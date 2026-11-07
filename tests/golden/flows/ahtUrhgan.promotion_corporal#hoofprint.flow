@@ -1,0 +1,37 @@
+# Promotion: Corporal's Warhorse Hoofprints (hidden at load until the Dark Rider's run: a GM shows each, `npcstatus ...
+# normal`; see promotion_superior_private#hoofprint). Accepted (a GM) with the Quartz Transmitter (a GM after each use):
+# each zone's Hoofprint takes the transmitter, sets Prog to its zone (Wajaom 1, Bhaflau 2, Mount Zhayolm 3, Caedarva 4)
+# and shows WARHORSE_HOOFPRINT + 1 with the transmitter; with no transmitter (section 2 off): the default
+# WARHORSE_HOOFPRINT. Naja then answers 5046 with [0] = the last zone's number (Caedarva: 4); finished: completed.
+lists WajaomWoodlands/Warhorse_Hoofprint/onTrigger BhaflauThickets/Warhorse_Hoofprint/onTrigger MountZhayolm/Warhorse_Hoofprint/onTrigger CaedarvaMire/Warhorse_Hoofprint/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrigger
+char zone=WajaomWoodlands pos=-619.539,-10.483,-69.223 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal accepted
+keyitem QuartzTransmitter
+keyitem LcWildcatBadge
+login
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # the transmitter taken, Prog 1, WARHORSE_HOOFPRINT + 1
+finish-if-event
+trigger Warhorse_Hoofprint              # no transmitter: section 2 off: WARHORSE_HOOFPRINT
+finish-if-event
+keyitem QuartzTransmitter               # a GM
+warp 461.666,-14.926,256.214 BhaflauThickets
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # Prog 2, WARHORSE_HOOFPRINT + 1
+finish-if-event
+keyitem QuartzTransmitter               # a GM
+warp 2.5,0,0 MountZhayolm
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # Prog 3, WARHORSE_HOOFPRINT + 1
+finish-if-event
+keyitem QuartzTransmitter               # a GM
+warp 414.686,-20.778,-114.026 CaedarvaMire
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # Prog 4, WARHORSE_HOOFPRINT + 1
+finish-if-event
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # no transmitter: 5046 [0] = 4
+finish                                  # completed

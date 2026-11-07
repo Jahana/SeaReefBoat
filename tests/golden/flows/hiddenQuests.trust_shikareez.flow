@@ -1,0 +1,26 @@
+# Trust: Shikaree Z (hidden quest TrustShikareeZ): a level 99 Warrior in Windurst Woods, CoP at Partners Without Fame
+# (Three Paths completed, not out of town). Perih Vashai (his failing talks play The Fanged One's 351 (the first) and
+# 352; each failing arm talks twice). No permit: the check fails: the failing talk (351 / 352). The Bastok Trust
+# Permit only (a GM): the check wants the Windurst one too: the failing talk (351 / 352). The Windurst Trust Permit (a
+# GM): 869 (a progress event); finished on option 0 (the finish reads no option): Shikaree Z learned,
+# YOU_LEARNED_TRUST. Learned: the failing talk (351 / 352).
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/onEventFinish/869
+char zone=WindurstWoods pos=116,-3.7,90.5 job=WAR lvl=99
+mission Cop PartnersWithoutFame current
+login
+trigger Perih_Vashai                    # no permit: the failing talk (351 / 352)
+finish-if-event
+trigger Perih_Vashai                    # the second talk
+finish-if-event
+keyitem BastokTrustPermit               # a GM
+trigger Perih_Vashai                    # no Windurst permit: the failing talk (351 / 352)
+finish-if-event
+trigger Perih_Vashai                    # the second talk
+finish-if-event
+keyitem WindurstTrustPermit             # a GM
+trigger Perih_Vashai                    # 869
+finish option=0                         # any option: Shikaree Z learned, YOU_LEARNED_TRUST
+trigger Perih_Vashai                    # learned: the failing talk (351 / 352)
+finish-if-event
+trigger Perih_Vashai                    # the second talk
+finish-if-event

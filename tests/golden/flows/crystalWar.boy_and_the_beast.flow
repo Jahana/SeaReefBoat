@@ -1,0 +1,54 @@
+# Boy and the Beast (crystalWar 24): a level 99 Warrior in Southern San d'Oria [S] with Claws of the Griffon and the
+# WotG mission Back to the Beginning completed (GMs; missions as group 1's flows; CHECK the mission line gives
+# hasCompletedMission and the next WotG mission plays at none of these NPCs: Raustigne answers five WotG missions).
+# Raustigne 55, finished: Prog 1. Rholont 56, finished: Prog 2; Rholont: 57. Vunkerl Inlet [S]: qm7 105, finished: the
+# Vunkerl Herb Memo, begun. qm7: no herb, Option 0: 110, finished: Option 1; again: 111. The harness's clock starts at
+# 12:00: Leafy Patch 107 (1), finished on option 0: the herb, no Prog; Leafy Patch: the herb held: nil (106). qm7: the
+# herb, Prog 2: 109, finished: the herb taken. 18:00: Leafy Patch 107 (2), option 0: the herb; qm7 109. 02:00: Leafy
+# Patch 107 (0), finished on option 1: Prog 3, the herb. qm7: Prog 3: 108, finished: completed (a Carbon Fishing Rod),
+# the herb and the memo taken.
+lists SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/55 SouthernSanDoriaS/onEventFinish/56 VunkerlInletS/qm7/onTrigger VunkerlInletS/Leafy_Patch/onTrigger VunkerlInletS/onEventFinish/105 VunkerlInletS/onEventFinish/107 VunkerlInletS/onEventFinish/108 VunkerlInletS/onEventFinish/109 VunkerlInletS/onEventFinish/110
+char zone=SouthernSanDoriaS pos=5.479,-1.999,44.456 job=WAR lvl=99
+quest CrystalWar.ClawsOfTheGriffon completed
+mission Wotg BackToTheBeginning completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Raustigne                       # available, Prog 0: 55
+finish                                  # Prog 1
+walk -167.043,-2,55.484
+trigger Rholont                         # Prog 1: 56
+finish                                  # Prog 2
+trigger Rholont                         # Prog 2: 57
+finish
+warp -24.775,-32.004,366.937 VunkerlInletS
+trigger qm7                             # available, Prog 2: 105
+finish                                  # the Vunkerl Herb Memo; begun
+trigger qm7                             # no herb, Option 0: 110
+finish                                  # Option 1
+trigger qm7                             # Option 1: 111
+finish
+walk -425.564,-31.019,581.825
+trigger Leafy_Patch                     # no herb, 12:00: 107 (1)
+finish option=0                         # the herb; no Prog
+trigger Leafy_Patch                     # the herb held: nil (106)
+finish-if-event
+walk -24.775,-32.004,366.937
+trigger qm7                             # the herb, Prog 2: 109
+finish                                  # the herb taken
+wait vana=6
+walk -425.564,-31.019,581.825
+trigger Leafy_Patch                     # 18:00: 107 (2)
+finish option=0                         # the herb
+walk -24.775,-32.004,366.937
+trigger qm7                             # 109
+finish                                  # the herb taken
+wait vana=8
+walk -425.564,-31.019,581.825
+trigger Leafy_Patch                     # 02:00: 107 (0)
+finish option=1                         # Prog 3; the herb
+walk -24.775,-32.004,366.937
+trigger qm7                             # the herb, Prog 3: 108
+finish                                  # completed (a Carbon Fishing Rod); the herb and the memo taken

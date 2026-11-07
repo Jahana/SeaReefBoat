@@ -1,0 +1,32 @@
+# Peace for the Spirit (sandoria 86): a WAR 50. Curilla, Sharzalion and Daggao traded a chip while available (no
+# onTrade either side: nothing). Enveloped in Darkness not completed: no state matches, Curilla's 530
+# and Sharzalion's 15 (the scripts'). Completed by GM: Curilla 114 and Sharzalion 69 (not the RDM's 109). Accepted by
+# GM: Sharzalion 64, Curilla 108 (CS 0; the job is not read once accepted). Completed by GM: Curilla 52.
+char zone=ChateauDoraguille pos=31.2,0.0,-0.9 job=WAR lvl=50
+item BoneChip
+login
+trade Curilla BoneChip x1                 # available: no onTrade either side: nothing
+trigger Curilla                           # Enveloped in Darkness not completed: 530 (the script's)
+finish
+warp 97.4,0.0,113.6 SouthernSanDoria
+trade Sharzalion BoneChip x1              # available: nothing
+walk 91.7,1.0,121.8                       # to Daggao: a trade reaches 6.0 yalms (quest rework P9, D3)
+trade Daggao BoneChip x1                  # available: nothing
+trigger Sharzalion                        # Enveloped in Darkness not completed: 15 (the script's)
+finish
+quest Sandoria.EnvelopedInDarkness completed
+trigger Sharzalion                        # available, Enveloped in Darkness completed: 69
+finish
+warp 31.2,0.0,-0.9 ChateauDoraguille
+trigger Curilla                           # WAR, Enveloped in Darkness completed, available: 114
+finish
+quest Sandoria.PeaceForTheSpirit accepted
+trigger Curilla                           # WAR, accepted, CS 0: 108
+finish
+warp 97.4,0.0,113.6 SouthernSanDoria
+trigger Sharzalion                        # accepted, CS 0: 64
+finish                                    # CS 1
+warp 31.2,0.0,-0.9 ChateauDoraguille
+quest Sandoria.PeaceForTheSpirit completed
+trigger Curilla                           # WAR, completed: 52
+finish

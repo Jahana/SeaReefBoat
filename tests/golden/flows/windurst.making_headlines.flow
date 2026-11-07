@@ -1,0 +1,67 @@
+# Making Headlines (windurst 37): Naiko-Paneiko, Kyume-Romeh (Windurst Waters), Yujuju (Port Windurst), Hiwon-Biwon
+# (Windurst Walls), Umumu (Windurst Woods), the Mahogany Door _5ca (Inner Horutoto Ruins). Only the door has a default
+# action (DefaultActions 44): its talks alternate, the default's 44 first after a zone-in, then the script, and a
+# script turn that starts no event plays the 44 after it. Scooped (C#, group 4) answers Naiko-Paneiko once this quest
+# is completed (676, a Progress event; its 677 while it is accepted takes turns with his script).
+# QuestMakingHeadlines_var: bits 0-3 the scoops, 4 the door. Available: 665, option 0: begun. Accepted: Naiko-Paneiko
+# 666 / 671 (the roll: 666, 671 here); Kyume-Romeh 668 (the Waters scoop, bit 0), then 669; Yujuju 314 (bit 1), 315;
+# Hiwon-Biwon (Curses, Foiled Again! not accepted) 281 (bit 2), 282; Umumu 381 (bit 3), 382; Naiko-Paneiko 673; the
+# door: the default's 44, then the script's turn: CAT_BURGLARS_HIDEOUT (1, the Woods scoop) and bit 4, then the 44;
+# Umumu 383; Naiko-Paneiko 674 / 670 (674 here): completed, Editor's Hatchet Man, 560 gil, the var cleared, the four
+# scoops taken. Completed: Umumu 385 / 386 / 414 (the roll: 414, 386, 386 here); Scooped accepted (GM): Naiko-Paneiko
+# 677 (Scooped's), then his script's 663.
+char zone=WindurstWaters pos=-245.4,-5.3,-308.0 job=WAR lvl=75
+login
+trigger Naiko-Paneiko                   # available: 665
+finish option=0                         # begun (any option)
+trigger Naiko-Paneiko                   # accepted, the scoops not all: 666 or 671 (the roll)
+finish
+trigger Naiko-Paneiko                   # the next roll
+finish
+warp -56.0,-4.5,23.2 WindurstWaters
+trigger Kyume-Romeh                     # no New Model Hat; accepted, bit 0 not set: 668
+finish                                  # the Windurst Waters Scoop; bit 0
+trigger Kyume-Romeh                     # bit 0: 669
+finish
+warp 200.0,-4.8,139.0 PortWindurst
+trigger Yujuju                          # bit 1 not set: 314
+finish                                  # the Port Windurst Scoop; bit 1
+trigger Yujuju                          # bit 1: 315
+finish
+warp 114.0,-2.4,99.0 WindurstWalls
+trigger Hiwon-Biwon                     # bit 2 not set, Curses, Foiled Again! not accepted: 281
+finish                                  # the Windurst Walls Scoop; bit 2
+trigger Hiwon-Biwon                     # bit 2: 282
+finish
+warp 31.0,-5.25,141.4 WindurstWoods
+trigger Umumu                           # bit 4 not set, bit 3 not set: 381
+finish                                  # the Windurst Woods Scoop; bit 3
+trigger Umumu                           # bit 3, not 4: 382
+finish
+warp -245.4,-5.3,-308.0 WindurstWaters
+trigger Naiko-Paneiko                   # the four scoops, bit 4 not set: 673
+finish
+warp -14.0,-2.2,20.0 InnerHorutotoRuins
+trigger _5ca                            # the default's turn (the first talk after the zone-in): 44
+finish
+trigger _5ca                            # the script's turn: the four, no bit 4: CAT_BURGLARS_HIDEOUT (1, 43); bit 4; 44
+finish
+warp 31.0,-5.25,141.4 WindurstWoods
+trigger Umumu                           # bit 4: 383
+finish
+warp -245.4,-5.3,-308.0 WindurstWaters
+trigger Naiko-Paneiko                   # bit 4: 674 or 670 (the roll)
+finish                                  # completed; Editor's Hatchet Man; 560 gil; the var cleared; the scoops taken
+warp 31.0,-5.25,141.4 WindurstWoods
+trigger Umumu                           # completed: 385, 386 or 414 (the roll)
+finish
+trigger Umumu                           # the next roll
+finish
+trigger Umumu                           # the next roll
+finish
+warp -245.4,-5.3,-308.0 WindurstWaters
+quest Windurst.Scooped accepted
+trigger Naiko-Paneiko                   # Scooped's 677 (his script the next talk)
+finish
+trigger Naiko-Paneiko                   # his script: completed: his 663
+finish

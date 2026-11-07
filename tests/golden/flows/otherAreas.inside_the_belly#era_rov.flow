@@ -1,0 +1,26 @@
+# Inside the Belly (otherAreas 26) with its era module, enabled by xi.pre(ROV) alone (RESTRICT_CONTENT 1, ENABLE_ROV 0):
+# the 2015 batch (Soryu, Sekiryu, Hakuryu, Far East Puffer) blocked; the trigger the quest's own. A trade of a blocked
+# fish with another fish: the wrap returns nothing at the blocked slot, whatever else is traded.
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# Completed (a GM), skill 30. A Soryu and a Far East Puffer: nothing, kept. An Abaia (SoA, on): 166 or 167. An Ahtapot with a
+# Hakuryu: the wrap's loop finds the Hakuryu: nothing (the quest's own trade would answer nil too: not exactly one fish).
+module modules/era/lua/quests/otherareas/inside_the_belly.lua
+lists Selbina/Zaldon/onTrade Selbina/onEventFinish/166 Selbina/onEventFinish/167
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest OtherAreas.InsideTheBelly completed
+skill Fishing 300
+item Soryu
+item FarEastPuffer
+item Abaia
+item Ahtapot
+item Hakuryu
+login
+trade Zaldon Soryu x1                   # blocked: nothing; kept
+trade Zaldon FarEastPuffer x1           # blocked: nothing; kept
+trade Zaldon Abaia x1                   # on: 166 (Aurora Bass, Plumb Boots) or 167
+finish                                  # 690 gil
+trade Zaldon Ahtapot x1 Hakuryu x1      # the Hakuryu blocked: nothing; both kept

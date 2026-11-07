@@ -1,0 +1,19 @@
+# BORGHERTZS_SNEAKY_HANDS (jeuno 49): the two optional coffers' sections (status not available, main job THF, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 THF: CastleOztroja's Treasure Coffer opens to
+# RoguesCulottes (the item bypass; the result is the item): [AF]ZilartCoffer +2048 (bit 11); CastleZvahlBaileys's to
+# RoguesVest: +4096 (bit 12).
+lists CastleOztroja/Treasure_Coffer/onTrade CastleZvahlBaileys/Treasure_Coffer/onTrade
+char zone=CastleOztroja pos=-99,-75,-129 job=THF lvl=75
+quest Jeuno.BorghertzsSneakyHands accepted
+item OztrojaCofferKey
+item ZvahlCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer OztrojaCofferKey x1 # bit 11 unset: RoguesCulottes; [AF]ZilartCoffer 2048
+tick 4500                               # the coffer opened
+warp 110.041,-20.002,106.811 CastleZvahlBaileys
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer ZvahlCofferKey x1 # bit 12 unset: RoguesVest; [AF]ZilartCoffer 6144
+tick 4500                               # the coffer opened

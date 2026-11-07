@@ -1,0 +1,52 @@
+# Transporting (adoulin 82): a level 99 Warrior in Western Adoulin. Vaulois at 49 Adoulin fame (level 1, a GM): no
+# section (default 520). Fame 50 (level 2): 2590, finished on 0: begun (any option), the Misdelivered Parcel. Available
+# again at fame 125 (level 3, GMs): 2590, finished on 2: begun. Accepted, Prog 0: Vaulois nothing from the quest
+# (default 520); qm_sluice_gate_6 (Rala Waterways) nothing (default NOTHING_OUT_OF_ORDINARY); Kongramm 2592, finished:
+# Prog 1; Kongramm at Prog 1: nothing from the quest (his script: nothing; default 558); Vaulois at Prog 1: nothing.
+# qm_sluice_gate_6 at Prog 1: 2802, finished: the parcel lost (KEYITEM_LOST), Prog 2; at Prog 2: nothing. Kongramm at
+# Prog 2: nothing. Vaulois at Prog 3 (a GM): nothing; at Prog 2: 2591, finished: completed (300 bayld, 1000 exp).
+# Completed: Vaulois default 520; Kongramm at Prog 0 (a GM): nothing from the quest.
+lists WesternAdoulin/Vaulois/onTrigger WesternAdoulin/Kongramm/onTrigger RalaWaterways/qm_sluice_gate_6/onTrigger
+lists WesternAdoulin/onEventFinish/2590 WesternAdoulin/onEventFinish/2591 WesternAdoulin/onEventFinish/2592
+lists RalaWaterways/onEventFinish/2802
+char zone=WesternAdoulin pos=21.5,0,85 job=WAR lvl=99
+fame Adoulin 49
+login
+trigger Vaulois                         # available, fame level 1: no section: default 520
+finish-if-event
+fame Adoulin 50                         # a GM: level 2
+trigger Vaulois                         # available, level 2: 2590
+finish option=0                         # begun (any option); the Misdelivered Parcel
+quest Adoulin.Transporting available    # a GM
+fame Adoulin 125                        # a GM: level 3
+trigger Vaulois                         # available, level 3: 2590
+finish option=2                         # begun
+trigger Vaulois                         # Prog 0: nothing from the quest: default 520
+finish-if-event
+warp -561.5,-5.768,61.5 RalaWaterways
+trigger qm_sluice_gate_6                # Prog 0: nothing: default NOTHING_OUT_OF_ORDINARY
+warp 62.5,32,138 WesternAdoulin
+trigger Kongramm                        # Prog 0: 2592
+finish                                  # Prog 1
+trigger Kongramm                        # Prog 1: nothing from the quest: his script (nothing) / default 558
+finish-if-event
+trigger Vaulois                         # Prog 1: nothing from the quest: default 520
+finish-if-event
+warp -561.5,-5.768,61.5 RalaWaterways
+trigger qm_sluice_gate_6                # Prog 1: 2802
+finish                                  # the parcel lost (KEYITEM_LOST); Prog 2
+trigger qm_sluice_gate_6                # Prog 2: nothing: default NOTHING_OUT_OF_ORDINARY
+warp 62.5,32,138 WesternAdoulin
+trigger Kongramm                        # Prog 2: nothing from the quest
+finish-if-event
+charvar Quest[9][82]Prog 3              # a GM
+trigger Vaulois                         # Prog 3: nothing from the quest: default 520
+finish-if-event
+charvar Quest[9][82]Prog 2              # a GM
+trigger Vaulois                         # Prog 2: 2591
+finish                                  # completed
+trigger Vaulois                         # completed: no section: default 520
+finish-if-event
+charvar Quest[9][82]Prog 0              # a GM
+trigger Kongramm                        # completed, Prog 0: nothing from the quest
+finish-if-event

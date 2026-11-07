@@ -1,0 +1,70 @@
+# Shattering Stars (jeuno 132, limit break 5): Maat in Ru'Lude Gardens (the first of that name; default MAAT_DIALOG). A
+# level 66 Warrior at level cap 70 (a GM, before login), MAX_LEVEL 99. Available: a stone and the Warrior's Testimony (no
+# trade handler while available: nothing), 92 (1) answered 0 (its finish reads no option: begun). Accepted (an original
+# job at 66): 91 (1) (no testimony traded); a Monk's Testimony (not the job's: nil); the Warrior's Testimony with a
+# stone (getItemQty, not an exact trade: 64 (1)) answered 0 (tradedTestimony 1, no teleport; the trade is not taken);
+# 63 (1); a GM's tradedTestimony 2 and -1: 63 (1) (not 0); a GM's Prog -1: the testimony gets nil (Prog not 0) and
+# Maat 63 (Prog not 1 or more); Prog 0 again: the testimony, 64 answered 2 (not 1: no teleport); 64 answered 1 (set
+# down in Horlais Peak, -511.459 159.004 -210.543: the char zones at the next tick).
+# In Horlais Peak the char enters its Maat fight: the testimony traded to BC_Entrance (tradedTestimony 1: the 32000
+# menu), 32000 updated with option 81 (index 5, Shattering Stars (WAR), area 1: registered, entered; the testimony wears,
+# 1 of 3 uses), finished; Maat of area 1 killed (the battlefield won, battlefieldWin 5), and the win's 32001 finished
+# (accepted: a Scroll of Instant Warp, Prog 1 (the Warrior's job id), maatsCap bit 0 (1), Maat Masher). Then: the
+# testimony (Prog 1: nil), 93 (completed: Star Breaker, level cap 75, YOUR_LEVEL_LIMIT_IS_NOW_75); Beyond the Sun then
+# answers (Shattering Stars completed, maatsCap 1 not full): 78 (1); the testimony once completed: no section has a trade
+# handler: nothing. A rematch once completed (area 2, Maat+1): the win's 32001 with the bit already set: Maat Masher
+# again only (no scroll: not accepted; maatsCap kept).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/92 RuludeGardens/onEventFinish/64 RuludeGardens/onEventFinish/93 RuludeGardens/onEventFinish/74 HorlaisPeak/BC_Entrance/onTrade HorlaisPeak/onEventFinish/32001
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=66
+levelcap 70
+item FlintStone
+item WarriorsTestimony
+item MonksTestimony
+login
+trade Maat FlintStone x1                # available (WAR 66, cap 70): no trade handler, nothing
+trade Maat WarriorsTestimony x1         # available: the testimony, no trade handler: nothing
+trigger Maat                            # 92 (1)
+finish option=0                         # begun (the finish reads no option)
+trigger Maat                            # accepted, Prog 0, tradedTestimony 0: 91 (1)
+finish
+trade Maat MonksTestimony x1            # not the job's testimony: nil
+trade Maat WarriorsTestimony x1 FlintStone x1  # the job's, with a stone, Prog 0: 64 (1)
+finish option=0                         # tradedTestimony 1; not 1: no teleport (the testimony stays)
+trigger Maat                            # tradedTestimony 1: 63 (1)
+finish
+charvar Quest[3][132]tradedTestimony 2  # a GM
+trigger Maat                            # tradedTestimony 2 (not 0): 63 (1)
+finish
+charvar Quest[3][132]tradedTestimony -1 # a GM
+trigger Maat                            # tradedTestimony -1 (not 0): 63 (1)
+finish
+charvar Quest[3][132]Prog -1            # a GM
+trade Maat WarriorsTestimony x1         # Prog -1 (not 0): nil
+trigger Maat                            # Prog -1 (not 1 or more): 63 (1)
+finish
+charvar Quest[3][132]Prog 0             # a GM
+trade Maat WarriorsTestimony x1         # 64 (1)
+finish option=2                         # tradedTestimony 1; not 1: no teleport
+trade Maat WarriorsTestimony x1         # 64 (1)
+finish option=1                         # tradedTestimony 1; set down in Horlais Peak (a WAR / BLM / RNG)
+tick 400
+login                                   # in Horlais Peak
+warp -501.5,158.3,-212.6 HorlaisPeak   # by BC_Entrance (a GM warp: the flow parser follows zones by warp)
+trade BC_Entrance WarriorsTestimony x1  # tradedTestimony 1: the battlefield's 32000 menu
+update 32000 option=81                  # Shattering Stars (WAR), index 5, area 1: registered, entered (the testimony wears)
+finish                                  # in the arena
+kill MAAT                               # Maat (WAR) of area 1: won, battlefieldWin 5, 32001 opens
+finish                                  # 32001, accepted: Scroll of Instant Warp, Prog 1, maatsCap 1, Maat Masher
+warp 12.4,3.1,119.5 RuludeGardens
+trade Maat WarriorsTestimony x1         # Prog 1: nil
+trigger Maat                            # Prog 1: 93
+finish                                  # completed: Star Breaker, level cap 75, YOUR_LEVEL_LIMIT_IS_NOW_75
+trigger Maat                            # Beyond the Sun available, maatsCap 1 (not full): 78 (1)
+finish
+trade Maat WarriorsTestimony x1         # completed: no trade handler answers: nothing
+warp -501.5,158.3,-212.6 HorlaisPeak   # by BC_Entrance again
+trade BC_Entrance WarriorsTestimony x1  # completed: the 32000 menu
+update 32000 option=82                  # Shattering Stars (WAR), index 5, area 2: registered, entered (the second use)
+finish                                  # in the arena
+kill MAAT+1                             # Maat (WAR) of area 2: won, battlefieldWin 5, 32001 opens
+finish                                  # 32001, completed, bit 0 already set: Maat Masher only (no scroll, maatsCap 1)

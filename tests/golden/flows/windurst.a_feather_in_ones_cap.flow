@@ -1,0 +1,45 @@
+# A Feather in One's Cap (windurst 1): Baren-Moren in Windurst Waters, after Hat in Hand's arms (one if-chain in his
+# script; no DefaultActions entry). Hat in Hand accepted with the New Model Hat (GMs) at Windurst fame level 3 (125): 52
+# completes it and sets needToZone. Then: needToZone: no offer (his random standard event); after a rezone, fame level 2
+# (124): no offer; level 3: 75 (0, 842), options 0 and 2: nothing; option 1: begun (75 sets no needToZone). Accepted: 78
+# (0, 842); 2 Giant Bird Feathers: nothing (tradeHas wants 3); 3: 79 (1500), its finish: npcUtil.completeQuest (fame
+# 16), 1500 gil, the feathers taken, needToZone. Completed with needToZone: no arm; 3 feathers while completed at the var
+# 0: nothing. After a rezone: 75 (the repeat), option 1: QuestFeatherInOnesCap_var 1; 78 (the var); 3 feathers: 79,
+# its finish (completed): fame 16, the var 0, 1500 gil, the feathers taken, needToZone.
+char zone=WindurstWaters pos=-65.0,-2.9,-145.7 job=WAR lvl=75
+fame Windurst 125
+quest Windurst.HatInHand accepted
+keyitem NewModelHat
+charvar Quest[2][23]Prog 1
+item GiantBirdFeather x6
+login
+trigger Baren-Moren                     # Hat in Hand: the hat, count 0: 52
+finish option=1                         # Hat in Hand completed (300 gil, fame 10); needToZone
+trigger Baren-Moren                     # Hat in Hand completed, available, fame level 3, needToZone: no arm; a random standard event
+finish
+rezone                                  # needToZone cleared
+fame Windurst 124
+trigger Baren-Moren                     # fame level 2: no offer; a random standard event
+finish
+fame Windurst 125
+trigger Baren-Moren                     # fame level 3: 75 (0, 842)
+finish option=0                         # declined: nothing
+trigger Baren-Moren                     # 75
+finish option=2                         # option 2: nothing
+trigger Baren-Moren                     # 75
+finish option=1                         # available: begun
+trigger Baren-Moren                     # accepted (no needToZone): 78 (0, 842), not 75
+finish
+trade Baren-Moren GiantBirdFeather x2   # 2 feathers: nothing
+trade Baren-Moren GiantBirdFeather x3   # accepted, 3 feathers: 79 (1500)
+finish                                  # accepted: completed (fame 16); 1500 gil; the feathers taken; needToZone
+trigger Baren-Moren                     # completed, needToZone: no arm; a random standard event
+finish
+trade Baren-Moren GiantBirdFeather x3   # completed, the var 0: nothing
+rezone
+trigger Baren-Moren                     # completed, no needToZone: 75 (the repeat)
+finish option=1                         # completed: QuestFeatherInOnesCap_var 1
+trigger Baren-Moren                     # the var 1: 78
+finish
+trade Baren-Moren GiantBirdFeather x3   # the var 1, 3 feathers: 79 (1500)
+finish                                  # completed: fame 16; the var 0; 1500 gil; the feathers taken; needToZone

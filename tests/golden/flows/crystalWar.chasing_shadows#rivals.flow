@@ -1,0 +1,31 @@
+# Chasing Shadows (crystalWar 60) at Rholont beside In a Haze of Glory (a Lua quest, available once Perils of the
+# Griffon is completed: a GM; its Rholont reply is the Event 637) and Claws of the Griffon (accepted, Prog 1, Option 1:
+# its Rholont reply the Event 49). A level 99 Warrior in Southern San d'Oria [S] with Blood of Heroes completed (a GM;
+# the WotG mission The Scent of Battle current, which answers none of this). Available: Rholont's 656 (an Event) ties
+# 637: container order the first time, the rotation the second. Accepted (a GM), Perils set back to available so In a
+# Haze of Glory is gone: Rholont's 167 (an Event) ties Claws' 49 the same way.
+lists SouthernSanDoriaS/Rholont/onTrigger
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.BloodOfHeroes completed
+quest CrystalWar.PerilsOfTheGriffon completed # In a Haze of Glory available: Rholont 637 (an Event)
+mission Wotg TheScentOfBattle current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # Chasing's 656 and In a Haze of Glory's 637 tie: container order
+finish-if-event
+trigger Rholont                         # the second tie plays the other
+finish-if-event
+quest CrystalWar.ChasingShadows available # a GM
+quest CrystalWar.ChasingShadows accepted # a GM
+quest CrystalWar.PerilsOfTheGriffon available # a GM: In a Haze of Glory is gone
+quest CrystalWar.ClawsOfTheGriffon available # a GM
+quest CrystalWar.ClawsOfTheGriffon accepted # a GM
+charvar Quest[7][16]Prog 1              # a GM
+charvar Quest[7][16]Option 1            # a GM
+trigger Rholont                         # Chasing's 167 and Claws' 49 tie: container order
+finish-if-event
+trigger Rholont                         # the second tie plays the other
+finish-if-event

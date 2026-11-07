@@ -1,0 +1,15 @@
+# Carbuncle Debacle (windurst 83), completion parity: 419's finish with a free slot is the Lua's raw
+# player:completeQuest (after the horn and the title; then the fame, the var, needToZone), so a GM's Quest[2][83]Prog
+# survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it). Class Reunion
+# completed and this quest accepted at CarbuncleDebacleProgress 7 (GM), beside Koru-Moru.
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion completed
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 7
+login
+charvar Quest[2][83]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 7: 419
+finish                                  # Evoker's Horn; the title; completed; fame 20; var 0; needToZone; Prog kept

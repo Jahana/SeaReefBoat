@@ -1,0 +1,22 @@
+# The Elvaan Goldsmith (bastok 13): Michea in Bastok Markets. The trade, the mustZone repeat.
+# From XI.Verify.QuestScripts.Live's RunElvaanGoldsmith twin.
+lists BastokMarkets/Michea/onTrigger BastokMarkets/Michea/onTrade BastokMarkets/onEventFinish/215 BastokMarkets/onEventFinish/216
+char zone=BastokMarkets pos=-296,-16,-157
+item CopperIngot x2
+item BronzeIngot
+login
+trigger Michea                  # the offer, 215
+finish                          # accepted
+trigger Michea                  # the reminder, 215
+finish
+trade Michea BronzeIngot x1     # the wrong ingot: nothing
+trade Michea CopperIngot x1     # 216
+finish                          # completed: 180 gil, 10 fame, an ingot gone, mustZone set
+trigger Michea                  # before zoning: no repeat offer (Michea's default 125)
+finish
+zoneline BastokMines            # to Bastok Mines and back: mustZone cleared
+zoneline BastokMarkets
+trigger Michea                  # after zoning at fame level 1: offered again
+finish
+trade Michea CopperIngot x1     # the second ingot: 216
+finish                          # the second completion

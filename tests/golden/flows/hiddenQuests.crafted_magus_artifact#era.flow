@@ -1,0 +1,72 @@
+# Crafted Magus Artifact (hidden quest MagusArtifact) with its era module, modules/era/lua/quests/hiddenquests/
+# crafted_magus_artifact.lua, enabled by xi.pre(ROV) (RESTRICT_CONTENT 1, ENABLE_ROV 0): the next piece is ordered at
+# JST midnight instead of a Vana'diel day later. A level 99 Warrior, Transformations accepted. No piece made, resting
+# (RestingDay far ahead, a GM): the module leaves it to the base: 729. The first piece handed over (736; a GM puts the
+# char at stage 2): with the inventory full nothing changes, so no RestingTimer; with room the base, then RestingTimer
+# = JstMidnight(). Talking to Lathuya with the timer set: the module's asleep event 737; the timer gone (a GM): the
+# module sets RestingDay 0 and the base offers 738. The second piece (744): the timer again: 745. The last (752):
+# Remaining 0, no timer: the base's 753. A stale [BLUAF]RestingTimer of 1 once all three are made (a GM): not below 3
+# pieces: the module's own asleep event there would be 737 + 16 = 753, the same as the base's, so that step cannot
+# tell the two paths apart (the RestingDay step below does). With no timer and RestingDay today the module leaves
+# RestingDay alone. A mask with bit 3 set (a GM) counts its low three bits only: one made, 737.
+module modules/era/lua/quests/hiddenquests/crafted_magus_artifact.lua
+lists AhtUrhganWhitegate/Lathuya/onTrigger AhtUrhganWhitegate/onEventFinish/736 AhtUrhganWhitegate/onEventFinish/744 AhtUrhganWhitegate/onEventFinish/752
+char zone=AhtUrhganWhitegate pos=-95.1,-6,33.1 job=WAR lvl=99
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest AhtUrhgan.Transformations accepted
+charvar [BLUAF]Remaining 7
+charvar [BLUAF]RestingDay 999999
+login
+trigger Lathuya                         # none made, resting: the module leaves RestingDay: the base's 729
+finish
+charvar [BLUAF]RestingDay 0             # a GM
+charvar [BLUAF]Current 1                # a GM: the bazubands ordered, paid, a day past
+charvar [BLUAF]CraftingStage 2
+charvar [BLUAF]PaymentDay 1
+fill-inventory
+trigger Lathuya                         # 736
+finish                                  # no room: nothing changes; no RestingTimer
+free-inventory
+trigger Lathuya                         # 736
+finish                                  # the base: Remaining 6; then RestingTimer = JstMidnight()
+trigger Lathuya                         # the timer set: the module's 737
+finish
+rezone
+trigger Lathuya                         # the timer set, zoned: 737
+finish
+charvar [BLUAF]RestingTimer 0           # a GM: the JST midnight passed
+trigger Lathuya                         # the module sets RestingDay 0: the base's 738
+finish
+charvar [BLUAF]Current 2                # a GM: the shalwar ordered, paid, a day past
+charvar [BLUAF]CraftingStage 2
+charvar [BLUAF]PaymentDay 1
+rezone
+trigger Lathuya                         # an order in progress: not the module's: 744
+finish                                  # the base: Remaining 4; then RestingTimer = JstMidnight()
+trigger Lathuya                         # the timer set: the module's 745
+finish
+charvar [BLUAF]RestingTimer 0           # a GM
+rezone
+trigger Lathuya                         # the module sets RestingDay 0: the base's 746
+finish
+charvar [BLUAF]Current 3                # a GM: the jubbah ordered, paid, a day past
+charvar [BLUAF]CraftingStage 2
+charvar [BLUAF]PaymentDay 1
+rezone
+trigger Lathuya                         # 752
+finish                                  # the base: Remaining 0: no RestingTimer
+trigger Lathuya                         # all made: the base's 753
+finish
+charvar [BLUAF]RestingTimer 1           # a GM: a stale timer
+trigger Lathuya                         # all made: 753 on either path (737 + 16 = the base's)
+finish
+charvar [BLUAF]RestingTimer 0           # a GM: no timer
+charvar [BLUAF]RestingDay 8000          # a GM: resting today
+trigger Lathuya                         # all made: the module must not reset RestingDay: the base's 753
+finish
+charvar [BLUAF]Remaining 14             # a GM: an impossible mask, bit 3 set: only its low three bits count (two: one made)
+charvar [BLUAF]RestingTimer 1           # a GM
+charvar [BLUAF]RestingDay 0             # a GM: the base would not call it resting
+trigger Lathuya                         # the module's asleep event 737 (one made), not the base's
+finish

@@ -1,0 +1,20 @@
+# Sin Hunting (windurst 72): operands the main flow leaves on one side. A level-40 RNG, The Fanged One completed by GM.
+# 523 finished with option 2 (not 0: nothing), then 0 (begun). Prog 3 (GM): Perih Vashai 524 (not Prog 4). Perchond
+# with the glittersand alone at Prog 2 and Prog 3 (GM): nil (the trade wants Prog 1).
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/onEventFinish/523 RanguemontPass/Perchond/onTrade
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=RNG lvl=40
+quest Windurst.TheFangedOne completed
+item PinchOfGlittersand
+login
+trigger Perih_Vashai                          # 523
+finish option=2                               # not 0: nothing
+trigger Perih_Vashai                          # 523
+finish option=0                               # begun
+charvar Quest[2][72]Prog 3                    # GM
+trigger Perih_Vashai                          # Prog 3: 524
+finish
+warp -180.8,5,-164.9 RanguemontPass
+charvar Quest[2][72]Prog 2                    # GM
+trade Perchond PinchOfGlittersand x1          # Prog 2: nil
+charvar Quest[2][72]Prog 3                    # GM
+trade Perchond PinchOfGlittersand x1          # Prog 3: nil

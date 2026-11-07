@@ -1,0 +1,99 @@
+# Promotion: Lance Corporal (ahtUrhgan 92): a level 1 Warrior with Superior Private completed and the SP Wildcat Badge,
+# AssaultPromotion 25. Whitegate: Abquhbah (his script: 255), Nafiwaa (no script; default 661), trigger area 3 (31 -7
+# -60 .. 39 -6 -52: Abquhbah stands in it; a trigger does not move the char, so the flow walks into it); Wajaom's
+# Wellsprings 1-4 (Mythralline_Wellspring, +1, +2, +3), Bhaflau's Wellspring 5 (default WELLSPRING). Available: Abquhbah
+# 5030, finished: begun. Stage 0: Abquhbah 5032 (importantOnce: Event, then Default), then his script's 255 (the
+# fallback's turn), 5032, 255; Nafiwaa 5035: Stage 1, the five empty tubes. Stage 1: Nafiwaa with none filled 5036;
+# Abquhbah 5033; Wellspring 1: 4 (tube 1 filled, KEYITEM_OBTAINED); again: no empty tube 1: WELLSPRING + 3; Wellsprings
+# 2, 3: 5, 6; Nafiwaa with three filled: 5037 ([1] = 3); Wellspring 4: 7; Bhaflau's 5: 10; Nafiwaa with five: 5038 ([2]
+# = 0, [5] = 0, [7] = 0), finished with result 1 (thrown out: option 1 << 30 | 7: tube 1 used up, tube 2 a third): Stage
+# 2, Prog 7, tube 1 back to its empty tube. Stage 2: Nafiwaa 5038 ([2] = 7, [5] = 1, [7] = 1), finished with option 0
+# (result 0): nothing; Wellspring 1 (the empty tube): 4 (Prog 4, the tube filled, WELLSPRING + 1); Wellspring 2 (tube 2
+# not full): 5 (Prog 0, WELLSPRING + 1); Wellspring 3 (full, no empty tube): WELLSPRING + 3; Nafiwaa 5038 ([2] = 0, [5]
+# = 0, [7] = 1), finished with result 2 (option 2 << 30 | 58 as an int32: -2147483590; tube 1 two thirds, tube 2 two,
+# tube 3 three): Stage 3, Wait tomorrow, Option 58, every tube key item taken. Stage 3: Nafiwaa 5039; Abquhbah 5034;
+# area 3 (a warp beside it, then a walk in): Wait tomorrow > today: nil. A Vana'diel day on: out of area 3 and in: 5031,
+# finished: quality 2 x 0.5 + 2 x 1.5 + 3 x 2 = 10 (luminium): two Imperial Gold Pieces (randomInt(3, 4) drawn first,
+# unused); completed (the LC Wildcat Badge, Lance Corporal); LANCE_CORPORAL (user ruling 2026-11-04, kept Lua bugs:
+# the Lua dropped it); AssaultPromotion 0; the SP badge taken.
+lists AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/Nafiwaa/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventFinish/5035 AhtUrhganWhitegate/onEventFinish/5038 AhtUrhganWhitegate/onEventFinish/5031 WajaomWoodlands/Mythralline_Wellspring/onTrigger WajaomWoodlands/onEventFinish/4 BhaflauThickets/Mythralline_Wellspring/onTrigger BhaflauThickets/onEventFinish/10
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+charvar AssaultPromotion 25
+keyitem SpWildcatBadge
+login
+trigger Abquhbah                        # available: 5030
+finish                                  # begun
+trigger Abquhbah                        # Stage 0: 5032 (importantOnce)
+finish
+trigger Abquhbah                        # 5032 at Default now, the fallback's turn: his script's 255
+finish
+trigger Abquhbah                        # 5032 at Default: the lookup and his script alternate: 5032
+finish
+trigger Abquhbah                        # 255
+finish
+trigger Nafiwaa                         # 5035
+finish                                  # Stage 1; the five empty tubes
+trigger Nafiwaa                         # Stage 1, none filled: 5036
+finish
+trigger Abquhbah                        # Stage 1: 5033
+finish
+trigger Abquhbah                        # 5033 at Default: his script's 255
+finish
+trigger Abquhbah                        # 5033
+finish
+warp -90.995,-15.139,-339.004 WajaomWoodlands
+trigger Mythralline_Wellspring          # tube 1, the empty tube held: 4
+finish                                  # tube 1 filled; KEYITEM_OBTAINED
+trigger Mythralline_Wellspring          # Stage 1, no empty tube 1: WELLSPRING + 3
+finish-if-event
+warp -217.296,-15.104,-388.272 WajaomWoodlands
+trigger Mythralline_Wellspring+1        # tube 2: 5
+finish
+warp 182.762,-23.098,268.394 WajaomWoodlands
+trigger Mythralline_Wellspring+2        # tube 3: 6
+finish
+warp -72.851,-5.999,126.575 AhtUrhganWhitegate
+trigger Nafiwaa                         # three filled: 5037 [1] = 3
+finish
+warp 260.479,-23.113,131.913 WajaomWoodlands
+trigger Mythralline_Wellspring+3        # tube 4: 7
+finish
+warp 182.313,-15.188,373.56 BhaflauThickets
+trigger Mythralline_Wellspring          # tube 5: 10
+finish
+warp -72.851,-5.999,126.575 AhtUrhganWhitegate
+trigger Nafiwaa                         # five filled: 5038 [2] = 0, [5] = 0, [7] = 0
+finish option=1073741831                # result 1, contents 7: Stage 2, Prog 7; tube 1 empty: back to its empty tube
+trigger Nafiwaa                         # Stage 2, 11 thirds left: 5038 [2] = 7, [5] = 1, [7] = 1
+finish option=0                         # result 0: nothing
+warp -90.995,-15.139,-339.004 WajaomWoodlands
+trigger Mythralline_Wellspring          # Stage 2, the empty tube held: 4
+finish                                  # Prog 4; the tube filled; WELLSPRING + 1
+warp -217.296,-15.104,-388.272 WajaomWoodlands
+trigger Mythralline_Wellspring+1        # Stage 2, tube 2 a third used: 5
+finish                                  # Prog 0; WELLSPRING + 1
+warp 182.762,-23.098,268.394 WajaomWoodlands
+trigger Mythralline_Wellspring+2        # tube 3 full, no empty tube: WELLSPRING + 3
+finish-if-event
+warp -72.851,-5.999,126.575 AhtUrhganWhitegate
+trigger Nafiwaa                         # Stage 2: 5038 [2] = 0, [5] = 0, [7] = 1
+finish option=-2147483590               # result 2, contents 58: Stage 3, Wait tomorrow, Option 58; the tubes taken
+trigger Nafiwaa                         # Stage 3: 5039
+finish
+trigger Abquhbah                        # Stage 3: 5034 (importantOnce)
+finish
+trigger Abquhbah                        # 5034 at Default: his script's 255
+finish
+trigger Abquhbah                        # 5034
+finish
+warp 37.024,-6.601,-62 AhtUrhganWhitegate   # south of area 3
+tick 1000
+tick 1000
+tick 1000
+walk 37.024,-6.5,-56                    # area 3, Wait (tomorrow) > today: nil
+wait vana=24                            # a Vana'diel day on
+walk 37.024,-6.601,-62                  # out of area 3 (south)
+walk 37.024,-6.5,-56                    # area 3, Wait <= today: 5031
+finish                                  # quality 10: two Imperial Gold Pieces; completed; AssaultPromotion 0; the SP
+                                        # badge taken

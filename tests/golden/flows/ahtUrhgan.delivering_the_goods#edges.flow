@@ -1,0 +1,17 @@
+# Delivering the Goods' edges: a level 75 Warrior, the quest accepted (a GM). Prog 0: Ulamaal 40, finished: Prog 1. Prog
+# 1 with a full bag: Fochacha 41, finished: the three bronze pieces do not fit: no completion, no Stage, no zoning flag
+# (Prog 1 kept); one free slot: 41: completed (the stack takes one slot).
+lists AhtUrhganWhitegate/Fochacha/onTrigger AhtUrhganWhitegate/Ulamaal/onTrigger AhtUrhganWhitegate/onEventFinish/40 AhtUrhganWhitegate/onEventFinish/41
+char zone=AhtUrhganWhitegate pos=2.897,0,-10.781 job=WAR lvl=75
+quest AhtUrhgan.DeliveringTheGoods accepted
+login
+trigger Ulamaal                         # Prog 0: 40
+finish                                  # Prog 1
+fill-inventory
+trigger Fochacha                        # Prog 1: 41
+finish                                  # full: no room: nothing more (Prog 1 kept)
+trigger Fochacha                        # still Prog 1: 41
+finish-if-event
+storage inventory 31                    # a GM: one free slot
+trigger Fochacha                        # 41
+finish                                  # the stack in the one free slot: completed; Stage now + 60; needToZone

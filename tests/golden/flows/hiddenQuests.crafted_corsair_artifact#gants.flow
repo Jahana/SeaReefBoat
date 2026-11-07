@@ -1,0 +1,49 @@
+# Crafted Corsair Artifact (hidden quest CorArtifact), the Gants (Option 1, Windurst Waters' green door): a level 99
+# Warrior in Windurst Waters, Against All Odds accepted, Option 1 and Prog 1 and the green letter (GMs). Raqtibahl first
+# (Port San d'Oria): Option 1, the Frac not made: nothing: his default 759. The green door (the zone's first Door_House;
+# its default messageSpecial DOOR_FIRMLY_SHUT): 941 (Prog 2, the letter taken); 942; the gold thread, karakul leather,
+# red grass cloth and wamoura silk: 943 (Prog 3); 954; four Imperial Mythril Pieces: 946 (Prog 4, Timer, mustZone); 945;
+# the Timer past and zoned, the inventory full: 944, finished: giveItem fails: nothing changes; again with room: 944,
+# the Gants (Completed bit 0). Then the door: Option 0: the default message. A stale Timer is cleared by 282's
+# finish.
+lists Nashmau/Leleroon/onTrigger Nashmau/onEventFinish/282 WindurstWaters/Door_House/onTrigger WindurstWaters/Door_House/onTrade WindurstWaters/onEventFinish/941 WindurstWaters/onEventFinish/943 WindurstWaters/onEventFinish/944 WindurstWaters/onEventFinish/946 PortSanDoria/Raqtibahl/onTrigger
+char zone=Nashmau pos=-14.7,0,26.6 job=WAR lvl=99
+quest AhtUrhgan.AgainstAllOdds accepted
+item SpoolOfGoldThread
+item SquareOfKarakulLeather
+item SquareOfRedGrassCloth
+item SpoolOfWamouraSilk
+item ImperialMythrilPiece x4
+login
+charvar HQuest[CorArtifact]Timer 5      # a GM: a stale Timer, which 282's finish clears
+trigger Leleroon                        # Prog 0: 282
+finish option=1                         # the green letter; Option 1, Prog 1, Timer 0
+trigger Leleroon                        # Prog 1, Option 1: 285
+finish
+warp -58.7,-4.5,-39.6 PortSanDoria
+trigger Raqtibahl                       # Option 1, no Frac: nothing: 759
+finish
+warp -197.6,-5.4,-112 WindurstWaters    # beside the green door
+trigger Door_House                      # the letter: 941
+finish                                  # Prog 2, the letter taken
+trigger Door_House                      # Prog 2: 942
+finish
+trade Door_House SpoolOfGoldThread x1 SquareOfKarakulLeather x1 SquareOfRedGrassCloth x1 SpoolOfWamouraSilk x1   # 943
+finish                                  # taken, Prog 3
+trigger Door_House                      # Prog 3: 954
+finish
+trade Door_House ImperialMythrilPiece x3   # Prog 3, not the four: nothing
+trade Door_House ImperialMythrilPiece x4   # 946
+finish                                  # taken, Prog 4, Timer tomorrow, mustZone
+trigger Door_House                      # not yet: 945
+finish
+charvar HQuest[CorArtifact]Timer 0      # a GM: the day past
+warp -58.7,-4.5,-39.6 PortSanDoria
+warp -197.6,-5.4,-112 WindurstWaters
+fill-inventory
+trigger Door_House                      # 944
+finish                                  # no room: giveItem fails: nothing changes
+free-inventory
+trigger Door_House                      # 944
+finish                                  # the Gants; Completed 1; Prog, Option, Timer 0
+trigger Door_House                      # Option 0: DOOR_FIRMLY_SHUT

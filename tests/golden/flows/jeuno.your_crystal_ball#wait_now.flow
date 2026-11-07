@@ -1,0 +1,11 @@
+# Your Crystal Ball (jeuno 9), GM-set accepted at Prog 1 with Wait exactly now (charvar 1800000000, the harness's
+# constant wall clock: GetSystemTime() == Wait): :85 GetSystemTime() >= Wait is true at equality, so the Rockwell pool
+# plays 52, not WAIT_A_BIT_LONGER.
+lists MazeOfShakhrami/Rockwell/onTrigger MazeOfShakhrami/onEventFinish/52
+char zone=MazeOfShakhrami pos=-18,-14,181.5 job=WAR lvl=30
+quest Jeuno.YourCrystalBall accepted
+charvar Quest[3][9]Prog 1
+charvar Quest[3][9]Wait 1800000000
+login
+trigger Rockwell                            # GetSystemTime() == Wait: 52 (Lua >=)
+finish                                      # a free slot: Prog 2, the Divination Sphere

@@ -1,0 +1,12 @@
+# Sorcery of the North (sandoria 83) accepted with the tome already held: the Fei'Yin chest's trade is the chest's own
+# script (its loot draw: 5580 gil, CHEST_UNLOCKED); the quest's handler wants no tome held. A chest is placed 10 s after its zone starts
+# (hence the tick).
+char zone=Feiyin pos=168.7,-24.0,210.8 job=WAR lvl=50
+quest Sandoria.SorceryOfTheNorth accepted
+keyitem FeiyinMagicTome
+item FeiyinChestKey
+login
+tick 13000
+trigger Treasure_Chest                    # the chest's own trigger
+trade Treasure_Chest FeiyinChestKey x1    # accepted, the tome held: the quest's nil; the chest's own script
+tick 4500

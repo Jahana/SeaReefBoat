@@ -1,0 +1,51 @@
+# Do Not Go into the Light (adoulin, call-only): a level 99 Warrior in Western Adoulin, DNGITL_Status 3 (a GM: nothing
+# sets it, begins or completes the quest), with three each of a Piece of Urunday Lumber (3927), a Damascus Ingot and a
+# Fire Crystal. Chanteillie's talks go in pairs (her default 531, then her script); trades run her script. Available:
+# the three: nothing; the pickaxe (a GM): nothing. Accepted (a GM), no pickaxe: nothing. The three at status 2,
+# at status 4: nothing; at 3 any two of the three: nothing; the three: 5076, finished: the trade taken, the
+# Inventor's Coalition Pickaxe, DNGITL_Status 0. The pickaxe: 5077 (no finish), each talk. Completed (a GM), status 3:
+# the three: nothing; the pickaxe: nothing. Vegetable Vegetable Crisis not accepted: its arms answer nothing.
+lists WesternAdoulin/Chanteillie/onTrigger WesternAdoulin/Chanteillie/onTrade WesternAdoulin/onEventFinish/5076
+char zone=WesternAdoulin pos=90.8,-0.65,-75 job=WAR lvl=99
+charvar DNGITL_Status 3
+item 3927 x3
+item DamascusIngot x3
+item FireCrystal x3
+login
+trade Chanteillie 3927 x1 DamascusIngot x1 FireCrystal x1   # available, status 3: nothing
+keyitem InventorsCoalitionPickaxe       # a GM
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # available, the pickaxe: nothing: 531
+finish-if-event
+delkeyitem InventorsCoalitionPickaxe    # a GM
+quest Adoulin.DoNotGoIntoTheLight accepted   # a GM
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # accepted, no pickaxe: nothing: 531
+finish-if-event
+charvar DNGITL_Status 2                 # a GM
+trade Chanteillie 3927 x1 DamascusIngot x1 FireCrystal x1   # status 2: nothing
+charvar DNGITL_Status 4                 # a GM
+trade Chanteillie 3927 x1 DamascusIngot x1 FireCrystal x1   # status 4: nothing
+charvar DNGITL_Status 3                 # a GM
+trade Chanteillie DamascusIngot x1 FireCrystal x1   # no lumber: nothing
+trade Chanteillie 3927 x1 FireCrystal x1   # no ingot: nothing
+trade Chanteillie 3927 x1 DamascusIngot x1  # no crystal: nothing
+trade Chanteillie 3927 x1 DamascusIngot x1 FireCrystal x1   # the three: 5076
+finish                                  # the trade taken, the pickaxe, DNGITL_Status 0
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # the pickaxe: 5077
+finish-if-event                         # no finish arm
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # 5077 again
+finish-if-event
+quest Adoulin.DoNotGoIntoTheLight completed  # a GM
+charvar DNGITL_Status 3                 # a GM
+trade Chanteillie 3927 x1 DamascusIngot x1 FireCrystal x1   # completed: nothing
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # completed, the pickaxe: nothing: 531
+finish-if-event

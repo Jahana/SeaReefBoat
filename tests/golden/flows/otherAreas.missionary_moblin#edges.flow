@@ -1,0 +1,22 @@
+# Missionary Moblin (otherAreas 103): the edges. Accepted (a GM). The letter with a feather (tradeHas: not exact): 9,
+# finished: completed, only the letter taken (the feather kept), the mustZone set. A trade of the feather alone after
+# the completion: no trade handler; nothing. Completed with the mustZone cleared by a GM (charvar 0) and For the Birds
+# completed and Better the Demon completed (GMs): Missionary's section off; Better's 27 (replaceDefault). Better
+# available again (a GM: delQuest is not a statement; status available): For's mustZone clear: Better's offer 20.
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/Koblakiq/onTrade OldtonMovalpolos/onEventFinish/9 OldtonMovalpolos/onEventFinish/20
+char zone=OldtonMovalpolos pos=-63.4,22.8,-117.5 job=WAR lvl=75
+quest OtherAreas.MissionaryMoblin accepted
+item SoiledLetter
+item ChocoboFeather x2
+login
+trade Koblakiq SoiledLetter x1 ChocoboFeather x1 # the letter and a feather: 9
+finish                                  # completed; 4000 gil; the letter taken, the feather kept; mustZone 11
+trade Koblakiq ChocoboFeather x1        # completed: no trade handler; nothing
+charvar Quest[4][103]mustZone 0         # a GM
+quest OtherAreas.ForTheBirds completed  # a GM
+quest OtherAreas.BetterTheDemonYouKnow completed # a GM
+trigger Koblakiq                        # Missionary's section off: Better completed: 27 (replaceDefault)
+finish
+quest OtherAreas.BetterTheDemonYouKnow available # a GM
+trigger Koblakiq                        # Better available (For completed, its mustZone clear): 20 (0, 1653)
+finish                                  # Better begun

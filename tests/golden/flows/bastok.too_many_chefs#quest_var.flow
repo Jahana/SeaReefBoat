@@ -1,0 +1,14 @@
+# Too Many Chefs (bastok 86), the quest's own var at the completion: Bastok fame 325, accepted, TOO_MANY_CHEFS 5 and
+# Quest[1][86]Prog 1 (GMs). Umberto (the second talk of a pair: his default 411 first): 473; finished: Aileen's Delight,
+# ITEM_OBTAINED, Bastok fame +50, TOO_MANY_CHEFS 0, the raw player:completeQuest. The raw completeQuest does no cleanup:
+# Quest[1][86]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=BastokMarkets pos=-57,-4,-134
+fame Bastok 325
+quest Bastok.TooManyChefs accepted
+charvar TOO_MANY_CHEFS 5
+charvar Quest[1][86]Prog 1      # a GM: the quest's own var
+login
+trigger Umberto                 # default turn: 411
+finish
+trigger Umberto                 # script: 473
+finish                          # Aileen's Delight, 50 fame, the var 0, completed, Prog kept

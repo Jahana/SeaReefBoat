@@ -1,0 +1,40 @@
+# The Gobbiebag Part II (jeuno 28) with its era module (quest rework B3b Jeuno, P4):
+# modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua, enabled by xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1,
+# ENABLE_SOA 0), raises the part's fame level to 4 (states 1 and 2's checks replaced) and adds state 3 (available, the
+# start size, the previous part, fame below 4: 42 with the inventory + 1). The inventory at 35 (storage, after a first
+# talk at 30: no state 3, 43 (81)), Part I completed. Fame level 3 (449 / 2 = 224): state 3's 42 (36); Part I set
+# accepted (a GM): no section (43 (81)); completed again; fame level 4 (450, a GM): 43 (36, 0, 1), begun; accepted at
+# fame level 3: the module's state 2 check fails: no section, a trade: nothing; at 4: the four items: 73 (41),
+# completed. A GM sets a part available before accepted (accepted over completed keeps it completed).
+module modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/Bluffnix/onTrade LowerJeuno/onEventFinish/43 LowerJeuno/onEventFinish/73
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+fame Sandoria 449
+quest Jeuno.TheGobbiebagPartI completed
+item SquareOfRamLeather
+item MythrilIngot
+item SquareOfWoolCloth
+item Turquoise
+login
+trigger Bluffnix                        # available, fame below the era level, the inventory 30, not 35: no state 3; 43 (81)
+finish
+storage inventory 35                    # a GM: the part's start size
+trigger Bluffnix                        # fame level 3, below the era level: state 3: 42 (36)
+finish
+quest Jeuno.TheGobbiebagPartI available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartI accepted  # a GM
+trigger Bluffnix                        # state 3: the previous part not completed: no section; 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartI completed # a GM
+fame Sandoria 450                       # a GM: fame level 4
+trigger Bluffnix                        # the module's state 1 check: 43 (36, 0, 1)
+finish option=0                         # begun
+fame Sandoria 449                       # a GM: fame level 3
+trigger Bluffnix                        # accepted, the module's state 2 check fails: no section; 43 (81)
+finish
+trade Bluffnix SquareOfRamLeather x1 MythrilIngot x1 SquareOfWoolCloth x1 Turquoise x1 # no section: nothing
+fame Sandoria 450                       # a GM
+trade Bluffnix SquareOfRamLeather x1 MythrilIngot x1 SquareOfWoolCloth x1 Turquoise x1 # the module's state 2 check: 73 (41)
+finish                                  # completed; inventory 40; INVENTORY_INCREASED

@@ -1,0 +1,19 @@
+# Crafted Puppetry Artifact (hidden quest PuppetryArtifact), the last piece: a level 99 Warrior in Aht Urhgan Whitegate,
+# Puppetmaster Blues completed, [AF]pupCrafted 6 (the tobe and dastanas), [PUP]orderId 15686 (Puppetry Babouches),
+# orderStage 2, orderTime 0 (GMs). Dhima: 793 (the last), finished with the inventory full: giveItem fails: nothing;
+# again with room: the babouches, pupCrafted 14, the order vars 0. All made: 788 (replaceDefault).
+lists AhtUrhganWhitegate/Dhima_Polevhia/onTrigger AhtUrhganWhitegate/onEventFinish/793
+char zone=AhtUrhganWhitegate pos=67.8,-6,27.8 job=WAR lvl=99
+quest AhtUrhgan.PuppetmasterBlues completed
+charvar [AF]pupCrafted 6
+charvar [PUP]orderId 15686
+charvar [PUP]orderStage 2
+login
+fill-inventory
+trigger Dhima_Polevhia                  # two made, ready: 793
+finish                                  # no room: nothing
+free-inventory
+trigger Dhima_Polevhia                  # 793
+finish                                  # the babouches; pupCrafted 14; the order vars 0
+trigger Dhima_Polevhia                  # all made: 788 (replaceDefault)
+finish

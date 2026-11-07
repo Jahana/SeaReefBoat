@@ -1,0 +1,18 @@
+# Children of the Rune (adoulin 119): the rune enhancement left before (RUN_COTR 2), finished with a full inventory: the
+# Sowilo Claymore not given, the reward pending (RUN_COTR 3); 29 while still full, then with room: the reward, completed.
+char zone=EasternAdoulin pos=2.444,-11.439,-16.595 job=WHM lvl=30
+quest Adoulin.ChildrenOfTheRune accepted
+keyitem YahseWildflowerPetal
+charvar RUN_COTR 2
+login
+fill-inventory
+trigger Octavien                # RUN_COTR 2: 26 with 1
+update 26 option=1              # HP and MP halved
+finish option=1                 # RUN_COTR 3, the inventory full: no reward
+trigger Octavien                # RUN_COTR 3: 29
+finish                          # still full: no reward
+free-inventory
+trigger Octavien                # 29
+finish                          # the reward: completed
+trigger Octavien                # Completed: 28
+finish

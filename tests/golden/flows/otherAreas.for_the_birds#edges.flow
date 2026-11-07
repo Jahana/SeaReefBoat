@@ -1,0 +1,62 @@
+# For the Birds (otherAreas 104): the edges. A fresh log: Koblakiq: Missionary's 7 (For off: Missionary not completed).
+# Missionary completed (a GM) with its mustZone (a GM: 11): For off: Missionary's 12. Cleared (a GM): 14, option 0 and
+# 2: nothing. Accepted (a GM): Koblakiq Prog 3, 5 and -1 (GMs): nil (13). Daa Bola: a feather: nil; a root and a feather
+# (tradeHas: not exact) at Prog 2 (a GM): 87, finished: the root taken, the feather kept, Prog 1 (back from 2),
+# mustZone. Daa Bola Prog 1 with the mustZone cleared (a GM): nil (HERETICS). GeFhu Prog 0 and 1: nil (HUURR). Prog 2 (a
+# GM) with no fragment: the spawn arm takes it all the same (TAKEN_FROM_YOU). A Magnes' and a Nickel's death at Prog 2,
+# and the other two at Prog 4: the Option kept (the main flow counts them at Prog 3). Koblakiq Prog 4 with a full
+# inventory: 18, finished: quest:complete fails (the mantle): no mustZone, still accepted: 18 again, finished with room:
+# completed.
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/onEventFinish/7 OldtonMovalpolos/onEventFinish/14 OldtonMovalpolos/onEventFinish/18 CastleOztroja/Daa_Bola_the_Seer/onTrigger CastleOztroja/Daa_Bola_the_Seer/onTrade CastleOztroja/onEventFinish/87 Beadeaux/GeFhu_Yagudoeye/onTrigger Beadeaux/Magnes_Quadav_NM/onMobDeath Beadeaux/Nickel_Quadav_NM/onMobDeath Beadeaux/onZoneOut/1
+char zone=OldtonMovalpolos pos=-63.4,22.8,-117.5 job=WAR lvl=75
+item ArnicaRoot
+item ChocoboFeather x2
+login
+trigger Koblakiq                        # Missionary available: 7 (For off)
+finish option=0                         # nothing
+quest OtherAreas.MissionaryMoblin completed # a GM
+charvar Quest[4][103]mustZone 11        # a GM
+trigger Koblakiq                        # For off (Missionary's mustZone): Missionary's 12
+finish
+charvar Quest[4][103]mustZone 0         # a GM
+trigger Koblakiq                        # 14
+finish option=0                         # nothing
+trigger Koblakiq                        # 14
+finish option=2                         # nothing
+quest OtherAreas.ForTheBirds accepted   # a GM
+charvar Quest[4][104]Prog 3             # a GM
+trigger Koblakiq                        # Prog 3: nil; 13
+finish
+charvar Quest[4][104]Prog 5             # a GM
+trigger Koblakiq                        # Prog 5: nil; 13
+finish
+charvar Quest[4][104]Prog -1            # a GM
+trigger Koblakiq                        # Prog -1: nil; 13 (not 15)
+finish
+charvar Quest[4][104]Prog 2             # a GM
+warp -156.5,-17.2,193.5 CastleOztroja
+trade Daa_Bola_the_Seer ChocoboFeather x1 # no root: nil; nothing
+trade Daa_Bola_the_Seer ArnicaRoot x1 ChocoboFeather x1 # a root and a feather, Prog 2: 87
+finish                                  # the root taken, the feather kept; Prog 1; mustZone 151
+charvar Quest[4][104]mustZone 0         # a GM
+trigger Daa_Bola_the_Seer               # Prog 1, no mustZone: nil; HERETICS
+warp -89.9,-3.25,-127.8 Beadeaux
+charvar Quest[4][104]Prog 0             # a GM
+trigger GeFhu_Yagudoeye                 # Prog 0: nil; HUURR
+charvar Quest[4][104]Prog 1             # a GM
+trigger GeFhu_Yagudoeye                 # Prog 1: nil; HUURR
+charvar Quest[4][104]Prog 2             # a GM
+trigger GeFhu_Yagudoeye                 # Prog 2, none up: Prog 3; four spawned; TAKEN_FROM_YOU (none held); attack
+charvar Quest[4][104]Prog 2             # a GM
+kill MAGNES_QUADAV_NM                   # Magnes at Prog 2: Option kept (0)
+kill NICKEL_QUADAV_NM                   # Nickel at Prog 2: kept
+charvar Quest[4][104]Prog 4             # a GM
+kill MAGNES_QUADAV_NM+2                 # Magnes at Prog 4: kept
+kill MAGNES_QUADAV_NM+3                 # Nickel at Prog 4: kept
+warp -63.4,22.8,-117.5 OldtonMovalpolos
+fill-inventory
+trigger Koblakiq                        # Prog 4: 18
+finish                                  # no room: quest:complete false; still accepted; no mustZone
+free-inventory
+trigger Koblakiq                        # Prog 4: 18 again
+finish                                  # completed; Jaguar Mantle; mustZone 11

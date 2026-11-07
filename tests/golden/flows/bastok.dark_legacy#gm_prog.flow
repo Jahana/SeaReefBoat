@@ -1,0 +1,14 @@
+# Dark Legacy, Vaa Huja the Erudite's death guard, the false side: accepted (GM) at Prog 2, the Yagudo Cherry at the
+# Giddeus qm1 spawns him (claimed); a GM moves Prog to 1 while he is up, so his death fails `Prog == 2` and Prog stays 1
+# (Prog 1, not 3: without the guard the handler's SetStep(3) would leave a Prog 3 unchanged and prove nothing).
+lists Giddeus/qm1/onTrade Giddeus/Vaa_Huja_the_Erudite/onMobDeath
+char zone=Giddeus pos=-60,-3.7,-446.5 job=DRK lvl=40
+quest Bastok.DarkLegacy accepted
+charvar Quest[1][57]Prog 2
+item YagudoCherry
+login
+trigger qm1                          # Prog 2: nil, NOTHING_OUT_OF_ORDINARY (walks to the qm1)
+finish-if-event
+trade qm1 YagudoCherry x1            # Prog 2, Vaa Huja not up: the cherry taken, Vaa Huja spawned and claimed
+charvar Quest[1][57]Prog 1
+kill VAA_HUJA_THE_ERUDITE            # Prog 1: the guard is false, nothing (Prog stays 1)

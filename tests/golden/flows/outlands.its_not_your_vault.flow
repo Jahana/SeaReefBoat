@@ -1,0 +1,51 @@
+# It's Not Your Vault (outlands): Keal in Norg (he patrols a path: `trigger` walks to him) and Sea Serpent Grotto's qm3
+# (call-only: scripts/zones/Norg/npcs/Keal.lua, scripts/zones/Sea_Serpent_Grotto/npcs/qm3.lua). Keal has a default
+# (DefaultActions 89) beside his script, so the lookup alternates: the first talk plays 89, the next runs his script
+# (when it starts nothing, 89 after it); each script turn is the second of a pair. qm3 has no default.
+# Available, a trade: no onTrade: nothing. Norg fame level 2: nothing (89). Level 3 at level 5: 36 (Sealed Iron Box);
+# finished on 0: not begun; on 1: begun. Accepted, no box: 37 (Map of Sea Serpent Grotto). qm3: the box
+# (npcUtil.giveKeyItem); again (held): nothing. Keal: 38; the inventory full: ITEM_CANNOT_BE_OBTAINED (Scroll of Tonko:
+# Ichi), nothing else; with room: the box taken, the scroll, ITEM_OBTAINED, fame +30, completed. Completed: 39; qm3:
+# nothing.
+char zone=Norg pos=-10.7,0.5,-5.6 job=WAR lvl=5
+fame Norg 124
+item Pebble
+login
+trigger Keal                            # default turn: 89
+finish
+trade Keal Pebble x1                    # available: no onTrade: nothing
+trigger Keal                            # script, fame level 2: nothing; then 89
+finish
+fame Norg 125
+trigger Keal                            # default turn: 89
+finish
+trigger Keal                            # script: 36 (Sealed Iron Box)
+finish option=0                         # not begun
+trigger Keal                            # default turn: 89
+finish
+trigger Keal                            # script: 36
+finish option=1                         # begun
+trigger Keal                            # default turn: 89
+finish
+trigger Keal                            # script, no box: 37 (the map)
+finish
+warp -173.7,27,254 SeaSerpentGrotto
+trigger qm3                             # accepted, no box: the box
+trigger qm3                             # the box held: nothing
+warp -10.7,0.5,-5.6 Norg
+fill-inventory
+trigger Keal                            # default turn: 89
+finish
+trigger Keal                            # script, the box: 38
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED
+free-inventory
+trigger Keal                            # default turn: 89
+finish
+trigger Keal                            # script: 38
+finish                                  # the box taken; the scroll; fame +30; completed
+trigger Keal                            # default turn: 89
+finish
+trigger Keal                            # script, completed: 39
+finish
+warp -173.7,27,254 SeaSerpentGrotto
+trigger qm3                             # completed: nothing

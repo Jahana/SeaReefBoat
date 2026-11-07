@@ -1,0 +1,22 @@
+# Chocobo Whistle, the whistle with no room and the setting off: Prog 3 (a GM) and the Handkerchief, the inventory
+# full: 830 (VanadielTime, 2) finished on 222: DONE, the handkerchief taken, giveQuestWhistle finds no room
+# (npcUtil.giveItem's message) and sets [ChocoboRaising]WhistlePending 1. Then Prog 1 (a GM) with
+# ENABLE_CHOCOBO_RAISING false: the check fails (his script). Then the setting 0 (Lua treats a 0 as on): 829 plays and
+# Prog 2.
+lists SouthernSanDoria/Hantileon/onTrigger SouthernSanDoria/onEventFinish/830
+char zone=SouthernSanDoria pos=-1,0,-105 job=WAR lvl=30
+charvar HQuest[ChocoboWhistle]Prog 3
+keyitem Handkerchief
+login
+fill-inventory
+trigger Hantileon                       # 830 (VanadielTime, 2)
+finish option=222                       # DONE; the handkerchief taken; no room: the pending var 1
+free-inventory
+charvar HQuest[ChocoboWhistle]Prog 1    # a GM
+setting ENABLE_CHOCOBO_RAISING false
+trigger Hantileon                       # the setting off: the check fails: his script
+finish-if-event
+setting ENABLE_CHOCOBO_RAISING 0       # Lua's truthiness: a 0 is on
+trigger Hantileon                       # 829 plays (the library's too)
+update 829 option=244
+finish                                  # Prog 2

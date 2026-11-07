@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- XI.Login: Phase-2 login-server wire model (lobby packet structs + auth/enums).
+         Layout constants are sourced from the compiled MSVC oracle
+         (csharp/oracle/login_lobby_harness.cpp -> login_lobby_golden.txt), never
+         hand-computed, because TC_OPERATION_MAKE mixes uint16/uint8/uint32 runs and
+         lpkt_chr_info_sub2 carries a byte-wide bit-field run. Product build targets
+         net8.0; spike/verify uses net10.0 for the local SDK. -->
+    <AssemblyName>XI.Login</AssemblyName>
+    <RootNamespace>XI.Login</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reuses the Phase-0 packet framing/cipher the lobby and connect sessions rely on. -->
+    <ProjectReference Include="..\XI.Crypto\XI.Crypto.csproj" />
+    <!-- Auth session: DB-backed account/OTP queries, AccountLogin IPC message, bcrypt. -->
+    <ProjectReference Include="..\XI.Persistence\XI.Persistence.csproj" />
+    <ProjectReference Include="..\XI.Ipc\XI.Ipc.csproj" />
+    <!-- LoginConfig: the settings files, read as settings::get<T> -->
+    <ProjectReference Include="..\XI.Common\XI.Common.csproj" />
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.5.1" />
+  </ItemGroup>
+
+</Project>

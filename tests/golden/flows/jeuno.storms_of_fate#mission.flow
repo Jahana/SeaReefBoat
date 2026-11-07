@@ -1,0 +1,33 @@
+# Storms of Fate (jeuno 86): the available check's mission operands, one at a time (GM steps between walks into Ru'Lude
+# Gardens' trigger area 1). A level 75 Warrior with Dawn's Status 8. CoP When Angels Fall current (828, under Dawn's
+# 840): no section; The Last Verse (850, over it): no section; Dawn current, Status 7: no section; Status 9: no section;
+# Status 8: 142, finished with option 2 (not 1: the mustZone set). Each "no section" walk plays nothing: Dawn's own
+# area-1 handler wants Status 4, When Angels Fall and The Last Verse have none in Ru'Lude Gardens. Then the trade while
+# the quest is only available: out to Misareaux Coast (the mustZone cleared: the available check holds again), a Bird
+# Feather to _0p2: no onTrade in any of the quest's states (and none in _0p2's script): nothing.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/142 MisareauxCoast/_0p2/onTrade
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+mission Cop WhenAngelsFall current
+charvar Mission[6][840]Status 8
+item BirdFeather
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # CoP When Angels Fall (828): no section; nothing
+walk 4,2.5,100
+mission Cop WhenAngelsFall completed     # a GM: the log's current mission cleared (addMission refuses to overwrite one)
+mission Cop TheLastVerse current        # a GM
+walk 4,2.5,60                           # CoP The Last Verse (850): no section; nothing
+walk 4,2.5,100
+mission Cop TheLastVerse completed      # a GM
+mission Cop Dawn current                # a GM
+charvar Mission[6][840]Status 7         # a GM
+walk 4,2.5,60                           # Dawn, Status 7: no section; nothing
+walk 4,2.5,100
+charvar Mission[6][840]Status 9         # a GM
+walk 4,2.5,60                           # Status 9: no section; nothing
+walk 4,2.5,100
+charvar Mission[6][840]Status 8         # a GM
+walk 4,2.5,60                           # Status 8: 142
+finish option=2                         # not 1: the mustZone set
+warp -258.5,-32.7,280 MisareauxCoast    # another zone: the mustZone cleared, available again
+trade _0p2 BirdFeather x1               # available: no onTrade: nothing

@@ -1,0 +1,57 @@
+# Elder Memories (otherAreas 24): the level edge and the setting, the option edges, the letter, the Prog arms past the
+# table, the finishes outside their section and tradeComplete with no trade open. Level 17 at SUBJOB_QUEST_LEVEL 18: 119;
+# at 17.4 (a GM setting; a decimal is read as Lua has it, so 17 >= 17.4 is false): 119; at 17: 111 (538), options 39
+# and 41: nothing; at 16: 111, option 40: begun. Gilgamesh's Introductory Letter (a GM) at Prog 0: 117 (the letter is
+# checked before the table), finished: completed, tradeComplete with nothing traded since the login (nothing taken), the
+# subjob unlocked; the letter kept. Accepted again (a GM: available, then accepted), the letter taken (a GM): Prog -1 and
+# Prog 3: Isacio nil (no default: nothing), the skull traded: nil. The letter (a GM) at Prog 3: 117, made available by
+# a GM while it is open: no 117 handler: nothing. Accepted again at Prog 0, the letter taken: the skull: 115 (537);
+# completed by a GM while it is open: no 115 handler: the skull kept, Prog stays 0. Accepted again (available, then
+# accepted), the letter (a GM): 117, finished: completed; its tradeComplete takes the skull of the last trade (the
+# 115 trade whose finish did nothing), which the trade container still holds.
+lists Selbina/Isacio/onTrigger Selbina/Isacio/onTrade Selbina/onEventFinish/111 Selbina/onEventFinish/115 Selbina/onEventFinish/117
+char zone=Selbina pos=-56.6,-0.9,-46.4 job=WAR lvl=17
+item MagickedSkull
+login
+trigger Isacio                          # level 17 < 18: 119
+finish
+setting SUBJOB_QUEST_LEVEL 17.4         # a GM setting
+trigger Isacio                          # 17 < 17.4: 119
+finish
+setting SUBJOB_QUEST_LEVEL 17           # a GM setting
+trigger Isacio                          # 17 >= 17: 111 (538)
+finish option=39                        # nothing
+trigger Isacio                          # 111
+finish option=41                        # nothing
+setting SUBJOB_QUEST_LEVEL 16           # a GM setting
+trigger Isacio                          # 17 >= 16: 111
+finish option=40                        # begun
+keyitem GilgameshsIntroductoryLetter    # a GM
+trigger Isacio                          # the letter at Prog 0: 117 (not 114)
+finish                                  # completed; tradeComplete: nothing traded, nothing taken; the subjob unlocked; the letter kept
+quest OtherAreas.ElderMemories available # a GM
+quest OtherAreas.ElderMemories accepted # a GM
+delkeyitem GilgameshsIntroductoryLetter # a GM
+charvar Quest[4][24]Prog -1             # a GM
+trigger Isacio                          # Prog -1: no step: nil; no default: nothing
+finish-if-event
+trade Isacio MagickedSkull x1           # Prog -1: nil
+charvar Quest[4][24]Prog 3              # a GM
+trigger Isacio                          # Prog 3: nil; nothing
+finish-if-event
+trade Isacio MagickedSkull x1           # Prog 3: nil
+keyitem GilgameshsIntroductoryLetter    # a GM
+trigger Isacio                          # the letter at Prog 3: 117
+quest OtherAreas.ElderMemories available # a GM, while 117 is open
+finish                                  # no 117 handler while available: nothing
+quest OtherAreas.ElderMemories accepted # a GM
+delkeyitem GilgameshsIntroductoryLetter # a GM
+charvar Quest[4][24]Prog 0              # a GM
+trade Isacio MagickedSkull x1           # 115 (537)
+quest OtherAreas.ElderMemories completed # a GM, while 115 is open
+finish                                  # no 115 handler while completed: the skull kept, Prog stays 0
+quest OtherAreas.ElderMemories available # a GM
+quest OtherAreas.ElderMemories accepted # a GM
+keyitem GilgameshsIntroductoryLetter    # a GM
+trigger Isacio                          # the letter at Prog 0: 117
+finish                                  # completed; tradeComplete takes the skull the 115 trade left in the trade container

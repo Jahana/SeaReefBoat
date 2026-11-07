@@ -1,0 +1,43 @@
+# In a Stew (windurst 45): its Kuoh Rhel replies next to his script, so a Progress line and an Event line differ. A
+# level-10 WAR, Windurst fame 50. Chocobilious through his script: 224 (option 1: accepted), ChocobiliousQuest 2 by GM,
+# 231: completed (fame 20, 1500 gil) and needToZone, so his script then answers 232 on its turn (until a zone change).
+# Its quest mustZone (Quest[2][27]mustZone, what this quest's check reads) stays clear. The lookup: a Progress line
+# plays on any talk; an Event line takes turns with the script; a default line (222) is an action and takes the action's
+# turn. 235 (Progress); 236 (Event, the quest's turn); 232; 236; Prog 2 and the stew by GM: 239 (Progress, on the
+# script's turn): completed, mustZone, Wait = 1800198000; 240 (Event); 232. wait jst=3 (the next tally 1800802800 >
+# Wait; this quest's check reads no mustZone of its own): section 1 and section 3 both hold: 234 (Progress) over 240
+# (Event), twice.
+lists WindurstWoods/Kuoh_Rhel/onTrigger
+char zone=WindurstWoods pos=133.4,-5,-102.7 job=WAR lvl=10
+fame Windurst 50
+login
+trigger Kuoh_Rhel                             # Chocobilious available: no section; the first talk: the default 222
+finish
+trigger Kuoh_Rhel                             # his script's turn: Chocobilious's offer 224
+finish option=1                               # Chocobilious accepted
+charvar ChocobiliousQuest 2
+trigger Kuoh_Rhel                             # the action's turn: the default 222
+finish
+trigger Kuoh_Rhel                             # his script's turn: 231
+finish                                        # Chocobilious completed; needToZone
+trigger Kuoh_Rhel                             # section 1 holds: 235 (Progress)
+finish                                        # begun; Prog 1
+trigger Kuoh_Rhel                             # Prog 1: 236 (the quest's turn after a Progress line)
+finish
+trigger Kuoh_Rhel                             # his script's turn: needToZone: 232
+finish
+trigger Kuoh_Rhel                             # the quest's turn: 236
+finish
+charvar Quest[2][45]Prog 2
+keyitem RanpiMonpisSpecialStew
+trigger Kuoh_Rhel                             # Prog 2: 239 (Progress) on his script's turn
+finish                                        # completed: fame 10, 900 gil; the mustZone; the stew taken; Wait = 1800198000
+trigger Kuoh_Rhel                             # completed, the mustZone: 240 (the quest's turn after a Progress line)
+finish
+trigger Kuoh_Rhel                             # his script's turn: 232
+finish
+wait jst=3                                    # the next tally 1800802800 > Wait: section 1 holds again
+trigger Kuoh_Rhel                             # 234 (Progress, section 1) over 240 (Event, section 3)
+finish option=0                               # not 1: nothing
+trigger Kuoh_Rhel                             # 234 again
+finish option=0

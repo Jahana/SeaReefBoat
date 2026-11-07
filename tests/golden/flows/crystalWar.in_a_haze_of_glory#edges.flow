@@ -1,0 +1,35 @@
+# In a Haze of Glory (crystalWar 38), the edges: a level 99 Warrior in Garlaige Citadel [S] without Perils of the
+# Griffon completed (missions as the main flow). Diordinne: no section (14). Perils completed (a GM): Diordinne 31,
+# finished on option 1: begun (any option). Wooden Crates 32: Prog 1; Wooden Crates at Prog 1: nil. The Garlaige
+# Citadel [S] zone-in at Prog 1: nothing. Southern San d'Oria [S]: Rholont at Prog 1: nil (32). Prog 3 (a GM), 18:00, a
+# full inventory: Rholont 82, finished: the bullet does not fit: not completed; freed: 82: completed.
+uncovered: 2/-/onEventFinish:10000 -- Ghoyu's Reverie's 10000 is the instance's clear (its TODO: "needs to be verified upon implementation of the instance"; Ghoyu's Reverie's one instance script is Doomvoid's, none for this quest), so no flow opens it; the main flow sets Prog 2 by a GM
+lists GarlaigeCitadelS/Diordinne/onTrigger GarlaigeCitadelS/Wooden_Crates/onTrigger GarlaigeCitadelS/onZoneIn/1 GarlaigeCitadelS/onEventFinish/31 GarlaigeCitadelS/onEventFinish/32 SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/82
+char zone=GarlaigeCitadelS pos=-106.285,0,193.665 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Diordinne                       # Perils not completed: no section (14)
+finish-if-event
+quest CrystalWar.PerilsOfTheGriffon completed # a GM
+trigger Diordinne                       # 31
+finish option=1                         # begun (any option); the key
+walk 0.783,3.347,-99.535
+trigger Wooden_Crates                   # 32
+finish                                  # Prog 1
+trigger Wooden_Crates                   # Prog 1: nil
+finish-if-event
+rezone                                  # Prog 1: no zone-in reply
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # accepted, Prog 1: nil (32)
+finish-if-event
+charvar Quest[7][38]Prog 3              # a GM
+wait vana=6
+fill-inventory
+trigger Rholont                         # Prog 3, 18:00: 82
+finish                                  # no room: not completed
+free-inventory
+trigger Rholont                         # 82
+finish                                  # completed

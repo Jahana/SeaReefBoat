@@ -1,0 +1,47 @@
+# Trust: Windurst (windurst 96): Kupipi's memories and rank arguments, and her nation arms. A Windurst char (nation 2)
+# with no current mission; the quest accepted by GM (with the card). Rank 2, no memories: 435 (0, 0, 0, 0, 0, 0, 0, 0).
+# The var 0 again (GM), The Three Kingdoms completed, rank 3: that mission's completed section answers Kupipi with
+# mission:event(102), an Event (Default priority), so the lookup takes turns between it and her script from here on
+# (102, the script, 102, ...): 435 (0, 0, 0, 2, 0, 0, 0, 1) on the script's turn; Moon Reading completed too:
+# 435 (0, 0, 0, 10, 0, 0, 0, 1). Then 436; then no arm: her rank < 10 arm 251, and at rank 10 408. San d'Oria's
+# completed (GM): 439 (0, 0, 0, 10, 0, 0, 0, 1): completed (Kupipi, the card taken, the permit).
+char zone=HeavensTower pos=2,0.1,30 lvl=75 nation=2
+rank 2
+quest Windurst.TrustWindurst accepted
+keyitem GreenInstituteCard
+login
+trigger Kupipi+1                        # accepted, the var 0, no memories, rank 2: 435 (0, 0, 0, 0, 0, 0, 0, 0)
+finish                                  # Kupipi learned; the var 1
+charvar WindurstFirstTrust 0
+mission Windurst TheThreeKingdoms current
+mission Windurst TheThreeKingdoms completed
+rank 3
+trigger Kupipi+1                        # The Three Kingdoms completed: the mission's turn: 102
+finish
+trigger Kupipi+1                        # the script's turn: 435 (0, 0, 0, 2, 0, 0, 0, 1)
+finish
+charvar WindurstFirstTrust 0
+mission Windurst MoonReading current
+mission Windurst MoonReading completed
+trigger Kupipi+1                        # the mission's turn: 102
+finish
+trigger Kupipi+1                        # Moon Reading too: 435 (0, 0, 0, 10, 0, 0, 0, 1)
+finish
+trigger Kupipi+1                        # 102
+finish
+trigger Kupipi+1                        # the var 1, flag 0: 436
+finish
+trigger Kupipi+1                        # 102
+finish
+trigger Kupipi+1                        # flag 1: no arm; Windurst, rank 3: 251
+finish
+rank 10
+trigger Kupipi+1                        # 102
+finish
+trigger Kupipi+1                        # rank 10: 408
+finish
+quest Sandoria.TrustSandoria completed
+trigger Kupipi+1                        # 102
+finish
+trigger Kupipi+1                        # San d'Oria's completed: 439 (0, 0, 0, 10, 0, 0, 0, 1)
+finish                                  # Kupipi learned; the card taken; the permit; completed

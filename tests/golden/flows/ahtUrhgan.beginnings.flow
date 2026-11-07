@@ -1,0 +1,92 @@
+# Beginnings (ahtUrhgan 21, BLU AF1): a level 40 Blue Mage with 5000 gil, Immortal Sentries completed, An Empty Vessel
+# completed (completeEvent 0: a GM's completion leaves no var). Waoud (no script; default 61) also answers for An Empty
+# Vessel's completed section (78 (gil), an Event: Beginnings' Progress replies beat it). Available: a trade to Waoud: no
+# handler: nothing; Waoud 705, option 0: nothing; 705, option 1: begun. Accepted: Waoud 706 (5000) without the brands,
+# option 0: nothing; option 1: 1000 gil (PAY_DIVINATION). The five staging NPCs, each with its own script (the Assault
+# armband, else 7 / 4; Waudeen 6 / 3): Meyaada 10 (the Brand of the Springserpent); the brand taken by a GM: 10 again
+# (Progress beats her script's turn); then 11 (importantEvent: Progress the first time in the zone), 11 again (now
+# Event, UseFallback 0: the quest's turn), then her script's turn: 4 (a fresh char's ToAU mission is not at or past
+# PRESIDENT_SALAHEEM). The same at Daswil 8 (the Skyserpent), 9, 9, his 4; Nahshib 10 (the Galeserpent), 11, 11, his 4;
+# Nareema 12 (the Stoneserpent), 13, 13, her 4; Waudeen 10 (the Flameserpent), 11, 11, his 3.
+# Waoud with the five: 707: completed (the Immortal's Scimitar, Branded by the Five Serpents), Omens' mustZone, Omens'
+# Timer = now + 60 (1800000060). Completed: no Beginnings section, Omens not available (level 40 < 50): An Empty
+# Vessel's 78.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/onEventFinish/707 ArrapagoReef/Meyaada/onTrigger CaedarvaMire/onEventFinish/10 MountZhayolm/Waudeen/onTrigger
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=40 gil=5000
+mission Toau ImmortalSentries completed
+quest AhtUrhgan.AnEmptyVessel completed
+item BoneChip
+login
+trade Waoud BoneChip x1                 # available: no trade handler (Beginnings nor An Empty Vessel): nothing
+trigger Waoud                           # 705 (Progress, over An Empty Vessel's 78)
+finish option=0                         # nothing
+trigger Waoud                           # 705
+finish option=1                         # begun
+trigger Waoud                           # accepted, BLU, no brands: 706 (5000)
+finish option=0                         # nothing
+trigger Waoud                           # 706
+finish option=1                         # 1000 gil taken, PAY_DIVINATION
+warp 23.946,-7.92,573.39 ArrapagoReef
+trigger Meyaada                         # no Springserpent: 10
+finish                                  # the Brand of the Springserpent
+delkeyitem BrandOfTheSpringserpent      # a GM
+trigger Meyaada                         # 10 again (Progress: no turn of her script)
+finish                                  # the brand again
+trigger Meyaada                         # 11, importantEvent: Progress the first time
+finish
+trigger Meyaada                         # 11 again: Event priority, UseFallback 0: the quest's turn
+finish
+trigger Meyaada                         # the script's turn: 4 (no ToAU mission at or past President Salaheem)
+finish-if-event
+warp -207.22,-11.889,-779.713 BhaflauThickets
+trigger Daswil                          # no Skyserpent: 8
+finish                                  # the Brand of the Skyserpent
+delkeyitem BrandOfTheSkyserpent         # a GM
+trigger Daswil                          # 8 again (Progress: no turn of the script)
+finish                                  # the brand again
+trigger Daswil                          # 9, importantEvent: Progress the first time
+finish
+trigger Daswil                          # 9 again: Event, UseFallback 0: the quest's turn
+finish
+trigger Daswil                          # the script's turn: 4
+finish-if-event
+warp -272.834,-8.287,-64.255 CaedarvaMire
+trigger Nahshib                         # no Galeserpent: 10
+finish                                  # the Brand of the Galeserpent
+delkeyitem BrandOfTheGaleserpent        # a GM
+trigger Nahshib                         # 10 again (Progress: no turn of the script)
+finish                                  # the brand again
+trigger Nahshib                         # 11, importantEvent: Progress the first time
+finish
+trigger Nahshib                         # 11 again: Event, UseFallback 0: the quest's turn
+finish
+trigger Nahshib                         # the script's turn: 4
+finish-if-event
+trigger Nareema                         # no Stoneserpent: 12
+finish                                  # the Brand of the Stoneserpent
+delkeyitem BrandOfTheStoneserpent       # a GM
+trigger Nareema                         # 12 again (Progress: no turn of the script)
+finish                                  # the brand again
+trigger Nareema                         # 13, importantEvent: Progress the first time
+finish
+trigger Nareema                         # 13 again: Event, UseFallback 0: the quest's turn
+finish
+trigger Nareema                         # the script's turn: 4
+finish-if-event
+warp 675.382,-23.995,367.604 MountZhayolm
+trigger Waudeen                         # no Flameserpent: 10
+finish                                  # the Brand of the Flameserpent
+delkeyitem BrandOfTheFlameserpent       # a GM
+trigger Waudeen                         # 10 again (Progress: no turn of the script)
+finish                                  # the brand again
+trigger Waudeen                         # 11, importantEvent: Progress the first time
+finish
+trigger Waudeen                         # 11 again: Event, UseFallback 0: the quest's turn
+finish
+trigger Waudeen                         # the script's turn: 3
+finish-if-event
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+trigger Waoud                           # the five brands: 707
+finish                                  # completed: the Immortal's Scimitar, Branded by the Five Serpents; Omens' mustZone and Timer = now + 60
+trigger Waoud                           # completed: no section; Omens needs level 50: An Empty Vessel's 78 (4000)
+finish option=0

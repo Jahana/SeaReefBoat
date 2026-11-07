@@ -1,0 +1,51 @@
+# Yomi Okuri (outlands 141) with its era module, modules/era/lua/quests/outlands/yomi_okuri.lua, enabled by xi.pre(SOA)
+# (RESTRICT_CONTENT 1, ENABLE_SOA 0): the hirasaka at JST midnight, A Thief in Norg!? offered at JST midnight. A level
+# 50 Samurai, Forge Your Destiny and The Sacred Katana completed, Yomi Okuri accepted at Prog 3 with the feather (GMs).
+# Jaucribaix 152, finished: the quest's own finish (the feather taken, Prog 4, the mustZone, Wait now + 60), then the
+# module's Wait = JstMidnight() (1800025200). 153 (the mustZone); out and back: 153 (now < Wait); Wait 1800000001 (a
+# GM): 153; Wait 1800000000: 154 (the hirasaka, Prog 5). The faded hirasaka for the hirasaka (GMs): 156, finished with a full inventory:
+# the module's copy: complete false, still accepted; 156 again, finished: the module's copy: completed, the faded hirasaka taken, A Thief in Norg!?'s mustZone and Timer = JstMidnight(). Out and
+# back: A Thief in Norg!?'s 157 (now < Timer); Timer 1800000001: 157; Timer 1800000000: 158.
+module modules/era/lua/quests/outlands/yomi_okuri.lua
+lists Norg/Jaucribaix/onTrigger Norg/onEventFinish/152 Norg/onEventFinish/156
+char zone=Norg pos=91,-7,-8 job=SAM lvl=50
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri accepted
+charvar Quest[5][141]Prog 3
+keyitem YomotsuFeather
+login
+trigger Jaucribaix                      # Prog 3, the feather: 152
+finish                                  # the quest's (Prog 4, the mustZone, Wait now + 60), then Wait = JstMidnight()
+trigger Jaucribaix                      # the mustZone: 153
+finish
+warp -63,7,0 PortJeuno                  # the mustZone cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # now < Wait (JST midnight): 153
+finish
+charvar Quest[5][141]Wait 1800000001    # a GM: one second past now
+trigger Jaucribaix                      # 153
+finish
+charvar Quest[5][141]Wait 1800000000    # a GM: now
+trigger Jaucribaix                      # 154
+finish                                  # the hirasaka; Prog 5
+delkeyitem YomotsuHirasaka              # a GM
+keyitem FadedYomotsuHirasaka            # a GM
+trigger Jaucribaix                      # the faded hirasaka: 156
+fill-inventory
+finish                                  # the module's copy: complete false (no room): still accepted, the faded hirasaka kept
+free-inventory
+trigger Jaucribaix                      # 156
+finish                                  # the module's copy: completed; A Thief in Norg!?'s mustZone; Timer = JstMidnight()
+warp -63,7,0 PortJeuno
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # A Thief in Norg!? available, now < Timer: 157
+finish
+charvar Quest[5][142]Timer 1800000001   # a GM
+trigger Jaucribaix                      # 157
+finish
+charvar Quest[5][142]Timer 1800000000   # a GM: now
+trigger Jaucribaix                      # 158
+finish option=0

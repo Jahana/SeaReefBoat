@@ -1,0 +1,27 @@
+# Beyond the Sun (jeuno 76) available (Shattering Stars completed, a GM), a level 66 Warrior, maatsCap (a GM) either side
+# of isFull(mask, 15): 32766 (the Warrior's bit 0 missing), 16383 (bit 14, the Summoner's, missing) and 0: 78 (1), the
+# rematch; -1 and 65535 (the low fifteen bits set, more besides): 74, each answered with a full bag (not completed, so
+# the quest stays available).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/74
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=66
+quest Jeuno.ShatteringStars completed
+charvar maatsCap 32766
+login
+trigger Maat                            # 32766, not full: 78 (1)
+finish
+charvar maatsCap 16383                  # a GM
+trigger Maat                            # 16383, not full: 78 (1)
+finish
+charvar maatsCap 0                      # a GM
+trigger Maat                            # 0: 78 (1)
+finish
+charvar maatsCap -1                     # a GM
+trigger Maat                            # -1: the low fifteen bits set: 74
+fill-inventory
+finish                                  # no room: not completed
+free-inventory
+charvar maatsCap 65535                  # a GM
+trigger Maat                            # 65535: the low fifteen bits set: 74
+fill-inventory
+finish                                  # no room: not completed
+free-inventory

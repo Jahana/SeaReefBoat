@@ -1,0 +1,61 @@
+# Lakeside Minuet (jeuno 95): Laila and Rhea Myuliah in Upper Jeuno (no scripts; defaults 10120 / 10121; the first of
+# each name: the normal ones), Valderotaux in Southern San d'Oria (no script; default 58; The Crimson Trial needs a Red
+# Mage), the Glowing Pebbles in Jugner Forest [S] (no script; default YOU_FIND_SPARKLING_STONE). Level 30
+# (ADVANCED_JOB_LEVEL), ENABLE_WOTG 1: a stone to Laila while available (no trade handler: nothing), 10111 (option 0:
+# nothing; option 1: begun), a stone while accepted (nothing), 10112; Valderotaux at Prog 0 (nil: his default 58); Rhea
+# 10113 (Prog 1), 10114; Valderotaux 888 (Prog 2), 889; Rhea 10115 (Prog 3), 10117 (rheaOption 1), 10116 (rheaOption
+# 0), 10117 again (rheaOption 1); the pebbles 100 (the Stardust Pebble, Prog 4), then nil (Prog 4, the pebble held:
+# YOU_FIND_SPARKLING_STONE); Rhea 10121 at Prog 4 (her default's csid too: the GM's Prog 5 is #gm_prog); Laila 10118
+# (completed: Troupe Brilioth Dancer, fame +7 x3, Dancer unlocked, UNLOCK_DANCER, the pebble taken, Job Gesture: Dancer,
+# needToZone); a stone while completed (nothing); then Laila 10119 and Rhea 10126 (replaceDefault).
+# Elsewhere: 10113's finish at a Prog other than 0 (a GM, the event open) is #mid_event; the pebbles with the pebble held
+# at Prog 3, and without it at Prog 2, are #pebble_held; Valderotaux and Rhea at Prog 5 are #gm_prog.
+# Not reachable: a failed completion (:106; the reward is a title only, npcUtil.completeQuest cannot fail).
+lists UpperJeuno/Laila/onTrigger UpperJeuno/Laila/onTrade UpperJeuno/Rhea_Myuliah/onTrigger UpperJeuno/onEventFinish/10111 UpperJeuno/onEventFinish/10113 UpperJeuno/onEventFinish/10115 UpperJeuno/onEventFinish/10116 UpperJeuno/onEventFinish/10117 UpperJeuno/onEventFinish/10118 SouthernSanDoria/Valderotaux/onTrigger SouthernSanDoria/onEventFinish/888 JugnerForestS/Glowing_Pebbles/onTrigger JugnerForestS/onEventFinish/100
+char zone=UpperJeuno pos=-52.5,0,101 job=WAR lvl=30
+item FlintStone x3
+login
+trade Laila FlintStone x1               # available: no trade handler, nothing
+trigger Laila                           # level 30, WotG on: 10111
+finish option=0                         # not 1: nothing
+trigger Laila                           # 10111
+finish option=1                         # begun
+trade Laila FlintStone x1               # accepted: no trade handler, nothing
+trigger Laila                           # accepted, no pebble: 10112
+finish
+warp 99.1,0,113.7 SouthernSanDoria
+trigger Valderotaux                     # Prog 0: nil; his default 58
+finish
+warp -52.5,0,101 UpperJeuno
+trigger Rhea_Myuliah                    # Prog 0: 10113
+finish                                  # Prog 1
+trigger Rhea_Myuliah                    # Prog 1: 10114
+finish
+warp 99.1,0,113.7 SouthernSanDoria
+trigger Valderotaux                     # Prog 1: 888
+finish                                  # Prog 2
+trigger Valderotaux                     # Prog 2: 889
+finish
+warp -52.5,0,101 UpperJeuno
+trigger Rhea_Myuliah                    # Prog 2: 10115
+finish                                  # Prog 3
+trigger Rhea_Myuliah                    # Prog 3, rheaOption 0: 10117
+finish                                  # rheaOption 1
+trigger Rhea_Myuliah                    # rheaOption 1: 10116
+finish                                  # rheaOption 0
+trigger Rhea_Myuliah                    # rheaOption 0 again: 10117
+finish                                  # rheaOption 1
+warp 99,6.4,442.6 JugnerForestS
+trigger Glowing_Pebbles                 # Prog 3, no pebble: 100
+finish                                  # the Stardust Pebble, Prog 4
+trigger Glowing_Pebbles                 # Prog 4, the pebble held: nil; YOU_FIND_SPARKLING_STONE
+warp -52.5,0,101 UpperJeuno
+trigger Rhea_Myuliah                    # Prog 4: 10121
+finish
+trigger Laila                           # the pebble: 10118
+finish                                  # completed: Troupe Brilioth Dancer, fame +7 x3, Dancer, UNLOCK_DANCER, pebble taken, Job Gesture, needToZone
+trade Laila FlintStone x1               # completed: no trade handler, nothing
+trigger Laila                           # completed, The Unfinished Waltz not completed: 10119 (replaceDefault)
+finish
+trigger Rhea_Myuliah                    # 10126 (replaceDefault)
+finish

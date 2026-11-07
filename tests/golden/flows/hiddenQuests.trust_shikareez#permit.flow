@@ -1,0 +1,13 @@
+# Trust: Shikaree Z, the finish's permit test: the Windurst Trust Permit, Three Paths completed. 869; the permit taken
+# again inside the open event (a GM): the check fails at the finish, so the handler is not called: nothing learned.
+# The check then fails (no permit): the failing talk.
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/onEventFinish/869
+char zone=WindurstWoods pos=116,-3.7,90.5 job=WAR lvl=99
+keyitem WindurstTrustPermit
+mission Cop ThreePaths completed
+login
+trigger Perih_Vashai                    # 869
+delkeyitem WindurstTrustPermit          # a GM, inside the open event
+finish                                  # the check fails at the finish: nothing learned
+trigger Perih_Vashai                    # no permit: the check fails
+finish-if-event

@@ -1,0 +1,18 @@
+# Making Amends (windurst 3): its completed 281 (replaceDefault: priority 20) next to Windurst mission 1-1's line at
+# Hakkuru-Rinkuru (The Horutoto Ruins Experiment, status 2: 91, an Event: 100), so a replaceDefault and an Event line
+# differ there: 91 alone outranks 281; were 281 an Event the two would take turns. His script acts only for Wonder Wands
+# (never here: Making Amens not completed), so its turn after an Event reply plays nothing and the lookup's line plays.
+# A level-10 WAR at Windurst fame 50 (level 2), Making Amends completed by GM (no mustZone), 1-1 current by GM.
+lists PortWindurst/Hakkuru-Rinkuru/onTrigger
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=10 nation=2
+fame Windurst 50
+quest Windurst.MakingAmends completed
+mission Windurst TheHorutotoRuinsExperiment current
+login
+missionstatus Windurst 2                      # a GM: 1-1 at status 2
+trigger Hakkuru-Rinkuru+7                     # 91 (Event) over 281 (replaceDefault)
+finish
+trigger Hakkuru-Rinkuru+7                     # his script's turn: nothing; 91 again (281 still below it)
+finish
+trigger Hakkuru-Rinkuru+7                     # 91
+finish

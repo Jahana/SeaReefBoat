@@ -1,0 +1,93 @@
+# Yomi Okuri (outlands 141): a level 50 Samurai (AF2_QUEST_LEVEL 50), The Sacred Katana completed, as its 141 leaves it
+# (GMs: Yomi Okuri's mustZone 252, Timer now + 60). Available: Jaucribaix 142 (the mustZone); out of Norg and back (the
+# mustZone cleared): 142 (now < Timer); a day on: 146, option 0: not begun; 146, option 1: begun, Prog 1. Jaucribaix 147
+# (no feather). Washu 148 (Prog 2); 149 (Stage 0, no wurst); the Hecteyes Eye, Bastore Sardine, Slice of Giant Sheep
+# Meat and Frost Turnip traded: 150 (taken; the wurst; Prog 3); 151 (the wurst held). Onzozo's qm2: 0 (the wurst, Ubume
+# down), option 0: nothing; 0, option 1: the wurst taken, Ubume spawned and claimed; qm2: no wurst, Stage 0: nil: its
+# default NEST_OF_LARGE_BIRD; Ubume killed at Prog 3: Stage 1; qm2 1 (the feather); qm2 again (the feather held): nil:
+# the default. Norg: Washu: Prog 3, Stage 1, no wurst: nil: his default 80; Jaucribaix 152 (the feather taken, Prog 4,
+# the mustZone, Wait now + 60); 153 (the mustZone); out and back: 153 (now < Wait); a day on: 154 (the Yomotsu Hirasaka,
+# Prog 5); 155 (held). Valkurm Dunes' qm3 at Vana'diel 12:00: not night, valkurmNM 0: nil: its default
+# YOU_SENSE_AN_EVIL_PRESENCE; 18:00: 10, option 0: nothing; 10, option 1 (1.5 yalms): SUDDEN_CHILL, Doman and Onryo
+# spawned and claimed; qm3: WHAT_DO_YOU_THINK (up); Doman killed (Onryo alive): nothing; Onryo killed (Doman dead):
+# valkurmNM 1; qm3 11, option 1: nothing; 11, option 0: the faded hirasaka; qm3: nil (the default). Norg: Jaucribaix
+# 156: completed (Myochin Sune-Ate, fame), the faded hirasaka taken, A Thief in Norg!?'s mustZone and Timer; Jaucribaix
+# again: A Thief in Norg!? available (level 50), its mustZone set: its 157.
+lists Norg/Jaucribaix/onTrigger Norg/Washu/onTrigger Norg/Washu/onTrade LabyrinthOfOnzozo/qm2/onTrigger ValkurmDunes/qm3/onTrigger Norg/onEventFinish/156
+char zone=Norg pos=91,-7,-8 job=SAM lvl=50
+quest Outlands.TheSacredKatana completed
+charvar Quest[5][141]mustZone 252
+charvar Quest[5][141]Timer 1800000060
+item HecteyesEye
+item BastoreSardine1
+item SliceOfGiantSheepMeat
+item FrostTurnip
+quest Outlands.ForgeYourDestiny completed
+login
+trigger Jaucribaix                      # the mustZone set: 142
+finish
+warp -176,10,-60 LabyrinthOfOnzozo      # out of Norg: the mustZone cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # now < Timer: 142
+finish
+wait jst=1                              # Timer passed
+trigger Jaucribaix                      # 146
+finish option=0                         # not begun
+trigger Jaucribaix                      # 146
+finish option=1                         # begun; Prog 1
+trigger Jaucribaix                      # Prog 1, no feather: 147
+finish
+trigger Washu                           # Prog 1: 148
+finish                                  # Prog 2
+trigger Washu                           # Stage 0, no wurst: 149
+finish
+trade Washu HecteyesEye x1 BastoreSardine1 x1 SliceOfGiantSheepMeat x1 FrostTurnip x1 # 150
+finish                                  # taken; Washu's Tasty Wurst; Prog 3
+trigger Washu                           # the wurst held: 151
+finish
+warp -176,10,-60 LabyrinthOfOnzozo
+trigger qm2                             # the wurst, Ubume down: 0
+finish option=0                         # nothing
+trigger qm2                             # 0
+finish option=1                         # the wurst taken; Ubume spawned and claimed
+trigger qm2                             # no wurst, Stage 0: nil: default NEST_OF_LARGE_BIRD
+kill UBUME                              # Prog 3: Stage 1
+trigger qm2                             # Stage 1, no feather: 1
+finish                                  # the Yomotsu Feather
+trigger qm2                             # the feather held: nil: default
+warp 49,-6,15 Norg
+trigger Washu                           # Prog 3, no wurst, Stage 1: nil: default 80
+finish
+trigger Jaucribaix                      # Prog 3, the feather: 152
+finish                                  # the feather taken; Prog 4; the mustZone; Wait now + 60
+trigger Jaucribaix                      # Prog 4, the mustZone: 153
+finish
+warp -176,10,-60 LabyrinthOfOnzozo      # the mustZone cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # now < Wait: 153
+finish
+wait jst=1
+trigger Jaucribaix                      # 154
+finish                                  # the Yomotsu Hirasaka; Prog 5
+trigger Jaucribaix                      # the hirasaka held: 155
+finish
+warp -767,-4,192 ValkurmDunes
+trigger qm3                             # Vana'diel 12:00: not night, valkurmNM 0: nil: default YOU_SENSE_AN_EVIL_PRESENCE
+wait vana=6                             # 18:00
+trigger qm3                             # night, neither NM up: 10
+finish option=0                         # nothing
+trigger qm3                             # 10
+finish option=1                         # 1.5 yalms: SUDDEN_CHILL; Doman and Onryo spawned and claimed
+trigger qm3                             # the NMs up: WHAT_DO_YOU_THINK
+kill DOMAN                              # Onryo alive: nothing
+kill ONRYO                              # Doman dead: valkurmNM 1
+trigger qm3                             # valkurmNM 1, the hirasaka: 11
+finish option=1                         # not 0: nothing
+trigger qm3                             # 11
+finish option=0                         # the hirasaka taken; the Faded Yomotsu Hirasaka
+trigger qm3                             # no hirasaka: nil: default
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # Prog 5, the faded hirasaka: 156
+finish                                  # completed; A Thief in Norg!?'s mustZone and Timer (now + 60)
+trigger Jaucribaix                      # A Thief in Norg!? available, its mustZone: 157
+finish

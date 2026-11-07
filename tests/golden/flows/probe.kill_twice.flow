@@ -1,0 +1,13 @@
+# probe (quest rework P9, D4): two kills back to back, no rezone between. After a kill the char's attack state ends on
+# the next tick (the target dead: CCharEntity::OnDisengage), which locks a new engage out for 1.5 s or more; the next
+# kill's swing came inside it, the engine refused it (MsgWaitLonger), and the harness, which swung once, killed the mob
+# unclaimed: no killer, no exp, the quest's onMobDeath not reached (probe.mob_id's rezones were the workaround). The
+# harness now swings again while the char is not engaged, as a player presses attack again, and a claim that never
+# takes fails the step (D1). Uleguerand - Dominion Op #01 (abyssea 101, still Lua), accepted: a Mechanical_Menace
+# killed: Prog 1; the next one at once: Prog 2.
+lists AbysseaUleguerand/Mechanical_Menace/onMobDeath
+char zone=AbysseaUleguerand pos=-240,-40,-520 job=WAR lvl=99
+quest Abyssea.DominionOp01Uleguerand accepted
+login
+kill #17813813                          # accepted: Prog 1
+kill #17813814                          # at once, no rezone: claimed (the second swing after the lockout): Prog 2

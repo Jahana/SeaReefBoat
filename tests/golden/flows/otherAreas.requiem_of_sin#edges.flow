@@ -1,0 +1,68 @@
+# Requiem of Sin (otherAreas 83): the edges. Tango with a Tracker not completed: no section, 106. Completed (a GM), the
+# wait 1800198000 (a GM, = the tally): nil, 106; a trade while available: no trade handler; the wait 1800197999: 578,
+# finished. _081's menu closed with no entry: no battlefield, nothing. The Letter from Shikaree X (a GM): Tango's
+# battlefield (677) entered: not 678, still available; won (both Shikarees killed), 32001: no handler while available.
+# Accepted (a GM): the letter Y held, the wait below the tally (a GM): nil, 106; taken away (a GM): 579, finished: the
+# letter Y, the wait 1800198000; taken away: the wait = the tally: 106. The letter X (a GM): Tango's battlefield
+# entered, battlefieldWin 677 (a GM, in the arena; Tango is completed, so its own win sets none), won, 32001: not 678,
+# not completed. Completed (a GM), the Mithran Trackers' letter held (a GM), the wait below: no section, 106; taken
+# away: 579, then the wait = the tally (a GM, while 579 is open): finished: section 3 off, the accepted section's 579
+# off (not accepted): nothing, no letter. The wait below (a GM): 579, finished: the letter.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/578 TavnazianSafehold/onEventFinish/579 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+item ChocoboFeather
+login
+trigger Despachiaire                    # Tango not completed: no section; 106
+finish
+quest OtherAreas.TangoWithATracker completed # a GM
+charvar ShikareeBattleWait 1800198000   # a GM: = the tally
+trigger Despachiaire                    # the wait = the tally: nil; 106
+finish
+trade Despachiaire ChocoboFeather x1    # available: no trade handler; nothing
+charvar ShikareeBattleWait 1800197999   # a GM
+trigger Despachiaire                    # 578
+finish                                  # the letter Y; the wait 1800198000; Prog 1
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081                            # the letter Y: the 32000 menu
+finish                                  # no entry: no battlefield; nothing
+keyitem LetterFromShikareeX             # a GM
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081                            # the letter: the 32000 menu
+update 32000 option=81                  # index 5, area 1: Tango with a Tracker (677)
+finish                                  # in 677: not 678; still available
+kill SHIKAREE_Y_ROS_TWT
+kill SHIKAREE_X_ROS_TWT                 # won; 32001
+finish                                  # available: no 32001 handler
+quest OtherAreas.RequiemOfSin accepted  # a GM
+warp 112.7,-40,-85.5 TavnazianSafehold
+charvar ShikareeBattleWait 0            # a GM
+trigger Despachiaire                    # the letter Y held: nil; 106
+finish
+delkeyitem LetterFromShikareeY          # a GM
+trigger Despachiaire                    # 579
+finish                                  # the letter Y; the wait 1800198000
+delkeyitem LetterFromShikareeY          # a GM
+trigger Despachiaire                    # the wait = the tally: nil; 106
+finish
+keyitem LetterFromShikareeX             # a GM
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081                            # the letter: the 32000 menu
+update 32000 option=81                  # index 5, area 1: Tango with a Tracker (677)
+finish                                  # in 677
+localvar battlefieldWin 677             # a GM
+kill SHIKAREE_Y_ROS_TWT
+kill SHIKAREE_X_ROS_TWT                 # won; 32001 (battlefieldWin 677)
+finish                                  # not 678: not completed
+quest OtherAreas.RequiemOfSin completed # a GM
+keyitem LetterFromTheMithranTrackers    # a GM
+charvar ShikareeBattleWait 0            # a GM
+warp 112.7,-40,-85.5 TavnazianSafehold
+trigger Despachiaire                    # the Trackers' letter held: no section; 106
+finish
+delkeyitem LetterFromTheMithranTrackers # a GM
+trigger Despachiaire                    # 579
+charvar ShikareeBattleWait 1800198000   # a GM, while 579 is open
+finish                                  # section 3 off; not accepted: nothing; no letter
+charvar ShikareeBattleWait 0            # a GM
+trigger Despachiaire                    # 579
+finish                                  # the Trackers' letter; the wait 1800198000

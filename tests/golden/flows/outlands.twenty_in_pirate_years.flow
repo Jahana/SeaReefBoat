@@ -1,0 +1,96 @@
+# Twenty in Pirate Years (outlands): call-only, Ryoma in Norg and Ensetsu in Port Bastok (scripts/zones/Norg/npcs/Ryoma.lua,
+# scripts/zones/Port_Bastok/npcs/Ensetsu.lua). Both have a default (DefaultActions: Ryoma 94, Ensetsu 27) beside their
+# script, so the lookup alternates their talks: the first plays the default, the next runs the script, and when the
+# script starts nothing the default plays after it. Each script turn is the second of a pair; a zone change starts the
+# pairs again. Kagetora (Port Bastok, CS 1 -> 2) stays Lua and is talked to for real; Eastern Altepa's qm2 / the
+# Tsuchigumo (CS 3 -> 4, the Trick Box) stay Lua: a GM here.
+# Ensetsu: a trade: nothing (no onTrade). Ayame and Kaede not completed: nothing. Completed (a GM): 247. Ryoma (a level 40
+# Ninja): 133, finished on 0: begun on any option, CS 1. Accepted, no Trick Box: nothing (True Will answers nothing
+# either). Ensetsu, CS 1: nothing. Kagetora: 261, CS 2. Ensetsu: 262, finished: CS 3; CS 3: nothing. CS 4 and the Trick
+# Box (GMs): 263. Ryoma: 134; one free slot (getFreeSlotsCount() <= 1 refuses): ITEM_CANNOT_BE_OBTAINED (Anju), nothing
+# more; two free slots: the box taken, the Anju and the Zushio, the var 0, Norg fame +20, completed. Completed: Ryoma:
+# nothing; the Trick Box again (a GM), completed: nothing (134 needs accepted). Ensetsu (completed, CS 0): nothing;
+# CS 2 (a GM): 262 (the var is read whatever the status), finished: CS 3; CS 4 (a GM): 263.
+char zone=PortBastok pos=31.966,-6.771,68.784 job=NIN lvl=40
+item Pebble
+login
+trade Ensetsu Pebble x1                 # no onTrade: nothing
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script, Ayame and Kaede not completed: nothing (27 after it)
+finish
+quest Bastok.AyameAndKaede completed    # a GM
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script: 247
+finish
+warp -26.276,0.53,-8.323 Norg
+trade Ryoma Pebble x1                   # no onTrade: nothing
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, a level 40 Ninja: 133
+finish option=0                         # begun on any option; CS 1
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, accepted, no Trick Box: nothing (94 after it)
+finish
+warp 31.966,-6.771,68.784 PortBastok
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script, CS 1: nothing (27 after it)
+finish
+trigger Kagetora                        # default turn: 23
+finish
+trigger Kagetora                        # Kagetora's script (Lua), CS 1: 261
+finish                                  # CS 2
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script, CS 2: 262
+finish                                  # CS 3
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script, CS 3: nothing (27 after it)
+finish
+charvar twentyInPirateYearsCS 4         # a GM: Eastern Altepa's qm2
+keyitem TrickBox
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script, CS 4: 263
+finish
+warp -26.276,0.53,-8.323 Norg
+fill-inventory
+storage inventory 31                    # one free slot
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, accepted, the box: 134
+finish                                  # one free slot: ITEM_CANNOT_BE_OBTAINED (Anju); the box kept
+storage inventory 32                    # two free slots
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script: 134
+finish                                  # the box taken; Anju, Zushio; the var 0; Norg fame +20; completed
+free-inventory
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, completed: nothing (Big Box: level 40 < 50; 94 after it)
+finish
+keyitem TrickBox                        # a GM
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, completed, the box: nothing (94 after it)
+finish
+warp 31.966,-6.771,68.784 PortBastok
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script, completed, CS 0: nothing (27 after it)
+finish
+charvar twentyInPirateYearsCS 2         # a GM: the var read whatever the status
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script, completed, CS 2: 262
+finish                                  # CS 3
+charvar twentyInPirateYearsCS 4         # a GM
+trigger Ensetsu                         # default turn: 27
+finish
+trigger Ensetsu                         # script, completed, CS 4: 263
+finish

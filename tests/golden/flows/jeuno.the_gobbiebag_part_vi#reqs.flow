@@ -1,0 +1,40 @@
+# The Gobbiebag Part VI (jeuno 75): reqsMet's operands one at a time, in both checks. Parts I-V completed (the chain's
+# earlier parts, by a GM), Jeuno fame level 3. The inventory at 30 (a fresh char): no section (43 (81)); at 55 (storage,
+# a GM's player:changeContainerSize): fame level 2 (249 / 2 = 124): no section; Part V set accepted (a GM): no section;
+# all met: 43 (56, 0, 1), begun. Accepted: fame level 2: no section; Part V accepted: no section (Part V itself: its
+# size 50 unmet); all met: 43 (56, 1, 1). A GM sets a part available before accepted (accepted over completed keeps it
+# completed).
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/onEventFinish/43
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+fame Sandoria 250
+quest Jeuno.TheGobbiebagPartI completed
+quest Jeuno.TheGobbiebagPartIi completed
+quest Jeuno.TheGobbiebagPartIii completed
+quest Jeuno.TheGobbiebagPartIv completed
+quest Jeuno.TheGobbiebagPartV completed
+login
+trigger Bluffnix                        # the inventory 30, not 55: no section; 43 (81)
+finish
+storage inventory 55                    # a GM's player:changeContainerSize to the part's start size
+fame Sandoria 249                       # a GM: fame level 2
+trigger Bluffnix                        # below the fame level: no section; 43 (81)
+finish
+fame Sandoria 250                       # a GM
+quest Jeuno.TheGobbiebagPartV available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartV accepted  # a GM: Part V not completed
+trigger Bluffnix                        # no section (Part V: inventory 55 is not its 50); 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartV completed # a GM
+trigger Bluffnix                        # all met: 43 (56, 0, 1)
+finish option=0                         # begun
+fame Sandoria 249                       # a GM: fame level 2
+trigger Bluffnix                        # accepted, below the fame level: no section; 43 (81)
+finish
+fame Sandoria 250                       # a GM
+quest Jeuno.TheGobbiebagPartV available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartV accepted  # a GM
+trigger Bluffnix                        # accepted, the previous part not completed: no section; 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartV completed # a GM
+trigger Bluffnix                        # all met: 43 (56, 1, 1)
+finish

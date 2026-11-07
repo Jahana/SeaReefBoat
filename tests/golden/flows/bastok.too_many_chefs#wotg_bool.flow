@@ -1,0 +1,14 @@
+# Too Many Chefs (bastok 86): Ferghus' guard xi.settings.main.ENABLE_WOTG == 1 with the setting a boolean: Lua's
+# `true == 1` is false: with fame level 5 the offer is still not made (420). A port that reads true as 1
+# (Settings.MainNumber / Main) would offer it (946); Settings.MainEquals (quest rework P9) does not. Then 1: 946, finished
+# on 1 (not begun: the finish begins on 0 only). Recorded on Lua at 9ab47b5a^ (the parent of the commit that ported the
+# quest).
+char zone=Metalworks pos=-23,-10,-27
+setting ENABLE_WOTG true
+login
+fame Bastok 325                 # fame level 5
+trigger Ferghus                 # ENABLE_WOTG true: not offered, 420
+finish-if-event
+setting ENABLE_WOTG 1
+trigger Ferghus                 # ENABLE_WOTG 1: 946
+finish option=1                 # not begun

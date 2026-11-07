@@ -1,0 +1,89 @@
+# The Requiem (jeuno 64): Bki Tbujhja and Mataligeat in Lower Jeuno, the sarcophagi of The Eldieme Necropolis. A level
+# 50 bard with Painful Memory completed: Bki's 145 (Progress, over Path of the Bard's Event 180; option 0: Option 1), a
+# flask to Bki and to Mataligeat while offered (no trade handler: nil), Mataligeat (nil: Path of the Bard's 143), 148
+# (option 0: nothing; option 1: begun); accepted at Prog 0: Bki's 146 (Event: the lookup cycles it with Path of the
+# Bard's 180), Mataligeat (nil: 143), two flasks (not tradeMatches: nil), the flask to Bki (151; option 1: nothing;
+# option 0: Prog 1; never taken), the flask at Prog 1 (nil); Prog 1: Bki's 147 / 149 (the 50 % roll: 147, 147, 149
+# with the pinned seed; cycling with 180), Mataligeat's 142 (cycling with 143). In the Necropolis: the first sarcophagus (not the bard's: nil; its script's
+# SARCOPHAGUS_CANNOT_BE_OPENED; a flask: nil), the bard's (SARCOPHAGUS_OFFSET + 3, Sarcophagus+3) at Prog 1 Popped 0
+# (nil: the script's message), two flasks (nil), one flask (Yum Kimil and the two guardians popped, claimed; the flask
+# taken, Popped 1; noAction), a trigger with the three up (the pop fails: nil, the script's message); the guardians and
+# Yum Kimil killed (Prog 2 at Yum Kimil's death), the bard's 46 (option 1: nothing; a flask at Prog 2: nil; option 0:
+# Star Ring 1). Back in
+# Lower Jeuno: Mataligeat with the ring (nil: 143), Bki's 150 (Progress; a full bag: not completed; with room:
+# completed, Choral Slippers, fame +7 x3, the ring kept), then completed: Bki's 134 (replaceDefault) loses to Path of
+# the Bard's Event 180.
+lists LowerJeuno/Bki_Tbujhja/onTrigger LowerJeuno/Bki_Tbujhja/onTrade LowerJeuno/Mataligeat/onTrigger LowerJeuno/Mataligeat/onTrade TheEldiemeNecropolis/Sarcophagus/onTrigger TheEldiemeNecropolis/Sarcophagus/onTrade TheEldiemeNecropolis/Yum_Kimil/onMobDeath LowerJeuno/onEventFinish/145 LowerJeuno/onEventFinish/148 LowerJeuno/onEventFinish/150 LowerJeuno/onEventFinish/151 TheEldiemeNecropolis/onEventFinish/46
+char zone=LowerJeuno pos=-21,0,-58 job=BRD lvl=50
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+quest Jeuno.PathOfTheBard completed
+quest Jeuno.PainfulMemory completed
+item FlaskOfHolyWater x2
+login
+trigger Bki_Tbujhja                         # available, Option 0: 145
+finish option=0                             # declined: Option 1
+trade Bki_Tbujhja FlaskOfHolyWater x1       # available: no trade handler, nil
+trigger Mataligeat                          # available: nil; Path of the Bard's 143
+finish
+trade Mataligeat FlaskOfHolyWater x1        # available: no trade handler, nil
+trigger Bki_Tbujhja                         # Option 1: 148
+finish option=0                             # not 1: nothing
+trigger Bki_Tbujhja                         # 148
+finish option=1                             # begun
+trigger Bki_Tbujhja                         # Prog 0, no ring: the lookup cycles 146 with Path of the Bard's 180: 180 first
+finish
+trigger Bki_Tbujhja                         # 146
+finish
+trigger Mataligeat                          # Prog 0: nil; Path of the Bard's 143
+finish
+trade Bki_Tbujhja FlaskOfHolyWater x2       # not one flask: nil; nothing
+trade Bki_Tbujhja FlaskOfHolyWater x1       # Prog 0, one flask: 151
+finish option=1                             # not 0: nothing
+trade Bki_Tbujhja FlaskOfHolyWater x1       # 151 again
+finish option=0                             # Prog 1; the flask handed back
+trade Bki_Tbujhja FlaskOfHolyWater x1       # Prog 1: nil
+trigger Bki_Tbujhja                         # Prog 1: the cycle's 180
+finish
+trigger Bki_Tbujhja                         # the roll (<= 50 with the pinned seed): 147
+finish
+trigger Bki_Tbujhja                         # the cycle's 180 again
+finish
+trigger Bki_Tbujhja                         # the roll again: 147
+finish
+trigger Bki_Tbujhja                         # 180
+finish
+trigger Bki_Tbujhja                         # the roll again (> 50): 149
+finish
+trigger Mataligeat                          # Prog 1, no ring: the cycle's 143 first (Path of the Bard)
+finish
+trigger Mataligeat                          # 142
+finish
+warp -417,6.5,500 TheEldiemeNecropolis
+trigger Sarcophagus                         # the first (OFFSET + 0): not the bard's, nil; its script's SARCOPHAGUS_CANNOT_BE_OPENED
+trade Sarcophagus FlaskOfHolyWater x1       # the first: nil; its script has no trade: nothing
+trigger Sarcophagus+3                       # the bard's, Prog 1, Popped 0: nil; the script's message
+trade Sarcophagus+3 FlaskOfHolyWater x2     # not tradeMatches: nil
+trade Sarcophagus+3 FlaskOfHolyWater x1     # Yum Kimil and the two guardians popped (claimed), the flask taken, Popped 1; noAction
+trigger Sarcophagus+3                       # Popped 1, the three up: the pop fails, nil; the script's message
+kill YUM_KIMIL+1                            # a guardian
+kill YUM_KIMIL+2                            # the other guardian
+kill YUM_KIMIL                              # Prog 2
+trigger Sarcophagus+3                       # Prog 2: 46
+finish option=1                             # not 0: nothing
+trade Sarcophagus+3 FlaskOfHolyWater x1     # Prog 2 (not 1): nil; nothing
+trigger Sarcophagus+3                       # 46 again
+finish option=0                             # Star Ring 1
+warp -21,0,-58 LowerJeuno
+trigger Mataligeat                          # the ring held: nil; Path of the Bard's 143
+finish
+trigger Bki_Tbujhja                         # the ring: 150
+fill-inventory
+finish                                      # no room for the slippers: not completed
+free-inventory
+trigger Bki_Tbujhja                         # 150 again
+finish                                      # completed: Choral Slippers, fame +7 x3; the ring kept
+trigger Bki_Tbujhja                         # completed: Path of the Bard's 180 (Event) outranks 134 (replaceDefault)
+finish
+trigger Bki_Tbujhja                         # 180 again (134 never plays)
+finish

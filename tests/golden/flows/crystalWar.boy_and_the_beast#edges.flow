@@ -1,0 +1,50 @@
+# Boy and the Beast (crystalWar 24), the edges: a level 99 Warrior in Southern San d'Oria [S], Back to the Beginning
+# current (missions as the main flow). Neither it nor Claws of the Griffon done: Raustigne: no section (606). Claws
+# completed (a GM), the mission still current: Raustigne: no section (606). The mission completed (a GM) and Claws put
+# back to available (a GM): Raustigne: no section (606). Claws completed again: Rholont at Prog 0: nil (32); Raustigne
+# 55: Prog 1; Raustigne at Prog 1: nil (606). Vunkerl Inlet [S]: qm7 at Prog 1: nil; Leafy Patch while available: no
+# section (106). Prog 3 and the herb (GMs), accepted: a full inventory: qm7 108, finished: the rod does not fit: not
+# completed, the herb and the memo kept; freed: 108: completed.
+lists SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/55 VunkerlInletS/qm7/onTrigger VunkerlInletS/Leafy_Patch/onTrigger VunkerlInletS/onEventFinish/108
+char zone=SouthernSanDoriaS pos=5.479,-1.999,44.456 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Raustigne                       # neither the mission nor Claws done: no section (606)
+finish-if-event
+quest CrystalWar.ClawsOfTheGriffon completed # a GM
+trigger Raustigne                       # Claws done, the mission current: no section (606)
+finish-if-event
+mission Wotg BackToTheBeginning completed # a GM
+quest CrystalWar.ClawsOfTheGriffon available # a GM: the completion undone
+trigger Raustigne                       # the mission done, Claws not: no section (606)
+finish-if-event
+quest CrystalWar.ClawsOfTheGriffon completed # a GM
+walk -167.043,-2,55.484
+trigger Rholont                         # Prog 0: nil (32)
+finish-if-event
+walk 5.479,-1.999,44.456
+trigger Raustigne                       # 55
+finish                                  # Prog 1
+trigger Raustigne                       # Prog 1: nil (606)
+finish-if-event
+warp -24.775,-32.004,366.937 VunkerlInletS
+trigger qm7                             # available, Prog 1: nil
+finish-if-event
+walk -425.564,-31.019,581.825
+trigger Leafy_Patch                     # available: no section (106)
+finish-if-event
+quest CrystalWar.BoyAndTheBeast accepted # a GM
+charvar Quest[7][24]Prog 3              # a GM
+keyitem VunkerlHerb                     # a GM
+keyitem VunkerlHerbMemo                 # a GM
+walk -24.775,-32.004,366.937
+fill-inventory
+trigger qm7                             # the herb, Prog 3: 108
+finish                                  # no room: not completed; the herb and the memo kept
+free-inventory
+trigger qm7                             # 108
+finish                                  # completed; the herb and the memo taken

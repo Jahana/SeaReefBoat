@@ -1,0 +1,25 @@
+# Community Service (jeuno 15) failed: begun at 18:00 on day 8000 (Timer 8000). At 0:00 of day 8001 (timer + 1 ==
+# date and hour < 1) a lamp is still in time (param 1, lit) and Zauko plays 114; at 1:00 (timer + 1 == date and hour
+# >= 1; no tick, so the zone's 1:00 onGameHour does not run and Vhana does not start her round) another lamp is too
+# late (3) and Zauko plays 119 (Prog 0, the char var Option 0); then the lamps at Prog 0: lit (5), closed (6).
+lists LowerJeuno/Zauko/onTrigger LowerJeuno/_l00/onTrigger LowerJeuno/_l01/onTrigger LowerJeuno/onEventUpdate/116 LowerJeuno/onEventFinish/119 LowerJeuno/onEventFinish/120 LowerJeuno/onEventFinish/121
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+login
+wait vana=6                             # 18:00
+trigger Zauko                           # 116 (0)
+update 116 option=0                     # begun: Timer 8000
+finish
+wait vana=6                             # day 8001, 0:00
+trigger _l00                            # timer + 1 == date, hour < 1, closed: 120 (1, 0)
+finish option=1                         # lit, Count 11
+trigger Zauko                           # Prog 1, timer + 1 == date, hour 0: on time, 114
+finish
+wait vana=1                             # 1:00
+trigger _l01                            # timer + 1 == date, hour >= 1: 121 (3, 1)
+finish option=0                         # nothing
+trigger Zauko                           # Prog 1, a day late: 119
+finish                                  # Prog 0, the char var Option 0
+trigger _l00                            # Prog 0, lit: 120 (5, 0)
+finish
+trigger _l01                            # Prog 0, closed: 121 (6, 1)
+finish

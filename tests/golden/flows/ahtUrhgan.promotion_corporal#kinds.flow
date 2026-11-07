@@ -1,0 +1,45 @@
+# Promotion: Corporal's (and Superior Private's 5020) reply kinds at Naja Salaheem, against rival lines of known rank in
+# GM-made states out of play order (containers in file order: Corporal, Lance Corporal, Private First Class, Sergeant,
+# Superior Private; equal ranks play the first container first, then rotate). Main (AssaultPromotion 25, Lance Corporal
+# and Private First Class completed: Corporal's 5045 and Superior Private's 5020 up, both Progress): 5045 (the first
+# container), finished: begun, the transmitter; 5047 ties 5020: 5047; its mark used: 5020, finished: SP begun; the
+# transmitter taken (a GM): 5046 over SP's 5021, finished: completed; then 5021. bob (Superior Private available,
+# Corporal completed: Sergeant's 5055 up): 5055 (Sergeant before Superior Private), finished with option 1; then 5020
+# (rotation), finished: begun. carl (Corporal accepted with no transmitter, Superior Private available): 5046 ties 5020:
+# 5046.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+charvar AssaultPromotion 25
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+bob: charvar AssaultPromotion 25
+bob: quest AhtUrhgan.PromotionPrivateFirstClass completed
+bob: quest AhtUrhgan.PromotionCorporal completed
+carl: charvar AssaultPromotion 25
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+carl: quest AhtUrhgan.PromotionLanceCorporal completed
+carl: quest AhtUrhgan.PromotionCorporal accepted
+login
+trigger Naja_Salaheem                   # 5045 ties 5020: 5045 (the first container)
+finish                                  # Corporal begun; the transmitter
+trigger Naja_Salaheem                   # 5047 ties 5020: 5047 (the first container)
+finish
+trigger Naja_Salaheem                   # 5047's mark used (Ignore): 5020
+finish                                  # Superior Private begun (the mustZone set)
+delkeyitem QuartzTransmitter            # a GM
+trigger Naja_Salaheem                   # 5046 (Progress) over Superior Private's 5021 (Event): 5046
+finish                                  # Corporal completed
+trigger Naja_Salaheem                   # 5021 [0] = 1, [1] = 1
+finish
+logout
+bob: login
+bob: trigger Naja_Salaheem              # 5055 ties 5020: 5055 (Sergeant first)
+bob: finish option=1                    # Sergeant not begun
+bob: trigger Naja_Salaheem              # rotation: 5020
+bob: finish                             # Superior Private begun
+bob: logout
+carl: login
+carl: trigger Naja_Salaheem             # 5046 ties 5020 (both Progress): 5046 (the first container)
+carl: finish                            # Corporal completed

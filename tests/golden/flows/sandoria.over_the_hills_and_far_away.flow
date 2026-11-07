@@ -1,0 +1,42 @@
+# Over the Hills and Far Away (sandoria 112): Antreneau (Port San d'Oria; default ANTRENEAU_READY_TO_EAT, a
+# messageSpecial: after each zone-in the first talk plays it, the next his script, "default"), the ??? in
+# Uleguerand Range (qm_moblin_hotrok, no default). A Taste for Meat (its var Option 0) and The Medicine Woman completed
+# by GM, DiaryPage 4 (GM: the diary pages). GIL_RATE and EXP_RATE 1.03125 (GM settings): 2000 x 1.03125 = 2062.5, which
+# the engine rounds half away from zero to 2063. Quest[0][112]Prog 1 (GM). Fame 549 (level 7): no arm (the default).
+# Fame 550 (level 8): 725, option 0: begun (any option); 726. The ???: accepted: SOMETHING_GLITTERING, WHAT_LIES_BENEATH
+# (0, the hotrok); a bone chip: nothing; the Moblin Hotrok, no Louverance status, no title: 10 (0, 1729, the
+# map, 1, 0, 0, 0); its finish: fame 80, the Map of the Uleguerand Range, 2063 gil (GIL_OBTAINED 2063), 2063 exp,
+# completed (Quest[0][112]Prog kept: no quest:complete cleanup), the hotrok taken. Then NOTHING_OUT_OF_ORDINARY; a
+# hotrok (GM) traded while completed: nothing; Antreneau 727.
+char zone=PortSanDoria pos=-70,-5.5,-41.1 lvl=75
+quest Sandoria.ATasteForMeat completed
+quest Sandoria.TheMedicineWoman completed
+fame Sandoria 549
+charvar DiaryPage 4
+item MoblinHotrok
+item BoneChip
+setting GIL_RATE 1.03125                  # 2000 x 1.03125 = 2062.5: llround 2063
+setting EXP_RATE 1.03125                  # 2062.5 again
+charvar Quest[0][112]Prog 1               # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+login
+trigger Antreneau                         # default ANTRENEAU_READY_TO_EAT
+trigger Antreneau                         # fame level 7: no arm; his script starts nothing: the default
+fame Sandoria 550
+trigger Antreneau                         # default
+trigger Antreneau                         # every guard operand true, available: 725
+finish option=0                           # begun (on any option)
+trigger Antreneau                         # default
+trigger Antreneau                         # accepted: 726
+finish
+warp -298.3,-51.9,-18.9 UleguerandRange
+trigger qm_moblin_hotrok                  # accepted: SOMETHING_GLITTERING; WHAT_LIES_BENEATH (0, the hotrok)
+trade qm_moblin_hotrok BoneChip x1        # accepted, not the hotrok: nothing
+trade qm_moblin_hotrok MoblinHotrok x1    # the hotrok, nibble 0, no title: 10 (0, 1729, map, 1, 0, 0, 0)
+finish                                    # see the header: completed; the hotrok taken
+trigger qm_moblin_hotrok                  # completed: NOTHING_OUT_OF_ORDINARY
+item MoblinHotrok                         # a GM
+trade qm_moblin_hotrok MoblinHotrok x1    # completed: nothing (the trade wants accepted)
+warp -70,-5.5,-41.1 PortSanDoria
+trigger Antreneau                         # default
+trigger Antreneau                         # completed: 727
+finish

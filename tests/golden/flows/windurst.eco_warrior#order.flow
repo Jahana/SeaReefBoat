@@ -1,0 +1,22 @@
+# Eco-Warrior (Windurst) (windurst 84): the Wyrmflies killed out of id order. The death handler (Eco_Warrior.lua:110-128)
+# returns while any other of WYRMFLY_OFFSET .. +2 is alive: +1 first (two others up), then +2 under the restriction with
+# WYRMFLY_OFFSET still up: the Lua returns (Prog 0); a loop that skipped WYRMFLY_OFFSET would write Prog 1 here. Five
+# ticks after the login first: zoneutils::AfterZoneIn (4 s after it) lifts a level restriction outside a battlefield, so
+# the restriction goes on after it. Perfect Dodge by GM keeps the char alive (as in the main flow); no rezone between the
+# kills (it would drop the ON_ZONE restriction).
+lists MazeOfShakhrami/Ahko_Mhalijikhari/onTrigger MazeOfShakhrami/qm2/onTrigger MazeOfShakhrami/Wyrmfly/onMobDeath MazeOfShakhrami/onEventFinish/62
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 lvl=30
+quest Windurst.EcoWarrior accepted
+login
+tick 1000
+tick 1000
+tick 1000
+tick 1000                            # afterZoneIn
+tick 1000
+effect 49                            # a GM: Perfect Dodge
+trigger Ahko_Mhalijikhari            # 62
+finish option=1                      # Level Restriction 25 (ON_ZONE)
+trigger qm2                          # Prog 0, the restriction: the three Wyrmflies popped
+finish-if-event
+kill WYRMFLY_OFFSET+1                # two others alive: returns
+kill WYRMFLY_OFFSET+2                # the restriction, WYRMFLY_OFFSET alive: returns, Prog 0

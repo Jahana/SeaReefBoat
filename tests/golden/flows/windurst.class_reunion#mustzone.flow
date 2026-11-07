@@ -1,0 +1,22 @@
+# Class Reunion (windurst 82): the offer's needToZone test. Accepted by GM at var 6 with both students talked to;
+# Koru-Moru's 410 completes it and sets needToZone. The status set available again by GM (needToZone kept: no zone
+# change; `trigger` walks within the zone, where a warp would zone): _6n2's offer refused (nothing; the door's default
+# message). After a rezone: 413 again, option 1: begun (any option).
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 6
+charvar ClassReunion_TalkedToFupepe 1
+charvar ClassReunion_TalkedToFurakku 1
+login
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 6, both talked to: 410
+finish                                  # completed; needToZone
+quest Windurst.ClassReunion available
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # available, SMN 75, needToZone: nothing (the default message again)
+rezone
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # no needToZone: 413
+finish option=1                         # begun again (any option); Carbuncle's Tear; var 1

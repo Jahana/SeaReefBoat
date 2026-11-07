@@ -1,0 +1,25 @@
+# Rock Racketeer (windurst 26): Ardea's lines next to Chasing Quotas' (the reply kinds). A level-10 WAR in Bastok
+# Markets, Rock Racketeer accepted by GM, Chasing Quotas accepted by GM at Prog 4: its 265 (an Event, no finish handler)
+# answers at Ardea on every talk. Prog 0: 261 (Progress) over 265 on both talks (option 2: nothing, Prog 0 kept).
+# Prog 1 (GM): 262 and 265 tie (Events) and take turns; Prog 2 (GM): 263 and 265 take turns.
+lists BastokMarkets/Ardea/onTrigger
+char zone=BastokMarkets pos=-196,-6,-69 job=WAR lvl=10
+quest Windurst.MihgosAmigo completed
+quest Windurst.RockRacketeer accepted
+quest Sandoria.ChasingQuotas accepted
+charvar Quest[0][95]Prog 4
+login
+trigger Ardea                                  # Prog 0: 261 (Progress) over 265
+finish option=2                                # nothing
+trigger Ardea                                  # 261 again
+finish option=2
+charvar Quest[2][26]Prog 1                     # GM
+trigger Ardea                                  # Prog 1: 262 and 265 tie: one of them
+finish
+trigger Ardea                                  # the other
+finish
+charvar Quest[2][26]Prog 2                     # GM
+trigger Ardea                                  # Prog 2: 263 and 265 tie: one of them
+finish
+trigger Ardea                                  # the other
+finish

@@ -1,0 +1,44 @@
+# His Name is Valgeir (otherAreas 3): Felisa's three conditions and the accepted section's status operand at her.
+# Accepted (a GM), no pizza: nil, her script's 221 (gil, 100); the pizza (a GM) at Prog 1 (a GM): nil, 221; Prog -1 (a
+# GM, below 0): nil, 221; Prog 0: 230; the quest made available by a GM while 230 is open: no 230 handler (Prog stays
+# 0); still available (the pizza, z 39.381, Prog 0): no section, 221; accepted again: 230, finished: Prog 1; Prog 0 and
+# completed (a GM): no section, 221. The z condition (P6: walk, then trigger Felisa here, from where the char stands; her
+# talk range is 6 yalms), accepted again at Prog 0: z 37.5 and z 38.5 (not above 38.5): the quest's nil, her script's 235
+# (z below 39); z 38.6: 230. 38.5 and 38.6 bracket the edge.
+lists Mhaura/Felisa/onTrigger Mhaura/onEventFinish/230 Mhaura/onEventFinish/221
+char zone=Mhaura pos=46.9,-8,39.4 job=WAR lvl=30
+quest OtherAreas.HisNameIsValgeir accepted
+login
+trigger Felisa                          # no pizza: nil; her script: 221 (gil, 100)
+finish option=0
+keyitem AragoneuPizza                   # a GM
+charvar Quest[4][3]Prog 1               # a GM
+trigger Felisa                          # Prog 1: nil; 221
+finish option=0
+charvar Quest[4][3]Prog -1              # a GM: below 0
+trigger Felisa                          # Prog -1: nil; 221
+finish option=0
+charvar Quest[4][3]Prog 0
+trigger Felisa                          # the pizza, z 39.381, Prog 0: 230
+quest OtherAreas.HisNameIsValgeir available # a GM, while 230 is open
+finish                                  # no 230 handler while available: Prog stays 0
+trigger Felisa                          # available: no section; her script: 221
+finish option=0
+quest OtherAreas.HisNameIsValgeir accepted # a GM
+trigger Felisa                          # 230
+finish                                  # Prog 1
+charvar Quest[4][3]Prog 0               # a GM
+quest OtherAreas.HisNameIsValgeir completed # a GM
+trigger Felisa                          # completed: no section; her script: 221
+finish option=0
+quest OtherAreas.HisNameIsValgeir available # a GM
+quest OtherAreas.HisNameIsValgeir accepted # a GM (Prog 0)
+walk 45.4,-8,37.5
+trigger Felisa here                     # z 37.5: the quest's nil; her script's 235 (z below 39)
+finish
+walk 45.4,-8,38.5
+trigger Felisa here                     # z 38.5, not above 38.5: nil; 235
+finish
+walk 45.4,-8,38.6
+trigger Felisa here                     # z 38.6, above 38.5: 230
+finish                                  # Prog 1

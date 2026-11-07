@@ -1,0 +1,50 @@
+# Save the Children (San d'Oria 1-3) repeated. A level 75 Warrior of San d'Oria, rank 2, 1-1, 1-2 and 1-3 completed
+# (GMs; Resonance current keeps RoV 1-1 out). Endracion's 1009, option 102: begun again (section 1 reads no completion),
+# Status 1. Mission[0][2]Option 1 (a GM, as a first completion leaves it before Arnau's 694): Arnau matches section 2
+# (Status below 2: 693) and section 5 (completed, Option 1: 694): section 2's 693 plays (the first section's action);
+# its finish: Status 2 (the GM's Status 2 after it changes nothing). Ghelsba Outpost: the menu (completed: the cutscene
+# skippable), entered, the three Fodderchiefs killed, 32001 (canSkipCS 1); finished: battlefieldWin 32: the Orcish Hut
+# Key, the title, Status 3. Hut_Door, completed: 3; finished: the key taken, Status 4. Endracion, completed: 1024;
+# finished: 250 rank points (addRankPoints), completed again, Option 1. Then at Ambrotien and Grilau (1-3 current at
+# Status 4 by GMs each time): 2024 and Northern San d'Oria's 1024, each finished: 250 rank points, completed.
+lists SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/onEventFinish/1024 SouthernSanDoria/onEventFinish/2024 NorthernSanDoria/Arnau/onTrigger NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1024 GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/onEventFinish/32001 GhelsbaOutpost/onEventFinish/3
+char zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=75 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+rank 2
+login
+trigger Endracion                       # section 1: 1009
+finish option=102                       # begun again, Status 1
+charvar Mission[0][2]Option 1           # a GM
+warp 148,0,137 NorthernSanDoria
+trigger Arnau                           # section 2 (693) and section 5 (694): 693 plays
+finish                                  # Status 2
+missionstatus Sandoria 2                # a GM
+warp -163.5,-11.7,77.8 GhelsbaOutpost
+trigger Hut_Door                        # Status 2: the menu 32000
+update 32000 option=1                   # index 0, area 1: registered, entered (completed: skippable)
+finish                                  # in the arena
+tick 2000                               # the Fodderchiefs spawn
+kill FODDERCHIEF_VOKDEK
+kill FODDERCHIEF_VOKDEK+1
+kill FODDERCHIEF_VOKDEK+2               # won: 32001 (canSkipCS 1)
+finish                                  # battlefieldWin 32: the key, the title, Status 3
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield
+trigger Hut_Door                        # section 3, completed: 3
+finish                                  # the key taken, Status 4
+warp -108.5,1,-34 SouthernSanDoria
+trigger Endracion                       # section 4, completed: 1024
+finish                                  # 250 rank points, completed again, Option 1
+mission Sandoria SaveTheChildren current  # a GM
+missionstatus Sandoria 4                # a GM
+warp 93.4,0,-55.5 SouthernSanDoria
+trigger Ambrotien                       # section 4, completed: 2024
+finish                                  # 250 rank points, completed
+mission Sandoria SaveTheChildren current  # a GM
+missionstatus Sandoria 4                # a GM
+warp -240.5,7,57.9 NorthernSanDoria
+trigger Grilau                          # section 4, completed: 1024
+finish                                  # 250 rank points, completed

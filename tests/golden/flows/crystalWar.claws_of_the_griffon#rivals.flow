@@ -1,0 +1,38 @@
+# Claws of the Griffon (crystalWar 16) at Rholont beside In a Haze of Glory (a Lua quest, available once Perils of the
+# Griffon is completed: a GM; its Rholont reply is the Event 637 in every state): a level 99 Warrior in Southern San
+# d'Oria [S] with Gifts of the Griffon completed (missions as the main flow). A Progress reply beats 637 every time; an
+# Event reply ties it and the two rotate by the last event id (Claws' first, then 637). The Timer equal to today (a GM:
+# the harness's day is 8000): 47, finished: begun, the mustZone; set back to available (a GM): 47 again. Option 0: 50,
+# finished: Option 1; Option 0 again (a GM): 50 again. Option 1: 49, then 637. Out to Garlaige Citadel [S] and back:
+# the mustZone clear, Prog 0: 48, finished: Prog 1; Prog 0 again (a GM): 48 again.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/47 SouthernSanDoriaS/onEventFinish/48 SouthernSanDoriaS/onEventFinish/50
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.GiftsOfTheGriffon completed
+quest CrystalWar.PerilsOfTheGriffon completed # In a Haze of Glory available: Rholont 637 (an Event)
+charvar Quest[7][16]Timer 8000          # a GM: today
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # the Timer at today (not before it): 47
+finish                                  # begun; the mustZone
+quest CrystalWar.ClawsOfTheGriffon available # a GM
+trigger Rholont                         # 47 again
+finish
+trigger Rholont                         # the mustZone set, Option 0: 50
+finish                                  # Option 1
+charvar Quest[7][16]Option 0            # a GM
+trigger Rholont                         # 50 again
+finish
+trigger Rholont                         # Option 1: 49 (an Event), first in order
+finish-if-event
+trigger Rholont                         # the same state again: 637
+finish-if-event
+warp 62.849,-6.078,137.438 GarlaigeCitadelS # out of the zone: the mustZone cleared
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 0: 48
+finish                                  # Prog 1
+charvar Quest[7][16]Prog 0              # a GM
+trigger Rholont                         # 48 again
+finish

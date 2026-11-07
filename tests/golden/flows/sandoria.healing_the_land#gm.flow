@@ -1,0 +1,38 @@
+# Healing the Land (sandoria 82), GM-set: accepted at fame level 1, main level 1 (683: neither is read once accepted);
+# a full inventory at 683 (no scroll: not completed); then Coullene takes a flyer (Flyers for Regine accepted by GM; the
+# flyer was alone in its slot), so exactly 1 slot is free: 683 completes, Quest[0][82]Prog 1 (GM) kept (the raw
+# player:completeQuest). 683 finished while available (a GM change
+# while the event is open; the finish reads no status): completed from available. Available at fame level 4, main level
+# 1: no 681 (nothing: 678).
+char zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=1
+quest Sandoria.HealingTheLand accepted
+quest Sandoria.FlyersForRegine accepted
+item MagicmartFlyer
+login
+fill-inventory
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted, no seal: 683
+finish-if-event                           # no room for the scroll: not completed
+warp 144.4,0.0,127.6 NorthernSanDoria
+trade Coullene MagicmartFlyer x1          # Flyers for Regine: the flyer taken; 1 slot free
+warp 126.3,-6.5,95.7 NorthernSanDoria
+trigger Eperdur                           # 678
+finish-if-event
+charvar Quest[0][82]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Eperdur                           # 683
+finish-if-event                           # exactly 1 free slot: completed; Quest[0][82]Prog kept
+free-inventory
+quest Sandoria.HealingTheLand available
+quest Sandoria.HealingTheLand accepted
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted, no seal: 683
+quest Sandoria.HealingTheLand available
+finish-if-event                           # finished while available: completed from available
+quest Sandoria.HealingTheLand available
+fame Sandoria 225
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # main level 1: no 681; nothing (678)
+finish-if-event

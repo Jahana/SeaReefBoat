@@ -1,0 +1,21 @@
+# Vanishing Act's available arm, the zoning flag alone (task 7 review of the mutants): Delivering the Goods' 41 sets
+# the flag and a Stage one minute on; after a JST day the Stage is past but the flag still holds, so Qutiba and
+# Ulamaal answer 52 and 53; after a zone-out and back the same talks answer 42.
+lists AhtUrhganWhitegate/Qutiba/onTrigger AhtUrhganWhitegate/Ulamaal/onTrigger
+char zone=AhtUrhganWhitegate pos=2.897,0,-10.781 job=WAR lvl=75
+quest AhtUrhgan.DeliveringTheGoods accepted
+charvar Quest[6][61]Prog 1
+login
+trigger Fochacha                        # 41
+finish                                  # completed; Stage now + 60; needToZone
+wait jst=1                              # past the Stage
+trigger Qutiba                          # the flag holds: 52
+finish
+trigger Ulamaal                         # the flag holds: 53
+finish
+warp -64,-7,38 AlZahbi                  # the zoning flag cleared
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+trigger Qutiba                          # 42
+finish option=1
+trigger Ulamaal                         # 42
+finish option=1

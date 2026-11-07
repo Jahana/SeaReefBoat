@@ -1,0 +1,20 @@
+# Inheritance (bastok 68): the offer without the sword. GreatSword 2500: 190 (once per zone); its finish with a full
+# inventory (no sword: giveItem false, not begun); a second talk in the zone falls to the default 52 (oncePerZone:
+# priority Ignore); after a rezone 190 again and begun (the sword and the guide); then 191 with the sword held (hide 1)
+# and its option 1 (the sword held: nothing).
+lists BastokMines/Gumbah/onTrigger BastokMines/onEventFinish/190 BastokMines/onEventFinish/191
+char zone=BastokMines pos=52,0,-36 job=WAR lvl=75
+quest Bastok.BladeOfDarkness completed    # Gumbah's 99 (Blade of Darkness, level 30) out of the way
+skill GreatSword 2500
+login
+trigger Gumbah                    # 190 (oncePerZone)
+fill-inventory
+finish                         # no sword, the inventory full: giveItem false, not begun
+free-inventory
+trigger Gumbah                    # 190 already played in this zone: priority Ignore, the default 52
+finish
+rezone
+trigger Gumbah                    # after the rezone: 190 again
+finish                         # the sword (0 points) and the Weapon Training Guide: accepted
+trigger Gumbah                    # the sword held: 191 with hide 1
+finish option=1                # option 1, the sword held: nothing

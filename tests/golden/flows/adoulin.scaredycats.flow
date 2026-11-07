@@ -1,0 +1,52 @@
+# Scaredy-Cats (adoulin 72, call-only: Eamonn's and Bilp's scripts): a level 99 Warrior in Western Adoulin. Eamonn and
+# Bilp (no defaults: single talks). Scaredycats_Status 0, available: 5031 at both. Status 1 (a GM: nothing sets it), not
+# accepted: 5024 at both; Eamonn's finished on 0 and on 2: nothing; Bilp's on 1: the status 2, added. Status 2:
+# Eamonn 5027, Bilp 5026. Status 1 (a GM), accepted: 5025 at both. Status 3 (a GM): the after-dialogue: Eamonn 5030,
+# Bilp 5029. Completed (a GM) at status 1: 5024 at both (not accepted), finished on 0; status 0, completed: the
+# after-dialogue: 5030, 5029. Available and status 1 again (GMs): Eamonn's 5024 finished on 1 (his own script's
+# questEvent): the status 2, added; then his 5027.
+lists WesternAdoulin/Eamonn/onTrigger WesternAdoulin/Bilp/onTrigger WesternAdoulin/onEventFinish/5024
+char zone=WesternAdoulin pos=-89.5,3,1 job=WAR lvl=99
+login
+trigger Eamonn                          # status 0, available: 5031
+finish
+trigger Bilp                            # 5031
+finish
+charvar Scaredycats_Status 1            # a GM
+trigger Eamonn                          # status 1, not accepted: 5024
+finish option=0                         # not option 1: nothing
+trigger Eamonn                          # 5024
+finish option=2                         # not option 1: nothing
+trigger Bilp                            # 5024
+finish option=1                         # status 2, added
+trigger Eamonn                          # status 2: 5027
+finish
+trigger Bilp                            # status 2: 5026
+finish
+charvar Scaredycats_Status 1            # a GM
+trigger Eamonn                          # status 1, accepted: 5025
+finish
+trigger Bilp                            # 5025
+finish
+charvar Scaredycats_Status 3            # a GM
+trigger Eamonn                          # status 3: the after-dialogue: 5030
+finish
+trigger Bilp                            # 5029
+finish
+quest Adoulin.Scaredycats completed     # a GM
+charvar Scaredycats_Status 1            # a GM
+trigger Eamonn                          # status 1, completed: 5024
+finish option=0
+trigger Bilp                            # 5024
+finish option=0
+charvar Scaredycats_Status 0            # a GM
+trigger Eamonn                          # status 0, completed: 5030
+finish
+trigger Bilp                            # 5029
+finish
+quest Adoulin.Scaredycats available     # a GM
+charvar Scaredycats_Status 1            # a GM
+trigger Eamonn                          # status 1, available: 5024
+finish option=1                         # Eamonn's finish: status 2, added
+trigger Eamonn                          # status 2: 5027
+finish

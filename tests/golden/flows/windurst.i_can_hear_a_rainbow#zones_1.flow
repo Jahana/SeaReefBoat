@@ -1,0 +1,136 @@
+# I Can Hear a Rainbow (windurst 75): the zone-in events of West Ronfaure to Batallia Downs, each left open (rezone open,
+# quest rework P5) for its update and finish. Accepted at Prog 0 by GM with a Carbuncle's Ruby; each arrival with Light
+# 127 (bits 0-6): no event whatever the zone's seeded weather. In each zone a GM sets the weather and Light to every bit
+# (0-8) but the weather's element's (so a wrong element map finds its bit set and plays nothing), rezone open: the
+# zone's event (the zone-in stores the weather in the local var Weather); with the event open a GM sets Light to the
+# pattern the update counts (bits 0-6 only: 0 to 7 lights, bits 7 and 8 left out; six lights set Prog 1, after which
+# the finish's Prog 0 section no longer matches: no handler, the bit not set; a GM then sets Prog 0 and Light 0 and the
+# zone's event plays once more to its finish); where a stored-weather override is
+# given, a GM's localvar Weather before the update (its value is the update's weather and the finish's element: the
+# light and dark weathers' bits 7 and 8, which no zone-in can reach); the finish sets the stored weather's element
+# bit. West Ronfaure first probes FOG with Light 0 (not in validWeatherTable: no event); Buburimu Peninsula rezones
+# with its bit set (no event).
+lists WestRonfaure/onZoneIn/1 EastRonfaure/onZoneIn/1 NorthGustaberg/onZoneIn/1 SouthGustaberg/onZoneIn/1 WestSarutabaruta/onZoneIn/1 EastSarutabaruta/onZoneIn/1 LaTheinePlateau/onZoneIn/1 KonschtatHighlands/onZoneIn/1 TahrongiCanyon/onZoneIn/1 ValkurmDunes/onZoneIn/1 BuburimuPeninsula/onZoneIn/1 JugnerForest/onZoneIn/1 BatalliaDowns/onZoneIn/1
+char zone=WestRonfaure pos=-380.0,-35.8,139.3 lvl=30
+quest Windurst.ICanHearARainbow accepted
+charvar Quest[2][75]Light 127
+item CarbunclesRuby
+login                                          # the login's zone-in: Light 127 (bits 0-6): no event whatever the seeded weather
+weather 3                                      # GM: FOG
+charvar Quest[2][75]Light 0                    # GM: no bit set
+rezone                                         # FOG is not in validWeatherTable: no event (the local var Weather 3)
+weather 0                                      # GM: NONE: element none, bit 0
+charvar Quest[2][75]Light 510                  # GM: bits 0-8 but 0
+rezone open                                    # NONE, bit 0 clear: 51 open (Weather 0)
+charvar Quest[2][75]Light 0                    # GM, the event open: bits none
+update 51 option=0                             # the count of bits 0-6: 0; updateEvent(0, 1, 0, 0)
+finish                                         # the stored weather's element none: bit 0 set: Light 1
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp 442.9,-46.3,142.5 EastRonfaure            # Light 127: no event whatever the seeded weather
+weather 4                                      # GM: HOT_SPELL: element fire, bit 1
+charvar Quest[2][75]Light 509                  # GM: bits 0-8 but 1
+rezone open                                    # HOT_SPELL, bit 1 clear: 21 open (Weather 4)
+charvar Quest[2][75]Light 1                    # GM, the event open: bits [0]
+update 21 option=0                             # the count of bits 0-6: 1; updateEvent(0, 1, 4, 1)
+finish                                         # the stored weather's element fire: bit 1 set: Light 3
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp -582.5,40.1,52.5 NorthGustaberg           # Light 127: no event whatever the seeded weather
+weather 5                                      # GM: HEAT_WAVE: element fire, bit 1
+charvar Quest[2][75]Light 509                  # GM: bits 0-8 but 1
+rezone open                                    # HEAT_WAVE, bit 1 clear: 244 open (Weather 5)
+charvar Quest[2][75]Light 5                    # GM, the event open: bits [0, 2]
+update 244 option=0                            # the count of bits 0-6: 2; updateEvent(0, 1, 5, 2)
+finish                                         # the stored weather's element fire: bit 1 set: Light 7
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp 552.4,-0.9,-315.5 SouthGustaberg          # Light 127: no event whatever the seeded weather
+weather 6                                      # GM: RAIN: element water, bit 6
+charvar Quest[2][75]Light 447                  # GM: bits 0-8 but 6
+rezone open                                    # RAIN, bit 6 clear: 901 open (Weather 6)
+charvar Quest[2][75]Light 7                    # GM, the event open: bits [0, 1, 2]
+update 901 option=0                            # the count of bits 0-6: 3; updateEvent(0, 1, 6, 3)
+finish                                         # the stored weather's element water: bit 6 set: Light 71
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp 73.0,-2.0,-198.4 WestSarutabaruta         # Light 127: no event whatever the seeded weather
+weather 7                                      # GM: SQUALL: element water, bit 6
+charvar Quest[2][75]Light 447                  # GM: bits 0-8 but 6
+rezone open                                    # SQUALL, bit 6 clear: 48 open (Weather 7)
+charvar Quest[2][75]Light 15                   # GM, the event open: bits [0, 1, 2, 3]
+update 48 option=0                             # the count of bits 0-6: 4; updateEvent(0, 1, 7, 4)
+finish                                         # the stored weather's element water: bit 6 set: Light 79
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp 91.9,-6.0,-346.5 EastSarutabaruta         # Light 127: no event whatever the seeded weather
+weather 8                                      # GM: DUST_STORM: element earth, bit 4
+charvar Quest[2][75]Light 495                  # GM: bits 0-8 but 4
+rezone open                                    # DUST_STORM, bit 4 clear: 50 open (Weather 8)
+charvar Quest[2][75]Light 47                   # GM, the event open: bits [0, 1, 2, 3, 5]
+update 50 option=0                             # the count of bits 0-6: 5; updateEvent(0, 1, 8, 5)
+finish                                         # the stored weather's element earth: bit 4 set: Light 63
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp 422.0,19.1,20.0 LaTheinePlateau           # Light 127: no event whatever the seeded weather
+weather 9                                      # GM: SAND_STORM: element earth, bit 4
+charvar Quest[2][75]Light 495                  # GM: bits 0-8 but 4
+rezone open                                    # SAND_STORM, bit 4 clear: 123 open (Weather 9)
+charvar Quest[2][75]Light 111                  # GM, the event open: bits [0, 1, 2, 3, 5, 6]
+update 123 option=0                            # the count of bits 0-6: 6; Prog 1; updateEvent(0, 1, 9, 6)
+finish                                         # Prog 1: the Prog 0 section no longer matches: no handler (Light stays 111)
+charvar Quest[2][75]Prog 0                     # GM: back to Prog 0
+charvar Quest[2][75]Light 0                    # GM: no bit set
+rezone open                                    # SAND_STORM, bit 4 clear: 123 open again (Weather 9)
+update 123 option=0                            # the count of bits 0-6: 0; updateEvent(0, 1, 9, 0)
+finish                                         # the stored weather's element earth: bit 4 set: Light 16
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp -221.5,16.8,139.4 KonschtatHighlands      # Light 127: no event whatever the seeded weather
+weather 10                                     # GM: WIND: element wind, bit 3
+charvar Quest[2][75]Light 503                  # GM: bits 0-8 but 3
+rezone open                                    # WIND, bit 3 clear: 104 open (Weather 10)
+charvar Quest[2][75]Light 247                  # GM, the event open: bits [0, 1, 2, 4, 5, 6, 7]
+update 104 option=0                            # the count of bits 0-6: 6; Prog 1; updateEvent(0, 1, 10, 6)
+finish                                         # Prog 1: the Prog 0 section no longer matches: no handler (Light stays 247)
+charvar Quest[2][75]Prog 0                     # GM: back to Prog 0
+charvar Quest[2][75]Light 0                    # GM: no bit set
+rezone open                                    # WIND, bit 3 clear: 104 open again (Weather 10)
+update 104 option=0                            # the count of bits 0-6: 0; updateEvent(0, 1, 10, 0)
+finish                                         # the stored weather's element wind: bit 3 set: Light 8
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp -171.3,16.6,74.6 TahrongiCanyon           # Light 127: no event whatever the seeded weather
+weather 11                                     # GM: GALES: element wind, bit 3
+charvar Quest[2][75]Light 503                  # GM: bits 0-8 but 3
+rezone open                                    # GALES, bit 3 clear: 35 open (Weather 11)
+charvar Quest[2][75]Light 0                    # GM, the event open: bits none
+update 35 option=0                             # the count of bits 0-6: 0; updateEvent(0, 1, 11, 0)
+finish                                         # the stored weather's element wind: bit 3 set: Light 8
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp 139.6,-7.1,100.5 ValkurmDunes             # Light 127: no event whatever the seeded weather
+weather 12                                     # GM: SNOW: element ice, bit 2
+charvar Quest[2][75]Light 507                  # GM: bits 0-8 but 2
+rezone open                                    # SNOW, bit 2 clear: 3 open (Weather 12)
+charvar Quest[2][75]Light 383                  # GM, the event open: bits [0, 1, 2, 3, 4, 5, 6, 8]
+localvar Weather 16                            # GM: the stored weather AURORAS (element light)
+update 3 option=0                              # the count of bits 0-6: 7; updateEvent(0, 1, 16, 7)
+finish                                         # the stored weather's element light: bit 7 set: Light 511
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp -477.8,-32.0,47.5 BuburimuPeninsula       # Light 127: no event whatever the seeded weather
+weather 13                                     # GM: BLIZZARDS: element ice, bit 2
+charvar Quest[2][75]Light 507                  # GM: bits 0-8 but 2
+rezone open                                    # BLIZZARDS, bit 2 clear: 3 open (Weather 13)
+charvar Quest[2][75]Light 0                    # GM, the event open: bits none
+update 3 option=0                              # the count of bits 0-6: 0; updateEvent(0, 1, 13, 0)
+finish                                         # the stored weather's element ice: bit 2 set: Light 4
+rezone                                         # BLIZZARDS again, bit 2 now set: no event
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp -71.4,2.2,100.6 JugnerForest              # Light 127: no event whatever the seeded weather
+weather 14                                     # GM: THUNDER: element thunder, bit 5
+charvar Quest[2][75]Light 479                  # GM: bits 0-8 but 5
+rezone open                                    # THUNDER, bit 5 clear: 15 open (Weather 14)
+charvar Quest[2][75]Light 0                    # GM, the event open: bits none
+localvar Weather 18                            # GM: the stored weather GLOOM (element dark)
+update 15 option=0                             # the count of bits 0-6: 0; updateEvent(0, 1, 18, 0)
+finish                                         # the stored weather's element dark: bit 8 set: Light 256
+charvar Quest[2][75]Light 127                  # GM: for the next arrival
+warp -43.1,0.1,436.9 BatalliaDowns             # Light 127: no event whatever the seeded weather
+weather 15                                     # GM: THUNDERSTORMS: element thunder, bit 5
+charvar Quest[2][75]Light 479                  # GM: bits 0-8 but 5
+rezone open                                    # THUNDERSTORMS, bit 5 clear: 901 open (Weather 15)
+charvar Quest[2][75]Light 0                    # GM, the event open: bits none
+update 901 option=0                            # the count of bits 0-6: 0; updateEvent(0, 1, 15, 0)
+finish                                         # the stored weather's element thunder: bit 5 set: Light 32

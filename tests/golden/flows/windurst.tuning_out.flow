@@ -1,0 +1,36 @@
+# Tuning Out (windurst 91): Leepe-Hoppe (Windurst Waters; default event 345, "default"; a talk his script answers with
+# nothing plays it again). Tuning In completed (GM): the three Tuning In items: nothing (the trade needs Tuning In
+# accepted). 888, option 1: TuningOut_Progress 1, begun (any option). Accepted: 889. TuningOut_Progress 8 (GM: the
+# Kazham, Norg, Beaucedine Glacier and Yuhtunga Jungle steps stay Lua): 897 with a full inventory: npcUtil.completeQuest
+# refuses (the Cache-Nez does not fit): still accepted, progress 8; with room: the Cache-Nez, Friend of the Helmed, fame
+# 40, completed, progress 0. Completed: nothing.
+char zone=WindurstWaters pos=12.9,-9.7,-197.5 job=WAR lvl=75
+quest Windurst.TuningIn completed
+item MagickedSteelIngot
+item PieceOfSpruceLumber
+item ExtraFineFile
+login
+trade Leepe-Hoppe MagickedSteelIngot x1 PieceOfSpruceLumber x1 ExtraFineFile x1  # Tuning In completed: nothing
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # Tuning In completed, Tuning Out available: 888
+finish option=1                         # TuningOut_Progress 1; begun
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # accepted, progress 1: 889
+finish
+charvar TuningOut_Progress 8
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # progress 8: 897
+fill-inventory
+finish                                  # the Cache-Nez does not fit: nothing; progress 8
+free-inventory
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # 897
+finish                                  # the Cache-Nez; Friend of the Helmed; fame 40; completed; progress 0
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # completed: nothing from his script, so 345 again
+finish

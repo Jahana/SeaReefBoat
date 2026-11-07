@@ -1,0 +1,12 @@
+# The Unfinished Waltz (jeuno 96) accepted (a GM) at Prog 1 (a GM), a level 75 Dancer by Grauberg [S]'s qm1, The
+# Essence of Dance not held. A GM sets the quest's local var hippoEvent to 3 (`localvar Quest[3][96]hippoEvent 3`: the
+# quest's own scripts set it to 1 and 2 only): qm1 takes the else arm, ATTEND_TO_MORE_PRESSING (not 12, a Dancer's
+# hippoEvent 0; not the spawn of hippoEvent 1; not 13, hippoEvent 2).
+lists GraubergS/qm1/onTrigger
+char zone=GraubergS pos=329.9,-47.8,93.2 job=DNC lvl=75
+quest Jeuno.LakesideMinuet completed
+quest Jeuno.TheUnfinishedWaltz accepted
+charvar Quest[3][96]Prog 1
+login
+localvar Quest[3][96]hippoEvent 3       # GM: a value no script sets
+trigger qm1                             # Prog 1, hippoEvent 3: ATTEND_TO_MORE_PRESSING

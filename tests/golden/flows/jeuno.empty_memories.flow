@@ -1,0 +1,75 @@
+# Empty Memories (jeuno 70): Ru'Lude Gardens' Harith (no script; default event 111; no other container). A level 75
+# Warrior with 20000 gil, CoP The Mothercrystals current (a GM, before login), holding three Recollections of Pain, one
+# each of Fear, Guilt, Suffering, Anxiety and Animosity, and a Bird Feather.
+# Available: the trade while only available, the accepted state's valid trade (a Recollection of Pain and 2000 gil):
+# no onTrade in section 1: nothing. 113, option 0: nothing; option 2: nothing; option 1: begun.
+# Accepted: 114. Trades of the Recollection of Pain (wants 2000 gil): no gil: 108 (2000); 1999 gil: 108; 2001 gil: 108;
+# a Bird Feather alone (no recollection): nil (nothing); two Pains and 2000 gil: hasItemQty(item, 1) wants exactly one:
+# nil (nothing); a Pain, the Bird Feather and 2000 gil (the exact trade plus an extra item): 109; finished: the Bottle of
+# Hysteroanima, the Pain taken (confirmItem(item, 1)), the feather and the trade's gil not taken (unconfirmed), 2000 gil
+# taken by delGil, fame +5 in San d'Oria, Bastok and Windurst (accepted), completed. The trades with gil offer it first
+# (trade slot 0, where trade:getGil() reads it).
+# Completed: 114; a Pain and 2000 gil: 109, finished: the Hysteroanima is Rare and held: not given: nothing (nothing
+# taken, no gil). The Recollection of Suffering (no gil wanted) with 2000 gil and a full bag (fill-inventory): 110 (the
+# gil not read); the finish gives nothing (nothing taken); again with a free bag: the Hamayumi, the Suffering taken, no
+# gil taken, no fame (completed), completed again. Fear with 1999 / 2001 gil: 108 (2000); with 2000: 109: the Bottle of
+# Psychoanima, 2000 gil taken. Guilt with 1999 / 2001: 108; with 2000: 109: the Bottle of Terroanima, 2000 gil taken.
+# Anxiety: 110: the Stone Gorget. Animosity: 110: the Dia Wand.
+# #available takes the check's mission operands, #two_recollections the reward table's pairs() order, #mid_event the
+# finishes outside their states.
+lists RuludeGardens/Harith/onTrigger RuludeGardens/Harith/onTrade RuludeGardens/onEventFinish/113 RuludeGardens/onEventFinish/109 RuludeGardens/onEventFinish/110
+char zone=RuludeGardens pos=-4.3,2,132.5 job=WAR lvl=75 gil=20000
+mission Cop TheMothercrystals current
+item RecollectionOfPain x3
+item RecollectionOfFear
+item RecollectionOfGuilt
+item RecollectionOfSuffering
+item RecollectionOfAnxiety
+item RecollectionOfAnimosity
+item BirdFeather
+login
+trade Harith gil=2000 RecollectionOfPain x1  # available: no onTrade: nothing
+trigger Harith                          # available, CoP The Mothercrystals: 113
+finish option=0                         # not 1: nothing
+trigger Harith                          # 113
+finish option=2                         # not 1: nothing
+trigger Harith                          # 113
+finish option=1                         # begun
+trigger Harith                          # accepted: 114
+finish
+trade Harith RecollectionOfPain x1      # no gil: 108 (2000)
+finish
+trade Harith gil=1999 RecollectionOfPain x1  # 108 (2000)
+finish
+trade Harith gil=2001 RecollectionOfPain x1  # 108 (2000)
+finish
+trade Harith BirdFeather x1             # no recollection: nil; nothing
+trade Harith gil=2000 RecollectionOfPain x2  # two Pains: hasItemQty(item, 1) is exact: no row matches: nil; nothing
+trade Harith gil=2000 RecollectionOfPain x1 BirdFeather x1  # the exact trade plus an extra item: 109; the Pain confirmed
+finish                                  # the Bottle of Hysteroanima; the Pain taken, the feather and the trade's gil kept, 2000 gil taken (delGil); fame +5 x3; completed
+trigger Harith                          # completed: 114
+finish
+trade Harith gil=2000 RecollectionOfPain x1  # 109
+finish                                  # the Hysteroanima held (Rare): not given: nothing
+fill-inventory
+trade Harith gil=2000 RecollectionOfSuffering x1  # 110 (no gil wanted)
+finish                                  # the Hamayumi cannot be given: nothing
+free-inventory
+trade Harith gil=2000 RecollectionOfSuffering x1  # 110
+finish                                  # the Hamayumi; the Suffering taken; no gil taken; no fame; completed again
+trade Harith gil=1999 RecollectionOfFear x1  # 108 (2000)
+finish
+trade Harith gil=2001 RecollectionOfFear x1  # 108 (2000)
+finish
+trade Harith gil=2000 RecollectionOfFear x1  # 109
+finish                                  # the Bottle of Psychoanima; 2000 gil taken
+trade Harith gil=1999 RecollectionOfGuilt x1  # 108 (2000)
+finish
+trade Harith gil=2001 RecollectionOfGuilt x1  # 108 (2000)
+finish
+trade Harith gil=2000 RecollectionOfGuilt x1  # 109
+finish                                  # the Bottle of Terroanima; 2000 gil taken
+trade Harith RecollectionOfAnxiety x1   # 110
+finish                                  # the Stone Gorget
+trade Harith RecollectionOfAnimosity x1 # 110
+finish                                  # the Dia Wand

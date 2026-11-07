@@ -1,0 +1,51 @@
+# Faded Promises (bastok 73): Romualdo, Ayame and Alois in the Metalworks, Kagetora in Port Bastok, the Treasure Chest of
+# Palborough Mines. The guard (main job NIN, main level 20, Norg fame level 4), the offer 802, Ayame's 803 (declined,
+# then Prog 1), the chest's trade at Prog 1 without the Diary of Mukunda (xi.treasure.onTrade with the diary as the
+# reward, bypass type 2: the key opens the chest, the diary arrives 2 s later), Kagetora's 296 (Prog 2), Ayame's 804
+# (Prog 3), Alois' 805 and the reward. Defaults: Romualdo 705, Ayame 701, Alois 370, Kagetora 23 (his own script
+# answers only twentyInPirateYearsCS). Message on the Winds (crystalWar) also names Romualdo: available, from main level
+# 20, it plays 952 (its finish sets its Prog 1, and it stays available), and the lookup alternates it with this quest's
+# offer. Stamp Hunt, Ayame's quests and missions, and Alois' missions need what this char lacks. A chest is placed 10 s
+# after its zone starts (hence the tick).
+lists Metalworks/Romualdo/onTrigger Metalworks/Romualdo/onTrade Metalworks/Ayame/onTrigger Metalworks/Alois/onTrigger PortBastok/Kagetora/onTrigger PalboroughMines/Treasure_Chest/onTrade Metalworks/onEventFinish/802 Metalworks/onEventFinish/803 Metalworks/onEventFinish/804 Metalworks/onEventFinish/805 PortBastok/onEventFinish/296
+char zone=Metalworks pos=133,-18.5,-35 job=NIN lvl=20
+fame Norg 224
+item PalboroughChestKey
+item BoneChip
+login
+trade Romualdo BoneChip x1     # available: no trade handler, nothing
+trigger Romualdo               # Norg fame 224 (level 3): no offer; Message on the Winds' 952
+finish                         # Message on the Winds' Prog 1
+fame Norg 225
+trigger Romualdo               # NIN, level 20, Norg fame level 4: the offer, 802
+finish                         # accepted
+trigger Alois                  # Prog 0: nil, his default 370
+finish
+trigger Ayame                  # Prog 0: 803
+finish option=1                # declined: Prog stays 0
+trigger Ayame                  # 803 again
+finish                         # option 0: Prog 1
+trigger Ayame                  # Prog 1: nil, her default 701
+finish
+warp -96,-2.3,30.4 PortBastok
+trigger Kagetora               # no diary: nil, his default 23
+finish
+warp 250.037,-32.069,174.156 PalboroughMines
+tick 13000                     # the chest placed
+trigger Treasure_Chest         # walks to the chest (its trigger shows nothing here)
+trade Treasure_Chest PalboroughChestKey x1  # Prog 1, no diary: the chest opens
+tick 4500                      # the Diary of Mukunda
+warp -96,-2.3,30.4 PortBastok
+trigger Kagetora               # the diary: 296
+finish                         # Prog 2
+warp 133,-18.5,-35 Metalworks
+trigger Ayame                  # Prog 2: 804
+finish                         # Prog 3
+trigger Alois                  # Prog 3: 805
+finish                         # completed: Fukuro, Norg fame +20, Assassin Reject, the diary deleted
+trigger Romualdo               # completed: no handler; Message on the Winds' 952
+finish
+trigger Ayame                  # completed: no handler, 701
+finish
+trigger Alois                  # completed: no handler, 370
+finish

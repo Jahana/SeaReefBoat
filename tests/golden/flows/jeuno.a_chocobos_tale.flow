@@ -1,0 +1,60 @@
+# A Chocobo's Tale (jeuno 72): Upper Jeuno's Nevela (no script; default 69), Bastok Mines' Wobke (no script; default 244),
+# Pashhow Marshlands' Outpost_Gate (default GATE_IS_LOCKED), Batallia Downs' qm_chocobotale (default YOU_FIND_NOTHING) and
+# its five Badshahs (BADSHAH_OFFSET .. + 4). A level 75 Warrior, CoP The Road Forks current, four Bottles of Warding Oil
+# and a Chocobo Feather. Available: Nevela's 10015: begun. Accepted: Nevela at Prog 0: 10016. Wobke: 245 (Prog 1), then
+# 246. The gate: three oils at Prog 1: nil; trigger: 21 (0, Warding Oil): Prog 2; trigger at Prog 2: nil (GATE_IS_LOCKED);
+# two oils: nil; four: nil; three and the feather: nil; three: 22: Prog 3 (the oil kept). Wobke at Prog 3: 247 (0, Warding
+# Oil): Prog 4; then 248. The qm at Prog 4: the five spawned claimed (YOU_ARE_BEING_ATTACKED); again with them up: nil
+# (YOU_FIND_NOTHING); four killed (the first death sets nmDefeated), the fifth up: nil; the fifth killed: the Silver
+# Comet's Collar (after the five despawned), Prog 5; again: nil. Nevela at Prog 5: 10017: completed (5200 gil, Chocobo Love Guru), fame +7 x3, the
+# collar taken. Completed: 10018; three oils to the gate: nothing.
+lists UpperJeuno/Nevela/onTrigger UpperJeuno/onEventFinish/10015 UpperJeuno/onEventFinish/10017 BastokMines/Wobke/onTrigger BastokMines/onEventFinish/245 BastokMines/onEventFinish/247 PashhowMarshlands/Outpost_Gate/onTrade PashhowMarshlands/Outpost_Gate/onTrigger PashhowMarshlands/onEventFinish/21 PashhowMarshlands/onEventFinish/22 BatalliaDowns/qm_chocobotale/onTrigger BatalliaDowns/Badshah/onMobDeath
+char zone=UpperJeuno pos=-58.6,0,81.1 job=WAR lvl=75
+mission Cop TheRoadForks current
+item BottleOfWardingOil x4
+item ChocoboFeather
+login
+trigger Nevela                          # available: 10015
+finish                                  # begun
+trigger Nevela                          # Prog 0: 10016
+finish
+warp 30.5,0.9,-111.6 BastokMines        # by Wobke
+trigger Wobke                           # Prog 0: 245
+finish                                  # Prog 1
+trigger Wobke                           # Prog 1: 246
+finish
+warp 472,23.4,413.1 PashhowMarshlands   # by the Outpost Gate
+trade Outpost_Gate BottleOfWardingOil x3 # Prog 1: nil; nothing
+trigger Outpost_Gate                    # Prog 1: 21 (0, Warding Oil)
+finish                                  # Prog 2
+trigger Outpost_Gate                    # Prog 2: nil; GATE_IS_LOCKED
+trade Outpost_Gate BottleOfWardingOil x2 # two: nil
+trade Outpost_Gate BottleOfWardingOil x4 # four: nil
+trade Outpost_Gate BottleOfWardingOil x3 ChocoboFeather x1 # three and an extra item: nil
+trade Outpost_Gate BottleOfWardingOil x3 # three, Prog 2: 22
+finish                                  # Prog 3; the oil kept
+warp 30.5,0.9,-111.6 BastokMines        # by Wobke
+trigger Wobke                           # Prog 3: 247 (0, Warding Oil)
+finish                                  # Prog 4
+trigger Wobke                           # Prog 4: 248
+finish
+warp -37.9,-11.1,307.3 BatalliaDowns    # by the qm
+trigger qm_chocobotale                  # Prog 4, none up, no nmDefeated: the five spawned; YOU_ARE_BEING_ATTACKED
+trigger qm_chocobotale                  # Badshahs up: nil; YOU_FIND_NOTHING
+kill BADSHAH_OFFSET                     # onMobDeath, Prog 4: nmDefeated 1
+kill BADSHAH_OFFSET+1
+kill BADSHAH_OFFSET+2
+kill BADSHAH_OFFSET+3
+trigger qm_chocobotale                  # +4 still up: nil; YOU_FIND_NOTHING
+kill BADSHAH_OFFSET+4
+tick 15000                              # the Badshahs despawning (the death and the despawn each take a zone tick)
+tick 30000                              # despawned
+trigger qm_chocobotale                  # none up, nmDefeated: the Silver Comet's Collar; Prog 5
+trigger qm_chocobotale                  # Prog 5: nil; YOU_FIND_NOTHING
+warp -58.6,0,81.1 UpperJeuno            # by Nevela
+trigger Nevela                          # Prog 5: 10017
+finish                                  # completed: 5200 gil, Chocobo Love Guru; fame +7 x3; the collar taken
+trigger Nevela                          # completed: 10018 (replacing her default)
+finish
+warp 472,23.4,413.1 PashhowMarshlands   # by the Outpost Gate
+trade Outpost_Gate BottleOfWardingOil x3 # completed: no onTrade: nothing (the oils kept)

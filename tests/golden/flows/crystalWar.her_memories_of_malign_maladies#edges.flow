@@ -1,0 +1,50 @@
+# Her Memories: Of Malign Maladies (crystalWar 72), the edges: a level 99 Warrior in Southern San d'Oria with the WotG
+# mission Pillar of Hope current (other logs as the main flow), a Philosopher's Stone and a Lilac. Amaura: Her Memories
+# not current: no section (her default 642). Her Memories current (a GM): 955, finished on option 1: begun (any
+# option). Windurst Waters: Library_book3 at Prog 0: nil (369). Grauberg [S]: Fey Blossoms at Prog 1 (a GM): nil; the
+# stone at Prog 1: nil; Prog 2 (a GM): the stone and a Lilac: nil (not exactly). Southern San d'Oria [S]: Raustigne, no
+# Fey Stone: nil (606). Grauberg [S]: Prog 3 with the Fey Stone (a GM): nil; the stone alone traded at Prog 3: nil.
+# Windurst Waters: Library_book3 at Prog 3: nil. Grauberg [S]: Fey Blossoms at Prog 4 without the Fey Stone (GMs): nil.
+lists SouthernSanDoria/Amaura/onTrigger SouthernSanDoria/onEventFinish/955 WindurstWaters/Library_book3/onTrigger GraubergS/Fey_Blossoms/onTrigger GraubergS/Fey_Blossoms/onTrade SouthernSanDoriaS/Raustigne/onTrigger
+char zone=SouthernSanDoria pos=-82.867,-6.949,91.148 job=WAR lvl=99
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item PhilosophersStone
+item Lilac
+login
+trigger Amaura                          # Her Memories not current: no section (her default 642)
+finish-if-event
+mission Wotg PillarOfHope completed   # a GM (so the next add does not overwrite it)
+mission Wotg HerMemories current        # a GM
+trigger Amaura                          # 955
+finish option=1                         # begun (any option)
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Library_book3                   # Prog 0: nil (369)
+finish-if-event
+charvar Quest[7][72]Prog 1              # a GM
+warp -139.812,-6.75,564.417 GraubergS
+trigger Fey_Blossoms                    # Prog 1: nil
+finish-if-event
+trade Fey_Blossoms PhilosophersStone x1 # Prog 1: nil
+charvar Quest[7][72]Prog 2              # a GM
+trade Fey_Blossoms PhilosophersStone x1 Lilac x1 # not the stone alone: nil
+warp 5.479,-1.999,44.456 SouthernSanDoriaS
+trigger Raustigne                       # no Fey Stone: nil (606)
+finish-if-event
+charvar Quest[7][72]Prog 3              # a GM
+keyitem FeyStone                        # a GM
+warp -139.812,-6.75,564.417 GraubergS
+trigger Fey_Blossoms                    # Prog 3, the Fey Stone held: nil
+finish-if-event
+trade Fey_Blossoms PhilosophersStone x1 # Prog 3, the stone alone: nil (Prog 2 only)
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Library_book3                   # Prog 3: nil (Prog 1 and 2 only)
+finish-if-event
+warp -139.812,-6.75,564.417 GraubergS
+charvar Quest[7][72]Prog 4              # a GM
+delkeyitem FeyStone                     # a GM
+trigger Fey_Blossoms                    # Prog 4, no Fey Stone: nil (Prog 3 only)
+finish-if-event

@@ -1,0 +1,27 @@
+# Carbuncle Debacle (windurst 83): the rewards already held, an SMN 75 with The Puppet Master and Class Reunion
+# completed and this quest accepted by GM. The Daze Breaker Charm held at Koru-Moru's 417 (var 4): var 5;
+# npcUtil.giveKeyItem gives nothing (no message). Evoker's Horn held (rare) at 419 (var 7): the free-slot test
+# passes, addItem fails, ITEM_OBTAINED is still sent and the quest completes (the title, fame 20, var 0, needToZone).
+# Var 8 (GM) before it: no arm of this quest (419 wants 7): Class Reunion's 411.
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion completed
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 4
+keyitem DazeBreakerCharm
+item EvokersHorn
+login
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 4: 417
+finish                                  # var 5; the charm held: no key item message
+charvar CarbuncleDebacleProgress 8
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # accepted, var 8: no arm of this quest: 411
+finish
+charvar CarbuncleDebacleProgress 7
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 7: 419
+finish                                  # the horn held: addItem fails; ITEM_OBTAINED; title; completed; fame; var 0

@@ -1,0 +1,33 @@
+# The Seamstress (sandoria 5): Hanaa Punaa in Southern San d'Oria, no guard. A trade while available (nothing), the offer
+# 528 declined (Prog 1), the re-offer 531 declined (nothing) and taken (option 0: begun), the accepted 529, the wrong
+# trades (a bone chip, two Sheepskins, three with a bone chip: tradeHasExactly fails), 530 for exactly three (Leather
+# Gloves, the skins taken, Silencer of the Lambs, completed: fame +10), the completed 590 below fame level 2, the repeat
+# 530 (gloves, title, fame +10, not completed again), and at fame level 2 Lizard Skins' offer instead of 590.
+# Hanaa Punaa has no script and no default event. Lizard Skins and Black Tiger Skins also name her: they need this quest
+# completed and fame level 2 / 3.
+lists SouthernSanDoria/Hanaa_Punaa/onTrigger SouthernSanDoria/Hanaa_Punaa/onTrade SouthernSanDoria/onEventFinish/528 SouthernSanDoria/onEventFinish/531 SouthernSanDoria/onEventFinish/530
+char zone=SouthernSanDoria pos=-178.2,-8.8,27.6
+item Sheepskin x6
+item BoneChip
+login
+trade Hanaa_Punaa Sheepskin x3            # available: no trade handler (the trade needs accepted or completed), nothing
+trigger Hanaa_Punaa                       # Prog 0: 528
+finish option=1                           # not option 0: Prog 1
+trigger Hanaa_Punaa                       # Prog 1: 531
+finish option=1                           # not option 0: nothing
+trigger Hanaa_Punaa                       # 531
+finish                                    # option 0: begun
+trigger Hanaa_Punaa                       # accepted: 529
+finish
+trade Hanaa_Punaa BoneChip x1             # not Sheepskins: nil, nothing
+trade Hanaa_Punaa Sheepskin x2            # two: nil
+trade Hanaa_Punaa Sheepskin x3 BoneChip x1   # not exactly three Sheepskins: nil
+trade Hanaa_Punaa Sheepskin x3            # exactly three: 530
+finish                                    # Leather Gloves, the skins taken, Silencer of the Lambs, completed (fame 10)
+trigger Hanaa_Punaa                       # completed, fame level 1: 590
+finish
+trade Hanaa_Punaa Sheepskin x3            # completed: 530 again
+finish                                    # Leather Gloves, the skins taken, the title, fame +10 (20); no completion
+fame Sandoria 50
+trigger Hanaa_Punaa                       # completed, fame level 2: no 590; Lizard Skins' offer 559
+finish option=1                           # Lizard Skins declined: its Prog 1

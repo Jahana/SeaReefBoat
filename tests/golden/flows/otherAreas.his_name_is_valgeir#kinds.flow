@@ -1,0 +1,62 @@
+# His Name is Valgeir (otherAreas 3): its reply kinds against two Event-priority competitors set by a GM: Rycharde the
+# Chef accepted (Rycharde 72, Take 68; RQ1 sorts before RQ4) and The Clue accepted (Rycharde 85, Take 65, Valgeir 143;
+# RQ6 sorts after). On a tie the lookup's action cycle plays the actions in container order, one per talk, from where it
+# last stopped. Available: Rycharde's 86 (Progress) twice; not due: 72, 75, 85 in turn (75 is Event); Take: 68, then 65
+# (65 is not Progress; RQ4's 65 and The Clue's 65 share the id). Accepted, the pizza held: Rycharde 72, 87, 85 in turn;
+# Felisa's 230 (Progress) over her script twice (an Event 230 would alternate with her script: the second talk would be
+# 221). Selbina: Valgeir's 100 (Progress) twice (the pizza given back by a GM), then without it 101 (Event) and 143 in
+# turn. Mhaura: Rycharde's 88 (Progress: an Event 88 would have tied and the cycle would play 72).
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Mhaura/Felisa/onTrigger Selbina/Valgeir/onTrigger Mhaura/onEventFinish/86 Mhaura/onEventFinish/230 Selbina/onEventFinish/100 Mhaura/onEventFinish/88
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.UnendingChase completed
+quest OtherAreas.RychardeTheChef accepted
+quest OtherAreas.TheClue accepted
+charvar Quest[4][2]DayCompleted 7997
+fame Windurst 125
+login
+trigger Rycharde                        # 86 (Progress beats 72 and 85)
+finish option=0
+trigger Rycharde                        # 86 again
+finish option=0
+charvar Quest[4][2]DayCompleted 7998    # a GM: not due
+trigger Rycharde                        # 72 (a three-way tie: the first container's)
+finish
+trigger Rycharde                        # 75
+finish
+trigger Rycharde                        # 85
+finish
+trigger Take                            # 68 (a tie with RQ4's 65 and The Clue's 65)
+finish
+trigger Take                            # 65
+finish
+charvar Quest[4][2]DayCompleted 7997
+trigger Rycharde                        # 86
+finish option=80                        # the pizza, begun
+trigger Rycharde                        # 72 (the cycle's last was 85: it starts over)
+finish
+trigger Rycharde                        # 87
+finish
+trigger Rycharde                        # 85
+finish
+trigger Take                            # accepted: 68 (a tie with RQ4's accepted 65 and The Clue's 65)
+finish
+trigger Take                            # 65
+finish
+trigger Felisa                          # 230 (Progress: the handler, not her script)
+finish                                  # Prog 1
+charvar Quest[4][3]Prog 0               # a GM
+trigger Felisa                          # 230 again
+finish                                  # Prog 1
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # 100 (Progress beats 143)
+finish                                  # the pizza taken
+keyitem AragoneuPizza                   # a GM
+trigger Valgeir                         # 100 again
+finish                                  # the pizza taken
+trigger Valgeir                         # no pizza: 101 (a tie with 143)
+finish
+trigger Valgeir                         # 143
+finish
+warp 19,-16,88.8 Mhaura
+trigger Rycharde                        # no pizza: 88 (Progress; an Event 88 would tie and the cycle would play 72)
+finish                                  # completed

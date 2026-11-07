@@ -1,0 +1,41 @@
+# Black Tiger Skins (sandoria 31): Hanaa Punaa in Southern San d'Oria. The guard (fame level 3 and Lizard Skins
+# completed): a trade while available (nothing), the guard false on Lizard Skins' side (its 559) and on the fame side
+# (Lizard Skins' 591), the offer 576 declined (Prog 1), 579 declined and taken, the accepted 578, the wrong trades, 577
+# for exactly three Tiger Hides (completed: Tiger Stole, fame +30, Cat Skinner; the hides taken), the completed 592 at
+# fame level 3, a trade once completed (nothing), and below fame level 3 Lizard Skins' 591 instead of 592.
+# Hanaa Punaa has no script and no default event; The Seamstress and Lizard Skins also name her (The Seamstress is
+# completed here, so its completed trade handler answers nil to each trade).
+lists SouthernSanDoria/Hanaa_Punaa/onTrigger SouthernSanDoria/Hanaa_Punaa/onTrade SouthernSanDoria/onEventFinish/576 SouthernSanDoria/onEventFinish/579 SouthernSanDoria/onEventFinish/577
+char zone=SouthernSanDoria pos=-178.2,-8.8,27.6
+fame Sandoria 125
+quest Sandoria.TheSeamstress completed
+item TigerHide x6
+item BoneChip
+login
+trade Hanaa_Punaa TigerHide x3            # available: no handler answers, nothing
+trigger Hanaa_Punaa                       # Lizard Skins not completed: Lizard Skins' 559
+finish option=1                           # Lizard Skins: its Prog 1
+quest Sandoria.LizardSkins completed
+fame Sandoria 124
+trigger Hanaa_Punaa                       # Lizard Skins completed, fame level 2: Lizard Skins' 591
+finish
+fame Sandoria 125
+trigger Hanaa_Punaa                       # fame level 3: 576
+finish option=1                           # not option 0: Prog 1
+trigger Hanaa_Punaa                       # Prog 1: 579
+finish option=1                           # not option 0: nothing
+trigger Hanaa_Punaa                       # 579
+finish                                    # option 0: begun
+trigger Hanaa_Punaa                       # accepted: 578
+finish
+trade Hanaa_Punaa BoneChip x1             # nil
+trade Hanaa_Punaa TigerHide x2            # two: nil
+trade Hanaa_Punaa TigerHide x3 BoneChip x1   # not exactly three: nil
+trade Hanaa_Punaa TigerHide x3            # exactly three: 577
+finish                                    # completed: Tiger Stole, fame +30 (155), Cat Skinner, the hides taken
+trigger Hanaa_Punaa                       # completed, fame level 3: 592
+finish
+trade Hanaa_Punaa TigerHide x3            # completed: no trade handler of this quest, nothing
+fame Sandoria 124
+trigger Hanaa_Punaa                       # completed, fame level 2: no 592; Lizard Skins' 591
+finish

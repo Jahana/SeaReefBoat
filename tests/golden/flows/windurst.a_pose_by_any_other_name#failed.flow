@@ -1,0 +1,30 @@
+# A Pose By Any Other Name (windurst 7): the time limit and the failure. 90's option 2 (Option 1), then 91's option 1
+# (begun with Option still 1), the request 92 (Wait = now + 3600). A GM sets Wait to exactly now (the harness clock,
+# 1800000000): `Wait >= now` still holds, so in time (no body: 94); `wait jst=1` moves the system time a day on: over
+# time, 102 (the quest deleted, Prog / Wait / Option 0: the Option row goes, Lower than the Lowest Tunnel Worm,
+# needToZone). While needToZone is set the available section is not met: her script answers. After a zone change the
+# offer is back, and at 90 (Option 0), not 91. 90's option 1 then begins it and sets Option 0 (a GM sets Option 1 while
+# 90 is open, so the write shows), and section 2 answers with 92.
+lists WindurstWaters/Angelica/onTrigger WindurstWaters/onEventFinish/90 WindurstWaters/onEventFinish/91 WindurstWaters/onEventFinish/102
+char zone=WindurstWaters pos=-63.1,-9.25,-8.85
+login
+trigger Angelica                    # available, no body, Option 0: 90
+finish option=2                     # Option 1
+trigger Angelica                    # Option 1: 91
+finish option=1                     # begun, Option stays 1
+trigger Angelica                    # Prog 0: 92 (Prog 12576, Wait = now + 3600)
+finish
+charvar Quest[2][7]Wait 1800000000  # a GM: Wait = now exactly
+trigger Angelica                    # Wait >= now (equal): in time; no body: 94 (1, ...)
+finish
+wait jst=1                          # the system time a day on
+trigger Angelica                    # Wait < now: 102
+finish                              # the quest deleted, Prog / Wait / Option 0 (their rows gone), the title, needToZone
+trigger Angelica                    # available, needToZone: not met; her script 86 (spokenAngelica 0)
+finish
+rezone                              # needToZone cleared
+trigger Angelica                    # available again, Option 0 (102 reset it): 90, not 91
+charvar Quest[2][7]Option 1         # a GM, while 90 is open: so the option-1 arm's SetVar Option 0 shows
+finish option=1                     # begun, Option 0 (its row gone)
+trigger Angelica                    # accepted, Prog 0: 92 (Prog 12576, Wait = now + 3600)
+finish

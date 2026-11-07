@@ -1,0 +1,108 @@
+# Know One's Onions (windurst 40): the reply kinds of sections 4-6. Level 5, Windurst rank 2; Truth, Justice, and the
+# Onion Way! accepted by GM (an earlier container, an Event line on every brigade member: Kohlo-Lakolo 371,
+# Gomada-Vulmada 373, Papo-Hopo 372, Pichichi 374, Pyo Nzon 375, Shanruru 377, Yafa Yaa 376); this quest accepted by
+# GM.
+# - Section 4 (Prog 3): Kohlo-Lakolo's 400 (Progress) beats 371 (finished with a full bag: nothing); an Event 400 would
+#   tie with 371. Each brigade line ties with the first quest's: one talk each, then the other.
+# - Section 5 (rank 3; Prog 0, 1, 2): Kohlo-Lakolo's 389, 387 and 386 each tie with 371; the brigade's 405, 403, 411,
+#   409, 412, 407 tie with the first quest's lines (Shanruru too). Of 386's two talks the one that plays 386 completes
+#   the quest.
+# - Section 6 (completed; Inspector's Gadget available by GM): each new default (replaceDefault) loses to the first
+#   quest's Event line on both talks; without replaceDefault it would tie and play on one of them.
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Gomada-Vulmada/onTrigger PortWindurst/Papo-Hopo/onTrigger PortWindurst/Pichichi/onTrigger PortWindurst/Pyo_Nzon/onTrigger PortWindurst/Shanruru/onTrigger PortWindurst/Yafa_Yaa/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+rank 2
+quest Windurst.TruthJusticeAndTheOnionWay accepted
+quest Windurst.KnowOnesOnions accepted
+charvar Quest[2][40]Prog 3
+login
+trigger Kohlo-Lakolo                           # 400 (Progress) over 371
+fill-inventory
+finish                                         # full: nothing
+free-inventory
+trigger Gomada-Vulmada                         # 373 and 404 tie: 373
+finish
+trigger Gomada-Vulmada                         # 404
+finish
+trigger Papo-Hopo                              # 372 and 402: 372
+finish
+trigger Papo-Hopo                              # 402
+finish
+trigger Pichichi                               # 374 and 410: 374
+finish
+trigger Pichichi                               # 410
+finish
+trigger Pyo_Nzon                               # 375 and 408: 375
+finish
+trigger Pyo_Nzon                               # 408
+finish
+trigger Yafa_Yaa                               # 376 and 406: 376
+finish
+trigger Yafa_Yaa                               # 406
+finish
+rank 3                                         # GM
+charvar Quest[2][40]Prog 0                     # GM: section 5
+trigger Kohlo-Lakolo                           # 371 and 389: one, then the other
+finish
+trigger Kohlo-Lakolo
+finish
+charvar Quest[2][40]Prog 1                     # GM
+trigger Kohlo-Lakolo                           # 371 and 387: one, then the other
+finish
+trigger Kohlo-Lakolo
+finish
+trigger Gomada-Vulmada                         # 373 and 405: one, then the other
+finish
+trigger Gomada-Vulmada
+finish
+trigger Papo-Hopo                              # 372 and 403
+finish
+trigger Papo-Hopo
+finish
+trigger Pichichi                               # 374 and 411
+finish
+trigger Pichichi
+finish
+trigger Pyo_Nzon                               # 375 and 409
+finish
+trigger Pyo_Nzon
+finish
+trigger Shanruru                               # 377 and 412
+finish
+trigger Shanruru
+finish
+trigger Yafa_Yaa                               # 376 and 407
+finish
+trigger Yafa_Yaa
+finish
+charvar Quest[2][40]Prog 2                     # GM
+trigger Kohlo-Lakolo                           # 371 and 386: one, then the other
+finish
+trigger Kohlo-Lakolo
+finish                                         # (386: completed)
+quest Windurst.KnowOnesOnions completed        # GM (already completed by 386: no change)
+quest Windurst.InspectorsGadget available      # GM: section 6
+trigger Gomada-Vulmada                         # 405 (replaceDefault) under 373: 373, twice
+finish
+trigger Gomada-Vulmada
+finish
+trigger Papo-Hopo                              # 403 under 372
+finish
+trigger Papo-Hopo
+finish
+trigger Pichichi                               # 411 under 374
+finish
+trigger Pichichi
+finish
+trigger Pyo_Nzon                               # 409 under 375
+finish
+trigger Pyo_Nzon
+finish
+trigger Shanruru                               # 412 under 377
+finish
+trigger Shanruru
+finish
+trigger Yafa_Yaa                               # 407 under 376
+finish
+trigger Yafa_Yaa
+finish

@@ -1,0 +1,24 @@
+# The Amazin' Scorpio (windurst 61) with Lure of the Wildcat (Windurst) accepted (a GM; its Prog 0): Soni-Muni's 735
+# (the Wildcat's Progress event, bit 0) answers before her script, whatever this quest's state; once her bit is set,
+# her script's call answers. Fame 50. Available: 735 (bit 0), then 481, option 0: begun. Accepted, bit 0 unset (a GM):
+# 735; then the stinger: 484 (the Wildcat has no trade at her): completed.
+# Completed, bit 0 unset again: 735, then 485.
+char zone=WindurstWoods pos=-17.0,1.75,-58.0 job=WAR lvl=75
+fame Windurst 50
+item ScorpionStinger
+login
+quest Windurst.LureOfTheWildcat accepted
+trigger Soni-Muni                       # the Wildcat, bit 0 unset: 735
+finish                                  # bit 0
+trigger Soni-Muni                       # bit 0 set; available, level 2: 481 (0, 0, 1017)
+finish option=0                         # begun
+charvar Quest[2][94]Prog 0
+trigger Soni-Muni                       # bit 0 unset: 735 (before this quest's 482)
+finish                                  # bit 0
+trade Soni-Muni ScorpionStinger x1      # accepted: 484 (no Wildcat trade)
+finish                                  # completed; fame 20; Great Grappler Scorpio; 1500 gil; the stinger taken
+charvar Quest[2][94]Prog 0
+trigger Soni-Muni                       # bit 0 unset: 735 (before this quest's 485)
+finish                                  # bit 0
+trigger Soni-Muni                       # completed: 485
+finish

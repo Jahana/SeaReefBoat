@@ -1,0 +1,21 @@
+# I Can Hear a Rainbow (windurst 75): the zone-in's ruby operand and the Prog 0 section's Prog edge, in West Ronfaure.
+# Accepted at Prog 0 by GM with no ruby and Light 0: the login's zone-in and a rezone with NONE: no ruby in the inventory:
+# nothing (the local var Weather not even set). The ruby given by GM: NONE, bit 0 clear: 51, ended by the rezone with
+# option 0 (its finish: Light 1); again: bit 0 set: nothing. Light 0 again: Prog -1 and Prog 1 by GM: no section with
+# the zone-in handlers: nothing; Prog 0: 51 (Light 1).
+lists WestRonfaure/onZoneIn/1 WestRonfaure/onEventFinish/51
+char zone=WestRonfaure pos=-380.0,-35.8,139.3 lvl=30
+quest Windurst.ICanHearARainbow accepted
+login                                          # no ruby: nothing
+weather 0                                      # GM: NONE
+rezone                                         # no ruby: nothing
+item CarbunclesRuby                            # GM
+rezone                                         # the ruby, NONE, bit 0 clear: 51 (Weather 0), ended with option 0: Light 1
+rezone                                         # NONE, bit 0 set: nothing
+charvar Quest[2][75]Light 0                    # GM
+charvar Quest[2][75]Prog -1                    # GM
+rezone                                         # Prog -1: no section: nothing
+charvar Quest[2][75]Prog 1                     # GM
+rezone                                         # Prog 1: the Prog 0 section does not match: nothing
+charvar Quest[2][75]Prog 0                     # GM
+rezone                                         # Prog 0: 51, ended with option 0: Light 1

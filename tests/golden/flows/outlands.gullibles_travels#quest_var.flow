@@ -1,0 +1,11 @@
+# Gullible's Travels (outlands 8), the quest's own var at the completion: accepted, MAGRIFFON_GIL_REQUEST 13000 and
+# Quest[5][8]Prog 1 (GMs). Magriffon: 13000 gil traded, 146; finished: the trade confirmed, the sum taken, the var 0,
+# Windurst fame +30, the title, the raw player:completeQuest, needToZone. The raw completeQuest does no cleanup:
+# Quest[5][8]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=Kazham pos=62.6,-12,-33.9 job=WAR lvl=75 gil=100000
+quest Outlands.GulliblesTravels accepted
+charvar MAGRIFFON_GIL_REQUEST 13000
+charvar Quest[5][8]Prog 1               # a GM: the quest's own var
+login
+trade Magriffon gil=13000               # the sum exactly: 146
+finish                                  # confirmed; the sum taken; fame +30; the title; completed, Prog kept

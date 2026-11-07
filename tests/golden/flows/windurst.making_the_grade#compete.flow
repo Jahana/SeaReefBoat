@@ -1,0 +1,98 @@
+# Making the Grade (windurst 4): its replies next to rival lines, so a Progress line and an Event line differ. A
+# level-10 WAR, Teacher's Pet completed, Windurst fame 225 (level 4: Let Sleeping Dogs Lie's section 1 holds, its
+# Event lines at the children and Mashuu-Ajuu and its Paku-Nakku 481 Progress). NPC scripts made to answer on their
+# turn: Fuepepe's (Class Reunion accepted, ClassReunionProgress 3, ClassReunion_TalkedToFupepe 0: 817, whose finish
+# sets the var to 1; the flow resets it by GM), Pechiru-Mashiru's (the New Model Hat held, QuestHatInHand_var bit 6
+# clear: YOU_SHOW_OFF_THE and 54, whose finish sets the bit; reset by GM), Mashuu-Ajuu's (Reap What You Sow accepted:
+# a random 464 / 476, always), Koru-Moru's (Class Reunion at progress 3: 408, always). The lookup: a Progress line
+# plays on any talk; an Event line takes turns with the script (the quest's turn after a Progress line or a zone change;
+# a default line is an action and takes the action's turn too); two Event lines of the same handler cycle.
+# Fuepepe: 442 (Progress) twice in a row, the second on what would be the script's turn; begun; 443 (Event); 817.
+# Pechiru-Mashiru: 445, then her script. The children (Let Sleeping Dogs Lie's 48x and this quest's 44x / 45x, both
+# Event lines): talked to twice, one line each. Mashuu-Ajuu: 483 / his script / 448. Paku-Nakku: Let Sleeping Dogs
+# Lie's 481 (Progress) over this quest's 452, twice (back to available by GM between). Koru-Moru at Prog 0 with the
+# sheets: 287, then 408; at Prog 2: 286, then 408. Fuepepe at Prog 2: 458, completed; after a zone change 459
+# (importantEvent): Progress the first time, the Event on the quest's turn after it, then his script's 817.
+lists WindurstWaters/Fuepepe/onTrigger WindurstWaters/Pechiru-Mashiru/onTrigger WindurstWaters/Akkeke/onTrigger WindurstWaters/Chomoro-Kyotoro/onTrigger WindurstWaters/Foi-Mui/onTrigger WindurstWaters/Kirarara/onTrigger WindurstWaters/Koko_Lihzeh/onTrigger WindurstWaters/Rukuku/onTrigger WindurstWaters/Mashuu-Ajuu/onTrigger WindurstWaters/Paku-Nakku/onTrigger WindurstWalls/Koru-Moru/onTrigger
+char zone=WindurstWaters pos=165.5,-1.25,161.1 job=WAR lvl=10
+quest Windurst.TeachersPet completed
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 3
+quest Windurst.ReapWhatYouSow accepted
+keyitem NewModelHat
+fame Windurst 225
+item PileOfAnswerSheets
+login
+trigger Fuepepe                               # available: 442 (Progress)
+finish option=0                               # not 1: nothing
+trigger Fuepepe                               # 442 again: a Progress line plays on what would be his script's turn
+finish option=0
+trigger Fuepepe                               # 442
+finish option=1                               # begun
+trigger Fuepepe                               # Prog 0: 443 (the quest's turn after a Progress line)
+finish
+trigger Fuepepe                               # his script's turn: Class Reunion's 817
+finish                                        # ClassReunion_TalkedToFupepe 1
+charvar ClassReunion_TalkedToFupepe 0
+trigger Pechiru-Mashiru                       # 445 (the first talk here)
+finish
+trigger Pechiru-Mashiru                       # her script's turn: YOU_SHOW_OFF_THE, 54
+finish                                        # QuestHatInHand_var bit 6
+charvar QuestHatInHand_var 0
+trigger Akkeke                                # Let Sleeping Dogs Lie's 484 (the Event lines cycle in the container order)
+finish
+trigger Akkeke                                # this quest's 453 (the next Event line)
+finish
+trigger Chomoro-Kyotoro                       # Let Sleeping Dogs Lie's 489 (the Event lines cycle in the container order)
+finish
+trigger Chomoro-Kyotoro                       # this quest's 454 (the next Event line)
+finish
+trigger Foi-Mui                               # Let Sleeping Dogs Lie's 486 (the Event lines cycle in the container order)
+finish
+trigger Foi-Mui                               # this quest's 449 (the next Event line)
+finish
+trigger Kirarara                              # Let Sleeping Dogs Lie's 485 (the Event lines cycle in the container order)
+finish
+trigger Kirarara                              # this quest's 447 (the next Event line)
+finish
+trigger Koko_Lihzeh                           # Let Sleeping Dogs Lie's 488 (the Event lines cycle in the container order)
+finish
+trigger Koko_Lihzeh                           # this quest's 451 (the next Event line)
+finish
+trigger Rukuku                                # Let Sleeping Dogs Lie's 487 (the Event lines cycle in the container order)
+finish
+trigger Rukuku                                # this quest's 450 (the next Event line)
+finish
+trigger Mashuu-Ajuu                           # Let Sleeping Dogs Lie's 483 (the Event lines cycle in the container order)
+finish
+trigger Mashuu-Ajuu                           # his script's turn: Reap What You Sow's 464
+finish
+trigger Mashuu-Ajuu                           # this quest's 448 (the next Event line)
+finish
+trigger Paku-Nakku                            # Let Sleeping Dogs Lie's 481 (Progress) over this quest's 452
+finish                                        # 481's finish begins that quest
+quest Windurst.LetSleepingDogsLie available
+trigger Paku-Nakku                            # 481 again
+finish
+quest Windurst.LetSleepingDogsLie available
+warp -119.7,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                             # Prog 0, the sheets held: 287 (the first talk here)
+finish
+trigger Koru-Moru                             # his script's turn: Class Reunion's 408
+finish
+charvar Quest[2][4]Prog 2
+trigger Koru-Moru                             # Prog 2: 286 (the quest's turn)
+finish
+trigger Koru-Moru                             # his script's turn: 408
+finish
+warp 165.5,-1.25,161.1 WindurstWaters
+trigger Fuepepe                               # Prog 2: 458 (the first talk after the zone change)
+finish                                        # completed: fame 30, the Scroll of Aspir; the mustZone
+warp -103.9,-3.25,107.9 PortWindurst          # the mustZone cleared on the zone change
+warp 165.5,-1.25,161.1 WindurstWaters         # back
+trigger Fuepepe                               # completed, no mustZone: 459 (importantEvent: Progress the first time)
+finish
+trigger Fuepepe                               # 459 (now an Event, on the quest's turn after the Progress)
+finish
+trigger Fuepepe                               # his script's turn: 817
+finish

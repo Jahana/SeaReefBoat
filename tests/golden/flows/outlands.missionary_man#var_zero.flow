@@ -1,0 +1,17 @@
+# Missionary Man, outside the var's quest arms: accepted (a GM) with MissionaryManVar 0: Rauteinot falls to the script's
+# 136; with 5 (a GM): 136. Completed (a GM) with the var 1 (a GM): the marble traded: 139 (the trade reads the var
+# only), finished: the var 2, the parcel, the marble taken.
+char zone=Kazham pos=-37.9,-10,-89.7 job=WHM lvl=75
+fame Windurst 125
+item SlabOfElshimoMarble
+quest Outlands.MissionaryMan accepted
+login
+trigger Rauteinot                       # accepted, the var 0: 136
+finish
+charvar MissionaryManVar 5              # a GM
+trigger Rauteinot                       # accepted, the var 5: 136
+finish
+quest Outlands.MissionaryMan completed
+charvar MissionaryManVar 1              # a GM
+trade Rauteinot SlabOfElshimoMarble x1  # the var 1, completed: 139
+finish                                  # the var 2; the parcel; the marble taken

@@ -1,0 +1,43 @@
+# Growing Flowers (sandoria 58): Kuu Mohzolhi in Northern San d'Oria (no NPC script, no default event; no other quest
+# or mission names him). Every talk and trade answers 605 (0, 231, n); the finish's option is the client's answer,
+# which the flow gives: 0 after a wrong item, 1 after a flower, 10 after a talk, 1002 after the Marguerite. Available,
+# a bone chip (n 0; option 0: begun, the chip kept); accepted: a Red Rose (n 1; option 0: kept; option 1: taken); a chip with
+# option 1 (nothing confirmed: nothing taken); a rose and a chip, a Marguerite and a chip, two Marguerites (not exactly
+# one flower: n 0); a talk (n 10; option 10: nothing); the Marguerite (n 2; option 1002: completed with fame 0, the
+# Marguerite taken, Mog House flag 0 + 0x0001, MOGHOUSE_EXIT). Completed: the Marguerite (n 4, option 1002: no finish
+# handler, kept), a rose (n 5), a chip (n 0), a Marguerite and a chip (n 0), a talk (n 10). #mhflag varies the flag the
+# sum reads.
+lists NorthernSanDoria/Kuu_Mohzolhi/onTrigger NorthernSanDoria/Kuu_Mohzolhi/onTrade NorthernSanDoria/onEventFinish/605
+char zone=NorthernSanDoria pos=-121.6,-0.2,80.5
+item BoneChip x2
+item RedRose x3
+item Marguerite x3
+login
+trade Kuu_Mohzolhi BoneChip x1            # available, not a flower: 605 (0, 231, 0)
+finish option=0                           # option 0: nothing taken; available: begun
+trade Kuu_Mohzolhi RedRose x1             # accepted, a flower: 605 (0, 231, 1)
+finish option=0                           # not option 1: no confirmTrade, the rose kept; accepted: no begin
+trade Kuu_Mohzolhi RedRose x1             # accepted, a flower: 605 (0, 231, 1)
+finish option=1                           # option 1: the rose taken; accepted: no begin
+trade Kuu_Mohzolhi BoneChip x1            # not a flower: 605 (0, 231, 0)
+finish option=1                           # option 1: confirmTrade, but nothing was confirmed: the chip kept
+trade Kuu_Mohzolhi RedRose x1 BoneChip x1 # not exactly one flower: 605 (0, 231, 0)
+finish option=0
+trade Kuu_Mohzolhi Marguerite x1 BoneChip x1   # not exactly the Marguerite, nor one flower: 605 (0, 231, 0)
+finish option=0
+trade Kuu_Mohzolhi Marguerite x2          # two: not exactly one: 605 (0, 231, 0)
+finish option=0
+trigger Kuu_Mohzolhi                      # 605 (0, 231, 10)
+finish option=10                          # cancel: nothing
+trade Kuu_Mohzolhi Marguerite x1          # the Marguerite: 605 (0, 231, 2)
+finish option=1002                        # completed (fame 0); the Marguerite taken; Mog House flag 1; MOGHOUSE_EXIT
+trade Kuu_Mohzolhi Marguerite x1          # completed: 605 (0, 231, 4)
+finish option=1002                        # completed: no finish handler; nothing taken
+trade Kuu_Mohzolhi RedRose x1             # completed, a flower: 605 (0, 231, 5)
+finish option=1                           # no finish handler: the rose kept
+trade Kuu_Mohzolhi BoneChip x1            # completed, not a flower: 605 (0, 231, 0)
+finish option=0
+trade Kuu_Mohzolhi Marguerite x1 BoneChip x1   # completed, not exactly the Marguerite, nor one flower: 605 (0, 231, 0)
+finish option=0
+trigger Kuu_Mohzolhi                      # completed: 605 (0, 231, 10)
+finish option=10

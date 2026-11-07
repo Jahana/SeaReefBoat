@@ -1,0 +1,27 @@
+# Trust: Abquhbah (hidden quest TrustAbquhbah): a level 99 Warrior in Aht Urhgan Whitegate (nation 1, Bastok).
+# Abquhbah has his own script (default none). No permit and no mission: the check fails: his script. The Bastok
+# Trust Permit (a GM, the permit helper accepts any of the three): Immortal Sentries only current (not completed):
+# his script; completed, but RoV not at Ever Forward (none): his script; Ever Forward current: 170 ([1] 1, [2] 1,
+# text_table 0). Finished with a full inventory: giveItem fails, no cipher; with room: the cipher. The cipher held:
+# the check fails: his script.
+lists AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/onEventFinish/170
+char zone=AhtUrhganWhitegate pos=35.5,-6.6,-56.7 job=WAR lvl=99 nation=1
+login
+trigger Abquhbah                        # no permit: the check fails: his script
+finish-if-event
+keyitem BastokTrustPermit               # a GM
+mission Toau ImmortalSentries current   # a GM
+trigger Abquhbah                        # Immortal Sentries not completed: the check fails: his script
+finish-if-event
+mission Toau ImmortalSentries completed # a GM
+trigger Abquhbah                        # RoV below Ever Forward (none): the check fails: his script
+finish-if-event
+mission Rov EverForward current         # a GM
+fill-inventory
+trigger Abquhbah                        # 170 ([1] 1, [2] 1)
+finish                                  # no room: giveItem fails, no cipher
+free-inventory
+trigger Abquhbah                        # 170 again
+finish                                  # the cipher
+trigger Abquhbah                        # the cipher held: the check fails: his script
+finish-if-event

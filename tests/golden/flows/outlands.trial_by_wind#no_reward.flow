@@ -1,0 +1,23 @@
+# Trial by Wind (outlands 194), 69 answered with no reward option, with room (P9, D6): option 0, and above 6 (7), take
+# the finish's last branch, player:addItem(0): the engine only warns (C++ ShowWarning "AddItem: Item <0> is not found
+# in a database"; the C# engine logs it as a lua: line), gives nothing, and the finish goes on: ITEM_OBTAINED 0, Heir
+# of the Great Wind, the whisper taken, TrialByWind_date set, the fame, completed. Accepted by GM with the whisper;
+# after the first completion the date is set behind (GM) for 66 (Selbina-Rabao level 5), whose option 1 begins the
+# quest again.
+warning: lua: AddItem: Item <0> is not found in a database -- 69 at 0 / 7: addItem(0) warns; the finish completes
+char zone=Rabao pos=-16.5,7.8,-10.5 job=WAR lvl=75
+fame Sandoria 244
+fame Bastok 244                           # Selbina-Rabao 325
+quest Outlands.TrialByWind accepted
+keyitem WhisperOfGales
+login
+trigger Agado-Pugado                      # accepted, the whisper: 69
+finish option=0                           # no reward option: addItem(0) warns; ITEM_OBTAINED 0; completed
+trigger Agado-Pugado                      # completed, the date ahead: 70
+finish
+charvar TrialByWind_date 1                # GM: the date behind
+trigger Agado-Pugado                      # 66
+finish option=1                           # begun again; the fork
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # 69
+finish option=7                           # above 6: the same as 0; completed

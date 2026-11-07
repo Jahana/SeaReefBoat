@@ -1,0 +1,35 @@
+# A Thief in Norg!? (outlands 142) with its era module, modules/era/lua/quests/outlands/a_thief_in_norg.lua, enabled by
+# xi.pre(SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0): the helm repaired at JST midnight. A level 50 Samurai, the SAM chain
+# before it completed, A Thief in Norg!? accepted at Prog 8 with the Charred Helm and a Spool of Gold Thread (GMs). The
+# thread traded: 162, finished: the quest's own finish (the thread and the helm taken, Prog 9, the mustZone, Wait now +
+# 60), then the module's Wait = JstMidnight() (1800025200). 163 (the mustZone); out and back: 163 (now < Wait); Wait
+# 1800000001 (a GM): 163; Wait 1800000000: 164, finished: completed.
+module modules/era/lua/quests/outlands/a_thief_in_norg.lua
+lists Norg/Jaucribaix/onTrigger Norg/Jaucribaix/onTrade Norg/onEventFinish/162
+char zone=Norg pos=91,-7,-8 job=SAM lvl=50
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+quest Outlands.AThiefInNorg accepted
+charvar Quest[5][142]Prog 8
+keyitem CharredHelm
+item SpoolOfGoldThread
+login
+trigger Jaucribaix                      # Prog 8: 161
+finish
+trade Jaucribaix SpoolOfGoldThread x1   # the helm held: 162
+finish                                  # the quest's (Prog 9, the mustZone, Wait now + 60), then Wait = JstMidnight()
+trigger Jaucribaix                      # the mustZone: 163
+finish
+warp -63,7,0 PortJeuno                  # the mustZone cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # now < Wait (JST midnight): 163
+finish
+charvar Quest[5][142]Wait 1800000001    # a GM: one second past now
+trigger Jaucribaix                      # 163
+finish
+charvar Quest[5][142]Wait 1800000000    # a GM: now
+trigger Jaucribaix                      # 164
+finish                                  # completed

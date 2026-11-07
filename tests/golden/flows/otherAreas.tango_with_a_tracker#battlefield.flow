@@ -1,0 +1,53 @@
+# Tango with a Tracker (otherAreas 82): the battlefield finishes' other arms and the accepted section's Despachiaire.
+# CoP When Angels Fall current (A Fate Decided completed), X Marks the Spot completed (a GM). Despachiaire 576,
+# finished: the letter, the wait 1800198000, Prog 1. The Letter from Shikaree Y (a GM). _081's menu closed with no entry
+# (finish, no update): no battlefield, nothing. Requiem of Sin's battlefield (678, index 6) entered: Tango's 32000
+# finish: not 677, still available; won (bfwin: Requiem's fight ends in an Armoury Crate), 32001: Tango has no 32001
+# handler while available (the char stays in the arena after it, so the next menu comes after a zone change). Accepted
+# (a GM): the letter held, the wait 0 (a GM): nil, 317; the wait 1800198000 again (a GM), taken away (a GM), the wait =
+# the tally: 317; the wait 1800197999 (a GM): 577, finished: the letter, the wait 1800198000; the letter held: 317.
+# Three JST days on (the tally 1800802800), the letter taken away: 577, finished: the wait 1800802800. Requiem of Sin's
+# battlefield again (the letter Y, a GM), battlefieldWin 678 (a GM, in the arena: Requiem is not accepted, so its own
+# win sets none): won, 32001: not 677, not completed.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/576 TavnazianSafehold/onEventFinish/577 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+mission Cop WhenAngelsFall current
+quest OtherAreas.XMarksTheSpot completed
+login
+trigger Despachiaire                    # 576
+finish                                  # the letter; the wait 1800198000; Prog 1
+keyitem LetterFromShikareeY             # a GM
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081                            # the letters: the 32000 menu
+finish                                  # no entry: no battlefield; nothing
+trigger _081                            # the 32000 menu
+update 32000 option=97                  # index 6, area 1: Requiem of Sin (678)
+finish                                  # in 678: Tango's 32000: not 677; still available
+bfwin                                   # a GM: won; 32001
+finish                                  # Tango available: no 32001 handler
+quest OtherAreas.TangoWithATracker accepted # a GM
+warp 112.7,-40,-85.5 TavnazianSafehold
+charvar ShikareeBattleWait 0            # a GM
+trigger Despachiaire                    # the letter held, the wait below the tally: nil; 317
+finish
+charvar ShikareeBattleWait 1800198000   # a GM: = the tally
+delkeyitem LetterFromShikareeX          # a GM
+trigger Despachiaire                    # the wait = the tally: nil; 317
+finish
+charvar ShikareeBattleWait 1800197999   # a GM
+trigger Despachiaire                    # the wait below the tally, no letter: 577
+finish                                  # the letter; the wait 1800198000
+trigger Despachiaire                    # the letter held: 317
+finish
+wait jst=3                              # Monday: the tally 1800802800
+delkeyitem LetterFromShikareeX          # a GM
+trigger Despachiaire                    # 577
+finish                                  # the letter; the wait 1800802800
+keyitem LetterFromShikareeY             # a GM
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081                            # the letters: the 32000 menu
+update 32000 option=97                  # index 6, area 1: Requiem of Sin (678)
+finish                                  # in 678 (Tango's accepted section has no 32000)
+localvar battlefieldWin 678             # a GM
+bfwin                                   # a GM: won; 32001
+finish                                  # battlefieldWin 678: not 677; not completed

@@ -1,0 +1,43 @@
+# Promotion: Sergeant Major's reply kinds at Naja Salaheem (no script, no default): each Progress line against Private
+# First Class's 5001 (an Event), in GM-made states out of play order (the lookup ranks only the actions up at the talk).
+# The containers run in file order (Chief Sergeant, Corporal, First Lieutenant, Lance Corporal, Private First Class,
+# Second Lieutenant, Sergeant, Sergeant Major, Superior Private): an Event tie would play Private First Class's 5001
+# first. Main (Sergeant completed, AssaultPromotion 25, Private First Class accepted by a GM): 5048 over 5001; then each
+# Stage set by a GM with Prog 0 (a day before today): 5049, 5050, 5051, 5052, 5053, 5054 over 5001; 5054 finished:
+# completed; then 5001.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionPrivateFirstClass accepted
+charvar AssaultPromotion 25
+login
+trigger Naja_Salaheem                   # 5048 (Progress) over 5001 (Event)
+finish option=3                         # begun; Stage 0, Prog today
+charvar Quest[6][95]Prog 0              # a GM: the day passed
+trigger Naja_Salaheem                   # Stage 0: 5049 over 5001
+finish option=3
+charvar Quest[6][95]Prog 0              # a GM
+charvar Quest[6][95]Stage 1             # a GM
+trigger Naja_Salaheem                   # 5050 over 5001
+finish option=2
+charvar Quest[6][95]Prog 0              # a GM
+charvar Quest[6][95]Stage 2             # a GM
+trigger Naja_Salaheem                   # 5051 over 5001
+finish option=3
+charvar Quest[6][95]Prog 0              # a GM
+charvar Quest[6][95]Stage 3             # a GM
+trigger Naja_Salaheem                   # 5052 over 5001
+finish option=3
+charvar Quest[6][95]Prog 0              # a GM
+charvar Quest[6][95]Stage 4             # a GM
+trigger Naja_Salaheem                   # 5053 over 5001
+finish option=3
+charvar Quest[6][95]Prog 0              # a GM
+charvar Quest[6][95]Stage 5             # a GM
+trigger Naja_Salaheem                   # 5054 over 5001
+finish                                  # completed
+trigger Naja_Salaheem                   # 5001 alone
+finish

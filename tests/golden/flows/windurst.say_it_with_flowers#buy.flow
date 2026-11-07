@@ -1,0 +1,33 @@
+# Say it with Flowers (windurst 50): buying from Ohbiru's 516 with 150 gil (accepted by GM, Prog 1). Option 6 (no
+# flowerList[6]) and option 0 (a Carnation, 300 gil) both get WHAT_DO_YOU_MEAN; option 8 does nothing; option 3 (a
+# Lilac, 150 gil: `getGil() >= gil` with exactly 150) with a full bag gives nothing; with room, the Lilac, -150 gil and
+# the mustZone; then Ohbiru's 518, and with a GM Option 1 beside the mustZone his 517 (the Option line comes first); the
+# Lilac handed to Moari completes the quest (522).
+lists WindurstWaters/Moari-Kaaori/onTrade WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/onEventFinish/516 WindurstWaters/onEventFinish/522
+char zone=WindurstWaters pos=24.0,-5.38,-197.7 gil=150
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+quest Windurst.SayItWithFlowers accepted
+charvar Quest[2][50]Prog 1
+fame Windurst 50
+login
+trigger Ohbiru-Dohbiru                  # 516
+finish option=6                         # no flowerList[6]: WHAT_DO_YOU_MEAN
+trigger Ohbiru-Dohbiru                  # 516
+finish option=0                         # a Carnation costs 300 (150 held): WHAT_DO_YOU_MEAN
+trigger Ohbiru-Dohbiru                  # 516
+finish option=8                         # neither < 7 nor 7: nothing
+fill-inventory
+trigger Ohbiru-Dohbiru                  # 516
+finish option=3                         # a Lilac (150, 150 held): no room, nothing
+free-inventory
+trigger Ohbiru-Dohbiru                  # 516
+finish option=3                         # the Lilac; -150 gil; mustZone
+trigger Ohbiru-Dohbiru                  # Option 0, mustZone: 518
+finish
+charvar Quest[2][50]Option 1            # a GM sets Option 1 while the mustZone holds
+trigger Ohbiru-Dohbiru                  # Option 1 comes before mustZone: event 517
+finish
+warp -251.5,-5.31,-226.9 WindurstWaters # a warp in place from the same moghouse zone: the mustZone cleared (player.lua)
+trade Moari-Kaaori Lilac x1             # a flower: 522
+finish                                  # completed; the Lilac taken; fame +10; +100 gil; mustZone

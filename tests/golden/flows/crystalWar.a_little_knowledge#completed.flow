@@ -1,0 +1,19 @@
+# A Little Knowledge (crystalWar 6), completed: a level 99 Scholar in The Eldieme Necropolis [S] with the quest
+# completed (a GM: the main flow completes it with `effect 47`; here it starts completed, with neither spell; missions
+# as the main flow). AF1_QUEST_LEVEL 100 keeps On Sabbatical unavailable (its 18 would tie with 47, both progress
+# events: the lookup rotates ties). Erlene: a Scholar of 5+ knowing neither spell: 47, finished: Embrava and Kaustra
+# (silently), YOU_LEARN_EMBRAVA_AND_KAUSTRA. Erlene: the spells known: 15 (replaceDefault).
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/47
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=SCH lvl=99
+quest CrystalWar.ALittleKnowledge completed
+setting AF1_QUEST_LEVEL 100
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erlene                          # completed, a Scholar of 99, neither spell: 47
+finish                                  # Embrava, Kaustra (silentLog); YOU_LEARN_EMBRAVA_AND_KAUSTRA
+trigger Erlene                          # the spells known: 15 (replaceDefault)
+finish

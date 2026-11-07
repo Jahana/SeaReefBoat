@@ -1,0 +1,36 @@
+# Beyond the Stars (jeuno 135), the level either side of 80 and of 75 (> 80 / >= 75 / below) and the Limit Breaker:
+# Warriors at cap 85, the two earlier limit breaks completed (level 81 with the key is the main flow's). Level 74
+# (main): 10045 (74, 1, 0, 0); 75 (c75): (75, 1, 2, 2); 80 (c80): (80, 1, 2, 2); level 81 without the Limit Breaker
+# (nokey): (81, 2, 0, 0).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=74
+char c75 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=75
+char c80 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=80
+char nokey zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=81
+keyitem LimitBreaker
+levelcap 85
+quest Jeuno.NewWorldsAwait completed
+quest Jeuno.ExpandingHorizons completed
+c75: keyitem LimitBreaker
+c75: levelcap 85
+c75: quest Jeuno.NewWorldsAwait completed
+c75: quest Jeuno.ExpandingHorizons completed
+c80: keyitem LimitBreaker
+c80: levelcap 85
+c80: quest Jeuno.NewWorldsAwait completed
+c80: quest Jeuno.ExpandingHorizons completed
+nokey: levelcap 85
+nokey: quest Jeuno.NewWorldsAwait completed
+nokey: quest Jeuno.ExpandingHorizons completed
+login
+trigger Nomad_Moogle                    # level 74: 10045 (74, 1, 0, 0)
+finish option=0
+c75: login
+c75: trigger Nomad_Moogle               # level 75: 10045 (75, 1, 2, 2)
+c75: finish option=0
+c80: login
+c80: trigger Nomad_Moogle               # level 80: 10045 (80, 1, 2, 2)
+c80: finish option=0
+nokey: login
+nokey: trigger Nomad_Moogle             # no Limit Breaker: 10045 (81, 2, 0, 0)
+nokey: finish option=0

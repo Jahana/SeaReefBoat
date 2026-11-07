@@ -1,0 +1,39 @@
+# To Cure a Cough (sandoria 20), each status operand alone (the GM sets the status, the other operands hold). Nenne, The
+# Medicine Woman completed, toCureaCough 0, no medicine: available 538, accepted 584, completed 584. Amaura at DiaryPage
+# 0, no key item (her default 642 alternates with the script): available silent, completed silent, accepted 645. The
+# qm1, no moss: available nothing, completed nothing, accepted the Thyme Moss.
+char zone=SouthernSanDoria pos=-112.6,-6.9,105.2 job=WAR lvl=30
+quest Sandoria.TheMedicineWoman completed
+login
+trigger Nenne                             # available: 538
+finish                                    # toCureaCough 1
+charvar toCureaCough 0
+quest Sandoria.ToCureACough accepted
+trigger Nenne                             # accepted: 584
+finish
+quest Sandoria.ToCureACough completed
+trigger Nenne                             # completed: 584
+finish
+warp -82.4,-6.9,91.1 SouthernSanDoria
+trigger Amaura                            # completed, DiaryPage 0
+finish-if-event
+trigger Amaura
+finish-if-event
+quest Sandoria.ToCureACough available
+trigger Amaura                            # available, DiaryPage 0
+finish-if-event
+trigger Amaura
+finish-if-event
+quest Sandoria.ToCureACough accepted
+trigger Amaura                            # accepted, DiaryPage 0, no key item
+finish-if-event
+trigger Amaura                            # 645 (the previous talk, line 28, took 642)
+finish-if-event
+quest Sandoria.ToCureACough available
+warp -113.8,-0.4,-184.3 Davoi
+trigger qm1                               # available, no moss: nothing
+quest Sandoria.ToCureACough completed
+trigger qm1                               # completed, no moss: nothing
+quest Sandoria.ToCureACough available
+quest Sandoria.ToCureACough accepted
+trigger qm1                               # accepted, no moss: the Thyme Moss

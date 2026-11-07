@@ -1,0 +1,94 @@
+# Bugi Soden's edges; every char has Twenty in Pirate Years accepted without the Trick Box (GMs: Ryoma's script does
+# nothing). Section 1 off, one operand each (katana skill 2500 unless said), each the lookup's default action 94: bob (a
+# level 75 Warrior: cannot wear the kodachi); carl (a level 70 Ninja: the kodachi is level 71); dan (a level 75 Ninja,
+# skill 2499); ed (a level 75 Ninja, the Weapon Training Guide held). Main (a level 75 Ninja, a Kodachi of Trials with
+# 299 points, a Hatchet): 184, option 1: begun. 185, option 0: the kodachi held: nothing. The kodachi with a Hatchet: nil;
+# the kodachi alone (299): 186 (unfinished; kept). 185, option 2: the quest dropped, the guide and the map taken. fred (a
+# level 75 Ninja, no kodachi): 184, option 2: not 1: nothing; out of Norg and back: 184, option 1 with a full inventory:
+# giveItem false: not begun; out and back: 184, option 1: the kodachi given, begun. ed (accepted by a GM after the guard check, no kodachi): 185, option 0: the kodachi
+# given; the map (a GM): 188. Onzozo's qm1 (ed): the map and the annals held (GMs): nil; the annals taken: Megapod
+# Megalops popped; qm1 again (up: popFromQM false): nil; the map taken (a GM), the NM killed: no killed_wsnm; qm1: nil;
+# the NM despawned and faded out (ticks): qm1 with no map: nil (no pop).
+# Not reachable: 189's quest:complete false (no item reward).
+lists Norg/Ryoma/onTrigger Norg/Ryoma/onTrade Norg/onEventFinish/185 LabyrinthOfOnzozo/qm1/onTrigger
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+char bob zone=Norg pos=-26.276,0.53,-8.323 job=WAR lvl=75
+char carl zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=70
+char dan zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+char ed zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+char fred zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+quest Outlands.TwentyInPirateYears accepted
+skill Katana 2500
+item KodachiOfTrials wsp=299
+item Hatchet
+bob: quest Outlands.TwentyInPirateYears accepted
+bob: skill Katana 2500
+carl: quest Outlands.TwentyInPirateYears accepted
+carl: skill Katana 2500
+dan: quest Outlands.TwentyInPirateYears accepted
+dan: skill Katana 2499
+ed: quest Outlands.TwentyInPirateYears accepted
+ed: skill Katana 2500
+ed: keyitem WeaponTrainingGuide
+fred: quest Outlands.TwentyInPirateYears accepted
+fred: skill Katana 2500
+login
+bob: login
+bob: trigger Ryoma                      # a Warrior: the default 94
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trigger Ryoma                     # level 70 < the kodachi's 71: the default 94
+carl: finish-if-event
+carl: logout
+dan: login
+dan: trigger Ryoma                      # skill 2499: the default 94
+dan: finish-if-event
+dan: logout
+trigger Ryoma                           # 184
+finish option=1                         # the kodachi held: the guide; begun
+trigger Ryoma                           # 185
+finish option=0                         # not 2, the kodachi held: nothing
+trade Ryoma KodachiOfTrials x1 Hatchet x1   # not the kodachi alone: nil
+trade Ryoma KodachiOfTrials x1          # 299 points: 186 (kept)
+finish
+trigger Ryoma                           # 185
+finish option=2                         # dropped: the guide and the map taken
+fred: login
+fred: trigger Ryoma                     # 184
+fred: finish option=2                   # not 1: nothing
+fred: warp -94.579,-2.299,30.463 PortBastok   # out of Norg and back: the once-per-zone mark cleared
+fred: warp -26.276,0.53,-8.323 Norg
+fred: trigger Ryoma                     # 184
+fred: fill-inventory
+fred: finish option=1                   # no kodachi, giveItem false: nothing
+fred: free-inventory
+fred: warp -94.579,-2.299,30.463 PortBastok   # out of Norg and back: the once-per-zone mark cleared
+fred: warp -26.276,0.53,-8.323 Norg
+fred: trigger Ryoma                     # 184
+fred: finish option=1                   # the kodachi given; the guide; begun
+fred: logout
+ed: login
+ed: trigger Ryoma                       # the guide held: the default 94
+ed: finish-if-event
+ed: quest Outlands.BugiSoden accepted   # a GM
+ed: trigger Ryoma                       # 185
+ed: finish option=0                     # no kodachi: the kodachi given
+ed: keyitem MapToTheAnnalsOfTruth       # a GM
+ed: trigger Ryoma                       # the map: 188
+ed: finish
+ed: keyitem AnnalsOfTruth               # a GM
+ed: warp 110.479,14.976,161.904 LabyrinthOfOnzozo
+ed: trigger qm1                         # the map and the annals: nil: the default
+ed: delkeyitem AnnalsOfTruth            # a GM
+ed: trigger qm1                         # Megapod Megalops popped; SENSE_OMINOUS_PRESENCE
+ed: trigger qm1                         # up: popFromQM false: nil: the default
+ed: delkeyitem MapToTheAnnalsOfTruth    # a GM
+ed: kill MEGAPOD_MEGALOPS               # no map: no killed_wsnm
+ed: trigger qm1                         # killed_wsnm 0, no map: nil: the default
+tick 4000
+tick 4000
+tick 4000
+tick 4000                               # the despawn (0x038 kesu)
+tick 4000                               # 3 s later: faded out (not spawned)
+ed: trigger qm1                         # the NM despawned, no map: nil: the default (no pop)

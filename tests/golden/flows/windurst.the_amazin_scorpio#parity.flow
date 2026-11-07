@@ -1,0 +1,13 @@
+# The Amazin' Scorpio (windurst 61), completion parity: 484's finish is npcUtil.completeQuest step for step
+# (fame 20 Windurst, the gil with GIL_OBTAINED, the title), ending in the raw player:completeQuest, so a GM's
+# Quest[2][61]Prog survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it).
+# Accepted (GM); the trigger walks beside Soni-Muni (she patrols).
+char zone=WindurstWoods pos=-17.0,1.75,-58.0 job=WAR lvl=75
+item ScorpionStinger
+login
+quest Windurst.TheAmazinScorpio accepted
+charvar Quest[2][61]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Soni-Muni                       # accepted: 482 (beside her)
+finish
+trade Soni-Muni ScorpionStinger x1      # 484
+finish                                  # fame 20; 1500 gil; Great Grappler Scorpio; completed; the stinger; Prog kept

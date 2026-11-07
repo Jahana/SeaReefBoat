@@ -1,0 +1,36 @@
+# Mog House Exposition's section 2 (the Moogle, not the home nation, oNation 1) next to the three Moogle quests that
+# accept the Moogle in any Mog House while accepted (Give a Moogle a Break, The Moogle's Picnic!, Moogles in the Wild).
+# A char of nation 0 in Bastok Mines' Mog House, ENABLE_AMK 0. Each quest accepted at Prog 0 alone with oNation 1, then
+# all three at once: the trace order lines show whose handler answers first.
+lists BastokMines/Moogle/onTrigger BastokMines/onEventFinish/30001 BastokMines/onEventFinish/30006 BastokMines/onEventFinish/30010 BastokMines/onEventFinish/30014
+char zone=BastokMines pos=116.9,-1.6,-72 job=WAR lvl=75 nation=0
+setting ENABLE_AMK 0                    # AMK's 30023 ties at the Moogle: #kinds
+setting ENABLE_ROV 0
+login
+warp 116.9,-1.6,-72 BastokMines
+quest OtherAreas.GiveAMoogleABreak accepted # a GM
+zoneline BastokMines                    # the Mog House of another nation
+charvar HQuest[moghouseExpo]oNation 1   # a GM
+trigger Moogle                          # both answer: the tie-break
+finish
+warp 116.9,-1.6,-72 BastokMines
+quest OtherAreas.GiveAMoogleABreak available # a GM
+quest OtherAreas.TheMooglePicnic accepted # a GM
+zoneline BastokMines
+charvar HQuest[moghouseExpo]oNation 1   # a GM
+trigger Moogle
+finish
+warp 116.9,-1.6,-72 BastokMines
+quest OtherAreas.TheMooglePicnic available # a GM
+quest OtherAreas.MooglesInTheWild accepted # a GM
+zoneline BastokMines
+charvar HQuest[moghouseExpo]oNation 1   # a GM
+trigger Moogle
+finish
+warp 116.9,-1.6,-72 BastokMines
+quest OtherAreas.GiveAMoogleABreak accepted # a GM
+quest OtherAreas.TheMooglePicnic accepted # a GM
+zoneline BastokMines
+charvar HQuest[moghouseExpo]oNation 1   # a GM
+trigger Moogle                          # all four
+finish

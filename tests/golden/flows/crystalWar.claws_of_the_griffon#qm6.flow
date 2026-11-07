@@ -1,0 +1,46 @@
+# Claws of the Griffon (crystalWar 16) at qm6 beside Perils of the Griffon (a Lua quest, accepted: a GM; its qm6
+# reply is the Progress 210 until the Orcish Warmachine Body is held): a level 99 Warrior in Jugner Forest [S] with
+# Gifts of the Griffon completed and Claws accepted at Prog 2 (GMs; missions as the main flow). Two Progress replies
+# tie: the first tie takes container order (Claws' 201), and the tie written to the rotation var plays Perils' 210
+# the next time (a mutant Event 210 would lose to 201). qm6: 201, finished: Prog 3; Prog 2 again (a GM): 210,
+# finished: the body (taken back by a GM). Prog 3 (a GM), then Prog 4 (a GM, the NM never spawned): 203, not 202,
+# finished: completed; set back to accepted at Prog 3 (GMs): 202, finished: Fingerfilcher Dradzad spawned. Prog 5 (a
+# GM) and the NM killed: a death past its step changes nothing: qm6 answers Perils' 210, finished: the body held
+# (taken back by a GM). Prog 4 (a GM), out to Southern San d'Oria [S] and back (the NM gone): 203 beats 210 and 202,
+# finished: completed.
+lists JugnerForestS/qm6/onTrigger JugnerForestS/Fingerfilcher_Dradzad/onMobDeath JugnerForestS/onEventFinish/201 JugnerForestS/onEventFinish/202 JugnerForestS/onEventFinish/203
+char zone=JugnerForestS pos=69.511,-0.677,323.781 job=WAR lvl=99
+quest CrystalWar.GiftsOfTheGriffon completed
+quest CrystalWar.ClawsOfTheGriffon accepted # a GM
+charvar Quest[7][16]Prog 2              # a GM
+quest CrystalWar.PerilsOfTheGriffon accepted # a GM: qm6 210 until the body is held
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger qm6                             # Prog 2: 201 and Perils' 210 tie: Claws first
+finish                                  # Prog 3
+charvar Quest[7][16]Prog 2              # a GM: back to the tie
+trigger qm6                             # the tie again: the rotation var, written by the first tie, plays 210
+finish                                  # the Orcish Warmachine Body (a mutant Event 210 would lose to 201)
+delkeyitem OrcishWarmachineBody         # a GM: Perils answers again
+charvar Quest[7][16]Prog 3              # a GM
+charvar Quest[7][16]Prog 4              # a GM: the NM never spawned
+trigger qm6                             # Prog 4: 203 (not 202: only at Prog 3)
+finish                                  # completed (an Angelstone)
+quest CrystalWar.ClawsOfTheGriffon available # a GM
+quest CrystalWar.ClawsOfTheGriffon accepted # a GM
+charvar Quest[7][16]Prog 3              # a GM
+trigger qm6                             # Prog 3, the NM not up: 202
+finish                                  # Fingerfilcher Dradzad spawned, claimed
+charvar Quest[7][16]Prog 5              # a GM
+kill FINGERFILCHER_DRADZAD              # Prog 5: nothing changes
+trigger qm6                             # Prog 5: no Claws reply: Perils' 210
+finish                                  # the Orcish Warmachine Body
+delkeyitem OrcishWarmachineBody         # a GM: Perils answers again
+charvar Quest[7][16]Prog 4              # a GM
+warp -167.043,-2,55.484 SouthernSanDoriaS # out of the zone: the NM gone
+warp 69.511,-0.677,323.781 JugnerForestS
+trigger qm6                             # Prog 4: 203 over 210
+finish                                  # completed (an Angelstone)

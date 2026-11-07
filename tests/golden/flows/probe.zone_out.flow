@@ -1,0 +1,32 @@
+# probe (quest rework P7): a quest's onZoneOut (interaction_lookup's zone-wide onZoneOut key, which luautils::OnZoneOut
+# runs as the char leaves the zone: CZone::CharZoneOut, on a warp and on a logout alike) through the C# bridge. Elderly
+# Pursuits (otherAreas 75; on C# since Other Areas group 5, whose `#zoneout` flow holds these steps): Carpenters'
+# Landing's onZoneOut sets Prog 2 back to 1 (Para to be fought again). Accepted at Prog 1 with the Antique Amulet:
+# qm_para pops Para (STENCH_OF_DECAY); Para killed: Prog 2; a warp to Southern San d'Oria: onZoneOut, Prog 1. Back, Prog
+# 2 (a GM): a logout: onZoneOut, Prog 1. Prog 3 (a GM): section 2's check (Prog <= 2) fails, so a warp keeps Prog 3.
+# Prog 1 (a GM): a warp keeps Prog 1 (the handler's Prog 2 test).
+# Recorded on the Lua quest (P7); the replay ran a test-only C# copy of the whole quest (removed in Other Areas group 5)
+# and now runs the port, ElderlyPursuits.cs. A new record refuses (a probe records Lua only). Not a quest port: the key
+# names no quest (Program.IsProbe).
+# engine-small-2: re-recorded on C# (`rerecord`, the trace's recorder csharp-rerecord) when the play time
+# moved onto the steady clock and every login's 0x00A changed; a Lua record refuses, since Elderly Pursuits on C#
+# answers it (a probe records Lua only).
+lists CarpentersLanding/onZoneOut/1 CarpentersLanding/qm_para/onTrigger CarpentersLanding/Para/onMobDeath
+char zone=CarpentersLanding pos=-414.6,0,-363.5 job=WAR lvl=75
+quest OtherAreas.SecretsOfOvensLost completed
+quest OtherAreas.ElderlyPursuits accepted
+charvar Quest[4][75]Prog 1
+keyitem AntiqueAmulet
+login
+trigger qm_para                         # Prog 1: Para popped (claimed); STENCH_OF_DECAY
+kill PARA                               # Prog 2
+warp -14.7,2.1,11.8 SouthernSanDoria    # onZoneOut at Prog 2: Prog 1
+warp -414.6,0,-363.5 CarpentersLanding
+charvar Quest[4][75]Prog 2              # a GM
+logout                                  # onZoneOut at Prog 2: Prog 1
+login
+charvar Quest[4][75]Prog 3              # a GM
+warp -14.7,2.1,11.8 SouthernSanDoria    # Prog 3: section 2 off, no onZoneOut: Prog 3 kept
+warp -414.6,0,-363.5 CarpentersLanding
+charvar Quest[4][75]Prog 1              # a GM
+warp -14.7,2.1,11.8 SouthernSanDoria    # onZoneOut at Prog 1: Prog 1 kept

@@ -1,0 +1,22 @@
+# A Boy's Dream (sandoria 91): the Sharpening the Sword operand. A PLD 50 with Father and Son completed and the Family
+# Counselor title (GMs), Sharpening available: Father and Son's completed state (AILBECHE_WHEN_FISHING) and Sharpening's
+# offer (45) answer Ailbeche; on the lookup's alternate talk his script runs: Sharpening not completed, so no 41; CS 0:
+# nothing. Then Sharpening accepted (GM; no whetstone): its 42 and his script alternate: no 41. Read each answer with
+# show: which container answers which talk is the lookup's (the port changes only the script's turn).
+char zone=NorthernSanDoria pos=6.5,0.5,26.9 job=PLD lvl=50
+quest Sandoria.FatherAndSon completed
+title FamilyCounselor
+login
+trigger Ailbeche                        # a container's answer (Sharpening's 45 or Father and Son's text)
+finish-if-event
+trigger Ailbeche                        # the alternate talk: his script: Sharpening available: no 41; nothing
+finish-if-event
+trigger Ailbeche
+finish-if-event
+quest Sandoria.SharpeningTheSword accepted
+trigger Ailbeche                        # Sharpening accepted, no whetstone: 42 or his script
+finish-if-event
+trigger Ailbeche                        # the other: Sharpening accepted: no 41; nothing
+finish-if-event
+trigger Ailbeche
+finish-if-event

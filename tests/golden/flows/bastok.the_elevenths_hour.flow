@@ -1,0 +1,54 @@
+# The Eleventh's Hour (bastok 7): Elki, Babenn, Parraggoh and Pavvke in Bastok Mines, the Old Toolbox in Palborough Mines.
+# The guard (Hearts of Mythril completed, Bastok fame level 3, the quest's own mustZone clear: Hearts of Mythril's
+# completion sets it), the offer 43 (option 1 begins it; option 0 declines), the toolbox's 23 (option 0: KI Old Toolbox),
+# Elki's 44 (Prog 1), Babenn's 45 and the reward (Small Sword, Pursuer of the Truth, fame +30, the toolbox deleted);
+# Pavvke's 48 while accepted.
+# Defaults: Elki 31, Babenn 40, Parraggoh 11, Pavvke 75, the Old Toolbox 22 (DefaultActions; none has a script).
+# Shared: Elki is Hearts of Mythril's (C#: its offer 41 while available, so the flow first shows that, then sets it
+# completed); Pavvke is Fallen Comrades' (C#: from fame level 2 it offers 90, a progressEvent that would outrank 48, so
+# Fallen Comrades is set completed), Out of the Depths' and missions 5-2 / 8-2'; Parraggoh is Beauty and the Galka's (C#,
+# silent at Prog 0 without the logs); Babenn is LB04's.
+lists BastokMines/Elki/onTrigger BastokMines/Babenn/onTrigger BastokMines/Parraggoh/onTrigger BastokMines/Pavvke/onTrigger BastokMines/onEventFinish/43 BastokMines/onEventFinish/44 BastokMines/onEventFinish/45 PalboroughMines/Old_Toolbox/onTrigger PalboroughMines/onEventFinish/23
+char zone=BastokMines pos=-17,0,51.3
+fame Bastok 125
+quest Bastok.FallenComrades completed
+login
+trigger Elki                         # Hearts of Mythril available: its offer 41 (not this quest)
+finish option=1                      # Hearts of Mythril declined
+quest Bastok.HeartsOfMythril completed
+fame Bastok 124
+trigger Elki                         # fame 124 (level 2): not offered, 31
+finish-if-event
+fame Bastok 125
+charvar Quest[1][7]mustZone 234
+trigger Elki                         # the mustZone set (as Hearts of Mythril leaves it): not offered, 31
+finish-if-event
+charvar Quest[1][7]mustZone 0
+trigger Elki                         # the offer, 43
+finish option=0                      # declined: still available
+trigger Elki                         # 43 again
+finish option=1                      # accepted
+trigger Elki                         # accepted, no toolbox: nil, 31
+finish-if-event
+trigger Babenn                       # Prog 0: nil, 40
+finish-if-event
+trigger Parraggoh                    # not completed: nil, 11
+finish-if-event
+trigger Pavvke                       # accepted: 48
+finish
+warp 113.6,-32.8,78.1 PalboroughMines
+trigger Old_Toolbox                  # no toolbox: 23
+finish option=1                      # not taken
+trigger Old_Toolbox                  # 23 again
+finish                               # option 0: KI Old Toolbox
+trigger Old_Toolbox                  # the toolbox held: nil, 22
+finish-if-event
+warp -17,0,51.3 BastokMines
+trigger Elki                         # the toolbox: 44
+finish                               # Prog 1
+trigger Babenn                       # Prog 1: 45
+finish                               # completed: Small Sword, Pursuer of the Truth, fame +30, the toolbox deleted
+trigger Babenn                       # completed: no handler, 40
+finish-if-event
+trigger Pavvke                       # completed: no handler, 75
+finish-if-event

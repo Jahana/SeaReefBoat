@@ -1,0 +1,35 @@
+# Making Headlines (windurst 37): the states the in-play flows pass by, set by GM. Naiko-Paneiko at three scoops (the
+# var 7: Umumu's bit 3 missing): the scoops not all, a reminder (666 or 671, the roll: 666 here). The Mahogany Door
+# _5ca: its default 44 (DefaultActions) and its script take turns (the lookup's fallback alternation: the first talk
+# after the zone-in is the default's; a script turn that starts no event plays the 44 after it), so each state gets two
+# talks, the default's 44, then the script's turn. The script's turns, each nothing (no CAT_BURGLARS_HIDEOUT, the var
+# unchanged), then the 44: accepted at the var 7 (the scoops not all); accepted at the var 31 (bit 4 already set);
+# available at the var 15 (not accepted); completed at the var 15 (not accepted).
+char zone=WindurstWaters pos=-245.4,-5.3,-308.0 job=WAR lvl=75
+login
+quest Windurst.MakingHeadlines accepted
+charvar QuestMakingHeadlines_var 7
+trigger Naiko-Paneiko                   # accepted, three scoops: not all: 666 or 671 (the roll)
+finish
+warp -14.0,-2.2,20.0 InnerHorutotoRuins
+trigger _5ca                            # the default's turn: 44
+finish
+trigger _5ca                            # the script's turn: accepted, the var 7: nothing; then the default's 44
+finish
+charvar QuestMakingHeadlines_var 31
+trigger _5ca                            # the default's turn: 44
+finish
+trigger _5ca                            # the script's turn: accepted, the var 31 (bit 4 set): nothing; then 44
+finish
+quest Windurst.MakingHeadlines available
+charvar QuestMakingHeadlines_var 15
+trigger _5ca                            # the default's turn: 44
+finish
+trigger _5ca                            # the script's turn: available, the var 15: nothing; then 44
+finish
+quest Windurst.MakingHeadlines completed
+charvar QuestMakingHeadlines_var 15
+trigger _5ca                            # the default's turn: 44
+finish
+trigger _5ca                            # the script's turn: completed, the var 15: nothing; then 44
+finish

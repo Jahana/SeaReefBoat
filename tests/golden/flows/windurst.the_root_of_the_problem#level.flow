@@ -1,0 +1,21 @@
+# The Root of the Problem (windurst 68): the level gates at 50 on a BLM 50, The Three Magi completed by GM.
+# Recollections available, AF2_QUEST_LEVEL 50: 270 at the edge (50 at 50), option 0: begun. Recollections completed
+# by GM: AF3_QUEST_LEVEL 51: no 276 (50 below 51; user ruling 2026-11-04, kept Lua bugs: the Lua's literal 50 offered
+# it): her 259. The quest set available and the var 0 (GMs: nothing to undo now), AF3_QUEST_LEVEL 50: 276 at the edge,
+# option 1: begun (any option), var 1; accepted, var 1: 277.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=50
+quest Windurst.TheThreeMagi completed
+login
+trigger Chumimi                         # BLM 50 at AF2 50: 270
+finish option=0                         # Recollections begun
+quest Windurst.Recollections completed  # GM
+setting AF3_QUEST_LEVEL 51
+trigger Chumimi                         # 50 below AF3 51: her 259
+finish option=1                         # nothing
+quest Windurst.TheRootOfTheProblem available # a GM
+charvar rootProblem 0                   # a GM
+setting AF3_QUEST_LEVEL 50
+trigger Chumimi                         # 50 at 50: 276 (0, 829)
+finish option=1                         # begun (any option); var 1
+trigger Chumimi                         # accepted, var 1: 277
+finish

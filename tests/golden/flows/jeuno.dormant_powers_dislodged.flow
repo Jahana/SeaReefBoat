@@ -1,0 +1,94 @@
+# Dormant Powers Dislodged (jeuno 136, limit break 9 part 1): the Nomad Moogle in Ru'Lude Gardens (default 10045 (0, 2,
+# 0, 0)). A level 86 Warrior with the Limit Breaker at level cap 90, the three earlier limit breaks completed (a GM,
+# before login), MAX_LEVEL 99, 10 merit points. Available: a crest and a Faded Crystal (no trade handler while
+# available: nothing); 10045 (86, 1, 4, 0, Option 0, the item drawn: itemWanted 0, so math.randomInt(0, 9), the seeded
+# RNG: 2, the Orcish Plate Armor, kept as itemWanted 3); updates 7 and 9 (nothing), 8 (Beat Around the Bushin not
+# completed: updateEvent(0)); finish option 0 (nothing); the next 10045 draws nothing (itemWanted set); options 10 and 13
+# (nothing), 12 (Option 1: the next 10045 shows it), then 11 (begun). Accepted, Prog 0: event 10045 (86, 1, 4, 1, 0, 3:
+# itemWanted, the index + 1, a kept quirk), (86, 2, ...) once the Limit Breaker is gone (a GM); Prog 2 (a GM): the same
+# reminder. The trade: the crest and the armor with 9 merit points (nil); with 10: the crest alone, the armor alone, two
+# crests and the armor, the pair and a stone, the crest and a Magicked Skull (another item of the table) (nil each); the
+# pair: 10191, finished with 12 merit points (a GM, 10191 open): the pair taken (confirmTrade), 12 - 10 = 2 merit points,
+# Prog 1. Prog 1: progressEvent 10192 (86, 0, 0, 2), the timing game: the update answers 0 under 420 frames, 1 under 540,
+# 2 under 660, 3 under 780, else 4 (each edge both sides); finish options 539 and 660 (nothing), 540 with a full bag (a
+# key item reward: completed anyway): the Soul Gem, level cap 95, YOUR_LEVEL_LIMIT_IS_NOW_95. Completed: Prelude to
+# Puissance answers at cap 95 (86, 1, 4, 2); at cap 90 again (a GM): the default; the pair: nothing.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventUpdate/10045 RuludeGardens/onEventUpdate/10192 RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10191 RuludeGardens/onEventFinish/10192
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=86
+keyitem LimitBreaker
+levelcap 90
+merits 10
+quest Jeuno.NewWorldsAwait completed
+quest Jeuno.ExpandingHorizons completed
+quest Jeuno.BeyondTheStars completed
+item KindredsCrest x5
+item PinchOfValkurmSunsand x2
+item FadedCrystal x2
+item OrcishPlateArmor
+item OrcishPlateArmor
+item MagickedSkull x2
+item CupOfDhalmelSaliva x2
+item YagudoCaulk x2
+item SirensTear x2
+item DangrufStone x2
+item OrcishAxe
+item QuadavBackscale x2
+item FlintStone
+login
+trade Nomad_Moogle KindredsCrest x1 FadedCrystal x1  # available: no trade handler, nothing
+trigger Nomad_Moogle                    # cap 90, BtS completed, level 86, itemWanted 0: the draw; 10045 (86, 1, 4, 0, 0, 2)
+update 10045 option=7                   # not 8: nothing
+update 10045 option=9                   # not 8: nothing
+update 10045 option=8                   # BATB not completed: updateEvent(0)
+finish option=0                         # not 11 or 12: nothing
+trigger Nomad_Moogle                    # itemWanted set: no draw; 10045 (86, 1, 4, 0, 0, 2)
+finish option=10                        # nothing
+trigger Nomad_Moogle                    # 10045 (86, 1, 4, 0, 0, 2)
+finish option=12                        # Option 1
+trigger Nomad_Moogle                    # 10045 (86, 1, 4, 0, 1, 2)
+finish option=13                        # nothing
+trigger Nomad_Moogle                    # 10045 (86, 1, 4, 0, 1, 2)
+finish option=11                        # begun
+trigger Nomad_Moogle                    # accepted, Prog 0: event 10045 (86, 1, 4, 1, 0, 3)
+finish
+delkeyitem LimitBreaker                 # a GM
+trigger Nomad_Moogle                    # no Limit Breaker: event 10045 (86, 2, 4, 1, 0, 3)
+finish
+keyitem LimitBreaker                    # a GM
+charvar Quest[3][136]Prog 2             # a GM
+trigger Nomad_Moogle                    # Prog 2 (not 1): event 10045 (86, 1, 4, 1, 0, 3)
+finish
+charvar Quest[3][136]Prog 0             # a GM
+merits 9                                # a GM
+trade Nomad_Moogle KindredsCrest x1 OrcishPlateArmor x1  # the pair, 9 merit points: nil
+merits 10                               # a GM
+trade Nomad_Moogle KindredsCrest x1     # the crest alone: nil
+trade Nomad_Moogle OrcishPlateArmor x1  # the item alone: nil
+trade Nomad_Moogle KindredsCrest x2 OrcishPlateArmor x1  # two crests and the item: nil
+trade Nomad_Moogle KindredsCrest x1 OrcishPlateArmor x1 FlintStone x1  # the pair and a stone: nil
+trade Nomad_Moogle KindredsCrest x1 MagickedSkull x1  # the crest and another item of the table: nil
+trade Nomad_Moogle KindredsCrest x1 OrcishPlateArmor x1  # the pair, 10 merit points: 10191
+merits 12                               # a GM, 10191 open
+finish                                  # the pair taken, merits 2, Prog 1
+trigger Nomad_Moogle                    # Prog 1: progressEvent 10192 (86, 0, 0, 2)
+update 10192 option=419                 # under 420: updateEvent(0)
+update 10192 option=420                 # updateEvent(1)
+update 10192 option=539                 # updateEvent(1)
+update 10192 option=540                 # updateEvent(2)
+update 10192 option=659                 # updateEvent(2)
+update 10192 option=660                 # updateEvent(3)
+update 10192 option=779                 # updateEvent(3)
+update 10192 option=780                 # updateEvent(4)
+finish option=539                       # under 540: nothing
+trigger Nomad_Moogle                    # 10192 (86, 0, 0, 2)
+finish option=660                       # 660 or more: nothing
+trigger Nomad_Moogle                    # 10192 (86, 0, 0, 2)
+fill-inventory
+finish option=540                       # completed: the Soul Gem, level cap 95, the message
+free-inventory
+trigger Nomad_Moogle                    # completed; Prelude to Puissance (DPD completed, cap 95), level 86: 10045 (86, 1, 4, 2)
+finish option=1
+levelcap 90                             # a GM
+trigger Nomad_Moogle                    # completed, cap 90: no section; the default 10045 (0, 0, 2, 0)
+finish
+trade Nomad_Moogle KindredsCrest x1 OrcishPlateArmor x1  # completed: no trade handler answers: nothing

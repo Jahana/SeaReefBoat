@@ -1,0 +1,25 @@
+# A Squire's Test (sandoria 10): Balasiel in Southern San d'Oria, no guard. A trade while available (nothing), the
+# offer 616 declined (Option 1), 631 declined (nothing) and taken (option 0: begun), the accepted message
+# GO_TO_KING_RANPERRES (the Revival Tree Root), the wrong trades (a bone chip; the root and a chip: not exactly), 617 for
+# the root (completed: Spatha, fame +20, Knight in Training; the root taken), and once completed A Squire's Test II's
+# 671 (level 5, below its 10). Balasiel's script answers only Knight Stalker's 63 (accepted, KnightStalker_Progress 2);
+# his default is 667. A Knight's Test and Methods Create Madness need what this char lacks.
+lists SouthernSanDoria/Balasiel/onTrigger SouthernSanDoria/Balasiel/onTrade SouthernSanDoria/onEventFinish/616 SouthernSanDoria/onEventFinish/631 SouthernSanDoria/onEventFinish/617
+char zone=SouthernSanDoria pos=-136.8,-10.8,65.8 lvl=5
+item RevivalTreeRoot
+item BoneChip
+login
+trade Balasiel RevivalTreeRoot x1         # available: no trade handler, nothing
+trigger Balasiel                          # Option 0: 616
+finish option=1                           # not option 0: Option 1
+trigger Balasiel                          # Option 1: 631
+finish option=1                           # not option 0: nothing
+trigger Balasiel                          # 631
+finish                                    # option 0: begun
+trigger Balasiel                          # accepted: GO_TO_KING_RANPERRES (the Revival Tree Root)
+trade Balasiel BoneChip x1                # not the root: nil
+trade Balasiel RevivalTreeRoot x1 BoneChip x1   # not exactly the root: nil
+trade Balasiel RevivalTreeRoot x1         # exactly the root: 617
+finish                                    # completed: Spatha, fame +20, Knight in Training; the root taken
+trigger Balasiel                          # completed: no section; A Squire's Test II, level 5: its 671
+finish

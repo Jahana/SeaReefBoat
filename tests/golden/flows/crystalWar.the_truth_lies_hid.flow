@@ -1,0 +1,74 @@
+# The Truth Lies Hid (crystalWar 58): a level 99 Warrior in Bastok Markets [S] with What Price Loyalty completed, the
+# WotG mission Adieu, Lilisette current (GMs; that mission's only section is Southern San d'Oria [S]'s; the other
+# missions as group 1's flows) and an Elixir. The day: the harness starts at Vana'diel day 8000, 12:00
+# (Harness.VanaStart), so VanadielUniqueDay() is 8000 until the first `wait vana=24`: 8000 % 3 = 2: scenario C (honest
+# imp 3, Rokke; statements 0, 2, 0); 8001: A (honest 2, Rakke; 1, 1, 1); 8002: B (honest 1, Rikke; 0, 0, 0). Gentle
+# Tiger 211 (over What Price Loyalty's completed 356, an Event), finished: begun. Prog 0: Gentle Tiger 212 and What
+# Price Loyalty's 356, both Events: they tie and rotate by the last event id, so two talks. Castle Zvahl Baileys [S]
+# (from Bastok Markets [S]: any zone): 12 (left open), finished: Prog 1. Castle Zvahl Keep [S], day 8000: Rikke 9 (155,
+# 0, 0), Imp1Day noted; again: 19 (155, 0, 0). Rakke 10 (155, 0, 2: scenario C); Rokke 11 (155, 0, 0). An Elixir to
+# Rikke: not the honest imp: 12 as an event (155, 0, 0), the trade state noted (8000, 1, 0); finished: no Prog. Rikke:
+# traded today, by him: 22 (155, 0, 0); Rakke: traded today, by another: 26 (0); Rokke: 27 (0). An Elixir to Rokke the
+# same day: nil (the day's trade spent). Day 8001: Rokke 11 (155, 0, 1), Rikke 9 (155, 0, 1), Rakke 10 (155, 0, 1). An
+# Elixir to Rakke: the honest imp: 13 as a progress event (155, 0, 1); finished: Prog 2. Prog 2 (day 8001, honest
+# Rakke): Rakke 23 (155, 0, 1), Rikke 25 (1), Rokke 27 (1). qm 15, finished: Prog 3. The Displaced Block 16, finished:
+# completed (a Sanctus Rosary). The Elixir is never taken. The Keep's first `qm` (17412773) has no position: `qm+5` is
+# the placed one (17412778).
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/211 CastleZvahlBaileysS/onZoneIn/1 CastleZvahlBaileysS/onEventFinish/12 CastleZvahlKeepS/Rikke/onTrigger CastleZvahlKeepS/Rikke/onTrade CastleZvahlKeepS/Rakke/onTrigger CastleZvahlKeepS/Rakke/onTrade CastleZvahlKeepS/Rokke/onTrigger CastleZvahlKeepS/Rokke/onTrade CastleZvahlKeepS/qm/onTrigger CastleZvahlKeepS/Displaced_Block/onTrigger CastleZvahlKeepS/onEventFinish/12 CastleZvahlKeepS/onEventFinish/13 CastleZvahlKeepS/onEventFinish/15 CastleZvahlKeepS/onEventFinish/16
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+item Elixir
+quest CrystalWar.WhatPriceLoyalty completed
+mission Wotg AdieuLilisette current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # 211 over What Price Loyalty's 356
+finish                                  # begun
+trigger Gentle_Tiger                    # Prog 0: 212 or What Price Loyalty's 356 (the tie)
+finish
+trigger Gentle_Tiger                    # the other one
+finish
+warp 412.024,-12,-20.047 CastleZvahlBaileysS open # Prog 0, from Bastok Markets [S] (any zone): 12, left open
+finish                                  # Prog 1
+warp -88.62,0.601,86.312 CastleZvahlKeepS
+trigger Rikke                           # day 8000, not talked: 9 (155, 0, 0); Imp1Day 8000
+finish
+trigger Rikke                           # talked today: 19 (155, 0, 0)
+finish
+trigger Rakke                           # day 8000, not talked: 10 (155, 0, 2): scenario C
+finish
+trigger Rokke                           # day 8000, not talked: 11 (155, 0, 0)
+finish
+walk -88.62,0.601,86.312
+trade Rikke Elixir x1                   # scenario C: 12 as an event (155, 0, 0); TradeDay 8000, TradeImp 1
+finish                                  # 12: not a success: no Prog
+trigger Rikke                           # traded today, by him: 22 (155, 0, 0)
+finish
+trigger Rakke                           # traded today, by another: 26 (0)
+finish
+trigger Rokke                           # traded today, by another: 27 (0)
+finish
+trade Rokke Elixir x1                   # the day's trade spent: nil
+finish-if-event
+wait vana=24
+trigger Rokke                           # day 8001 (scenario A), not talked today: 11 (155, 0, 1)
+finish
+trigger Rikke                           # day 8001, not talked today: 9 (155, 0, 1)
+finish
+trigger Rakke                           # day 8001, not talked today: 10 (155, 0, 1)
+finish
+walk -111.722,0.601,-149.88
+trade Rakke Elixir x1                   # the honest imp (Rakke): 13 as a progress event (155, 0, 1); TradeSuccess 1
+finish                                  # 13: TradeImp 2, a success: Prog 2
+trigger Rakke                           # Prog 2, the day's honest imp: 23 (155, 0, 1)
+finish
+trigger Rikke                           # Prog 2: 25 (1)
+finish
+trigger Rokke                           # Prog 2: 27 (1)
+finish
+trigger qm+5                            # Prog 2: 15
+finish                                  # Prog 3
+trigger Displaced_Block                 # Prog 3: 16
+finish                                  # completed (a Sanctus Rosary)

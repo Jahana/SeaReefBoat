@@ -1,0 +1,15 @@
+# Chocobo's Wounds (jeuno 4) with its era module, GM-set accepted with Timer far above any Vana'diel day (an epoch time,
+# as a server leaves it that turns era mode on mid-quest): the module's onTrade takes the Timer > VanadielUniqueDay()
+# side of its >=, 73, where only equality (#era) and less-than reach the other arms. Nothing is taken or written.
+module modules/era/lua/quests/jeuno/chocobos_wounds.lua
+lists UpperJeuno/Chocobo/onTrade
+char zone=UpperJeuno pos=-55.5,8.2,97.5 lvl=20
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.ChocobosWounds accepted
+charvar Quest[3][4]Timer 1800000045
+item ClumpOfGausebitWildgrass x2
+login
+walk -59.8,8.2,92.9                                 # beside the Chocobo: a trade does not walk
+trade Chocobo ClumpOfGausebitWildgrass x1               # Timer 1800000045 > today (8000): 73
+finish

@@ -1,0 +1,37 @@
+# Empty Memories (jeuno 70): the reward table's pairs() order, with two recollections in one trade (the first one the
+# loop finds decides). The Lua walks rewardItems with pairs(); under the server's LuaJIT the order is Hamayumi
+# (Suffering), Bottle of Hysteroanima (Pain), Dia Wand (Animosity), Stone Gorget (Anxiety), Bottle of Terroanima (Guilt),
+# Bottle of Psychoanima (Fear). Each adjacent pair is traded once, so the five steps fix the whole order:
+# - Suffering + Pain, no gil: 110 (Pain first would be 108); finished: the Hamayumi, the Suffering taken, the Pain
+#   returned, fame (accepted), completed;
+# - Pain + Animosity, no gil: 108 (2000) (Animosity first would be 110);
+# - Animosity + Anxiety: 110 either way; finished: the Dia Wand (Animosity first), the Animosity taken;
+# - Anxiety + Guilt, no gil: 110 (Guilt first would be 108); finished: the Stone Gorget;
+# - Guilt + Fear and 2000 gil: 109 either way; finished: the Bottle of Terroanima (Guilt first), the Guilt taken, the
+#   Fear returned, 2000 gil taken.
+# Then two Pains and 2000 gil: no row's hasItemQty(item, 1) holds (exactly one): nil; one Pain and 2000 gil: 109,
+# finished: the Hysteroanima. The gil is offered first (trade slot 0, where trade:getGil() reads it).
+# A level 75 Warrior with 10000 gil, the quest accepted (a GM).
+lists RuludeGardens/Harith/onTrade RuludeGardens/onEventFinish/109 RuludeGardens/onEventFinish/110
+char zone=RuludeGardens pos=-4.3,2,132.5 job=WAR lvl=75 gil=10000
+quest Jeuno.EmptyMemories accepted
+item RecollectionOfPain x2
+item RecollectionOfFear
+item RecollectionOfGuilt
+item RecollectionOfSuffering
+item RecollectionOfAnxiety
+item RecollectionOfAnimosity
+login
+trade Harith RecollectionOfSuffering x1 RecollectionOfPain x1  # Suffering first: 110
+finish                                  # the Hamayumi; the Suffering taken, the Pain returned; fame; completed
+trade Harith RecollectionOfPain x1 RecollectionOfAnimosity x1  # Pain first, no gil: 108 (2000)
+finish
+trade Harith RecollectionOfAnimosity x1 RecollectionOfAnxiety x1  # 110
+finish                                  # the Dia Wand: Animosity first
+trade Harith RecollectionOfAnxiety x1 RecollectionOfGuilt x1  # Anxiety first: 110
+finish                                  # the Stone Gorget
+trade Harith gil=2000 RecollectionOfGuilt x1 RecollectionOfFear x1  # 109
+finish                                  # the Bottle of Terroanima: Guilt first; 2000 gil taken
+trade Harith gil=2000 RecollectionOfPain x2  # two Pains: hasItemQty(item, 1) is exact: nil; nothing
+trade Harith gil=2000 RecollectionOfPain x1  # 109
+finish                                  # the Hysteroanima; the Pain taken, 2000 gil taken

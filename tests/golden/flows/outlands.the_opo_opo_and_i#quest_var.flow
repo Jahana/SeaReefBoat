@@ -1,0 +1,15 @@
+# The Opo-Opo and I (outlands 11), the quest's own var at the completion: accepted, OPO_OPO_PROGRESS 9, a Lucky Egg and
+# Quest[5][11]Prog 1 (GMs). A talk to Nenepp first (to stand by him: he walks; the default text or his 212), then the
+# egg: 241; finished: the egg taken, Windurst fame +70, the raw player:completeQuest, the crown and 3 pamamas, the
+# vars 0, the title. The raw completeQuest does no cleanup: Quest[5][11]Prog stays 1 (quest:complete's cleanup would
+# clear it).
+char zone=Kazham pos=-25.0,-2.5,-3.5 job=WAR lvl=75
+quest Outlands.TheOpoOpoAndI accepted
+charvar OPO_OPO_PROGRESS 9
+item LuckyEgg
+charvar Quest[5][11]Prog 1              # a GM: the quest's own var
+login
+trigger Nenepp                          # by him
+finish-if-event
+trade Nenepp LuckyEgg x1                # 241
+finish                                  # the egg taken; fame +70; completed, Prog kept; the crown, 3 pamamas; vars 0

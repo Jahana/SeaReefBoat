@@ -1,0 +1,56 @@
+# Confessions of a Bellmaker (otherAreas 79): the edges and the guild masters' turns. Reinberta and Mevreauche have
+# scripts (xi.crafting.guildMasterOnTrigger: 300 / 626), so their replies' kinds show on a repeat talk: a Progress
+# reply plays again, while an Event one would hand the next talk to the script. Available: Reinberta and Mevreauche: no
+# section: their guild scripts (300, 626). Accepted (a GM): Reinberta at Prog 0: 402, finished: Prog 1; Prog 0 again (a
+# GM): 402 again; Prog 2 (a GM): nil: 300. Mevreauche at Prog 1 (a GM): 74, finished: Prog 2; Prog 1 again (a GM): 74
+# again; Prog 2: nil: 626; Prog 0 (a GM): nil: 626; available (a GM): 626. The Monument at Prog 1 and 5 (GMs): nil
+# (MONUMENT). Arcane Phantasm popped at Prog 3, killed at Prog 2 (a GM before the kill): Prog 2 kept. The Monument at
+# Prog 4 with a full inventory: 103, finished: quest:complete false: the scroll kept, still accepted: 103 again,
+# finished with room: completed.
+lists RiverneSiteA01/Stone_Monument/onTrigger RiverneSiteA01/Arcane_Phantasm/onMobDeath RiverneSiteA01/onEventFinish/103 BastokMarkets/Reinberta/onTrigger BastokMarkets/onEventFinish/402 NorthernSanDoria/Mevreauche/onTrigger NorthernSanDoria/onEventFinish/74
+char zone=BastokMarkets pos=-189.1,-6.8,-59.4 job=WAR lvl=75
+login
+trigger Reinberta                       # available: no section; her guild script: 300
+finish
+quest OtherAreas.ConfessionsOfABellmaker accepted # a GM
+trigger Reinberta                       # Prog 0: 402
+finish                                  # Prog 1
+charvar Quest[4][79]Prog 0              # a GM
+trigger Reinberta                       # Prog 0: 402 again (Progress: no turn for her script)
+finish                                  # Prog 1
+charvar Quest[4][79]Prog 2              # a GM
+trigger Reinberta                       # Prog 2: nil; 300
+finish
+warp -192.1,11,148.7 NorthernSanDoria
+charvar Quest[4][79]Prog 1              # a GM
+trigger Mevreauche                      # Prog 1: 74
+finish                                  # Prog 2
+charvar Quest[4][79]Prog 1              # a GM
+trigger Mevreauche                      # Prog 1: 74 again (Progress: no turn for his script)
+finish                                  # Prog 2
+trigger Mevreauche                      # Prog 2: nil; 626
+finish
+charvar Quest[4][79]Prog 0              # a GM
+trigger Mevreauche                      # Prog 0: nil; 626
+finish
+quest OtherAreas.ConfessionsOfABellmaker available # a GM
+trigger Mevreauche                      # available: no section; 626
+finish
+quest OtherAreas.ConfessionsOfABellmaker accepted # a GM
+charvar Quest[4][79]Prog 1              # a GM
+warp -731.6,-45.9,-300.7 RiverneSiteA01
+trigger Stone_Monument                  # Prog 1: nil; MONUMENT
+charvar Quest[4][79]Prog 5              # a GM
+trigger Stone_Monument                  # Prog 5: nil; MONUMENT
+charvar Quest[4][79]Prog 3              # a GM
+trigger Stone_Monument                  # Prog 3: Arcane Phantasm popped; noAction
+charvar Quest[4][79]Prog 2              # a GM, before the kill
+kill ARCANE_PHANTASM                    # Prog 2: kept
+charvar Quest[4][79]Prog 4              # a GM
+keyitem OrnamentedScroll                # a GM
+fill-inventory
+trigger Stone_Monument                  # Prog 4: 103
+finish                                  # no room: complete false; the scroll kept
+free-inventory
+trigger Stone_Monument                  # 103 again
+finish                                  # completed; the dagger; the scroll taken

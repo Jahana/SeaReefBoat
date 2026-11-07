@@ -1,0 +1,58 @@
+# X Marks the Spot (otherAreas 65): the trade's other arms, _0r9's else, the completed section's edges. CoP Ancient Vows
+# current. Despachiaire 144, finished: begun. Odeya trades: Prog 1 (a GM) with the liver: nil; Prog 2 with the liver
+# and a feather: nil (tradeHasExactly); with two livers: nil; Prog 3 (a GM) with the liver: nil. _0r9 at Prog 2 (a
+# GM): nil, its default. Prog 4 (a GM): 143 finished: completed, Post 1. Leaving the zone at Post 1: no cleanup (Post
+# 2 only): Odeya 148 still; Post 0 (a GM) while 148 is open: finished: Post 2. Post 0 (a GM): Odeya: nil, 150. 141
+# finished while completed (available, accepted at Prog 1 and completed again by GMs, the last while 141 is open): no
+# 141 handler in the completed section, Prog kept. The completed section's check (completed) against an accepted quest
+# holding Post (GMs: available, accepted, Prog 0, Post 1): Odeya: nil, 150 (no 148); Post 2 (a GM) and a zone change: no
+# cleanup (Post 2 kept).
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Parelbriaux/onTrigger TavnazianSafehold/Odeya/onTrigger TavnazianSafehold/Odeya/onTrade TavnazianSafehold/onEventFinish/141 TavnazianSafehold/onEventFinish/142 TavnazianSafehold/onEventFinish/143 TavnazianSafehold/onEventFinish/144 TavnazianSafehold/onEventFinish/145 TavnazianSafehold/onEventFinish/148 PhomiunaAqueducts/_0r9/onTrigger PhomiunaAqueducts/onEventFinish/37
+lists TavnazianSafehold/onZoneOut/1
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+mission Cop AncientVows current
+item TavnazianLiver x2
+item ChocoboFeather
+login
+trigger Despachiaire                    # 248: 144
+finish                                  # begun
+charvar Quest[4][65]Prog 1              # a GM
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trade Odeya TavnazianLiver x1           # Prog 1: nil
+charvar Quest[4][65]Prog 2              # a GM
+trade Odeya TavnazianLiver x1 ChocoboFeather x1 # the liver and a feather: nil
+trade Odeya TavnazianLiver x2           # two livers: nil
+charvar Quest[4][65]Prog 3              # a GM
+trade Odeya TavnazianLiver x1           # Prog 3: nil
+charvar Quest[4][65]Prog 2              # a GM
+warp 140.5,-25.5,60 PhomiunaAqueducts
+trigger _0r9                            # Prog 2: nil; DOOR_FIRMLY_SHUT
+charvar Quest[4][65]Prog 4              # a GM
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trigger Odeya                           # Prog 4: 143
+finish                                  # completed; Post 1
+warp 140.5,-25.5,60 PhomiunaAqueducts   # Post 1: no cleanup
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trigger Odeya                           # Post 1: 148
+charvar Quest[4][65]Post 0              # a GM, while 148 is open
+finish                                  # Post 2
+charvar Quest[4][65]Post 0              # a GM
+trigger Odeya                           # Post 0: nil; 150
+finish
+quest OtherAreas.XMarksTheSpot available # a GM: the completed bit cleared
+quest OtherAreas.XMarksTheSpot accepted # a GM
+charvar Quest[4][65]Prog 1              # a GM
+trigger Odeya                           # Prog 1: 141
+quest OtherAreas.XMarksTheSpot completed # a GM, while 141 is open
+finish                                  # completed: no 141 handler; Prog 1 kept
+quest OtherAreas.XMarksTheSpot available # a GM: the completed bit cleared
+quest OtherAreas.XMarksTheSpot accepted # a GM
+charvar Quest[4][65]Prog 0              # a GM
+charvar Quest[4][65]Post 1              # a GM
+trigger Odeya                           # accepted, Prog 0, Post 1: nil; 150
+finish
+charvar Quest[4][65]Post 2              # a GM
+warp 140.5,-25.5,60 PhomiunaAqueducts   # accepted at Post 2: no cleanup
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trigger Odeya                           # Post 2 kept; nil, 150
+finish

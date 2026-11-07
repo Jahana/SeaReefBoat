@@ -1,0 +1,23 @@
+# Hunger Strikes (adoulin 76), the tie: a level 99 Warrior in Western Adoulin with both quests available (The Starving's
+# Timer 0); Adoulin fame level 1. Westerly Breeze: Hunger Strikes' 2530 and The Starving's 3005 are both progressEvents:
+# they tie, the first talk plays the first in container order (Hunger Strikes'), finished: begun; the second talk the
+# other one (alone at Progress), finished: begun. Both accepted (their accepted sections registered under Western
+# Adoulin, user ruling 2026-11-04, kept Lua bugs): Hunger Strikes' 2531 and The Starving's 3006, both events, tie: the
+# first in container order, 2531. Both available again (GMs): the tie's cycle starts after the last action it played,
+# 2531, which is not in this tie: from the first, 2530, finished: Hunger Strikes begun; then 3005, finished: The
+# Starving begun.
+lists WesternAdoulin/Westerly_Breeze/onTrigger WesternAdoulin/onEventFinish/2530 WesternAdoulin/onEventFinish/3005
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+login
+trigger Westerly_Breeze                 # the tie: the first in container order: 2530
+finish                                  # Hunger Strikes begun
+trigger Westerly_Breeze                 # The Starving's 3005, alone now
+finish                                  # The Starving begun
+trigger Westerly_Breeze                 # both accepted: 2531 and 3006 tie: 2531
+finish-if-event
+quest Adoulin.HungerStrikes available   # a GM
+quest Adoulin.TheStarving available     # a GM
+trigger Westerly_Breeze                 # the tie again: the last played, 2531, is not in it: 2530
+finish                                  # Hunger Strikes begun
+trigger Westerly_Breeze                 # 3005, alone now
+finish                                  # The Starving begun

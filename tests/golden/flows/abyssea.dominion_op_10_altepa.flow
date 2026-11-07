@@ -1,0 +1,26 @@
+# Altepa - Dominion Op #10 (abyssea 96, op 569): a level 99 Warrior in Abyssea - Altepa; the op's target Gastornis
+# (18 placed spawns, the first 17670323). The next op (#11, Nannakola) and Grauberg's #10 accepted (a GM), this op
+# available: a Gastornis killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0, which
+# dominionOnMobDeath does not read): a Gastornis killed: dominionOnMobDeath(569): Quest[8][96]Prog 1
+# (FOV_DEFEATED_TARGET 1 of 5). The next op's Nannakola killed: Quest[8][97]Prog 1 (its own count), this op's unchanged.
+# Prog 4 (a GM): one more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing. Completed
+# (Prog 0, as completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge, Invincible and
+# Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaAltepa/Gastornis/onMobDeath AbysseaAltepa/Nannakola/onMobDeath
+char zone=AbysseaAltepa pos=432,0,321 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp11Altepa accepted # a GM: the next op
+quest Abyssea.DominionOp10Grauberg accepted # a GM: Grauberg's #10
+kill RANI_OFFSET-228                    # available: nothing (17670323)
+quest Abyssea.DominionOp10Altepa accepted # a GM
+kill RANI_OFFSET-227                    # accepted: Prog 1 (17670324)
+kill RANI_OFFSET-343                    # Nannakola: Quest[8][97]Prog 1 (17670208)
+charvar Quest[8][96]Prog 4              # a GM
+kill RANI_OFFSET-226                    # Prog 5 (17670325)
+kill RANI_OFFSET-225                    # full: nothing (17670326)
+quest Abyssea.DominionOp10Altepa completed # a GM
+charvar Quest[8][96]Prog 0              # a GM
+kill RANI_OFFSET-224                    # completed: nothing (17670327)

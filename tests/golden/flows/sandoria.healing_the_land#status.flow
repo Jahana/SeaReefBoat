@@ -1,0 +1,55 @@
+# Healing the Land (sandoria 82), each status operand alone (GM-set statuses). Eperdur at fame level 4, main level 10
+# (each answer below is the script's turn; 678 is the lookup's): available 681; accepted with the seal 682; completed
+# (Sorcery of the North available, no needToZone) Sorcery of the North's 685. The seal's arms at fame level 1: available
+# with the seal: nothing (678); both quests accepted: this quest answers first (682, not 686); completed: 685. The qm3
+# with the seal: completed, available: LETTERS_IS_WRITTEN_HERE; accepted: FOUND_LOCATION_SEAL (taken); without it:
+# available, completed: LETTERS_IS_WRITTEN_HERE; accepted: IS_ON_THIS_SEAL.
+char zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=10
+fame Sandoria 225
+keyitem SealOfBanishing
+login
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # available, fame level 4, main level 10: 681
+finish-if-event option=1                  # declined
+quest Sandoria.HealingTheLand accepted
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted, the seal: 682
+finish-if-event
+quest Sandoria.HealingTheLand completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # completed: Sorcery of the North's 685
+finish-if-event option=1                  # declined
+fame Sandoria 0
+quest Sandoria.HealingTheLand available
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # available, fame level 1, the seal: nothing; 678
+finish-if-event
+quest Sandoria.HealingTheLand accepted
+quest Sandoria.SorceryOfTheNorth accepted
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # both accepted, the seal: this quest's 682 (not 686)
+finish-if-event
+quest Sandoria.SorceryOfTheNorth available
+quest Sandoria.HealingTheLand completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # completed, the seal: 685
+finish-if-event option=1                  # declined
+warp -165.9,1.0,312.8 GusgenMines
+trigger qm3                               # completed, the seal: LETTERS_IS_WRITTEN_HERE
+quest Sandoria.HealingTheLand available
+trigger qm3                               # available, the seal: LETTERS_IS_WRITTEN_HERE
+quest Sandoria.HealingTheLand accepted
+trigger qm3                               # accepted, the seal: taken; FOUND_LOCATION_SEAL
+quest Sandoria.HealingTheLand available
+trigger qm3                               # available, no seal: LETTERS_IS_WRITTEN_HERE
+quest Sandoria.HealingTheLand completed
+trigger qm3                               # completed, no seal: LETTERS_IS_WRITTEN_HERE
+quest Sandoria.HealingTheLand available
+quest Sandoria.HealingTheLand accepted
+trigger qm3                               # accepted, no seal: IS_ON_THIS_SEAL

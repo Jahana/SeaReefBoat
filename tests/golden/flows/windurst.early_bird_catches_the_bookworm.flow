@@ -1,0 +1,77 @@
+# Early Bird Catches the Bookworm (windurst 20): Tosuka-Porika, Furakku-Norakku and Orn in Windurst Waters, Quu Bokye in
+# Giddeus. A Bastok char (the char line's default nation): the guard (each side: Glyph Hanger completed, Windurst fame level 2, no
+# mustZone char var), the offer 387 (declined, then accepted), Tosuka's 388, Furakku's 389 (the overdue notice) and 390,
+# Orn's 395 (Prog 1, notice taken) and 396, Furakku's 397, Quu Bokye's 57, the Silver Beastcoin (58: Art for Everyone,
+# Prog 2) and 59, Orn's 398 (Prog 3) and 399, Furakku's 400 (completed: 1500 gil, fame +20, Savior of Knowledge; the
+# book gone) and the completed 401 (replaceDefault) until the char zones (a player local var).
+# Defaults: Tosuka's script toggles 370 / 881 (local var TosukaDialogueToggle; no mission completed); Furakku's script
+# acts only for Class Reunion, so his default 371 (DefaultActions) answers; Orn 652; Quu Bokye 56. Also named: Tosuka by
+# Chasing Tales (needs this quest completed and fame level 3; fame 70 at the end is level 2) and Windurst missions 2-1,
+# 7-1, 8-2, 9-2, CoP 3-3; Furakku by Chasing Tales and mission 2-1; Quu Bokye by Dark Legacy and The Lost Book (both
+# accepted only). A Bastok char has no Windurst mission.
+lists WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/Tosuka-Porika/onTrade WindurstWaters/Furakku-Norakku/onTrigger WindurstWaters/Orn/onTrigger Giddeus/Quu_Bokye/onTrigger Giddeus/Quu_Bokye/onTrade WindurstWaters/onEventFinish/387 WindurstWaters/onEventFinish/389 WindurstWaters/onEventFinish/395 WindurstWaters/onEventFinish/398 WindurstWaters/onEventFinish/400 Giddeus/onEventFinish/58
+char zone=WindurstWaters pos=-26.5,-5.25,104.4
+fame Windurst 50
+item SilverBeastcoin x2
+item BoneChip
+login
+trade Tosuka-Porika BoneChip x1     # available: no trade handler, nothing
+trigger Tosuka-Porika               # Glyph Hanger not completed: section 1 not met; his script: 370 (toggle to 1)
+finish
+quest Windurst.GlyphHanger completed
+fame Windurst 49
+trigger Tosuka-Porika               # fame 49 (level 1): not met; his script: 881 (toggle to 0)
+finish
+fame Windurst 50
+charvar Quest[2][20]mustZone 236    # a GM sets the quest's own mustZone char var
+trigger Tosuka-Porika               # mustZone set: not met; his script: 370 (toggle to 1)
+finish
+charvar Quest[2][20]mustZone 0
+trigger Tosuka-Porika               # guard met, a Bastok char: 387
+finish option=1                     # declined: nothing
+trigger Tosuka-Porika               # 387 again
+finish option=0                     # begun
+trigger Tosuka-Porika               # accepted: 388
+finish
+trigger Orn                         # Prog 0, no notice: nil, his default 652
+finish
+trigger Furakku-Norakku             # Prog 0, no notice: 389 (0, Art for Everyone)
+finish                              # Overdue Book Notifications given
+trigger Furakku-Norakku             # Prog 0, the notice held: 390
+finish
+warp -159.5,17.1,181.5 Giddeus
+trigger Quu_Bokye                   # Prog 0: nil, his default 56
+finish
+trade Quu_Bokye SilverBeastcoin x1  # Prog 0: nil, nothing (no script)
+warp -70.2,-9.25,31.7 WindurstWaters
+trigger Orn                         # Prog 0, the notice held: 395 (0, Art for Everyone)
+finish                              # Prog 1, the notice gone
+trigger Orn                         # Prog 1: 396
+finish
+trigger Furakku-Norakku             # Prog 1: 397
+finish
+warp -159.5,17.1,181.5 Giddeus
+trigger Quu_Bokye                   # Prog 1: 57
+finish
+trade Quu_Bokye BoneChip x1         # Prog 1, not the beastcoin: nil
+trade Quu_Bokye SilverBeastcoin x1 BoneChip x1  # Prog 1, the beastcoin and more: not exact, nil
+trade Quu_Bokye SilverBeastcoin x1  # Prog 1, exactly the beastcoin: 58
+finish                              # the beastcoin taken, Art for Everyone, Prog 2
+trigger Quu_Bokye                   # Prog 2: 59
+finish
+trade Quu_Bokye SilverBeastcoin x1  # Prog 2: nil, the beastcoin kept
+warp -70.2,-9.25,31.7 WindurstWaters
+trigger Orn                         # Prog 2: 398
+finish                              # Prog 3
+trigger Orn                         # Prog 3: 399
+finish
+trigger Furakku-Norakku             # Prog 3 (>= 2): 400
+finish                              # completed: 1500 gil, fame +20, Savior of Knowledge; Art for Everyone gone; local var Quest[2][13]mustZone 1
+trigger Furakku-Norakku             # completed, the local var set: 401 (replaceDefault)
+finish
+trade Furakku-Norakku BoneChip x1   # completed: nothing
+trigger Tosuka-Porika               # completed; Chasing Tales needs fame level 3 (fame 70): his script 370 (the warps cleared the toggle)
+finish
+rezone                              # the local var gone
+trigger Furakku-Norakku             # completed, no local var: no section, 371
+finish

@@ -1,0 +1,33 @@
+# Trial-Size Trial by Water (outlands 148): accepted by GM with no Mini Tuning Fork (used up by a lost fight): 203 (0,
+# fork, 2, 20), declined (option 0: nothing), option 2 (nothing), option 1 with a full inventory
+# (ITEM_CANNOT_BE_OBTAINED), then option 1 with one free slot (a new fork); then 111. Each script talk follows the
+# default 114 (UseFallback; see the main flow). 203's finish reads no status: 203 finished while completed (a GM inside
+# the event) still gives a fork.
+char zone=Norg pos=-12.5,1.1,-22.5 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByWater accepted
+login
+trigger Verctissa                         # UseFallback 0: the default 114
+finish
+trigger Verctissa                         # the script: accepted, no fork: 203 (0, fork, 2, 20)
+finish option=0                           # nothing
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # 203
+finish option=2                           # option 2: nothing
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # 203
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork)
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # 203
+quest Outlands.TrialSizeTrialByWater completed
+finish option=1                           # finished while completed: a new Mini Tuning Fork of Water, ITEM_OBTAINED
+quest Outlands.TrialSizeTrialByWater available
+quest Outlands.TrialSizeTrialByWater accepted
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # the fork held: 111
+finish

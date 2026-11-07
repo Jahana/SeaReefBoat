@@ -1,0 +1,19 @@
+# Save the Children (San d'Oria 1-3): its Ghelsba Outpost 32001 handler on another fight's win. A level 75 Warrior of
+# San d'Oria with 1-3 current at Status 2 (GMs; Resonance current keeps RoV 1-1 out) and a Cloudy Orb: the orb traded
+# to Hut_Door opens the menu (Wings of Fury, index 2; Save the Children wants no trade); 32000 updated with 33 (index
+# 2, area 1): registered, entered (Wings of Fury's level cap 20); won by a GM (bfwin): 32001; finished: battlefieldWin
+# 34, not 32: 1-3's handler does nothing (no key, Status 2 kept).
+lists GhelsbaOutpost/Hut_Door/onTrade GhelsbaOutpost/onEventFinish/32001
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren current
+item CloudyOrb
+login
+missionstatus Sandoria 2                # a GM
+trade Hut_Door CloudyOrb x1             # the menu 32000 (Wings of Fury)
+update 32000 option=33                  # index 2, area 1: registered, entered
+finish                                  # in the arena
+bfwin                                   # a GM: won; 32001
+finish                                  # battlefieldWin 34: 1-3's handler: nothing

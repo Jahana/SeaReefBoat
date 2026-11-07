@@ -1,0 +1,48 @@
+# Cactuar Suave (battlefield.cactuar_suave, Chamber of Oracles KSNM30: a plain Battlefield, index 5, 30 minutes, 6
+# players, no fixed area, the Clotho Orb required with its wear and worn messages, Sabotender_Campeon and
+# Sabotender_Amante essential, nine loot groups, Shimmering_Circle the exit). A level 75 Warrior with a Clotho Orb and a
+# Chunk of Copper Ore. SC_Entrance's trigger: the registrant brings no trade, the fight wants one (and no fight of the
+# zone is open to a trigger here): NO_BATTLEFIELD_ENTRY. Trades: the ore alone; the orb with the ore (not exactly
+# the orb): no options: NO_BATTLEFIELD_ENTRY. The orb alone: the worn check passes (no wear yet): the menu 32000
+# (options 32: index 5). Updates: 97 (index 6, not in the menu): REQS_NOT_MET; 80 (index 5, area 0) and 84 (area 4,
+# past the zone's 3): REQS_NOT_MET; 81 (area 1): registered, entered; the orb kept (it wears: no tradeComplete),
+# onBattlefieldEnter: the orb's wear (A_CRACK_HAS_FORMED, one use), the entry messages; finished. The three cactuars of
+# arena 1 spawn at its first tick; killed (one superlinked party): the essential group's allDeath
+# (handleAllMonstersDefeated): arena 1's Armoury Crate (getArmouryCrate) put in the battlefield and shown, its
+# ON_TRIGGER listener added. The crate (Armoury_Crate+14) opened: handleLootRolls, one math.randomInt roll per group on
+# the seeded RNG (the picks as recorded): group 1 the 24000 gil (one player: all of it, giveCurrency: 1000 -> 25000);
+# 2 Cactuar Needle (its only entry); 3 Bag of Cactus Stems (its only entry); 4 Vial of Black Beetle Blood; 5 Pole Grip;
+# 6 Light Spirit Pact; 7 Demon Horn; 8 Ram Horn (not its NONE); 9 Phoenix Feather (not its NONE); each item by
+# addTreasure in group order (a lone char: each lotted to it at once); WON, the cutscene timer 5. Six ticks later
+# (the timer counts down to 0) the cleanup: 32001 (battlefieldWin 197); finished: no title, no XP. Out after it. The
+# cracked orb traded again: the options hold the fight, but its wear is spent: ORB_IS_CRACKED.
+lists ChamberOfOracles/SC_Entrance/onTrigger ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/onEventUpdate/32000 ChamberOfOracles/onEventFinish/32000 ChamberOfOracles/onEventFinish/32001
+char zone=ChamberOfOracles pos=-218.6,-1.9,23.0 job=WAR lvl=75
+item ClothoOrb
+item ChunkOfCopperOre
+login
+trigger SC_Entrance                     # no trade: NO_BATTLEFIELD_ENTRY
+trade SC_Entrance ChunkOfCopperOre x1   # no fight wants it: NO_BATTLEFIELD_ENTRY
+trade SC_Entrance ClothoOrb x1 ChunkOfCopperOre x1  # not exactly the orb: NO_BATTLEFIELD_ENTRY
+trade SC_Entrance ClothoOrb x1          # the menu 32000 (index 5)
+update 32000 option=97                  # index 6, not in the menu: REQS_NOT_MET
+update 32000 option=80                  # area 0: REQS_NOT_MET
+update 32000 option=84                  # area 4: REQS_NOT_MET
+update 32000 option=81                  # area 1: registered, entered; A_CRACK_HAS_FORMED
+finish                                  # in the arena
+tick 2000                               # arena 1's cactuars spawn
+kill #17465381                          # Sabotender_Campeon
+kill #17465382                          # Sabotender_Amante
+kill #17465383                          # Sabotender_Amante: allDeath: the crate shown
+trigger Armoury_Crate+14                # arena 1's crate: the loot (see the header); WON, the cutscene timer 5
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000                               # the timer out: the cleanup: 32001
+finish-if-event                         # no title, no XP
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield
+warp -218.6,-1.9,23.0 ChamberOfOracles
+trade SC_Entrance ClothoOrb x1          # the orb's wear spent: ORB_IS_CRACKED

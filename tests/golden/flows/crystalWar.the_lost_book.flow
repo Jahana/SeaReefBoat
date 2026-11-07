@@ -1,0 +1,55 @@
+# The Lost Book (crystalWar 26): a level 30 Warrior in Windurst Waters [S] with the Bronze Ribbon of Service, a Mythril
+# Beastcoin and a Sheet of Vellum (missions as The Tigress Stirs' main flow). The Rhinostery door (south; no script, no
+# default): 143, finished: begun, Prog 1; 148 (no finish). Giddeus: Quu Bokye (no script; default 56): 64 (no finish);
+# the beastcoin: 65, finished: the trade confirmed, the Leather-bound Book, Prog 2. Windurst Waters [S]: the Rhinostery
+# door 144, finished: Prog 3; 150 (an Event). The Optistery door (no script, no default) 145, finished: the book taken,
+# Prog 4. Castle Oztroja [S]: _qm0 (no script, no default): the Lynx Pelt (npcUtil.giveKeyItem), and the handler
+# answers nil; again: the pelt held: no section: nil. Windurst Waters [S]: the Optistery door: the vellum: 146,
+# finished: the trade confirmed, the pelt taken, Prog 5, Timer = today + 1; a talk the same day: no section: nil. A
+# Vana'diel day later: 147, finished: completed (a Scroll of Retrace). Completed (no section): both doors: nil.
+lists WindurstWatersS/Door_Rhinostery_South/onTrigger WindurstWatersS/Door_Optistery/onTrigger WindurstWatersS/Door_Optistery/onTrade WindurstWatersS/onEventFinish/143 WindurstWatersS/onEventFinish/144 WindurstWatersS/onEventFinish/145 WindurstWatersS/onEventFinish/146 WindurstWatersS/onEventFinish/147 Giddeus/Quu_Bokye/onTrigger Giddeus/Quu_Bokye/onTrade Giddeus/onEventFinish/65 CastleOztrojaS/_qm0/onTrigger
+char zone=WindurstWatersS pos=4.668,-5.812,-197 job=WAR lvl=30
+keyitem BronzeRibbonOfService
+item MythrilBeastcoin
+item SheetOfVellum
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Door_Rhinostery_South           # 143; the mission takes no talk
+finish                                  # begun; Prog 1
+trigger Door_Rhinostery_South           # Prog 1: 148
+finish
+warp -159.992,17.137,181.502 Giddeus
+trigger Quu_Bokye                       # Prog 1: 64
+finish
+trade Quu_Bokye MythrilBeastcoin x1     # 65
+finish                                  # the trade confirmed; the Leather-bound Book; Prog 2
+warp 4.668,-5.812,-197 WindurstWatersS
+trigger Door_Rhinostery_South           # Prog 2: 144
+finish                                  # Prog 3
+trigger Door_Rhinostery_South           # Prog 3: 150
+finish
+warp -55.452,-6.249,92.029 WindurstWatersS
+trigger Door_Optistery                  # Prog 3: 145
+finish                                  # the book taken; Prog 4
+warp -139.072,0.054,-9.223 CastleOztrojaS
+trigger _qm0                            # Prog 4, no pelt: the Lynx Pelt; the handler answers nil
+finish-if-event
+trigger _qm0                            # the pelt held: no section: nil
+finish-if-event
+warp -55.452,-6.249,92.029 WindurstWatersS
+trade Door_Optistery SheetOfVellum x1   # Prog 4, the pelt: 146
+finish                                  # the trade confirmed; the pelt taken; Prog 5; Timer = today + 1
+trigger Door_Optistery                  # Prog 5, the same day: no section: nil
+finish-if-event
+wait vana=24
+trigger Door_Optistery                  # the day turned: 147
+finish                                  # completed (Scroll of Retrace)
+trigger Door_Optistery                  # completed: no section: nil
+finish-if-event
+warp 4.668,-5.812,-197 WindurstWatersS
+trigger Door_Rhinostery_South           # completed: no section: nil
+finish-if-event

@@ -1,0 +1,38 @@
+# The Rescue (otherAreas 23): Selbina's Thunder Hawk (no script, default 84) and Beadeaux's Jail Door _43b (no script,
+# default NOTHING_OUT_OF_ORDINARY). No other quest answers either, so the reply kinds are not observable (no script to
+# alternate with; any kind beats a default). A level 75 Warrior with a Quadav Charm and a Chocobo Feather.
+# Available (Selbina / Rabao fame level 1: the check's >= 1 always holds): 80, option 0: nothing; option 69: nothing;
+# option 71: nothing; option 70: begun. Accepted without the Trader's Sack: 83. Beadeaux: the door: LOCKED_DOOR_QUADAV_HAS_KEY;
+# the feather: nil; the charm and the feather: nil (tradeHasExactly); the charm: 1000, finished: the charm taken, the sack.
+# The door with the sack: nil, its default; the charm again (a GM gives one): nil (the sack held). Selbina: 81, finished:
+# completed (2000 exp, 5000 gil, the Map of the Ranguemont Pass, Honorary Citizen of Selbina), fame +10 San d'Oria and
+# Bastok, the sack taken. Completed: 82 (replaceDefault).
+lists Selbina/Thunder_Hawk/onTrigger Selbina/onEventFinish/80 Selbina/onEventFinish/81 Beadeaux/_43b/onTrigger Beadeaux/_43b/onTrade Beadeaux/onEventFinish/1000
+char zone=Selbina pos=-58.9,-10.6,4.8 job=WAR lvl=75
+item QuadavCharm
+item ChocoboFeather
+login
+trigger Thunder_Hawk                    # 80
+finish option=0                         # not 70: nothing
+trigger Thunder_Hawk                    # 80
+finish option=69                        # not 70: nothing
+trigger Thunder_Hawk                    # 80
+finish option=71                        # not 70: nothing
+trigger Thunder_Hawk                    # 80
+finish option=70                        # begun
+trigger Thunder_Hawk                    # no sack: 83
+finish
+warp 55.2,-0.5,-26.3 Beadeaux
+trigger _43b                            # no sack: LOCKED_DOOR_QUADAV_HAS_KEY
+trade _43b ChocoboFeather x1            # not the charm: nil; nothing
+trade _43b QuadavCharm x1 ChocoboFeather x1 # an extra item: nil
+trade _43b QuadavCharm x1               # 1000
+finish                                  # the charm taken; the Trader's Sack
+trigger _43b                            # the sack: nil; its default NOTHING_OUT_OF_ORDINARY
+item QuadavCharm                        # a GM
+trade _43b QuadavCharm x1               # the sack held: nil; the charm kept
+warp -58.9,-10.6,4.8 Selbina
+trigger Thunder_Hawk                    # the sack: 81
+finish                                  # completed; fame +10 x2; the sack taken
+trigger Thunder_Hawk                    # completed: 82 (replaceDefault)
+finish

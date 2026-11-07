@@ -1,0 +1,130 @@
+# Onion Rings (windurst 42): the reply kinds. Level 5, fame 124; Know One's Onions and Inspector's Gadget! completed by
+# GM; Truth, Justice, and the Onion Way! accepted by GM (an earlier container, an Event line on every brigade member:
+# Kohlo-Lakolo 371, Gomada-Vulmada 373, Papo-Hopo 372, Pichichi 374, Pyo Nzon 375, Shanruru 377, Yafa Yaa 376).
+# - Section 1: 422 (Event, fame level 2) ties with 371: 371, then 422; a Progress 422 would play first. Fame 125: 429
+#   (Progress) beats 371 (Prog 1, EndTime 790192656). The ring and EndTime now + 1 by GM: 430 (Progress) beats 371
+#   (begun); available again by GM, Prog 2: 432 (Progress) beats 371 (completed). An Event one would tie and lose the
+#   first talk to 371.
+# - Section 2 (accepted by GM at Prog 1, EndTime now + 1: in time): each in-time line ties with the first quest's: 371,
+#   then 431; 373, then 435; and so on. EndTime now (late): the late lines likewise, Kohlo-Lakolo's 433 last (it
+#   completes the quest). Accepted again by GM (Prog 1, EndTime now + 1), The Puppet Master accepted by GM (its 403 on
+#   the House of the Hero, an Event, an earlier container): 289 (Progress) beats it (completed); an Event 289 would tie
+#   and lose the first talk to 403.
+# - Section 3 (Crying Over Onions available): each new default (replaceDefault) loses to the first quest's line on both
+#   talks; without replaceDefault it would tie and play on one of them.
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Gomada-Vulmada/onTrigger PortWindurst/Papo-Hopo/onTrigger PortWindurst/Pichichi/onTrigger PortWindurst/Pyo_Nzon/onTrigger PortWindurst/Shanruru/onTrigger PortWindurst/Yafa_Yaa/onTrigger WindurstWalls/_6n2/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5
+fame Windurst 124
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.TruthJusticeAndTheOnionWay accepted
+login
+trigger Kohlo-Lakolo                           # 371 and 422 tie: 371
+finish
+trigger Kohlo-Lakolo                           # 422
+finish
+fame Windurst 125                              # GM
+trigger Kohlo-Lakolo                           # 429 (Progress) over 371
+finish                                         # Prog 1, EndTime 790192656
+keyitem OldRing                                # GM
+charvar Quest[2][42]EndTime 790189201          # GM: now + 1
+trigger Kohlo-Lakolo                           # 430 (Progress) over 371
+finish                                         # begun
+quest Windurst.OnionRings available            # GM
+charvar Quest[2][42]Prog 2                     # GM
+trigger Kohlo-Lakolo                           # 432 (Progress) over 371
+finish                                         # completed; the ring taken
+quest Windurst.OnionRings available            # GM
+quest Windurst.OnionRings accepted             # GM
+charvar Quest[2][42]Prog 1                     # GM
+charvar Quest[2][42]EndTime 790189201          # GM: now + 1, in time
+trigger Kohlo-Lakolo                           # 371 and 431: 371
+finish
+trigger Kohlo-Lakolo                           # 431
+finish
+trigger Gomada-Vulmada                         # 373 and 435: 373
+finish
+trigger Gomada-Vulmada                         # 435
+finish
+trigger Papo-Hopo                              # 372 and 434: 372
+finish
+trigger Papo-Hopo                              # 434
+finish
+trigger Pichichi                               # 374 and 438: 374
+finish
+trigger Pichichi                               # 438
+finish
+trigger Pyo_Nzon                               # 375 and 436: 375
+finish
+trigger Pyo_Nzon                               # 436
+finish
+trigger Shanruru                               # 377 and 439: 377
+finish
+trigger Shanruru                               # 439
+finish
+trigger Yafa_Yaa                               # 376 and 437: 376
+finish
+trigger Yafa_Yaa                               # 437
+finish
+charvar Quest[2][42]EndTime 790189200          # GM: now, late
+trigger Gomada-Vulmada                         # 373 and 442: 373
+finish
+trigger Gomada-Vulmada                         # 442
+finish
+trigger Papo-Hopo                              # 372 and 441: 372
+finish
+trigger Papo-Hopo                              # 441
+finish
+trigger Pichichi                               # 374 and 445: 374
+finish
+trigger Pichichi                               # 445
+finish
+trigger Pyo_Nzon                               # 375 and 443: 375
+finish
+trigger Pyo_Nzon                               # 443
+finish
+trigger Shanruru                               # 377 and 446: 377
+finish
+trigger Shanruru                               # 446
+finish
+trigger Yafa_Yaa                               # 376 and 444: 376
+finish
+trigger Yafa_Yaa                               # 444
+finish
+trigger Kohlo-Lakolo                           # 371 and 433: 371
+finish
+trigger Kohlo-Lakolo                           # 433
+finish                                         # completed
+quest Windurst.OnionRings available            # GM
+quest Windurst.OnionRings accepted             # GM
+charvar Quest[2][42]Prog 1                     # GM
+charvar Quest[2][42]EndTime 790189201          # GM: now + 1
+quest Windurst.ThePuppetMaster accepted        # GM
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # 289 (Progress) over The Puppet Master's 403
+finish                                         # completed
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Gomada-Vulmada                         # 442 (replaceDefault) under 373: 373, twice
+finish
+trigger Gomada-Vulmada
+finish
+trigger Papo-Hopo                              # 441 under 372
+finish
+trigger Papo-Hopo
+finish
+trigger Pichichi                               # 445 under 374
+finish
+trigger Pichichi
+finish
+trigger Pyo_Nzon                               # 443 under 375
+finish
+trigger Pyo_Nzon
+finish
+trigger Shanruru                               # 446 under 377
+finish
+trigger Shanruru
+finish
+trigger Yafa_Yaa                               # 444 under 376
+finish
+trigger Yafa_Yaa
+finish

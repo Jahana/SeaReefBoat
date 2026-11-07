@@ -1,0 +1,44 @@
+# Divine Might (Repeat) (outlands 164) with the era module modules/era/lua/quests/outlands/divine_might.lua
+# (xi.pre(ROV): RESTRICT_CONTENT 1, ENABLE_ROV 0): the window (the full moon, 00:00 to 02:59, NONE or SUNSHINE) gates
+# both trades. A level 75 Warrior in Ro'Maeve, Divine Might completed and the repeat accepted (GMs), no ore, three
+# Chunks of Light Ore, a pair. Day 8022: 00:00 CLOUDS (2): a light ore: nothing; NONE: 8, finished: the Moonlight Ore,
+# the light ore taken; a light ore again (the ore held): nothing; the ore deleted (a GM); 02:00 SUNSHINE with a
+# Rainstorm on the char (a GM: the char's weather RAIN; the module reads the zone's): a light ore: 8, finished: the ore
+# again; the pair: 7, finished: the Ark Pentasphere; the ore deleted (a GM); 03:00 NONE (the base's window): a light
+# ore: nothing; day 8022 05:00 SUNSHINE: nothing; day 8029 00:00 NONE (93% waning: not the full moon): nothing.
+module modules/era/lua/quests/outlands/divine_might.lua
+lists Romaeve/QuHau_Spring/onTrade Romaeve/onEventFinish/7 Romaeve/onEventFinish/8
+char zone=Romaeve pos=1.748,-27.402,67.751 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Outlands.DivineMight completed
+quest Outlands.DivineMightRepeat accepted
+item ChunkOfLightOre x3
+item SheetOfParchment
+item BottleOfIlluminink
+login
+wait vana=516                           # day 8022, 00:00 (FULL_MOON)
+weather 2                               # CLOUDS
+trade QuHau_Spring ChunkOfLightOre x1   # the module: nothing
+weather 0                               # NONE
+trade QuHau_Spring ChunkOfLightOre x1   # 8
+finish                                  # the Moonlight Ore; the light ore taken
+trade QuHau_Spring ChunkOfLightOre x1   # the ore held: nothing
+delkeyitem MoonlightOre                 # a GM
+wait vana=2                             # 02:00
+effect 183                              # a GM: Rainstorm (the char's weather RAIN)
+weather 1                               # SUNSHINE
+trade QuHau_Spring ChunkOfLightOre x1   # 8
+finish                                  # the ore again; the light ore taken
+trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # 7
+finish                                  # the Ark Pentasphere; the pair taken
+delkeyitem MoonlightOre                 # a GM
+wait vana=1                             # 03:00
+weather 0
+trade QuHau_Spring ChunkOfLightOre x1   # the module: nothing (the base: 8)
+wait vana=2                             # 05:00
+weather 1
+trade QuHau_Spring ChunkOfLightOre x1   # the module: nothing (the base: 8)
+wait vana=163                           # day 8029, 00:00 (93% waning: not the full moon)
+weather 0
+trade QuHau_Spring ChunkOfLightOre x1   # the module: nothing

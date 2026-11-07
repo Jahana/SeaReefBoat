@@ -1,0 +1,49 @@
+# Let Sleeping Dogs Lie (windurst 46): the arms the first mutant round showed untaken. Accepted by GM at Prog 1 with
+# Making the Grade accepted too (its Event lines are the rivals: Paku-Nakku 452, Pechiru-Mashiru 445, Fuepepe 443,
+# Moreno-Toeno 444), Teacher's Pet completed (439 at Moreno-Toeno), a level-10 WAR, fame 225. The lookup: two Event
+# lines of one handler cycle in the container order (this quest's first), the cycle resuming after the last line
+# played; a Progress line plays on every talk; Pechiru-Mashiru's script (no New Model Hat) answers nothing on its
+# turn, so the cycle's next line plays. Prog 1: Pechiru-Mashiru 492, then 445 (492 is an Event); a Remedy with a bone
+# chip (tradeHas is not exact): Option 2, 494, the Remedy taken, the chip kept. Prog 2 Option 2: 495 (..., 0) twice
+# (Prog 2 again by GM; a Progress line over the cycle's next line); Prog 3: 496, then 445 (496 is an Event); the first
+# talks at Fuepepe and Moreno-Toeno at Prog 3: this quest's 493 and 491 (Prog 3 is still <= 3); Paku-Nakku 499,
+# option 0: nothing; 499, option 2: Spoilsport, Prog 4; Prog 4: 500, then 452 (500 is an Event).
+lists WindurstWaters/Paku-Nakku/onTrigger WindurstWaters/Paku-Nakku/onTrade WindurstWaters/Pechiru-Mashiru/onTrigger WindurstWaters/Fuepepe/onTrigger WindurstWaters/Moreno-Toeno/onTrigger WindurstWaters/onEventFinish/494 WindurstWaters/onEventFinish/499
+char zone=WindurstWaters pos=131,-5.75,165 job=WAR lvl=10
+quest Windurst.TeachersPet completed
+quest Windurst.MakingTheGrade accepted
+quest Windurst.LetSleepingDogsLie accepted
+charvar Quest[2][46]Prog 1
+fame Windurst 225
+item Remedy
+item BoneChip
+login
+trigger Pechiru-Mashiru                       # Prog 1: two Event lines: this quest's 492 first
+finish
+trigger Pechiru-Mashiru                       # her script's turn (nothing), then the cycle's next line: Making the Grade's 445
+finish
+trigger Paku-Nakku                            # Prog 1: this quest's 482 (the first of two Event lines) (walks beside him)
+finish
+trade Paku-Nakku Remedy x1 BoneChip x1        # no peppers; tradeHas (not exact) finds the Remedy: Option 2; 494
+finish                                        # Prog 2; the Remedy taken (the chip kept)
+trigger Pechiru-Mashiru                       # Prog 2, Option 2: 495 (0, Remedy, Blazing Peppers, 0) (Progress)
+finish                                        # Prog 3
+charvar Quest[2][46]Prog 2
+trigger Pechiru-Mashiru                       # 495 again: a Progress line over the cycle's next line (445)
+finish                                        # Prog 3
+trigger Pechiru-Mashiru                       # Prog 3: this quest's 496 (the quest's turn after a Progress line)
+finish
+trigger Pechiru-Mashiru                       # her script's turn (nothing), then the cycle's next line: Making the Grade's 445
+finish
+trigger Fuepepe                               # Prog 3 (<= 3), the first talk here: this quest's 493
+finish
+trigger Moreno-Toeno                          # Prog 3 (<= 3), the first talk here: this quest's 491
+finish
+trigger Paku-Nakku                            # Prog 3: 499
+finish option=0                               # not 2: nothing; Prog 3
+trigger Paku-Nakku                            # 499
+finish option=2                               # Spoilsport; Prog 4
+trigger Paku-Nakku                            # Prog 4: this quest's 500 (the cycle resumes after 499: the first line)
+finish
+trigger Paku-Nakku                            # the cycle's next line: Making the Grade's 452 (500 is an Event)
+finish

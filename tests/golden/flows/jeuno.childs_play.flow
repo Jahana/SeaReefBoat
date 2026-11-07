@@ -1,0 +1,23 @@
+# Child's Play (jeuno 23): Port Jeuno's Karl (no script; default 58; Lure of the Wildcat (Jeuno) answers him only while
+# accepted). A level 75 Warrior, The Wonder Magic Set accepted (a GM), three White Rocks and a Chocobo Feather.
+# Available: a rock traded: no trade handler, nothing; 0: begun. Accepted: 61; two rocks: nil; the rock and the
+# feather: nil; the rock: 1, finished: completed (the Wonder Magic Set key item, Trader of Mysteries), fame +7 x3, the
+# rock taken. Completed: no section (58; a trade: nothing). The replies' kinds: #wildcat.
+lists PortJeuno/Karl/onTrigger PortJeuno/Karl/onTrade PortJeuno/onEventFinish/0 PortJeuno/onEventFinish/1
+char zone=PortJeuno pos=-59.4,0,-8.9 job=WAR lvl=75
+quest Jeuno.TheWonderMagicSet accepted
+item WhiteRock x3
+item ChocoboFeather
+login
+trade Karl WhiteRock x1                 # available: no trade handler: nothing, the rock kept
+trigger Karl                            # The Wonder Magic Set accepted: 0
+finish                                  # begun
+trigger Karl                            # accepted: 61
+finish
+trade Karl WhiteRock x2                 # two: nil
+trade Karl WhiteRock x1 ChocoboFeather x1 # an extra item: nil
+trade Karl WhiteRock x1                 # 1
+finish                                  # completed: the Wonder Magic Set, the title; fame +7 x3; the rock taken
+trigger Karl                            # completed: no section; 58
+finish
+trade Karl WhiteRock x1                 # completed: no trade handler: nothing, the rock kept

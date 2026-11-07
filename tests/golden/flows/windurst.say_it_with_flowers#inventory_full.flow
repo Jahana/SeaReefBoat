@@ -1,0 +1,21 @@
+# Say it with Flowers (windurst 50): a full bag. The Cacti give nothing (the quest returns nil: their default
+# POISONOUS_LOOKING_BUDS); Moari's 520 gives no Iron Sword, so nothing happens and the cactus is kept; with room, 520
+# completes the quest.
+lists WindurstWaters/Moari-Kaaori/onTrade TahrongiCanyon/Tahrongi_Cacti/onTrigger WindurstWaters/onEventFinish/514 WindurstWaters/onEventFinish/520
+char zone=WindurstWaters pos=-251.5,-5.31,-226.9
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+fame Windurst 50
+item TahrongiCactus
+login
+trigger Moari-Kaaori                    # 514
+finish option=1                         # begun, Prog 1, SIWFSword 1
+warp -307.2,7.48,264.45 TahrongiCanyon
+fill-inventory
+trigger Tahrongi_Cacti                  # no room: nil; POISONOUS_LOOKING_BUDS
+warp -251.5,-5.31,-226.9 WindurstWaters
+trade Moari-Kaaori TahrongiCactus x1    # SIWFSword 1: 520
+finish                                  # no room for the sword: nothing
+free-inventory
+trade Moari-Kaaori TahrongiCactus x1    # 520
+finish                                  # completed

@@ -1,0 +1,33 @@
+# Food for Thought (windurst 14): the offer's other arms, with GM-set vars. Kerutoto's else (312) at ohbiruProg 0 and at
+# a GM ohbiruProg 2, also with a GM kerutotoProg 256 (the 314 line needs ohbiruProg 1 too); Ohbiru at a GM ohbiruProg 2
+# (neither 0 nor 1: nil, his default 344); 313 answered 2 (neither 0 nor 1: nothing), then 0 (begun, kerutotoProg 1);
+# accepted with a GM kerutotoProg 0 (neither 1 nor 2: nil, his default 306) and a GM ohbiruProg 4 (nil, 344).
+lists WindurstWaters/Kerutoto/onTrigger WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/onEventFinish/308 WindurstWaters/onEventFinish/313
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+login
+trigger Kerutoto                        # available, ohbiruProg 0: event 312
+finish
+trigger Ohbiru-Dohbiru                  # ohbiruProg 0: 308
+finish                                  # ohbiruProg 1
+charvar Quest[2][14]ohbiruProg 2        # a GM sets ohbiruProg 2
+trigger Ohbiru-Dohbiru                  # ohbiruProg 2: neither 0 nor 1, nil; his default 344
+finish
+trigger Kerutoto                        # ohbiruProg 2: the 313 / 314 lines need ohbiruProg 1: 312
+finish
+charvar Quest[2][14]kerutotoProg 256    # a GM sets the refusal
+trigger Kerutoto                        # ohbiruProg 2, kerutotoProg 256: 312 (not 314)
+finish
+charvar Quest[2][14]ohbiruProg 1
+charvar Quest[2][14]kerutotoProg 0
+trigger Kerutoto                        # ohbiruProg 1, kerutotoProg 0: 313 (0, 4371)
+finish option=2                         # neither 0 nor 1: nothing
+trigger Kerutoto                        # 313 again
+finish option=0                         # begun, kerutotoProg 1
+trigger Kerutoto                        # accepted, kerutotoProg 1: 315
+finish
+charvar Quest[2][14]kerutotoProg 0      # a GM sets kerutotoProg 0 while accepted
+trigger Kerutoto                        # neither 1 nor 2: nil; his default 306
+finish
+charvar Quest[2][14]ohbiruProg 4        # a GM sets ohbiruProg 4 while accepted
+trigger Ohbiru-Dohbiru                  # neither < 2, 2 nor 3: nil; his default 344
+finish

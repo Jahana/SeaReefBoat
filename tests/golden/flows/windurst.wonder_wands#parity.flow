@@ -1,0 +1,15 @@
+# Wonder Wands (windurst 48), completion parity: 265's finish with a free slot is the Lua's raw player:completeQuest
+# (after the trade, the gil, the New Moon Armlets, the fame and the title), so a GM's Quest[2][48]Prog survives the
+# completion (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) beside
+# Hakkuru-Rinkuru.
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=75
+item OakStaff
+item MythrilRod
+item RoseWand
+login
+quest Windurst.MakingAmends completed
+quest Windurst.MakingAmens completed
+quest Windurst.WonderWands accepted
+charvar Quest[2][48]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Hakkuru-Rinkuru+7 OakStaff x1 MythrilRod x1 RoseWand x1  # the three alone: 265 (0, ...)
+finish                                  # the var 1; the trade; 4800 gil; the armlets; fame 50; the title; completed

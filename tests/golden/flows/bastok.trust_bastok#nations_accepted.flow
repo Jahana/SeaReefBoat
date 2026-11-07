@@ -1,0 +1,34 @@
+# Trust: Bastok (bastok 92): the other nations' trust NPCs read this quest's status (status reads in their own scripts,
+# which stay; nothing of this quest runs there). Available: Gondebaud's 3500 (Southern San d'Oria) and Wetata's 863
+# (Windurst Woods) need all three trust quests available (option 0: nothing). Accepted through Clarion Star's 434:
+# Gondebaud and Wetata start nothing (Bastok's is neither available nor completed, the other two available); with
+# Trust: Windurst accepted by GM, Kupipi (Heaven's Tower) plays 435, not 439 (Bastok's not completed, San d'Oria's
+# available); with Trust: San d'Oria accepted by GM too, Excenmille (Northern San d'Oria) plays 893, not 897 (Bastok's
+# not completed, Windurst's accepted). 435's and 893's finishes are their scripts' own (the trust learned, their
+# FirstTrust var 1).
+# Kupipi+1: Heaven's Tower has two Kupipis; the first (17768466) is cutscene_only, the second the one a char talks to.
+lists PortBastok/Clarion_Star/onTrigger PortBastok/onEventFinish/434
+char zone=SouthernSanDoria pos=123.7,0,92.1 lvl=5 nation=1
+login
+trigger Gondebaud              # the three available: 3500
+finish                         # option 0: nothing
+warp -23.8,2.5,-44.6 WindurstWoods
+trigger Wetata                 # the three available: 863
+finish                         # option 0: nothing
+warp 81.5,7.5,-24.2 PortBastok
+trigger Clarion_Star           # 434
+finish option=2                # begun, the Blue Institute Card
+warp 123.7,0,92.1 SouthernSanDoria
+trigger Gondebaud              # Bastok's accepted: no event
+finish-if-event
+warp -23.8,2.5,-44.6 WindurstWoods
+trigger Wetata                 # Bastok's accepted: no event
+finish-if-event
+quest Windurst.TrustWindurst accepted
+warp 2,0.1,30 HeavensTower
+trigger Kupipi+1               # Windurst's accepted, Bastok's accepted, San d'Oria's available: 435
+finish
+quest Sandoria.TrustSandoria accepted
+warp -229.3,7,23 NorthernSanDoria
+trigger Excenmille             # San d'Oria's accepted, Bastok's and Windurst's accepted: 893
+finish

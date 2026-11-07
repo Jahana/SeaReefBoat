@@ -1,0 +1,79 @@
+# You Call That a Knife's edges. bob (fame 424, level 5; a Sandfish, a Bone Chip): Mhebi's trade: no section: nothing;
+# Mhebi: the default 125, and again with Nonberry's Knife (a GM: no section matches an available quest); _6y9: 126;
+# Pula: 92; the Temple: a chip to Chef Nonberry: no section: nothing (the default's text is a trigger's). Main (fame 425;
+# two Sandfish, seven Bone Chips, a Tonberry Board): two Sandfish to Mhebi: not the fish alone: nil; Vah while available:
+# his script, the default 124. Accepted at Prog 0 (a GM): Vah 131. The Temple at Prog 1 (a GM): Chef Nonberry reads no
+# Prog: with cooldown now + 1 (a GM): 28: the chip taken, no pop; the board with a chip: not the board alone: 28, both
+# taken, no pop; cooldown = now: 28: the cooks popped, cooldown now + 600; cooldown = now again with the cooks up: 28:
+# popFromQM false, the cooldown unchanged (set only on a pop); the four cooks killed (and gone): 28: popped (the cooldown
+# was still now), cooldown now + 600; the cooks killed again: 28: now < cooldown: no pop. With the knife (a GM): a chip to
+# Chef Nonberry: no section-3 handler: nothing; Kazham: a chip to Mhebi: no trade handler; Pula: no section-3 reply: the
+# default 92. Not reachable: 133's quest:complete false (no item reward).
+lists Kazham/Mhebi_Juhbily/onTrade Kazham/Mhebi_Juhbily/onTrigger Kazham/_6y9/onTrigger Kazham/Pula_Rhatti/onTrigger Kazham/Vah_Keshura/onTrigger TempleOfUggalepih/Chef_Nonberry/onTrade TempleOfUggalepih/onEventFinish/28
+char zone=Kazham pos=40.063,-11,-161.234 job=WAR lvl=75
+char bob zone=Kazham pos=40.063,-11,-161.234 job=WAR lvl=75
+fame Windurst 425
+item Sandfish x2
+item BoneChip x7
+item TonberryBoard
+bob: fame Windurst 424
+bob: item Sandfish
+bob: item BoneChip
+login
+bob: login
+bob: trade Mhebi_Juhbily Sandfish x1    # level 5: no section: nothing
+bob: trigger Mhebi_Juhbily              # the default 125
+bob: finish
+bob: keyitem NonberrysKnife             # a GM
+bob: trigger Mhebi_Juhbily              # available (fame 424) with the knife: no section: the default 125
+bob: finish
+bob: trigger _6y9                       # the default 126
+bob: finish
+bob: trigger Pula_Rhatti                # the default 92
+bob: finish
+bob: warp -135.225,0,-90.732 TempleOfUggalepih
+bob: trade Chef_Nonberry BoneChip x1    # no section: nothing
+bob: logout
+trade Mhebi_Juhbily Sandfish x2         # not exactly one fish: nil
+trigger Vah_Keshura                     # available: no section: his script (no BathedInScent), the default 124
+finish
+quest Outlands.YouCallThatAKnife accepted   # a GM: Prog 0
+trigger Vah_Keshura                     # Prog 0: 131
+finish
+charvar Quest[5][6]Prog 1               # a GM
+warp -135.225,0,-90.732 TempleOfUggalepih   # beside Chef Nonberry
+npclocalvar Chef_Nonberry cooldown 1800000001   # a GM: now + 1
+trade Chef_Nonberry BoneChip x1         # Prog 1: 28
+finish                                  # the chip taken; now < cooldown: no pop
+trade Chef_Nonberry TonberryBoard x1 BoneChip x1   # not the board alone: 28
+finish                                  # both taken; now < cooldown: no pop
+npclocalvar Chef_Nonberry cooldown 1800000000   # a GM: now
+trade Chef_Nonberry BoneChip x1         # 28
+finish                                  # the chip taken; the four cooks popped, claimed; cooldown now + 600
+npclocalvar Chef_Nonberry cooldown 1800000000   # a GM: now
+trade Chef_Nonberry BoneChip x1         # 28
+finish                                  # the chip taken; the cooks up: popFromQM false: the cooldown stays now
+kill COOK_OFFSET
+kill COOK_OFFSET+1
+kill COOK_OFFSET+2
+kill COOK_OFFSET+3
+tick 15000                              # the bodies despawn
+tick 4000                               # they fade: not spawned
+walk -135.225,0,-90.732                 # beside Chef Nonberry again
+trade Chef_Nonberry BoneChip x1         # 28
+finish                                  # the cooldown still now: the cooks popped; cooldown now + 600
+kill COOK_OFFSET
+kill COOK_OFFSET+1
+kill COOK_OFFSET+2
+kill COOK_OFFSET+3
+tick 15000                              # the bodies despawn
+tick 4000                               # they fade: not spawned
+walk -135.225,0,-90.732                 # beside Chef Nonberry again
+trade Chef_Nonberry BoneChip x1         # 28
+finish                                  # the chip taken; now < cooldown (now + 600): no pop
+keyitem NonberrysKnife                  # a GM
+trade Chef_Nonberry BoneChip x1         # the knife held: no section-3 Chef handler: nothing
+warp 40.063,-11,-161.234 Kazham
+trade Mhebi_Juhbily BoneChip x1         # accepted (the knife): no trade handler: nothing
+trigger Pula_Rhatti                     # the knife: no section-3 Pula: the default 92
+finish

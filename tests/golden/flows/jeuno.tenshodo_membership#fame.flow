@@ -1,0 +1,18 @@
+# Tenshodo Membership (jeuno 17): Ghebi's fame edge. A level 75 Warrior with the form (a GM), Jeuno fame level 2 ((249
+# + 0 + 0) / 2 = 124): nil, her script's 106 (4); finished with option 2: the quest's 106 finish runs on her script's
+# event too: Prog 1. 250 (a GM; 125, level 3): 107; a full bag: the invite not given, not completed (the form kept);
+# 107 again: completed.
+lists LowerJeuno/Ghebi_Damomohe/onTrigger LowerJeuno/onEventFinish/106 LowerJeuno/onEventFinish/107
+char zone=LowerJeuno pos=17,-0.1,-7.6 job=WAR lvl=75
+fame Sandoria 249
+keyitem TenshodoApplicationForm
+login
+trigger Ghebi_Damomohe                  # fame level 2: nil; her script's 106 (4)
+finish option=2                         # the quest's 106 finish: Prog 1
+fame Sandoria 250                       # a GM
+trigger Ghebi_Damomohe                  # fame level 3, the form: 107
+fill-inventory
+finish                                  # the invite cannot be given: not completed; the form kept
+free-inventory
+trigger Ghebi_Damomohe                  # 107
+finish                                  # completed; the form taken

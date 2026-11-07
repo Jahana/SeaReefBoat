@@ -1,0 +1,15 @@
+# Prelude to Puissance (jeuno 170), MAX_LEVEL either side of 95 (MAX_LEVEL > 95): a level 91 Warrior with the Limit
+# Breaker at cap 95, Dormant Powers Dislodged completed. MAX_LEVEL 95: 10045 (91, 1, 0, 0) (its finish: no handler in
+# the available section, nothing); 96: 10194 (91, 1, 6, 2).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10194
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+keyitem LimitBreaker
+levelcap 95
+quest Jeuno.DormantPowersDislodged completed
+setting MAX_LEVEL 95
+login
+trigger Nomad_Moogle                    # MAX_LEVEL 95: 10045 (91, 1, 0, 0)
+finish option=13                        # no 10045 handler while available: nothing
+setting MAX_LEVEL 96
+trigger Nomad_Moogle                    # MAX_LEVEL 96: 10194 (91, 1, 6, 2)
+finish                                  # begun

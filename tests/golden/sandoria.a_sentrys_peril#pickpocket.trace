@@ -1,0 +1,110 @@
+# golden trace: sandoria.a_sentrys_peril#pickpocket
+seed 7
+flow a6cc84fb82bcd7eefde8c13956f3b9b7e307da03d0651d4f25cd77775808ab0b
+recorder lua
+lua-at 32ea35310e4dcc92a7a4181bfb1e5fc68c1752fc
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @ca8dd4b43597a0c3 (168)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @a6975a20bea73c98 (2)
+char_jobs @66c57b98f0122169 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @e9cae1c4bb221b99 (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @d635c29f321f5d1d (2)
+char_recast @0b9414455bd195c9 (4)
+char_stats @624f10c4cab4ab95 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @e909b45de3ebc37e (41)
+ret onZoneIn=number:4294967295
+order 100/Aaveleon/onTrigger=default,Quest[0][0],Quest[0][0],Quest[0][3]
+order 100/Aaveleon/onTrade=Quest[0][0]
+order 100/onEventFinish/126=Quest[0][0]
+step trade Aaveleon BoneChip x1
+packets
+ret onTrade=nil:nil
+step trigger Aaveleon
+packets
+  00E @6c9f81e1f7c88983
+  00E @277d6de7b1c58916
+  00E @014774fd29c87915
+  00E @28788e95316caeec
+  00E @ab08ffb4170f9504
+  00E @183b5d89f00711ab
+  00E @794cc74eea5359c5
+  00E @6737ce7fb8ed47e6
+  036 @2840faaa3ce61fae
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step quest Sandoria.ASentrysPeril accepted
+packets
+  056 @7615c00e7d200b92
+char_quest_state + quest_key=sandoria.a_sentrys_peril|area=0|quest_id=0|status=1|step=0|progress=null|repeat_by=0
+chars quests +0:09
+step trigger Aaveleon
+packets
+  036 @2840faaa3ce61fae
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step charvar Quest[0][0]TradedAaveleon 1
+packets
+char_quest_state - quest_key=sandoria.a_sentrys_peril|area=0|quest_id=0|status=1|step=0|progress=null|repeat_by=0
+char_quest_state + quest_key=sandoria.a_sentrys_peril|area=0|quest_id=0|status=1|step=0|progress={"TradedAaveleon":1}|repeat_by=0
+char_vars + varname=Quest[0][0]TradedAaveleon|value=1|expiry=0
+step trigger Aaveleon
+packets
+  034 @2772289e7eab89f0
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish option=1
+packets
+  020 @30e0c6c66ff51ee7
+  01D @f8579df92de4b1ca
+  02A @e694fb0c299f268c
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory + location=0|slot=2|itemId=601|quantity=1|bazaar=0|signature=|extra=000000000000000000000000000000000000000000000000
+ret onEventFinish=nil:nil
+step trigger Aaveleon
+packets
+  036 @2b343dda57018833
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step trigger Aaveleon
+packets
+  036 @2840faaa3ce61fae
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step trigger Aaveleon
+packets
+  036 @2b343dda57018833
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step quest Sandoria.ASentrysPeril completed
+packets
+  056 @9f88652e51473412
+  056 @92dcdcee1d199816
+char_quest_state - quest_key=sandoria.a_sentrys_peril|area=0|quest_id=0|status=1|step=0|progress={"TradedAaveleon":1}|repeat_by=0
+char_quest_state + quest_key=sandoria.a_sentrys_peril|area=0|quest_id=0|status=2|step=0|progress={"TradedAaveleon":1}|repeat_by=0
+chars quests +0:08 +32:01
+step trigger Aaveleon
+packets
+  036 @2840faaa3ce61fae
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step trigger Aaveleon
+packets
+  036 @2b343dda57018833
+  052 @992a1d6976db40ee
+ret onTrigger=number:0

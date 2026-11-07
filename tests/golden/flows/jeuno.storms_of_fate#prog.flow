@@ -1,0 +1,19 @@
+# Storms of Fate (jeuno 86): the accepted handlers' other Prog values, set by a GM. A level 75 Warrior, CoP Dawn current
+# with Status 8, the quest accepted (a GM, before login), by Unstable_Displacement in Riverne Site #B01. Prog 0: the
+# quest's nil (it wants 1); the battlefield wants Prog 2: nothing. Ru'Lude Gardens' area 1 at Prog 2 and at Prog 4 (the
+# handler wants 3): nil; nothing.
+lists RiverneSiteB01/Unstable_Displacement/onTrigger RuludeGardens/onTriggerAreaEnter/1
+char zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+mission Cop Dawn current
+charvar Mission[6][840]Status 8
+quest Jeuno.StormsOfFate accepted
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+trigger Unstable_Displacement           # Prog 0: the quest's nil; no battlefield menu (requiredVar Prog 2); nothing
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+charvar Quest[3][86]Prog 2              # a GM
+walk 4,2.5,60                           # Prog 2: nil; nothing
+walk 4,2.5,100
+charvar Quest[3][86]Prog 4              # a GM
+walk 4,2.5,60                           # Prog 4: nil; nothing

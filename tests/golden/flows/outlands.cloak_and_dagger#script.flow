@@ -1,0 +1,26 @@
+# Cloak and Dagger: Jakoh's Events (280, 283) alternate with his script (UseFallback); 284 (Progress) does not. A level
+# 75 Thief, dagger skill 2300, the Dagger of Trials held, Cloak and Dagger accepted and TuningOut_Progress 2 (GMs: his
+# script starts 294). 280, then his script's 294. The map (a GM): 283, then 294, then 283 again (UseFallback set). The
+# annals (a GM): 284 (a progress event plays over his script's turn); finished: completed.
+lists Kazham/Jakoh_Wahcondalo/onTrigger
+char zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+skill Dagger 2300
+item DaggerOfTrials
+quest Outlands.CloakAndDagger accepted
+keyitem WeaponTrainingGuide
+charvar TuningOut_Progress 2
+login
+trigger Jakoh_Wahcondalo                # no map: 280 (the dagger held: 2)
+finish option=0                         # nothing
+trigger Jakoh_Wahcondalo                # his script's turn: 294
+finish
+keyitem MapToTheAnnalsOfTruth           # a GM
+trigger Jakoh_Wahcondalo                # the map: 283
+finish
+trigger Jakoh_Wahcondalo                # his script's turn: 294
+finish
+trigger Jakoh_Wahcondalo                # 283
+finish
+keyitem AnnalsOfTruth                   # a GM
+trigger Jakoh_Wahcondalo                # the annals: 284 (Progress) over his script's turn
+finish                                  # completed; the key items taken; Evisceration

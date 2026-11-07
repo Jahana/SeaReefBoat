@@ -1,0 +1,40 @@
+# The Moogle's Picnic! (otherAreas 101) with its era module, modules/era/lua/quests/otherareas/the_moogles_picnic.lua,
+# enabled by xi.pre(SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0). The module's check: the bed placed before the last conquest
+# tally (bedPlacedTime < NextConquestTally() - 7 days: the harness clock's tally is 1800198000, so the edge is
+# 1799593200). bedPlacedTime 1799999939 (the quest's own check would offer: placed 61 s ago): the menu. 1799593200 (not
+# <): the menu. 1799593199: 30009, option 1: begun. Out and back: 30010; the trade: 30011, finished: the module's copy
+# (both taken, Prog 1, Timer = JstMidnight(): 1800025200). Out and back: the Timer ahead: the menu (the quest's own
+# finish would have set now + 60: the trace's char var shows which). Timer now - 1 (a GM): 30012, finished: completed.
+module modules/era/lua/quests/otherareas/the_moogles_picnic.lua
+lists BastokMines/Moogle/onTrigger BastokMines/Moogle/onTrade BastokMines/onEventFinish/30009 BastokMines/onEventFinish/30010 BastokMines/onEventFinish/30011 BastokMines/onEventFinish/30012
+char zone=BastokMines pos=116.9,-1.6,-72 job=WAR lvl=75 nation=1
+setting ENABLE_AMK 0                    # AMK 1 (30023, the Moogle, ENABLE_AMK 1) off: #kinds shows it
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest OtherAreas.GiveAMoogleABreak completed
+fame Bastok 325
+charvar Quest[4][101]bedPlacedTime 1799999939
+item ShrimpLure
+item StickOfSelbinaButter
+login
+zoneline BastokMines                    # into the Mog House
+trigger Moogle                          # placed after the tally - 7 days: the menu
+charvar Quest[4][101]bedPlacedTime 1799593200 # a GM: the edge (not <)
+trigger Moogle                          # the menu
+charvar Quest[4][101]bedPlacedTime 1799593199 # a GM
+trigger Moogle                          # 30009
+finish option=1                         # begun
+warp -6,0,-50 BastokMarkets
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+trigger Moogle                          # 30010
+finish
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1  # 30011
+finish                                  # the module's: both taken; Prog 1; Timer = JstMidnight() (1800025200)
+warp -6,0,-50 BastokMarkets
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+trigger Moogle                          # the Timer ahead: nil; the menu
+charvar Quest[4][101]Timer 1799999999   # a GM: now - 1
+trigger Moogle                          # 30012
+finish                                  # completed

@@ -1,0 +1,43 @@
+# In the Name of Science (otherAreas 76), the status operands. Emptiness Bleeds current (The Warriors' Path completed),
+# available: a base traded: nothing (accepted or completed wanted); the pie with a target (a GM: NAME_OF_SCIENCE_target
+# 15496, the Snow Gorget): nothing; the organs one short: nothing; the trigger: 524 (the available arm first, the target
+# held), begun. The organs' trade reads no status: available again (a GM) with the target, the Snow Gorget's organs (10
+# Phuabo, 5 Aern, 1 Yovra): 529; its finish: the Snow Gorget, the target 0, completed from available
+# (Quest[4][76]Prog 1 (GM) kept: npcUtil.completeQuest has no cleanup). Completed, no
+# target: 525; the Sanative Earring base (a Silver Earring, a White Chip): 526, the target 14791; 531's hint 17 with
+# the pie; then 532 or 528 (Silver Earring, White Chip).
+char zone=TavnazianSafehold pos=82.5,-25.0,3.5 job=WAR lvl=75
+mission Cop EmptinessBleeds current
+item Gorget
+item ClearChip
+item ApplePie x2
+item PhuaboOrgan x10
+item AernOrgan x5
+item YovraOrgan x1
+item SilverEarring
+item WhiteChip
+login
+trade Yurim Gorget x1 ClearChip x1      # available, no target: nothing
+charvar NAME_OF_SCIENCE_target 15496    # a GM: the Snow Gorget
+trade Yurim ApplePie x1                 # available, a target: nothing
+trade Yurim PhuaboOrgan x10 AernOrgan x4 YovraOrgan x1   # one Aern short: nothing
+trigger Yurim                           # UseFallback 0: the default 527
+finish
+trigger Yurim                           # available (a target held): 524
+finish option=0                         # begun (no option read)
+quest OtherAreas.InTheNameOfScience available   # a GM
+charvar Quest[4][76]Prog 1              # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+trade Yurim PhuaboOrgan x10 AernOrgan x5 YovraOrgan x1   # the target's organs, no status read: 529
+finish                                  # the Snow Gorget; the target 0; completed from available
+trigger Yurim                           # the default 527
+finish
+trigger Yurim                           # completed, no target: 525
+finish
+trade Yurim SilverEarring x1 WhiteChip x1   # completed, no target: the Sanative Earring base: 526 (Silver Earring, White Chip)
+finish                                  # both taken
+trade Yurim ApplePie x1                 # completed, a target: 531 (Apple Pie, 0, 17)
+finish                                  # the pie taken
+trigger Yurim                           # the default 527
+finish
+trigger Yurim                           # completed, a target: 532 or 528 (Silver Earring, White Chip)
+finish

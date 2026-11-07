@@ -1,0 +1,12 @@
+# Lure of the Wildcat (San d'Oria) (sandoria 113): 812's reply kind. Amutiyaal has a script onTrigger (816), so an
+# Event offer would alternate with it on a second talk in a row; 812 is a Progress event and plays again. The GM resets
+# the quest (available, the badge taken) between the two offers.
+lists SouthernSanDoria/Amutiyaal/onTrigger SouthernSanDoria/onEventFinish/812
+char zone=SouthernSanDoria pos=118.0,0.0,84.7 job=WAR lvl=20
+login
+trigger Amutiyaal                         # 812
+finish                                    # the badge; begun
+quest Sandoria.LureOfTheWildcat available
+delkeyitem RedSentinelBadge
+trigger Amutiyaal                         # 812 again (Progress)
+finish                                    # the badge; begun

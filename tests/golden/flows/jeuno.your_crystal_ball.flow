@@ -1,0 +1,46 @@
+# Your Crystal Ball (jeuno 9): Kurou-Morou in Lower Jeuno, the Rockwell pool in the Maze of Shakhrami. Jeuno fame level
+# 2 ((34 + 33 + 33) / 2 = 50): a lens to him while available (no trade handler: nil), his 194 (option 1: nothing;
+# option 0: begun), 191, a lens to him (Prog 0, not the sphere: nil); the pool at Prog 0 (nil: WATER_POOL), two lenses
+# (not tradeMatches: nil), one lens (taken, Prog 1, Wait = now + 60, SUBMERGED_ITEM), another (MORE_THAN_ONE),
+# WAIT_A_BIT_LONGER, a JST day later 52 (a full bag: ITEM_CANNOT_BE_OBTAINED; with a slot: Prog 2, the Divination
+# Sphere), the pool at Prog 2 (nil: WATER_POOL; a lens: neither arm, nil), a lens to him at Prog 2 (not the sphere:
+# nil), the sphere to him (196: completed, Fortune-Teller in Training, fame +16 x3, the sphere taken,
+# FORTUNE_TOLD_BY_KUROU_MOROU), then Never to Return's 204.
+lists LowerJeuno/Kurou-Morou/onTrigger LowerJeuno/Kurou-Morou/onTrade MazeOfShakhrami/Rockwell/onTrigger MazeOfShakhrami/Rockwell/onTrade LowerJeuno/onEventFinish/194 LowerJeuno/onEventFinish/196 MazeOfShakhrami/onEventFinish/52
+char zone=LowerJeuno pos=-1,-6.7,-29 job=WAR lvl=30
+fame Sandoria 34
+fame Bastok 33
+fame Windurst 33
+item AhrimanLens x4
+login
+walk -2.5,-6.7,-28
+trade Kurou-Morou AhrimanLens x1            # available: no trade handler, nil
+trigger Kurou-Morou                         # available, fame level 2: 194
+finish option=1                             # not 0: nothing
+trigger Kurou-Morou                         # 194
+finish option=0                             # begun
+trigger Kurou-Morou                         # accepted: 191
+finish
+trade Kurou-Morou AhrimanLens x1            # Prog 0, not the sphere: nil
+warp -18,-14,181.5 MazeOfShakhrami
+trigger Rockwell                            # Prog 0: nil; WATER_POOL
+trade Rockwell AhrimanLens x2               # not one lens: nil
+trade Rockwell AhrimanLens x1               # Prog 0: the lens taken, Prog 1, Wait, SUBMERGED_ITEM
+trade Rockwell AhrimanLens x1               # Prog 1: MORE_THAN_ONE
+trigger Rockwell                            # before Wait: WAIT_A_BIT_LONGER
+wait jst=1                                  # GetSystemTime past Wait
+trigger Rockwell                            # 52
+fill-inventory
+finish                                      # no free slot: ITEM_CANNOT_BE_OBTAINED, Prog 1
+free-inventory
+trigger Rockwell                            # 52 again
+finish                                      # Prog 2, the Divination Sphere
+trigger Rockwell                            # Prog 2: nil; WATER_POOL
+trade Rockwell AhrimanLens x1               # Prog 2: neither arm, nil
+warp -1,-6.7,-29 LowerJeuno
+walk -2.5,-6.7,-28
+trade Kurou-Morou AhrimanLens x1            # Prog 2, not the sphere: nil
+trade Kurou-Morou DivinationSphere x1       # Prog 2, the sphere: 196
+finish                                      # completed: Fortune-Teller in Training, fame +16 x3, the sphere taken, FORTUNE_TOLD_BY_KUROU_MOROU
+trigger Kurou-Morou                         # completed: Never to Return's 204
+finish option=1

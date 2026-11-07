@@ -1,0 +1,18 @@
+# The Requiem (jeuno 64), the repop after a wipe: accepted by GM at Prog 1, Popped 1, none of the three up (the char
+# wiped, the guardians gone without Yum Kimil's death). The bard's sarcophagus (Sarcophagus+3) pops Yum Kimil and the two
+# guardians again (claimed): noAction, no message; a flask traded to it then (Popped 1): nil; a trigger with the three
+# up: the pop fails, nil, the script's SARCOPHAGUS_CANNOT_BE_OPENED (7453).
+lists TheEldiemeNecropolis/Sarcophagus/onTrigger TheEldiemeNecropolis/Sarcophagus/onTrade
+char zone=TheEldiemeNecropolis pos=-417,6.5,500 job=BRD lvl=50
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+quest Jeuno.PathOfTheBard completed
+quest Jeuno.PainfulMemory completed
+quest Jeuno.TheRequiem accepted
+charvar Quest[3][64]Prog 1
+charvar Quest[3][64]Popped 1
+item FlaskOfHolyWater
+login
+trigger Sarcophagus+3                       # Prog 1, Popped 1, none up: the three popped; noAction
+trade Sarcophagus+3 FlaskOfHolyWater x1     # Popped 1: nil; nothing
+trigger Sarcophagus+3                       # the three up: the pop fails, nil; SARCOPHAGUS_CANNOT_BE_OPENED

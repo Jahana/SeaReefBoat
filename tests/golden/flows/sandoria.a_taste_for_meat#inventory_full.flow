@@ -1,0 +1,17 @@
+# A Taste for Meat (sandoria 100): Prog 1 by GM (the char var Quest[0][100]Prog), five slices to Thierride (528:
+# completed, Option 1); with a full inventory Antreneau's 530 cannot give the Slice of Grilled Hare: Option stays 1 and
+# the finish starts 538 (no handler), which the client ends; with room, 530 again gives it (Option 0). 528's completion
+# cannot fail (gil, fame and a title only).
+char zone=PortSanDoria pos=-65.949,-5.496,-28.792 job=WAR lvl=10
+charvar Quest[0][100]Prog 1
+item SliceOfHareMeat x5
+login
+trade Thierride SliceOfHareMeat x5        # Prog 1, exactly five: 528
+finish                                    # begun and completed; Option 1
+fill-inventory
+trigger Antreneau                         # Option 1: 530
+finish                                    # no room: giveItem false; the finish starts 538
+finish-if-event                           # 538 ended (no handler)
+free-inventory
+trigger Antreneau                         # Option still 1: 530
+finish                                    # a Slice of Grilled Hare; Option 0

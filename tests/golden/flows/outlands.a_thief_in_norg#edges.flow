@@ -1,0 +1,146 @@
+# A Thief in Norg!?'s edges. Section 1 off, one operand each: bob (a level 49 Samurai, Yomi Okuri completed): default
+# 71, and 71 again at AF3_QUEST_LEVEL 49.4 (the setting compared as a number: 49 < 49.4); carl (a level 50 Warrior, completed): 71; dan (a level 50 Samurai, Yomi Okuri accepted at Prog 2, no feather): its
+# 147 twice (no tie with a 158). Main (a level 50 Samurai, Yomi Okuri completed, no mustZone): Timer now + 1: 157; Timer
+# = now: 158 (options 0 and 2: not begun); the mustZone alone (a GM): 157. Available, the thread traded with the helm held (the accepted trade; the status the only change): nothing.
+# Begun. Prog 0 (a GM): 159; Prog 4: 159; Prog 5: 166 finished with a full inventory: giveItem false, Prog stays 5; 166:
+# the charm, Prog 6; 166 again at Prog 5 (a GM) with the charm held (rare): giveItem false, Prog 5 (Prog 6 without the
+# charm: ed below). Prog 7: 160; Prog 9 (a GM), no mustZone, Wait now + 1: 163; Wait = now and the mustZone alone (a
+# GM): 163; Wait = now: 164 finished with a full
+# inventory: complete false: still accepted. Prog 10: nil (default 71). Jaucribaix's trade: the thread without the helm:
+# nil; the helm and the thread with the charm: nil; two threads: nil. Sanosuke: Prog 0: nil (default 303), Prog 5: 306; Phoochuchu: Prog 1: nil (default 300), Prog 5: 302;
+# the door _6i8: Prog 2 and Prog 4: nil (no script, no default: the trigger returns -1, no event). Waughroon Shrine's
+# zone-in at Prog 3 and 5: no event. ed (a level 50 Samurai, accepted at Prog 6 with no charm): 168 finished with a full
+# inventory: nothing; 168: the charm, Prog stays 6.
+lists Norg/Jaucribaix/onTrigger Norg/Jaucribaix/onTrade PortJeuno/Sanosuke/onTrigger Mhaura/Phoochuchu/onTrigger BastokMines/_6i8/onTrigger WaughroonShrine/onZoneIn/1
+char zone=Norg pos=91,-7,-8 job=SAM lvl=50
+char bob zone=Norg pos=91,-7,-8 job=SAM lvl=49
+char carl zone=Norg pos=91,-7,-8 job=WAR lvl=50
+char dan zone=Norg pos=91,-7,-8 job=SAM lvl=50
+char ed zone=Norg pos=91,-7,-8 job=SAM lvl=50
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+charvar Quest[5][142]Timer 1800000001
+item SpoolOfGoldThread x2
+keyitem CharredHelm
+bob: quest Outlands.ForgeYourDestiny completed
+bob: quest Outlands.TheSacredKatana completed
+bob: quest Outlands.YomiOkuri completed
+carl: quest Outlands.ForgeYourDestiny completed
+carl: quest Outlands.TheSacredKatana completed
+carl: quest Outlands.YomiOkuri completed
+dan: quest Outlands.ForgeYourDestiny completed
+dan: quest Outlands.TheSacredKatana completed
+dan: quest Outlands.YomiOkuri accepted
+dan: charvar Quest[5][141]Prog 2
+ed: quest Outlands.ForgeYourDestiny completed
+ed: quest Outlands.TheSacredKatana completed
+ed: quest Outlands.YomiOkuri completed
+ed: quest Outlands.AThiefInNorg accepted
+ed: charvar Quest[5][142]Prog 6
+login
+bob: login
+bob: trigger Jaucribaix                 # level 49 < AF3_QUEST_LEVEL 50: default 71
+bob: finish
+setting AF3_QUEST_LEVEL 49.4
+bob: trigger Jaucribaix                 # 49 < 49.4: default 71
+bob: finish
+setting AF3_QUEST_LEVEL 50
+bob: logout
+carl: login
+carl: trigger Jaucribaix                # a Warrior: default 71
+carl: finish
+carl: logout
+dan: login
+dan: trigger Jaucribaix                 # Yomi Okuri accepted: its 147
+dan: finish
+dan: trigger Jaucribaix                 # 147 again
+dan: finish
+dan: logout
+ed: login
+ed: trigger Jaucribaix                  # Prog 6, no charm: 168
+ed: fill-inventory
+ed: finish                              # giveItem false: nothing
+ed: free-inventory
+ed: trigger Jaucribaix                  # 168
+ed: finish                              # the charm; Prog stays 6
+ed: trigger Jaucribaix                  # the charm held: 167
+ed: finish
+ed: logout
+trigger Jaucribaix                      # now < Timer (now + 1): 157
+finish
+charvar Quest[5][142]Timer 1800000000   # a GM: now
+trigger Jaucribaix                      # 158
+finish option=0
+trigger Jaucribaix                      # 158
+finish option=2                         # not 1: not begun
+charvar Quest[5][142]mustZone 252       # a GM: the mustZone alone
+trigger Jaucribaix                      # the mustZone: 157
+finish
+charvar Quest[5][142]mustZone 0         # a GM
+trade Jaucribaix SpoolOfGoldThread x1   # available, the helm held: nothing
+trigger Jaucribaix                      # 158
+finish option=1                         # begun; Prog 1
+charvar Quest[5][142]Prog 0             # a GM
+trigger Jaucribaix                      # Prog 0: 159
+finish
+charvar Quest[5][142]Prog 4             # a GM
+trigger Jaucribaix                      # Prog 4: 159
+finish
+charvar Quest[5][142]Prog 5             # a GM
+trigger Jaucribaix                      # Prog 5: 166
+fill-inventory
+finish                                  # giveItem false: Prog stays 5
+free-inventory
+trigger Jaucribaix                      # 166
+finish                                  # the charm; Prog 6
+charvar Quest[5][142]Prog 5             # a GM
+trigger Jaucribaix                      # 166
+finish                                  # the charm held (rare): giveItem false: Prog stays 5
+charvar Quest[5][142]Prog 7             # a GM
+trigger Jaucribaix                      # Prog 7: 160
+finish                                  # Prog 8
+trade Jaucribaix SpoolOfGoldThread x1 BanishingCharm x1 # the helm held, the thread and a second item: nil
+trade Jaucribaix SpoolOfGoldThread x2   # two threads: nil
+delkeyitem CharredHelm                  # a GM
+trade Jaucribaix SpoolOfGoldThread x1   # no helm: nil
+charvar Quest[5][142]Prog 9             # a GM
+charvar Quest[5][142]Wait 1800000001    # a GM: now + 1 (no mustZone)
+trigger Jaucribaix                      # now < Wait: 163
+finish
+charvar Quest[5][142]Wait 1800000000    # a GM: now
+charvar Quest[5][142]mustZone 252       # a GM: the mustZone alone
+trigger Jaucribaix                      # the mustZone: 163
+finish
+charvar Quest[5][142]mustZone 0         # a GM
+trigger Jaucribaix                      # 164
+fill-inventory
+finish                                  # complete false (no room for the kabuto): still accepted
+free-inventory
+charvar Quest[5][142]Prog 10            # a GM
+trigger Jaucribaix                      # Prog 10: no arm: nil: default 71
+finish
+charvar Quest[5][142]Prog 0             # a GM
+warp -63,7,0 PortJeuno
+trigger Sanosuke                        # Prog 0: nil: default 303
+finish
+charvar Quest[5][142]Prog 5             # a GM
+trigger Sanosuke                        # Prog 5 (>= 3): 306
+finish
+charvar Quest[5][142]Prog 1             # a GM
+warp -4,-4,69 Mhaura
+trigger Phoochuchu                      # Prog 1: nil: default 300
+finish
+charvar Quest[5][142]Prog 5             # a GM
+trigger Phoochuchu                      # Prog 5 (>= 4): 302
+finish
+charvar Quest[5][142]Prog 2             # a GM
+warp 70,7,2 BastokMines
+trigger _6i8                            # Prog 2: nil (the door: no script, no default: nothing)
+charvar Quest[5][142]Prog 4             # a GM
+trigger _6i8                            # Prog 4: nil
+charvar Quest[5][142]Prog 3             # a GM
+warp -338.1,104.3,-260.3 WaughroonShrine   # Prog 3: no zone-in event
+charvar Quest[5][142]Prog 5             # a GM
+warp -63,7,0 PortJeuno
+warp -338.1,104.3,-260.3 WaughroonShrine   # Prog 5: no zone-in event

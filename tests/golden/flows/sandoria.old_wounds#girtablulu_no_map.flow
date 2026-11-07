@@ -1,0 +1,12 @@
+# Old Wounds (sandoria 102): Girtablulu's death without the map. Only a map holder pops Girtablulu, and the map leaves
+# only through 48 or 46's option 2, so a GM deletes the map while it is up: the death handler's
+# hasKeyItem(MAP_TO_THE_ANNALS_OF_TRUTH) is false and killed_wsnm stays 0, so the next qm3 talk gives nothing.
+char zone=QuicksandCaves pos=-144.9,1.9,448.1 job=WAR lvl=75
+quest Sandoria.OldWounds accepted
+keyitem WeaponTrainingGuide
+keyitem MapToTheAnnalsOfTruth
+login
+trigger qm3                               # the map, no Annals: Girtablulu popped and claimed, SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth
+kill GIRTABLULU                           # no map: killed_wsnm not set
+trigger qm3                               # killed_wsnm 0, no map: nil, NOTHING_OUT_OF_ORDINARY (no Annals)

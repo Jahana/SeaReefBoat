@@ -1,0 +1,20 @@
+# Fire and Brimstone (windurst 73) with a full inventory (accepted, fireAndBrimstone 5 by a GM): the earring: 537; its
+# finish: npcUtil.completeQuest refuses (no room for Hunter's Beret; the earring still holds its slot): nothing taken,
+# var 5, still accepted. With a slot free: 537: completed, the earring taken.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=RNG lvl=60
+quest Windurst.SinHunting completed
+quest Windurst.TheFangedOne completed
+quest Windurst.FireAndBrimstone accepted
+charvar fireAndBrimstone 5
+item OldEarring
+login
+fill-inventory
+trade Perih_Vashai OldEarring x1        # var 5: 537
+finish                                  # no room: refused; the earring kept, var 5, accepted
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # still var 5: 536
+finish
+free-inventory
+trade Perih_Vashai OldEarring x1        # 537
+finish                                  # completed: Hunter's Beret, fame 20, var 0; the earring taken

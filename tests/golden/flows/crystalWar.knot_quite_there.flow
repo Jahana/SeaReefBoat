@@ -1,0 +1,48 @@
+# Knot Quite There (crystalWar 27): a level 99 Warrior in Windurst Waters [S] with a 108-Knot Quipu, The Tigress Strikes
+# completed, the WotG mission Back to the Beginning completed and The Queen of the Dance current (GMs: past Cait Sith,
+# whose own Southern San d'Oria [S] zone-in is in #caitsith; the four later-expansion missions as group 1's flows). The
+# Acolyte Hostel door (script: DOOR_ACOLYTE_HOSTEL_LOCKED): 151, finished: begun; 152 (an Event: it alternates with the
+# script), the script's message then 152 (the message does not count as "did something"), 152 again. Sauromugue Champaign [S]: Bulwark Gate (empty script, default DOOR_FIRMLY_SEALED):
+# Prog 0: 105, finished: Prog 1; 107; the quipu: 106, finished: the trade confirmed, Prog 2; 108. East Ronfaure [S],
+# then Southern San d'Oria [S]: the zone-in from East Ronfaure [S] at Prog 2: 62 (left open), finished: Prog 3. _6eo
+# (empty script, default GATE_IS_LOCKED): 63, finished: completed (a Platinum Beastcoin). Completed (no section): _6eo:
+# its default; the door: its script.
+lists WindurstWatersS/Door_Acolyte_Hostel_down/onTrigger WindurstWatersS/onEventFinish/151 SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/Bulwark_Gate/onTrade SauromugueChampaignS/onEventFinish/105 SauromugueChampaignS/onEventFinish/106 SouthernSanDoriaS/_6eo/onTrigger SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventFinish/62 SouthernSanDoriaS/onEventFinish/63
+char zone=WindurstWatersS pos=125.5,-3,222.215 job=WAR lvl=99
+item OneHundredEightKnotQuipu
+quest CrystalWar.TheTigressStrikes completed
+mission Wotg BackToTheBeginning completed
+mission Wotg TheQueenOfTheDance current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Door_Acolyte_Hostel_down        # 151; the mission takes no talk
+finish                                  # begun
+trigger Door_Acolyte_Hostel_down        # 152 (an Event)
+finish
+trigger Door_Acolyte_Hostel_down        # the script's turn: its message, then 152
+finish-if-event
+trigger Door_Acolyte_Hostel_down        # 152 again
+finish
+warp -445.674,-1.831,342.417 SauromugueChampaignS
+trigger Bulwark_Gate                    # Prog 0: 105
+finish                                  # Prog 1
+trigger Bulwark_Gate                    # Prog 1: 107
+finish
+trade Bulwark_Gate OneHundredEightKnotQuipu x1 # Prog 1, the quipu: 106
+finish                                  # the trade confirmed; Prog 2
+trigger Bulwark_Gate                    # Prog 2: 108
+finish
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp -13.849,1.398,-30.368 SouthernSanDoriaS open # from East Ronfaure [S] at Prog 2: 62
+finish                                  # Prog 3
+warp 149.733,-2.5,23.788 SouthernSanDoriaS
+trigger _6eo                            # Prog 3: 63
+finish                                  # completed (Platinum Beastcoin)
+trigger _6eo                            # completed: no section: the default GATE_IS_LOCKED
+finish-if-event
+warp 125.5,-3,222.215 WindurstWatersS
+trigger Door_Acolyte_Hostel_down        # completed: no section: its script
+finish-if-event

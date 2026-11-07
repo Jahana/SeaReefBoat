@@ -1,0 +1,22 @@
+# To Catch a Falling Star (windurst 53) once completed (a GM's completeQuest). The Twinkle Tree at 03:00, prog 0 and no
+# tear held: the scales: nothing (not accepted). Sigismund: the tear (a GM's): nothing (not accepted); prog 0: his 357;
+# prog 1 (a GM): 200 (prog > 0), prog 0; then his 357. Tohopka: her 358.
+char zone=WestSarutabaruta pos=154.5,-40.75,333.7 job=WAR lvl=75
+item HandfulOfPugilScales
+login
+quest Windurst.ToCatchAFallingStar completed
+wait vana=15                            # 03:00
+trigger Twinkle_Tree                    # its script: hour 3, prog 0: FROST_DEPOSIT_TWINKLES, MELT_BARE_HANDS
+trade Twinkle_Tree HandfulOfPugilScales x1  # completed: nothing
+warp -109.04,-9.0,80.56 PortWindurst    # beside Sigismund
+item StarfallTear
+trade Sigismund StarfallTear x1         # completed: nothing
+trigger Sigismund                       # completed, prog 0: his 357
+finish
+charvar QuestCatchAFallingStar_prog 1
+trigger Sigismund                       # completed, prog 1: 200; prog 0
+finish
+trigger Sigismund                       # prog 0: his 357
+finish
+trigger Tohopka                         # completed: her 358
+finish

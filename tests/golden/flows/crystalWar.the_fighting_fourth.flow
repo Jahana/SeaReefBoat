@@ -1,0 +1,108 @@
+# The Fighting Fourth (crystalWar 7), the main path with no campaign allegiance: a level 99 Warrior in the Eldieme
+# Necropolis [S] (missions as Steamed Rams' main flow). Turbulent Storm (script: 9 with an allegiance, 8 with the RED
+# letter, else 7; its onEventFinish 7 on option 0 gives the Blue letter): nothing held: the quest's 7 (an Event),
+# declined; the lookup's other turn: the script's 7, declined; the quest's 7, option 2: nothing; the script's 7,
+# declined; the quest's 7, accepted: the Blue Recommendation Letter (the script's finish runs too: npcUtil.giveKeyItem
+# sees the letter held); the script's 7 (it reads the RED letter), option 1; the letter held: the quest's 8; the
+# script's 7 again. Bastok Markets [S]: Adelbrecht (an empty script): the letter: 139 (0, 0), options 0 and 2: nothing;
+# option 1: the letter taken, the Battle Rations, begun. Prog 0: 140, options 0 and 2: nothing. North Gustaberg [S]:
+# Roderich at Prog 0: nil (default 111); the Barricade: nil (NO_WAY_PAST_BARRIER); Gebhardt 102, finished: the rations
+# taken, Prog 1; 103. The Barricade at Prog 1: nil. Bastok Markets [S]: Adelbrecht 141, option 0: nothing. North
+# Gustaberg [S]: Roderich 104, finished: Prog 2; 105. Bastok Markets [S]: Adelbrecht 142, option 0: nothing. North
+# Gustaberg [S]: Gebhardt 107; the Barricade 106, finished: Prog 3; Roderich 109; Gebhardt 108. Bastok Markets [S]:
+# Adelbrecht 143, finished: the Sprinter's Shoes, completed (Fourth Division Soldier), the Bronze Ribbon of Service,
+# allegiance 2, NOW_ALLIED_WITH 2. Completed: Adelbrecht 162, twice; Gebhardt 108, Roderich 109, the Barricade nil
+# (NO_WAY_PAST_BARRIER); Turbulent Storm: the quest's 9 (replaceDefault), then the script's 9.
+lists TheEldiemeNecropolisS/Turbulent_Storm/onTrigger TheEldiemeNecropolisS/onEventFinish/7 BastokMarketsS/Adelbrecht/onTrigger BastokMarketsS/onEventFinish/139 BastokMarketsS/onEventFinish/140 BastokMarketsS/onEventFinish/142 BastokMarketsS/onEventFinish/143 NorthGustabergS/Gebhardt/onTrigger NorthGustabergS/Roderich/onTrigger NorthGustabergS/Barricade/onTrigger NorthGustabergS/onEventFinish/102 NorthGustabergS/onEventFinish/104 NorthGustabergS/onEventFinish/106
+char zone=TheEldiemeNecropolisS pos=423.961,-48,-47.308 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Turbulent_Storm                 # nothing held: the quest's 7; the mission takes no talk
+finish option=1                         # declined: nothing
+trigger Turbulent_Storm                 # the lookup's other turn: the script's 7 (no RED letter)
+finish option=1                         # nothing
+trigger Turbulent_Storm                 # the quest's 7
+finish option=2                         # nothing (the quest's finish and the script's)
+trigger Turbulent_Storm                 # the script's 7
+finish option=1                         # nothing
+trigger Turbulent_Storm                 # the quest's 7
+finish option=0                         # the Blue Recommendation Letter (the script's finish sees it held)
+trigger Turbulent_Storm                 # the script's 7 (it reads the RED letter)
+finish option=1                         # nothing
+trigger Turbulent_Storm                 # the letter: the quest's 8
+finish
+trigger Turbulent_Storm                 # the script's 7
+finish option=1
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # the letter: 139 (0, 0)
+finish option=0                         # nothing
+trigger Adelbrecht                      # 139 (0, 0)
+finish option=2                         # nothing
+trigger Adelbrecht                      # 139 (0, 0)
+finish option=1                         # the letter taken; the Battle Rations; begun
+trigger Adelbrecht                      # Prog 0: 140
+finish option=0                         # nothing
+trigger Adelbrecht                      # 140
+finish option=2                         # nothing
+warp -398.539,39.991,-90.445 NorthGustabergS
+trigger Roderich                        # Prog 0: nil: default 111
+finish-if-event
+warp -513.46,37.979,583.287 NorthGustabergS
+trigger Barricade                       # Prog 0: nil: NO_WAY_PAST_BARRIER
+finish-if-event
+warp 207.799,-20.826,669.125 NorthGustabergS
+trigger Gebhardt                        # Prog 0: 102
+finish                                  # the rations taken (no message); Prog 1
+trigger Gebhardt                        # 103
+finish
+warp -513.46,37.979,583.287 NorthGustabergS
+trigger Barricade                       # Prog 1: nil: NO_WAY_PAST_BARRIER
+finish-if-event
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # Prog 1: 141
+finish option=0                         # nothing
+warp -398.539,39.991,-90.445 NorthGustabergS
+trigger Roderich                        # Prog 1: 104
+finish                                  # Prog 2
+trigger Roderich                        # 105
+finish
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # Prog 2: 142
+finish option=0                         # nothing
+warp 207.799,-20.826,669.125 NorthGustabergS
+trigger Gebhardt                        # Prog 2: 107
+finish
+warp -513.46,37.979,583.287 NorthGustabergS
+trigger Barricade                       # Prog 2: 106
+finish                                  # Prog 3
+warp -398.539,39.991,-90.445 NorthGustabergS
+trigger Roderich                        # Prog 3: 109
+finish
+warp 207.799,-20.826,669.125 NorthGustabergS
+trigger Gebhardt                        # Prog 3: 108
+finish
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # Prog 3: 143
+finish                                  # Sprinter's Shoes; completed; Bronze Ribbon; allegiance 2; NOW_ALLIED_WITH 2
+trigger Adelbrecht                      # completed: 162
+finish
+trigger Adelbrecht                      # 162 again
+finish
+warp 207.799,-20.826,669.125 NorthGustabergS
+trigger Gebhardt                        # completed: 108
+finish
+warp -398.539,39.991,-90.445 NorthGustabergS
+trigger Roderich                        # completed: 109
+finish
+warp -513.46,37.979,583.287 NorthGustabergS
+trigger Barricade                       # completed: no handler: NO_WAY_PAST_BARRIER
+finish-if-event
+warp 423.961,-48,-47.308 TheEldiemeNecropolisS
+trigger Turbulent_Storm                 # completed: the quest's 9
+finish
+trigger Turbulent_Storm                 # the script's 9 (allegiance 2)
+finish

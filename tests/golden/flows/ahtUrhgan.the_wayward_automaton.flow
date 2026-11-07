@@ -1,0 +1,52 @@
+# The Wayward Automaton (ahtUrhgan): Iruki-Waraki in Whitegate, Dnegan in Nashmau, Caedarva Mire's qm9 and the
+# Caedarva Toad. A PUP of level 40 (AF1_QUEST_LEVEL) with No Strings Attached completed (a GM) and its Animator held.
+# Iruki-Waraki answers through No Strings Attached's completed section first (its 267, an Event) and his script on the
+# next talk (interaction_lookup's UseFallback, cleared by zoning): each script talk follows a 267 talk. His script
+# calls this quest first: 774 (finish: progress 1, begun); 775 at progress 1. Dnegan (no default): 289 at progress 1
+# (finish: progress 2), 289 again at progress 2. qm9 at progress 2: HIDEOUS_BEAST_EMERGES, the toad spawned and
+# claimed; again while it is up: nothing; the toad killed: TheWaywardAutomatonNM 1; qm9: 14 (finish: progress 3, the
+# NM var 0); then SOMEONE_SLIPPED; Dnegan at progress 3: his 288. Iruki-Waraki at progress 3: 776; its finish with a
+# full inventory: the completion fails (the Turbo Animator does not fit; nothing else); with room: the Turbo Animator,
+# completed, the var cleared. Completed, a PUP below AF2_QUEST_LEVEL (50): 777.
+char zone=AhtUrhganWhitegate pos=102.8,-6.0,-29.0 job=PUP lvl=40
+quest AhtUrhgan.NoStringsAttached completed
+item Animator
+login
+trigger Iruki-Waraki                    # No Strings Attached completed, the Animator held: its 267 (UseFallback 0)
+finish
+trigger Iruki-Waraki                    # the script: PUP 40, No Strings Attached completed, available: 774
+finish                                  # TheWaywardAutomatonProgress 1; begun
+trigger Iruki-Waraki                    # 267
+finish
+trigger Iruki-Waraki                    # accepted, progress 1: 775
+finish
+warp 31.0,-6.0,56.0 Nashmau
+trigger Dnegan                          # accepted, progress 1: 289
+finish                                  # progress 2
+trigger Dnegan                          # progress 2: 289
+finish                                  # progress 2 again
+warp 130.4,1.4,-631.4 CaedarvaMire
+trigger qm9                             # progress 2, NM 0, no toad: HIDEOUS_BEAST_EMERGES; the toad spawned and claimed
+trigger qm9                             # the toad up: nothing
+kill CAEDARVA_TOAD                      # accepted, progress 2, NM 0: TheWaywardAutomatonNM 1
+trigger qm9                             # NM 1: 14
+finish                                  # progress 3; NM 0
+trigger qm9                             # progress 3: SOMEONE_SLIPPED
+warp 31.0,-6.0,56.0 Nashmau
+trigger Dnegan                          # accepted, progress 3 (not 1 or 2): no arm: 288
+finish
+warp 102.8,-6.0,-29.0 AhtUrhganWhitegate
+trigger Iruki-Waraki                    # 267 (the warp cleared UseFallback)
+finish
+trigger Iruki-Waraki                    # accepted, progress 3: 776
+fill-inventory
+finish                                  # no room for the Turbo Animator: not completed (npcUtil's message)
+free-inventory
+trigger Iruki-Waraki                    # 267
+finish
+trigger Iruki-Waraki                    # 776
+finish                                  # the Turbo Animator; completed; TheWaywardAutomatonProgress cleared
+trigger Iruki-Waraki                    # 267
+finish
+trigger Iruki-Waraki                    # completed, PUP 40 below AF2 50: 777
+finish

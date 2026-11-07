@@ -1,0 +1,36 @@
+# In Search of the Truth (otherAreas 80): its reply kinds. Sheltering Doubt current. Accepted at Prog 1 (a GM). Chemioue
+# 561 (Event) against Petals for Parelbriaux's 512 (available, Prog 0: Progress): 512, finished (Petals Prog 1); then
+# against CoP 2-3's 281 and 3-5's 282 (replaceDefault): 561 every time (no script: no fallback turn). Mengrenaux 560
+# (Event) against 2-3's 271 (replaceDefault): 560. Completed (a GM), Option 2 (a GM): Ondieulix 559 (Progress) against
+# Petals' 514 (Prog 2, a GM: Progress): a tie, In_Search_of_the_Truth sorts first: 559, finished; Option 2 again (a GM;
+# the completion cleared it): the cycle, 514. Tressia at Option 2: 562 (no other quest answers her). Raminey's 549
+# against A Bitter Past's 152: a_bitter_past#kinds.
+lists TavnazianSafehold/Tressia/onTrigger TavnazianSafehold/Raminey/onTrigger TavnazianSafehold/Zadant/onTrigger TavnazianSafehold/Fouagine/onTrigger TavnazianSafehold/Noam/onTrigger TavnazianSafehold/Mengrenaux/onTrigger TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/Ondieulix/onTrigger TavnazianSafehold/qm1_in_search_of_truth/onTrigger TavnazianSafehold/qm2_in_search_of_truth/onTrigger TavnazianSafehold/qm3_in_search_of_truth/onTrigger TavnazianSafehold/qm4_in_search_of_truth/onTrigger TavnazianSafehold/qm5_in_search_of_truth/onTrigger TavnazianSafehold/onEventFinish/544 TavnazianSafehold/onEventFinish/549 TavnazianSafehold/onEventFinish/551 TavnazianSafehold/onEventFinish/553 TavnazianSafehold/onEventFinish/555 TavnazianSafehold/onEventFinish/557 TavnazianSafehold/onEventFinish/558 TavnazianSafehold/onEventFinish/559 TavnazianSafehold/onEventFinish/562 TavnazianSafehold/onEventFinish/565
+lists TavnazianSafehold/onEventFinish/512 TavnazianSafehold/onEventFinish/514
+char zone=TavnazianSafehold pos=89,-34,70.5 job=WAR lvl=75
+mission Cop ShelteringDoubt current
+quest OtherAreas.InSearchOfTheTruth accepted
+charvar Quest[4][80]Prog 1
+login
+warp 83.5,-34,67.6 TavnazianSafehold
+trigger Chemioue                        # 512 (Progress) beats 561 (Event)
+finish                                  # Petals Prog 1
+trigger Chemioue                        # 561 beats 281 / 282 (replaceDefault)
+finish
+trigger Chemioue                        # 561 again
+finish
+warp 74.3,-34.25,63.9 TavnazianSafehold
+trigger Mengrenaux                      # 560 beats 271
+finish
+quest OtherAreas.InSearchOfTheTruth completed # a GM
+charvar Quest[4][80]Option 2            # a GM
+charvar Quest[4][74]Prog 2              # a GM: Petals' Ondieulix 514
+warp 8.3,-25,65.4 TavnazianSafehold
+trigger Ondieulix                       # 559 and 514 tie: 559
+finish                                  # completed; the Cape; the vars cleared
+charvar Quest[4][80]Option 2            # a GM
+trigger Ondieulix                       # the cycle: 514
+finish                                  # Petals begun; Prog 3
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # Option 2: 562
+finish                                  # Option 2 (already)

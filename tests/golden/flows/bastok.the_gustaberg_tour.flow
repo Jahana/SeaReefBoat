@@ -1,0 +1,24 @@
+# The Gustaberg Tour (bastok 45): Izabele in the Metalworks, Hunting Bear in North Gustaberg. The offer 745 (no guard),
+# Izabele's 746, Hunting Bear's 21 (a party of 2 or more, every alliance member at level 15 or below and within 15
+# yalms, would play 22 instead), then, set completed by a GM, 23 and Izabele's 747 (both replaceDefault). Izabele's
+# default is 745 too, Hunting Bear's 20; no other quest or mission names either. The char is level 10 and alone.
+# 22 and its finish (the completion) need a party of two or more: #party plays them (and #era with the era module).
+lists Metalworks/Izabele/onTrigger Metalworks/Izabele/onTrade NorthGustaberg/Hunting_Bear/onTrigger Metalworks/onEventFinish/745 NorthGustaberg/onEventFinish/22
+char zone=Metalworks pos=-44.5,-10,-4.7
+item BoneChip
+login
+trade Izabele BoneChip x1      # available: no trade handler, nothing
+trigger Izabele                # available: the offer, 745
+finish                         # accepted
+trigger Izabele                # accepted: 746
+finish
+trade Izabele BoneChip x1      # accepted: no trade handler, nothing
+warp -233.9,41.465,426.5 NorthGustaberg
+trigger Hunting_Bear           # level 10, alone (a party of one): 21
+finish
+quest Bastok.TheGustabergTour completed
+trigger Hunting_Bear           # completed: 23
+finish
+warp -44.5,-10,-4.7 Metalworks
+trigger Izabele                # completed: 747
+finish

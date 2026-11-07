@@ -1,0 +1,69 @@
+# Prelude to Puissance (jeuno 170), each completing option of 10045 but 13 (the main flow's), one level 91 Warrior each,
+# with the Limit Breaker at cap 95, Dormant Powers Dislodged completed, accepted (a GM), no stone traded
+# (tradeCompleted 0: completed all the same, a kept quirk). Option 0 (main): completed (the Soul Gem Clasp), Beyond
+# Infinity not added: it answers in its available section, 10045 (91, 1, 5, 0, 0). Option 15 (c15): rejectedStartLB10 1
+# (a local var), completed, Beyond Infinity not added: 10045 (91, 1, 5, 0, 1) (it reads the local var). Options 14, 19,
+# 20, 21 (c14, c19, c20, c21): completed, Beyond Infinity added, set down at Horlais Peak (-511.459 159.004 -210.543,
+# 139), Waughroon Shrine (-349.899 104.213 -260.150, 144), Balga's Dais (299.316 -123.591 353.760, 146), Qu'Bia Arena
+# (-225.146 -24.250 20.057, 206): the char zones at the next tick.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+char c15 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+char c14 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+char c19 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+char c20 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+char c21 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+keyitem LimitBreaker
+levelcap 95
+quest Jeuno.DormantPowersDislodged completed
+quest Jeuno.PreludeToPuissance accepted
+c15: keyitem LimitBreaker
+c15: levelcap 95
+c15: quest Jeuno.DormantPowersDislodged completed
+c15: quest Jeuno.PreludeToPuissance accepted
+c14: keyitem LimitBreaker
+c14: levelcap 95
+c14: quest Jeuno.DormantPowersDislodged completed
+c14: quest Jeuno.PreludeToPuissance accepted
+c19: keyitem LimitBreaker
+c19: levelcap 95
+c19: quest Jeuno.DormantPowersDislodged completed
+c19: quest Jeuno.PreludeToPuissance accepted
+c20: keyitem LimitBreaker
+c20: levelcap 95
+c20: quest Jeuno.DormantPowersDislodged completed
+c20: quest Jeuno.PreludeToPuissance accepted
+c21: keyitem LimitBreaker
+c21: levelcap 95
+c21: quest Jeuno.DormantPowersDislodged completed
+c21: quest Jeuno.PreludeToPuissance accepted
+login
+trigger Nomad_Moogle                    # accepted: 10045 (91, 1, 6, 2, 0)
+finish option=0                         # completed (no stone traded), Beyond Infinity not added
+trigger Nomad_Moogle                    # Beyond Infinity available (PtP completed, cap 95): 10045 (91, 1, 5, 0, 0)
+finish option=0                         # Beyond Infinity: not begun
+c15: login
+c15: trigger Nomad_Moogle               # 10045 (91, 1, 6, 2, 0)
+c15: finish option=15                   # rejectedStartLB10 1, completed, Beyond Infinity not added
+c15: trigger Nomad_Moogle               # Beyond Infinity available, the local var: 10045 (91, 1, 5, 0, 1)
+c15: finish option=0
+c14: login
+c14: trigger Nomad_Moogle               # 10045 (91, 1, 6, 2, 0)
+c14: finish option=14                   # completed, Beyond Infinity added, set down at Horlais Peak
+tick 400
+c14: login                              # in Horlais Peak
+c19: login
+c19: trigger Nomad_Moogle               # 10045 (91, 1, 6, 2, 0)
+c19: finish option=19                   # completed, Beyond Infinity added, set down at Waughroon Shrine
+tick 400
+c19: login                              # in Waughroon Shrine
+c20: login
+c20: trigger Nomad_Moogle               # 10045 (91, 1, 6, 2, 0)
+c20: finish option=20                   # completed, Beyond Infinity added, set down at Balga's Dais
+tick 400
+c20: login                              # in Balga's Dais
+c21: login
+c21: trigger Nomad_Moogle               # 10045 (91, 1, 6, 2, 0)
+c21: finish option=21                   # completed, Beyond Infinity added, set down at Qu'Bia Arena
+tick 400
+c21: login                              # in Qu'Bia Arena

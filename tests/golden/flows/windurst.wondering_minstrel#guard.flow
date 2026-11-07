@@ -1,0 +1,26 @@
+# Wondering Minstrel (windurst 6): the offer's fame operand. A level-10 WAR at Windurst fame 324 (level 4): Jatan-Paratan
+# not offered (his script's line), Yuli Yaam (his script's line), Yung Yaam (609). Fame 325: 633. Prog 1 by GM at fame
+# 324: still not offered (the check is the fame alone; Prog is read only inside it). At 325: Prog 1 634, Prog -1 634
+# (not 0), Prog 0 633.
+lists WindurstWaters/Jatan-Paratan/onTrigger WindurstWaters/Yuli_Yaam/onTrigger WindurstWaters/Yung_Yaam/onTrigger
+char zone=WindurstWaters pos=-61,-4,21.5 job=WAR lvl=10
+fame Windurst 324
+login
+trigger Jatan-Paratan                         # fame level 4: not offered; his script's line
+finish
+trigger Yuli_Yaam                             # not offered; his script's line
+finish
+trigger Yung_Yaam                             # not offered; 609
+finish
+charvar Quest[2][6]Prog 1
+trigger Jatan-Paratan                         # fame level 4, Prog 1: not offered; his script's line
+finish
+fame Windurst 325
+trigger Jatan-Paratan                         # Prog 1: 634
+finish option=1
+charvar Quest[2][6]Prog -1
+trigger Jatan-Paratan                         # Prog -1 (not 0): 634
+finish option=1
+charvar Quest[2][6]Prog 0
+trigger Jatan-Paratan                         # Prog 0: 633
+finish option=0

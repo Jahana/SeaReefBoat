@@ -1,0 +1,19 @@
+# BORGHERTZS_STALWART_HANDS (jeuno 50): the two optional coffers' sections (status not available, main job PLD, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 PLD: Beadeaux's Treasure Coffer opens to GallantBreeches
+# (the item bypass; the result is the item): [AF]ZilartCoffer +8192 (bit 13); GarlaigeCitadel's to GallantCoronet:
+# +16384 (bit 14).
+lists Beadeaux/Treasure_Coffer/onTrade GarlaigeCitadel/Treasure_Coffer/onTrade
+char zone=Beadeaux pos=-82.3,1.056,-140.1 job=PLD lvl=75
+quest Jeuno.BorghertzsStalwartHands accepted
+item BeadeauxCofferKey
+item GarlaigeCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer BeadeauxCofferKey x1 # bit 13 unset: GallantBreeches; [AF]ZilartCoffer 8192
+tick 4500                               # the coffer opened
+warp -282.3,0,263.2 GarlaigeCitadel
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer GarlaigeCofferKey x1 # bit 14 unset: GallantCoronet; [AF]ZilartCoffer 24576
+tick 4500                               # the coffer opened

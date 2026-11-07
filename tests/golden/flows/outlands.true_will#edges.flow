@@ -1,0 +1,54 @@
+# True Will, the arms that read a key item or char var whatever the status (Ryoma's 137 / 138), and the status tests
+# around them. Ryoma (94) and Leodarion (89) alternate their default with their script (each script turn the second of a
+# pair; a zone change starts the pairs again); qm3 has none.
+# main (a level 75 Ninja; Twenty in Pirate Years, I'll Take the Big Box and True Will completed; GMs): the Old Trick Box
+# (a GM), trueWillCS 0: Ryoma 137 (any status), finished: trueWillCS 1; 138. trueWillCS 2 (a GM): nothing. Leodarion,
+# completed with trueWillCS 1 (a GM): nothing. qm3, completed, trueWillKilledNM 1 and no Old Trick Box (GMs):
+# NOTHING_OUT_OF_ORDINARY.
+# bob (the same, True Will available, trueWillCS 1 and the Old Trick Box, GMs): Ryoma: 136 (the status arm comes
+# first); finished on 0: begun all the same. Accepted now: 138 (trueWillCS 1; 137 needs trueWillCS 0).
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+char bob zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+quest Outlands.TwentyInPirateYears completed
+quest Outlands.ILlTakeTheBigBox completed
+quest Outlands.TrueWill completed
+bob: quest Outlands.TwentyInPirateYears completed
+bob: quest Outlands.ILlTakeTheBigBox completed
+bob: charvar trueWillCS 1
+bob: keyitem OldTrickBox
+login
+keyitem OldTrickBox                     # a GM
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, completed, the Old Trick Box, trueWillCS 0: 137
+finish                                  # trueWillCS 1
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, completed, trueWillCS 1: 138
+finish
+charvar trueWillCS 2                    # a GM
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, trueWillCS 2 (the box held): nothing (94 after it)
+finish
+charvar trueWillCS 1                    # a GM
+warp -49.513,7.999,41.323 Rabao
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, completed, trueWillCS 1: nothing (89 after it)
+finish
+warp 204.5,0.1,82 YhoatorJungle
+charvar trueWillKilledNM 1              # a GM
+delkeyitem OldTrickBox                  # a GM
+trigger qm3                             # completed: NOTHING_OUT_OF_ORDINARY
+logout
+bob: login
+bob: trigger Ryoma                      # default turn: 94
+bob: finish
+bob: trigger Ryoma                      # script, available, Big Box completed: 136 (before 137 / 138)
+bob: finish option=0                    # begun on any option
+bob: trigger Ryoma                      # default turn: 94
+bob: finish
+bob: trigger Ryoma                      # script, accepted, trueWillCS 1 (the box held): 138
+bob: finish
+bob: logout

@@ -1,0 +1,16 @@
+# All the Way to the Bank (adoulin 103; call-only): the receipt needs bit 4 too, and Hujette needs the invoice.
+# A level 99 Warrior in Western Adoulin with 100000 gil and the TARUTARU_SAUCE_INVOICE (a GM),
+# ATWTTB_Payments 14 (a GM: bits 1, 2, 3). Defliaa 5069, finished: 19440 taken, Payments 15: bits 0 to 3 but not 4:
+# no receipt. The invoice taken, Payments 0 (GMs): Hujette 3000: nothing.
+# The deliberate log writes (user ruling 2026-11-04) are the C# port's, not the Lua's: this trace is a csharp-rerecord
+# of the Lua recording (lua-at kept), the difference the log's 0x056 pages, chars.quests and char_quest_state only.
+char zone=WesternAdoulin pos=45.4,2,-113.5 job=WAR lvl=99 gil=100000
+keyitem TarutaruSauceInvoice
+charvar ATWTTB_Payments 14
+login
+trade Defliaa gil=19440                   # bit 0 clear: 5069
+finish                                    # 19440 taken; Payments 15: not full (bit 4 clear), no receipt
+delkeyitem TarutaruSauceInvoice           # a GM
+charvar ATWTTB_Payments 0                 # a GM
+warp 36.4,0,-56 WesternAdoulin            # beside Hujette
+trade Hujette gil=3000                    # no invoice: nothing

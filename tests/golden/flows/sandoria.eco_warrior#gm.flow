@@ -1,0 +1,21 @@
+# Eco-Warrior (San d'Oria) (sandoria 97), accepted by GM, the vars' other values. Under the restriction with Necroplasm
+# down: Prog -1 (the qm7's == 0 test's lower side: nil) and Prog 2 without the stalagmite (the == 1 test's upper side:
+# nil). The stalagmite by GM with Informed -1 (Rojaireaut's == 0 test's lower side: 53 under the restriction, then nil).
+lists OrdellesCaves/Rojaireaut/onTrigger OrdellesCaves/qm7/onTrigger OrdellesCaves/onEventFinish/51 OrdellesCaves/onEventFinish/53
+char zone=OrdellesCaves pos=-90.3,0.5,587.9 lvl=30
+quest Sandoria.EcoWarrior accepted
+login
+trigger Rojaireaut                        # no stalagmite, no restriction: 51
+finish option=1                           # Level Restriction 25 (ON_ZONE)
+charvar Quest[0][97]Prog -1
+trigger qm7                               # walks; Prog -1, the restriction: neither arm; nil; NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[0][97]Prog 2
+trigger qm7                               # Prog 2, no stalagmite: neither arm; nil
+finish-if-event
+keyitem IndigestedStalagmite
+charvar Quest[0][97]Informed -1
+trigger Rojaireaut                        # the stalagmite, Informed -1 (not 0), the restriction: 53
+finish                                    # option 0: the restriction off
+trigger Rojaireaut                        # the stalagmite, Informed -1, no restriction: nil; 50
+finish-if-event

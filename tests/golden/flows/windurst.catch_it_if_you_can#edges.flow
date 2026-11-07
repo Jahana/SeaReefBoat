@@ -1,0 +1,24 @@
+# Catch It If You Can (windurst 21): the other operands and the chain's order. Available with QuestCatchItIfYouCan_var 3
+# (a GM): nothing (the var arms have no else; his standard 230 is not reached). Var 0 with Wonder Wands completed (GM):
+# 230 and var 1 (the available arm comes before 265). Wonder Wands accepted (GM): 258 (before the var arms; the var not
+# moved). Mute and needToZone (GMs) while available: the var arm 253 and var 2 (before 246 and 255); 231, option 1:
+# begun (any option).
+char zone=PortWindurst pos=-105.0,-4.25,92.7 job=WAR lvl=75
+charvar QuestCatchItIfYouCan_var 3
+login
+trigger Ohruru                          # available, var 3: nothing
+charvar QuestCatchItIfYouCan_var 0
+quest Windurst.WonderWands completed
+trigger Ohruru                          # available, var 0, Wonder Wands completed: 230; var 1
+finish
+quest Windurst.WonderWands available
+quest Windurst.WonderWands accepted
+trigger Ohruru                          # Wonder Wands accepted: 258 (0, 17053); var stays 1
+finish
+quest Windurst.WonderWands available
+effect 29                               # a GM: Mute
+charvar [generic]mustZone 240           # needToZone (a GM)
+trigger Ohruru                          # available, var 1, Mute, needToZone: 253; var 2
+finish
+trigger Ohruru                          # var 2: 231
+finish option=1                         # begun (any option)

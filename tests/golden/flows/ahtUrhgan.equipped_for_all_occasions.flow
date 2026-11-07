@@ -1,0 +1,43 @@
+# Equipped for All Occasions (ahtUrhgan 24, COR AF1): a level 40 Corsair, Luck of the Draw and The Die is Cast
+# completed, its Stage 1 (GMs: Luck of the Draw's 552 sets it), a Bone Chip. Arrapago Reef: qm6 (no script; default
+# NOTHING_OUT_OF_ORDINARY). Maze of Shakhrami: _5i0 the Iron Door (its script: cutscene 42 when the char's x >= 248,
+# else MIGHT_BE_ABLE_TO_OPEN; `trigger` stands 1.5 yalms east, x 249.2). Available: Ratihb: no handler (Luck of the
+# Draw's completed section off by Stage 1): 603; a trade to qm6: nothing; qm6 228, finished: begun at Prog 1; qm6 Prog
+# 1: nil: NOTHING_OUT_OF_ORDINARY. The Maze: _5i0 at Prog 1: the Lost Soul popped (claimed; the door not hidden), the
+# quest answers nothing: the door's script plays 42; the Lost Soul killed at Prog 1: Prog 2; _5i0 Prog 2: 66 (the Wheel
+# Lock Trigger, Prog 3); Prog 3: nil: the script's 42. qm6 Prog 3: 231 (the trigger taken, Prog 4); Prog 4: nil:
+# NOTHING_OUT_OF_ORDINARY. Ratihb Prog 4 with Stage 1: 772: completed (a Trump Gun; the cleanup clears Stage).
+# Completed: Ratihb: Luck of the Draw's section off (Equipped completed): 603.
+lists AhtUrhganWhitegate/Ratihb/onTrigger ArrapagoReef/qm6/onTrigger MazeOfShakhrami/_5i0/onTrigger MazeOfShakhrami/Lost_Soul/onMobDeath AhtUrhganWhitegate/onEventFinish/772
+char zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=COR lvl=40
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.TheDieIsCast completed
+charvar Quest[6][24]Stage 1
+item BoneChip
+login
+trigger Ratihb                          # available: no handler: 603
+finish
+warp 470.267,-12.292,111.817 ArrapagoReef
+trade qm6 BoneChip x1                   # available: no trade handler: nothing
+trigger qm6                             # 228
+finish                                  # begun; Prog 1
+trigger qm6                             # Prog 1: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp 249.235,18.499,-142.267 MazeOfShakhrami   # beside the Iron Door
+trigger _5i0                            # Prog 1: the Lost Soul popped, claimed; nil: the door's script (x >= 248): 42
+finish-if-event
+kill LOST_SOUL                          # Prog 1: Prog 2
+trigger _5i0                            # Prog 2: 66
+finish                                  # the Wheel Lock Trigger; Prog 3
+trigger _5i0                            # Prog 3: nil: the script's 42
+finish-if-event
+warp 470.267,-12.292,111.817 ArrapagoReef
+trigger qm6                             # Prog 3: 231
+finish                                  # the trigger taken; Prog 4
+trigger qm6                             # Prog 4: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp 76.725,-6,-137.203 AhtUrhganWhitegate
+trigger Ratihb                          # Prog 4, Stage 1: 772
+finish                                  # completed: Trump Gun
+trigger Ratihb                          # completed: Luck of the Draw's section off: 603
+finish

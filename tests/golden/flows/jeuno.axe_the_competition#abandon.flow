@@ -1,0 +1,29 @@
+# Axe the Competition (jeuno 59): 15 with no pick and its options. Accepted by a GM with the guide alone (no pick, no
+# map): 15 (0); option 1, no pick: a new pick; 15 (1). The pick dropped is not possible here, so option 2 next: the
+# quest deleted (available again), the guide and the map (a GM's) deleted. Then Axe 0: not offered.
+# Brutus's other quests are kept silent for a level 75 Warrior: Chocobo's Wounds and Save My Son completed, Path of
+# the Beastmaster accepted (a GM, before login: it has no accepted section; available it would play 70, completed 20),
+# Chocobo on the Loose completed (no completed section); his script then starts nothing, and a talk with no
+# quest reply plays his default 66 (DefaultActions).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/onEventFinish/15
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=75
+quest Jeuno.AxeTheCompetition accepted
+keyitem WeaponTrainingGuide
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster accepted
+quest Jeuno.ChocoboOnTheLoose completed
+login
+trigger Brutus                          # accepted, no Annals, no map, no pick: 15 (0)
+finish option=1                         # option 1, no pick: a new pick
+trigger Brutus                          # the pick held: 15 (1)
+finish option=0                         # nothing
+keyitem MapToTheAnnalsOfTruth           # a GM
+trigger Brutus                          # the map: 16
+finish
+delkeyitem MapToTheAnnalsOfTruth        # a GM
+trigger Brutus                          # 15 (1)
+keyitem MapToTheAnnalsOfTruth           # a GM, while 15 is open
+finish option=2                         # the quest deleted; the guide and the map deleted
+trigger Brutus                          # available, Axe 0: not offered; the default 66
+finish

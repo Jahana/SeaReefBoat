@@ -1,0 +1,43 @@
+# Claws of the Griffon (crystalWar 16): a level 99 Warrior in Southern San d'Oria [S] with Gifts of the Griffon
+# completed (a GM; missions as group 1's flows). The Timer (Gifts' 24 sets it to tomorrow) set by GMs, so the flow does
+# not lean on the day: 99999: Rholont: nil (32); 0: 47, finished: begun, the mustZone. Rholont: the mustZone set, Option
+# 0: 50, finished: Option 1; again: 49. Out to Garlaige Citadel [S] and back: Prog 0: 48, finished: Prog 1; Prog 1: 49.
+# Jugner Forest [S] from East Ronfaure [S] at Prog 1: 200, finished: Prog 2. qm6 201, finished: Prog 3; qm6 202,
+# finished: Fingerfilcher Dradzad spawned, claimed (scripted spawn: not up at zone load); qm6: the NM up: nil
+# (YOU_FIND_NOTHING_ORDINARY). The NM killed at Prog 3: Prog 4. qm6 203, finished: completed (an Angelstone).
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/47 SouthernSanDoriaS/onEventFinish/48 SouthernSanDoriaS/onEventFinish/50 JugnerForestS/onZoneIn/1 JugnerForestS/qm6/onTrigger JugnerForestS/Fingerfilcher_Dradzad/onMobDeath JugnerForestS/onEventFinish/200 JugnerForestS/onEventFinish/201 JugnerForestS/onEventFinish/202 JugnerForestS/onEventFinish/203
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.GiftsOfTheGriffon completed
+charvar Quest[7][16]Timer 99999         # a GM: a day to come
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # the Timer after today: nil (32)
+finish-if-event
+charvar Quest[7][16]Timer 0             # a GM
+trigger Rholont                         # the Timer at or before today: 47
+finish                                  # begun; the mustZone
+trigger Rholont                         # the mustZone set, Option 0: 50
+finish                                  # Option 1
+trigger Rholont                         # Option 1: 49
+finish
+warp 62.849,-6.078,137.438 GarlaigeCitadelS # out of the zone: the mustZone cleared (a rezone keeps it: the same zone)
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 0: 48
+finish                                  # Prog 1
+trigger Rholont                         # Prog 1, Option 1: 49
+finish
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp 69.511,-0.677,323.781 JugnerForestS open # from East Ronfaure [S] at Prog 1: 200, left open
+finish                                  # Prog 2
+trigger qm6                             # Prog 2: 201
+finish                                  # Prog 3
+trigger qm6                             # Prog 3, the NM not up: 202
+finish                                  # Fingerfilcher Dradzad spawned, claimed
+trigger qm6                             # the NM up: nil (YOU_FIND_NOTHING_ORDINARY)
+finish-if-event
+kill FINGERFILCHER_DRADZAD              # Prog 3: Prog 4
+trigger qm6                             # Prog 4: 203
+finish                                  # completed (an Angelstone)

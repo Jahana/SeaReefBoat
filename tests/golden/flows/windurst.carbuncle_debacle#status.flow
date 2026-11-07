@@ -1,0 +1,68 @@
+# Carbuncle Debacle (windurst 83): the arms read in other statuses (SMN 75, The Puppet Master completed). Class Reunion
+# accepted (var 0): _6n2's two offers both refused (the default message). Class Reunion completed by GM, this quest
+# available: Koru-Moru with the var 0: Class Reunion's 411; var 1: 411 (416 wants it accepted); var 2 (GM): 411 too
+# (user ruling 2026-11-04, kept Lua bugs: the Lua's `accepted and progress == 1 or progress == 2` played 416 there,
+# whatever the status); vars 4, 5 and 7: no arm of this quest (not accepted): 411. Ripapa at vars 2 and 3 (no pendulum):
+# no arm (not accepted): 10020. Agado-Pugado at var 5 with the Daze Breaker Charm and at var 6: no arm: 70.
+# Class Reunion made available again (GM) with this quest completed: Koru-Moru's 420 not played (Class Reunion not
+# completed): his 193.
+char zone=WindurstWalls pos=-24.5,-14.5,263.0 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion accepted
+login
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # Class Reunion accepted: neither offer: the message again
+quest Windurst.ClassReunion completed
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # this quest available, var 0: no arm; Class Reunion's 411
+finish
+charvar CarbuncleDebacleProgress 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 1: no 416 (accepted only): 411
+finish
+charvar CarbuncleDebacleProgress 2
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 2: no 416 (accepted only): 411
+finish
+charvar CarbuncleDebacleProgress 4
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 4: no 417: 411
+finish
+charvar CarbuncleDebacleProgress 5
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 5: no 418: 411
+finish
+charvar CarbuncleDebacleProgress 7
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 7: no 419: 411
+finish
+charvar CarbuncleDebacleProgress 2
+warp 31.1,-15.7,55.4 Mhaura
+trigger Ripapa                          # not accepted, var 2: no 10022: 10020
+finish
+charvar CarbuncleDebacleProgress 3
+trigger Ripapa                          # not accepted, var 3, no pendulum: no 10023: 10020
+finish
+charvar CarbuncleDebacleProgress 5
+keyitem DazeBreakerCharm
+warp -16.5,7.8,-10.5 Rabao
+trigger Agado-Pugado                    # not accepted, var 5, the charm: no 86: 70
+finish
+charvar CarbuncleDebacleProgress 6
+trigger Agado-Pugado                    # not accepted, var 6: no 87 / 88: 70
+finish
+charvar CarbuncleDebacleProgress 0
+quest Windurst.CarbuncleDebacle completed  # GM
+quest Windurst.ClassReunion available   # GM
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # Class Reunion available: no 420, no 411: 193
+finish

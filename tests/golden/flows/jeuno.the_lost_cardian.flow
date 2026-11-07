@@ -1,0 +1,47 @@
+# The Lost Cardian (jeuno 18): Panta-Putta, Naruru, Teigero-Bangero (Lower Jeuno), Monberaux (Upper Jeuno); call-only.
+# The Wonder Magic Set and Cook's Pride completed (GM). A WAR 75.
+# Turns: Teigero-Bangero's default 34 first. Monberaux has no default, but his script queues events: his introduction
+# 109 (once, before the quest's event), the quest's, then 28 every time; each needs its finish.
+# theLostCardianVar 0: Panta-Putta 40, Naruru 31. Teigero-Bangero 29: the var 1; again 66. Panta-Putta 30: the var 2;
+# again 30 (the var 2 is >= 1). Naruru 71. Monberaux 33, queued after 109: a queued event's finish does not reach his
+# script (nothing). 33 again; option 1: the var 3; 34 option 1: nothing; 34 option 0: Two's Company, the var 0, 2100 gil, Two of Swords, fame +7 x3, completed (never accepted), The Kind
+# Cardian begun. Then Monberaux: The Kind Cardian accepted: 32 (its arm).
+char zone=LowerJeuno pos=-60.8,-0.3,-140.0 job=WAR lvl=75
+quest Jeuno.TheWonderMagicSet completed
+quest Jeuno.CooksPride completed
+login
+trigger Panta-Putta                     # WMS completed, this quest available, the var 0: 40
+finish
+trigger Naruru                          # Cook's Pride completed, The Kind Cardian available, the var 0: 31
+finish
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # available, the var 0: 29
+finish                                  # the var 1
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # the var 1: 66
+finish
+trigger Panta-Putta                     # the var 1: 30
+finish                                  # the var 2
+trigger Panta-Putta                     # the var 2: 30 again
+finish                                  # the var 2
+trigger Naruru                          # the var 2: 71
+finish
+warp -40.9,-0.5,-1.9 UpperJeuno         # beside Monberaux
+trigger Monberaux                       # his introduction: 109 (the quest's 33 and his 28 queued)
+finish                                  # 109 done (the unique event); the queued 33 starts
+finish option=1                         # the queued 33: its finish does not reach his script (the var stays 2); 28 starts
+finish                                  # 28
+trigger Monberaux                       # the var 2: 33 (28 queued)
+finish option=1                         # 33, option 1: the var 3; 28 starts
+finish                                  # 28
+trigger Monberaux                       # the var 3: 34
+finish option=1                         # nothing; 28 starts
+finish
+trigger Monberaux                       # 34
+finish option=0                         # Two's Company; var 0; 2100 gil; Two of Swords; fame +7 x3; completed; The Kind Cardian begun; 28
+finish
+trigger Monberaux                       # completed, The Kind Cardian accepted: 32 (its arm), then 28
+finish
+finish

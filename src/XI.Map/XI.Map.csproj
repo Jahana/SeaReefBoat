@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- XI.Map: Phase-3 map-server packet framing. The CBasicPacket header bit-packing
+         (9-bit opcode that overflows into byte-1 bit-0, the ((size+3)&~3)/2 size rounding with
+         uint8 truncation, and the min(2*(byte1&~1), PACKET_SIZE) readback clamp) is sourced from
+         the compiled MSVC oracle (csharp/oracle/map_packet_harness.cpp -> map_packet_golden.txt),
+         never hand-computed. Product build targets net8.0; spike/verify uses net10.0 locally. -->
+    <AssemblyName>XI.Map</AssemblyName>
+    <RootNamespace>XI.Map</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XI.Crypto\XI.Crypto.csproj" />
+    <ProjectReference Include="..\XI.Common\XI.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,42 @@
+# The Gobbiebag Part III (jeuno 29) with its era module (quest rework B3b Jeuno, P4):
+# modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua, enabled by xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1,
+# ENABLE_SOA 0), raises the part's fame level to 5 (states 1 and 2's checks replaced) and adds state 3 (available, the
+# start size, the previous part, fame below 5: 42 with the inventory + 1). The inventory at 40 (storage, after a first
+# talk at 30: no state 3, 43 (81)), Parts I-II completed (the chain's earlier parts, by a GM). Fame level 4 (649 / 2 =
+# 324): state 3's 42 (41); Part II set accepted (a GM): no section (43 (81)); completed again; fame level 5 (650, a GM):
+# 43 (41, 0, 1), begun; accepted at fame level 4: the module's state 2 check fails: no section, a trade: nothing; at 5:
+# the four items: 73 (46), completed. A GM sets a part available before accepted (accepted over completed keeps it
+# completed).
+module modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/Bluffnix/onTrade LowerJeuno/onEventFinish/43 LowerJeuno/onEventFinish/73
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+fame Sandoria 649
+quest Jeuno.TheGobbiebagPartI completed
+quest Jeuno.TheGobbiebagPartIi completed
+item SquareOfBlackTigerLeather
+item GoldIngot
+item SquareOfVelvetCloth
+item Painite
+login
+trigger Bluffnix                        # available, fame below the era level, the inventory 30, not 40: no state 3; 43 (81)
+finish
+storage inventory 40                    # a GM: the part's start size
+trigger Bluffnix                        # fame level 4, below the era level: state 3: 42 (41)
+finish
+quest Jeuno.TheGobbiebagPartIi available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartIi accepted # a GM
+trigger Bluffnix                        # state 3: the previous part not completed: no section; 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartIi completed # a GM
+fame Sandoria 650                       # a GM: fame level 5
+trigger Bluffnix                        # the module's state 1 check: 43 (41, 0, 1)
+finish option=0                         # begun
+fame Sandoria 649                       # a GM: fame level 4
+trigger Bluffnix                        # accepted, the module's state 2 check fails: no section; 43 (81)
+finish
+trade Bluffnix SquareOfBlackTigerLeather x1 GoldIngot x1 SquareOfVelvetCloth x1 Painite x1 # no section: nothing
+fame Sandoria 650                       # a GM
+trade Bluffnix SquareOfBlackTigerLeather x1 GoldIngot x1 SquareOfVelvetCloth x1 Painite x1 # the module's state 2 check: 73 (46)
+finish                                  # completed; inventory 45; INVENTORY_INCREASED

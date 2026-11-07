@@ -1,0 +1,22 @@
+# Trial by Ice (sandoria 59): Gulmama's Class Reunion branches (Windurst's quest, kept in her script) answer before this
+# quest's call. San d'Oria fame level 6 throughout. Class Reunion accepted, ClassReunionProgress 5 without the Ice
+# Pendulum: 712 (not 706); its finish gives the pendulum. Progress 5 with the pendulum held: the call runs: 706
+# (declined). Progress 4: 713 (the pendulum held or not); its finish gives another. Class Reunion available with
+# progress 4: the call runs: 706, begun; then 707.
+char zone=NorthernSanDoria pos=-185.5,0.0,110.1 job=WAR lvl=75
+fame Sandoria 425
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 5
+login
+trigger Gulmama                           # Class Reunion, progress 5, no pendulum: 712 (the script's)
+finish                                    # the Ice Pendulum
+trigger Gulmama                           # progress 5, the pendulum held: the quest's 706
+finish option=0                           # declined
+charvar ClassReunionProgress 4
+trigger Gulmama                           # progress 4: 713 (the script's)
+finish                                    # another Ice Pendulum
+quest Windurst.ClassReunion available
+trigger Gulmama                           # Class Reunion available, progress 4: the quest's 706
+finish option=1                           # begun; the fork
+trigger Gulmama                           # accepted, the fork: 707
+finish

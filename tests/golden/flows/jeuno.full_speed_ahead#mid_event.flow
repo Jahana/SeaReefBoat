@@ -1,0 +1,57 @@
+# Full Speed Ahead! (jeuno 179): the finishes read no status. A WAR 20 with the license and the map (GM). 10223 open
+# while the quest is set completed (GM): option 2 still runs addQuest (the current bit set beside the completed one).
+# Available again (GM), the var 4: 10225 open while it is set completed (GM): its finish, with option 1 (the Lua reads
+# no option for 10225), still runs (completeQuest, fame, the whistle, Raptor Companion). Accepted (GM; set available first: a GM accepted keeps the completed bit): 10224 open
+# while it is set available (GM): option 2 does nothing (it begins only on 10223); option 1 still begins it, the var 1,
+# setPos to Batallia Downs. The race started there (Lua: the var 3), back at Mapitoto (GM warp): accepted, the var 3:
+# 10224 (only the var 4 plays 10225); 10224 open while it is set completed (GM): option 1 still begins it, the var 1,
+# setPos. Back again (the var 3), available (GM): 10223; 10223 open while it is set accepted (GM): option 1 still sets
+# the var 1 and setPos.
+char zone=UpperJeuno pos=-52.8,8.2,85.9 job=WAR lvl=20
+keyitem ChocoboLicense
+keyitem MapOfTheJeunoArea
+login
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # available: 10223
+quest Jeuno.FullSpeedAhead completed
+finish option=2                         # addQuest over a completed quest: the current bit set too
+quest Jeuno.FullSpeedAhead available
+charvar [QUEST]FullSpeedAhead 4
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # available, the var 4: 10225
+quest Jeuno.FullSpeedAhead completed
+finish option=1                         # completed all the same (any option): the var 0, fame, the whistle, Raptor Companion
+quest Jeuno.FullSpeedAhead available
+quest Jeuno.FullSpeedAhead accepted
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # accepted: 10224 (1)
+quest Jeuno.FullSpeedAhead available
+finish option=2                         # nothing: option 2 begins only on 10223 (the quest stays available)
+quest Jeuno.FullSpeedAhead accepted
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # accepted: 10224 (1)
+quest Jeuno.FullSpeedAhead available
+finish option=1                         # begun; the var 1; setPos to Batallia Downs
+tick 400
+login                                   # the zone-in at Batallia Downs: the race (Lua): the var 3
+warp -52.8,8.2,85.9 UpperJeuno          # GM: back to Mapitoto, the var 3
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # accepted, the var 3: 10224 (1) (only the var 4 plays 10225)
+quest Jeuno.FullSpeedAhead completed
+finish option=1                         # begun over a completed quest; the var 1; setPos to Batallia Downs
+tick 400
+login                                   # the zone-in at Batallia Downs: the race (Lua): the var 3
+warp -52.8,8.2,85.9 UpperJeuno          # GM: back to Mapitoto, the var 3
+quest Jeuno.FullSpeedAhead available
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # available, the var 3: 10223 (0, 0, 4)
+quest Jeuno.FullSpeedAhead accepted
+finish option=1                         # begun (already accepted); the var 1; setPos to Batallia Downs
+tick 400
+login                                   # the zone-in at Batallia Downs

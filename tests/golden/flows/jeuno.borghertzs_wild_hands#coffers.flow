@@ -1,0 +1,19 @@
+# BORGHERTZS_WILD_HANDS (jeuno 52): the two optional coffers' sections (status not available, main job BST, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 BST: Beadeaux's Treasure Coffer opens to BeastJackcoat (the
+# item bypass; the result is the item): [AF]ZilartCoffer +131072 (bit 17); GarlaigeCitadel's to BeastHelm: +262144 (bit
+# 18).
+lists Beadeaux/Treasure_Coffer/onTrade GarlaigeCitadel/Treasure_Coffer/onTrade
+char zone=Beadeaux pos=-82.3,1.056,-140.1 job=BST lvl=75
+quest Jeuno.BorghertzsWildHands accepted
+item BeadeauxCofferKey
+item GarlaigeCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer BeadeauxCofferKey x1 # bit 17 unset: BeastJackcoat; [AF]ZilartCoffer 131072
+tick 4500                               # the coffer opened
+warp -282.3,0,263.2 GarlaigeCitadel
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer GarlaigeCofferKey x1 # bit 18 unset: BeastHelm; [AF]ZilartCoffer 393216
+tick 4500                               # the coffer opened

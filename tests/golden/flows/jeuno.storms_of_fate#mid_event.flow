@@ -1,0 +1,34 @@
+# Storms of Fate (jeuno 86): the finishes when their state no longer holds. A level 75 Warrior, CoP Dawn current with
+# Status 8. 142 open, a GM sets Dawn's Status 7: the finish (option 1) finds no state: not begun, no mustZone. Then
+# accepted at Prog 3 (a GM): 143 open, the quest set available by a GM: the finish finds the available state only (no
+# 143 finish there): nothing (not completed, no Timer for Shadows of the Departed). Accepted at Prog 0 by _0p2: 559 open,
+# the quest set available: nothing (Prog 0). Accepted at Prog 1 by Unstable_Displacement: 1 open, the quest set
+# available: nothing (Prog 1).
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/142 RuludeGardens/onEventFinish/143 MisareauxCoast/_0p2/onTrigger MisareauxCoast/onEventFinish/559 RiverneSiteB01/Unstable_Displacement/onTrigger RiverneSiteB01/onEventFinish/1
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+mission Cop Dawn current
+charvar Mission[6][840]Status 8
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # 142
+charvar Mission[6][840]Status 7         # a GM, while 142 is open
+finish option=1                         # no state: not begun, no mustZone
+walk 4,2.5,100
+charvar Mission[6][840]Status 8         # a GM
+quest Jeuno.StormsOfFate accepted       # a GM
+charvar Quest[3][86]Prog 3              # a GM
+walk 4,2.5,60                           # accepted, Prog 3: 143
+quest Jeuno.StormsOfFate available      # a GM, while 143 is open
+finish                                  # the available state has no 143 finish: nothing
+warp -258.5,-32.7,280 MisareauxCoast    # by _0p2
+quest Jeuno.StormsOfFate accepted       # a GM
+charvar Quest[3][86]Prog 0              # a GM
+trigger _0p2                            # Prog 0: 559
+quest Jeuno.StormsOfFate available      # a GM, while 559 is open
+finish                                  # no 559 finish in the available state: nothing (Prog 0)
+warp -611.3,1.8,693.2 RiverneSiteB01    # by Unstable_Displacement
+quest Jeuno.StormsOfFate accepted       # a GM
+charvar Quest[3][86]Prog 1              # a GM
+trigger Unstable_Displacement           # Prog 1: 1
+quest Jeuno.StormsOfFate available      # a GM, while 1 is open
+finish                                  # no 1 finish in the available state: nothing (Prog 1)

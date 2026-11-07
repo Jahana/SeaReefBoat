@@ -1,0 +1,48 @@
+# To Catch a Falling Star (windurst 53): Sigismund and Tohopka (Port Windurst; no default, no container; their
+# standards 357 / 358 are their scripts') and the Twinkle Tree (West Sarutabaruta; its trigger stays Lua: the hour and
+# QuestCatchAFallingStar_prog only). The harness clock starts at 12:00. Available: Tohopka 358; Sigismund 196 (0, 546),
+# option 0: begun. Accepted: 197; Tohopka 198 (0, 546, 868). The tree's trade needs the quest accepted and
+# VanadielHour() <= 3: at 12:00 and at 04:00 nothing (its trigger NOTHING_OUT_OF_ORDINARY); at 03:00 its trigger plays
+# the two messages; a bone chip: nothing; the scales: the two messages, the Starfall Tear, the scales taken, prog 1;
+# again (prog 1): nothing; prog 0 again (a GM) with the tear held (rare): the two messages, npcUtil.giveItem refuses
+# (ITEM_CANNOT_BE_OBTAINED), nothing taken. Sigismund's trade (one Starfall Tear, nothing else, no gil): with gil,
+# with a bone chip, a bone chip alone: nothing; the tear: 199: the tear taken; completed; fame 20; the Fish Scale Shield
+# (ITEM_OBTAINED); prog 2. Completed: 200 (prog 0), then his 357; Tohopka 358.
+char zone=PortWindurst pos=-109.04,-9.0,80.56 job=WAR lvl=75 gil=100
+item HandfulOfPugilScales x4
+item BoneChip x2
+login
+trigger Tohopka                         # available: her 358
+finish
+trigger Sigismund                       # available: 196 (0, 546)
+finish option=0                         # begun
+trigger Sigismund                       # accepted: 197 (0, 546)
+finish
+trigger Tohopka                         # accepted: 198 (0, 546, 868)
+finish
+warp 154.5,-40.75,333.7 WestSarutabaruta  # beside the Twinkle Tree
+trade Twinkle_Tree HandfulOfPugilScales x1  # 12:00 (hour 12 > 3): nothing
+trigger Twinkle_Tree                    # its script: hour 12: NOTHING_OUT_OF_ORDINARY
+wait vana=16                            # 04:00
+trade Twinkle_Tree HandfulOfPugilScales x1  # hour 4 > 3: nothing
+trigger Twinkle_Tree                    # its script: hour 4: NOTHING_OUT_OF_ORDINARY
+wait vana=23                            # 03:00
+trigger Twinkle_Tree                    # its script: hour 3, prog 0: FROST_DEPOSIT_TWINKLES, MELT_BARE_HANDS
+trade Twinkle_Tree BoneChip x1          # hour 3, prog 0, no scales: nothing
+trade Twinkle_Tree HandfulOfPugilScales x1  # hour 3, prog 0: the two messages; the tear; the scales taken; prog 1
+trade Twinkle_Tree HandfulOfPugilScales x1  # prog 1: nothing
+trigger Twinkle_Tree                    # its script: prog 1: NOTHING_OUT_OF_ORDINARY
+charvar QuestCatchAFallingStar_prog 0
+trade Twinkle_Tree HandfulOfPugilScales x1  # the tear held: the two messages; ITEM_CANNOT_BE_OBTAINED; nothing taken
+warp -109.04,-9.0,80.56 PortWindurst    # beside Sigismund
+trade Sigismund StarfallTear x1 gil=10  # gil in the trade: nothing
+trade Sigismund StarfallTear x1 BoneChip x1  # two items: nothing
+trade Sigismund BoneChip x1             # no tear: nothing
+trade Sigismund StarfallTear x1         # accepted, the tear alone: 199
+finish                                  # the tear taken; completed; fame 20; the Fish Scale Shield; prog 2
+trigger Sigismund                       # completed, prog 2: 200; prog 0
+finish
+trigger Sigismund                       # completed, prog 0: his 357
+finish
+trigger Tohopka                         # completed: her 358
+finish

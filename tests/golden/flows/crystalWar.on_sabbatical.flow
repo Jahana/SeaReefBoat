@@ -1,0 +1,50 @@
+# On Sabbatical (crystalWar 32): a level 99 Scholar in The Eldieme Necropolis [S] with A Little Knowledge completed (a
+# GM; missions as A Little Knowledge's flows). AF1_QUEST_LEVEL 100 at first: Erlene: A Little Knowledge's 47 (no tie
+# with this quest's 18), finished: the two spells. AF1_QUEST_LEVEL 40 (a setting step): Erlene 18 (over A Little
+# Knowledge's 15, an Event), finished: Ulbrecht's Sealed Letter, begun. Erlene at Prog 0: 19. Bastok Markets [S]:
+# Gentle Tiger 46, finished: Prog 1; Prog 1: 47. Pashhow Marshlands [S]: the second Indescript Markings (offset 1):
+# nil (its script: NOTHING_OUT_OF_ORDINARY); the first (offset 0) at Prog 1: 2, finished: Schultz's Sealed Letter,
+# Prog 2; again at Prog 1 (a GM): 2 again, finished; at Prog 2: nil (its script). Eldieme [S]: Erlene 20, finished:
+# completed (a Klimaform Schema), both letters taken, the Timer tomorrow and the mustZone (Quest[7][32]). Erlene:
+# Downward Helix not yet (its Timer): A Little Knowledge's 15. A Vana day on (the Timer is today): Downward Helix's
+# 23, finished: begun.
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/18 TheEldiemeNecropolisS/onEventFinish/20 BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/46 PashhowMarshlandsS/Indescript_Markings/onTrigger PashhowMarshlandsS/onEventFinish/2
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=SCH lvl=99
+quest CrystalWar.ALittleKnowledge completed
+setting AF1_QUEST_LEVEL 100
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erlene                          # On Sabbatical unavailable (level 99 < 100): A Little Knowledge's 47
+finish                                  # Embrava, Kaustra
+setting AF1_QUEST_LEVEL 40
+trigger Erlene                          # a Scholar of 99: 18 (A Little Knowledge's 15 is an Event: lower)
+finish                                  # Ulbrecht's Sealed Letter; begun
+trigger Erlene                          # accepted, Prog 0: 19
+finish
+warp -203.932,-9.998,3.737 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 0: 46
+finish                                  # Prog 1
+trigger Gentle_Tiger                    # Prog 1: 47
+finish
+warp -457.366,24.532,-363.107 PashhowMarshlandsS
+trigger Indescript_Markings+1           # offset 1: nil; its script: NOTHING_OUT_OF_ORDINARY (no AF_SCH_PANTS)
+finish-if-event
+trigger Indescript_Markings             # offset 0, Prog 1: 2
+finish                                  # Schultz's Sealed Letter; Prog 2
+charvar Quest[7][32]Prog 1               # a GM
+trigger Indescript_Markings             # Prog 1 again: 2 (an Event would be NOTHING_OUT_OF_ORDINARY)
+finish
+trigger Indescript_Markings             # Prog 2: nil; its script: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp 378.436,-39.999,17.914 TheEldiemeNecropolisS
+trigger Erlene                          # Prog 2: 20
+finish                                  # completed (a Klimaform Schema); both letters taken; Timer tomorrow, mustZone
+trigger Erlene                          # Downward Helix's Timer to come: A Little Knowledge's 15
+finish
+wait vana=24
+trigger Erlene                          # a Vana day on, the Timer is today: Downward Helix's 23 (<=, not <)
+finish                                  # begun

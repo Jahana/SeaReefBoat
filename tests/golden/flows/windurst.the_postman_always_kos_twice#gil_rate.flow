@@ -1,0 +1,18 @@
+# The Postman Always KO's Twice (windurst 19) at GIL_RATE 1.01: the events' gil argument and the finishes' gil are
+# GIL_RATE x amount read by the engine's integral getter (llround: 50.5 -> 51, 252.5 -> 253; a round-half-even or a
+# missing rate would give 50 / 252 or 50 / 250). Accepted (GM): one letter 52, then completed: one and three letters.
+char zone=WindurstWalls pos=63.5,-2.5,-63.2 job=WAR lvl=75
+setting GIL_RATE 1.01
+item TornEpistle
+login
+quest Windurst.ThePostmanAlwaysKosTwice accepted
+trade Ambrosius TornEpistle x1          # accepted, one: 52 (51)
+finish                                  # taken; 51 gil; fame 10; completed
+item TornEpistle
+trade Ambrosius TornEpistle x1          # completed, one: 57 (51)
+finish                                  # taken; 51 gil; fame 10
+item TornEpistle
+item MuddyBarTab
+item OddPostcard
+trade Ambrosius TornEpistle x1 MuddyBarTab x1 OddPostcard x1  # three: 59 (253, 3)
+finish                                  # taken; 253 gil; fame 10

@@ -1,0 +1,28 @@
+# Deal with Tenshodo (jeuno 26): Garnev in Lower Jeuno. The guard (A Clock Most Delicate accepted), Garnev's 168 at
+# Norg fame level 1, 167 at level 2 (begun on any finish), the trades while accepted (two masks or a mask with a bone
+# chip: npcUtil.tradeHasExactly fails, nil; exactly one Gold Orcmask: 166), the completion (Norg fame +50, the Clock
+# Tower Oil key item, Trader of Renown, the mask taken by confirmTrade).
+# Garnev has no script and no other quest; his default is 207.
+lists LowerJeuno/Garnev/onTrigger LowerJeuno/Garnev/onTrade LowerJeuno/onEventFinish/167 LowerJeuno/onEventFinish/166
+char zone=LowerJeuno pos=30.4,4.4,-34.8
+fame Norg 49
+item GoldOrcmask x3
+item BoneChip
+login
+trigger Garnev                            # A Clock Most Delicate available: no section; 207
+finish
+quest Jeuno.AClockMostDelicate accepted   # a GM
+trade Garnev GoldOrcmask x1               # available, guard met: no trade handler, nothing
+trigger Garnev                            # Norg fame 49 (level 1): 168
+finish                                    # no finish handler for 168
+fame Norg 50                              # level 2
+trigger Garnev                            # 167
+finish                                    # begun
+trigger Garnev                            # accepted: no trigger handler; 207
+finish
+trade Garnev GoldOrcmask x2               # two masks: not exact, nil
+trade Garnev GoldOrcmask x1 BoneChip x1   # a mask and a chip: not exact, nil
+trade Garnev GoldOrcmask x1               # exactly one mask: 166
+finish                                    # completed: Norg fame +50, Clock Tower Oil KI, Trader of Renown; one mask taken
+trigger Garnev                            # completed: no section; 207
+finish

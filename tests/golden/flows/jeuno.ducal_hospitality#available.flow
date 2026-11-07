@@ -1,0 +1,23 @@
+# Ducal Hospitality (jeuno 68): the available check's operands one at a time, at Taillegeas (default 10061). A level 75
+# Warrior, CoP The Road Forks current, Jeuno fame level 3 ((150 + 150 + 148) / 2 = 224): 10061 (no section); Windurst
+# 150 (a GM; 225, level 4): 10057, option 10; a Goblin Pie traded while the quest is only available: no onTrade:
+# nothing. CoP A Vessel Without a Captain current (318: not completed; a GM, The Road Forks completed first: addMission
+# refuses to overwrite a current mission): 10061.
+lists RuludeGardens/Taillegeas/onTrigger RuludeGardens/Taillegeas/onTrade RuludeGardens/onEventFinish/10057
+char zone=RuludeGardens pos=29.5,2,58 job=WAR lvl=75
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 148
+mission Cop TheRoadForks current
+item GoblinPie
+login
+trigger Taillegeas                      # fame level 3: no section; 10061
+finish
+fame Windurst 150                       # a GM: level 4
+trigger Taillegeas                      # 10057, a draw
+finish option=10                        # not begun
+trade Taillegeas GoblinPie x1           # available: no onTrade: nothing (the pie kept)
+mission Cop TheRoadForks completed      # a GM: the log's current mission cleared
+mission Cop AVesselWithoutACaptain current # a GM: 318 current, not completed
+trigger Taillegeas                      # no section; 10061
+finish

@@ -1,0 +1,131 @@
+# Promotion: Lance Corporal's edges. Main: AssaultPromotion 24 (Superior Private completed): Abquhbah: no section: his
+# script's 255. Accepted (GMs from here). Bhaflau's Wellspring at Stage 0: no section: the default WELLSPRING; Stage 1
+# with no empty tube 5: WELLSPRING + 3; Stage 3, Option 48 (tube 3 used up: quality 6, platinum): WELLSPRING + 2;
+# Wajaom's Wellspring 1 at Stage 3: its WELLSPRING + 2.
+# Whitegate: Nafiwaa 5039; Option 0: no section: her default 661; Stage 2 with Prog 767 (tubes 1-4 empty, tube 5 two
+# thirds used: one third left): 5036. Stage 3, Option 48, Wait 0: area 3 with a full bag: 5031, finished: the platinum
+# tier (randomInt(3, 4), then randomInt(1, 2): the draws give three or four Imperial Mythril Pieces) does not fit:
+# nothing, still accepted; room again: out and in: 5031: the reward (two new draws: one Imperial Gold Piece), completed.
+# bob: Stage 3, Option 1 (tube 1 a third: quality 0.5), Wait 0: area 3: 5031, finished: no reward (randomInt(3, 4) still
+# drawn); completed. carl (AssaultPromotion 25, Private First Class completed, Superior Private not): Abquhbah: no
+# section: 255. Round 2 (GMs): Wajaom's Wellspring 1 at Stage 1 with its empty tube: 4, the Stage set to 3 while 4 is
+# open: the finish runs nothing (its section is off); Nafiwaa at Stage 2 with Prog -1 (no tube read: 15 thirds): 5038;
+# with Prog 4, finished on 0x80000304 (result 2, contents 772): Option 768; Stage 1 with no / one / four tubes filled:
+# 5036, 5037 [1] = 1, [1] = 4; Stage -1: Abquhbah's 255. dan: Option 60 (quality 10.5): 5031, no reward; ed: Option 565
+# (quality 10 with tube 5): two Imperial Gold Pieces.
+lists AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/Nafiwaa/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventFinish/5031 BhaflauThickets/Mythralline_Wellspring/onTrigger WajaomWoodlands/Mythralline_Wellspring/onTrigger
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=35,-6.601,-62 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char dan zone=AhtUrhganWhitegate pos=35,-6.601,-62 job=WAR lvl=1
+char ed zone=AhtUrhganWhitegate pos=35,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+charvar AssaultPromotion 24
+keyitem SpWildcatBadge
+bob: quest AhtUrhgan.PromotionLanceCorporal accepted
+bob: charvar Quest[6][92]Stage 3
+bob: charvar Quest[6][92]Option 1
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+dan: quest AhtUrhgan.PromotionLanceCorporal accepted
+dan: charvar Quest[6][92]Stage 3
+dan: charvar Quest[6][92]Option 60
+ed: quest AhtUrhgan.PromotionLanceCorporal accepted
+ed: charvar Quest[6][92]Stage 3
+ed: charvar Quest[6][92]Option 565
+carl: charvar AssaultPromotion 25
+login
+trigger Abquhbah                        # AssaultPromotion 24: no section: his script's 255
+finish
+quest AhtUrhgan.PromotionLanceCorporal accepted   # a GM; Stage 0
+warp 182.313,-15.188,373.56 BhaflauThickets
+trigger Mythralline_Wellspring          # Stage 0: no section: WELLSPRING
+finish-if-event
+charvar Quest[6][92]Stage 1             # a GM
+trigger Mythralline_Wellspring          # Stage 1, no empty tube 5: WELLSPRING + 3
+finish-if-event
+charvar Quest[6][92]Stage 3             # a GM
+charvar Quest[6][92]Option 48           # a GM: tube 3, three thirds
+trigger Mythralline_Wellspring          # Stage 3: WELLSPRING + 2
+finish-if-event
+warp -90.995,-15.139,-339.004 WajaomWoodlands
+charvar Quest[6][92]Stage 1             # a GM
+keyitem EmptyTestTube1                  # a GM
+trigger Mythralline_Wellspring          # Stage 1, the empty tube: 4
+charvar Quest[6][92]Stage 3             # a GM, 4 left open
+finish                                  # Stage 3 at the finish: section 3 off, 4's finish not run: nothing
+charvar Quest[6][92]Option 48           # a GM
+trigger Mythralline_Wellspring          # Wajaom, Stage 3: WELLSPRING + 2
+finish-if-event
+warp -72.851,-5.999,126.575 AhtUrhganWhitegate
+trigger Nafiwaa                         # Stage 3, Option 48: 5039
+finish
+charvar Quest[6][92]Option 0            # a GM
+trigger Nafiwaa                         # Stage 3, Option 0: no section: 661
+finish
+charvar Quest[6][92]Stage 2             # a GM
+charvar Quest[6][92]Prog 767            # a GM: 14 thirds used
+trigger Nafiwaa                         # Stage 2, one third left: 5036
+finish
+charvar Quest[6][92]Prog -1             # a GM
+trigger Nafiwaa                         # Stage 2, Prog -1 (splitBits of a negative: no tube): 15 thirds left:
+                                        # 5038 [2] = -1
+finish option=0                         # result 0: nothing
+charvar Quest[6][92]Prog 4              # a GM: tube 2 a third used
+trigger Nafiwaa                         # Stage 2: 5038 [2] = 4
+finish option=-2147482876               # 0x80000304: result 2, contents 772: Stage 3, Wait, Option 768 (772 - 4)
+charvar Quest[6][92]Stage 1             # a GM
+delkeyitem TestTube1                    # a GM (a no-op: Wajaom's finish above filled no tube)
+trigger Nafiwaa                         # Stage 1, no tube filled: 5036
+finish
+keyitem TestTube1                       # a GM
+trigger Nafiwaa                         # one filled: 5037 [1] = 1
+finish
+keyitem TestTube2                       # a GM
+keyitem TestTube3                       # a GM
+keyitem TestTube4                       # a GM
+trigger Nafiwaa                         # four filled: 5037 [1] = 4
+finish
+charvar Quest[6][92]Stage -1            # a GM
+trigger Abquhbah                        # Stage -1: no section: his script's 255
+finish
+charvar Quest[6][92]Stage 3             # a GM
+charvar Quest[6][92]Option 48           # a GM
+charvar Quest[6][92]Wait 0              # a GM
+warp 37.024,-6.601,-62 AhtUrhganWhitegate   # south of area 3
+tick 1000
+tick 1000
+tick 1000
+fill-inventory
+walk 37.024,-6.5,-56                    # area 3: 5031
+finish                                  # quality 6: platinum (the Mythril Pieces drawn); no room: nothing
+free-inventory
+walk 37.024,-6.601,-62
+walk 37.024,-6.5,-56                    # 5031 again
+finish                                  # the platinum reward (two new draws: one Imperial Gold Piece); completed;
+                                        # AssaultPromotion 0
+logout
+bob: login
+tick 1000
+tick 1000
+tick 1000
+bob: walk 35,-6.5,-56                   # area 3, Option 1, Wait 0: 5031
+bob: finish                             # quality 0.5: no reward; completed
+bob: logout
+carl: login
+carl: trigger Abquhbah                  # Superior Private not completed: 255
+carl: finish
+carl: logout
+dan: login
+tick 1000
+tick 1000
+tick 1000
+dan: walk 35,-6.5,-56                   # area 3, Option 60 (tubes 2 and 3 used up): quality 10.5 (smoke): 5031
+dan: finish                             # no reward; completed
+dan: logout
+ed: login
+tick 1000
+tick 1000
+tick 1000
+ed: walk 35,-6.5,-56                    # area 3, Option 565 (tube 1 a third, 2 a third, 3 three, 5 two): quality 10:
+                                        # 5031
+ed: finish                              # two Imperial Gold Pieces; completed

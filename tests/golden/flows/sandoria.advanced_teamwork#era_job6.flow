@@ -1,0 +1,35 @@
+# Advanced Teamwork (sandoria 65) with its era module (quest rework B3b, Task 9): six WHMs, main one of them. The
+# module (xi.pre(xi.expansion.ROV): RESTRICT_CONTENT 1, ENABLE_ROV 0) counts the members of the main job of the char who
+# talks, not of WAR: six WHMs, the local Prog 1, updateEvent(15, 3); finish option 1: nothing.
+module modules/era/lua/quests/sandoria/advanced_teamwork.lua
+lists WestRonfaure/Vilatroire/onTrigger WestRonfaure/onEventUpdate/129 WestRonfaure/onEventFinish/129
+char zone=WestRonfaure pos=-258.861,-70.999,423.42 job=WHM lvl=10
+char bob zone=WestRonfaure pos=-258.861,-70.999,428 job=WHM lvl=10
+char carl zone=WestRonfaure pos=-256,-70.999,426 job=WHM lvl=10
+char dave zone=WestRonfaure pos=-256,-70.999,421 job=WHM lvl=10
+char eve zone=WestRonfaure pos=-261.5,-70.999,426 job=WHM lvl=10
+char fay zone=WestRonfaure pos=-261.5,-70.999,421 job=WHM lvl=10
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Sandoria.IntroductionToTeamwork completed
+quest Sandoria.IntermediateTeamwork completed
+quest Sandoria.AdvancedTeamwork accepted
+login
+bob: login
+carl: login
+dave: login
+eve: login
+fay: login
+invite bob
+bob: accept
+invite carl
+carl: accept
+invite dave
+dave: accept
+invite eve
+eve: accept
+invite fay
+fay: accept                               # six WHMs
+trigger Vilatroire                        # 129 { [1] = 3 }
+update 129 option=0                       # six WHMs (== 6): the local Prog 1, updateEvent(15, 3)
+finish option=1                           # option 1: nothing

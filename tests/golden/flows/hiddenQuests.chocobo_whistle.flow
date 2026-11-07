@@ -1,0 +1,33 @@
+# Chocobo Whistle (hidden quest ChocoboWhistle): a level 30 Warrior in Southern San d'Oria with no raised chocobo (the
+# names are '' x3). The chocobo raising library writes Prog (a GM's charvar here). Hantileon's own script is the VCS
+# trainer's (xi.chocoboRaising.onTriggerVCSTrainer). Prog 0: the check fails: his script. Prog 1: the string event 829
+# (strings '', '', '', ''; VanadielTime(), 0, 0, 2), started by the handler, then noAction. An update on 1: nothing; on
+# 244 (draw the chocobo): updateEvent(0, 0, 1, 0, 4, 1). The finish: Prog 2 (SEARCH): the check fails again. Prog 3
+# (FOUND, a GM) with the Dirty Handkerchief: 830 (VanadielTime(), 1); finished on 0: nothing. With the Handkerchief too:
+# 830 (VanadielTime(), 2); finished on 222: setWhistleProgress(DONE) (the user flag WHISTLE_QUEST_DONE, Prog 0), both
+# handkerchiefs taken, the Chocobo Whistle given. CHECK in the first trace: VanadielTime() in 829 / 830 (the harness's
+# clock), and what Hantileon's script plays for a char with no chocobo.
+# Not recordable (no rival flow with Chocobo on the Loose! at Prog 2, both asking at Hantileon): the Lua itself fails
+# there. The whistle's progressEvent 821 ties with the Loose's on noAction, and the Whistle's performNextAction does
+# setLocalVar(cycleVar, nil) which errors; the Lost Chick (#loose) is the recorded rival.
+lists SouthernSanDoria/Hantileon/onTrigger SouthernSanDoria/onEventUpdate/829 SouthernSanDoria/onEventFinish/829 SouthernSanDoria/onEventFinish/830
+char zone=SouthernSanDoria pos=-1,0,-105 job=WAR lvl=30
+login
+trigger Hantileon                       # Prog 0: the check fails: his script
+finish-if-event
+charvar HQuest[ChocoboWhistle]Prog 1    # a GM: SEE_HANTILEON
+trigger Hantileon                       # 829 ('' x4; VanadielTime, 0, 0, 2); noAction
+update 829 option=1                     # not 244: nothing
+update 829 option=244                   # updateEvent(0, 0, 1, 0, 4, 1)
+finish                                  # Prog 2 (SEARCH)
+trigger Hantileon                       # Prog 2: the check fails: his script
+finish-if-event
+charvar HQuest[ChocoboWhistle]Prog 3    # a GM: FOUND (the search walk's find)
+keyitem DirtyHandkerchief
+trigger Hantileon                       # 830 (VanadielTime, 1: dirty)
+finish option=0                         # not 222: nothing
+keyitem Handkerchief
+trigger Hantileon                       # 830 (VanadielTime, 2: from the worker)
+finish option=222                       # DONE: the user flag, Prog 0; both handkerchiefs taken; the whistle
+trigger Hantileon                       # Prog 0: the check fails: his script
+finish-if-event

@@ -1,0 +1,15 @@
+# All at Sea (windurst 23): the offer's fame operand. A level-10 WAR at Windurst fame 124 (level 2): not offered;
+# Paytah's default 288 (he has no script), the Ripped Cap traded: nothing (no handler). Fame 125: 291; the cap: 292.
+lists PortWindurst/Paytah/onTrigger PortWindurst/Paytah/onTrade
+char zone=PortWindurst pos=79.5,-5,117.77 job=WAR lvl=10
+fame Windurst 124
+item RippedCap
+login
+trigger Paytah                                # fame level 2: not offered; 288
+finish
+trade Paytah RippedCap x1                     # not offered: no trade handler, nothing
+fame Windurst 125
+trigger Paytah                                # 291
+finish
+trade Paytah RippedCap x1                     # 292
+finish option=0                               # begun

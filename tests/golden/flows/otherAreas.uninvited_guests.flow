@@ -1,0 +1,45 @@
+# Uninvited Guests (otherAreas 81): Tavnazian Safehold's Justinius (two, +33; no script; default 265); Monarch Linn's
+# battlefield Uninvited Guests (SD_Entrance, index 6: the permit spent, Prog 1 required). CoP Slanderous Utterings
+# current: CoP 3-5's and 4-1's completed sections answer Justinius 129 and 266 (replaceDefault, in turn) when the quest
+# has nothing. NextConquestTally() is 1800198000; the reward is a random draw (#draws).
+# Justinius 570, option 0: nothing; option 1: the permit, Prog 1, begun. 571 (event). Monarch Linn: the battlefield
+# entered, won (a GM's bfwin: the win is Mammet-800.lua's onMobDeath once its group is dead, and the group is filled on
+# engage; the harness kill never engages, so a scratch record's MAMMET_800 kill won nothing), 32001: Prog 2. Justinius
+# 572, finished: the reward rolled and given, 10000 gil (first clear), completed (Monarch Linn Patrol Guard), Wait
+# 1800198000. Completed, Prog 0, the wait not over: nil (129). Three JST days on: 573, option 0: nothing; option 1:
+# started again (the permit, Prog 1). The permit taken away (a GM: the fight lost): Justinius: Prog 3, 575, finished:
+# Wait 1800802800, Prog 4; again: 575, finished: nothing. Seven days on: 574, finished: started again.
+lists TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/onEventFinish/570 TavnazianSafehold/onEventFinish/572 TavnazianSafehold/onEventFinish/573 TavnazianSafehold/onEventFinish/574 TavnazianSafehold/onEventFinish/575 MonarchLinn/onEventFinish/32001
+char zone=TavnazianSafehold pos=80.2,-34,70.5 job=WAR lvl=75
+mission Cop SlanderousUtterings current
+login
+trigger Justinius                       # available: 570
+finish option=0                         # nothing
+trigger Justinius                       # 570
+finish option=1                         # the permit; Prog 1; begun
+trigger Justinius                       # Prog 1, the permit: 571
+finish
+warp -37.6,-3.35,-540 MonarchLinn
+trigger SD_Entrance                     # the permit, Prog 1: the 32000 menu
+update 32000 option=97                  # index 6, area 1
+finish                                  # in the arena; the permit spent
+bfwin                                   # won: 32001
+finish                                  # Prog 2
+warp 80.2,-34,70.5 TavnazianSafehold
+trigger Justinius                       # Prog 2: 572
+finish                                  # the reward; 10000 gil; completed; Wait 1800198000
+trigger Justinius                       # Prog 0, the wait not over: nil; 129
+finish
+wait jst=3                              # the tally 1800802800
+trigger Justinius                       # the wait over: 573
+finish option=0                         # nothing
+trigger Justinius                       # 573
+finish option=1                         # started again: the permit; Prog 1
+delkeyitem MonarchLinnPatrolPermit      # a GM: the fight lost
+trigger Justinius                       # Prog 1, no permit: Prog 3; 575
+finish                                  # Wait 1800802800; Prog 4
+trigger Justinius                       # Prog 4, the wait not over: 575
+finish                                  # Prog 4: nothing
+wait jst=7                              # the tally a week on
+trigger Justinius                       # Prog 4, the wait over: 574
+finish                                  # started again

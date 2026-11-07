@@ -1,0 +1,63 @@
+# Blade of Evil at the qm1, accepted (GM) at Prog 0, a DRK 75; the char waits on the fourth floor
+# while the bodies despawn, so the victims lose it: each arm of
+# the qm1 trade's guard. The vial pops the three (BLADE_OF_EVIL_OFFSET +0 the Scythe, claimed; +1 / +2 its victims, on the
+# char's enmity); a trade with any of the three spawned is nil, each spawned one in turn (the bodies stay spawned past
+# 32 s and are gone within 92 s: the ticks); the Scythe's death sets Prog 1 from Prog 0 only (Prog 2 by GM: nothing);
+# a trade at Prog 1 with none up is nil.
+lists MiddleDelkfuttsTower/qm1/onTrade MiddleDelkfuttsTower/Gerwitzs_Scythe/onMobDeath
+char zone=MiddleDelkfuttsTower pos=86.9,-79.6,79 job=DRK lvl=75
+quest Bastok.DarkPuppet completed
+quest Bastok.BladeOfEvil accepted
+item VialOfQuadavMageBlood
+item VialOfQuadavMageBlood
+item VialOfQuadavMageBlood
+login
+trigger qm1                          # NOTHING_OUT_OF_ORDINARY (walks to the qm1)
+finish-if-event
+trade qm1 VialOfQuadavMageBlood x1   # Prog 0, none up: the vial taken, the three popped, SENSE_A_FOUL_PRESENCE
+trade qm1 VialOfQuadavMageBlood x1   # Prog 0, the Scythe (+0) up: nil (the vial kept)
+kill BLADE_OF_EVIL_OFFSET            # the Scythe at Prog 0: Prog 1
+charvar Quest[1][59]Prog 0
+warp -43.1,-47.4,77.5 MiddleDelkfuttsTower  # away on the fourth floor while the bodies despawn: the victims lose the char
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+warp 86.9,-79.6,79 MiddleDelkfuttsTower
+trigger qm1                          # NOTHING_OUT_OF_ORDINARY (walks to the qm1)
+finish-if-event
+trade qm1 VialOfQuadavMageBlood x1   # Prog 0 (GM), the Scythe gone, the first victim (+1) up: nil
+kill BLADE_OF_EVIL_OFFSET+1          # no handler
+warp -43.1,-47.4,77.5 MiddleDelkfuttsTower  # away on the fourth floor while the bodies despawn: the victims lose the char
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+warp 86.9,-79.6,79 MiddleDelkfuttsTower
+trigger qm1                          # NOTHING_OUT_OF_ORDINARY (walks to the qm1)
+finish-if-event
+trade qm1 VialOfQuadavMageBlood x1   # Prog 0, the second victim (+2) alone up: nil
+kill BLADE_OF_EVIL_OFFSET+2          # no handler
+warp -43.1,-47.4,77.5 MiddleDelkfuttsTower  # away on the fourth floor while the bodies despawn: the victims lose the char
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+warp 86.9,-79.6,79 MiddleDelkfuttsTower
+trigger qm1                          # NOTHING_OUT_OF_ORDINARY (walks to the qm1)
+finish-if-event
+trade qm1 VialOfQuadavMageBlood x1   # Prog 0, none up: popped again, the second vial taken
+charvar Quest[1][59]Prog 2
+kill BLADE_OF_EVIL_OFFSET            # the Scythe at Prog 2 (GM): the guard is false, Prog stays 2
+kill BLADE_OF_EVIL_OFFSET+2
+kill BLADE_OF_EVIL_OFFSET+1          # (after +2: since 8da64d7f the char no longer claims +2 once +1 is down)
+charvar Quest[1][59]Prog 1
+warp -43.1,-47.4,77.5 MiddleDelkfuttsTower  # away on the fourth floor while the bodies despawn: the victims lose the char
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+warp 86.9,-79.6,79 MiddleDelkfuttsTower
+trigger qm1                          # NOTHING_OUT_OF_ORDINARY (walks to the qm1)
+finish-if-event
+trade qm1 VialOfQuadavMageBlood x1   # Prog 1, none up: nil (the third vial kept)

@@ -1,0 +1,63 @@
+# Better Part of Valor (crystalWar 12): a level 99 Warrior in Bastok Markets [S] with The Fighting Fourth completed (a
+# GM: xi.wotg.helpers.hasCompletedFirstQuest; missions as group 1's flows) and a Gnole Claw. Engelhart while available:
+# no section: his default 104. North Gustaberg [S] from Bastok Markets [S]: the zone-in's 1 (left open), finished on
+# option 0: begun, the Clump of Animal Hair. Bastok Markets [S]: Engelhart Prog 0: 116, finished: Prog 1, the hair
+# taken; Prog 1: 117. North Gustaberg [S] (the zone-in from Bastok Markets [S] while accepted: nothing): qm1 3,
+# finished: Prog 2; Prog 2: nil (no script, no default); Solitary Ant 2 (an Event, replaceDefault). Vunkerl Inlet [S]:
+# Leadavox: the claw at Prog 2: nil (the claw stays); 101, finished: Prog 3; 102; the claw alone: 103, finished: the
+# trade confirmed, the Xhifhut, Prog 4; Prog 4: nil (his default 100). Bastok Markets [S]: Engelhart 118, finished:
+# completed (10000 gil, the Warning Letter), the Xhifhut taken, needToZone. Completed (no section): Engelhart: Fires of
+# Discontent's 120 (its arm: the next quest is available); North Gustaberg [S]: Solitary Ant's default 112, qm1 nil;
+# Vunkerl Inlet [S]: Leadavox's default 100.
+lists BastokMarketsS/Engelhart/onTrigger BastokMarketsS/onEventFinish/116 BastokMarketsS/onEventFinish/118 NorthGustabergS/onZoneIn/1 NorthGustabergS/onEventFinish/1 NorthGustabergS/qm1/onTrigger NorthGustabergS/Solitary_Ant/onTrigger NorthGustabergS/onEventFinish/3 VunkerlInletS/Leadavox/onTrigger VunkerlInletS/Leadavox/onTrade VunkerlInletS/onEventFinish/101 VunkerlInletS/onEventFinish/103
+char zone=BastokMarketsS pos=-78.585,-4.425,-125.327 job=WAR lvl=99
+item GnoleClaw
+quest CrystalWar.TheFightingFourth completed
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Engelhart                       # available: no section: his default 104; the mission takes no talk
+finish-if-event
+warp 380.038,-2.25,147.627 NorthGustabergS open # from Bastok Markets [S]: 1, left open
+finish                                  # begun; the Clump of Animal Hair
+warp -78.585,-4.425,-125.327 BastokMarketsS
+trigger Engelhart                       # Prog 0: 116
+finish                                  # Prog 1; the hair taken
+trigger Engelhart                       # Prog 1: 117
+finish
+warp -575.082,39.854,64.186 NorthGustabergS # from Bastok Markets [S] while accepted: no zone-in reply
+trigger qm1                             # Prog 1: 3
+finish                                  # Prog 2
+trigger qm1                             # Prog 2: nil (no default)
+finish-if-event
+warp 376.532,0.865,151.645 NorthGustabergS
+trigger Solitary_Ant                    # 2 (replaceDefault)
+finish
+warp 208.581,-32.002,315.458 VunkerlInletS
+trade Leadavox GnoleClaw x1             # Prog 2: nil (the claw stays)
+finish-if-event
+trigger Leadavox                        # Prog 2: 101
+finish                                  # Prog 3
+trigger Leadavox                        # Prog 3: 102
+finish
+trade Leadavox GnoleClaw x1             # Prog 3, the claw alone: 103
+finish                                  # the trade confirmed; the Xhifhut; Prog 4
+trigger Leadavox                        # Prog 4: nil: his default 100
+finish-if-event
+warp -78.585,-4.425,-125.327 BastokMarketsS
+trigger Engelhart                       # Prog 4: 118
+finish                                  # completed (10000 gil, the Warning Letter); the Xhifhut taken; needToZone
+trigger Engelhart                       # completed: no section: Fires of Discontent's 120 (BPoV completed)
+finish option=1                         # Fires begun (its arm)
+warp 376.532,0.865,151.645 NorthGustabergS # from Bastok Markets [S] while completed: no zone-in reply
+trigger Solitary_Ant                    # completed: no section: his default 112
+finish-if-event
+warp -575.082,39.854,64.186 NorthGustabergS
+trigger qm1                             # completed: nil
+finish-if-event
+warp 208.581,-32.002,315.458 VunkerlInletS
+trigger Leadavox                        # completed: his default 100
+finish-if-event

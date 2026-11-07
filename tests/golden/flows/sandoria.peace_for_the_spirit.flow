@@ -1,0 +1,106 @@
+# Peace for the Spirit (sandoria 86, RDM AF3): Curilla in Chateau d'Oraguille, Sharzalion and Daggao in Southern San
+# d'Oria, the Dry Fountain in Fei'Yin, the Oaken Box in Garlaige Citadel, the Fei'Yin and Northern San d'Oria zone-ins.
+# An RDM 50 with The Crimson Trial (whose offer is Sharzalion's) and Enveloped in Darkness completed. Northern San
+# d'Oria's first visit plays two mission events (30035, RoV 1-1's, then 878, SoA 1-1's) before the zone's own; then CS 0: no 49.
+# Available: Daggao's 60 (the script's); the Oaken Box (BOXES_HERE) and the Dry Fountain traded a chip (nothing).
+# Curilla: 109, declined (option 0, option 2), accepted (option 1); CS 0: 108. Sharzalion 64 (CS 1), 65. Fei'Yin's
+# zone-in at CS 1 without the coin spawns Miser Murphy (killed: his onMobDeath runs, and his drop gives the coin; the GM
+# `item` after it adds nothing, the coin being rare and held); the
+# Dry Fountain: a coin and a chip, a chip (nothing), one coin (17: taken, CS 2); its trigger DRIED_UP_FOUNTAIN (the
+# script's). Sharzalion 66 (CS 3); Daggao 72 (CS 4), then 60. The Oaken Box at CS 4, the inventory full: the Guardian
+# Statue spawns claimed, then FEELS_WRONG (the script's, the statue alive); killed (its drop stays in the pool): dead
+# but still spawned: BOXES_HERE; four ticks later (its body gone): it spawns again; killed; the pool's Nail Puller given;
+# the inventory full again: BOXES_SCATTERED; a chip (nothing); the puller and a chip (tradeHas: 14, the puller taken,
+# the chip kept, CS 5: exactly one slot free); BOXES_HERE. Daggao 73; Sharzalion 15; Curilla 51; the Northern San
+# d'Oria zone-in with exactly one free slot: 49, left open (no update handler); finished: completed (Warlock's
+# Chapeau, Paragon of Red Mage Excellence, no fame: the Lua table has no fameArea), CS 0; Curilla 52; Sharzalion 15.
+char zone=ChateauDoraguille pos=31.2,0.0,-0.9 job=RDM lvl=50
+quest Sandoria.TheCrimsonTrial completed
+quest Sandoria.EnvelopedInDarkness completed
+item BoneChip x2
+login
+warp 126.3,-6.5,95.7 NorthernSanDoria     # the first visit: 30035 (RoV 1-1 Rhapsodies of Vana'diel; wins over the zone's onZoneIn, which runs too)
+rezone                                    # 878 (SoA 1-1 Rumors from the West; wins over the zone's onZoneIn, which runs too)
+rezone                                    # CS 0: no 49
+warp 97.4,0.0,113.6 SouthernSanDoria
+trigger Daggao                            # available, CS 0: 60 (the script's)
+finish
+warp -159.9,-1.0,224.5 GarlaigeCitadel
+trigger Oaken_Box                         # available, CS 0, no puller: BOXES_HERE (the script's)
+trade Oaken_Box BoneChip x1               # available: nothing
+warp -15.5,-16.5,67.0 Feiyin              # CS 0: no spawn
+trade Dry_Fountain BoneChip x1            # available: nothing
+warp 31.2,0.0,-0.9 ChateauDoraguille
+trigger Curilla                           # RDM 50, Enveloped in Darkness completed, available: 109
+finish option=0                           # declined: not begun
+trigger Curilla                           # 109
+finish option=2                           # not 1: not begun
+trigger Curilla                           # 109
+finish option=1                           # begun
+trigger Curilla                           # accepted, CS 0: 108
+finish
+warp 97.4,0.0,113.6 SouthernSanDoria
+trigger Sharzalion                        # CS 0: 64
+finish                                    # CS 1
+trigger Sharzalion                        # CS 1: 65
+finish
+warp -15.5,-16.5,67.0 Feiyin              # CS 1, no Antique Coin: Miser Murphy spawns (no cutscene)
+kill MISER_MURPHY                         # killed (his onMobDeath runs): spawned
+walk -15.5,-16.5,67.0                     # back to the Dry Fountain
+item AntiqueCoin held                     # GM: nothing (his drop gave it: rare, held)
+trade Dry_Fountain AntiqueCoin x1 BoneChip x1  # two items: nothing
+trade Dry_Fountain BoneChip x1            # no coin: nothing
+trade Dry_Fountain AntiqueCoin x1         # 17
+finish                                    # the coin taken; CS 2
+trigger Dry_Fountain                      # DRIED_UP_FOUNTAIN (the script's)
+warp 97.4,0.0,113.6 SouthernSanDoria
+trigger Sharzalion                        # CS 2: 66
+finish                                    # CS 3
+trigger Daggao                            # CS 3: 72
+finish                                    # CS 4
+trigger Daggao                            # CS 4: no answer of the quest; 60
+finish
+warp -159.9,-1.0,224.5 GarlaigeCitadel
+fill-inventory                            # GM: no room for the statue's drop
+trigger Oaken_Box                         # CS 4, no puller, the statue not spawned: the Guardian Statue spawns claimed
+trigger Oaken_Box                         # the statue alive: FEELS_WRONG (the script's, before the quest)
+kill GUARDIAN_STATUE                      # its drop stays in the treasure pool
+walk -159.9,-1.0,224.5                    # back to the Oaken Box
+trigger Oaken_Box                         # the statue dead but still spawned, CS 4, no puller: BOXES_HERE
+tick 15000                                # its body gone
+tick 15000
+tick 15000
+tick 15000
+trigger Oaken_Box                         # not spawned, CS 4, no puller: the Guardian Statue spawns claimed again
+kill GUARDIAN_STATUE
+walk -159.9,-1.0,224.5
+tick 15000
+tick 15000
+tick 15000
+tick 15000
+free-inventory
+tick 60000                                # the first kill's pool gives the Nail Puller
+item NailPuller held                      # GM: held already (rare): nothing
+fill-inventory
+trigger Oaken_Box                         # accepted, the puller: BOXES_SCATTERED (Nail Puller)
+trade Oaken_Box BoneChip x1               # no puller: nothing
+trade Oaken_Box NailPuller x1 BoneChip x1 # tradeHas: 14
+finish                                    # the puller taken, the chip kept; CS 5; one slot free
+trigger Oaken_Box                         # accepted, no puller, CS 5: BOXES_HERE (the script's)
+warp 97.4,0.0,113.6 SouthernSanDoria
+trigger Daggao                            # CS 5: 73
+finish
+trigger Sharzalion                        # accepted, CS 5: 15 (the script's)
+finish
+warp 31.2,0.0,-0.9 ChateauDoraguille
+trigger Curilla                           # CS 5: 51
+finish
+warp 126.3,-6.5,95.7 NorthernSanDoria open  # CS 5, exactly one free slot: 49, left open
+update 49 option=0                        # no update handler either side
+finish                                    # completed: Warlock's Chapeau, the title; CS 0
+warp 31.2,0.0,-0.9 ChateauDoraguille
+trigger Curilla                           # completed: 52
+finish
+warp 97.4,0.0,113.6 SouthernSanDoria
+trigger Sharzalion                        # completed: 15
+finish

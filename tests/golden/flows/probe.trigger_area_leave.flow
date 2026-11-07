@@ -1,0 +1,26 @@
+# probe (quest rework P9): a quest's onTriggerAreaLeave (interaction_lookup's onTriggerAreaLeave[area id], which
+# luautils::OnTriggerAreaLeave runs as the char leaves the area: CZone::CheckTriggerAreas) through the C# bridge.
+# Dances with Luopans (adoulin 118; on C# since B3b Adoulin group 4, DancesWithLuopans.cs):
+# Ceizak Battlegrounds' Ergon Locus area 1 (a cylinder of radius 11 around 357.819, -250.201). Its enter, with the
+# Luopan at Prog 0: UNCANNY_SENSATION and the quest's local var LocusArea 1; its leave: LocusArea and RestUntil 0. A
+# local var is in no table a trace records, so the healing effect (xi.effect.HEALING, 794, the /heal effect) shows it:
+# its onEffectGain calls xi.dancesWithLuopans.onHealing, which with LocusArea 1 and Prog 0 says ENERGIES_COURSE (and
+# arms a player:timer of 30 to 480 s, past the flow's end). Accepted with the Luopan (a GM): walked into area 1: the
+# enter; healed there: ENERGIES_COURSE; walked out: the leave (and the healing ends on the move); healed outside:
+# LocusArea 0: nothing.
+# Recorded on the Lua quest in P9, before the port. It replays against DancesWithLuopans.cs now (the healing hook its
+# export, the leave its OnTriggerAreaLeave) and can no longer be recorded: the quest's Lua file is gone (a probe
+# records Lua only). The trace is P9's, unchanged by the port.
+# Not a quest port: the key names no quest (Program.IsProbe).
+lists CeizakBattlegrounds/onTriggerAreaEnter/1 CeizakBattlegrounds/onTriggerAreaLeave/1
+char zone=CeizakBattlegrounds pos=330,0,-250 job=WAR lvl=99
+quest Adoulin.DancesWithLuopans accepted
+keyitem Luopan
+login
+tick 1000                               # xi.player.onGameIn's ZoningIn (no trigger areas while loading in) cleared at 2.5 s
+tick 1000
+tick 1000
+walk 357.8,0,-250.2                     # into area 1: the enter: UNCANNY_SENSATION, LocusArea 1
+effect 794                              # healing inside, LocusArea 1: ENERGIES_COURSE
+walk 330,0,-250                         # out: the leave: LocusArea 0, RestUntil 0
+effect 794                              # healing outside, LocusArea 0: nothing

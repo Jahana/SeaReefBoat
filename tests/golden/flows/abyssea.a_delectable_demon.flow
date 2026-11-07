@@ -1,0 +1,42 @@
+# A Delectable Demon (abyssea 173): a level 99 Warrior in Valkurm Dunes by the Cavernous Maw with The Truth Beckons
+# completed and Dawn of Death accepted (GMs), no Traverser Stone, 4 maw quests completed (A Goldstruck Gigas, To Paste a
+# Peiste, Megadrile Menace, The Beast of Bastore) and A Fluttery Fiend accepted (GMs; an accepted one does not count).
+# The maw, no stone: no section: its own warp event 55 (entranceMawOnTrigger), finished on option 0: no warp. Traverser
+# Stone 5 (a GM, one stone: `>= 1`): 56 (a Progress), finished on option 0: begun. Back to available (a GM): the maw
+# again with no other talk between: 56 again (an Event-rank 56 would alternate with the maw's own onTrigger: 55),
+# finished on option 2: begun (any option). Accepted: the maw: no handler: 55. A zone-in, accepted with no Cirein-croin
+# title: nothing. The title (a GM): the zone-in plays 57 (left open); its update on option 0 and on option 2: nothing;
+# on option 1: updateEvent(the key item for 4 completed: Ivory Abyssite of Perspicacity); finished: Ivory Abyssite of
+# Perspicacity given, then completed. Completed (title, stone and Dawn of Death still held): a zone-in: nothing; the
+# maw: 55.
+lists ValkurmDunes/Cavernous_Maw/onTrigger ValkurmDunes/onEventFinish/56 ValkurmDunes/onEventFinish/55 ValkurmDunes/onZoneIn/1 ValkurmDunes/onEventUpdate/57 ValkurmDunes/onEventFinish/57
+char zone=ValkurmDunes pos=369.48,-0.443,-119.874 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath accepted
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.MegadrileMenace completed
+quest Abyssea.TheBeastOfBastore completed
+quest Abyssea.AFlutteryFiend accepted
+login
+trigger Cavernous_Maw                   # no stone: no section: the maw's warp event 55
+finish                                  # option 0: no warp
+keyitem TraverserStone5                 # a GM: one stone
+trigger Cavernous_Maw                   # available, one stone, Dawn of Death accepted: 56
+finish                                  # option 0: begun
+quest Abyssea.ADelectableDemon available # a GM
+trigger Cavernous_Maw                   # 56 again (the kind)
+finish option=2                         # begun (any option)
+trigger Cavernous_Maw                   # accepted: no maw handler: 55
+finish                                  # option 0: no warp
+rezone                                  # accepted, no title: nothing
+title CireinCroinHarpooner              # a GM
+rezone open                             # the title: 57, left open
+update 57 option=0                      # option 0: nothing
+update 57 option=2                      # option 2: nothing
+update 57 option=1                      # option 1: updateEvent(Ivory Abyssite of Perspicacity)
+finish                                  # Ivory Abyssite of Perspicacity given; completed
+rezone                                  # completed: nothing
+trigger Cavernous_Maw                   # completed: no section: 55
+finish                                  # option 0: no warp

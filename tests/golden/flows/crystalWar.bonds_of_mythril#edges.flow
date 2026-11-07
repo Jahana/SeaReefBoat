@@ -1,0 +1,46 @@
+# Bonds of Mythril (crystalWar 59), the edges: a level 99 Warrior in Castle Zvahl Keep [S] with the WotG mission Adieu,
+# Lilisette current (missions as the main flow); The Truth Lies Hid not completed. Castle Zvahl Baileys [S] from the
+# Keep: no section, no zone-in reply. The Truth Lies Hid completed (a GM): Baileys from Xarcabard [S]: nil; from the
+# Keep: 13, finished on option 1: begun (any option). The Keep at Prog 0: a Keep Imp killed: no ImpKills (the death
+# handler is Prog 1's). Prog 3 without the passkey (a GM): Throne Room [S]: _4c1: no section (nothing). The passkey
+# given (a GM) at Prog 2: _4c1: nil; Prog 5: nil. Prog 7 (a GM) with a full inventory: North Gustaberg [S] (from Throne
+# Room [S]: any zone): 13, finished: the ring does not fit: not completed (the passkey kept); freed: the zone-in again:
+# 13, finished: completed, the passkey taken.
+# The Keep Imp / Gargouille Warden deaths' `Prog == 1` tests are their section's own check (both handlers live only in
+# the Prog 1 section), so their false arms are unreachable. The mission before Adieu, Lilisette is the #mission flow.
+uncovered: 5/-/onEventFinish:32001 -- Throne Room [S]'s 32001 is the Bonds of Mythril battlefield's win ("not implemented currently": bcnm_records has 354 but there is no battlefields/Throne_Room_[S] script, and _4c1 has no NPC script to enter one), so no flow opens it (the battlefield statements need a battlefield); the main flow sets Prog 5 by a GM
+lists CastleZvahlBaileysS/onZoneIn/1 CastleZvahlBaileysS/onEventFinish/13 CastleZvahlKeepS/Keep_Imp/onMobDeath ThroneRoomS/_4c1/onTrigger NorthGustabergS/onZoneIn/1 NorthGustabergS/onEventFinish/13
+char zone=CastleZvahlKeepS pos=-382.757,-51.999,-95.783 job=WAR lvl=99
+mission Wotg AdieuLilisette current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+warp 412.024,-12,-20.047 CastleZvahlBaileysS # The Truth Lies Hid not completed: no zone-in reply
+quest CrystalWar.TheTruthLiesHid completed # a GM
+warp -414,-46.5,20 XarcabardS
+warp 412.024,-12,-20.047 CastleZvahlBaileysS # from Xarcabard [S]: nil
+warp -382.757,-51.999,-95.783 CastleZvahlKeepS
+warp 412.024,-12,-20.047 CastleZvahlBaileysS open # from the Keep: 13, left open
+finish option=1                         # begun (any option)
+warp -382.757,-51.999,-95.783 CastleZvahlKeepS
+kill GARGOUILLE_WARDEN-424              # Prog 0: a Keep Imp's death: no ImpKills
+charvar Quest[7][59]Prog 3              # a GM, no passkey
+warp -114.349,-8.657,0 ThroneRoomS
+trigger _4c1                            # no passkey: no section: nothing
+finish-if-event
+keyitem ZvahlPasskey                    # a GM
+charvar Quest[7][59]Prog 2              # a GM
+trigger _4c1                            # the passkey, Prog 2: nil
+finish-if-event
+charvar Quest[7][59]Prog 5              # a GM
+trigger _4c1                            # the passkey, Prog 5: nil
+finish-if-event
+charvar Quest[7][59]Prog 7              # a GM
+fill-inventory
+warp 380.038,-2.25,147.627 NorthGustabergS open # Prog 7, from Throne Room [S] (any zone): 13, left open
+finish                                  # no room for the ring: not completed (the passkey kept)
+free-inventory
+rezone open                             # Prog 7: 13 again, left open
+finish                                  # completed; the passkey taken

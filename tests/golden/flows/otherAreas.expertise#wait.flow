@@ -1,0 +1,33 @@
+# Expertise (otherAreas 4): Valgeir's readyTime edge, his Prog arms' edges and the trade at any Prog. Accepted (a GM),
+# Prog 0: the fungus and the meat: 103 at Prog 0 (no 102 first), finished: Prog 2, readyTime 1800003456, the trade
+# taken. readyTime set by a GM: 1800000001 (one second ahead of GetSystemTime()): 141; 1800000000 (now): 105, finished:
+# Prog 3, the bisque. A second fungus and meat at Prog 3: 103 again, finished: Prog 2, readyTime 1800003456 (the wait
+# restarts). Prog 4 (a GM): no arm: nil, his default 140; Prog -1: nil, 140. 103 finished while the quest is completed
+# (a GM, while it is open): no handler (the trade kept).
+lists Selbina/Valgeir/onTrigger Selbina/Valgeir/onTrade Selbina/onEventFinish/103 Selbina/onEventFinish/105
+char zone=Selbina pos=59,-15.27,20.2 job=WAR lvl=30
+quest OtherAreas.Expertise accepted
+item ScreamFungus x3
+item SliceOfLandCrabMeat x3
+login
+trade Valgeir ScreamFungus x1 SliceOfLandCrabMeat x1 # Prog 0: 103
+finish                                  # Prog 2, readyTime 1800003456, the trade taken
+charvar Quest[4][4]readyTime 1800000001 # a GM: one second ahead
+trigger Valgeir                         # 141
+finish
+charvar Quest[4][4]readyTime 1800000000 # now: readyTime <= GetSystemTime()
+trigger Valgeir                         # 105
+finish                                  # Prog 3, the bisque (KEYITEM_OBTAINED)
+trade Valgeir ScreamFungus x1 SliceOfLandCrabMeat x1 # Prog 3: 103
+finish                                  # Prog 2, readyTime 1800003456, the trade taken
+trigger Valgeir                         # Prog 2, not ready: 141
+finish
+charvar Quest[4][4]Prog 4               # a GM
+trigger Valgeir                         # Prog 4: nil; his default 140
+finish
+charvar Quest[4][4]Prog -1              # a GM
+trigger Valgeir                         # Prog -1: nil; his default 140
+finish
+trade Valgeir ScreamFungus x1 SliceOfLandCrabMeat x1 # 103
+quest OtherAreas.Expertise completed    # a GM, while 103 is open
+finish                                  # no section while completed: nothing (the trade kept)

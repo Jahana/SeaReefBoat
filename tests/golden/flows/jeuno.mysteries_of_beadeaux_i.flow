@@ -1,0 +1,29 @@
+# Mysteries of Beadeaux I (jeuno 31): Lower Jeuno's Sattal-Mansal (no script; default 96). A level 75 Warrior with two
+# Quadav Charms, a Quadav Augury Shell and a Chocobo Feather. Without the Silver Bell: no section (96), a trade: nothing.
+# With it (a GM): a trade while available: no trade handler; 89 (0), finished: this quest begun and Mysteries of
+# Beadeaux II added (accepted). Accepted: 89 (1), no finish handler; two charms: nil (tradeMatches is exact); a charm
+# and the feather: nil; the feather: nil; a charm: the Coruscant Rosary added (no message), fame +7 x3, the trade
+# completed, 91; finished: completed (player:completeQuest), KEYITEM_OBTAINED (the rosary). Completed: no section;
+# Mysteries of Beadeaux II (accepted) has no trigger: 96.
+lists LowerJeuno/Sattal-Mansal/onTrigger LowerJeuno/Sattal-Mansal/onTrade LowerJeuno/onEventFinish/89 LowerJeuno/onEventFinish/91
+char zone=LowerJeuno pos=42.6,3.9,-54 job=WAR lvl=75
+item QuadavCharm x2
+item QuadavAuguryShell
+item ChocoboFeather
+login
+trigger Sattal-Mansal               # no Silver Bell: no section; 96
+finish
+trade Sattal-Mansal QuadavCharm x1  # no section: nothing
+keyitem SilverBell                  # a GM
+trade Sattal-Mansal QuadavCharm x1  # available: no trade handler; nothing
+trigger Sattal-Mansal               # the Silver Bell: 89 (0)
+finish                              # begun; Mysteries of Beadeaux II added
+trigger Sattal-Mansal               # accepted: 89 (1)
+finish                              # no 89 finish while accepted: nothing
+trade Sattal-Mansal QuadavCharm x2  # two: nil
+trade Sattal-Mansal QuadavCharm x1 ChocoboFeather x1 # an extra item: nil
+trade Sattal-Mansal ChocoboFeather x1 # no charm: nil
+trade Sattal-Mansal QuadavCharm x1  # the Coruscant Rosary (no message), fame +7 x3, the charm taken; 91
+finish                              # completed (no reward table); KEYITEM_OBTAINED
+trigger Sattal-Mansal               # completed: no section; II has no trigger: 96
+finish

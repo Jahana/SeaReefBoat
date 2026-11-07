@@ -1,0 +1,143 @@
+# Waking the Beast (otherAreas 32): the Full Moon Fountain's 32001 (section 3: accepted or completed, the six eyes and the
+# resonator). Its fight (random avatar order, HP-threshold phases, an unkillable main Carbuncle until phase 6) cannot be
+# driven by kill steps: each run is the entrance's menu, area 1 entered, `bfwin` (a GM: WON; 32001). The entry needs the
+# seven key items only (the registrant: hasQuestItems), not the quest. Accepted, Option 1 (a GM): finished on 1:
+# battlefieldWin 226: the seven taken, the Faded Ruby, Option 0. The seven back (GMs): battlefieldWin 0 (a GM) before
+# the finish: nothing. Each of the seven taken in turn (a GM) before the finish: section 3 off: no handler, nothing
+# taken. Completed (a GM; the win sets battlefieldWin 226 for a completed char too, user ruling 2026-11-05, kept
+# bugs; and 226 by a GM): finished on 0: the ruby, Option 1.
+# Accepted again (a GM), won (226), available (a GM) before the finish: section 3 off: nothing.
+lists FullMoonFountain/onEventFinish/32001
+char zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=SMN lvl=75
+quest OtherAreas.WakingTheBeast accepted
+charvar Quest[4][32]Option 1
+keyitem EyeOfFlames
+keyitem EyeOfFrost
+keyitem EyeOfGales
+keyitem EyeOfStorms
+keyitem EyeOfTides
+keyitem EyeOfTremors
+keyitem RainbowResonator
+login
+trigger MS_Entrance                     # the 32000 menu
+update 32000 option=33                  # area 1 (226)
+finish                                  # entered
+bfwin                                   # a GM: WON; 32001
+finish option=1                         # battlefieldWin 226: the seven taken; the Faded Ruby; Option 0
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+delkeyitem FadedRuby                    # a GM
+keyitem EyeOfFlames                     # GMs: the seven back
+keyitem EyeOfFrost
+keyitem EyeOfGales
+keyitem EyeOfStorms
+keyitem EyeOfTides
+keyitem EyeOfTremors
+keyitem RainbowResonator
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin
+localvar battlefieldWin 0               # a GM: another id
+finish option=0                         # battlefieldWin 0: nothing (the seven kept, no ruby, Option 0)
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin
+delkeyitem EyeOfFlames                  # a GM: section 3 off
+finish option=0                         # no handler: nothing
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+keyitem EyeOfFlames                     # a GM
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin
+delkeyitem EyeOfFrost                   # a GM: section 3 off
+finish option=0                         # no handler: nothing
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+keyitem EyeOfFrost                      # a GM
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin
+delkeyitem EyeOfGales                   # a GM: section 3 off
+finish option=0                         # no handler: nothing
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+keyitem EyeOfGales                      # a GM
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin
+delkeyitem EyeOfStorms                  # a GM: section 3 off
+finish option=0                         # no handler: nothing
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+keyitem EyeOfStorms                     # a GM
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin
+delkeyitem EyeOfTides                   # a GM: section 3 off
+finish option=0                         # no handler: nothing
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+keyitem EyeOfTides                      # a GM
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin
+delkeyitem EyeOfTremors                 # a GM: section 3 off
+finish option=0                         # no handler: nothing
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+keyitem EyeOfTremors                    # a GM
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin
+delkeyitem RainbowResonator             # a GM: section 3 off
+finish option=0                         # no handler: nothing
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+keyitem RainbowResonator                # a GM
+quest OtherAreas.WakingTheBeast completed # a GM
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin                                   # completed: battlefieldWin 226 (user ruling 2026-11-05)
+localvar battlefieldWin 226             # a GM
+finish option=0                         # completed: battlefieldWin 226: the seven taken; the Faded Ruby; Option 1
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+delkeyitem FadedRuby                    # a GM
+keyitem EyeOfFlames                     # GMs: the seven back
+keyitem EyeOfFrost
+keyitem EyeOfGales
+keyitem EyeOfStorms
+keyitem EyeOfTides
+keyitem EyeOfTremors
+keyitem RainbowResonator
+quest OtherAreas.WakingTheBeast accepted # a GM
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance
+update 32000 option=33
+finish
+bfwin                                   # accepted: battlefieldWin 226
+quest OtherAreas.WakingTheBeast available # a GM: section 3 off
+finish option=0                         # available: no handler: nothing
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)

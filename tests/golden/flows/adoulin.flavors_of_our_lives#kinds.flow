@@ -1,0 +1,31 @@
+# Flavors of Our Lives (adoulin 46), the kinds at Dewalt: a level 99 Warrior in Western Adoulin, Don't Ever Leaf Me
+# accepted (a GM: Dewalt's script plays 5013, then 5014), the quest accepted at Prog 1 (GMs). Dewalt: 85, finished:
+# Prog 2; Prog 1 again (a GM): 85 again (a progressEvent: his script would take an Event's second turn), finished:
+# Prog 2. Prog 2: 105 (an Event), then his script's turn: 5013, finished (DELM_Dewalt_Branch 1); 105; his 5014.
+# Prog 3, no Blightberry (a GM): 105 (an Event), his 5014, 105.
+lists WesternAdoulin/Dewalt/onTrigger WesternAdoulin/onEventFinish/85
+char zone=WesternAdoulin pos=-21.599,-0.648,28.208 job=WAR lvl=99
+quest Adoulin.DontEverLeafMe accepted
+quest Adoulin.FlavorsOfOurLives accepted
+charvar Quest[9][46]Prog 1
+login
+trigger Dewalt                          # Prog 1: 85
+finish                                  # Prog 2
+charvar Quest[9][46]Prog 1              # a GM
+trigger Dewalt                          # Prog 1: 85 again (not his script's 5013)
+finish                                  # Prog 2
+trigger Dewalt                          # Prog 2: 105 (an Event)
+finish
+trigger Dewalt                          # his script's turn: 5013
+finish                                  # DELM_Dewalt_Branch 1
+trigger Dewalt                          # 105
+finish
+trigger Dewalt                          # his script's turn: 5014
+finish
+charvar Quest[9][46]Prog 3              # a GM: Prog 3, no Blightberry
+trigger Dewalt                          # Prog 3: 105 (an Event)
+finish
+trigger Dewalt                          # his script's turn: 5014
+finish
+trigger Dewalt                          # 105
+finish

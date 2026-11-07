@@ -1,0 +1,26 @@
+# Navigating the Unfriendly Seas (ahtUrhgan 25) with its era module, modules/era/lua/quests/ahturhgan/
+# navigating_the_unfriendly_seas.lua, enabled by xi.pre(ROV) (RESTRICT_CONTENT 1, ENABLE_ROV 0): the Leypoint finishes
+# at JST midnight. A level 50 Corsair, accepted at Prog 1 (GMs), a Hydrogauge and a Bone Chip. A Bone Chip to the
+# Leypoint: the base trade's nil: the module sets nothing (Wait stays 0); the gauge: the base trade (confirmed, Prog 2,
+# Wait = now + 60, PLACE_HYDROGAUGE), then the module's Wait = JstMidnight() (1800025200; the quest alone leaves
+# 1800000060); the Leypoint: ENIGMATIC_LIGHT; Wait 1800000001 (a GM): ENIGMATIC_LIGHT; Wait 1800000000 (now): 508.
+module modules/era/lua/quests/ahturhgan/navigating_the_unfriendly_seas.lua
+lists WajaomWoodlands/Leypoint/onTrade WajaomWoodlands/Leypoint/onTrigger
+char zone=WajaomWoodlands pos=-198.527,-8.5,80.058 job=COR lvl=50
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.EquippedForAllOccasions completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas accepted
+charvar Quest[6][25]Prog 1
+item Hydrogauge
+item BoneChip
+login
+trade Leypoint BoneChip x1              # the base's nil: the module sets nothing
+trade Leypoint Hydrogauge x1            # the base: confirmed, Prog 2, Wait = now + 60, PLACE_HYDROGAUGE; the module: Wait = JstMidnight()
+trigger Leypoint                        # Wait > now: ENIGMATIC_LIGHT
+charvar Quest[6][25]Wait 1800000001     # a GM: one second past now
+trigger Leypoint                        # ENIGMATIC_LIGHT
+charvar Quest[6][25]Wait 1800000000     # a GM: now (not past it)
+trigger Leypoint                        # 508
+finish                                  # Prog 3; Wait 0

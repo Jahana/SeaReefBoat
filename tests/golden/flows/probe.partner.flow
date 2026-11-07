@@ -1,0 +1,13 @@
+# probe (quest rework P3): a char's id and name as values. Two chars in Lower Jeuno; Chululu's compatibility reading
+# (Rubbish Day, jeuno 13, Lua: event 199) reads its update's option as the partner: a number is GetPlayerByID(option),
+# a string GetPlayerByName(option). Not a quest port: the key names no quest (Program.IsProbe).
+char zone=LowerJeuno pos=-9,-6.673,-44 lvl=20
+char bob zone=LowerJeuno pos=-12,-6.673,-46 lvl=20
+quest Jeuno.CollectTarutCards completed
+charvar Quest[3][166]Date 2000000000     # All in the Cards waits (its Date ahead of the clock): Rubbish Day alone answers
+login
+bob: login
+trigger Chululu             # Rubbish Day available, Prog 0: 199, the reading
+update 199 option=$bob      # bob's id: in the zone, so counted (Prog 1, Day) and updateEvent(eventBits[randomInt(1, 6)])
+update 199 option="$bob"    # bob's name typed: updateEvent(main's id, bob's id, 0)
+finish

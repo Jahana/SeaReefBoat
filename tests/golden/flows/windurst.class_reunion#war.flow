@@ -1,0 +1,60 @@
+# Class Reunion (windurst 82): a WAR 75 with The Puppet Master completed: _6n2's offer refused (not SMN). The arms of
+# the other NPCs while the quest is available (vars set by GM): Koru-Moru's trade (four Astragaloi, var 2): nothing;
+# his talk at vars 1, 2, 3 and 6 (both talked to): his default; Shantotto (var 3): Curses Foiled Again 1's 171;
+# Fuepepe and Furakku-Norakku (var 3): their defaults; Gulmama at var 4 and at var 5 without the pendulum:
+# Trial by Ice nothing (fame 0), her 710.
+char zone=WindurstWalls pos=-24.5,-14.5,263.0 job=WAR lvl=75
+quest Windurst.ThePuppetMaster completed
+item Astragalos x4
+login
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # WAR: nothing (the default message again)
+charvar ClassReunionProgress 2
+warp -120.2,-5.5,122.4 WindurstWalls
+trade Koru-Moru Astragalos x4           # not accepted: nothing
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 2: no 414: 193
+finish
+charvar ClassReunionProgress 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 1: no 412: 193
+finish
+charvar ClassReunionProgress 3
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 3, no student talked to: no 408: 193
+finish
+charvar ClassReunionProgress 6
+charvar ClassReunion_TalkedToFupepe 1
+charvar ClassReunion_TalkedToFurakku 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # available, var 6, both talked to: no 410 (no 411: not completed): 193
+finish
+charvar ClassReunionProgress 3
+charvar ClassReunion_TalkedToFupepe 0
+charvar ClassReunion_TalkedToFurakku 0
+warp 124.1,-3.0,113.6 WindurstWalls
+trigger Shantotto                       # Curses Foiled Again 1's turn: its offer 171 (Event)
+finish
+trigger Shantotto                       # not accepted: 171
+finish
+warp 165.0,-1.25,161.1 WindurstWaters
+trigger Fuepepe                         # the default's turn: 423
+finish
+trigger Fuepepe                         # not accepted: 423
+finish
+warp -16.5,-5.25,102.0 WindurstWaters
+trigger Furakku-Norakku                 # the default's turn: 371
+finish
+trigger Furakku-Norakku                 # not accepted (status 0): 371
+finish
+charvar ClassReunionProgress 4
+warp -185.5,0.0,110.1 NorthernSanDoria
+trigger Gulmama                         # not accepted, var 4: Trial by Ice nothing: 710
+finish
+charvar ClassReunionProgress 5
+trigger Gulmama                         # not accepted, var 5, no pendulum: 710
+finish

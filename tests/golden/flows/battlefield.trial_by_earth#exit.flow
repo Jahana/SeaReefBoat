@@ -1,0 +1,21 @@
+# Trial by Earth (battlefield.trial_by_earth): the exit. A level 75 Summoner with the quest accepted and the Tuning
+# Fork of Earth enters arena 1 (the fork taken). Earth_Protocrystal (arena 1's), in the battlefield: 32003 (an optional
+# cutscene, cs_option 3, skippable); its update: onExitEventUpdate does nothing; finished with 0: not 4: still inside.
+# Again, finished with 4: leaveBattlefield(1) (EXIT: no win, no loss event; the clearance kept, no longer entered).
+# EP_Entrance with the clearance: checkRequirements as no registrant: the fork is gone: the handler returns nothing:
+# EP_Entrance's default PROTOCRYSTAL.
+lists CloisterOfTremors/EP_Entrance/onTrigger CloisterOfTremors/Earth_Protocrystal/onTrigger CloisterOfTremors/onEventUpdate/32003 CloisterOfTremors/onEventFinish/32003
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+quest Bastok.TrialByEarth accepted
+keyitem TuningForkOfEarth
+login
+trigger EP_Entrance                     # the menu 32000
+update 32000 option=1                   # area 1: registered, entered, the fork taken
+finish                                  # in the arena
+trigger Earth_Protocrystal              # in the battlefield: 32003
+update 32003 option=1                   # onExitEventUpdate: nothing
+finish option=0                         # not 4: still inside
+trigger Earth_Protocrystal              # 32003
+finish option=4                         # leaveBattlefield(1): out
+warp -538.4,0.455,-493.9 CloisterOfTremors
+trigger EP_Entrance                     # the clearance, no fork: checkRequirements fails: the default PROTOCRYSTAL

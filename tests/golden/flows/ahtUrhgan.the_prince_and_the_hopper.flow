@@ -1,0 +1,56 @@
+# The Prince and the Hopper (ahtUrhgan 67): a level 75 Warrior in Whitegate. Maudaal (no script; default 240); Mamook's
+# Toads_Footprint1 / 2 (no scripts, no defaults), the Poroggo Casanova and its five Poroggo; Wajaom's and Mamook's
+# zone-ins. Available: Maudaal 889, option 1: nothing; option 2: begun. Prog 0: Maudaal: nil: 240; Wajaom from Al Zahbi
+# at the Wajaom spot 610.5 -28.5 356.2: outside the box: none; at 685 -16 219.5 (in the box 680 -19 218 .. 691 -14 221):
+# 513, finished: Prog 1. Prog 1: Wajaom again: none; Mamook's zone-in: not Prog 3: none; Footprint1: nil; Footprint2
+# 222, finished: Prog 2, setPos into Wajaom; the zone change (`tick 400`, `login open`): Prog 2: 20, finished: Prog 3,
+# setPos into Mamook; the zone change: Prog 3: 227, finished: Prog 4. Footprint2: nil; Footprint1 223, finished: Prog 5;
+# Footprint1: the six mobs popped (the footprint hidden until they are dead, then 1 s), IMPENDING_BATTLE from the
+# handler (no reply); shown by a GM: the mobs up: the pop fails: nil, no message; the Poroggo Casanova killed: Prog 6,
+# the five despawned; Footprint1 225, finished: Prog 7. Whitegate: Maudaal 890, finished: completed (Chanoix's Gorget);
+# Maudaal: no section: 240.
+lists AhtUrhganWhitegate/Maudaal/onTrigger AhtUrhganWhitegate/onEventFinish/889 WajaomWoodlands/onZoneIn/1 WajaomWoodlands/onEventFinish/20 WajaomWoodlands/onEventFinish/513 Mamook/onZoneIn/1 Mamook/Toads_Footprint1/onTrigger Mamook/Toads_Footprint2/onTrigger Mamook/Poroggo_Casanova/onMobDeath Mamook/onEventFinish/227
+char zone=AhtUrhganWhitegate pos=-145.7,1.8,-3.121 job=WAR lvl=75
+login
+trigger Maudaal                         # available: 889
+finish option=1                         # not option 2: nothing
+trigger Maudaal                         # 889
+finish option=2                         # begun
+trigger Maudaal                         # Prog 0: nil: 240
+finish
+warp -64,-7,38 AlZahbi
+warp 610.542,-28.547,356.247 WajaomWoodlands   # Prog 0, outside the box: no event
+warp 685,-16,219.5 WajaomWoodlands open # Prog 0, in the box: 513
+finish                                  # Prog 1
+warp 685,-16,219.5 WajaomWoodlands      # Prog 1: no event
+warp 217.6,-23.818,-102.464 Mamook      # Prog 1: Mamook's zone-in: not 3: no event
+trigger Toads_Footprint1                # Prog 1: nil: nothing (no default)
+finish-if-event
+trigger Toads_Footprint2                # Prog 1: 222
+finish                                  # Prog 2; setPos into Wajaom
+tick 400
+login open                              # the zone change; Prog 2: 20
+finish                                  # Prog 3; setPos into Mamook
+tick 400
+login open                              # the zone change; Prog 3: 227
+finish                                  # Prog 4
+trigger Toads_Footprint2                # Prog 4: nil: nothing
+finish-if-event
+trigger Toads_Footprint1                # Prog 4: 223
+finish                                  # Prog 5
+trigger Toads_Footprint1                # Prog 5: the six popped; IMPENDING_BATTLE (the handler's own); nil
+finish-if-event
+npcstatus Toads_Footprint1 normal       # a GM: the footprint stays hidden while the six are up
+trigger Toads_Footprint1                # Prog 5, the mobs up: the pop fails: nil (no message)
+finish-if-event
+kill POROGGO_CASANOVA                   # Prog 5: Prog 6; the five despawned
+# After this kill the footprint stays hidden at least 2 s on both sides (the edges flow waits that long, tick 2000, at
+# Prog 4; when it shows depends on when the corpses despawn); here a GM shows it at once.
+npcstatus Toads_Footprint1 normal
+trigger Toads_Footprint1                # Prog 6: 225
+finish                                  # Prog 7
+warp -145.7,1.8,-3.121 AhtUrhganWhitegate
+trigger Maudaal                         # Prog 7: 890
+finish                                  # completed: Chanoix's Gorget
+trigger Maudaal                         # completed: no section: 240
+finish

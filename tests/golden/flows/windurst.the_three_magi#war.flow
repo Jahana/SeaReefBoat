@@ -1,0 +1,38 @@
+# The Three Magi (windurst 66): a WAR 75 (Foe Finder MK I by GM: Recollections' 275 reads its own status). Available,
+# not BLM: no 260; The Three Magi not completed: no 268: her 259. qm1, not accepted: NOTHING_OUT_OF_ORDINARY; the Faded
+# Crystal: nothing. Accepted by GM (no job read): qm1: SENSE_EVIL; the crystal: Chaos Elemental popped; made available
+# again by GM while it is up: DO_NOT_SENSE (the first test reads no status); killed (its drop: the Glowstone) and gone:
+# NOTHING_OUT_OF_ORDINARY. Chumimi: the Glowstone, available: nothing; accepted by GM: 261, and the stone: 269 (no job
+# read; theThreeMagiSupport never set: Doctor Yoran-Oran Supporter). Completed, Recollections available: 268 (the key
+# item held), also with The Root of the Problem accepted at var 1 by GM (268 comes before 277).
+char zone=HeavensTower pos=0.0,30.75,21.5 job=WAR lvl=75
+keyitem FoeFinderMkI
+item FadedCrystal x2
+login
+trigger Chumimi                         # WAR, available (the key item held): her 259
+finish
+warp -333.5,-26.4,-49.2 Xarcabard
+trigger qm1                             # not accepted: NOTHING_OUT_OF_ORDINARY
+trade qm1 FadedCrystal x1               # not accepted: nothing
+quest Windurst.TheThreeMagi accepted    # GM
+trigger qm1                             # accepted (WAR): SENSE_EVIL
+trade qm1 FadedCrystal x1               # Chaos Elemental popped; the crystal taken
+quest Windurst.TheThreeMagi available   # GM
+trigger qm1                             # up, available: DO_NOT_SENSE
+kill CHAOS_ELEMENTAL                    # its drop: the Glowstone
+tick 15000
+tick 30000                              # gone
+trigger qm1                             # available, not up: NOTHING_OUT_OF_ORDINARY
+warp 0.0,30.75,21.5 HeavensTower
+trade Chumimi Glowstone x1              # available: nothing
+quest Windurst.TheThreeMagi accepted    # GM
+trigger Chumimi                         # accepted (WAR): 261
+finish
+trade Chumimi Glowstone x1              # accepted: 269
+finish                                  # wand; var 0: Doctor Yoran-Oran Supporter; needToZone; fame 20; completed
+trigger Chumimi                         # completed, Recollections available, WAR (the key item held): 268
+finish
+quest Windurst.TheRootOfTheProblem accepted  # GM
+charvar rootProblem 1
+trigger Chumimi                         # 268 (before The Root of the Problem's 277)
+finish

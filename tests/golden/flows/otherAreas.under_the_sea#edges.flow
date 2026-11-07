@@ -1,0 +1,37 @@
+# Under the Sea (otherAreas 17): Oswald's Prog and ring arms, Zaldon's trade at Prog 4, the completed section's The Sand
+# Charm operand and a trade while completed. Accepted (a GM): Prog -1 without the ring: nil (30); the Etched Ring (a GM)
+# at Prog 0: 32 (the Prog arm comes first), finished: Prog 1; a Greedie at Prog 4 (a GM): nil; the ring at Prog -1: 37
+# (the ring arm reads no Prog), finished: completed, the ring taken. Completed: The Sand Charm accepted (a GM): no
+# section 3 (30); completed: 30; available: 38. A Greedie traded at Prog 3 (a GM) while completed: no section 2, nothing.
+# Fishing is off (the default), so neither Gift answers Oswald.
+lists Selbina/Oswald/onTrigger Selbina/Zaldon/onTrade Selbina/onEventFinish/32 Selbina/onEventFinish/37
+char zone=Selbina pos=48.6,-15.3,8 job=WAR lvl=30
+quest OtherAreas.UnderTheSea accepted
+item FatGreedie
+item FatGreedie
+login
+charvar Quest[4][17]Prog -1             # a GM
+trigger Oswald                          # Prog -1, no ring: nil; 30
+finish
+keyitem EtchedRing                      # a GM
+charvar Quest[4][17]Prog 0              # a GM
+trigger Oswald                          # Prog 0 with the ring: 32
+finish                                  # Prog 1
+charvar Quest[4][17]Prog 4              # a GM
+walk -10.3,-7.287,-6.742                # to Zaldon
+trade Zaldon FatGreedie x1              # Prog 4: nil
+charvar Quest[4][17]Prog -1             # a GM
+trigger Oswald                          # Prog -1 with the ring: 37
+finish                                  # completed; the ring taken
+quest OtherAreas.TheSandCharm accepted  # a GM
+trigger Oswald                          # The Sand Charm accepted: no section 3; 30
+finish
+quest OtherAreas.TheSandCharm completed # a GM
+trigger Oswald                          # The Sand Charm completed: no section 3; 30
+finish
+quest OtherAreas.TheSandCharm available # a GM
+trigger Oswald                          # 38 (replaceDefault)
+finish
+charvar Quest[4][17]Prog 3              # a GM
+walk -10.3,-7.287,-6.742                # to Zaldon
+trade Zaldon FatGreedie x1              # completed: no section 2; nothing

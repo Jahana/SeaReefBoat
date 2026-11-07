@@ -1,0 +1,35 @@
+# Grave Concerns (sandoria 11) with a full inventory at each give: 541 taken (the skin cannot be given: not begun);
+# accepted by GM: the Tombstone's 2 (no skin, no waterskin: Dropped 1) finished full (no waterskin), then with room
+# (the waterskin); a Well full (the waterskin traded: the skin cannot be given, nothing taken), then with room; the
+# Tombstone full (the skin traded: the waterskin cannot be given: nil, OfferingWaterOK stays 0), then with room; 624
+# finished full (no item in the reward: completed anyway, the waterskin taken).
+lists SouthernSanDoria/Andecia/onTrigger SouthernSanDoria/Andecia/onTrade SouthernSanDoria/Well/onTrade SouthernSanDoria/onEventFinish/541 SouthernSanDoria/onEventFinish/624 KingRanperresTomb/Tombstone_Upper/onTrigger KingRanperresTomb/Tombstone_Upper/onTrade KingRanperresTomb/onEventFinish/2
+char zone=SouthernSanDoria pos=171.1,-0.9,45.0 job=WAR lvl=30
+charvar Quest[0][11]Introduction 1
+login
+fill-inventory
+trigger Andecia                           # Introduction 1: 541
+finish                                    # option 0, no room for the skin: not begun
+free-inventory
+quest Sandoria.GraveConcerns accepted
+warp 1.0,-1.4,-102.0 KingRanperresTomb
+fill-inventory
+trigger Tombstone_Upper                   # no skin, no waterskin, OfferingWaterOK 0: DroppedWaterskin 1; 2
+finish                                    # Dropped 1, no skin, no room: no waterskin
+free-inventory
+trigger Tombstone_Upper                   # 2 again
+finish                                    # the Tomb Guard's Waterskin
+warp -276.0,-4.6,118.8 SouthernSanDoria
+fill-inventory
+trade Well TombGuardsWaterskin x1         # no skin, the waterskin, no room for the skin: nothing taken
+free-inventory
+trade Well TombGuardsWaterskin x1         # the Skin of Well Water; the waterskin taken
+warp 1.0,-1.4,-102.0 KingRanperresTomb
+fill-inventory
+trade Tombstone_Upper SkinOfWellWater x1  # OfferingWaterOK 0, no room for the waterskin: nil; the skin kept
+free-inventory
+trade Tombstone_Upper SkinOfWellWater x1  # the waterskin; OfferingWaterOK 1; CHANGE_WATER
+warp 171.1,-0.9,45.0 SouthernSanDoria
+fill-inventory
+trade Andecia TombGuardsWaterskin x1      # OfferingWaterOK 1, DroppedWaterskin 1: 624
+finish                                   # no item in the reward: completed even with no room; the waterskin taken

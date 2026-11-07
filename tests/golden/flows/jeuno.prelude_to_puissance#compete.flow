@@ -1,0 +1,22 @@
+# Prelude to Puissance (jeuno 170), its trigger replies' kinds against another quest's at the same time (a progressEvent
+# over an event; equal replies with one csid: the first in container order, 133, 134, 135, 136, 170, 137, 167; with
+# different csids they take turns). A level 91 Warrior with the Limit Breaker at cap 95, Dormant Powers Dislodged
+# completed; New Worlds Await accepted (a GM): its reminder, event 10045 (91, 1, 1, 1). Prelude to Puissance available:
+# its progressEvent 10194 (91, 1, 6, 2) wins (finished: begun; set available again by a GM), and again. Accepted: its
+# progressEvent 10045 (91, 1, 6, 2, 0) wins both triggers (finished with option 1: nothing).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10194 RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+keyitem LimitBreaker
+levelcap 95
+quest Jeuno.DormantPowersDislodged completed
+quest Jeuno.NewWorldsAwait accepted
+login
+trigger Nomad_Moogle                    # PtP available (progressEvent) over NWA's reminder: 10194 (91, 1, 6, 2)
+finish                                  # begun
+quest Jeuno.PreludeToPuissance available  # a GM
+trigger Nomad_Moogle                    # again PtP's: 10194 (91, 1, 6, 2)
+finish                                  # begun
+trigger Nomad_Moogle                    # PtP accepted (progressEvent) over NWA's reminder: 10045 (91, 1, 6, 2, 0)
+finish option=1                         # nothing
+trigger Nomad_Moogle                    # again PtP's: 10045 (91, 1, 6, 2, 0)
+finish option=1                         # nothing

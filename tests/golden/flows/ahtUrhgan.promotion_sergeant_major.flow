@@ -1,0 +1,43 @@
+# Promotion: Sergeant Major (ahtUrhgan 95): a level 1 Warrior with Private First Class to Sergeant completed and the S
+# Wildcat Badge, AssaultPromotion 25; Naja Salaheem (no script, no default). Available: 5048, finished with option 2:
+# begun, Prog today, Stage 1. The same day: no section: nothing. Each game a Vana'diel day on: Stage 1: 5050, option 3
+# (failed): Stage 2; Stage 2: 5051, option 0: nothing (Prog today); 5051, option 2: Stage 3; Stage 3: 5052, option 1:
+# Stage 4; Stage 4: 5053, option 3: nothing; 5053, option 2: Stage 5; the same day: nothing; a day on: 5054, finished:
+# completed (the SM Wildcat Badge, Sergeant Major), AssaultPromotion 0, the S badge taken, PROMOTION_SERGEANT_MAJOR.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/5048 AhtUrhganWhitegate/onEventFinish/5050 AhtUrhganWhitegate/onEventFinish/5051 AhtUrhganWhitegate/onEventFinish/5052 AhtUrhganWhitegate/onEventFinish/5053 AhtUrhganWhitegate/onEventFinish/5054
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+charvar AssaultPromotion 25
+keyitem SWildcatBadge
+login
+trigger Naja_Salaheem                   # available: 5048
+finish option=2                         # begun; Prog today; Stage 1
+trigger Naja_Salaheem                   # Prog = today: no section: nothing
+finish-if-event
+wait vana=24
+trigger Naja_Salaheem                   # Stage 1: 5050
+finish option=3                         # not 2: failed: Stage 2
+wait vana=24
+trigger Naja_Salaheem                   # Stage 2: 5051
+finish option=0                         # Prog today only
+wait vana=24
+trigger Naja_Salaheem                   # 5051
+finish option=2                         # Stage 3
+wait vana=24
+trigger Naja_Salaheem                   # Stage 3: 5052
+finish option=1                         # failed: Stage 4
+wait vana=24
+trigger Naja_Salaheem                   # Stage 4: 5053
+finish option=3                         # not 2: Prog today only
+wait vana=24
+trigger Naja_Salaheem                   # 5053
+finish option=2                         # Stage 5
+trigger Naja_Salaheem                   # the same day: nothing
+finish-if-event
+wait vana=24
+trigger Naja_Salaheem                   # Stage 5: 5054
+finish                                  # completed; AssaultPromotion 0; the S badge taken; PROMOTION_SERGEANT_MAJOR

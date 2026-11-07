@@ -1,0 +1,26 @@
+# Everyone's Grudging's offer against A Question of Taste's completed replies. A level 75 Warrior at Windurst fame 488, A
+# Question of Taste completed at Prog 1 with no mustZone, rancorCurse 1 (GMs). Jakoh: 107 (a progress cutscene) beats A
+# Question of Taste's 56 (an Event); finished: begun, Excommunicate of Kazham. Jakoh: 56 and 108 (Events) tie: the last
+# id 107 is neither: 56 (container order), then 108. Etteh: A Question of Taste's guard holds (rancorCurse 1, fame level
+# 7, Everyone's Grudging not completed): its nil; 109. rancorCurse 0 (a GM): Etteh: 55 and 109 tie: the last id 109: 55,
+# then 109.
+lists Kazham/Jakoh_Wahcondalo/onTrigger Kazham/Etteh_Sulaej/onTrigger
+char zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+fame Windurst 488
+quest Outlands.AQuestionOfTaste completed
+charvar Quest[5][3]Prog 1
+charvar rancorCurse 1
+login
+trigger Jakoh_Wahcondalo                # 107 (a progress cutscene) beats 56 (an Event)
+finish                                  # begun; Excommunicate of Kazham
+trigger Jakoh_Wahcondalo                # 56 and 108 tie: 56
+finish
+trigger Jakoh_Wahcondalo                # the cycle: 108
+finish
+trigger Etteh_Sulaej                    # the guard: A Question of Taste nil; 109
+finish
+charvar rancorCurse 0                   # a GM
+trigger Etteh_Sulaej                    # 55 and 109 tie: the last id 109: 55
+finish
+trigger Etteh_Sulaej                    # the cycle: 109
+finish

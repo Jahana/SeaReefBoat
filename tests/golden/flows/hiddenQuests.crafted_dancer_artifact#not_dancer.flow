@@ -1,0 +1,20 @@
+# Crafted Dancer Artifact (hidden quest DncArtifact), not a Dancer: a level 99 Warrior in Upper Jeuno, The Road to
+# Divadom completed, Prog 2, Status 7 (GMs). Olgald: the check (main job Dancer) fails: his default 10122. Matthias:
+# section 2 fails: his default 499.
+lists BastokMarkets/Matthias/onTrade UpperJeuno/Olgald/onTrigger BastokMarkets/Matthias/onTrigger
+char zone=UpperJeuno pos=-53,0,101.9 job=WAR lvl=99
+quest Jeuno.TheRoadToDivadom completed
+charvar HQuest[DncArtifact]Prog 2
+charvar HQuest[DncArtifact]Status 7
+item SquareOfImperialSilkCloth
+item SquareOfWolfFelt
+item SquareOfSilverBrocade
+login
+trigger Olgald                          # not a Dancer: 10122
+finish
+warp -114.1,-4.3,-105.8 BastokMarkets
+trigger Matthias                        # not a Dancer: 499
+finish
+charvar HQuest[DncArtifact]Prog 4        # a GM
+charvar HQuest[DncArtifact]Option 1
+trade Matthias SquareOfImperialSilkCloth x1 SquareOfWolfFelt x1 SquareOfSilverBrocade x1   # not a Dancer: nothing

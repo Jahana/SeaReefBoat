@@ -1,0 +1,51 @@
+# Message on the Winds (crystalWar 1), the edges: a level 19 Warrior in the Metalworks (missions as the main flow).
+# Romualdo: a Lilac: nil (no trade handler); level 19: nil (705). Batallia Downs [S]: Romualdo at Prog 0: nil (102).
+# Grauberg [S]: Childerich available: nil (10); qm3: nil (NOTHING_OUT_OF_ORDINARY). Prog 1 (a GM; level 19, available):
+# Batallia Downs [S] Romualdo 109 (the section has no status or level check), finished on option 1: begun, Prog 2.
+# Grauberg [S]: qm3 at Prog 2: nil. Completed by a GM (PostCS 0, no title): Childerich: nil (10); Metalworks Romualdo:
+# nil (705); Batallia Downs [S] Romualdo: 112. Prog 1 while completed (a GM): Romualdo 109 over 112 (the section has no
+# status check), finished: still completed (the begin keeps the status), Prog 2. PostCS 1 (a GM): Childerich: nil (10).
+# (only PostCS 2 plays 6).
+lists Metalworks/Romualdo/onTrade Metalworks/Romualdo/onTrigger BatalliaDownsS/Romualdo/onTrigger BatalliaDownsS/onEventFinish/109 GraubergS/Childerich/onTrigger GraubergS/qm3/onTrigger
+char zone=Metalworks pos=136.535,-18.475,-37.419 job=WAR lvl=19
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item Lilac
+login
+trade Romualdo Lilac x1                 # available: nil (no trade handler)
+trigger Romualdo                        # level 19: nil (705)
+finish-if-event
+warp 55.804,-13.836,141.055 BatalliaDownsS
+trigger Romualdo                        # Prog 0: nil (102)
+finish-if-event
+warp -311.344,16.23,-514.973 GraubergS
+trigger Childerich                      # available: nil (10)
+finish-if-event
+trigger qm3                             # available: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+charvar Quest[7][1]Prog 1               # a GM
+warp 55.804,-13.836,141.055 BatalliaDownsS
+trigger Romualdo                        # Prog 1 (level 19, available): 109
+finish option=1                         # begun; Prog 2
+warp -311.344,16.23,-514.973 GraubergS
+trigger qm3                             # Prog 2: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+quest CrystalWar.MessageOnTheWinds completed # a GM
+charvar Quest[7][1]Prog 0               # a GM
+trigger Childerich                      # completed, PostCS 0, no title: nil (10)
+finish-if-event
+warp 136.535,-18.475,-37.419 Metalworks
+trigger Romualdo                        # completed, PostCS 0: nil (705)
+finish-if-event
+warp 55.804,-13.836,141.055 BatalliaDownsS
+trigger Romualdo                        # completed: 112 (replaceDefault)
+finish
+charvar Quest[7][1]Prog 1               # a GM, completed
+trigger Romualdo                        # completed, Prog 1: 109 (no status check) over 112
+finish                                  # still completed (begin keeps it); Prog 2
+charvar Quest[7][1]PostCS 1             # a GM, completed
+warp -311.344,16.23,-514.973 GraubergS
+trigger Childerich                      # completed, PostCS 1: nil (10; only PostCS 2 plays 6)
+finish-if-event

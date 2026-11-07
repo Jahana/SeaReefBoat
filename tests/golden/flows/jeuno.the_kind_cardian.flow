@@ -1,0 +1,90 @@
+# The Kind Cardian (jeuno 8): Apururu (Windurst Woods), Monberaux (Upper Jeuno), Panta-Putta, Naruru, Teigero-Bangero
+# (Lower Jeuno); call-only. The Wonder Magic Set, Cook's Pride and The Lost Cardian completed, this quest accepted and
+# Two of Swords given (GM: The Lost Cardian's completion does both). Can Cardians Cry? accepted (GM; Windurst group 22,
+# still Lua in Apururu's script): it shows where her script falls through to it. A WAR 75.
+# Turns: Apururu's default 274 and Teigero-Bangero's 34 take the first turn; each script talk follows a default talk.
+# Apururu 392: options 0 and 2 nothing; option 1 the var 1; 393. A pebble: no card: Can Cardians Cry?'s arm: nothing.
+# The Ten of Cups card with the Bruised Starfruit (npcUtil.tradeHas): 397, ahead of Can Cardians Cry?'s 325 (which the
+# starfruit meets): Two of Swords taken, the var 2, Windurst fame +30, the card taken (the starfruit kept). The
+# starfruit alone: Can Cardians Cry?'s 325, which completes it. 398.
+# The var 5 (GM): her script plays nothing (not Can Cardians Cry?'s 330); the lookup then plays her 274. Monberaux:
+# The Lost Cardian not completed (GM): no arm (109, 28); completed: 32, 28. Naruru 71, Teigero-Bangero 66 while accepted. Panta-Putta 35 refused on a full
+# inventory, then Bringer of Bliss, Two of Swords taken (already gone), the var 0, a Green Cape, fame +13 x3,
+# completed (Quest[3][8]Prog 1 (GM) kept: the raw player:completeQuest). Completed: Panta-Putta 76, Naruru 72,
+# Teigero-Bangero 67; Monberaux: no quest arm (28).
+char zone=WindurstWoods pos=-10.5,-2.75,15.9 job=WAR lvl=75
+quest Jeuno.TheWonderMagicSet completed
+quest Jeuno.CooksPride completed
+quest Jeuno.TheLostCardian completed
+quest Jeuno.TheKindCardian accepted
+quest Windurst.CanCardiansCry accepted
+keyitem TwoOfSwords
+item TenOfCupsCard
+item Pebble
+item BruisedStarfruit
+login
+trigger Apururu                         # the turn: her default 274
+finish
+trigger Apururu                         # accepted, the var 0: 392
+finish option=0                         # nothing
+trigger Apururu                         # the turn: 274
+finish
+trigger Apururu                         # 392
+finish option=2                         # nothing
+trigger Apururu                         # the turn: 274
+finish
+trigger Apururu                         # 392
+finish option=1                         # the var 1
+trigger Apururu                         # the turn: 274
+finish
+trigger Apururu                         # the var 1: 393
+finish
+trade Apururu Pebble x1                 # no card: Can Cardians Cry?'s arm: no starfruit: nothing
+trade Apururu TenOfCupsCard x1 BruisedStarfruit x1 # accepted, the card among the items: 397 (first: Can Cardians Cry?'s 325 also holds)
+finish                                  # Two of Swords taken; the var 2; Windurst fame +30; the card taken (confirmTrade), the starfruit kept
+trade Apururu BruisedStarfruit x1       # no card: Can Cardians Cry?'s 325
+finish                                  # Can Cardians Cry? completed (5000 gil, title); the starfruit taken
+trigger Apururu                         # the turn: 274
+finish
+trigger Apururu                         # the var 2: 398
+finish
+charvar theKindCardianVar 5
+trigger Apururu                         # the turn: 274
+finish
+trigger Apururu                         # accepted, the var 5: her script plays nothing (not Can Cardians Cry?'s 330); the lookup's 274
+finish-if-event
+charvar theKindCardianVar 2
+warp -40.9,-0.5,-1.9 UpperJeuno         # beside Monberaux
+quest Jeuno.TheLostCardian available    # GM
+trigger Monberaux                       # The Lost Cardian not completed: no arm: 109 (28 queued)
+finish
+finish
+quest Jeuno.TheLostCardian completed    # GM
+trigger Monberaux                       # The Lost Cardian completed, accepted: 32 (28 queued)
+finish
+finish
+warp -53.2,-0.1,-139.5 LowerJeuno       # beside Naruru
+trigger Naruru                          # Cook's Pride completed, this quest not completed: 71
+finish
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # accepted: 66
+finish
+fill-inventory
+trigger Panta-Putta                     # accepted, the var 2: 35
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (13596); nothing else
+free-inventory
+charvar Quest[3][8]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Panta-Putta                     # 35
+finish                                  # Bringer of Bliss; Two of Swords taken; var 0; Green Cape; fame +13 x3; completed
+trigger Panta-Putta                     # completed: 76
+finish
+trigger Naruru                          # completed: 72
+finish
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # completed: 67
+finish
+warp -40.9,-0.5,-1.9 UpperJeuno
+trigger Monberaux                       # completed: no quest arm: 28
+finish

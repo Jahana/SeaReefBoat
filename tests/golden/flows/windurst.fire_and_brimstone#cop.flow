@@ -1,0 +1,21 @@
+# Fire and Brimstone (windurst 73) beside CoP 5-3 Three Paths (Louverance's path at Perih Vashai, a mission container
+# ahead of his script): accepted, var 1, a RNG 60. Louverance status 2: the mission's 686 (its finish: status 3); 3:
+# 687; status 4 (no mission arm): the default's turn (the mission's events leave the next talk to it), then
+# Fire and Brimstone's 532.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=RNG lvl=60
+quest Windurst.SinHunting completed
+quest Windurst.TheFangedOne completed
+quest Windurst.FireAndBrimstone accepted
+charvar fireAndBrimstone 1
+mission Cop ThreePaths current
+login
+missionstatus Cop 2 pos=2
+trigger Perih_Vashai                    # Louverance 2: the mission's 686
+finish                                  # Louverance 3
+trigger Perih_Vashai                    # Louverance 3: 687
+finish
+missionstatus Cop 4 pos=2
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Louverance 4: var 1: 532
+finish

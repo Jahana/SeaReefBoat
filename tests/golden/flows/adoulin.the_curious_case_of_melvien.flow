@@ -1,0 +1,32 @@
+# The Curious Case of Melvien (adoulin, call-only): a level 99 Warrior in Western Adoulin, Order Up available. Nothing
+# begins the quest or gives Melvien's Turn (GMs). Talks in pairs (Mastan's default 525, then his script). Available
+# with the Turn: nothing from the quest; a trade: no onTrade, nothing. Accepted with the Turn and without
+# Melvien's Death: 184; finished on 0, then on 2: nothing; again 184, finished on 1: Melvien's Death. With the Turn
+# and the Death: nothing.
+lists WesternAdoulin/Mastan/onTrigger WesternAdoulin/onEventFinish/184
+char zone=WesternAdoulin pos=-8.5,0,67.5 job=WAR lvl=99
+keyitem MelviensTurn                    # a GM (nothing gives it)
+item FlintStone
+login
+trigger Mastan                          # available: 525
+finish-if-event
+trigger Mastan                          # his script: nothing from either quest: 525
+finish-if-event
+trade Mastan FlintStone x1              # available: no onTrade: nothing, the stone kept
+quest Adoulin.TheCuriousCaseOfMelvien accepted   # a GM
+trigger Mastan                          # 525
+finish-if-event option=0
+trigger Mastan                          # accepted, the Turn, no Death: 184
+finish-if-event option=0                # 184 on 0: nothing
+trigger Mastan                          # 525
+finish-if-event option=2
+trigger Mastan                          # 184 again
+finish-if-event option=2                # 184 on 2: nothing
+trigger Mastan                          # 525
+finish-if-event option=1
+trigger Mastan                          # 184 again
+finish-if-event option=1                # 184 on 1: Melvien's Death
+trigger Mastan                          # 525
+finish-if-event
+trigger Mastan                          # the Death held: nothing from the quest: 525
+finish-if-event

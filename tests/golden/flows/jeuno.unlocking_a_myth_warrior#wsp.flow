@@ -1,0 +1,35 @@
+# Unlocking a Myth: Warrior (jeuno 102): the trade's weapon skill point edges against 250 (requiredWsPoints / 5 = 50, *
+# 4 / 5 = 200): five Warriors (P3 chars), each with the quest accepted and its own Sturdy Axe: 50: 10091; 51: 10092;
+# 200: 10092; 201: 10093; 249: 10093 (none finished into a completion: these are Events with no finish handler). 250 is
+# #trade's 10088.
+lists LowerJeuno/Zalsuhm/onTrade
+char zone=LowerJeuno pos=-31.5,5.9,-117.5 job=WAR lvl=75
+char bob zone=LowerJeuno pos=-31.5,5.9,-116 job=WAR lvl=75
+char cid zone=LowerJeuno pos=-31.5,5.9,-119 job=WAR lvl=75
+char dan zone=LowerJeuno pos=-30,5.9,-117.5 job=WAR lvl=75
+char eve zone=LowerJeuno pos=-30,5.9,-116 job=WAR lvl=75
+quest Jeuno.UnlockingAMythWarrior accepted
+item SturdyAxe wsp=50
+bob: quest Jeuno.UnlockingAMythWarrior accepted
+bob: item SturdyAxe wsp=51
+cid: quest Jeuno.UnlockingAMythWarrior accepted
+cid: item SturdyAxe wsp=200
+dan: quest Jeuno.UnlockingAMythWarrior accepted
+dan: item SturdyAxe wsp=201
+eve: quest Jeuno.UnlockingAMythWarrior accepted
+eve: item SturdyAxe wsp=249
+login
+bob: login
+cid: login
+dan: login
+eve: login
+trade Zalsuhm SturdyAxe x1              # 50 <= 50: 10091
+finish
+bob: trade Zalsuhm SturdyAxe x1         # 51 > 50, <= 200: 10092
+bob: finish
+cid: trade Zalsuhm SturdyAxe x1         # 200 <= 200: 10092
+cid: finish
+dan: trade Zalsuhm SturdyAxe x1         # 201 > 200, < 250: 10093
+dan: finish
+eve: trade Zalsuhm SturdyAxe x1         # 249 < 250: 10093
+eve: finish

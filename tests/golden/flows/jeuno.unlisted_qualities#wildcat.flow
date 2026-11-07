@@ -1,0 +1,47 @@
+# Unlisted Qualities (jeuno 77) against Lure of the Wildcat (Jeuno), both accepted by a GM, at Luto Mewrilah and Red
+# Ghost (neither has a script onTrigger). Data 15728659 (name 3, race 1; size, face and personality unset). Prog 0:
+# Luto's 10033 (an Event) loses to the Wildcat's 10085 (a Progress event) every time (a GM clears the Wildcat's bit 7
+# between talks; a Progress 10033 would tie and rotate to it); with the bit set, 10033. Prog 2: 10032 and 10085 are
+# both Progress events: a tie, the first in the list plays (10085), and after a GM reset the tie rotates by the last
+# event (10032). Red Ghost at Prog 0: 320 (an Event) loses to the Wildcat's 314 (a Progress event), again after a GM
+# reset; with bit 15 set, 320 (option 7: personality 8, Data 15736851; size and face unset: Prog 0). Unlisted available
+# (a GM): Luto's 10031 (an Event) loses to 10085 the same way, again after a GM reset; with bit 7 set, 10031.
+lists UpperJeuno/Luto_Mewrilah/onTrigger UpperJeuno/onEventFinish/10085 PortJeuno/Red_Ghost/onTrigger PortJeuno/onEventFinish/314 PortJeuno/onEventFinish/320
+char zone=UpperJeuno pos=-53.9,-0.3,44.9 job=WAR lvl=20
+quest Jeuno.LureOfTheWildcat accepted
+quest Jeuno.UnlistedQualities accepted
+charvar Quest[3][77]Data 15728659
+login
+trigger Luto_Mewrilah          # Prog 0: the Wildcat's 10085 over 10033
+finish                         # the Wildcat's bit 7
+charvar Quest[3][90]Prog 0     # a GM
+trigger Luto_Mewrilah          # 10085 again over 10033
+finish                         # bit 7
+trigger Luto_Mewrilah          # bit 7 set: 10033
+finish
+charvar Quest[3][77]Prog 2     # a GM
+charvar Quest[3][90]Prog 0     # a GM
+trigger Luto_Mewrilah          # Prog 2: 10032 and 10085 tie: 10085, the first in the list
+finish                         # bit 7
+charvar Quest[3][90]Prog 0     # a GM
+trigger Luto_Mewrilah          # the tie rotates by the last event: 10032
+finish                         # no 10032 finish
+charvar Quest[3][77]Prog 0     # a GM
+warp -95,0,-3.3 PortJeuno
+trigger Red_Ghost              # Prog 0, personality unset: the Wildcat's 314 over 320
+finish                         # bit 15
+charvar Quest[3][90]Prog 0     # a GM
+trigger Red_Ghost              # 314 again over 320
+finish                         # bit 15
+trigger Red_Ghost              # bit 15 set: 320, [7] = 15728659
+finish option=7                # female, 7: personality 8, Data 15736851; Prog 0
+warp -53.9,-0.3,44.9 UpperJeuno
+quest Jeuno.UnlistedQualities available # a GM
+charvar Quest[3][90]Prog 0     # a GM
+trigger Luto_Mewrilah          # Unlisted available: the Wildcat's 10085 over 10031
+finish                         # bit 7
+charvar Quest[3][90]Prog 0     # a GM
+trigger Luto_Mewrilah          # 10085 again over 10031 (a Progress 10031 would tie and rotate to it)
+finish                         # bit 7
+trigger Luto_Mewrilah          # bit 7 set: 10031
+finish option=1073741824       # cancelled: nothing

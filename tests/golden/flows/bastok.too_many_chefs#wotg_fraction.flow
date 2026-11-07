@@ -1,0 +1,9 @@
+# Too Many Chefs (bastok 86): Ferghus' guard xi.settings.main.ENABLE_WOTG == 1 compares the setting as the Lua number it is,
+# so a fraction (1.25) is not 1: with fame level 5 the offer is still not made (420). A port that rounds the setting
+# (Settings.Main) would offer it (946). Recorded on Lua at 9ab47b5a^ (the parent of the commit that ported the quest).
+char zone=Metalworks pos=-23,-10,-27
+setting ENABLE_WOTG 1.25
+login
+fame Bastok 325                 # fame level 5
+trigger Ferghus                 # ENABLE_WOTG 1.25: not offered, 420
+finish-if-event

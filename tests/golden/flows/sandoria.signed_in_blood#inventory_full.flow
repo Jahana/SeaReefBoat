@@ -1,0 +1,15 @@
+# Signed in Blood at Prog 3 with a full inventory: 736 does not complete it (the earring cannot be given): the pages
+# are kept and needToZone is not set; with room, 736 again completes it.
+char zone=SouthernSanDoria pos=-189,-2.9,97.2 job=WAR lvl=30
+quest Sandoria.SignedInBlood accepted
+charvar Quest[0][108]Prog 3
+keyitem TornOutPages
+login
+fill-inventory
+trigger Sobane                            # Prog 3: 736
+finish                                    # no room: not completed, the pages kept, no needToZone
+free-inventory
+trigger Sobane                            # 736
+finish                                    # completed: Cunning Earring, fame +30, 3500 gil; the pages deleted; needToZone
+trigger Sobane                            # needToZone: 737
+finish

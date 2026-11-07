@@ -1,0 +1,31 @@
+# From Saplings Grow (windurst 85): the qm1 and Stolas in Cape Teriggan with GM-set states. Available with the map
+# (GM): no handler, nothing pops (the qm1's default NOTHING_OUT_OF_ORDINARY). Accepted without the map: nil. The map:
+# Stolas pops; the map taken by GM before the kill: its death sets nothing, so the next qm1 talk (no map, killed_wsnm
+# 0) is nil. The map again, and a wait for its body to go (popFromQM needs it despawned): it pops again; the quest
+# deleted by GM (available) before the kill: no death handler, killed_wsnm not set; accepted again by GM, after the
+# wait the qm1 (the map, killed_wsnm 0): it pops a third time, no Annals of Truth.
+lists CapeTeriggan/qm1/onTrigger
+char zone=CapeTeriggan pos=-154.9,-8,198.1 job=RNG lvl=75
+login
+keyitem MapToTheAnnalsOfTruth
+trigger qm1                                         # available, the map: no handler; nothing pops; NOTHING_OUT_OF_ORDINARY
+quest Windurst.FromSaplingsGrow accepted
+delkeyitem MapToTheAnnalsOfTruth
+trigger qm1                                         # accepted, no map: nil; NOTHING_OUT_OF_ORDINARY
+keyitem MapToTheAnnalsOfTruth
+trigger qm1                                         # the map: Stolas pops (claimed); SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth
+kill STOLAS                                         # no map: killed_wsnm not set
+trigger qm1                                         # no map, killed_wsnm 0: nil; NOTHING_OUT_OF_ORDINARY
+keyitem MapToTheAnnalsOfTruth
+tick 15000                                          # its body despawns: one zone tick per tick statement
+tick 15000
+tick 15000
+trigger qm1                                         # the map: it pops again; SENSE_OMINOUS_PRESENCE
+quest Windurst.FromSaplingsGrow available
+kill STOLAS                                         # the quest available: no death handler; killed_wsnm not set
+quest Windurst.FromSaplingsGrow accepted
+tick 15000
+tick 15000
+tick 15000
+trigger qm1                                         # killed_wsnm 0, the map: it pops again; SENSE_OMINOUS_PRESENCE

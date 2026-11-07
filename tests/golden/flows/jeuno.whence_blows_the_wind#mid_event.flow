@@ -1,0 +1,20 @@
+# Whence Blows the Wind (jeuno 130), each finish once its section no longer holds (a GM's change while the event is
+# open): a level 56 Warrior at cap 60; 85 open, then cap 61: 85 answered 1: nothing (not begun); cap 60 again: 85,
+# answered 1: begun. Accepted, the three crests (a GM): 87 open, then the quest set back to available (87's finish is
+# the accepted section's): nothing (not completed, the crests kept, cap 60).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/85 RuludeGardens/onEventFinish/87
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=56
+levelcap 60
+login
+trigger Maat                            # 85
+levelcap 61                             # a GM, 85 open
+finish option=1                         # cap 61: no section: nothing (not begun)
+levelcap 60                             # a GM
+trigger Maat                            # 85
+finish option=1                         # begun
+keyitem OrcishCrest                     # a GM
+keyitem QuadavCrest
+keyitem YagudoCrest
+trigger Maat                            # 87
+quest Jeuno.WhenceBlowsTheWind available  # a GM, 87 open
+finish                                  # available: 87's finish is the accepted section's: nothing

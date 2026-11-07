@@ -1,0 +1,59 @@
+# Trial-Size Trial by Lightning (otherAreas 28): Lacia in Mhaura. Her default 10021 (Mhaura's DefaultActions)
+# alternates with her script (interaction_lookup's UseFallback, a local var cleared by zoning): with UseFallback 0 a
+# talk plays 10021 and sets it to 1; the next talk runs the script (the call) and resets it to 0, and plays 10021
+# again when the script starts nothing. So each script talk below follows a default talk. The guard (main level 20,
+# main job SMN, Windurst fame level 2): fame 49 not offered (10021 on both talks); the offer 10025 (0, Mini Tuning Fork
+# of Lightning, 5, 20) declined, option 2 (nothing), option 1 with a full inventory (ITEM_CANNOT_BE_OBTAINED: not
+# begun), then begun with one free slot (the fork, ITEM_OBTAINED); 10018 while the fork is held; the trades (a bone
+# chip: nothing; the fork: 10026, declined, option 2 (nothing), then option 1: xi.teleport.to the Cloister of Storms,
+# the fork kept; the tick and the login finish the zone change). A trade while available is #level19's. Completed by
+# GM: 10028; the fork's trade: nothing. The fork-lost arms are #fork_lost, the level and job sides #level19 and
+# #not_smn, the battlefield #battlefield.
+char zone=Mhaura pos=30.6,-15.6,56.0 job=SMN lvl=20
+fame Windurst 49
+item BoneChip
+login
+trigger Lacia                             # UseFallback 0: the default 10021
+finish
+trigger Lacia                             # the script: fame 49 (level 1): the quest's nil; the default 10021
+finish
+fame Windurst 50
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # the script: SMN 20, fame level 2: 10025 (0, fork, 5, 20)
+finish option=0                           # declined: nothing
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # 10025
+finish option=2                           # option 2: nothing (the finish wants option 1)
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # 10025
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork); not begun
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # 10025
+finish option=1                           # begun; the Mini Tuning Fork of Lightning, ITEM_OBTAINED
+free-inventory
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # accepted, the fork held: 10018
+finish
+trade Lacia BoneChip x1                   # SMN, accepted, not the fork: nothing
+trade Lacia MiniTuningForkOfLightning x1  # SMN, accepted, the fork: 10026 (0, fork, 5, 20)
+finish option=0                           # option 0: nothing, the fork kept
+trade Lacia MiniTuningForkOfLightning x1  # 10026
+finish option=2                           # option 2: nothing, the fork kept
+trade Lacia MiniTuningForkOfLightning x1  # 10026 again
+finish option=1                           # xi.teleport.to the Cloister of Storms (the fork kept)
+tick 400                                  # the teleport's zone change: saved at the Cloister of Storms (202)
+login                                     # back in at the teleport's destination
+quest OtherAreas.TrialSizeTrialByLightning completed
+warp 30.6,-15.6,56.0 Mhaura
+trigger Lacia                             # the default 10021 (the zone change cleared UseFallback)
+finish
+trigger Lacia                             # completed: 10028
+finish
+trade Lacia MiniTuningForkOfLightning x1  # completed: nothing

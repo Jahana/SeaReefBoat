@@ -1,0 +1,25 @@
+# Scattered into Shadow (jeuno 61), AF2_QUEST_LEVEL compared as the Lua compares it (a number, no rounding): a level 50
+# beastmaster with the setting at 50.4: 50 >= 50.4 is false, no section (Path of the Beastmaster's 20, then his script);
+# at 50: the offer, 141. Wings of Gold then not completed (a GM's delQuest): no section (Wings of Gold's own
+# offer 139, then 137).
+lists UpperJeuno/Brutus/onTrigger
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=BST lvl=50
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster completed
+quest Jeuno.WingsOfGold completed
+setting AF2_QUEST_LEVEL 50.4
+login
+trigger Brutus                  # 50 < 50.4: no section; Path of the Beastmaster's 20
+finish-if-event
+trigger Brutus                  # the next turn
+finish-if-event
+setting AF2_QUEST_LEVEL 50
+trigger Brutus                  # 50 >= 50: 141
+finish option=0                 # Prog 1
+quest Jeuno.WingsOfGold available
+trigger Brutus                  # Wings of Gold not completed: no section; Wings of Gold's 139
+finish-if-event
+trigger Brutus                  # the next turn
+finish-if-event

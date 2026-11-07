@@ -1,0 +1,42 @@
+# The Gobbiebag Part VIII (jeuno 94): reqsMet's operands one at a time, in both checks. Parts I-VII completed (the
+# chain's earlier parts, by a GM), Jeuno fame level 4. The inventory at 30 (a fresh char): no section (43 (81)); at 65
+# (storage, a GM's player:changeContainerSize): fame level 3 (449 / 2 = 224): no section; Part VII set accepted (a GM):
+# no section; all met: 43 (66, 0, 1), begun. Accepted: fame level 3: no section; Part VII accepted: no section (Part VII
+# itself: its size 60 unmet); all met: 43 (66, 1, 1). A GM sets a part available before accepted (accepted over
+# completed keeps it completed).
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/onEventFinish/43
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+fame Sandoria 450
+quest Jeuno.TheGobbiebagPartI completed
+quest Jeuno.TheGobbiebagPartIi completed
+quest Jeuno.TheGobbiebagPartIii completed
+quest Jeuno.TheGobbiebagPartIv completed
+quest Jeuno.TheGobbiebagPartV completed
+quest Jeuno.TheGobbiebagPartVi completed
+quest Jeuno.TheGobbiebagPartVii completed
+login
+trigger Bluffnix                        # the inventory 30, not 65: no section; 43 (81)
+finish
+storage inventory 65                    # a GM's player:changeContainerSize to the part's start size
+fame Sandoria 449                       # a GM: fame level 3
+trigger Bluffnix                        # below the fame level: no section; 43 (81)
+finish
+fame Sandoria 450                       # a GM
+quest Jeuno.TheGobbiebagPartVii available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartVii accepted # a GM: Part VII not completed
+trigger Bluffnix                        # no section (Part VII: inventory 65 is not its 60); 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartVii completed # a GM
+trigger Bluffnix                        # all met: 43 (66, 0, 1)
+finish option=0                         # begun
+fame Sandoria 449                       # a GM: fame level 3
+trigger Bluffnix                        # accepted, below the fame level: no section; 43 (81)
+finish
+fame Sandoria 450                       # a GM
+quest Jeuno.TheGobbiebagPartVii available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartVii accepted # a GM
+trigger Bluffnix                        # accepted, the previous part not completed: no section; 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartVii completed # a GM
+trigger Bluffnix                        # all met: 43 (66, 1, 1)
+finish

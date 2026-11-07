@@ -1,0 +1,14 @@
+# Mimeo Stone, the Cradle with a full bag: the stone from a Luminant, the bag filled (a GM): the Cradle at NumFades 0:
+# BRIGHTNESS + 0, then ITEM_CANNOT_BE_OBTAINED (the Regain), noAction, the stone kept (user ruling 2026-11-04,
+# kept Lua bugs: the Lua's room test was hasItem alone, so it played 2, whose finish took the stone and refused the
+# Regain). The bag freed: the Cradle: BRIGHTNESS + 0, krtu, Progress 1, 2; its finish: the stone taken, the Regain.
+lists AttohwaChasm/Luminant/onTrigger AttohwaChasm/Cradle_of_Rebirth/onTrigger AttohwaChasm/onEventFinish/2
+char zone=AttohwaChasm pos=241,19,-150 job=WAR lvl=75
+login
+trigger Luminant                        # the stone; the timer
+fill-inventory                          # a GM: no free slot
+trigger Cradle_of_Rebirth               # BRIGHTNESS + 0; no room: ITEM_CANNOT_BE_OBTAINED; noAction
+finish-if-event                         # no event
+free-inventory
+trigger Cradle_of_Rebirth               # BRIGHTNESS + 0; krtu; Progress 1; 2
+finish-if-event                         # the stone taken; the Regain

@@ -1,0 +1,39 @@
+# Grave Concerns (sandoria 11): the var values outside 0 and 1, set by GM. Available, Introduction 2: Andecia's
+# onTrigger returns nil (no script, no default: nothing). Accepted: OfferingWaterOK 2 (Andecia's onTrigger nil; the
+# waterskin to Andecia nil); OfferingWaterOK -1 (Andecia nil: a negative value is neither 0 nor 1); OfferingWaterOK 1
+# with DroppedWaterskin 2 (the waterskin to Andecia: neither 558 nor 624, nil); OfferingWaterOK 2 at the Tombstone (the
+# skin traded: nil, the skin kept); OfferingWaterOK 0 (the waterskin to Andecia: nil, the trade wants 1); the skin to
+# the Tombstone (swapped, so no skin is held); then by GM OfferingWaterOK 0 and DroppedWaterskin 2 (Andecia, no skin:
+# Dropped not 1, so the else arm: DroppedWaterskin 1, 622).
+lists SouthernSanDoria/Andecia/onTrigger SouthernSanDoria/Andecia/onTrade KingRanperresTomb/Tombstone_Upper/onTrade SouthernSanDoria/onEventFinish/622
+char zone=SouthernSanDoria pos=171.1,-0.9,45.0 job=WAR lvl=30
+charvar Quest[0][11]Introduction 2
+item TombGuardsWaterskin
+item SkinOfWellWater
+login
+trigger Andecia                           # available, Introduction 2: nil; nothing
+finish-if-event
+quest Sandoria.GraveConcerns accepted
+charvar Quest[0][11]OfferingWaterOK 2
+trigger Andecia                           # OfferingWaterOK 2: nil; nothing
+finish-if-event
+trade Andecia TombGuardsWaterskin x1      # OfferingWaterOK 2: nil
+charvar Quest[0][11]OfferingWaterOK -1
+trigger Andecia                           # OfferingWaterOK -1: nil
+finish-if-event
+charvar Quest[0][11]OfferingWaterOK 1
+charvar Quest[0][11]DroppedWaterskin 2
+trade Andecia TombGuardsWaterskin x1      # OfferingWaterOK 1, DroppedWaterskin 2: nil
+charvar Quest[0][11]OfferingWaterOK 2
+warp 1.0,-1.4,-102.0 KingRanperresTomb
+trade Tombstone_Upper SkinOfWellWater x1  # OfferingWaterOK 2: nil; the skin kept
+warp 171.1,-0.9,45.0 SouthernSanDoria
+charvar Quest[0][11]OfferingWaterOK 0
+trade Andecia TombGuardsWaterskin x1      # OfferingWaterOK 0: nil (the trade wants OfferingWaterOK 1)
+warp 1.0,-1.4,-102.0 KingRanperresTomb
+trade Tombstone_Upper SkinOfWellWater x1  # OfferingWaterOK 0: the skin swapped for a waterskin; OfferingWaterOK 1; CHANGE_WATER
+warp 171.1,-0.9,45.0 SouthernSanDoria
+charvar Quest[0][11]OfferingWaterOK 0
+charvar Quest[0][11]DroppedWaterskin 2
+trigger Andecia                           # OfferingWaterOK 0, no skin, DroppedWaterskin 2 (not 1): DroppedWaterskin 1; 622
+finish

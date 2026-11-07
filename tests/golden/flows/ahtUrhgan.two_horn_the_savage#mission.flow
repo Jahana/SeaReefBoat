@@ -1,0 +1,52 @@
+# Cacaroon's trade kinds against Knight of Gold's (TOAU 4): at mission status 2 its Cacaroon trade handler answers
+# exactly 1000 gil or one Imperial Bronze Piece with the Progress 3022, which ties Two Horn's 595 (exactly 1000 gil) and
+# Rat Race's 850 (the bronze piece): they rotate; an Event kind loses to 3022 every time. A level 75 Warrior in
+# Whitegate, Knight of Gold current at status 2 (GMs, reset after each trade: 3022's finish takes the trade and sets
+# status 3). Two Horn accepted at Prog 0: four trades of exactly 1000 gil. Rat Race accepted at Prog 2: four trades
+# of one bronze piece.
+lists AhtUrhganWhitegate/Cacaroon/onTrade AhtUrhganWhitegate/onEventFinish/595 AhtUrhganWhitegate/onEventFinish/850
+char zone=AhtUrhganWhitegate pos=-70.5,0,-82.337 job=WAR lvl=75 gil=9000
+item ImperialBronzePiece
+mission Toau KnightOfGold current
+quest AhtUrhgan.TwoHornTheSavage accepted
+charvar Quest[6][17]Prog 0
+login
+missionstatus Toau 2
+trade Cacaroon gil=1000                 # Two Horn Prog 0, status 2: 595 and 3022 tie
+finish
+missionstatus Toau 2
+charvar Quest[6][17]Prog 0
+trade Cacaroon gil=1000
+finish
+missionstatus Toau 2
+charvar Quest[6][17]Prog 0
+trade Cacaroon gil=1000
+finish
+missionstatus Toau 2
+charvar Quest[6][17]Prog 0
+trade Cacaroon gil=1000
+finish
+missionstatus Toau 2
+charvar Quest[6][17]Prog 0
+quest AhtUrhgan.RatRace accepted
+charvar Quest[6][66]Prog 2
+trade Cacaroon ImperialBronzePiece x1   # Rat Race Prog 2, status 2: 850 and 3022 tie
+finish
+item ImperialBronzePiece
+charvar Quest[6][66]Prog 2
+missionstatus Toau 2
+trade Cacaroon ImperialBronzePiece x1
+finish
+item ImperialBronzePiece
+charvar Quest[6][66]Prog 2
+missionstatus Toau 2
+trade Cacaroon ImperialBronzePiece x1
+finish
+item ImperialBronzePiece
+charvar Quest[6][66]Prog 2
+missionstatus Toau 2
+trade Cacaroon ImperialBronzePiece x1
+finish
+item ImperialBronzePiece
+charvar Quest[6][66]Prog 2
+missionstatus Toau 2

@@ -1,0 +1,64 @@
+# Class Reunion (windurst 82): the arms against a completed quest (GM), an SMN 75 with The Puppet Master completed and
+# Carbuncle Debacle available. Koru-Moru: four Astragaloi at var 2: nothing; the talk at vars 1, 2, 3 and 6 (both
+# students talked to): 411 each time, none of the accepted arms. Shantotto at var 3: Curses Foiled Again 1's 171;
+# Fuepepe and Furakku-Norakku at var 3, not talked to: their defaults; Gulmama at var 4 and at var 5 without the
+# pendulum: her 710. The Puppet Master made available again (GM): Koru-Moru's 411 not played (his 193).
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion completed
+item Astragalos x4
+login
+charvar ClassReunionProgress 2
+trade Koru-Moru Astragalos x4           # completed, var 2: nothing
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # completed, var 2: no 414: 411
+finish
+charvar ClassReunionProgress 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # completed, var 1: no 412: 411
+finish
+charvar ClassReunionProgress 3
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # completed, var 3, no student talked to: no 408: 411
+finish
+charvar ClassReunionProgress 6
+charvar ClassReunion_TalkedToFupepe 1
+charvar ClassReunion_TalkedToFurakku 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # completed, var 6, both talked to: no 410: 411
+finish
+charvar ClassReunionProgress 3
+charvar ClassReunion_TalkedToFupepe 0
+charvar ClassReunion_TalkedToFurakku 0
+warp 124.1,-3.0,113.6 WindurstWalls     # beside Shantotto
+trigger Shantotto                       # Curses Foiled Again 1's turn: its offer 171 (Event)
+finish
+trigger Shantotto                       # completed, var 3: no 409: 171
+finish
+warp 165.0,-1.25,161.1 WindurstWaters   # beside Fuepepe
+trigger Fuepepe                         # the default's turn: 423
+finish
+trigger Fuepepe                         # completed, var 3, not talked to: no 817: 423
+finish
+warp -16.5,-5.25,102.0 WindurstWaters   # beside Furakku-Norakku
+trigger Furakku-Norakku                 # the default's turn: 371
+finish
+trigger Furakku-Norakku                 # completed (status 2), var 3, not talked to: no 816: 371
+finish
+charvar ClassReunionProgress 4
+warp -185.5,0.0,110.1 NorthernSanDoria  # beside Gulmama
+trigger Gulmama                         # completed, var 4: no 713; Trial by Ice (fame 0): nothing; her 710
+finish
+charvar ClassReunionProgress 5
+trigger Gulmama                         # completed, var 5, no pendulum: no 712: her 710
+finish
+quest Windurst.ThePuppetMaster available  # GM
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # TPM available: no 411; nothing: 193
+finish

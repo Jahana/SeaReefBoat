@@ -1,0 +1,19 @@
+# Tea with a Tonberry? (sandoria 109): the offer's needToZone operand. Signed in Blood completed and fame level 4, with
+# the zoning flag ([generic]mustZone 230, what Signed in Blood's 736 sets) held: Tea's check reads needToZone() true and
+# is false, so Signed in Blood's section 6 answers (737). Entering another zone clears the flag; back in Southern San
+# d'Oria the check passes: 738.
+char zone=SouthernSanDoria pos=-189,-2.9,97.2 job=WAR lvl=75
+quest Sandoria.SignedInBlood completed
+fame Sandoria 225
+charvar [generic]mustZone 230
+login
+trigger Sobane                            # fame level 4, needToZone: not offered; Signed in Blood's 737
+finish
+# Again: still only Signed in Blood's 737. With the Tea offer matching too, the lookup would alternate the two progress
+# events.
+trigger Sobane                            # 737 again
+finish
+warp 5.3,0.5,24.9 NorthernSanDoria       # another zone: the flag cleared
+warp -189,-2.9,97.2 SouthernSanDoria
+trigger Sobane                            # no needToZone: 738
+finish                                    # begun

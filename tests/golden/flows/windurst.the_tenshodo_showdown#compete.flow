@@ -1,0 +1,52 @@
+# The Tenshodo Showdown (windurst 69): its lines next to other containers' lines. Mihgo's Amigo completed by GM with its
+# mustZone char var set by GM (Quest[2][25]mustZone, cleared by the next zone change): its completed section's 89 (an
+# Event) stands at Nanaa Mihgo. A THF at level 40: 496, 497 (Prog 0) and 498 (Prog 1, GM) are Progress lines: each
+# plays over 89. Prog 3 (GM): the quest has no line: 89. Completed by GM (As Thick as Thieves available, level 40):
+# 503 is a replaceDefault line (priority 20), so 89 (100) plays on both talks. Lower Jeuno with CoP 3-5 Darkness Named
+# current by GM (Status 0): Harnek's 13 is an importantEvent (Progress the first time, then an Event). The
+# Tenshodo Showdown accepted by GM with the letter: the first talk ties two Progress lines: 13 (the mission's
+# container first); then 10021 (Progress over the Event 13), finished (Prog 1); the letter given back and the envelope
+# taken by GM: 10021 again (the last event was 10021, an Event 10021 would give the turn to 13); the signed envelope
+# alone (GM), the bag full: 10022 over 13, its completion fails; again: 10022.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger LowerJeuno/Harnek/onTrigger
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=THF lvl=40
+quest Windurst.MihgosAmigo completed
+mission Cop DarknessNamed current
+login
+charvar Quest[2][25]mustZone 241               # GM: Mihgo's Amigo's completed 89 (an Event) at Nanaa Mihgo, 91 at Cha Lebagta
+trigger Nanaa_Mihgo+99                         # 496 (Progress) over 89
+finish                                         # begun; the letter
+trigger Nanaa_Mihgo+99                         # Prog 0: 497 over 89
+finish
+charvar Quest[2][69]Prog 1                     # GM
+trigger Nanaa_Mihgo+99                         # Prog 1: 498 over 89
+finish
+charvar Quest[2][69]Prog 3                     # GM
+trigger Nanaa_Mihgo+99                         # Prog 3: no line of the quest: 89
+finish
+quest Windurst.TheTenshodoShowdown completed   # GM
+trigger Nanaa_Mihgo+99                         # completed: 503 (replaceDefault, 20) under 89 (Event, 100): 89
+finish
+trigger Nanaa_Mihgo+99                         # 89 again (503 never plays while 89 stands)
+finish
+quest Windurst.TheTenshodoShowdown available   # GM
+quest Windurst.TheTenshodoShowdown accepted    # GM
+keyitem LetterFromTheTenshodo                  # GM
+warp 47.0,-0.1,-19.6 LowerJeuno
+trigger Harnek                                 # two Progress lines: the mission's 13 first (importantEvent)
+finish
+trigger Harnek                                 # 13 is now an Event: 10021
+finish                                         # Prog 1; the letter taken, the envelope given
+delkeyitem TenshodoEnvelope                    # GM
+keyitem LetterFromTheTenshodo                  # GM
+trigger Harnek                                 # 10021 over 13 (last event 10021)
+finish
+delkeyitem TenshodoEnvelope                    # GM
+delkeyitem LetterFromTheTenshodo               # GM
+keyitem SignedEnvelope                         # GM
+trigger Harnek                                 # 10022 over 13 (last event 10021)
+fill-inventory
+finish                                         # the knife does not fit: nothing
+free-inventory
+trigger Harnek                                 # 10022 over 13 (last event 10022)
+finish                                         # completed

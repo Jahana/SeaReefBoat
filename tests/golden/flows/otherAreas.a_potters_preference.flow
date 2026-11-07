@@ -1,0 +1,45 @@
+# A Potter's Preference (otherAreas 9): Nereus (Mhaura; no DefaultActions entry, no other quest: his script calls the
+# quest whole). A WAR 20. The Dish of Gusgen Clay is RARE (stack 1): the char holds one at a time, the next by a GM.
+# Available, fame 424 (level 5): 110; the dish traded: nothing. Fame 425 (level 6): 111 (569); option 0, then 2:
+# nothing; option 1: begun. Accepted: 114 (569); a cabbage traded: nothing; the dish: 113: the dish taken, fame +60,
+# 2160 gil, the repeat var 0, the day var today, completed (Quest[4][9]Prog 1 (GM) kept: the raw
+# player:completeQuest). Completed, the day + 8 not reached: 115; a dish (a GM)
+# traded: nothing. 7 Vana'diel days later: 115; 8 days: 112: the repeat var 1; 112 again (no reminder); the dish and a
+# cabbage: 113: only the dish taken, completed again, the day var the new day. Then 115.
+char zone=Mhaura pos=34.0,-16.0,82.0 job=WAR lvl=20
+item DishOfGusgenClay x1
+item LaTheineCabbage x2
+fame Windurst 424
+login
+trigger Nereus                          # available, fame level 5: 110
+finish
+trade Nereus DishOfGusgenClay x1        # available, no repeat var: nothing (the dish kept)
+fame Windurst 425                       # a GM: level 6
+trigger Nereus                          # 111 (569)
+finish option=0                         # nothing
+trigger Nereus                          # 111
+finish option=2                         # nothing
+trigger Nereus                          # 111
+finish option=1                         # begun
+trigger Nereus                          # accepted: 114 (569)
+finish
+trade Nereus LaTheineCabbage x1         # no dish: nothing
+charvar Quest[4][9]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Nereus DishOfGusgenClay x1        # 113
+finish                                  # the dish taken; fame +60; 2160 gil; repeat var 0; day var today; completed
+trigger Nereus                          # completed, day + 8 not reached: 115
+finish
+item DishOfGusgenClay x1                # a GM: another dish
+trade Nereus DishOfGusgenClay x1        # completed, repeat var 0: nothing
+wait vana=168                           # 7 Vana'diel days
+trigger Nereus                          # day + 7: 115
+finish
+wait vana=24                            # the 8th day
+trigger Nereus                          # day + 8: 112
+finish                                  # the repeat var 1
+trigger Nereus                          # completed, the day reached: 112 again
+finish
+trade Nereus DishOfGusgenClay x1 LaTheineCabbage x1  # repeat var 1: 113
+finish                                  # only the dish taken; fame +60; 2160 gil; completed again; the day var today
+trigger Nereus                          # 115
+finish

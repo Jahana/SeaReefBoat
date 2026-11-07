@@ -1,0 +1,29 @@
+# Cloak and Dagger's Jakoh replies against A Question of Taste's accepted Events (46 below Prog 2, 48 from it), both on
+# Jakoh with no script turn (TuningOut_Progress 0). A level 75 Thief, dagger skill 2300, the Dagger of Trials held,
+# Windurst fame 425, A Question of Taste accepted at Prog 0 (GMs). 46 and 279 (Events) tie: 46 (container order), then
+# the cycle: 279 (once per zone), finished: begun. 46 and 280 tie: the last id 279 is neither: 46, then 280. The map (a
+# GM): 46 and 283 tie: the last id 280 is neither: 46, then 283. The annals (a GM): 284 (Progress) beats 46 (the last id
+# 283 is neither: a tie would play 46); finished: completed.
+lists Kazham/Jakoh_Wahcondalo/onTrigger
+char zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+skill Dagger 2300
+item DaggerOfTrials
+fame Windurst 425
+quest Outlands.AQuestionOfTaste accepted
+login
+trigger Jakoh_Wahcondalo                # 46 and 279 tie: 46
+finish
+trigger Jakoh_Wahcondalo                # the cycle: 279
+finish                                  # the dagger held: the guide; begun
+trigger Jakoh_Wahcondalo                # 46 and 280 tie: the last id 279: 46
+finish
+trigger Jakoh_Wahcondalo                # the cycle: 280
+finish option=0                         # nothing
+keyitem MapToTheAnnalsOfTruth           # a GM
+trigger Jakoh_Wahcondalo                # 46 and 283 tie: the last id 280: 46
+finish
+trigger Jakoh_Wahcondalo                # the cycle: 283
+finish
+keyitem AnnalsOfTruth                   # a GM
+trigger Jakoh_Wahcondalo                # 284 (Progress) beats 46
+finish                                  # completed; the key items taken; Evisceration

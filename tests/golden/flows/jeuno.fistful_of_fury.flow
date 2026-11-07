@@ -1,0 +1,47 @@
+# Fistful of Fury (jeuno 41): Vola (Lower Jeuno; no DefaultActions entry: 212 is her script's). A WAR 75 (Beat Around
+# the Bushin is never offered: not a MNK). Norg fame 125 (level 3) without Silence of the Rams: 212. 124 (level 2) with
+# Silence of the Rams completed (GM): 212. 125 and Silence of the Rams: the trade while available: nothing; 216; options
+# 0 and 2 nothing; option 1 begun. Accepted: 215. The trade: two of the three; each three-item trade with one of the
+# three swapped for a pebble; the three and a fourth item: nothing; the three: 213 refused on a full inventory (the items
+# kept), then Brown Belt (title and item), Norg fame +30, the trade taken, completed. Completed: no arm of either quest:
+# 212; the three: nothing. Norg fame 425 (level 6), a WAR: Beat Around the Bushin's 160 not offered: 212.
+char zone=LowerJeuno pos=45.8,3.9,-45.4 job=WAR lvl=75
+fame Norg 125
+item NueFang x2
+item MorbolgerVine x2
+item DodoSkin x2
+item Pebble
+login
+trigger Vola                            # Norg fame level 3, Silence of the Rams not completed: 212
+finish
+fame Norg 124
+quest Bastok.SilenceOfTheRams completed
+trigger Vola                            # level 2, Silence of the Rams completed: 212
+finish
+fame Norg 125
+trade Vola NueFang x1 MorbolgerVine x1 DodoSkin x1  # available: nothing
+trigger Vola                            # level 3, available, Silence of the Rams completed: 216
+finish option=0                         # nothing
+trigger Vola                            # 216
+finish option=2                         # nothing
+trigger Vola                            # 216
+finish option=1                         # begun
+trigger Vola                            # accepted: 215
+finish
+trade Vola NueFang x1 MorbolgerVine x1  # two of the three: nothing
+trade Vola MorbolgerVine x1 DodoSkin x1 Pebble x1  # no Nue Fang: nothing
+trade Vola NueFang x1 DodoSkin x1 Pebble x1  # no Morbolger Vine: nothing
+trade Vola NueFang x1 MorbolgerVine x1 Pebble x1  # no Dodo Skin: nothing
+trade Vola NueFang x1 MorbolgerVine x1 DodoSkin x1 Pebble x1  # four items: nothing
+fill-inventory
+trade Vola NueFang x1 MorbolgerVine x1 DodoSkin x1  # the three: 213
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED; the items kept
+free-inventory
+trade Vola NueFang x1 MorbolgerVine x1 DodoSkin x1  # 213
+finish                                  # Brown Belt (title); Brown Belt; Norg fame +30; the trade taken; completed
+trigger Vola                            # completed: no arm (Beat Around the Bushin: WAR, available): 212
+finish
+trade Vola NueFang x1 MorbolgerVine x1 DodoSkin x1  # completed: nothing
+fame Norg 425
+trigger Vola                            # Norg fame level 6, a WAR: no 160: 212
+finish

@@ -1,0 +1,28 @@
+# Prelude of Black and White (sandoria 88, WHM AF2): the door _6h1 in Chateau d'Oraguille, Narcheral in Northern San
+# d'Oria. A WHM 50 with Messenger From Beyond completed: the canteen and moccasins to Narcheral while available
+# (nothing); _6h1's 551 (begun); the door while accepted (no section: the zone's default action ITS_LOCKED, since the
+# lookup tries its own actions first when UseFallback is 0); Narcheral's trigger (no handler: his default 688); the
+# canteen alone (nil), canteen, moccasins and a chip (not exactly: nil), canteen and moccasins (691: completed, Healer's
+# Duckbills, fame +20, both taken). Not talked to after: the door's 552 would begin Pieuje's Decision.
+# _6h1's script answers WHM 50+ (Pieuje's Decision's 552 after Prelude, else nothing), else rank 10 (73) or 523; its
+# DefaultActions entry ITS_LOCKED is an action of the lookup, so it alternates with the script. Narcheral's script has
+# no onTrigger (default 688); his onTrade answers Pieuje's Decision only. No Sandy mission is current (three name _6h1).
+lists ChateauDoraguille/_6h1/onTrigger ChateauDoraguille/onEventFinish/551 NorthernSanDoria/Narcheral/onTrigger NorthernSanDoria/Narcheral/onTrade NorthernSanDoria/onEventFinish/691
+char zone=NorthernSanDoria pos=128.8,-11,130.3 job=WHM lvl=50
+quest Sandoria.MessengerFromBeyond completed
+item CanteenOfYagudoHolyWater
+item Moccasins
+item BoneChip
+login
+trade Narcheral CanteenOfYagudoHolyWater x1 Moccasins x1   # available: no trade handler; his script: nothing
+warp -36,-4.9,28.5 ChateauDoraguille
+trigger _6h1                              # 551
+finish                                    # begun (any option)
+trigger _6h1                              # accepted: no section; the default action ITS_LOCKED
+warp 128.8,-11,130.3 NorthernSanDoria
+trigger Narcheral                         # accepted: no trigger handler; his default 688
+finish
+trade Narcheral CanteenOfYagudoHolyWater x1   # not both: nil; his script: nothing
+trade Narcheral CanteenOfYagudoHolyWater x1 Moccasins x1 BoneChip x1   # not exactly: nil
+trade Narcheral CanteenOfYagudoHolyWater x1 Moccasins x1   # 691
+finish                                    # completed: Healer's Duckbills, fame +20; both taken

@@ -1,0 +1,103 @@
+# Tutorial (hidden quest Tutorial), Bastok: a level 1 Warrior (nation 1) in Bastok Markets. Gulldago (no script; his
+# default): Prog 0: 719 (Prog 1); 697 (Prog 2); no Signet: 698. The Signet (a GM's effect 253): 699 (6 Meat Jerky; a
+# full inventory: none, Prog stays 2); Prog 3, no food: 700; food (effect 251): 701. Prog 4, no combat skill at 5
+# (Sword 4 too): 702; Sword at 5 (a GM's setSkillLevel; getSkillLevel reads 5 at level 1): 703; finished: 100 x
+# GIL_RATE gil, Prog 5. No Memorandoll: 704; with it and a full inventory: 705 finished: giveItem fails, Prog stays 5;
+# with room: the Lizard Tail, Pot of Honey, Fire Crystal, Prog 6. Option 0: 706 (Option 2 too); the Auction Counter:
+# Option 1, the auction menu, noAction; 707: the Conquest Promotion Voucher, Prog 7, Option 0. Level 1: 708. Prog 8 (a
+# GM; the level 5 arm is #later's): no permit: 710; the permit with a full inventory: 711 finished: the Warp Ring
+# fails, Prog stays 8; with room: the Warp Ring, Prog 9. TutorialBypass 0: 712 (1). Bastok Mines' Survival Guide
+# (the quest arm only registers the guide and sends message 16066; the 8500 is the guide's own script): TutorialBypass
+# 1, 16066, 8500; again: 1 is not 0: 8500 only. TutorialBypass 1 at Gulldago: 712 (1). North Gustaberg's guide: 2,
+# message 12493, 8500 (param 20: bit 0x4000 cleared). Gulldago: 713 (1); full: no Saltena, Prog stays 9; TutorialBypass
+# 3: 713 (1) too; with room: 12 Saltena, Prog 10, TutorialBypass 0. Level 1: 714. Prog 11 (a GM), no support job: 716
+# (1). Prog 12: 718.
+lists BastokMarkets/Gulldago/onTrigger BastokMarkets/Auction_Counter/onTrigger BastokMines/Survival_Guide/onTrigger NorthGustaberg/Survival_Guide/onTrigger BastokMarkets/onEventFinish/719 BastokMarkets/onEventFinish/697 BastokMarkets/onEventFinish/703 BastokMarkets/onEventFinish/705 BastokMarkets/onEventFinish/707 BastokMarkets/onEventFinish/711 BastokMarkets/onEventFinish/713
+char zone=BastokMarkets pos=-362,-10,-167 job=WAR lvl=1 nation=1
+login
+trigger Gulldago                        # Prog 0: 719
+finish                                  # Prog 1
+trigger Gulldago                        # 697
+finish                                  # Prog 2
+trigger Gulldago                        # no Signet: 698
+finish
+effect 253                              # a GM: the Signet
+fill-inventory
+trigger Gulldago                        # 699
+finish                                  # no room: no Meat Jerky; Prog stays 2
+free-inventory
+trigger Gulldago                        # 699
+finish                                  # 6 Meat Jerky; Prog 3
+trigger Gulldago                        # no food: 700
+finish
+effect 251                              # a GM: food
+trigger Gulldago                        # 701
+finish                                  # Prog 4
+trigger Gulldago                        # no combat skill at 5: 702
+finish
+skill Sword 40                          # a GM: Sword 4, under 5
+trigger Gulldago                        # still no combat skill at 5: 702
+finish
+skill Sword 50                          # a GM: Sword 5
+trigger Gulldago                        # 703
+finish                                  # 100 x GIL_RATE gil; Prog 5
+trigger Gulldago                        # no Memorandoll: 704
+finish
+keyitem Memorandoll
+fill-inventory
+trigger Gulldago                        # 705
+finish                                  # no room: giveItem fails; Prog stays 5
+free-inventory
+trigger Gulldago                        # 705
+finish                                  # Lizard Tail, Pot of Honey, Fire Crystal; Prog 6
+trigger Gulldago                        # Option 0: 706
+finish
+charvar HQuest[Tutorial]Option 2       # a GM: not 1: 706
+trigger Gulldago
+finish
+trigger Auction_Counter                 # Option 1; the auction menu; noAction
+trigger Gulldago                        # 707
+finish                                  # the Conquest Promotion Voucher; Prog 7; Option 0
+trigger Gulldago                        # level 1: 708
+finish
+charvar HQuest[Tutorial]Prog 8          # a GM (the level 5 arm: #later)
+trigger Gulldago                        # no permit: 710
+finish
+keyitem BastokTrustPermit
+fill-inventory
+trigger Gulldago                        # 711
+finish                                  # no room: the Warp Ring fails; Prog stays 8
+free-inventory
+trigger Gulldago                        # 711
+finish                                  # the Warp Ring; Prog 9
+trigger Gulldago                        # TutorialBypass 0: 712 (1)
+finish
+warp 20,0,-113 BastokMines
+trigger Survival_Guide                  # 0: TutorialBypass 1; message 16066; the guide's 8500
+finish-if-event
+trigger Survival_Guide                  # 1 is not 0: the guide's 8500 only
+finish-if-event
+warp -362,-10,-167 BastokMarkets
+trigger Gulldago                        # TutorialBypass 1: 712 (1)
+finish
+warp -582.7,40.1,54 NorthGustaberg
+trigger Survival_Guide                  # 1: TutorialBypass 2; message 12493; 8500 (param 20)
+finish-if-event
+warp -362,-10,-167 BastokMarkets
+fill-inventory
+trigger Gulldago                        # TutorialBypass 2: 713 (1)
+finish                                  # no room: no Saltena; Prog stays 9
+charvar TutorialBypass 3                # a GM: over 2
+trigger Gulldago                        # TutorialBypass 3: 713 (1)
+finish                                  # no room
+free-inventory
+trigger Gulldago                        # 713 (1)
+finish                                  # 12 Saltena; Prog 10; TutorialBypass 0
+trigger Gulldago                        # level 1: 714
+finish
+charvar HQuest[Tutorial]Prog 11         # a GM
+trigger Gulldago                        # no support job: 716 (1)
+finish
+charvar HQuest[Tutorial]Prog 12         # a GM
+trigger Gulldago                        # done: 718
+finish

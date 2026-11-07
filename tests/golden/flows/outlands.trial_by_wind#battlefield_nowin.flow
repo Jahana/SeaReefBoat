@@ -1,0 +1,23 @@
+# Trial by Wind (outlands 194), the battlefield's arms without a win. Accepted without the fork: WP_Entrance opens no
+# menu (the fork is required). Available with the fork: no menu (BattlefieldQuest's entry wants the status at accepted or
+# more; a status read that stays in Lua). Accepted with the fork: entered (the fork taken), then left through
+# Wind_Protocrystal (32003, option 4: leaveBattlefield): no 32001, no whisper; Agado-Pugado then has neither key item:
+# 107 (a new fork).
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Outlands.TrialByWind accepted
+login
+trigger WP_Entrance                       # accepted, no fork: no menu
+finish-if-event
+keyitem TuningForkOfWind
+quest Outlands.TrialByWind available
+trigger WP_Entrance                       # available, the fork: no menu
+finish-if-event
+quest Outlands.TrialByWind accepted
+trigger WP_Entrance                       # accepted, the fork: 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+trigger Wind_Protocrystal                # the exit: 32003
+finish option=4                           # left: no win
+warp -16.5,7.8,-10.5 Rabao
+trigger Agado-Pugado                      # accepted, neither key item: 107
+finish                                    # a new fork

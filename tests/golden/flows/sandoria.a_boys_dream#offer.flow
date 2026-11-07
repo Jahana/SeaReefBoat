@@ -1,0 +1,71 @@
+# A Boy's Dream (sandoria 91): the offer, Ailbeche's 41 / 40 (Northern San d'Oria). Father and Son and Sharpening the
+# Sword completed (GMs). While this quest is available, Sharpening's completed section (check 4, its misspelt
+# A_BOY_S_DREAM read as A_BOYS_DREAM: user ruling 2026-11-05, kept bugs) answers with AILBECHE_WHEN_FISHING
+# (replaceDefault, over his default 868): it takes the first talk after the zone-in and every other talk, his script
+# the others ("fishing"); a talk his script answers with nothing falls back to it too. Once accepted or completed,
+# his default 868 takes those talks ("868").
+# Main, a PLD 50, the quest available: CS 0: 41; option 2: nothing; option 0: CS 1. CS 1: 40; options 0 and 2: nothing.
+# CS 5 (GM): 40 (the offer before the CS arms, not 47); option 1: begun, CS 2; 46. Available again and CS 0 (GMs): 41,
+# option 1: begun, CS 2; 46. Accepted at CS 0, then completed (GMs): no 41 (868). Low, a PLD 49, and war, a WAR 50: no
+# 41 (the literal level 50 and the job): every talk is fishing (the script plays nothing).
+# At AF2_QUEST_LEVEL 49: low's 41, option 1: begun, CS 2 (user ruling 2026-11-04, kept Lua bugs: the Lua's literal 50
+# gave no 41 there).
+char zone=NorthernSanDoria pos=6.5,0.5,26.9 job=PLD lvl=50
+char low zone=NorthernSanDoria pos=6.5,0.5,28.9 job=PLD lvl=49
+char war zone=NorthernSanDoria pos=6.5,0.5,30.9 job=WAR lvl=50
+quest Sandoria.FatherAndSon completed
+quest Sandoria.SharpeningTheSword completed
+low: quest Sandoria.FatherAndSon completed
+low: quest Sandoria.SharpeningTheSword completed
+war: quest Sandoria.FatherAndSon completed
+war: quest Sandoria.SharpeningTheSword completed
+login
+trigger Ailbeche                        # fishing
+trigger Ailbeche                        # available, CS 0: 41
+finish option=2                         # nothing (CS 0, available)
+trigger Ailbeche                        # fishing
+trigger Ailbeche                        # CS 0: 41
+finish option=0                         # aBoysDreamCS 1
+trigger Ailbeche                        # fishing
+trigger Ailbeche                        # CS 1: 40
+finish option=0                         # nothing
+trigger Ailbeche                        # fishing
+trigger Ailbeche                        # CS 1: 40
+finish option=2                         # nothing
+charvar aBoysDreamCS 5                  # a GM
+trigger Ailbeche                        # fishing
+trigger Ailbeche                        # CS 5, the offer holding: 40 (not 47)
+finish option=1                         # begun, aBoysDreamCS 2
+trigger Ailbeche                        # 868
+finish
+trigger Ailbeche                        # accepted, CS 2: 46
+finish
+quest Sandoria.ABoysDream available     # a GM
+charvar aBoysDreamCS 0                  # a GM
+trigger Ailbeche                        # fishing
+trigger Ailbeche                        # CS 0: 41
+finish option=1                         # begun, aBoysDreamCS 2
+trigger Ailbeche                        # 868
+finish
+trigger Ailbeche                        # accepted, CS 2: 46
+finish
+charvar aBoysDreamCS 0                  # a GM: accepted at CS 0
+trigger Ailbeche                        # 868
+finish
+trigger Ailbeche                        # accepted, CS 0: no 41 (868)
+finish
+quest Sandoria.ABoysDream completed     # a GM: completed at CS 0
+trigger Ailbeche                        # 868
+finish
+trigger Ailbeche                        # completed, CS 0: no 41 (868)
+finish
+low: login
+low: trigger Ailbeche                   # fishing
+low: trigger Ailbeche                   # a PLD 49, CS 0: no 41 (fishing)
+war: login
+war: trigger Ailbeche                   # fishing
+war: trigger Ailbeche                   # a WAR 50, CS 0: no 41 (fishing)
+setting AF2_QUEST_LEVEL 49
+low: trigger Ailbeche                   # fishing
+low: trigger Ailbeche                   # a PLD 49 at AF2 49, CS 0: 41
+low: finish option=1                    # begun, aBoysDreamCS 2

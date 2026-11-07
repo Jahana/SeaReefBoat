@@ -1,0 +1,28 @@
+# Tango with a Tracker (otherAreas 82): Tavnazian Safehold's Despachiaire (no script, default 106) and Boneyard Gully's
+# battlefield 677 (entry _081, index 5; its registrant needs only the Letter from Shikaree X: the battlefield's own
+# checkRequirements calls Battlefield's, not BattlefieldQuest's, so the available quest may enter). CoP When Angels Fall
+# current (A Fate Decided completed: CoP's hasCompletedMission is "below the current"); X Marks the Spot completed (a
+# GM: its available 144 would tie on Despachiaire). With no quest reply Despachiaire answers CoP 4-4's completed 317
+# (replaceDefault). NextConquestTally() is 1800198000 (Friday 17:00 JST). Despachiaire 576, finished: the letter,
+# ShikareeBattleWait 1800198000, Prog 1 (still available); again: nil, 317. The battlefield entered (32000 finished in
+# 677): begun; the letter spent on entry. Won: 32001 (battlefieldWin 677: accepted), finished: completed (10000 gil, Sin
+# Hunter Hunter). Completed: no section, 317.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/576 TavnazianSafehold/onEventFinish/577 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+mission Cop WhenAngelsFall current
+quest OtherAreas.XMarksTheSpot completed
+login
+trigger Despachiaire                    # available, Prog 0: 576
+finish                                  # the letter; the wait 1800198000; Prog 1
+trigger Despachiaire                    # Prog 1: nil; 317
+finish
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081                            # the letter: the 32000 menu
+update 32000 option=81                  # index 5, area 1: Tango with a Tracker (677)
+finish                                  # in 677: begun; the letter spent
+kill SHIKAREE_Y_ROS_TWT
+kill SHIKAREE_X_ROS_TWT                 # both down: won; 32001
+finish                                  # battlefieldWin 677: completed
+warp 112.7,-40,-85.5 TavnazianSafehold
+trigger Despachiaire                    # completed: no section; 317
+finish

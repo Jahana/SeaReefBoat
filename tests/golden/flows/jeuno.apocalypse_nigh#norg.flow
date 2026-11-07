@@ -1,0 +1,32 @@
+# Apocalypse Nigh (jeuno 89): Norg's other sides, one operand off at a time (GMs set Prog and Timer; day 8000). A level
+# 75 Warrior by Gilgamesh, the quest accepted at Prog 4 with Timer 8000 (a GM).
+# - Gilgamesh (Timer reached, no mustZone): Prog 4: nil; Prog 7: nil (no script, no default: nothing).
+# - _700 (Timer 8001 > day): Prog 7: nil (DOOR_IS_LOCKED); Prog 4: nil; Prog 6: nil. Prog 5, Timer 7999 (under the day:
+#   > false): nil.
+# - Gilgamesh, Prog 5, Timer 7999 (under the day): 232 (252, 6), finished 0: Prog 6; Timer 8000 (= day), Prog 6: 234
+#   (252), finished 5 (Prog 6); Timer 8001, Prog 6: nil.
+lists Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Norg/onEventFinish/232 Norg/onEventFinish/234
+char zone=Norg pos=120.9,-8,-12 job=WAR lvl=75
+quest Jeuno.ApocalypseNigh accepted
+charvar Quest[3][89]Prog 4
+charvar Quest[3][89]Timer 8000
+login
+trigger Gilgamesh                       # Prog 4: nil; nothing
+charvar Quest[3][89]Prog 7              # a GM
+trigger Gilgamesh                       # Prog 7: nil; nothing
+charvar Quest[3][89]Timer 8001          # a GM
+trigger _700                            # Prog 7: nil; DOOR_IS_LOCKED
+charvar Quest[3][89]Prog 4              # a GM
+trigger _700                            # Prog 4: nil; DOOR_IS_LOCKED
+charvar Quest[3][89]Prog 6              # a GM
+trigger _700                            # Prog 6: nil; DOOR_IS_LOCKED
+charvar Quest[3][89]Prog 5              # a GM
+charvar Quest[3][89]Timer 7999          # a GM
+trigger _700                            # Prog 5, Timer 7999 > day 8000 false: nil; DOOR_IS_LOCKED
+trigger Gilgamesh                       # Prog 5, day 8000 >= Timer 7999, no mustZone: 232 (252, 6)
+finish option=0                         # Prog 6
+charvar Quest[3][89]Timer 8000          # a GM
+trigger Gilgamesh                       # Prog 6, Timer = day: 234 (252)
+finish option=5                         # Prog 6
+charvar Quest[3][89]Timer 8001          # a GM
+trigger Gilgamesh                       # Prog 6, Timer 8001 > day: nil; nothing

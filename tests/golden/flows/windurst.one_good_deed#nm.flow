@@ -1,0 +1,35 @@
+# One Good Deed? (windurst 92): the qm_deed's and the Peerifools' operands, by GM. Accepted at Prog 0, a level-75 WAR
+# in Bibiki Bay. NMKilled 6 by GM (no kill): cutscene 34 (finish option 0 still sets Prog 1). Prog 0, none up:
+# NMKilled 3, 1, 5 and 7: nil; Prog 1 at NMKilled 0: nil. NMKilled 0: the six spawn. Prog 1 by GM: the first one
+# killed: no count (NMKilled stays 0). Prog 0 again: NMKilled 0, but five are up: nil (the spawned operands, each
+# alone in #spawned). Below level 5 the quest is not offered: #guard.
+lists BibikiBay/qm_deed/onTrigger BibikiBay/onEventFinish/34
+char zone=BibikiBay pos=-319.7,-2.74,-735.3 job=WAR lvl=75
+quest Windurst.OneGoodDeed accepted
+login
+localvar NMKilled 6
+trigger qm_deed                               # Prog 0, NMKilled 6: cutscene 34
+finish                                        # Prog 1; the deed
+charvar Quest[2][92]Prog 0
+delkeyitem DeedToPurgonorgoIsle
+localvar NMKilled 3
+trigger qm_deed                               # NMKilled 3: nil; NOTHING_OUT_OF_ORDINARY
+localvar NMKilled 1
+trigger qm_deed                               # NMKilled 1, none up: nil (the spawn needs 0)
+localvar NMKilled 5
+trigger qm_deed                               # NMKilled 5: nil (the cutscene needs 6)
+localvar NMKilled 7
+trigger qm_deed                               # NMKilled 7: nil
+charvar Quest[2][92]Prog 1
+localvar NMKilled 0
+trigger qm_deed                               # Prog 1, NMKilled 0, none up: nil (the spawn needs Prog 0)
+charvar Quest[2][92]Prog 0
+localvar NMKilled 0
+trigger qm_deed                               # the six spawn; IT_WAS_A_TRAP; YOU_ARE_NOT_ALONE
+charvar Quest[2][92]Prog 1
+kill PEERIFOOL                                # Prog 1: no count
+charvar Quest[2][92]Prog 0
+tick 15000                                    # the first one's body despawns
+tick 15000
+tick 15000
+trigger qm_deed                               # NMKilled 0, Prog 0, but PEERIFOOL+1..+5 up: nil

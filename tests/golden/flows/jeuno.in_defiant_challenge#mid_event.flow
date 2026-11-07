@@ -1,0 +1,19 @@
+# In Defiant Challenge (jeuno 128), each finish once its section no longer holds (a GM's change while the event is
+# open): a level 50 Warrior; 79 open, then cap 51: 79 answered 1: the available section fails, nothing (not begun);
+# cap 50 again: 79, answered 1: begun. Accepted, the three items: 81 open, then the quest set back to available (its
+# section 1 holds, but 81's finish is the accepted section's): nothing (not completed, the items kept, cap 50).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/79 RuludeGardens/onEventFinish/81
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=50
+item ClumpOfExorayMold
+item ChunkOfBombCoal
+item PieceOfAncientPapyrus
+login
+trigger Maat                            # 79
+levelcap 51                             # a GM, 79 open
+finish option=1                         # cap 51: no section: nothing (not begun)
+levelcap 50                             # a GM
+trigger Maat                            # 79
+finish option=1                         # begun
+trade Maat ClumpOfExorayMold x1 ChunkOfBombCoal x1 PieceOfAncientPapyrus x1  # 81
+quest Jeuno.InDefiantChallenge available  # a GM, 81 open
+finish                                  # available: 81's finish is the accepted section's: nothing

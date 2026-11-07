@@ -1,0 +1,21 @@
+# Fire and Brimstone (windurst 73) while Sin Hunting is accepted (a RNG 60, The Fanged One completed by GM):
+# Sin Hunting's 524 is an Event (it outranks his default 338), so the interaction framework alternates it with his
+# script. The script's turns: Sin Hunting accepted (not completed): no 531, no 528; var 0: nothing from either quest, so
+# the framework plays its 524 after all; var 2 (GM): 532.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=RNG lvl=60
+quest Windurst.SinHunting accepted
+quest Windurst.TheFangedOne completed
+login
+trigger Perih_Vashai                    # the framework's turn: Sin Hunting's 524
+finish
+trigger Perih_Vashai                    # the script's turn: Sin Hunting accepted, RNG 60, available: no 531: 524
+finish
+trigger Perih_Vashai                    # the framework's turn: 524
+finish
+trigger Perih_Vashai                    # the script's turn: var 0: 524
+finish
+trigger Perih_Vashai                    # the framework's turn: 524
+finish
+charvar fireAndBrimstone 2
+trigger Perih_Vashai                    # the script's turn: var 2: 532
+finish

@@ -1,0 +1,25 @@
+# The Goblin Tailor (jeuno 42): the Maze of Shakhrami's and Ordelle's Caves' pattern operand alone (the week's location
+# and race, the Magical Pattern held): the quest's nil, the chest's own script. Accepted by a GM, the pattern from a GM.
+# Main, a Hume female (race 2), at the Maze of Shakhrami in week 1001 (`wait vana=180`); bob, an Elvaan male (race 3),
+# at Ordelle's Caves in week 1002 (`wait vana=192` more).
+lists GusgenMines/Treasure_Chest/onTrade MazeOfShakhrami/Treasure_Chest/onTrade OrdellesCaves/Treasure_Chest/onTrade
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 job=WAR lvl=75 race=2
+char bob zone=OrdellesCaves pos=-49.4,-1.07,7.2 job=WAR lvl=75 race=3
+quest Jeuno.TheGoblinTailor accepted
+keyitem MagicalPattern
+item ShakhramiChestKey
+bob: quest Jeuno.TheGoblinTailor accepted
+bob: keyitem MagicalPattern
+bob: item OrdelleChestKey
+login
+wait vana=180                           # week 1001 (race 2, location 2)
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest ShakhramiChestKey x1 # location 2, race 2, the pattern held: nil; the chest's own script
+tick 4500                               # the chest opened
+wait vana=192                           # week 1002 (race 3, location 0)
+bob: login
+tick 13000                              # the chest placed
+bob: trigger Treasure_Chest             # walks to the chest
+bob: trade Treasure_Chest OrdelleChestKey x1 # location 0, race 3, the pattern held: nil; the chest's own script
+tick 4500                               # the chest opened

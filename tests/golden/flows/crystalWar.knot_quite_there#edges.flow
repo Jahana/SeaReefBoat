@@ -1,0 +1,74 @@
+# Knot Quite There (crystalWar 27), the edges. Main: a level 99 Warrior in Windurst Waters [S] with a 108-Knot Quipu and
+# a Walnut, the WotG missions as the main flow (Back to the Beginning completed), The Tigress Strikes not completed. The
+# Acolyte Hostel door: the check fails: its script. Sauromugue Champaign [S] while available: the quipu to Bulwark Gate:
+# nil; a talk: its default DOOR_FIRMLY_SEALED. The Tigress Strikes completed (a GM): the door 151, finished with option
+# 1: begun (any option). Bob, The Tigress Strikes completed but Back to the Beginning current (not completed): the door:
+# its script. Main at Prog 0: Southern San d'Oria [S] from East Ronfaure [S]: no 62. Bulwark Gate: the quipu at Prog 0:
+# nil; Prog 1 (a GM): the Walnut: nil; Prog 2 (a GM): the quipu: nil. Southern San d'Oria [S] from Sauromugue [S] at
+# Prog 2: no 62; _6eo at Prog 2: nil: its default. East Ronfaure [S], then Southern San d'Oria [S]: 62, finished: Prog
+# 3. Bulwark Gate at Prog 3: nil: its default. _6eo with a full inventory: 63, finished: the beastcoin does not fit:
+# not completed (Prog 3 kept); again: 63; freed: 63: completed.
+lists WindurstWatersS/Door_Acolyte_Hostel_down/onTrigger WindurstWatersS/onEventFinish/151 SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/Bulwark_Gate/onTrade SouthernSanDoriaS/_6eo/onTrigger SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventFinish/62 SouthernSanDoriaS/onEventFinish/63
+char zone=WindurstWatersS pos=125.5,-3,222.215 job=WAR lvl=99
+item OneHundredEightKnotQuipu
+item Walnut
+mission Wotg BackToTheBeginning completed
+mission Wotg TheQueenOfTheDance current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+char bob zone=WindurstWatersS pos=125.5,-3,223.7 job=WAR lvl=99
+bob: quest CrystalWar.TheTigressStrikes completed
+bob: mission Wotg BackToTheBeginning current
+bob: mission Asa BurgeoningDread current
+bob: mission Acp ACrystallineProphecyFin current
+bob: mission Rov ARhapsodyForTheAges current
+bob: mission Soa Abomination current
+login
+trigger Door_Acolyte_Hostel_down        # The Tigress Strikes not completed: its script
+finish-if-event
+warp -445.674,-1.831,342.417 SauromugueChampaignS
+trade Bulwark_Gate OneHundredEightKnotQuipu x1 # available: nil
+finish-if-event
+trigger Bulwark_Gate                    # available: its default DOOR_FIRMLY_SEALED
+finish-if-event
+warp 125.5,-3,222.215 WindurstWatersS
+quest CrystalWar.TheTigressStrikes completed
+trigger Door_Acolyte_Hostel_down        # 151
+finish option=1                         # begun (any option)
+bob: login
+bob: trigger Door_Acolyte_Hostel_down   # Back to the Beginning not completed: its script
+bob: finish-if-event
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp -13.849,1.398,-30.368 SouthernSanDoriaS open # from East Ronfaure [S] at Prog 0: no 62
+finish-if-event
+warp -445.674,-1.831,342.417 SauromugueChampaignS
+trade Bulwark_Gate OneHundredEightKnotQuipu x1 # Prog 0: nil
+finish-if-event
+charvar Quest[7][27]Prog 1
+trade Bulwark_Gate Walnut x1            # Prog 1, not the quipu: nil
+finish-if-event
+charvar Quest[7][27]Prog 2
+trade Bulwark_Gate OneHundredEightKnotQuipu x1 # Prog 2: nil
+finish-if-event
+warp -13.849,1.398,-30.368 SouthernSanDoriaS open # from Sauromugue [S] at Prog 2: no 62
+finish-if-event
+warp 149.733,-2.5,23.788 SouthernSanDoriaS
+trigger _6eo                            # Prog 2: nil: its default GATE_IS_LOCKED
+finish-if-event
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp -13.849,1.398,-30.368 SouthernSanDoriaS open # from East Ronfaure [S] at Prog 2: 62
+finish                                  # Prog 3
+warp -445.674,-1.831,342.417 SauromugueChampaignS
+trigger Bulwark_Gate                    # Prog 3: nil: its default
+finish-if-event
+warp 149.733,-2.5,23.788 SouthernSanDoriaS
+fill-inventory
+trigger _6eo                            # Prog 3: 63
+finish                                  # no room: not completed
+trigger _6eo                            # 63 again
+finish                                  # still no room
+free-inventory
+trigger _6eo                            # 63
+finish                                  # completed (Platinum Beastcoin)

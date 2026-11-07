@@ -1,0 +1,31 @@
+# For the Birds (otherAreas 104): Beadeaux's onZoneOut (Prog >= 2: Option 0), bracketed on the Prog and the status.
+# Every matching onZoneOut runs on each zone-out (no cycling). Accepted (a GM), Option 3 (a GM) each time but at Prog 4
+# (Option 4, a GM): Prog 1: leaving Beadeaux keeps Option 3; Prog 2: Option 0; Prog 3 by a logout: Option 0; Prog 4:
+# Option 0. Completed (a GM) with Prog 4 and Option 3 (GMs): section 2 off: Option 3 kept. Leaving another zone (Castle
+# Oztroja) at Prog 3: Beadeaux's handler does not run: Option 3 kept. GeFhu at Prog 4 and Option 4 with no NM up: nil
+# (HUURR): not 124 (Prog 3 only), and neither spawn arm.
+lists Beadeaux/onZoneOut/1
+char zone=Beadeaux pos=-89.9,-3.25,-127.8 job=WAR lvl=75
+quest OtherAreas.ForTheBirds accepted
+charvar Quest[4][104]Prog 1
+charvar Quest[4][104]Option 3
+login
+warp -156.5,-17.2,193.5 CastleOztroja   # onZoneOut at Prog 1: Option 3 kept
+warp -89.9,-3.25,-127.8 Beadeaux
+charvar Quest[4][104]Prog 2             # a GM
+warp -156.5,-17.2,193.5 CastleOztroja   # onZoneOut at Prog 2: Option 0
+charvar Quest[4][104]Prog 3             # a GM
+charvar Quest[4][104]Option 3           # a GM
+warp -156.5,-17.2,193.5 CastleOztroja   # Castle Oztroja's zone-out: Beadeaux's handler does not run: Option 3 kept
+warp -89.9,-3.25,-127.8 Beadeaux
+logout                                  # onZoneOut at Prog 3 (a logout): Option 0
+login
+charvar Quest[4][104]Prog 4             # a GM
+charvar Quest[4][104]Option 4           # a GM
+trigger GeFhu_Yagudoeye                 # Prog 4, Option 4, none up: nil; HUURR (124 needs Prog 3)
+warp -156.5,-17.2,193.5 CastleOztroja   # onZoneOut at Prog 4: Option 0
+warp -89.9,-3.25,-127.8 Beadeaux
+quest OtherAreas.ForTheBirds completed  # a GM
+charvar Quest[4][104]Prog 4             # a GM
+charvar Quest[4][104]Option 3           # a GM
+warp -156.5,-17.2,193.5 CastleOztroja   # completed: section 2 off: Option 3 kept

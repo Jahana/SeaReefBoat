@@ -1,0 +1,24 @@
+# The Holy Crest (sandoria 93): the battlefield after the completion (the entry holds for a completed quest). Completed
+# by GM, no Dragon Curse Remedy: entered, a tick, Cyranuce M Cutauleon killed: 32001 (canSkipCS 1) with option 3: no
+# remedy: nothing. The won arena's cleanup (21 s of ticks) takes the char out. The remedy given by GM: entered again,
+# won by a GM's bfwin, option 2: the 32001 finish reads no status: the remedy taken, DRG unlocked, the wyvern named 3,
+# YOU_CAN_NOW_BECOME_A_DRAGOON, the completion again (Job Gesture: Dragoon held: npcUtil.giveKeyItem's message only;
+# fame 20; the title; the var cleared).
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=DRG lvl=30
+quest Sandoria.TheHolyCrest completed
+login
+trigger Hut_Door                          # completed: the entry menu 32000
+update 32000 option=17                    # The Holy Crest (index 1), area 1: registered, entered
+finish                                    # in the arena
+tick 2000                                 # Cyranuce M Cutauleon spawned (the arena's first tick)
+kill CYRANUCE_M_CUTAULEON                 # won: 32001 (canSkipCS 1)
+finish option=3                           # no remedy: nothing
+tick 11000                                # the won arena's cleanup: Cyranuce M Cutauleon despawned
+tick 10000                                # the char out of the battlefield (its effect gone)
+warp -163.5,-11.7,77.8 GhelsbaOutpost     # back by Hut_Door
+keyitem DragonCurseRemedy                 # GM
+trigger Hut_Door                          # 32000
+update 32000 option=17                    # registered, entered
+finish                                    # in the arena
+bfwin                                     # a GM's win (Cyranuce does not spawn again this soon): 32001
+finish option=2                           # see the header: completed again

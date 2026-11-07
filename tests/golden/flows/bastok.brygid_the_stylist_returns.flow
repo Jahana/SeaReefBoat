@@ -1,0 +1,48 @@
+# Brygid the Stylist Returns (bastok 74): Brygid in Bastok Markets, for a MNK 75 who has completed Brygid the Stylist.
+# Open (not accepted) while any artifact armor is worn: 380 with the Robe flag, two random requests the job can wear
+# (here a Wool Gambison and a Carapace Subligar) and the job; its finish deletes the quest and begins it again. While
+# accepted: 381 until both requests are worn, then 382, whose updates report the reward of the option looked at (held,
+# wearable) and whose finish keeps an option of 1-13; 385 once an option is kept; the option's zodiac subligar traded
+# for its reward (383). It opens again after completion while the armor is worn. Brygid's default is 119; Brygid the
+# Stylist is completed, so it plays nothing.
+# A trade while accepted before an option is kept is #early_trade's.
+lists BastokMarkets/Brygid/onTrigger BastokMarkets/Brygid/onTrade BastokMarkets/onEventUpdate/382 BastokMarkets/onEventFinish/380 BastokMarkets/onEventFinish/382 BastokMarkets/onEventFinish/383
+char zone=BastokMarkets pos=-90.2,-4.302,-107.5 job=MNK lvl=75
+quest Bastok.BrygidTheStylist completed
+item TempleCrown
+item Robe
+item WoolGambison
+item CarapaceSubligar
+item AriesSubligar
+item AriesSubligar
+item BoneChip
+login
+trade Brygid AriesSubligar x1   # available, no artifact armor: no trade handler, nothing
+trigger Brygid                  # no artifact armor: her default 119
+finish
+equip TempleCrown Head
+trigger Brygid                  # the Temple Crown worn: 380 (robe 0, the requests, MNK)
+finish                          # accepted (deleted, then begun)
+trigger Brygid                  # Option 0, the requests not worn: 381 (robe 0)
+finish
+equip Robe Body
+trigger Brygid                  # the Robe worn: 381 (robe 1)
+finish
+equip WoolGambison Body
+trigger Brygid                  # the requested body only: 381 (robe 0)
+finish
+equip CarapaceSubligar Legs
+trigger Brygid                  # both requests worn: 382
+update 382 option=1             # the Duende Cotehardie: not held, not wearable by a MNK: (0, 0, 1, 0)
+update 382 option=11            # the Aikido Gi: not held, wearable: (0, 10, 1, 1)
+finish option=0                 # option 0 is no option: Option stays 0
+trigger Brygid                  # 382 again
+finish option=1                 # Option 1: the Duende Cotehardie for an Aries Subligar
+trigger Brygid                  # Option 1: 385 (0, Duende Cotehardie, Aries Subligar)
+finish
+trade Brygid BoneChip x1        # the wrong item: nothing
+trade Brygid AriesSubligar x1   # 383
+finish                          # completed: the Duende Cotehardie, an Aries Subligar gone, fame +10, the title, vars cleared
+equip Robe Body
+trigger Brygid                  # completed, the Temple Crown still worn: 380 again (robe 1, new requests)
+finish                          # accepted again

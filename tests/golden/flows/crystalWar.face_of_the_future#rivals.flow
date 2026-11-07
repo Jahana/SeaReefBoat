@@ -1,0 +1,32 @@
+# Face of the Future (crystalWar 61) at the Batallia Downs Cavernous Maw beside the WotG mission Back to the Beginning
+# (current by a GM; Claws of the Griffon completed, a GM: its requirement; its maw reply the Progress 501). A level 99
+# Warrior in Batallia Downs [S] with Chasing Shadows completed and this quest accepted (GMs). The [S] maw unlocks the
+# PAST_MAW bit 0 (shared with the Batallia Downs maw) before the mission is current (the mission answers the [S] maw
+# too). Prog 6 by a GM: the maw's 504 (a Progress reply) ties 501: container order the first time, the rotation the
+# next. The first round's mission finish is made to complete nothing (a GM completes the mission with its event open),
+# then the mission and Prog are set back (GMs): the second tie in the zone plays the 504.
+lists BatalliaDowns/Cavernous_Maw/onTrigger BatalliaDowns/onEventFinish/504
+char zone=BatalliaDownsS pos=-48,0,435 job=WAR lvl=99
+quest CrystalWar.ChasingShadows completed
+quest CrystalWar.FaceOfTheFuture accepted
+quest CrystalWar.ClawsOfTheGriffon completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Cavernous_Maw                   # the PAST_MAW bit 0 not held: the [S] maw's 100
+finish option=1                         # the bit; setPos into Batallia Downs
+tick 400
+login                                   # the zone change: Batallia Downs
+warp -48,0.1,435 BatalliaDowns          # the same spot: for the flow checker's zone
+mission Wotg CavernousMaws completed    # a GM: the default current mission (it answers the maw 500)
+mission Wotg BackToTheBeginning current # a GM
+charvar Quest[7][61]Prog 6              # a GM
+trigger Cavernous_Maw                   # 504 and 501 tie: container order
+mission Wotg BackToTheBeginning completed # a GM, the event open: its finish completes nothing
+finish
+mission Wotg BackToTheBeginning current # a GM
+charvar Quest[7][61]Prog 6              # a GM
+trigger Cavernous_Maw                   # the second tie in the zone plays the other
+finish

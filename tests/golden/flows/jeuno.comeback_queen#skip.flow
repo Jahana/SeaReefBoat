@@ -1,0 +1,27 @@
+# Comeback Queen (jeuno 98): accepted by a GM at Prog 2 with Timer 0. 10151 (0) answered 2 (anything but 0; the main
+# flow answers 1) at Prog 2 jumps a step (Prog 3) and sets the char down in place (a zone-in with no event at Prog 3);
+# 10151 (1) answered 0 (Timer 8001, mustZone 244, Prog 3). Then the GM-set Prog 5 with nobody zoning: Laila (no arm, nil: The Road to Divadom's 10140), Olgald (nil:
+# his default 10122; HQuest Prog 0), Rhea (nil: The Road to Divadom's 10141); the zone-in at Prog 5 then plays 10209
+# (answered 0: Prog 6, set down in place).
+lists UpperJeuno/Laila/onTrigger UpperJeuno/Rhea_Myuliah/onTrigger UpperJeuno/Olgald/onTrigger UpperJeuno/onZoneIn/1 UpperJeuno/onEventFinish/10151 UpperJeuno/onEventFinish/10209
+char zone=UpperJeuno pos=-52.5,0,101 job=DNC lvl=75
+quest Jeuno.LakesideMinuet completed
+quest Jeuno.TheUnfinishedWaltz completed
+quest Jeuno.TheRoadToDivadom completed
+quest Jeuno.ComebackQueen accepted
+charvar Quest[3][98]Prog 2
+login
+trigger Laila                           # Prog 2, Timer 0: 10151 (0)
+finish option=2                         # not 0 (not only 1): Prog 3, setPos in place
+tick 400
+login                                   # zone-in at Prog 3: no event
+trigger Laila                           # Prog 3, Timer 0: 10151 (1)
+finish option=0                         # Timer 8001, mustZone 244, Prog 3
+charvar Quest[3][98]Prog 5              # a GM
+trigger Laila                           # Prog 5: nil; The Road to Divadom's 10140
+finish
+trigger Olgald                          # Prog 5: nil; his default 10122
+finish
+trigger Rhea_Myuliah                    # Prog 5: nil; The Road to Divadom's 10141
+finish
+rezone                                  # zone-in at Prog 5: 10209, answered 0: Prog 6, setPos

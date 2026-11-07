@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- XI.Zone: the map server's game side (char model + DB loader, growth tables, S2C builders, zone-in flow)
+         layered over XI.Map's packet framing / session layer. Builders are verified byte-for-byte against a
+         real-client capture of the C++ xi_map (tests/XI.Verify.ZoneIn/reference). -->
+    <AssemblyName>XI.Zone</AssemblyName>
+    <RootNamespace>XI.Zone</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XI.Map\XI.Map.csproj" />
+    <ProjectReference Include="..\XI.Common\XI.Common.csproj" />
+    <ProjectReference Include="..\XI.Persistence\XI.Persistence.csproj" />
+    <ProjectReference Include="..\XI.Script\XI.Script.csproj" />
+    <ProjectReference Include="..\XI.Quests\XI.Quests.csproj" />
+    <ProjectReference Include="..\XI.QuestContent\XI.QuestContent.csproj" />
+    <!-- conquest_data.h's influence types and CalculateBeastmenInfluence, shared with the world server -->
+    <ProjectReference Include="..\XI.World\XI.World.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- the suite that registers test-only quests (ZoneHost.TestQuestScripts) -->
+    <InternalsVisibleTo Include="XI.Verify.QuestScripts.Live" />
+    <InternalsVisibleTo Include="XI.Verify.QuestGolden.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Content1.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Content2.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Missions.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Missions3.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Abyssea.Live" />
+    <InternalsVisibleTo Include="XI.Verify.WeaponSkill.Live" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- navmesh/detour_navmesh.cpp's Detour: DotRecast's port of the same recastnavigation library -->
+    <PackageReference Include="DotRecast.Detour" Version="2026.3.1" />
+  </ItemGroup>
+
+</Project>

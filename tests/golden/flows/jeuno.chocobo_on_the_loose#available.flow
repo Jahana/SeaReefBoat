@@ -1,0 +1,27 @@
+# Chocobo on the Loose! (jeuno 92): the available check's operands. A level 19 Warrior (the others as main):
+# Brutus: no section. A level 20 Warrior with ENABLE_TOAU 0 (a GM setting): no section; 1.25 (the Lua's `== 1` is
+# false; a rounding read would make it 1): no section; ENABLE_TOAU 1: 10093, begun.
+# Brutus's other quests are kept silent: Chocobo's Wounds and Save My Son completed (a GM, before login: Chocobo's
+# Wounds' completed section wants Save My Son not completed), level 25 (Path of the Beastmaster wants 30); his script
+# then starts nothing (Chocobo's Wounds completed, Wings of Gold / Scattered into Shadow not); a talk with
+# no quest reply plays his default 66 (DefaultActions).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/onEventFinish/10093
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=19
+char other zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=20
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+other: quest Jeuno.ChocobosWounds completed
+other: quest Jeuno.SaveMySon completed
+login
+trigger Brutus                          # level 19: no section; the default 66
+finish
+setting ENABLE_TOAU 0                   # a GM
+other: login
+other: trigger Brutus                   # level 20, ENABLE_TOAU 0: no section; the default 66
+other: finish
+setting ENABLE_TOAU 1.25                # a GM
+other: trigger Brutus                   # ENABLE_TOAU 1.25 ~= 1: no section; the default 66
+other: finish
+setting ENABLE_TOAU 1                   # a GM
+other: trigger Brutus                   # 10093
+other: finish                           # begun

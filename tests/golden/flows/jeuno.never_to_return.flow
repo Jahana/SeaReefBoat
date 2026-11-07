@@ -1,0 +1,52 @@
+# Never to Return (jeuno 14): Kurou-Morou in Lower Jeuno. Your Crystal Ball completed, Jeuno fame level 5 ((217 + 217 +
+# 216) / 2 = 325): the hairpin while available (no trade handler: nil), his readings (204; each update answers
+# (VanadielUniqueDay() + the char's id) % 100; option 1: nothing; option 0 on a new Vana'diel day: Prog + 1, Day =
+# today; again the same day: nothing), three days of readings (Prog 3), the same day (204), the next day 202 (option
+# 1: nothing; option 0: begun), 203, a lens (nil), the Horn Hairpin (201: a full bag: not completed; with room:
+# completed, 1200 gil, Garnet Ring, the hairpin taken, fame +17 x3), then completed: 204 with its update, a lens
+# (no trade handler: nil).
+lists LowerJeuno/Kurou-Morou/onTrigger LowerJeuno/Kurou-Morou/onTrade LowerJeuno/onEventUpdate/204 LowerJeuno/onEventFinish/204 LowerJeuno/onEventFinish/202 LowerJeuno/onEventFinish/201
+char zone=LowerJeuno pos=-1,-6.7,-29 job=WAR lvl=30
+quest Jeuno.YourCrystalBall completed
+fame Sandoria 217
+fame Bastok 217
+fame Windurst 216
+item HornHairpin
+item AhrimanLens
+login
+walk -2.5,-6.7,-28
+trade Kurou-Morou HornHairpin x1            # available: no trade handler, nil
+trigger Kurou-Morou                         # available, Prog 0: 204
+update 204 option=0                         # (day + char id) % 100
+finish option=1                             # not 0: nothing
+trigger Kurou-Morou                         # 204
+update 204 option=0
+finish option=0                             # a new day: Prog 1, Day = today
+trigger Kurou-Morou                         # 204
+finish option=0                             # the same day: nothing
+wait vana=24
+trigger Kurou-Morou                         # 204
+finish option=0                             # Prog 2
+wait vana=24
+trigger Kurou-Morou                         # 204
+finish option=0                             # Prog 3, Day = today
+trigger Kurou-Morou                         # Prog 3, read today: 204
+finish option=1
+wait vana=24
+trigger Kurou-Morou                         # Prog 3, a new day, fame level 5: 202
+finish option=1                             # not 0: nothing
+trigger Kurou-Morou                         # 202
+finish option=0                             # begun
+trigger Kurou-Morou                         # accepted: 203
+finish
+trade Kurou-Morou AhrimanLens x1            # not the hairpin: nil
+trade Kurou-Morou HornHairpin x1            # 201
+fill-inventory
+finish                                      # no room for the ring: not completed, the hairpin kept
+free-inventory
+trade Kurou-Morou HornHairpin x1            # 201 again
+finish                                      # completed: 1200 gil, Garnet Ring, the hairpin taken, fame +17 x3
+trigger Kurou-Morou                         # completed: 204
+update 204 option=0                         # (day + char id) % 100
+finish option=0                             # no finish handler when completed: nothing
+trade Kurou-Morou AhrimanLens x1            # completed: no trade handler, nil

@@ -1,0 +1,25 @@
+# The Goblin Tailor (jeuno 42): the chests' operands in week 1000 (location 1, race 1). Accepted by a GM, a Hume male.
+# The Maze of Shakhrami's chest (location 2) and Ordelle's Caves' (location 0): the quest's nil, the chest's own script
+# (its key opens it to its own loot). Gusgen Mines' with the pattern already held (a GM): nil, the chest's own script.
+lists LowerJeuno/Guttrix/onTrigger LowerJeuno/onEventFinish/10016 LowerJeuno/onEventFinish/10018 GusgenMines/Treasure_Chest/onTrade MazeOfShakhrami/Treasure_Chest/onTrade OrdellesCaves/Treasure_Chest/onTrade
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 job=WAR lvl=75
+quest Jeuno.TheGoblinTailor accepted
+item ShakhramiChestKey
+item OrdelleChestKey
+item GusgenChestKey
+login
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest ShakhramiChestKey x1 # location 2 is not this week's 1: nil; the chest's own script
+tick 4500                               # the chest opened
+warp -49.4,-1.07,7.2 OrdellesCaves
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest OrdelleChestKey x1 # location 0: nil; the chest's own script
+tick 4500                               # the chest opened
+keyitem MagicalPattern                  # a GM
+warp 208.7,-59.2,-101 GusgenMines
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest GusgenChestKey x1  # this week's location and race, the pattern held: nil; the chest's own script
+tick 4500                               # the chest opened

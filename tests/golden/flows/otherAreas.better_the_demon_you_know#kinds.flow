@@ -1,0 +1,59 @@
+# Better the Demon You Know (otherAreas 105): Koblakiq's reply kinds. Oldton Movalpolos' Koblakiq has no script (no
+# fallback turn) and the default event 13; Missionary Moblin, For the Birds and Better share him, and the container
+# order of their ties is Better_The_Demon_You_Know < For_The_Birds < Missionary_Moblin (a tie plays Better's first, then
+# cycles). So each of Better's replies is shown against Missionary's 7 (Progress, Missionary available) and 8 / 12
+# (Event, Missionary accepted / completed with its mustZone): a Progress ties with 7 and plays first (an Event there
+# would lose to 7); an Event at priority 101 loses to 7 and beats 8 / 12 on every talk (at 100 it would tie with them
+# and cycle: the second talk would play theirs; at Progress it would beat 7); 27 (replaceDefault, 20) loses to 8.
+# For the Birds completed (no mustZone), Better available. Talk 1: 20 and 7: 20, finished: begun. Prog 0: 21 loses to
+# 7. Missionary accepted (a GM): 21, twice. The Soiled Letter and a Demon Pen traded: 22 and 9 (Progress): a tie: 22,
+# finished: the pen and the letter taken (each handler's tradeHas confirmed its item), Prog 1, Wait now + 60. The two
+# again (GMs): the cycle: 9, finished: Missionary completed, its mustZone set. Prog 1, the wait not over: 23 beats 12,
+# twice. Missionary available (a GM): 7 beats 23. The wait over (Wait now, a GM): 24 and 7: 24, finished: Prog 2. 7
+# beats 25. Missionary accepted (a GM): 25 beats 8, twice. Prog 3 (a GM), Missionary available (a GM): 26 and 7: 26,
+# finished: completed. Missionary accepted (a GM): 27 loses to 8.
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/Koblakiq/onTrade OldtonMovalpolos/onEventFinish/7 OldtonMovalpolos/onEventFinish/9 OldtonMovalpolos/onEventFinish/20 OldtonMovalpolos/onEventFinish/22 OldtonMovalpolos/onEventFinish/24 OldtonMovalpolos/onEventFinish/26
+char zone=OldtonMovalpolos pos=-63.4,22.8,-117.5 job=WAR lvl=75
+quest OtherAreas.ForTheBirds completed
+item SoiledLetter
+item DemonPen
+login
+trigger Koblakiq                        # Better available: 20 and Missionary's 7 (both Progress): a tie: 20
+finish                                  # Better begun
+trigger Koblakiq                        # Prog 0: 21 (101) loses to 7 (Progress): 7
+finish option=0                         # nothing
+quest OtherAreas.MissionaryMoblin accepted # a GM
+trigger Koblakiq                        # 21 (101) beats 8 (Event): 21
+finish
+trigger Koblakiq                        # 21 again (no tie, no cycle)
+finish
+trade Koblakiq SoiledLetter x1 DemonPen x1 # 22 and 9 (both Progress): a tie: 22
+finish                                  # the pen and the letter taken; Prog 1; Wait now + 60
+item SoiledLetter                       # a GM
+item DemonPen                           # a GM
+trade Koblakiq SoiledLetter x1 DemonPen x1 # the tie's cycle: 9
+finish                                  # Missionary completed (4000 gil); the letter and the pen taken; its mustZone 11
+trigger Koblakiq                        # Prog 1, the wait not over: 23 (101) beats Missionary's 12 (Event): 23
+finish
+trigger Koblakiq                        # 23 again
+finish
+quest OtherAreas.MissionaryMoblin available # a GM
+trigger Koblakiq                        # 23 (101) loses to 7: 7
+finish option=0                         # nothing
+charvar Quest[4][105]Wait 1800000000    # a GM: now
+trigger Koblakiq                        # the wait over: 24 and 7 (both Progress): a tie: 24
+finish                                  # Prog 2
+trigger Koblakiq                        # Prog 2: 25 (101) loses to 7: 7
+finish option=0                         # nothing
+quest OtherAreas.MissionaryMoblin accepted # a GM
+trigger Koblakiq                        # 25 (101) beats 8: 25
+finish
+trigger Koblakiq                        # 25 again
+finish
+charvar Quest[4][105]Prog 3             # a GM
+quest OtherAreas.MissionaryMoblin available # a GM
+trigger Koblakiq                        # Prog 3: 26 and 7 (both Progress): a tie: 26
+finish                                  # Better completed (Goblin Grenade, Apostate for Hire)
+quest OtherAreas.MissionaryMoblin accepted # a GM
+trigger Koblakiq                        # completed: 27 (replaceDefault) loses to 8 (Event): 8
+finish

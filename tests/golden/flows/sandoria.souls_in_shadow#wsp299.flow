@@ -1,0 +1,13 @@
+# Souls in Shadow (sandoria 99): the weapon skill point threshold's low side. Accepted by GM with the guide and the
+# Scythe of Trials at 299 weapon skill points (one under 300): Novalmauge's 3 with 1; the scythe traded alone: 2 (the
+# unfinished weapon, no finish handler: the scythe kept). The main flow takes 300 (1).
+lists BostaunieuxOubliette/Novalmauge/onTrigger BostaunieuxOubliette/Novalmauge/onTrade
+char zone=BostaunieuxOubliette pos=32.4,-24,19.8 job=DRK lvl=75
+quest Sandoria.SoulsInShadow accepted
+keyitem WeaponTrainingGuide
+item ScytheOfTrials wsp=299
+login
+trigger Novalmauge                        # accepted, no Annals, no map, the scythe held: 3 with 1
+finish
+trade Novalmauge ScytheOfTrials x1        # 299 weapon skill points (< 300): 2
+finish                                    # 2 has no finish handler: the scythe kept

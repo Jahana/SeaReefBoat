@@ -1,0 +1,18 @@
+# Mom, the Adventurer? (bastok 21): the letter's other sides. Completed by GM with the mustZone clear and the letter by
+# GM (never seen): Nbu's 233 (200 gil, completed again, the mustZone set). Then accepted again by GM (delQuest, then
+# addQuest: addQuest alone leaves the completed bit, and the completed status wins) with a new letter that is then
+# seen: Nbu's 234 (100 gil, completed). A letter given again after a seen one stays seen (the seen bit outlives
+# delKeyItem), so the unseen side comes first.
+lists BastokMarkets/Nbu_Latteh/onTrigger BastokMarkets/onEventFinish/233 BastokMarkets/onEventFinish/234
+char zone=BastokMarkets pos=-114.8,-4,-112.3 lvl=10
+quest Bastok.MomTheAdventurer completed
+keyitem LetterFromRohLatteh
+login
+trigger Nbu_Latteh             # completed, mustZone clear, the letter not seen: 233
+finish                         # completed again: fame +10, the letter deleted, 200 gil, the mustZone set
+quest Bastok.MomTheAdventurer available
+quest Bastok.MomTheAdventurer accepted
+keyitem LetterFromRohLatteh
+seekeyitem LetterFromRohLatteh
+trigger Nbu_Latteh             # accepted, the letter seen: 234
+finish                         # completed, 100 gil

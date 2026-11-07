@@ -1,0 +1,66 @@
+# Gifts of the Griffon (crystalWar 15) at Rholont beside In a Haze of Glory (a Lua quest, available once Perils of the
+# Griffon is completed: a GM; its Rholont reply is the Event 637 in every state): a level 99 Warrior in Southern San
+# d'Oria [S] with Steamed Rams completed (missions as the main flow). An Event reply ties 637 and the two rotate by the
+# last event id (first talk: Gifts', in container order; the same state again: 637); a Progress reply beats it every
+# time. Available, Prog 1 (a GM): 637. Accepted by a GM (no begin: no plumes held), 6 traded (Option 63), the Timer 0:
+# 34, finished: the Timer the next tally; the Timer 0 again (a GM): 34 again. Before the Timer: 46, then 637. A full
+# inventory and a past Timer: 35, finished: the Timer 0, no plumes fit; the Timer past again: 35 again. The inventory
+# freed, Option 64 and the Timer equal to now (1,800,000,000: not before it): 35 gives 6 plumes (7 less the bits
+# traded). A plume held: 33, then 637. Option 127 (all traded) and a full inventory: 24, finished: no room, not
+# completed; 24 again; freed: 24, completed. Set back to available at Prog 2 (GMs): 23, finished: begun; again: 23.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/23 SouthernSanDoriaS/onEventFinish/24 SouthernSanDoriaS/onEventFinish/34 SouthernSanDoriaS/onEventFinish/35
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.SteamedRams completed  # hasCompletedFirstQuest (Steamed Rams' arm)
+quest CrystalWar.PerilsOfTheGriffon completed # In a Haze of Glory available: Rholont 637 (an Event)
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+charvar Quest[7][15]Prog 1              # a GM (available): Rholont answers only at Prog 2
+trigger Rholont                         # Prog 1: no Gifts reply: 637
+finish-if-event
+quest CrystalWar.GiftsOfTheGriffon accepted # a GM: no begin, no plumes
+charvar Quest[7][15]Option 63           # a GM: 6 traded
+trigger Rholont                         # no plume, the Timer 0: 34
+finish                                  # the Timer: the next tally
+charvar Quest[7][15]Timer 0             # a GM
+trigger Rholont                         # 34 again
+finish
+trigger Rholont                         # before the Timer: 46 (an Event), first in order
+finish-if-event
+trigger Rholont                         # the same state again: 637
+finish-if-event
+fill-inventory
+charvar Quest[7][15]Timer 1             # a GM: a time past
+trigger Rholont                         # 35
+finish                                  # the Timer 0; the plumes do not fit
+charvar Quest[7][15]Timer 1             # a GM
+trigger Rholont                         # 35 again
+finish
+free-inventory
+charvar Quest[7][15]Option 64           # a GM: only bit 6 traded
+charvar Quest[7][15]Timer 1800000000    # a GM: now (not before it)
+trigger Rholont                         # 35
+finish                                  # the Timer 0; 7 less 1 traded: 6 plumes
+trigger Rholont                         # a plume held, 1 traded: 33 (an Event)
+finish-if-event
+trigger Rholont                         # the same state again: 637
+finish-if-event
+charvar Quest[7][15]Option 127          # a GM: all seven traded
+fill-inventory
+trigger Rholont                         # 7 traded: 24
+finish                                  # no room for the Deathstone: not completed
+trigger Rholont                         # 24 again
+finish
+free-inventory
+trigger Rholont                         # 24
+finish                                  # completed; Claws of the Griffon's Timer
+quest CrystalWar.GiftsOfTheGriffon available # a GM
+charvar Quest[7][15]Prog 2              # a GM
+trigger Rholont                         # available, Prog 2: 23
+finish                                  # begun; 7 plumes
+quest CrystalWar.GiftsOfTheGriffon available # a GM
+charvar Quest[7][15]Prog 2              # a GM
+trigger Rholont                         # 23 again
+finish

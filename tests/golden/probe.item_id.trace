@@ -1,0 +1,100 @@
+# golden trace: probe.item_id
+seed 7
+flow b7b32c0a3dc3295f831ca5750d430da01b44fb744c69f6868b4b689be00861e7
+recorder lua
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @92fad11b94f1aec3 (176)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @b2acfbeccb6df32a (4)
+char_jobs @66c57b98f0122169 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @bcbc236d2b548e3e (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @0b9414455bd195c9 (4)
+char_stats @624f10c4cab4ab95 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+char_vars @c42f14809668c9ed (1)
+chars @c73408c303952813 (41)
+ret onZoneIn=number:30035,onEventFinish=nil:nil
+order 230/Kipopo/onTrade=
+order 230/Kipopo/onTrigger=
+step trigger Kipopo
+packets
+  00E @536974671ee67ac3
+  00E @1eca0dbdfd9b817c
+  00E @01bf5792e969f58e
+  00E @c597556c3c3d7380
+  00E @6cea8059aed88747
+  00E @8c03e3bab5b1335d
+  00E @997f20aadee6f004
+  00E @773f9dc0d41cb810
+  00E @403d2f70ad824ede
+  00E @3707e921942f601f
+  00E @ea92c6f45b50ae55
+  00E @39de72b8ff69aa06
+  00E @2c6bb52faa041c43
+  00E @2b978f48a3248eaa
+  00E @f04910a279313327
+  00E @a7ceadb9fbf12bd6
+  00E @7ed685dabff4d968
+  00E @924a66af1a49f568
+  00E @7fbf6cd3a1996730
+  00E @ad8110309c1ada81
+  00E @0d141d0f4cd870b4
+  00E @00f3c6a782b89fe6
+  00E @c10a579f16c5f83d
+  00E @a04b3d8d7369208c
+  032 @d4f21c017600298b
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=nil:nil
+step finish
+packets
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step item 2012 x1
+packets
+  020 @53262c694d272083
+  01D @f8579df92de4b1ca
+char_inventory + location=0|slot=4|itemId=2012|quantity=1|bazaar=0|signature=|extra=000000000000000000000000000000000000000000000000
+step trade Kipopo SquareOfSheepLeather x1 816 x1
+packets
+ret onTrade=boolean:false
+step finish-if-event
+packets
+step trade Kipopo 2012 x1 850 x1 SpoolOfSilkThread x1
+packets
+  032 @b26517cf5156041c
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrade=nil:nil
+step finish
+packets
+  055 @89e3d7cdcd90026e
+  020 @a6804f916f69b514
+  020 @c2098199f51d601f
+  020 @00cdf038176ca121
+  01D @f8579df92de4b1ca
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory - location=0|slot=1|itemId=2012|quantity=1|bazaar=0|signature=|extra=null
+char_inventory - location=0|slot=2|itemId=850|quantity=1|bazaar=0|signature=|extra=null
+char_inventory - location=0|slot=3|itemId=816|quantity=1|bazaar=0|signature=|extra=null
+char_vars - varname=sayItWithAHandbagCS|value=2|expiry=0
+char_vars + varname=[generic]mustZone|value=230|expiry=0
+char_vars + varname=sayItWithAHandbagCS|value=3|expiry=0
+chars keyitems +259:00
+ret onEventFinish=nil:nil

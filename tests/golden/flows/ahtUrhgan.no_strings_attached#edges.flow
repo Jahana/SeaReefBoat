@@ -1,0 +1,41 @@
+# No Strings Attached's edges. A level 20 Warrior (under ADVANCED_JOB_LEVEL): Shamarhaan: no section: his default 433;
+# Iruki-Waraki: no section: his default 259. The quest accepted at
+# Prog 2 without the automaton (GMs): Ghatsad: nil: 256; Bastok Markets: Shamarhaan 435; Prog 4 (a GM): Iruki-Waraki
+# 266, finished with a full bag: the Animator does not fit: no completion (Prog 4 kept). Completed (a GM: no Animator):
+# Iruki-Waraki: the name message YOU_LOST_YOUR_ANIMATOR ([0] the Animator; a Message: the next talk goes to his script:
+# 267); a trade of 5000 gil: nil; 10000 gil: the gil taken, the Animator, YOU_BETTER_NOT_LOSE_IT_AGAIN; then 267;
+# 10000 gil again with the Animator held: nil.
+lists BastokMarkets/Shamarhaan/onTrigger AhtUrhganWhitegate/Iruki-Waraki/onTrigger AhtUrhganWhitegate/Iruki-Waraki/onTrade AhtUrhganWhitegate/Ghatsad/onTrigger AhtUrhganWhitegate/onEventFinish/266
+char zone=BastokMarkets pos=-285.382,-12.021,-84.743 job=WAR lvl=20 gil=40000
+login
+trigger Shamarhaan                      # level 20: no section: 433
+finish
+warp 101.329,-6,-29.042 AhtUrhganWhitegate
+trigger Iruki-Waraki                    # level 20: no section: his default 259
+finish-if-event
+quest AhtUrhgan.NoStringsAttached accepted   # GMs
+charvar Quest[6][7]Prog 2
+trigger Ghatsad                         # Prog 2, no automaton: nil: 256
+finish
+warp -285.382,-12.021,-84.743 BastokMarkets
+trigger Shamarhaan                      # accepted: 435
+finish
+warp 101.329,-6,-29.042 AhtUrhganWhitegate
+charvar Quest[6][7]Prog 4               # a GM
+fill-inventory
+trigger Iruki-Waraki                    # Prog 4: 266
+finish option=2                         # full: complete false: nothing more
+free-inventory
+quest AhtUrhgan.NoStringsAttached completed  # a GM: no Animator
+trigger Iruki-Waraki                    # no Animator: YOU_LOST_YOUR_ANIMATOR
+finish-if-event
+trigger Iruki-Waraki                    # the alternation: his script: 267
+finish-if-event
+trade Iruki-Waraki gil=5000             # under 10000: nil (his script: nothing)
+finish-if-event
+trade Iruki-Waraki gil=10000            # the gil taken; the Animator; YOU_BETTER_NOT_LOSE_IT_AGAIN
+finish-if-event
+trigger Iruki-Waraki                    # the Animator held: 267
+finish-if-event
+trade Iruki-Waraki gil=10000            # the Animator held: nil
+finish-if-event

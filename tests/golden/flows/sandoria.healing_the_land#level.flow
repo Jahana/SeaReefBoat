@@ -1,0 +1,34 @@
+# Healing the Land (sandoria 82), 681's edges, a char for each side (each talks to Eperdur after its own login, so the
+# lookup's 678 comes first): main, main level 9 at fame level 4: neither quest answers (678); bob, main level 11 at fame
+# level 4: 681; cid, main level 10 at fame level 5: 681; dan, main level 10 at fame level 7: 681, and while it is open
+# the quest completed by GM: option 0 adds the quest (the log's current bit; the status stays completed) and gives the
+# seal.
+char zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=9
+char bob zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=11
+char cid zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=10
+char dan zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=10
+fame Sandoria 225
+bob: fame Sandoria 225
+cid: fame Sandoria 325
+dan: fame Sandoria 488
+login
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # main level 9: nothing; 678
+finish-if-event
+bob: login
+bob: trigger Eperdur                      # 678
+bob: finish-if-event
+bob: trigger Eperdur                      # main level 11: 681
+bob: finish-if-event option=1             # declined
+cid: login
+cid: trigger Eperdur                      # 678
+cid: finish-if-event
+cid: trigger Eperdur                      # fame level 5: 681
+cid: finish-if-event option=1             # declined
+dan: login
+dan: trigger Eperdur                      # 678
+dan: finish-if-event
+dan: trigger Eperdur                      # fame level 7: 681
+dan: quest Sandoria.HealingTheLand completed
+dan: finish-if-event option=0             # finished while completed: addQuest (the current bit), the seal

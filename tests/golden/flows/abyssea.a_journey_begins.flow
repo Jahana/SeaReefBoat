@@ -1,0 +1,14 @@
+# A Journey Begins (abyssea 160): a level 99 Warrior in Port Jeuno with the quest accepted (a GM; at a login the game
+# adds it anyway, #login_add). The login's zone-in at Prog 0: 324, finished: Prog 1. Out and back in at Prog 1: no
+# zone-in reply. Joachim at Prog 1: 325, finished: completed (Traverser Stone 1, the traverser epoch set), The Truth
+# Beckons accepted. Joachim again: The Truth Beckons' 326 (accepted, Prog 0).
+lists PortJeuno/Joachim/onTrigger PortJeuno/onZoneIn/1 PortJeuno/onEventFinish/324 PortJeuno/onEventFinish/325 PortJeuno/onEventFinish/326
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins accepted
+login open                              # accepted, Prog 0, level 99: 324 (a number from onZoneIn), left open
+finish                                  # Prog 1
+rezone                                  # Prog 1: no zone-in reply
+trigger Joachim                         # Prog 1: 325
+finish                                  # completed: Traverser Stone 1; setTraverserEpoch; The Truth Beckons accepted
+trigger Joachim                         # The Truth Beckons (Prog 0): 326
+finish

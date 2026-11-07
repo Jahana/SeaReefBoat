@@ -1,0 +1,19 @@
+# BORGHERTZS_LURKING_HANDS (jeuno 56): the two optional coffers' sections (status not available, main job NIN, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 NIN: SeaSerpentGrotto's Treasure Coffer opens to
+# NinjaKyahan (the item bypass; the result is the item): [AF]ZilartCoffer +33554432 (bit 25); TheBoyahdaTree's to
+# NinjaHatsuburi: +67108864 (bit 26).
+lists SeaSerpentGrotto/Treasure_Coffer/onTrade TheBoyahdaTree/Treasure_Coffer/onTrade
+char zone=SeaSerpentGrotto pos=189.673,18.999,30.161 job=NIN lvl=75
+quest Jeuno.BorghertzsLurkingHands accepted
+item GrottoCofferKey
+item BoyahdaCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer GrottoCofferKey x1 # bit 25 unset: NinjaKyahan; [AF]ZilartCoffer 33554432
+tick 4500                               # the coffer opened
+warp -11,-19,-177 TheBoyahdaTree
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer BoyahdaCofferKey x1 # bit 26 unset: NinjaHatsuburi; [AF]ZilartCoffer 100663296
+tick 4500                               # the coffer opened

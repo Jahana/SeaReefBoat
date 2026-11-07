@@ -1,0 +1,33 @@
+# Old Wounds (sandoria 102): the offer's other sides. A WAR 75 (can equip the Sapara of Trials), no guide: sword skill
+# raw 2399 (/ 10 is below 240: not offered, her script's 530), then 2400: 43 once per zone, an Event; option 0
+# (nothing); the next talk is her script's turn (530); the one after falls to her script too (43 spent in this zone);
+# after a rezone 43 again, option 1 with a full inventory (no sapara held, giveItem fails: nothing, not begun); after
+# another rezone option 1 with room (the sapara and the guide, begun); then (after the script's turn) 46 with 1 and the
+# sapara at 0 weapon skill points (45, which has no finish handler: the sapara kept).
+lists ChateauDoraguille/Curilla/onTrigger ChateauDoraguille/Curilla/onTrade ChateauDoraguille/onEventFinish/43
+char zone=ChateauDoraguille pos=29.2,0,1.1 job=WAR lvl=75
+skill Sword 2399
+login
+trigger Curilla                           # sword 2399 (/ 10 is 239.9): not offered; her script's 530
+finish
+skill Sword 2400
+trigger Curilla                           # all three met: 43 (oncePerZone)
+finish                                    # option 0: nothing
+trigger Curilla                           # the script's turn: 530
+finish
+trigger Curilla                           # 43 already played in this zone: her script's 530
+finish
+rezone
+trigger Curilla                           # after the rezone: 43 again
+fill-inventory
+finish option=1                           # option 1, no sapara, the inventory full: giveItem false, not begun
+free-inventory
+rezone
+trigger Curilla                           # 43
+finish option=1                           # option 1: the Sapara of Trials and the Weapon Training Guide, begun
+trigger Curilla                           # the script's turn: 530
+finish
+trigger Curilla                           # accepted, the sapara held: 46 with 1
+finish
+trade Curilla SaparaOfTrials x1           # 0 weapon skill points: 45
+finish                                    # 45 has no finish handler: the sapara kept

@@ -1,0 +1,21 @@
+# Water Way to Go (windurst 16): a full bag. 352 accepted with no room: giveItem fails, the quest is not begun. With
+# room it begins. At the spring with no room: 55's giveItem fails, the empty canteen is kept; with room, filled.
+lists WindurstWaters/Ohbiru-Dohbiru/onTrigger Giddeus/Giddeus_Spring/onTrade WindurstWaters/onEventFinish/352 Giddeus/onEventFinish/55
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+fame Windurst 125
+login
+fill-inventory
+trigger Ohbiru-Dohbiru                      # 352
+finish option=0                             # no room for the canteen: not begun
+free-inventory
+trigger Ohbiru-Dohbiru                      # 352
+finish option=0                             # the canteen; begun
+warp 228.4,0.2,-299.3 Giddeus
+fill-inventory
+trade Giddeus_Spring RhinosteryCanteen x1   # 55
+finish                                      # no room for the water: nothing, the canteen kept
+free-inventory
+trade Giddeus_Spring RhinosteryCanteen x1   # 55
+finish                                      # the water; the canteen taken

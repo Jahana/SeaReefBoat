@@ -1,0 +1,70 @@
+# Chocobilious (windurst 27): Kuoh Rhel (Windurst Woods; default 222, which takes turns with his script: each script
+# talk follows a 222, the first talk after a zone-in the default), Matata (default 223, his script's standard 223 too)
+# and Tapoh Lihzeh (no default; his script calls this quest, then Paying Lip Service, else 437). In a Stew (group 10, a
+# container) answers Kuoh Rhel with a Progress event once this quest is completed at fame level 2: the flow drops the
+# fame to 0 (a GM) after the completion so his script answers. A warp is a zone change (the turns start again).
+# Available, fame level 1: nothing; level 2: 224, option 0: nothing; option 1: begun. Accepted: 225; Matata 223; the
+# grass to Tapoh at var 0: nothing; Tapoh 227 (var 1), 228, the grass: 229 (var 2; the grass kept), 230. Kuoh Rhel 231:
+# fame 20, 1500 gil, var cleared, completed, needToZone. Fame 0 (GM): 232; Matata 226; rezoned: nothing.
+char zone=WindurstWoods pos=129.5,-5.0,-104.0 job=WAR lvl=75
+fame Windurst 49
+item PapakaGrass x2
+item BeehiveChip x3
+login
+trigger Kuoh_Rhel                       # his default 222
+finish
+trigger Kuoh_Rhel                       # his script: available, fame level 1: nothing
+finish-if-event
+fame Windurst 50
+trigger Kuoh_Rhel                       # 222
+finish
+trigger Kuoh_Rhel                       # level 2: 224
+finish option=0                         # not 1: nothing
+trigger Kuoh_Rhel                       # 222
+finish
+trigger Kuoh_Rhel                       # 224
+finish option=1                         # begun
+trigger Matata                          # his default 223 (not completed)
+finish
+trigger Kuoh_Rhel                       # 222
+finish
+trigger Kuoh_Rhel                       # accepted: 225
+finish
+trigger Matata                          # his script's turn: not completed: his standard 223
+finish
+trigger Matata                          # his default 223
+finish
+warp 49.5,-3.75,54.4 WindurstWoods      # beside Tapoh Lihzeh
+trade Tapoh_Lihzeh PapakaGrass x1       # accepted, var 0: no arm (Paying Lip Service available: none): nothing
+trigger Tapoh_Lihzeh                    # accepted, var 0: 227 (0, 938)
+finish                                  # var 1
+trigger Tapoh_Lihzeh                    # var 1: 228 (0, 938)
+finish
+trade Tapoh_Lihzeh BeehiveChip x3       # var 1, not the grass: Paying Lip Service available: nothing
+trade Tapoh_Lihzeh PapakaGrass x1       # var 1, the grass: 229 (0, 938)
+finish                                  # var 2 (no confirmTrade: the grass kept)
+trigger Tapoh_Lihzeh                    # var 2: 230
+finish
+trade Tapoh_Lihzeh PapakaGrass x1       # var 2, the grass: not var 1: nothing
+warp 129.5,-5.0,-104.0 WindurstWoods
+trigger Kuoh_Rhel                       # 222
+finish
+trigger Kuoh_Rhel                       # accepted, var 2: 231
+finish                                  # fame 20; 1500 gil (GIL_OBTAINED); var cleared; completed; needToZone
+fame Windurst 0                         # In a Stew's offer needs fame level 2: his script answers
+trigger Kuoh_Rhel                       # 222
+finish
+trigger Kuoh_Rhel                       # completed, needToZone: 232
+finish
+trigger Matata                          # his default 223
+finish
+trigger Matata                          # his script: completed: 226
+finish
+rezone                                  # needToZone cleared
+trigger Kuoh_Rhel                       # 222
+finish
+trigger Kuoh_Rhel                       # completed, no needToZone: nothing
+warp 49.5,-3.75,54.4 WindurstWoods      # beside Tapoh Lihzeh
+trade Tapoh_Lihzeh PapakaGrass x1       # completed: no arm: nothing
+trigger Tapoh_Lihzeh                    # completed: Paying Lip Service available: 477
+finish option=0

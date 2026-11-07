@@ -1,0 +1,75 @@
+# The Basics (otherAreas 6): its reply kinds against Event-priority competitors set by a GM, both before RQ7 in container
+# order: Rycharde the Chef accepted (Rycharde 72, Take 68) and Expertise accepted at Prog 1 (Take 63, Valgeir 104). On a
+# tie the lookup's action cycle plays the actions in container order, one per talk, from where it last stopped (a zone
+# change clears it). Available: Rycharde's 94 (Progress: an Event 94 would tie and the cycle would play 72 first); not
+# due: nil, 72 alone; Take's 66 (Event): 68, 63, 66; Valgeir's 144 (Event): 104, then 144. Accepted: Rycharde's 95
+# (Event): 72, then 95; Valgeir's 106 (Progress: an Event 106 would play 104 first); Prog 1: 145 (Event): 104, then 145.
+# Completed: Rycharde's 97 (Event): 72, then 97 (finished: the var cleared); then 98 (replaceDefault) loses to 72 every
+# time; Take's 67 (replaceDefault) loses to 68 and 63 (68, 63, 68); Valgeir's 107 (Event): 104, then 107; then 146
+# (replaceDefault) loses to 104. The trade reply (96 Progress) has no competitor.
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Selbina/Valgeir/onTrigger Mhaura/onEventFinish/94 Selbina/onEventFinish/106 Mhaura/onEventFinish/97 Selbina/onEventFinish/107
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.TheClue completed
+quest OtherAreas.RychardeTheChef accepted
+quest OtherAreas.Expertise accepted
+charvar Quest[4][4]Prog 1
+charvar Quest[4][5]DayCompleted 7992
+fame Windurst 325
+login
+trigger Rycharde                        # 94 (Progress beats 72)
+finish option=0
+charvar Quest[4][5]DayCompleted 7993    # a GM: not due
+trigger Rycharde                        # The Basics' nil: 72 alone
+finish
+trigger Take                            # 68 (a three-way tie with 63 and 66: the first container's)
+finish
+trigger Take                            # 63
+finish
+trigger Take                            # 66
+finish
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # available: 104 (a tie with 144: the first container's)
+finish
+trigger Valgeir                         # 144
+finish
+warp 19,-16,88.8 Mhaura
+charvar Quest[4][5]DayCompleted 7992
+trigger Rycharde                        # 94
+finish option=85                        # the couscous, begun
+trigger Rycharde                        # accepted: 72 (a tie with 95)
+finish
+trigger Rycharde                        # 95
+finish
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # Prog 0: 106 (Progress beats 104)
+finish                                  # the popoto, the couscous taken, Prog 1
+trigger Valgeir                         # Prog 1: 104 (a tie with 145)
+finish
+trigger Valgeir                         # 145
+finish
+quest OtherAreas.TheBasics completed    # a GM
+charvar Quest[4][6]CommentaryValgeir 1  # a GM
+charvar Quest[4][6]CommentaryRycharde 1 # a GM
+trigger Valgeir                         # completed: 104 (a tie with 107; the cycle's last 145 is gone: it starts over)
+finish
+trigger Valgeir                         # 107
+finish                                  # CommentaryValgeir 0
+trigger Valgeir                         # 146 (replaceDefault) loses: 104
+finish
+trigger Valgeir                         # 104 again: 146 (replaceDefault) never takes a turn in the cycle
+finish
+warp 19,-16,88.8 Mhaura
+trigger Rycharde                        # 72 (a tie with 97)
+finish
+trigger Rycharde                        # 97
+finish                                  # CommentaryRycharde 0
+trigger Rycharde                        # 98 (replaceDefault) loses: 72
+finish
+trigger Rycharde                        # 72 again
+finish
+trigger Take                            # 67 (replaceDefault) loses: 68 (a tie with 63)
+finish
+trigger Take                            # 63
+finish
+trigger Take                            # 68
+finish

@@ -1,0 +1,56 @@
+# A Sentry's Peril (sandoria 0): Glenne in Southern San d'Oria (script: her patrol path only; no default), Aaveleon in
+# West Ronfaure (no script; default 101; The Pickpocket (C#) answers him with a message in its state 2: #pickpocket).
+# Available: a trade to Glenne (no trade handler: nothing); 510 declined (option 1: nothing, no ointment), then taken
+# (option 0: the Dose of Ointment, begun). TradedAaveleon 0: Glenne's 520 (the ointment held); a chip to Glenne and the
+# ointment to Glenne (any trade: 514); Aaveleon's talk (no handler: 101); a chip, the ointment and a chip (not exact:
+# 106); the ointment with no free slot (118); with room (100; finish: the Ointment Case, the ointment taken,
+# TradedAaveleon 1). TradedAaveleon 1: Aaveleon's AAVELEON_HEALED (the case held); a trade to him (no trade handler:
+# nothing); Glenne's 520; a chip, the case and a chip (514); the case (513: completed, Bronze Subligar, fame +20,
+# Ronfaurian Rescuer; the case taken). Completed: Glenne's 521, Aaveleon's AAVELEON_HEALED, a trade to Glenne (no
+# handler: nothing). #lost takes the items lost and the var's other values, #inventory_full the full bag, #free_slot
+# the free-slot test's edge.
+lists SouthernSanDoria/Glenne/onTrigger SouthernSanDoria/Glenne/onTrade SouthernSanDoria/onEventFinish/510 SouthernSanDoria/onEventFinish/513 WestRonfaure/Aaveleon/onTrigger WestRonfaure/Aaveleon/onTrade WestRonfaure/onEventFinish/100
+char zone=SouthernSanDoria pos=-123.4,-2.0,14.5 job=WAR lvl=30
+item BoneChip
+item BoneChip
+login
+trade Glenne BoneChip x1                  # available: no trade handler; nothing
+trigger Glenne                            # 510
+finish option=1                           # not option 0: nothing (no ointment given)
+trigger Glenne                            # 510
+finish                                    # option 0: the Dose of Ointment; begun
+trigger Glenne                            # TradedAaveleon 0, the ointment held: 520
+finish
+trade Glenne BoneChip x1                  # any trade: 514
+finish
+trade Glenne DoseOfOintment x1            # any trade: 514
+finish
+warp -431.8,-45.9,342.3 WestRonfaure
+trigger Aaveleon                          # TradedAaveleon 0: no trigger handler; his default 101
+finish
+trade Aaveleon BoneChip x1                # not the ointment: 106
+finish
+trade Aaveleon DoseOfOintment x1 BoneChip x1   # not exactly the ointment: 106
+finish
+fill-inventory
+trade Aaveleon DoseOfOintment x1          # exactly the ointment, no free slot: 118
+finish
+free-inventory
+trade Aaveleon DoseOfOintment x1          # a free slot: 100
+finish                                    # the Ointment Case; the ointment taken; TradedAaveleon 1
+trigger Aaveleon                          # TradedAaveleon 1, the case held: AAVELEON_HEALED
+trade Aaveleon BoneChip x1                # TradedAaveleon 1: no trade handler; nothing
+warp -123.4,-2.0,14.5 SouthernSanDoria
+trigger Glenne                            # TradedAaveleon 1: 520
+finish
+trade Glenne BoneChip x1                  # not the case: 514
+finish
+trade Glenne OintmentCase x1 BoneChip x1  # not exactly the case: 514
+finish
+trade Glenne OintmentCase x1              # exactly the case: 513
+finish                                    # completed: Bronze Subligar, fame +20, Ronfaurian Rescuer; the case taken
+trigger Glenne                            # completed: 521
+finish
+trade Glenne BoneChip x1                  # completed: no trade handler; nothing
+warp -431.8,-45.9,342.3 WestRonfaure
+trigger Aaveleon                          # completed: AAVELEON_HEALED

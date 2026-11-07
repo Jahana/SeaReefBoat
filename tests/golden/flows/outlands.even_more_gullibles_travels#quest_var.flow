@@ -1,0 +1,12 @@
+# Even More Gullible's Travels (outlands 9), the quest's own var at the completion: Gullible's Travels completed, this
+# quest accepted, EVEN_MORE_GULLIBLES_PROGRESS 2 and Quest[5][9]Prog 1 (GMs). Magriffon: 152; finished: the progress 0,
+# Windurst fame +70, the raw player:completeQuest. The raw completeQuest does no cleanup: Quest[5][9]Prog stays 1
+# (quest:complete's cleanup would clear it).
+char zone=Kazham pos=62.6,-12,-33.9 job=WAR lvl=75
+quest Outlands.GulliblesTravels completed
+quest Outlands.EvenMoreGulliblesTravels accepted
+charvar EVEN_MORE_GULLIBLES_PROGRESS 2
+charvar Quest[5][9]Prog 1               # a GM: the quest's own var
+login
+trigger Magriffon                       # progress 2: 152 (0, 1144, 256)
+finish                                  # progress 0; fame +70; completed, Prog kept

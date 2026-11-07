@@ -1,0 +1,10 @@
+# probe (quest rework P9, D2): kill <Mob> nokiller, a death with no killer (an unclaimed mob's: CMobEntity::
+# DistributeRewards with no owner, ZoneHost.Exp.cs: OnMobDeath(mob, nil): no exp, and the lookup's onMobDeath gets no
+# player). Uleguerand - Dominion Op #01 (abyssea 101, still Lua), accepted: a Mechanical_Menace dead with no killer:
+# no exp, no Prog (dominionOnMobDeath needs the player); the next one killed by the char: Prog 1.
+lists AbysseaUleguerand/Mechanical_Menace/onMobDeath
+char zone=AbysseaUleguerand pos=-240,-40,-520 job=WAR lvl=99
+quest Abyssea.DominionOp01Uleguerand accepted
+login
+kill #17813813 nokiller                 # no killer: no exp, Prog 0
+kill #17813814                          # the char's kill: Prog 1

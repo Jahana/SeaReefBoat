@@ -1,0 +1,21 @@
+# Borghertz's Warring Hands (jeuno 44): finishes outside their state. 155 open, the quest set accepted by a GM: no 155
+# handler while accepted. 48 open (Prog 5, both key items), the quest set completed by a GM: no 48 handler (no fame,
+# the key items kept). 26 open, the Old Gauntlets taken by a GM: no 26 handler (the section off).
+lists UpperJeuno/Guslam/onTrigger UpperJeuno/onEventFinish/155 UpperJeuno/onEventFinish/26 PortJeuno/qm1/onTrigger PortJeuno/onEventFinish/48
+char zone=UpperJeuno pos=-4.2,1.3,47.5 job=WAR lvl=50
+quest Bastok.TheTalekeepersTruth completed
+login
+trigger Guslam                          # 155 (Option 1)
+quest Jeuno.BorghertzsWarringHands accepted # a GM, while 155 is open
+finish                                  # no 155 finish while accepted: nothing
+keyitem OldGauntlets                    # a GM
+trigger Guslam                          # 26
+delkeyitem OldGauntlets                 # a GM, while 26 is open
+finish                                  # no 26 finish without the gauntlets: Prog 0
+keyitem OldGauntlets                    # a GM
+keyitem ShadowFlames                    # a GM
+charvar Quest[3][44]Prog 5              # a GM
+warp -52.7,6.1,-4.6 PortJeuno
+trigger qm1                             # 48
+quest Jeuno.BorghertzsWarringHands completed # a GM, while 48 is open
+finish                                  # no 48 finish while completed: nothing

@@ -1,0 +1,21 @@
+# Rock Bottom (ahtUrhgan 20) with the example module, modules/example/lua/modify_interaction_entry_example.lua (no
+# condition: on when listed), which replaces section 1's check with one that is always false. A level 75 Warrior with a
+# Pickaxe. Available: blank11: no section: NOTHING_HAPPENS (the default; the quest alone plays 7); the Pickaxe: nil.
+# Accepted at Prog 1 (GMs): the sections the module leaves alone still answer: the Pickaxe: 8, finished: Prog 2, the
+# zoning flag, the pickaxe taken (user ruling 2026-11-04); blank11's talk: NOTHING_HAPPENS (the quest's own
+# messageSpecial).
+module modules/example/lua/modify_interaction_entry_example.lua
+lists MountZhayolm/blank11/onTrigger MountZhayolm/blank11/onTrade
+char zone=MountZhayolm pos=839.743,-14.475,231.871 job=WAR lvl=75
+item Pickaxe
+login
+trigger blank11                         # available, the module's check false: NOTHING_HAPPENS (the default)
+finish-if-event
+trade blank11 Pickaxe x1                # available: nil
+finish-if-event
+quest AhtUrhgan.RockBottom accepted     # GMs
+charvar Quest[6][20]Prog 1
+trade blank11 Pickaxe x1                # Prog 1: 8
+finish                                  # Prog 2; needToZone; the pickaxe taken
+trigger blank11                         # accepted: NOTHING_HAPPENS
+finish-if-event

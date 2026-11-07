@@ -1,0 +1,148 @@
+# The Fighting Fourth (crystalWar 7) beside its rivals at Roderich, Gebhardt, the Barricade and Adelbrecht: What Price
+# Loyalty (group 5, on Lua) at Prog 1 (Roderich 11, an Event) and Her Memories: Azure Footfalls (group 10, on Lua)
+# accepted (Gebhardt 14 at Prog 2, the Barricade 16 at Prog 4, Adelbrecht 360 at Prog 5: Progress events) or available
+# (Adelbrecht 359 at Prog 1, with WotG Her Memories and allegiance 2), all by GMs. Each Fighting Fourth reply is shown
+# against a rival, twice where a tie or a reply of another kind would show only on the second talk (ties go to the first
+# container: Azure Footfalls, The Fighting Fourth, What Price Loyalty; then they rotate by the last event). A level 99
+# Warrior in North Gustaberg [S] with both quests accepted, Prog 1 (missions as Steamed Rams' main flow). Roderich: 104
+# over 11, Prog 2; Prog 1 again (a GM): 104; Prog 2: 105 ties 11, twice; Prog 3: 109 ties 11, twice. Completed (a GM):
+# 109 (replaceDefault) under 11, twice. What Price Loyalty set available, The Fighting Fourth accepted again (GMs),
+# Azure Footfalls accepted at Prog 2. Gebhardt: Prog 0: 102 ties 14: 14 (Azure Prog 3); Prog 2 again (a GM): 102 (Prog
+# 1); 103 under 14, twice (Azure's Prog set back each time); Prog 2: 107 under 14, twice; Prog 3: 108 under 14, twice.
+# Prog 2, Azure Prog 4: the Barricade: 106 ties 16: 16; Azure Prog 4 again: 106 (Prog 3). Bastok Markets [S], Azure Prog
+# 5: Adelbrecht: Prog 0: 140 under 360, twice (Azure set accepted at Prog 5 again after each 360 completes it); Prog 1:
+# 141, twice; Prog 2: 142, twice; Prog 3: 143 ties 360: 360, then 143: completed, allegiance 2. The Fighting Fourth set
+# available, WotG Her Memories, Azure Footfalls available at Prog 1 (GMs): 139 ties 359: 359 (Azure begun); Azure
+# available at Prog 1 again: 139, option 0. The Blue letter (a GM): 139 (0, 0) ties 359: 359 (Azure begun); Azure
+# available at Prog 1 again: 139 (0, 0), option 0.
+lists NorthGustabergS/Roderich/onTrigger NorthGustabergS/Gebhardt/onTrigger NorthGustabergS/Barricade/onTrigger BastokMarketsS/Adelbrecht/onTrigger
+char zone=NorthGustabergS pos=-398.539,39.991,-90.445 job=WAR lvl=99
+quest CrystalWar.TheFightingFourth accepted
+charvar Quest[7][7]Prog 1
+quest CrystalWar.WhatPriceLoyalty accepted
+charvar Quest[7][50]Prog 1
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Roderich                        # Prog 1: 104 over What Price Loyalty's 11
+finish                                  # Prog 2
+charvar Quest[7][7]Prog 1
+trigger Roderich                        # 104 again
+finish                                  # Prog 2
+trigger Roderich                        # Prog 2: 105 ties 11
+finish
+trigger Roderich                        # the other of the two
+finish
+charvar Quest[7][7]Prog 3
+trigger Roderich                        # Prog 3: 109 ties 11
+finish
+trigger Roderich                        # the other of the two
+finish
+quest CrystalWar.TheFightingFourth completed
+trigger Roderich                        # completed: 109 (replaceDefault) under 11
+finish
+trigger Roderich                        # again
+finish
+quest CrystalWar.WhatPriceLoyalty available
+quest CrystalWar.TheFightingFourth available
+quest CrystalWar.TheFightingFourth accepted
+charvar Quest[7][7]Prog 0
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 2
+warp 207.799,-20.826,669.125 NorthGustabergS
+trigger Gebhardt                        # Prog 0: 102 ties Azure Footfalls' 14: 14
+finish                                  # Azure Prog 3
+charvar Quest[7][70]Prog 2
+trigger Gebhardt                        # the other of the two: 102
+finish                                  # Prog 1
+trigger Gebhardt                        # Prog 1: 103 under 14
+finish
+charvar Quest[7][70]Prog 2
+trigger Gebhardt                        # again
+finish
+charvar Quest[7][70]Prog 2
+charvar Quest[7][7]Prog 2
+trigger Gebhardt                        # Prog 2: 107 under 14
+finish
+charvar Quest[7][70]Prog 2
+trigger Gebhardt                        # again
+finish
+charvar Quest[7][70]Prog 2
+charvar Quest[7][7]Prog 3
+trigger Gebhardt                        # Prog 3: 108 under 14
+finish
+charvar Quest[7][70]Prog 2
+trigger Gebhardt                        # again
+finish
+charvar Quest[7][7]Prog 2
+charvar Quest[7][70]Prog 4
+warp -513.46,37.979,583.287 NorthGustabergS
+trigger Barricade                       # Prog 2: 106 ties Azure Footfalls' 16: 16
+finish                                  # Azure Prog 5
+charvar Quest[7][70]Prog 4
+trigger Barricade                       # the other of the two: 106
+finish                                  # Prog 3
+charvar Quest[7][7]Prog 0
+charvar Quest[7][70]Prog 5
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # Prog 0: 140 under Azure Footfalls' 360
+finish                                  # Azure completed
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+trigger Adelbrecht                      # again
+finish
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+charvar Quest[7][7]Prog 1
+trigger Adelbrecht                      # Prog 1: 141 under 360
+finish
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+trigger Adelbrecht                      # again
+finish
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+charvar Quest[7][7]Prog 2
+trigger Adelbrecht                      # Prog 2: 142 under 360
+finish
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+trigger Adelbrecht                      # again
+finish
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+charvar Quest[7][7]Prog 3
+trigger Adelbrecht                      # Prog 3: 143 ties 360: 360
+finish
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+trigger Adelbrecht                      # the other of the two: 143
+finish                                  # completed; allegiance 2
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.TheFightingFourth available
+mission Wotg BackToTheBeginning completed
+mission Wotg HerMemories current
+charvar Quest[7][70]Prog 1
+trigger Adelbrecht                      # available, allegiance 2: 139 ties Azure Footfalls' 359: 359
+finish                                  # Azure begun, Prog 2
+quest CrystalWar.HerMemoriesAzureFootfalls available
+charvar Quest[7][70]Prog 1
+trigger Adelbrecht                      # the other of the two: 139
+finish option=0                         # nothing
+keyitem BlueRecommendationLetter
+trigger Adelbrecht                      # the letter: 139 (0, 0) ties 359: 359
+finish                                  # Azure begun, Prog 2
+quest CrystalWar.HerMemoriesAzureFootfalls available
+charvar Quest[7][70]Prog 1
+trigger Adelbrecht                      # the other of the two: 139 (0, 0)
+finish option=0                         # nothing

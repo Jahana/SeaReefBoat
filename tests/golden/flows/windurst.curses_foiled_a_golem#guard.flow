@@ -1,0 +1,21 @@
+# Curses, Foiled A-Golem!? (windurst 63): the guard's (2)-completed side and the level edge's met side. A level-10 WAR
+# at fame 225 with (2) accepted: not met; Shantotto plays (2)'s 181 (this quest's 340, a Progress line, would beat it).
+# (2) completed by GM: level 10 meets the guard: 340 (option 0: Total Loser). Accepted by GM at Prog 3: 341 (only Prog 2
+# plays 342), twice: (2)'s completed 184 (replaceDefault) is under 341's Event line, never tied with it (a tie cycles).
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/onEventFinish/340
+char zone=WindurstWalls pos=122.6,-3.0,111.6 job=WAR lvl=10
+quest Windurst.CursesFoiledAgain1 completed
+quest Windurst.CursesFoiledAgain2 accepted
+fame Windurst 225
+login
+trigger Shantotto                                   # (2) accepted: not met; (2)'s 181
+finish
+quest Windurst.CursesFoiledAgain2 completed
+trigger Shantotto                                   # level 10: met; progressEvent 340
+finish option=0                                     # Total Loser
+quest Windurst.CursesFoiledAGolem accepted
+charvar Quest[2][63]Prog 3
+trigger Shantotto                                   # accepted, Prog 3 (GM): not 2, event 341
+finish
+trigger Shantotto                                   # 341 again (her script's turn: it does nothing, the quest's 341)
+finish

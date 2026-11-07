@@ -1,0 +1,15 @@
+# Always More Quoth the Ravenous (adoulin, call-only) at midpoint rates: a level 99 Warrior in Western Adoulin, the
+# quest accepted (a GM), EXP_RATE 1.375 and BAYLD_RATE 1.0625 (1500 x 1.375 = 2062.5, 1000 x 1.0625 = 1062.5: the
+# bindings' llround gives 2063 and 1063, round half to even and truncation 2062 and 1062). A Cursed Beverage: 3012,
+# finished: 2063 exp, 1063 bayld, BAYLD_OBTAINED 1063; Quest[9][88]Prog 1 (a GM) kept (quest:complete's cleanup
+# would clear it).
+lists WesternAdoulin/Westerly_Breeze/onTrade WesternAdoulin/onEventFinish/3012
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+setting EXP_RATE 1.375
+setting BAYLD_RATE 1.0625
+quest Adoulin.AlwaysMoreQuothTheRavenous accepted
+charvar Quest[9][88]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+item BottleOfCursedBeverage
+login
+trade Westerly_Breeze BottleOfCursedBeverage x1  # accepted: 3012
+finish                                  # completed: 2063 exp, 1063 bayld

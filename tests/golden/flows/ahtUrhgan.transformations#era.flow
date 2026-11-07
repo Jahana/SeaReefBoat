@@ -1,0 +1,33 @@
+# Transformations (ahtUrhgan 23) with its era module, modules/era/lua/quests/ahturhgan/transformations.lua, enabled by
+# xi.pre(ROV) (RESTRICT_CONTENT 1, ENABLE_ROV 0): The Beast Within is offered at JST midnight. A level 66 Blue Mage,
+# Transformations accepted at Prog 4 (GMs). A full bag: blank_transformations 5, finished: the module's copy:
+# quest:complete false: nothing (no The Beast Within Timer); room again: 5, finished: the module's copy: completed, The Beast
+# Within's Timer = JstMidnight() (1800025200; the quest alone sets 1800000060; no mustZone either way). Whitegate: Waoud:
+# The Beast Within available (level 66), now < Timer: nil: An Empty Vessel's 78; Timer 1800000001 (a GM): 78; Timer
+# 1800000000 (now): 760.
+module modules/era/lua/quests/ahturhgan/transformations.lua
+lists AlzadaalUnderseaRuins/blank_transformations/onTrigger AlzadaalUnderseaRuins/onEventFinish/5 AhtUrhganWhitegate/Waoud/onTrigger
+char zone=AlzadaalUnderseaRuins pos=-528.204,0,649.682 job=BLU lvl=66 gil=5000
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings completed
+quest AhtUrhgan.Omens completed
+quest AhtUrhgan.Transformations accepted
+charvar Quest[6][23]Prog 4
+login
+fill-inventory
+trigger blank_transformations           # Prog 4: 5
+finish                                  # the module's copy: the keffiyeh does not fit: quest:complete false: nothing (no The Beast Within Timer)
+free-inventory
+trigger blank_transformations           # still Prog 4: 5
+finish                                  # the module's copy: completed; The Beast Within's Timer = JstMidnight()
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+trigger Waoud                           # now < Timer (JST midnight): nil: An Empty Vessel's 78
+finish option=0
+charvar Quest[6][40]Timer 1800000001    # a GM: one second past now
+trigger Waoud                           # 78
+finish option=0
+charvar Quest[6][40]Timer 1800000000    # a GM: now
+trigger Waoud                           # The Beast Within's 760
+finish option=1                         # not 0: nothing

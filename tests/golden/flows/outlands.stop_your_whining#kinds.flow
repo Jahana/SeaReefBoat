@@ -1,0 +1,54 @@
+# Washu's reply kinds (Norg; no script; default 80) between Stop Your Whining (21 / 22 / 23 P; completed 24 E rD) and
+# Chasing Dreams (Prog 2: 221 P); Yomi Okuri's are group 1's (yomi_okuri#kinds). A level 75 Warrior at Norg fame 225,
+# Chasing Dreams accepted at Prog 2 (GMs). Ties: first talk: container order; after that ties rotate by the last event
+# id. 221 and 21 (both Progress) tie: 221 (Chasing Dreams' container first; its
+# finish gives Washu's Flask and sets Chasing Prog 3 whatever the option); Prog 2 again (a GM): the last id 221: 21
+# (option 0: nothing); the cycle wraps: 221. Chasing at Prog 3: 21 alone (a lone action leaves the last id 221), option
+# 1: Stop Your Whining begun. Prog 2 (a GM): 22 and 221: the last id 221: 22; then 221. The brew (GMs): 23 and 221: the
+# last id 221: 23 (completed); Prog 2 (a GM): 221. Stop Your Whining completed: 221 (Progress) beats 24
+# (replaceDefault); Chasing Prog 3: 24. bob (a level 75 Samurai, Yomi Okuri accepted at Prog 2, Stage 0, no wurst,
+# Stop Your Whining completed; GMs): 149 (Event) beats 24 (replaceDefault) on two talks (149 alone: no rotation).
+lists Norg/Washu/onTrigger
+char zone=Norg pos=51.041,-6.282,15.546 job=WAR lvl=75
+char bob zone=Norg pos=51.041,-6.282,15.546 job=SAM lvl=75
+fame Norg 225
+quest Outlands.ChasingDreams accepted
+charvar Quest[5][199]Prog 2
+bob: quest Outlands.YomiOkuri accepted
+bob: charvar Quest[5][141]Prog 2
+bob: quest Outlands.StopYourWhining completed
+login
+trigger Washu                           # 221 and 21 tie: 221
+finish option=0
+charvar Quest[5][199]Prog 2             # a GM
+trigger Washu                           # the last id 221: 21
+finish option=0
+trigger Washu                           # the cycle wraps: 221
+finish option=0
+trigger Washu                           # Chasing at Prog 3: 21 alone
+finish option=1                         # Stop Your Whining begun; the Empty Barrel
+charvar Quest[5][199]Prog 2             # a GM
+trigger Washu                           # 22 and 221: the last id 221: 22
+finish
+charvar Quest[5][199]Prog 2             # a GM
+trigger Washu                           # the last id 22: 221
+finish
+delkeyitem EmptyBarrel                  # a GM
+keyitem BarrelOfOpoOpoBrew              # a GM
+charvar Quest[5][199]Prog 2             # a GM
+trigger Washu                           # 23 and 221: the last id 221: 23
+finish
+charvar Quest[5][199]Prog 2             # a GM
+trigger Washu                           # 221 alone
+finish
+charvar Quest[5][199]Prog 2             # a GM
+trigger Washu                           # 221 (Progress) beats 24 (replaceDefault)
+finish
+trigger Washu                           # Chasing Prog 3: 24
+finish
+bob: login
+bob: trigger Washu                      # 149 (Event) beats 24 (replaceDefault)
+bob: finish
+bob: trigger Washu                      # 149 again
+bob: finish
+bob: logout

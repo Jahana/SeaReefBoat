@@ -1,0 +1,25 @@
+# Inside the Belly (otherAreas 26) with its era module, enabled by xi.pre(SOA) alone (RESTRICT_CONTENT 1, ENABLE_SOA 0):
+# the 2012 batch (Abaia, Matsya) blocked; the trigger the quest's own.
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# Completed (a GM), skill 30. An Abaia and a Matsya: nothing, kept. A Soryu (RoV, on): 166 or 167. A Grimmonite (Abyssea, on):
+# 166 or 167.
+module modules/era/lua/quests/otherareas/inside_the_belly.lua
+lists Selbina/Zaldon/onTrade Selbina/onEventFinish/166 Selbina/onEventFinish/167
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest OtherAreas.InsideTheBelly completed
+skill Fishing 300
+item Abaia
+item Matsya
+item Soryu
+item Grimmonite
+login
+trade Zaldon Abaia x1                   # blocked: nothing; kept
+trade Zaldon Matsya x1                  # blocked: nothing; kept
+trade Zaldon Soryu x1                   # on: <= 468: 166 (the Soryu's Liver), else 167
+finish                                  # 1512 gil
+trade Zaldon Grimmonite x1              # on: 166 or 167
+finish                                  # 350 gil

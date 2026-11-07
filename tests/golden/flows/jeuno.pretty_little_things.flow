@@ -1,0 +1,38 @@
+# Pretty Little Things (jeuno 43): Port Jeuno's Zona Shodhun (script: 10023 (0, 246, 10)). A level 75 Warrior with
+# Yellow Rocks, a Red Rock, an Amaryllis and a Chocobo Feather. Available: her talk: her script's 10023; its finish
+# (option 0) runs the quest's 10023 finish too ("any trade or onTrigger flags this quest"): begun. Accepted: the
+# feather: 10023 (0, 246, 0, 0, 0, 0, 7, 0), option 0: nothing taken; the Red Rock: 10023 (0, 246, 1, 1, 0, 1, 7, 1),
+# option 1: the rock taken; the Amaryllis: (0, 246, 1, 1, 1, 0, 7, 0), option 1: taken; two Yellow Rocks: not exact:
+# the else arm, option 0: kept; a Yellow Rock and the feather: the else arm; a Yellow Rock: (1, 246, 2, 1, 0, 1, 5, 1),
+# option 0: kept, nothing; again, option 4002: the trade taken, completed, the Mog House exit flag + 0x0008,
+# MOGHOUSE_EXIT. Completed: a Yellow Rock: (0, 246, 4, 1, 0, 1, 7, 0), option 4002: no finish (kept); the feather:
+# (0, 246, 5, 0, 0, 0, 7, 0); her talk, option 4002: nothing. The finish's options from available: #option.
+lists PortJeuno/Zona_Shodhun/onTrade PortJeuno/onEventFinish/10023 PortJeuno/Zona_Shodhun/onTrigger
+char zone=PortJeuno pos=-173.6,-5,-4.2 job=WAR lvl=75
+item YellowRock x4
+item RedRock
+item Amaryllis
+item ChocoboFeather
+login
+trigger Zona_Shodhun                    # no quest handler: her script's 10023 (0, 246, 10)
+finish                                  # option 0: the quest's 10023 finish runs on it: available: begun
+trade Zona_Shodhun ChocoboFeather x1    # accepted, the else arm: 10023 (0, 246, 0, 0, 0, 0, 7, 0)
+finish option=0                         # option 0: nothing taken; accepted: no begin
+trade Zona_Shodhun RedRock x1           # accepted, a rock: (0, 246, 1, 1, 0, 1, 7, 1)
+finish option=1                         # option 1: the rock taken
+trade Zona_Shodhun Amaryllis x1         # a flower: (0, 246, 1, 1, 1, 0, 7, 0)
+finish option=1                         # the flower taken
+trade Zona_Shodhun YellowRock x2        # two: not exact, not a rock alone: the else arm
+finish option=0                         # nothing
+trade Zona_Shodhun YellowRock x1 ChocoboFeather x1 # an extra item: the else arm
+finish option=0                         # nothing
+trade Zona_Shodhun YellowRock x1        # the Yellow Rock: (1, 246, 2, 1, 0, 1, 5, 1)
+finish option=0                         # nothing (accepted: no begin)
+trade Zona_Shodhun YellowRock x1        # (1, 246, 2, 1, 0, 1, 5, 1)
+finish option=4002                      # the trade taken; completed; the Mog House flag + 0x0008; MOGHOUSE_EXIT
+trade Zona_Shodhun YellowRock x1        # completed: (0, 246, 4, 1, 0, 1, 7, 0)
+finish option=4002                      # no finish in the completed state: the rock kept
+trade Zona_Shodhun ChocoboFeather x1    # completed, else arm: (0, 246, 5, 0, 0, 0, 7, 0)
+finish
+trigger Zona_Shodhun                    # completed: her script's 10023 (0, 246, 10)
+finish option=4002                      # no finish in the completed state: nothing (no second flag)

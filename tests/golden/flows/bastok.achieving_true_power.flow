@@ -1,0 +1,41 @@
+# Achieving True Power (bastok 85): Shamarhaan in Bastok Markets, the battlefield in the Navukgo Execution Chamber. The
+# available guard (Puppetmaster Blues completed, main job PUP, main level 66), the offer 441 (the automaton's model id
+# as its argument: no automaton set up, Harlequin's; its finish begins it), the accepted guard (PUP, level 66), 442, the
+# Puppetmaster's Testimony traded (443: Prog 1, the testimony kept, the finish's own setPos into the Navukgo Execution
+# Chamber); then the battlefield (scripts/battlefields/Navukgo_Execution_Chamber/achieving_true_power.lua: index 3,
+# entry _1s0 by trading the testimony (requiredItems), PUP 66, maxPlayers 1, requiredVar 'Quest[1][85]Prog' at 1, which
+# the finish of 443 just wrote: the battlefield's read of the quest's var; Shamarhaan and his automaton (SHAMARHAAN, +1)
+# of area 1; his death alone wins it) and its win's 32001 (battlefieldWin 1123 while accepted): the level cap 70 raised
+# to 75 (YOUR_LEVEL_LIMIT_IS_NOW_75), a Scroll of Instant Warp, completed (Master of Manipulation). The level guards are
+# in #level65, the other jobs and the completed line in #completed, the cap not 70 (and a full bag) in
+# #battlefield_cap75, a 32001 without the local var in #battlefield_novar. 443's setPos changes zone: `tick 400` and
+# `login` finish it the way the harness's warp does; the GM warp after them puts the char at the gate and tells the flow
+# checker the zone. The 32000 update's option is index << 4 | area (3 << 4 | 1 = 49). Shared: Shamarhaan is No Strings
+# Attached's (available from level 30: progressEvent 434, which would compete with 441; set completed here) and
+# Puppetmaster Blues' (accepted only). Default 433.
+lists BastokMarkets/Shamarhaan/onTrigger BastokMarkets/Shamarhaan/onTrade BastokMarkets/onEventFinish/441 BastokMarkets/onEventFinish/443 NavukgoExecutionChamber/onEventFinish/32001
+char zone=BastokMarkets pos=-285.4,-12,-83.2 job=PUP lvl=66
+levelcap 70
+quest AhtUrhgan.NoStringsAttached completed
+item PuppetmastersTestimony
+item BoneChip
+login
+trigger Shamarhaan                   # Puppetmaster Blues not completed: not offered, 433
+finish-if-event
+quest AhtUrhgan.PuppetmasterBlues completed
+trade Shamarhaan PuppetmastersTestimony x1  # available: no trade handler, nothing
+trigger Shamarhaan                   # the offer, 441 (model id)
+finish                               # accepted
+trigger Shamarhaan                   # accepted: 442
+finish
+trade Shamarhaan BoneChip x1         # no testimony: nil
+trade Shamarhaan PuppetmastersTestimony x1  # 443
+finish                               # Prog 1, setPos into the Navukgo Execution Chamber (the testimony kept)
+tick 400
+login                                # the zone change: Navukgo Execution Chamber
+warp -598.5,8,-100 NavukgoExecutionChamber  # at the gate _1s0 (and the flow checker's zone)
+trade _1s0 PuppetmastersTestimony x1  # Prog 1: the battlefield's 32000 menu (the quest names no _1s0)
+update 32000 option=49               # index 3, area 1: registered, entered
+finish                               # in the arena
+kill SHAMARHAAN                      # area 1: won (his death alone ends it), battlefieldWin 1123, 32001 opens
+finish                               # 32001: cap 70 -> 75 (YOUR_LEVEL_LIMIT_IS_NOW_75), the scroll, completed

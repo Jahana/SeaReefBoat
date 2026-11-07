@@ -1,0 +1,55 @@
+# Tenshodo Membership (jeuno 17): Lower Jeuno's Ghebi_Damomohe (script: 106 (4), the Psoxja Pass's ENM; 106 option 0
+# opens her shop), Port Bastok's Jabbar (script: 150) and Silver_Owl (script: 150 (1)). A level 75 Warrior at Jeuno
+# fame level 3 ((250 + 0 + 0) / 2 = 125). Each NPC has a script, so the lookup alternates the quest's event 106 with
+# it (UseFallback), while a progressEvent plays whatever UseFallback holds.
+# Jabbar / Silver Owl at Prog 0, no form: nil (their scripts). Ghebi: the quest's 106 (an event: UseFallback set);
+# option 1: nothing; again: her script's 106 (4); option 0: her shop (the quest's 106 finish: nothing); the quest's
+# 106, option 0: her shop too (her script's finish runs on the quest's event); her script's 106, option 1: nothing; the
+# quest's 106, option 2: Prog 1; Prog 0 (a GM): her script's 106 (4), option 2: the quest's 106 finish runs on it too: Prog 1.
+# Jabbar at Prog 1: 151, finished: the Tenshodo Application Form; the form deleted (a GM): 151 again (a progressEvent:
+# UseFallback 0 or 1, his script waits), the form again; with the form: 152 (no finish), twice. Silver Owl with the
+# form: 152 (1), twice. Ghebi with the form: 107, finished: completed (a Tenshodo Invite, the Tenshodo Members Card),
+# the form taken. Completed: no section (her script; Jabbar's shop with the card).
+lists LowerJeuno/Ghebi_Damomohe/onTrigger LowerJeuno/Ghebi_Damomohe/onTrade LowerJeuno/onEventFinish/106 LowerJeuno/onEventFinish/107 PortBastok/Jabbar/onTrigger PortBastok/Silver_Owl/onTrigger PortBastok/onEventFinish/151
+char zone=PortBastok pos=-98.2,-2.3,26 job=WAR lvl=75
+fame Sandoria 250
+login
+trigger Jabbar                          # no form, Prog 0: nil; his script 150
+finish
+warp -97.7,4.6,23.3 PortBastok          # by Silver Owl
+trigger Silver_Owl                      # no form, Prog 0: nil; her script 150 (1)
+finish
+warp 17,-0.1,-7.6 LowerJeuno            # by Ghebi Damomohe
+trigger Ghebi_Damomohe                  # fame level 3, no form: the quest's 106 (UseFallback 0; then 1)
+finish option=1                         # not 2: nothing (her script: not 0, no shop)
+trigger Ghebi_Damomohe                  # UseFallback 1: her script's 106 (4); then 0
+finish option=0                         # her shop (the quest's 106 finish: not 2, nothing)
+trigger Ghebi_Damomohe                  # the quest's 106 (then UseFallback 1)
+finish option=0                         # her script's finish runs on the quest's 106 too: her shop; the quest's: nothing
+trigger Ghebi_Damomohe                  # her script's 106 (4)
+finish option=1                         # nothing on either side
+trigger Ghebi_Damomohe                  # the quest's 106 (then UseFallback 1)
+finish option=2                         # the quest's 106 finish: Prog 1
+charvar Quest[3][17]Prog 0              # a GM
+trigger Ghebi_Damomohe                  # UseFallback 1: her script's 106 (4)
+finish option=2                         # the quest's 106 finish runs on her script's 106: Prog 1
+warp -98.2,-2.3,26 PortBastok           # by Jabbar
+trigger Jabbar                          # no form, Prog 1: 151
+finish                                  # the Tenshodo Application Form
+delkeyitem TenshodoApplicationForm      # a GM
+trigger Jabbar                          # 151 again (an event would give his script's 150 now)
+finish                                  # the form again
+trigger Jabbar                          # the form: 152
+finish                                  # no 152 finish
+trigger Jabbar                          # 152 again (an event would give his script's 150 now)
+finish
+warp -97.7,4.6,23.3 PortBastok          # by Silver Owl
+trigger Silver_Owl                      # the form: 152 (1)
+finish
+trigger Silver_Owl                      # 152 (1) again (an event would give her script's 150 (1) now)
+finish
+warp 17,-0.1,-7.6 LowerJeuno            # by Ghebi Damomohe
+trigger Ghebi_Damomohe                  # the form: 107
+finish                                  # completed: a Tenshodo Invite, the Members Card; the form taken
+trigger Ghebi_Damomohe                  # completed: no section; her script 106 (4)
+finish

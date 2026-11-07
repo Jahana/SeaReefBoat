@@ -1,0 +1,61 @@
+# Two Horn the Savage (ahtUrhgan 17): a level 75 Warrior in Whitegate with 5000 gil and an Imperial Bronze Piece.
+# Milazahn (no script; default 594, the offer's own csid), Cacaroon (248). Available: Cacaroon: no section: 248; 1000
+# gil to Cacaroon: no section-1 trade handler: nothing; Milazahn 594, option 0: nothing; option 1: begun. Prog 0:
+# Milazahn: nil: 594 (the default, an event); Cacaroon: nil: 248; 500 gil: nil; the bronze piece and 1000 gil: not
+# exactly the gil: nil; 1000 gil: 595, finished: Prog 1 (nothing confirms the trade: the gil stays). Prog 1: Cacaroon
+# 608 (once per zone), again: nil: 248. Mamook (Viscous Liquid: script 214, finished with option 0: no Illusion): the
+# first liquid: not the quest's: nil: 214; the sixth (QUEST_LIQUID) at Prog 1: 212, finished: Prog 2; Prog 2: the
+# Mamool Ja popped and claimed: IMPENDING_BATTLE (a Message: the next talk is the script's turn, UseFallback): 214 (the
+# NM up: the pop fails); again 214; the NM killed: Prog 3; 213, finished: Prog 4; Prog 4: nil: 214. Whitegate: Cacaroon
+# 608 (zoned: once per zone again); Milazahn 596, finished: completed (an Imperial Mythril Piece); Milazahn: no
+# section: 594.
+lists AhtUrhganWhitegate/Milazahn/onTrigger AhtUrhganWhitegate/Cacaroon/onTrigger AhtUrhganWhitegate/Cacaroon/onTrade AhtUrhganWhitegate/onEventFinish/594 Mamook/Viscous_Liquid/onTrigger Mamook/Mamool_Ja/onMobDeath Mamook/onEventFinish/212 Mamook/onEventFinish/213
+char zone=AhtUrhganWhitegate pos=-70.5,0,-82.337 job=WAR lvl=75 gil=5000
+item ImperialBronzePiece
+login
+trigger Cacaroon                        # walks beside him; available: no section: 248
+finish
+trade Cacaroon gil=1000                 # available: no trade handler: nothing
+finish-if-event
+trigger Milazahn                        # available: 594
+finish option=0                         # not option 1: nothing
+trigger Milazahn                        # 594
+finish option=1                         # begun
+trigger Milazahn                        # Prog 0: nil: 594 (the default)
+finish
+trigger Cacaroon                        # Prog 0: nil: 248
+finish
+trade Cacaroon gil=500                  # not 1000: nil
+finish-if-event
+trade Cacaroon ImperialBronzePiece x1 gil=1000   # an item besides the gil: not exactly: nil
+finish-if-event
+trade Cacaroon gil=1000                 # Prog 0, exactly 1000 gil: 595
+finish                                  # Prog 1 (nothing confirms the trade)
+trigger Cacaroon                        # Prog 1: 608 (once per zone)
+finish
+trigger Cacaroon                        # 608 performed: Ignore until zoned: nil: 248
+finish
+warp -258.7,3.882,-141.086 Mamook
+trigger Viscous_Liquid                  # the first liquid, not QUEST_LIQUID: nil: the script's 214
+finish option=0                         # option 1 would start the Illusion timer
+trigger Viscous_Liquid+5                # QUEST_LIQUID, Prog 1: 212
+finish                                  # Prog 2
+# Prog 2: the Mamool Ja popped (claimed, the liquid not hidden): IMPENDING_BATTLE
+trigger Viscous_Liquid+5
+# the NM up (the Message left UseFallback 1): the script's turn, the pop fails: 214
+trigger Viscous_Liquid+5
+finish option=0
+trigger Viscous_Liquid+5                # Prog 2, the NM up: the pop fails: nil: 214
+finish option=0
+kill MAMOOL_JA                          # Prog 2: Prog 3
+trigger Viscous_Liquid+5                # Prog 3: 213
+finish                                  # Prog 4
+trigger Viscous_Liquid+5                # Prog 4: nil: 214
+finish option=0
+warp -70.5,0,-82.337 AhtUrhganWhitegate
+trigger Cacaroon                        # Prog 4, zoned: 608
+finish
+trigger Milazahn                        # Prog 4: 596
+finish                                  # completed: the mythril piece
+trigger Milazahn                        # completed: no section: 594
+finish

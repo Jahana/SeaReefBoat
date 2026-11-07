@@ -1,0 +1,131 @@
+# Yomi Okuri's Norg and Onzozo edges. Section 1 off, one operand each: bob (a level 49 Samurai, The Sacred Katana
+# completed): default 71, and 71 again at AF2_QUEST_LEVEL 49.4 (the setting compared as a number: 49 < 49.4); carl (a
+# level 50 Warrior, completed): 71; dan (a level 50 Samurai, The Sacred Katana accepted): its 143 (no Mumeito) twice (no
+# tie with a 146). Main (a level 50 Samurai, completed, no mustZone): Timer now + 1 (a GM): 142; Timer = now: 146 (options
+# 0 and 2: not begun); the
+# mustZone alone (a GM, Timer = now): 142. Available, the four items traded to Washu (the accepted trade; the status the
+# only change): nil (his default trade: nothing). Begun (Prog 1). Washu's trade, one operand off each: a Frost Turnip
+# missing: nil; the four and a fifth item: nil; the wurst held (a GM): nil; the feather held (a GM): nil; Stage 1 (a
+# GM): nil; all four at Stage 0: 150. Washu at Prog 2 (a GM), the wurst held: 151; without it, Stage 0: 149; Stage 1:
+# nil (default 80). Onzozo's qm2: 0, option 2: nothing; the wurst with Ubume up (spawned by another 0): the Stage arm: Stage 0: nil; Ubume
+# killed at Prog 4 (a GM): Stage stays 0 (its body still spawned: nil again); despawned: 0 again, Ubume spawned again and
+# killed at Prog 2: Stage 1; qm2 1 (the feather). Jaucribaix: Prog 3 with the feather: 152; Prog 4 with no mustZone,
+# Wait now + 1 (GMs): 153; Wait = now: 154; Prog 4, Wait = now, the mustZone alone (GMs): 153; Prog 5 with neither
+# hirasaka: nil (default 71); the faded one: 156, finished with a full inventory: quest:complete false (no room): still
+# accepted, the faded hirasaka kept.
+lists Norg/Jaucribaix/onTrigger Norg/Washu/onTrigger Norg/Washu/onTrade LabyrinthOfOnzozo/qm2/onTrigger Norg/onEventFinish/156
+char zone=Norg pos=91,-7,-8 job=SAM lvl=50
+char bob zone=Norg pos=91,-7,-8 job=SAM lvl=49
+char carl zone=Norg pos=91,-7,-8 job=WAR lvl=50
+char dan zone=Norg pos=91,-7,-8 job=SAM lvl=50
+quest Outlands.TheSacredKatana completed
+quest Outlands.ForgeYourDestiny completed
+charvar Quest[5][141]Timer 1800000001
+item HecteyesEye x2
+item BastoreSardine1 x2
+item SliceOfGiantSheepMeat x2
+item FrostTurnip x2
+item Hatchet
+bob: quest Outlands.ForgeYourDestiny completed
+bob: quest Outlands.TheSacredKatana completed
+carl: quest Outlands.ForgeYourDestiny completed
+carl: quest Outlands.TheSacredKatana completed
+dan: quest Outlands.ForgeYourDestiny completed
+dan: quest Outlands.TheSacredKatana accepted
+login
+bob: login
+bob: trigger Jaucribaix                 # level 49 < AF2_QUEST_LEVEL 50: default 71
+bob: finish
+setting AF2_QUEST_LEVEL 49.4
+bob: trigger Jaucribaix                 # 49 < 49.4: default 71
+bob: finish
+setting AF2_QUEST_LEVEL 50
+bob: logout
+carl: login
+carl: trigger Jaucribaix                # a Warrior: default 71
+carl: finish
+carl: logout
+dan: login
+dan: trigger Jaucribaix                 # The Sacred Katana accepted: its 143
+dan: finish
+dan: trigger Jaucribaix                 # 143 again (no 146 to cycle to)
+dan: finish
+dan: logout
+trigger Jaucribaix                      # now < Timer (now + 1): 142
+finish
+charvar Quest[5][141]Timer 1800000000   # a GM: now
+trigger Jaucribaix                      # not < : 146
+finish option=0
+trigger Jaucribaix                      # 146
+finish option=2                         # not 1: not begun
+charvar Quest[5][141]mustZone 252       # a GM: the mustZone alone
+trigger Jaucribaix                      # the mustZone: 142
+finish
+charvar Quest[5][141]mustZone 0         # a GM
+trigger Washu                           # available: no Yomi Okuri arm: default 80
+finish
+trade Washu HecteyesEye x1 BastoreSardine1 x1 SliceOfGiantSheepMeat x1 FrostTurnip x1 # available: nothing
+trigger Jaucribaix                      # 146
+finish option=1                         # begun; Prog 1
+trigger Washu                           # Prog 1: 148
+finish                                  # Prog 2
+trade Washu HecteyesEye x1 BastoreSardine1 x1 SliceOfGiantSheepMeat x1 # no turnip: nil
+trade Washu HecteyesEye x1 BastoreSardine1 x1 SliceOfGiantSheepMeat x1 FrostTurnip x1 Hatchet x1 # a fifth item: nil
+keyitem WashusTastyWurst                # a GM
+trade Washu HecteyesEye x1 BastoreSardine1 x1 SliceOfGiantSheepMeat x1 FrostTurnip x1 # the wurst held: nil
+trigger Washu                           # the wurst held: 151
+finish
+delkeyitem WashusTastyWurst             # a GM
+keyitem YomotsuFeather                  # a GM
+trade Washu HecteyesEye x1 BastoreSardine1 x1 SliceOfGiantSheepMeat x1 FrostTurnip x1 # the feather held: nil
+delkeyitem YomotsuFeather               # a GM
+charvar Quest[5][141]Stage 1            # a GM
+trade Washu HecteyesEye x1 BastoreSardine1 x1 SliceOfGiantSheepMeat x1 FrostTurnip x1 # Stage 1: nil
+trigger Washu                           # Prog 2, no wurst, Stage 1: nil: default 80
+finish
+charvar Quest[5][141]Stage 0            # a GM
+trigger Washu                           # Stage 0, no wurst: 149
+finish
+trade Washu HecteyesEye x1 BastoreSardine1 x1 SliceOfGiantSheepMeat x1 FrostTurnip x1 # 150
+finish                                  # the wurst; Prog 3
+warp -176,10,-60 LabyrinthOfOnzozo
+trigger qm2                             # the wurst, Ubume down: 0
+finish option=2                         # not 1: nothing (the wurst kept, no Ubume)
+trigger qm2                             # 0
+finish option=1                         # Ubume spawned and claimed; the wurst taken
+keyitem WashusTastyWurst                # a GM
+trigger qm2                             # the wurst, Ubume up: not 0; Stage 0: nil: default
+charvar Quest[5][141]Prog 4             # a GM
+kill UBUME                              # Prog 4: Stage stays 0
+trigger qm2                             # its body still spawned: not 0; Stage 0: nil: default
+tick 15000                              # the body despawns
+tick 4000                               # and fades
+trigger qm2                             # the wurst, Ubume down: 0
+finish option=1                         # Ubume spawned; the wurst taken
+charvar Quest[5][141]Prog 2             # a GM
+kill UBUME                              # Prog 2: Stage 1
+trigger qm2                             # no wurst: Stage 1, no feather: 1
+finish                                  # the feather
+warp 91,-7,-8 Norg
+charvar Quest[5][141]Prog 3             # a GM
+trigger Jaucribaix                      # Prog 3, the feather: 152
+finish                                  # Prog 4, the mustZone, Wait now + 60
+charvar Quest[5][141]mustZone 0         # a GM
+charvar Quest[5][141]Wait 1800000001    # a GM: now + 1
+trigger Jaucribaix                      # now < Wait: 153
+finish
+charvar Quest[5][141]Wait 1800000000    # a GM: now
+charvar Quest[5][141]mustZone 252       # a GM: the mustZone alone
+trigger Jaucribaix                      # the mustZone: 153
+finish
+charvar Quest[5][141]mustZone 0         # a GM
+trigger Jaucribaix                      # 154
+finish                                  # the hirasaka; Prog 5
+delkeyitem YomotsuHirasaka              # a GM
+trigger Jaucribaix                      # Prog 5, neither hirasaka: nil: default 71
+finish
+keyitem FadedYomotsuHirasaka            # a GM
+trigger Jaucribaix                      # 156
+fill-inventory
+finish                                  # complete false: still accepted, the faded hirasaka kept
+free-inventory

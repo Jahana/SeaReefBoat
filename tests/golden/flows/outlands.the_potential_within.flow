@@ -1,0 +1,43 @@
+# The Potential Within (outlands 146): a level 75 Samurai, great katana skill 250 (2500), a Tachi of Trials with 300
+# weapon skill points held (a GM); the SAM chain completed (GMs: Forge Your Destiny's 25 and the AF offers would outrank
+# 178), so Jaucribaix's other reply is A Thief in Norg!?'s 165 (replaceDefault). Available: Jaucribaix 178 (Event, once
+# per zone) beats 165, option 0: nothing; again: 178 performed this zone: ignored: 165; out of Norg and back (the local
+# vars cleared): 178, option 1 (the tachi held): the Weapon Training Guide, begun. Accepted: 179 (1: the tachi held),
+# option 1: the tachi held: nothing; the tachi traded (300 points): 181 (the tachi taken by confirmTrade; the Map to the
+# Annals of Truth); 182 (the map). Kuftal Tunnel's qm3: the map, no annals: Kettenkaefer popped (claimed),
+# SENSE_OMINOUS_PRESENCE; Kettenkaefer killed: killed_wsnm 1; qm3: the local var cleared, the Annals of Truth (a keyItem
+# reply); qm3 again: nil: its default NOTHING_OUT_OF_ORDINARY. Norg: Jaucribaix 183: completed (fame), the three key
+# items taken, Tachi: Kasha learnt, TACHI_KASHA_LEARNED; again: no section: 165.
+lists Norg/Jaucribaix/onTrigger Norg/Jaucribaix/onTrade KuftalTunnel/qm3/onTrigger Norg/onEventFinish/183
+char zone=Norg pos=91,-7,-8 job=SAM lvl=75
+skill GreatKatana 2500
+item TachiOfTrials wsp=300
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+quest Outlands.AThiefInNorg completed
+login
+trigger Jaucribaix                      # available: 178 (Event, once per zone) beats 165 (replaceDefault)
+finish option=0                         # nothing
+trigger Jaucribaix                      # 178 performed this zone: ignored: 165
+finish
+warp -63,7,0 PortJeuno                  # out of Norg and back: the local vars cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # 178
+finish option=1                         # the tachi held: the Weapon Training Guide; begun
+trigger Jaucribaix                      # accepted: 179 (1)
+finish option=1                         # the tachi held: nothing
+trade Jaucribaix TachiOfTrials x1       # 300 points: 181
+finish                                  # the tachi taken; the Map to the Annals of Truth
+trigger Jaucribaix                      # the map: 182
+finish
+warp 200,11,99 KuftalTunnel
+trigger qm3                             # the map, no annals: Kettenkaefer popped; SENSE_OMINOUS_PRESENCE
+kill KETTENKAEFER                       # the map held: killed_wsnm 1
+trigger qm3                             # killed_wsnm 1: cleared; the Annals of Truth
+trigger qm3                             # the annals held: nil: default NOTHING_OUT_OF_ORDINARY
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # the annals: 183
+finish                                  # completed; the key items taken; Tachi: Kasha; TACHI_KASHA_LEARNED
+trigger Jaucribaix                      # completed: no section: 165
+finish

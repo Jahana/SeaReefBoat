@@ -1,0 +1,18 @@
+# Sorcery of the North (sandoria 83) accepted by GM, no tome, at the Fei'Yin chest: the trade's exactness is
+# xi.treasure.onTrade's (the quest's call passes the trade through): the key and a bone chip (two items) and a bone chip
+# alone are refused (CHEST_UNLOCKED + 7, the key named; nothing taken); the key alone opens the chest (the tome 2 s
+# later). A trade of the key with the tome then held is the chest's own (the quest's nil): the chest is open (opened
+# 1 for 5 s): CHEST_UNLOCKED - 7.
+char zone=Feiyin pos=168.7,-24.0,210.8 job=WAR lvl=50
+quest Sandoria.SorceryOfTheNorth accepted
+item FeiyinChestKey x2
+item BoneChip
+login
+tick 13000
+trigger Treasure_Chest                    # the chest's own trigger
+trade Treasure_Chest FeiyinChestKey x1 BoneChip x1  # the key and a chip: refused
+trade Treasure_Chest BoneChip x1          # a chip: refused
+trade Treasure_Chest FeiyinChestKey x1    # the key: the chest opens
+tick 2500                                 # the Fei'Yin Magic Tome
+trade Treasure_Chest FeiyinChestKey x1    # the tome held: the chest's own script; open: CHEST_UNLOCKED - 7
+tick 2000

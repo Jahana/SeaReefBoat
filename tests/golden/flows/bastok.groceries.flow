@@ -1,0 +1,38 @@
+# Groceries (bastok 37): Tami in Bastok Mines, Zelman in Zeruhn Mines. A key item seen or not, the start over at
+# Prog 0, a trade, a full inventory. From XI.Verify.QuestScripts.Live's RunGroceries twin.
+lists BastokMines/Tami/onTrigger BastokMines/Tami/onTrade BastokMines/onEventFinish/110 BastokMines/onEventFinish/112 BastokMines/onEventFinish/113 ZeruhnMines/Zelman/onTrigger ZeruhnMines/onEventFinish/161 ZeruhnMines/onEventFinish/162
+char zone=BastokMines pos=61,0,-68
+item StripOfMeatJerky
+item BronzeIngot
+login
+trigger Tami                    # the offer, 110
+finish                          # accepted: Tami's Note, Prog 1
+trigger Tami                    # Prog 1: TAMI_MY_HUSBAND, no event
+trade Tami StripOfMeatJerky x1  # the jerky at Prog 1: nothing
+finish-if-event
+route ZeruhnMines               # to Zelman, the note not looked at
+trigger Zelman                  # 161
+finish                          # Prog 2, the note gone
+trigger Zelman                  # Prog 2: ZELMAN_CANT_RUN_AROUND
+route BastokMines
+trigger Tami                    # Prog 2: 112
+finish                          # 10 fame, 10 gil, Prog 0
+trigger Tami                    # accepted at Prog 0: 110 again
+finish                          # the note again, Prog 1
+seekeyitem TamisNote            # the note looked at
+route ZeruhnMines
+trigger Zelman                  # the note seen: 162
+finish                          # Prog 3, the note gone
+trigger Zelman                  # Prog 3: his message
+route BastokMines
+trigger Tami                    # Prog 3: 111
+finish
+trade Tami BronzeIngot x1       # nothing
+fill-inventory
+trade Tami StripOfMeatJerky x1  # 113
+finish                          # the inventory full: not completed, the jerky kept
+free-inventory
+trade Tami StripOfMeatJerky x1  # 113
+finish                          # completed: the Rabbit Mantle, 20 fame
+trigger Tami                    # completed: not offered again
+finish-if-event

@@ -1,0 +1,15 @@
+# The Prankster's edges: a level 75 Warrior in Whitegate, the quest accepted at Prog 3 (GMs): Ahaadah 17. Bhaflau
+# Thickets at Prog 0 (a GM): qm3: no Prog-0 handler: NOTHING_HAPPENS. Prog 4 (a GM): Ahaadah: no section.
+lists AhtUrhganWhitegate/Ahaadah/onTrigger BhaflauThickets/qm3/onTrigger
+char zone=AhtUrhganWhitegate pos=-68.7,-6,105.246 job=WAR lvl=75
+quest AhtUrhgan.ThePrankster accepted
+charvar Quest[6][60]Prog 3
+login
+trigger Ahaadah                         # Prog 3: 17
+finish
+charvar Quest[6][60]Prog 4              # a GM: past the last step
+trigger Ahaadah                         # Prog 4: no section
+finish-if-event
+charvar Quest[6][60]Prog 0              # a GM
+warp 461.666,-14.926,256.214 BhaflauThickets
+trigger qm3                             # Prog 0: nil: NOTHING_HAPPENS

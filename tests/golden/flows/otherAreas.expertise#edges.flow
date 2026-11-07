@@ -1,0 +1,33 @@
+# Expertise (otherAreas 4): the available check and Take's conditions, bracketed. His Name is Valgeir accepted (a GM): its
+# section (Take 65), none of this quest's. Completed (a GM), Quest[4][3]DayCompleted 7992 (7992 + 8 = 8000, not below):
+# 65; 7991 with Windurst fame 124 (level 2): 65; fame 125: 61; the quest made completed by a GM while it is open: no
+# section, nothing (DayCompleted stays 7991). Available again (a GM): 61, finished with option 1: begun all the same
+# (any option), DayCompleted 0. The accepted section's status operand alone: Prog 3 (a GM) and the bisque while completed
+# (a GM): Take's default 59, not 62.
+lists Mhaura/Take/onTrigger Mhaura/onEventFinish/61 Mhaura/onEventFinish/62
+char zone=Mhaura pos=22.1,-8,69.8 job=WAR lvl=30
+quest OtherAreas.HisNameIsValgeir accepted
+fame Windurst 125
+login
+trigger Take                            # His Name is Valgeir accepted: 65; no Expertise section
+finish
+quest OtherAreas.HisNameIsValgeir completed # a GM
+charvar Quest[4][3]DayCompleted 7992    # 8000 < 8000 false
+trigger Take                            # 65
+finish
+charvar Quest[4][3]DayCompleted 7991    # 7999 < 8000
+fame Windurst 124                       # level 2
+trigger Take                            # 65
+finish
+fame Windurst 125                       # level 3
+trigger Take                            # 61
+quest OtherAreas.Expertise completed    # a GM, while 61 is open
+finish                                  # no section while completed: nothing (DayCompleted stays 7991)
+quest OtherAreas.Expertise available    # a GM
+trigger Take                            # 61
+finish option=1                         # any option: DayCompleted 0, begun
+charvar Quest[4][4]Prog 3               # a GM
+keyitem LandCrabBisque                  # a GM
+quest OtherAreas.Expertise completed    # a GM
+trigger Take                            # completed: no section (The Clue off below fame level 5): 59
+finish

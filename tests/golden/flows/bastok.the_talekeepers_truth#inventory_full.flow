@@ -1,0 +1,15 @@
+# The Talekeeper's Truth (bastok 55): 165 with a full inventory (not completed, no Gift Timer or mustZone), then with
+# room; the ??? at Prog 2 (no pop).
+char zone=PalboroughMines pos=15,-31,-94 job=WAR lvl=50
+quest Bastok.TheDoorman completed
+quest Bastok.TheTalekeepersTruth accepted
+charvar Quest[1][55]Prog 2
+login
+trigger qm_talekeeper           # Prog 2: nil, NOTHING_OUT_OF_ORDINARY
+warp -13,7,29 BastokMines
+fill-inventory
+trigger Deidogg                 # Prog 2, no Timer: 165
+finish                          # inventory full: not completed
+free-inventory
+trigger Deidogg                 # 165
+finish                          # completed: Fighter's Calligae, fame +20, the Gift's Timer and mustZone

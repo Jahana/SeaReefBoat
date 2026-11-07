@@ -1,0 +1,45 @@
+# To Cure a Cough (sandoria 20), GM-set states. Nenne, available, The Medicine Woman completed: toCureaCough -1 (not 0:
+# 584); The Medicine Woman accepted (not completed: 584); toCureaCough 0 with the Cough Medicine (GM): 538 first (before
+# 647), then 647 (completed from available; Quest[0][20]Prog 1 (GM) kept: the raw player:completeQuest). 538 finished
+# after a GM status change while it is open (its finish reads no status: toCureaCough 1). Amaura (her default 642
+# alternates with the script): both the moss and the medicine: 646 (the moss arm); 646 while available at DiaryPage 3
+# (its finish reads no status); completed at DiaryPage 3: 645, whose finish calls addQuest (the current bit; the status
+# stays completed).
+char zone=SouthernSanDoria pos=-112.6,-6.9,105.2 job=WAR lvl=30
+quest Sandoria.TheMedicineWoman completed
+charvar toCureaCough -1
+login
+trigger Nenne                             # available, toCureaCough -1: 584
+finish
+charvar toCureaCough 0
+quest Sandoria.TheMedicineWoman available
+quest Sandoria.TheMedicineWoman accepted
+trigger Nenne                             # available, toCureaCough 0, The Medicine Woman accepted: 584
+finish
+quest Sandoria.TheMedicineWoman completed
+trigger Nenne                             # 538
+quest Sandoria.ToCureACough completed
+finish                                    # completed while 538 is open: toCureaCough 1 all the same
+quest Sandoria.ToCureACough available
+charvar toCureaCough 0
+keyitem CoughMedicine
+trigger Nenne                             # available, toCureaCough 0, the medicine: 538 (first)
+finish                                    # toCureaCough 1
+charvar Quest[0][20]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Nenne                             # the medicine: 647
+finish                                    # completed from available; Quest[0][20]Prog kept
+charvar DiaryPage 3
+keyitem ThymeMoss
+keyitem CoughMedicine
+quest Sandoria.ToCureACough available
+warp -82.4,-6.9,91.1 SouthernSanDoria
+trigger Amaura                            # DiaryPage 3, the moss and the medicine
+finish-if-event
+trigger Amaura                            # 646 (the previous talk, line 34, took 642)
+finish-if-event                           # 646 while available: the moss taken, the medicine (again)
+delkeyitem CoughMedicine
+quest Sandoria.ToCureACough completed
+trigger Amaura                            # completed, DiaryPage 3, no key item
+finish-if-event
+trigger Amaura                            # 645 (the previous talk, line 40, took 642)
+finish-if-event                           # 645: addQuest; still completed

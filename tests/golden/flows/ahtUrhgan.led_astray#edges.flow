@@ -1,0 +1,27 @@
+# Led Astray's edges: a level 75 Warrior in Whitegate, the quest accepted at Prog 2 (GMs). Rubahah first: 811,
+# finished: bit 2 not set: Stage bit 1; Rubahah: nil: his shop (his script; no event); Cacaroon 812, finished: bit 1
+# set: Prog 3, Stage 0. Nashmau's Tataroon at Prog 3: no Prog-3 Nashmau handler: 270. Prog 4 (a GM) with a full bag:
+# Tataroon 305, finished: the silver piece does not fit: not completed, the letter kept; freed: 305: completed, the
+# letter taken.
+lists AhtUrhganWhitegate/Rubahah/onTrigger AhtUrhganWhitegate/Cacaroon/onTrigger AhtUrhganWhitegate/onEventFinish/811 AhtUrhganWhitegate/onEventFinish/812 Nashmau/Tataroon/onTrigger Nashmau/onEventFinish/305
+char zone=AhtUrhganWhitegate pos=-95.2,0,-14.701 job=WAR lvl=75
+keyitem LetterFromBernahn
+quest AhtUrhgan.LedAstray accepted
+charvar Quest[6][65]Prog 2
+login
+trigger Rubahah                         # Prog 2, no bit 1: 811
+finish                                  # bit 2 not set: Stage bit 1
+trigger Rubahah                         # bit 1 set: nil: his shop
+finish-if-event
+trigger Cacaroon                        # no bit 2: 812
+finish                                  # bit 1 set: Prog 3, Stage 0
+warp -23.7,0,-39.022 Nashmau
+trigger Tataroon                        # Prog 3: nil: 270
+finish
+charvar Quest[6][65]Prog 4              # a GM
+fill-inventory
+trigger Tataroon                        # Prog 4: 305
+finish                                  # the silver piece does not fit: not completed, the letter kept
+free-inventory
+trigger Tataroon                        # 305
+finish                                  # completed; the letter taken

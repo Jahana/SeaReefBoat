@@ -1,0 +1,49 @@
+# Dark Puppet (bastok 58, DRK AF2): Cid in the Metalworks, qm4 / qm5 / qm6 and Gerwitz's Axe, Sword and Soul in Ordelle's
+# Caves, the La Theine Plateau zone-in. The guard (Dark Legacy completed, DRK, AF2_QUEST_LEVEL 50), the offer 760, the
+# Ordelle's Caves zone-in 10 at Prog 0 (Prog 1), the Darksteel Ingot at qm4 (Gerwitz's Axe, DARK_PUPPET_OFFSET+0),
+# Gerwitz's Axe at qm5 (Gerwitz's Sword, +1), Gerwitz's Sword at qm6 (Gerwitz's Soul, +2), the Soul's death (Prog 2), the
+# La Theine Plateau zone-in 122 and the reward (Chaos Sollerets, fame +20). Each pop takes the traded item and shows
+# SENSE_A_FOUL_PRESENCE; the qm stays shown (hide = 0). The Axe and the Sword NMs drop their weapon into the char's
+# inventory at the kill (the pinned seed); the GM `item ... held` line after each kill is then a no-op (both weapons are
+# rare), and the plain `item` gives the weapon back after a trade took it.
+# Defaults: Cid 500 (DefaultActions); qm4-qm6 NOTHING_OUT_OF_ORDINARY. Cid's other quests and missions (Chips, Shoot
+# First Ask Questions Later, Bastok 1-2 / 2-1 / 7-1, CoP 3-1 onward) need what this char lacks.
+lists Metalworks/Cid/onTrigger Metalworks/Cid/onTrade Metalworks/onEventFinish/760 OrdellesCaves/onZoneIn/1 OrdellesCaves/onEventFinish/10 OrdellesCaves/qm4/onTrade OrdellesCaves/qm5/onTrade OrdellesCaves/qm6/onTrade OrdellesCaves/Gerwitzs_Soul/onMobDeath LaTheinePlateau/onZoneIn/1 LaTheinePlateau/onEventFinish/122
+char zone=Metalworks pos=-12.6,-11,4 job=DRK lvl=50
+item DarksteelIngot x2
+item BoneChip
+login
+trigger Cid                          # Dark Legacy not completed: not offered, 500
+finish-if-event
+quest Bastok.DarkLegacy completed
+trade Cid BoneChip x1                # available: no trade handler, nothing
+trigger Cid                          # the offer, 760
+finish                               # accepted
+trigger Cid                          # accepted: no handler, 500
+finish-if-event
+warp -559,0,680 LaTheinePlateau      # Prog 0: La Theine's zone-in is nil (not 122)
+zoneline OrdellesCaves               # Prog 0: 10, answered with option 0: Prog 1
+warp 12.5,32,165.5 OrdellesCaves     # Prog 1: the zone-in is nil
+trade qm4 BoneChip x1                # the wrong item: nil, nothing
+trade qm4 DarksteelIngot x1          # no axe: Gerwitz's Axe popped, the ingot taken, SENSE_A_FOUL_PRESENCE
+trade qm4 DarksteelIngot x1          # the Axe NM up: popFromQM false, nil (the ingot kept)
+kill DARK_PUPPET_OFFSET              # the Axe NM: no handler; it drops Gerwitz's Axe to the char
+item GerwitzsAxe held                # the drop gave it (rare): a no-op
+trade qm4 DarksteelIngot x1          # the axe held: nil, nothing
+warp -94,-28.4,-69.5 OrdellesCaves
+trade qm5 BoneChip x1                # the wrong item: nil
+trade qm5 GerwitzsAxe x1             # no sword: Gerwitz's Sword popped, the axe taken, SENSE_A_FOUL_PRESENCE
+item GerwitzsAxe
+trade qm5 GerwitzsAxe x1             # the Sword NM up: nil (the axe kept)
+kill DARK_PUPPET_OFFSET+1            # the Sword NM: no handler; it drops Gerwitz's Sword to the char
+item GerwitzsSword held              # the drop gave it (rare): a no-op
+trade qm5 GerwitzsAxe x1             # the sword held: nil, nothing
+warp -131,-27.9,-245 OrdellesCaves
+trade qm6 BoneChip x1                # the wrong item: nil
+trade qm6 GerwitzsSword x1           # Gerwitz's Soul popped, the sword taken, SENSE_A_FOUL_PRESENCE
+item GerwitzsSword
+trade qm6 GerwitzsSword x1           # the Soul up: nil (the sword kept)
+kill DARK_PUPPET_OFFSET+2            # Gerwitz's Soul: Prog 2
+warp -559,0,680 LaTheinePlateau      # Prog 2: 122, answered with option 0: completed, Chaos Sollerets, fame +20
+warp -131,-27.9,-245 OrdellesCaves   # completed: no zone-in (at the qm6)
+trade qm6 GerwitzsSword x1           # completed: no handler, nothing

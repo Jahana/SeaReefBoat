@@ -1,0 +1,43 @@
+# Elder Memories (otherAreas 24): Selbina's Isacio (no script, no default); Mhaura's Vera (no script, no default). A level
+# 18 Warrior (SUBJOB_QUEST_LEVEL 18) with a Magicked Skull, a Damselfly Worm, a Crab Apron and a Chocobo Feather (none
+# of the four stacks). Available (The Old Lady available): a trade: no trade handler; Isacio 111 (538), option 0:
+# nothing; option 40: begun. Accepted, Prog 0: Isacio 114 (538); the worm: nil (Prog 0 asks the skull); the skull and the
+# feather: nil (tradeMatches is exact); the skull: 115 (537), finished: the skull taken, Prog 1; Isacio 114 (537); the
+# worm: 116 (539), finished: Prog 2; Isacio 114 (539). Mhaura: Vera 130 (replaceDefault; The Old Lady's section is off).
+# Selbina: the apron: 117, finished: completed (no reward table), the apron taken, the subjob unlocked (SUBJOB_UNLOCKED).
+# Completed: Isacio 118 (replaceDefault); Mhaura: Vera 130 (replaceDefault).
+lists Selbina/Isacio/onTrigger Selbina/Isacio/onTrade Mhaura/Vera/onTrigger Selbina/onEventFinish/111 Selbina/onEventFinish/115 Selbina/onEventFinish/116 Selbina/onEventFinish/117
+char zone=Selbina pos=-56.6,-0.9,-46.4 job=WAR lvl=18
+item MagickedSkull
+item DamselflyWorm
+item CrabApron
+item ChocoboFeather
+login
+trade Isacio MagickedSkull x1           # available: no trade handler; nothing
+trigger Isacio                          # level 18 >= 18: 111 (538)
+finish option=0                         # not 40: nothing
+trigger Isacio                          # 111 (538)
+finish option=40                        # begun
+trigger Isacio                          # Prog 0: 114 (538)
+finish
+trade Isacio DamselflyWorm x1           # Prog 0 asks the skull: nil
+trade Isacio MagickedSkull x1 ChocoboFeather x1 # an extra item: nil
+trade Isacio MagickedSkull x1           # 115 (537)
+finish                                  # the skull taken, Prog 1
+trigger Isacio                          # Prog 1: 114 (537)
+finish
+trade Isacio DamselflyWorm x1           # 116 (539)
+finish                                  # the worm taken, Prog 2
+trigger Isacio                          # Prog 2: 114 (539)
+finish
+warp -51.5,-3.9,17.2 Mhaura
+trigger Vera                            # accepted: 130 (replaceDefault)
+finish
+warp -56.6,-0.9,-46.4 Selbina
+trade Isacio CrabApron x1               # Prog 2, no next item: 117
+finish                                  # completed; the apron taken; the subjob unlocked (SUBJOB_UNLOCKED)
+trigger Isacio                          # completed: 118 (replaceDefault)
+finish
+warp -51.5,-3.9,17.2 Mhaura
+trigger Vera                            # completed: 130 (replaceDefault)
+finish

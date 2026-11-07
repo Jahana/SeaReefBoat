@@ -1,0 +1,77 @@
+# The Price of Valor (crystalWar 44): a level 99 Warrior in Southern San d'Oria [S] with In a Haze of Glory
+# completed (a GM; missions as group 1's flows). Haze's 82 sets the Timer (tomorrow) and the mustZone: set here by
+# GMs. The Timer 99999: Rholont 49; the Timer 0, the mustZone 80: 49; out to Garlaige Citadel [S] and back: 638,
+# finished: Prog 1. Rholont: none of the three: 643. Tree Hollow 640, finished: the Long-Life Biscuits; Tree Hollow
+# again: nil (NOTHING_OUT_OF_ORDINARY). Well 641, finished: the Flask of Kingdom Water. Rholont: two of three: 643.
+# The Ronfaure Maple Syrup (a GM: East Ronfaure [S] logging gives it at random): Rholont 642, finished: the Biscuit
+# a la Rholont, the three taken, Prog 2. Rholont: 645. Jugner Forest [S]: Felled Trees 211, finished: begun. Vunkerl
+# Inlet [S]: Toppled Cresset 1 202 (Prog 3), Toppled Cresset 2 203 (Prog 4), Underbrush 204 (Prog 5). Underbrush:
+# nmDefeated 0, the NM down: 205, finished: Madthrasher Zradbodd spawned, claimed (scripted spawn: not up at zone
+# load; the mob is `BIG_BANG+211`, 17117560: no IDs.lua key of its own); Underbrush: the NM up: NOW_IS_NOT_THE_TIME.
+# The NM killed at Prog 5: nmDefeated 1. Underbrush 206, finished: Prog 6; Underbrush again at Prog 6: nil. Toppled
+# Cresset 2 again at Prog 4: nil. Pashhow Marshlands [S]: Shimmering Pondweed 105, finished: completed (a Peiste
+# Skin). Pondweed again: Bonds That Never Die available, no letter: nil.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Tree_Hollow/onTrigger SouthernSanDoriaS/Well/onTrigger SouthernSanDoriaS/onEventFinish/638 SouthernSanDoriaS/onEventFinish/640 SouthernSanDoriaS/onEventFinish/641 SouthernSanDoriaS/onEventFinish/642 JugnerForestS/Felled_Trees/onTrigger JugnerForestS/onEventFinish/211 VunkerlInletS/Toppled_Cresset_1/onTrigger VunkerlInletS/Toppled_Cresset_2/onTrigger VunkerlInletS/Underbrush/onTrigger VunkerlInletS/Madthrasher_Zradbodd/onMobDeath VunkerlInletS/onEventFinish/202 VunkerlInletS/onEventFinish/203 VunkerlInletS/onEventFinish/204 VunkerlInletS/onEventFinish/205 VunkerlInletS/onEventFinish/206 PashhowMarshlandsS/Shimmering_Pondweed/onTrigger PashhowMarshlandsS/onEventFinish/105
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.InAHazeOfGlory completed
+charvar Quest[7][44]Timer 99999         # a GM: a day to come
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # the Timer to come: 49
+finish
+charvar Quest[7][44]Timer 0             # a GM
+charvar Quest[7][44]mustZone 80         # a GM: the mustZone (Haze's 82 sets it in Southern San d'Oria [S])
+trigger Rholont                         # the mustZone set: 49
+finish
+warp 62.849,-6.078,137.438 GarlaigeCitadelS # another zone: the mustZone cleared
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 0: 638
+finish                                  # Prog 1
+trigger Rholont                         # Prog 1, none of the three: 643
+finish
+trigger Tree_Hollow                     # Prog 1, no biscuits: 640
+finish                                  # the Long-Life Biscuits
+trigger Tree_Hollow                     # the biscuits held: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+walk -151.676,-4.789,57.37
+trigger Well                            # Prog 1, no flask: 641
+finish                                  # the Flask of Kingdom Water
+walk -167.043,-2,55.484
+trigger Rholont                         # two of the three: 643
+finish
+keyitem RonfaureMapleSyrup              # a GM: the East Ronfaure [S] logging's (random)
+trigger Rholont                         # all three: 642
+finish                                  # the Biscuit a la Rholont; the three taken; Prog 2
+trigger Rholont                         # Prog 2: 645
+finish
+warp -262.344,5.713,151.392 JugnerForestS
+trigger Felled_Trees                    # Prog 2: 211
+finish                                  # begun
+warp 140.377,-31.939,107.459 VunkerlInletS
+trigger Toppled_Cresset_1               # Prog 2: 202
+finish                                  # Prog 3
+walk -391.386,-32.396,-45.692
+trigger Toppled_Cresset_2               # Prog 3: 203
+finish                                  # Prog 4
+trigger Toppled_Cresset_2               # Prog 4: nothing (the test is Prog 3 only)
+finish-if-event
+walk -330.161,-39.57,-696.664
+trigger Underbrush                      # Prog 4: 204
+finish                                  # Prog 5
+trigger Underbrush                      # Prog 5, nmDefeated 0, the NM down: 205 (its id into nmId)
+finish                                  # Madthrasher Zradbodd spawned, claimed
+trigger Underbrush                      # the NM up: NOW_IS_NOT_THE_TIME
+finish-if-event
+kill BIG_BANG+211                       # Madthrasher Zradbodd (17117560) at Prog 5: nmDefeated 1
+trigger Underbrush                      # nmDefeated 1: 206
+finish                                  # Prog 6
+trigger Underbrush                      # Prog 6: nothing (the test is Prog 5 only; nmDefeated is 1)
+finish-if-event
+warp -196.855,24.999,407.678 PashhowMarshlandsS
+trigger Shimmering_Pondweed             # Prog 6: 105
+finish                                  # completed (a Peiste Skin)
+trigger Shimmering_Pondweed             # Bonds That Never Die available, no letter: nil
+finish-if-event

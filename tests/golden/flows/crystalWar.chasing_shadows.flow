@@ -1,0 +1,59 @@
+# Chasing Shadows (crystalWar 60): a level 99 Warrior in Southern San d'Oria [S] with Blood of Heroes completed (a GM;
+# the WotG mission The Scent of Battle current, other logs as group 1's flows). The Timer stays 0: the GM completion
+# runs no 7 (whose finish sets it to tomorrow). Rholont (available): 656. Rongelouts N Distaud 165, finished: begun. Rholont 167,
+# Rongelouts 168 (accepted). Out to Beaucedine Glacier [S], then Xarcabard [S] from there at Prog 0: 30, finished: Prog
+# 1. Backfilled Pit 31, finished: Prog 2; Prog 2: nil (NOTHING_OUT_OF_ORDINARY). Compact Footprint 32, finished: Prog 3;
+# Prog 3: nil. Sunken Footprint 33, finished: Prog 4; Prog 4: nil. Compact Footprint 34, finished: Prog 5. Out to
+# Beaucedine Glacier [S], then Batallia Downs [S] from there at Prog 5: 114, finished: Prog 6. Fresh Snowmelt 115,
+# finished: Prog 7; 116, finished: Menechme spawned (unclaimed; scripted: not up at zone load); the NM up: nil. The NM
+# killed at Prog 7: Prog 8. Fresh Snowmelt 117, finished: completed (a Darksteel Sheet), Face of the Future accepted,
+# the char set down in Batallia Downs (Face at Prog 0: no zone-in reply there).
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Rongelouts_N_Distaud/onTrigger SouthernSanDoriaS/onEventFinish/165 XarcabardS/onZoneIn/1 XarcabardS/Backfilled_Pit/onTrigger XarcabardS/Compact_Footprint/onTrigger XarcabardS/Sunken_Footprint/onTrigger XarcabardS/onEventFinish/30 XarcabardS/onEventFinish/31 XarcabardS/onEventFinish/32 XarcabardS/onEventFinish/33 XarcabardS/onEventFinish/34 BatalliaDownsS/onZoneIn/1 BatalliaDownsS/Fresh_Snowmelt/onTrigger BatalliaDownsS/Menechme/onMobDeath BatalliaDownsS/onEventFinish/114 BatalliaDownsS/onEventFinish/115 BatalliaDownsS/onEventFinish/116 BatalliaDownsS/onEventFinish/117 BatalliaDowns/onZoneIn/1
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.BloodOfHeroes completed
+mission Wotg TheScentOfBattle current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # available: 656
+finish
+trigger Rongelouts_N_Distaud            # available: 165
+finish                                  # begun
+trigger Rholont                         # accepted: 167
+finish
+trigger Rongelouts_N_Distaud            # accepted: 168
+finish
+warp 46.437,-0.762,-370.178 BeaucedineGlacierS
+warp -172,-2.818,-85 XarcabardS open    # from Beaucedine Glacier [S] at Prog 0: 30, left open
+finish                                  # Prog 1
+trigger Backfilled_Pit                  # Prog 1: 31
+finish                                  # Prog 2
+trigger Backfilled_Pit                  # Prog 2: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+trigger Compact_Footprint               # Prog 2: 32
+finish                                  # Prog 3
+trigger Compact_Footprint               # Prog 3: nil
+finish-if-event
+trigger Sunken_Footprint                # Prog 3: 33
+finish                                  # Prog 4
+trigger Sunken_Footprint                # Prog 4: nil
+finish-if-event
+trigger Compact_Footprint               # Prog 4: 34
+finish                                  # Prog 5
+warp 46.437,-0.762,-370.178 BeaucedineGlacierS
+warp -71.66,-2.58,450.114 BatalliaDownsS open # from Beaucedine Glacier [S] at Prog 5: 114, left open
+finish                                  # Prog 6
+trigger Fresh_Snowmelt                  # Prog 6: 115
+finish                                  # Prog 7
+trigger Fresh_Snowmelt                  # Prog 7, the NM not up: 116
+finish                                  # Menechme spawned (no claim)
+trigger Fresh_Snowmelt                  # the NM up: nil
+finish-if-event
+kill MENECHME                           # Prog 7: Prog 8
+trigger Fresh_Snowmelt                  # Prog 8: 117
+finish                                  # completed (a Darksteel Sheet); Face of the Future accepted
+# setPos into Batallia Downs
+tick 400
+login                                   # the zone change: Batallia Downs (Face at Prog 0: no zone-in reply)

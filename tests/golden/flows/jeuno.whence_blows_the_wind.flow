@@ -1,0 +1,50 @@
+# Whence Blows the Wind (jeuno 130, limit break 3): Maat in Ru'Lude Gardens (the first of that name), qm2 in Castle
+# Oztroja, qm1 in Monastic Cavern, qm1 in Qulun Dome (no scripts; defaults NOTHING_OUT_OF_ORDINARY,
+# NOTHING_OUT_OF_ORDINARY, YOU_FIND_NOTHING). A level 56 Warrior at level cap 60 (a GM, before login), MAX_LEVEL 99.
+# Available: a stone (no trade handler: nothing), 85 answered 0 and 2 (not 1: nothing), then 1 (begun). Accepted: 86;
+# a stone (nil). Each ??? gives its crest, then nil once held (its default). Maat with one crest missing at a time (a
+# GM): 86 each time; with the three: 87 (completed: Sky Breaker, the crests taken, level cap 65,
+# YOUR_LEVEL_LIMIT_IS_NOW_65); then Riding on the Clouds is not offered (it wants level 61): MAAT_DIALOG; a GM's cap 60
+# again: this quest completed, no section: MAAT_DIALOG.
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/85 RuludeGardens/onEventFinish/87 CastleOztroja/qm2/onTrigger MonasticCavern/qm1/onTrigger QulunDome/qm1/onTrigger
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=56
+levelcap 60
+item FlintStone
+login
+trade Maat FlintStone x1                # available (cap 60): no trade handler, nothing
+trigger Maat                            # cap 60, level 56: 85
+finish option=0                         # not 1: nothing
+trigger Maat                            # 85
+finish option=2                         # not 1: nothing
+trigger Maat                            # 85
+finish option=1                         # begun
+trigger Maat                            # accepted, no crest: 86
+finish
+trade Maat FlintStone x1                # accepted: no trade handler, nil
+warp -99,-63.2,60.3 CastleOztroja
+trigger qm2                             # the Yagudo Crest
+trigger qm2                             # held: nil; NOTHING_OUT_OF_ORDINARY
+warp 169.3,-2.1,-21.3 MonasticCavern
+trigger qm1                             # the Orcish Crest
+trigger qm1                             # held: nil; NOTHING_OUT_OF_ORDINARY
+warp 261.4,39.8,79.5 QulunDome
+trigger qm1                             # the Quadav Crest
+trigger qm1                             # held: nil; YOU_FIND_NOTHING
+warp 12.4,3.1,119.5 RuludeGardens
+delkeyitem OrcishCrest                  # a GM: the Orcish one missing
+trigger Maat                            # 86
+finish
+keyitem OrcishCrest                     # a GM: back
+delkeyitem QuadavCrest                  # the Quadav one missing
+trigger Maat                            # 86
+finish
+keyitem QuadavCrest
+delkeyitem YagudoCrest                  # the Yagudo one missing
+trigger Maat                            # 86
+finish
+keyitem YagudoCrest
+trigger Maat                            # the three crests: 87
+finish                                  # completed: Sky Breaker, the crests taken, level cap 65, YOUR_LEVEL_LIMIT_IS_NOW_65
+trigger Maat                            # Riding on the Clouds wants level 61: no section; MAAT_DIALOG
+levelcap 60                             # a GM: cap 60 again
+trigger Maat                            # this quest completed: no section; MAAT_DIALOG

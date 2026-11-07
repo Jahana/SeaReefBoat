@@ -1,0 +1,12 @@
+# Lakeside Minuet (jeuno 95) at level 30 with ENABLE_WOTG true: the Lua's `true == 1` is false (Settings.MainEquals, quest
+# rework P9; MainNumber / Main would read true as 1): no section; Laila's default 10120. Then 1: 10111. Recorded on Lua at
+# 18acd18b^ (the parent of the commit that deleted the Lua).
+lists UpperJeuno/Laila/onTrigger
+char zone=UpperJeuno pos=-52.5,0,101 job=WAR lvl=30
+setting ENABLE_WOTG true
+login
+trigger Laila                           # true is not 1: no section; default 10120
+finish
+setting ENABLE_WOTG 1
+trigger Laila                           # WotG on, level 30: 10111
+finish                                  # option 0: not begun

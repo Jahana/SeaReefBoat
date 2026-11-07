@@ -1,0 +1,23 @@
+# Trial by Water (outlands 133), the battlefield's arms without a win. Accepted without the fork: WP_Entrance opens no
+# menu (the fork is required). Available with the fork: no menu (BattlefieldQuest's entry wants the status at accepted or
+# more; a status read that stays in Lua). Accepted with the fork: entered (the fork taken), then left through
+# Water_Protocrystal (32003, option 4: leaveBattlefield): no 32001, no whisper; Edal-Tahdal then has neither key item:
+# 190 (a new fork).
+char zone=CloisterOfTides pos=557.5,35.1,563.0 job=WAR lvl=75
+quest Outlands.TrialByWater accepted
+login
+trigger WP_Entrance                       # accepted, no fork: no menu
+finish-if-event
+keyitem TuningForkOfWater
+quest Outlands.TrialByWater available
+trigger WP_Entrance                       # available, the fork: no menu
+finish-if-event
+quest Outlands.TrialByWater accepted
+trigger WP_Entrance                       # accepted, the fork: 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+trigger Water_Protocrystal                # the exit: 32003
+finish option=4                           # left: no win
+warp -13.0,1.1,-19.0 Norg
+trigger Edal-Tahdal                       # accepted, neither key item: 190
+finish                                    # a new fork

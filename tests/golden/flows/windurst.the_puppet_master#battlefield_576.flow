@@ -1,0 +1,15 @@
+# The Puppet Master (windurst 81) at Prog 1: the battlefield won (battlefieldWin 577), then its 32001 finished after a GM
+# sets the local var battlefieldWin to 576 (Trial by Earth's id, below the battlefield's 577): the quest's 32001 handler's battlefieldWin side:
+# nothing (Prog stays 1). With #battlefield_578 it brackets the == 577 test.
+lists CloisterOfTremors/EP_Entrance/onTrade CloisterOfTremors/onEventFinish/32001
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+quest Windurst.ThePuppetMaster accepted
+charvar Quest[2][81]Prog 1
+item EarthPendulum
+login
+trade EP_Entrance EarthPendulum x1             # the 32000 menu
+update 32000 option=17                         # index 1, arena 1: registered, entered
+finish                                         # in the arena
+kill GALGALIM                                  # arena 1's mob (the battlefield's mobIds are per arena): won, battlefieldWin 577; 32001 opens
+localvar battlefieldWin 576                     # GM
+finish                                         # 32001, battlefieldWin 576: nothing (Prog 1)

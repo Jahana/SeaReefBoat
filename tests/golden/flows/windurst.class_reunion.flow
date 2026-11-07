@@ -1,0 +1,100 @@
+# Class Reunion (windurst 82, SMN AF2): the door _6n2 and Koru-Moru (Windurst Walls), Shantotto, Fuepepe and
+# Furakku-Norakku, Gulmama (Northern San d'Oria). The Puppet Master completed by GM. SMN 75.
+# Turns: _6n2 (default DOORS_SEALED_SHUT), Koru-Moru (193), Fuepepe (423) and Furakku-Norakku (371) have a
+# Default-priority default and a script, so the lookup takes turns: the default's turn, the script's turn
+# (interaction_lookup.lua's UseFallback, per NPC, cleared by a zone change: a warp zones). A script that plays nothing
+# falls back to the default, and the next talk is the default's turn again. At Shantotto, Curses Foiled Again 1's
+# offer 171 (an Event, available to a fresh char) outranks her default 164 and takes the turns. Gulmama has no default
+# (her 710 is her script's). Back in Windurst Walls from Windurst Waters, a mission's zone-in event (514) plays.
+# 413 (option 0): begun, Carbuncle's Tear, var 1. Koru-Moru: the trade at var 1: nothing; 412: the tear taken, var 2;
+# 414; the trades: three Astragaloi, four with gil, four with another item: nothing (his script's check); four: 407
+# (the trade taken in its finish, var 3); four again at var 3: nothing; 408 (no student talked to). Shantotto 409:
+# var 4; again: nothing (171). Fuepepe 817; again: nothing. Koru-Moru 408 (Fuepepe only). Furakku-Norakku 816.
+# Gulmama 713: the Ice Pendulum, var 5. Koru-Moru at var 5 with both talked to: nothing of this quest (his default).
+# Var 6 (GM: the Cloister of Frost win stays Lua): 410 refused on a full inventory, then the spats, completed, the
+# vars 0, needToZone, fame 20. Completed: 411.
+char zone=WindurstWalls pos=-24.5,-14.5,263.0 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+item Astragalos x11
+item BlockOfAnimalGlue
+login
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT (a message, no event)
+trigger _6n2                            # the script: TPM completed, available, SMN 75, no needToZone: 413
+finish option=0                         # begun; Carbuncle's Tear; ClassReunionProgress 1
+warp -120.2,-5.5,122.4 WindurstWalls    # beside Koru-Moru
+trade Koru-Moru Astragalos x4           # accepted, var 1: nothing
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # Carbuncle Debacle: nothing; accepted, var 1: 412 (0, 450, 17299)
+finish                                  # the tear taken; var 2
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 2: 414 (0, 0, 17299)
+finish
+trade Koru-Moru Astragalos x3           # three: his script's check fails: nothing
+trade Koru-Moru Astragalos x4 gil=10    # gil in the trade: nothing
+trade Koru-Moru Astragalos x4 BlockOfAnimalGlue x1  # another item: nothing
+trade Koru-Moru Astragalos x4           # accepted, var 2: 407
+finish                                  # the four taken (tradeComplete in the finish); var 3
+trade Koru-Moru Astragalos x4           # var 3: nothing
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 3, no student talked to: 408
+finish
+warp 124.1,-3.0,113.6 WindurstWalls     # beside Shantotto
+trigger Shantotto                       # Curses Foiled Again 1's turn: its offer 171 (Event)
+finish
+trigger Shantotto                       # accepted, var 3: 409
+finish                                  # var 4
+trigger Shantotto                       # Curses Foiled Again 1's turn: its offer 171 (Event)
+finish
+trigger Shantotto                       # var 4: nothing: 171 again
+finish
+warp 165.0,-1.25,161.1 WindurstWaters   # beside Fuepepe
+trigger Fuepepe                         # the default's turn: 423
+finish
+trigger Fuepepe                         # accepted, var 4 (>= 3), not talked to: 817
+finish                                  # ClassReunion_TalkedToFupepe 1
+trigger Fuepepe                         # the default's turn: 423
+finish
+trigger Fuepepe                         # talked to: nothing (423 again)
+finish
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 4, Furakku-Norakku not talked to: 408
+finish
+warp -16.5,-5.25,102.0 WindurstWaters   # beside Furakku-Norakku
+trigger Furakku-Norakku                 # the default's turn: 371
+finish
+trigger Furakku-Norakku                 # status 1 (accepted), var 4, not talked to: 816
+finish                                  # ClassReunion_TalkedToFurakku 1
+trigger Furakku-Norakku                 # the default's turn: 371
+finish
+trigger Furakku-Norakku                 # talked to: nothing (371 again)
+finish
+warp -185.5,0.0,110.1 NorthernSanDoria  # beside Gulmama
+trigger Gulmama                         # accepted, var 4: 713 (0, 1171)
+finish                                  # the Ice Pendulum; var 5
+trigger Gulmama                         # var 5, the pendulum held: no arm; Trial by Ice (fame 0): nothing; her 710
+finish
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 5, both talked to: no arm (Root not accepted): 193
+finish
+charvar ClassReunionProgress 6          # GM: the Cloister of Frost win (class_reunion.lua, var-only) stays Lua
+fill-inventory
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 6, both talked to: 410
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (14228); nothing else
+free-inventory
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # 410
+finish                                  # Evoker's Spats; completed; the three vars 0; needToZone; Windurst fame 20
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # TPM and Class Reunion completed (Carbuncle Debacle available): 411
+finish

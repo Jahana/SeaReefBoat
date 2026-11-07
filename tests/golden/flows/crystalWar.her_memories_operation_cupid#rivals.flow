@@ -1,0 +1,44 @@
+# Her Memories: Operation Cupid (crystalWar 68), the rival at Bulwark Gate: a level 99 Warrior in Sauromugue Champaign
+# [S] with Knot Quite There (crystalWar 27, group 2; Bulwark Gate 105, a Progress, at its Prog 0) and Operation Cupid
+# accepted (GMs; missions as the main flow). Cupid Prog 0: 11 and 105 tie (Progress): 11, the first container,
+# finished: Cupid Prog 1. Then 105 (Progress) over 12 (an Event), finished: Knot Prog 1. Knot Prog 0 again (a GM): 105
+# over 12 again; at Knot Prog 1: 12. The Pot of Martial Relish and Knot Prog 0 (GMs): 13 and 105 tie: 13 (the cycle is
+# at 11, not in the tie), finished: Cupid Prog 2, the pot taken. Knot Prog 0 and the pot again (GMs): the tie rotates:
+# 105. Knot Prog 0 again (a GM), the pot still held, Cupid Prog 2: the tie rotates: 13, finished: the pot taken. Then
+# 105 (Progress) over 14 (an Event).
+lists SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/onEventFinish/11 SauromugueChampaignS/onEventFinish/13 SauromugueChampaignS/onEventFinish/105
+char zone=SauromugueChampaignS pos=-445.674,-1.831,342.417 job=WAR lvl=99
+quest CrystalWar.TheTigressStrikes completed
+quest CrystalWar.KnotQuiteThere accepted
+quest CrystalWar.HerMemoriesOperationCupid accepted
+mission Wotg BackToTheBeginning completed
+mission Wotg HerMemories current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Bulwark_Gate                    # Cupid Prog 0, Knot Prog 0: 11 and 105 tie (Progress): 11, the first container
+finish                                  # Cupid Prog 1
+trigger Bulwark_Gate                    # Cupid Prog 1: 105 (Progress) over 12 (an Event)
+finish                                  # Knot Prog 1
+charvar Quest[7][27]Prog 0              # a GM
+charvar Quest[7][68]Prog 1              # a GM
+trigger Bulwark_Gate                    # 105 over 12 again
+finish                                  # Knot Prog 1
+trigger Bulwark_Gate                    # Knot Prog 1: 12
+finish
+charvar Quest[7][27]Prog 0              # a GM
+keyitem PotOfMartialRelish              # a GM
+trigger Bulwark_Gate                    # the pot: 13 and 105 tie: 13 (the cycle at 11)
+finish                                  # Cupid Prog 2; the pot taken
+charvar Quest[7][27]Prog 0              # a GM
+keyitem PotOfMartialRelish              # a GM
+trigger Bulwark_Gate                    # the tie rotates: 105
+finish                                  # Knot Prog 1
+charvar Quest[7][27]Prog 0              # a GM
+charvar Quest[7][68]Prog 2              # a GM
+trigger Bulwark_Gate                    # the pot still held: the tie rotates: 13
+finish                                  # the pot taken
+trigger Bulwark_Gate                    # Cupid Prog 2: 105 (Progress) over 14 (an Event)
+finish                                  # Knot Prog 1

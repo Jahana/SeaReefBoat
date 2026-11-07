@@ -1,0 +1,97 @@
+# Forge Your Destiny's qm edges. Available (a level 30 Warrior): Konschtat Highlands' qm3 and Zi'Tah's qm2 have no
+# section: their defaults (BLACKENED_SPOT_ON_GROUND, BEAUTIFUL_STURDY_BRANCH) and no trade arm (the steel, the hatchet with
+# the sprig held: nothing, no NM). Accepted (a GM). qm3: from 1.61 yalms the steel traded: BLACKENED_MUST_BE_CLOSER (>
+# 1.6); from 1.59 a Chunk of Darksteel Ore: noAction; the steel and the ore: noAction; the cooldown one second ahead (a
+# GM): trigger BLACKENED_SPOT_ON_GROUND, the steel: BLACKENED_NOTHING_HAPPENS; the cooldown = now: trigger
+# BLACKENED_SHOULD_PLACE, the steel: the Forger spawned (PLACE_BLACKENED_SPOT); the steel again (a GM) with the Forger up
+# and the cooldown at now: NOTHING_HAPPENS (the spawned operand alone); the Forger killed: its body still spawned:
+# NOT_THE_TIME_FOR_THAT, the steel NOTHING_HAPPENS; despawned (its listener: now + 120): SPOT_ON_GROUND, the steel
+# NOTHING_HAPPENS (the cooldown operand). Zi'Tah's qm2: a Hatchet without the sprig: nil (available, then accepted by a GM); the sprig held (a GM): two
+# hatchets: nil; a hatchet and the sprig: nil; the cooldown one second ahead: the hatchet: STRANGE_FORCE_PREVENTS; trigger
+# at Prog 0 with the cooldown ahead: no arm: nil: qm2's default BEAUTIFUL_STURDY_BRANCH; the cooldown = now:
+# LOOKS_LIKE_STURDY_BRANCH; the sprig at Prog 0: nil; the hatchet: the Treant spawned; the hatchet again with the Treant
+# up (the cooldown at now): PREVENTS; trigger: NOT_THE_TIME_FOR_THAT; killed: Prog 1; its body still spawned: trigger
+# NOT_THE_TIME_FOR_THAT (the spawned arm before Prog 1); despawned (its listener: now + 600): NO_LONGER_SENSE_EVIL; the
+# Oriental Steel alone: nil; the sprig and the steel (count 2): nil; the sprig with a full inventory: giveItem false: nil; the sprig: the branch, Prog 2; NEWLY_SPROUTED_GLOWING; a sprig (a
+# GM) at Prog 2: nil. The cooldown = now (a GM): the hatchet: the Treant again, killed at Prog 2: Prog 1; despawned: NO_LONGER_SENSE_EVIL;
+# Prog 0 (a GM): the listener's cooldown ahead: trigger nil (the default), the hatchet PREVENTS. Completed (a GM): qm2
+# and Konschtat's qm3 have no section: their defaults; the hatchet, the steel: nothing.
+lists KonschtatHighlands/qm3/onTrigger KonschtatHighlands/qm3/onTrade TheSanctuaryOfZitah/qm2/onTrigger TheSanctuaryOfZitah/qm2/onTrade
+char zone=KonschtatHighlands pos=-709,2,102 job=WAR lvl=30
+item LumpOfOrientalSteel
+item ChunkOfDarksteelOre
+item Hatchet x6
+login
+trigger qm3                             # available: no section: default BLACKENED_SPOT_ON_GROUND
+trade qm3 LumpOfOrientalSteel x1        # available: no trade arm: nothing (no Forger)
+quest Outlands.ForgeYourDestiny accepted   # a GM
+trigger qm3 at=1.61                     # BLACKENED_SHOULD_PLACE
+trade qm3 LumpOfOrientalSteel x1        # 1.61 > 1.6: BLACKENED_MUST_BE_CLOSER
+trigger qm3 at=1.59                     # BLACKENED_SHOULD_PLACE
+trade qm3 ChunkOfDarksteelOre x1        # 1.59, not the steel: noAction
+trade qm3 LumpOfOrientalSteel x1 ChunkOfDarksteelOre x1 # the steel and another item: noAction
+npclocalvar qm3 forgerNextPopAllowedTime 1800000001   # a GM: one second ahead
+trigger qm3                             # cooldown > now: BLACKENED_SPOT_ON_GROUND
+trade qm3 LumpOfOrientalSteel x1        # cooldown > now: BLACKENED_NOTHING_HAPPENS
+npclocalvar qm3 forgerNextPopAllowedTime 1800000000   # a GM: now
+trigger qm3                             # cooldown <= now: BLACKENED_SHOULD_PLACE
+trade qm3 LumpOfOrientalSteel x1        # not > now: the Forger spawned and claimed; PLACE_BLACKENED_SPOT
+item LumpOfOrientalSteel                # a GM
+trade qm3 LumpOfOrientalSteel x1        # the Forger up (cooldown at now): BLACKENED_NOTHING_HAPPENS
+kill FORGER
+trigger qm3                             # its body still spawned: NOT_THE_TIME_FOR_THAT
+trade qm3 LumpOfOrientalSteel x1        # still spawned: BLACKENED_NOTHING_HAPPENS
+tick 15000                              # the body despawns
+tick 4000                               # and fades: the listener: cooldown now + 120
+trigger qm3                             # cooldown ahead: BLACKENED_SPOT_ON_GROUND
+trade qm3 LumpOfOrientalSteel x1        # cooldown ahead, the Forger gone: BLACKENED_NOTHING_HAPPENS
+warp 642,-5,-150 TheSanctuaryOfZitah
+quest Outlands.ForgeYourDestiny available  # a GM
+quest Outlands.ForgeYourDestiny accepted   # a GM
+trade qm2 Hatchet x1                    # accepted, no sprig held: nil (no Treant)
+quest Outlands.ForgeYourDestiny available  # a GM
+item SacredSprig                        # a GM
+trigger qm2                             # available: no section: default BEAUTIFUL_STURDY_BRANCH
+trade qm2 Hatchet x1                    # available, the sprig held: no trade arm: nothing (no Treant)
+quest Outlands.ForgeYourDestiny accepted   # a GM
+trade qm2 SacredSprig x1 Hatchet x1     # the hatchet with the sprig traded too (count 2): nil
+trigger qm2                             # Prog 0, cooldown 0: LOOKS_LIKE_STURDY_BRANCH
+trade qm2 Hatchet x2                    # two hatchets: nil
+npclocalvar qm2 treantNextPopAllowedTime 1800000001   # a GM: one second ahead
+trade qm2 Hatchet x1                    # cooldown > now: STRANGE_FORCE_PREVENTS
+trigger qm2                             # Prog 0, cooldown ahead: no arm: nil: default BEAUTIFUL_STURDY_BRANCH
+npclocalvar qm2 treantNextPopAllowedTime 1800000000   # a GM: now
+trigger qm2                             # cooldown <= now: LOOKS_LIKE_STURDY_BRANCH
+trade qm2 SacredSprig x1                # Prog 0: nil
+trade qm2 Hatchet x1                    # the Treant spawned and claimed; SENSE_STRONG_EVIL_PRESENCE
+trade qm2 Hatchet x1                    # the Treant up (cooldown at now): STRANGE_FORCE_PREVENTS
+trigger qm2                             # the Treant up: NOT_THE_TIME_FOR_THAT
+kill GUARDIAN_TREANT                    # Prog 1
+trigger qm2                             # its body still spawned (Prog 1): NOT_THE_TIME_FOR_THAT
+tick 15000                              # the body despawns
+tick 4000                               # and fades: the listener: cooldown now + 600
+trigger qm2                             # Prog 1: NO_LONGER_SENSE_EVIL
+trade qm2 LumpOfOrientalSteel x1        # Prog 1, one item, not the sprig: nil
+trade qm2 SacredSprig x1 LumpOfOrientalSteel x1 # the sprig and another item (count 2): nil
+fill-inventory
+trade qm2 SacredSprig x1                # Prog 1, giveItem false (no room): nil; the sprig kept
+free-inventory
+trade qm2 SacredSprig x1                # the Sacred Branch; Prog 2; STRANGE_FORCE_VANISHED
+trigger qm2                             # Prog 2: NEWLY_SPROUTED_GLOWING
+item SacredSprig                        # a GM
+trade qm2 SacredSprig x1                # Prog 2: nil (the sprig kept)
+npclocalvar qm2 treantNextPopAllowedTime 1800000000   # a GM: now
+trade qm2 Hatchet x1                    # the Treant spawned
+kill GUARDIAN_TREANT                    # at Prog 2: Prog 1
+tick 15000
+tick 4000                               # despawned: cooldown now + 600
+trigger qm2                             # Prog 1: NO_LONGER_SENSE_EVIL
+charvar Quest[5][129]Prog 0             # a GM
+trigger qm2                             # Prog 0, the listener's cooldown ahead: nil: default BEAUTIFUL_STURDY_BRANCH
+trade qm2 Hatchet x1                    # the cooldown ahead: STRANGE_FORCE_PREVENTS
+quest Outlands.ForgeYourDestiny completed  # a GM
+trigger qm2                             # no section: default BEAUTIFUL_STURDY_BRANCH
+trade qm2 Hatchet x1                    # nothing
+warp -709,2,102 KonschtatHighlands
+trigger qm3                             # no section: default BLACKENED_SPOT_ON_GROUND
+trade qm3 LumpOfOrientalSteel x1        # nothing

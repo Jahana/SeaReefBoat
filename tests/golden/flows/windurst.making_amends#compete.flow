@@ -1,0 +1,49 @@
+# Making Amends (windurst 3): its Hakkuru-Rinkuru lines next to his script. Wonder Wands accepted by GM: his onTrigger
+# and his onTrade answer 260 on every turn they get, so an Event line and a Progress line differ there. A level-10 WAR
+# at Windurst fame 50 (level 2). Available: 274 (Progress) against 260; a chip: no quest trade line, his 260. Accepted:
+# 275 (Event) and 260 take turns; a chip: nil, his 260; the glue: 277 (Progress), completed. Completed with the
+# mustZone: 278 (Event) and 260; after a rezone (the mustZone cleared): 281 (Event, replaceDefault) and 260.
+lists PortWindurst/Hakkuru-Rinkuru/onTrigger PortWindurst/Hakkuru-Rinkuru/onTrade
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=10
+fame Windurst 50
+quest Windurst.WonderWands accepted
+item BoneChip
+item BlockOfAnimalGlue x2
+login
+trigger Hakkuru-Rinkuru+7                     # 274 (a Progress: it plays on every turn)
+finish option=0
+trigger Hakkuru-Rinkuru+7                     # 274
+finish option=0
+trigger Hakkuru-Rinkuru+7                     # 274
+finish option=0
+trade Hakkuru-Rinkuru+7 BoneChip x1           # available: no quest trade line; his script's 260
+finish-if-event
+trigger Hakkuru-Rinkuru+7                     # 274
+finish option=1                               # begun
+trigger Hakkuru-Rinkuru+7                     # accepted: 275 (an Event: the next turn is his script's)
+finish-if-event option=1
+trigger Hakkuru-Rinkuru+7                     # his script's 260
+finish
+trigger Hakkuru-Rinkuru+7                     # 275
+finish
+trigger Hakkuru-Rinkuru+7                     # 260
+finish
+trade Hakkuru-Rinkuru+7 BoneChip x1           # accepted, no glue: nil; his script's 260
+finish-if-event
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1  # the glue (a Progress, the only trade line): 277 (1500)
+finish                                        # completed: fame 30, Quick Fixer; the glue taken; 1500 gil; the mustZone
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1  # completed: no quest trade line; his script's 260
+finish-if-event
+trigger Hakkuru-Rinkuru+7                     # completed, the mustZone: 278
+finish
+trigger Hakkuru-Rinkuru+7                     # 260
+finish
+trigger Hakkuru-Rinkuru+7                     # 278
+finish
+rezone                                        # the mustZone cleared
+trigger Hakkuru-Rinkuru+7                     # no mustZone: 281 (replaceDefault)
+finish
+trigger Hakkuru-Rinkuru+7                     # 260
+finish
+trigger Hakkuru-Rinkuru+7                     # 281
+finish

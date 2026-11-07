@@ -1,0 +1,78 @@
+# A Certain Substitute Patrolman (adoulin 78): a level 99 Warrior in Western Adoulin. Rising Solstice with SoA current 0
+# and 6 (GMs; before Life on the Frontier): no section (his default 502). Pioneer Registration completed and SoA 7
+# (Life on the Frontier, GMs): from now on Pioneer Registration's replaceDefault events answer where the quest does not
+# (Rising Solstice 580, Clemmar 570, Shipilolo 535, Dangueubert 546, Nylene 562). Zaoso while available: his script 574;
+# Rising Solstice 2550, finished on 0: begun (any option), the Western Adoulin Patrol Route. Accepted, Prog 0:
+# Rising Solstice 2551; Clemmar (offset 1): nothing from the quest; the patrol in order, Zaoso 2553 .. Nylene 2559, each
+# finish adding 1 to Prog, each NPC talked to again at the next Prog: nothing from the quest. At Dangueubert (offset 5)
+# a GM sets Prog 3 while 2558 is open: the finish's own check fails, Prog stays 3; Prog 5 again (a GM): 2558, Prog 6.
+# Nylene (offset 6): a GM sets Prog 7 while 2559 is open: no increment either (Prog stays 7, not 8).
+# Rising Solstice at Prog 6 and 8 (a GM): 2551; Prog 7: 2552, finished: completed (500 bayld, 1000 exp, the key item
+# lost: KEYITEM_LOST). Completed: Rising Solstice: no section; Zaoso at Prog 0 (a GM): his script 574.
+lists WesternAdoulin/Rising_Solstice/onTrigger WesternAdoulin/Zaoso/onTrigger WesternAdoulin/Clemmar/onTrigger
+lists WesternAdoulin/Kongramm/onTrigger WesternAdoulin/Virsaint/onTrigger WesternAdoulin/Shipilolo/onTrigger
+lists WesternAdoulin/Dangueubert/onTrigger WesternAdoulin/Nylene/onTrigger WesternAdoulin/onEventFinish/2550
+lists WesternAdoulin/onEventFinish/2552 WesternAdoulin/onEventFinish/2553 WesternAdoulin/onEventFinish/2558
+char zone=WesternAdoulin pos=-152.5,4,-29 job=WAR lvl=99
+login
+trigger Rising_Solstice                 # available, SoA current 0: no section: default 502
+finish-if-event
+mission Soa PioneerRegistration current # a GM: SoA 6
+trigger Rising_Solstice                 # SoA 6, below Life on the Frontier: no section
+finish-if-event
+mission Soa PioneerRegistration completed # a GM: the log's current mission cleared
+mission Soa LifeOnTheFrontier current   # a GM: SoA 7
+trigger Zaoso                           # available: no quest handler: his script 574
+finish-if-event
+trigger Rising_Solstice                 # available, SoA 7: 2550
+finish option=0                         # begun (any option); the Western Adoulin Patrol Route
+trigger Rising_Solstice                 # accepted, Prog 0: 2551 (an Event)
+finish
+trigger Clemmar                         # Prog 0, Clemmar's offset 1: nothing from the quest
+finish-if-event
+trigger Zaoso                           # Prog 0: 2553
+finish                                  # Prog 1
+trigger Zaoso                           # Prog 1: nothing from the quest: his script 574
+finish-if-event
+trigger Clemmar                         # Prog 1: 2554
+finish                                  # Prog 2
+trigger Clemmar                         # Prog 2: nothing from the quest
+finish-if-event
+trigger Kongramm                        # Prog 2: 2555
+finish                                  # Prog 3
+trigger Kongramm                        # Prog 3: nothing from the quest
+finish-if-event
+trigger Virsaint                        # Prog 3: 2556
+finish                                  # Prog 4
+trigger Virsaint                        # Prog 4: nothing from the quest
+finish-if-event
+trigger Shipilolo                       # Prog 4: 2557
+finish                                  # Prog 5
+trigger Shipilolo                       # Prog 5: nothing from the quest
+finish-if-event
+trigger Dangueubert                     # Prog 5: 2558
+charvar Quest[9][78]Prog 3              # a GM, while 2558 is open
+finish                                  # Prog 3, not Dangueubert's 5: no increment (Prog stays 3)
+charvar Quest[9][78]Prog 5              # a GM
+trigger Dangueubert                     # Prog 5: 2558
+finish                                  # Prog 6
+trigger Dangueubert                     # Prog 6: nothing from the quest
+finish-if-event
+trigger Rising_Solstice                 # Prog 6: 2551
+finish
+trigger Nylene                          # Prog 6: 2559
+charvar Quest[9][78]Prog 7              # a GM, while 2559 is open: above Nylene's 6
+finish                                  # Prog 7, not Nylene's 6: no increment (Prog stays 7)
+trigger Nylene                          # Prog 7: nothing from the quest
+finish-if-event
+charvar Quest[9][78]Prog 8              # a GM
+trigger Rising_Solstice                 # Prog 8: 2551
+finish
+charvar Quest[9][78]Prog 7              # a GM
+trigger Rising_Solstice                 # Prog 7: 2552
+finish                                  # completed; the patrol route lost (KEYITEM_LOST)
+trigger Rising_Solstice                 # completed: no section
+finish-if-event
+charvar Quest[9][78]Prog 0              # a GM
+trigger Zaoso                           # completed, Prog 0: no quest handler: his script 574
+finish-if-event

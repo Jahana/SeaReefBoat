@@ -1,0 +1,39 @@
+# Unending Chase (otherAreas 2): its reply kinds against Rycharde the Chef accepted (a GM: Rycharde 72, Take 68, both
+# Event; RQ1 sorts before RQ3, and its ids differ from Unending Chase's, unlike The Clue's 65 / 85). On a tie the lookup's
+# action cycle plays the first container's action, then the next one per talk. Available: Rycharde's 82 (Progress; its
+# finish sets Prog 1), then 84 (Progress) twice; Take's 65 (Event): 68, then 65; not due (DayCompleted 7993): 75
+# (Event): 72, then 75. Accepted: Rycharde's 85 (Event): 72, then 85; Take's 65 (Event): 68, then 65. The trade reply
+# (83 Progress) has no competitor (XI.Verify.Quests checks it).
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Mhaura/onEventFinish/82 Mhaura/onEventFinish/84
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.WayOfTheCook completed
+quest OtherAreas.RychardeTheChef accepted
+charvar Quest[4][1]DayCompleted 7992
+fame Windurst 125
+login
+trigger Rycharde                        # Prog 0: 82 (Progress beats 72)
+finish option=0                         # Prog 1, DayCompleted 0
+trigger Rycharde                        # Prog 1: 84 (Progress beats 72)
+finish option=0
+trigger Rycharde                        # 84 again
+finish option=0
+trigger Take                            # available: 68 (a tie with 65: the first container's)
+finish
+trigger Take                            # 65
+finish
+charvar Quest[4][1]DayCompleted 7993    # a GM: not due
+trigger Rycharde                        # 72 (a tie with 75)
+finish
+trigger Rycharde                        # 75
+finish
+charvar Quest[4][1]DayCompleted 7992    # a GM
+trigger Rycharde                        # 84
+finish option=78                        # begun
+trigger Rycharde                        # accepted: 72 (a tie with 85)
+finish
+trigger Rycharde                        # 85
+finish
+trigger Take                            # accepted: 68 (a tie with 65)
+finish
+trigger Take                            # 65
+finish

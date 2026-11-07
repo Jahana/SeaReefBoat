@@ -1,0 +1,31 @@
+# All at Sea (windurst 23): the kinds of Baren-Moren's trade lines (547, 549 first, 549 after), next to his script's
+# onTrade: A Feather in One's Cap accepted by GM and three Giant Bird Feathers in the trade: his 79 (1500). 547 and
+# 549 are tradeHas (not exact), so the feathers ride along. A Progress keeps the lookup's turn on the next trade; an
+# Event would hand it to his script (the onTrade UseFallback var). A level-10 WAR at Windurst fame 125, All at Sea
+# accepted at Prog 0 by GM. Prog 0: the Ripped Cap with three feathers: 547, Prog 1 (the cap taken, the feathers
+# kept); Prog 0 and a Ripped Cap again by GM: the same trade: 547 again. Prog 1: four hides with three feathers: 549,
+# option 2 (nothing); again: 549. Prog 2 by GM: the same: 549 (0, 0, 1), option 2; again: 549.
+lists WindurstWaters/Baren-Moren/onTrade WindurstWaters/onEventFinish/547 WindurstWaters/onEventFinish/549
+char zone=WindurstWaters pos=-64.6,-2.875,-145.7 job=WAR lvl=10
+fame Windurst 125
+quest Windurst.AllAtSea accepted
+quest Windurst.AFeatherInOnesCap accepted
+item RippedCap
+item DhalmelHide x4
+item GiantBirdFeather x3
+login
+trade Baren-Moren RippedCap x1 GiantBirdFeather x3  # Prog 0: 547 (0, Dhalmel Hide), a Progress
+finish                                        # Prog 1; the cap taken, the feathers kept
+charvar Quest[2][23]Prog 0                    # a GM
+item RippedCap                                # a GM
+trade Baren-Moren RippedCap x1 GiantBirdFeather x3  # 547 again (an Event would give his 79)
+finish                                        # Prog 1
+trade Baren-Moren DhalmelHide x4 GiantBirdFeather x3  # Prog 1, no Sailor's Cap: 549, a Progress
+finish option=2                               # not 0 or 1: nothing (the hides kept)
+trade Baren-Moren DhalmelHide x4 GiantBirdFeather x3  # 549 again (an Event would give his 79)
+finish option=2
+charvar Quest[2][23]Prog 2                    # a GM
+trade Baren-Moren DhalmelHide x4 GiantBirdFeather x3  # Prog 2: 549 (0, 0, 1), a Progress
+finish option=2
+trade Baren-Moren DhalmelHide x4 GiantBirdFeather x3  # 549 (0, 0, 1) again (an Event would give his 79)
+finish option=2

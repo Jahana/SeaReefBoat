@@ -1,0 +1,50 @@
+# Burden of Suspicion (crystalWar 20), the edges: the day timer and the mustZone. A level 99 Warrior in Bastok Markets
+# [S] with The Fighting Fourth, Better Part of Valor and Fires of Discontent completed and Light in the Darkness
+# accepted at Prog 6 (GMs; missions as the main flow). Gentle Tiger 27 (Light's: this quest is not available yet),
+# finished: Light completed (an Adaman Ingot), this quest's Timer = VanadielUniqueDay() + 1 and its mustZone (the
+# zone's id). Gentle Tiger, with the mustZone set and the Timer ahead: nil (109). The Metalworks and back (the zone-in
+# clears the mustZone), the Timer ahead: nil (109). The mustZone set again (a GM, as Light's finish sets it) and a
+# Vana'diel day on (`wait vana=24`: the Timer is today): nil (109). The Metalworks and back: 30, finished on option 1:
+# begun (any option; no Warning Letter held: the delKeyItem takes nothing). The Eldieme Necropolis [S]: Sarcophagus at
+# Prog 0: nil. Prog 3 (a GM): Sarcophagus nil; Bastok Markets [S]: Gentle Tiger 31, Engelhart 33.
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/Engelhart/onTrigger BastokMarketsS/onEventFinish/27 BastokMarketsS/onEventFinish/30 TheEldiemeNecropolisS/Sarcophagus/onTrigger
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+quest CrystalWar.TheFightingFourth completed
+quest CrystalWar.BetterPartOfValor completed
+quest CrystalWar.FiresOfDiscontent completed
+quest CrystalWar.LightInTheDarkness accepted
+charvar Quest[7][19]Prog 6
+mission Wotg BackToTheBeginning completed
+mission Wotg CaitSith current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # Light in the Darkness at Prog 6: its 27 (this quest not available yet)
+finish                                  # Light completed; this quest's Timer (tomorrow) and mustZone
+trigger Gentle_Tiger                    # available, the mustZone set, the Timer ahead: nil: 109
+finish-if-event
+warp 94.436,-19.532,1.814 Metalworks    # the zone-in clears the mustZone
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # the mustZone clear, the Timer ahead: nil: 109
+finish-if-event
+charvar Quest[7][20]mustZone 87         # a GM: the mustZone set again (Bastok Markets [S])
+wait vana=24
+trigger Gentle_Tiger                    # the Timer today, the mustZone set: nil: 109
+finish-if-event
+warp 94.436,-19.532,1.814 Metalworks    # the zone-in clears the mustZone
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # the mustZone clear, the Timer today: 30
+finish option=1                         # begun (any option)
+warp 348.367,-32.407,-125.985 TheEldiemeNecropolisS
+trigger Sarcophagus                     # Prog 0: nil
+finish-if-event
+charvar Quest[7][20]Prog 3              # a GM: past every arm
+trigger Sarcophagus                     # Prog 3: nil
+finish-if-event
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 3: 31
+finish
+trigger Engelhart                       # Prog 3: 33
+finish

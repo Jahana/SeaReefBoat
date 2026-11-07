@@ -1,0 +1,44 @@
+# Rock Bottom (ahtUrhgan 20): a level 75 Warrior with a Pickaxe and a Mythril Pick. Mount Zhayolm's blank11 (no script;
+# default NOTHING_HAPPENS). Available: the Pickaxe: nil; blank11 7, finished on option 1: Prog 1, begun (any option).
+# Accepted: blank11's talk: NOTHING_HAPPENS (the quest's own messageSpecial). Prog 1: the Mythril Pick: nil; the Pickaxe
+# and the Mythril Pick: nil; the Pickaxe: 8, finished: Prog 2, the zoning flag, the pickaxe taken (user ruling
+# 2026-11-04, kept Lua bugs: the Lua's 8 confirmed no trade, so the pickaxe was kept); a pickaxe again (a GM, the Lua
+# baseline's second). Prog 2 needing to zone: the Mythril Pick: nil. After a zone change: the Pickaxe: nil; the Mythril
+# Pick and the Pickaxe: nil; the Mythril Pick: 9 ([0] 16651), finished: completed, the pick taken, the Map of Mount
+# Zhayolm (KEYITEM_OBTAINED). Completed: the Pickaxe: nil, also at a GM's Prog 1; blank11: no section: NOTHING_HAPPENS
+# (the default).
+lists MountZhayolm/blank11/onTrigger MountZhayolm/blank11/onTrade MountZhayolm/onEventFinish/9
+char zone=MountZhayolm pos=839.743,-14.475,231.871 job=WAR lvl=75
+item Pickaxe
+item MythrilPick
+login
+trade blank11 Pickaxe x1                # available: no trade handler: nil
+finish-if-event
+trigger blank11                         # available: 7
+finish option=1                         # Prog 1, begun (any option)
+trigger blank11                         # accepted: NOTHING_HAPPENS
+finish-if-event
+trade blank11 MythrilPick x1            # Prog 1: not the pickaxe: nil
+finish-if-event
+trade blank11 Pickaxe x1 MythrilPick x1 # the pickaxe and more: nil
+finish-if-event
+trade blank11 Pickaxe x1                # Prog 1: 8
+finish                                  # Prog 2; needToZone; the pickaxe taken (user ruling 2026-11-04)
+item Pickaxe                            # a GM: a pickaxe for the trades below
+trade blank11 MythrilPick x1            # needing to zone: nil
+finish-if-event
+warp 81.95,-6,-137.707 AhtUrhganWhitegate      # another zone: the flag cleared
+warp 839.743,-14.475,231.871 MountZhayolm
+trade blank11 Pickaxe x1                # Prog 2: not a mythril pick: nil
+finish-if-event
+trade blank11 MythrilPick x1 Pickaxe x1 # the pick and more: nil
+finish-if-event
+trade blank11 MythrilPick x1            # 9 ([0] 16651)
+finish                                  # completed; the pick taken; the Map of Mount Zhayolm
+trade blank11 Pickaxe x1                # completed: no section: nil
+finish-if-event
+charvar Quest[6][20]Prog 1              # a GM: completed at Prog 1
+trade blank11 Pickaxe x1                # completed: no section: nil
+finish-if-event
+trigger blank11                         # completed: no section: NOTHING_HAPPENS (the default)
+finish-if-event

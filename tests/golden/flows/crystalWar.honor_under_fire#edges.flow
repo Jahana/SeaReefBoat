@@ -1,0 +1,38 @@
+# Honor Under Fire (crystalWar 43), the edges: a level 99 Warrior in Bastok Markets [S] with the WotG mission
+# Crossroads of Time current (missions as the main flow). Gentle Tiger: Quelling the Storm not completed: no section
+# (109). Quelling completed (a GM): Gentle Tiger 66, finished on option 1: begun (any option). Prog 2 with the grenade
+# held (GMs): 68, finished: giveKeyItem answers true (the grenade held): Prog 3. Vunkerl Inlet [S]: qm8 at Prog 3: nil.
+# Prog 5 (a GM): Vunkerl Inlet [S] from Bastok Markets [S]: nil. Prog 6 (a GM) with a full inventory: Gentle Tiger 71,
+# finished: the tank does not fit: not completed; freed: 71: completed.
+uncovered: 6/-/onEventFinish:10000 -- Everbloom Hollow's 10000 is the Honor Under Fire instance's completion cutscene ("not implemented currently": no instance script opens it): no flow can open it without an instance run (PLATFORM-NEEDS: an instance run); the main flow sets Prog 5 by a GM
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/66 BastokMarketsS/onEventFinish/68 BastokMarketsS/onEventFinish/71 VunkerlInletS/onZoneIn/1 VunkerlInletS/qm8/onTrigger
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+mission Wotg CrossroadsOfTime current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # Quelling the Storm not completed: no section: 109
+finish-if-event
+quest CrystalWar.QuellingTheStorm completed
+trigger Gentle_Tiger                    # 66
+finish option=1                         # begun (any option)
+charvar Quest[7][43]Prog 2              # a GM
+keyitem FlareGrenade                    # a GM
+trigger Gentle_Tiger                    # Prog 2: 68
+finish                                  # the grenade held (no message); Prog 3 all the same
+warp -355.028,-32.084,286.333 VunkerlInletS
+trigger qm8                             # Prog 3: nil
+finish-if-event
+charvar Quest[7][43]Prog 5              # a GM
+warp -202.432,-9.998,2.237 BastokMarketsS
+warp 242.5,-31.995,242.999 VunkerlInletS # from Bastok Markets [S] at Prog 5: nil
+charvar Quest[7][43]Prog 6              # a GM
+warp -202.432,-9.998,2.237 BastokMarketsS
+fill-inventory
+trigger Gentle_Tiger                    # Prog 6: 71
+finish                                  # no room for the tank: not completed
+free-inventory
+trigger Gentle_Tiger                    # 71
+finish                                  # completed

@@ -1,0 +1,38 @@
+# The Tigress Stirs (crystalWar 17), the edges: a level 99 Warrior in Windurst Waters [S], no nation opener completed
+# (missions as the main flow). Dhea Prandoleh: the available check fails: her default 136. West Sarutabaruta [S]:
+# qm4 while available: nil. Steamed Rams completed (a GM): Dhea Prandoleh 128, finished with option 1: begun (any
+# option). Reset (GMs: The Tigress Stirs and Steamed Rams available), The Fighting Fourth completed: 128, finished:
+# begun. The Small Starfruit (a GM), a full inventory: the Acolyte Hostel door 129, finished: the Hi-Elixir does not
+# fit: not completed, the starfruit kept; again: 129, the same; freed: 129: completed.
+lists WindurstWatersS/Dhea_Prandoleh/onTrigger WindurstWatersS/Door_Acolyte_Hostel_down/onTrigger WindurstWatersS/onEventFinish/128 WindurstWatersS/onEventFinish/129 WestSarutabarutaS/qm4/onTrigger
+char zone=WindurstWatersS pos=4.667,-1,15.545 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Dhea_Prandoleh                  # no opener completed: her default 136
+finish-if-event
+warp 155.97,-40.157,332.064 WestSarutabarutaS
+trigger qm4                             # available: nil
+finish-if-event
+warp 4.667,-1,15.545 WindurstWatersS
+quest CrystalWar.SteamedRams completed
+trigger Dhea_Prandoleh                  # Steamed Rams completed: 128
+finish option=1                         # begun (any option)
+quest CrystalWar.TheTigressStirs available
+quest CrystalWar.SteamedRams available
+quest CrystalWar.TheFightingFourth completed
+trigger Dhea_Prandoleh                  # The Fighting Fourth completed: 128
+finish                                  # begun
+keyitem SmallStarfruit
+warp 125.5,-3,222.215 WindurstWatersS
+fill-inventory
+trigger Door_Acolyte_Hostel_down        # 129
+finish                                  # no room for the Hi-Elixir: not completed; the starfruit kept
+trigger Door_Acolyte_Hostel_down        # 129 again (a progress event: no turn for the script)
+finish                                  # still no room
+free-inventory
+trigger Door_Acolyte_Hostel_down        # 129
+finish                                  # completed; the starfruit taken

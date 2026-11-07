@@ -1,0 +1,121 @@
+# Chasing Quotas (sandoria 95, DRG AF2): Ceraulian in Port San d'Oria, Miaux in Northern San d'Oria, Ardea in Bastok
+# Markets, Esca in West Ronfaure, the qm2 and Sturmtiger in Batallia Downs. A DRG at 50 with The Holy Crest completed.
+# Before A Craftsman's Work: Ceraulian's script (587). Then 18 cancelled (nothing), 18 declined (Declined 1), 14
+# declined (nothing), 14 taken (begun). Prog 0: a chip (nil), the Gold Hairpin with a chip (not tradeMatches: nil), his
+# 13; the hairpin (17: taken, Prog 1, Wait now + 60); the second hairpin at Prog 1 (the trade's Prog operand: nil); his
+# script's turn (587, the Event alternation); the wait's bound by GM: Wait one second after now (3), Wait at exactly now
+# (7: Prog 2); 8. Miaux's 67 (Shiny Earring, Prog 3), 68. Ceraulian's 6. Ardea's 264 (Prog 4), 265. Miaux's 68 and Ceraulian's 9 at Prog 4 (the
+# second operands of their `or`s). Esca's 137 (the earring taken, Prog 5), 138. Ardea at Prog 5 (nil: 260). Ceraulian's
+# 9; Miaux's 66. Batallia Downs: the qm2 pops Sturmtiger (SENSE_AN_EVIL_PRESENCE); again with it up (SOMEONE_DUG); Prog 4
+# by GM, it dies (the death's Prog operand: Killed stays 0); it despawns, Prog 5 again, the qm2 pops it again; it dies
+# (Killed 1); the qm2 gives Ranchuriome's Legacy (Prog 6, Killed 0); again (SOMEONE_DUG); Killed 2 by GM (not 1:
+# SOMEONE_DUG). Miaux's 66 at Prog 6. Ceraulian at Prog 7 by GM (nil: his script's 587); at 6, 15 (completed: Drachen
+# Brais, fame +20; the legacy taken); then his script (16, Knight Stalker's lead-in). Completed with Prog 3 by GM: Ardea
+# (section 2's status operand: nil, 260).
+# The nil arms at Prog 0 are #offer (with 18's other option); a non-DRG and a DRG at 49 are #war and #level.
+# Ceraulian's script: The Holy Crest completed, so not 24; Chasing Quotas completed and Knight Stalker available: 16;
+# else 587. Miaux's script, A Craftsman's Work completed: 11. Ardea (default 260) and Esca (default 119) have no script;
+# Rock Racketeer and The Pickpocket are not begun. The qm2's lines are speakerless text (messageText, false, 6); its
+# handler always answers while accepted (noAction).
+# The Event alternation (interaction_lookup's UseFallback local var): after an Event-priority quest reply, Ceraulian's
+# next Event-priority talk goes to his script first; a Progress reply or a zone change resets it.
+lists PortSanDoria/Ceraulian/onTrigger PortSanDoria/Ceraulian/onTrade PortSanDoria/onEventFinish/18 PortSanDoria/onEventFinish/14 PortSanDoria/onEventFinish/17 PortSanDoria/onEventFinish/7 PortSanDoria/onEventFinish/15 NorthernSanDoria/Miaux/onTrigger NorthernSanDoria/onEventFinish/67 BastokMarkets/Ardea/onTrigger BastokMarkets/onEventFinish/264 WestRonfaure/Esca/onTrigger WestRonfaure/onEventFinish/137 BatalliaDowns/qm2/onTrigger BatalliaDowns/Sturmtiger/onMobDeath
+char zone=PortSanDoria pos=0.626,-8,-120.914 job=DRG lvl=50
+quest Sandoria.TheHolyCrest completed
+item GoldHairpin
+item GoldHairpin
+item BoneChip
+login
+trigger Ceraulian                         # A Craftsman's Work not completed: no section; his script's 587
+finish
+quest Sandoria.ACraftsmansWork completed
+trade Ceraulian GoldHairpin x1               # available, DRG 50: no onTrade answers; his script has none: nothing (the Available state takes no trade)
+trigger Ceraulian                         # DRG 50, Declined 0: 18
+finish option=1073741824                  # cancelled (utils.EVENT_CANCELLED_OPTION): nothing
+trigger Ceraulian                         # 18
+finish                                    # option 0: Declined 1
+trigger Ceraulian                         # Declined 1: 14
+finish                                    # option 0: nothing
+trigger Ceraulian                         # 14
+finish option=1                           # Declined 0; begun
+trade Ceraulian BoneChip x1               # Prog 0, not the hairpin: nil; his script has no onTrade: nothing
+trade Ceraulian GoldHairpin x1 BoneChip x1   # not just the hairpin: nil
+trigger Ceraulian                         # Prog 0: 13 (section 1 closed: its 18 would win)
+finish
+trade Ceraulian GoldHairpin x1            # 17
+finish                                    # the hairpin taken; Prog 1; Wait = now + 60
+trade Ceraulian GoldHairpin x1            # Prog 1, just the hairpin: nil (the Prog operand)
+trigger Ceraulian                         # Prog 1, the wait not over: the Event alternation gives his script its turn (13 played last): 587
+finish
+charvar Quest[0][95]Wait 1800000001
+trigger Ceraulian                         # now one second before Wait: 3
+finish
+charvar Quest[0][95]Wait 1800000000
+trigger Ceraulian                         # now == Wait (not <): 7
+finish                                    # Prog 2
+trigger Ceraulian                         # Prog 2: 8
+finish
+warp -167.627,3.999,158.677 NorthernSanDoria
+trigger Miaux                             # Prog 2: 67
+finish                                    # Shiny Earring; Prog 3
+trigger Miaux                             # Prog 3: 68
+finish
+warp 0.626,-8,-120.914 PortSanDoria
+trigger Ceraulian                         # Prog 3: 6
+finish
+warp -196.463,-6,-69.026 BastokMarkets
+trigger Ardea                             # Prog 3: 264
+finish                                    # Prog 4
+trigger Ardea                             # Prog 4: 265
+finish
+warp -167.627,3.999,158.677 NorthernSanDoria
+trigger Miaux                             # Prog 4: 68
+finish
+warp 0.626,-8,-120.914 PortSanDoria
+trigger Ceraulian                         # Prog 4: 9
+finish
+warp -622.731,-51.499,278.369 WestRonfaure
+trigger Esca                              # Prog 4: 137
+finish                                    # the earring taken; Prog 5
+trigger Esca                              # Prog 5: 138
+finish
+warp -196.463,-6,-69.026 BastokMarkets
+trigger Ardea                             # Prog 5: nil; her default 260
+finish
+warp 0.626,-8,-120.914 PortSanDoria
+trigger Ceraulian                         # Prog 5: 9
+finish
+warp -167.627,3.999,158.677 NorthernSanDoria
+trigger Miaux                             # Prog 5: 66
+finish
+warp 146.873,16.462,-548.56 BatalliaDowns
+trigger qm2                               # Prog 5: Sturmtiger popped and claimed; SENSE_AN_EVIL_PRESENCE
+trigger qm2                               # it is up: the pop fails; SOMEONE_DUG
+charvar Quest[0][95]Prog 4
+kill STURMTIGER                           # Prog 4: nothing (Killed stays 0)
+tick 15000                                # the death's fade
+tick 15000                                # Sturmtiger despawns
+charvar Quest[0][95]Prog 5
+trigger qm2                               # Prog 5, Killed 0, it is down: popped again; SENSE_AN_EVIL_PRESENCE
+kill STURMTIGER                           # Prog 5: Killed 1
+trigger qm2                               # Killed 1: Ranchuriome's Legacy; Prog 6; Killed 0
+trigger qm2                               # Prog 6: SOMEONE_DUG
+charvar Quest[0][95]Killed 2
+trigger qm2                               # Killed 2 (not 1), Prog 6: SOMEONE_DUG
+charvar Quest[0][95]Killed 0
+warp -167.627,3.999,158.677 NorthernSanDoria
+trigger Miaux                             # Prog 6: 66
+finish
+warp 0.626,-8,-120.914 PortSanDoria
+charvar Quest[0][95]Prog 7
+trigger Ceraulian                         # Prog 7: nil; his script's 587
+finish
+charvar Quest[0][95]Prog 6
+trigger Ceraulian                         # Prog 6: 15
+finish                                    # completed: Drachen Brais, fame +20; the legacy taken
+trigger Ceraulian                         # completed: no section; his script's 16
+finish
+charvar Quest[0][95]Prog 3
+warp -196.463,-6,-69.026 BastokMarkets
+trigger Ardea                             # completed, Prog 3: no section (section 2's status operand); her default 260
+finish

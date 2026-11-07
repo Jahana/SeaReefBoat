@@ -1,0 +1,10 @@
+# Acting in Good Faith (windurst 64): 10019's finish at an option neither 0 nor 1. The Lua begins the quest on option 0
+# only (Acting_in_Good_Faith.lua:41): option 2 gives nothing (a test of option != 1 would begin it). Then option 0.
+lists WindurstWaters/Gantineux/onTrigger WindurstWaters/onEventFinish/10019
+char zone=WindurstWaters pos=-83.5,-9.25,3.5 job=WAR lvl=10
+fame Windurst 225
+login
+trigger Gantineux                             # 10019
+finish option=2                               # not 0: nothing, still available
+trigger Gantineux                             # 10019
+finish option=0                               # the Spirit Incense; begun

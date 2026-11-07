@@ -1,0 +1,39 @@
+# Altepa - Dominion Op #01 (abyssea 87, op 560), through the sergeant: a level 99 Warrior in Abyssea - Altepa beside
+# DSgt_Nanaa. No active op: 501 (the packed influence, the op mask, the notes); update on option 18 (type 2, op 1):
+# updateEvent(5, 0, 0, 0, 0, 0, 0, 560); finished on 18: the op added (player:addQuest), activeDominionOp 560,
+# DOMINION_SIGNED_ON. DSgt_Nanaa with the op on: 501 (the op, 5, 0, status 1), finished on 0: nothing. Five Sand_Sweeper
+# killed: Prog 1 to 5. DSgt_Nanaa (5 of 5): 501 (status 2); finished on 8 (type 8): completeDominionOp: the op
+# completed, 1000 exp, 200 cruor, 100 dominion notes, the vars cleared. A Sand_Sweeper killed: completed: nothing.
+# Signed on again (18): addQuest leaves the completed op completed, so a Sand_Sweeper killed counts nothing; DSgt_Nanaa:
+# 501 (the op, 5, 0, status 1). Cancelled (3): delQuest, the vars cleared, CANCELED_OBJECTIVE; a Sand_Sweeper killed:
+# nothing. Op #02 signed on (34: type 2, op 2): a Surveyor killed: Quest[8][88]Prog 1. The status changes are all the
+# global's (globals/abyssea/dominion.lua); the C# quests are the count only. Perfect Dodge, Invincible and Elemental
+# Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaAltepa/Sand_Sweeper/onMobDeath AbysseaAltepa/Surveyor/onMobDeath AbysseaAltepa/DSgt_Nanaa/onTrigger AbysseaAltepa/onEventUpdate/501 AbysseaAltepa/onEventFinish/501
+char zone=AbysseaAltepa pos=-846.593,-9.813,-605.97 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+trigger DSgt_Nanaa                      # no active op: 501
+update 501 option=18                    # type 2, op 1: updateEvent(5, ..., 560)
+finish option=18                        # type 2: the op added, activeDominionOp set
+trigger DSgt_Nanaa                      # the op on: 501 (status 1)
+finish                                  # type 0: nothing
+kill RANI_OFFSET-28                     # Prog 1 (17670523)
+kill RANI_OFFSET-27                     # Prog 2 (17670524)
+kill RANI_OFFSET-26                     # Prog 3 (17670525)
+kill RANI_OFFSET-25                     # Prog 4 (17670526)
+kill RANI_OFFSET-24                     # Prog 5 (17670527)
+trigger DSgt_Nanaa                      # 5 of 5: 501 (status 2)
+finish option=8                         # type 8: completed; exp, cruor, notes; vars cleared
+kill RANI_OFFSET-23                     # completed: nothing (17670528)
+trigger DSgt_Nanaa                      # no active op: 501
+finish option=18                        # type 2: addQuest on the completed op
+kill RANI_OFFSET-22                     # still completed: nothing (17670529)
+trigger DSgt_Nanaa                      # the op on: 501 (0 of 5, status 1)
+finish option=3                         # type 3: cancelled (delQuest), vars cleared
+kill RANI_OFFSET-21                     # cancelled: nothing (17670530)
+trigger DSgt_Nanaa                      # no active op: 501
+finish option=34                        # type 2, op 2: op #02 added
+kill RANI_OFFSET-55                     # Surveyor: Quest[8][88]Prog 1 (17670496)

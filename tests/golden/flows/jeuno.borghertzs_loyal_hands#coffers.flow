@@ -1,0 +1,19 @@
+# BORGHERTZS_LOYAL_HANDS (jeuno 55): the two optional coffers' sections (status not available, main job SAM, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 SAM: QuicksandCaves's Treasure Coffer opens to
+# MyochinHaidate (the item bypass; the result is the item): [AF]ZilartCoffer +8388608 (bit 23); TempleOfUggalepih's to
+# MyochinDomaru: +16777216 (bit 24).
+lists QuicksandCaves/Treasure_Coffer/onTrade TempleOfUggalepih/Treasure_Coffer/onTrade
+char zone=QuicksandCaves pos=-144.9,1.9,448.1 job=SAM lvl=75
+quest Jeuno.BorghertzsLoyalHands accepted
+item QuicksandCofferKey
+item UggalepihCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer QuicksandCofferKey x1 # bit 23 unset: MyochinHaidate; [AF]ZilartCoffer 8388608
+tick 4500                               # the coffer opened
+warp 219.7,-8.1,205.8 TempleOfUggalepih
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer UggalepihCofferKey x1 # bit 24 unset: MyochinDomaru; [AF]ZilartCoffer 25165824
+tick 4500                               # the coffer opened

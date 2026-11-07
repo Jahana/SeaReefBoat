@@ -1,0 +1,43 @@
+# The Tigress Strikes (crystalWar 18), the edges: a level 99 Warrior in Windurst Waters [S], The Tigress Stirs accepted
+# (missions as the main flow). Dhea Prandoleh: The Tigress Stirs' 131 (this quest's check fails). The Tigress Stirs
+# completed (a GM): 133, finished with option 1: begun (any option). Fort Karugo-Narugo [S]: qm4 at Prog 0: nil: the
+# default. Prog 1 and 2 (GMs): Dhea Prandoleh 135.
+# Left out: the War_Lynx death handler's other-lynx side (`mob:getID() ~= TIGRESS_STRIKES_WAR_LYNX`). The zone's
+# other War_Lynx-scripted mobs (17170870-17170875, War_Lynx_campaign) are Campaign mobs, not spawned outside a Campaign
+# battle (`kill #17170870`: "the mob is not spawned"), and no flow statement spawns a mob; the id test is pinned by
+# XI.Verify.Quests (crystalwar g2) instead. Prog 3 (a GM), a full inventory: 134, finished: the Star Globe does not fit: not completed (no
+# needToZone); again: 134; freed: 134: completed.
+lists WindurstWatersS/Dhea_Prandoleh/onTrigger WindurstWatersS/onEventFinish/133 WindurstWatersS/onEventFinish/134 FortKarugoNarugoS/qm4/onTrigger FortKarugoNarugoS/War_Lynx/onMobDeath
+char zone=WindurstWatersS pos=4.667,-1,15.545 job=WAR lvl=99
+quest CrystalWar.SnakeOnThePlains completed
+quest CrystalWar.TheTigressStirs accepted
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Dhea_Prandoleh                  # The Tigress Stirs accepted: its 131 (this check fails)
+finish
+quest CrystalWar.TheTigressStirs completed
+trigger Dhea_Prandoleh                  # 133
+finish option=1                         # begun (any option)
+warp 209.248,-30.19,54.052 FortKarugoNarugoS
+trigger qm4                             # Prog 0: nil: the default
+finish-if-event
+warp 4.667,-1,15.545 WindurstWatersS
+charvar Quest[7][18]Prog 1
+trigger Dhea_Prandoleh                  # Prog 1: 135
+finish
+charvar Quest[7][18]Prog 2
+trigger Dhea_Prandoleh                  # Prog 2: 135
+finish
+charvar Quest[7][18]Prog 3
+fill-inventory
+trigger Dhea_Prandoleh                  # Prog 3: 134
+finish                                  # no room: not completed
+trigger Dhea_Prandoleh                  # 134 again
+finish                                  # still no room
+free-inventory
+trigger Dhea_Prandoleh                  # 134
+finish                                  # completed; needToZone

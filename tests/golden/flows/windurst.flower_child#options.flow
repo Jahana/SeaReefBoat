@@ -1,0 +1,20 @@
+# Flower Child (windurst 65): the finish acts on the client's option, not on the trade (kept quirk). Available: a Red
+# Rose traded while the quest is only available: 10000 (0, 239, 1), option 1: the rose taken, begun. Back to available
+# by GM: a talk finished with option 3002: completed with no Lilac (the exit flag + 4, MOGHOUSE_EXIT; nothing to take).
+# Back to available, then accepted, by GM: a talk finished with option 1: confirmTrade with no trade (nothing), accepted already.
+lists WindurstWalls/Ojha_Rhawash/onTrigger WindurstWalls/Ojha_Rhawash/onTrade WindurstWalls/onEventFinish/10000
+char zone=WindurstWalls pos=-207.9,0,-134.9 job=WAR lvl=1
+item RedRose
+login
+trigger Ojha_Rhawash                          # 10000 (0, 239, 10) (walks beside her)
+finish option=10                              # begun
+quest Windurst.FlowerChild available
+trade Ojha_Rhawash RedRose x1                 # available, the check holds: 10000 (0, 239, 1)
+finish option=1                               # the rose taken; begun
+quest Windurst.FlowerChild available
+trigger Ojha_Rhawash                          # 10000 (0, 239, 10)
+finish option=3002                            # completed with no Lilac; the exit flag + 4; MOGHOUSE_EXIT
+quest Windurst.FlowerChild available          # GM: a GM accept over a completed quest keeps it completed
+quest Windurst.FlowerChild accepted
+trigger Ojha_Rhawash                          # accepted: 10000 (0, 239, 10)
+finish option=1                               # confirmTrade with no trade: nothing; not available: not begun again

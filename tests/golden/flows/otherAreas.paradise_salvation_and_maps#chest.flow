@@ -1,0 +1,42 @@
+# Paradise, Salvation, and Maps (otherAreas 68): the Sacrarium's Treasure Chest (a script: xi.treasure's). CoP Slanderous
+# Utterings current. The chest has no fixed spot: xi.treasure.initZone moves it 10 s after the zone loads to one of its
+# eight spots (a draw: the seeded run puts it at spot 5, J-10, 179.709 -7.693 -97.007), hidden for 5 s after its move
+# (hideNPC); 15 s after the login the engine still answers its talk with a release only (a scratch record), 30 s after
+# it the chest shows. trigger walks to where it is (its script's onTrigger: the key it wants, CHEST_UNLOCKED - 8).
+# Available: a trade (a feather): no section: the chest's script (no key: CHEST_UNLOCKED + 7). Accepted (a GM): with the
+# floorplans (a GM): nil, the script; Option 2 (a GM) without them: nil, the script. Option 0: a feather: xi.treasure's
+# no-key message, Option 5 (the char stands within 2 yalms of spot 5), noAction. Option 0 (a GM), the char 4 yalms off:
+# the key: xi.treasure's too-far message, Option 0 (no spot within 2), noAction. Back at the chest: the key: opened (a
+# zone key never fails), Option 5, noAction; 2 s on: the floorplans (the timer), the chest moves. Tavnazian Safehold:
+# Nivorajean 225 (4), option 0: Prog 2.
+lists TavnazianSafehold/Nivorajean/onTrigger TavnazianSafehold/onEventFinish/223 TavnazianSafehold/onEventFinish/225 TavnazianSafehold/onEventFinish/227 TavnazianSafehold/onEventFinish/228 Sacrarium/Treasure_Chest/onTrade
+lists Sacrarium/Treasure_Chest/onTrigger
+char zone=Sacrarium pos=30,-2,99 job=WAR lvl=75
+mission Cop SlanderousUtterings current
+item SacrariumChestKey
+item ChocoboFeather
+login
+tick 15000                              # the chest placed (initZone's moveTreasure) and shown
+tick 15000
+trigger Treasure_Chest at=1             # the chest's script (xi.treasure.onTrigger)
+finish-if-event
+trade Treasure_Chest ChocoboFeather x1  # available: no section; the chest's script: no key
+quest OtherAreas.ParadiseSalvationAndMaps accepted # a GM
+keyitem PieceOfRippedFloorplans         # a GM
+trade Treasure_Chest ChocoboFeather x1  # the floorplans held: nil; the chest's script
+delkeyitem PieceOfRippedFloorplans      # a GM
+charvar Quest[4][68]Option 2            # a GM
+trade Treasure_Chest ChocoboFeather x1  # Option 2: nil; the chest's script
+charvar Quest[4][68]Option 0            # a GM
+trade Treasure_Chest ChocoboFeather x1  # Option 0: xi.treasure: no key; Option 5; noAction
+charvar Quest[4][68]Option 0            # a GM
+walk 183.709,-7.693,-97.007             # 4 yalms east of the chest
+trade Treasure_Chest SacrariumChestKey x1 # too far: xi.treasure's message; Option 0 (no spot within 2); noAction
+trigger Treasure_Chest at=1             # back at the chest
+finish-if-event
+trade Treasure_Chest SacrariumChestKey x1 # opened: Option 5; noAction
+tick 2500                               # the timer: the floorplans; the chest moves
+tick 2500
+warp 17.4,-22,13.3 TavnazianSafehold
+trigger Nivorajean                      # the floorplans: 225 (4)
+finish option=0                         # Prog 2

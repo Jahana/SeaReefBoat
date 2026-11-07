@@ -1,0 +1,33 @@
+# Divine Might (outlands 163), Ark Angel GK's wyvern after the win. No Invincible: the five kill the level 75 Warrior,
+# so GK's claim falls with him; the five die with no killer, GK last, with a 200 ms tick before his death so the
+# battlefield's tick falls in the same zone tick as it: won, 32001. The win's cleanup stops the battlefield's mobs'
+# ticks, so the wyvern's owner-dead roam tick (xi.mob.callPets: setHP(0)) runs only once the cleanup has removed it from
+# the battlefield: its DEATH listener (Ark_Angel_GK.lua) finds no battlefield. Upstream indexed the nil and raised (the
+# Lua baseline, 4b161821); the guard leaves it, nothing to respawn (user ruling 2026-11-05, kept bugs).
+lists LaloffAmphitheater/onEventFinish/32001
+char zone=LaloffAmphitheater pos=-603.563,-22.681,483.937 job=WAR lvl=75
+mission Zilart TheSealedShrine current
+quest Outlands.DivineMight accepted
+login
+item ArkPentasphere                     # a GM
+trade qm1_1 ArkPentasphere x1           # 32000
+update 32000 option=81                  # index 5, arena 1: entered
+finish
+claim ARK_ANGEL_GK+12
+tick 5000
+tick 5000
+tick 5000
+tick 5000
+tick 5000
+tick 5000
+tick 5000
+tick 5000
+kill ARK_ANGEL_HM+24 nokiller
+kill ARK_ANGEL_MR+22 nokiller
+kill ARK_ANGEL_EV+16 nokiller
+kill ARK_ANGEL_TT+14 nokiller
+tick 200
+kill ARK_ANGEL_GK+12 nokiller   # won
+tick 15000
+tick 5000
+tick 5000

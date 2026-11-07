@@ -1,0 +1,25 @@
+# The Merchant's Bidding (sandoria 69): Parvipon in Southern San d'Oria, no guard, no reward table. A trade while
+# available (nothing), the offer 90 declined (option 0: nothing) and taken (option 1), the accepted 88, the wrong trades
+# (a bone chip, two hides: nil), 89 for three Rabbit Hides (quest:complete: completed and fame +10; 120 gil; the hides
+# taken), the completed 90 with option [7] = 1 (no finish handler), and the repeat 89 with four hides (quest:complete
+# again: fame +10; 120 gil; three taken). Parvipon has no script; no other quest names him.
+lists SouthernSanDoria/Parvipon/onTrigger SouthernSanDoria/Parvipon/onTrade SouthernSanDoria/onEventFinish/90 SouthernSanDoria/onEventFinish/89
+char zone=SouthernSanDoria pos=-170.1,-1,12.2
+item RabbitHide x7
+item BoneChip
+login
+trade Parvipon RabbitHide x3              # available: no trade handler, nothing
+trigger Parvipon                          # available: 90
+finish                                    # option 0: nothing
+trigger Parvipon                          # 90
+finish option=1                           # option 1: begun
+trigger Parvipon                          # accepted: 88
+finish
+trade Parvipon BoneChip x1                # nil
+trade Parvipon RabbitHide x2              # two: nil
+trade Parvipon RabbitHide x3              # three: 89
+finish                                    # completed, fame +10, 120 gil, the hides taken
+trigger Parvipon                          # completed: 90 with option [7] = 1
+finish                                    # no finish handler for 90 once completed: nothing
+trade Parvipon RabbitHide x4              # completed: 89
+finish                                    # quest:complete again (true): fame +10; 120 gil; three taken, one kept

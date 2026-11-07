@@ -1,0 +1,58 @@
+# Prelude to Puissance (jeuno 170, limit break 9 part 2): the Nomad Moogle in Ru'Lude Gardens (default 10045 (0, 2, 0,
+# 0)). A level 91 Warrior with the Limit Breaker at level cap 95, the four earlier limit breaks completed (a GM, before
+# login), MAX_LEVEL 99. Available: a Seasoning Stone (no trade handler while available: nothing); progressEvent 10194
+# (91, 1, 6, 2), finished with option 7 (any option): begun. Accepted, tradeCompleted 0: progressEvent 10045 (91, 1, 6,
+# 2, 0), finished with options 1, 12, 16, 18, 22 (none completes: nothing); (91, 2, 6, 2, 0) once the Limit Breaker is
+# gone (a GM). tradeCompleted -1 (a GM): 10045 (91, 1, 6, 2, 0) (not over 0), the stone nil (not 0). tradeCompleted 0:
+# two stones, a stone and a flint stone, a Kindred's Crest (nil each); one stone: tradeCompleted 1, the stone taken
+# (confirmTrade), progressEvent 10045 (0, 1, 5, 0), finished with option 1 (nothing); the stone again (tradeCompleted 1:
+# nil); 10045 (91, 1, 5, 0, 0), finished with option 13 and a full bag (a key item reward: completed anyway): the Soul
+# Gem Clasp, Beyond Infinity added (accepted). Beyond Infinity (group 9, Lua) then answers: its reminder, event 10045
+# (91, 1, 5, 1); a stone: nothing.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventFinish/10194 RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+keyitem LimitBreaker
+levelcap 95
+quest Jeuno.NewWorldsAwait completed
+quest Jeuno.ExpandingHorizons completed
+quest Jeuno.BeyondTheStars completed
+quest Jeuno.DormantPowersDislodged completed
+item SeasoningStone x5
+item FlintStone
+item KindredsCrest
+login
+trade Nomad_Moogle SeasoningStone x1    # available: no trade handler, nothing
+trigger Nomad_Moogle                    # cap 95, DPD completed, level 91: progressEvent 10194 (91, 1, 6, 2)
+finish option=7                         # any option: begun
+trigger Nomad_Moogle                    # accepted, tradeCompleted 0: progressEvent 10045 (91, 1, 6, 2, 0)
+finish option=1                         # not a completing option: nothing
+trigger Nomad_Moogle                    # 10045 (91, 1, 6, 2, 0)
+finish option=12                        # nothing
+trigger Nomad_Moogle                    # 10045 (91, 1, 6, 2, 0)
+finish option=16                        # nothing
+trigger Nomad_Moogle                    # 10045 (91, 1, 6, 2, 0)
+finish option=18                        # nothing
+trigger Nomad_Moogle                    # 10045 (91, 1, 6, 2, 0)
+finish option=22                        # nothing
+delkeyitem LimitBreaker                 # a GM
+trigger Nomad_Moogle                    # no Limit Breaker: 10045 (91, 2, 6, 2, 0)
+finish option=1
+keyitem LimitBreaker                    # a GM
+charvar Quest[3][170]tradeCompleted -1  # a GM
+trigger Nomad_Moogle                    # tradeCompleted -1 (not over 0): 10045 (91, 1, 6, 2, 0)
+finish option=1
+trade Nomad_Moogle SeasoningStone x1    # tradeCompleted -1 (not 0): nil
+charvar Quest[3][170]tradeCompleted 0   # a GM
+trade Nomad_Moogle SeasoningStone x2    # two stones: nil
+trade Nomad_Moogle SeasoningStone x1 FlintStone x1  # a stone and a flint stone: nil
+trade Nomad_Moogle KindredsCrest x1     # not a stone: nil
+trade Nomad_Moogle SeasoningStone x1    # tradeCompleted 1, the stone taken: progressEvent 10045 (0, 1, 5, 0)
+finish option=1                         # not a completing option: nothing
+trade Nomad_Moogle SeasoningStone x1    # tradeCompleted 1: nil
+trigger Nomad_Moogle                    # traded: 10045 (91, 1, 5, 0, 0)
+fill-inventory
+finish option=13                        # completed: the Soul Gem Clasp; Beyond Infinity added
+free-inventory
+trigger Nomad_Moogle                    # completed; Beyond Infinity accepted, Prog 0, the clasp: event 10045 (91, 1, 5, 1)
+finish
+trade Nomad_Moogle SeasoningStone x1    # completed: no trade handler answers: nothing

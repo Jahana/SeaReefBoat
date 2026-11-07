@@ -1,0 +1,55 @@
+# Save the Children (battlefield.save_the_children, Ghelsba Outpost, BattlefieldMission: San d'Oria 1-3, required status
+# 2, area 1, index 0, 10 minutes, no exit NPC). A level 75 Warrior of San d'Oria with 1-3 current (GMs; Resonance
+# current keeps RoV 1-1 out). Status 1: Hut_Door: the registrant's requirement (current, Status == 2) fails, as do the
+# zone's other fights: NO_BATTLEFIELD_ENTRY. Status 2: a Chunk of Copper Ore traded: a registrant's trade fails a fight
+# that wants none (and is no Wings of Fury orb): NO_BATTLEFIELD_ENTRY. The trigger: the menu 32000 (options 1: index 0).
+# The updates: option 0: redirectEventUpdate ignores it; 17 (index 1, not in the menu): REQS_NOT_MET; 2 (index 0, area
+# 2): the fight's fixed area 1 is registered (the requested area is not read): entered, the entry messages; finished:
+# setEnteredBattlefield, the CS var 1. The Fodderchiefs spawn at the arena's first tick; the three killed: their group's
+# allDeath sets WON (no armoury crate, no cutscene timer); the win (BattlefieldMission:onBattlefieldWin, 1-3 current):
+# battlefieldWin 32, 32001 (canSkipCS 0); finished: no title, no XP (1-3's handler: the key, the title, Status 3). Out
+# after the cleanup. The key dropped and Status 2 again (GMs): entered again (autoSkipCS 100: the CS var; the update
+# shows bcnm_records' new record: 24 s, 1 member); the time prompts on the golden clock: TIME_LEFT 300, 60, 30, 10 (no
+# 600: the limit is not above 600); time up: TIME_IN_THE_BATTLEFIELD_IS_UP, LOST, and in the same tick the forced
+# cleanup: 32002 (the loss; no PARTY_MEMBERS_HAVE_FALLEN: the tick read the status before it set LOST); finished:
+# leaveBattlefield(1). Last, a level sync (a GM's effect 269): Hut_Door's trigger and trade:
+# MEMBERS_LEVELS_ARE_RESTRICTED.
+lists GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/Hut_Door/onTrade GhelsbaOutpost/onEventUpdate/32000 GhelsbaOutpost/onEventFinish/32000 GhelsbaOutpost/onEventFinish/32001 GhelsbaOutpost/onEventFinish/32002
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren current
+item ChunkOfCopperOre
+login
+missionstatus Sandoria 1                # a GM
+trigger Hut_Door                        # Status 1: no fight on offer: NO_BATTLEFIELD_ENTRY
+missionstatus Sandoria 2                # a GM
+trade Hut_Door ChunkOfCopperOre x1      # a trade: Save the Children wants none: NO_BATTLEFIELD_ENTRY
+trigger Hut_Door                        # Status 2: the menu 32000 (options 1)
+update 32000 option=0                   # 0: ignored
+update 32000 option=17                  # index 1, not in the menu: REQS_NOT_MET
+update 32000 option=2                   # index 0, area 2 asked: area 1 registered, entered
+finish                                  # setEnteredBattlefield, the CS var 1
+tick 2000                               # the arena's first tick: the Fodderchiefs spawn
+kill FODDERCHIEF_VOKDEK
+kill FODDERCHIEF_VOKDEK+1
+kill FODDERCHIEF_VOKDEK+2               # allDeath: WON; the win: battlefieldWin 32, 32001
+finish                                  # no title, no XP (1-3: the key, the title, Status 3)
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield (its effect gone)
+delkeyitem OrcishHutKey                 # a GM
+missionstatus Sandoria 2                # a GM
+trigger Hut_Door                        # the menu 32000
+update 32000 option=1                   # entered again: autoSkipCS 100
+finish                                  # in the arena
+tick 301000                             # 299 s left: TIME_LEFT 300
+tick 240000                             # 59 s left: 60
+tick 30000                              # 29 s left: 30
+tick 20000                              # 9 s left: 10
+tick 10000                              # time up: TIME_IN_THE_BATTLEFIELD_IS_UP, LOST, the forced cleanup: 32002
+finish                                  # leaveBattlefield(1)
+tick 10000                              # the clearance gone
+effect 269                              # a GM: level sync
+trigger Hut_Door                        # MEMBERS_LEVELS_ARE_RESTRICTED
+trade Hut_Door ChunkOfCopperOre x1      # MEMBERS_LEVELS_ARE_RESTRICTED

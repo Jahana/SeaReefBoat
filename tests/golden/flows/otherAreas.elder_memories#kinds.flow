@@ -1,0 +1,40 @@
+# Elder Memories (otherAreas 24) and The Old Lady (otherAreas 10): the mutual exclusion and the reply kinds on Isacio, the
+# only NPC both quests answer in Selbina (no script, no default, no other quest), and on Vera. The Old Lady accepted (a
+# GM): Elder Memories' available section is off: Isacio's 99 (The Old Lady's replaceDefault) instead of 111; The Old
+# Lady completed: 99 again. Both accepted (The Old Lady available, then accepted), Prog 0: Isacio's 114 (Event) beats 99
+# (replaceDefault) every time (a replaceDefault 114 would tie: 114 then 99); Prog 3: Elder Memories' nil: 99 alone. Elder
+# Memories completed, The Old Lady accepted: its 118 (replaceDefault) and 99 tie: 118, then 99 (Elder_Memories sorts
+# first; an Event or Progress 118 would play every time). Mhaura: Vera: The Old Lady's 132 (Event, Prog 0) beats Elder
+# Memories' 130 (replaceDefault) every time. Event against Progress cannot be told apart on these two NPCs (no third
+# reply): 111 / 117 (Progress) and 119 / 114 (Event) are XI.Verify.Quests `oa g2 kinds`.
+lists Selbina/Isacio/onTrigger Mhaura/Vera/onTrigger Selbina/onEventFinish/111
+char zone=Selbina pos=-56.6,-0.9,-46.4 job=WAR lvl=30
+quest OtherAreas.TheOldLady accepted
+login
+trigger Isacio                          # The Old Lady accepted: Elder Memories off: 99 (replaceDefault)
+finish
+quest OtherAreas.TheOldLady completed   # a GM
+trigger Isacio                          # The Old Lady completed: Elder Memories off: 99
+finish
+quest OtherAreas.TheOldLady available   # a GM
+quest OtherAreas.TheOldLady accepted    # a GM
+quest OtherAreas.ElderMemories accepted # a GM: both accepted
+trigger Isacio                          # Prog 0: 114 (538) (Event beats 99)
+finish
+trigger Isacio                          # 114 again
+finish
+charvar Quest[4][24]Prog 3              # a GM
+trigger Isacio                          # Elder Memories' nil: 99
+finish
+quest OtherAreas.ElderMemories completed # a GM
+trigger Isacio                          # 118 (a tie of replaceDefault replies: Elder Memories' first)
+finish
+trigger Isacio                          # 99
+finish
+trigger Isacio                          # 118
+finish
+warp -51.5,-3.9,17.2 Mhaura
+trigger Vera                            # The Old Lady at Prog 0: 132 (542) beats 130
+finish
+trigger Vera                            # 132 again
+finish

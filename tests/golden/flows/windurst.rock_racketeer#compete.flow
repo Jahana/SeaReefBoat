@@ -1,0 +1,38 @@
+# Rock Racketeer (windurst 26): its lines next to other containers' lines (the reply kinds). A level-10 WAR, Mihgo's
+# Amigo completed by GM, Windurst fame 125, Hitting the Marquisate accepted by GM at nanaaProg 1: its 517 (Progress, no
+# finish handler) answers at Nanaa Mihgo on every talk. Ties rotate by the last event id; with none, the first action in
+# the list plays, here Rock Racketeer's. Available: 93 ties with 517 and plays first;
+# option 1, begun. Prog 0 Option 0: 94 (an Event) loses to 517; Option 1 (GM): 95 loses to 517. Prog 1 (GM): 98 ties
+# with 517, 517 played last: 98 (Prog 2). Prog 2: 99 loses to 517. As Thick as Thieves accepted by GM: Bopa Greso's 96 and
+# Cha Lebagta's 97 (Events) lose to its 506 and 507 (Progress). Completed by GM with the mustZone set (GM): 96 and 97
+# lose to 506 and 507 again.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/Bopa_Greso/onTrigger WindurstWoods/Cha_Lebagta/onTrigger WindurstWoods/onEventFinish/93 WindurstWoods/onEventFinish/98
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=WAR lvl=10
+quest Windurst.MihgosAmigo completed
+quest Windurst.HittingTheMarquisate accepted
+charvar Quest[2][71]nanaaProg 1
+fame Windurst 125
+login
+trigger Nanaa_Mihgo+99                         # available: 93 and 517 tie (Progress); no last id: 93
+finish option=1                                # begun; the Sharp Gray Stone
+trigger Nanaa_Mihgo+99                         # Prog 0, Option 0: 94 (Event) under 517: 517
+finish
+charvar Quest[2][26]Option 1                   # GM
+trigger Nanaa_Mihgo+99                         # Prog 0, Option 1: 95 (Event) under 517: 517
+finish
+charvar Quest[2][26]Prog 1                     # GM
+trigger Nanaa_Mihgo+99                         # Prog 1: 98 and 517 tie; 517 played last: 98
+finish                                         # Prog 2
+trigger Nanaa_Mihgo+99                         # Prog 2: 99 (Event) under 517: 517
+finish
+quest Windurst.AsThickAsThieves accepted       # GM
+trigger Bopa_Greso                             # Prog 2: 96 (Event) under As Thick as Thieves' 506: 506
+finish
+trigger Cha_Lebagta                            # Prog 2: 97 (Event) under 507: 507
+finish
+quest Windurst.RockRacketeer completed         # GM
+charvar Quest[2][26]mustZone 241               # GM
+trigger Bopa_Greso                             # completed, the mustZone: 96 (Event) under 506: 506
+finish
+trigger Cha_Lebagta                            # 97 under 507: 507
+finish

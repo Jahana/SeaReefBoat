@@ -1,0 +1,25 @@
+# Trial-Size Trial by Fire (outlands 15) at Dodmos with Trial by Fire (outlands 12, a lookup quest on C#) accepted: Trial
+# by Fire's 272 (an Event-priority action) alternates with Dodmos's script (UseFallback), so the script's turns show this
+# quest's arms against Trial by Fire's. A level 20 Summoner at Windurst fame level 2, both quests accepted by GM, no Mini
+# Tuning Fork of Fire: 272, then the script's 290 (0, fork, 0, 20), finished on 1 (a new fork), then 272, then the
+# script's 272 (the fork held). Then this quest completed by GM: 272, then the script's 289. The fork's trade while this
+# quest is completed: nothing.
+char zone=Kazham pos=100.37,-13.999,-97.676 job=SMN lvl=20
+fame Windurst 50
+quest Outlands.TrialByFire accepted
+quest Outlands.TrialSizeTrialByFire accepted
+login
+trigger Dodmos                            # Trial by Fire's 272
+finish
+trigger Dodmos                            # the script: accepted, no fork: 290 (0, fork, 0, 20)
+finish option=1                           # a new Mini Tuning Fork of Fire, ITEM_OBTAINED
+trigger Dodmos                            # Trial by Fire's 272
+finish
+trigger Dodmos                            # the script: accepted, the fork held: 272 (this quest's)
+finish
+quest Outlands.TrialSizeTrialByFire completed
+trigger Dodmos                            # Trial by Fire's 272
+finish
+trigger Dodmos                            # the script: completed: 289
+finish
+trade Dodmos MiniTuningForkOfFire x1      # completed: nothing

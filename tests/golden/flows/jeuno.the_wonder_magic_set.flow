@@ -1,0 +1,42 @@
+# The Wonder Magic Set (jeuno 7): Panta-Putta and Teigero-Bangero (Lower Jeuno; call-only: their scripts' arms). A WAR
+# 75. Jeuno fame is (San d'Oria + Bastok + Windurst) / 2 (the engine's getFame): 150 + 150 + 149 is 224, level 3; one
+# more Windurst point makes 225, level 4.
+# Turns: Teigero-Bangero has a default (34) and a script: the default plays first, the script next. Panta-Putta has
+# none (78 is her script's else).
+# Level 3: no arm (nor The Lost Cardian's, nor The Kind Cardian's): her 78. Teigero-Bangero, available: 34. Level 4: 77;
+# options 0 and 2: nothing; option 1: begun. Accepted without the key item: 55. Teigero-Bangero: Cook's Pride's draw
+# (75 or 32). The Wonder Magic Set (GM: Child's Play's reward): 33 refused on a full inventory, then Fool's Errand
+# Runner, the key item taken, a Mythril Earring, fame +13 x3, needToZone, completed. Completed, Cook's Pride not: 40.
+char zone=LowerJeuno pos=-60.8,-0.3,-140.0 job=WAR lvl=75
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 149
+login
+trigger Panta-Putta                     # Jeuno fame 224, level 3: no arm: 78
+finish
+trigger Teigero-Bangero                 # the turn: his default 34
+finish
+trigger Teigero-Bangero                 # the script: available: 34
+finish
+fame Windurst 150                       # Jeuno fame 225: level 4
+trigger Panta-Putta                     # level 4, available: 77
+finish option=0                         # nothing
+trigger Panta-Putta                     # 77
+finish option=2                         # nothing
+trigger Panta-Putta                     # 77
+finish option=1                         # begun
+trigger Panta-Putta                     # accepted, no key item: 55
+finish
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # not available; Cook's Pride not completed: math.randomInt(1, 2): 75 or 32
+finish
+keyitem WonderMagicSet                  # GM: Child's Play's reward (Port Jeuno Karl)
+fill-inventory
+trigger Panta-Putta                     # the key item: 33
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (13328); nothing else
+free-inventory
+trigger Panta-Putta                     # 33
+finish                                  # Fool's Errand Runner; the key item taken; Mythril Earring; fame +13 x3; needToZone; completed
+trigger Panta-Putta                     # completed, Cook's Pride not completed: 40
+finish

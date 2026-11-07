@@ -1,0 +1,79 @@
+# Riding on the Clouds (jeuno 131): the Bastok NPCs (npcBastok, the Smiling Stone). A level 61 Warrior at level cap 65
+# (a GM, before login), MAX_LEVEL 99, so the available check holds where it stands. Each NPC's onTrade handler
+# compares npcBastok with its index (0 to 7, the Lua file's order): for each, a GM sets the var to the index on each side
+# (k-1 and k+1; index 7: 0 and 8; the trade: nil, then the NPC's own onTrade runs: the step comment says what it
+# shows), then to the NPC's own
+# (a Kindred's Seal alone: npcBastok 8, the seal taken, the Smiling Stone, KEYITEM_OBTAINED; the handler still
+# returns nil), and a GM drops the stone again so the next give shows. The seal's exactness is tried at
+# Babenn (index 0): a wrong item, the seal with an extra item, two seals; and npcBastok 8 after the give.
+# The quests named in the comments are the NPCs' other quests and missions: none takes a Kindred's Seal (the port
+# agent checks each step's 'ret onTrade' and packets against its comment).
+lists BastokMines/Babenn/onTrade BastokMarkets/Gwill/onTrade BastokMarkets/Brygid/onTrade PortBastok/Kaede/onTrade PortBastok/Hilda/onTrade Metalworks/Naji/onTrade Metalworks/Raibaht/onTrade Metalworks/Lucius/onTrade
+char zone=BastokMines pos=74.958,-0.047,34.724 job=WAR lvl=61
+levelcap 65
+item KindredsSeal x12
+item FlintStone
+login
+quest Jeuno.RidingOnTheClouds accepted  # a GM: accepted, the four vars 0
+trade Babenn FlintStone x1            # npcBastok 0 (index 0): a flint stone is not the seal: nil; nothing
+trade Babenn KindredsSeal x1 FlintStone x1  # the seal and an extra item: not exact: nil; nothing
+trade Babenn KindredsSeal x2          # two seals: not exact: nil; nothing
+trade Babenn KindredsSeal x1   # npcBastok 0: npcBastok 8, the seal taken, the Smiling Stone
+trade Babenn KindredsSeal x1   # npcBastok 8: nil; no script; The Eleventh's Hour (C#) takes no seal: nothing, the seal kept
+delkeyitem SmilingStone   # a GM: the stone dropped, so the next give shows it
+warp -316.329,-15.948,-177.375 BastokMarkets   # by Gwill
+charvar Quest[3][131]npcBastok 0   # a GM: the index below Gwill's
+trade Gwill KindredsSeal x1   # npcBastok 0, not 1: nil; no script; The Cold Light of Day, The Return of the Adventurer (C#) take no seal
+charvar Quest[3][131]npcBastok 2   # a GM: the index above Gwill's
+trade Gwill KindredsSeal x1   # npcBastok 2, not 1: nil; no script; The Cold Light of Day, The Return of the Adventurer (C#) take no seal
+charvar Quest[3][131]npcBastok 1   # a GM: Gwill's index
+trade Gwill KindredsSeal x1   # npcBastok 1: npcBastok 8, the seal taken, the Smiling Stone
+delkeyitem SmilingStone   # a GM: the stone dropped, so the next give shows it
+warp -88.697,-4.302,-108.509 BastokMarkets   # by Brygid
+charvar Quest[3][131]npcBastok 1   # a GM: the index below Brygid's
+trade Brygid KindredsSeal x1   # npcBastok 1, not 2: nil; no script; Brygid the Stylist (Returns) (C#) take no seal
+charvar Quest[3][131]npcBastok 3   # a GM: the index above Brygid's
+trade Brygid KindredsSeal x1   # npcBastok 3, not 2: nil; no script; Brygid the Stylist (Returns) (C#) take no seal
+charvar Quest[3][131]npcBastok 2   # a GM: Brygid's index
+trade Brygid KindredsSeal x1   # npcBastok 2: npcBastok 8, the seal taken, the Smiling Stone
+delkeyitem SmilingStone   # a GM: the stone dropped, so the next give shows it
+warp 49.85,-6.872,69.181 PortBastok   # by Kaede
+charvar Quest[3][131]npcBastok 2   # a GM: the index below Kaede's
+trade Kaede KindredsSeal x1   # npcBastok 2, not 3: nil; the first of two Kaede; no script; Ayame and Kaede, Lure of the Wildcat (C#) take no seal
+charvar Quest[3][131]npcBastok 4   # a GM: the index above Kaede's
+trade Kaede KindredsSeal x1   # npcBastok 4, not 3: nil; the first of two Kaede; no script; Ayame and Kaede, Lure of the Wildcat (C#) take no seal
+charvar Quest[3][131]npcBastok 3   # a GM: Kaede's index
+trade Kaede KindredsSeal x1   # npcBastok 3: npcBastok 8, the seal taken, the Smiling Stone
+delkeyitem SmilingStone   # a GM: the stone dropped, so the next give shows it
+warp -158.141,-10.535,16.276 PortBastok   # by Hilda
+charvar Quest[3][131]npcBastok 3   # a GM: the index below Hilda's
+trade Hilda KindredsSeal x1   # npcBastok 3, not 4: nil; a script with no onTrade; mission 7-2, Cid's Secret, Lure of the Wildcat, The Usual take no seal
+charvar Quest[3][131]npcBastok 5   # a GM: the index above Hilda's
+trade Hilda KindredsSeal x1   # npcBastok 5, not 4: nil; a script with no onTrade; mission 7-2, Cid's Secret, Lure of the Wildcat, The Usual take no seal
+charvar Quest[3][131]npcBastok 4   # a GM: Hilda's index
+trade Hilda KindredsSeal x1   # npcBastok 4: npcBastok 8, the seal taken, the Smiling Stone
+delkeyitem SmilingStone   # a GM: the stone dropped, so the next give shows it
+warp 68.365,-13.999,-4.562 Metalworks   # by Naji
+charvar Quest[3][131]npcBastok 4   # a GM: the index below Naji's
+trade Naji KindredsSeal x1   # npcBastok 4, not 5: nil; no script; the Bastok missions, Bonds of Mythril, The Doorman, Trust: Bastok take no seal
+charvar Quest[3][131]npcBastok 6   # a GM: the index above Naji's
+trade Naji KindredsSeal x1   # npcBastok 6, not 5: nil; no script; the Bastok missions, Bonds of Mythril, The Doorman, Trust: Bastok take no seal
+charvar Quest[3][131]npcBastok 5   # a GM: Naji's index
+trade Naji KindredsSeal x1   # npcBastok 5: npcBastok 8, the seal taken, the Smiling Stone
+delkeyitem SmilingStone   # a GM: the stone dropped, so the next give shows it
+warp -24.763,-10,-3.596 Metalworks   # by Raibaht
+charvar Quest[3][131]npcBastok 5   # a GM: the index below Raibaht's
+trade Raibaht KindredsSeal x1   # npcBastok 5, not 6: nil; no script; Dark Legacy, Lure of the Wildcat, Teak Me to the Stars, The Usual take no seal
+charvar Quest[3][131]npcBastok 7   # a GM: the index above Raibaht's
+trade Raibaht KindredsSeal x1   # npcBastok 7, not 6: nil; no script; Dark Legacy, Lure of the Wildcat, Teak Me to the Stars, The Usual take no seal
+charvar Quest[3][131]npcBastok 6   # a GM: Raibaht's index
+trade Raibaht KindredsSeal x1   # npcBastok 6: npcBastok 8, the seal taken, the Smiling Stone
+delkeyitem SmilingStone   # a GM: the stone dropped, so the next give shows it
+warp 61.459,-16.39,-42.321 Metalworks   # by Lucius
+charvar Quest[3][131]npcBastok 0   # a GM: an index below Lucius's (the lowest)
+trade Lucius KindredsSeal x1   # npcBastok 0, not 7: nil; no script; mission 3-3, Trust: Bastok take no seal
+charvar Quest[3][131]npcBastok 8   # a GM: the index above Lucius's
+trade Lucius KindredsSeal x1   # npcBastok 8, not 7: nil; no script; mission 3-3, Trust: Bastok take no seal
+charvar Quest[3][131]npcBastok 7   # a GM: Lucius's index
+trade Lucius KindredsSeal x1   # npcBastok 7: npcBastok 8, the seal taken, the Smiling Stone
+delkeyitem SmilingStone   # a GM: the stone dropped, so the next give shows it

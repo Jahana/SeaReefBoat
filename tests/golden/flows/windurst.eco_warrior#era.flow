@@ -1,0 +1,21 @@
+# Eco-Warrior (Windurst) with its era module (modules/era/lua/quests/windurst/eco_warrior.lua, enabled by its condition
+# xi.pre(xi.expansion.ROV): RESTRICT_CONTENT 1, ENABLE_ROV 0), which replaces state 2's Maze of Shakhrami finish of 62
+# with a copy whose Level Restriction is 20 (the quest's own is 25). Accepted, no meat, at Ahko Mhalijikhari: 62 with
+# option 0 (the module's handler, its option-not-1 side: nothing), 62 with option 1 (the module's handler: Level
+# Restriction 20, ON_ZONE: the char's level shows 20), then the restriction's 64 (the quest's own, option 0: off) and 62
+# again.
+module modules/era/lua/quests/windurst/eco_warrior.lua
+lists MazeOfShakhrami/Ahko_Mhalijikhari/onTrigger MazeOfShakhrami/onEventFinish/62 MazeOfShakhrami/onEventFinish/64
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Windurst.EcoWarrior accepted
+login
+trigger Ahko_Mhalijikhari            # no meat, no restriction: 62
+finish option=0                      # the module's 62, option 0: nothing
+trigger Ahko_Mhalijikhari            # 62 again
+finish option=1                      # the module's 62: Level Restriction 20 (ON_ZONE)
+trigger Ahko_Mhalijikhari            # the restriction: 64
+finish                               # option 0: the restriction off (the quest's own 64)
+trigger Ahko_Mhalijikhari            # no meat, no restriction: 62
+finish option=0

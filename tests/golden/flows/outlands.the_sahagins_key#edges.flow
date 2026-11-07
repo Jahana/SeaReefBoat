@@ -1,0 +1,22 @@
+# The Sahagin's Key (outlands 128; call-only): the arms with no Gimb first. A level 99 Warrior in Sea Serpent Grotto,
+# SahaginKeyProgress 0. Hurr at Progress 0: 104. Bou 108 (Progress 2: he reads no Progress). SahaginKeyItems 2 (a GM):
+# Hurr at Progress 2 without the key: 105, Items 1 (the Progress 2 arm comes before the Items arms). Progress 4 (a GM):
+# 104. Progress 3, Items 2, with no key (GMs): 106 (no roll: Items is not 0).
+char zone=SeaSerpentGrotto pos=307.4,27.768,234.3 job=WAR lvl=99
+login
+trigger Hurr_the_Betrayer                 # Progress 0: 104
+finish
+warp -123.5,47.568,-334.8 SeaSerpentGrotto
+trigger Bou_the_Righteous                 # 108, Progress 2
+finish
+warp 307.4,27.768,234.3 SeaSerpentGrotto
+charvar SahaginKeyItems 2                 # a GM
+trigger Hurr_the_Betrayer                 # Progress 2, no key: 105, Items 1
+finish
+charvar SahaginKeyProgress 4              # a GM
+trigger Hurr_the_Betrayer                 # Progress 4: 104
+finish
+charvar SahaginKeyProgress 3              # a GM
+charvar SahaginKeyItems 2
+trigger Hurr_the_Betrayer                 # Progress 3, Items 2: 106
+finish

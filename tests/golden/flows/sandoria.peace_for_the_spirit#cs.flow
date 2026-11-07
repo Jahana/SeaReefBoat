@@ -1,0 +1,88 @@
+# Peace for the Spirit (sandoria 86): each CS value (by GM, 0 to 6) at Curilla, Sharzalion and Daggao. Accepted by GM,
+# an RDM 50 with The Crimson Trial and Enveloped in Darkness completed. Curilla: 108 (CS 0, 1), 113 (CS 2, 3, 4, 6), 51
+# (CS 5). Sharzalion: 64 (CS 0; its finish sets CS 1), 65 (CS 1), 66 (CS 2, 3; its finish sets CS 3), 15 (the
+# script's: CS 4, 5, 6). Daggao (CS read in any status): 72 (CS 3; its finish sets CS 4), 73 (CS 5), 60 (the script's:
+# CS 0, 1, 2, 4, 6); then available (CS 3: 72, CS 5: 73) and completed (CS 3: 72, CS 5: 73) by GM; Sharzalion while
+# completed at CS 0: 15.
+char zone=ChateauDoraguille pos=31.2,0.0,-0.9 job=RDM lvl=50
+quest Sandoria.TheCrimsonTrial completed
+quest Sandoria.EnvelopedInDarkness completed
+quest Sandoria.PeaceForTheSpirit accepted
+login
+trigger Curilla                           # CS 0: 108
+finish
+charvar peaceForTheSpiritCS 1
+trigger Curilla                           # CS 1: 108
+finish
+charvar peaceForTheSpiritCS 2
+trigger Curilla                           # CS 2: 113
+finish
+charvar peaceForTheSpiritCS 3
+trigger Curilla                           # CS 3: 113
+finish
+charvar peaceForTheSpiritCS 4
+trigger Curilla                           # CS 4: 113
+finish
+charvar peaceForTheSpiritCS 5
+trigger Curilla                           # CS 5: 51
+finish
+charvar peaceForTheSpiritCS 6
+trigger Curilla                           # CS 6: 113
+finish
+warp 97.4,0.0,113.6 SouthernSanDoria
+charvar peaceForTheSpiritCS 0
+trigger Sharzalion                        # CS 0: 64
+finish                                    # CS 1
+trigger Sharzalion                        # CS 1: 65
+finish
+charvar peaceForTheSpiritCS 2
+trigger Sharzalion                        # CS 2: 66
+finish                                    # CS 3
+trigger Sharzalion                        # CS 3: 66
+finish                                    # CS 3
+charvar peaceForTheSpiritCS 4
+trigger Sharzalion                        # CS 4: 15
+finish
+charvar peaceForTheSpiritCS 5
+trigger Sharzalion                        # CS 5: 15
+finish
+charvar peaceForTheSpiritCS 6
+trigger Sharzalion                        # CS 6: 15
+finish
+charvar peaceForTheSpiritCS 0
+trigger Daggao                            # CS 0: 60
+finish
+charvar peaceForTheSpiritCS 1
+trigger Daggao                            # CS 1: 60
+finish
+charvar peaceForTheSpiritCS 2
+trigger Daggao                            # CS 2: 60
+finish
+charvar peaceForTheSpiritCS 3
+trigger Daggao                            # CS 3: 72
+finish                                    # CS 4
+trigger Daggao                            # CS 4: 60
+finish
+charvar peaceForTheSpiritCS 5
+trigger Daggao                            # CS 5: 73
+finish
+charvar peaceForTheSpiritCS 6
+trigger Daggao                            # CS 6: 60
+finish
+quest Sandoria.PeaceForTheSpirit available
+charvar peaceForTheSpiritCS 3
+trigger Daggao                            # available, CS 3: 72
+finish                                    # CS 4
+charvar peaceForTheSpiritCS 5
+trigger Daggao                            # available, CS 5: 73
+finish
+quest Sandoria.PeaceForTheSpirit completed
+charvar peaceForTheSpiritCS 3
+trigger Daggao                            # completed, CS 3: 72
+finish                                    # CS 4
+charvar peaceForTheSpiritCS 5
+trigger Daggao                            # completed, CS 5: 73
+finish
+charvar peaceForTheSpiritCS 0
+trigger Sharzalion                        # completed, CS 0: 15
+finish

@@ -1,0 +1,31 @@
+# Messenger From Beyond (sandoria 87, WHM AF1): Narcheral in Northern San d'Oria, qm2 and Marchelute in Valkurm Dunes.
+# A WHM 40: a trade while available (nothing), Narcheral's 689 (begun), his trigger while accepted (no handler: his
+# default 688); qm2 (Marchelute popped, FOUL_PRESENCE), qm2 with Marchelute up (nil: its default), the Tavnazia Pass by
+# GM (Marchelute drops it), qm2 with the pass (nil); the pass and a chip (not exactly: nil), the pass (690: completed,
+# Blessed Hammer, fame +20, the pass taken); then his default 688 (Prelude of Black and White needs level 50).
+# Narcheral's script has no onTrigger (his default is 688); his onTrade answers Pieuje's Decision only. qm2 has no
+# script; its default is NOTHING_OUT_OF_ORDINARY; no other quest names Valkurm Dunes' qm2. Valkurm Dunes' Zone.lua
+# shows qm2 only from 18:00 to 05:00 (onInitialize, onGameHour): the run starts at 12:00, so the flow waits 6 Vana'diel
+# hours and ticks once (the zone's onGameHour at 18 sets it NORMAL).
+lists NorthernSanDoria/Narcheral/onTrigger NorthernSanDoria/Narcheral/onTrade NorthernSanDoria/onEventFinish/689 NorthernSanDoria/onEventFinish/690 ValkurmDunes/qm2/onTrigger
+char zone=NorthernSanDoria pos=128.8,-11,130.3 job=WHM lvl=40
+item BoneChip
+login
+trade Narcheral BoneChip x1               # available: no trade handler; his script: no Pieuje's Decision, nothing
+trigger Narcheral                         # WHM 40: 689
+finish                                    # begun (any option)
+trigger Narcheral                         # accepted: no trigger handler; his default 688
+finish
+warp -715.9,-10.75,68 ValkurmDunes
+wait vana=6                               # 18:00
+tick 1000                                 # the hour's onGameHour: qm2 shown
+trigger qm2                               # no pass, Marchelute down: popped and claimed, FOUL_PRESENCE
+trigger qm2                               # Marchelute up: popFromQM false, nil; NOTHING_OUT_OF_ORDINARY
+item TavnaziaPass                         # GM: Marchelute's drop
+trigger qm2                               # the pass held: nil; NOTHING_OUT_OF_ORDINARY
+warp 128.8,-11,130.3 NorthernSanDoria
+trade Narcheral TavnaziaPass x1 BoneChip x1   # not exactly the pass: nil
+trade Narcheral TavnaziaPass x1           # 690
+finish                                    # completed: Blessed Hammer, fame +20; the pass taken
+trigger Narcheral                         # completed: his default 688
+finish

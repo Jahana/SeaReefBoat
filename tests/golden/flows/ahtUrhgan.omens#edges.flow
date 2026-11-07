@@ -1,0 +1,75 @@
+# Omens' edges. The offer's operands, each false alone (An Empty Vessel completed for all: its 78 answers Waoud's nil):
+# bob: Beginnings not completed (and no Immortal Sentries: Beginnings not offered either): 78; carl: a Warrior: 78; dan:
+# a level 49 Blue Mage: 78, also at AF2_QUEST_LEVEL 49.4 (a number). ed (all met): Omens' mustZone set (a GM: the zone id 50): Waoud nil: 78; out and back (the
+# mustZone cleared), Timer = now + 1 (a GM): nil: 78; Timer = now: 710. Main (accepted by a GM, 500 gil): Prog 0 711
+# (500), option 1: under 1000 gil: nothing; Prog 1 (a GM): Lathuya nil: 770; Prog 2 (a GM): 713 (500), option 1:
+# nothing; blank_omens Prog 2: nil: NOTHING_OUT_OF_ORDINARY; Prog 4 (a GM): Waoud nil: 78; Lathuya 716 with a full bag:
+# quest:complete false (the charuqs do not fit): nothing, the envelope kept; room again: 716: completed.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/Lathuya/onTrigger AhtUrhganWhitegate/onEventFinish/711 AhtUrhganWhitegate/onEventFinish/713 AhtUrhganWhitegate/onEventFinish/716 AydeewaSubterrane/blank_omens/onTrigger
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=500
+char bob zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+char carl zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=WAR lvl=50 gil=5000
+char dan zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=49 gil=5000
+char ed zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings completed
+quest AhtUrhgan.Omens accepted
+keyitem SealedImmortalEnvelope
+bob: quest AhtUrhgan.AnEmptyVessel completed
+carl: quest AhtUrhgan.AnEmptyVessel completed
+carl: quest AhtUrhgan.Beginnings completed
+dan: quest AhtUrhgan.AnEmptyVessel completed
+dan: quest AhtUrhgan.Beginnings completed
+ed: quest AhtUrhgan.AnEmptyVessel completed
+ed: quest AhtUrhgan.Beginnings completed
+ed: charvar Quest[6][22]mustZone 50
+login
+bob: login
+bob: trigger Waoud                      # Beginnings not completed: not offered: 78
+bob: finish option=0
+bob: logout
+carl: login
+carl: trigger Waoud                     # a Warrior: 78
+carl: finish option=0
+carl: logout
+dan: login
+dan: trigger Waoud                      # level 49: 78
+dan: finish option=0
+setting AF2_QUEST_LEVEL 49.4
+dan: trigger Waoud                      # 49 < 49.4 (the setting read as a number): 78
+dan: finish option=0
+setting AF2_QUEST_LEVEL 50
+dan: logout
+ed: login
+ed: trigger Waoud                       # Omens' mustZone: nil: 78
+ed: finish option=0
+ed: warp -64,-7,38 AlZahbi              # the mustZone cleared
+ed: charvar Quest[6][22]Timer 1800000001   # a GM: now + 1
+ed: warp 67.116,-6,-78.222 AhtUrhganWhitegate
+ed: trigger Waoud                       # now < Timer: nil: 78
+ed: finish option=0
+ed: charvar Quest[6][22]Timer 1800000000   # a GM: now
+ed: trigger Waoud                       # 710
+ed: finish                              # begun
+ed: logout
+trigger Waoud                           # Prog 0: 711 (500)
+finish option=1                         # under 1000 gil: nothing
+charvar Quest[6][22]Prog 1              # a GM
+trigger Lathuya                         # Prog 1: nil: 770
+finish
+charvar Quest[6][22]Prog 2              # a GM
+trigger Waoud                           # Prog 2: 713 (500)
+finish option=1                         # under 1000 gil: nothing
+warp 343.629,36.509,-24.856 AydeewaSubterrane
+trigger blank_omens                     # Prog 2: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+charvar Quest[6][22]Prog 4              # a GM
+trigger Waoud                           # Prog 4: nil: 78
+finish option=0
+fill-inventory
+trigger Lathuya                         # Prog 4: 716
+finish                                  # the charuqs do not fit: quest:complete false: nothing; the envelope kept
+free-inventory
+trigger Lathuya                         # 716
+finish                                  # completed; the envelope taken

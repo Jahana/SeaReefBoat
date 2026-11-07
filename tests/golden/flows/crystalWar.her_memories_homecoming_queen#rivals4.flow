@@ -1,0 +1,29 @@
+# Her Memories: Homecoming Queen (crystalWar 64), the rival at Bertenont and Halver: a San d'Orian level 99 Warrior in
+# Northern San d'Oria with the WotG mission Her Memories current (a GM; other logs as group 1's flows), Homecoming Queen
+# accepted at Prog2 1 (GMs) and Lure of the Wildcat (sandoria 113) accepted with no wildcat bit set (a GM): Bertenont
+# answers its 809 and Halver its 558, both Progress. Bertenont: The Faux Pas' 870 ties 809: 870, the first container,
+# finished: The Faux Pas completed; FRAGMENT_FAR_TOO_SMALL, Tiny Memory Fragment 2. Then 809 alone, finished: its bit.
+# Chateau d'Oraguille: Halver: The Grave Resolve's 571 (Prog3 0) ties 558: 571, the first of the two, finished: The
+# Grave Resolve added, Prog3 1. Then 558 (Progress) over 572 (an Event), finished: its bit. Then 572 alone.
+lists NorthernSanDoria/Bertenont/onTrigger NorthernSanDoria/onEventFinish/809 NorthernSanDoria/onEventFinish/870 ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/558 ChateauDoraguille/onEventFinish/571
+char zone=NorthernSanDoria pos=-163.949,0,226.443 job=WAR lvl=99 nation=0
+mission Wotg HerMemories current
+quest CrystalWar.HerMemoriesHomecomingQueen accepted
+charvar Quest[7][64]Prog2 1
+quest Sandoria.LureOfTheWildcat accepted
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Bertenont                       # 870 and 809 tie (Progress): 870, the first container
+finish                                  # The Faux Pas completed; FRAGMENT_FAR_TOO_SMALL; Tiny Memory Fragment 2
+trigger Bertenont                       # The Faux Pas completed: 809 alone
+finish                                  # Lure of the Wildcat: bit 9
+warp 31.2,0.0,-0.9 ChateauDoraguille
+trigger Halver                          # Prog3 0: 571 and 558 tie (Progress): 571
+finish                                  # The Grave Resolve added; Prog3 1
+trigger Halver                          # Prog3 1: 558 (Progress) over 572 (an Event)
+finish                                  # Lure of the Wildcat: bit 16
+trigger Halver                          # 572 alone (oncePerZone)
+finish

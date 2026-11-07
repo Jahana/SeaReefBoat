@@ -1,0 +1,41 @@
+# Sorcery of the North (sandoria 83): Eperdur in Northern San d'Oria, the Treasure Chest of Fei'Yin. Eperdur's
+# DefaultActions 678 takes every other talk (the lookup's turn after each zone-in, and again whenever his script plays
+# nothing). Healing the Land available at fame level 1: neither quest answers (678 twice). Healing the Land completed by
+# GM (needToZone clear at login): 685, declined (option 1), accepted (option 0). Accepted: 686; the chest's trade with
+# the Fei'Yin Chest Key and no tome (xi.treasure.onTrade with the tome as the reward, bypass type 2: the chest opens,
+# the tome arrives 2 s later); 687 (completed: Scroll of Teleport-Vahzl, the tome taken, fame +40). Completed: neither
+# quest answers (678). A chest is placed 10 s after its zone starts (hence the tick).
+char zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=50
+item FeiyinChestKey
+login
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # Healing the Land available, fame level 1: neither quest answers; 678
+finish-if-event
+quest Sandoria.HealingTheLand completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # Healing the Land completed, no needToZone: 685
+finish-if-event option=1                  # declined: not begun
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # 685
+finish-if-event option=0                  # begun
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted, no tome: 686
+finish-if-event
+warp 168.7,-24.0,210.8 Feiyin
+tick 13000                                # the chest placed
+trigger Treasure_Chest                    # walks to the chest (its trigger: the chest's own script)
+trade Treasure_Chest FeiyinChestKey x1    # accepted, no tome: the chest opens
+tick 4500                                 # the Fei'Yin Magic Tome
+warp 126.3,-6.5,95.7 NorthernSanDoria
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # the tome: 687
+finish-if-event                           # Teleport-Vahzl; the tome taken; fame +40; completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # both completed: neither quest answers; 678
+finish-if-event

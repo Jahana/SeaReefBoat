@@ -1,0 +1,14 @@
+# The Moonlit Path (windurst 9): the Full Moon Fountain battlefield won as in #battlefield, then its 32001 finished after
+# a GM sets the local var battlefieldWin to another value (`localvar battlefieldWin 0`): the quest's 32001 handler's
+# other side: nothing (the Moon Bauble kept, no Whisper of the Moon).
+lists FullMoonFountain/MS_Entrance/onTrigger FullMoonFountain/onEventFinish/32001
+char zone=FullMoonFountain pos=-301.3,9.5,-260.0 job=WAR lvl=75
+quest Windurst.TheMoonlitPath accepted
+keyitem MoonBauble
+login
+trigger MS_Entrance            # the bauble: the entry menu 32000
+update 32000 option=1          # The Moonlit Path (index 0), arena 1: registered, entered (the bauble kept)
+finish                         # in the arena
+kill FENRIR_PRIME              # arena 1: won, battlefieldWin 224, 32001 opens
+localvar battlefieldWin 0      # GM: the win's local var cleared
+finish                         # 32001, battlefieldWin 0: nothing; the bauble kept

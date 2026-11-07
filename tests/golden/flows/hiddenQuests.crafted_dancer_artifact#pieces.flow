@@ -1,0 +1,28 @@
+# Crafted Dancer Artifact (hidden quest DncArtifact), the pieces that decide the menus: a level 99 Dancer (race 2, the
+# female pieces) in Bastok Markets, The Road to Divadom completed, Prog 3 (GMs). Status 3 (the tiara and bangles still
+# to make, the toe shoes made): Matthias 493 (0, 0, 1), finished on 1 (a piece still to make): Option 1, Prog 4.
+# Status 1 at Prog 4 (a GM): his 494 (Option - 1), finished with no handler for it. Status 0 (nothing left to make)
+# with Prog 3 again: section 2 fails: his default 499. The tiara and bangles held, not the toe shoes: 499; the toe
+# shoes too: 498.
+lists BastokMarkets/Matthias/onTrigger BastokMarkets/onEventFinish/493
+char zone=BastokMarkets pos=-114.1,-4.3,-105.8 job=DNC lvl=99 race=2
+quest Jeuno.TheRoadToDivadom completed
+charvar HQuest[DncArtifact]Prog 3
+charvar HQuest[DncArtifact]Status 3
+login
+trigger Matthias                        # Status 3: 493 (0, 0, 1)
+finish option=1                         # a piece still to make: Option 1, Prog 4
+charvar HQuest[DncArtifact]Status 1     # a GM
+trigger Matthias                        # Status 1, Prog 4: 494
+finish option=1                         # 494: no handler
+charvar HQuest[DncArtifact]Prog 3       # a GM
+charvar HQuest[DncArtifact]Status 0     # a GM: nothing left to make
+trigger Matthias                        # section 2 fails: 499
+finish
+item DancersTiaraF                      # a GM
+item DancersBanglesF                    # a GM
+trigger Matthias                        # the toe shoes not held: 499
+finish
+item DancersToeShoesF                   # a GM
+trigger Matthias                        # the three held: 498
+finish

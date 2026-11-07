@@ -1,0 +1,27 @@
+# Ayame and Kaede (bastok 60): the qm2 and leech arms only a GM's state reaches. Accepted by GM at Prog 2, at the qm2:
+# the quest's local var nmDefeated set to 1 by GM (`localvar`) with isActor 0 (this char spawned nothing): Prog 3, the
+# coral, and the qm2 not hidden (the isActor side, :83 false); a talk right after (Prog 3: nil) shows it is not hidden.
+# Then Prog 2 and nmDefeated 0 again by GM: the talk spawns the three leeches (isActor 1); Prog set to 3 by GM while
+# they are up, the three killed: isNMDefeated true but Prog 3, so nmDefeated stays 0 (:107 false). A local var is not
+# in the trace, so the next talk shows it: once they have despawned and Prog is 2 again (GM), the qm2 spawns them
+# again (HAIR_STANDS_ON_END), not the coral that nmDefeated 1 would give.
+lists KorrolokaTunnel/qm2/onTrigger KorrolokaTunnel/Korroloka_Leech/onMobDeath
+char zone=KorrolokaTunnel pos=-206.8,-9.9,176.2 job=WAR lvl=30
+quest Bastok.AyameAndKaede accepted
+charvar Quest[1][60]Prog 2
+login
+localvar Quest[1][60]nmDefeated 1
+trigger qm2                    # Prog 2, none up, nmDefeated 1, isActor 0: Prog 3, no hide, the Strangely Shaped Coral
+trigger qm2                    # Prog 3: nil, NOTHING_OUT_OF_ORDINARY (the qm2 not hidden)
+charvar Quest[1][60]Prog 2
+localvar Quest[1][60]nmDefeated 0
+trigger qm2                    # Prog 2, nmDefeated 0: isActor 1, the three leeches spawned and claimed,
+                               # HAIR_STANDS_ON_END
+charvar Quest[1][60]Prog 3
+kill KORROLOKA_LEECH           # a leech dead at Prog 3: nmDefeated stays 0
+kill KORROLOKA_LEECH+1         # the same
+kill KORROLOKA_LEECH+2         # the same
+tick 15000                     # the leeches despawning (the death and the despawn each take a zone tick)
+tick 30000                     # the leeches despawned
+charvar Quest[1][60]Prog 2
+trigger qm2                    # Prog 2, none up, nmDefeated still 0: the leeches spawned again, HAIR_STANDS_ON_END

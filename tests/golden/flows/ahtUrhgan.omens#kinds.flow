@@ -1,0 +1,41 @@
+# Omens' reply kinds at Lathuya (no script; default 770), against the hidden quest Crafted Magus Artifact (Lua), up once
+# Transformations is accepted. With [BLUAF]Remaining 7 and a resting day ahead its Lathuya trigger is 729 (Event:
+# event(737 + (0 - 8)), the asleep message). Main (a GM-set state: Omens accepted, Transformations accepted too): Prog 2:
+# 714 (Progress) beats 729 (twice: Prog reset to 2 by a GM after the first 714); Prog 3: 715 (twice); Prog 4 with a
+# full bag: 716 (twice: quest:complete false keeps it). bob (in play: Omens completed, Transformations accepted): 771
+# (Event, replaceDefault: priority 20) loses to 729 (Event, 100), twice.
+lists AhtUrhganWhitegate/Lathuya/onTrigger
+char zone=AhtUrhganWhitegate pos=-93.581,-6,31.638 job=BLU lvl=50 gil=5000
+char bob zone=AhtUrhganWhitegate pos=-93.581,-6,31.638 job=BLU lvl=50 gil=5000
+quest AhtUrhgan.Omens accepted
+quest AhtUrhgan.Transformations accepted
+charvar Quest[6][22]Prog 2
+charvar [BLUAF]Remaining 7
+charvar [BLUAF]RestingDay 99999
+keyitem SealedImmortalEnvelope
+bob: quest AhtUrhgan.Omens completed
+bob: quest AhtUrhgan.Transformations accepted
+bob: charvar [BLUAF]Remaining 7
+bob: charvar [BLUAF]RestingDay 99999
+login
+trigger Lathuya                         # Prog 2: 714 (Progress) beats the hidden quest's 729 (Event)
+finish                                  # Prog 3
+charvar Quest[6][22]Prog 2              # a GM
+trigger Lathuya                         # 714 again
+finish
+trigger Lathuya                         # Prog 3: 715
+finish
+trigger Lathuya                         # 715 again
+finish
+charvar Quest[6][22]Prog 4              # a GM
+fill-inventory
+trigger Lathuya                         # Prog 4: 716
+finish                                  # the charuqs do not fit: quest:complete false: nothing
+trigger Lathuya                         # 716 again
+finish
+free-inventory
+bob: login
+bob: trigger Lathuya                    # Omens completed: 771 (replaceDefault) loses to 729
+bob: finish
+bob: trigger Lathuya                    # again
+bob: finish

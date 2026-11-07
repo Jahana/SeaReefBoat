@@ -1,0 +1,33 @@
+# Ode to the Serpents (ahtUrhgan 44): a level 75 Warrior. Fari-Wari (no script; default event 831). Saga of the
+# Skyserpent accepted (a GM): Ode not available: Saga's 829. Saga completed (a GM): Ode available: Fari-Wari 882,
+# finished on option 1: begun (any option), Biyaada's Letter. Accepted, neither When the Bow Breaks nor Fist of the
+# People completed: 891 (an Event); Fist only (a GM): 891; Bow only (GMs): 891; both (a GM) with a full bag: 883,
+# finished: the Gold Piece does not fit: no completion, the letter kept; the bag freed: 883, finished: completed, the
+# letter taken. Completed: Soothing Waters available: its 894, finished on option 1 (not begun).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger AhtUrhganWhitegate/onEventFinish/882 AhtUrhganWhitegate/onEventFinish/883
+char zone=AhtUrhganWhitegate pos=81.95,-6,-137.707 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent accepted
+login
+trigger Fari-Wari                       # Saga accepted, Prog 0: Ode not available: Saga's 829
+finish
+quest AhtUrhgan.SagaOfTheSkyserpent completed   # a GM
+trigger Fari-Wari                       # available: 882
+finish option=1                         # begun (any option); Biyaada's Letter
+trigger Fari-Wari                       # accepted, neither done: 891 (an Event)
+finish
+quest AhtUrhgan.FistOfThePeople completed   # a GM
+trigger Fari-Wari                       # Fist only: 891
+finish
+quest AhtUrhgan.FistOfThePeople available   # GMs: Bow only
+quest AhtUrhgan.WhenTheBowBreaks completed
+trigger Fari-Wari                       # Bow only: 891
+finish
+quest AhtUrhgan.FistOfThePeople completed   # a GM: both
+fill-inventory
+trigger Fari-Wari                       # both: 883
+finish                                  # full: complete false: the letter kept
+free-inventory
+trigger Fari-Wari                       # 883
+finish                                  # completed: the Gold Piece; the letter taken
+trigger Fari-Wari                       # completed: Soothing Waters available: its 894
+finish option=1                         # not 0: Soothing not begun

@@ -1,0 +1,12 @@
+# A Crisis in the Making (windurst 2), completion parity: 267's finish is the Lua's raw player:completeQuest (after the
+# gil, the var, the offering and the fame; then needToZone), so a GM's Quest[2][2]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) at var 2 with the Off Offering,
+# beside Ranpi-Monpi.
+char zone=WindurstWaters pos=-122.0,-3.0,63.2 job=WAR lvl=75
+quest Windurst.ACrisisInTheMaking accepted
+charvar QuestCrisisMaking_var 2
+keyitem OffOffering
+login
+charvar Quest[2][2]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Ranpi-Monpi                     # accepted, var 2: 267
+finish                                  # 400 gil, var 0, the offering taken, fame 10, completed, needToZone; Prog kept

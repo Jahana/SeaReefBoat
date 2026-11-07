@@ -1,0 +1,67 @@
+# The All-New C-2000 (windurst 24): Kopuro-Popuro (Windurst Woods; no default action; his talk calls The All-New C-3000,
+# Legendary Plan B, then this quest, his standard 276 last; his trade this quest first), Kororo (default 277) and
+# Boizo-Naizo (default 275): a default takes turns with the script, and a script talk that starts nothing plays the
+# default again. A level-75 WAR, Windurst fame 0 (A Greeting Cardian answers Kororo and Boizo-Naizo only from fame level
+# 3 with this quest completed). Available: 285 (0, 856, 846, 4368), option 2: nothing; the trade: nothing (no trade arm
+# answers); Kororo and Boizo-Naizo: nothing (their defaults); 285, option 0: begun. Accepted: 288; each two of the three
+# traded: 288; Kororo 291, Boizo-Naizo 290. The three and a Wolf Hide (tradeHas): 292 (200): completed, fame 20, Cardian
+# Tutor, 200 gil (no message), the three taken (the hide kept). Completed: 293; a trade: nothing; Kororo and
+# Boizo-Naizo: nothing (their defaults).
+# Waived: Kopuro-Popuro's standard 276 (his chain's else) is unreachable: this quest's three statuses each answer above
+# it.
+char zone=WindurstWoods pos=-1.0,-4.75,-21.0 job=WAR lvl=75
+item InsectWing
+item RabbitHide
+item TwoLeafMandragoraBud
+item WolfHide
+login
+trigger Kopuro-Popuro                   # available: 285 (0, 856, 846, 4368)
+finish option=2                         # declined: nothing
+trade Kopuro-Popuro InsectWing x1       # available: no trade arm: nothing
+walk -11.0,-2.75,7.0
+trigger Kororo                          # his default 277
+finish
+trigger Kororo                          # his script: not accepted: nothing; 277 again
+finish
+walk -9.6,-2.75,-24.5
+trigger Boizo-Naizo                     # his default 275
+finish
+trigger Boizo-Naizo                     # his script: not accepted: nothing; 275 again
+finish
+walk -1.0,-4.75,-21.0
+trigger Kopuro-Popuro                   # 285
+finish option=0                         # begun (any option but 2)
+trigger Kopuro-Popuro                   # accepted: 288 (0, 856, 846, 4368)
+finish
+trade Kopuro-Popuro InsectWing x1 RabbitHide x1  # no bud: 288
+finish
+trade Kopuro-Popuro InsectWing x1 TwoLeafMandragoraBud x1  # no hide: 288
+finish
+trade Kopuro-Popuro RabbitHide x1 TwoLeafMandragoraBud x1  # no wing: 288
+finish
+walk -11.0,-2.75,7.0
+trigger Kororo                          # 277 (his turn state)
+finish
+trigger Kororo                          # his script: accepted: 291
+finish
+walk -9.6,-2.75,-24.5
+trigger Boizo-Naizo                     # 275
+finish
+trigger Boizo-Naizo                     # his script: accepted: 290
+finish
+walk -1.0,-4.75,-21.0
+trade Kopuro-Popuro InsectWing x1 RabbitHide x1 TwoLeafMandragoraBud x1 WolfHide x1  # the three and more: 292 (200)
+finish                                  # completed; fame 20; Cardian Tutor; 200 gil; the three taken (the hide kept)
+trigger Kopuro-Popuro                   # completed: 293
+finish
+trade Kopuro-Popuro WolfHide x1         # completed: nothing
+walk -11.0,-2.75,7.0
+trigger Kororo                          # 277
+finish
+trigger Kororo                          # his script: completed: nothing (A Greeting Cardian: fame level 1); 277 again
+finish
+walk -9.6,-2.75,-24.5
+trigger Boizo-Naizo                     # 275
+finish
+trigger Boizo-Naizo                     # his script: completed: nothing; 275 again
+finish

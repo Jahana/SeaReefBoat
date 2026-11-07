@@ -1,0 +1,60 @@
+# Save the Children (battlefield.save_the_children): the zone at capacity, LOCKED, and a menu outliving its fight.
+# Four level 75 Warriors of San d'Oria by Hut_Door: main and bob with 1-3 current at Status 2 (two registrants, not
+# in one party), cid and eve with 1-3 completed (helpers; GMs set the statuses). main leads cid and eve. main's
+# menu, area 1: registered, cid and eve registered with it; main enters. bob, alone, no member holding a clearance:
+# getBattlefieldOptions: bob meets the requirement, but battlefieldAtCapacity holds (Ghelsba Outpost has one arena,
+# taken): no option: NO_BATTLEFIELD_ENTRY. (So registerBattlefield's INCREMENT_REQUEST for the fixed area can not
+# be asked here; rank_2_mission_2#busy takes it.) cid and eve, holding the clearance: completed: the menu
+# (enterExisting 1); neither updates yet. main claims a Fodderchief: its enmity locks the battlefield;
+# onBattlefieldStatusChange (LOCKED, once) takes the clearance from cid and eve, outside it (0x029 206 for each).
+# cid's update: registerBattlefield: no clearance and no effect, [BCNM]EnterExisting 1, cid still registered in
+# area 1, the area asked: LOCKED (0x05C [4]). The three killed: won, 32001 to main; finished; the cleanup ends the
+# battlefield (no registration left). eve's update now: EnterExisting 1, registered nowhere: REQS_NOT_MET (0x05C
+# [5]); that arm's delStatusEffect(BATTLEFIELD) deletes nothing (the lock took eve's clearance). No timing or RNG
+# dependency; the tick sizes are the ones the other Save the Children flows use.
+lists GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/onEventUpdate/32000 GhelsbaOutpost/onEventFinish/32000 GhelsbaOutpost/onEventFinish/32001
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+char bob zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+char cid zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+char eve zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren current
+bob: mission Sandoria SmashTheOrcishScouts completed
+bob: mission Sandoria BatHunt completed
+bob: mission Sandoria SaveTheChildren current
+cid: mission Sandoria SmashTheOrcishScouts completed
+cid: mission Sandoria BatHunt completed
+cid: mission Sandoria SaveTheChildren completed
+eve: mission Sandoria SmashTheOrcishScouts completed
+eve: mission Sandoria BatHunt completed
+eve: mission Sandoria SaveTheChildren completed
+login
+missionstatus Sandoria 2                # a GM
+bob: login
+bob: missionstatus Sandoria 2           # a GM
+cid: login
+eve: login
+invite cid
+cid: accept
+invite eve
+eve: accept
+trigger Hut_Door                        # the menu 32000
+update 32000 option=1                   # registered in area 1; cid and eve registered with it
+finish                                  # main entered
+bob: trigger Hut_Door                   # the zone's one arena taken: at capacity: NO_BATTLEFIELD_ENTRY
+cid: trigger Hut_Door                   # the clearance, completed: the menu (enterExisting)
+eve: trigger Hut_Door                   # the same
+tick 2000                               # the Fodderchiefs spawn
+claim FODDERCHIEF_VOKDEK                # LOCKED; the clearance taken from cid and eve
+tick 1000
+cid: update 32000 option=1              # no clearance, still registered: LOCKED
+cid: finish
+kill FODDERCHIEF_VOKDEK
+kill FODDERCHIEF_VOKDEK+1
+kill FODDERCHIEF_VOKDEK+2               # won: 32001 to main
+finish                                  # 1-3: the key, the title, Status 3
+tick 11000                              # the won arena's cleanup
+tick 10000                              # the battlefield gone
+eve: update 32000 option=1              # registered nowhere: REQS_NOT_MET
+eve: finish

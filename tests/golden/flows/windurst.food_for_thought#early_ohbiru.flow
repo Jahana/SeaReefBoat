@@ -1,0 +1,14 @@
+# Food for Thought (windurst 14): the three items before the order, with Kerutoto and Kenapa done (GM vars):
+# ohbiruProg 0 (< 2) draws randomInt(1, 100): <= 50 is 325 (440), else 326. Ohbiru's finish then completes the quest
+# (+440 gil, fame +20, Fast Food Deliverer, vars cleared, mustZone). `#early_ohbiru_rng` takes the other side.
+lists WindurstWaters/Ohbiru-Dohbiru/onTrade WindurstWaters/onEventFinish/325 WindurstWaters/onEventFinish/326
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought accepted
+charvar Quest[2][14]kerutotoProg 2
+charvar Quest[2][14]kenapaProg 4
+item CupOfWindurstianTea
+item Tortilla
+item ClumpOfPamtamKelp
+login
+trade Ohbiru-Dohbiru CupOfWindurstianTea x1 Tortilla x1 ClumpOfPamtamKelp x1  # ohbiruProg 0 (< 2): 325 (440) or 326
+finish                                  # taken, +440 gil; the other two done: completed, mustZone

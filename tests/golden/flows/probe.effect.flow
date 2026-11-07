@@ -1,0 +1,21 @@
+# probe (quest rework P8): effect <id>, a GM's player:addStatusEffect(<id>, { power = 1, origin = player }). A Little
+# Knowledge (crystalWar 6, still Lua): Erlene (The Eldieme Necropolis [S]) at Prog 1 plays 14, the quest's completion,
+# only with Manafont (47), Chainspell (48), Astral Flow (55) or Azure Lore (163) on the char; without one, 13. Accepted at
+# Prog 1 (GMs), a level 99 Warrior (no mage job), the other logs' missions as the group's drafts set them (none answers
+# Erlene). Erlene: 13. effect 47: Manafont. Erlene: 14, finished: the Grimoire and the Scholar job gesture, Schultz
+# Scholar, completed, Scholar unlocked (YOU_CAN_NOW_BECOME_A_SCHOLAR).
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/14
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=WAR lvl=99
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+quest CrystalWar.ALittleKnowledge accepted
+charvar Quest[7][6]Prog 1
+login
+trigger Erlene                          # Prog 1, no two-hour effect: 13
+finish
+effect 47                               # a GM: Manafont
+trigger Erlene                          # Prog 1, under Manafont: 14
+finish                                  # the two key items, the title, completed; Scholar unlocked

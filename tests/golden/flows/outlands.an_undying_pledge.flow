@@ -1,0 +1,53 @@
+# An Undying Pledge (outlands 5): Stray Cloud in Norg (call-only: scripts/zones/Norg/npcs/Stray_Cloud.lua). Stray Cloud
+# has a default (DefaultActions 231) beside his script, so the lookup alternates: the first talk plays the default 231
+# (UseFallback 0 -> 1), the next runs his script, and so on; each script turn below is the second of a pair.
+# Available, a trade: no onTrade in his script: nothing. Norg fame level 3: the script's else, 231. Level 4: 225,
+# finished: begun, anUndyingPledgeCS 1. Accepted, CS 1: 228. Norg's trigger area 1 (Zone.lua, stays Lua): 226, finished:
+# CS 2; CS 2: 229. CS 3 and no blade (a GM: Sea Serpent Grotto's qm5 writes 3 with the blade): the script's else, 231.
+# The Caliginous Blade: 227; the inventory full: npcUtil.completeQuest fails (the buckler's message), the blade kept.
+# With room: 227: the Light Buckler, Norg fame +40, anUndyingPledgeCS cleared, the blade taken. Completed: 230.
+char zone=Norg pos=-19.2,1.1,-21 job=WAR lvl=75
+fame Norg 224
+item Pebble
+login
+trade Stray_Cloud Pebble x1             # available: no onTrade: nothing
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, fame level 3: the else, 231
+finish
+fame Norg 225
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, level 4: 225
+finish                                  # begun; anUndyingPledgeCS 1
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, CS 1: 228
+finish
+walk -19.5,0.5,-54.5                    # into Norg's trigger area 1 (the SSG exit)
+tick 2000                               # the zone's trigger-area check: 226
+finish                                  # Zone.lua: anUndyingPledgeCS 2
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, CS 2: 229
+finish
+charvar anUndyingPledgeCS 3             # a GM: Sea Serpent Grotto's qm5
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, CS 3, no blade: the else, 231
+finish
+keyitem CaliginousBlade
+fill-inventory
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, the blade: 227
+finish                                  # no room: the completion fails (the buckler's message); the blade kept
+free-inventory
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script: 227
+finish                                  # the Light Buckler; fame +40; the var cleared; the blade taken
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, completed: 230
+finish

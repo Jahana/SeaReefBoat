@@ -1,0 +1,56 @@
+# Blue Ribbon Blues (windurst 17): Roberta's other arms and the Prog operands. Available, Prog 0, no ribbon: 377 (option
+# 0: nothing; option 1: a ribbon); Prog 0 with the ribbon: 379. The ribbon to the Hume Bones while available (the guard
+# met: no section-1 handler, nil, kept) and the Hume Bones' default. The ribbon straight to Kerutoto begins the quest
+# (358). Accepted, Prog 0, no ribbon: Roberta's 377 (option 0: nothing; option 1: a ribbon); Prog 0 with the ribbon: 380
+# (the ribbon half); the ribbon to Kerutoto at Prog 0 (nil: the Prog half) and to the Hume Bones at Prog 0 (nil: the
+# Prog half, nothing pops). GM Prog 1 with the ribbon: Kerutoto's 361, the ribbon and a chip (nil: not exact) and a chip
+# alone (nil: the trade half), then the ribbon taken (365); GM Prog 1 without it: 366; GM Prog 2: no arm, his default
+# 306; GM Prog 3 without the ribbon: Roberta's 380 (the Prog half).
+lists WindurstWaters/Kerutoto/onTrigger WindurstWaters/Kerutoto/onTrade WindurstWoods/Roberta/onTrigger TheEldiemeNecropolis/Hume_Bones/onTrade WindurstWaters/onEventFinish/358 WindurstWoods/onEventFinish/377
+char zone=WindurstWoods pos=22.0,-4.25,-155.6
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+quest Windurst.WaterWayToGo completed
+fame Windurst 325
+item BoneChip
+login
+trigger Roberta                         # available, no ribbon, Prog 0: 377 (0, Purple Ribbon)
+finish option=0                         # nothing
+trigger Roberta                         # 377 again
+finish option=1                         # a Purple Ribbon
+trigger Roberta                         # Prog 0, the ribbon held: 379
+finish
+warp 301.5,-0.25,19.99 TheEldiemeNecropolis
+trade Hume_Bones PurpleRibbon x1        # available, the guard met: no section-1 handler, nil, the ribbon kept
+trigger Hume_Bones                      # available: NOTHING_OUT_OF_ORDINARY
+warp 13.0,-4.71,-155.9 WindurstWaters
+trade Kerutoto PurpleRibbon x1          # available, Prog 0: 358 (3600)
+finish                                  # the ribbon taken, +3600 gil, begun, Prog 0, Timer
+warp 22.0,-4.25,-155.6 WindurstWoods
+trigger Roberta                         # accepted, Prog 0, no ribbon: 377
+finish option=0                         # nothing
+trigger Roberta                         # 377 again
+finish option=1                         # a Purple Ribbon
+trigger Roberta                         # Prog 0, the ribbon held: 380
+finish
+warp 301.5,-0.25,19.99 TheEldiemeNecropolis
+trade Hume_Bones PurpleRibbon x1        # the ribbon, Prog 0: nil, nothing pops, the ribbon kept
+warp 13.0,-4.71,-155.9 WindurstWaters
+trade Kerutoto PurpleRibbon x1          # the ribbon, Prog 0: nil
+charvar Quest[2][17]Prog 1
+trigger Kerutoto                        # Prog 1, the ribbon held: 361 (0, Purple Ribbon)
+finish
+trade Kerutoto PurpleRibbon x1 BoneChip x1  # Prog 1, the ribbon and a chip: not exact, nil
+trade Kerutoto BoneChip x1              # Prog 1, a chip: not the ribbon, nil
+trade Kerutoto PurpleRibbon x1          # Prog 1: 365
+finish                                  # the ribbon taken; Prog 0; the timer again
+charvar Quest[2][17]Prog 1
+trigger Kerutoto                        # Prog 1, no ribbon: 366 (0, Purple Ribbon)
+finish
+charvar Quest[2][17]Prog 2
+trigger Kerutoto                        # Prog 2: no arm, nil; his default 306
+finish
+charvar Quest[2][17]Prog 3
+warp 22.0,-4.25,-155.6 WindurstWoods
+trigger Roberta                         # Prog 3, no ribbon: 380
+finish

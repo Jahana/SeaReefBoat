@@ -1,0 +1,1267 @@
+# Inside the Belly (otherAreas 26): the reward draws, from the completed section (a GM: its finish gives the reward with
+# no completion in the way; the accepted section's finish is the #accepted flow's).
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua). The inventory is 80 (the rewards that do not stack).
+# Each round gives the fish (a GM), trades it and finishes. tradeFish draws randomInt(1, 1000) and walks the entries,
+# summing chance * 10 (doubles), 166 (0, the item) at the first sum the roll does not exceed, else 167; the finish gives
+# the item (randomInt(min, max) of it for an entry with min and max), the fish's gil and its title.
+# Rounds 1-278: the rolls of an instrumented run (tools/golden_inside_the_belly_draws.py; Armored Pisces, 166 at <= 4,
+# fill the rounds no bound needs; no entry of theirs draws again, so the stream is the exploration's):
+#   round 1, roll 150: a Grimmonite, its third sum (50 + 50 + 50): 166, the Silver Ring (`<` would play 167);
+#   round 175, roll 12: a Matsya, sum 12 (1.2 * 10): 166, the Shaper's Shawl;
+#   round 218, roll 287: an Ahtapot, its second sum (185 + 102): 166, the Decayed Ingot;
+#   round 224, roll 185: an Ahtapot, its first sum: 166, the Mildewy Ingot (`<` would give the Decayed Ingot);
+#   round 236, roll 223: an Abaia, past 218 (the three Aurora Bass entries), within 225: 166, the Plumb Boots;
+#   round 278, roll 10: an Abaia, its first sum (15): 166, one Aurora Bass (randomInt(1, 1) in the finish).
+# Rounds 279-302: Abaia (<= 15 one Aurora Bass, <= 93 two, <= 218 three: each draws randomInt(min, max) again in the
+# finish, min = max; 690 gil); rounds 303-382: Monke-Onke (<= 100: the Poison Dust, randomInt(1, 6) of it; 150 gil);
+# rounds 383-414: Ahtapot (350 gil). The trace shows each round's event and item.
+lists Selbina/Zaldon/onTrade Selbina/onEventFinish/166 Selbina/onEventFinish/167
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.InsideTheBelly completed
+skill Fishing 300
+storage inventory 80
+login
+item Grimmonite
+trade Zaldon Grimmonite x1              # round 1
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 2
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 3
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 4
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 5
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 6
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 7
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 8
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 9
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 10
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 11
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 12
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 13
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 14
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 15
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 16
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 17
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 18
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 19
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 20
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 21
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 22
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 23
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 24
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 25
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 26
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 27
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 28
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 29
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 30
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 31
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 32
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 33
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 34
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 35
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 36
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 37
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 38
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 39
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 40
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 41
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 42
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 43
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 44
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 45
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 46
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 47
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 48
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 49
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 50
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 51
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 52
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 53
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 54
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 55
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 56
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 57
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 58
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 59
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 60
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 61
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 62
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 63
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 64
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 65
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 66
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 67
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 68
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 69
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 70
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 71
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 72
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 73
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 74
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 75
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 76
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 77
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 78
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 79
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 80
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 81
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 82
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 83
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 84
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 85
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 86
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 87
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 88
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 89
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 90
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 91
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 92
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 93
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 94
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 95
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 96
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 97
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 98
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 99
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 100
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 101
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 102
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 103
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 104
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 105
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 106
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 107
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 108
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 109
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 110
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 111
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 112
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 113
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 114
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 115
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 116
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 117
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 118
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 119
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 120
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 121
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 122
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 123
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 124
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 125
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 126
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 127
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 128
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 129
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 130
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 131
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 132
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 133
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 134
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 135
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 136
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 137
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 138
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 139
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 140
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 141
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 142
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 143
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 144
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 145
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 146
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 147
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 148
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 149
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 150
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 151
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 152
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 153
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 154
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 155
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 156
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 157
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 158
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 159
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 160
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 161
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 162
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 163
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 164
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 165
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 166
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 167
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 168
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 169
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 170
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 171
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 172
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 173
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 174
+finish
+item Matsya
+trade Zaldon Matsya x1                  # round 175
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 176
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 177
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 178
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 179
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 180
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 181
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 182
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 183
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 184
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 185
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 186
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 187
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 188
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 189
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 190
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 191
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 192
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 193
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 194
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 195
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 196
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 197
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 198
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 199
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 200
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 201
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 202
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 203
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 204
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 205
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 206
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 207
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 208
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 209
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 210
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 211
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 212
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 213
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 214
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 215
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 216
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 217
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 218
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 219
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 220
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 221
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 222
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 223
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 224
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 225
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 226
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 227
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 228
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 229
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 230
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 231
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 232
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 233
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 234
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 235
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 236
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 237
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 238
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 239
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 240
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 241
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 242
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 243
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 244
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 245
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 246
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 247
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 248
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 249
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 250
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 251
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 252
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 253
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 254
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 255
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 256
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 257
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 258
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 259
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 260
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 261
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 262
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 263
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 264
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 265
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 266
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 267
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 268
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 269
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 270
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 271
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 272
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 273
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 274
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 275
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 276
+finish
+item ArmoredPisces
+trade Zaldon ArmoredPisces x1           # round 277
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 278
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 279
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 280
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 281
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 282
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 283
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 284
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 285
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 286
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 287
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 288
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 289
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 290
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 291
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 292
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 293
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 294
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 295
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 296
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 297
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 298
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 299
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 300
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 301
+finish
+item Abaia
+trade Zaldon Abaia x1                   # round 302
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 303
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 304
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 305
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 306
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 307
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 308
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 309
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 310
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 311
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 312
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 313
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 314
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 315
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 316
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 317
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 318
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 319
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 320
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 321
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 322
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 323
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 324
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 325
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 326
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 327
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 328
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 329
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 330
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 331
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 332
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 333
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 334
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 335
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 336
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 337
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 338
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 339
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 340
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 341
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 342
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 343
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 344
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 345
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 346
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 347
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 348
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 349
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 350
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 351
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 352
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 353
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 354
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 355
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 356
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 357
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 358
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 359
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 360
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 361
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 362
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 363
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 364
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 365
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 366
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 367
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 368
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 369
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 370
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 371
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 372
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 373
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 374
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 375
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 376
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 377
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 378
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 379
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 380
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 381
+finish
+item MonkeOnke1
+trade Zaldon MonkeOnke1 x1              # round 382
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 383
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 384
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 385
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 386
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 387
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 388
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 389
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 390
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 391
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 392
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 393
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 394
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 395
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 396
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 397
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 398
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 399
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 400
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 401
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 402
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 403
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 404
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 405
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 406
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 407
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 408
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 409
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 410
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 411
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 412
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 413
+finish
+item Ahtapot
+trade Zaldon Ahtapot x1                 # round 414
+finish

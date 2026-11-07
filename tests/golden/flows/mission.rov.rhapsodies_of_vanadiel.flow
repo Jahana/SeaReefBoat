@@ -1,0 +1,39 @@
+# Rhapsodies of Vana'diel (RoV 1-1, mission.rov.rhapsodies_of_vanadiel): its one section (current, ENABLE_ROV 1, main
+# level 3 or more, not in a Mog House) puts the same zone section in the ten entry zones: onZoneIn 30035, whose finish
+# completes it (reward nextMission Resonance; the status reset to 0; cleanup). A fresh char has it current (log 13's
+# current 0). A level 3 Warrior of Bastok (the level's lower edge): the login in Bastok Markets plays 30035 (the login
+# answers it with 0: completed, Resonance current). Then in each other entry zone a GM makes it current again and a warp
+# zones in: 30035, completed. In Windurst Woods the warp leaves 30035 open: finished with option 1 (the finish reads no
+# option: completed). Then completed (Resonance current): a rezone plays nothing of it (SoA 1-1's 839 plays). Current
+# again (a GM): Upper Jeuno is no entry zone: nothing; Bastok Markets' Mog House (current, level 3, ENABLE_ROV 1: only
+# inMogHouse fails): nothing. Other zone-ins of the same zones (SoA 1-1's first visits) play beside it as the lookup
+# orders them.
+warning: lua: addMission: overwriting current mission 2 of log 13 with 0 -- a GM's addMission of Rhapsodies over Resonance, the current mission the completion left (ZoneHost.Progress.cs, as C++ ShowWarning)
+lists BastokMarkets/onZoneIn/1 BastokMarkets/onEventFinish/30035 BastokMines/onZoneIn/1 NorthernSanDoria/onZoneIn/1 PortBastok/onZoneIn/1 PortSanDoria/onZoneIn/1 PortWindurst/onZoneIn/1 SouthernSanDoria/onZoneIn/1 WindurstWalls/onZoneIn/1 WindurstWaters/onZoneIn/1 WindurstWoods/onZoneIn/1 WindurstWoods/onEventFinish/30035 UpperJeuno/onZoneIn/1
+char zone=BastokMarkets pos=-6,0,-50 job=WAR lvl=3 nation=1
+login                                       # level 3, current: 30035, finished with 0: completed, Resonance current
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp 116.9,-1.6,-72 BastokMines             # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp 128.3,-6.5,97.2 NorthernSanDoria       # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp -3,1.407,49 PortBastok                 # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp -17.65,-8,-129.728 PortSanDoria        # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp -27.5,-8.0,189.6 PortWindurst          # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp 97.4,0.0,113.6 SouthernSanDoria        # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp -24.5,-14.498,262.994 WindurstWalls    # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp -50.9,-6.25,109.3 WindurstWaters       # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp 66.5,-4.75,239.6 WindurstWoods open    # 30035 left open
+finish option=1                             # the finish reads no option: completed
+rezone                                      # completed (Resonance current): no section (SoA 1-1's 839 plays)
+mission Rov RhapsodiesOfVanadiel current    # a GM
+warp -55.5,8.2,97.5 UpperJeuno              # no entry zone: nothing
+warp -6,0,-50 BastokMarkets                 # 30035: completed
+mission Rov RhapsodiesOfVanadiel current    # a GM
+zoneline BastokMarkets                      # the Mog House (inMogHouse): the section's check fails: nothing

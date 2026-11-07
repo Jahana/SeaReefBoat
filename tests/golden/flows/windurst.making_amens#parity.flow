@@ -1,0 +1,11 @@
+# Making Amens! (windurst 8), completion parity: 284's finish is the Lua's raw player:completeQuest (after needToZone,
+# the wand, the title, the gil and the fame), so a GM's Quest[2][8]Prog survives the completion (quest:cleanup, which
+# a called Quest.Complete() runs, would clear it). Accepted (GM) with the Broken Wand beside Kuroido-Moido.
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=75
+keyitem BrokenWand
+login
+quest Windurst.MakingAmends completed
+quest Windurst.MakingAmens accepted
+charvar Quest[2][8]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Kuroido-Moido+7                 # accepted, the wand: 284 (6000)
+finish                                  # needToZone; wand taken; the title; 6000 gil; fame 40; completed; Prog kept

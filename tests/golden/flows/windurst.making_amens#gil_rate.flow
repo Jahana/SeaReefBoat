@@ -1,0 +1,11 @@
+# Making Amens! (windurst 8) at GIL_RATE 1.0001: 284's argument is GIL_RATE x 6000 = 6000.6, read by the engine's
+# integral getter (llround: 6001; a truncation would give 6000, no rate 6000). Its finish's gil is
+# npcUtil.giveCurrency's own GIL_RATE x 6000. Accepted with the Broken Wand (GMs).
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=75
+setting GIL_RATE 1.0001
+keyitem BrokenWand
+login
+quest Windurst.MakingAmends completed
+quest Windurst.MakingAmens accepted
+trigger Kuroido-Moido+7                 # accepted, the wand: 284 (6001)
+finish                                  # needToZone; wand taken; the title; 6000 x 1.0001 gil; fame 40; completed

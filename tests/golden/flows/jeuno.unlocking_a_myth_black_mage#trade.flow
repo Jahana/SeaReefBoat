@@ -1,0 +1,15 @@
+# Unlocking a Myth: BlackMage (jeuno 105): the trade, the weapon unworn. Accepted by a GM, a level 75 BLM with the
+# MagesStaff at 250 weapon skill points (xi.equipment.vigilWeaponRequiredWsPoints: 250) and a Bone Chip: the chip: nil
+# (no message); the weapon: 10088 (4), finished: completed (no reward table), MYTHIC_LEARNED (4), Vidohunir learned,
+# the weapon kept. Completed: no section: 10085 (his default).
+lists LowerJeuno/Zalsuhm/onTrigger LowerJeuno/Zalsuhm/onTrade LowerJeuno/onEventFinish/10088
+char zone=LowerJeuno pos=-31.5,5.9,-117.5 job=BLM lvl=75
+quest Jeuno.UnlockingAMythBlackMage accepted
+item MagesStaff wsp=250
+item BoneChip
+login
+trade Zalsuhm BoneChip x1               # not the weapon: nil
+trade Zalsuhm MagesStaff x1             # 250 >= 250: 10088 (4)
+finish                                  # completed; MYTHIC_LEARNED (4); Vidohunir; the weapon kept
+trigger Zalsuhm                         # completed: no section; 10085
+finish

@@ -1,0 +1,61 @@
+# A Bitter Past (otherAreas 66): Tavnazian Safehold's Frescheque (two, +1; default 158), Raminey (159), Equette (162), no
+# scripts; Lufaise Meadows' qm_bitter_past (default NOTHING_OUT_OF_ORDINARY), Blackbone Frazdiz and Rainbringer Yjatvot.
+# The Call of the Sea completed (a GM: its Equette 170 would compete; #kinds has it). A fresh CoP log.
+# Frescheque 151, finished: begun; again (no wristlet): nil, 158. Equette at Prog 0: nil, 162. Raminey 152, finished: Prog
+# 1; again: nil, 159. Equette 153, finished: Prog 2; again: nil, 162. Lufaise: the ???: both NMs popped, SENSE_OF_FOREBODING;
+# again (both up: the pop fails): nil, its default. Blackbone killed (Rainbringer alive): nothing; the ???: nil. Rainbringer
+# killed (Blackbone dead): nmKilled 1. The ???: the Tiny Wristlet, noAction; again (held): nil; again once the corpses are
+# gone (nmKilled 1: no pop): nil. Frescheque: 154,
+# finished: completed (the Yin-Yang Lorgnette), the wristlet taken. Completed: Equette 155 (event, importantOnce); again:
+# the importantOnce is spent (Default priority until the zone changes), so the NPC's default 162 plays; Frescheque: no
+# section, 158; Equette after the zone change (a warp): 155 again. The second Frescheque (+1) is cutscene_only: the engine
+# answers it with a release only, so no step talks to it.
+lists TavnazianSafehold/Frescheque/onTrigger TavnazianSafehold/Raminey/onTrigger TavnazianSafehold/Equette/onTrigger TavnazianSafehold/onEventFinish/151 TavnazianSafehold/onEventFinish/152 TavnazianSafehold/onEventFinish/153 TavnazianSafehold/onEventFinish/154 LufaiseMeadows/qm_bitter_past/onTrigger LufaiseMeadows/Blackbone_Frazdiz/onMobDeath LufaiseMeadows/Rainbringer_Yjatvot/onMobDeath
+char zone=TavnazianSafehold pos=19.4,-36,11.8 job=WAR lvl=75
+quest OtherAreas.TheCallOfTheSea completed
+login
+trigger Frescheque                      # available: 151
+finish                                  # begun
+trigger Frescheque                      # no wristlet: nil; 158
+finish
+warp 4,-22.3,-17.3 TavnazianSafehold
+trigger Equette                         # Prog 0: nil; 162
+finish
+warp 83.9,-36,49.7 TavnazianSafehold
+trigger Raminey                         # Prog 0: 152
+finish                                  # Prog 1
+trigger Raminey                         # Prog 1: nil; 159
+finish
+warp 4,-22.3,-17.3 TavnazianSafehold
+trigger Equette                         # Prog 1: 153
+finish                                  # Prog 2
+trigger Equette                         # Prog 2: nil; 162
+finish
+warp 59.5,-7.3,27.5 LufaiseMeadows
+trigger qm_bitter_past                  # Prog 2: both popped; SENSE_OF_FOREBODING
+trigger qm_bitter_past                  # both up: the pop fails; nil; its default
+kill BLACKBONE_FRAZDIZ                  # Rainbringer alive: nothing
+trigger qm_bitter_past                  # Rainbringer up: the pop fails; nmKilled 0: nil
+kill BLACKBONE_FRAZDIZ+1                # Rainbringer; Blackbone dead: nmKilled 1
+# (no rezone between the kills: the warp's afterZoneIn, 4 s after the zone-in, falls in this second kill's step, since
+# the first kill's clock did not reach it: so its ret and the char's saved position, where the kill left it, show here)
+trigger qm_bitter_past                  # nmKilled 1, no wristlet: the wristlet; noAction
+trigger qm_bitter_past                  # held: nil; its default
+tick 15000                              # the corpses despawn
+tick 15000
+tick 15000
+trigger qm_bitter_past                  # Prog 2, nmKilled 1 (no pop), the NMs gone, held: nil; its default
+warp 19.4,-36,11.8 TavnazianSafehold
+trigger Frescheque                      # the wristlet: 154
+finish                                  # completed; the Lorgnette; the wristlet taken
+warp 4,-22.3,-17.3 TavnazianSafehold
+trigger Equette                         # completed: 155
+finish
+trigger Equette                         # importantOnce spent: Default priority; the default 162
+finish
+warp 19.4,-36,11.8 TavnazianSafehold
+trigger Frescheque                      # completed: no section; 158
+finish
+warp 4,-22.3,-17.3 TavnazianSafehold    # a zone change: the importantOnce again
+trigger Equette                         # 155 again
+finish

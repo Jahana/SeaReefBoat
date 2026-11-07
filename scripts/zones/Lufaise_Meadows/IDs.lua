@@ -1,0 +1,84 @@
+-----------------------------------
+-- Area: Lufaise_Meadows
+-----------------------------------
+zones = zones or {}
+
+zones[xi.zone.LUFAISE_MEADOWS] =
+{
+    text =
+    {
+        ITEM_CANNOT_BE_OBTAINED       = 6387, -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6395, -- Obtained: <item>.
+        GIL_OBTAINED                  = 6396, -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6398, -- Obtained key item: <keyitem>.
+        KEYITEM_LOST                  = 6399, -- Lost key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6409, -- There is nothing out of the ordinary here.
+        SENSE_OF_FOREBODING           = 6410, -- You are suddenly overcome with a sense of foreboding...
+        FELLOW_MESSAGE_OFFSET         = 6424, -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS           = 7006, -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7007, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7008, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7028, -- Your party is unable to participate because certain members' levels are restricted.
+        CONQUEST_BASE                 = 7073, -- Tallying conquest results...
+        CONQUEST                      = 7241, -- You've earned conquest points!
+        FISHING_MESSAGE_OFFSET        = 7575, -- You can't fish here.
+        FOUND_ITEM_WITH_EASE          = 7665, -- It appears your chocobo found this item with ease.
+        KI_STOLEN                     = 7705, -- The <keyitem> has been stolen!
+        NO_ROOM_COME_BACK_LATER       = 7720, -- You do not have any room in your bag, so you hide the <item> in the grass nearby. Come and retrieve it later.
+        LOGGING_IS_POSSIBLE_HERE      = 7753, -- Logging is possible here if you have <item>.
+        SURVEY_THE_SURROUNDINGS       = 7760, -- You survey the surroundings but see nothing out of the ordinary.
+        MURDEROUS_PRESENCE            = 7761, -- Wait, you sense a murderous presence...!
+        YOU_CAN_SEE_FOR_MALMS         = 7762, -- You can see for malms in every direction.
+        SPINE_CHILLING_PRESENCE       = 7764, -- You sense a spine-chilling presence!
+        AMALTHEIA_TEXT                = 7803, -- A message has been engraved into the rock: Offer up the ancient shield, and the pact shall be honored.
+        KURREA_TEXT                   = 7807, -- The stench of rotten flesh fills the air around you. Some scavenger must have made this place its territory.
+        KURREA_SLURP                  = 7810, -- Kurrea slurps down the adamantoise soup!
+        KURREA_MUSCLES                = 7811, -- Kurrea's muscles bulge crazily!
+        KURREA_SHINE                  = 7812, -- Kurrea's scales shine mysteriously!
+        KURREA_WIND                   = 7813, -- Kurrea is enveloped by a fierce wind!
+        KURREA_RIGID                  = 7814, -- Kurrea's hide grows rigid!
+        KURREA_VEIN                   = 7815, -- The veins in Kurrea's head are popping out!
+        KURREA_EYES                   = 7816, -- Kurrea's eyes glow weirdly!
+        KURREA_CURE                   = 7817, -- Kurrea's wounds disappear!
+        KURREA_AURA                   = 7818, -- Kurrea is surrounded by an ominous aura!
+        KURREA_GREEN                  = 7819, -- Kurrea's face has turned green...
+        COMMON_SENSE_SURVIVAL         = 8759, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 8823, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+    },
+    mob =
+    {
+        AMALTHEIA             = GetFirstID('Amaltheia'),
+        BAUMESEL              = GetFirstID('Baumesel'),
+        BLACKBONE_FRAZDIZ     = GetFirstID('Blackbone_Frazdiz'),
+        COLORFUL_LESHY        = GetFirstID('Colorful_Leshy'),
+        FLOCKBOCK             = GetFirstID('Flockbock'),
+        FOMOR_BARD            = GetTableOfIDs('Fomor_Bard'),
+        FOMOR_BEASTMASTER     = GetTableOfIDs('Fomor_Beastmaster'),
+        FOMOR_BLACK_MAGE      = GetTableOfIDs('Fomor_Black_Mage'),
+        FOMOR_DARK_KNIGHT     = GetTableOfIDs('Fomor_Dark_Knight'),
+        FOMOR_DRAGOON         = GetTableOfIDs('Fomor_Dragoon'),
+        FOMOR_MONK            = GetTableOfIDs('Fomor_Monk'),
+        FOMOR_NINJA           = GetTableOfIDs('Fomor_Ninja'),
+        FOMOR_PALADIN         = GetTableOfIDs('Fomor_Paladin'),
+        FOMOR_RANGER          = GetTableOfIDs('Fomor_Ranger'),
+        FOMOR_RED_MAGE        = GetTableOfIDs('Fomor_Red_Mage'),
+        FOMOR_SAMURAI         = GetTableOfIDs('Fomor_Samurai'),
+        FOMOR_SUMMONER        = GetTableOfIDs('Fomor_Summoner'),
+        FOMOR_THIEF           = GetTableOfIDs('Fomor_Thief'),
+        FOMOR_WARRIOR         = GetTableOfIDs('Fomor_Warrior'),
+        KURREA                = GetFirstID('Kurrea'),
+        LESHY_OFFSET          = GetFirstID('Leshy'),
+        MEGALOBUGARD          = GetFirstID('Megalobugard'),
+        PADFOOT               = GetTableOfIDs('Padfoot'),
+        SPLINTERSPINE_GRUKJUK = GetFirstID('Splinterspine_Grukjuk'),
+        TAVNAZIAN_RAM         = GetTableOfIDs('Tavnazian_Ram'),
+        TAVNAZIAN_SHEEP       = GetTableOfIDs('Tavnazian_Sheep'),
+    },
+    npc =
+    {
+        LOGGING       = GetTableOfIDs('Logging_Point'),
+        OVERSEER_BASE = GetFirstID('Jemmoquel_RK'),
+    },
+}
+
+return zones[xi.zone.LUFAISE_MEADOWS]

@@ -1,0 +1,29 @@
+# Beyond Infinity (jeuno 137): state 2's two operands besides the status (Prog 0, the Soul Gem Clasp held), each
+# isolated where state 2's own replies show: Maat (only state 2 answers him: 10193) and the moogle's 10045 finish
+# (state 2 sets down on 16 / 22 / 23 / 24). A level 91 Warrior at level cap 95, Prelude to Puissance completed, the Limit
+# Breaker, Beyond Infinity accepted (a GM, before login), MAX_LEVEL 99, no clasp, Prog 0:
+# - no clasp: Maat: no Beyond Infinity section answers him (state 4 has no Maat handler): MAAT_DIALOG; the moogle:
+#   state 4's 10045 (91, 1, 5, 3, 0, 0, 0), finished with option 16: state 4's finish gives the clasp (16 is not 0) and
+#   sets down nowhere (16 is none of 17 / 25 / 26 / 27; state 2 does not hold);
+# - the clasp held (state 2): Maat: 10193;
+# - Prog 1 with the clasp (a GM): Maat: MAAT_DIALOG (state 5 has no Maat handler);
+# - Prog 2 with the clasp (a GM): Maat: MAAT_DIALOG; the moogle: no section: the default 10045 (0, 0, 2, 0).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=91
+levelcap 95
+quest Jeuno.PreludeToPuissance completed
+quest Jeuno.BeyondInfinity accepted
+keyitem LimitBreaker
+login
+trigger Maat                            # accepted, Prog 0, no clasp: no section answers Maat: MAAT_DIALOG
+trigger Nomad_Moogle                    # state 4: 10045 (91, 1, 5, 3, 0, 0, 0)
+finish option=16                        # state 4: the clasp; no set-down (state 2 does not hold)
+tick 400                                # a set-down would zone the char at this tick: none
+trigger Maat                            # the clasp held, Prog 0: state 2: event 10193
+finish
+charvar Quest[3][137]Prog 1             # a GM: Prog 1, the clasp held
+trigger Maat                            # state 5 has no Maat handler: MAAT_DIALOG
+charvar Quest[3][137]Prog 2             # a GM: Prog 2, the clasp held
+trigger Maat                            # no section: MAAT_DIALOG
+trigger Nomad_Moogle                    # no section: the default 10045 (0, 0, 2, 0)
+finish

@@ -1,0 +1,28 @@
+# Shadows of the Departed (jeuno 88): the finishes when their state no longer holds. A level 75 Warrior, Storms of Fate
+# completed, Zilart Awakening current, brought to status 3. 161 open, Storms of Fate set available by a GM: the finish
+# finds no state: no Note, not begun. Then accepted with the three slivers (a GM): 162 open, the quest set available by a
+# GM: the finish finds the available state only (no 162 finish there): nothing (the slivers kept, no Timer or mustZone
+# for Apocalypse Nigh).
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/161 RuludeGardens/onEventFinish/162
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+quest Jeuno.StormsOfFate completed
+mission Zilart Awakening current
+login
+warp 120.9,-8,-12 Norg                  # 176: status 1
+warp 39.6,-1.6,-16.6 LowerJeuno         # by _6tc
+trigger _6tc                            # 20
+finish                                  # status 3
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # 161
+quest Jeuno.StormsOfFate available      # a GM, while 161 is open
+finish                                  # no state: no Note, not begun
+walk 4,2.5,100
+quest Jeuno.StormsOfFate completed      # a GM
+quest Jeuno.ShadowsOfTheDeparted accepted  # a GM
+keyitem PromyvionHollaSliver            # a GM: the three slivers
+keyitem PromyvionDemSliver
+keyitem PromyvionMeaSliver
+walk 4,2.5,60                           # 162
+quest Jeuno.ShadowsOfTheDeparted available  # a GM, while 162 is open
+finish                                  # the available state has no 162 finish: nothing

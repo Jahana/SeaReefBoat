@@ -1,0 +1,66 @@
+# Shadows of the Departed (jeuno 88): the available check's operands one at a time, each walk into Ru'Lude Gardens'
+# area 1 with one operand off. Three level 75 Warriors.
+# - main: Storms of Fate completed, Zilart Awakening current: _6tc only (Awakening's 20: status 2): area 1: no section
+#   (status 2, under 3); Norg (176: status 3); the trade while only available: a Bird Feather to Promyvion-Holla's _0gc:
+#   no onTrade in any state: nothing; area 1: 161, finished (begun).
+# - other: Awakening current, brought to status 3 the same way, Storms of Fate accepted (not completed): area 1: no
+#   section (Storms of Fate's own accepted area handler at Prog 0: nil); then Storms of Fate completed and Awakening
+#   completed, The Last Verse (31, over Awakening's 30) current (GMs; addMission keeps the status): no section; The Last
+#   Verse completed, The Celestial Nexus (28, under it) current: no section; The Celestial Nexus completed, Awakening
+#   current again: status 3: 161, begun.
+# - four: Storms of Fate completed, Zilart The Chamber of Oracles current (a GM): its Pedestal of Earth sets status bit 2
+#   (status 4, YOU_PLACE_THE); then Awakening current (a GM; the status kept): area 1: status 4 (over 3): no section.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/161 PromyvionHolla/_0gc/onTrade
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+char other zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+char four zone=ChamberOfOracles pos=206.9,-3.6,47.6 job=WAR lvl=75
+quest Jeuno.StormsOfFate completed
+mission Zilart Awakening current
+item BirdFeather
+other: quest Jeuno.StormsOfFate accepted
+other: mission Zilart Awakening current
+four: quest Jeuno.StormsOfFate completed
+four: mission Zilart TheChamberOfOracles current
+login
+warp 39.6,-1.6,-16.6 LowerJeuno         # by _6tc
+trigger _6tc                            # Awakening's 20
+finish                                  # status 2
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # status 2: no section; nothing
+warp 120.9,-8,-12 Norg                  # Awakening's 176, answered by the warp: status 3
+warp 101.5,-3,-140 PromyvionHolla       # by _0gc
+trade _0gc BirdFeather x1               # available: no onTrade: nothing
+warp 4,2.5,100 RuludeGardens
+tick 3000
+walk 4,2.5,60                           # status 3: 161
+finish                                  # the Note; begun
+other: login
+other: warp 120.9,-8,-12 Norg           # 176: status 1
+other: warp 39.6,-1.6,-16.6 LowerJeuno  # by _6tc
+other: trigger _6tc                     # 20
+other: finish                           # status 3
+other: warp 4,2.5,100 RuludeGardens
+tick 3000
+other: walk 4,2.5,60                    # Storms of Fate accepted at Prog 0: its area handler's nil; no section here; nothing
+other: walk 4,2.5,100
+other: quest Jeuno.StormsOfFate completed  # a GM
+other: mission Zilart Awakening completed  # a GM: the log's current mission cleared
+other: mission Zilart TheLastVerse current # a GM
+other: walk 4,2.5,60                    # Zilart The Last Verse: no section; nothing
+other: walk 4,2.5,100
+other: mission Zilart TheLastVerse completed     # a GM
+other: mission Zilart TheCelestialNexus current  # a GM
+other: walk 4,2.5,60                    # Zilart The Celestial Nexus: no section; nothing
+other: walk 4,2.5,100
+other: mission Zilart TheCelestialNexus completed  # a GM
+other: mission Zilart Awakening current # a GM
+other: walk 4,2.5,60                    # Awakening again, status 3: 161
+other: finish                           # begun
+four: login
+four: trigger Pedestal_of_Earth         # The Chamber of Oracles: status + 4 (YOU_PLACE_THE)
+four: mission Zilart TheChamberOfOracles completed  # a GM
+four: mission Zilart Awakening current  # a GM: the status kept (4)
+four: warp 4,2.5,100 RuludeGardens
+tick 3000
+four: walk 4,2.5,60                     # status 4: no section; nothing

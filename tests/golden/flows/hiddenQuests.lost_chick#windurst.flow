@@ -1,0 +1,14 @@
+# Lost Chick, Windurst: an ask owner with ask 2 and guess 3. Owner 4 (Kororo), 3 clues, Windurst (4 + 0x30 + 0xC0 =
+# 244). Kororo's default 277 (CHECK: his script or default plays it): the ask (2): updateEvent(1, 1, 1); the guess with
+# high bits (0x10003: option & 0xFFFF is 3): right: updateEvent(1, 1, 1), the story, RETURNED and solved. Pulonono: 766
+# ([0] = 0, [1] = 1, [7] = 3); the finish clears the result.
+lists WindurstWoods/Kororo/onTrigger WindurstWoods/Pulonono/onTrigger WindurstWoods/onEventUpdate/277 WindurstWoods/onEventFinish/766
+char zone=WindurstWoods pos=130,-5,-117 job=WAR lvl=30
+charvar [ChocoboRaising]LostChick 244
+login
+trigger Kororo                          # his 277
+update 277 option=2                     # the ask: updateEvent(1, 1, 1)
+update 277 option=65539                 # 0x10003: the guess: right; the story; KEYITEM_OBTAINED
+finish
+trigger Pulonono                        # 766 ([0] = 0, [1] = 1, [7] = 3)
+finish                                  # the result cleared

@@ -1,0 +1,27 @@
+# Better the Demon You Know (otherAreas 105) with its era module, modules/era/lua/quests/otherareas/
+# better_the_demon_you_know.lua, enabled by xi.pre(SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0): the wait runs to JST
+# midnight. Missionary Moblin and For the Birds completed (so Missionary's 7 does not take Koblakiq's turn). Accepted
+# at Prog 0 (a GM) with a Demon Pen. The trade: 22, finished: the quest's own finish (the pen taken,
+# Prog 1, Wait now + 60), then the module's Wait = JstMidnight() (1800025200: the next JST midnight after the harness
+# clock; the trace's char var shows it, where the quest alone sets 1800000060). The quest's trigger (GetSystemTime() >=
+# Wait): 23. Wait 1800000001 (a GM, one past now): 23; Wait 1800000000 (now): 24, finished: Prog 2.
+module modules/era/lua/quests/otherareas/better_the_demon_you_know.lua
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/Koblakiq/onTrade OldtonMovalpolos/onEventFinish/22 OldtonMovalpolos/onEventFinish/24
+char zone=OldtonMovalpolos pos=-63.4,22.8,-117.5 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest OtherAreas.MissionaryMoblin completed
+quest OtherAreas.ForTheBirds completed
+quest OtherAreas.BetterTheDemonYouKnow accepted
+item DemonPen
+login
+trade Koblakiq DemonPen x1              # 22
+finish                                  # the pen taken, Prog 1, Wait now + 60; then the module: Wait = JstMidnight()
+trigger Koblakiq                        # now < Wait (JST midnight): 23
+finish
+charvar Quest[4][105]Wait 1800000001    # a GM: one second past now
+trigger Koblakiq                        # 23
+finish
+charvar Quest[4][105]Wait 1800000000    # a GM: now
+trigger Koblakiq                        # now >= Wait: 24
+finish                                  # Prog 2

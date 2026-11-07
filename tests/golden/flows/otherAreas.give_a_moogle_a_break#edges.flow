@@ -1,0 +1,50 @@
+# Give a Moogle a Break (otherAreas 100): the edges of the check and the trade. A Bastok char in Bastok Mines' Mog House
+# (zmrg). GetSystemTime() is the harness's 1800000000 throughout (no step but `wait jst=` moves it). Fame 124 (level 2):
+# the menu; 125 (level 3): 30005 (finished with option 0: questSeen 1; out and back clears it). The local mustZone 1 (a
+# GM, as the bed's placing sets it): the menu. bedPlacedTime 0: the menu; now - 60 (not >): the menu; now - 61: 30005.
+# Accepted (a GM): the bow alone; the bow, the ring and a feather: nil (tradeMatches is exact): the script's trade
+# (nothing). Prog 2, then -1 (GMs): nil: the menu. Prog 1, Timer now (a GM): not < now: nil; Timer now - 1: 30008,
+# finished: completed.
+lists BastokMines/Moogle/onTrigger BastokMines/Moogle/onTrade BastokMines/onEventFinish/30005 BastokMines/onEventFinish/30008
+char zone=BastokMines pos=116.9,-1.6,-72 job=WAR lvl=75 nation=1
+setting ENABLE_AMK 0                    # AMK 1 (30023, the Moogle, ENABLE_AMK 1) off: #kinds shows it
+fame Bastok 124
+charvar Quest[4][100]bedPlacedTime 1799999939
+item PowerBow
+item BeetleRing
+item ChocoboFeather
+login
+zoneline BastokMines                    # into the Mog House
+trigger Moogle                          # fame level 2: the menu
+fame Bastok 125                         # a GM: level 3
+trigger Moogle                          # 30005
+finish option=0                         # questSeen 1
+warp -6,0,-50 BastokMarkets             # out: questSeen cleared
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+localvar Quest[4][100]mustZone 1        # a GM (the bed's placing sets it)
+trigger Moogle                          # the local mustZone 1: the menu
+localvar Quest[4][100]mustZone 0        # a GM
+charvar Quest[4][100]bedPlacedTime 0    # a GM
+trigger Moogle                          # no bed: the menu
+charvar Quest[4][100]bedPlacedTime 1799999940 # a GM: now - 60
+trigger Moogle                          # not > bedPlacedTime + 60: the menu
+charvar Quest[4][100]bedPlacedTime 1799999939 # a GM: now - 61
+trigger Moogle                          # 30005
+finish option=0
+quest OtherAreas.GiveAMoogleABreak accepted # a GM
+warp -6,0,-50 BastokMarkets
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+trade Moogle PowerBow x1                # the bow alone: nil; the script's trade
+trade Moogle PowerBow x1 BeetleRing x1 ChocoboFeather x1 # with a feather: nil (exact)
+charvar Quest[4][100]Prog 2             # a GM
+trigger Moogle                          # Prog 2: nil; the menu
+charvar Quest[4][100]Prog -1            # a GM
+trigger Moogle                          # Prog -1: nil; the menu
+charvar Quest[4][100]Prog 1             # a GM
+charvar Quest[4][100]Timer 1800000000   # a GM: now
+trigger Moogle                          # Timer not < now: nil; the menu
+charvar Quest[4][100]Timer 1799999999   # a GM: now - 1
+trigger Moogle                          # 30008
+finish                                  # completed; the safes + 10

@@ -1,0 +1,45 @@
+# Luck of the Draw (ahtUrhgan 6, COR unlock): a level 30 Warrior, The Die is Cast completed (a GM: its available 591
+# would tie with 547 at Ratihb; `the_die_is_cast#edges` shows the tie), a Bone Chip. Ratihb (no script; default 603),
+# Mafwahb (no script; default 647). Available: a trade to Ratihb: no handler: nothing; Ratihb 547, finished: begun at
+# Prog 1. Accepted: Ratihb: no section-2 handler: 603; Mafwahb Prog 1 548 (Prog 2); Prog 2 647 (an Event). Arrapago
+# Reef: qm6 Prog 2: the cutscene 211 (Prog 3); Prog 3: nil: NOTHING_OUT_OF_ORDINARY. Talacca Cove: _1l0 at Prog 3: nil:
+# the battlefields' own handler (NO_BATTLEFIELD_ENTRY, a messageSpecial of its own), then the default (-1); qm1 Prog 3:
+# 2 (Prog 4, the Forgotten Hexagun); qm1 Prog 4: nil (no default); _1l0 Prog 4: 3: completed (a Corsair Die, the COR
+# gesture key item, Seagull Phratrie Crew Member), the hexagun taken, COR unlocked, YOU_CAN_NOW_BECOME_A_CORSAIR.
+# Whitegate: completed, Equipped for All Occasions' Stage 0 and not completed: Ratihb 552, finished: its Stage 1; then
+# 603 (Stage 1: the section off); Mafwahb: no section: 647.
+lists AhtUrhganWhitegate/Ratihb/onTrigger AhtUrhganWhitegate/Mafwahb/onTrigger ArrapagoReef/qm6/onTrigger TalaccaCove/qm1/onTrigger TalaccaCove/_1l0/onTrigger TalaccaCove/onEventFinish/3
+char zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=30
+quest AhtUrhgan.TheDieIsCast completed
+item BoneChip
+login
+trade Ratihb BoneChip x1                # available: no trade handler: nothing
+trigger Ratihb                          # 547
+finish                                  # begun; Prog 1
+trigger Ratihb                          # accepted: no Ratihb handler: the default 603
+finish
+trigger Mafwahb                         # Prog 1: 548
+finish                                  # Prog 2
+trigger Mafwahb                         # Prog 2: 647 (an Event)
+finish
+warp 470.267,-12.292,111.817 ArrapagoReef
+trigger qm6                             # Prog 2: the cutscene 211
+finish                                  # Prog 3
+trigger qm6                             # Prog 3: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp -60.016,-9.905,-138.676 TalaccaCove
+trigger _1l0                            # Prog 3: nil: the battlefields' NO_BATTLEFIELD_ENTRY, then the default -1
+finish-if-event
+trigger qm1                             # Prog 3: 2
+finish                                  # Prog 4; the Forgotten Hexagun
+trigger qm1                             # Prog 4: nil (no default)
+finish-if-event
+trigger _1l0                            # Prog 4: NO_BATTLEFIELD_ENTRY (the battlefields'), and 3
+finish                                  # completed: Corsair Die, the COR gesture, Seagull Phratrie Crew Member; the hexagun taken; COR; YOU_CAN_NOW_BECOME_A_CORSAIR
+warp 76.725,-6,-137.203 AhtUrhganWhitegate
+trigger Ratihb                          # completed, Stage 0, Equipped not completed: 552
+finish                                  # Equipped for All Occasions' Stage 1
+trigger Ratihb                          # Stage 1: the section off: 603
+finish
+trigger Mafwahb                         # completed: no section: 647
+finish

@@ -1,0 +1,16 @@
+# Everyone's Grudge (outlands 134), the quest's own var at the completion: accepted, EveryonesGrudgeStarted 1, three
+# Gold Beastcoins and Quest[5][134]Prog 1 (GMs). Magephaud: the coins, 118; finished: the raw player:completeQuest, the
+# trade taken, Norg fame +20, the Tonberry Priest Key, EveryonesGrudgeStarted 0, the title. The raw completeQuest does
+# no cleanup: Quest[5][134]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=Norg pos=13,0,7 job=WAR lvl=75
+quest Outlands.EveryonesGrudge accepted
+charvar EveryonesGrudgeStarted 1
+item GoldBeastcoin x3
+charvar Quest[5][134]Prog 1             # a GM: the quest's own var
+login
+trade Magephaud GoldBeastcoin x3        # 118
+finish                                  # completed, Prog kept; taken; fame +20; the key; Started 0; the title
+trigger Magephaud                       # default turn: 115
+finish
+trigger Magephaud                       # script, completed: 119
+finish

@@ -1,0 +1,21 @@
+# New Character Cutscenes (hidden quest newCharacterCS), Bastok: a level 1 char with notSeen 1 (charCreate's var; a GM's
+# charvar here), NEW_CHARACTER_CUTSCENE 1. Bastok Markets (login open): setPos(-280, -12, -90, 0), the home point
+# (nations 0), 0 (RESET_CAMERA, NO_PCS, OPENING_MODE); finished: 7 started (the same flags, isHidden); finished: the
+# coupon, MAP_MARKER_TUTORIAL (the char's own), notSeen 0, nations 2 (Bastok's bit). Bastok Mines (notSeen 1 again, a
+# GM): setPos, no home point (nations 2), 1 (warp finishes it): the coupon, the text. Port Bastok, the inventory full:
+# 1: the text, then the coupon fails (its message). Then notSeen 1 with NEW_CHARACTER_CUTSCENE 0: no zone-in event.
+lists BastokMarkets/onZoneIn/1 BastokMarkets/onEventFinish/0 BastokMarkets/onEventFinish/7 BastokMines/onZoneIn/1 BastokMines/onEventFinish/1 PortBastok/onZoneIn/1 PortBastok/onEventFinish/1
+char zone=BastokMarkets pos=-280,-12,-90 job=WAR lvl=1 nation=1
+charvar HQuest[newCharacterCS]notSeen 1
+login open                              # setPos, home point; 0 (flags 0x83)
+finish                                  # 7 started (flags 0x83, isHidden)
+finish                                  # the coupon; MAP_MARKER_TUTORIAL; notSeen 0; nations 2
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp -45,0,25 BastokMines               # setPos; 1 (finished with 0): the coupon; the text; nations 2
+charvar HQuest[newCharacterCS]notSeen 1
+fill-inventory
+warp 134,8.5,-11 PortBastok             # 1 (finished with 0): the text; no room: the coupon's message
+free-inventory
+charvar HQuest[newCharacterCS]notSeen 1
+setting NEW_CHARACTER_CUTSCENE 0
+warp -45,0,25 BastokMines               # the setting off: no zone-in event

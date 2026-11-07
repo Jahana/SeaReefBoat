@@ -1,0 +1,92 @@
+# Return to the Depths (bastok 78), up to Prog 9: Ayame in the Metalworks, the Oldton Movalpolos zone-ins and Tarnotik,
+# Muckvix in Lower Jeuno, Magriffon in Kazham, the burning circle _0d0 in Mine Shaft #2716. The guard (Bastok fame level
+# 5, A Question of Faith completed), the offer 879, Ayame's 880 at Prog 0, the Oldton zone-in 40 (Prog 1), the Misareaux
+# Garlic to Muckvix (99: Prog 2, KI Letter from Muckvix, 2000 gil), Muckvix's 46 (oncePerZone), Magriffon's 299 (Prog 3,
+# the letter deleted), 10000 gil to Magriffon (301: Prog 4, KI Providence Pot, KI Letter from Magriffon), Muckvix's 100
+# (Prog 5, KI Pungent Providence Pot, the pot and the letter deleted) and 47 (oncePerZone), the Oldton zone-in 41 (Prog
+# 6), Tarnotik's 42 (Prog 7) and 43 (oncePerZone), the Bottle of Ahriman Tears to Tarnotik (44: Prog 8, the bottle
+# taken, the finish's own setPos into Mine Shaft #2716), the circle's 5 (Prog 9); then the battlefield
+# (scripts/battlefields/Mine_Shaft_2716/return_to_the_depths.lua: index 1, entry _0d0, requiredVar 'Quest[1][78]Prog' at
+# 9, which the finish of 5 just wrote: the battlefield's read of the quest's var; Twilotak and his six adds of area 1;
+# his death alone wins it in this engine) and its win's 32001 (BattlefieldQuest:onBattlefieldWin sets the local var
+# battlefieldWin to 737 while the quest is accepted), whose quest finish sets Prog 10 and gives 10000 gil. Prog 10 and
+# the completed lines are in #prog10, a 32001 without the local var in #battlefield_novar. 44's setPos changes zone:
+# `tick 400` and `login` finish that zone change the way the harness's warp does (a GM setPos, Tick(400), Login); the GM
+# warp to the same spot after them only tells the flow checker the zone. The battlefield's 32000 menu: update option =
+# index << 4 | area (1 << 4 | 1 = 17) registers and enters it (Battlefield.redirectEventUpdate, onEntryEventUpdate). The
+# zone-ins are answered with option 0 inside the warp's step. Defaults: Ayame 701, Muckvix 15, Tarnotik his own script
+# (30 or 31 by math.randomInt), Magriffon his own script (Gullible's Travels: nothing for this char), _0d0 the
+# battlefield's entry. Shared: Ayame (A Question of Faith, Faded Promises, True Strength, Trust: Bastok, 2-1, 3-1),
+# Muckvix (CoP 4-1), Tarnotik (CoP 5-3), _0d0 (CoP 5-3, 7-3 and the battlefield).
+lists MineShaft2716/onEventFinish/32001 Metalworks/Ayame/onTrigger Metalworks/Ayame/onTrade Metalworks/onEventFinish/879 OldtonMovalpolos/onZoneIn/1 OldtonMovalpolos/onEventFinish/40 OldtonMovalpolos/onEventFinish/41 OldtonMovalpolos/onEventFinish/42 OldtonMovalpolos/onEventFinish/44 OldtonMovalpolos/Tarnotik/onTrigger OldtonMovalpolos/Tarnotik/onTrade LowerJeuno/Muckvix/onTrigger LowerJeuno/Muckvix/onTrade LowerJeuno/onEventFinish/99 LowerJeuno/onEventFinish/100 Kazham/Magriffon/onTrigger Kazham/Magriffon/onTrade Kazham/onEventFinish/299 Kazham/onEventFinish/301 MineShaft2716/_0d0/onTrigger MineShaft2716/onEventFinish/5
+char zone=Metalworks pos=133.9,-19,34.8 lvl=75 gil=30000
+fame Bastok 325
+quest Bastok.OutOfTheDepths completed
+quest Bastok.AQuestionOfFaith accepted
+item MisareauxGarlic
+item BottleOfAhrimanTears x2
+item BoneChip
+login
+trigger Ayame                        # A Question of Faith accepted, not completed: not offered, 701
+finish-if-event
+quest Bastok.AQuestionOfFaith completed
+fame Bastok 324
+trigger Ayame                        # fame 324 (level 4): not offered, 701
+finish-if-event
+fame Bastok 325
+trade Ayame BoneChip x1              # available: no trade handler, nothing
+trigger Ayame                        # the offer, 879
+finish                               # accepted
+trigger Ayame                        # Prog 0: 880
+finish
+warp -26.8,4.6,-135.6 LowerJeuno
+trigger Muckvix                      # Prog 0: nil, 15
+finish-if-event
+trade Muckvix MisareauxGarlic x1     # Prog 0: nil
+warp 160.9,12,-54.2 OldtonMovalpolos # Prog 0: 40, answered with option 0: Prog 1
+trigger Tarnotik                     # Prog 1: nil, his script
+finish-if-event
+trade Tarnotik BottleOfAhrimanTears x1  # Prog 1: nil
+warp 160.9,12,-54.2 OldtonMovalpolos # Prog 1: no zone-in event
+warp -26.8,4.6,-135.6 LowerJeuno
+trade Muckvix BoneChip x1            # Prog 1, the wrong item: nil
+trade Muckvix MisareauxGarlic x1     # Prog 1: 99 (1, 1, 3, 0, garlic)
+finish                               # Prog 2, the garlic taken, KI Letter from Muckvix, 2000 gil
+trigger Muckvix                      # Prog 2: 46 (oncePerZone)
+finish
+trigger Muckvix                      # the same zone-in: 46 lowered, his default 15
+finish-if-event
+warp 59,-12,-36 Kazham
+trade Magriffon gil=10000            # Prog 2: nil (his script: nothing for this char)
+trigger Magriffon                    # Prog 2, the letter: 299 (75, Providence Pot, 10000)
+finish                               # Prog 3, the letter deleted
+trigger Magriffon                    # Prog 3: nil, his script
+finish-if-event
+trade Magriffon gil=9999             # 9999 gil: nil
+trade Magriffon gil=10000            # 10000 gil: 301 (1, Providence Pot)
+finish                               # Prog 4, the gil taken, KI Providence Pot, KI Letter from Magriffon
+warp -26.8,4.6,-135.6 LowerJeuno
+trigger Muckvix                      # Prog 4, both key items: 100
+finish                               # Prog 5, KI Pungent Providence Pot, the pot and the letter deleted
+trigger Muckvix                      # Prog 5: 47 (oncePerZone)
+finish
+warp 160.9,12,-54.2 OldtonMovalpolos # Prog 5: 41, option 0: Prog 6
+trigger Tarnotik                     # Prog 6: 42 (11, 131456, 384, 0, garlic)
+finish                               # Prog 7
+trigger Tarnotik                     # Prog 7: 43 (oncePerZone)
+finish
+trigger Tarnotik                     # 43 lowered: his script
+finish-if-event
+trade Tarnotik BoneChip x1           # Prog 7, the wrong item: nil
+trade Tarnotik BottleOfAhrimanTears x1  # Prog 7: 44
+finish                               # Prog 8, the bottle taken, setPos into Mine Shaft #2716
+tick 400
+login                                # the zone change: Mine Shaft #2716
+warp -93.657,-120,-583.561 MineShaft2716  # the same spot: for the flow checker's zone
+trigger _0d0                         # Prog 8: 5 (1, 131456, 384, 0, garlic)
+finish                               # Prog 9
+trigger _0d0                         # Prog 9: the quest's handler nil; the battlefield's 32000 menu
+update 32000 option=17               # index 1, area 1: registered, entered
+finish                               # in the arena
+kill TWILOTAK                        # area 1: won (his death alone ends it here), battlefieldWin 737, 32001 opens
+finish                               # 32001: Prog 10, 10000 gil

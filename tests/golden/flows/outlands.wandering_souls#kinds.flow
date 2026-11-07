@@ -1,0 +1,21 @@
+# Wandering Souls (outlands 161) against Rhapsodies of Zilart 5 at the Cape Teriggan headstone. main: the mission
+# current, the Wind Fragment held, the quest accepted (GMs: the mission's 201): the mission answers nil (the quest not
+# completed): the quest's MUST_BE_A_WAY_TO_SOOTHE; a Rain Lily: 202, finished: completed, the lily taken; the headstone:
+# the mission's ALREADY_OBTAINED_FRAG and noAction. bob: the mission completed (its rD ZILART_MONUMENT), the quest
+# accepted: the quest's message (50) beats the rD (20).
+lists CapeTeriggan/Cermet_Headstone/onTrigger CapeTeriggan/Cermet_Headstone/onTrade CapeTeriggan/onEventFinish/202
+char zone=CapeTeriggan pos=-108.084,-8.841,453.989 job=WAR lvl=75
+char bob zone=CapeTeriggan pos=-108.084,-8.841,453.989 job=WAR lvl=75
+mission Zilart HeadstonePilgrimage current
+keyitem WindFragment
+quest Outlands.WanderingSouls accepted
+item RainLily
+bob: mission Zilart HeadstonePilgrimage completed
+bob: quest Outlands.WanderingSouls accepted
+login
+trigger Cermet_Headstone                # the mission: nil; the quest: MUST_BE_A_WAY_TO_SOOTHE
+trade Cermet_Headstone RainLily x1      # 202
+finish                                  # completed; the lily taken
+trigger Cermet_Headstone                # the mission: ALREADY_OBTAINED_FRAG, noAction
+bob: login
+bob: trigger Cermet_Headstone           # the quest's MUST_BE_A_WAY_TO_SOOTHE over the mission's rD ZILART_MONUMENT

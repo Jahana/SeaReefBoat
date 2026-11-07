@@ -1,0 +1,17 @@
+# One Good Deed? (windurst 92): the Boneyard Gully afterZoneIn (its handler is OnAfterZoneIn on the C# side, quest
+# rework P5). Accepted by GM at Prog 2 with the deed, a level-75 WAR logged
+# in at Boneyard Gully: zoneutils::AfterZoneIn runs 4 s after the zone-in (tick 5000): 8 (4, the deed, 0, 274, 8); its
+# update option 100 (nothing), option 101 (updateEvent 3, the map, 0, 274, 8); the finish: Prog 3, the Map of the
+# Attohwa Chasm. Logged in again at Prog 3: no event (the Prog operand).
+lists BoneyardGully/afterZoneIn/1 BoneyardGully/onEventUpdate/8 BoneyardGully/onEventFinish/8
+char zone=BoneyardGully pos=-709.5,18.07,456.24 job=WAR lvl=75
+quest Windurst.OneGoodDeed accepted
+charvar Quest[2][92]Prog 2
+keyitem DeedToPurgonorgoIsle
+login
+tick 5000                                     # afterZoneIn, Prog 2: 8 (4, the deed, 0, 274, 8)
+update 8 option=100                           # not 101: nothing
+update 8 option=101                           # updateEvent(3, the map, 0, 274, 8)
+finish                                        # Prog 3; the Map of the Attohwa Chasm
+login                                         # a zone-in again at Prog 3
+tick 5000                                     # afterZoneIn, Prog 3: nil; no event

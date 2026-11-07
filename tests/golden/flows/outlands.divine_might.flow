@@ -1,0 +1,68 @@
+# Divine Might (outlands 163): blank_divine_might in The Shrine of Ru'Avitau (no script; the default
+# NOTHING_OUT_OF_ORDINARY; Rhapsodies of Zilart 14 Ark Angels' 53 at status 0), the Qu'Hau Spring in Ro'Maeve (no
+# script; the default MYSTERIOUS_ANCIENT_MONUMENT; Windurst 8-1 / 9-2 by trigger only), the La'Loff Amphitheater
+# battlefield (293, entered by the Ark Pentasphere at qm1_1). A level 75 Warrior on Zilart ARK_ANGELS (status 0), a sheet
+# of parchment, a bottle of illuminink. The harness clock starts on day 8000, 12:00 (a waxing 38% moon); the full moon
+# runs from day 8022 to day 8028 (windurst group 9's sin_hunting#era works the count out).
+# blank: the parchment traded while available: no trade handler: nothing. blank: the mission's 53 (progressCutscene; the
+# quest's arm: ARK_ANGELS at status 0, no shard: nil), finished: status 1; blank: 54 (parchment, illuminink,
+# pentasphere), finished: begun; 54 again (accepted, Prog 0: the incomplete arm; no finish there). Ro'Maeve: the pair on
+# day 8000 12:00: nothing; day 8021 23:00 (not yet the full moon): nothing; day 8022 00:00: 7 (parchment, illuminink);
+# finished with a full inventory: giveItem false: nothing taken; freed: 7, finished: the Ark Pentasphere, the pair taken
+# (confirmTrade). La'Loff: Invincible (a GM: the five would kill a level 75 Warrior before the last falls); the
+# pentasphere at qm1_1: the entry menu 32000, option 81 (index 5, arena 1): entered, the pentasphere worn; the five Ark
+# Angels of arena 1 killed: won, 32001; finished: both 32001 handlers: the quest's (battlefieldWin 293: Prog 1) and the
+# mission's (status 1: index 5: the five shards, DivineMight 2, the mission completed: THE_SEALED_SHRINE). Shrine: 55
+# (the five earrings); update option 2: the earrings sent again; finish option 0: nothing; 55, update option 1: nothing,
+# finish option 6: nothing; 55, a full inventory, option 1: nothing; freed: 55, option 1: the Suppanomimi: completed
+# (Pentacide Perpetrator), DM_Earring 14739. blank: no Divine Might section; the repeat's: one earring held
+# (NUMBER_OF_DM_EARRINGS 1): nil: the default.
+lists TheShrineOfRuavitau/blank_divine_might/onTrigger Romaeve/QuHau_Spring/onTrade TheShrineOfRuavitau/onEventFinish/54 TheShrineOfRuavitau/onEventUpdate/55 TheShrineOfRuavitau/onEventFinish/55 Romaeve/onEventFinish/7 LaloffAmphitheater/onEventFinish/32001
+char zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+mission Zilart ArkAngels current
+item SheetOfParchment
+item BottleOfIlluminink
+login
+trade blank_divine_might SheetOfParchment x1   # available: no trade handler: nothing
+trigger blank_divine_might              # ARK_ANGELS status 0: the mission's 53 (the quest: nil)
+finish                                  # status 1
+trigger blank_divine_might              # status 1: 54 (917, 1408, 1550)
+finish                                  # begun
+trigger blank_divine_might              # accepted, Prog 0: the incomplete arm: 54
+finish                                  # no finish in the accepted section: nothing
+warp 1.748,-27.402,67.751 Romaeve
+trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # day 8000 12:00, a waxing 38%: nothing
+wait vana=515                           # day 8021, 23:00 (88% waxing: not the full moon)
+trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # nothing
+wait vana=1                             # day 8022, 00:00 (90% waxing: FULL_MOON), hour 0
+trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # 7 (917, 1408)
+fill-inventory
+finish                                  # giveItem false: nothing taken
+free-inventory
+trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # 7
+finish                                  # the Ark Pentasphere; the pair taken
+warp -603.563,-22.681,483.937 LaloffAmphitheater
+effect 50                               # a GM: Invincible
+trade qm1_1 ArkPentasphere x1           # the entry menu 32000
+update 32000 option=81                  # Divine Might (index 5), arena 1: registered, entered, the pentasphere worn
+finish                                  # in the arena
+kill ARK_ANGEL_HM+24                    # arena 1's five (superlink)
+kill ARK_ANGEL_MR+22
+kill ARK_ANGEL_EV+16
+kill ARK_ANGEL_TT+14
+kill ARK_ANGEL_GK+12                    # all dead: won: 32001
+finish                                  # battlefieldWin 293: Prog 1; the mission: the five shards, DivineMight 2, completed
+warp -38.533,-1.648,-148.199 TheShrineOfRuavitau
+trigger blank_divine_might              # Prog 1: 55 (14739 .. 14743)
+update 55 option=2                      # the earrings again (updateEvent)
+finish option=0                         # earringRewards[0]: nil: nothing
+trigger blank_divine_might              # 55
+update 55 option=1                      # not 2: nothing
+finish option=6                         # nil: nothing
+trigger blank_divine_might              # 55
+fill-inventory
+finish option=1                         # giveItem false: nothing
+free-inventory
+trigger blank_divine_might              # 55
+finish option=1                         # the Suppanomimi: completed (the title); DM_Earring 14739
+trigger blank_divine_might              # completed: the repeat's section: one earring held: nil: the default

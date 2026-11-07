@@ -1,0 +1,26 @@
+# Flavors of Our Lives (adoulin 46), the SoA rival at Masad: a level 99 Warrior in Western Adoulin, SoA current
+# The Man in Black (51, a GM: its Masad handler plays 134, an Event, without the Card Jailer Teodor), the quest accepted
+# (a GM). Masad's order line: Mission[12][11], Mission[12][51], Mission[12][52], then the quest. Prog 0: 83 (a
+# progressEvent) over the mission's 134; SoA 51 is past Budding Prospects: no mission var, only the quest's Timer 8001;
+# finished: Prog 1. Prog 1, the Timer 8001 (to come): 104 (a progressEvent) over 134. The Timer 8000 (today, a GM): 104
+# (an Event, once per zone) and 134 tie: the first in container order plays (the mission's 134), finished on 1:
+# The Man in Black completed (To the Victor's Status 1), SoA To the Victor (52, the same 134 at Masad); then 104 (the
+# rotation); then 134 twice (104 spent in this zone visit; To the Victor's 134 finish on 1 does nothing).
+lists WesternAdoulin/Masad/onTrigger WesternAdoulin/onEventFinish/83
+char zone=WesternAdoulin pos=-26.682,-0.65,-91.991 job=WAR lvl=99
+mission Soa TheManInBlack current
+quest Adoulin.FlavorsOfOurLives accepted
+login
+trigger Masad                           # Prog 0: 83 over the mission's 134; the quest's Timer 8001
+finish                                  # Prog 1
+trigger Masad                           # Prog 1, the Timer 8001 (to come): 104 (a progressEvent) over 134
+finish
+charvar Quest[9][46]Timer 8000          # a GM: the Timer today
+trigger Masad                           # 104 (an Event, once per zone) and 134 tie: 134 (the mission's, first)
+finish option=1                         # The Man in Black completed: SoA To the Victor (Status 1)
+trigger Masad                           # the rotation: 104
+finish option=1
+trigger Masad                           # 104 spent in this zone visit: To the Victor's 134
+finish option=1                         # To the Victor: option 1 does nothing
+trigger Masad                           # 134 again
+finish option=1

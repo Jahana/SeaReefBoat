@@ -1,0 +1,18 @@
+# Know One's Onions (windurst 40): the offer's operands. Level 5. Truth, Justice, and the Onion Way! accepted (not
+# completed): section 1's quest operand false alone: not available; that quest's own 371. Completed by GM: available;
+# this quest's char-var mustZone set by GM (nothing else sets it): Kohlo-Lakolo's 379; a warp out and back clears it:
+# 391, begun.
+lists PortWindurst/Kohlo-Lakolo/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+quest Windurst.TruthJusticeAndTheOnionWay accepted
+login
+trigger Kohlo-Lakolo                           # the first quest not completed: not available; its 371
+finish
+quest Windurst.TruthJusticeAndTheOnionWay completed   # GM
+charvar Quest[2][40]mustZone 240               # GM
+trigger Kohlo-Lakolo                           # available; the mustZone: 379
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+warp -27.5,-8.0,189.6 PortWindurst             # the mustZone cleared
+trigger Kohlo-Lakolo                           # 391
+finish                                         # Prog 1; begun

@@ -1,0 +1,115 @@
+# Searching for the Right Words (jeuno 66): Kurou-Morou and Chululu in Lower Jeuno, Ilumida in Upper Jeuno (the first
+# of that name), the ??? (qm2) and Agas in the Boyahda Tree. A Candlelight Vigil, Rubbish Day and Never to Return
+# completed, Jeuno fame level 6 exactly ((284 + 283 + 283) / 2 = 425). Shared NPCs: Kurou-Morou (no script; default
+# 193) also answers Never to Return's completed 204 (Event: it cycles with this quest's Event replies; Progress 17 /
+# 154 beat it); Chululu (no script; default 26) answers Rubbish Day's completed 199 (Event: cycles with 57 / 56; it
+# alone answers when this quest returns nil); the ??? has a script (CAN_SEE_SKY from 19:00 to 3:59 outside the new
+# moon, else CANNOT_SEE_MOON) that answers when this quest returns nil. The clock starts at Vana'diel day 8000, 12:00.
+# Not reachable: :170-173 Agas missing (a placed mob of the zone: GetMobByID never fails).
+lists LowerJeuno/Kurou-Morou/onTrigger LowerJeuno/Kurou-Morou/onTrade LowerJeuno/Chululu/onTrigger LowerJeuno/onEventFinish/17 LowerJeuno/onEventFinish/154 UpperJeuno/Ilumida/onTrigger UpperJeuno/onEventFinish/197 UpperJeuno/onEventFinish/201 UpperJeuno/onEventFinish/198 TheBoyahdaTree/qm2/onTrigger TheBoyahdaTree/Agas/onMobDeath TheBoyahdaTree/onEventFinish/14
+char zone=LowerJeuno pos=-1.2,-6.7,-30.1 job=WAR lvl=75
+quest Jeuno.CollectTarutCards completed            # (Rubbish Day needs it; else its offer 28 answers at Chululu)
+quest Jeuno.YourCrystalBall completed              # (Never to Return needs it; else its offer 194 answers at Kurou-Morou)
+charvar Quest[3][166]Date 2000000000               # All in the Cards waits (Date ahead): no 10110 at Chululu
+quest Jeuno.ACandlelightVigil completed
+quest Jeuno.RubbishDay completed
+quest Jeuno.NeverToReturn completed
+fame Sandoria 284
+fame Bastok 283
+fame Windurst 283
+item FlintStone x3
+login
+walk -1.7,-6.7,-30.1
+trade Kurou-Morou FlintStone x1         # available: no trade handler (Never to Return trades only while accepted): nothing
+trigger Chululu                         # available, Prog 0: nil; Rubbish Day's 199
+finish
+trigger Kurou-Morou                     # Prog 0: 17 (Progress, over Never to Return's 204)
+finish option=1                         # not 0: nothing
+trigger Kurou-Morou                     # 17
+finish option=0                         # Prog 1
+trigger Kurou-Morou                     # Prog 1: Event 38 and Never to Return's Event 204 cycle: 204 first
+finish
+trigger Kurou-Morou                     # then 38
+finish
+trigger Chululu                         # Prog 1: Event 57 and Rubbish Day's Event 199 cycle: 199 first
+finish
+trigger Chululu                         # then 57
+finish
+warp -73.5,-1.2,57.3 UpperJeuno
+trigger Ilumida                         # Prog 1: 197
+finish option=2                         # neither 1 nor 0: nothing
+trigger Ilumida                         # 197
+finish option=0                         # declined: Prog 2
+trigger Ilumida                         # Prog 2: 201
+finish option=0                         # not 1: nothing
+warp -1.2,-6.7,-30.1 LowerJeuno
+trigger Kurou-Morou                     # Prog 2: 36 and 204 cycle: 204
+finish
+trigger Kurou-Morou                     # 36
+finish
+trigger Chululu                         # Prog 2: 57 and 199 cycle: 199
+finish
+trigger Chululu                         # 57
+finish
+warp -73.5,-1.2,57.3 UpperJeuno
+trigger Ilumida                         # 201
+finish option=1                         # begun, Prog 3
+trigger Ilumida                         # accepted, no Moondrop: 199
+finish
+warp -1.2,-6.7,-30.1 LowerJeuno
+walk -1.7,-6.7,-30.1
+trade Kurou-Morou FlintStone x1         # accepted: no trade handler here (Never to Return is completed): nothing
+trigger Kurou-Morou                     # accepted: 39 and 204 cycle: 204
+finish
+trigger Kurou-Morou                     # 39
+finish
+trigger Chululu                         # accepted: 57 and 199 cycle: 199
+finish
+trigger Chululu                         # 57
+finish
+warp 36.1,-20.2,-61.6 TheBoyahdaTree
+trigger qm2                             # 12:00: nil; the ???'s CANNOT_SEE_MOON
+wait vana=7                             # 19:00
+trigger qm2                             # Prog 3: Agas spawned and claimed; SOMETHING_NOT_RIGHT (replaceDefault)
+trigger qm2                             # Agas up: nil; CAN_SEE_SKY
+kill AGAS                               # Prog 3: Prog 4
+trigger qm2                             # the body still spawned: nil; CAN_SEE_SKY
+tick 30000                              # the body gone within 92 s
+tick 30000
+tick 30000
+tick 2000
+wait vana=7                             # day 8001, 2:00 (still in the window: hour < 4)
+trigger qm2                             # Prog 4: 14
+finish option=1                         # not 0: nothing
+trigger qm2                             # 14
+finish option=0                         # the Moondrop, Prog 5
+trigger qm2                             # the Moondrop held: nil; CAN_SEE_SKY
+warp -73.5,-1.2,57.3 UpperJeuno
+trigger Ilumida                         # the Moondrop: 198
+fill-inventory
+finish                                  # no room for the scroll: not completed
+free-inventory
+trigger Ilumida                         # 198
+finish                                  # completed: 3000 gil, Scroll of Sleepga II, the Moondrop taken, fame +23 x3, Post 1
+trigger Ilumida                         # completed, Post 1: 200 (replaceDefault)
+finish
+warp -1.2,-6.7,-30.1 LowerJeuno
+trigger Chululu                         # completed, Post 1: nil; Rubbish Day's 199
+finish
+trigger Kurou-Morou                     # Post 1: 154 (Progress)
+finish option=1                         # not 0: nothing
+trigger Kurou-Morou                     # 154
+finish option=0                         # Post 0
+trigger Kurou-Morou                     # Post 0: 37 and 204 cycle: 204
+finish
+trigger Kurou-Morou                     # 37
+finish
+trigger Chululu                         # Post 0: 56 and 199 cycle: 199
+finish
+trigger Chululu                         # 56
+finish
+walk -1.7,-6.7,-30.1
+trade Kurou-Morou FlintStone x1         # completed: no trade handler: nothing
+warp -73.5,-1.2,57.3 UpperJeuno
+trigger Ilumida                         # Post 0: 196 (replaceDefault)
+finish

@@ -1,0 +1,58 @@
+# Blue Ribbon Blues with its era module (modules/era/lua/quests/windurst/blue_ribbon_blues.lua), enabled by its
+# condition xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0). It wraps section 1's 358 and section 2's 365
+# (each runs the quest's own finish, then sets Timer to JstMidnight() and the quest's mustZone) and replaces section 2's
+# Kerutoto onTrigger with a copy that also waits while the mustZone holds: Prog 0 plays 359 while `now < Timer or
+# mustZone`, else 360. The harness's system time is 1800000000; JstMidnight() is then 1800025200 (the next JST midnight).
+# Each operand of the wait: both true (just after 358), now < Timer alone (after a zone change), the mustZone alone (a
+# day on, the mustZone set by GM), neither (360). The Timer edge: Timer = now + 1 (359) and Timer = now (360). The copy's
+# other arms: Prog 1 with the ribbon (361), Prog 1 without (366), Prog 2 (no arm: his default 306), Prog 3 (362: the
+# quest completes; completed with the mustZone: 363). 365's wrap after a 361.
+module modules/era/lua/quests/windurst/blue_ribbon_blues.lua
+lists WindurstWaters/Kerutoto/onTrigger WindurstWaters/onEventFinish/358 WindurstWaters/onEventFinish/365
+char zone=WindurstWaters pos=13.0,-4.71,-155.9
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+quest Windurst.WaterWayToGo completed
+fame Windurst 325
+item PurpleRibbon
+login
+trigger Kerutoto                        # available: 357 (section 1's trigger is not the module's)
+finish                                  # Prog 1
+trade Kerutoto PurpleRibbon x1          # 358 (3600)
+finish                                  # the quest's 358 (the ribbon taken, +3600 gil, begun, Prog 0, Timer now + 60), then Timer = 1800025200 and the mustZone
+trigger Kerutoto                        # Prog 0, now < Timer and the mustZone: 359
+finish
+warp 22.0,-4.25,-155.6 WindurstWoods
+warp 13.0,-4.71,-155.9 WindurstWaters   # the mustZone cleared
+trigger Kerutoto                        # now < Timer, no mustZone: 359
+finish
+wait jst=1                              # now 1800086400, past the Timer
+charvar Quest[2][17]mustZone 238        # the mustZone alone, set by GM
+trigger Kerutoto                        # now >= Timer, the mustZone: 359
+finish
+charvar Quest[2][17]mustZone 0
+charvar Quest[2][17]Timer 1800086401
+trigger Kerutoto                        # no mustZone, now < Timer (one second): 359
+finish
+charvar Quest[2][17]Timer 1800086400
+trigger Kerutoto                        # no mustZone, now == Timer: 360
+finish                                  # a ribbon; Prog 1
+trigger Kerutoto                        # Prog 1, the ribbon held: 361
+finish
+trade Kerutoto PurpleRibbon x1          # Prog 1: 365
+finish                                  # the quest's 365 (the ribbon taken, Prog 0, Timer now + 60), then Timer = 1800111600 and the mustZone
+trigger Kerutoto                        # Prog 0, now < Timer and the mustZone: 359
+finish
+charvar Quest[2][17]Prog 1
+trigger Kerutoto                        # Prog 1, no ribbon: 366
+finish
+charvar Quest[2][17]Prog 2
+trigger Kerutoto                        # Prog 2: no arm, nil; his default 306
+finish
+charvar Quest[2][17]Prog 3
+trigger Kerutoto                        # Prog 3: 362
+finish                                  # completed: fame +50, Ghostie Buster, the mustZone
+trigger Kerutoto                        # completed, the mustZone: 363
+finish

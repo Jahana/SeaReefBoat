@@ -1,0 +1,54 @@
+# Crafted Magus Artifact (hidden quest MagusArtifact), the first piece (the bazubands): a level 99 Warrior in Aht Urhgan
+# Whitegate, [BLUAF]Remaining 7 (a GM: Transformations' completion seeds it). Lathuya (default 770): Transformations
+# available: the check fails: 770. Accepted (a GM): a trade with no order: nothing. 730 (0): its updates: option 1
+# (below 2): nothing; option 2 (2 % 3 == 2: piece 1): Current 1, updateEvent(0, the four materials); option 3: the fee,
+# updateEvent(0, the Imperial Mythril Piece, 2); finished (no finish arm). Current 1, stage 0: 731 (0, coin, 2); the
+# coins at stage 0: nothing; the materials: 732 (the bazubands, coin, 2), finished: stage 1, taken. 733; the two coins:
+# 734 (0, coin, 2), finished: taken, stage 2, PaymentDay today, mustZone, the Magus Order Slip. 735 (not yet);
+# PaymentDay 0 (a GM) but not zoned: 735; zoned: 736 (the bazubands), finished: given, Remaining 6, the stage vars 0,
+# RestingDay today, mustZone, the slip taken. Then (one made, offset 8, resting): 737.
+# Zoned again with RestingDay today (the first day not yet past): still 737.
+lists AhtUrhganWhitegate/Lathuya/onTrigger AhtUrhganWhitegate/Lathuya/onTrade AhtUrhganWhitegate/onEventUpdate/730 AhtUrhganWhitegate/onEventFinish/732 AhtUrhganWhitegate/onEventFinish/734 AhtUrhganWhitegate/onEventFinish/736
+char zone=AhtUrhganWhitegate pos=-95.1,-6,33.1 job=WAR lvl=99
+charvar [BLUAF]Remaining 7
+item PlatinumSheet
+item SquareOfVelvetCloth
+item SquareOfKarakulLeather
+item FlaskOfVenomPotion
+item ImperialMythrilPiece x2
+login
+trigger Lathuya                         # Transformations available: 770
+finish
+quest AhtUrhgan.Transformations accepted   # a GM
+trade Lathuya ImperialMythrilPiece x2   # no order: nothing
+charvar [BLUAF]RestingDay 999999        # a GM: resting
+trigger Lathuya                         # no order, none made, resting: 729
+finish
+charvar [BLUAF]RestingDay 0             # a GM
+trigger Lathuya                         # no order, none made: 730 (0)
+update 730 option=1                     # below 2: nothing
+update 730 option=2                     # piece 1: Current 1, updateEvent(0, the materials)
+update 730 option=3                     # the fee: updateEvent(0, coin, 2)
+finish option=2
+trigger Lathuya                         # stage 0: 731 (0, coin, 2)
+finish
+trade Lathuya ImperialMythrilPiece x2   # stage 0, not the materials: nothing
+trade Lathuya PlatinumSheet x1 SquareOfVelvetCloth x1 SquareOfKarakulLeather x1 FlaskOfVenomPotion x1   # 732
+finish                                  # stage 1, taken
+trigger Lathuya                         # stage 1: 733 (the bazubands, coin, 2)
+finish
+trade Lathuya ImperialMythrilPiece x2   # 734 (0, coin, 2)
+finish                                  # taken, stage 2, PaymentDay today, mustZone, the slip
+trigger Lathuya                         # not yet: 735
+finish
+charvar [BLUAF]PaymentDay 0             # a GM: the day past
+trigger Lathuya                         # not zoned: 735
+finish
+rezone
+trigger Lathuya                         # 736 (the bazubands)
+finish                                  # given; Remaining 6; RestingDay today; mustZone; the slip taken
+trigger Lathuya                         # one made, resting: 737
+finish
+rezone
+trigger Lathuya                         # zoned, RestingDay is today (not past): 737
+finish

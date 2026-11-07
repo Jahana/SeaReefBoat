@@ -1,0 +1,53 @@
+# Petals for Parelbriaux (otherAreas 74): the edges. Sheltering Doubt current (the mission's false side, Darkness Named
+# current, is #early: a GM's mission step after login overwrites the current mission, which the recorder refuses). A trade
+# to Chemioue while available: no trade handler; Parelbriaux at
+# Prog 0: nil, 296; Ondieulix at Prog 0: nil, 285; Prog 1 (a GM): Ondieulix nil. Accepted at Prog 2 (a GM), Lufaise in fog:
+# the ???: nil (Prog 2); the local NMKilled 1 (a GM): nil. Prog 3 (a GM), NMKilled 0 (a GM): Baumesel popped; Prog 2 (a GM)
+# before the kill: its death sets NMKilled all the same (no Prog test). Prog 3: the ???: the petal, 115, finished: Prog 4.
+# Prog 3 again (a GM), NMKilled still 1: giveKeyItem again (a no-op: the petal is held), 115. Fog with Baumesel up is in the main flow. Ondieulix at Prog
+# 4 with a full inventory: 516, finished: not completed, the petal kept; room: 516: completed. Completed with Prog 4 (a
+# GM): Ondieulix nil, 285 (the accepted section is off).
+lists TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/Parelbriaux/onTrigger TavnazianSafehold/Ondieulix/onTrigger TavnazianSafehold/onEventFinish/512 TavnazianSafehold/onEventFinish/513 TavnazianSafehold/onEventFinish/514 TavnazianSafehold/onEventFinish/516 LufaiseMeadows/qm_baumesel/onTrigger LufaiseMeadows/Baumesel/onMobDeath LufaiseMeadows/onEventFinish/115
+lists TavnazianSafehold/Chemioue/onTrade
+char zone=TavnazianSafehold pos=83.5,-34,67.6 job=WAR lvl=75
+mission Cop ShelteringDoubt current
+item ChocoboFeather
+login
+trade Chemioue ChocoboFeather x1        # available: no trade handler; nothing
+warp 116.8,-41.2,43.2 TavnazianSafehold
+trigger Parelbriaux                     # Prog 0: nil; 296
+finish
+warp 8.3,-25,65.4 TavnazianSafehold
+trigger Ondieulix                       # Prog 0: nil; 285
+finish
+charvar Quest[4][74]Prog 1              # a GM
+trigger Ondieulix                       # Prog 1: nil; 285
+finish
+quest OtherAreas.PetalsForParelbriaux accepted # a GM
+charvar Quest[4][74]Prog 2              # a GM
+warp -209,-16.2,288.9 LufaiseMeadows
+weather 3                               # a GM: fog
+trigger qm_baumesel                     # Prog 2: nil; its default
+localvar NMKilled 1                     # a GM
+trigger qm_baumesel                     # Prog 2, NMKilled 1: nil
+localvar NMKilled 0                     # a GM
+charvar Quest[4][74]Prog 3              # a GM
+trigger qm_baumesel                     # Prog 3, fog: Baumesel popped
+charvar Quest[4][74]Prog 2              # a GM, before the kill
+kill BAUMESEL                           # any Prog: NMKilled 1
+charvar Quest[4][74]Prog 3              # a GM
+trigger qm_baumesel                     # NMKilled 1: the petal; 115
+finish                                  # Prog 4
+charvar Quest[4][74]Prog 3              # a GM
+trigger qm_baumesel                     # NMKilled still 1: giveKeyItem again (a no-op: the petal is held); 115
+finish                                  # Prog 4
+warp 8.3,-25,65.4 TavnazianSafehold
+fill-inventory
+trigger Ondieulix                       # Prog 4: 516
+finish                                  # no room: not completed; the petal kept
+free-inventory
+trigger Ondieulix                       # 516
+finish                                  # completed
+charvar Quest[4][74]Prog 4              # a GM: Prog 4 while completed
+trigger Ondieulix                       # completed: the accepted section is off: nil; 285
+finish

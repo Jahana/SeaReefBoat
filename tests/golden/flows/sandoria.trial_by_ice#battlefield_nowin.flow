@@ -1,0 +1,23 @@
+# Trial by Ice (sandoria 59), the battlefield's arms without a win. Accepted without the fork: IP_Entrance opens no menu
+# (the fork is required: the entry's message 7258). Available with the fork: no menu (BattlefieldQuest's entry wants the
+# status at accepted or more; a status read that stays in Lua). Accepted with the fork: entered (the fork taken), then
+# left through Ice_Protocrystal (32003, option 4: leaveBattlefield): no 32001, no whisper; Gulmama then has neither key
+# item: 718 (a new fork).
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=WAR lvl=75
+quest Sandoria.TrialByIce accepted
+login
+trigger IP_Entrance                       # accepted, no fork: no menu
+finish-if-event
+keyitem TuningForkOfIce
+quest Sandoria.TrialByIce available
+trigger IP_Entrance                       # available, the fork: no menu
+finish-if-event
+quest Sandoria.TrialByIce accepted
+trigger IP_Entrance                       # accepted, the fork: 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+trigger Ice_Protocrystal                  # the exit: 32003
+finish option=4                           # left: no win
+warp -185.5,0.0,110.1 NorthernSanDoria
+trigger Gulmama                           # accepted, neither key item: 718
+finish                                    # a new fork

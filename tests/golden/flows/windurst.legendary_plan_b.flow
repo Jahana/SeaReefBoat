@@ -1,0 +1,62 @@
+# Legendary Plan B (windurst 44): Kopuro-Popuro (Windurst Woods; no default action) and Kororo (default 277; A Greeting
+# Cardian's container answers him with 304 once it is completed). A level-75 WAR, The All-New C-2000 completed (GM). A
+# Greeting Cardian accepted (GM) at Prog 0: no arm (C-2000's 293); Prog 1: 301. A Greeting Cardian completed (GM, Prog
+# still 1): fame level 2: 293 (no offer, not 301); the three traded while available: nothing. Level 3 with needToZone (a
+# GM's flag, as A Greeting Cardian's completion sets it): 306; rezoned: 308 (0, 529, 940, 858), option 2: begun (any
+# option). Accepted: 309; each two of the three traded: 309; Kororo 312 (after A Greeting Cardian's 304). A full bag:
+# 314, npcUtil.completeQuest fails (no room for the armlets: ITEM_CANNOT_BE_OBTAINED): nothing more. Room: 314: the
+# Scentless Armlets, 700 gil, fame 30, completed; the three taken (the Bone Chip kept); needToZone. Completed: 316; a
+# trade: nothing; Kororo: nothing (304).
+char zone=WindurstWoods pos=-1.0,-4.75,-21.0 job=WAR lvl=75
+fame Windurst 124
+item 529
+item WolfHide
+item RevivalTreeRoot
+item BoneChip
+login
+quest Windurst.TheAllNewC2000 completed
+quest Windurst.AGreetingCardian accepted
+trigger Kopuro-Popuro                   # A Greeting Cardian accepted, Prog 0: no arm; C-2000 completed: 293
+finish
+charvar Quest[2][43]Prog 1
+trigger Kopuro-Popuro                   # A Greeting Cardian accepted, Prog 1: 301
+finish
+quest Windurst.AGreetingCardian completed
+trigger Kopuro-Popuro                   # A Greeting Cardian completed (Prog 1), fame level 2: no offer, not 301; 293
+finish
+trade Kopuro-Popuro 529 x1 WolfHide x1 RevivalTreeRoot x1  # available: no trade arm: nothing
+fame Windurst 125
+charvar [generic]mustZone 241           # needToZone (a GM)
+trigger Kopuro-Popuro                   # level 3, needToZone: 306
+finish
+rezone                                  # needToZone cleared
+trigger Kopuro-Popuro                   # 308 (0, 529, 940, 858)
+finish option=2                         # begun (any option)
+trigger Kopuro-Popuro                   # accepted: 309 (0, 529, 940, 858)
+finish
+trade Kopuro-Popuro WolfHide x1 RevivalTreeRoot x1  # no Luminicloth: 309
+finish
+trade Kopuro-Popuro 529 x1 RevivalTreeRoot x1  # no hide: 309
+finish
+trade Kopuro-Popuro 529 x1 WolfHide x1  # no root: 309
+finish
+walk -11.0,-2.75,7.0
+trigger Kororo                          # A Greeting Cardian's 304
+finish
+trigger Kororo                          # his script: C-2000 not accepted; accepted: 312 (0, 529, 940, 858)
+finish
+walk -1.0,-4.75,-21.0
+fill-inventory
+trade Kopuro-Popuro 529 x1 WolfHide x1 RevivalTreeRoot x1 BoneChip x1  # 314 (0, 529, 940, 858)
+finish                                  # no room: ITEM_CANNOT_BE_OBTAINED (the armlets); completeQuest false: no more
+free-inventory
+trade Kopuro-Popuro 529 x1 WolfHide x1 RevivalTreeRoot x1 BoneChip x1  # 314
+finish                                  # the armlets, 700 gil, fame 30, completed; the three taken; needToZone
+trigger Kopuro-Popuro                   # completed (fame level 3: no C-3000 offer): 316
+finish
+trade Kopuro-Popuro BoneChip x1         # completed: nothing
+walk -11.0,-2.75,7.0
+trigger Kororo                          # 304
+finish
+trigger Kororo                          # his script: completed: nothing; 304 again
+finish

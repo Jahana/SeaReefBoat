@@ -1,0 +1,12 @@
+# The Rivalry (sandoria 75): Ufanne's Cycle is a char local var, 0 or 1 in play; a GM sets it to 2 (player:setLocalVar), which is neither
+# arm of his onTrigger (:88): nil, no reply. Section 2 (accepted). The other brother's quest is completed: its Ufanne arm answers nil at Cycle 2 as well.
+lists PortSanDoria/Ufanne/onTrigger
+char zone=PortSanDoria pos=-13.2,-2,-43.755 job=WAR lvl=10
+quest Sandoria.TheRivalry accepted
+quest Sandoria.TheCompetition completed
+login
+localvar Cycle 2                          # GM: neither 0 nor 1
+trigger Ufanne                            # Cycle 2: nil (no event, no reply)
+localvar Cycle 0
+trigger Ufanne                            # Cycle 0: 309 (control: the arm answers once the var is back)
+finish

@@ -1,0 +1,45 @@
+# Fires of Discontent (crystalWar 13), the edges: a level 99 Warrior in Bastok Markets [S], Better Part of Valor not
+# completed (missions as the main flow). Engelhart: no section: his default 104 (Better Part of Valor available with no
+# nation opener: none of its handlers either). Metalworks: Iron Eater while available: his default 604. Better Part of
+# Valor completed (a GM): Engelhart 120, finished on option 1: begun (any option). Metalworks: Iron Eater at Prog 0: 957.
+# Grauberg [S]: qm5 at Prog 0 and 2 (GMs): nil. Bastok Markets [S]: Engelhart at Prog 7 (a GM): nil (104); Pagdako at
+# Prog 7: 123; Gentle Tiger at Prog 7: 161; Metalworks: Iron Eater at Prog 7: 957; Grauberg [S]: qm5 at Prog 7: nil.
+lists BastokMarketsS/Engelhart/onTrigger BastokMarketsS/Pagdako/onTrigger BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/120 Metalworks/Iron_Eater/onTrigger GraubergS/qm5/onTrigger
+char zone=BastokMarketsS pos=-78.585,-4.425,-125.327 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Engelhart                       # Better Part of Valor not completed: 104
+finish-if-event
+warp 94.436,-19.532,1.814 Metalworks
+trigger Iron_Eater                      # available: no section: his default 604
+finish-if-event
+quest CrystalWar.BetterPartOfValor completed
+warp -78.585,-4.425,-125.327 BastokMarketsS
+trigger Engelhart                       # 120
+finish option=1                         # begun (any option)
+warp 94.436,-19.532,1.814 Metalworks
+trigger Iron_Eater                      # Prog 0: 957
+finish
+warp 261.293,33.192,515.257 GraubergS
+trigger qm5                             # Prog 0: nil
+finish-if-event
+charvar Quest[7][13]Prog 2              # a GM
+trigger qm5                             # Prog 2: nil
+finish-if-event
+charvar Quest[7][13]Prog 7              # a GM: past every arm
+trigger qm5                             # Prog 7: nil
+finish-if-event
+warp -78.585,-4.425,-125.327 BastokMarketsS
+trigger Engelhart                       # Prog 7: nil: 104
+finish-if-event
+trigger Pagdako                         # Prog 7: 123
+finish
+trigger Gentle_Tiger                    # Prog 7: 161
+finish
+warp 94.436,-19.532,1.814 Metalworks
+trigger Iron_Eater                      # Prog 7: 957
+finish

@@ -1,0 +1,309 @@
+diff --git a/src/test/test_lua_environment.cpp b/src/test/test_lua_environment.cpp
+index 0caf92e4..fca4e565 100644
+--- a/src/test/test_lua_environment.cpp
++++ b/src/test/test_lua_environment.cpp
+@@ -35,6 +35,295 @@
+ #include "lua/lua_test_entity_assertions.h"
+ #include "mock_manager.h"
+ 
++// golden_hooks
++#include "ai/ai_container.h"
++#include "ai/helpers/targetfind.h"
++#include "ai/states/magic_state.h"
++#include "attack.h"
++#include "attackround.h"
++#include "entities/battle_entity.h"
++#include "entities/char_entity.h"
++#include "entities/mob_entity.h"
++#include "lua/lua_base_entity.h"
++#include "lua/luautils.h"
++#include "petskill.h"
++#include "spell.h"
++#include "status_effect.h"
++#include "status_effect_container.h"
++#include "utils/battleutils.h"
++
++// ---- Golden-value capture hooks (test only) ---------------------------------------------------------------------
++//
++// golden_hooks.* reaches what xi_test's Lua surface cannot: the native auto-attack swing (CAttackRound / CAttack,
++// Sneak / Trick Attack), GetCritHitRate and the native GetHitRate, the cast and recast times, MagicDmgTaken, a spell
++// carrying the real target count of its area, a real CPetSkill for the blood pact scripts, a mob in a char's view
++// list and an effect's start time to the millisecond. Applied from
++// csharp/tests/XI.Verify.Golden/capture/xi_test_hooks.patch by build_xi_test.sh and reverted after the build; the
++// engine itself is untouched.
++namespace
++{
++
++// m_PSpell / m_castTime are protected: reached through a member pointer formed in a derived class
++struct GoldenMagicStatePeek : CMagicState
++{
++    static auto spell() -> std::unique_ptr<CSpell> CMagicState::*
++    {
++        return &GoldenMagicStatePeek::m_PSpell;
++    }
++};
++
++auto goldenBattle(CLuaBaseEntity* entity, const char* hook) -> CBattleEntity*
++{
++    auto* PEntity = entity ? dynamic_cast<CBattleEntity*>(entity->GetBaseEntity()) : nullptr;
++    if (PEntity == nullptr)
++    {
++        ShowErrorFmt("golden_hooks.{}: not a battle entity", hook);
++    }
++
++    return PEntity;
++}
++
++// the spells and pet skills handed to Lua live for the whole run
++std::vector<std::unique_ptr<CSpell>>    goldenSpells;
++std::vector<std::unique_ptr<CPetSkill>> goldenPetSkills;
++
++void registerGoldenHooks()
++{
++    auto hooks = lua.create_named_table("golden_hooks");
++
++    // battleutils::GetCritHitRate(attacker, defender, ignoreSneakTrickAttack, slot)
++    hooks.set_function(
++        "critHitRate",
++        [](CLuaBaseEntity* attacker, CLuaBaseEntity* defender, bool ignoreSneakTrickAttack, uint8 slot) -> uint8
++        {
++            auto* PAttacker = goldenBattle(attacker, "critHitRate");
++            auto* PDefender = goldenBattle(defender, "critHitRate");
++            if (!PAttacker || !PDefender)
++            {
++                return 0;
++            }
++
++            return battleutils::GetCritHitRate(PAttacker, PDefender, ignoreSneakTrickAttack, static_cast<SLOTTYPE>(slot));
++        });
++
++    // battleutils::GetHitRate(attacker, defender, attackNumber, offsetAccuracy): Sneak / Trick Attack's sure hit, else
++    // the Lua rate floored to a percent
++    hooks.set_function(
++        "hitRate",
++        [](CLuaBaseEntity* attacker, CLuaBaseEntity* defender, uint8 attackNumber, int16 offsetAccuracy) -> uint8
++        {
++            auto* PAttacker = goldenBattle(attacker, "hitRate");
++            auto* PDefender = goldenBattle(defender, "hitRate");
++            if (!PAttacker || !PDefender)
++            {
++                return 0;
++            }
++
++            return battleutils::GetHitRate(PAttacker, PDefender, attackNumber, offsetAccuracy);
++        });
++
++    // the first swing of a native attack round: CAttackRound(attacker, defender), CAttack::SetCritical (the Lua pDIF,
++    // drawn from the caller's math.random), CAttack::ProcessDamage. The fractions argument is the C# side's draw
++    // sequence (the capture scripts math.random itself). Returns damage, Sneak Attack, Trick Attack, damage ratio,
++    // the round's swing count.
++    hooks.set_function(
++        "swing",
++        [](CLuaBaseEntity* attacker, CLuaBaseEntity* defender, bool critical, sol::object) -> std::tuple<int32, bool, bool, float, uint8>
++        {
++            auto* PAttacker = goldenBattle(attacker, "swing");
++            auto* PDefender = goldenBattle(defender, "swing");
++            if (!PAttacker || !PDefender)
++            {
++                return { 0, false, false, 0.0f, 0 };
++            }
++
++            // the round looks for a Trick Attack partner around the attacker's battle target, which must be set
++            if (PAttacker->StatusEffectContainer->HasStatusEffect(xi::StatusEffect::TrickAttack) && PAttacker->GetBattleTarget() == nullptr)
++            {
++                ShowError("golden_hooks.swing: Trick Attack without a battle target");
++                return { 0, false, false, 0.0f, 0 };
++            }
++
++            CAttackRound round(PAttacker, PDefender);
++            if (round.GetAttackSwingCount() == 0)
++            {
++                return { 0, false, false, 0.0f, 0 };
++            }
++
++            CAttack& attack = round.GetAttack(0);
++            attack.SetCritical(critical);
++            attack.ProcessDamage();
++
++            return { attack.GetDamage(), attack.IsSneakAttack(), attack.IsTrickAttack(), attack.GetDamageRatio(), round.GetAttackSwingCount() };
++        });
++
++    // battleutils::CalculateSpellCastTime on a magic state holding a copy of the spell (never initialised or run):
++    // milliseconds, Quick Magic's instant cast
++    hooks.set_function(
++        "castTime",
++        [](CLuaBaseEntity* entity, uint16 spellId) -> std::tuple<int64, bool>
++        {
++            auto* PEntity = goldenBattle(entity, "castTime");
++            auto* PSpell  = spell::GetSpell(static_cast<SpellID>(spellId));
++            if (!PEntity || !PSpell)
++            {
++                return { 0, false };
++            }
++
++            auto state = CState::make<CMagicState>(PEntity, EntityId(PEntity), static_cast<SpellID>(spellId), uint8{ 0 });
++            (*state).*GoldenMagicStatePeek::spell() = PSpell->clone();
++            const auto cast = battleutils::CalculateSpellCastTime(PEntity, state.get());
++
++            return { timer::count_milliseconds(cast), state->IsInstantCast() };
++        });
++
++    // battleutils::CalculateSpellRecastTime, in milliseconds
++    hooks.set_function(
++        "recastTime",
++        [](CLuaBaseEntity* entity, uint16 spellId) -> int64
++        {
++            auto* PEntity = goldenBattle(entity, "recastTime");
++            auto* PSpell  = spell::GetSpell(static_cast<SpellID>(spellId));
++            if (!PEntity || !PSpell)
++            {
++                return 0;
++            }
++
++            return timer::count_milliseconds(battleutils::CalculateSpellRecastTime(PEntity, PSpell));
++        });
++
++    // battleutils::MagicDmgTaken(defender, damage, element)
++    hooks.set_function(
++        "magicDmgTaken",
++        [](CLuaBaseEntity* defender, int32 damage, uint8 element) -> int32
++        {
++            auto* PDefender = goldenBattle(defender, "magicDmgTaken");
++            if (!PDefender)
++            {
++                return 0;
++            }
++
++            return battleutils::MagicDmgTaken(PDefender, damage, static_cast<ELEMENT>(element));
++        });
++
++    // a copy of the spell with the target count CBattleEntity::OnCastFinished finds around the target (the Lua AoE
++    // type and radius, TargetFind within the area / cone, else the target alone): the spell, the count
++    hooks.set_function(
++        "spellTargets",
++        [](CLuaBaseEntity* caster, CLuaBaseEntity* target, uint16 spellId) -> std::tuple<CSpell*, uint16>
++        {
++            auto* PCaster = goldenBattle(caster, "spellTargets");
++            auto* PTarget = goldenBattle(target, "spellTargets");
++            auto* PSpell  = spell::GetSpell(static_cast<SpellID>(spellId));
++            if (!PCaster || !PTarget || !PSpell)
++            {
++                return { nullptr, 0 };
++            }
++
++            auto* PCopy = goldenSpells.emplace_back(PSpell->clone()).get();
++
++            PCaster->PAI->TargetFind->reset();
++            uint8 flags = FINDFLAGS_NONE;
++            if (PCopy->getValidTarget() & TARGET_PLAYER_DEAD)
++            {
++                flags |= FINDFLAGS_DEAD;
++            }
++
++            const auto result    = luautils::callGlobal<sol::table>("xi.combat.magicAoE.calculateTypeAndRadius", PCaster, PCopy);
++            SPELLAOE   aoeType   = result.get_or(1, SPELLAOE_NONE);
++            float      aoeRadius = result.get_or(2, 0.0f);
++
++            switch (aoeType)
++            {
++                case SPELLAOE_RADIAL:
++                    PCaster->PAI->TargetFind->findWithinArea(PTarget, AOE_RADIUS::TARGET, aoeRadius, flags, PCopy->getValidTarget());
++                    break;
++                case SPELLAOE_CONAL:
++                    PCaster->PAI->TargetFind->findWithinCone(PTarget, aoeRadius, 45, flags, PCopy->getValidTarget());
++                    break;
++                default:
++                    PCaster->PAI->TargetFind->findSingleTarget(PTarget, flags, PCopy->getValidTarget());
++                    break;
++            }
++
++            const auto totalTargets = static_cast<uint16>(PCaster->PAI->TargetFind->m_targets.size());
++            PCopy->setTotalTargets(totalTargets);
++            PCopy->setPrimaryTargetID(PTarget->id);
++            PCaster->PAI->TargetFind->reset();
++
++            return { PCopy, totalTargets };
++        });
++
++    // a copy of the pet skill (battleutils::GetPetSkill) carrying the given TP, as the pet skill state hands it to
++    // the scripts
++    hooks.set_function(
++        "petSkill",
++        [](uint16 skillId, int16 tp) -> CPetSkill*
++        {
++            auto* PSkill = battleutils::GetPetSkill(skillId);
++            if (!PSkill)
++            {
++                ShowErrorFmt("golden_hooks.petSkill: no pet skill {}", skillId);
++                return nullptr;
++            }
++
++            auto* PCopy = goldenPetSkills.emplace_back(std::make_unique<CPetSkill>(*PSkill)).get();
++            PCopy->setTP(tp);
++
++            return PCopy;
++        });
++
++    // puts the mob in (or takes it out of) the char's list of visible mobs (SpawnMOBList, which only the zone's
++    // spawn update fills): a player's area search only finds the mobs in it
++    hooks.set_function(
++        "seeMob",
++        [](CLuaBaseEntity* player, CLuaBaseEntity* mob, bool visible) -> bool
++        {
++            auto* PChar = player ? dynamic_cast<CCharEntity*>(player->GetBaseEntity()) : nullptr;
++            auto* PMob  = mob ? dynamic_cast<CMobEntity*>(mob->GetBaseEntity()) : nullptr;
++            if (!PChar || !PMob)
++            {
++                ShowError("golden_hooks.seeMob: needs a char and a mob");
++                return false;
++            }
++
++            if (visible)
++            {
++                PChar->SpawnMOBList[PMob->id] = PMob;
++            }
++            else
++            {
++                PChar->SpawnMOBList.erase(PMob->id);
++            }
++
++            return true;
++        });
++
++    // starts the entity's effect the given milliseconds ago (getTimeRemaining reads the steady clock)
++    hooks.set_function(
++        "setEffectElapsed",
++        [](CLuaBaseEntity* entity, uint16 effectId, uint32 elapsedMs) -> bool
++        {
++            auto* PEntity = goldenBattle(entity, "setEffectElapsed");
++            if (!PEntity)
++            {
++                return false;
++            }
++
++            auto* PEffect = PEntity->StatusEffectContainer->GetStatusEffect(static_cast<xi::StatusEffect>(effectId));
++            if (!PEffect)
++            {
++                return false;
++            }
++
++            PEffect->SetStartTime(timer::now() - std::chrono::milliseconds(elapsedMs));
++
++            return true;
++        });
++}
++
++} // namespace
++
+ TestLuaEnvironment::TestLuaEnvironment(MockManager* mockManager)
+ : mockManager_(mockManager)
+ {
+@@ -95,6 +384,8 @@ void TestLuaEnvironment::registerTestSpecificFunctions() const
+             return mockManager_->stub(path, impl.value_or(sol::lua_nil));
+         });
+ 
++    registerGoldenHooks();
++
+     lua.set_function(
+         "spy",
+         [this](const std::string& path)

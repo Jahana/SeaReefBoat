@@ -1,0 +1,43 @@
+# Everyone's Grudging (outlands 4): a level 75 Warrior at Windurst fame 488 (level 7), A Question of Taste completed (a
+# GM: no mustZone, Prog 0), the curse (charvar rancorCurse 1, as an Altar of Rancor's flame sets it), a Rancor Flame (rare:
+# one at a time; a GM gives the next after each trade). Available: the flame traded to Jakoh: no trade handler (his script
+# has none): nothing; Jakoh 107 (a progress cutscene: 0, Rancor Flame): begun, Excommunicate of Kazham. Accepted, Prog 0:
+# Jakoh 108; Etteh: A Question of Taste's completed section answers nil (rancorCurse 1, fame level 7, Everyone's Grudging
+# not completed), so 109; Romaa 276 (her script: no Tuning Out). Den of Rancor: four Rancor Flames traded to the Altar of
+# Rancor _4ge (its NPC script: one lantern lit each, an Unlit Lantern back; the fourth: TANSFORMED_INTO_A_MONSTER, Rancor
+# Torch spawned and claimed); Rancor Torch killed: Prog 1 (his mob script: rancorCurse 0). Kazham: Etteh: rancorCurse 0:
+# A Question of Taste's 53 (Progress) beats 109; option 2 (Option 1: no other change). Jakoh: Prog 1: 110 (an Event),
+# finished: completed (Windurst fame +60, 11000 gil). Jakoh again: completed: no section; A Question of Taste's nil: his
+# script, the default 113.
+lists Kazham/Jakoh_Wahcondalo/onTrigger Kazham/Jakoh_Wahcondalo/onTrade Kazham/Etteh_Sulaej/onTrigger Kazham/Romaa_Mihgo/onTrigger DenOfRancor/Rancor_Torch/onMobDeath Kazham/onEventFinish/110
+char zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+fame Windurst 488
+quest Outlands.AQuestionOfTaste completed
+charvar rancorCurse 1
+item RancorFlame
+login
+trade Jakoh_Wahcondalo RancorFlame x1   # available: no trade handler: nothing
+trigger Jakoh_Wahcondalo                # 107 (0, Rancor Flame)
+finish                                  # begun; Excommunicate of Kazham
+trigger Jakoh_Wahcondalo                # Prog 0: 108
+finish
+trigger Etteh_Sulaej                    # A Question of Taste: nil (the guard); 109
+finish
+trigger Romaa_Mihgo                     # 276
+finish
+warp 119.25,12.904,-319.789 DenOfRancor # beside the Altar of Rancor _4ge
+trade _4ge RancorFlame x1               # its script: the flame taken, an Unlit Lantern; the first lantern lit
+item RancorFlame                        # a GM: the next flame
+trade _4ge RancorFlame x1               # the second lantern
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1               # the third lantern
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1               # the fourth: TANSFORMED_INTO_A_MONSTER; Rancor Torch spawned, claimed
+kill RANCOR_TORCH                       # Prog 0: Prog 1; his mob script: rancorCurse 0
+warp 101.702,-15.023,-115.841 Kazham
+trigger Etteh_Sulaej                    # rancorCurse 0: A Question of Taste's 53 (Progress) beats 109
+finish option=2                         # A Question of Taste: Option 1
+trigger Jakoh_Wahcondalo                # Prog 1: 110
+finish                                  # completed: Windurst fame +60; 11000 gil
+trigger Jakoh_Wahcondalo                # completed: no section; A Question of Taste's nil: his script (nothing), the default 113
+finish

@@ -1,0 +1,33 @@
+# probe (quest rework P6): trigger <Npc> here, a talk from where the char stands (no walk to 1.5 yalms east of the NPC),
+# for a handler that reads the char's own position. Recorded on the Lua of both quests (P6); both are now C#
+# (His Name is Valgeir in Other Areas group 1, The Sand Charm in group 2), so a re-record is refused and the probe stays
+# as a C#-side regression check of `here`: the replay runs the C# ports. His Name is Valgeir's Felisa (otherAreas 3;
+# Mhaura, at 45.441,-7.999,39.381) answers 230 only while player:getZPos() > 38.5; her own script answers 235 below z
+# 39, else 221. The Sand Charm's Blandine (otherAreas 8; the second Blandine, 20 ids after the first, at 23.118,-7.758,
+# 39.575) offers 125 only outside the docking box 16 < x < 32, 29 < z < 38 (the Lua: zPos <= 29 or zPos >= 38 or
+# xPos <= 16 or xPos >= 32). A plain trigger stands east of the NPC, at her z 39.381: that is above 38.5, so it gets Felisa's
+# 230, and outside Blandine's box (z 39.575), so it gets 125. Only the z 37.5 step (the quest's nil, her 235) and the step
+# inside Blandine's box (the quest's nil, the zone's 122) need `here`.
+# Blandine's box faces: only z 38 can be bracketed, inside 37.9 and outside 38. The talk range is 6 yalms (3D, InTalkRange)
+# from her at x 23.118, z 39.575: the x 16 face (7.1 yalms away), the x 32 face (8.9) and the z 29 face (10.6) are out of it.
+lists Mhaura/Felisa/onTrigger Mhaura/onEventFinish/230 Mhaura/Blandine/onTrigger Mhaura/onEventFinish/125
+char zone=Mhaura pos=46.9,-8,39.4 job=WAR lvl=30
+quest OtherAreas.HisNameIsValgeir accepted
+keyitem AragoneuPizza
+fame Windurst 300
+login
+walk 45.4,-8,37.5
+trigger Felisa here                     # z 37.5: the quest's nil; her script's 235 (z below 39)
+finish
+walk 45.4,-8,38.8
+trigger Felisa here                     # z 38.8 (above 38.5, below 39): 230
+finish                                  # Prog 1
+walk 24,-7.7,36
+trigger Blandine+20 here                # x 24, z 36: inside the box: the quest's nil, the zone's default 122
+finish-if-event
+walk 24,-7.7,37.9
+trigger Blandine+20 here                # z 37.9: just inside the z 38 face, 122
+finish-if-event
+walk 24,-7.7,38
+trigger Blandine+20 here                # z 38: on the face, outside (zPos >= 38), 125
+finish

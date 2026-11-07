@@ -1,0 +1,105 @@
+# Waking the Colossus (ahtUrhgan 74): a level 75 Warrior of Bastok with ToAU 48 Eternal Mercenary current, the SP
+# Wildcat Badge (mercenary rank 3), five Slabs of Plumbago. Naja Salaheem: no script, no default; ToAU 48's 3151
+# (replaceDefault) answers when no quest does. Imperial Whitegate: no script; default GATE_IS_FIRMLY_CLOSED (a
+# messageSpecial, no event). Available: Imperial Whitegate at Prog 0: nil: the default; area 13 (walked into after the
+# zone-in lock: three ticks): 925, finished: Prog 1; area 13 again: nothing; the gate 926, option 1: nothing; 926,
+# option 0: the Imperial Missive, begun. Ru'Lude Gardens: _6r9 at Prog 1: 10115 (Prog 2); at Prog 2 without the letters:
+# nil: the door's script 138. Halver 567, option 1: nothing; option 0: the San d'Orian letter; again: nil: his script
+# (Bastok: a showText). Iron Eater 968, option 0: the Bastokan letter. Kupipi 429, option 0: the Windurstian letter.
+# _6r9 with the three: 10116, option 1: nothing; option 0: the Jeuno letter; again: nil: 138. Whitegate: the gate 927,
+# option 1: nothing; option 0: the five key items taken, the Present for Megomak; again: no handler of section 4: the
+# default. Mount Zhayolm: the door 154, option 0: nothing; three Slabs with the Present only: nil; the door 154, option
+# 1: the Present taken, Megomak's Shopping List; again: nil: the default ACID_EATEN_DOOR; two Slabs: nil; three: 155,
+# finished: the Lightning Cell, the trade taken. blank_lamp (306, Prog 3) loads hidden: `#lamp` holds its steps; here a
+# GM sets Prog 3. The Nyzul Isle instance (Prog 4, the cell taken) is a GM's too (PLATFORM-NEEDS: an instance run).
+# Alzadaal's zone-in at Prog 4 without the Whisper: 307 (left open), finished: the Whisper of Radiance. Whitegate: the
+# gate 928, option 1: nothing; option 0: Prog 5; again: nil: the default. Naja 929 ([0] 3, [7] 0: no Colossus item, no
+# Alexander), option 1: the Colossus's Mantle; completed (Heir of the Blessed Radiance, an Imperial Gold Piece); the
+# Whisper taken; Quest[6][75]Timer 1 until the next JST midnight. Naja again: completed (no section), Divine
+# Interference not available (the Timer): ToAU 48's 3151.
+lists AhtUrhganWhitegate/Imperial_Whitegate/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/13 RuludeGardens/_6r9/onTrigger ChateauDoraguille/Halver/onTrigger Metalworks/Iron_Eater/onTrigger HeavensTower/Kupipi/onTrigger MountZhayolm/Acid-eaten_Door/onTrigger MountZhayolm/Acid-eaten_Door/onTrade AlzadaalUnderseaRuins/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/929
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75 nation=1
+mission Toau EternalMercenary current
+keyitem SpWildcatBadge
+item SlabOfPlumbago x5
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock (trigger areas)
+trigger Naja_Salaheem                   # no quest reply: ToAU 48's 3151 ([0] 3)
+finish
+walk 35,-6.6,-45                        # area 13, available, Prog 0: 925
+finish                                  # Prog 1
+walk 24.2,-7.804,-45.591                # out of area 13
+walk 35,-6.6,-45                        # Prog 1: nil: nothing
+trigger Imperial_Whitegate              # Prog 1, no missive: 926
+finish option=1                         # not 0: nothing
+trigger Imperial_Whitegate              # 926
+finish option=0                         # the Imperial Missive (KEYITEM_OBTAINED); begun
+trigger Imperial_Whitegate              # accepted, the missive: no gate handler in section 2: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+warp 0,-5,66 RuludeGardens
+trigger _6r9                            # Prog 1: 10115
+finish                                  # Prog 2
+trigger _6r9                            # Prog 2, no letters: nil: the door's script 138 (param 0)
+finish
+warp 2.4,0,0 ChateauDoraguille
+trigger Halver                          # Prog 2, no San d'Orian letter: 567
+finish option=1                         # nothing
+trigger Halver                          # 567
+finish option=0                         # the San d'Orian Approval Letter
+trigger Halver                          # the letter held: nil: his script (Bastok: HALVER_OFFSET + 1092, a showText)
+finish-if-event
+warp 91,-19,1 Metalworks
+trigger Iron_Eater                      # 968
+finish option=0                         # the Bastokan Approval Letter
+warp 2,0,30 HeavensTower
+trigger Kupipi+1                        # 429
+finish option=0                         # the Windurstian Approval Letter
+warp 0,-5,66 RuludeGardens
+trigger _6r9                            # the three letters, no Jeuno one: 10116
+finish option=1                         # nothing
+trigger _6r9                            # 10116
+finish option=0                         # the Jeunoan Approval Letter
+trigger _6r9                            # the Jeuno letter held: nil: 138
+finish
+warp 155.796,-4.199,0.03 AhtUrhganWhitegate
+trigger Imperial_Whitegate              # the Jeuno letter, no Present: 927
+finish option=1                         # nothing
+trigger Imperial_Whitegate              # 927
+finish option=0                         # missive and four letters taken; the Present for Megomak
+trigger Imperial_Whitegate              # section 4 has no gate handler: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+warp 271.9,-32,-88 MountZhayolm
+trigger Acid-eaten_Door                 # the Present, no list: 154
+finish option=0                         # not 1: nothing
+trade Acid-eaten_Door SlabOfPlumbago x3 # no shopping list: nil: nothing
+finish-if-event
+trigger Acid-eaten_Door                 # 154
+finish option=1                         # the Present taken; Megomak's Shopping List
+trigger Acid-eaten_Door                 # the list held: nil: ACID_EATEN_DOOR
+finish-if-event
+trade Acid-eaten_Door SlabOfPlumbago x2 # not exactly three: nil
+finish-if-event
+trade Acid-eaten_Door SlabOfPlumbago x3 # 155
+finish                                  # the Lightning Cell; the three slabs taken
+# blank_lamp (hidden at load; `#lamp` shows it): its 306 at Prog 2 with the cell sets Prog 3
+charvar Quest[6][74]Prog 3              # a GM: 306's write
+# the Nyzul Isle instance (PLATFORM-NEEDS: an instance run): its afterInstanceRegister takes the cell, its
+# onInstanceComplete sets Prog 4, its 1 sets the char down in Alzadaal at 180 -0.05 20
+delkeyitem LightningCell                # a GM: the instance's registration
+charvar Quest[6][74]Prog 4              # a GM: the instance's completion
+warp 180,-0.05,20 AlzadaalUnderseaRuins open   # Prog 4, no Whisper: the zone-in's 307, left open
+finish                                  # the Whisper of Radiance
+warp 155.796,-4.199,0.03 AhtUrhganWhitegate
+trigger Imperial_Whitegate              # the Whisper, Prog 4: 928
+finish option=1                         # nothing
+trigger Imperial_Whitegate              # 928
+finish option=0                         # Prog 5
+trigger Imperial_Whitegate              # Prog 5: nil: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # Prog 5: 929 ([0] 3, [7] 0)
+finish option=1                         # the Mantle; completed: title, Gold Piece; Whisper taken; DI's Timer 1
+trigger Naja_Salaheem                   # completed: no section; Divine Interference not available (Timer 1): 3151
+finish

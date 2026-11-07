@@ -1,0 +1,37 @@
+# Making Headlines (windurst 37) with CoP 3-3 (The Road Forks) current, the mission's lines at Kyume-Romeh (Windurst
+# Waters) and Yujuju (Port Windurst); Ancient Flames Beckon completed and The Road Forks current by GM, Making
+# Headlines accepted by GM. The login's zone-in is the mission's 871 (its finish: CoP Windurst status 1). Kyume-Romeh
+# at status 3 (GM): the mission's 873 (Progress; its finish: status 5); at status 5: its 878 (an importantEvent: its
+# first showing ranks Progress), then 878 (now an Event, the lookup's turn), then his script's turn: this quest's 668
+# (the Windurst Waters Scoop, bit 0), then 878 again. Yujuju at status 9 (GM): the mission's 592 (Progress; its
+# finish: status 11); at status 11: 593 (importantEvent), 593, his script's turn: this quest's 314 (the Port Windurst
+# Scoop, bit 1), then 593 again.
+char zone=WindurstWaters pos=-56.0,-4.5,23.2 job=WAR lvl=75
+mission Cop AncientFlamesBeckon completed
+mission Cop TheRoadForks current
+login                                   # the mission's zone-in 871
+finish                                  # CoP Windurst status 1
+quest Windurst.MakingHeadlines accepted
+missionstatus Cop 3 pos=1
+trigger Kyume-Romeh                     # status 3: the mission's 873
+finish                                  # status 5
+trigger Kyume-Romeh                     # status 5: the mission's 878 (important: first showing)
+finish
+trigger Kyume-Romeh                     # 878 (an Event now: the lookup's turn)
+finish
+trigger Kyume-Romeh                     # his script's turn: this quest's 668
+finish                                  # the Windurst Waters Scoop; bit 0
+trigger Kyume-Romeh                     # the lookup's turn: 878
+finish
+warp 200.0,-4.8,139.0 PortWindurst
+missionstatus Cop 9 pos=1
+trigger Yujuju                          # status 9: the mission's 592
+finish                                  # status 11
+trigger Yujuju                          # status 11: the mission's 593 (important: first showing)
+finish
+trigger Yujuju                          # 593 (an Event now: the lookup's turn)
+finish
+trigger Yujuju                          # his script's turn: this quest's 314
+finish                                  # the Port Windurst Scoop; bit 1
+trigger Yujuju                          # the lookup's turn: 593
+finish

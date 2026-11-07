@@ -1,0 +1,17 @@
+# Trial by Lightning (otherAreas 27): the battlefield entered while accepted, then the quest set available by GM
+# inside the arena: the win's 32001 (canSkipCS 1, battlefieldWin not set) is finished while available: Heir of the
+# Great Lightning and the Whisper of Storms all the same (the finish reads no status; kept Lua quirk). Ripapa,
+# available at fame level 1 with the whisper: 10020.
+char zone=CloisterOfStorms pos=533.5,-14.9,492.0 job=WAR lvl=75
+quest OtherAreas.TrialByLightning accepted
+keyitem TuningForkOfLightning
+login
+trigger LP_Entrance                       # accepted, the fork: 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+quest OtherAreas.TrialByLightning available
+kill LIGHTNING_GREMLIN-3                  # won while available: 32001 (canSkipCS 1)
+finish                                    # Heir of the Great Lightning, the Whisper of Storms
+warp 30.6,-15.6,56.0 Mhaura
+trigger Ripapa                            # available, fame level 1, the whisper: 10020
+finish

@@ -1,0 +1,35 @@
+# The Old Monument (jeuno 11): Mertaire and Mataligeat in Lower Jeuno, the Song Runes of Buburimu Peninsula. A level 30
+# warrior (ADVANCED_JOB_LEVEL; never begun): Mataligeat's 140, a sheet traded to Mertaire and Mataligeat while
+# offered (no trade handler: nil), the runes at Prog 0 (nil: SONG_RUNES_DEFAULT), Mertaire's 102 (Prog 1), then
+# MERTAIRE_MALLIEBELL_LEFT (messageName(..., 0, 0, 0, 0, true, false): showName true, turn false, so no NPC turn and no
+# update packet), the runes: a sheet at Prog 1 (nil), 0 (Prog 2), SONG_RUNES_REQUIRE, two sheets (not exact: nil), one
+# sheet: 2, with a full bag (SONG_RUNES_WRITING, not completed, the sheet kept), then with room (SONG_RUNES_WRITING;
+# completed: Poetic Parchment, Researcher of Classics, fame +7 x3, the sheet taken).
+# Completed: the runes answer for A Minstrel in Despair (SONG_RUNES_REQUIRE).
+lists LowerJeuno/Mertaire/onTrigger LowerJeuno/Mertaire/onTrade LowerJeuno/Mataligeat/onTrigger LowerJeuno/Mataligeat/onTrade BuburimuPeninsula/Song_Runes/onTrigger BuburimuPeninsula/Song_Runes/onTrade LowerJeuno/onEventFinish/102 BuburimuPeninsula/onEventFinish/0 BuburimuPeninsula/onEventFinish/2
+char zone=LowerJeuno pos=-19.5,0,-59 job=WAR lvl=30
+item SheetOfParchment x3
+login
+trigger Mataligeat                          # available: 140
+finish
+trade Mataligeat SheetOfParchment x1        # available: no trade handler, nil
+warp -244,16,-280 BuburimuPeninsula
+trigger Song_Runes                          # Prog 0: nil; SONG_RUNES_DEFAULT
+warp -19.5,0,-59 LowerJeuno
+trigger Mertaire                            # Prog 0: 102
+finish                                      # Prog 1
+trigger Mertaire                            # Prog 1: MERTAIRE_MALLIEBELL_LEFT (showName, no turn)
+trade Mertaire SheetOfParchment x1          # available: no trade handler, nil
+warp -244,16,-280 BuburimuPeninsula
+trade Song_Runes SheetOfParchment x1        # Prog 1: nil; no default trade: nothing
+trigger Song_Runes                          # Prog 1: cutscene 0
+finish                                      # Prog 2
+trigger Song_Runes                          # Prog 2: SONG_RUNES_REQUIRE (the sheet)
+trade Song_Runes SheetOfParchment x2        # not exactly one sheet: nil
+trade Song_Runes SheetOfParchment x1        # Prog 2, one sheet: cutscene 2
+fill-inventory
+finish                                      # SONG_RUNES_WRITING; no room for the Poetic Parchment: not completed, the sheet kept
+free-inventory
+trade Song_Runes SheetOfParchment x1        # cutscene 2 again
+finish                                      # SONG_RUNES_WRITING; completed: Poetic Parchment, Researcher of Classics, fame +7 x3, the sheet taken
+trigger Song_Runes                          # completed: A Minstrel in Despair's SONG_RUNES_REQUIRE

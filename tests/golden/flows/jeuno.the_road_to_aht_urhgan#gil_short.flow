@@ -1,0 +1,11 @@
+# The Road to Aht Urhgan (jeuno 91): option 3 without the gil. A level 75 Warrior with 499999 gil, Prog 1 by a GM
+# while available: 10063, finished 3: begun (the available finish), the gil check fails: nothing else (Prog 1).
+# Accepted: 10064, finished 3: nothing.
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/onEventFinish/10063 LowerJeuno/onEventFinish/10064
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75 gil=499999
+charvar Quest[3][91]Prog 1
+login
+trigger Faursel                     # available, Prog 1: 10063
+finish option=3                     # begun; 499999 < 500000: no purchase
+trigger Faursel                     # accepted, Prog 1: 10064
+finish option=3                     # no purchase: nothing

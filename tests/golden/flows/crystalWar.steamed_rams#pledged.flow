@@ -1,0 +1,74 @@
+# Steamed Rams (crystalWar 9) with a campaign allegiance (no flow statement sets one: the char earns it by completing
+# Snake on the Plains first). A level 99 Warrior in Windurst Waters [S] with the Green Recommendation Letter (missions
+# as in the main flow). Miah Riyuh 103, accepted: Snake begun, the putty; West Sarutabaruta [S]: the three entrances
+# sealed (the third takes the putty); Miah Riyuh 106: Snake completed, allegiance 3. Garlaige Citadel [S]: Randecque: an
+# allegiance: 12 (the quest's Event), then the script's 3 on the lookup's other turn, then 12 again. Southern San d'Oria
+# [S]: Mainchelite: the Red letter too (a GM): pledged, Option 0: 10, declined (option 1): Option 1; 11, options 1 and
+# 2: nothing; 11, accepted: begun, the letter taken (user ruling 2026-11-04, kept Lua bugs: the Lua's 10 and 11 left
+# it); the GM's delkeyitem after it: nothing to take. Accepted, no evidence, pledged: 14, option 1: the quest deleted
+# (no letter given; Option stays 1); 11 again, accepted: begun; 14, options 0 and 2: nothing. Option 0 (a GM) and the
+# quest set available: 10, option 2: Option 1; 11, accepted: begun. The three (GMs): 624, finished: completed (Knight of
+# the Iron Ram), allegiance 1, the three taken, NOW_ALLIED_WITH 1 (no shoes, no ribbon). Completed: 5. Garlaige Citadel
+# [S]: Randecque, completed: the script's 3.
+lists GarlaigeCitadelS/Randecque/onTrigger SouthernSanDoriaS/Mainchelite/onTrigger WindurstWatersS/Miah_Riyuh/onTrigger WestSarutabarutaS/Sealed_Entrance_1/onTrigger WestSarutabarutaS/Sealed_Entrance_2/onTrigger WestSarutabarutaS/Sealed_Entrance_3/onTrigger SouthernSanDoriaS/onEventFinish/10 SouthernSanDoriaS/onEventFinish/11 SouthernSanDoriaS/onEventFinish/14 SouthernSanDoriaS/onEventFinish/624
+char zone=WindurstWatersS pos=6.823,-1,37.462 job=WAR lvl=99
+keyitem GreenRecommendationLetter
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Miah_Riyuh                      # the green letter: 103
+finish option=0                         # Snake begun; the putty
+warp -243.5,-18.1,660 WestSarutabarutaS
+trigger Sealed_Entrance_1               # DOOR_OFFSET + 1
+warp 265.1,-6.512,40 WestSarutabarutaS
+trigger Sealed_Entrance_2               # DOOR_OFFSET + 1
+warp -338.5,1.825,-364.825 WestSarutabarutaS
+trigger Sealed_Entrance_3               # all three: the putty taken, DOOR_OFFSET + 4
+warp 6.823,-1,37.462 WindurstWatersS
+trigger Miah_Riyuh                      # 106
+finish option=0                         # Snake completed; allegiance 3
+warp 62.849,-6.078,137.438 GarlaigeCitadelS
+trigger Randecque                       # an allegiance: 12 (the quest's Event)
+finish
+trigger Randecque                       # the lookup's other turn: the script's 3
+finish
+trigger Randecque                       # 12 again
+finish
+warp -13.849,1.398,-30.368 SouthernSanDoriaS
+keyitem RedRecommendationLetter
+trigger Mainchelite                     # pledged (the letter too), Option 0: 10
+finish option=1                         # declined: Option 1
+trigger Mainchelite                     # 11
+finish option=1                         # nothing
+trigger Mainchelite                     # 11
+finish option=2                         # nothing
+trigger Mainchelite                     # 11
+finish option=0                         # begun; the letter taken
+delkeyitem RedRecommendationLetter      # a GM: not held: nothing
+trigger Mainchelite                     # pledged, no evidence: 14
+finish option=1                         # the quest deleted (no letter given)
+trigger Mainchelite                     # 11 (Option still 1)
+finish option=0                         # begun
+trigger Mainchelite                     # 14
+finish option=0                         # nothing
+trigger Mainchelite                     # 14
+finish option=2                         # nothing
+charvar Quest[7][9]Option 0
+quest CrystalWar.SteamedRams available
+trigger Mainchelite                     # pledged, Option 0: 10
+finish option=2                         # not 0: Option 1
+trigger Mainchelite                     # 11
+finish option=0                         # begun
+keyitem CharredPropeller
+keyitem OxidizedPlate
+keyitem PieceOfShatteredLumber
+trigger Mainchelite                     # the three, pledged: 624
+finish                                  # completed; allegiance 1; the three taken; NOW_ALLIED_WITH 1
+trigger Mainchelite                     # completed: 5
+finish
+warp 62.849,-6.078,137.438 GarlaigeCitadelS
+trigger Randecque                       # completed: no section: the script's 3
+finish

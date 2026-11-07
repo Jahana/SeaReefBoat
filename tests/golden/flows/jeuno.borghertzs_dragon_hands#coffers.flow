@@ -1,0 +1,19 @@
+# BORGHERTZS_DRAGON_HANDS (jeuno 57): the two optional coffers' sections (status not available, main job DRG, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 DRG: IfritsCauldron's Treasure Coffer opens to DrachenMail
+# (the item bypass; the result is the item): [AF]ZilartCoffer +134217728 (bit 27); QuicksandCaves's to DrachenGreaves:
+# +268435456 (bit 28).
+lists IfritsCauldron/Treasure_Coffer/onTrade QuicksandCaves/Treasure_Coffer/onTrade
+char zone=IfritsCauldron pos=118.8,20.0,141.8 job=DRG lvl=75
+quest Jeuno.BorghertzsDragonHands accepted
+item CauldronCofferKey
+item QuicksandCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer CauldronCofferKey x1 # bit 27 unset: DrachenMail; [AF]ZilartCoffer 134217728
+tick 4500                               # the coffer opened
+warp -144.9,1.9,448.1 QuicksandCaves
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer QuicksandCofferKey x1 # bit 28 unset: DrachenGreaves; [AF]ZilartCoffer 402653184
+tick 4500                               # the coffer opened

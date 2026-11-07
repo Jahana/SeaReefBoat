@@ -1,0 +1,21 @@
+# The Basics (otherAreas 6): a full inventory at both item steps. Accepted (a GM), Prog 0, the couscous: Valgeir's 106
+# with a full inventory: npcUtil.giveItem fails (ITEM_CANNOT_BE_OBTAINED), yet the couscous is taken and Prog becomes 1
+# (a kept quirk). A popoto given by a GM, the inventory full again: Rycharde's 96, finished: npcUtil.completeQuest cannot
+# give the Tea Set: not completed, the popoto kept, no exp, no Commentary vars. Room made: 96, completed.
+lists Selbina/Valgeir/onTrigger Selbina/onEventFinish/106 Mhaura/Rycharde/onTrade Mhaura/onEventFinish/96
+char zone=Selbina pos=59,-15.27,20.2 job=WAR lvl=30
+quest OtherAreas.TheBasics accepted
+keyitem MhauranCouscous
+login
+fill-inventory
+trigger Valgeir                         # Prog 0: 106
+finish                                  # no room: ITEM_CANNOT_BE_OBTAINED; the couscous taken anyway; Prog 1
+free-inventory
+item BakedPopoto                        # a GM
+fill-inventory
+warp 19,-16,88.8 Mhaura
+trade Rycharde BakedPopoto x1           # Prog 1: 96
+finish                                  # no room for the Tea Set: not completed; the popoto kept
+free-inventory
+trade Rycharde BakedPopoto x1           # 96
+finish                                  # completed: fame 60 Windurst, the Tea Set, the title; the popoto taken; 2000 exp

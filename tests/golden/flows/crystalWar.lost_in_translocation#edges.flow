@@ -1,0 +1,26 @@
+# Lost in Translocation (crystalWar 0), the edges: a level 99 Warrior in The Eldieme Necropolis [S] (missions as the
+# main flow). Available: Erik, Gravestone and Sarcophagus_map_quest: no handler: their defaults (1,
+# NAMES_CARVED_ON_STONE, SARCOPHAGUS_SEALED). Batallia Downs [S]: Thorben 103, finished on option 1: begun (any
+# option). The three pieces (GMs) at Option 0: 107, finished: completed.
+lists BatalliaDownsS/Thorben/onTrigger BatalliaDownsS/onEventFinish/103 BatalliaDownsS/onEventFinish/107 TheEldiemeNecropolisS/Erik/onTrigger TheEldiemeNecropolisS/Gravestone/onTrigger TheEldiemeNecropolisS/Sarcophagus_map_quest/onTrigger
+char zone=TheEldiemeNecropolisS pos=258.643,-33.249,101.401 job=WAR lvl=99
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erik                            # available: no handler: his default 1
+finish-if-event
+trigger Gravestone                      # available: NAMES_CARVED_ON_STONE
+finish-if-event
+trigger Sarcophagus_map_quest           # available: SARCOPHAGUS_SEALED
+finish-if-event
+warp 176.846,8.038,-419.244 BatalliaDownsS
+trigger Thorben                         # 103
+finish option=1                         # begun (any option)
+keyitem LeftMapPiece                    # a GM
+keyitem MiddleMapPiece                  # a GM
+keyitem RightMapPiece                   # a GM
+trigger Thorben                         # the three at Option 0: 107
+finish                                  # completed

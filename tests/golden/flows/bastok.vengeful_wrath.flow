@@ -1,0 +1,21 @@
+# Vengeful Wrath (bastok 32): Goraow in Bastok Mines. The fame guard (level 3), the Quadav helm trade, the completion
+# repeated: the trade section matches every status but available.
+lists BastokMines/Goraow/onTrigger BastokMines/Goraow/onTrade BastokMines/onEventFinish/106 BastokMines/onEventFinish/107
+char zone=BastokMines pos=37,0,14
+item QuadavHelm x2
+item BoneChip
+fame Bastok 124                 # fame level 2
+login
+trade Goraow QuadavHelm x1      # available: no trade handler, nothing
+trigger Goraow                  # fame level 2: not offered, his default 105
+finish
+fame Bastok 125                 # fame level 3
+trigger Goraow                  # the offer, 106
+finish                          # accepted
+trigger Goraow                  # accepted: 105
+finish
+trade Goraow BoneChip x1        # the wrong item: nothing
+trade Goraow QuadavHelm x1      # 107
+finish                          # completed: 900 gil, Avenger, fame 16, a helm gone
+trade Goraow QuadavHelm x1      # completed: 107 again
+finish                          # the repeat: 900 gil, fame 16 again

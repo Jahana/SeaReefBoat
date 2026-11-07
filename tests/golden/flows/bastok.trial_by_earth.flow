@@ -1,0 +1,74 @@
+# Trial by Earth (bastok 61): Juroro in Port Bastok. The guard (Bastok fame level 6), the offer 249 declined (option 0)
+# then accepted (option 1: the Tuning Fork of Earth), 250 while the fork is held, the Whisper of Tremors by GM (the
+# battlefield's 32001 is in #battlefield), then 252 once per reward option: each completion sets the Timer var to the
+# next JST day (no section while it runs: the default 253), `wait jst=1` clears it, and 249's option 1 deletes the
+# quest and begins it again. The reward mask (252's sixth argument) grows by the items held: bit 0 the Titan's Cudgel,
+# 1 the Earth Belt, 2 the Earth Ring, 3 the Dose of Desert Light, 5 the Titan spell. Option 0 (rewardItems[-1], nil)
+# completes with no reward, as does any option above 6 (kept Lua quirk); a full inventory on an item option does not
+# complete. Juroro's default is 253; The Puppet Master (windurst 81) also names him, but needs that quest accepted
+# (#puppet_master). The char is a WAR, so no SMN quest applies.
+lists PortBastok/Juroro/onTrigger PortBastok/Juroro/onTrade PortBastok/onEventFinish/249 PortBastok/onEventFinish/252 PortBastok/onEventFinish/284
+char zone=PortBastok pos=32,7,-41 job=WAR lvl=75
+fame Bastok 424
+item BoneChip
+login
+trade Juroro BoneChip x1       # no trade handler in any section: nothing
+trigger Juroro                 # fame 424 (level 5): not offered, the default 253
+finish
+fame Bastok 425
+trigger Juroro                 # fame level 6: 249 (0, fork, 0, 0, 0, 0, 0)
+finish option=0                # declined: nothing
+trigger Juroro                 # 249 again
+finish option=1                # the Tuning Fork of Earth, accepted
+trigger Juroro                 # the fork, no whisper: 250 (0, fork, 1)
+finish
+trade Juroro BoneChip x1       # accepted: no trade handler, nothing
+keyitem WhisperOfTremors       # GM: the battlefield win (#battlefield)
+trigger Juroro                 # the whisper: 252, reward mask 0
+finish option=1                # the Titan's Cudgel: completed (fame +60), the whisper deleted, Timer set
+trigger Juroro                 # completed, Timer running: no section, 253
+finish
+wait jst=1                     # the Timer var expires
+trigger Juroro                 # completed, Timer 0: 249 again
+finish option=0                # declined: still completed
+trigger Juroro                 # 249
+finish option=1                # the quest deleted and begun again; the fork still held (no fight here): no second one
+keyitem WhisperOfTremors
+trigger Juroro                 # 252, mask 1 (the cudgel held)
+finish option=2                # the Earth Belt: completed
+wait jst=1
+trigger Juroro
+finish option=1                # begun again
+keyitem WhisperOfTremors
+trigger Juroro                 # 252, mask 3
+finish option=3                # the Earth Ring: completed
+wait jst=1
+trigger Juroro
+finish option=1
+keyitem WhisperOfTremors
+trigger Juroro                 # 252, mask 7
+finish option=4                # the Dose of Desert Light: completed
+wait jst=1
+trigger Juroro
+finish option=1
+keyitem WhisperOfTremors
+trigger Juroro                 # 252, mask 15
+finish option=5                # 10000 gil: completed
+wait jst=1
+trigger Juroro
+finish option=1
+keyitem WhisperOfTremors
+trigger Juroro                 # 252, mask 15
+finish option=6                # the Titan spell, TITAN_UNLOCKED (0, 0, 1): completed
+wait jst=1
+trigger Juroro
+finish option=1
+keyitem WhisperOfTremors
+trigger Juroro                 # 252, mask 47 (bit 5: Titan)
+finish option=0                # option 0: rewardItems[-1] is nil, giveItem returns true: completed with no reward
+wait jst=1
+trigger Juroro
+finish option=1
+keyitem WhisperOfTremors
+trigger Juroro                 # 252, mask 47
+finish option=7                # above 6: no reward, completed

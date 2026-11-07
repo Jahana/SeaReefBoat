@@ -1,0 +1,30 @@
+# Striking a Balance's edges: a level 75 Warrior in Al Zahbi, the quest accepted at Prog 3 (GMs). The blank: Prog 4,
+# moved, the package; Prog 3 again (a GM; the package dropped by a GM): the blank at a row of positionTable: that row is
+# its current one: another row drawn; the package again. Whitegate at Prog 4: 695, finished: Prog 5; out to Al Zahbi and
+# back: Whitegate's zone-in at Prog 5: none. Past the last step (a GM, Prog 6): Saliyahf: nothing. Prog 5 again (a GM),
+# a full bag: Saliyahf 696, finished: the bronze pieces do not fit: not completed; freed: 696: completed.
+lists AlZahbi/blank_striking_a_balance/onTrigger AhtUrhganWhitegate/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/696
+char zone=AlZahbi pos=-41.1,0,8.942 job=WAR lvl=75
+quest AhtUrhgan.StrikingABalance accepted
+charvar Quest[6][63]Prog 3
+login
+trigger blank_striking_a_balance        # Prog 3: Prog 4; moved (a row of 2-7); the package
+finish-if-event
+charvar Quest[6][63]Prog 3              # a GM
+delkeyitem MunahdasPackage              # a GM
+trigger blank_striking_a_balance        # at its row: Prog 4; moved to another row; the package
+finish-if-event
+warp -58.4,0,64.855 AhtUrhganWhitegate open   # Prog 4: 695
+finish                                  # the package taken; Prog 5
+warp -41.1,0,8.942 AlZahbi
+warp -58.4,0,64.855 AhtUrhganWhitegate   # Prog 5: no zone-in event
+charvar Quest[6][63]Prog 6              # a GM: past the last step
+trigger Saliyahf                        # Prog 6: no section
+finish-if-event
+charvar Quest[6][63]Prog 5              # a GM
+fill-inventory
+trigger Saliyahf                        # Prog 5: 696
+finish                                  # the bronze pieces do not fit: not completed
+free-inventory
+trigger Saliyahf                        # 696
+finish                                  # completed

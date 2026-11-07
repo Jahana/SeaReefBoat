@@ -1,0 +1,40 @@
+# Hitting the Marquisate (windurst 71): the progress operands alone, and the trades with no progress test. Accepted by
+# GM (a THF at level 50). Nanaa Mihgo: yatnielProg 2, hagainProg 7: nil (76); yatnielProg 1, hagainProg 8: nil (76);
+# nanaaProg 1 with those: 517. La Theine's qm2 at nanaaProg 0: nil. Yatniel at yatnielProg 3: nil (his default
+# 10028); four grenades at yatnielProg 0: 10031 (no progress test: kept quirk; yatnielProg 2). Hagain: the coal at
+# hagainProg 0 with no incense held: 10005 (no progress test; the incense "taken"; hagainProg 8).
+lists WindurstWoods/Nanaa_Mihgo/onTrigger LaTheinePlateau/qm2/onTrade LowerJeuno/Yatniel/onTrigger LowerJeuno/Yatniel/onTrade Mhaura/Hagain/onTrade LowerJeuno/onEventFinish/10031 Mhaura/onEventFinish/10005
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=THF lvl=50
+quest Windurst.MihgosAmigo completed
+quest Windurst.TheTenshodoShowdown completed
+quest Windurst.AsThickAsThieves completed
+quest Windurst.HittingTheMarquisate accepted
+charvar Quest[2][71]yatnielProg 2
+charvar Quest[2][71]hagainProg 7
+item QuakeGrenade x4
+item LumpOfChandelierCoal
+item Pickaxe
+login
+trigger Nanaa_Mihgo+99                         # yatnielProg 2, hagainProg 7: nil; 76
+finish
+charvar Quest[2][71]yatnielProg 1              # GM
+charvar Quest[2][71]hagainProg 8               # GM
+trigger Nanaa_Mihgo+99                         # yatnielProg 1, hagainProg 8: nil; 76
+finish
+charvar Quest[2][71]nanaaProg 1                # GM
+trigger Nanaa_Mihgo+99                         # not both; nanaaProg 1: 517
+finish
+charvar Quest[2][71]nanaaProg 0                # GM
+warp -71.5,54.6,-443.1 LaTheinePlateau
+trade qm2 Pickaxe x1                           # nanaaProg 0: nil
+charvar Quest[2][71]yatnielProg 3              # GM
+warp -65.3,-7.0,-126.6 LowerJeuno
+trigger Yatniel                                # yatnielProg 3: nil; his default 10028
+finish
+charvar Quest[2][71]yatnielProg 0              # GM
+trade Yatniel QuakeGrenade x4                  # yatnielProg 0, four: 10031
+finish                                         # taken; yatnielProg 2
+charvar Quest[2][71]hagainProg 0               # GM
+warp 14.1,-16.0,81.4 Mhaura
+trade Hagain LumpOfChandelierCoal x1           # hagainProg 0, no incense: 10005
+finish                                         # taken; the incense "taken"; hagainProg 8

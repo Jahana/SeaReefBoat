@@ -1,0 +1,37 @@
+# Invitation Cards (hidden quest Invitation_Cards): a level 75 Warrior in Aht Urhgan Whitegate. No card: the check
+# fails: Naja Salaheem's script / missions. Two cards (Red, Blue): Prog 0: 74 (text_table 0); an update on 0: nothing;
+# on 1: updateEvent(2, Imperial Bronze Piece, 2); finished on 0: the local Option 1 only. Then she is silent for the
+# quest (nil: her script). The local Option 0 (a GM), the inventory full: 74 finished on 3: giveItem fails: nothing but
+# the local. With room: two Bronze Pieces, the cards taken, Prog 2. The Green card: 75 (text_table 0); an update on 1:
+# updateEvent(1, Imperial Bronze Piece, 1); finished on 3: one Bronze Piece, Prog 3. The White card: 75 finished on 3:
+# one Bronze Piece, 3 + 1 >= 4: quest:complete (no reward; the vars cleared).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventUpdate/74 AhtUrhganWhitegate/onEventUpdate/75 AhtUrhganWhitegate/onEventFinish/74 AhtUrhganWhitegate/onEventFinish/75
+char zone=AhtUrhganWhitegate pos=22.7,-7.8,-43 job=WAR lvl=75
+login
+trigger Naja_Salaheem                   # no card: the check fails: her script
+finish-if-event
+keyitem RedInvitationCard
+keyitem BlueInvitationCard
+trigger Naja_Salaheem                   # Prog 0: 74 (text_table 0)
+update 74 option=0                      # nothing
+update 74 option=1                      # updateEvent(2, Imperial Bronze Piece, 2)
+finish option=0                         # the local Option 1
+trigger Naja_Salaheem                   # the local Option 1: nil: her script
+finish-if-event
+localvar HQuest[Invitation_Cards]Option 0
+fill-inventory
+trigger Naja_Salaheem                   # 74
+finish option=3                         # no room: giveItem fails (its message); nothing more
+free-inventory
+localvar HQuest[Invitation_Cards]Option 0
+trigger Naja_Salaheem                   # 74
+finish option=3                         # two Bronze Pieces; the cards taken; Prog 2
+keyitem GreenInvitationCard
+localvar HQuest[Invitation_Cards]Option 0
+trigger Naja_Salaheem                   # Prog 2: 75 (text_table 0)
+update 75 option=1                      # updateEvent(1, Imperial Bronze Piece, 1)
+finish option=3                         # one Bronze Piece; the card taken; Prog 3
+keyitem WhiteInvitationCard
+localvar HQuest[Invitation_Cards]Option 0
+trigger Naja_Salaheem                   # Prog 3: 75
+finish option=3                         # one Bronze Piece; 3 + 1 >= 4: complete (the vars cleared)

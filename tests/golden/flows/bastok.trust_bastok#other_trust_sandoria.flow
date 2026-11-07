@@ -1,0 +1,19 @@
+# Trust: Bastok (bastok 92): Trust: San d'Oria's side of each test, for a San d'Oria char of rank 3. Trust: Windurst
+# accepted (not completed), San d'Oria's available: Clarion Star returns nil (442). Trust: San d'Oria completed by GM
+# (Windurst's still accepted): Clarion Star's 438, option 2; Naji's 984 (memories 0, rank3 1: the char's own nation's
+# rank, San d'Oria's 3; its Bastok rank is 1). The bag is full when 984 finishes: the reward is a key item, so the quest
+# completes anyway (quest:complete is never false here).
+lists PortBastok/Clarion_Star/onTrigger PortBastok/onEventFinish/438 Metalworks/Naji/onTrigger Metalworks/onEventFinish/984
+char zone=PortBastok pos=81.5,7.5,-24.2 lvl=5 nation=0
+quest Windurst.TrustWindurst accepted
+rank 3
+login
+trigger Clarion_Star           # Windurst's accepted, none completed: nil, 442
+finish
+quest Sandoria.TrustSandoria completed
+trigger Clarion_Star           # San d'Oria's completed: 438
+finish option=2                # begun, the card
+warp 64,-14,-4 Metalworks
+fill-inventory
+trigger Naji                   # San d'Oria's completed: 984 (0, 0, 0, 0, 0, 0, 0, 1)
+finish                         # completed with the bag full: the permit, Naji learned, the card deleted, KEYITEM_LOST

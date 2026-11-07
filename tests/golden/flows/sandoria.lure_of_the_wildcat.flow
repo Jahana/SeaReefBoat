@@ -1,0 +1,94 @@
+# Lure of the Wildcat (San d'Oria) (sandoria 113): Amutiyaal in Southern San d'Oria and twenty NPCs in Southern and
+# Northern San d'Oria, Port San d'Oria and Chateau d'Oraguille. The guard (ENABLE_TOAU 1, the default): a trade while
+# available (no quest trade handler; his script's trade wants 300 gil and the quest completed: nothing); 812 (the Red
+# Sentinel Badge, begun); Amutiyaal's 813 at Prog 0, 814 with some bits, 815 with all twenty (the badge taken,
+# KEYITEM_LOST, completed: the Red Invitation Card, fame 0); each NPC's event once (its bit unset) and nil after (Daggao
+# and Maloquedil are talked to twice). Completed: Amutiyaal's own script (816 before ToAU's President Salaheem), and
+# Daggao's script (no section; the vars cleared). #toau_off is the guard's other side; #gm sets Prog by GM (isFull's
+# edges); #kinds repeats 812.
+# The reply kinds: 813 and 814 are Events, so a second Amutiyaal talk in a row alternates to his script's 816
+# (UseFallback); 815 is a Progress event, so it plays right after an Event (814) where an Event would fall back (#gm;
+# here zone changes come between his 814 and 815 and clear the alternation). Each
+# NPC's event is a Progress event: Daggao's 810 plays again after a GM reset of his bit, where an Event would fall back
+# to his script's 60 (his last answer was the quest's).
+# The char is a WAR of level 20 at fame 0, so the other quests at these NPCs stay silent or answer below the quest's
+# Progress events: Warding Vampires (Maloquedil), Distant Loyalties / Spice Gals / Elderly Pursuits (Rouva, Femitte),
+# A Timely Visit (Deraquien), The Pickpocket (Parcarin), The General's Secret / Old Wounds / Enveloped in Darkness
+# (Curilla), Blackmail / A Timely Visit (Halver), Her Majesty's Garden / The Circle of Time (Chalvatot), LB04
+# (Maloquedil, Rugiette), Her Memories (Bertenont, Halver), the nation missions (no mission current).
+lists SouthernSanDoria/Amutiyaal/onTrigger SouthernSanDoria/Amutiyaal/onTrade SouthernSanDoria/onEventFinish/812 SouthernSanDoria/onEventFinish/815 SouthernSanDoria/Daggao/onTrigger SouthernSanDoria/Authere/onTrigger SouthernSanDoria/Rouva/onTrigger SouthernSanDoria/Femitte/onTrigger SouthernSanDoria/Deraquien/onTrigger NorthernSanDoria/Giaunne/onTrigger NorthernSanDoria/Anilla/onTrigger NorthernSanDoria/Maloquedil/onTrigger NorthernSanDoria/Phairupegiont/onTrigger NorthernSanDoria/Bertenont/onTrigger PortSanDoria/Perdiouvilet/onTrigger PortSanDoria/Pomilla/onTrigger PortSanDoria/Cherlodeau/onTrigger PortSanDoria/Parcarin/onTrigger PortSanDoria/Rugiette/onTrigger ChateauDoraguille/Curilla/onTrigger ChateauDoraguille/Halver/onTrigger ChateauDoraguille/Rahal/onTrigger ChateauDoraguille/Perfaumand/onTrigger ChateauDoraguille/Chalvatot/onTrigger
+char zone=SouthernSanDoria pos=118.0,0.0,84.7 job=WAR lvl=20
+item BoneChip
+login
+trade Amutiyaal BoneChip x1               # available: no quest trade handler; his script's trade (300 gil, quest completed): nothing
+trigger Daggao                            # available: no section; Daggao's script 60
+finish
+trigger Amutiyaal                         # ENABLE_TOAU 1: 812
+finish                                    # the Red Sentinel Badge; begun
+trigger Amutiyaal                         # Prog 0: 813 (Event)
+finish
+trigger Amutiyaal                         # his last answer was the Event 813: his script's 816
+finish
+trigger Amutiyaal                         # Prog 0: 813 again
+finish
+trigger Daggao                            # bit 0 unset: 810
+finish                                    # bit 0
+charvar Quest[0][113]Prog 0
+trigger Daggao                            # bit 0 unset again (GM): 810, a Progress event (an Event would fall back to 60)
+finish                                    # bit 0
+trigger Daggao                            # bit 0 set: nil; his script's 60
+finish
+trigger Amutiyaal                         # some bits, but his last answer was the Event 813: his script's 816
+finish
+trigger Amutiyaal                         # some bits: 814 (Event)
+finish
+trigger Authere                           # 809
+finish                                    # bit 1
+trigger Rouva                             # 808
+finish                                    # bit 2
+trigger Femitte                           # 807
+finish                                    # bit 3
+trigger Deraquien                         # 811
+finish                                    # bit 4
+warp -13.0,0.0,40.5 NorthernSanDoria
+trigger Giaunne                           # 805
+finish                                    # bit 5
+trigger Anilla                            # 808 (Northern San d'Oria's 808)
+finish                                    # bit 6
+trigger Maloquedil                        # 807 (Northern San d'Oria's 807)
+finish                                    # bit 7
+trigger Maloquedil                        # bit 7 set: nil; Warding Vampires' 21 (an Event, under 807 before)
+finish-if-event
+trigger Phairupegiont                     # 806
+finish                                    # bit 8
+trigger Bertenont                         # 809 (Northern San d'Oria's 809)
+finish                                    # bit 9
+warp -59.8,-4.5,-28.2 PortSanDoria
+trigger Perdiouvilet                      # 750
+finish                                    # bit 10
+trigger Pomilla                           # 749
+finish                                    # bit 11
+trigger Cherlodeau                        # 748
+finish                                    # bit 12
+trigger Parcarin                          # 747
+finish                                    # bit 13
+trigger Rugiette                          # 746
+finish                                    # bit 14
+warp 29.2,0.0,0.6 ChateauDoraguille
+trigger Curilla                           # 562
+finish                                    # bit 15
+trigger Halver                            # 558
+finish                                    # bit 16
+trigger Rahal                             # 559
+finish                                    # bit 17
+trigger Perfaumand                        # 560
+finish                                    # bit 18
+trigger Chalvatot                         # 561
+finish                                    # bit 19: Prog 0xFFFFF
+warp 118.0,0.0,84.7 SouthernSanDoria
+trigger Amutiyaal                         # all twenty: 815 (the zone changes since his 814 cleared the alternation)
+finish                                    # the badge taken; KEYITEM_LOST; completed: the Red Invitation Card
+trigger Amutiyaal                         # completed: no section; his own script's 816
+finish
+trigger Daggao                            # completed (Prog cleared): no section; his script's 60
+finish

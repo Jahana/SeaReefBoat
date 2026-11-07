@@ -1,0 +1,23 @@
+# Grave Concerns (sandoria 11), completed by GM: the accepted section's status operand, on each of its NPCs, with the
+# vars and items its arms want. OfferingWaterOK 1 (GM): the waterskin to Andecia (nothing: section 2 would play 558).
+# OfferingWaterOK 0 (GM): Andecia's I_THANK_YOU_ADVENTURER (section 3; section 2's 622 would win); the waterskin to a
+# Well with no skin held (nothing: section 2 would swap it for the skin). The Tombstone with the waterskin held (its
+# default HERE_LIES_KING_RANPERRE); a Skin of Well Water (GM) traded to it (nothing: section 2 would swap it); the
+# Tombstone with the skin held at OfferingWaterOK 0 and DroppedWaterskin 0 (HERE_LIES: section 2's first arm would play
+# 2).
+lists SouthernSanDoria/Andecia/onTrigger SouthernSanDoria/Andecia/onTrade SouthernSanDoria/Well/onTrade KingRanperresTomb/Tombstone_Upper/onTrigger KingRanperresTomb/Tombstone_Upper/onTrade
+char zone=SouthernSanDoria pos=171.1,-0.9,45.0 job=WAR lvl=30
+quest Sandoria.GraveConcerns completed
+charvar Quest[0][11]OfferingWaterOK 1
+item TombGuardsWaterskin
+login
+trade Andecia TombGuardsWaterskin x1      # completed, OfferingWaterOK 1, DroppedWaterskin 0: no section 2; nothing
+charvar Quest[0][11]OfferingWaterOK 0
+trigger Andecia                           # completed: I_THANK_YOU_ADVENTURER (section 2's 622 would win)
+warp -276.0,-4.6,118.8 SouthernSanDoria
+trade Well TombGuardsWaterskin x1         # completed, no skin, exactly the waterskin: nothing; the waterskin kept
+warp 1.0,-1.4,-102.0 KingRanperresTomb
+trigger Tombstone_Upper                   # completed, the waterskin held: HERE_LIES_KING_RANPERRE
+item SkinOfWellWater                      # GM
+trade Tombstone_Upper SkinOfWellWater x1  # completed, OfferingWaterOK 0, the skin: nothing; the skin kept
+trigger Tombstone_Upper                   # completed, the skin held, OfferingWaterOK 0, DroppedWaterskin 0: HERE_LIES (section 2's first arm would play 2)

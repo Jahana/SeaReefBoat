@@ -1,0 +1,20 @@
+# Faded Promises at Prog 3 with the diary: Kagetora's 296 still plays, and its finish keeps Prog 3 (user ruling
+# 2026-11-05, kept bugs: the Lua's finish set Prog back to 2, and Ayame's 804 then set 3 again; the Lua baseline is
+# this flow's trace before 296's guard), so Ayame plays her default 701; then Alois' 805 with a full inventory (the
+# Fukuro does not fit: not completed, the diary kept), and again with room (completed).
+char zone=PortBastok pos=-96,-2.3,30.4 job=NIN lvl=20
+keyitem DiaryOfMukunda
+quest Bastok.FadedPromises accepted
+charvar Quest[1][73]Prog 3
+login
+trigger Kagetora               # the diary held: 296
+finish                         # Prog stays 3
+warp 133,-18.5,-35 Metalworks
+trigger Ayame                  # Prog 3: nil, her default 701
+finish
+fill-inventory
+trigger Alois                  # Prog 3: 805
+finish                         # the inventory full: not completed, the diary kept
+free-inventory
+trigger Alois                  # 805 again
+finish                         # completed: Fukuro, Norg fame +20, Assassin Reject, the diary deleted

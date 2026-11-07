@@ -1,0 +1,30 @@
+# Children of the Rune (adoulin 119): Octavien in Eastern Adoulin and the Yahse Wildflower in the Yahse Hunting Grounds.
+# Its state is the char var RUN_COTR (1 declined, 2 the rune enhancement left, 3 the reward pending). A full run at the
+# level gate (ADVANCED_JOB_LEVEL 30, a level 30 WHM for the MP): the offer (23) declined, offered again (24) and accepted,
+# the reminder (25), the petal, the rune enhancement (26) and its updates (option 1 halves HP and MP) left, taken up again
+# (26 with 1) and finished: the Sowilo Claymore, rune fencer, the gesture, the petal taken, completed; 28 after.
+char zone=EasternAdoulin pos=2.444,-11.439,-16.595 job=WHM lvl=30
+setting ADVANCED_JOB_LEVEL 30
+login
+trigger Octavien                # Available, level 30 at the gate: 23
+finish option=0                 # declined: RUN_COTR 1
+trigger Octavien                # RUN_COTR 1: 24
+finish option=1                 # accepted
+trigger Octavien                # Accepted, no petal: 25
+finish
+warp 370.713,0.680,153.281 YahseHuntingGrounds
+trigger Yahse_Wildflower        # Accepted: the Yahse Wildflower Petal
+finish-if-event
+warp 2.444,-11.439,-16.595 EasternAdoulin
+trigger Octavien                # the petal: 26
+update 26 option=0              # option 0: nothing
+update 26 option=1              # HP and MP halved
+finish option=0                 # left: RUN_COTR 2
+trigger Octavien                # RUN_COTR 2: 26 with 1
+update 26 option=1              # halved again
+finish option=1                 # RUN_COTR 3, the reward given: completed, RUN_COTR deleted
+trigger Octavien                # Completed: 28
+finish
+warp 370.713,0.680,153.281 YahseHuntingGrounds
+trigger Yahse_Wildflower        # Completed: nothing
+finish-if-event

@@ -1,0 +1,63 @@
+# Healing the Land (sandoria 82): Eperdur in Northern San d'Oria, the qm3 in Gusgen Mines. Eperdur's DefaultActions
+# (678) and his script take turns: after each zone-in the lookup plays 678 first; the next talk is the script's, whose
+# call to this quest (then to Sorcery of the North) answers; when the script plays nothing the lookup plays 678 again
+# and the turn goes back to it. Available: a trade (no onTrade: nothing); fame level 3 at main level 10: neither quest
+# answers (678); the qm3: LETTERS_IS_WRITTEN_HERE (the script's, after the quest's nil). Fame level 4, main level 10:
+# 681, declined (option 1), accepted (option 0: the Seal of Banishing). Accepted: 682 with the seal; the qm3 takes it
+# (FOUND_LOCATION_SEAL), then IS_ON_THIS_SEAL; 683 (completed: Scroll of Teleport-Holla, Pilgrim to Holla, needToZone,
+# fame +40). Completed: Sorcery of the North's 684 while needToZone holds (the char var [generic]mustZone: a rezone into
+# Northern San d'Oria keeps it), the qm3's LETTERS_IS_WRITTEN_HERE, 685 once back from Gusgen Mines (begun: Sorcery of
+# the North accepted, 686).
+char zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=10
+fame Sandoria 224
+item BoneChip
+login
+trade Eperdur BoneChip x1                 # available: no onTrade in his script; nothing
+trigger Eperdur                           # the lookup's turn: 678
+finish-if-event
+trigger Eperdur                           # the script's turn: fame level 3: neither quest answers; 678
+finish-if-event
+fame Sandoria 225
+warp -165.9,1.0,312.8 GusgenMines
+trigger qm3                               # available: the quest's nil; LETTERS_IS_WRITTEN_HERE
+warp 126.3,-6.5,95.7 NorthernSanDoria
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # fame level 4, main level 10: 681
+finish-if-event option=1                  # declined: not begun
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # 681
+finish-if-event option=0                  # begun; the Seal of Banishing
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted, the seal: 682
+finish-if-event
+warp -165.9,1.0,312.8 GusgenMines
+trigger qm3                               # accepted, the seal: taken; FOUND_LOCATION_SEAL
+trigger qm3                               # accepted, no seal: IS_ON_THIS_SEAL
+warp 126.3,-6.5,95.7 NorthernSanDoria
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted, no seal: 683
+finish-if-event                           # Teleport-Holla, Pilgrim to Holla, needToZone, fame +40; completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # completed; Sorcery of the North available, needToZone: 684
+finish-if-event
+rezone                                    # the same zone again: needToZone ([generic]mustZone 231) still holds
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # 684
+finish-if-event
+warp -165.9,1.0,312.8 GusgenMines         # another zone: needToZone cleared
+trigger qm3                               # completed: LETTERS_IS_WRITTEN_HERE
+warp 126.3,-6.5,95.7 NorthernSanDoria
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # 685
+finish-if-event option=0                  # Sorcery of the North begun
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # Sorcery of the North accepted, no tome: 686
+finish-if-event

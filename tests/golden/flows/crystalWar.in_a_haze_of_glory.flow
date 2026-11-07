@@ -1,0 +1,52 @@
+# In a Haze of Glory (crystalWar 38): a level 99 Warrior in Southern San d'Oria [S] with Perils of the Griffon
+# completed (a GM; missions as group 1's flows). Rholont 637. Garlaige Citadel [S]: Diordinne 31, finished: the
+# Number Eight Shelter Key, begun. Diordinne: the key, Option 0: 37, finished: Option 1; again: nil (14). Wooden
+# Crates 32, finished: Prog 1. The key taken (a GM: the instance's entry would): Diordinne: the Timer 0: 34,
+# finished: the Timer tomorrow; again: 35 (oncePerZone); again: once per zone: nil (14; CHECK). A day later: 36,
+# finished: the Timer 0, the key again. Ghoyu's Reverie's 10000 finish (the instance cleared: Prog 2, the setPos) is
+# waived in `#edges`: Prog 2 by a GM. The Garlaige Citadel [S] zone-in at Prog 2: 33, finished: Prog 3; a zone-in at
+# Prog 3: nothing. Rholont at Prog 3 (12:00 the next day): 81; at 18:00: 82, finished: completed (a Fullmetal
+# Bullet), The Price of Valor's Timer and mustZone. Rholont again: The Price of Valor's available 49 (its mustZone).
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/82 GarlaigeCitadelS/Diordinne/onTrigger GarlaigeCitadelS/Wooden_Crates/onTrigger GarlaigeCitadelS/onZoneIn/1 GarlaigeCitadelS/onEventFinish/31 GarlaigeCitadelS/onEventFinish/32 GarlaigeCitadelS/onEventFinish/33 GarlaigeCitadelS/onEventFinish/34 GarlaigeCitadelS/onEventFinish/36 GarlaigeCitadelS/onEventFinish/37
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.PerilsOfTheGriffon completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # available: 637
+finish
+warp -106.285,0,193.665 GarlaigeCitadelS
+trigger Diordinne                       # available: 31
+finish                                  # the Number Eight Shelter Key; begun
+trigger Diordinne                       # the key, Option 0: 37
+finish                                  # Option 1
+trigger Diordinne                       # the key, Option 1: nil (14)
+finish-if-event
+walk 0.783,3.347,-99.535
+trigger Wooden_Crates                   # Prog 0: 32
+finish                                  # Prog 1
+delkeyitem NumberEightShelterKey        # a GM: what the instance's entry would take
+walk -106.285,0,193.665
+trigger Diordinne                       # no key, the Timer 0: 34
+finish                                  # the Timer: tomorrow
+trigger Diordinne                       # the Timer to come: 35 (oncePerZone)
+finish
+trigger Diordinne                       # once this zone visit: nil (14)
+finish-if-event
+wait vana=24
+trigger Diordinne                       # the Timer today: 36
+finish                                  # the Timer 0; the key again
+charvar Quest[7][38]Prog 2              # a GM: what Ghoyu's Reverie's 10000 does
+rezone open                             # Prog 2 (any zone): 33, left open
+finish                                  # Prog 3
+rezone                                  # Prog 3: no zone-in reply (the test is Prog 2 only)
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 3, before 18:00: 81
+finish
+wait vana=6
+trigger Rholont                         # Prog 3, 18:00 on: 82
+finish                                  # completed (a Fullmetal Bullet); The Price of Valor's Timer and mustZone
+trigger Rholont                         # The Price of Valor available, its mustZone: 49
+finish

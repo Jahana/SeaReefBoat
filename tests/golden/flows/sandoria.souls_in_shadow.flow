@@ -1,0 +1,41 @@
+# Souls in Shadow (sandoria 99): Novalmauge in Bostaunieux Oubliette, qm_mokumokuren and Mokumokuren in the Den of
+# Rancor. A DRK 75 with scythe skill 240 (raw 2400) and the Scythe of Trials already held at 300 weapon skill points:
+# the offer 0 (oncePerZone) taken with option 1 (the scythe held: none given; the Weapon Training Guide, begun); 3 with
+# 1 (the scythe held), option 1 (nothing); the wrong trades (a bone chip; the scythe and a chip: not exactly); the
+# scythe at 300 points (1: the scythe taken, the Map to the Annals of Truth); his 4; the qm's pop of Mokumokuren
+# (SENSE_OMINOUS_PRESENCE), the qm while it is up (nil), the kill (killed_wsnm 1), the Annals of Truth, the qm with the
+# Annals (nil); 5 (completed: fame +20, the three key items deleted, Spiral Hell, SPIRAL_HELL_LEARNED); once completed
+# his default 10 and a trade (nothing). Novalmauge's script acts only on The Holy Crest's char vars (none here) and
+# starts nothing, so on the alternation's script turn (UseFallback) the quest's Event replies still play; his default is
+# 10. A DRK 75 at fame 0 meets neither The Rumor (fame level 3) nor Trouble at the Sluice (The Rumor not completed).
+# qm_mokumokuren has no script; its default is NOTHING_OUT_OF_ORDINARY. He walks a patrol path: every trade follows a
+# talk. The other sides: #offer (the skill threshold, oncePerZone, a trade while available, the scythe given, a full
+# bag, 2), #offer_job, #offer_guide, #abandon, #mokumokuren_no_map.
+lists BostaunieuxOubliette/Novalmauge/onTrigger BostaunieuxOubliette/Novalmauge/onTrade BostaunieuxOubliette/onEventFinish/0 BostaunieuxOubliette/onEventFinish/3 BostaunieuxOubliette/onEventFinish/1 BostaunieuxOubliette/onEventFinish/5 DenOfRancor/qm_mokumokuren/onTrigger DenOfRancor/Mokumokuren/onMobDeath
+char zone=BostaunieuxOubliette pos=32.4,-24,19.8 job=DRK lvl=75
+skill Scythe 2400
+item ScytheOfTrials wsp=300
+item BoneChip
+login
+trigger Novalmauge                        # can equip the scythe, scythe 240, no guide: 0 (oncePerZone)
+finish option=1                           # option 1, the scythe held: none given; the Weapon Training Guide, begun
+trigger Novalmauge                        # accepted, no Annals, no map, the scythe held: 3 with 1
+finish option=1                           # option 1, the scythe held: nothing
+trade Novalmauge BoneChip x1              # not the scythe: nil
+trade Novalmauge ScytheOfTrials x1 BoneChip x1   # not exactly the scythe: nil
+trade Novalmauge ScytheOfTrials x1        # 300 weapon skill points: 1
+finish                                    # the scythe taken, the Map to the Annals of Truth
+trigger Novalmauge                        # the map: 4
+finish
+warp 119.4,35.892,-280.779 DenOfRancor
+trigger qm_mokumokuren                    # the map, no Annals: Mokumokuren popped and claimed, SENSE_OMINOUS_PRESENCE
+trigger qm_mokumokuren                    # Mokumokuren up: popFromQM false, nil: NOTHING_OUT_OF_ORDINARY
+kill MOKUMOKUREN                          # the map held: killed_wsnm 1
+trigger qm_mokumokuren                    # killed_wsnm 1: back to 0, the key item Annals of Truth
+trigger qm_mokumokuren                    # the Annals held, killed_wsnm 0: nil, NOTHING_OUT_OF_ORDINARY
+warp 32.4,-24,19.8 BostaunieuxOubliette
+trigger Novalmauge                        # the Annals: 5
+finish                                    # completed: fame +20; map, Annals and guide deleted; Spiral Hell learned, SPIRAL_HELL_LEARNED
+trigger Novalmauge                        # completed: no section; his default 10
+finish
+trade Novalmauge BoneChip x1              # completed: no trade handler, nothing

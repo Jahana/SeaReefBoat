@@ -1,0 +1,31 @@
+# Trial by Wind (outlands 194), 69's free-slot test (getFreeSlotsCount() == 0) on both sides: accepted by GM at fame
+# level 1 (the fame is read only while available), the whisper held, a full inventory: option 1 is refused
+# (ITEM_CANNOT_BE_OBTAINED Garuda's Dagger, not completed, the whisper kept), option 0 and option 7 likewise
+# (ITEM_CANNOT_BE_OBTAINED 0). Options 5 (10000 gil) and 6 (the spell) need no slot: user ruling 2026-11-04 (kept Lua
+# bugs), the test is `option ~= 5 and option ~= 6`, so with a full inventory each completes (the Lua's `or` always held
+# and refused them too, ITEM_CANNOT_BE_OBTAINED 0). Between them and before the last arm a GM's delQuest and addQuest
+# and the whisper again. With one free slot (the bag grown by one; the test is == 0): option 1 completes.
+char zone=Rabao pos=-16.5,7.8,-10.5 job=WAR lvl=75
+quest Outlands.TrialByWind accepted
+keyitem WhisperOfGales
+login
+fill-inventory
+trigger Agado-Pugado                      # accepted, the whisper: 69
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (Garuda's Dagger)
+trigger Agado-Pugado                      # 69
+finish option=0                           # no free slot: ITEM_CANNOT_BE_OBTAINED 0
+trigger Agado-Pugado                      # 69
+finish option=7                           # no free slot: ITEM_CANNOT_BE_OBTAINED 0
+trigger Agado-Pugado                      # 69
+finish option=5                           # 10000 gil (no slot needed); the title, the whisper taken; completed
+quest Outlands.TrialByWind available      # a GM: delQuest
+quest Outlands.TrialByWind accepted       # a GM: addQuest
+keyitem WhisperOfGales                    # a GM
+trigger Agado-Pugado                      # 69
+finish option=6                           # the spell (no slot needed); completed
+quest Outlands.TrialByWind available      # a GM: delQuest
+quest Outlands.TrialByWind accepted       # a GM: addQuest
+keyitem WhisperOfGales                    # a GM
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0, so it gives
+trigger Agado-Pugado                      # 69
+finish option=1                           # Garuda's Dagger; completed

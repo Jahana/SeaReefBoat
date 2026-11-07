@@ -1,0 +1,34 @@
+# Ranemaud's reply kinds (Norg; no script; default 68): Forge Your Destiny (40 / 41 / 42 / 48 P while waitTime is 0,
+# else nil; the trade's 43 P) and The Sacred Katana (144 E without a Mumeito; the trade's 145 P). Both accepted (GMs),
+# no Mumeito, no sprig, no branch, Forge Your Destiny's waitTime 0: 40 (Progress) beats 144 (Event); finished: the
+# sprig. 41 (Progress) beats 144 on two talks (an Event 41 would tie and rotate to 144). waitTime set (a GM): Forge Your Destiny nil: 144 alone. Both completed (GMs): no
+# section: the default 68. The Sacred Katana available and accepted again and The Potential Within accepted (GMs):
+# Jaucribaix 143 and 179 (both Event): a tie: SAM_AF1_The_Sacred_Katana first: 143; the rotation: 179, option 2 (The
+# Potential Within dropped); then 143 alone.
+lists Norg/Ranemaud/onTrigger Norg/onEventFinish/40
+char zone=Norg pos=15,0,23 job=SAM lvl=75
+quest Outlands.ForgeYourDestiny accepted
+quest Outlands.TheSacredKatana accepted
+login
+trigger Ranemaud                        # 40 (Progress) and 144 (Event): 40
+finish                                  # the sprig; Forge Your Destiny's Option bit 1
+trigger Ranemaud                        # 41 (Progress) beats 144
+finish
+trigger Ranemaud                        # 41 again (an Event 41 would tie with 144 and rotate to it)
+finish
+charvar Quest[5][129]waitTime 1800010368   # a GM
+trigger Ranemaud                        # Forge Your Destiny nil: 144
+finish
+quest Outlands.ForgeYourDestiny completed  # a GM
+quest Outlands.TheSacredKatana completed   # a GM
+trigger Ranemaud                        # no section: default 68
+finish
+quest Outlands.TheSacredKatana available   # a GM
+quest Outlands.TheSacredKatana accepted    # a GM
+quest Outlands.ThePotentialWithin accepted # a GM
+trigger Jaucribaix                      # no Mumeito: 143 and 179 (0) (both Event): a tie: the container order: 143
+finish
+trigger Jaucribaix                      # the rotation: 179 (0)
+finish option=2                         # 2: The Potential Within dropped
+trigger Jaucribaix                      # 143 alone
+finish

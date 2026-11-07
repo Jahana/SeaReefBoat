@@ -1,0 +1,17 @@
+# Trial by Wind (outlands 194): the battlefield entered while accepted, then the quest set available by GM inside the
+# arena: the win's 32001 (canSkipCS 1, battlefieldWin not set) is finished while available: Heir of the Great Wind and
+# the Whisper of Gales all the same (the finish reads no status; kept Lua quirk). Agado-Pugado, available at fame level 1
+# with the whisper: 70.
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Outlands.TrialByWind accepted
+keyitem TuningForkOfWind
+login
+trigger WP_Entrance                       # accepted, the fork: 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+quest Outlands.TrialByWind available
+kill OGMIOS-3                             # won while available: 32001 (canSkipCS 1)
+finish                                    # Heir of the Great Wind, the Whisper of Gales
+warp -16.5,7.8,-10.5 Rabao
+trigger Agado-Pugado                      # available, fame level 1, the whisper: 70
+finish

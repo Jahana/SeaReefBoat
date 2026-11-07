@@ -1,0 +1,22 @@
+# Expertise (otherAreas 4): Take's Prog 3 test, both sides, and quest:complete false. Accepted (a GM), the Land Crab
+# Bisque: Prog 2 (a GM): 63; Prog 4: 63; Prog 3: 62 (132). With a full inventory: npcUtil.completeQuest cannot give the
+# Tableware Set (ITEM_CANNOT_BE_OBTAINED): not completed, the bisque kept, no DayCompleted. Room made: 62 again,
+# completed (the set, the title), the bisque taken (KEYITEM_OBTAINED + 1), DayCompleted 8000.
+lists Mhaura/Take/onTrigger Mhaura/onEventFinish/62
+char zone=Mhaura pos=22.1,-8,69.8 job=WAR lvl=30
+quest OtherAreas.Expertise accepted
+charvar Quest[4][4]Prog 2
+keyitem LandCrabBisque
+login
+trigger Take                            # Prog 2 (below 3): 63
+finish
+charvar Quest[4][4]Prog 4               # a GM
+trigger Take                            # Prog 4 (above 3): 63
+finish
+charvar Quest[4][4]Prog 3               # a GM
+fill-inventory
+trigger Take                            # Prog 3: 62 (132)
+finish                                  # the inventory full: not completed (ITEM_CANNOT_BE_OBTAINED), the bisque kept
+free-inventory
+trigger Take                            # still Prog 3: 62 (132)
+finish                                  # completed: the Tableware Set, the title; the bisque taken; DayCompleted 8000

@@ -1,0 +1,25 @@
+# A Chocobo's Tale (jeuno 72): the available check and Nevela's Prog edge. A level 75 Warrior, CoP A Vessel Without a
+# Captain current (318: not completed), three Bottles of Warding Oil: Nevela's default 69. CoP The Road Forks (a GM;
+# A Vessel Without a Captain completed first: addMission refuses to overwrite a current mission): the trade while the
+# quest is only available: three oils to Pashhow Marshlands' Outpost Gate: no onTrade in the available state: nothing.
+# Back to Nevela: 10015, begun. A GM sets Prog 4: 10016; Prog 5: 10017.
+lists UpperJeuno/Nevela/onTrigger UpperJeuno/onEventFinish/10015 PashhowMarshlands/Outpost_Gate/onTrade
+char zone=UpperJeuno pos=-58.6,0,81.1 job=WAR lvl=75
+mission Cop AVesselWithoutACaptain current
+item BottleOfWardingOil x3
+login
+trigger Nevela                          # 318 current: no section; 69
+finish
+mission Cop AVesselWithoutACaptain completed # a GM: the log's current mission cleared
+mission Cop TheRoadForks current        # a GM
+warp 472,23.4,413.1 PashhowMarshlands   # by the Outpost Gate
+trade Outpost_Gate BottleOfWardingOil x3 # available: no onTrade: nothing
+warp -58.6,0,81.1 UpperJeuno            # by Nevela
+trigger Nevela                          # 10015
+finish                                  # begun
+charvar Quest[3][72]Prog 4              # a GM
+trigger Nevela                          # Prog 4: 10016
+finish
+charvar Quest[3][72]Prog 5              # a GM
+trigger Nevela                          # Prog 5: 10017
+finish option=0                         # completed

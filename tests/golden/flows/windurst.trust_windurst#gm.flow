@@ -1,0 +1,53 @@
+# Trust: Windurst (windurst 96): the states only a GM reaches, at Kupipi and Wetata. A level 5 Bastok char. Available
+# with Trust: San d'Oria completed at the var 2, then the var 1 (flag 0): no arm, her 251. Accepted by GM (no card;
+# San d'Oria's available again) at the var -1: 251; the permit held (GM) at the var 2: 437, option 1
+# (no option test: KEYITEM_LOST for the card not held; no KEYITEM_OBTAINED; The Trustworthy; the var 0; completed).
+# Completed with San d'Oria's completed: 438, not 439; after a rezone at the var 1: 438, not 436; after another rezone
+# at the var 2: 438, not 437. Accepted again (San d'Oria's available), after a rezone (the 438 above set the flag 1:
+# only the flag set by GM is read) at the var 1 with the flag 2 (GM): 251, not 436; completed with the flag 2: 251,
+# not 438. Wetata, accepted by GM without the card: neither arm, her 868.
+char zone=HeavensTower pos=2,0.1,30 lvl=5 nation=1
+charvar WindurstFirstTrust 2
+quest Sandoria.TrustSandoria completed
+login
+trigger Kupipi+1                        # available, San d'Oria's completed, the var 2: no arm: 251
+finish
+charvar WindurstFirstTrust 1
+trigger Kupipi+1                        # available, the var 1, flag 0: no arm: 251
+finish
+quest Sandoria.TrustSandoria available
+quest Windurst.TrustWindurst accepted
+charvar WindurstFirstTrust -1
+trigger Kupipi+1                        # accepted, the var -1: no arm: 251
+finish
+keyitem WindurstTrustPermit
+charvar WindurstFirstTrust 2
+trigger Kupipi+1                        # accepted, the var 2, no card: 437
+finish option=1                         # KEYITEM_LOST anyway; the permit held: no message; title; var 0; completed
+quest Sandoria.TrustSandoria completed
+trigger Kupipi+1                        # completed, San d'Oria's completed, flag 0: 438
+finish
+rezone
+charvar WindurstFirstTrust 1
+trigger Kupipi+1                        # completed, the var 1, flag 0: 438
+finish
+rezone
+charvar WindurstFirstTrust 2
+trigger Kupipi+1                        # completed, the var 2, flag 0: 438
+finish
+quest Windurst.TrustWindurst available
+quest Windurst.TrustWindurst accepted
+quest Sandoria.TrustSandoria available
+charvar WindurstFirstTrust 1
+rezone                                  # the flag 0 again: the GM's 2 is the value read
+localvar KupipiTrustChatFlag 2
+trigger Kupipi+1                        # accepted, the var 1, flag 2 (GM; not 0): no arm: 251
+finish
+quest Windurst.TrustWindurst completed
+trigger Kupipi+1                        # completed, flag 2: no arm: 251
+finish
+quest Windurst.TrustWindurst available
+quest Windurst.TrustWindurst accepted
+warp -23.8,2.5,-44.6 WindurstWoods
+trigger Wetata                          # accepted, no card: neither arm: 868
+finish

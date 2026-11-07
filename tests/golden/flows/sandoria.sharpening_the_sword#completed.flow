@@ -1,0 +1,19 @@
+# Sharpening the Sword (sandoria 90): its completed section (check 4), Ailbeche in Northern San d'Oria. A PLD 40 with
+# Father and Son and Sharpening the Sword completed (GMs), A Boy's Dream available (his offer needs a PLD 50).
+# The Lua's check 4 reads xi.quest.id.sandoria.A_BOY_S_DREAM and xi.quest.status (both nil) and raises on every talk
+# (the lookup's pcall prints it and skips the section, so his default 868 plays: the Lua baseline, 3c4c08d2, has an
+# expect-error and 868 on each talk); the C# reads A_BOYS_DREAM (user ruling 2026-11-05, kept bugs). So while A Boy's
+# Dream is available every talk plays AILBECHE_WHEN_FISHING (replaceDefault, over 868; on the lookup's alternate talk
+# his script plays nothing and the message plays again). Then A Boy's Dream accepted (GM): no section, 868.
+char zone=NorthernSanDoria pos=5.3,0.5,24.9 job=PLD lvl=40
+quest Sandoria.FatherAndSon completed
+quest Sandoria.SharpeningTheSword completed
+login
+trigger Ailbeche                        # A Boy's Dream available: AILBECHE_WHEN_FISHING
+trigger Ailbeche                        # the alternate talk: his script plays nothing; AILBECHE_WHEN_FISHING
+trigger Ailbeche                        # AILBECHE_WHEN_FISHING
+quest Sandoria.ABoysDream accepted      # a GM
+trigger Ailbeche                        # A Boy's Dream accepted: no section; his default 868
+finish
+trigger Ailbeche                        # 868
+finish

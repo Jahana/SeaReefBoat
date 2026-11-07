@@ -1,0 +1,46 @@
+# Knocking on Forbidden Doors (otherAreas 78): its reply kinds where another quest shares the NPC. The chain before it
+# completed (a GM). Chemioue: 536 (Progress) against In Search of the Truth accepted at Prog 1 (a GM; its 561 is Event):
+# 536 every time (an Event 536 would tie, and Knocking_on_Forbidden_Doors sorts first, then 561). Sheltering Doubt current
+# (Darkness Named completed; set before the login: a GM's addMission over the char's first CoP mission logs a warning)
+# makes Petals for Parelbriaux available; its Chemioue 512 needs its Prog 0, kept at 1 (a GM) until In Search of the
+# Truth is moved off (its Prog 2, a GM). Then 536 and Petals' 512 (Progress) tie, Knocking first: 536, then 512 (Darkness
+# Named's 282 replaceDefault loses to both). Fyi: 321 (Progress) at Prog 5 against It's Raining Mannequins! accepted at
+# Prog 0 (available, then accepted, by a GM; 306, Event): 321 every time; the completed section's 321 likewise. Not
+# observable: the ladder's 38 (its script does nothing at the harness's spot, and a fallback that does nothing hands the
+# turn back), Enaremand's 535, the ???s' key item and 556 / 557 / 558 (no other quest, no script), the 319 trade (no
+# other quest answers a mannequin).
+lists TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/onEventFinish/536 TavnazianSafehold/onEventFinish/512 Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/onEventFinish/321
+char zone=TavnazianSafehold pos=83.5,-34,67.6 job=WAR lvl=75
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile completed
+quest OtherAreas.KnockingOnForbiddenDoors accepted
+quest OtherAreas.InSearchOfTheTruth accepted
+charvar Quest[4][80]Prog 1
+mission Cop ShelteringDoubt current
+charvar Quest[4][74]Prog 1
+login
+trigger Chemioue                        # Prog 0: 536 beats In Search of the Truth's 561
+finish                                  # Prog 1
+charvar Quest[4][78]Prog 0              # a GM
+trigger Chemioue                        # 536 again
+finish                                  # Prog 1
+charvar Quest[4][78]Prog 0              # a GM
+charvar Quest[4][80]Prog 2              # a GM: In Search of the Truth's Chemioue off
+charvar Quest[4][74]Prog 0              # a GM: Petals for Parelbriaux's Chemioue on
+trigger Chemioue                        # 536 and Petals' 512 tie: 536 first
+finish                                  # Prog 1
+charvar Quest[4][78]Prog 0              # a GM
+trigger Chemioue                        # the cycle: 512
+finish option=0                         # Petals for Parelbriaux's 512 finish (its Prog 1)
+charvar Quest[4][78]Prog 5              # a GM
+quest OtherAreas.ItsRainingMannequins available # a GM
+quest OtherAreas.ItsRainingMannequins accepted # a GM: Prog 0, 306
+warp -37.8,-16,70.1 Mhaura
+trigger Fyi_Chalmwoh                    # Prog 5: 321 beats 306
+update 321 option=0                     # accepted: no update handler
+finish option=0                         # completed (the key item not held: no second finish)
+keyitem BetterHumesAndMannequins        # a GM: the completed section
+trigger Fyi_Chalmwoh                    # completed: 321 beats 306
+finish option=0
+trigger Fyi_Chalmwoh                    # 321 again
+finish option=0

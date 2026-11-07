@@ -1,0 +1,27 @@
+# What Friends Are For's Prog bounds: a level 75 Warrior in Nashmau with a Chunk of Tin Ore, a Cobalt Jellyfish and an
+# Imperial Bronze Piece (GMs set every state). Available at Prog 2: Tsetseroon: nil: 4 (the default; no section holds
+# Prog 2). Accepted at Prog 2: the tin, the jellyfish and the bronze piece together: nil (the trade must be exactly the
+# two). Accepted at Prog 5: Tsetseroon: nil: 4. Aydeewa Subterrane: accepted at Prog 4 with the stew held (a GM): qm9:
+# nil.
+lists Nashmau/Tsetseroon/onTrigger Nashmau/Tsetseroon/onTrade AydeewaSubterrane/qm9/onTrigger
+char zone=Nashmau pos=-11.5,-6,68.971 job=WAR lvl=75
+item ChunkOfTinOre
+item CobaltJellyfish
+item ImperialBronzePiece
+quest AhtUrhgan.WhatFriendsAreFor available
+charvar Quest[6][19]Prog 2
+login
+trigger Tsetseroon                      # available, Prog 2: nil: 4 (the default)
+finish-if-event
+quest AhtUrhgan.WhatFriendsAreFor accepted
+charvar Quest[6][19]Prog 2
+trade Tsetseroon ChunkOfTinOre x1 CobaltJellyfish x1 ImperialBronzePiece x1   # three items: nil
+finish-if-event
+charvar Quest[6][19]Prog 5
+trigger Tsetseroon                      # accepted, Prog 5: nil: 4 (the default)
+finish-if-event
+keyitem PotOfTsetseroonsStew            # a GM
+charvar Quest[6][19]Prog 4
+warp -404.4,6.514,-440.237 AydeewaSubterrane
+trigger qm9                             # Prog 4, the stew held: nil
+finish-if-event

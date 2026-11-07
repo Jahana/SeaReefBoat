@@ -1,0 +1,77 @@
+# Trial by Water (outlands 133): Edal-Tahdal in Norg. Available: a trade (his script has no onTrade: nothing); Norg fame
+# level 3: 113 (the script's, after the quest's nil); level 4: 109 (0, Tuning Fork of Water), declined (option 0),
+# option 2 (nothing: the finish wants option 1), accepted (option 1: TrialByWater_date 0, the fork). Accepted: 110 (0,
+# fork, 2) with the fork; the fork deleted by GM: 190 (finish: a new fork); the Whisper of Tides by GM with the fork held
+# (the battlefield's 32001 is #battlefield): 112 once per reward option. Each completion sets TrialByWater_date to the
+# next JST midnight (1800025200 from the harness's 1800000000): 113 while it lies ahead; `wait jst=1` moves the clock a
+# day (1800086400), past it: 109 again, whose option 1 deletes the quest and begins it anew. The strict
+# GetSystemTime() > TrialByWater_date at its edge: the date equal to the clock: 113; one second behind: 109. 112's last
+# argument grows by the rewards held: 1 Leviathan's Rod, 2 the Water Belt, 4 the Water Ring, 8 the Eye of Nept, 32 the
+# Leviathan spell. Option 0 and options above 6 with room are not taken: player:addItem(0) only warns in the engine and
+# the finish completes with no reward, which the recorder refuses to trace (any lua: warning line); a fake check proves
+# it (as Trial by Ice's); with no room they are #inventory_full's.
+char zone=Norg pos=-13.0,1.1,-19.0 job=WAR lvl=75
+fame Norg 224
+item BoneChip
+login
+trade Edal-Tahdal BoneChip x1             # available: no onTrade in his script; nothing
+trigger Edal-Tahdal                       # fame level 3: the quest's nil; 113
+finish
+fame Norg 225
+trigger Edal-Tahdal                       # fame level 4: 109 (0, fork)
+finish option=0                           # declined: nothing
+trigger Edal-Tahdal                       # 109
+finish option=2                           # option 2: nothing
+trigger Edal-Tahdal                       # 109
+finish option=1                           # begun; TrialByWater_date 0; the Tuning Fork of Water
+trigger Edal-Tahdal                       # accepted, the fork, no whisper: 110 (0, fork, 2)
+finish
+delkeyitem TuningForkOfWater
+trigger Edal-Tahdal                       # accepted, neither key item: 190 (0, fork)
+finish                                    # a new fork
+keyitem WhisperOfTides                    # GM: the battlefield win (#battlefield)
+trigger Edal-Tahdal                       # the fork and the whisper: 112 (0, fork, 2, 0, 0)
+finish option=1                           # Leviathan's Rod, ITEM_OBTAINED; Heir of the Great Water; the whisper taken; date; Norg fame +60; completed
+trigger Edal-Tahdal                       # completed, TrialByWater_date 1800025200 ahead: 113
+finish
+charvar TrialByWater_date 1800000000      # GM: the date equal to the clock
+trigger Edal-Tahdal                       # not past (strict >): 113
+finish
+charvar TrialByWater_date 1799999999      # GM: one second behind
+trigger Edal-Tahdal                       # past: 109
+finish option=1                           # the quest deleted and begun again; TrialByWater_date 0; the fork already held
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # 112, mask 1
+finish option=2                           # the Water Belt: completed; TrialByWater_date 1800025200
+trigger Edal-Tahdal                       # ahead: 113
+finish
+wait jst=1                                # the clock 1800086400, past the JST midnight
+trigger Edal-Tahdal                       # completed, TrialByWater_date behind: 109
+finish option=1                           # begun again
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # 112, mask 3
+finish option=3                           # the Water Ring: completed
+charvar TrialByWater_date 1
+trigger Edal-Tahdal                       # 109
+finish option=1
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # 112, mask 7
+finish option=4                           # the Eye of Nept: completed
+charvar TrialByWater_date 1
+trigger Edal-Tahdal                       # 109
+finish option=1
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # 112, mask 15
+finish option=5                           # 10000 gil: completed
+charvar TrialByWater_date 1
+trigger Edal-Tahdal                       # 109
+finish option=1
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # 112, mask 15
+finish option=6                           # the Leviathan spell, AVATAR_UNLOCKED (0, 0, 2): completed
+charvar TrialByWater_date 1
+trigger Edal-Tahdal                       # 109
+finish option=1
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # 112, mask 47 (32: Leviathan)
+finish option=2                           # the Water Belt again: rare, addItem fails (no row), ITEM_OBTAINED all the same; completed

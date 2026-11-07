@@ -1,0 +1,163 @@
+# golden trace: hiddenQuests.chocobo_whistle
+seed 7
+flow 754b0ec07d8bebab6b469915c22ccb8610c2bc4e1f06b562eef668e551f32dc5
+recorder lua
+lua-at 58b8c6a9d70605d3530652a8975c84c66734d556
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @2fe9266a621f4016 (173)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @66c57b98f0122169 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @bcbc236d2b548e3e (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @0b9414455bd195c9 (4)
+char_stats @624f10c4cab4ab95 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @3e4234fe03257d25 (41)
+ret onZoneIn=number:30035,onEventFinish=nil:nil
+order 230/Hantileon/onTrigger=HQuest[ChocoboWhistle],HQuest[ChocoboWhistle],HQuest[LostChick],Quest[3][92]
+order 230/onEventUpdate/829=HQuest[ChocoboWhistle]
+order 230/onEventFinish/829=HQuest[ChocoboWhistle]
+order 230/onEventFinish/830=HQuest[ChocoboWhistle]
+step trigger Hantileon
+packets
+  00E @c2a066b9aece4d8d
+  00E @a63bf261089bea9f
+  00E @eaea37d28f5c331d
+  00E @f87f86cac3c2d7b4
+  00E @8d2250315b23e961
+  00E @7e76067c3d48e304
+  00E @af17f7d4f7bb99fd
+  00E @e42eefa8ef266fc6
+  00E @729e2ef307358c0d
+  00E @a9175169bd73980c
+  00E @fe3cafcb8437e225
+  00E @cc2cf8190dafc89b
+  00E @e2bc7c00d111adf0
+  00E @7781956456fd9a45
+  00E @257edd6296beb6f4
+  00E @35b4145fbc257443
+  00E @806027d4b2620271
+  00E @0842a4e666e3e55f
+  00E @3e9a7f8e5dbca0e4
+  00E @6292d63d0eb2dbf3
+  00E @5f630d292679b3c3
+  00E @75f5a785bd35eefe
+  034 @24e780cf9a5d8878
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=nil:nil
+step finish-if-event
+packets
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step charvar HQuest[ChocoboWhistle]Prog 1
+packets
+char_vars + varname=HQuest[ChocoboWhistle]Prog|value=1|expiry=0
+step trigger Hantileon
+packets
+  033 @d61774036fe76ba4
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=boolean:true
+step update 829 option=1
+packets
+  052 @3c1f8adddcc5ad8a
+ret onEventUpdate=nil:nil
+step update 829 option=244
+packets
+  05C @9f1ef22a9d4669df
+  052 @3c1f8adddcc5ad8a
+ret onEventUpdate=nil:nil
+step finish
+packets
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_vars - varname=HQuest[ChocoboWhistle]Prog|value=1|expiry=0
+char_vars + varname=HQuest[ChocoboWhistle]Prog|value=2|expiry=0
+ret onEventFinish=nil:nil
+step trigger Hantileon
+packets
+  034 @24e780cf9a5d8878
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=nil:nil
+step finish-if-event
+packets
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step charvar HQuest[ChocoboWhistle]Prog 3
+packets
+char_vars - varname=HQuest[ChocoboWhistle]Prog|value=2|expiry=0
+char_vars + varname=HQuest[ChocoboWhistle]Prog|value=3|expiry=0
+step keyitem DirtyHandkerchief
+packets
+  055 @4d1dbac65bbc7073
+chars - keyitems=null
+chars + keyitems=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+step trigger Hantileon
+packets
+  033 @a94b39a30d759e30
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=boolean:true
+step finish option=0
+packets
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step keyitem Handkerchief
+packets
+  055 @3ab1cba17385becc
+chars keyitems +165:06
+step trigger Hantileon
+packets
+  033 @960dc032f2cf9fd0
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=boolean:true
+step finish option=222
+packets
+  055 @f69f48833e8882a9
+  055 @1e3bf07cf5dc573f
+  020 @6d67ccf5b523c2ce
+  01D @f8579df92de4b1ca
+  02A @e85c941d6b2a40b6
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory + location=0|slot=1|itemId=15533|quantity=1|bazaar=0|signature=|extra=001900000000000000000000000000000000000000000000
+char_pet - chocobo_user_data=null
+char_pet + chocobo_user_data=0000000001000000000000000000000000000000000000000000000000000000
+char_vars - varname=HQuest[ChocoboWhistle]Prog|value=3|expiry=0
+chars keyitems +165:00
+ret onEventFinish=nil:nil
+step trigger Hantileon
+packets
+  034 @24e780cf9a5d8878
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=nil:nil
+step finish-if-event
+packets
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil

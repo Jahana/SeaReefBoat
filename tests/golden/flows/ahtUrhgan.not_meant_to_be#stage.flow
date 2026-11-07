@@ -1,0 +1,81 @@
+# Not Meant to Be's qm12 by Stage (the NMs' kill bits: Lamia No.27 bit 0, Moshdahn bit 1): two level 75 Warriors in
+# Caedarva Mire, the quest accepted (GMs); bob holds a 17 open (talked to while neither NM was up) and finishes it
+# later, once the NMs stand or lie in the combinations that make 17's own check count. Main: Prog 0: qm12: nil: the
+# default; Prog 3, Stage 3, neither NM up (never spawned): 18 (a GM resets Prog and Stage); Stage 4: nil; Stage 2
+# (Moshdahn's bit only), none up: 17, finished: both spawned. Lamia killed and despawned (two ticks), Moshdahn up:
+# qm12: nil; bob finishes his 17: Moshdahn up: nothing spawned. Both killed and gone; again with Moshdahn killed, Lamia
+# up: nil, bob's 17: nothing spawned. Kills at the wrong Prog: Moshdahn at Prog 3 and Lamia at Prog 4 (and the other
+# way): only the Prog 3 kill's bit is set (Stage 2, or 1; none up): qm12: 17. Nashmau: Fhe Maksojha at Prog 0 and at
+# Prog 5: nil (nothing plays).
+lists CaedarvaMire/qm12/onTrigger CaedarvaMire/Lamia_No27/onMobDeath CaedarvaMire/Moshdahn/onMobDeath CaedarvaMire/onEventFinish/17 CaedarvaMire/onEventFinish/18 Nashmau/Fhe_Maksojha/onTrigger
+char zone=CaedarvaMire pos=458.5,-7,-270.815 job=WAR lvl=75
+char bob zone=CaedarvaMire pos=458.5,-7,-269.5 job=WAR lvl=75
+quest AhtUrhgan.NotMeantToBe accepted
+charvar Quest[6][64]Prog 0
+bob: quest AhtUrhgan.NotMeantToBe accepted
+bob: charvar Quest[6][64]Prog 3
+login
+bob: login
+trigger qm12                            # Prog 0: nil: NOTHING_HAPPENS
+bob: trigger qm12                        # bob: neither NM up: 17, left open
+charvar Quest[6][64]Prog 3              # a GM
+charvar Quest[6][64]Stage 3             # a GM
+trigger qm12                            # Stage 3, neither NM up: 18
+finish                                  # Prog 4
+charvar Quest[6][64]Prog 3              # a GM
+charvar Quest[6][64]Stage 4             # a GM
+trigger qm12                            # Stage 4: nil
+finish-if-event
+charvar Quest[6][64]Stage 2             # a GM
+trigger qm12                            # Stage 2, none up: 17
+finish                                  # both spawned, claimed
+charvar Quest[6][64]Stage 0             # a GM
+kill LAMIA_NO27                         # Prog 3: Stage 1
+tick 15000
+tick 30000                             # the NM gone (a dead mob stays through one long tick)
+trigger qm12                            # Moshdahn up, Lamia gone: nil
+finish-if-event
+bob: finish                              # bob's 17: Moshdahn up: nothing spawned
+kill MOSHDAHN                           # Stage 3
+tick 15000
+tick 30000                             # the NM gone (a dead mob stays through one long tick)
+charvar Quest[6][64]Stage 0             # a GM
+bob: trigger qm12                        # none up: 17
+trigger qm12                            # 17
+finish                                  # both spawned
+kill MOSHDAHN                           # Stage 2
+tick 15000
+tick 30000                             # the NM gone (a dead mob stays through one long tick)
+trigger qm12                            # Lamia up, Moshdahn gone: nil
+finish-if-event
+bob: finish                              # bob's 17: Lamia up: nothing spawned
+kill LAMIA_NO27                         # Stage 3
+tick 15000
+tick 30000                             # the NM gone (a dead mob stays through one long tick)
+charvar Quest[6][64]Stage 0             # a GM
+trigger qm12                            # 17
+finish                                  # both spawned
+kill MOSHDAHN                           # Prog 3: Stage 2
+charvar Quest[6][64]Prog 4              # a GM
+kill LAMIA_NO27                         # Prog 4: no bit
+charvar Quest[6][64]Prog 3              # a GM
+tick 15000
+tick 30000                             # the NM gone (a dead mob stays through one long tick)
+trigger qm12                            # Stage 2, none up: 17
+finish                                  # both spawned
+charvar Quest[6][64]Stage 0             # a GM
+kill LAMIA_NO27                         # Prog 3: Stage 1
+charvar Quest[6][64]Prog 4              # a GM
+kill MOSHDAHN                           # Prog 4: no bit
+charvar Quest[6][64]Prog 3              # a GM
+tick 15000
+tick 30000                             # the NM gone (a dead mob stays through one long tick)
+trigger qm12                            # Stage 1, none up: 17
+finish
+warp 20.584,-6,71.287 Nashmau
+charvar Quest[6][64]Prog 0              # a GM
+trigger Fhe_Maksojha                    # Prog 0: nil
+finish-if-event
+charvar Quest[6][64]Prog 5              # a GM
+trigger Fhe_Maksojha                    # Prog 5: nil
+finish-if-event

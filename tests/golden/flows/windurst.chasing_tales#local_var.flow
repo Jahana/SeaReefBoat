@@ -1,0 +1,15 @@
+# Chasing Tales (windurst 13): Early Bird's completion sets the player local var Quest[2][13]mustZone (this quest's
+# prefix), but this quest's offer reads quest:getMustZone, the char var of that name: so the offer is there at once,
+# with no zone change (a kept quirk). The fame is raised before Early Bird's completion (125, then 145: level 3).
+# Early Bird completes on C# here (from Prog 2: Furakku's 400), as its own traces prove it against its Lua.
+lists WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/Furakku-Norakku/onTrigger WindurstWaters/onEventFinish/400 WindurstWaters/onEventFinish/403
+char zone=WindurstWaters pos=-16.5,-5.25,102.0
+quest Windurst.EarlyBirdCatchesTheBookworm accepted
+charvar Quest[2][20]Prog 2
+keyitem ArtForEveryone
+fame Windurst 125
+login
+trigger Furakku-Norakku             # Early Bird at Prog 2: 400
+finish                              # Early Bird completed (fame 145); local var Quest[2][13]mustZone 1
+trigger Tosuka-Porika               # available, Early Bird completed, fame level 3, the char var 0: 403 (the local var does not gate it)
+finish option=1                     # declined: nothing

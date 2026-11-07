@@ -1,0 +1,81 @@
+# Rubbish Day (jeuno 13): Chululu in Lower Jeuno (no script; default 26; Collect Tarut Cards and All in the Cards also
+# name her: Collect Tarut Cards is completed and All in the Cards' Date is set far ahead, so neither has a section),
+# Mashira in Garlaige Citadel (a script: 11 with 3, its finish acts only for Making Amens). Bob is a second char in
+# Lower Jeuno: the readings take a partner's id (option=$bob) or a typed name (option="<text>").
+# Available: a trade (no trade handler), 199 and its updates: 0 (nothing); typed '' (EMPTY: 0, 3), 'chululu' (0, 1),
+# 'KUROU-MOROU' (string.lower: 0, 2), an unknown name (0, 0), main's own name (the partner is the char: 0, 0), bob's
+# name (bob's id, 0); an id no char has (nothing); bob's id (counted: Prog 1, Day 8000; one eventBits row); bob's id
+# again the same day (the row only). Day 8001: main's own id (GetPlayerByID finds the char itself in the zone:
+# counted, Prog 2). Day 8002: Prog 2 not read today (199), bob's id (Prog 3), bob in Upper Jeuno (his id: nothing;
+# his name: 0, 0), Prog 3 read today (199). Day 8003: 198 (option 1: nothing; option 0: begun, the Magic Trash, Prog
+# 0). Accepted: 49, a trade (nothing), Mashira's 11 with 1 (Progress over his script; option 0: nothing; option 1: the
+# trash deleted, Prog 1), Mashira at Prog 1 (nil: his script's 11 with 3; its finish runs this quest's 11 handler too:
+# option 0, nothing), Chululu's 197 (a full bag: not completed; with room: completed, 6000 gil, Chain Choker, fame +13
+# x3). Completed: 199 (Event) with bob's id (not counted: the row only) and a typed 'Chululu' (0, 1); a trade (nothing).
+lists LowerJeuno/Chululu/onTrigger LowerJeuno/Chululu/onTrade GarlaigeCitadel/Mashira/onTrigger LowerJeuno/onEventUpdate/199 LowerJeuno/onEventFinish/199 LowerJeuno/onEventFinish/198 LowerJeuno/onEventFinish/197 GarlaigeCitadel/onEventFinish/11
+char zone=LowerJeuno pos=-9,-6.673,-44 job=WAR lvl=30
+char bob zone=LowerJeuno pos=-12,-6.673,-46 lvl=20
+quest Jeuno.CollectTarutCards completed
+charvar Quest[3][166]Date 2000000000
+item FlintStone x3
+login
+bob: login
+walk -10.0,-6.673,-44
+trade Chululu FlintStone x1                 # available: no trade handler, nothing
+trigger Chululu                             # available, Prog 0: 199
+update 199 option=0                         # 0: nothing
+update 199 option=""                        # '': updateEvent(main's id, 0, 3)
+update 199 option="chululu"                 # updateEvent(main's id, 0, 1)
+update 199 option="KUROU-MOROU"             # string.lower: updateEvent(main's id, 0, 2)
+update 199 option="Nobody"                  # no such char: updateEvent(main's id, 0, 0)
+update 199 option="$main"                   # the char itself: updateEvent(main's id, 0, 0)
+update 199 option="$bob"                    # bob in the zone: updateEvent(main's id, bob's id, 0)
+update 199 option=1                         # no char has id 1: nothing
+update 199 option=$bob                      # bob in the zone, Day not today: Prog 1, Day 8000; an eventBits row
+update 199 option=$bob                      # the same day: the row only
+finish
+trigger Chululu                             # Prog 1: 199
+finish
+wait vana=24                                # day 8001
+trigger Chululu                             # Prog 1: 199
+update 199 option=$main                     # the char's own id: in the zone, counted: Prog 2, Day 8001; a row
+finish
+wait vana=24                                # day 8002
+trigger Chululu                             # Prog 2, Day 8001 (not today): Prog under 3, 199
+update 199 option=$bob                      # counted: Prog 3, Day 8002; a row
+bob: warp -75,-1.2,62 UpperJeuno
+update 199 option=$bob                      # bob in Upper Jeuno: nothing
+update 199 option="$bob"                    # bob in Upper Jeuno: updateEvent(main's id, 0, 0)
+finish
+trigger Chululu                             # Prog 3, read today: 199
+finish
+wait vana=24                                # day 8003
+trigger Chululu                             # Prog 3, Day 8002: 198
+finish option=1                             # not 0: nothing
+trigger Chululu                             # 198
+finish option=0                             # begun: the Magic Trash, Prog 0
+trigger Chululu                             # accepted, Prog 0: 49
+finish
+walk -10.0,-6.673,-44
+trade Chululu FlintStone x1                 # accepted: no trade handler, nothing
+warp 141,-6,138 GarlaigeCitadel
+trigger Mashira                             # Prog 0: 11 with 1 (Progress: the script does not get a turn)
+finish option=0                             # not 1: nothing
+trigger Mashira                             # 11 with 1
+finish option=1                             # the trash deleted, Prog 1
+trigger Mashira                             # Prog 1: nil; his script's 11 with 3
+finish option=0                             # this quest's 11 handler runs too: option 0, nothing
+warp -9,-6.673,-44 LowerJeuno
+trigger Chululu                             # Prog 1: 197
+fill-inventory
+finish                                      # no room for the choker: not completed
+free-inventory
+trigger Chululu                             # 197 again
+finish                                      # completed: 6000 gil, Chain Choker, fame +13 x3
+bob: warp -12,-6.673,-46 LowerJeuno
+trigger Chululu                             # completed: 199 (Event)
+update 199 option=$bob                      # bob in the zone; completed readings are not counted: the row only
+update 199 option="Chululu"                 # updateEvent(main's id, 0, 1)
+finish
+walk -10.0,-6.673,-44
+trade Chululu FlintStone x1                 # completed: no trade handler, nothing

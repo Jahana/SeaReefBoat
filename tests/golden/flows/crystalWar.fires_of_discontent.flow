@@ -1,0 +1,66 @@
+# Fires of Discontent (crystalWar 13): a level 99 Warrior in Bastok Markets [S] with The Fighting Fourth and Better Part
+# of Valor completed (GMs; missions as group 1's flows: the WotG mission Back to the Beginning current, not completed).
+# Pagdako while available: no section: his default 106. Engelhart 120, finished: begun. Prog 0: Engelhart 121; Gentle
+# Tiger 161; Pagdako 122, finished: Prog 1; 123. Prog 1: Engelhart 121. Metalworks: Iron Eater 956, finished: Prog 2;
+# 957. Bastok Markets [S]: Engelhart 124, finished: Prog 3; 125. Grauberg [S]: qm5 11, finished: Prog 4; Prog 4: nil
+# (no script, no default). Bastok Markets [S]: Engelhart 126, finished: Prog 5; 127. Gentle Tiger 160, finished: Prog
+# 6; 161. Engelhart 164, finished: completed (10000 gil). Completed: Engelhart 165 (replaceDefault), twice; Pagdako:
+# no section: 106; Gentle Tiger: Light in the Darkness not available (the mission not completed): his default 109.
+lists BastokMarketsS/Engelhart/onTrigger BastokMarketsS/Pagdako/onTrigger BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/120 BastokMarketsS/onEventFinish/122 BastokMarketsS/onEventFinish/124 BastokMarketsS/onEventFinish/126 BastokMarketsS/onEventFinish/160 BastokMarketsS/onEventFinish/164 Metalworks/Iron_Eater/onTrigger Metalworks/onEventFinish/956 GraubergS/qm5/onTrigger GraubergS/onEventFinish/11
+char zone=BastokMarketsS pos=-200.58,-6,-93.928 job=WAR lvl=99
+quest CrystalWar.TheFightingFourth completed
+quest CrystalWar.BetterPartOfValor completed
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Pagdako                         # available: no section: his default 106; the mission takes no talk
+finish-if-event
+trigger Engelhart                       # 120
+finish                                  # begun
+trigger Engelhart                       # Prog 0: 121
+finish
+trigger Gentle_Tiger                    # Prog 0: 161
+finish
+trigger Pagdako                         # Prog 0: 122
+finish                                  # Prog 1
+trigger Pagdako                         # Prog 1: 123
+finish
+trigger Engelhart                       # Prog 1: 121
+finish
+warp 94.436,-19.532,1.814 Metalworks
+trigger Iron_Eater                      # Prog 1: 956
+finish                                  # Prog 2
+trigger Iron_Eater                      # Prog 2: 957
+finish
+warp -78.585,-4.425,-125.327 BastokMarketsS
+trigger Engelhart                       # Prog 2: 124
+finish                                  # Prog 3
+trigger Engelhart                       # Prog 3: 125
+finish
+warp 261.293,33.192,515.257 GraubergS
+trigger qm5                             # Prog 3: 11
+finish                                  # Prog 4
+trigger qm5                             # Prog 4: nil (no default)
+finish-if-event
+warp -78.585,-4.425,-125.327 BastokMarketsS
+trigger Engelhart                       # Prog 4: 126
+finish                                  # Prog 5
+trigger Engelhart                       # Prog 5: 127
+finish
+trigger Gentle_Tiger                    # Prog 5: 160
+finish                                  # Prog 6
+trigger Gentle_Tiger                    # Prog 6: 161
+finish
+trigger Engelhart                       # Prog 6: 164
+finish                                  # completed (10000 gil)
+trigger Engelhart                       # completed: 165 (replaceDefault)
+finish
+trigger Engelhart                       # 165 again
+finish
+trigger Pagdako                         # completed: no section: 106
+finish-if-event
+trigger Gentle_Tiger                    # completed, Light in the Darkness not available: his default 109
+finish-if-event

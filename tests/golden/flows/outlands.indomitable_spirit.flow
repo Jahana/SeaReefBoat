@@ -1,0 +1,30 @@
+# Indomitable Spirit (outlands 201): Irmilant in Rabao. The offer with the Serpent Rumors (131), a wrong trade, the trade (132)
+# setting IndomitableSpiritTimer, waiting before the tally (133), the ending after it (134), the Completed talk (135), then the
+# trade, the wait and the ending again while Completed.
+char zone=Rabao pos=3.78,9.54,56.21
+item SaberShoot x2
+item SpoolOfOpalSilk x2
+login
+trigger Irmilant                # no Serpent Rumors: nothing
+finish-if-event
+keyitem SerpentRumors
+trigger Irmilant                # 131
+finish                          # accepted
+trade Irmilant SaberShoot x1    # wrong trade: nothing
+finish-if-event
+trade Irmilant SaberShoot x1 SpoolOfOpalSilk x1   # 132
+finish                          # the timer set to the next tally
+trigger Irmilant                # before the tally: 133
+finish-if-event
+wait jst=8
+trigger Irmilant                # after it: 134
+finish                          # completed, the Ebisu Fishing Rod, the title, the timer deleted
+trigger Irmilant                # Completed: 135
+finish-if-event
+trade Irmilant SaberShoot x1 SpoolOfOpalSilk x1   # Completed: 132 again
+finish
+trigger Irmilant                # 133
+finish-if-event
+wait jst=8
+trigger Irmilant                # 134 again
+finish

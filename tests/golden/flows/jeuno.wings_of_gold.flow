@@ -1,0 +1,57 @@
+# Wings of Gold (jeuno 60): Brutus in Upper Jeuno, the Treasure Chests of Middle and Upper Delkfutt's Tower. A level
+# 40 beastmaster with Path of the Beastmaster completed: Brutus's 139 (option 0: Prog 1), 137 (option 0: nothing;
+# option 1: begun), Brutus while accepted without the bell (136; Path of the Beastmaster's completed 20 has the same
+# Event priority, so the lookup cycles the two, 20 first by container order, his silent script's turns falling back to
+# the next one), the Middle tower chest without the bell (the treasure trade with the key item bypass gives the
+# Guiding Bell; noAction), the Upper tower chest with the bell (nil: the chest's own script, a regular opening),
+# Brutus's 138 (a full bag: not completed, the bell kept; with room: completed, Barbaroi Axe, fame +7 x3, the bell
+# deleted), then completed: Wings' 134 (replaceDefault) loses to Path of the Beastmaster's Event 20 in the lookup, and
+# Brutus's script plays 134 on its turns (Wings completed); then a GM completes Scattered into Shadow (check 3 false:
+# Path's 20, and the script's 151). A bone chip traded to Brutus while offered: no trade handler, nil.
+# Chests: placed 10 s after the zone loads (tick 13000), the key item 2 s after the trade (tick 4500).
+lists UpperJeuno/Brutus/onTrigger MiddleDelkfuttsTower/Treasure_Chest/onTrade UpperDelkfuttsTower/Treasure_Chest/onTrade UpperJeuno/onEventFinish/137 UpperJeuno/onEventFinish/139 UpperJeuno/onEventFinish/138
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=BST lvl=40
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster completed
+item DelkfuttChestKey x2
+item BoneChip
+login
+trigger Brutus                              # available, Prog 0: 139
+finish option=0                             # not 1: Prog 1
+trade Brutus BoneChip x1                    # available: no trade handler, nil (his script has none)
+trigger Brutus                              # Prog 1: 137
+finish option=0                             # not 1: nothing
+trigger Brutus                              # 137
+finish option=1                             # begun
+trigger Brutus                              # accepted, no bell: the lookup's turn, Path of the Beastmaster's 20 first
+finish
+trigger Brutus                              # the script's turn, silent: the next Event action, 136
+finish
+warp -40,-47.852,90 MiddleDelkfuttsTower
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest DelkfuttChestKey x1    # no bell: the treasure trade, bypass 2: the Guiding Bell; noAction
+tick 4500                                   # the Guiding Bell
+warp -300,-175.924,20 UpperDelkfuttsTower
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest DelkfuttChestKey x1    # the bell held: nil; the chest's own script opens it
+tick 4500
+warp -55.5,8.2,97.5 UpperJeuno
+trigger Brutus                              # the bell: 138
+fill-inventory
+finish                                      # no room for the axe: not completed, the bell kept
+free-inventory
+trigger Brutus                              # 138 again
+finish                                      # completed: Barbaroi Axe, fame +7 x3, the bell deleted
+trigger Brutus                              # completed: Path of the Beastmaster's 20 (Event) outranks Wings' 134 (replaceDefault)
+finish
+trigger Brutus                              # the script's turn: his 134 (Wings completed)
+finish
+quest Jeuno.ScatteredIntoShadow completed   # a GM: check 3 false, Wings returns nothing at Brutus
+trigger Brutus                              # Path of the Beastmaster's 20 (the lookup's turn)
+finish
+trigger Brutus                              # the script's turn: his 151 (Scattered completed)
+finish

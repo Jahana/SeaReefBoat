@@ -1,0 +1,52 @@
+# Expanding Horizons (jeuno 134, limit break 7): the Nomad Moogle in Ru'Lude Gardens (default 10045 (0, 0, 2, 0)). A
+# level 76 Warrior with the Limit Breaker at level cap 80, New Worlds Await completed (both by a GM, before login),
+# MAX_LEVEL 99, 4 merit points. Available: five Kindred's Crests (no trade handler while available: nothing); 10045 (76,
+# 1, 2, 0), finish options 0, 6 and 8 (nothing), then 7 (begun). Accepted: event 10045 (76, 1, 2, 1), (76, 2, 2, 1) once the
+# Limit Breaker is gone (a GM). The trade: five crests with 3 merit points (nil); with 4: four, six, five and a stone,
+# five Kindred's Seals (nil each); five crests: 10136, finished with 6 merit points (a GM, 10136 open) and a full bag (no
+# item reward: completed anyway): the crests taken (confirmTrade), 6 - 4 = 2 merit points, level cap 85,
+# YOUR_LEVEL_LIMIT_IS_NOW_85. Completed: Beyond the Stars answers at cap 85 (76, 1, 2, 2); at cap 80 again (a GM) no
+# quest answers: the default; five crests: nothing.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10136
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=76
+keyitem LimitBreaker
+levelcap 80
+merits 4
+quest Jeuno.NewWorldsAwait completed
+item KindredsCrest x11
+item KindredsSeal x5
+item FlintStone
+login
+trade Nomad_Moogle KindredsCrest x5     # available, 4 merit points: no trade handler, nothing
+trigger Nomad_Moogle                    # cap 80, NWA completed, level 76: 10045 (76, 1, 2, 0)
+finish option=0                         # not 7: nothing
+trigger Nomad_Moogle                    # 10045 (76, 1, 2, 0)
+finish option=6                         # not 7: nothing
+trigger Nomad_Moogle                    # 10045 (76, 1, 2, 0)
+finish option=8                         # not 7: nothing
+trigger Nomad_Moogle                    # 10045 (76, 1, 2, 0)
+finish option=7                         # begun
+trigger Nomad_Moogle                    # accepted: event 10045 (76, 1, 2, 1)
+finish
+delkeyitem LimitBreaker                 # a GM
+trigger Nomad_Moogle                    # accepted, no Limit Breaker: event 10045 (76, 2, 2, 1)
+finish
+keyitem LimitBreaker                    # a GM
+merits 3                                # a GM
+trade Nomad_Moogle KindredsCrest x5     # five crests, 3 merit points: nil
+merits 4                                # a GM
+trade Nomad_Moogle KindredsCrest x4     # four: nil
+trade Nomad_Moogle KindredsCrest x6     # six: nil
+trade Nomad_Moogle KindredsCrest x5 FlintStone x1  # five and a stone: nil
+trade Nomad_Moogle KindredsSeal x5      # five seals, not crests: nil
+trade Nomad_Moogle KindredsCrest x5     # five crests, 4 merit points: 10136
+merits 6                                # a GM, 10136 open
+fill-inventory
+finish                                  # completed: the crests taken, merits 2, level cap 85, the message
+free-inventory
+trigger Nomad_Moogle                    # completed; Beyond the Stars (EH completed, cap 85), level 76: 10045 (76, 1, 2, 2)
+finish
+levelcap 80                             # a GM
+trigger Nomad_Moogle                    # completed, cap 80: no section; the default 10045 (0, 0, 2, 0)
+finish
+trade Nomad_Moogle KindredsCrest x5     # completed: no trade handler answers: nothing

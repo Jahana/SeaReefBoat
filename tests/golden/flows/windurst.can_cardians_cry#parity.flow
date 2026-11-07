@@ -1,0 +1,12 @@
+# Can Cardians Cry? (windurst 47), completion parity: 325's finish is npcUtil.completeQuest step for step, ending in the
+# raw player:completeQuest, so a GM's Quest[2][47]Prog survives the completion (quest:cleanup, which a called
+# Quest.Complete() runs, would clear it). GIL_RATE 1.0025: 5000 x 1.0025 = 5012.5 (llround 5013, GIL_OBTAINED 5013).
+# Accepted (GM) beside Apururu (her default 274 does not answer a trade).
+char zone=WindurstWoods pos=-10.5,-2.75,15.9 job=WAR lvl=75
+setting GIL_RATE 1.0025
+item BruisedStarfruit
+login
+quest Windurst.CanCardiansCry accepted
+charvar Quest[2][47]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Apururu BruisedStarfruit x1       # 325 (0, 20000, 5000)
+finish                                  # 5013 gil; Deliverer of Tearful News; completed; the starfruit taken; Prog kept

@@ -1,0 +1,39 @@
+# Wrath of the Griffon (crystalWar 25): a level 99 Warrior in Southern San d'Oria [S] with Boy and the Beast completed
+# (a GM; missions as group 1's flows). Rholont 59, finished: begun; Rholont: Prog 0: 61. Jugner Forest [S]: qm8 204,
+# finished: Prog 1; qm8 205, finished: Cobraclaw Buchzvotch spawned, claimed (scripted spawn: not up at zone load); qm8:
+# the NM up: nil (207). The NM killed at Prog 1: Prog 2. qm8 206, finished: Prog 3; qm8 at Prog 3: nil (207). Rholont
+# 60, finished: completed (the Military Scrip), Perils of the Griffon's Timer tomorrow and its mustZone. Wyatt: the
+# scrip: 66 (priority 1005, over Seeing Spots' available 2: CHECK), finished: the scrip taken, 20147 gil. Wyatt: no
+# scrip: no section: Seeing Spots' 2 (finished: Seeing Spots begun).
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Wyatt/onTrigger SouthernSanDoriaS/onEventFinish/59 SouthernSanDoriaS/onEventFinish/60 SouthernSanDoriaS/onEventFinish/66 JugnerForestS/qm8/onTrigger JugnerForestS/Cobraclaw_Buchzvotch/onMobDeath JugnerForestS/onEventFinish/204 JugnerForestS/onEventFinish/205 JugnerForestS/onEventFinish/206
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.BoyAndTheBeast completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # available: 59
+finish                                  # begun
+trigger Rholont                         # Prog 0: 61
+finish
+warp -4.6,0.23,-294.975 JugnerForestS
+trigger qm8                             # Prog 0: 204
+finish                                  # Prog 1
+trigger qm8                             # Prog 1, the NM not up: 205
+finish                                  # Cobraclaw Buchzvotch spawned, claimed
+trigger qm8                             # the NM up: nil (207)
+finish-if-event
+kill COBRACLAW_BUCHZVOTCH               # Prog 1: Prog 2
+trigger qm8                             # Prog 2: 206
+finish                                  # Prog 3
+trigger qm8                             # Prog 3: nil (207)
+finish-if-event
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 3: 60
+finish                                  # completed (the Military Scrip); Perils' Timer and mustZone
+walk 125.517,0,84.169
+trigger Wyatt                           # completed, the scrip: 66 (priority 1005)
+finish                                  # the scrip taken; 20147 gil
+trigger Wyatt                           # no scrip: no section: Seeing Spots' 2
+finish-if-event

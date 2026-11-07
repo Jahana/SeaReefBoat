@@ -1,0 +1,43 @@
+# Inside the Belly (otherAreas 26): a full inventory at the finish. The trade is confirmed before the event, so the fish's
+# slot is free when the event starts; a GM fills it. npcUtil.giveItem then fails (ITEM_CANNOT_BE_OBTAINED, the item lost)
+# but the gil and the local vars' reset still come.
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# Completed (a GM; the accepted section's finish is the #accepted flow's), skill 30. Six rounds
+# of a Sekiryu (<= 481: 166, the Sekiryu's Liver, else 167; 1512 gil), the liver lost on each 166.
+lists Selbina/Zaldon/onTrade Selbina/onEventFinish/166 Selbina/onEventFinish/167
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.InsideTheBelly completed
+skill Fishing 300
+login
+free-inventory
+item Sekiryu
+trade Zaldon Sekiryu x1                 # round 1: confirmed now; <= 481: 166 (0, the liver), else 167
+fill-inventory                          # the fish's slot filled
+finish                                  # the liver lost on a 166; 1512 gil
+free-inventory
+item Sekiryu
+trade Zaldon Sekiryu x1                 # round 2: confirmed now; <= 481: 166 (0, the liver), else 167
+fill-inventory                          # the fish's slot filled
+finish                                  # the liver lost on a 166; 1512 gil
+free-inventory
+item Sekiryu
+trade Zaldon Sekiryu x1                 # round 3: confirmed now; <= 481: 166 (0, the liver), else 167
+fill-inventory                          # the fish's slot filled
+finish                                  # the liver lost on a 166; 1512 gil
+free-inventory
+item Sekiryu
+trade Zaldon Sekiryu x1                 # round 4: confirmed now; <= 481: 166 (0, the liver), else 167
+fill-inventory                          # the fish's slot filled
+finish                                  # the liver lost on a 166; 1512 gil
+free-inventory
+item Sekiryu
+trade Zaldon Sekiryu x1                 # round 5: confirmed now; <= 481: 166 (0, the liver), else 167
+fill-inventory                          # the fish's slot filled
+finish                                  # the liver lost on a 166; 1512 gil
+free-inventory
+item Sekiryu
+trade Zaldon Sekiryu x1                 # round 6: confirmed now; <= 481: 166 (0, the liver), else 167
+fill-inventory                          # the fish's slot filled
+finish                                  # the liver lost on a 166; 1512 gil

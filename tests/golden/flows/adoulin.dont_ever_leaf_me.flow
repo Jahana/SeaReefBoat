@@ -1,0 +1,54 @@
+# Don't Ever Leaf Me (adoulin 70, call-only: Dewalt's and Barenngo's scripts): a level 99 Warrior in Western Adoulin.
+# Dewalt (default 5017; Flavors of Our Lives' three containers in his order line, none up: Flavors available) and
+# Barenngo (default 5018) alternate with their scripts: pairs, the default first. Available: nothing from the quest
+# (5017 both talks). Accepted (a GM: nothing begins it): Dewalt 5013, finished: DELM_Dewalt_Branch 1; then 5014; the
+# var 2 (a GM): nothing. Barenngo 5015, finished: DELM_Barenngo_Branch 1; then 5016; the var 2: nothing. Completed with
+# the vars 0 (GMs): nothing at either.
+lists WesternAdoulin/Dewalt/onTrigger WesternAdoulin/Barenngo/onTrigger WesternAdoulin/onEventFinish/5013
+lists WesternAdoulin/onEventFinish/5015
+char zone=WesternAdoulin pos=-21.5,0,28 job=WAR lvl=99
+login
+trigger Dewalt                          # available: nothing (5017 by the turn)
+finish-if-event
+trigger Dewalt                          # the other of the pair
+finish-if-event
+quest Adoulin.DontEverLeafMe accepted   # a GM
+trigger Dewalt                          # var 0: 5013 or 5017
+finish-if-event
+trigger Dewalt                          # the other; 5013's finish: the var 1
+finish-if-event
+trigger Dewalt                          # var 1: 5014 or 5017
+finish-if-event
+trigger Dewalt                          # the other of the pair
+finish-if-event
+charvar DELM_Dewalt_Branch 2            # a GM
+trigger Dewalt                          # var 2: nothing
+finish-if-event
+trigger Dewalt                          # the other of the pair
+finish-if-event
+warp -99.5,3,14 WesternAdoulin          # beside Barenngo
+trigger Barenngo                        # var 0: 5015 or 5018
+finish-if-event
+trigger Barenngo                        # the other; 5015's finish: the var 1
+finish-if-event
+trigger Barenngo                        # var 1: 5016 or 5018
+finish-if-event
+trigger Barenngo                        # the other of the pair
+finish-if-event
+charvar DELM_Barenngo_Branch 2          # a GM
+trigger Barenngo                        # var 2: nothing
+finish-if-event
+trigger Barenngo                        # the other of the pair
+finish-if-event
+quest Adoulin.DontEverLeafMe completed  # a GM
+charvar DELM_Barenngo_Branch 0          # a GM
+trigger Barenngo                        # completed, var 0: nothing
+finish-if-event
+trigger Barenngo                        # the other of the pair
+finish-if-event
+charvar DELM_Dewalt_Branch 0            # a GM
+warp -21.5,0,28 WesternAdoulin          # beside Dewalt
+trigger Dewalt                          # completed, var 0: nothing
+finish-if-event
+trigger Dewalt                          # the other of the pair
+finish-if-event

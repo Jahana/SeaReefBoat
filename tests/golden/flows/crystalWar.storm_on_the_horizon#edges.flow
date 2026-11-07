@@ -1,0 +1,57 @@
+# Storm on the Horizon (crystalWar 35), the edges: a level 99 Warrior in Bastok Markets [S] (missions as the main flow).
+# Burden of Suspicion not completed: Blatherix: no section (nothing); North Gustaberg [S] and back: no zone-in reply.
+# Burden completed (a GM): a full inventory: Blatherix 37, finished: the Elixir does not fit: nothing set (Prog 0);
+# freed: 37, finished on option 1: the Elixir, Prog 1, Timer, mustZone. The Timer set to 0 (a GM). In North Gustaberg
+# [S] (the mustZone cleared), the mustZone set to 87 (a GM, so the arrival keeps it): Bastok Markets [S] from North
+# Gustaberg [S]: the mustZone set: nil. Vunkerl Inlet [S] (cleared), then Bastok Markets [S] from Vunkerl Inlet [S]: not
+# from North Gustaberg [S]: nil. Prog 0 (a GM): North Gustaberg [S] and back: nil. Accepted at Prog 0 (a GM): Gentle
+# Tiger nil (109); Prog 4 (a GM): Gentle Tiger nil (109); Prog 0 again (a GM): the Monument at Prog 0: nil; Grauberg
+# [S]'s qm5 at Prog 0: nil. Prog 4 (a GM), a full inventory: qm5 16, finished: the wing does not fit: not completed;
+# freed: 16: completed.
+lists BastokMarketsS/onZoneIn/1 BastokMarketsS/Blatherix/onTrigger BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/37 NorthGustabergS/Monument/onTrigger GraubergS/qm5/onTrigger GraubergS/onEventFinish/16
+char zone=BastokMarketsS pos=-308.324,-11.999,-42.791 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Blatherix+13                    # Burden of Suspicion not completed: no section: nothing
+finish-if-event
+warp 380.038,-2.25,147.627 NorthGustabergS
+warp -308.324,-11.999,-42.791 BastokMarketsS # no section: no zone-in reply
+quest CrystalWar.BurdenOfSuspicion completed
+fill-inventory
+trigger Blatherix+13                    # Prog 0: 37
+finish                                  # no room for the Elixir: nothing set
+free-inventory
+trigger Blatherix+13                    # Prog 0: 37
+finish option=1                         # the Elixir; Prog 1; Timer; mustZone
+charvar Quest[7][35]Timer 0             # a GM: the Timer passed
+warp 380.038,-2.25,147.627 NorthGustabergS # the mustZone cleared
+charvar Quest[7][35]mustZone 87         # a GM: set to Bastok Markets [S], which its zone-in keeps
+warp -308.324,-11.999,-42.791 BastokMarketsS # from North Gustaberg [S], the mustZone set: nil
+warp 208.581,-32.002,315.458 VunkerlInletS # the mustZone cleared
+warp -308.324,-11.999,-42.791 BastokMarketsS # from Vunkerl Inlet [S]: nil
+charvar Quest[7][35]Prog 0              # a GM
+warp 380.038,-2.25,147.627 NorthGustabergS
+warp -308.324,-11.999,-42.791 BastokMarketsS # Prog 0: nil
+quest CrystalWar.StormOnTheHorizon accepted
+trigger Gentle_Tiger                    # accepted, Prog 0: nil: 109
+finish-if-event
+charvar Quest[7][35]Prog 4              # a GM
+trigger Gentle_Tiger                    # Prog 4: nil: 109
+finish-if-event
+charvar Quest[7][35]Prog 0              # a GM
+warp 301.429,-62.8,497.289 NorthGustabergS
+trigger Monument                        # Prog 0: nil
+finish-if-event
+warp 261.293,33.192,515.257 GraubergS
+trigger qm5                             # Prog 0: nil
+finish-if-event
+charvar Quest[7][35]Prog 4              # a GM
+fill-inventory
+trigger qm5                             # Prog 4: 16
+finish                                  # no room for the wing: not completed
+free-inventory
+trigger qm5                             # 16
+finish                                  # completed

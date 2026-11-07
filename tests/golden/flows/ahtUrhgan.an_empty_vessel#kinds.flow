@@ -1,0 +1,62 @@
+# An Empty Vessel's reply kinds at Waoud (no script; default 61), against the other group-1 quests' Progress replies
+# (GM-set states: in play An Empty Vessel is completed before any of them is offered). Equal kinds tie: the first talk
+# plays the first container's (An Empty Vessel's, the first in the list), a later talk rotates by the last event id.
+# Main (a level 50 Blue Mage, Beginnings accepted by a GM: its 706 (Progress) up): An Empty Vessel available: 60
+# (Progress) ties with 706 (talked to twice); its mustZone (a GM): 63 (Event) loses to 706 (twice). Accepted (a GM):
+# Prog 0: 65 (Progress) ties with 706 (twice, Prog reset by a GM after a 65); Prog 1: 66 (Event) loses to 706 (twice);
+# Prog 2: 68 (Event) loses (twice); the mustZone: 64 (Event) loses (twice). bob (completed, completeEvent 1, Beginnings
+# completed: Omens' 710 up): 69 (Progress) ties with 710 (twice). carl (completed, its mustZone set, Immortal Sentries
+# completed: Beginnings' 705 up): 63 (Event) loses to 705 (twice).
+lists AhtUrhganWhitegate/Waoud/onTrigger
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+char bob zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+char carl zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+quest AhtUrhgan.Beginnings accepted
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: charvar Quest[6][5]completeEvent 1
+bob: quest AhtUrhgan.Beginnings completed
+carl: quest AhtUrhgan.AnEmptyVessel completed
+carl: charvar Quest[6][5]mustZone 50
+carl: mission Toau ImmortalSentries completed
+login
+trigger Waoud                           # available, no wait: 60 (Progress) ties with Beginnings' 706: the first talk
+finish option=0                         # nothing either way
+trigger Waoud                           # the tie again: rotated
+finish option=0
+charvar Quest[6][5]mustZone 50          # a GM
+trigger Waoud                           # 63 (Event): 706 (Progress) wins
+finish option=0
+trigger Waoud                           # again
+finish option=0
+charvar Quest[6][5]mustZone 0           # a GM
+quest AhtUrhgan.AnEmptyVessel accepted  # a GM: Prog 0, no wait
+trigger Waoud                           # 65 (Progress) ties with 706
+finish option=0                         # (65's finish: Prog 1)
+charvar Quest[6][5]Prog 0               # a GM
+trigger Waoud                           # the tie again: rotated
+finish option=0
+charvar Quest[6][5]Prog 1               # a GM
+trigger Waoud                           # 66 (Event): 706 wins
+finish option=0
+trigger Waoud                           # again
+finish option=0
+charvar Quest[6][5]Prog 2               # a GM
+trigger Waoud                           # 68 (Event): 706 wins
+finish option=0
+trigger Waoud                           # again
+finish option=0
+charvar Quest[6][5]mustZone 50          # a GM
+trigger Waoud                           # 64 (Event): 706 wins
+finish option=0
+trigger Waoud                           # again
+finish option=0
+bob: login
+bob: trigger Waoud                      # completeEvent 1: 69 (Progress) ties with Omens' 710
+bob: finish option=0                    # (69: nothing; 710: Omens begun)
+bob: trigger Waoud                      # the tie again (69 against 710 or Omens' 711): rotated
+bob: finish option=0
+carl: login
+carl: trigger Waoud                     # completed, mustZone: 63 (Event): Beginnings' 705 (Progress) wins
+carl: finish option=0
+carl: trigger Waoud                     # again
+carl: finish option=0

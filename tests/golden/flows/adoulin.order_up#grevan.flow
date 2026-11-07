@@ -1,0 +1,26 @@
+# Order Up (adoulin, call-only), Grevan's own dialogue after the quest's call: a level 99 Warrior in Western Adoulin,
+# Hypocritical Oath completed (a GM). Talks in pairs (his default 541, then his script). Order Up available,
+# Not-So-Clean Bill not completed: 171; Not-So-Clean Bill completed (a GM): 188. Order Up accepted (a GM), bit 10
+# unset: the quest's 69 answers first, finished: bit 10 (1024); then his 188 again.
+lists WesternAdoulin/Grevan/onTrigger WesternAdoulin/onEventFinish/69
+char zone=WesternAdoulin pos=52.5,0,6.2 job=WAR lvl=99
+quest Adoulin.HypocriticalOath completed
+login
+trigger Grevan                          # 541
+finish-if-event
+trigger Grevan                          # his dialogue, Not-So-Clean Bill not completed: 171
+finish-if-event
+quest Adoulin.NotsocleanBill completed  # a GM
+trigger Grevan                          # 541
+finish-if-event
+trigger Grevan                          # both completed: 188
+finish-if-event
+quest Adoulin.OrderUp accepted          # a GM
+trigger Grevan                          # 541
+finish-if-event
+trigger Grevan                          # Order Up first: 69
+finish-if-event                         # 69's finish: bit 10 (1024)
+trigger Grevan                          # 541
+finish-if-event
+trigger Grevan                          # bit 10 set: his dialogue: 188
+finish-if-event

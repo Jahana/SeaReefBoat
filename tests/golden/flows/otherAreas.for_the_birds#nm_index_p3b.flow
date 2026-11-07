@@ -1,0 +1,41 @@
+# For the Birds (otherAreas 104): the Prog 3 arm of GeFhu's trigger, per NM id: 17379786 and 17379787, and the Option
+# == 4 edge. Accepted at Prog 3 (GMs). Each spawn arm at Prog 3: the four spawned and claimed, noAction; the Option
+# set back to 0 (a GM) after the kills. With only 17379787 up the arm spawns the four again. Last, the four up at Prog
+# 3: Option 3: nil; 5: nil; 4: 124, finished: Prog 4.
+# GeFhu Yagudoeye's spawn checks read MAGNES (17379784), MAGNES + 1 (17379785, NICKEL), NICKEL (17379785 again) and
+# NICKEL + 1 (17379786); MAGNES + 3 (17379787, the second Nickel) is never read. Each round: the four up, the other
+# three killed and their corpses left to despawn: one NM up: nil (HUURR); that one killed and gone: none up: the arm
+# spawns the four again. The checks are split over four flows (two NMs each), with the char at level 99: one flow of
+# every round left the char (at level 75, and again at 99) dead to the NM left up and a Beadeaux Emerald Quadav.
+lists Beadeaux/GeFhu_Yagudoeye/onTrigger Beadeaux/Magnes_Quadav_NM/onMobDeath Beadeaux/Nickel_Quadav_NM/onMobDeath Beadeaux/onEventFinish/124
+char zone=Beadeaux pos=-89.9,-3.25,-127.8 job=WAR lvl=99
+quest OtherAreas.ForTheBirds accepted
+charvar Quest[4][104]Prog 3
+login
+trigger GeFhu_Yagudoeye                 # Prog 3, none up: the four spawned; noAction
+kill MAGNES_QUADAV_NM                   # Prog 3: Option 1
+kill MAGNES_QUADAV_NM+1                 # Option 2
+kill MAGNES_QUADAV_NM+3                 # Option 3
+charvar Quest[4][104]Option 0           # a GM
+tick 15000                              # the corpses despawning
+tick 30000
+trigger GeFhu_Yagudoeye                 # Prog 3, only 17379786 up: nil; HUURR
+kill MAGNES_QUADAV_NM+2                 # Option 1
+charvar Quest[4][104]Option 0           # a GM
+tick 15000
+tick 30000
+trigger GeFhu_Yagudoeye                 # none up: the four spawned; noAction
+kill MAGNES_QUADAV_NM
+kill MAGNES_QUADAV_NM+1
+kill MAGNES_QUADAV_NM+2
+charvar Quest[4][104]Option 0           # a GM
+tick 15000
+tick 30000
+trigger GeFhu_Yagudoeye                 # Prog 3, only 17379787 up (never read): the four spawned again; noAction
+charvar Quest[4][104]Option 3           # a GM; the four up
+trigger GeFhu_Yagudoeye                 # Prog 3, Option 3, up: nil; HUURR
+charvar Quest[4][104]Option 5           # a GM
+trigger GeFhu_Yagudoeye                 # Option 5: nil; HUURR
+charvar Quest[4][104]Option 4           # a GM
+trigger GeFhu_Yagudoeye                 # Option 4: 124
+finish                                  # Prog 4

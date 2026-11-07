@@ -1,0 +1,23 @@
+# Undying Flames (sandoria 26), the free-slot test of 563's finish (getFreeSlotsCount() == 0) on both sides of its edge:
+# accepted by GM at fame level 0 (565: the fame is not read once accepted); 563 with a full inventory
+# (ITEM_CANNOT_BE_OBTAINED, the lumps kept, not completed); then Coullene takes a flyer (Flyers for Regine accepted by
+# GM: the flyer was alone in its slot), so exactly 1 slot is free: 563 completes (the lumps taken, the Friar's Rope),
+# Quest[0][26]Prog 1 (GM) kept (the raw player:completeQuest).
+char zone=NorthernSanDoria pos=136.6,6.5,131.7 job=WAR lvl=30
+item LumpOfBeeswax x2
+item MagicmartFlyer
+quest Sandoria.UndyingFlames accepted
+quest Sandoria.FlyersForRegine accepted
+login
+trigger Pagisalis                         # accepted, fame level 0: 565
+finish
+fill-inventory
+trade Pagisalis LumpOfBeeswax x2          # 563
+finish                                    # no free slot: ITEM_CANNOT_BE_OBTAINED (Friar's Rope); the lumps kept
+warp 144.4,0.0,127.6 NorthernSanDoria
+trade Coullene MagicmartFlyer x1          # Flyers for Regine: the flyer taken; 1 slot free
+trigger Pagisalis                         # 565
+finish
+charvar Quest[0][26]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Pagisalis LumpOfBeeswax x2          # 563
+finish                                    # exactly 1 free slot: completed (Faith Like a Candle, Friar's Rope, fame +20)

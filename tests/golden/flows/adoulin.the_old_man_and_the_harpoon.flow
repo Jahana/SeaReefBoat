@@ -1,0 +1,53 @@
+# The Old Man and the Harpoon (adoulin, call-only): a level 99 Warrior in Western Adoulin, SoA Pioneer Registration
+# current. Talks in pairs (the default first, then the script). Jorin (560): a trade while available: no onTrade,
+# nothing. Available: 2540, finished: added, the Broken Harpoon. Accepted without the Extravagant Harpoon: 2541.
+# Shipilolo (526): Pioneer Registration current (6, below Life on the Frontier): his script's mission test fails:
+# nothing. Pioneer Registration completed (its 535 replaceDefault from then on) and Life on the Frontier current
+# (GMs), accepted with the Broken Harpoon: 2543, finished: the Broken Harpoon taken, the Extravagant Harpoon given;
+# then nothing. Jorin: 2542, finished: completed (the raw completeQuest), 500 exp, 300 bayld, BAYLD_OBTAINED, the
+# Extravagant Harpoon taken, 30 Adoulin fame. Completed: Jorin nothing; Shipilolo with a Broken Harpoon (a GM):
+# nothing.
+lists WesternAdoulin/Jorin/onTrigger WesternAdoulin/Shipilolo/onTrigger WesternAdoulin/onEventFinish/2540 WesternAdoulin/onEventFinish/2542 WesternAdoulin/onEventFinish/2543
+char zone=WesternAdoulin pos=93.8,32,152.2 job=WAR lvl=99
+mission Soa PioneerRegistration current
+item FlintStone
+login
+trade Jorin FlintStone x1               # available: no onTrade: nothing, the stone kept
+trigger Jorin                           # 560
+finish-if-event
+trigger Jorin                           # available: 2540
+finish-if-event                         # 2540's finish: added, the Broken Harpoon
+trigger Jorin                           # 560
+finish-if-event
+trigger Jorin                           # accepted, no Extravagant Harpoon: 2541
+finish-if-event
+warp 86,0,-60.6 WesternAdoulin          # beside Shipilolo
+trigger Shipilolo                       # 526
+finish-if-event
+trigger Shipilolo                       # Pioneer Registration current: his script plays nothing: 526
+finish-if-event
+mission Soa PioneerRegistration completed   # a GM
+mission Soa LifeOnTheFrontier current   # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # the Broken Harpoon: 2543
+finish-if-event                         # 2543's finish: the Broken Harpoon taken, the Extravagant Harpoon given
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # no Broken Harpoon: nothing from the quests: 535
+finish-if-event
+warp 93.8,32,152.2 WesternAdoulin       # beside Jorin
+trigger Jorin                           # 560
+finish-if-event
+trigger Jorin                           # the Extravagant Harpoon: 2542
+finish-if-event                         # 2542's finish: completed, exp, bayld, BAYLD_OBTAINED, the harpoon taken, fame
+trigger Jorin                           # 560
+finish-if-event
+trigger Jorin                           # completed: nothing: 560
+finish-if-event
+warp 86,0,-60.6 WesternAdoulin          # beside Shipilolo
+keyitem BrokenHarpoon                   # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # completed with the Broken Harpoon: nothing: 535
+finish-if-event

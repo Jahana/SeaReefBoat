@@ -1,0 +1,31 @@
+# Open Sesame (outlands 165): Lokpix in Eastern Altepa Desert (no script; the default 24). A level 75 Warrior with a
+# Bone Chip, a Tremorstone (rare) and a Meteorite. Available: a trade: no trade handler: nothing; Lokpix 20, option 0:
+# nothing; option 2: nothing; 20, option 1: begun. Accepted: Lokpix 21; the chip: 23; the Tremorstone alone: 23; the Meteorite alone: 23;
+# the Meteorite and the Tremorstone: 22, finished: completed (the Loadstone), San d'Oria and Bastok fame +15 each, the
+# two taken (tradeComplete). Completed: Lokpix 24 (replaceDefault); a trade: nothing.
+lists EasternAltepaDesert/Lokpix/onTrigger EasternAltepaDesert/Lokpix/onTrade EasternAltepaDesert/onEventFinish/20 EasternAltepaDesert/onEventFinish/22
+char zone=EasternAltepaDesert pos=-53.999,3.949,224.154 job=WAR lvl=75
+item BoneChip
+item Tremorstone
+item Meteorite
+login
+trade Lokpix BoneChip x1                # available: no trade handler: nothing
+trigger Lokpix                          # 20
+finish option=0                         # nothing
+trigger Lokpix                          # 20
+finish option=2                         # not 1: nothing
+trigger Lokpix                          # 20
+finish option=1                         # begun
+trigger Lokpix                          # 21
+finish
+trade Lokpix BoneChip x1                # 23
+finish
+trade Lokpix Tremorstone x1             # no option's item: 23
+finish
+trade Lokpix Meteorite x1               # no Tremorstone: 23
+finish
+trade Lokpix Meteorite x1 Tremorstone x1   # option 1: 22
+finish                                  # completed: the Loadstone; fame; the two taken
+trigger Lokpix                          # completed: 24 (replaceDefault)
+finish
+trade Lokpix BoneChip x1                # completed: no trade handler: nothing

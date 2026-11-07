@@ -1,0 +1,24 @@
+# Twenty in Pirate Years, 134's needToZone (Norg; Ryoma's default 94 alternates with his script, so each script turn is
+# the second of a pair while the script answers): a level 75 Ninja, the quest accepted with the Trick Box (GMs). 134,
+# finished: completed (Anju, Zushio, the box taken), needToZone set (user ruling 2026-11-05, kept bugs: the Lua's
+# player:needToZone() with no argument is a read, so nothing was set and the next talk offered I'll Take the Big Box at
+# once): the next talks get no Big Box offer until a zone change; after a trip to Port Bastok and back, 135.
+lists Norg/Ryoma/onTrigger Norg/onEventFinish/134
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+quest Outlands.TwentyInPirateYears accepted
+keyitem TrickBox
+login
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script: accepted, the Trick Box: 134
+finish                                  # completed: Anju, Zushio, the box taken; needToZone set (mustZone 252)
+trigger Ryoma                           # Twenty completed, needToZone set: no Big Box offer: 94 (the Lua: 135)
+finish                                  # nothing (the Lua: the Big Box begun)
+trigger Ryoma                           # 94
+finish-if-event
+warp 31.966,-6.771,68.784 PortBastok    # the zone change clears needToZone
+warp -26.276,0.53,-8.323 Norg
+trigger Ryoma                           # needToZone clear: the Big Box's 135 (the Lua: 94, accepted)
+finish-if-event                         # begun
+trigger Ryoma                           # the Big Box accepted: no arm: 94
+finish-if-event

@@ -1,0 +1,39 @@
+# Even More Gullible's Travels, the flowers outside the accepted quest. Available (Gullible's Travels completed, a GM):
+# the first flower: FLOWER_BLOOMING. Completed (a GM), BathedInScent 0, RafflesiaScentDay 0 (the repeat): the first
+# flower: 21, finished on 0: nothing; on 1 (the others 0): First 1, a jar. Again: FLOWER_BLOOMING (its var 1). The third:
+# 23, on 1 (First 1, Second 0): Third 1, a jar. The second: 22, on 1: bathed (First and Third 0, BathedInScent 1, the
+# day, a jar, FEEL_DIZZY, no progress write: not accepted). Again: FLOWER_BLOOMING (bathed). BathedInScent 0 (a GM),
+# the same day: FLOWER_BLOOMING (the scent day not past). A Vana'diel day later: BathedInScent 1 (a GM): FLOWER_BLOOMING;
+# 0 again (a GM): 22, on 1 (the others 0): Second 1, a
+# jar; the third: 23, on 1 (First 0): Third 1, a jar; the first: 21, on 1: bathed (Second and Third 0).
+char zone=YuhtungaJungle pos=-466.9,0.1,220.2 job=WAR lvl=75
+quest Outlands.GulliblesTravels completed
+login
+trigger Blue_Rafflesia                  # available: FLOWER_BLOOMING
+quest Outlands.EvenMoreGulliblesTravels completed
+trigger Blue_Rafflesia                  # the repeat: 21
+finish option=0                         # nothing
+trigger Blue_Rafflesia                  # 21
+finish option=1                         # First 1; a jar
+trigger Blue_Rafflesia                  # First 1: FLOWER_BLOOMING
+warp 52.4,-0.1,-501.8 YuhtungaJungle
+trigger Blue_Rafflesia+2                # 23
+finish option=1                         # Third 1; a jar
+warp -148.8,-0.2,-223.1 YuhtungaJungle
+trigger Blue_Rafflesia+1                # 22
+finish option=1                         # bathed: First, Third 0; BathedInScent 1; the day; a jar; FEEL_DIZZY
+trigger Blue_Rafflesia+1                # bathed: FLOWER_BLOOMING
+charvar BathedInScent 0                 # a GM
+trigger Blue_Rafflesia+1                # the same day: FLOWER_BLOOMING
+wait vana=24
+charvar BathedInScent 1                 # a GM
+trigger Blue_Rafflesia+1                # a day later, bathed: FLOWER_BLOOMING (the BathedInScent test)
+charvar BathedInScent 0                 # a GM
+trigger Blue_Rafflesia+1                # a day later: 22
+finish option=1                         # Second 1; a jar
+warp 52.4,-0.1,-501.8 YuhtungaJungle
+trigger Blue_Rafflesia+2                # 23
+finish option=1                         # First 0: Third 1; a jar
+warp -466.9,0.1,220.2 YuhtungaJungle
+trigger Blue_Rafflesia                  # 21
+finish option=1                         # bathed: Second, Third 0; BathedInScent 1; the day; a jar; FEEL_DIZZY

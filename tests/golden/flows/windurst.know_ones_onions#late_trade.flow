@@ -1,0 +1,39 @@
+# Know One's Onions (windurst 40): late, the onions' completion. Rank 3: 388, begun (Prog 0). Prog 3 by GM at rank 3:
+# the completion section (it does not read the rank): 400, finished with a full bag (nothing); Shanruru (the completion
+# section has no line for him: his default 367, finished so the next step is not swallowed, not the late section's 412)
+# and four onions to Kohlo-Lakolo (the completion section has no trade: nil, not the late section's 390) bracket the
+# late section's Prog < 3: each answers differently at Prog 3 than a late section reaching Prog 3 would. Prog 0 again: 389. Trades
+# (the late section's own trade handler): a bone chip, three onions, five onions, four onions plus a chip (each nil),
+# four onions with a full bag (390: nothing, the onions kept), four onions (390: completed, the onions taken, the player
+# local var [2][41]mustZone 1).
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Kohlo-Lakolo/onTrade PortWindurst/onEventFinish/390 PortWindurst/onEventFinish/400
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+rank 3
+quest Windurst.TruthJusticeAndTheOnionWay completed
+item BoneChip
+item WildOnion x5
+login
+trigger Kohlo-Lakolo                           # 388
+finish                                         # begun (Prog 0)
+charvar Quest[2][40]Prog 3                     # GM
+trigger Kohlo-Lakolo                           # Prog 3 at rank 3: section 4: 400
+fill-inventory
+finish                                         # full: nothing
+free-inventory
+trigger Shanruru                               # Prog 3 at rank 3: no section-4 line: his default 367
+finish                                         # his 367 closed, so the trade below reaches Kohlo
+walk -27.5,-8.0,189.6                          # back beside Kohlo-Lakolo: a trade reaches 6.0 yalms (quest rework P9, D3)
+trade Kohlo-Lakolo WildOnion x4                # Prog 3: section 4 has no trade: nil
+charvar Quest[2][40]Prog 0                     # GM
+trigger Kohlo-Lakolo                           # 389 (beside him)
+finish
+trade Kohlo-Lakolo BoneChip x1                 # wrong item: nil
+trade Kohlo-Lakolo WildOnion x3                # three: nil
+trade Kohlo-Lakolo WildOnion x5                # five: nil
+trade Kohlo-Lakolo WildOnion x4 BoneChip x1    # four plus an extra: nil
+fill-inventory
+trade Kohlo-Lakolo WildOnion x4                # 390
+finish                                         # full: quest:complete false: nothing, the onions kept
+free-inventory
+trade Kohlo-Lakolo WildOnion x4                # 390
+finish                                         # completed; the onions taken; local var [2][41]mustZone 1

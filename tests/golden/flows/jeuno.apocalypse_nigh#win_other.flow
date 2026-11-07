@@ -1,0 +1,73 @@
+# Apocalypse Nigh (jeuno 89): the 32001 handler's other sides, each a real win of the Apocalypse Nigh battlefield (index
+# 1; areas 1 to 3, each with its Kamlanaut and Ealdnarche: KAMLANAUT+0/+1, +2/+3, +4/+5) with one operand changed by a
+# GM while 32001 is open. Three level 75 Warriors by TR_Entrance in Empyreal Paradox, the quest accepted at Prog 3 (a
+# GM, before login; the battlefield takes a registrant only at Prog 3). Each 32001 finish is followed by the
+# battlefield's own win finish, which sets the char down at 540 0 -514 (a zone change: tick, login).
+# - main, area 1: battlefieldWin 1056 (a GM; the fight's id is 1057): nothing (Prog 3, no Timer); its zone-in at Prog 3:
+#   no event;
+# - p2, area 2: battlefieldWin 1058: nothing;
+# - p3, area 3: Prog 2 (a GM): nothing (Prog 2); its zone-in at Prog 2: no event;
+# - main again (area 1, once its battlefield has closed): Prog 4 (a GM): nothing (no Timer); the zone-in at Prog 4 then
+#   plays 7 (answered by the login: Breaker of the Chains, set down in Al'Taieu);
+# - p2 again (area 2): the quest set available by a GM: no state with a 32001 finish: nothing.
+lists EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/onEventFinish/32001
+char zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75
+char p2 zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75
+char p3 zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75
+quest Jeuno.ApocalypseNigh accepted
+charvar Quest[3][89]Prog 3
+p2: quest Jeuno.ApocalypseNigh accepted
+p2: charvar Quest[3][89]Prog 3
+p3: quest Jeuno.ApocalypseNigh accepted
+p3: charvar Quest[3][89]Prog 3
+login
+trigger TR_Entrance                     # Prog 3: the 32000 menu
+update 32000 option=17                  # index 1, area 1: registered, entered
+finish
+kill KAMLANAUT
+kill KAMLANAUT+1                        # won: battlefieldWin 1057, 32001 opens
+localvar battlefieldWin 1056            # a GM
+finish                                  # 32001, battlefieldWin 1056: nothing; the win's set-down
+tick 400
+login                                   # at 540 0 -514; the zone-in at Prog 3: no event
+p2: login
+p2: trigger TR_Entrance                 # Prog 3: the 32000 menu
+p2: update 32000 option=18              # area 2: registered, entered
+p2: finish
+p2: kill KAMLANAUT+2
+p2: kill KAMLANAUT+3                    # won, 32001 opens
+p2: localvar battlefieldWin 1058        # a GM
+p2: finish                              # 32001, battlefieldWin 1058: nothing; the set-down
+tick 400
+p2: login
+p3: login
+p3: trigger TR_Entrance                 # Prog 3: the 32000 menu
+p3: update 32000 option=19              # area 3: registered, entered
+p3: finish
+p3: kill KAMLANAUT+4
+p3: kill KAMLANAUT+5                    # won, 32001 opens
+p3: charvar Quest[3][89]Prog 2          # a GM, while 32001 is open
+p3: finish                              # 32001, Prog 2: nothing; the set-down
+tick 400
+p3: login                               # the zone-in at Prog 2: no event
+tick 10000                              # the first battlefields close
+trigger TR_Entrance                     # main, Prog 3: the 32000 menu
+update 32000 option=17                  # area 1 again
+finish
+kill KAMLANAUT
+kill KAMLANAUT+1                        # won, 32001 opens
+charvar Quest[3][89]Prog 4              # a GM, while 32001 is open
+finish                                  # 32001, Prog 4: nothing (no Timer); the set-down
+tick 400
+login                                   # the zone-in at Prog 4: 7, answered: Breaker of the Chains, set down in Al'Taieu
+tick 400
+login                                   # in Al'Taieu
+p2: trigger TR_Entrance                 # Prog 3: the 32000 menu
+p2: update 32000 option=18              # area 2 again
+p2: finish
+p2: kill KAMLANAUT+2
+p2: kill KAMLANAUT+3                    # won, 32001 opens
+p2: quest Jeuno.ApocalypseNigh available  # a GM, while 32001 is open
+p2: finish                              # no state with a 32001 finish: nothing; the set-down
+tick 400
+p2: login

@@ -1,0 +1,97 @@
+# A Boy's Dream (sandoria 91, PLD AF2): Ailbeche (Northern San d'Oria), Exoroche (Southern, Lua), the Crawlers' Nest
+# qm9, Zaldon (Selbina, Lua), the door _6h0 (Chateau d'Oraguille). Exoroche and the door have a default action (76,
+# ITS_LOCKED): after each zone-in the first talk plays it and the next his script (the lookup's alternation); those
+# talks say "default". Father and Son completed and Sharpening the Sword accepted by GM: Sharpening's 42 (Event) takes
+# Ailbeche's first talk after each zone-in and every other talk ("42"), his script (and so the quest's call) the others;
+# when the script plays nothing, 42 plays. Sharpening completed and the offer (41 / 40 and their finishes) are #offer's:
+# while this quest is available, Sharpening's check 4 then takes his default's talks with AILBECHE_WHEN_FISHING.
+# A PLD 50, begun by GM at aBoysDreamCS 2 (as 40 / 41's option 1 leaves it): 46; the bug at CS 2: nothing; Exoroche 50:
+# CS 3. The qm9: Dreadbug pops claimed, SENSE_OF_FOREBODING; again the same day: NOTHING_WILL_HAPPEN_YET. Dreadbug
+# killed, the Odontotyrannus by GM. Ailbeche at CS 3: 39; the fish at 3, the bug and the fish, two bugs: nothing; one
+# bug: 15 (CS 4, the bug kept); the bug at 4: nothing; 60; the fish: 47 (CS 5, the fish kept); the fish at 5: nothing;
+# the bug and the fish at 4: nothing; 47 at 5 (no change). Zaldon, the fish: 85 (the Knight's Boots, CS 6, the fish
+# taken). Ailbeche 25 (CS 7); 25 at 7 (no change). Exoroche 32 (CS 8), 32 at 8 (no change). The door at CS 8: 88 with a
+# full inventory: ITEM_CANNOT_BE_OBTAINED; with room: Under Oath begun (PLD), the boots taken, the Gallant Leggings,
+# ITEM_OBTAINED, CS 0, fame 20, completed. Completed: Ailbeche no arm (42), the qm9 NOTHING_WILL_HAPPEN_YET.
+char zone=NorthernSanDoria pos=6.5,0.5,26.9 job=PLD lvl=50
+quest Sandoria.FatherAndSon completed
+quest Sandoria.SharpeningTheSword accepted
+quest Sandoria.ABoysDream accepted
+charvar aBoysDreamCS 2
+item GiantShellBug x3
+login
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # CS 2: 46
+finish
+trade Ailbeche GiantShellBug x1         # CS 2, the bug: nothing (CS under 3)
+warp 72.0,0.0,60.0 SouthernSanDoria
+trigger Exoroche                        # default 76
+finish
+trigger Exoroche                        # CS 2: 50 (Lua)
+finish                                  # aBoysDreamCS 3
+warp -25.0,-11.1,122.2 CrawlersNest
+trigger qm9                             # accepted, not popped today: Dreadbug spawns claimed; SENSE_OF_FOREBODING
+trigger qm9                             # popped today: NOTHING_WILL_HAPPEN_YET
+kill DREADBUG
+item Odontotyrannus                     # GM: fished
+warp 6.5,0.5,26.9 NorthernSanDoria
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # CS 3: 39
+finish
+trade Ailbeche Odontotyrannus x1        # CS 3, the fish: nothing
+trade Ailbeche GiantShellBug x1 Odontotyrannus x1  # CS 3, the bug and the fish (not exact): nothing
+trade Ailbeche GiantShellBug x2         # CS 3, two bugs (not exact): nothing
+trade Ailbeche GiantShellBug x1         # CS 3, exactly the bug: 15
+finish                                  # aBoysDreamCS 4 (the bug not taken)
+trade Ailbeche GiantShellBug x1         # CS 4, the bug: nothing
+trigger Ailbeche                        # 42 (the trades leave the turn as it was: read with show)
+finish
+trigger Ailbeche                        # CS 4: 60
+finish
+trade Ailbeche GiantShellBug x1 Odontotyrannus x1  # CS 4, the bug and the fish (not exact): nothing
+trade Ailbeche Odontotyrannus x1        # CS 4, exactly the fish: 47
+finish                                  # aBoysDreamCS 5 (the fish not taken)
+trade Ailbeche Odontotyrannus x1        # CS 5, the fish: nothing
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # CS 5: 47
+finish                                  # CS 5: no change
+warp -10.5,-7.3,-6.7 Selbina
+trade Zaldon Odontotyrannus x1          # CS 5, exactly the fish: 85 (Lua)
+finish                                  # the Knight's Boots; aBoysDreamCS 6; the fish taken
+warp 6.5,0.5,26.9 NorthernSanDoria
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # CS 6: 25
+finish                                  # aBoysDreamCS 7
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # CS 7: 25
+finish                                  # CS 7: no change
+warp 72.0,0.0,60.0 SouthernSanDoria
+trigger Exoroche                        # default 76
+finish
+trigger Exoroche                        # CS 7: 32 (Lua)
+finish                                  # aBoysDreamCS 8
+trigger Exoroche                        # default 76
+finish
+trigger Exoroche                        # CS 8: 32
+finish                                  # no change
+warp -38.0,-4.9,73.5 ChateauDoraguille
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # CS 8: 88
+fill-inventory
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (Gallant Leggings); nothing else
+free-inventory
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # CS 8: 88
+finish                                  # PLD: Under Oath begun; the boots taken; the leggings; CS 0; fame 20; completed
+warp 6.5,0.5,26.9 NorthernSanDoria
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # completed, CS 0, UnderOathCS 0: no arm; 42
+finish-if-event
+warp -25.0,-11.1,122.2 CrawlersNest
+trigger qm9                             # completed: NOTHING_WILL_HAPPEN_YET

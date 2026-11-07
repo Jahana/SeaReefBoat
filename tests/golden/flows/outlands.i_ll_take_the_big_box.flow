@@ -1,0 +1,43 @@
+# I'll Take the Big Box (outlands 144): a level 50 Ninja (AF2_QUEST_LEVEL 50), Twenty in Pirate Years completed (a GM),
+# an Oak Pole. Available: the Oak Pole traded to Ryoma: no trade handler (his script has no onTrade): nothing, the
+# pole kept; Ryoma 135: begun; Ryoma again: no Big Box arm: the lookup's default action 94 on the handler's
+# turn (his script, with Twenty in Pirate Years completed and no trick box, would do nothing). Port Bastok (Rhapsodies of
+# Vana'diel's 30035 at the zone-in): Ensetsu 264 (Prog 1), 265. Rabao: Leodarion 90 (Prog 2), 91; the Oak Pole: 92 (the
+# pole taken by tradeComplete, Timer = VanadielUniqueDay() + 1, Prog 3); 93 (the day not changed: 12:00 and 23:00); at
+# 00:00 (the next Vana'diel day): 94 (the Seance Staff, Prog 4); 95. The Ship bound for Selbina at 00:00 (night) with the
+# staff at Prog 4: the zone's Zone.lua spawns Enagakure; killed: Prog 5. Selbina's zone-in at Prog 5 (the Lua table
+# { 1101, -1, 0x13 }) and its 1101 finish are in the #zonein flow.
+lists Norg/Ryoma/onTrigger PortBastok/Ensetsu/onTrigger Rabao/Leodarion/onTrigger Rabao/Leodarion/onTrade ShipBoundForSelbina/Enagakure/onMobDeath
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=50
+quest Outlands.TwentyInPirateYears completed
+item OakPole
+login
+trade Ryoma OakPole x1                  # available: no trade handler: nothing, the pole kept
+trigger Ryoma                           # a Ninja of 50, needToZone clear: 135
+finish                                  # begun
+trigger Ryoma                           # accepted: no Big Box arm: the default 94
+finish-if-event
+warp 31.966,-6.771,68.784 PortBastok
+trigger Ensetsu                         # Prog 0: 264
+finish                                  # Prog 1
+trigger Ensetsu                         # Prog 1: 265
+finish
+warp -49.513,7.999,41.323 Rabao
+trigger Leodarion                       # Prog 1: 90
+finish                                  # Prog 2
+trigger Leodarion                       # Prog 2: 91
+finish
+trade Leodarion OakPole x1              # Prog 2, the pole alone: 92
+finish                                  # the pole taken; Timer = VanadielUniqueDay() + 1; Prog 3
+trigger Leodarion                       # VanadielUniqueDay() < Timer: 93
+finish
+wait vana=11                            # 23:00, the same Vana'diel day
+trigger Leodarion                       # still < Timer: 93
+finish
+wait vana=1                             # 00:00: the next day
+trigger Leodarion                       # 94
+finish                                  # the Seance Staff; Prog 4
+trigger Leodarion                       # Prog 4: 95
+finish
+warp 0.15,-2.1,3.25 ShipBoundForSelbina # 00:00 (night), the staff, Prog 4: Zone.lua spawns Enagakure
+kill ENAGAKURE                          # Prog 4: Prog 5

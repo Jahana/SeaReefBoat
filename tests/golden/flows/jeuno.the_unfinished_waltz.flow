@@ -1,0 +1,62 @@
+# The Unfinished Waltz (jeuno 96, DNC AF1): Laila and Rhea Myuliah in Upper Jeuno (no scripts; defaults 10120 / 10121),
+# the ??? (qm1) and the Migratory Hippogryph in Grauberg [S]. A level 75 Dancer with Lakeside Minuet completed (its
+# completed section answers Laila 10119 / Rhea 10126 at priority ReplaceDefault, 20: every reply of this quest beats
+# it). Two NPCs of Grauberg [S] are named qm1 (17142456 at 328,-48,93 and 17142561 at -157,-8,597, the quest's ???):
+# `trigger qm1` talks to the first, and the quest answers it the same (the containers key on the name; no other quest
+# or mission names a qm1 of Grauberg [S]). A stone to Laila while available (no trade handler: nothing), 10129 (begun),
+# 10130; Rhea 10131 (Prog 1), 10132; the ???: 12 (hippoEvent 1), the hippogryph spawned with enmity
+# (A_SHIVER_RUNS_DOWN), ATTEND_TO_MORE_PRESSING while it is up; its death (hippoEvent 2); 13 (The Essence of Dance); nil
+# with the key item (Prog 1); Laila 10130 until the key item is seen, 10133 with a full bag (the War Hoop cannot be
+# given: nothing), 10133 (completed: War Hoop, Promising Dancer; The Road to Divadom's Timer = tomorrow, 8001, and the
+# local var Quest[3][97]mustZone, which getMustZone never reads: it reads the char var). Then The Road to Divadom's
+# check 1 by operand: Timer ahead alone (Laila 10134, Rhea 10135: replaceDefault), mustZone alone (a GM's Timer 0 and
+# char var mustZone 244: 10134); a day later (day 8001 = Timer, no mustZone) its 10136 (begun).
+# Elsewhere: not a Dancer, Prog 0 at the ??? and a Warrior at hippoEvent 0 are #not_dnc; level 39 is #level39; the
+# hippogryph killed after a rezone (hippoEvent 0) is #rezone.
+# Not reachable: hippoEvent 3 or more (a local var no flow statement sets; the else arm it would take is taken here).
+lists UpperJeuno/Laila/onTrigger UpperJeuno/Laila/onTrade UpperJeuno/Rhea_Myuliah/onTrigger UpperJeuno/onEventFinish/10129 UpperJeuno/onEventFinish/10131 UpperJeuno/onEventFinish/10133 UpperJeuno/onEventFinish/10136 GraubergS/qm1/onTrigger GraubergS/Migratory_Hippogryph/onMobDeath GraubergS/onEventFinish/12 GraubergS/onEventFinish/13
+char zone=UpperJeuno pos=-52.5,0,101 job=DNC lvl=75
+quest Jeuno.LakesideMinuet completed
+item FlintStone
+login
+trade Laila FlintStone x1               # available: no trade handler, nothing
+trigger Laila                           # a Dancer, level 75: 10129 (over Lakeside Minuet's 10119)
+finish                                  # begun
+trigger Laila                           # accepted, the essence not held: 10130
+finish
+trigger Rhea_Myuliah                    # Prog 0: 10131
+finish                                  # Prog 1
+trigger Rhea_Myuliah                    # Prog 1: 10132
+finish
+warp 329.9,-47.8,93.2 GraubergS
+trigger qm1                             # Prog 1, hippoEvent 0, a Dancer: 12
+finish                                  # hippoEvent 1
+trigger qm1                             # hippoEvent 1, the hippogryph not up: spawned (enmity), A_SHIVER_RUNS_DOWN
+trigger qm1                             # hippoEvent 1, up: ATTEND_TO_MORE_PRESSING
+kill MIGRATORY_HIPPOGRYPH               # hippoEvent 1: 2
+trigger qm1                             # hippoEvent 2: 13
+finish                                  # The Essence of Dance
+trigger qm1                             # the key item held: nil
+warp -52.5,0,101 UpperJeuno
+trigger Laila                           # the key item held but not seen: 10130
+finish
+seekeyitem TheEssenceOfDance
+trigger Laila                           # seen: 10133
+fill-inventory
+finish                                  # no room for the War Hoop: not completed
+free-inventory
+trigger Laila                           # 10133
+finish                                  # completed: War Hoop, Promising Dancer; Quest[3][97]Timer = 8001, the local var Quest[3][97]mustZone
+trigger Laila                           # The Road to Divadom: Timer 8001 ahead (the local var mustZone is read by nobody); this quest's completed 10134 (replaceDefault)
+finish
+trigger Rhea_Myuliah                    # 10135 (replaceDefault)
+finish
+charvar Quest[3][97]Timer 0             # a GM
+charvar Quest[3][97]mustZone 244        # a GM: the char var getMustZone reads, as setMustZone writes it
+trigger Laila                           # The Road to Divadom: mustZone alone; 10134
+finish
+charvar Quest[3][97]mustZone 0          # a GM
+charvar Quest[3][97]Timer 8001          # a GM: as the finish set it
+wait vana=24                            # day 8001
+trigger Laila                           # The Road to Divadom: Timer 8001 = today; offered: 10136
+finish                                  # The Road to Divadom begun

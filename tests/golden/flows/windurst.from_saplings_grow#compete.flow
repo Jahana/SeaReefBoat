@@ -1,0 +1,36 @@
+# From Saplings Grow (windurst 85): its Perih Vashai lines next to The Fanged One's (the reply kinds). A level-75 RNG at
+# Archery 2500 holding the Bow of Trials at 300 points; Sin Hunting, Fire and Brimstone and Unbridled Passion completed
+# by GM (his script answers nothing), The Fanged One accepted by GM at Prog 0: its 352 (an Event, no finish handler)
+# answers on every talk. Ties rotate by the last event id; with none, the first action in the list plays, here From
+# Saplings Grow's. Available: 661 plays first (begun, the guide). Accepted: 662 and 352 take turns;
+# the bow traded: 664 (the only trade line), the map; 665 and 352 take turns; the Annals of Truth by GM: 666 (Progress)
+# over 352, with 352 played last; completed.
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/Perih_Vashai/onTrade WindurstWoods/onEventFinish/661 WindurstWoods/onEventFinish/664 WindurstWoods/onEventFinish/666
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=RNG lvl=75
+quest Windurst.SinHunting completed
+quest Windurst.FireAndBrimstone completed
+quest Windurst.UnbridledPassion completed
+quest Windurst.TheFangedOne accepted
+skill Archery 2500
+item BowOfTrials wsp=300
+login
+trigger Perih_Vashai                          # available: 661 and 352 tie: 661 plays; begun
+finish
+trigger Perih_Vashai                          # accepted: 662 and 352 tie: 662 (661 played last)
+finish
+trigger Perih_Vashai                          # 352 (662 played last)
+finish
+trigger Perih_Vashai                          # 662 again (352 played last)
+finish
+trigger Perih_Vashai                          # the other
+finish
+walk 119.5,-3.7,90.45
+trade Perih_Vashai BowOfTrials x1             # 664 (0, 0, Annals of Truth)
+finish                                        # the bow taken; the map
+trigger Perih_Vashai                          # 665 and 352 tie: one of them
+finish
+trigger Perih_Vashai                          # the other
+finish
+keyitem AnnalsOfTruth                         # GM
+trigger Perih_Vashai                          # 666 (Progress) over 352
+finish                                        # completed

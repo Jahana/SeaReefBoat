@@ -1,0 +1,50 @@
+# Divine Interference's Progress and Event replies against the rival containers at the same NPCs (task 5 review
+# Important 1; see waking_the_colossus#rivals). main (Naja Salaheem, 932 with the Whisper, a full bag so the quest
+# stays accepted): Promotion: Private First Class accepted answers 5001 (an Event): 932 twice, the second talk not
+# rotating to 5001. bob (Imperial Whitegate, available: Waking the Colossus completed, ToAU 48, Prog 1, Timer 0: 931)
+# and carl (Divine Interference completed with the Timer 0: 931): Trust: Nashmeira's 5092 (a Progress): the tie, the
+# quest's first. dan (blank_lamp, Prog 2 with the Lightning Cell: 308) against Nashmeira's Plea (ToAU 44, status 0: 8,
+# an earlier Progress): 8 first, then 308 rotated.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/Imperial_Whitegate/onTrigger AlzadaalUnderseaRuins/blank_lamp/onTrigger
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75 nation=1
+char bob zone=AhtUrhganWhitegate pos=155.796,-4.199,0.03 job=WAR lvl=75 nation=1
+char carl zone=AhtUrhganWhitegate pos=155.796,-4.199,0.03 job=WAR lvl=75 nation=1
+char dan zone=AlzadaalUnderseaRuins pos=208.05,-1.5,20.05 job=WAR lvl=75 nation=1
+setting ENABLE_TRUST_QUESTS 1
+quest AhtUrhgan.DivineInterference accepted
+charvar Quest[6][75]Prog 4
+keyitem WhisperOfRadiance
+quest AhtUrhgan.PromotionPrivateFirstClass accepted
+bob: quest AhtUrhgan.WakingTheColossus completed
+bob: charvar Quest[6][75]Prog 1
+bob: keyitem SanDoriaTrustPermit
+bob: mission Toau TheEmpressCrowned completed
+carl: quest AhtUrhgan.WakingTheColossus completed
+carl: quest AhtUrhgan.DivineInterference completed
+carl: keyitem SanDoriaTrustPermit
+carl: mission Toau TheEmpressCrowned completed
+dan: quest AhtUrhgan.DivineInterference accepted
+dan: charvar Quest[6][75]Prog 2
+dan: keyitem LightningCell
+dan: mission Toau NashmeirasPlea current
+login
+fill-inventory
+trigger Naja_Salaheem                   # 932
+finish option=1                         # a full bag: the state kept
+trigger Naja_Salaheem                   # 932 again (an Event would rotate to 5001)
+finish option=1
+bob: login
+bob: mission Toau EternalMercenary current   # a GM
+bob: trigger Imperial_Whitegate         # 931 ties 5092: the first container's
+bob: finish option=1
+bob: trigger Imperial_Whitegate         # rotated: the other
+bob: finish option=1
+carl: login
+carl: trigger Imperial_Whitegate        # the repeat's 931 ties 5092
+carl: finish option=1
+dan: login
+dan: npcstatus blank_lamp normal        # a GM: shown
+dan: trigger blank_lamp                 # 8 and 308 tie: the mission's first
+dan: finish option=1
+dan: trigger blank_lamp                 # rotated: 308
+dan: finish

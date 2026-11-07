@@ -1,0 +1,29 @@
+# Trouble at the Sluice (sandoria 68): GM-set states. Accepted by GM with The Rumor completed, in Bostaunieux Oubliette.
+# Prog 0 (a trade to Novalmauge after a talk: section 2 has no trade handler, nothing); the Neutralizer given by GM at
+# Prog 0 (section 2's "no Neutralizer" fails: no 15, The Rumor's 14; section 4 has no Novalmauge handler); Prog 2 with
+# the Neutralizer deleted (no section matches: The Rumor's 14, Belgidiveau's default 585); Prog 2 with the Neutralizer
+# (section 4: Belgidiveau's 56, whatever Prog is).
+char zone=BostaunieuxOubliette pos=32.4,-24,19.8 job=WAR lvl=10
+fame Sandoria 125
+quest Sandoria.TheRumor completed
+quest Sandoria.TroubleAtTheSluice accepted
+item BoneChip
+login
+charvar Quest[0][68]Prog 1                # GM: Prog 1, so the talk below is 16 (no Prog change)
+trigger Novalmauge                        # Prog 1: 16
+finish
+charvar Quest[0][68]Prog 0                # GM: back to Prog 0
+trade Novalmauge BoneChip x1              # Prog 0: section 2 has no trade handler (his script has none): nothing
+keyitem Neutralizer                       # GM: the Neutralizer at Prog 0
+trigger Novalmauge                        # section 2 fails on the Neutralizer, section 4 has no Novalmauge: The Rumor's 14
+finish
+charvar Quest[0][68]Prog 2                # GM: Prog 2
+delkeyitem Neutralizer
+trigger Novalmauge                        # Prog 2, no Neutralizer: no section; The Rumor's 14
+finish
+warp -96.2,-0.2,69.3 NorthernSanDoria
+trigger Belgidiveau                       # Prog 2, no Neutralizer: no section; his default 585
+finish
+keyitem Neutralizer                       # GM: the Neutralizer at Prog 2
+trigger Belgidiveau                       # section 4 (the Neutralizer, any Prog): 56
+finish                                    # completed: Heavy Axe, fame +30; the Neutralizer deleted

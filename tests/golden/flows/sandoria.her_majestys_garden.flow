@@ -1,0 +1,27 @@
+# Her Majesty's Garden (sandoria 62): Chalvatot in Chateau d'Oraguille. The guard (fame level 4): a trade while
+# available (nothing), fame level 3 (his default 531), the offer 84 declined (option 0: nothing) and taken (option 1), the
+# accepted 82, a wrong trade (nil), 83 for the Chunk of Derfland Humus (completed: fame +40, the Map of the Northlands
+# Area; the humus taken), and the completed trigger (no section: 531). Chalvatot has no script; The Circle of Time and
+# San d'Oria mission 3-2 also name him and need what this char lacks.
+lists ChateauDoraguille/Chalvatot/onTrigger ChateauDoraguille/Chalvatot/onTrade ChateauDoraguille/onEventFinish/84 ChateauDoraguille/onEventFinish/83
+char zone=ChateauDoraguille pos=-104.5,0.4,72.2
+fame Sandoria 224
+item ChunkOfDerflandHumus
+item BoneChip
+login
+trade Chalvatot ChunkOfDerflandHumus x1   # available: no trade handler, nothing
+trigger Chalvatot                         # fame level 3: his default 531
+finish
+fame Sandoria 225
+trigger Chalvatot                         # fame level 4: 84
+finish                                    # option 0: nothing
+trigger Chalvatot                         # 84
+finish option=1                           # option 1: begun
+trigger Chalvatot                         # accepted: 82
+finish
+trade Chalvatot BoneChip x1               # nil
+trade Chalvatot ChunkOfDerflandHumus x1   # the humus: 83
+finish                                    # completed: fame +40, the Map of the Northlands Area, the humus taken
+trigger Chalvatot                         # completed: no section, 531
+finish
+trade Chalvatot BoneChip x1               # completed: no trade handler, nothing

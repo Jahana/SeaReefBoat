@@ -1,0 +1,16 @@
+# In Defiant Challenge (jeuno 128), accepted (a GM), at Crawlers' Nest: with OLDSCHOOL_G1 true a ??? does nothing (no
+# crumb); with it false again, the clump held and the three crumbs held (a GM): qm10 gives no crumb, and the set cannot
+# fuse while the clump is held: ITEM_CANNOT_BE_OBTAINED (the crumbs kept).
+lists CrawlersNest/qm10/onTrigger CrawlersNest/qm11/onTrigger
+char zone=CrawlersNest pos=-81.9,-8.2,79.1 job=WAR lvl=50
+quest Jeuno.InDefiantChallenge accepted
+setting OLDSCHOOL_G1 true
+login
+trigger qm10                            # OLDSCHOOL_G1: nothing
+trigger qm11                            # OLDSCHOOL_G1: nothing
+setting OLDSCHOOL_G1 false
+item ClumpOfExorayMold                  # a GM
+keyitem ExorayMoldCrumb1
+keyitem ExorayMoldCrumb2
+keyitem ExorayMoldCrumb3
+trigger qm10                            # the clump held: no crumb; the set, the clump held: ITEM_CANNOT_BE_OBTAINED

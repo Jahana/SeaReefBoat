@@ -1,0 +1,99 @@
+# Promotion: Chief Sergeant (ahtUrhgan 96): a level 1 Warrior with Private First Class to Sergeant Major completed and
+# the SM Wildcat Badge, AssaultPromotion 25. Whitegate: Abquhbah (his script: 255; the char stands south of area 3),
+# Hagakoff (his script: the shop dialog, no event). Aydeewa Subterrane: the Mushroom Patches (+0 .. +5; no script;
+# default NOTHING_OUT_OF_ORDINARY). Available: Abquhbah 5060: begun. Prog 0: Abquhbah 5062 (once per zone); again: his
+# script's 255; Hagakoff 5067: Prog 1; Hagakoff again: no section: his shop (a message, no event). Prog 1: Abquhbah
+# 5068: Prog 2. Prog 2: Abquhbah 5069; again: 255; Hagakoff 5063: Prog 3. Prog 3, no sprouts: Abquhbah nil: 255.
+# Aydeewa: patch 0: 14 (harvested, the Scourshroom); again: 15; patch 3 with the Scourshroom: 19, option 1: nothing; 19,
+# option 0: planted, needToZone, the Scourshroom taken; again: 20 (needToZone); patch 2: 14 (the Scourshroom again). Out
+# and back, the next day (MPatch_Time3 reached; the same day is #ready_day): patch 3: ready: 21 ([0] = 1 at about 12:00,
+# [3] = 0: the draw under 75), option 3: picked, Option 3; again: 18. Patch 4: 19, option 0: planted. Out and back, the
+# next day: patch 4: 21, option 4: 4 + 3 = 7 > 5: NO_MORE_SPROUTS and NO_MORE_SPROUTS + 1 (0, 5)
+# (user ruling 2026-11-04, kept Lua bugs: the Lua dropped them), Option 5. Whitegate: Abquhbah 5061 ([0] = 0, [1]
+# = 5), option 10 (under 11): Stage 5, Option 0, the patches reset; again: Option 0: nil: 255. Option 1 (a GM): 5061
+# ([0] = 5, [1] = 1), options 15, 11, 19: nothing; a full bag: option 30 (under two free slots):
+# ITEM_CANNOT_BE_OBTAINED + 4 (the ruling again), nothing more; option 29 (no
+# slot check): quest:complete false (the Imperial Mythril Piece does not fit): ITEM_CANNOT_BE_OBTAINED; room again:
+# option 30: completed (an Imperial Mythril Piece, the CS Wildcat Badge, Chief Sergeant), an Imperial Gold Piece,
+# AssaultPromotion 0, PROMOTION_CHIEF_SERGEANT.
+lists AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/Hagakoff/onTrigger AhtUrhganWhitegate/onEventFinish/5061 AydeewaSubterrane/Mushroom_Patch/onTrigger AydeewaSubterrane/onEventFinish/14 AydeewaSubterrane/onEventFinish/19 AydeewaSubterrane/onEventFinish/21
+char zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+charvar AssaultPromotion 25
+keyitem SmWildcatBadge
+login
+trigger Abquhbah                        # available: 5060
+finish                                  # begun
+trigger Abquhbah                        # Prog 0: 5062 (once per zone)
+finish
+trigger Abquhbah                        # Ignore: no action: his script's 255
+finish
+trigger Hagakoff                        # Prog 0: 5067
+finish                                  # Prog 1
+trigger Hagakoff                        # Prog 1: no section: his shop (no event)
+finish-if-event
+trigger Abquhbah                        # Prog 1: 5068
+finish                                  # Prog 2
+trigger Abquhbah                        # Prog 2: 5069 (once per zone)
+finish
+trigger Abquhbah                        # its mark used: no action: 255
+finish
+trigger Hagakoff                        # Prog 2: 5063
+finish                                  # Prog 3
+trigger Abquhbah                        # Prog 3, Option 0: nil: 255
+finish
+warp 124.319,36.844,5.795 AydeewaSubterrane
+trigger Mushroom_Patch                  # patch 0, no Scourshroom, untouched: 14
+finish                                  # harvested; the Scourshroom
+trigger Mushroom_Patch                  # harvested: 15
+finish
+warp 118.947,36.826,-45.499 AydeewaSubterrane
+trigger Mushroom_Patch+3                # the Scourshroom, untouched: 19
+finish option=1                         # nothing
+trigger Mushroom_Patch+3                # 19
+finish option=0                         # planted; needToZone; the Scourshroom taken
+trigger Mushroom_Patch+3                # planted, needToZone: 20
+finish
+warp -206.852,8.57,143.435 AydeewaSubterrane
+trigger Mushroom_Patch+2                # no Scourshroom, untouched: 14
+finish                                  # the Scourshroom
+warp -619.539,-10.483,-69.223 WajaomWoodlands
+warp 118.947,36.826,-45.499 AydeewaSubterrane   # needToZone cleared
+wait vana=24                            # the next day: MPatch_Time3 reached
+trigger Mushroom_Patch+3                # planted, ready: 21 [0] = 1 (about 12:00), [3] = 0 (the draw under 75)
+finish option=3                         # picked; Option 3
+trigger Mushroom_Patch+3                # picked: 18
+finish
+warp -219.019,8.633,141.049 AydeewaSubterrane
+trigger Mushroom_Patch+4                # the Scourshroom, untouched: 19
+finish option=0                         # planted; needToZone
+warp -619.539,-10.483,-69.223 WajaomWoodlands
+warp -219.019,8.633,141.049 AydeewaSubterrane
+wait vana=24                            # the next day: MPatch_Time4 reached
+trigger Mushroom_Patch+4                # 21 [0] = 1, [3] = 0
+finish option=4                         # 7 > 5: NO_MORE_SPROUTS, NO_MORE_SPROUTS + 1; Option 5
+warp 37.024,-6.601,-62 AhtUrhganWhitegate
+trigger Abquhbah                        # Option 5: 5061 [0] = 0, [1] = 5
+finish option=10                        # under 11: Stage 0 + 5; Option 0; the patches reset
+trigger Abquhbah                        # Option 0: nil: 255
+finish
+charvar Quest[6][96]Option 1            # a GM: one more harvest
+trigger Abquhbah                        # 5061 [0] = 5, [1] = 1
+finish option=15                        # 11 to 19: nothing
+trigger Abquhbah                        # 5061
+finish option=11                        # nothing
+trigger Abquhbah                        # 5061
+finish option=19                        # nothing
+fill-inventory
+trigger Abquhbah                        # 5061
+finish option=30                        # under two free slots: ITEM_CANNOT_BE_OBTAINED + 4
+trigger Abquhbah                        # 5061
+finish option=29                        # under 30: no slot check; complete false (the Mythril Piece does not fit)
+free-inventory
+trigger Abquhbah                        # 5061
+finish option=30                        # completed: the Mythril Piece; the Gold Piece; AssaultPromotion 0

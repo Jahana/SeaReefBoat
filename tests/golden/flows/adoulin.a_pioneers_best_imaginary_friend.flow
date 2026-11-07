@@ -1,0 +1,68 @@
+# A Pioneer's Best (Imaginary) Friend (adoulin 75, call-only: Merleg's and Ruth's scripts): a level 99 Warrior in
+# Western Adoulin, no SoA mission. Merleg (default 543) and Ruth (default 503) alternate with their scripts (the
+# UseFallback turn): the talks come in pairs, the default first after a zone visit begins, the script's event (from the
+# quest's call) second. Merleg, available: 2520, finished (no Ionis): added (no 2522). Accepted, no Ionis: 2521. Ruth
+# below Life on the Frontier (SoA 0, then 6 Pioneer Registration, GMs): her script's SoA test fails: 503 both talks.
+# Pioneer Registration completed and SoA 7 (GMs): Pioneer Registration's completed section (Mission[12][6] in Ruth's
+# order line) answers 590 in the default's place. Available (a GM): nothing from her script: 590 both talks. Accepted
+# again, Signet and Sanction (influence) and Food (no_cancel, no influence) on (GMs; a warp saves them): 2523,
+# finished: the influence effects removed silently (Signet and Sanction gone, Food kept) and Ionis for 9000 s.
+# Ionis on: nothing. Merleg with Ionis: 2522, finished: completed (the raw completeQuest), 500 exp, 200 bayld
+# (npcUtil.giveCurrency, BAYLD_OBTAINED), the F.A.I.L. Badge, 30 Adoulin fame. Completed: Merleg 543, Ruth 590 (nothing
+# from either script).
+lists WesternAdoulin/Merleg/onTrigger WesternAdoulin/Ruth/onTrigger WesternAdoulin/onEventFinish/2520
+lists WesternAdoulin/onEventFinish/2522 WesternAdoulin/onEventFinish/2523
+char zone=WesternAdoulin pos=32.5,0,-131 job=WAR lvl=99
+login
+trigger Merleg                          # available: 2520 or 543 (the turn)
+finish-if-event
+trigger Merleg                          # the other; 2520's finish: added (no Ionis: no 2522)
+finish-if-event
+trigger Merleg                          # accepted, no Ionis: 2521 or 543
+finish-if-event
+trigger Merleg                          # the other of the pair
+finish-if-event
+warp -142.5,4,-10 WesternAdoulin        # beside Ruth
+trigger Ruth                            # SoA 0: nothing from her script (503 by the turn)
+finish-if-event
+trigger Ruth                            # the other of the pair
+finish-if-event
+mission Soa PioneerRegistration current # a GM: SoA 6
+trigger Ruth                            # SoA 6: nothing from her script
+finish-if-event
+trigger Ruth                            # the other of the pair
+finish-if-event
+mission Soa PioneerRegistration completed # a GM: the log's current mission cleared
+mission Soa LifeOnTheFrontier current   # a GM: SoA 7
+quest Adoulin.APioneersBestImaginaryFriend available # a GM
+trigger Ruth                            # SoA 7, available: nothing
+finish-if-event
+trigger Ruth                            # the other of the pair
+finish-if-event
+quest Adoulin.APioneersBestImaginaryFriend accepted # a GM
+effect 253                              # a GM: Signet (an influence effect)
+effect 256                              # a GM: Sanction (an influence effect too)
+effect 251                              # a GM: Food (no_cancel, not influence: kept)
+warp -142.5,4,-10 WesternAdoulin        # the same spot (a save: the effects in char_effects)
+trigger Ruth                            # accepted, no Ionis: 2523 or 590
+finish-if-event
+trigger Ruth                            # the other; 2523's finish: Signet, Sanction removed, Ionis
+finish-if-event
+trigger Ruth                            # Ionis on: nothing
+finish-if-event
+trigger Ruth                            # the other of the pair
+finish-if-event
+warp 32.5,0,-131 WesternAdoulin         # beside Merleg
+trigger Merleg                          # Ionis on: 2522 or 543
+finish-if-event
+trigger Merleg                          # the other; 2522's finish: completed, exp, bayld, the badge, fame
+finish-if-event
+trigger Merleg                          # completed: nothing
+finish-if-event
+trigger Merleg                          # the other of the pair
+finish-if-event
+warp -142.5,4,-10 WesternAdoulin        # beside Ruth
+trigger Ruth                            # completed: nothing
+finish-if-event
+trigger Ruth                            # the other of the pair
+finish-if-event

@@ -1,0 +1,29 @@
+# Path of the Beastmaster (jeuno 19): Brutus, the Chocobo and Osker in Upper Jeuno. Save My Son not completed (no
+# section: Chocobo's Wounds' 22 at Brutus, its 61 at the chocobo), then completed (Save My Son's 55 at the chocobo), the
+# offer 70 (the beastmaster job unlocked, YOU_CAN_NOW_BECOME_A_BEASTMASTER, completed: the Job Gesture: Beastmaster key
+# item, Animal Trainer, fame +7 x3), then Brutus's 20, the chocobo's 72 and Osker's 45 (both replaceDefault).
+# Brutus's script is silent here (Chocobo's Wounds completed, Wings of Gold not), so his Event actions show each time.
+# A bone chip traded to Brutus while offered: no trade handler, nil.
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/Chocobo/onTrigger UpperJeuno/Osker/onTrigger UpperJeuno/onEventFinish/70
+char zone=UpperJeuno pos=-55.5,8.2,97.5 lvl=30
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+item BoneChip
+login
+trigger Brutus                  # Save My Son not completed: no section; Chocobo's Wounds' 22
+finish
+trigger Chocobo                 # Chocobo's Wounds' 61
+finish
+quest Jeuno.SaveMySon completed # a GM
+trigger Chocobo                 # Save My Son's 55
+finish
+walk -55.5,8.2,97.5             # beside Brutus
+trade Brutus BoneChip x1        # available: no trade handler, nil (his script has none)
+trigger Brutus                  # available: 70
+finish                          # BST unlocked, YOU_CAN_NOW_BECOME_A_BEASTMASTER, completed: Job Gesture KI, Animal Trainer, fame +7 x3
+trigger Brutus                  # completed: 20
+finish
+trigger Chocobo                 # 72 (replaceDefault; Save My Son's 55 needs this quest not completed)
+finish
+trigger Osker                   # 45 (replaceDefault)
+finish

@@ -1,0 +1,37 @@
+# The Die is Cast's edges. bob (level 30, both quests available at Ratihb): 547 (Luck of the Draw) and 591 tie at
+# Progress: the first talk plays actions[1], the container listed first: Luck of the Draw's 547; finished: that quest
+# begun; the next talk: 591 (Luck of the Draw has no Ratihb handler at Prog 1); finished: begun too. Main (level 20,
+# accepted by a GM): Prog 0: Jijiroon: nil: 1; Prog 1 (a GM): qm9: nil: NOTHING_OUT_OF_ORDINARY; Prog 3 (a GM): qm9 pops
+# Bukki (SPINE_CHILL); Prog 2 (a GM) with Bukki up: Bukki killed: his death handler is Prog 3's section's: nothing (Prog
+# 2 kept); Prog 5 with the bag (GMs), a full bag: 593: complete false (the ring does not fit): nothing, the bag kept;
+# room again: 593: completed.
+lists AhtUrhganWhitegate/Ratihb/onTrigger Nashmau/Jijiroon/onTrigger ArrapagoReef/qm9/onTrigger ArrapagoReef/Bukki/onMobDeath AhtUrhganWhitegate/onEventFinish/593
+char zone=Nashmau pos=17.413,0,-32.676 job=WAR lvl=20
+char bob zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=30
+quest AhtUrhgan.TheDieIsCast accepted
+login
+bob: login
+bob: trigger Ratihb                     # 547 and 591 tie: actions[1]: Luck of the Draw's 547
+bob: finish                             # Luck of the Draw begun
+bob: trigger Ratihb                     # 591
+bob: finish                             # The Die is Cast begun
+bob: logout
+trigger Jijiroon                        # Prog 0: nil: 1
+finish
+charvar Quest[6][16]Prog 1              # a GM
+warp 312.588,-3.882,170.124 ArrapagoReef
+trigger qm9                             # Prog 1: no section-3 handler: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][16]Prog 3              # a GM
+trigger qm9                             # Prog 3: Bukki popped: SPINE_CHILL
+charvar Quest[6][16]Prog 2              # a GM
+kill BUKKI                              # Prog 2: no death handler: nothing
+charvar Quest[6][16]Prog 5              # a GM
+keyitem BagOfGoldPieces                 # a GM
+warp 76.725,-6,-137.203 AhtUrhganWhitegate
+fill-inventory
+trigger Ratihb                          # Prog 5: 593
+finish                                  # the ring does not fit: complete false: nothing; the bag kept
+free-inventory
+trigger Ratihb                          # 593
+finish                                  # completed; the bag taken

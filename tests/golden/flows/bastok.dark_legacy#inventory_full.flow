@@ -1,0 +1,18 @@
+# Dark Legacy at Prog 3 without the formula: Cochal-Monchal's trigger is nil (his default 696); then, the formula given by
+# GM, Raibaht's 755 with a full inventory (the Raven Scythe does not fit: not completed, the formula kept), and again with
+# room (completed).
+lists Metalworks/Raibaht/onTrigger WindurstWaters/Cochal-Monchal/onTrigger Metalworks/onEventFinish/755
+char zone=WindurstWaters pos=-50.9,-6.25,109.3 job=DRK lvl=40
+quest Bastok.DarkLegacy accepted
+charvar Quest[1][57]Prog 3
+login
+trigger Cochal-Monchal               # Prog 3, no formula: nil, his default 696
+finish-if-event
+keyitem DarksteelFormula
+warp -26.3,-10,-2.1 Metalworks
+fill-inventory
+trigger Raibaht                      # the formula: 755
+finish                               # the inventory full: not completed, the formula kept
+free-inventory
+trigger Raibaht                      # 755 again
+finish                               # completed: Raven Scythe, fame +20, the formula deleted

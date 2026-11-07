@@ -1,0 +1,35 @@
+# Such Sweet Sorrow (ahtUrhgan 13): a level 75 Warrior in Whitegate with two Merrow Scales and a Bone Chip. Dabhuh (no
+# script, no default). Available: a Merrow Scale to Dabhuh: no section-1 trade handler: nothing; Dabhuh 582 ({
+# text_table = 0 }), finished: Option 1, setPos into Caedarva Mire (43.493 5.325 -699.828). The zone change (`tick 400`,
+# `login open`): Caedarva's zone-in at Option 1: 29; finished: Option 2, setPos into Whitegate (100.023 0 -91.762); the
+# zone change: Whitegate's zone-in at Option 2: { 956, 0 } (cutscene 956, text table 0); finished: begun, Option 0.
+# Accepted: Dabhuh 584 ({ text_table = 0 }); the Bone Chip: nil; the scale with the chip: not exactly: nil; one scale:
+# 583 ({ text_table = 0 }); finished: completed (a Merrow No.17 Locket), the scale taken. Completed: Dabhuh 584; a
+# scale: no section-3 trade handler.
+lists AhtUrhganWhitegate/Dabhuh/onTrigger AhtUrhganWhitegate/Dabhuh/onTrade AhtUrhganWhitegate/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/582 AhtUrhganWhitegate/onEventFinish/956 CaedarvaMire/onZoneIn/1 CaedarvaMire/onEventFinish/29 AhtUrhganWhitegate/onEventFinish/583
+char zone=AhtUrhganWhitegate pos=99.4,0,-91.53 job=WAR lvl=75
+item MerrowScale x2
+item BoneChip
+login
+trade Dabhuh MerrowScale x1             # available: no trade handler: nothing
+finish-if-event
+trigger Dabhuh                          # available: 582 ({ text_table = 0 })
+finish                                  # Option 1; setPos into Caedarva Mire
+tick 400
+login open                              # the zone change; Option 1: 29
+finish                                  # Option 2; setPos into Whitegate
+tick 400
+login open                              # the zone change; Option 2: 956 (text table 0)
+finish                                  # begun; Option 0
+trigger Dabhuh                          # accepted: 584
+finish
+trade Dabhuh BoneChip x1                # not the scale: nil
+finish-if-event
+trade Dabhuh MerrowScale x1 BoneChip x1 # not exactly the scale: nil
+finish-if-event
+trade Dabhuh MerrowScale x1             # exactly one scale: 583
+finish                                  # completed: the locket; the scale taken
+trigger Dabhuh                          # completed: 584
+finish
+trade Dabhuh MerrowScale x1             # completed: no trade handler: nothing
+finish-if-event

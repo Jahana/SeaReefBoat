@@ -1,0 +1,54 @@
+# The Doorman (bastok 54, WAR AF1): Phara in Bastok Mines, Hide Flap (1) in Davoi, Naji in Metalworks; Barakbok and
+# Gavotvut in Davoi. The guard (main job WAR, main level AF1_QUEST_LEVEL 40), the offer 151, the hide flap's distance
+# (more than 1 yalm: CLOSER_TO_SEARCH; trigger at=0.5 is close enough), its 110 (declined, the two NMs spawned and claimed
+# with nmClaimed 1, the Sword Grip Material once both are dead with nmKilled 3, nothing once the KI is held), the NMs'
+# deaths (nmKilled bits 1 and 0), Phara's 152 (the KI taken, Timer = tomorrow, Prog 1), the Timer not reached, 153 the
+# next Vana'diel day (Yasin's Sword, Prog 2), Naji's 750 and the reward. nmClaimed and nmKilled are local vars (not in
+# the trace): their effect shows in the next 110. Defaults: Phara 150, Naji 700, the hide flap none. The Talekeeper's
+# Truth also names Phara: it needs this quest completed and level 50. Naji's missions and Trust: Bastok need what this
+# char lacks.
+lists BastokMines/Phara/onTrigger BastokMines/onEventFinish/151 BastokMines/onEventFinish/152 BastokMines/onEventFinish/153 Davoi/Hide_Flap_1/onTrigger Davoi/onEventFinish/110 Davoi/Barakbok/onMobDeath Davoi/Gavotvut/onMobDeath Metalworks/Naji/onTrigger Metalworks/onEventFinish/750
+char zone=BastokMines pos=75,0,-80 job=WAR lvl=40
+item BoneChip
+login
+trade Phara BoneChip x1         # available: no trade handler, nothing
+trigger Phara                   # WAR 40, available: 151
+finish                          # accepted
+trigger Phara                   # accepted, no KI, Prog 0: nil, her default 150
+finish
+trade Phara BoneChip x1         # accepted: no trade handler, nothing
+warp 64,-14,-4 Metalworks
+trigger Naji                    # no Yasin's Sword: nil, his default 700
+finish
+warp 263,4,-249 Davoi
+trigger Hide_Flap_1             # 1.5 yalms away: FIND_ORC_TENT, then CLOSER_TO_SEARCH
+trigger Hide_Flap_1 at=0.5      # close, neither NM alive: FIND_ORC_TENT, 110
+finish option=1                 # option 1: nothing
+trigger Hide_Flap_1 at=0.5      # 110
+finish                          # no KI, nmKilled 0, neither spawned: YOU_FIND_NOTHING, both spawned and claimed, nmClaimed 1
+trigger Hide_Flap_1 at=0.5      # both alive: FIND_ORC_TENT, noAction
+kill GAVOTVUT                   # nmClaimed 1: nmKilled bit 1
+trigger Hide_Flap_1 at=0.5      # Barakbok alive: FIND_ORC_TENT, noAction
+kill BARAKBOK                   # nmClaimed 1: nmKilled bit 0, so 3
+trigger Hide_Flap_1 at=0.5      # both dead: FIND_ORC_TENT, 110
+finish                          # nmKilled 3: the Sword Grip Material
+trigger Hide_Flap_1 at=0.5      # 110
+finish                          # the KI held: YOU_FIND_NOTHING
+warp 75,0,-80 BastokMines
+trigger Phara                   # the KI: 152
+finish                          # the KI taken, Timer = today + 1, Prog 1
+trigger Phara                   # Prog 1, Timer not reached: nil, 150
+finish
+wait vana=24
+trigger Phara                   # Prog 1, the Timer reached: 153
+finish                          # Yasin's Sword, Prog 2
+trigger Phara                   # Prog 2, no KI: nil, 150
+finish
+warp 64,-14,-4 Metalworks
+trigger Naji                    # Yasin's Sword: 750
+finish                          # completed: Razor Axe, Bastok fame +20, the sword taken
+trigger Naji                    # completed: 700
+finish
+warp 75,0,-80 BastokMines
+trigger Phara                   # completed, level 40: The Talekeeper's Truth not offered; 150
+finish

@@ -1,0 +1,49 @@
+# A Thief in Norg!?'s reply kinds at Jaucribaix (Norg; no script; default 71) against The Potential Within's 179 (Event):
+# a level 75 Samurai with a Tachi of Trials, Forge Your Destiny, The Sacred Katana and Yomi Okuri completed, The
+# Potential Within accepted (GMs). Available (no mustZone, no Timer): 158 (Progress) beats 179 on both talks (an Event
+# 158 would tie with 179 and rotate to it); option 1: begun, Prog 1. Prog 1: 159 and 179 (both Event): a tie: the
+# container order (SAM_AF3_A_Thief_in_Norg first): 159, then the rotation: 179. Prog 5 (a GM), a full inventory: 166
+# twice (giveItem false: Prog stays 5); Prog 6, no charm: 168 twice (giveItem false); Prog 7: 160 (Prog 8), Prog 7 again
+# (a GM): 160; Prog 9, no mustZone, no Wait: 164 twice with a full inventory (complete false). Each Progress reply beats
+# 179 on the second talk too.
+lists Norg/Jaucribaix/onTrigger
+char zone=Norg pos=91,-7,-8 job=SAM lvl=75
+item TachiOfTrials
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+quest Outlands.ThePotentialWithin accepted
+login
+trigger Jaucribaix                      # 158 (Progress) beats 179 (Event)
+finish option=0                         # not begun
+trigger Jaucribaix                      # 158 again
+finish option=1                         # begun; Prog 1
+trigger Jaucribaix                      # Prog 1: 159 and 179 (1) (both Event): a tie: the container order: 159
+finish
+trigger Jaucribaix                      # the rotation: 179 (1)
+finish option=0                         # the tachi held: nothing
+charvar Quest[5][142]Prog 5             # a GM
+trigger Jaucribaix                      # 166 (Progress) beats 179
+fill-inventory
+finish                                  # giveItem false: Prog stays 5
+trigger Jaucribaix                      # 166 again
+finish                                  # giveItem false
+charvar Quest[5][142]Prog 6             # a GM
+trigger Jaucribaix                      # no charm: 168 (Progress) beats 179
+finish                                  # giveItem false
+trigger Jaucribaix                      # 168 again
+finish
+free-inventory
+charvar Quest[5][142]Prog 7             # a GM
+trigger Jaucribaix                      # 160 (Progress) beats 179
+finish                                  # Prog 8
+charvar Quest[5][142]Prog 7             # a GM
+trigger Jaucribaix                      # 160 again
+finish                                  # Prog 8
+charvar Quest[5][142]Prog 9             # a GM
+trigger Jaucribaix                      # no mustZone, no Wait: 164 (Progress) beats 179
+fill-inventory
+finish                                  # complete false (no room): still accepted
+trigger Jaucribaix                      # 164 again
+finish
+free-inventory

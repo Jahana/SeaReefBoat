@@ -1,0 +1,26 @@
+# Trust: Shantotto (hidden quest TrustShantotto), the progress arm: a level 99 Warrior in Windurst Walls with the
+# Windurst Trust Permit, Curses, Foiled... completed (a GM). Without the nine trusts: 529 (importantEvent), finished
+# on 0: nothing. With the nine nation trust spells (a GM, `spell <id>`): 529 as a progress event ([3] 0, [7] 1),
+# finished on 2: Shantotto learned, YOU_LEARNED_TRUST. Eight of the nine: still 529 (importantEvent).
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/onEventFinish/529
+char zone=WindurstWalls pos=122.6,-3,112.1 job=WAR lvl=99
+keyitem WindurstTrustPermit
+quest Windurst.CursesFoiledAGolem completed
+login
+trigger Shantotto                       # no trusts: 529 (importantEvent)
+finish option=0
+spell 898                               # Kupipi
+spell 901                               # Nanaa Mihgo
+spell 904                               # Ajido-Marujido
+spell 899                               # Excenmille
+spell 902                               # Curilla
+spell 905                               # Trion
+spell 900                               # Ayame
+spell 897                               # Naji
+trigger Shantotto                       # eight of the nine: 529 (importantEvent)
+finish option=0
+spell 903                               # Volker
+trigger Shantotto                       # the nine trusts: the default (the talk alternation)
+finish-if-event
+trigger Shantotto                       # the nine trusts: 529 (a progress event, [3] 0, [7] 1)
+finish option=2                         # Shantotto learned, YOU_LEARNED_TRUST

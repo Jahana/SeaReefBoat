@@ -1,0 +1,51 @@
+# Wild Card (windurst 77): the reply kinds that only another quest's or mission's line shows. Level 5, fame 325,
+# Crying Over Onions completed (its new defaults stand: The Promise available), Truth, Justice, and the Onion Way!
+# accepted by GM (Kohlo-Lakolo 371, Papo-Hopo 372: Events), The Puppet Master accepted by GM (its 403 on the House of
+# the Hero, an Event), Windurst mission 8-2 The Jester Who'd Be King current (Apururu's 588, a Progress line, at
+# mission status 0; 589, an Event, at 1). Wild Card accepted by GM at Prog 0, rank 8.
+# - Kohlo-Lakolo: 545 (Progress) over 371 (Prog 1). Papo-Hopo: 509 (Event) ties with 372 (both talks; Crying Over
+#   Onions' 508 replaceDefault below both).
+# - The House of the Hero (_6n2, its script answers nothing here): 386 (Progress) over 403 (Prog 2); the card by GM: 387
+#   (Progress) over 403 (the card taken, 8000 gil, Prog 4); Prog 1 and rank 9 by GM: 388 (Progress) over 403 (Prog 3);
+#   the card by GM: 389 (Progress) over 403 (Prog 4). An Event line would tie with 403 or give the next talk to the
+#   door's script.
+# - Apururu (Windurst Woods), Prog 3 by GM: 600 and 588 (both Progress) tie: 588 first (its finish: mission status 1,
+#   the Manustery Ring); then 600 (Progress) over 589 (Event), twice. An Event 600 would lose to 588 and tie with 589.
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Papo-Hopo/onTrigger WindurstWalls/_6n2/onTrigger WindurstWoods/Apururu/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+rank 8
+fame Windurst 325
+quest Windurst.CryingOverOnions completed
+quest Windurst.TruthJusticeAndTheOnionWay accepted
+quest Windurst.ThePuppetMaster accepted
+mission Windurst TheJesterWhodBeKing current
+quest Windurst.WildCard accepted
+login
+trigger Kohlo-Lakolo                           # 545 (Progress) over 371
+finish                                         # Prog 1
+trigger Papo-Hopo                              # 509 and 372 tie: 372 first
+finish
+trigger Papo-Hopo                              # 509
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # Prog 1, rank 8: 386 (Progress) over 403
+finish                                         # Prog 2
+keyitem JokerCard                              # GM
+trigger _6n2                                   # Prog 2, the card, rank 8: 387 (Progress) over 403
+finish                                         # the card taken; 8000 gil; Prog 4
+charvar Quest[2][77]Prog 1                     # GM
+rank 9                                         # GM
+trigger _6n2                                   # Prog 1, rank 9: 388 (Progress) over 403
+finish                                         # Prog 3
+keyitem JokerCard                              # GM
+trigger _6n2                                   # Prog 3, the card, rank 9: 389 (Progress) over 403
+finish                                         # the card taken; 8000 gil; Prog 4
+charvar Quest[2][77]Prog 3                     # GM
+warp -10.6,-2.75,15.9 WindurstWoods
+trigger Apururu                                # 600 and 588 (Progress) tie: 588 first (mission status 1)
+finish
+trigger Apururu                                # mission status 1: 600 (Progress) over 589 (Event)
+finish
+charvar Quest[2][77]Prog 3                     # GM
+trigger Apururu                                # the same again
+finish                                         # 8000 gil; Prog 4

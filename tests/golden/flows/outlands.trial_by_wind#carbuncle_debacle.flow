@@ -1,0 +1,38 @@
+# Trial by Wind (outlands 194): Agado-Pugado's Carbuncle Debacle arms (Windurst's quest, kept in his script) answer
+# before this quest. At Selbina-Rabao fame level 5, Carbuncle Debacle accepted with CarbuncleDebacleProgress 6 and no
+# Wind Pendulum: 87 (not 66); its finish gives the pendulum. Progress 6 with the pendulum: 88. Progress 5 with the Daze
+# Breaker Charm (a GM): 86 (finish: a pendulum, progress 6). Progress 5 without the charm (the charm deleted by GM): the
+# call runs: 66, declined. Progress 7: the call runs: 66, accepted, then 67. Carbuncle Debacle completed with progress 6
+# (a GM): the call runs: 67. First, the 87 finish with a full bag: ITEM_CANNOT_BE_OBTAINED, no pendulum, progress 6
+# kept (the patched script's elseif, after the call's three csids).
+char zone=Rabao pos=-16.5,7.8,-10.5 job=WAR lvl=75
+fame Sandoria 244
+fame Bastok 244                           # Selbina-Rabao 325: level 5
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 6
+login
+fill-inventory
+trigger Agado-Pugado                      # Carbuncle Debacle, progress 6, no pendulum: 87 (the script's)
+finish                                    # no free slot: ITEM_CANNOT_BE_OBTAINED (the pendulum), nothing given
+free-inventory
+trigger Agado-Pugado                      # still no pendulum: 87 again
+finish                                    # the Wind Pendulum; CarbuncleDebacleProgress 6
+trigger Agado-Pugado                      # progress 6, the pendulum held: 88
+finish
+charvar CarbuncleDebacleProgress 5
+keyitem DazeBreakerCharm
+trigger Agado-Pugado                      # progress 5, the charm: 86
+finish                                    # a second Wind Pendulum: rare, addItem fails (no row), ITEM_OBTAINED all the same; progress 6
+delkeyitem DazeBreakerCharm
+charvar CarbuncleDebacleProgress 5
+trigger Agado-Pugado                      # progress 5, no charm: the quest's 66
+finish option=0                           # declined
+charvar CarbuncleDebacleProgress 7
+trigger Agado-Pugado                      # progress 7: the quest's 66
+finish option=1                           # begun; the fork
+trigger Agado-Pugado                      # accepted, the fork: 67
+finish
+charvar CarbuncleDebacleProgress 6
+quest Windurst.CarbuncleDebacle completed
+trigger Agado-Pugado                      # Carbuncle Debacle completed, progress 6: the quest's 67
+finish

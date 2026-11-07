@@ -1,0 +1,12 @@
+# Overnight Delivery (windurst 15): the guard's Food for Thought side alone. Fame 50 (level 2), no mustZone, Food for
+# Thought available: the offer is not met, and Food for Thought's own 310 (a progressEvent) answers Kenapa. Two talks:
+# had this quest's 336 (also a progressEvent) answered too, the lookup would cycle the two equal actions and one talk
+# would play 336.
+lists WindurstWaters/Kenapa-Keppa/onTrigger
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+fame Windurst 50
+login
+trigger Kenapa-Keppa                    # Food for Thought not completed: not met; Food for Thought's 310
+finish
+trigger Kenapa-Keppa                    # 310 again (no cycle to 336)
+finish

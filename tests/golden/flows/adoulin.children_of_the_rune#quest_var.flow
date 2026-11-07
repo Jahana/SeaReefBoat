@@ -1,0 +1,14 @@
+# Children of the Rune (adoulin 119), the quest's own var at the completion: accepted, the reward pending (RUN_COTR 3),
+# the Yahse Wildflower Petal and Quest[9][119]Prog 1 (GMs). Octavien: 29; finished: the Sowilo Claymore, RUN unlocked,
+# YOU_CAN_NOW_BECOME, the gesture, RUN_COTR 0, the petal taken, the raw player:completeQuest. The raw completeQuest does
+# no cleanup: Quest[9][119]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=EasternAdoulin pos=2.444,-11.439,-16.595 job=WHM lvl=30
+quest Adoulin.ChildrenOfTheRune accepted
+keyitem YahseWildflowerPetal
+charvar RUN_COTR 3
+charvar Quest[9][119]Prog 1     # a GM: the quest's own var
+login
+trigger Octavien                # RUN_COTR 3: 29
+finish                          # the reward: completed, Prog kept
+trigger Octavien                # Completed: 28
+finish

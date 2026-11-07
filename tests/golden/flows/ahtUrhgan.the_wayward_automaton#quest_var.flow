@@ -1,0 +1,16 @@
+# The Wayward Automaton (ahtUrhgan 27), the quest's own var at the completion: a PUP of level 40 with
+# No Strings Attached completed, the Animator, this quest accepted, TheWaywardAutomatonProgress 3 and Quest[6][27]Prog 1
+# (GMs). Iruki-Waraki (the second talk of a pair: No Strings Attached's 267 first): 776; finished: npcUtil.completeQuest
+# (the Turbo Animator, the progress var 0, completed). npcUtil.completeQuest does no cleanup: Quest[6][27]Prog stays 1
+# (quest:complete's cleanup would clear it).
+char zone=AhtUrhganWhitegate pos=102.8,-6.0,-29.0 job=PUP lvl=40
+quest AhtUrhgan.NoStringsAttached completed
+item Animator
+quest AhtUrhgan.TheWaywardAutomaton accepted
+charvar TheWaywardAutomatonProgress 3
+charvar Quest[6][27]Prog 1              # a GM: the quest's own var
+login
+trigger Iruki-Waraki                    # No Strings Attached's 267
+finish
+trigger Iruki-Waraki                    # accepted, progress 3: 776
+finish                                  # the Turbo Animator; the progress var 0; completed, Prog kept

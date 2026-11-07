@@ -1,0 +1,13 @@
+# Brygid the Stylist Returns with a full inventory: 383 plays, the reward does not fit (npcUtil.giveItem fails), the
+# subligar is kept and the quest stays accepted; once there is room the same trade completes it.
+char zone=BastokMarkets pos=-90.2,-4.302,-107.5 job=MNK lvl=75
+item AriesSubligar
+quest Bastok.BrygidTheStylistReturns accepted
+charvar Quest[1][74]Option 1
+login
+fill-inventory
+trade Brygid AriesSubligar x1   # Option 1: 383
+finish                          # the inventory full: no reward, the subligar kept, still accepted
+free-inventory
+trade Brygid AriesSubligar x1   # 383 again
+finish                          # completed: the Duende Cotehardie, fame +10, the title

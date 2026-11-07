@@ -1,0 +1,57 @@
+# Waters of the Cheval (sandoria 1): Miageau and Nouveil in Northern San d'Oria, the Cheval River in East Ronfaure (none
+# has a script; defaults Miageau 517, Nouveil 574, the river THE_WATER_SPARKLES; no other quest or mission names them).
+# Available: a trade to Miageau (no trade handler: nothing); Nouveil's default 574; Miageau's 504 with option 0 (begun),
+# the quest reset by GM, 504 with option 1 (begun: any option). Accepted: Miageau's 519 (no waterskin); Nouveil's 575
+# (neither item); 9 gil to Nouveil (nil); a chip (no gil: nil); exactly 10 gil (YOU_DONATE_GIL, 571; finish: the Blessed
+# Waterskin, the 10 gil taken); Nouveil's 572 (the waterskin); 15 gil and a chip (tradeHas: 571; a second waterskin,
+# 10 gil taken, 5 and the chip back); Miageau's 512 (the waterskin); a chip to Miageau (no river water: nil). The river:
+# a talk (BLESSED_WATERSKIN); a chip (no waterskin: nil); the waterskin and a chip (tradeHas: the Skin of Cheval River
+# Water given silently, one waterskin taken, the chip kept, CHEVAL_RIVER_WATER). Nouveil's 573 (the river water and a
+# waterskin: the first arm); Miageau's 512; the water and a chip to Miageau (515: completed, Wing Pendant from the
+# trade, fame +20, The Pure One; the water taken, the chip kept). Completed: the three defaults.
+# #gm takes the trades while available and completed; #inventory_full the gives that fail.
+lists NorthernSanDoria/Miageau/onTrigger NorthernSanDoria/Miageau/onTrade NorthernSanDoria/Nouveil/onTrigger NorthernSanDoria/Nouveil/onTrade NorthernSanDoria/onEventFinish/504 NorthernSanDoria/onEventFinish/515 NorthernSanDoria/onEventFinish/571 EastRonfaure/Cheval_River/onTrigger EastRonfaure/Cheval_River/onTrade
+char zone=NorthernSanDoria pos=115.6,0.0,109.2 job=WAR lvl=30 gil=1000
+item BoneChip
+item BoneChip
+login
+trade Miageau BoneChip x1                 # available: no trade handler; nothing
+trigger Nouveil                           # available: no section; his default 574
+finish
+trigger Miageau                           # 504
+finish option=0                           # begun
+quest Sandoria.WatersOfTheCheval available
+trigger Miageau                           # 504 again
+finish option=1                           # begun (any option)
+trigger Miageau                           # accepted, no waterskin: 519
+finish
+trigger Nouveil                           # neither item: 575
+finish
+trade Nouveil gil=9                       # under 10 gil: nil; nothing
+trade Nouveil BoneChip x1                 # no gil: nil; nothing
+trade Nouveil gil=10                      # exactly 10 gil: YOU_DONATE_GIL; 571
+finish                                    # the Blessed Waterskin (from the trade); the 10 gil taken
+trigger Nouveil                           # the waterskin: 572
+finish
+trade Nouveil BoneChip x1 gil=15          # 10 gil or more, a chip besides (tradeHas): YOU_DONATE_GIL; 571
+finish                                    # a second waterskin; 10 gil taken, 5 and the chip back
+trigger Miageau                           # the waterskin: 512
+finish
+trade Miageau BoneChip x1                 # no river water: nil; nothing
+warp 222.3,-58.2,427.4 EastRonfaure
+trigger Cheval_River                      # BLESSED_WATERSKIN
+trade Cheval_River BoneChip x1            # no waterskin: nil; nothing
+trade Cheval_River BlessedWaterskin x1 BoneChip x1   # the waterskin (tradeHas): the river water, silently; one waterskin taken, the chip kept; CHEVAL_RIVER_WATER
+warp 115.6,0.0,109.2 NorthernSanDoria
+trigger Nouveil                           # the river water and a waterskin: 573 (the first arm)
+finish
+trigger Miageau                           # a waterskin: 512
+finish
+trade Miageau SkinOfChevalRiverWater x1 BoneChip x1   # the river water (tradeHas): 515
+finish                                    # completed: Wing Pendant (from the trade), fame +20, The Pure One; the water taken, the chip kept
+trigger Miageau                           # completed: no section; his default 517
+finish
+trigger Nouveil                           # completed: his default 574
+finish
+warp 222.3,-58.2,427.4 EastRonfaure
+trigger Cheval_River                      # completed: no section; THE_WATER_SPARKLES

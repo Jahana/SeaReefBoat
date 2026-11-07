@@ -1,0 +1,41 @@
+# Breaking the Bonds of Fate (ahtUrhgan 41, COR limit break): a level 70 Corsair, level cap 70, the earlier COR quests
+# completed (GMs), a Corsair's Testimony and a Bone Chip. Arrapago Reef: qm6 (no script; default
+# NOTHING_OUT_OF_ORDINARY). Available: a trade to qm6: nothing; qm6 234, option 1: nothing; 234, option 0: begun.
+# Accepted: qm6: YOU_MUST_BRING (the testimony); a Bone Chip: nil; the testimony: 235 ({ [7] = 1 }), option 1: nothing;
+# 235, option 0: Prog 1, setPos into Talacca Cove (`tick 400`, `login`: the zone change). The battlefield: the testimony
+# traded to _1l0 (requiredItems; requiredVar Prog 1; Luck of the Draw's _1l0 handler needs its Prog 4): the 32000 menu;
+# option 49 (index 3 << 4 | area 1) enters; QULTADA (area 1) killed: won (allDeath), 32001 opens; finished:
+# battlefieldWin 1091: the cap 70 -> 75 (YOUR_LEVEL_LIMIT_IS_NOW_75), a Scroll of Instant Warp, completed (Master of
+# Chance). Arrapago: completed: no section: qm6's NOTHING_OUT_OF_ORDINARY.
+lists ArrapagoReef/qm6/onTrigger ArrapagoReef/qm6/onTrade ArrapagoReef/onEventFinish/235 TalaccaCove/_1l0/onTrade TalaccaCove/onEventFinish/32001
+char zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=70
+levelcap 70
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.EquippedForAllOccasions completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+quest AhtUrhgan.AgainstAllOdds completed
+item CorsairsTestimony
+item BoneChip
+login
+trade qm6 BoneChip x1                   # available: no trade handler: nothing
+trigger qm6                             # 234
+finish option=1                         # not 0: nothing
+trigger qm6                             # 234
+finish option=0                         # begun
+trigger qm6                             # accepted: YOU_MUST_BRING (the testimony)
+trade qm6 BoneChip x1                   # no testimony: nil
+trade qm6 CorsairsTestimony x1          # 235 ({ [7] = 1 })
+finish option=1                         # nothing
+trade qm6 CorsairsTestimony x1          # 235
+finish option=0                         # Prog 1; setPos into Talacca Cove
+tick 400
+login                                   # the zone change: Talacca Cove
+warp -98.5,-9.399,-87 TalaccaCove       # beside _1l0 (and the flow checker's zone)
+trade _1l0 CorsairsTestimony x1         # Prog 1: the battlefield's 32000 menu
+update 32000 option=49                  # Breaking the Bonds of Fate (index 3), area 1: registered, entered
+finish                                  # in the arena
+kill QULTADA                            # area 1: won, battlefieldWin 1091; 32001 opens in the kill step
+finish                                  # 32001: cap 70 -> 75, YOUR_LEVEL_LIMIT_IS_NOW_75; the scroll; completed: Master of Chance
+warp 470.267,-12.292,111.817 ArrapagoReef
+trigger qm6                             # completed: no section: NOTHING_OUT_OF_ORDINARY
+finish-if-event

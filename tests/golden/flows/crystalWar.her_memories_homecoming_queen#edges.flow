@@ -1,0 +1,51 @@
+# Her Memories: Homecoming Queen (crystalWar 64), the edges: a level 99 Warrior in East Ronfaure with the WotG mission
+# Pillar of Hope current and Of Malign Maladies completed (GMs; other logs as the main flow), a Lilac. Southern San
+# d'Oria from East Ronfaure, Her Memories not current: nothing. Her Memories current (a GM): from Port San d'Oria:
+# nothing; from East Ronfaure: 957, finished on option 1: begun (any option). Amaura at Prog1 0 without the bean (before
+# Thierride): nil (her default 642). Prog1 2 (a GM): Thierride: nil (521). Northern San d'Oria: Bertenont at Prog2 0:
+# nil (his script: BERTENONT_DIALOG). Batallia Downs: the Gravestone at Prog3 0: nil (SEE_WEATHERED_GRAVESTONE); Prog3
+# 1 and 3 (a GM): the Lilac: nil (Prog3 is not 2); Prog3 2 (a GM): the Lilac and a Philosopher's Stone: nil (not the
+# Lilac alone). Old Bean completed (a GM): Port San d'Oria: Thierride: no Old Bean section: nil (521).
+lists SouthernSanDoria/onZoneIn/1 SouthernSanDoria/onEventFinish/957 SouthernSanDoria/Amaura/onTrigger PortSanDoria/Thierride/onTrigger NorthernSanDoria/Bertenont/onTrigger BatalliaDowns/Weathered_Gravestone/onTrigger BatalliaDowns/Weathered_Gravestone/onTrade
+char zone=EastRonfaure pos=-258.861,-70.999,426 job=WAR lvl=99 nation=0
+mission Wotg PillarOfHope current
+quest CrystalWar.HerMemoriesOfMalignMaladies completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item Lilac
+item PhilosophersStone
+login
+warp 97.4,0.0,113.6 SouthernSanDoria    # from East Ronfaure, Her Memories not current: no zone-in reply
+mission Wotg PillarOfHope completed   # a GM (so the next add does not overwrite it)
+mission Wotg HerMemories current        # a GM
+warp -65.949,-5.496,-28.792 PortSanDoria
+warp 97.4,0.0,113.6 SouthernSanDoria    # from Port San d'Oria: no zone-in reply
+warp -258.861,-70.999,426 EastRonfaure
+warp 97.4,0.0,113.6 SouthernSanDoria open # from East Ronfaure: 957, left open
+finish option=1                         # begun (any option)
+warp -82.867,-6.949,91.148 SouthernSanDoria
+trigger Amaura                          # Prog1 0, no bean: nil (her default 642)
+finish-if-event
+charvar Quest[7][64]Prog1 2             # a GM
+warp -65.949,-5.496,-28.792 PortSanDoria
+trigger Thierride                       # Prog1 2: nil (521)
+finish-if-event
+warp -163.949,0,226.443 NorthernSanDoria
+trigger Bertenont                       # Prog2 0: nil (his script: BERTENONT_DIALOG)
+finish-if-event
+warp 151.228,-5.109,-395.121 BatalliaDowns
+trigger Weathered_Gravestone            # Prog3 0: nil (SEE_WEATHERED_GRAVESTONE)
+finish-if-event
+charvar Quest[7][64]Prog3 1             # a GM
+walk 151.228,-5.109,-395.121
+trade Weathered_Gravestone Lilac x1     # Prog3 1: nil
+charvar Quest[7][64]Prog3 3             # a GM
+trade Weathered_Gravestone Lilac x1     # Prog3 3: nil (Prog3 is not 2)
+charvar Quest[7][64]Prog3 2             # a GM
+trade Weathered_Gravestone Lilac x1 PhilosophersStone x1 # Prog3 2, not the Lilac alone: nil
+quest CrystalWar.HerMemoriesOldBean completed # a GM
+warp -65.949,-5.496,-28.792 PortSanDoria
+trigger Thierride                       # Old Bean completed: no section: nil (521)
+finish-if-event

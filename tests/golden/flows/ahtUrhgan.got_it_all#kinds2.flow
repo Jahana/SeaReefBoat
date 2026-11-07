@@ -1,0 +1,205 @@
+# Got It All's reply kinds against rival containers (task 8 review lesson: the Whitegate NPCs have no script, so a lone
+# reply shows no kind; the trace shows that a Progress beats an Event and that equal kinds rotate by the last event
+# played, even across a finish and a state reset, so each pair or triple of triggers has a rival and the state its
+# finish moves is reset between them). One char per scenario.
+# Tehf Kimasnahya against Three Men and a Closet 843 (Progress, Prog 3) and 844 (Event, Prog 4 or completed): Got It
+# All 520 (Progress, available) with 843, 527 (Progress, Prog 6) and 539 (Event, Prog 7 with the zoning flag) with 844,
+# 528 (Progress, Prog 7) with 843, 525 (Progress, Prog 4) with the completed 844.
+# Ekhu Pesshyadha against The Die Is Cast 592 (Progress, step 0): 522 (Progress), 537 (Event), 531 (Event).
+# Zabahf against Arts and Crafts 512 (Progress, its bit 3 clear): 533 (Event, available and Prog 1 / 4), 523
+# (Progress), 538 / 540 / 535 (Events).
+lists AhtUrhganWhitegate/Tehf_Kimasnahya/onTrigger AhtUrhganWhitegate/Ekhu_Pesshyadha/onTrigger AhtUrhganWhitegate/Zabahf/onTrigger
+char zone=AhtUrhganWhitegate pos=-89.897,0,6.199 job=WAR lvl=75
+char dee zone=AhtUrhganWhitegate pos=-89.897,0,6.199 job=WAR lvl=75
+char eve zone=AhtUrhganWhitegate pos=-89.897,0,6.199 job=WAR lvl=75
+char ekh zone=AhtUrhganWhitegate pos=-89.897,0,6.199 job=WAR lvl=75
+char fio zone=AhtUrhganWhitegate pos=-89.897,0,6.199 job=WAR lvl=75
+char zab zone=AhtUrhganWhitegate pos=-89.897,0,6.199 job=WAR lvl=75
+quest AhtUrhgan.ThreeMenAndACloset accepted
+charvar Quest[6][31]Prog 3
+dee: quest AhtUrhgan.GotItAll accepted
+dee: charvar Quest[6][3]Prog 7
+dee: quest AhtUrhgan.ThreeMenAndACloset accepted
+dee: charvar Quest[6][31]Prog 3
+eve: quest AhtUrhgan.GotItAll accepted
+eve: charvar Quest[6][3]Prog 4
+eve: quest AhtUrhgan.ThreeMenAndACloset completed
+ekh: quest AhtUrhgan.GotItAll accepted
+ekh: charvar Quest[6][3]Prog 1
+ekh: quest AhtUrhgan.TheDieIsCast accepted
+fio: quest AhtUrhgan.GotItAll completed
+fio: quest AhtUrhgan.TheDieIsCast accepted
+zab: quest AhtUrhgan.ArtsAndCrafts accepted
+login
+dee: login
+eve: login
+ekh: login
+fio: login
+zab: login
+quest AhtUrhgan.GotItAll available
+trigger Tehf_Kimasnahya   # 520 (Progress) and 843 (Progress) rotate
+finish
+quest AhtUrhgan.GotItAll available
+trigger Tehf_Kimasnahya
+finish
+quest AhtUrhgan.GotItAll available
+trigger Tehf_Kimasnahya
+finish
+quest AhtUrhgan.GotItAll accepted
+charvar Quest[6][31]Prog 4
+charvar Quest[6][3]Prog 6
+trigger Tehf_Kimasnahya   # Prog 6: 527 (Progress) against 844 (Event); its finish: Prog 7, the zoning flag
+finish
+charvar Quest[6][3]Prog 6
+trigger Tehf_Kimasnahya
+finish
+charvar Quest[6][3]Prog 6
+trigger Tehf_Kimasnahya
+finish
+trigger Tehf_Kimasnahya   # Prog 7 with the zoning flag: 539 (Event) and 844 (Event) rotate
+finish
+trigger Tehf_Kimasnahya
+finish
+trigger Tehf_Kimasnahya
+finish
+dee: quest AhtUrhgan.GotItAll available
+dee: quest AhtUrhgan.GotItAll accepted
+dee: charvar Quest[6][3]Prog 7
+dee: trigger Tehf_Kimasnahya   # Prog 7: 528 (Progress) and 843 (Progress) rotate; the finish completes it
+dee: finish
+dee: quest AhtUrhgan.GotItAll available
+dee: quest AhtUrhgan.GotItAll accepted
+dee: charvar Quest[6][3]Prog 7
+dee: trigger Tehf_Kimasnahya
+dee: finish
+dee: quest AhtUrhgan.GotItAll available
+dee: quest AhtUrhgan.GotItAll accepted
+dee: charvar Quest[6][3]Prog 7
+dee: trigger Tehf_Kimasnahya
+dee: finish
+dee: quest AhtUrhgan.GotItAll available
+eve: trigger Tehf_Kimasnahya   # completed 844 (Event) against 525 (Progress, Prog 4)
+eve: finish option=1
+eve: trigger Tehf_Kimasnahya
+eve: finish option=1
+eve: trigger Tehf_Kimasnahya
+eve: finish option=1
+ekh: charvar Quest[6][3]Prog 1
+ekh: charvar Quest[6][16]Prog 0
+ekh: trigger Ekhu_Pesshyadha   # 522 (Progress) and 592 (Progress) rotate
+ekh: finish
+ekh: charvar Quest[6][3]Prog 1
+ekh: charvar Quest[6][16]Prog 0
+ekh: trigger Ekhu_Pesshyadha
+ekh: finish
+ekh: charvar Quest[6][3]Prog 1
+ekh: charvar Quest[6][16]Prog 0
+ekh: trigger Ekhu_Pesshyadha
+ekh: finish
+ekh: charvar Quest[6][3]Prog 4
+ekh: charvar Quest[6][16]Prog 0
+ekh: trigger Ekhu_Pesshyadha   # Prog 4: 537 (Event) against 592 (Progress)
+ekh: finish
+ekh: charvar Quest[6][16]Prog 0
+ekh: trigger Ekhu_Pesshyadha
+ekh: finish
+ekh: charvar Quest[6][16]Prog 0
+ekh: trigger Ekhu_Pesshyadha
+ekh: finish
+fio: charvar Quest[6][16]Prog 0
+fio: trigger Ekhu_Pesshyadha   # completed, Three Men and a Closet not: 531 (Event) against 592
+fio: finish
+fio: charvar Quest[6][16]Prog 0
+fio: trigger Ekhu_Pesshyadha
+fio: finish
+fio: charvar Quest[6][16]Prog 0
+fio: trigger Ekhu_Pesshyadha
+fio: finish
+zab: charvar Quest[6][1]Prog 0
+zab: trigger Zabahf   # available: 533 (Event) against 512 (Progress)
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: trigger Zabahf
+zab: finish
+zab: quest AhtUrhgan.GotItAll accepted
+zab: charvar Quest[6][3]Prog 1
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 1
+zab: trigger Zabahf   # Prog 1: 533 (Event)
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 1
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 1
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][3]Prog 2
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 2
+zab: trigger Zabahf   # Prog 2: 523 (Progress) and 512 (Progress) rotate
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 2
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 2
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][3]Prog 4
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 4
+zab: trigger Zabahf   # Prog 4: 533 (Event)
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 4
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 4
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][3]Prog 5
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 5
+zab: trigger Zabahf   # Prog 5: 538 (Event)
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 5
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 5
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][3]Prog 6
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 6
+zab: trigger Zabahf   # Prog 6: 540 (Event)
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 6
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 6
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][3]Prog 7
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 7
+zab: trigger Zabahf   # Prog 7: 535 (Event)
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 7
+zab: trigger Zabahf
+zab: finish
+zab: charvar Quest[6][1]Prog 0
+zab: charvar Quest[6][3]Prog 7
+zab: trigger Zabahf
+zab: finish

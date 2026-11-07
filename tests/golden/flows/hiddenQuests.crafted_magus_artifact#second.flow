@@ -1,0 +1,56 @@
+# Crafted Magus Artifact (hidden quest MagusArtifact), the second piece (the shalwar, events at offset 8): a level 99
+# Warrior in Aht Urhgan Whitegate, Transformations accepted, [BLUAF]Remaining 6 (a GM: the bazubands made). Lathuya: 738
+# (1), its updates: 10 (above 9) and 1 (below 2): nothing; 2 (2 % 3 == 2: piece 1, already made): nothing; 5 (piece 2):
+# Current 2, updateEvent(0, the shalwar's four materials); 6 and 7: updateEvent(0, coin, 2). Current 2, stage 0: 739 (0,
+# coin, 2); the coins: nothing; the materials: 740, finished: stage 1; 741; the coins: 742, finished: stage 2, the slip,
+# mustZone; 743; not zoned: 743; zoned: 744, finished: the shalwar, Remaining 4, RestingDay today, mustZone, the slip
+# taken. Then (two made, resting): 745.
+# Updates 5, 10 and 1 with Current set (a GM): nothing more. PaymentDay today (a GM), zoned: still 743; PaymentDay 0
+# then the 744 above. Current 4 (a GM) with two coins traded: nothing (no order matches).
+lists AhtUrhganWhitegate/Lathuya/onTrigger AhtUrhganWhitegate/Lathuya/onTrade AhtUrhganWhitegate/onEventUpdate/738 AhtUrhganWhitegate/onEventFinish/740 AhtUrhganWhitegate/onEventFinish/742 AhtUrhganWhitegate/onEventFinish/744
+char zone=AhtUrhganWhitegate pos=-95.1,-6,33.1 job=WAR lvl=99
+quest AhtUrhgan.Transformations accepted
+charvar [BLUAF]Remaining 6
+item GoldChain
+item SquareOfVelvetCloth
+item ChunkOfFlanMeat
+item SquareOfImperialSilkCloth
+item ImperialMythrilPiece x4
+login
+trigger Lathuya                         # one made, none ordered: 738 (1)
+update 738 option=10                    # above 9: nothing
+update 738 option=1                     # below 2: nothing
+update 738 option=2                     # piece 1, already made: nothing
+update 738 option=5                     # piece 2: Current 2, updateEvent(0, the materials)
+update 738 option=6                     # the fee: updateEvent(0, coin, 2)
+update 738 option=7                     # the fee again
+update 738 option=5                     # piece 2 again
+update 738 option=10                    # above 9, an order held: nothing
+update 738 option=1                     # below 2, an order held: nothing
+finish option=5
+trigger Lathuya                         # stage 0: 739 (0, coin, 2)
+finish
+trade Lathuya ImperialMythrilPiece x2   # stage 0, not the materials: nothing
+trade Lathuya GoldChain x1 SquareOfVelvetCloth x1 ChunkOfFlanMeat x1 SquareOfImperialSilkCloth x1   # 740
+finish                                  # stage 1, taken
+trigger Lathuya                         # stage 1: 741
+finish
+trade Lathuya ImperialMythrilPiece x4   # stage 1, not the two coins: nothing
+trade Lathuya ImperialMythrilPiece x2   # 742 (0, coin, 2)
+finish                                  # taken, stage 2, PaymentDay today, mustZone, the slip
+trigger Lathuya                         # not yet: 743
+finish
+charvar [BLUAF]PaymentDay 0             # a GM: the day past
+trigger Lathuya                         # not zoned: 743
+finish
+charvar [BLUAF]PaymentDay 8000          # a GM: PaymentDay is today
+rezone
+trigger Lathuya                         # zoned, PaymentDay is today (not past): 743
+finish
+charvar [BLUAF]PaymentDay 0             # a GM: the day past
+trigger Lathuya                         # 744 (the shalwar)
+finish                                  # given; Remaining 4; RestingDay today; mustZone; the slip taken
+trigger Lathuya                         # two made, resting: 745
+finish
+charvar [BLUAF]Current 4                # a GM: no such piece
+trade Lathuya ImperialMythrilPiece x2   # nothing

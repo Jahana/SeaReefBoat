@@ -1,0 +1,45 @@
+# Divine Interference's edges: a level 75 Warrior, Waking the Colossus completed (a GM), three Slabs of Plumbago. No
+# ToAU 48: area 13: not available: nothing. GM: ToAU 48 current: the gate at Prog 0: nil: GATE_IS_FIRMLY_CLOSED. GMs:
+# accepted at Prog 4 with no cell and no Whisper (the instance took the cell): three Slabs: 158 again (Prog 2 or more):
+# a second Lightning Cell, the slabs taken (the Lua's kept quirk). GMs: the cell gone, the Whisper held at Prog 4: the
+# Alzadaal zone-in nil (the Whisper held), and Naja: 932 (the complete section has no Prog test), option 1 with a full
+# bag: the mantle does not fit: nothing (the Whisper kept); then one free slot (storage 31): option 1: the mantle, the
+# Gold Piece does not fit (complete false, unread): the Whisper taken, Timer set, the quest left accepted at Prog 4; the
+# Alzadaal zone-in at Prog 4 without the Whisper: 309 again: the Whisper; Naja (the bag freed): 932 ([7] 1: the mantle
+# held), option 4: 10000 gil, completed.
+lists AhtUrhganWhitegate/Imperial_Whitegate/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/13 MountZhayolm/Acid-eaten_Door/onTrade AlzadaalUnderseaRuins/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/932
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+quest AhtUrhgan.WakingTheColossus completed
+item SlabOfPlumbago x3
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+walk 35,-6.6,-45                        # no ToAU 48: not available: nothing
+walk 24.2,-7.804,-45.591
+mission Toau EternalMercenary current   # a GM
+trigger Imperial_Whitegate              # available, Prog 0: nil: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+quest AhtUrhgan.DivineInterference accepted   # GMs
+charvar Quest[6][75]Prog 4
+warp 270.65,-33,-88 MountZhayolm        # beside the door
+trade Acid-eaten_Door SlabOfPlumbago x3 # Prog 4, no cell: 158
+finish                                  # a second Lightning Cell; the slabs taken
+delkeyitem LightningCell                # GMs
+keyitem WhisperOfRadiance
+warp 180,-0.05,20 AlzadaalUnderseaRuins # Prog 4, the Whisper held: nil
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+fill-inventory
+trigger Naja_Salaheem                   # the Whisper: 932 ([0] 0, [7] 0)
+finish option=1                         # full: ITEM_CANNOT_BE_OBTAINED: nothing (the Whisper kept)
+storage inventory 31                    # a GM: one free slot
+trigger Naja_Salaheem                   # 932
+finish option=1                         # the mantle; the Gold Piece does not fit: complete false; Whisper taken, Timer
+trigger Naja_Salaheem                   # accepted, no Whisper: no Naja handler: ToAU 48's 3151
+finish
+warp 180,-0.05,20 AlzadaalUnderseaRuins open   # still accepted at Prog 4, no Whisper: 309 again, left open
+finish                                  # the Whisper
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+free-inventory
+trigger Naja_Salaheem                   # 932 ([7] 1: the mantle)
+finish option=4                         # 10000 gil; completed

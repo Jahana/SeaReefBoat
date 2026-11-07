@@ -1,0 +1,32 @@
+# Inside the Belly (otherAreas 26): Zaldon's reply kinds against Under the Sea (accepted by a GM at Prog 2: its 34,
+# Progress), the only other quest on him.
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# Inside the Belly available (The Real Gift completed, skill 30): 161 and 34 are both Progress: they take turns,
+# Inside_the_Belly first (it sorts before Under_the_Sea): 161 (an Event 161 would lose to 34). 161's finish begins the
+# quest, so a GM makes it available again between the turns: 34, then 161.
+# Accepted (a GM): 34 (Progress) beats the tier event 162 (Event) every time (a Progress 162 would take turns with 34).
+# The trade replies (166 / 167, Event) have no competitor: Under the Sea's trade answers a Fat Greedie at Prog 3 only, and
+# Zaldon's script answers an Odontotyrannus at aBoysDreamCS 5 only (no fish of fishRewards).
+lists Selbina/Zaldon/onTrigger Selbina/onEventFinish/161 Selbina/onEventFinish/34
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.TheSandCharm completed
+quest OtherAreas.TheRealGift completed
+quest OtherAreas.UnderTheSea accepted
+charvar Quest[4][17]Prog 2
+skill Fishing 300
+login
+trigger Zaldon                          # 161 (a tie of Progress replies: Inside the Belly's first)
+finish                                  # begun
+quest OtherAreas.InsideTheBelly available # a GM
+trigger Zaldon                          # the next turn: 34 (the Fat Greedie)
+finish                                  # Under the Sea's Prog 3
+charvar Quest[4][17]Prog 2              # a GM
+trigger Zaldon                          # the next turn: 161
+finish                                  # begun
+trigger Zaldon                          # accepted: 34 (Progress beats the tier event 162)
+finish                                  # Prog 3
+charvar Quest[4][17]Prog 2              # a GM
+trigger Zaldon                          # 34 again
+finish

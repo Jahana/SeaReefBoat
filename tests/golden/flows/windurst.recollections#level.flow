@@ -1,0 +1,22 @@
+# Recollections (windurst 67): the AF2 level gate on a BLM 49, The Three Magi completed by GM. AF2_QUEST_LEVEL 50 (the
+# default) and 49.4: 268 (49 under both; MainNumber reads 49.4 as it is); 49 at 49: 270, option 1: begun (any
+# option). Recollections completed by GM: The Root of the Problem's level is AF3_QUEST_LEVEL (50): her 259; at
+# AF3_QUEST_LEVEL 49: its 276, option 0: begun (user ruling 2026-11-04, kept Lua bugs: the Lua's literal 50 played her
+# 259 there too).
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=49
+quest Windurst.TheThreeMagi completed
+login
+trigger Chumimi                         # 49 under AF2 50: 268
+finish
+setting AF2_QUEST_LEVEL 49.4
+trigger Chumimi                         # 49 under 49.4: 268
+finish
+setting AF2_QUEST_LEVEL 49
+trigger Chumimi                         # 49 at 49: 270 (0, 1105)
+finish option=1                         # begun (any option)
+quest Windurst.Recollections completed  # GM
+trigger Chumimi                         # BLM 49 under AF3 50: no 276: her 259
+finish
+setting AF3_QUEST_LEVEL 49
+trigger Chumimi                         # 49 at AF3 49: 276
+finish                                  # The Root of the Problem begun (any option); rootProblem 1

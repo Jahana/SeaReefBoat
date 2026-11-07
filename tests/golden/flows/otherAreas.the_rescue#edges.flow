@@ -1,0 +1,13 @@
+# The Rescue (otherAreas 23): the door while the quest is only available, and 1000 finished out of the accepted state.
+# Available: the charm to the door: no trade handler, nothing (kept); the door: no section, its default. Accepted (a GM):
+# the charm: 1000; completed by a GM while it is open, finished: no 1000 handler, nothing (the charm kept, no sack).
+lists Beadeaux/_43b/onTrigger Beadeaux/_43b/onTrade Beadeaux/onEventFinish/1000
+char zone=Beadeaux pos=55.2,-0.5,-26.3 job=WAR lvl=75
+item QuadavCharm
+login
+trade _43b QuadavCharm x1               # available: no trade handler; nothing (the charm kept)
+trigger _43b                            # available: no section; its default NOTHING_OUT_OF_ORDINARY
+quest OtherAreas.TheRescue accepted     # a GM
+trade _43b QuadavCharm x1               # 1000
+quest OtherAreas.TheRescue completed    # a GM, while 1000 is open
+finish                                  # no 1000 handler while completed: nothing

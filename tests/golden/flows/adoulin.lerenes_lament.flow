@@ -1,0 +1,28 @@
+# Lerene's Lament (adoulin 126): a level 99 Warrior in Outer Ra'Kaznar with three Squares of Ancestral Cloth. A trade
+# while available: no handler (Lerene has no script; default 25 is a talk's). Lerene: 22, finished on 1, 0 and 3:
+# not begun; on 2: begun. Accepted: 23; a trade of one and of three: nil (not exactly two); of two: 24, finished:
+# Lerene's Paten, YOU_HAVE_LEARNED Pulverizing, completed (500 bayld), the trade confirmed, Pulverizing added.
+# Completed: no section: a talk (default 25) and a trade, nothing.
+lists OuterRakaznar/Lerene/onTrigger OuterRakaznar/Lerene/onTrade
+lists OuterRakaznar/onEventFinish/22 OuterRakaznar/onEventFinish/24
+char zone=OuterRakaznar pos=-45.376,-179.334,-28.602 job=WAR lvl=99
+item SquareOfAncestralCloth x3
+login
+trade Lerene SquareOfAncestralCloth x2  # available: no trade handler: nothing
+trigger Lerene                          # available: 22
+finish option=1                         # not option 2: not begun
+trigger Lerene                          # 22
+finish option=0                         # not begun
+trigger Lerene                          # 22
+finish option=3                         # not begun
+trigger Lerene                          # 22
+finish option=2                         # begun
+trigger Lerene                          # accepted: 23 (an Event)
+finish
+trade Lerene SquareOfAncestralCloth x1  # one: nil
+trade Lerene SquareOfAncestralCloth x3  # three: nil
+trade Lerene SquareOfAncestralCloth x2  # two: 24
+finish                                  # the paten, the learned line, completed, confirmed, Pulverizing
+trigger Lerene                          # completed: no section: default 25
+finish-if-event
+trade Lerene SquareOfAncestralCloth x1  # completed: no section: nothing

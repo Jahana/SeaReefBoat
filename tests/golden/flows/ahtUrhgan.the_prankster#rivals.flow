@@ -1,0 +1,28 @@
+# The Prankster's area-12 3 (a Progress) against Promotion: First Lieutenant's area-12 5080 (a Progress), both up at
+# two entries: a level 1 Warrior in Whitegate, Second Lieutenant completed, AssaultPromotion 25, The Prankster accepted
+# at Prog 1 (GMs). Equal ranks play the first container first (file order: Promotion_First_Lieutenant before
+# The_Prankster), then rotate; an Event 3 would lose every entry. Area 12: 5080, finished: First Lieutenant begun; a GM
+# makes it available again; out and back into area 12: the rotation: 3, finished: The Prankster's Prog 2.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/12
+char zone=AhtUrhganWhitegate pos=27.5,-6,-120 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant completed
+quest AhtUrhgan.PromotionSecondLieutenant completed
+quest AhtUrhgan.ThePrankster accepted
+charvar Quest[6][60]Prog 1
+charvar AssaultPromotion 25
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+walk 27.5,-6,-125                       # area 12: 5080 and 3 tie: 5080 (the first container)
+finish                                  # First Lieutenant begun
+quest AhtUrhgan.PromotionFirstLieutenant available   # a GM
+walk 27.5,-6,-120
+walk 27.5,-6,-125                       # 5080 and 3 tie again: the rotation: 3
+finish                                  # The Prankster's Prog 2

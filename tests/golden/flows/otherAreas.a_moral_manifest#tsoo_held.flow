@@ -1,0 +1,21 @@
+# A Moral Manifest (otherAreas 108): the Stone Lid at moral 7: a wrong trade, then the Yagudo Headgear while the rare
+# Tsoo Haja's Headgear is held (50, the headgear taken, nothing given, moral stays 7). Then moral 8 (GM) in the
+# Tsoo Haja's Headgear with a full inventory: the zone-in's 51, whose finish sets moralrebuy 1 and stops at
+# npcUtil.completeQuest's item (the Gold Beastcoin cannot be given: ITEM_CANNOT_BE_OBTAINED; not completed, moral 8).
+char zone=AltarRoom pos=-313,24.77,12 lvl=75
+quest OtherAreas.AMoralManifest accepted
+charvar moral 7
+item YagudoHeadgear
+item TsooHajasHeadgear
+item BronzeCap
+login
+trade Stone_Lid BronzeCap x1    # not the Yagudo Headgear: nothing
+finish-if-event
+trade Stone_Lid YagudoHeadgear x1   # 50, the headgear taken
+finish                          # the Tsoo Haja's Headgear held: nothing given, moral 7
+trigger Stone_Lid               # moral 7: nothing
+finish-if-event
+charvar moral 8                 # a GM
+equip TsooHajasHeadgear Head
+fill-inventory
+rezone                          # 51; no free slot: no Gold Beastcoin, not completed, moral 8

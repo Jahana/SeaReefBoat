@@ -1,0 +1,38 @@
+# The Stars of Ifrit (bastok 42): Agapito in Port Bastok, qm1 on the San d'Oria-Jeuno Airship. The guard (the Airship
+# Pass and Bastok fame level 3), the offer 180, the Carrier Pigeon Letter from qm1 while accepted, 181 and the reward.
+# Agapito's default is 17; qm1 has no script and no default (Zone.lua shows it only at night under a full moon, at the
+# game hour). No other quest or mission names either. The harness clock starts at day 8000, noon, a waxing moon at 38%:
+# 534 hours on (day 8022, 18:00) the moon is full (90%, waxing) and it is night, and the next zone tick runs the game
+# hour that shows qm1.
+lists PortBastok/Agapito/onTrigger PortBastok/Agapito/onTrade PortBastok/onEventFinish/180 PortBastok/onEventFinish/181 SanDoriaJeunoAirship/qm1/onTrigger
+char zone=PortBastok pos=-72.1,-2.097,10.3
+fame Bastok 125
+item BoneChip
+login
+trade Agapito BoneChip x1       # available: no trade handler, nothing
+trigger Agapito                 # fame level 3, no pass: his default 17
+finish
+keyitem AirshipPass
+fame Bastok 124
+trigger Agapito                 # the pass, fame 124 (level 2): 17
+finish
+fame Bastok 125
+trigger Agapito                 # the pass and fame level 3: the offer, 180
+finish                          # accepted
+trigger Agapito                 # accepted, no letter: 17
+finish
+warp -9.5,-4.967,-12.4 SanDoriaJeunoAirship
+wait vana=534                   # a full moon, 18:00
+tick 1000                       # the game hour: qm1 shown
+trigger qm1                     # accepted, no letter: the Carrier Pigeon Letter
+finish-if-event
+trigger qm1                     # the letter held: nothing
+finish-if-event
+warp -72.1,-2.097,10.3 PortBastok
+trigger Agapito                 # the letter held: 181
+finish                          # completed: 2100 gil, fame +30, Star of Ifrit; the letter kept
+trigger Agapito                 # completed: 17
+finish
+warp -9.5,-4.967,-12.4 SanDoriaJeunoAirship
+trigger qm1                     # completed: section 2 fails, nothing (qm1 still shown)
+finish-if-event

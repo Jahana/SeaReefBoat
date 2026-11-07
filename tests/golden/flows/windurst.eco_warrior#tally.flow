@@ -1,0 +1,20 @@
+# Eco-Warrior (Windurst) (windurst 84): the EcoReset lock until the next conquest tally. Completed at Lumomo (822:
+# EcoReset 1, its expiry NextConquestTally(): the harness's JST clock starts on a Friday at 17:00, so the tally is the
+# Monday 00:00 JST after it, 1800198000). Then nil (EcoReset 1); two JST days later (Sunday 17:00, before the tally:
+# still nil); one more day (Monday 17:00, past the tally: EcoReset reads 0): 818, option 1 deletes the quest and begins
+# it again.
+lists WindurstWaters/Lumomo/onTrigger WindurstWaters/onEventFinish/818 WindurstWaters/onEventFinish/822
+char zone=WindurstWaters pos=-55.8,-4.5,20.9 lvl=30
+quest Windurst.EcoWarrior accepted
+keyitem IndigestedMeat
+login
+trigger Lumomo                            # the meat: 822
+finish                                    # completed; EcoReset 1 until the next conquest tally
+trigger Lumomo                            # completed, EcoReset 1: nil; 819
+finish-if-event
+wait jst=2
+trigger Lumomo                            # Sunday 17:00 JST, before the tally: EcoReset 1: nil; 819
+finish-if-event
+wait jst=1
+trigger Lumomo                            # Monday 17:00 JST, past the tally: EcoReset 0: 818
+finish option=1                           # the quest deleted and begun again

@@ -1,0 +1,30 @@
+# Curses, Foiled A-Golem!? (windurst 63): GM-set states. Accepted at Prog 1 with both spells: Torino-Samarino plays 105
+# (the New Spell is tested first); Prog 3 and Prog -1: nil (his default 101); the Cermet Door with both: 14 (Prog 2, the
+# New Spell taken, the Ex-Spell kept). Then the Ex-Spell taken by GM, the quest completed by GM and a New Spell given:
+# a Jenglot kill does nothing (the mob handlers are the accepted section's). (A Mind Hoarder kill here, as it was, found
+# the NM unspawned and killed nothing: quest rework P9, D1, a kill must claim its mob.)
+lists BeaucedineGlacier/Torino-Samarino/onTrigger Feiyin/_no4/onTrigger Feiyin/onEventFinish/14
+char zone=BeaucedineGlacier pos=106.1,-20.25,140.2 job=WAR lvl=75
+quest Windurst.CursesFoiledAgain1 completed
+quest Windurst.CursesFoiledAgain2 completed
+quest Windurst.CursesFoiledAGolem accepted
+charvar Quest[2][63]Prog 1
+keyitem ShantottosNewSpell
+keyitem ShantottosExSpell
+login
+trigger Torino-Samarino                             # Prog 1, both spells: the New Spell first, event 105
+finish
+charvar Quest[2][63]Prog 3
+trigger Torino-Samarino                             # Prog 3: nil; his default 101
+finish
+charvar Quest[2][63]Prog -1
+trigger Torino-Samarino                             # Prog -1: nil; 101
+finish
+charvar Quest[2][63]Prog 1
+warp -182.5,-2.0,190.0 Feiyin
+trigger _no4                                        # both spells: the New Spell first, progressEvent 14
+finish                                              # Prog 2; the New Spell taken; the Ex-Spell kept
+delkeyitem ShantottosExSpell
+quest Windurst.CursesFoiledAGolem completed
+keyitem ShantottosNewSpell
+kill ALTEDOUR_I_TAVNAZIA+4                          # Jenglot, completed: no handler; the New Spell kept, no Ex-Spell

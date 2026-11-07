@@ -1,0 +1,15 @@
+# probe (quest rework P8): a support job, char ... sjob=<JOB> slvl=<n> (char_stats' sjob, char_jobs' level of it). The
+# Tutorial (a hidden quest, still Lua): at step 11 (HQuest[Tutorial]Prog 11), Gulldago (Bastok Markets) plays 717 when
+# player:getSubLvl() >= 1, else 716. Main, a level 20 Warrior with a level 10 White Mage support (getSubLvl 10): 717;
+# finished: 12 Free Chocopasses and the Echad Ring, Prog 12. Bob, no support job: 716.
+lists BastokMarkets/Gulldago/onTrigger BastokMarkets/onEventFinish/717
+char zone=BastokMarkets pos=-362.6,-10.034,-167.456 job=WAR lvl=20 nation=1 sjob=WHM slvl=10
+char bob zone=BastokMarkets pos=-362.6,-10.034,-167.456 job=WAR lvl=20 nation=1
+charvar HQuest[Tutorial]Prog 11
+bob: charvar HQuest[Tutorial]Prog 11
+login
+trigger Gulldago                        # a support job: 717
+finish                                  # 12 Free Chocopasses, the Echad Ring; Prog 12
+bob: login
+bob: trigger Gulldago                   # no support job: 716
+bob: finish

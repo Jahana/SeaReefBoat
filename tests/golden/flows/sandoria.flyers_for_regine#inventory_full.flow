@@ -1,0 +1,20 @@
+# Flyers for Regine (sandoria 16), Regine's 510 option 2 (the script calls the quest for that option only): with a full
+# inventory the two stacks do not fit (not begun); with room begun. Accepted, 510 (the script's menu) option 2: fifteen
+# more flyers, addQuest again (still accepted). Completed by GM: 510 option 2 again gives fifteen flyers and calls
+# addQuest (no status test; kept as the Lua has it): the log's current bit is set, the status stays completed (the
+# complete bit wins), so Regine plays 510 again.
+char zone=PortSanDoria pos=66.3,-8.1,-73.7 job=WAR lvl=30
+login
+fill-inventory
+trigger Regine                            # available: 510 (2)
+finish option=2                           # no room for the flyers: not begun
+free-inventory
+trigger Regine                            # still available: 510 (2)
+finish option=2                           # fifteen flyers; begun
+trigger Regine                            # accepted, mask 0, flyers held: 510
+finish option=2                           # fifteen more flyers; addQuest again: still accepted
+quest Sandoria.FlyersForRegine completed
+trigger Regine                            # completed: 510 (the script's menu)
+finish option=2                           # 510 option 2 in any status: fifteen more flyers; addQuest: the current bit
+trigger Regine                            # still completed: 510
+finish option=4                           # nothing

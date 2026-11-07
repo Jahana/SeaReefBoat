@@ -1,0 +1,92 @@
+# Cloak and Dagger's edges. Section 1 off, one operand each (dagger skill 2300 unless said): bob (a level 75 Monk: cannot
+# wear the dagger): Jakoh: his script, the default 113; carl (a level 70 Thief: the dagger is level 71, checkLevel true):
+# the default; dan (a level 75 Thief, skill 2299): the default; ed (a level 75 Thief, the Weapon Training Guide held): the
+# default. Main (a level 75 Thief, a Dagger of Trials with 299 points, a Hatchet): available, the dagger traded: nothing;
+# 279, finished: begun. 280 (2), option 0: nothing. The dagger with a Hatchet: nil; the dagger alone (299): 281
+# (unfinished; kept). 280, the map given by a GM while it is open, option 3: the quest dropped, the guide and the map
+# taken. Available again, 279 performed this
+# zone: ignored: the default. fred (a level 75 Thief, no dagger): 279 finished with a full inventory: giveItem false: not
+# begun; 279 again (once per zone): ignored: the default; out of Kazham and back: 279: the dagger given, begun. ed
+# (accepted by a GM after the guard check, no dagger): 280 (0), option 2: nothing; 280 (0), option 1: the dagger given; 280 (2), option 0: nothing;
+# the map (a GM): 283. Gustav Tunnel's qm1 (ed): the map and the annals held (GMs): nil; the annals taken: the bat
+# popped; qm1 again (the bat up: popFromQM false): nil; the map taken (a GM), the bat killed: no killed_wsnm; the bat
+# gone (two ticks), no map, no annals: qm1: nil (the map operand: no pop).
+# Not reachable: 284's quest:complete false (no item reward).
+lists Kazham/Jakoh_Wahcondalo/onTrigger Kazham/Jakoh_Wahcondalo/onTrade Kazham/onEventFinish/280 GustavTunnel/qm1/onTrigger
+char zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+char bob zone=Kazham pos=101.702,-15.023,-115.841 job=MNK lvl=75
+char carl zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=70
+char dan zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+char ed zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+char fred zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+skill Dagger 2300
+item DaggerOfTrials wsp=299
+item Hatchet
+bob: skill Dagger 2300
+carl: skill Dagger 2300
+dan: skill Dagger 2299
+ed: skill Dagger 2300
+ed: keyitem WeaponTrainingGuide
+fred: skill Dagger 2300
+login
+bob: login
+bob: trigger Jakoh_Wahcondalo           # a Monk (cannot wear the dagger): the default 113
+bob: finish
+bob: logout
+carl: login
+carl: trigger Jakoh_Wahcondalo          # level 70 < the dagger's 71: the default
+carl: finish
+carl: logout
+dan: login
+dan: trigger Jakoh_Wahcondalo           # skill 2299 (229.9 < 230): the default
+dan: finish
+dan: logout
+trade Jakoh_Wahcondalo DaggerOfTrials x1   # available: no trade arm: nothing
+trigger Jakoh_Wahcondalo                # 279
+finish                                  # the dagger held: the guide; begun
+trigger Jakoh_Wahcondalo                # 280 (2)
+finish option=0                         # neither 1 nor 3: nothing
+trade Jakoh_Wahcondalo DaggerOfTrials x1 Hatchet x1   # not the dagger alone: nil
+trade Jakoh_Wahcondalo DaggerOfTrials x1   # 299 points: 281 (the dagger kept)
+finish
+trigger Jakoh_Wahcondalo                # 280 (2)
+keyitem MapToTheAnnalsOfTruth           # a GM, 280 open
+finish option=3                         # dropped: the guide and the map taken
+trigger Jakoh_Wahcondalo                # available again, 279 performed this zone: ignored: the default
+finish
+fred: login
+fred: trigger Jakoh_Wahcondalo          # 279
+fred: fill-inventory
+fred: finish                            # no dagger, giveItem false: nothing
+fred: free-inventory
+fred: trigger Jakoh_Wahcondalo          # 279 performed this zone: ignored: the default
+fred: finish
+fred: warp -64.619,-9.25,-8.853 WindurstWaters   # out of Kazham and back: the once-per-zone mark cleared
+fred: warp 101.702,-15.023,-115.841 Kazham
+fred: trigger Jakoh_Wahcondalo          # 279
+fred: finish                            # the dagger given; the guide; begun
+fred: logout
+ed: login
+ed: trigger Jakoh_Wahcondalo            # the guide held: the default
+ed: finish
+ed: quest Outlands.CloakAndDagger accepted   # a GM
+ed: trigger Jakoh_Wahcondalo            # no dagger: 280 (0)
+ed: finish option=2                     # neither 1 nor 3: nothing
+ed: trigger Jakoh_Wahcondalo            # 280 (0)
+ed: finish option=1                     # the dagger given
+ed: trigger Jakoh_Wahcondalo            # 280 (2)
+ed: finish option=0                     # nothing
+ed: keyitem MapToTheAnnalsOfTruth       # a GM
+ed: trigger Jakoh_Wahcondalo            # the map: 283
+ed: finish
+ed: keyitem AnnalsOfTruth               # a GM
+ed: warp 52.761,-0.999,19.852 GustavTunnel
+ed: trigger qm1                         # the map and the annals: nil: the default
+ed: delkeyitem AnnalsOfTruth            # a GM
+ed: trigger qm1                         # the bat popped; SENSE_OMINOUS_PRESENCE
+ed: trigger qm1                         # the bat up: popFromQM false: nil: the default
+ed: delkeyitem MapToTheAnnalsOfTruth    # a GM
+ed: kill BARONIAL_BAT                   # no map: no killed_wsnm
+tick 15000                              # the body despawns
+tick 4000                               # it fades: not spawned
+ed: trigger qm1                         # killed_wsnm 0, no map, no annals, the bat gone: nil: the default (no pop)

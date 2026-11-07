@@ -1,0 +1,20 @@
+# Hitting the Marquisate (windurst 71): 56's option 1 and the Chandelier up (quest rework P10, deferred callbacks). A
+# THF at level 50, accepted, hagainProg 7, the Bomb Incense held (all by GM), in Garlaige Citadel. qm15
+# (the cooldown local var 0: past it; no Chandelier): HEAT_FROM_CEILING and 56 (the incense); finished with option 1:
+# npc:timer(5000, ...) on qm15, nothing yet. 4 s on: nothing; 5 s on, the deadline itself: nothing
+# (CAIActionQueue fires a timer only on a tick strictly past it); 6 s on: the Chandelier pops
+# (npcUtil.popFromQM: unclaimed, qm15 not hidden; its 0x00E comes with the next step's update) and THE_PRESENCE_MOVES +
+# 5 ("Something flies out from the ceiling!"). qm15 again, the Chandelier up: nil (its own text, 7318). On C# the timer
+# is the callback chandelier, armed with WithPlayer.Yes: the char that finished 56, found by id when it fires.
+lists GarlaigeCitadel/qm15/onTrigger GarlaigeCitadel/onEventFinish/56
+char zone=GarlaigeCitadel pos=-218.5,-5.5,194.2 job=THF lvl=50
+quest Windurst.HittingTheMarquisate accepted
+keyitem BombIncense
+charvar Quest[2][71]hagainProg 7
+login
+trigger qm15                                   # hagainProg 7, past the cooldown, no Chandelier, the incense: HEAT_FROM_CEILING; 56
+finish option=1                                # npc:timer(5000, ...) armed on qm15: nothing yet
+tick 4000                                      # 4 s on: nothing
+tick 1000                                      # 5 s on, the deadline: not strictly past it: nothing
+tick 1000                                      # 6 s on: the Chandelier pops (unclaimed); THE_PRESENCE_MOVES + 5
+trigger qm15                                   # the Chandelier up (its 0x00E): nil; qm15's own text

@@ -1,0 +1,45 @@
+# Her Memories: Operation Cupid (crystalWar 68), the edges: a level 99 Warrior in Jugner Forest [S] with the WotG
+# mission Pillar of Hope current (other logs as the main flow), the three ingredients. Batallia Downs [S] from Jugner
+# Forest [S], Her Memories not current: nothing. Her Memories current (a GM): from Rolanberry Fields [S]: nothing
+# (Jugner Forest [S] only); from Jugner Forest [S]: 23, finished on option 1: begun (any option). Prog 2 (a GM):
+# Batallia Downs [S] from Jugner Forest [S]: nothing (accepted). Vunkerl Inlet [S]: Leadavox, the three at Prog 2: nil.
+# Prog 1 (a GM): two of the three: nil (not the three exactly); with the pot (a GM): the three: nil (the pot held).
+# Sauromugue Champaign [S]: Bulwark Gate at Prog 1 with the pot: 13 (the pot at any Prog), finished: Prog 2. Prog 3 (a
+# GM): 12 (oncePerZone: the else). Prog 1 (a GM), Batallia Downs [S] from Rolanberry Fields [S]: nothing.
+lists BatalliaDownsS/onZoneIn/1 BatalliaDownsS/onEventFinish/23 SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/onEventFinish/13 VunkerlInletS/Leadavox/onTrade
+char zone=JugnerForestS pos=-262.344,5.713,151.392 job=WAR lvl=99
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item BottleOfRiceVinegar
+item JarOfGroundWasabi
+item SprigOfHolyBasil
+login
+warp -71.66,-2.58,450.114 BatalliaDownsS # from Jugner Forest [S], Her Memories not current: no zone-in reply
+mission Wotg PillarOfHope completed   # a GM (so the next add does not overwrite it)
+mission Wotg HerMemories current        # a GM
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+warp -71.66,-2.58,450.114 BatalliaDownsS # from Rolanberry Fields [S], available: no zone-in reply (Jugner Forest [S] only)
+warp -262.344,5.713,151.392 JugnerForestS
+warp -71.66,-2.58,450.114 BatalliaDownsS open # 23, left open
+finish option=1                         # begun (any option)
+charvar Quest[7][68]Prog 2              # a GM
+warp -262.344,5.713,151.392 JugnerForestS
+warp -71.66,-2.58,450.114 BatalliaDownsS # accepted, from Jugner Forest [S]: no zone-in reply
+warp 208.581,-32.002,315.458 VunkerlInletS
+trade Leadavox BottleOfRiceVinegar x1 JarOfGroundWasabi x1 SprigOfHolyBasil x1 # Prog 2: nil
+charvar Quest[7][68]Prog 1              # a GM
+trade Leadavox BottleOfRiceVinegar x1 JarOfGroundWasabi x1 # Prog 1, no pot, two of the three: nil
+keyitem PotOfMartialRelish              # a GM
+trade Leadavox BottleOfRiceVinegar x1 JarOfGroundWasabi x1 SprigOfHolyBasil x1 # the pot held: nil
+warp -445.674,-1.831,342.417 SauromugueChampaignS
+trigger Bulwark_Gate                    # Prog 1, the pot: 13
+finish                                  # Prog 2; the pot taken
+charvar Quest[7][68]Prog 3              # a GM
+trigger Bulwark_Gate                    # Prog 3: 12 (oncePerZone)
+finish
+charvar Quest[7][68]Prog 1              # a GM
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+warp -71.66,-2.58,450.114 BatalliaDownsS # from Rolanberry Fields [S] at Prog 1: no zone-in reply

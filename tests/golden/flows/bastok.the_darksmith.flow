@@ -1,0 +1,43 @@
+# The Darksmith (bastok 40): Mighty Fist in the Metalworks. The guard (Bastok fame level 3), the offer 565, then the
+# second section (accepted and completed): 561 until its finish sets the quest's mustZone, 560 after it, the two
+# Chunks of Darksteel Ore trade (566), which completes the quest again each time. Mighty Fist has his own script (561
+# until its finish sets the local var spokenMetalFist, 560 after), and the lookup alternates the quest's Event-priority
+# action with that script. DRK AF1 (Dark Legacy) also names him, and this char (a WAR) never meets its guard.
+lists Metalworks/Mighty_Fist/onTrigger Metalworks/Mighty_Fist/onTrade Metalworks/onEventFinish/565 Metalworks/onEventFinish/561 Metalworks/onEventFinish/566
+char zone=Metalworks pos=-45.2,2.777,-31.2
+fame Bastok 124
+item ChunkOfDarksteelOre x5
+item BoneChip
+login
+trade Mighty_Fist ChunkOfDarksteelOre x2  # available: no trade handler, nothing
+trigger Mighty_Fist             # fame 124 (level 2): his script, 561
+finish                          # his script: spokenMetalFist 1
+trigger Mighty_Fist             # his script, 560
+finish
+fame Bastok 125
+trigger Mighty_Fist             # fame level 3: the offer, 565
+finish                          # accepted
+trigger Mighty_Fist             # accepted, no mustZone: 561
+finish                          # mustZone set (his script also runs: spokenMetalFist already 1)
+trigger Mighty_Fist             # the lookup turns to his script (ret nil): 560
+finish
+trigger Mighty_Fist             # the quest again, mustZone set: 560
+finish
+trigger Mighty_Fist             # his script: 560
+finish
+zoneline BastokMarkets          # out and back: the quest's mustZone cleared
+zoneline Metalworks
+trigger Mighty_Fist             # the quest, mustZone clear: 561
+finish                          # mustZone set again
+trigger Mighty_Fist             # his script: 560 (spokenMetalFist is still 1)
+finish
+trade Mighty_Fist BoneChip x1   # the wrong item: nothing
+trade Mighty_Fist ChunkOfDarksteelOre x1  # one ore: nothing
+trade Mighty_Fist ChunkOfDarksteelOre x2  # 566
+finish                          # completed: 8000 gil, fame +16, two ores gone, the quest's vars cleared
+trigger Mighty_Fist             # completed: the quest, mustZone cleared by the completion: 561
+finish                          # mustZone set
+trigger Mighty_Fist             # his script: 560
+finish
+trade Mighty_Fist ChunkOfDarksteelOre x2  # completed: 566 again
+finish                          # completed again: 8000 gil, fame +16

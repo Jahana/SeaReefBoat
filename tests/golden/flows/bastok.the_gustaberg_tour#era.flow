@@ -1,0 +1,53 @@
+# The Gustaberg Tour with its era module (quest rework P4): modules/era/lua/quests/bastok/the_gustaberg_tour.lua, enabled
+# by its condition xi.pre(xi.expansion.ROV) (RESTRICT_CONTENT 1, ENABLE_ROV 0), replaces state 2's Hunting_Bear onTrigger:
+# 22 (the completion) only when every alliance member is at level 5 or below and within 15 yalms and the party has
+# exactly 6 members, otherwise 21 (the quest's own: level 15 or below and more than one member). Six chars at level 5
+# near Hunting Bear; main holds the quest. Each arm of the module's handler: a party of one (21; the quest's own 21 too),
+# a party of two (21 where the quest's own plays 22), a party of five all in range (21: six, not five or more), six with
+# one member about 16 yalms from main (21: within 15, not 20) and about 21 yalms (21), six in range (22, the finish
+# completes the quest), then completed (23, the quest's own). A member over level 5 is #era_level6. The distance is
+# member:checkDistance(player): main stands 1.5 yalms east of the bear when it triggers (-230.9).
+module modules/era/lua/quests/bastok/the_gustaberg_tour.lua
+lists NorthGustaberg/Hunting_Bear/onTrigger NorthGustaberg/onEventFinish/22
+char zone=NorthGustaberg pos=-233.9,41.465,426.5 lvl=5
+char p2 zone=NorthGustaberg pos=-233,41.465,427 lvl=5
+char p3 zone=NorthGustaberg pos=-232.5,41.465,426 lvl=5
+char p4 zone=NorthGustaberg pos=-233.5,41.465,428 lvl=5
+char p5 zone=NorthGustaberg pos=-232,41.465,427.5 lvl=5
+char p6 zone=NorthGustaberg pos=-234,41.465,427.5 lvl=5
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Bastok.TheGustabergTour accepted
+login
+trigger Hunting_Bear           # alone (a party of one): 21
+finish
+p2: login
+invite p2
+p2: accept
+trigger Hunting_Bear           # a party of two at level 5: 21 (the quest's own plays 22 here)
+finish
+p3: login
+invite p3
+p3: accept
+p4: login
+invite p4
+p4: accept
+p5: login
+invite p5
+p5: accept
+trigger Hunting_Bear           # a party of five at level 5, all in range: 21
+finish
+p6: login
+invite p6
+p6: accept
+p6: walk -214.7,41.465,426.5   # p6 about 16 yalms from main
+trigger Hunting_Bear           # six, one 16 yalms off: 21
+finish
+p6: walk -210,41.465,427.5     # p6 about 21 yalms from main
+trigger Hunting_Bear           # six, one out of range: 21
+finish
+p6: walk -234,41.465,427.5     # p6 back in range
+trigger Hunting_Bear           # six at level 5, all in range: 22
+finish                         # completed: 500 gil, Bastok fame, GUSTABERG_TOURIST
+trigger Hunting_Bear           # completed: 23 (the quest's own)
+finish

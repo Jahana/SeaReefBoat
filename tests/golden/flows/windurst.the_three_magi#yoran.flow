@@ -1,0 +1,13 @@
+# The Three Magi (windurst 66): option 5 at 260 (stored as it is): Doctor Yoran-Oran Supporter at 269 (the else arm:
+# any var but 2 / 3); first with a full inventory: the wand refused, nothing done (the stone kept, still accepted).
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+item Glowstone
+login
+trigger Chumimi                         # 260
+finish option=5                         # begun; theThreeMagiSupport 5
+fill-inventory
+trade Chumimi Glowstone x1              # 269
+finish                                  # no free slot: npcUtil.giveItem refuses the wand: nothing (still accepted)
+free-inventory
+trade Chumimi Glowstone x1              # 269
+finish                                  # Casting Wand; var 5: Doctor Yoran-Oran Supporter; completed

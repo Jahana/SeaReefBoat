@@ -1,0 +1,63 @@
+# From Saplings Grow (windurst 85): Perih Vashai in Windurst Woods, the qm1 and Stolas in Cape Teriggan (the shape of
+# Blood and Glory's flows). A level-75 RNG (can equip the Bow of Trials: level 71, RNG its only job), with the bow
+# already held at 300 weapon skill points (item wsp=300). The Fanged One, Sin Hunting, Fire and Brimstone and Unbridled
+# Passion completed by GM: their offers (351 / 523 Progress) would beat 661, and with the RNG AF quests done Perih
+# Vashai's script starts nothing, so a nil turn shows his default 338. The offer's skill edge (Archery 2499, under 250 a
+# level: not offered; 2500: 661), the trade while the check holds (the bow: no trade handler in section 1; his script's
+# trade wants the Old Earring: nothing), 661's finish with the bow held (no second bow: the Weapon Training Guide alone,
+# begun), 662 with the bow held (param 2; option 0: nothing; option 1, held: nothing), the trades while accepted (a
+# chip; the bow and a chip: nil; the bow at 300 points: 664, its finish takes the bow and gives the Map to the Annals of
+# Truth), 665, the qm1 (the map, no annals: Stolas pops, claimed, SENSE_OMINOUS_PRESENCE; the NM up: popFromQM false,
+# nil), the kill (the map held: killed_wsnm 1), the qm1's Annals of Truth (killed_wsnm reset), the qm1 with both key
+# items (nil; again once its body is gone: nil, no pop), 666 (completed: fame +20; the map, the annals and the guide
+# taken; Empyreal Arrow learned, EMPYREAL_ARROW_LEARNED), then completed: 338 and a trade (nothing). #offer (no bow
+# held; level 71), #offer_guide, #offer_job and #offer_level take the offer's other arms, #abandon 662's other options
+# without the bow, #wsp299 the trade's edge, #gm_nomap the qm1 and the NM without the map or without the quest.
+# Defaults: Perih Vashai 338; the qm1 NOTHING_OUT_OF_ORDINARY (no script; Cape Teriggan's DefaultActions). Also named:
+# Perih Vashai by Trust: Shikaree Z (a trust permit: never here) and CoP 5-3 (not current); the Cape Teriggan qm1 by no
+# other quest.
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/Perih_Vashai/onTrade WindurstWoods/onEventFinish/661 WindurstWoods/onEventFinish/662 WindurstWoods/onEventFinish/664 WindurstWoods/onEventFinish/666 CapeTeriggan/qm1/onTrigger
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=RNG lvl=75
+quest Windurst.TheFangedOne completed
+quest Windurst.SinHunting completed
+quest Windurst.FireAndBrimstone completed
+quest Windurst.UnbridledPassion completed
+skill Archery 2499
+item BoneChip
+item BowOfTrials wsp=300
+login
+trigger Perih_Vashai                                   # Archery 2499 (getCharSkillLevel / 10 is below 250): not offered; his default 338
+finish
+skill Archery 2500
+walk 119.5,-3.7,90.45
+trade Perih_Vashai BowOfTrials x1                     # the check holds: no trade handler in section 1, nothing; the bow kept
+trigger Perih_Vashai                                   # can equip, Archery 2500, no guide: event 661 (oncePerZone)
+finish                                              # the bow held: no second bow; the Weapon Training Guide; begun
+trigger Perih_Vashai                                   # accepted, no key items, the bow held: event 662 (0, Bow of Trials, 0, 0, 2)
+finish option=0                                     # nothing
+trigger Perih_Vashai                                   # 662 again
+finish option=1                                     # the bow held: nothing
+walk 119.5,-3.7,90.45
+trade Perih_Vashai BoneChip x1                         # not the bow: nil
+trade Perih_Vashai BowOfTrials x1 BoneChip x1         # the bow and a chip: not exact, nil
+trade Perih_Vashai BowOfTrials x1                     # 300 weapon skill points: progressEvent 664 (0, 0, Annals of Truth)
+finish                                              # the bow taken; the Map to the Annals of Truth
+trigger Perih_Vashai                                   # the map: event 665
+finish
+warp -154.9,-8,198.1 CapeTeriggan
+trigger qm1                                         # the map, no annals: Stolas pops (claimed); SENSE_OMINOUS_PRESENCE
+trigger qm1                                         # the NM spawned: popFromQM false, nil; NOTHING_OUT_OF_ORDINARY
+kill STOLAS                                         # the map held: local killed_wsnm 1
+trigger qm1                                         # killed_wsnm 1: reset; the Annals of Truth
+trigger qm1                                         # both key items, killed_wsnm 0: nil; NOTHING_OUT_OF_ORDINARY
+tick 15000                                          # its body despawns (one zone tick per tick statement, as #gm_nomap)
+tick 15000
+tick 15000
+trigger qm1                                         # both key items, it is gone: the annals held, so no pop; nil; NOTHING_OUT_OF_ORDINARY
+warp 119.5,-3.7,90.45 WindurstWoods
+trigger Perih_Vashai                                   # the annals (and the map): progressEvent 666
+finish                                              # completed; the key items taken; Empyreal Arrow; EMPYREAL_ARROW_LEARNED
+trigger Perih_Vashai                                   # completed: no section; his default 338
+finish
+walk 119.5,-3.7,90.45
+trade Perih_Vashai BoneChip x1                         # completed: no trade handler, nothing

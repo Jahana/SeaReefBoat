@@ -1,0 +1,53 @@
+# A Taste of Honey (ahtUrhgan 12): a level 75 Warrior, Delivering the Goods and Vanishing Act completed (GMs).
+# Available, Stage later than now (a GM): Qutiba 55; Fochacha: 50 and then Vanishing Act's 59 (both shown); Stage now
+# (a GM): Ulamaal 579 (a Progress event: above Vanishing Act's completed 58), finished: Stage 0, begun. Accepted:
+# Qutiba 585; a trade of one pot: nil (no Qutiba script, no default: nothing). Wajaom Woodlands: the first Pephredo
+# Hive: its var 0 and the pot fits: a Pot of White Honey (ITEM_OBTAINED), the var 1 until the next JST midnight, no
+# action; again: nil: the default NOTHING_OUT_OF_ORDINARY; the second and third hives: a pot each. Back: three pots to
+# Qutiba: 580, finished: completed, the Irmik Helvasi, the pots taken. Completed: Qutiba 57 (recipe 57), its updates
+# walk the recipe 57 -> 1 -> 2 -> 3 -> 0. A JST day later: the first hive again: a pot; one pot to Qutiba: 581,
+# finished: the pot taken.
+lists AhtUrhganWhitegate/Qutiba/onTrigger AhtUrhganWhitegate/Qutiba/onTrade AhtUrhganWhitegate/Ulamaal/onTrigger AhtUrhganWhitegate/Fochacha/onTrigger WajaomWoodlands/Pephredo_Hive/onTrigger AhtUrhganWhitegate/onEventFinish/579 AhtUrhganWhitegate/onEventFinish/580 AhtUrhganWhitegate/onEventFinish/581
+char zone=AhtUrhganWhitegate pos=92.341,-6.5,-127.5 job=WAR lvl=75
+quest AhtUrhgan.DeliveringTheGoods completed
+quest AhtUrhgan.VanishingAct completed
+charvar Quest[6][12]Stage 1800099999   # a GM: later than now
+login
+trigger Qutiba                          # Stage later than now: 55
+finish
+trigger Fochacha                        # 50 (Events alike with Vanishing Act's completed 59: the quest's first)
+finish
+trigger Fochacha                        # the other one: 59
+finish
+charvar Quest[6][12]Stage 1800000000    # a GM: now
+trigger Ulamaal                         # 579
+finish                                  # Stage 0; begun
+trigger Qutiba                          # accepted: 585
+finish
+warp -455,-24,-700 WajaomWoodlands
+trigger Pephredo_Hive                   # var 0: a pot; the var 1 until JST midnight; no action
+finish-if-event
+trigger Pephredo_Hive                   # var 1: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+trigger Pephredo_Hive+1                 # a pot
+finish-if-event
+trigger Pephredo_Hive+2                 # a pot
+finish-if-event
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+trade Qutiba PotOfWhiteHoney x1         # not three: nil: nothing
+finish-if-event
+trade Qutiba PotOfWhiteHoney x3         # 580
+finish                                  # completed; the Irmik Helvasi; the pots taken
+trigger Qutiba                          # completed: 57 (recipe 57)
+update 57 option=0                      # recipe 57 -> 1: (5579, 1, 255, 0, 67108863, 5976652, 4095)
+update 57 option=0                      # 1 -> 2: (4096, 615, 936, 1523, 67108863, 5976652, 4)
+update 57 option=0                      # 2 -> 3: (2214, 2237, 4509, 5568)
+update 57 option=0                      # 3 -> 0: (5575)
+finish
+wait jst=1                              # the hives' vars expired
+warp -455,-24,-700 WajaomWoodlands
+trigger Pephredo_Hive                   # completed, var 0 again: a pot
+finish-if-event
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+trade Qutiba PotOfWhiteHoney x1         # completed: 581
+finish                                  # the pot taken

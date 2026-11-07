@@ -1,0 +1,76 @@
+# Chasing Shadows (crystalWar 60), the edges: a level 99 Warrior in Southern San d'Oria [S] without Blood of Heroes
+# completed (missions as the main flow). Rongelouts N Distaud: no section: nil (604). Blood completed and the Timer
+# 99999
+# (GMs): no section: nil (604). The Timer 0: 165, finished on option 1: begun (any option). Xarcabard [S] from Southern
+# San d'Oria [S] at Prog 0: nothing; Backfilled Pit, Compact and Sunken Footprint at Prog 0: nil. Prog 1 (a GM): from
+# Beaucedine Glacier [S]: nothing. Prog 4 (a GM): Batallia Downs [S] from Beaucedine Glacier [S]: nothing. Prog 5 (a
+# GM): from Xarcabard [S]: nothing; Fresh Snowmelt: nil. Prog 7: 116, finished: Menechme up; Prog 6 (a GM): the NM
+# killed: no Prog. Prog 8, a full inventory: 117, finished: not completed (Face not added, no setPos); freed: 117:
+# completed, setPos into Batallia Downs.
+lists SouthernSanDoriaS/Rongelouts_N_Distaud/onTrigger SouthernSanDoriaS/onEventFinish/165 XarcabardS/onZoneIn/1 XarcabardS/Backfilled_Pit/onTrigger XarcabardS/Compact_Footprint/onTrigger XarcabardS/Sunken_Footprint/onTrigger BatalliaDownsS/onZoneIn/1 BatalliaDownsS/Fresh_Snowmelt/onTrigger BatalliaDownsS/Menechme/onMobDeath BatalliaDownsS/onEventFinish/116 BatalliaDownsS/onEventFinish/117
+char zone=SouthernSanDoriaS pos=-0.5,1.999,-22.006 job=WAR lvl=99
+mission Wotg TheScentOfBattle current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rongelouts_N_Distaud            # Blood of Heroes not completed: no section: nil (604)
+finish-if-event
+quest CrystalWar.BloodOfHeroes completed # a GM
+charvar Quest[7][60]Timer 99999         # a GM: a Timer to come, as Blood of Heroes' 7 sets one (tomorrow)
+trigger Rongelouts_N_Distaud            # the Timer to come: no section: nil (604)
+finish-if-event
+charvar Quest[7][60]Timer 8000          # a GM: today (the harness's day)
+trigger Rongelouts_N_Distaud            # 165
+finish option=1                         # begun (any option)
+warp -172,-2.818,-85 XarcabardS         # from Southern San d'Oria [S] at Prog 0: no zone-in reply
+trigger Backfilled_Pit                  # Prog 0: nil
+finish-if-event
+trigger Compact_Footprint               # Prog 0: nil
+finish-if-event
+trigger Sunken_Footprint                # Prog 0: nil
+finish-if-event
+charvar Quest[7][60]Prog 1              # a GM
+warp 46.437,-0.762,-370.178 BeaucedineGlacierS
+warp -172,-2.818,-85 XarcabardS         # from Beaucedine Glacier [S] at Prog 1: no zone-in reply
+charvar Quest[7][60]Prog 4              # a GM
+warp 46.437,-0.762,-370.178 BeaucedineGlacierS
+warp -71.66,-2.58,450.114 BatalliaDownsS # from Beaucedine Glacier [S] at Prog 4: no zone-in reply
+charvar Quest[7][60]Prog 5              # a GM
+warp -172,-2.818,-85 XarcabardS
+trigger Compact_Footprint               # Prog 5: nil (34 is Prog 4's)
+finish-if-event
+warp -71.66,-2.58,450.114 BatalliaDownsS # from Xarcabard [S] at Prog 5: no zone-in reply
+trigger Fresh_Snowmelt                  # Prog 5: nil
+finish-if-event
+charvar Quest[7][60]Prog 6              # a GM
+warp 46.437,-0.762,-370.178 BeaucedineGlacierS
+warp -71.66,-2.58,450.114 BatalliaDownsS # from Beaucedine Glacier [S] at Prog 6: no zone-in reply
+charvar Quest[7][60]Prog 7              # a GM
+trigger Fresh_Snowmelt                  # Prog 7: 116
+finish                                  # Menechme spawned
+charvar Quest[7][60]Prog 6              # a GM
+kill MENECHME                           # Prog 6: no Prog
+tick 15000                              # the corpse despawning
+tick 30000                              # despawned
+rezone                                  # Menechme is gone
+charvar Quest[7][60]Prog 7              # a GM
+trigger Fresh_Snowmelt                  # Prog 7, Menechme not up: 116
+finish                                  # Menechme spawned again
+charvar Quest[7][60]Prog 9              # a GM
+kill MENECHME                           # Prog 9: no Prog
+trigger Fresh_Snowmelt                  # Prog 9: nil
+finish-if-event
+tick 15000                              # the corpse despawning
+tick 30000                              # despawned
+rezone                                  # Menechme is gone
+charvar Quest[7][60]Prog 8              # a GM
+fill-inventory
+trigger Fresh_Snowmelt                  # Prog 8, Menechme not up: 117
+finish                                  # no room for the Darksteel Sheet: not completed (no Face, no setPos)
+free-inventory
+trigger Fresh_Snowmelt                  # 117
+finish                                  # completed; Face of the Future accepted; setPos into Batallia Downs
+tick 400
+login                                   # the zone change: Batallia Downs

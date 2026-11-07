@@ -1,0 +1,11 @@
+# Chocobilious (windurst 27) at GIL_RATE 1.0625: Kuoh Rhel's 231 reward gil is GIL_RATE x 1500 (1593.75 -> 1594 by the
+# engine's integral getter; a missing rate would give 1500). Accepted at var 2 (GM): his default 222, then script 231.
+char zone=WindurstWoods pos=129.5,-5.0,-104.0 job=WAR lvl=75
+setting GIL_RATE 1.0625
+login
+quest Windurst.Chocobilious accepted
+charvar ChocobiliousQuest 2
+trigger Kuoh_Rhel                       # his default 222
+finish
+trigger Kuoh_Rhel                       # his script, accepted, var 2: 231
+finish                                  # fame 20; 1594 gil; var cleared; completed; needToZone

@@ -1,0 +1,12 @@
+# The Three Magi (windurst 66), completion parity: 269's finish with the wand given is the Lua's raw
+# player:completeQuest (after the title, the trade, needToZone, the var and the fame), so a GM's Quest[2][66]Prog
+# survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) at
+# theThreeMagiSupport 3 with a Glowstone, beside Chumimi.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi accepted
+charvar theThreeMagiSupport 3
+item Glowstone
+login
+charvar Quest[2][66]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Chumimi Glowstone x1              # accepted, the stone alone: 269
+finish                                  # the Casting Wand; Koru-Moru's title; the stone; fame 20; completed; Prog kept

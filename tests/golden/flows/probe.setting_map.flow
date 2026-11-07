@@ -1,0 +1,20 @@
+# probe (quest rework P6): setting map.<NAME> <value>, an assignment to xi.settings.map[NAME] (before the login a header
+# line, after it a step). Through The Gift (otherAreas 21), whose offer needs xi.settings.map.FISHING_ENABLE == true
+# (false by default), Under the Sea completed and The Sand Charm accepted. Recorded on the Lua quest; the replay ran a
+# test-only C# copy of its offer (on Settings.MapFlag), removed once The Gift shipped in Other Areas group 2. The Gift is
+# now C#: the replay runs the port, a re-record is refused, and the probe stays as a C#-side regression check. Only the
+# Lua table changes: the engine's own fishing stays off.
+lists Selbina/Oswald/onTrigger Selbina/onEventFinish/70
+char zone=Selbina pos=48.6,-15.273,7.989 job=WAR lvl=30
+setting map.FISHING_ENABLE true         # header
+quest OtherAreas.UnderTheSea completed
+quest OtherAreas.TheSandCharm accepted
+login
+trigger Oswald                          # fishing on: the offer, 70 (DANCESHROOM)
+finish option=0                         # not taken (50 takes it)
+setting map.FISHING_ENABLE false        # a step
+trigger Oswald                          # fishing off: no section, Oswald's own script
+finish-if-event
+setting map.FISHING_ENABLE true         # a step
+trigger Oswald                          # 70 again
+finish option=50                        # begun

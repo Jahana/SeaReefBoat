@@ -1,0 +1,23 @@
+# Acting in Good Faith (windurst 64): 680's reply kind at Eperdur, whose script answers here: at San d'Oria fame level 4
+# and main level 10 his script calls Healing the Land (C#), which offers 681. Accepted by GM with the letter, a full
+# bag: 680 (the scroll does not fit: complete fails, the letter kept); 680 again right after (a Progress event keeps
+# the lookup's turn; an Event would hand this talk to his script's 681); room: 680, completed (the letter taken). Then
+# completed: no section, the lookup's default 678 and his script's 681 take turns.
+lists NorthernSanDoria/Eperdur/onTrigger NorthernSanDoria/onEventFinish/680
+char zone=NorthernSanDoria pos=126.5,-6.5,97.5 job=WAR lvl=10
+fame Sandoria 225
+quest Windurst.ActingInGoodFaith accepted
+keyitem GantineuxsLetter
+login
+fill-inventory
+trigger Eperdur                               # the letter: 680
+finish                                        # the scroll does not fit: complete fails: the letter kept
+trigger Eperdur                               # 680 again (Progress)
+finish                                        # still full: nothing
+free-inventory
+trigger Eperdur                               # 680
+finish                                        # completed: fame 40, the Scroll of Teleport-Mea, Pilgrim to Mea; the letter taken
+trigger Eperdur                               # completed: no section; after the Progress 680 the lookup's turn: his default 678
+finish
+trigger Eperdur                               # his script's turn: Healing the Land's 681
+finish

@@ -1,0 +1,13 @@
+# A Purchase of Arms with the receipt and a full inventory: 607 does not complete it (the staff cannot be given), the
+# receipt is kept; with room, 607 again completes it.
+char zone=SouthernSanDoria pos=68.8,0,62.4 job=WAR lvl=10
+quest Sandoria.FatherAndSon completed
+quest Sandoria.APurchaseOfArms accepted
+keyitem WeaponsReceipt
+login
+fill-inventory
+trigger Helbort                           # no order: 607
+finish                                    # no room: not completed, the receipt kept
+free-inventory
+trigger Helbort                           # 607
+finish                                    # completed: Elm Staff, fame +20, Arms Trader; the receipt deleted

@@ -1,0 +1,52 @@
+# The Clue (otherAreas 5): the available check (fame level 5, Expertise completed) and Rycharde's wait, bracketed, and
+# the offers' options and Prog test. Expertise completed, Windurst fame 324 (level 4): no section: Valgeir 140, Take 59
+# (defaults). Fame 325: Valgeir 143, Take 64. Quest[4][4]DayCompleted 7993 (7993 + 7 = 8000, not below): Rycharde nil
+# (69); 7992: 90, option 82 (below 83): Prog 1, the DayCompleted cleared, not begun; Prog -1 (a GM, below 0): 91, option
+# 0; Prog 1: 91, option 82: nothing; 91, option 84 (above 83): nothing; Prog 0 (a GM): 90, option 84: Prog 1, not begun;
+# Prog 0: 90, option 83: Prog 1, begun. Made available again (a GM, Prog 1), Expertise not completed (a GM: available,
+# then accepted): Expertise's section only (Rycharde: it has no Rycharde handler, so his default 69, not The Clue's 91;
+# Take at Prog 0: 63).
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Selbina/Valgeir/onTrigger Mhaura/onEventFinish/90 Mhaura/onEventFinish/91
+char zone=Selbina pos=59,-15.27,20.2 job=WAR lvl=30
+quest OtherAreas.Expertise completed
+charvar Quest[4][4]DayCompleted 7993
+fame Windurst 324
+login
+trigger Valgeir                         # fame level 4: no section; his default 140
+finish
+fame Windurst 325                       # level 5
+trigger Valgeir                         # available: 143
+finish
+warp 19,-16,88.8 Mhaura
+trigger Take                            # 64
+finish
+trigger Rycharde                        # 7993 + 7 < 8000 false: nil; his default 69
+finish
+fame Windurst 324                       # level 4
+trigger Take                            # no section: his default 59
+finish
+fame Windurst 325
+charvar Quest[4][4]DayCompleted 7992    # 7999 < 8000
+trigger Rycharde                        # Prog 0: 90 (4357)
+finish option=82                        # Prog 1, DayCompleted 0; below 83: not begun
+charvar Quest[4][5]Prog -1              # a GM: below 0
+trigger Rycharde                        # Prog -1: 91
+finish option=0
+charvar Quest[4][5]Prog 1               # a GM
+trigger Rycharde                        # Prog 1: 91
+finish option=82                        # below 83: nothing
+trigger Rycharde                        # 91
+finish option=84                        # above 83: nothing
+charvar Quest[4][5]Prog 0               # a GM
+trigger Rycharde                        # Prog 0: 90
+finish option=84                        # Prog 1; above 83: not begun
+charvar Quest[4][5]Prog 0               # a GM
+trigger Rycharde                        # Prog 0: 90
+finish option=83                        # Prog 1, begun
+quest OtherAreas.TheClue available      # a GM
+quest OtherAreas.Expertise available    # a GM (delQuest: addQuest alone leaves a completed quest completed)
+quest OtherAreas.Expertise accepted     # a GM: Expertise no longer completed
+trigger Rycharde                        # Expertise accepted has no Rycharde handler; The Clue's is off: 69
+finish
+trigger Take                            # Expertise's section (Prog 0: 63); The Clue's is off
+finish

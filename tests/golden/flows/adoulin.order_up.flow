@@ -1,0 +1,75 @@
+# Order Up (adoulin, call-only): a level 99 Warrior in Western Adoulin. Nothing begins the quest (its giver is not
+# implemented) or completes it: GMs. Each NPC has a default (DefaultActions.lua) and a script, so its talks go in
+# pairs: the first plays the default (the UseFallback turn), the second runs the script, the default again when the
+# script plays nothing. Available: Terwok (532), Mastan (525), Oka Qhantari (511), Grevan (541; Hypocritical Oath not
+# completed: his own dialogue plays nothing) answer nothing from the quest; a trade at Terwok: no onTrade, nothing.
+# Accepted (a GM), in the order Grevan, Oka Qhantari, Mastan, Terwok: each without its bit: its event (Grevan 69,
+# Oka Qhantari 71, Mastan 70, Terwok 67), finished: its bit set in Order_Up_NPCs (10: 1024, 9: 1536, 11: 3584,
+# 7: 3712); talked again: nothing from the quest. Completed (a GM) with the mask 0: Terwok nothing. Marjoirelle:
+# #marjoirelle.
+lists WesternAdoulin/Terwok/onTrigger WesternAdoulin/Marjoirelle/onTrigger WesternAdoulin/Grevan/onTrigger WesternAdoulin/Mastan/onTrigger WesternAdoulin/Oka_Qhantari/onTrigger WesternAdoulin/onEventFinish/67 WesternAdoulin/onEventFinish/68 WesternAdoulin/onEventFinish/69 WesternAdoulin/onEventFinish/70 WesternAdoulin/onEventFinish/71
+char zone=WesternAdoulin pos=129.2,4,-82.2 job=WAR lvl=99
+item FlintStone
+login
+trigger Terwok                          # available: 532 (the default first)
+finish-if-event
+trigger Terwok                          # his script: nothing from the quest: 532
+finish-if-event
+trade Terwok FlintStone x1              # available: no onTrade: nothing, the stone kept
+warp -8.5,0,67.5 WesternAdoulin         # beside Mastan
+trigger Mastan                          # available: 525
+finish-if-event
+trigger Mastan                          # his script: nothing from either quest (no Melvien's Turn): 525
+finish-if-event
+warp -129,3.25,-6.1 WesternAdoulin      # beside Oka Qhantari
+trigger Oka_Qhantari                    # available: 511
+finish-if-event
+trigger Oka_Qhantari                    # her script: nothing: 511
+finish-if-event
+warp 52.5,0,6.2 WesternAdoulin          # beside Grevan
+trigger Grevan                          # available: 541
+finish-if-event
+trigger Grevan                          # his script: nothing (Hypocritical Oath not completed): 541
+finish-if-event
+quest Adoulin.OrderUp accepted          # a GM (nothing adds it)
+trigger Grevan                          # 541
+finish-if-event
+trigger Grevan                          # accepted, bit 10 unset: 69
+finish-if-event                         # 69's finish: bit 10 (1024)
+trigger Grevan                          # 541
+finish-if-event
+trigger Grevan                          # bit 10 set: his own dialogue: nothing (Hypocritical Oath): 541
+finish-if-event
+warp -129,3.25,-6.1 WesternAdoulin      # beside Oka Qhantari
+trigger Oka_Qhantari                    # 511
+finish-if-event
+trigger Oka_Qhantari                    # bit 9 unset: 71
+finish-if-event                         # 71's finish: bit 9 (1536)
+trigger Oka_Qhantari                    # 511
+finish-if-event
+trigger Oka_Qhantari                    # bit 9 set: nothing: 511
+finish-if-event
+warp -8.5,0,67.5 WesternAdoulin         # beside Mastan
+trigger Mastan                          # 525
+finish-if-event
+trigger Mastan                          # bit 11 unset: 70
+finish-if-event                         # 70's finish: bit 11 (3584)
+trigger Mastan                          # 525
+finish-if-event
+trigger Mastan                          # bit 11 set, no Melvien's Turn: nothing: 525
+finish-if-event
+warp 129.2,4,-82.2 WesternAdoulin       # beside Terwok
+trigger Terwok                          # 532
+finish-if-event
+trigger Terwok                          # bit 7 unset: 67
+finish-if-event                         # 67's finish: bit 7 (3712)
+trigger Terwok                          # 532
+finish-if-event
+trigger Terwok                          # bit 7 set: nothing: 532
+finish-if-event
+charvar Order_Up_NPCs 0                 # a GM
+quest Adoulin.OrderUp completed         # a GM
+trigger Terwok                          # 532
+finish-if-event
+trigger Terwok                          # completed, bit 7 unset: nothing: 532
+finish-if-event

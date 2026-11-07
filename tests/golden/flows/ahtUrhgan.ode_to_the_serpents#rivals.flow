@@ -1,0 +1,34 @@
+# Ode to the Serpents' rivals at Fari-Wari (GM states out of play order): a level 75 Warrior. Saga completed and Fist of
+# the People accepted at Prog 0 (GMs: Fist's 884, a Progress). Ode available: 882 and 884 take turns (each finish undone
+# by GMs: Ode available again, the letter taken back; Fist Prog 0). Biyaada's Letter held already (a GM): 882, finished:
+# begun, the letter given again. Then Saga available, Ode accepted, Bow and Fist completed (GMs): 883 and Saga's 823
+# take turns (each finish undone: Ode available then accepted, Saga available).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger
+char zone=AhtUrhganWhitegate pos=81.95,-6,-137.707 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent completed
+quest AhtUrhgan.FistOfThePeople accepted
+login
+trigger Fari-Wari                       # Ode available: 882 or Fist's 884 (Progresses: turns)
+finish
+quest AhtUrhgan.OdeToTheSerpents available  # GMs: undone
+delkeyitem BiyaadasLetter
+charvar Quest[6][46]Prog 0
+trigger Fari-Wari                       # the other
+finish
+quest AhtUrhgan.OdeToTheSerpents available
+delkeyitem BiyaadasLetter
+charvar Quest[6][46]Prog 0
+quest AhtUrhgan.FistOfThePeople completed   # GMs: 882 alone
+keyitem BiyaadasLetter                  # the letter held already
+trigger Fari-Wari                       # 882
+finish                                  # begun; the letter given again
+quest AhtUrhgan.WhenTheBowBreaks completed  # GMs: Ode accepted with both done; Saga available
+quest AhtUrhgan.SagaOfTheSkyserpent available
+trigger Fari-Wari                       # 883 or Saga's 823 (Progresses: turns)
+finish
+quest AhtUrhgan.OdeToTheSerpents available  # GMs: undone
+quest AhtUrhgan.OdeToTheSerpents accepted
+quest AhtUrhgan.SagaOfTheSkyserpent available
+keyitem BiyaadasLetter
+trigger Fari-Wari                       # the other
+finish

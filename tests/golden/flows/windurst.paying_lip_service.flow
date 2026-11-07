@@ -1,0 +1,25 @@
+# Paying Lip Service (windurst 60): Tapoh Lihzeh (Windurst Woods; no default; his script answers Chocobilious first,
+# never started here). Available: three chips traded: nothing; 477 (0, 912, 1016, 150, 200), option 0: nothing; option
+# 1: begun. Accepted: 478 (the same); two chips: nothing; three: 479 (0, 912, 1016, 0, 0), option 0: completed (Kisser
+# Make-Upper; no fame: the reward names no fameArea), 150 gil, the chips taken. Completed: his 437; two shells:
+# 479 (..., 0, 1), option 1: fame 10, 200 gil; three chips, option 1: fame 10, 200 gil (the option pays, not the items).
+char zone=WindurstWoods pos=49.5,-3.75,54.4 job=WAR lvl=75
+item BeehiveChip x6
+item RemiShell x2
+login
+trigger Tapoh_Lihzeh                    # available: 477 (0, 912, 1016, 150, 200)
+finish option=0                         # not 1: nothing
+trade Tapoh_Lihzeh BeehiveChip x3       # available: no trade arm: nothing
+trigger Tapoh_Lihzeh                    # 477
+finish option=1                         # begun
+trigger Tapoh_Lihzeh                    # accepted: 478 (0, 912, 1016, 150, 200)
+finish
+trade Tapoh_Lihzeh BeehiveChip x2       # two chips: nothing
+trade Tapoh_Lihzeh BeehiveChip x3       # three chips: 479 (0, 912, 1016, 0, 0)
+finish option=0                         # completed (Kisser Make-Upper, no fame); 150 gil; the chips taken
+trigger Tapoh_Lihzeh                    # completed: his 437
+finish
+trade Tapoh_Lihzeh RemiShell x2         # completed, two shells: 479 (0, 912, 1016, 0, 1)
+finish option=1                         # fame 10; 200 gil; the shells taken
+trade Tapoh_Lihzeh BeehiveChip x3       # three chips: 479 (..., 0, 0)
+finish option=1                         # fame 10; 200 gil (the finish's option, not the chips); the chips taken

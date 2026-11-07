@@ -1,0 +1,29 @@
+# The Kuftal Tour (outlands 195) against Bastok 8-2 Enter the Talekeeper, which shares Kuftal Tunnel's qm5 (status 1:
+# its 12, a progressEvent). qm5 has no script, so there is no fallback turn; two progressEvents tie and rotate by the
+# last event id (interaction_lookup.lua's performNextAction). main: a level 30 Bastok Warrior on Enter the Talekeeper,
+# the quest accepted (a GM), with bob (level 30). Status 1 (a GM), alone: 12 alone (the quest: nil); finished on 1:
+# nothing. bob joins: 12 and 14 tie: 12 (the list's first: the missions' containers before the quests'), finished on 1:
+# nothing; the last id 12: 14, finished: Prog 1; the last id 14: the cycle wraps: 12, finished on 0: status 2 and FELL;
+# then 14 alone, twice.
+lists KuftalTunnel/qm5/onTrigger KuftalTunnel/onEventFinish/12 KuftalTunnel/onEventFinish/14
+char zone=KuftalTunnel pos=-27.695,-22.159,-183.716 job=WAR lvl=30 nation=1
+char bob zone=KuftalTunnel pos=-27.695,-22.159,-182.716 job=WAR lvl=30 nation=1
+mission Bastok EnterTheTalekeeper current
+quest Outlands.TheKuftalTour accepted
+login
+missionstatus Bastok 1                  # a GM
+trigger qm5                             # alone: the mission's 12 (the quest: nil)
+finish option=1                         # not 0: nothing
+bob: login
+invite bob
+bob: accept
+trigger qm5                             # 12 and 14 tie: 12
+finish option=1
+trigger qm5                             # the cycle: 14
+finish option=1
+trigger qm5                             # the cycle wraps: 12
+finish option=0                         # status 2, FELL
+trigger qm5                             # status 2: 14 alone
+finish option=0
+trigger qm5                             # 14 alone
+finish

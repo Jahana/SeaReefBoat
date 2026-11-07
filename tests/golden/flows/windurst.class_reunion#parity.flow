@@ -1,0 +1,16 @@
+# Class Reunion (windurst 82), completion parity: 410's finish with a free slot is the Lua's raw player:completeQuest
+# (after the spats; then the three vars, needToZone, the fame), so a GM's Quest[2][82]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) at ClassReunionProgress 6 with
+# both talked to, beside Koru-Moru.
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 6
+charvar ClassReunion_TalkedToFupepe 1
+charvar ClassReunion_TalkedToFurakku 1
+login
+charvar Quest[2][82]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 6, both talked to: 410
+finish                                  # Evoker's Spats; completed; the three vars 0; needToZone; fame 20; Prog kept

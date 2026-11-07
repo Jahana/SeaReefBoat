@@ -1,0 +1,57 @@
+# Olduum's bounds: Wait at the clock (GetSystemTime() is 1800000000 in the harness) and the ring, band and cell tests
+# of 7 and 8, each state made by a GM. Main: a level 75 Warrior in Whitegate with a Pickaxe, Olduum completed, Wait
+# 1800000000 (now), Reissue 0, nothing held. Dkhaaya: Wait not ahead: 7 ([7] = 1); option 99, Wait not ahead: Reissue
+# 1. Aydeewa: the Pickaxe (Reissue 1, Wait <= now): the draw; a GM pins the Electrolocomotive: the cell. Reissue 0 (a
+# GM): Dkhaaya 7 ([7] = 1); option 99, the cell held: nothing. Reissue 1 (a GM): 8; a GM takes the cell while it is
+# open: finished: no cell: nothing. The cell back (a GM): 8; a GM gives the ring while it is open: finished: the ring
+# held: nothing. Reissue 0, the cell taken (GMs): Dkhaaya, the ring held: 7 (no parameter); option 99: the ring held:
+# nothing. Bob (Reissue 1, Wait now, the Electropot): 8, finished: Wait not ahead: the band, the cell taken, Prog 0,
+# Reissue 0. Carl (Reissue 1, Wait 0, the Electrocell): 8; a GM gives a band while it is open: finished: the band
+# held: nothing.
+lists AhtUrhganWhitegate/Dkhaaya/onTrigger AhtUrhganWhitegate/onEventFinish/7 AhtUrhganWhitegate/onEventFinish/8 AydeewaSubterrane/Excavation_Site/onTrade
+char zone=AhtUrhganWhitegate pos=-71.7,0,-5.842 job=WAR lvl=75
+char bob zone=AhtUrhganWhitegate pos=-71.7,0,-5.842 job=WAR lvl=75
+char carl zone=AhtUrhganWhitegate pos=-71.7,0,-5.842 job=WAR lvl=75
+item Pickaxe
+quest AhtUrhgan.Olduum completed
+charvar Quest[6][2]Wait 1800000000
+bob: quest AhtUrhgan.Olduum completed
+bob: charvar Quest[6][2]Reissue 1
+bob: charvar Quest[6][2]Wait 1800000000
+bob: charvar Quest[6][2]Prog 2
+bob: keyitem Electropot
+carl: quest AhtUrhgan.Olduum completed
+carl: charvar Quest[6][2]Reissue 1
+carl: charvar Quest[6][2]Prog 1
+carl: keyitem Electrocell
+login
+trigger Dkhaaya                         # Wait = now, not ahead; Reissue 0: 7 ([7] = 1)
+finish option=99                        # Wait = now, not ahead: Reissue 1
+warp 392,0.984,349.642 AydeewaSubterrane
+trade Excavation_Site Pickaxe x1        # Reissue 1, Wait = now (<= now), nothing held: the draw; 0
+localvar mineFail 0                     # a GM pins a success
+charvar Quest[6][2]Prog 3               # a GM pins the Electrolocomotive
+finish                                  # the Electrolocomotive; the pickaxe taken
+warp -71.7,0,-5.842 AhtUrhganWhitegate
+charvar Quest[6][2]Reissue 0            # a GM
+trigger Dkhaaya                         # Reissue 0 (the cell not read): 7 ([7] = 1)
+finish option=99                        # the cell held: nothing (Reissue 0 kept)
+charvar Quest[6][2]Reissue 1            # a GM
+trigger Dkhaaya                         # Reissue 1, the cell: 8 ([0] = Electrolocomotive)
+delkeyitem Electrolocomotive            # a GM, while 8 is open
+finish                                  # no cell: nothing (Reissue 1 kept, no band)
+keyitem Electrolocomotive               # a GM
+trigger Dkhaaya                         # 8 ([0] = Electrolocomotive)
+item OlduumRing                         # a GM, while 8 is open
+finish                                  # the ring held: nothing (the cell kept, no band)
+charvar Quest[6][2]Reissue 0            # a GM
+delkeyitem Electrolocomotive            # a GM
+trigger Dkhaaya                         # the ring held: 7 (no parameter)
+finish option=99                        # the ring held: nothing (Reissue 0 kept)
+bob: login
+bob: trigger Dkhaaya                    # Reissue 1, the Electropot, Wait = now: 8 ([0] = Electropot)
+bob: finish                             # Wait not ahead: the band; the Electropot taken; Prog 0, Reissue 0
+carl: login
+carl: trigger Dkhaaya                   # Reissue 1, the Electrocell, Wait 0: 8 ([0] = Electrocell)
+carl: item LightningBand                # a GM, while 8 is open
+carl: finish                            # the band held: nothing (the cell kept)

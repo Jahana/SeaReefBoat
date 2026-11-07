@@ -1,0 +1,36 @@
+# Orlando's Antiques (otherAreas 7): Orlando (Mhaura; no DefaultActions entry, no other quest: his script calls the
+# quest whole). A WAR 20. No fame, no license: 100. Windurst fame level 2 (50) and the Chocobo License (GMs): available,
+# 8 Beastcoins: nothing; 101: begun (no option read). Accepted: 103 (its finish: not completed, nothing). Trades: 7
+# Beastcoins: 104; 7 and a Goblin Die (8 in all, not 8 of the slot's item): nothing; 9 Beastcoins (trade:hasItemQty is
+# exact: 9 is not 8): nothing; 8: 102 (600, 656): the trade taken, Windurst fame +10, 600 gil, completed, ANTIQUE_PAYOUT
+# 0. Completed, OrlandoRepeat 0: 8 Goblin Dice: nothing. 103: OrlandoRepeat 1; 8 Goblin Dice: 102 (120, 568): completed
+# again, OrlandoRepeat 0. 103 again (OrlandoRepeat 1): a cabbage in the first slot (not an antique) and a die: nothing
+# (the die's slot would play 104).
+char zone=Mhaura pos=-36.5,-8.0,59.3 job=WAR lvl=20
+item Beastcoin x9
+item GoblinDie x9
+item LaTheineCabbage x1
+login
+trigger Orlando                         # no fame, no license: 100
+finish
+fame Windurst 50                        # a GM: level 2
+keyitem ChocoboLicense                  # a GM
+trade Orlando Beastcoin x8              # available, OrlandoRepeat 0: nothing
+trigger Orlando                         # available: 101
+finish                                  # begun
+trigger Orlando                         # accepted: 103
+finish                                  # not completed: nothing
+trade Orlando Beastcoin x7              # fewer than 8: 104
+finish
+trade Orlando Beastcoin x7 GoblinDie x1 # 8 items, not 8 of the slot's: nothing
+trade Orlando Beastcoin x9              # hasItemQty(656, 8) is exact: 9 is not 8: nothing
+trade Orlando Beastcoin x8              # 102 (600, 656)
+finish                                  # the 8 taken; Windurst fame +10; 600 gil; completed; ANTIQUE_PAYOUT 0
+trade Orlando GoblinDie x8              # completed, OrlandoRepeat 0: nothing
+trigger Orlando                         # completed: 103
+finish                                  # OrlandoRepeat 1
+trade Orlando GoblinDie x8              # 102 (120, 568)
+finish                                  # taken; fame +10; 120 gil; completed again; OrlandoRepeat 0
+trigger Orlando                         # 103
+finish                                  # OrlandoRepeat 1
+trade Orlando LaTheineCabbage x1 GoblinDie x1  # the first slot's item no antique: nothing

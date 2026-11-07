@@ -1,0 +1,21 @@
+# Expanding Horizons (jeuno 134), each finish once its section no longer holds (a GM's change while the event is open): a
+# level 76 Warrior with the Limit Breaker at cap 80, New Worlds Await completed. 10045 open, then cap 81: finish option 7
+# does nothing (not begun); cap 80 again: begun. Accepted, 4 merit points, five crests: 10136 open, then the quest set
+# available (its first section holds; 10136's finish is the accepted section's): nothing (crests kept, merits 4, cap 80).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10136
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=76
+keyitem LimitBreaker
+levelcap 80
+merits 4
+quest Jeuno.NewWorldsAwait completed
+item KindredsCrest x5
+login
+trigger Nomad_Moogle                    # 10045 (76, 1, 2, 0)
+levelcap 81                             # a GM, 10045 open
+finish option=7                         # cap 81: no section: nothing (not begun)
+levelcap 80                             # a GM
+trigger Nomad_Moogle                    # 10045 (76, 1, 2, 0)
+finish option=7                         # begun
+trade Nomad_Moogle KindredsCrest x5     # 10136
+quest Jeuno.ExpandingHorizons available # a GM, 10136 open
+finish                                  # available: nothing

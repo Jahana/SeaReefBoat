@@ -1,0 +1,51 @@
+# Collect Tarut Cards (jeuno 10): Chululu in Lower Jeuno. Jeuno fame level 3 ((84 + 83 + 83) / 2 = 125): the four
+# cards while available (no trade handler: nil), her 28 (option 1: nothing; option 0 with a full bag: no cards, not
+# begun; option 0: five of one random card, begun, Date = the next JST midnight), 27 before Date, 10112 a JST day later
+# (a full bag: no cards, Date kept; option 1: nothing; option 0: a new batch, Date moved), three cards (not
+# tradeMatches: nil), the four (200: completed, Card Collector, fame +7 x3, the cards taken, All in the Cards' Date =
+# the next JST midnight), then Rubbish Day's 199 (still Lua; All in the Cards waits for its Date), and a JST day later
+# All in the Cards' 10110 and Rubbish Day's 199 (both Progress: the lookup cycles them, a C# / Lua mix once All in the
+# Cards is ported).
+lists LowerJeuno/Chululu/onTrigger LowerJeuno/Chululu/onTrade LowerJeuno/onEventFinish/28 LowerJeuno/onEventFinish/10112 LowerJeuno/onEventFinish/200 LowerJeuno/onEventFinish/10110 LowerJeuno/onEventUpdate/199
+char zone=LowerJeuno pos=-9,-6.7,-42.5 job=WAR lvl=30
+fame Sandoria 84
+fame Bastok 83
+fame Windurst 83
+item TarutCardTheFool
+item TarutCardDeath
+item TarutCardTheHermit
+item TarutCardTheKing
+login
+walk -11.5,-6.7,-42
+trade Chululu TarutCardTheFool x1 TarutCardDeath x1 TarutCardTheHermit x1 TarutCardTheKing x1  # available: no trade handler, nil
+trigger Chululu                             # available, fame level 3: 28
+finish option=1                             # not 0: nothing
+trigger Chululu                             # 28
+fill-inventory
+finish option=0                             # no room for the cards: not begun
+free-inventory
+trigger Chululu                             # 28
+finish option=0                             # five of one random card; begun, Date = the next JST midnight
+trigger Chululu                             # accepted, before Date: 27
+finish
+wait jst=1                                  # GetSystemTime past Date
+trigger Chululu                             # 10112
+fill-inventory
+finish option=0                             # no room: no cards, Date kept
+free-inventory
+trigger Chululu                             # 10112 again
+finish option=1                             # not 0: nothing
+trigger Chululu                             # 10112 again
+finish option=0                             # a new batch, Date moved
+trigger Chululu                             # before Date: 27
+finish
+trade Chululu TarutCardTheFool x1 TarutCardDeath x1 TarutCardTheHermit x1  # three cards: nil
+trade Chululu TarutCardTheFool x1 TarutCardDeath x1 TarutCardTheHermit x1 TarutCardTheKing x1  # the four: 200
+finish                                      # completed: Card Collector, fame +7 x3, the cards taken, All in the Cards' Date
+trigger Chululu                             # All in the Cards waits for its Date: Rubbish Day's 199 (Progress; alone, no cycle var written)
+finish
+wait jst=1
+trigger Chululu                             # All in the Cards' 10110 (Progress: first in the cycle with Rubbish Day's Progress 199)
+finish option=1
+trigger Chululu                             # the cycle's next: Rubbish Day's 199
+finish option=1

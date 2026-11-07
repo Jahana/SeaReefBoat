@@ -1,0 +1,12 @@
+# Past Perfect completed: Evi on each side of the char's local var EviDialog, which no script sets (a GM's !setlocalvar
+# does; the localvar statement is its call). At 0 the completed section's 21 (its finish sets Prog 1); at 1 the other
+# arm, event 104 (no finish handler for 104).
+lists PortBastok/Evi/onTrigger PortBastok/onEventFinish/21
+char zone=PortBastok pos=-4.6,-2.1,3.2
+quest Bastok.PastPerfect completed
+login
+trigger Evi                          # EviDialog 0: 21
+finish                               # Prog 1 on the completed quest
+localvar EviDialog 1                 # player:setLocalVar('EviDialog', 1)
+trigger Evi                          # EviDialog 1: event 104
+finish                               # no handler for 104: nothing

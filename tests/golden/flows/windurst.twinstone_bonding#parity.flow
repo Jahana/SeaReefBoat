@@ -1,0 +1,14 @@
+# Twinstone Bonding (windurst 62), completion parity: 490's finish while accepted is npcUtil.completeQuest step for step
+# (the Wrapped Bow, stopping when it cannot be given; fame 16 Windurst; the title), ending in the raw
+# player:completeQuest, so a GM's Quest[2][62]Prog survives the completion (quest:cleanup, which a called
+# Quest.Complete() runs, would clear it). Accepted (GM) with GiohAijhriSpokenTo 1 beside Gioh Ajihri.
+char zone=WindurstWoods pos=106.2,-4.75,173.9 job=WAR lvl=75
+item TwinstoneEarring
+charvar GiohAijhriSpokenTo 1
+login
+quest Windurst.TwinstoneBonding accepted
+charvar Quest[2][62]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Gioh_Ajihri                     # accepted: 488 (beside him)
+finish                                  # var 1
+trade Gioh_Ajihri TwinstoneEarring x1   # 490
+finish                                  # the earring taken; needToZone; var 0; the bow; fame 16; the title; Prog kept

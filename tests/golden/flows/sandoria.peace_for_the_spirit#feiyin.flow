@@ -1,0 +1,35 @@
+# Peace for the Spirit (sandoria 86): the Fei'Yin zone-in's spawn of Miser Murphy (CS == 1 and no Antique Coin held, in
+# any status). A zone-in shows no spawn in its own step (a mob's 0x00E goes out on the char's next position packet), so
+# each entry is followed by a step that would: `kill MISER_MURPHY` where he spawns (his onMobDeath runs), a `walk` to his
+# spawn point and back where he does not (quest rework P9, D1: a kill must claim its mob, so the old `kill` of an
+# unspawned Murphy now fails; a `tick` sends no position, so it shows no spawn). Accepted by GM: CS 0 and CS 1 with the
+# coin, CS 2 and CS 0 without it: no spawn; set
+# available at CS 1 without the coin: Miser Murphy spawns. The Dry Fountain traded one coin while completed: nothing.
+char zone=BeaucedineGlacier pos=403.3,0.0,279.2 job=RDM lvl=75
+quest Sandoria.PeaceForTheSpirit accepted
+item AntiqueCoin
+login
+warp -15.5,-16.5,67.0 Feiyin              # CS 0, the coin held: no spawn
+walk -6.8,-16.4,48.3                      # to his spawn point (-4.8,-16.4,48.3): a spawned Murphy would show (0x00E): none
+walk -15.5,-16.5,67.0                     # back to the Dry Fountain
+charvar peaceForTheSpiritCS 1
+warp -15.5,-16.5,67.0 Feiyin              # CS 1, the coin held: no spawn
+walk -6.8,-16.4,48.3                      # to his spawn point (-4.8,-16.4,48.3): a spawned Murphy would show (0x00E): none
+walk -15.5,-16.5,67.0                     # back to the Dry Fountain
+trade Dry_Fountain AntiqueCoin x1         # 17
+finish                                    # the coin taken; CS 2
+rezone                                    # CS 2, no coin: no spawn
+walk -6.8,-16.4,48.3                      # to his spawn point (-4.8,-16.4,48.3): a spawned Murphy would show (0x00E): none
+walk -15.5,-16.5,67.0                     # back to the Dry Fountain
+charvar peaceForTheSpiritCS 0
+rezone                                    # CS 0, no coin: no spawn
+walk -6.8,-16.4,48.3                      # to his spawn point (-4.8,-16.4,48.3): a spawned Murphy would show (0x00E): none
+walk -15.5,-16.5,67.0                     # back to the Dry Fountain
+quest Sandoria.PeaceForTheSpirit available
+charvar peaceForTheSpiritCS 1
+rezone                                    # available, CS 1, no coin: Miser Murphy spawns
+kill MISER_MURPHY                         # spawned: he dies
+walk -15.5,-16.5,67.0                     # back to the Dry Fountain
+quest Sandoria.PeaceForTheSpirit completed
+item AntiqueCoin held                     # his drop gave it (rare): a no-op
+trade Dry_Fountain AntiqueCoin x1         # completed: nothing

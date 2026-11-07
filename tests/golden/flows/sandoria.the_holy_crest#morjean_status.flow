@@ -1,0 +1,17 @@
+# The Holy Crest (sandoria 93): Morjean's 65 reads no status. Accepted (GM) with TheHolyCrest_Event 2 (GM): his
+# default 601, then 65; its finish begins the quest again (player:addQuest on an accepted quest) and sets the var 3.
+# Completed (GM) with the var 2 (GM): 601, then 65; its finish adds the quest again and sets the var 3.
+char zone=NorthernSanDoria pos=100.1,0,114.1 job=WAR lvl=30
+quest Sandoria.TheHolyCrest accepted
+charvar TheHolyCrest_Event 2
+login
+trigger Morjean                           # default 601
+finish
+trigger Morjean                           # accepted, TheHolyCrest_Event 2: 65 (no status read)
+finish                                    # addQuest again; TheHolyCrest_Event 3
+quest Sandoria.TheHolyCrest completed     # GM
+charvar TheHolyCrest_Event 2              # GM
+trigger Morjean                           # default 601
+finish
+trigger Morjean                           # completed, TheHolyCrest_Event 2: 65 (no status read)
+finish                                    # addQuest on a completed quest; TheHolyCrest_Event 3

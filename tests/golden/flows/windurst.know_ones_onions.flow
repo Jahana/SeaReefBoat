@@ -1,0 +1,122 @@
+# Know One's Onions (windurst 40): in time, at Windurst rank 2 (the rank edge's in-time side). Level 5, Windurst fame
+# 30, Truth, Justice, and the Onion Way! completed by GM. Available, the check holding: four onions traded (no trade
+# handler: nothing); Prog 1 set by GM while available: Gomada-Vulmada plays the first quest's 381 (section 2's status
+# operand false alone; Prog back to 0); Kohlo-Lakolo's 391 (0, onion): Prog 1, begun. Prog 1: 392; the lines 394, 393,
+# 395, 396, 397 (no Shanruru line: his default 367); trades: a bone chip, three onions, five onions, four onions plus a
+# chip (each nil), four onions (398: taken, Prog 2). Prog 2: 399 and the lines (Shanruru: 367); the House of the Hero's
+# 288 (0, onion): Prog 3. Prog 3: the lines 404, 402, 410, 408, 406 (Shanruru: 367); 400 with a full bag (the Scroll of
+# Blaze Spikes does not fit: nothing), then 400 (completed: fame 20 (50 in all), the scroll, SOB Super Hero, the player
+# local var [2][41]mustZone 1). Completed while Inspector's Gadget is available: 405, 403, 411, 409, 412, 407
+# (replaceDefault); this quest's Prog set back to 2, 3 and 1 by GM: Gomada-Vulmada stays 405 (sections 3, 4 and 2 want
+# it accepted: each status operand false alone). Kohlo-Lakolo: Inspector's Gadget's offer, fame level 2 now, its own
+# char-var mustZone 0 (the local var 400 set is not read): 413, option 0, begun; Gomada-Vulmada: section 6 not met
+# (Inspector's Gadget accepted), its 417. Inspector's Gadget completed and Onion Rings accepted by GM (Prog 0, silent):
+# section 6's quest operand false with no other line: 363. At the start, Gomada-Vulmada twice (the first quest's 381
+# both times: section 6's status operand false, so no 405 to cycle with).
+# The House of the Hero (_6n2): its script acts only for a summoner (Class Reunion, Carbuncle Debacle): nothing here;
+# also named by The Puppet Master, I Can Hear a Rainbow, Wild Card and Windurst 2-1 (none started here).
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Kohlo-Lakolo/onTrade PortWindurst/Gomada-Vulmada/onTrigger PortWindurst/Shanruru/onTrigger WindurstWalls/_6n2/onTrigger PortWindurst/onEventFinish/391 PortWindurst/onEventFinish/398 PortWindurst/onEventFinish/400 PortWindurst/onEventFinish/413 WindurstWalls/onEventFinish/288
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+rank 2
+fame Windurst 30
+quest Windurst.TruthJusticeAndTheOnionWay completed
+item BoneChip
+item WildOnion x5
+login
+trade Kohlo-Lakolo WildOnion x4                # available (the check holds): no trade handler: nothing
+charvar Quest[2][40]Prog 1                     # GM: Prog 1 while available
+trigger Gomada-Vulmada                         # section 2 wants accepted: the first quest's 381
+finish
+trigger Gomada-Vulmada                         # 381 again (section 6 wants this quest completed: no 405 to cycle with)
+finish
+charvar Quest[2][40]Prog 0                     # GM
+trigger Kohlo-Lakolo                           # level 5, no mustZone, rank 2 < 3: 391 (0, onion)
+finish                                         # Prog 1; begun
+trigger Kohlo-Lakolo                           # Prog 1, rank 2: 392 (0, onion)
+finish
+trigger Gomada-Vulmada                         # 394
+finish
+trigger Papo-Hopo                              # 393
+finish
+trigger Pichichi                               # 395
+finish
+trigger Pyo_Nzon                               # 396
+finish
+trigger Yafa_Yaa                               # 397
+finish
+trigger Shanruru                               # no line in this section: his default 367
+finish
+trigger Kohlo-Lakolo                           # 392 (back beside him)
+finish
+trade Kohlo-Lakolo BoneChip x1                 # wrong item: nil
+trade Kohlo-Lakolo WildOnion x3                # three: nil
+trade Kohlo-Lakolo WildOnion x5                # five: nil
+trade Kohlo-Lakolo WildOnion x4 BoneChip x1    # four plus an extra: nil
+trade Kohlo-Lakolo WildOnion x4                # 398 (0, onion)
+finish                                         # four onions taken; Prog 2
+trigger Kohlo-Lakolo                           # Prog 2: 399 (0, onion)
+finish
+trigger Gomada-Vulmada                         # 394
+finish
+trigger Papo-Hopo                              # 393
+finish
+trigger Pichichi                               # 395
+finish
+trigger Pyo_Nzon                               # 396
+finish
+trigger Yafa_Yaa                               # 397
+finish
+trigger Shanruru                               # 367
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # Prog 2, rank 2: 288 (0, onion)
+finish                                         # Prog 3
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Gomada-Vulmada                         # Prog 3: 404
+finish
+trigger Papo-Hopo                              # 402
+finish
+trigger Pichichi                               # 410
+finish
+trigger Pyo_Nzon                               # 408
+finish
+trigger Yafa_Yaa                               # 406
+finish
+trigger Shanruru                               # 367
+finish
+trigger Kohlo-Lakolo                           # 400
+fill-inventory
+finish                                         # full: quest:complete false: nothing
+free-inventory
+trigger Kohlo-Lakolo                           # 400
+finish                                         # completed: fame 20, the scroll, SOB Super Hero; local var [2][41]mustZone 1
+trigger Gomada-Vulmada                         # Inspector's Gadget available: 405 (replaceDefault)
+finish
+trigger Papo-Hopo                              # 403
+finish
+trigger Pichichi                               # 411
+finish
+trigger Pyo_Nzon                               # 409
+finish
+trigger Shanruru                               # 412
+finish
+trigger Yafa_Yaa                               # 407
+finish
+charvar Quest[2][40]Prog 2                     # GM, completed: section 3 wants accepted
+trigger Gomada-Vulmada                         # 405
+finish
+charvar Quest[2][40]Prog 3                     # GM: section 4 wants accepted
+trigger Gomada-Vulmada                         # 405
+finish
+charvar Quest[2][40]Prog 1                     # GM: section 2 wants accepted
+trigger Gomada-Vulmada                         # 405
+finish
+charvar Quest[2][40]Prog 0                     # GM
+trigger Kohlo-Lakolo                           # Inspector's Gadget's offer: fame 50 (level 2): 413
+finish option=0                                # Inspector's Gadget begun
+trigger Gomada-Vulmada                         # section 6 not met; Inspector's Gadget's 417
+finish
+quest Windurst.InspectorsGadget completed      # GM
+quest Windurst.OnionRings accepted             # GM (Prog 0: none of its sections)
+trigger Gomada-Vulmada                         # Inspector's Gadget not available: section 6 not met; nor its section 3 (Onion Rings accepted): 363
+finish

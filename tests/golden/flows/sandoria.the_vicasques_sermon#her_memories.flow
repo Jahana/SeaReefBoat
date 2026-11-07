@@ -1,0 +1,38 @@
+# The Vicasque's Sermon (sandoria 9) at Abioleget against Her Memories: Homecoming Queen (crystalWar 64, Lua), whose
+# Faux Pas section (accepted, The Faux Pas not completed) answers Abioleget with progressEvent 869 at Prog2 0 and
+# event(871):oncePerZone() otherwise. The reply kinds: 589 (Progress) ties with 869 (Progress), so the lookup's action
+# cycle plays both over two talks (an Event 589 would lose to 869), and beats 871 (Event); WILL_PROVIDE_PITTANCE (Message)
+# loses to 871 once (then 871 is Default for the zone) and to 869; 600 (Progress) ties with 869 (an Event 600
+# would lose to it). After each finish that changes a state (869: Prog2 1 and The Faux Pas added; 589: begun) the GM
+# puts it back.
+lists NorthernSanDoria/Abioleget/onTrigger NorthernSanDoria/onEventFinish/589 NorthernSanDoria/onEventFinish/600
+char zone=NorthernSanDoria pos=130.3,0.0,118.5 job=WAR lvl=30 gil=1000
+quest Sandoria.WatersOfTheCheval completed
+quest CrystalWar.HerMemoriesHomecomingQueen accepted
+login
+trigger Abioleget                         # 589 and 869 both Progress: the cycle's first, 869 (Her Memories' container
+                                          # comes first)
+finish                                    # Prog2 1, The Faux Pas added
+charvar Quest[7][64]Prog2 0
+quest Sandoria.TheVicasquesSermon available
+trigger Abioleget                         # the cycle's second: 589
+finish                                    # begun
+charvar Quest[7][64]Prog2 0
+quest Sandoria.TheVicasquesSermon available
+charvar Quest[7][64]Prog2 1
+trigger Abioleget                         # 589 (Progress) over 871 (Event)
+finish                                    # begun
+trigger Abioleget                         # accepted, Prog 0: 871 (Event) over WILL_PROVIDE_PITTANCE (Message)
+finish                                    # 871 is Default in this zone from now on
+trigger Abioleget                         # WILL_PROVIDE_PITTANCE over 871 (Default)
+charvar Quest[7][64]Prog2 0
+trigger Abioleget                         # 869 (Progress) over WILL_PROVIDE_PITTANCE
+finish                                    # Prog2 1
+charvar Quest[7][64]Prog2 0
+charvar Quest[0][9]Prog 1
+trigger Abioleget                         # 600 and 869 both Progress; the cycle's last pick was 589 (talks with
+                                          # one winner leave it), which is not here: the first, 869
+finish                                    # Prog2 1
+charvar Quest[7][64]Prog2 0
+trigger Abioleget                         # 600 and 869 again: the cycle's next after 869, 600
+finish                                    # completed

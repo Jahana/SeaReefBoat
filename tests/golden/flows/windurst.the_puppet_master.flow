@@ -1,0 +1,76 @@
+# The Puppet Master (windurst 81): the House of the Hero (_6n2) and Koru-Moru (Windurst Walls), Juroro (Port Bastok), the
+# Cloister of Tremors battlefield. A SMN at level 40 (the AF1 level, the edge's met side) with the quest's mustZone set
+# by GM (239): not met (the door's script answers nothing for a fresh char: its default DOORS_SEALED_SHUT); Koru-Moru
+# while available with the mustZone (the completed section's 405 wants the completed status: his default 193). A warp
+# out and back: a trade to the door while available (the quest has no trade handler anywhere: nothing), then 402,
+# begun. Accepted: 403; Koru-Moru at Prog 0: nil (193). Juroro at Prog 0: 256 (a progress), finished with a full bag
+# (the pendulum does not fit: Prog stays 0), then with room (the Earth Pendulum, Prog 1); Prog 1 with the pendulum
+# held: 253 (0,0,0,0,0, pendulum, 1). The battlefield: the pendulum to EP_Entrance (32000; kept), index 1 area 1,
+# arena 1's Galgalim killed (the battlefield's mobIds list one mob per arena): won, battlefieldWin 577, 32001 opens; its finish: Prog 2. Juroro at Prog 2: 258
+# (Prog 3); at Prog 3: nil (his default 253, no arguments). Koru-Moru at Prog 3: 404, finished with a full bag
+# (Kukulcan's Staff does not fit: nothing), then with room (completed: fame 20, the staff, this quest's and Class
+# Reunion's mustZone 239). Completed, Class Reunion not, with the mustZone: 405; a warp out and back: Koru-Moru nil
+# (193), the door: its default (the offer wants the available status; the door's script wants level 50 for Class
+# Reunion). The mustZone set again by GM and Class Reunion completed by GM: not met; Koru-Moru's script: The Puppet Master
+# and Class Reunion completed: 411.
+# Defaults: _6n2 DOORS_SEALED_SHUT (its script: Class Reunion / Carbuncle Debacle offers, which need this quest
+# completed and level 50), Koru-Moru 193, Juroro 253 (no script). Also named: Juroro by Trial by Earth (Bastok, C#:
+# Bastok fame 0, never offered here), Koru-Moru by Star Struck (available, no epistle: nil) and Blast from the Past
+# (never available here: Star Struck not completed). Other arms: #koru, #juroro, #compete, #battlefield_*, #guard_*.
+lists WindurstWalls/_6n2/onTrigger WindurstWalls/_6n2/onTrade WindurstWalls/Koru-Moru/onTrigger PortBastok/Juroro/onTrigger CloisterOfTremors/EP_Entrance/onTrade CloisterOfTremors/onEventFinish/32001 PortBastok/onEventFinish/256 PortBastok/onEventFinish/258 WindurstWalls/onEventFinish/402 WindurstWalls/onEventFinish/404
+char zone=WindurstWalls pos=-24.5,-14.498,262.994 job=SMN lvl=40
+charvar Quest[2][81]mustZone 239
+item BoneChip
+login
+trigger _6n2                                   # the mustZone: not met; DOORS_SEALED_SHUT
+finish-if-event
+trigger Koru-Moru                              # available with the mustZone: no 405 (the completed status wanted): his default 193
+finish-if-event
+warp -188.2,-2.0,66.3 PortWindurst
+warp -24.5,-14.498,262.994 WindurstWalls       # the mustZone cleared
+trade _6n2 BoneChip x1                         # available, the check holds: no trade handler: nothing
+trigger _6n2                                   # SMN, level 40 >= 40, no mustZone: 402
+finish                                         # begun
+trigger _6n2                                   # accepted: 403
+finish
+trigger Koru-Moru                              # Prog 0: nil; his default 193
+finish-if-event
+warp 32.0,7.0,-41.0 PortBastok
+trigger Juroro                                 # Prog 0: 256 (0, the Tuning Fork of Earth, 0, the Earth Pendulum)
+fill-inventory
+finish                                         # giveItem false: Prog stays 0
+free-inventory
+trigger Juroro                                 # 256 again
+finish                                         # the Earth Pendulum; Prog 1
+trigger Juroro                                 # Prog 1, the pendulum held: 253 (0,0,0,0,0, the pendulum, 1)
+finish
+warp -538.4,0.455,-493.9 CloisterOfTremors
+trade EP_Entrance EarthPendulum x1             # Prog 1 and the pendulum: the battlefield's 32000 menu
+update 32000 option=17                         # The Puppet Master (index 1), arena 1: registered, entered; the pendulum kept
+finish                                         # in the arena
+kill GALGALIM                                  # arena 1's mob (the battlefield's mobIds are per arena): won, battlefieldWin 577; 32001 opens
+finish                                         # 32001: battlefieldWin 577 and Prog 1: Prog 2
+warp 32.0,7.0,-41.0 PortBastok
+trigger Juroro                                 # Prog 2: 258
+finish                                         # Prog 3
+trigger Juroro                                 # Prog 3: the quest's nil; his default 253 (no arguments)
+finish-if-event
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                              # Prog 3: 404
+fill-inventory
+finish                                         # full: quest:complete false (the staff does not fit): nothing
+free-inventory
+trigger Koru-Moru                              # 404 again
+finish                                         # completed: fame 20, Kukulcan's Staff; Quest[2][81]mustZone and Quest[2][82]mustZone 239
+trigger Koru-Moru                              # completed, Class Reunion not, the mustZone: 405
+finish
+warp -188.2,-2.0,66.3 PortWindurst
+warp -24.5,-14.498,262.994 WindurstWalls       # both mustZones cleared
+trigger _6n2                                   # completed: no 402 (the available status wanted), no 403; the door's script: level 40 < AF2: nothing; DOORS_SEALED_SHUT
+finish-if-event
+trigger Koru-Moru                              # no mustZone: nil; his script (Class Reunion available): nothing; 193
+finish-if-event
+charvar Quest[2][81]mustZone 239               # GM
+quest Windurst.ClassReunion completed          # GM
+trigger Koru-Moru                              # Class Reunion completed: not met; his script: 411
+finish

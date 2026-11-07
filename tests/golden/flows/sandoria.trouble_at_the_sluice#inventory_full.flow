@@ -1,0 +1,13 @@
+# Trouble at the Sluice (sandoria 68) with the Neutralizer and a full inventory: 56 does not complete it (the Heavy Axe
+# cannot be given), the Neutralizer is kept; with room, 56 again completes it.
+char zone=NorthernSanDoria pos=-96.2,-0.2,69.3 job=WAR lvl=10
+quest Sandoria.TheRumor completed
+quest Sandoria.TroubleAtTheSluice accepted
+keyitem Neutralizer
+login
+fill-inventory
+trigger Belgidiveau                       # the Neutralizer: 56
+finish                                    # no room: not completed, the Neutralizer kept
+free-inventory
+trigger Belgidiveau                       # 56
+finish                                    # completed: Heavy Axe, fame +30; the Neutralizer deleted

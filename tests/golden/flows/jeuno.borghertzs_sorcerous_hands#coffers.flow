@@ -1,0 +1,19 @@
+# BORGHERTZS_SORCEROUS_HANDS (jeuno 47): the two optional coffers' sections (status not available, main job BLM, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 BLM: MonasticCavern's Treasure Coffer opens to WizardsCoat
+# (the item bypass; the result is the item): [AF]ZilartCoffer +128 (bit 7); TheEldiemeNecropolis's to WizardsTonban:
+# +256 (bit 8).
+lists MonasticCavern/Treasure_Coffer/onTrade TheEldiemeNecropolis/Treasure_Coffer/onTrade
+char zone=MonasticCavern pos=107.5,-3,-144 job=BLM lvl=75
+quest Jeuno.BorghertzsSorcerousHands accepted
+item DavoiCofferKey
+item EldiemeCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer DavoiCofferKey x1 # bit 7 unset: WizardsCoat; [AF]ZilartCoffer 128
+tick 4500                               # the coffer opened
+warp 301.5,-0.25,19.99 TheEldiemeNecropolis
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer EldiemeCofferKey x1 # bit 8 unset: WizardsTonban; [AF]ZilartCoffer 384
+tick 4500                               # the coffer opened

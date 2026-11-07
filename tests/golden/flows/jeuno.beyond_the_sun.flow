@@ -1,0 +1,21 @@
+# Beyond the Sun (jeuno 76): Maat in Ru'Lude Gardens (the first of that name; default MAAT_DIALOG). Shattering Stars
+# completed and maatsCap holding the fifteen original jobs (32767; both by GM), a level 66 Warrior. Available: a stone
+# (no trade handler: nothing); 74 answered with a full bag (Maat's Cap cannot be given: not completed; the finish
+# ignores it); 74 again (completed: Maat's Cap, Ultimate Champion of the World). Completed (maatsCap still full): 78 (1)
+# (the completed section reads no maatsCap); a stone: nothing.
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/74
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=66
+quest Jeuno.ShatteringStars completed
+charvar maatsCap 32767
+item FlintStone
+login
+trade Maat FlintStone x1                # available: no trade handler, nothing
+trigger Maat                            # all fifteen jobs: 74
+fill-inventory
+finish                                  # no room for Maat's Cap: not completed
+free-inventory
+trigger Maat                            # still available: 74
+finish                                  # completed: Maat's Cap, Ultimate Champion of the World
+trigger Maat                            # completed, an original job at 66: 78 (1)
+finish
+trade Maat FlintStone x1                # completed: nothing

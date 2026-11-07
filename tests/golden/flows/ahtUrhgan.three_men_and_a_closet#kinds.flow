@@ -1,0 +1,66 @@
+# Three Men and a Closet's replies at Kubhe Ijyuhla 836 / 837 / 838 / 839 / 842 / 845 / 846, Ratihb 840 / 841 and Tehf
+# Kimasnahya 843 / 844, every state triggered twice with the quest reset between the two when its finish moves it.
+# These NPCs have no script of theirs: a lone reply repeats, so a Progress cannot be told from an Event; Ratihb's and
+# Tehf's kinds are proven against rivals in three_men_and_a_closet#kinds2 and got_it_all#kinds2, Kubhe's by the pin check.
+lists AhtUrhganWhitegate/Kubhe_Ijyuhla/onTrigger AhtUrhganWhitegate/Ratihb/onTrigger AhtUrhganWhitegate/Tehf_Kimasnahya/onTrigger
+char zone=AhtUrhganWhitegate pos=23.257,0,21.532 job=WAR lvl=75
+login
+quest AhtUrhgan.GotItAll completed      # GMs
+trigger Kubhe_Ijyuhla                   # available: 836 (Progress)
+finish                                  # begun
+quest AhtUrhgan.ThreeMenAndACloset available
+trigger Kubhe_Ijyuhla                   # 836 again
+finish
+quest AhtUrhgan.ThreeMenAndACloset accepted
+charvar Quest[6][31]Prog 0
+trigger Kubhe_Ijyuhla                   # Prog 0: 837 (Event)
+finish
+trigger Kubhe_Ijyuhla                   # the same Event again (he has no script; his default is 662)
+finish
+charvar Quest[6][31]Prog 1
+trigger Kubhe_Ijyuhla                   # Prog 1: 838 (Progress)
+finish                                  # Prog 2
+charvar Quest[6][31]Prog 1
+trigger Kubhe_Ijyuhla                   # 838 again
+finish
+trigger Kubhe_Ijyuhla                   # Prog 2: 839 (Event)
+finish
+trigger Kubhe_Ijyuhla                   # the same Event again (he has no script; his default is 662)
+finish
+trigger Ratihb                          # Prog 2: Luck of the Draw's available 547 (Progress) takes the talk
+finish                                  # begins it
+charvar Quest[6][31]Prog 2
+trigger Ratihb                          # The Die Is Cast's 591 (Progress) takes it
+finish
+trigger Ratihb                          # Prog 2: 840 (Progress)
+finish                                  # Prog 3
+trigger Ratihb                          # Prog 3: 841 (Event)
+finish
+trigger Kubhe_Ijyuhla                   # Prog 3: 842 (Event)
+finish
+trigger Kubhe_Ijyuhla                   # the same Event again (he has no script; his default is 662)
+finish
+trigger Tehf_Kimasnahya                 # Prog 3: 843 (Progress)
+finish option=0                         # not option 1: nothing
+trigger Tehf_Kimasnahya                 # 843 again
+finish option=0
+charvar Quest[6][31]Prog 4
+trigger Tehf_Kimasnahya                 # Prog 4: 844 (Event)
+finish
+trigger Tehf_Kimasnahya                 # the same Event again (no script)
+finish
+trigger Kubhe_Ijyuhla                   # Prog 4: 845 (Progress)
+finish                                  # completed
+quest AhtUrhgan.ThreeMenAndACloset available
+quest AhtUrhgan.ThreeMenAndACloset accepted
+charvar Quest[6][31]Prog 4
+trigger Kubhe_Ijyuhla                   # 845 again
+finish                                  # completed
+trigger Kubhe_Ijyuhla                   # completed: 846 (Event)
+finish
+trigger Kubhe_Ijyuhla                   # the same Event again (he has no script; his default is 662)
+finish
+trigger Tehf_Kimasnahya                 # completed: 844 (Event)
+finish
+trigger Tehf_Kimasnahya                 # the same Event again (no script)
+finish

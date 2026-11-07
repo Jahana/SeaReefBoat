@@ -1,0 +1,20 @@
+# Atop the Highest Mountains (jeuno 129), accepted (a GM), OLDSCHOOL_G2 true, a level 75 Warrior in Xarcabard beside the
+# qm_boreal_tiger (the Boreal Tiger's ???): only that NM is killed here, the other two stay up, so the ???'s isDead
+# operand is its own NM's (each ??? has its own flow). The NMs spawn with the setting on, and each onMobSpawn's
+# showNPC(0) sets the ??? to normal and queues its hiding with a 0 ms delay: the queued action runs at the zone's next
+# tick (as the C++ QueueAction does). So the trigger right after the login, before any tick, finds the ??? still shown
+# and its script runs with the Tiger alive (isDead false): nil, its default ONLY_SHARDS. After a tick the ??? is hidden:
+# a trigger reaches no script (a release only). The Tiger killed (its mob script with G2: the ??? shown for
+# FRIGICITE_TIME, BLOCKS_OF_ICE while the quest is accepted and the frigicite not held): the Round Frigicite; then nil once held.
+# The char stands by the ???, so the kill's claim by a swing lands (no unclaimed death: see the Boreal NMs' onMobDeath).
+lists Xarcabard/qm_boreal_tiger/onTrigger
+char zone=Xarcabard pos=340.3,-28.2,381.3 job=WAR lvl=75
+quest Jeuno.AtopTheHighestMountains accepted
+setting OLDSCHOOL_G2 true
+login
+trigger qm_boreal_tiger   # Boreal Tiger alive (isDead false), the ??? not hidden yet: nil; ONLY_SHARDS
+tick 400     # the zone's first tick: the ??? hidden (the onMobSpawn's showNPC(0))
+trigger qm_boreal_tiger   # hidden while the Tiger is up: no script (a release)
+kill BOREAL_TIGER      # BLOCKS_OF_ICE; the ??? shown; the other two NMs still up
+trigger qm_boreal_tiger   # the Tiger dead: the Round Frigicite
+trigger qm_boreal_tiger   # held: nil; ONLY_SHARDS

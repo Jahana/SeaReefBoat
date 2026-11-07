@@ -1,0 +1,35 @@
+# Trial by Ice (sandoria 59), 709's free-slot test (getFreeSlotsCount() == 0) on both sides: accepted by GM at fame
+# level 1 (the fame is read only while available), the whisper held, a full inventory: option 1 is refused
+# (ITEM_CANNOT_BE_OBTAINED Shiva's Claws, not completed, the whisper kept), option 0 likewise (ITEM_CANNOT_BE_OBTAINED
+# 0). Options 5 (10000 gil) and 6 (the spell) need no slot: user ruling 2026-11-04 (kept Lua bugs), the test is `option
+# ~= 5 and option ~= 6`, so with a full inventory each completes (the Lua's `or` always held and refused them too,
+# ITEM_CANNOT_BE_OBTAINED 0). Between them and before the last arm a GM's delQuest and addQuest and the whisper again.
+# Then Coullene takes a flyer (Flyers for Regine accepted by GM; the flyer was alone in its slot), so exactly 1 slot is
+# free: option 1 completes, Quest[0][59]Prog 1 (GM) kept (the raw player:completeQuest).
+char zone=NorthernSanDoria pos=-185.5,0.0,110.1 job=WAR lvl=75
+quest Sandoria.TrialByIce accepted
+quest Sandoria.FlyersForRegine accepted
+keyitem WhisperOfFrost
+item MagicmartFlyer
+login
+fill-inventory
+trigger Gulmama                           # accepted, the whisper: 709
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (Shiva's Claws)
+trigger Gulmama                           # 709
+finish option=0                           # no free slot: ITEM_CANNOT_BE_OBTAINED 0
+trigger Gulmama                           # 709
+finish option=5                           # 10000 gil (no slot needed); the title, the whisper taken; completed
+quest Sandoria.TrialByIce available       # a GM: delQuest
+quest Sandoria.TrialByIce accepted        # a GM: addQuest
+keyitem WhisperOfFrost                    # a GM
+trigger Gulmama                           # 709
+finish option=6                           # the spell (no slot needed); completed
+quest Sandoria.TrialByIce available       # a GM: delQuest
+quest Sandoria.TrialByIce accepted        # a GM: addQuest
+keyitem WhisperOfFrost                    # a GM
+warp 144.4,0.0,127.6 NorthernSanDoria
+trade Coullene MagicmartFlyer x1          # Flyers for Regine: the flyer taken; 1 slot free
+warp -185.5,0.0,110.1 NorthernSanDoria
+charvar Quest[0][59]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Gulmama                           # 709
+finish option=1                           # exactly 1 free slot: Shiva's Claws; completed; Quest[0][59]Prog kept

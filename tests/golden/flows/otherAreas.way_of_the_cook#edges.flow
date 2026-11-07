@@ -1,0 +1,35 @@
+# Way of the Cook (otherAreas 1): the available check and Rycharde's two conditions, each bracketed. Rycharde the Chef
+# not completed: no section (his default 69; Take's default 59). Completed (a GM), Quest[4][0]DayCompleted 7993 (7993 + 8
+# > 8000): 75; 7992 (= 8000): with Windurst fame 124 (level 2): 75; fame 125 (level 3): 76; the wait by the clock: 8000
+# (the day Rycharde the Chef would store) is 75 until the Vana'diel day reaches 8008: `wait vana=179` (day 8007, 23:00)
+# 75, one more hour (day 8008) 76. 76 finished with the quest made accepted by a GM while it is open: no 76 handler in
+# the accepted section (DayCompleted kept, no EndTime).
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Mhaura/onEventFinish/76
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+fame Windurst 125
+login
+trigger Rycharde                        # Rycharde the Chef available: its section (Prog 0: nil); his default 69
+finish
+trigger Take                            # its section (Prog 0: nil); his default 59
+finish
+quest OtherAreas.RychardeTheChef completed # a GM
+charvar Quest[4][0]DayCompleted 7993    # a GM: 7993 + 8 > 8000
+trigger Rycharde                        # 75
+finish
+charvar Quest[4][0]DayCompleted 7992    # 7992 + 8 = 8000
+fame Windurst 124                       # level 2
+trigger Rycharde                        # fame level 2: 75
+finish
+fame Windurst 125                       # level 3
+trigger Rycharde                        # 76 (912, 4359)
+finish option=0
+charvar Quest[4][0]DayCompleted 8000    # completed today
+trigger Rycharde                        # 8008 > 8000: 75
+finish
+wait vana=179                           # day 8007 (23:00)
+trigger Rycharde                        # 8008 > 8007: 75
+finish
+wait vana=1                             # day 8008 (00:00)
+trigger Rycharde                        # 8008 <= 8008: 76
+quest OtherAreas.WayOfTheCook accepted  # a GM, while 76 is open
+finish option=74                        # no 76 handler while accepted: nothing (DayCompleted stays 8000)

@@ -1,0 +1,15 @@
+# The First Meeting (bastok 52): the NMs' deaths with the San d'Orian Martial Arts Scroll held set no nmKilled bit. The
+# scroll is GM-given while both are still up. nmKilled is a local var, not in the trace, and with the scroll held the
+# next 108 says YOU_FIND_NOTHING either way: this flow takes the arm, the trace cannot tell its effect.
+char zone=Davoi pos=-126,4,20 job=MNK lvl=75
+quest Bastok.GhostsOfThePast completed
+quest Bastok.TheFirstMeeting accepted
+keyitem LetterFromDalzakk
+login
+trigger Hide_Flap_2 at=0.5      # 108
+finish                          # the letter, neither spawned: YOU_FIND_NOTHING, both NMs spawned
+keyitem SanDorianMartialArtsScroll
+kill BILOPDOP                   # the scroll held: no bit
+kill DELOKNOK                   # the scroll held: no bit
+trigger Hide_Flap_2 at=0.5      # 108
+finish                          # the scroll held: YOU_FIND_NOTHING

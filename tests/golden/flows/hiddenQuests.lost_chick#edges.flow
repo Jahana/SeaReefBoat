@@ -1,0 +1,32 @@
+# Lost Chick (hidden quest LostChick), the edges of the chick var: a level 30 Warrior in Southern San d'Oria, the chick
+# at owner 1 (Coderiant), 3 clues, San d'Oria (113). Coderiant asked and guessed right (updateEvent 1, the var solved);
+# the chick again at Coderiant and a guess with no ask before it: nothing (the ask was spent by the first guess). A
+# solved chick (bit 18) at the wrong owner (Cahaurme): the wrong answer keeps the solved bit. A chick at Bastok (location
+# 2, owner 1: 177) is not San d'Oria's: Cahaurme plays only his own script. With the setting 0 (the Lua's truthiness:
+# on) Violitte's 851 and Hantileon's report 852 play.
+lists SouthernSanDoria/Violitte/onTrigger SouthernSanDoria/Hantileon/onTrigger SouthernSanDoria/onEventFinish/852 SouthernSanDoria/Cahaurme/onTrigger SouthernSanDoria/onEventUpdate/583 SouthernSanDoria/onEventUpdate/847
+char zone=SouthernSanDoria pos=-1,0,-105 job=WAR lvl=30
+login
+charvar [ChocoboRaising]LostChick 113
+trigger Coderiant                       # 583
+update 583 option=1                     # the ask
+update 583 option=2                     # right
+finish
+charvar [ChocoboRaising]LostChick 113
+trigger Coderiant                       # 583
+update 583 option=2                     # the guess with no ask: nothing
+finish
+charvar [ChocoboRaising]LostChick 262257   # 113 + (1 << 18): solved
+trigger Cahaurme                        # 847
+update 847 option=1                     # wrong owner: WRONG_OWNER, solved kept
+finish
+charvar [ChocoboRaising]LostChick 177   # a Bastok chick
+trigger Cahaurme                        # not San d'Oria's: his script
+finish-if-event
+setting ENABLE_CHOCOBO_RAISING 0        # Lua's truthiness: a 0 is on
+charvar [ChocoboRaising]LostChick 113
+trigger Violitte                        # 851 plays (an owner of the location)
+finish
+charvar [ChocoboRaising]LostChick 65649 # 113 + (1 << 16): a result to report
+trigger Hantileon                       # 852 plays (the trainer's report)
+finish

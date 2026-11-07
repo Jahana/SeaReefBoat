@@ -1,0 +1,28 @@
+# Shadows of the Departed (jeuno 88): the Timer edge (VanadielUniqueDay() >= Timer; the harness's Vana'diel clock starts
+# at hour 12 of day 8000). A level 75 Warrior, Storms of Fate completed, Zilart Awakening current, brought to status 3
+# (Norg, then _6tc). Timer 8001 (a GM): area 1: no section; Timer 8000: 161 (its finish begins on any option). Then a GM
+# sets the quest available and the Timer 8001 again; `wait vana=12` (day 8001): area 1: 161. The main flow's Timer 0
+# is the side under the day.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/161
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+quest Jeuno.StormsOfFate completed
+mission Zilart Awakening current
+charvar Quest[3][88]Timer 8001
+login
+warp 120.9,-8,-12 Norg                  # 176: status 1
+warp 39.6,-1.6,-16.6 LowerJeuno         # by _6tc
+trigger _6tc                            # 20
+finish                                  # status 3
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # Timer 8001 > day 8000: no section; nothing
+walk 4,2.5,100
+charvar Quest[3][88]Timer 8000          # a GM: today
+walk 4,2.5,60                           # Timer 8000 = day 8000: 161
+finish option=7                         # begun (any option)
+walk 4,2.5,100
+quest Jeuno.ShadowsOfTheDeparted available  # a GM
+charvar Quest[3][88]Timer 8001          # a GM
+wait vana=12                            # day 8001
+walk 4,2.5,60                           # Timer 8001 = day 8001: 161
+finish                                  # begun

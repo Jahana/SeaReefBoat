@@ -1,0 +1,24 @@
+# Trust: Maat, his own script (npcs/Maat.lua: event 117 at BeatAroundTheBushin 5, its finish sets 6) against the plain
+# events: the Bastok Trust Permit, BeatAroundTheBushin 5, maatsCap 0 (10242), three talks: the quest's event, the
+# script's turn, the quest's event again (the events are plain, so the script takes the second talk). Then maatsCap
+# 0x801F (bit 15 is job 16's cap and five low bits: six of the 16 low bits) with BeatAroundTheBushin 5 again: 10241,
+# three talks the same way.
+lists RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/10241
+char zone=RuludeGardens pos=10.9,3.1,117.9 job=WAR lvl=99
+keyitem BastokTrustPermit
+charvar BeatAroundTheBushin 5
+login
+trigger Maat                            # maatsCap 0: 10242
+finish-if-event
+trigger Maat                            # the second talk
+finish-if-event
+trigger Maat                            # the third talk
+finish-if-event
+charvar BeatAroundTheBushin 5           # a GM
+charvar maatsCap 32799                  # a GM: 0x801F
+trigger Maat                            # six of the 16 low bits: 10241
+finish option=0
+trigger Maat                            # the second talk
+finish-if-event
+trigger Maat                            # the third talk
+finish option=0

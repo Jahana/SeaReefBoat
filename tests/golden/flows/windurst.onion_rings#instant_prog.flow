@@ -1,0 +1,16 @@
+# Onion Rings (windurst 42): the 430 condition's Prog operand false alone (its 2 side). 429 (Prog 1, EndTime now +
+# 3456, in time); the ring and Prog 2 by GM: in time but not Prog 1: 432 (0, the ring), completed at once (the ring
+# taken).
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/onEventFinish/432
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5
+fame Windurst 125
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+login
+trigger Kohlo-Lakolo                           # no ring: 429
+finish                                         # Prog 1, EndTime 790192656
+keyitem OldRing                                # GM
+charvar Quest[2][42]Prog 2                     # GM
+trigger Kohlo-Lakolo                           # in time, Prog 2: 432 (0, the ring)
+finish                                         # completed; the ring taken; local var [2][76]mustZone 1

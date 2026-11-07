@@ -1,0 +1,21 @@
+# From Saplings Grow (windurst 85): the offer without the bow, and the level edge's met side. A level-71 RNG (the Bow of
+# Trials' level) at Archery 2500: 661 (oncePerZone); its finish with a full bag (no bow: giveItem false, not begun); a
+# second talk in the zone falls to his default 338 (oncePerZone: priority Ignore); after a rezone 661 again, begun (the
+# bow, 0 weapon skill points, and the Weapon Training Guide).
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/onEventFinish/661
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=RNG lvl=71
+quest Windurst.TheFangedOne completed
+quest Windurst.SinHunting completed
+quest Windurst.FireAndBrimstone completed
+quest Windurst.UnbridledPassion completed
+skill Archery 2500
+login
+trigger Perih_Vashai                                   # level 71, Archery 2500, no guide: event 661 (oncePerZone)
+fill-inventory
+finish                                              # no bow, the bag full: giveItem false, not begun
+free-inventory
+trigger Perih_Vashai                                   # 661 played this zone: his default 338
+finish
+rezone
+trigger Perih_Vashai                                   # after the rezone: 661 again
+finish                                              # the Bow of Trials and the Weapon Training Guide: begun

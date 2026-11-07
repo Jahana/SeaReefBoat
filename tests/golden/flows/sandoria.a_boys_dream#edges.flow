@@ -1,0 +1,124 @@
+# A Boy's Dream (sandoria 91): the other operands. Ailbeche's CS arms and trades read no status: a WAR 75 with the
+# quest available (GM vars): CS 0: nothing, the bug too; 2: 46; 3: 39; the bug at 3: 15 (CS 4); 4: 60; 5: 47; 6: 25
+# (CS 7). The qm9 while available: NOTHING_WILL_HAPPEN_YET. Accepted (GM): the qm9 pops Dreadbug; DreadbugNM_Day 0
+# (GM) with Dreadbug up: npcUtil.popFromQM fails: NOTHING_SEEMS_TO_HAPPEN. Dreadbug killed: inside the timer
+# (1800000180): NOTHING_SEEMS_TO_HAPPEN; the timer at 1799999970 (GetSystemTime() is 1800000000, not past it + 30):
+# NOTHING_SEEMS_TO_HAPPEN; at 1799999969: Dreadbug pops again. Killed; a Vana'diel day later (the harness clock does
+# not move, so the timer 1800000180 holds): NOTHING_SEEMS_TO_HAPPEN; the timer 0: popped. The door's 88 for a WAR at CS
+# 8 with the boots and a GM var Quest[0][91]Prog 1, exactly one free slot: no Under Oath; the boots taken, the
+# leggings, CS 0, fame 20, completed (player:completeQuest: the GM var kept). 88 reads no status: CS 8 again while
+# completed: 88 again: the leggings held (rare, addItem fails), ITEM_OBTAINED anyway, CS 0, fame 20. The finishes
+# read the CS at the finish: a GM CS set while 15 (5, 2), 47 (3, 6) and 25 (5, 8) are open: no change.
+# Father and Son completed and Sharpening the Sword accepted by GM: Sharpening's 42 takes Ailbeche's first talk after
+# each zone-in and every other talk ("42"), his script the others (42 again when it plays nothing). Sharpening
+# completed is only in sandoria.a_boys_dream#offer and sandoria.sharpening_the_sword#completed: while A Boy's Dream is
+# available, its check 4 answers Ailbeche's talks with AILBECHE_WHEN_FISHING (over his default 868).
+char zone=NorthernSanDoria pos=6.5,0.5,26.9 job=WAR lvl=75
+quest Sandoria.FatherAndSon completed
+quest Sandoria.SharpeningTheSword accepted
+item GiantShellBug
+login
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # WAR, available, CS 0: no arm; 42
+finish-if-event
+trade Ailbeche GiantShellBug x1         # available, CS 0, the bug: nothing
+charvar aBoysDreamCS 2
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # available, CS 2: 46
+finish
+charvar aBoysDreamCS 3
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # available, CS 3: 39
+finish
+trade Ailbeche GiantShellBug x1         # available, CS 3, the bug: 15
+charvar aBoysDreamCS 5                  # GM, 15 open
+finish                                  # 15's finish at CS 5: no change
+charvar aBoysDreamCS 3                  # GM
+trade Ailbeche GiantShellBug x1         # CS 3, the bug: 15
+charvar aBoysDreamCS 2                  # GM, 15 open
+finish                                  # 15's finish at CS 2: no change
+charvar aBoysDreamCS 3                  # GM
+trade Ailbeche GiantShellBug x1         # CS 3, the bug: 15
+finish                                  # aBoysDreamCS 4
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # available, CS 4: 60
+finish
+charvar aBoysDreamCS 5
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # available, CS 5: 47
+charvar aBoysDreamCS 3                  # GM, 47 open
+finish                                  # 47's finish at CS 3: no change
+charvar aBoysDreamCS 5                  # GM
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # available, CS 5: 47
+charvar aBoysDreamCS 6                  # GM, 47 open
+finish                                  # 47's finish at CS 6: no change
+charvar aBoysDreamCS 6                  # GM
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # available, CS 6: 25
+charvar aBoysDreamCS 5                  # GM, 25 open
+finish                                  # 25's finish at CS 5: no change
+charvar aBoysDreamCS 6                  # GM
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # available, CS 6: 25
+charvar aBoysDreamCS 8                  # GM, 25 open
+finish                                  # 25's finish at CS 8: no change
+charvar aBoysDreamCS 6                  # GM
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # available, CS 6: 25
+finish                                  # aBoysDreamCS 7
+charvar aBoysDreamCS 0
+warp -25.0,-11.1,122.2 CrawlersNest
+trigger qm9                             # available: NOTHING_WILL_HAPPEN_YET
+quest Sandoria.ABoysDream accepted
+trigger qm9                             # accepted: Dreadbug spawns claimed; SENSE_OF_FOREBODING
+charvar DreadbugNM_Day 0
+charvar DreadbugNM_Timer 0
+trigger qm9                             # Dreadbug up: popFromQM fails: NOTHING_SEEMS_TO_HAPPEN
+kill DREADBUG
+tick 15000                              # his body gone
+tick 15000
+tick 15000
+tick 15000
+charvar DreadbugNM_Day 0
+charvar DreadbugNM_Timer 1800000180
+trigger qm9                             # not today, inside the timer: NOTHING_SEEMS_TO_HAPPEN
+charvar DreadbugNM_Timer 1799999970
+trigger qm9                             # GetSystemTime() not past the timer + 30: NOTHING_SEEMS_TO_HAPPEN
+charvar DreadbugNM_Timer 1799999969
+trigger qm9                             # past it: Dreadbug spawns claimed; SENSE_OF_FOREBODING
+kill DREADBUG
+tick 15000                              # his body gone
+tick 15000
+tick 15000
+tick 15000
+wait vana=24                            # the next Vana'diel day; the timer (1800000180) holds
+trigger qm9                             # not today, inside the timer: NOTHING_SEEMS_TO_HAPPEN
+charvar DreadbugNM_Timer 0
+trigger qm9                             # Dreadbug spawns claimed again; SENSE_OF_FOREBODING
+kill DREADBUG
+charvar aBoysDreamCS 8
+charvar Quest[0][91]Prog 1              # GM: a quest var no script sets
+keyitem KnightsBoots
+warp -38.0,-4.9,73.5 ChateauDoraguille
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # CS 8: 88
+fill-inventory
+storage inventory 31                    # exactly one free slot
+finish                                  # WAR: no Under Oath; the boots taken; the leggings; CS 0; fame 20; completed
+free-inventory
+charvar aBoysDreamCS 8
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # completed, CS 8: 88
+finish                                  # again: the leggings held (rare): not given; ITEM_OBTAINED; CS 0; fame 20
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # completed, CS 0: nothing (ITS_LOCKED)

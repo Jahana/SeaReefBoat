@@ -1,0 +1,26 @@
+# Soothing Waters's rivals at Nadeey (no script; default 251): the missions there. A level 75 Warrior, ToAU Easterly
+# Winds current (its Nadeey 3025, an Event) and Soothing accepted at Prog 1 (GMs). Prog 1: 896 beats 3025 (twice, Prog 1
+# set again by a GM after each finish). Prog 0 and Prog 2 (GMs): no Soothing handler: 3025. RoV Reunited current too (a
+# GM: its Nadeey 167, a Progress): Prog 1: 896 and 167 tie: the first of the list plays (once: a mission set current
+# over a current one is an engine error, so the mission's finish cannot be undone).
+lists AhtUrhganWhitegate/Nadeey/onTrigger
+char zone=AhtUrhganWhitegate pos=81.527,-0.325,55.072 job=WAR lvl=75
+mission Toau EasterlyWinds current
+quest AhtUrhgan.SoothingWaters accepted
+charvar Quest[6][47]Prog 1
+login
+trigger Nadeey                          # Prog 1: 896 (beats Easterly Winds' 3025)
+finish                                  # Prog 2
+charvar Quest[6][47]Prog 1              # a GM
+trigger Nadeey                          # 896 again
+finish
+charvar Quest[6][47]Prog 0              # a GM
+trigger Nadeey                          # Prog 0: no Soothing handler: 3025
+finish
+charvar Quest[6][47]Prog 2              # a GM
+trigger Nadeey                          # Prog 2: 3025
+finish
+charvar Quest[6][47]Prog 1              # GMs
+mission Rov Reunited current
+trigger Nadeey                          # Prog 1: 896 or Reunited's 167 (Progresses: the first in the list)
+finish

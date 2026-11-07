@@ -1,0 +1,70 @@
+# Enveloped in Darkness (sandoria 85, RDM AF2): Curilla in Chateau d'Oraguille, Sharzalion in Southern San d'Oria,
+# Pagisalis in Northern San d'Oria, qm8 and the Treasure Chest in the Crawlers' Nest. An RDM 50 with The Crimson Trial
+# completed: a trade while available (nothing); Curilla's 94 declined (Prog 1), 95 declined, 95 taken (begun, the Old
+# Pocket Watch). Prog 1: Curilla's 92 (an Event: her script's 530 on the next talk), Sharzalion's 68, qm8 (nil: its
+# default), Pagisalis's 48 (then his script's 564), a bone chip (nil), the velvet (37: Prog 2, the velvet taken, the
+# watch deleted, the Old Boots), his 58. Sharzalion's 69, Curilla's 101 (Prog 3), her 107. qm8 with the boots but no
+# blood (SOMEONE_HAS_BEEN_DIGGING_HERE); the Treasure Chest's own script gives the Crawler Blood (it reads Prog and
+# Time); qm8's 4 declined, 4 taken (Time = now + 30, both key items deleted, YOU_BURY_THE); EQUIPMENT_NOT_PURIFIED; a
+# JST day later (the wall clock moves only with `wait jst`) 5 (completed: Warlock's Boots, fame +20); qm8 then (no
+# section: its default).
+# Curilla's, Sharzalion's and Pagisalis's scripts always start an event (530, 15, 564 here); the quest's Event-priority
+# replies alternate with them per NPC (interaction_lookup's UseFallback, a local var cleared by zoning); Progress replies
+# always win. qm8 has no script; its default is SOMEONE_HAS_BEEN_DIGGING_HERE. No Sandy mission is current (the five
+# that name Curilla stay silent). Curilla's script has no onTrade.
+lists ChateauDoraguille/Curilla/onTrigger ChateauDoraguille/Curilla/onTrade ChateauDoraguille/onEventFinish/94 ChateauDoraguille/onEventFinish/95 ChateauDoraguille/onEventFinish/101 SouthernSanDoria/Sharzalion/onTrigger CrawlersNest/qm8/onTrigger CrawlersNest/onEventFinish/4 CrawlersNest/onEventFinish/5 NorthernSanDoria/Pagisalis/onTrigger NorthernSanDoria/Pagisalis/onTrade NorthernSanDoria/onEventFinish/37
+char zone=ChateauDoraguille pos=29.2,0,1.1 job=RDM lvl=50
+quest Sandoria.TheCrimsonTrial completed
+item BoneChip
+item SquareOfVelvetCloth
+item NestChestKey
+login
+trigger Curilla                           # Prog 0: 94
+finish                                    # option 0: Prog 1 (declined)
+trade Curilla BoneChip x1                 # available: no trade handler (her script has none): nothing
+trigger Curilla                           # Prog 1: 95
+finish                                    # option 0: nothing
+trigger Curilla                           # 95
+finish option=1                           # begun, the Old Pocket Watch
+trigger Curilla                           # accepted, Prog 1: 92 (Event)
+finish
+trigger Curilla                           # the script's turn: 530
+finish
+warp 96.4,0,111.6 SouthernSanDoria
+trigger Sharzalion                        # Prog 1: 68
+finish
+warp 58.9,0.4,69 CrawlersNest
+trigger qm8                               # Prog 1: nil; SOMEONE_HAS_BEEN_DIGGING_HERE (its default)
+warp 138.6,6.5,133.7 NorthernSanDoria
+trigger Pagisalis                         # Prog 1: 48 (Event)
+finish
+trigger Pagisalis                         # the script's turn: 564 (fame level 1, Undying Flames not offered)
+finish
+trade Pagisalis BoneChip x1               # not exactly the velvet: nil; his script: no Undying Flames, nothing
+trade Pagisalis SquareOfVelvetCloth x1    # 37
+finish                                    # Prog 2, the velvet taken, the watch deleted, the Old Boots
+trigger Pagisalis                         # Prog 2: 58
+finish
+warp 96.4,0,111.6 SouthernSanDoria
+trigger Sharzalion                        # Prog 2: 69
+finish
+warp 29.2,0,1.1 ChateauDoraguille
+trigger Curilla                           # Prog 2: 101
+finish                                    # Prog 3
+trigger Curilla                           # Prog 3: 107 (Event)
+finish
+warp 58.9,0.4,69 CrawlersNest
+trigger qm8                               # Prog 3, no Time, the boots but no blood: SOMEONE_HAS_BEEN_DIGGING_HERE
+tick 13000                                # the chest placed
+trigger Treasure_Chest                    # walks to the chest (its own script)
+trade Treasure_Chest NestChestKey x1      # the chest's script: Prog >= 2, Time 0, no blood: the chest opens for the Crawler Blood
+tick 4500                                 # the Crawler Blood
+trigger qm8                               # the blood and the boots: 4
+finish                                    # option 0: nothing
+trigger qm8                               # 4
+finish option=1                           # Time = now + 30; the blood and the boots deleted; YOU_BURY_THE
+trigger qm8                               # Time not reached: EQUIPMENT_NOT_PURIFIED
+wait jst=1
+trigger qm8                               # Time reached: 5
+finish                                    # completed: Warlock's Boots, fame +20
+trigger qm8                               # completed: no section; SOMEONE_HAS_BEEN_DIGGING_HERE

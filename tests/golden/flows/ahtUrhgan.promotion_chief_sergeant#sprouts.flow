@@ -1,0 +1,66 @@
+# Promotion: Chief Sergeant's sprout counts and the slot check, in GM-made states (a level 1 Warrior, accepted at Prog 3
+# by GMs). Aydeewa: patch 0 planted (MPatch0 2, a GM; its MPatch_Time0 unset: 0); MPatch_Time (no patch number, which
+# the Lua read: since user ruling 2026-11-04 read by nothing) at today, 8000 (a GM): ready: 21, option 100: nothing. At
+# about 04:00 and at about 06:00 (the first and last hours of the hour draw: a second randomInt(1, 100), >= 50 gives [0]
+# = 2): 21, option 100, five times each. 21, Option 0, option 0: 0 + 0, clamped up to 1: picked, Option 1. Planted again
+# (a GM): 21, option 101 (not 100): 101 + 1, clamped to 5: picked, Option 5. Whitegate: Stage 3, patch 5 picked with its
+# MPatch_Time5 (GMs): Abquhbah 5061 ([0] = 3, [1] = 5), option 10 (under 11): Stage 3 + 5 = 8, Option 0, the patches
+# reset. A full bag grown by one slot (one free: under two), Option 1 (a GM): 5061, option 30:
+# ITEM_CANNOT_BE_OBTAINED + 4 only (user ruling 2026-11-04, kept Lua bugs: the Lua dropped it); again, option 20
+# (no slot check): completed (the Imperial Mythril Piece takes the free slot), no Gold Piece.
+lists AydeewaSubterrane/onEventFinish/21 AhtUrhganWhitegate/onEventFinish/5061
+char zone=AydeewaSubterrane pos=124.319,36.844,5.795 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant accepted
+charvar Quest[6][96]Prog 3
+charvar Quest[6][96]MPatch0 2
+charvar AssaultPromotion 25
+login
+charvar Quest[6][96]MPatch_Time 8000    # a GM: the var the Lua read (no patch number; now read by nothing)
+trigger Mushroom_Patch                  # MPatch_Time0 0: ready: 21
+finish option=100                       # nothing (still planted)
+wait vana=16                            # about 04:00 (day 8001): the hour draw's first hour
+trigger Mushroom_Patch                  # 21: the bonus draw, then the hour draw (>= 50: [0] = 2)
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+wait vana=2                             # about 06:00: the hour draw's last hour
+trigger Mushroom_Patch                  # 21: both draws
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=0                       # 0 + 0, clamped to 1: picked; Option 1
+charvar Quest[6][96]MPatch0 2           # a GM: planted again
+trigger Mushroom_Patch                  # 21
+finish option=101                       # not 100: 101 + 1 > 5: NO_MORE_SPROUTS (both); picked; Option 5
+warp 37.024,-6.601,-62 AhtUrhganWhitegate
+charvar Quest[6][96]Stage 3             # a GM: three polished
+charvar Quest[6][96]MPatch5 3           # a GM: patch 5 picked
+charvar Quest[6][96]MPatch_Time5 8002   # a GM
+trigger Abquhbah                        # 5061 [0] = 3, [1] = 5
+finish option=10                        # under 11: Stage 3 + 5 = 8; Option 0; the patches reset (0 and 5 too)
+fill-inventory
+storage inventory 31                    # a GM: one slot more: one free
+charvar Quest[6][96]Option 1            # a GM
+trigger Abquhbah                        # 5061 [0] = 8, [1] = 1
+finish option=30                        # one free slot, under two: ITEM_CANNOT_BE_OBTAINED + 4
+trigger Abquhbah                        # 5061
+finish option=20                        # no slot check: completed (the Mythril Piece fits), no Gold Piece

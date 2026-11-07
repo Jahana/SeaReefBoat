@@ -1,0 +1,93 @@
+# Greetings to the Guardian (outlands): Hari Pakhroib in Kazham, the Altar of Ashes in Ifrit's Cauldron (call-only:
+# scripts/zones/Kazham/npcs/Hari_Pakhroib.lua, scripts/zones/Ifrits_Cauldron/npcs/Altar_of_Ashes.lua). Hari has a default
+# (DefaultActions 84) beside his script, so the lookup alternates his talks: the first plays 84, the next runs his
+# script (when the script starts nothing, the lookup plays 84 after it); each script turn is the second of a pair. The
+# altar has no default.
+# Windurst fame level 6 (425): Hari: nothing. The altar, available: ALTAR_STANDARD; pamamas traded: nothing. Level 7
+# (488): 68 (4596 x3); finished on 0: not begun; on 1: begun, PamamaVar 0. 69 (0, 4596); PamamaVar 2 (a GM): 69. The
+# altar: ALTAR_INSPECT; a flint stone: nothing; the pamamas and a flint stone (no count test): ALTAR_OFFERING, PamamaVar
+# 1, both taken; ALTAR_COMPLETED; PamamaVar 2 (a GM): ALTAR_COMPLETED; 3: ALTAR_STANDARD. Hari (PamamaVar 1): 71,
+# finished: 5000 gil, completed, fame +16, the Kazham Caller title, PamamaVar 0, needToZone. 72 (needToZone); PamamaVar 2
+# (a GM) with needToZone: 72. The altar, completed: ALTAR_STANDARD; the pamamas: ALTAR_OFFERING, PamamaVar 2;
+# ALTAR_STANDARD (completed, PamamaVar 2). Hari,
+# zoned: 71, finished: 5000 gil, fame +16, PamamaVar 0, needToZone. Zoned out and back (a rezone into Kazham keeps the
+# [generic]mustZone var), PamamaVar 0: 72; PamamaVar 1 (a GM): 72.
+char zone=Kazham pos=58,-12,-176.7 job=WAR lvl=75
+fame Windurst 425
+item BunchOfWildPamamas
+item BunchOfWildPamamas
+item BunchOfWildPamamas
+item FlintStone x2
+login
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, level 6: nothing; then 84
+finish
+warp 18.3,0,-58.6 IfritsCauldron
+trigger Altar_of_Ashes                  # available: ALTAR_STANDARD
+trade Altar_of_Ashes BunchOfWildPamamas x1   # available: nothing
+warp 58,-12,-176.7 Kazham
+fame Windurst 488
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, level 7: 68
+finish option=0                         # not begun
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script: 68
+finish option=1                         # begun; PamamaVar 0
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, accepted, PamamaVar 0: 69
+finish
+charvar PamamaVar 2                     # a GM
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, accepted, PamamaVar 2: 69
+finish
+charvar PamamaVar 0                     # a GM
+warp 18.3,0,-58.6 IfritsCauldron
+trigger Altar_of_Ashes                  # accepted, 0: ALTAR_INSPECT
+trade Altar_of_Ashes FlintStone x1      # no pamamas: nothing
+trade Altar_of_Ashes BunchOfWildPamamas x1 FlintStone x1   # ALTAR_OFFERING; PamamaVar 1; both taken
+trigger Altar_of_Ashes                  # accepted, 1: ALTAR_COMPLETED
+charvar PamamaVar 2                     # a GM
+trigger Altar_of_Ashes                  # accepted, 2: ALTAR_COMPLETED
+charvar PamamaVar 3                     # a GM
+trigger Altar_of_Ashes                  # accepted, 3: ALTAR_STANDARD
+charvar PamamaVar 1                     # a GM: back to the offering's 1
+warp 58,-12,-176.7 Kazham
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, PamamaVar 1: 71
+finish                                  # 5000 gil; completed; fame +16; the title; PamamaVar 0; needToZone
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, completed, needToZone: 72
+finish
+charvar PamamaVar 2                     # a GM
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, completed, needToZone, PamamaVar 2: 72
+finish
+charvar PamamaVar 0                     # a GM
+warp 18.3,0,-58.6 IfritsCauldron
+trigger Altar_of_Ashes                  # completed: ALTAR_STANDARD
+trade Altar_of_Ashes BunchOfWildPamamas x1   # completed: ALTAR_OFFERING; PamamaVar 2
+trigger Altar_of_Ashes                  # completed, PamamaVar 2: ALTAR_STANDARD (the accepted test)
+warp 58,-12,-176.7 Kazham
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, zoned, PamamaVar 2: 71
+finish                                  # 5000 gil; fame +16; PamamaVar 0; needToZone
+warp 18.3,0,-58.6 IfritsCauldron
+warp 58,-12,-176.7 Kazham
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, zoned, PamamaVar 0: 72
+finish
+charvar PamamaVar 1                     # a GM
+trigger Hari_Pakhroib                   # default turn: 84
+finish
+trigger Hari_Pakhroib                   # script, completed, zoned, PamamaVar 1: 72 (the == 2 test)
+finish

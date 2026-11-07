@@ -1,0 +1,64 @@
+# Breaking the Bonds of Fate's edges (Equipped for All Occasions and Navigating the Unfriendly Seas completed for all,
+# GMs: their qm6 offers off; Against All Odds completed for all but bob). Main (a level 66 Corsair, the floor of both
+# sections): qm6 234, option 1: nothing; 234, option 0: begun; accepted at 66: YOU_MUST_BRING. The offer's operands,
+# each false alone: bob: Against All Odds accepted, not completed; carl: a Warrior; dan: a level 65 Corsair: qm6
+# NOTHING_OUT_OF_ORDINARY. The accepted section's: ed (accepted by a GM) a level 65 Corsair; fred (accepted by a GM) a
+# level 66 Warrior: no section: qm6 NOTHING_OUT_OF_ORDINARY; the testimony: no section: nothing.
+lists ArrapagoReef/qm6/onTrigger ArrapagoReef/qm6/onTrade
+char zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=66
+char bob zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=66
+char carl zone=ArrapagoReef pos=470.267,-12.292,111.817 job=WAR lvl=66
+char dan zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=65
+char ed zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=65
+char fred zone=ArrapagoReef pos=470.267,-12.292,111.817 job=WAR lvl=66
+quest AhtUrhgan.EquippedForAllOccasions completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+quest AhtUrhgan.AgainstAllOdds completed
+bob: quest AhtUrhgan.EquippedForAllOccasions completed
+bob: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+bob: quest AhtUrhgan.AgainstAllOdds accepted
+carl: quest AhtUrhgan.EquippedForAllOccasions completed
+carl: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+carl: quest AhtUrhgan.AgainstAllOdds completed
+dan: quest AhtUrhgan.EquippedForAllOccasions completed
+dan: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+dan: quest AhtUrhgan.AgainstAllOdds completed
+ed: quest AhtUrhgan.EquippedForAllOccasions completed
+ed: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+ed: quest AhtUrhgan.AgainstAllOdds completed
+ed: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+ed: item CorsairsTestimony
+fred: quest AhtUrhgan.EquippedForAllOccasions completed
+fred: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+fred: quest AhtUrhgan.AgainstAllOdds completed
+fred: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+fred: item CorsairsTestimony
+login
+trigger qm6                             # level 66: 234
+finish option=1                         # not 0: nothing
+trigger qm6                             # 234
+finish option=0                         # begun
+trigger qm6                             # accepted at level 66: YOU_MUST_BRING
+finish-if-event
+bob: login
+bob: trigger qm6                        # Against All Odds not completed: NOTHING_OUT_OF_ORDINARY
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trigger qm6                       # a Warrior: NOTHING_OUT_OF_ORDINARY
+carl: finish-if-event
+carl: logout
+dan: login
+dan: trigger qm6                        # level 65: NOTHING_OUT_OF_ORDINARY
+dan: finish-if-event
+dan: logout
+ed: login
+ed: trigger qm6                         # accepted, level 65: no section: NOTHING_OUT_OF_ORDINARY
+ed: finish-if-event
+ed: trade qm6 CorsairsTestimony x1      # no section: nothing
+ed: logout
+fred: login
+fred: trigger qm6                       # accepted, a Warrior: no section: NOTHING_OUT_OF_ORDINARY
+fred: finish-if-event
+fred: trade qm6 CorsairsTestimony x1    # no section: nothing
+fred: logout

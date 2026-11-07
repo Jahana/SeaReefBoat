@@ -1,0 +1,17 @@
+# New Character Cutscenes next to the missions whose zone-in containers run first, Bastok (nation 1, ROV off,
+# notSeen 1, a GM). Port Bastok: the Enduring Tumult of War at status 0 (306). Bastok Markets: Rumors from the West.
+char zone=PortBastok pos=-140,-7,172 job=WAR lvl=75 nation=1
+setting ENABLE_ROV 0
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+mission Cop AncientFlamesBeckon completed # a GM
+mission Cop TheEnduringTumultOfWar current # a GM
+login                                   # Tumult first
+finish
+mission Cop TheEnduringTumultOfWar completed # a GM
+mission Soa RumorsFromTheWest current   # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp -45,0,25 BastokMarkets             # Rumors yields to the quest at notSeen 1
+finish
+charvar HQuest[newCharacterCS]notSeen 0 # a GM
+warp -45,0,25 BastokMarkets             # notSeen 0: Rumors
+finish

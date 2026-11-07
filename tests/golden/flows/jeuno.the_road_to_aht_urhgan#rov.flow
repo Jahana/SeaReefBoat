@@ -1,0 +1,14 @@
+# The Road to Aht Urhgan (jeuno 91): "Where's Tenzen?" at RoV Inescapable Binds, from the available state's 10063. A
+# level 75 Warrior, RoV Inescapable Binds current, Prog 1 by a GM while available: 10063 (0, 0, 0, 0, 0, 1); finished
+# 1: not begun (1 is not 2 / 3), but quest:complete runs: completed, the Boarding Permit, the mission completed and
+# Desert Winds added. Completed: 10071. (The accepted 10064's: #rov_accepted; a GM cannot set Inescapable Binds current
+# again over Desert Winds: addMission refuses to overwrite a current mission.)
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/onEventFinish/10063 LowerJeuno/onEventFinish/10064
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+mission Rov InescapableBinds current
+charvar Quest[3][91]Prog 1
+login
+trigger Faursel                     # available, Prog 1, the mission: 10063 (0, 0, 0, 0, 0, 1)
+finish option=1                     # completed; the Boarding Permit; Inescapable Binds completed, Desert Winds current
+trigger Faursel                     # completed: 10071
+finish

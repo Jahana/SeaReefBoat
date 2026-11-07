@@ -1,0 +1,76 @@
+# golden trace: windurst.twinstone_bonding#edges
+seed 7
+flow 0eb15e1a30ed47377974edc16625e916dfb250714b77c64a0ee156bc84b217b5
+recorder lua
+lua-at 4ab7555810c47fa1c28ed5884b69f09f42520826
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @3e4f55a2cb660675 (174)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @acbaa503915f7dc1 (2)
+char_jobs @3e907948536df038 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @bcbc236d2b548e3e (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @4cdbd8051d2399ff (7)
+char_stats @aed604d3dea413a4 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+char_vars @b5b129ec98806e4b (1)
+chars @86ccb57d3c3f7ef0 (41)
+ret onZoneIn=number:30035,onEventFinish=nil:nil
+step trigger Gioh_Ajihri
+packets
+  00E @9002a39f9cae797b
+  00E @207d5bc3b473fee5
+  00E @d3fcdb08f83ab4f7
+  00E @e7663f5935a87032
+  00E @88cc94f8a1b25213
+  032 @4c61948d82dfe67d
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Gioh_Ajihri TwinstoneEarring x1
+packets
+ret onTrade=boolean:false
+step charvar GiohAijhriSpokenTo 1
+packets
+char_vars - varname=GiohAijhriSpokenTo|value=2|expiry=0
+char_vars + varname=GiohAijhriSpokenTo|value=1|expiry=0
+step trade Gioh_Ajihri TwinstoneEarring x1
+packets
+  032 @8a1beaeba44d0e46
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrade=nil:nil
+step finish
+packets
+  020 @a6804f916f69b514
+  01D @f8579df92de4b1ca
+  01E @343c29dcd16be8fc
+  02A @00722cd3f599ddac
+  0DF @e86c6ce1bb1d2923
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory - location=0|slot=0|itemId=65535|quantity=1000|bazaar=0|signature=|extra=null
+char_inventory - location=0|slot=1|itemId=13360|quantity=1|bazaar=0|signature=|extra=null
+char_inventory + location=0|slot=0|itemId=65535|quantity=1900|bazaar=0|signature=|extra=null
+char_profile - fame_windurst=0
+char_profile + fame_windurst=16
+char_vars - varname=GiohAijhriSpokenTo|value=1|expiry=0
+char_vars + varname=[generic]mustZone|value=241|expiry=0
+ret onEventFinish=nil:nil

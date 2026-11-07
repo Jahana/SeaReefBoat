@@ -1,0 +1,47 @@
+# Luck of the Draw's edges (The Die is Cast completed for all, by GMs). bob (level 29): not offered: Ratihb's default
+# 603, also at ADVANCED_JOB_LEVEL 29.4 (29 < 29.4: the setting read as a number). carl: Luck of the Draw and Equipped
+# for All Occasions completed (Stage 0): the completed section off: 603. Main (level 30, accepted by a GM): Mafwahb at
+# Prog 0: nil: 647; Prog 3 (a GM): nil: 647; qm6 at Prog 1 (a GM): nil: NOTHING_OUT_OF_ORDINARY; Prog 4 with the hexagun
+# (GMs), a full bag: _1l0's 3: quest:complete false (the die does not fit): nothing, the hexagun kept; room again: 3:
+# completed.
+lists AhtUrhganWhitegate/Ratihb/onTrigger AhtUrhganWhitegate/Mafwahb/onTrigger ArrapagoReef/qm6/onTrigger TalaccaCove/onEventFinish/3
+char zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=30
+char bob zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=29
+char carl zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=30
+quest AhtUrhgan.TheDieIsCast completed
+quest AhtUrhgan.LuckOfTheDraw accepted
+bob: quest AhtUrhgan.TheDieIsCast completed
+carl: quest AhtUrhgan.TheDieIsCast completed
+carl: quest AhtUrhgan.LuckOfTheDraw completed
+carl: quest AhtUrhgan.EquippedForAllOccasions completed
+login
+bob: login
+bob: trigger Ratihb                     # level 29: not offered: 603
+bob: finish
+setting ADVANCED_JOB_LEVEL 29.4
+bob: trigger Ratihb                     # 29 < 29.4 (the setting read as a number): not offered: 603
+bob: finish
+setting ADVANCED_JOB_LEVEL 30
+bob: logout
+carl: login
+carl: trigger Ratihb                    # Equipped completed: the completed section off: 603
+carl: finish
+carl: logout
+trigger Mafwahb                         # Prog 0: nil: 647
+finish
+charvar Quest[6][6]Prog 3               # a GM
+trigger Mafwahb                         # Prog 3: nil: 647
+finish
+charvar Quest[6][6]Prog 1               # a GM
+warp 470.267,-12.292,111.817 ArrapagoReef
+trigger qm6                             # Prog 1: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][6]Prog 4               # a GM
+keyitem ForgottenHexagun                # a GM
+warp -98.5,-9.399,-87 TalaccaCove       # beside _1l0
+fill-inventory
+trigger _1l0                            # Prog 4: 3
+finish                                  # the die does not fit: quest:complete false: nothing; the hexagun kept
+free-inventory
+trigger _1l0                            # 3
+finish                                  # completed; the hexagun taken; COR

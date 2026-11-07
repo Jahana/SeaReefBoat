@@ -1,0 +1,29 @@
+# Monstrosity Bee (hidden quest monstrosityBee): a level 75 Warrior in the Feretory, ENABLE_MONSTROSITY 1, the Bee not
+# unlocked (a fresh char's monstrosity data: every level 0). Suibhne, Option 0: a quiz drawn (math.randomInt(1, 6): the
+# harness's seed), kept in Option; suibhneGreet (his showText); 11 (1, quiz - 1); finished on 0: nothing. Quiz 1 pinned
+# (a GM): 11 (1, 0); finished on 2 (wrong): Timer tomorrow. 11 (0, 0) (locked); finished on the right answer: Timer past
+# today: nothing. Timer 0 (a GM): 11 (1, 0); finished on 1 + (4 << 16) + (1 << 19) + (3 << 22) = 13369345 (Teyrnon,
+# Aengus, Suibhne): quest:complete (the vars cleared), the Bee unlocked, MAY_POSSESS_BEES. Then the check fails: his
+# script (greet, 11). ENABLE_MONSTROSITY 0: his script answers nothing.
+lists Feretory/Suibhne/onTrigger Feretory/onEventFinish/11
+char zone=Feretory pos=-366,-3.6,-463 job=WAR lvl=75
+setting ENABLE_MONSTROSITY 1
+login
+trigger Suibhne                         # a quiz drawn; greet; 11 (1, quiz - 1)
+finish option=0                         # neither right nor 2: nothing
+charvar HQuest[monstrosityBee]Option 1  # a GM: quiz 1
+trigger Suibhne                         # 11 (1, 0)
+finish option=2                         # wrong: Timer tomorrow
+trigger Suibhne                         # locked: 11 (0, 0)
+finish option=13369345                  # Timer past today: nothing
+charvar HQuest[monstrosityBee]Timer 0   # a GM: long past
+trigger Suibhne                         # 11 (1, 0)
+finish option=0                         # open, neither right nor 2: nothing
+charvar HQuest[monstrosityBee]Timer 8000 # a GM: today (the harness day)
+trigger Suibhne                         # open on the Timer's day: 11 (1, 0)
+finish option=13369345                  # right: complete; the Bee; MAY_POSSESS_BEES
+trigger Suibhne                         # unlocked: the check fails: his script (greet, 11)
+finish
+setting ENABLE_MONSTROSITY 0
+trigger Suibhne                         # his script: nothing
+finish-if-event

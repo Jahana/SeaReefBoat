@@ -1,0 +1,25 @@
+# As Thick as Thieves (windurst 70): its lines next to other containers' lines. Mihgo's Amigo completed by GM with its
+# mustZone char var set by GM: its 89 (an Event) at Nanaa Mihgo and 91 (an Event) at Cha Lebagta. A THF at level 50,
+# The Tenshodo Showdown completed: 504 (Progress) over 89, accepted (option 1); 505 over 89; Cha Lebagta's 507 over 91.
+# Mihgo's Amigo accepted by GM (available first): its 84 (an Event) at Bopa Greso, 82 (an Event) at Nanaa Mihgo:
+# Bopa Greso's 506 over 84; both envelopes signed by GM: 508 over 82, completed.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/Bopa_Greso/onTrigger WindurstWoods/Cha_Lebagta/onTrigger
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=THF lvl=50
+quest Windurst.MihgosAmigo completed
+quest Windurst.TheTenshodoShowdown completed
+login
+charvar Quest[2][25]mustZone 241               # GM: Mihgo's Amigo's completed 89 (an Event) at Nanaa Mihgo, 91 at Cha Lebagta
+trigger Nanaa_Mihgo+99                         # 504 (Progress) over 89
+finish option=1                                # begun
+trigger Nanaa_Mihgo+99                         # 505 over 89
+finish
+trigger Cha_Lebagta                            # 507 over 91
+finish
+quest Windurst.MihgosAmigo available           # GM
+quest Windurst.MihgosAmigo accepted            # GM
+trigger Bopa_Greso                             # 506 over Mihgo's Amigo's 84
+finish
+keyitem FirstSignedForgedEnvelope              # GM
+keyitem SecondSignedForgedEnvelope             # GM
+trigger Nanaa_Mihgo+99                         # 508 over Mihgo's Amigo's 82
+finish                                         # completed

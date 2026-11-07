@@ -1,0 +1,42 @@
+# Sharpening the Sword (sandoria 90, PLD AF1): Ailbeche in Northern San d'Oria, Sobane in Southern San d'Oria, the
+# Stalagmite and Polevik in Ordelle's Caves. A PLD 40 with Father and Son completed: without the Family Counselor title
+# not offered (Father and Son's OH_I_WANT_MY_ITEM); with it, a trade (no Sharpening trade handler; Father and Son's
+# completed section: the title held, nil), 45 (option 0: Option 1), 43 (priority 200; option 0:
+# nothing; option 1: Option 0, begun). Accepted without the whetstone: Ailbeche's 42, Sobane's 52, the Stalagmite
+# (Polevik popped, noAction; with Polevik up DRY_WIND + 1 and DRY_WIND), Polevik's kill (Stage 1), the Stalagmite (the
+# Ordelle Whetstone), the Stalagmite again (the whetstone held: no section, DRY_WIND). With it: Sobane's 52, Ailbeche's
+# 44 (completed: Honor Sword, fame +20, the whetstone deleted). Ailbeche is not talked to after the completion: the
+# completed section (check 4) is #completed's.
+# Ailbeche's script answers A Boy's Dream / Under Oath vars only (none set). Sobane has no script (default
+# SOBANE_DIALOG); Signed in Blood needs fame level 3 (fame 0 here). The Stalagmite has no script; its default is DRY_WIND.
+lists NorthernSanDoria/Ailbeche/onTrigger NorthernSanDoria/onEventFinish/43 NorthernSanDoria/onEventFinish/45 NorthernSanDoria/onEventFinish/44 SouthernSanDoria/Sobane/onTrigger OrdellesCaves/Stalagmite/onTrigger OrdellesCaves/Polevik/onMobDeath
+char zone=NorthernSanDoria pos=5.3,0.5,24.9 job=PLD lvl=40
+quest Sandoria.FatherAndSon completed
+item BoneChip
+login
+trigger Ailbeche                          # no title: not offered; Father and Son: OH_I_WANT_MY_ITEM, noAction
+title FamilyCounselor
+trade Ailbeche BoneChip x1                # available: Father and Son's trade, the title held: nil; his script: nothing
+trigger Ailbeche                          # the title, PLD 40, Option 0: 45 (over Father and Son's AILBECHE_WHEN_FISHING)
+finish                                    # option 0: Option 1
+trigger Ailbeche                          # Option 1: 43 (priority 200)
+finish                                    # option 0: nothing
+trigger Ailbeche                          # 43
+finish option=1                           # Option 0, begun
+trigger Ailbeche                          # accepted, no whetstone: 42
+finish
+warp -189,-2.9,97.2 SouthernSanDoria
+trigger Sobane                            # no whetstone: 52
+finish
+warp -49.4,-1.07,7.2 OrdellesCaves
+trigger Stalagmite                        # Stage 0, Polevik down: popped and claimed, noAction
+trigger Stalagmite                        # Polevik up: DRY_WIND + 1 (the whetstone) and DRY_WIND
+kill POLEVIK                              # Stage 1
+trigger Stalagmite                        # Stage 1: Stage 0, the key item Ordelle Whetstone
+trigger Stalagmite                        # the whetstone held: no section; DRY_WIND
+warp -189,-2.9,97.2 SouthernSanDoria
+trigger Sobane                            # the whetstone: 52
+finish
+warp 5.3,0.5,24.9 NorthernSanDoria
+trigger Ailbeche                          # the whetstone: 44
+finish                                    # completed: Honor Sword, fame +20; the whetstone deleted

@@ -1,0 +1,18 @@
+# Heroes of Abyssea (abyssea 179), the edges: a level 99 Warrior in Port Jeuno with A Journey Begins completed (GM).
+# Available, none of the three begun: no section: nothing. A Beaked Blusterer accepted alone (a GM): 340, finished on
+# option 1: begun (any option). The quest available again and A Beaked Blusterer available (GMs), A Man-eating Mite
+# completed alone: 340, finished: begun.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/340
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+login
+trigger Joachim                         # available, none of the three begun: nothing
+finish-if-event
+quest Abyssea.ABeakedBlusterer accepted             # a GM
+trigger Joachim                         # A Beaked Blusterer accepted: 340
+finish option=1                         # begun (any option)
+quest Abyssea.HeroesOfAbyssea available           # a GM
+quest Abyssea.ABeakedBlusterer available            # a GM
+quest Abyssea.AManEatingMite completed            # a GM
+trigger Joachim                         # A Man-eating Mite completed: 340
+finish                                  # begun

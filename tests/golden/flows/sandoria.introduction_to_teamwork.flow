@@ -1,0 +1,22 @@
+# Introduction to Teamwork (sandoria 63): Vilatroire in West Ronfaure. A WAR 10 at fame 49 (level 1): 134
+# (replaceDefault, over his default 136); a trade while available: nothing (no trade handler, no script); fame 50 (level
+# 2): 135 declined (nothing), 135 taken (begun); accepted, alone: the trigger returns nil (#party is 1), so his default
+# 136; a trade: nothing. 129 (and its update and finish) starts only in a party of two or more: the #party flows take
+# it. Vilatroire has no script; his default is 136. No other quest or mission names him besides the two later teamwork
+# quests, which need this one completed.
+lists WestRonfaure/Vilatroire/onTrigger WestRonfaure/onEventFinish/135 WestRonfaure/onEventUpdate/129 WestRonfaure/onEventFinish/129
+char zone=WestRonfaure pos=-258.4,-71,423.4 job=WAR lvl=10
+fame Sandoria 49
+item BoneChip
+login
+trigger Vilatroire                        # fame level 1: 134 (replaceDefault)
+finish
+trade Vilatroire BoneChip x1              # available: no trade handler, no script: nothing
+fame Sandoria 50
+trigger Vilatroire                        # fame level 2, level 10: 135
+finish                                    # option 0: nothing
+trigger Vilatroire                        # 135
+finish option=1                           # begun
+trigger Vilatroire                        # accepted, alone (#party 1): nil; his default 136
+finish
+trade Vilatroire BoneChip x1              # accepted: no trade handler: nothing

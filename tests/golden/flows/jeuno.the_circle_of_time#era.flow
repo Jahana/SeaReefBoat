@@ -1,0 +1,25 @@
+# The Circle of Time (jeuno 65) with its era module (quest rework B3b Jeuno, P4): modules/era/lua/quests/jeuno/
+# the_circle_of_time.lua, enabled by its condition xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0),
+# replaces state 2's Xarcabard onEventFinish[3] with a copy of the quest's: option 0 sets Buried = JstMidnight() (the
+# next JST midnight; the harness's wall clock is 1800000000, 17:00 JST, so 1800025200), where the quest sets
+# GetSystemTime() + 30. GM-set accepted at Prog 3 with Star Ring 1 at the Perennial Snow: 3 (option 1: nothing), 3
+# (option 0: Buried = JstMidnight()), PERENNIAL_SNOW_WAIT, a JST day later 2 (option 0: Prog 4).
+# The condition's false side cannot be a module flow (the harness fails a flow whose module is not enabled); the
+# quest's own flows are that side.
+module modules/era/lua/quests/jeuno/the_circle_of_time.lua
+lists Xarcabard/Perennial_Snow/onTrigger Xarcabard/onEventFinish/2 Xarcabard/onEventFinish/3
+char zone=Xarcabard pos=337.5,0,-378 job=BRD lvl=50
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.TheCircleOfTime accepted
+charvar Quest[3][65]Prog 3
+keyitem StarRing1
+login
+trigger Perennial_Snow                      # Prog 3, Buried 0: 3
+finish option=1                             # not 0: nothing
+trigger Perennial_Snow                      # 3 again
+finish option=0                             # Buried = JstMidnight()
+trigger Perennial_Snow                      # before the time: PERENNIAL_SNOW_WAIT (Star Ring 1)
+wait jst=1                                  # GetSystemTime past Buried
+trigger Perennial_Snow                      # 2
+finish option=0                             # Prog 4

@@ -1,0 +1,38 @@
+# Not Meant to Be (ahtUrhgan 64): a level 75 Warrior in Nashmau. Fhe Maksojha (no script, no default); Caedarva Mire's
+# qm12 (no script; default NOTHING_HAPPENS), the NMs Lamia No.27 and Moshdahn. Available: Fhe 293, finished: begun,
+# Prog 1. Prog 1: Fhe 295. Caedarva: qm12 16, finished: Prog 2; qm12 at Prog 2: nil: NOTHING_HAPPENS. Nashmau: Fhe 294,
+# finished: Prog 3; Fhe 296. Caedarva: qm12 at Prog 3, Stage 0, neither NM up: 17, finished: both spawned and claimed;
+# qm12 with both up: nil: the default; Lamia No.27 killed: Stage bit 0; qm12, Stage 1, Moshdahn up: nil; Moshdahn
+# killed: Stage 3; qm12 at Stage 3: 18, finished: Prog 4. Nashmau: Fhe 297, finished: completed (three Imperial Gold
+# Pieces); Fhe 298.
+lists Nashmau/Fhe_Maksojha/onTrigger Nashmau/onEventFinish/297 CaedarvaMire/qm12/onTrigger CaedarvaMire/Lamia_No27/onMobDeath CaedarvaMire/Moshdahn/onMobDeath CaedarvaMire/onEventFinish/17 CaedarvaMire/onEventFinish/18
+char zone=Nashmau pos=20.584,-6,71.287 job=WAR lvl=75
+login
+trigger Fhe_Maksojha                    # available: 293
+finish                                  # begun, Prog 1
+trigger Fhe_Maksojha                    # Prog 1: 295
+finish
+warp 458.5,-7,-270.815 CaedarvaMire
+trigger qm12                            # Prog 1: 16
+finish                                  # Prog 2
+trigger qm12                            # Prog 2: nil: NOTHING_HAPPENS
+warp 20.584,-6,71.287 Nashmau
+trigger Fhe_Maksojha                    # Prog 2: 294
+finish                                  # Prog 3
+trigger Fhe_Maksojha                    # Prog 3: 296
+finish
+warp 458.5,-7,-270.815 CaedarvaMire
+trigger qm12                            # Prog 3, Stage 0, neither NM up: 17
+finish                                  # Lamia No.27 and Moshdahn spawned, claimed by the char
+trigger qm12                            # Stage 0, both up: nil: NOTHING_HAPPENS
+kill LAMIA_NO27                         # Prog 3: Stage bit 0
+trigger qm12                            # Stage 1, Moshdahn up: nil: NOTHING_HAPPENS
+kill MOSHDAHN                           # Prog 3: Stage bit 1: Stage 3
+trigger qm12                            # Stage 3: 18
+finish                                  # Prog 4
+trigger qm12                            # Prog 4: nil: NOTHING_HAPPENS
+warp 20.584,-6,71.287 Nashmau
+trigger Fhe_Maksojha                    # Prog 4: 297
+finish                                  # completed: the gold pieces
+trigger Fhe_Maksojha                    # completed: 298
+finish

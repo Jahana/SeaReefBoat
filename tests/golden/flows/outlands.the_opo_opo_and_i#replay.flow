@@ -1,0 +1,117 @@
+# The Opo-Opo and I (outlands 11): a failure at the last handler and the replay. Accepted by GM at OPO_OPO_PROGRESS 9
+# (the first nine items given). Nenepp, a wrong item (the Ancient Salt): 238 (failed 1, OPO_OPO_RETRY 10); his talk then
+# 206 (the retry), Lalapp's 205. Lulupp: 239 (0, 0, 9: the 10th handler's clue), option 0 (nothing), then option 1
+# (retry 0, failed 1); 207 (failed 1). Then each handler k in turn: the ask by failed k + 1 (progress 9 is not k), its
+# item: the good event's else (progress is not k: failed k + 2, nothing taken), the thanks by failed (Lulupp, Kukupp,
+# Lalapp; progress 9 answers them too). Kukupp at failed 3 (failed above k + 1, progress 9: not his turn): another's
+# item: nothing. Nenepp at failed 10: 241 (no progress test): the egg (and the whole trade) taken, completed.
+# Each talk to a defaulted handler follows a default talk (see the main flow); Lalapp has none.
+char zone=Kazham pos=30.0,-11.0,-182.0 job=WAR lvl=75
+quest Outlands.TheOpoOpoAndI accepted
+charvar OPO_OPO_PROGRESS 9
+item BrokenMithranFishingRod
+item Workbench
+item TenOfCoinsCard
+item HandfulOfTheSandsOfSilence
+item WanderingBulb
+item SetOfGiantFishBones
+item BlackenedToad
+item WyvernSkull
+item RockOfAncientSalt
+item LuckyEgg
+login
+trigger Nenepp                          # UseFallback 0: the default OPO_OPO text
+finish-if-event
+trade Nenepp RockOfAncientSalt x1       # progress 9, not the egg, another's item: 238
+finish                                  # failed 1, OPO_OPO_RETRY 10
+trigger Nenepp                          # the script: retry: 206
+finish
+warp -64.0,-11.0,-96.0 Kazham
+trigger Lalapp                          # retry: 205
+finish
+warp -25.0,-2.5,-3.5 Kazham
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # retry 10: 239 (0, 0, 9)
+finish option=0                         # nothing: the retry kept
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 9)
+finish option=1                         # retry 0, failed 1
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # failed 1: 207
+finish
+trade Lulupp BrokenMithranFishingRod x1 # failed 1: 219
+finish                                  # progress 9 is not 0: failed 2; the rod kept
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 242
+finish
+warp 42.0,-11.0,-178.0 Kazham
+trigger Kukupp                          # the text
+finish-if-event
+trigger Kukupp                          # failed 2: 208
+finish
+trade Kukupp Workbench x1               # 220
+finish                                  # progress is not 1: failed 3; the workbench kept
+trade Kukupp TenOfCoinsCard x1          # failed 3, progress 9: not his turn: nothing
+trigger Kukupp                          # the text
+finish-if-event
+trigger Kukupp                          # failed 3 (and progress 9): 243
+finish
+warp 93.0,-15.0,-114.0 Kazham
+trigger Mumupp                          # the text
+finish-if-event
+trigger Mumupp                          # failed 3: 209
+finish
+trade Mumupp TenOfCoinsCard x1          # 221
+finish                                  # failed 4
+warp 15.0,-8.0,-108.0 Kazham
+trigger Roropp                          # the text
+finish-if-event
+trigger Roropp                          # failed 4: 210
+finish
+trade Roropp HandfulOfTheSandsOfSilence x1  # 222
+finish                                  # failed 5
+warp 15.6,-8.0,-80.8 Kazham
+trigger Popopp                          # the text
+finish-if-event
+trigger Popopp                          # failed 5: 210
+finish
+trade Popopp WanderingBulb x1           # 223
+finish                                  # failed 6
+warp 67.7,-11.0,-48.0 Kazham
+trigger Bubupp                          # the text
+finish-if-event
+trigger Bubupp                          # failed 6: 211
+finish
+trade Bubupp SetOfGiantFishBones x1     # 224
+finish                                  # failed 7
+trigger Tatapp                          # the text
+finish-if-event
+trigger Tatapp                          # failed 7: 212
+finish
+trade Tatapp BlackenedToad x1           # 225
+finish                                  # failed 8
+warp 102.8,-15.0,-108.0 Kazham
+trigger Kakapp                          # the text
+finish-if-event
+trigger Kakapp                          # failed 8: 213
+finish
+trade Kakapp WyvernSkull x1             # 226
+finish                                  # failed 9
+warp -64.0,-11.0,-96.0 Kazham
+trigger Lalapp                          # failed 9: 214
+finish
+trade Lalapp RockOfAncientSalt x1       # 227
+finish                                  # failed 10
+trigger Lalapp                          # failed 10: 250
+finish
+warp 30.0,-11.0,-182.0 Kazham
+trigger Nenepp                          # the text
+finish-if-event
+trigger Nenepp                          # failed 10: 212
+finish
+trade Nenepp LuckyEgg x1                # failed 10: 241
+finish                                  # no progress test: the egg taken; completed; the crown, the pamamas, the title

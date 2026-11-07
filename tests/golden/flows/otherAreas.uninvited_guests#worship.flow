@@ -1,0 +1,44 @@
+# Uninvited Guests (otherAreas 81): CoP The Secrets of Worship current (The Savage just completed: the check's boundary,
+# its own flow: a GM's mission step after login overwrites the current mission, which the recorder refuses), its Status
+# 0 throughout until the last steps. CoP 4-3's Justinius 131 is an importantEvent with no finish: Progress on its first
+# showing, then Event, and Status stays 0. So the first talk is a Progress tie [131, 570] that 131 wins (the mission's
+# container ranks first; the cycle var then holds 131), and from then on 131 is an Event rival to every Justinius reply:
+# a Progress reply plays alone, an Event reply takes turns with 131. Each reply is talked to until its kind shows: 570
+# twice (option 2: nothing; option 1: begun); 571 and the tie's next (131); Prog 3 (a GM): 575, finished: Wait, Prog 4;
+# 575 again; Wait 0 (a GM): 574, finished: started; 571; Prog 2 (a GM): 572, finished: the reward, 10000 gil, completed;
+# Wait 0 (a GM): 573, option 2: nothing. Then available again (a GM) and CoP 4-3 at Status 1 (a GM, the mission var): no
+# mission answer: 570, option 1: begun.
+lists TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/onEventFinish/570 TavnazianSafehold/onEventFinish/572 TavnazianSafehold/onEventFinish/573 TavnazianSafehold/onEventFinish/574 TavnazianSafehold/onEventFinish/575 TavnazianSafehold/onEventFinish/131
+char zone=TavnazianSafehold pos=80.2,-34,70.5 job=WAR lvl=75
+mission Cop TheSecretsOfWorship current
+login
+trigger Justinius                       # the first talk: the Progress tie [131, 570]: 131 (CoP 4-3), not 570
+finish                                  # no 131 finish: Status 0; 131 now Event
+trigger Justinius                       # 570 (Progress) alone at the top
+finish option=2                         # nothing
+trigger Justinius                       # 570
+finish option=1                         # the permit; Prog 1; begun
+trigger Justinius                       # Prog 1, the permit: the Event tie [131, 571]: 571 (the cycle var held 131)
+finish
+trigger Justinius                       # the tie's next: 131
+finish
+charvar Quest[4][81]Prog 3              # a GM
+trigger Justinius                       # Prog 3: 575 (Progress) alone
+finish                                  # Wait 1800198000; Prog 4
+trigger Justinius                       # Prog 4, the wait not over: 575
+finish                                  # nothing
+charvar Quest[4][81]Wait 0              # a GM
+trigger Justinius                       # Prog 4, the wait over: 574 (Progress) alone
+finish                                  # started again: Prog 1
+trigger Justinius                       # Prog 1, the permit: the Event tie [131, 571]
+finish
+charvar Quest[4][81]Prog 2              # a GM
+trigger Justinius                       # Prog 2: 572 (Progress) alone
+finish                                  # the reward; 10000 gil; completed; Wait 1800198000
+charvar Quest[4][81]Wait 0              # a GM
+trigger Justinius                       # completed, Prog 0, the wait over: 573 (Progress) alone
+finish option=2                         # nothing
+quest OtherAreas.UninvitedGuests available # a GM
+charvar Mission[6][428]Status 1         # a GM: CoP 4-3's Justinius answers at Status 0 only
+trigger Justinius                       # 570
+finish option=1                         # the permit; Prog 1; begun

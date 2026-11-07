@@ -1,0 +1,9 @@
+# Collect Tarut Cards (jeuno 10), GM-set accepted with Date exactly now (charvar 1800000000, the harness's constant
+# wall clock: GetSystemTime() == Date): :71 GetSystemTime() > Date is false at equality, so Chululu plays 27, not 10112.
+lists LowerJeuno/Chululu/onTrigger
+char zone=LowerJeuno pos=-9,-6.7,-42.5 job=WAR lvl=30
+quest Jeuno.CollectTarutCards accepted
+charvar Quest[3][10]Date 1800000000
+login
+trigger Chululu                             # GetSystemTime() == Date: 27 (Lua >)
+finish

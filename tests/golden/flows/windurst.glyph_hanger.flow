@@ -1,0 +1,42 @@
+# Glyph Hanger (windurst 30): Hariga-Origa, Serukoko and Sohdede in Windurst Waters, Ipupu in West Sarutabaruta. The
+# offer 381 (declined, then accepted: Note from Hariga-Origa), Hariga's 382, Serukoko's 383 and Sohdede's 384 while no
+# note from Ipupu, Ipupu's 47 (the notes swapped), the hand-in 385 (Map of the Horutoto Ruins, fame +20, exp 2000) and
+# the completed 386 (replaceDefault) until Chasing Tales is completed. Hariga's, Serukoko's and Sohdede's scripts hold
+# only an idle animation (no onTrigger, no onTrade); their defaults are 372, 373, 374 (DefaultActions) and Ipupu's the
+# text IPUPU_DIALOG. A Smudge on One's Record also names Hariga-Origa and Serukoko (its offer needs Chasing Tales
+# completed and fame level 4: never met here). No mission names them.
+lists WindurstWaters/Hariga-Origa/onTrigger WindurstWaters/Hariga-Origa/onTrade WindurstWaters/Serukoko/onTrigger WindurstWaters/Sohdede/onTrigger WestSarutabaruta/Ipupu/onTrigger WindurstWaters/onEventFinish/381 WindurstWaters/onEventFinish/385 WestSarutabaruta/onEventFinish/47
+char zone=WindurstWaters pos=-60.5,-5.5,105.2
+item BoneChip
+login
+trade Hariga-Origa BoneChip x1  # available: no trade handler anywhere, nothing
+trigger Serukoko                # available: not this quest's; his default 373
+finish
+trigger Hariga-Origa            # available: 381
+finish option=1                 # declined: nothing
+trigger Hariga-Origa            # 381 again
+finish option=0                 # begun; Note from Hariga-Origa
+trigger Hariga-Origa            # accepted, no note from Ipupu: event 382
+finish
+trade Hariga-Origa BoneChip x1  # accepted: no trade handler, nothing
+trigger Serukoko                # no note from Ipupu: 383
+finish
+trigger Sohdede                 # no note from Ipupu: 384
+finish
+warp 253.2,-5.5,35.5 WestSarutabaruta
+trigger Ipupu                   # Hariga's note held: 47 (0, Note from Hariga-Origa)
+finish                          # Hariga's note gone, Note from Ipupu given
+trigger Ipupu                   # no Hariga note: nil, his default text IPUPU_DIALOG
+warp -60.5,-5.5,105.2 WindurstWaters
+trigger Serukoko                # Ipupu's note held: nil, his default 373
+finish
+trigger Sohdede                 # Ipupu's note held: nil, 374
+finish
+trigger Hariga-Origa            # Ipupu's note held: 385
+finish                          # completed: Map of the Horutoto Ruins, fame +20, exp 2000; Ipupu's note gone; local var Quest[2][20]mustZone 1
+trigger Hariga-Origa            # completed, Chasing Tales not completed: 386 (replaceDefault)
+finish
+trade Hariga-Origa BoneChip x1  # completed: nothing
+quest Windurst.ChasingTales completed
+trigger Hariga-Origa            # Chasing Tales completed: no section; A Smudge's offer needs fame level 4 (fame 20): her default 372
+finish

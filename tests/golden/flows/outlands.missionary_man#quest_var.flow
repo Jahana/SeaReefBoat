@@ -1,0 +1,12 @@
+# Missionary Man (outlands 7), the quest's own var at the completion: accepted, MissionaryManVar 4, the
+# Sublime Statue of the Goddess and Quest[5][7]Prog 1 (GMs). Rauteinot: 141; finished: the Scroll of Teleport-Yhoat
+# (npcUtil.giveItem), the var 0, the statue taken, Windurst fame +30, the raw player:completeQuest. The raw
+# completeQuest does no cleanup: Quest[5][7]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=Kazham pos=-37.9,-10,-89.7 job=WHM lvl=75
+quest Outlands.MissionaryMan accepted
+charvar MissionaryManVar 4
+keyitem SublimeStatueOfTheGoddess
+charvar Quest[5][7]Prog 1               # a GM: the quest's own var
+login
+trigger Rauteinot                       # 4: 141
+finish                                  # the scroll; the var 0; the statue taken; fame +30; completed, Prog kept

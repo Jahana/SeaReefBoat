@@ -1,0 +1,17 @@
+# Orastery Woes (windurst 86): the offer without the club, and the level edge's met side. A level-71 WAR (the Club of
+# Trials' level) at Club 2300: 578 (oncePerZone); its finish with a full bag (no club: giveItem false, not begun); a
+# second talk in the zone plays nothing (oncePerZone: priority Ignore; his script silent, no default); after a rezone
+# 578 again, begun (the club, 0 weapon skill points, and the Weapon Training Guide).
+lists PortWindurst/Kuroido-Moido/onTrigger PortWindurst/onEventFinish/578
+char zone=PortWindurst pos=-110.7,-4.25,102.06 job=WAR lvl=71
+quest Windurst.MakingAmends completed
+skill Club 2300
+login
+trigger Kuroido-Moido+7                                   # level 71, Club 2300, no guide: event 578 (oncePerZone)
+fill-inventory
+finish                                              # no club, the bag full: giveItem false, not begun
+free-inventory
+trigger Kuroido-Moido+7                                   # 578 played this zone: nothing (his script: Making Amends completed, fame below level 4: nothing; no default)
+rezone
+trigger Kuroido-Moido+7                                   # after the rezone: 578 again
+finish                                              # the Club of Trials and the Weapon Training Guide: begun

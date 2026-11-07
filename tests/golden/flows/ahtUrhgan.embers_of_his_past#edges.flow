@@ -1,0 +1,157 @@
+# Embers of His Past's edges: a level 75 Warrior with a Hydrangea and a Rusty Medal; Saga, Ode and Soothing completed,
+# Embers accepted (GMs). Mount Zhayolm's hours (`VanadielHour() >= 18 or <= 6`; the login is at 12:xx, and each
+# `wait vana=<n>` moves n hours on). Each event below is finished with Prog 9 set first by a GM (no Mount Zhayolm
+# section at Prog 9: no finish runs, the Hydrangea kept), then the next Prog set. 12:xx: Prog 4: Withered Petals: nil:
+# nothing (no default); Prog 8: the Hydrangea to her: nil. 17:xx: Prog 3: Sprightly Footsteps: nil
+# (NOTHING_OUT_OF_ORDINARY); Prog 4: Withered Petals: nil; Prog 8: the Hydrangea: nil. 18:xx: Prog 3: Sprightly 15,
+# Withered Petals nil; Prog 2: Sprightly nil; Prog 4: Sprightly nil, Withered Petals 16, the Hydrangea nil; Prog 8:
+# Withered Petals nil, the Hydrangea 17, a Rusty Medal nil, the Hydrangea with the medal nil; Prog 9: the Hydrangea nil.
+# Completed (a GM) at Prog 3: Sprightly nil; Prog 4: Withered Petals nil; Prog 8: the Hydrangea nil. 06:xx: Prog 3: 15;
+# Prog 4: 16; Prog 8: 17. 07:xx: the three nil. Wajaom's zone-in at Prog 0, 3 and 8, and completed at Prog 7: nil.
+# Prog 9 with a full bag: Fari-Wari 920, finished: complete false: no standing, no flag, no Option. Completed with
+# Option 1 (GMs), the bag still full: Fari-Wari 921, finished: the slip does not fit: Option 1 kept; freed: 921: the
+# slip, Option 0. Completed at Option 2: 923; at Prog 5: 923, the Hydrangea nil; Wajaom's zone-in completed at Prog 1, 2
+# and 6: nil. Accepted at Prog 10 (GMs): Fari-Wari: no section: 831.
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger WajaomWoodlands/onZoneIn/1 MountZhayolm/Sprightly_Footsteps/onTrigger MountZhayolm/Withered_Petals/onTrigger MountZhayolm/Withered_Petals/onTrade AhtUrhganWhitegate/onEventFinish/921
+char zone=MountZhayolm pos=858.653,-14.539,248.601 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent completed
+quest AhtUrhgan.OdeToTheSerpents completed
+quest AhtUrhgan.SoothingWaters completed
+quest AhtUrhgan.EmbersOfHisPast accepted
+charvar Quest[6][48]Prog 4
+item Hydrangea
+item RustyMedal
+login
+trigger Withered_Petals                 # 12:xx, Prog 4: nil: nothing
+finish-if-event
+charvar Quest[6][48]Prog 8              # a GM
+trade Withered_Petals Hydrangea x1      # Prog 8, the day: nil
+finish-if-event
+wait vana=5                             # 17:xx
+charvar Quest[6][48]Prog 3
+trigger Sprightly_Footsteps             # 17:xx, Prog 3: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][48]Prog 4
+trigger Withered_Petals                 # 17:xx, Prog 4: nil
+finish-if-event
+charvar Quest[6][48]Prog 8
+trade Withered_Petals Hydrangea x1      # 17:xx, Prog 8: nil
+finish-if-event
+wait vana=1                             # 18:xx
+charvar Quest[6][48]Prog 3
+trigger Sprightly_Footsteps             # 18:xx, Prog 3: the cutscene 15
+charvar Quest[6][48]Prog 9              # a GM: no section's 15 finish
+finish
+charvar Quest[6][48]Prog 3
+trigger Withered_Petals                 # Prog 3: nil
+finish-if-event
+charvar Quest[6][48]Prog 2
+trigger Sprightly_Footsteps             # Prog 2: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][48]Prog 4
+trigger Sprightly_Footsteps             # Prog 4: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+trigger Withered_Petals                 # Prog 4: the cutscene 16
+charvar Quest[6][48]Prog 9
+finish
+charvar Quest[6][48]Prog 4
+trade Withered_Petals Hydrangea x1      # Prog 4: nil
+finish-if-event
+charvar Quest[6][48]Prog 8
+trigger Withered_Petals                 # Prog 8: nil
+finish-if-event
+trade Withered_Petals Hydrangea x1      # Prog 8: the cutscene 17
+charvar Quest[6][48]Prog 9
+finish                                  # no finish: the Hydrangea kept
+charvar Quest[6][48]Prog 8
+trade Withered_Petals RustyMedal x1     # not the Hydrangea: nil
+finish-if-event
+trade Withered_Petals Hydrangea x1 RustyMedal x1   # not exactly the Hydrangea: nil
+finish-if-event
+charvar Quest[6][48]Prog 9
+trade Withered_Petals Hydrangea x1      # Prog 9: nil
+finish-if-event
+quest AhtUrhgan.EmbersOfHisPast completed      # GMs
+charvar Quest[6][48]Prog 3
+trigger Sprightly_Footsteps             # completed at Prog 3: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][48]Prog 4
+trigger Withered_Petals                 # completed at Prog 4: nil
+finish-if-event
+charvar Quest[6][48]Prog 8
+trade Withered_Petals Hydrangea x1      # completed at Prog 8: nil
+finish-if-event
+quest AhtUrhgan.EmbersOfHisPast available      # GMs: accepted again
+quest AhtUrhgan.EmbersOfHisPast accepted
+wait vana=12                            # 06:xx
+charvar Quest[6][48]Prog 3
+trigger Sprightly_Footsteps             # 06:xx, Prog 3: the cutscene 15
+charvar Quest[6][48]Prog 9
+finish
+charvar Quest[6][48]Prog 4
+trigger Withered_Petals                 # 06:xx, Prog 4: the cutscene 16
+charvar Quest[6][48]Prog 9
+finish
+charvar Quest[6][48]Prog 8
+trade Withered_Petals Hydrangea x1      # 06:xx, Prog 8: the cutscene 17
+charvar Quest[6][48]Prog 9
+finish
+wait vana=1                             # 07:xx
+charvar Quest[6][48]Prog 3
+trigger Sprightly_Footsteps             # 07:xx, Prog 3: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][48]Prog 4
+trigger Withered_Petals                 # 07:xx, Prog 4: nil
+finish-if-event
+charvar Quest[6][48]Prog 8
+trade Withered_Petals Hydrangea x1      # 07:xx, Prog 8: nil
+finish-if-event
+charvar Quest[6][48]Prog 3              # a GM
+warp 610.542,-28.547,356.247 WajaomWoodlands   # Prog 3: no zone-in arm: nil
+charvar Quest[6][48]Prog 0
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+warp 610.542,-28.547,356.247 WajaomWoodlands   # Prog 0: nil
+charvar Quest[6][48]Prog 8
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+warp 610.542,-28.547,356.247 WajaomWoodlands   # Prog 8: nil
+quest AhtUrhgan.EmbersOfHisPast completed      # GMs
+charvar Quest[6][48]Prog 7
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+warp 610.542,-28.547,356.247 WajaomWoodlands   # completed at Prog 7: nil
+quest AhtUrhgan.EmbersOfHisPast available      # GMs: accepted again
+quest AhtUrhgan.EmbersOfHisPast accepted
+charvar Quest[6][48]Prog 9
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+fill-inventory
+trigger Fari-Wari                       # Prog 9: 920
+finish                                  # full: the Gold Piece does not fit: complete false: nothing more
+quest AhtUrhgan.EmbersOfHisPast completed      # GMs
+charvar Quest[6][48]Option 1
+trigger Fari-Wari                       # completed, no zoning flag, Option 1: 921
+finish                                  # full: no slip: Option 1 kept
+free-inventory
+trigger Fari-Wari                       # 921
+finish                                  # the slip; Option 0
+charvar Quest[6][48]Option 2            # a GM: completed at Option 2
+trigger Fari-Wari                       # Option 2 (not 1): 923
+finish
+charvar Quest[6][48]Option 0
+charvar Quest[6][48]Prog 5              # a GM: completed at Prog 5
+trigger Fari-Wari                       # completed at Prog 5: 923 (not Prog 5's 924)
+finish
+trade Fari-Wari Hydrangea x1            # completed at Prog 5: nil
+finish-if-event
+charvar Quest[6][48]Prog 1
+warp 610.542,-28.547,356.247 WajaomWoodlands   # completed at Prog 1: nil
+charvar Quest[6][48]Prog 2
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+warp 610.542,-28.547,356.247 WajaomWoodlands   # completed at Prog 2: nil
+charvar Quest[6][48]Prog 6
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+warp 610.542,-28.547,356.247 WajaomWoodlands   # completed at Prog 6: nil
+quest AhtUrhgan.EmbersOfHisPast available      # GMs: accepted at Prog 10
+quest AhtUrhgan.EmbersOfHisPast accepted
+charvar Quest[6][48]Prog 10
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # accepted, Prog 10: no section: 831
+finish

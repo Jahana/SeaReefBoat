@@ -1,0 +1,54 @@
+# The Fighting Fourth (crystalWar 7) with a campaign allegiance (no flow statement sets one: the char completes Steamed
+# Rams first, allegiance 1). A level 99 Warrior in Southern San d'Oria [S] with the Red Recommendation Letter (missions
+# as Steamed Rams' main flow). Mainchelite 7, accepted: Steamed Rams begun; the three (GMs): 12: completed, allegiance
+# 1. The Eldieme [S]: Turbulent Storm, nothing held, allegiance 1: the quest's 7, then the script's 9 (an allegiance),
+# then the quest's 7, accepted: the Blue letter; the letter: the quest's 8, then the script's 9. Bastok Markets [S]:
+# Adelbrecht 139 (0, 0), option 1: begun; Prog 3 (a GM), the Bronze Ribbon of Service taken (a GM: Steamed Rams gave
+# it), a full inventory: 143, finished: pledged: no shoes, completed, no ribbon, allegiance 2, NOW_ALLIED_WITH 2.
+# Completed: Turbulent Storm: the quest's 9, then the script's 9. Snake on the Plains completed (a GM): Windurst Waters
+# [S]: Miah Riyuh: completed, allegiance 2: 121.
+lists SouthernSanDoriaS/Mainchelite/onTrigger TheEldiemeNecropolisS/Turbulent_Storm/onTrigger TheEldiemeNecropolisS/onEventFinish/7 BastokMarketsS/Adelbrecht/onTrigger BastokMarketsS/onEventFinish/139 BastokMarketsS/onEventFinish/143 WindurstWatersS/Miah_Riyuh/onTrigger
+char zone=SouthernSanDoriaS pos=-13.849,1.398,-30.368 job=WAR lvl=99
+keyitem RedRecommendationLetter
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Mainchelite                     # Steamed Rams: 7
+finish option=0                         # Steamed Rams begun
+keyitem CharredPropeller
+keyitem OxidizedPlate
+keyitem PieceOfShatteredLumber
+trigger Mainchelite                     # 12
+finish                                  # Steamed Rams completed; allegiance 1
+warp 423.961,-48,-47.308 TheEldiemeNecropolisS
+trigger Turbulent_Storm                 # nothing held, allegiance 1: the quest's 7
+finish option=1                         # nothing
+trigger Turbulent_Storm                 # the script's 9 (an allegiance)
+finish
+trigger Turbulent_Storm                 # the quest's 7
+finish option=0                         # the Blue Recommendation Letter
+trigger Turbulent_Storm                 # the script's 9
+finish
+trigger Turbulent_Storm                 # the letter: the quest's 8
+finish
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # the letter: 139 (0, 0)
+finish option=1                         # begun; the rations
+charvar Quest[7][7]Prog 3
+delkeyitem BronzeRibbonOfService
+fill-inventory
+trigger Adelbrecht                      # Prog 3: 143
+finish                                  # pledged: no shoes (the full bag no matter); completed; no ribbon; allegiance 2
+free-inventory
+warp 423.961,-48,-47.308 TheEldiemeNecropolisS
+trigger Turbulent_Storm                 # completed: the quest's 9
+finish
+trigger Turbulent_Storm                 # the script's 9
+finish
+quest CrystalWar.SnakeOnThePlains completed
+warp 6.823,-1,37.462 WindurstWatersS
+trigger Miah_Riyuh                      # Snake completed, allegiance 2: 121
+finish

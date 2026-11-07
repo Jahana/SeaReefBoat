@@ -1,0 +1,50 @@
+# Grimy Signposts (sandoria 66): Prog values set by GM. Available with Prog 15 and fame level 1 (no section: 46).
+# Accepted, Prog 14 (under 15: Maugie's 43); Prog 16 (neither under 15 nor 15: no section, Maugie's default 46: the
+# completed section's 42, replaceDefault, would beat it); Prog -1 (under 15: Maugie's 43). Jugner Forest: Prog -1
+# (every bit set: the first Signpost's own 4); Prog 16 (no section: its script's 4); Prog 14 (bits 3, 2, 1 set, bit 0
+# not): the first three Signposts each play their script's event (4, 3, 2: each one's bit-set side), the fourth its
+# cutscene 6 (1), left grimy (option 0). Completed with Prog 15 by GM (the status operand of the Prog-15 section:
+# Maugie's 42, not 44); completed with Prog 0 (the Signposts' section's status operand: the fourth Signpost's own 1,
+# not 6).
+lists SouthernSanDoria/Maugie/onTrigger JugnerForest/Signpost/onTrigger JugnerForest/onEventFinish/6
+char zone=SouthernSanDoria pos=106.6,2.0,-16.7 job=WAR lvl=30
+charvar Quest[0][66]Prog 15
+login
+trigger Maugie                            # available, fame level 1, Prog 15: no section; 46
+finish
+quest Sandoria.GrimySignposts accepted
+charvar Quest[0][66]Prog 14
+trigger Maugie                            # Prog 14: 43
+finish
+charvar Quest[0][66]Prog 16
+trigger Maugie                            # Prog 16: no section; 46
+finish
+charvar Quest[0][66]Prog -1
+trigger Maugie                            # Prog -1 (under 15): 43
+finish
+warp -71.9,2.2,100.6 JugnerForest
+trigger Signpost                          # Prog -1: every bit set: nil; its script's 4
+finish
+charvar Quest[0][66]Prog 16
+trigger Signpost                          # Prog 16: no section; its script's 4
+finish
+charvar Quest[0][66]Prog 14
+trigger Signpost                          # Prog 14, offset 0, bit 3 set: nil; its script's 4
+finish
+warp -258.7,0.0,-23.2 JugnerForest
+trigger Signpost+1                        # offset 1, bit 2 set: nil; its script's 3
+finish
+warp -456.3,2.4,-416.1 JugnerForest
+trigger Signpost+2                        # offset 2, bit 1 set: nil; its script's 2
+finish
+warp 302.9,0.2,418.9 JugnerForest
+trigger Signpost+3                        # offset 3, bit 0 unset: cutscene 6 (1)
+finish option=0                           # left grimy: Prog stays 14
+quest Sandoria.GrimySignposts completed
+charvar Quest[0][66]Prog 0
+trigger Signpost+3                        # completed, Prog 0: no section; its script's 1
+finish
+charvar Quest[0][66]Prog 15
+warp 106.6,2.0,-16.7 SouthernSanDoria
+trigger Maugie                            # completed, Prog 15: 42, not 44
+finish

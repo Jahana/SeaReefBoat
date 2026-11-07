@@ -1,0 +1,37 @@
+# probe (quest rework P3): three chars in a party formed by the engine's own invite and accept, and a stock NPC whose Lua
+# reads #player:getParty() and each member's zone, distance and nation: Vilatroire (West Ronfaure) answers Introduction
+# to Teamwork (sandoria 63, Lua when recorded) with 129 only for a party, and its update reads the members. Not a quest
+# port: the key names no quest (Program.IsProbe), and coverage leaves it out.
+# engine-small-2: re-recorded on C# (`rerecord`, the trace's recorder csharp-rerecord) when the play time
+# moved onto the steady clock and every login's 0x00A changed; a Lua record refuses, since Introduction to Teamwork on C#
+# answers it (a probe records Lua only).
+char zone=WestRonfaure pos=-258.5,-71,423.4 nation=0 lvl=20
+char bob zone=WestRonfaure pos=-261,-71,421 nation=1 race=2 job=WAR lvl=20
+char carl zone=WestRonfaure pos=-256,-71,426 nation=0 race=5 job=WHM lvl=20
+quest Sandoria.IntroductionToTeamwork accepted
+bob: item CopperIngot       # bob's fixture row (a setup line of bob's)
+login
+bob: login                  # main sees bob come into view, bob sees main
+bob: charvar P3Probe 1      # a GM's call on bob (setCharVar): bob's char_vars row
+carl: login
+trigger Vilatroire          # no party: #party is 1, no event (Vilatroire's default)
+finish-if-event
+invite bob                  # GROUP_SOLICIT_REQ: bob gets the invite (0x0DC)
+bob: accept                 # GROUP_SOLICIT_RES: main leads, bob joins; the lists on the tick (PartyReload routed back)
+trigger Vilatroire          # a party of two: 129 { [1] = 1 }
+update 129 option=$bob      # bob is Bastok: one of San d'Oria, updateEvent(3, 1) (the option is bob's id; the Lua ignores it)
+finish option=$bob          # an option not 0: not completed
+invite carl
+carl: accept                # a party of three: main, bob, carl
+trigger Vilatroire
+update 129 option=0         # main and carl San d'Oria, all in range: updateEvent(15, 1) and Prog 1
+finish option=1             # an option not 0: not completed
+bob: walk -230,-71,421      # bob 28 yalms off
+trigger Vilatroire
+update 129 option=0         # a member out of range (checkDistance > 15): updateEvent(1)
+finish option=1
+bob: warp 90,-62,268 EastRonfaure
+tick 400                    # bob's zone-in reload: back in main's party, in another zone
+trigger Vilatroire
+update 129 option=0         # a member in another zone: updateEvent(1)
+finish option=1

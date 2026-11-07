@@ -1,0 +1,69 @@
+# Waking the Colossus' Progress and Event replies against the rival containers at the same NPCs (task 5 review
+# Important 1): a Progress reply ties a Progress rival and beats an Event one; an Event reply loses to the first and
+# ties the second. main, carl and dan talk once; bob, eve and fay talk twice; finish option 1 leaves every state as it
+# was (eve's plain finish sets Prog 2). main (Naja Salaheem, 929 at Prog 5 with the Whisper): Promotion: Private First
+# Class accepted answers 5001 (an Event): 929 over it. bob / carl / dan (Imperial Whitegate, bob twice: 926 available
+# at Prog 1 without the missive; 927 the Jeuno letter at Prog 2; 928 the Whisper at Prog 4): Trust: Nashmeira's 5092
+# (a Progress): the tie (bob twice: the first container's, then the other rotated). eve (Ru'Lude Gardens _6r9: 10115
+# at Prog 1): talk, finish (Prog 2), a GM sets Prog 1, talk again: 10115 again. fay (Metalworks Iron_Eater, 968 at
+# Prog 2 with the Imperial Missive): Bastok 3-1 current answers 715 (a Progress): the tie, twice (the first
+# container's, then the other rotated).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/Imperial_Whitegate/onTrigger RuludeGardens/_6r9/onTrigger Metalworks/Iron_Eater/onTrigger
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75 nation=1
+char bob zone=AhtUrhganWhitegate pos=155.796,-4.199,0.03 job=WAR lvl=75 nation=1
+char carl zone=AhtUrhganWhitegate pos=155.796,-4.199,0.03 job=WAR lvl=75 nation=1
+char dan zone=AhtUrhganWhitegate pos=155.796,-4.199,0.03 job=WAR lvl=75 nation=1
+char eve zone=RuludeGardens pos=0,-5,66 job=WAR lvl=75 nation=1
+char fay zone=Metalworks pos=91,-19,1 job=WAR lvl=75 nation=1
+setting ENABLE_TRUST_QUESTS 1
+quest AhtUrhgan.WakingTheColossus accepted
+charvar Quest[6][74]Prog 5
+keyitem WhisperOfRadiance
+quest AhtUrhgan.PromotionPrivateFirstClass accepted
+bob: charvar Quest[6][74]Prog 1
+bob: keyitem SanDoriaTrustPermit
+bob: mission Toau TheEmpressCrowned completed
+carl: quest AhtUrhgan.WakingTheColossus accepted
+carl: charvar Quest[6][74]Prog 2
+carl: keyitem JeunoanApprovalLetter
+carl: keyitem SanDoriaTrustPermit
+carl: mission Toau TheEmpressCrowned completed
+dan: quest AhtUrhgan.WakingTheColossus accepted
+dan: charvar Quest[6][74]Prog 4
+dan: keyitem WhisperOfRadiance
+dan: keyitem SanDoriaTrustPermit
+dan: mission Toau TheEmpressCrowned completed
+eve: quest AhtUrhgan.WakingTheColossus accepted
+eve: charvar Quest[6][74]Prog 1
+eve: keyitem ImperialMissive
+fay: quest AhtUrhgan.WakingTheColossus accepted
+fay: charvar Quest[6][74]Prog 2
+fay: keyitem ImperialMissive
+fay: mission Bastok TheFourMusketeers current
+login
+trigger Naja_Salaheem                   # 929 over the Private First Class's 5001
+finish option=1
+bob: login
+bob: mission Toau EternalMercenary current   # a GM
+bob: trigger Imperial_Whitegate         # 926 ties 5092: the first container's
+bob: finish option=1
+bob: trigger Imperial_Whitegate         # rotated: the other
+bob: finish option=1
+carl: login
+carl: trigger Imperial_Whitegate        # 927 ties 5092
+carl: finish option=1
+dan: login
+dan: trigger Imperial_Whitegate         # 928 ties 5092
+dan: finish option=1
+eve: login
+eve: trigger _6r9                       # Prog 1: 10115
+eve: finish                             # Prog 2
+eve: charvar Quest[6][74]Prog 1         # a GM
+eve: trigger _6r9                       # 10115 again
+eve: finish
+fay: login
+fay: missionstatus Bastok 0
+fay: trigger Iron_Eater                 # 968 ties 715: the first container's
+fay: finish option=1
+fay: trigger Iron_Eater                 # rotated: the other
+fay: finish option=1

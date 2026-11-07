@@ -1,0 +1,31 @@
+# The Brugaire Consortium (sandoria 12) with a full inventory: 509 cannot give the first parcel (not begun); 511 cannot
+# give the second (Option stays 0: 511 again); 515 cannot give the Lauan Shield (not completed: its finish ignores the
+# result, so 515 plays again); each then with room.
+char zone=PortSanDoria pos=-9.133,-8,-122.199 job=WAR lvl=10 gil=1000
+login
+fill-inventory
+trigger Fontoumant                        # 509
+finish                                    # option 0, no room: giveItem false, not begun
+free-inventory
+trigger Fontoumant                        # 509
+finish                                    # the Parcel for the Magic Shop; begun
+trade Fontoumant gil=100                  # 608
+finish                                    # Prog 1
+fill-inventory
+trigger Fontoumant                        # Prog 1 > Option 0: 511
+finish                                    # no room: Option stays 0
+free-inventory
+trigger Fontoumant                        # 511 again
+finish                                    # the Parcel for the Auction House; Option 1
+trade Fontoumant gil=100                  # 609
+finish                                    # Prog 2
+trigger Fontoumant                        # 512
+finish                                    # the Parcel for the Pub; Option 2
+trade Fontoumant gil=100                  # 610
+finish                                    # Prog 3
+fill-inventory
+trigger Fontoumant                        # 515
+finish                                    # no room: not completed (the result is ignored)
+free-inventory
+trigger Fontoumant                        # 515 again
+finish                                    # completed: Lauan Shield, fame +20, Courier Extraordinaire

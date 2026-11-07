@@ -1,0 +1,71 @@
+# Forge Your Destiny (outlands 129): a level 30 Warrior (ADVANCED_JOB_LEVEL 30) in Norg. Available: Jaucribaix 25,
+# option 0: not begun; 25, option 1: begun. Accepted: Jaucribaix 26 (waitTime 0); Aeka 44 (the oriental steel, Option
+# bit 0), then 45 (held); Ranemaud 40 (the sprig, bit 1), then 41 (held). Konschtat Highlands' qm3:
+# BLACKENED_SHOULD_PLACE; the steel traded from 1.5 yalms: the Forger spawned and claimed, PLACE_BLACKENED_SPOT; qm3:
+# NOT_THE_TIME_FOR_THAT; the Forger killed (it drops the Lump of Bomb Steel): its body stays spawned (qm3 still
+# NOT_THE_TIME_FOR_THAT) until the despawn (tick 15000: the body goes, tick 4000: it fades, and its DESPAWN listener sets
+# the qm's forgerNextPopAllowedTime to now + 120): qm3 BLACKENED_SPOT_ON_GROUND (the quest's). Zi'Tah's qm2:
+# LOOKS_LIKE_STURDY_BRANCH; a Hatchet traded (the sprig held): the Guardian Treant spawned and claimed,
+# SENSE_STRONG_EVIL_PRESENCE; qm2: NOT_THE_TIME_FOR_THAT; the Treant killed: Prog 1; despawned: qm2 NO_LONGER_SENSE_EVIL;
+# the sprig traded: the Sacred Branch, Prog 2, STRANGE_FORCE_VANISHED; qm2: NEWLY_SPROUTED_GLOWING. Norg: Aeka 49 (the
+# bomb steel held); Ranemaud 48 (the branch held); Jaucribaix 26, then the bomb steel and the branch traded: 27 (taken;
+# waitTime now + 10368); Jaucribaix 28 (72); Aeka 50; Ranemaud nil (his default 68). A day on: Jaucribaix 29: completed
+# (Mumeito, the Samurai gesture, Bushido Blade, Norg fame), YOU_CAN_NOW_BECOME_A_SAMURAI, Samurai unlocked. Jaucribaix
+# again: no section holds (a Warrior): his default 71.
+lists Norg/Jaucribaix/onTrigger Norg/Jaucribaix/onTrade Norg/Aeka/onTrigger Norg/Ranemaud/onTrigger KonschtatHighlands/qm3/onTrade TheSanctuaryOfZitah/qm2/onTrade Norg/onEventFinish/29
+char zone=Norg pos=91,-7,-8 job=WAR lvl=30
+login
+trigger Jaucribaix                      # available: 25 (Sacred Branch, Lump of Bomb Steel)
+finish option=0                         # not begun
+trigger Jaucribaix                      # 25
+finish option=1                         # begun
+trigger Jaucribaix                      # accepted, waitTime 0: 26
+finish
+trigger Aeka                            # no steel, Option bit 0 clear: 44
+finish                                  # the Lump of Oriental Steel; bit 0
+trigger Aeka                            # the oriental steel held: 45
+finish
+trigger Ranemaud                        # waitTime 0, no branch, no sprig, bit 1 clear: 40
+finish                                  # the Sacred Sprig; bit 1
+trigger Ranemaud                        # the sprig held: 41
+finish
+warp -709,2,102 KonschtatHighlands
+trigger qm3                             # the Forger not up, cooldown 0: BLACKENED_SHOULD_PLACE (Lump of Oriental Steel)
+trade qm3 LumpOfOrientalSteel x1        # from 1.5 yalms: the Forger spawned and claimed; PLACE_BLACKENED_SPOT
+trigger qm3                             # the Forger up: NOT_THE_TIME_FOR_THAT
+kill FORGER                             # no quest handler; it drops the Lump of Bomb Steel
+trigger qm3                             # its body still spawned: NOT_THE_TIME_FOR_THAT
+tick 15000                              # the body despawns (15 s after the death)
+tick 4000                               # and fades: the DESPAWN listener: cooldown now + 120
+trigger qm3                             # cooldown ahead: BLACKENED_SPOT_ON_GROUND (the quest's)
+warp 642,-5,-150 TheSanctuaryOfZitah
+trigger qm2                             # Prog 0, the Treant not up, cooldown 0: LOOKS_LIKE_STURDY_BRANCH (Hatchet)
+item Hatchet                            # a GM
+trade qm2 Hatchet x1                    # the sprig held: the Treant spawned and claimed; SENSE_STRONG_EVIL_PRESENCE
+trigger qm2                             # the Treant up: NOT_THE_TIME_FOR_THAT
+kill GUARDIAN_TREANT                    # Prog 1
+tick 15000                              # the body despawns
+tick 4000                               # and fades: cooldown now + 600
+trigger qm2                             # Prog 1: NO_LONGER_SENSE_EVIL
+trade qm2 SacredSprig x1                # Prog 1: the Sacred Branch; Prog 2; STRANGE_FORCE_VANISHED
+trigger qm2                             # Prog 2: NEWLY_SPROUTED_GLOWING (Sacred Sprig)
+warp 4,0,-4 Norg
+trigger Aeka                            # the bomb steel held: 49
+finish
+trigger Ranemaud                        # the branch held: 48
+finish
+trigger Jaucribaix                      # waitTime 0: 26
+finish
+trade Jaucribaix LumpOfBombSteel x1 SacredBranch x1 # 27
+finish                                  # the trade taken; waitTime now + 10368
+trigger Jaucribaix                      # 10368 s left: 28 (72)
+finish
+trigger Aeka                            # waitTime set: 50
+finish
+trigger Ranemaud                        # waitTime set: nil: his default 68
+finish
+wait jst=1                              # waitTime passed
+trigger Jaucribaix                      # 29 (Mumeito)
+finish                                  # completed; YOU_CAN_NOW_BECOME_A_SAMURAI; Samurai unlocked
+trigger Jaucribaix                      # completed (no section), a Warrior (no Samurai quest): default 71
+finish

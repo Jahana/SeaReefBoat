@@ -1,0 +1,31 @@
+# Tutorial, the level arms: a level 18 Warrior (nation 1) in Bastok Markets. Prog 7 (a GM): level 18 >= 5: 709; full:
+# giveItem fails, Prog stays 7; with room: the Raising Earring, Prog 8. Prog 10 (a GM): level 18: 715 (1); full: no
+# voucher; with room: the Copper A.M.A.N. Voucher, Prog 11. Prog 11, no support job: 716 (1). Then at Selele in Windurst
+# Woods (level 18): Prog 7: 1000 (the Raising Earring; Prog 8); Prog 10: 1006 (2) (the voucher; Prog 11).
+# The step 11 pass arm (a support job): #support.
+lists BastokMarkets/Gulldago/onTrigger BastokMarkets/onEventFinish/709 BastokMarkets/onEventFinish/715 WindurstWoods/Selele/onTrigger WindurstWoods/onEventFinish/1000 WindurstWoods/onEventFinish/1006
+char zone=BastokMarkets pos=-362,-10,-167 job=WAR lvl=18 nation=1
+charvar HQuest[Tutorial]Prog 7
+login
+fill-inventory
+trigger Gulldago                        # level 18: 709
+finish                                  # no room: Prog stays 7
+free-inventory
+trigger Gulldago                        # 709
+finish                                  # the Raising Earring; Prog 8
+charvar HQuest[Tutorial]Prog 10         # a GM
+fill-inventory
+trigger Gulldago                        # 715 (1)
+finish                                  # no room: Prog stays 10
+free-inventory
+trigger Gulldago                        # 715 (1)
+finish                                  # the Copper A.M.A.N. Voucher; Prog 11
+trigger Gulldago                        # no support job: 716 (1)
+finish
+warp 106.8,-5,-29.5 WindurstWoods
+charvar HQuest[Tutorial]Prog 7          # a GM
+trigger Selele                          # level 18: 1000
+finish                                  # the Raising Earring; Prog 8
+charvar HQuest[Tutorial]Prog 10         # a GM
+trigger Selele                          # level 18: 1006 (2)
+finish                                  # the Copper A.M.A.N. Voucher; Prog 11

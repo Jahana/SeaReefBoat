@@ -1,0 +1,15 @@
+# The Gobbiebag Part I (jeuno 27): the template's Mog Satchel arm (the same code for every part: GobbiebagQuest's 73
+# finish). A Mog Satchel of 30 (storage satchel; a fresh char has none, and only charCreate with
+# START_INVENTORY over 30 or the !setbag GM command give one). Accepted by a GM: the four items: 73 (36), finished:
+# completed, the inventory 35 and the satchel 35, INVENTORY_INCREASED.
+lists LowerJeuno/Bluffnix/onTrade LowerJeuno/onEventFinish/73
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+storage satchel 30                      # a Mog Satchel (char_storage.satchel), the arm getContainerSize(MOGSATCHEL) > 0
+quest Jeuno.TheGobbiebagPartI accepted
+item SquareOfDhalmelLeather
+item SteelIngot
+item SquareOfLinenCloth
+item Peridot
+login
+trade Bluffnix SquareOfDhalmelLeather x1 SteelIngot x1 SquareOfLinenCloth x1 Peridot x1 # the four items: 73 (36)
+finish                                  # completed; inventory 35; the satchel 30 -> 35; INVENTORY_INCREASED

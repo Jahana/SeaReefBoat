@@ -1,0 +1,49 @@
+# Go! Go! Gobmuffin! (otherAreas 69): the edges. CoP The Savage current (Sheltering Doubt just completed: the check's
+# boundary): 232, finished: begun. Prog 2 (a GM): Epinolle 233 (Prog == 1, not >= 1). Riverne: 17: the three up. +2
+# killed first: GobmuffinNM 4; +0: 5. The corpses gone, +1 up: 17: nothing (one up; from 40 yalms: +1 alone). A zone
+# change (to Tavnazian Safehold and back) clears the local var: +1 killed: 2, Prog 0. The corpses gone, 17: the three
+# again. Prog 1 (a GM): each killed: nothing (+0, +1, +2 at Prog 1). The corpses gone, 17 at Prog 1: nothing spawned
+# (from 40 yalms: none).
+lists TavnazianSafehold/Epinolle/onTrigger TavnazianSafehold/onEventFinish/232 TavnazianSafehold/onEventFinish/234 RiverneSiteB01/onEventFinish/17 RiverneSiteB01/Book_Browser_Bokabraq/onMobDeath RiverneSiteB01/Chemical_Cook_Chemachiq/onMobDeath RiverneSiteB01/Spell_Spitter_Spilospok/onMobDeath
+char zone=TavnazianSafehold pos=-100.7,-27.25,58.8 job=WAR lvl=75
+mission Cop TheSavage current
+login
+trigger Epinolle                        # Sheltering Doubt completed: 232
+finish                                  # begun
+charvar Quest[4][69]Prog 2              # a GM
+trigger Epinolle                        # Prog 2: 233
+finish
+charvar Quest[4][69]Prog 0              # a GM
+warp 387.2,49.8,693.7 RiverneSiteB01
+trigger DISPLACEMENT_OFFSET+15          # 17
+finish option=0                         # the three spawned
+kill SPELL_SPITTER_SPILUSPOK+2          # bit 2: GobmuffinNM 4
+kill SPELL_SPITTER_SPILUSPOK            # bit 0: 5
+# (no rezone between the kills: a zone change clears the local var GobmuffinNM. The warp's afterZoneIn, 4 s after the
+# zone-in, falls in this second kill's step, since the steps before did not reach it: so its ret shows here)
+tick 15000                              # the corpses despawn
+tick 15000
+tick 15000
+trigger DISPLACEMENT_OFFSET+15          # 17
+finish option=0                         # +1 up: nothing
+walk 300,88,808                         # 40 yalms from the NMs: +1 alone
+warp -100.7,-27.25,58.8 TavnazianSafehold # a zone change: the local var cleared
+warp 387.2,49.8,693.7 RiverneSiteB01
+kill SPELL_SPITTER_SPILUSPOK+1          # bit 1: GobmuffinNM 2; Prog 0
+# (the kill follows the warp back at once: the warp's afterZoneIn, 4 s after the zone-in, falls in this kill's step, so
+# its ret shows here)
+tick 15000                              # the corpse despawns
+tick 15000
+tick 15000
+trigger DISPLACEMENT_OFFSET+15          # 17
+finish option=0                         # none up: the three spawned
+charvar Quest[4][69]Prog 1              # a GM
+kill SPELL_SPITTER_SPILUSPOK            # Prog 1: nothing
+kill SPELL_SPITTER_SPILUSPOK+1          # Prog 1: nothing
+kill SPELL_SPITTER_SPILUSPOK+2          # Prog 1: nothing
+tick 15000                              # the corpses despawn
+tick 15000
+tick 15000
+trigger DISPLACEMENT_OFFSET+15          # 17
+finish option=0                         # Prog 1: nothing spawned
+walk 300,88,808                         # 40 yalms from the NMs: none

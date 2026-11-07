@@ -1,0 +1,22 @@
+# Chasing Quotas (sandoria 95) with its era module (quest rework P4): modules/era/lua/quests/sandoria/chasing_quotas.lua,
+# enabled by its condition xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0), wraps section 2's Port San
+# d'Oria onEventFinish 17: the quest's own finish (the hairpin taken, Prog 1, Wait = now + 60), then Wait = JstMidnight()
+# (1800025200, seven hours after the harness clock's 1800000000), where the quest's own leaves 1800000060. Accepted by
+# GM at Prog 0 with the hairpin: 17; Ceraulian's 3 (the wait); a JST day later 7 (Prog 2).
+module modules/era/lua/quests/sandoria/chasing_quotas.lua
+lists PortSanDoria/Ceraulian/onTrade PortSanDoria/onEventFinish/17
+char zone=PortSanDoria pos=0.626,-8,-120.914 job=DRG lvl=50
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Sandoria.TheHolyCrest completed
+quest Sandoria.ACraftsmansWork completed
+quest Sandoria.ChasingQuotas accepted
+item GoldHairpin
+login
+trade Ceraulian GoldHairpin x1            # Prog 0, just the hairpin: 17
+finish                                    # the hairpin taken; Prog 1; Wait = JstMidnight() (the module), not now + 60
+trigger Ceraulian                         # Prog 1, now before Wait: 3
+finish
+wait jst=1                                # past the next JST midnight
+trigger Ceraulian                         # Prog 1, now past Wait: 7
+finish                                    # Prog 2

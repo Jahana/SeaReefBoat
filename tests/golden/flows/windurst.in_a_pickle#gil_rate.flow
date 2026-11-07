@@ -1,0 +1,18 @@
+# In a Pickle (windurst 5) at GIL_RATE 1.0625 (exact in binary; setting <NAME> <decimal>, quest rework P5): 200 x
+# 1.0625 = 212.5, a product that ends in exactly one half, so the rounding shows. 659 pays through npcUtil.giveCurrency
+# (200 x GIL_RATE with GIL_OBTAINED: 213); 662's argument is the literal 200 and it pays addGil(GIL_RATE x 200) (the
+# engine's integral getter, llround: 213; a truncation would give 212), no message. Accepted (a GM); one stone at a
+# time (rare, stack 1: a GM gives each); the draws as the seed plays them after the colon.
+char zone=WindurstWaters pos=-69.0,-3.8,-4.4 job=WAR lvl=75
+setting GIL_RATE 1.0625
+quest Windurst.InAPickle accepted
+login
+item SmoothStone
+trade Chamama SmoothStone x1            # accepted: 659 / 657 / 658: 659
+finish                                  # 213 gil by giveCurrency, GIL_OBTAINED 213; completed
+item SmoothStone
+trade Chamama SmoothStone x1            # completed: 662 / 657 / 658: 657
+finish
+item SmoothStone
+trade Chamama SmoothStone x1            # 662 (200)
+finish                                  # 213 gil (addGil), no message

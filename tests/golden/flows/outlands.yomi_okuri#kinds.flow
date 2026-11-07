@@ -1,0 +1,58 @@
+# Washu's reply kinds (Norg; no script; default 80): Yomi Okuri (148 P at Prog 1; 151 E with the wurst; 149 E at Stage 0
+# without it; the trade's 150 P), Stop Your Whining (available, Norg fame level 4, level 10: 21 P; accepted: 22 / 23 P
+# with a barrel; completed: 24 E replaceDefault) and Chasing Dreams (Prog 2: 221 P; group 3). Yomi Okuri at Prog 2,
+# Stage 0, no wurst (GMs) and Stop Your Whining completed: 149 (Event) beats 24 (replaceDefault). Stop Your Whining
+# available, Norg fame 225 (level 4; GMs): 21 (Progress) beats 149; option 0: not begun. Yomi Okuri at Prog 1 (a GM):
+# 148 and 21 (both Progress): a tie: the container order puts outlands/SAM_AF2_Yomi_Okuri before
+# outlands/Stop_Your_Whining: 148 (its finish sets Prog 2); the next talk: 21 (Progress) over 149 (Event). Yomi Okuri at
+# Prog 3, Stage 1 (GMs: no arm) and Stop Your Whining completed (a GM): 24 (replaceDefault) over the default 80. Stop
+# Your Whining available at fame 224 (level 3): off: Washu's default 80. Prog 0, Stage 0 (GMs): 149 (not 148). The wurst (a GM) and fame 225: 21 (Progress) over
+# 151 (Event). Forge Your Destiny and The Sacred Katana completed, The Potential Within accepted, Prog 5 and the faded
+# hirasaka (GMs): Jaucribaix 156 (Progress) beats 179 (Event) on two talks (full inventory: complete false).
+lists Norg/Washu/onTrigger Norg/onEventFinish/148 Norg/onEventFinish/21
+char zone=Norg pos=49,-6,15 job=SAM lvl=75
+quest Outlands.YomiOkuri accepted
+charvar Quest[5][141]Prog 2
+quest Outlands.StopYourWhining completed
+login
+trigger Washu                           # 149 (Event) beats 24 (replaceDefault)
+finish
+fame Norg 225                           # a GM: level 4
+quest Outlands.StopYourWhining available   # a GM
+trigger Washu                           # 21 (Progress) beats 149 (Event)
+finish option=0                         # not begun
+charvar Quest[5][141]Prog 1             # a GM
+trigger Washu                           # 148 and 21 (Progress): a tie: the container order: 148
+finish option=0                         # 148: Prog 2
+trigger Washu                           # Prog 2: 21 (Progress) over 149 (Event)
+finish option=0
+charvar Quest[5][141]Prog 3             # a GM
+charvar Quest[5][141]Stage 1            # a GM: Yomi Okuri has no Washu arm
+quest Outlands.StopYourWhining completed   # a GM
+trigger Washu                           # 24 (replaceDefault) over the default 80
+finish
+fame Norg 224                           # a GM: level 3
+quest Outlands.StopYourWhining available   # a GM
+trigger Washu                           # Stop Your Whining off, Yomi Okuri nil: default 80
+finish
+charvar Quest[5][141]Prog 0             # a GM
+charvar Quest[5][141]Stage 0            # a GM
+trigger Washu                           # Prog 0 (not 1), no wurst, Stage 0: 149
+finish
+keyitem WashusTastyWurst                # a GM
+fame Norg 225                           # a GM: level 4: Stop Your Whining on
+trigger Washu                           # the wurst: 151 (Event) and 21 (Progress): 21
+finish option=0
+quest Outlands.ForgeYourDestiny completed   # a GM
+quest Outlands.TheSacredKatana completed    # a GM
+quest Outlands.ThePotentialWithin accepted  # a GM
+charvar Quest[5][141]Prog 5             # a GM
+keyitem FadedYomotsuHirasaka            # a GM
+trigger Jaucribaix                      # the faded hirasaka: 156 (Progress) beats 179 (Event)
+fill-inventory
+finish                                  # complete false (no room): still accepted
+free-inventory
+trigger Jaucribaix                      # 156 again (an Event 156 would tie with 179 and rotate to it)
+fill-inventory
+finish
+free-inventory

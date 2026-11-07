@@ -1,0 +1,48 @@
+# Jaucribaix's reply kinds (Norg; no script; default 71): the five quests of group 1. Forge Your Destiny (25 / 26 / 28 /
+# 29 P), The Sacred Katana (139 P; 140 / 143 E), Yomi Okuri (142 E / 146 P; 147 E, 152 P, 153 E, 154 P, 155 E, 156 P), A
+# Thief in Norg!? (157 E / 158 P; 159 / 161 / 163 / 167 E, 160 / 164 / 166 / 168 P; 165 E replaceDefault) and The
+# Potential Within (178 E once per zone; 179 / 182 E, 183 P). A level 75 Samurai, skill 2500, a Tachi of Trials held,
+# Forge Your Destiny and The Sacred Katana completed, Yomi Okuri accepted at Prog 2 without the feather and The
+# Potential Within accepted (GMs): 147 and 179 (both Event): a tie: the container order puts SAM_AF2_Yomi_Okuri before
+# The_Potential_Within: 147; then the tie rotates by the last event: 179, then 147 again. The Sacred Katana available
+# (a GM): 139 (Progress) beats both. The Sacred Katana completed again, Forge Your Destiny deleted and accepted, the
+# feather held (GMs): 26 and 152 (both Progress): a tie: Forge_Your_Destiny first: 26; the rotation: 152 (its finish:
+# Prog 4, the mustZone); then 26 (Progress) over 153 and 179 (Event). Forge Your Destiny completed, Yomi Okuri at Prog
+# 2, the Annals of Truth (GMs): 183 (Progress) beats 147 (Event): completed; then Yomi Okuri's 147.
+lists Norg/Jaucribaix/onTrigger Norg/onEventFinish/152
+char zone=Norg pos=91,-7,-8 job=SAM lvl=75
+skill GreatKatana 2500
+item TachiOfTrials
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri accepted
+charvar Quest[5][141]Prog 2
+quest Outlands.ThePotentialWithin accepted
+keyitem WeaponTrainingGuide
+login
+trigger Jaucribaix                      # 147 and 179 (1) (both Event): a tie: the container order: 147
+finish option=0
+trigger Jaucribaix                      # the rotation: 179 (1)
+finish option=0
+trigger Jaucribaix                      # 147 again
+finish option=0
+quest Outlands.TheSacredKatana available   # a GM
+trigger Jaucribaix                      # 139 (Progress) beats 147 and 179
+finish option=0
+quest Outlands.TheSacredKatana completed   # a GM
+quest Outlands.ForgeYourDestiny available  # a GM: deleted (a completed quest stays completed under addQuest)
+quest Outlands.ForgeYourDestiny accepted   # a GM
+keyitem YomotsuFeather                  # a GM
+trigger Jaucribaix                      # 26 and 152 (both Progress): a tie: the container order: 26
+finish
+trigger Jaucribaix                      # the rotation: 152
+finish
+trigger Jaucribaix                      # Prog 4: 26 (Progress) over 153 and 179 (Event)
+finish
+quest Outlands.ForgeYourDestiny completed   # a GM
+charvar Quest[5][141]Prog 2             # a GM: Yomi Okuri's 147 (no feather)
+keyitem AnnalsOfTruth                   # a GM
+trigger Jaucribaix                      # the annals: 183 (Progress) beats 147 (Event)
+finish                                  # completed (fame only: complete true); the key items taken; Tachi: Kasha
+trigger Jaucribaix                      # The Potential Within completed: Yomi Okuri's 147
+finish

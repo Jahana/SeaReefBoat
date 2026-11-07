@@ -1,0 +1,105 @@
+# Let Sleeping Dogs Lie (windurst 46): its replies next to rival lines, so a Progress line and an Event line differ.
+# Accepted by GM with Making the Grade accepted too (both at Prog 0), a level-10 WAR, Teacher's Pet completed, Windurst
+# fame 225. NPC scripts made to answer on their turn, as in making_the_grade#compete: Fuepepe's 817 (Class Reunion),
+# Pechiru-Mashiru's 54 (the New Model Hat), Mashuu-Ajuu's 464 / 476 (Reap What You Sow accepted), Moreno-Toeno's
+# 441 / 469 (always). The lookup: a Progress line plays on any talk; an Event line takes turns with the script; two or
+# three Event lines of the same handler cycle. Prog 0: Paku-Nakku 482 / 452; Fuepepe 493 / 817 / 443; Pechiru-Mashiru
+# 490 / 54 / 445; the children (this quest's 48x, Making the Grade's 44x / 45x) twice each; Mashuu-Ajuu 483 / script /
+# 448; Moreno-Toeno 491 / 444 / 439 with his script between. Prog 3: Paku-Nakku 499 (Progress) over 452, twice. Making
+# the Grade at Prog 2: Chomoro-Kyotoro's 460 (Progress) over this quest's 489, twice (Prog 2 again by GM). Prog 2
+# Option 1: Pechiru-Mashiru's 495 (Progress) on her script's turn, twice. Prog 4: 497 (Progress) with a full bag
+# (nothing), then 497: completed.
+lists WindurstWaters/Paku-Nakku/onTrigger WindurstWaters/Fuepepe/onTrigger WindurstWaters/Pechiru-Mashiru/onTrigger WindurstWaters/Akkeke/onTrigger WindurstWaters/Chomoro-Kyotoro/onTrigger WindurstWaters/Foi-Mui/onTrigger WindurstWaters/Kirarara/onTrigger WindurstWaters/Koko_Lihzeh/onTrigger WindurstWaters/Rukuku/onTrigger WindurstWaters/Mashuu-Ajuu/onTrigger WindurstWaters/Moreno-Toeno/onTrigger
+char zone=WindurstWaters pos=131,-5.75,165 job=WAR lvl=10
+quest Windurst.TeachersPet completed
+quest Windurst.MakingTheGrade accepted
+quest Windurst.LetSleepingDogsLie accepted
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 3
+quest Windurst.ReapWhatYouSow accepted
+keyitem NewModelHat
+fame Windurst 225
+login
+trigger Paku-Nakku                            # this quest's 482 (the Event lines cycle in the container order)
+finish
+trigger Paku-Nakku                            # Making the Grade's 452 (the next Event line)
+finish
+trigger Fuepepe                               # this quest's 493 (the Event lines cycle in the container order)
+finish
+trigger Fuepepe                               # his script's turn: 817
+finish
+charvar ClassReunion_TalkedToFupepe 0
+trigger Fuepepe                               # Making the Grade's 443 (the next Event line)
+finish
+trigger Pechiru-Mashiru                       # this quest's 490 (the Event lines cycle in the container order)
+finish
+trigger Pechiru-Mashiru                       # her script's turn: YOU_SHOW_OFF_THE, 54
+finish
+charvar QuestHatInHand_var 0
+trigger Pechiru-Mashiru                       # Making the Grade's 445 (the next Event line)
+finish
+trigger Akkeke                                # this quest's 484 (the Event lines cycle in the container order)
+finish
+trigger Akkeke                                # Making the Grade's 453 (the next Event line)
+finish
+trigger Chomoro-Kyotoro                       # this quest's 489 (the Event lines cycle in the container order)
+finish
+trigger Chomoro-Kyotoro                       # Making the Grade's 454 (the next Event line)
+finish
+trigger Foi-Mui                               # this quest's 486 (the Event lines cycle in the container order)
+finish
+trigger Foi-Mui                               # Making the Grade's 449 (the next Event line)
+finish
+trigger Kirarara                              # this quest's 485 (the Event lines cycle in the container order)
+finish
+trigger Kirarara                              # Making the Grade's 447 (the next Event line)
+finish
+trigger Koko_Lihzeh                           # this quest's 488 (the Event lines cycle in the container order)
+finish
+trigger Koko_Lihzeh                           # Making the Grade's 451 (the next Event line)
+finish
+trigger Rukuku                                # this quest's 487 (the Event lines cycle in the container order)
+finish
+trigger Rukuku                                # Making the Grade's 450 (the next Event line)
+finish
+trigger Mashuu-Ajuu                           # this quest's 483 (the Event lines cycle in the container order)
+finish
+trigger Mashuu-Ajuu                           # his script's turn: Reap What You Sow's 464
+finish
+trigger Mashuu-Ajuu                           # Making the Grade's 448 (the next Event line)
+finish
+trigger Moreno-Toeno                          # this quest's 491 (the Event lines cycle in the container order)
+finish
+trigger Moreno-Toeno                          # his script's turn: 469
+finish
+trigger Moreno-Toeno                          # Making the Grade's 444 (the next Event line)
+finish
+trigger Moreno-Toeno                          # his script's turn: 441
+finish
+trigger Moreno-Toeno                          # Teacher's Pet's 439 (the next Event line)
+finish
+charvar Quest[2][46]Prog 3
+trigger Paku-Nakku                            # Prog 3: 499 (Progress) over Making the Grade's 452
+finish option=1                               # not 2: nothing
+trigger Paku-Nakku                            # 499 again
+finish option=1
+charvar Quest[2][4]Prog 2
+trigger Chomoro-Kyotoro                       # Making the Grade at Prog 2: its 460 (Progress) over this quest's 489
+finish                                        # Making the Grade Prog 3
+charvar Quest[2][4]Prog 2
+trigger Chomoro-Kyotoro                       # 460 again
+finish
+charvar Quest[2][46]Prog 2
+charvar Quest[2][46]Option 1
+trigger Pechiru-Mashiru                       # Prog 2, Option 1: 495 (Progress) over 445, on her script's turn
+finish                                        # Prog 3
+charvar Quest[2][46]Prog 2
+trigger Pechiru-Mashiru                       # 495 again
+finish
+charvar Quest[2][46]Prog 4
+trigger Pechiru-Mashiru                       # Prog 4: 497 (Progress)
+fill-inventory
+finish                                        # the staff does not fit: complete fails: nothing; Prog 4
+free-inventory
+trigger Pechiru-Mashiru                       # 497 again
+finish                                        # completed: fame 40, the Hypno Staff

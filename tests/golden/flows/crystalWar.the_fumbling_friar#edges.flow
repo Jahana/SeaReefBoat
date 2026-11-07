@@ -1,0 +1,30 @@
+# The Fumbling Friar (crystalWar 22), the edges: a level 29 Warrior in Garlaige Citadel [S] (missions as the main flow).
+# No ribbon: Fondactiont: a Lilac: nil (no trade handler); a talk: nil (25). The ribbon (a GM), level 29: nil (25).
+# Grauberg [S]: qm2+104 available: nil (NOTHING_OUT_OF_ORDINARY). Accepted by a GM with the package (a GM), the bag full
+# (a GM): Fondactiont 28, finished: the scroll does not fit: not completed, the package kept; 28 again (the bag still
+# full): the same.
+lists GarlaigeCitadelS/Fondactiont/onTrade GarlaigeCitadelS/Fondactiont/onTrigger GarlaigeCitadelS/onEventFinish/28 GraubergS/qm2/onTrigger
+char zone=GarlaigeCitadelS pos=-93.71,0,195.616 job=WAR lvl=29
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item Lilac
+login
+trade Fondactiont Lilac x1              # available: nil (no trade handler)
+trigger Fondactiont                     # no ribbon: nil (25)
+finish-if-event
+keyitem BronzeRibbonOfService           # a GM
+trigger Fondactiont                     # level 29: nil (25)
+finish-if-event
+warp 81.376,-1.169,457.219 GraubergS
+trigger qm2+104                         # available: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+quest CrystalWar.TheFumblingFriar accepted # a GM
+keyitem OrnatePackage                   # a GM
+fill-inventory                          # a GM: no slot free
+warp -93.71,0,195.616 GarlaigeCitadelS
+trigger Fondactiont                     # the package: 28
+finish                                  # the scroll does not fit: not completed; the package kept
+trigger Fondactiont                     # still accepted, the package: 28
+finish

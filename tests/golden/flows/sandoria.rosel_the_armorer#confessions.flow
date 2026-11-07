@@ -1,0 +1,21 @@
+# Rosel the Armorer (sandoria 2) and ToAU mission 5 Confessions of Royalty on Guilerme: the reply kind of the quest's
+# 507. A San d'Oria char of rank 1 (it cannot enter the Chateau) on Confessions of Royalty with Raillefal's Letter: the
+# mission's Guilerme plays progressEvent 810. Rosel the Armorer accepted by GM, the Receipt for the Prince held, Stage
+# 1: the quest's Guilerme plays progressEvent 507 (0, 0, 0, 0, 0, 0, 0). Both are Progress priority, so the lookup plays
+# them in turn (interaction_lookup's action cycle). 810's option 0 does nothing (option 1 would send the char into the
+# Chateau); 507's finish takes the receipt (Option 0), which closes the quest's arm. An Event-priority 507 would lose to
+# 810 every time.
+lists NorthernSanDoria/Guilerme/onTrigger NorthernSanDoria/onEventFinish/507 NorthernSanDoria/onEventFinish/810
+char zone=NorthernSanDoria pos=-3.0,0.0,99.0 job=WAR lvl=30 nation=0
+mission Toau ConfessionsOfRoyalty current
+keyitem RaillefalsLetter
+quest Sandoria.RoselTheArmorer accepted
+keyitem ReceiptForThePrince
+charvar Quest[0][2]Stage 1
+login
+trigger Guilerme                          # 810 and 507 tie (Progress): the first of the cycle
+finish option=0
+trigger Guilerme                          # the other one
+finish option=0
+trigger Guilerme                          # the receipt gone once 507 finished: 810
+finish option=0

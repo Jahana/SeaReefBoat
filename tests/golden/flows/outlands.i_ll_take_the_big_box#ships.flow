@@ -1,0 +1,23 @@
+# I'll Take the Big Box's ships: level 50 Ninjas, accepted at Prog 4 with the Seance Staff (GMs). 20:00 (night): the
+# Ship bound for Selbina (pirates' copy): its Zone.lua spawns Enagakure; killed at Prog 4: Prog 5. bob: the Ship bound
+# for Selbina at night: Enagakure spawned; claimed (Prog 4), Prog 3 (a GM), killed: nothing (Prog stays 3). (Claimed
+# before the GM's Prog 3: a kill whose swing comes a step after the zone-in finds the NM moved, out of range, and kills
+# it unclaimed: no exp, no player for onMobDeath.)
+lists ShipBoundForSelbinaPirates/Enagakure/onMobDeath ShipBoundForSelbina/Enagakure/onMobDeath
+char zone=Rabao pos=-49.513,7.999,41.323 job=NIN lvl=50
+char bob zone=Rabao pos=-49.513,7.999,41.323 job=NIN lvl=50
+quest Outlands.ILlTakeTheBigBox accepted
+charvar Quest[5][144]Prog 4
+keyitem SeanceStaff
+bob: quest Outlands.ILlTakeTheBigBox accepted
+bob: charvar Quest[5][144]Prog 4
+bob: keyitem SeanceStaff
+login
+wait vana=8                             # 20:00
+warp 0.15,-2.1,3.25 ShipBoundForSelbinaPirates   # night, the staff, Prog 4: Enagakure spawned (Zone.lua)
+kill ENAGAKURE                          # Prog 4: Prog 5
+bob: login
+bob: warp 0.15,-2.1,3.25 ShipBoundForSelbina   # night, the staff, Prog 4: Enagakure spawned (Zone.lua)
+bob: claim ENAGAKURE                    # Prog 4: claimed
+bob: charvar Quest[5][144]Prog 3        # a GM
+bob: kill ENAGAKURE                     # Prog 3: nothing (the exp only)

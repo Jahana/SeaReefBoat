@@ -1,0 +1,13 @@
+# Reap What You Sow (windurst 29), completion parity: 475's finish while accepted is the Lua's raw player:completeQuest
+# (after the gil, the trade, needToZone; then the fame and the Stationery Set; 477 runs the same lines), so a GM's
+# Quest[2][29]Prog survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it).
+# Accepted (GM) beside Mashuu-Ajuu.
+char zone=WindurstWaters pos=129.6,-5.75,167.5 job=WAR lvl=75
+item SobbingFungus
+login
+quest Windurst.ReapWhatYouSow accepted
+charvar Quest[2][29]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Mashuu-Ajuu                     # his default 429 (beside him)
+finish
+trade Mashuu-Ajuu SobbingFungus x1      # accepted: 475
+finish                                  # 500 gil; the fungus taken; needToZone; completed; fame 10; the set; Prog kept

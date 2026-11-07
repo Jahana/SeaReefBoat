@@ -1,0 +1,29 @@
+# Orastery Woes (windurst 86): 579 without the club and its options. Accepted by GM with the guide alone: 579 (param
+# 0), option 0, 2 and 4 (nothing); option 1 with a full bag (giveItem fails: nothing); option 1 (the club, 0 weapon
+# skill points); the club traded: 580 (no finish handler); 579 (param 2), the Map to the Annals of Truth given by GM
+# while it is open, option 3: the quest deleted, the guide and the map taken. Then available, Club 0: not offered (nothing).
+lists PortWindurst/Kuroido-Moido/onTrigger PortWindurst/Kuroido-Moido/onTrade PortWindurst/onEventFinish/579
+char zone=PortWindurst pos=-110.7,-4.25,102.06 job=WAR lvl=75
+quest Windurst.MakingAmends completed
+quest Windurst.OrasteryWoes accepted
+keyitem WeaponTrainingGuide
+login
+trigger Kuroido-Moido+7                                   # accepted, no key items, no club: event 579 (0, Club of Trials, 0, 0, 0)
+finish option=0                                     # nothing
+trigger Kuroido-Moido+7                                   # 579 again
+finish option=2                                     # neither 1 nor 3: nothing
+trigger Kuroido-Moido+7                                   # 579 again
+finish option=4                                     # nothing
+trigger Kuroido-Moido+7                                   # 579 again
+fill-inventory
+finish option=1                                     # no club, the bag full: giveItem fails (its message)
+free-inventory
+trigger Kuroido-Moido+7                                   # 579 again
+finish option=1                                     # no club: the Club of Trials (0 weapon skill points)
+walk -110.7,-4.25,102.06
+trade Kuroido-Moido+7 ClubOfTrials x1                     # 0 weapon skill points: event 580
+finish                                              # 580 has no finish handler: the club kept
+trigger Kuroido-Moido+7                                   # the club held: 579 (..., 2)
+keyitem MapToTheAnnalsOfTruth                       # the map given by GM while 579 is open
+finish option=3                                     # the quest deleted; the guide and the map taken
+trigger Kuroido-Moido+7                                   # available, Club 0: not offered; nothing (his script: Making Amends completed, fame below level 4: nothing; no default)

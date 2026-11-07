@@ -1,0 +1,28 @@
+# Undying Flames (sandoria 26), each status operand alone (the GM sets the status, the other operands hold). Pagisalis
+# at fame level 2: available 562, accepted 565 (not 562), completed 566. Two lumps of beeswax: available nothing,
+# completed nothing, accepted 563. The finishes read no status: 562 finished after a GM completion while it is open
+# (option 0: addQuest, the current bit; still completed); 563 finished after a GM delQuest while it is open (completed
+# from available).
+char zone=NorthernSanDoria pos=136.6,6.5,131.7 job=WAR lvl=30
+item LumpOfBeeswax x4
+fame Sandoria 50
+login
+trigger Pagisalis                         # available, fame level 2: 562
+finish option=1                           # declined
+quest Sandoria.UndyingFlames accepted
+trigger Pagisalis                         # accepted, fame level 2: 565
+finish
+quest Sandoria.UndyingFlames completed
+trigger Pagisalis                         # completed, fame level 2: 566
+finish
+trade Pagisalis LumpOfBeeswax x2          # completed: nothing
+quest Sandoria.UndyingFlames available
+trade Pagisalis LumpOfBeeswax x2          # available: nothing
+trigger Pagisalis                         # 562
+quest Sandoria.UndyingFlames completed
+finish option=0                           # addQuest (the current bit); still completed
+quest Sandoria.UndyingFlames available
+quest Sandoria.UndyingFlames accepted
+trade Pagisalis LumpOfBeeswax x2          # accepted: 563
+quest Sandoria.UndyingFlames available
+finish                                    # available while 563 is open: completed all the same (lumps taken, the rope)

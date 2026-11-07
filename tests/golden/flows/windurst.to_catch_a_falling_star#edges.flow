@@ -1,0 +1,22 @@
+# To Catch a Falling Star (windurst 53): the trades while available, and 196's finish with a non-zero option.
+# Sigismund: the tear: nothing (not accepted). The Twinkle Tree at 03:00 and at 00:00 with the scales: nothing (not
+# accepted). Sigismund's 196 finish begins the quest on any option (the Lua's addQuest ignores it): option 1 begins it,
+# and his next talk is 197.
+char zone=PortWindurst pos=-109.04,-9.0,80.56 job=WAR lvl=75
+item StarfallTear
+item HandfulOfPugilScales x2
+login
+trigger Sigismund                       # available: 196 (0, 546)
+finish option=1                         # begun (any option)
+trigger Sigismund                       # accepted: 197 (0, 546)
+finish
+quest Windurst.ToCatchAFallingStar available
+trigger Sigismund                       # available again (a GM's delQuest): 196 (0, 546)
+finish option=2                         # begun (any option)
+quest Windurst.ToCatchAFallingStar available
+trade Sigismund StarfallTear x1         # available: nothing
+warp 154.5,-40.75,333.7 WestSarutabaruta
+wait vana=15                            # 03:00
+trade Twinkle_Tree HandfulOfPugilScales x1  # not accepted, hour 3: nothing
+wait vana=21                            # 00:00
+trade Twinkle_Tree HandfulOfPugilScales x1  # not accepted, hour 0: nothing

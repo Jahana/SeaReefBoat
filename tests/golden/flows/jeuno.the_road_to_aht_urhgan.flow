@@ -1,0 +1,60 @@
+# The Road to Aht Urhgan (jeuno 91): Lower Jeuno's Faursel (no script; default 10065). A level 75 Warrior, ENABLE_TOAU 1
+# (the default), no RoV mission, the six beginner items (five plus a second Damselfly Worm for the short trade) and a
+# Chocobo Feather. Available: a trade: no trade handler; Prog 0: 10062, option 0: nothing; option 1: Prog 1 (not added).
+# Prog 1: 10063 (0, 0, 0, 0, 0, 0); its updates: option 10: the beginner list (537 ... 542, 0, 0), 12: the intermediate
+# list, 13: the chips, 14: (1, 1, 1, 1, 1, 1, the gil: a fresh char's 1000, 1), 11: nothing; finished 0: nothing; 10063
+# again, option 1 (no RoV mission): nothing; option 2: begun (Prog 1). Accepted: 10064 (0, ..., 0), updates 10, 12, 13,
+# 14 and 11 as 10063's, finished 1 without the RoV mission: nothing; five of the six: nil; a coffer key and the feather:
+# nil; the six: 10069 (the trade taken, the mustZone, Prog 3, Timer 8001). Prog 3 with the mustZone: 10072; out and back
+# (cleared), Timer 8001 > day 8000: 10072; `wait vana=12` (day 8001): 10070, finished: completed (the reward table is
+# empty), the Boarding Permit. Completed: 10071 (replaceDefault).
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/Faursel/onTrade LowerJeuno/onEventUpdate/10063 LowerJeuno/onEventUpdate/10064 LowerJeuno/onEventFinish/10062 LowerJeuno/onEventFinish/10063 LowerJeuno/onEventFinish/10064 LowerJeuno/onEventFinish/10069 LowerJeuno/onEventFinish/10070
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+item DamselflyWorm x2
+item MagickedSkull
+item CrabApron
+item BloodyRobe
+item CupOfDhalmelSaliva
+item WildRabbitTail
+item DavoiCofferKey
+item ChocoboFeather
+login
+trade Faursel ChocoboFeather x1     # available: no trade handler; nothing
+trigger Faursel                     # Prog 0: 10062
+finish option=0                     # not 1: nothing
+trigger Faursel                     # 10062
+finish option=1                     # Prog 1; the quest not added
+trigger Faursel                     # Prog 1: 10063 (0, 0, 0, 0, 0, 0)
+update 10063 option=10              # updateEvent(537, 538, 539, 540, 541, 542, 0, 0)
+update 10063 option=12              # updateEvent(1532, 1533, 1535, 0, 0, 0, 0, 0)
+update 10063 option=13              # updateEvent(1692, 1693, 1694, 0, 0, 0, 0, 0)
+update 10063 option=14              # updateEvent(1, 1, 1, 1, 1, 1, 1000, 1): a fresh char's 1000 gil
+update 10063 option=11              # no arm: nothing
+finish option=0                     # not 2 / 3: not begun; no selection arm: nothing
+trigger Faursel                     # 10063
+finish option=1                     # not 2 / 3: not begun; option 1 without RoV Inescapable Binds: nothing
+trigger Faursel                     # 10063
+finish option=2                     # begun; "Let me think about it": Prog 1
+trigger Faursel                     # accepted, Prog 1: 10064 (0, 0, 0, 0, 0, 0)
+update 10064 option=10              # updateEvent(537, ..., 542, 0, 0)
+update 10064 option=12              # updateEvent(1532, 1533, 1535, 0, 0, 0, 0, 0)
+update 10064 option=13              # updateEvent(1692, 1693, 1694, 0, 0, 0, 0, 0)
+update 10064 option=14              # updateEvent(1, 1, 1, 1, 1, 1, 1000, 1): a fresh char's 1000 gil
+update 10064 option=11              # no arm: nothing
+finish option=1                     # option 1 without RoV Inescapable Binds: nothing
+trade Faursel DamselflyWorm x1 MagickedSkull x1 CrabApron x1 BloodyRobe x1 CupOfDhalmelSaliva x1 # five of six: nil
+trade Faursel DavoiCofferKey x1 ChocoboFeather x1 # a key and an extra item: nil
+trade Faursel DamselflyWorm x2 MagickedSkull x1 CrabApron x1 BloodyRobe x1 CupOfDhalmelSaliva x1 WildRabbitTail x1 # two worms: nil
+trade Faursel DamselflyWorm x1 MagickedSkull x1 CrabApron x1 BloodyRobe x1 CupOfDhalmelSaliva x1 WildRabbitTail x1 # the beginner list: 10069
+finish                              # the trade taken; the mustZone; Prog 3; Timer 8001
+trigger Faursel                     # Prog 3, the mustZone: 10072
+finish
+warp -52.5,0,101 UpperJeuno         # another zone: the mustZone cleared
+warp 39.5,4.1,-45.2 LowerJeuno
+trigger Faursel                     # Timer 8001 > day 8000: 10072
+finish
+wait vana=12                        # day 8001
+trigger Faursel                     # Timer reached, no mustZone: 10070
+finish                              # completed (empty reward); the Boarding Permit
+trigger Faursel                     # completed: 10071 (replaceDefault)
+finish

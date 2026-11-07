@@ -1,0 +1,31 @@
+# Sin Hunting with its era module (modules/era/lua/quests/windurst/sin_hunting.lua), enabled by its condition
+# xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0). It wraps section 2's Jugner Forest qm2 onTrigger: the
+# quest's own action at the full moon (getVanadielMoonCycle() == FULL_MOON), else nil. Accepted by GM at Prog 3, a
+# level-40 RNG. The harness clock starts at Vana'diel day 8000, 12:00; the moon's day count is (day + 318986) % 84 (58
+# on day 8000: a waxing 38%). Full moon: waxing at 90% or more (count 80-83) and waning at 94% or more (count 0-2), so
+# days 8022 to 8028. Each edge bracketed: day 8021 (count 79, 88% waxing: GREATER_WAXING_GIBBOUS) nil; day 8022, 00:00
+# (count 80, 90%: FULL_MOON) 13; day 8028, 23:00 (count 2, 95% waning: FULL_MOON) 13; day 8029, 00:00 (count 3, 93%:
+# GREATER_WANING_GIBBOUS) nil. 13's finishes take option 1 (nothing), so Prog stays 3. Then Prog 2 at the full moon
+# (wait to day 8106 = 8022 + 84): the quest's own nil passes through.
+module modules/era/lua/quests/windurst/sin_hunting.lua
+lists JugnerForest/qm2/onTrigger JugnerForest/onEventFinish/13
+char zone=JugnerForest pos=-8.9,-1,313.8 job=RNG lvl=40
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Windurst.SinHunting accepted
+charvar Quest[2][72]Prog 3
+login
+trigger qm2                                   # day 8000 (a waxing 38%): not the full moon: nil
+wait vana=504                                 # day 8021, 12:00 (88% waxing)
+trigger qm2                                   # not the full moon: nil
+wait vana=12                                  # day 8022, 00:00 (90% waxing: FULL_MOON)
+trigger qm2                                   # the full moon: the quest's 13 (0, Pinch of Glittersand)
+finish option=1                               # nothing
+wait vana=167                                 # day 8028, 23:00 (95% waning: FULL_MOON)
+trigger qm2                                   # 13
+finish option=1
+wait vana=1                                   # day 8029, 00:00 (93% waning: GREATER_WANING_GIBBOUS)
+trigger qm2                                   # nil
+charvar Quest[2][72]Prog 2
+wait vana=1848                                # day 8106, 00:00 (count 80 again: FULL_MOON)
+trigger qm2                                   # the full moon, Prog 2: the quest's nil passes through

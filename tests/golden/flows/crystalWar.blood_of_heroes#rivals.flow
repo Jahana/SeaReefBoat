@@ -1,0 +1,49 @@
+# Blood of Heroes (crystalWar 52) at the Forbidding Portal beside What Price Loyalty (group 5, its Prog 3 reply the
+# Progress 9; Blood's Prog 2 reply the Progress 4). A level 99 Warrior in Xarcabard [S]; Songbirds in a Snowstorm
+# and Beneath the Mask completed, both quests accepted by GMs. Blood at Prog 2 and What Price Loyalty at Prog 3 with the
+# Commander's Endorsement: the two Progress replies tie, so the first takes container order and the rotation var is
+# written (two ties), so the next tie plays the other. Without the endorsement What Price Loyalty has no section
+# (Blood's 4 alone). Blood at Prog 3 (no reply of its own): What Price Loyalty's 9 alone, finished: its Prog 4.
+lists SouthernSanDoriaS/Rholont/onTrigger XarcabardS/Forbidding_Portal/onTrigger XarcabardS/onEventFinish/4 XarcabardS/onEventFinish/9
+char zone=XarcabardS pos=321.5,-10.835,158.699 job=WAR lvl=99
+quest CrystalWar.SongbirdsInASnowstorm completed
+quest CrystalWar.BeneathTheMask completed
+mission Wotg FateInHaze current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+quest CrystalWar.BloodOfHeroes available     # a GM
+quest CrystalWar.BloodOfHeroes accepted      # a GM
+charvar Quest[7][52]Prog 2                   # a GM
+quest CrystalWar.WhatPriceLoyalty available  # a GM
+quest CrystalWar.WhatPriceLoyalty accepted   # a GM
+charvar Quest[7][50]Prog 3                   # a GM
+keyitem CommandersEndorsement                # a GM
+login
+trigger Forbidding_Portal                    # Blood's 4 and What Price Loyalty's 9 tie: container order
+finish
+charvar Quest[7][52]Prog 2                   # a GM
+charvar Quest[7][50]Prog 3                   # a GM
+trigger Forbidding_Portal                    # the second tie plays the next reply
+finish
+charvar Quest[7][52]Prog 2                   # a GM
+charvar Quest[7][50]Prog 3                   # a GM
+delkeyitem CommandersEndorsement             # a GM
+trigger Forbidding_Portal                    # no endorsement: What Price Loyalty has no section: Blood's 4 alone
+finish
+keyitem CommandersEndorsement                # a GM
+charvar Quest[7][50]Prog 3                   # a GM
+trigger Forbidding_Portal                    # Blood at Prog 3: nothing of its own: What Price Loyalty's 9
+finish                                       # What Price Loyalty's Prog 4
+trigger Forbidding_Portal                    # both without a Portal reply: NO_RESPONSE
+finish-if-event
+warp -167.043,-2,55.484 SouthernSanDoriaS
+mission Wotg FateInHaze completed       # a GM
+mission Wotg TheScentOfBattle current   # a GM: not Fate in Haze (its Rholont reply is the same 656)
+quest CrystalWar.BloodOfHeroes available # a GM
+quest CrystalWar.PerilsOfTheGriffon completed # a GM: In a Haze of Glory available: Rholont 637 (an Event)
+trigger Rholont                         # Blood's 656 and In a Haze of Glory's 637 tie: container order
+finish-if-event
+trigger Rholont                         # the second tie plays the other
+finish-if-event

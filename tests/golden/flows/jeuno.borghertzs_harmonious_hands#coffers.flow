@@ -1,0 +1,19 @@
+# BORGHERTZS_HARMONIOUS_HANDS (jeuno 53): the two optional coffers' sections (status not available, main job BRD, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 BRD: CastleOztroja's Treasure Coffer opens to
+# ChoralCannions (the item bypass; the result is the item): [AF]ZilartCoffer +524288 (bit 19); CrawlersNest's to
+# ChoralRoundlet: +1048576 (bit 20).
+lists CastleOztroja/Treasure_Coffer/onTrade CrawlersNest/Treasure_Coffer/onTrade
+char zone=CastleOztroja pos=-99,-75,-129 job=BRD lvl=75
+quest Jeuno.BorghertzsHarmoniousHands accepted
+item OztrojaCofferKey
+item NestCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer OztrojaCofferKey x1 # bit 19 unset: ChoralCannions; [AF]ZilartCoffer 524288
+tick 4500                               # the coffer opened
+warp 58.9,0.4,69 CrawlersNest
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer NestCofferKey x1  # bit 20 unset: ChoralRoundlet; [AF]ZilartCoffer 1572864
+tick 4500                               # the coffer opened

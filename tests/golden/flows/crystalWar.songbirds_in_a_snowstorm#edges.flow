@@ -1,0 +1,115 @@
+# Songbirds in a Snowstorm (crystalWar 51), the edges: a level 99 Warrior in Southern San d'Oria [S] with Bonds That
+# Never Die completed and the WotG mission The Will of the World not (The Scent of Battle current; other logs as the
+# main flow). Rholont: no section: nil (32). The mission completed (GMs: current, completed, then The Scent of Battle
+# current again): Daigraffeaux at Prog 0: nil (620). Prog 2 while available (a GM): Rholont: nil (32, no arm for it);
+# Daigraffeaux: nil (620). Prog 1: Beaucedine Glacier [S] while available: no zone-in reply; Charred Firewood, a Flint
+# Stone: no trade handler (nothing). Back: Daigraffeaux 114, finished on option 1: begun (any option). Prog 2 (a GM):
+# the Beaucedine zone-in: nothing; Rocky Perch: nil. Prog 3, a full inventory: Rocky Perch: NONDESCRIPT_MASS, the worm
+# does not fit, no event. Charred Firewood: the flint at Prog 3: nil; at Prog 4 two flints: nil (not exactly one).
+# Compressed Snow at Prog 4: nil. Prog 6 with the three key items: Colossal Footprint 3, finished: Prog 4 (a step back:
+# the key items are never taken). Prog 6: Compressed Snow 27, finished: the NM up; Prog 5 (a GM): the NM killed: no
+# Prog. Prog 7, a full inventory: Compressed Snow 6, finished: not completed; freed: 6: completed.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Daigraffeaux/onTrigger SouthernSanDoriaS/onEventFinish/114 BeaucedineGlacierS/onZoneIn/1 BeaucedineGlacierS/Colossal_Footprint/onTrigger BeaucedineGlacierS/Rocky_Perch/onTrigger BeaucedineGlacierS/Charred_Firewood/onTrade BeaucedineGlacierS/Compressed_Snow/onTrigger BeaucedineGlacierS/Orcish_Bloodletter/onMobDeath BeaucedineGlacierS/onEventFinish/3 BeaucedineGlacierS/onEventFinish/6 BeaucedineGlacierS/onEventFinish/27
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.BondsThatNeverDie completed
+mission Wotg TheScentOfBattle current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item FlintStone x3
+login
+trigger Rholont                         # The Will of the World not completed: no section: nil (32)
+finish-if-event
+mission Wotg TheScentOfBattle completed  # a GM (the current one moves on)
+mission Wotg TheWillOfTheWorld current  # a GM (completeMission wants it current)
+mission Wotg TheWillOfTheWorld completed # a GM
+mission Wotg TheScentOfBattle current   # a GM
+trigger Daigraffeaux                    # available, Prog 0: nil (620)
+finish-if-event
+charvar Quest[7][51]Prog 2              # a GM
+trigger Rholont                         # available, Prog 2: nil (32)
+finish-if-event
+trigger Daigraffeaux                    # Prog 2: nil (620)
+finish-if-event
+charvar Quest[7][51]Prog 1              # a GM
+warp 84.796,-58.472,175.2 BeaucedineGlacierS # available: no zone-in reply
+trade Charred_Firewood FlintStone x1    # available: no trade handler (nothing)
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Daigraffeaux                    # Prog 1: 114
+finish option=1                         # begun (any option)
+charvar Quest[7][51]Prog 2              # a GM
+warp 84.796,-58.472,175.2 BeaucedineGlacierS # accepted, Prog 2: no zone-in reply
+trigger Rocky_Perch                     # Prog 2: nil
+finish-if-event
+charvar Quest[7][51]Prog 3              # a GM
+fill-inventory
+trigger Rocky_Perch                     # Prog 3: NONDESCRIPT_MASS, no room for the worm, no event
+finish-if-event
+free-inventory
+walk 84.796,-58.472,175.2               # beside the Charred Firewood (a trade does not walk)
+trade Charred_Firewood FlintStone x1    # Prog 3: nil
+charvar Quest[7][51]Prog 4              # a GM
+trade Charred_Firewood FlintStone x2    # Prog 4, two flints: nil (not exactly one)
+trigger Compressed_Snow                 # Prog 4: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+charvar Quest[7][51]Prog 6              # a GM
+keyitem LanceFish                       # a GM
+keyitem PaladinLobster                  # a GM
+keyitem ScutumCrab                      # a GM
+trigger Colossal_Footprint              # Prog 6, the three held: 3 (136)
+finish                                  # Prog 4: a step back
+charvar Quest[7][51]Prog 6              # a GM
+trigger Compressed_Snow                 # Prog 6, the NM not up: 27
+finish                                  # the Orcish Bloodletter spawned, claimed
+charvar Quest[7][51]Prog 5              # a GM
+kill ORCISH_BLOODLETTER                 # Prog 5: no Prog
+charvar Quest[7][51]Prog 7              # a GM
+fill-inventory
+trigger Compressed_Snow                 # Prog 7: 6
+finish                                  # no room for the Icarus Wing: not completed
+free-inventory
+trigger Compressed_Snow                 # 6
+finish                                  # completed
+quest CrystalWar.SongbirdsInASnowstorm available # a GM (it was completed)
+quest CrystalWar.SongbirdsInASnowstorm accepted # a GM
+charvar Quest[7][51]Prog 7              # a GM
+tick 15000                              # the corpse despawning
+tick 30000                              # despawned
+warp -167.043,-2,55.484 SouthernSanDoriaS # out of the zone: the Orcish Bloodletter is gone
+warp 46.437,-0.762,-370.178 BeaucedineGlacierS
+trigger Compressed_Snow                 # Prog 7, the NM not up: 6
+finish                                  # completed again
+quest CrystalWar.SongbirdsInASnowstorm available # a GM
+quest CrystalWar.SongbirdsInASnowstorm accepted # a GM
+charvar Quest[7][51]Prog 4              # a GM
+warp -106.321,0.282,-365.035 BeaucedineGlacierS
+trigger Rocky_Perch                     # Prog 4: nil (the worm is Prog 3's)
+finish-if-event
+charvar Quest[7][51]Prog 3              # a GM
+delkeyitem LanceFish                    # a GM: two of the three
+trigger Colossal_Footprint              # Prog 3, no Lance Fish: nil
+finish-if-event
+keyitem LanceFish                       # a GM
+delkeyitem PaladinLobster               # a GM
+trigger Colossal_Footprint              # Prog 3, no Paladin Lobster: nil
+finish-if-event
+keyitem PaladinLobster                  # a GM
+delkeyitem ScutumCrab                   # a GM
+trigger Colossal_Footprint              # Prog 3, no Scutum Crab: nil
+finish-if-event
+charvar Quest[7][51]Prog 6              # a GM
+tick 15000                              # the corpse despawning
+tick 30000                              # despawned
+warp 46.437,-0.762,-370.178 BeaucedineGlacierS
+trigger Compressed_Snow                 # Prog 6, the NM not up: 27
+finish                                  # the Orcish Bloodletter spawned, claimed
+charvar Quest[7][51]Prog 8              # a GM
+kill ORCISH_BLOODLETTER                 # Prog 8: no Prog
+quest CrystalWar.SongbirdsInASnowstorm available # a GM
+quest CrystalWar.BondsThatNeverDie available # a GM: Bonds not completed, The Will of the World completed
+charvar Quest[7][51]Prog 0              # a GM
+charvar Quest[7][51]Timer 0             # a GM
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Bonds not completed: no section: nil (32)
+finish-if-event

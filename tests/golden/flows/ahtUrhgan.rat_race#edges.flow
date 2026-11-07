@@ -1,0 +1,63 @@
+# Rat Race's edges: a level 75 Warrior with an Imperial Bronze Piece, a Bowl of Nashmau Stew and the five fish; Rat
+# Race accepted at Prog 0 (GMs; the begin sets Prog 1, so Prog 0 is a GM's): Whitegate: Nadee Periyaha, Cacaroon: nil:
+# their defaults 90, 248; the bronze piece at Prog 0: nil. Prog 3 (a GM): Cacaroon's trade: nil (Prog 2 only). Nashmau:
+# Kyokyoroon, the stew at Prog 3: nil; Ququroon, the fish at Prog 3: nil (Prog 4 only; Cook-a-roon left available,
+# which has no trade); Prog 4 (a GM) with a full bag: the fish: 310, finished: the stew does not fit: no confirm, Prog
+# stays 4; freed: 310 again: Prog 5. Kyokyoroon, the stew with another item at Prog 5: nil. Prog 7 (a GM): Kakkaroon
+# 313 (only Prog 6 is 312); Kyokyoroon at Prog 7: nil, 263 (only Prog 6 is 316). Prog 6 (a GM) with a full bag:
+# Kakkaroon 312, finished: the coins do not fit: not completed; freed: 312: completed. Cook-a-roon stays available
+# throughout (no Ququroon trigger here). Ququroon: the fish and a stew at Prog 4: not exactly the fish: nil.
+lists AhtUrhganWhitegate/Nadee_Periyaha/onTrigger AhtUrhganWhitegate/Cacaroon/onTrigger AhtUrhganWhitegate/Cacaroon/onTrade Nashmau/Kyokyoroon/onTrade Nashmau/Ququroon/onTrade Nashmau/Kakkaroon/onTrigger Nashmau/onEventFinish/310 Nashmau/onEventFinish/312
+char zone=AhtUrhganWhitegate pos=-9.3,0,-1.198 job=WAR lvl=75
+item ImperialBronzePiece
+item BowlOfNashmauStew
+item Ahtapot x2
+item Istakoz x2
+item Istavrit1 x2
+item Istiridye x2
+item Mercanbaligi x2
+quest AhtUrhgan.RatRace accepted
+login
+trigger Nadee_Periyaha                  # Prog 0: nil: 90
+finish
+trigger Cacaroon                        # Prog 0: nil: 248
+finish
+trade Cacaroon ImperialBronzePiece x1   # Prog 0: nil
+finish-if-event
+charvar Quest[6][66]Prog 3              # a GM
+trade Cacaroon ImperialBronzePiece x1   # Prog 3: nil
+finish-if-event
+warp 19.5,-6,10.467 Nashmau
+trigger Kyokyoroon                      # Prog 3: nil: 263
+finish
+trade Kyokyoroon BowlOfNashmauStew x1   # Prog 3: nil
+finish-if-event
+# beside Ququroon (a trade does not walk; a talk would tie 309 with Cook-a-roon's 241)
+warp -0.9,0,66.824 Nashmau
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # Prog 3: nil
+finish-if-event
+charvar Quest[6][66]Prog 4              # a GM
+# not exactly the fish: nil
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1 BowlOfNashmauStew x1
+finish-if-event
+fill-inventory
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # Prog 4: 310
+finish                                  # the stew does not fit: nothing more (Prog 4, the fish kept)
+free-inventory
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # 310
+finish                                  # the stew; the fish taken; Prog 5
+warp 19.5,-6,10.467 Nashmau
+trade Kyokyoroon BowlOfNashmauStew x1 Istakoz x1   # Prog 5, the stew among something else: nil
+finish-if-event
+charvar Quest[6][66]Prog 7              # a GM
+trigger Kakkaroon                       # Prog 7: not 6: 313
+finish
+trigger Kyokyoroon                      # Prog 7: nil: 263
+finish
+charvar Quest[6][66]Prog 6              # a GM
+fill-inventory
+trigger Kakkaroon                       # Prog 6: 312
+finish                                  # the coins do not fit: not completed
+free-inventory
+trigger Kakkaroon                       # 312
+finish                                  # completed

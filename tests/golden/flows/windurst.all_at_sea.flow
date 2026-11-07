@@ -1,0 +1,64 @@
+# All at Sea (windurst 23): Paytah and Odilia (Port Windurst), Baren-Moren (Windurst Waters). A level-10 WAR at
+# Windurst fame 125 (level 3). Baren-Moren's script always answers (Hat in Hand's offer 48 while Quest[2][23]Prog is 0,
+# else a random line): it takes turns with an Event reply and answers this quest's nil (finished with option 0: no
+# quest taken). Available: Paytah 291; a bone chip: nil; the Ripped Cap with a chip (tradeHas, not exact): 292, begun
+# (the cap kept). Accepted: Paytah 293, Odilia 294; a chip to Paytah: nil. Baren-Moren at Prog 0: nil (his script's
+# 48); the Ripped Cap: 547 (0, Dhalmel Hide): taken, Prog 1; 548 at Prog 1; three hides: nil; four: 549 option 2
+# (nothing, kept); four: 549 option 0 (taken; the Sailor's Cap and the Dhalmel Mantle; Prog 2); 550 at Prog 2; four
+# hides with the cap held: nil. The cap to Paytah: 295 with a full bag (nothing), 295: completed (fame 30, the Leather
+# Ring; the cap taken; the mustZone). Completed: Paytah 296, Odilia 297; out to Windurst Waters and back: their defaults
+# 288, 289.
+lists PortWindurst/Paytah/onTrigger PortWindurst/Paytah/onTrade PortWindurst/Odilia/onTrigger PortWindurst/onEventFinish/292 PortWindurst/onEventFinish/295 WindurstWaters/Baren-Moren/onTrigger WindurstWaters/Baren-Moren/onTrade WindurstWaters/onEventFinish/547 WindurstWaters/onEventFinish/549
+char zone=PortWindurst pos=79.5,-5,117.77 job=WAR lvl=10
+fame Windurst 125
+item BoneChip
+item RippedCap
+item DhalmelHide x12
+login
+trigger Paytah                                # fame level 3: 291
+finish
+trade Paytah BoneChip x1                      # no Ripped Cap: nil
+trade Paytah RippedCap x1 BoneChip x1         # the cap (tradeHas, not exact): 292
+finish                                        # begun; the cap kept (no confirmTrade)
+trigger Paytah                                # accepted: 293
+finish
+trade Paytah BoneChip x1                      # no Sailor's Cap: nil
+trigger Odilia                                # 294
+finish
+warp -64.6,-2.875,-145.7 WindurstWaters
+trigger Baren-Moren                           # Prog 0: nil; his script's 48 (Hat in Hand's offer, Prog 0)
+finish option=0                               # declined: nothing
+trade Baren-Moren DhalmelHide x4              # Prog 0, no Ripped Cap: nil
+trade Baren-Moren RippedCap x1                # Prog 0: 547 (0, Dhalmel Hide)
+finish                                        # the cap taken; Prog 1
+trigger Baren-Moren                           # Prog 1: 548 (0, Dhalmel Hide), an Event: the next turn is his script's
+finish option=0
+trigger Baren-Moren                           # his script's 45 (a random line)
+finish option=0
+trade Baren-Moren DhalmelHide x3              # three: nil
+trade Baren-Moren DhalmelHide x4              # Prog 1, four, no Sailor's Cap: 549
+finish option=2                               # neither 0 nor 1: nothing; the hides kept
+trade Baren-Moren DhalmelHide x4              # 549
+finish option=0                               # the hides taken; the Sailor's Cap; the Dhalmel Mantle; Prog 2
+trigger Baren-Moren                           # Prog 2: 550 (Sailor's Cap, Dhalmel Hide)
+finish option=0
+trigger Baren-Moren                           # his script's 47 (a random line)
+finish option=0
+trade Baren-Moren DhalmelHide x4              # the Sailor's Cap held: nil
+warp 79.5,-5,117.77 PortWindurst
+trade Paytah SailorsCap x1                    # 295
+fill-inventory
+finish                                        # the ring does not fit: complete fails: nothing; the cap kept
+free-inventory
+trade Paytah SailorsCap x1                    # 295
+finish                                        # completed: fame 30, the Leather Ring; the cap taken; the mustZone
+trigger Paytah                                # completed, the mustZone: 296
+finish
+trigger Odilia                                # 297
+finish
+warp -50.9,-6.25,109.3 WindurstWaters
+warp 79.5,-5,117.77 PortWindurst              # the mustZone cleared on the zone-in
+trigger Paytah                                # no section: 288
+finish
+trigger Odilia                                # 289
+finish

@@ -1,0 +1,26 @@
+# Father Figure (bastok 29): Michea in Bastok Markets, beside The Elvaan Goldsmith (C#). The guard (The Elvaan Goldsmith
+# completed and Bastok fame level 2), the silver ingot trade, no repeat.
+lists BastokMarkets/Michea/onTrigger BastokMarkets/Michea/onTrade BastokMarkets/onEventFinish/215 BastokMarkets/onEventFinish/240 BastokMarkets/onEventFinish/241
+char zone=BastokMarkets pos=-296,-16,-157
+item SilverIngot x2
+item CopperIngot
+fame Bastok 50                  # fame level 2
+quest Bastok.TheElvaanGoldsmith accepted
+login
+trigger Michea                  # The Elvaan Goldsmith not completed: its reminder 215, not 240
+finish
+quest Bastok.TheElvaanGoldsmith completed
+fame Bastok 49                  # fame level 1
+trigger Michea                  # fame level 1: The Elvaan Goldsmith's repeat 215, not 240
+finish
+fame Bastok 50                  # fame level 2
+trigger Michea                  # the offer, 240
+finish                          # accepted
+trigger Michea                  # accepted: Michea's default 125
+finish
+trade Michea CopperIngot x1     # the wrong ingot: nothing
+trade Michea SilverIngot x1     # 241
+finish                          # completed: 2200 gil, fame 20, an ingot gone
+trigger Michea                  # completed: 125
+finish
+trade Michea SilverIngot x1     # completed: nothing

@@ -1,0 +1,26 @@
+# Grauberg - Dominion Op #12 (abyssea 189, op 599): a level 99 Warrior in Abyssea - Grauberg; the op's target Unseelie
+# (19 placed spawns, the first 17817932). The next op (#13, Goblin_Plunderer) and Altepa's #12 accepted (a GM), this op
+# available: an Unseelie killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0, which
+# dominionOnMobDeath does not read): an Unseelie killed: dominionOnMobDeath(599): Quest[8][189]Prog 1
+# (FOV_DEFEATED_TARGET 1 of 5). The next op's Goblin_Plunderer killed: Quest[8][190]Prog 1 (its own count), this op's
+# unchanged. Prog 4 (a GM): one more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing.
+# Completed (Prog 0, as completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge,
+# Invincible and Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaGrauberg/Unseelie/onMobDeath AbysseaGrauberg/Goblin_Plunderer/onMobDeath
+char zone=AbysseaGrauberg pos=-555,31,-760 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp13Grauberg accepted # a GM: the next op
+quest Abyssea.DominionOp12Altepa accepted # a GM: Altepa's #12
+kill IRONCLAD_SUNDERER-109              # available: nothing (17817932)
+quest Abyssea.DominionOp12Grauberg accepted # a GM
+kill IRONCLAD_SUNDERER-108              # accepted: Prog 1 (17817933)
+kill IRONCLAD_SUNDERER-303              # Goblin_Plunderer: Quest[8][190]Prog 1 (17817738)
+charvar Quest[8][189]Prog 4             # a GM
+kill IRONCLAD_SUNDERER-107              # Prog 5 (17817934)
+kill IRONCLAD_SUNDERER-106              # full: nothing (17817935)
+quest Abyssea.DominionOp12Grauberg completed # a GM
+charvar Quest[8][189]Prog 0             # a GM
+kill IRONCLAD_SUNDERER-105              # completed: nothing (17817936)

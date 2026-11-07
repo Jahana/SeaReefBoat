@@ -1,0 +1,21 @@
+# Acting in Good Faith (windurst 64): the offer's fame operand and the key items' order. Fame 224 (level 3), level 10:
+# Gantineux's default 10018. Fame 225: 10019 (#guard_level takes level 9). Accepted by GM with both key items: 10020
+# (the incense first). With neither held, in Eldieme the qm1 is nil (the incense operand).
+lists WindurstWaters/Gantineux/onTrigger TheEldiemeNecropolis/qm1/onTrigger
+char zone=WindurstWaters pos=-83.5,-9.25,3.5 job=WAR lvl=10
+fame Windurst 224
+login
+trigger Gantineux                             # fame level 3: not offered; 10018
+finish
+fame Windurst 225
+trigger Gantineux                             # 10019
+finish option=1                               # nothing
+quest Windurst.ActingInGoodFaith accepted
+keyitem SpiritIncense
+keyitem GantineuxsLetter
+trigger Gantineux                             # both: the incense arm first: 10020
+finish
+delkeyitem SpiritIncense
+delkeyitem GantineuxsLetter
+warp -19.6,-1.63,58.4 TheEldiemeNecropolis
+trigger qm1                                   # no incense: nil; NOTHING_OUT_OF_ORDINARY

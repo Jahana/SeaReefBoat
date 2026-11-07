@@ -1,0 +1,33 @@
+# Etteh's and Jakoh's reply kinds between A Question of Taste (completed section: 51 / 52 E while its mustZone is set;
+# Etteh nil on the Everyone's Grudging guard, else 53 / 54 / 57 P, 55 E; Jakoh 56 E or nil) and Everyone's Grudging
+# (accepted: Etteh 109 E, Jakoh 108 / 110 E). A level 75 Warrior at Windurst fame 488, A Question of Taste completed with
+# its mustZone set in Kazham (250), Everyone's Grudging accepted at Prog 0, rancorCurse 1 (GMs). Etteh: 51 and 109 (both
+# Event): a tie: the container order (A Question of Taste first): 51, then the cycle: 109. Jakoh: 52 and 108 (both Event, his script doing
+# nothing): a tie: 52, then 108. Out of Kazham and back (the mustZone cleared): Etteh: A Question of Taste nil
+# (the guard): 109 alone. rancorCurse 0 (a GM): Etteh: 53 (Progress) beats 109, option 2. Jakoh: A Question of Taste nil
+# (Prog 0): 108 alone.
+lists Kazham/Etteh_Sulaej/onTrigger Kazham/Jakoh_Wahcondalo/onTrigger
+char zone=Kazham pos=93.981,-14.5,-110.818 job=WAR lvl=75
+fame Windurst 488
+quest Outlands.AQuestionOfTaste completed
+charvar Quest[5][3]mustZone 250
+quest Outlands.EveryonesGrudging accepted
+charvar rancorCurse 1
+login
+trigger Etteh_Sulaej                    # 51 and 109 (both Event): a tie: the container order: 51
+finish
+trigger Etteh_Sulaej                    # the cycle: 109
+finish
+trigger Jakoh_Wahcondalo                # 52 and 108 (both Event): a tie: 52
+finish
+trigger Jakoh_Wahcondalo                # the cycle: 108
+finish
+warp -64.619,-9.25,-8.853 WindurstWaters   # the mustZone cleared
+warp 93.981,-14.5,-110.818 Kazham
+trigger Etteh_Sulaej                    # A Question of Taste: nil (the guard): 109
+finish
+charvar rancorCurse 0                   # a GM
+trigger Etteh_Sulaej                    # A Question of Taste's 53 (Progress) beats 109
+finish option=2                         # Option 1
+trigger Jakoh_Wahcondalo                # A Question of Taste: nil (Prog 0): 108
+finish

@@ -1,0 +1,55 @@
+# The Zeruhn Report (Bastok 1-1, mission.bastok.the_zeruhn_report). A level 10 Warrior of Bastok (rank 1, no mission;
+# a GM's Resonance current keeps RoV 1-1's 30035 out of the logins). Section 1 (no current mission, Bastok, 1-1 not
+# completed): the four gate guards' 1000 (Cleades, Rashid, Malduc, Argus), each in its zone with its own finish; options
+# 1 at Cleades, Rashid and Malduc decline (nothing); Naji then: no section: his default 700. Argus's 1000 with 0:
+# begun, YOU_ACCEPT_THE_MISSION. Section 2 (current): each guard's ORIGINAL_MISSION_OFFSET; Naji without the report:
+# his handler returns nothing: his default 700. Zeruhn Mines: Rasmus without the report: 120 (canSkip); Makarim without
+# it: 121, finished: the Zeruhn Report (npcUtil.giveKeyItem); Makarim with it: MAKARIM_DIALOG_I; Rasmus with it: his
+# handler returns nothing: his default 101. Metalworks: Naji with the report not yet seen: 710 (1); finished: completed
+# (no reward table: npcUtil.completeMission writes the flag, the log's current back to none; the status reset; cleanup),
+# then the report deleted. Completed: Naji's default 700; Cleades: section 1 fails (completed): his script's mission
+# list 1001.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1000 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1000 Metalworks/Malduc/onTrigger Metalworks/Naji/onTrigger Metalworks/onEventFinish/1000 Metalworks/onEventFinish/710 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1000 ZeruhnMines/Makarim/onTrigger ZeruhnMines/Rasmus/onTrigger ZeruhnMines/onEventFinish/121
+char zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+login
+trigger Cleades                         # section 1: 1000
+finish option=1                         # declined: nothing
+warp -8.4,-1,-121 BastokMines
+trigger Rashid                          # section 1: 1000
+finish option=1                         # declined: nothing
+warp 64,-14,-4 Metalworks
+trigger Malduc                          # section 1: 1000
+finish option=1                         # declined: nothing
+trigger Naji                            # no section: his default 700
+finish
+warp 132,8.5,-4 PortBastok
+trigger Argus                           # section 1: 1000
+finish option=0                         # 0: begun, YOU_ACCEPT_THE_MISSION
+trigger Argus                           # section 2: ORIGINAL_MISSION_OFFSET
+warp -358,-10,-168 BastokMarkets
+trigger Cleades                         # section 2: ORIGINAL_MISSION_OFFSET
+warp -8.4,-1,-121 BastokMines
+trigger Rashid                          # section 2: ORIGINAL_MISSION_OFFSET
+warp 64,-14,-4 Metalworks
+trigger Malduc                          # section 2: ORIGINAL_MISSION_OFFSET (Metalworks' is 14)
+trigger Naji                            # section 2, no report: nothing: his default 700
+finish
+warp -11.7,0,72 ZeruhnMines
+trigger Rasmus                          # no report: 120 (canSkip)
+finish
+walk -60,8.5,-331
+trigger Makarim                         # no report: 121 (canSkip)
+finish                                  # the Zeruhn Report
+trigger Makarim                         # the report: MAKARIM_DIALOG_I
+walk -11.7,0,72
+trigger Rasmus                          # the report: nothing: his default 101
+finish
+warp 64,-14,-4 Metalworks
+trigger Naji                            # the report, not seen: 710 (1)
+finish                                  # completed; the report deleted
+trigger Naji                            # completed: no section: his default 700
+finish
+warp -358,-10,-168 BastokMarkets
+trigger Cleades                         # completed: no section 1: his script's mission list 1001
+finish

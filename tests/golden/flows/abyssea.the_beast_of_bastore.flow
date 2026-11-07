@@ -1,0 +1,40 @@
+# The Beast of Bastore (abyssea 172): a level 99 Warrior in Jugner Forest by the Cavernous Maw 2 with The Truth Beckons
+# completed and Dawn of Death accepted (GMs), no Traverser Stone, 3 maw quests completed (A Goldstruck Gigas, To Paste a
+# Peiste, Megadrile Menace) and A Delectable Demon accepted (GMs; an accepted one does not count). The maw, no stone: no
+# section: its own warp event 47 (entranceMawOnTrigger), finished on option 0: no warp. Traverser Stone 4 (a GM, one
+# stone: `>= 1`): 48 (a Progress), finished on option 0: begun. Back to available (a GM): the maw again with no other
+# talk between: 48 again (an Event-rank 48 would alternate with the maw's own onTrigger: 47), finished on option 2:
+# begun (any option). Accepted: the maw: no handler: 47. A zone-in, accepted with no Sedna title: nothing. The title (a
+# GM): the zone-in plays 49 (left open); its update on option 0 and on option 2: nothing; on option 1: updateEvent(the
+# key item for 3 completed: Ivory Abyssite of the Reaper); finished: Ivory Abyssite of the Reaper given, then completed.
+# Completed (title, stone and Dawn of Death still held): a zone-in: nothing; the maw: 47.
+lists JugnerForest/Cavernous_Maw_2/onTrigger JugnerForest/onEventFinish/48 JugnerForest/onEventFinish/47 JugnerForest/onZoneIn/1 JugnerForest/onEventUpdate/49 JugnerForest/onEventFinish/49
+char zone=JugnerForest pos=247.818,-0.709,5.706 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath accepted
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.MegadrileMenace completed
+quest Abyssea.ADelectableDemon accepted
+login
+trigger Cavernous_Maw_2                 # no stone: no section: the maw's warp event 47
+finish                                  # option 0: no warp
+keyitem TraverserStone4                 # a GM: one stone
+trigger Cavernous_Maw_2                 # available, one stone, Dawn of Death accepted: 48
+finish                                  # option 0: begun
+quest Abyssea.TheBeastOfBastore available # a GM
+trigger Cavernous_Maw_2                 # 48 again (the kind)
+finish option=2                         # begun (any option)
+trigger Cavernous_Maw_2                 # accepted: no maw handler: 47
+finish                                  # option 0: no warp
+rezone                                  # accepted, no title: nothing
+title SednaTuskbreaker                  # a GM
+rezone open                             # the title: 49, left open
+update 49 option=0                      # option 0: nothing
+update 49 option=2                      # option 2: nothing
+update 49 option=1                      # option 1: updateEvent(Ivory Abyssite of the Reaper)
+finish                                  # Ivory Abyssite of the Reaper given; completed
+rezone                                  # completed: nothing
+trigger Cavernous_Maw_2                 # completed: no section: 47
+finish                                  # option 0: no warp

@@ -1,0 +1,46 @@
+# Like Shining Leggings (outlands 139): Heizo in Norg (no script; the default 126). A level 75 Warrior with a Bone Chip
+# and 11 Rusty Leggings (one a slot: no stack). Fame 124 (level 2): Heizo: the default 126; a legging traded: no section:
+# nothing. Fame 125 (a GM: level 3): no trade handler: nothing; 127, finished: begun. Accepted: Heizo 128 (0); the chip
+# alone: 128 (0); a legging with the chip: 128 (0), nothing taken; three leggings: taken at once, Prog 3, 128 (3); six:
+# taken, Prog 9, 128 (9); one: the total 10: 129, finished: completed (the Scroll of Dokumori: Ichi, Norg fame 30, Looks
+# Good in Leggings), the legging taken by tradeComplete. Completed: no section: Heizo's default 126; a legging: nothing.
+lists Norg/Heizo/onTrigger Norg/Heizo/onTrade Norg/onEventFinish/127 Norg/onEventFinish/129
+char zone=Norg pos=-1.106,-4.756,22.777 job=WAR lvl=75
+fame Norg 124
+item BoneChip
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+login
+trigger Heizo                           # fame level 2: the default 126
+finish
+trade Heizo RustyLeggings x1            # no section: nothing
+fame Norg 125                           # a GM: level 3
+trade Heizo RustyLeggings x1            # no trade handler: nothing
+trigger Heizo                           # 127
+finish                                  # begun
+trigger Heizo                           # 128 (0)
+finish
+trade Heizo BoneChip x1                 # no legging: 128 (0)
+finish
+trade Heizo RustyLeggings x1 BoneChip x1   # another item with it: 128 (0), nothing taken
+finish
+trade Heizo RustyLeggings x3            # taken at once; Prog 3; 128 (3)
+finish
+trigger Heizo                           # 128 (3)
+finish
+trade Heizo RustyLeggings x6            # taken; Prog 9; 128 (9)
+finish
+trade Heizo RustyLeggings x1            # 9 + 1: 129
+finish                                  # completed: the scroll, Norg fame 30, the title; the legging taken
+trigger Heizo                           # completed: no section: the default 126
+finish
+trade Heizo RustyLeggings x1            # nothing

@@ -1,0 +1,40 @@
+# A Clock Most Delicate (jeuno 2): Collet and the door _6s2 in Upper Jeuno. The guard (Jeuno fame level 2), the door
+# at Option 0 (nil: its NO_ONES_HOME), Collet's 112 (Option 1) and 186, the door's 119 (option 0: Option 2) and 118
+# (option 0: nothing; option 1: begun), the door's 117 while accepted, then with the Clock Tower Oil (a GM: Deal with
+# Tenshodo gives it, see its flow) 202: completed (1200 gil, Engineer's Gloves, Professional Loafer, fame +17 x3, the
+# oil deleted, Option cleared).
+# Jeuno fame: 33/33/33 is 49 (level 1), 33/33/34 is 50 (level 2). After the reward 50/50/51: 75, short of level 5, so
+# Save the Clock Tower (Collet's 164) and The Clockmaster (the door's 152) stay silent.
+# Defaults: Collet 114, the door's NO_ONES_HOME (messageSpecial, no event).
+lists UpperJeuno/Collet/onTrigger UpperJeuno/_6s2/onTrigger UpperJeuno/onEventFinish/112 UpperJeuno/onEventFinish/118 UpperJeuno/onEventFinish/119 UpperJeuno/onEventFinish/202
+char zone=UpperJeuno pos=-42.2,0,107.0
+fame Sandoria 33
+fame Bastok 33
+fame Windurst 33
+item BoneChip
+login
+trigger Collet                  # Jeuno fame 49 (level 1): no section; 114
+finish
+trigger _6s2                    # no section: NO_ONES_HOME
+fame Windurst 34                # Jeuno fame 50: level 2
+trade _6s2 BoneChip x1          # available: no trade handler; nothing
+trigger _6s2                    # Option 0: nil; NO_ONES_HOME
+trigger Collet                  # Option 0: 112
+finish                          # Option 1
+trade Collet BoneChip x1        # available: no trade handler; nothing
+trigger Collet                  # Option 1: 186
+finish
+trigger _6s2                    # Option 1: 119
+finish option=0                 # not 1: Option 2
+trigger _6s2                    # Option 2: 118
+finish option=0                 # not 1: nothing
+trigger _6s2                    # 118 again
+finish option=1                 # begun
+trigger _6s2                    # accepted, no oil: 117
+finish
+trigger Collet                  # accepted: no handler; 114
+finish
+keyitem ClockTowerOil           # a GM
+trigger _6s2                    # the oil: 202
+finish                          # completed: 1200 gil, Engineer's Gloves, Professional Loafer, fame +17 x3, the oil deleted
+trigger _6s2                    # completed: no section; NO_ONES_HOME

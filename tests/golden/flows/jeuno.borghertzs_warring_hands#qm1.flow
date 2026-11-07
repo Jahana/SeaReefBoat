@@ -1,0 +1,36 @@
+# Borghertz's Warring Hands (jeuno 44): Port Jeuno's qm1 and the Torch off their steps. Accepted by a GM, the Old
+# Gauntlets, Prog 3: qm1 20, finished 0: Prog 3. Prog 2: qm1 nil. Prog 5 without the flames: 49. The Torch at Prog 3:
+# nil (NOTHING_OUT_OF_ORDINARY). Prog 4: Dark Spark popped; the Torch again with Dark Spark up: the pop fails, Prog 5
+# false: nil (NOTHING_OUT_OF_ORDINARY). Dark Spark's death at Prog 3 (a GM): Prog 3 kept. Prog 5 (a GM): the Torch
+# gives the Shadow Flames; then 48 with a full bag: quest:complete
+# fails (the hands): nothing, both key items kept; with room: completed.
+lists PortJeuno/qm1/onTrigger PortJeuno/onEventFinish/20 PortJeuno/onEventFinish/48 CastleZvahlBaileys/Torch/onTrigger CastleZvahlBaileys/Dark_Spark/onMobDeath
+char zone=PortJeuno pos=-52.7,6.1,-4.6 job=WAR lvl=75
+quest Jeuno.BorghertzsWarringHands accepted
+keyitem OldGauntlets
+charvar Quest[3][44]Prog 3
+login
+trigger qm1                             # Prog 3: 20
+finish option=0                         # not 1: Prog 3
+charvar Quest[3][44]Prog 2              # a GM
+trigger qm1                             # Prog 2: nil
+charvar Quest[3][44]Prog 5              # a GM
+trigger qm1                             # Prog 5, no flames: 49
+finish
+charvar Quest[3][44]Prog 3              # a GM
+warp 61.4,-26.2,15 CastleZvahlBaileys
+trigger Torch                           # Prog 3: nil; NOTHING_OUT_OF_ORDINARY
+charvar Quest[3][44]Prog 4              # a GM
+trigger Torch                           # Prog 4: Dark Spark popped; SENSE_OF_FOREBODING
+trigger Torch                           # Dark Spark up: the pop fails; nil; NOTHING_OUT_OF_ORDINARY
+charvar Quest[3][44]Prog 3              # a GM, Dark Spark up
+kill DARK_SPARK                         # Prog 3: not 4: Prog 3 kept
+charvar Quest[3][44]Prog 5              # a GM
+trigger Torch                           # Prog 5: the Shadow Flames
+warp -52.7,6.1,-4.6 PortJeuno
+fill-inventory
+trigger qm1                             # Prog 5, the flames: 48
+finish                                  # a full bag: quest:complete false: nothing; the key items kept
+free-inventory
+trigger qm1                             # 48
+finish                                  # completed: Fighter's Mufflers; fame +7 x3; both key items taken

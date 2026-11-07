@@ -1,0 +1,16 @@
+# Uninvited Guests (otherAreas 81): Monarch Linn's 32001 while the quest is completed (the section's second status).
+# CoP Slanderous Utterings current. Accepted at Prog 1 with the permit (GMs): the battlefield entered; inside, the quest
+# set completed (a GM); won: 32001 (the cutscene skippable), finished: Prog 2 all the same.
+lists TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/onEventFinish/572 MonarchLinn/onEventFinish/32001
+char zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+mission Cop SlanderousUtterings current
+quest OtherAreas.UninvitedGuests accepted
+charvar Quest[4][81]Prog 1
+keyitem MonarchLinnPatrolPermit
+login
+trigger SD_Entrance                     # the permit, Prog 1: the 32000 menu
+update 32000 option=97                  # index 6, area 1
+finish                                  # in the arena; the permit spent
+quest OtherAreas.UninvitedGuests completed # a GM, inside
+bfwin                                   # won: 32001
+finish                                  # completed: Prog 2

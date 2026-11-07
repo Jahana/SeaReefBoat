@@ -1,0 +1,59 @@
+# The Basics (otherAreas 6): Mhaura's Rycharde and Take, Selbina's Valgeir. The Clue completed, its Quest[4][5]
+# DayCompleted 7992 (a GM: 7992 + 7 < 8000), Windurst fame 325 (level 5). A level 30 Warrior with a Chocobo Feather.
+# Available: a trade: no trade handler; Take 66; Rycharde 94, option 0: nothing; 94, option 85: Quest[4][5]DayCompleted
+# 0, the Mhauran Couscous (KEYITEM_OBTAINED), begun. Accepted: Rycharde 95; Take: no handler (his default 59). Selbina:
+# Valgeir at Prog 0: 106, finished: a Baked Popoto (ITEM_OBTAINED), the couscous taken (KEYITEM_OBTAINED + 1), Prog 1;
+# Prog 1: 145. Mhaura: trades: the popoto and the feather: nil; the feather: nil; the popoto at Prog 1: 96, finished:
+# completed (fame 60 Windurst, the Tea Set, Five Star Purveyor), the popoto taken, 2000 exp, CommentaryValgeir and
+# CommentaryRycharde 1. Completed: Rycharde 97, finished: CommentaryRycharde 0; Rycharde 98 (replaceDefault); Take 67
+# (replaceDefault). Selbina: Valgeir 107, finished: CommentaryValgeir 0; Valgeir 146 (replaceDefault); CommentaryValgeir 2
+# (a GM): 146. Mhaura: CommentaryRycharde 2 (a GM): 98; a popoto (a GM): no trade handler while completed.
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/Take/onTrigger Selbina/Valgeir/onTrigger Mhaura/onEventFinish/94 Mhaura/onEventFinish/96 Mhaura/onEventFinish/97 Selbina/onEventFinish/106 Selbina/onEventFinish/107
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.TheClue completed
+charvar Quest[4][5]DayCompleted 7992
+fame Windurst 325
+item ChocoboFeather
+login
+trade Rycharde ChocoboFeather x1        # available: no trade handler; nothing
+trigger Take                            # available: 66
+finish
+trigger Rycharde                        # 7992 + 7 < 8000: 94
+finish option=0                         # not 85: nothing
+trigger Rycharde                        # 94
+finish option=85                        # Quest[4][5]DayCompleted 0, the couscous (KEYITEM_OBTAINED), begun
+trigger Rycharde                        # accepted: 95
+finish
+trigger Take                            # accepted: no handler; his default 59
+finish
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # Prog 0: 106
+finish                                  # a Baked Popoto (ITEM_OBTAINED); the couscous taken (KEYITEM_OBTAINED + 1); Prog 1
+trigger Valgeir                         # Prog 1: 145
+finish
+warp 19,-16,88.8 Mhaura
+trade Rycharde BakedPopoto x1 ChocoboFeather x1 # an extra item: nil
+trade Rycharde ChocoboFeather x1        # a wrong item, no popoto: nil
+trade Rycharde BakedPopoto x1           # Prog 1: 96
+finish                                  # completed: fame 60 Windurst, the Tea Set, the title; the popoto taken; 2000 exp; the Commentary vars 1
+trigger Rycharde                        # completed, CommentaryRycharde 1: 97
+finish                                  # CommentaryRycharde 0
+trigger Rycharde                        # 98 (replaceDefault)
+finish
+trigger Take                            # 67 (replaceDefault)
+finish
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # CommentaryValgeir 1: 107
+finish                                  # CommentaryValgeir 0
+trigger Valgeir                         # 146 (replaceDefault)
+finish
+charvar Quest[4][6]CommentaryValgeir 2  # a GM: above 1
+trigger Valgeir                         # 146 (replaceDefault)
+finish
+warp 19,-16,88.8 Mhaura
+charvar Quest[4][6]CommentaryRycharde 2 # a GM: above 1
+trigger Rycharde                        # 98 (replaceDefault)
+finish
+item BakedPopoto                        # a GM
+walk 18.9,-16,88.8                      # back to Rycharde (a trade does not walk)
+trade Rycharde BakedPopoto x1           # completed: no trade handler; nothing

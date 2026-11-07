@@ -1,0 +1,69 @@
+# The Fanged One (windurst 31): Perih Vashai, Kapeh Myohrye, Muhk Johldy (Windurst Woods), Tiger Bones and Old
+# Sabertooth (Sauromugue Champaign). A level-75 WAR (not a RNG, so Sin Hunting stays out; at level 30 the Sabertooth
+# Tigers around Tiger Bones kill the char during the second fight; #offer_level takes the offer at level 30). The
+# harness's wall clock is constant: GetSystemTime() is 1800000000 at every step. Available: a Black Tiger Fang traded
+# to Perih Vashai (no quest trade handler; his script's trade wants the Old Earring: nothing); 351, begun. Prog 0:
+# Perih Vashai 352; a bone chip, the fang with a chip: nil; the fang alone: 356, its finish takes it; Kapeh Myohrye
+# 354, Muhk Johldy 353. Tiger Bones: Prog 0, Wait 0, Old Sabertooth not up: he spawns, OLD_SABERTOOTH_DIALOG_I; again
+# while he is up: nil (the default MANY_TIGER_BONES). Killed by the char (damage taken): his script sets Wait to now +
+# 300; once his body is gone, Tiger Bones: Wait ahead: nil. Wait now + 1 by GM: nil; Wait now (the <= edge): he spawns
+# again. Timer now by GM (not ahead; he is up): nil. Timer now + 1: the Old Tiger's Fang, Prog 1, no action. Timer
+# ahead with the fang held: the elseif, Prog 1: nil (he is killed and gone, Wait now by GM, so only the Prog operand
+# fails). Perih Vashai at Prog 1 with the fang: 357 with a full bag (nothing), 357: completed (fame 20, the Ranger's
+# Necklace, the title; the fang taken; RNG unlocked; the Job Gesture: Ranger; PERIH_VASHAI_DIALOG; the mustZone).
+# Completed: Perih Vashai 358 while the mustZone holds; out to Windurst Waters and back: nil (his script: nothing for a
+# WAR; his default 338).
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/Perih_Vashai/onTrade WindurstWoods/Kapeh_Myohrye/onTrigger WindurstWoods/Muhk_Johldy/onTrigger WindurstWoods/onEventFinish/351 WindurstWoods/onEventFinish/356 WindurstWoods/onEventFinish/357 SauromugueChampaign/Tiger_Bones/onTrigger
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=WAR lvl=75
+item BoneChip
+item BlackTigerFang
+item BlackTigerFang
+login
+trade Perih_Vashai BlackTigerFang x1          # available, the check holds: no quest trade handler; his script: nothing
+trigger Perih_Vashai                          # level 75: 351
+finish                                        # begun
+trigger Perih_Vashai                          # Prog 0: 352
+finish
+trade Perih_Vashai BoneChip x1                # not the fang: nil
+trade Perih_Vashai BlackTigerFang x1 BoneChip x1  # the fang with an extra: nil
+trade Perih_Vashai BlackTigerFang x1          # the fang alone: 356
+finish                                        # tradeComplete: the fang taken
+trigger Kapeh_Myohrye                         # 354
+finish
+trigger Muhk_Johldy                           # 353
+finish
+warp 667,-8.7,-380.1 SauromugueChampaign
+trigger Tiger_Bones                           # Prog 0, Wait 0 <= now, not spawned: Old Sabertooth spawns; OLD_SABERTOOTH_DIALOG_I
+trigger Tiger_Bones                           # he is up: nil; MANY_TIGER_BONES
+kill OLD_SABERTOOTH                           # damage taken: his script sets Wait = now + 300
+tick 15000                                    # his body despawns
+tick 15000
+tick 15000
+trigger Tiger_Bones                           # Wait now + 300 > now: nil; MANY_TIGER_BONES
+charvar Quest[2][31]Wait 1800000001
+trigger Tiger_Bones                           # Wait one second ahead: nil
+charvar Quest[2][31]Wait 1800000000
+trigger Tiger_Bones                           # Wait == now (<=): he spawns; OLD_SABERTOOTH_DIALOG_I
+charvar Quest[2][31]Timer 1800000000
+trigger Tiger_Bones                           # Timer == now (not >); the elseif: he is up: nil
+charvar Quest[2][31]Timer 1800000001
+trigger Tiger_Bones                           # Timer ahead, no fang: the Old Tiger's Fang; Prog 1; noAction
+kill OLD_SABERTOOTH                           # Wait = now + 300 again
+tick 15000
+tick 15000
+tick 15000
+charvar Quest[2][31]Wait 1800000000
+trigger Tiger_Bones                           # Timer ahead but the fang held; Prog 1 (Wait now, he is gone): nil
+warp 119.5,-3.7,90.45 WindurstWoods
+trigger Perih_Vashai                          # Prog 1, the fang: 357
+fill-inventory
+finish                                        # the necklace does not fit: complete fails: nothing
+free-inventory
+trigger Perih_Vashai                          # 357
+finish                                        # completed; the fang taken; RNG unlocked; Job Gesture; PERIH_VASHAI_DIALOG; the mustZone
+trigger Perih_Vashai                          # completed, the mustZone: 358
+finish
+warp -50.9,-6.25,109.3 WindurstWaters
+warp 119.5,-3.7,90.45 WindurstWoods           # the mustZone cleared on the zone-in
+trigger Perih_Vashai                          # nil; his script (a WAR: nothing); 338
+finish

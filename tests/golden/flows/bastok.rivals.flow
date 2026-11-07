@@ -1,0 +1,23 @@
+# Rivals (bastok 20): Detzo in Bastok Mines. The guard (Bastok fame level 3), the Mythril Sallet trade (borrowed: the
+# finish completes the quest but takes no item), the message while accepted, the Wolf Gorget reward, no repeat.
+# Detzo's default is 30; The Talekeeper's Gift and mission 8-2 also name him, and this char (a WAR 1 with no missions)
+# meets neither.
+lists BastokMines/Detzo/onTrigger BastokMines/Detzo/onTrade BastokMines/onEventFinish/93 BastokMines/onEventFinish/94
+char zone=BastokMines pos=5.4,6.999,10.9
+fame Bastok 124
+item MythrilSallet
+item BoneChip
+login
+trade Detzo MythrilSallet x1    # available: no trade handler, nothing
+trigger Detzo                   # fame 124 (level 2): his default 30
+finish
+fame Bastok 125
+trigger Detzo                   # fame level 3: the offer, 93
+finish                          # accepted
+trigger Detzo                   # accepted: DETZO_RIVALS_DIALOG (messageName)
+trade Detzo BoneChip x1         # the wrong item: nothing
+trade Detzo MythrilSallet x1    # 94
+finish                          # completed: Wolf Gorget, fame +30, Contest Rigger; the sallet kept (no tradeComplete)
+trigger Detzo                   # completed: 30
+finish
+trade Detzo MythrilSallet x1    # completed: nothing

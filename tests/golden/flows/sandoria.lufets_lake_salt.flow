@@ -1,0 +1,22 @@
+# Lufet's Lake Salt (sandoria 81): Nogelle in Port San d'Oria, no guard. A trade while available (nothing), the offer
+# 12 declined (option 0: nothing) and taken (option 1), the accepted 10, a wrong trade (two chunks: nil), 11 for four
+# Chunks of Lufet Salt (tradeHas is not exact: three taken, one kept; completed: fame +10, 600 gil, Bean Cuisine Salter),
+# the completed 522 (replaceDefault) and a trade then (nothing). Nogelle has no script and no default; no other quest
+# names her.
+lists PortSanDoria/Nogelle/onTrigger PortSanDoria/Nogelle/onTrade PortSanDoria/onEventFinish/12 PortSanDoria/onEventFinish/11
+char zone=PortSanDoria pos=-69,-5.5,-32.8
+item ChunkOfLufetSalt x4
+login
+trade Nogelle ChunkOfLufetSalt x3         # available: no trade handler, nothing
+trigger Nogelle                           # available: 12
+finish                                    # option 0: nothing
+trigger Nogelle                           # 12
+finish option=1                           # option 1: begun
+trigger Nogelle                           # accepted: 10
+finish
+trade Nogelle ChunkOfLufetSalt x2         # two: nil
+trade Nogelle ChunkOfLufetSalt x4         # three and more: 11
+finish                                    # completed: fame +10, 600 gil, Bean Cuisine Salter; three taken, one kept
+trigger Nogelle                           # completed: 522 (replaceDefault)
+finish
+trade Nogelle ChunkOfLufetSalt x1         # completed: no trade handler, nothing

@@ -1,0 +1,18 @@
+# Unbridled Passion (windurst 74), completion parity: 546's finish is npcUtil.completeQuest step for step
+# (Hunter's Socks, stopping when they cannot be given; fame 20 Windurst; the var cleared), ending in the raw
+# player:completeQuest, so a GM's Quest[2][74]Prog survives the completion (quest:cleanup, which a called
+# Quest.Complete() runs, would clear it). Fire and Brimstone completed and this quest accepted at unbridledPassion 7
+# with Koh's Letter (GM), beside Perih Vashai.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=RNG lvl=50
+quest Windurst.SinHunting completed
+quest Windurst.TheFangedOne completed       # else Perih Vashai's first talk offers it
+quest Windurst.FireAndBrimstone completed
+quest Windurst.UnbridledPassion accepted
+charvar unbridledPassion 7
+keyitem KohsLetter
+login
+charvar Quest[2][74]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 7: 546 (0, 14099)
+finish                                  # Hunter's Socks, fame 20, var 0, completed; Koh's Letter taken; Prog kept

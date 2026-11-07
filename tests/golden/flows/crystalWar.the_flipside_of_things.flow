@@ -1,0 +1,31 @@
+# The Flipside of Things (crystalWar 11): a level 99 Warrior in Garlaige Citadel [S] (missions as group 1's flows).
+# Rarcasmeault: a Lilac: nil (no trade handler); 6, finished on options 0 and 2: nothing; 6, option 1: begun. No case:
+# 8 (an Event). _qm2 7, finished: the Firepower Case; again: nil (5). Rarcasmeault 9, finished: completed (2000 exp,
+# 2000 gil, the Map of Vunkerl Inlet), the case taken; again: 4 (replaceDefault). _qm2 completed: nil (5).
+lists GarlaigeCitadelS/Rarcasmeault/onTrade GarlaigeCitadelS/Rarcasmeault/onTrigger GarlaigeCitadelS/_qm2/onTrigger GarlaigeCitadelS/onEventFinish/6 GarlaigeCitadelS/onEventFinish/7 GarlaigeCitadelS/onEventFinish/9
+char zone=GarlaigeCitadelS pos=147.675,-6,93.04 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item Lilac
+login
+trade Rarcasmeault Lilac x1             # available: nil (no trade handler)
+trigger Rarcasmeault                    # available: 6
+finish option=0                         # nothing
+trigger Rarcasmeault                    # 6
+finish option=2                         # nothing (only option 1 begins)
+trigger Rarcasmeault                    # 6
+finish option=1                         # begun
+trigger Rarcasmeault                    # no case: 8
+finish
+trigger _qm2                            # no case: 7
+finish                                  # the Firepower Case
+trigger _qm2                            # the case: nil (5)
+finish-if-event
+trigger Rarcasmeault                    # the case: 9
+finish                                  # completed (2000 exp, 2000 gil, the map); the case taken
+trigger Rarcasmeault                    # completed: 4 (replaceDefault)
+finish
+trigger _qm2                            # completed: nil (5)
+finish-if-event

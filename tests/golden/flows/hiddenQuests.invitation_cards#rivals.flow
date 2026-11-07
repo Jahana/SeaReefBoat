@@ -1,0 +1,27 @@
+# Invitation Cards (hidden quest Invitation_Cards) next to Naja Salaheem's other Lua quests (the Aht Urhgan promotions,
+# whose containers run before the card quest's): a level 75 Warrior in Aht Urhgan Whitegate with the PSC Wildcat Badge,
+# an Imp Wing, the Red and Blue Invitation Cards, and AssaultPromotion 25 (Private First Class available). The
+# promotion's 5000 / 5001 / 5002 win over the card's 74; once it is completed (AssaultPromotion 0) the card's 74 plays. Then Naja's Toau missions: Astral Waves current
+# (3052, a tie with the card's 74: the trigger order shows who wins); Knight of Gold (3021) is #rivals_gold.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/74
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+charvar AssaultPromotion 25
+keyitem PscWildcatBadge
+keyitem RedInvitationCard
+keyitem BlueInvitationCard
+item ImpWing
+login
+trigger Naja_Salaheem                   # available: 5000
+finish                                  # begun
+trigger Naja_Salaheem                   # accepted: 5001
+finish
+trade Naja_Salaheem ImpWing x1          # 5002
+finish                                  # completed
+trigger Naja_Salaheem                   # the promotion is done: the card's 74
+update 74 option=1
+finish option=0
+mission Toau AstralWaves current        # 3052 against the card's 74
+trigger Naja_Salaheem
+finish
+trigger Naja_Salaheem
+finish

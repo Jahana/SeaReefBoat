@@ -1,0 +1,19 @@
+# Requiem for the Departed (crystalWar 23), the quest's own var at the completion (missions as the main flow's):
+# accepted with the Sheaf of Handmade Incense and Quest[7][23]Prog 1 (GMs). Heptachiond: 107; finished:
+# npcUtil.completeQuest (the Scroll of Recall-Meriph, completed), then the incense taken. npcUtil.completeQuest does no
+# cleanup: Quest[7][23]Prog stays 1 (quest:complete's cleanup would clear it).
+lists TheEldiemeNecropolisS/Heptachiond/onTrigger TheEldiemeNecropolisS/onEventFinish/107
+char zone=TheEldiemeNecropolisS pos=257.696,-31.999,20.073 job=WAR lvl=99
+keyitem BronzeRibbonOfService
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+quest CrystalWar.RequiemForTheDeparted accepted
+keyitem SheafOfHandmadeIncense
+charvar Quest[7][23]Prog 1              # a GM: the quest's own var
+login
+trigger Heptachiond                     # the incense: 107
+finish                                  # the Scroll of Recall-Meriph; completed, Prog kept; the incense taken
+trigger Heptachiond                     # completed: 108
+finish

@@ -1,0 +1,20 @@
+# All the Way to the Bank (adoulin 103; call-only): the receipt at Defliaa, none at Hujette. A level 99 Warrior in
+# Western Adoulin with 100000 gil and the TARUTARU_SAUCE_INVOICE (a GM). ATWTTB_Payments 30 (a GM: bits 1 to 4):
+# Defliaa 5069, finished: 19440 taken, Payments 31: the receipt. Payments 29 (a GM: bits 0, 2, 3, 4): Hujette 5070,
+# finished: 3000 taken, bit 2 set again: Payments 29, not full: no receipt (her receipt arm cannot be reached: she
+# needs bit 1 clear and sets bit 2). Payments 2 (bit 1 set): Hujette: nothing.
+# The deliberate log writes (user ruling 2026-11-04) are the C# port's, not the Lua's: this trace is a csharp-rerecord
+# of the Lua recording (lua-at kept), the difference the log's 0x056 pages, chars.quests and char_quest_state only.
+char zone=WesternAdoulin pos=45.4,2,-113.5 job=WAR lvl=99 gil=100000
+keyitem TarutaruSauceInvoice
+charvar ATWTTB_Payments 30
+login
+trade Defliaa gil=19440                   # bit 0 clear: 5069
+finish                                    # 19440 taken; Payments 31: TARUTARU_SAUCE_RECEIPT
+delkeyitem TarutaruSauceReceipt           # a GM
+charvar ATWTTB_Payments 29                # a GM: bits 0, 2, 3, 4
+warp 36.4,0,-56 WesternAdoulin            # beside Hujette
+trade Hujette gil=3000                    # bit 1 clear: 5070
+finish                                    # 3000 taken; Payments 29: not full, no receipt
+charvar ATWTTB_Payments 2                 # a GM: bit 1
+trade Hujette gil=3000                    # bit 1 set: nothing

@@ -1,0 +1,16 @@
+# Guest of Hauteur with a Replica Maul and a full inventory: Steel Bones' 57 for the Replica Maul (the other side of the
+# Maul check), then 58 with no room for the Targe: not completed, the letter kept; once there is room 58 completes it.
+char zone=PortBastok pos=-150,-7.48,19 job=WHM lvl=31
+item ReplicaMaul
+quest Bastok.WelcomeToBastok completed
+quest Bastok.GuestOfHauteur accepted
+login
+equip ReplicaMaul Main
+trigger Steel_Bones            # the Replica Maul, no letter: 57
+finish                         # the Letter from Domien
+fill-inventory
+trigger Powhatan               # the letter held: 58
+finish                         # the inventory full: not completed, the letter kept
+free-inventory
+trigger Powhatan               # 58 again
+finish                         # completed: Targe, fame +30, the letter deleted

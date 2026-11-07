@@ -1,0 +1,12 @@
+# The Road to Aht Urhgan (jeuno 91): ENABLE_TOAU true: the Lua's xi.settings.main.ENABLE_TOAU == 1 is false for a boolean
+# (Settings.MainEquals, quest rework P9; MainNumber / Main would read true as 1): not offered, Faursel's default 10065.
+# Then 1: 10062 (Prog 0's offer). Recorded on Lua at d954561a^ (the parent of the commit that deleted the Lua).
+lists LowerJeuno/Faursel/onTrigger
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+setting ENABLE_TOAU true
+login
+trigger Faursel                     # true is not 1: no section; 10065
+finish
+setting ENABLE_TOAU 1
+trigger Faursel                     # Prog 0: 10062
+finish

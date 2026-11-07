@@ -1,0 +1,16 @@
+# Flavors of Our Lives (adoulin 46), the first offer's options: a level 99 Warrior in Western Adoulin. Berghent: 80,
+# finished on 2: refused (any option but 1: the local var 1); 81. A zone change clears the local var: 80, finished on 1:
+# begun (80's option 1 arm). Prog 0: 82.
+lists WesternAdoulin/Berghent/onTrigger WesternAdoulin/onEventFinish/80 WesternAdoulin/onEventFinish/81
+char zone=WesternAdoulin pos=97.221,-0.148,-28.68 job=WAR lvl=99
+login
+trigger Berghent                        # available, no refusal: 80
+finish option=2                         # not option 1: refused (Flavors_of_Our_Lives_Refused 1)
+trigger Berghent                        # refused before: 81
+finish option=0                         # nothing
+warp -316.5,-1,-318 RalaWaterways
+warp 97.221,-0.148,-28.68 WesternAdoulin
+trigger Berghent                        # the local var gone with the zone: 80
+finish option=1                         # begun
+trigger Berghent                        # Prog 0: 82
+finish

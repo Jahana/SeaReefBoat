@@ -1,0 +1,33 @@
+# Riding on the Clouds (jeuno 131): the kinds of its Maat replies, against Maat's own script (the fallback: Maat.lua
+# plays 117 while the char var BeatAroundTheBushin is 5, and its finish sets it to 6). A quest event takes turns with
+# the fallback (the quest's turn, then the script's); a progressEvent wins on the script's turn too. A level 61 Warrior
+# at level cap 65, MAX_LEVEL 99, BeatAroundTheBushin 5 and the quest accepted (a GM, before login). Accepted, no stone:
+# 89 (an event: the quest's turn), then 117 (the script's turn); BeatAroundTheBushin 5 again (a GM); 89 (the quest's
+# turn). The quest set available (a GM) on the script's turn: 88 all the same (a progressEvent). Accepted again (a GM):
+# 89 (the turn after a progressEvent is the quest's), the four stones (a GM), then on the script's turn: 90 (a
+# progressEvent), finished: completed.
+lists RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/88 RuludeGardens/onEventFinish/90
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=61
+levelcap 65
+charvar BeatAroundTheBushin 5
+quest Jeuno.RidingOnTheClouds accepted
+login
+trigger Maat                            # accepted, no stone: event 89 (the quest's turn)
+finish
+trigger Maat                            # the script's turn: Maat.lua's 117 (BeatAroundTheBushin 5)
+finish                                  # Maat.lua: BeatAroundTheBushin 6
+charvar BeatAroundTheBushin 5           # a GM
+trigger Maat                            # the quest's turn: 89
+finish
+quest Jeuno.RidingOnTheClouds available # a GM
+trigger Maat                            # the script's turn, but 88 is a progressEvent: 88 (the vars drawn)
+finish option=0                         # the four vars set to 0
+quest Jeuno.RidingOnTheClouds accepted  # a GM
+trigger Maat                            # after a progressEvent, the quest's turn: 89 (the vars 0)
+finish
+keyitem ScowlingStone                   # a GM: the four stones
+keyitem SmilingStone
+keyitem SomberStone
+keyitem SpiritedStone
+trigger Maat                            # the script's turn, but 90 is a progressEvent: 90
+finish                                  # completed: Cloud Breaker, the stones taken, level cap 70

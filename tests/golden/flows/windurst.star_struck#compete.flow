@@ -1,0 +1,40 @@
+# Star Struck (windurst 10): reply kinds at Koru-Moru (Windurst Walls). Koru-Moru's script answers 416 whenever
+# Carbuncle Debacle is accepted with CarbuncleDebacleProgress 2 (GMs; accepted since 416 wants it so, user ruling
+# 2026-11-04, kept Lua bugs: the Lua's `accepted and progress == 1 or progress == 2` read no status at 2): so an
+# Event-priority line (or a replaceDefault one, or his default) alternates with his script's 416, and a Progress line
+# plays on every talk. Available with no epistle: the quest's nil, then his default 193 and his script's 416 alternate
+# (his script still runs after the quest's nil). The epistle held: 197 on two talks in a row (Progress; option 1 keeps
+# the quest available). Accepted: 198 alternates with 416 (Event). Completed with Blast from the Past accepted (GM) and
+# CarbuncleDebacleProgress 0 (Carbuncle Debacle available again): Blast from the Past's 216 (Event) on two talks;
+# Star Struck's 213 (replaceDefault, below Event) never plays (a plain Event 213 would tie with 216 and play first,
+# Star Struck's container being the earlier).
+lists WindurstWalls/Koru-Moru/onTrigger WindurstWalls/onEventFinish/197
+char zone=WindurstWalls pos=-120.2,-5.5,122.4
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 2
+login
+trigger Koru-Moru                              # available, no epistle: the quest's nil; his default 193 (the default's turn)
+finish
+trigger Koru-Moru                              # his script's turn: 416 (his script still runs after the quest's nil)
+finish
+item TornEpistle                               # GM
+trigger Koru-Moru                              # 197 (Progress)
+finish option=1                                # nothing
+trigger Koru-Moru                              # 197 again (a Progress line: his script never gets the turn)
+finish option=1                                # nothing
+trigger Koru-Moru                              # 197 again
+finish option=0                                # begun
+trigger Koru-Moru                              # accepted: 198 (Event: the quest's turn)
+finish
+trigger Koru-Moru                              # his script's turn: 416
+finish
+trigger Koru-Moru                              # 198 again
+finish
+quest Windurst.StarStruck completed            # GM
+quest Windurst.BlastFromThePast accepted       # GM
+charvar CarbuncleDebacleProgress 0             # GM: his script silent again
+quest Windurst.CarbuncleDebacle available      # GM: no longer accepted
+trigger Koru-Moru                              # Blast from the Past's 216 (Event, Option 0) over Star Struck's 213 (replaceDefault)
+finish
+trigger Koru-Moru                              # 216 again (213 never in the running)
+finish

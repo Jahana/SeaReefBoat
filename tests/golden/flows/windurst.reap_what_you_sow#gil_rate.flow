@@ -1,0 +1,15 @@
+# Reap What You Sow (windurst 29) at GIL_RATE 1.0625: the turn-in gil is GIL_RATE x amount (500 -> 531.25 -> 531; 700 ->
+# 743.75 -> 744; a missing rate would give 500 / 700). The events' args stay literal. Accepted (GM): a fungus: 475,
+# 531 gil, completed; completed at var 0: a Deathball: 477, 744 gil.
+char zone=WindurstWaters pos=129.6,-5.75,167.5 job=WAR lvl=75
+setting GIL_RATE 1.0625
+item SobbingFungus
+item Deathball
+login
+quest Windurst.ReapWhatYouSow accepted
+trigger Mashuu-Ajuu                     # his default 429 (beside him)
+finish
+trade Mashuu-Ajuu SobbingFungus x1      # accepted: 475
+finish                                  # 531 gil; the fungus taken; needToZone; completed; fame 10; the Stationery Set
+trade Mashuu-Ajuu Deathball x1          # completed, var 0: 477
+finish                                  # 744 gil; the ball taken; fame 10; var 0

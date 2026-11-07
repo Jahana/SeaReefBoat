@@ -1,0 +1,39 @@
+# F.A.I.L.ure Is Not an Option (adoulin 29, call-only: Clautaire's script): a level 99 Warrior in Western Adoulin.
+# Clautaire (default 545) alternates with his script: the talks come in pairs, 545 first. Adoulin fame 224 (level 3)
+# with the F.A.I.L. Badge (GMs; A Pioneer's Best (Imaginary) Friend's reward): nothing from the quest. 225 (level 4)
+# without the badge: nothing. With it: 78, finished: added. Accepted without the Hunk of Bedrock: 77. The Hunk (a GM:
+# nothing gives it): 76, finished: the Hunk taken, completed (the raw completeQuest), 1000 exp, 500 bayld,
+# BAYLD_OBTAINED 500, 30 Adoulin fame (225 -> 255). Completed (the badge and level 4 kept): nothing.
+lists WesternAdoulin/Clautaire/onTrigger WesternAdoulin/onEventFinish/78 WesternAdoulin/onEventFinish/76
+char zone=WesternAdoulin pos=42.5,4,-159 job=WAR lvl=99
+fame Adoulin 224
+keyitem FailBadge
+login
+trigger Clautaire                       # 224: level 3, the badge: nothing (545 by the turn)
+finish-if-event
+trigger Clautaire                       # the other of the pair
+finish-if-event
+fame Adoulin 225                        # a GM: level 4
+delkeyitem FailBadge                    # a GM
+trigger Clautaire                       # level 4, no badge: nothing
+finish-if-event
+trigger Clautaire                       # the other of the pair
+finish-if-event
+keyitem FailBadge                       # a GM
+trigger Clautaire                       # level 4, the badge: 78 or 545
+finish-if-event
+trigger Clautaire                       # the other; 78's finish: added
+finish-if-event
+trigger Clautaire                       # accepted, no Hunk: 77 or 545
+finish-if-event
+trigger Clautaire                       # the other of the pair
+finish-if-event
+keyitem HunkOfBedrock                   # a GM (nothing gives it)
+trigger Clautaire                       # the Hunk: 76 or 545
+finish-if-event
+trigger Clautaire                       # the other; 76's finish: the Hunk taken, completed, exp, bayld, fame
+finish-if-event
+trigger Clautaire                       # completed: nothing
+finish-if-event
+trigger Clautaire                       # the other of the pair
+finish-if-event

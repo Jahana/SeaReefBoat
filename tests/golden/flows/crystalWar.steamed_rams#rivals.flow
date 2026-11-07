@@ -1,0 +1,77 @@
+# Steamed Rams (crystalWar 9) beside its rival at Mainchelite and the East Ronfaure [S] qms: Her Memories: Carnelian
+# Footfalls (group 10, on Lua) accepted by a GM: Mainchelite 173 (an Event, oncePerZone) while its Option is not 7, the
+# qms 4 / 5 / 6 (Events) once its Option bits are set. Each Steamed Rams reply is shown against the rival so a reply of
+# another kind would play otherwise (ties go to the first container: Carnelian Footfalls before Steamed Rams). A level 99
+# Warrior in Southern San d'Oria [S] (missions as the main flow). Available, nothing held: 15 ties 173: 173; again (173
+# spent in this zone): 15. The Red letter (a GM), rezoned: 7 (a Progress) over 173, declined; 8 over 173, option 1. The
+# Fighting Fourth accepted (a GM), rezoned: 9 ties 173: 173; again: 9; it set available. 8, accepted: begun. Rezoned:
+# 13 over 173. East Ronfaure [S], Carnelian Footfalls' Option 7 (a GM): qm3 1 (a Progress) over its 4: the Propeller;
+# qm3 again: Steamed Rams nil: its 4; qm4 2 over 5; qm5 3 over 6. Option 0 again (a GM). Mainchelite: 12 over 173,
+# finished: completed, allegiance 1. Completed: 5 (replaceDefault) under 173: 173; again: 5. Set available (a GM),
+# pledged now, rezoned: 10 over 173, declined: Option 1; 11 over 173, accepted: begun; rezoned: 14 over 173, option 0;
+# the three (GMs): 624 over 173, finished: completed.
+lists SouthernSanDoriaS/Mainchelite/onTrigger EastRonfaureS/qm3/onTrigger EastRonfaureS/qm4/onTrigger EastRonfaureS/qm5/onTrigger
+char zone=SouthernSanDoriaS pos=-13.849,1.398,-30.368 job=WAR lvl=99
+quest CrystalWar.HerMemoriesCarnelianFootfalls accepted
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Mainchelite                     # nothing held: Steamed Rams 15 ties Carnelian Footfalls 173: 173
+finish
+trigger Mainchelite                     # 173 spent in this zone: 15
+finish
+keyitem RedRecommendationLetter
+rezone
+trigger Mainchelite                     # the letter: 7 over 173
+finish option=1                         # Option 1
+trigger Mainchelite                     # 8 over 173
+finish option=1                         # nothing
+quest CrystalWar.TheFightingFourth accepted
+rezone
+trigger Mainchelite                     # The Fighting Fourth accepted: 9 ties 173
+finish
+trigger Mainchelite                     # the other of the two
+finish
+quest CrystalWar.TheFightingFourth available
+trigger Mainchelite                     # 8
+finish option=0                         # begun; the letter taken
+rezone
+trigger Mainchelite                     # accepted, nothing held: 13 over 173
+finish option=0                         # nothing
+warp 314.321,-30.495,-67.15 EastRonfaureS
+charvar Quest[7][69]Option 7
+trigger qm3                             # 1 over Carnelian Footfalls' 4
+finish                                  # the Charred Propeller
+trigger qm3                             # held: Steamed Rams nil: Carnelian Footfalls' 4
+finish
+warp 542.925,-49.83,178.563 EastRonfaureS
+trigger qm4                             # 2 over 5
+finish                                  # the Piece of Shattered Lumber
+warp 381.515,-26.5,-22.525 EastRonfaureS
+trigger qm5                             # 3 over 6
+finish                                  # the Oxidized Plate
+charvar Quest[7][69]Option 0
+warp -13.849,1.398,-30.368 SouthernSanDoriaS
+trigger Mainchelite                     # the three: 12 over 173
+finish                                  # completed; allegiance 1
+trigger Mainchelite                     # completed: 5 (replaceDefault) under 173: 173
+finish
+trigger Mainchelite                     # 173 spent: 5
+finish
+quest CrystalWar.SteamedRams available
+rezone
+trigger Mainchelite                     # pledged, Option 0: 10 over 173
+finish option=1                         # Option 1
+trigger Mainchelite                     # 11 over 173
+finish option=0                         # begun
+rezone
+trigger Mainchelite                     # pledged, no evidence: 14 over 173
+finish option=0                         # nothing
+keyitem CharredPropeller
+keyitem OxidizedPlate
+keyitem PieceOfShatteredLumber
+trigger Mainchelite                     # 624 over 173
+finish                                  # completed

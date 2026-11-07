@@ -1,0 +1,19 @@
+# Collect Tarut Cards (jeuno 10) with its era module (xi.pre(xi.expansion.ABYSSEA): RESTRICT_CONTENT 1, ENABLE_ABYSSEA
+# 0), GM-set accepted with Searching for the Right Words accepted (its Chululu Event 57). The module's 27 is
+# quest:event(27), an Event: it takes turns with the other quest's Event 57 (interaction_lookup's cycle), where the
+# quest's own Progress 27 would win alone each time. The patched container is last in the list (modifyInteractionEntry's
+# remove and add), so Searching for the Right Words' 57 comes first in the cycle.
+module modules/era/lua/quests/jeuno/collect_tarut_cards.lua
+lists LowerJeuno/Chululu/onTrigger
+char zone=LowerJeuno pos=-9,-6.7,-42.5 job=WAR lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_ABYSSEA 0
+quest Jeuno.CollectTarutCards accepted
+quest Jeuno.SearchingForTheRightWords accepted
+login
+trigger Chululu                             # the cycle's first: Searching for the Right Words' 57
+finish
+trigger Chululu                             # the cycle's next: the module's 27 (the quest's own Progress 27 would win alone)
+finish
+trigger Chululu                             # and back: 57
+finish

@@ -1,0 +1,57 @@
+# A Certain Substitute Patrolman (adoulin 78), the kinds at the NPCs with scripts: a level 99 Warrior in
+# Western Adoulin, SoA current Beauty and the Beast (57, a GM: Rising Solstice's script plays 150 on its turns),
+# The Old Man and the Harpoon accepted with the Broken Harpoon (GMs: Shipilolo's script plays 2543). Rising Solstice:
+# 2550, finished: begun; available again (a GM): 2550 again (a progressEvent: an Event would give his script this turn).
+# Prog 0: 2551 (an Event), then his script's turn: 150, then 2551. Zaoso at Prog 0: 2553, finished: Prog 1; Prog 0 again
+# (a GM): 2553 again (his script 574 would take an Event's second turn). Shipilolo at Prog 4 (a GM): 2557, finished:
+# Prog 5; Prog 4 again: 2557 again (not his 2543). Prog 7: 2552, finished: completed; available, accepted, Prog 7 again
+# (GMs): 2552 again. Beauty and the Beast completed and SoA A Curse from the Past current (39, GMs: Kongramm's script
+# plays 148): the quest accepted at Prog 2 (GMs): Kongramm 2555, finished: Prog 3; Prog 2 again: 2555 again (not his
+# 148).
+lists WesternAdoulin/Rising_Solstice/onTrigger WesternAdoulin/Zaoso/onTrigger WesternAdoulin/Shipilolo/onTrigger
+lists WesternAdoulin/Kongramm/onTrigger
+char zone=WesternAdoulin pos=-152.5,4,-29 job=WAR lvl=99
+mission Soa BeautyAndTheBeast current
+quest Adoulin.TheOldManAndTheHarpoon accepted
+keyitem BrokenHarpoon
+login
+trigger Rising_Solstice                 # available: 2550
+finish                                  # begun
+quest Adoulin.ACertainSubstitutePatrolman available # a GM
+trigger Rising_Solstice                 # available: 2550 again (a progressEvent outranks his script)
+finish                                  # begun
+trigger Rising_Solstice                 # Prog 0: 2551 (an Event)
+finish
+trigger Rising_Solstice                 # his script's turn: 150
+finish
+trigger Rising_Solstice                 # 2551
+finish
+trigger Zaoso                           # Prog 0: 2553
+finish                                  # Prog 1
+charvar Quest[9][78]Prog 0              # a GM
+trigger Zaoso                           # Prog 0: 2553 again (not his script's 574)
+finish                                  # Prog 1
+charvar Quest[9][78]Prog 4              # a GM
+trigger Shipilolo                       # Prog 4: 2557
+finish                                  # Prog 5
+charvar Quest[9][78]Prog 4              # a GM
+trigger Shipilolo                       # Prog 4: 2557 again (not his script's 2543)
+finish                                  # Prog 5
+charvar Quest[9][78]Prog 7              # a GM
+trigger Rising_Solstice                 # Prog 7: 2552
+finish                                  # completed; the patrol route lost
+quest Adoulin.ACertainSubstitutePatrolman available # a GM
+quest Adoulin.ACertainSubstitutePatrolman accepted # a GM
+charvar Quest[9][78]Prog 7              # a GM
+trigger Rising_Solstice                 # Prog 7: 2552 again (not his script's 150)
+finish                                  # completed again
+mission Soa BeautyAndTheBeast completed # a GM: the log's current mission cleared
+mission Soa ACurseFromThePast current   # a GM: SoA 39
+quest Adoulin.ACertainSubstitutePatrolman available # a GM
+quest Adoulin.ACertainSubstitutePatrolman accepted # a GM
+charvar Quest[9][78]Prog 2              # a GM
+trigger Kongramm                        # Prog 2: 2555
+finish                                  # Prog 3
+charvar Quest[9][78]Prog 2              # a GM
+trigger Kongramm                        # Prog 2: 2555 again (not his script's 148)
+finish                                  # Prog 3

@@ -1,0 +1,48 @@
+# A Pose By Any Other Name (windurst 7): Angelica in Windurst Waters. A WAR (the char line's default job) of level 10,
+# whose pose body is the Bronze Harness; the Leather Vest (level 7, WAR may wear it) is "another body" (a WAR cannot wear
+# the Robe or the Tunic). Available: no body or another body, 90 while Option is 0 (option 0: nothing; option 2:
+# Option 1), then 91 (option 0: nothing; option 1: begun, Option kept); the harness worn, 86 (setPriority 101).
+# Accepted, Prog 0: the request 92 (Prog = the harness's id 12576, Wait = now + 3600). Prog set, in time: another body
+# 94 (1, ...); the harness 96 (completed: fame +20, Copy of Ancient Blood, Super Model, Angelica's Autograph; the quest's
+# vars cleared, mustZone 238). Completed with mustZone: 101 (setPriority 101); after a zone change nothing, so her
+# script answers. Her script cycles 86 / 87 by the player local var spokenAngelica (set by its own onEventFinish for
+# 86 / 87, which runs after the quest's 86 too; a zone change clears it): the second talk with the harness worn tells
+# the quest's 86 from her script's. A Question of Taste (outlands) also names Angelica, only while it is accepted (never
+# here). No mission names her.
+lists WindurstWaters/Angelica/onTrigger WindurstWaters/Angelica/onTrade WindurstWaters/onEventFinish/90 WindurstWaters/onEventFinish/91 WindurstWaters/onEventFinish/96
+char zone=WindurstWaters pos=-63.1,-9.25,-8.85 lvl=10
+item BronzeHarness
+item LeatherVest
+item BoneChip
+login
+trade Angelica BoneChip x1          # available: no trade handler, nothing
+trigger Angelica                    # available, no body (0 is not the harness), Option 0: 90
+finish option=0                     # nothing
+trigger Angelica                    # 90 again
+finish option=2                     # Option 1
+trigger Angelica                    # Option 1: 91
+finish option=0                     # nothing
+equip BronzeHarness Body
+trigger Angelica                    # available, the WAR's harness worn: 86 (setPriority 101)
+finish                              # her script's finish: spokenAngelica 1
+trigger Angelica                    # the quest's 86 again (her script would now play 87: spokenAngelica 1)
+finish
+equip LeatherVest Body
+trigger Angelica                    # another body, Option 1: 91
+finish option=1                     # begun (Option stays 1)
+trigger Angelica                    # accepted, Prog 0: Wait = now + 3600, Prog 12576 (the harness); 92 (0, harness, robe, tunic, vest, robe, kenpogi)
+finish
+trigger Angelica                    # in time, the vest worn: 94 (1, harness, robe, tunic, vest, robe, kenpogi)
+finish
+trade Angelica BoneChip x1          # accepted: nothing
+equip BronzeHarness Body
+trigger Angelica                    # in time, the harness worn: 96
+finish                              # completed: fame +20, Copy of Ancient Blood, Super Model, Angelica's Autograph; vars cleared; mustZone 238
+trigger Angelica                    # completed, mustZone: 101 (setPriority 101)
+finish
+trigger Angelica                    # 101 again: at priority 101 it beats her script (a plain event would tie with it and cycle to her 87)
+finish
+trade Angelica BoneChip x1          # completed: nothing
+rezone                              # the mustZone cleared (and the local var spokenAngelica)
+trigger Angelica                    # completed, no mustZone: nil; her script 86 (spokenAngelica 0 after the zone change)
+finish

@@ -1,0 +1,11 @@
+# A Timely Visit (sandoria 105): qm1's Prog operand of the pop arm and of the daytime arm. Stage 1, Prog 6 by GM, in a
+# fresh zone (qm1's Wait 0: the wait is over), no NM up, NMKilled 0. At 12:00 (day): not UNABLE_TO_INVESTIGATE (Prog
+# not 5): nil, DUG_UP. At 20:00 (night): no pop (Prog not 5): nil, DUG_UP.
+char zone=JugnerForest pos=-309.382,-0.139,407.377 job=WAR lvl=75
+quest Sandoria.ATimelyVisit accepted
+charvar Quest[0][105]Prog 6
+charvar Quest[0][105]Stage 1
+login
+trigger qm1                               # 12:00, day, Prog 6: the daytime arm's Prog operand fails; nil, DUG_UP
+wait vana=8
+trigger qm1                               # 20:00, night, wait over, no NM up, Prog 6: the pop arm's Prog operand fails; nil, DUG_UP

@@ -1,0 +1,49 @@
+# Wrath of the Griffon (crystalWar 25) beside Perils of the Griffon and In a Haze of Glory (Lua quests; Haze is
+# available once Perils is completed and answers Rholont with the Event 637 in every state): a level 99 Warrior in
+# Southern San d'Oria [S] with Perils and Boy and the Beast completed (GMs; missions as the main flow). Rholont,
+# available: 59 (Progress) beats 637 every time (twice, the quest set back to available by a GM between); begun,
+# Prog 0: 61 (an Event) ties 637 and they rotate (61, then 637). Jugner Forest [S]: qm8 204 (Prog 1); Prog 3 (a GM)
+# and the NM killed: qm8 answers nothing. Prog 2 (a GM) before the NM ever spawned: 206, not 205; Prog 1 (a GM):
+# 205. Rholont at Prog 3: 60 (Progress: it beats 637), finished: completed (a key item always fits); then 637; set
+# back to accepted at Prog 3 (GMs): 60 again.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/59 SouthernSanDoriaS/onEventFinish/60 JugnerForestS/qm8/onTrigger JugnerForestS/Cobraclaw_Buchzvotch/onMobDeath JugnerForestS/onEventFinish/204 JugnerForestS/onEventFinish/205 JugnerForestS/onEventFinish/206
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.PerilsOfTheGriffon completed # In a Haze of Glory available: Rholont 637 (an Event)
+quest CrystalWar.BoyAndTheBeast completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # available: 59 over 637
+finish                                  # begun
+quest CrystalWar.WrathOfTheGriffon available # a GM
+trigger Rholont                         # the same state again: 59
+finish
+trigger Rholont                         # begun, Prog 0: 61 (an Event), first in order
+finish-if-event
+trigger Rholont                         # the same state again: 637
+finish-if-event
+warp -4.6,0.23,-294.975 JugnerForestS
+trigger qm8                             # Prog 0: 204
+finish                                  # Prog 1
+charvar Quest[7][25]Prog 2              # a GM: the NM never spawned
+trigger qm8                             # Prog 2: 206 (not 205: only at Prog 1)
+finish                                  # Prog 3
+charvar Quest[7][25]Prog 1              # a GM
+trigger qm8                             # Prog 1, the NM not up: 205
+finish                                  # Cobraclaw Buchzvotch spawned, claimed
+charvar Quest[7][25]Prog 3              # a GM
+kill COBRACLAW_BUCHZVOTCH               # Prog 3: nothing changes
+trigger qm8                             # Prog 3: nothing
+finish-if-event
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 3: 60 (Progress: over 637)
+finish                                  # completed (the Military Scrip)
+trigger Rholont                         # completed: no 60: 637
+finish-if-event
+quest CrystalWar.WrathOfTheGriffon available # a GM
+quest CrystalWar.WrathOfTheGriffon accepted # a GM
+charvar Quest[7][25]Prog 3              # a GM
+trigger Rholont                         # 60 again (a Progress reply: the last event id does not rotate it)
+finish

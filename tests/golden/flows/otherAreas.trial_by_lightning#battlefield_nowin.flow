@@ -1,0 +1,23 @@
+# Trial by Lightning (otherAreas 27), the battlefield's arms without a win. Accepted without the fork: LP_Entrance
+# opens no menu (the fork is required). Available with the fork: no menu (BattlefieldQuest's entry wants the status at
+# accepted or more; a status read that stays in Lua). Accepted with the fork: entered (the fork taken), then left
+# through Lightning_Protocrystal (32003, option 4: leaveBattlefield): no 32001, no whisper; Ripapa then sees neither key
+# item: 10024 (a new fork).
+char zone=CloisterOfStorms pos=533.5,-14.9,492.0 job=WAR lvl=75
+quest OtherAreas.TrialByLightning accepted
+login
+trigger LP_Entrance                       # accepted, no fork: no menu
+finish-if-event
+keyitem TuningForkOfLightning
+quest OtherAreas.TrialByLightning available
+trigger LP_Entrance                       # available, the fork: no menu
+finish-if-event
+quest OtherAreas.TrialByLightning accepted
+trigger LP_Entrance                       # accepted, the fork: 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+trigger Lightning_Protocrystal            # the exit: 32003
+finish option=4                           # left: no win
+warp 30.6,-15.6,56.0 Mhaura
+trigger Ripapa                            # accepted, neither key item: 10024
+finish                                    # a new fork

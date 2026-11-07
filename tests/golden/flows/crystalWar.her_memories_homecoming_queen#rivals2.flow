@@ -1,0 +1,25 @@
+# Her Memories: Homecoming Queen (crystalWar 64), the rival at Thierride: a level 99 Warrior in Port San d'Oria with
+# Homecoming Queen accepted (a GM; missions as group 1's flows) and A Taste for Meat (sandoria 100) at its Prog 1, still
+# available (a GM): Thierride answers its 526 (Progress). Old Bean, Prog1 0, no bean: 792 ties 526: 792, the first
+# container, finished: Old Bean added, Thierride's Bean Creation. The bean held: 526 (Progress) over 794 (an Event),
+# finished: nothing. Prog1 1 (a GM): 793 ties 526: 793 (the cycle is at 792, not in the tie), finished: Old Bean
+# completed; no tiny fragment held: FRAGMENT_FAR_TOO_SMALL, Tiny Memory Fragment 1. Again: 526 alone.
+lists PortSanDoria/Thierride/onTrigger PortSanDoria/onEventFinish/792 PortSanDoria/onEventFinish/793
+char zone=PortSanDoria pos=-65.949,-5.496,-28.792 job=WAR lvl=99 nation=0
+mission Wotg HerMemories current
+quest CrystalWar.HerMemoriesHomecomingQueen accepted
+charvar Quest[0][100]Prog 1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Thierride                       # Prog1 0, no bean: 792 and 526 tie (Progress): 792, the first container
+finish                                  # Old Bean added; Thierride's Bean Creation
+trigger Thierride                       # the bean: 526 (Progress) over 794 (an Event)
+finish                                  # nothing
+charvar Quest[7][64]Prog1 1             # a GM
+trigger Thierride                       # Prog1 1: 793 and 526 tie: 793 (the cycle at 792)
+finish                                  # Old Bean completed; FRAGMENT_FAR_TOO_SMALL; Tiny Memory Fragment 1
+trigger Thierride                       # Old Bean completed: 526 alone
+finish

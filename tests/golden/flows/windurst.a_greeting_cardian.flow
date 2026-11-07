@@ -1,0 +1,75 @@
+# A Greeting Cardian (windurst 43): Kororo, Spare One and Boizo-Naizo (Windurst Woods), the Fives (Five of Clubs in
+# Port Windurst, Five of Diamonds in Windurst Walls, Five of Hearts in Windurst Waters, Five of Spades in Buburimu
+# Peninsula). A level-10 WAR at Windurst fame 125 (level 3), The All-New C-2000 completed by GM (Kororo's and
+# Boizo-Naizo's scripts act only while it or Legendary Plan B is accepted: silent here). Available: Kororo 296 (no
+# greeting); Spare One 295 option 0 (an escape: nothing), option 4 (nothing), option 2 (Greeting 2, Wait = now + 60,
+# the mustZone); Spare One 495 (0, 2); Kororo nil (the mustZone: his default 277); out to Windurst Waters and back
+# (the mustZone cleared): nil (Wait = now + 60 not reached: 277); Wait = now by GM: 298 option 0 (nothing), option 1
+# (begun). Accepted: Kororo 299, Boizo-Naizo 302, Spare One (no handler: 278); Five of Clubs 448, Five of Diamonds 339,
+# Five of Hearts 686; Five of Spades at Prog 0: 1 (118, 2), Prog 1; again: the greeting line (messageName
+# FIVEOFSPADES_GREETING_OFFSET + 2); Kororo at Prog 1: 303 with a full bag (complete fails: nothing), 303: completed
+# (fame 30, the Tourmaline Earring; needToZone). Completed: Kororo 304, Boizo-Naizo 307, Spare One 278.
+lists WindurstWoods/Kororo/onTrigger WindurstWoods/Spare_One/onTrigger WindurstWoods/Boizo-Naizo/onTrigger WindurstWoods/onEventFinish/295 WindurstWoods/onEventFinish/298 WindurstWoods/onEventFinish/303 PortWindurst/Five_of_Clubs/onTrigger WindurstWalls/Five_of_Diamonds/onTrigger WindurstWaters/Five_of_Hearts/onTrigger BuburimuPeninsula/Five_of_Spades/onTrigger BuburimuPeninsula/onEventFinish/1
+char zone=WindurstWoods pos=-10,-2.75,7.5 job=WAR lvl=10
+fame Windurst 125
+quest Windurst.TheAllNewC2000 completed
+item BoneChip
+login
+trade Spare_One BoneChip x1                   # available, the check holds: no trade handler: nothing
+trigger Kororo                                # no greeting: 296
+finish
+trigger Spare_One                             # no greeting: 295
+finish option=0                               # an escape: nothing taught
+trigger Spare_One                             # 295
+finish option=4                               # above 3: nothing taught
+trigger Kororo                                # still no greeting: 296
+finish
+trigger Spare_One                             # 295
+finish option=2                               # Greeting 2, Wait = now + 60, the mustZone
+trigger Spare_One                             # greeting 2: 495 (0, 2)
+finish
+trigger Kororo                                # the mustZone: nil; 277
+finish
+warp -50.9,-6.25,109.3 WindurstWaters
+warp -10,-2.75,7.5 WindurstWoods              # the mustZone cleared on the zone-in
+trigger Kororo                                # Wait = now + 60, not reached: nil; 277
+finish
+charvar Quest[2][43]Wait 1800000000           # GM: the wait over (now)
+trigger Kororo                                # 298
+finish option=0                               # declined: nothing
+trigger Kororo                                # 298
+finish option=1                               # begun
+trigger Kororo                                # Prog 0: 299
+finish
+trigger Spare_One                             # accepted: no handler: 278
+finish
+walk -9.6,-2.75,-24.5
+trigger Boizo-Naizo                           # 302
+finish
+warp 95.5,-4,150 PortWindurst
+trigger Five_of_Clubs                         # 448
+finish
+warp -219,1,-121 WindurstWalls
+trigger Five_of_Diamonds                      # 339
+finish
+warp 124.5,-2,44 WindurstWaters
+trigger Five_of_Hearts                        # 686
+finish
+warp -476.5,-32.12,46 BuburimuPeninsula
+trigger Five_of_Spades                        # Prog 0: 1 (118, 2)
+finish                                        # Prog 1
+trigger Five_of_Spades                        # Prog 1: messageName FIVEOFSPADES_GREETING_OFFSET + 2
+warp -10,-2.75,7.5 WindurstWoods
+trigger Kororo                                # Prog 1: 303
+fill-inventory
+finish                                        # the earring does not fit: complete fails: nothing
+free-inventory
+trigger Kororo                                # 303
+finish                                        # completed: fame 30, the Tourmaline Earring; needToZone
+trigger Kororo                                # completed: 304
+finish
+trigger Spare_One                             # completed: no section: 278
+finish
+walk -9.6,-2.75,-24.5
+trigger Boizo-Naizo                           # 307
+finish

@@ -1,0 +1,66 @@
+# A Shot in the Dark (adoulin 96): a level 99 Warrior in Eastern Adoulin with three Umbril Oozes and a Twitherym Wing,
+# ADOULIN_FAME_QUEST_TRACKER 2. A trade of an ooze while available: no handler (Pudith has no script, no default).
+# Pudith: 3011, finished on 0 and on 2: not begun; on 1: begun. Accepted: 3014; a trade of an ooze and the wing, of
+# two oozes: nil (tradeHasExactly one ooze); of an ooze: 3012, finished: completed (6 Adoulin fame, 200 bayld, 500 exp),
+# confirmed, the tracker 0. Completed: a trade of an ooze: nothing; 3010. The repeat's operands (GMs): the
+# tracker 0 and 2 with the other two available, 2 with only It Sets My Heart Aflutter completed, with only
+# A Good Pair of Crocs completed: 3010; all three completed, the tracker 1 and 3: 3010; 2: 3013, finished on 0: deleted
+# and begun again (accepted: 3014). Completed again (a GM): 3013 again, finished on 3: begun again; a trade of an ooze:
+# 3012, finished: completed again, the tracker 0. The tracker 2 and the quest accepted by a GM on the completed quest
+# (its completed bit kept): the repeat's 3013 (no status read), finished: deleted, begun; 3014.
+lists EasternAdoulin/Pudith/onTrigger EasternAdoulin/Pudith/onTrade EasternAdoulin/onEventFinish/3011
+lists EasternAdoulin/onEventFinish/3012 EasternAdoulin/onEventFinish/3013
+char zone=EasternAdoulin pos=-108.033,-0.15,56.939 job=WAR lvl=99
+charvar ADOULIN_FAME_QUEST_TRACKER 2
+item UmbrilOoze x3
+item TwitherymWing
+login
+trade Pudith UmbrilOoze x1              # available: no trade handler: nothing
+trigger Pudith                          # available: 3011
+finish option=0                         # not begun
+trigger Pudith                          # 3011
+finish option=2                         # not option 1: not begun
+trigger Pudith                          # 3011
+finish option=1                         # begun
+trigger Pudith                          # accepted: 3014
+finish
+trade Pudith UmbrilOoze x1 TwitherymWing x1 # an ooze and the wing: nil
+trade Pudith UmbrilOoze x2              # two oozes: nil
+trade Pudith UmbrilOoze x1              # an ooze: 3012
+finish                                  # completed (fame, bayld, exp); confirmed; tracker 0
+trade Pudith UmbrilOoze x1              # completed: no trade handler: nothing
+trigger Pudith                          # completed, the others available, tracker 0: 3010
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER 2    # a GM
+trigger Pudith                          # the others available, tracker 2: 3010
+finish
+quest Adoulin.ItSetsMyHeartAflutter completed # a GM
+trigger Pudith                          # A Good Pair of Crocs available, tracker 2: 3010
+finish
+quest Adoulin.ItSetsMyHeartAflutter available # a GM
+quest Adoulin.AGoodPairOfCrocs completed # a GM
+trigger Pudith                          # It Sets My Heart Aflutter available, tracker 2: 3010
+finish
+quest Adoulin.ItSetsMyHeartAflutter completed # a GM: all three completed
+charvar ADOULIN_FAME_QUEST_TRACKER 1    # a GM
+trigger Pudith                          # tracker 1: 3010
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER 3    # a GM
+trigger Pudith                          # tracker 3: 3010
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER 2    # a GM
+trigger Pudith                          # all three completed, tracker 2: 3013
+finish option=0                         # deleted, then begun again
+trigger Pudith                          # accepted, not completed: 3014
+finish
+quest Adoulin.AShotInTheDark completed  # a GM
+trigger Pudith                          # all three completed, tracker 2: 3013 again
+finish option=3                         # deleted, then begun again (any option)
+trade Pudith UmbrilOoze x1              # an ooze: 3012
+finish                                  # completed again; confirmed; tracker 0
+charvar ADOULIN_FAME_QUEST_TRACKER 2    # a GM
+quest Adoulin.AShotInTheDark accepted   # a GM, on the completed quest: its completed bit kept
+trigger Pudith                          # accepted with the completed bit: the repeat, 3013 (not 3014)
+finish                                  # deleted (both bits), begun again
+trigger Pudith                          # accepted: 3014
+finish

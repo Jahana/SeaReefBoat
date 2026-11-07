@@ -1,0 +1,38 @@
+# Trial-Size Trial by Earth (bastok 72): Ferrol in Port Bastok. The guard (main level 20, main job SMN, Bastok fame
+# level 2): fame 49 not offered; the offer 297 (0, Mini Tuning Fork of Earth, 1, 20) declined, then option 1 with a
+# full inventory (no fork: not begun), then begun; 251 while the fork is held; the trades (a bone chip: nil; the fork:
+# 298, declined, then option 1: xi.teleport.to the Cloister of Tremors, the fork kept; the tick and the login finish
+# the zone change, so the destination is in the trace). The battlefield and its 32001 are in #battlefield and
+# #battlefield_tbe; completed by GM, Ferrol's 300 (replaceDefault). Ferrol's default is 254; no other quest or
+# mission names him. The level, job and fork-lost sides are #level19, #not_smn and #fork_lost.
+lists PortBastok/Ferrol/onTrigger PortBastok/Ferrol/onTrade PortBastok/onEventFinish/297 PortBastok/onEventFinish/298 PortBastok/onEventFinish/301
+char zone=PortBastok pos=33.7,6.5,-39.4 job=SMN lvl=20
+fame Bastok 49
+item BoneChip
+login
+trade Ferrol BoneChip x1       # available: no trade handler in section 1, nothing
+trigger Ferrol                 # fame 49 (level 1): not offered, the default 254
+finish
+fame Bastok 50
+trigger Ferrol                 # SMN 20, fame level 2: 297
+finish option=0                # declined: nothing
+trigger Ferrol                 # 297 again
+fill-inventory
+finish option=1                # option 1, the fork does not fit: not begun
+free-inventory
+trigger Ferrol                 # 297 again
+finish option=1                # the Mini Tuning Fork of Earth, accepted
+trigger Ferrol                 # the fork held: 251
+finish
+trade Ferrol BoneChip x1       # SMN, not the fork: nil, nothing
+trade Ferrol MiniTuningForkOfEarth x1  # SMN and the fork: 298 (0, fork, 1, 20)
+finish option=0                # option 0: nothing, the fork kept
+trade Ferrol MiniTuningForkOfEarth x1  # 298 again
+finish option=1                # xi.teleport.to the Cloister of Tremors (the fork kept)
+tick 400                       # the zone change the teleport set: the char saved at the Cloister of Tremors (209)
+login                          # back in at the teleport's destination (-540.269, 1.396, -509.8)
+quest Bastok.TrialSizeTrialByEarth completed
+warp 33.7,6.5,-39.4 PortBastok
+trigger Ferrol                 # completed: 300 (replaceDefault)
+finish
+trade Ferrol MiniTuningForkOfEarth x1  # completed: no trade handler, nothing

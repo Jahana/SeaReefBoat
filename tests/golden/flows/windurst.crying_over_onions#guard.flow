@@ -1,0 +1,42 @@
+# Crying Over Onions (windurst 76): the offer's operands and Honoi-Gomoi's other Prog. Onion Rings accepted (Prog 0: none
+# of its sections): not available; Kohlo-Lakolo's default 361. Completed by GM, Reward 0 with the mustZone set by GM:
+# 440. Reward 1 by GM, the mustZone still set: 450; a warp out and back, fame 324 (level 4): 450; fame 325: 496, begun.
+# Prog 2 and Prog 5 by GM: Kohlo-Lakolo's else arm, 498; Gomada-Vulmada at Prog 5: nil (363). Prog 5 at Honoi-Gomoi:
+# her line has no arm: nil, her script's 650.
+# Truth, Justice, and the Onion Way!, Know One's Onions and Inspector's Gadget! completed by GM (each one's available
+# line would otherwise answer at Kohlo-Lakolo first).
+lists PortWindurst/Kohlo-Lakolo/onTrigger WindurstWaters/Honoi-Gomoi/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5
+fame Windurst 324
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.OnionRings accepted
+login
+trigger Kohlo-Lakolo                           # Onion Rings accepted at Prog 0: no section: 361
+finish
+quest Windurst.OnionRings completed            # GM
+charvar Quest[2][76]mustZone 240               # GM
+trigger Kohlo-Lakolo                           # Reward 0, the mustZone: 440
+finish
+charvar Quest[2][76]Reward 1                   # GM
+trigger Kohlo-Lakolo                           # Reward 1, the mustZone (fame level 4 too): 450
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+warp -27.5,-8.0,189.6 PortWindurst             # the mustZone cleared
+trigger Kohlo-Lakolo                           # fame 324 (fame level 4) alone: 450
+finish
+fame Windurst 325
+trigger Kohlo-Lakolo                           # 496
+finish                                         # begun
+charvar Quest[2][76]Prog 2                     # GM
+trigger Kohlo-Lakolo                           # Prog 2: 498 (not 3 or 4)
+finish
+charvar Quest[2][76]Prog 5                     # GM
+trigger Kohlo-Lakolo                           # Prog 5: 498 (not 3 or 4)
+finish
+trigger Gomada-Vulmada                         # Prog 5: nil (not 4); his default 363
+finish
+warp -192.6,-10.4,-122.9 WindurstWaters
+trigger Honoi-Gomoi                            # Prog 5: nil; her script: 650
+finish

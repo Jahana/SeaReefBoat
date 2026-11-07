@@ -1,0 +1,42 @@
+# Class Reunion (windurst 82): Gulmama's arms (Northern San d'Oria; no default: her 710 is her script's), accepted by
+# GM. Vars 6 and 3 without the Ice Pendulum: no arm, 710. ClassReunionProgress 5 without it on a full inventory:
+# 712 (0, 1171), refused (ITEM_CANNOT_BE_OBTAINED); with room: 712 again, its finish gives one (var 5). Var 5 with
+# it: no arm, 710. Var 4 with the pendulum held: 713; the pendulum is rare: addItem fails, ITEM_OBTAINED is still
+# sent and the var is still set to 5. Var 4 on a full inventory: 713, refused (the var stays 4); then 713 again.
+# Vars 3 and 6 with it: no arm, 710. San d'Oria fame 0: Trial by Ice's call plays nothing, so her 710 when no arm
+# answers.
+char zone=NorthernSanDoria pos=-185.5,0.0,110.1 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 6
+login
+trigger Gulmama                         # var 6, no pendulum: no 712 (var 5 only): 710
+finish
+charvar ClassReunionProgress 3
+trigger Gulmama                         # var 3, no pendulum: no arm: 710
+finish
+charvar ClassReunionProgress 5
+fill-inventory
+trigger Gulmama                         # accepted, var 5, no pendulum: 712 (0, 1171)
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED; nothing else
+free-inventory
+trigger Gulmama                         # 712 again
+finish                                  # the Ice Pendulum; var 5
+trigger Gulmama                         # var 5, the pendulum held: no arm; Trial by Ice nothing: 710
+finish
+charvar ClassReunionProgress 4
+trigger Gulmama                         # var 4 (the pendulum held): 713
+finish                                  # rare, held: the add fails; ITEM_OBTAINED sent anyway; var 5
+charvar ClassReunionProgress 4
+fill-inventory
+trigger Gulmama                         # var 4: 713
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED; the var stays 4
+free-inventory
+trigger Gulmama                         # var 4: 713 again
+finish                                  # the pendulum held: the add fails; ITEM_OBTAINED; var 5
+charvar ClassReunionProgress 3
+trigger Gulmama                         # var 3: no arm: 710
+finish
+charvar ClassReunionProgress 6
+trigger Gulmama                         # var 6: no arm: 710
+finish

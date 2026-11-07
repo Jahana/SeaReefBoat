@@ -1,0 +1,69 @@
+# Led Astray (ahtUrhgan 65): a level 75 Warrior in Whitegate. Mhasbaf (no script; default 542), Tohka Telposkha (663),
+# Cacaroon (248), Rubahah (script: his shop); trigger areas 7 (69 0 7 .. 73 0 11) and 8 (10 2 -96 .. 14 2 -92), walked
+# into after the zone-in lock. Available: area 7: no handler: nothing; Mhasbaf 808, finished: begun. Prog 0: Mhasbaf 834
+# (once per zone), again: Ignore until zoned: nil: 542; Tohka: nil: 663; area 7: 809, finished: Prog 1; area 7 again:
+# nothing. Prog 1: Mhasbaf: nil: 542 (the Ignore holds); Tohka 810, finished: Prog 2. Prog 2: Tohka: nil: 663; Mhasbaf:
+# nil: 542; Cacaroon 812, finished: bit 1 not set: Stage bit 2; Cacaroon: nil: 248; Rubahah 811, finished: bit 2 set:
+# Prog 3, Stage 0. Prog 3: Mhasbaf's plain 834 reads the
+# Ignore that the once-per-zone 834 left on [Action][Mhasbaf][onTrigger]834 in this zone: nil: 542; zoned (Al
+# Zahbi and back): 834, again 834 (no once per zone); area 8: 813, finished: the Letter from Bernahn, Prog 4; area 8
+# again: nothing. Prog 4: Mhasbaf 834 (once per zone). Nashmau: Tataroon 305, finished: completed (an Imperial Silver
+# Piece), the letter taken; Tataroon: no section: 270.
+lists AhtUrhganWhitegate/Mhasbaf/onTrigger AhtUrhganWhitegate/Tohka_Telposkha/onTrigger AhtUrhganWhitegate/Rubahah/onTrigger AhtUrhganWhitegate/Cacaroon/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/7 AhtUrhganWhitegate/onTriggerAreaEnter/8 AhtUrhganWhitegate/onEventFinish/811 AhtUrhganWhitegate/onEventFinish/812 Nashmau/Tataroon/onTrigger Nashmau/onEventFinish/305
+char zone=AhtUrhganWhitegate pos=56.2,-6,11.387 job=WAR lvl=75
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+walk 71,0,9                             # area 7, available: no handler: nothing
+walk 60,0,9
+trigger Mhasbaf                         # available: 808
+finish                                  # begun (Prog 0)
+trigger Mhasbaf                         # Prog 0: 834 (once per zone)
+finish
+trigger Mhasbaf                         # 834 performed: Ignore until zoned: nil: 542
+finish
+trigger Tohka_Telposkha                 # Prog 0: nil: 663
+finish
+walk 60,0,9
+walk 71,0,9                             # area 7, Prog 0: 809
+finish                                  # Prog 1
+walk 60,0,9
+walk 71,0,9                             # area 7, Prog 1: no handler: nothing
+trigger Mhasbaf                         # Prog 1: 834 (once per zone), Ignore from Prog 0's: nil: 542
+finish
+trigger Tohka_Telposkha                 # Prog 1: 810
+finish                                  # Prog 2
+trigger Tohka_Telposkha                 # Prog 2: nil: 663
+finish
+trigger Mhasbaf                         # Prog 2: 834 (once per zone), Ignore: nil: 542
+finish
+trigger Cacaroon                        # Prog 2, no bit 2: 812
+finish                                  # bit 1 not set: Stage bit 2
+trigger Cacaroon                        # bit 2 set: nil: 248
+finish
+trigger Rubahah                         # no bit 1: 811
+finish                                  # bit 2 set: Prog 3, Stage 0
+trigger Mhasbaf                         # Prog 3: plain 834, but 834's Ignore holds in this zone: nil: 542
+finish
+warp -64,-7,38 AlZahbi
+warp 56.2,-6,11.387 AhtUrhganWhitegate  # zoned: the action local vars cleared
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+trigger Mhasbaf                         # Prog 3: 834
+finish
+trigger Mhasbaf                         # Prog 3: 834 again (no once per zone)
+finish
+walk 20,2,-94
+walk 12,2,-94                           # area 8, Prog 3: 813
+finish                                  # the Letter from Bernahn, Prog 4
+walk 20,2,-94
+walk 12,2,-94                           # area 8, Prog 4: no handler: nothing
+trigger Mhasbaf                         # Prog 4: 834 (once per zone)
+finish
+warp -23.7,0,-39.022 Nashmau
+trigger Tataroon                        # Prog 4: 305
+finish                                  # completed: the silver piece; the letter taken
+trigger Tataroon                        # completed: no section: 270
+finish

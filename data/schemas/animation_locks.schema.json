@@ -1,0 +1,78 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "animation_locks.schema.json",
+   "title": "Animation Locks",
+   "description": "Caster action lock per animation id, by action category.",
+   "type": "object",
+   "properties": {
+      "animation_locks": {
+         "type": "object",
+         "properties": {
+            "ability": {
+               "$ref": "#/$defs/std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >",
+               "description": "Animation locks for ActionCategory 6/10."
+            },
+            "dancer": {
+               "$ref": "#/$defs/std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >",
+               "description": "Animation locks for ActionCategory 14."
+            },
+            "item": {
+               "$ref": "#/$defs/std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >",
+               "description": "Animation locks for ActionCategory 5/9."
+            },
+            "magic": {
+               "$ref": "#/$defs/std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >",
+               "description": "Animation locks for ActionCategory 4/8."
+            },
+            "mob_skill": {
+               "$ref": "#/$defs/std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >",
+               "description": "Animation locks for ActionCategory 7/11."
+            },
+            "pet": {
+               "$ref": "#/$defs/std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >",
+               "description": "Animation locks for ActionCategory 13."
+            },
+            "rune_fencer": {
+               "$ref": "#/$defs/std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >",
+               "description": "Animation locks for ActionCategory 15."
+            },
+            "weapon_skill": {
+               "$ref": "#/$defs/std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >",
+               "description": "Animation locks for ActionCategory 3."
+            }
+         },
+         "additionalProperties": false,
+         "required": [
+            "weapon_skill",
+            "dancer",
+            "rune_fencer",
+            "magic",
+            "ability",
+            "item",
+            "mob_skill",
+            "pet"
+         ],
+         "description": "Caster action lock in milliseconds, keyed by animation id."
+      },
+      "meta": {
+         "$ref": "_meta.schema.json"
+      }
+   },
+   "additionalProperties": false,
+   "$defs": {
+      "std::unordered_map<unsigned short,unsigned short,struct std::hash<unsigned short>,struct std::equal_to<unsigned short>,class std::allocator<struct std::pair<unsigned short const ,unsigned short> > >": {
+         "type": "object",
+         "additionalProperties": {
+            "$ref": "#/$defs/uint16_t"
+         }
+      },
+      "uint16_t": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 65535
+      }
+   },
+   "required": [
+      "animation_locks"
+   ]
+}

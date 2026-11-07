@@ -1,0 +1,54 @@
+# Crafted Dancer Artifact (hidden quest DncArtifact): a level 99 Dancer (race 1, Hume male: getGender 1, the male
+# pieces) in Upper Jeuno, The Road to Divadom completed and HQuest[DncArtifact]Prog 1 (GMs: that quest's completion
+# writes it). Olgald (default 10122): Prog 1: 10167 (Prog 2, Status 7); Prog 2: 10168 once per zone, then his default.
+# Bastok Markets, Matthias (default 499): Prog 2: 492, finished on 1: Option 1, Prog 4. Prog 4: 494 (0). A trade of the
+# tiara's three cloths plus a fourth item: nothing (tradeHasExactly); the three: 495 (0), finished: confirmed, Timer
+# tomorrow, Prog 5. 496 (not yet). Timer past (a GM): 497 (Dancer's Tiara (M), 0), finished: the tiara, Status 6, Prog
+# 3. 493 (1, 0, 0), finished on 0: nothing; on 1 (made): nothing; on 3: Option 3, Prog 4. 494 (2).
+# The Timer set to today (a GM) counts as past: the check is Timer <= today.
+lists UpperJeuno/Olgald/onTrigger UpperJeuno/onEventFinish/10167 BastokMarkets/Matthias/onTrigger BastokMarkets/Matthias/onTrade BastokMarkets/onEventFinish/492 BastokMarkets/onEventFinish/493 BastokMarkets/onEventFinish/495 BastokMarkets/onEventFinish/497
+char zone=UpperJeuno pos=-53,0,101.9 job=DNC lvl=99 race=1
+quest Jeuno.TheRoadToDivadom completed
+charvar HQuest[DncArtifact]Prog 1
+item SquareOfImperialSilkCloth
+item SquareOfWolfFelt
+item SquareOfSilverBrocade
+item FireCrystal
+item SquareOfKarakulCloth
+item SquareOfRainbowCloth
+item SquareOfRainbowVelvet
+login
+trigger Olgald                          # Prog 1: 10167
+finish                                  # Prog 2, Status 7
+trigger Olgald                          # Prog 2: 10168 (once per zone)
+finish
+trigger Olgald                          # once per zone spent: 10122
+finish
+warp -114.1,-4.3,-105.8 BastokMarkets   # beside Matthias
+trade Matthias SquareOfImperialSilkCloth x1 SquareOfWolfFelt x1 SquareOfSilverBrocade x1   # Prog 2: nothing
+trigger Matthias                        # Prog 2: 492
+finish option=1                         # Option 1, Prog 4
+trigger Matthias                        # Prog 4: 494 (0)
+finish
+trade Matthias SquareOfImperialSilkCloth x1 SquareOfWolfFelt x1 SquareOfSilverBrocade x1 FireCrystal x1   # not exactly: nothing
+trade Matthias SquareOfImperialSilkCloth x1 SquareOfWolfFelt x1 SquareOfSilverBrocade x1   # 495 (0)
+finish                                  # confirmed, Timer tomorrow, Prog 5
+trigger Matthias                        # Prog 5, not yet: 496
+finish
+charvar HQuest[DncArtifact]Timer 8000   # a GM: the Timer is today (the check is Timer <= today)
+trigger Matthias                        # 497 (the tiara (M), 0)
+finish                                  # the tiara; Status 6, Prog 3
+trigger Matthias                        # Prog 3: 493 (1, 0, 0)
+finish option=0                         # nothing
+trigger Matthias                        # 493
+finish option=1                         # the tiara made: nothing
+trigger Matthias                        # 493
+finish option=3                         # Option 3, Prog 4
+trigger Matthias                        # 494 (2)
+finish
+charvar HQuest[DncArtifact]Option 2     # a GM: the bangles
+trade Matthias SquareOfKarakulCloth x1 SquareOfRainbowCloth x1 SquareOfRainbowVelvet x1   # 495 (1)
+finish                                  # confirmed, Timer tomorrow, Prog 5
+charvar HQuest[DncArtifact]Timer 0      # a GM: the day past
+trigger Matthias                        # 497 (the bangles (M), 0)
+finish                                  # the bangles; Status 4, Prog 3

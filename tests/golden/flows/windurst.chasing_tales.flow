@@ -1,0 +1,96 @@
+# Chasing Tales (windurst 13): Tosuka-Porika and Furakku-Norakku in Windurst Waters, An Polaali, An Shanaa and Hae Jakkya
+# in Windurst Woods, Hae Jakhya in Southern San d'Oria. A Bastok char: the guard (each side: Early Bird completed, fame level 3, no
+# mustZone char var), the offer 403 (declined, then accepted), Tosuka's 406 / 412, Furakku's 404 (the overdue notice),
+# 405 and 409, Hae Jakkya's 402 (Prog 1) and 403, An Polaali's 404, An Shanaa's 405, Hae Jakhya's 611 (A Song of Love)
+# and 612, the Woods trio with the song (407, 408, 406), Furakku's 410 (completed: 2800 gil, fame +30, Savior of
+# Knowledge; both key items gone) and the completed section: Furakku's 411 (replaceDefault) until the char zones, the
+# Woods trio's importantOnce events.
+# Defaults: Tosuka's script toggles 370 / 881; Furakku's script acts only for Class Reunion (his default 371); An Polaali
+# 44, An Shanaa 45, Hae Jakkya 41 (DefaultActions; no scripts), Hae Jakhya 610. Also named: Tosuka and Furakku by Early
+# Bird (completed here) and the Windurst missions (none for a Bastok char). The Woods trio and Hae Jakhya are named by no
+# other quest or mission.
+lists WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/Tosuka-Porika/onTrade WindurstWaters/Furakku-Norakku/onTrigger WindurstWoods/An_Polaali/onTrigger WindurstWoods/An_Shanaa/onTrigger WindurstWoods/Hae_Jakkya/onTrigger SouthernSanDoria/Hae_Jakhya/onTrigger WindurstWaters/onEventFinish/403 WindurstWaters/onEventFinish/404 WindurstWaters/onEventFinish/410 WindurstWoods/onEventFinish/402 SouthernSanDoria/onEventFinish/611
+char zone=WindurstWaters pos=-27.2,-5.25,104.4
+fame Windurst 125
+item BoneChip
+login
+trade Tosuka-Porika BoneChip x1     # available: no trade handler, nothing
+trigger Tosuka-Porika               # Early Bird not completed: not met (Early Bird's own offer needs Glyph Hanger, not completed): his script 370
+finish
+quest Windurst.EarlyBirdCatchesTheBookworm completed
+fame Windurst 124
+trigger Tosuka-Porika               # fame 124 (level 2): section 1 not met; his script 881
+finish
+fame Windurst 125
+charvar Quest[2][13]mustZone 238    # a GM sets the quest's own mustZone char var
+trigger Tosuka-Porika               # mustZone set: not met; his script 370
+finish
+charvar Quest[2][13]mustZone 0
+trigger Tosuka-Porika               # guard met, a Bastok char: 403
+finish option=1                     # declined: nothing
+trigger Tosuka-Porika               # 403 again
+finish option=0                     # begun
+trigger Tosuka-Porika               # accepted, Prog 0: 406
+finish
+warp 52.9,-2.2,-128.8 WindurstWoods
+trigger An_Polaali                  # no song, Prog 0: nil, her default 44
+finish
+trigger An_Shanaa                   # no song, Prog 0: nil, 45
+finish
+trigger Hae_Jakkya                  # no song, Prog 0, no notice: nil, 41
+finish
+warp -16.5,-5.25,102.0 WindurstWaters
+trigger Furakku-Norakku             # no notice: 404 (0, A Song of Love)
+finish                              # Overdue Book Notification given
+trigger Furakku-Norakku             # notice, no song, Prog 0: 405 (0, 126)
+finish
+trade Furakku-Norakku BoneChip x1   # accepted: no trade handler, nothing
+warp -71.7,-7.4,-24.2 SouthernSanDoria
+trigger Hae_Jakhya                  # no song, Prog 0: nil, her default 610
+finish
+warp 58.9,-2.5,-140.8 WindurstWoods
+trigger Hae_Jakkya                  # no song, Prog 0, the notice held: 402 (0, A Song of Love)
+finish                              # Prog 1
+trigger Hae_Jakkya                  # Prog 1: 403 (0, A Song of Love); no finish handler in the Woods
+finish
+trigger An_Polaali                  # Prog 1: 404 (the Woods 404 has no finish handler)
+finish
+trigger An_Shanaa                   # Prog 1: 405
+finish
+warp -27.2,-5.25,104.4 WindurstWaters
+trigger Tosuka-Porika               # Prog 1: 412
+finish
+trigger Furakku-Norakku             # no song, Prog 1: 409
+finish
+warp -71.7,-7.4,-24.2 SouthernSanDoria
+trigger Hae_Jakhya                  # no song, Prog 1: 611
+finish                              # A Song of Love given
+trigger Hae_Jakhya                  # the song held: 612 (0, A Song of Love)
+finish
+warp 52.9,-2.2,-128.8 WindurstWoods
+trigger An_Polaali                  # the song: 407
+finish
+trigger An_Shanaa                   # the song: 408 (0, A Song of Love)
+finish
+trigger Hae_Jakkya                  # the song: 406
+finish
+warp -16.5,-5.25,102.0 WindurstWaters
+trigger Furakku-Norakku             # the song: 410
+finish                              # completed: 2800 gil, fame +30, Savior of Knowledge; both key items gone; local var Quest[2][12]mustZone 1
+trigger Furakku-Norakku             # completed, the local var set: 411 (replaceDefault)
+finish
+trade Furakku-Norakku BoneChip x1   # completed: nothing
+warp 52.9,-2.2,-128.8 WindurstWoods
+trigger An_Polaali                  # completed: 407 (importantOnce: Event priority, then Default)
+finish
+trigger An_Polaali                  # Default priority now, a tie with her default 44: the lookup's cycle plays 44
+finish
+trigger An_Polaali                  # the cycle: 407 again
+finish
+trigger An_Shanaa                   # completed: 408 (0, 126)
+finish
+trigger Hae_Jakkya                  # completed: 406
+finish
+warp -16.5,-5.25,102.0 WindurstWaters
+trigger Furakku-Norakku             # the zone change cleared the local var: no section, 371
+finish

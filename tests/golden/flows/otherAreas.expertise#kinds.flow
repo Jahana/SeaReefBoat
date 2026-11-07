@@ -1,0 +1,68 @@
+# Expertise (otherAreas 4): its reply kinds against two Event-priority competitors set by a GM: Rycharde the Chef
+# accepted (Rycharde 72, Take 68; RQ1 sorts before RQ5) and The Clue accepted (Rycharde 85, Take 65, Valgeir 143; RQ6
+# sorts after). On a tie the lookup's action cycle plays the actions in container order, one per talk, from where it last
+# stopped (a zone change clears it). Available: Rycharde's fixed 89: 72, 89, 85 in turn (Event); Take's 61 (Progress: an
+# Event 61 would tie and the cycle would play 68 first); not due: 68, then 65 (RQ5's 65 and The Clue's share the id).
+# Accepted: Take's 63 (Event): 68, 63, 65 in turn; Prog 3: 62 (Progress; dropped by a rezone, no finish). Selbina:
+# Valgeir's 102 (Progress) twice (Prog put back by a GM); Prog 1: 104 (Event), then 143; Prog 2, ready: 105 (Progress)
+# twice; not ready: 141 (Event), then 143; Prog 3: 142 (Event), then 143. The trade reply (103 Progress) has no
+# competitor.
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Selbina/Valgeir/onTrigger Mhaura/onEventFinish/61 Selbina/onEventFinish/102 Selbina/onEventFinish/105
+char zone=Mhaura pos=22.1,-8,69.8 job=WAR lvl=30
+quest OtherAreas.HisNameIsValgeir completed
+quest OtherAreas.RychardeTheChef accepted
+quest OtherAreas.TheClue accepted
+charvar Quest[4][3]DayCompleted 7991
+fame Windurst 125
+login
+trigger Rycharde                        # 72 (a three-way tie with 89 and 85: the first container's)
+finish
+trigger Rycharde                        # 89
+finish
+trigger Rycharde                        # 85
+finish
+charvar Quest[4][3]DayCompleted 7992    # a GM: not due
+trigger Take                            # 68 (a tie with RQ5's 65 and The Clue's 65)
+finish
+trigger Take                            # 65
+finish
+charvar Quest[4][3]DayCompleted 7991
+trigger Take                            # 61 (Progress beats 68 and 65)
+finish                                  # begun
+trigger Take                            # accepted, Prog 0: 68 (a tie with 63 and 65; the cycle's last 65 is the last entry: it starts over)
+finish
+trigger Take                            # 63
+finish
+trigger Take                            # 65
+finish
+charvar Quest[4][4]Prog 3               # a GM
+trigger Take                            # 62 (Progress)
+rezone                                  # 62 dropped unfinished (the quest stays accepted)
+warp 59,-15.27,20.2 Selbina
+charvar Quest[4][4]Prog 0               # a GM
+trigger Valgeir                         # 102 (Progress beats 143)
+finish                                  # Prog 1
+charvar Quest[4][4]Prog 0               # a GM
+trigger Valgeir                         # 102 again
+finish                                  # Prog 1
+trigger Valgeir                         # Prog 1: 104 (a tie with 143)
+finish
+trigger Valgeir                         # 143
+finish
+charvar Quest[4][4]Prog 2               # a GM; readyTime 0: ready
+trigger Valgeir                         # 105 (Progress beats 143)
+finish                                  # Prog 3, the bisque
+charvar Quest[4][4]Prog 2               # a GM
+trigger Valgeir                         # 105 again
+finish                                  # Prog 3
+charvar Quest[4][4]Prog 2               # a GM
+charvar Quest[4][4]readyTime 1800000001 # a GM: not ready
+trigger Valgeir                         # 141 (a tie with 143; the cycle's last 143 is the last entry: it starts over)
+finish
+trigger Valgeir                         # 143
+finish
+charvar Quest[4][4]Prog 3               # a GM
+trigger Valgeir                         # 142 (a tie with 143; starts over)
+finish
+trigger Valgeir                         # 143
+finish

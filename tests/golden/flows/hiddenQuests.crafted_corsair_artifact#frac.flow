@@ -1,0 +1,79 @@
+# Crafted Corsair Artifact (hidden quest CorArtifact), the Frac (Option 3, Raqtibahl): a level 99 Warrior in Port San
+# d'Oria, Against All Odds completed (a GM), Option 3, Prog 1 and the red letter (GMs: Leleroon's 282 on 3 gives them,
+# as the main flow shows on 2). Raqtibahl (default 759): the letter: 753 (Prog 2, the letter taken); 754; the gold
+# chain, velvet, red grass cloth and sailcloth: 755 (Prog 3); 761; an Imperial Gold Piece: 760 (Prog 4, Timer,
+# mustZone); 757; the Timer past and zoned: 756 (the Frac, Completed bit 2). Option 0 with the Frac made: 758. Option
+# 1 (another commission, a GM): 758 too. Completed 7 (a GM) at Leleroon: nothing (264). With no room the piece's
+# giveItem fails and nothing changes (the #gants flow). At Prog 2 the Bottes' and Gants' doors (Bastok Mines, Windurst
+# Waters) ignore Option 3: their talk and their materials do nothing. Leleroon at Prog 4: 287; at Prog 5 (a GM):
+# nothing.
+lists Nashmau/onEventFinish/282 PortSanDoria/Raqtibahl/onTrigger PortSanDoria/Raqtibahl/onTrade PortSanDoria/onEventFinish/753 PortSanDoria/onEventFinish/755 PortSanDoria/onEventFinish/756 PortSanDoria/onEventFinish/760 Nashmau/Leleroon/onTrigger
+char zone=Nashmau pos=-14.7,0,26.6 job=WAR lvl=99
+quest AhtUrhgan.AgainstAllOdds completed
+item Ruby
+item GoldChain
+item SquareOfVelvetCloth
+item SquareOfRedGrassCloth
+item SquareOfSailcloth
+item ImperialGoldPiece
+item MythrilSheet
+item SquareOfKarakulLeather x2
+item SquareOfLmBuffaloLeather
+item SquareOfWolfFelt
+item SpoolOfGoldThread
+item SpoolOfWamouraSilk
+login
+trigger Leleroon                        # Prog 0: 282
+finish option=3                         # the red letter; Option 3, Prog 1, Timer 0
+trigger Leleroon                        # Prog 1, Option 3: 287
+finish
+warp -58.7,-4.5,-39.6 PortSanDoria
+trade Raqtibahl GoldChain x1 SquareOfVelvetCloth x1 SquareOfRedGrassCloth x1 SquareOfSailcloth x1   # Prog 1: nothing
+trigger Raqtibahl                       # the letter: 753
+finish                                  # Prog 2, the letter taken
+trigger Raqtibahl                       # Prog 2: 754
+finish
+warp 10.4,-1,-16 BastokMines            # beside the blue door: Option 3 is not its commission
+trigger Door_House                      # nothing: this Door_House has no default, nothing plays
+finish
+trade Door_House MythrilSheet x1 SquareOfKarakulLeather x1 SquareOfLmBuffaloLeather x1 SquareOfWolfFelt x1   # nothing
+warp -197.6,-5.4,-112 WindurstWaters    # beside the green door: not its commission either
+trigger Door_House                      # nothing: the door's default
+finish
+trade Door_House SpoolOfGoldThread x1 SquareOfKarakulLeather x1 SquareOfRedGrassCloth x1 SpoolOfWamouraSilk x1   # nothing
+warp -58.7,-4.5,-39.6 PortSanDoria
+trade Raqtibahl Ruby x1                 # Prog 2, not the materials: nothing
+trade Raqtibahl GoldChain x1 SquareOfVelvetCloth x1 SquareOfRedGrassCloth x1 SquareOfSailcloth x1   # 755
+finish                                  # taken, Prog 3
+trigger Raqtibahl                       # Prog 3: 761
+finish
+trade Raqtibahl Ruby x1                 # Prog 3, not the gold piece: nothing
+trade Raqtibahl ImperialGoldPiece x1    # 760
+finish                                  # taken, Prog 4, Timer tomorrow, mustZone
+trigger Raqtibahl                       # Prog 4, not yet: 757
+finish
+charvar HQuest[CorArtifact]Timer 0      # a GM: the day past
+warp -14.7,0,26.6 Nashmau
+trigger Leleroon                        # Prog 4, Option 3: 287
+finish
+charvar HQuest[CorArtifact]Prog 5       # a GM: past the commission's Progs
+trigger Leleroon                        # nothing: 264
+finish
+charvar HQuest[CorArtifact]Prog 4       # a GM
+warp -58.7,-4.5,-39.6 PortSanDoria
+trigger Raqtibahl                       # 756
+finish                                  # the Frac; Completed 4; Prog, Option, Timer 0
+trigger Raqtibahl                       # Option 0, the Frac made: 758
+finish
+charvar HQuest[CorArtifact]Option 1     # a GM: another commission
+trigger Raqtibahl                       # Option 1, the Frac made: 758
+finish
+charvar HQuest[CorArtifact]Option 0     # a GM
+charvar HQuest[CorArtifact]Completed 7  # a GM: all three made
+warp -14.7,0,26.6 Nashmau
+trigger Leleroon                        # Prog 0, Completed 7: nothing: 264
+finish
+charvar HQuest[CorArtifact]Completed 0  # a GM
+charvar HQuest[CorArtifact]Prog 1       # a GM: Prog 1, Option 0
+trigger Leleroon                        # Option 0: nothing: 264
+finish

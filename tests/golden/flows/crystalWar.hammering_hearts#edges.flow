@@ -1,0 +1,25 @@
+# Hammering Hearts (crystalWar 14), the edges: a level 99 Warrior in Bastok Markets [S] (missions as the main flow), a
+# Heavy Quadav Chestplate, a Heavy Quadav Backplate and a Lilac. Available: the two: nil (no available trade). 40,
+# option 0: begun. The chestplate alone: nil; the two and the Lilac: nil (not exactly). Prog 1 by a GM (no local var):
+# 42 at once; the bag full (a GM): 42, finished: the hammer does not fit: not completed (Prog 1 stays); 42 again.
+lists BastokMarketsS/Scarred_Shark/onTrigger BastokMarketsS/Scarred_Shark/onTrade BastokMarketsS/onEventFinish/40 BastokMarketsS/onEventFinish/42
+char zone=BastokMarketsS pos=-232.489,-2,67.638 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item HeavyQuadavChestplate
+item HeavyQuadavBackplate
+item Lilac
+login
+trade Scarred_Shark HeavyQuadavChestplate x1 HeavyQuadavBackplate x1 # available: nil
+trigger Scarred_Shark                   # 40
+finish option=0                         # begun
+trade Scarred_Shark HeavyQuadavChestplate x1 # the chestplate alone: nil
+trade Scarred_Shark HeavyQuadavChestplate x1 HeavyQuadavBackplate x1 Lilac x1 # not exactly: nil
+charvar Quest[7][14]Prog 1              # a GM (no NeedToZone local var)
+fill-inventory                          # a GM: no slot free
+trigger Scarred_Shark                   # Prog 1, no local var: 42
+finish                                  # the hammer does not fit: not completed
+trigger Scarred_Shark                   # still Prog 1: 42
+finish

@@ -1,0 +1,34 @@
+# Donate to Recycling (otherAreas 16): Romeo (Selbina; no DefaultActions entry, no other quest: his script calls the
+# quest whole). A WAR 20. The Onion weapons do not stack: one `item` line each. Available: 5 Onion Swords: nothing; 20:
+# begun (no option read). Accepted: 22; 4 Onion Swords: nothing; 5: 21; a full inventory: npcUtil.completeQuest false
+# (ITEM_CANNOT_BE_OBTAINED): nothing (the swords kept); then 21: the Wastebasket, Ecologist, completed, San d'Oria and
+# Bastok fame +10, the swords taken (Quest[4][16]Prog 1 (GM) kept: the Lua's npcUtil.completeQuest has no cleanup).
+# Completed: 23; 5 Onion Rods: nothing.
+char zone=Selbina pos=-9.0,-11.76,-5.0 job=WAR lvl=20
+item OnionSword
+item OnionSword
+item OnionSword
+item OnionSword
+item OnionSword
+item OnionRod
+item OnionRod
+item OnionRod
+item OnionRod
+item OnionRod
+login
+trade Romeo OnionSword x5               # available: nothing
+trigger Romeo                           # available: 20
+finish                                  # begun
+trigger Romeo                           # accepted: 22
+finish
+trade Romeo OnionSword x4               # 4: nothing
+trade Romeo OnionSword x5               # 21
+fill-inventory
+finish                                  # no free slot: completeQuest false: nothing (the swords kept)
+free-inventory
+charvar Quest[4][16]Prog 1              # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+trade Romeo OnionSword x5               # 21
+finish                                  # Wastebasket; Ecologist; completed; fame +10 x2; the swords taken
+trigger Romeo                           # completed: 23
+finish
+trade Romeo OnionRod x5                 # completed: nothing

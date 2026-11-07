@@ -1,0 +1,20 @@
+# Downward Helix (crystalWar 33), the tie at Erlene: a level 99 Scholar in The Eldieme Necropolis [S] with A Little
+# Knowledge and On Sabbatical completed (GMs; On Sabbatical's Timer 0; missions as A Little Knowledge's flows) and
+# neither spell (so A Little Knowledge's 47 is a Progress reply too). Downward Helix available: 23 and 47 tie; Erlene's
+# first reply is 47 (finished: the spells, so no tie remains), then 23 (finished: begun), then 24.
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/23 TheEldiemeNecropolisS/onEventFinish/47
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=SCH lvl=99
+quest CrystalWar.ALittleKnowledge completed
+quest CrystalWar.OnSabbatical completed
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erlene                          # the tie, 23 and 47: 47
+finish                                  # the spells
+trigger Erlene                          # 23 alone
+finish-if-event                         # begun
+trigger Erlene                          # accepted, Prog 0: 24
+finish-if-event

@@ -1,0 +1,25 @@
+# Pretty Little Things (jeuno 43): the finish's options from available (the client's option decides). Four level 75
+# Warriors, the quest available for each. Main, a Red Rock, option 2: the rock taken (option > 0), begun. Other, a
+# Chocobo Feather (the else arm), option 4002: the feather taken (option > 0), completed straight from available, the
+# Mog House flag, MOGHOUSE_EXIT. Talk, her script's 10023 (no trade), option 4002: the quest's finish runs on it:
+# completed with nothing traded. Zero, the feather, option 0: nothing taken, begun.
+lists PortJeuno/Zona_Shodhun/onTrade PortJeuno/Zona_Shodhun/onTrigger PortJeuno/onEventFinish/10023
+char zone=PortJeuno pos=-173.6,-5,-4.2 job=WAR lvl=75
+char other zone=PortJeuno pos=-173.6,-5,-4.2 job=WAR lvl=75
+char talk zone=PortJeuno pos=-173.6,-5,-4.2 job=WAR lvl=75
+char zero zone=PortJeuno pos=-173.6,-5,-4.2 job=WAR lvl=75
+item RedRock
+other: item ChocoboFeather
+zero: item ChocoboFeather
+login
+trade Zona_Shodhun RedRock x1           # available, a rock: (0, 246, 1, 1, 0, 1, 7, 1)
+finish option=2                         # option 2: the rock taken; begun
+other: login
+other: trade Zona_Shodhun ChocoboFeather x1 # the else arm
+other: finish option=4002               # the feather taken; completed from available; the Mog House flag; MOGHOUSE_EXIT
+talk: login
+talk: trigger Zona_Shodhun              # no quest handler: her script's 10023 (0, 246, 10)
+talk: finish option=4002                # the quest's finish on it: nothing to take; completed; the flag; MOGHOUSE_EXIT
+zero: login
+zero: trade Zona_Shodhun ChocoboFeather x1 # the else arm
+zero: finish option=0                   # nothing taken; begun

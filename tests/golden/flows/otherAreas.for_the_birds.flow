@@ -1,0 +1,56 @@
+# For the Birds (otherAreas 104): Oldton Movalpolos' Koblakiq (default 13), Castle Oztroja's Daa Bola the Seer (default
+# HERETICS), Beadeaux's GeFhu Yagudoeye (default HUURR) and the NMs Magnes Quadav (MAGNES_QUADAV_NM 17379784, +2
+# 17379786) and Nickel Quadav (NICKEL_QUADAV_NM = MAGNES + 1, 17379785; MAGNES + 3, 17379787). Missionary Moblin
+# completed (a GM), its mustZone clear. Two Arnica Roots. A trade of a root to Daa Bola while For is available: no
+# section; nothing. Koblakiq 14 (0, 1663), option 1: begun. Prog 0: 15 (event). Daa Bola Prog 0: 86 (event). The root
+# traded: 87, finished: the root taken, Prog 1, mustZone 151. Daa Bola, mustZone: LETTING_YOU_GO; a rezone (the same
+# zone): kept: LETTING_YOU_GO; a warp out: cleared. Koblakiq Prog 1: 16 (0, Glittering Fragment), finished: Prog 2, the
+# fragment. Prog 2: 17 (event). Daa Bola Prog 2, no mustZone: nil (HERETICS). GeFhu Prog 2, none up: Prog 3, the four
+# NMs spawned and claimed, the fragment taken (TAKEN_FROM_YOU), QUADAV_ARE_ATTACKING. Again (up, Option 0): nil (HUURR).
+# The four killed: Option 4. GeFhu: 124, finished: Prog 4. Leaving Beadeaux at Prog 4 (onZoneOut, Prog >= 2): Option 0.
+# Koblakiq Prog 4: 18, finished: completed (Jaguar Mantle), mustZone 11: 19. A warp out and back: Better the Demon's
+# offer 20 (0, Demon Pen).
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/onEventFinish/14 OldtonMovalpolos/onEventFinish/16 OldtonMovalpolos/onEventFinish/18 CastleOztroja/Daa_Bola_the_Seer/onTrigger CastleOztroja/Daa_Bola_the_Seer/onTrade CastleOztroja/onEventFinish/87 Beadeaux/GeFhu_Yagudoeye/onTrigger Beadeaux/Magnes_Quadav_NM/onMobDeath Beadeaux/Nickel_Quadav_NM/onMobDeath Beadeaux/onZoneOut/1 Beadeaux/onEventFinish/124
+char zone=CastleOztroja pos=-156.5,-17.2,193.5 job=WAR lvl=75
+quest OtherAreas.MissionaryMoblin completed
+item ArnicaRoot x2
+login
+trade Daa_Bola_the_Seer ArnicaRoot x1   # For available: no section; nothing
+warp -63.4,22.8,-117.5 OldtonMovalpolos
+trigger Koblakiq                        # available: 14 (0, 1663)
+finish option=1                         # begun
+trigger Koblakiq                        # Prog 0: 15
+finish
+warp -156.5,-17.2,193.5 CastleOztroja
+trigger Daa_Bola_the_Seer               # Prog 0: 86
+finish
+trade Daa_Bola_the_Seer ArnicaRoot x1   # 87
+finish                                  # the root taken; Prog 1; mustZone 151
+trigger Daa_Bola_the_Seer               # Prog 1, mustZone: LETTING_YOU_GO
+rezone                                  # the same zone: the mustZone kept
+trigger Daa_Bola_the_Seer               # LETTING_YOU_GO again
+warp -63.4,22.8,-117.5 OldtonMovalpolos # another zone: the mustZone cleared
+trigger Koblakiq                        # Prog 1: 16 (0, Glittering Fragment)
+finish                                  # Prog 2; the fragment
+trigger Koblakiq                        # Prog 2: 17
+finish
+warp -156.5,-17.2,193.5 CastleOztroja
+trigger Daa_Bola_the_Seer               # Prog 2, no mustZone: nil; HERETICS
+warp -89.9,-3.25,-127.8 Beadeaux
+trigger GeFhu_Yagudoeye                 # Prog 2, none up: Prog 3; four spawned; TAKEN_FROM_YOU; QUADAV_ARE_ATTACKING
+trigger GeFhu_Yagudoeye                 # Prog 3, Option 0, up: nil; HUURR
+kill MAGNES_QUADAV_NM                   # Magnes' death at Prog 3: Option 1
+kill NICKEL_QUADAV_NM                   # Nickel's: Option 2
+kill MAGNES_QUADAV_NM+2                 # Option 3
+kill MAGNES_QUADAV_NM+3                 # Option 4
+trigger GeFhu_Yagudoeye                 # Prog 3, Option 4: 124
+finish                                  # Prog 4
+warp -63.4,22.8,-117.5 OldtonMovalpolos # onZoneOut, Prog 4: Option 0
+trigger Koblakiq                        # Prog 4: 18
+finish                                  # completed; Jaguar Mantle; mustZone 11
+trigger Koblakiq                        # completed, mustZone: 19
+finish
+warp -156.5,-17.2,193.5 CastleOztroja   # the mustZone cleared
+warp -63.4,22.8,-117.5 OldtonMovalpolos
+trigger Koblakiq                        # For off; Better the Demon: 20 (0, 1653)
+finish                                  # Better begun

@@ -1,0 +1,38 @@
+# The Tigress Stirs (crystalWar 17): a level 99 Warrior in Windurst Waters [S] with Snake on the Plains completed (a
+# GM: xi.wotg.helpers.hasCompletedFirstQuest), the WotG mission Back to the Beginning current and the four
+# later-expansion missions set (as group 1's flows). Dhea Prandoleh (no script; default 136): 128, finished: begun;
+# 131 (an Event over the default), twice. The Acolyte Hostel door without the Small Starfruit: nil: its script
+# (DOOR_ACOLYTE_HOSTEL_LOCKED). West Sarutabaruta [S]: qm4 (no script, no default): the starfruit (a KeyItem reply);
+# again: held: nil. Windurst Waters [S]: the door with it: 129, finished: completed (a Hi-Elixir), the starfruit taken.
+# Completed (no section): the door: its script; Dhea Prandoleh: The Tigress Strikes' 133 (available now).
+lists WindurstWatersS/Dhea_Prandoleh/onTrigger WindurstWatersS/Door_Acolyte_Hostel_down/onTrigger WindurstWatersS/onEventFinish/128 WindurstWatersS/onEventFinish/129 WestSarutabarutaS/qm4/onTrigger
+char zone=WindurstWatersS pos=4.667,-1,15.545 job=WAR lvl=99
+quest CrystalWar.SnakeOnThePlains completed
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Dhea_Prandoleh                  # 128; the mission takes no talk
+finish                                  # begun
+trigger Dhea_Prandoleh                  # 131
+finish
+trigger Dhea_Prandoleh                  # 131 again (no script to alternate with)
+finish
+warp 125.5,-3,222.215 WindurstWatersS
+trigger Door_Acolyte_Hostel_down        # no starfruit: nil: DOOR_ACOLYTE_HOSTEL_LOCKED (its script)
+finish-if-event
+warp 155.97,-40.157,332.064 WestSarutabarutaS
+trigger qm4                             # the Small Starfruit
+finish-if-event
+trigger qm4                             # held: nil
+finish-if-event
+warp 125.5,-3,222.215 WindurstWatersS
+trigger Door_Acolyte_Hostel_down        # the starfruit: 129
+finish                                  # completed (Hi-Elixir); the starfruit taken
+trigger Door_Acolyte_Hostel_down        # completed: no section: its script
+finish-if-event
+warp 4.667,-1,15.545 WindurstWatersS
+trigger Dhea_Prandoleh                  # completed: The Tigress Strikes' 133
+finish-if-event option=1                # (133 begins The Tigress Strikes on any option)

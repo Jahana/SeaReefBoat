@@ -1,0 +1,101 @@
+# Eco-Warrior (Windurst) (windurst 84): Lumomo in Windurst Waters, Ahko Mhalijikhari, the qm2 and the three Wyrmflies
+# in the Maze of Shakhrami (the shape of Bastok's flow). Lumomo's offer 818 (Windurst fame level 1, EcoReset 0; 823
+# while the San d'Oria or the Bastok Eco-Warrior is accepted, each on its own; option 1 begins it; a trade while
+# available: no handler), Ahko Mhalijikhari's 62 (option 1: Level Restriction 25, ON_ZONE), the qm2 under the
+# restriction at Prog 0 (the three Wyrmflies popped, claimed, OINTMENT_DRAWS_MONSTERS; while they are up popFromQM
+# refuses), the Wyrmflies killed without the restriction (nothing), the deaths of the first two under it (another
+# alive: nothing) and of the last (Prog 1), the qm2's KI Indigested Meat, Ahko Mhalijikhari's 65 (option 0: Informed 1)
+# and 64 (option 0: the restriction off), Lumomo's 820 without the meat and 822 with it (completed: Dragon Chronicles,
+# 5000 gil, Emerald Exterminator, fame +20, the meat deleted, EcoReset 1 until the next conquest tally); once
+# completed: 823 for either other nation's, nil while EcoReset is 1, and 818 (option 1 deletes the quest and begins it
+# again).
+# The restriction is ON_ZONE: a warp, even inside the Maze, zones the char and drops it, so the flow moves between Ahko
+# Mhalijikhari and the qm2 by `trigger` (which walks) and uses `rezone` only to drop it on purpose. AfterZoneIn also
+# lifts it 4 s after a zone-in: the first window (from the warp to the qm2's pops) holds only because no step in it
+# moves the clock 4 s; a `tick` or `kill` there would lift the restriction (64 would turn to 62, the pop to nil). Dead
+# Wyrmflies despawn 15-45 s after the kill (two ticks). Perfect Dodge (a GM effect) keeps the char alive while the
+# Wyrmflies and the zone's mobs swing at it; a zone change drops it, so it is given again after the rezone. The kills
+# come one after another with no rezone between them (it would drop the restriction; check each onMobDeath with show).
+# Defaults: Lumomo 819, Ahko Mhalijikhari 61, the qm2 NOTHING_OUT_OF_ORDINARY (DefaultActions; no scripts; no other
+# quest or mission names them in this zone). San d'Oria's and Bastok's read this quest's status. The era module is #era.
+lists WindurstWaters/Lumomo/onTrigger WindurstWaters/onEventFinish/818 WindurstWaters/onEventFinish/822 MazeOfShakhrami/Ahko_Mhalijikhari/onTrigger MazeOfShakhrami/qm2/onTrigger MazeOfShakhrami/Wyrmfly/onMobDeath MazeOfShakhrami/onEventFinish/62 MazeOfShakhrami/onEventFinish/64 MazeOfShakhrami/onEventFinish/65
+char zone=WindurstWaters pos=-55.8,-4.5,20.9 lvl=30
+charvar EcoReset 1
+item BoneChip
+login
+trigger Lumomo                       # available, EcoReset 1: nil, 819
+finish-if-event
+trade Lumomo BoneChip x1              # available: no trade handler either way, nothing
+charvar EcoReset 0
+quest Sandoria.EcoWarrior accepted
+trigger Lumomo                       # the San d'Oria Eco-Warrior accepted: 823
+finish
+quest Sandoria.EcoWarrior available
+quest Bastok.EcoWarrior accepted
+trigger Lumomo                       # the Bastok Eco-Warrior accepted: 823
+finish
+quest Bastok.EcoWarrior available
+trigger Lumomo                       # the offer, 818
+finish option=0                      # declined: still available
+trigger Lumomo                       # 818 again
+finish option=1                      # accepted
+trigger Lumomo                       # accepted, no meat: 820
+finish
+warp -342.6,-11.2,-166.2 MazeOfShakhrami
+effect 49                            # a GM: Perfect Dodge (every melee hit evaded: the Wyrmflies and the zone's mobs cannot kill the char)
+trigger Ahko_Mhalijikhari            # no meat, no restriction: 62
+finish option=0                      # no ointment
+trigger Ahko_Mhalijikhari            # 62 again
+finish option=1                      # Level Restriction 25 (ON_ZONE)
+trigger Ahko_Mhalijikhari            # no meat, the restriction: 64
+finish option=1                      # kept
+trigger qm2                          # walks; Prog 0, the restriction: the Wyrmflies popped, OINTMENT_DRAWS_MONSTERS
+finish-if-event
+trigger qm2                          # the Wyrmflies up: popFromQM false, Prog 0: nil, NOTHING_OUT_OF_ORDINARY
+finish-if-event
+rezone                               # ON_ZONE: the restriction gone (the Wyrmflies stay up)
+effect 49                            # Perfect Dodge again (the zone change dropped it)
+kill WYRMFLY_OFFSET                  # no restriction: the death handler returns at once
+kill WYRMFLY_OFFSET+1                # no restriction: nothing
+kill WYRMFLY_OFFSET+2                # no restriction: nothing, Prog 0
+tick 15000                           # the dead Wyrmflies despawning (the death and the despawn each take a zone tick)
+tick 30000                           # despawned: popFromQM refuses a spawned mob
+trigger qm2                          # Prog 0, no restriction: nil, NOTHING_OUT_OF_ORDINARY
+finish-if-event
+trigger Ahko_Mhalijikhari            # no meat, no restriction: 62
+finish option=1                      # the restriction again
+trigger qm2                          # the Wyrmflies popped again
+finish-if-event
+kill WYRMFLY_OFFSET                  # the restriction, the others alive: returns, Prog 0
+kill WYRMFLY_OFFSET+1                # the restriction, the third alive: returns, Prog 0
+kill WYRMFLY_OFFSET+2                # the last Wyrmfly: Prog 1
+trigger qm2                          # Prog 1, no meat: KI Indigested Meat
+finish-if-event
+trigger qm2                          # the meat held: nil, NOTHING_OUT_OF_ORDINARY
+finish-if-event
+trigger Ahko_Mhalijikhari            # the meat, Informed 0: 65
+finish option=1                      # Informed stays 0
+trigger Ahko_Mhalijikhari            # 65 again
+finish                               # option 0: Informed 1
+trigger Ahko_Mhalijikhari            # the meat, Informed 1, the restriction: 64
+finish                               # option 0: the restriction off
+trigger Ahko_Mhalijikhari            # the meat, Informed 1, no restriction: nil, 61
+finish-if-event
+warp -55.8,-4.5,20.9 WindurstWaters
+trigger Lumomo                       # the meat: 822
+finish                               # completed: Dragon Chronicles, 5000 gil, Emerald Exterminator, fame +20, EcoReset 1
+trigger Lumomo                       # completed, EcoReset 1: nil, 819
+finish-if-event
+charvar EcoReset 0
+quest Sandoria.EcoWarrior accepted
+trigger Lumomo                       # completed, the San d'Oria one accepted: 823
+finish
+quest Sandoria.EcoWarrior available
+quest Bastok.EcoWarrior accepted
+trigger Lumomo                       # completed, the Bastok one accepted: 823
+finish
+quest Bastok.EcoWarrior available
+trigger Lumomo                       # completed, EcoReset 0: 818
+finish option=0                      # nothing
+trigger Lumomo                       # 818 again
+finish option=1                      # the quest deleted and begun again: accepted, Prog 0

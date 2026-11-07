@@ -1,0 +1,57 @@
+# Shattering Stars (jeuno 132) accepted (a GM) by level 66 chars of the jobs Chamber of Oracles serves: SAM (12), NIN (13), DRG (14),
+# one char each (main the first). Each trades its job's testimony (64 with its job id) and answers 1: tradedTestimony
+# 1, set down at Chamber of Oracles (-220.084 -0.645 4.442, zone 168); the char zones at the next tick.
+# Then each char, in the flow's order, enters its own Maat fight in its own area (1, 2, 3: the fights of one zone
+# run side by side): a GM warp by SC_Entrance (the flow parser follows zones by warp), the testimony traded (the 32000
+# menu), 32000 updated with option index * 16 + area (registered, entered; the testimony wears), finished; that
+# area's Maat "killed" (unkillable: 1 HP; he yields, battlefield:win, at a later onMobFight, so some kills take ticks
+# before the 32001 opens; battlefieldWin the fight's id), and the win's 32001 finished: accepted, so a Scroll of
+# Instant Warp, Prog = the job id, the job's maatsCap bit (1 << (job - 1): a fresh char's maatsCap is 0), Maat Masher.
+lists RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/64 ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/onEventFinish/32001
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=SAM lvl=66
+char nin zone=RuludeGardens pos=12.4,3.1,119.5 job=NIN lvl=66
+char drg zone=RuludeGardens pos=12.4,3.1,119.5 job=DRG lvl=66
+levelcap 70
+quest Jeuno.ShatteringStars accepted
+item SamuraisTestimony
+nin: levelcap 70
+nin: quest Jeuno.ShatteringStars accepted
+nin: item NinjasTestimony
+drg: levelcap 70
+drg: quest Jeuno.ShatteringStars accepted
+drg: item DragoonsTestimony
+login
+trade Maat SamuraisTestimony x1         # SAM's testimony, Prog 0: 64 (12)
+finish option=1                         # tradedTestimony 1; set down at Chamber of Oracles
+tick 400
+login                                   # in Chamber of Oracles
+nin: login
+nin: trade Maat NinjasTestimony x1      # NIN's testimony, Prog 0: 64 (13)
+nin: finish option=1                    # tradedTestimony 1; set down at Chamber of Oracles
+tick 400
+nin: login                              # in Chamber of Oracles
+drg: login
+drg: trade Maat DragoonsTestimony x1    # DRG's testimony, Prog 0: 64 (14)
+drg: finish option=1                    # tradedTestimony 1; set down at Chamber of Oracles
+tick 400
+drg: login                              # in Chamber of Oracles
+warp -218.6,-1.9,23.0 ChamberOfOracles  # by SC_Entrance
+trade SC_Entrance SamuraisTestimony x1  # tradedTestimony 1: the 32000 menu
+update 32000 option=33                  # Shattering Stars (SAM), index 2, area 1: registered, entered
+finish                                  # in the arena
+kill MAAT                               # Maat (SAM) of area 1: won, battlefieldWin 194, 32001 opens
+finish                                  # 32001, accepted: the scroll, Prog 12, maatsCap 2048, Maat Masher
+nin: warp -218.6,-1.9,23.0 ChamberOfOracles  # by SC_Entrance
+nin: trade SC_Entrance NinjasTestimony x1  # tradedTestimony 1: the 32000 menu
+nin: update 32000 option=50             # Shattering Stars (NIN), index 3, area 2: registered, entered
+nin: finish                             # in the arena
+nin: kill MAAT+4                        # Maat (NIN) of area 2: 1 HP (unkillable), won once he yields, battlefieldWin 195
+tick 1000                               # Maat is unkillable: he yields (battlefield:win) in a later onMobFight; 32001 opens on the last tick
+tick 1000
+nin: finish                             # 32001, accepted: the scroll, Prog 13, maatsCap 4096, Maat Masher
+drg: warp -218.6,-1.9,23.0 ChamberOfOracles  # by SC_Entrance
+drg: trade SC_Entrance DragoonsTestimony x1  # tradedTestimony 1: the 32000 menu
+drg: update 32000 option=67             # Shattering Stars (DRG), index 4, area 3: registered, entered
+drg: finish                             # in the arena
+drg: kill MAAT+10                       # Maat (DRG) of area 3: won, battlefieldWin 196, 32001 opens
+drg: finish                             # 32001, accepted: the scroll, Prog 14, maatsCap 8192, Maat Masher

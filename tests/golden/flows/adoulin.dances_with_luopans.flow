@@ -1,0 +1,108 @@
+# Dances with Luopans (adoulin 118): a level 99 Warrior of San d'Oria (nation 0) in Western Adoulin with a Petrified
+# Log and a Square of Ancestral Cloth. ADVANCED_JOB_LEVEL 100 (a GM): Sylvie has no section (default 38); at 99:
+# Sylvie 31, finished on 0: Declined 1; 32, finished on 0: nothing; 32 on 1: Declined 0, begun. Accepted, Prog 0,
+# no Luopan: Sylvie 33; the log traded without the soil: nil. La Theine's Ergon Locus (San d'Oria's zone): the
+# Fistful of Homeland Soil, no event; again, the soil held: nothing. Konschtat's (Bastok's) and Tahrongi's
+# (Windurst's): nothing. Sylvie: the cloth with the soil: nil; the log and the cloth (tradeHas): 34, finished: the log
+# taken (not the cloth), the soil taken, the Luopan; then 35. La Theine's Ergon Locus with the Luopan: nothing.
+# Ceizak Battlegrounds area 1 without the Luopan (a GM): nothing; with it at Prog 0: UNCANNY_SENSATION (LocusArea 1).
+# The healing hooks (heal: the client's /heal): healed there, ENERGIES_COURSE, RestUntil and a timer of 30 .. 480 s;
+# heal stop (onEffectLose): RestUntil 0, so the timer, fired a day of wall clock on, does nothing; healed again: the
+# timer fired with the wall clock unmoved (before RestUntil): nothing. Walked out (the leave: LocusArea 0), healed:
+# nothing. In, healed, walked out while resting (the leave: RestUntil 0), the timer a day on: nothing. Area 2: in,
+# UNCANNY_SENSATION; out; healed: nothing. Yahse Hunting Grounds area 1 the same (Yahse's text ids); then in, healed:
+# ENERGIES_COURSE, the timer a day on: MYSTICAL_WARMTH, Prog 1. At Prog 1: healed, nothing; area 1 entered, nothing.
+# Sylvie at Prog 1 (the Luopan held): 36, finished: the Plate of Indi-Poison and the Matre Bell, Geomancer unlocked,
+# YOU_CAN_NOW_BECOME, the Geomancer gesture, completed. Completed, a Warrior: 39 (replacing the default). The other
+# arms: #accept_first, #full, #bell, #bell_bayld, #bell_poor, #soil_bastok, #soil_windurst.
+lists WesternAdoulin/Sylvie/onTrigger WesternAdoulin/Sylvie/onTrade WesternAdoulin/onEventFinish/31
+lists WesternAdoulin/onEventFinish/32 WesternAdoulin/onEventFinish/34 WesternAdoulin/onEventFinish/36
+lists LaTheinePlateau/Ergon_Locus/onTrigger KonschtatHighlands/Ergon_Locus/onTrigger
+lists TahrongiCanyon/Ergon_Locus/onTrigger
+lists CeizakBattlegrounds/onTriggerAreaEnter/1 CeizakBattlegrounds/onTriggerAreaLeave/1
+lists CeizakBattlegrounds/onTriggerAreaEnter/2 CeizakBattlegrounds/onTriggerAreaLeave/2
+lists YahseHuntingGrounds/onTriggerAreaEnter/1 YahseHuntingGrounds/onTriggerAreaLeave/1
+char zone=WesternAdoulin pos=79.594,32,135.725 job=WAR lvl=99 nation=0
+item PetrifiedLog
+item SquareOfAncestralCloth
+login
+setting ADVANCED_JOB_LEVEL 100          # a GM: level 99 below it
+trigger Sylvie                          # available, below the level: no section: default 38
+finish-if-event
+setting ADVANCED_JOB_LEVEL 99           # level 99 at it
+trigger Sylvie                          # available: 31
+finish option=0                         # declined: Declined 1
+trigger Sylvie                          # Declined 1: 32
+finish option=0                         # nothing
+trigger Sylvie                          # 32
+finish option=1                         # Declined 0, begun
+trigger Sylvie                          # Prog 0, no Luopan: 33
+finish
+trade Sylvie PetrifiedLog x1            # no soil: nil
+warp 421.9,24.39,28.734 LaTheinePlateau
+trigger Ergon_Locus                     # San d'Oria's zone, no soil, no Luopan: the soil (no event)
+trigger Ergon_Locus                     # the soil held: nothing
+warp 221.541,24.451,309.234 KonschtatHighlands
+trigger Ergon_Locus                     # Bastok's zone: nothing
+warp 92.346,40.444,339.803 TahrongiCanyon
+trigger Ergon_Locus                     # Windurst's zone: nothing
+warp 79.594,32,135.725 WesternAdoulin
+trade Sylvie SquareOfAncestralCloth x1  # the soil, no log: nil
+trade Sylvie PetrifiedLog x1 SquareOfAncestralCloth x1  # the soil, the log and the cloth (tradeHas): 34
+finish                                  # confirmed, the soil taken, the Luopan
+trigger Sylvie                          # the Luopan: 35
+finish
+warp 421.9,24.39,28.734 LaTheinePlateau
+trigger Ergon_Locus                     # the Luopan held (no soil): nothing
+warp 330,0,-250 CeizakBattlegrounds
+tick 1000                               # onGameIn's ZoningIn (no trigger areas while loading in) cleared at 2.5 s
+tick 1000
+tick 1000
+delkeyitem Luopan                       # a GM
+walk 357.8,0,-250.2                     # into area 1 without the Luopan: nothing
+walk 330,0,-250                         # out: the leave (LocusArea, RestUntil 0: nothing shows)
+keyitem Luopan                          # a GM
+walk 357.8,0,-250.2                     # into area 1, the Luopan, Prog 0: UNCANNY_SENSATION, LocusArea 1
+heal                                    # LocusArea 1, Prog 0: ENERGIES_COURSE, RestUntil, the timer
+heal stop                               # onEffectLose: RestUntil 0
+wait jst=1                              # the wall clock a day on
+tick 481000                             # the timer, past any wait: RestUntil 0: nothing
+heal                                    # ENERGIES_COURSE, a new RestUntil and timer
+tick 481000                             # the timer, the wall clock not moved (before RestUntil): nothing
+heal stop                               # RestUntil 0
+walk 330,0,-250                         # out: LocusArea 0
+heal                                    # outside, LocusArea 0: nothing
+heal stop
+walk 357.8,0,-250.2                     # in: UNCANNY_SENSATION, LocusArea 1
+heal                                    # ENERGIES_COURSE
+walk 330,0,-250                         # out while resting: the leave: LocusArea and RestUntil 0
+wait jst=1
+tick 481000                             # the timer: RestUntil 0: nothing
+heal stop
+walk 87.2,0,95                          # outside area 2
+walk 87.2,0,74                          # into area 2: UNCANNY_SENSATION, LocusArea 1
+walk 87.2,0,95                          # out: LocusArea 0
+heal                                    # outside: nothing
+heal stop
+warp -447.7,-0.68,385 YahseHuntingGrounds
+tick 1000                               # ZoningIn cleared
+tick 1000
+tick 1000
+walk -447.7,-0.68,364                   # into Yahse area 1: UNCANNY_SENSATION (Yahse's), LocusArea 1
+walk -447.7,-0.68,385                   # out: LocusArea 0
+heal                                    # outside: nothing
+heal stop
+walk -447.7,-0.68,364                   # in: UNCANNY_SENSATION
+heal                                    # ENERGIES_COURSE (Yahse's)
+wait jst=1
+tick 481000                             # the timer at or past RestUntil: MYSTICAL_WARMTH (Yahse's), RestUntil 0, Prog 1
+heal stop
+heal                                    # Prog 1: nothing
+heal stop
+walk -447.7,-0.68,385                   # out
+walk -447.7,-0.68,364                   # in at Prog 1: nothing
+warp 79.594,32,135.725 WesternAdoulin
+trigger Sylvie                          # Prog 1: 36
+finish                                  # the plate and the bell, Geomancer, the gesture, completed
+trigger Sylvie                          # completed, a Warrior: 39 (replaceDefault)
+finish

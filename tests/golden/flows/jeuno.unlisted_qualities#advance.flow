@@ -1,0 +1,50 @@
+# Unlisted Qualities (jeuno 77): checkAdvanceToPhase1's operands, each the last one set (a GM's Data, Prog 0). Size last
+# (personality 1, face 4, size unset: Data 4195328): Akta's 10103 option 1 (the lower edge): size 1, Prog 1; again from
+# 4195328 with option 3 (the upper edge): Prog 1. A GM-accepted quest with no Data (0): the face reads 0 (set), the
+# personality and size unset: Akta's 10103 ([7] = 0), option 2: size 2 (Data 524288), no advance (personality unset);
+# Kuah answers nil (face 0 set). Face last (personality 1, size 3, face unset: Data 16516096): Kuah's 20000 option 0
+# (face 0 counts as set): Data 787456, Prog 1. (Personality last is the main flow's.) Each operand false alone:
+# personality (Data 0 above), face (personality 1, face and size unset: Data 15729664; Akta's option 2: size 2, Data
+# 16253952, face unset: Prog 0), size (personality 1, size and face unset: Kuah's option 0: face 0, Data 1024, size
+# unset: Prog 0). Option 4 at Akta with face 4 set (Data 4194304): nothing. Face 14 (Kuah's option 14) is read back as
+# set: Kuah then answers nil. Red Ghost with the personality set (Data 1024) at Prog 0: nil, his default 34.
+lists RuludeGardens/Akta/onTrigger RuludeGardens/onEventFinish/10103 LowerJeuno/Kuah_Dakonsa/onTrigger LowerJeuno/onEventFinish/20000 PortJeuno/Red_Ghost/onTrigger PortJeuno/onEventFinish/320
+char zone=RuludeGardens pos=8.5,0,-67.2 job=WAR lvl=20
+quest Jeuno.UnlistedQualities accepted
+charvar Quest[3][77]Data 4195328
+login
+trigger Akta                   # size unset: 10103, [7] = 4195328
+finish option=1                # size 1: Data 4457472; all set: Prog 1
+charvar Quest[3][77]Prog 0     # a GM
+charvar Quest[3][77]Data 4195328 # a GM
+trigger Akta                   # 10103
+finish option=3                # size 3: Data 4981760; Prog 1
+charvar Quest[3][77]Prog 0     # a GM
+charvar Quest[3][77]Data 0     # a GM: no Data
+trigger Akta                   # size unset: 10103, [7] = 0
+finish option=2                # size 2: Data 524288; personality unset: Prog 0
+charvar Quest[3][77]Data 15729664 # a GM: personality 1, face and size unset
+trigger Akta                   # 10103, [7] = 15729664
+finish option=2                # size 2: Data 16253952; face unset: Prog 0
+charvar Quest[3][77]Data 4194304 # a GM: face 4; size and personality unset
+trigger Akta                   # 10103, [7] = 4194304
+finish option=4                # above 3: nothing (a size of 4 would spill into the face's low bit: face 5)
+warp -41.2,0,-65.9 LowerJeuno
+charvar Quest[3][77]Data 0     # a GM: no Data
+trigger Kuah_Dakonsa           # Data 0: the face reads 0 (set): nil, 190
+finish
+charvar Quest[3][77]Data 16516096 # a GM: face unset, personality 1, size 3
+trigger Kuah_Dakonsa           # 20000, [7] = 16516096
+finish option=0                # face 0: Data 787456; Prog 1
+charvar Quest[3][77]Prog 0     # a GM
+charvar Quest[3][77]Data 15728659 # a GM: name 3, race 1; size, face and personality unset
+trigger Kuah_Dakonsa           # 20000, [7] = 15728659
+finish option=14               # face 14, the highest face read as set: Data 14680083; Prog 0
+trigger Kuah_Dakonsa           # face 14 set: nil, 190
+finish
+charvar Quest[3][77]Data 15729664 # a GM: personality 1, face and size unset
+trigger Kuah_Dakonsa           # 20000, [7] = 15729664
+finish option=0                # face 0: Data 1024; size unset: Prog 0
+warp -95,0,-3.3 PortJeuno
+trigger Red_Ghost              # Prog 0, personality set: nil, 34
+finish

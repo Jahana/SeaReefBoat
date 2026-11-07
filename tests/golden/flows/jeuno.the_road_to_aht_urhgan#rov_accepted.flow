@@ -1,0 +1,22 @@
+# The Road to Aht Urhgan (jeuno 91): "Where's Tenzen?" from the accepted state's 10064, and its other selections. A
+# level 75 Warrior with a fresh char's 1000 gil, accepted by a GM at Prog 1, RoV Inescapable Binds current: 10064 (0, 0,
+# 0, 0, 0, 1); finished 1: completed, the Boarding Permit, the mission completed and Desert Winds added. Set accepted
+# again at Prog 0 (a GM): 10064 (0, ..., 0) (Desert Winds current now); finished 2: Prog 1; 10064 finished 3 with 1000
+# gil: nothing; finished 0: no arm.
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/onEventFinish/10064
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+quest Jeuno.TheRoadToAhtUrhgan accepted
+mission Rov InescapableBinds current
+charvar Quest[3][91]Prog 1
+login
+trigger Faursel                     # accepted, Prog 1, the mission: 10064 (0, 0, 0, 0, 0, 1)
+finish option=1                     # completed; the Boarding Permit; the mission completed, Desert Winds added
+quest Jeuno.TheRoadToAhtUrhgan available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheRoadToAhtUrhgan accepted # a GM
+charvar Quest[3][91]Prog 0          # a GM: accepted back when 10062 granted the quest
+trigger Faursel                     # Prog 0: 10064 (0, 0, 0, 0, 0, 0): Desert Winds is current now
+finish option=2                     # Prog 1
+trigger Faursel                     # Prog 1: 10064
+finish option=3                     # 1000 gil, under 500000: nothing (Prog 1)
+trigger Faursel                     # Prog 1: 10064
+finish option=0                     # no arm: nothing

@@ -1,0 +1,17 @@
+# Brygid the Stylist Returns (bastok 74): a trade while accepted before an option is kept. A MNK 75 who has completed
+# Brygid the Stylist, the Temple Crown worn: 380 (the requests), accepted. The Aries Subligar traded at Option 0: the
+# trade answers nothing (user ruling 2026-11-05, kept bugs: the Lua's trade handler indexed optionToItems[0], nil,
+# and raised; the Lua baseline, 3c4c08d2, has an expect-error on each trade), so nothing plays and the subligar
+# stays; 381 (the requests not worn); the same trade answers nothing again.
+char zone=BastokMarkets pos=-90.2,-4.302,-107.5 job=MNK lvl=75
+quest Bastok.BrygidTheStylist completed
+item TempleCrown
+item AriesSubligar
+login
+equip TempleCrown Head
+trigger Brygid                  # the Temple Crown worn: 380 (robe 0, the requests, MNK)
+finish                          # accepted (deleted, then begun)
+trade Brygid AriesSubligar x1   # Option 0: no option kept, nothing
+trigger Brygid                  # Option 0, the requests not worn: 381
+finish
+trade Brygid AriesSubligar x1   # nothing again; the subligar stays

@@ -1,0 +1,40 @@
+# The Kuftal Tour (outlands 195): Datta in Rabao (no script; the default 73), Kuftal Tunnel's qm5 (no script; the
+# default DO_NOT_SEE_ANYTHING). main: a level 30 Warrior, The Gustaberg Tour completed (a GM), Selbina-Rabao fame 124
+# (level 2), a Bone Chip. bob: a level 40 Warrior in Kuftal Tunnel by the qm (the quest not his). Datta: the default 73;
+# fame 125 (a GM): a trade while available: no trade handler: nothing; 74, finished: begun; Datta at Prog 0: nil: the
+# default. bob: qm5 (no section of his): the default. Kuftal Tunnel: qm5 alone (party of 1): nil: the default; bob
+# invited and accepted (both within 15 yalms; bob at 40, not above): bob's own talk (the quest not his, in a party of
+# 2): the default; main: 14, finished: Prog 1; qm5 again: 14 (no Prog test), finished. Rabao: Datta 75, finished: completed (8000 gil, Kuftal Tourist), San d'Oria and Bastok fame +10 each.
+# Completed: no section: Datta's default 73.
+lists Rabao/Datta/onTrigger Rabao/Datta/onTrade KuftalTunnel/qm5/onTrigger Rabao/onEventFinish/74 KuftalTunnel/onEventFinish/14 Rabao/onEventFinish/75
+char zone=Rabao pos=-23.268,8.324,70.722 job=WAR lvl=30
+char bob zone=KuftalTunnel pos=-27.695,-22.159,-182.716 job=WAR lvl=40
+quest Bastok.TheGustabergTour completed
+fame Sandoria 94
+fame Bastok 93                          # Selbina-Rabao (94 + 93) * 2 / 3 = 124
+item BoneChip
+login
+trigger Datta                           # fame level 2: the default 73
+finish
+fame Bastok 94                          # a GM: Selbina-Rabao 125: level 3
+trade Datta BoneChip x1                 # available: no trade handler: nothing
+trigger Datta                           # 74
+finish                                  # begun
+trigger Datta                           # Prog 0: nil: the default 73
+finish
+bob: login
+bob: trigger qm5                        # bob: no section: the default DO_NOT_SEE_ANYTHING
+warp -27.695,-22.159,-183.716 KuftalTunnel
+trigger qm5                             # alone: nil: the default DO_NOT_SEE_ANYTHING
+invite bob
+bob: accept
+bob: trigger qm5                        # bob in the party, the quest not his: no section: the default
+trigger qm5                             # a party of 2, levels 30 and 40, bob 1 yalm away: 14
+finish                                  # Prog 1
+trigger qm5                             # 14 again
+finish
+warp -23.268,8.324,70.722 Rabao
+trigger Datta                           # Prog 1: 75
+finish                                  # completed: 8000 gil, the title; fame +10 San d'Oria, +10 Bastok
+trigger Datta                           # completed: no section: the default 73
+finish

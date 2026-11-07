@@ -1,0 +1,18 @@
+# Fly High (otherAreas 71): 243's and 245's finishes read no status. Completed, two feathers: 245; the quest put back
+# to accepted inside the event (GMs): the finish gives the Mistmelt (npcUtil.giveItem), takes the feathers and leaves
+# the quest accepted. Then accepted, two feathers: 243; the quest put back to available inside the event (a GM): the
+# finish (npcUtil.completeQuest) gives a Mistmelt, takes the feathers and completes it from available
+# (Quest[4][71]Prog 1 (GM) kept: npcUtil.completeQuest has no cleanup).
+char zone=TavnazianSafehold pos=-68.0,-11.3,-5.0 job=WAR lvl=75
+mission Cop TheSavage current
+quest OtherAreas.FlyHigh completed
+item HippogryphTailfeather x4
+login
+trade Ferchinne HippogryphTailfeather x2   # completed: 245
+quest OtherAreas.FlyHigh available      # a GM
+quest OtherAreas.FlyHigh accepted       # a GM
+finish                                  # the Mistmelt; the feathers taken; still accepted
+charvar Quest[4][71]Prog 1              # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+trade Ferchinne HippogryphTailfeather x2   # accepted: 243
+quest OtherAreas.FlyHigh available      # a GM
+finish                                  # a second Mistmelt; the feathers taken; completed from available

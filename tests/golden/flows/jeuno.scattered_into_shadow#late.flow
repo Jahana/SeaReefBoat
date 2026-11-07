@@ -1,0 +1,60 @@
+# Scattered into Shadow (jeuno 61), Castle Oztroja and the end (accepted by GM at Prog 4, Stage 7: the main flow takes
+# the pools). The Castle Oztroja zone-in at Prog 4 (no csid) adds the TEBHI_RESPAWN TICK listener: Tebhi loads
+# CUTSCENE_ONLY, and its first tick finds his respawnTime (0) passed: NORMAL, the STATUS_VISIBLE animation ('deru'). The
+# chest (Prog 4, Stage 7, no collar: the treasure trade with the item bypass gives the Beast Collar; noAction). Tebhi's
+# trades: a bone chip (not the collar: nil), the collar with a bone chip (not exactly the collar: nil), the collar
+# alone (NORMAL: the collar taken, Prog 5, Tebhi stopped (clearPath) and turned to the char, his respawnTime the wall
+# clock + 180, TEBHI_ACCEPTS; two timers). The listener's next tick: Prog 5: it removes itself. tebhiFade at 2000 ms
+# (the STATUS_DISAPPEAR animation 'kesu'), tebhiGone at 4000 ms (CUTSCENE_ONLY, continuePath): each ticked to its
+# deadline (nothing) and 1 ms past it. Tebhi CUTSCENE_ONLY: a bone chip traded (not NORMAL: nil). The wall clock a day
+# on (past his respawnTime): no listener, he stays hidden; a GM's Prog 4 (no zone-in, so no listener): still hidden.
+# Brutus's 135 (a full bag: not completed; with room: completed, Beast Gaiters, fame +7 x3), then completed: 151
+# (Event, importantOnce), after Path of the Beastmaster's Event 20, taking turns with his script's own 151.
+lists UpperJeuno/Brutus/onTrigger CastleOztroja/Tebhi/onTrade CastleOztroja/Treasure_Chest/onTrade UpperJeuno/onEventFinish/135
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=BST lvl=50
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster completed
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ScatteredIntoShadow accepted
+charvar Quest[3][61]Prog 4
+charvar Quest[3][61]Stage 7
+item OztrojaChestKey
+item BoneChip x3
+login
+warp -134.5,24,-21 CastleOztroja            # the zone-in at Prog 4: the TEBHI_RESPAWN listener (no csid)
+tick 13000                                  # the chest placed; Tebhi made NORMAL by the listener ('deru')
+trigger Treasure_Chest
+trade Treasure_Chest OztrojaChestKey x1     # Prog 4, Stage 7, no collar: the treasure trade, bypass 1: the Beast
+                                            # Collar; noAction
+tick 4500                                   # the Beast Collar
+trigger Tebhi                               # walk to him (no trigger handler, no default)
+trade Tebhi BoneChip x1                     # not the collar: nil
+trade Tebhi BeastCollar x1 BoneChip x1      # not exactly the collar: nil
+trade Tebhi BeastCollar x1                  # NORMAL, exactly the collar: taken, Prog 5, TEBHI_ACCEPTS; the two timers
+tick 2000                                   # the listener: Prog 5, removed; tebhiFade at its deadline: nothing
+tick 1                                      # tebhiFade: 'kesu'
+tick 1999                                   # tebhiGone at its deadline: nothing
+tick 1                                      # tebhiGone: CUTSCENE_ONLY, continuePath
+trade Tebhi BoneChip x1                     # not NORMAL: nil
+wait jst=1                                  # the wall clock past his respawnTime
+tick 1000                                   # no listener: Tebhi stays CUTSCENE_ONLY
+charvar Quest[3][61]Prog 4                  # a GM's Prog 4 in the zone (no zone-in: no listener)
+tick 1000                                   # still hidden
+charvar Quest[3][61]Prog 5
+warp -55.5,8.2,97.5 UpperJeuno
+trigger Brutus                              # Prog 5: 135
+fill-inventory
+finish                                      # no room for the gaiters: not completed
+free-inventory
+trigger Brutus                              # 135 again
+finish                                      # completed: Beast Gaiters, fame +7 x3
+trigger Brutus                              # completed: the lookup's turn: Path of the Beastmaster's 20
+finish
+trigger Brutus                              # his script's turn: 151 (Scattered into Shadow completed)
+finish
+trigger Brutus                              # the lookup's turn: the quest's 151 (importantOnce)
+finish
+trigger Brutus                              # his script's turn: 151
+finish

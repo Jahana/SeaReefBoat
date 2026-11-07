@@ -1,0 +1,53 @@
+# A Thirst for the Ages (adoulin 114, call-only: Nikkhail's script): a level 99 Warrior in Western Adoulin, the quest
+# accepted (a GM: nothing begins it). Nikkhail (default 510) alternates with his script: pairs, 510 first. SoA 0 and
+# SoA 6 (Pioneer Registration current, just below the bound): his script's SoA test fails: 510 both talks. Pioneer
+# Registration completed, Life on the Frontier current (GMs): that mission's completed section answers 584 in place of
+# his default from then on (so 584 / 5053 pairs); 5053, finished: the Copy of the Alliance Agreement (KEYITEM_OBTAINED).
+# The copy held: nothing. The copy taken and ATFTA_Status 1 (GMs): 5053 again, the copy again. The copy taken and the
+# status 2: nothing. Completed (status 0, GMs): nothing. Available: nothing.
+lists WesternAdoulin/Nikkhail/onTrigger WesternAdoulin/onEventFinish/5053
+char zone=WesternAdoulin pos=-99.5,3,9 job=WAR lvl=99
+quest Adoulin.AThirstForTheAges accepted
+login
+trigger Nikkhail                        # no SoA: nothing (510 by the turn)
+finish-if-event
+trigger Nikkhail                        # the other of the pair
+finish-if-event
+mission Soa PioneerRegistration current # a GM: SoA 6, below the bound
+trigger Nikkhail                        # SoA 6: nothing (510 by the turn)
+finish-if-event
+trigger Nikkhail                        # the other of the pair
+finish-if-event
+mission Soa PioneerRegistration completed # a GM: the log's current mission cleared
+mission Soa LifeOnTheFrontier current   # a GM: SoA 7
+trigger Nikkhail                        # 5053 or 584
+finish-if-event
+trigger Nikkhail                        # the other; 5053's finish: the copy
+finish-if-event
+trigger Nikkhail                        # the copy held: nothing
+finish-if-event
+trigger Nikkhail                        # the other of the pair
+finish-if-event
+delkeyitem CopyOfTheAllianceAgreement   # a GM
+charvar ATFTA_Status 1                  # a GM
+trigger Nikkhail                        # status 1: 5053 or 584
+finish-if-event
+trigger Nikkhail                        # the other; the copy again
+finish-if-event
+delkeyitem CopyOfTheAllianceAgreement   # a GM
+charvar ATFTA_Status 2                  # a GM
+trigger Nikkhail                        # status 2: nothing
+finish-if-event
+trigger Nikkhail                        # the other of the pair
+finish-if-event
+charvar ATFTA_Status 0                  # a GM
+quest Adoulin.AThirstForTheAges completed # a GM
+trigger Nikkhail                        # completed: nothing
+finish-if-event
+trigger Nikkhail                        # the other of the pair
+finish-if-event
+quest Adoulin.AThirstForTheAges available # a GM
+trigger Nikkhail                        # available: nothing
+finish-if-event
+trigger Nikkhail                        # the other of the pair
+finish-if-event

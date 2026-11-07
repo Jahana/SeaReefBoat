@@ -1,0 +1,96 @@
+# Blue Ribbon Blues (windurst 17): Kerutoto in Windurst Waters, Roberta in Windurst Woods, the Hume Bones and Lich C.
+# Magnus in The Eldieme Necropolis. A level-75 WAR (Lich C. Magnus is level 58). Food for Thought and Overnight Delivery
+# completed by GM. The guard (each side: Water Way to Go completed, fame level 5, Water Way to Go's mustZone), Kerutoto's
+# 357 (oncePerZone: Prog 1; then his default; after a zone change 357 again, Prog 1: nothing), Roberta's 376 (declined;
+# accepted: a Purple Ribbon) and 379, the ribbon to Kerutoto (the ribbon and a chip: nil; the ribbon: 358, 3600: +3600
+# gil, begun, Prog 0, Timer now + 60), 359 within the minute, 360 after it (a ribbon, Prog 1), 361, the ribbon back (365:
+# Prog 0, the timer again), 359, 360, Roberta's 380 (Prog 1, the ribbon held), the Hume Bones (local Prog 0: nil; a chip,
+# the ribbon and a chip: nil; the ribbon: Lich C. Magnus pops claimed, the qm not hidden, RETURN_RIBBON_TO_HER; a second
+# ribbon while it lives: popFromQM false, nil, the ribbon kept), the kill (local var Prog 2), the Blue Ribbon (no room:
+# ITEM_CANNOT_BE_OBTAINED; with room: ITEM_OBTAINED, Prog 3; again: the local var is still 2, the ribbon is rare, so
+# ITEM_CANNOT_BE_OBTAINED), the ribbon at Prog 3 (nil), Kerutoto's 362 (completed: fame +50, Ghostie Buster, mustZone),
+# 363 (replaceDefault; a trade: nil), then after a zone change his default 306.
+# Trades with no handler: Kerutoto while the guard fails and while completed; Roberta while available (the guard met).
+# Defaults: Kerutoto 306, Roberta 436 (DefaultActions; neither has a script), the Hume Bones NOTHING_OUT_OF_ORDINARY. Also
+# named: Kerutoto by Food for Thought (completed by GM: no mustZone, nothing), Waking Dreams (needs CoP 3-5 completed:
+# never here), LB04 (accepted only), CoP 5-3 and mission 7-2 (not current); Roberta, the Hume Bones and the Lich by no
+# other quest or mission. A mustZone clears only on entering another zone, so the flow zones out and back.
+lists WindurstWaters/Kerutoto/onTrigger WindurstWaters/Kerutoto/onTrade WindurstWoods/Roberta/onTrigger WindurstWoods/Roberta/onTrade TheEldiemeNecropolis/Hume_Bones/onTrigger TheEldiemeNecropolis/Hume_Bones/onTrade TheEldiemeNecropolis/Lich_C_Magnus/onMobDeath WindurstWaters/onEventFinish/357 WindurstWaters/onEventFinish/358 WindurstWaters/onEventFinish/360 WindurstWaters/onEventFinish/362 WindurstWaters/onEventFinish/365 WindurstWoods/onEventFinish/376
+char zone=WindurstWaters pos=13.0,-4.71,-155.9 job=WAR lvl=75
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+fame Windurst 325
+item BoneChip
+login
+trade Kerutoto BoneChip x1              # Water Way to Go not completed: no section, nothing
+trigger Kerutoto                        # not met: his default 306
+finish
+quest Windurst.WaterWayToGo completed
+fame Windurst 324
+trigger Kerutoto                        # fame 324 (level 4): 306
+finish
+fame Windurst 325
+charvar Quest[2][16]mustZone 238        # Water Way to Go's mustZone set by GM
+trigger Kerutoto                        # 306
+finish
+charvar Quest[2][16]mustZone 0
+trade Kerutoto BoneChip x1              # the guard met, not the ribbon: nil
+trigger Kerutoto                        # guard met: event 357 (oncePerZone)
+finish                                  # Prog 0: Prog 1
+trigger Kerutoto                        # 357 performed this zone: his default 306
+finish
+warp 22.0,-4.25,-155.6 WindurstWoods
+trade Roberta BoneChip x1               # available, the guard met: Roberta has no trade handler, nothing
+trigger Roberta                         # available, no ribbon, Prog 1: 376 (0, Purple Ribbon)
+finish option=0                         # nothing
+trigger Roberta                         # 376 again
+finish option=1                         # a Purple Ribbon
+trigger Roberta                         # the ribbon held: 379
+finish
+warp 13.0,-4.71,-155.9 WindurstWaters
+trigger Kerutoto                        # a new zone: 357 again
+finish                                  # Prog 1: nothing
+trade Kerutoto PurpleRibbon x1 BoneChip x1  # the ribbon and a chip: not exact, nil
+trade Kerutoto PurpleRibbon x1          # the ribbon: 358 (3600)
+finish                                  # the ribbon taken, +3600 gil, begun, Prog 0, Timer = now + 60
+trigger Kerutoto                        # accepted, Prog 0, within the minute: 359
+finish
+wait jst=1                              # the system time a day on
+trigger Kerutoto                        # Prog 0, the timer passed: 360
+finish                                  # a Purple Ribbon; Prog 1
+trigger Kerutoto                        # Prog 1, the ribbon held: 361 (0, Purple Ribbon)
+finish
+trade Kerutoto PurpleRibbon x1          # Prog 1: 365
+finish                                  # the ribbon taken; Prog 0; the timer again (now + 60)
+trigger Kerutoto                        # within the minute: 359
+finish
+wait jst=1
+trigger Kerutoto                        # 360
+finish                                  # a ribbon; Prog 1
+warp 22.0,-4.25,-155.6 WindurstWoods
+trigger Roberta                         # accepted, Prog 1, the ribbon held: 380
+finish
+warp 301.5,-0.25,19.99 TheEldiemeNecropolis
+trigger Hume_Bones                      # local Prog 0: nil; NOTHING_OUT_OF_ORDINARY
+trade Hume_Bones BoneChip x1            # not the ribbon: nil
+trade Hume_Bones PurpleRibbon x1 BoneChip x1  # the ribbon and a chip: not exact, nil
+trade Hume_Bones PurpleRibbon x1        # the ribbon, Prog 1: Lich C. Magnus pops (claimed, the qm not hidden); the ribbon taken; RETURN_RIBBON_TO_HER
+item PurpleRibbon                       # a GM gives a second ribbon
+trade Hume_Bones PurpleRibbon x1        # the Lich is spawned: popFromQM false, nil, the ribbon kept
+kill LICH_C_MAGNUS                      # onMobDeath, Prog 1: quest local var Prog 2
+fill-inventory
+trigger Hume_Bones                      # local Prog 2, no room: ITEM_CANNOT_BE_OBTAINED
+free-inventory
+trigger Hume_Bones                      # the Blue Ribbon (silent); Prog 3; ITEM_OBTAINED
+trigger Hume_Bones                      # the local var still 2; the Blue Ribbon held (rare): ITEM_CANNOT_BE_OBTAINED, Prog 3 again
+warp 13.0,-4.71,-155.9 WindurstWaters
+trade Kerutoto PurpleRibbon x1          # Prog 3: nil, kept
+trigger Kerutoto                        # Prog 3: 362
+finish                                  # completed: fame +50, Ghostie Buster; mustZone 238
+trade Kerutoto BoneChip x1              # completed, mustZone: no trade handler, nothing
+trigger Kerutoto                        # completed, mustZone: 363 (replaceDefault)
+finish
+warp 22.0,-4.25,-155.6 WindurstWoods
+warp 13.0,-4.71,-155.9 WindurstWaters   # the mustZone cleared
+trigger Kerutoto                        # completed, no mustZone: no section, 306
+finish

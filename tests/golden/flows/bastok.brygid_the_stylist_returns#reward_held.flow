@@ -1,0 +1,18 @@
+# Brygid the Stylist Returns, accepted, the requests set by GM (a Robe, a Bronze Subligar) and the Duende Cotehardie
+# already held: the requested legs alone give 381; both give 382, whose update for option 1 reports the reward held (0).
+char zone=BastokMarkets pos=-90.2,-4.302,-107.5 job=MNK lvl=75
+item Robe
+item BronzeSubligar
+item DuendeCotehardie
+quest Bastok.BrygidTheStylist completed
+quest Bastok.BrygidTheStylistReturns accepted
+charvar Quest[1][74]requestedBody 12600
+charvar Quest[1][74]requestedLegs 12832
+login
+equip BronzeSubligar Legs
+trigger Brygid                  # the requested legs only: 381 (robe 0)
+finish
+equip Robe Body
+trigger Brygid                  # the requests (a Robe, a Bronze Subligar) worn: 382
+update 382 option=1             # the Duende Cotehardie held: (0, 0, 0, 0)
+finish option=0                 # no option kept

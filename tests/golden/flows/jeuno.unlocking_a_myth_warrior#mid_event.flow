@@ -1,0 +1,31 @@
+# Unlocking a Myth: Warrior (jeuno 102): finishes outside their state, and the main job read by each check. Main, a
+# WAR wearing the Sturdy Axe: 10086 (1) open, the quest set accepted by a GM: finished 1: no 10086 handler while
+# accepted (not begun again). Cid, a WAR with the quest accepted and an unworn Sturdy Axe at 250 points: 10088 (1) open,
+# the quest set completed by a GM: finished: no 10088 handler (no MYTHIC_LEARNED, no King's Justice). Bob, a MNK with a
+# Sturdy Axe in his bag: the Warrior's quest is silent on another main job (its available check reads the main job);
+# Zalsuhm answers the Monk's quest, not wearing Burning Fists: 10085. The WAR quest accepted on bob by a GM: the trade
+# of the axe: the accepted check reads the main job: no section, nothing; the trigger: the Monk's quest's 10085.
+lists LowerJeuno/Zalsuhm/onTrigger LowerJeuno/Zalsuhm/onTrade LowerJeuno/onEventFinish/10086 LowerJeuno/onEventFinish/10088
+char zone=LowerJeuno pos=-31.5,5.9,-117.5 job=WAR lvl=75
+char bob zone=LowerJeuno pos=-31.5,5.9,-116 job=MNK lvl=75
+char cid zone=LowerJeuno pos=-31.5,5.9,-119 job=WAR lvl=75
+item SturdyAxe wsp=0
+bob: item SturdyAxe wsp=250
+cid: quest Jeuno.UnlockingAMythWarrior accepted
+cid: item SturdyAxe wsp=250
+login
+equip SturdyAxe Main                    # the Main slot
+trigger Zalsuhm                         # wearing it: 10086 (1)
+quest Jeuno.UnlockingAMythWarrior accepted # a GM, while 10086 is open
+finish option=1                         # no 10086 finish while accepted: nothing
+cid: login
+cid: trade Zalsuhm SturdyAxe x1         # accepted, 250 >= 250: 10088 (1)
+cid: quest Jeuno.UnlockingAMythWarrior completed # a GM, while 10088 is open
+cid: finish                             # no 10088 finish while completed: nothing
+bob: login
+bob: trigger Zalsuhm                    # a MNK: the WAR quest silent; the Monk quest: not wearing Burning Fists: 10085
+bob: finish
+bob: quest Jeuno.UnlockingAMythWarrior accepted # a GM: the WAR quest accepted on a MNK
+bob: trade Zalsuhm SturdyAxe x1         # the accepted check reads the main job: no section; nothing
+bob: trigger Zalsuhm                    # the Monk quest: 10085
+bob: finish

@@ -1,0 +1,28 @@
+# The Lost Book (crystalWar 26), the rival at Quu Bokye (Giddeus; no script, default 56): a level 30 Warrior there with
+# a Mythril Beastcoin, The Lost Book accepted at Prog 1 and Dark Legacy (Bastok, C#) accepted at Prog 2 (GMs; missions
+# as the main flow): Dark Legacy answers him with 61 (an Event) and trades a Yagudo Cherry for 62. 64 (Progress) over
+# 61, twice; the beastcoin: 65 (Dark Legacy wants the cherry), finished: the book, Prog 2. Prog 2: no section here:
+# Dark Legacy's 61, twice (no script: no turn to alternate with).
+lists Giddeus/Quu_Bokye/onTrigger Giddeus/Quu_Bokye/onTrade Giddeus/onEventFinish/65
+char zone=Giddeus pos=-159.992,17.137,181.502 job=WAR lvl=30
+item MythrilBeastcoin
+quest CrystalWar.TheLostBook accepted
+charvar Quest[7][26]Prog 1
+quest Bastok.DarkLegacy accepted
+charvar Quest[1][57]Prog 2
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Quu_Bokye                       # Prog 1: 64 over Dark Legacy's 61
+finish
+trigger Quu_Bokye                       # 64 again
+finish
+trade Quu_Bokye MythrilBeastcoin x1     # 65
+finish                                  # the trade confirmed; the Leather-bound Book; Prog 2
+trigger Quu_Bokye                       # Prog 2: Dark Legacy's 61
+finish
+trigger Quu_Bokye                       # 61 again
+finish

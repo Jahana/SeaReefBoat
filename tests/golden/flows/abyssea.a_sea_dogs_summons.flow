@@ -1,0 +1,24 @@
+# A Sea Dog's Summons (abyssea 180): a level 99 Warrior in Port Jeuno with Champions of Abyssea completed and the quest
+# accepted (GMs). Its only section wants the hour from 18:00 to 4:59 (user ruling 2026-11-04, kept Lua bugs: the Lua's
+# VanadielHour() >= 18 and VanadielHour() < 5 was never true; the C# reads it as an `or`): the Hall of the Gods zone-in
+# at 12:00 plays nothing from it; at 20:00 6, answered by the warp: completed, Death and Rebirth accepted; at 04:00
+# (completed; Death and Rebirth at Prog 0 has no zone-in) nothing.
+lists HallOfTheGods/onZoneIn/1
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate completed
+quest Abyssea.HeartOfMadness completed
+quest Abyssea.TenuousExistence completed
+quest Abyssea.ChampionsOfAbyssea completed
+quest Abyssea.ASeaDogsSummons accepted
+login
+warp -0.011,-1.848,-176.133 HallOfTheGods # 12:00: no section: nothing
+warp -51.344,0,-9.978 PortJeuno
+wait vana=8                             # 20:00: VanadielHour() >= 18
+warp -0.011,-1.848,-176.133 HallOfTheGods # 6, answered with 0: completed; Death and Rebirth accepted
+warp -51.344,0,-9.978 PortJeuno
+wait vana=8                             # 04:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # completed: nothing

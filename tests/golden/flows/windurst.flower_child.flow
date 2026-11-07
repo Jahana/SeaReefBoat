@@ -1,0 +1,36 @@
+# Flower Child (windurst 65): Ojha Rhawash (Windurst Walls; no script, no default). A level-1 WAR. Available: a talk:
+# 10000 (0, 239, 10); its finish with option 10 begins the quest. Accepted: a talk, option 10: nothing; a bone chip:
+# 10000 (..., 0), option 0: nothing (the chip kept); a Red Rose alone: (..., 1), option 1: the rose taken; a rose with a
+# chip, a Lilac with a chip: (..., 0) (not exact); a Lilac alone: (..., 2), option 3002 with a full bag (the reward is
+# fame only: complete does not fail): completed (fame 0), the Lilac taken, the Mog House exit flag + 0x0004, MOGHOUSE_EXIT. Completed: a talk (..., 10); a Lilac (..., 4), a rose (...,
+# 5), a chip (..., 0): no finish handler, nothing taken.
+lists WindurstWalls/Ojha_Rhawash/onTrigger WindurstWalls/Ojha_Rhawash/onTrade WindurstWalls/onEventFinish/10000
+char zone=WindurstWalls pos=-207.9,0,-134.9 job=WAR lvl=1
+item BoneChip
+item RedRose x3
+item Lilac x2
+login
+trigger Ojha_Rhawash                          # available: 10000 (0, 239, 10)
+finish option=10                              # not 3002, no trade: begun
+trigger Ojha_Rhawash                          # accepted: 10000 (0, 239, 10)
+finish option=10                              # accepted already: nothing
+trade Ojha_Rhawash BoneChip x1                # not a flower: 10000 (0, 239, 0)
+finish option=0                               # nothing; the chip kept
+trade Ojha_Rhawash RedRose x1                 # one flower alone: 10000 (0, 239, 1)
+finish option=1                               # the rose taken
+trade Ojha_Rhawash RedRose x1 BoneChip x1     # with an extra (tradeHasExactly): 10000 (0, 239, 0)
+finish option=0
+trade Ojha_Rhawash Lilac x1 BoneChip x1       # the Lilac with an extra: 10000 (0, 239, 0)
+finish option=0
+trade Ojha_Rhawash Lilac x1                   # the Lilac alone: 10000 (0, 239, 2)
+fill-inventory
+finish option=3002                            # a full bag (fame only: complete cannot fail): completed (fame 0); the Lilac taken; the exit flag + 4; MOGHOUSE_EXIT
+free-inventory
+trigger Ojha_Rhawash                          # completed: 10000 (0, 239, 10)
+finish option=10                              # no finish handler: nothing
+trade Ojha_Rhawash Lilac x1                   # completed: 10000 (0, 239, 4)
+finish option=3002                            # no finish handler: the Lilac kept
+trade Ojha_Rhawash RedRose x1                 # 10000 (0, 239, 5)
+finish option=1                               # nothing taken
+trade Ojha_Rhawash BoneChip x1                # 10000 (0, 239, 0)
+finish option=0

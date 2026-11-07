@@ -1,0 +1,13 @@
+# Mimeo Stone, GM-set states: the stone held with the quest's Progress local var 1 (a GM's: the Cradle's event started
+# and not finished, which no client can leave so): the Cradle: nil, its default (NOTHING_OUT_OF_ORDINARY). The stone
+# held at NumFades 4 and Progress 0 (a GM's): the Cradle shows BRIGHTNESS + 4 and gives the Fire Feather.
+lists AttohwaChasm/Luminant/onTrigger AttohwaChasm/Cradle_of_Rebirth/onTrigger AttohwaChasm/onEventFinish/2
+char zone=AttohwaChasm pos=241,19,-150 job=WAR lvl=75
+login
+trigger Luminant                        # the stone; the timer
+localvar HQuest[mimeoStone]Progress 1
+trigger Cradle_of_Rebirth               # Progress 1: nil; the default NOTHING_OUT_OF_ORDINARY
+localvar HQuest[mimeoStone]Progress 0
+localvar HQuest[mimeoStone]NumFades 4
+trigger Cradle_of_Rebirth               # NumFades 4: BRIGHTNESS + 4; krtu; Progress 1; 2
+finish                                  # the stone taken; the Fire Feather

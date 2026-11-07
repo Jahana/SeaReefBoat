@@ -1,0 +1,81 @@
+# Water Way to Go (windurst 16): Ohbiru-Dohbiru in Windurst Waters, the Giddeus Spring. Food for Thought completed by GM
+# (its mustZone clear). The guard (each side: Overnight Delivery completed, fame level 3, its mustZone), the offer 352
+# (declined; accepted: Rhinostery Canteen, begun), 353 with a canteen, the spring's 55 (the canteen filled), 353 with the
+# water only, the hand-in 355 (900: completed, mustZone; once, see below), 356 while the mustZone holds; after
+# a zone change the repeat: 352 at fame level 4 (declined; accepted: a canteen, Prog 1, the status stays completed),
+# 353, the spring's 55 again, 355 again (completed again, once: fame +16, +900 gil, the vars cleared); at fame level 5,
+# nil. The first hand-in runs two 355 finishes: the lookup checks each section's entry when it reaches it, so section
+# 2's 355 (accepted) completes the quest and section 3's 355 (completed) then runs as well; since user ruling
+# 2026-11-05 (kept bugs) the second only clears the first's latch, so it pays 900 gil and fame +16 once (the Lua paid
+# 1800 gil and fame +32). A zone change clears a mustZone only into another zone (player.lua: a `]mustZone` var whose zone differs
+# from the new one is reset; an in-place rezone after a trip to Giddeus keeps it), so the flow zones out to Giddeus.
+# `trade Giddeus_Spring` is the first of the two springs (id order: 226.9, 0.2, -299.3); both carry the name.
+# Trades that are no match: while available (the guard false, then met), and while completed: the canteen and a chip
+# at the spring at Prog 1, the water and a chip at Ohbiru.
+# Defaults: Ohbiru 344 (no script); the Giddeus Spring 54 (DefaultActions; no script, no trade). Also named: Ohbiru by
+# Food for Thought (completed by GM: no mustZone, nothing), Overnight Delivery (completed: 351 below fame level 6,
+# replaceDefault, priority 20: under this quest's Event and Progress lines), Say It with Flowers (its Prog 0: nothing),
+# Toraimarai Turmoil (needs Blue Ribbon Blues), CoP 3-3 and Windurst missions (not current).
+lists WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/Ohbiru-Dohbiru/onTrade Giddeus/Giddeus_Spring/onTrade WindurstWaters/onEventFinish/352 WindurstWaters/onEventFinish/355 Giddeus/onEventFinish/55
+warning: quests: windurst.water_way_to_go: one finish of 355 ran 2 handlers (2/-/onEventFinish:355, 3/-/onEventFinish:355) -- the Lua runs it twice too: its sections at Water_Way_to_Go.lua:99 (accepted) and :195 (completed) at lua-at f47cdaa7 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match (since user ruling 2026-11-05, kept bugs, the second only clears the first's latch: paid once)
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought completed
+fame Windurst 125
+item BoneChip
+login
+trade Ohbiru-Dohbiru BoneChip x1            # available: no trade handler, nothing
+trigger Ohbiru-Dohbiru                      # Overnight Delivery not completed: not met; his default 344
+finish
+quest Windurst.OvernightDelivery completed
+fame Windurst 124
+trigger Ohbiru-Dohbiru                      # fame 124 (level 2): not met; Overnight Delivery's 351
+finish
+fame Windurst 125
+charvar Quest[2][15]mustZone 238            # Overnight Delivery's mustZone set by GM
+trigger Ohbiru-Dohbiru                      # not met; 351
+finish
+charvar Quest[2][15]mustZone 0
+trade Ohbiru-Dohbiru BoneChip x1            # available, the guard met (Overnight Delivery completed, fame 125, no mustZone): no trade handler, nothing
+trigger Ohbiru-Dohbiru                      # guard met: 352 (0, Canteen of Giddeus Water)
+finish option=1                             # declined: nothing
+trigger Ohbiru-Dohbiru                      # 352 again
+finish option=0                             # Rhinostery Canteen given; begun
+trigger Ohbiru-Dohbiru                      # accepted, a canteen held: event 353
+finish
+trade Ohbiru-Dohbiru RhinosteryCanteen x1   # the empty canteen: nil
+warp 228.4,0.2,-299.3 Giddeus
+trade Giddeus_Spring BoneChip x1            # not the canteen: nil
+trade Giddeus_Spring RhinosteryCanteen x1 BoneChip x1  # the canteen and a chip: not a match, nil
+trade Giddeus_Spring RhinosteryCanteen x1   # accepted, the canteen: 55
+finish                                      # Canteen of Giddeus Water given; the empty canteen taken
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Ohbiru-Dohbiru                      # the water held, no empty canteen: 353
+finish
+trade Ohbiru-Dohbiru CanteenOfGiddeusWater x1 BoneChip x1  # the water and a chip: not a match, nil
+trade Ohbiru-Dohbiru CanteenOfGiddeusWater x1  # 355 (900)
+finish                                      # completed: the water taken; section 2's 355 then section 3's (the latch only): +900 gil and fame +16 once; mustZone 238
+trigger Ohbiru-Dohbiru                      # completed, mustZone: event 356 (0, Canteen of Giddeus Water)
+finish
+trade Ohbiru-Dohbiru BoneChip x1            # completed, not the water: nil
+warp 228.4,0.2,-299.3 Giddeus               # another zone: the mustZone cleared
+warp 24.0,-5.38,-197.7 WindurstWaters
+fame Windurst 324
+trigger Ohbiru-Dohbiru                      # completed, Prog 0, fame 324 (level 4 < 5): 352
+finish option=1                             # declined: nothing
+trigger Ohbiru-Dohbiru                      # 352 again
+finish option=0                             # a canteen; quest:begin (the status stays completed); Prog 1
+trigger Ohbiru-Dohbiru                      # Prog 1, a canteen held: 353
+finish
+warp 228.4,0.2,-299.3 Giddeus
+trade Giddeus_Spring RhinosteryCanteen x1 BoneChip x1  # completed, Prog 1, the canteen and a chip: not a match, nil
+trade Giddeus_Spring RhinosteryCanteen x1   # completed, Prog 1: 55
+finish                                      # the water; the canteen taken
+warp 24.0,-5.38,-197.7 WindurstWaters
+trade Ohbiru-Dohbiru CanteenOfGiddeusWater x1 BoneChip x1  # completed, the water and a chip: not a match, nil
+trade Ohbiru-Dohbiru CanteenOfGiddeusWater x1  # completed: 355 (900)
+finish                                      # completed again (section 3's 355 only): fame +16, +900 gil, the vars cleared (Prog 0), mustZone
+warp 228.4,0.2,-299.3 Giddeus               # the mustZone cleared
+warp 24.0,-5.38,-197.7 WindurstWaters
+fame Windurst 325
+trigger Ohbiru-Dohbiru                      # completed, Prog 0, fame level 5: nil; Overnight Delivery's 351
+finish

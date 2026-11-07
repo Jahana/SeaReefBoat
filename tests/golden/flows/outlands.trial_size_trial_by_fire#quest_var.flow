@@ -1,0 +1,15 @@
+# Trial-Size Trial by Fire (outlands 15), the quest's own var at the completion: a SMN of level 20 with the quest
+# accepted, the Mini Tuning Fork of Fire and Quest[5][15]Prog 1 (GMs). The fork's trade to FP_Entrance: 32000; option 17
+# (index 1, arena 1): registered, entered, the fork taken; a GM's bfwin: 32001, finished: Ifrit learned, the
+# Scroll of Instant Warp, Windurst fame +20, the raw player:completeQuest. The raw completeQuest does no cleanup:
+# Quest[5][15]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByFire accepted
+item MiniTuningForkOfFire
+charvar Quest[5][15]Prog 1                # a GM: the quest's own var
+login
+trade FP_Entrance MiniTuningForkOfFire x1  # the fork: the entry menu 32000
+update 32000 option=17                    # index 1, arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+bfwin                                     # a GM's win: 32001
+finish                                    # Ifrit learned; the scroll; Windurst fame +20; completed, Prog kept

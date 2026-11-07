@@ -1,0 +1,90 @@
+# Flyers for Regine (sandoria 16): Regine in Port San d'Oria, the fifteen flyer NPCs of the three cities (Port: Answald,
+# Prietta, Miene, Portaure, Auvare; Northern: Coullene, Guilberdrier, Boncort, Capiria, Villion; Southern: Blendare,
+# Rosel, Maugie, Adaunel, Leuveret), Cletae in Southern San d'Oria; a call-only quest whose state is the char var
+# [ffr]deliveryMask. Available: 10 gil to Regine, a flyer to Answald and to Cletae (nothing); Regine's 510 (2), its
+# option 1 (the black magic shop, the script's), option 3 (nothing), option 2 (fifteen flyers, begun). Accepted: Regine
+# with flyers held and the mask not full (510, the script's menu; option 0 the white magic shop); a chip, 9 gil (nothing),
+# 10 gil, 10 gil and a chip, 15 gil (a flyer each, 10 taken); a chip to Answald (nothing); each NPC's flyer
+# (FLYER_ACCEPTED, FFR_<NAME>, its bit, the flyer taken), Answald again (FLYER_ALREADY, kept), Prietta's flyer with a
+# chip and Miene's two flyers (tradeHas: one flyer taken); Cletae: the flyer alone (FLYER_REFUSED), with a chip, two
+# flyers, a chip alone (not exact: nothing). The fifteenth bit: Regine's 603 (completed: fame +20, 440 gil, Advertising
+# Executive, the mask var deleted). Completed: Regine's 510, 10 gil to Regine, a flyer to Answald and to Cletae
+# (nothing).
+# The trigger-area hint (FFR_LOOKS_CURIOUSLY_BASE + offset, quests.ffr.onTriggerAreaEnter from the city's Zone.lua) stays
+# in Lua: a walk into the 10-yalm cylinder round Answald while accepted shows it with bit 0 unset, not once it is set (a
+# warp alone enters no trigger area).
+char zone=PortSanDoria pos=66.3,-8.1,-73.7 job=WAR lvl=30 gil=1000
+item MagicmartFlyer
+item BoneChip x8
+login
+trade Regine gil=10                       # available: nothing
+warp 74.3,-16.0,-128.7 PortSanDoria
+trade Answald MagicmartFlyer x1           # available: nothing (the GM flyer kept)
+warp -187.1,-8.8,14.4 SouthernSanDoria
+trade Cletae MagicmartFlyer x1            # available (status 0, not 1): nothing
+warp 66.3,-8.1,-73.7 PortSanDoria
+trigger Regine                            # available: 510 (2)
+finish option=1                           # the black magic shop (the script's); not begun
+trigger Regine                            # 510 (2)
+finish option=3                           # not option 2: nothing
+trigger Regine                            # 510 (2)
+finish option=2                           # 1 + 14 flyers (16 held with the GM one); begun
+trigger Regine                            # accepted, mask 0, flyers held: 510 (the script's menu)
+finish option=0                           # the white magic shop (the script's)
+trade Regine BoneChip x1                  # no gil: nothing
+trade Regine gil=9                        # under 10: nothing
+trade Regine gil=10                       # exactly 10: a flyer (17 held); the gil taken
+trade Regine BoneChip x1 gil=10           # tradeHas: a flyer (18); 10 gil taken, the chip kept
+trade Regine gil=15                       # tradeHas: a flyer (19); 10 taken, 5 kept
+warp 74.3,-16.0,-128.7 PortSanDoria
+tick 2000                                 # the zone-in settles: walks then enter and leave trigger areas
+walk 60.3,-16.0,-128.7                    # out of Answald's cylinder
+walk 75.3,-16.0,-128.7                    # in again, bit 0 unset: the hint FFR_LOOKS_CURIOUSLY_BASE (Lua)
+trade Answald BoneChip x1                 # no flyer: nothing
+trade Answald MagicmartFlyer x1           # bit 0 unset: FLYER_ACCEPTED, FFR_ANSWALD; bit 0; the flyer taken
+trade Answald MagicmartFlyer x1           # bit 0 set: FLYER_ALREADY; the flyer kept
+walk 60.3,-16.0,-128.7                    # out of the cylinder
+walk 75.3,-16.0,-128.7                    # back in, bit 0 set: no hint
+warp -11.8,-14.0,-95.9 PortSanDoria
+trade Prietta MagicmartFlyer x1 BoneChip x1   # tradeHas: bit 1; only the flyer taken, the chip kept
+warp 2.8,-4.0,-81.4 PortSanDoria
+trade Miene MagicmartFlyer x2             # tradeHas: bit 2; one flyer taken
+warp -20.0,-4.0,-106.9 PortSanDoria
+trade Portaure MagicmartFlyer x1          # bit 3
+warp -35.8,-8.0,40.9 PortSanDoria
+trade Auvare MagicmartFlyer x1            # bit 4
+warp 144.4,0.0,127.6 NorthernSanDoria
+trade Coullene MagicmartFlyer x1          # bit 5
+warp -157.1,12.0,253.8 NorthernSanDoria
+trade Guilberdrier MagicmartFlyer x1      # bit 6
+warp -154.2,-5.2,49.2 NorthernSanDoria
+trade Boncort MagicmartFlyer x1           # bit 7
+warp -125.4,0.0,130.5 NorthernSanDoria
+trade Capiria MagicmartFlyer x1           # bit 8
+warp -155.5,4.0,263.8 NorthernSanDoria
+trade Villion MagicmartFlyer x1           # bit 9
+warp 35.0,2.0,-30.1 SouthernSanDoria
+trade Blendare MagicmartFlyer x1          # bit 10
+warp 71.9,0.0,41.1 SouthernSanDoria
+trade Rosel MagicmartFlyer x1             # bit 11
+warp 107.1,2.0,-16.7 SouthernSanDoria
+trade Maugie MagicmartFlyer x1            # bit 12
+warp 82.4,-7.4,-24.6 SouthernSanDoria
+trade Adaunel MagicmartFlyer x1           # bit 13
+warp -187.1,-8.8,14.4 SouthernSanDoria
+trade Cletae MagicmartFlyer x1            # accepted, the flyer alone: FLYER_REFUSED; kept
+trade Cletae MagicmartFlyer x1 BoneChip x1    # not exact (an extra item): nothing
+trade Cletae MagicmartFlyer x2            # not exact (two flyers): nothing
+trade Cletae BoneChip x1                  # a wrong item: nothing
+warp -134.3,-8.8,22.0 SouthernSanDoria
+trade Leuveret MagicmartFlyer x1          # bit 14: all fifteen
+warp 66.3,-8.1,-73.7 PortSanDoria
+trigger Regine                            # mask full (flyers still held): 603
+finish                                    # completed: fame +20, 440 gil, Advertising Executive; the mask var deleted
+trigger Regine                            # completed: 510 (the script's menu)
+finish option=4                           # nothing
+trade Regine gil=10                       # completed: nothing
+warp 74.3,-16.0,-128.7 PortSanDoria
+trade Answald MagicmartFlyer x1           # completed: nothing
+warp -187.1,-8.8,14.4 SouthernSanDoria
+trade Cletae MagicmartFlyer x1            # completed: nothing

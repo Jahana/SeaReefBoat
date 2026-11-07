@@ -1,0 +1,35 @@
+# Moment of Truth's Progress replies against the rival containers at the same places (task 5 review Important 1; see
+# waking_the_colossus#rivals). main (a level 50 Corsair at the Whitegate's area 5, 802 at Prog 0): Against All Odds
+# (available: 797, a Progress): the two tie, the first container's, then the other rotated (an Event in place of 802
+# would lose both entries); 802's finish sets Prog 1, 797's begins Against All Odds. bob (Jade Sepulcher's _1v0, 3 at
+# Prog 3): Puppet in Peril (ToAU 29, status 0: 4, a Progress): 4 first, whose finish sets the mission status 1; a GM
+# resets it; 3 rotated.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/5 JadeSepulcher/_1v0/onTrigger
+char zone=AhtUrhganWhitegate pos=80,-6,-140 job=COR lvl=50 nation=1
+char bob zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75 nation=1
+quest AhtUrhgan.GivePeaceAChance completed
+quest AhtUrhgan.MomentOfTruth accepted
+charvar Quest[6][30]Prog 0
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.EquippedForAllOccasions completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+bob: quest AhtUrhgan.GivePeaceAChance completed
+bob: quest AhtUrhgan.MomentOfTruth accepted
+bob: charvar Quest[6][30]Prog 3
+bob: mission Toau PuppetInPeril current
+login
+tick 1000
+tick 1000
+tick 1000
+walk 80,-6,-130                         # area 5: 797 and 802 tie: the first container's
+finish
+quest AhtUrhgan.AgainstAllOdds available   # a GM: 797's begin undone
+walk 80,-6,-140
+walk 80,-6,-130                         # rotated: the other
+finish                                  # Prog 1
+bob: login
+bob: trigger _1v0                       # 4 and 3 tie: the mission's first
+bob: finish
+bob: missionstatus Toau 0               # a GM
+bob: trigger _1v0                       # rotated: 3
+bob: finish

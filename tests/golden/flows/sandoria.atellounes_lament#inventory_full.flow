@@ -1,0 +1,19 @@
+# Atelloune's Lament (sandoria 114): 890 finished with option 0 (begun: any option begins it); then complete fails
+# twice and the wing stays. A full inventory (891: no room for the gloves: not completed, the wing kept); then, with
+# room, the Trainee Gloves already held (GM; rare: giveItem refuses them, not completed, the wing kept). The main flow
+# takes the true side.
+lists SouthernSanDoria/Atelloune/onTrigger SouthernSanDoria/Atelloune/onTrade SouthernSanDoria/onEventFinish/890 SouthernSanDoria/onEventFinish/891
+char zone=SouthernSanDoria pos=124.9,0.0,84.7 job=WAR lvl=30
+fame Sandoria 50
+quest CrystalWar.SeeingSpots completed
+item LadybugWing
+login
+trigger Atelloune                         # fame level 2, Seeing Spots completed: 890
+finish option=0                           # begun (option 0 too)
+fill-inventory
+trade Atelloune LadybugWing x1            # 891
+finish                                    # no room for the gloves: not completed; the wing kept
+free-inventory
+item TraineeGloves                        # GM: the rare gloves already held
+trade Atelloune LadybugWing x1            # 891
+finish                                    # the gloves held (rare): not completed; the wing kept

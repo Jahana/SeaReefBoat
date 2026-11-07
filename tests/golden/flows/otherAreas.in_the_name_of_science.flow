@@ -1,0 +1,66 @@
+# In the Name of Science (otherAreas 76): Yurim (Tavnazian Safehold; his DefaultActions 527 alternates with his script:
+# each script talk follows a default talk, and a script talk that plays nothing plays the default instead). A WAR 75.
+# The Warriors' Path current (not completed: CoP completion is a mission below the current one): no arm. A base traded
+# while available: nothing. Emptiness Bleeds current (a GM; The Warriors' Path completed): 524, begun (no option read).
+# Accepted, no target: 525. A pie alone: nothing. A pie with the Karin Obi base: 526 (Silver Obi, Red Chip), the target
+# 15435; the pie is taken too (the pie arm's tradeHas confirms it before its target test fails). A target: 532 or 528
+# (the draw; the base). A base again with a target: nothing. The pie: 531 (pie, 0, 1). The organs with a pie (the organ
+# arm first): 529 (Gorget, Silver Earring, Silver Obi); a full bag: giveItem false (ITEM_CANNOT_BE_OBTAINED, the Karin
+# Obi), nothing else; one free slot (the bag one larger: the test is < 1): the Karin Obi, the target 0, completed, the
+# organs taken (the pie kept). Completed, no target: 525. The base again: 526; the organs: 529; the Karin Obi held (rare):
+# giveItem false, not completed again, the target kept, the organs kept. Completed with a target: 532 or 528.
+char zone=TavnazianSafehold pos=82.5,-25.0,3.5 job=WAR lvl=75
+mission Cop TheWarriorsPath current
+item SilverObi
+item SilverObi
+item RedChip
+item RedChip
+item ApplePie x4
+item PhuaboOrgan x12
+item XzomitOrgan x6
+item SampleOfLuminianTissue x6
+login
+trigger Yurim                           # UseFallback 0: the default 527
+finish
+trigger Yurim                           # the script: The Warriors' Path current: no arm: the default 527
+finish
+trade Yurim SilverObi x1 RedChip x1     # available, no target: nothing (accepted or completed wanted)
+mission Cop TheWarriorsPath completed   # a GM (no current mission: addMission warns over a current one)
+mission Cop EmptinessBleeds current     # a GM: The Warriors' Path completed
+trigger Yurim                           # the default 527
+finish
+trigger Yurim                           # available: 524 (Silver Obi, Silver Earring, Gorget)
+finish option=1                         # begun (no option read)
+trigger Yurim                           # the default 527
+finish
+trigger Yurim                           # accepted, no target: 525 (Silver Obi, Silver Earring, Gorget)
+finish
+trade Yurim ApplePie x1                 # accepted, no target, no base: nothing
+trade Yurim ApplePie x1 SilverObi x1 RedChip x1   # the Karin Obi base: target 15435; 526 (Silver Obi, Red Chip)
+finish                                  # the Silver Obi, the Red Chip and the pie taken
+trigger Yurim                           # the default 527
+finish
+trigger Yurim                           # a target: 532 or 528 (Silver Obi, Red Chip)
+finish
+trade Yurim SilverObi x1 RedChip x1     # a target, no pie, not its organs: nothing
+trade Yurim ApplePie x1                 # accepted, a target: 531 (Apple Pie, 0, 1)
+finish                                  # the pie taken
+fill-inventory
+trade Yurim PhuaboOrgan x7 XzomitOrgan x3 SampleOfLuminianTissue x3 ApplePie x1   # the organs: 529
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (Karin Obi); nothing else
+storage inventory 31                    # one free slot
+trade Yurim PhuaboOrgan x7 XzomitOrgan x3 SampleOfLuminianTissue x3 ApplePie x1   # 529
+finish option=1                         # the Karin Obi; the target 0; completed; the organs taken, the pie kept
+trigger Yurim                           # the default 527
+finish
+trigger Yurim                           # completed, no target: 525
+finish
+trade Yurim SilverObi x1 RedChip x1     # completed, no target: the Karin Obi base again: 526
+finish                                  # both taken
+item PhuaboOrgan x2                     # a GM: 7 Phuabo again
+trade Yurim PhuaboOrgan x7 XzomitOrgan x3 SampleOfLuminianTissue x3   # 529
+finish                                  # the Karin Obi held (rare): ITEM_CANNOT_BE_OBTAINED; the target kept; kept
+trigger Yurim                           # the default 527
+finish
+trigger Yurim                           # completed, a target: 532 or 528 (Silver Obi, Red Chip)
+finish

@@ -1,0 +1,49 @@
+# Atop the Highest Mountains (jeuno 129, limit break 2): Maat in Ru'Lude Gardens (the first of that name), the three ???
+# in Xarcabard (no script; default ONLY_SHARDS). A level 51 Warrior at level cap 55 (a GM's setLevelCap before login),
+# MAX_LEVEL 99, OLDSCHOOL_G2 false. Available: a stone (no trade handler: nothing), 82 answered 0 and 2 (not 1:
+# nothing), then 1 (begun). Accepted: 83; a stone (no trade handler: nil). Each ??? gives its frigicite (Round, Square,
+# Triangular), then nil once it is held (the default ONLY_SHARDS). Maat with one frigicite missing at a time (a GM's
+# delKeyItem, then its addKeyItem back): 83 each time; with the three: 84 (completed: Summit Breaker, the frigicites
+# taken, level cap 60, YOUR_LEVEL_LIMIT_IS_NOW_60); Whence Blows the Wind then answers (cap 60, level 51 < 56:
+# MAAT_LB3_PLACEHOLDER); a GM's cap 55 again: this quest completed, no section (In Defiant Challenge wants level 50):
+# MAAT_DIALOG.
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/82 RuludeGardens/onEventFinish/84 Xarcabard/qm_boreal_tiger/onTrigger Xarcabard/qm_boreal_coeurl/onTrigger Xarcabard/qm_boreal_hound/onTrigger
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=51
+levelcap 55
+item FlintStone
+login
+trade Maat FlintStone x1                # available (cap 55): no trade handler, nothing
+trigger Maat                            # cap 55, level 51: 82
+finish option=0                         # not 1: nothing
+trigger Maat                            # 82
+finish option=2                         # not 1: nothing
+trigger Maat                            # 82
+finish option=1                         # begun
+trigger Maat                            # accepted, no frigicite: 83
+finish
+trade Maat FlintStone x1                # accepted: no trade handler, nil
+warp 340.3,-28.2,381.3 Xarcabard
+trigger qm_boreal_tiger                 # the Round Frigicite (keyItem reply)
+trigger qm_boreal_tiger                 # held: nil; ONLY_SHARDS
+trigger qm_boreal_coeurl                # the Square Frigicite
+trigger qm_boreal_coeurl                # held: nil; ONLY_SHARDS
+trigger qm_boreal_hound                 # the Triangular Frigicite
+trigger qm_boreal_hound                 # held: nil; ONLY_SHARDS
+warp 12.4,3.1,119.5 RuludeGardens
+delkeyitem RoundFrigicite               # a GM: the Round one missing
+trigger Maat                            # 83
+finish
+keyitem RoundFrigicite                  # a GM: back
+delkeyitem SquareFrigicite              # the Square one missing
+trigger Maat                            # 83
+finish
+keyitem SquareFrigicite
+delkeyitem TriangularFrigicite          # the Triangular one missing
+trigger Maat                            # 83
+finish
+keyitem TriangularFrigicite
+trigger Maat                            # the three: 84
+finish                                  # completed: Summit Breaker, the frigicites taken, level cap 60, YOUR_LEVEL_LIMIT_IS_NOW_60
+trigger Maat                            # cap 60: Whence Blows the Wind, level 51: MAAT_LB3_PLACEHOLDER
+levelcap 55                             # a GM: cap 55 again
+trigger Maat                            # this quest completed: no section; MAAT_DIALOG

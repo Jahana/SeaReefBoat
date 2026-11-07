@@ -1,0 +1,118 @@
+# Lure of the Wildcat (Jeuno) (jeuno 90): Ajithaam in Upper Jeuno and twenty NPCs in Upper Jeuno, Ru'Lude Gardens, Lower
+# Jeuno and Port Jeuno. The guard (ENABLE_TOAU 1, the default): a trade while available (no quest trade handler; his
+# script's trade wants 300 gil and the quest completed: nothing); 10088 (the White Sentinel Badge, begun); Ajithaam's
+# 10089 at Prog 0, 10090 with some bits, 10091 with all twenty (the badge taken, KEYITEM_LOST, completed: the White
+# Invitation Card); each NPC's event once (its bit unset), then, with its bit set, nil: its script or default answers.
+# Completed: no section; Ajithaam's script starts 10176 only from ToAU's President Salaheem (nothing here), so his
+# default 10092 plays. #toau_off and #toau_fraction are the guard's other side, #mask the isFull edges, #ajithaam his
+# replies' kinds (against his script), #kinds and #adolie the NPC events' kinds, #mid_event the finishes outside their
+# states. Ru'Lude's second Crooked Arrow (17772719) is cutscene_only: the engine refuses a talk to it (no handler runs).
+# The char is a WAR of level 20 at fame 0, so the other quests at these NPCs stay silent or lose to this quest's
+# Progress events: Unlisted Qualities (Luto Mewrilah's available 10031, importantOnce: an Event; with bit 7 set it
+# answers, and its cancel option leaves it available), Child's Play (Karl: not offered), Tenshodo Membership
+# (Sutarara's script: completed only), Cook's Pride / The Kind Cardian (Naruru's script: its standard 98), Shami's 23,
+# Sagheera's SAGHEERA_NO_LIMBUS_ACCESS (no event), Hinda's local var (161 / 10128). The Gobbiebag Part I's 43 at
+# Bluffnix is a Progress event too (fame level 1, an inventory of 30): the two tie, the first in the list (10056) plays,
+# and with bit 12 set 43 plays (option 1: not begun). Lower Jeuno's zone-in is the Mog House zone event 10094 (the warp
+# answers it).
+lists UpperJeuno/Ajithaam/onTrigger UpperJeuno/onEventFinish/10088 UpperJeuno/onEventFinish/10091 UpperJeuno/Sibila-Mobla/onTrigger UpperJeuno/Shiroro/onTrigger UpperJeuno/Luto_Mewrilah/onTrigger UpperJeuno/Renik/onTrigger UpperJeuno/Hinda/onTrigger RuludeGardens/Albiona/onTrigger RuludeGardens/Crooked_Arrow/onTrigger RuludeGardens/Muhoho/onTrigger RuludeGardens/Adolie/onTrigger RuludeGardens/Yavoraile/onTrigger LowerJeuno/Sutarara/onTrigger LowerJeuno/Saprut/onTrigger LowerJeuno/Bluffnix/onTrigger LowerJeuno/Naruru/onTrigger LowerJeuno/Gurdern/onTrigger PortJeuno/Red_Ghost/onTrigger PortJeuno/Karl/onTrigger PortJeuno/Shami/onTrigger PortJeuno/Rinzei/onTrigger PortJeuno/Sagheera/onTrigger
+char zone=UpperJeuno pos=-79.7,0,161.5 job=WAR lvl=20
+item BoneChip
+login
+trade Ajithaam BoneChip x1     # available: no trade handler; his script's trade (300 gil, the quest completed): nothing
+trigger Renik                  # available: no handler, Renik's default 168
+finish
+trigger Ajithaam               # ENABLE_TOAU 1: 10088
+finish                         # the White Sentinel Badge, begun
+trigger Ajithaam               # Prog 0: 10089
+finish
+trigger Renik                  # bit 8 unset: 10086
+finish                         # bit 8
+trigger Renik                  # bit 8 set: nil, 168
+finish
+trigger Ajithaam               # some bits: his last answer was the Event 10089, so the lookup tries his script first
+                               # (UseFallback); it starts nothing (no ToAU mission), so the quest's 10090 plays
+finish
+trigger Sibila-Mobla           # 10083
+finish                         # bit 5
+trigger Sibila-Mobla           # bit set: nil; her default 98 (her script has no onTrigger)
+finish
+trigger Shiroro                # 10084
+finish                         # bit 6
+trigger Shiroro                # bit set: nil; his default 85
+finish
+trigger Luto_Mewrilah          # 10085 (Progress, above Unlisted Qualities' 10031 importantOnce)
+finish                         # bit 7
+trigger Luto_Mewrilah          # bit set: nil; Unlisted Qualities' 10031 (available)
+finish option=1073741824     # cancelled: Unlisted Qualities stays available
+trigger Hinda                  # 10087
+finish                         # bit 9
+trigger Hinda                  # bit set: nil; her script's 161
+finish                         # her script: spokenHinda 1
+warp -4.4,9,-30.4 RuludeGardens
+trigger Albiona                # 10089
+finish                         # bit 0
+trigger Albiona                # bit set: nil; her default 146
+finish
+trigger Crooked_Arrow          # 10090
+finish                         # bit 1
+trigger Crooked_Arrow          # bit set: nil; his default 149
+finish
+trigger Muhoho                 # 10093
+finish                         # bit 2
+trigger Muhoho                 # bit set: nil; his default 152
+finish
+trigger Adolie                 # 10091
+finish                         # bit 3
+trigger Adolie                 # bit set: nil; her default 158
+finish
+trigger Yavoraile              # 10092
+finish                         # bit 4
+trigger Yavoraile              # bit set: nil; his default 118 (his script has no onTrigger)
+finish
+warp 31.2,-0.1,-1.1 LowerJeuno
+trigger Sutarara               # 10055
+finish                         # bit 10
+trigger Sutarara               # bit set: nil; his script: nothing (Tenshodo Membership not completed); his default 208
+finish
+trigger Saprut                 # 10054
+finish                         # bit 11
+trigger Saprut                 # bit set: nil; his default 224
+finish
+trigger Bluffnix               # 10056 ties with The Gobbiebag Part I's 43: 10056, the first in the list
+finish                         # bit 12
+trigger Bluffnix               # bit set: nil; The Gobbiebag Part I's 43 (31, 0, 1)
+finish option=1                # not 0: The Gobbiebag Part I not begun
+trigger Naruru                 # 10053
+finish                         # bit 13
+trigger Naruru                 # bit set: nil; his script's 98
+finish
+trigger Gurdern                # 10052
+finish                         # bit 14
+trigger Gurdern                # bit set: nil; his default 112
+finish
+warp -95,0,-3.3 PortJeuno
+trigger Red_Ghost              # 314
+finish                         # bit 15
+trigger Red_Ghost              # bit set: nil; Unlisted Qualities available: no handler; his default 34
+finish
+trigger Karl                   # 316
+finish                         # bit 16
+trigger Karl                   # bit set: nil; his default 58
+finish
+trigger Shami                  # 317
+finish                         # bit 17
+trigger Shami                  # bit set: nil; his script's 23
+finish
+trigger Rinzei                 # 315
+finish                         # bit 18
+trigger Rinzei                 # bit set: nil; his default 56
+finish
+trigger Sagheera               # 313
+finish                         # bit 19: Prog 0xFFFFF
+trigger Sagheera               # bit set: nil; her script's SAGHEERA_NO_LIMBUS_ACCESS (no event)
+warp -79.7,0,161.5 UpperJeuno
+trigger Ajithaam               # all twenty: 10091
+finish                         # the badge taken, KEYITEM_LOST, completed: the White Invitation Card
+trigger Ajithaam               # completed: no section; his script: nothing (no ToAU mission); his default 10092
+finish

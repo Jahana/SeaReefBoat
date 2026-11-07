@@ -1,0 +1,41 @@
+# Elderly Pursuits (otherAreas 75): Tavnazian Safehold's Despachiaire (no script, default 106), Southern San d'Oria's
+# Rouva (a script whose onTrigger does nothing; default 662), Carpenters' Landing's qm_para (default
+# NOTHING_OUT_OF_ORDINARY) and the NM Para. A level 75 Warrior with no CoP mission (no mission reply on Despachiaire).
+# Secrets of Ovens Lost not completed: no section, 106. Completed (a GM): Despachiaire 517, finished: begun, the Antique
+# Amulet; again: no handler at Prog 0, 106. Rouva with the amulet: 747 (Prog 1), and again at Prog 1: 747 (any Prog up
+# to 2). Carpenters' Landing: the ??? at Prog 1: Para popped and claimed, STENCH_OF_DECAY; again (Para up: the pop
+# fails): nil, its default. Para killed (the first Para): Prog 2. The ???: Prog 3, the amulet taken, the Cathedral
+# Medallion, POLISH_MUSHROOM_SPORE, KEYITEM_OBTAINED; again (Prog 3: section 2 off): its default. Rouva with the
+# medallion: 748 (Prog 4); again: 748 (Prog 4 again). Despachiaire at Prog 4: 518, finished: completed (the Elegant
+# Ribbon), the medallion taken. Completed: no section, 106.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/517 TavnazianSafehold/onEventFinish/518 SouthernSanDoria/Rouva/onTrigger SouthernSanDoria/onEventFinish/747 SouthernSanDoria/onEventFinish/748 CarpentersLanding/qm_para/onTrigger CarpentersLanding/Para/onMobDeath
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+login
+trigger Despachiaire                    # Secrets of Ovens Lost not completed: no section; 106
+finish
+quest OtherAreas.SecretsOfOvensLost completed # a GM
+trigger Despachiaire                    # 517
+finish                                  # begun; the Antique Amulet
+trigger Despachiaire                    # Prog 0: no handler; 106
+finish
+warp -14.7,2.1,11.8 SouthernSanDoria
+trigger Rouva                           # the amulet: 747
+finish                                  # Prog 1
+trigger Rouva                           # Prog 1, the amulet: 747
+finish                                  # Prog 1
+warp -414.6,0,-363.5 CarpentersLanding
+trigger qm_para                         # Prog 1: Para popped, claimed; STENCH_OF_DECAY
+trigger qm_para                         # Para up: the pop fails; nil; its default
+kill PARA                               # the first Para, Prog 1: Prog 2
+trigger qm_para                         # Prog 2, the amulet: Prog 3; the medallion; POLISH_MUSHROOM_SPORE; KEYITEM_OBTAINED
+trigger qm_para                         # Prog 3: section 2 off; its default
+warp -14.7,2.1,11.8 SouthernSanDoria
+trigger Rouva                           # Prog 3, the medallion: 748
+finish                                  # Prog 4
+trigger Rouva                           # Prog 4, the medallion: 748
+finish                                  # Prog 4
+warp 112.7,-40,-85.5 TavnazianSafehold
+trigger Despachiaire                    # Prog 4: 518
+finish                                  # completed; the Elegant Ribbon; the medallion taken
+trigger Despachiaire                    # completed: no section; 106
+finish

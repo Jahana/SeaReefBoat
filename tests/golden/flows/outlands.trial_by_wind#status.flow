@@ -1,0 +1,71 @@
+# Trial by Wind (outlands 194), each status operand of Agado-Pugado's arms alone (GM-set statuses, the rest held
+# still). 66's two halves: TrialByWind_date 1 (behind) at fame level 4: available 70, completed 66; fame level 5 with
+# the date ahead (2000000000): completed 70, available 66. The accepted arms at fame level 1 with the date ahead: no
+# key item: available 70, completed 70, accepted 107; the fork: available 70, accepted 67, completed 70; the
+# whisper: available 70, accepted 69, completed 70. The finishes read no status (GM changes while the event is open):
+# 66 option 1 finished while accepted (addQuest on an accepted quest: no change; TrialByWind_date 0; the fork), 107
+# finished while completed (a fork), 69 finished while available (the Bubbly Water, completed from available).
+char zone=Rabao pos=-16.5,7.8,-10.5 job=WAR lvl=75
+fame Sandoria 244
+fame Bastok 243                           # Selbina-Rabao (244 + 243) * 2 / 3 = 324
+charvar TrialByWind_date 1
+login
+trigger Agado-Pugado                      # available, fame level 4, date behind: 70
+finish
+quest Outlands.TrialByWind completed
+trigger Agado-Pugado                      # completed, date behind: 66
+finish option=0                           # declined
+fame Sandoria 244
+fame Bastok 244                           # Selbina-Rabao 325
+charvar TrialByWind_date 2000000000
+trigger Agado-Pugado                      # completed, fame level 5, date ahead: 70
+finish
+quest Outlands.TrialByWind available
+trigger Agado-Pugado                      # available, fame level 5: 66
+finish option=0                           # declined
+fame Sandoria 0
+fame Bastok 0
+trigger Agado-Pugado                      # available, fame level 1, no key item: 70
+finish
+quest Outlands.TrialByWind completed
+trigger Agado-Pugado                      # completed (date ahead), no key item: 70
+finish
+quest Outlands.TrialByWind available
+quest Outlands.TrialByWind accepted
+trigger Agado-Pugado                      # accepted, no key item: 107
+finish                                    # the fork
+quest Outlands.TrialByWind completed
+trigger Agado-Pugado                      # completed (date ahead), the fork: 70
+finish
+quest Outlands.TrialByWind available
+trigger Agado-Pugado                      # available, the fork: 70
+finish
+quest Outlands.TrialByWind accepted
+trigger Agado-Pugado                      # accepted, the fork: 67
+finish
+delkeyitem TuningForkOfWind
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # accepted, the whisper alone: 69 (0, fork, 3)
+finish option=3                           # the Wind Ring: completed; TrialByWind_date 1800025200
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # completed (date ahead), the whisper: 70
+finish
+quest Outlands.TrialByWind available
+trigger Agado-Pugado                      # available, fame level 1, the whisper: 70
+finish
+quest Outlands.TrialByWind accepted
+trigger Agado-Pugado                      # 69
+quest Outlands.TrialByWind available
+finish option=4                           # finished while available: the Bubbly Water; completed from available
+quest Outlands.TrialByWind available
+quest Outlands.TrialByWind accepted
+delkeyitem TuningForkOfWind
+trigger Agado-Pugado                      # accepted, no key item: 107
+quest Outlands.TrialByWind completed
+finish                                    # finished while completed: the fork
+fame Sandoria 244
+fame Bastok 244                           # Selbina-Rabao 325
+quest Outlands.TrialByWind available
+trigger Agado-Pugado                      # available, fame level 5: 66
+quest Outlands.TrialByWind accepted
+finish option=1                           # finished while accepted: no change of status; TrialByWind_date 0; the fork held

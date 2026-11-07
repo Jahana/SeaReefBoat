@@ -1,0 +1,104 @@
+# One Good Deed? (windurst 92): the qm_deed's six spawned operands, each alone. Accepted by GM at Prog 0, a level-75
+# WAR in Bibiki Bay, under Perfect Dodge by GM (effect 49: the Peerifools up beside it would put it to sleep and kill
+# it over six rounds, even at level 99). Each round k (0 to 5): the qm_deed (Prog 0, NMKilled 0, none up) spawns the
+# six; the five but PEERIFOOL+k killed; NMKilled 0 by GM (whatever the kills counted); their bodies despawn (three
+# ticks of 15 s: a body is still spawned); the qm_deed with only PEERIFOOL+k up: nil (NOTHING_OUT_OF_ORDINARY);
+# PEERIFOOL+k killed, NMKilled 0 by GM, its body despawns.
+# The kills come one after another with no rezone between them (against the rule's rezone after a kill): a zone
+# change resets NMKilled (a local var) and the spawned Peerifools, which this flow needs to keep.
+lists BibikiBay/qm_deed/onTrigger
+char zone=BibikiBay pos=-319.7,-2.74,-735.3 job=WAR lvl=75
+quest Windurst.OneGoodDeed accepted
+login
+effect 49                                     # a GM: Perfect Dodge (every melee hit evaded)
+trigger qm_deed                               # round 0: none up, NMKilled 0: the six spawn
+kill PEERIFOOL+1
+kill PEERIFOOL+2
+kill PEERIFOOL+3
+kill PEERIFOOL+4
+kill PEERIFOOL+5
+localvar NMKilled 0
+tick 15000                                    # the five bodies despawn
+tick 15000
+tick 15000
+trigger qm_deed                               # only PEERIFOOL up: nil
+kill PEERIFOOL
+localvar NMKilled 0
+tick 15000
+tick 15000
+tick 15000
+trigger qm_deed                               # round 1: none up, NMKilled 0: the six spawn
+kill PEERIFOOL
+kill PEERIFOOL+2
+kill PEERIFOOL+3
+kill PEERIFOOL+4
+kill PEERIFOOL+5
+localvar NMKilled 0
+tick 15000                                    # the five bodies despawn
+tick 15000
+tick 15000
+trigger qm_deed                               # only PEERIFOOL+1 up: nil
+kill PEERIFOOL+1
+localvar NMKilled 0
+tick 15000
+tick 15000
+tick 15000
+trigger qm_deed                               # round 2: none up, NMKilled 0: the six spawn
+kill PEERIFOOL
+kill PEERIFOOL+1
+kill PEERIFOOL+3
+kill PEERIFOOL+4
+kill PEERIFOOL+5
+localvar NMKilled 0
+tick 15000                                    # the five bodies despawn
+tick 15000
+tick 15000
+trigger qm_deed                               # only PEERIFOOL+2 up: nil
+kill PEERIFOOL+2
+localvar NMKilled 0
+tick 15000
+tick 15000
+tick 15000
+trigger qm_deed                               # round 3: none up, NMKilled 0: the six spawn
+kill PEERIFOOL
+kill PEERIFOOL+1
+kill PEERIFOOL+2
+kill PEERIFOOL+4
+kill PEERIFOOL+5
+localvar NMKilled 0
+tick 15000                                    # the five bodies despawn
+tick 15000
+tick 15000
+trigger qm_deed                               # only PEERIFOOL+3 up: nil
+kill PEERIFOOL+3
+localvar NMKilled 0
+tick 15000
+tick 15000
+tick 15000
+trigger qm_deed                               # round 4: none up, NMKilled 0: the six spawn
+kill PEERIFOOL
+kill PEERIFOOL+1
+kill PEERIFOOL+2
+kill PEERIFOOL+3
+kill PEERIFOOL+5
+localvar NMKilled 0
+tick 15000                                    # the five bodies despawn
+tick 15000
+tick 15000
+trigger qm_deed                               # only PEERIFOOL+4 up: nil
+kill PEERIFOOL+4
+localvar NMKilled 0
+tick 15000
+tick 15000
+tick 15000
+trigger qm_deed                               # round 5: none up, NMKilled 0: the six spawn
+kill PEERIFOOL
+kill PEERIFOOL+1
+kill PEERIFOOL+2
+kill PEERIFOOL+3
+kill PEERIFOOL+4
+localvar NMKilled 0
+tick 15000                                    # the five bodies despawn
+tick 15000
+tick 15000
+trigger qm_deed                               # only PEERIFOOL+5 up: nil

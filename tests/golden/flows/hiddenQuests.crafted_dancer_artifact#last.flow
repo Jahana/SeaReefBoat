@@ -1,0 +1,32 @@
+# Crafted Dancer Artifact (hidden quest DncArtifact), the last piece and after: a level 99 Dancer (race 2, Hume female:
+# getGender 0, the female pieces) in Bastok Markets, The Road to Divadom completed, Prog 2, Status 4 (GMs). Matthias:
+# 492, finished on 0: Prog 3. 493 (1, 1, 0), finished on 3: Option 3, Prog 4; the toe shoes' cloths: 495 (2); Timer
+# past and Prog 5 (GMs): 497 (Dancer's Toe Shoes (F), 1), finished with the inventory full: giveItem fails: nothing;
+# with room: the toe shoes, quest:complete (the vars cleared). Then the tiara and bangles (F) held (GMs): section 3:
+# 498. As a Warrior (a GM's job change is not a statement: a second char line, #not_dancer) the checks fail.
+lists BastokMarkets/Matthias/onTrigger BastokMarkets/Matthias/onTrade BastokMarkets/onEventFinish/492 BastokMarkets/onEventFinish/493 BastokMarkets/onEventFinish/495 BastokMarkets/onEventFinish/497
+char zone=BastokMarkets pos=-114.1,-4.3,-105.8 job=DNC lvl=99 race=2
+quest Jeuno.TheRoadToDivadom completed
+charvar HQuest[DncArtifact]Prog 2
+charvar HQuest[DncArtifact]Status 4
+item SquareOfWamouraCloth
+item SquareOfMoblinweave
+item SquareOfGoldBrocade
+login
+trigger Matthias                        # Prog 2: 492
+finish option=0                         # Prog 3
+trigger Matthias                        # 493 (1, 1, 0)
+finish option=3                         # Option 3, Prog 4
+trade Matthias SquareOfWamouraCloth x1 SquareOfMoblinweave x1 SquareOfGoldBrocade x1   # 495 (2)
+finish                                  # Timer tomorrow, Prog 5
+charvar HQuest[DncArtifact]Timer 0      # a GM
+fill-inventory
+trigger Matthias                        # 497 (the toe shoes (F), 1)
+finish                                  # no room: nothing
+free-inventory
+trigger Matthias                        # 497
+finish                                  # the toe shoes; the last: quest:complete, the vars cleared
+item DancersTiaraF                      # a GM
+item DancersBanglesF                    # a GM
+trigger Matthias                        # Prog 0: section 2 fails; the three held: 498
+finish

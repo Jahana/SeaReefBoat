@@ -1,0 +1,77 @@
+# Trial by Ice (sandoria 59): Gulmama in Northern San d'Oria. Available: a trade (her script has no onTrade: nothing);
+# San d'Oria fame level 5: 710 (the script's, after the quest's nil); level 6: 706 (0, Tuning Fork of Ice), declined
+# (option 0), option 2 (nothing: the finish wants option 1), accepted (option 1: TrialByIce_date 0, the fork).
+# Accepted: 707 with the fork; the fork deleted by GM: 718 (finish: a new fork); the Whisper of Frost by GM with the
+# fork held (the battlefield's 32001 is #battlefield): 709 once per reward option. Each completion sets TrialByIce_date
+# to the next JST midnight (1800025200 from the harness's 1800000000): 710 while it lies ahead; `wait jst=1` moves the
+# clock a day (1800086400), past it: 706 again, whose option 1 deletes the quest and begins it anew. The strict
+# GetSystemTime() > TrialByIce_date at its edge: the date equal to the clock: 710; one second behind: 706. 709's last
+# argument grows by the rewards held: 1 Shiva's Claws, 2 the Ice Belt, 4 the Ice Ring, 8 Rust 'B' Gone, 32 the Shiva
+# spell (mask 47 at the last 706's 709 below, answered with a free slot: option 0 and options above 6 are not taken
+# with room: player:addItem(0) only warns in the engine and the finish completes with no reward: #no_reward traces it,
+# its warning declared with `warning:` (quest rework P9, D6); with no room they are #inventory_full's).
+char zone=NorthernSanDoria pos=-185.5,0.0,110.1 job=WAR lvl=75
+fame Sandoria 424
+item BoneChip
+login
+trade Gulmama BoneChip x1                 # available: no onTrade in her script; nothing
+trigger Gulmama                           # fame level 5: the quest's nil; 710
+finish
+fame Sandoria 425
+trigger Gulmama                           # fame level 6: 706 (0, fork)
+finish option=0                           # declined: nothing
+trigger Gulmama                           # 706
+finish option=2                           # option 2: nothing
+trigger Gulmama                           # 706
+finish option=1                           # begun; TrialByIce_date 0; the Tuning Fork of Ice
+trigger Gulmama                           # accepted, the fork, no whisper: 707 (0, fork, 4)
+finish
+delkeyitem TuningForkOfIce
+trigger Gulmama                           # accepted, neither key item: 718 (0, fork)
+finish                                    # a new fork
+keyitem WhisperOfFrost                    # GM: the battlefield win (#battlefield)
+trigger Gulmama                           # the fork and the whisper: 709 (0, fork, 4, 0, 0)
+finish option=1                           # Shiva's Claws, ITEM_OBTAINED; Heir of the Great Ice; the whisper taken; date; fame +60; completed
+trigger Gulmama                           # completed, TrialByIce_date 1800025200 ahead: 710
+finish
+charvar TrialByIce_date 1800000000        # GM: the date equal to the clock
+trigger Gulmama                           # not past (strict >): 710
+finish
+charvar TrialByIce_date 1799999999        # GM: one second behind
+trigger Gulmama                           # past: 706
+finish option=1                           # the quest deleted and begun again; TrialByIce_date 0; the fork already held
+keyitem WhisperOfFrost
+trigger Gulmama                           # 709, mask 1
+finish option=2                           # the Ice Belt: completed; TrialByIce_date 1800025200
+trigger Gulmama                           # ahead: 710
+finish
+wait jst=1                                # the clock 1800086400, past the JST midnight
+trigger Gulmama                           # completed, TrialByIce_date behind: 706
+finish option=1                           # begun again
+keyitem WhisperOfFrost
+trigger Gulmama                           # 709, mask 3
+finish option=3                           # the Ice Ring: completed
+charvar TrialByIce_date 1
+trigger Gulmama                           # 706
+finish option=1
+keyitem WhisperOfFrost
+trigger Gulmama                           # 709, mask 7
+finish option=4                           # Rust 'B' Gone: completed
+charvar TrialByIce_date 1
+trigger Gulmama                           # 706
+finish option=1
+keyitem WhisperOfFrost
+trigger Gulmama                           # 709, mask 15
+finish option=5                           # 10000 gil: completed
+charvar TrialByIce_date 1
+trigger Gulmama                           # 706
+finish option=1
+keyitem WhisperOfFrost
+trigger Gulmama                           # 709, mask 15
+finish option=6                           # the Shiva spell, SHIVA_UNLOCKED (0, 0, 4): completed
+charvar TrialByIce_date 1
+trigger Gulmama                           # 706
+finish option=1
+keyitem WhisperOfFrost
+trigger Gulmama                           # 709, mask 47 (32: Shiva)
+finish option=2                           # the Ice Belt again: completed

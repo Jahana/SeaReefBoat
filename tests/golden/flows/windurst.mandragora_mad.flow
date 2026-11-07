@@ -1,0 +1,46 @@
+# Mandragora Mad (windurst 34): Yoran-Oran (Windurst Walls; default event 245: after a zone-in the first talk plays it,
+# the next his script, "default"; a talk his script answers with nothing plays the default again). Available: a Cornette
+# traded: nothing; 249, finished with option 0: begun (any option). Accepted: 256. A Bone Chip: 250. A Cornette: 251
+# (200): fame 10, completed, 200 gil, taken. Completed: his script plays nothing for a talk; a Pinch of Yuhtunga Sulfur: 252 (250):
+# fame 10, 250 gil; a Three-Leaf Mandragora Bud: 253 (1200): fame 22, 1200 gil; a Four-Leaf Mandragora Bud: 254 (120):
+# fame 10, 120 gil; a Snobby Letter: 255 (5500): fame 36, 5500 gil; each completes again and takes the item. A Cornette
+# with a Bone Chip (not exactly one item): 250. Two Cornettes (stack 1: two slots; tradeHas exact: not one): 250.
+char zone=WindurstWalls pos=-108.5,-13.0,203.3 job=WAR lvl=75
+item Cornette
+item Cornette
+item Cornette
+item PinchOfYuhtungaSulfur
+item ThreeLeafMandragoraBud
+item FourLeafMandragoraBud
+item SnobbyLetter
+item BoneChip x2
+login
+trade Yoran-Oran Cornette x1            # available: nothing
+trigger Yoran-Oran                      # default 245
+finish
+trigger Yoran-Oran                      # available: 249
+finish option=0                         # begun (any option)
+trigger Yoran-Oran                      # default 245
+finish
+trigger Yoran-Oran                      # accepted: 256
+finish
+trade Yoran-Oran BoneChip x1            # accepted, not a turn-in item: 250
+finish
+trade Yoran-Oran Cornette x1            # 251 (200)
+finish                                  # fame 10; completed; 200 gil; the cornette taken
+trigger Yoran-Oran                      # default 245
+finish
+trigger Yoran-Oran                      # completed: nothing from his script, so 245 again
+finish
+trade Yoran-Oran PinchOfYuhtungaSulfur x1  # 252 (250)
+finish                                  # fame 10; completed again; 250 gil
+trade Yoran-Oran ThreeLeafMandragoraBud x1  # 253 (1200)
+finish                                  # fame 22; 1200 gil
+trade Yoran-Oran FourLeafMandragoraBud x1  # 254 (120)
+finish                                  # fame 10; 120 gil
+trade Yoran-Oran SnobbyLetter x1        # 255 (5500)
+finish                                  # fame 36; 5500 gil
+trade Yoran-Oran Cornette x1 BoneChip x1  # not exactly one: 250
+finish
+trade Yoran-Oran Cornette x2            # two cornettes (tradeHas exact: not one): 250
+finish

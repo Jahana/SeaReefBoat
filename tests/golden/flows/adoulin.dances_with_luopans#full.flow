@@ -1,0 +1,19 @@
+# Dances with Luopans (adoulin 118), 36 with no room: a level 99 Warrior in Western Adoulin, the quest accepted (GMs),
+# no Luopan. Prog 2 (a GM): Sylvie 33 (36 is Prog 1 only). Prog 1, the inventory full (GMs): Sylvie 36, finished:
+# npcUtil.giveItem of the plate and the bell fails (ITEM_CANNOT_BE_OBTAINED): no job, no completion. Freed: 36 again,
+# finished: completed.
+lists WesternAdoulin/Sylvie/onTrigger WesternAdoulin/onEventFinish/36
+char zone=WesternAdoulin pos=79.594,32,135.725 job=WAR lvl=99
+quest Adoulin.DancesWithLuopans accepted
+charvar Quest[9][118]Prog 1
+login
+charvar Quest[9][118]Prog 2              # a GM
+trigger Sylvie                          # Prog 2, no Luopan: 33
+finish
+charvar Quest[9][118]Prog 1              # a GM
+fill-inventory
+trigger Sylvie                          # Prog 1: 36
+finish                                  # no room: giveItem fails: nothing
+free-inventory
+trigger Sylvie                          # 36
+finish                                  # the plate and the bell, Geomancer, the gesture, completed

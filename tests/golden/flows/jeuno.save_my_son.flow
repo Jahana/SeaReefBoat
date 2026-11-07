@@ -1,0 +1,53 @@
+# Save My Son (jeuno 5): the door _6t2 in Lower Jeuno, Shalott (and the Chocobo and Osker once completed) in Upper
+# Jeuno, the Nightflowers of Qufim Island. The offer 164 (option 1: not begun; option 0: begun), the door's 229 and
+# Shalott's 101 at Prog 0, the Nightflowers at noon (nil: its script's THESE_WITHERED_FLOWERS) and at 22:00 (0: Prog 1),
+# then at Prog 1 (nil: NOW_THAT_NIGHT_HAS_FALLEN), Shalott's 44, the door's 163 (a full bag: not completed; with room:
+# completed, 2100 gil, Beast Whistle, Life Saver, fame +7 x3), then the door's 132 and Shalott's 44 (replaceDefault),
+# the chocobo's and Osker's 55 (Path of the Beastmaster not completed). A bone chip traded to the door while offered: no
+# trade handler, nil.
+# Chocobo's Wounds is set completed; its completed section answers the chocobo (61) and Osker (53) until this quest is
+# completed. The harness starts at 12:00 Vana'diel; `wait vana=10` reaches 22:00 (clock time 2200 > 2130).
+# Defaults: the door 64 (its script acts only for A New Dawn), Shalott 104; the Nightflowers' script messages.
+lists LowerJeuno/_6t2/onTrigger UpperJeuno/Shalott/onTrigger UpperJeuno/Chocobo/onTrigger UpperJeuno/Osker/onTrigger QufimIsland/Nightflowers/onTrigger LowerJeuno/onEventFinish/164 LowerJeuno/onEventFinish/163 QufimIsland/onEventFinish/0
+char zone=LowerJeuno pos=-80.7,-7.65,-168.8 lvl=30
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+item BoneChip
+login
+trigger _6t2                    # available: 164
+finish option=1                 # not 0: not begun
+trade _6t2 BoneChip x1          # available: no trade handler, nil (its script: nothing)
+trigger _6t2                    # 164
+finish option=0                 # begun
+trigger _6t2                    # accepted, Prog 0: 229
+finish
+warp -49,8.2,87.2 UpperJeuno
+trigger Shalott                 # Prog 0: 101
+finish
+trigger Chocobo                 # this quest not completed: Chocobo's Wounds' 61
+finish
+warp -263.3,-3.718,28.77 QufimIsland
+trigger Nightflowers            # Prog 0 at noon: nil; its script's THESE_WITHERED_FLOWERS
+wait vana=10                    # 22:00
+trigger Nightflowers            # Prog 0 at night: 0
+finish                          # Prog 1
+trigger Nightflowers            # Prog 1: nil; NOW_THAT_NIGHT_HAS_FALLEN
+warp -49,8.2,87.2 UpperJeuno
+trigger Shalott                 # Prog 1: 44
+finish
+warp -80.7,-7.65,-168.8 LowerJeuno
+trigger _6t2                    # Prog 1: 163
+fill-inventory
+finish                          # no room for the whistle: not completed
+free-inventory
+trigger _6t2                    # 163 again
+finish                          # completed: 2100 gil, Beast Whistle, Life Saver, fame +7 x3
+trigger _6t2                    # completed: 132 (replaceDefault)
+finish
+warp -49,8.2,87.2 UpperJeuno
+trigger Shalott                 # completed: 44 (replaceDefault)
+finish
+trigger Chocobo                 # Path of the Beastmaster not completed: 55 (Chocobo's Wounds' 61 needs this quest not completed)
+finish
+trigger Osker                   # 55
+finish

@@ -1,0 +1,25 @@
+# Evil at the Inlet (crystalWar 21, call-only): a level 99 Warrior in Crawlers' Nest [S] with the Bronze Ribbon of
+# Service (missions as group 1's flows). Rodeupansat 107, finished: the quest added, the Evil-warding Seal; again: 108.
+# Vunkerl Inlet [S]: qm6 112, finished: the seal taken; again: its script's NOTHING_OUT_OF_ORDINARY. Crawlers' Nest
+# [S]: Rodeupansat 109, finished: completed (the Scroll of Recall-Jugner); again: 110.
+lists CrawlersNestS/Rodeupansat/onTrigger VunkerlInletS/qm6/onTrigger CrawlersNestS/onEventFinish/107 CrawlersNestS/onEventFinish/109 VunkerlInletS/onEventFinish/112
+char zone=CrawlersNestS pos=130.74,-34.353,25.927 job=WAR lvl=99
+keyitem BronzeRibbonOfService
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rodeupansat                     # available, the ribbon, level 30+: 107
+finish                                  # the quest added; the Evil-warding Seal
+trigger Rodeupansat                     # accepted, the seal: 108
+finish
+warp -633.885,-51.101,-454.311 VunkerlInletS
+trigger qm6                             # accepted, the seal: 112
+finish                                  # the seal taken
+trigger qm6                             # no seal: NOTHING_OUT_OF_ORDINARY
+warp 130.74,-34.353,25.927 CrawlersNestS
+trigger Rodeupansat                     # accepted, no seal: 109
+finish                                  # completed (the Scroll of Recall-Jugner)
+trigger Rodeupansat                     # completed: 110
+finish

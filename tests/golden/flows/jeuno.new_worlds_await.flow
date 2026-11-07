@@ -1,0 +1,56 @@
+# New Worlds Await (jeuno 133, limit break 6): the Nomad Moogle in Ru'Lude Gardens (no NPC script; default event 10045
+# (0, 0, 2, 0)). A level 75 Warrior at level cap 75 (a GM, before login), MAX_LEVEL 99, 3 merit points. Available: five
+# Kindred's Seals with 3 merit points (no trade handler while available: nothing); 10045 (75, 2, 0, 0) without the Limit Breaker; its update
+# with option 3 (nothing) and 4 (the fixed reply), option 4 at the finish: the Limit Breaker. 10045 (75, 1, 1, 0): update
+# option 5 (not 4: nothing), finish options 0, 3 and 6 (nothing), then 5 (begun). Accepted: 10045 (75, 1, 1, 1) as an event
+# (a reminder), (75, 2, 1, 1) once the Limit Breaker is gone (a GM). The trade: five seals with 2 merit points (nil);
+# with 3: four, six, five and a stone, five Kindred's Crests (nil each); five seals: 10135, finished with 5 merit points
+# (a GM, while 10135 is open) and a full bag (the reward is empty: completed anyway): the seals taken, 5 - 3 = 2 merit
+# points, level cap 80, YOUR_LEVEL_LIMIT_IS_NOW_80. Completed: Expanding Horizons answers at cap 80 (75, 1, 1, 2); at
+# cap 75 again (a GM) no quest answers: the default 10045 (0, 0, 2, 0); five seals: nothing.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventUpdate/10045 RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10135
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=75
+levelcap 75
+merits 3
+item KindredsSeal x11
+item KindredsCrest x5
+item FlintStone
+login
+trade Nomad_Moogle KindredsSeal x5      # available, 3 merit points: no trade handler, nothing
+trigger Nomad_Moogle                    # cap 75, no Limit Breaker: 10045 (75, 2, 0, 0)
+update 10045 option=3                   # not 4: nothing
+update 10045 option=4                   # updateEvent(243, 2, 3, 1, 17154, 0, 235339776, 4)
+finish option=4                         # the Limit Breaker
+trigger Nomad_Moogle                    # the Limit Breaker, level 75, MAX_LEVEL 99: 10045 (75, 1, 1, 0)
+update 10045 option=5                   # not 4: nothing
+finish option=0                         # neither 4 nor 5: nothing
+trigger Nomad_Moogle                    # 10045 (75, 1, 1, 0)
+finish option=3                         # neither 4 nor 5: nothing
+trigger Nomad_Moogle                    # 10045 (75, 1, 1, 0)
+finish option=6                         # neither 4 nor 5: nothing
+trigger Nomad_Moogle                    # 10045 (75, 1, 1, 0)
+finish option=5                         # begun
+trigger Nomad_Moogle                    # accepted: event 10045 (75, 1, 1, 1)
+finish
+delkeyitem LimitBreaker                 # a GM
+trigger Nomad_Moogle                    # accepted, no Limit Breaker: event 10045 (75, 2, 1, 1)
+finish
+keyitem LimitBreaker                    # a GM
+merits 2                                # a GM
+trade Nomad_Moogle KindredsSeal x5      # five seals, 2 merit points: nil
+merits 3                                # a GM
+trade Nomad_Moogle KindredsSeal x4      # four: nil
+trade Nomad_Moogle KindredsSeal x6      # six: nil
+trade Nomad_Moogle KindredsSeal x5 FlintStone x1  # five and a stone: nil
+trade Nomad_Moogle KindredsCrest x5     # five crests, not seals: nil
+trade Nomad_Moogle KindredsSeal x5      # five seals, 3 merit points: 10135
+merits 5                                # a GM, 10135 open
+fill-inventory
+finish                                  # completed (no item reward): the seals taken, merits 2, level cap 80, the message
+free-inventory
+trigger Nomad_Moogle                    # completed; Expanding Horizons (NWA completed, cap 80): 10045 (75, 1, 1, 2)
+finish
+levelcap 75                             # a GM
+trigger Nomad_Moogle                    # completed, cap 75: no section; the default 10045 (0, 0, 2, 0)
+finish
+trade Nomad_Moogle KindredsSeal x5      # completed: no trade handler answers: nothing

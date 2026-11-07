@@ -1,0 +1,18 @@
+# Rycharde the Chef (otherAreas 0): Numi Adaligo's 50 is keyed on the csid alone. Prog 3 (a GM): her 50 finished with
+# option 2 sets Prog 1 again (Take: 60 once more; a kept quirk). Accepted (a GM): 50 with option 2 finds no handler (the
+# accepted section has none): Prog stays 2 (Rycharde's 72).
+lists Mhaura/Take/onTrigger Mhaura/Rycharde/onTrigger Mhaura/Numi_Adaligo/onTrigger Mhaura/onEventFinish/50 Mhaura/onEventFinish/60
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+charvar Quest[4][0]Prog 3
+login
+trigger Take                            # Prog 3: 68
+finish
+trigger Numi_Adaligo                    # 50
+finish option=2                         # Prog 1 (down from 3)
+trigger Take                            # Prog 1: 60
+finish                                  # Prog 2
+quest OtherAreas.RychardeTheChef accepted # a GM
+trigger Numi_Adaligo                    # 50
+finish option=2                         # no 50 handler while accepted: Prog stays 2
+trigger Rycharde                        # accepted: 72
+finish

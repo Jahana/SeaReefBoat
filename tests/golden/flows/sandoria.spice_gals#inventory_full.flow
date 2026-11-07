@@ -1,0 +1,17 @@
+# Spice Gals (sandoria 110) by GM, A Transient Dream current (CoP 2-5 completed). Available, Prog 1, the herb (the status
+# operands of 725's and 727's arms): 728. Accepted, Prog 1, the herb, a full inventory: Rouva's 725 does not complete it
+# (the Memoirs cannot be given; the herb kept, Prog 1); with room, 725 completes it.
+char zone=SouthernSanDoria pos=-14.694,2.101,11.805 job=WAR lvl=75
+mission Cop ATransientDream current
+charvar Quest[0][110]Prog 1
+keyitem Rivernewort
+login
+trigger Rouva                             # available, Prog 1, the herb: neither 725 nor 727; 728
+finish
+quest Sandoria.SpiceGals accepted
+fill-inventory
+trigger Rouva                             # Prog 1, accepted, the herb: 725
+finish                                    # no room: not completed; the herb kept
+free-inventory
+trigger Rouva                             # 725
+finish                                    # completed: Miratete's Memoirs; the herb taken; Wait; Prog cleared

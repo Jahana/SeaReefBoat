@@ -1,0 +1,41 @@
+# The Sahagin's Stash (outlands 136): Laisrean in Norg (no script; the default 83), Sea Serpent Grotto's qm2 (no script,
+# no default: nothing). A level 75 Warrior with a Bone Chip, fame 224 (level 3): Laisrean: the default 83. Fame 225 (a
+# GM: level 4): the chip traded: no trade handler: nothing; 33 ([7] = 0); option 0: declined: Option 1; Sea Serpent
+# Grotto's qm2 while available: no section: nothing; 33 ([7] = 1); option 2: declined again (Option stays 1); 33 ([7] =
+# 1); option 1: begun. Accepted: Laisrean 34 (no
+# statue). Sea Serpent Grotto: qm2: 1, finished: the Sea Serpent Statue; qm2 again: the statue held: nil: nothing. Norg: Laisrean 35 (the
+# statue); finished with a full inventory: complete false, the statue kept; freed: 35, finished: completed (the Scroll of
+# Utsusemi: Ichi, Norg fame 40, Treasure House Ransacker), the statue taken. Completed: the default 83.
+lists Norg/Laisrean/onTrigger SeaSerpentGrotto/qm2/onTrigger Norg/onEventFinish/33 Norg/onEventFinish/35 SeaSerpentGrotto/onEventFinish/1
+char zone=Norg pos=-2.047,0,21.651 job=WAR lvl=75
+fame Norg 224
+item BoneChip
+login
+trigger Laisrean                        # fame level 3: the default 83
+finish
+fame Norg 225                           # a GM: level 4
+trade Laisrean BoneChip x1              # available: no trade handler: nothing
+trigger Laisrean                        # 33 ([7] = 0)
+finish option=0                         # declined: Option 1
+warp 296.776,27.129,213.043 SeaSerpentGrotto
+trigger qm2                             # available: no section: nothing
+warp -2.047,0,21.651 Norg
+trigger Laisrean                        # 33 ([7] = 1)
+finish option=2                         # not 1: declined again (Option stays 1)
+trigger Laisrean                        # 33 ([7] = 1)
+finish option=1                         # begun
+trigger Laisrean                        # no statue: 34
+finish
+warp 296.776,27.129,213.043 SeaSerpentGrotto
+trigger qm2                             # no statue: 1
+finish                                  # the Sea Serpent Statue
+trigger qm2                             # the statue held: nil: nothing
+warp -2.047,0,21.651 Norg
+trigger Laisrean                        # the statue: 35
+fill-inventory
+finish                                  # inventory full: complete false: the statue kept
+free-inventory
+trigger Laisrean                        # 35
+finish                                  # completed: the scroll, Norg fame 40, the title; the statue taken
+trigger Laisrean                        # completed: no section: the default 83
+finish

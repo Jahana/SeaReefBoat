@@ -1,0 +1,27 @@
+# For the Birds (otherAreas 104): Koblakiq's reply kinds. Koblakiq has no script (no fallback turn); against Better
+# the Demon You Know's 25 (Better accepted at Prog 2: an Event at priority 101) a Progress reply plays and an Event
+# reply loses (as a Progress it would beat 25). Missionary Moblin completed (no mustZone). For available: 14 beats 25.
+# Accepted (a GM), Prog 0: 15 loses: 25. Prog 1 (a GM): 16 beats 25, finished: Prog 2, the fragment. Prog 2: 17 loses:
+# 25. Prog 4 (a GM): 18 beats 25, finished: completed (the Jaguar Mantle), the mustZone set. Completed with the
+# mustZone: 19 loses: 25.
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/onEventFinish/14 OldtonMovalpolos/onEventFinish/16 OldtonMovalpolos/onEventFinish/18
+char zone=OldtonMovalpolos pos=-63.4,22.8,-117.5 job=WAR lvl=75
+quest OtherAreas.MissionaryMoblin completed
+quest OtherAreas.BetterTheDemonYouKnow accepted
+charvar Quest[4][105]Prog 2
+login
+trigger Koblakiq                        # For available: 14 (Progress) beats Better's 25 (101): 14
+finish option=0                         # nothing
+quest OtherAreas.ForTheBirds accepted   # a GM
+trigger Koblakiq                        # Prog 0: 15 (Event) loses to 25: 25
+finish
+charvar Quest[4][104]Prog 1             # a GM
+trigger Koblakiq                        # Prog 1: 16 (Progress) beats 25: 16
+finish                                  # Prog 2; the fragment
+trigger Koblakiq                        # Prog 2: 17 (Event) loses to 25: 25
+finish
+charvar Quest[4][104]Prog 4             # a GM
+trigger Koblakiq                        # Prog 4: 18 (Progress) beats 25: 18
+finish                                  # completed; Jaguar Mantle; mustZone 11
+trigger Koblakiq                        # completed, mustZone: 19 (Event) loses to 25: 25
+finish

@@ -1,0 +1,61 @@
+# Snake on the Plains (crystalWar 8), the main path with no campaign allegiance: a level 99 Warrior in Windurst Waters
+# [S] (missions as Steamed Rams' main flow). Miah Riyuh (no script, no default): nothing held: 121, twice; the Green
+# Recommendation Letter (a GM): 103, option 1: LetterUsed 1, the letter taken (not begun); LetterUsed: 105, options 1
+# and 2: nothing; 105, option 0: begun, Zonpa-Zippa's All-Purpose Putty. Accepted: the putty, no door: 104 ([7] 0),
+# options 0 and 2: nothing. West Sarutabaruta [S]: Sealed Entrance 1: the putty: bit 0 set, DOOR_OFFSET + 1; again:
+# already sealed: DOOR_OFFSET + 2; Sealed Entrance 2: bit 1, DOOR_OFFSET + 1. Miah Riyuh: two doors: 104 ([7] 2), option
+# 0. Sealed Entrance 3: all three: the putty taken, DOOR_OFFSET + 4; again, no putty: DOOR_OFFSET + 3. Miah Riyuh: Doors
+# full: 106, options 1 and 2: nothing; 106, option 0: the Sprinter's Shoes, completed (Cobra Unit Mercenary), the Bronze
+# Ribbon of Service, allegiance 3, NOW_ALLIED_WITH 3. Completed: Miah Riyuh 107 (allegiance 3); Sealed Entrance 1, 2 and
+# 3: DOOR_OFFSET + 2 (replaceDefault).
+lists WindurstWatersS/Miah_Riyuh/onTrigger WindurstWatersS/onEventFinish/103 WindurstWatersS/onEventFinish/104 WindurstWatersS/onEventFinish/105 WindurstWatersS/onEventFinish/106 WestSarutabarutaS/Sealed_Entrance_1/onTrigger WestSarutabarutaS/Sealed_Entrance_2/onTrigger WestSarutabarutaS/Sealed_Entrance_3/onTrigger
+char zone=WindurstWatersS pos=6.823,-1,37.462 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Miah_Riyuh                      # nothing held: 121; the mission takes no talk
+finish
+trigger Miah_Riyuh                      # 121 again
+finish
+keyitem GreenRecommendationLetter
+trigger Miah_Riyuh                      # the letter: 103
+finish option=1                         # LetterUsed 1; the letter taken; not begun
+trigger Miah_Riyuh                      # LetterUsed: 105
+finish option=1                         # nothing
+trigger Miah_Riyuh                      # 105
+finish option=2                         # nothing
+trigger Miah_Riyuh                      # 105
+finish option=0                         # begun; the putty
+trigger Miah_Riyuh                      # the putty, no door: 104 ([7] 0)
+finish option=0                         # nothing
+trigger Miah_Riyuh                      # 104 ([7] 0)
+finish option=2                         # nothing
+warp -243.5,-18.1,660 WestSarutabarutaS
+trigger Sealed_Entrance_1               # bit 0: DOOR_OFFSET + 1
+trigger Sealed_Entrance_1               # already sealed: DOOR_OFFSET + 2
+warp 265.1,-6.512,40 WestSarutabarutaS
+trigger Sealed_Entrance_2               # bit 1: DOOR_OFFSET + 1
+warp 6.823,-1,37.462 WindurstWatersS
+trigger Miah_Riyuh                      # two doors: 104 ([7] 2)
+finish option=0
+warp -338.5,1.825,-364.825 WestSarutabarutaS
+trigger Sealed_Entrance_3               # all three: the putty taken; DOOR_OFFSET + 4
+trigger Sealed_Entrance_3               # no putty: DOOR_OFFSET + 3
+warp 6.823,-1,37.462 WindurstWatersS
+trigger Miah_Riyuh                      # Doors full: 106
+finish option=1                         # nothing
+trigger Miah_Riyuh                      # 106
+finish option=2                         # nothing
+trigger Miah_Riyuh                      # 106
+finish option=0                         # Sprinter's Shoes; completed; Bronze Ribbon; allegiance 3; NOW_ALLIED_WITH 3
+trigger Miah_Riyuh                      # completed, allegiance 3: 107
+finish
+warp -243.5,-18.1,660 WestSarutabarutaS
+trigger Sealed_Entrance_1               # completed: DOOR_OFFSET + 2
+warp 265.1,-6.512,40 WestSarutabarutaS
+trigger Sealed_Entrance_2               # completed: DOOR_OFFSET + 2
+warp -338.5,1.825,-364.825 WestSarutabarutaS
+trigger Sealed_Entrance_3               # completed: DOOR_OFFSET + 2

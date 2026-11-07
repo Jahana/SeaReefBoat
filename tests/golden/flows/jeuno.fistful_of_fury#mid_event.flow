@@ -1,0 +1,21 @@
+# Fistful of Fury (jeuno 41): the finishes read no status. A WAR 75, Norg fame 125, Silence of the Rams completed (a
+# GM). 216 open, the quest set completed by a GM: option 1: addQuest over a completed quest (the current bit set, the
+# status still completed). Then available and accepted (a GM): the three: 213 open, the quest set available by a GM:
+# the finish completes it anyway (Brown Belt, title, fame, the trade taken); Quest[3][41]Prog 1 (GM) kept (the raw
+# player:completeQuest).
+char zone=LowerJeuno pos=45.8,3.9,-45.4 job=WAR lvl=75
+fame Norg 125
+quest Bastok.SilenceOfTheRams completed
+item NueFang
+item MorbolgerVine
+item DodoSkin
+login
+trigger Vola                            # 216
+quest Jeuno.FistfulOfFury completed     # a GM, while 216 is open
+finish option=1                         # addQuest over a completed quest
+quest Jeuno.FistfulOfFury available     # a GM (the completed bit cleared)
+quest Jeuno.FistfulOfFury accepted      # a GM
+charvar Quest[3][41]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Vola NueFang x1 MorbolgerVine x1 DodoSkin x1  # 213
+quest Jeuno.FistfulOfFury available     # a GM, while 213 is open
+finish                                  # no status read: Brown Belt; title; fame; the trade taken; completed

@@ -1,0 +1,17 @@
+# The Road to Aht Urhgan (jeuno 91): finishes outside their state. 10063 open, the quest set accepted by a GM: finished 2:
+# no 10063 handler (no selection). 10069 open (Prog 1), the quest set completed by a GM: no 10069 handler (the trade
+# kept, Prog 1).
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/Faursel/onTrade LowerJeuno/onEventFinish/10063 LowerJeuno/onEventFinish/10069
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+charvar Quest[3][91]Prog 1
+item JadeCryptex
+item SilverEngraving
+item ThirteenKnotQuipu
+login
+trigger Faursel                     # available, Prog 1: 10063
+quest Jeuno.TheRoadToAhtUrhgan available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheRoadToAhtUrhgan accepted # a GM, while 10063 is open
+finish option=2                     # no 10063 finish while accepted: nothing
+trade Faursel JadeCryptex x1 SilverEngraving x1 ThirteenKnotQuipu x1 # accepted, Prog 1: 10069
+quest Jeuno.TheRoadToAhtUrhgan completed # a GM, while 10069 is open
+finish                              # no 10069 finish while completed: the items kept, Prog 1

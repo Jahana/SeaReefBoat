@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Repeatable/daily quests drive their reopen window off the byte-proven Vana'diel
+         clock (XI.Common.VanaTime) so the reset boundary matches the engine's daily tick. -->
+    <ProjectReference Include="..\XI.Common\XI.Common.csproj" />
+    <!-- CharacterStateMigration binds each normalized row through the real XI.Persistence
+         BoundValue/Binder, so the seam proves executable against the ported DB contract. The
+         faithful no-int64-bind rule forces 64-bit columns (repeat_by ticks, completed_mask,
+         updated_at) onto String kind, which the gate asserts offline. -->
+    <ProjectReference Include="..\XI.Persistence\XI.Persistence.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- QuestScript.ExpectedKeyForTest: the key check of the C2 container core -->
+    <InternalsVisibleTo Include="XI.Verify.Quests" />
+  </ItemGroup>
+</Project>

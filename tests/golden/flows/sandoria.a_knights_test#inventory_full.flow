@@ -1,0 +1,17 @@
+# A Knight's Test (sandoria 29): 628 with a full inventory (the Kite Shield does not fit: not completed, no job, the key
+# items kept), then with room (completed, PLD unlocked).
+char zone=SouthernSanDoria pos=-136.8,-10.8,65.8 lvl=30
+quest Sandoria.ASquiresTest completed
+quest Sandoria.ASquiresTestIi completed
+quest Sandoria.AKnightsTest accepted
+keyitem BookOfTasks
+keyitem BookOfTheWest
+keyitem BookOfTheEast
+keyitem KnightsSoul
+login
+fill-inventory
+trigger Balasiel                          # the soul: 628
+finish                                    # inventory full: not completed, the key items kept
+free-inventory
+trigger Balasiel                          # 628
+finish                                    # completed, PLD unlocked, UNLOCK_PALADIN, the four key items deleted

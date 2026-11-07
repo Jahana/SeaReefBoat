@@ -1,0 +1,32 @@
+# Beadeaux Smog (bastok 33): High Bear in the Metalworks, qm1 in Beadeaux. The guard (Bastok fame level 4), the offer
+# 731, the Corrupted Dirt from qm1 while accepted, 732 and the Chakram. High Bear's default is 730 (he has no script);
+# qm1's default is the FOUL_SMELLING_SOIL_IS_SPILLING_OUT message. No other quest or mission names either.
+# qm1 shows only in rain or a squall (Beadeaux's Zone.lua, onZoneWeatherChange). The char starts in Beadeaux, where the
+# weather rolled at the zone's start (the harness's pinned weather seed) shows it.
+lists Metalworks/High_Bear/onTrigger Metalworks/High_Bear/onTrade Metalworks/onEventFinish/731 Metalworks/onEventFinish/732 Beadeaux/qm1/onTrigger
+char zone=Beadeaux pos=-82.3,1.056,-140.1
+fame Bastok 224
+item BoneChip
+login
+trigger qm1                     # available: section 2 fails, the default message
+finish-if-event
+warp 25.2,-14,5.5 Metalworks
+trade High_Bear BoneChip x1     # available: no trade handler, nothing
+trigger High_Bear               # fame 224 (level 3): his default 730
+finish
+fame Bastok 225
+trigger High_Bear               # fame level 4: the offer, 731
+finish                          # accepted
+trigger High_Bear               # accepted, no dirt: his default 730
+finish
+trade High_Bear BoneChip x1     # accepted: nothing
+warp -82.3,1.056,-140.1 Beadeaux
+trigger qm1                     # accepted, no dirt: the Corrupted Dirt
+finish-if-event
+trigger qm1                     # the dirt held: section 2 fails, the default message
+finish-if-event
+warp 25.2,-14,5.5 Metalworks
+trigger High_Bear               # the dirt held: 732
+finish                          # completed: Chakram, fame +40, Beadeaux Surveyor; the dirt kept
+trigger High_Bear               # completed: 730
+finish

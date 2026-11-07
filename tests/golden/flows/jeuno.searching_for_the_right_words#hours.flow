@@ -1,0 +1,18 @@
+# Searching for the Right Words (jeuno 66): the ???'s hour window at its edges (currentHour < 19 and currentHour >= 4:
+# nil). Accepted at Prog 4 (GM), so a pass plays 14 (answered 1: nothing). 18:00: nil, CANNOT_SEE_MOON; 19:00: 14;
+# 3:00 the next day: 14; 4:00: nil, CANNOT_SEE_MOON. Days 8000 and 8001 are not a new moon.
+lists TheBoyahdaTree/qm2/onTrigger TheBoyahdaTree/onEventFinish/14
+char zone=TheBoyahdaTree pos=36.1,-20.2,-61.6 job=WAR lvl=75
+quest Jeuno.SearchingForTheRightWords accepted
+charvar Quest[3][66]Prog 4
+login
+wait vana=6                             # 18:00
+trigger qm2                             # hour 18: nil; CANNOT_SEE_MOON
+wait vana=1                             # 19:00
+trigger qm2                             # hour 19: 14
+finish option=1                         # not 0: nothing
+wait vana=8                             # day 8001, 3:00
+trigger qm2                             # hour 3: 14
+finish option=1                         # nothing
+wait vana=1                             # 4:00
+trigger qm2                             # hour 4: nil; CANNOT_SEE_MOON

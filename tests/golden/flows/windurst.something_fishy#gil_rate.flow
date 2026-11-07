@@ -1,0 +1,13 @@
+# Something Fishy (windurst 52) at GIL_RATE 1.75 (exact in binary): 210's argument and its addGil are 70 x 1.75 = 122.5,
+# read by the engine's integral getter (llround: 123; a truncation or a round-to-even would give 122). 208, option 2:
+# begun. A sardine: 210 (123, 4360); its finish: completed, fame 10, the sardine taken, 123 gil.
+char zone=PortWindurst pos=-188.3,-2.0,66.3 job=WAR lvl=75
+setting GIL_RATE 1.75
+item BastoreSardine1
+login
+trigger Tokaka                          # default 207
+finish
+trigger Tokaka                          # available: 208 (0, 4360)
+finish option=2                         # begun; TokakaSpokenTo 1
+trade Tokaka BastoreSardine1 x1         # 210 (123, 4360)
+finish                                  # completed; fame 10; the sardine taken; 123 gil

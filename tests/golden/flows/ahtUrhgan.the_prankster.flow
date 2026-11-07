@@ -1,0 +1,41 @@
+# The Prankster (ahtUrhgan 60): a level 75 Warrior in Whitegate. Ahaadah (no script; default 870); trigger areas 11 (22
+# 1 -100 .. 24.5 3 -98) and 12 (25 -7 -127 .. 30 -5 -123), walked into after the zone-in lock; Bhaflau Thickets' qm3 (no
+# script; default NOTHING_HAPPENS) and the Plague Chigoe. Available: area 11: no handler: nothing; Ahaadah 1, finished:
+# begun. Prog 0: Ahaadah 15; area 12: no Prog-0 handler: nothing; area 11: 2, finished: Prog 1. Prog 1: Ahaadah 16;
+# area 11: nothing; area 12: 3, finished: Prog 2. Prog 2: Ahaadah 17. Bhaflau: qm3, no chigoe: the cutscene 1, finished:
+# the Plague Chigoe popped (claimed); qm3 with it up: nil: NOTHING_HAPPENS; the chigoe killed: Prog 3. qm3: the cutscene
+# 2, finished: completed (the Map of Caedarva Mire). Whitegate: Ahaadah 18 (replaceDefault).
+lists AhtUrhganWhitegate/Ahaadah/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/11 AhtUrhganWhitegate/onTriggerAreaEnter/12 BhaflauThickets/qm3/onTrigger BhaflauThickets/Plague_Chigoe/onMobDeath BhaflauThickets/onEventFinish/1 BhaflauThickets/onEventFinish/2
+char zone=AhtUrhganWhitegate pos=-68.7,-6,105.246 job=WAR lvl=75
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+walk 23,2,-99                           # area 11, available: no handler: nothing
+walk 23,2,-105
+trigger Ahaadah                         # available: 1
+finish                                  # begun
+trigger Ahaadah                         # Prog 0: 15
+finish
+walk 27.5,-6,-125                       # area 12, Prog 0: nothing
+walk 27.5,-6,-115
+walk 23,2,-99                           # area 11, Prog 0: 2
+finish                                  # Prog 1
+walk 23,2,-105
+walk 23,2,-99                           # area 11, Prog 1: nothing
+trigger Ahaadah                         # Prog 1: 16
+finish
+walk 27.5,-6,-125                       # area 12, Prog 1: 3
+finish                                  # Prog 2
+trigger Ahaadah                         # Prog 2: 17
+finish
+warp 461.666,-14.926,256.214 BhaflauThickets
+trigger qm3                             # Prog 2, no chigoe: the cutscene 1
+finish                                  # the Plague Chigoe popped, claimed
+trigger qm3                             # the chigoe up: nil: NOTHING_HAPPENS
+kill PLAGUE_CHIGOE                      # Prog 3
+trigger qm3                             # Prog 3: the cutscene 2
+finish                                  # completed: the Map of Caedarva Mire
+warp -68.7,-6,105.246 AhtUrhganWhitegate
+trigger Ahaadah                         # completed: 18
+finish

@@ -1,0 +1,27 @@
+# The Beast of Bastore (abyssea 172), the edges: a level 99 Warrior in Jugner Forest with The Truth Beckons completed,
+# Traverser Stones 4 and 5 (two stones: `>= 1`), 5 maw quests completed (A Delectable Demon, A Fluttery Fiend, A Beaked
+# Blusterer, A Man-eating Mite, An Ulcerous Uragnite) (GMs), Dawn of Death available. The maw: no section (Dawn of Death
+# available): 47. Dawn of Death completed (a GM; `>=` accepted): 48, finished on option 1: begun (any option). The title
+# (a GM): the zone-in's 49, its update on option 1: updateEvent(the key item for 5 completed: Ivory Abyssite of
+# Guerdon); finished: it is given, completed.
+lists JugnerForest/Cavernous_Maw_2/onTrigger JugnerForest/onEventFinish/48 JugnerForest/onEventFinish/47 JugnerForest/onZoneIn/1 JugnerForest/onEventUpdate/49 JugnerForest/onEventFinish/49
+char zone=JugnerForest pos=247.818,-0.709,5.706 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+keyitem TraverserStone4
+keyitem TraverserStone5
+quest Abyssea.ADelectableDemon completed
+quest Abyssea.AFlutteryFiend completed
+quest Abyssea.ABeakedBlusterer completed
+quest Abyssea.AManEatingMite completed
+quest Abyssea.AnUlcerousUragnite completed
+login
+trigger Cavernous_Maw_2                 # Dawn of Death available: no section: 47
+finish                                  # option 0: no warp
+quest Abyssea.DawnOfDeath completed     # a GM
+trigger Cavernous_Maw_2                 # Dawn of Death completed, two stones: 48
+finish option=1                         # begun (any option)
+title SednaTuskbreaker                  # a GM
+rezone open                             # 49, left open
+update 49 option=1                      # updateEvent(Ivory Abyssite of Guerdon)
+finish                                  # Ivory Abyssite of Guerdon given; completed

@@ -1,0 +1,33 @@
+# Trial-Size Trial by Fire (outlands 15): accepted by GM with no Mini Tuning Fork (used up by a lost fight): 290 (0,
+# fork, 2, 20), declined (option 0: nothing), option 2 (nothing), option 1 with a full inventory
+# (ITEM_CANNOT_BE_OBTAINED), then option 1 with one free slot (a new fork); then 272. Each script talk follows the
+# default 275 (UseFallback; see the main flow). 290's finish reads no status: 290 finished while completed (a GM inside
+# the event) still gives a fork.
+char zone=Kazham pos=100.4,-14.0,-97.7 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByFire accepted
+login
+trigger Dodmos                            # UseFallback 0: the default 275
+finish
+trigger Dodmos                            # the script: accepted, no fork: 290 (0, fork, 0, 20)
+finish option=0                           # nothing
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # 290
+finish option=2                           # option 2: nothing
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # 290
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork)
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # 290
+quest Outlands.TrialSizeTrialByFire completed
+finish option=1                           # finished while completed: a new Mini Tuning Fork of Fire, ITEM_OBTAINED
+quest Outlands.TrialSizeTrialByFire available
+quest Outlands.TrialSizeTrialByFire accepted
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # the fork held: 272
+finish

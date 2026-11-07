@@ -1,0 +1,16 @@
+# Lure of the Wildcat (Jeuno) (jeuno 90): Adolie's 10091 against CoP 6-2 A Place to Return (current by a GM), whose
+# Adolie answers 158 (an Event). 10091 is a Progress event: it beats 158 (an Event 10091 would tie with it); after its
+# finish a GM clears Prog and it plays again; with the bit set the mission's 158 plays (her default is 158 too).
+# Accepted by a GM at Prog 0.
+lists RuludeGardens/Adolie/onTrigger RuludeGardens/onEventFinish/10091
+char zone=RuludeGardens pos=-33.5,2,59 job=WAR lvl=20
+mission Cop APlaceToReturn current
+quest Jeuno.LureOfTheWildcat accepted
+login
+trigger Adolie                 # 10091 over the mission's 158
+finish                         # bit 3
+charvar Quest[3][90]Prog 0     # a GM
+trigger Adolie                 # 10091 again
+finish                         # bit 3
+trigger Adolie                 # bit set: nil; the mission's 158
+finish

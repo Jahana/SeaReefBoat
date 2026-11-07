@@ -1,0 +1,63 @@
+# Quelling the Storm (crystalWar 42), the edges: a level 99 Warrior in North Gustaberg [S] with the WotG mission
+# Crossroads of Time current (missions as the main flow), two Goblin Mess Tins, a Goblin Mushpot and a Pinch of Twinkle
+# Powder. Blatherix is `Blatherix+13` (see group 3). Fire in the Hole not completed: Bastok Markets [S] from North
+# Gustaberg [S]: no section, no zone-in reply. Fire completed (a GM): Bastok Markets [S] from Vunkerl Inlet [S]: nil;
+# the three items to Blatherix while available: no trade handler; from North Gustaberg [S]: 179, finished on option 1:
+# begun (any option). The town NPCs in other orders (GMs: Prog 1 and two of the three vars): Paul 1: Biggorf 194,
+# finished: Biggorf 1, Wilhelmina 0: Prog 1; Wilhelmina 192, finished: all three: Prog 2. Prog 1, Wilhelmina 1, Paul 0,
+# Biggorf 0: Biggorf 194, finished: Paul 0: Prog 1; Paul 193, finished: all three: Prog 2. Prog 1 with Biggorf 1:
+# Biggorf 197. Prog 4 (a GM): Blatherix 188; the three items with a fourth (a Goblin Mess Tin more): nil. Vunkerl Inlet
+# [S]: qm8 at Prog 4: nil (no section; no default). Prog 7 (a GM) with a full inventory: Blatherix 185, finished: the
+# belt does not fit: not completed; freed: 185: completed.
+lists BastokMarketsS/onZoneIn/1 BastokMarketsS/Paul/onTrigger BastokMarketsS/Biggorf/onTrigger BastokMarketsS/Wilhelmina/onTrigger BastokMarketsS/Blatherix/onTrigger BastokMarketsS/Blatherix/onTrade BastokMarketsS/onEventFinish/179 BastokMarketsS/onEventFinish/185 BastokMarketsS/onEventFinish/192 BastokMarketsS/onEventFinish/193 BastokMarketsS/onEventFinish/194 VunkerlInletS/qm8/onTrigger
+char zone=NorthGustabergS pos=380.038,-2.25,147.627 job=WAR lvl=99
+item GoblinMessTin x2
+item GoblinMushpot
+item PinchOfTwinklePowder
+mission Wotg CrossroadsOfTime current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+warp -308.324,-11.999,-42.791 BastokMarketsS # Fire in the Hole not completed: no zone-in reply
+quest CrystalWar.FireInTheHole completed
+warp 208.581,-32.002,315.458 VunkerlInletS
+warp -308.324,-11.999,-42.791 BastokMarketsS # from Vunkerl Inlet [S]: nil
+trade Blatherix+13 GoblinMessTin x1 GoblinMushpot x1 PinchOfTwinklePowder x1 # available: no trade handler
+finish-if-event
+warp 380.038,-2.25,147.627 NorthGustabergS
+warp -308.324,-11.999,-42.791 BastokMarketsS open # from North Gustaberg [S]: 179, left open
+finish option=1                         # begun (any option)
+charvar Quest[7][42]Prog 1              # a GM
+charvar Quest[7][42]Paul 1              # a GM
+trigger Biggorf                         # Biggorf 0: 194
+finish                                  # Biggorf 1; Wilhelmina 0: Prog 1
+trigger Wilhelmina                      # Wilhelmina 0: 192
+finish                                  # Wilhelmina 1; all three: Prog 2
+charvar Quest[7][42]Prog 1              # a GM
+charvar Quest[7][42]Paul 0              # a GM
+charvar Quest[7][42]Biggorf 0           # a GM
+trigger Biggorf                         # Biggorf 0: 194
+finish                                  # Biggorf 1; Paul 0: Prog 1
+trigger Paul                            # Paul 0: 193
+finish                                  # Paul 1; all three: Prog 2
+charvar Quest[7][42]Prog 1              # a GM
+trigger Biggorf                         # Prog 1, Biggorf 1: 197
+finish
+charvar Quest[7][42]Prog 4              # a GM
+trigger Blatherix+13                    # Prog 4: 188
+finish
+trade Blatherix+13 GoblinMessTin x2 GoblinMushpot x1 PinchOfTwinklePowder x1 # a tin more: nil
+finish-if-event
+warp -355.028,-32.084,286.333 VunkerlInletS
+trigger qm8                             # Prog 4: no handler (no default)
+finish-if-event
+charvar Quest[7][42]Prog 7              # a GM
+warp -308.324,-11.999,-42.791 BastokMarketsS
+fill-inventory
+trigger Blatherix+13                    # Prog 7: 185
+finish                                  # no room for the belt: not completed
+free-inventory
+trigger Blatherix+13                    # 185
+finish                                  # completed

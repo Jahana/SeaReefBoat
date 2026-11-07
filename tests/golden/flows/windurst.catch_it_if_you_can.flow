@@ -1,0 +1,70 @@
+# Catch It If You Can (windurst 21): Ohruru (Port Windurst; no default action; his standard 230 is his script's else).
+# Available: 230 (var 1), 253 (var 2), 231, option 0: begun (any option). Accepted, no Mute / Bane / Plague: 248 or 251
+# (math.randomInt, the seeded script RNG). Mute (a GM's effect): 246, option 1: nothing; option 0: needToZone, Mute
+# taken, 1000 gil, var 0, completed, fame 10. Completed with needToZone: 255. Bane alone: 246 (before needToZone),
+# option 0: Bane taken, 1200 gil, fame 10 (no completion). Mute, Bane and Plague together: 246 three times, each finish
+# taking the first of Mute / Bane / Plague (1000, 1200, 1500). Rezoned: completed, Wonder Wands available: his standard
+# 230; Wonder Wands completed (GM): 265; Wonder Wands accepted (GM): 258 (0, 17053). Accepted again (GMs), Wonder Wands
+# completed: this quest's arms first (248 / 251); Wonder Wands accepted: 258 before this quest's arms; accepted with
+# needToZone (a GM's flag): 255.
+char zone=PortWindurst pos=-105.0,-4.25,92.7 job=WAR lvl=75
+login
+trigger Ohruru                          # available, var 0: 230; var 1
+finish
+trigger Ohruru                          # var 1: 253; var 2
+finish
+trigger Ohruru                          # var 2: 231
+finish option=0                         # begun (any option)
+trigger Ohruru                          # accepted, no effect: 248 or 251 (the roll)
+finish
+trigger Ohruru                          # the next roll
+finish
+trigger Ohruru                          # the next roll
+finish
+trigger Ohruru                          # the next roll
+finish
+effect 29                               # a GM: Mute
+trigger Ohruru                          # accepted, Mute: 246
+finish option=1                         # not 0: nothing (Mute kept)
+trigger Ohruru                          # 246
+finish option=0                         # needToZone; Mute taken, 1000 gil; var 0; completed; fame 10
+trigger Ohruru                          # completed, needToZone: 255
+finish
+effect 30                               # a GM: Bane
+trigger Ohruru                          # completed, needToZone, Bane: 246 (before 255)
+finish option=0                         # Bane taken, 1200 gil; var 0; fame 10 (no completion)
+effect 29                               # Mute
+effect 30                               # Bane
+effect 31                               # Plague
+trigger Ohruru                          # 246
+finish option=0                         # Mute taken (the first), 1000 gil; fame 10
+trigger Ohruru                          # Bane and Plague: 246
+finish option=0                         # Bane taken, 1200 gil; fame 10
+trigger Ohruru                          # Plague alone: 246
+finish option=0                         # Plague taken, 1500 gil; fame 10
+trigger Ohruru                          # no effect, needToZone: 255
+finish
+rezone                                  # needToZone cleared
+trigger Ohruru                          # completed, Wonder Wands available: his standard 230
+finish
+quest Windurst.WonderWands completed
+trigger Ohruru                          # completed, no needToZone, Wonder Wands completed: 265
+finish
+quest Windurst.WonderWands available
+quest Windurst.WonderWands accepted
+trigger Ohruru                          # Wonder Wands accepted: 258 (0, 17053)
+finish
+quest Windurst.CatchItIfYouCan available
+quest Windurst.CatchItIfYouCan accepted
+quest Windurst.WonderWands available
+quest Windurst.WonderWands completed
+trigger Ohruru                          # accepted: 248 or 251 (before Wonder Wands' 265)
+finish
+quest Windurst.WonderWands available
+quest Windurst.WonderWands accepted
+trigger Ohruru                          # Wonder Wands accepted: 258 (0, 17053), before this quest's arms
+finish
+quest Windurst.WonderWands available
+charvar [generic]mustZone 240           # needToZone (a GM; 246's finish sets it)
+trigger Ohruru                          # accepted, needToZone: 255
+finish

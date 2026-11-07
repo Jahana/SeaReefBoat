@@ -1,0 +1,27 @@
+# Behind the Smile (otherAreas 77): its reply kinds. Enaremand has no script and no other quest answers him while Behind
+# the Smile is accepted (Knocking on Forbidden Doors' offer needs it completed; a completed bit makes the status
+# completed): 541 (Event) against his default only, not observable; 534 / 533 likewise. The ??? (a messageSpecial reply,
+# STENCH_OF_DECAY, and noAction) has no other quest. Fyi's 320 (Progress) against Knocking on Forbidden Doors accepted at
+# Prog 5 (a GM; its 321 is Progress): a tie, Behind_the_Smile first: 320, then 321; and against It's Raining Mannequins!
+# accepted at Prog 0 (306, Event): 320 every time.
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/onEventFinish/320 Mhaura/onEventFinish/321
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile accepted
+quest OtherAreas.KnockingOnForbiddenDoors accepted
+charvar Quest[4][78]Prog 5
+login
+trigger Fyi_Chalmwoh                    # 320 and 321 tie: 320 first
+finish                                  # Prog 1
+charvar Quest[4][77]Prog 0              # a GM
+trigger Fyi_Chalmwoh                    # the cycle: 321 (Knocking on Forbidden Doors')
+update 321 option=0                     # no 321 update handler while Knocking on Forbidden Doors is accepted: nothing
+finish option=0                         # Knocking on Forbidden Doors completed (no reward); its completed section needs Better Humes and Mannequins (not held): no second finish
+quest OtherAreas.KnockingOnForbiddenDoors available # a GM (no Better Humes and Mannequins: no completed section either)
+quest OtherAreas.ItsRainingMannequins available # a GM
+quest OtherAreas.ItsRainingMannequins accepted # a GM: Prog 0, 306
+trigger Fyi_Chalmwoh                    # 320 beats 306
+finish                                  # Prog 1
+charvar Quest[4][77]Prog 0              # a GM
+trigger Fyi_Chalmwoh                    # 320 again
+finish                                  # Prog 1

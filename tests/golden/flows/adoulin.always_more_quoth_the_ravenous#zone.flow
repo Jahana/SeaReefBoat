@@ -1,0 +1,24 @@
+# Always More Quoth the Ravenous (adoulin, call-only), the talk's needToZone gate: a level 99 Warrior in
+# Western Adoulin, Hunger Strikes and The Starving completed (GMs), 125 Adoulin fame; Raptor Rapture accepted at
+# Raptor_Rapture_Status 8 (GMs). Pagnelle: 5039, finished: Raptor Rapture completed and needToZone (the only statement
+# that sets it). Westerly Breeze (pairs: 553, then his script), needing to zone: nothing from the script. After a
+# rezone: 3010, finished: added.
+lists WesternAdoulin/Westerly_Breeze/onTrigger WesternAdoulin/Pagnelle/onTrigger WesternAdoulin/onEventFinish/5039 WesternAdoulin/onEventFinish/3010
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+fame Adoulin 125
+quest Adoulin.HungerStrikes completed
+quest Adoulin.TheStarving completed
+quest Adoulin.RaptorRapture accepted
+charvar Raptor_Rapture_Status 8
+login
+trigger Pagnelle                        # Raptor Rapture at status 8: 5039
+finish                                  # completed, needToZone
+trigger Westerly_Breeze                 # 553
+finish-if-event
+trigger Westerly_Breeze                 # needing to zone: nothing: 553
+finish-if-event
+rezone
+trigger Westerly_Breeze                 # 553
+finish-if-event
+trigger Westerly_Breeze                 # zoned: 3010
+finish-if-event                         # added

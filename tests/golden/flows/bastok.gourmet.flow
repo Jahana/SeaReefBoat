@@ -1,0 +1,54 @@
+# Gourmet (bastok 12): Salimah in Bastok Markets. No guard: the offer 200 (begins it); one Sleepshroom, Treant Bulb or
+# Wild Onion traded while the quest's mustZone is clear plays its event by the Vana'diel hour: VanadielHour() - 6, wrapped
+# into 0..23, inside the item's window (Sleepshroom 12..23, Treant Bulb 0..5: 201; Wild Onion 6..11: 202) or outside it
+# (203). Each finish completes it again (Mommy's Helper) and pays 200 / 350 / 100 gil and Bastok fame +10, then sets the
+# mustZone (Salimah plays 121 and takes no trade until the char zones). The harness clock starts at 12:00; `wait vana=`
+# moves it. A rezone in the same zone does not clear a mustZone (player.lua clears it only in another zone), so the flow
+# zones to Bastok Mines and back.
+# Salimah has no script and no DefaultActions entry, and no other quest or mission names her.
+lists BastokMarkets/Salimah/onTrigger BastokMarkets/Salimah/onTrade BastokMarkets/onEventFinish/200 BastokMarkets/onEventFinish/201 BastokMarkets/onEventFinish/202 BastokMarkets/onEventFinish/203
+char zone=BastokMarkets pos=-31.7,-6.8,-71.8
+item Sleepshroom x3
+item TreantBulb x2
+item WildOnion x3
+item BoneChip
+login
+trade Salimah WildOnion x1           # available: no trade handler, nothing
+trigger Salimah                      # available: 200
+finish                               # accepted
+trigger Salimah                      # accepted, no mustZone: event 200
+finish                               # (no 200 finish in the second section: nothing)
+trade Salimah BoneChip x1            # the wrong item: nil
+trade Salimah WildOnion x2           # two onions: nil
+trade Salimah TreantBulb x1          # 12:00 (offset 6), outside the bulb's 0..5: 203 with the bulb
+finish                               # completed: Mommy's Helper, 100 gil, fame +10, the bulb taken, mustZone set
+trigger Salimah                      # mustZone: event 121
+finish
+trade Salimah WildOnion x1           # mustZone: nil (the onion kept)
+zoneline BastokMines                 # another zone: mustZone cleared
+zoneline BastokMarkets
+trigger Salimah                      # completed, no mustZone: event 200
+finish
+trade Salimah WildOnion x1           # 12:00 (offset 6), the onion's 6..11: 202
+finish                               # completed again: 350 gil, fame +10, mustZone set
+zoneline BastokMines
+zoneline BastokMarkets
+wait vana=6                          # 18:00 (offset 12)
+trigger Salimah                      # walks back: 200
+finish
+trade Salimah Sleepshroom x1         # offset 12, the sleepshroom's 12..23: 201
+finish                               # 200 gil, fame +10, mustZone set
+zoneline BastokMines
+zoneline BastokMarkets
+wait vana=8                          # 02:00 (offset -4, wrapped to 20)
+trigger Salimah
+finish
+trade Salimah Sleepshroom x1         # offset 20: 201
+finish                               # 200 gil, fame +10
+zoneline BastokMines
+zoneline BastokMarkets
+wait vana=6                          # 08:00 (offset 2)
+trigger Salimah
+finish
+trade Salimah TreantBulb x1          # offset 2, the bulb's 0..5: 201
+finish                               # 200 gil, fame +10

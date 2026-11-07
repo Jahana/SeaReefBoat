@@ -1,0 +1,38 @@
+# Apocalypse Nigh (jeuno 89): the available check's operands one at a time, at Ru'Lude Gardens' trigger area 1 (a walk
+# from z 100). Two level 75 Warriors.
+# - main: Shadows of the Departed accepted: no section (its own accepted area handler: no sliver: nil): nothing.
+#   Completed (a GM), the Timer 8001 (a GM; day 8000): nothing. The Timer 8000 (today): the available check holds: the
+#   trade while only available, a Static Earring to Gilgamesh in Norg: no onTrade anywhere (no script): nothing; back
+#   in area 1: 123 (Timer = day), begun. The main flow's Timer 0 is the side under the day.
+# - other: Shadows of the Departed completed, the mustZone set by a GM (Quest[3][89]mustZone 243, as Shadows of the
+#   Departed's 162 leaves it): nothing; out to Upper Jeuno and back (cleared): 123, begun.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/123 Norg/Gilgamesh/onTrade
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+char other zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+quest Jeuno.ShadowsOfTheDeparted accepted
+item StaticEarring
+other: quest Jeuno.ShadowsOfTheDeparted completed
+other: charvar Quest[3][89]mustZone 243
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # Shadows of the Departed accepted: no section; nothing
+walk 4,2.5,100
+quest Jeuno.ShadowsOfTheDeparted completed  # a GM
+charvar Quest[3][89]Timer 8001          # a GM
+walk 4,2.5,60                           # Timer 8001 > day 8000: no section; nothing
+walk 4,2.5,100
+charvar Quest[3][89]Timer 8000          # a GM: today
+warp 120.9,-8,-12 Norg                  # by Gilgamesh
+trade Gilgamesh StaticEarring x1        # available: no onTrade: nothing
+warp 4,2.5,100 RuludeGardens
+tick 3000
+walk 4,2.5,60                           # Timer 8000 = day 8000: 123
+finish                                  # begun
+other: login
+tick 3000
+other: walk 4,2.5,60                    # the mustZone set: no section; nothing
+other: warp -55.5,8.2,97.5 UpperJeuno   # another zone: the mustZone cleared
+other: warp 4,2.5,100 RuludeGardens
+tick 3000
+other: walk 4,2.5,60                    # 123
+other: finish                           # begun

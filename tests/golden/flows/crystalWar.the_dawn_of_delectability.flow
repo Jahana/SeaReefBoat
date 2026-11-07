@@ -1,0 +1,60 @@
+# The Dawn of Delectability (crystalWar 5): a level 99 Warrior in Windurst Waters [S] with a Pepperoni, a Walnut, a
+# Dragon Fruit and a Bastore Sweeper (missions as The Tigress Stirs' main flow). Ranpi-Monpi [S] (no script, no
+# default): 117, finished: begun, Prog 1; 119 (no finish). Windurst Waters: Ranpi-Monpi (his script: A Crisis in the
+# Making, else a random song; no onTrade): 978 (Progress: no turn for the script), finished: Prog 2; Prog 1 again (a
+# GM): 978, finished: Prog 2; 979, twice; the four: 983, finished: the trade confirmed, Prog 3, Timer = today + 1; 982
+# (Timer ahead), twice. A Vana'diel day later: 980, finished: Ranpi-Monpi's Specialty, Prog 4, Timer 0; Prog 3 again
+# (a GM; Timer 0): 980, finished: the specialty already held, Prog 4. Windurst Waters [S]: 118, finished: the specialty
+# taken, the Culinary Knife, Prog 5; Prog 5: 120 (the last section's `or vars.Prog == 5`). Windurst Waters: 981,
+# finished: completed (a Trainee Knife), the knife taken. Completed: his script. Windurst Waters [S]: 120.
+lists WindurstWatersS/Ranpi-Monpi/onTrigger WindurstWatersS/onEventFinish/117 WindurstWatersS/onEventFinish/118 WindurstWaters/Ranpi-Monpi/onTrigger WindurstWaters/Ranpi-Monpi/onTrade WindurstWaters/onEventFinish/978 WindurstWaters/onEventFinish/980 WindurstWaters/onEventFinish/981 WindurstWaters/onEventFinish/983
+char zone=WindurstWatersS pos=-113.952,-2,43.389 job=WAR lvl=99
+item Pepperoni
+item Walnut
+item DragonFruit
+item BastoreSweeper
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Ranpi-Monpi                     # 117; the mission takes no talk
+finish                                  # begun; Prog 1
+trigger Ranpi-Monpi                     # Prog 1: 119
+finish
+warp -121.817,-3.04,63.211 WindurstWaters
+trigger Ranpi-Monpi                     # Prog 1: 978
+finish                                  # Prog 2
+charvar Quest[7][5]Prog 1
+trigger Ranpi-Monpi                     # Prog 1 again: 978 (no turn for his script)
+finish                                  # Prog 2
+trigger Ranpi-Monpi                     # Prog 2: 979
+finish
+trigger Ranpi-Monpi                     # 979 again
+finish
+trade Ranpi-Monpi Pepperoni x1 Walnut x1 DragonFruit x1 BastoreSweeper x1 # 983
+finish                                  # the trade confirmed; Prog 3; Timer = today + 1
+trigger Ranpi-Monpi                     # Timer ahead: 982
+finish
+trigger Ranpi-Monpi                     # 982 again
+finish
+wait vana=24
+trigger Ranpi-Monpi                     # the day turned: 980
+finish                                  # Ranpi-Monpi's Specialty; Prog 4; Timer 0
+charvar Quest[7][5]Prog 3
+trigger Ranpi-Monpi                     # Prog 3, Timer 0: 980 again
+finish                                  # the specialty already held; Prog 4
+warp -113.952,-2,43.389 WindurstWatersS
+trigger Ranpi-Monpi                     # Prog 4: 118
+finish                                  # the specialty taken; the Culinary Knife; Prog 5
+trigger Ranpi-Monpi                     # Prog 5: 120
+finish
+warp -121.817,-3.04,63.211 WindurstWaters
+trigger Ranpi-Monpi                     # Prog 5: 981
+finish                                  # completed (Trainee Knife); the knife taken
+trigger Ranpi-Monpi                     # completed: no section here: his script
+finish-if-event
+warp -113.952,-2,43.389 WindurstWatersS
+trigger Ranpi-Monpi                     # completed: 120
+finish

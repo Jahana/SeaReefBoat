@@ -1,0 +1,23 @@
+# Eco-Warrior (San d'Oria) with its era module (modules/era/lua/quests/sandoria/eco_warrior.lua, enabled by its
+# condition xi.pre(xi.expansion.ROV): RESTRICT_CONTENT 1, ENABLE_ROV 0), which replaces state 2's Ordelles Caves finish
+# of 51 with a copy whose Level Restriction is 20 (the quest's own is 25). Accepted, no stalagmite, at Rojaireaut: 51
+# with option 0 and 2 (the module's handler, its option-not-1 side: nothing), 51 with option 1 (the module's handler:
+# Level Restriction 20, ON_ZONE: the char's level shows 20), then the restriction's 53 (the quest's own, option 0: off)
+# and 51 again. The twin of tests/golden/flows/bastok.eco_warrior#era.flow.
+module modules/era/lua/quests/sandoria/eco_warrior.lua
+lists OrdellesCaves/Rojaireaut/onTrigger OrdellesCaves/onEventFinish/51 OrdellesCaves/onEventFinish/53
+char zone=OrdellesCaves pos=-90.3,0.5,587.9 lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Sandoria.EcoWarrior accepted
+login
+trigger Rojaireaut                        # no stalagmite, no restriction: 51
+finish option=0                           # the module's 51, option 0: nothing
+trigger Rojaireaut                        # 51 again
+finish option=2                           # the module's 51, option 2: nothing
+trigger Rojaireaut                        # 51 again
+finish option=1                           # the module's 51: Level Restriction 20 (ON_ZONE)
+trigger Rojaireaut                        # the restriction: 53
+finish                                    # option 0: the restriction off (the quest's own 53)
+trigger Rojaireaut                        # no stalagmite, no restriction: 51
+finish option=0

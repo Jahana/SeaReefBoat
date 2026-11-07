@@ -1,0 +1,15 @@
+# The Zeruhn Report (Bastok 1-1): section 1's other checks, by two chars (Resonance current keeps RoV 1-1 out). Main, a
+# level 10 Warrior of San d'Oria: Cleades: section 1 fails (not Bastok): his script's 1003. bob, a level 10 Warrior of
+# Bastok with A Geological Survey current (a GM): Cleades: 1-1's section 1 fails (a current mission), section 2 too
+# (not 1-1); 1-2's own section answers (ORIGINAL_MISSION_OFFSET + 3, 6540).
+lists BastokMarkets/Cleades/onTrigger
+char zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=0
+char bob zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+bob: mission Rov Resonance current
+bob: mission Bastok GeologicalSurvey current
+login
+trigger Cleades                         # not Bastok: no section: his script's 1003
+finish
+bob: login
+bob: trigger Cleades                    # a current mission (1-2): no 1-1 section: 1-2's 6540

@@ -1,0 +1,25 @@
+# Axe the Competition (jeuno 59): the qm9 without the map. Available: no handler (NOTHING_OUT_OF_ORDINARY); accepted by
+# a GM with no map: nil; the map by a GM pops Yallery Brown; the map deleted by a GM before the kill: his death sets
+# nothing, so the next qm9 talk (no map, killed_wsnm 0) is nil again. Yallery Brown despawned, the map (a GM): popped
+# again, killed (killed_wsnm 1); despawned, the Annals and killed_wsnm 0 (a GM): the map and the Annals: nil, no pop.
+lists TempleOfUggalepih/qm9/onTrigger TempleOfUggalepih/Yallery_Brown/onMobDeath
+char zone=TempleOfUggalepih pos=219.7,-8.1,205.8 job=WAR lvl=75
+login
+trigger qm9                             # available: no handler; NOTHING_OUT_OF_ORDINARY
+quest Jeuno.AxeTheCompetition accepted  # a GM
+trigger qm9                             # accepted, no map: nil
+keyitem MapToTheAnnalsOfTruth           # a GM
+trigger qm9                             # the map: Yallery Brown popped and claimed; SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth        # a GM
+kill YALLERY_BROWN                      # no map: killed_wsnm not set
+trigger qm9                             # killed_wsnm 0, no map: nil
+tick 15000                              # Yallery Brown despawning (the death and the despawn each take a zone tick)
+tick 30000                              # despawned
+keyitem MapToTheAnnalsOfTruth           # a GM
+trigger qm9                             # the map, no Annals, Yallery Brown gone: popped again; SENSE_OMINOUS_PRESENCE
+kill YALLERY_BROWN                      # the map held: killed_wsnm 1
+tick 15000                              # despawning
+tick 30000                              # despawned
+keyitem AnnalsOfTruth                   # a GM
+localvar killed_wsnm 0                  # a GM: the death's mark cleared
+trigger qm9                             # the map and the Annals, Yallery Brown gone: nil (no pop)

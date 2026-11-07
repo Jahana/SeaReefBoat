@@ -1,0 +1,32 @@
+# The Rumor (sandoria 61): Novalmauge in Bostaunieux Oubliette. A WAR 5 at fame 124 (level 2): his default 10; fame 125
+# (level 3): 13 declined (nothing), a trade while offered (no handler; his script has no onTrade): nothing, 13 taken
+# (begun); accepted: 11; the trades (a bone chip; the vial and a chip: nil; exactly the vial: 12, completed: Scroll of
+# Drain, fame +30, the vial taken); completed: 14 (replaceDefault, over his default 10); a trade then: nothing.
+# Novalmauge's script acts only on The Holy Crest's char vars (none here) and otherwise starts nothing: on the
+# alternation's script turn (interaction_lookup's UseFallback) the script does nothing and the quest's reply plays
+# anyway, so every talk shows the quest's event. He walks a patrol path (onSpawn pathThrough): `trigger` walks to him
+# and every trade follows a talk (check first, README item 1). Souls in Shadow and Trouble at the Sluice stay closed (no
+# scythe skill; The Rumor not completed).
+lists BostaunieuxOubliette/Novalmauge/onTrigger BostaunieuxOubliette/Novalmauge/onTrade BostaunieuxOubliette/onEventFinish/13 BostaunieuxOubliette/onEventFinish/12
+char zone=BostaunieuxOubliette pos=32.4,-24,19.8 job=WAR lvl=5
+fame Sandoria 124
+item VialOfBeastmanBlood
+item BoneChip
+login
+trigger Novalmauge                        # fame level 2: not offered; his default 10
+finish
+fame Sandoria 125
+trigger Novalmauge                        # fame level 3, level 5: 13
+finish                                    # option 0: nothing
+trade Novalmauge VialOfBeastmanBlood x1   # available, offered: no trade handler, his script has none: nothing
+trigger Novalmauge                        # 13
+finish option=1                           # begun
+trigger Novalmauge                        # accepted: 11
+finish
+trade Novalmauge BoneChip x1              # not the vial: nil, nothing
+trade Novalmauge VialOfBeastmanBlood x1 BoneChip x1   # not exactly the vial: nil
+trade Novalmauge VialOfBeastmanBlood x1   # exactly the vial: 12
+finish                                    # completed: Scroll of Drain, fame +30; the vial taken (confirmTrade)
+trigger Novalmauge                        # completed: 14 (replaceDefault)
+finish
+trade Novalmauge BoneChip x1              # completed: no trade handler, nothing

@@ -1,0 +1,18 @@
+# The Three Magi (windurst 66): the AF1 level gate on a BLM 39. AF1_QUEST_LEVEL 40 (the default) and 39.4: no 260
+# (MainNumber reads 39.4 as it is: 39 is under it), and no other arm: her 259. 39 at 39: 260, option 1: begun (any
+# option), theThreeMagiSupport 1. Accepted: 261 (no level read). Completed by GM: a BLM under AF2_QUEST_LEVEL: 268.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=39
+login
+trigger Chumimi                         # 39 under AF1 40: her 259
+finish
+setting AF1_QUEST_LEVEL 39.4
+trigger Chumimi                         # 39 under 39.4: her 259
+finish
+setting AF1_QUEST_LEVEL 39
+trigger Chumimi                         # 39 at 39: 260
+finish option=1                         # begun (any option); theThreeMagiSupport 1
+trigger Chumimi                         # accepted: 261
+finish
+quest Windurst.TheThreeMagi completed   # GM
+trigger Chumimi                         # completed, Recollections available, BLM 39 under AF2 50: 268
+finish

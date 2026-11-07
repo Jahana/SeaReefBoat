@@ -1,0 +1,17 @@
+# Peace for the Spirit (sandoria 86): Curilla's level test (main level >= AF2_QUEST_LEVEL, a setting compared as a
+# number) on both sides. An RDM 49 with Enveloped in Darkness completed: 114 at AF2_QUEST_LEVEL 50 (the default) and at
+# 49.4 (49 < 49.4: a rounded setting would let 109 through); 109 at 49 (equal) and at 48 (above).
+char zone=ChateauDoraguille pos=31.2,0.0,-0.9 job=RDM lvl=49
+quest Sandoria.EnvelopedInDarkness completed
+login
+trigger Curilla                           # RDM 49, AF2_QUEST_LEVEL 50: 114
+finish
+setting AF2_QUEST_LEVEL 49.4
+trigger Curilla                           # RDM 49, AF2_QUEST_LEVEL 49.4: 114
+finish
+setting AF2_QUEST_LEVEL 49
+trigger Curilla                           # RDM 49, AF2_QUEST_LEVEL 49: 109
+finish option=0
+setting AF2_QUEST_LEVEL 48
+trigger Curilla                           # RDM 49, AF2_QUEST_LEVEL 48: 109
+finish option=0

@@ -1,0 +1,69 @@
+# Saga of the Skyserpent's rivals at Fari-Wari (GM states out of play order, so each Saga reply meets another quest's):
+# a level 75 Warrior, Ode to the Serpents accepted (a GM: its 891, an Event, neither Bow nor Fist completed). A Progress
+# beats an Event and equal kinds take turns, so each pair is talked to twice. Saga available: 823 beats 891, finished on
+# option 1: begun. Prog 0: 829 and 891 (both Events) take turns. Prog 1: 953 beats 891 (twice); Prog 2: 825 beats 891
+# (twice); each finish with Prog 9 set first by a GM, so no section's finish runs (no zone change, no completion). Then
+# Fist of the People accepted (a GM: its 884, a Progress): Prog 0: 884 beats 829 and 891 (twice, Fist Prog 0 set again
+# by a GM after each finish); Prog 1: 953 and 884 take turns; Prog 2: 825 and 884 take turns. Saga available again (a
+# GM): 823 and 884 take turns (each finish undone by a GM).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger
+char zone=AhtUrhganWhitegate pos=81.95,-6,-137.707 job=WAR lvl=75
+quest AhtUrhgan.OdeToTheSerpents accepted
+login
+trigger Fari-Wari                       # Saga available: 823 (beats Ode's 891)
+finish option=1                         # Saga begun
+trigger Fari-Wari                       # Prog 0: 829 or 891 (Events: turns)
+finish
+trigger Fari-Wari                       # the other
+finish
+charvar Quest[6][43]Prog 1              # a GM
+trigger Fari-Wari                       # Prog 1: 953 (beats 891)
+charvar Quest[6][43]Prog 9              # a GM: no section's 953 finish
+finish
+charvar Quest[6][43]Prog 1
+trigger Fari-Wari                       # 953 again
+charvar Quest[6][43]Prog 9
+finish
+charvar Quest[6][43]Prog 2
+trigger Fari-Wari                       # Prog 2: 825 (beats 891)
+charvar Quest[6][43]Prog 9              # a GM: no section's 825 finish
+finish
+charvar Quest[6][43]Prog 2
+trigger Fari-Wari                       # 825 again
+charvar Quest[6][43]Prog 9
+finish
+quest AhtUrhgan.FistOfThePeople accepted   # a GM: Fist's 884 (a Progress) at Prog 0
+charvar Quest[6][43]Prog 0
+trigger Fari-Wari                       # Saga Prog 0: 884 (beats 829 and 891)
+finish                                  # Fist Prog 1
+charvar Quest[6][46]Prog 0              # a GM
+trigger Fari-Wari                       # 884 again
+finish
+charvar Quest[6][46]Prog 0
+charvar Quest[6][43]Prog 1
+trigger Fari-Wari                       # Saga Prog 1: 953 or 884 (Progresses: turns)
+charvar Quest[6][43]Prog 9
+finish
+charvar Quest[6][46]Prog 0
+charvar Quest[6][43]Prog 1
+trigger Fari-Wari                       # the other
+charvar Quest[6][43]Prog 9
+finish
+charvar Quest[6][46]Prog 0
+charvar Quest[6][43]Prog 2
+trigger Fari-Wari                       # Saga Prog 2: 825 or 884
+charvar Quest[6][43]Prog 9
+finish
+charvar Quest[6][46]Prog 0
+charvar Quest[6][43]Prog 2
+trigger Fari-Wari                       # the other
+charvar Quest[6][43]Prog 9
+finish
+charvar Quest[6][46]Prog 0
+quest AhtUrhgan.SagaOfTheSkyserpent available  # a GM
+trigger Fari-Wari                       # Saga available: 823 or 884
+finish option=1
+quest AhtUrhgan.SagaOfTheSkyserpent available
+charvar Quest[6][46]Prog 0
+trigger Fari-Wari                       # the other
+finish option=1

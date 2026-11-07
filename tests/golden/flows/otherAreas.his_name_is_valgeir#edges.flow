@@ -1,0 +1,40 @@
+# His Name is Valgeir (otherAreas 3): the available check and Rycharde's conditions, bracketed, and 86's options. Unending
+# Chase accepted (a GM): its section (Rycharde 85), none of this quest's. Completed (a GM), Quest[4][2]DayCompleted 7998
+# (7998 + 2 = 8000, not below): 75; 7997 with Windurst fame 124 (level 2): 75; fame 125: 86, option 79 (below 80):
+# nothing; option 82 (above 81): nothing; option 81: DayCompleted 0, the pizza, begun. The pizza taken by a GM: Rycharde
+# 88; the quest made available by a GM while it is open: no 88 handler (nothing given). The accepted section's status
+# operand alone, at Valgeir: the pizza (a GM) while available: no section (his default 140, not 100); while completed (a
+# GM): Expertise's available section, which has no Valgeir handler: 140.
+lists Mhaura/Rycharde/onTrigger Mhaura/onEventFinish/86 Mhaura/onEventFinish/88 Selbina/Valgeir/onTrigger
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.UnendingChase accepted
+fame Windurst 125
+login
+trigger Rycharde                        # Unending Chase accepted: 85
+finish
+quest OtherAreas.UnendingChase completed # a GM
+charvar Quest[4][2]DayCompleted 7998    # 8000 < 8000 false
+trigger Rycharde                        # 75
+finish
+charvar Quest[4][2]DayCompleted 7997    # 7999 < 8000
+fame Windurst 124                       # level 2
+trigger Rycharde                        # 75
+finish
+fame Windurst 125                       # level 3
+trigger Rycharde                        # 86
+finish option=79                        # below 80: nothing
+trigger Rycharde                        # 86
+finish option=82                        # above 81: nothing
+trigger Rycharde                        # 86
+finish option=81                        # DayCompleted 0, the pizza, begun
+delkeyitem AragoneuPizza                # a GM
+trigger Rycharde                        # no pizza: 88
+quest OtherAreas.HisNameIsValgeir available # a GM, while 88 is open
+finish                                  # no 88 handler while available: nothing
+keyitem AragoneuPizza                   # a GM
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # available, the pizza: no section; his default 140
+finish
+quest OtherAreas.HisNameIsValgeir completed # a GM
+trigger Valgeir                         # completed, the pizza: Expertise's section has no Valgeir handler: 140
+finish

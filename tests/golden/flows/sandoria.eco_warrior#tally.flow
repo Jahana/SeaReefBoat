@@ -1,0 +1,20 @@
+# Eco-Warrior (San d'Oria) (sandoria 97): the EcoReset lock until the next conquest tally. Completed at Norejaie (681:
+# EcoReset 1, its expiry NextConquestTally(): the harness's JST clock starts on a Friday at 17:00, so the tally is the
+# Monday 00:00 JST after it, 1800198000). Then nil (EcoReset 1); two JST days later (Sunday 17:00, before the tally:
+# still nil); one more day (Monday 17:00, past the tally: EcoReset reads 0): 677, option 1 deletes the quest and begins
+# it again.
+lists SouthernSanDoria/Norejaie/onTrigger SouthernSanDoria/onEventFinish/677 SouthernSanDoria/onEventFinish/681
+char zone=SouthernSanDoria pos=85.4,1.0,110.5 lvl=30
+quest Sandoria.EcoWarrior accepted
+keyitem IndigestedStalagmite
+login
+trigger Norejaie                          # the stalagmite: 681
+finish                                    # completed; EcoReset 1 until the next conquest tally
+trigger Norejaie                          # completed, EcoReset 1: nil; 678
+finish-if-event
+wait jst=2
+trigger Norejaie                          # Sunday 17:00 JST, before the tally: EcoReset 1: nil; 678
+finish-if-event
+wait jst=1
+trigger Norejaie                          # Monday 17:00 JST, past the tally: EcoReset 0: 677
+finish option=1                           # the quest deleted and begun again

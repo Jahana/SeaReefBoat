@@ -1,0 +1,22 @@
+# probe (quest rework P8): missionstatus <MissionLog> <value> [pos=<n>], a GM's player:setMissionStatus. Over the Hills
+# and Far Away (sandoria, its Lua in Uleguerand Range's qm_moblin_hotrok script): the Moblin Hotrok trade plays 10, and
+# its parameters follow getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) (position 2) == 14:
+# (0, 1729, map, 1, 0, 0, 0) at another status, (0, 1729, map, 1, 0, 1, 0) at 14 (no Louverance title either time).
+# Accepted, the hotrok: 10 at 0; finished: completed (the map, gil, fame), the hotrok taken. Accepted again with another
+# hotrok (GMs: delQuest first, since a completed quest stays completed), the CoP status at position 2 set to 14: 10 with
+# the other parameters; finished: completed again. The whole status (no pos=) set back to 0 last.
+lists UleguerandRange/qm_moblin_hotrok/onTrade
+char zone=UleguerandRange pos=-297.5,-62,-18 job=WAR lvl=75
+quest Sandoria.OverTheHillsAndFarAway accepted
+item MoblinHotrok
+login
+trigger qm_moblin_hotrok                # accepted: SOMETHING_GLITTERING, WHAT_LIES_BENEATH
+trade qm_moblin_hotrok MoblinHotrok x1  # LOUVERANCE 0: 10 (0, 1729, map, 1, 0, 0, 0)
+finish                                  # completed; the hotrok taken
+quest Sandoria.OverTheHillsAndFarAway available # a GM: delQuest (the completed bit cleared; completed would win)
+quest Sandoria.OverTheHillsAndFarAway accepted # a GM
+item MoblinHotrok                       # a GM
+missionstatus Cop 14 pos=2              # a GM: COP LOUVERANCE 14
+trade qm_moblin_hotrok MoblinHotrok x1  # LOUVERANCE 14: 10 (0, 1729, map, 1, 0, 1, 0)
+finish                                  # completed again
+missionstatus Cop 0                     # a GM: the whole CoP status 0

@@ -1,0 +1,26 @@
+# Trial by Earth (battlefield.trial_by_earth, Cloister of Tremors, BattlefieldQuest of bastok.trial_by_earth, a C#
+# quest; index 0, 30 minutes, 6 players, the Tuning Fork of Earth required, Earth_Protocrystal the exit). A level 75
+# Summoner with the quest accepted and the fork. A trade to EP_Entrance (a Chunk of Copper Ore): Trial by Earth wants no
+# trade (nor does any fight of the zone with that item): no options, and the zone's IDs.lua has no NO_BATTLEFIELD_ENTRY:
+# nothing. The trigger: the menu 32000 (options 1).
+# Updates: 0 (index 0, area 0) and 4 (area 4, past the zone's 3 arenas): no fixed area: REQS_NOT_MET; 1 (area 1):
+# registered, entered: onBattlefieldEnter takes the fork (requiredKeyItems, no keep), the entry messages; finished.
+# Titan_Prime_TBE of arena 1 (GALGALIM-3: below every IDs.lua key) killed: its group's allDeath sets WON; the win
+# (BattlefieldQuest:onBattlefieldWin, accepted): battlefieldWin 576, 32001 (canSkipCS 0); finished: no title, no XP
+# (the C# quest's 32001 handler: the Whisper of Tremors, Heir of the Great Earth). After the cleanup, out.
+lists CloisterOfTremors/EP_Entrance/onTrigger CloisterOfTremors/EP_Entrance/onTrade CloisterOfTremors/onEventUpdate/32000 CloisterOfTremors/onEventFinish/32000 CloisterOfTremors/onEventFinish/32001
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+quest Bastok.TrialByEarth accepted
+keyitem TuningForkOfEarth
+item ChunkOfCopperOre
+login
+trade EP_Entrance ChunkOfCopperOre x1   # no fight wants it, no NO_BATTLEFIELD_ENTRY text: nothing
+trigger EP_Entrance                     # the fork: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=4                   # index 0, area 4: REQS_NOT_MET
+update 32000 option=1                   # area 1: registered, entered, the fork taken
+finish                                  # in the arena
+kill GALGALIM-3                         # Titan_Prime_TBE of arena 1: WON; 32001
+finish                                  # nothing of the battlefield (the quest: the whisper, the title)
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

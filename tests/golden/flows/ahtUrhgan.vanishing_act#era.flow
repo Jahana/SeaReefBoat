@@ -1,0 +1,25 @@
+# Vanishing Act with its era module, modules/era/lua/quests/ahturhgan/vanishing_act.lua, enabled by xi.pre(SOA)
+# (RESTRICT_CONTENT 1, ENABLE_SOA 0): A Taste of Honey opens at JST midnight. A level 75 Warrior, the quest accepted at
+# Prog 2 with the Rainbow Berry (GMs). Qutiba 45, finished: the module's copy: completed, the silver piece, the zoning
+# flag, the berry taken, A Taste of Honey's Stage = JstMidnight() (1800025200; the quest alone sets 1800000060). Out of
+# Whitegate and back: now < Stage: Qutiba: A Taste of Honey's 55 (Vanishing Act completed has no Qutiba); Stage
+# 1800000000 (a GM, now): 579, finished: its Stage 0, begun.
+module modules/era/lua/quests/ahturhgan/vanishing_act.lua
+lists AhtUrhganWhitegate/Qutiba/onTrigger AhtUrhganWhitegate/onEventFinish/45 AhtUrhganWhitegate/onEventFinish/579
+char zone=AhtUrhganWhitegate pos=92.341,-6.5,-127.5 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest AhtUrhgan.DeliveringTheGoods completed
+quest AhtUrhgan.VanishingAct accepted
+charvar Quest[6][62]Prog 2
+keyitem RainbowBerry
+login
+trigger Qutiba                          # the berry: 45
+finish                                  # the module's copy: completed; needToZone; berry taken; Stage JstMidnight()
+warp -64,-7,38 AlZahbi                  # the zoning flag cleared
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+trigger Qutiba                          # now < Stage (JST midnight): A Taste of Honey's 55
+finish
+charvar Quest[6][12]Stage 1800000000    # a GM: now
+trigger Qutiba                          # 579
+finish                                  # Stage 0; begun

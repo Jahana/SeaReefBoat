@@ -1,0 +1,92 @@
+# Curses, Foiled Again!? (2) (windurst 33): Shantotto and Hiwon-Biwon in Windurst Walls. (1) accepted by GM and
+# completed here (fame 30 + 20 = 50, level 2), which sets this quest's Timer to the next Vana'diel day and (1)'s
+# mustZone. The wait's two operands, each alone at both NPCs: the Timer ahead with (1)'s mustZone (174 / nil), the Timer
+# ahead alone after a zone change (174 / nil), (1)'s mustZone alone (GM, the day after: Timer == today) (174 / nil).
+# Then Shantotto 178 at Prog 0; Hiwon-Biwon 179 (Prog 1; again at Prog 1: nothing); Shantotto 177 (Prog 2, the
+# mustZone); 179 at Prog 2 (nothing); Shantotto at Prog 2 with the mustZone: nil (her default 164); after a zone change
+# 180 (options 0, 2 and 4: nothing; option 3: begun, Tarutaru Murder Suspect by setTitle). Accepted: 181, Hiwon's 182
+# (the Lock of Hiwon's Hair; again: the hair is rare and held, giveItem fails with its message), the trades (a chip; the
+# set without the hair; one Bomb Arm short; the set and an extra chip: nil), the set with a full bag (the Misery Staff
+# does not fit: nothing), the set (183: completed, fame +20, the staff, Hexer Vexer; the items taken; the Golem quest's
+# mustZone), then 184 and 185 (replaceDefault: the Golem not completed).
+# Trades with no handler: Shantotto while the offer's check holds (Timer passed, Prog 0).
+# Defaults: Shantotto 164 (her script acts only for Class Reunion: never here); Hiwon-Biwon's script answers Making
+# Headlines (not accepted here) and else draws one of 305 / 306 / 168 / 170 / 169 (math.randomInt(1, 5)): his quest
+# Progress lines (179, 182) always win; his nil turns and the script's turn of the alternation after 185 show one of the
+# five, by the seed. Also named: Shantotto as in (1)'s flow, and by the Golem (its offer needs fame level 4: fame 70 here);
+# Hiwon-Biwon by no other quest (his script reads (1)'s status for Making Headlines' 283 / 284).
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/Shantotto/onTrade WindurstWalls/Hiwon-Biwon/onTrigger WindurstWalls/onEventFinish/177 WindurstWalls/onEventFinish/179 WindurstWalls/onEventFinish/180 WindurstWalls/onEventFinish/182 WindurstWalls/onEventFinish/183
+char zone=WindurstWalls pos=122.6,-3.0,111.6
+fame Windurst 30
+quest Windurst.CursesFoiledAgain1 accepted
+item PinchOfBombAsh
+item BoneChip x3
+login
+trade Shantotto PinchOfBombAsh x1 BoneChip x2       # (1)'s 173
+finish                                              # (1) completed: fame 50; this quest's Timer = tomorrow; (1)'s mustZone 239
+trigger Shantotto                                   # available, the Timer ahead and (1)'s mustZone: event 174
+finish
+trigger Hiwon-Biwon                                 # the same: nil; his script (Making Headlines not accepted): a random one of five
+finish
+warp 11.4,-9.75,-195.97 WindurstWaters              # (1)'s mustZone cleared (another zone)
+warp 122.6,-3.0,111.6 WindurstWalls
+trigger Shantotto                                   # the Timer ahead alone: 174
+finish
+trigger Hiwon-Biwon                                 # the Timer ahead alone: nil; random
+finish
+wait vana=24                                        # the next Vana'diel day: Timer == today
+charvar Quest[2][32]mustZone 239                    # (1)'s mustZone alone, by GM
+trigger Shantotto                                   # (1)'s mustZone: 174
+finish
+trigger Hiwon-Biwon                                 # (1)'s mustZone: nil; random
+finish
+charvar Quest[2][32]mustZone 0
+walk 122.6,-3.0,111.6
+trade Shantotto BoneChip x1                         # the check holds: no trade handler in section 1, nothing
+trigger Shantotto                                   # Timer == today, no mustZone, Prog 0: event 178
+finish
+trigger Hiwon-Biwon                                 # progressEvent 179
+finish                                              # Prog 0: Prog 1
+trigger Hiwon-Biwon                                 # 179 again
+finish                                              # Prog 1: nothing
+trigger Shantotto                                   # Prog 1: event 177
+finish                                              # Prog 2; the quest's mustZone 239
+trigger Hiwon-Biwon                                 # 179 at Prog 2
+finish                                              # nothing
+trigger Shantotto                                   # Prog 2 with the mustZone: nil; her default 164
+finish
+warp 11.4,-9.75,-195.97 WindurstWaters              # the quest's mustZone cleared
+warp 122.6,-3.0,111.6 WindurstWalls
+trigger Shantotto                                   # Prog 2: progressEvent 180 (0, 0, 0, 0, Bomb Ash, Bone Chip, Bomb Arm, Revival Tree Root)
+finish option=0                                     # nothing
+trigger Shantotto                                   # 180 again
+finish option=2                                     # below 3: nothing
+trigger Shantotto                                   # 180 again
+finish option=4                                     # above 3: nothing
+trigger Shantotto                                   # 180 again
+finish option=3                                     # begun; the title Tarutaru Murder Suspect
+trigger Shantotto                                   # accepted: event 181
+finish
+trigger Hiwon-Biwon                                 # accepted: progressEvent 182
+finish                                              # the Lock of Hiwon's Hair
+trigger Hiwon-Biwon                                 # 182 again
+finish                                              # the hair is rare and held: giveItem fails (its message)
+item BombArm x2
+item RevivalTreeRoot
+walk 122.6,-3.0,111.6
+trade Shantotto BoneChip x1                         # not the set: nil
+trade Shantotto BombArm x2 RevivalTreeRoot x1       # no hair: nil
+trade Shantotto BombArm x1 RevivalTreeRoot x1 LockOfHiwonsHair x1   # one Bomb Arm: nil
+trade Shantotto BombArm x2 RevivalTreeRoot x1 LockOfHiwonsHair x1 BoneChip x1   # the set and an extra chip: nil
+fill-inventory
+trade Shantotto BombArm x2 RevivalTreeRoot x1 LockOfHiwonsHair x1   # the set: 183
+finish                                              # no room for the Misery Staff: complete fails, nothing
+free-inventory
+trade Shantotto BombArm x2 RevivalTreeRoot x1 LockOfHiwonsHair x1   # 183
+finish                                              # completed: fame +20, the staff, Hexer Vexer; the items taken; the Golem quest's mustZone
+trigger Shantotto                                   # completed, the Golem not completed: 184 (replaceDefault)
+finish
+trigger Hiwon-Biwon                                 # 185 (replaceDefault): the handler's turn
+finish
+trigger Hiwon-Biwon                                 # the script's turn: a random one of five
+finish

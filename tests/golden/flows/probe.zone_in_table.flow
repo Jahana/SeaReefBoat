@@ -1,0 +1,21 @@
+# probe (quest rework P8): the OnZoneIn table reply. A Lua zone-in that returns the table { csid, textTable, flags }
+# (the engine's OnZoneIn reads [1] the cutscene, [2] its text table, default -1, [3] its cutscene flags, default 0), as
+# the C# bridge returns QuestReply.Event(<csid>).TextTable(<n>).Flags(<n>). Recorded on Lua (P8), when both quests were
+# Lua; the C# runs then registered a test-only C# copy of each (Twins.cs). Both are ported now: the replay runs
+# SuchSweetSorrow.cs (its copy removed in B3b Aht Urhgan group 10) and IllTakeTheBigBox.cs (Twins.cs leaves a copy out
+# once its key ships); a new record refuses (a probe records Lua only). Such Sweet Sorrow (ahtUrhgan 13): Whitegate's
+# zone-in at Option 2 returns { 956, 0 }: cutscene 956 with text table 0 (not the zone's own, 50); its finish begins the
+# quest, Option 0. I'll Take the Big Box (outlands 144): Selbina's zone-in at Prog 5 returns { 1101, -1, RESET_CAMERA |
+# NO_PCS | NO_NPCS } (0x13); its finish completes the quest (the Ninja Hakama, Norg fame 20) and takes the Seance Staff.
+# Main logs in to Whitegate, bob to Selbina, each with the zone-in left open (login open) and then finished.
+lists AhtUrhganWhitegate/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/956 Selbina/onZoneIn/1 Selbina/onEventFinish/1101
+char zone=AhtUrhganWhitegate pos=100.023,0,-91.762 job=WAR lvl=30
+char bob zone=Selbina pos=17.981,-16.806,99.83 job=NIN lvl=60
+charvar Quest[6][13]Option 2
+bob: quest Outlands.ILlTakeTheBigBox accepted
+bob: charvar Quest[5][144]Prog 5
+bob: keyitem SeanceStaff
+login open                              # Option 2: { 956, 0 }: 956, text table 0
+finish                                  # begun; Option 0
+bob: login open                         # Prog 5: { 1101, -1, 0x13 }: 1101 with its flags
+bob: finish                             # completed: the Ninja Hakama, Norg fame 20; the staff taken

@@ -1,0 +1,52 @@
+# The Real Gift (otherAreas 22): Oswald's offer and each operand of its check, behind xi.settings.map.FISHING_ENABLE
+# (false in settings/default/map.lua): `setting map.FISHING_ENABLE true` (P6) in the header, off as a step once.
+# The Sand Charm and The Gift completed, Under the Sea accepted (a GM): no Real Gift section; Under the Sea's 32 (a
+# Progress 73 would tie with it and play first: The_Real_Gift sorts before Under_the_Sea). Under the Sea completed, The
+# Sand Charm accepted: no Real Gift section; The Gift's 78 (replaceDefault). The Sand Charm completed, fishing off: 78.
+# Fishing on: a shell traded: no trade handler; 73 (4484), options 0, 49 and 51: nothing; option 50: begun. The
+# check's status operand alone: accepted and then completed (a GM), every other operand still true: 74, then 76 (a
+# Progress 73 from section 1 would beat both). Reply kinds:
+# The Real Gift available again and The Gift accepted (a GM: available first, since a completed quest stays completed
+# under addQuest): 73 (Progress) beats The Gift's 71 (Event) every time (an Event 73 would tie, and The Gift's 71 would
+# play first).
+lists Selbina/Oswald/onTrigger Selbina/Oswald/onTrade Selbina/onEventFinish/73
+char zone=Selbina pos=48.6,-15.3,8 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.UnderTheSea accepted
+quest OtherAreas.TheSandCharm completed
+quest OtherAreas.TheGift completed
+item ShallShell
+login
+trigger Oswald                          # Under the Sea accepted, Prog 0: its 32; no Real Gift section
+finish                                  # Under the Sea's Prog 1
+quest OtherAreas.UnderTheSea completed  # a GM
+quest OtherAreas.TheSandCharm available # a GM (from completed: available first)
+quest OtherAreas.TheSandCharm accepted  # a GM
+trigger Oswald                          # The Sand Charm accepted: no Real Gift section; The Gift's 78 (replaceDefault)
+finish
+quest OtherAreas.TheSandCharm completed # a GM
+setting map.FISHING_ENABLE false        # a step: the check's FISHING_ENABLE operand
+trigger Oswald                          # fishing off: no Real Gift section; The Gift's 78 (replaceDefault)
+finish
+setting map.FISHING_ENABLE true         # a step
+trade Oswald ShallShell x1              # available: no trade handler; nothing
+trigger Oswald                          # 73 (4484) (Progress beats 78)
+finish option=0                         # not 50: nothing
+trigger Oswald                          # 73
+finish option=49                        # nothing
+trigger Oswald                          # 73
+finish option=51                        # nothing
+trigger Oswald                          # 73
+finish option=50                        # begun
+trigger Oswald                          # accepted (every other operand true): no section 1; its 74 (4484)
+finish
+quest OtherAreas.TheRealGift completed  # a GM
+trigger Oswald                          # completed: no section 1; its 76 (replaceDefault)
+finish
+quest OtherAreas.TheRealGift available  # a GM
+quest OtherAreas.TheGift available      # a GM
+quest OtherAreas.TheGift accepted       # a GM
+trigger Oswald                          # 73 (Progress beats The Gift's 71)
+finish option=0
+trigger Oswald                          # 73 again
+finish option=0

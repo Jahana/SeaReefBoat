@@ -1,0 +1,71 @@
+# Rycharde the Chef (otherAreas 0): Mhaura's Numi Adaligo (default 50), Take (default 59) and Rycharde (default 69); none
+# has a script. A level 30 Warrior with three Slices of Dhalmel Meat and a Chocobo Feather. Available: two meat (the valid
+# trade, in the wrong status): no trade handler; Rycharde at Prog 0: nil (69); Take at Prog 0: nil (59); Numi's 50
+# finished with option 1 and 3: nothing, with option 2: Prog 1; Rycharde at Prog 1: nil (69); Take at Prog 1: 60,
+# finished: Prog 2; Take at Prog 2: 68; Rycharde at Prog 2: 70 (4359), options 0, 69 and 72: nothing, option 70: Prog 3;
+# Take at Prog 3: 68; Rycharde at Prog 3: 71 (4359), options 0, 71 and 73: nothing, option 72: begun. Accepted: Rycharde
+# 72; Take 68; trades (walked back to Rycharde): one meat: 73; three: nil; one meat and the feather: 73 (hasItemQty(meat,
+# 1) is an equality); two and the feather: nil; the feather: nil; two: 74, finished: completed (fame 20 Windurst, 1500
+# gil, Purveyor in Training), the meat taken, Quest[4][0]DayCompleted 8000 (the harness's Vana'diel day). Completed: no
+# section; Way of the Cook's available section answers Rycharde: 75 (8000 + 8 > 8000); two meat (one given by a GM): no
+# trade handler while completed.
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/Take/onTrigger Mhaura/Numi_Adaligo/onTrigger Mhaura/onEventFinish/50 Mhaura/onEventFinish/60 Mhaura/onEventFinish/70 Mhaura/onEventFinish/71 Mhaura/onEventFinish/72 Mhaura/onEventFinish/73 Mhaura/onEventFinish/74
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+item SliceOfDhalmelMeat x3
+item ChocoboFeather
+login
+trade Rycharde SliceOfDhalmelMeat x2    # available: no trade handler; nothing
+trigger Rycharde                        # Prog 0: nil; his default 69
+finish
+trigger Take                            # Prog 0: nil; his default 59
+finish
+trigger Numi_Adaligo                    # her default 50 (no quest trigger)
+finish option=1                         # option 1 (below 2): Prog stays 0
+trigger Numi_Adaligo                    # 50
+finish option=3                         # option 3 (above 2): Prog stays 0
+trigger Take                            # Prog 0: 59
+finish
+trigger Numi_Adaligo                    # 50
+finish option=2                         # Prog 1
+trigger Rycharde                        # Prog 1: nil; 69
+finish
+trigger Take                            # Prog 1: 60
+finish                                  # Prog 2
+trigger Take                            # Prog 2: 68
+finish
+trigger Rycharde                        # Prog 2: 70 (4359)
+finish option=0                         # neither 71 nor 70: nothing (Prog 2)
+trigger Rycharde                        # 70 (4359)
+finish option=69                        # below 70: nothing
+trigger Rycharde                        # 70 (4359)
+finish option=72                        # above 71: nothing
+trigger Rycharde                        # 70 (4359)
+finish option=70                        # declined: Prog 3
+trigger Take                            # Prog 3: 68
+finish
+trigger Rycharde                        # Prog 3: 71 (4359)
+finish option=0                         # not 72: nothing
+trigger Rycharde                        # 71 (4359)
+finish option=71                        # below 72: nothing
+trigger Rycharde                        # 71 (4359)
+finish option=73                        # above 72: nothing
+trigger Rycharde                        # 71 (4359)
+finish option=72                        # begun
+trigger Rycharde                        # accepted: 72
+finish
+trigger Take                            # accepted: 68
+finish
+walk 18.9,-16,88.8                      # back to Rycharde (a trade does not walk)
+trade Rycharde SliceOfDhalmelMeat x1    # exactly one: 73
+finish
+trade Rycharde SliceOfDhalmelMeat x3    # three: not exactly two, hasItemQty(meat, 1) false: nil
+trade Rycharde SliceOfDhalmelMeat x1 ChocoboFeather x1 # one meat and an extra item: 73
+finish
+trade Rycharde SliceOfDhalmelMeat x2 ChocoboFeather x1 # two and an extra item: nil
+trade Rycharde ChocoboFeather x1        # a wrong item, no meat: nil
+trade Rycharde SliceOfDhalmelMeat x2    # two alone: 74
+finish                                  # completed: fame 20 Windurst, 1500 gil, the title; two meat taken; DayCompleted 8000
+trigger Rycharde                        # completed: Way of the Cook available, 8000 + 8 > 8000: 75
+finish
+item SliceOfDhalmelMeat                 # a GM: two meat again
+trade Rycharde SliceOfDhalmelMeat x2    # completed: no trade handler; nothing

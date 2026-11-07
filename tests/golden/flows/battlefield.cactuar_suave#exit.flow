@@ -1,0 +1,24 @@
+# Cactuar Suave (battlefield.cactuar_suave): the exit and the clearance kept. A level 75 Warrior with a Clotho Orb:
+# traded, area 1 (option 81): entered (the orb's first wear). Shimmering_Circle (arena 1's) in the battlefield: 32003;
+# finished with 4: leaveBattlefield(1) (EXIT: no event). A GM warp back by SC_Entrance: the zone-in gives the clearance
+# back (the char registered, the battlefield not in progress: RestoreClearance; a walk instead leaves the char without
+# it). The orb traded with the clearance: WAIT_LONGER. SC_Entrance's trigger with the clearance: checkRequirements as no
+# registrant (no trade needed then): the menu (enterExisting 1); option 81: in again (autoSkipCS 0: the zone change
+# cleared the CS local var; the orb wears again as the initiator enters). Shimmering_Circle: inside again: 32003;
+# finished with 0: not 4: still inside.
+lists ChamberOfOracles/SC_Entrance/onTrigger ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/Shimmering_Circle/onTrigger ChamberOfOracles/onEventFinish/32003
+char zone=ChamberOfOracles pos=-218.6,-1.9,23.0 job=WAR lvl=75
+item ClothoOrb
+login
+trade SC_Entrance ClothoOrb x1          # the menu 32000
+update 32000 option=81                  # area 1: registered, entered; A_CRACK_HAS_FORMED
+finish                                  # in the arena
+trigger Shimmering_Circle               # in the battlefield: 32003
+finish option=4                         # leaveBattlefield(1): out, the clearance kept
+warp -218.6,-1.9,23.0 ChamberOfOracles  # back by SC_Entrance: the zone-in gives the clearance back (registered, not in progress)
+trade SC_Entrance ClothoOrb x1          # the clearance: WAIT_LONGER
+trigger SC_Entrance                     # the clearance: the menu (enterExisting)
+update 32000 option=81                  # in again (autoSkipCS 0); the orb wears again
+finish                                  # in the arena
+trigger Shimmering_Circle               # inside again: 32003
+finish option=0                         # not 4: still inside

@@ -1,0 +1,40 @@
+# Making Amends (windurst 3): Hakkuru-Rinkuru and Kuroido-Moido (Port Windurst; +7 each: the first entity of each name
+# is cutscene-only). A level-10 WAR at Windurst fame 50 (level 2). Hakkuru-Rinkuru's script acts only for Wonder Wands
+# (never here); Kuroido-Moido's answers a random 225 / 226 while Making Amends is not completed (it takes turns with an
+# Event reply: talked to twice), and nothing once it is completed below fame level 4. Available: the glue traded (no
+# quest trade handler; his script's trade: Wonder Wands only): nothing; 274 (0, glue) option 0 (nothing), option 1
+# (begun). Accepted: Hakkuru-Rinkuru 275; Kuroido-Moido 276; a bone chip: nil; the glue with a chip (tradeHas, not
+# exact): 277 (1500): completed (fame 30, Quick Fixer; the glue taken, the chip kept; 1500 gil; the mustZone).
+# Completed: Hakkuru-Rinkuru 278, Kuroido-Moido 279 (mustZone); out to Windurst Waters and back: Hakkuru-Rinkuru 281
+# (replaceDefault), Kuroido-Moido nil (nothing plays).
+lists PortWindurst/Hakkuru-Rinkuru/onTrigger PortWindurst/Hakkuru-Rinkuru/onTrade PortWindurst/Kuroido-Moido/onTrigger PortWindurst/onEventFinish/274 PortWindurst/onEventFinish/277
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=10
+fame Windurst 50
+item BoneChip
+item BlockOfAnimalGlue x2
+login
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1  # available, the check holds: no quest trade handler: nothing
+trigger Hakkuru-Rinkuru+7                     # fame level 2: 274 (0, Block of Animal Glue)
+finish option=0                               # not 1: nothing
+trigger Hakkuru-Rinkuru+7                     # 274
+finish option=1                               # begun
+trigger Hakkuru-Rinkuru+7                     # accepted: 275
+finish
+trigger Kuroido-Moido+7                       # 276 (an Event: the next turn is his script's)
+finish
+trigger Kuroido-Moido+7                       # his script's 225
+finish
+trigger Hakkuru-Rinkuru+7                     # 275 (stands beside him)
+finish
+trade Hakkuru-Rinkuru+7 BoneChip x1           # no glue: nil
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1 BoneChip x1  # the glue (tradeHas, not exact): 277 (1500)
+finish                                        # completed: fame 30, Quick Fixer; the glue taken, the chip kept; 1500 gil; the mustZone
+trigger Hakkuru-Rinkuru+7                     # completed, the mustZone: 278
+finish
+trigger Kuroido-Moido+7                       # the mustZone: 279 (his script: completed, fame below level 4: nothing)
+finish
+warp -50.9,-6.25,109.3 WindurstWaters
+warp -109.1,-4.25,102.06 PortWindurst         # the mustZone cleared on the zone-in
+trigger Hakkuru-Rinkuru+7                     # no mustZone: 281 (replaceDefault)
+finish
+trigger Kuroido-Moido+7                       # no mustZone: nil; his script: nothing; no default: nothing plays

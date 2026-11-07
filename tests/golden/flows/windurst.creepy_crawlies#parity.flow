@@ -1,0 +1,10 @@
+# Creepy Crawlies (windurst 39), completion parity: 335's finish is the Lua's raw player:completeQuest (then the title,
+# the gil, the trade), so a GM's Quest[2][39]Prog survives the completion (quest:cleanup, which a called
+# Quest.Complete() runs, would clear it). Accepted (GM) beside Illu Bohjaa.
+char zone=WindurstWoods pos=22.8,-5.3,125.2 job=WAR lvl=75
+quest Windurst.CreepyCrawlies accepted
+item SpoolOfSilkThread x3
+login
+charvar Quest[2][39]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Illu_Bohjaa SpoolOfSilkThread x3  # fame 10; 335 (600)
+finish                                  # completed; Crawler Culler; 600 gil; the spools taken; Prog kept

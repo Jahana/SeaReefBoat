@@ -1,0 +1,78 @@
+# Apocalypse Nigh (jeuno 89) with its era module (quest rework B3b Jeuno, P4): modules/era/lua/quests/jeuno/
+# apocalypse_nigh.lua, enabled by xi.pre(xi.expansion.TVR) (RESTRICT_CONTENT 1, ENABLE_TVR 0), replaces state 1's check
+# (the Timer compared with GetSystemTime(), the harness's wall clock 1800000000), state 2's Norg _700 and Gilgamesh
+# onTriggers (the same) and state 2's Empyreal Paradox 32001 finish (#era_win). Every operand of each copy is taken here
+# once more, one at a time, by a level 75 Warrior of Bastok at rank 6, Shadows of the Departed completed:
+# - the check: Timer 1800000001: no section; Timer 1800000000 (now): 123, begun; available again with Timer 1799999999
+#   (GMs): 123, begun; available, Shadows of the Departed accepted, Timer 0: no section (its own area handler: nil);
+#   completed again, the mustZone set (a GM): no section; out and back (cleared): 123, begun; accepted: no area handler
+#   (the copied check's status operand): nothing.
+# - Norg, Prog 5 (a GM): Timer 1800000001: Gilgamesh: nil (now < Timer); _700: 235 (the mustZone); Timer 1800000000:
+#   _700: nil (now < now false; DOOR_IS_LOCKED); Timer 1799999999: _700: nil; Gilgamesh: the mustZone set: nil; out and
+#   back: Gilgamesh: 232 (252, 6), finished 0 (Prog 6); Timer 1800000000, Prog 6: 234 (252), finished 5; Prog 4 and Prog
+#   7 (GMs): Gilgamesh: nil; Timer 1800000001: _700 at Prog 4 and at Prog 6: nil.
+# The condition's false side is the quest's own flows (no module line).
+module modules/era/lua/quests/jeuno/apocalypse_nigh.lua
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/123 Norg/_700/onTrigger Norg/Gilgamesh/onTrigger
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75 nation=1
+rank 6
+setting RESTRICT_CONTENT 1
+setting ENABLE_TVR 0
+quest Jeuno.ShadowsOfTheDeparted completed
+charvar Quest[3][89]Timer 1800000001
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # the module's check: now < Timer: no section; nothing
+walk 4,2.5,100
+charvar Quest[3][89]Timer 1800000000    # a GM: now
+walk 4,2.5,60                           # the module's check: now >= Timer: 123
+finish                                  # begun
+walk 4,2.5,100
+quest Jeuno.ApocalypseNigh available    # a GM
+charvar Quest[3][89]Timer 1799999999    # a GM: a second before now
+walk 4,2.5,60                           # 123
+finish                                  # begun
+walk 4,2.5,100
+quest Jeuno.ApocalypseNigh available    # a GM
+quest Jeuno.ShadowsOfTheDeparted available  # a GM (completeQuest's bit cleared)
+quest Jeuno.ShadowsOfTheDeparted accepted   # a GM
+charvar Quest[3][89]Timer 0             # a GM
+walk 4,2.5,60                           # Shadows of the Departed accepted: no section; nothing
+walk 4,2.5,100
+quest Jeuno.ShadowsOfTheDeparted completed  # a GM
+charvar Quest[3][89]mustZone 243        # a GM
+walk 4,2.5,60                           # the mustZone set: no section; nothing
+warp -55.5,8.2,97.5 UpperJeuno          # another zone: the mustZone cleared
+warp 4,2.5,100 RuludeGardens
+tick 3000
+walk 4,2.5,60                           # 123
+finish                                  # begun
+walk 4,2.5,100
+walk 4,2.5,60                           # accepted: the module's check wants the quest available; no area handler; nothing
+charvar Quest[3][89]Prog 5              # a GM
+charvar Quest[3][89]Timer 1800000001    # a GM
+warp 120.9,-8,-12 Norg                  # by Gilgamesh
+trigger Gilgamesh                       # the module's: now < Timer: nil; nothing
+trigger _700                            # the module's: Prog 5, now < Timer: 235
+finish                                  # the mustZone (252)
+charvar Quest[3][89]Timer 1800000000    # a GM: now
+trigger _700                            # now < now false: nil; DOOR_IS_LOCKED
+charvar Quest[3][89]Timer 1799999999    # a GM
+trigger _700                            # nil; DOOR_IS_LOCKED
+trigger Gilgamesh                       # the Timer reached, the mustZone set: nil; nothing
+warp 22.5,3.9,-61.5 LowerJeuno          # another zone: the mustZone cleared
+warp 120.9,-8,-12 Norg                  # by Gilgamesh
+trigger Gilgamesh                       # the module's: Prog 5: 232 (252, 6)
+finish option=0                         # Prog 6
+charvar Quest[3][89]Timer 1800000000    # a GM: now
+trigger Gilgamesh                       # the module's: Prog 6: 234 (252)
+finish option=5                         # Prog 6
+charvar Quest[3][89]Prog 4              # a GM
+trigger Gilgamesh                       # Prog 4: nil; nothing
+charvar Quest[3][89]Prog 7              # a GM
+trigger Gilgamesh                       # Prog 7: nil; nothing
+charvar Quest[3][89]Timer 1800000001    # a GM
+charvar Quest[3][89]Prog 4              # a GM
+trigger _700                            # the module's: Prog 4: nil; DOOR_IS_LOCKED
+charvar Quest[3][89]Prog 6              # a GM
+trigger _700                            # Prog 6: nil; DOOR_IS_LOCKED

@@ -1,0 +1,14 @@
+# Lure of the Wildcat (Jeuno) (jeuno 90): the guard xi.settings.main.ENABLE_TOAU == 1 with the setting a boolean: Lua's
+# `true == 1` is false: not offered; Ajithaam's script starts nothing (no ToAU mission), so his default 10092 plays. A
+# port that reads true as 1 (Settings.MainNumber / Main) would offer 10088; Settings.MainEquals (quest rework P9) does
+# not. Then 1: 10088 (the White Sentinel Badge, begun). Recorded on Lua at 2888497f^ (the parent of the commit that
+# deleted the Lua).
+lists UpperJeuno/Ajithaam/onTrigger UpperJeuno/onEventFinish/10088
+char zone=UpperJeuno pos=-79.7,0,161.5 job=WAR lvl=20
+setting ENABLE_TOAU true
+login
+trigger Ajithaam               # ENABLE_TOAU true: not offered; his default 10092
+finish
+setting ENABLE_TOAU 1
+trigger Ajithaam               # ENABLE_TOAU 1: 10088
+finish                         # the White Sentinel Badge; begun

@@ -1,0 +1,48 @@
+# Saga of the Skyserpent (ahtUrhgan 43): a level 75 Warrior. Fari-Wari (no script; default event 831); Biyaada (no
+# script; default 250); Halvung's qm7 (no script, no default). Available: Fari-Wari 823, finished on option 1: begun
+# (any option). Prog 0: Fari-Wari 829 (an Event); Biyaada 278 (an Event); qm7: Prog 1 set, the key item action (the
+# Lilac Ribbon, KEYITEM_OBTAINED); qm7 again: Prog 1: nil: nothing. Prog 1: Biyaada 278; Fari-Wari 953, finished: set at
+# 0 0 0 in Wajaom (the zone change: `tick 400`, `login open`, as the harness's warp does it); the Wajaom zone-in at Prog
+# 1: 12, finished: 13 started; finished: Prog 2, Stage today, the ribbon taken, set down in Whitegate at 80 -6 -123.
+# Prog 2: Biyaada 279; Fari-Wari the same Vana'diel day: 833 (an Event); the next day: 825 (user ruling 2026-11-04, kept
+# Lua bugs: the Lua's Stage-gated choice was the zone table's dead entry [1], so 825 played at once and 833 never),
+# finished: completed (an Imperial Gold Piece, Skyserpent Aggrandizer), 1000 imperial standing, BESIEGED_OFFSET.
+# Completed: Fari-Wari answers Ode to the Serpents' 882 (available now), finished: Ode begun, Biyaada's Letter.
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger AlZahbi/Biyaada/onTrigger Halvung/qm7/onTrigger WajaomWoodlands/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/825
+char zone=AhtUrhganWhitegate pos=81.95,-6,-137.707 job=WAR lvl=75
+login
+trigger Fari-Wari                       # available: 823
+finish option=1                         # begun (any option)
+trigger Fari-Wari                       # Prog 0: 829 (an Event)
+finish
+warp -64.3,-6,69.273 AlZahbi            # beside Biyaada
+trigger Biyaada                         # Prog 0: 278 (an Event)
+finish
+warp -10.11,7.935,-185.469 Halvung      # beside qm7
+trigger qm7                             # Prog 0: Prog 1; the Lilac Ribbon (KEYITEM_OBTAINED)
+finish-if-event
+trigger qm7                             # Prog 1: nil: nothing
+finish-if-event
+warp -64.3,-6,69.273 AlZahbi
+trigger Biyaada                         # Prog 1: 278
+finish
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 1: 953
+finish                                  # set at 0 0 0 in Wajaom
+tick 400
+login open                              # the zone change: Wajaom; Prog 1: the zone-in's 12, left open
+finish                                  # 13 started
+finish                                  # 13: Prog 2, Stage today, the ribbon taken; set down in Whitegate (80 -6 -123)
+tick 400
+login                                   # the zone change: Whitegate
+warp -64.3,-6,69.273 AlZahbi
+trigger Biyaada                         # Prog 2: 279
+finish
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 2, Stage today: 833 (an Event)
+finish
+wait vana=24                            # the next Vana'diel day: Stage < today
+trigger Fari-Wari                       # 825
+finish                                  # completed: the Gold Piece, the title; 1000 imperial standing; BESIEGED_OFFSET
+trigger Fari-Wari                       # completed: Ode to the Serpents available: its 882
+finish                                  # Ode begun, Biyaada's Letter

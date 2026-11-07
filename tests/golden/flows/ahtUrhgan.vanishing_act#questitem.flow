@@ -1,0 +1,17 @@
+# Vanishing Act's 507 clears the questItem var (task 7 mutants): a Sickle at Prog 2: 507, finished: the Rainbow
+# Berry, questItem 0. The berry taken and Prog 1 (GMs): the Harvesting Point's own 507 (the quest's trade answers
+# nil), finished: no berry again (questItem is 0, not left at 1).
+lists WajaomWoodlands/Harvesting_Point/onTrade WajaomWoodlands/onEventFinish/507
+char zone=WajaomWoodlands pos=-587.328,-17.999,-200 job=WAR lvl=75
+item Sickle x2
+quest AhtUrhgan.DeliveringTheGoods completed
+quest AhtUrhgan.VanishingAct accepted
+charvar Quest[6][62]Prog 2
+login
+trade Harvesting_Point Sickle x1        # Prog 2, no berry: questItem 1; 507
+finish                                  # the Rainbow Berry; questItem 0
+delkeyitem RainbowBerry                 # a GM
+charvar Quest[6][62]Prog 1              # a GM
+trade Harvesting_Point Sickle x1        # Prog 1: nil (the Harvesting Point's own 507)
+delkeyitem RainbowBerry                 # a GM, between the trade and the finish
+finish                                  # questItem 0: no berry given again (a stale 1 would give it)

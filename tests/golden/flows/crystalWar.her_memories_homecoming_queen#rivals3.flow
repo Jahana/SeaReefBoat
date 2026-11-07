@@ -1,0 +1,32 @@
+# Her Memories: Homecoming Queen (crystalWar 64), the rival at the Weathered Gravestone: a level 99 Warrior in Batallia
+# Downs with the WotG mission A Hawk in Repose current (a GM; other logs as group 1's flows), Homecoming Queen accepted
+# at Prog3 1 (GMs) and a Lilac. The talk: A Hawk in Repose's 502 (its Status 0) and The Grave Resolve's 5 tie
+# (Progress): 502, the first container, finished: Status 1. Status 0 again (a GM): the tie rotates: 5, finished: Prog3
+# 2. The trade, Status 1 (a GM): the Lilac alone matches 503 and 6 (Prog3 2), both Progress; a GM puts the trade's
+# cycle at 503 (taking 503 first would complete the mission, and a GM cannot make it current again): 6, the Lilac
+# confirmed, finished: The Grave Resolve completed; no tiny fragment held: FRAGMENT_FAR_TOO_SMALL, Tiny Memory Fragment
+# 3. A Lilac again (a GM): 503 alone, finished: the Lilac taken, A Hawk in Repose completed.
+lists BatalliaDowns/Weathered_Gravestone/onTrigger BatalliaDowns/Weathered_Gravestone/onTrade BatalliaDowns/onEventFinish/5 BatalliaDowns/onEventFinish/6 BatalliaDowns/onEventFinish/502 BatalliaDowns/onEventFinish/503
+char zone=BatalliaDowns pos=151.228,-5.109,-395.121 job=WAR lvl=99 nation=0
+mission Wotg AHawkInRepose current
+quest CrystalWar.HerMemoriesHomecomingQueen accepted
+charvar Quest[7][64]Prog3 1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item Lilac
+login
+trigger Weathered_Gravestone            # 502 and 5 tie (Progress): 502, the first container
+finish                                  # Status 1
+charvar Mission[5][28]Status 0          # a GM
+trigger Weathered_Gravestone            # the tie rotates: 5 (8 args)
+finish                                  # Prog3 2
+charvar Mission[5][28]Status 1          # a GM
+walk 151.228,-5.109,-395.121            # beside the Gravestone (a trade does not walk)
+localvar [Action][Weathered_Gravestone][onTrade] 503 # a GM: the cycle at 503
+trade Weathered_Gravestone Lilac x1     # 503 and 6 tie (Progress): the cycle rotates to 6 (8 args), the Lilac confirmed
+finish                                  # The Grave Resolve completed; FRAGMENT_FAR_TOO_SMALL; Tiny Memory Fragment 3
+item Lilac                              # a GM
+trade Weathered_Gravestone Lilac x1     # The Grave Resolve completed: 503 alone
+finish                                  # the Lilac taken; A Hawk in Repose completed

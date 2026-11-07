@@ -1,0 +1,33 @@
+# Mihgo's Amigo (windurst 25): its lines next to other containers' lines (the reply kinds). A level-10 WAR with Hitting
+# the Marquisate accepted by GM at nanaaProg 1: its 517 (Progress, no finish handler) answers at Nanaa Mihgo on every
+# talk. Ties rotate by the last event id (interaction_lookup.lua performNextAction); with none, the first action in the
+# list plays, here Mihgo's Amigo's. Available: 80 ties with 517 and plays first,
+# begun. Accepted: 82 (an Event) loses to 517. Four necklaces: 88 (the only trade line), completed. Completed, no
+# mustZone: 517. Four necklaces again: 494, the mustZone. 89 (an Event) loses to 517. Back to available by GM, Crying
+# Over Onions accepted: 81 ties with 517; 517 played last, so 81 plays. As Thick as Thieves accepted by GM (Mihgo's
+# Amigo accepted): Cha Lebagta's 85 (an Event) loses to its 507 (Progress).
+lists WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/Nanaa_Mihgo/onTrade WindurstWoods/Cha_Lebagta/onTrigger
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=WAR lvl=10
+quest Windurst.HittingTheMarquisate accepted
+charvar Quest[2][71]nanaaProg 1
+item YagudoBeadNecklace x8
+login
+trigger Nanaa_Mihgo+99                         # available: 80 and 517 tie (Progress); no last id: 80
+finish                                         # begun
+trigger Nanaa_Mihgo+99                         # accepted: 82 (Event) under 517 (Progress): 517
+finish
+trade Nanaa_Mihgo+99 YagudoBeadNecklace x4     # 88 (200)
+finish                                         # completed
+trigger Nanaa_Mihgo+99                         # completed, no mustZone: 517
+finish
+trade Nanaa_Mihgo+99 YagudoBeadNecklace x4     # 494 (200)
+finish                                         # the mustZone
+trigger Nanaa_Mihgo+99                         # 89 (Event) under 517: 517
+finish
+quest Windurst.MihgosAmigo available           # GM
+quest Windurst.CryingOverOnions accepted       # GM
+trigger Nanaa_Mihgo+99                         # 81 and 517 tie; 517 played last: 81
+finish                                         # begun
+quest Windurst.AsThickAsThieves accepted       # GM
+trigger Cha_Lebagta                            # 85 (Event) under As Thick as Thieves' 507 (Progress): 507
+finish

@@ -1,0 +1,28 @@
+# Tenuous Existence (abyssea 170), the reply kind: a level 99 Warrior in Port Jeuno with the quest accepted, its story
+# quests before it and the three set quests completed (GMs: their offers would tie). Prog 1 (a GM). Joachim: 336,
+# finished: completed, Champions of Abyssea accepted. Champions of Abyssea back to available and the quest back to
+# accepted at Prog 1 (GMs): Joachim again: 336 again. Joachim has his own onTrigger (xi.abyssea.traverserNPCOnTrigger):
+# an Event-rank 336 would alternate with it (interaction_lookup.lua's UseFallback) and the second talk would go to his
+# script (his 328: Dawn of Death accepted or completed).
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/336
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate completed
+quest Abyssea.HeartOfMadness completed
+quest Abyssea.TenuousExistence accepted
+quest Abyssea.HeroesOfAbyssea completed
+quest Abyssea.ScarsOfAbyssea completed
+quest Abyssea.TheForbiddenFrontier completed
+login
+charvar Quest[8][170]Prog 1             # a GM: Prog 1
+trigger Joachim                         # 336
+finish                                  # completed; Champions of Abyssea accepted
+quest Abyssea.ChampionsOfAbyssea available # a GM
+quest Abyssea.TenuousExistence available # a GM
+quest Abyssea.TenuousExistence accepted # a GM
+charvar Quest[8][170]Prog 1             # a GM: Prog 1
+trigger Joachim                         # 336 again (the kind)
+finish                                  # completed again

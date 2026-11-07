@@ -1,0 +1,19 @@
+# All in the Cards (jeuno 166), GM-set Date exactly now (charvar 1800000000, the harness's constant wall clock:
+# GetSystemTime() == Date), Collect Tarut Cards and Rubbish Day completed (Rubbish Day's Event 199 stays at Chululu).
+# Each of the quest's three time checks is false at equality (Lua >): available, no 10110 (Rubbish Day's 199 alone);
+# accepted (GM addQuest), 10111 and not 10112 (first in the cycle with 199: the single-action trigger before wrote no
+# cycle var); completed (GM completeQuest, Date kept), no 10113 (199 alone).
+lists LowerJeuno/Chululu/onTrigger
+char zone=LowerJeuno pos=-9,-6.7,-42.5 job=WAR lvl=30
+quest Jeuno.CollectTarutCards completed
+quest Jeuno.RubbishDay completed
+charvar Quest[3][166]Date 1800000000
+login
+trigger Chululu                             # available, GetSystemTime() == Date: no section; Rubbish Day's 199
+finish
+quest Jeuno.AllInTheCards accepted
+trigger Chululu                             # accepted, GetSystemTime() == Date: 10111, not 10112
+finish
+quest Jeuno.AllInTheCards completed
+trigger Chululu                             # completed, GetSystemTime() == Date: no section; Rubbish Day's 199, not 10113
+finish

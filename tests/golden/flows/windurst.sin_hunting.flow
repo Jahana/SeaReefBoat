@@ -1,0 +1,85 @@
+# Sin Hunting (windurst 72, RNG AF1): Perih Vashai, Kapeh Myohrye, Muhk Johldy (Windurst Woods), Perchond (Ranguemont
+# Pass; the first of the name, the second is cutscene-only), Alexius and the qm2 (Jugner Forest). A level-40 RNG, The
+# Fanged One completed by GM (its offer 351 would beat 523; its mustZone clear, so its 358 stays out). No era module
+# (RESTRICT_CONTENT default): the qm2 answers at any moon (day 8000 is not a full moon). Available: a bone chip traded to
+# Perih Vashai (no quest trade handler; his script's trade wants the Old Earring at fireAndBrimstone 5: nothing); 523
+# option 1 (nothing), option 0 (begun, the Chieftainness's Twinstone Earring). Prog 0: Perih Vashai 524; Kapeh Myohrye
+# 526, Muhk Johldy 525. Perchond: the glittersand at Prog 0 (nil); 3 option 1 (nothing), option 0 (Prog 1); 4; a chip,
+# the glittersand with a chip (not tradeMatches): nil; the glittersand alone: 5, option 1 (nothing, kept), option 0 (the
+# trade taken, Perchond's Envelope, Prog 2); 6. The qm2 at Prog 2: nil. Alexius 10 option 1 (nothing), option 0 (Prog
+# 3); 11. Perchond at Prog 3: 6. The qm2 13 option 1 (nothing), option 0 (Prog 4); the qm2 and Alexius at Prog 4: nil.
+# Perchond at Prog 4: nil (his default 2). Perih Vashai 527 with a full bag (nothing), 527: completed (fame 20, the
+# Sniping Bow; both key items taken). Completed: Kapeh Myohrye 530, Muhk Johldy 529 (replaceDefault); Perih Vashai: no
+# section: his default 338 first (the lookup's turn), then his script: Sin Hunting completed, Fire and Brimstone
+# available, level 40 < AF2_QUEST_LEVEL: 528.
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/Kapeh_Myohrye/onTrigger WindurstWoods/Muhk_Johldy/onTrigger WindurstWoods/onEventFinish/523 WindurstWoods/onEventFinish/527 RanguemontPass/Perchond/onTrigger RanguemontPass/Perchond/onTrade RanguemontPass/onEventFinish/3 RanguemontPass/onEventFinish/5 JugnerForest/Alexius/onTrigger JugnerForest/qm2/onTrigger JugnerForest/onEventFinish/10 JugnerForest/onEventFinish/13
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=RNG lvl=40
+quest Windurst.TheFangedOne completed
+item BoneChip
+item PinchOfGlittersand
+login
+trade Perih_Vashai BoneChip x1                # available, the check holds: no quest trade handler; his script: nothing
+trigger Perih_Vashai                          # RNG, level 40: 523
+finish option=1                               # not 0: nothing
+trigger Perih_Vashai                          # 523
+finish option=0                               # begun; the Chieftainness's Twinstone Earring
+trigger Perih_Vashai                          # Prog 0: 524
+finish
+trigger Kapeh_Myohrye                         # 526
+finish
+trigger Muhk_Johldy                           # 525
+finish
+warp -180.8,5,-164.9 RanguemontPass
+trade Perchond PinchOfGlittersand x1          # Prog 0: nil
+trigger Perchond                              # Prog 0: 3 (0, Pinch of Glittersand)
+finish option=1                               # nothing
+trigger Perchond                              # 3
+finish option=0                               # Prog 1
+trigger Perchond                              # Prog 1: 4 (0, Pinch of Glittersand)
+finish
+trade Perchond BoneChip x1                    # not the glittersand: nil
+trade Perchond PinchOfGlittersand x1 BoneChip x1  # with an extra (tradeMatches is exact): nil
+trade Perchond PinchOfGlittersand x1          # Prog 1, the glittersand alone: 5
+finish option=1                               # nothing; the glittersand kept
+trade Perchond PinchOfGlittersand x1          # 5
+finish option=0                               # the trade taken; Perchond's Envelope; Prog 2
+trigger Perchond                              # Prog 2: 6
+finish
+warp -8.9,-1,313.8 JugnerForest
+trigger qm2                                   # Prog 2: nil
+warp 101.9,5.4,386 JugnerForest
+trigger Alexius                               # Prog 2: 10
+finish option=1                               # nothing
+trigger Alexius                               # 10
+finish option=0                               # Prog 3
+trigger Alexius                               # Prog 3: 11
+finish
+warp -180.8,5,-164.9 RanguemontPass
+trigger Perchond                              # Prog 3: 6
+finish
+warp -8.9,-1,313.8 JugnerForest
+trigger qm2                                   # Prog 3: 13 (0, Pinch of Glittersand)
+finish option=1                               # nothing
+trigger qm2                                   # 13
+finish option=0                               # Prog 4
+trigger qm2                                   # Prog 4: nil
+warp 101.9,5.4,386 JugnerForest
+trigger Alexius                               # Prog 4: nil
+warp -180.8,5,-164.9 RanguemontPass
+trigger Perchond                              # Prog 4: nil; his default 2
+finish
+warp 119.5,-3.7,90.45 WindurstWoods
+trigger Perih_Vashai                          # Prog 4: 527
+fill-inventory
+finish                                        # the bow does not fit: complete fails: nothing
+free-inventory
+trigger Perih_Vashai                          # 527
+finish                                        # completed: fame 20, the Sniping Bow; both key items taken
+trigger Kapeh_Myohrye                         # completed: 530 (replaceDefault)
+finish
+trigger Muhk_Johldy                           # completed: 529 (replaceDefault)
+finish
+trigger Perih_Vashai                          # no section: his default 338 (the lookup's turn: 527 left UseFallback 0)
+finish
+trigger Perih_Vashai                          # his script's turn: 528 (Fire and Brimstone available, level 40 < 50)
+finish

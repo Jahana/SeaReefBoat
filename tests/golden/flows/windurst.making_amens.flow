@@ -1,0 +1,50 @@
+# Making Amens! (windurst 8): Kuroido-Moido (Port Windurst; +7: the first of the name is cutscene-only; no default
+# action; Making Amends' container answers him with 276 while it is accepted and 279 while it is completed with its
+# mustZone, taking turns with his script) and Mashira (Garlaige Citadel; his script's standard is 11 (3)). A level-75
+# WAR. Making Amends available: his random 225 / 226, at fame level 3 and at level 4. Making Amends completed by a GM:
+# fame level 3: nothing (no else); level 4 with Making Amends' mustZone (a GM's var, as its 277 finish sets it): its
+# 279, then his script: nothing (its 279 plays again); out to Windurst Waters and back (the mustZone cleared): 280,
+# option 0: begun. Accepted, no wand: 283. Mashira: 11 (0), option 1: nothing; option 0: the Broken Wand; then 11 (3)
+# (his script's), option 0: nothing more (the wand held). Kuroido-Moido: 284 (6000): needToZone, the wand taken, the
+# title, 6000 gil, fame 40, completed. Completed: 286 (0, 937); Wonder Wands accepted (GM): 261; completed (GM): 266.
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=75
+fame Windurst 224
+login
+trigger Kuroido-Moido+7                 # Making Amends available, level 3: no arm; his random 225 / 226
+finish
+quest Windurst.MakingAmends completed
+trigger Kuroido-Moido+7                 # Making Amends completed, fame level 3: nothing (no else)
+fame Windurst 225
+quest Windurst.MakingAmends available
+trigger Kuroido-Moido+7                 # Making Amends available, level 4: his random 225 / 226 (not 280)
+finish
+quest Windurst.MakingAmends completed
+charvar Quest[2][3]mustZone 240         # Making Amends' mustZone (its 277 finish's setMustZone)
+trigger Kuroido-Moido+7                 # Making Amends' container: 279 (an Event: his script takes the next turn)
+finish
+trigger Kuroido-Moido+7                 # his script: level 4, the mustZone: nothing; the container's 279 again
+finish
+warp -122.0,-3.0,63.2 WindurstWaters    # the mustZone cleared (another zone)
+warp -109.1,-4.25,102.06 PortWindurst
+trigger Kuroido-Moido+7                 # level 4, no mustZone: 280
+finish option=0                         # begun (any option)
+trigger Kuroido-Moido+7                 # accepted, no Broken Wand: 283
+finish
+warp 141.5,-6.0,139.1 GarlaigeCitadel
+trigger Mashira                         # accepted, no wand: 11 (0)
+finish option=1                         # not 0: nothing
+trigger Mashira                         # 11 (0)
+finish option=0                         # the Broken Wand (KEYITEM_OBTAINED)
+trigger Mashira                         # accepted, the wand held: 11 (3)
+finish option=0                         # the wand held: npcUtil.giveKeyItem gives nothing
+warp -109.1,-4.25,102.06 PortWindurst
+trigger Kuroido-Moido+7                 # accepted, the wand: 284 (6000)
+finish                                  # needToZone; wand taken; the title (124); 6000 gil; fame 40; completed
+trigger Kuroido-Moido+7                 # completed, Wonder Wands available: 286 (0, 937)
+finish
+quest Windurst.WonderWands accepted
+trigger Kuroido-Moido+7                 # Wonder Wands accepted: 261
+finish
+quest Windurst.WonderWands completed
+trigger Kuroido-Moido+7                 # Wonder Wands completed: 266
+finish

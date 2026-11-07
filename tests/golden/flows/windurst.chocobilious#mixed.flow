@@ -1,0 +1,21 @@
+# Chocobilious (windurst 27) with Paying Lip Service (60) accepted too (reachable in play: Paying Lip Service at Tapoh
+# first, then Chocobilious at Kuoh Rhel; a GM sets the stages here): Tapoh Lihzeh answers Chocobilious' arms first (the
+# trigger 227, not 478; the grass at var 1: 229) and falls to Paying Lip Service's when Chocobilious has no arm for the
+# trade (three chips at var 0 and at var 1: 479, completing it).
+char zone=WindurstWoods pos=49.5,-3.75,54.4 job=WAR lvl=75
+item PapakaGrass
+item BeehiveChip x6
+login
+quest Windurst.Chocobilious accepted
+quest Windurst.PayingLipService accepted
+trigger Tapoh_Lihzeh                    # Chocobilious first: var 0: 227 (0, 938), not 478
+finish                                  # var 1
+trade Tapoh_Lihzeh BeehiveChip x3       # var 1, not the grass: Paying Lip Service accepted: 479 (0, 912, 1016, 0, 0)
+finish option=0                         # completed (Kisser Make-Upper); 150 gil; the chips taken
+trade Tapoh_Lihzeh PapakaGrass x1       # var 1, the grass: Chocobilious' 229 first
+finish                                  # var 2
+trigger Tapoh_Lihzeh                    # var 2: 230
+finish
+charvar ChocobiliousQuest 0
+trade Tapoh_Lihzeh BeehiveChip x3       # Chocobilious at var 0: no arm: Paying Lip Service completed: 479
+finish option=1                         # fame 10; 200 gil

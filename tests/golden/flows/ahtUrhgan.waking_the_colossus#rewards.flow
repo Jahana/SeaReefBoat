@@ -1,0 +1,54 @@
+# Waking the Colossus's 929 options, one char each, every one accepted at Prog 5 with the Whisper (GMs), by Naja (no
+# script, no default; no ToAU 48 here: a nil answers nothing). main holds the Colossus's Mantle and Torque: 929 [7] 5
+# (bits 0 and 2); option 0: rewardItems[-1] is nil, npcUtil.giveItem(player, nil) returns true: completed with no pick
+# (the title, an Imperial Gold Piece; the Whisper taken; DI's Timer 1). bob option 2: the Colossus's Earring, completed.
+# carl option 3: the Torque, completed. dan option 4: 10000 gil (GIL_OBTAINED), completed. eve option 5: Alexander
+# learnt, ALEXANDER_UNLOCKED (0, 0, 1), completed; her Naja again: completed: nothing. fay option 6: no reward arm:
+# completed.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/929
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char dan zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char eve zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char fay zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+quest AhtUrhgan.WakingTheColossus accepted
+charvar Quest[6][74]Prog 5
+keyitem WhisperOfRadiance
+item ColossussMantle
+item ColossussTorque
+bob: quest AhtUrhgan.WakingTheColossus accepted
+bob: charvar Quest[6][74]Prog 5
+bob: keyitem WhisperOfRadiance
+carl: quest AhtUrhgan.WakingTheColossus accepted
+carl: charvar Quest[6][74]Prog 5
+carl: keyitem WhisperOfRadiance
+dan: quest AhtUrhgan.WakingTheColossus accepted
+dan: charvar Quest[6][74]Prog 5
+dan: keyitem WhisperOfRadiance
+eve: quest AhtUrhgan.WakingTheColossus accepted
+eve: charvar Quest[6][74]Prog 5
+eve: keyitem WhisperOfRadiance
+fay: quest AhtUrhgan.WakingTheColossus accepted
+fay: charvar Quest[6][74]Prog 5
+fay: keyitem WhisperOfRadiance
+login
+trigger Naja_Salaheem                   # 929 ([0] 0, [7] 5)
+finish option=0                         # no pick: completed anyway
+bob: login
+bob: trigger Naja_Salaheem              # 929 ([7] 0)
+bob: finish option=2                    # the Colossus's Earring; completed
+carl: login
+carl: trigger Naja_Salaheem
+carl: finish option=3                   # the Colossus's Torque; completed
+dan: login
+dan: trigger Naja_Salaheem
+dan: finish option=4                    # 10000 gil; completed
+eve: login
+eve: trigger Naja_Salaheem
+eve: finish option=5                    # Alexander, ALEXANDER_UNLOCKED; completed
+eve: trigger Naja_Salaheem              # completed, no mission: nothing
+eve: finish-if-event
+fay: login
+fay: trigger Naja_Salaheem
+fay: finish option=6                    # no reward arm (wasRewarded true): completed

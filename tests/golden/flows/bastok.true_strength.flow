@@ -1,0 +1,25 @@
+# True Strength (bastok 53, MNK AF3): Ayame in Metalworks; the ??? (qm_truestrength) and Huu Xalmo the Savage in Castle
+# Oztroja. This flow: the guard (The First Meeting completed, main job MNK, main level AF3_QUEST_LEVEL 50), the offer
+# 748, and the Xalmo Feather to Ayame (GM-given here; the ??? part is #oztroja): 749, the reward. Default: Ayame 701.
+# Ayame's other quests (Out of the Depths: Bastok fame level 3; Return to the Depths; Trust: Bastok) and missions need
+# what this char lacks.
+lists Metalworks/Ayame/onTrigger Metalworks/Ayame/onTrade Metalworks/onEventFinish/748 Metalworks/onEventFinish/749
+char zone=Metalworks pos=133,-19,34 job=MNK lvl=50
+quest Bastok.TheFirstMeeting accepted
+item BoneChip
+login
+trigger Ayame                   # The First Meeting not completed: 701
+finish
+trade Ayame BoneChip x1         # available: no trade handler, nothing
+quest Bastok.TheFirstMeeting completed
+trigger Ayame                   # The First Meeting completed, MNK 50: 748
+finish                          # accepted
+trigger Ayame                   # accepted: no trigger handler, 701
+finish
+trade Ayame BoneChip x1         # accepted, not the feather: nil
+item XalmoFeather
+trade Ayame XalmoFeather x1     # 749
+finish                          # completed: Temple Hose, Bastok fame +20, Paragon of Monk Excellence, the feather taken
+trigger Ayame                   # completed: 701
+finish
+trade Ayame BoneChip x1         # completed: nothing

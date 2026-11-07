@@ -1,0 +1,31 @@
+# Curses, Foiled Again!? (2) (windurst 33): the offer check's operands, each alone, and Prog out of range by GM. (1)
+# accepted at fame 50: this quest is not available, so Hiwon-Biwon's 179 (a Progress line, which would beat his script)
+# does not answer: his script's random one of five; Shantotto plays (1)'s 172. (1) completed by GM (no Timer, no
+# mustZone) at fame 49 (level 1): not met; Shantotto's default 164, Hiwon's random. Fame 50 (level 2): 178, 179 (Prog 1).
+# Prog set by GM to 3 and to -1: the offer's Shantotto line returns nil (her default 164).
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/Hiwon-Biwon/onTrigger WindurstWalls/onEventFinish/179
+char zone=WindurstWalls pos=122.6,-3.0,111.6
+fame Windurst 50
+quest Windurst.CursesFoiledAgain1 accepted
+login
+trigger Hiwon-Biwon                                 # (1) not completed: not available; his script: a random one of five
+finish
+trigger Shantotto                                   # (1)'s 172
+finish
+quest Windurst.CursesFoiledAgain1 completed
+fame Windurst 49
+trigger Shantotto                                   # fame level 1: not met; her default 164
+finish
+trigger Hiwon-Biwon                                 # not met: his script's random one
+finish
+fame Windurst 50
+trigger Shantotto                                   # met (Timer 0, no mustZone), Prog 0: event 178
+finish
+trigger Hiwon-Biwon                                 # met: progressEvent 179
+finish                                              # Prog 1
+charvar Quest[2][33]Prog 3
+trigger Shantotto                                   # Prog 3: nil; her default 164
+finish
+charvar Quest[2][33]Prog -1
+trigger Shantotto                                   # Prog -1: nil; her default 164
+finish

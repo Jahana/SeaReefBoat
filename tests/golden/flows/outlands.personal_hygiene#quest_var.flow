@@ -1,0 +1,12 @@
+# Personal Hygiene (outlands 10), the quest's own var at the completion: accepted, not bathed, and Quest[5][10]Prog 1
+# (GMs). Gatih Mijurabi: 193; finished: the raw player:completeQuest, Windurst fame +70, the Mithran Stone,
+# ITEM_OBTAINED. The raw completeQuest does no cleanup: Quest[5][10]Prog stays 1 (quest:complete's cleanup would clear
+# it).
+char zone=Kazham pos=58.2,-12.1,-47.5
+quest Outlands.PersonalHygiene accepted
+charvar Quest[5][10]Prog 1          # a GM: the quest's own var
+login
+trigger Gatih_Mijurabi              # not bathed, Accepted: 193
+finish                              # completed, Prog kept; 70 fame; the Mithran Stone
+trigger Gatih_Mijurabi              # not bathed, Completed: 196
+finish-if-event

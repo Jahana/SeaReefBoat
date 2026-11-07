@@ -1,0 +1,18 @@
+# The Moonlit Path (windurst 9): the item bits. Accepted with the Whisper of the Moon (GM), holding all five reward items:
+# 846 with mask 223 (bits 0-4, and 6 and 7); option 2 (Fenrir's Cape, held, rare): giveItem fails, nothing, the quest
+# stays accepted, the whisper kept.
+lists WindurstWaters/Leepe-Hoppe/onTrigger WindurstWaters/onEventFinish/846
+char zone=WindurstWaters pos=11.4,-9.75,-195.97
+fame Windurst 425
+quest Windurst.TheMoonlitPath accepted
+keyitem WhisperOfTheMoon
+item FenrirsStone
+item FenrirsCape
+item FenrirsTorque
+item FenrirsEarring
+item AncientsKey
+login
+trigger Leepe-Hoppe                     # 846 (mask 223)
+finish option=2                         # the cape held: giveItem fails, nothing
+trigger Leepe-Hoppe                     # still accepted, the whisper kept: 846
+finish

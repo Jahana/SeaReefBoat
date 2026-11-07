@@ -1,0 +1,72 @@
+# Orastery Woes (windurst 86): its Kuroido-Moido lines next to his script and to Making Amends' lines. A level-75 WAR
+# at Club 2300. Making Amends not completed: his script answers a random 225 / 226 on every turn it gets. Available,
+# Making Amends accepted by GM, no club and a full bag: 578 (Event, oncePerZone) beside its 276 (Event) and his script,
+# 578's finish begins nothing. Making Amends available again, a rezone, the club at 300 points by GM: 578 against his
+# script; begun. Accepted: 579 (Event) and his
+# script take turns; the club traded: 581 (Progress; his script has no onTrade), the map; 582 (Event) and his script;
+# the Annals of Truth by GM: 583 (Progress) on his script's turn, completed; accepted again by GM with the map.
+# Making Amends accepted by GM: its 276 (Event) joins the cycle. Making Amends completed through Hakkuru-Rinkuru's 277
+# (its mustZone set; his script then silent below fame level 4): its 279 (Event) and 582 take turns.
+lists PortWindurst/Kuroido-Moido/onTrigger PortWindurst/Kuroido-Moido/onTrade PortWindurst/onEventFinish/578 PortWindurst/onEventFinish/583
+char zone=PortWindurst pos=-110.7,-4.25,102.06 job=WAR lvl=75
+skill Club 2300
+item BlockOfAnimalGlue
+login
+quest Windurst.MakingAmends accepted          # GM: its 276 (Event) beside 578 (Event)
+fill-inventory                                # no club held and no room: 578's finish begins nothing
+trigger Kuroido-Moido+7                       # 276 or 578 or his script
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+free-inventory
+quest Windurst.MakingAmends available         # GM: his script's random line alone again
+rezone                                        # 578 offered again (oncePerZone)
+item ClubOfTrials wsp=300                     # GM: the club held at 300 points
+trigger Kuroido-Moido+7                       # available: 578 or his script
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+walk -110.7,-4.25,102.06
+trade Kuroido-Moido+7 ClubOfTrials x1         # 581 (Progress)
+finish                                        # the club taken; the map
+trigger Kuroido-Moido+7                       # the map: 582 or his script
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+keyitem AnnalsOfTruth
+trigger Kuroido-Moido+7                       # 583 (Progress) on his script's turn
+finish                                        # completed
+quest Windurst.OrasteryWoes available         # GM: accepted again, with the map
+quest Windurst.OrasteryWoes accepted
+keyitem MapToTheAnnalsOfTruth
+quest Windurst.MakingAmends accepted          # GM: its 276 joins
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1  # Making Amends' 277
+finish                                        # completed; its mustZone
+trigger Kuroido-Moido+7                       # Making Amends' 279 or 582
+finish
+trigger Kuroido-Moido+7
+finish
+trigger Kuroido-Moido+7
+finish

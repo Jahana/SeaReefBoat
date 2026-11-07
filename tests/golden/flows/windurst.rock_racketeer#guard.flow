@@ -1,0 +1,23 @@
+# Rock Racketeer (windurst 26): the offer's operands, a level-10 WAR. Mihgo's Amigo completed and fame 124 (level 2):
+# not offered; Nanaa Mihgo nil (76). Fame 125 and Mihgo's Amigo's mustZone set by GM: not offered; Mihgo's Amigo's 89.
+# The mustZone cleared, Mihgo's Amigo set available, then accepted, by GM (a GM accept over a completed quest keeps it
+# completed): not offered; its 82. Mihgo's Amigo completed again: 93.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=WAR lvl=10
+quest Windurst.MihgosAmigo completed
+fame Windurst 124
+login
+trigger Nanaa_Mihgo+99                        # fame level 2: not offered; 76
+finish
+fame Windurst 125
+charvar Quest[2][25]mustZone 241
+trigger Nanaa_Mihgo+99                        # Mihgo's Amigo's mustZone: not offered; its 89
+finish
+charvar Quest[2][25]mustZone 0
+quest Windurst.MihgosAmigo available
+quest Windurst.MihgosAmigo accepted
+trigger Nanaa_Mihgo+99                        # Mihgo's Amigo not completed: not offered; its 82
+finish
+quest Windurst.MihgosAmigo completed
+trigger Nanaa_Mihgo+99                        # all three hold: 93
+finish option=0

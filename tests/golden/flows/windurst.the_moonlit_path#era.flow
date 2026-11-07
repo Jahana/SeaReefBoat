@@ -1,0 +1,40 @@
+# The Moonlit Path with its era module (modules/era/lua/quests/windurst/the_moonlit_path.lua), enabled by its condition
+# xi.pre(xi.expansion.ROV) (RESTRICT_CONTENT 1, ENABLE_ROV 0). It wraps section 2's Leepe-Hoppe onTrigger: the quest's own
+# action, with bit 7 (the mount) of the reward mask (the event's fifth parameter) set when the action is 846 or 850.
+# Each arm: 843, 845 and 844 pass through unchanged; 846 with bit 7 clear in the quest's own mask (the Trainer's Whistle
+# held: 64 becomes 192) and already set (no Trainer's Whistle: 192 stays); 850 the same both ways. A WAR (bit 6 set).
+module modules/era/lua/quests/windurst/the_moonlit_path.lua
+lists WindurstWaters/Leepe-Hoppe/onTrigger
+char zone=WindurstWaters pos=11.4,-9.75,-195.97
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+fame Windurst 425
+quest Windurst.TheMoonlitPath accepted
+login
+trigger Leepe-Hoppe                     # no whisper: 843, unchanged
+finish
+keyitem MoonBauble
+trigger Leepe-Hoppe                     # the bauble: 845, unchanged
+finish
+delkeyitem MoonBauble
+keyitem WhisperOfFlames
+keyitem WhisperOfTremors
+keyitem WhisperOfTides
+keyitem WhisperOfGales
+keyitem WhisperOfFrost
+keyitem WhisperOfStorms
+trigger Leepe-Hoppe                     # all six: 844, unchanged
+finish option=1                         # escaped: nothing
+keyitem WhisperOfTheMoon
+keyitem TrainersWhistle
+trigger Leepe-Hoppe                     # 846: the quest's mask 64 (the Trainer's Whistle), the module's 192
+finish option=0                         # escaped
+delkeyitem TrainersWhistle
+trigger Leepe-Hoppe                     # 846: the quest's mask 192 (no Trainer's Whistle), unchanged
+finish option=0
+charvar Quest[2][9]Repeat 1
+trigger Leepe-Hoppe                     # 850: the quest's mask 192, unchanged
+finish option=0
+keyitem TrainersWhistle
+trigger Leepe-Hoppe                     # 850: the quest's mask 64, the module's 192
+finish option=6                         # 15000 gil; completed

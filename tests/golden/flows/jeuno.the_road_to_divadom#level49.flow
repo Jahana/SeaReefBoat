@@ -1,0 +1,14 @@
+# The Road to Divadom (jeuno 97) for a level 49 Dancer (AF2_QUEST_LEVEL 50) with The Unfinished Waltz completed: the
+# glue to the Glowing Pebbles at level 49 (check 1 fails: no section holds, so no trade handler and no zone-in event;
+# the available section's own silence at level 75 is the main flow's), then Laila: the level alone fails check 1, not
+# offered, the Waltz's 10134.
+lists UpperJeuno/Laila/onTrigger JugnerForestS/Glowing_Pebbles/onTrade JugnerForestS/onZoneIn/1
+char zone=JugnerForestS pos=99,6.4,442.6 job=DNC lvl=49
+quest Jeuno.LakesideMinuet completed
+quest Jeuno.TheUnfinishedWaltz completed
+item BlockOfYagudoGlue
+login
+trade Glowing_Pebbles BlockOfYagudoGlue x1  # level 49: no section, nothing
+warp -52.5,0,101 UpperJeuno
+trigger Laila                           # level 49: no section; the Waltz's 10134
+finish

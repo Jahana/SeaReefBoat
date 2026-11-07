@@ -1,0 +1,65 @@
+# Divine Might (Repeat) (outlands 164), the edges. NUMBER_OF_DM_EARRINGS 2 (a setting). main: a level 75 Warrior,
+# Divine Might and the repeat completed (GMs), the Suppanomimi held, the Moonlight Ore held, DM_Earring 14739. blank: one
+# earring < 2: 57 (14739), escaped (option 0: no option read): deleted, begun; Prog 0 with the ore: 56; Prog 1 (a GM)
+# without the ore (deleted by a GM): nil: the default. The setting back to 1: completed again (a GM), one earring held: the
+# default. The setting 1.4 (a decimal: the Lua compares the number, 1 < 1.4): 57, finished: begun; completed again (a GM),
+# the Bushinomimi too (a GM: the loop's last id), the setting 2: two earrings, not < 2: the default. bob in Ro'Maeve,
+# accepted (a GM), no ore, three light ores, a pair: day 8022 05:00: a light ore: 8, finished: the ore; 06:00: the pair:
+# nothing; the ore deleted (a GM): a light ore at 06:00: nothing; 17:00: nothing; 18:00: 8, finished: the ore, the light
+# ore taken; the pair with a light ore: nothing. Day 8029 00:00 (93% waning: not the full moon): the pair: nothing.
+# cid in Ro'Maeve, both quests completed (the repeat not accepted), no ore: day 8022 05:00: a light ore: no section:
+# nothing.
+lists TheShrineOfRuavitau/blank_divine_might/onTrigger Romaeve/QuHau_Spring/onTrade TheShrineOfRuavitau/onEventFinish/57 Romaeve/onEventFinish/8
+char zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+char bob zone=Romaeve pos=1.748,-27.402,67.751 job=WAR lvl=75
+char cid zone=Romaeve pos=1.748,-27.402,67.751 job=WAR lvl=75
+setting NUMBER_OF_DM_EARRINGS 2
+quest Outlands.DivineMight completed
+quest Outlands.DivineMightRepeat completed
+charvar DM_Earring 14739
+item Suppanomimi
+keyitem MoonlightOre
+bob: quest Outlands.DivineMight completed
+bob: quest Outlands.DivineMightRepeat accepted
+bob: item ChunkOfLightOre x3
+bob: item SheetOfParchment
+bob: item BottleOfIlluminink
+cid: quest Outlands.DivineMight completed
+cid: quest Outlands.DivineMightRepeat completed
+cid: item ChunkOfLightOre
+login
+trigger blank_divine_might              # one earring < 2: 57 (14739)
+finish option=0                         # no option read: deleted, begun
+trigger blank_divine_might              # Prog 0, the ore: 56
+finish
+charvar Quest[5][164]Prog 1             # a GM
+delkeyitem MoonlightOre                 # a GM
+trigger blank_divine_might              # Prog 1, no ore: nil: the default
+setting NUMBER_OF_DM_EARRINGS 1
+quest Outlands.DivineMightRepeat completed   # a GM
+trigger blank_divine_might              # one earring held, not < 1: nil: the default
+setting NUMBER_OF_DM_EARRINGS 1.4
+trigger blank_divine_might              # 1 < 1.4: 57 (14739)
+finish                                  # deleted, begun
+quest Outlands.DivineMightRepeat completed   # a GM
+item Bushinomimi                        # a GM
+setting NUMBER_OF_DM_EARRINGS 2
+trigger blank_divine_might              # two earrings, not < 2: nil: the default
+bob: login
+wait vana=521                           # day 8022, 05:00 (FULL_MOON)
+bob: trade QuHau_Spring ChunkOfLightOre x1   # hour 5, no ore: 8
+bob: finish                             # the Moonlight Ore; the light ore taken
+cid: login
+cid: trade QuHau_Spring ChunkOfLightOre x1   # the repeat not accepted: no section: nothing
+wait vana=1                             # 06:00
+bob: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # hour 6: nothing
+bob: delkeyitem MoonlightOre            # a GM
+bob: trade QuHau_Spring ChunkOfLightOre x1   # hour 6: nothing
+wait vana=11                            # 17:00
+bob: trade QuHau_Spring ChunkOfLightOre x1   # hour 17: nothing
+wait vana=1                             # 18:00
+bob: trade QuHau_Spring ChunkOfLightOre x1   # hour 18, no ore: 8
+bob: finish                             # the ore; the light ore taken
+bob: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1 ChunkOfLightOre x1   # not exactly either: nothing
+wait vana=150                           # day 8029, 00:00 (93% waning: not the full moon)
+bob: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # not the full moon: nothing

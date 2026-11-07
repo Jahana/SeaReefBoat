@@ -1,0 +1,31 @@
+# Path of the Bard (jeuno 20): Bki Tbujhja, Mataligeat and Mertaire in Lower Jeuno, the Song Runes of Valkurm Dunes.
+# A Minstrel in Despair completed (never begun; no level or job check): Bki's 182, Mataligeat's 144, Mertaire's
+# COULD_HE_BE (messageName(..., true, false): showName, no turn), a bone chip to Mertaire and the runes while offered
+# (no trade handler: nil), the runes' 2 (the bard job unlocked,
+# UNLOCK_BARD, completed: 3000 gil, the job gesture, Wandering Minstrel, fame +7 x3). Completed: Bki's 180,
+# Mataligeat's 143, Mertaire's 103 while Painful Memory is available (a warrior: its section does not match).
+lists LowerJeuno/Mertaire/onTrigger LowerJeuno/Mertaire/onTrade ValkurmDunes/Song_Runes/onTrade LowerJeuno/Bki_Tbujhja/onTrigger LowerJeuno/Mataligeat/onTrigger ValkurmDunes/Song_Runes/onTrigger ValkurmDunes/onEventFinish/2
+char zone=LowerJeuno pos=-19.5,0,-59 job=WAR lvl=30
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+item BoneChip
+login
+trigger Bki_Tbujhja                         # available: 182
+finish
+trigger Mataligeat                          # 144
+finish
+trigger Mertaire                            # COULD_HE_BE (showName, no turn)
+trade Mertaire BoneChip x1                  # available: no trade handler, nil
+warp -717.6,-7.6,101 ValkurmDunes
+walk -719.5,-7,102
+trade Song_Runes BoneChip x1                # available: no trade handler, nil
+trigger Song_Runes                          # cutscene 2
+finish                                      # BRD unlocked, UNLOCK_BARD; completed: 3000 gil, the gesture, Wandering Minstrel, fame +7 x3
+trigger Song_Runes                          # completed: no section; SONG_RUNES_DEFAULT
+warp -19.5,0,-59 LowerJeuno
+trigger Bki_Tbujhja                         # completed: 180
+finish
+trigger Mataligeat                          # 143
+finish
+trigger Mertaire                            # Painful Memory available: 103
+finish

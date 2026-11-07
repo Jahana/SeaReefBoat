@@ -1,0 +1,31 @@
+# Elderly Pursuits (otherAreas 75): its reply kinds. Despachiaire: 517 (Progress) against X Marks the Spot available
+# (CoP Ancient Vows current, a GM; its 144 is Progress): a tie, Elderly_Pursuits sorts first: 517; available again (a
+# GM): the cycle, 144. 518 (Progress) at Prog 4 against X Marks the Spot accepted (144, Event with importantOnce): 518.
+# Rouva: 747 (Progress) against Lure of the Wildcat accepted (a GM; its Rouva 808 is Progress while its bit 2 is not
+# set): a tie, the otherAreas container sorts before the sandoria one: 747, then 808 (an Event 747 would lose every
+# time); with bit 2 set: 747. The ??? (a messageSpecial reply) has no other quest. CoP 2-2's completed 106
+# (replaceDefault) loses to them all.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/517 TavnazianSafehold/onEventFinish/144 TavnazianSafehold/onEventFinish/518 SouthernSanDoria/Rouva/onTrigger SouthernSanDoria/onEventFinish/747 SouthernSanDoria/onEventFinish/808
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+quest OtherAreas.SecretsOfOvensLost completed
+mission Cop AncientVows current
+login
+trigger Despachiaire                    # 517 and 144 tie: 517
+finish                                  # begun; the Antique Amulet
+quest OtherAreas.ElderlyPursuits available # a GM
+trigger Despachiaire                    # the cycle: 144
+finish                                  # X Marks the Spot begun
+quest OtherAreas.ElderlyPursuits accepted # a GM
+warp -14.7,2.1,11.8 SouthernSanDoria
+quest Sandoria.LureOfTheWildcat accepted # a GM: Rouva's 808 (Progress)
+trigger Rouva                           # 747 and 808 tie: 747
+finish                                  # Prog 1
+trigger Rouva                           # the cycle: 808
+finish                                  # Lure of the Wildcat's bit 2
+trigger Rouva                           # 808 off (bit 2 set): 747
+finish                                  # Prog 1
+warp 112.7,-40,-85.5 TavnazianSafehold
+charvar Quest[4][75]Prog 4              # a GM
+keyitem CathedralMedallion              # a GM
+trigger Despachiaire                    # 518 beats X Marks' 144 (Event)
+finish                                  # completed

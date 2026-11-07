@@ -1,0 +1,14 @@
+# The Walls of Your Mind (bastok 69): the qm1 without the map. Available: no section-2 handler (the default
+# NOTHING_OUT_OF_ORDINARY); accepted by GM with no map: nil; the map by GM pops Bodach; the map deleted by GM before
+# the kill: Bodach's death sets nothing, so the next qm1 talk (no map, killed_wsnm 0) is nil again.
+lists BostaunieuxOubliette/qm1/onTrigger
+char zone=BostaunieuxOubliette pos=20,17,-140 job=MNK lvl=75
+login
+trigger qm1                    # available: no handler, NOTHING_OUT_OF_ORDINARY
+quest Bastok.TheWallsOfYourMind accepted
+trigger qm1                    # accepted, no map: nil, NOTHING_OUT_OF_ORDINARY
+keyitem MapToTheAnnalsOfTruth
+trigger qm1                    # the map: Bodach popped and claimed, SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth
+kill BODACH             # no map: killed_wsnm not set
+trigger qm1                    # killed_wsnm 0, no map: nil, NOTHING_OUT_OF_ORDINARY

@@ -1,0 +1,33 @@
+# Fires of Discontent (crystalWar 13), the rival at Iron Eater: a level 99 Warrior in the Metalworks with The Fighting
+# Fourth and Better Part of Valor completed and the Windurst mission 2-3 (The Three Kingdoms, its Bastok leg 2,
+# Lua) current (GMs; missions as the main flow). The mission answers Iron Eater with 702 (an Event) at any status.
+# Fires available: no section of its own: 702. Accepted at Prog 0 (a GM): 957 and 702 tie (Events): the lookup rotates
+# them, the mission's 702 first: 702, 957, 702. Prog 1 (a GM): 956 (Progress) over 702, finished: Prog 2. Prog 2: the
+# tie again, the rotation going on from the last tie's 702: 957, then 702.
+lists Metalworks/Iron_Eater/onTrigger Metalworks/onEventFinish/956
+char zone=Metalworks pos=94.436,-19.532,1.814 job=WAR lvl=99
+quest CrystalWar.TheFightingFourth completed
+quest CrystalWar.BetterPartOfValor completed
+mission Windurst TheThreeKingdomsBastok2 current
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Iron_Eater                      # Fires available: the mission's 702
+finish
+quest CrystalWar.FiresOfDiscontent accepted
+trigger Iron_Eater                      # Prog 0: 957 and 702 tie: 702 first
+finish
+trigger Iron_Eater                      # then 957
+finish
+trigger Iron_Eater                      # 702 again
+finish
+charvar Quest[7][13]Prog 1              # a GM
+trigger Iron_Eater                      # Prog 1: 956 over 702
+finish                                  # Prog 2
+trigger Iron_Eater                      # Prog 2: the tie: after 702, 957
+finish
+trigger Iron_Eater                      # then 702
+finish

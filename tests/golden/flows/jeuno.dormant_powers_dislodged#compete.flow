@@ -1,0 +1,33 @@
+# Dormant Powers Dislodged (jeuno 136), its trigger replies' kinds against other quests' at the same time (a
+# progressEvent over an event; equal replies with one csid: the first in container order, 133, 134, 135, 136, 170, 137,
+# 167; with different csids they take turns). A level 86 Warrior with the Limit Breaker at cap 90, Beyond the Stars
+# completed. Dormant Powers Dislodged available, New Worlds Await accepted (a GM): its progressEvent 10045 (86, 1, 4, 0,
+# 0, drawn) over New Worlds Await's event. Accepted too, and Prelude to Puissance accepted (a GM): Prelude to Puissance's
+# progressEvent (86, 1, 6, 2, 0) over the two events. New Worlds Await and Prelude to Puissance available again (a GM),
+# Beyond Infinity accepted with the Soul Gem Clasp (a GM; group 9, Lua: its reminder, event 10045 (86, 1, 5, 1)): two
+# events 10045, Dormant Powers Dislodged's (86, 1, 4, 1, 0, itemWanted) first. Prog 1 (a GM): its progressEvent 10192
+# (86, 0, 0, 2) over Beyond Infinity's event, both triggers.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10192
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=86
+keyitem LimitBreaker
+levelcap 90
+quest Jeuno.BeyondTheStars completed
+quest Jeuno.NewWorldsAwait accepted
+login
+trigger Nomad_Moogle                    # DPD available (progressEvent) over NWA's reminder: 10045 (86, 1, 4, 0, 0, drawn)
+finish option=0                         # nothing
+quest Jeuno.DormantPowersDislodged accepted  # a GM
+quest Jeuno.PreludeToPuissance accepted # a GM
+trigger Nomad_Moogle                    # PtP's progressEvent over NWA's and DPD's reminders: 10045 (86, 1, 6, 2, 0)
+finish option=1                         # nothing
+quest Jeuno.NewWorldsAwait available    # a GM
+quest Jeuno.PreludeToPuissance available  # a GM
+quest Jeuno.BeyondInfinity accepted     # a GM
+keyitem SoulGemClasp                    # a GM
+trigger Nomad_Moogle                    # two reminders, both event 10045: DPD's (86, 1, 4, 1, 0, itemWanted)
+finish
+charvar Quest[3][136]Prog 1             # a GM
+trigger Nomad_Moogle                    # DPD's progressEvent 10192 over BI's reminder: 10192 (86, 0, 0, 2)
+finish option=0
+trigger Nomad_Moogle                    # again 10192 (86, 0, 0, 2)
+finish option=0

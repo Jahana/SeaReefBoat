@@ -1,0 +1,44 @@
+# Cactuar Suave (battlefield.cactuar_suave): the loot of a two-member party. Two level 75 Warriors: main with a
+# Clotho Orb, leading bob. main trades the orb: the menu; area 1 (option 81): registered, bob registered with it;
+# main enters (the orb's wear). bob with the clearance: checkRequirements as no registrant (no trade asked of him):
+# the menu (enterExisting 1); area 1: entered (no wear: bob is not the initiator). The three cactuars killed: the
+# crate shown. main opens it: handleLootRolls: battlefield:getPlayers() holds both; players[1] rolls the groups
+# (utils.selectFromLootGroups, one math.randomInt draw per group on the seeded RNG): the same picks as the lone
+# char's in the main flow. Group 1 the 24000 gil: gilPerPlayer = 24000 * (100 + 0) / 100 / #players 2 = 12000,
+# given to each (1000 -> 13000 both). Groups 2-9 (916, 1236, 1110, 19025, 4902, 902, 895, 844) by
+# players[1]:addTreasure into the party's treasure pool, slots 0-7: two members, so none goes straight to an
+# inventory (0x0D2 to both). WON, the cutscene timer 5; at the sixth tick the cleanup: 32001 to both; out after it.
+# The pool: no lot statement, so each item waits out its 5-minute life (the pool checks every 3 s); the long tick
+# passes it, and each item goes to a random member with room (TreasurePool's RandomBelow(2) on the seeded RNG, in
+# slot order): bob slots 0, 1, 3, 6 (916, 1236, 19025, 895), main slots 2, 4, 5, 7 (1110, 4902, 902, 844); 0x0D3
+# to both, the char_inventory rows of that step.
+lists ChamberOfOracles/SC_Entrance/onTrigger ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/onEventUpdate/32000 ChamberOfOracles/onEventFinish/32000 ChamberOfOracles/onEventFinish/32001
+char zone=ChamberOfOracles pos=-218.6,-1.9,23.0 job=WAR lvl=75
+char bob zone=ChamberOfOracles pos=-218.6,-1.9,23.0 job=WAR lvl=75
+item ClothoOrb
+login
+bob: login
+invite bob
+bob: accept
+trade SC_Entrance ClothoOrb x1          # the menu 32000 (index 5)
+update 32000 option=81                  # area 1: registered, bob registered with it; entered; A_CRACK_HAS_FORMED
+finish                                  # in the arena
+bob: trigger SC_Entrance                # the clearance: the menu (enterExisting)
+bob: update 32000 option=81             # area 1: entered (no wear)
+bob: finish                             # in the arena
+tick 2000                               # arena 1's cactuars spawn
+kill #17465381                          # Sabotender_Campeon
+kill #17465382                          # Sabotender_Amante
+kill #17465383                          # Sabotender_Amante: allDeath: the crate shown
+trigger Armoury_Crate+14                # the loot: 12000 gil each; eight items into the pool; WON, the timer 5
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000                               # the timer out: the cleanup: 32001 to both
+finish-if-event
+bob: finish-if-event
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield
+tick 300000                             # the pool's items past their 5 minutes: each to a random member

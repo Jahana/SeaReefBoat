@@ -1,0 +1,45 @@
+# Monstrosity (otherAreas 34): Pashhow Marshlands' Suspicious Hume (script: nothing until completed, then 45), Northern
+# San d'Oria's Suspicious Elvaan (script: gladiatorOnTrigger: CHATTER 881 until completed, then GLADIATOR_INTRO 886),
+# the Feretory's zone-in. ENABLE_MONSTROSITY 1; ENABLE_SOA / ENABLE_ROV 0 (their city cutscenes). A Lizard Tail.
+# Available: the Elvaan: no section: 881 (the script); the tail traded: no section, the script has no onTrade: nothing.
+# The Hume: the tail traded: nothing. The Hume 40, finished: begun. The Hume, no ring: 41 (priorityEvent). The Elvaan, no ring: 882 (INTRO, Progress);
+# again: 882 (no fallback turn). The tail traded: MONSTROSITY_UNLOCK 43 (LIZARD), 883 (926), finished: the local
+# cleared, the tail taken (tradeComplete), the Ring of Supernal Disjunction, setMonstrosityData(43, 43). The Elvaan, the
+# ring: 884 (HAS_RING). The Hume, the ring: 42. The Feretory (a warp; its zone-in left open): the quest's onZoneIn: 2;
+# updated with option 1: updateIntroEvent (race, face, the Lizard's starter); finished: completed (no reward). The
+# Feretory's zone-in made the char a monster (MON): the completed section is #completed's.
+lists PashhowMarshlands/Suspicious_Hume/onTrigger PashhowMarshlands/onEventFinish/40 NorthernSanDoria/Suspicious_Elvaan/onTrigger NorthernSanDoria/Suspicious_Elvaan/onTrade NorthernSanDoria/onEventFinish/883 Feretory/onZoneIn/1 Feretory/onEventUpdate/2 Feretory/onEventFinish/2
+char zone=NorthernSanDoria pos=83.7,-0.2,42.7 job=WAR lvl=75
+setting ENABLE_MONSTROSITY 1
+setting ENABLE_SOA 0
+setting ENABLE_ROV 0
+item LizardTail
+login
+trigger Suspicious_Elvaan               # available: no section; the script: 881 (CHATTER)
+finish
+trade Suspicious_Elvaan LizardTail x1   # available: no section; the script has no onTrade: nothing
+warp -490.3,25,-618.6 PashhowMarshlands
+trade Suspicious_Hume LizardTail x1     # available: no trade handler; the script has no onTrade: nothing
+trigger Suspicious_Hume                 # available: 40
+finish                                  # begun
+trigger Suspicious_Hume                 # accepted, no ring: 41
+finish
+trigger Suspicious_Hume                 # 41 again (the script does nothing before completion: no fallback event)
+finish
+warp 83.7,-0.2,42.7 NorthernSanDoria
+trigger Suspicious_Elvaan               # no ring: 882
+finish
+trigger Suspicious_Elvaan               # 882 again (Progress: no fallback turn)
+finish
+trade Suspicious_Elvaan LizardTail x1   # MONSTROSITY_UNLOCK 43; 883 (926)
+finish                                  # the tail taken; the ring; setMonstrosityData(43, 43)
+trigger Suspicious_Elvaan               # the ring: 884
+finish
+trigger Suspicious_Elvaan               # 884 again (Progress: no fallback turn)
+finish
+warp -490.3,25,-618.6 PashhowMarshlands
+trigger Suspicious_Hume                 # the ring: 42
+finish
+warp -358,-3.4,-440 Feretory open       # the quest's onZoneIn: 2, left open
+update 2 option=1                       # updateIntroEvent: race, face, the starter
+finish                                  # completed

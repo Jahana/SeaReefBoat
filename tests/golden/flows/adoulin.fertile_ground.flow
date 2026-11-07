@@ -1,0 +1,39 @@
+# Fertile Ground (adoulin, call-only): a level 99 Warrior in Western Adoulin, SoA Pioneer Registration completed and
+# Life on the Frontier current, a Broken Harpoon (a GM). Nothing begins or completes the quest (GMs). Talks in pairs
+# (Shipilolo's default, Pioneer Registration's 535 replaceDefault, then his script). Both quests available, the
+# Broken Harpoon held: nothing; a trade: no onTrade, nothing. Fertile Ground and The Old Man and the Harpoon accepted
+# (GMs): the harpoon's 2543 answers first, finished: the Broken Harpoon taken, the Extravagant given. Then without
+# the Bottle of Fertilizer X: 2850, finished: the bottle (addKeyItem, no message). The bottle held: nothing. The
+# bottle taken, the quest completed (GMs): nothing.
+lists WesternAdoulin/Shipilolo/onTrigger WesternAdoulin/onEventFinish/2543 WesternAdoulin/onEventFinish/2850
+char zone=WesternAdoulin pos=86,0,-60.6 job=WAR lvl=99
+mission Soa PioneerRegistration completed
+mission Soa LifeOnTheFrontier current
+keyitem BrokenHarpoon
+item FlintStone
+login
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # both available, the Broken Harpoon: nothing: 535
+finish-if-event
+trade Shipilolo FlintStone x1           # available: no onTrade: nothing, the stone kept
+quest Adoulin.FertileGround accepted    # a GM
+quest Adoulin.TheOldManAndTheHarpoon accepted   # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # the harpoon first: 2543
+finish-if-event                         # 2543's finish
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # no bottle: 2850
+finish-if-event                         # 2850's finish: the bottle
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # the bottle held: nothing: 535
+finish-if-event
+delkeyitem BottleOfFertilizerX          # a GM
+quest Adoulin.FertileGround completed   # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # completed, no bottle: nothing: 535
+finish-if-event

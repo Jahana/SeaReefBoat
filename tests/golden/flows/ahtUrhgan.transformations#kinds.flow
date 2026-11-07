@@ -1,0 +1,23 @@
+# Transformations' 722 (Progress) at Imperial Whitegate (no script; default GATE_IS_FIRMLY_CLOSED), against the hidden
+# quest Trust: Nashmeira (Lua; 5092, Progress: ENABLE_TRUST_QUESTS 1, a trust permit, The Empress Crowned completed,
+# Nashmeira not known). Main (Omens completed, Transformations available at Prog 1 by a GM): the two tie: the first
+# talk plays the first container's, a later one rotates; 5092 finished on option 0 (not 2: nothing); after a 722 (its
+# finish begins the quest) a GM sets Transformations available at Prog 1 again.
+lists AhtUrhganWhitegate/Imperial_Whitegate/onTrigger
+char zone=AhtUrhganWhitegate pos=155.796,-4.199,0.03 job=BLU lvl=50 gil=5000
+quest AhtUrhgan.Omens completed
+charvar Quest[6][23]Prog 1
+keyitem SanDoriaTrustPermit
+mission Toau TheEmpressCrowned completed
+setting ENABLE_TRUST_QUESTS 1
+login
+trigger Imperial_Whitegate              # 722 and 5092 tie: the first talk
+finish option=0                         # 722: begun; 5092: nothing
+quest AhtUrhgan.Transformations available   # a GM
+charvar Quest[6][23]Prog 1              # a GM
+trigger Imperial_Whitegate              # the tie again: rotated
+finish option=0
+quest AhtUrhgan.Transformations available   # a GM
+charvar Quest[6][23]Prog 1              # a GM
+trigger Imperial_Whitegate              # rotated again
+finish option=0

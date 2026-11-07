@@ -1,0 +1,47 @@
+# The Weight of Your Limits (bastok 66): Iron_Eater in Metalworks, qm1 in the Sanctuary of Zi'Tah. The natural path, with the axe of Trials already held
+# at 300 weapon skill points (item wsp=300): the trades while only available (a bone chip, the axe: no handler), the
+# offer's skill threshold (GreatAxe 2399, under 240 a level: not offered; 2400: 790), 790's finish with the axe held (no
+# second axe: the Weapon Training Guide alone, begun), 791 with the axe held (hide 1), the trades while accepted (a
+# bone chip: nil; the axe at 300 points: 793, whose finish takes it and gives the Map to the Annals of Truth), 791
+# with the map and no axe (hide 1) and its option 1 (a new axe, 0 points), the trade of that axe (792, no finish
+# handler), the qm1's pop of Greenman, the kill, the Annals of Truth and 794 (Steel Cyclone). Completed: no section, the default
+# and no trade handler. #offer takes the offer without the axe (a full inventory, oncePerZone, the rezone), #offer_job
+# and #offer_guide the guard's other sides, #abandon 791 with hide 0 and option 2, #gm_nomap the qm1 with no map and
+# Greenman's death without the map.
+# Iron Eater also answers Waking the Colossus, WotG Fires of Discontent, Bastok missions 2-3, 3-1, 8-1, 8-2, 9-2 and
+# Trust: Bastok (completed); none applies to a fresh char. His default is 604.
+# qm1 has no script; its default is NOTHING_OUT_OF_ORDINARY.
+lists Metalworks/Iron_Eater/onTrigger Metalworks/Iron_Eater/onTrade Metalworks/onEventFinish/790 Metalworks/onEventFinish/791 Metalworks/onEventFinish/793 Metalworks/onEventFinish/794 TheSanctuaryOfZitah/qm1/onTrigger
+char zone=Metalworks pos=92,-19.6,2 job=WAR lvl=75
+skill GreatAxe 2399
+item BoneChip
+item AxeOfTrials wsp=300
+login
+trade Iron_Eater BoneChip x1          # available: no trade handler in section 1, nothing
+trade Iron_Eater AxeOfTrials x1    # available: nothing, the axe kept
+trigger Iron_Eater                    # GreatAxe 2399 (getCharSkillLevel / 10 is below 240): not offered, the default 604
+finish
+skill GreatAxe 2400
+trigger Iron_Eater                    # can equip, GreatAxe 2400, no guide: 790 (oncePerZone)
+finish                         # the axe held: no second axe, the Weapon Training Guide, accepted
+trigger Iron_Eater                    # accepted, no Annals, the axe held: 791 with hide 1
+finish option=0                # option 0: nothing
+trade Iron_Eater BoneChip x1          # not the axe: nil, nothing
+trade Iron_Eater AxeOfTrials x1    # 300 weapon skill points: 793
+finish                         # the axe taken, the Map to the Annals of Truth
+trigger Iron_Eater                    # the map, no axe: 791 with hide 1
+finish option=1                # option 1, no axe: a new axe (0 points)
+trade Iron_Eater AxeOfTrials x1    # 0 weapon skill points: 792
+finish                         # 792 has no finish handler: the axe kept
+warp -324,1,474 TheSanctuaryOfZitah
+trigger qm1                    # the map, no Annals: Greenman popped and claimed, SENSE_OMINOUS_PRESENCE
+trigger qm1                    # Greenman up: popFromQM false, nil: NOTHING_OUT_OF_ORDINARY
+kill GREENMAN             # the map held: killed_wsnm 1
+trigger qm1                    # killed_wsnm 1: back to 0, the key item Annals of Truth
+trigger qm1                    # the Annals held, killed_wsnm 0: nil, NOTHING_OUT_OF_ORDINARY
+warp 92,-19.6,2 Metalworks
+trigger Iron_Eater                    # the Annals: 794
+finish                         # completed: fame +20, the guide, map and Annals deleted, Steel Cyclone learned, STEEL_CYCLONE_LEARNED
+trigger Iron_Eater                    # completed: no section, 604
+finish
+trade Iron_Eater AxeOfTrials x1    # completed: no trade handler, nothing

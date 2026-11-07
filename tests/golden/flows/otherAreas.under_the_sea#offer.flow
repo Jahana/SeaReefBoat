@@ -1,0 +1,32 @@
+# Under the Sea (otherAreas 17): Yaya's offer, behind xi.settings.map.FISHING_ENABLE (false in
+# settings/default/map.lua): `setting map.FISHING_ENABLE true` (P6) in the header. Selbina / Rabao fame is (San d'Oria +
+# Bastok) x 2 / 3: San d'Oria 74 is 49 (level 1): no section (Yaya's default 153); 75 is 50 (level 2). A trade to Yaya:
+# no trade handler; a Greedie to Zaldon at Prog 3 (a GM) while available: no section 2, nothing. Yaya 31, finished:
+# begun. Accepted: no section 1 (153); completed (a GM): 153. Available again (a GM): 31, completed by a GM while it is
+# open: no 31 handler in the completed section: nothing.
+lists Selbina/Yaya/onTrigger Selbina/Zaldon/onTrade Selbina/onEventFinish/31
+char zone=Selbina pos=-17.3,-2.6,-14.9 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+fame Sandoria 74
+item ChocoboFeather
+item FatGreedie
+login
+trigger Yaya                            # Selbina / Rabao level 1: no section; her default 153
+finish
+fame Sandoria 75                        # level 2
+trade Yaya ChocoboFeather x1            # available: no trade handler; nothing
+charvar Quest[4][17]Prog 3              # a GM
+walk -10.3,-7.287,-6.742                # to Zaldon
+trade Zaldon FatGreedie x1              # available, Prog 3: no section 2; nothing
+charvar Quest[4][17]Prog 0              # a GM
+trigger Yaya                            # 31
+finish                                  # begun
+trigger Yaya                            # accepted: no section 1; 153
+finish
+quest OtherAreas.UnderTheSea completed  # a GM
+trigger Yaya                            # completed: 153
+finish
+quest OtherAreas.UnderTheSea available  # a GM
+trigger Yaya                            # 31
+quest OtherAreas.UnderTheSea completed  # a GM, while 31 is open
+finish                                  # the completed section has no 31 handler: nothing

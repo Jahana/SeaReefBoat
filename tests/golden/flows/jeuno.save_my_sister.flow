@@ -1,0 +1,86 @@
+# Save My Sister (jeuno 1): Baudin and Mailloquetat in Upper Jeuno, Neraf-Najiruf in Ru'Lude Gardens, the four
+# Braziers of The Eldieme Necropolis (F-9, H-7, F-7, H-9: ids BRAZIER + 0..3; `trigger Brazier+<n>` / `BRAZIER+<n>`).
+# The quest stays available until completed. The guard (Crest of Davoi completed, Jeuno fame level 4), Mailloquetat's
+# 159 (Prog 0 -> 1) and 158, Baudin's 105 (Prog 1 -> 2), Baudin at Prog 2 (nil: Crest of Davoi's 122), Neraf-Najiruf's
+# 98 (option 1: nothing; option 0: the Ducal Guard's Lantern, Prog 3) and 99, Baudin's 27 (Prog 3), the braziers' 44
+# (option 1: nothing). Finish 44 lights the lantern only at the brazier whose offset (npc:getID() - BRAZIER) equals
+# Stage: Stage 0 at offset 1 (REFUSE_TO_LIGHT, Stage 0), Stage 0 at offset 0 (THE_LIGHT_DIMLY, Stage 1), Stage 1 at
+# offset 0 (LANTERN_GOES_OUT, Stage 0), then 0, 1, 2 (THE_LIGHT_HAS_INTENSIFIED x2), 3 (THE_LIGHT_IS_FULLY_LIT, Prog 4),
+# Baudin's 107 (completed: 3000 gil, Holy Mace, Exorcist in Training, fame +13 x3, the vars cleared), Baudin's 176 and
+# Neraf-Najiruf's 97 (the lantern deleted). A bone chip traded to each of the four while the quest is available: no
+# trade handler of either side, nil.
+# Jeuno fame is derived: (San d'Oria + Bastok + Windurst) / 2 (ZoneHost.Progress.cs Fame); setFame cannot write it.
+# 150/150/149 is 224 (level 3), 150/150/150 is 225 (level 4).
+# Defaults: Baudin 173, Mailloquetat 25, Neraf-Najiruf 156 (CoP 6-2 / 6-3 also name him: this char has no CoP), the
+# Braziers NOTHING_OUT_OF_ORDINARY (no script).
+lists UpperJeuno/Baudin/onTrigger UpperJeuno/Baudin/onTrade UpperJeuno/Mailloquetat/onTrigger RuludeGardens/Neraf-Najiruf/onTrigger TheEldiemeNecropolis/Brazier/onTrigger UpperJeuno/onEventFinish/105 UpperJeuno/onEventFinish/107 UpperJeuno/onEventFinish/159 UpperJeuno/onEventFinish/172 RuludeGardens/onEventFinish/98 RuludeGardens/onEventFinish/97 TheEldiemeNecropolis/onEventFinish/44
+char zone=UpperJeuno pos=-74.9,-1.2,80.0
+item BoneChip
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 149
+login
+trigger Baudin                        # Crest of Davoi available (no bell): no section of either quest; 173
+finish
+quest Jeuno.CrestOfDavoi completed    # a GM
+trigger Baudin                        # Jeuno fame 224 (level 3): no section; Crest of Davoi's 122 (replaceDefault)
+finish
+trigger Mailloquetat                  # level 3: no section; 25
+finish
+fame Windurst 150                     # Jeuno fame 225: level 4
+trigger Mailloquetat                  # Prog 0: 159
+finish                                # Prog 1
+trade Mailloquetat BoneChip x1        # available: no trade handler, nil
+trigger Mailloquetat                  # Prog 1: 158
+finish
+warp -34.8,2,59 RuludeGardens
+trigger Neraf-Najiruf                 # Prog 1: nil; 156
+finish
+trade Neraf-Najiruf BoneChip x1       # available: no trade handler, nil
+warp -74.9,-1.2,80 UpperJeuno
+trigger Baudin                        # Prog 1: 105
+finish                                # Prog 2
+trade Baudin BoneChip x1              # available (Save the Clock Tower not accepted): no trade handler, nil
+trigger Baudin                        # Prog 2: nil; Crest of Davoi's 122 (replaceDefault)
+finish
+warp -34.8,2,59 RuludeGardens
+trigger Neraf-Najiruf                 # Prog 2: 98
+finish option=1                       # not 0: no lantern, Prog stays 2
+trigger Neraf-Najiruf                 # 98 again
+finish option=0                       # the Ducal Guard's Lantern, Prog 3
+trigger Neraf-Najiruf                 # Prog 3: 99
+finish
+warp -74.9,-1.2,80 UpperJeuno
+trigger Baudin                        # Prog 3: 27
+finish
+warp 101.4,-35,-60.1 TheEldiemeNecropolis
+trigger Brazier                       # Prog 3: 44 (the first Brazier: offset 0)
+finish option=1                       # not 0: nothing
+trade Brazier BoneChip x1             # available: no trade handler, nil
+trigger Brazier+1                     # 44 (offset 1)
+finish                                # Stage 0, offset 1: REFUSE_TO_LIGHT, Stage stays 0
+trigger Brazier                       # 44
+finish                                # Stage 0 = offset 0: THE_LIGHT_DIMLY (the lit lantern), Stage 1
+trigger Brazier                       # 44
+finish                                # Stage 1, offset 0: LANTERN_GOES_OUT, Stage 0
+trigger Brazier                       # 44
+finish                                # Stage 0 = offset 0: THE_LIGHT_DIMLY, Stage 1
+trigger Brazier+1                     # 44
+finish                                # Stage 1 = offset 1: THE_LIGHT_HAS_INTENSIFIED, Stage 2
+trigger BRAZIER+2                     # 44 (the IDs.lua key form)
+finish                                # Stage 2 = offset 2: THE_LIGHT_HAS_INTENSIFIED, Stage 3
+trigger Brazier+3                     # 44
+finish                                # Stage 3 = offset 3: THE_LIGHT_IS_FULLY_LIT, Prog 4 (Stage stays 3)
+trigger Brazier+3                     # Prog 4: nil; NOTHING_OUT_OF_ORDINARY
+warp -74.9,-1.2,80 UpperJeuno
+trigger Baudin                        # Prog 4: 107
+finish                                # completed: 3000 gil, Holy Mace, Exorcist in Training, fame +13 x3; Prog and Stage cleared
+trigger Baudin                        # completed: 176 (replaceDefault); Crest of Davoi returns nil
+finish
+trigger Mailloquetat                  # completed: no section; 25
+finish
+warp -34.8,2,59 RuludeGardens
+trigger Neraf-Najiruf                 # completed, the lantern held: 97
+finish                                # the lantern deleted
+trigger Neraf-Najiruf                 # no lantern: nil; 156
+finish

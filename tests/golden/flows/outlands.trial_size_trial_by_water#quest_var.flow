@@ -1,0 +1,15 @@
+# Trial-Size Trial by Water (outlands 148), the quest's own var at the completion: a SMN of level 20 with the quest
+# accepted, the Mini Tuning Fork of Water and Quest[5][148]Prog 1 (GMs). The fork's trade to WP_Entrance: 32000;
+# option 17 (index 1, arena 1): registered, entered, the fork taken; a GM's bfwin: 32001, finished: Leviathan learned,
+# the Scroll of Instant Warp, Norg fame +20, the raw player:completeQuest. The raw completeQuest does no cleanup:
+# Quest[5][148]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=CloisterOfTides pos=557.5,35.1,563.0 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByWater accepted
+item MiniTuningForkOfWater
+charvar Quest[5][148]Prog 1               # a GM: the quest's own var
+login
+trade WP_Entrance MiniTuningForkOfWater x1  # the fork: the entry menu 32000
+update 32000 option=17                    # index 1, arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+bfwin                                     # a GM's win: 32001
+finish                                    # Leviathan learned; the scroll; Norg fame +20; completed, Prog kept

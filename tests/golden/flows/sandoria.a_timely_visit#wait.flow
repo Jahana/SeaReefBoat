@@ -1,0 +1,20 @@
+# A Timely Visit (sandoria 105): both NM handlers' Prog operand, and qm1 while its Wait has not run out. Stage 1, Prog 5
+# by GM; at 20:00 the NMs popped (SENSE_OF_FOREBODING); Prog 4 by GM; both killed (each handler's Prog operand fails:
+# NMKilled stays 0); Prog 5 by GM; both despawn (qm1's Wait = GetSystemTime() + 180); qm1 then: NMKilled 0 (no 18), the
+# wait not over (no pop; the harness's clock does not move with `tick`), night (no UNABLE_TO_INVESTIGATE): nil, DUG_UP.
+char zone=JugnerForest pos=-309.382,-0.139,407.377 job=WAR lvl=75
+quest Sandoria.ATimelyVisit accepted
+charvar Quest[0][105]Prog 5
+charvar Quest[0][105]Stage 1
+login
+wait vana=8
+trigger qm1                               # 20:00: both popped and claimed; SENSE_OF_FOREBODING
+charvar Quest[0][105]Prog 4               # GM: Prog 4 at both deaths
+kill GIOLLEMITTE                          # Prog 4: nothing
+kill GIOLLEMITTE+1                        # Prog 4: nothing
+charvar Quest[0][105]Prog 5
+tick 15000                                # the death's fade (0x038)
+tick 15000                                # both despawn: qm1's Wait set
+trigger qm1                               # NMKilled 0, the wait not over, night: nil; DUG_UP
+wait jst=1                                # a day on: GetSystemTime() past the Wait
+trigger qm1                               # the wait over, no NM up, night: both popped again; SENSE_OF_FOREBODING

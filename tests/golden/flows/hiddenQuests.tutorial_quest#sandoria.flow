@@ -1,0 +1,64 @@
+# Tutorial, San d'Oria: a level 18 Warrior (nation 0) in Southern San d'Oria, Alaune (no script; her default). Prog 0:
+# 3662 (Prog 1); 3640 (Prog 2); no Signet: 3641. Prog 3: 3643. Prog 4: no skill: 3645; Sword 5: 3646: the gil, Prog 5.
+# 3647; the Memorandoll: 3648: Rock Salt, Hare Meat, Fire Crystal, Prog 6. 3649; the Auction Counter (Southern San
+# d'Oria's): Option 1, the menu; 3650: the voucher, Prog 7. Level 18: 3652: the Raising Earring, Prog 8. 3653; the San
+# d'Oria Trust Permit: 3654: the Warp Ring, Prog 9. 3655 (0); Northern San d'Oria's guide: 0 -> 1; West Ronfaure's: 1
+# -> 2; 3656 (0): Saltena, Prog 10. 3658 (0): the voucher, Prog 11. No support job: 3659 (0). Prog 12 (a GM): 3661.
+# The Signet (effect 253: 3642) and food (effect 251: 3644) by a GM's effect; the support job arm (3660): #support.
+lists SouthernSanDoria/Alaune/onTrigger SouthernSanDoria/Auction_Counter/onTrigger NorthernSanDoria/Survival_Guide/onTrigger WestRonfaure/Survival_Guide/onTrigger SouthernSanDoria/onEventFinish/3662 SouthernSanDoria/onEventFinish/3640 SouthernSanDoria/onEventFinish/3646 SouthernSanDoria/onEventFinish/3648 SouthernSanDoria/onEventFinish/3650 SouthernSanDoria/onEventFinish/3652 SouthernSanDoria/onEventFinish/3654 SouthernSanDoria/onEventFinish/3656 SouthernSanDoria/onEventFinish/3658
+char zone=SouthernSanDoria pos=-90.6,1,-57.5 job=WAR lvl=18 nation=0
+login
+trigger Alaune                          # Prog 0: 3662
+finish                                  # Prog 1
+trigger Alaune                          # 3640
+finish                                  # Prog 2
+trigger Alaune                          # no Signet: 3641
+finish
+effect 253                              # a GM: the Signet
+trigger Alaune                          # 3642
+finish                                  # 6 Meat Jerky; Prog 3
+trigger Alaune                          # no food: 3643
+finish
+effect 251                              # a GM: food
+trigger Alaune                          # 3644
+finish                                  # Prog 4
+trigger Alaune                          # no skill at 5: 3645
+finish
+skill Sword 50
+trigger Alaune                          # 3646
+finish                                  # the gil; Prog 5
+trigger Alaune                          # no Memorandoll: 3647
+finish
+keyitem Memorandoll
+trigger Alaune                          # 3648
+finish                                  # Rock Salt, Hare Meat, Fire Crystal; Prog 6
+trigger Alaune                          # Option 0: 3649
+finish
+trigger Auction_Counter                 # Option 1; the menu; noAction
+trigger Alaune                          # 3650
+finish                                  # the voucher; Prog 7; Option 0
+trigger Alaune                          # level 18: 3652
+finish                                  # the Raising Earring; Prog 8
+trigger Alaune                          # no permit: 3653
+finish
+keyitem SanDoriaTrustPermit
+trigger Alaune                          # 3654
+finish                                  # the Warp Ring; Prog 9
+trigger Alaune                          # 3655 (0)
+finish
+warp -174,4,82 NorthernSanDoria
+trigger Survival_Guide                  # 0 -> 1; 8500; nil
+finish-if-event
+warp -452.6,-19.8,-216 WestRonfaure
+trigger Survival_Guide                  # 1 -> 2; 8500; nil
+finish-if-event
+warp -90.6,1,-57.5 SouthernSanDoria
+trigger Alaune                          # 3656 (0)
+finish                                  # 12 Saltena; Prog 10; TutorialBypass 0
+trigger Alaune                          # level 18: 3658 (0)
+finish                                  # the voucher; Prog 11
+trigger Alaune                          # no support job: 3659 (0)
+finish
+charvar HQuest[Tutorial]Prog 12         # a GM (3661; the support job arm, 3660, is #support's)
+trigger Alaune                          # 3661
+finish

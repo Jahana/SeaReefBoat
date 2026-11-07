@@ -1,0 +1,71 @@
+# Crafted Corsair Artifact (hidden quest CorArtifact) with its era module, modules/era/lua/quests/hiddenquests/
+# crafted_corsair_artifact.lua, enabled by xi.pre(ROV) (RESTRICT_CONTENT 1, ENABLE_ROV 0): each piece is handed over
+# at JST midnight instead of a Vana'diel day later. A level 99 Warrior, Against All Odds completed. The three
+# commissions in turn (GMs put the char at Prog 3 with the Option): the fee's finish (946 Windurst Waters' green door,
+# 524 Bastok Mines' blue door, 760 Raqtibahl) runs the base and then sets Wait = JstMidnight(). Prog 3: the base's
+# reminder. Prog 4 with Wait set: the module's wait event (945 / 523 / 757) although the base's Timer is past and the
+# char has zoned (it would play 944 / 522 / 756); the Option of another commission (a GM) with Wait set: the base's
+# nothing. With Wait 0 (a GM: the JST midnight passed) the module sets Timer 0 and the base plays the piece's event;
+# another Option with Wait 0 leaves the Timer alone.
+module modules/era/lua/quests/hiddenquests/crafted_corsair_artifact.lua
+lists WindurstWaters/Door_House/onTrigger WindurstWaters/onEventFinish/946 WindurstWaters/onEventFinish/944 BastokMines/Door_House/onTrigger BastokMines/onEventFinish/524 BastokMines/onEventFinish/522 PortSanDoria/Raqtibahl/onTrigger PortSanDoria/onEventFinish/760 PortSanDoria/onEventFinish/756
+char zone=WindurstWaters pos=-197.6,-5.4,-112 job=WAR lvl=99
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest AhtUrhgan.AgainstAllOdds completed
+item ImperialMythrilPiece x8
+item ImperialGoldPiece
+charvar HQuest[CorArtifact]Option 1
+charvar HQuest[CorArtifact]Prog 3
+login
+trigger Door_House                      # Prog 3: not the module's: the base's 954
+finish
+trade Door_House ImperialMythrilPiece x4   # 946
+finish                                  # the base, then Wait = JstMidnight()
+trigger Door_House                      # Prog 4, Wait set, the Timer not past: 945
+finish
+charvar HQuest[CorArtifact]Timer 0      # a GM: the Timer past
+rezone
+trigger Door_House                      # Wait set: the module's 945 (the base would be 944)
+finish
+charvar HQuest[CorArtifact]Option 2     # a GM: another commission
+trigger Door_House                      # Wait set, the base has nothing: nothing
+finish
+charvar HQuest[CorArtifact]Wait 0       # a GM: the JST midnight passed
+charvar HQuest[CorArtifact]Timer 999999 # a GM: far in the future
+trigger Door_House                      # not this Option: the base's nothing; the Timer stays
+finish
+charvar HQuest[CorArtifact]Option 1     # a GM
+trigger Door_House                      # Wait 0: the module sets Timer 0: the base's 944
+finish                                  # the Gants
+warp 10.4,-1,-16 BastokMines            # beside the blue door
+charvar HQuest[CorArtifact]Option 2     # a GM
+charvar HQuest[CorArtifact]Prog 3       # a GM
+trade Door_House ImperialMythrilPiece x4   # 524
+finish                                  # the base, then Wait = JstMidnight()
+charvar HQuest[CorArtifact]Timer 0      # a GM: the Timer past
+rezone
+trigger Door_House                      # Wait set: the module's 523 (the base would be 522)
+finish
+charvar HQuest[CorArtifact]Wait 0       # a GM: the JST midnight passed
+warp -58.7,-4.5,-39.6 PortSanDoria      # out of the zone and back: the mustZone gone
+warp 10.4,-1,-16 BastokMines
+trigger Door_House                      # the module sets Timer 0: the base's 522
+finish                                  # the Bottes
+warp -58.7,-4.5,-39.6 PortSanDoria
+charvar HQuest[CorArtifact]Option 3     # a GM
+charvar HQuest[CorArtifact]Prog 3       # a GM
+trade Raqtibahl ImperialGoldPiece x1    # 760
+finish                                  # the base, then Wait = JstMidnight()
+charvar HQuest[CorArtifact]Timer 0      # a GM: the Timer past
+warp -14.7,0,26.6 Nashmau
+warp -58.7,-4.5,-39.6 PortSanDoria
+trigger Raqtibahl                       # Wait set: the module's 757 (the base would be 756)
+finish
+charvar HQuest[CorArtifact]Option 1     # a GM: another commission
+trigger Raqtibahl                       # Wait set, Option 1: the base's 759 (the Frac is not made)
+finish
+charvar HQuest[CorArtifact]Option 3     # a GM
+charvar HQuest[CorArtifact]Wait 0       # a GM: the JST midnight passed
+trigger Raqtibahl                       # the module sets Timer 0: the base's 756
+finish                                  # the Frac

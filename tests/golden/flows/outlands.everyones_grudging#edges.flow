@@ -1,0 +1,69 @@
+# Everyone's Grudging's edges. Section 1 off, one operand each (level 75 Warriors in Kazham): bob (fame 487, level 6; A
+# Question of Taste completed, rancorCurse 1): Jakoh: A Question of Taste's nil: the default 113; carl (fame 488, A
+# Question of Taste accepted, rancorCurse 1): A Question of Taste's 46; dan (fame 488, A Question of Taste completed,
+# rancorCurse 1, A Pose By Any Other Name's mustZone 250 set in Kazham): the default; ed (fame 488, A Question of Taste
+# completed, rancorCurse 0): the default. Main (accepted by a GM at Prog 2, a Rancor Flame): Den of Rancor: the Torch popped
+# (four flames to _4ge) and killed at Prog 2 (not 0): Prog stays 2; the Torch gone (two ticks: the lanterns out), Everyone's
+# Grudging set available at Prog 0 (GMs), the Torch popped again and killed: nothing (the death is the accepted
+# section's). Not reachable: quest:complete false (a gil reward only).
+lists Kazham/Jakoh_Wahcondalo/onTrigger DenOfRancor/Rancor_Torch/onMobDeath
+char zone=DenOfRancor pos=119.25,12.904,-319.789 job=WAR lvl=75
+char bob zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+char carl zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+char dan zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+char ed zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+fame Windurst 488
+quest Outlands.AQuestionOfTaste completed
+quest Outlands.EveryonesGrudging accepted
+charvar Quest[5][4]Prog 2
+item RancorFlame
+bob: fame Windurst 487
+bob: quest Outlands.AQuestionOfTaste completed
+bob: charvar rancorCurse 1
+carl: fame Windurst 488
+carl: quest Outlands.AQuestionOfTaste accepted
+carl: charvar rancorCurse 1
+dan: fame Windurst 488
+dan: quest Outlands.AQuestionOfTaste completed
+dan: charvar rancorCurse 1
+dan: charvar Quest[2][7]mustZone 250
+ed: fame Windurst 488
+ed: quest Outlands.AQuestionOfTaste completed
+login
+bob: login
+bob: trigger Jakoh_Wahcondalo           # fame level 6: not offered; A Question of Taste nil: the default 113
+bob: finish
+bob: logout
+carl: login
+carl: trigger Jakoh_Wahcondalo          # A Question of Taste not completed: not offered; its 46
+carl: finish
+carl: logout
+dan: login
+dan: trigger Jakoh_Wahcondalo           # A Pose's mustZone (250, kept in Kazham): not offered: the default
+dan: finish
+dan: logout
+ed: login
+ed: trigger Jakoh_Wahcondalo            # rancorCurse 0: not offered: the default
+ed: finish
+ed: logout
+trade _4ge RancorFlame x1               # the first lantern
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1               # the fourth: Rancor Torch spawned, claimed
+kill RANCOR_TORCH                       # Prog 2 (not 0): nothing (Prog stays 2)
+tick 15000                              # the body despawns
+tick 4000                               # it fades: the lanterns go out
+quest Outlands.EveryonesGrudging available   # a GM
+charvar Quest[5][4]Prog 0               # a GM
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1               # the first lantern again
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1
+item RancorFlame                        # a GM
+trade _4ge RancorFlame x1               # the fourth: Rancor Torch spawned, claimed
+kill RANCOR_TORCH                       # Everyone's Grudging available (Prog 0): no accepted section: nothing

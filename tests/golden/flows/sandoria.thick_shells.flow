@@ -1,0 +1,25 @@
+# Thick Shells (sandoria 117): Vounebariont in Port San d'Oria, one NPC script quest. The fame guard, the trade of 5
+# beetle shells while Accepted and again while Completed, wrong trades. The default 568 stays in the NPC script.
+# Quest[0][117]Prog 1 (GM) at the completion, kept (the raw player:completeQuest).
+char zone=PortSanDoria pos=-3,-13,-147
+item BeetleShell x20
+item SilverBeastcoin
+login
+trigger Vounebariont                # fame level 1: 568
+finish-if-event
+trade Vounebariont BeetleShell x5   # Available: nothing
+finish-if-event
+fame Sandoria 50                    # fame level 2
+trigger Vounebariont                # the offer, 516
+finish                              # accepted
+trade Vounebariont BeetleShell x4   # 4 shells: nothing
+finish-if-event
+trade Vounebariont BeetleShell x5 SilverBeastcoin x1   # 5 shells and another item: nothing
+finish-if-event
+charvar Quest[0][117]Prog 1         # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Vounebariont BeetleShell x5   # 514
+finish                              # completed: 16 fame, the Bug Catcher title, 750 gil; Quest[0][117]Prog kept
+trigger Vounebariont                # Completed: 516 again
+finish                              # not started again
+trade Vounebariont BeetleShell x5   # Completed: 514 again
+finish                              # 16 fame, title, 750 gil again

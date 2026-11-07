@@ -1,0 +1,20 @@
+# To Bee or Not to Bee? (windurst 35): the other operands. Accepted (GM) at ToBeeOrNot_var 0: Zayhi-Bauhi nothing (the
+# accepted arm has no else; his 299 not reached); a honey: nothing; Kalupa-Tawalupa (var not > 0) 298, Rutango-Botango
+# 297; Raamimi 68. Var 5 while accepted: Zayhi-Bauhi nothing. Completed at var 5 with no needToZone: Zayhi-Bauhi 299.
+char zone=WindurstWalls pos=-88.0,-9.5,106.0 job=WAR lvl=75
+item PotOfHoney
+login
+quest Windurst.ToBeeOrNotToBee accepted
+trigger Zayhi-Bauhi                     # accepted, var 0: nothing
+trade Zayhi-Bauhi PotOfHoney x1         # var 0: nothing
+trigger Kalupa-Tawalupa                 # accepted, var 0: his 298
+finish
+trigger Rutango-Botango                 # accepted, var 0: his 297
+finish
+trigger Raamimi                         # accepted: 68
+finish
+charvar ToBeeOrNot_var 5
+trigger Zayhi-Bauhi                     # accepted, var 5: nothing
+quest Windurst.ToBeeOrNotToBee completed
+trigger Zayhi-Bauhi                     # completed, no needToZone: his 299
+finish

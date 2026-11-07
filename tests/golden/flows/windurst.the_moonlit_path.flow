@@ -1,0 +1,97 @@
+# The Moonlit Path (windurst 9): Leepe-Hoppe in Windurst Waters. A WAR of San d'Oria (no SMN unlocked, no Trainer's
+# Whistle). The guard (fame level 6: 424, then 425), the offer 842 (option 0, option 1: nothing; option 2: begun), 843
+# while a whisper is missing (none; each of the six missing in turn, the other five held), 844 with all six (option 1,
+# escaped: nothing; option 0: the Moon Bauble, the six whispers taken), 845 with the bauble. The Full Moon Fountain's
+# 32001 finish (the battlefield win) is #battlefield, its no-win arm #battlefield_novar; here its result (the bauble
+# taken, the Whisper of the Moon) is set by GM. 846 (Repeat 0; mask 192: no SMN, bit 6; no Trainer's Whistle, bit 7):
+# escaped (0) and out of range (9): nothing; option 6: 15000 gil, completed (fame +60, Heir of the New Moon), the
+# whisper taken, Timer 1 (expires at the next JST day), no Dark Mana Orb (not a Windurst char). Completed, Timer 1,
+# Repeat 0: 847; a day on (Timer expired), Repeat 0: 848 (option 0, option 1: nothing; option 2: the quest deleted and
+# begun again, the Moon Bauble, Repeat 1); accepted with the bauble: 845; the whisper (GM): 850 (Repeat 1, mask 192);
+# option 1 (Fenrir's Stone): completed, Repeat 1 again; Timer 1, Repeat 1: 851; a day on, Timer 0 with Repeat 1: 848.
+# Trades with no handler: Leepe while available (the guard false, then met).
+# Defaults: Leepe-Hoppe 345 (DefaultActions); his script acts only for Tuning In / Out (Tuning In needs CoP 4-2 or later:
+# never here), so the quest's Event lines (843, 845, 847, 851) answer on its turn and on the script's turn alike. Also
+# named: Leepe-Hoppe by Food for Thought (accepted only) and Toraimarai Turmoil (accepted only); missions 1-3 and 7-2 (not
+# current).
+# The battlefield (MS_Entrance, 32000, Fenrir Prime, 32001) is in #battlefield (the win) and #battlefield_novar.
+lists WindurstWaters/Leepe-Hoppe/onTrigger WindurstWaters/Leepe-Hoppe/onTrade WindurstWaters/onEventFinish/842 WindurstWaters/onEventFinish/844 WindurstWaters/onEventFinish/846 WindurstWaters/onEventFinish/848 WindurstWaters/onEventFinish/850
+char zone=WindurstWaters pos=11.4,-9.75,-195.97
+fame Windurst 424
+item BoneChip
+login
+trade Leepe-Hoppe BoneChip x1           # fame 424: no section, nothing (his script: no Tuning In)
+trigger Leepe-Hoppe                     # fame 424 (level 5): not met; his default 345
+finish
+fame Windurst 425
+trade Leepe-Hoppe BoneChip x1           # the guard met: no section-1 onTrade, nothing
+trigger Leepe-Hoppe                     # level 6: 842 (0, Carbuncle's Ruby)
+finish option=0                         # nothing
+trigger Leepe-Hoppe                     # 842 again
+finish option=1                         # nothing
+trigger Leepe-Hoppe                     # 842 again
+finish option=2                         # begun
+trigger Leepe-Hoppe                     # accepted, no bauble, no whisper of the moon, no whisper: event 843
+finish
+keyitem WhisperOfFlames
+keyitem WhisperOfTremors
+keyitem WhisperOfTides
+keyitem WhisperOfGales
+keyitem WhisperOfFrost
+trigger Leepe-Hoppe                     # Storms missing: 843
+finish
+keyitem WhisperOfStorms
+delkeyitem WhisperOfFlames
+trigger Leepe-Hoppe                     # Flames missing: 843
+finish
+keyitem WhisperOfFlames
+delkeyitem WhisperOfTremors
+trigger Leepe-Hoppe                     # Tremors missing: 843
+finish
+keyitem WhisperOfTremors
+delkeyitem WhisperOfTides
+trigger Leepe-Hoppe                     # Tides missing: 843
+finish
+keyitem WhisperOfTides
+delkeyitem WhisperOfGales
+trigger Leepe-Hoppe                     # Gales missing: 843
+finish
+keyitem WhisperOfGales
+delkeyitem WhisperOfFrost
+trigger Leepe-Hoppe                     # Frost missing: 843
+finish
+keyitem WhisperOfFrost
+trigger Leepe-Hoppe                     # all six: 844 (0, Carbuncle's Ruby, Moon Bauble)
+finish option=1                         # escaped: nothing
+trigger Leepe-Hoppe                     # 844 again
+finish option=0                         # the Moon Bauble; the six whispers taken
+trigger Leepe-Hoppe                     # the bauble: event 845 (0, Carbuncle's Ruby, Moon Bauble)
+finish
+delkeyitem MoonBauble                   # GM: the battlefield win's result (32001: the bauble taken,
+keyitem WhisperOfTheMoon                # the Whisper of the Moon)
+trigger Leepe-Hoppe                     # the whisper of the moon, Repeat 0: 846 (0, earring, key, ruby, mask 192, stone, cape)
+finish option=0                         # escaped: nothing
+trigger Leepe-Hoppe                     # 846 again
+finish option=9                         # out of range: nothing
+trigger Leepe-Hoppe                     # 846 again
+finish option=6                         # 15000 gil; completed; the whisper taken; Timer 1 (expiry: the next JST day); not Windurst: no orb
+trigger Leepe-Hoppe                     # completed, Timer 1, Repeat 0: event 847 (0, Carbuncle's Ruby)
+finish
+wait jst=1                              # the Timer expired
+trigger Leepe-Hoppe                     # Timer 0: 848 (0, Carbuncle's Ruby, Moon Bauble)
+finish option=0                         # nothing
+trigger Leepe-Hoppe                     # 848 again
+finish option=1                         # nothing
+trigger Leepe-Hoppe                     # 848 again
+finish option=2                         # the quest deleted; the Moon Bauble; begun; Repeat 1
+trigger Leepe-Hoppe                     # accepted, the bauble: 845
+finish
+delkeyitem MoonBauble
+keyitem WhisperOfTheMoon
+trigger Leepe-Hoppe                     # Repeat 1: 850 (0, earring, key, ruby, mask 192, stone, cape)
+finish option=1                         # Fenrir's Stone; completed; the whisper taken; Timer 1; Repeat 1 again
+trigger Leepe-Hoppe                     # completed, Timer 1, Repeat 1: event 851
+finish
+wait jst=1
+trigger Leepe-Hoppe                     # Timer 0, Repeat 1: 848
+finish

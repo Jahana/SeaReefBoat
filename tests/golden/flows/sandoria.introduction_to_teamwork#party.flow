@@ -1,0 +1,65 @@
+# Introduction to Teamwork (sandoria 63): 129 in a party, formed by the engine's own invite and accept. Accepted by GM.
+# Main (San d'Oria) leads; bob is Bastok, carl and dave San d'Oria. Vilatroire's trigger moves main to 1.5 yalms east of
+# him, (-258.861, -70.999, 423.42). The update counts the members (main among them) of main's nation, after checking
+# each member's zone and distance (> 15 yalms fails):
+# - main and bob: one of the nation, updateEvent(3, 1); 129's finish with option 0 and the local Prog 0: nothing;
+# - bob exactly 15 yalms off (z + 15): in range (> 15 is false), updateEvent(3, 1); 15.01 yalms: updateEvent(1);
+# - bob in East Ronfaure, at coordinates 2.58 yalms from main's (only the zone check fails): updateEvent(1);
+# - bob logs out while 129 is open: the party is main alone, #party below 2: updateEvent(1); alone, the next talk is his
+#   default 136;
+# - main and carl: two of the nation, the local Prog 1, updateEvent(15, 1); finish option 1: nothing;
+# - main, carl and dave: three (>= 2), updateEvent(15, 1); finish option 0 with a full bag: complete fails (Shell Ring),
+#   not completed, the local Prog stays 1;
+# - dave 16.58 yalms off: updateEvent(1), but the local Prog is still 1, so finish option 0 completes it (Shell Ring,
+#   fame +20, Third-Rate Organizer; the local Prog 0): a kept quirk, the update's failure arms leave Prog as it was.
+lists WestRonfaure/Vilatroire/onTrigger WestRonfaure/onEventUpdate/129 WestRonfaure/onEventFinish/129
+char zone=WestRonfaure pos=-258.861,-70.999,423.42 job=WAR lvl=10 nation=0
+char bob zone=WestRonfaure pos=-258.861,-70.999,428 job=WAR lvl=10 nation=1
+char carl zone=WestRonfaure pos=-256,-70.999,426 job=WAR lvl=10 nation=0
+char dave zone=WestRonfaure pos=-256,-70.999,421 job=WAR lvl=10 nation=0
+quest Sandoria.IntroductionToTeamwork accepted
+login
+bob: login
+carl: login
+dave: login
+invite bob
+bob: accept                               # main leads, bob joins
+trigger Vilatroire                        # a party of two: 129 { [1] = 1 }
+update 129 option=0                       # main San d'Oria, bob Bastok: one, updateEvent(3, 1)
+finish                                    # option 0, the local Prog 0: nothing
+bob: walk -258.861,-70.999,438.42         # exactly 15 yalms from main's spot at Vilatroire
+trigger Vilatroire                        # 129
+update 129 option=0                       # checkDistance 15, not > 15: in range; one: updateEvent(3, 1)
+finish option=1
+bob: walk -258.861,-70.999,438.43         # 15.01 yalms
+trigger Vilatroire                        # 129
+update 129 option=0                       # bob out of range: updateEvent(1)
+finish option=1
+bob: warp -258.861,-70.999,426 EastRonfaure   # another zone, 2.58 yalms from main's coordinates
+tick 400                                  # bob's zone-in reload: in main's party, in another zone
+trigger Vilatroire                        # #party 2: 129
+update 129 option=0                       # bob's zone is not main's: updateEvent(1)
+finish option=1
+trigger Vilatroire                        # 129
+bob: logout                               # bob leaves the process: main alone
+tick 400
+update 129 option=0                       # #party 1, below 2: updateEvent(1)
+finish option=1
+trigger Vilatroire                        # alone now (#party 1): the trigger's nil, his default 136
+finish
+invite carl
+carl: accept                              # main and carl, both San d'Oria
+trigger Vilatroire                        # 129
+update 129 option=0                       # two of the nation: the local Prog 1, updateEvent(15, 1)
+finish option=1                           # option 1: nothing (the local Prog stays 1)
+invite dave
+dave: accept                              # main, carl and dave: three of the nation
+fill-inventory
+trigger Vilatroire                        # 129
+update 129 option=0                       # three (>= 2): the local Prog 1, updateEvent(15, 1)
+finish                                    # option 0, Prog 1, a full bag: complete fails, not completed
+free-inventory
+dave: walk -258.861,-70.999,440           # dave 16.58 yalms off
+trigger Vilatroire                        # 129
+update 129 option=0                       # dave out of range: updateEvent(1), the local Prog left at 1
+finish                                    # option 0, the stale Prog 1: completed (Shell Ring, fame +20, Third-Rate Organizer)

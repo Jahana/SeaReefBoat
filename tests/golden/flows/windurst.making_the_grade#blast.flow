@@ -1,0 +1,31 @@
+# Making the Grade (windurst 4): Koru-Moru's trade lines next to Blast from the Past's (windurst 11), so a Progress and
+# an Event line differ. Blast from the Past accepted (Option 0) answers any trade but the Burnite Shell Stone with 225
+# (an Event); its container is before this quest's in Koru-Moru's trade order (Quest[3][131], Quest[2][11], Quest[2][4],
+# Quest[2][10]). A level-10 WAR, Teacher's Pet completed, fame 125, both quests accepted by GM. Prog 0: Blast from the Past's 225 first,
+# then 287 (Event), in turns; Prog 1: 285 (Progress) on every trade (twice, Prog 1 again by GM); Prog 2: the turns resume (287, then 225).
+lists WindurstWalls/Koru-Moru/onTrade WindurstWalls/onEventFinish/285
+char zone=WindurstWalls pos=-119.7,-5.5,122.4 job=WAR lvl=10
+quest Windurst.TeachersPet completed
+fame Windurst 125
+quest Windurst.BlastFromThePast accepted
+quest Windurst.MakingTheGrade accepted
+item PileOfAnswerSheets
+login
+trade Koru-Moru PileOfAnswerSheets x1         # Prog 0: two Event lines: Blast from the Past's 225 first
+finish
+trade Koru-Moru PileOfAnswerSheets x1         # the next line: this quest's 287 (no finish handler: the sheets kept)
+finish
+trade Koru-Moru PileOfAnswerSheets x1         # the cycle wraps: 225
+finish
+charvar Quest[2][4]Prog 1
+trade Koru-Moru PileOfAnswerSheets x1         # Prog 1: 285 (Progress) over 225
+finish                                        # the sheets taken; the Tattered Test Sheet; Prog 2
+charvar Quest[2][4]Prog 1
+item PileOfAnswerSheets                       # 285 took the sheets
+trade Koru-Moru PileOfAnswerSheets x1         # 285 again (a Progress line over the cycle)
+finish                                        # Prog 2
+item PileOfAnswerSheets                       # taken again
+trade Koru-Moru PileOfAnswerSheets x1         # Prog 2: the cycle resumes after 225: this quest's 287
+finish
+trade Koru-Moru PileOfAnswerSheets x1         # the cycle wraps: 225
+finish

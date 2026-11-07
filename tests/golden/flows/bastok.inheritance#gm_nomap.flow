@@ -1,0 +1,14 @@
+# Inheritance (bastok 68): the qm1 without the map. Available: no section-2 handler (the default
+# NOTHING_OUT_OF_ORDINARY); accepted by GM with no map: nil; the map by GM pops Maharaja; the map deleted by GM before
+# the kill: Maharaja's death sets nothing, so the next qm1 talk (no map, killed_wsnm 0) is nil again.
+lists WesternAltepaDesert/qm1/onTrigger
+char zone=WesternAltepaDesert pos=-660,0,-338 job=WAR lvl=75
+login
+trigger qm1                    # available: no handler, NOTHING_OUT_OF_ORDINARY
+quest Bastok.Inheritance accepted
+trigger qm1                    # accepted, no map: nil, NOTHING_OUT_OF_ORDINARY
+keyitem MapToTheAnnalsOfTruth
+trigger qm1                    # the map: Maharaja popped and claimed, SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth
+kill MAHARAJA             # no map: killed_wsnm not set
+trigger qm1                    # killed_wsnm 0, no map: nil, NOTHING_OUT_OF_ORDINARY

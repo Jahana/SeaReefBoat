@@ -1,0 +1,16 @@
+# Northward (jeuno 24) with its era module: modules/era/lua/quests/jeuno/northward.lua, enabled by its condition
+# xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0), replaces the reward table: the Map of Castle Zvahl and
+# Envoy to the North only (no exp, no gil: added in 2013). Accepted by a GM; the Flame Degen traded: 61, finished:
+# completed with the module's reward, fame +13 x3, the degen taken.
+# The condition's false side cannot be a module flow (the harness fails a flow whose module is not enabled); the
+# quest's own flows are that side.
+module modules/era/lua/quests/jeuno/northward.lua
+lists RuludeGardens/Radeivepart/onTrigger RuludeGardens/Radeivepart/onTrade RuludeGardens/onEventFinish/61
+char zone=RuludeGardens pos=5.9,9,-38.7 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.Northward accepted
+item FlameDegen
+login
+trade Radeivepart FlameDegen x1     # 61
+finish                              # completed: the map and the title only; fame +13 x3; the degen taken

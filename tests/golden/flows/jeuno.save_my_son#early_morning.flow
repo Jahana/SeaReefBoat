@@ -1,0 +1,13 @@
+# Save My Son (jeuno 5), the early-morning half of the Nightflowers' night check (vanadielClockTime <= 540): GM-accepted
+# at Prog 0, the char at the Nightflowers of Qufim Island. The harness starts at 12:00 Vana'diel; `wait vana=16`
+# reaches 04:00 (clock time 400 <= 540): 0, its finish Prog 1. The main flow takes the late half (22:00 > 2130) and
+# the day's false (12:00).
+lists QufimIsland/Nightflowers/onTrigger QufimIsland/onEventFinish/0
+char zone=QufimIsland pos=-263.3,-3.718,28.77 lvl=30
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon accepted
+login
+wait vana=16                    # 04:00
+trigger Nightflowers            # Prog 0 at 04:00: 0
+finish                          # Prog 1

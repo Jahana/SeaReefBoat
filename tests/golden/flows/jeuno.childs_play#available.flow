@@ -1,0 +1,14 @@
+# Child's Play (jeuno 23): the available check's operand. A level 75 Warrior: The Wonder Magic Set available: Karl's
+# default 58; completed (a GM): 58; available, then accepted (a GM): 0, begun.
+lists PortJeuno/Karl/onTrigger PortJeuno/onEventFinish/0
+char zone=PortJeuno pos=-59.4,0,-8.9 job=WAR lvl=75
+login
+trigger Karl                            # The Wonder Magic Set available: no section; 58
+finish
+quest Jeuno.TheWonderMagicSet completed # a GM
+trigger Karl                            # completed: 58
+finish
+quest Jeuno.TheWonderMagicSet available # a GM: both bits clear (`accepted` over completed would keep it completed)
+quest Jeuno.TheWonderMagicSet accepted  # a GM
+trigger Karl                            # accepted: 0
+finish                                  # begun

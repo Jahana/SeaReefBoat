@@ -1,0 +1,24 @@
+# Trust: Bastok (bastok 92): Trust: Windurst's side of each test. Trust: San d'Oria accepted (not completed), Trust:
+# Windurst available: Clarion Star returns nil (neither 434 nor 438: his default 442). Trust: Windurst completed by GM
+# (San d'Oria's still accepted): 438, option 0 (nothing), option 2 (begun, the card). Naji's 984 (Windurst's completed;
+# the memories set before login: The Emissary 2, The Doorman 4, Light of Judgment 8 = 14; rank 2, so rank3 = 0):
+# completed at once (the permit, Naji learned, YOU_LEARNED_TRUST, the card deleted, KEYITEM_LOST). The San d'Oria side
+# of each test is #other_trust_sandoria.
+lists PortBastok/Clarion_Star/onTrigger PortBastok/onEventFinish/438 Metalworks/Naji/onTrigger Metalworks/onEventFinish/984
+char zone=PortBastok pos=81.5,7.5,-24.2 lvl=5 nation=1
+quest Sandoria.TrustSandoria accepted
+quest Bastok.TheDoorman completed
+mission Bastok TheEmissary completed
+mission Toau LightOfJudgment completed
+rank 2
+login
+trigger Clarion_Star           # San d'Oria's accepted, none completed: nil, 442
+finish
+quest Windurst.TrustWindurst completed
+trigger Clarion_Star           # Windurst's completed: 438
+finish option=0                # nothing
+trigger Clarion_Star           # 438 again
+finish option=2                # begun, the Blue Institute Card
+warp 64,-14,-4 Metalworks
+trigger Naji                   # Windurst's completed: 984 (0, 0, 0, 14, 0, 0, 0, 0)
+finish                         # completed: the permit, Naji learned, YOU_LEARNED_TRUST, the card deleted, KEYITEM_LOST

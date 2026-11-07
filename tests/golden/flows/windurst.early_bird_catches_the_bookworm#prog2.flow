@@ -1,0 +1,17 @@
+# Early Bird Catches the Bookworm (windurst 20): Furakku-Norakku's Prog arms the main flow does not take. A GM's Prog -1
+# meets no arm of his if / elseif chain (0, 1, >= 2): nil, his default 371. At Prog 2 (Orn's 398 never seen) he
+# completes it, the `>= 2` boundary (the main flow completes from Prog 3): 1500 gil, fame +20, Savior of Knowledge, Art
+# for Everyone gone, the player local var Quest[2][13]mustZone 1.
+lists WindurstWaters/Furakku-Norakku/onTrigger WindurstWaters/onEventFinish/400
+char zone=WindurstWaters pos=-16.5,-5.25,102.0
+quest Windurst.EarlyBirdCatchesTheBookworm accepted
+charvar Quest[2][20]Prog -1
+keyitem ArtForEveryone
+login
+trigger Furakku-Norakku             # Prog -1 (a GM's): nil; his default 371
+finish
+charvar Quest[2][20]Prog 2
+trigger Furakku-Norakku             # Prog 2 (>= 2): 400
+finish                              # completed: 1500 gil, fame +20, Savior of Knowledge; Art for Everyone gone; local var Quest[2][13]mustZone 1
+trigger Furakku-Norakku             # completed, the local var set: 401 (replaceDefault)
+finish

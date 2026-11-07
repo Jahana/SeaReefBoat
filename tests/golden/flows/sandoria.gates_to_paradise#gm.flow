@@ -1,0 +1,38 @@
+# Gates to Paradise (sandoria 18), GM-set key items: the Scripture of Water while available at fame level 2: 620 (before
+# 619); a full inventory at its finish (no cape: not completed, the Water kept); with room: completed from available,
+# Quest[0][18]Prog 1 (GM) kept (the raw player:completeQuest).
+# Accepted by GM at fame level 0, no key item: OLBERGIEUT_DIALOG; the Water held while accepted: 620 (completed).
+# Completed with the Water again: 620 (any status; the cape, fame +20 and the title again, the Water taken; the quest
+# stays completed). 619's finish after a GM status change while it is open (it reads no status): option 0 adds the quest
+# (the current bit of a completed quest) and gives the Wind. Completed with the Wind: Faurbellant's FAURBELLANT_4 (not 2);
+# available with the Wind: FAURBELLANT_1.
+char zone=NorthernSanDoria pos=91.0,0.0,118.5 job=WAR lvl=30
+fame Sandoria 50
+keyitem ScriptureOfWater
+login
+trigger Olbergieut                        # available, fame level 2, the Water: 620
+fill-inventory
+finish                                    # no room for the cape: not completed; the Water kept
+free-inventory
+charvar Quest[0][18]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Olbergieut                        # 620
+finish                                    # completed from available: cape, fame, title; the Water taken; Prog kept
+fame Sandoria 0
+quest Sandoria.GatesToParadise available
+quest Sandoria.GatesToParadise accepted
+trigger Olbergieut                        # accepted, fame level 0, no Water: OLBERGIEUT_DIALOG
+keyitem ScriptureOfWater
+trigger Olbergieut                        # accepted, the Water: 620
+finish                                    # completed
+keyitem ScriptureOfWater
+trigger Olbergieut                        # completed, the Water: 620
+finish                                    # the cape again, fame +20, title; the Water taken; still completed
+quest Sandoria.GatesToParadise available
+fame Sandoria 50
+trigger Olbergieut                        # available, fame level 2: 619
+quest Sandoria.GatesToParadise completed
+finish option=0                           # completed while 619 is open: addQuest (the current bit), the Wind
+warp 479.3,24.0,-89.9 LaTheinePlateau
+trigger Faurbellant                       # completed, the Wind held: FAURBELLANT_4
+quest Sandoria.GatesToParadise available
+trigger Faurbellant                       # available, the Wind held: FAURBELLANT_1 (the script's)

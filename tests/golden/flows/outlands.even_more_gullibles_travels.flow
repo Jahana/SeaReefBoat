@@ -1,0 +1,53 @@
+# Even More Gullible's Travels (outlands): Magriffon in Kazham (after Gullible's Travels' arms in his script), the three
+# Blue Rafflesias of Yuhtunga Jungle (call-only). No default beside either script. Gullible's Travels completed (a GM),
+# Windurst fame level 6 (425): 147; 35000 gil traded while available: nothing. Level 7 (488): 148 (0, 256, 0, 0, 35000);
+# finished on 0: not begun; on 1: begun. Progress 3 (a GM): falls to the Gullible's-completed arm: 147. Progress 0: 149.
+# 30000 gil: nothing; 35000: 150, finished: confirmed, 35000 taken, progress 1, the title, the Treasure Map. 35000 again
+# at progress 1: nothing. 151. The first flower: 21, finished on 0: nothing; on 1: FirstBlueRafflesiaCS 1, a jar.
+# Again: FLOWER_BLOOMING (its var 1). The second: 22, on 1 (First 1, Third 0): Second 1, a jar. The third: 23, on 1:
+# both others 1: both 0, BathedInScent 1, RafflesiaScentDay today, a jar, FEEL_DIZZY, progress 2. Again (progress 2):
+# FLOWER_BLOOMING. Magriffon: 152 (0, 1144, 256), finished: progress 0, fame +70, completed. Completed: 147; 35000 gil:
+# nothing.
+char zone=Kazham pos=62.6,-12,-33.9 job=WAR lvl=75 gil=200000
+quest Outlands.GulliblesTravels completed
+fame Windurst 425
+login
+trigger Magriffon                       # Gullible's completed, level 6: 147
+finish
+trade Magriffon gil=35000               # available: nothing
+fame Windurst 488
+trigger Magriffon                       # level 7: 148
+finish option=0                         # not begun
+trigger Magriffon                       # 148
+finish option=1                         # begun
+charvar EVEN_MORE_GULLIBLES_PROGRESS 3  # a GM
+trigger Magriffon                       # progress 3: the Gullible's-completed arm: 147
+finish
+charvar EVEN_MORE_GULLIBLES_PROGRESS 0  # a GM
+trigger Magriffon                       # progress 0: 149
+finish
+trade Magriffon gil=30000               # less than 35000: nothing
+trade Magriffon gil=35000               # 150
+finish                                  # 35000 taken; progress 1; the title; the Treasure Map
+trade Magriffon gil=35000               # progress 1: nothing
+trigger Magriffon                       # progress 1: 151
+finish
+warp -466.9,0.1,220.2 YuhtungaJungle
+trigger Blue_Rafflesia                  # 21
+finish option=0                         # nothing
+trigger Blue_Rafflesia                  # 21
+finish option=1                         # First 1; a jar
+trigger Blue_Rafflesia                  # First 1: FLOWER_BLOOMING
+warp -148.8,-0.2,-223.1 YuhtungaJungle
+trigger Blue_Rafflesia+1                # 22
+finish option=1                         # First 1, Third 0: Second 1; a jar
+warp 52.4,-0.1,-501.8 YuhtungaJungle
+trigger Blue_Rafflesia+2                # 23
+finish option=1                         # the third: bathed; a jar; FEEL_DIZZY; progress 2
+trigger Blue_Rafflesia+2                # progress 2: FLOWER_BLOOMING
+warp 62.6,-12,-33.9 Kazham
+trigger Magriffon                       # progress 2: 152 (0, 1144, 256)
+finish                                  # progress 0; fame +70; completed
+trigger Magriffon                       # completed: 147
+finish
+trade Magriffon gil=35000               # completed: nothing

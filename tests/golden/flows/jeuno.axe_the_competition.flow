@@ -1,0 +1,53 @@
+# Axe the Competition (jeuno 59): Upper Jeuno's Brutus, the Temple of Uggalepih's qm9 (default NOTHING_OUT_OF_ORDINARY)
+# and Yallery Brown. The natural path, with the Pick of Trials already held at 300 weapon skill points: the trades while
+# only available (a bone chip, the pick: no handler), the offer's skill threshold (Axe 2399: not offered; 2400: 12), 12
+# option 0 (nothing), 12 again in the zone (priority Ignore), the rezone, 12 option 1 with the pick held (the guide
+# alone, begun), 15 with the pick held (1), the trades while accepted (a bone chip: nil; the pick and a bone chip: nil;
+# the pick at 300 points: 13, whose finish takes it and gives the Map to the Annals of Truth), 16 with the map, the qm9's
+# pop of Yallery Brown, the kill, the Annals of Truth and 17 (Decimation). Completed: no section.
+# Brutus's other quests are kept silent for a level 75 Warrior: Chocobo's Wounds and Save My Son completed, Path of
+# the Beastmaster accepted (a GM, before login: it has no accepted section; available it would play 70, completed 20),
+# Chocobo on the Loose completed (no completed section); his script then starts nothing, and a talk with no
+# quest reply plays his default 66 (DefaultActions).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/Brutus/onTrade UpperJeuno/onEventFinish/12 UpperJeuno/onEventFinish/13 UpperJeuno/onEventFinish/15 UpperJeuno/onEventFinish/17 TempleOfUggalepih/qm9/onTrigger TempleOfUggalepih/Yallery_Brown/onMobDeath
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=75
+skill Axe 2399
+item BoneChip x2
+item PickOfTrials wsp=300
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster accepted
+quest Jeuno.ChocoboOnTheLoose completed
+login
+trade Brutus BoneChip x1                # available: no trade handler; nothing
+trade Brutus PickOfTrials x1            # available: nothing, the pick kept
+trigger Brutus                          # Axe 2399 (getCharSkillLevel / 10 below 240): not offered; the default 66
+finish
+skill Axe 2400                          # a GM
+trigger Brutus                          # can equip, Axe 2400, no guide: 12 (oncePerZone)
+finish option=0                         # not 1: nothing
+trigger Brutus                          # 12 played in this zone: priority Ignore; the default 66
+finish
+rezone
+trigger Brutus                          # after the rezone: 12 again
+finish option=1                         # the pick held: no second pick; the Weapon Training Guide; begun
+trigger Brutus                          # accepted, no Annals, no map, the pick held: 15 (1)
+finish option=0                         # nothing
+trade Brutus BoneChip x1                # not the pick: nil
+trade Brutus PickOfTrials x1 BoneChip x1 # the pick and an extra item: nil
+trade Brutus PickOfTrials x1            # 300 weapon skill points: 13
+finish                                  # the pick taken, the Map to the Annals of Truth
+trigger Brutus                          # the map: 16
+finish
+warp 219.7,-8.1,205.8 TempleOfUggalepih # by qm9
+trigger qm9                             # the map, no Annals: Yallery Brown popped and claimed; SENSE_OMINOUS_PRESENCE
+trigger qm9                             # Yallery Brown up: popFromQM false, nil; NOTHING_OUT_OF_ORDINARY
+kill YALLERY_BROWN                      # the map held: killed_wsnm 1
+trigger qm9                             # killed_wsnm 1: back to 0, the Annals of Truth
+trigger qm9                             # the Annals held, killed_wsnm 0: nil; NOTHING_OUT_OF_ORDINARY
+warp -55.5,8.2,97.5 UpperJeuno          # by Brutus
+trigger Brutus                          # the Annals: 17
+finish                                  # completed: fame +7 x3, the three key items deleted, Decimation learned, DECIMATION_LEARNED
+trigger Brutus                          # completed: no section; the default 66
+finish
+trade Brutus BoneChip x1                # completed: no trade handler; nothing

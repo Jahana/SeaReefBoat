@@ -1,0 +1,21 @@
+# Trial by Water (outlands 133), 112 answered with no reward option, with room (P9, D6): option 0, and above 6 (7),
+# take the finish's last branch, player:addItem(0): the engine only warns (C++ ShowWarning "AddItem: Item <0> is not
+# found in a database"; the C# engine logs it as a lua: line), gives nothing, and the finish goes on: ITEM_OBTAINED 0,
+# Heir of the Great Water, the whisper taken, TrialByWater_date set, Norg fame +60, completed. Accepted by GM with the
+# whisper; after the first completion the date is set behind (GM) for 109, whose option 1 begins the quest again.
+warning: lua: AddItem: Item <0> is not found in a database -- 112 at 0 / 7: addItem(0) warns; the finish completes
+char zone=Norg pos=-13.0,1.1,-19.0 job=WAR lvl=75
+fame Norg 225
+quest Outlands.TrialByWater accepted
+keyitem WhisperOfTides
+login
+trigger Edal-Tahdal                       # accepted, the whisper: 112
+finish option=0                           # no reward option: addItem(0) warns; ITEM_OBTAINED 0; completed
+trigger Edal-Tahdal                       # completed, the date ahead: 113
+finish
+charvar TrialByWater_date 1               # GM: the date behind
+trigger Edal-Tahdal                       # 109
+finish option=1                           # begun again; the fork
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # 112
+finish option=7                           # above 6: the same as 0; completed

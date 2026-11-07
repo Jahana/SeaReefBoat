@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>XI.Ipc</AssemblyName>
+    <RootNamespace>XI.Ipc</RootNamespace>
+  </PropertyGroup>
+  <!--
+    System.Formats.Cbor is the CBOR reader/writer that mirrors the C++ engine's
+    glaze write_cbor/read_cbor (src/common/ipc.h). It is NOT in Microsoft.NETCore.App;
+    offline it comes from the ASP.NET Core shared framework. In a network-enabled
+    product build, replace this with a standalone
+    <PackageReference Include="System.Formats.Cbor" /> so the foundation lib does not
+    drag the whole ASP.NET framework. Tracked as an open packaging decision.
+  -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>

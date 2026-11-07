@@ -1,0 +1,40 @@
+# On Sabbatical (crystalWar 32), the edges: a level 39 Scholar in The Eldieme Necropolis [S] with A Little Knowledge
+# completed (GMs; missions as the main flow). Below AF1_QUEST_LEVEL 40: no section: Erlene: A Little Knowledge's 47,
+# finished: the spells; then its 15. AF1_QUEST_LEVEL 39 (a setting step): 18, finished on option 1: the letter, begun
+# (any option). Erlene at Prog 1 (a GM): 19. Pashhow Marshlands [S]: the first Indescript Markings at Prog 0 (a GM):
+# nil (its script). Bastok Markets [S]: Gentle Tiger at Prog 2 (a GM): 47. Eldieme [S]: Erlene at Prog 2, a full
+# inventory: 20, finished: the schema does not fit: not completed (the letters kept); freed: 20: completed.
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/18 TheEldiemeNecropolisS/onEventFinish/20 BastokMarketsS/Gentle_Tiger/onTrigger PashhowMarshlandsS/Indescript_Markings/onTrigger
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=SCH lvl=39
+quest CrystalWar.ALittleKnowledge completed
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erlene                          # level 39 < AF1_QUEST_LEVEL 40: no section: A Little Knowledge's 47
+finish                                  # the spells
+trigger Erlene                          # A Little Knowledge's 15 (replaceDefault)
+finish
+setting AF1_QUEST_LEVEL 39
+trigger Erlene                          # 18
+finish option=1                         # the letter; begun (any option)
+charvar Quest[7][32]Prog 1              # a GM
+trigger Erlene                          # Prog 1: 19
+finish
+charvar Quest[7][32]Prog 0              # a GM
+warp -457.366,24.532,-363.107 PashhowMarshlandsS
+trigger Indescript_Markings             # offset 0, Prog 0: nil (its script)
+finish-if-event
+charvar Quest[7][32]Prog 2              # a GM
+warp -203.932,-9.998,3.737 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 2: 47
+finish
+warp 378.436,-39.999,17.914 TheEldiemeNecropolisS
+fill-inventory
+trigger Erlene                          # Prog 2: 20
+finish                                  # no room for the schema: not completed
+free-inventory
+trigger Erlene                          # 20
+finish                                  # completed; the letters taken

@@ -1,0 +1,20 @@
+# A Clock Most Delicate (jeuno 2), the door's 119 accepted at once (option 1: begun, Option stays 1), then a full
+# inventory at 202 (no room for the Engineer's Gloves: not completed, the oil kept), then 202 with room.
+# Jeuno fame 50 (level 2): 33/33/34.
+lists UpperJeuno/Collet/onTrigger UpperJeuno/_6s2/onTrigger UpperJeuno/onEventFinish/112 UpperJeuno/onEventFinish/119 UpperJeuno/onEventFinish/202
+char zone=UpperJeuno pos=-42.2,0,107.0
+fame Sandoria 33
+fame Bastok 33
+fame Windurst 34
+login
+trigger Collet                  # Option 0: 112
+finish                          # Option 1
+trigger _6s2                    # Option 1: 119
+finish option=1                 # begun
+keyitem ClockTowerOil           # a GM
+trigger _6s2                    # the oil: 202
+fill-inventory
+finish                          # no room for the gloves: not completed, the oil kept
+free-inventory
+trigger _6s2                    # 202 again
+finish                          # completed: 1200 gil, Engineer's Gloves, Professional Loafer, fame +17 x3, the oil deleted

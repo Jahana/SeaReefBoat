@@ -1,0 +1,21 @@
+# Monstrosity (otherAreas 34): both guards xi.settings.main.ENABLE_MONSTROSITY == 1 (available and accepted) with the
+# setting a boolean: Lua's `true == 1` is false (Settings.MainEquals, quest rework P9; MainNumber / Main would read true as
+# 1). Pashhow Marshlands' Suspicious Hume (his script does nothing until completed). Available, true: no section, nothing.
+# 1: 40, finished: begun. Accepted, true: no section, nothing (a port reading true as 1 would play 41). 1: 41.
+# ENABLE_SOA / ENABLE_ROV 0 as in the main flow. Recorded on Lua at 6c38eff5^ (the parent of the commit that deleted the
+# Lua).
+lists PashhowMarshlands/Suspicious_Hume/onTrigger PashhowMarshlands/onEventFinish/40
+char zone=PashhowMarshlands pos=-490.3,25,-618.6 job=WAR lvl=75
+setting ENABLE_MONSTROSITY true
+setting ENABLE_SOA 0
+setting ENABLE_ROV 0
+login
+trigger Suspicious_Hume                 # available, true: no section; nothing
+setting ENABLE_MONSTROSITY 1
+trigger Suspicious_Hume                 # available, 1: 40
+finish                                  # begun
+setting ENABLE_MONSTROSITY true
+trigger Suspicious_Hume                 # accepted, true: no section; nothing
+setting ENABLE_MONSTROSITY 1
+trigger Suspicious_Hume                 # accepted, 1, no ring: 41
+finish

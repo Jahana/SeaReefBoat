@@ -1,0 +1,24 @@
+# The Road to Aht Urhgan (jeuno 91): the selection's other options at RoV Inescapable Binds ("Where's Tenzen?" needs
+# option 1 and the mission: option == 1 and the mission current). A level 75 Warrior (1000 gil), RoV Inescapable Binds
+# current, Prog 1 by a GM while available: 10063 (0, 0, 0, 0, 0, 1), option 0: not begun, no arm; option 2: begun,
+# Prog 1 (not completed). Accepted: 10064 (0, 0, 0, 0, 0, 1), option 0: nothing; option 3 with 1000 gil: nothing;
+# option 2: Prog 1; option 1: completed, the Boarding Permit, the mission completed and Desert Winds added.
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/onEventFinish/10063 LowerJeuno/onEventFinish/10064
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+mission Rov InescapableBinds current
+charvar Quest[3][91]Prog 1
+login
+trigger Faursel                         # available, Prog 1, the mission: 10063 (0, 0, 0, 0, 0, 1)
+finish option=0                         # not 2 / 3: not begun; not 1: no arm
+trigger Faursel                         # 10063 (0, 0, 0, 0, 0, 1)
+finish option=2                         # begun; "Let me think about it": Prog 1 (not completed)
+trigger Faursel                         # accepted, Prog 1, the mission: 10064 (0, 0, 0, 0, 0, 1)
+finish option=0                         # no arm: nothing
+trigger Faursel                         # 10064 (0, 0, 0, 0, 0, 1)
+finish option=3                         # 1000 gil, under 500000: nothing
+trigger Faursel                         # 10064 (0, 0, 0, 0, 0, 1)
+finish option=2                         # Prog 1
+trigger Faursel                         # 10064 (0, 0, 0, 0, 0, 1)
+finish option=1                         # completed; the Boarding Permit; the mission completed, Desert Winds added
+trigger Faursel                         # completed: 10071
+finish

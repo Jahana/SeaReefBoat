@@ -1,0 +1,95 @@
+# In Search of the Truth (otherAreas 80): the edges. Petals for Parelbriaux completed (a GM). Sheltering Doubt current (the
+# mission's false side, Darkness Named current, is #early: a GM's mission step after login overwrites the current mission,
+# which the recorder refuses). A trade to Tressia while available: no trade handler; Raminey while available: nil, 159.
+# Accepted (a GM) at Option 28 (bits 2-4): Tressia 556; Option 30: 557,
+# option 0: nothing (Prog 0 kept); Option 31 (bit 0 too): 556; Raminey, Zadant, Fouagine, Noam (bits set): nil. Prog 2 (a GM), Option 1: Tressia
+# 562, finished: no 562 handler while accepted (Option 1 kept); qm1 at Option 1 without the cruse: nil; Option 2: Tressia
+# nil, 310. Option 0, Water 3 (a GM), no cruse: qm2, qm3, qm4 nil; Water 4: qm5 nil. Water 0, the cruse (a GM): qm2 at
+# Water 0: nil; Water 3 (a GM): qm2: Water 2 (back down); qm4 at
+# Water 2: nil; qm5: nil; Water 5 (a GM): qm5 nil.
+# Completed (a GM), Option 1: Ondieulix nil, 285. Option 2, a full inventory: Ondieulix 559, finished: Option 0, quest:complete fails (the reward lost);
+# Tressia: 314; Ondieulix: nil, 285.
+lists TavnazianSafehold/Tressia/onTrigger TavnazianSafehold/Raminey/onTrigger TavnazianSafehold/Zadant/onTrigger TavnazianSafehold/Fouagine/onTrigger TavnazianSafehold/Noam/onTrigger TavnazianSafehold/Mengrenaux/onTrigger TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/Ondieulix/onTrigger TavnazianSafehold/qm1_in_search_of_truth/onTrigger TavnazianSafehold/qm2_in_search_of_truth/onTrigger TavnazianSafehold/qm3_in_search_of_truth/onTrigger TavnazianSafehold/qm4_in_search_of_truth/onTrigger TavnazianSafehold/qm5_in_search_of_truth/onTrigger TavnazianSafehold/onEventFinish/544 TavnazianSafehold/onEventFinish/549 TavnazianSafehold/onEventFinish/551 TavnazianSafehold/onEventFinish/553 TavnazianSafehold/onEventFinish/555 TavnazianSafehold/onEventFinish/557 TavnazianSafehold/onEventFinish/558 TavnazianSafehold/onEventFinish/559 TavnazianSafehold/onEventFinish/562 TavnazianSafehold/onEventFinish/565
+lists TavnazianSafehold/Tressia/onTrade
+char zone=TavnazianSafehold pos=89,-34,70.5 job=WAR lvl=75
+mission Cop ShelteringDoubt current
+quest OtherAreas.PetalsForParelbriaux completed
+item ChocoboFeather
+login
+trade Tressia ChocoboFeather x1         # available: no trade handler; nothing
+warp 83.9,-36,49.7 TavnazianSafehold
+trigger Raminey                         # available: nil; 159
+finish
+quest OtherAreas.InSearchOfTheTruth accepted # a GM
+charvar Quest[4][80]Option 28           # a GM: bits 2-4
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # Option 28: 556
+finish
+charvar Quest[4][80]Option 30           # a GM
+trigger Tressia                         # Option 30: 557
+finish option=0                         # nothing; Prog 0 kept
+charvar Quest[4][80]Option 31           # a GM: bit 0 too
+trigger Tressia                         # Option 31: 556
+finish
+warp 83.9,-36,49.7 TavnazianSafehold
+trigger Raminey                         # bit 1 set: nil; 159
+finish
+warp -9,-22,-15.7 TavnazianSafehold
+trigger Zadant                          # bit 2 set: nil; 326
+finish
+warp 26.8,-35.9,-20.9 TavnazianSafehold
+trigger Fouagine                        # bit 3 set: nil; 338
+finish
+warp -68.7,-11.3,6.8 TavnazianSafehold
+trigger Noam                            # bit 4 set: nil; 363
+finish
+charvar Quest[4][80]Prog 2              # a GM
+charvar Quest[4][80]Option 1            # a GM
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # Prog 2, Option 1: 562
+finish                                  # accepted: no 562 handler; Option 1 kept
+warp -71.5,-11.1,11.8 TavnazianSafehold
+trigger qm1_in_search_of_truth          # Option 1, no cruse: nil; its default
+charvar Quest[4][80]Option 2            # a GM
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # Option 2: nil; 310
+finish
+charvar Quest[4][80]Option 0            # a GM
+charvar Quest[4][80]Water 3             # a GM, no cruse
+warp -79.2,-20,65.9 TavnazianSafehold
+trigger qm2_in_search_of_truth          # no cruse, Water 3: nil; its default
+warp -60,-22,44.1 TavnazianSafehold
+trigger qm3_in_search_of_truth          # no cruse, Water 3: nil; its default
+warp -24.6,-22,26.3 TavnazianSafehold
+trigger qm4_in_search_of_truth          # no cruse, Water 3: nil; its default
+charvar Quest[4][80]Water 4             # a GM
+warp -3.2,-22.7,23.6 TavnazianSafehold
+trigger qm5_in_search_of_truth          # no cruse, Water 4: nil; its default
+charvar Quest[4][80]Water 0             # a GM
+keyitem ShadedCruse                     # a GM
+warp -79.2,-20,65.9 TavnazianSafehold
+trigger qm2_in_search_of_truth          # the cruse, Water 0: nil; its default
+charvar Quest[4][80]Water 3             # a GM
+trigger qm2_in_search_of_truth          # Water 3: Water 2 (back down)
+warp -24.6,-22,26.3 TavnazianSafehold
+trigger qm4_in_search_of_truth          # Water 2: nil; its default
+warp -3.2,-22.7,23.6 TavnazianSafehold
+trigger qm5_in_search_of_truth          # Water 2: nil; its default
+charvar Quest[4][80]Water 5             # a GM
+trigger qm5_in_search_of_truth          # Water 5 (not 4): nil; its default
+quest OtherAreas.InSearchOfTheTruth completed # a GM
+charvar Quest[4][80]Option 1            # a GM
+warp 8.3,-25,65.4 TavnazianSafehold
+trigger Ondieulix                       # Option 1: nil; 285
+finish
+charvar Quest[4][80]Option 2            # a GM
+fill-inventory
+trigger Ondieulix                       # Option 2: 559
+finish                                  # Option 0; no room: the reward lost
+free-inventory
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # Option 0: 314
+finish
+warp 8.3,-25,65.4 TavnazianSafehold
+trigger Ondieulix                       # Option 0: nil; 285
+finish

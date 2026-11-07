@@ -1,0 +1,52 @@
+# Her Memories: Of Malign Maladies (crystalWar 72): a level 99 Warrior in Southern San d'Oria with the WotG mission Her
+# Memories current (a GM; Homecoming Queen available, which has no Amaura handler then; other logs as group 1's flows),
+# a Philosopher's Stone. Amaura 955 (8 args), finished: begun; again: 956 (oncePerZone); again: 642 (her default text,
+# packet @3c695a459ad1a08b). Upper Jeuno: Monberaux 10190, finished: Prog 1; again: 10191 (0x27CF, an Event, packet
+# @89976af100f8057a: UseFallback was 0 after 10190); again: his script's 109 / 28 on the fallback turn (not 10191).
+# Windurst Waters: Library_book3 1017, finished: Prog 2; again: 1018. Grauberg [S]: Fey Blossoms at Prog 2:
+# SUITABLE_PLACE_TO_SOAK (the stone); the stone: 30, finished: confirmed, Prog 3, the Timer tomorrow; Prog 3: 31 (the
+# Timer to come); a Vana'diel day later: 32, finished: the Fey Stone; the Fey Stone held: nil. Southern San d'Oria [S]:
+# Raustigne 169, finished: completed (Large Memory Fragment 2), checkMemoryFragments (one large: nothing), the Fey Stone
+# taken.
+lists SouthernSanDoria/Amaura/onTrigger SouthernSanDoria/onEventFinish/955 UpperJeuno/Monberaux/onTrigger UpperJeuno/onEventFinish/10190 WindurstWaters/Library_book3/onTrigger WindurstWaters/onEventFinish/1017 GraubergS/Fey_Blossoms/onTrigger GraubergS/Fey_Blossoms/onTrade GraubergS/onEventFinish/30 GraubergS/onEventFinish/32 SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/onEventFinish/169
+char zone=SouthernSanDoria pos=-82.867,-6.949,91.148 job=WAR lvl=99
+mission Wotg HerMemories current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item PhilosophersStone
+login
+trigger Amaura                          # available, Her Memories current: 955 (8 args)
+finish                                  # begun
+trigger Amaura                          # accepted: 956 (oncePerZone)
+finish
+trigger Amaura                          # 956 shown this visit: nil (her default 642)
+finish-if-event
+warp -40.881,-0.499,-1.913 UpperJeuno
+trigger Monberaux                       # Prog 0: 10190 (8 args)
+finish                                  # Prog 1
+trigger Monberaux                       # Prog 1: 10191 (an Event)
+finish
+trigger Monberaux                       # 10191 shown: his script's 109 / 28 (not 10191)
+finish-if-event
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Library_book3                   # Prog 1: 1017
+finish                                  # Prog 2
+trigger Library_book3                   # Prog 2: 1018
+finish
+warp -139.812,-6.75,564.417 GraubergS
+trigger Fey_Blossoms                    # Prog 2: SUITABLE_PLACE_TO_SOAK (the stone; a message reply)
+finish-if-event
+trade Fey_Blossoms PhilosophersStone x1 # Prog 2, the stone alone: 30
+finish                                  # confirmed; Prog 3; the Timer tomorrow
+trigger Fey_Blossoms                    # Prog 3, the Timer tomorrow: 31
+finish
+wait vana=24                            # a Vana'diel day
+trigger Fey_Blossoms                    # the Timer at today: 32
+finish                                  # the Fey Stone
+trigger Fey_Blossoms                    # the Fey Stone held: nil (no default)
+finish-if-event
+warp 5.479,-1.999,44.456 SouthernSanDoriaS
+trigger Raustigne                       # the Fey Stone: 169 (8 args)
+finish                                  # completed (Large Memory Fragment 2); checkMemoryFragments: nothing; the Fey Stone taken

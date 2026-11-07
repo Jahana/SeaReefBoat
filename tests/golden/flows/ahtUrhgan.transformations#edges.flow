@@ -1,0 +1,103 @@
+# Transformations' edges. The offer's operands, each false alone (An Empty Vessel completed for all: its 78 answers
+# Waoud's nil): bob: Omens not completed: 78; carl: a Warrior: 78; dan: a level 49 Blue Mage: 78, also at AF3_QUEST_LEVEL 49.4 (a number). ed (all met): the
+# mustZone set (a GM: 50): nil: 78; out and back, Timer = now + 1 (a GM): nil: 78; Timer = now: 720. Main (500 gil): 720
+# (500), option 1: under 1000 gil: nothing, Prog stays 0; Prog 1 (a GM): 721 (500), option 1: nothing; Prog 2 (a GM):
+# Imperial Whitegate: nil (GATE_IS_FIRMLY_CLOSED); Prog 1 again (a GM); accepted (a GM):
+# 723 (500), option 1: nothing; Alzadaal: area 25 at Prog 1: nil; blank_transformations Prog 2 (a GM): nil:
+# NOTHING_OUT_OF_ORDINARY; Prog 3 (a GM): 4: the Soulflayer popped; Prog 2 (a GM): the Soulflayer killed: Prog stays 2;
+# Prog 3 (a GM): 4: popped again; Prog 5 (a GM): killed: Prog stays 5; blank_transformations at Prog 5: nil;
+# Prog 4 (a GM) with a full bag: 5: quest:complete false (the keffiyeh does not fit): nothing; room again: 5: completed.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/onEventFinish/720 AhtUrhganWhitegate/onEventFinish/721 AhtUrhganWhitegate/onEventFinish/723 AlzadaalUnderseaRuins/onTriggerAreaEnter/25 AlzadaalUnderseaRuins/blank_transformations/onTrigger AlzadaalUnderseaRuins/Nepionic_Soulflayer/onMobDeath
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=500
+char bob zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+char carl zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=WAR lvl=50 gil=5000
+char dan zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=49 gil=5000
+char ed zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings completed
+quest AhtUrhgan.Omens completed
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: quest AhtUrhgan.Beginnings completed
+carl: quest AhtUrhgan.AnEmptyVessel completed
+carl: quest AhtUrhgan.Omens completed
+dan: quest AhtUrhgan.AnEmptyVessel completed
+dan: quest AhtUrhgan.Omens completed
+ed: quest AhtUrhgan.AnEmptyVessel completed
+ed: quest AhtUrhgan.Omens completed
+ed: charvar Quest[6][23]mustZone 50
+login
+bob: login
+bob: trigger Waoud                      # Omens not completed (Omens itself available: Beginnings completed, level 50): Omens' 710
+bob: finish                             # (Omens begun: bob's part ends here)
+bob: logout
+carl: login
+carl: trigger Waoud                     # a Warrior: 78
+carl: finish option=0
+carl: logout
+dan: login
+dan: trigger Waoud                      # level 49: 78
+dan: finish option=0
+setting AF3_QUEST_LEVEL 49.4
+dan: trigger Waoud                      # 49 < 49.4 (the setting read as a number): 78
+dan: finish option=0
+setting AF3_QUEST_LEVEL 50
+dan: logout
+ed: login
+ed: trigger Waoud                       # the mustZone: nil: 78
+ed: finish option=0
+ed: warp -64,-7,38 AlZahbi              # the mustZone cleared
+ed: charvar Quest[6][23]Timer 1800000001   # a GM: now + 1
+ed: warp 67.116,-6,-78.222 AhtUrhganWhitegate
+ed: trigger Waoud                       # now < Timer: nil: 78
+ed: finish option=0
+ed: charvar Quest[6][23]Timer 1800000000   # a GM: now
+ed: trigger Waoud                       # 720
+ed: finish option=0
+ed: logout
+trigger Waoud                           # 720 (500)
+finish option=1                         # under 1000 gil: nothing; Prog stays 0
+charvar Quest[6][23]Prog 1              # a GM
+trigger Waoud                           # 721 (500)
+finish option=1                         # under 1000 gil: nothing
+charvar Quest[6][23]Prog 2              # a GM
+trigger Imperial_Whitegate              # available at Prog 2 (not 1): nil: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+charvar Quest[6][23]Prog 1              # a GM
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+quest AhtUrhgan.Transformations accepted   # a GM (Prog 1 kept)
+trigger Waoud                           # 723 (500)
+finish option=1                         # under 1000 gil: nothing
+warp 140,0,-588 AlzadaalUnderseaRuins
+tick 1000
+tick 1000
+tick 1000
+walk 140,0,-580.5                       # area 25 at Prog 1: nil
+walk 140,0,-588
+warp -528.204,0,649.682 AlzadaalUnderseaRuins
+charvar Quest[6][23]Prog 2              # a GM
+trigger blank_transformations           # Prog 2: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][23]Prog 3              # a GM
+trigger blank_transformations           # Prog 3, down: 4
+finish                                  # popped
+charvar Quest[6][23]Prog 2              # a GM
+kill NEPIONIC_SOULFLAYER                # Prog 2: nothing
+tick 16000                              # the body fades 15 s after the death, then despawns
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+charvar Quest[6][23]Prog 3              # a GM
+trigger blank_transformations           # Prog 3: 4
+finish                                  # popped again
+charvar Quest[6][23]Prog 5              # a GM
+kill NEPIONIC_SOULFLAYER                # Prog 5 (not 3): nothing, Prog stays 5
+trigger blank_transformations           # Prog 5 (not 4): nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][23]Prog 4              # a GM
+fill-inventory
+trigger blank_transformations           # Prog 4: 5
+finish                                  # the keffiyeh does not fit: quest:complete false: nothing
+free-inventory
+trigger blank_transformations           # 5
+finish                                  # completed; The Beast Within's Timer

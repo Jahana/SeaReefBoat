@@ -1,0 +1,15 @@
+# The Circle of Time (jeuno 65) on another job (a level 50 warrior): Mertaire's 139 plays regardless of job (Prog 1);
+# Imasuke's job check returns nil: his default 12.
+lists LowerJeuno/Mertaire/onTrigger PortJeuno/Imasuke/onTrigger LowerJeuno/onEventFinish/139
+char zone=LowerJeuno pos=-19.5,0,-59 job=WAR lvl=50
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+quest Jeuno.PathOfTheBard completed
+quest Jeuno.PainfulMemory completed
+quest Jeuno.TheRequiem completed
+login
+trigger Mertaire                            # 139, whatever the job
+finish option=0                             # Prog 1
+warp -165,11,94.5 PortJeuno
+trigger Imasuke                             # not a bard: nil; default 12
+finish

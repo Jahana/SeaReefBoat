@@ -1,0 +1,14 @@
+# Raptor Rapture (adoulin, call-only), the zone-in's rival: a level 99 Warrior logging into Western Adoulin with
+# SoA's Heartwings and the Kindhearted current and Raptor_Rapture_Status 2 (GMs). The mission's zone-in cutscene 2
+# answers first (Raptor Rapture's 5056 does not play; its status stays 2), left open (login open), finished: the
+# mission completed and Pioneer Registration added by the mission's own handler; then Zone.lua's csid 2 branch (kept
+# after the patched Raptor Rapture call) completes and adds them again and the engine warns twice (the warning: lines:
+# main's, pinned in XI.Verify.Missions3.Live).
+warning: lua: completeMission: 5 on log 12 is not the current mission -- Zone.lua's csid 2 finish runs after the SoA mission's own handler (main's; pinned in XI.Verify.Missions3.Live): the mission has moved on
+warning: lua: addMission: overwriting current mission 6 of log 12 with 6 -- the same finish's addMission of Pioneer Registration, already current (main's; pinned in XI.Verify.Missions3.Live)
+lists WesternAdoulin/onZoneIn/1
+char zone=WesternAdoulin pos=-6.5,0,-100 job=WAR lvl=99
+mission Soa HeartwingsAndTheKindhearted current
+charvar Raptor_Rapture_Status 2
+login open                              # the mission's 2, not 5056; the status stays 2
+finish                                  # Heartwings completed, Pioneer Registration; Zone.lua's csid 2 again: warns

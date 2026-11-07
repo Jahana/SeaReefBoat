@@ -1,0 +1,25 @@
+# The Weatherspoon War (adoulin, call-only): a level 99 Warrior in Western Adoulin, the quest accepted (a GM: nothing
+# begins it). Flapano has no default. Weatherspoon_War_Status 5 (a GM): its arm fails: Exotic Delicacies' offer (2860,
+# Flapano_Odd_Even 1), finished on 0. Status 6 (a GM: nothing sets it): 191 first (no finish), the Exotic var not
+# touched; again 191. Status 7: Exotic's turn: the shop (the var 0). Completed at status 6 (a GM): the offer 2860 (the
+# var 1). Available at status 6 (a GM): the shop (the var 0).
+lists WesternAdoulin/Flapano/onTrigger
+char zone=WesternAdoulin pos=71.5,0,-13.5 job=WAR lvl=99
+quest Adoulin.TheWeatherspoonWar accepted
+charvar Weatherspoon_War_Status 5
+login
+trigger Flapano                         # status 5: Exotic Delicacies' 2860 (the var 1)
+finish option=0
+charvar Weatherspoon_War_Status 6       # a GM
+trigger Flapano                         # status 6: 191
+finish                                  # no finish arm
+trigger Flapano                         # 191 again (the Exotic var stays 1)
+finish
+charvar Weatherspoon_War_Status 7       # a GM
+trigger Flapano                         # status 7: Exotic's turn: the shop (the var 0)
+charvar Weatherspoon_War_Status 6       # a GM
+quest Adoulin.TheWeatherspoonWar completed   # a GM
+trigger Flapano                         # completed at 6: Exotic's 2860 (the var 1)
+finish option=0
+quest Adoulin.TheWeatherspoonWar available   # a GM
+trigger Flapano                         # available at 6: the shop (the var 0)

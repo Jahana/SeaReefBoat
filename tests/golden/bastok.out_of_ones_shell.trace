@@ -1,0 +1,844 @@
+# golden trace: bastok.out_of_ones_shell
+seed 7
+flow 14308f4f3d7db239e591d67554d1ca2e0096bc609d6917136785c4be77daf264
+recorder lua
+lua-at e5cf832dd1fd58af14f5c976321e543fea2f9b4a
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @4cd909224ea3ca4e (175)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @a6c0a9708df6e836 (3)
+char_jobs @27ea52c8fa126bff (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @bcbc236d2b548e3e (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @bfa44062b86a600c (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @67a27677bd1e54e5 (2)
+char_stats @019b7fd8799a85e6 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @ce2f1b1f674e25a4 (41)
+ret onZoneIn=number:30035,onEventFinish=nil:nil
+order 236/Ronan/onTrigger=default,Quest[1][5],Quest[1][5],Quest[1][5]
+order 236/Ronan/onTrade=Quest[1][5]
+order 236/Mine_Konte/onTrigger=default,Quest[1][5]
+order 236/Panana/onTrigger=default,Quest[1][5]
+order 236/Corann/onTrigger=default,Quest[1][5],Quest[1][4],Quest[1][4]
+order 236/onEventFinish/82=Quest[1][5]
+order 236/onEventFinish/84=Quest[1][5]
+order 236/onEventFinish/86=Quest[1][5]
+step trigger Ronan
+packets
+  00E @fff304ac0fb334e1
+  00E @6a006da4159b1826
+  00E @452143d18fcfbfe1
+  00E @c5cfab28c43a49e2
+  00E @434688e531a851c6
+  00E @a94da0637c22108a
+  00E @ff13dc471b3b48cb
+  00E @0c6f0199367a3f8e
+  00E @1eec463b1fbd077f
+  00E @7778ad881b6cfb91
+  00E @992f7490429cbee1
+  00E @6d78df7df31d56fd
+  00E @688ff2804e22c8f7
+  00E @b94040fbc1216904
+  00E @d5b57b2a190f868a
+  00E @9f5b07a8e8135743
+  00E @e7428eceaaf89431
+  00E @60277433fe1828f3
+  00E @d6fd6251e229e5b2
+  032 @b4bd2b3edce53e4b
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish-if-event
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step quest Bastok.TheQuadavsCurse completed
+packets
+  056 @37435d3f9bc1464a
+  056 @0418d1beec82a3cc
+char_quest_state + quest_key=bastok.the_quadavs_curse|area=1|quest_id=4|status=2|step=0|progress=null|repeat_by=0
+chars quests +96:10
+step fame Bastok 49
+packets
+char_profile - fame_bastok=50
+char_profile + fame_bastok=49
+step trigger Ronan
+packets
+  032 @b4bd2b3edce53e4b
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish-if-event
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step fame Bastok 50
+packets
+char_profile - fame_bastok=49
+char_profile + fame_bastok=50
+step trade Ronan ShellBug x3
+packets
+ret onTrade=nil:nil
+step trigger Ronan
+packets
+  032 @d51f32c73ee3d3c3
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  056 @793dd3fef1e6e6f5
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_quest_state + quest_key=bastok.out_of_ones_shell|area=1|quest_id=5|status=1|step=0|progress=null|repeat_by=0
+chars quests +64:20
+ret onEventFinish=nil:nil
+step trigger Ronan
+packets
+  00E @440501de2e24f90f
+  02A @4d85384157d1f2b4
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step finish-if-event
+packets
+step trade Ronan BoneChip x1
+packets
+ret onTrade=nil:nil
+step trade Ronan ShellBug x2
+packets
+ret onTrade=nil:nil
+step trigger Mine_Konte
+packets
+  00E @9e1713bbd1159ec6
+  00E @ca810915c0623583
+  00E @9406951546f6d3df
+  00E @8b65b6793b62d473
+  00E @c1772be235fadcc6
+  00E @9048ebe14f807326
+  00E @3035e4f8a59a7ce4
+  00E @b30091cbea04a1f1
+  00E @382e7fa4715946b9
+  00E @4972dbfb2289b101
+  00E @c1518ec8db979ffc
+  00E @14d37672a8737bbb
+  00E @6b4f7d80d16a7188
+  00E @af65cc9ab450848d
+  00E @4a355b1a1e726c8a
+  00E @7962c2ffe62123f4
+  00E @792cb31db5fb0dcf
+  00E @41392b6f6a8423bd
+  00E @63e208e127e5ff03
+  00E @f0679bb62fe8f7a7
+  00E @641a1b69db89da39
+  00E @27045e6d8fb603c4
+  00E @0c20740d46ca2f26
+  00E @967301b6c11460e4
+  00E @e76ea95e0ea9d22f
+  00E @80f89d3e281b99a5
+  00E @7343226ba2ec808a
+  00E @7b93f0417a47b7fd
+  00E @72ebe55d357fe3f4
+  00E @10610a0838e2dbbe
+  00E @55e2fdb783a6178d
+  00E @e4bb406c534ebd85
+  00E @a1d100c0be1f46c5
+  00E @441a945e5ff37697
+  00E @967193eef1be0d06
+  00E @fccbdd2881d127fb
+  00E @ed0f7e98704167ba
+  00E @4444002d6ef17f37
+  00E @355aa4f2a68f36e6
+  00E @f086e58831936544
+  00E @d1566ed2f0ece72d
+  00E @6deb7a329f635fa3
+  00E @275b4b3e1226dcaa
+  00E @ebbffa37ab6bc9b4
+  00E @40a14700fcd3567a
+  00E @bbebc392e210ac1a
+  00E @0fffdddaa47172b0
+  00E @4f5618ec764fd8b0
+  00E @1c1218a88633c705
+  00E @45fb8109931c8c07
+  00E @0d7108a73d6e9f8a
+  032 @ad7961e743dc077f
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Panana
+packets
+  032 @f1a7bb24c65d3116
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Ronan
+packets
+  00E @43158489da8f641e
+  00E @e883666f75b87f4f
+  00E @b43008bb9d54eb41
+  00E @1deb2fc52c87b44c
+  00E @eb18c8d362425746
+  00E @4f0da3d7e09580c0
+  00E @3a92d14ff499ace4
+  00E @159c2e274e8651c1
+  00E @263d2f832127dab0
+  00E @fba6aa6e19002cd2
+  00E @93d25c06c2488389
+  00E @bafa24d939274482
+  00E @fcce1f42f9422332
+  00E @9736ace9c3ac44c2
+  00E @70bf432e47bfa1ca
+  00E @204255df89578ff3
+  00E @2a77549002b338a8
+  00E @386cdc2e55db9391
+  00E @82e4adbe717617ae
+  00E @8a455169fa26ecd1
+  00E @19f5950aff6390d6
+  00E @332b2966e995342b
+  00E @590e4ee98d47389b
+  00E @a17ed5d84d0aa4e4
+  00E @5a86d5d5d9defa0a
+  00E @fdbdb624ce19af11
+  00E @907a1bc3e2c67456
+  00E @cca7fb2e96e8b7e5
+  00E @a1e537f46ab58d30
+  00E @d529578b75042632
+  00E @890d04d78c719e6c
+  00E @8a3ce97272a1f66a
+  00E @d827387da9a244d2
+  00E @cbb43d99fe5abbc1
+  00E @18bac61a163f60d4
+  00E @fff304ac0fb334e1
+  00E @6a006da4159b1826
+  00E @452143d18fcfbfe1
+  00E @c5cfab28c43a49e2
+  00E @bca57ea417282a00
+  00E @a94da0637c22108a
+  00E @ff13dc471b3b48cb
+  00E @0c6f0199367a3f8e
+  00E @1eec463b1fbd077f
+  00E @7778ad881b6cfb91
+  00E @992f7490429cbee1
+  00E @6d78df7df31d56fd
+  00E @9f5b07a8e8135743
+  00E @e7428eceaaf89431
+  00E @60277433fe1828f3
+  00E @d6fd6251e229e5b2
+  00E @440501de2e24f90f
+  02A @4d85384157d1f2b4
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step finish-if-event
+packets
+step trade Ronan ShellBug x3
+packets
+  032 @ca7cb4b6f2382fd7
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  01E @ab58fc71f4858eef
+  01D @f8579df92de4b1ca
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory - location=0|slot=1|itemId=17397|quantity=7|bazaar=0|signature=|extra=null
+char_inventory + location=0|slot=1|itemId=17397|quantity=4|bazaar=0|signature=|extra=null
+char_quest_state - quest_key=bastok.out_of_ones_shell|area=1|quest_id=5|status=1|step=0|progress=null|repeat_by=0
+char_quest_state + quest_key=bastok.out_of_ones_shell|area=1|quest_id=5|status=1|step=1|progress={"mustZone":236}|repeat_by=0
+char_vars + varname=Quest[1][5]Prog|value=1|expiry=0
+char_vars + varname=Quest[1][5]mustZone|value=236|expiry=0
+ret onEventFinish=nil:nil
+step trade Ronan ShellBug x3
+packets
+ret onTrade=nil:nil
+step trigger Ronan
+packets
+  032 @4f4ea12621c4a4d2
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Mine_Konte
+packets
+  00E @7962c2ffe62123f4
+  00E @4a355b1a1e726c8a
+  00E @af65cc9ab450848d
+  00E @6b4f7d80d16a7188
+  00E @14d37672a8737bbb
+  00E @c1518ec8db979ffc
+  00E @4972dbfb2289b101
+  00E @382e7fa4715946b9
+  00E @b30091cbea04a1f1
+  00E @3035e4f8a59a7ce4
+  00E @9048ebe14f807326
+  00E @c1772be235fadcc6
+  00E @8b65b6793b62d473
+  00E @9406951546f6d3df
+  00E @ca810915c0623583
+  00E @9e1713bbd1159ec6
+  00E @792cb31db5fb0dcf
+  00E @41392b6f6a8423bd
+  00E @63e208e127e5ff03
+  00E @f0679bb62fe8f7a7
+  00E @641a1b69db89da39
+  00E @27045e6d8fb603c4
+  00E @0c20740d46ca2f26
+  00E @967301b6c11460e4
+  00E @e76ea95e0ea9d22f
+  00E @80f89d3e281b99a5
+  00E @7343226ba2ec808a
+  00E @7b93f0417a47b7fd
+  00E @72ebe55d357fe3f4
+  00E @10610a0838e2dbbe
+  00E @55e2fdb783a6178d
+  00E @e4bb406c534ebd85
+  00E @a1d100c0be1f46c5
+  00E @441a945e5ff37697
+  00E @967193eef1be0d06
+  00E @fccbdd2881d127fb
+  00E @ed0f7e98704167ba
+  00E @4444002d6ef17f37
+  00E @355aa4f2a68f36e6
+  00E @f086e58831936544
+  00E @d1566ed2f0ece72d
+  00E @6deb7a329f635fa3
+  00E @275b4b3e1226dcaa
+  00E @ebbffa37ab6bc9b4
+  00E @40a14700fcd3567a
+  00E @bbebc392e210ac1a
+  00E @0fffdddaa47172b0
+  00E @4f5618ec764fd8b0
+  00E @1c1218a88633c705
+  00E @45fb8109931c8c07
+  00E @0d7108a73d6e9f8a
+  032 @b197ead18104e62a
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish-if-event
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Panana
+packets
+  032 @64b51653b5387623
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish-if-event
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step zoneline BastokMarkets
+packets
+  00B @e3fae3084fc94222
+  00D @5582c2a47641b451
+  04F @b873a2c641daca6c
+  051 @f53ad4416658523c
+  01C @e20648d15c89e2c6
+  00A @ca4ffb0eb0a6bbda
+  0AA @31f1ce1924233c8c
+  0AC @621746aaff7ddfaf
+  008 @fcb1ab0a8c66ccc8
+  01C @e20648d15c89e2c6
+  0B4 @22243da2e9c4b4ec
+  051 @f53ad4416658523c
+  01B @37f75f2896bfcc8c
+  08E @ab47925b68ae8d77
+  037 @676c09eb86d9e153
+  063 @70d0a3ebbdb42b84
+  063 @934c117e8b20186b
+  063 @0dc8ce00de9761a4
+  063 @d60ad9c61b5b4cff
+  063 @2ad07d8db6ef50ff
+  063 @2913744aeb9194e9
+  063 @253e04fee5bca725
+  063 @a9ffca4f1144bd8b
+  063 @82bd3f6ca8ee91fd
+  063 @e709b773159f5d30
+  063 @e8fe4ad433edbb4e
+  063 @68947166f34df7b9
+  063 @160634d53692c684
+  063 @7603d70fbfe20956
+  063 @1385503e077d870e
+  063 @47efe06d116ee466
+  063 @ae94002f65ffa453
+  063 @5f15b3cae83cb5f9
+  063 @87cef148d53a3bb0
+  063 @0a2452ea1cb37464
+  063 @8210f9e4b0b1f7bf
+  063 @ceaab3fa30e34114
+  063 @74b8998378f9a9fb
+  063 @2810f19a90b7a21c
+  063 @48af35d71b69bc5e
+  063 @dc7b8ef7687b24d4
+  063 @294658a2d05df46f
+  063 @08d32fe409553438
+  063 @a0e707f35d3f9b56
+  063 @3fbe1aad26531112
+  063 @512184ac5153d3af
+  063 @1dc270fa0b6fddb3
+  063 @b94a8e2b4ea87328
+  063 @103e23eece9360c6
+  063 @01d0798845db56d7
+  063 @973955c960965b5d
+  063 @3270fe7c7be021d9
+  063 @9560090bc0b831ab
+  063 @aac6d1df3bc2513a
+  063 @7ff9efe76f91eff0
+  063 @219f75e3bca63874
+  063 @250591afb6ab5f20
+  063 @4aa985b52c82864a
+  063 @b2687dbc54b6d4d0
+  063 @9a998b0e4f0a7895
+  063 @dec33efa23ab6e4b
+  063 @61ccedf33e9880d0
+  063 @10463c32029497a4
+  063 @21442ba7d2223b60
+  063 @1f331e35d786ee7b
+  063 @345373624189e379
+  063 @8599b7ee8b45cb16
+  063 @584ae4490c042ffa
+  063 @05efbaa7eb8fe746
+  063 @5bad3d30dde0e8db
+  063 @bc7d249e68391b43
+  063 @b3206306fa24740d
+  063 @f5061b3a886fbe66
+  063 @bf441bee3782d1ae
+  063 @53e72ab699b919a1
+  063 @7f0c217c4dfd6e1f
+  063 @6ad89f275cce89ef
+  063 @f06894aca234160f
+  063 @f6cb89ae538d0f35
+  063 @d10cc9aca9b13a5e
+  063 @57047b2f3775c31a
+  063 @067328b8dbda6b89
+  063 @673317619739ebe8
+  055 @39a5a014d49ec4c9
+  055 @1e3bf07cf5dc573f
+  055 @89e3d7cdcd90026e
+  055 @199ea02f5f488a20
+  055 @f4d0d4f222892114
+  055 @11710565d0e5fcda
+  055 @f88bc6c3e6a8becc
+  055 @5a906b8771151c34
+  056 @2567b5fa4a207790
+  056 @793dd3fef1e6e6f5
+  056 @d1758a5f6bb12c8c
+  056 @1fcaf48a6288c665
+  056 @79d6cca259997fdc
+  056 @e297b5680035ee99
+  056 @8a5e56afc7da55d5
+  056 @70e0a9d74c833f8e
+  056 @abe270ded8c77874
+  056 @0418d1beec82a3cc
+  056 @2f35c6be81167cb4
+  056 @72b4f6eb32a81b00
+  056 @693f9bc17832b445
+  056 @85d8304113d2f25b
+  056 @3e1cf47db1ef556a
+  056 @8a74ee1fa227c272
+  056 @c81229ddfd76941d
+  056 @b127ebf3020ea051
+  056 @eb02a73788e6cdfd
+  056 @73644f89cecf32db
+  056 @343972ec8ae2c57a
+  056 @58e33a802e078847
+  056 @fb0c97c1e2f90767
+  056 @75e41e013e7156e6
+  056 @4547079451e2a0e8
+  056 @9d705adbe954d481
+  056 @ed198c10a0d9e892
+  056 @1deeb69deed32a6c
+  110 @ea22d5165c11c07a
+  111 @6c94b61fe5f7471f
+  112 @46527347e1305bd9
+  112 @2bf8bc319bc7ed66
+  112 @8b3d5f704c2526f7
+  112 @7029dfecc5ff7355
+  0AA @31f1ce1924233c8c
+  0AE @34d219ea7c820c47
+  0AD @8f65a991bc56f9a4
+  0AC @621746aaff7ddfaf
+  067 @d2cc45019eec0699
+  0CA @e8bafbb673236c39
+  08C @2406b76904bbb491
+  08C @ac1e3c6a6745f428
+  08C @65ccd7cd030f8fae
+  08C @95425fe96d4394d3
+  08C @52820a5877342ff6
+  020 @97e712e10747e12a
+  020 @31906b70717829c5
+  020 @7dfefe1134534422
+  01D @bbe4914800e01221
+  01D @a35a9e7d6e9d8689
+  01D @c1e4dd6fffe26d8b
+  01D @b35ef3efe6f80e89
+  01D @680e5a59aec47280
+  01D @64f928e3e6cdf490
+  01D @598d912c83e579af
+  01D @e24103acc26b15b4
+  01D @09a092f0eb1352b9
+  01D @7e5c1d490329cd1a
+  01D @9ffb3eb32be5e0c0
+  01D @4fee0b527ed5e40a
+  01D @11dd91fdbd9f0f1c
+  01D @82e0d52e4f9962a3
+  01D @e0a611548457718a
+  01D @c38465e819f7edae
+  01D @0950feccbbcc2f45
+  01D @3ce8a713d6ca80ff
+  01D @f8579df92de4b1ca
+  041 @f68ae8968e728444
+  0D2 @f73e3ef9129b7ccd
+  0D2 @ac5a739f3eaf0c50
+  0D2 @d29edf4b975b630c
+  0D2 @35d819d67d5c3789
+  0D2 @44e79a2c1acc6320
+  0D2 @d5db3af82dca729d
+  0D2 @b73cc7d25544970d
+  0D2 @06cc25c4e6e46f47
+  0D2 @415cda7743dd568d
+  0D2 @c36d9f29f31b5814
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_history - distance_travelled=0
+char_history - npc_interactions=0
+char_history + distance_travelled=848
+char_history + npc_interactions=10
+char_mission_state - area=12|current=0|status=0|completed_mask=0|progress=null
+char_mission_state + area=12|current=0|status=2|completed_mask=0|progress=null
+char_quest_state - quest_key=bastok.out_of_ones_shell|area=1|quest_id=5|status=1|step=1|progress={"mustZone":236}|repeat_by=0
+char_quest_state + quest_key=bastok.out_of_ones_shell|area=1|quest_id=5|status=1|step=1|progress=null|repeat_by=0
+char_stats - hp=300
+char_stats - mp=50
+char_stats + hp=169
+char_stats + mp=0
+char_vars - varname=Quest[1][5]mustZone|value=236|expiry=0
+chars - eminence=null
+chars - pos_prevzonelineid=0
+chars - pos_rot=0
+chars - pos_x=84.7
+chars - pos_y=-8.8
+chars - pos_z=21.8
+chars - pos_zone=236
+chars + eminence=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+chars + pos_prevzonelineid=845887098
+chars + pos_rot=63
+chars + pos_x=-235.878
+chars + pos_y=-2.224
+chars + pos_z=86.734
+chars + pos_zone=235
+chars missions +844:02
+chars zones +29:18
+ret onZoneOut=nil:nil,onZoneIn=number:22,onEventFinish=nil:nil
+step zoneline PortBastok
+packets
+  00B @e3fae3084fc94222
+  00D @403927deb9cb701b
+  04F @b873a2c641daca6c
+  051 @f53ad4416658523c
+  01C @e20648d15c89e2c6
+  00A @a63857e07b1e3730
+  0AA @31f1ce1924233c8c
+  0AC @621746aaff7ddfaf
+  008 @fcb1ab0a8c66ccc8
+  01C @e20648d15c89e2c6
+  0B4 @22243da2e9c4b4ec
+  051 @f53ad4416658523c
+  01B @37f75f2896bfcc8c
+  08E @ab47925b68ae8d77
+  037 @7b1b7bd2a760339c
+  063 @70d0a3ebbdb42b84
+  063 @934c117e8b20186b
+  063 @0dc8ce00de9761a4
+  063 @d60ad9c61b5b4cff
+  063 @2ad07d8db6ef50ff
+  063 @2913744aeb9194e9
+  063 @253e04fee5bca725
+  063 @a9ffca4f1144bd8b
+  063 @82bd3f6ca8ee91fd
+  063 @e709b773159f5d30
+  063 @e8fe4ad433edbb4e
+  063 @68947166f34df7b9
+  063 @160634d53692c684
+  063 @7603d70fbfe20956
+  063 @1385503e077d870e
+  063 @47efe06d116ee466
+  063 @ae94002f65ffa453
+  063 @5f15b3cae83cb5f9
+  063 @87cef148d53a3bb0
+  063 @0a2452ea1cb37464
+  063 @8210f9e4b0b1f7bf
+  063 @ceaab3fa30e34114
+  063 @74b8998378f9a9fb
+  063 @2810f19a90b7a21c
+  063 @48af35d71b69bc5e
+  063 @dc7b8ef7687b24d4
+  063 @294658a2d05df46f
+  063 @08d32fe409553438
+  063 @a0e707f35d3f9b56
+  063 @3fbe1aad26531112
+  063 @512184ac5153d3af
+  063 @1dc270fa0b6fddb3
+  063 @b94a8e2b4ea87328
+  063 @103e23eece9360c6
+  063 @01d0798845db56d7
+  063 @973955c960965b5d
+  063 @3270fe7c7be021d9
+  063 @9560090bc0b831ab
+  063 @aac6d1df3bc2513a
+  063 @7ff9efe76f91eff0
+  063 @219f75e3bca63874
+  063 @250591afb6ab5f20
+  063 @4aa985b52c82864a
+  063 @b2687dbc54b6d4d0
+  063 @9a998b0e4f0a7895
+  063 @dec33efa23ab6e4b
+  063 @61ccedf33e9880d0
+  063 @10463c32029497a4
+  063 @21442ba7d2223b60
+  063 @1f331e35d786ee7b
+  063 @345373624189e379
+  063 @8599b7ee8b45cb16
+  063 @584ae4490c042ffa
+  063 @05efbaa7eb8fe746
+  063 @5bad3d30dde0e8db
+  063 @bc7d249e68391b43
+  063 @b3206306fa24740d
+  063 @f5061b3a886fbe66
+  063 @bf441bee3782d1ae
+  063 @53e72ab699b919a1
+  063 @7f0c217c4dfd6e1f
+  063 @6ad89f275cce89ef
+  063 @f06894aca234160f
+  063 @f6cb89ae538d0f35
+  063 @d10cc9aca9b13a5e
+  063 @57047b2f3775c31a
+  063 @067328b8dbda6b89
+  063 @673317619739ebe8
+  055 @39a5a014d49ec4c9
+  055 @1e3bf07cf5dc573f
+  055 @89e3d7cdcd90026e
+  055 @199ea02f5f488a20
+  055 @f4d0d4f222892114
+  055 @11710565d0e5fcda
+  055 @f88bc6c3e6a8becc
+  055 @5a906b8771151c34
+  056 @2567b5fa4a207790
+  056 @793dd3fef1e6e6f5
+  056 @d1758a5f6bb12c8c
+  056 @1fcaf48a6288c665
+  056 @79d6cca259997fdc
+  056 @e297b5680035ee99
+  056 @8a5e56afc7da55d5
+  056 @70e0a9d74c833f8e
+  056 @abe270ded8c77874
+  056 @0418d1beec82a3cc
+  056 @2f35c6be81167cb4
+  056 @72b4f6eb32a81b00
+  056 @693f9bc17832b445
+  056 @85d8304113d2f25b
+  056 @3e1cf47db1ef556a
+  056 @8a74ee1fa227c272
+  056 @c81229ddfd76941d
+  056 @b127ebf3020ea051
+  056 @eb02a73788e6cdfd
+  056 @73644f89cecf32db
+  056 @343972ec8ae2c57a
+  056 @58e33a802e078847
+  056 @fb0c97c1e2f90767
+  056 @75e41e013e7156e6
+  056 @4547079451e2a0e8
+  056 @9d705adbe954d481
+  056 @ed198c10a0d9e892
+  056 @1deeb69deed32a6c
+  110 @ea22d5165c11c07a
+  111 @6c94b61fe5f7471f
+  112 @46527347e1305bd9
+  112 @2bf8bc319bc7ed66
+  112 @8b3d5f704c2526f7
+  112 @7029dfecc5ff7355
+  0AA @31f1ce1924233c8c
+  0AE @34d219ea7c820c47
+  0AD @8f65a991bc56f9a4
+  0AC @621746aaff7ddfaf
+  067 @d2cc45019eec0699
+  0CA @e8bafbb673236c39
+  08C @2406b76904bbb491
+  08C @ac1e3c6a6745f428
+  08C @65ccd7cd030f8fae
+  08C @95425fe96d4394d3
+  08C @52820a5877342ff6
+  020 @97e712e10747e12a
+  020 @31906b70717829c5
+  020 @7dfefe1134534422
+  01D @bbe4914800e01221
+  01D @a35a9e7d6e9d8689
+  01D @c1e4dd6fffe26d8b
+  01D @b35ef3efe6f80e89
+  01D @680e5a59aec47280
+  01D @64f928e3e6cdf490
+  01D @598d912c83e579af
+  01D @e24103acc26b15b4
+  01D @09a092f0eb1352b9
+  01D @7e5c1d490329cd1a
+  01D @9ffb3eb32be5e0c0
+  01D @4fee0b527ed5e40a
+  01D @11dd91fdbd9f0f1c
+  01D @82e0d52e4f9962a3
+  01D @e0a611548457718a
+  01D @c38465e819f7edae
+  01D @0950feccbbcc2f45
+  01D @3ce8a713d6ca80ff
+  01D @f8579df92de4b1ca
+  041 @f68ae8968e728444
+  0D2 @f73e3ef9129b7ccd
+  0D2 @ac5a739f3eaf0c50
+  0D2 @d29edf4b975b630c
+  0D2 @35d819d67d5c3789
+  0D2 @44e79a2c1acc6320
+  0D2 @d5db3af82dca729d
+  0D2 @b73cc7d25544970d
+  0D2 @06cc25c4e6e46f47
+  0D2 @415cda7743dd568d
+  0D2 @c36d9f29f31b5814
+char_history - distance_travelled=848
+char_history + distance_travelled=853
+chars - pos_prevzone=236
+chars - pos_prevzonelineid=845887098
+chars - pos_rot=63
+chars - pos_x=-235.878
+chars - pos_y=-2.224
+chars - pos_z=86.734
+chars - pos_zone=235
+chars + pos_prevzone=235
+chars + pos_prevzonelineid=845821562
+chars + pos_rot=192
+chars + pos_x=-189.512
+chars + pos_y=-0.138
+chars + pos_z=-76.239
+chars + pos_zone=236
+ret onZoneOut=nil:nil,onZoneIn=number:4294967295
+step trigger Ronan
+packets
+  00E @fff304ac0fb334e1
+  00E @6a006da4159b1826
+  00E @452143d18fcfbfe1
+  00E @c5cfab28c43a49e2
+  00E @bca57ea417282a00
+  00E @a94da0637c22108a
+  00E @ff13dc471b3b48cb
+  00E @0c6f0199367a3f8e
+  00E @1eec463b1fbd077f
+  00E @7778ad881b6cfb91
+  00E @992f7490429cbee1
+  00E @6d78df7df31d56fd
+  00E @688ff2804e22c8f7
+  00E @b94040fbc1216904
+  00E @d5b57b2a190f868a
+  00E @9f5b07a8e8135743
+  00E @e7428eceaaf89431
+  00E @60277433fe1828f3
+  00E @d6fd6251e229e5b2
+  032 @5b49509258eeb2c8
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  020 @829e5cfae3a841ae
+  01D @f8579df92de4b1ca
+  02A @506e1e51b9de731f
+  061 @5f5729de3b9ebb16
+  056 @37435d3f9bc1464a
+  056 @0d40e0d799d02fe3
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory + location=0|slot=3|itemId=12501|quantity=1|bazaar=0|signature=|extra=000000000000000000000000000000000000000000000000
+char_profile - fame_bastok=50
+char_profile + fame_bastok=70
+char_quest_state - quest_key=bastok.out_of_ones_shell|area=1|quest_id=5|status=1|step=1|progress=null|repeat_by=0
+char_quest_state + quest_key=bastok.out_of_ones_shell|area=1|quest_id=5|status=2|step=0|progress=null|repeat_by=0
+char_stats - title=0
+char_stats + title=82
+char_vars - varname=Quest[1][5]Prog|value=1|expiry=0
+chars quests +64:00 +96:30
+chars titles +10:04
+ret onEventFinish=nil:nil
+step trigger Ronan
+packets
+  032 @f93525bbcb904ff4
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Ronan ShellBug x3
+packets
+ret onTrade=nil:nil
+step trigger Corann
+packets
+  00E @9e1713bbd1159ec6
+  00E @9406951546f6d3df
+  00E @8b65b6793b62d473
+  00E @b30091cbea04a1f1
+  00E @382e7fa4715946b9
+  00E @6b4f7d80d16a7188
+  00E @af65cc9ab450848d
+  00E @4a355b1a1e726c8a
+  00E @7962c2ffe62123f4
+  032 @13cf38f841256e08
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil

@@ -1,0 +1,53 @@
+# Unbridled Passion (windurst 74): the other operands, on a WAR 60 (Sin Hunting, The Fanged One and Fire and Brimstone
+# completed by GM): not RNG: 338. The var arms read no status: var 3 (GM): 542; var 7 with a full inventory: 546:
+# npcUtil.completeQuest refuses (the socks): var 7 kept, the quest not completed, Koh's Letter kept; var 7 with space:
+# 546: the available quest completed. Completed: var 1: 542; var 7: 546 again: npcUtil.completeQuest refuses
+# (Hunter's Socks are rare and held): var 7, the quest completed. Fire and Brimstone's var arms come first: its var 1
+# with this var 7: 532; its var 5: 536.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=WAR lvl=60
+quest Windurst.SinHunting completed
+quest Windurst.TheFangedOne completed
+quest Windurst.FireAndBrimstone completed
+keyitem KohsLetter
+login
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # WAR, var 0: no reply: his default 338
+finish
+charvar unbridledPassion 3
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 3 (available): 542
+finish
+charvar unbridledPassion 7
+fill-inventory
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 7: 546 (0, 14099)
+finish                                  # npcUtil.completeQuest refuses (no room): var 7, not completed, the letter kept
+free-inventory
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 7: 546
+finish                                  # the available quest completed: the socks, fame 20, var 0; the letter taken
+charvar unbridledPassion 1
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # completed, var 1: 542
+finish
+charvar unbridledPassion 7
+charvar fireAndBrimstone 1
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Fire and Brimstone's var 1 first: 532
+finish
+charvar fireAndBrimstone 5
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # its var 5: 536
+finish
+charvar fireAndBrimstone 0
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # completed, var 7: 546
+finish                                  # the socks are rare and held: npcUtil.completeQuest refuses, nothing changes

@@ -1,0 +1,68 @@
+# The Tenshodo Showdown (windurst 69): Nanaa Mihgo (Windurst Woods; +99: the first entity of the name is cutscene-only),
+# Harnek (Lower Jeuno), Elfriede (Selbina). A THF at level 40 (AF1_QUEST_LEVEL); Mihgo's Amigo completed by GM (while
+# it is available its 80 shares Nanaa Mihgo's Progress turns with 496; accepted, its 82 Event would cover 503; Windurst
+# fame stays below level 3, so Rock Racketeer stays unavailable). Available: a bone chip traded to Nanaa Mihgo (no
+# trade handler; Mihgo's Amigo's wants four necklaces: nothing); 496: begun, the Letter from the Tenshodo. Prog 0: 497;
+# Elfriede nil (her default 25), the stew traded: nil. Harnek with the letter: 10021 (the letter taken, the Tenshodo
+# Envelope, Prog 1); Harnek again: nil (his default 217). Prog 1: Nanaa Mihgo 498; Elfriede: the stew traded at Prog 1:
+# nil; 10002 (Prog 2); 10003; a bone chip, the stew plus a chip: nil; the stew alone: 10004 (taken, the envelope taken,
+# the Signed Envelope, Prog 3). Prog 3: Elfriede nil (25), a second stew: nil; Nanaa Mihgo nil (76). Harnek with the
+# signed envelope: 10022 with a full bag (the knife does not fit: nothing), then 10022: completed (fame 20, the
+# Marauder's Knife; the signed envelope taken). Completed, As Thick as Thieves available, THF, level 40 < 50: Nanaa
+# Mihgo's 503 (replaceDefault), twice (the second talk is her script's turn: it does nothing without a trust permit,
+# so the quest line plays again). As Thick as Thieves accepted by GM: not met; its 505.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger LowerJeuno/Harnek/onTrigger Selbina/Elfriede/onTrigger Selbina/Elfriede/onTrade WindurstWoods/onEventFinish/496 LowerJeuno/onEventFinish/10021 LowerJeuno/onEventFinish/10022 Selbina/onEventFinish/10002 Selbina/onEventFinish/10004
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=THF lvl=40
+quest Windurst.MihgosAmigo completed
+item BoneChip
+item BowlOfQuadavStew
+item BowlOfQuadavStew
+login
+trade Nanaa_Mihgo+99 BoneChip x1               # available, the check holds: no quest trade handler: nothing
+trigger Nanaa_Mihgo+99                         # THF, level 40: 496
+finish                                         # begun; the Letter from the Tenshodo
+trigger Nanaa_Mihgo+99                         # Prog 0: 497
+finish
+warp 63.4,-15.27,13.5 Selbina
+trigger Elfriede                               # Prog 0: nil; her default 25
+finish
+trade Elfriede BowlOfQuadavStew x1             # Prog 0: nil
+warp 47.0,-0.1,-19.6 LowerJeuno
+trigger Harnek                                 # the letter: 10021 (0, letter, envelope)
+finish                                         # the letter taken; the Tenshodo Envelope; Prog 1
+trigger Harnek                                 # neither key item: nil; his default 217
+finish
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                         # Prog 1: 498
+finish
+warp 63.4,-15.27,13.5 Selbina
+trade Elfriede BowlOfQuadavStew x1             # Prog 1: nil
+trigger Elfriede                               # Prog 1: 10002 (0, envelope, stew)
+finish                                         # Prog 2
+trigger Elfriede                               # Prog 2: 10003 (0, 0, stew)
+finish
+trade Elfriede BoneChip x1                     # not the stew: nil
+trade Elfriede BowlOfQuadavStew x1 BoneChip x1 # the stew plus an extra: nil
+trade Elfriede BowlOfQuadavStew x1             # Prog 2, the stew alone: 10004 (0, envelope, stew)
+finish                                         # taken; the envelope taken; the Signed Envelope; Prog 3
+trigger Elfriede                               # Prog 3: nil; 25
+finish
+trade Elfriede BowlOfQuadavStew x1             # Prog 3: nil
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                         # Prog 3: nil; her default 76
+finish
+warp 47.0,-0.1,-19.6 LowerJeuno
+trigger Harnek                                 # the signed envelope: 10022
+fill-inventory
+finish                                         # the knife does not fit: complete fails: nothing
+free-inventory
+trigger Harnek                                 # 10022
+finish                                         # completed: fame 20, the Marauder's Knife; the signed envelope taken
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                         # completed, AF2 available, THF, level 40: 503 (replaceDefault)
+finish
+trigger Nanaa_Mihgo+99                         # her script's turn (UseFallback): it does nothing (no trust permit): 503
+finish
+quest Windurst.AsThickAsThieves accepted       # GM
+trigger Nanaa_Mihgo+99                         # not met; As Thick as Thieves accepted: its 505 (0, the note)
+finish

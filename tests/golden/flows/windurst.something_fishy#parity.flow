@@ -1,0 +1,12 @@
+# Something Fishy (windurst 52), completion parity: 210's finish while accepted is the Lua's raw player:completeQuest
+# (then the fame, the trade, the gil, the var, needToZone), so a GM's Quest[2][52]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) with TokakaSpokenTo 1 beside
+# Tokaka (his default 207 does not answer a trade).
+char zone=PortWindurst pos=-188.3,-2.0,66.3 job=WAR lvl=75
+quest Windurst.SomethingFishy accepted
+charvar TokakaSpokenTo 1
+item BastoreSardine1
+login
+charvar Quest[2][52]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Tokaka BastoreSardine1 x1         # 210 (70, 4360)
+finish                                  # completed; fame 10; the sardine taken; 70 gil; Prog kept

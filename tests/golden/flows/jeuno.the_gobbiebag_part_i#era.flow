@@ -1,0 +1,34 @@
+# The Gobbiebag Part I (jeuno 27) with its era module (quest rework B3b Jeuno, P4):
+# modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua, enabled by xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1,
+# ENABLE_SOA 0), raises the part's fame level to 3 (states 1 and 2's checks replaced) and adds state 3 (available, the
+# start size, the previous part, fame below 3: 42 with the inventory + 1). The inventory at 35 first (storage): no state
+# 3 (43 (81)); then at 30. Fame level 2 (249 / 2 = 124): state 3's 42 (31); fame level 3 (250, a GM): 43 (31, 0, 1),
+# begun; accepted at fame level 2: the module's state 2 check fails: no section, a trade: nothing; at 3: the four items:
+# 73 (36), completed.
+module modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/Bluffnix/onTrade LowerJeuno/onEventFinish/43 LowerJeuno/onEventFinish/73
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+fame Sandoria 249
+item SquareOfDhalmelLeather
+item SteelIngot
+item SquareOfLinenCloth
+item Peridot
+login
+storage inventory 35                    # a GM: not the part's 30
+trigger Bluffnix                        # available, fame below the era level, the inventory 35: no state 3; 43 (81)
+finish
+storage inventory 30                    # a GM: the part's start size
+trigger Bluffnix                        # fame level 2, below the era level: state 3: 42 (31)
+finish
+fame Sandoria 250                       # a GM: fame level 3
+trigger Bluffnix                        # the module's state 1 check: 43 (31, 0, 1)
+finish option=0                         # begun
+fame Sandoria 249                       # a GM: fame level 2
+trigger Bluffnix                        # accepted, the module's state 2 check fails: no section; 43 (81)
+finish
+trade Bluffnix SquareOfDhalmelLeather x1 SteelIngot x1 SquareOfLinenCloth x1 Peridot x1 # no section: nothing
+fame Sandoria 250                       # a GM
+trade Bluffnix SquareOfDhalmelLeather x1 SteelIngot x1 SquareOfLinenCloth x1 Peridot x1 # the module's state 2 check: 73 (36)
+finish                                  # completed; inventory 35; INVENTORY_INCREASED

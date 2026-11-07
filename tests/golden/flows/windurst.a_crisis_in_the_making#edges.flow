@@ -1,0 +1,36 @@
+# A Crisis in the Making (windurst 2): the other operands, by GM. Fame 49 (level 1), available: QuestCrisisMaking_var
+# 1: Ranpi-Monpi's standard event (the var 1 reminders want accepted or completed); var 2: the same (267 / 268 want
+# accepted / completed). The altar while available with var 1: its standard 60 (status 0 is not >= 1). Accepted at var
+# 0: Ranpi-Monpi's accepted arm plays nothing (no event, no standard event). Accepted at var 1: the altar's 53, and its
+# finish (option 1) after the quest was set available inside the event (GM) still gives the offering (the finish reads
+# no status). Accepted at var 3 (GM): nothing (267 wants var 2); completed at var 3: his standard event (268 wants
+# var 2).
+char zone=WindurstWaters pos=-122.0,-3.0,63.2 job=WAR lvl=75
+fame Windurst 49
+charvar QuestCrisisMaking_var 1
+login
+trigger Ranpi-Monpi                     # available, level 1, var 1: a standard event
+finish
+charvar QuestCrisisMaking_var 2
+trigger Ranpi-Monpi                     # available, level 1, var 2: a standard event
+finish
+charvar QuestCrisisMaking_var 1
+warp -133.0,17.0,180.0 Giddeus
+trigger Altar_of_Offerings              # available, var 1: 60
+finish
+quest Windurst.ACrisisInTheMaking accepted
+charvar QuestCrisisMaking_var 0
+warp -122.0,-3.0,63.2 WindurstWaters
+trigger Ranpi-Monpi                     # accepted, var 0: nothing
+charvar QuestCrisisMaking_var 1
+warp -133.0,17.0,180.0 Giddeus
+trigger Altar_of_Offerings              # accepted, var 1: 53
+quest Windurst.ACrisisInTheMaking available
+finish option=1                         # the Off Offering; var 2 (no status read)
+quest Windurst.ACrisisInTheMaking accepted
+charvar QuestCrisisMaking_var 3
+warp -122.0,-3.0,63.2 WindurstWaters
+trigger Ranpi-Monpi                     # accepted, var 3: nothing
+quest Windurst.ACrisisInTheMaking completed
+trigger Ranpi-Monpi                     # completed, var 3: a standard event
+finish

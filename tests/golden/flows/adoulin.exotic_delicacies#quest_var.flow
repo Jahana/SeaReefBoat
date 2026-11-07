@@ -1,0 +1,19 @@
+# Exotic Delicacies (adoulin 74), the quest's own var at the completion, at midpoint rates: accepted,
+# Flapano_Odd_Even 1, the ingredients and Quest[9][74]Prog 1 (GMs); EXP_RATE 1.125 and BAYLD_RATE 1.375. Flapano: the
+# ingredients, 2861; finished: npcUtil.completeQuest (the Plate of Flapano's Paella, 500 bayld at the rate: 687.5, which
+# the bindings round half away from zero to 688, BAYLD_OBTAINED 688; 1000 exp at the rate: 1125; completed), then the
+# trade confirmed and the var 0. npcUtil.completeQuest does no cleanup: Quest[9][74]Prog stays 1 (quest:complete's
+# cleanup would clear it).
+lists WesternAdoulin/Flapano/onTrigger WesternAdoulin/Flapano/onTrade WesternAdoulin/onEventFinish/2861
+char zone=WesternAdoulin pos=71.5,0,-13.5 job=WAR lvl=30
+setting EXP_RATE 1.125
+setting BAYLD_RATE 1.375
+quest Adoulin.ExoticDelicacies accepted
+charvar Flapano_Odd_Even 1
+item 3916
+item 5949
+item 5954 x2
+charvar Quest[9][74]Prog 1              # a GM: the quest's own var
+login
+trade Flapano 3916 x1 5949 x1 5954 x2   # 2861
+finish                                  # the paella, 688 bayld, 1125 exp; completed, Prog kept; the trade taken

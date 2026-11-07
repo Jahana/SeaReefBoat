@@ -1,0 +1,83 @@
+# Waking the Beast (otherAreas 32): La Theine Plateau's qm3 (no script; default STRANGE_ENERGY; I Can Hear a Rainbow and
+# CoP 5-3 off here), the six Cloisters' Waking the Beast battlefields (index 2 or 3: option index * 16 + area 1) and the
+# Full Moon Fountain's. Five avatar spells by header lines: qm3: no section (STRANGE_ENERGY). Ramuh by a step: 207,
+# finished: the Rainbow Resonator, begun. qm3 again: accepted, no ruby: no section. Each Cloister: the entrance's menu,
+# area 1 entered, the Prime killed (allDeath: its elementals die, WON), 32001 finished: battlefieldWin its id: the eye.
+# The Full Moon Fountain: entered, won (bfwin: the fight cannot be driven by kills), 32001 finished on 0: battlefieldWin
+# 226: the six eyes and the resonator taken, the Faded Ruby, Option 1. qm3: the ruby: 208, finished: completed (the
+# pole), completedThisWeek 1 until the tally (1800198000), the ruby taken, Interrupter of Dreams (Option 1, read before
+# quest:complete clears it: user ruling 2026-11-04, kept Lua bugs; the Lua read it after, always 0: Disturber of
+# Slumber; Option 0's Disturber is #edges'). qm3: completedThisWeek 1: no section: STRANGE_ENERGY.
+lists LaTheinePlateau/qm3/onTrigger LaTheinePlateau/onEventFinish/207 LaTheinePlateau/onEventFinish/208 CloisterOfFlames/onEventFinish/32001 CloisterOfFrost/onEventFinish/32001 CloisterOfGales/onEventFinish/32001 CloisterOfStorms/onEventFinish/32001 CloisterOfTides/onEventFinish/32001 CloisterOfTremors/onEventFinish/32001 FullMoonFountain/onEventFinish/32001
+char zone=LaTheinePlateau pos=-178.2,8.8,254.3 job=SMN lvl=75
+spell 298
+spell 299
+spell 300
+spell 301
+spell 302
+login
+trigger qm3                             # five of the six: no section; STRANGE_ENERGY
+spell 303                               # a GM: Ramuh
+trigger qm3                             # the six: 207
+finish                                  # the Rainbow Resonator; available: begun
+trigger qm3                             # accepted, no ruby: no section; STRANGE_ENERGY
+warp -720.6,-1.4,-598.0 CloisterOfFlames
+trigger FP_Entrance                     # the resonator: the 32000 menu
+update 32000 option=33                  # Waking the Beast, area 1 (546)
+finish                                  # entered
+kill IFRIT_PRIME_ASA-15                 # the Prime (allDeath): WON; 32001
+finish                                  # battlefieldWin 546: EyeOfFlames
+trigger Fire_Protocrystal               # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp 561.5,-0.8,600.0 CloisterOfFrost
+trigger IP_Entrance                     # the resonator: the 32000 menu
+update 32000 option=49                  # Waking the Beast, area 1 (483)
+finish                                  # entered
+kill SHIVA_PRIME_ASA-15                 # the Prime (allDeath): WON; 32001
+finish                                  # battlefieldWin 483: EyeOfFrost
+trigger Ice_Protocrystal                # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp -357.6,-0.1,-380.0 CloisterOfGales
+trigger WP_Entrance                     # the resonator: the 32000 menu
+update 32000 option=49                  # Waking the Beast, area 1 (419)
+finish                                  # entered
+kill GARUDA_PRIME_ASA-15                # the Prime (allDeath): WON; 32001
+finish                                  # battlefieldWin 419: EyeOfGales
+trigger Wind_Protocrystal               # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp 536.6,-14.9,493.0 CloisterOfStorms
+trigger LP_Entrance                     # the resonator: the 32000 menu
+update 32000 option=49                  # Waking the Beast, area 1 (451)
+finish                                  # entered
+kill RAMUH_PRIME_ASA-15                 # the Prime (allDeath): WON; 32001
+finish                                  # battlefieldWin 451: EyeOfStorms
+trigger Lightning_Protocrystal          # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp 560.5,35.1,563.0 CloisterOfTides
+trigger WP_Entrance                     # the resonator: the 32000 menu
+update 32000 option=33                  # Waking the Beast, area 1 (610)
+finish                                  # entered
+kill LEVIATHAN_PRIME_ASA-15             # the Prime (allDeath): WON; 32001
+finish                                  # battlefieldWin 610: EyeOfTides
+trigger Water_Protocrystal              # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp -538.4,0.5,-493.9 CloisterOfTremors
+trigger EP_Entrance                     # the resonator: the 32000 menu
+update 32000 option=49                  # Waking the Beast, area 1 (579)
+finish                                  # entered
+kill TITAN_PRIME_ASA-15                 # the Prime (allDeath): WON; 32001
+finish                                  # battlefieldWin 579: EyeOfTremors
+trigger Earth_Protocrystal              # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp -301.8,9.5,-260.1 FullMoonFountain
+trigger MS_Entrance                     # the six eyes and the resonator: the 32000 menu
+update 32000 option=33                  # Waking the Beast, area 1 (226)
+finish                                  # entered
+bfwin                                   # a GM: WON; 32001
+finish option=0                         # battlefieldWin 226: the seven taken; the Faded Ruby; Option 1
+trigger Moon_Spiral                     # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp -178.2,8.8,254.3 LaTheinePlateau
+trigger qm3                             # the ruby, the week open: 208
+finish                                  # completed; the pole; completedThisWeek 1 (until 1800198000); the ruby taken; Option 1: Interrupter of Dreams
+trigger qm3                             # completedThisWeek 1: no section; STRANGE_ENERGY

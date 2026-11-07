@@ -1,0 +1,88 @@
+# Beyond Infinity (jeuno 137): state 4, accepted with Prog 0 and no Soul Gem Clasp (the battlefield lost: the clasp is
+# worn on entry; here a GM drops it). A level 91 Warrior at level cap 95, Prelude to Puissance completed, the Limit
+# Breaker held, Beyond Infinity accepted (a GM), MAX_LEVEL 99, 0 merit points. The moogle: 10045 (91, 1, 5, 3, 0, 0,
+# meritCost) with meritCost 0 at 0 merit points and 1 from 1; its update option 9 takes one merit point when there is
+# one (nothing at 0), any other update option nothing; its finish: option 0 nothing, any other the clasp, and 17 / 25 /
+# 26 / 27 set down at Horlais Peak / Waughroon Shrine / Balga's Dais / Qu'Bia Arena (1: the clasp only). The trade: four
+# crests, six, five with a flint stone, a flint stone alone: not exact: nil; five alone: 10195 (1), whose finish takes
+# them and gives the clasp whatever the option, and 16 / 22 / 23 / 24 set down at the four arenas (0: no set-down).
+# Each set-down zones at the next tick; a GM warp brings the char back and drops the clasp again. Last, Prog 2 (a GM):
+# none of the states (Prog 0 / 1): the default 10045 (0, 0, 2, 0).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventUpdate/10045 RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10195
+char zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=91
+levelcap 95
+quest Jeuno.PreludeToPuissance completed
+quest Jeuno.BeyondInfinity accepted
+keyitem LimitBreaker
+item HighKindredsCrest x30
+item FlintStone
+login
+trigger Nomad_Moogle                    # accepted, Prog 0, no clasp, 0 merit points: 10045 (91, 1, 5, 3, 0, 0, 0)
+update 10045 option=9                   # 0 merit points: nothing
+finish option=0                         # option 0: no clasp
+merits 2                                # a GM: two merit points
+trigger Nomad_Moogle                    # 10045 (91, 1, 5, 3, 0, 0, 1)
+update 10045 option=8                   # not 9: nothing
+update 10045 option=9                   # merit points 2 -> 1
+finish option=1                         # not 0: the Soul Gem Clasp; 1: no set-down
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped (state 4 again)
+trigger Nomad_Moogle                    # 1 merit point: 10045 (91, 1, 5, 3, 0, 0, 1)
+update 10045 option=9                   # merit points 1 -> 0
+finish option=17                        # the clasp; set down at Horlais Peak
+tick 400                                # the zone change runs at the tick
+login                                   # in Horlais Peak
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+trigger Nomad_Moogle                    # 0 merit points: 10045 (91, 1, 5, 3, 0, 0, 0)
+finish option=25                        # the clasp; set down at Waughroon Shrine
+tick 400
+login                                   # in Waughroon Shrine
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+trigger Nomad_Moogle                    # 0 merit points: 10045 (91, 1, 5, 3, 0, 0, 0)
+finish option=26                        # the clasp; set down at Balga's Dais
+tick 400
+login                                   # in Balga's Dais
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+trigger Nomad_Moogle                    # 0 merit points: 10045 (91, 1, 5, 3, 0, 0, 0)
+finish option=27                        # the clasp; set down at Qu'Bia Arena
+tick 400
+login                                   # in Qu'Bia Arena
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+trade Nomad_Moogle HighKindredsCrest x4 # four: not exact: nil, nothing
+trade Nomad_Moogle HighKindredsCrest x6 # six: not exact: nil, nothing
+trade Nomad_Moogle HighKindredsCrest x5 FlintStone x1  # five and a flint stone: not exact: nil, nothing
+trade Nomad_Moogle FlintStone x1        # a flint stone: nil, nothing
+trade Nomad_Moogle HighKindredsCrest x5 # five alone: 10195 (1)
+finish option=0                         # the crests taken, the clasp; 0: no set-down
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+trade Nomad_Moogle HighKindredsCrest x5 # 10195 (1)
+finish option=16                        # the crests taken, the clasp; set down at Horlais Peak
+tick 400
+login                                   # in Horlais Peak
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+trade Nomad_Moogle HighKindredsCrest x5 # 10195 (1)
+finish option=22                        # the crests taken, the clasp; set down at Waughroon Shrine
+tick 400
+login                                   # in Waughroon Shrine
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+trade Nomad_Moogle HighKindredsCrest x5 # 10195 (1)
+finish option=23                        # the crests taken, the clasp; set down at Balga's Dais
+tick 400
+login                                   # in Balga's Dais
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+trade Nomad_Moogle HighKindredsCrest x5 # 10195 (1)
+finish option=24                        # the crests taken, the clasp; set down at Qu'Bia Arena
+tick 400
+login                                   # in Qu'Bia Arena
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+delkeyitem SoulGemClasp                 # a GM: the clasp dropped
+charvar Quest[3][137]Prog 2             # a GM: Prog 2
+trigger Nomad_Moogle                    # Prog 2: no state (0 / 1 wanted); the default 10045 (0, 0, 2, 0)
+finish
+trade Nomad_Moogle HighKindredsCrest x5 # Prog 2: no trade handler: nothing

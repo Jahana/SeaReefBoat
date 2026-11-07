@@ -1,0 +1,17 @@
+# Fire and Brimstone (windurst 73) while Sin Hunting is accepted, on a WAR 60 (a RNG who took it, then changed job;
+# The Fanged One completed by GM): Sin Hunting's 524 takes the framework's turns (see #sin_hunting). The script's turns:
+# Sin Hunting accepted (not completed): no 528; var 0: nothing from either quest: 524. Sin Hunting completed (GM): his
+# default 338 takes the framework's turn; the script's: 528.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=WAR lvl=60
+quest Windurst.SinHunting accepted
+quest Windurst.TheFangedOne completed
+login
+trigger Perih_Vashai                    # the framework's turn: Sin Hunting's 524
+finish
+trigger Perih_Vashai                    # the script's turn: Sin Hunting accepted, WAR, available: no 528: 524
+finish
+quest Windurst.SinHunting completed
+trigger Perih_Vashai                    # the framework's turn: his default 338
+finish
+trigger Perih_Vashai                    # the script's turn: Sin Hunting completed, available: 528
+finish

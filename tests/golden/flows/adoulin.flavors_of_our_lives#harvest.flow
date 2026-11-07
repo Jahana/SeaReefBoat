@@ -1,0 +1,32 @@
+# Flavors of Our Lives (adoulin 46), the Blightberry: a level 99 Warrior in Western Adoulin with a Sickle,
+# ENABLE_HELM_WAIT on (a setting), the quest accepted (a GM). Prog 0 with the Blightberry (a GM): Berghent 82 (the
+# reward section needs Prog 3 too). The Blightberry taken back, Prog 2 (GMs), in the Yahse Hunting Grounds beside the
+# first Harvesting Point: the Sickle traded: no trade handler: nothing. Prog 3 (a GM): with ENABLE_HELM_WAIT on
+# xi.helm.onTrade returns before pickItem while GetSystemTime() < the local var [HELM]LastAttempt + 3 (pickItem, which
+# upstream raised in at zone 260, finds nothing there since user ruling 2026-11-05: #raise); with that var at
+# 2000000000 (a GM; in play a second trade within 3 s of the first) the handler goes on to its
+# Blightberry action: the key item (KEYITEM_OBTAINED). Prog 3 with it: the trade has no handler: nothing. Back in
+# Western Adoulin: Berghent 87, finished: completed (300 bayld, 500 exp, Potation Pathfinder; no fame area), the
+# Blightberry kept; completed: 88.
+lists YahseHuntingGrounds/Harvesting_Point/onTrade WesternAdoulin/Berghent/onTrigger WesternAdoulin/onEventFinish/87
+char zone=WesternAdoulin pos=97.221,-0.148,-28.68 job=WAR lvl=99
+setting ENABLE_HELM_WAIT true
+quest Adoulin.FlavorsOfOurLives accepted
+keyitem Blightberry
+item Sickle
+login
+trigger Berghent                        # Prog 0 with the Blightberry (a GM): 82
+finish
+delkeyitem Blightberry                  # a GM
+charvar Quest[9][46]Prog 2              # a GM
+warp 164.33,0,-283.7 YahseHuntingGrounds
+trade Harvesting_Point Sickle x1        # Prog 2: no trade handler: nothing
+charvar Quest[9][46]Prog 3              # a GM
+localvar [HELM]LastAttempt 2000000000   # a GM
+trade Harvesting_Point Sickle x1        # Prog 3: the Blightberry
+trade Harvesting_Point Sickle x1        # Prog 3 with it: nothing
+warp 97.221,-0.148,-28.68 WesternAdoulin
+trigger Berghent                        # Prog 3 with the Blightberry: 87
+finish                                  # completed
+trigger Berghent                        # completed: 88
+finish

@@ -1,0 +1,63 @@
+# Abelard's reply kinds (Selbina; no script; default event 1130): An Explorer's Footsteps (40 / 42 P, 43 / 44 / 49 E, 48
+# E rD; the trade's 41 / 46 / 47 P, 45 E), Outlands' Chasing Dreams (Prog 7: 1108 P), RoV 1-04 Set Free (181 E
+# importantOnce: Event the first time, then Default; a trade of three bee pollen: 178 P) and San d'Oria's Signed in
+# Blood (Prog 2 without the Torn-Out Pages: 1105 E). Explorer accepted with no clay (ClayRecieved 0: 44, Event) and
+# Chasing Dreams at Prog 7 (GMs: 1108, Progress): 1108; finished: Chasing Prog 8. Then 44 alone, finished: a clay. Prog
+# 7 again (a GM): 43 (Event) against 1108: 1108; 43 alone. TargetMonument 9 and Prog 7 (GMs): 49 (Event) against 1108:
+# 1108; 49 alone. Explorer completed (a GM): 48 (replaceDefault, 20) against the default 1130 (10): 48. Prog 7 (a GM):
+# 1108 beats 48. Explorer available (a GM), the bitmask 0, Prog 7: 40 and 1108 (both Progress): a tie: Explorer's
+# container first: 40; the cycle: 1108. The bitmask set and Prog 7 (GMs): 42 and 1108 (Progress): the cycle (last 1108):
+# 42; then 1108. Explorer completed, RoV 1-04 current (GMs): 181 (Event, its first time) beats 48 (20); then 181 has
+# dropped to Default (10): 48. Signed in Blood accepted at Prog 2 (GMs): 1105 (Event, 100) beats 48 (20) on both talks
+# (an Event 48 would tie with it and play on the cycle).
+lists Selbina/Abelard/onTrigger Selbina/onEventFinish/1108 Selbina/onEventFinish/40 Selbina/onEventFinish/42 Selbina/onEventFinish/44
+char zone=Selbina pos=-50.6,-11.3,-13.1 job=WAR lvl=75
+quest OtherAreas.AnExplorersFootsteps accepted
+quest Outlands.ChasingDreams accepted
+charvar Quest[5][199]Prog 7
+login
+trigger Abelard                         # 44 (Event) and 1108 (Progress): 1108
+finish                                  # Chasing Dreams Prog 8
+trigger Abelard                         # 44 alone
+finish                                  # a clay; ClayRecieved 1
+charvar Quest[5][199]Prog 7             # a GM
+trigger Abelard                         # 43 (Event) and 1108 (Progress): 1108
+finish                                  # Chasing Dreams Prog 8
+trigger Abelard                         # 43 (0) alone
+finish
+charvar Quest[4][19][EF]TargetMonument 9 # a GM
+charvar Quest[5][199]Prog 7             # a GM
+trigger Abelard                         # 49 (Event) and 1108 (Progress): 1108
+finish                                  # Chasing Dreams Prog 8
+trigger Abelard                         # 49 (0) alone
+finish
+quest OtherAreas.AnExplorersFootsteps completed # a GM
+trigger Abelard                         # 48 (replaceDefault) beats the default 1130
+finish
+charvar Quest[5][199]Prog 7             # a GM
+trigger Abelard                         # 1108 beats 48
+finish
+quest OtherAreas.AnExplorersFootsteps available # a GM
+charvar Quest[5][199]Prog 7             # a GM
+trigger Abelard                         # 40 and 1108 (both Progress): a tie: Explorer's container first: 40
+finish option=0
+trigger Abelard                         # the cycle: 1108
+finish option=0
+charvar [EF]MonumentBitmask 1           # a GM
+charvar Quest[5][199]Prog 7             # a GM
+trigger Abelard                         # 42 and 1108 (both Progress): the cycle (last 1108): 42
+finish option=0
+trigger Abelard                         # the cycle: 1108
+finish option=0
+quest OtherAreas.AnExplorersFootsteps completed # a GM
+mission Rov SetFree current             # a GM
+trigger Abelard                         # 181 (Event, importantOnce's first time) beats 48 (replaceDefault)
+finish
+trigger Abelard                         # 181 dropped to Default: 48
+finish
+quest Sandoria.SignedInBlood accepted   # a GM
+charvar Quest[0][108]Prog 2             # a GM: no Torn-Out Pages: 1105 (Event)
+trigger Abelard                         # 1105 (Event) beats 48 (replaceDefault)
+finish
+trigger Abelard                         # again
+finish

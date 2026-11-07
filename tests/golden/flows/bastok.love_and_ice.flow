@@ -1,0 +1,43 @@
+# Love and Ice (bastok 43): Carmelo in Port Bastok, Mirror Pond in Beaucedine Glacier. The guard (the Carrier Pigeon
+# Letter seen), then Carmelo's 187 until The Siren's Tear is completed and Bastok fame reaches level 5, then 185 (the
+# Song Sheet, accepted), Mirror Pond's 100 (the sheet taken), 186 and the reward, which sets A Test of True Love's
+# mustZone. Carmelo's default is 182. The Siren's Tear also names Carmelo: its Prog var is set to 2 (its last cutscene,
+# 19, seen) so it stays silent; A Test of True Love and Lovers in the Dusk need fame level 6. Mirror Pond has no script
+# and no default, and Zone.lua shows it only in weather other than snow or blizzards. The harness clock starts on day
+# 8000 (weather day 1520: blizzards only); 12 game hours on, the next day (1521) rolls auroras 50%, snow 35% and
+# blizzards 15%, at each change (every 3-30 earth minutes). Under the pinned weather seed the first change there is
+# auroras: the pond shows (this depends on the seed and on the weather rolls of the zones before it).
+lists PortBastok/Carmelo/onTrigger PortBastok/Carmelo/onTrade BeaucedineGlacier/Mirror_Pond_1/onTrigger PortBastok/onEventFinish/185 PortBastok/onEventFinish/186 BeaucedineGlacier/onEventFinish/100
+char zone=PortBastok pos=-146.5,-7.48,13 lvl=75
+fame Bastok 324
+charvar Quest[1][0]Prog 2
+keyitem CarrierPigeonLetter
+item BoneChip
+login
+trade Carmelo BoneChip x1      # available: no trade handler, nothing
+trigger Carmelo                # the letter not seen: his default 182
+finish
+seekeyitem CarrierPigeonLetter
+trigger Carmelo                # seen, The Siren's Tear not completed: 187
+finish
+quest Bastok.TheSirensTear completed
+trigger Carmelo                # The Siren's Tear completed, fame 324 (level 4): 187
+finish
+fame Bastok 325
+trigger Carmelo                # fame level 5: 185
+finish                         # Carmelo's Song Sheet, accepted
+trigger Carmelo                # the sheet held: nil, 182
+finish
+trade Carmelo BoneChip x1      # accepted: no trade handler, nothing
+warp -94.7,1.518,-392.7 BeaucedineGlacier
+wait vana=12                   # day 8001 (weather day 1521)
+tick 1800000                   # a weather change: auroras, the pond shown
+trigger Mirror_Pond_1          # the sheet held: 100
+finish                         # the sheet deleted
+trigger Mirror_Pond_1          # no sheet: nil, nothing
+finish-if-event
+warp -146.5,-7.48,13 PortBastok
+trigger Carmelo                # no sheet: 186
+finish                         # completed: Lamia Harp, fame +50, Sorrow Drowner, A Test of True Love's mustZone set
+trigger Carmelo                # completed: no handler; A Test of True Love waits for its mustZone and fame level 6: 182
+finish

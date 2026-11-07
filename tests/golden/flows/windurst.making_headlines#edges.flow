@@ -1,0 +1,29 @@
+# Making Headlines (windurst 37): the other operands. Available: Hiwon-Biwon's random default (his script: 306 here);
+# the door's first talk after the zone-in is its default's turn: 44 (DefaultActions; the script does not run). Accepted
+# (GM), no scoop: the door's script turn: nothing (the scoops not all), then the default's 44. Curses, Foiled Again!
+# accepted (GM): Hiwon-Biwon 283 or 284 (the roll: 283 here; its finish: the Windurst Walls Scoop, bit 2). Set
+# available again (GM): Umumu 414, Yujuju 340, Kyume-Romeh 604 / 393 (their scripts; the roll: 393 here).
+char zone=WindurstWalls pos=114.0,-2.4,99.0 job=WAR lvl=75
+login
+trigger Hiwon-Biwon                     # available: his random default (305 / 306 / 168 / 170 / 169)
+finish
+warp -14.0,-2.2,20.0 InnerHorutotoRuins
+trigger _5ca                            # available; the default's turn: 44
+finish
+quest Windurst.MakingHeadlines accepted
+trigger _5ca                            # the script's turn: accepted, no scoop: nothing; then the default's 44
+finish
+warp 114.0,-2.4,99.0 WindurstWalls
+quest Windurst.CursesFoiledAgain1 accepted
+trigger Hiwon-Biwon                     # bit 2 not set, Curses, Foiled Again! accepted: 283 or 284 (the roll)
+finish                                  # the Windurst Walls Scoop; bit 2
+quest Windurst.MakingHeadlines available
+warp 31.0,-5.25,141.4 WindurstWoods
+trigger Umumu                           # available: his 414
+finish
+warp 200.0,-4.8,139.0 PortWindurst
+trigger Yujuju                          # available: his 340
+finish
+warp -56.0,-4.5,23.2 WindurstWaters
+trigger Kyume-Romeh                     # available: his 604 or 393 (the roll)
+finish

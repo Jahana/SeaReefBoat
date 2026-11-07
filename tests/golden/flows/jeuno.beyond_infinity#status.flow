@@ -1,0 +1,28 @@
+# Beyond Infinity (jeuno 137): the status operand alone, of state 2 (accepted, Prog 0, the Soul Gem Clasp) at Maat and
+# of state 4 (accepted, Prog 0, no clasp) on the moogle's trade. A level 91 Warrior at level cap 95, Prelude to Puissance
+# completed, the Limit Breaker (a GM, before login), MAX_LEVEL 99, Prog 0 throughout:
+# - available, no clasp: five High Kindred's Crests to the moogle: state 4 fails on its status alone; the available
+#   section has no trade handler: nothing (the main flow's available trade holds the clasp: two operands);
+# - available, the clasp (a GM): Maat: state 2 fails on its status alone; no section answers him: MAAT_DIALOG;
+# - accepted (a GM), the clasp: Maat: state 2: event 10193 (the step that differs in the status only);
+# - completed (a GM), the clasp: Maat: MAAT_DIALOG; then no clasp (a GM): the crests: state 4 fails on its status
+#   alone: nothing.
+# Maat's other quests (limit breaks 1-5, Beyond the Sun, Trust: Maat) and the moogle's (limit breaks 6-9, Martial
+# Mastery) do not answer a level 91 char at cap 95 with no combat skill (as in the main flow).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Nomad_Moogle/onTrade
+char zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=91
+levelcap 95
+quest Jeuno.PreludeToPuissance completed
+keyitem LimitBreaker
+item HighKindredsCrest x5
+login
+trade Nomad_Moogle HighKindredsCrest x5 # available, no clasp: state 4 fails on the status alone; no trade handler: nothing
+keyitem SoulGemClasp                    # a GM: the clasp
+trigger Maat                            # available, Prog 0, the clasp: state 2 fails on the status alone: MAAT_DIALOG
+quest Jeuno.BeyondInfinity accepted     # a GM: accepted, Prog 0, the clasp held
+trigger Maat                            # state 2: event 10193
+finish
+quest Jeuno.BeyondInfinity completed    # a GM: completed, the clasp held
+trigger Maat                            # state 2 fails on the status alone (the completed section has no Maat handler): MAAT_DIALOG
+delkeyitem SoulGemClasp                 # a GM: no clasp
+trade Nomad_Moogle HighKindredsCrest x5 # completed, Prog 0, no clasp: state 4 fails on the status alone; no trade handler: nothing

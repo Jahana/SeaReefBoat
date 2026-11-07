@@ -1,0 +1,26 @@
+# Empty Memories (jeuno 70): the available check's operands one at a time, at Harith (no script; default 111). A level 75
+# Warrior, CoP Below the Arks current (118, under The Mothercrystals' 128; a GM, before login) with its Option var 0: 111
+# (no section). Option -1 (a GM; > 0 false, where != 0 would hold): 111. Option 1: 113 (option 0: nothing). Option 0
+# again, Below the Arks completed and The Mothercrystals current (GMs; addMission refuses to overwrite a current
+# mission): 113 (the edge). The Mothercrystals completed, The Lost City current (218, over it): 113, option 1: begun.
+lists RuludeGardens/Harith/onTrigger RuludeGardens/onEventFinish/113
+char zone=RuludeGardens pos=-4.3,2,132.5 job=WAR lvl=75
+mission Cop BelowTheArks current
+login
+trigger Harith                          # Below the Arks, Option 0: no section; his default 111
+finish
+charvar Mission[6][118]Option -1        # a GM
+trigger Harith                          # Option -1: 111
+finish
+charvar Mission[6][118]Option 1         # a GM
+trigger Harith                          # Option 1: 113
+finish option=0                         # nothing
+charvar Mission[6][118]Option 0         # a GM
+mission Cop BelowTheArks completed      # a GM
+mission Cop TheMothercrystals current   # a GM
+trigger Harith                          # The Mothercrystals: 113
+finish option=0
+mission Cop TheMothercrystals completed # a GM
+mission Cop TheLostCity current         # a GM
+trigger Harith                          # The Lost City (218): 113
+finish option=1                         # begun

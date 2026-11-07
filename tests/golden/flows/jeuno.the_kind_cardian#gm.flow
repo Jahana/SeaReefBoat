@@ -1,0 +1,23 @@
+# The Kind Cardian (jeuno 8): GM-set states no play reaches, where the Lua's checks still decide (each a step a GM can
+# take). Teigero-Bangero: The Wonder Magic Set, Cook's Pride and The Lost Cardian completed, this quest available: no
+# arm in his script (66 wants it accepted, 67 completed). Naruru: this quest accepted while The Wonder Magic Set is
+# available and Cook's Pride available: no arm (71 wants Cook's Pride completed, 72 this quest completed): her 98.
+# Panta-Putta: this quest completed with theKindCardianVar 2: 76, not 35.
+char zone=LowerJeuno pos=-56.0,0.1,-139.5 job=WAR lvl=75
+quest Jeuno.TheWonderMagicSet completed
+quest Jeuno.CooksPride completed
+quest Jeuno.TheLostCardian completed
+login
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # this quest available: no arm: his script plays nothing; the lookup's 34
+finish-if-event
+quest Jeuno.TheWonderMagicSet available
+quest Jeuno.CooksPride available
+quest Jeuno.TheKindCardian accepted
+trigger Naruru                          # Cook's Pride not completed, this quest accepted: no arm: 98
+finish
+quest Jeuno.TheKindCardian completed
+charvar theKindCardianVar 2
+trigger Panta-Putta                     # completed with the var 2: 76 (not 35: it wants this quest accepted)
+finish

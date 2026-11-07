@@ -1,0 +1,53 @@
+# The Sand Charm (otherAreas 8): the fame edge, the docking area, Prog brackets, the finishes outside their section and
+# Celestina's reply kind. Windurst fame 49 (level 1): no section 1: Blandine 122, Zexu 121 (also at Prog 1: the fame
+# operand alone), Celestina at Prog 3: her shop. Fame 50 (level 2). The docking area (`walk`, then `trigger Blandine+20
+# here`; her talk range is 6 yalms, so only the z 38 face of the box 16 < x < 32, 29 < z < 38 can be bracketed; the
+# x 16, x 32 and z 29 faces are 7.1, 8.9 and 10.6 yalms from her, and the first Blandine is cutscene_only):
+# x 24, z 37.9 is inside (nil: 122); z 38 is on the face, outside: 125, finished: Prog 1. Prog -1 (a GM): Blandine nil
+# (122). 125 finished while the quest is accepted (a GM, while it is open): no handler (Prog stays 0). Prog 4 (a GM):
+# Celestina's shop (not 126). Prog 3: 126, finished: begun; made available again by a GM (Prog stays 3): 126 again
+# (Progress: the handler wins over her script every time; an Event 126 would let her shop script run on the second
+# talk). 127 finished while the quest is available (a GM, while it is open): no handler: not completed, the charm kept.
+# A charm traded while available: no section 2, nothing.
+lists Mhaura/Blandine/onTrigger Mhaura/Zexu/onTrigger Mhaura/Celestina/onTrigger Mhaura/Celestina/onTrade Mhaura/onEventFinish/125 Mhaura/onEventFinish/126 Mhaura/onEventFinish/127
+char zone=Mhaura pos=24.6,-7.758,39.575 job=WAR lvl=30
+fame Windurst 49
+item SandCharm
+login
+trigger Blandine+20                     # fame 49 (level 1): no section; her default 122
+finish
+trigger Zexu                            # no section; his default 121
+finish
+charvar Quest[4][8]Prog 1               # a GM
+trigger Zexu                            # fame 49, Prog 1: no section (the fame operand alone); 121
+finish
+charvar Quest[4][8]Prog 3               # a GM
+trigger Celestina                       # fame 49, Prog 3: no section; her shop
+charvar Quest[4][8]Prog 0               # a GM
+fame Windurst 50                        # level 2
+walk 24,-7.7,37.9
+trigger Blandine+20 here                # inside the docking box (z 37.9): nil; her default 122
+finish-if-event
+walk 24,-7.7,38
+trigger Blandine+20 here                # z 38 (zPos >= 38): outside: 125
+finish                                  # Prog 1
+charvar Quest[4][8]Prog -1              # a GM
+trigger Blandine+20                     # Prog -1: nil; 122
+finish
+charvar Quest[4][8]Prog 0               # a GM
+trigger Blandine+20                     # 125
+quest OtherAreas.TheSandCharm accepted  # a GM, while 125 is open
+finish                                  # no 125 handler while accepted: Prog stays 0
+quest OtherAreas.TheSandCharm available # a GM
+charvar Quest[4][8]Prog 4               # a GM
+trigger Celestina                       # Prog 4: nil; her shop
+charvar Quest[4][8]Prog 3               # a GM
+trigger Celestina                       # Prog 3: 126 (13095)
+finish                                  # begun
+quest OtherAreas.TheSandCharm available # a GM (Prog stays 3)
+trigger Celestina                       # 126 again: Progress over her script
+finish                                  # begun
+trade Celestina SandCharm x1            # 127 (0, 13095)
+quest OtherAreas.TheSandCharm available # a GM, while 127 is open
+finish                                  # no 127 handler while available: not completed; the charm kept
+trade Celestina SandCharm x1            # available: no section 2; nothing

@@ -1,0 +1,24 @@
+# Trial by Ice (sandoria 59), a quick re-entry. Accepted with the fork: entered, then left through Ice_Protocrystal
+# (32003, option 4: no win). Two ticks run the empty battlefield's cleanup: the first pass (nobody is inside, so no
+# leave handler runs and the 10 s wait is skipped), then the second, which starts Shiva_Prime_TBI's 3 s despawn and
+# frees the arena. The fork back (a GM) and in again at once: a new battlefield, which leaves the fading Shiva unkilled
+# (CBattleEntity::isAlive is false in the despawn state) and spawns it over that despawn (CBaseEntity::Spawn's
+# PAI->Reset drops it); it stays up through the kill's ticks, and its kill wins: 32001. Before the fix the old fade-out
+# took the new Shiva away during the claim.
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=WAR lvl=75
+quest Sandoria.TrialByIce accepted
+keyitem TuningForkOfIce
+login
+trigger IP_Entrance                       # the fork: the entry menu 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+trigger Ice_Protocrystal                  # the exit: 32003
+finish option=4                           # left: no win
+tick 400                                  # the cleanup's first pass: nobody inside, so no leave handler, no wait
+tick 400                                  # its second: Shiva's despawn begins, the arena freed
+keyitem TuningForkOfIce                   # a GM
+trigger IP_Entrance                       # the fork: 32000
+update 32000 option=1                     # entered again, the fork taken
+finish                                    # in the arena
+kill DRYAD-3                              # the new Shiva: won, 32001
+finish                                    # Heir of the Great Ice, the Whisper of Frost

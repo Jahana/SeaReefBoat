@@ -1,0 +1,31 @@
+# The Sacred Katana (outlands 140) with its era module, modules/era/lua/quests/outlands/the_sacred_katana.lua, enabled
+# by xi.pre(SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0): Yomi Okuri is offered at JST midnight. A level 50 Samurai, Forge
+# Your Destiny completed, The Sacred Katana accepted with the Mumeito and the scales (GMs). Jaucribaix 140; the Mumeito
+# traded: 141, finished: the module's copy: completed, the Mumeito and the scales taken, Yomi Okuri's mustZone, its
+# Timer = JstMidnight() (1800025200: the next JST midnight after the harness clock; the quest alone sets 1800000060: the
+# trace's char var shows which). Out of Norg and back (the mustZone cleared): Yomi Okuri's 142 (now < Timer). Timer
+# 1800000001 (a GM): 142; Timer 1800000000 (now): 146.
+module modules/era/lua/quests/outlands/the_sacred_katana.lua
+lists Norg/Jaucribaix/onTrigger Norg/onEventFinish/141
+char zone=Norg pos=91,-7,-8 job=SAM lvl=50
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana accepted
+item Mumeito
+keyitem HandfulOfCrystalScales
+login
+trigger Jaucribaix                      # the Mumeito held: 140
+finish
+trade Jaucribaix Mumeito x1             # the scales held: 141
+finish                                  # the module's copy: completed; Yomi Okuri's mustZone; Timer = JstMidnight()
+warp -63,7,0 PortJeuno                  # the mustZone cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # Yomi Okuri available, now < Timer (JST midnight): 142
+finish
+charvar Quest[5][141]Timer 1800000001   # a GM: one second past now
+trigger Jaucribaix                      # 142
+finish
+charvar Quest[5][141]Timer 1800000000   # a GM: now
+trigger Jaucribaix                      # 146
+finish option=0

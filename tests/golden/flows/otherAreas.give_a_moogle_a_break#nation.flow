@@ -1,0 +1,18 @@
+# Give a Moogle a Break (otherAreas 100): the home nation edge. A San d'Oria char (nation 0) with Bastok fame 125 and
+# San d'Oria fame 125 in Bastok Mines' Mog House: not the home nation (xi.moghouse.inMogHouseInHomeNation: Bastok Mines
+# to Port Bastok only for nation 1): the menu. The same char in Northern San d'Oria's Mog House (its home nation; the
+# zone's line to itself): 30005 (the San d'Oria fame read through getNation()). The Bastok side of the edge is the main
+# flow.
+lists BastokMines/Moogle/onTrigger NorthernSanDoria/Moogle/onTrigger NorthernSanDoria/onEventFinish/30005
+char zone=BastokMines pos=116.9,-1.6,-72 job=WAR lvl=75 nation=0
+setting ENABLE_AMK 0                    # AMK 1 (30023, the Moogle, ENABLE_AMK 1) off: #kinds shows it
+fame Bastok 125
+fame Sandoria 125
+charvar Quest[4][100]bedPlacedTime 1799999939
+login
+zoneline BastokMines                    # Bastok's Mog House
+trigger Moogle                          # nation 0 in Bastok: not the home nation: the menu
+warp -192.1,11,148.7 NorthernSanDoria
+zoneline NorthernSanDoria               # San d'Oria's Mog House (the zone's line to itself)
+trigger Moogle                          # home nation, San d'Oria fame level 3: 30005
+finish option=0                         # questSeen 1; not begun

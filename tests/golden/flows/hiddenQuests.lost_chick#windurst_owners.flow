@@ -1,0 +1,77 @@
+# Lost Chick, WindurstWoods's owners one by one (the coverage of every owner's trigger and update). A level 30 Warrior,
+# ENABLE_CHOCOBO_RAISING on. Each owner in turn is the chick's owner (3 clues, location 3: the var is owner + 0x30 +
+# 192) and is asked: the owners with an ask option play their own default event, the ask, then the guess (right:
+# updateEvent(1, 1, 1), the Story of a Diligent Chocobo); the owners without one play their question event on trigger
+# (priorityEvent, 1) and the guess is the update. Then the same with the next owner as the chick's owner (wrong:
+# updateEvent(0, 0, 0), WRONG_OWNER). The trace shows the default event of each ask owner.
+lists WindurstWoods/onEventUpdate/340 WindurstWoods/onEventUpdate/277 WindurstWoods/onEventUpdate/424 WindurstWoods/onEventUpdate/420 WindurstWoods/onEventUpdate/483 WindurstWoods/onEventUpdate/486
+char zone=WindurstWoods pos=130,-5,-117 job=WAR lvl=30
+login
+charvar [ChocoboRaising]LostChick 242   # owner 2, right at Kapeh_Myohrye
+trigger Kapeh_Myohrye
+update 340 option=1
+update 340 option=2
+finish
+charvar [ChocoboRaising]LostChick 244   # owner 4, right at Kororo
+trigger Kororo
+update 277 option=2
+update 277 option=3
+finish
+charvar [ChocoboRaising]LostChick 245   # owner 5, right at Gioh_Ajihri
+trigger Gioh_Ajihri
+update 424 option=1
+update 424 option=2
+finish
+charvar [ChocoboRaising]LostChick 246   # owner 6, right at Gottah_Maporushanoh
+trigger Gottah_Maporushanoh
+update 420 option=1
+update 420 option=2
+update 483 option=1
+update 483 option=2
+update 486 option=1
+update 486 option=2
+finish
+quest Windurst.TheAmazinScorpio accepted
+charvar [ChocoboRaising]LostChick 246
+trigger Gottah_Maporushanoh
+update 420 option=1
+update 420 option=2
+update 483 option=1
+update 483 option=2
+update 486 option=1
+update 486 option=2
+finish
+quest Windurst.TheAmazinScorpio completed
+charvar [ChocoboRaising]LostChick 246
+trigger Gottah_Maporushanoh
+update 420 option=1
+update 420 option=2
+update 483 option=1
+update 483 option=2
+update 486 option=1
+update 486 option=2
+finish
+charvar [ChocoboRaising]LostChick 244   # owner 4, wrong at Kapeh_Myohrye
+trigger Kapeh_Myohrye
+update 340 option=1
+update 340 option=2
+finish
+charvar [ChocoboRaising]LostChick 245   # owner 5, wrong at Kororo
+trigger Kororo
+update 277 option=2
+update 277 option=3
+finish
+charvar [ChocoboRaising]LostChick 246   # owner 6, wrong at Gioh_Ajihri
+trigger Gioh_Ajihri
+update 424 option=1
+update 424 option=2
+finish
+charvar [ChocoboRaising]LostChick 242   # owner 2, wrong at Gottah_Maporushanoh
+trigger Gottah_Maporushanoh
+update 420 option=1
+update 420 option=2
+update 483 option=1
+update 483 option=2
+update 486 option=1
+update 486 option=2
+finish

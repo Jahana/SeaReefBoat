@@ -1,0 +1,92 @@
+# In Search of the Truth (otherAreas 80): Tavnazian Safehold, no scripts: Tressia (two, +36; default 310), Raminey (159),
+# Zadant (326), Fouagine (338), Noam (363), Mengrenaux (270), Chemioue (280), Ondieulix (285), the five ???s (default
+# NOTHING_OUT_OF_ORDINARY). CoP Sheltering Doubt current (past Darkness Named): CoP 2-3's and 3-5's completed sections
+# answer Chemioue 281 / 282 and Mengrenaux 271 (replaceDefault). Petals for Parelbriaux completed (a GM: its Chemioue 512
+# would compete; #kinds has it).
+# Tressia 544 (the cruse as option 1), finished: begun. Prog 0: Tressia 556 (event); Raminey 549 (bit 1), again: nil, 159;
+# Zadant 551, Fouagine 553, Noam 555 (bits 2-4: Option 30), each again once its bit is set: nil. Tressia 557, option 0: nothing; 557, option 1: Option 0, Prog 1.
+# Prog 1: Mengrenaux 560, Chemioue 561 (events); qm1 (the Prog 2 section off): nil; Tressia 565, finished: Prog 2. Prog 2: Tressia 566 (event, Option 0). qm2
+# without the cruse: nil, its default. qm1: the cruse, Water 1, CRUSE_ON_THE_GROUND; again: TRAIL_OF_WATER. qm3 at Water 1:
+# nil. qm5: nil. qm2: Water 2; qm3: 3; qm4: 4 (TRAIL_OF_WATER each). qm5: 558, finished: the cruse taken, Option 1, Water 0,
+# completed (no reward). Completed: Tressia 562, finished: Option 2; again at Option 2: 562 again. Ondieulix 559,
+# finished: Option 0, quest:complete (the Gramary Cape; the vars cleared). Tressia: 314 (replaceDefault). Ondieulix: nil,
+# 285. The second Tressia (+36) is cutscene_only: the engine answers it with a release only, so no step talks to it.
+lists TavnazianSafehold/Tressia/onTrigger TavnazianSafehold/Raminey/onTrigger TavnazianSafehold/Zadant/onTrigger TavnazianSafehold/Fouagine/onTrigger TavnazianSafehold/Noam/onTrigger TavnazianSafehold/Mengrenaux/onTrigger TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/Ondieulix/onTrigger TavnazianSafehold/qm1_in_search_of_truth/onTrigger TavnazianSafehold/qm2_in_search_of_truth/onTrigger TavnazianSafehold/qm3_in_search_of_truth/onTrigger TavnazianSafehold/qm4_in_search_of_truth/onTrigger TavnazianSafehold/qm5_in_search_of_truth/onTrigger TavnazianSafehold/onEventFinish/544 TavnazianSafehold/onEventFinish/549 TavnazianSafehold/onEventFinish/551 TavnazianSafehold/onEventFinish/553 TavnazianSafehold/onEventFinish/555 TavnazianSafehold/onEventFinish/557 TavnazianSafehold/onEventFinish/558 TavnazianSafehold/onEventFinish/559 TavnazianSafehold/onEventFinish/562 TavnazianSafehold/onEventFinish/565
+char zone=TavnazianSafehold pos=89,-34,70.5 job=WAR lvl=75
+mission Cop ShelteringDoubt current
+quest OtherAreas.PetalsForParelbriaux completed
+login
+trigger Tressia                         # available: 544
+finish                                  # begun
+trigger Tressia                         # Prog 0, Option 0: 556
+finish
+warp 83.9,-36,49.7 TavnazianSafehold
+trigger Raminey                         # bit 1 unset: 549
+finish                                  # bit 1
+trigger Raminey                         # bit 1 set: nil; 159
+finish
+warp -9,-22,-15.7 TavnazianSafehold
+trigger Zadant                          # 551
+finish                                  # bit 2
+trigger Zadant                          # bit 2 set (bit 3 not): nil; 326
+finish
+warp 26.8,-35.9,-20.9 TavnazianSafehold
+trigger Fouagine                        # 553
+finish                                  # bit 3
+trigger Fouagine                        # bit 3 set (bit 4 not): nil; 338
+finish
+warp -68.7,-11.3,6.8 TavnazianSafehold
+trigger Noam                            # 555
+finish                                  # bit 4: Option 30
+trigger Noam                            # bit 4 set: nil; 363
+finish
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # Option 30: 557
+finish option=0                         # not 1: nothing
+trigger Tressia                         # 557
+finish option=1                         # Option 0; Prog 1
+warp 74.3,-34.25,63.9 TavnazianSafehold
+trigger Mengrenaux                      # Prog 1: 560
+finish
+warp 83.5,-34,67.6 TavnazianSafehold
+trigger Chemioue                        # Prog 1: 561
+finish
+warp -71.5,-11.1,11.8 TavnazianSafehold
+trigger qm1_in_search_of_truth          # Prog 1: the Prog 2 section is off: nil; its default
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # Prog 1: 565
+finish                                  # Prog 2
+trigger Tressia                         # Prog 2, Option 0: 566
+finish
+warp -79.2,-20,65.9 TavnazianSafehold
+trigger qm2_in_search_of_truth          # no cruse: nil; its default
+warp -71.5,-11.1,11.8 TavnazianSafehold
+trigger qm1_in_search_of_truth          # no cruse, Option 0: the cruse; Water 1; CRUSE_ON_THE_GROUND
+trigger qm1_in_search_of_truth          # the cruse: TRAIL_OF_WATER
+warp -60,-22,44.1 TavnazianSafehold
+trigger qm3_in_search_of_truth          # Water 1: nil; its default
+warp -3.2,-22.7,23.6 TavnazianSafehold
+trigger qm5_in_search_of_truth          # Water 1: nil; its default
+warp -79.2,-20,65.9 TavnazianSafehold
+trigger qm2_in_search_of_truth          # Water 2; TRAIL_OF_WATER
+warp -60,-22,44.1 TavnazianSafehold
+trigger qm3_in_search_of_truth          # Water 3; TRAIL_OF_WATER
+warp -24.6,-22,26.3 TavnazianSafehold
+trigger qm4_in_search_of_truth          # Water 4; TRAIL_OF_WATER
+warp -3.2,-22.7,23.6 TavnazianSafehold
+trigger qm5_in_search_of_truth          # Water 4: 558
+finish                                  # the cruse taken; Option 1; Water 0; completed
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # completed, Option 1: 562
+finish                                  # Option 2
+trigger Tressia                         # Option 2: 562 again
+finish                                  # Option 2
+warp 8.3,-25,65.4 TavnazianSafehold
+trigger Ondieulix                       # Option 2: 559
+finish                                  # Option 0; completed; the Gramary Cape
+warp 89,-34,70.5 TavnazianSafehold
+trigger Tressia                         # Option 0: 314 (replaceDefault)
+finish
+warp 8.3,-25,65.4 TavnazianSafehold
+trigger Ondieulix                       # Option 0: nil; 285
+finish

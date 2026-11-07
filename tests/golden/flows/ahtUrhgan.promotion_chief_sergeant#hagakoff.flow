@@ -1,0 +1,26 @@
+# Promotion: Chief Sergeant's reply kinds at Hagakoff (his script: the shop dialog, a message). The lookup gives the
+# script a turn after an Event or a lower reply (interaction_lookup.lua's UseFallback var), not after a Progress one:
+# so a Progress line talked to again right after it plays again, an Event there gives his shop. A level 1 Warrior
+# accepted at Prog 0 by GMs: Hagakoff 5067, finished: Prog 1; Prog 0 again (a GM): 5067 again. Prog 2 (a GM): 5063,
+# finished: Prog 3; Prog 2 again (a GM): 5063 again.
+lists AhtUrhganWhitegate/Hagakoff/onTrigger
+char zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant accepted
+login
+trigger Hagakoff                        # Prog 0: 5067
+finish                                  # Prog 1
+charvar Quest[6][96]Prog 0              # a GM
+trigger Hagakoff                        # 5067 again (after a Progress: no script turn)
+finish                                  # Prog 1
+charvar Quest[6][96]Prog 2              # a GM
+trigger Hagakoff                        # Prog 2: 5063
+finish                                  # Prog 3
+charvar Quest[6][96]Prog 2              # a GM
+trigger Hagakoff                        # 5063 again
+finish                                  # Prog 3

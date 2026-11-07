@@ -1,0 +1,37 @@
+# Blood of Heroes (crystalWar 52), the edges: a level 99 Warrior in Xarcabard [S] without Songbirds in a Snowstorm
+# completed (missions as the main flow). Animal Spoor: no section: nil (NOTHING_OUT_OF_ORDINARY). Songbirds completed (a
+# GM): Animal Spoor 1, finished on option 1: begun (any option). Accepted, Prog 0: Animal Spoor: nil; Forbidding Portal:
+# nil (NO_RESPONSE). Prog 3 (a GM): a zone-in: nothing; Wheel Rut: nil. Prog 2: Animal Spoor: nil.
+uncovered: 2/-/onEventFinish:10000 -- Ghoyu's Reverie's 10000 is the instance's clear (the Lua's TODO; Ghoyu's Reverie has no instance script for this quest), so no flow opens it; the main flow sets Prog 4 by a GM
+lists XarcabardS/Animal_Spoor/onTrigger XarcabardS/Wheel_Rut/onTrigger XarcabardS/Forbidding_Portal/onTrigger XarcabardS/onZoneIn/1 XarcabardS/onEventFinish/1
+char zone=XarcabardS pos=543.954,-0.522,-290.313 job=WAR lvl=99
+mission Wotg TheScentOfBattle current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Animal_Spoor                    # Songbirds not completed: no section: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+quest CrystalWar.SongbirdsInASnowstorm completed # a GM
+trigger Animal_Spoor                    # 1
+finish option=1                         # begun (any option)
+trigger Animal_Spoor                    # accepted, Prog 0: nil
+finish-if-event
+trigger Forbidding_Portal               # Prog 0: nil (NO_RESPONSE)
+finish-if-event
+charvar Quest[7][52]Prog 3              # a GM
+rezone                                  # Prog 3: no zone-in reply
+trigger Wheel_Rut                       # Prog 3: nil
+finish-if-event
+charvar Quest[7][52]Prog 2              # a GM
+trigger Animal_Spoor                    # Prog 2: nil
+finish-if-event
+charvar Quest[7][52]Prog 4              # a GM
+trigger Animal_Spoor                    # Prog 4, no vial: nil
+finish-if-event
+charvar Quest[7][52]Prog 6              # a GM
+trigger Wheel_Rut                       # Prog 6: nil
+finish-if-event
+charvar Quest[7][52]Prog 5              # a GM
+rezone                                  # Prog 5: no zone-in reply

@@ -1,0 +1,12 @@
+# A New Dawn (jeuno 62): Sturm's death with no killer (an unclaimed death: OnMobDeath(mob, nil), carry-harness-2's
+# expect-error step). A BST 75 with A New Dawn accepted and the var 4 (GM) at the first Sarcophagus: the three NMs
+# popped, unclaimed. Sturm dies with no killer: Sturm.lua calls the quest only with a player (user ruling 2026-11-05,
+# kept bugs), so the var stays 4 and the despawns run: Taifun and Trombe gone. The Lua's onMobDeath indexed the nil
+# player (Sturm.lua:24 at 28747119, player:getQuestStatus) and raised before the despawns, so both stayed up and the
+# char killed them after it (the baseline: the kill as expect-error, then the two kills).
+char zone=TheEldiemeNecropolis pos=-410.4,6.5,503.0 job=BST lvl=75
+quest Jeuno.ANewDawn accepted
+charvar ANewDawn_Event 4
+login
+trigger Sarcophagus                     # accepted, the first, the var 4: Sturm, Taifun, Trombe popped; no event
+kill STURM nokiller                     # no quest call; the var stays 4; Taifun and Trombe despawned

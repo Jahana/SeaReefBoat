@@ -1,0 +1,101 @@
+# The Opo-Opo and I (outlands 11): Lulupp's own arms. Accepted by GM at progress 0: a wrong item (the Lucky Egg): 229
+# (retry 1 alone, no failed); another (the Workbench): 229 again. Kukupp at retry 1: 198 (the middle handlers' test is retry >= 1). Lulupp's talk: 239 (no
+# argument); option 2 (nothing: the finish wants 1), then option 1 (retry 0, failed 1). Failed 1, progress 0: the rod:
+# 219, taken (progress 0), progress 1, failed stays 1 (Lulupp's finish does not reset it), so the talk still asks: 207.
+# Progress 0 with failed 2 (a GM): 207, not 242: the ask's progress == 0 comes first (the thanks' failed >= 2 answers
+# alone only with progress below 0, as the nil arm). Then each retry 2 .. 10 by GM: 239 (0, 0, retry - 1), each declined (option 0:
+# the retry kept); retry 11 (no arm of the ten): the progress arms: progress 0: 207. Each script talk follows a default
+# talk (see the main flow). Progress or failed below 0 (Lulupp's nil arm) is waived: no script sets a negative value.
+char zone=Kazham pos=-25.0,-2.5,-3.5 job=WAR lvl=75
+quest Outlands.TheOpoOpoAndI accepted
+item LuckyEgg
+item BrokenMithranFishingRod
+item Workbench
+login
+trigger Lulupp                          # UseFallback 0: the default OPO_OPO text (stands the char by the walking Lulupp)
+finish-if-event
+trade Lulupp LuckyEgg x1                # progress 0, another's item: 229
+finish                                  # OPO_OPO_RETRY 1 (failed stays 0)
+trade Lulupp Workbench x1               # progress 0, another's item (the workbench): 229
+finish                                  # retry 1 again
+warp 42.0,-11.0,-178.0 Kazham
+trigger Kukupp                          # the text
+finish-if-event
+trigger Kukupp                          # retry 1: 198
+finish
+warp -25.0,-2.5,-3.5 Kazham
+trigger Lulupp                          # the text (the warp is a zone change: UseFallback 0 again)
+finish-if-event
+trigger Lulupp                          # the script: retry 1: 239
+finish option=2                         # nothing: the retry kept
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # retry 1: 239
+finish option=1                         # retry 0, failed 1
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # failed 1, progress 0: 207
+finish
+trade Lulupp BrokenMithranFishingRod x1 # failed 1: 219
+finish                                  # progress 0: the rod taken; progress 1; failed stays 1
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # progress 1, failed 1: 207 (the ask's failed == 1 first)
+finish
+charvar OPO_OPO_PROGRESS 0
+charvar OPO_OPO_FAILED 2
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # progress 0, failed 2: 207 (the ask's progress == 0 comes first)
+finish
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 2
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # retry 2: 239 (0, 0, 1)
+finish option=0
+charvar OPO_OPO_RETRY 3
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 2)
+finish option=0
+charvar OPO_OPO_RETRY 4
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 3)
+finish option=0
+charvar OPO_OPO_RETRY 5
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 4)
+finish option=0
+charvar OPO_OPO_RETRY 6
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 5)
+finish option=0
+charvar OPO_OPO_RETRY 7
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 6)
+finish option=0
+charvar OPO_OPO_RETRY 8
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 7)
+finish option=0
+charvar OPO_OPO_RETRY 9
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 8)
+finish option=0
+charvar OPO_OPO_RETRY 10
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 239 (0, 0, 9)
+finish option=0
+charvar OPO_OPO_RETRY 11
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # retry 11: no retry arm; progress 0: 207
+finish

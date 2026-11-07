@@ -1,0 +1,30 @@
+# Undying Flames (sandoria 26): Pagisalis in Northern San d'Oria. Available at fame level 1: 564 (the script's); two
+# lumps of beeswax (nothing). Level 2: 562 (option 1 declined, option 0 begun). Accepted: 565; one lump, three lumps,
+# one lump and a chip (two items, hasItemQty(2) exact: false), two lumps and a chip (hasItemQty true, three items), a
+# chip (nothing); two lumps: 563 (completed: Faith Like a Candle, Friar's Rope, ITEM_OBTAINED, fame +20). Completed:
+# 566; two lumps (nothing).
+char zone=NorthernSanDoria pos=136.6,6.5,131.7 job=WAR lvl=30
+item LumpOfBeeswax x4
+item BoneChip
+fame Sandoria 49
+login
+trigger Pagisalis                         # available, fame level 1: no section; 564
+finish
+trade Pagisalis LumpOfBeeswax x2          # available: no trade section; nothing
+fame Sandoria 50
+trigger Pagisalis                         # fame level 2: 562
+finish option=1                           # declined: not begun
+trigger Pagisalis                         # 562
+finish option=0                           # begun
+trigger Pagisalis                         # accepted: 565
+finish
+trade Pagisalis LumpOfBeeswax x1          # one lump: nothing
+trade Pagisalis LumpOfBeeswax x3          # three lumps: nothing
+trade Pagisalis LumpOfBeeswax x1 BoneChip x1  # one lump and a chip: two items, hasItemQty(2) false: nothing
+trade Pagisalis LumpOfBeeswax x2 BoneChip x1  # two lumps and a chip: three items, nothing
+trade Pagisalis BoneChip x1               # a wrong item: nothing
+trade Pagisalis LumpOfBeeswax x2          # 563
+finish                                    # the lumps taken; completed: Faith Like a Candle, Friar's Rope, fame +20
+trigger Pagisalis                         # completed: 566
+finish
+trade Pagisalis LumpOfBeeswax x2          # completed: nothing

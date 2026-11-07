@@ -1,0 +1,30 @@
+# The Sahagin's Key (outlands 128; call-only): the arms the deliberate log writes read (user ruling 2026-11-04; on Lua
+# no script writes the log). A level 99 Warrior in Norg with six Mythril Beastcoins and a Norg Shell. Gimb 69 while
+# available (C#: added), Gimb 69 while accepted (no second add). The quest made available again (a GM's delQuest),
+# SahaginKeyProgress 3 and SahaginKeyItems 1 (GMs: a char from before the change, its key handed with no log): Hurr's
+# trade 107, finished: the key, the coins and the shell taken, Items 0 (C#: completed from available). The door takes
+# the key (Lua); a new shell, Items 1 (GMs): 107 again, finished: the key (C#: completed already: no second
+# completion).
+# The deliberate log writes (user ruling 2026-11-04) are the C# port's, not the Lua's: this trace is a csharp-rerecord
+# of the Lua recording (lua-at kept), the difference the log's 0x056 pages, chars.quests and char_quest_state only.
+char zone=Norg pos=-5,-1,-44 job=WAR lvl=99
+item MythrilBeastcoin x6
+item NorgShell
+login
+trigger Gimb                              # available: 69, Progress 1 (C#: added)
+finish
+trigger Gimb                              # accepted: 69, Progress 1 (no second add)
+finish
+quest Outlands.TheSahaginsKey available   # a GM (delQuest)
+charvar SahaginKeyProgress 3              # a GM
+charvar SahaginKeyItems 1
+warp 307.4,27.768,234.3 SeaSerpentGrotto  # beside Hurr the Betrayer
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # Items 1: 107
+finish                                    # the key; coins and shell taken; Items 0 (C#: completed)
+warp 101.5,-2.2,41.5 SeaSerpentGrotto     # outside the Ornamented Door
+trade _4wa SahaginKey x1                  # the door takes the key (Lua)
+warp 307.4,27.768,234.3 SeaSerpentGrotto
+item NorgShell                            # a GM
+charvar SahaginKeyItems 1                 # a GM
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # 107
+finish                                    # the key; Items 0 (C#: already completed)

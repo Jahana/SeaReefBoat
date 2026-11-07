@@ -1,0 +1,43 @@
+# I'm on a Boat (adoulin 55), completed (a GM): castoffPointWarp at every Castoff Point it registers.
+# Foret de Hennetiel's six (the river route): 18 with the pad's index 0 .. 5. Cirdas Caverns: 11 with (1 + index) % 2:
+# 1, 0. Morimar Basalt Fields: 18 with (0 + index) % 2: 0, 1. Sih Gates: 12 with (1 + index) % 2: 1, 0. The
+# Yahse Hunting Grounds: 16 with (0 + index) % 2: 0, 1. Each an Event, finished on 0 (no finish handler; the zones'
+# onEventFinish do nothing).
+lists ForetDeHennetiel/Castoff_Point_0/onTrigger ForetDeHennetiel/Castoff_Point_4/onTrigger
+lists CirdasCaverns/Castoff_Point/onTrigger MorimarBasaltFields/Castoff_Point/onTrigger SihGates/Castoff_Point/onTrigger
+lists YahseHuntingGrounds/Castoff_Point/onTrigger
+char zone=ForetDeHennetiel pos=-218.5,0.8,225 job=WAR lvl=99
+quest Adoulin.ImOnABoat completed
+login
+trigger Castoff_Point_0                 # 18 (0)
+finish
+trigger Castoff_Point_1                 # 18 (1)
+finish
+trigger Castoff_Point_2                 # 18 (2)
+finish
+trigger Castoff_Point_3                 # 18 (3)
+finish
+trigger Castoff_Point_4                 # 18 (4)
+finish
+trigger Castoff_Point_5                 # 18 (5)
+finish
+warp 191.5,11,222 CirdasCaverns
+trigger Castoff_Point                   # 11 (1)
+finish
+trigger Castoff_Point+1                 # 11 (0)
+finish
+warp -460.847,-46,257.484 MorimarBasaltFields
+trigger Castoff_Point                   # 18 (0)
+finish
+trigger Castoff_Point+1                 # 18 (1)
+finish
+warp 33.5,1.5,-440 SihGates
+trigger Castoff_Point                   # 12 (1)
+finish
+trigger Castoff_Point+1                 # 12 (0)
+finish
+warp 378.5,4.38,-9.8 YahseHuntingGrounds
+trigger Castoff_Point                   # 16 (0)
+finish
+trigger Castoff_Point+1                 # 16 (1)
+finish

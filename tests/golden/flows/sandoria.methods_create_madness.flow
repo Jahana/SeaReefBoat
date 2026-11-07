@@ -1,0 +1,44 @@
+# Methods Create Madness (sandoria 98): Balasiel in Southern San d'Oria, qm1 and the Water Leaper in Sea Serpent Grotto.
+# Balasiel's other three quests are set completed (an available one answers him with a Progress event first). A WAR 75
+# with polearm skill 240 (raw 2400) and the Spear of Trials already held at 300 weapon skill points: a trade while
+# available (nothing), the offer 8 (oncePerZone) taken with option 1 (the spear held: none given; the Weapon Training
+# Guide, begun); 11 with 1 (the spear held), option 1 (nothing); the wrong trades (a bone chip; the spear and a chip: not
+# exactly); the spear at 300 points (9: the spear taken, the Map to the Annals of Truth); Balasiel's 12; the qm1 pop of
+# the Water Leaper (SENSE_OMINOUS_PRESENCE), qm1 while it is up (nil), the kill (killed_wsnm 1), the Annals of Truth,
+# qm1 with the Annals (nil); 13 (completed: fame +20, the three key items deleted, Impulse Drive, IMPULSE_DRIVE_LEARNED);
+# once completed his default 667 and a trade (nothing). Balasiel's script answers only Knight Stalker (accepted,
+# KnightStalker_Progress 2); his default is 667. qm1 and the Water Leaper have no script; qm1's default is
+# NOTHING_OUT_OF_ORDINARY. The other sides: #offer (the skill threshold, oncePerZone, the spear given, a full bag, 10),
+# #offer_job, #offer_guide, #abandon.
+lists SouthernSanDoria/Balasiel/onTrigger SouthernSanDoria/Balasiel/onTrade SouthernSanDoria/onEventFinish/8 SouthernSanDoria/onEventFinish/11 SouthernSanDoria/onEventFinish/9 SouthernSanDoria/onEventFinish/13 SeaSerpentGrotto/qm1/onTrigger SeaSerpentGrotto/Water_Leaper/onMobDeath
+char zone=SouthernSanDoria pos=-136.8,-10.8,65.8 job=WAR lvl=75
+quest Sandoria.ASquiresTest completed
+quest Sandoria.ASquiresTestIi completed
+quest Sandoria.AKnightsTest completed
+skill Polearm 2400
+item SpearOfTrials wsp=300
+item BoneChip
+login
+trade Balasiel BoneChip x1                # available: no trade handler, nothing
+trigger Balasiel                          # can equip the spear, polearm 240, no guide: 8 (oncePerZone)
+finish option=1                           # option 1, the spear held: none given; the Weapon Training Guide, begun
+trigger Balasiel                          # accepted, no Annals, no map, the spear held: 11 with 1
+finish option=1                           # option 1, the spear held: nothing
+trade Balasiel BoneChip x1                # not the spear: nil
+trade Balasiel SpearOfTrials x1 BoneChip x1   # not exactly the spear: nil
+trade Balasiel SpearOfTrials x1           # 300 weapon skill points: 9
+finish                                    # the spear taken, the Map to the Annals of Truth
+trigger Balasiel                          # the map: 12
+finish
+warp 105.6,0.7,-125.3 SeaSerpentGrotto
+trigger qm1                               # the map, no Annals: the Water Leaper popped and claimed, SENSE_OMINOUS_PRESENCE
+trigger qm1                               # the Leaper up: popFromQM false, nil: NOTHING_OUT_OF_ORDINARY
+kill WATER_LEAPER                         # the map held: killed_wsnm 1
+trigger qm1                               # killed_wsnm 1: back to 0, the key item Annals of Truth
+trigger qm1                               # the Annals held, killed_wsnm 0: nil, NOTHING_OUT_OF_ORDINARY
+warp -136.8,-10.8,65.8 SouthernSanDoria
+trigger Balasiel                          # the Annals: 13
+finish                                    # completed: fame +20; map, Annals and guide deleted; Impulse Drive learned, IMPULSE_DRIVE_LEARNED
+trigger Balasiel                          # completed: no section, 667
+finish
+trade Balasiel BoneChip x1                # completed: no trade handler, nothing

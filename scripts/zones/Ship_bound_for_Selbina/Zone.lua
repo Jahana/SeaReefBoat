@@ -1,0 +1,104 @@
+-----------------------------------
+-- Zone: Ship_bound_for_Selbina (220)
+-----------------------------------
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA]
+-----------------------------------
+---@type TZone
+local zoneObject = {}
+
+-- Deck mob slots.
+-- Entry 1 of the Sea Monk and Sea Pugil ids is the fished copy.
+local slots =
+{
+    { id = ID.mob.SEA_CRAB[1] },
+    { id = ID.mob.SEA_CRAB[2] },
+    { id = ID.mob.SEA_PUGIL[2] },
+    { id = ID.mob.SEA_PUGIL[3] },
+    { id = ID.mob.SEA_MONK[2] },
+    { id = ID.mob.SEA_HORROR },
+    { id = ID.mob.PHANTOM, night = true },
+    { id = ID.mob.THUNDER_ELEMENTAL, weather = { xi.weather.THUNDER, xi.weather.THUNDERSTORMS } },
+    { id = ID.mob.WATER_ELEMENTAL, weather = { xi.weather.RAIN, xi.weather.SQUALL } },
+}
+
+zoneObject.onInitialize = function(zone)
+end
+
+zoneObject.onZoneTick = function(zone)
+    xi.ferry.onZoneTick(zone, slots)
+end
+
+zoneObject.onZoneIn = function(player, prevZone)
+    local cs = -1
+
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
+        local position = math.randomInt(-2, 2) + 0.150
+        player:setPos(position, -2.100, 3.250, 64)
+    end
+
+    -- Enagakure pop mechanics.
+    local enagakure = GetMobByID(ID.mob.ENAGAKURE)
+    local hour      = VanadielHour()
+
+    if
+        enagakure and
+        not enagakure:isSpawned() and
+        (hour >= 20 or hour < 4) and
+        player:hasKeyItem(xi.keyItem.SEANCE_STAFF) and
+        xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, 'Prog') == 4
+    then
+        SpawnMob(ID.mob.ENAGAKURE)
+    end
+
+    return cs
+end
+
+zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
+    player:startEvent(255)
+end
+
+zoneObject.onTransportVoyageEnd = function(zone)
+    xi.ferry.onTransportVoyageEnd(zone)
+end
+
+zoneObject.onZoneWeatherChange = function(weather)
+    xi.ferry.onWeatherChange(weather, slots)
+end
+
+zoneObject.onEventUpdate = function(player, csid, option, npc)
+end
+
+zoneObject.onEventFinish = function(player, csid, option, npc)
+    if csid == 255 then
+        player:setPos(0, 0, 0, 0, xi.zone.SELBINA)
+    end
+end
+
+zoneObject.onGameHour = function(zone)
+    -- Enagakure pop mechanics. It appears at night for anyone already aboard, so the
+    -- check also runs here; the spawn point's window handles the despawn.
+    local enagakure = GetMobByID(ID.mob.ENAGAKURE)
+    local hour      = VanadielHour()
+
+    if
+        enagakure and
+        not enagakure:isSpawned() and
+        (hour >= 20 or hour < 4)
+    then
+        for _, player in pairs(zone:getPlayers()) do
+            if
+                player:hasKeyItem(xi.keyItem.SEANCE_STAFF) and
+                xi.quest.getVar(player, xi.questLog.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, 'Prog') == 4
+            then
+                SpawnMob(ID.mob.ENAGAKURE)
+                break
+            end
+        end
+    end
+end
+
+return zoneObject

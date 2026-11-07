@@ -1,0 +1,46 @@
+# Don't Forget the Antidote (outlands): Edigey in Rabao (call-only: scripts/zones/Rabao/npcs/Edigey.lua). He has a
+# default (DefaultActions 50) beside his script, so the lookup alternates his talks: the first plays 50, the next runs
+# his script, and so on; each script turn is the second of a pair. His trades go to the script alone.
+# Selbina-Rabao fame is (San d'Oria + Bastok) * 2 / 3: 168 each is 224 (level 3): the script's 50. 169 each is 225
+# (level 4): a vial traded: available: nothing; 2 (0, 1209); finished on 0: not begun; on 1: begun,
+# DontForgetAntidoteVar 1. Accepted: 3. A pebble alone: nothing; the vial and a pebble: nothing. The vial: 4, finished
+# (the var 1): the var 0, the vial taken, the Desert Hunter title, the Dotanuki, ITEM_OBTAINED, completed, San d'Oria and
+# Bastok fame +5. Completed: 5. A new vial (a GM; the vial is rare): with a pebble: nothing; alone: 4, finished (the var
+# 0): the vial taken, 1800 gil, the fame again.
+char zone=Rabao pos=-34.7,0,-37.9 job=SAM lvl=75
+fame Sandoria 168
+fame Bastok 168
+item VialOfDesertVenom
+item Pebble x2
+login
+trigger Edigey                          # default turn: 50
+finish
+trigger Edigey                          # script, level 3: 50
+finish
+fame Sandoria 169
+fame Bastok 169
+trade Edigey VialOfDesertVenom x1       # available: nothing
+trigger Edigey                          # default turn: 50
+finish
+trigger Edigey                          # script, level 4: 2
+finish option=0                         # not begun
+trigger Edigey                          # default turn: 50
+finish
+trigger Edigey                          # script: 2
+finish option=1                         # begun; the var 1
+trigger Edigey                          # default turn: 50
+finish
+trigger Edigey                          # script, accepted: 3
+finish
+trade Edigey Pebble x1                  # no vial: nothing
+trade Edigey VialOfDesertVenom x1 Pebble x1   # two items: nothing
+trade Edigey VialOfDesertVenom x1       # 4
+finish                                  # the first time: the Dotanuki; completed; fame
+trigger Edigey                          # default turn: 50
+finish
+trigger Edigey                          # script, completed: 5
+finish
+item VialOfDesertVenom                  # a GM: another vial
+trade Edigey VialOfDesertVenom x1 Pebble x1   # completed, two items: nothing
+trade Edigey VialOfDesertVenom x1       # completed: 4
+finish                                  # a repeat: the vial taken; 1800 gil; fame

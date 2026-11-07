@@ -1,0 +1,22 @@
+# The Immortal Lu Shang (outlands 196): Irmilant in Rabao, a quest inside an NPC script that also holds Indomitable Spirit.
+# The rod offer (77), an Accepted trigger and wrong trades that do nothing, the trade (78) completing it, then the offer and
+# the trade again while Completed.
+char zone=Rabao pos=3.78,9.54,56.21
+item PieceOfAncientLumber x2
+item BrokenLuShangsFishingRod x2
+item LightCrystal x2
+login
+trigger Irmilant                # the rod, Available: 77
+finish                          # accepted
+trigger Irmilant                # Accepted: nothing
+finish-if-event
+trade Irmilant PieceOfAncientLumber x1 BrokenLuShangsFishingRod x1   # no crystal: nothing
+finish-if-event
+trade Irmilant PieceOfAncientLumber x1 BrokenLuShangsFishingRod x1 LightCrystal x1   # 78
+finish                          # completed: the rod, the title, 10 fame in two nations
+trigger Irmilant                # Completed, the second rod: 77 again
+finish
+trade Irmilant PieceOfAncientLumber x1 BrokenLuShangsFishingRod x1 LightCrystal x1   # Completed: 78 again
+finish
+trigger Irmilant                # no rod left: nothing
+finish-if-event

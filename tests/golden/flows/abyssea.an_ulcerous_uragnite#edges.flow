@@ -1,0 +1,21 @@
+# An Ulcerous Uragnite (abyssea 178), the edges: a level 99 Warrior in North Gustaberg with The Truth Beckons completed,
+# Traverser Stones 3 and 4 (two stones: `>= 1`), no other maw quest completed (GMs), Dawn of Death available. The maw:
+# no section (Dawn of Death available): 908. Dawn of Death completed (a GM; `>=` accepted): 0, finished on option 1:
+# begun (any option). The title (a GM): the zone-in's 1, its update on option 1: updateEvent(the key item for 0
+# completed: Lunar Abyssite II); finished: it is given, completed.
+lists NorthGustaberg/Cavernous_Maw_2/onTrigger NorthGustaberg/onEventFinish/0 NorthGustaberg/onEventFinish/908 NorthGustaberg/onZoneIn/1 NorthGustaberg/onEventUpdate/1 NorthGustaberg/onEventFinish/1
+char zone=NorthGustaberg pos=-76.5,-0.5,600 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+keyitem TraverserStone3
+keyitem TraverserStone4
+login
+trigger Cavernous_Maw_2                 # Dawn of Death available: no section: 908
+finish                                  # option 0: no warp
+quest Abyssea.DawnOfDeath completed     # a GM
+trigger Cavernous_Maw_2                 # Dawn of Death completed, two stones: 0
+finish option=1                         # begun (any option)
+title AmphitriteShucker                 # a GM
+rezone open                             # 1, left open
+update 1 option=1                       # updateEvent(Lunar Abyssite II)
+finish                                  # Lunar Abyssite II given; completed

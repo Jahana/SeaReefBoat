@@ -1,0 +1,49 @@
+# The Siren's Tear (bastok 0): Wahid and Echo Hawk in Bastok Mines, Otto and Carmelo in Port Bastok. No guard: Wahid's
+# offer 81 (Echo Hawk plays 5 while it is available); while accepted Otto's 5 at Prog 0 and Carmelo's 6 (Prog 1); a
+# Siren's Tear (given here by GM: North Gustaberg's moving qm1 gives it through its own script, with no quest read) at
+# Wahid plays 82 (completed: 150 gil, fame +10, Tearjerker, the tear taken); once completed Carmelo's 19 (Prog under 2, no
+# tear held: Prog 2), and the tear at Wahid plays 82 again, which pays the reward again.
+# Defaults: Wahid 28, Echo Hawk 13, Otto 20, Carmelo 182 (DefaultActions; no scripts). Echo Hawk is Lure of the Wildcat
+# (Bastok)'s (group 9: accepted only); Carmelo is Love and Ice's, A Test of True Love's and Lovers in the Dusk's (C#:
+# Love and Ice needs the Carrier Pigeon Letter seen, the others need Love and Ice completed; all silent here).
+lists BastokMines/Wahid/onTrigger BastokMines/Wahid/onTrade BastokMines/Echo_Hawk/onTrigger BastokMines/onEventFinish/81 BastokMines/onEventFinish/82 PortBastok/Otto/onTrigger PortBastok/Carmelo/onTrigger PortBastok/onEventFinish/6 PortBastok/onEventFinish/19
+char zone=BastokMines pos=26.3,0,-64.9
+item BoneChip
+login
+trade Wahid BoneChip x1              # available: no trade handler in any matching section, nothing
+trigger Echo_Hawk                    # available: 5
+finish
+trigger Wahid                        # the offer, 81
+finish                               # accepted
+trigger Echo_Hawk                    # accepted: no handler, 13
+finish-if-event
+warp -145.9,-7.5,12.2 PortBastok
+trigger Otto                         # Prog 0: 5
+finish
+trigger Carmelo                      # accepted: 6
+finish                               # Prog 1
+trigger Otto                         # Prog 1: nil, 20
+finish-if-event
+trigger Carmelo                      # 6 again (no Prog guard)
+finish                               # Prog 1
+item SirensTear
+warp 26.3,0,-64.9 BastokMines
+trade Wahid BoneChip x1              # accepted, the wrong item: nil
+trade Wahid SirensTear x1            # 82
+finish                               # completed: 150 gil, fame +10, Tearjerker, the tear taken
+trigger Wahid                        # completed: no trigger handler, 28
+finish-if-event
+warp -145.9,-7.5,12.2 PortBastok
+trigger Carmelo                      # completed, Prog 0 (the completion's cleanup), no tear: 19
+finish                               # Prog 2
+trigger Carmelo                      # Prog 2: nil, 182
+finish-if-event
+charvar Quest[1][0]Prog 0
+item SirensTear
+trigger Carmelo                      # Prog 0, the tear held: nil, 182
+finish-if-event
+trigger Otto                         # completed: no handler, 20
+finish-if-event
+warp 26.3,0,-64.9 BastokMines
+trade Wahid SirensTear x1            # completed: 82 again
+finish                               # completed again: 150 gil, fame +10, the tear taken

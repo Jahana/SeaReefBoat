@@ -1,0 +1,73 @@
+# A Test of True Love (bastok 62): Carmelo in Port Bastok, the Treasure Chests of Castle Zvahl Baileys and Keep (Un
+# Moment), Labyrinth of Onzozo (L'Ancienne) and Sea Serpent Grotto (L'Ephemere). The guard (Love and Ice completed,
+# Bastok fame level 6, the quest's own mustZone clear: Love and Ice's completion sets it), the offer 270, 271 until the
+# three pages are held, 272 (Prog 1 and the mustZone), 273 until the zone changes, then 274 and the reward, which sets
+# Lovers in the Dusk's mustZone and takes the pages. Each chest's trade, without its page, is xi.treasure.onTrade with
+# the page as the reward (bypass type 2), and the quest takes the trade (noAction): the zone key opens the chest, and
+# the page arrives 2 s later. With the page held the quest leaves the trade to the chest's own script (a regular
+# opening). A chest is placed 10 s after its zone starts (hence the ticks) and leaves for 3 minutes once opened.
+# Carmelo's default is 182; The Siren's Tear's Prog var is 2 (its last cutscene seen), so it stays silent.
+lists PortBastok/Carmelo/onTrigger PortBastok/Carmelo/onTrade PortBastok/onEventFinish/270 PortBastok/onEventFinish/272 PortBastok/onEventFinish/274 CastleZvahlBaileys/Treasure_Chest/onTrade CastleZvahlKeep/Treasure_Chest/onTrade LabyrinthOfOnzozo/Treasure_Chest/onTrade SeaSerpentGrotto/Treasure_Chest/onTrade
+char zone=PortBastok pos=-146.5,-7.48,13 lvl=75
+fame Bastok 425
+charvar Quest[1][0]Prog 2
+quest Bastok.TheSirensTear completed
+item ZvahlChestKey
+item ZvahlChestKey
+item OnzozoChestKey
+item GrottoChestKey
+item BoneChip
+login
+trade Carmelo BoneChip x1      # available: no trade handler, nothing
+trigger Carmelo                # Love and Ice not completed (its letter never seen): his default 182
+finish
+quest Bastok.LoveAndIce completed
+fame Bastok 424
+trigger Carmelo                # fame 424 (level 5): 182
+finish
+fame Bastok 425
+charvar Quest[1][62]mustZone 236
+trigger Carmelo                # the quest's mustZone set: 182
+finish
+zoneline BastokMarkets         # out and back: the mustZone cleared
+zoneline PortBastok
+trigger Carmelo                # the offer, 270
+finish                         # accepted
+trigger Carmelo                # Prog 0, no pages: 271
+finish
+trade Carmelo BoneChip x1      # accepted: no trade handler, nothing
+warp 110.041,-20.002,106.811 CastleZvahlBaileys
+tick 13000                     # the chest placed
+trigger Treasure_Chest         # walks to the chest (its trigger shows nothing here)
+trade Treasure_Chest BoneChip x1  # no Un Moment, the wrong item: the treasure trade, locked (CHEST_UNLOCKED + 7)
+trade Treasure_Chest ZvahlChestKey x1  # no Un Moment, the key: the chest opens
+tick 4500                      # Un Moment
+warp -299.787,-48,24.873 CastleZvahlKeep
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest ZvahlChestKey x1  # Un Moment held: nil, the chest's own script (a regular opening)
+tick 4500
+warp 50.829,3.684,-27.560 LabyrinthOfOnzozo
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest OnzozoChestKey x1  # no L'Ancienne: the chest opens
+tick 4500                      # L'Ancienne
+warp -146.5,-7.48,13 PortBastok
+trigger Carmelo                # two pages: 271
+finish
+warp 189.673,18.999,30.161 SeaSerpentGrotto
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest GrottoChestKey x1  # no L'Ephemere: the chest opens
+tick 4500                      # L'Ephemere
+warp -146.5,-7.48,13 PortBastok
+trigger Carmelo                # three pages: 272
+finish                         # Prog 1, the mustZone set
+trigger Carmelo                # Prog 1, the mustZone set: 273
+finish
+zoneline BastokMarkets         # out and back: the mustZone cleared
+zoneline PortBastok
+trigger Carmelo                # Prog 1, no mustZone: 274
+finish                         # completed: 10000 gil, fame +70, the pages deleted, Lovers in the Dusk's mustZone set
+trigger Carmelo                # completed: no handler; Lovers in the Dusk waits for its mustZone: 182
+finish

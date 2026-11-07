@@ -1,0 +1,19 @@
+# Save the Children (San d'Oria 1-3, mission.sandoria.save_the_children): section 3's key conjunct. A level 75
+# Warrior of San d'Oria with 1-1 and 1-2 completed and 1-3 current, by Hut_Door; a GM sets Status 3 (the win's
+# status) without the Orcish Hut Key. Hut_Door: section 3 (current, Status 3, the key) fails on the key; section 2
+# (Status below 3) fails too; the battlefields' entry handler: Save the Children wants Status 2 and the zone's other
+# fights do not apply: NO_BATTLEFIELD_ENTRY, and nothing else. The key given (a GM): Hut_Door: section 3 holds,
+# not completed: 55 (NO_BATTLEFIELD_ENTRY beside it, as in the main flow); finished: the key taken, Status 4. No
+# timing or RNG dependency.
+lists GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/onEventFinish/55
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren current
+login
+missionstatus Sandoria 3                # a GM: the win's status, no key
+trigger Hut_Door                        # no key: no section 3: NO_BATTLEFIELD_ENTRY only
+keyitem OrcishHutKey                    # a GM
+trigger Hut_Door                        # section 3, not completed: 55
+finish                                  # the key taken, Status 4

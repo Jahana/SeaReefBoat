@@ -1,0 +1,37 @@
+# Claws of the Griffon (crystalWar 16), the edges: a level 99 Warrior in Southern San d'Oria [S] without Gifts of the
+# Griffon completed (missions as the main flow). Rholont: no section (32). Accepted at Prog 1 (GMs): Jugner Forest [S]
+# from Southern San d'Oria [S]: no zone-in reply; from East Ronfaure [S] at Prog 0 and 2: none. qm6 at Prog 1: nil. Prog
+# 3 (a GM): qm6 202, finished: the NM spawned; Prog 2 (a GM): the NM killed: not Prog 3: Prog stays 2. Prog 4 (a GM)
+# with a full inventory: qm6 203, finished: the Angelstone does not fit: not completed; freed: 203 again: completed.
+lists SouthernSanDoriaS/Rholont/onTrigger JugnerForestS/onZoneIn/1 JugnerForestS/qm6/onTrigger JugnerForestS/Fingerfilcher_Dradzad/onMobDeath JugnerForestS/onEventFinish/202 JugnerForestS/onEventFinish/203
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # Gifts not completed: no section (32)
+finish-if-event
+quest CrystalWar.ClawsOfTheGriffon accepted # a GM
+charvar Quest[7][16]Prog 1              # a GM
+warp 69.511,-0.677,323.781 JugnerForestS # from Southern San d'Oria [S]: no zone-in reply
+trigger qm6                             # Prog 1: nil
+finish-if-event
+charvar Quest[7][16]Prog 0              # a GM
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp 69.511,-0.677,323.781 JugnerForestS # from East Ronfaure [S] at Prog 0: no zone-in reply
+charvar Quest[7][16]Prog 2              # a GM
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp 69.511,-0.677,323.781 JugnerForestS # from East Ronfaure [S] at Prog 2: no zone-in reply
+charvar Quest[7][16]Prog 3              # a GM
+trigger qm6                             # 202
+finish                                  # the NM spawned, claimed
+charvar Quest[7][16]Prog 2              # a GM
+kill FINGERFILCHER_DRADZAD              # Prog 2: no change
+charvar Quest[7][16]Prog 4              # a GM
+fill-inventory
+trigger qm6                             # Prog 4: 203
+finish                                  # no room: not completed
+free-inventory
+trigger qm6                             # 203
+finish                                  # completed

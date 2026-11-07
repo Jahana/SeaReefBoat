@@ -1,0 +1,31 @@
+# Hammering Hearts (crystalWar 14): a level 99 Warrior in Bastok Markets [S] (missions as group 1's flows), a Heavy
+# Quadav Chestplate and a Heavy Quadav Backplate. Scarred Shark 40, finished on options 1 and 2: nothing; 40, option
+# 0: begun. Prog 0: 43 (the reminder). The two: 41, finished: confirmed, Prog 1, the local var NeedToZone 1. Prog 1,
+# not zoned: 44 (no finish). Zoned (the local var gone): 42, finished: completed (the Trainee Hammer); again: 45
+# (replaceDefault).
+lists BastokMarketsS/Scarred_Shark/onTrigger BastokMarketsS/Scarred_Shark/onTrade BastokMarketsS/onEventFinish/40 BastokMarketsS/onEventFinish/41 BastokMarketsS/onEventFinish/42
+char zone=BastokMarketsS pos=-232.489,-2,67.638 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item HeavyQuadavChestplate
+item HeavyQuadavBackplate
+login
+trigger Scarred_Shark                   # available: 40
+finish option=1                         # nothing
+trigger Scarred_Shark                   # 40
+finish option=2                         # nothing (only option 0 begins)
+trigger Scarred_Shark                   # 40
+finish option=0                         # begun
+trigger Scarred_Shark                   # Prog 0: 43
+finish
+trade Scarred_Shark HeavyQuadavChestplate x1 HeavyQuadavBackplate x1 # the two alone: 41
+finish                                  # confirmed; Prog 1; NeedToZone 1
+trigger Scarred_Shark                   # Prog 1, not zoned: 44
+finish
+rezone                                  # the local var gone
+trigger Scarred_Shark                   # Prog 1, zoned: 42
+finish                                  # completed (the Trainee Hammer)
+trigger Scarred_Shark                   # completed: 45 (replaceDefault)
+finish

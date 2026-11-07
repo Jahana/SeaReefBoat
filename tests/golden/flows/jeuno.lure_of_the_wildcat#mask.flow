@@ -1,0 +1,18 @@
+# Lure of the Wildcat (Jeuno) (jeuno 90): utils.mask.isFull(Prog, 20), its edges set by a GM. Accepted with the badge:
+# Prog 0x7FFFF (bit 19 missing, 524287): 10090; 0xFFFFE (bit 0 missing, 1048574): 10090; 0x1FFFFF (all twenty and bit
+# 20, 2097151): 10091 (isFull reads the low 20 bits), finished: completed. After an Event the lookup tries his script
+# first (UseFallback); it starts nothing without the ToAU mission, so the quest's action plays each time.
+lists UpperJeuno/Ajithaam/onTrigger UpperJeuno/onEventFinish/10091
+char zone=UpperJeuno pos=-79.7,0,161.5 job=WAR lvl=20
+quest Jeuno.LureOfTheWildcat accepted
+keyitem WhiteSentinelBadge
+charvar Quest[3][90]Prog 524287
+login
+trigger Ajithaam               # bit 19 missing: 10090
+finish
+charvar Quest[3][90]Prog 1048574 # a GM: bit 0 missing
+trigger Ajithaam               # 10090
+finish
+charvar Quest[3][90]Prog 2097151 # a GM: the low twenty bits and bit 20
+trigger Ajithaam               # isFull: 10091 (Progress: no alternation)
+finish                         # the badge taken, KEYITEM_LOST, completed: the White Invitation Card

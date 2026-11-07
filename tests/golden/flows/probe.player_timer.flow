@@ -1,0 +1,26 @@
+# probe (quest rework P10): a C# quest's player timer (q.Player.Timer, a deferred callback) through the char's own Lua
+# timer binding
+# (CLuaBaseEntity::timer: the deadline now + ms, fired by CAIActionQueue::checkAction on the first tick strictly past
+# it).
+# Embers of His Past (ahtUrhgan 48; on C# since B3b Aht Urhgan group 6, EmbersOfHisPast.cs): accepted at Prog 7,
+# Wajaom Woodlands' zone-in plays 19 (kept open); finished: ITEM_RETURNED (the Hydrangea), Prog 8, and
+# player:timer(1000, function(playerArg) playerArg:setPos(80, -6, -123, 55, xi.zone.AHT_URHGAN_WHITEGATE) end), on C#
+# q.Player.Timer(1000, toWhitegate). 500 ms on: nothing; 1000 ms on, the deadline itself: nothing (not strictly past
+# it); 1500 ms on: the char set down in Aht Urhgan Whitegate (its zone change, 0x00B, in that tick). No login there:
+# Whitegate's zone-in runs C# quests (Such Sweet Sorrow's), and a probe records Lua only.
+# Recorded on the Lua quest in P10, before the port. It replays against EmbersOfHisPast.cs now and can no longer be
+# recorded from Lua: the quest's Lua file is gone (a probe records Lua only, and its key turns no quest off). The port
+# left P10's trace unchanged.
+# engine-small-2: re-recorded on C# (`rerecord`, the trace's recorder csharp-rerecord) when the play time
+# moved onto the steady clock and every login's 0x00A changed; a Lua record refuses, since Embers of His Past on C#
+# answers it (a probe records Lua only).
+# Not a quest port: the key names no quest (Program.IsProbe).
+lists WajaomWoodlands/onZoneIn/1 WajaomWoodlands/onEventFinish/19
+char zone=WajaomWoodlands pos=822,-18,176 job=WAR lvl=75
+quest AhtUrhgan.EmbersOfHisPast accepted
+charvar Quest[6][48]Prog 7
+login open                              # accepted, Prog 7: Wajaom's zone-in 19 (kept open)
+finish                                  # ITEM_RETURNED (Hydrangea), Prog 8; the 1000 ms timer armed
+tick 500                                # 500 ms on: nothing
+tick 500                                # 1000 ms on, the deadline: not strictly past it: nothing
+tick 500                                # 1500 ms on: past it: setPos into Aht Urhgan Whitegate, the zone change

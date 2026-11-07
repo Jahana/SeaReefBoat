@@ -1,0 +1,29 @@
+# The Curious Case of Melvien (adoulin, call-only), Order Up first at Mastan: a level 99 Warrior in Western Adoulin,
+# both quests accepted and Melvien's Turn (GMs). Talks in pairs (his default 525, then his script). Order Up's bit 11
+# unset: its 70 answers first, finished: bit 11 (2048). Then 184 (finished on 0: nothing). The Turn taken (a GM):
+# accepted without the Turn: nothing. The Turn given back, the quest completed (GMs), no Death: nothing.
+lists WesternAdoulin/Mastan/onTrigger WesternAdoulin/onEventFinish/70 WesternAdoulin/onEventFinish/184
+char zone=WesternAdoulin pos=-8.5,0,67.5 job=WAR lvl=99
+quest Adoulin.OrderUp accepted
+quest Adoulin.TheCuriousCaseOfMelvien accepted
+keyitem MelviensTurn
+login
+trigger Mastan                          # 525
+finish-if-event
+trigger Mastan                          # Order Up first: 70
+finish-if-event                         # 70's finish: bit 11 (2048)
+trigger Mastan                          # 525
+finish-if-event option=0
+trigger Mastan                          # bit 11 set: 184
+finish-if-event option=0                # 184 on 0: nothing
+delkeyitem MelviensTurn                 # a GM
+trigger Mastan                          # 525
+finish-if-event
+trigger Mastan                          # accepted, no Turn: nothing: 525
+finish-if-event
+keyitem MelviensTurn                    # a GM
+quest Adoulin.TheCuriousCaseOfMelvien completed  # a GM
+trigger Mastan                          # 525
+finish-if-event
+trigger Mastan                          # completed, the Turn, no Death: nothing: 525
+finish-if-event

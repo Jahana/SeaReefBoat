@@ -1,0 +1,34 @@
+# The Goblin Tailor (jeuno 42): the Hume female (xi.race 2) row of rseTable. Accepted by a GM, a level 75 Hume female
+# Warrior. Week 1001 (`wait vana=180`: day 8008): race 2, location 2: the Maze of Shakhrami's chest opens to the
+# pattern for her (and Gusgen's, last week's location, is the chest's own). Each piece by its option, the pattern from
+# a GM before each talk: CustomVest, CustomFGloves, CustomPants, CustomFBoots; the first completes the quest.
+lists LowerJeuno/Guttrix/onTrigger LowerJeuno/onEventFinish/10016 LowerJeuno/onEventFinish/10018 GusgenMines/Treasure_Chest/onTrade MazeOfShakhrami/Treasure_Chest/onTrade OrdellesCaves/Treasure_Chest/onTrade
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 job=WAR lvl=75 race=2
+quest Jeuno.TheGoblinTailor accepted
+item ShakhramiChestKey
+item GusgenChestKey
+login
+wait vana=180                           # day 8008: week 1001 (race 2, location 2)
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest ShakhramiChestKey x1 # location 2, race 2, no pattern: the Magical Pattern
+tick 4500                               # the chest opened
+delkeyitem MagicalPattern               # a GM
+warp 208.7,-59.2,-101 GusgenMines
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest GusgenChestKey x1  # location 1 is last week's: nil; the chest's own script
+tick 4500                               # the chest opened
+warp -34.5,5.5,-139.7 LowerJeuno
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (0)
+finish option=1                         # the CustomVest; [RSE]Gear 1; completed
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (1)
+finish option=2                         # the CustomFGloves; [RSE]Gear 3
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (3)
+finish option=3                         # the CustomPants; [RSE]Gear 7
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (7)
+finish option=4                         # the CustomFBoots; [RSE]Gear 15

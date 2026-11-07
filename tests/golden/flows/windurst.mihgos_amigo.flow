@@ -1,0 +1,57 @@
+# Mihgo's Amigo (windurst 25): Nanaa Mihgo (Windurst Woods; +99: the first entity of the name is cutscene-only), Bopa
+# Greso, Cha Lebagta. A level-10 WAR (no THF AF quest can answer; Windurst fame stays at level 1, so Rock Racketeer is
+# never available). Available: four necklaces traded (no trade handler in section 1: nothing, kept); 80 (Crying Over
+# Onions not accepted), begun. Accepted: 82; three necklaces, a bone chip: nil (tradeHas needs four); Bopa Greso 84; Cha
+# Lebagta 85 (0, the necklace); Mheca Khetashipah's script 83 and Wani Casdohry's 86 (their status reads); four
+# necklaces and a chip: 88 (200): completed (Cat Burglar Groupie; the four taken, the chip kept; Norg +30; 200 gil).
+# Completed, no mustZone (88 sets none): Nanaa Mihgo nil (her default 76), Cha Lebagta nil (78). Five necklaces: 494
+# (200): completed again; four taken, one kept; the mustZone; Norg +15; 200 gil. While it holds: Nanaa Mihgo 89, Cha
+# Lebagta 91 (0, the necklace), Bopa Greso nil (77: no completed handler). Out to Windurst Waters and back (the mustZone
+# cleared on the zone-in): Nanaa Mihgo nil (76), Cha Lebagta nil (78). Three necklaces while completed: nil.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/Nanaa_Mihgo/onTrade WindurstWoods/Bopa_Greso/onTrigger WindurstWoods/Cha_Lebagta/onTrigger WindurstWoods/onEventFinish/80 WindurstWoods/onEventFinish/88 WindurstWoods/onEventFinish/494
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=WAR lvl=10
+item BoneChip
+item YagudoBeadNecklace x12
+login
+trade Nanaa_Mihgo+99 YagudoBeadNecklace x4     # available, the check holds: no trade handler in section 1: nothing
+trigger Nanaa_Mihgo+99                         # neither THF AF accepted, Crying Over Onions not accepted: 80
+finish                                         # begun
+trigger Nanaa_Mihgo+99                         # accepted: 82
+finish
+trade Nanaa_Mihgo+99 YagudoBeadNecklace x3     # three: nil
+trade Nanaa_Mihgo+99 BoneChip x1               # no necklace: nil
+trigger Bopa_Greso                             # 84
+finish
+trigger Cha_Lebagta                            # 85 (0, Yagudo Bead Necklace)
+finish
+trigger Mheca_Khetashipah                      # her script: Mihgo's Amigo accepted: 83
+finish
+trigger Wani_Casdohry                          # his script: Mihgo's Amigo accepted: 86 (0, 498)
+finish
+trigger Nanaa_Mihgo+99                         # 82
+finish
+trade Nanaa_Mihgo+99 YagudoBeadNecklace x4 BoneChip x1  # four and a chip (tradeHas, not exact): 88 (200)
+finish                                         # completed: the title; the four taken, the chip kept; Norg +30; 200 gil
+trigger Nanaa_Mihgo+99                         # completed, no mustZone: nil; her default 76
+finish
+trigger Cha_Lebagta                            # no mustZone: nil; 78
+finish
+trigger Nanaa_Mihgo+99
+finish
+trade Nanaa_Mihgo+99 YagudoBeadNecklace x5     # completed, five: 494 (200)
+finish                                         # completed again; four taken (one kept); the mustZone; Norg +15; 200 gil
+trigger Nanaa_Mihgo+99                         # the mustZone: 89
+finish
+trigger Cha_Lebagta                            # the mustZone: 91 (0, Yagudo Bead Necklace)
+finish
+trigger Bopa_Greso                             # no completed handler: 77
+finish
+warp -50.9,-6.25,109.3 WindurstWaters
+warp 66.5,-4.75,239.6 WindurstWoods            # the zone-in clears the mustZone (the Waters zone-in did)
+trigger Nanaa_Mihgo+99                         # no mustZone: nil; 76
+finish
+trigger Cha_Lebagta                            # nil; 78
+finish
+trigger Nanaa_Mihgo+99
+finish
+trade Nanaa_Mihgo+99 YagudoBeadNecklace x1 BoneChip x1  # completed, one necklace: nil

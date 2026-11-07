@@ -1,0 +1,15 @@
+# Tutorial, step 4's gil with GIL_RATE: Lua gives 100 x GIL_RATE to npcUtil.giveCurrency, which multiplies by GIL_RATE
+# again and rounds once, at addGil. Prog 4 (a GM), Sword 5: 703. GIL_RATE 1.00390625: 101 gil (rounding 100 x rate first
+# would give 100); GIL_RATE 2: 400 gil.
+lists BastokMarkets/Gulldago/onTrigger BastokMarkets/onEventFinish/703
+char zone=BastokMarkets pos=-362,-10,-167 job=WAR lvl=1 nation=1
+charvar HQuest[Tutorial]Prog 4
+skill Sword 50
+setting GIL_RATE 1.00390625
+login
+trigger Gulldago                        # 703
+finish                                  # 101 gil; Prog 5
+charvar HQuest[Tutorial]Prog 4          # a GM
+setting GIL_RATE 2
+trigger Gulldago                        # 703
+finish                                  # 400 gil; Prog 5

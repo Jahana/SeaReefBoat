@@ -1,0 +1,67 @@
+# A Greeting Cardian (windurst 43): its Kororo and Boizo-Naizo lines next to their scripts, so an Event line and a
+# Progress line differ there. A level-10 WAR at Windurst fame 125. Available (The All-New C-2000 completed), Legendary
+# Plan B accepted by GM: Kororo's script answers 312 on every turn it gets: 296 (Event, no greeting) and 312 take turns;
+# Greeting 1 and Wait = now by GM (no mustZone) after a 296: 298 (Progress) on his script's turn, declined, and again.
+# Accepted by GM at Prog 0, C-2000 accepted again by GM (available first): Kororo's script answers 291, Boizo-Naizo's
+# 290: Kororo 299 (Event), Boizo-Naizo 302 (Event), each against its script; Prog 1 by GM: Kororo 303 (Progress)
+# against 291, with a full bag (not completed), then completed; Kororo 304 (Event), Boizo-Naizo 307 (Event), each
+# against its script.
+lists WindurstWoods/Kororo/onTrigger WindurstWoods/Boizo-Naizo/onTrigger WindurstWoods/onEventFinish/298 WindurstWoods/onEventFinish/303
+char zone=WindurstWoods pos=-10,-2.75,7.5 job=WAR lvl=10
+fame Windurst 125
+quest Windurst.TheAllNewC2000 completed
+quest Windurst.LegendaryPlanB accepted
+login
+trigger Kororo                                # available, no greeting: 296 or 312
+finish
+trigger Kororo
+finish
+trigger Kororo
+finish
+trigger Kororo
+finish
+trigger Kororo                                # 296 again: the next turn is his script's
+finish
+charvar Quest[2][43]Greeting 1
+charvar Quest[2][43]Wait 1800000000
+trigger Kororo                                # 298 (Progress) or 312
+finish option=0
+trigger Kororo
+finish option=0
+quest Windurst.AGreetingCardian accepted
+quest Windurst.TheAllNewC2000 available
+quest Windurst.TheAllNewC2000 accepted
+trigger Kororo                                # accepted, Prog 0: 299 or 291
+finish
+trigger Kororo
+finish
+trigger Kororo
+finish
+walk -9.6,-2.75,-24.5
+trigger Boizo-Naizo                           # 302 or 290
+finish
+trigger Boizo-Naizo
+finish
+trigger Boizo-Naizo
+finish
+walk -10,-2.75,7.5
+charvar Quest[2][43]Prog 1
+trigger Kororo                                # Prog 1, after his 299: 303 (Progress) on his script's turn
+fill-inventory
+finish                                        # the earring does not fit: not completed
+free-inventory
+trigger Kororo                                # Prog 1 again
+finish
+trigger Kororo                                # completed: 304 or 291
+finish
+trigger Kororo
+finish
+trigger Kororo
+finish
+walk -9.6,-2.75,-24.5
+trigger Boizo-Naizo                           # completed: 307 or 290
+finish
+trigger Boizo-Naizo
+finish
+trigger Boizo-Naizo
+finish

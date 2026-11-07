@@ -1,0 +1,25 @@
+# Trial-Size Trial by Lightning (otherAreas 28): the battlefield. A SMN of level 20 with this quest accepted and the
+# Mini Tuning Fork of Lightning. The fork's trade to LP_Entrance opens the entry menu 32000; its update with option 33
+# (index 2, arena 1) registers and enters (the fork taken); the inventory filled by GM inside the arena;
+# Ramuh_Prime_TSTBL of arena 1 (LIGHTNING_GREMLIN+6: mob 17604618) is killed and the win's 32001 opens within the
+# kill step. Its finish runs content:onEventFinishWin, which calls this quest: Ramuh learned (RAMUH_UNLOCKED 0, 0, 5);
+# the Scroll of Instant Warp does not fit (npcUtil.giveItem: ITEM_CANNOT_BE_OBTAINED), the completion goes on:
+# Windurst fame +20, completed. Back in Mhaura, Lacia's default 10021, then her script's 10028. A win while completed
+# (the spell known, the scroll given) is #battlefield_again (a second entry here would land in the won arena, which
+# the char has not left).
+char zone=CloisterOfStorms pos=533.5,-14.9,492.0 job=SMN lvl=20
+quest OtherAreas.TrialSizeTrialByLightning accepted
+item MiniTuningForkOfLightning
+login
+trade LP_Entrance MiniTuningForkOfLightning x1 # the fork: the entry menu 32000
+update 32000 option=33                    # Trial-Size Trial by Lightning (index 2), arena 1: registered, entered
+finish                                    # in the arena
+fill-inventory
+kill LIGHTNING_GREMLIN+6                  # Ramuh_Prime_TSTBL of arena 1: won, 32001 opens
+finish                                    # Ramuh learned; the scroll does not fit; Windurst fame +20; completed
+free-inventory
+warp 30.6,-15.6,56.0 Mhaura
+trigger Lacia                             # UseFallback 0: the default 10021
+finish
+trigger Lacia                             # completed: 10028
+finish

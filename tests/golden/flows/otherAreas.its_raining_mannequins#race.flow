@@ -1,0 +1,17 @@
+# It's Raining Mannequins! (otherAreas 29): the mannequin by race, the other end of HUME_M_MANNEQUIN + race - 1. A Galka
+# (race 8), accepted at Prog 3 by a GM with Wait 1799999940 (now = Wait + 60), holding another race's mannequin (the Hume
+# Male's: not the chosen one, so the hasItem test passes), with one free slot (the bag filled, then grown to 31 by a GM).
+# Fyi 311, finished: completed, the Galka Mannequin (263) with its
+# exdata race 8, ITEM_OBTAINED.
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/onEventFinish/311
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30 race=8
+quest OtherAreas.ItsRainingMannequins accepted
+charvar Quest[4][29]Prog 3
+charvar Quest[4][29]Wait 1799999940
+item HumeMMannequin
+login
+fill-inventory
+storage inventory 31                    # a GM: one free slot (the free-slot test is > 0)
+trigger Fyi_Chalmwoh                    # Prog 3, now = Wait + 60: 311
+finish                                  # completed; the Galka Mannequin (263, exdata race 8); ITEM_OBTAINED
+tick 1000                               # the item's exdata (setExData marks it dirty) is saved on the char's next tick

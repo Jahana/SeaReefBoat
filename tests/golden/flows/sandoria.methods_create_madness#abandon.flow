@@ -1,0 +1,22 @@
+# Methods Create Madness (sandoria 98): accepted by GM with the guide, no spear, no map, starting in Sea Serpent Grotto:
+# qm1 with no map (nil); then Balasiel's 11 with 0, option 0 (nothing), option 1 (no spear: the Spear of Trials given),
+# 11 with 1, option 2 (the quest deleted, available again; the guide deleted, the map not held). Then, polearm skill 0,
+# the char is not offered: the default 667.
+lists SeaSerpentGrotto/qm1/onTrigger SouthernSanDoria/Balasiel/onTrigger SouthernSanDoria/onEventFinish/11
+char zone=SeaSerpentGrotto pos=105.6,0.7,-125.3 job=WAR lvl=75
+quest Sandoria.ASquiresTest completed
+quest Sandoria.ASquiresTestIi completed
+quest Sandoria.AKnightsTest completed
+quest Sandoria.MethodsCreateMadness accepted
+keyitem WeaponTrainingGuide
+login
+trigger qm1                               # accepted, no map: nil, NOTHING_OUT_OF_ORDINARY
+warp -136.8,-10.8,65.8 SouthernSanDoria
+trigger Balasiel                          # accepted, no Annals, no map, no spear: 11 with 0
+finish                                    # option 0: nothing
+trigger Balasiel                          # 11 with 0
+finish option=1                           # option 1, no spear: the Spear of Trials given
+trigger Balasiel                          # the spear held: 11 with 1
+finish option=2                           # the quest deleted, the guide deleted
+trigger Balasiel                          # available, skill 0: not offered, 667
+finish

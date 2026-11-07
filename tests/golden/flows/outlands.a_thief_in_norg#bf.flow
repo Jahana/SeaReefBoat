@@ -1,0 +1,29 @@
+# A Thief in Norg!?'s Waughroon Shrine edges: a level 50 Samurai by BC_Entrance with the Banishing Charm. Available:
+# no zone-in event; the charm traded to BC_Entrance: the battlefield's quest requirement (BattlefieldQuest: the quest
+# accepted, Quest[5][142]Prog 6; status and var reads that stay in Lua) not met: no menu. Accepted at Prog 4 (GMs):
+# the zone-in again (rezone) left open: 2, finished: Prog 5. Prog 5: the charm traded: requiredValue 6 not met: no menu.
+# Prog 6 (a GM): the 32000 menu, area 1 (option 65), the three Gaki killed: won (battlefieldWin 68), 32001 opens in the
+# last kill; the local var set to 67 by a GM with 32001 open (the battlefieldWin operand alone): finished: no helm, no
+# CHARM_DAMAGED, Prog stays 6. (The win with 68 is the main flow's.)
+lists WaughroonShrine/onZoneIn/1 WaughroonShrine/BC_Entrance/onTrade WaughroonShrine/onEventFinish/2 WaughroonShrine/onEventFinish/32001
+char zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=SAM lvl=50
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+item BanishingCharm
+login                                   # available: no zone-in event
+trade BC_Entrance BanishingCharm x1     # available: the battlefield's requirement not met: no menu
+quest Outlands.AThiefInNorg accepted    # a GM
+charvar Quest[5][142]Prog 4             # a GM
+rezone open                             # Prog 4: the zone-in's 2, left open
+finish                                  # Prog 5
+trade BC_Entrance BanishingCharm x1     # Prog 5: requiredValue 6 not met: no menu
+charvar Quest[5][142]Prog 6             # a GM
+trade BC_Entrance BanishingCharm x1     # the 32000 menu
+update 32000 option=65                  # Thief in Norg (index 4), area 1: registered, entered; the charm kept
+finish                                  # in the arena
+kill GAKI
+kill GAKI+1
+kill GAKI+2                             # won: battlefieldWin 68; 32001 opens
+localvar battlefieldWin 67              # a GM, 32001 open
+finish                                  # battlefieldWin 67: nothing; Prog stays 6

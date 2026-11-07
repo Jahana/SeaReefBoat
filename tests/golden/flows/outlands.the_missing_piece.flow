@@ -1,0 +1,50 @@
+# The Missing Piece (outlands 193): Alfesar in Rabao (no script; the default 52), Quicksand Caves' qm5 (no script; the
+# default NOTHING_OUT_OF_ORDINARY; its spawn spot 781.7,-16,-825 is none of positionTable's, so pickNewPosition keeps
+# index 1 as the current one and draws 2 to 5), Charlaimagnat in Northern San d'Oria (no script; the default 702). A
+# level 10 Warrior, Selbina-Rabao fame 224 (level 3), a Bone Chip. Alfesar: the default 52; fame 225 (a GM): a trade
+# while available: no trade handler: nothing; 6 (the fragment), finished: begun; 7 (the fragment). Quicksand Caves: qm5:
+# Prog 1, the qm moved, the Ancient Tablet Fragment (a keyItem reply); qm5 again (where it went): nil: the default.
+# Rabao: Alfesar 8, finished: the fragment taken, the tablet and the letter (addKeyItem), Prog 2, ACCEPTED_KEYITEM (0,
+# tablet, letter); 9 (0, tablet). San d'Oria: Charlaimagnat 703, finished: Wait = 1800000060, Acquirer of Ancient
+# Arcanum, the tablet and the letter taken, Prog 3; 704 (now 1800000000 < Wait); `wait jst=1`: 705; finished with a full
+# inventory: complete false: nothing; freed: 705, finished: completed (the Scroll of Teleport-Altep), San d'Oria and
+# Bastok fame +20 each. Charlaimagnat: no section: 702. Rabao: Alfesar 11 (replaceDefault).
+lists Rabao/Alfesar/onTrigger Rabao/Alfesar/onTrade QuicksandCaves/qm5/onTrigger NorthernSanDoria/Charlaimagnat/onTrigger Rabao/onEventFinish/6 Rabao/onEventFinish/8 NorthernSanDoria/onEventFinish/703 NorthernSanDoria/onEventFinish/705
+char zone=Rabao pos=23.309,8.929,40.887 job=WAR lvl=10
+fame Sandoria 169
+fame Bastok 168                         # Selbina-Rabao (169 + 168) * 2 / 3 = 224
+item BoneChip
+login
+trigger Alfesar                         # fame level 3: the default 52
+finish
+fame Bastok 169                         # a GM: Selbina-Rabao 225: level 4
+trade Alfesar BoneChip x1               # available: no trade handler: nothing
+trigger Alfesar                         # 6 (the fragment)
+finish                                  # begun
+trigger Alfesar                         # Prog 0: 7 (the fragment)
+finish
+warp 783.227,-16,-825.022 QuicksandCaves
+trigger qm5                             # Prog 0: Prog 1; the qm moved; the fragment (keyItem reply)
+trigger qm5                             # Prog 1: nil: the default NOTHING_OUT_OF_ORDINARY
+warp 23.309,8.929,40.887 Rabao
+trigger Alfesar                         # Prog 1: 8
+finish                                  # the fragment taken; the tablet and the letter; Prog 2; ACCEPTED_KEYITEM
+trigger Alfesar                         # Prog 2: 9 (0, tablet)
+finish
+warp 127.703,6.499,109.316 NorthernSanDoria
+trigger Charlaimagnat                   # Prog 2: 703
+finish                                  # Wait = now + 60; the title; the key items taken; Prog 3
+trigger Charlaimagnat                   # now < Wait: 704
+finish
+wait jst=1                              # past Wait
+trigger Charlaimagnat                   # 705
+fill-inventory
+finish                                  # complete false: nothing
+free-inventory
+trigger Charlaimagnat                   # 705
+finish                                  # completed: the scroll; fame +20 San d'Oria, +20 Bastok
+trigger Charlaimagnat                   # completed: no section: the default 702
+finish
+warp 23.309,8.929,40.887 Rabao
+trigger Alfesar                         # completed: 11 (replaceDefault)
+finish

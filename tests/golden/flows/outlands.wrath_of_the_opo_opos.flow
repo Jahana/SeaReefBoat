@@ -1,0 +1,26 @@
+# Wrath of the Opo-Opos (outlands 160): the Cermet Headstone in Yuhtunga Jungle (no script; the default
+# CANNOT_REMOVE_FRAG; Rhapsodies of Zilart 5's monument: not current here). A level 75 Warrior, no Zilart mission, two
+# Garnets, a Bone Chip. Available: the default; a garnet: nothing. Accepted (a GM): TOUCHING_RED_JEWEL; the chip:
+# nothing; a garnet with the chip: nothing; two garnets: nothing; a garnet: 202 (the garnet); finished with a full
+# inventory: complete false: kept; freed: 202, finished: completed (the Opo-opo Necklace, Friend of the Opo-opos), the
+# garnet taken. Completed: the default; a garnet: nothing.
+lists YuhtungaJungle/Cermet_Headstone/onTrigger YuhtungaJungle/Cermet_Headstone/onTrade YuhtungaJungle/onEventFinish/202
+char zone=YuhtungaJungle pos=495.415,19.658,303.495 job=WAR lvl=75
+item Garnet x2
+item BoneChip
+login
+trigger Cermet_Headstone                # no section: the default CANNOT_REMOVE_FRAG
+trade Cermet_Headstone Garnet x1        # no section: nothing
+quest Outlands.WrathOfTheOpoOpos accepted   # a GM
+trigger Cermet_Headstone                # TOUCHING_RED_JEWEL
+trade Cermet_Headstone BoneChip x1      # nothing
+trade Cermet_Headstone Garnet x1 BoneChip x1   # not exactly: nothing
+trade Cermet_Headstone Garnet x2        # two garnets: not exactly: nothing
+trade Cermet_Headstone Garnet x1        # 202 (the garnet)
+fill-inventory
+finish                                  # complete false: the garnet kept
+free-inventory
+trade Cermet_Headstone Garnet x1        # 202
+finish                                  # completed: the necklace, the title; the garnet taken
+trigger Cermet_Headstone                # completed: the default
+trade Cermet_Headstone Garnet x1        # nothing

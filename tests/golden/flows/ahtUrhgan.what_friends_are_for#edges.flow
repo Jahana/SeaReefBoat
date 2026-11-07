@@ -1,0 +1,30 @@
+# What Friends Are For's edges: a level 75 Warrior in Aydeewa Subterrane, the quest accepted at Prog 3 with no stew
+# (GMs): qm9: nil: NOTHING_OUT_OF_ORDINARY; the stew given (a GM): 8, option 0: Prog 4, the stew taken, no map. Nashmau:
+# Tsetseroon at Prog 4 without the map: 20, finished: completed, then the map. Accepted again at Prog 4 (GMs; available
+# first: an accepted over a completed quest stays completed), the map held, a full bag: 20, finished: the bronze piece
+# does not fit: not completed; freed: 20: completed. Accepted at Prog 0 (a GM): Tsetseroon: nil: 4 (the default).
+lists AydeewaSubterrane/qm9/onTrigger AydeewaSubterrane/onEventFinish/8 Nashmau/Tsetseroon/onTrigger Nashmau/onEventFinish/20
+char zone=AydeewaSubterrane pos=-404.4,6.514,-440.237 job=WAR lvl=75
+quest AhtUrhgan.WhatFriendsAreFor accepted
+charvar Quest[6][19]Prog 3
+login
+trigger qm9                             # Prog 3, no stew: nil: NOTHING_OUT_OF_ORDINARY
+keyitem PotOfTsetseroonsStew            # a GM
+trigger qm9                             # Prog 3, the stew: 8
+finish option=0                         # Prog 4; the stew taken; no map
+warp -11.5,-6,68.971 Nashmau
+trigger Tsetseroon                      # Prog 4: 20
+finish                                  # no map: completed, then the map
+quest AhtUrhgan.WhatFriendsAreFor available   # GMs
+quest AhtUrhgan.WhatFriendsAreFor accepted
+charvar Quest[6][19]Prog 4
+fill-inventory
+trigger Tsetseroon                      # Prog 4: 20
+finish                                  # the map held: the bronze piece does not fit: not completed
+free-inventory
+trigger Tsetseroon                      # 20
+finish                                  # the bronze piece; completed
+quest AhtUrhgan.WhatFriendsAreFor available   # GMs
+quest AhtUrhgan.WhatFriendsAreFor accepted
+trigger Tsetseroon                      # accepted, Prog 0: nil: 4
+finish

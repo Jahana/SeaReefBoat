@@ -1,0 +1,67 @@
+# Vegetable Vegetable Crisis (adoulin, call-only): a level 99 Warrior in Western Adoulin, the quest accepted (a GM:
+# nothing begins it, completes it or sets VVC_Status 1), with Pieces of Urunday Lumber (3927), Midrium Ingots (3919),
+# Squares of Raaz Leather (8708), a Damascus Ingot and a Fire Crystal. Chanteillie's talks go in pairs (her default 531,
+# then her script); trades run her script. VVC_Status 0, 2: talk and the three: nothing. Status 1: 5088 (no finish);
+# any two of the three: nothing; the three: 5089, finished: the trade taken, VVC_Status 2, VVC_Gameday_Wait today; then
+# nothing. Completed, available (GMs) at status 1: nothing. Accepted at 1 again with Do Not Go into the Light accepted,
+# its pickaxe and DNGITL_Status 3 (GMs): its 5077 answers the talk first; the five items: its 5076 first (its finish
+# takes its three); then the three: 5089.
+lists WesternAdoulin/Chanteillie/onTrigger WesternAdoulin/Chanteillie/onTrade WesternAdoulin/onEventFinish/5076 WesternAdoulin/onEventFinish/5089
+char zone=WesternAdoulin pos=90.8,-0.65,-75 job=WAR lvl=99
+quest Adoulin.VegetableVegetableCrisis accepted
+item 3927 x4
+item 3919 x4
+item 8708 x4
+item DamascusIngot
+item FireCrystal
+login
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # status 0: nothing: 531
+finish-if-event
+trade Chanteillie 3927 x1 3919 x1 8708 x1   # status 0: nothing
+charvar VVC_Status 2                    # a GM
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # status 2: nothing: 531
+finish-if-event
+trade Chanteillie 3927 x1 3919 x1 8708 x1   # status 2: nothing
+charvar VVC_Status 1                    # a GM
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # status 1: 5088
+finish-if-event                         # no finish arm
+trade Chanteillie 3919 x1 8708 x1       # no lumber: nothing
+trade Chanteillie 3927 x1 8708 x1       # no ingot: nothing
+trade Chanteillie 3927 x1 3919 x1       # no leather: nothing
+trade Chanteillie 3927 x1 3919 x1 8708 x1   # the three: 5089
+finish                                  # the trade taken, VVC_Status 2, VVC_Gameday_Wait today
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # status 2: nothing: 531
+finish-if-event
+charvar VVC_Status 1                    # a GM
+quest Adoulin.VegetableVegetableCrisis completed   # a GM
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # completed at 1: nothing: 531
+finish-if-event
+trade Chanteillie 3927 x1 3919 x1 8708 x1   # completed: nothing
+quest Adoulin.VegetableVegetableCrisis available   # a GM
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # available at 1: nothing: 531
+finish-if-event
+trade Chanteillie 3927 x1 3919 x1 8708 x1   # available: nothing
+quest Adoulin.VegetableVegetableCrisis accepted    # a GM
+quest Adoulin.DoNotGoIntoTheLight accepted   # a GM
+keyitem InventorsCoalitionPickaxe       # a GM
+charvar DNGITL_Status 3                 # a GM
+trigger Chanteillie                     # 531
+finish-if-event
+trigger Chanteillie                     # Do Not Go into the Light first: 5077
+finish-if-event
+trade Chanteillie 3927 x1 DamascusIngot x1 FireCrystal x1 3919 x1 8708 x1   # its 5076 first
+finish                                  # its three taken, the pickaxe again, DNGITL_Status 0
+trade Chanteillie 3927 x1 3919 x1 8708 x1   # VVC at 1: 5089
+finish                                  # the trade taken, VVC_Status 2

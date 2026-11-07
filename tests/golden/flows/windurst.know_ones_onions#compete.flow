@@ -1,0 +1,90 @@
+# Know One's Onions (windurst 40): the reply kinds of sections 1-3. Level 5, Windurst rank 2, fame 125; Truth, Justice,
+# and the Onion Way! and Inspector's Gadget! completed by GM, so Onion Rings (windurst 42, a later container) is
+# available and its offer (no Old Ring) answers Kohlo-Lakolo with 429 (Progress).
+# - Section 1, this quest's char-var mustZone set by GM: its 379 (Event) loses to 429 (finished: Onion Rings Prog 1,
+#   EndTime; it stays available and keeps offering 429). The mustZone cleared by GM, rank 3: 388 (Progress) ties with
+#   429; the lookup plays the first container's, 388 (begun). An Event 388 would lose to 429. Made available again by
+#   GM, rank 2: 391 ties with 429 and plays (begun, Prog 1).
+# - Onion Rings accepted by GM at Prog 0 (no section of it: silent). Truth, Justice, and the Onion Way! made available,
+#   then accepted, by GM (an earlier container, an Event line on every brigade member: 371, 373, 372, 374, 375, 377,
+#   376). Section 2 (Prog 1): each Event line ties with the first quest's: the first quest's on one talk, this quest's
+#   on the other (the lookup's cycle). A Progress line would play on both. Shanruru: the first quest's 377 only.
+# - Section 3 (Prog 2 by GM): the same pairs, Kohlo-Lakolo's 399. The House of the Hero: The Puppet Master accepted by
+#   GM (its 403, an Event); 288 (Progress) beats it (Prog 3); an Event 288 would tie with 403.
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Gomada-Vulmada/onTrigger PortWindurst/Papo-Hopo/onTrigger PortWindurst/Pichichi/onTrigger PortWindurst/Pyo_Nzon/onTrigger PortWindurst/Shanruru/onTrigger PortWindurst/Yafa_Yaa/onTrigger WindurstWalls/_6n2/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+rank 2
+fame Windurst 125
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.InspectorsGadget completed
+charvar Quest[2][40]mustZone 240
+login
+trigger Kohlo-Lakolo                           # 379 (Event, the mustZone) under Onion Rings' 429: 429
+finish                                         # Onion Rings: Prog 1, EndTime 790192656
+charvar Quest[2][40]mustZone 0                 # GM
+rank 3                                         # GM
+trigger Kohlo-Lakolo                           # 388 and 429 tie (both Progress): 388
+finish                                         # begun (Prog 0)
+quest Windurst.KnowOnesOnions available        # GM
+rank 2                                         # GM
+trigger Kohlo-Lakolo                           # 391 and 429 tie: 391
+finish                                         # Prog 1; begun
+quest Windurst.OnionRings accepted             # GM
+charvar Quest[2][42]Prog 0                     # GM: Onion Rings silent
+quest Windurst.TruthJusticeAndTheOnionWay available  # GM: delQuest (addQuest on a completed quest leaves it completed)
+quest Windurst.TruthJusticeAndTheOnionWay accepted   # GM
+trigger Kohlo-Lakolo                           # 371 and 392 tie: 371
+finish
+trigger Kohlo-Lakolo                           # 392
+finish
+trigger Gomada-Vulmada                         # 373 and 394: 373
+finish
+trigger Gomada-Vulmada                         # 394
+finish
+trigger Papo-Hopo                              # 372 and 393: 372
+finish
+trigger Papo-Hopo                              # 393
+finish
+trigger Pichichi                               # 374 and 395: 374
+finish
+trigger Pichichi                               # 395
+finish
+trigger Pyo_Nzon                               # 375 and 396: 375
+finish
+trigger Pyo_Nzon                               # 396
+finish
+trigger Yafa_Yaa                               # 376 and 397: 376
+finish
+trigger Yafa_Yaa                               # 397
+finish
+trigger Shanruru                               # the first quest's 377 only
+finish
+charvar Quest[2][40]Prog 2                     # GM: section 3
+trigger Kohlo-Lakolo                           # 371 and 399: 371
+finish
+trigger Kohlo-Lakolo                           # 399
+finish
+trigger Gomada-Vulmada                         # 373 and 394: 373
+finish
+trigger Gomada-Vulmada                         # 394
+finish
+trigger Papo-Hopo                              # 372 and 393: 372
+finish
+trigger Papo-Hopo                              # 393
+finish
+trigger Pichichi                               # 374 and 395: 374
+finish
+trigger Pichichi                               # 395
+finish
+trigger Pyo_Nzon                               # 375 and 396: 375
+finish
+trigger Pyo_Nzon                               # 396
+finish
+trigger Yafa_Yaa                               # 376 and 397: 376
+finish
+trigger Yafa_Yaa                               # 397
+finish
+quest Windurst.ThePuppetMaster accepted        # GM
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # 288 (Progress) over The Puppet Master's 403
+finish                                         # Prog 3

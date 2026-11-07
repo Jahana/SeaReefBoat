@@ -1,0 +1,43 @@
+# The Setting Sun (sandoria 72): Vamorcote in Northern San d'Oria. Fame 325 (level 5) without Blackmail (only that
+# operand fails): his default 651. Blackmail's Dauperiat (fame 5, rank 1) plays 641, which sets needToZone: available
+# with needToZone (check 3's status operand fails): 651. Blackmail completed by GM, fame 324 (level 4, only the fame
+# operand fails): 651; fame 325: 654 (options [1], [2] the Engraved Key) declined; a key while available (check 1
+# holds; no trade handler, no script: nothing); 654 taken (begun). Accepted: 655 (option [2] the key); a chip (nil), the
+# key and a chip (not exactly: nil), the key (658: completed, 10000 gil, fame +50, the key taken, needToZone set).
+# Completed with needToZone: 659 (replaceDefault); after a rezone: his default 651.
+# Vamorcote has no script; his default is 651. Dauperiat has no script. The Engraved Key comes from outside this quest
+# (by GM here).
+lists NorthernSanDoria/Vamorcote/onTrigger NorthernSanDoria/Vamorcote/onTrade NorthernSanDoria/onEventFinish/654 NorthernSanDoria/onEventFinish/658
+char zone=NorthernSanDoria pos=-135.57,11.999,161.855 job=WAR lvl=10 nation=0
+fame Sandoria 325
+item EngravedKey
+item BoneChip
+login
+trigger Vamorcote                         # Blackmail not completed: not offered; his default 651
+finish
+trigger Dauperiat                         # Blackmail, fame level 5, rank 1: 641
+finish                                    # needToZone set
+trigger Vamorcote                         # available, needToZone: check 3 is completed only; 651
+finish
+rezone                                    # needToZone cleared
+quest Sandoria.Blackmail completed
+fame Sandoria 324
+trigger Vamorcote                         # fame level 4: 651
+finish
+fame Sandoria 325
+trigger Vamorcote                         # fame level 5, Blackmail completed: 654
+finish                                    # option 0: nothing
+trade Vamorcote EngravedKey x1            # available (check 1 holds): no trade handler, no script: nothing
+trigger Vamorcote                         # 654
+finish option=1                           # begun
+trigger Vamorcote                         # accepted: 655
+finish
+trade Vamorcote BoneChip x1               # not the key: nil
+trade Vamorcote EngravedKey x1 BoneChip x1   # not exactly the key: nil
+trade Vamorcote EngravedKey x1            # 658
+finish                                    # completed: 10000 gil, fame +50; the key taken; needToZone
+trigger Vamorcote                         # completed, needToZone: 659 (replaceDefault)
+finish
+rezone                                    # needToZone cleared
+trigger Vamorcote                         # completed, no needToZone: no section; 651
+finish

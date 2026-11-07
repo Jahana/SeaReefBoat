@@ -1,0 +1,36 @@
+# Crest of Davoi (jeuno 0): Baudin in Upper Jeuno. The guard (the Silver Bell), the offer 174 (option 1 begins it,
+# option 0 does not), Baudin's 175 while accepted, the trades (a bone chip: nil; the Slice of Coeurl Meat with a bone
+# chip: npcUtil.tradeHas is not exact, so 171), the completion (the Crest of Davoi key item, fame +7 in San d'Oria,
+# Bastok and Windurst, the meat taken by confirmTrade, the bone chip kept), then 122 (replaceDefault) until Save My
+# Sister is completed, after which this quest returns nil and Save My Sister's 176 answers. A probe at Jeuno fame
+# level 4 (Save My Sister offered) shows which of this quest's 122 and Save My Sister's Lua 172 wins at Baudin.
+# Baudin has no script; his default is 173. Save My Sister needs this quest completed and Jeuno fame level 4 (this char
+# reaches Jeuno fame 10 with the reward: level 1). Save the Clock Tower names Baudin only for a trade while accepted.
+lists UpperJeuno/Baudin/onTrigger UpperJeuno/Baudin/onTrade UpperJeuno/onEventFinish/174 UpperJeuno/onEventFinish/171
+char zone=UpperJeuno pos=-74.9,-1.2,80.0
+item SliceOfCoeurlMeat
+item BoneChip x2
+login
+trigger Baudin                                  # no Silver Bell: no section; his default 173
+finish
+keyitem SilverBell                              # a GM gives the bell
+trade Baudin SliceOfCoeurlMeat x1               # available with the bell: no trade handler, nothing
+trigger Baudin                                  # available with the bell: 174
+finish option=0                                 # not option 1: not begun
+trigger Baudin                                  # 174 again
+finish option=1                                 # begun
+trigger Baudin                                  # accepted: 175
+finish
+trade Baudin BoneChip x1                        # not the meat: nil, nothing
+trade Baudin SliceOfCoeurlMeat x1 BoneChip x1   # the meat (and a chip: tradeHas is not exact): 171
+finish                                          # completed: Crest of Davoi KI, fame +7 x3; the meat taken, the chip kept
+trigger Baudin                                  # completed, Save My Sister not completed: 122 (replaceDefault)
+finish
+fame Sandoria 150                               # raw fame set: Jeuno fame (150+150+150)/2 = 225, level 4: Save My Sister is offered
+fame Bastok 150
+fame Windurst 150
+trigger Baudin                                  # priority probe, 122 (event) against Save My Sister's Lua 172 (progressEvent): 172 wins
+finish                                          # Save My Sister's finish 172: its Prog 1 (it stays available)
+quest Jeuno.SaveMySister completed              # a GM
+trigger Baudin                                  # Save My Sister completed: nil here; Save My Sister's 176 (replaceDefault)
+finish

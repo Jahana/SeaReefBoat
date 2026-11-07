@@ -1,0 +1,33 @@
+# probe (quest rework P6): storage <inventory|satchel> <n>, a container's size: before the login char_storage's column,
+# after it a GM's player:changeContainerSize by the difference. Through The Gobbiebag Parts II and III (jeuno 28 and 29),
+# whose template reads getContainerSize(INVENTORY) (reqsMet: exactly the part's start size; 43's and 73's first
+# parameter) and getContainerSize(MOGSATCHEL) (73's finish grows a satchel the char has). Recorded on the Lua quests; the
+# parts are C# ports now (GobbiebagQuest.cs), so the replay runs against the real ports and the probe can no longer be
+# recorded.
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/Bluffnix/onTrade LowerJeuno/onEventFinish/43 LowerJeuno/onEventFinish/73
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+storage inventory 35                    # Part II's start size (a fresh char has 30)
+storage satchel 30                      # a Mog Satchel (a fresh char has none)
+quest Jeuno.TheGobbiebagPartI completed
+item SquareOfRamLeather
+item MythrilIngot
+item SquareOfWoolCloth
+item Turquoise
+login
+trigger Bluffnix                        # Part II available at 35: 43 (36, 0, 1)
+finish option=0                         # begun
+trade Bluffnix SquareOfRamLeather x1 MythrilIngot x1 SquareOfWoolCloth x1 Turquoise x1 # 73 (41)
+finish                                  # completed: the inventory 40, the satchel 35 (an ITEM_MAX each)
+storage inventory 45                    # a GM: changeContainerSize(INVENTORY, 5)
+trigger Bluffnix                        # Part III's start size is 40, not 45: no section
+finish-if-event
+storage inventory 40                    # a GM: changeContainerSize(INVENTORY, -5)
+storage satchel 0                       # a GM: changeContainerSize(MOGSATCHEL, -35): no satchel
+trigger Bluffnix                        # Part III available at 40: 43 (41, 0, 1)
+finish option=0                         # begun
+item SquareOfBlackTigerLeather          # a GM
+item GoldIngot
+item SquareOfVelvetCloth
+item Painite
+trade Bluffnix SquareOfBlackTigerLeather x1 GoldIngot x1 SquareOfVelvetCloth x1 Painite x1 # 73 (46)
+finish                                  # completed: the inventory 45; no satchel, so no satchel change

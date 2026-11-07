@@ -1,0 +1,47 @@
+# Way of the Cook (otherAreas 1): the time limit. VanadielTime() is the harness's wall clock (1800000000) less the
+# Vana'diel epoch (1009810800): 790189200, moved only by `wait jst=` (86400 s a day). Accepted (a GM) with EndTime set by
+# a GM: 790189201 (1 s left): 78 (1: math.ceil); 790189344 (144 s): 78 (1); 790189345 (145 s): 78 (2: ceil, not floor
+# or round); 790189200 (none left): 79. The trade's own test, both sides: EndTime 790189201: the meat and the chip: 80,
+# the quest made available by a GM while 80 is open: no 80 handler (the trade kept, nothing given); accepted again,
+# EndTime 790189200: 81, finished: completed, the trade taken, 1000 gil, Quest[4][1]DayCompleted 8000. A second run by
+# the clock: made available by a GM, accepted through 76 (EndTime 790199568), 78 (72); `wait jst=1` (86400 s > 10368):
+# 79; the trade: 81, finished: completed, 1000 gil.
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/onEventFinish/76 Mhaura/onEventFinish/80 Mhaura/onEventFinish/81
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.RychardeTheChef completed
+quest OtherAreas.WayOfTheCook accepted
+charvar Quest[4][0]DayCompleted 7992
+fame Windurst 125
+item SliceOfDhalmelMeat x2
+item BeehiveChip x2
+login
+charvar Quest[4][1]EndTime 790189201    # a GM: one second left
+trigger Rycharde                        # 78 (1)
+finish
+charvar Quest[4][1]EndTime 790189344    # 144 s left
+trigger Rycharde                        # 78 (1)
+finish
+charvar Quest[4][1]EndTime 790189345    # 145 s left
+trigger Rycharde                        # 78 (2)
+finish
+charvar Quest[4][1]EndTime 790189200    # none left
+trigger Rycharde                        # currentTime < endTime false: 79
+finish
+charvar Quest[4][1]EndTime 790189201    # a GM: one second left
+trade Rycharde SliceOfDhalmelMeat x1 BeehiveChip x1 # in time: 80
+quest OtherAreas.WayOfTheCook available # a GM, while 80 is open
+finish                                  # no 80 handler while available: nothing (the trade kept, no gil)
+quest OtherAreas.WayOfTheCook accepted  # a GM
+charvar Quest[4][1]EndTime 790189200    # none left
+trade Rycharde SliceOfDhalmelMeat x1 BeehiveChip x1 # late: 81
+finish                                  # completed: fame 20 Windurst, the title; the trade taken; 1000 gil; DayCompleted 8000
+quest OtherAreas.WayOfTheCook available # a GM: the quest again
+trigger Rycharde                        # available: 7992 + 8 <= 8000: 76
+finish option=74                        # EndTime 790199568, begun
+trigger Rycharde                        # 78 (72)
+finish
+wait jst=1                              # the wall clock + 86400 s
+trigger Rycharde                        # past EndTime: 79
+finish
+trade Rycharde SliceOfDhalmelMeat x1 BeehiveChip x1 # late: 81
+finish                                  # completed; 1000 gil

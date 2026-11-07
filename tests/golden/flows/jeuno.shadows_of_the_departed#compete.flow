@@ -1,0 +1,35 @@
+# Shadows of the Departed (jeuno 88): the reply kinds. Ru'Lude Gardens' trigger area 1 has no NPC script, so a reply's
+# kind shows only against another container's: ToAU mission Easterly Winds (current by a GM; its container comes before
+# this quest's) plays progressEvent 10094 there whatever its state; two progressEvents with two csids take turns, where
+# an event would always lose to it. A full bag (fill-inventory) keeps Easterly Winds current (its 10094 finish with
+# option 1 completes it only when the Bronze Pieces are given). A level 75 Warrior, Storms of Fate completed, Zilart
+# Awakening current, brought to status 3, Easterly Winds current: area 1: 10094, then 161 (begun); the three slivers (a
+# GM): 10094, then 162 (completed). The crystals' keyItem actions have no rival on their NPCs (no script, no other
+# container): their kind is not observable.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/161 RuludeGardens/onEventFinish/162
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+quest Jeuno.StormsOfFate completed
+mission Zilart Awakening current
+mission Toau EasterlyWinds current
+login
+warp 120.9,-8,-12 Norg                  # 176: status 1
+warp 39.6,-1.6,-16.6 LowerJeuno         # by _6tc
+trigger _6tc                            # 20
+finish                                  # status 3
+fill-inventory                          # a GM: Easterly Winds kept on its finish
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # 10094 and 161 tie: the first, 10094
+finish option=1                         # kept
+walk 4,2.5,100
+walk 4,2.5,60                           # the turn: 161
+finish                                  # begun
+walk 4,2.5,100
+keyitem PromyvionHollaSliver            # a GM: the three slivers
+keyitem PromyvionDemSliver
+keyitem PromyvionMeaSliver
+walk 4,2.5,60                           # 10094 and 162 tie: 10094 (161's action is not in the list)
+finish option=1                         # kept
+walk 4,2.5,100
+walk 4,2.5,60                           # the turn: 162
+finish                                  # completed

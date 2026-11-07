@@ -1,0 +1,69 @@
+# Face of the Future (crystalWar 61): a level 99 Warrior in Batallia Downs with Chasing Shadows completed and this quest
+# accepted (GMs: Chasing's 117 adds it; the WotG mission The Scent of Battle current, so Cavernous Maws does not answer
+# the maw; other logs as group 1's flows). Jugner Forest from Batallia Downs at Prog 0: 44, finished: Prog 1. Metallic
+# Hodgepodge 45, finished: Prog 2; Prog 2: nil (NOTHING_OUT_OF_ORDINARY). Ghelsba Outpost at Prog 2 (any zone): 57,
+# finished: Prog 3. Clandestine Marking: no Orcish Infiltration Kit: the kit (a key item reply); the kit held: nil (its
+# default, `{ ID.text.NOTHING_OUT_OF_ORDINARY }` with no key: CHECK what it plays). Yughott Grotto: Scrape Mark 1,
+# finished: Prog 4; Prog 4: nil. Everbloom Hollow's 10000 (Prog 5, setPos) is waived in `#edges`: Prog 5 by a GM; the
+# Yughott zone-in at Prog 5 (any zone): 2, finished: Prog 6, the char set down in Ghelsba Outpost. The Batallia Downs
+# maw unlocked by its Batallia Downs [S] twin (no flow statement gives a teleport): the [S] maw's 100 (an optional
+# cutscene of xi.maws.onTrigger), finished on option 1: the PAST_MAW bit 0 (shared by both maws), the char set down in
+# Batallia Downs. The Batallia Downs maw, unlocked, Prog 6: 504, finished: Prog 7, setPos in Batallia Downs; the zone-in
+# at Prog 7: 505, finished: Prog 8, setPos into Xarcabard [S]; there at Prog 8: 40, finished: Prog 9, setPos into
+# Batallia Downs; at Prog 9: 508, finished: Prog 10, setPos in Batallia Downs; at Prog 10: 507, finished: completed (a
+# Griffon Ring, Fangmonger Forestaller), the char set down in Batallia Downs [S]. Each setPos zones the char at the next
+# tick (its own zone too): `tick 400`, then `login open` for the zone-in event.
+lists JugnerForest/onZoneIn/1 JugnerForest/Metallic_Hodgepodge/onTrigger JugnerForest/onEventFinish/44 JugnerForest/onEventFinish/45 GhelsbaOutpost/onZoneIn/1 GhelsbaOutpost/Clandestine_Marking/onTrigger GhelsbaOutpost/onEventFinish/57 YughottGrotto/onZoneIn/1 YughottGrotto/Scrape_Mark/onTrigger YughottGrotto/onEventFinish/1 YughottGrotto/onEventFinish/2 BatalliaDowns/onZoneIn/1 BatalliaDowns/Cavernous_Maw/onTrigger BatalliaDowns/onEventFinish/504 BatalliaDowns/onEventFinish/505 BatalliaDowns/onEventFinish/507 BatalliaDowns/onEventFinish/508 XarcabardS/onZoneIn/1 XarcabardS/onEventFinish/40
+char zone=BatalliaDowns pos=-48,0.1,435 job=WAR lvl=99
+quest CrystalWar.ChasingShadows completed
+quest CrystalWar.FaceOfTheFuture accepted
+mission Wotg TheScentOfBattle current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+warp -285.493,-7.819,-163.707 JugnerForest open # from Batallia Downs at Prog 0: 44, left open
+finish                                  # Prog 1
+trigger Metallic_Hodgepodge             # Prog 1: 45
+finish                                  # Prog 2
+trigger Metallic_Hodgepodge             # Prog 2: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+warp 55.474,-2.046,36.147 GhelsbaOutpost open # Prog 2 (any zone): 57, left open
+finish                                  # Prog 3
+trigger Clandestine_Marking             # no kit: the Orcish Infiltration Kit (a key item reply)
+finish-if-event
+trigger Clandestine_Marking             # the kit held: nil (the default)
+finish-if-event
+warp -7.817,0.132,-62.194 YughottGrotto # Prog 3: no zone-in reply
+trigger Scrape_Mark                     # Prog 3: 1
+finish                                  # Prog 4
+trigger Scrape_Mark                     # Prog 4: nil (the instance's entry is not here)
+finish-if-event
+charvar Quest[7][61]Prog 5              # a GM: what Everbloom Hollow's 10000 does
+rezone open                             # Prog 5 (any zone): 2, left open
+finish                                  # Prog 6; setPos into Ghelsba Outpost
+tick 400
+login                                   # the zone change: Ghelsba Outpost (Prog 6: no zone-in reply)
+warp -48,0.1,435 BatalliaDownsS         # the Batallia Downs [S] maw
+trigger Cavernous_Maw                   # the PAST_MAW bit 0 not held: its 100 (xi.maws.onTrigger, an optional cutscene)
+finish option=1                         # the bit added (xi.maws.addMaw); setPos into Batallia Downs
+tick 400
+login                                   # the zone change: Batallia Downs (Prog 6: no zone-in reply)
+warp -48,0.1,435 BatalliaDowns          # the same spot: for the flow checker's zone (Prog 6: no zone-in reply)
+trigger Cavernous_Maw                   # the maw unlocked, Prog 6: 504
+finish                                  # Prog 7; setPos in Batallia Downs
+tick 400
+login open                              # the zone change: Prog 7: 505, left open
+finish                                  # Prog 8; setPos into Xarcabard [S]
+tick 400
+login open                              # the zone change: Xarcabard [S] at Prog 8: 40, left open
+finish                                  # Prog 9; setPos into Batallia Downs
+tick 400
+login open                              # the zone change: Batallia Downs at Prog 9: 508, left open
+finish                                  # Prog 10; setPos in Batallia Downs
+tick 400
+login open                              # the zone change: Prog 10: 507, left open
+finish                                  # completed (a Griffon Ring, Fangmonger Forestaller); setPos into BD [S]
+tick 400
+login                                   # the zone change: Batallia Downs [S]

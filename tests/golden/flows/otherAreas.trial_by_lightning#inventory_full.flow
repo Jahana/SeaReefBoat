@@ -1,0 +1,33 @@
+# Trial by Lightning (otherAreas 27), 10019's free-slot test (getFreeSlotsCount() == 0) on both sides: accepted by GM
+# at fame level 1 (the fame is read only while available), the whisper held, a full inventory: option 1 is refused
+# (ITEM_CANNOT_BE_OBTAINED Ramuh's Staff, not completed, the whisper kept), option 0 and option 7 likewise
+# (ITEM_CANNOT_BE_OBTAINED 0). Options 5 (10000 gil) and 6 (the Ramuh spell) need no slot: user ruling 2026-11-04 (kept
+# Lua bugs), the test is `option ~= 5 and option ~= 6`, so with a full inventory each completes (the Lua's `or` always
+# held and refused them too, ITEM_CANNOT_BE_OBTAINED 0). Between them a GM's delQuest and addQuest and the whisper
+# again. With one free slot (the bag grown by one; the test is == 0): option 1 completes, Quest[4][27]Prog 1 (GM) kept
+# (the raw player:completeQuest).
+char zone=Mhaura pos=30.6,-15.6,56.0 job=WAR lvl=75
+quest OtherAreas.TrialByLightning accepted
+keyitem WhisperOfStorms
+login
+fill-inventory
+trigger Ripapa                            # accepted, the whisper: 10019 (0, fork, 5, 0, 0)
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (Ramuh's Staff)
+trigger Ripapa                            # 10019
+finish option=0                           # no free slot: ITEM_CANNOT_BE_OBTAINED 0
+trigger Ripapa                            # 10019
+finish option=7                           # no free slot: ITEM_CANNOT_BE_OBTAINED 0
+trigger Ripapa                            # 10019
+finish option=5                           # 10000 gil (no slot needed); the title, the whisper taken; completed
+quest OtherAreas.TrialByLightning available # a GM: delQuest
+quest OtherAreas.TrialByLightning accepted  # a GM: addQuest
+keyitem WhisperOfStorms                   # a GM
+trigger Ripapa                            # 10019 (0, fork, 5, 0, 0)
+finish option=6                           # the Ramuh spell (no slot needed): RAMUH_UNLOCKED; completed
+quest OtherAreas.TrialByLightning available # a GM
+quest OtherAreas.TrialByLightning accepted  # a GM
+keyitem WhisperOfStorms                   # a GM
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0, so it gives
+charvar Quest[4][27]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Ripapa                            # 10019 (0, fork, 5, 0, 32: the spell held)
+finish option=1                           # Ramuh's Staff; completed; Quest[4][27]Prog kept

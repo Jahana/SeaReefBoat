@@ -1,0 +1,55 @@
+# In Defiant Challenge (jeuno 128, limit break 1): Maat in Ru'Lude Gardens (the first of four of that name; his script
+# acts only at BeatAroundTheBushin 5; default MAAT_DIALOG), the ??? qm10-qm12 in Crawlers' Nest, qm18-qm20 in Garlaige
+# Citadel, qm7-qm9 in The Eldieme Necropolis (no script, no default). A level 50 Warrior, level cap 50 (a new char's
+# genkai), MAX_LEVEL 99, OLDSCHOOL_G1 false. Available: a stone (no trade handler: nothing), 79 answered 0 and 2
+# (not 1: nothing), then 1 (begun). Accepted: 80; a stone (not the three: nil). Crawlers' Nest: the three crumbs, the
+# third fusing them (COMBINE_INTO_A_CLUMP, the clump); qm10 again (the clump held: no crumb; no set: nothing).
+# Garlaige Citadel: two fragments, the third with a full bag (ITEM_CANNOT_BE_OBTAINED, the fragments kept), qm20 again
+# with room (fragment 3 held: none given; fused, the chunk). The Eldieme Necropolis: the three shreds in reverse order
+# (the fusing text names shred 1). A GM gives one key item of each set back (lingering key items). Maat: two of the
+# items, then the three and a stone (not exactly the three: nil), then the three (81: completed, Horizon Breaker, the
+# nine key items cleared, the trade confirmed, level cap 55); Atop the Highest Mountains then answers (cap 55, level
+# 50 < 51: MAAT_LB2_PLACEHOLDER); a GM's cap 50 again: this quest completed, no section: MAAT_DIALOG; a stone: nothing.
+# The ??? return nil after acting (handleQMTrigger returns nothing).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/79 RuludeGardens/onEventFinish/81 CrawlersNest/qm10/onTrigger CrawlersNest/qm11/onTrigger CrawlersNest/qm12/onTrigger GarlaigeCitadel/qm18/onTrigger GarlaigeCitadel/qm19/onTrigger GarlaigeCitadel/qm20/onTrigger TheEldiemeNecropolis/qm7/onTrigger TheEldiemeNecropolis/qm8/onTrigger TheEldiemeNecropolis/qm9/onTrigger
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=50
+item FlintStone
+login
+trade Maat FlintStone x1                # available (level 50, cap 50): no trade handler, nothing
+trigger Maat                            # 79
+finish option=0                         # not 1: nothing
+trigger Maat                            # 79
+finish option=2                         # not 1: nothing
+trigger Maat                            # 79
+finish option=1                         # begun
+trigger Maat                            # accepted: 80
+finish
+trade Maat FlintStone x1                # accepted, not the three: nil
+warp -81.9,-8.2,79.1 CrawlersNest
+trigger qm10                            # Exoray Mold Crumb 1
+trigger qm11                            # Crumb 2
+trigger qm12                            # Crumb 3; the set: crumbs taken, COMBINE_INTO_A_CLUMP, the Clump of Exoray Mold
+trigger qm10                            # the clump held: no crumb; no set: nothing
+warp -11.9,-1.2,191.7 GarlaigeCitadel
+trigger qm18                            # Bomb Coal Fragment 1
+trigger qm19                            # Fragment 2
+fill-inventory
+trigger qm20                            # Fragment 3; the set, no free slot: ITEM_CANNOT_BE_OBTAINED (the fragments kept)
+free-inventory
+trigger qm20                            # Fragment 3 held: none given; the set, room: fused, COMBINE_INTO_A_CHUNK, the Chunk of Bomb Coal
+warp 93.8,-32,-64.7 TheEldiemeNecropolis
+trigger qm9                             # Ancient Papyrus Shred 3
+trigger qm8                             # Shred 2
+trigger qm7                             # Shred 1; the set: PUT_TOGUETHER_TO_COMPLETE (shred 1), the Piece of Ancient Papyrus
+keyitem ExorayMoldCrumb2                # a GM: a lingering key item of each set
+keyitem BombCoalFragment1
+keyitem AncientPapyrusShred3
+warp 12.4,3.1,119.5 RuludeGardens
+trade Maat ClumpOfExorayMold x1 ChunkOfBombCoal x1  # two of the three: not exactly: nil
+trade Maat ClumpOfExorayMold x1 ChunkOfBombCoal x1 PieceOfAncientPapyrus x1 FlintStone x1  # the three and a stone: not exactly: nil
+trade Maat ClumpOfExorayMold x1 ChunkOfBombCoal x1 PieceOfAncientPapyrus x1  # exactly the three: 81
+finish                                  # completed: Horizon Breaker, the lingering key items cleared, the items taken, level cap 55
+trigger Maat                            # cap 55: Atop the Highest Mountains, level 50: MAAT_LB2_PLACEHOLDER
+levelcap 50                             # a GM: cap 50 again
+trigger Maat                            # this quest completed (level 50, cap 50): no section; MAAT_DIALOG
+trade Maat FlintStone x1                # completed: nothing

@@ -1,0 +1,35 @@
+# Promotion: First Lieutenant's area-12 5080 against The Prankster's (Lua; accepted at Prog 1 by GMs) area-12 3
+# (Progress), in a GM-made state out of play order: Second Lieutenant completed, AssaultPromotion 25. Equal ranks play the
+# first container first (file order: Promotion_First_Lieutenant before The_Prankster), then rotate; an Event 5080 would
+# lose to 3. Area 12: 5080, finished: begun; again: 3, finished: The Prankster's Prog 2. Then Abquhbah: exactly five Imperial
+# Gold Pieces (Prog 0, Wait 0): 5081: taken, Wait today.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/12 AhtUrhganWhitegate/Abquhbah/onTrade
+char zone=AhtUrhganWhitegate pos=27.5,-6,-120 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant completed
+quest AhtUrhgan.PromotionSecondLieutenant completed
+quest AhtUrhgan.ThePrankster accepted
+charvar Quest[6][60]Prog 1
+charvar AssaultPromotion 25
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialGoldPiece
+login
+tick 1000
+tick 1000
+tick 1000
+walk 27.5,-6,-125                       # area 12: 5080 and 3 tie: 5080 (the first container)
+finish                                  # begun
+walk 27.5,-6,-120
+walk 27.5,-6,-125                       # 3 alone
+finish                                  # The Prankster's Prog 2
+warp 37.024,-6.601,-62 AhtUrhganWhitegate
+trade Abquhbah ImperialGoldPiece x5     # exactly five: 5081
+finish                                  # taken; Wait today

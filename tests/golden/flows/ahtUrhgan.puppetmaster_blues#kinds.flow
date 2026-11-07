@@ -1,0 +1,36 @@
+# Puppetmaster Blues' replies, two triggers each, the quest reset between the two when its finish moves it: Iruki-Waraki's
+# available 782 at exactly level 50 (the gate is >= 50), Prog 2 (783), Prog 3 784 and Prog 4 785, and Sajhra's 291 at
+# Prog 4. A lone reply shows its kind here: a Progress event plays again (782, 782; 784, 784; 291, 291), an Event is
+# followed by his script's reply (783, then 777; 785, then 777; Iruki's own default event is 259). The rivals flows
+# (no_strings_attached#rivals, #kinds2) show the kinds against other quests.
+lists AhtUrhganWhitegate/Iruki-Waraki/onTrigger Nashmau/Sajhra/onTrigger
+char zone=AhtUrhganWhitegate pos=101.329,-6,-29.042 job=PUP lvl=50
+quest AhtUrhgan.OperationTeatime completed
+login
+trigger Iruki-Waraki                    # available at level 50: 782 (Progress)
+finish                                  # begun
+quest AhtUrhgan.PuppetmasterBlues available
+trigger Iruki-Waraki                    # 782 again
+finish
+charvar Quest[6][29]Prog 2
+trigger Iruki-Waraki                    # Prog 2: 783 (Event)
+finish
+trigger Iruki-Waraki                    # his script: 777
+finish
+charvar Quest[6][29]Prog 3
+trigger Iruki-Waraki                    # Prog 3: 784 (Progress)
+finish                                  # Prog 4
+charvar Quest[6][29]Prog 3
+trigger Iruki-Waraki                    # 784 again
+finish
+trigger Iruki-Waraki                    # Prog 4: 785 (Event)
+finish
+trigger Iruki-Waraki                    # his script: 777
+finish
+warp 14.83,0,-59.5 Nashmau
+charvar Quest[6][29]Prog 4
+trigger Sajhra  # 291 (Progress)
+finish  # Prog 5
+charvar Quest[6][29]Prog 4
+trigger Sajhra  # 291 again: Progress beats his script (an Event would give 220)
+finish

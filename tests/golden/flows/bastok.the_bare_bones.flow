@@ -1,0 +1,23 @@
+# The Bare Bones (bastok 38): Degenhard and Biggorf in Bastok Markets. The offer, Biggorf's 257 while accepted, the bone
+# chip trade, the key item and exp reward, no repeat. Degenhard's own script answers what the quest does not.
+lists BastokMarkets/Degenhard/onTrigger BastokMarkets/Degenhard/onTrade BastokMarkets/Biggorf/onTrigger BastokMarkets/onEventFinish/256 BastokMarkets/onEventFinish/258
+char zone=BastokMarkets pos=-173,2,-135
+item BoneChip x3
+item CopperIngot
+login
+trade Degenhard BoneChip x1     # available: no quest trade handler, his script's onTrade (false)
+trigger Biggorf                 # available: his default 126
+finish
+trigger Degenhard               # the offer, 256
+finish                          # accepted
+trigger Biggorf                 # accepted: 257
+finish
+trigger Degenhard               # accepted: no quest action, his default 255
+finish
+trade Degenhard CopperIngot x1  # the wrong item: nothing
+trade Degenhard BoneChip x1     # 258
+finish                          # completed: the Map of the Dangruf Wadi, 2000 exp, fame 20, a chip gone
+trigger Biggorf                 # completed: 126
+finish
+walk -173,2,-135                # back to Degenhard (a trade does not walk to the NPC)
+trade Degenhard BoneChip x1     # completed: nothing

@@ -1,0 +1,10 @@
+# To Catch a Falling Star (windurst 53), completion parity: 199's finish is the Lua's raw player:completeQuest (after
+# the trade; then the fame, the shield, the prog), so a GM's Quest[2][53]Prog survives the completion (quest:cleanup,
+# which a called Quest.Complete() runs, would clear it). Accepted (GM) with the Starfall Tear beside Sigismund.
+char zone=PortWindurst pos=-109.04,-9.0,80.56 job=WAR lvl=75
+item StarfallTear
+login
+quest Windurst.ToCatchAFallingStar accepted
+charvar Quest[2][53]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Sigismund StarfallTear x1         # accepted, the tear alone: 199
+finish                                  # the tear taken; completed; fame 20; the Fish Scale Shield; prog 2; Prog kept

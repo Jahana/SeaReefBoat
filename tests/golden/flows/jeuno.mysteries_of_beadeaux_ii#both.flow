@@ -1,0 +1,22 @@
+# Mysteries of Beadeaux II (jeuno 32): both quests accepted (I's 89, with the Silver Bell): each trade handler answers
+# only its own item. A shell: I's tradeMatches fails (nil), II's 92 (the necklace, fame +7 x3); finished: II completed,
+# I still accepted. A charm: I's 91 (the rosary); finished: I completed. II set available, then accepted, by a GM; a
+# shell: 92 (the necklace already held, fame +7 x3, the shell taken); 92 open with II completed by a GM: no 92 handler
+# (no KEYITEM_OBTAINED).
+lists LowerJeuno/Sattal-Mansal/onTrigger LowerJeuno/Sattal-Mansal/onTrade LowerJeuno/onEventFinish/89 LowerJeuno/onEventFinish/91 LowerJeuno/onEventFinish/92
+char zone=LowerJeuno pos=42.6,3.9,-54 job=WAR lvl=75
+keyitem SilverBell
+item QuadavCharm
+item QuadavAuguryShell x2
+login
+trigger Sattal-Mansal               # I available: 89 (0)
+finish                              # I begun; II added
+trade Sattal-Mansal QuadavAuguryShell x1 # I: nil; II: the necklace, fame +7 x3; 92
+finish                              # II completed; KEYITEM_OBTAINED
+trade Sattal-Mansal QuadavCharm x1  # I: the rosary, fame +7 x3; 91 (II completed: no section)
+finish                              # I completed; KEYITEM_OBTAINED
+quest Jeuno.MysteriesOfBeadeauxIi available # a GM (accepted over a completed quest would leave it completed)
+quest Jeuno.MysteriesOfBeadeauxIi accepted # a GM
+trade Sattal-Mansal QuadavAuguryShell x1 # II: the necklace (already held), fame +7 x3; 92
+quest Jeuno.MysteriesOfBeadeauxIi completed # a GM, while 92 is open
+finish                              # no 92 finish while completed: no message

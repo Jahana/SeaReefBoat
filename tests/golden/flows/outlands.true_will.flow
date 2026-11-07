@@ -1,0 +1,89 @@
+# True Will (outlands): call-only, Ryoma in Norg, Leodarion in Rabao, Yhoator Jungle's qm3 and the three Kappa NMs
+# (scripts/zones/Norg/npcs/Ryoma.lua, Rabao/npcs/Leodarion.lua, Yhoator_Jungle/npcs/qm3.lua, Yhoator_Jungle/mobs/Kappa_*.lua).
+# Ryoma (94) and Leodarion (89) have a default beside their script: the lookup alternates their talks (the first plays
+# the default, the next runs the script, the default after a script turn that starts nothing); a zone change starts the
+# pairs again. qm3 has none. Kuftal Tunnel's Treasure Coffer (the Large Trick Box) stays Lua: a GM here.
+# A level 75 Ninja, Twenty in Pirate Years completed, I'll Take the Big Box accepted (GMs: its Ryoma 135 is offered
+# only while it is available). Ryoma: a trade: nothing (no onTrade); Big Box accepted: nothing. Completed (a GM): 136,
+# finished: begun. Leodarion, trueWillCS 0: nothing. qm3: CHILL_RUNS_DOWN, the three Kappas popped (claimed); again while
+# up: CHILL_RUNS_DOWN (popFromQM refuses). Akuso dies (Bonze, Biwa alive): no count; Bonze (Biwa alive): no count; Biwa
+# (the last): trueWillKilledNM 1. qm3: the Old Trick Box, the var 0; again (held): NOTHING_OUT_OF_ORDINARY. Ryoma: 137,
+# finished: trueWillCS 1; 138. Leodarion: 97, finished: the Old Trick Box taken, trueWillCS 2; 98. The Large Trick Box
+# (a GM: the coffer): 99 (not 98); the inventory full: the completion fails (the chainmail's message), the box kept.
+# trueWillCS 3 and no box (GMs): nothing; the box again (a GM): 99; with room: the Ninja Chainmail, Norg fame +20, the
+# title, trueWillCS cleared, the box taken. Completed: Leodarion: nothing; Ryoma: nothing; qm3: NOTHING_OUT_OF_ORDINARY.
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+quest Outlands.TwentyInPirateYears completed
+quest Outlands.ILlTakeTheBigBox accepted
+item Pebble
+login
+trade Ryoma Pebble x1                   # no onTrade: nothing
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, Big Box accepted: nothing (94 after it)
+finish
+quest Outlands.ILlTakeTheBigBox completed   # a GM
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script: 136
+finish                                  # begun
+warp -49.513,7.999,41.323 Rabao
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, trueWillCS 0: nothing (89 after it)
+finish
+warp 204.5,0.1,82 YhoatorJungle
+trigger qm3                             # CHILL_RUNS_DOWN; the three popped and claimed
+trigger qm3                             # up: CHILL_RUNS_DOWN (no pop)
+kill KAPPA_AKUSO                        # Bonze and Biwa alive: no count
+kill KAPPA_BONZE                        # Biwa alive: no count
+kill KAPPA_BIWA                         # the last: trueWillKilledNM 1
+trigger qm3                             # the Old Trick Box; the var 0
+trigger qm3                             # the box held: NOTHING_OUT_OF_ORDINARY
+warp -26.276,0.53,-8.323 Norg
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, the Old Trick Box, trueWillCS 0: 137
+finish                                  # trueWillCS 1
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, trueWillCS 1: 138
+finish
+warp -49.513,7.999,41.323 Rabao
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, trueWillCS 1: 97
+finish                                  # the Old Trick Box taken; trueWillCS 2
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, 2, no Large Trick Box: 98
+finish
+keyitem LargeTrickBox                   # a GM: Kuftal Tunnel's coffer
+fill-inventory
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, 2 and the Large Trick Box: 99
+finish                                  # no room: the completion fails; the box kept
+free-inventory
+delkeyitem LargeTrickBox                # a GM
+charvar trueWillCS 3                    # a GM
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, 3, no Large Trick Box: nothing (89 after it)
+finish
+keyitem LargeTrickBox                   # a GM
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, 3 and the Large Trick Box: 99
+finish                                  # the Ninja Chainmail; fame +20; the title; trueWillCS cleared; the box taken
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, completed: nothing (89 after it)
+finish
+warp -26.276,0.53,-8.323 Norg
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, completed, trueWillCS 0, no box: nothing (94 after it)
+finish
+warp 204.5,0.1,82 YhoatorJungle
+trigger qm3                             # completed: NOTHING_OUT_OF_ORDINARY

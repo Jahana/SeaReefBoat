@@ -1,0 +1,18 @@
+# Scars of Abyssea (abyssea 175), the edges: a level 99 Warrior in Port Jeuno with A Journey Begins completed (GM).
+# Available, none of the three begun: no section: nothing. A Delectable Demon accepted alone (a GM): 337, finished on
+# option 1: begun (any option). The quest available again and A Delectable Demon available (GMs), A Fluttery Fiend
+# completed alone: 337, finished: begun.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/337
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+login
+trigger Joachim                         # available, none of the three begun: nothing
+finish-if-event
+quest Abyssea.ADelectableDemon accepted             # a GM
+trigger Joachim                         # A Delectable Demon accepted: 337
+finish option=1                         # begun (any option)
+quest Abyssea.ScarsOfAbyssea available           # a GM
+quest Abyssea.ADelectableDemon available            # a GM
+quest Abyssea.AFlutteryFiend completed            # a GM
+trigger Joachim                         # A Fluttery Fiend completed: 337
+finish                                  # begun

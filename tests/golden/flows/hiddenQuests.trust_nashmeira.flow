@@ -1,0 +1,15 @@
+# Trust: Nashmeira (hidden quest TrustNashmeira): a level 99 Warrior in Aht Urhgan Whitegate. The Imperial Whitegate (no
+# script; default GATE_IS_FIRMLY_CLOSED). ToAU The Empress Crowned completed (setup). No permit: the default message.
+# The Windurst Trust Permit (a GM): 5092 (text_table 0); finished on 1: nothing; again, finished on 2: Nashmeira
+# learned, YOU_LEARNED_TRUST. Learned: the default message.
+lists AhtUrhganWhitegate/Imperial_Whitegate/onTrigger AhtUrhganWhitegate/onEventFinish/5092
+char zone=AhtUrhganWhitegate pos=152.8,-4.2,0 job=WAR lvl=99
+mission Toau TheEmpressCrowned completed
+login
+trigger Imperial_Whitegate              # no permit: GATE_IS_FIRMLY_CLOSED
+keyitem WindurstTrustPermit             # a GM
+trigger Imperial_Whitegate              # 5092
+finish option=1                         # not 2: nothing
+trigger Imperial_Whitegate              # 5092
+finish option=2                         # Nashmeira learned, YOU_LEARNED_TRUST
+trigger Imperial_Whitegate              # learned: GATE_IS_FIRMLY_CLOSED

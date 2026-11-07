@@ -1,0 +1,110 @@
+# Chocobo's Wounds (jeuno 4): the door _6t2 in Lower Jeuno; Brutus, Osker and the Chocobo (the first NPC named
+# Chocobo: 17776650; ChocoboA-D and two cutscene-only Chocobos are others) in Upper Jeuno. The door's 64 while offered,
+# Brutus's 71 (argument 1; option 0: Declined 1; then argument 0; option 1: begun, Prog 1), then the six feedings:
+# Prog 1 wildgrass with a bone chip (57: not exact before Prog 3), the Timer (73), Prog 2 (58), two clumps at Prog 3
+# (not exact: nil), one clump (99, taken), 59, 60, 64 (completed: the Chocobo License key item, Chocobo Trainer, fame
+# +7 x3, the clump taken). Between them Brutus 65 / 66 / 102, Osker 103 / 51 / 52 / 49 / 46 / 47, the chocobo 62 / 63,
+# the door 63 from Prog 4, the greens (76), a bone chip (noAction). Completed (Save My Son not): Brutus 22, the
+# chocobo 61, Osker 53.
+# The lookup (interaction_lookup.lua onHandler): an Event-priority quest action and the NPC's own script take turns
+# (fallbackVar), the script's turn falling back to the action when the script does nothing. Brutus's script plays
+# 66 (main level) while Chocobo's Wounds is not completed, so his quest events alternate with it; the chocobo's script
+# plays 38 for a Gysahl Greens trade, alternating with the quest's 76. Osker's and the door's scripts act only for A
+# New Dawn (nothing here). Progress actions (71, 57, ...) and noAction always win.
+# The Timer is GetSystemTime() + 45: `wait jst=1` moves the harness's wall clock a day (tick does not). A trade does
+# not walk: after a wait the flow walks beside the Chocobo first. A bone chip traded to the door and to Brutus while
+# offered: no trade handler, nil.
+# Chocobo on the Loose (Brutus's 10093 Progress offer from level 20 while ToAU is on) is set completed: it has no
+# completed section. Axe the Competition needs a great axe skill this char lacks.
+# Not recorded: Prog 0 (only a GM's accepted state; a Lua-bug arm). eventTable[0] is nil, but that is no error at the
+# index: the chocobo's trade (Prog <= 2) and Osker build an Event action with a nil id, and only Event:perform's
+# startEvent(nil) errors, when that action wins (the trade's progress action always; Osker's, since his script acts
+# only for A New Dawn). The C# throws at the lookup (KeyNotFound), kept under the Lua-bug precedent.
+lists LowerJeuno/_6t2/onTrigger UpperJeuno/Brutus/onTrigger UpperJeuno/Chocobo/onTrigger UpperJeuno/Chocobo/onTrade UpperJeuno/Osker/onTrigger UpperJeuno/onEventFinish/71 UpperJeuno/onEventFinish/57 UpperJeuno/onEventFinish/58 UpperJeuno/onEventFinish/99 UpperJeuno/onEventFinish/59 UpperJeuno/onEventFinish/60 UpperJeuno/onEventFinish/64
+char zone=LowerJeuno pos=-80.7,-7.65,-168.8 lvl=20
+quest Jeuno.ChocoboOnTheLoose completed
+item BunchOfGysahlGreens x2
+item ClumpOfGausebitWildgrass x8
+item BoneChip
+login
+trigger _6t2                                            # available, level 20: 64
+finish
+trade _6t2 BoneChip x1                                  # available: no trade handler, nil (its script: nothing)
+warp -55.5,8.2,97.5 UpperJeuno
+trigger Brutus                                          # available, Declined 0: 71 (1)
+finish option=0                                         # not 1: Declined 1
+trade Brutus BoneChip x1                                # available: no trade handler, nil (his script has none)
+trigger Brutus                                          # 71 (0)
+finish option=1                                         # begun, Prog 1
+trigger Brutus                                          # Prog 1: 65 (the lookup's turn)
+finish
+trigger Brutus                                          # the script's turn: his 66 (20)
+finish
+trigger Osker                                           # Prog 1: 103
+finish
+trigger Chocobo                                         # Prog 1: 62
+finish
+trade Chocobo BoneChip x1                               # no greens, no wildgrass: noAction, nothing
+trade Chocobo BunchOfGysahlGreens x1                    # greens: 76 (the lookup's turn)
+finish
+trade Chocobo BunchOfGysahlGreens x1                    # the script's turn: its 38
+finish
+trade Chocobo ClumpOfGausebitWildgrass x1 BoneChip x1   # Prog 1, no Timer: 57 (not exact before Prog 3)
+finish                                                  # Prog 2, Timer now + 45; nothing taken
+trade Chocobo ClumpOfGausebitWildgrass x1               # the Timer runs: 73
+finish
+trigger Brutus                                          # Prog 2: 66 (the lookup's turn; no argument)
+finish
+trigger Osker                                           # Prog 2: 51
+finish
+wait jst=1                                              # the Timer has run out
+walk -59.8,8.2,92.9                                     # beside the Chocobo: a trade does not walk
+trade Chocobo ClumpOfGausebitWildgrass x1               # Prog 2: 58
+finish                                                  # Prog 3, Timer
+trigger Osker                                           # Prog 3: 52
+finish
+trigger Chocobo                                         # Prog 3: 62
+finish
+warp -80.7,-7.65,-168.8 LowerJeuno
+trigger _6t2                                            # Prog 3: nil; the door's default 64 (its script: nothing)
+finish-if-event
+warp -55.5,8.2,97.5 UpperJeuno
+wait jst=1
+walk -59.8,8.2,92.9                                     # beside the Chocobo: a trade does not walk
+trade Chocobo ClumpOfGausebitWildgrass x2               # Prog 3, two clumps: not exact, nil (the script: nothing)
+trade Chocobo ClumpOfGausebitWildgrass x1               # one clump: 99
+finish                                                  # Prog 4, Timer, the clump taken
+trigger Chocobo                                         # Prog 4: 63
+finish
+trigger Osker                                           # Prog 4: 49
+finish
+warp -80.7,-7.65,-168.8 LowerJeuno
+trigger _6t2                                            # Prog 4: 63
+finish
+warp -55.5,8.2,97.5 UpperJeuno
+wait jst=1
+walk -59.8,8.2,92.9                                     # beside the Chocobo: a trade does not walk
+trade Chocobo ClumpOfGausebitWildgrass x1               # Prog 4: 59
+finish                                                  # Prog 5, the clump taken
+trigger Osker                                           # Prog 5: 46
+finish
+wait jst=1
+walk -59.8,8.2,92.9                                     # beside the Chocobo: a trade does not walk
+trade Chocobo ClumpOfGausebitWildgrass x1               # Prog 5: 60
+finish                                                  # Prog 6, the clump taken
+trigger Osker                                           # Prog 6: 47
+finish
+trigger Brutus                                          # Prog 6: 102 (the lookup's turn)
+finish
+trigger Brutus                                          # the script's turn: his 66 (20)
+finish
+wait jst=1
+walk -59.8,8.2,92.9                                     # beside the Chocobo: a trade does not walk
+trade Chocobo ClumpOfGausebitWildgrass x1               # Prog 6: 64
+finish                                                  # completed: Chocobo License KI, Chocobo Trainer, fame +7 x3, the clump taken
+trigger Brutus                                          # completed (Save My Son not): 22 (his script: nothing now)
+finish
+trigger Chocobo                                         # 61
+finish
+trigger Osker                                           # 53
+finish

@@ -1,0 +1,19 @@
+# Lure of the Wildcat (Jeuno) (jeuno 90): finishes outside their state. 10088 open, the quest set accepted by a GM: no
+# 10088 handler while accepted (no badge). Renik's 10086 open, the quest set available by a GM: no 10086 handler while
+# available (no bit). Ajithaam's 10091 open (accepted, all twenty bits, the badge), the quest set completed by a GM: no
+# 10091 handler while completed (the badge kept, no KEYITEM_LOST).
+lists UpperJeuno/Ajithaam/onTrigger UpperJeuno/Renik/onTrigger UpperJeuno/onEventFinish/10088 UpperJeuno/onEventFinish/10086 UpperJeuno/onEventFinish/10091
+char zone=UpperJeuno pos=-79.7,0,161.5 job=WAR lvl=20
+login
+trigger Ajithaam               # available: 10088
+quest Jeuno.LureOfTheWildcat accepted # a GM, while 10088 is open
+finish                         # no 10088 finish while accepted: no badge
+trigger Renik                  # accepted, bit 8 unset: 10086
+quest Jeuno.LureOfTheWildcat available # a GM, while 10086 is open
+finish                         # no 10086 finish while available: no bit
+quest Jeuno.LureOfTheWildcat accepted # a GM
+keyitem WhiteSentinelBadge     # a GM
+charvar Quest[3][90]Prog 1048575 # a GM: all twenty bits
+trigger Ajithaam               # 10091
+quest Jeuno.LureOfTheWildcat completed # a GM, while 10091 is open
+finish                         # no 10091 finish while completed: the badge kept

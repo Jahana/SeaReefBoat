@@ -1,0 +1,77 @@
+# Chasing Dreams' edges: a level 75 Warrior, accepted by a GM at Prog 0, An Explorer's Footsteps completed (a GM).
+# Norg: Sohyon at Prog 0 and 3: 213; Washu at Prog 3: nil: the default 80. Korroloka Tunnel at Prog 2 (no flask): _4t1,
+# _4t3: CLAM_EMPTY; the flask (a GM) with _4t2's bit already set (Option 8, a GM): _4t2: CLAM_EMPTY. Prog 4 (a GM): Sohyon
+# without the water: nil (the default 212); with the water and the key (GMs): nil (212); Gimb without the key: nil (his
+# script's 69); Port Bastok: Kagetora at Prog 4: 324. Prog 5: Patient_Wheel's talk: nil (the default 325); five gems: nil.
+# Prog 6: four gems: nil; five gems and a Bone Chip: nil. Selbina at Prog 6 and 8: Abelard nil: An Explorer's Footsteps'
+# 48 (replaceDefault). Lufaise Meadows at Prog 7 and 9: no zone-in event. Rabao: Zoriboh at Prog 4 and 8: nil (the default
+# 127). Prog 9: Zoriboh 121 finished with a full inventory: complete false (no room for the ring): still accepted; 121
+# again: completed.
+# The Sahagin's Key's deliberate log write (user ruling 2026-11-04): Gimb's 69 adds it while available, so this
+# trace is a csharp-rerecord of its Lua recording (lua-at kept), the difference its log entry only.
+lists Norg/Sohyon/onTrigger Norg/Washu/onTrigger Norg/Gimb/onTrigger KorrolokaTunnel/_4t1/onTrigger KorrolokaTunnel/_4t2/onTrigger KorrolokaTunnel/_4t3/onTrigger PortBastok/Kagetora/onTrigger PortBastok/Patient_Wheel/onTrigger PortBastok/Patient_Wheel/onTrade Selbina/Abelard/onTrigger LufaiseMeadows/onZoneIn/1 Rabao/Zoriboh/onTrigger Rabao/onEventFinish/121
+char zone=Norg pos=47.286,-6.282,13.873 job=WAR lvl=75
+quest OtherAreas.AnExplorersFootsteps completed
+quest Outlands.ChasingDreams accepted
+item EasternGem x9
+item BoneChip
+login
+trigger Sohyon                          # Prog 0: 213
+finish
+charvar Quest[5][199]Prog 3             # a GM
+trigger Sohyon                          # Prog 3: 213
+finish
+trigger Washu                           # Prog 3: nil: the default 80
+finish
+charvar Quest[5][199]Prog 2             # a GM
+warp -25.17,-5.915,187.851 KorrolokaTunnel
+trigger _4t1                            # no flask: CLAM_EMPTY
+trigger _4t3                            # no flask: CLAM_EMPTY
+keyitem WashusFlask                     # a GM
+charvar Quest[5][199]Option 8           # a GM: bit 3 (_4t2's) set
+trigger _4t2                            # its bit set: CLAM_EMPTY
+charvar Quest[5][199]Prog 4             # a GM
+warp 47.286,-6.282,13.873 Norg
+trigger Sohyon                          # Prog 4, no water: nil: the default 212
+finish
+keyitem FlaskOfClamWater                # a GM
+keyitem StoreroomKey                    # a GM
+trigger Sohyon                          # the water and the key: nil: the default
+finish
+delkeyitem StoreroomKey                 # a GM
+trigger Gimb                            # no key: nil: his script's 69 (The Sahagin's Key added)
+finish
+warp -94.579,-2.299,30.463 PortBastok
+trigger Kagetora                        # Prog 4: 324
+finish
+charvar Quest[5][199]Prog 5             # a GM
+trigger Patient_Wheel                   # Prog 5: nil: the default 325
+finish
+trade Patient_Wheel EasternGem x5       # Prog 5: nil
+charvar Quest[5][199]Prog 6             # a GM
+trade Patient_Wheel EasternGem x4       # four gems: nil
+trade Patient_Wheel EasternGem x5 BoneChip x1   # not the gems alone: nil
+warp -52.121,-11.338,-13.067 Selbina
+trigger Abelard                         # Prog 6: nil: An Explorer's Footsteps' 48 (replaceDefault)
+finish
+charvar Quest[5][199]Prog 8             # a GM
+trigger Abelard                         # Prog 8: nil: 48
+finish
+charvar Quest[5][199]Prog 7             # a GM
+warp 458,6,-4 LufaiseMeadows            # Prog 7: no zone-in event
+charvar Quest[5][199]Prog 9             # a GM
+rezone                                  # Prog 9: no zone-in event
+warp 119.593,8,50.945 Rabao
+charvar Quest[5][199]Prog 4             # a GM
+trigger Zoriboh                         # Prog 4: nil: the default 127
+finish
+charvar Quest[5][199]Prog 8             # a GM
+trigger Zoriboh                         # Prog 8: nil: the default
+finish
+charvar Quest[5][199]Prog 9             # a GM
+trigger Zoriboh                         # 121
+fill-inventory
+finish                                  # complete false (no room for the ring): still accepted
+free-inventory
+trigger Zoriboh                         # 121
+finish                                  # completed

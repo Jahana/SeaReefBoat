@@ -1,0 +1,46 @@
+# Better Part of Valor (crystalWar 12), the rival at Leadavox: a level 99 Warrior in Vunkerl Inlet [S] with a Gnole
+# Claw, The Fighting Fourth completed, Better Part of Valor accepted at Prog 2 and Her Memories: Operation Cupid (group
+# 10, Lua) accepted at Prog 1 with the Pot of Martial Relish (GMs; missions as the main flow). Cupid answers Leadavox's
+# talk with 5 (an Event, oncePerZone) while the pot is held, and his trade only with its three items exactly (none
+# here). BPoV 101 (Progress) over Cupid's 5: 101, finished: Prog 3. 102 and 5 tie (Events): Cupid's 5 plays first
+# (its container comes first), then 102; 5 drops for the zone: 102. The claw: 103 (Cupid has no answer to it),
+# finished: Prog 4. Prog 4: no BPoV section, 5 already shown: his default 100. A rezone: 5 again (Cupid alone). Prog 2
+# again (a GM): 101 over 5; finished: Prog 3; the tie once more (the rezone reset the rotation): 5, then 102.
+lists VunkerlInletS/Leadavox/onTrigger VunkerlInletS/Leadavox/onTrade VunkerlInletS/onEventFinish/101 VunkerlInletS/onEventFinish/103
+char zone=VunkerlInletS pos=208.581,-32.002,315.458 job=WAR lvl=99
+item GnoleClaw
+keyitem PotOfMartialRelish
+quest CrystalWar.TheFightingFourth completed
+quest CrystalWar.BetterPartOfValor accepted
+charvar Quest[7][12]Prog 2
+quest CrystalWar.HerMemoriesOperationCupid accepted
+charvar Quest[7][68]Prog 1
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Leadavox                        # Prog 2: 101 over Cupid's 5
+finish                                  # Prog 3
+trigger Leadavox                        # 102 and 5 tie: Cupid's 5 first
+finish
+trigger Leadavox                        # then 102
+finish
+trigger Leadavox                        # 5 shown this zone: 102
+finish
+trade Leadavox GnoleClaw x1             # Prog 3, the claw alone: 103
+finish                                  # the trade confirmed; the Xhifhut; Prog 4
+trigger Leadavox                        # Prog 4: no BPoV section; 5 shown this zone: his default 100
+finish-if-event
+rezone
+trigger Leadavox                        # Cupid's 5 alone
+finish
+charvar Quest[7][12]Prog 2              # a GM
+rezone
+trigger Leadavox                        # 101 over 5
+finish                                  # Prog 3
+trigger Leadavox                        # the tie: 5 first again
+finish
+trigger Leadavox                        # then 102
+finish

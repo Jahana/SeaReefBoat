@@ -1,0 +1,21 @@
+# Beyond Infinity (jeuno 137) completed (a GM, before login), level cap 99, MAX_LEVEL 99, no Limit Breaker. Main, a
+# level 99 Warrior: no Job Breaker: 10240 (99, 2); option 0: nothing; 10240 again, option 28: the Job Breaker; then held:
+# event 10045 (99, 2, 0, 0). Low, a level 98 Warrior: event 10045 (98, 2, 0, 0) (level 98 < 99). Martial Mastery (level
+# 96 and a combat skill at 357) is silent: a fresh char's skills are 0.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10240
+char zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=99
+char low zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=98
+levelcap 99
+quest Jeuno.BeyondInfinity completed
+low: levelcap 99
+low: quest Jeuno.BeyondInfinity completed
+login
+trigger Nomad_Moogle                    # level 99, no Job Breaker: 10240 (99, 2)
+finish option=0                         # not 28: nothing
+trigger Nomad_Moogle                    # 10240 (99, 2)
+finish option=28                        # the Job Breaker
+trigger Nomad_Moogle                    # the Job Breaker held: event 10045 (99, 2, 0, 0)
+finish
+low: login
+low: trigger Nomad_Moogle               # level 98: event 10045 (98, 2, 0, 0)
+low: finish

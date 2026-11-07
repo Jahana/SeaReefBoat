@@ -1,0 +1,21 @@
+-----------------------------------
+-- Area: Tahrongi Canyon
+--   NM: Herbage Hunter
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 15)
+    mob:addImmunity(xi.immunity.DARK_SLEEP)
+    mob:addImmunity(xi.immunity.LIGHT_SLEEP)
+    mob:addImmunity(xi.immunity.TERROR)
+    mob:addImmunity(xi.immunity.PLAGUE)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    xi.hunts.checkHunt(mob, player, 259)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 431 })
+end
+
+return entity

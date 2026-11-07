@@ -1,0 +1,32 @@
+# The First Meeting (bastok 52): accepted (GM), a MNK 75 (Bilopdop and Deloknok at once would kill a 50). Hide Flap (2):
+# more than 1 yalm away CLOSER_TO_SEARCH; close (trigger at=0.5) 108: declined (option 1), then without the Letter from
+# Dalzakk YOU_FIND_NOTHING; the zone-in to Fei'Yin from Davoi (nothing), from Qubia Arena without the letter (16, answered
+# 0: the letter) and with it (nothing); then 108 with the letter spawns Bilopdop (claimed) and Deloknok (enmity), again
+# while they are up YOU_FIND_NOTHING; their deaths set nmKilled bits 0 and 1 (a local var, not in the trace); 108 with
+# nmKilled 3 gives the San d'Orian Martial Arts Scroll, and once it is held YOU_FIND_NOTHING.
+lists Davoi/Hide_Flap_2/onTrigger Davoi/onEventFinish/108 Davoi/Bilopdop/onMobDeath Davoi/Deloknok/onMobDeath Feiyin/onZoneIn/1 Feiyin/onEventFinish/16
+char zone=Davoi pos=-126,4,20 job=MNK lvl=75
+quest Bastok.GhostsOfThePast completed
+quest Bastok.TheFirstMeeting accepted
+login
+trigger Hide_Flap_2             # 1.5 yalms away: CLOSER_TO_SEARCH
+trigger Hide_Flap_2 at=0.5      # close: 108
+finish option=1                 # option 1: nothing
+trigger Hide_Flap_2 at=0.5      # 108
+finish                          # no scroll, nmKilled 0, no letter: YOU_FIND_NOTHING
+warp -180,-24,-187 Feiyin       # from Davoi: no event
+warp -241.046,-25.86,19.991 QubiaArena
+warp -180,-24,-187 Feiyin       # from Qubia Arena, no letter: 16, answered 0: the Letter from Dalzakk
+warp -241.046,-25.86,19.991 QubiaArena
+warp -180,-24,-187 Feiyin       # from Qubia Arena, the letter held: no event
+warp -126,4,20 Davoi
+trigger Hide_Flap_2 at=0.5      # 108
+finish                          # the letter, neither NM spawned: YOU_FIND_NOTHING, Bilopdop claimed, Deloknok on enmity
+trigger Hide_Flap_2 at=0.5      # 108
+finish                          # the NMs up: YOU_FIND_NOTHING
+kill BILOPDOP                   # no scroll: nmKilled bit 0
+kill DELOKNOK                   # no scroll: nmKilled bit 1, so 3
+trigger Hide_Flap_2 at=0.5      # 108
+finish                          # nmKilled 3: the San d'Orian Martial Arts Scroll
+trigger Hide_Flap_2 at=0.5      # 108
+finish                          # the scroll held: YOU_FIND_NOTHING

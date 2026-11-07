@@ -1,0 +1,9 @@
+# Mimeo Stone, leaving the zone with the stone: the sixth Luminant (16806295): the stone. A warp to Tavnazian Safehold:
+# the zone-out (section 2: the stone held): MIMEO_JEWEL_OFFSET + 4 (the Attohwa text), the stone taken. The zone
+# change clears the char's timers (~CCharEntity): 90001 ms later nothing runs.
+lists AttohwaChasm/Luminant/onTrigger AttohwaChasm/onZoneOut/1
+char zone=AttohwaChasm pos=442,19,-32 job=WAR lvl=75
+login
+trigger Luminant+5                      # the stone; the timer
+warp 0,0,0 TavnazianSafehold            # the zone-out: MIMEO_JEWEL_OFFSET + 4; the stone taken
+tick 90001                              # the timer cleared by the zone change: nothing

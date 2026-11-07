@@ -1,0 +1,34 @@
+# Promotion: Superior Private's Warhorse Hoofprints. The Hoofprints of Wajaom Woodlands, Bhaflau Thickets, Mount Zhayolm
+# and Caedarva Mire load hidden (npcs.yaml gives no status: DISAPPEAR) and show only once the Dark Rider's run has left
+# them (globals/dark_rider.lua: its rests move and hide them, its despawn shows them); a GM shows each one here
+# (`npcstatus ... normal`, a GM's npc:setStatus). Accepted (a GM), no hoofprint: Wajaom's Hoofprint: the Dark Rider
+# Hoofprint (quest:keyItem: KEYITEM_OBTAINED). Bhaflau's with the hoofprint held: section 2 off: the default
+# WARHORSE_HOOFPRINT. Each other zone with the key item taken by a GM: Bhaflau, Mount Zhayolm, Caedarva Mire: the key
+# item again (each zone's handler). Hidden (the load's status): a release only, no handler runs.
+lists WajaomWoodlands/Warhorse_Hoofprint/onTrigger BhaflauThickets/Warhorse_Hoofprint/onTrigger MountZhayolm/Warhorse_Hoofprint/onTrigger CaedarvaMire/Warhorse_Hoofprint/onTrigger
+char zone=WajaomWoodlands pos=-619.539,-10.483,-69.223 job=WAR lvl=1
+quest AhtUrhgan.PromotionSuperiorPrivate accepted
+charvar AssaultPromotion 25
+login
+trigger Warhorse_Hoofprint              # hidden: a release only
+finish-if-event
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # accepted, no hoofprint: the Dark Rider Hoofprint (KEYITEM_OBTAINED)
+finish-if-event
+warp 461.666,-14.926,256.214 BhaflauThickets
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # the hoofprint held: section 2 off: the default WARHORSE_HOOFPRINT
+finish-if-event
+delkeyitem DarkRiderHoofprint           # a GM
+trigger Warhorse_Hoofprint              # no hoofprint: the key item
+finish-if-event
+delkeyitem DarkRiderHoofprint           # a GM
+warp 2.5,0,0 MountZhayolm
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # no hoofprint: the key item
+finish-if-event
+delkeyitem DarkRiderHoofprint           # a GM
+warp 414.686,-20.778,-114.026 CaedarvaMire
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # no hoofprint: the key item
+finish-if-event

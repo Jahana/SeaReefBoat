@@ -1,0 +1,72 @@
+# Chocobo's Wounds (jeuno 4) with its era module (quest rework B3b Jeuno, P4): modules/era/lua/quests/jeuno/
+# chocobos_wounds.lua, enabled by its condition xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0), replaces
+# state 2's Upper Jeuno Chocobo onTrade (73 while Timer >= VanadielUniqueDay(), where the quest has Timer >
+# GetSystemTime()) and the finishes 57, 58, 59, 60 and 99 (Timer = VanadielUniqueDay(), where the quest has
+# GetSystemTime() + 45). The harness's clocks are apart: `wait jst=1` moves the wall clock (GetSystemTime) a day and
+# leaves the Vana'diel clock; `wait vana=<hours>` moves the Vana'diel clock only (it starts at hour 12 of day 8000).
+# Each arm of the module's trade: a bone chip (no wildgrass: noAction), the greens (76), the wildgrass with a bone chip
+# at Prog 1 (Timer 0 < today: 57, not exact before Prog 3), the wildgrass the same Vana'diel day (Timer == today: 73,
+# the >= at equality), a wall-clock day later the same Vana'diel day (73, where the quest's own feeds), the next
+# Vana'diel day with the wall clock still (58: Timer < today, where the quest's own plays 73), two clumps at Prog 3
+# (not exact: nil), one (99), the same day (73), then 59, 60 and 64 a Vana'diel day apart (64 is the quest's own
+# finish: completed). Each module finish writes Timer = VanadielUniqueDay() and Prog; 59 / 60 / 99 take the clump.
+# Brutus 71 / 65 / 22 and Osker 103 / 53 around them: the patched container goes to the end of the lookup lists, as
+# modifyInteractionEntry leaves it (the lists line shows it on Brutus, Osker and the Chocobo, which other quests share).
+# The condition's false side (ENABLE_SOA 1 or RESTRICT_CONTENT 0) cannot be a module flow: the harness fails a flow
+# whose module is not enabled. The quest's own flows (jeuno.chocobos_wounds, #level19) are that side.
+module modules/era/lua/quests/jeuno/chocobos_wounds.lua
+lists LowerJeuno/_6t2/onTrigger UpperJeuno/Brutus/onTrigger UpperJeuno/Chocobo/onTrigger UpperJeuno/Chocobo/onTrade UpperJeuno/Osker/onTrigger UpperJeuno/onEventFinish/71 UpperJeuno/onEventFinish/57 UpperJeuno/onEventFinish/58 UpperJeuno/onEventFinish/99 UpperJeuno/onEventFinish/59 UpperJeuno/onEventFinish/60 UpperJeuno/onEventFinish/64
+char zone=UpperJeuno pos=-55.5,8.2,97.5 lvl=20
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.ChocoboOnTheLoose completed
+item BunchOfGysahlGreens
+item ClumpOfGausebitWildgrass x8
+item BoneChip
+login
+trigger Brutus                                          # available: 71 (1)
+finish option=1                                         # begun, Prog 1
+trigger Brutus                                          # Prog 1: 65 (the lookup's turn)
+finish
+trigger Osker                                           # Prog 1: 103
+finish
+trigger Chocobo                                         # Prog 1: 62 (the quest's own)
+finish
+trade Chocobo BoneChip x1                               # no greens, no wildgrass: noAction, nothing
+trade Chocobo BunchOfGysahlGreens x1                    # greens: 76 (the lookup's turn)
+finish
+trade Chocobo ClumpOfGausebitWildgrass x1 BoneChip x1   # Prog 1, Timer 0 < today: 57 (not exact before Prog 3)
+finish                                                  # Timer = VanadielUniqueDay(), Prog 2; nothing taken
+trade Chocobo ClumpOfGausebitWildgrass x1               # Timer == today: 73
+finish
+wait jst=1                                              # the wall clock a day on, the same Vana'diel day
+walk -59.8,8.2,92.9                                     # beside the Chocobo: a trade does not walk
+trade Chocobo ClumpOfGausebitWildgrass x1               # still today: 73 (the quest's own would feed: 58)
+finish
+wait vana=12                                            # the next Vana'diel day (hour 0), the wall clock still
+walk -59.8,8.2,92.9
+trade Chocobo ClumpOfGausebitWildgrass x1               # Timer < today, Prog 2: 58 (the quest's own: 73)
+finish                                                  # Timer = today, Prog 3; nothing taken
+wait vana=24
+walk -59.8,8.2,92.9
+trade Chocobo ClumpOfGausebitWildgrass x2               # Prog 3, two clumps: not exact, nil
+trade Chocobo ClumpOfGausebitWildgrass x1               # one clump: 99
+finish                                                  # Timer = today, Prog 4, the clump taken
+trade Chocobo ClumpOfGausebitWildgrass x1               # Prog 4, Timer == today: 73
+finish
+wait vana=24
+walk -59.8,8.2,92.9
+trade Chocobo ClumpOfGausebitWildgrass x1               # Prog 4: 59
+finish                                                  # Timer = today, Prog 5, the clump taken
+wait vana=24
+walk -59.8,8.2,92.9
+trade Chocobo ClumpOfGausebitWildgrass x1               # Prog 5: 60
+finish                                                  # Timer = today, Prog 6, the clump taken
+wait vana=24
+walk -59.8,8.2,92.9
+trade Chocobo ClumpOfGausebitWildgrass x1               # Prog 6: 64
+finish                                                  # the quest's own 64: completed, Chocobo License KI, Chocobo Trainer, fame +7 x3, the clump taken
+trigger Brutus                                          # completed (Save My Son not): 22
+finish
+trigger Osker                                           # 53
+finish

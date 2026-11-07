@@ -1,0 +1,124 @@
+# A Question of Taste's edges. bob (fame 424, level 5): a trade to Etteh and Etteh: no section: the default 42. Angelica's
+# guard, one operand each (AQoT accepted at Prog 0 by GMs, in Windurst Waters): carl (A Pose By Any Other Name available):
+# the quest's nil; A Pose's own offer 90; dan (A Pose completed, its mustZone 238 set in
+# Windurst Waters): the quest's nil; A Pose's 101 (setPriority 101). Main (fame 425, accepted by a GM): Etteh at Prog 3
+# and 5: 49 (>= 2). The Temple's frame: Prog 0 and 1: nil (the default); Prog 2 with Wait now + 1: the Wait messages; Wait
+# = now (not ahead), Trompe L'Oeil down: 50, option 2: nothing; 50, option 1: spawned; Wait = now with Trompe L'Oeil up: nil (the default);
+# Trompe L'Oeil killed at Prog 4: nothing. Completed (a GM; Prog 0, no mustZone, rancorCurse 0): Etteh 53, option 0: begun
+# (53 begins on every option but 2); 55 at Prog 1 and 2; Jakoh at Prog 0: nil. The frame (completed): Prog 0: nil; Prog 1,
+# Wait = now: 51, option 0: nothing; 51, option 2: nothing; 51, option 1: spawned; Wait = now with Trompe L'Oeil up: nil; killed at Prog 0:
+# nothing; Prog 3: nil. Etteh's Everyone's Grudging guard (completed by GMs, no mustZone, Windurst fame 488 unless said):
+# ed (rancorCurse 1, Everyone's Grudging available): nil: the default 42; Everyone's Grudging completed (a GM): 53, option
+# 2: Option 1; Everyone's Grudging available again and rancorCurse 0 (GMs): 54, option 2: nothing; fred (rancorCurse 1,
+# fame 487): 53, option 1: begun (Prog 1, Final Fantasy Part II).
+# Not reachable: GetMobByID(TROMPE_LOEIL) nil (the zone's own mob); quest:complete false (a gil reward only).
+lists Kazham/Etteh_Sulaej/onTrigger Kazham/Etteh_Sulaej/onTrade Kazham/Jakoh_Wahcondalo/onTrigger WindurstWaters/Angelica/onTrigger TempleOfUggalepih/Stone_Picture_Frame_QoT/onTrigger TempleOfUggalepih/Trompe_LOeil/onMobDeath
+char zone=Kazham pos=93.981,-14.5,-110.818 job=WAR lvl=75
+char bob zone=Kazham pos=93.981,-14.5,-110.818 job=WAR lvl=75
+char carl zone=WindurstWaters pos=-64.619,-9.25,-8.853 job=WAR lvl=75
+char dan zone=WindurstWaters pos=-64.619,-9.25,-8.853 job=WAR lvl=75
+char ed zone=Kazham pos=93.981,-14.5,-110.818 job=WAR lvl=75
+char fred zone=Kazham pos=93.981,-14.5,-110.818 job=WAR lvl=75
+fame Windurst 425
+quest Windurst.APoseByAnyOtherName completed
+quest Outlands.AQuestionOfTaste accepted
+bob: fame Windurst 424
+bob: item BoneChip
+carl: fame Windurst 425
+carl: quest Outlands.AQuestionOfTaste accepted
+dan: fame Windurst 425
+dan: quest Windurst.APoseByAnyOtherName completed
+dan: charvar Quest[2][7]mustZone 238
+dan: quest Outlands.AQuestionOfTaste accepted
+ed: fame Windurst 488
+ed: quest Outlands.AQuestionOfTaste completed
+ed: charvar rancorCurse 1
+fred: fame Windurst 487
+fred: quest Outlands.AQuestionOfTaste completed
+fred: charvar rancorCurse 1
+login
+bob: login
+bob: trade Etteh_Sulaej BoneChip x1     # fame 424: no section: nothing
+bob: trigger Etteh_Sulaej               # level 5: the default 42
+bob: finish
+bob: logout
+carl: login
+carl: trigger Angelica                  # A Pose not completed: the quest's nil; A Pose's offer 90
+carl: finish option=0                   # A Pose: nothing
+carl: logout
+dan: login
+dan: trigger Angelica                   # A Pose's mustZone (238, kept in Windurst Waters): nil; A Pose's 101
+dan: finish
+dan: logout
+charvar Quest[5][3]Prog 3               # a GM
+trigger Etteh_Sulaej                    # Prog 3 (>= 2): 49
+finish
+charvar Quest[5][3]Prog 5               # a GM
+trigger Etteh_Sulaej                    # Prog 5 (>= 2): 49
+finish
+charvar Quest[5][3]Prog 0               # a GM
+warp 79.876,0.5,-36.964 TempleOfUggalepih
+trigger Stone_Picture_Frame_QoT         # Prog 0: nil: the default FRAME_FOR_A_PAINTING
+charvar Quest[5][3]Prog 1               # a GM
+trigger Stone_Picture_Frame_QoT         # Prog 1: nil: the default
+charvar Quest[5][3]Prog 2               # a GM
+charvar Quest[5][3]Wait 1800000001      # a GM: now + 1
+trigger Stone_Picture_Frame_QoT         # Wait ahead: FRAME_FOR_A_PAINTING + 1; STILL_HANGS_ON_THE_WALL
+charvar Quest[5][3]Wait 1800000000      # a GM: now (not ahead)
+keyitem FinalFantasy                    # a GM
+trigger Stone_Picture_Frame_QoT         # Trompe L'Oeil down: 50
+finish option=2                         # not 1: nothing (Final Fantasy kept, no spawn)
+trigger Stone_Picture_Frame_QoT         # 50
+finish option=1                         # Final Fantasy taken; spawned, claimed; Wait now + 900
+charvar Quest[5][3]Wait 1800000000      # a GM
+trigger Stone_Picture_Frame_QoT         # Prog 2, Wait not ahead, Trompe L'Oeil up: nil: the default
+charvar Quest[5][3]Prog 4               # a GM
+kill TROMPE_LOEIL                       # Prog 4: nothing (Prog stays 4)
+tick 15000                              # the body despawns
+tick 4000                               # it fades: not spawned
+quest Outlands.AQuestionOfTaste completed   # a GM: completed, Prog 4 kept
+charvar Quest[5][3]Prog 0               # a GM
+warp 93.981,-14.5,-110.818 Kazham
+trigger Jakoh_Wahcondalo                # completed, Prog 0, no mustZone: nil: his script, the default 113
+finish
+trigger Etteh_Sulaej                    # completed, rancorCurse 0, Prog 0, Option 0: 53
+finish option=0                         # not 2: Prog 1; begun (still completed); Final Fantasy Part II
+trigger Etteh_Sulaej                    # Prog 1: 55
+finish
+charvar Quest[5][3]Prog 2               # a GM
+trigger Etteh_Sulaej                    # Prog 2 (>= 1): 55
+finish
+charvar Quest[5][3]Prog 0               # a GM
+warp 79.876,0.5,-36.964 TempleOfUggalepih
+trigger Stone_Picture_Frame_QoT         # completed, Prog 0: nil: the default
+charvar Quest[5][3]Prog 1               # a GM
+charvar Quest[5][3]Wait 1800000000      # a GM: now (not ahead)
+trigger Stone_Picture_Frame_QoT         # Trompe L'Oeil down: 51
+finish option=0                         # nothing
+trigger Stone_Picture_Frame_QoT         # 51
+finish option=2                         # not 1: nothing (Final Fantasy Part II kept, no spawn)
+trigger Stone_Picture_Frame_QoT         # 51
+finish option=1                         # FF Part II taken; spawned, claimed; Wait now + 900
+charvar Quest[5][3]Wait 1800000000      # a GM
+trigger Stone_Picture_Frame_QoT         # Prog 1, Wait not ahead, Trompe L'Oeil up: nil: the default
+charvar Quest[5][3]Prog 0               # a GM
+kill TROMPE_LOEIL                       # Prog 0: nothing
+tick 15000                              # the body despawns
+tick 4000                               # it fades: not spawned
+charvar Quest[5][3]Prog 3               # a GM
+trigger Stone_Picture_Frame_QoT         # completed, Prog 3: no arm: nil: the default
+ed: login
+ed: trigger Etteh_Sulaej                # rancorCurse 1, fame 488, Everyone's Grudging not completed: nil: the default 42
+ed: finish
+ed: quest Outlands.EveryonesGrudging completed   # a GM
+ed: trigger Etteh_Sulaej                # Everyone's Grudging completed: 53
+ed: finish option=2                     # Option 1
+ed: quest Outlands.EveryonesGrudging available   # a GM
+ed: charvar rancorCurse 0               # a GM
+ed: trigger Etteh_Sulaej                # rancorCurse 0: 54 (Option 1)
+ed: finish option=2                     # not 1: nothing
+ed: logout
+fred: login
+fred: trigger Etteh_Sulaej              # fame 487 (level 6): 53
+fred: finish option=1                   # not 2: Prog 1; begun (still completed); Final Fantasy Part II
+fred: logout

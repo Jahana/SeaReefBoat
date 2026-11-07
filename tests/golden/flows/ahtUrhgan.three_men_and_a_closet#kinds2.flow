@@ -1,0 +1,32 @@
+# Three Men and a Closet's Ratihb replies against The Die Is Cast's available 591 (Progress; Luck of the Draw completed,
+# whose own 552 is silenced by the Stage var of Equipped for All Occasions): 840 (Progress, Prog 2) ties with it and the
+# two rotate, 841 (Event, Prog 3) loses to it. Each trigger's finish begins The Die Is Cast or moves Prog, so the states
+# are reset between the triggers (task 8 review lesson: a lone reply at an NPC without a script shows no kind). The
+# trace order line says who is first.
+lists AhtUrhganWhitegate/Ratihb/onTrigger
+char zone=AhtUrhganWhitegate pos=75,-6,-137 job=WAR lvl=75
+quest AhtUrhgan.LuckOfTheDraw completed
+charvar Quest[6][24]Stage 1
+quest AhtUrhgan.ThreeMenAndACloset accepted
+login
+charvar Quest[6][31]Prog 2
+trigger Ratihb                          # Prog 2: 840 (Progress) and 591 (Progress)
+finish
+quest AhtUrhgan.TheDieIsCast available
+charvar Quest[6][31]Prog 2
+trigger Ratihb                          # the second
+finish
+quest AhtUrhgan.TheDieIsCast available
+charvar Quest[6][31]Prog 2
+trigger Ratihb                          # the third
+finish
+quest AhtUrhgan.TheDieIsCast available
+charvar Quest[6][31]Prog 3
+trigger Ratihb                          # Prog 3: 841 (Event) against 591 (Progress)
+finish
+quest AhtUrhgan.TheDieIsCast available
+trigger Ratihb                          # the second
+finish
+quest AhtUrhgan.TheDieIsCast available
+trigger Ratihb                          # the third
+finish

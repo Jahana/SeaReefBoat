@@ -1,0 +1,12 @@
+# Father and Son at Prog 1 with a full inventory: 509 does not complete it (the rod cannot be given), the quest stays
+# accepted at Prog 1; with room, 509 again completes it.
+char zone=NorthernSanDoria pos=5.3,0.5,24.9 job=WAR lvl=10
+quest Sandoria.FatherAndSon accepted
+charvar Quest[0][4]Prog 1
+login
+fill-inventory
+trigger Ailbeche                          # Prog 1: 509
+finish                                    # no room: quest:complete fails, nothing given, still accepted
+free-inventory
+trigger Ailbeche                          # 509
+finish                                    # completed: Willow Fishing Rod, fame +20, Lost Child Officer

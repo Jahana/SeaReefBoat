@@ -1,0 +1,12 @@
+# Tuning In (windurst 90), completion parity: 886's finish is npcUtil.completeQuest step for step (the gil with
+# GIL_OBTAINED, the title), ending in the raw player:completeQuest, so a GM's Quest[2][90]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) beside Leepe-Hoppe.
+char zone=WindurstWaters pos=12.9,-9.7,-197.5 job=WAR lvl=75
+quest Windurst.TuningIn accepted
+item MagickedSteelIngot
+item PieceOfSpruceLumber
+item ExtraFineFile
+login
+charvar Quest[2][90]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Leepe-Hoppe MagickedSteelIngot x1 PieceOfSpruceLumber x1 ExtraFineFile x1  # accepted: 886
+finish                                  # 4000 gil; GIL_OBTAINED 4000; Fine Tuner; completed; the items taken; Prog kept

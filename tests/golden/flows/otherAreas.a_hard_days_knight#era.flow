@@ -1,0 +1,17 @@
+# A Hard Day's Knight with its era module (modules/era/lua/quests/otherareas/a_hard_days_knight.lua, enabled by its
+# condition xi.pre(xi.expansion.SOA): RESTRICT_CONTENT 1, ENABLE_SOA 0): its onServerStart override removes
+# quest.sections[3] (table.remove), the completed section, so the Temple Knight Key cannot be had. Completed (a GM) with
+# both crest keys: Quelveuiat's trigger: no section: his default 122; both keys traded: no trade handler, nothing; the
+# keys kept. The available and accepted sections are the quest's own (the main flow).
+module modules/era/lua/quests/otherareas/a_hard_days_knight.lua
+lists TavnazianSafehold/Quelveuiat/onTrigger TavnazianSafehold/Quelveuiat/onTrade TavnazianSafehold/onEventFinish/631 TavnazianSafehold/onEventFinish/632
+char zone=TavnazianSafehold pos=4.3,-22.75,-25.9 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest OtherAreas.AHardDaysKnight completed
+item SealionCrestKey
+item CoralCrestKey
+login
+trigger Quelveuiat                      # completed: the section removed: 122 (not 631)
+finish
+trade Quelveuiat SealionCrestKey x1 CoralCrestKey x1 # no trade handler: nothing; the keys kept

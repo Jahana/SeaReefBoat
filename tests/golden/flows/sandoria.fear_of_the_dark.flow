@@ -1,0 +1,25 @@
+# Fear of the Dark (sandoria 78): Secodiand in Northern San d'Oria, no guard. A trade while available (nothing), the
+# offer 19 declined (option 0: nothing) and taken (option 1), the accepted trigger (no handler: his default 17), the
+# wrong trades (a bone chip, one wing: nil), 18 for two Bat Wings (completed: fame +10, 200 gil; the wings taken), the
+# completed trigger (17), and the repeat 18 with three wings (200 gil, fame +10, two taken). Secodiand has no script; Fear
+# of the Dark III names a Secodiand in Abyssea - La Theine, another zone.
+lists NorthernSanDoria/Secodiand/onTrigger NorthernSanDoria/Secodiand/onTrade NorthernSanDoria/onEventFinish/19 NorthernSanDoria/onEventFinish/18
+char zone=NorthernSanDoria pos=-159.6,0,137.1
+item BatWing x5
+item BoneChip
+login
+trade Secodiand BatWing x2                # available: no trade handler, nothing
+trigger Secodiand                         # available: 19
+finish                                    # option 0: nothing
+trigger Secodiand                         # 19
+finish option=1                           # option 1: begun
+trigger Secodiand                         # accepted: no trigger handler, his default 17
+finish
+trade Secodiand BoneChip x1               # nil
+trade Secodiand BatWing x1                # one: nil
+trade Secodiand BatWing x2                # two: 18
+finish                                    # accepted: completed (fame +10, 200 gil), the wings taken
+trigger Secodiand                         # completed: 17
+finish
+trade Secodiand BatWing x3                # completed: 18
+finish                                    # not accepted: 200 gil, fame +10; two taken, one kept

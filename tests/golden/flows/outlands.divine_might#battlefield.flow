@@ -1,0 +1,33 @@
+# Divine Might (outlands 163), the shard arm and the battlefield's other win: a level 75 Warrior on Zilart
+# THE_SEALED_SHRINE (Ark Angels' sections do not answer) with the Shard of Envy. blank: the incomplete arm (current >=
+# ARK_ANGELS, a shard): 56 (917, 1408, 1550), finished: begun; 56 again (accepted, Prog 0; no finish there). La'Loff:
+# Invincible (a GM: the five would kill a level 75 Warrior before the last falls), the Ark Pentasphere (a GM) at qm1_1:
+# 32000, option 81: entered (the pentasphere worn: one use, so no second entry with it); the five killed: 32001 open;
+# battlefieldWin 292 (a GM: another battlefield's id): finished: nothing (Prog 0). Prog 1 by a GM (the 293 win itself is
+# the main flow's). Shrine: 55; option 5: the Bushinomimi: completed, DM_Earring 14743.
+lists TheShrineOfRuavitau/blank_divine_might/onTrigger TheShrineOfRuavitau/onEventFinish/56 TheShrineOfRuavitau/onEventFinish/55 LaloffAmphitheater/onEventFinish/32001
+char zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+mission Zilart TheSealedShrine current
+keyitem ShardOfEnvy
+login
+trigger blank_divine_might              # past ARK_ANGELS, a shard: 56
+finish                                  # begun
+trigger blank_divine_might              # accepted, Prog 0: 56
+finish                                  # no finish in the accepted section: nothing
+warp -603.563,-22.681,483.937 LaloffAmphitheater
+effect 50                               # a GM: Invincible
+item ArkPentasphere                     # a GM
+trade qm1_1 ArkPentasphere x1           # 32000
+update 32000 option=81                  # index 5, arena 1: entered
+finish
+kill ARK_ANGEL_HM+24
+kill ARK_ANGEL_MR+22
+kill ARK_ANGEL_EV+16
+kill ARK_ANGEL_TT+14
+kill ARK_ANGEL_GK+12                    # won: 32001
+localvar battlefieldWin 292             # a GM, 32001 open: another battlefield's id
+finish                                  # not 293: nothing
+charvar Quest[5][163]Prog 1             # a GM
+warp -38.533,-1.648,-148.199 TheShrineOfRuavitau
+trigger blank_divine_might              # 55
+finish option=5                         # the Bushinomimi: completed; DM_Earring 14743

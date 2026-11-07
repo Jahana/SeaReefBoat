@@ -1,0 +1,35 @@
+# Legendary Plan B (windurst 44): the order of the three quests' calls in Kopuro-Popuro's and Kororo's scripts, with
+# statuses no player reaches together (GMs). A level-75 WAR at fame level 3. The All-New C-2000 and this quest
+# accepted: Legendary Plan B's three traded: C-2000's 288 (its trade first; not 314); Kororo: 277, then C-2000's 291
+# (not 312). C-2000 completed, The All-New C-3000 accepted: C-3000's two traded: this quest's 309 (before C-3000's;
+# not 657). A Greeting Cardian accepted at Prog 1: 301 (before this quest's 309). C-3000 completed: its 659 first (not
+# 301).
+char zone=WindurstWoods pos=-1.0,-4.75,-21.0 job=WAR lvl=75
+fame Windurst 125
+item 529
+item WolfHide
+item RevivalTreeRoot
+item BeetleShell
+item HecteyesEye
+login
+quest Windurst.TheAllNewC2000 accepted
+quest Windurst.LegendaryPlanB accepted
+trade Kopuro-Popuro 529 x1 WolfHide x1 RevivalTreeRoot x1  # C-2000 accepted first: 288 (not 314)
+finish
+walk -11.0,-2.75,7.0
+trigger Kororo                          # his default 277
+finish
+trigger Kororo                          # his script: C-2000 accepted first: 291 (not 312)
+finish
+walk -1.0,-4.75,-21.0
+quest Windurst.TheAllNewC2000 completed
+quest Windurst.TheAllNewC3000 accepted
+trade Kopuro-Popuro BeetleShell x1 HecteyesEye x1  # this quest accepted before C-3000: 309 (not 657)
+finish
+quest Windurst.AGreetingCardian accepted
+charvar Quest[2][43]Prog 1
+trigger Kopuro-Popuro                   # 301 before this quest's 309
+finish
+quest Windurst.TheAllNewC3000 completed
+trigger Kopuro-Popuro                   # C-3000 completed first: 659 (not 301)
+finish

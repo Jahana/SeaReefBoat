@@ -1,0 +1,31 @@
+# Transformations at exactly 1000 gil (720's, 721's and 723's `getGil() >= 1000`; the main flow holds 5000, #edges' main
+# 500). Main (a level 50 Blue Mage, 1000 gil, Omens completed, Transformations available at Prog 0): Waoud 720 (1000),
+# option 1: the 1000 gil taken (PAY_DIVINATION), Prog 1. bob (the same at Prog 1, a GM's): 721 (1000), option 1: the
+# 1000 gil taken. carl (Transformations accepted): 723 (1000), option 1: the 1000 gil taken.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/onEventFinish/720 AhtUrhganWhitegate/onEventFinish/721 AhtUrhganWhitegate/onEventFinish/723
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=1000
+char bob zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=1000
+char carl zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=1000
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Omens completed
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: quest AhtUrhgan.Omens completed
+bob: charvar Quest[6][23]Prog 1
+carl: quest AhtUrhgan.AnEmptyVessel completed
+carl: quest AhtUrhgan.Omens completed
+carl: quest AhtUrhgan.Transformations accepted
+login
+trigger Waoud                           # Prog 0: 720 (1000)
+finish option=1                         # 1000 >= 1000: the 1000 gil taken, PAY_DIVINATION; Prog 1
+trigger Waoud                           # Prog 1: 721 (0)
+finish option=0
+bob: login
+bob: trigger Waoud                      # Prog 1: 721 (1000)
+bob: finish option=1                    # 1000 >= 1000: the 1000 gil taken, PAY_DIVINATION
+bob: trigger Waoud                      # 721 (0)
+bob: finish option=0
+carl: login
+carl: trigger Waoud                     # accepted: 723 (1000)
+carl: finish option=1                   # 1000 >= 1000: the 1000 gil taken, PAY_DIVINATION
+carl: trigger Waoud                     # 723 (0)
+carl: finish option=0

@@ -1,0 +1,57 @@
+# The Old Lady (otherAreas 10): the level edge and the setting, the option edges, the letter, the Prog arms past the
+# table, the finishes outside their section and tradeComplete with no trade open. Level 17 at SUBJOB_QUEST_LEVEL 18: 133;
+# at 17.4 (a GM setting; a decimal is read as Lua has it, so 17 >= 17.4 is false): 133; at 17: 131 (542), options 39
+# and 41: nothing; at 16: 131, option 40: begun. Gilgamesh's Introductory Letter (a GM) at Prog 0: 137 (the letter is
+# checked before the table), finished: completed, tradeComplete with nothing traded since the login (nothing taken), the
+# subjob unlocked; the letter kept. Accepted again (a GM: available, then accepted), the letter taken (a GM): Prog -1 and
+# Prog 3: Vera nil (no default: nothing), the tail traded: nil. The letter (a GM) at Prog 3: 137, made available by
+# a GM while it is open: no 137 handler: nothing. Accepted again at Prog 0, the letter taken: the tail: 135 (541);
+# completed by a GM while it is open: no 135 handler: the tail kept, Prog stays 0. Accepted again (available, then
+# accepted), the letter (a GM): 137, finished: completed; its tradeComplete takes the tail of the last trade (the
+# 135 trade whose finish did nothing), which the trade container still holds.
+lists Mhaura/Vera/onTrigger Mhaura/Vera/onTrade Mhaura/onEventFinish/131 Mhaura/onEventFinish/135 Mhaura/onEventFinish/137
+char zone=Mhaura pos=-51.5,-3.9,17.2 job=WAR lvl=17
+item WildRabbitTail
+login
+trigger Vera                            # level 17 < 18: 133
+finish
+setting SUBJOB_QUEST_LEVEL 17.4         # a GM setting
+trigger Vera                            # 17 < 17.4: 133
+finish
+setting SUBJOB_QUEST_LEVEL 17           # a GM setting
+trigger Vera                            # 17 >= 17: 131 (542)
+finish option=39                        # nothing
+trigger Vera                            # 131
+finish option=41                        # nothing
+setting SUBJOB_QUEST_LEVEL 16           # a GM setting
+trigger Vera                            # 17 >= 16: 131
+finish option=40                        # begun
+keyitem GilgameshsIntroductoryLetter    # a GM
+trigger Vera                            # the letter at Prog 0: 137 (not 132)
+finish                                  # completed; tradeComplete: nothing traded, nothing taken; the subjob unlocked; the letter kept
+quest OtherAreas.TheOldLady available   # a GM
+quest OtherAreas.TheOldLady accepted    # a GM
+delkeyitem GilgameshsIntroductoryLetter # a GM
+charvar Quest[4][10]Prog -1             # a GM
+trigger Vera                            # Prog -1: no step: nil; no default: nothing
+finish-if-event
+trade Vera WildRabbitTail x1            # Prog -1: nil
+charvar Quest[4][10]Prog 3              # a GM
+trigger Vera                            # Prog 3: nil; nothing
+finish-if-event
+trade Vera WildRabbitTail x1            # Prog 3: nil
+keyitem GilgameshsIntroductoryLetter    # a GM
+trigger Vera                            # the letter at Prog 3: 137
+quest OtherAreas.TheOldLady available   # a GM, while 137 is open
+finish                                  # no 137 handler while available: nothing
+quest OtherAreas.TheOldLady accepted    # a GM
+delkeyitem GilgameshsIntroductoryLetter # a GM
+charvar Quest[4][10]Prog 0              # a GM
+trade Vera WildRabbitTail x1            # 135 (541)
+quest OtherAreas.TheOldLady completed   # a GM, while 135 is open
+finish                                  # no 135 handler while completed: the tail kept, Prog stays 0
+quest OtherAreas.TheOldLady available   # a GM
+quest OtherAreas.TheOldLady accepted    # a GM
+keyitem GilgameshsIntroductoryLetter    # a GM
+trigger Vera                            # the letter at Prog 0: 137
+finish                                  # completed; tradeComplete takes the tail the 135 trade left in the trade container

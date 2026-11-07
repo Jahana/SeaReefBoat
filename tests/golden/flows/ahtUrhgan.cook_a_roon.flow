@@ -1,0 +1,36 @@
+# Cook-a-roon (ahtUrhgan 15): a level 75 Warrior in Nashmau with three of each fish. Ququroon (no script; default 241,
+# the offer's own csid). Available: a fish trade: no section-1 trade handler: nothing; Ququroon 241, option 0: nothing;
+# 241 again, option 1: begun. Accepted: Ququroon 242; one Ahtapot alone: not the five: nil; the five fish: Prog =
+# randomInt(2, 3) and 243 ([7] = the draw), a GM pins Prog 2; finished: the Bowl of Nashmau
+# Stew (Prog 2), completed (no reward table), the trade confirmed. Completed: Ququroon 244; the five fish: 243 ([7] =
+# the draw), a GM pins Prog 2; update 243: the trade confirmed, the stew (Prog 2), Prog 0; finished. The Prog 3 arms are
+# `#draws`. The draws are the script RNG on both sides (Player.RandomInt): the replay's [7] must match.
+lists Nashmau/Ququroon/onTrigger Nashmau/Ququroon/onTrade Nashmau/onEventFinish/241 Nashmau/onEventFinish/243 Nashmau/onEventUpdate/243
+char zone=Nashmau pos=-0.9,0,66.824 job=WAR lvl=75
+item Ahtapot x3
+item Istakoz x3
+item Istavrit1 x3
+item Istiridye x3
+item Mercanbaligi x3
+login
+trigger Ququroon                        # walks beside him; available: 241
+finish option=0                         # not option 1: nothing
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # available: no trade handler: nothing
+finish-if-event
+trigger Ququroon                        # available: 241
+finish option=1                         # begun
+trigger Ququroon                        # accepted: 242
+finish
+trade Ququroon Ahtapot x1               # not exactly the five: nil
+finish-if-event
+# Prog = randomInt(2, 3); 243 ([7] = Prog)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1
+charvar Quest[6][15]Prog 2              # a GM pins the draw (the 243 sent carries the drawn value)
+finish                                  # Prog 2: the stew; completed (Prog cleared); the fish taken
+trigger Ququroon                        # completed: 244
+finish
+# completed: Prog = randomInt(2, 3); 243 ([7] = Prog)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1
+charvar Quest[6][15]Prog 2              # a GM pins the draw
+update 243 option=0                     # the fish taken, the stew (Prog 2), Prog 0
+finish                                  # no completed-section finish: nothing

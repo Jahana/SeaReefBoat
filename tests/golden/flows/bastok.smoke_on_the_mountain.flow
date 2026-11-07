@@ -1,0 +1,36 @@
+# Smoke on the Mountain (bastok 15): Hungry Wolf in Metalworks, Offa in Bastok Markets. The offer, Offa's 222 once per
+# zone-in while accepted or completed (oncePerZone), the Galkan sausage trade, the completion repeated: the second
+# section matches accepted and completed.
+lists Metalworks/Hungry_Wolf/onTrigger Metalworks/Hungry_Wolf/onTrade Metalworks/onEventFinish/428 Metalworks/onEventFinish/429 BastokMarkets/Offa/onTrigger
+char zone=Metalworks pos=-25,-10,-29
+item GalkanSausage x2
+item BoneChip
+login
+trade Hungry_Wolf GalkanSausage x1  # available: no trade handler, nothing
+zoneline BastokMarkets
+trigger Offa                    # available: its default 124
+finish
+zoneline Metalworks
+trigger Hungry_Wolf             # the offer, 428
+finish                          # accepted
+trigger Hungry_Wolf             # accepted: its default 421
+finish
+trade Hungry_Wolf BoneChip x1   # the wrong item: nothing
+zoneline BastokMarkets
+trigger Offa                    # accepted: 222
+finish
+trigger Offa                    # the second talk this zone-in: 124
+finish
+zoneline Metalworks
+zoneline BastokMarkets
+trigger Offa                    # after zoning: 222 again
+finish
+zoneline Metalworks
+walk -25,-10,-29                # to Hungry Wolf (a trade does not walk to the NPC)
+trade Hungry_Wolf GalkanSausage x1  # 429
+finish                          # completed: 300 gil, Hot Dog, fame 10, a sausage gone
+trade Hungry_Wolf GalkanSausage x1  # completed: 429 again
+finish                          # the repeat: 300 gil, fame 10 again
+zoneline BastokMarkets
+trigger Offa                    # completed: 222
+finish

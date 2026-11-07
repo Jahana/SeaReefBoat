@@ -1,0 +1,14 @@
+# Enveloped in Darkness with Time passed and a full inventory: 5's finish calls quest:complete, which fails (the boots
+# cannot be given); the quest stays accepted (the Lua ignores the result); with room, 5 again completes it.
+char zone=CrawlersNest pos=58.9,0.4,69 job=RDM lvl=50
+quest Sandoria.TheCrimsonTrial completed
+quest Sandoria.EnvelopedInDarkness accepted
+charvar Quest[0][85]Prog 3
+charvar Quest[0][85]Time 1
+login
+fill-inventory
+trigger qm8                               # Time 1 <= now: 5
+finish                                    # no room: not completed
+free-inventory
+trigger qm8                               # 5
+finish                                    # completed: Warlock's Boots, fame +20

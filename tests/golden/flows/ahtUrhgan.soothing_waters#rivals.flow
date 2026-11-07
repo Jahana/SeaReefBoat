@@ -1,0 +1,58 @@
+# Soothing Waters' rivals at Fari-Wari (GM states out of play order): a level 75 Warrior, Saga of the Skyserpent
+# completed, Ode to the Serpents accepted (its 891, an Event) and Soothing accepted (GMs). A Progress beats an Event, an
+# Event beats a replaceEvent, and equal kinds take turns, so each pair is talked to twice. Prog 0, 1, 2, 3: Ode's 891
+# beats 906 (twice each). Prog 4: 897 beats 891 (twice; each finish with Prog 9 set first by a GM, so no section's 897
+# finish runs). Then Fist of the People accepted (a GM: its 884, a Progress): Prog 4: 897 and 884 take turns
+# (Fist Prog 0 set again after each). Ode completed and Soothing available (GMs): 894 and 884 take turns (894 finished
+# on option 1: not begun).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger
+char zone=AhtUrhganWhitegate pos=81.95,-6,-137.707 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent completed
+quest AhtUrhgan.OdeToTheSerpents accepted
+quest AhtUrhgan.SoothingWaters accepted
+login
+trigger Fari-Wari                       # Prog 0: Ode's 891 (beats 906)
+finish
+trigger Fari-Wari                       # 891 again
+finish
+charvar Quest[6][47]Prog 1              # a GM
+trigger Fari-Wari                       # Prog 1: 891
+finish
+trigger Fari-Wari                       # 891
+finish
+charvar Quest[6][47]Prog 2              # a GM
+trigger Fari-Wari                       # Prog 2: 891
+finish
+trigger Fari-Wari                       # 891
+finish
+charvar Quest[6][47]Prog 3              # a GM
+trigger Fari-Wari                       # Prog 3: 891
+finish
+trigger Fari-Wari                       # 891
+finish
+charvar Quest[6][47]Prog 4              # a GM
+trigger Fari-Wari                       # Prog 4: 897 (beats 891)
+charvar Quest[6][47]Prog 9              # a GM: no section's 897 finish
+finish
+charvar Quest[6][47]Prog 4
+trigger Fari-Wari                       # 897 again
+charvar Quest[6][47]Prog 9
+finish
+quest AhtUrhgan.FistOfThePeople accepted   # a GM: Fist's 884 (a Progress)
+charvar Quest[6][47]Prog 4
+trigger Fari-Wari                       # Prog 4: 897 or 884 (Progresses: turns)
+charvar Quest[6][47]Prog 9
+finish
+charvar Quest[6][46]Prog 0              # GMs
+charvar Quest[6][47]Prog 4
+trigger Fari-Wari                       # the other
+charvar Quest[6][47]Prog 9
+finish
+charvar Quest[6][46]Prog 0
+quest AhtUrhgan.OdeToTheSerpents completed  # GMs: Soothing available
+quest AhtUrhgan.SoothingWaters available
+trigger Fari-Wari                       # 894 or 884
+finish option=1
+charvar Quest[6][46]Prog 0
+trigger Fari-Wari                       # the other
+finish option=1

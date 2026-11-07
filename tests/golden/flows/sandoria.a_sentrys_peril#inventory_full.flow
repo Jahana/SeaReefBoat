@@ -1,0 +1,32 @@
+# A Sentry's Peril (sandoria 0) with a full bag at each give: 510 taken (no room for the ointment: not begun); accepted
+# by GM: 644 (no ointment; its finish ignores the result); 100 with the bag filled while it is open (100 plays only with
+# a free slot, so its give fails only if the slot fills during the event: no case, the ointment kept, TradedAaveleon
+# stays 0); 126 option 1 (no case); 513 (no room for the subligar: not completed, the case kept).
+lists SouthernSanDoria/Glenne/onTrigger SouthernSanDoria/Glenne/onTrade SouthernSanDoria/onEventFinish/510 SouthernSanDoria/onEventFinish/644 SouthernSanDoria/onEventFinish/513 WestRonfaure/Aaveleon/onTrigger WestRonfaure/Aaveleon/onTrade WestRonfaure/onEventFinish/100 WestRonfaure/onEventFinish/126
+char zone=SouthernSanDoria pos=-123.4,-2.0,14.5 job=WAR lvl=30
+login
+fill-inventory
+trigger Glenne                            # available: 510
+finish                                    # option 0, no room for the ointment: not begun
+quest Sandoria.ASentrysPeril accepted
+trigger Glenne                            # TradedAaveleon 0, no ointment: 644
+finish                                    # no room: no ointment (the result ignored)
+free-inventory
+trigger Glenne                            # 644 again
+finish                                    # the Dose of Ointment
+warp -431.8,-45.9,342.3 WestRonfaure
+trade Aaveleon DoseOfOintment x1          # a free slot: 100
+fill-inventory
+finish                                    # the bag filled while 100 was open: no case; the ointment kept; TradedAaveleon 0
+free-inventory
+charvar Quest[0][0]TradedAaveleon 1
+fill-inventory
+trigger Aaveleon                          # TradedAaveleon 1, no case: 126
+finish option=1                           # no room: no case
+free-inventory
+trigger Aaveleon                          # 126
+finish option=1                           # the case
+warp -123.4,-2.0,14.5 SouthernSanDoria
+fill-inventory
+trade Glenne OintmentCase x1              # 513
+finish                                    # no room for the Bronze Subligar: not completed; the case kept

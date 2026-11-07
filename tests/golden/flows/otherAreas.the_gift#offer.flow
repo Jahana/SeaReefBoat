@@ -1,0 +1,49 @@
+# The Gift (otherAreas 21): Oswald's offer and each operand of its check, behind xi.settings.map.FISHING_ENABLE (false in
+# settings/default/map.lua): `setting map.FISHING_ENABLE true` (P6) in the header, off as a step once.
+# Under the Sea accepted (a GM; The Sand Charm accepted): no Gift section; Under the Sea's 32 (a Progress 70 would tie
+# with it and play first: The_Gift sorts before Under_the_Sea). Under the Sea completed, The Sand Charm available: no Gift
+# section; Under the Sea's 38 (replaceDefault). The Sand Charm accepted, fishing off: no section at all: Oswald's 30.
+# Fishing on: a Danceshroom traded: no trade handler; 70 (4375), options 0, 49 and 51: nothing; option 50: begun. The
+# Sand Charm completed, The Gift available again (a GM): The Gift's 70 and The Real Gift's 73 are both Progress and take
+# turns (The_Gift sorts first): 70, 73, 70. The Gift completed, The Real Gift available: The Real Gift's 73 (Progress)
+# beats The Gift's 78 (replaceDefault) every time (a Progress 78 would tie and play first).
+lists Selbina/Oswald/onTrigger Selbina/Oswald/onTrade Selbina/onEventFinish/70 Selbina/onEventFinish/73
+char zone=Selbina pos=48.6,-15.3,8 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.UnderTheSea accepted
+quest OtherAreas.TheSandCharm accepted
+item Danceshroom
+login
+trigger Oswald                          # Under the Sea accepted, Prog 0: its 32; no Gift section
+finish                                  # Under the Sea's Prog 1
+quest OtherAreas.UnderTheSea completed  # a GM
+quest OtherAreas.TheSandCharm available # a GM
+trigger Oswald                          # The Sand Charm available: no Gift section; Under the Sea's 38 (replaceDefault)
+finish
+quest OtherAreas.TheSandCharm accepted  # a GM
+setting map.FISHING_ENABLE false        # a step: the check's FISHING_ENABLE operand
+trigger Oswald                          # fishing off: no Gift section; Under the Sea's section 3 off: his default 30
+finish
+setting map.FISHING_ENABLE true         # a step
+trade Oswald Danceshroom x1             # available: no trade handler; nothing
+trigger Oswald                          # 70 (4375)
+finish option=0                         # not 50: nothing
+trigger Oswald                          # 70
+finish option=49                        # nothing
+trigger Oswald                          # 70
+finish option=51                        # nothing
+trigger Oswald                          # 70
+finish option=50                        # begun
+quest OtherAreas.TheGift available      # a GM
+quest OtherAreas.TheSandCharm completed # a GM: The Real Gift available too
+trigger Oswald                          # 70 (a tie of Progress replies: The Gift's first)
+finish option=0
+trigger Oswald                          # The Real Gift's 73
+finish option=0
+trigger Oswald                          # 70 again
+finish option=0
+quest OtherAreas.TheGift completed      # a GM
+trigger Oswald                          # 73 (Progress beats 78, replaceDefault)
+finish option=0
+trigger Oswald                          # 73 again
+finish option=0

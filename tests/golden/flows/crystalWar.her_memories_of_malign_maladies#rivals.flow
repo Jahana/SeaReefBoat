@@ -1,0 +1,40 @@
+# Her Memories: Of Malign Maladies (crystalWar 72), the rivals at Amaura and Raustigne. A level 99 Warrior in Southern
+# San d'Oria with the WotG mission Her Memories current (a GM; other logs as group 1's flows) and Homecoming Queen
+# accepted (a GM) with Thierride's Bean Creation. Amaura answers Malign's 955 (available) and Homecoming Queen's 958
+# (the bean), both Progress: the tie goes to the first container, Homecoming Queen: 958, finished: the bean taken, Prog1
+# 1. Then 955 (Progress) over 959 (an Event), finished: Malign begun. Then 959 and 956 (Events, oncePerZone) tie: 959
+# (the cycle is at 958, not in the tie), finished; her script answers nothing on the turn after an Event, so the lookup
+# plays 956; both shown: her default 642. Southern San d'Oria [S]: Boy and the Beast (group 2: Claws and Perils of the
+# Griffon and the mission Back to the Beginning completed (GMs), then Her Memories current) answers Raustigne with 55
+# (Progress) at its Prog 0, and Malign (Prog 3 and the Fey Stone: GMs) with 169 (Progress): the tie goes to the first
+# container, Malign: 169, finished: completed (Large Memory Fragment 2), the Fey Stone taken. Then 55 alone.
+lists SouthernSanDoria/Amaura/onTrigger SouthernSanDoria/onEventFinish/955 SouthernSanDoria/onEventFinish/958 SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/onEventFinish/55 SouthernSanDoriaS/onEventFinish/169
+char zone=SouthernSanDoria pos=-82.867,-6.949,91.148 job=WAR lvl=99
+quest CrystalWar.ClawsOfTheGriffon completed # GMs: Boy and the Beast available
+quest CrystalWar.PerilsOfTheGriffon completed
+mission Wotg BackToTheBeginning completed
+mission Wotg HerMemories current
+quest CrystalWar.HerMemoriesHomecomingQueen accepted
+keyitem ThierridesBeanCreation
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Amaura                          # 958 and 955 tie (Progress): 958, the first container
+finish                                  # the bean taken; Prog1 1
+trigger Amaura                          # 955 (Progress) over 959 (an Event)
+finish                                  # Malign begun
+trigger Amaura                          # 959 and 956 tie (Events, oncePerZone): 959 (the cycle at 958)
+finish
+trigger Amaura                          # her script answers nothing: the lookup's 956
+finish
+trigger Amaura                          # both shown: her default 642
+finish-if-event
+charvar Quest[7][72]Prog 3              # a GM
+keyitem FeyStone                        # a GM
+warp 5.479,-1.999,44.456 SouthernSanDoriaS
+trigger Raustigne                       # 169 and 55 tie (Progress): 169, the first container
+finish                                  # completed (Large Memory Fragment 2); the Fey Stone taken
+trigger Raustigne                       # Malign completed: 55 alone
+finish                                  # Boy and the Beast Prog 1

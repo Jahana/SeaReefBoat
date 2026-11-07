@@ -1,0 +1,16 @@
+# The Unfinished Waltz (jeuno 96): the hippogryph killed after a zone change. Accepted at Prog 1 (a GM): 12 (hippoEvent
+# 1), the hippogryph spawned with enmity (A_SHIVER_RUNS_DOWN); a rezone clears the local var while it stays up; its
+# death at hippoEvent 0 sets nothing; the ??? plays 12 again (hippoEvent 0, a Dancer: not ATTEND_TO_MORE_PRESSING, not
+# 13).
+lists GraubergS/qm1/onTrigger GraubergS/Migratory_Hippogryph/onMobDeath GraubergS/onEventFinish/12
+char zone=GraubergS pos=329.9,-47.8,93.2 job=DNC lvl=75
+quest Jeuno.TheUnfinishedWaltz accepted
+charvar Quest[3][96]Prog 1
+login
+trigger qm1                             # hippoEvent 0: 12
+finish                                  # hippoEvent 1
+trigger qm1                             # the hippogryph spawned (enmity), A_SHIVER_RUNS_DOWN
+rezone                                  # hippoEvent gone (0)
+kill MIGRATORY_HIPPOGRYPH               # hippoEvent 0: nothing
+trigger qm1                             # hippoEvent 0, a Dancer: 12
+finish                                  # hippoEvent 1

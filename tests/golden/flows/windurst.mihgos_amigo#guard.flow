@@ -1,0 +1,23 @@
+# Mihgo's Amigo (windurst 25): the offer's operands. A level-10 WAR. The Tenshodo Showdown accepted by GM: not offered;
+# that quest's 497 (Prog 0; its Progress reply, so an 80 would show in its place or take turns). Back to available, As
+# Thick as Thieves accepted by GM: not offered; its 505 (0, the note). Back to available: 80. Crying Over Onions
+# accepted (Prog 0: its Nanaa Mihgo line is nil): 81, begun.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/onEventFinish/81
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=WAR lvl=10
+quest Windurst.TheTenshodoShowdown accepted
+login
+trigger Nanaa_Mihgo+99                         # The Tenshodo Showdown accepted: not offered; its 497
+finish
+quest Windurst.TheTenshodoShowdown available
+quest Windurst.AsThickAsThieves accepted
+trigger Nanaa_Mihgo+99                         # As Thick as Thieves accepted: not offered; its 505
+finish
+quest Windurst.AsThickAsThieves available
+trigger Nanaa_Mihgo+99                         # both available: 80
+finish option=1                                # 80's finish begins on any option
+quest Windurst.MihgosAmigo available
+quest Windurst.CryingOverOnions accepted
+trigger Nanaa_Mihgo+99                         # Crying Over Onions accepted (Prog 0): 81
+finish                                         # begun
+trigger Nanaa_Mihgo+99                         # accepted: 82
+finish

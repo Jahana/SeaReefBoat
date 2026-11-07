@@ -1,0 +1,58 @@
+# Test My Mettle (otherAreas 25): Davoi's Jar. Available: no section: the Jar's default (NOTHING_OUT_OF_ORDINARY).
+# Accepted (a GM), a full inventory: npcUtil.giveItem fails (ITEM_CANNOT_BE_OBTAINED), the jar stays, noAction (no
+# default). Room made: the sandals given, the jar moved, noAction; the sandals held: nil: the default.
+# moveJar (helpers.lua, ported for this trigger): randomInt(125, 10800) for Davoi_Jar_Move_Time = now + it (a server
+# variable: the trace does not show it); npcUtil.pickNewPosition: math.randomInt(1, 0) (1, no draw), the jar's current
+# spot found by its floored coordinates (its first spot, -95.6,2.5,-50.8, is none of the ten: index 1), then
+# randomInt(1, 10) until it differs; npcUtil.queueMove: setPos(x, y, z, 0) 3000 ms later (the tick after each move).
+# Five more moves, each from the spot the last one chose: the sandals traded to Devean in Selbina with the timer over
+# (123; its finish takes them and drops the quest), accepted again (a GM), back in Davoi, the Jar.
+# Davoi's own onGameHour moves the jar too once GetSystemTime() reaches Davoi_Jar_Move_Time: the snapshot's
+# 1800004534 is never reached (the clock stays at 1800000000: no `wait jst`).
+lists Davoi/Jar/onTrigger Selbina/Devean/onTrade Selbina/onEventFinish/123
+char zone=Davoi pos=-94.1,2.5,-50.8 job=WAR lvl=10 nation=1
+login
+trigger Jar                             # available: no section: NOTHING_OUT_OF_ORDINARY
+quest OtherAreas.TestMyMettle accepted  # a GM
+fill-inventory
+trigger Jar                             # giveItem fails (ITEM_CANNOT_BE_OBTAINED); the jar stays; noAction
+free-inventory
+trigger Jar                             # the sandals given; the jar moved; noAction
+tick 4000                               # move 1 lands
+trigger Jar                             # the sandals held: nil: NOTHING_OUT_OF_ORDINARY
+warp 41.4,-14.6,40 Selbina
+trade Devean PowerSandals x1            # the timer over (Timer 0): 123
+finish                                  # the sandals taken; off the current list
+quest OtherAreas.TestMyMettle accepted  # a GM
+warp -94.1,2.5,-50.8 Davoi
+trigger Jar                             # the sandals given; move 2 (from move 1's spot)
+tick 4000
+warp 41.4,-14.6,40 Selbina
+trade Devean PowerSandals x1            # 123
+finish
+quest OtherAreas.TestMyMettle accepted  # a GM
+warp -94.1,2.5,-50.8 Davoi
+trigger Jar                             # move 3
+tick 4000
+warp 41.4,-14.6,40 Selbina
+trade Devean PowerSandals x1            # 123
+finish
+quest OtherAreas.TestMyMettle accepted  # a GM
+warp -94.1,2.5,-50.8 Davoi
+trigger Jar                             # move 4
+tick 4000
+warp 41.4,-14.6,40 Selbina
+trade Devean PowerSandals x1            # 123
+finish
+quest OtherAreas.TestMyMettle accepted  # a GM
+warp -94.1,2.5,-50.8 Davoi
+trigger Jar                             # move 5
+tick 4000
+warp 41.4,-14.6,40 Selbina
+trade Devean PowerSandals x1            # 123
+finish
+quest OtherAreas.TestMyMettle accepted  # a GM
+warp -94.1,2.5,-50.8 Davoi
+trigger Jar                             # move 6
+tick 4000
+trigger Jar                             # the sandals held: nil

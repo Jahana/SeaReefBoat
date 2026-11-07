@@ -1,0 +1,49 @@
+# Can Cardians Cry? (windurst 47): Apururu (Windurst Woods; default action 274, which takes turns with her script, and
+# a script talk that starts nothing plays it again; her script answers The Kind Cardian first (never started here)
+# and plays the trust event 866 last, with the Windurst Trust Permit and without Ajido-Marujido). A level-75 WAR,
+# Windurst fame 325 (level 5). The All-New C-3000 accepted (GM): no arm; the trust permit: 866, option 0: nothing; no
+# permit: nothing (274). C-3000 completed (GM), fame level 4: nothing. Level 5: the starfruit traded while available:
+# nothing; 319 (0, 20000), option 1: begun (any option). Accepted: 320 (0, 20000); a Wolf Hide traded: nothing; the
+# starfruit and the hide: 325 (0, 20000, 5000): 5000 gil (GIL_OBTAINED), Deliverer of Tearful News, completed, the
+# starfruit taken (the hide kept). Completed: 330; the starfruit: nothing.
+char zone=WindurstWoods pos=-10.5,-2.75,15.9 job=WAR lvl=75
+fame Windurst 325
+item BruisedStarfruit
+item BruisedStarfruit
+item WolfHide
+keyitem WindurstTrustPermit
+login
+quest Windurst.TheAllNewC3000 accepted
+trigger Apururu                         # her default 274
+finish
+trigger Apururu                         # her script: C-3000 not completed: no arm; the permit: 866
+finish option=0                         # not 2: nothing
+delkeyitem WindurstTrustPermit
+trigger Apururu                         # 274
+finish
+trigger Apururu                         # her script: nothing; 274 again
+finish
+quest Windurst.TheAllNewC3000 completed
+fame Windurst 324
+trigger Apururu                         # 274
+finish
+trigger Apururu                         # fame level 4: nothing; 274 again
+finish
+fame Windurst 325
+trade Apururu BruisedStarfruit x1       # available: nothing
+trigger Apururu                         # 274
+finish
+trigger Apururu                         # level 5: 319 (0, 20000)
+finish option=1                         # begun (any option)
+trigger Apururu                         # 274
+finish
+trigger Apururu                         # accepted: 320 (0, 20000)
+finish
+trade Apururu WolfHide x1               # accepted, no starfruit: nothing
+trade Apururu BruisedStarfruit x1 WolfHide x1  # the starfruit among the items: 325 (0, 20000, 5000)
+finish                                  # 5000 gil; Deliverer of Tearful News; completed; the starfruit taken
+trigger Apururu                         # 274
+finish
+trigger Apururu                         # completed: 330
+finish
+trade Apururu BruisedStarfruit x1       # completed: nothing

@@ -1,0 +1,18 @@
+# Trial by Lightning (otherAreas 27): the battlefield won while accepted. With the Tuning Fork of Lightning, at
+# LP_Entrance the fork opens the entry menu 32000; its update with option 1 (index 0, arena 1) registers and enters (the
+# fork taken); Ramuh_Prime_TBL of arena 1 (LIGHTNING_GREMLIN-3: mob 17604609; LIGHTNING_GREMLIN is 17604612) is killed,
+# and the win's 32001 opens within the kill step. Its finish runs content:onEventFinishWin, which calls this quest: Heir
+# of the Great Lightning, the Whisper of Storms. In Mhaura, Ripapa's 10019 (the whisper, no fork) and option 5 (10000
+# gil) complete it.
+char zone=CloisterOfStorms pos=533.5,-14.9,492.0 job=WAR lvl=75
+quest OtherAreas.TrialByLightning accepted
+keyitem TuningForkOfLightning
+login
+trigger LP_Entrance                       # the fork: the entry menu 32000
+update 32000 option=1                     # Trial by Lightning (index 0), arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+kill LIGHTNING_GREMLIN-3                  # Ramuh_Prime_TBL of arena 1: the battlefield won, 32001 opens
+finish                                    # Heir of the Great Lightning, the Whisper of Storms
+warp 30.6,-15.6,56.0 Mhaura
+trigger Ripapa                            # the whisper, no fork: 10019
+finish option=5                           # 10000 gil: completed

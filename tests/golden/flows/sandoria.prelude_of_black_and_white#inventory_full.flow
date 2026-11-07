@@ -1,0 +1,14 @@
+# Prelude of Black and White with the two items and a full inventory: 691 does not complete it (the duckbills cannot
+# be given), the items are not taken; with room, 691 again completes it.
+char zone=NorthernSanDoria pos=128.8,-11,130.3 job=WHM lvl=50
+quest Sandoria.MessengerFromBeyond completed
+quest Sandoria.PreludeOfBlackAndWhite accepted
+item CanteenOfYagudoHolyWater
+item Moccasins
+login
+fill-inventory
+trade Narcheral CanteenOfYagudoHolyWater x1 Moccasins x1   # 691
+finish                                    # no room: not completed, both kept
+free-inventory
+trade Narcheral CanteenOfYagudoHolyWater x1 Moccasins x1   # 691
+finish                                    # completed: Healer's Duckbills, fame +20; both taken

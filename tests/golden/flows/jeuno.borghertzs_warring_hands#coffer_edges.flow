@@ -1,0 +1,57 @@
+# Borghertz's Warring Hands (jeuno 44): the coffers' operands. A level 75 Warrior. Available (no section): the Eldieme
+# coffer: nil, the coffer's own script (its loot). Accepted (a GM), the Old Gauntlets held (a GM): the old-gauntlet
+# section off: nil again (190 s later, the coffer back). Completed (a GM), [AF]ZilartCoffer 2 (bit 1 set, a GM): Castle
+# Zvahl Baileys' coffer: nil, the coffer's own. Bit 1 cleared (a GM), a full bag: the treasure's item bypass answers 0
+# (no room): no bit, noAction; with room: Fighter's Cuisses, [AF]ZilartCoffer 2, while completed. Crawler's Nest's
+# coffer (the second optional zone), a full bag: 0: no bit; with room: Fighter's Mask, [AF]ZilartCoffer 6; the coffer
+# back (190 s later), bit 2 set: nil, the coffer's own script.
+lists TheEldiemeNecropolis/Treasure_Coffer/onTrade CastleZvahlBaileys/Treasure_Coffer/onTrade CrawlersNest/Treasure_Coffer/onTrade
+char zone=TheEldiemeNecropolis pos=301.5,-0.25,19.99 job=WAR lvl=75
+item EldiemeCofferKey
+item EldiemeCofferKey
+item ZvahlCofferKey
+item ZvahlCofferKey
+item ZvahlCofferKey
+item NestCofferKey
+item NestCofferKey
+item NestCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer EldiemeCofferKey x1 # available: nil; the coffer's own script
+tick 4500                               # the coffer opened
+quest Jeuno.BorghertzsWarringHands accepted # a GM
+keyitem OldGauntlets                    # a GM
+tick 190000                             # the coffer back after 180 s
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer EldiemeCofferKey x1 # the gauntlets held: nil; the coffer's own
+tick 4500                               # the coffer opened
+quest Jeuno.BorghertzsWarringHands completed # a GM
+charvar [AF]ZilartCoffer 2              # a GM: bit 1
+warp 110.041,-20.002,106.811 CastleZvahlBaileys
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer ZvahlCofferKey x1 # bit 1 set: nil; the coffer's own
+tick 4500                               # the coffer opened
+charvar [AF]ZilartCoffer 0              # a GM
+fill-inventory
+tick 190000                             # the coffer back
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer ZvahlCofferKey x1 # a full bag: the treasure answers 0: no bit; noAction
+free-inventory
+trigger Treasure_Coffer                 # the same coffer (not moved)
+trade Treasure_Coffer ZvahlCofferKey x1 # completed, bit 1 unset: Fighter's Cuisses; [AF]ZilartCoffer 2
+tick 4500                               # the coffer opened
+warp 58.9,0.4,69 CrawlersNest
+fill-inventory
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer NestCofferKey x1  # bit 2 unset, a full bag: the treasure answers 0: no bit; noAction
+free-inventory
+trigger Treasure_Coffer                 # the same coffer (not moved)
+trade Treasure_Coffer NestCofferKey x1  # completed, bit 2 unset: Fighter's Mask; [AF]ZilartCoffer 6
+tick 4500                               # the coffer opened
+tick 190000                             # the coffer back
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer NestCofferKey x1  # bit 2 set: the second coffer section off: nil; the coffer's own script
+tick 4500                               # the coffer opened

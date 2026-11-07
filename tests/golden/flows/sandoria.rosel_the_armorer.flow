@@ -1,0 +1,33 @@
+# Rosel the Armorer (sandoria 2): Rosel in Southern San d'Oria, Guilerme in Northern San d'Oria. Available: a trade to
+# Rosel (no quest trade handler; his script's Flyers for Regine trade: that quest not accepted, nothing); Rosel's first
+# talk draws Stage (math.randomInt(1, 2) on the pinned seed: it draws 1; #draws covers the range) and plays 523
+# (0, 0, 0, 0, Stage - 1: 0); option 1: Prog 1. Prog 1: 524 (no draw: Stage kept); option 1: nothing; option 0:
+# begun, the Receipt for the Prince. Accepted with the receipt: Rosel's 524 (no finish handler while accepted: nothing).
+# Guilerme with the receipt: 507 (0, 0, 0, 0, 0, 0, Stage - 1); option 1 (the wrong prince): Option 1, the receipt
+# taken; Guilerme without it (nil: his default GUILERME_DIALOG). Rosel without the receipt: 527 (0, 0, 0, 0, Stage - 1,
+# 1); option 0: 200 gil, fame +20, completed (Entrance Denied): the pay follows 527's option, not the Option var.
+# Completed: no section; Rosel's default ROSEL_GREETINGS.
+# Rosel's script answers only the Flyers for Regine trade (his default text ROSEL_GREETINGS); Guilerme has no script
+# (default GUILERME_DIALOG; ToAU's Confessions of Royalty is not current: #confessions). #gm sets Stage and Prog, and
+# takes 507's option 0 with 527's option 1 (100 gil, fame +10).
+lists SouthernSanDoria/Rosel/onTrigger SouthernSanDoria/Rosel/onTrade SouthernSanDoria/onEventFinish/523 SouthernSanDoria/onEventFinish/524 SouthernSanDoria/onEventFinish/527 NorthernSanDoria/Guilerme/onTrigger NorthernSanDoria/onEventFinish/507
+char zone=SouthernSanDoria pos=71.4,0.0,41.1 job=WAR lvl=30
+item BoneChip
+login
+trade Rosel BoneChip x1                   # available: no quest trade handler; Flyers for Regine not accepted: nothing
+trigger Rosel                             # Stage 0: drawn 1, Stage 1; Prog 0: 523 (0, 0, 0, 0, 0)
+finish option=1                           # not option 0: Prog 1
+trigger Rosel                             # Stage kept; Prog 1: 524 (0, 0, 0, 0, Stage - 1)
+finish option=1                           # not option 0: nothing
+trigger Rosel                             # 524
+finish                                    # option 0: begun; the Receipt for the Prince
+trigger Rosel                             # accepted, the receipt: 524 (0, 0, 0, 0, Stage - 1)
+finish                                    # accepted: no 524 finish handler; nothing
+warp -3.0,0.0,99.0 NorthernSanDoria
+trigger Guilerme                          # the receipt: 507 (0, 0, 0, 0, 0, 0, Stage - 1)
+finish option=1                           # Option 1; the receipt taken
+trigger Guilerme                          # no receipt: nil; GUILERME_DIALOG
+warp 71.4,0.0,41.1 SouthernSanDoria
+trigger Rosel                             # no receipt: 527 (0, 0, 0, 0, Stage - 1, 1)
+finish                                    # option 0 (Option is 1: the finish reads its own option): 200 gil, fame +20; completed (Entrance Denied)
+trigger Rosel                             # completed: no section; ROSEL_GREETINGS

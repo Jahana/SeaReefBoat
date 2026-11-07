@@ -1,0 +1,56 @@
+# Better Part of Valor (crystalWar 12), the edges: a level 99 Warrior in Bastok Markets [S] with two Gnole Claws (missions
+# as the main flow). No nation opener completed (the check's helper false): Engelhart: his default 104; North Gustaberg
+# [S] from Bastok Markets [S]: no zone-in reply; Solitary Ant: no section: his default 112; Vunkerl Inlet [S]: a claw
+# to Leadavox: no handler (nil); Leadavox: his default 100. Steamed Rams completed (a GM: the helper's first arm): a
+# claw to Leadavox while available: nil; North Gustaberg [S] from Vunkerl Inlet [S]: nil (not from Bastok Markets
+# [S]); from Bastok Markets [S]: 1, finished on option 1: begun (any option), the hair. Accepted: qm1 at Prog 0: nil;
+# Leadavox at Prog 0 and 1 (a GM): nil (100); Prog 3 (a GM): two claws: nil (not exactly one), a Gnole Claw stays;
+# Engelhart 117 at Prog 3 and 2; qm1 at Prog 4 (a GM): nil.
+lists BastokMarketsS/Engelhart/onTrigger BastokMarketsS/onEventFinish/116 NorthGustabergS/onZoneIn/1 NorthGustabergS/onEventFinish/1 NorthGustabergS/qm1/onTrigger NorthGustabergS/Solitary_Ant/onTrigger VunkerlInletS/Leadavox/onTrigger VunkerlInletS/Leadavox/onTrade VunkerlInletS/onEventFinish/103
+char zone=BastokMarketsS pos=-78.585,-4.425,-125.327 job=WAR lvl=99
+item GnoleClaw x2
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Engelhart                       # no opener completed: no section: 104
+finish-if-event
+warp 380.038,-2.25,147.627 NorthGustabergS # from Bastok Markets [S], no opener: no zone-in reply
+trigger Solitary_Ant                    # available: no section: his default 112
+finish-if-event
+warp 208.581,-32.002,315.458 VunkerlInletS
+trade Leadavox GnoleClaw x1             # no opener: no handler
+finish-if-event
+trigger Leadavox                        # no opener: his default 100
+finish-if-event
+quest CrystalWar.SteamedRams completed  # hasCompletedFirstQuest (Steamed Rams' arm)
+trade Leadavox GnoleClaw x1             # available: no trade handler
+finish-if-event
+warp 380.038,-2.25,147.627 NorthGustabergS # from Vunkerl Inlet [S]: nil
+warp -78.585,-4.425,-125.327 BastokMarketsS
+warp 380.038,-2.25,147.627 NorthGustabergS open # from Bastok Markets [S]: 1, left open
+finish option=1                         # begun (any option); the hair
+warp -575.082,39.854,64.186 NorthGustabergS
+trigger qm1                             # Prog 0: nil
+finish-if-event
+warp 208.581,-32.002,315.458 VunkerlInletS
+trigger Leadavox                        # Prog 0: nil: 100
+finish-if-event
+charvar Quest[7][12]Prog 1              # a GM
+trigger Leadavox                        # Prog 1: nil: 100
+finish-if-event
+charvar Quest[7][12]Prog 3              # a GM
+trade Leadavox GnoleClaw x2             # Prog 3, two claws: nil (tradeHasExactly one)
+finish-if-event
+warp -78.585,-4.425,-125.327 BastokMarketsS
+trigger Engelhart                       # Prog 3: 117
+finish
+charvar Quest[7][12]Prog 2              # a GM
+trigger Engelhart                       # Prog 2: 117
+finish
+charvar Quest[7][12]Prog 4              # a GM
+warp -575.082,39.854,64.186 NorthGustabergS
+trigger qm1                             # Prog 4: nil
+finish-if-event

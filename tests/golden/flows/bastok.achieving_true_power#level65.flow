@@ -1,0 +1,14 @@
+# Achieving True Power below main level 66: not offered (available guard), and accepted at level 65 (a GM state: the
+# accepted guard false, no handler: Shamarhaan's default 433 for a talk, nothing for the testimony).
+lists BastokMarkets/Shamarhaan/onTrigger BastokMarkets/Shamarhaan/onTrade
+char zone=BastokMarkets pos=-285.4,-12,-83.2 job=PUP lvl=65
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.PuppetmasterBlues completed
+item PuppetmastersTestimony
+login
+trigger Shamarhaan                   # level 65: not offered, 433
+finish-if-event
+quest Bastok.AchievingTruePower accepted
+trigger Shamarhaan                   # accepted, level 65: the guard false, 433
+finish-if-event
+trade Shamarhaan PuppetmastersTestimony x1  # the guard false: nothing

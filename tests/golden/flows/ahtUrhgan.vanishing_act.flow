@@ -1,0 +1,76 @@
+# Vanishing Act (ahtUrhgan 62): a level 75 Warrior with a Sickle, Delivering the Goods accepted at Prog 1 (GMs).
+# Fochacha 41 completes it (Stage now + 60, the zoning flag). Available: the flag: Qutiba 52; out of Whitegate and back,
+# now < Stage: Ulamaal 53; Fochacha 47; after a JST day: Qutiba 42, option 1: still available;
+# Ulamaal 42, option 0: Stage 0, begun. Accepted: Ulamaal 54 (no berry); Fochacha 43, finished: Prog 1; Fochacha 48.
+# Into trigger area 2 from the south: 44, finished: the char at -80 -6 122 (and the zone's own finish: vanishingactCS 4,
+# the same setPos), Prog 2. Fochacha 49. Wajaom Woodlands: the first Harvesting Point, a Sickle: 507 ([0] 4294966520),
+# finished: the Rainbow Berry (KEYITEM_OBTAINED). Back in Whitegate: Qutiba 45, finished: completed, an Imperial Silver
+# Piece, the zoning flag, the berry taken, A Taste of Honey's Stage now + 60. Completed, A Taste of Honey available but
+# the flag: Ulamaal 56 then 58, Fochacha 50 then 59 (Events alike: each pair cycles, A Taste of Honey's first).
+# Out and back, a JST day: Qutiba: A Taste of Honey's 579, begun; then Ulamaal 58 alone, its updates walking the
+# recipe 58 -> 1 -> 2 -> 3 -> 0 (a fifth: nothing); Fochacha 59 alone.
+lists AhtUrhganWhitegate/Fochacha/onTrigger AhtUrhganWhitegate/Qutiba/onTrigger AhtUrhganWhitegate/Ulamaal/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/2 AhtUrhganWhitegate/onEventFinish/44 AhtUrhganWhitegate/onEventFinish/45 WajaomWoodlands/Harvesting_Point/onTrade WajaomWoodlands/onEventFinish/507
+char zone=AhtUrhganWhitegate pos=2.897,0,-10.781 job=WAR lvl=75
+item Sickle
+quest AhtUrhgan.DeliveringTheGoods accepted
+charvar Quest[6][61]Prog 1
+login
+trigger Fochacha                        # Delivering at Prog 1: 41
+finish                                  # Delivering completed; Stage now + 60; needToZone
+trigger Qutiba                          # Vanishing Act available, the zoning flag: 52
+finish
+warp -64,-7,38 AlZahbi                  # the zoning flag cleared
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+trigger Ulamaal                         # now < Stage: 53
+finish
+trigger Fochacha                        # available: 47
+finish
+wait jst=1                              # past the Stage (system time; a Vana hour does not move it)
+trigger Qutiba                          # 42
+finish option=1                         # not option 0: still available
+trigger Ulamaal                         # 42
+finish option=0                         # Stage 0; begun
+trigger Ulamaal                         # accepted, no berry: 54
+finish
+trigger Fochacha                        # Prog 0: 43
+finish                                  # Prog 1
+trigger Fochacha                        # Prog 1: 48
+finish
+warp -80,-6,115 AhtUrhganWhitegate      # south of trigger area 2
+tick 1000
+tick 1000
+tick 1000
+walk -80,-6,125                         # into area 2 at Prog 1: 44
+finish                                  # the char at -80 -6 122; Prog 2 (the zone's finish: vanishingactCS 4)
+trigger Fochacha                        # Prog 2: 49
+finish
+trigger Qutiba                          # no berry: 54
+finish
+warp -587.328,-17.999,-200 WajaomWoodlands
+trade Harvesting_Point Sickle x1        # Prog 2, no berry: questItem 1; 507 ([0] 4294966520)
+finish                                  # the Rainbow Berry; questItem 0
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+trigger Qutiba                          # the berry: 45
+finish                                  # completed; silver piece; needToZone; berry taken; ATOH Stage now + 60
+trigger Ulamaal                         # completed, the flag: A Taste of Honey's 56 first
+finish
+trigger Ulamaal                         # the tie's other one: 58 (recipe 58)
+finish
+trigger Fochacha                        # A Taste of Honey's 50 first
+finish
+trigger Fochacha                        # the other one: 59
+finish
+warp -64,-7,38 AlZahbi                  # the zoning flag cleared
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+wait jst=1                              # past A Taste of Honey's Stage
+trigger Qutiba                          # A Taste of Honey's 579
+finish                                  # its Stage 0; begun
+trigger Ulamaal                         # A Taste of Honey accepted has no Ulamaal: 58 alone (recipe 58)
+update 58 option=0                      # recipe 58 -> 1: (5579, 1, 255, 0, 67108863, 5976652, 4095)
+update 58 option=0                      # 1 -> 2: (4096, 615, 936, 1523, 67108863, 5976652, 4)
+update 58 option=0                      # 2 -> 3: (2214, 2237, 4509, 5568)
+update 58 option=0                      # 3 -> 0: (5575)
+update 58 option=0                      # recipe 0: no branch: nothing
+finish
+trigger Fochacha                        # 59 alone
+finish

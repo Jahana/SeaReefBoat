@@ -1,0 +1,62 @@
+# The Crimson Trial (sandoria 84, RDM AF1): Sharzalion and Valderotaux in Southern San d'Oria, the Storage Hole and
+# Purpleflash Brukdok in Davoi. An RDM 40, a JST day after login (54's argument, the playtime, is then 86400, not 0: the
+# wall clock moves only with `wait jst`): Valderotaux at Prog 0 in the active section (nil: his default 58),
+# Sharzalion's 70 declined (Prog 1), a trade while available (nothing), Valderotaux's 54 (the playtime) with update
+# option 0 (nothing) and option 1 (updateEvent(54, 0)), 71 declined, 71 taken (begun). Accepted: Sharzalion's 74 (an
+# Event: his script's 15 on the next talk), Valderotaux's 54 with update option 0 (nothing) and option 1
+# (updateEvent(54, 0)).
+# Davoi, about 35 yalms east of Brukdok's spawn point (-135.5, -0.1, -184.7: in view, so its spawn is recorded): the
+# zone-in spawns Purpleflash Brukdok; a rezone with it up spawns nothing; then at the Storage Hole: its
+# AN_ORCISH_STORAGE_HOLE; a bone chip (nil); the Davoi Storage Key (taken, the Orcish Dried Food, nil); a second key with
+# the food held (nil, kept). Sharzalion's 75 (completed: Fencing Degen, fame +20, the food deleted), then his script's 15.
+# Sharzalion's script always starts an event (15 here: Enveloped in Darkness not completed); the quest's Event-priority
+# 74 alternates with it (interaction_lookup's UseFallback). Valderotaux and the Storage Hole have no script; defaults 58
+# and YOU_SEE_NOTHING. Neither Sharzalion's script nor the quest has an onTrade for him.
+lists SouthernSanDoria/Sharzalion/onTrigger SouthernSanDoria/Sharzalion/onTrade SouthernSanDoria/Valderotaux/onTrigger SouthernSanDoria/onEventUpdate/54 SouthernSanDoria/onEventFinish/70 SouthernSanDoria/onEventFinish/71 SouthernSanDoria/onEventFinish/75 Davoi/Storage_Hole/onTrigger Davoi/Storage_Hole/onTrade Davoi/onZoneIn/1
+char zone=SouthernSanDoria pos=96.4,0,111.6 job=RDM lvl=40
+item BoneChip
+item DavoiStorageKey
+login
+wait jst=1                                # the playtime: 86400
+trigger Valderotaux                       # available, Prog 0: the section's handler returns nil; his default 58
+finish
+trigger Sharzalion                        # walks to him: available, Prog 0: 70
+finish                                    # option 0: Prog 1 (declined)
+trade Sharzalion BoneChip x1              # available: no trade handler (his script has none): nothing
+trigger Valderotaux                       # Prog 1: 54 (the playtime)
+update 54 option=0                        # option 0: no updateEvent
+finish
+trigger Valderotaux                       # 54
+update 54 option=1                        # updateEvent(54, 0)
+finish
+trigger Sharzalion                        # Prog 1: 71
+finish                                    # option 0: nothing
+trigger Sharzalion                        # 71
+finish option=1                           # begun
+trigger Sharzalion                        # accepted, no food: 74 (Event)
+finish
+trigger Sharzalion                        # the script's turn: 15
+finish
+trigger Valderotaux                       # accepted: 54 (the playtime)
+update 54 option=0                        # option 0: no updateEvent
+finish
+trigger Valderotaux                       # 54
+update 54 option=1                        # updateEvent(54, 0)
+finish
+warp -100,0,-184.7 Davoi                  # zone-in, no food, Brukdok down: Purpleflash Brukdok spawned (in view)
+walk -101,0,-184.7                        # a step: the entities in view are sent, Brukdok among them
+rezone                                    # zone-in, Brukdok up: nothing spawned
+walk -100,0,-184.7                        # Brukdok seen again (the same mob, not respawned)
+warp -21.3,3.9,-195.1 Davoi               # to the Storage Hole (Brukdok up: nothing spawned)
+trigger Storage_Hole                      # accepted: AN_ORCISH_STORAGE_HOLE
+trade Storage_Hole BoneChip x1            # not exactly the key: nil, nothing (no script)
+trade Storage_Hole DavoiStorageKey x1     # the key taken (tradeComplete), the Orcish Dried Food; nil
+item DavoiStorageKey
+trade Storage_Hole DavoiStorageKey x1     # the food held: nil, the key kept
+warp 96.4,0,111.6 SouthernSanDoria
+trigger Sharzalion                        # the food: 75
+finish                                    # completed: Fencing Degen, fame +20; the food deleted
+trigger Sharzalion                        # completed (Enveloped in Darkness needs level 50): his script's 15
+finish
+trigger Valderotaux                       # completed: no section; 58
+finish

@@ -1,0 +1,28 @@
+# Breaking the Ice (adoulin 54): a level 99 Warrior in Kamihr Drifts with four Rabbit Hides and a Raaz Tusk. A trade
+# while available: no handler (Traiffeaux has no script, no default). Traiffeaux: 24, finished on 1, 0 and 3: not begun;
+# on 2: begun. Accepted: 25; a trade of two hides and the tusk: nil (not exactly); of the three hides alone: nil; of
+# three and the tusk: 26, finished: the Pair of Fuzzy Earmuffs, YOU_HAVE_LEARNED Fragmenting, completed (500 bayld), the
+# trade confirmed, Fragmenting added. Completed: no section: a talk and a trade, nothing.
+lists KamihrDrifts/Traiffeaux/onTrigger KamihrDrifts/Traiffeaux/onTrade
+lists KamihrDrifts/onEventFinish/24 KamihrDrifts/onEventFinish/26
+char zone=KamihrDrifts pos=438.951,63,-290.512 job=WAR lvl=99
+item RabbitHide x4
+item RaazTusk
+login
+trade Traiffeaux RabbitHide x3 RaazTusk x1  # available: no trade handler: nothing
+trigger Traiffeaux                      # available: 24
+finish option=1                         # not option 2: not begun
+trigger Traiffeaux                      # 24
+finish option=0                         # not option 2: not begun
+trigger Traiffeaux                      # 24
+finish option=3                         # not option 2: not begun
+trigger Traiffeaux                      # 24
+finish option=2                         # begun
+trigger Traiffeaux                      # accepted: 25 (an Event)
+finish
+trade Traiffeaux RabbitHide x2 RaazTusk x1  # not exactly: nil
+trade Traiffeaux RabbitHide x3          # not exactly (no tusk): nil
+trade Traiffeaux RabbitHide x3 RaazTusk x1  # exactly: 26
+finish                                  # earmuffs, the learned line, completed, confirmed, Fragmenting
+trigger Traiffeaux                      # completed: no section: nothing
+trade Traiffeaux RabbitHide x1          # completed: no section: nothing

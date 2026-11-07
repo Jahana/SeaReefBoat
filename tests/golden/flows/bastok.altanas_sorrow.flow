@@ -1,0 +1,48 @@
+# Altana's Sorrow (bastok 49): Virnage in Bastok Mines, the qm1 in Garlaige Citadel, Eperdur in Northern San d'Oria. The
+# guard (main level 10, Bastok fame level 4), the offer 141 (option 0 begins it), Virnage's accepted events 142 / 143 /
+# 144, which his handler starts itself with player:startEvent and answers the lookup with nil: the lookup then performs
+# his DefaultActions 140 too, which the engine queues behind the open event (it opens when that one ends), the qm1's KI
+# Bucket of Divine Paint, Virnage's 143 (the bucket deleted, KI Letter from Virnage), Eperdur's 679 (completed: Scroll
+# of Teleport-Dem, Pilgrim to Dem, fame +40, the letter deleted), Virnage's 145 once completed (replaceDefault).
+# Defaults: Virnage 140, the qm1 YOU_FIND_NOTHING, Eperdur 678 (and his own script: Healing the Land and Sorcery of the
+# North, from San d'Oria fame level 4; this char has none). A Question of Faith (C#) names Virnage only while accepted.
+lists BastokMines/Virnage/onTrigger BastokMines/Virnage/onTrade BastokMines/onEventFinish/141 BastokMines/onEventFinish/143 GarlaigeCitadel/qm1/onTrigger NorthernSanDoria/Eperdur/onTrigger NorthernSanDoria/onEventFinish/679
+char zone=BastokMines pos=1.5,0,51.5 lvl=10
+fame Bastok 224
+item BoneChip
+login
+trigger Virnage                      # fame 224 (level 3): not offered, 140
+finish-if-event
+trade Virnage BoneChip x1            # available: no trade handler, nothing
+fame Bastok 225
+trigger Virnage                      # the offer, 141
+finish option=1                      # declined: still available
+trigger Virnage                      # 141 again
+finish                               # option 0: accepted
+trigger Virnage                      # accepted, no key items: startEvent 142 (ret nil); the lookup then starts his
+                                     # default 140, queued
+finish                               # 142 ends; the queued 140 opens
+finish                               # 140 ends
+warp -282.3,0,263.2 GarlaigeCitadel
+trigger qm1                          # neither key item: KI Bucket of Divine Paint
+finish-if-event
+trigger qm1                          # the bucket held: nil, YOU_FIND_NOTHING
+finish-if-event
+warp 1.5,0,51.5 BastokMines
+trigger Virnage                      # the bucket: startEvent 143 (ret nil), the default 140 queued
+finish                               # the bucket deleted, KI Letter from Virnage; the queued 140 opens
+finish                               # 140 ends (no quest finish for 140)
+trigger Virnage                      # the letter: startEvent 144 (ret nil), the default 140 queued
+finish                               # 144 ends; 140 opens
+finish                               # 140 ends
+warp -282.3,0,263.2 GarlaigeCitadel
+trigger qm1                          # the letter held: nil, YOU_FIND_NOTHING
+finish-if-event
+warp 128.3,-6.5,97.2 NorthernSanDoria
+trigger Eperdur                      # the letter: 679
+finish                               # completed: Scroll of Teleport-Dem, Pilgrim to Dem, fame +40, the letter deleted
+trigger Eperdur                      # completed: no handler, his script
+finish-if-event
+warp 1.5,0,51.5 BastokMines
+trigger Virnage                      # completed: 145 (replaceDefault)
+finish

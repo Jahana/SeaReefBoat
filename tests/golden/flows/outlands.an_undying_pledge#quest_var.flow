@@ -1,0 +1,18 @@
+# An Undying Pledge (outlands 149), the quest's own var at the completion: accepted with the Caliginous Blade and
+# Quest[5][149]Prog 1 (GMs). Stray Cloud's 227 (the second talk of a pair: his default 231 first): npcUtil.completeQuest
+# (the Light Buckler, Norg fame +40, anUndyingPledgeCS cleared, completed), then the blade taken. npcUtil.completeQuest
+# does no cleanup: Quest[5][149]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=Norg pos=-19.2,1.1,-21 job=WAR lvl=75
+quest Outlands.AnUndyingPledge accepted
+keyitem CaliginousBlade
+charvar anUndyingPledgeCS 3
+charvar Quest[5][149]Prog 1             # a GM: the quest's own var
+login
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, the blade: 227
+finish                                  # the buckler; fame +40; the CS var 0; completed, Prog kept; the blade taken
+trigger Stray_Cloud                     # default turn: 231
+finish
+trigger Stray_Cloud                     # script, completed: 230
+finish

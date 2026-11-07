@@ -1,0 +1,15 @@
+# Methods Create Madness (sandoria 98): the Water Leaper's death without the map. Only a map holder pops the Leaper, and
+# the map leaves only through 13 or 11's option 2, so a GM deletes the map while the Leaper is up: the death handler's
+# hasKeyItem(MAP_TO_THE_ANNALS_OF_TRUTH) is false and killed_wsnm stays 0, so the next qm1 talk gives nothing.
+char zone=SeaSerpentGrotto pos=105.6,0.7,-125.3 job=WAR lvl=75
+quest Sandoria.ASquiresTest completed
+quest Sandoria.ASquiresTestIi completed
+quest Sandoria.AKnightsTest completed
+quest Sandoria.MethodsCreateMadness accepted
+keyitem WeaponTrainingGuide
+keyitem MapToTheAnnalsOfTruth
+login
+trigger qm1                               # the map, no Annals: the Water Leaper popped and claimed, SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth
+kill WATER_LEAPER                         # no map: killed_wsnm not set
+trigger qm1                               # killed_wsnm 0, no map: nil, NOTHING_OUT_OF_ORDINARY (no Annals)

@@ -1,0 +1,25 @@
+# The Truth Beckons (abyssea 161), the reply kind: a level 99 Warrior in Port Jeuno with A Journey Begins completed and
+# the quest accepted, and Dawn of Death completed (GMs: no section; it makes his script answer, which does nothing
+# before Dawn of Death is accepted, so the lookup would play the quest's action anyway). Joachim at Prog 0: 326,
+# finished; Joachim again: 326 again. Prog 1 (a GM): 327, finished: completed, Dawn of Death added (accepted again, no
+# maw quest: no section). The quest back to accepted at Prog 1 (GMs): Joachim again: 327 again. Joachim has his own
+# onTrigger (xi.abyssea.traverserNPCOnTrigger): an Event-rank 326 or 327 would alternate with it
+# (interaction_lookup.lua's UseFallback) and the second talk would go to his script (his 328).
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/326 PortJeuno/onEventFinish/327
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons accepted
+quest Abyssea.DawnOfDeath completed
+login
+trigger Joachim                         # Prog 0: 326
+finish
+trigger Joachim                         # 326 again (the kind)
+finish
+charvar Quest[8][161]Prog 1             # a GM: Prog 1
+trigger Joachim                         # 327
+finish                                  # completed; Dawn of Death added
+quest Abyssea.TheTruthBeckons available # a GM
+quest Abyssea.TheTruthBeckons accepted  # a GM
+charvar Quest[8][161]Prog 1             # a GM: Prog 1
+trigger Joachim                         # 327 again (the kind)
+finish                                  # completed again

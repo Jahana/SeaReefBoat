@@ -1,0 +1,15 @@
+# Tango with a Tracker (otherAreas 82): the available check's false side at its edge. CoP A Fate Decided current (not
+# completed: CoP's hasCompletedMission is "below the current"), X Marks the Spot completed (a GM: its available 144
+# would tie on Despachiaire). No section: Despachiaire answers CoP's 317 (replaceDefault). A trade to Despachiaire while
+# the quest is available: no trade handler, nothing. (The CoP mission is set before the login: a GM's addMission over a
+# current one logs `lua: addMission: overwriting current mission`, which the recorder refuses; the true side, When
+# Angels Fall current, is in the main flow and #battlefield.)
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Despachiaire/onTrade TavnazianSafehold/onEventFinish/576
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+mission Cop AFateDecided current
+quest OtherAreas.XMarksTheSpot completed
+item ChocoboFeather
+login
+trigger Despachiaire                    # A Fate Decided not completed: no section; 317
+finish
+trade Despachiaire ChocoboFeather x1    # available: no trade handler; nothing

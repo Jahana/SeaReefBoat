@@ -1,0 +1,85 @@
+# Class Reunion (windurst 82): the students' vars against Koru-Moru's 408 / 410 and the students' own arms, an SMN 75,
+# The Puppet Master completed and Class Reunion accepted by GM. Koru-Moru: var 0: nothing (no 412: var 1 only);
+# var 3 with only Furakku-Norakku talked to: 408; with ClassReunion_TalkedToFupepe 2 (not 1): 408; Fuepepe talked to
+# and ClassReunion_TalkedToFurakku 2: 408; var 7 with one not talked to: 408 (>= 3 has no upper bound); var 7 with
+# both: nothing; var 6 with only Fuepepe: 408 (not 410). Shantotto at var 2: nothing. Fuepepe at var 2: nothing; at
+# var 7, not talked to: 817; at var 3 with TalkedToFupepe 2: 817. Furakku-Norakku at var 2: nothing; at var 3 with
+# TalkedToFurakku 2: 816.
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion accepted
+login
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # accepted, var 0: no arm: 193
+finish
+charvar ClassReunionProgress 3
+charvar ClassReunion_TalkedToFurakku 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 3, only Furakku-Norakku talked to: 408
+finish
+charvar ClassReunion_TalkedToFupepe 2
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # TalkedToFupepe 2 (not 1): 408
+finish
+charvar ClassReunion_TalkedToFupepe 1
+charvar ClassReunion_TalkedToFurakku 2
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # Fuepepe talked to, TalkedToFurakku 2 (not 1): 408
+finish
+charvar ClassReunion_TalkedToFurakku 1
+charvar ClassReunionProgress 7
+charvar ClassReunion_TalkedToFupepe 0
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 7, Fuepepe not talked to: 408
+finish
+charvar ClassReunion_TalkedToFupepe 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 7, both talked to: no 408, no 410 (var 6 only): 193
+finish
+charvar ClassReunionProgress 6
+charvar ClassReunion_TalkedToFurakku 0
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 6, only Fuepepe talked to: 408, not 410
+finish
+charvar ClassReunionProgress 2
+warp 124.1,-3.0,113.6 WindurstWalls     # beside Shantotto
+trigger Shantotto                       # Curses Foiled Again 1's turn: its offer 171 (Event)
+finish
+trigger Shantotto                       # accepted, var 2: no 409: 171
+finish
+charvar ClassReunion_TalkedToFupepe 0
+warp 165.0,-1.25,161.1 WindurstWaters   # beside Fuepepe
+trigger Fuepepe                         # the default's turn: 423
+finish
+trigger Fuepepe                         # accepted, var 2 (under 3): no 817: 423
+finish
+charvar ClassReunionProgress 7
+trigger Fuepepe                         # the default's turn: 423
+finish
+trigger Fuepepe                         # var 7, not talked to: 817
+finish                                  # ClassReunion_TalkedToFupepe 1
+charvar ClassReunionProgress 3
+charvar ClassReunion_TalkedToFupepe 2
+trigger Fuepepe                         # the default's turn: 423
+finish
+trigger Fuepepe                         # var 3, TalkedToFupepe 2 (not 1): 817
+finish                                  # ClassReunion_TalkedToFupepe 1
+charvar ClassReunionProgress 2
+warp -16.5,-5.25,102.0 WindurstWaters   # beside Furakku-Norakku
+trigger Furakku-Norakku                 # the default's turn: 371
+finish
+trigger Furakku-Norakku                 # accepted, var 2 (under 3): no 816: 371
+finish
+charvar ClassReunionProgress 3
+charvar ClassReunion_TalkedToFurakku 2
+trigger Furakku-Norakku                 # the default's turn: 371
+finish
+trigger Furakku-Norakku                 # var 3, TalkedToFurakku 2 (not 1): 816
+finish                                  # ClassReunion_TalkedToFurakku 1

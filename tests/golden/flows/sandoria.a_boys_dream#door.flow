@@ -1,0 +1,28 @@
+# A Boy's Dream (sandoria 91): the door _6h0's chain (Under Oath's arms, the Trion trust, this quest's 88, rank 10's
+# 62). A San d'Oria PLD 50 of rank 10 (GM): 62; aBoysDreamCS 9 (GM): 62. aBoysDreamCS 8 (GM): 88 before 62; finished
+# with a full inventory: ITEM_CANNOT_BE_OBTAINED, nothing else. The San d'Oria Trust permit (GM): the trust's 574 before
+# 88; option 0: nothing. UnderOathCS 8 (GM): Under Oath's 89 before the trust; a full inventory:
+# ITEM_CANNOT_BE_OBTAINED.
+char zone=ChateauDoraguille pos=-38.0,-4.9,73.5 job=PLD lvl=50 nation=0
+rank 10
+login
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # rank 10, nothing else: 62
+finish
+charvar aBoysDreamCS 9                  # GM
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # CS 9: no 88; rank 10: 62
+finish
+charvar aBoysDreamCS 8
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # CS 8: 88 (before 62)
+fill-inventory
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED; CS 8 kept
+keyitem SanDoriaTrustPermit
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # rank 10, the permit, no Trion: 574 (before 88)
+finish option=0                         # nothing
+charvar UnderOathCS 8
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # UnderOathCS 8: 89 (before the trust)
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (Gallant Surcoat)

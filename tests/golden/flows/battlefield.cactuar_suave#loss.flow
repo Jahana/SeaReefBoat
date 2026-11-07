@@ -1,0 +1,18 @@
+# Cactuar Suave (battlefield.cactuar_suave): a loss on time. A level 75 Warrior with a Clotho Orb: traded, area 1
+# (option 81): entered. The time prompts on the golden clock: TIME_LEFT 600, 300, 60, 30, 10 (the 30-minute limit is
+# above each); time up: TIME_IN_THE_BATTLEFIELD_IS_UP, LOST, the forced cleanup: onBattlefieldLeave (LOST):
+# onBattlefieldLoss: 32002 (lossEventParams: none); finished: leaveBattlefield(1).
+lists ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/onEventFinish/32002
+char zone=ChamberOfOracles pos=-218.6,-1.9,23.0 job=WAR lvl=75
+item ClothoOrb
+login
+trade SC_Entrance ClothoOrb x1          # the menu 32000
+update 32000 option=81                  # area 1: registered, entered; A_CRACK_HAS_FORMED
+finish                                  # in the arena
+tick 1202000                            # 599 s left: TIME_LEFT 600
+tick 300000                             # 299 s left: 300
+tick 240000                             # 59 s left: 60
+tick 30000                              # 29 s left: 30
+tick 20000                              # 9 s left: 10
+tick 10000                              # time up: LOST, the forced cleanup: 32002
+finish-if-event                         # leaveBattlefield(1)

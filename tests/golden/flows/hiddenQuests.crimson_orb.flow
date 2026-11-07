@@ -1,0 +1,41 @@
+# Crimson Orb (hidden quest CrimsonOrb): a level 75 Warrior (race 1, Hume male) in Davoi. Sedal-Godjal at Prog 0: 24
+# (canSkip, replaceDefault). A pond at Prog 0: nil: its default (the pool is the color of blood). The Wall of Banishing
+# (_45d) at Prog 0: Prog 1, nil: its script (the cave is sealed off). Sedal-Godjal at Prog 1: 22 (canSkip); finished on
+# 0: nothing; on 1: Prog 2, the White Orb. Prog 2: 21 (canSkip); the wall: MAY_BE_SOME_WAY_TO_BREAK. The ponds in order
+# _45g, _45h, _45i, _45j: ORB_QUEST_OFFSET, the cutscene 50 + offset (0, the ponds done, 1); each finish: the bit,
+# ORB_QUEST_OFFSET + done + 1 (0, 0, 0, the next orb), the orb swapped (White -> Pink -> Red -> Blood -> Cursed); a pond
+# already done: nil (its default); the fourth: Curse I (power 50, 600 s), ORB_QUEST_OFFSET + 5, Prog 3. Sedal-Godjal at
+# Prog 3: the cutscene 25 (0, 0, 0, 136); finished: the Cursed Orb taken, quest:complete (the Crimson Orb, the vars
+# cleared). Then the check fails (the Crimson Orb held): his default.
+lists Davoi/Sedal-Godjal/onTrigger Davoi/_45d/onTrigger Davoi/_45g/onTrigger Davoi/_45h/onTrigger Davoi/_45i/onTrigger Davoi/_45j/onTrigger Davoi/onEventFinish/22 Davoi/onEventFinish/25 Davoi/onEventFinish/50 Davoi/onEventFinish/51 Davoi/onEventFinish/52 Davoi/onEventFinish/53
+char zone=Davoi pos=187,-3,-115 job=WAR lvl=75 race=1
+login
+trigger Sedal-Godjal                    # Prog 0: 24 (canSkip, replaceDefault)
+finish
+trigger _45g                            # Prog 0: nil: the pond's default
+finish-if-event
+trigger _45d                            # the wall, Prog 0: Prog 1; nil: its script
+finish-if-event
+trigger Sedal-Godjal                    # Prog 1: 22 (canSkip)
+finish option=0                         # nothing
+trigger Sedal-Godjal                    # 22
+finish option=1                         # Prog 2, the White Orb
+trigger Sedal-Godjal                    # Prog 2: 21 (canSkip)
+finish
+trigger _45d                            # Prog 2: MAY_BE_SOME_WAY_TO_BREAK
+trigger _45g                            # ORB_QUEST_OFFSET; cutscene 50 (0, 0, 1)
+finish                                  # bit 0; ORB + 1 (Pink Orb); White -> Pink
+trigger _45g                            # done: nil: the pond's default
+finish-if-event
+trigger _45h                            # cutscene 51 (0, 1, 1)
+finish                                  # Pink -> Red
+trigger _45i                            # cutscene 52 (0, 2, 1)
+finish                                  # Red -> Blood
+trigger _45j                            # cutscene 53 (0, 3, 1)
+finish                                  # Blood -> Cursed; Curse I; ORB + 5; Prog 3
+trigger Sedal-Godjal                    # Prog 3: cutscene 25 (0, 0, 0, 136)
+finish                                  # the Cursed Orb taken; the Crimson Orb; the vars cleared
+trigger Sedal-Godjal                    # the Crimson Orb held: the check fails: his default
+finish-if-event
+trigger _45d                            # the check fails: its script (the orb lets the char pass)
+finish-if-event

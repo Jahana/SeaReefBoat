@@ -1,0 +1,41 @@
+# Lovers in the Dusk (bastok 63): Carmelo in Port Bastok, qm4 in The Sanctuary of Zi'Tah. The guard (A Test of True Love
+# completed, Bastok fame level 6, the quest's own mustZone clear: A Test of True Love's completion sets it), the offer
+# 275 (the Chanson de Liberte, accepted), Carmelo's 276, qm4's 204 at dusk (17:00-17:59) and the reward, then 277
+# (replaceDefault). Carmelo's default is 182; The Siren's Tear's Prog var is 2 (its last cutscene seen), so it stays
+# silent. qm4's default is the text NOTHING_OUT_OF_ORDINARY; the other quests and missions that name a qm4 are in other
+# zones. The harness clock starts at noon: 5 game hours on it is dusk.
+lists PortBastok/Carmelo/onTrigger PortBastok/Carmelo/onTrade TheSanctuaryOfZitah/qm4/onTrigger PortBastok/onEventFinish/275 TheSanctuaryOfZitah/onEventFinish/204
+char zone=PortBastok pos=-146.5,-7.48,13 lvl=75
+fame Bastok 424
+charvar Quest[1][0]Prog 2
+item BoneChip
+login
+trade Carmelo BoneChip x1      # available: no trade handler, nothing
+trigger Carmelo                # A Test of True Love not completed (nor Love and Ice): his default 182
+finish
+quest Bastok.ATestOfTrueLove completed
+trigger Carmelo                # fame 424 (level 5): 182
+finish
+fame Bastok 425
+charvar Quest[1][63]mustZone 236
+trigger Carmelo                # the quest's mustZone set: 182
+finish
+zoneline BastokMarkets         # out and back: the mustZone cleared
+zoneline PortBastok
+trigger Carmelo                # the offer, 275
+finish                         # the Chanson de Liberte, accepted
+trigger Carmelo                # accepted: 276
+finish
+warp 21.6,0.483,94.6 TheSanctuaryOfZitah
+trigger qm4                    # day, not dusk: nil, its default text
+finish-if-event
+wait vana=5                    # 17:00, dusk
+tick 1000
+trigger qm4                    # dusk: 204
+finish                         # completed: Siren Flute, fame +70, the Chanson deleted
+trigger qm4                    # completed: no handler, its default text
+finish-if-event
+warp -146.5,-7.48,13 PortBastok
+trigger Carmelo                # completed: 277
+finish
+trade Carmelo BoneChip x1      # completed: no trade handler, nothing

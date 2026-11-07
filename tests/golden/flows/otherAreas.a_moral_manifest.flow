@@ -1,0 +1,66 @@
+# A Moral Manifest (otherAreas 108): Ponono in Windurst Woods, the Stone Lid and the Yagudo Avatar in the Altar Room and
+# the Altar Room's zone-ins. The quest lives in four scripts (Zone.lua, the mob, two NPCs); its state is the char var moral
+# (1-8). A full run at level 75 (the headgears need it): the offer on zone-in accepted, Ponono's steps (the cloth trade,
+# the wait past Vana'diel midnight after a zone), the Yagudo Headgear zone-in, the Stone Lid's events, the Avatar's kill,
+# the Tsoo Haja's Headgear zone-in that completes it (Quest[4][108]Prog 1 (GM) kept: the Lua's npcUtil.completeQuest
+# has no cleanup). Ponono's guild master stays in his script.
+char zone=WindurstWoods pos=-38.243,-2.25,-120.954 lvl=75 gil=10000
+item SquareOfVelvetCloth
+item SquareOfRainbowCloth
+item YagudoHeadgear
+item BronzeCap
+login
+trigger Ponono                  # Available: the guild master
+finish-if-event
+warp -313,24.77,12 AltarRoom    # level 75, Available: 46, accepted (option 0), moral 1
+trigger Stone_Lid               # moral 1: nothing
+finish-if-event
+warp -38.243,-2.25,-120.954 WindurstWoods
+trade Ponono SquareOfVelvetCloth x1 SquareOfRainbowCloth x1 gil=10000   # moral 1: the guild master's trade
+finish-if-event
+trigger Ponono                  # Accepted, moral 1: 700
+finish                          # moral 2
+trigger Ponono                  # moral 2: the guild master
+finish-if-event
+trade Ponono SquareOfVelvetCloth x1 gil=10000   # no Rainbow Cloth: the guild master's trade
+finish-if-event
+trade Ponono SquareOfVelvetCloth x1 SquareOfRainbowCloth x1 gil=10000   # 703: moral 3, moralZone, moralWait (nothing taken)
+finish
+trigger Ponono                  # moralZone 1: the guild master
+finish-if-event
+rezone                          # the local var gone
+trigger Ponono                  # before Vana'diel midnight: the guild master
+finish-if-event
+wait jst=1
+trigger Ponono                  # 705
+finish                          # the Yagudo Headdress Cutting, moral 4
+trigger Ponono                  # Accepted, moral 4: 704
+finish-if-event
+warp -313,24.77,12 AltarRoom    # moral 4 without the Yagudo Headgear: nothing
+equip YagudoHeadgear Head
+rezone                          # 47: the Vault Quipus, moral 5
+equip BronzeCap Head
+trigger Stone_Lid               # moral 5 without the headgear: nothing
+finish-if-event
+equip YagudoHeadgear Head
+trigger Stone_Lid               # 48
+finish                          # the Yagudo Avatar and the Yagudo NMs pop
+kill YAGUDO_AVATAR              # moral 6, the Vault Quipus taken, the rest despawned
+tick 30000                      # the Avatar's body gone: its despawn shows the Stone Lid again a second on
+tick 2000
+trade Stone_Lid BronzeCap x1    # moral 6: nothing
+finish-if-event
+trigger Stone_Lid               # 49
+finish                          # moral 7
+equip BronzeCap Head
+trade Stone_Lid YagudoHeadgear x1   # 50, the headgear taken
+finish                          # Tsoo Haja's Headgear, moral 8
+trigger Stone_Lid               # moral 8: nothing
+finish-if-event
+equip TsooHajasHeadgear Head
+charvar Quest[4][108]Prog 1     # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+rezone                          # 51: completed, the Gold Beastcoin, moralrebuy 1, moral deleted
+rezone                          # Completed: nothing
+warp -38.243,-2.25,-120.954 WindurstWoods
+trigger Ponono                  # Completed: 704
+finish-if-event

@@ -1,0 +1,69 @@
+# A Good Pair of Crocs (adoulin 93): a level 99 Warrior in Eastern Adoulin with a Velkk Necklace, two Velkk Masks and a
+# Twitherym Wing, ADOULIN_FAME_QUEST_TRACKER 1. A trade of a mask while available: no handler (Felmsy has no script, no
+# default). Felmsy: 3001, finished on 0 and on 2: not begun; on 1: begun. Accepted: 3004; a trade of the necklace and a
+# mask, of two masks, of a mask and the wing: nil (tradeHasExactly one); of a mask: 3002, finished: completed
+# (6 Adoulin fame, 200 bayld, 500 exp), confirmed, the tracker 2. Completed: a trade of a mask: nothing; 3000. The
+# repeat's operands (GMs): the tracker 2 and 1 with the other two available, 1 with only It Sets My Heart Aflutter
+# completed, with only A Shot in the Dark completed: 3000; all three completed, the tracker 0 and 2: 3000; 1: 3003,
+# finished on 0: deleted and begun again (accepted: 3004). Completed again (a GM): 3003 again, finished on 3: begun
+# again; a trade of the necklace: 3002, finished: completed again, the tracker 2. The tracker 1 and the quest accepted
+# by a GM on the completed quest (its completed bit kept): the repeat's 3003 (no status read), finished: deleted, begun;
+# 3004.
+lists EasternAdoulin/Felmsy/onTrigger EasternAdoulin/Felmsy/onTrade EasternAdoulin/onEventFinish/3001
+lists EasternAdoulin/onEventFinish/3002 EasternAdoulin/onEventFinish/3003
+char zone=EasternAdoulin pos=-51.611,-0.15,88.456 job=WAR lvl=99
+charvar ADOULIN_FAME_QUEST_TRACKER 1
+item VelkkNecklace
+item VelkkMask x2
+item TwitherymWing
+login
+trade Felmsy VelkkMask x1               # available: no trade handler: nothing
+trigger Felmsy                          # available: 3001
+finish option=0                         # not begun
+trigger Felmsy                          # 3001
+finish option=2                         # not option 1: not begun
+trigger Felmsy                          # 3001
+finish option=1                         # begun
+trigger Felmsy                          # accepted: 3004
+finish
+trade Felmsy VelkkNecklace x1 VelkkMask x1 # both: nil
+trade Felmsy VelkkMask x2               # two masks: nil
+trade Felmsy VelkkMask x1 TwitherymWing x1 # a mask and the wing: nil
+trade Felmsy VelkkMask x1               # a mask: 3002
+finish                                  # completed (fame, bayld, exp); confirmed; tracker 2
+trade Felmsy VelkkMask x1               # completed: no trade handler: nothing
+trigger Felmsy                          # completed, the others available, tracker 2: 3000
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER 1    # a GM
+trigger Felmsy                          # the others available, tracker 1: 3000
+finish
+quest Adoulin.ItSetsMyHeartAflutter completed # a GM
+trigger Felmsy                          # A Shot in the Dark available, tracker 1: 3000
+finish
+quest Adoulin.ItSetsMyHeartAflutter available # a GM
+quest Adoulin.AShotInTheDark completed  # a GM
+trigger Felmsy                          # It Sets My Heart Aflutter available, tracker 1: 3000
+finish
+quest Adoulin.ItSetsMyHeartAflutter completed # a GM: all three completed
+charvar ADOULIN_FAME_QUEST_TRACKER 0    # a GM
+trigger Felmsy                          # tracker 0: 3000
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER 2    # a GM
+trigger Felmsy                          # tracker 2: 3000
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER 1    # a GM
+trigger Felmsy                          # all three completed, tracker 1: 3003
+finish option=0                         # deleted, then begun again
+trigger Felmsy                          # accepted, not completed: 3004
+finish
+quest Adoulin.AGoodPairOfCrocs completed # a GM
+trigger Felmsy                          # all three completed, tracker 1: 3003 again
+finish option=3                         # deleted, then begun again (any option)
+trade Felmsy VelkkNecklace x1           # the necklace: 3002
+finish                                  # completed again; confirmed; tracker 2
+charvar ADOULIN_FAME_QUEST_TRACKER 1    # a GM
+quest Adoulin.AGoodPairOfCrocs accepted # a GM, on the completed quest: its completed bit kept
+trigger Felmsy                          # accepted with the completed bit: the repeat, 3003 (not 3004)
+finish                                  # deleted (both bits), begun again
+trigger Felmsy                          # accepted: 3004
+finish

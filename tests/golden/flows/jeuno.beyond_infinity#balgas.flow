@@ -1,0 +1,32 @@
+# Beyond Infinity (jeuno 137): Balga's Dais (299.316 -123.591 353.760). A level 91 Warrior at level cap 95, Prelude to Puissance
+# completed, the Limit Breaker held, MAX_LEVEL 99, no Soul Gem Clasp.
+# Available: 10045, option 20: begun and set down at Balga's Dais; no clasp held, so state 4's finish runs in the
+# same lookup and gives the clasp (20 is not 0; none of 17 / 25 / 26 / 27).
+# Back by a GM warp: state 2's 10045 (91, 1, 5, 1), option 23: set down at Balga's Dais again. There, BC_Entrance's 32000
+# menu, Beyond Infinity (index 20) in area 1 (the clasp worn), Atori-Tutori killed (won, battlefieldWin 116), 32001:
+# the Scroll of Instant Warp, Prog 1. Back at the moogle: 10139 (75, 1): completed, level cap 99.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045 BalgasDais/BC_Entrance/onTrigger BalgasDais/onEventFinish/32001
+warning: quests: jeuno.beyond_infinity: one finish of 10045 ran 2 handlers (1/-/onEventFinish:10045, 4/-/onEventFinish:10045) -- the Lua runs it twice too: its sections at LB10_Beyond_Infinity.lua:77 (available), :135 (accepted) and :207 (accepted, Prog 0, no Soul Gem Clasp) at lua-at d8964eb5 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=91
+levelcap 95
+quest Jeuno.PreludeToPuissance completed
+keyitem LimitBreaker
+login
+trigger Nomad_Moogle                    # available: 10045 (91, 1, 5, 0, 0)
+finish option=20                        # begun; set down at Balga's Dais; state 4 (no clasp): the Soul Gem Clasp
+tick 400                                # the zone change runs at the tick
+login                                   # in Balga's Dais
+warp 11.5,2.5,121.9 RuludeGardens       # a GM: back
+trigger Nomad_Moogle                    # accepted, Prog 0, the clasp: event 10045 (91, 1, 5, 1)
+finish option=23                        # set down at Balga's Dais
+tick 400
+login                                   # in Balga's Dais
+warp 300.4,-124.1,341.3 BalgasDais   # by BC_Entrance
+trigger BC_Entrance                     # accepted, the clasp: the 32000 menu
+update 32000 option=321                 # Beyond Infinity (Balga's Dais), index 20, area 1: registered, entered; the clasp worn
+finish                                  # in the arena
+kill ATORI_TUTORI                       # area 1's Atori-Tutori: won, battlefieldWin 116, 32001 opens
+finish                                  # 32001, battlefieldWin 116 (this arena's): a Scroll of Instant Warp, Prog 1
+warp 11.5,2.5,121.9 RuludeGardens
+trigger Nomad_Moogle                    # accepted, Prog 1: 10139 (75, 1)
+finish                                  # completed: Bushin Aspirant, level cap 99, YOUR_LEVEL_LIMIT_IS_NOW_99

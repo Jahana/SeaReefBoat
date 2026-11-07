@@ -1,0 +1,24 @@
+# An Officer and a Pirate (abyssea 168), the reply kind: a level 99 Warrior in Port Jeuno with the quest accepted, its
+# story quests before it and the three set quests completed (GMs: their offers would tie). Joachim: 334, finished:
+# completed, Heart of Madness accepted. Heart of Madness back to available and the quest back to accepted (GMs): Joachim
+# again: 334 again. Joachim has his own onTrigger (xi.abyssea.traverserNPCOnTrigger): an Event-rank 334 would alternate
+# with it (interaction_lookup.lua's UseFallback) and the second talk would go to his script (his 328: Dawn of Death
+# accepted or completed).
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/334
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate accepted
+quest Abyssea.HeroesOfAbyssea completed
+quest Abyssea.ScarsOfAbyssea completed
+quest Abyssea.TheForbiddenFrontier completed
+login
+trigger Joachim                         # 334
+finish                                  # completed; Heart of Madness accepted
+quest Abyssea.HeartOfMadness available  # a GM
+quest Abyssea.AnOfficerAndAPirate available # a GM
+quest Abyssea.AnOfficerAndAPirate accepted # a GM
+trigger Joachim                         # 334 again (the kind)
+finish                                  # completed again

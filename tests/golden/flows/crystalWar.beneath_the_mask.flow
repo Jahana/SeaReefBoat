@@ -1,0 +1,61 @@
+# Beneath the Mask (crystalWar 49): a level 99 Warrior in Bastok Markets [S] with Honor Under Fire completed, the WotG
+# mission Fate in Haze current (GMs; that mission's only sections are Southern San d'Oria [S]'s: it plays nothing here;
+# the other missions as group 1's flows), a Lump of Beeswax and a Jar of Red Textile Dye. Gentle Tiger 345, finished:
+# begun; Prog 0: 351. Beadeaux [S] (from Bastok Markets [S]: any zone): 1 (left open), finished: Prog 1. Bastok Markets
+# [S]: Gentle Tiger 346, finished: Prog 2; 352. The Eldieme Necropolis [S]: Red Axe 42, finished: Prog 3; 44. Vunkerl
+# Inlet [S]: the beeswax alone to Leadavox: nil; the dye alone: nil; Leadavox: no trigger handler of the quest (his
+# default 100); both: 2, finished: the trade confirmed, the Wax Seal, Prog 4. Bastok Markets [S]: Gentle Tiger 352.
+# Eldieme [S]: Red Axe 43, finished: Prog 5, the seal taken; 45. Bastok Markets [S]: Gentle Tiger 347, finished: Prog
+# 6; 353. Beaucedine Glacier [S]: Hoarfang 7, finished: completed (a Super Reraiser).
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/345 BastokMarketsS/onEventFinish/346 BastokMarketsS/onEventFinish/347 BeadeauxS/onZoneIn/1 BeadeauxS/onEventFinish/1 TheEldiemeNecropolisS/Red_Axe/onTrigger TheEldiemeNecropolisS/onEventFinish/42 TheEldiemeNecropolisS/onEventFinish/43 VunkerlInletS/Leadavox/onTrigger VunkerlInletS/Leadavox/onTrade VunkerlInletS/onEventFinish/2 BeaucedineGlacierS/Hoarfang/onTrigger BeaucedineGlacierS/onEventFinish/7
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+item LumpOfBeeswax
+item JarOfRedTextileDye
+quest CrystalWar.HonorUnderFire completed
+mission Wotg FateInHaze current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # 345
+finish                                  # begun
+trigger Gentle_Tiger                    # Prog 0: 351
+finish
+warp -297.109,0.008,96.002 BeadeauxS open # Prog 0, from Bastok Markets [S] (any zone): 1, left open
+finish                                  # Prog 1
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 1: 346
+finish                                  # Prog 2
+trigger Gentle_Tiger                    # Prog 2: 352
+finish
+warp 306.128,-27.5,13.955 TheEldiemeNecropolisS
+trigger Red_Axe                         # Prog 2: 42
+finish                                  # Prog 3
+trigger Red_Axe                         # Prog 3: 44
+finish
+warp 208.581,-32.002,315.458 VunkerlInletS
+trigger Leadavox                        # Prog 3: no trigger handler of the quest: his default 100
+finish-if-event
+trade Leadavox LumpOfBeeswax x1         # the beeswax alone: nil
+finish-if-event
+trade Leadavox JarOfRedTextileDye x1    # the dye alone: nil
+finish-if-event
+trade Leadavox LumpOfBeeswax x1 JarOfRedTextileDye x1 # both alone: 2
+finish                                  # the trade confirmed; the Wax Seal; Prog 4
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 4, the seal: 352
+finish
+warp 306.128,-27.5,13.955 TheEldiemeNecropolisS
+trigger Red_Axe                         # Prog 4, the seal: 43
+finish                                  # Prog 5; the seal taken
+trigger Red_Axe                         # Prog 5: 45
+finish
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 5: 347
+finish                                  # Prog 6
+trigger Gentle_Tiger                    # Prog 6: 353
+finish
+warp -262.077,-39.622,-329.347 BeaucedineGlacierS
+trigger Hoarfang                        # Prog 6: 7
+finish                                  # completed (a Super Reraiser)

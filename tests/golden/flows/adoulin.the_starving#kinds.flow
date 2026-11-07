@@ -1,0 +1,20 @@
+# The Starving (adoulin 84), the kinds: a level 99 Warrior in Western Adoulin with Hunger Strikes completed (a GM), the
+# Timer 0 and 125 Adoulin fame (level 3: his script offers Always More Quoth the Ravenous, 3010, on its turns).
+# Westerly Breeze: 3005 (a progressEvent: it outranks his script), finished: begun; available again (a GM): 3005 again
+# (an event would give his script this turn: 3010). Accepted: 3006 (an event: the accepted section registered under
+# Western Adoulin, user ruling 2026-11-04, kept Lua bugs), then his script's turn: 3010, finished: Always More Quoth
+# the Ravenous begun (his script).
+lists WesternAdoulin/Westerly_Breeze/onTrigger WesternAdoulin/onEventFinish/3005
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+quest Adoulin.HungerStrikes completed
+fame Adoulin 125
+login
+trigger Westerly_Breeze                 # available: 3005
+finish                                  # begun
+quest Adoulin.TheStarving available     # a GM
+trigger Westerly_Breeze                 # available: 3005 (a progressEvent, not his script's turn)
+finish                                  # begun
+trigger Westerly_Breeze                 # accepted: 3006 (an event)
+finish-if-event
+trigger Westerly_Breeze                 # his script's turn: 3010
+finish                                  # Always More Quoth the Ravenous begun

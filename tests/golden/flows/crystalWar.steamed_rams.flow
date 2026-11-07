@@ -1,0 +1,83 @@
+# Steamed Rams (crystalWar 9), the main path with no campaign allegiance: a level 99 Warrior in Garlaige Citadel [S]
+# holding WotG Back to the Beginning (the mission a char doing the openers holds; it answers none of these NPCs) and the
+# four later-expansion missions set as scripts/tests/quests/wotg_nation_sandoria.lua did (no [S] zone-in cutscene of
+# theirs). Randecque (script: 3 with an allegiance, else nothing): no letter: 1 ([7] = Option 0), options 1 and 2:
+# nothing; 1, accepted: the Red Recommendation Letter, Option 0; the letter held: 2 (no finish of its own), twice (a
+# Progress: the script answers nothing without an allegiance). Southern San d'Oria [S]: Mainchelite (no script; default
+# 15): the letter: 7 (7 + 0 + Option 0), declined: Option 1; 8, options 1 and 2: nothing; the letter taken (a GM): no
+# letter, no allegiance: 15 (the quest's Event). Randecque: Option 1, no letter: 1 ([7] 1), accepted: the letter, Option
+# 0. Mainchelite: 7 again (Option back to 0), option 2: Option 1; 8, accepted: begun, the letter taken. Accepted,
+# nothing held: 13, options 0 and 2: nothing. East Ronfaure [S]: qm3 1 (the Charred Propeller), qm3 again: nil (its
+# default 4). Mainchelite: the Propeller alone: 13. qm4 2 (the Piece of Shattered Lumber), again: default 5; qm5 3 (the
+# Oxidized Plate), again: default 6. Mainchelite: the three, no allegiance: 12, finished: the Sprinter's Shoes,
+# completed (Knight of the Iron Ram), the Bronze Ribbon of Service, allegiance 1, the three taken, NOW_ALLIED_WITH 1.
+# Completed: Mainchelite 5, twice. Garlaige Citadel [S]: Randecque, completed, allegiance 1: no quest section: the
+# script's 3.
+lists GarlaigeCitadelS/Randecque/onTrigger SouthernSanDoriaS/Mainchelite/onTrigger EastRonfaureS/qm3/onTrigger EastRonfaureS/qm4/onTrigger EastRonfaureS/qm5/onTrigger GarlaigeCitadelS/onEventFinish/1 GarlaigeCitadelS/onEventFinish/2 SouthernSanDoriaS/onEventFinish/7 SouthernSanDoriaS/onEventFinish/8 SouthernSanDoriaS/onEventFinish/12 SouthernSanDoriaS/onEventFinish/13 EastRonfaureS/onEventFinish/1 EastRonfaureS/onEventFinish/2 EastRonfaureS/onEventFinish/3
+char zone=GarlaigeCitadelS pos=62.849,-6.078,137.438 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Randecque                       # no allegiance, no letter: 1 ([7] = Option 0); the mission takes no talk
+finish option=1                         # declined: nothing
+trigger Randecque                       # 1 ([7] 0)
+finish option=2                         # nothing
+trigger Randecque                       # 1 ([7] 0)
+finish option=0                         # the Red Recommendation Letter; Option 0
+trigger Randecque                       # the letter held: 2
+finish                                  # 2 has no finish: nothing
+trigger Randecque                       # 2 again (the script answers nothing without an allegiance)
+finish
+warp -13.849,1.398,-30.368 SouthernSanDoriaS
+trigger Mainchelite                     # the letter, no allegiance, Option 0: 7
+finish option=1                         # declined: Option 1
+trigger Mainchelite                     # 8 (7 + 0 + 1)
+finish option=1                         # nothing
+trigger Mainchelite                     # 8
+finish option=2                         # nothing
+delkeyitem RedRecommendationLetter
+trigger Mainchelite                     # no letter, no allegiance: 15 (the quest's Event)
+finish
+warp 62.849,-6.078,137.438 GarlaigeCitadelS
+trigger Randecque                       # no letter, Option 1: 1 ([7] 1)
+finish option=0                         # the letter; Option 0
+warp -13.849,1.398,-30.368 SouthernSanDoriaS
+trigger Mainchelite                     # Option 0 again: 7
+finish option=2                         # not 0: Option 1
+trigger Mainchelite                     # 8
+finish option=0                         # begun; the letter taken
+trigger Mainchelite                     # accepted, nothing held, no allegiance: 13
+finish option=0                         # nothing
+trigger Mainchelite                     # 13
+finish option=2                         # nothing
+warp 314.321,-30.495,-67.15 EastRonfaureS
+trigger qm3                             # no Propeller: 1
+finish                                  # the Charred Propeller
+trigger qm3                             # held: nil: its default 4
+finish-if-event
+warp -13.849,1.398,-30.368 SouthernSanDoriaS
+trigger Mainchelite                     # the Propeller alone: 13
+finish option=0                         # nothing
+warp 542.925,-49.83,178.563 EastRonfaureS
+trigger qm4                             # no Lumber: 2
+finish                                  # the Piece of Shattered Lumber
+trigger qm4                             # held: nil: its default 5
+finish-if-event
+warp 381.515,-26.5,-22.525 EastRonfaureS
+trigger qm5                             # no Plate: 3
+finish                                  # the Oxidized Plate
+trigger qm5                             # held: nil: its default 6
+finish-if-event
+warp -13.849,1.398,-30.368 SouthernSanDoriaS
+trigger Mainchelite                     # the three, no allegiance: 12
+finish                                  # Sprinter's Shoes; completed; Bronze Ribbon; allegiance 1; the three taken; NOW_ALLIED_WITH 1
+trigger Mainchelite                     # completed: 5
+finish
+trigger Mainchelite                     # 5 again
+finish
+warp 62.849,-6.078,137.438 GarlaigeCitadelS
+trigger Randecque                       # completed, allegiance 1: no section: the script's 3
+finish

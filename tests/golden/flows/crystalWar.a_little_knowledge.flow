@@ -1,0 +1,64 @@
+# A Little Knowledge (crystalWar 6): a level 99 Warrior in The Eldieme Necropolis [S] (ADVANCED_JOB_LEVEL 30; the WotG
+# mission Pillar of Hope current, which answers none of these NPCs and zones; other logs as group 1's flows), 156
+# Rolanberries (13 stacks). Erlene 10 (1), finished on option 1: not begun; 10, finished on option 0: begun. Erlene at
+# Prog 0: 11. Crawlers' Nest [S]: Tucker at Option 0: 6, finished: Option 1; Option 1: 7. Tucker, 48 berries at Option
+# 1: 8 (numAwarded 4), finished: 4 Sheets of Vellum, the berries taken, Option 2; Option 2: 9; 60 berries at Option 2:
+# 10 (4: min(4, 5); 48 taken, 12 back), finished: 4 more, Option 3; 48 berries: 11, finished: 4 more (12), Option 4;
+# Option 4: 12. Eldieme [S]: Erlene, the 12 sheets at Prog 0: 12 (0: a Warrior), finished: the sheets taken, Prog 1.
+# Erlene at Prog 1, no two-hour effect: 13. Under Manafont (a GM; Chainspell, Astral Flow and Azure Lore are the
+# `#chainspell`, `#astralflow` and `#azurelore` flows): 14, finished: the Grimoire and the Scholar job gesture, the
+# title Schultz Scholar, completed, Scholar unlocked; a Warrior completed: 15 (replaceDefault).
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/Erlene/onTrade TheEldiemeNecropolisS/onEventFinish/10 TheEldiemeNecropolisS/onEventFinish/12 TheEldiemeNecropolisS/onEventFinish/14 CrawlersNestS/Tucker/onTrigger CrawlersNestS/Tucker/onTrade CrawlersNestS/onEventFinish/6 CrawlersNestS/onEventFinish/8 CrawlersNestS/onEventFinish/10 CrawlersNestS/onEventFinish/11
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=WAR lvl=99
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+login
+trigger Erlene                          # available, level 99: 10 (1)
+finish option=1                         # declined: not begun
+trigger Erlene                          # 10 (1)
+finish option=0                         # begun
+trigger Erlene                          # accepted, Prog 0: 11
+finish
+warp 218.263,-32.441,-20.239 CrawlersNestS # beside Tucker
+trigger Tucker                          # Prog 0, Option 0: 6
+finish                                  # Option 1
+trigger Tucker                          # Option 1: 7
+finish
+trade Tucker Rolanberry x48             # Option 1, 4 stacks: 8 (numAwarded 4)
+finish                                  # 4 Sheets of Vellum; the 48 berries taken; Option 2
+trigger Tucker                          # Option 2: 9
+finish
+trade Tucker Rolanberry x60             # Option 2, 5 stacks: 10 (numAwarded min(4, 5) = 4; 48 confirmed)
+finish                                  # 4 more sheets; 48 taken, 12 back; Option 3
+trigger Tucker                          # Option 3: 9
+finish
+trade Tucker Rolanberry x48             # Option 3: 11 (4)
+finish                                  # 4 more sheets (12); Option 4
+trigger Tucker                          # Option 4: 12
+finish
+warp 378.436,-39.999,17.914 TheEldiemeNecropolisS # beside Erlene (a trade does not walk)
+trade Erlene SheetOfVellum x12          # Prog 0, exactly 12 sheets: 12 (0: not a mage job)
+finish                                  # the sheets taken; Prog 1
+trigger Erlene                          # Prog 1, no two-hour effect: 13
+finish
+effect 47                               # a GM: Manafont
+trigger Erlene                          # Prog 1, under Manafont: 14
+finish                                  # the Grimoire, the job gesture, Schultz Scholar; completed
+trigger Erlene                          # completed, a Warrior: 15 (replaceDefault)
+finish

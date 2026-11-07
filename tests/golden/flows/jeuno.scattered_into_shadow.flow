@@ -1,0 +1,64 @@
+# Scattered into Shadow (jeuno 61), the start and the pools: Brutus in Upper Jeuno, Feiyin's three Underground Pools
+# (UNDERGROUND_POOL_OFFSET + 0..2) and Dabotz's Ghost. A level 50 beastmaster with Wings of Gold completed: Brutus's 141
+# (option 0: Prog 1), 143 (option 0: nothing; option 1: begun, Aquaflora 1-3 by addKeyItem, YOU_ARE_GIVEN_THREE_SPRIGS;
+# Prog stays 1), Brutus with the sprigs held (142, an Event: the lookup cycles it with Path of the Beastmaster's
+# completed Event 20, 20 first by container order, and takes turns with his script, whose 134 plays as Wings of Gold is
+# completed), Osker at Prog 1 (nil: Path of the Beastmaster's 45), a bone chip traded to Brutus while available (no
+# trade handler, his script has none). The pools: offset 0 with Aquaflora 2 (20: the sprig taken, Stage bit 1) and
+# without it (nil: the pool's empty script); offset 2 with Aquaflora 1 (21: Stage bit 0) and without it (nil); offset 1
+# at Prog 1 with Aquaflora 3: Dabotz's Ghost popped (claimed), noAction; again with the ghost up: popFromQM false, nil;
+# the ghost's death with Aquaflora 3: Prog 2; offset 1 at Prog 2: 18 (Aquaflora 3 taken, Prog 3, Stage bit 2: Stage 7);
+# offset 1 at Prog 3, no sprig: nil. Brutus at Prog 3: 144 (a Progress event: it wins at once; Prog 4); Osker at Prog 4:
+# 145; Brutus at Prog 4: 149 (an Event, cycled and taking turns as 142).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/Osker/onTrigger Feiyin/Underground_Pool/onTrigger Feiyin/Dabotzs_Ghost/onMobDeath UpperJeuno/onEventFinish/141 UpperJeuno/onEventFinish/143 UpperJeuno/onEventFinish/144 Feiyin/onEventFinish/20 Feiyin/onEventFinish/21 Feiyin/onEventFinish/18
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=BST lvl=50
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster completed
+quest Jeuno.WingsOfGold completed
+item BoneChip
+login
+trigger Brutus                              # available, Prog 0: 141 (long)
+finish option=0                             # not 1: Prog 1
+trade Brutus BoneChip x1                    # available: no trade handler, nil (his script has none)
+trigger Brutus                              # Prog 1: 143 (short)
+finish option=0                             # not 1: nothing
+trigger Brutus                              # 143
+finish option=1                             # begun: Aquaflora 1, 2, 3, YOU_ARE_GIVEN_THREE_SPRIGS
+trigger Brutus                              # accepted, sprigs held: the lookup's turn: Path of the Beastmaster's 20
+finish
+trigger Brutus                              # his script's turn: 134
+finish
+trigger Brutus                              # the lookup's turn: the next Event, 142
+finish
+trigger Brutus                              # his script's turn: 134
+finish
+trigger Osker                               # Prog 1: nil; Path of the Beastmaster's 45 (replaceDefault)
+finish-if-event
+warp 11.5,0,250 Feiyin
+trigger Underground_Pool                    # offset 0, Aquaflora 2: 20
+finish                                      # Aquaflora 2 deleted, Stage bit 1
+trigger Underground_Pool                    # offset 0, no Aquaflora 2: nil; the pool's empty script: nothing
+trigger Underground_Pool+2                  # offset 2, Aquaflora 1: 21
+finish                                      # Aquaflora 1 deleted, Stage bit 0
+trigger Underground_Pool+2                  # offset 2, no Aquaflora 1: nil
+trigger Underground_Pool+1                  # offset 1, Prog 1, Aquaflora 3: Dabotz's Ghost popped (claimed); noAction
+trigger Underground_Pool+1                  # the ghost up: popFromQM false: nil
+kill DABOTZS_GHOST                          # its death with Aquaflora 3 held: Prog 2
+trigger Underground_Pool+1                  # Prog 2: 18
+finish                                      # Aquaflora 3 deleted, Prog 3, Stage bit 2 (Stage 7)
+trigger Underground_Pool+1                  # Prog 3, no Aquaflora 3: nil
+warp -55.5,8.2,97.5 UpperJeuno
+trigger Brutus                              # no sprigs, Prog 3: 144 (Progress)
+finish                                      # Prog 4
+trigger Osker                               # Prog 4: 145
+finish
+trigger Brutus                              # Prog 4: the lookup's turn: Path of the Beastmaster's 20
+finish
+trigger Brutus                              # his script's turn: 134
+finish
+trigger Brutus                              # the lookup's turn: 149
+finish
+trigger Brutus                              # his script's turn: 134
+finish

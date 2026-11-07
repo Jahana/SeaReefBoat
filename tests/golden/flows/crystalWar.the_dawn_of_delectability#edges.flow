@@ -1,0 +1,50 @@
+# The Dawn of Delectability (crystalWar 5), the edges: a level 99 Warrior in Windurst Waters with the four ingredients
+# and a second Pepperoni (missions as the main flow). Available: Ranpi-Monpi: the four: nil (no section, no onTrade
+# script); a talk: his script. Accepted at Prog 1 (GMs): the four: nil (no trade at Prog 1). Prog 2: the Pepperoni
+# alone: nil. Prog 3 with Timer 0 (GMs): the four: nil. Prog 4: no section here: his script. Windurst Waters [S] at
+# Prog 2: Ranpi-Monpi [S]: no section: nil. Prog 5 and the Culinary Knife (GMs), a full inventory: Windurst Waters:
+# 981, finished: the Trainee Knife does not fit: not completed, the knife kept; again: 981; freed: 981: completed.
+lists WindurstWatersS/Ranpi-Monpi/onTrigger WindurstWaters/Ranpi-Monpi/onTrigger WindurstWaters/Ranpi-Monpi/onTrade WindurstWaters/onEventFinish/981
+char zone=WindurstWaters pos=-121.817,-3.04,63.211 job=WAR lvl=99
+item Pepperoni x2
+item Walnut
+item DragonFruit
+item BastoreSweeper
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trade Ranpi-Monpi Pepperoni x1 Walnut x1 DragonFruit x1 BastoreSweeper x1 # available: nil
+finish-if-event
+trigger Ranpi-Monpi                     # available: no section here: his script
+finish-if-event
+quest CrystalWar.TheDawnOfDelectability accepted
+charvar Quest[7][5]Prog 1
+trade Ranpi-Monpi Pepperoni x1 Walnut x1 DragonFruit x1 BastoreSweeper x1 # Prog 1: nil
+finish-if-event
+charvar Quest[7][5]Prog 2
+trade Ranpi-Monpi Pepperoni x1          # Prog 2, not the four: nil
+finish-if-event
+charvar Quest[7][5]Prog 3
+trade Ranpi-Monpi Pepperoni x1 Walnut x1 DragonFruit x1 BastoreSweeper x1 # Prog 3, Timer 0: nil
+finish-if-event
+charvar Quest[7][5]Prog 4
+trigger Ranpi-Monpi                     # Prog 4: no section here: his script
+finish-if-event
+charvar Quest[7][5]Prog 2
+warp -113.952,-2,43.389 WindurstWatersS
+trigger Ranpi-Monpi                     # Prog 2 in the past: no section: nil
+finish-if-event
+warp -121.817,-3.04,63.211 WindurstWaters
+charvar Quest[7][5]Prog 5
+keyitem CulinaryKnife
+fill-inventory
+trigger Ranpi-Monpi                     # Prog 5: 981
+finish                                  # no room: not completed
+trigger Ranpi-Monpi                     # 981 again
+finish                                  # still no room
+free-inventory
+trigger Ranpi-Monpi                     # 981
+finish                                  # completed; the knife taken

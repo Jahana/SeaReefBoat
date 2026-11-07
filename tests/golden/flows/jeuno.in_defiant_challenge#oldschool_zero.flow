@@ -1,0 +1,12 @@
+# In Defiant Challenge (jeuno 128), accepted (a GM), at Crawlers' Nest: `if xi.settings.main.OLDSCHOOL_G1 then` is Lua's
+# truthiness, and 0 is true in Lua: with OLDSCHOOL_G1 0 a ??? does nothing (no crumb), as with true. A port that reads
+# the setting as a number (Main != 0) would give the crumb; Settings.MainTruthy (quest rework P9) does not. Then false:
+# qm10 gives the crumb. Recorded on Lua at 49dabcc9^ (the parent of the commit that deleted the Lua).
+lists CrawlersNest/qm10/onTrigger
+char zone=CrawlersNest pos=-81.9,-8.2,79.1 job=WAR lvl=50
+quest Jeuno.InDefiantChallenge accepted
+setting OLDSCHOOL_G1 0
+login
+trigger qm10                            # OLDSCHOOL_G1 0 (truthy): nothing
+setting OLDSCHOOL_G1 false
+trigger qm10                            # off: the crumb

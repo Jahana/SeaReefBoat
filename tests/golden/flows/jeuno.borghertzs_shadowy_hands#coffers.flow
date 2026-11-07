@@ -1,0 +1,19 @@
+# BORGHERTZS_SHADOWY_HANDS (jeuno 51): the two optional coffers' sections (status not available, main job DRK, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 DRK: CastleOztroja's Treasure Coffer opens to ChaosCuirass
+# (the item bypass; the result is the item): [AF]ZilartCoffer +32768 (bit 15); MonasticCavern's to ChaosFlanchard:
+# +65536 (bit 16).
+lists CastleOztroja/Treasure_Coffer/onTrade MonasticCavern/Treasure_Coffer/onTrade
+char zone=CastleOztroja pos=-99,-75,-129 job=DRK lvl=75
+quest Jeuno.BorghertzsShadowyHands accepted
+item OztrojaCofferKey
+item DavoiCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer OztrojaCofferKey x1 # bit 15 unset: ChaosCuirass; [AF]ZilartCoffer 32768
+tick 4500                               # the coffer opened
+warp 107.5,-3,-144 MonasticCavern
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer DavoiCofferKey x1 # bit 16 unset: ChaosFlanchard; [AF]ZilartCoffer 98304
+tick 4500                               # the coffer opened

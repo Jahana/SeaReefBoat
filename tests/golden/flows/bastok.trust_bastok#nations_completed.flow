@@ -1,0 +1,33 @@
+# Trust: Bastok (bastok 92): the other nations' trust NPCs read this quest completed (status reads in their own
+# scripts). Completed through this quest (434 option 2, Naji's 980, Prog 2 by GM, 982). Then Bastok's completed alone
+# decides each: Gondebaud's 3504 (Windurst's available) and Wetata's 867 (San d'Oria's available), option 0; with Trust:
+# Windurst accepted by GM, Kupipi's 439 (San d'Oria's available; its finish completes Trust: Windurst); Trust: Windurst
+# made available again by GM and Trust: San d'Oria accepted: Excenmille's 897 (Windurst's not completed; its finish
+# completes Trust: San d'Oria).
+# Kupipi+1: Heaven's Tower has two Kupipis; the first (17768466) is cutscene_only, the second the one a char talks to.
+lists PortBastok/Clarion_Star/onTrigger PortBastok/onEventFinish/434 Metalworks/Naji/onTrigger Metalworks/onEventFinish/980 Metalworks/onEventFinish/982
+char zone=PortBastok pos=81.5,7.5,-24.2 lvl=5 nation=1
+login
+trigger Clarion_Star           # 434
+finish option=2                # begun, the card
+warp 64,-14,-4 Metalworks
+trigger Naji                   # 980
+finish                         # Naji learned, Prog 1
+charvar Quest[1][92]Prog 2     # GM: the Naji trust's cast in Gustaberg
+trigger Naji                   # 982
+finish                         # completed
+warp 123.7,0,92.1 SouthernSanDoria
+trigger Gondebaud              # Bastok's completed, Windurst's available: 3504
+finish                         # option 0: nothing
+warp -23.8,2.5,-44.6 WindurstWoods
+trigger Wetata                 # Bastok's completed, San d'Oria's available: 867
+finish                         # option 0: nothing
+quest Windurst.TrustWindurst accepted
+warp 2,0.1,30 HeavensTower
+trigger Kupipi+1               # Windurst's accepted, Bastok's completed, San d'Oria's available: 439
+finish                         # Kupipi's script: Kupipi learned, Trust: Windurst completed
+quest Windurst.TrustWindurst available
+quest Sandoria.TrustSandoria accepted
+warp -229.3,7,23 NorthernSanDoria
+trigger Excenmille             # San d'Oria's accepted, Bastok's completed, Windurst's available: 897
+finish                         # Excenmille's script: Excenmille learned, Trust: San d'Oria completed

@@ -1,0 +1,65 @@
+# Beneath the Mask (crystalWar 49), the edges: a level 99 Warrior in Bastok Markets [S] with the WotG mission Fate in
+# Haze current (missions as the main flow), the beeswax and the dye; Honor Under Fire not completed. Gentle Tiger: no
+# section (109). Honor completed (a GM): 345, finished on option 1: begun (any option). Vunkerl Inlet [S] at Prog 0: the
+# two items to Leadavox: no trade handler (nil). Prog 2 (a GM): the two items: nil (the trade is Prog 3's); Prog 4 with
+# the Wax Seal (GMs): nil again. Prog 1 (a GM, the seal taken back): Beadeaux [S]: no zone-in reply; Red Axe nothing.
+# Prog 4 without the seal (a GM): no section: Red Axe nothing (no default). Prog 6 (a GM): Red Axe nothing. Prog 4
+# without the seal (a GM): Gentle Tiger 109; Prog 3 (a GM): Gentle Tiger 352. Prog 5 (a GM): Hoarfang nothing. Prog 6
+# (a GM) with a full inventory: Hoarfang 7, finished: the Super Reraiser does not fit: not completed; freed: 7:
+# completed.
+# The mission before Fate in Haze is the #mission flow (a mission line over a current mission is refused mid-flow).
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/345 BeadeauxS/onZoneIn/1 TheEldiemeNecropolisS/Red_Axe/onTrigger VunkerlInletS/Leadavox/onTrade BeaucedineGlacierS/Hoarfang/onTrigger BeaucedineGlacierS/onEventFinish/7
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+item LumpOfBeeswax
+item JarOfRedTextileDye
+mission Wotg FateInHaze current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # Honor Under Fire not completed: no section: 109
+finish-if-event
+quest CrystalWar.HonorUnderFire completed # a GM
+trigger Gentle_Tiger                    # 345
+finish option=1                         # begun (any option)
+warp 208.581,-32.002,315.458 VunkerlInletS
+trade Leadavox LumpOfBeeswax x1 JarOfRedTextileDye x1 # Prog 0: nil
+finish-if-event
+charvar Quest[7][49]Prog 2              # a GM
+trade Leadavox LumpOfBeeswax x1 JarOfRedTextileDye x1 # Prog 2: nil
+finish-if-event
+charvar Quest[7][49]Prog 4              # a GM
+keyitem WaxSeal                         # a GM
+trade Leadavox LumpOfBeeswax x1 JarOfRedTextileDye x1 # Prog 4, the seal: nil
+finish-if-event
+delkeyitem WaxSeal                      # a GM
+charvar Quest[7][49]Prog 1              # a GM
+warp -297.109,0.008,96.002 BeadeauxS    # Prog 1: no zone-in reply
+warp 306.128,-27.5,13.955 TheEldiemeNecropolisS
+trigger Red_Axe                         # Prog 1: nothing
+finish-if-event
+charvar Quest[7][49]Prog 4              # a GM, no Wax Seal
+trigger Red_Axe                         # Prog 4 without the seal: no section: nothing
+finish-if-event
+charvar Quest[7][49]Prog 6              # a GM
+trigger Red_Axe                         # Prog 6: nothing
+finish-if-event
+charvar Quest[7][49]Prog 4              # a GM, no Wax Seal
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 4 without the seal: no section: 109
+finish-if-event
+charvar Quest[7][49]Prog 3              # a GM
+trigger Gentle_Tiger                    # Prog 3: 352
+finish
+charvar Quest[7][49]Prog 5              # a GM
+warp -262.077,-39.622,-329.347 BeaucedineGlacierS
+trigger Hoarfang                        # Prog 5: nothing
+finish-if-event
+charvar Quest[7][49]Prog 6              # a GM
+fill-inventory
+trigger Hoarfang                        # Prog 6: 7
+finish                                  # no room for the Super Reraiser: not completed
+free-inventory
+trigger Hoarfang                        # 7
+finish                                  # completed

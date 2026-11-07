@@ -1,0 +1,84 @@
+# Blast from the Past (windurst 11): reply kinds, each against an NPC script that answers on its turn. Koru-Moru's
+# script answers 416 while Carbuncle Debacle is accepted with CarbuncleDebacleProgress 2 (GMs; accepted since 416 wants
+# it so, user ruling 2026-11-04, kept Lua bugs), and 407 to four astragaloi while Class Reunion is accepted with
+# ClassReunionProgress 2 (GM); Yoran-Oran's answers 256 while Mandragora Mad is accepted (GM); Tokaka's 208 while
+# Something Fishy is available. An Event-priority line alternates with the script's answer, a Progress line plays on
+# every talk, and an importantEvent plays at Progress once, then alternates.
+# Koru-Moru: 214 (Progress) on two talks (option 1 keeps the quest available); accepted: 216 alternates with 416; Option
+# 2 by GM: 215 alternates with 416. The trades: four astragaloi (not the stone): 225 (Event), then his script's 407 on the
+# next trade (its finish takes the astragaloi and sets ClassReunionProgress 3), then 225 again.
+# Yoran-Oran: Option 0: the quest's nil, his default 245 and his script's 256 alternate (his script still runs after the
+# quest's nil); Option 1: 221 (Progress) on two talks (Option set back to 1 by GM between); Option 2: 222 (importantEvent:
+# Progress, then Event: 222, 222, 256, 222). Tokaka: 318 (Progress) on two talks (Option set back to 0 by GM between).
+# Completed (by GM) with no mustZone: Yoran-Oran's 223 (importantEvent: 223, 223, 256).
+lists WindurstWalls/Koru-Moru/onTrigger WindurstWalls/Koru-Moru/onTrade WindurstWalls/Yoran-Oran/onTrigger PortWindurst/Tokaka/onTrigger WindurstWalls/onEventFinish/214 WindurstWalls/onEventFinish/221 PortWindurst/onEventFinish/318
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 lvl=75
+fame Windurst 125
+quest Windurst.StarStruck completed
+quest Windurst.MandragoraMad accepted
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 2
+item Astragalos x8
+login
+trigger Koru-Moru                              # 214 (Progress)
+finish option=1                                # nothing
+trigger Koru-Moru                              # 214 again (his script's 416 never gets the turn)
+finish option=0                                # begun
+trigger Koru-Moru                              # Option 0: 216 (Event: the quest's turn)
+finish
+trigger Koru-Moru                              # his script's turn: 416
+finish
+trigger Koru-Moru                              # 216 again
+finish
+charvar Quest[2][11]Option 2                   # GM
+trigger Koru-Moru                              # Option 2: his script's turn first: 416
+finish
+trigger Koru-Moru                              # 215 (Event)
+finish
+trigger Koru-Moru                              # 416 again
+finish
+charvar CarbuncleDebacleProgress 0             # GM
+quest Windurst.CarbuncleDebacle available      # GM: no longer accepted
+quest Windurst.ClassReunion accepted           # GM
+charvar ClassReunionProgress 2                 # GM: his script takes four astragaloi (407)
+trade Koru-Moru Astragalos x4                  # not the stone: 225 (Event: the quest's turn)
+finish
+trade Koru-Moru Astragalos x4                  # his script's turn: 407 (its finish: the astragaloi taken, ClassReunionProgress 3)
+finish
+charvar ClassReunionProgress 2                 # GM
+trade Koru-Moru Astragalos x4                  # 225 again
+finish
+charvar Quest[2][11]Option 0                   # GM
+trigger Yoran-Oran                             # Option 0: the quest's nil; his default 245 (the default's turn)
+finish
+trigger Yoran-Oran                             # his script's turn: 256 (his script still runs after the quest's nil)
+finish
+charvar Quest[2][11]Option 1                   # GM
+trigger Yoran-Oran                             # Option 1: 221 (Progress)
+finish                                         # Option 2
+charvar Quest[2][11]Option 1                   # GM: back to 1
+trigger Yoran-Oran                             # 221 again (256 never gets the turn)
+finish                                         # Option 2
+trigger Yoran-Oran                             # Option 2: 222 (importantEvent: Progress)
+finish
+trigger Yoran-Oran                             # 222 (now Event: its turn)
+finish
+trigger Yoran-Oran                             # his script's turn: 256
+finish
+trigger Yoran-Oran                             # 222
+finish
+charvar Quest[2][11]Option 0                   # GM
+warp -188.2,-2.0,66.3 PortWindurst
+trigger Tokaka                                 # Option 0: 318 (Progress)
+finish                                         # Option 1
+charvar Quest[2][11]Option 0                   # GM: back to 0
+trigger Tokaka                                 # 318 again (his script's 208 never gets the turn)
+finish                                         # Option 1
+quest Windurst.BlastFromThePast completed      # GM
+warp -108.5,-13.0,203.3 WindurstWalls
+trigger Yoran-Oran                             # completed, no mustZone: 223 (importantEvent: Progress)
+finish
+trigger Yoran-Oran                             # 223 (now Event: its turn)
+finish
+trigger Yoran-Oran                             # his script's turn: 256
+finish

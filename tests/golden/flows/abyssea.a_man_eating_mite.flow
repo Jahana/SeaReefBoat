@@ -1,0 +1,45 @@
+# A Man-eating Mite (abyssea 177): a level 99 Warrior in Xarcabard by the Cavernous Maw with The Truth Beckons completed
+# and Dawn of Death accepted (GMs), no Traverser Stone, 7 maw quests completed (A Goldstruck Gigas, To Paste a Peiste,
+# Megadrile Menace, The Beast of Bastore, A Delectable Demon, A Fluttery Fiend, A Beaked Blusterer) and An Ulcerous
+# Uragnite accepted (GMs; an accepted one does not count). The maw, no stone: no section: its own warp event 204
+# (entranceMawOnTrigger), finished on option 0: no warp. Traverser Stone 2 (a GM, one stone: `>= 1`): 58 (a Progress),
+# finished on option 0: begun. Back to available (a GM): the maw again with no other talk between: 58 again (an Event-
+# rank 58 would alternate with the maw's own onTrigger: 204), finished on option 2: begun (any option). Accepted: the
+# maw: no handler: 204. A zone-in, accepted with no Resheph title: nothing. The title (a GM): the zone-in plays 59 (left
+# open); its update on option 0 and on option 2: nothing; on option 1: updateEvent(the key item for 7 completed: Ivory
+# Abyssite of Prosperity); finished: Ivory Abyssite of Prosperity given, then completed. Completed (title, stone and
+# Dawn of Death still held): a zone-in: nothing; the maw: 204.
+lists Xarcabard/Cavernous_Maw/onTrigger Xarcabard/onEventFinish/58 Xarcabard/onEventFinish/204 Xarcabard/onZoneIn/1 Xarcabard/onEventUpdate/59 Xarcabard/onEventFinish/59
+char zone=Xarcabard pos=271.5,-9,-70 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath accepted
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.MegadrileMenace completed
+quest Abyssea.TheBeastOfBastore completed
+quest Abyssea.ADelectableDemon completed
+quest Abyssea.AFlutteryFiend completed
+quest Abyssea.ABeakedBlusterer completed
+quest Abyssea.AnUlcerousUragnite accepted
+login
+trigger Cavernous_Maw                   # no stone: no section: the maw's warp event 204
+finish                                  # option 0: no warp
+keyitem TraverserStone2                 # a GM: one stone
+trigger Cavernous_Maw                   # available, one stone, Dawn of Death accepted: 58
+finish                                  # option 0: begun
+quest Abyssea.AManEatingMite available  # a GM
+trigger Cavernous_Maw                   # 58 again (the kind)
+finish option=2                         # begun (any option)
+trigger Cavernous_Maw                   # accepted: no maw handler: 204
+finish                                  # option 0: no warp
+rezone                                  # accepted, no title: nothing
+title ReshephEradicator                 # a GM
+rezone open                             # the title: 59, left open
+update 59 option=0                      # option 0: nothing
+update 59 option=2                      # option 2: nothing
+update 59 option=1                      # option 1: updateEvent(Ivory Abyssite of Prosperity)
+finish                                  # Ivory Abyssite of Prosperity given; completed
+rezone                                  # completed: nothing
+trigger Cavernous_Maw                   # completed: no section: 204
+finish                                  # option 0: no warp

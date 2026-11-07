@@ -1,0 +1,184 @@
+# As Thick as Thieves (windurst 70): the whole quest but the dice games (#dangruf). A THF at level 50; The Tenshodo
+# Showdown and Mihgo's Amigo completed by GM (Windurst fame 0: Rock Racketeer unavailable). Nanaa Mihgo (Windurst Woods,
+# +99): a bone chip traded (no handler: nothing); 504 declined (option 0: nothing), 504 accepted (option 1: begun, the
+# Gang Whereabouts Note and the two forged envelopes); 505 (0, the note). Bopa Greso 506, Cha Lebagta 507 (0, grapnel).
+# Sniggnix (Lower Jeuno; draws two numbers on every talk): 10024 (0, die, rand1, rand2) declined (option 0: Prog 0),
+# then accepted (option 1: Prog 1); Prog 1 and Prog 5 (GM): 10025. Prog 4 by GM (the games: #dangruf): North
+# Gustaberg's qm2: Gambilox Wanderling popped, SENSE_EVIL_PRESENCE; again (the mob up: no pop) the same message; Prog 3
+# by GM, the mob killed: his death at Prog 3 changes nothing; Prog 4 by GM, popped again, killed: Prog 5; qm2 at Prog 5:
+# 200 (the die) with a full bag (nothing), then 200 (the die, Prog 6); Prog 6: nil. Sniggnix: the die at Prog 5 (GM):
+# nil; Prog 6: 10023 (the else arm); a chip, the die plus a chip: nil; the die alone: 10026 (0, die, a draw): taken,
+# the second envelope signed, Prog 7; Prog 7: 10023. Nanaa Mihgo with the second signed only: 505.
+# The Sauromugue Champaign towers qm2-qm7 (the bag full, so each Climbpix Highrise's grapnel stays in the treasure pool
+# and findItem stays false): round 1 with no grapnel: the day's tower (local var Quest[2][70]Option 1, the zone's random
+# draw at init) pops Climbpix Highrise (THF_AF_MOB), the others THF_AF_WALL_OFFSET (Option 0, or the mob up); the mob
+# killed; qm3 again (Option 0, the mob down): THF_AF_WALL_OFFSET. Then each tower in turn: Option 1 by GM (npclocalvar):
+# THF_AF_MOB (popped), again THF_AF_WALL_OFFSET (the mob up: popFromQM fails), the mob killed. The bag freed: the pool's
+# first grapnel given, the rest lost (rare); the grapnel held: all six THF_AF_WALL_OFFSET (findItem). Trades: qm3-qm7
+# the grapnel alone: THF_AF_WALL_OFFSET + 3 (0, grapnel); the grapnel plus a chip: nil; qm2 a chip: nil; qm2 the grapnel
+# plus a chip: nil; qm2 the grapnel alone, nothing equipped: 2 (0, grapnel): taken, the first envelope signed; the
+# towers then: + 1; qm2 the grapnel (GM) with the first signed held: nil. Nanaa Mihgo: both signed: 508 with a full bag
+# (the bonnet does not fit: nothing); the first signed only (the second taken by GM): 505; both again: 508: completed
+# (fame 20, the Rogue's Bonnet; the three key items taken; the player local var Quest[2][71]mustZone 1, which no step
+# shows). Then Hitting the Marquisate's 512: its check reads the char var mustZone, not that local var.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/Nanaa_Mihgo/onTrade WindurstWoods/Bopa_Greso/onTrigger WindurstWoods/Cha_Lebagta/onTrigger LowerJeuno/Sniggnix/onTrigger LowerJeuno/Sniggnix/onTrade NorthGustaberg/qm2/onTrigger NorthGustaberg/Gambilox_Wanderling/onMobDeath SauromugueChampaign/qm2/onTrigger SauromugueChampaign/qm2/onTrade SauromugueChampaign/qm3/onTrigger SauromugueChampaign/qm3/onTrade SauromugueChampaign/qm4/onTrigger SauromugueChampaign/qm4/onTrade SauromugueChampaign/qm5/onTrigger SauromugueChampaign/qm5/onTrade SauromugueChampaign/qm6/onTrigger SauromugueChampaign/qm6/onTrade SauromugueChampaign/qm7/onTrigger SauromugueChampaign/qm7/onTrade WindurstWoods/onEventFinish/504 WindurstWoods/onEventFinish/508 LowerJeuno/onEventFinish/10024 LowerJeuno/onEventFinish/10026 NorthGustaberg/onEventFinish/200 SauromugueChampaign/onEventFinish/2
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=THF lvl=50
+quest Windurst.MihgosAmigo completed
+quest Windurst.TheTenshodoShowdown completed
+item BoneChip x6
+login
+trade Nanaa_Mihgo+99 BoneChip x1               # available, the check holds: no quest trade handler: nothing
+trigger Nanaa_Mihgo+99                         # 504 (0, signed envelope, envelope)
+finish option=0                                # declined: nothing
+trigger Nanaa_Mihgo+99                         # 504
+finish option=1                                # begun; the note and the two forged envelopes
+trigger Nanaa_Mihgo+99                         # neither signed: 505 (0, note)
+finish
+trigger Bopa_Greso                             # 506
+finish
+trigger Cha_Lebagta                            # 507 (0, grapnel)
+finish
+warp -44.3,4.5,-135.0 LowerJeuno
+trigger Sniggnix                               # Prog 0: 10024 (0, die, rand1, rand2)
+finish option=0                                # Prog stays 0
+trigger Sniggnix                               # 10024
+finish option=1                                # Prog 1
+trigger Sniggnix                               # Prog 1: 10025 (0, die, rand1, rand2)
+finish
+charvar Quest[2][70]Prog 5                     # GM
+trigger Sniggnix                               # Prog 5 (the <= 5 edge): 10025
+finish
+charvar Quest[2][70]Prog 4                     # GM: the three games won (#dangruf)
+warp -231.4,99.107,443.0 NorthGustaberg
+trigger qm2                                    # Prog 4: Gambilox Wanderling popped; SENSE_EVIL_PRESENCE
+trigger qm2                                    # the mob up: no pop; SENSE_EVIL_PRESENCE
+charvar Quest[2][70]Prog 3                     # GM
+kill GAMBILOX_WANDERLING                       # his death at Prog 3: nothing
+tick 15000                                     # the body gone (two ticks: one long tick leaves it spawned)
+tick 4000
+charvar Quest[2][70]Prog 4                     # GM
+trigger qm2                                    # popped again; SENSE_EVIL_PRESENCE
+kill GAMBILOX_WANDERLING                       # Prog 4: Prog 5
+tick 15000
+tick 4000
+trigger qm2                                    # Prog 5: 200 (die)
+fill-inventory
+finish                                         # the die does not fit: nothing (Prog 5)
+free-inventory
+trigger qm2                                    # 200
+finish                                         # the die; Prog 6
+trigger qm2                                    # Prog 6: nil
+warp -44.3,4.5,-135.0 LowerJeuno
+charvar Quest[2][70]Prog 5                     # GM
+trade Sniggnix RegalDie x1                     # Prog 5, the die alone: nil
+charvar Quest[2][70]Prog 6                     # GM
+trigger Sniggnix                               # Prog 6: 10023
+finish
+trade Sniggnix BoneChip x1                     # not the die: nil
+trade Sniggnix RegalDie x1 BoneChip x1         # the die plus an extra: nil
+trade Sniggnix RegalDie x1                     # Prog 6, the die alone: 10026 (0, die, a draw)
+finish                                         # taken; the second forged envelope taken, the second signed; Prog 7
+trigger Sniggnix                               # Prog 7: 10023
+finish
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                         # the second signed only: 505
+finish
+warp 198.3,31.3,206.1 SauromugueChampaign
+fill-inventory                                 # each Climbpix grapnel stays in the treasure pool
+trigger qm2                                    # round 1, no grapnel: the day's tower pops Climbpix (THF_AF_MOB); else THF_AF_WALL_OFFSET
+trigger qm3
+trigger qm4
+trigger qm5
+trigger qm6
+trigger qm7
+kill CLIMBPIX_HIGHRISE
+tick 15000
+tick 4000
+trigger qm3                                    # Option 0, no grapnel, the mob down: THF_AF_WALL_OFFSET
+npclocalvar qm2 Quest[2][70]Option 1           # GM
+trigger qm2                                    # Option 1, no grapnel: popped: THF_AF_MOB
+trigger qm2                                    # the mob up: the pop fails: THF_AF_WALL_OFFSET
+kill CLIMBPIX_HIGHRISE
+tick 15000
+tick 4000
+npclocalvar qm3 Quest[2][70]Option 1           # GM
+trigger qm3                                    # THF_AF_MOB
+trigger qm3                                    # THF_AF_WALL_OFFSET
+kill CLIMBPIX_HIGHRISE
+tick 15000
+tick 4000
+npclocalvar qm4 Quest[2][70]Option 1           # GM
+trigger qm4                                    # THF_AF_MOB
+trigger qm4                                    # THF_AF_WALL_OFFSET
+kill CLIMBPIX_HIGHRISE
+tick 15000
+tick 4000
+npclocalvar qm5 Quest[2][70]Option 1           # GM
+trigger qm5                                    # THF_AF_MOB
+trigger qm5                                    # THF_AF_WALL_OFFSET
+kill CLIMBPIX_HIGHRISE
+tick 15000
+tick 4000
+npclocalvar qm6 Quest[2][70]Option 1           # GM
+trigger qm6                                    # THF_AF_MOB
+trigger qm6                                    # THF_AF_WALL_OFFSET
+kill CLIMBPIX_HIGHRISE
+tick 15000
+tick 4000
+npclocalvar qm7 Quest[2][70]Option 1           # GM
+trigger qm7                                    # THF_AF_MOB
+trigger qm7                                    # THF_AF_WALL_OFFSET
+kill CLIMBPIX_HIGHRISE
+tick 15000
+tick 4000
+free-inventory
+tick 4000                                      # the pool: the first grapnel given, the others lost (rare, held)
+item Grapnel held                              # GM: a no-op (the pool gave one: rare, held)
+trigger qm2                                    # the grapnel held: THF_AF_WALL_OFFSET (each)
+trigger qm3
+trigger qm4
+trigger qm5
+trigger qm6
+trigger qm7
+walk 418.6,15.6,-137.5
+trade qm3 Grapnel x1                           # the grapnel alone: THF_AF_WALL_OFFSET + 3 (0, grapnel)
+trade qm3 Grapnel x1 BoneChip x1               # plus an extra: nil
+walk 131.1,-0.6,-235.5
+trade qm4 Grapnel x1                           # THF_AF_WALL_OFFSET + 3
+trade qm4 Grapnel x1 BoneChip x1               # nil
+walk -116.2,15.237,45.9
+trade qm5 Grapnel x1                           # THF_AF_WALL_OFFSET + 3
+trade qm5 Grapnel x1 BoneChip x1               # nil
+walk 365.0,23.6,6.3
+trade qm6 Grapnel x1                           # THF_AF_WALL_OFFSET + 3
+trade qm6 Grapnel x1 BoneChip x1               # nil
+walk -192.4,15.4,276.8
+trade qm7 Grapnel x1                           # THF_AF_WALL_OFFSET + 3
+trade qm7 Grapnel x1 BoneChip x1               # nil
+walk 198.3,31.3,206.1
+trade qm2 BoneChip x1                          # not the grapnel: nil
+trade qm2 Grapnel x1 BoneChip x1               # plus an extra: nil
+trade qm2 Grapnel x1                           # no first signed, the grapnel alone, nothing equipped: 2 (0, grapnel)
+finish                                         # taken; the first forged envelope taken; the first signed
+trigger qm2                                    # the first signed: THF_AF_WALL_OFFSET + 1
+trigger qm3                                    # the same (each tower)
+trigger qm4
+trigger qm5
+trigger qm6
+trigger qm7
+item Grapnel                                   # GM
+walk 198.3,31.3,206.1
+trade qm2 Grapnel x1                           # the first signed held: nil
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                         # both signed: 508
+fill-inventory
+finish                                         # the bonnet does not fit: complete fails: nothing
+free-inventory
+delkeyitem SecondSignedForgedEnvelope          # GM
+trigger Nanaa_Mihgo+99                         # the first signed only: 505
+finish
+keyitem SecondSignedForgedEnvelope             # GM
+trigger Nanaa_Mihgo+99                         # 508
+finish                                         # completed: fame 20, the Rogue's Bonnet; the three key items taken; local var
+trigger Nanaa_Mihgo+99                         # Hitting the Marquisate's 512 (the char var mustZone unset)
+finish                                         # it begins

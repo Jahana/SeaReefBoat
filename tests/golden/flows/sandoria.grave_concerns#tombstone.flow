@@ -1,0 +1,21 @@
+# Grave Concerns (sandoria 11): the Tombstone's operands with no item held, and its finish's two operands. Accepted by
+# GM, no skin, no waterskin: OfferingWaterOK 1 (second arm false on OfferingWaterOK alone: nil, HERE_LIES_KING_RANPERRE);
+# OfferingWaterOK 0 (2, DroppedWaterskin 1: section 2's first arm would play 2 without setting it). While 2 is open the
+# GM sets DroppedWaterskin back to 0: the finish (Dropped 0, no skin) gives nothing (the finish's Dropped operand). Then
+# 2 again (DroppedWaterskin 1), and while it is open the GM gives a Skin of Well Water: the finish (Dropped 1, the skin
+# held) gives no waterskin (the finish's hasItem operand). Last, the Tombstone with the skin and no waterskin at
+# DroppedWaterskin 1 (the second arm false on the skin alone: nil, HERE_LIES).
+lists KingRanperresTomb/Tombstone_Upper/onTrigger KingRanperresTomb/onEventFinish/2
+char zone=KingRanperresTomb pos=1.0,-1.4,-102.0 job=WAR lvl=30
+quest Sandoria.GraveConcerns accepted
+charvar Quest[0][11]OfferingWaterOK 1
+login
+trigger Tombstone_Upper                   # no skin, no waterskin, OfferingWaterOK 1: nil; HERE_LIES_KING_RANPERRE
+charvar Quest[0][11]OfferingWaterOK 0
+trigger Tombstone_Upper                   # no skin, no waterskin, OfferingWaterOK 0: DroppedWaterskin 1; 2
+charvar Quest[0][11]DroppedWaterskin 0    # GM, while 2 is open
+finish                                    # DroppedWaterskin 0, no skin: no waterskin given
+trigger Tombstone_Upper                   # no skin, no waterskin, OfferingWaterOK 0: DroppedWaterskin 1; 2
+item SkinOfWellWater                      # GM, while 2 is open
+finish                                    # DroppedWaterskin 1, the skin held: no waterskin given
+trigger Tombstone_Upper                   # the skin, no waterskin, OfferingWaterOK 0, DroppedWaterskin 1: first arm false on Dropped; second false on the skin alone: nil; HERE_LIES

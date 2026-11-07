@@ -1,0 +1,87 @@
+# Riding on the Clouds (jeuno 131): the Selbina and Mhaura NPCs (npcOtherlands, the Somber Stone). A level 61 Warrior at level cap 65
+# (a GM, before login), MAX_LEVEL 99, so the available check holds where it stands. Each NPC's onTrade handler
+# compares npcOtherlands with its index (0 to 7, the Lua file's order): for each, a GM sets the var to the index on each side
+# (k-1 and k+1; index 7: 0 and 8; the trade: nil, then the NPC's own onTrade runs: the step comment says what it
+# shows), then to the NPC's own
+# (a Kindred's Seal alone: npcOtherlands 8, the seal taken, the Somber Stone, KEYITEM_OBTAINED; the handler still
+# returns nil), and a GM drops the stone again so the next give shows. The seal's exactness is tried at
+# Mathilde (index 0): a wrong item, the seal with an extra item, two seals; and npcOtherlands 8 after the give.
+# The quests named in the comments are the NPCs' other quests and missions: none takes a Kindred's Seal (the port
+# agent checks each step's 'ret onTrade' and packets against its comment).
+# After Melyon's give, the quest's nil is shown to let the NPC's own script run: npcOtherlands back at his index, Only
+# the Best accepted (a GM), five La Theine Cabbages: the quest's handler takes its own branch and replies nothing (not
+# the seal), then Melyon.lua's onTrade plays 62 (0, 4366).
+lists Selbina/Mathilde/onTrade Selbina/Vobo/onTrade Selbina/Melyon/onTrade Selbina/Gabwaleid/onTrade Mhaura/Celestina/onTrade Mhaura/Ekokoko/onTrade Mhaura/Bihoro-Guhoro/onTrade Mhaura/Jikka-Abukka/onTrade
+char zone=Selbina pos=14.078,-7.287,-7.576 job=WAR lvl=61
+levelcap 65
+item KindredsSeal x12
+item FlintStone
+item LaTheineCabbage x5
+login
+quest Jeuno.RidingOnTheClouds accepted  # a GM: accepted, the four vars 0
+trade Mathilde FlintStone x1            # npcOtherlands 0 (index 0): a flint stone is not the seal: nil; nothing
+trade Mathilde KindredsSeal x1 FlintStone x1  # the seal and an extra item: not exact: nil; nothing
+trade Mathilde KindredsSeal x2          # two seals: not exact: nil; nothing
+trade Mathilde KindredsSeal x1   # npcOtherlands 0: npcOtherlands 8, the seal taken, the Somber Stone
+trade Mathilde KindredsSeal x1   # npcOtherlands 8: nil; a script with no onTrade; CoP 6-3 takes no seal: nothing, the seal kept
+delkeyitem SomberStone   # a GM: the stone dropped, so the next give shows it
+warp 39.44,-14.558,81.159 Selbina   # by Vobo
+charvar Quest[3][131]npcOtherlands 0   # a GM: the index below Vobo's
+trade Vobo KindredsSeal x1   # npcOtherlands 0, not 1: nil; no script
+charvar Quest[3][131]npcOtherlands 2   # a GM: the index above Vobo's
+trade Vobo KindredsSeal x1   # npcOtherlands 2, not 1: nil; no script
+charvar Quest[3][131]npcOtherlands 1   # a GM: Vobo's index
+trade Vobo KindredsSeal x1   # npcOtherlands 1: npcOtherlands 8, the seal taken, the Somber Stone
+delkeyitem SomberStone   # a GM: the stone dropped, so the next give shows it
+warp 27.106,-6.558,4.254 Selbina   # by Melyon
+charvar Quest[3][131]npcOtherlands 1   # a GM: the index below Melyon's
+trade Melyon KindredsSeal x1   # npcOtherlands 1, not 2: nil; its script onTrade (Only the Best available): nothing
+charvar Quest[3][131]npcOtherlands 3   # a GM: the index above Melyon's
+trade Melyon KindredsSeal x1   # npcOtherlands 3, not 2: nil; its script onTrade (Only the Best available): nothing
+charvar Quest[3][131]npcOtherlands 2   # a GM: Melyon's index
+trade Melyon KindredsSeal x1   # npcOtherlands 2: npcOtherlands 8, the seal taken, the Somber Stone
+delkeyitem SomberStone   # a GM: the stone dropped, so the next give shows it
+charvar Quest[3][131]npcOtherlands 2   # a GM: Melyon's index again (the handler's own branch)
+quest OtherAreas.OnlyTheBest accepted   # a GM: Melyon's script reads it (not available)
+trade Melyon LaTheineCabbage x5   # npcOtherlands 2, not the seal: the quest's handler nil; Melyon.lua's onTrade runs: Only the Best not available, five cabbages: 62 (0, 4366)
+finish                            # option 0 (Melyon.lua completes on 11): nothing, the cabbages kept
+warp -16.241,-7.287,11.232 Selbina   # by Gabwaleid
+charvar Quest[3][131]npcOtherlands 2   # a GM: the index below Gabwaleid's
+trade Gabwaleid KindredsSeal x1   # npcOtherlands 2, not 3: nil; a script with no onTrade
+charvar Quest[3][131]npcOtherlands 4   # a GM: the index above Gabwaleid's
+trade Gabwaleid KindredsSeal x1   # npcOtherlands 4, not 3: nil; a script with no onTrade
+charvar Quest[3][131]npcOtherlands 3   # a GM: Gabwaleid's index
+trade Gabwaleid KindredsSeal x1   # npcOtherlands 3: npcOtherlands 8, the seal taken, the Somber Stone
+delkeyitem SomberStone   # a GM: the stone dropped, so the next give shows it
+warp -36.124,-16.05,75.681 Mhaura   # by Celestina
+charvar Quest[3][131]npcOtherlands 3   # a GM: the index below Celestina's
+trade Celestina KindredsSeal x1   # npcOtherlands 3, not 4: nil; the first of two (another at 20.4,-7.8,43.7); a script with no onTrade; The Sand Charm takes no seal
+charvar Quest[3][131]npcOtherlands 5   # a GM: the index above Celestina's
+trade Celestina KindredsSeal x1   # npcOtherlands 5, not 4: nil; the first of two (another at 20.4,-7.8,43.7); a script with no onTrade; The Sand Charm takes no seal
+charvar Quest[3][131]npcOtherlands 4   # a GM: Celestina's index
+trade Celestina KindredsSeal x1   # npcOtherlands 4: npcOtherlands 8, the seal taken, the Somber Stone
+delkeyitem SomberStone   # a GM: the stone dropped, so the next give shows it
+warp -76.416,-24.624,27.983 Mhaura   # by Ekokoko
+charvar Quest[3][131]npcOtherlands 4   # a GM: the index below Ekokoko's
+trade Ekokoko KindredsSeal x1   # npcOtherlands 4, not 5: nil; a script with no onTrade; RoV 1-4 takes no seal
+charvar Quest[3][131]npcOtherlands 6   # a GM: the index above Ekokoko's
+trade Ekokoko KindredsSeal x1   # npcOtherlands 6, not 5: nil; a script with no onTrade; RoV 1-4 takes no seal
+charvar Quest[3][131]npcOtherlands 5   # a GM: Ekokoko's index
+trade Ekokoko KindredsSeal x1   # npcOtherlands 5: npcOtherlands 8, the seal taken, the Somber Stone
+delkeyitem SomberStone   # a GM: the stone dropped, so the next give shows it
+warp -26.957,-8,40.851 Mhaura   # by Bihoro-Guhoro
+charvar Quest[3][131]npcOtherlands 5   # a GM: the index below Bihoro-Guhoro's
+trade Bihoro-Guhoro KindredsSeal x1   # npcOtherlands 5, not 6: nil; no script
+charvar Quest[3][131]npcOtherlands 7   # a GM: the index above Bihoro-Guhoro's
+trade Bihoro-Guhoro KindredsSeal x1   # npcOtherlands 7, not 6: nil; no script
+charvar Quest[3][131]npcOtherlands 6   # a GM: Bihoro-Guhoro's index
+trade Bihoro-Guhoro KindredsSeal x1   # npcOtherlands 6: npcOtherlands 8, the seal taken, the Somber Stone
+delkeyitem SomberStone   # a GM: the stone dropped, so the next give shows it
+warp -12.045,-15.88,58.618 Mhaura   # by Jikka-Abukka
+charvar Quest[3][131]npcOtherlands 0   # a GM: an index below Jikka-Abukka's (the lowest)
+trade Jikka-Abukka KindredsSeal x1   # npcOtherlands 0, not 7: nil; no script
+charvar Quest[3][131]npcOtherlands 8   # a GM: the index above Jikka-Abukka's
+trade Jikka-Abukka KindredsSeal x1   # npcOtherlands 8, not 7: nil; no script
+charvar Quest[3][131]npcOtherlands 7   # a GM: Jikka-Abukka's index
+trade Jikka-Abukka KindredsSeal x1   # npcOtherlands 7: npcOtherlands 8, the seal taken, the Somber Stone
+delkeyitem SomberStone   # a GM: the stone dropped, so the next give shows it

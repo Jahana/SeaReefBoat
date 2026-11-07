@@ -1,0 +1,15 @@
+# Chocobo on the Loose! (jeuno 92): a level 20 Warrior with ENABLE_TOAU true: the Lua's `== 1` is false for a boolean
+# (Settings.MainEquals, quest rework P9; MainNumber / Main would read true as 1): no section, Brutus's default 66. Then 1:
+# 10093, begun. Brutus's other quests are kept silent as in #available (Chocobo's Wounds and Save My Son completed by a GM
+# before login). Recorded on Lua at 49c07d3a^ (the parent of the commit that deleted the Lua).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/onEventFinish/10093
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=20
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+setting ENABLE_TOAU true
+login
+trigger Brutus                          # ENABLE_TOAU true: no section; the default 66
+finish
+setting ENABLE_TOAU 1
+trigger Brutus                          # 10093
+finish                                  # begun

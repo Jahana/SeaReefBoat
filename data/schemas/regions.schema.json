@@ -1,0 +1,63 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "regions.schema.json",
+   "title": "Zone roam regions",
+   "description": "Hand-drawn areas a mob may roam in, for one zone.",
+   "type": "object",
+   "properties": {
+      "regions": {
+         "type": "object",
+         "additionalProperties": {
+            "type": "object",
+            "properties": {
+               "holes": {
+                  "anyOf": [
+                     {
+                        "type": "array",
+                        "items": {
+                           "$ref": "#/$defs/std::vector<std::vector<float>>"
+                        }
+                     },
+                     {
+                        "type": "null"
+                     }
+                  ],
+                  "description": "Rings cut out of the outer one, each in the same form. Omitted means a solid region."
+               },
+               "poly": {
+                  "$ref": "#/$defs/std::vector<std::vector<float>>",
+                  "description": "Outer ring, as x, y, z corners in order. Closes implicitly. Y is the ground under that corner."
+               }
+            },
+            "additionalProperties": false,
+            "required": [
+               "poly"
+            ]
+         },
+         "description": "Areas a mob may roam in, keyed by name. A spawn joins one by naming it, or lists several and picks one on each spawn."
+      },
+      "meta": {
+         "$ref": "_meta.schema.json"
+      }
+   },
+   "additionalProperties": false,
+   "$defs": {
+      "float": {
+         "type": "number",
+         "minimum": -3.4028234663852886E38,
+         "maximum": 3.4028234663852886E38
+      },
+      "std::vector<std::vector<float>>": {
+         "type": "array",
+         "items": {
+            "type": "array",
+            "items": {
+               "$ref": "#/$defs/float"
+            }
+         }
+      }
+   },
+   "required": [
+      "regions"
+   ]
+}

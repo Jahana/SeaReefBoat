@@ -1,0 +1,34 @@
+# Creepy Crawlies (windurst 39): Illu Bohjaa (Windurst Woods; no DefaultActions entry; every answer of his script is
+# this quest's). Available: three Spools of Silk Thread traded: nothing; 333 (0, 816, 938, 1156), option 0: nothing;
+# option 1: begun. Accepted: 334; two spools: nothing (tradeHas wants 3); two calculi: nothing; three spools: Windurst
+# fame 10 at the trade, then 335 (600, 816, 938, 1156); its finish: completed, Crawler Culler, 600 gil (no message), the
+# spools taken. Completed: 334; four spools (tradeHas: at least three, only three confirmed): fame 10, 335, completed
+# again, 600 gil, three taken (one kept). Three crawler calculi (item 1156, no xi.item name): fame 10, 335, the three
+# taken. Three spools and three calculi: the spools' arm first: the spools taken, the calculi kept. Three spools and a
+# pebble: 335 (tradeHas is not exact), the spools taken, the pebble kept.
+char zone=WindurstWoods pos=22.8,-5.3,125.2 job=WAR lvl=75
+item SpoolOfSilkThread x12
+item 1156 x12
+item Pebble
+login
+trade Illu_Bohjaa SpoolOfSilkThread x3  # available: nothing
+trigger Illu_Bohjaa                     # available: 333
+finish option=0                         # nothing
+trigger Illu_Bohjaa                     # 333
+finish option=1                         # begun
+trigger Illu_Bohjaa                     # accepted: 334
+finish
+trade Illu_Bohjaa SpoolOfSilkThread x2  # two: nothing
+trade Illu_Bohjaa 1156 x2               # two calculi: nothing
+trade Illu_Bohjaa SpoolOfSilkThread x3  # three: fame 10; 335 (600, 816, 938, 1156)
+finish                                  # completed; Crawler Culler; 600 gil; the spools taken
+trigger Illu_Bohjaa                     # completed: 334
+finish
+trade Illu_Bohjaa SpoolOfSilkThread x4  # four: fame 10; 335
+finish                                  # completed again; 600 gil; three taken, one kept
+trade Illu_Bohjaa 1156 x3               # three calculi: fame 10; 335
+finish                                  # 600 gil; the three taken
+trade Illu_Bohjaa SpoolOfSilkThread x3 1156 x3   # both: the spools' arm: fame 10; 335
+finish                                  # the spools taken, the calculi kept
+trade Illu_Bohjaa SpoolOfSilkThread x3 Pebble x1 # three and a pebble: fame 10; 335
+finish                                  # the spools taken, the pebble kept

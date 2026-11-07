@@ -1,0 +1,24 @@
+# Rank 2 Mission 2 (battlefield.rank_2_mission_2) by a Windurst char. A level 75 Warrior of Windurst with The Three
+# Kingdoms (Bastok, the second) current at Status 10 and the Dark Key (GMs): BC_Entrance: the menu; area 2 (option 2):
+# registered, entered (skippable). Dark_Dragon (its title) and Seeker of arena 2 killed: no crate: the timer, WON; at
+# the fifth tick the cleanup: battlefieldWin 64, 32001; finished: Windurst 2-3's handler: the Kindred Crest, the Dark
+# Key taken, Status 11.
+lists WaughroonShrine/BC_Entrance/onTrigger WaughroonShrine/onEventFinish/32001
+char zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=WAR lvl=75 nation=2
+mission Windurst TheThreeKingdomsBastok2 current
+keyitem DarkKey
+login
+missionstatus Windurst 10               # a GM
+trigger BC_Entrance                     # the menu 32000
+update 32000 option=2                   # area 2: registered, entered
+finish                                  # in the arena
+tick 2000                               # the pair spawns
+kill #17367043                          # Dark_Dragon of arena 2
+kill #17367044                          # Seeker of arena 2: the timer, WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000                               # the timer out: the cleanup: 32001
+tick 2000                               # nothing more
+finish                                 # 2-3: the Kindred Crest, the Dark Key taken, Status 11

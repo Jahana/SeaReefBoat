@@ -1,0 +1,17 @@
+# Exotic Delicacies (adoulin, call-only), completed (a GM): a level 99 Warrior in Western Adoulin, Flapano_Odd_Even 0,
+# with a Plate of Barnacle Paella and the ingredients. Talks: the shop each time (no offer at the var 0); the var at 1
+# (a GM): the shop, the var not reset (1 stays). Trades: a paella, the ingredients: nothing (not accepted).
+lists WesternAdoulin/Flapano/onTrigger WesternAdoulin/Flapano/onTrade
+char zone=WesternAdoulin pos=71.5,0,-13.5 job=WAR lvl=99
+quest Adoulin.ExoticDelicacies completed
+item PlateOfBarnaclePaella
+item 3916
+item 5949
+item 5954 x2
+login
+trigger Flapano                         # completed, the var 0: the shop
+trigger Flapano                         # the shop again (no offer turn)
+charvar Flapano_Odd_Even 1              # a GM
+trigger Flapano                         # completed, the var 1: the shop, the var stays 1
+trade Flapano PlateOfBarnaclePaella x1  # completed: nothing
+trade Flapano 3916 x1 5949 x1 5954 x2   # completed: nothing

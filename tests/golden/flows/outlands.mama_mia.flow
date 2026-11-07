@@ -1,0 +1,64 @@
+# Mama Mia (outlands): Mamaulabion in Norg (call-only: scripts/zones/Norg/npcs/Mamaulabion.lua; no default, so no
+# alternation). Norg fame level 4, The Moonlit Path not completed: the script's else, 93. The Moonlit Path completed (a
+# GM) at fame level 3: 93. A trade while available: nothing. Level 4: 191, finished: begun. Accepted, none given: 192.
+# The Bubbly Water: its bit set in the trade, 193 (1202), finished: confirmed (taken); again: 194 (1202; no finish: kept).
+# Two items at once: nothing (no single tradeHasExactly). Egil's Torch, the Eye of Nept, the Desert Light, the Elder
+# Branch, the Rust B Gone: 193 each (confirmed). The Ancient's Key: all seven: 195, finished: confirmed, MamaMia_date =
+# JstMidnight(). Before the date: 196. GetSystemTime() is 1800000000 in the harness: MamaMia_date one past it (a GM):
+# 196; at it: 197 (not before the date); the inventory full: ITEM_CANNOT_BE_OBTAINED (14625); with room: the Evoker's
+# Ring, ITEM_OBTAINED, fame +40, completed, tradesMamaMia 0. Completed with the ring: 198; a trade: nothing.
+char zone=Norg pos=-55.9,-9.4,68.7 job=SMN lvl=75
+fame Norg 225
+item BottleOfBubblyWater
+item BottleOfBubblyWater
+item EgilsTorch
+item EyeOfNept
+item DoseOfDesertLight
+item ElderBranch
+item BottleOfRustBGone
+item AncientsKey
+login
+trigger Mamaulabion                     # The Moonlit Path not completed: 93
+finish
+quest Windurst.TheMoonlitPath completed
+fame Norg 224
+trigger Mamaulabion                     # fame level 3: 93
+finish
+fame Norg 225
+trade Mamaulabion EgilsTorch x1         # available: nothing
+trigger Mamaulabion                     # 191
+finish                                  # begun
+trigger Mamaulabion                     # none given: 192
+finish
+trade Mamaulabion BottleOfBubblyWater x1   # bit 0 set; 193 (1202)
+finish                                  # confirmed: taken
+trade Mamaulabion BottleOfBubblyWater x1   # already given: 194 (1202)
+finish                                  # no finish: kept
+trade Mamaulabion EgilsTorch x1 EyeOfNept x1   # two items: nothing
+trade Mamaulabion EgilsTorch x1         # 193
+finish
+trade Mamaulabion EyeOfNept x1          # 193
+finish
+trade Mamaulabion DoseOfDesertLight x1  # 193
+finish
+trade Mamaulabion ElderBranch x1        # 193
+finish
+trade Mamaulabion BottleOfRustBGone x1  # 193
+finish
+trade Mamaulabion AncientsKey x1        # all seven: 195 (1208)
+finish                                  # confirmed; MamaMia_date = JstMidnight()
+trigger Mamaulabion                     # before the date: 196
+finish
+charvar MamaMia_date 1800000001         # a GM: one second past GetSystemTime()
+trigger Mamaulabion                     # still before the date: 196
+finish
+charvar MamaMia_date 1800000000         # a GM: GetSystemTime() itself
+fill-inventory
+trigger Mamaulabion                     # not before the date: 197
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (14625)
+free-inventory
+trigger Mamaulabion                     # 197
+finish                                  # the Evoker's Ring; fame +40; completed; tradesMamaMia 0
+trigger Mamaulabion                     # completed, the ring held: 198
+finish
+trade Mamaulabion BottleOfBubblyWater x1   # completed: nothing

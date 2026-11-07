@@ -1,0 +1,44 @@
+# Inside the Belly (otherAreas 26): Selbina's Zaldon (a script: A Boy's Dream's trade; default 150).
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# Under the Sea, The Sand Charm and The Real Gift completed; fishing skill 30 (300 stored); a level 30 Warrior with a
+# Chocobo Feather, a Fat Greedie, three Zafmlug Bass and a Silver Shark. Available (section 1 holds): a bass traded: no
+# trade handler: nothing, kept. Zaldon 161 (Progress); finished: begun. Accepted, total skill 30 (< 40): 162 (the four
+# tier-1 fish). Trades: a bass and the feather: nil (not exactly one fish); a Fat Greedie (no fishRewards entry):
+# nil; two bass: nil; one bass: the trade confirmed at once (the bass gone), randomInt(1, 1000) <= 14: 166 (0, the Blue Rock), else 167. A GM completes the quest before the finish: the
+# accepted section's 166 / 167 finish (giveReward, complete, fame +10 San d'Oria and Bastok) is the #accepted flow's,
+# so the finish played is the completed section's: the rock on a 166, 15 gil, the local vars cleared. Completed: 162 again; the Silver Shark: 166 (0, the Trident) on a roll <= 14, else 167; finished: the trident
+# on a 166, 250 gil, the title Ace Angler; no fame. The feather traded while completed: nil (no fishRewards entry).
+# The lookup runs every onEventFinish entry whose check holds when its turn comes (interaction_lookup.lua
+# runHandlersInData: the check is evaluated per entry, after the entries before it ran). The accepted section's 166 /
+# 167 finish completes the quest, so the completed section's check then holds too and its 166 / 167 runs: giveReward
+# reads the fishId local var the first one cleared (0), and `reward.gil` on fishRewards[0] (nil) raises
+# (Inside_the_Belly.lua:546: attempt to index local 'reward'). The #accepted flow records that finish.
+lists Selbina/Zaldon/onTrigger Selbina/Zaldon/onTrade Selbina/onEventFinish/161 Selbina/onEventFinish/166 Selbina/onEventFinish/167
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.UnderTheSea completed
+quest OtherAreas.TheSandCharm completed
+quest OtherAreas.TheRealGift completed
+skill Fishing 300
+item ChocoboFeather
+item FatGreedie
+item ZafmlugBass x3
+item SilverShark
+login
+trade Zaldon ZafmlugBass x1             # available: no trade handler: nothing; kept
+trigger Zaldon                          # available, skill 30: 161
+finish                                  # begun
+trigger Zaldon                          # accepted, skill 30 < 40: 162 (the tier-1 list)
+finish
+trade Zaldon ZafmlugBass x1 ChocoboFeather x1 # not exactly the fish: nil
+trade Zaldon FatGreedie x1              # no entry: nil
+trade Zaldon ZafmlugBass x2             # two: nil
+trade Zaldon ZafmlugBass x1             # confirmed now; roll <= 14: 166 (0, Blue Rock), else 167
+quest OtherAreas.InsideTheBelly completed # a GM: the accepted finish is the #accepted flow's
+finish                                  # the completed section's: the rock on a 166; 15 gil; no fame
+trigger Zaldon                          # completed: 162
+finish
+trade Zaldon SilverShark x1             # roll <= 14: 166 (0, Trident), else 167
+finish                                  # the trident on a 166; 250 gil; Ace Angler; no fame
+trade Zaldon ChocoboFeather x1          # completed: no entry: nil; kept

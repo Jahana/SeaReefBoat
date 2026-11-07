@@ -1,0 +1,26 @@
+# Waters of the Cheval (sandoria 1), accepted by GM, each give refused: Nouveil with both the waterskin and the river
+# water (the first arm, 573); a full bag at Nouveil's 571 (no waterskin, the fromTrade message; the gil kept); a full bag
+# at Miageau's 515 (no room for the pendant: not completed, the water kept); a full bag at the river (the river water
+# cannot be given: silently nil; the waterskin kept); the Wing Pendant already held (rare: not completed, the water
+# kept).
+lists NorthernSanDoria/Miageau/onTrade NorthernSanDoria/Nouveil/onTrigger NorthernSanDoria/Nouveil/onTrade NorthernSanDoria/onEventFinish/515 NorthernSanDoria/onEventFinish/571 EastRonfaure/Cheval_River/onTrade
+char zone=NorthernSanDoria pos=115.6,0.0,109.2 job=WAR lvl=30 gil=1000
+quest Sandoria.WatersOfTheCheval accepted
+item BlessedWaterskin
+item SkinOfChevalRiverWater
+login
+trigger Nouveil                           # the river water and the waterskin: 573 (the first arm)
+finish
+fill-inventory
+trade Nouveil gil=10                      # YOU_DONATE_GIL; 571
+finish                                    # no room: no waterskin (fromTrade message); the gil kept
+walk 115.6,0.0,109.2                      # to Miageau
+trade Miageau SkinOfChevalRiverWater x1   # 515
+finish                                    # no room for the Wing Pendant: not completed; the water kept
+warp 222.3,-58.2,427.4 EastRonfaure
+trade Cheval_River BlessedWaterskin x1    # no room: the give fails (silent): nil; nothing; the waterskin kept
+free-inventory
+warp 115.6,0.0,109.2 NorthernSanDoria
+item WingPendant
+trade Miageau SkinOfChevalRiverWater x1   # 515
+finish                                    # the pendant held (rare): not completed; the water kept

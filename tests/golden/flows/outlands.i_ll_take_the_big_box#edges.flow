@@ -1,0 +1,71 @@
+# I'll Take the Big Box's edges. Ryoma's guard, one operand each (Twenty in Pirate Years completed unless said), each nil:
+# the lookup's default action 94 on the handler's turn: bob (a level 49 Ninja), carl (a level 50 Warrior), ed (a level 50
+# Ninja, the needToZone flag [generic]mustZone 252 set in Norg); dan (a level 50 Ninja, Twenty in Pirate Years available:
+# section 1 off): 94, then his script's turn: Twenty in Pirate Years' offer 133 (a Ninja from 40); fred (a level 50
+# Ninja, AF2_QUEST_LEVEL 50.4 for the talk: a number compare, 50 < 50.4, not rounded). Main (a level 50
+# Ninja, accepted by a GM): Rabao: Leodarion at Prog 0: nil: the default 89; an Oak Pole at Prog 1: nil; Prog 2: the pole
+# and a Bone Chip: nil (tradeMatches: the pole alone); Prog 5: Leodarion nil: 89. Port Bastok: Ensetsu at Prog 2: nil:
+# the default 27. Selbina at Prog 4: the quest's zone-in answers nothing (Rhapsodies of Vana'diel 1-02's 176 plays,
+# finished by the warp); completed with Prog 5 (GMs): no section: the zone's own empty table, no event. The zone-in at
+# Prog 5 and its 1101 finish (complete true / false) are in the #zonein flow.
+lists Norg/Ryoma/onTrigger PortBastok/Ensetsu/onTrigger Rabao/Leodarion/onTrigger Rabao/Leodarion/onTrade Selbina/onZoneIn/1
+char zone=Rabao pos=-49.513,7.999,41.323 job=NIN lvl=50
+char bob zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=49
+char carl zone=Norg pos=-26.276,0.53,-8.323 job=WAR lvl=50
+char dan zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=50
+char ed zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=50
+char fred zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=50
+quest Outlands.TwentyInPirateYears completed
+quest Outlands.ILlTakeTheBigBox accepted
+item OakPole x2
+item BoneChip
+bob: quest Outlands.TwentyInPirateYears completed
+carl: quest Outlands.TwentyInPirateYears completed
+ed: quest Outlands.TwentyInPirateYears completed
+ed: charvar [generic]mustZone 252
+fred: quest Outlands.TwentyInPirateYears completed
+login
+bob: login
+bob: trigger Ryoma                      # level 49 < 50: nil: the default 94
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trigger Ryoma                     # a Warrior: nil: the default 94
+carl: finish-if-event
+carl: logout
+dan: login
+dan: trigger Ryoma                      # Twenty in Pirate Years available: no section: 94
+dan: finish-if-event
+dan: trigger Ryoma                      # his script's turn: 133
+dan: finish-if-event
+dan: logout
+ed: login
+ed: trigger Ryoma                       # needToZone (kept in Norg): nil: the default 94
+ed: finish-if-event
+ed: logout
+setting AF2_QUEST_LEVEL 50.4
+fred: login
+fred: trigger Ryoma                     # level 50 < 50.4: nil: the default 94
+fred: finish-if-event
+fred: logout
+setting AF2_QUEST_LEVEL 50
+trigger Leodarion                       # Prog 0: nil: the default 89
+finish
+charvar Quest[5][144]Prog 1             # a GM
+walk -48.013,7.999,41.323               # beside Leodarion
+trade Leodarion OakPole x1              # Prog 1: nil
+charvar Quest[5][144]Prog 2             # a GM
+trade Leodarion OakPole x1 BoneChip x1  # not the pole alone: nil
+charvar Quest[5][144]Prog 5             # a GM
+trigger Leodarion                       # Prog 5: nil: the default 89
+finish
+charvar Quest[5][144]Prog 2             # a GM
+warp 31.966,-6.771,68.784 PortBastok
+trigger Ensetsu                         # Prog 2: nil: the default 27
+finish
+charvar Quest[5][144]Prog 4             # a GM
+warp -52.121,-11.338,-13.067 Selbina    # Prog 4: the quest's zone-in nothing: RoV 1-02's 176
+quest Outlands.ILlTakeTheBigBox completed   # a GM
+charvar Quest[5][144]Prog 5             # a GM
+warp 31.966,-6.771,68.784 PortBastok
+warp -52.121,-11.338,-13.067 Selbina    # completed: no section: no event

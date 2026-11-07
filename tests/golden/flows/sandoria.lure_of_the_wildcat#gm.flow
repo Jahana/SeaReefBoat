@@ -1,0 +1,26 @@
+# Lure of the Wildcat (San d'Oria) (sandoria 113): Prog set by GM, isFull(Prog, 20)'s edges. Accepted with the badge
+# (GM): Prog 0x7FFFF (bit 19 missing: 814); 0xFFFFE (bit 0 missing: 814); 0x100000 (bit 20 only, not 0: 814); -1 (every
+# bit: full: 815, completed). 814 is an Event, so the talk after the first two 814s alternates to his script's 816
+# (UseFallback). 815 comes straight after the third 814, so it plays only as a Progress event: an Event would fall back
+# to 816 there (the main flow's 815 follows zone changes, which clear the alternation).
+lists SouthernSanDoria/Amutiyaal/onTrigger SouthernSanDoria/onEventFinish/815
+char zone=SouthernSanDoria pos=118.0,0.0,84.7 job=WAR lvl=20
+quest Sandoria.LureOfTheWildcat accepted
+keyitem RedSentinelBadge
+charvar Quest[0][113]Prog 524287
+login
+trigger Amutiyaal                         # Prog 0x7FFFF: not full: 814
+finish
+trigger Amutiyaal                         # after the Event 814: his script's 816
+finish
+charvar Quest[0][113]Prog 1048574
+trigger Amutiyaal                         # Prog 0xFFFFE: not full: 814
+finish
+trigger Amutiyaal                         # his script's 816
+finish
+charvar Quest[0][113]Prog 1048576
+trigger Amutiyaal                         # Prog 0x100000: not 0, not full: 814
+finish
+charvar Quest[0][113]Prog -1
+trigger Amutiyaal                         # Prog -1: every bit set: full: 815 right after the Event 814 (a Progress event)
+finish                                    # the badge taken; KEYITEM_LOST; completed: the Red Invitation Card

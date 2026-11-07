@@ -1,0 +1,48 @@
+# The Call of the Sea (otherAreas 67): the edges. Available: a trade to Equette: no trade handler. Equette 170 (Prog 1),
+# Anteurephiaux 172 (begun, Prog 2). Accepted, Option 0: Leporaitceau 171 (the accepted section's), finished: Option 1;
+# again: nil. Equette at Prog 2: nil; Anteurephiaux at Prog 2: nil. Prog 1 (a GM): the ??? (Prog 1): nil. Prog 2, the local
+# NMKilled 1 (a GM, no fight): the conch, Prog 3. Equette at Prog 3: nil. Prog 4 (a GM): Anteurephiaux nil. A full
+# inventory: Equette 174, finished: not completed; room: 174, finished: completed.
+lists TavnazianSafehold/Equette/onTrigger TavnazianSafehold/Leporaitceau/onTrigger TavnazianSafehold/Anteurephiaux/onTrigger TavnazianSafehold/onEventFinish/170 TavnazianSafehold/onEventFinish/171 TavnazianSafehold/onEventFinish/172 TavnazianSafehold/onEventFinish/173 TavnazianSafehold/onEventFinish/174 MisareauxCoast/qm_bloody_coffin/onTrigger MisareauxCoast/Bloody_Coffin/onMobDeath
+lists TavnazianSafehold/Equette/onTrade
+char zone=TavnazianSafehold pos=77.5,-25,13.2 job=WAR lvl=75
+item ChocoboFeather
+login
+warp 4,-22.3,-17.3 TavnazianSafehold
+trade Equette ChocoboFeather x1         # available: no trade handler; nothing
+trigger Equette                         # 170
+finish                                  # Prog 1
+warp 84.1,-25,-3.3 TavnazianSafehold
+trigger Anteurephiaux                   # 172
+finish                                  # begun; Prog 2
+warp 77.5,-25,13.2 TavnazianSafehold
+trigger Leporaitceau                    # accepted, Option 0: 171
+finish                                  # Option 1
+trigger Leporaitceau                    # Option 1: nil; 180
+finish
+warp 4,-22.3,-17.3 TavnazianSafehold
+trigger Equette                         # Prog 2: nil; 162
+finish
+warp 84.1,-25,-3.3 TavnazianSafehold
+trigger Anteurephiaux                   # Prog 2: nil; 177
+finish
+charvar Quest[4][67]Prog 1              # a GM
+warp 642.8,0.3,-516.6 MisareauxCoast
+trigger qm_bloody_coffin                # Prog 1: nil; its default
+charvar Quest[4][67]Prog 2              # a GM
+localvar NMKilled 1                     # a GM
+trigger qm_bloody_coffin                # NMKilled 1: the conch; Prog 3
+warp 4,-22.3,-17.3 TavnazianSafehold
+trigger Equette                         # Prog 3: nil; 162
+finish
+charvar Quest[4][67]Prog 4              # a GM
+warp 84.1,-25,-3.3 TavnazianSafehold
+trigger Anteurephiaux                   # Prog 4: nil; 177
+finish
+warp 4,-22.3,-17.3 TavnazianSafehold
+fill-inventory
+trigger Equette                         # 174
+finish                                  # no room: not completed
+free-inventory
+trigger Equette                         # 174
+finish                                  # completed

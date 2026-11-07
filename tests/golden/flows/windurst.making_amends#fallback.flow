@@ -1,0 +1,18 @@
+# Making Amends (windurst 3): 277's kind at Hakkuru-Rinkuru's trade, next to his script's onTrade (Wonder Wands
+# accepted by GM: 260 on any trade). A Progress keeps the lookup's turn; an Event would hand the next trade to his
+# script (the onTrade UseFallback var). A level-10 WAR at Windurst fame 50, Making Amends accepted by GM. The glue: 277
+# (a Progress): completed. Accepted again by GM (available first: a completed quest stays completed), no other trade
+# between: the glue again: 277, not his 260.
+lists PortWindurst/Hakkuru-Rinkuru/onTrade PortWindurst/onEventFinish/277
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=10
+fame Windurst 50
+quest Windurst.WonderWands accepted
+quest Windurst.MakingAmends accepted
+item BlockOfAnimalGlue x2
+login
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1  # accepted, the glue: 277 (1500), a Progress
+finish                                        # completed: fame 30, Quick Fixer; the glue taken; 1500 gil; the mustZone
+quest Windurst.MakingAmends available         # a GM: delQuest (a completed quest stays completed)
+quest Windurst.MakingAmends accepted          # a GM
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1  # 277 again (a Progress keeps the turn; an Event would give his 260)
+finish                                        # completed again

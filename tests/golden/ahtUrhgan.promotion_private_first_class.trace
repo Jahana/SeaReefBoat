@@ -1,0 +1,132 @@
+# golden trace: ahtUrhgan.promotion_private_first_class
+seed 7
+flow a19c3d8520938164549127cce880c3563d7ccfd9e7600ebfcc9d2bd49f2add01
+recorder lua
+lua-at e2878a8c41adc3efb3fde92ac701aef87f873f6e
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @feaa229e0b289e28 (170)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @cf2d88266bd8896a (4)
+char_jobs @d7aaec2234dfc6eb (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @e9cae1c4bb221b99 (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @55fd8fbe89fa8d58 (1)
+char_stats @225ae21d55d9f743 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+char_vars @d044b4a03bbcfeb5 (1)
+chars @7c33bd10c534f388 (41)
+ret onZoneIn=number:4294967295
+order 50/Naja_Salaheem/onTrigger=Mission[4][1],Mission[4][2],Mission[4][3],Mission[4][4],Mission[4][5],Mission[4][6],Mission[4][7],Mission[4][8],Mission[4][9],Mission[4][10],Mission[4][11],Mission[4][12],Mission[4][13],Mission[4][14],Mission[4][15],Mission[4][16],Mission[4][17],Mission[4][18],Mission[4][19],Mission[4][21],Mission[4][23],Mission[4][24],Mission[4][25],Mission[4][26],Mission[4][27],Mission[4][28],Mission[4][29],Mission[4][30],Mission[4][31],Mission[4][32],Mission[4][33],Mission[4][34],Mission[4][35],Mission[4][37],Mission[4][38],Mission[4][39],Mission[4][40],Mission[4][41],Mission[4][43],Mission[4][45],Mission[4][47],Quest[6][75],Quest[6][93],Quest[6][93],Quest[6][93],Quest[6][90],Quest[6][90],Quest[6][94],Quest[6][94],Quest[6][94],Quest[6][94],Quest[6][94],Quest[6][94],Quest[6][95],Quest[6][95],Quest[6][95],Quest[6][95],Quest[6][95],Quest[6][95],Quest[6][95],Quest[6][91],Quest[6][91],Quest[6][91],Quest[6][74],HQuest[Invitation_Cards]
+order 50/Naja_Salaheem/onTrade=Quest[6][90]
+order 50/onEventFinish/5000=Quest[6][90]
+order 50/onEventFinish/5002=Quest[6][90]
+step trigger Naja_Salaheem
+packets
+  00E @7314f70bc9521d81
+  00E @eb89ac950b1bb449
+  00E @eaec2fa722b3aa4a
+  00E @2edad05332a4574b
+  00E @f5c3373ceeef56ba
+  00E @ab73baaaa2d30463
+  00E @42ea7db79ae31501
+  00E @8cb277a4cda691da
+  00E @8cac5c117e08d974
+  00E @3272eac917b6870e
+  00E @1d05584dda5f3a90
+  052 @992a1d6976db40ee
+ret onTrigger=number:4294967295
+step finish-if-event
+packets
+step charvar AssaultPromotion 25
+packets
+char_vars - varname=AssaultPromotion|value=24|expiry=0
+char_vars + varname=AssaultPromotion|value=25|expiry=0
+step trigger Naja_Salaheem
+packets
+  034 @3a22f69f273669a2
+  0DF @dda83823432ec34a
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  056 @eb09152269f32afe
+  0DF @dda83823432ec34a
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_quest_state + quest_key=ahtUrhgan.promotion_private_first_class|area=6|quest_id=90|status=1|step=0|progress=null|repeat_by=0
+chars quests +395:04
+ret onEventFinish=nil:nil
+step trigger Naja_Salaheem
+packets
+  034 @603fcf31b7b2ae2d
+  0DF @dda83823432ec34a
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @dda83823432ec34a
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Naja_Salaheem BoneChip x1
+packets
+ret onTrade=nil:nil
+step finish-if-event
+packets
+step trade Naja_Salaheem ImpWing x2
+packets
+ret onTrade=nil:nil
+step finish-if-event
+packets
+step trade Naja_Salaheem ImpWing x1 BoneChip x1
+packets
+ret onTrade=nil:nil
+step finish-if-event
+packets
+step trade Naja_Salaheem ImpWing x1
+packets
+  034 @f27ac0aa0616119e
+  0DF @dda83823432ec34a
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  055 @e2418d9db4309802
+  02A @2aa56f30d151cb3c
+  061 @020d502263aa76a5
+  056 @8a5e56afc7da55d5
+  056 @64334d6fb8eaf624
+  020 @a6804f916f69b514
+  01D @f8579df92de4b1ca
+  055 @d2527e00ec353b47
+  02A @96cd2546eb9f3f6d
+  0DF @dda83823432ec34a
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory - location=0|slot=1|itemId=2163|quantity=1|bazaar=0|signature=|extra=null
+char_quest_state - quest_key=ahtUrhgan.promotion_private_first_class|area=6|quest_id=90|status=1|step=0|progress=null|repeat_by=0
+char_quest_state + quest_key=ahtUrhgan.promotion_private_first_class|area=6|quest_id=90|status=2|step=0|progress=null|repeat_by=0
+char_stats - title=0
+char_stats + title=445
+char_vars - varname=AssaultPromotion|value=25|expiry=0
+chars keyitems +161:80
+chars quests +395:00 +427:04
+chars titles +55:20
+ret onEventFinish=nil:nil
+step trigger Naja_Salaheem
+packets
+  052 @992a1d6976db40ee
+ret onTrigger=number:4294967295
+step finish-if-event
+packets

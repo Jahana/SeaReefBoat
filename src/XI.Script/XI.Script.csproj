@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- XI.Script: the map server's Lua host. LuaJIT (libluajit_64.dll in the server root) is driven through its
+         C API, so the shipped scripts/ run with LuaJIT's VM semantics as under xi_map; the sol2 bindings (luautils
+         globals, CLuaBaseEntity and friends) are re-registered from C#. The DLL is a newer LuaJIT 2.1 than the C++
+         server's (tools/build_luajit.sh: it has the ITERN fixes for LuaJIT #827), with the same exports. -->
+    <AssemblyName>XI.Script</AssemblyName>
+    <RootNamespace>XI.Script</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\XI.Common\XI.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="XI.Verify.QuestScripts.Live" />
+    <InternalsVisibleTo Include="XI.Verify.QuestGolden.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Content1.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Content2.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Missions.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Missions3.Live" />
+    <InternalsVisibleTo Include="XI.Verify.Abyssea.Live" />
+  </ItemGroup>
+
+</Project>

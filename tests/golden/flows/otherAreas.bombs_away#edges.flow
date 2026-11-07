@@ -1,0 +1,20 @@
+# Bombs Away! (otherAreas 96): the edges of the exact trade. Accepted (a GM). One core: nil (nothing). Three cores: nil.
+# Two cores and a feather: nil (not exact). Two cores with a full inventory: 8, finished: quest:complete false (no room
+# for the salt): the cores kept, still accepted: 7. With room: 8, finished: completed.
+lists UleguerandRange/Buffalostalker_Dodzbraz/onTrigger UleguerandRange/Buffalostalker_Dodzbraz/onTrade UleguerandRange/onEventFinish/8
+char zone=UleguerandRange pos=-378.7,-23.9,-180.8 job=WAR lvl=75
+quest OtherAreas.BombsAway accepted
+item ClusterCore x3
+item ChocoboFeather
+login
+trade Buffalostalker_Dodzbraz ClusterCore x1 # one core: nil; nothing
+trade Buffalostalker_Dodzbraz ClusterCore x3 # three cores: nil
+trade Buffalostalker_Dodzbraz ClusterCore x2 ChocoboFeather x1 # two and a feather: nil (not exact)
+fill-inventory
+trade Buffalostalker_Dodzbraz ClusterCore x2 # 8
+finish                                  # no room: complete false; the cores kept
+trigger Buffalostalker_Dodzbraz         # still accepted: 7
+finish
+free-inventory
+trade Buffalostalker_Dodzbraz ClusterCore x2 # 8
+finish                                  # completed; the salt; the cores taken

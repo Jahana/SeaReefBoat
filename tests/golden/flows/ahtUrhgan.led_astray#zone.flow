@@ -1,0 +1,69 @@
+# Led Astray's Mhasbaf once per zone, state by state: a level 75 Warrior in Whitegate, the quest accepted at each Prog
+# (GMs), zoned (Al Zahbi and back) before each: Prog 0, 1, 2 and 4: 834, then 542 (the Ignore); Prog 3: 834, 834
+# (plain). Prog 5 (a GM; only Prog 0-4 answer): Mhasbaf: nil: 542; Nashmau's Tataroon: nil: 270.
+lists AhtUrhganWhitegate/Mhasbaf/onTrigger Nashmau/Tataroon/onTrigger
+char zone=AhtUrhganWhitegate pos=56.2,-6,11.387 job=WAR lvl=75
+quest AhtUrhgan.LedAstray accepted
+charvar Quest[6][65]Prog 0
+login
+warp -64,-7,38 AlZahbi
+warp 56.2,-6,11.387 AhtUrhganWhitegate
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+charvar Quest[6][65]Prog 1              # a GM
+trigger Mhasbaf                         # Prog 1: 834
+finish
+trigger Mhasbaf                         # 542 (the Ignore)
+finish
+warp -64,-7,38 AlZahbi
+warp 56.2,-6,11.387 AhtUrhganWhitegate
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+charvar Quest[6][65]Prog 2              # a GM
+trigger Mhasbaf                         # Prog 2: 834
+finish
+trigger Mhasbaf                         # 542
+finish
+warp -64,-7,38 AlZahbi
+warp 56.2,-6,11.387 AhtUrhganWhitegate
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+charvar Quest[6][65]Prog 3              # a GM
+trigger Mhasbaf                         # Prog 3: 834
+finish
+trigger Mhasbaf                         # 834 again (plain)
+finish
+warp -64,-7,38 AlZahbi
+warp 56.2,-6,11.387 AhtUrhganWhitegate
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+charvar Quest[6][65]Prog 4              # a GM
+trigger Mhasbaf                         # Prog 4: 834
+finish
+trigger Mhasbaf                         # 542
+finish
+warp -64,-7,38 AlZahbi
+warp 56.2,-6,11.387 AhtUrhganWhitegate
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+charvar Quest[6][65]Prog 0              # a GM
+trigger Mhasbaf                         # Prog 0: 834
+finish
+trigger Mhasbaf                         # 542
+finish
+warp -64,-7,38 AlZahbi
+warp 56.2,-6,11.387 AhtUrhganWhitegate
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+charvar Quest[6][65]Prog 5              # a GM
+trigger Mhasbaf                         # Prog 5: nil: 542
+finish
+warp -23.7,0,-39.022 Nashmau
+trigger Tataroon                        # Prog 5: nil: 270
+finish

@@ -1,0 +1,64 @@
+# It's Raining Mannequins! (otherAreas 29): its reply kinds. Fyi has no script and no default, so only another quest's
+# reply on him tells them apart: Behind the Smile accepted at Prog 0 (a GM; its Fyi 320 is Progress), whose container
+# sorts first (Behind_the_Smile < Its_Raining_Mannequins). A tie plays the first container's action, then the next one per
+# talk (the action cycle). Available: 305 and 320 tie (both Progress): 320, then 305. Accepted: 320 (Progress) beats 306,
+# 307, 308 and 310 (Event) on two talks each (each an Event: a Progress one would tie and take the second talk); 311 (Progress) ties with
+# 320: the cycle's last action (305) is not in that tie, so 320 first, then 311. Ramona's 1103 and Cheupirudaux's 759 (Progress) against their own scripts: twice in a row each
+# (an Event would let the script answer the second talk).
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/onEventFinish/305 Mhaura/onEventFinish/320 Mhaura/onEventFinish/311 Selbina/Ramona/onTrigger Selbina/onEventFinish/1103 NorthernSanDoria/Cheupirudaux/onTrigger NorthernSanDoria/onEventFinish/759
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30
+quest OtherAreas.BehindTheSmile accepted
+login
+trigger Fyi_Chalmwoh                    # a tie of Progress: Behind the Smile's 320 first
+finish                                  # Behind the Smile's Prog 1
+charvar Quest[4][77]Prog 0              # a GM
+trigger Fyi_Chalmwoh                    # the cycle: 305
+finish                                  # begun (Prog 0)
+trigger Fyi_Chalmwoh                    # Prog 0: 320 beats 306
+finish
+charvar Quest[4][77]Prog 0
+trigger Fyi_Chalmwoh                    # 320 again
+finish
+charvar Quest[4][77]Prog 0
+charvar Quest[4][29]Prog 1              # a GM
+trigger Fyi_Chalmwoh                    # Prog 1: 320 beats 307
+finish
+charvar Quest[4][77]Prog 0
+trigger Fyi_Chalmwoh                    # 320 again
+finish
+charvar Quest[4][77]Prog 0
+charvar Quest[4][29]Prog 2
+trigger Fyi_Chalmwoh                    # Prog 2: 320 beats 308
+finish
+charvar Quest[4][77]Prog 0
+trigger Fyi_Chalmwoh                    # 320 again
+finish
+charvar Quest[4][77]Prog 0
+charvar Quest[4][29]Prog 3
+charvar Quest[4][29]Wait 1800000000
+trigger Fyi_Chalmwoh                    # Prog 3, waiting: 320 beats 310
+finish
+charvar Quest[4][77]Prog 0
+trigger Fyi_Chalmwoh                    # 320 again
+finish
+charvar Quest[4][77]Prog 0
+charvar Quest[4][29]Wait 1799999940
+trigger Fyi_Chalmwoh                    # 311 and 320 tie; the cycle's last was 305 (not in the tie): the first, 320
+finish                                  # Behind the Smile's Prog 1
+charvar Quest[4][77]Prog 0
+trigger Fyi_Chalmwoh                    # 311 and 320 tie; the last was 320: 311
+finish                                  # completed; the Hume Male Mannequin
+quest OtherAreas.ItsRainingMannequins available # a GM
+quest OtherAreas.ItsRainingMannequins accepted  # a GM: accepted at Prog 0
+warp 14,-7.3,2.9 Selbina
+trigger Ramona                          # 1103
+finish                                  # Prog 1
+charvar Quest[4][29]Prog 0              # a GM
+trigger Ramona                          # 1103 again: Progress over her script
+finish                                  # Prog 1
+warp -136.7,12,250.9 NorthernSanDoria
+trigger Cheupirudaux                    # 759
+finish                                  # Prog 2
+charvar Quest[4][29]Prog 1              # a GM
+trigger Cheupirudaux                    # 759 again: Progress over his script
+finish                                  # Prog 2

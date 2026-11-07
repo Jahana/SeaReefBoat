@@ -1,0 +1,33 @@
+# Always More Quoth the Ravenous (adoulin, call-only), the talk's gates at fame level 3: a level 99 Warrior in
+# Western Adoulin, Hunger Strikes and The Starving completed (GMs), 125 Adoulin fame, Westerly_Breeze_Wait 99999 (a GM:
+# nothing in the game sets it), Vana'diel day 8000. Talks go in pairs (553, then his script). An Apple Juice and a
+# Cursed Beverage while available: nothing (the trade arms need the quest accepted). The wait day ahead: nothing from
+# the script. The wait var at today (8000, a GM): nothing (the day must be past it). The wait var 7999 (a GM): 3010,
+# finished on 0: added (any option). The Cursed Beverage: 3012, finished: completed, Westerly_Breeze_Wait 0.
+lists WesternAdoulin/Westerly_Breeze/onTrigger WesternAdoulin/Westerly_Breeze/onTrade WesternAdoulin/onEventFinish/3010 WesternAdoulin/onEventFinish/3012
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+fame Adoulin 125
+quest Adoulin.HungerStrikes completed
+quest Adoulin.TheStarving completed
+charvar Westerly_Breeze_Wait 99999
+item BottleOfAppleJuice
+item BottleOfCursedBeverage
+login
+trade Westerly_Breeze BottleOfAppleJuice x1   # a drink while available: nothing
+trade Westerly_Breeze BottleOfCursedBeverage x1  # the beverage while available: nothing
+trigger Westerly_Breeze                 # 553
+finish-if-event
+trigger Westerly_Breeze                 # the wait day ahead: nothing: 553
+finish-if-event
+charvar Westerly_Breeze_Wait 8000       # a GM: today
+trigger Westerly_Breeze                 # 553
+finish-if-event
+trigger Westerly_Breeze                 # the wait day today: nothing: 553
+finish-if-event
+charvar Westerly_Breeze_Wait 7999       # a GM: yesterday
+trigger Westerly_Breeze                 # 553
+finish-if-event option=0
+trigger Westerly_Breeze                 # the wait day past: 3010
+finish-if-event option=0                # added
+trade Westerly_Breeze BottleOfCursedBeverage x1  # accepted: 3012
+finish                                  # completed, Westerly_Breeze_Wait 0

@@ -1,0 +1,13 @@
+# Chocobo's Wounds (jeuno 4) below level 20: no section. Brutus has no quest action, so his default 66 (Default
+# priority) and his script's 66 (19) take turns; the door gives its default 64 (its script does nothing).
+lists UpperJeuno/Brutus/onTrigger LowerJeuno/_6t2/onTrigger
+char zone=UpperJeuno pos=-55.5,8.2,97.5 lvl=19
+quest Jeuno.ChocoboOnTheLoose completed
+login
+trigger Brutus                  # level 19: no section; the default 66 (the lookup's turn)
+finish
+trigger Brutus                  # the script's turn: 66 (19)
+finish
+warp -80.7,-7.65,-168.8 LowerJeuno
+trigger _6t2                    # no section: the door's default 64
+finish

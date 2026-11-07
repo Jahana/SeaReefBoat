@@ -1,0 +1,31 @@
+# Beyond the Stars (jeuno 135), its trigger replies' kinds against other quests' at the same time (a progressEvent over
+# an event; equal replies with one csid: the first in container order, 133, 134, 135, 136, 170, 137, 167; with
+# different csids they take turns). A level 81 Warrior with the Limit Breaker at cap 85, the two earlier limit breaks
+# completed. Beyond the Stars available, Prelude to Puissance accepted (a GM): two progressEvents 10045, Beyond the
+# Stars' (81, 1, 3, 0) first. Accepted too (a GM), Prog 0: Prelude to Puissance's (81, 1, 6, 2, 0) over Beyond the
+# Stars' event. Prelude to Puissance available again and Dormant Powers Dislodged accepted (a GM; itemWanted 3): two
+# events 10045, Beyond the Stars' (81, 1, 3, 1) first. Prog 1 (a GM): its progressEvent 10161 (81, 0) over Dormant
+# Powers Dislodged's event, both triggers.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10161
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=81
+keyitem LimitBreaker
+levelcap 85
+quest Jeuno.NewWorldsAwait completed
+quest Jeuno.ExpandingHorizons completed
+quest Jeuno.PreludeToPuissance accepted
+login
+trigger Nomad_Moogle                    # BtS available and PtP accepted, both progressEvent 10045: BtS's (81, 1, 3, 0)
+finish option=1                         # nothing (neither BtS's 9 nor PtP's completing options)
+quest Jeuno.BeyondTheStars accepted     # a GM
+trigger Nomad_Moogle                    # PtP's progressEvent over BtS's reminder: 10045 (81, 1, 6, 2, 0)
+finish option=1                         # nothing
+quest Jeuno.PreludeToPuissance available  # a GM
+quest Jeuno.DormantPowersDislodged accepted  # a GM
+charvar Quest[3][136]itemWanted 3       # a GM
+trigger Nomad_Moogle                    # two reminders, both event 10045: BtS's (81, 1, 3, 1)
+finish
+charvar Quest[3][135]Prog 1             # a GM
+trigger Nomad_Moogle                    # BtS's progressEvent 10161 over DPD's reminder: 10161 (81, 0)
+finish option=0
+trigger Nomad_Moogle                    # again 10161 (81, 0)
+finish option=0

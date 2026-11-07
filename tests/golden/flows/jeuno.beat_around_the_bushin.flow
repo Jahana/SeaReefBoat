@@ -1,0 +1,87 @@
+# Beat Around the Bushin (jeuno 67): Vola and the door _6tc (Lower Jeuno; neither has a DefaultActions entry). A MNK 71.
+# Norg fame 424 (level 5): Vola's 212. 425 (level 6): 160 (its finish, option 1: the var 1). The door's trade while available: the
+# beard at var 1 and at var 2 (a GM): nothing. The door at var 1: 155: begun, the var 2. The door at var 2 without the
+# Tenshodo card: ITS_LOCKED. Vola, accepted: 214. The door's trades, at each var: a pebble, the item with a pebble, the
+# item at a wrong var: nothing; the Wyrm Beard at 2: 156 (var 3, taken); var 4 (a GM: Bastok Markets Degenhard,
+# var-only, stays Lua): the Behemoth Tongue 157 (var 5); var 6 (a GM: Ru'Lude Gardens Maat): the Adamantoise Egg 158
+# (var 7); the Brown Belt at 7: 159 refused on a full inventory, then Black Belt (title and item), var 0, Norg fame +60,
+# the belt taken, completed. The door at var 0: ITS_LOCKED; with the card (a GM): 105. Vola, completed: 214. The var 1
+# again (a GM): the door's 155 before the card's 105 (no status read): addQuest over a completed quest (its current
+# bit set, still completed); the var 2. While completed, each item at its var (2, 4, 6, 7; a GM): nothing. Fistful of
+# Fury accepted (a GM): Vola's 215 before 214; available with Silence of the Rams completed (a GM): 216 before 214.
+char zone=LowerJeuno pos=45.8,3.9,-45.4 job=MNK lvl=71
+fame Norg 424
+item WyrmBeard x2
+item BehemothTongue x2
+item AdamantoiseEgg x2
+item BrownBelt x2
+item Pebble
+login
+trigger Vola                            # Norg fame level 5: no arm: 212
+finish
+fame Norg 425
+trigger Vola                            # available, MNK 71, level 6: 160
+finish option=1                         # still available, option 1 (no option read): BeatAroundTheBushin 1
+walk 39.6,-1.6,-16.6                    # to the door (trades are refused from afar)
+trade _6tc WyrmBeard x1                 # not accepted, var 1: nothing
+charvar BeatAroundTheBushin 2           # a GM
+trade _6tc WyrmBeard x1                 # not accepted, var 2: nothing
+charvar BeatAroundTheBushin 1           # a GM
+trigger _6tc                            # the var 1: 155
+finish                                  # begun; the var 2
+trigger _6tc                            # var 2, no Tenshodo card: ITS_LOCKED
+trigger Vola                            # accepted: 214
+finish
+walk 39.6,-1.6,-16.6                    # to the door (trades are refused from afar)
+trade _6tc Pebble x1                    # var 2, a pebble: nothing
+trade _6tc WyrmBeard x1 Pebble x1       # the beard and a pebble: nothing
+trade _6tc BehemothTongue x1            # the tongue at var 2: nothing
+trade _6tc WyrmBeard x1                 # accepted, var 2: 156
+finish                                  # var 3; the beard taken
+trade _6tc WyrmBeard x1                 # the beard at var 3: nothing
+trade _6tc BehemothTongue x1            # the tongue at var 3: nothing
+charvar BeatAroundTheBushin 4           # a GM: Degenhard (Bastok Markets) stays Lua
+trade _6tc Pebble x1                    # var 4, a pebble: nothing
+trade _6tc BehemothTongue x1 Pebble x1  # the tongue and a pebble: nothing
+trade _6tc AdamantoiseEgg x1            # the egg at var 4: nothing
+trade _6tc BehemothTongue x1            # var 4: 157
+finish                                  # var 5; taken
+trade _6tc AdamantoiseEgg x1            # the egg at var 5: nothing
+charvar BeatAroundTheBushin 6           # a GM: Maat (Ru'Lude Gardens) stays Lua
+trade _6tc Pebble x1                    # var 6, a pebble: nothing
+trade _6tc AdamantoiseEgg x1 Pebble x1  # the egg and a pebble: nothing
+trade _6tc BrownBelt x1                 # the belt at var 6: nothing
+trade _6tc AdamantoiseEgg x1            # var 6: 158
+finish                                  # var 7; taken
+trade _6tc AdamantoiseEgg x1            # the egg at var 7: nothing
+trade _6tc Pebble x1                    # var 7, a pebble: nothing
+trade _6tc BrownBelt x1 Pebble x1       # the belt and a pebble: nothing
+fill-inventory
+trade _6tc BrownBelt x1                 # var 7: 159
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED; the belt kept
+free-inventory
+trade _6tc BrownBelt x1                 # 159
+finish                                  # Black Belt (title); Black Belt; var 0; Norg fame +60; the belt taken; completed
+trigger _6tc                            # var 0, no Tenshodo card: ITS_LOCKED (the script's)
+keyitem TenshodoMembersCard
+trigger _6tc                            # the card: 105 (the script's: the door opens)
+finish
+trigger Vola                            # completed: 214
+finish
+charvar BeatAroundTheBushin 1           # a GM
+trigger _6tc                            # the var 1, the card held: 155 (no status read; before the card's 105)
+finish                                  # addQuest over a completed quest; the var 2
+trade _6tc WyrmBeard x1                 # completed, var 2: nothing
+charvar BeatAroundTheBushin 4           # a GM
+trade _6tc BehemothTongue x1            # completed, var 4: nothing
+charvar BeatAroundTheBushin 6           # a GM
+trade _6tc AdamantoiseEgg x1            # completed, var 6: nothing
+charvar BeatAroundTheBushin 7           # a GM
+trade _6tc BrownBelt x1                 # completed, var 7: nothing
+quest Jeuno.FistfulOfFury accepted      # a GM
+trigger Vola                            # Fistful of Fury's 215 before this quest's 214
+finish
+quest Bastok.SilenceOfTheRams completed  # a GM
+quest Jeuno.FistfulOfFury available     # a GM
+trigger Vola                            # Fistful of Fury's 216 before this quest's 214
+finish option=0                         # nothing

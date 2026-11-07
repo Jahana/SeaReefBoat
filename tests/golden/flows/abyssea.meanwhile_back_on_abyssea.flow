@@ -1,0 +1,76 @@
+# Meanwhile, Back on Abyssea (abyssea 185): a level 99 Warrior in Port Jeuno with The Wyrm God completed and the quest
+# accepted (GMs). The Hall of the Gods at Prog 0 and 18:00: nothing (section 2 wants Prog 1). Joachim at Prog 0: 345,
+# finished: Prog 1; Prog 0 again (a GM) with no talk between: 345 again (the reply kind: an Event-rank 345 would
+# alternate with his own onTrigger; a talk that plays his script between would reset the alternation), finished: Prog 1;
+# at Prog 1: nil: his script's 328. The Hall of the Gods at Prog 1: 12:00 and 17:00 nothing; 18:00: 9, finished: Prog 2;
+# at Prog 2: nothing; Prog 1 again (a GM): 04:00: 9; Prog 1 again: 05:00: nothing. Abyssea - Empyreal Paradox at Prog 2:
+# Prishe: 204 (over The Wyrm God's 206), finished: completed (the Abyssite of the Cosmos), A Moonlight Requite accepted.
+# Prishe (completed): The Wyrm God's 206 and this quest's 207 are both replaceDefault Events: they tie and rotate, 207
+# first (this quest's container comes first), then 206, then 207 (Prog 2 by a GM before the third: no 204). Completed:
+# Joachim at Prog 0 (a GM): 328; the Hall at Prog 1 and 20:00: nothing.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/345 PortJeuno/onEventFinish/328 HallOfTheGods/onZoneIn/1 HallOfTheGods/onEventFinish/9 AbysseaEmpyrealParadox/Prishe/onTrigger AbysseaEmpyrealParadox/onEventFinish/204 AbysseaEmpyrealParadox/onEventFinish/206 AbysseaEmpyrealParadox/onEventFinish/207
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate completed
+quest Abyssea.HeartOfMadness completed
+quest Abyssea.TenuousExistence completed
+quest Abyssea.ChampionsOfAbyssea completed
+quest Abyssea.ASeaDogsSummons completed
+quest Abyssea.DeathAndRebirth completed
+quest Abyssea.EmissariesOfGod completed
+quest Abyssea.BeneathABloodRedSky completed
+quest Abyssea.TheWyrmGod completed
+quest Abyssea.MeanwhileBackOnAbyssea accepted
+login
+wait vana=6                             # 18:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 0 at 18:00: no section: nothing
+warp -51.344,0,-9.978 PortJeuno
+trigger Joachim                         # Prog 0: 345
+finish                                  # Prog 1
+charvar Quest[8][185]Prog 0             # a GM
+trigger Joachim                         # Prog 0: 345 again (the kind)
+finish                                  # Prog 1
+trigger Joachim                         # Prog 1: nil: 328 (his script)
+finish
+wait vana=18                            # 12:00 (the next day)
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 1 at 12:00: nothing
+warp -51.344,0,-9.978 PortJeuno
+wait vana=5                             # 17:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 1 at 17:00: nothing (not >= 18, not < 5)
+warp -51.344,0,-9.978 PortJeuno
+wait vana=1                             # 18:00
+warp -0.011,-1.848,-176.133 HallOfTheGods open # Prog 1 at 18:00 (>= 18): 9, left open
+finish                                  # Prog 2
+warp -51.344,0,-9.978 PortJeuno
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 2: no section: nothing
+warp -51.344,0,-9.978 PortJeuno
+charvar Quest[8][185]Prog 1             # a GM: Prog 1 again
+wait vana=10                            # 04:00
+warp -0.011,-1.848,-176.133 HallOfTheGods open # Prog 1 at 04:00 (< 5): 9, left open
+finish                                  # Prog 2
+warp -51.344,0,-9.978 PortJeuno
+charvar Quest[8][185]Prog 1             # a GM: Prog 1 again
+wait vana=1                             # 05:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 1 at 05:00: nothing (not < 5, not >= 18)
+warp -51.344,0,-9.978 PortJeuno
+charvar Quest[8][185]Prog 2             # a GM
+warp 538,-500,-591.338 AbysseaEmpyrealParadox
+trigger Prishe                          # Prog 2: 204
+finish                                  # completed: the Abyssite of the Cosmos; A Moonlight Requite accepted
+trigger Prishe                          # completed: 206 / 207 tie (replaceDefault): 207 (its container first)
+finish
+trigger Prishe                          # 206 (the rotation)
+finish
+charvar Quest[8][185]Prog 2             # a GM: completed at Prog 2 (no 204)
+trigger Prishe                          # 207 again
+finish
+warp -51.344,0,-9.978 PortJeuno
+charvar Quest[8][185]Prog 0             # a GM
+trigger Joachim                         # completed at Prog 0: no section: 328
+finish
+charvar Quest[8][185]Prog 1             # a GM
+wait vana=15                            # 20:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # completed at Prog 1, 20:00: no section: nothing

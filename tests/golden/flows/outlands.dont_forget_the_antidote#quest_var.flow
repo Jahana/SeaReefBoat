@@ -1,0 +1,17 @@
+# Don't Forget the Antidote (outlands 192), the quest's own var at the completion: accepted, DontForgetAntidoteVar 1,
+# the Vial of Desert Venom and Quest[5][192]Prog 1 (GMs). Edigey: the vial, 4; finished (the var 1): the var 0, the vial
+# taken, the Desert Hunter title, the Dotanuki, ITEM_OBTAINED, the raw player:completeQuest,
+# San d'Oria and Bastok fame +5. The raw completeQuest does no cleanup: Quest[5][192]Prog stays 1 (quest:complete's
+# cleanup would clear it).
+char zone=Rabao pos=-34.7,0,-37.9 job=SAM lvl=75
+quest Outlands.DontForgetTheAntidote accepted
+charvar DontForgetAntidoteVar 1
+item VialOfDesertVenom
+charvar Quest[5][192]Prog 1             # a GM: the quest's own var
+login
+trade Edigey VialOfDesertVenom x1       # 4
+finish                                  # the first time: the Dotanuki; completed, Prog kept; fame
+trigger Edigey                          # default turn: 50
+finish
+trigger Edigey                          # script, completed: 5
+finish

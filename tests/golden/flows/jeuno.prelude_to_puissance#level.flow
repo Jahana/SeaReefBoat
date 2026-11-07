@@ -1,0 +1,33 @@
+# Prelude to Puissance (jeuno 170), the level either side of 90 and of 75 (> 90 / >= 75 / below) and the Limit Breaker:
+# Warriors at cap 95, Dormant Powers Dislodged completed (level 91 with the key is the main flow's). Level 74 (main):
+# 10045 (74, 1, 0, 0); 75 (c75): 10045 (75, 1, 4, 2); 90 (c90): 10045 (90, 1, 4, 2); level 91 without the Limit Breaker
+# (nokey): 10045 (91, 2, 0, 0). Each 10045 finished with option 13: no 10045 handler in the available section, nothing
+# (not begun, not completed).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=74
+char c75 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=75
+char c90 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=90
+char nokey zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+keyitem LimitBreaker
+levelcap 95
+quest Jeuno.DormantPowersDislodged completed
+c75: keyitem LimitBreaker
+c75: levelcap 95
+c75: quest Jeuno.DormantPowersDislodged completed
+c90: keyitem LimitBreaker
+c90: levelcap 95
+c90: quest Jeuno.DormantPowersDislodged completed
+nokey: levelcap 95
+nokey: quest Jeuno.DormantPowersDislodged completed
+login
+trigger Nomad_Moogle                    # level 74: 10045 (74, 1, 0, 0)
+finish option=13                        # nothing
+c75: login
+c75: trigger Nomad_Moogle               # level 75: 10045 (75, 1, 4, 2)
+c75: finish option=13                   # nothing
+c90: login
+c90: trigger Nomad_Moogle               # level 90: 10045 (90, 1, 4, 2)
+c90: finish option=13                   # nothing
+nokey: login
+nokey: trigger Nomad_Moogle             # no Limit Breaker: 10045 (91, 2, 0, 0)
+nokey: finish option=13                 # nothing

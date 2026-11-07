@@ -1,0 +1,13 @@
+# Sharpening the Sword with the whetstone and a full inventory: 44 does not complete it (the sword cannot be given),
+# the whetstone is kept; with room, 44 again completes it.
+char zone=NorthernSanDoria pos=5.3,0.5,24.9 job=PLD lvl=40
+quest Sandoria.FatherAndSon completed
+quest Sandoria.SharpeningTheSword accepted
+keyitem OrdelleWhetstone
+login
+fill-inventory
+trigger Ailbeche                          # the whetstone: 44
+finish                                    # no room: not completed, the whetstone kept
+free-inventory
+trigger Ailbeche                          # 44
+finish                                    # completed: Honor Sword, fame +20; the whetstone deleted

@@ -1,0 +1,25 @@
+# Such Sweet Sorrow's edges: a level 75 Warrior in Whitegate with a Merrow Scale. Available at Option 0: out to Al Zahbi
+# and into Caedarva Mire: Option 0: no zone-in event; back into Whitegate: Option 0: none (the zone's own). Option 1 (a
+# GM): Whitegate's zone-in: not 2: none. Option 2 (a GM): Caedarva's zone-in: not 1: none; Whitegate's: 956 (text table
+# 0), finished: begun. A full bag: the scale: 583, finished: the locket does not fit: not completed, the scale kept;
+# freed: 583: completed.
+lists AhtUrhganWhitegate/onZoneIn/1 CaedarvaMire/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/583
+char zone=AhtUrhganWhitegate pos=99.4,0,-91.53 job=WAR lvl=75
+item MerrowScale
+login
+warp -64,-7,38 AlZahbi
+warp 43.493,5.325,-699.828 CaedarvaMire # Option 0: no zone-in event
+warp 99.4,0,-91.53 AhtUrhganWhitegate   # Option 0: no quest zone-in event
+charvar Quest[6][13]Option 1            # a GM
+warp -64,-7,38 AlZahbi
+warp 99.4,0,-91.53 AhtUrhganWhitegate   # Option 1: not 2: none
+charvar Quest[6][13]Option 2            # a GM
+warp 43.493,5.325,-699.828 CaedarvaMire # Option 2: not 1: none
+warp 99.4,0,-91.53 AhtUrhganWhitegate open   # Option 2: 956
+finish                                  # begun; Option 0
+fill-inventory
+trade Dabhuh MerrowScale x1             # accepted: 583 (a trade does not walk: the warp stood beside Dabhuh)
+finish                                  # the locket does not fit: not completed, the scale kept
+free-inventory
+trade Dabhuh MerrowScale x1             # 583
+finish                                  # completed

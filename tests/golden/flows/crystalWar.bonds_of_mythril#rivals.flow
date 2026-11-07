@@ -1,0 +1,51 @@
+# Bonds of Mythril (crystalWar 59) beside its rivals at Gentle Tiger and Naji: a level 99 Warrior in Bastok Markets [S]
+# with The Truth Lies Hid, What Price Loyalty and Bonds of Mythril completed and the WotG mission Adieu, Lilisette
+# current (GMs; missions as the main flow). Gentle Tiger: What Price Loyalty's completed 356 (an Event) over Bonds'
+# 214 (replaceDefault), twice. What Price Loyalty set back to available (a GM; its available section wants Beneath the
+# Mask completed: none): 214. Metalworks: Trust: Bastok completed (a GM): Naji: its 983 (a Progress, once per zone:
+# Ayame not learned) over Bonds' 971 (replaceDefault); again: 983 spent for the zone: 971; Trust: Bastok set back to
+# available (a GM; its available section wants ENABLE_TRUST_QUESTS and a Bastok rank: none): 971. Bastok Markets
+# [S]: What Price Loyalty completed again and Bonds accepted at Prog 5 (GMs: set available first, a GM accepted over a
+# completion keeps it completed): Gentle Tiger 213 (a Progress) over 356, finished: Prog 6, setPos into the
+# Metalworks; the zone change: 972 (left open), finished: Prog 7, setPos into North Gustaberg [S]; the zone change: 13
+# (left open), finished: completed.
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/213 Metalworks/onZoneIn/1 Metalworks/onEventFinish/972 Metalworks/Naji/onTrigger NorthGustabergS/onZoneIn/1 NorthGustabergS/onEventFinish/13
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+quest CrystalWar.TheTruthLiesHid completed
+quest CrystalWar.WhatPriceLoyalty completed
+quest CrystalWar.BondsOfMythril completed
+mission Wotg AdieuLilisette current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # completed: What Price Loyalty's 356 over 214
+finish
+trigger Gentle_Tiger                    # 356 again
+finish
+quest CrystalWar.WhatPriceLoyalty available # a GM
+trigger Gentle_Tiger                    # 214
+finish
+warp 68.365,-13.999,-4.562 Metalworks
+quest Bastok.TrustBastok completed      # a GM
+trigger Naji                            # Trust: Bastok's 983 (a Progress, once per zone) over 971
+finish
+trigger Naji                            # 983 spent for the zone: 971
+finish
+quest Bastok.TrustBastok available      # a GM
+trigger Naji                            # 971
+finish
+warp -202.432,-9.998,2.237 BastokMarketsS
+quest CrystalWar.WhatPriceLoyalty completed # a GM
+quest CrystalWar.BondsOfMythril available # a GM
+quest CrystalWar.BondsOfMythril accepted # a GM
+charvar Quest[7][59]Prog 5              # a GM
+trigger Gentle_Tiger                    # Prog 5: 213 (87, 0, 2964, 0) over 356
+finish                                  # Prog 6; setPos into the Metalworks
+tick 400
+login open                              # the zone change: the Metalworks at Prog 6: 972, left open
+finish                                  # Prog 7; setPos into North Gustaberg [S]
+tick 400
+login open                              # the zone change: North Gustaberg [S] at Prog 7: 13, left open
+finish                                  # completed

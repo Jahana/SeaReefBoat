@@ -1,0 +1,22 @@
+# Dormant Powers Dislodged (jeuno 136), the draw's edge and the update's quest: a level 86 Warrior with the Limit Breaker
+# at cap 90, the three earlier limit breaks completed, available. itemWanted 1 (a GM, before login: index 0): no draw,
+# 10045 (86, 1, 4, 0, 0, 0); itemWanted -1 (a GM: index -2, below 0): a draw, itemWanted set to the index + 1, 10045
+# (86, 1, 4, 0, 0, drawn). Beat Around the Bushin completed (a GM): update 8 answers updateEvent(1).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventUpdate/10045 RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=86
+keyitem LimitBreaker
+levelcap 90
+quest Jeuno.NewWorldsAwait completed
+quest Jeuno.ExpandingHorizons completed
+quest Jeuno.BeyondTheStars completed
+charvar Quest[3][136]itemWanted 1
+login
+trigger Nomad_Moogle                    # itemWanted 1: no draw; 10045 (86, 1, 4, 0, 0, 0)
+finish option=0
+charvar Quest[3][136]itemWanted -1      # a GM
+trigger Nomad_Moogle                    # itemWanted -1: a draw; 10045 (86, 1, 4, 0, 0, drawn), itemWanted drawn + 1
+finish option=0
+quest Jeuno.BeatAroundTheBushin completed  # a GM
+trigger Nomad_Moogle                    # 10045 (86, 1, 4, 0, 0, drawn)
+update 10045 option=8                   # BATB completed: updateEvent(1)
+finish option=0

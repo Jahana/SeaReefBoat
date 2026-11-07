@@ -1,0 +1,46 @@
+# Father and Son (sandoria 4): Ailbeche in Northern San d'Oria, Exoroche and Helbort in Southern San d'Oria. Available:
+# Exoroche's random line (EXOROCHE_START when math.randomInt(1, 100) < 30, else EXOROCHE_DIALOG_OFFSET + 0..5),
+# Helbort's 593 once per zone (his default after it), a trade to Ailbeche (nothing), his 508 (begun). Accepted:
+# AILBECHE_FATHER_WHERE at Prog 0, Helbort's 593 again in a new zone visit, Exoroche's 542 (Prog 1) then
+# EXOROCHE_PLEASE_TELL, Ailbeche's 509 (completed: Willow Fishing Rod, fame +20, Lost Child Officer). Completed with
+# Sharpening the Sword available (a WAR: never offered): the rod and a chip (not exactly: nil), his
+# OH_I_WANT_MY_ITEM (npc:showText, noAction), the rod (61: taken, Family Counselor), then AILBECHE_WHEN_FISHING; a
+# GM-given rod with the title (nil).
+# Ailbeche's script answers A Boy's Dream / Under Oath vars only (none set); his default is 868. Exoroche's script
+# answers the same vars only; his default is 76. Helbort has no script; his default is text HELBORT_DIALOG. A Purchase
+# of Arms also names Helbort: fame 20 after the completion is level 1, below its offer.
+lists NorthernSanDoria/Ailbeche/onTrigger NorthernSanDoria/Ailbeche/onTrade NorthernSanDoria/onEventFinish/508 NorthernSanDoria/onEventFinish/509 NorthernSanDoria/onEventFinish/61 SouthernSanDoria/Exoroche/onTrigger SouthernSanDoria/Helbort/onTrigger SouthernSanDoria/onEventFinish/542
+char zone=SouthernSanDoria pos=68.8,0,62.4 job=WAR lvl=10
+item BoneChip
+login
+trigger Exoroche                          # available, randomInt(1, 100) < 30 under the pinned seed: EXOROCHE_START
+trigger Exoroche                          # the seeded RNG's next draw: EXOROCHE_START again
+trigger Exoroche                          # randomInt(1, 100) >= 30: EXOROCHE_DIALOG_OFFSET + randomInt(0, 5) (+2, 8029)
+trigger Helbort                           # available: 593 (once per zone)
+finish
+trigger Helbort                           # 593 seen in this zone visit: his default HELBORT_DIALOG
+warp 5.3,0.5,24.9 NorthernSanDoria
+trade Ailbeche BoneChip x1                # available: no trade handler; his script: no A Boy's Dream var, nothing
+trigger Ailbeche                          # available: 508
+finish                                    # begun (any option)
+trigger Ailbeche                          # accepted, Prog 0: AILBECHE_FATHER_WHERE (progress)
+warp 68.8,0,62.4 SouthernSanDoria
+trigger Helbort                           # accepted, a new zone visit: 593
+finish
+trigger Exoroche                          # Prog 0: 542
+finish                                    # Prog 1
+trigger Exoroche                          # Prog 1: EXOROCHE_PLEASE_TELL (progress)
+warp 5.3,0.5,24.9 NorthernSanDoria
+trigger Ailbeche                          # Prog 1: 509
+finish                                    # completed: Willow Fishing Rod, fame +20, Lost Child Officer
+trade Ailbeche WillowFishingRod x1 BoneChip x1   # not exactly the rod: nil; his script: nothing
+trigger Ailbeche                          # no Family Counselor title: OH_I_WANT_MY_ITEM (npc:showText) and a progress noAction
+trade Ailbeche WillowFishingRod x1        # exactly the rod, no title: 61
+finish                                    # the rod taken, Family Counselor
+trigger Ailbeche                          # the title: AILBECHE_WHEN_FISHING (replaceDefault)
+item WillowFishingRod
+trade Ailbeche WillowFishingRod x1        # exactly the rod, the title held: nil; his script: nothing
+warp 68.8,0,62.4 SouthernSanDoria
+trigger Exoroche                          # completed: no section; his script: nothing; his default 76
+finish
+trigger Helbort                           # completed, fame level 1: no section; HELBORT_DIALOG

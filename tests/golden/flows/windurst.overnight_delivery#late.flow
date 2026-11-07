@@ -1,0 +1,31 @@
+# Overnight Delivery (windurst 15): the six o'clock edges. Accepted by GM (Prog 4). Kotan at 06:00 of the next day: day
+# (144: `< 6` is false at 6). At 05:00 of the day after: night, 141; the finish runs at 06:00 (`wait vana=1` while 141
+# is open), so its `VanadielHour() < 6` is false: dueDate = today + 1. At 06:00 of the due day Kenapa takes the bag
+# late (`dueDate == today and hour < 6` false): 346 (the quest deleted, the bag gone, dueDate 0, Prog 256). Available
+# again: 347 (Prog 0) at 06:00 (the 256 line comes before the hour check), then at Prog 0 and 06:00 nothing (`hour >= 7`
+# false: his script), and at 07:00 the offer 336.
+lists WindurstWaters/Kenapa-Keppa/onTrigger Mhaura/Kotan-Purutan/onTrigger WindurstWaters/onEventFinish/346 WindurstWaters/onEventFinish/347 WindurstWaters/onEventFinish/336 Mhaura/onEventFinish/141
+char zone=Mhaura pos=41.8,-8.0,44.2
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery accepted
+charvar Quest[2][15]Prog 4
+fame Windurst 50
+login
+wait vana=18                            # day 8001, 06:00
+trigger Kotan-Purutan                   # no bag, Prog 4, 06:00 (not < 6, not >= 18): event 144
+finish
+wait vana=23                            # day 8002, 05:00
+trigger Kotan-Purutan                   # 05:00 (< 6): 141
+wait vana=1                             # 06:00, 141 still open
+finish                                  # Small Bag; the finish reads 06:00 (not < 6): dueDate = today + 1
+wait vana=24                            # the due day, 06:00
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Kenapa-Keppa                    # the bag, due today, 06:00 (not < 6): 346
+finish                                  # failed: the quest deleted, the bag gone, dueDate 0, Prog 256
+trigger Kenapa-Keppa                    # available, Prog 256: 347
+finish                                  # Prog 0
+trigger Kenapa-Keppa                    # Prog 0, 06:00 (< 7): nil; his script 302 or 303
+finish
+wait vana=1                             # 07:00
+trigger Kenapa-Keppa                    # 07:00, Prog 0: 336
+finish                                  # Prog 1

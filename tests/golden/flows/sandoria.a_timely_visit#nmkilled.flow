@@ -1,0 +1,11 @@
+# A Timely Visit (sandoria 105): qm1's NMKilled is a char local var, 1 once either NM died at Prog 5; a GM sets 2, which is
+# not 1: qm1's first arm (18) stays closed. Stage 1, Prog 5, no NM up, 12:00 (daytime): UNABLE_TO_INVESTIGATE. The wait
+# arm (npc local var Wait) is taken by sandoria.a_timely_visit#waitover (npclocalvar).
+lists JugnerForest/qm1/onTrigger JugnerForest/onEventFinish/18
+char zone=JugnerForest pos=-309.382,-0.139,407.377 job=WAR lvl=75
+quest Sandoria.ATimelyVisit accepted
+charvar Quest[0][105]Prog 5
+charvar Quest[0][105]Stage 1
+login
+localvar NMKilled 2                       # GM: not 1
+trigger qm1                               # NMKilled 2, Prog 5, no NM up: no 18; daytime: UNABLE_TO_INVESTIGATE

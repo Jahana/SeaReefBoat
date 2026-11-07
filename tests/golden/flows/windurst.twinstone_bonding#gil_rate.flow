@@ -1,0 +1,13 @@
+# Twinstone Bonding (windurst 62) at GIL_RATE 1.0625: the repeat's 490 (completed, GiohAijhriSpokenTo 1) pays
+# npcUtil.giveCurrency's GIL_RATE x 900 gil (956.25, which the engine rounds to 956; a missing rate would give 900).
+# Completed and the var 1 by a GM.
+char zone=WindurstWoods pos=106.2,-4.75,173.9 job=WAR lvl=75
+setting GIL_RATE 1.0625
+item TwinstoneEarring
+charvar GiohAijhriSpokenTo 1
+login
+quest Windurst.TwinstoneBonding completed
+trigger Gioh_Ajihri                     # completed, no needToZone: 488 (beside him)
+finish                                  # var 1
+trade Gioh_Ajihri TwinstoneEarring x1   # 490
+finish                                  # fame 16; GIL_RATE x 900 gil; the earring taken; needToZone; var 0

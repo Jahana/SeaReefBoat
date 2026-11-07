@@ -1,0 +1,27 @@
+# The Return of the Adventurer (bastok 30): Gwill in Bastok Markets. The guard (Father Figure completed and Bastok fame
+# level 3), the cinnamon trade, the Cotton Headband reward, no repeat. Gwill's default is 113; The Cold Light of Day (also
+# on Gwill) stays available here, so it plays nothing.
+lists BastokMarkets/Gwill/onTrigger BastokMarkets/Gwill/onTrade BastokMarkets/onEventFinish/242 BastokMarkets/onEventFinish/243
+char zone=BastokMarkets pos=-317.8,-15.948,-176.4
+fame Bastok 125
+item StickOfCinnamon x3
+item BoneChip
+login
+trade Gwill StickOfCinnamon x1  # available: no trade handler, nothing
+trigger Gwill                   # fame level 3, Father Figure not completed: his default 113
+finish
+quest Bastok.FatherFigure completed
+fame Bastok 124
+trigger Gwill                   # Father Figure completed, fame 124 (level 2): 113
+finish
+fame Bastok 125
+trigger Gwill                   # the offer, 242
+finish                          # accepted
+trigger Gwill                   # accepted: no trigger in section 2, his default 113
+finish
+trade Gwill BoneChip x1         # the wrong item: nothing
+trade Gwill StickOfCinnamon x1  # 243
+finish                          # completed: Cotton Headband, fame +30, Kulatz Bridge Companion, one cinnamon gone
+trigger Gwill                   # completed: 113
+finish
+trade Gwill StickOfCinnamon x1  # completed: nothing

@@ -1,0 +1,17 @@
+# Flavors of Our Lives (adoulin 46), the Harvesting Point with no HELM wait (ENABLE_HELM_WAIT off, the default): a
+# level 99 Warrior in the Yahse Hunting Grounds beside the first Harvesting Point with a Sickle, the quest accepted at
+# Prog 3 (GMs). The Sickle traded: xi.helm.onTrade reaches pickItem, which finds no Yahse entry in
+# xi.helm.dataTable[HARVESTING].zone and, since user ruling 2026-11-05 (kept bugs), finds nothing (the tool kept): the
+# handler goes on to its Blightberry action (KEYITEM_OBTAINED). The Lua indexed the nil entry and raised (its baseline
+# holds the trade as expect-error). Back in Western Adoulin: Berghent 87, finished: completed (300 bayld, 500 exp,
+# Potation Pathfinder).
+lists YahseHuntingGrounds/Harvesting_Point/onTrade WesternAdoulin/Berghent/onTrigger WesternAdoulin/onEventFinish/87
+char zone=YahseHuntingGrounds pos=164.33,0,-283.7 job=WAR lvl=99
+quest Adoulin.FlavorsOfOurLives accepted
+charvar Quest[9][46]Prog 3
+item Sickle
+login
+trade Harvesting_Point Sickle x1        # Prog 3: nothing found; the Blightberry
+warp 97.221,-0.148,-28.68 WesternAdoulin
+trigger Berghent                        # Prog 3 with the Blightberry: 87
+finish                                  # completed

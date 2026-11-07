@@ -1,0 +1,36 @@
+# Omens (ahtUrhgan 22) with its era module, modules/era/lua/quests/ahturhgan/omens.lua, enabled by xi.pre(ROV)
+# (RESTRICT_CONTENT 1, ENABLE_ROV 0): Transformations is offered at JST midnight. A level 50 Blue Mage, Omens accepted at
+# Prog 4 with the Sealed Immortal Envelope (GMs). A full bag: Lathuya 716, finished: the module's copy: quest:complete
+# false: nothing (the envelope kept, no Transformations mustZone, no Timer); room again: Lathuya 716, finished: the module's copy: completed, the envelope
+# taken, Transformations' mustZone, its Timer = JstMidnight() (1800025200; the quest alone sets 1800000060). Waoud:
+# Transformations available (level 50) but its mustZone: nil: An Empty Vessel's 78; out and back: now < Timer: 78; Timer
+# 1800000001 (a GM): 78; Timer 1800000000 (now): Transformations' 720 (gil).
+module modules/era/lua/quests/ahturhgan/omens.lua
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/Lathuya/onTrigger AhtUrhganWhitegate/onEventFinish/716
+char zone=AhtUrhganWhitegate pos=-93.581,-6,31.638 job=BLU lvl=50 gil=5000
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings completed
+quest AhtUrhgan.Omens accepted
+charvar Quest[6][22]Prog 4
+keyitem SealedImmortalEnvelope
+login
+fill-inventory
+trigger Lathuya                         # Prog 4: 716
+finish                                  # the module's copy: the charuqs do not fit: quest:complete false: nothing (the envelope kept, no Transformations mustZone, no Timer)
+free-inventory
+trigger Lathuya                         # still Prog 4: 716
+finish                                  # the module's copy: completed; the envelope taken; Transformations' mustZone; Timer = JstMidnight()
+trigger Waoud                           # Transformations' mustZone: nil: An Empty Vessel's 78
+finish option=0
+warp -64,-7,38 AlZahbi                  # the mustZone cleared
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+trigger Waoud                           # now < Timer (JST midnight): nil: 78
+finish option=0
+charvar Quest[6][23]Timer 1800000001    # a GM: one second past now
+trigger Waoud                           # 78
+finish option=0
+charvar Quest[6][23]Timer 1800000000    # a GM: now
+trigger Waoud                           # Transformations' 720 (5000)
+finish option=0                         # nothing

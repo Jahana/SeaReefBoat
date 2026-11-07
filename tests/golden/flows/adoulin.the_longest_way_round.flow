@@ -1,0 +1,86 @@
+# The Longest Way Round... (adoulin 91): a level 99 Warrior in Eastern Adoulin. Vastran with SoA current 0 and 6 (GMs;
+# before Life on the Frontier): no section (no script, no default: nothing). Pioneer Registration completed and SoA 7
+# (GMs): Lamaron while available: his script 531 (no Pioneer's Badge); Vastran 2510, finished on 0: begun (any option),
+# the Eastern Adoulin Patrol Route. Accepted, Prog 0: Vastran 2511; Lamaron (offset 1): his script 531; the patrol in
+# order, Fostaig 2513 .. Ndah Tolohjin 2519, each finish adding 1 to Prog, each NPC talked to again at the next Prog:
+# nothing from the quest. Lamaron at Prog 1 again (a GM): 2514 again (a progressEvent: his script would take an Event's
+# second turn). At Ploh Trishbahk (offset 4) a GM sets Prog 2 while 2517 is open: no increment (Prog stays 2); Prog 4
+# again (a GM): 2517, Prog 5. Ndah Tolohjin (offset 6): a GM sets Prog 7 while 2519 is open: no increment (Prog stays
+# 7, not 8). Vastran at Prog 6 and 8 (a GM): 2511; Prog 7: 2512, finished: completed (500 bayld, 1000 exp, the key item
+# lost: LOST_KEYITEM). Completed: Vastran nothing; Fostaig at Prog 0 (a GM): nothing from the quest. Life on the
+# Frontier completed, SoA Beauty and the Beast current (57, GMs: above 7), available again (a GM): Vastran 2510,
+# finished on 1: begun.
+lists EasternAdoulin/Vastran/onTrigger EasternAdoulin/Fostaig/onTrigger EasternAdoulin/Lamaron/onTrigger
+lists EasternAdoulin/Irate_Destrier/onTrigger EasternAdoulin/Nhili_Uvolep/onTrigger
+lists EasternAdoulin/Ploh_Trishbahk/onTrigger EasternAdoulin/Cunegonde/onTrigger EasternAdoulin/Ndah_Tolohjin/onTrigger
+lists EasternAdoulin/onEventFinish/2510 EasternAdoulin/onEventFinish/2512 EasternAdoulin/onEventFinish/2513
+lists EasternAdoulin/onEventFinish/2517
+char zone=EasternAdoulin pos=-117.43,-0.15,-8.813 job=WAR lvl=99
+login
+trigger Vastran                         # available, SoA current 0: no section: nothing
+mission Soa PioneerRegistration current # a GM: SoA 6
+trigger Vastran                         # SoA 6: no section: nothing
+mission Soa PioneerRegistration completed # a GM: the log's current mission cleared
+mission Soa LifeOnTheFrontier current   # a GM: SoA 7
+trigger Lamaron                         # available: no quest handler: his script 531
+finish
+trigger Vastran                         # available, SoA 7: 2510
+finish option=0                         # begun (any option); the Eastern Adoulin Patrol Route
+trigger Vastran                         # accepted, Prog 0: 2511 (an Event)
+finish
+trigger Lamaron                         # Prog 0, Lamaron's offset 1: nothing from the quest: his script 531
+finish
+trigger Fostaig                         # Prog 0: 2513
+finish                                  # Prog 1
+trigger Fostaig                         # Prog 1: nothing from the quest
+finish-if-event
+trigger Lamaron                         # Prog 1: 2514
+finish                                  # Prog 2
+charvar Quest[9][91]Prog 1              # a GM
+trigger Lamaron                         # Prog 1: 2514 again (not his script's 531)
+finish                                  # Prog 2
+trigger Lamaron                         # Prog 2: nothing from the quest: his script 531
+finish
+trigger Irate_Destrier                  # Prog 2: 2515
+finish                                  # Prog 3
+trigger Irate_Destrier                  # Prog 3: nothing from the quest
+finish-if-event
+trigger Nhili_Uvolep                    # Prog 3: 2516
+finish                                  # Prog 4
+trigger Nhili_Uvolep                    # Prog 4: nothing from the quest
+finish-if-event
+trigger Ploh_Trishbahk                  # Prog 4: 2517
+charvar Quest[9][91]Prog 2              # a GM, while 2517 is open
+finish                                  # Prog 2, not Ploh Trishbahk's 4: no increment (Prog stays 2)
+charvar Quest[9][91]Prog 4              # a GM
+trigger Ploh_Trishbahk                  # Prog 4: 2517
+finish                                  # Prog 5
+trigger Ploh_Trishbahk                  # Prog 5: nothing from the quest
+finish-if-event
+trigger Cunegonde                       # Prog 5: 2518
+finish                                  # Prog 6
+trigger Cunegonde                       # Prog 6: nothing from the quest
+finish-if-event
+trigger Vastran                         # Prog 6: 2511
+finish
+trigger Ndah_Tolohjin                   # Prog 6: 2519
+charvar Quest[9][91]Prog 7              # a GM, while 2519 is open: above Ndah Tolohjin's 6
+finish                                  # Prog 7, not Ndah Tolohjin's 6: no increment (Prog stays 7)
+trigger Ndah_Tolohjin                   # Prog 7: nothing from the quest
+finish-if-event
+charvar Quest[9][91]Prog 8              # a GM
+trigger Vastran                         # Prog 8: 2511
+finish
+charvar Quest[9][91]Prog 7              # a GM
+trigger Vastran                         # Prog 7: 2512
+finish                                  # completed; the patrol route lost (LOST_KEYITEM)
+trigger Vastran                         # completed: no section: nothing
+finish-if-event
+charvar Quest[9][91]Prog 0              # a GM
+trigger Fostaig                         # completed, Prog 0: nothing from the quest
+finish-if-event
+mission Soa LifeOnTheFrontier completed # a GM: the log's current mission cleared
+mission Soa BeautyAndTheBeast current   # a GM: SoA 57
+quest Adoulin.TheLongestWayRound available # a GM
+trigger Vastran                         # available, SoA 57: 2510
+finish option=1                         # begun

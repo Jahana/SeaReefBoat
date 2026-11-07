@@ -1,0 +1,131 @@
+# Hitting the Marquisate (windurst 71): a THF at level 50; Mihgo's Amigo, The Tenshodo Showdown and As Thick as Thieves
+# completed by GM. Nanaa Mihgo (Windurst Woods, +99): a bone chip traded (no handler: nothing); 512: begun, the Cat
+# Burglar's Note; accepted with nothing done: nil (her default 76). Yatniel (Lower Jeuno): 10029
+# (0, grenade: yatnielProg 1), 10030; three grenades, four plus a chip, five: nil; four: 10031 (taken, yatnielProg 2);
+# 10032. Hagain (Mhaura): 10003 (0, incense, coal: hagainProg 1, the Bomb Incense); 10004. Garlaige Citadel: at
+# hagainProg 1 with the incense, the five other qms out of turn: nil; then each qm in quest order
+# (qm6 1, qm5 2, qm12 3, qm13 4, qm10 5, qm9 6): without the incense (taken by GM): nil; with it (given back):
+# PRESENCE_FROM_CEILING and its cutscene (50-55, the incense), option 0: nothing; again, option 1: THE_PRESENCE_MOVES +
+# its offset (1, 2, 0, 0, 3, 0) and hagainProg + 1; qm6 again at hagainProg 2: nil; qm15 at hagainProg 6: nil. qm15 at
+# 7: the Chandelier's cooldown (qm15's local var chandelierCooldown, by GM: npclocalvar) at now (GetSystemTime() <= it):
+# THE_PRESENCE_MOVES + 7; at now - 1, the Chandelier not up, the incense held: HEAT_FROM_CEILING and 56 (the incense):
+# option 0: THE_PRESENCE_MOVES + 6; the incense taken: nil. Hagain at 7: 10004; the coal plus a chip: nil; the coal:
+# 10005 (taken, the incense taken, hagainProg 8); 10006. Nanaa Mihgo, yatnielProg 2 and hagainProg 8: 516
+# (nanaaProg 1, both others 0); 517. La Theine's qm2: the pickaxe plus a chip: nil; the pickaxe with a full bag: 119
+# (0, poulaines, nation, pickaxe), the completion fails (nothing, the pickaxe kept); then 119: completed
+# (the Rogue's Poulaines, Paragon of Thief Excellence; the pickaxe and the note taken). 56 finished with option 1 runs
+# npc:timer(5000, ...), which pops the Chandelier 5 s later (THE_PRESENCE_MOVES + 5), and qm15 with the Chandelier up
+# gives nil: both in #chandelier (quest rework P10, deferred callbacks). The coal comes by GM.
+lists WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/Nanaa_Mihgo/onTrade LowerJeuno/Yatniel/onTrigger LowerJeuno/Yatniel/onTrade Mhaura/Hagain/onTrigger Mhaura/Hagain/onTrade GarlaigeCitadel/qm5/onTrigger GarlaigeCitadel/qm6/onTrigger GarlaigeCitadel/qm9/onTrigger GarlaigeCitadel/qm10/onTrigger GarlaigeCitadel/qm12/onTrigger GarlaigeCitadel/qm13/onTrigger GarlaigeCitadel/qm15/onTrigger LaTheinePlateau/qm2/onTrade WindurstWoods/onEventFinish/512 WindurstWoods/onEventFinish/516 LowerJeuno/onEventFinish/10029 LowerJeuno/onEventFinish/10031 Mhaura/onEventFinish/10003 Mhaura/onEventFinish/10005 GarlaigeCitadel/onEventFinish/50 GarlaigeCitadel/onEventFinish/51 GarlaigeCitadel/onEventFinish/52 GarlaigeCitadel/onEventFinish/53 GarlaigeCitadel/onEventFinish/54 GarlaigeCitadel/onEventFinish/55 GarlaigeCitadel/onEventFinish/56 LaTheinePlateau/onEventFinish/119
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=THF lvl=50
+quest Windurst.MihgosAmigo completed
+quest Windurst.TheTenshodoShowdown completed
+quest Windurst.AsThickAsThieves completed
+item BoneChip x4
+item QuakeGrenade x5
+item LumpOfChandelierCoal
+item Pickaxe
+login
+trade Nanaa_Mihgo+99 BoneChip x1               # available, the check holds: no quest trade handler: nothing
+trigger Nanaa_Mihgo+99                         # 512
+finish                                         # begun; the Cat Burglar's Note
+trigger Nanaa_Mihgo+99                         # accepted, nothing done: nil; her default 76
+finish
+warp -65.3,-7.0,-126.6 LowerJeuno
+trigger Yatniel                                # yatnielProg 0: 10029 (0, grenade)
+finish                                         # yatnielProg 1
+trigger Yatniel                                # 10030 (0, grenade)
+finish
+trade Yatniel QuakeGrenade x3                  # three: nil
+trade Yatniel QuakeGrenade x4 BoneChip x1      # four plus an extra: nil
+trade Yatniel QuakeGrenade x5                  # five: nil
+trade Yatniel QuakeGrenade x4                  # exactly four: 10031
+finish                                         # taken; yatnielProg 2
+trigger Yatniel                                # 10032
+finish
+warp 14.1,-16.0,81.4 Mhaura
+trigger Hagain                                 # hagainProg 0: 10003 (0, incense, coal)
+finish                                         # hagainProg 1; the Bomb Incense
+trigger Hagain                                 # hagainProg 1: 10004 (0, incense, coal)
+finish
+warp -218.5,-5.5,194.2 GarlaigeCitadel
+trigger qm5                                    # hagainProg 1, not qm5's 2: nil
+trigger qm9                                    # not 6: nil
+trigger qm10                                   # not 5: nil
+trigger qm12                                   # not 3: nil
+trigger qm13                                   # not 4: nil
+delkeyitem BombIncense                         # GM
+trigger qm6                                    # hagainProg 1, no incense: nil
+keyitem BombIncense                            # GM
+trigger qm6                                    # PRESENCE_FROM_CEILING; 50 (incense)
+finish option=0                                # nothing
+trigger qm6                                    # 50
+finish option=1                                # THE_PRESENCE_MOVES + 1; hagainProg 2
+trigger qm6                                    # hagainProg 2: nil
+delkeyitem BombIncense                         # GM
+trigger qm5                                    # no incense: nil
+keyitem BombIncense                            # GM
+trigger qm5                                    # 51
+finish option=0                                # nothing
+trigger qm5                                    # 51
+finish option=1                                # + 2; hagainProg 3
+delkeyitem BombIncense                         # GM
+trigger qm12                                   # no incense: nil
+keyitem BombIncense                            # GM
+trigger qm12                                   # 52
+finish option=0                                # nothing
+trigger qm12                                   # 52
+finish option=1                                # + 0; hagainProg 4
+delkeyitem BombIncense                         # GM
+trigger qm13                                   # no incense: nil
+keyitem BombIncense                            # GM
+trigger qm13                                   # 53
+finish option=0                                # nothing
+trigger qm13                                   # 53
+finish option=1                                # + 0; hagainProg 5
+delkeyitem BombIncense                         # GM
+trigger qm10                                   # no incense: nil
+keyitem BombIncense                            # GM
+trigger qm10                                   # 54
+finish option=0                                # nothing
+trigger qm10                                   # 54
+finish option=1                                # + 3; hagainProg 6
+trigger qm15                                   # hagainProg 6: nil
+delkeyitem BombIncense                         # GM
+trigger qm9                                    # no incense: nil
+keyitem BombIncense                            # GM
+trigger qm9                                    # 55
+finish option=0                                # nothing
+trigger qm9                                    # 55
+finish option=1                                # + 0; hagainProg 7
+npclocalvar qm15 chandelierCooldown 1800000000 # GM: the cooldown at now (GetSystemTime())
+trigger qm15                                   # now <= the cooldown: THE_PRESENCE_MOVES + 7
+npclocalvar qm15 chandelierCooldown 1799999999 # GM: now - 1: past
+trigger qm15                                   # no Chandelier, the incense: HEAT_FROM_CEILING; 56 (incense)
+finish option=0                                # THE_PRESENCE_MOVES + 6
+delkeyitem BombIncense                         # GM
+trigger qm15                                   # past the cooldown, no Chandelier, no incense: nil
+keyitem BombIncense                            # GM
+warp 14.1,-16.0,81.4 Mhaura
+trigger Hagain                                 # hagainProg 7: 10004
+finish
+trade Hagain LumpOfChandelierCoal x1 BoneChip x1  # plus an extra: nil
+trade Hagain BoneChip x1                       # not the coal: nil
+trade Hagain LumpOfChandelierCoal x1           # the coal alone: 10005
+finish                                         # taken; the incense taken; hagainProg 8
+trigger Hagain                                 # hagainProg 8: 10006
+finish
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                         # yatnielProg 2, hagainProg 8: 516
+finish                                         # nanaaProg 1; yatnielProg 0; hagainProg 0
+trigger Nanaa_Mihgo+99                         # nanaaProg 1: 517
+finish
+warp -71.5,54.6,-443.1 LaTheinePlateau
+trade qm2 Pickaxe x1 BoneChip x1               # plus an extra: nil
+trade qm2 BoneChip x1                          # not the pickaxe: nil
+fill-inventory
+trade qm2 Pickaxe x1                           # nanaaProg 1, the pickaxe alone: 119 (0, poulaines, nation, pickaxe)
+finish                                         # the poulaines do not fit: complete fails: nothing (the pickaxe kept)
+free-inventory
+trade qm2 Pickaxe x1                           # 119
+finish                                         # completed: the Rogue's Poulaines, the title; the pickaxe and the note taken

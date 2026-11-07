@@ -1,0 +1,83 @@
+# The Truth Lies Hid (crystalWar 58), the edges: a level 99 Warrior in Bastok Markets [S] with the WotG mission Adieu,
+# Lilisette current (missions as the main flow) and two Elixirs (they do not stack); What Price Loyalty not completed.
+# The days as the main flow: 8000 C (honest Rokke), 8001 A (honest Rakke), 8002 B (honest Rikke). Gentle Tiger: no
+# section of either quest (What Price Loyalty available wants Beneath the Mask completed): 109. What Price Loyalty
+# completed (a GM): 211 (over its 356), finished on option 1: begun (any option). Castle Zvahl Keep [S] at Prog 0: an
+# Elixir to Rikke: nil; Rikke: his default 28. Prog 1 (a GM): Castle Zvahl Baileys [S]: no zone-in reply. The Keep, day
+# 8000: qm at Prog 1: its default NOTHING_OUT_OF_ORDINARY; an Elixir to Rokke: the honest imp: 14 as a progress event
+# (155, 0, 1), finished: Prog 2. Prog 1 again (a GM): an Elixir to Rikke the same day: nil (the day's trade spent). Day
+# 8001: two Elixirs to Rikke: nil (not exactly one); an Elixir to Rokke: not the honest imp: 14 as an event (155, 0, 0),
+# finished: no Prog; Rokke: traded today, by him: 24 (155, 0, 0). Day 8002: Rikke 9, Rakke 10, Rokke 11 (each 155, 0, 0:
+# scenario B); an Elixir to Rikke: the honest imp: 12 as a progress event (155, 0, 1), finished: Prog 2. Prog 2 (honest
+# Rikke): Rikke 22 (155, 0, 1), Rakke 26 (1). Prog 1 and TradeDay 0 (GMs): an Elixir to Rakke: 13 as an event (155, 0,
+# 0), finished: no Prog; Rakke: traded today, by him: 23 (155, 0, 0). Prog 2 (a GM): the Displaced Block: nothing. Prog
+# 3 (a GM): qm: its default; Rakke: his default 29. (The helper's reminder arm is the main flow's Rikke 19.)
+# The mission before Adieu, Lilisette is the #mission flow.
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/211 CastleZvahlBaileysS/onZoneIn/1 CastleZvahlKeepS/Rikke/onTrigger CastleZvahlKeepS/Rikke/onTrade CastleZvahlKeepS/Rakke/onTrigger CastleZvahlKeepS/Rakke/onTrade CastleZvahlKeepS/Rokke/onTrigger CastleZvahlKeepS/Rokke/onTrade CastleZvahlKeepS/qm/onTrigger CastleZvahlKeepS/Displaced_Block/onTrigger CastleZvahlKeepS/onEventFinish/12 CastleZvahlKeepS/onEventFinish/13 CastleZvahlKeepS/onEventFinish/14
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+item Elixir
+item Elixir
+mission Wotg AdieuLilisette current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # What Price Loyalty not completed: no section: 109
+finish-if-event
+quest CrystalWar.WhatPriceLoyalty completed # a GM
+trigger Gentle_Tiger                    # 211 over What Price Loyalty's 356
+finish option=1                         # begun (any option)
+warp -88.62,0.601,86.312 CastleZvahlKeepS
+trade Rikke Elixir x1                   # Prog 0: nil
+finish-if-event
+trigger Rikke                           # Prog 0: his default 28
+finish-if-event
+charvar Quest[7][58]Prog 1              # a GM
+warp 412.024,-12,-20.047 CastleZvahlBaileysS # Prog 1: no zone-in reply
+warp -382.757,-51.999,-95.783 CastleZvahlKeepS
+trigger qm+5                            # Prog 1: its default NOTHING_OUT_OF_ORDINARY
+finish-if-event
+walk -28.542,0.601,-153.925
+trade Rokke Elixir x1                   # day 8000, the honest imp: 14 as a progress event (155, 0, 1)
+finish                                  # 14: TradeImp 3, a success: Prog 2
+charvar Quest[7][58]Prog 1              # a GM
+walk -88.62,0.601,86.312
+trade Rikke Elixir x1                   # the day's trade spent: nil
+finish-if-event
+wait vana=24
+trade Rikke Elixir x2                   # day 8001: two Elixirs: nil
+finish-if-event
+walk -28.542,0.601,-153.925
+trade Rokke Elixir x1                   # day 8001 (honest Rakke): 14 as an event (155, 0, 0)
+finish                                  # 14: not a success: no Prog
+trigger Rokke                           # traded today, by him: 24 (155, 0, 0)
+finish
+wait vana=24
+trigger Rikke                           # day 8002 (scenario B), not talked: 9 (155, 0, 0)
+finish
+trigger Rakke                           # day 8002, not talked: 10 (155, 0, 0)
+finish
+trigger Rokke                           # day 8002, not talked: 11 (155, 0, 0)
+finish
+walk -88.62,0.601,86.312
+trade Rikke Elixir x1                   # day 8002 (honest Rikke): 12 as a progress event (155, 0, 1)
+finish                                  # 12: a success: Prog 2
+trigger Rikke                           # Prog 2, honest Rikke: 22 (155, 0, 1)
+finish
+trigger Rakke                           # Prog 2: 26 (1)
+finish
+charvar Quest[7][58]Prog 1              # a GM
+charvar Quest[7][58]TradeDay 0          # a GM: the day's trade free again
+trade Rakke Elixir x1                   # day 8002, not the honest imp: 13 as an event (155, 0, 0)
+finish                                  # 13: not a success: no Prog
+trigger Rakke                           # traded today, by him: 23 (155, 0, 0)
+finish
+charvar Quest[7][58]Prog 2              # a GM
+trigger Displaced_Block                 # Prog 2: nothing
+finish-if-event
+charvar Quest[7][58]Prog 3              # a GM
+trigger qm+5                            # Prog 3: its default
+finish-if-event
+trigger Rakke                           # Prog 3: his default 29
+finish-if-event

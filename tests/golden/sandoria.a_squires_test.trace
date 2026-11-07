@@ -1,0 +1,151 @@
+# golden trace: sandoria.a_squires_test
+seed 7
+flow 80c49e180bba13a2971de004ac7c0c3afc85a9f97e35dba0be7c9f6df824759f
+recorder lua
+lua-at 5c17f9d5c74924c3878ead225542ef5b994f14ec
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @d1ebfaeaba8265a1 (175)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f1afb08a50fd07e9 (3)
+char_jobs @561290e76ce498da (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @bcbc236d2b548e3e (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @67a27677bd1e54e5 (2)
+char_stats @56e84b5def67c85d (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @5338a424daac8dfd (41)
+ret onZoneIn=number:30035,onEventFinish=nil:nil
+order 230/Balasiel/onTrigger=default,Quest[0][29],Quest[0][29],Quest[0][10],Quest[0][10],Quest[0][19],Quest[0][19],Quest[0][98],Quest[0][98]
+order 230/Balasiel/onTrade=Quest[0][10],Quest[0][98]
+order 230/onEventFinish/616=Quest[0][10]
+order 230/onEventFinish/631=Quest[0][10]
+order 230/onEventFinish/617=Quest[0][10]
+step trade Balasiel RevivalTreeRoot x1
+packets
+ret onTrade=nil:nil
+step trigger Balasiel
+packets
+  00E @2b9d898fa2028e76
+  00E @108e5a4fa19408fe
+  00E @316076ba965fcad2
+  00E @557a4efeec76c64c
+  00E @a68e4a18e4ec7e8a
+  00E @37fad59d94655f34
+  00E @85ba1e2cf5b80113
+  00E @bb569c33974fd805
+  00E @04d2f3f2ebf780f2
+  00E @4a57dc0822e0ba73
+  00E @334187a7a68794bf
+  00E @39de72b8ff69aa06
+  00E @2c6bb52faa041c43
+  00E @6409166d67a60080
+  00E @d4865674ffede106
+  00E @4b350aba60b8e909
+  00E @33a0370d211768e3
+  00E @32e56741f04711cc
+  032 @464a17f5cd596ec1
+  0DF @855d9fea123da361
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish option=1
+packets
+  0DF @855d9fea123da361
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_quest_state + quest_key=sandoria.a_squires_test|area=0|quest_id=10|status=0|step=0|progress={"Option":1}|repeat_by=0
+char_vars + varname=Quest[0][10]Option|value=1|expiry=0
+ret onEventFinish=nil:nil
+step trigger Balasiel
+packets
+  032 @71b1ee16315e91f3
+  0DF @855d9fea123da361
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish option=1
+packets
+  0DF @855d9fea123da361
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Balasiel
+packets
+  032 @71b1ee16315e91f3
+  0DF @855d9fea123da361
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  056 @e9ece9fdf0dd028b
+  0DF @855d9fea123da361
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_quest_state - quest_key=sandoria.a_squires_test|area=0|quest_id=10|status=0|step=0|progress={"Option":1}|repeat_by=0
+char_quest_state + quest_key=sandoria.a_squires_test|area=0|quest_id=10|status=1|step=0|progress={"Option":1}|repeat_by=0
+chars quests +1:04
+ret onEventFinish=nil:nil
+step trigger Balasiel
+packets
+  00E @77c649df7d44a418
+  02A @4c96710decfc12c0
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step trade Balasiel BoneChip x1
+packets
+ret onTrade=nil:nil
+step trade Balasiel RevivalTreeRoot x1 BoneChip x1
+packets
+ret onTrade=nil:nil
+step trade Balasiel RevivalTreeRoot x1
+packets
+  032 @52c5054db68818f4
+  0DF @855d9fea123da361
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  020 @949f470172cf30dc
+  01D @f8579df92de4b1ca
+  02A @44fcb9cd2d5aff04
+  061 @68577071949a4c1f
+  056 @2567b5fa4a207790
+  056 @8d5b426c3b2c9526
+  020 @a6804f916f69b514
+  01D @f8579df92de4b1ca
+  0DF @855d9fea123da361
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory - location=0|slot=1|itemId=940|quantity=1|bazaar=0|signature=|extra=null
+char_inventory + location=0|slot=3|itemId=16565|quantity=1|bazaar=0|signature=|extra=000000000000000000000000000000000000000000000000
+char_profile - fame_sandoria=0
+char_profile + fame_sandoria=20
+char_quest_state - quest_key=sandoria.a_squires_test|area=0|quest_id=10|status=1|step=0|progress={"Option":1}|repeat_by=0
+char_quest_state + quest_key=sandoria.a_squires_test|area=0|quest_id=10|status=2|step=0|progress=null|repeat_by=0
+char_stats - title=0
+char_stats + title=69
+char_vars - varname=Quest[0][10]Option|value=1|expiry=0
+chars quests +1:00 +33:04
+chars titles +8:20
+ret onEventFinish=nil:nil
+step trigger Balasiel
+packets
+  032 @3135f5fbde985cfc
+  0DF @855d9fea123da361
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @855d9fea123da361
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil

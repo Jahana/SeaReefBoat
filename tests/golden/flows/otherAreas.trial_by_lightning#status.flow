@@ -1,0 +1,68 @@
+# Trial by Lightning (otherAreas 27), each status operand of Ripapa's arms alone (GM-set statuses, the rest held
+# still). 10016's two halves: TrialByLightning_date 1 (behind) at fame 424 (level 5): available 10020, completed
+# 10016; fame level 6 with the date ahead (2000000000): completed 10020, available 10016. The accepted arms at fame
+# level 1 with the date ahead: no key item: available 10020, completed 10020, accepted 10024; the fork: completed
+# 10020, available 10020, accepted 10017; the whisper: accepted 10019, completed 10020, available 10020. The finishes
+# read no status (GM changes while the event is open): 10019 finished while available (the Elder Branch, completed
+# from available), 10024 finished while completed (a fork), 10016 option 1 finished while accepted (no change of
+# status; date 0; the fork).
+char zone=Mhaura pos=30.6,-15.6,56.0 job=WAR lvl=75
+fame Windurst 424                         # level 5
+charvar TrialByLightning_date 1
+login
+trigger Ripapa                            # available, fame level 5, date behind: 10020
+finish
+quest OtherAreas.TrialByLightning completed
+trigger Ripapa                            # completed, date behind: 10016
+finish option=0                           # declined
+fame Windurst 425
+charvar TrialByLightning_date 2000000000
+trigger Ripapa                            # completed, fame level 6, date ahead: 10020
+finish
+quest OtherAreas.TrialByLightning available
+trigger Ripapa                            # available, fame level 6: 10016
+finish option=0                           # declined
+fame Windurst 0
+trigger Ripapa                            # available, fame level 1, no key item: 10020
+finish
+quest OtherAreas.TrialByLightning completed
+trigger Ripapa                            # completed (date ahead), no key item: 10020
+finish
+quest OtherAreas.TrialByLightning available
+quest OtherAreas.TrialByLightning accepted
+trigger Ripapa                            # accepted, no key item: 10024
+finish                                    # the fork
+quest OtherAreas.TrialByLightning completed
+trigger Ripapa                            # completed (date ahead), the fork: 10020
+finish
+quest OtherAreas.TrialByLightning available
+trigger Ripapa                            # available, the fork: 10020
+finish
+quest OtherAreas.TrialByLightning accepted
+trigger Ripapa                            # accepted, the fork: 10017
+finish
+delkeyitem TuningForkOfLightning
+keyitem WhisperOfStorms
+trigger Ripapa                            # accepted, the whisper alone: 10019 (0, fork, 5)
+finish option=3                           # the Lightning Ring: completed; TrialByLightning_date 1800025200
+keyitem WhisperOfStorms
+trigger Ripapa                            # completed (date ahead), the whisper: 10020
+finish
+quest OtherAreas.TrialByLightning available
+trigger Ripapa                            # available, fame level 1, the whisper: 10020
+finish
+quest OtherAreas.TrialByLightning accepted
+trigger Ripapa                            # 10019
+quest OtherAreas.TrialByLightning available
+finish option=4                           # finished while available: the Elder Branch; completed from available
+quest OtherAreas.TrialByLightning available
+quest OtherAreas.TrialByLightning accepted
+delkeyitem TuningForkOfLightning
+trigger Ripapa                            # accepted, no key item: 10024
+quest OtherAreas.TrialByLightning completed
+finish                                    # finished while completed: the fork
+fame Windurst 425
+quest OtherAreas.TrialByLightning available
+trigger Ripapa                            # available, fame level 6: 10016
+quest OtherAreas.TrialByLightning accepted
+finish option=1                           # finished while accepted: status kept; the date 0; the fork held

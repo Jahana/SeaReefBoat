@@ -1,0 +1,20 @@
+# Against All Odds' Arrapago Reef zone-in: a level 50 Corsair accepted at Prog 2 (GMs). From Wajaom Woodlands (not The
+# Ashu Talif) at Prog 2: nil. The Ashu Talif (zone 60) is the instance's zone: a char that zones into it with no
+# instance is not placed (ZoneHost.InstanceCharAttach's "Failed to place" path, CZoneInstance::IncreaseZoneCounter's)
+# and goes out to the zone onInstanceLoadFailed returns (The_Ashu_Talif/Zone.lua: ARRAPAGO_REEF) at 0,0,0, so a warp
+# into it is a zone-in to Arrapago with The Ashu Talif as the previous zone, as the instance's own exit is. At Prog 1 (a
+# GM): nil. At Prog 2, the zone-in left open (`warp ... open`): 238; finished: completed (Corsair's Tricorne, Paragon of
+# Corsair Excellence). The instance itself (the Cutter's 221 entry, GOWAM and YAZQUHL, onInstanceComplete's Prog 2) is
+# not run: Prog 2 is a GM's.
+lists ArrapagoReef/onZoneIn/1 ArrapagoReef/onEventFinish/238
+char zone=WajaomWoodlands pos=-198.527,-8.5,80.058 job=COR lvl=50
+quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+quest AhtUrhgan.AgainstAllOdds accepted
+charvar Quest[6][26]Prog 2
+login
+warp -450,-2,-400 ArrapagoReef          # from Wajaom at Prog 2: nil
+charvar Quest[6][26]Prog 1              # a GM
+warp 0,0,0 TheAshuTalif                 # no instance: back to Arrapago from The Ashu Talif, Prog 1: nil
+charvar Quest[6][26]Prog 2              # a GM
+warp 0,0,0 TheAshuTalif open            # back to Arrapago from The Ashu Talif, Prog 2: 238, left open
+finish                                  # completed

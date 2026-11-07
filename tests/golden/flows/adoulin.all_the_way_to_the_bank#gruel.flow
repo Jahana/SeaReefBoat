@@ -1,0 +1,35 @@
+# All the Way to the Bank (adoulin 103; call-only): Westerly Breeze's gruel trade "after completing" the quest (no
+# script sets ATWTTB_Can_Trade_Gruel 1: a GM here). A level 99 Warrior in Western Adoulin with three Bowls of Vegetable
+# Gruel, two Bowls of Medicinal Gruel (4534) and an Apple Pie. His talks are Always More Quoth the Ravenous's (not
+# here). Trades of one item and no gil, a food (AH 52 to 57): the vegetable gruel at Can_Trade_Gruel 0 and 2:
+# nothing; at 1: the Apple Pie (a food, not a gruel): nothing; two gruels, a gruel with gil: nothing (not one item and
+# no gil); the vegetable gruel: 5068, finished on 0: taken, 19716 gil, Can_Trade_Gruel 0; again at 0: nothing. At 1
+# (GM): the medicinal gruel: 5068 with 1, finished on 0: 19716 (the finish's option, not the event's parameter, picks
+# the gil: kept); at 1: the medicinal gruel finished on 1: 39432; at 1: the vegetable gruel finished on 1: 39432.
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+item BowlOfVegetableGruel
+item BowlOfVegetableGruel
+item BowlOfVegetableGruel
+item 4534
+item 4534
+item ApplePie
+login
+trade Westerly_Breeze BowlOfVegetableGruel x1  # ATWTTB_Can_Trade_Gruel 0: nothing
+charvar ATWTTB_Can_Trade_Gruel 2          # a GM
+trade Westerly_Breeze BowlOfVegetableGruel x1  # not 1: nothing
+charvar ATWTTB_Can_Trade_Gruel 1          # a GM
+trade Westerly_Breeze ApplePie x1         # a food, not a gruel: nothing
+trade Westerly_Breeze BowlOfVegetableGruel x2  # two items: nothing
+trade Westerly_Breeze BowlOfVegetableGruel x1 gil=100  # gil: nothing
+trade Westerly_Breeze BowlOfVegetableGruel x1  # 5068
+finish option=0                           # taken; 19716 gil; Can_Trade_Gruel 0
+trade Westerly_Breeze BowlOfVegetableGruel x1  # Can_Trade_Gruel 0: nothing
+charvar ATWTTB_Can_Trade_Gruel 1          # a GM
+trade Westerly_Breeze 4534 x1             # the medicinal gruel: 5068 with 1
+finish option=0                           # taken; 19716 gil (option 0); Can_Trade_Gruel 0
+charvar ATWTTB_Can_Trade_Gruel 1          # a GM
+trade Westerly_Breeze 4534 x1             # 5068 with 1
+finish option=1                           # taken; 39432 gil; Can_Trade_Gruel 0
+charvar ATWTTB_Can_Trade_Gruel 1          # a GM
+trade Westerly_Breeze BowlOfVegetableGruel x1  # 5068
+finish option=1                           # taken; 39432 gil (option 1); Can_Trade_Gruel 0

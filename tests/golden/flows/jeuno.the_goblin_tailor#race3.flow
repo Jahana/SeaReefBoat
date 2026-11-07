@@ -1,0 +1,26 @@
+# The Goblin Tailor (jeuno 42): the Elvaan male (xi.race 3) row of rseTable. Accepted by a GM, a level 75 Elvaan male
+# Warrior. Week 1002 (`wait vana=372`: day 8016): race 3, location 0: Ordelle's Caves' chest opens to the pattern for
+# him. Each piece by its option, the pattern from a GM before each talk: MagnaJerkin, MagnaGauntlets, MagnaMChausses,
+# MagnaMLedelsens; the first completes the quest.
+lists LowerJeuno/Guttrix/onTrigger LowerJeuno/onEventFinish/10016 LowerJeuno/onEventFinish/10018 GusgenMines/Treasure_Chest/onTrade MazeOfShakhrami/Treasure_Chest/onTrade OrdellesCaves/Treasure_Chest/onTrade
+char zone=OrdellesCaves pos=-49.4,-1.07,7.2 job=WAR lvl=75 race=3
+quest Jeuno.TheGoblinTailor accepted
+item OrdelleChestKey
+login
+wait vana=372                           # day 8016: week 1002 (race 3, location 0)
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest OrdelleChestKey x1 # location 0, race 3, no pattern: the Magical Pattern
+tick 4500                               # the chest opened
+warp -34.5,5.5,-139.7 LowerJeuno
+trigger Guttrix                         # 10018 (0)
+finish option=1                         # the MagnaJerkin; [RSE]Gear 1; completed
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (1)
+finish option=2                         # the MagnaGauntlets; [RSE]Gear 3
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (3)
+finish option=3                         # the MagnaMChausses; [RSE]Gear 7
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (7)
+finish option=4                         # the MagnaMLedelsens; [RSE]Gear 15

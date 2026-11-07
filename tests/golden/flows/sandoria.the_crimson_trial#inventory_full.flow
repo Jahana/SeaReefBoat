@@ -1,0 +1,14 @@
+# The Crimson Trial with the Orcish Dried Food and a full inventory: 75 does not complete it (the degen cannot be
+# given), the food is kept; with room, 75 again completes it. Also a Davoi zone-in with the food held spawns nothing.
+char zone=Davoi pos=-100,0,-184.7 job=RDM lvl=40
+quest Sandoria.TheCrimsonTrial accepted
+keyitem OrcishDriedFood
+login                                     # zone-in with the food, 35 yalms from Brukdok's spawn point: nothing spawned
+walk -101,0,-184.7                        # a step: the entities in view are sent, no Brukdok among them
+warp 96.4,0,111.6 SouthernSanDoria
+fill-inventory
+trigger Sharzalion                        # the food: 75
+finish                                    # no room: not completed, the food kept
+free-inventory
+trigger Sharzalion                        # 75
+finish                                    # completed: Fencing Degen, fame +20; the food deleted

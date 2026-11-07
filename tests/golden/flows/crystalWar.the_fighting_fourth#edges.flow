@@ -1,0 +1,75 @@
+# The Fighting Fourth (crystalWar 7), the quit arms, the nils and Turbulent Storm's cross arms: a level 99 Warrior in
+# the Eldieme Necropolis [S] (missions as Steamed Rams' main flow). Turbulent Storm: the RED letter alone (a GM, Steamed
+# Rams' key item): the quest's 7 (it reads the Blue letter and the rations), then the script's 8 (it reads the RED
+# letter); the RED letter taken, the Battle Rations alone (a GM): the quest's 8, then the script's 7; the rations taken.
+# Bastok Markets [S]: Adelbrecht: no letter: 139 (1, 23), option 1: begun all the same (delKeyItem of no letter), the
+# Battle Rations. Prog 0: 140, option 1: the rations taken (ARE_TAKEN_AWAY_FROM_CHAR), the letter given
+# (ITEM_RETURNED_TO_CHAR), deleted and cleaned up. The letter: 139 (0, 0), option 1: begun, the rations. Prog 1 (a GM):
+# 141, option 2: nothing; option 1: the letter back, quit (the rations kept). 139, option 1: begun: Prog 0 again (the
+# cleanup cleared Prog): 140, option 0. Prog 2 (a GM): 142, option 2: nothing; option 1: the letter back, quit. 139,
+# option 1: begun; Prog 4 (a GM): Adelbrecht nil (his script has no onTrigger); North Gustaberg [S]: Gebhardt nil
+# (default 110), Roderich nil (default 111), the Barricade nil (NO_WAY_PAST_BARRIER). Prog 3 (a GM), a full inventory:
+# Adelbrecht 143, finished: the shoes do not fit: nothing more; freed, 143 again: completed.
+lists TheEldiemeNecropolisS/Turbulent_Storm/onTrigger BastokMarketsS/Adelbrecht/onTrigger BastokMarketsS/onEventFinish/139 BastokMarketsS/onEventFinish/140 BastokMarketsS/onEventFinish/141 BastokMarketsS/onEventFinish/142 BastokMarketsS/onEventFinish/143 NorthGustabergS/Gebhardt/onTrigger NorthGustabergS/Roderich/onTrigger NorthGustabergS/Barricade/onTrigger
+char zone=TheEldiemeNecropolisS pos=423.961,-48,-47.308 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+keyitem RedRecommendationLetter
+trigger Turbulent_Storm                 # the RED letter alone: the quest's 7
+finish option=1                         # declined: nothing
+trigger Turbulent_Storm                 # the script's 8 (the RED letter)
+finish
+delkeyitem RedRecommendationLetter
+keyitem BattleRations
+trigger Turbulent_Storm                 # the rations alone: the quest's 8
+finish
+trigger Turbulent_Storm                 # the script's 7
+finish option=1                         # nothing
+delkeyitem BattleRations
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # no letter: 139 (1, 23)
+finish option=1                         # begun (delKeyItem of no letter); the rations
+trigger Adelbrecht                      # Prog 0: 140
+finish option=1                         # the rations taken; the letter returned; deleted, cleaned up
+trigger Adelbrecht                      # the letter: 139 (0, 0)
+finish option=1                         # begun; the rations
+charvar Quest[7][7]Prog 1
+trigger Adelbrecht                      # Prog 1: 141
+finish option=2                         # nothing
+trigger Adelbrecht                      # 141
+finish option=1                         # the letter returned; quit (the rations kept)
+trigger Adelbrecht                      # 139 (0, 0)
+finish option=1                         # begun; the rations (already held)
+trigger Adelbrecht                      # Prog 0 again (cleaned up): 140
+finish option=0                         # nothing
+charvar Quest[7][7]Prog 2
+trigger Adelbrecht                      # Prog 2: 142
+finish option=2                         # nothing
+trigger Adelbrecht                      # 142
+finish option=1                         # the letter returned; quit
+trigger Adelbrecht                      # 139 (0, 0)
+finish option=1                         # begun
+charvar Quest[7][7]Prog 4
+trigger Adelbrecht                      # Prog 4: nil (his script has no onTrigger)
+finish-if-event
+warp 207.799,-20.826,669.125 NorthGustabergS
+trigger Gebhardt                        # Prog 4: nil: default 110
+finish-if-event
+warp -398.539,39.991,-90.445 NorthGustabergS
+trigger Roderich                        # Prog 4: nil: default 111
+finish-if-event
+warp -513.46,37.979,583.287 NorthGustabergS
+trigger Barricade                       # not Prog 2: nil: NO_WAY_PAST_BARRIER
+finish-if-event
+charvar Quest[7][7]Prog 3
+warp -324.266,-12.601,-76.977 BastokMarketsS
+fill-inventory
+trigger Adelbrecht                      # Prog 3: 143
+finish                                  # the shoes do not fit: nothing more
+free-inventory
+trigger Adelbrecht                      # 143
+finish                                  # Sprinter's Shoes; completed; Bronze Ribbon; allegiance 2; NOW_ALLIED_WITH 2

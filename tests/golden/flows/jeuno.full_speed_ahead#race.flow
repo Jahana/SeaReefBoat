@@ -1,0 +1,18 @@
+# Full Speed Ahead! (jeuno 179): a WAR 20 with the Map of the Jeuno Area and no Chocobo License: nothing. The license
+# (GM): 10223 finished with option 1: begun, the var 1 and setPos(475, 8.8, -159, 128, 105): `tick 400` and `login`
+# finish the zone change to Batallia Downs, where the zone-in (Lua) starts the race (the FULL_SPEED_AHEAD effect; the
+# race's helper sets the var 3). The flow stops at the arrival.
+char zone=UpperJeuno pos=-52.8,8.2,85.9 job=WAR lvl=20
+keyitem MapOfTheJeunoArea
+login
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # the map, no license: no arm
+finish
+keyitem ChocoboLicense
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # 10223 (0, 0, 4)
+finish option=1                         # begun; the var 1; setPos to Batallia Downs
+tick 400
+login                                   # the zone-in at Batallia Downs: the race's effect, the var 3 (Lua)

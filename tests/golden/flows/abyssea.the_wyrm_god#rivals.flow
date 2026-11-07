@@ -1,0 +1,44 @@
+# The Wyrm God (abyssea 184) and Meanwhile, Back on Abyssea (185) at Prishe, the reply kinds: a level 99 Warrior in
+# Abyssea - Empyreal Paradox with Beneath a Blood Red Sky completed and both quests accepted at Prog 2 (GMs). Prishe
+# offers both progressEvents (203 and 204), which tie and rotate by the last event id: the first talk plays Meanwhile's
+# 204 (its container comes first), finished; both back to accepted at Prog 2 (GMs): the second talk plays 203, the third
+# 204 again. An Event-rank 203 or 204 would lose to the other's Progress each time.
+lists AbysseaEmpyrealParadox/Prishe/onTrigger AbysseaEmpyrealParadox/onEventFinish/203 AbysseaEmpyrealParadox/onEventFinish/204
+char zone=AbysseaEmpyrealParadox pos=540,-500,-597.5 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate completed
+quest Abyssea.HeartOfMadness completed
+quest Abyssea.TenuousExistence completed
+quest Abyssea.ChampionsOfAbyssea completed
+quest Abyssea.ASeaDogsSummons completed
+quest Abyssea.DeathAndRebirth completed
+quest Abyssea.EmissariesOfGod completed
+quest Abyssea.BeneathABloodRedSky completed
+quest Abyssea.TheWyrmGod accepted
+charvar Quest[8][184]Prog 2
+quest Abyssea.MeanwhileBackOnAbyssea accepted
+charvar Quest[8][185]Prog 2
+login
+trigger Prishe                          # 203 / 204 tie: 204 (Meanwhile's container first)
+finish
+quest Abyssea.TheWyrmGod available      # a GM
+quest Abyssea.TheWyrmGod accepted       # a GM
+charvar Quest[8][184]Prog 2             # a GM
+quest Abyssea.MeanwhileBackOnAbyssea available # a GM
+quest Abyssea.MeanwhileBackOnAbyssea accepted # a GM
+charvar Quest[8][185]Prog 2             # a GM
+delkeyitem AbyssiteOfTheCosmos          # a GM
+trigger Prishe                          # 203 (the rotation)
+finish
+quest Abyssea.TheWyrmGod available      # a GM
+quest Abyssea.TheWyrmGod accepted       # a GM
+charvar Quest[8][184]Prog 2             # a GM
+quest Abyssea.MeanwhileBackOnAbyssea available # a GM
+quest Abyssea.MeanwhileBackOnAbyssea accepted # a GM
+charvar Quest[8][185]Prog 2             # a GM
+delkeyitem AbyssiteOfTheCosmos          # a GM
+trigger Prishe                          # 204 again
+finish

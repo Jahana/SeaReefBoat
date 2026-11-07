@@ -1,0 +1,56 @@
+# The Gobbiebag Part V (jeuno 74): Lower Jeuno's Bluffnix (no script; default 43 with 81), the template GobbiebagQuest.
+# A level 75 Warrior at Jeuno fame level 3 ((250 + 0 + 0) / 2 = 125), the inventory at 50 (storage; a fresh char has
+# 30), Parts I-IV completed (the chain's earlier parts, by a GM), the four items, a Bowl of Goblin Stew (880) and a
+# Chocobo Feather. Available: a trade: no trade handler; 43 (51, 0, 1), option 1: nothing; option 0: begun. Accepted: 43
+# (51, 1, 1), its finish: no handler; three items, the four and the feather, the stew and an item: 43 (51, 1, 1); the
+# stew alone: 73 (56), the quest completed by a GM while it is open: no 73 finish (the stew kept); accepted again (a
+# GM): the four items: 73 (56), finished: completed (Greedalox), the inventory 55, INVENTORY_INCREASED, the items taken
+# (no satchel: unchanged). Completed: Part VI's 43 (56, 0, 1) (its fame level 3 met, the inventory 55, Part V
+# completed), declined (option 1). Set accepted by a GM at 55: the accepted check fails: no section (43 (81)), a trade:
+# nothing; set available by a GM at 55: no section. A GM sets a part available before accepted (accepted over completed
+# keeps it completed).
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/Bluffnix/onTrade LowerJeuno/onEventFinish/43 LowerJeuno/onEventFinish/73
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+storage inventory 50                    # the part's start size (char_storage.inventory; a fresh char has 30)
+fame Sandoria 250
+quest Jeuno.TheGobbiebagPartI completed
+quest Jeuno.TheGobbiebagPartIi completed
+quest Jeuno.TheGobbiebagPartIii completed
+quest Jeuno.TheGobbiebagPartIv completed
+item Rhodonite
+item PaktongIngot
+item SquareOfMoblinweave
+item SquareOfBugardLeather
+item BowlOfGoblinStew880
+item ChocoboFeather
+login
+trade Bluffnix ChocoboFeather x1        # available: no trade handler; nothing
+trigger Bluffnix                        # reqsMet: 43 (51, 0, 1)
+finish option=1                         # not 0: nothing
+trigger Bluffnix                        # 43 (51, 0, 1)
+finish option=0                         # begun
+trigger Bluffnix                        # accepted: 43 (51, 1, 1)
+finish option=0                         # no 43 finish while accepted: nothing
+trade Bluffnix Rhodonite x1 PaktongIngot x1 SquareOfMoblinweave x1 # three of the four: 43 (51, 1, 1)
+finish
+trade Bluffnix Rhodonite x1 PaktongIngot x1 SquareOfMoblinweave x1 SquareOfBugardLeather x1 ChocoboFeather x1 # an extra item: 43 (51, 1, 1)
+finish
+trade Bluffnix BowlOfGoblinStew880 x1 Rhodonite x1 # the stew and an item: 43 (51, 1, 1)
+finish
+trade Bluffnix BowlOfGoblinStew880 x1   # the stew alone: 73 (56)
+quest Jeuno.TheGobbiebagPartV completed # a GM, while 73 is open
+finish                                  # no 73 finish while completed: nothing (the stew kept)
+quest Jeuno.TheGobbiebagPartV available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartV accepted  # a GM
+trade Bluffnix Rhodonite x1 PaktongIngot x1 SquareOfMoblinweave x1 SquareOfBugardLeather x1 # the four items: 73 (56)
+finish                                  # completed (Greedalox); inventory 55; INVENTORY_INCREASED; the items taken
+trigger Bluffnix                        # completed: Part VI's 43 (56, 0, 1)
+finish option=1                         # declined: nothing
+quest Jeuno.TheGobbiebagPartV available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartV accepted  # a GM, at 55
+trigger Bluffnix                        # accepted, the inventory 55: no section; 43 (81)
+finish
+trade Bluffnix BowlOfGoblinStew880 x1   # no section: nothing
+quest Jeuno.TheGobbiebagPartV available # a GM, at 55
+trigger Bluffnix                        # available, the inventory 55: no section; 43 (81)
+finish option=0                         # no section: not begun

@@ -1,0 +1,14 @@
+# Scattered into Shadow (jeuno 61), the Castle Oztroja chest at Prog 5 (the collar given to Tebhi, a GM's) with
+# Stage 7 and no collar: nil, the chest's own script (a regular opening, the key taken): the chest's arm is Prog 4 only.
+lists CastleOztroja/Treasure_Chest/onTrade
+char zone=CastleOztroja pos=-134.5,24,-21 job=BST lvl=50
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ScatteredIntoShadow accepted
+charvar Quest[3][61]Prog 5
+charvar Quest[3][61]Stage 7
+item OztrojaChestKey
+login
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest OztrojaChestKey x1     # Prog 5: nil; the chest's own script opens it
+tick 4500

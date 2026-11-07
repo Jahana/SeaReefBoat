@@ -1,0 +1,30 @@
+# The Fumbling Friar (crystalWar 22): a level 30 Warrior (the 26 check is 30 or more) in Garlaige Citadel [S] with the
+# Bronze Ribbon of Service (missions as group 1's flows). Fondactiont 26, finished: begun; again: 27 (an Event).
+# Grauberg [S]: the second qm2 (79.9 -1.2 457.2, qm2+104): no package: the Ornate Package given (user ruling 2026-11-04,
+# kept Lua bugs: the Lua built quest:keyItem(ORNATE_PACKAGE), dropped it and returned noAction, so nothing was given).
+# The first qm2 (qm2, 416 -28 284) runs no script when triggered (tried on Lua): it is not flowed. The GM's package
+# after it changes nothing. The package: qm2: nil (NOTHING_OUT_OF_ORDINARY). Garlaige Citadel [S]: Fondactiont 28,
+# finished: completed (the Scroll of Recall-Pashh), the package taken; again: 29 (replaceDefault).
+lists GarlaigeCitadelS/Fondactiont/onTrigger GarlaigeCitadelS/onEventFinish/26 GarlaigeCitadelS/onEventFinish/28 GraubergS/qm2/onTrigger
+char zone=GarlaigeCitadelS pos=-93.71,0,195.616 job=WAR lvl=30
+keyitem BronzeRibbonOfService
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Fondactiont                     # available, the ribbon, level 30+: 26
+finish                                  # begun (any option)
+trigger Fondactiont                     # no package: 27
+finish
+warp 81.376,-1.169,457.219 GraubergS
+trigger qm2+104                         # no package: the Ornate Package given
+finish-if-event
+keyitem OrnatePackage                   # a GM: already held (the Lua's only way to it)
+trigger qm2+104                         # the package: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+warp -93.71,0,195.616 GarlaigeCitadelS
+trigger Fondactiont                     # the package: 28
+finish                                  # completed (the Scroll of Recall-Pashh); the package taken
+trigger Fondactiont                     # completed: 29 (replaceDefault)
+finish

@@ -1,0 +1,53 @@
+# Carbuncle Debacle (windurst 83): Ripapa's and Agado-Pugado's pendulum arms, accepted by GM. Ripapa: var 4 without
+# the Lightning Pendulum: no arm (10023 wants var 3), 10020; var 3 without it: 10023 (0, 1172), the pendulum; var 3
+# with it: no arm (10020); var 2 with it: 10022, the rare pendulum not added, ITEM_OBTAINED sent anyway, var 3;
+# var 2 on a full inventory: refused (the var stays 2); var 4: no arm (10020). Agado-Pugado: var 6 without the
+# Wind Pendulum on a full inventory: 87 (0, 1174), refused; with room: the pendulum; var 5 without the
+# Daze Breaker Charm: no arm, Trial by Wind (Selbina-Rabao fame 0) nothing: his 70; var 5 with the charm on a full
+# inventory: 86 refused (the var stays 5); with room and the pendulum held: 86, the rare add fails, ITEM_OBTAINED,
+# var 6; var 7: no arm (70).
+char zone=Mhaura pos=31.1,-15.7,55.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion completed
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 4
+login
+trigger Ripapa                          # accepted, var 4, no pendulum: no arm: 10020
+finish
+charvar CarbuncleDebacleProgress 3
+trigger Ripapa                          # accepted, var 3, no pendulum: 10023 (0, 1172)
+finish                                  # the Lightning Pendulum; var 3
+trigger Ripapa                          # var 3, the pendulum held: no arm: 10020
+finish
+charvar CarbuncleDebacleProgress 2
+trigger Ripapa                          # var 2: 10022
+finish                                  # rare, held: the add fails; ITEM_OBTAINED sent anyway; var 3
+charvar CarbuncleDebacleProgress 2
+fill-inventory
+trigger Ripapa                          # var 2: 10022
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED; the var stays 2
+free-inventory
+charvar CarbuncleDebacleProgress 4
+trigger Ripapa                          # var 4: no arm: 10020
+finish
+charvar CarbuncleDebacleProgress 6
+warp -16.5,7.8,-10.5 Rabao
+fill-inventory
+trigger Agado-Pugado                    # accepted, var 6, no pendulum: 87 (0, 1174)
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED; nothing else
+free-inventory
+trigger Agado-Pugado                    # 87 again
+finish                                  # the Wind Pendulum; var 6
+charvar CarbuncleDebacleProgress 5
+trigger Agado-Pugado                    # var 5, no charm: no arm; Trial by Wind nothing: 70
+finish
+keyitem DazeBreakerCharm
+fill-inventory
+trigger Agado-Pugado                    # var 5, the charm: 86
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED; the var stays 5
+free-inventory
+trigger Agado-Pugado                    # var 5, the charm: 86
+finish                                  # the pendulum held: the add fails; ITEM_OBTAINED; var 6
+charvar CarbuncleDebacleProgress 7
+trigger Agado-Pugado                    # var 7: no arm: 70
+finish

@@ -1,0 +1,107 @@
+# golden trace: jeuno.ducal_hospitality#available
+seed 7
+flow a4d1d84fc7f654d738191c3fec6a4022cacdaed5325af7d90fb01ff629ab7178
+recorder lua
+lua-at 3f5cf4f2b3ce5102e8ebda3ade8f0810e8bb5c4d
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @8360c624b69d32b3 (168)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @5d433fb7dd016969 (2)
+char_jobs @3e907948536df038 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @4cd0da4bb437e41d (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @777590821e1fcb1b (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @4cdbd8051d2399ff (7)
+char_stats @aed604d3dea413a4 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @5d664f4d3d4bfe67 (41)
+ret onZoneIn=number:4294967295
+order 243/Taillegeas/onTrigger=default,HQuest[TrustCherukiki],Quest[3][68],Quest[3][68],Quest[3][68]
+order 243/Taillegeas/onTrade=Quest[3][68],Quest[3][68]
+order 243/onEventFinish/10057=Quest[3][68],Quest[3][68]
+step trigger Taillegeas
+packets
+  00E @6bf6ad2d072c72df
+  00E @c474ae21c12bc679
+  00E @60ff3534b547a718
+  00E @da6d26d8e190303e
+  00E @a2fad18f1a9d812f
+  00E @c56a92492152ae1b
+  00E @767170321d413de1
+  00E @0f4710e2741bf5aa
+  00E @c7419b07dae22c7e
+  00E @21d135544024f8a4
+  00E @e394d1c029104886
+  00E @6f490ae1d511c5d9
+  00E @069a5b9c5669fa0e
+  00E @068206dac2ec28ac
+  00E @ad610cd439a18583
+  032 @f5b8c6cc81e79f80
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step fame Windurst 150
+packets
+char_profile - fame_windurst=148
+char_profile + fame_windurst=150
+step trigger Taillegeas
+packets
+  034 @16c4c82a54fb77c0
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+char_quest_state + quest_key=jeuno.ducal_hospitality|area=3|quest_id=68|status=0|step=0|progress={"ItemSet":2}|repeat_by=0
+char_vars + varname=Quest[3][68]ItemSet|value=2|expiry=0
+ret onTrigger=number:0
+step finish option=10
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Taillegeas GoblinPie x1
+packets
+ret onTrade=nil:nil
+step mission Cop TheRoadForks completed
+packets
+  056 @98b04edd62b8f880
+char_mission_state - area=6|current=325|status=0|completed_mask=0|progress=null
+char_mission_state + area=6|current=0|status=0|completed_mask=0|progress=null
+chars - assault=null
+chars - campaign=null
+chars + assault=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+chars + campaign=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+chars missions +420:0000
+step mission Cop AVesselWithoutACaptain current
+packets
+  056 @3019070a2e4decb8
+char_mission_state - area=6|current=0|status=0|completed_mask=0|progress=null
+char_mission_state + area=6|current=318|status=0|completed_mask=0|progress=null
+chars missions +420:3E01
+step trigger Taillegeas
+packets
+  032 @f5b8c6cc81e79f80
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil

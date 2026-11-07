@@ -1,0 +1,13 @@
+# Raptor Rapture (adoulin, call-only), 5039 at a midpoint rate: a level 99 Warrior in Western Adoulin, the quest
+# accepted at Raptor_Rapture_Status 8 (GMs), BAYLD_RATE 1.0625 (1000 x 1.0625 = 1062.5: the binding's llround
+# gives 1063, round half to even and truncation 1062). Pagnelle: 5039, finished: 1063 bayld, BAYLD_OBTAINED 1063;
+# Quest[9][73]Prog 1 (a GM) kept (quest:complete's cleanup would clear it).
+lists WesternAdoulin/Pagnelle/onTrigger WesternAdoulin/onEventFinish/5039
+char zone=WesternAdoulin pos=-6.5,0,-100 job=WAR lvl=99
+setting BAYLD_RATE 1.0625
+quest Adoulin.RaptorRapture accepted
+charvar Raptor_Rapture_Status 8
+charvar Quest[9][73]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+login
+trigger Pagnelle                        # status 8: 5039
+finish                                  # completed: 1063 bayld

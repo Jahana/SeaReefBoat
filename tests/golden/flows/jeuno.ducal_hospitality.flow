@@ -1,0 +1,63 @@
+# Ducal Hospitality (jeuno 68): Ru'Lude Gardens' Taillegeas (no script; default 10061; Trust: Cherukiki's 10235 wants a
+# trust permit: none here). A level 75 Warrior at Jeuno fame level 4 (150 in each nation: 450 / 2 = 225), CoP The Road
+# Forks current (A Vessel Without a Captain completed; The Warrior's Path not: option 0 is 0 throughout), two of set 2's
+# items and set 1's (a GM, before login). Available: 10057 with a drawn set (math.randomInt(1, 5): the trace shows it),
+# option 10: not begun; 10057 again (a new draw), option 0: begun. A GM sets ItemSet 0: set 2 traded: nil (the trade's
+# ItemSet > 0 check). A GM sets ItemSet 2 (the draw fixed): 10059 (set 2:
+# items 1-3, [4] = [5] = 0, text 1); set 2 less one item: nil; set 2 and a Goblin Pie: nil; set 2 exactly: 10058 ([6] =
+# 1), finished: completed (4000 gil, Ducal Dupe), fame +5 x3, the trade taken, the mustZone (the completed state's 10058
+# finish runs in the same lookup and is skipped by that mustZone). Completed: ItemSet 0 (cleared by the completion),
+# the mustZone: 10060; a trade of set 2: nil (ItemSet 0). Out to Upper Jeuno and back (the mustZone cleared): 10057 (a
+# draw), option 10: ItemSet 0; 10057 (a draw), option 0: kept; a GM sets ItemSet 1: 10059 (set 1: five items, text 0);
+# set 1 less one: nil; set 1 traded: 10058 ([6] = 0), finished: the trade taken, the mustZone, ItemSet 0, 4000 gil, fame +5 x3. A GM sets
+# ItemSet 2 with the mustZone still set: 10059; set 2 traded: 10058, finished: the mustZone set: nothing (the items
+# kept, no gil). The Lua error arm (ItemSet 0 while accepted) is not flowed: see the README.
+lists RuludeGardens/Taillegeas/onTrigger RuludeGardens/Taillegeas/onTrade RuludeGardens/onEventFinish/10057 RuludeGardens/onEventFinish/10058 RuludeGardens/onEventFinish/10059 RuludeGardens/onEventFinish/10060
+warning: quests: jeuno.ducal_hospitality: one finish of 10058 ran 2 handlers (2/-/onEventFinish:10058, 3/-/onEventFinish:10058) -- the Lua runs it twice too: its sections at Ducal_Hospitality.lua:162 (accepted) and :243 (completed) at lua-at 3f5cf4f2 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=RuludeGardens pos=29.5,2,58 job=WAR lvl=75
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 150
+mission Cop TheRoadForks current
+item PileOfChocoboBedding x2
+item SetOfKaiserinCosmetics x2
+item MyFirstMagicKit x2
+item HandfulOfCounterfeitGil
+item LoafOfGoblinBread
+item GoblinDoll
+item GoblinMushpot
+item GoblinPie
+login
+trigger Taillegeas                      # available: 10057, a drawn set
+finish option=10                        # not begun
+trigger Taillegeas                      # 10057, a new draw
+finish option=0                         # begun
+charvar Quest[3][68]ItemSet 0           # a GM: no set while accepted
+trade Taillegeas PileOfChocoboBedding x1 SetOfKaiserinCosmetics x1 MyFirstMagicKit x1 # ItemSet 0: nil (the trade's > 0 check)
+charvar Quest[3][68]ItemSet 2           # a GM: set 2
+trigger Taillegeas                      # accepted: 10059 (set 2, [4] 0, [5] 0, [6] 1)
+finish
+trade Taillegeas PileOfChocoboBedding x1 SetOfKaiserinCosmetics x1 # set 2 less one: nil; nothing
+trade Taillegeas PileOfChocoboBedding x1 SetOfKaiserinCosmetics x1 MyFirstMagicKit x1 GoblinPie x1 # set 2 and an extra item: nil
+trade Taillegeas PileOfChocoboBedding x1 SetOfKaiserinCosmetics x1 MyFirstMagicKit x1 # set 2 exactly: 10058 ([0] 0, [6] 1)
+finish                                  # completed: 4000 gil, Ducal Dupe; fame +5 x3; the trade taken; the mustZone
+trigger Taillegeas                      # completed, ItemSet 0, the mustZone: 10060
+finish
+trade Taillegeas PileOfChocoboBedding x1 SetOfKaiserinCosmetics x1 MyFirstMagicKit x1 # ItemSet 0: nil; nothing
+warp -55.5,8.2,97.5 UpperJeuno          # another zone: the mustZone cleared
+warp 29.5,2,58 RuludeGardens
+trigger Taillegeas                      # no ItemSet, no mustZone: 10057, a draw
+finish option=10                        # ItemSet 0
+trigger Taillegeas                      # 10057, a draw
+finish option=0                         # the drawn set kept
+charvar Quest[3][68]ItemSet 1           # a GM: set 1
+trigger Taillegeas                      # ItemSet 1: 10059 (set 1, five items, [6] 0)
+finish
+trade Taillegeas HandfulOfCounterfeitGil x1 LoafOfGoblinBread x1 GoblinDoll x1 GoblinMushpot x1 # set 1 less one: nil
+trade Taillegeas HandfulOfCounterfeitGil x1 LoafOfGoblinBread x1 GoblinDoll x1 GoblinMushpot x1 GoblinPie x1 # 10058 ([6] 0)
+finish                                  # the trade taken, the mustZone, ItemSet 0, 4000 gil, fame +5 x3
+charvar Quest[3][68]ItemSet 2           # a GM, the mustZone still set
+trigger Taillegeas                      # ItemSet 2 (before the mustZone): 10059
+finish
+trade Taillegeas PileOfChocoboBedding x1 SetOfKaiserinCosmetics x1 MyFirstMagicKit x1 # 10058
+finish                                  # the mustZone set: nothing (the items kept, no gil)

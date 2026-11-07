@@ -1,0 +1,37 @@
+# Not Meant to Be's edges: two level 75 Warriors in Caedarva Mire, each with the quest accepted at Prog 3 (GMs). Both
+# talk to qm12 before either finishes: 17 each (neither NM up); main finishes: both NMs spawned, claimed by main; bob
+# finishes: 17's own check: they are up: nothing spawned. Main at Prog 2 (a GM) as the NMs die: Lamia No.27 and
+# Moshdahn killed: Prog not 3: no Stage bit (bob, not the killer, at Prog 3 in the zone: the lookup runs the death for
+# the killer's alliance only: bob is in none: nothing). Main back at Prog 3 (a GM), the NMs despawned (two
+# ticks): qm12, Stage 0, neither up: 17 (finished with both spawned again). Then Prog 4 (a GM) with a full bag in
+# Nashmau: Fhe 297, finished: the gold pieces do not fit: not completed; freed: 297: completed.
+lists CaedarvaMire/qm12/onTrigger CaedarvaMire/Lamia_No27/onMobDeath CaedarvaMire/Moshdahn/onMobDeath CaedarvaMire/onEventFinish/17 Nashmau/Fhe_Maksojha/onTrigger Nashmau/onEventFinish/297
+char zone=CaedarvaMire pos=458.5,-7,-270.815 job=WAR lvl=75
+char bob zone=CaedarvaMire pos=458.5,-7,-269.5 job=WAR lvl=75
+quest AhtUrhgan.NotMeantToBe accepted
+charvar Quest[6][64]Prog 3
+bob: quest AhtUrhgan.NotMeantToBe accepted
+bob: charvar Quest[6][64]Prog 3
+login
+bob: login
+trigger qm12                            # main: Prog 3, Stage 0, neither NM up: 17
+bob: trigger qm12                       # bob: the same: 17
+finish                                  # main: both spawned, claimed by main
+bob: finish                             # bob: 17's check: both up: nothing
+charvar Quest[6][64]Prog 2              # a GM: main off Prog 3
+kill LAMIA_NO27                         # Prog 2: no Stage bit
+kill MOSHDAHN                           # Prog 2: no Stage bit
+charvar Quest[6][64]Prog 3              # a GM
+tick 15000
+tick 30000                              # the NMs despawned (a dead mob stays spawned through one long tick)
+trigger qm12                            # Prog 3, Stage 0, neither up: 17
+finish                                  # both spawned again
+bob: logout
+warp 20.584,-6,71.287 Nashmau
+charvar Quest[6][64]Prog 4              # a GM
+fill-inventory
+trigger Fhe_Maksojha                    # Prog 4: 297
+finish                                  # the gold pieces do not fit: not completed
+free-inventory
+trigger Fhe_Maksojha                    # 297
+finish                                  # completed

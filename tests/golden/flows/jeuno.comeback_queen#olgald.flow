@@ -1,0 +1,18 @@
+# Comeback Queen (jeuno 98) at Prog 0 against the crafted Dancer artifact hidden quest (Crafted_Dancer_Artifact.lua,
+# still Lua: The Road to Divadom completed and a Dancer). HQuest[DncArtifact]Prog 1 (a GM): Olgald plays the hidden
+# quest's 10167 (progressEvent, priority 1000, over 10146 at 995), its finish sets HQuest Prog 2 and Status 7; then the
+# hidden quest's 10168 (event, priority 100, once per zone) loses to Comeback Queen's 10146 (setPriority 995).
+lists UpperJeuno/Olgald/onTrigger UpperJeuno/onEventFinish/10167
+char zone=UpperJeuno pos=-52.5,0,101 job=DNC lvl=75
+quest Jeuno.LakesideMinuet completed
+quest Jeuno.TheUnfinishedWaltz completed
+quest Jeuno.TheRoadToDivadom completed
+quest Jeuno.ComebackQueen accepted
+charvar HQuest[DncArtifact]Prog 1
+login
+trigger Olgald                          # HQuest Prog 1: the hidden quest's 10167
+finish                                  # HQuest Prog 2, Status 7
+trigger Olgald                          # 10146 (995) over the hidden quest's 10168 (100)
+finish
+trigger Olgald                          # 10146 again (10168's once per zone would be spent anyway)
+finish

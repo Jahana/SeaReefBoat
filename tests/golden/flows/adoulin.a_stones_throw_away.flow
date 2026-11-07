@@ -1,0 +1,29 @@
+# A Stone's Throw Away (adoulin 56): a level 99 Warrior in Morimar Basalt Fields with three Marble Nuggets. A trade
+# while available: no handler (Apolliane has no script, no default). Apolliane: 2571, finished on 3: begun (any option);
+# available again (a GM): 2571 on 0: begun. Accepted: 2572; the nugget at Prog 0: nil (tradeHasExactly true,
+# Prog not 1). Nothing in the game sets Prog 1 (the Lua's TODO: Morimar's HELM): a GM. Two nuggets at Prog 1: nil (not
+# exactly); the nugget at Prog 2 (a GM): nil. The nugget at Prog 1: 2573, finished: YOU_HAVE_LEARNED Demolishing,
+# completed (500 bayld), Demolishing added, the trade confirmed. Completed: no section: a talk and a trade, nothing.
+lists MorimarBasaltFields/Apolliane/onTrigger MorimarBasaltFields/Apolliane/onTrade
+lists MorimarBasaltFields/onEventFinish/2571 MorimarBasaltFields/onEventFinish/2573
+char zone=MorimarBasaltFields pos=448.588,-15.847,-320.441 job=WAR lvl=99
+item MarbleNugget x3
+login
+trade Apolliane MarbleNugget x1         # available: no trade handler: nothing
+trigger Apolliane                       # available: 2571
+finish option=3                         # begun (any option)
+quest Adoulin.AStonesThrowAway available  # a GM
+trigger Apolliane                       # available: 2571
+finish option=0                         # begun
+trigger Apolliane                       # accepted: 2572 (an Event)
+finish
+trade Apolliane MarbleNugget x1         # Prog 0: nil
+charvar Quest[9][56]Prog 1              # a GM (no mining sets it)
+trade Apolliane MarbleNugget x2         # Prog 1, two nuggets: not exactly: nil
+charvar Quest[9][56]Prog 2              # a GM
+trade Apolliane MarbleNugget x1         # Prog 2: nil
+charvar Quest[9][56]Prog 1              # a GM
+trade Apolliane MarbleNugget x1         # Prog 1: 2573
+finish                                  # the learned line, completed, Demolishing, confirmed
+trigger Apolliane                       # completed: no section: nothing
+trade Apolliane MarbleNugget x1         # completed: no section: nothing

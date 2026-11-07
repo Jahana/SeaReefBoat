@@ -1,0 +1,60 @@
+# Knight Stalker (sandoria 96): the guards and the arms that read no status. A WAR 75 with The Holy Crest and Balasiel's
+# quests completed (GM). Chasing Quotas not completed: Rahal 529; Ceraulian 587. KnightStalker_Progress 1 while
+# available (GM): Ceraulian 23 (that arm reads no status). Progress 2 while available: Ceraulian 587; Balasiel's arm
+# wants accepted: his default. Chasing Quotas completed (GM): Ceraulian 16 (any job); Rahal: a WAR: 529. Accepted by GM:
+# Rahal 119 (the accepted arm reads no job); Progress 1, 2 and 3 without the challenge: nothing at all; Balasiel at
+# Progress 1: his default; Progress 4 with the challenge: Rahal nothing at all; Ceraulian 587 (accepted, no arm at
+# Progress 4).
+char zone=ChateauDoraguille pos=-29.5,0,-8.4 job=WAR lvl=75
+quest Sandoria.TheHolyCrest completed
+quest Sandoria.ASquiresTest completed
+quest Sandoria.ASquiresTestIi completed
+quest Sandoria.AKnightsTest completed
+quest Sandoria.MethodsCreateMadness completed
+login
+trigger Rahal                             # Chasing Quotas not completed: no arm; Option2 0: 529
+finish
+warp 0.6,-8,-121.9 PortSanDoria
+trigger Ceraulian                         # Chasing Quotas not completed, available, Progress 0, Option1 0: no arm: 587
+finish
+charvar KnightStalker_Progress 1
+trigger Ceraulian                         # Progress 1 while available, no challenge: 23
+finish
+charvar KnightStalker_Progress 2
+trigger Ceraulian                         # Progress 2 while available: no arm: 587
+finish
+warp -136.8,-10.8,65.8 SouthernSanDoria
+trigger Balasiel                          # default 667
+finish
+trigger Balasiel                          # Progress 2 while available: no arm: the default 667
+finish
+charvar KnightStalker_Progress 0
+quest Sandoria.ChasingQuotas completed
+warp 0.6,-8,-121.9 PortSanDoria
+trigger Ceraulian                         # Chasing Quotas completed, available (no job read): 16
+finish
+warp -29.5,0,-8.4 ChateauDoraguille
+trigger Rahal                             # a WAR: no arm: 529
+finish
+quest Sandoria.KnightStalker accepted
+trigger Rahal                             # accepted, Progress 0 (no job read): 119
+finish
+charvar KnightStalker_Progress 1
+trigger Rahal                             # accepted, Progress 1, no challenge: the arm taken, nothing at all
+charvar KnightStalker_Progress 2
+trigger Rahal                             # accepted, Progress 2, no challenge: nothing at all
+charvar KnightStalker_Progress 3
+trigger Rahal                             # accepted, Progress 3, no challenge: nothing at all
+charvar KnightStalker_Progress 1
+warp -136.8,-10.8,65.8 SouthernSanDoria
+trigger Balasiel                          # default 667
+finish
+trigger Balasiel                          # accepted, Progress 1: no arm: the default 667
+finish
+warp -29.5,0,-8.4 ChateauDoraguille
+keyitem ChallengeToTheRoyalKnights
+charvar KnightStalker_Progress 4
+trigger Rahal                             # Progress 4 with the challenge: nothing at all
+warp 0.6,-8,-121.9 PortSanDoria
+trigger Ceraulian                         # accepted, Progress 4, Option1 0: no arm: 587
+finish

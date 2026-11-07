@@ -1,0 +1,25 @@
+# Olduum's Leypoint talk against Navigating the Unfriendly Seas' (C#), the Leypoint's other talk line: a level 75
+# Warrior in Wajaom Woodlands with a Lightning Band, Olduum completed, Navigating accepted at Prog 2 with Wait an hour
+# ahead (GMs). Olduum's LEYPOINT + 1 (the band) and Navigating's ENIGMATIC_LIGHT (the Hydrogauge) are both messages:
+# equal ranks play the first container first (Navigating's: the order line), then rotate; a higher kind on either would
+# win every talk. Navigating's Wait past (a GM): its 508 (a Progress) beats Olduum's message; finished: Navigating Prog
+# 3, Wait 0; the Leypoint: Olduum's message alone.
+lists WajaomWoodlands/Leypoint/onTrigger WajaomWoodlands/onEventFinish/508
+char zone=WajaomWoodlands pos=-198.5,-8.5,80.058 job=WAR lvl=75
+item LightningBand
+quest AhtUrhgan.Olduum completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas accepted
+charvar Quest[6][25]Prog 2
+charvar Quest[6][25]Wait 1800003600
+login
+trigger Leypoint                        # the messages tie: Navigating's ENIGMATIC_LIGHT
+finish-if-event
+trigger Leypoint                        # Olduum's LEYPOINT + 1
+finish-if-event
+trigger Leypoint                        # ENIGMATIC_LIGHT again
+finish-if-event
+charvar Quest[6][25]Wait 0              # a GM
+trigger Leypoint                        # Navigating, Wait past: 508 (a Progress) over Olduum's message
+finish                                  # Navigating: Prog 3, Wait 0
+trigger Leypoint                        # Navigating at Prog 3: nil; Olduum's LEYPOINT + 1
+finish-if-event

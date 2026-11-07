@@ -1,0 +1,18 @@
+# New Character Cutscenes next to the missions whose zone-in containers run first, Windurst (nation 2, ROV off,
+# notSeen 1, a GM). Windurst Waters: CoP's Road Forks at status 0 (871) wins over the quest. Windurst Woods: Rumors
+# from the West yields to the quest at notSeen 1 and shows 839 at 0.
+char zone=WindurstWaters pos=-40.6,-5,102.5 job=WAR lvl=75 nation=2
+setting ENABLE_ROV 0
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+mission Cop AncientFlamesBeckon completed # a GM
+mission Cop TheRoadForks current        # a GM
+login                                   # Road Forks first
+finish
+mission Cop TheRoadForks completed      # a GM
+mission Soa RumorsFromTheWest current   # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp 30,2,-40 WindurstWoods             # Rumors yields to the quest at notSeen 1
+finish
+charvar HQuest[newCharacterCS]notSeen 0 # a GM
+warp 30,2,-40 WindurstWoods             # notSeen 0: Rumors
+finish

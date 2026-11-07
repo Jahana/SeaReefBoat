@@ -1,0 +1,52 @@
+# Grimy Signposts (sandoria 66): Maugie in Southern San d'Oria, the four Signposts of Jugner Forest. Fame 49 (level
+# 1): no section, Maugie's default 46. Fame 50 (level 2): a trade to Maugie (no quest trade handler; his script's Flyers
+# for Regine trade: that quest not accepted, nothing); 45 declined (option 1), then taken (option 0: begun). Accepted,
+# Prog 0: Maugie's 43. Each Signpost by id: the first (offset 0) plays cutscene 9 (1); option 0 leaves it grimy; option
+# 1 cleans it (SIGNPOST_NEW, bit 3); again (bit set: nil, its script's startEvent(4)). The second and third (offsets 1,
+# 2): 8, 7, each left grimy once (option 0), then cleaned (bits 2, 1); the fourth (offset 3): 6 (bit 0; Prog 15), then
+# again at Prog 15 (no Signpost section: its script's 1). Maugie at Prog 15: 44 (completed: fame +20, 1500 gil); then
+# 42 (replaceDefault). #gm takes the Prog values a GM sets, each Signpost's bit-set side and the completed Signpost.
+# Maugie's script answers only the Flyers for Regine trade; his default is 46. Each Signpost's script plays 4, 3, 2, 1
+# by its offset from ID.npc.SIGNPOST[1]; no other quest or mission names them.
+lists SouthernSanDoria/Maugie/onTrigger SouthernSanDoria/Maugie/onTrade SouthernSanDoria/onEventFinish/45 SouthernSanDoria/onEventFinish/44 JugnerForest/Signpost/onTrigger JugnerForest/onEventFinish/6 JugnerForest/onEventFinish/7 JugnerForest/onEventFinish/8 JugnerForest/onEventFinish/9
+char zone=SouthernSanDoria pos=106.6,2.0,-16.7 job=WAR lvl=30
+fame Sandoria 49
+item BoneChip
+login
+trigger Maugie                            # fame level 1: no section; his default 46
+finish
+fame Sandoria 50
+trade Maugie BoneChip x1                  # available: no quest trade handler; Flyers for Regine not accepted: nothing
+trigger Maugie                            # fame level 2: 45
+finish option=1                           # not option 0: not begun
+trigger Maugie                            # 45
+finish                                    # option 0: begun
+trigger Maugie                            # accepted, Prog 0: 43
+finish
+warp -71.9,2.2,100.6 JugnerForest
+trigger Signpost                          # offset 0, bit 3 unset: cutscene 9 (1)
+finish option=0                           # not option 1: still grimy
+trigger Signpost                          # cutscene 9 again
+finish option=1                           # SIGNPOST_NEW; bit 3 (Prog 8)
+trigger Signpost                          # bit 3 set: nil; its script's 4
+finish
+warp -258.7,0.0,-23.2 JugnerForest
+trigger Signpost+1                        # offset 1: cutscene 8 (1)
+finish option=0                           # not option 1: still grimy
+trigger Signpost+1                        # cutscene 8 again
+finish option=1                           # SIGNPOST_NEW; bit 2 (Prog 12)
+warp -456.3,2.4,-416.1 JugnerForest
+trigger Signpost+2                        # offset 2: cutscene 7 (1)
+finish option=0                           # not option 1: still grimy
+trigger Signpost+2                        # cutscene 7 again
+finish option=1                           # SIGNPOST_NEW; bit 1 (Prog 14)
+warp 302.9,0.2,418.9 JugnerForest
+trigger Signpost+3                        # offset 3: cutscene 6 (1)
+finish option=1                           # SIGNPOST_NEW; bit 0 (Prog 15)
+trigger Signpost+3                        # Prog 15: no Signpost section; its script's 1
+finish
+warp 106.6,2.0,-16.7 SouthernSanDoria
+trigger Maugie                            # Prog 15: 44
+finish                                    # completed: fame +20, 1500 gil
+trigger Maugie                            # completed: 42 (replaceDefault)
+finish

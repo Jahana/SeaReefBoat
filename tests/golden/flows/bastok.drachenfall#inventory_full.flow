@@ -1,0 +1,12 @@
+# Drachenfall's offer with a full inventory: 101's give fails, so the quest is not begun (no canteen); with room, 101
+# again gives the canteen and begins it.
+lists BastokMines/Black_Mud/onTrigger BastokMines/onEventFinish/101
+char zone=BastokMines pos=60,7,0.5
+fame Bastok 50
+login
+fill-inventory
+trigger Black_Mud                    # the offer, 101
+finish                               # the inventory full: no canteen, still available
+free-inventory
+trigger Black_Mud                    # 101 again
+finish                               # Brass Canteen, accepted

@@ -1,0 +1,36 @@
+# Arts and Crafts' edges: a level 75 Warrior, the quest accepted (a GM), Led Astray available. Mhasbaf: 510 and Led
+# Astray's 808 (Progress events alike: the two cycle, 510 first); 510's finish: bit 1; 808's: Led
+# Astray begun. At Stage 0 a trade of a bowl (a GM): nil (no Hadahda script: nothing). Bits 1-7 (a GM: Prog 254) with a
+# full bag: Hadahda 517, finished: the bowl does not fit: Prog and Stage kept; Hadahda 517 again; freed: the bowl, Prog
+# 0, Stage 1. A trade of the bowl and a second item: nil. The bowl alone with a full bag: 573, finished: the Imperial
+# Bronze Piece does not fit: no completion (the bowl kept); freed: 573: completed.
+lists AhtUrhganWhitegate/Hadahda/onTrigger AhtUrhganWhitegate/Hadahda/onTrade AhtUrhganWhitegate/Mhasbaf/onTrigger AhtUrhganWhitegate/onEventFinish/510 AhtUrhganWhitegate/onEventFinish/517 AhtUrhganWhitegate/onEventFinish/573
+char zone=AhtUrhganWhitegate pos=54.701,-6,11.387 job=WAR lvl=75
+quest AhtUrhgan.ArtsAndCrafts accepted
+item BowlOfSutlac
+item SheetOfParchment
+login
+trigger Mhasbaf                         # 510 first (Progress events alike with Led Astray's 808)
+finish
+trigger Mhasbaf                         # the other one: 808
+finish
+warp -112.029,-6,-66.114 AhtUrhganWhitegate   # beside Hadahda
+trade Hadahda BowlOfSutlac x1           # Stage 0: nil
+finish-if-event
+charvar Quest[6][1]Prog 254             # a GM: bits 1-7
+fill-inventory
+trigger Hadahda                         # 517
+finish                                  # full: the bowl does not fit: nothing more
+trigger Hadahda                         # Prog kept: 517
+finish-if-event
+free-inventory
+trigger Hadahda                         # 517
+finish                                  # a second bowl; Prog 0; Stage 1
+trade Hadahda BowlOfSutlac x1 SheetOfParchment x1   # not the bowl alone: nil
+finish-if-event
+fill-inventory
+trade Hadahda BowlOfSutlac x1           # 573
+finish                                  # full: complete false: nothing more (the bowl kept)
+free-inventory
+trade Hadahda BowlOfSutlac x1           # 573
+finish                                  # completed; the bronze piece; one bowl taken

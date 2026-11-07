@@ -1,0 +1,37 @@
+# An Eye for Revenge (abyssea 3), the edges: a level 99 Warrior in Abyssea - La Theine with three Filthy Gnole Claws.
+# Curilla, Lost Memories available: 189; accepted (a GM): 189. Lugarhoo popped and killed while available: no section:
+# no eyeball. Lost Memories completed (a GM), no vial held: 190 (delKeyItem of nothing), finished on option 0: begun
+# (any option). The eyeball held (a GM): Lugarhoo popped and killed: nothing more (held). Curilla: 192, finished:
+# completed. Lugarhoo popped and killed while completed, no eyeball: no section: nothing.
+lists AbysseaLaTheine/Curilla/onTrigger AbysseaLaTheine/Lugarhoo/onMobDeath AbysseaLaTheine/onEventFinish/189 AbysseaLaTheine/onEventFinish/190 AbysseaLaTheine/onEventFinish/192
+char zone=AbysseaLaTheine pos=-465.8,-3.315,770.159 job=WAR lvl=99
+item FilthyGnoleClaw
+item FilthyGnoleClaw
+item FilthyGnoleClaw
+login
+trigger Curilla                         # Lost Memories available: 189
+finish
+quest Abyssea.LostMemories accepted     # a GM
+trigger Curilla                         # Lost Memories accepted (not completed): 189
+finish
+walk -85.313,24.379,-511.991
+trade qm_lugarhoo FilthyGnoleClaw x1    # pops Lugarhoo (claimed)
+kill LUGARHOO                           # available: no section: no eyeball
+quest Abyssea.LostMemories completed    # a GM
+walk -465.8,-3.315,770.159
+trigger Curilla                         # Lost Memories completed, no vial: 190
+finish option=0                         # begun (any option)
+keyitem LugarhoosEyeball                # a GM
+walk -85.313,24.379,-511.991
+tick 15000
+tick 30000
+trade qm_lugarhoo FilthyGnoleClaw x1    # Lugarhoo popped, claimed
+kill LUGARHOO                           # eyeball held: nothing
+walk -465.8,-3.315,770.159
+trigger Curilla                         # the eyeball: 192
+finish                                  # the eyeball taken; 800 cruor; completed
+walk -85.313,24.379,-511.991
+tick 15000
+tick 30000
+trade qm_lugarhoo FilthyGnoleClaw x1    # Lugarhoo popped, claimed
+kill LUGARHOO                           # completed, no eyeball: no section: nothing

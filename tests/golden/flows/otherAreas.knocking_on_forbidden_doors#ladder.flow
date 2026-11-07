@@ -1,0 +1,21 @@
+# Knocking on Forbidden Doors (otherAreas 78): the ladder's 38 against its own script. The Wooden Ladder script plays the
+# ladder cutscene of the box the char stands in (ladder 4, LADDER_KNOCKING: event 24, x -224.1 to -212.1, y -1 to 1, z 12
+# to 24, the ladder closer than 1.95). The char walks into that box (y -0.5) and talks from there. Accepted at Prog 1 (a
+# GM; the chain before it completed): 38 (27), finished: Prog 2. Prog 1 again (a GM): 38 again (a Progress action beats
+# the script every time; an Event one would hand the second talk to the script: its 24). Prog 2: no quest action: the
+# script's 24.
+lists PhomiunaAqueducts/Wooden_Ladder/onTrigger PhomiunaAqueducts/onEventFinish/38
+char zone=PhomiunaAqueducts pos=-216.6,-1.5,18.1 job=WAR lvl=75
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile completed
+quest OtherAreas.KnockingOnForbiddenDoors accepted
+charvar Quest[4][78]Prog 1
+login
+walk -216.9,-0.5,18.1
+trigger LADDER_KNOCKING here            # Prog 1, in the ladder's box: 38 (27)
+finish                                  # Prog 2
+charvar Quest[4][78]Prog 1              # a GM
+trigger LADDER_KNOCKING here            # 38 again (Progress)
+finish                                  # Prog 2
+trigger LADDER_KNOCKING here            # Prog 2: no quest action; the script: the ladder's 24
+finish-if-event

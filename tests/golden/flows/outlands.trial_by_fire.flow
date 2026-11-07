@@ -1,0 +1,71 @@
+# Trial by Fire (outlands 12): Ronta-Onta in Kazham. A level 75 Warrior (SMN not unlocked: the mask's bit 5 is always
+# set). The guard (Windurst fame level 6: 424, then 425 by a GM), the offer 270 (0, fork, 0, 1) declined (option 2) then
+# accepted (option 1: the Tuning Fork of Fire, begun); 271 (4, fork) while the fork is held; Dodmos 272 (his script: no
+# Trial-Size Trial by Fire for a Warrior). The Whisper of Flames by GM (the battlefield's 32001 is #battlefield), then 273
+# (0, 1, 0, 0, mask): option 0 and 7 (escaped: nothing), then once per reward option: each completion (Windurst fame 60)
+# takes the whisper and sets the Timer to the next JST day (Ronta answers nil while it runs: the default 274), `wait
+# jst=1` clears it, and 270 (0, fork), option 0 and 2: nothing; option 1: the quest deleted, the fork, begun again. The mask
+# grows by the items held: 32 (no SMN), 33 (Ifrit's Blade), 35 (Fire Belt), 39 (Fire Ring), 47 (Egil's Torch); option 5:
+# 10000 gil; option 6: the Ifrit spell, IFRIT_UNLOCKED (0, 0, 0). Trades with no handler: Ronta while the guard is false,
+# then met. Defaults: Ronta-Onta 274, Dodmos 275; no other quest or mission names Ronta-Onta.
+lists Kazham/Ronta-Onta/onTrigger Kazham/Ronta-Onta/onTrade Kazham/Dodmos/onTrigger Kazham/onEventFinish/270 Kazham/onEventFinish/273
+char zone=Kazham pos=100.37,-13.999,-97.676 job=WAR lvl=75
+fame Windurst 424
+item BoneChip
+login
+trade Ronta-Onta BoneChip x1            # fame 424: no section, nothing
+trigger Ronta-Onta                      # level 5: not offered: the default 274
+finish
+fame Windurst 425                       # a GM
+trade Ronta-Onta BoneChip x1            # the guard met: no trade handler: nothing
+trigger Ronta-Onta                      # 270 (0, fork, 0, 1)
+finish option=2                         # not 1: nothing
+trigger Ronta-Onta                      # 270
+finish option=1                         # the Tuning Fork of Fire; begun
+trigger Ronta-Onta                      # the fork: 271 (4, fork)
+finish
+trigger Dodmos                          # 272 (his script does nothing for a Warrior: the quest's Event every time)
+finish
+keyitem WhisperOfFlames                 # a GM: the battlefield win (#battlefield)
+trigger Ronta-Onta                      # the whisper: 273 (0, 1, 0, 0, 32)
+finish option=0                         # escaped: nothing
+trigger Ronta-Onta                      # 273
+finish option=7                         # above 6: nothing
+trigger Ronta-Onta                      # 273 (32)
+finish option=1                         # Ifrit's Blade: completed (fame +60); the whisper taken; Timer
+trigger Ronta-Onta                      # completed, Timer running: nil: the default 274
+finish
+wait jst=1                              # the Timer expires
+trigger Ronta-Onta                      # completed, Timer 0: 270 (0, fork)
+finish option=0                         # nothing: still completed
+trigger Ronta-Onta                      # 270
+finish option=2                         # not 1: nothing: still completed
+trigger Ronta-Onta                      # 270
+finish option=1                         # the quest deleted and begun again; the fork (held already)
+keyitem WhisperOfFlames                 # a GM
+trigger Ronta-Onta                      # 273 (33: the blade held)
+finish option=2                         # the Fire Belt: completed
+wait jst=1
+trigger Ronta-Onta
+finish option=1                         # begun again
+keyitem WhisperOfFlames
+trigger Ronta-Onta                      # 273 (35)
+finish option=3                         # the Fire Ring: completed
+wait jst=1
+trigger Ronta-Onta
+finish option=1
+keyitem WhisperOfFlames
+trigger Ronta-Onta                      # 273 (39)
+finish option=4                         # Egil's Torch: completed
+wait jst=1
+trigger Ronta-Onta
+finish option=1
+keyitem WhisperOfFlames
+trigger Ronta-Onta                      # 273 (47)
+finish option=5                         # 10000 gil: completed
+wait jst=1
+trigger Ronta-Onta
+finish option=1
+keyitem WhisperOfFlames
+trigger Ronta-Onta                      # 273 (47)
+finish option=6                         # the Ifrit spell; IFRIT_UNLOCKED (0, 0, 0): completed

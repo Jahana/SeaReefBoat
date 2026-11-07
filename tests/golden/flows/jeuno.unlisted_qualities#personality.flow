@@ -1,0 +1,34 @@
+# Unlisted Qualities (jeuno 77): Red Ghost's 320 and the fellow's sex, one race at a time, each with size 2 and face 4
+# already set (a GM's Data, Prog 0), so each accepted personality also advances to Prog 1 (set back to 0 by a GM).
+# Race 7 (odd, but not female): option 6 nothing, 5 accepted (personality 6, Data 4724848). Race 6 (even, but female):
+# option 5 nothing, 6 accepted (Data 4725856). Race 0: option 6 nothing, 0 accepted (the lower edge: personality 1,
+# Data 4719616). Race 1: option 5 nothing, 11 accepted (the upper edge: personality 12, Data 4730896).
+lists PortJeuno/Red_Ghost/onTrigger PortJeuno/onEventFinish/320
+char zone=PortJeuno pos=-95,0,-3.3 job=WAR lvl=20
+quest Jeuno.UnlistedQualities accepted
+charvar Quest[3][77]Data 4718704
+login
+trigger Red_Ghost              # race 7: 320, [7] = 4718704
+finish option=6                # a male fellow, a female option: nothing
+trigger Red_Ghost              # 320
+finish option=5                # personality 6: Data 4724848, Prog 1
+charvar Quest[3][77]Prog 0     # a GM
+charvar Quest[3][77]Data 4718688 # a GM: race 6
+trigger Red_Ghost              # 320, [7] = 4718688
+finish option=5                # a female fellow, a male option: nothing
+trigger Red_Ghost              # 320
+finish option=6                # personality 7: Data 4725856, Prog 1
+charvar Quest[3][77]Prog 0     # a GM
+charvar Quest[3][77]Data 4718592 # a GM: race 0
+trigger Red_Ghost              # 320, [7] = 4718592
+finish option=6                # a male fellow, a female option: nothing
+trigger Red_Ghost              # 320
+finish option=0                # personality 1: Data 4719616, Prog 1
+charvar Quest[3][77]Prog 0     # a GM
+charvar Quest[3][77]Data 4718608 # a GM: race 1
+trigger Red_Ghost              # 320, [7] = 4718608
+finish option=5                # a female fellow, a male option: nothing
+trigger Red_Ghost              # 320
+finish option=11               # personality 12: Data 4730896, Prog 1
+trigger Red_Ghost              # Prog 1: no handler; 34
+finish

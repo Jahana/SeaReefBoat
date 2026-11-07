@@ -1,0 +1,21 @@
+# Curses, Foiled Again!? (2) (windurst 33): Hiwon-Biwon while Making Headlines is accepted. (1) completed by GM (no
+# Timer set, no mustZone): 284 (Prog 1); its finish also runs Hiwon's script (the Windurst Walls Scoop, bit 2 of
+# QuestMakingHeadlines_var: the lookup runs both finish handlers); 284 again at Prog 1: nothing from the quest (the
+# script gives the scoop again: held); 284 at Prog 2 (GM): Prog stays 2. Making Headlines completed by GM (not
+# accepted): 179 (Prog 2: nothing).
+lists WindurstWalls/Hiwon-Biwon/onTrigger WindurstWalls/onEventFinish/284 WindurstWalls/onEventFinish/179
+char zone=WindurstWalls pos=115.6,-2.38,101.0
+fame Windurst 50
+quest Windurst.CursesFoiledAgain1 completed
+quest Windurst.MakingHeadlines accepted
+login
+trigger Hiwon-Biwon                                 # Making Headlines accepted: progressEvent 284
+finish                                              # Prog 1; his script: the Windurst Walls Scoop, the bit
+trigger Hiwon-Biwon                                 # 284 again
+finish                                              # Prog 1: nothing from the quest; the script gives the scoop again (held: no message)
+charvar Quest[2][33]Prog 2
+trigger Hiwon-Biwon                                 # 284 at Prog 2 (GM)
+finish                                              # not Prog 0: Prog stays 2
+quest Windurst.MakingHeadlines completed
+trigger Hiwon-Biwon                                 # Making Headlines completed, not accepted: progressEvent 179
+finish                                              # Prog 2: nothing

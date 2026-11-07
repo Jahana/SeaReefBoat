@@ -1,0 +1,28 @@
+# Mysteries of Beadeaux I (jeuno 31) against CoP 3-5 Darkness Named (current by a GM, Status 0), whose Sattal-Mansal
+# answers 11 (importantEvent: a Progress event the first time, an Event after it played). With the Silver Bell: 89 (0),
+# a Progress event, ties with the mission's first 11: the mission's 11 plays (the first in the list); then 11 is an
+# Event and 89 (0) wins (an Event 89 would tie with it). Accepted: 89 (1), an Event, ties with the mission's 11 (an
+# Event): the talks alternate 89 (1), 11, 89 (1) (a Progress 89 (1) would win every time). Then II's trade (92, a
+# Progress event) between the talks: the alternation goes on (11, then 89 (1)).
+lists LowerJeuno/Sattal-Mansal/onTrigger LowerJeuno/onEventFinish/89
+char zone=LowerJeuno pos=42.6,3.9,-54 job=WAR lvl=75
+mission Cop DarknessNamed current
+keyitem SilverBell
+item QuadavAuguryShell
+login
+trigger Sattal-Mansal               # 89 (0) and the mission's first 11 tie (Progress): 11
+finish
+trigger Sattal-Mansal               # 11 now an Event: 89 (0)
+finish                              # begun; Mysteries of Beadeaux II added
+trigger Sattal-Mansal               # accepted: 89 (1) and 11 tie (Events): 89 (1)
+finish
+trigger Sattal-Mansal               # the tie rotates: 11
+finish
+trigger Sattal-Mansal               # 89 (1)
+finish
+trade Sattal-Mansal QuadavAuguryShell x1 # II: the necklace, fame +7 x3; 92
+finish                              # II completed; KEYITEM_OBTAINED
+trigger Sattal-Mansal               # 11
+finish
+trigger Sattal-Mansal               # 89 (1)
+finish

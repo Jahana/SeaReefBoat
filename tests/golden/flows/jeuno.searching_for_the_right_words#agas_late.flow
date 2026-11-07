@@ -1,0 +1,27 @@
+# Searching for the Right Words (jeuno 66): Agas killed when Prog is not 3, and the 14 finish with the Moondrop already
+# held. The ??? spawns Agas at Prog 3; a GM then sets Prog 4 (as if an earlier Agas had died), so the kill changes
+# nothing (:193 false). The ??? then plays 14; a GM gives the Moondrop while it is open, and option 0 still sets Prog 5
+# (npcUtil.giveKeyItem returns true when the key item is held: no message). A GM's Prog 4 with the Moondrop held: nil
+# (the Moondrop check, before Prog's), CAN_SEE_SKY. With Prog 5 again and the Moondrop gone (GM) the ??? has neither
+# Prog 4 nor 3: nil, CAN_SEE_SKY.
+lists TheBoyahdaTree/qm2/onTrigger TheBoyahdaTree/Agas/onMobDeath TheBoyahdaTree/onEventFinish/14
+char zone=TheBoyahdaTree pos=36.1,-20.2,-61.6 job=WAR lvl=75
+quest Jeuno.SearchingForTheRightWords accepted
+charvar Quest[3][66]Prog 3
+login
+wait vana=7                             # 19:00
+trigger qm2                             # Prog 3: Agas spawned and claimed; SOMETHING_NOT_RIGHT
+charvar Quest[3][66]Prog 4              # a GM
+kill AGAS                               # Prog 4: nothing
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+trigger qm2                             # Prog 4: 14
+keyitem Moondrop                        # a GM, the event open
+finish option=0                         # giveKeyItem: true (held: no message); Prog 5
+charvar Quest[3][66]Prog 4              # a GM
+trigger qm2                             # Prog 4, the Moondrop held: nil; CAN_SEE_SKY
+charvar Quest[3][66]Prog 5              # a GM
+delkeyitem Moondrop                     # a GM
+trigger qm2                             # Prog 5, no Moondrop: nil; CAN_SEE_SKY

@@ -1,0 +1,23 @@
+# Personal Hygiene (outlands 10): Gatih Mijurabi in Kazham, one NPC script quest. BathedInScent set or not, the quest
+# Available, Accepted or Completed, a full inventory. The default 196 stays in the NPC script.
+char zone=Kazham pos=58.2,-12.1,-47.5
+login
+trigger Gatih_Mijurabi              # not bathed, Available: 196
+finish-if-event
+charvar BathedInScent 1
+trigger Gatih_Mijurabi              # bathed, Available: 191
+finish                              # accepted
+trigger Gatih_Mijurabi              # bathed, Accepted: 192
+finish-if-event
+charvar BathedInScent 0
+trigger Gatih_Mijurabi              # no longer bathed, Accepted: 193
+fill-inventory
+finish                              # the inventory full: not completed
+free-inventory
+trigger Gatih_Mijurabi              # 193 again
+finish                              # completed: 70 fame, the Mithran Stone
+trigger Gatih_Mijurabi              # not bathed, Completed: 196
+finish-if-event
+charvar BathedInScent 1
+trigger Gatih_Mijurabi              # bathed, Completed: 195
+finish-if-event

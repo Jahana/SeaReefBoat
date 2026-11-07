@@ -1,0 +1,14 @@
+# Operation Teatime (ahtUrhgan 28), the quest's own var at the completion: a PUP of level 50, this quest accepted,
+# OperationTeatimeProgress 3 and Quest[6][28]Prog 1 (GMs). Caedarva Mire's qm10: 15; finished: npcUtil.completeQuest
+# (the Puppetry Churidars, the progress var 0, completed). npcUtil.completeQuest does no cleanup:
+# Quest[6][28]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=CaedarvaMire pos=474.8,-31.8,75.5 job=PUP lvl=50
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.TheWaywardAutomaton completed
+quest AhtUrhgan.OperationTeatime accepted
+charvar OperationTeatimeProgress 3
+charvar Quest[6][28]Prog 1              # a GM: the quest's own var
+login
+trigger qm10                            # accepted, OperationTeatimeProgress 3: 15
+finish                                  # the Puppetry Churidars; the progress var 0; completed, Prog kept
+trigger qm10                            # completed: NOTHING_OUT_OF_ORDINARY

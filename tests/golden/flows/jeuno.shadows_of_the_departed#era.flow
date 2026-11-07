@@ -1,0 +1,85 @@
+# Shadows of the Departed (jeuno 88) with its era module (quest rework B3b Jeuno, P4): modules/era/lua/quests/jeuno/
+# shadows_of_the_departed.lua, enabled by xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0), replaces state 1's
+# check with a copy whose Timer is compared with GetSystemTime() (the harness's wall clock, 1800000000) and state 2's 162
+# finish with a copy that sets Apocalypse Nigh's Timer to JstMidnight() (1800025200). Every operand of the copied check
+# is taken here once more, one at a time, by three level 75 Warriors:
+# - main: Storms of Fate completed, Zilart Awakening current: _6tc only (status 2): area 1: no section; Norg (status 3);
+#   Timer 1800000001 (a GM): no section; Timer 1800000000: 161, begun; accepted, no sliver: nothing (the copied check's
+#   status operand: section 1 would answer otherwise); the quest available again and Timer 1799999999 (GMs): 161, begun;
+#   the three slivers (a GM): 162: the module's finish: completed, the slivers taken, YOU_HAND_THE_THREE_SLIVERS,
+#   Apocalypse Nigh's Timer 1800025200 and its mustZone;
+# - other: Storms of Fate accepted, brought to status 3: no section; Storms of Fate completed, The Last Verse current: no
+#   section; The Celestial Nexus current: no section; Awakening current again: 161, begun;
+# - four: status 4 (the Chamber of Oracles' Pedestal of Earth), Awakening current: no section.
+# The condition's false side is the quest's own flows (no module line).
+module modules/era/lua/quests/jeuno/shadows_of_the_departed.lua
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/161 RuludeGardens/onEventFinish/162
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+char other zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+char four zone=ChamberOfOracles pos=206.9,-3.6,47.6 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.StormsOfFate completed
+mission Zilart Awakening current
+other: quest Jeuno.StormsOfFate accepted
+other: mission Zilart Awakening current
+four: quest Jeuno.StormsOfFate completed
+four: mission Zilart TheChamberOfOracles current
+login
+warp 39.6,-1.6,-16.6 LowerJeuno         # by _6tc
+trigger _6tc                            # Awakening's 20
+finish                                  # status 2
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # the module's check: status 2: no section; nothing
+warp 120.9,-8,-12 Norg                  # Awakening's 176, answered by the warp: status 3
+warp 4,2.5,100 RuludeGardens
+tick 3000
+charvar Quest[3][88]Timer 1800000001    # a GM: a second after the wall clock
+walk 4,2.5,60                           # the module's check: 1800000000 < 1800000001: no section; nothing
+walk 4,2.5,100
+charvar Quest[3][88]Timer 1800000000    # a GM: now
+walk 4,2.5,60                           # the module's check: now >= Timer: 161
+finish                                  # begun
+walk 4,2.5,100
+walk 4,2.5,60                           # accepted, no sliver: the module's check wants the quest available; state 2's nil; nothing
+walk 4,2.5,100
+quest Jeuno.ShadowsOfTheDeparted available  # a GM
+charvar Quest[3][88]Timer 1799999999    # a GM: a second before now
+walk 4,2.5,60                           # the module's check: 161
+finish                                  # begun
+walk 4,2.5,100
+keyitem PromyvionHollaSliver            # a GM: the three slivers
+keyitem PromyvionDemSliver
+keyitem PromyvionMeaSliver
+walk 4,2.5,60                           # 162
+finish                                  # the module's finish: completed, the slivers taken, Apocalypse Nigh's Timer = JstMidnight(), its mustZone
+other: login
+other: warp 120.9,-8,-12 Norg           # 176: status 1
+other: warp 39.6,-1.6,-16.6 LowerJeuno  # by _6tc
+other: trigger _6tc                     # 20
+other: finish                           # status 3
+other: warp 4,2.5,100 RuludeGardens
+tick 3000
+other: walk 4,2.5,60                    # Storms of Fate accepted: no section; nothing
+other: walk 4,2.5,100
+other: quest Jeuno.StormsOfFate completed  # a GM
+other: mission Zilart Awakening completed  # a GM
+other: mission Zilart TheLastVerse current # a GM
+other: walk 4,2.5,60                    # Zilart The Last Verse: no section; nothing
+other: walk 4,2.5,100
+other: mission Zilart TheLastVerse completed     # a GM
+other: mission Zilart TheCelestialNexus current  # a GM
+other: walk 4,2.5,60                    # Zilart The Celestial Nexus: no section; nothing
+other: walk 4,2.5,100
+other: mission Zilart TheCelestialNexus completed  # a GM
+other: mission Zilart Awakening current # a GM
+other: walk 4,2.5,60                    # Awakening again, status 3: 161
+other: finish                           # begun
+four: login
+four: trigger Pedestal_of_Earth         # status + 4
+four: mission Zilart TheChamberOfOracles completed  # a GM
+four: mission Zilart Awakening current  # a GM: the status kept (4)
+four: warp 4,2.5,100 RuludeGardens
+tick 3000
+four: walk 4,2.5,60                     # status 4: no section; nothing

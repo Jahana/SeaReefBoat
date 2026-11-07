@@ -1,0 +1,60 @@
+# Equipped for All Occasions' edges (Luck of the Draw and The Die is Cast completed for all, GMs). bob (a Warrior) and
+# carl (a level 39 Corsair, also at AF1_QUEST_LEVEL 39.4, a number): not offered: qm6's NOTHING_OUT_OF_ORDINARY. Main
+# (accepted by a GM, Stage 0): Prog 1: _5i0 pops the Lost Soul (the quest's nil: the door's script, 42); again with it
+# up: popFromQM false, nothing popped (42); Prog 2 (a GM): 66, finished: the trigger, Prog 3; Prog 2 again (a GM): 66
+# again (a Progress: an Event would let the door's own script answer this second talk); the Lost Soul killed at Prog 3:
+# Prog stays 3. Whitegate: Prog 4 (a GM) with Stage 0: Ratihb: the quest's nil, Luck of the Draw's 552 (its Stage 1);
+# Stage 1 at Prog 3 and at Prog 5 (GMs): nil: 603; Prog 4: 772 with a full bag: complete false (unread): nothing; room
+# again: 772: completed.
+lists ArrapagoReef/qm6/onTrigger MazeOfShakhrami/_5i0/onTrigger MazeOfShakhrami/Lost_Soul/onMobDeath AhtUrhganWhitegate/Ratihb/onTrigger AhtUrhganWhitegate/onEventFinish/772
+char zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=40
+char bob zone=ArrapagoReef pos=470.267,-12.292,111.817 job=WAR lvl=40
+char carl zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=39
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.TheDieIsCast completed
+quest AhtUrhgan.EquippedForAllOccasions accepted
+charvar Quest[6][24]Prog 1
+bob: quest AhtUrhgan.LuckOfTheDraw completed
+carl: quest AhtUrhgan.LuckOfTheDraw completed
+login
+bob: login
+bob: trigger qm6                        # a Warrior: not offered: NOTHING_OUT_OF_ORDINARY
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trigger qm6                       # level 39: NOTHING_OUT_OF_ORDINARY
+carl: finish-if-event
+setting AF1_QUEST_LEVEL 39.4
+carl: trigger qm6                       # 39 < 39.4 (the setting read as a number): NOTHING_OUT_OF_ORDINARY
+carl: finish-if-event
+setting AF1_QUEST_LEVEL 40
+carl: logout
+warp 249.235,18.499,-142.267 MazeOfShakhrami
+trigger _5i0                            # Prog 1: the Lost Soul popped
+finish-if-event
+trigger _5i0                            # Prog 1, the Lost Soul up: popFromQM false; the script's 42
+finish-if-event
+charvar Quest[6][24]Prog 2              # a GM
+trigger _5i0                            # Prog 2: 66
+finish                                  # the Wheel Lock Trigger; Prog 3
+charvar Quest[6][24]Prog 2              # a GM
+trigger _5i0                            # Prog 2 again: 66 (a Progress: the quest's again, not the door's script)
+finish                                  # Prog 3
+kill LOST_SOUL                          # Prog 3: nothing
+charvar Quest[6][24]Prog 4              # a GM
+warp 76.725,-6,-137.203 AhtUrhganWhitegate
+trigger Ratihb                          # Prog 4, Stage 0: the quest's nil; Luck of the Draw's 552
+finish                                  # Stage 1
+charvar Quest[6][24]Prog 3              # a GM
+trigger Ratihb                          # Prog 3, Stage 1: nil: 603
+finish
+charvar Quest[6][24]Prog 5              # a GM
+trigger Ratihb                          # Prog 5, Stage 1: nil: 603
+finish
+charvar Quest[6][24]Prog 4              # a GM
+fill-inventory
+trigger Ratihb                          # Prog 4, Stage 1: 772
+finish                                  # the gun does not fit: complete false (unread): nothing
+free-inventory
+trigger Ratihb                          # 772
+finish                                  # completed: Trump Gun

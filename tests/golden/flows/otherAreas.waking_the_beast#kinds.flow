@@ -1,0 +1,34 @@
+# La Theine Plateau qm3's reply kinds (no script; default STRANGE_ENERGY): Waking the Beast (207 / 208 P), CoP 5-3 Three
+# Paths (Tenzen's path status 0: 203 importantEvent: Progress its first time in the zone, then Event; its finish sets
+# Tenzen's path 2), Windurst's I Can Hear a Rainbow (a trade only, Prog 1) and the two Abyssea quests (not accepted
+# here: from 18:00 to 4:59, since user ruling 2026-11-04, their Progress replies 11 / 12 would compete with 207 / 208
+# and 203). Three Paths current and Waking the Beast completed (GMs): 207 and 203 (both Progress): a tie: the mission's
+# container first: 203. Tenzen's path 0 again (a GM): 203 is now Event: 207 (Progress) beats it; finished: the
+# resonator. The resonator taken (a GM): 207 beats 203 again (an Event 207 would tie and the cycle would play 203). The
+# resonator held: Waking the Beast off: 203 alone. Tenzen's path 0, the resonator taken, the Faded Ruby (GMs): 208
+# (Progress) beats 203; finished: completed again, completedThisWeek 1. completedThisWeek 0 and the ruby (GMs): 208
+# beats 203 again; finished: the pole is rare and held: complete false.
+lists LaTheinePlateau/qm3/onTrigger LaTheinePlateau/onEventFinish/207 LaTheinePlateau/onEventFinish/208
+char zone=LaTheinePlateau pos=-178.2,8.8,254.3 job=SMN lvl=75
+mission Cop ThreePaths current
+quest OtherAreas.WakingTheBeast completed
+login
+trigger qm3                             # 207 and 203 (Progress): a tie: the mission's container first: 203
+finish                                  # Tenzen's path 2
+missionstatus Cop 0 pos=3               # a GM: Tenzen's path 0: 203 back (Event: played once here)
+trigger qm3                             # 207 (Progress) beats 203 (Event)
+finish                                  # the resonator
+delkeyitem RainbowResonator             # a GM
+trigger qm3                             # 207 (Progress) beats 203 (Event) again
+finish                                  # the resonator
+trigger qm3                             # the resonator held: Waking the Beast off: 203 alone
+finish                                  # Tenzen's path 2
+missionstatus Cop 0 pos=3               # a GM
+delkeyitem RainbowResonator             # a GM
+keyitem FadedRuby                       # a GM
+trigger qm3                             # 208 (Progress) beats 203 (Event)
+finish                                  # completed again; the pole; completedThisWeek 1; the ruby taken
+charvar Quest[4][32]completedThisWeek 0 # a GM
+keyitem FadedRuby                       # a GM
+trigger qm3                             # 208 (Progress) beats 203 (Event) again
+finish                                  # the pole is rare (held): complete false; the ruby kept

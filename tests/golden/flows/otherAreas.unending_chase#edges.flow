@@ -1,0 +1,42 @@
+# Unending Chase (otherAreas 2): the available check and Rycharde's conditions, bracketed, and the offers' options.
+# Way of the Cook accepted (a GM): its section (Rycharde 78 / 79: EndTime 0, so 79). Completed (a GM),
+# Quest[4][1]DayCompleted 7993 (7993 + 7 = 8000, not below): 75; 7992 with Windurst fame 124 (level 2): 75; fame 125:
+# 82 at Prog 0, option 76 (below 77): Prog 1, the previous DayCompleted cleared, not begun. Prog -1 (a GM, below 0): 84,
+# option 0. Prog 0 again (a GM): 82, option 78 (above 77): Prog 1, not begun. Prog 0: 82, option 77: Prog 1, begun.
+# Made available again (a GM, Prog 0): 82; the quest made completed by a GM while it is open: no section while
+# completed, so no 82 handler: nothing (Prog stays 0, still completed). Prog 1 while accepted (a GM): Rycharde 85, not
+# 84 (the available section's status operand alone).
+lists Mhaura/Rycharde/onTrigger Mhaura/onEventFinish/82 Mhaura/onEventFinish/84
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.WayOfTheCook accepted
+fame Windurst 125
+login
+trigger Rycharde                        # Way of the Cook accepted (EndTime 0): 79; no Unending Chase section
+finish
+quest OtherAreas.WayOfTheCook completed # a GM
+charvar Quest[4][1]DayCompleted 7993    # 7993 + 7 < 8000 false
+trigger Rycharde                        # 75
+finish
+charvar Quest[4][1]DayCompleted 7992    # 7999 < 8000
+fame Windurst 124                       # level 2
+trigger Rycharde                        # 75
+finish
+fame Windurst 125                       # level 3
+trigger Rycharde                        # Prog 0: 82 (4448)
+finish option=76                        # Prog 1, DayCompleted 0; below 77: not begun
+charvar Quest[4][2]Prog -1              # a GM: below 0
+trigger Rycharde                        # Prog -1: 84
+finish option=0
+charvar Quest[4][2]Prog 0               # a GM
+trigger Rycharde                        # Prog 0: 82
+finish option=78                        # Prog 1; above 77: not begun
+charvar Quest[4][2]Prog 0               # a GM
+trigger Rycharde                        # Prog 0: 82
+finish option=77                        # Prog 1, begun
+trigger Rycharde                        # accepted, Prog 1: 85 (not 84)
+finish
+quest OtherAreas.UnendingChase available # a GM
+charvar Quest[4][2]Prog 0               # a GM
+trigger Rycharde                        # Prog 0: 82
+quest OtherAreas.UnendingChase completed # a GM, while 82 is open
+finish option=77                        # no section while completed: nothing

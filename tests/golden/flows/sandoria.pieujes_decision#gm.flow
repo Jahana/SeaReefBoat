@@ -1,0 +1,37 @@
+# Pieuje's Decision (sandoria 89): available, entered Fei'Yin from Beaucedine Glacier: no 19 (the status); the qm1
+# YOU_FIND_NOTHING and the bell (nothing); Narcheral the mask (nothing). Accepted by GM: entered from Northern San
+# d'Oria at pieujesDecisionCS 0: no 19 (the previous zone); from Beaucedine Glacier at pieujesDecisionCS 2: no 19.
+# Narcheral's 692 with a full inventory (ITEM_CANNOT_BE_OBTAINED, the mask kept, not completed); Coullene takes a flyer
+# (Flyers for Regine accepted by GM): exactly one free slot: 692 completes it, Quest[0][89]Prog 1 (GM) kept (the raw
+# player:completeQuest).
+# Then completed, entered from Beaucedine Glacier at pieujesDecisionCS 0: no 19.
+char zone=BeaucedineGlacier pos=403.3,0.0,279.2 job=WHM lvl=50
+quest Sandoria.FlyersForRegine accepted
+item TavnaziaBell
+item TavnazianMask
+item MagicmartFlyer
+login
+warp -51.0,-16.0,38.0 Feiyin              # available, from Beaucedine Glacier: no 19
+trigger qm1                               # available: YOU_FIND_NOTHING
+trade qm1 TavnaziaBell x1                 # available: nothing
+warp 126.8,-11.0,128.3 NorthernSanDoria
+trade Narcheral TavnazianMask x1          # available: nothing
+quest Sandoria.PieujesDecision accepted
+warp -51.0,-16.0,38.0 Feiyin              # accepted, pieujesDecisionCS 0, from Northern San d'Oria: no 19
+warp 403.3,0.0,279.2 BeaucedineGlacier
+charvar pieujesDecisionCS 2
+warp -51.0,-16.0,38.0 Feiyin              # from Beaucedine Glacier, pieujesDecisionCS 2: no 19
+warp 126.8,-11.0,128.3 NorthernSanDoria
+fill-inventory
+trade Narcheral TavnazianMask x1          # 692
+finish                                    # no free slot: ITEM_CANNOT_BE_OBTAINED (Healer's Bliaut); the mask kept
+warp 144.4,0.0,127.6 NorthernSanDoria
+trade Coullene MagicmartFlyer x1          # Flyers for Regine: the flyer taken; one slot free
+warp 126.8,-11.0,128.3 NorthernSanDoria
+charvar Quest[0][89]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Narcheral TavnazianMask x1          # 692
+finish                                    # exactly one free slot: completed; Quest[0][89]Prog kept
+quest Sandoria.PieujesDecision completed
+charvar pieujesDecisionCS 0
+warp 403.3,0.0,279.2 BeaucedineGlacier
+warp -51.0,-16.0,38.0 Feiyin              # completed, from Beaucedine Glacier, pieujesDecisionCS 0: no 19

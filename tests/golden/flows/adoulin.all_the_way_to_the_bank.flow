@@ -1,0 +1,41 @@
+# All the Way to the Bank (adoulin 103; call-only, no quest log: no script reads or writes its status): the payments in
+# ATWTTB_Payments, Defliaa bit 0, Hujette and Flapano bit 2; the TARUTARU_SAUCE_RECEIPT once bits 0 to 4 are set. No
+# script gives the TARUTARU_SAUCE_INVOICE (a GM here). None of the three has a default; their talks are shops (not
+# ported). A level 99 Warrior in Western Adoulin with 200000 gil and a Plate of Barnacle Paella.
+# Defliaa: 19440 gil without the invoice: nothing. With it: 19439: nothing; 20000: 5069 (npcUtil.tradeHas: at least
+# 19440), finished: 19440 taken, Payments 1, no receipt; 19440 again: bit 0 set: nothing. Hujette: 2999: nothing; 3000:
+# 5070, finished: 3000 taken, bit 2 set (kept: she tests bit 1 and sets bit 2), Payments 5; 3000 again: bit 1 still
+# clear: 5070, finished: 3000 taken, Payments 5. Flapano (Exotic Delicacies accepted by GM): 5600 with bit 2 set: the
+# arm taken, nothing; 5600 and a paella: nothing (Exotic Delicacies' 2862 not reached); Payments 27
+# (a GM: bits 0, 1, 3, 4): 5599 and the paella: Exotic Delicacies' 2862; 5600 and the paella: 5071, finished: 5600 taken
+# (the paella stays), Payments 31: the receipt; 5600 again: nothing. The invoice taken (GM): 5600 and the paella: 2862.
+# The deliberate log writes (user ruling 2026-11-04) are the C# port's, not the Lua's: this trace is a csharp-rerecord
+# of the Lua recording (lua-at kept), the difference the log's 0x056 pages, chars.quests and char_quest_state only.
+char zone=WesternAdoulin pos=45.4,2,-113.5 job=WAR lvl=99 gil=200000
+quest Adoulin.ExoticDelicacies accepted   # (GM) so that a trade the arm passes reaches its 2862
+item PlateOfBarnaclePaella
+login
+trade Defliaa gil=19440                   # no invoice: nothing
+keyitem TarutaruSauceInvoice              # a GM (no script gives it)
+trade Defliaa gil=19439                   # under 19440: nothing
+trade Defliaa gil=20000                   # bit 0 clear: 5069
+finish                                    # 19440 taken; ATWTTB_Payments 1; not full: no receipt (added)
+trade Defliaa gil=19440                   # bit 0 set: nothing
+warp 36.4,0,-56 WesternAdoulin            # beside Hujette
+trade Hujette gil=2999                    # under 3000: nothing
+trade Hujette gil=3000                    # bit 1 clear: 5070
+finish                                    # 3000 taken; bit 2 set: Payments 5
+trade Hujette gil=3000                    # bit 1 still clear: 5070
+finish                                    # 3000 taken; Payments 5
+warp 71.5,0,-13.5 WesternAdoulin          # beside Flapano
+trade Flapano gil=5600                    # bit 2 set: the arm taken, nothing
+trade Flapano PlateOfBarnaclePaella x1 gil=5600  # bit 2 set: nothing (no 2862)
+charvar ATWTTB_Payments 27                # a GM: bits 0, 1, 3, 4
+trade Flapano PlateOfBarnaclePaella x1 gil=5599  # under 5600: Exotic Delicacies: 2862
+finish
+trade Flapano PlateOfBarnaclePaella x1 gil=5600  # bit 2 clear: 5071
+finish                                    # 5600 taken; Payments 31: TARUTARU_SAUCE_RECEIPT (completed)
+trade Flapano gil=5600                    # bit 2 set: nothing
+delkeyitem TarutaruSauceInvoice           # a GM
+trade Flapano PlateOfBarnaclePaella x1 gil=5600  # no invoice: Exotic Delicacies: 2862
+finish

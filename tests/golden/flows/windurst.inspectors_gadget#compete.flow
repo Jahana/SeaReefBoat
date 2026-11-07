@@ -1,0 +1,54 @@
+# Inspector's Gadget! (windurst 41): the reply kinds on Kohlo-Lakolo and in section 3. Level 5, fame 50; Know One's
+# Onions completed by GM; Truth, Justice, and the Onion Way! accepted by GM (an earlier container, an Event line on
+# every brigade member: Kohlo-Lakolo 371, Gomada-Vulmada 373, Papo-Hopo 372, Pichichi 374, Pyo Nzon 375, Shanruru 377,
+# Yafa Yaa 376). Section 2's other Event lines tie with the first quest's in its #compete flow; Chamama's 553 / 551
+# alternate (or not) with her script in the main flow.
+# - Section 1: 413 (Progress) beats 371 (option 1: nothing); an Event 413 would tie and lose the first talk to 371. Fame
+#   49 by GM: 401 (Event) ties with 371: 371, then 401; a Progress 401 would play first.
+# - Section 2 (accepted by GM, the Fake Moustache by GM): 421 (Progress) beats 371 (finished with a full bag: nothing).
+# - Section 3 (completed by GM; Onion Rings available): each new default (replaceDefault) loses to the first quest's
+#   line on both talks; without replaceDefault it would tie and play on one of them.
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Gomada-Vulmada/onTrigger PortWindurst/Papo-Hopo/onTrigger PortWindurst/Pichichi/onTrigger PortWindurst/Pyo_Nzon/onTrigger PortWindurst/Shanruru/onTrigger PortWindurst/Yafa_Yaa/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5
+fame Windurst 50
+quest Windurst.KnowOnesOnions completed
+quest Windurst.TruthJusticeAndTheOnionWay accepted
+login
+trigger Kohlo-Lakolo                           # 413 (Progress) over 371
+finish option=1                                # nothing
+fame Windurst 49                               # GM
+trigger Kohlo-Lakolo                           # 371 and 401 tie: 371
+finish
+trigger Kohlo-Lakolo                           # 401
+finish
+quest Windurst.InspectorsGadget accepted       # GM
+keyitem FakeMoustache                          # GM
+trigger Kohlo-Lakolo                           # 421 (Progress) over 371
+fill-inventory
+finish                                         # full: nothing
+free-inventory
+quest Windurst.InspectorsGadget completed      # GM; Onion Rings available: section 3
+trigger Gomada-Vulmada                         # 425 (replaceDefault) under 373: 373, twice
+finish
+trigger Gomada-Vulmada
+finish
+trigger Papo-Hopo                              # 424 under 372
+finish
+trigger Papo-Hopo
+finish
+trigger Pichichi                               # 423 under 374
+finish
+trigger Pichichi
+finish
+trigger Pyo_Nzon                               # 426 under 375
+finish
+trigger Pyo_Nzon
+finish
+trigger Shanruru                               # 428 under 377
+finish
+trigger Shanruru
+finish
+trigger Yafa_Yaa                               # 427 under 376
+finish
+trigger Yafa_Yaa
+finish

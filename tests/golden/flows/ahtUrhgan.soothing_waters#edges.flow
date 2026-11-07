@@ -1,0 +1,41 @@
+# Soothing Waters's edges: a level 75 Warrior with no mercenary badge, Saga of the Skyserpent completed (a GM). Ode not
+# completed: Eunheem (no script, no default): nothing; Rughadjeen: his default 265; Ode accepted (a GM): Fari-Wari:
+# Ode's 891 (Soothing not available). GMs: accepted at Prog 1: Mihli Aliapoh: no Prog-1 handler: 267; Rughadjeen 265.
+# Prog 5 (a GM): Fari-Wari: no section: 831; Eunheem: nothing. Prog 4 with a full bag: Fari-Wari 897, finished: the Gold
+# Piece does not fit: no completion (Prog 4 kept); freed: 897: completed. Completed with no badge: Rughadjeen 284 ([0]
+# rank 0).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger AhtUrhganWhitegate/Eunheem/onTrigger AlZahbi/Mihli_Aliapoh/onTrigger AlZahbi/Rughadjeen/onTrigger AhtUrhganWhitegate/onEventFinish/897
+char zone=AhtUrhganWhitegate pos=-54.945,0,-3.241 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent completed
+login
+trigger Eunheem                         # no section: nothing
+finish-if-event
+quest AhtUrhgan.OdeToTheSerpents accepted   # a GM
+trigger Fari-Wari                       # Ode accepted: Soothing not available: Ode's 891
+finish
+warp -72.65,-6,70.656 AlZahbi
+trigger Rughadjeen                      # no section: 265
+finish
+quest AhtUrhgan.SoothingWaters accepted # GMs
+charvar Quest[6][47]Prog 1
+trigger Mihli_Aliapoh                   # Prog 1: no handler: 267
+finish
+trigger Rughadjeen                      # accepted: no handler: 265
+finish
+quest AhtUrhgan.OdeToTheSerpents completed  # a GM: Ode's 891 gone
+charvar Quest[6][47]Prog 5              # a GM
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 5: no section: 831
+finish
+trigger Eunheem                         # Prog 5: nothing
+finish-if-event
+charvar Quest[6][47]Prog 4              # a GM
+fill-inventory
+trigger Fari-Wari                       # Prog 4: 897
+finish                                  # full: complete false: nothing more
+free-inventory
+trigger Fari-Wari                       # 897
+finish                                  # completed; 500 standing; BESIEGED_OFFSET
+warp -72.65,-6,70.656 AlZahbi
+trigger Rughadjeen                      # completed, no badge: 284 ([0] 0)
+finish

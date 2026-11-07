@@ -1,0 +1,61 @@
+# Moment of Truth (ahtUrhgan 30): a level 75 Warrior, Give Peace a Chance completed (a GM). Mishhar (no script; default
+# event 590). Available: Mishhar 800, finished: begun. Accepted, Prog 0: Mishhar 801 (an Event); area 5 (the Shaharat
+# Teahouse, walked into after the zone-in lock): 802, finished: Prog 1; area 5 again: nothing. Mishhar 803, finished:
+# Prog 2; Mishhar 588 (an Event). Mamook's qm7 (no script; default NOTHING_OUT_OF_ORDINARY) at Prog 2: the cutscene 221,
+# finished: Prog 3; again: nil: the default. Whitegate: Mishhar 804 (an Event). Jade Sepulcher's _1v0 (no script;
+# default messageSpecial -1) at Prog 3: 3, finished: Prog 4. Whitegate: Mishhar 804 again (Prog 4). The battlefield:
+# _1v0 at Prog 4 (requiredVar 4): the quest's nil, the battlefield's 32000 menu; option 49 (index 3 << 4 | area 1)
+# enters; the six of area 1 (SHADOWHAND_KAJEEL_JA + 0 .. + 5) killed: won (allDeath), 32001 opens; finished:
+# battlefieldWin 1155: Prog 5. Whitegate: Mishhar 805, finished: the Warrior's Strength Potion; completed. Mishhar
+# again: completed: 806 (replaceDefault).
+lists AhtUrhganWhitegate/Mishhar/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/5 Mamook/qm7/onTrigger JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventFinish/32001 AhtUrhganWhitegate/onEventFinish/805
+char zone=AhtUrhganWhitegate pos=-10.7,-6,29.371 job=WAR lvl=75
+quest AhtUrhgan.GivePeaceAChance completed
+login
+trigger Mishhar                         # available: 800
+finish                                  # begun
+trigger Mishhar                         # Prog 0: 801 (an Event)
+finish
+warp 80,-6,-140 AhtUrhganWhitegate      # south of area 5
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+walk 80,-6,-130                         # area 5, Prog 0: 802
+finish                                  # Prog 1
+walk 80,-6,-140
+walk 80,-6,-130                         # Prog 1: nil: nothing
+warp -10.7,-6,29.371 AhtUrhganWhitegate
+trigger Mishhar                         # Prog 1: 803
+finish                                  # Prog 2
+trigger Mishhar                         # Prog 2: 588 (an Event)
+finish
+warp 218.4,-26.1,-94.6 Mamook           # beside qm7
+trigger qm7                             # Prog 2: 221 (a cutscene)
+finish                                  # Prog 3
+trigger qm7                             # Prog 3: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp -10.7,-6,29.371 AhtUrhganWhitegate
+trigger Mishhar                         # Prog 3: 804 (an Event)
+finish
+warp 300,-2.517,-198.5 JadeSepulcher    # by the door _1v0
+trigger _1v0                            # Prog 3: 3
+finish                                  # Prog 4
+warp -10.7,-6,29.371 AhtUrhganWhitegate
+trigger Mishhar                         # Prog 4: 804
+finish
+warp 300,-2.517,-198.5 JadeSepulcher
+trigger _1v0                            # Prog 4: the quest's nil; the battlefield's 32000 menu
+update 32000 option=49                  # Moment of Truth (index 3), area 1: registered, entered
+finish                                  # in the arena
+kill SHADOWHAND_KAJEEL_JA
+kill SHADOWHAND_KAJEEL_JA+1
+kill SHADOWHAND_KAJEEL_JA+2
+kill SHADOWHAND_KAJEEL_JA+3
+kill SHADOWHAND_KAJEEL_JA+4
+kill SHADOWHAND_KAJEEL_JA+5             # the last of area 1: won, battlefieldWin 1155; 32001 opens inside the kill
+finish                                  # 32001: battlefieldWin 1155: Prog 5
+warp -10.7,-6,29.371 AhtUrhganWhitegate
+trigger Mishhar                         # Prog 5: 805
+finish                                  # WAR: a Strength Potion; completed
+trigger Mishhar                         # completed: 806 (replaceDefault)
+finish

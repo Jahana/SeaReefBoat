@@ -1,0 +1,16 @@
+# Dark Puppet's zone-in events left open (login / rezone / warp ... open, quest rework P5): each zone-in event stays open
+# for the steps after it, where a zone-in without open answers it at once. Prog 0 in Ordelle's Caves: login open (10
+# open), an update of 10 (no onEventUpdate: nothing), then finish (Prog 1). Prog 1: rezone open (the zone-in is nil: no
+# event; finish-if-event finds none). Prog 2 by GM: warp to La Theine Plateau open (122 open), finish option=1: completed.
+lists OrdellesCaves/onZoneIn/1 OrdellesCaves/onEventFinish/10 LaTheinePlateau/onZoneIn/1 LaTheinePlateau/onEventFinish/122
+char zone=OrdellesCaves pos=12.5,32,165.5 job=DRK lvl=50
+quest Bastok.DarkLegacy completed
+quest Bastok.DarkPuppet accepted
+login open                           # Prog 0: 10 open
+update 10 option=1                   # no onEventUpdate for 10: nothing
+finish                               # 10's finish: Prog 1
+rezone open                          # Prog 1: the zone-in is nil, no event
+finish-if-event
+charvar Quest[1][58]Prog 2
+warp -559,0,680 LaTheinePlateau open # Prog 2: 122 open
+finish option=1                      # 122's finish: completed, Chaos Sollerets, fame +20

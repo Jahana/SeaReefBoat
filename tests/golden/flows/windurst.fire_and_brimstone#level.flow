@@ -1,0 +1,34 @@
+# Fire and Brimstone (windurst 73): the AF2 level gate and the Sin Hunting / status operands of 531, on a RNG 49
+# (Sin Hunting and The Fanged One completed by GM). AF2_QUEST_LEVEL 50 (the default) and 49.4: 528 (49 is under both;
+# MainNumber reads 49.4 as it is); 49: 531, option 1: begun (any option), var 1. Accepted, var 0: 338. Sin Hunting
+# available (AF1_QUEST_LEVEL 100 keeps its 523 away) on an available quest, RNG at the level: no 531, no 528: 338.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=RNG lvl=49
+quest Windurst.SinHunting completed
+quest Windurst.TheFangedOne completed
+login
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # level 49 under AF2_QUEST_LEVEL 50: 528
+finish
+setting AF2_QUEST_LEVEL 49.4
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # 49 under 49.4: 528
+finish
+setting AF2_QUEST_LEVEL 49
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # 49 at 49: 531
+finish option=1                         # begun (any option); var 1
+charvar fireAndBrimstone 0
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # accepted, var 0, RNG at the level: 338
+finish
+setting AF1_QUEST_LEVEL 100
+quest Windurst.SinHunting available
+quest Windurst.FireAndBrimstone available
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Sin Hunting available (its 523 refused at AF1 100), RNG at the level: 338
+finish

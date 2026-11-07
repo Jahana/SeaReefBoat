@@ -1,0 +1,42 @@
+# Olduum (ahtUrhgan 2): a level 75 Warrior in Whitegate with three Pickaxes. Dkhaaya (no script, no default); Aydeewa
+# Subterrane's Excavation Sites (no script; default NOTHING_HAPPENS); Wajaom's Leypoint (no script; default LEYPOINT).
+# Available: Dkhaaya 4, finished: Dkhaaya's Research Journal, begun. Accepted, no cell: Dkhaaya 5. Aydeewa: two Picks:
+# not tradeMatches { PICKAXE, 1 }: nil: nothing; one: randomInt(1, 100) <= 50 draws ([0] = the cell on a success, [1] =
+# 1 on a failure); a GM pins a success with the Electrocell (mineFail 0, Prog 1); finished: the Electrocell, the pickaxe
+# taken (tradeComplete); one more Pickaxe with the cell held: nil. Whitegate: Dkhaaya 6 ([0] = Electrocell); update
+# option 0: nothing; option 1: updateEvent(Electrocell); finished: completed (a Lightning Band), the Electrocell taken.
+# Completed with the band: Dkhaaya 7; finished with option 99: the band held: nothing. Wajaom: the Leypoint with the
+# band: LEYPOINT + 1 (the band); the band traded, a free slot: 2, finished: the Olduum Ring, the band taken, Wait = now
+# + 60; the Leypoint: no band: nil: LEYPOINT. Whitegate: Dkhaaya with the ring: 7.
+lists AhtUrhganWhitegate/Dkhaaya/onTrigger AhtUrhganWhitegate/onEventUpdate/6 AhtUrhganWhitegate/onEventFinish/6 AhtUrhganWhitegate/onEventFinish/7 AydeewaSubterrane/Excavation_Site/onTrade AydeewaSubterrane/onEventFinish/0 WajaomWoodlands/Leypoint/onTrigger WajaomWoodlands/Leypoint/onTrade WajaomWoodlands/onEventFinish/2
+char zone=AhtUrhganWhitegate pos=-71.7,0,-5.842 job=WAR lvl=75
+item Pickaxe x3
+login
+trigger Dkhaaya                         # available: 4
+finish                                  # the journal; begun
+trigger Dkhaaya                         # accepted, no cell: 5
+finish
+warp 392,0.984,349.642 AydeewaSubterrane
+trade Excavation_Site Pickaxe x2        # not exactly one pickaxe: nil: nothing
+finish-if-event
+trade Excavation_Site Pickaxe x1        # no ring, no cell, one pickaxe: the draw; 0
+localvar mineFail 0                     # a GM pins a success
+charvar Quest[6][2]Prog 1               # a GM pins the Electrocell
+finish                                  # mineFail 0: the Electrocell (no message); the pickaxe taken
+trade Excavation_Site Pickaxe x1        # a cell held: nil
+finish-if-event
+warp -71.7,0,-5.842 AhtUrhganWhitegate
+trigger Dkhaaya                         # the cell: 6 ([0] = Electrocell)
+update 6 option=0                       # not option 1: nothing
+update 6 option=1                       # updateEvent(keyItems[1]) = Electrocell
+finish                                  # completed: the Lightning Band; the Electrocell taken
+trigger Dkhaaya                         # completed, the band held: 7
+finish option=99                        # the band held: nothing
+warp -198.5,-8.5,80.058 WajaomWoodlands
+trigger Leypoint                        # the band held: LEYPOINT + 1 (the band)
+trade Leypoint LightningBand x1         # no ring, the band, free slots: 2
+finish                                  # the Olduum Ring; the band taken; Wait = now + 60
+trigger Leypoint                        # no band: nil: LEYPOINT
+warp -71.7,0,-5.842 AhtUrhganWhitegate
+trigger Dkhaaya                         # the ring held: 7
+finish

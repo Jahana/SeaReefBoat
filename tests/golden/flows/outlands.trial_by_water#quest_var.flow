@@ -1,0 +1,11 @@
+# Trial by Water (outlands 133), the quest's own var at the completion: accepted with the Whisper of Tides and
+# Quest[5][133]Prog 1 (GMs). Edal-Tahdal: 112; finished on 5: 10000 gil, Heir of the Great Water, the whisper taken,
+# TrialByWater_date set, Norg fame +60, the raw player:completeQuest. The raw completeQuest does no cleanup:
+# Quest[5][133]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=Norg pos=-13.0,1.1,-19.0 job=WAR lvl=75
+quest Outlands.TrialByWater accepted
+keyitem WhisperOfTides
+charvar Quest[5][133]Prog 1               # a GM: the quest's own var
+login
+trigger Edal-Tahdal                       # accepted, the whisper: 112 (0, fork, 2, 0, 0)
+finish option=5                           # 10000 gil; the title; the whisper taken; the date; fame +60; completed

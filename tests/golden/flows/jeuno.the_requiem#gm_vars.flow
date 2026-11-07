@@ -1,0 +1,20 @@
+# The Requiem (jeuno 64), two arms one char reaches with GM state (charvar after the login). Accepted at Prog 1, Popped
+# 0, two flasks: the flask pops the three at the bard's sarcophagus (Popped 1); a GM Popped 0, then a second flask with
+# the three still up: popFromQM fails, nil, the flask kept. A GM Prog 0, then Yum Kimil killed: its onMobDeath needs
+# Prog 1, so Prog stays 0.
+lists TheEldiemeNecropolis/Sarcophagus/onTrigger TheEldiemeNecropolis/Sarcophagus/onTrade TheEldiemeNecropolis/Yum_Kimil/onMobDeath
+char zone=TheEldiemeNecropolis pos=-417,6.5,500 job=BRD lvl=50
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+quest Jeuno.PathOfTheBard completed
+quest Jeuno.PainfulMemory completed
+quest Jeuno.TheRequiem accepted
+charvar Quest[3][64]Prog 1
+item FlaskOfHolyWater x2
+login
+trigger Sarcophagus+3                       # Prog 1, Popped 0: nil; the script's SARCOPHAGUS_CANNOT_BE_OPENED
+trade Sarcophagus+3 FlaskOfHolyWater x1     # the three popped (claimed), the flask taken, Popped 1; noAction
+charvar Quest[3][64]Popped 0
+trade Sarcophagus+3 FlaskOfHolyWater x1     # Popped 0, one flask, but the three are up: the pop fails, nil; the flask kept
+charvar Quest[3][64]Prog 0
+kill YUM_KIMIL                              # Prog 0 (not 1): nothing; Prog stays 0

@@ -1,0 +1,60 @@
+# Trial-Size Trial by Wind (outlands 197): Rahi Fohlatti in Rabao. Her default 71 (Rabao's DefaultActions) alternates
+# with her script (interaction_lookup's UseFallback, a local var cleared by zoning): with UseFallback 0 a talk plays 71
+# and sets it to 1; the next talk runs the script (the call) and resets it to 0, and plays 71 again when the script
+# starts nothing. So each script talk below follows a default talk. The guard (main level 20, main job SMN,
+# Selbina-Rabao fame level 2): fame 49 not offered (71 on both talks); the offer 108 (0, Mini Tuning Fork of Wind, 3,
+# 20) declined, option 2 (nothing), option 1 with a full inventory (ITEM_CANNOT_BE_OBTAINED: not begun), then begun with
+# one free slot (the fork, ITEM_OBTAINED); 68 while the fork is held; the trades (a bone chip: nothing; the fork: 109,
+# declined, option 2 (nothing), then option 1: xi.teleport.to the Cloister of Gales, the fork kept; the tick and the
+# login finish the zone change). A trade while available is #level19's. Completed by GM: 111; the fork's trade: nothing.
+# The fork-lost arms are #fork_lost, the level and job sides #level19 and #not_smn, the battlefield #battlefield.
+char zone=Rabao pos=-13.5,7.9,-9.5 job=SMN lvl=20
+fame Sandoria 37
+fame Bastok 37                            # Selbina-Rabao (37 + 37) * 2 / 3 = 49
+item BoneChip
+login
+trigger Rahi_Fohlatti                     # UseFallback 0: the default 71
+finish
+trigger Rahi_Fohlatti                     # the script: fame 49 (level 1): the quest's nil; the default 71
+finish
+fame Sandoria 38
+fame Bastok 37                            # Selbina-Rabao 50
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # the script: SMN 20, fame level 2: 108 (0, fork, 3, 20)
+finish option=0                           # declined: nothing
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # 108
+finish option=2                           # option 2: nothing (the finish wants option 1)
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # 108
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork); not begun
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # 108
+finish option=1                           # begun; the Mini Tuning Fork of Wind, ITEM_OBTAINED
+free-inventory
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # accepted, the fork held: 68
+finish
+trade Rahi_Fohlatti BoneChip x1           # SMN, accepted, not the fork: nothing
+trade Rahi_Fohlatti MiniTuningForkOfWind x1 # SMN, accepted, the fork: 109 (0, fork, 3, 20)
+finish option=0                           # option 0: nothing, the fork kept
+trade Rahi_Fohlatti MiniTuningForkOfWind x1 # 109
+finish option=2                           # option 2: nothing, the fork kept
+trade Rahi_Fohlatti MiniTuningForkOfWind x1 # 109 again
+finish option=1                           # xi.teleport.to the Cloister of Gales (the fork kept)
+tick 400                                  # the zone change the teleport set: the char saved at the Cloister of Gales (201)
+login                                     # back in at the teleport's destination (-374.919, 0.628, -386.774)
+quest Outlands.TrialSizeTrialByWind completed
+warp -13.5,7.9,-9.5 Rabao
+trigger Rahi_Fohlatti                     # the default 71 (the zone change cleared UseFallback)
+finish
+trigger Rahi_Fohlatti                     # completed: 111
+finish
+trade Rahi_Fohlatti MiniTuningForkOfWind x1 # completed: nothing

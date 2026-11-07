@@ -1,0 +1,13 @@
+# Lure of the Wildcat (Bastok) (bastok 84): the guard xi.settings.main.ENABLE_TOAU == 1 with the setting a boolean: Lua's
+# `true == 1` is false, so true is not 1: not offered, Alib-Mufalib's own script (361). A port that reads true as 1
+# (Settings.MainNumber / Main) would offer it; Settings.MainEquals (quest rework P9) does not. Then 1: 357 (the badge,
+# begun). Recorded on Lua at 93992a4c^ (the parent of the commit that deleted the Lua).
+lists PortBastok/Alib-Mufalib/onTrigger PortBastok/onEventFinish/357
+char zone=PortBastok pos=116.1,7.4,-31.8 job=WAR lvl=20
+setting ENABLE_TOAU true
+login
+trigger Alib-Mufalib           # ENABLE_TOAU true: not offered, 361
+finish
+setting ENABLE_TOAU 1
+trigger Alib-Mufalib           # ENABLE_TOAU 1: 357
+finish                         # the Blue Sentinel Badge; begun

@@ -1,0 +1,43 @@
+# His Name is Valgeir (otherAreas 3): Mhaura's Rycharde, Take and Felisa (a script: z >= 39: 221 (gil, 100), else 235);
+# Selbina's Valgeir (default 140). Unending Chase completed, its Quest[4][2]DayCompleted 7997 (a GM: 7997 + 2 < 8000),
+# Windurst fame 125 (level 3). A level 30 Warrior with a Chocobo Feather. Available: a trade: no trade handler; Take 65;
+# Rycharde 86, option 0: nothing; 86, option 80: Quest[4][2]DayCompleted 0, the Aragoneu Pizza (KEYITEM_OBTAINED), begun.
+# Accepted: Rycharde with the pizza: 87; Take 65; Felisa (the char at z 39.381, east of her: above 38.5) with the pizza at
+# Prog 0: 230, finished: Prog 1; at Prog 1: nil, her script's 221 (gil, 100), finished with option 0: nothing. Selbina:
+# Valgeir with the pizza: 100, finished: the pizza taken (no message); without: 101. Mhaura: Felisa without the pizza: nil
+# (221); Rycharde without it: 88, finished: completed (fame 40 Windurst, 2000 gil, the Map of the Toraimarai Canal),
+# 2000 exp, Quest[4][3]DayCompleted 8000. Completed: no section; Expertise's available section answers Rycharde: 89.
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/Take/onTrigger Mhaura/Felisa/onTrigger Mhaura/onEventFinish/86 Mhaura/onEventFinish/88 Mhaura/onEventFinish/230 Mhaura/onEventFinish/221 Selbina/Valgeir/onTrigger Selbina/onEventFinish/100
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.UnendingChase completed
+charvar Quest[4][2]DayCompleted 7997
+fame Windurst 125
+item ChocoboFeather
+login
+trade Rycharde ChocoboFeather x1        # available: no trade handler; nothing
+trigger Take                            # available: 65
+finish
+trigger Rycharde                        # 7997 + 2 < 8000, fame level 3: 86
+finish option=0                         # neither 80 nor 81: nothing
+trigger Rycharde                        # 86
+finish option=80                        # Quest[4][2]DayCompleted 0, the pizza (KEYITEM_OBTAINED), begun
+trigger Rycharde                        # accepted, the pizza held: 87
+finish
+trigger Take                            # accepted: 65
+finish
+trigger Felisa                          # the pizza, z 39.381 > 38.5, Prog 0: 230
+finish                                  # Prog 1
+trigger Felisa                          # Prog 1: nil; her script: 221 (gil, 100)
+finish option=0                         # her script: not 333, nothing
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # the pizza: 100
+finish                                  # the pizza taken
+trigger Valgeir                         # no pizza: 101
+finish
+warp 19,-16,88.8 Mhaura
+trigger Felisa                          # no pizza: nil; 221 (gil, 100)
+finish option=0
+trigger Rycharde                        # no pizza: 88
+finish                                  # completed: fame 40 Windurst, 2000 gil, the map; 2000 exp; DayCompleted 8000
+trigger Rycharde                        # completed: Expertise available: 89
+finish

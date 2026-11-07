@@ -1,0 +1,21 @@
+# Got It All with its era module, modules/era/lua/quests/ahturhgan/got_it_all.lua, enabled by xi.pre(SOA)
+# (RESTRICT_CONTENT 1, ENABLE_SOA 0). A level 75 Warrior, the quest accepted at Prog 6 (GMs). Tehf Kimasnahya 527,
+# finished: the module's copy: Prog 7, Stage = JstMidnight() (1800025200: the trace's char var; the quest alone sets no
+# Stage), the zoning flag. Tehf 539 (the flag); out of Whitegate and back: nothing reads Stage: Tehf 528 at once,
+# finished: completed.
+module modules/era/lua/quests/ahturhgan/got_it_all.lua
+lists AhtUrhganWhitegate/Tehf_Kimasnahya/onTrigger AhtUrhganWhitegate/onEventFinish/527 AhtUrhganWhitegate/onEventFinish/528
+char zone=AhtUrhganWhitegate pos=-89.897,0,6.199 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest AhtUrhgan.GotItAll accepted
+charvar Quest[6][3]Prog 6
+login
+trigger Tehf_Kimasnahya                 # Prog 6: 527
+finish                                  # the module's copy: Prog 7; Stage = JstMidnight(); needToZone
+trigger Tehf_Kimasnahya                 # the zoning flag: 539
+finish
+warp -64,-7,38 AlZahbi                  # the zoning flag cleared
+warp -89.897,0,6.199 AhtUrhganWhitegate
+trigger Tehf_Kimasnahya                 # Stage unread: 528 before JST midnight
+finish                                  # completed

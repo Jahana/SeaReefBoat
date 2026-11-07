@@ -1,0 +1,11 @@
+# Catch It If You Can (windurst 21), completion parity: 246's finish (option 0) while accepted is the Lua's raw
+# player:completeQuest (after needToZone, Mute and the gil, the var; then the fame), so a GM's Quest[2][21]Prog
+# survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) beside
+# Ohruru, under Mute (a GM).
+char zone=PortWindurst pos=-105.0,-4.25,92.7 job=WAR lvl=75
+quest Windurst.CatchItIfYouCan accepted
+login
+charvar Quest[2][21]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+effect 29                               # a GM: Mute
+trigger Ohruru                          # accepted, Mute: 246
+finish option=0                         # needToZone; Mute taken, 1000 gil; var 0; completed; fame 10; Prog kept

@@ -1,0 +1,20 @@
+# Orlando's Antiques (otherAreas 7): GIL_RATE 1.25, so the payout GIL_RATE x the price is a fraction: Rotten Meat 150 ->
+# 187.5, Teeth Sack 250 -> 312.5 (one rounds up to an even number, the other to an odd one). The trace shows the 102
+# parameter, ANTIQUE_PAYOUT (setCharVar of the fraction) and the gil (npcUtil.giveCurrency multiplies the var by
+# GIL_RATE again). Accepted (a GM), Windurst fame 50 and the Chocobo License. Quest[4][7]Prog 1 (GM) at the
+# completion, kept (the raw player:completeQuest).
+char zone=Mhaura pos=-36.5,-8.0,59.3 job=WAR lvl=20
+setting GIL_RATE 1.25
+fame Windurst 50
+keyitem ChocoboLicense
+quest OtherAreas.OrlandosAntiques accepted
+item PieceOfRottenMeat x8
+item 565 x8
+login
+charvar Quest[4][7]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Orlando PieceOfRottenMeat x8      # accepted: 102 (GIL_RATE x 150)
+finish                                  # the payout var x GIL_RATE in gil; completed
+trigger Orlando                         # 103
+finish                                  # OrlandoRepeat 1
+trade Orlando 565 x8                    # 102 (GIL_RATE x 250)
+finish

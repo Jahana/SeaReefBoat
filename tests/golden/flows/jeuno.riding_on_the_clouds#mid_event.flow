@@ -1,0 +1,25 @@
+# Riding on the Clouds (jeuno 131): each finish when its state no longer holds (a GM changes the state while the event
+# is open). A level 61 Warrior at level cap 65, MAX_LEVEL 99. 88 open, then a GM's cap 66: the finish (option 0) finds
+# no available state: nothing (the drawn vars are kept, not set to 0; the next 89 shows them). Accepted (a GM), the four
+# stones (a GM): 90 open, then the quest set available by a GM (`quest ... available`; a GM addQuest on a completed
+# quest would leave it completed): the finish finds no accepted state: nothing (not completed, the stones kept, cap 65).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/88 RuludeGardens/onEventFinish/90
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=61
+levelcap 65
+login
+trigger Maat                            # cap 65: the vars drawn; 88
+levelcap 66                             # a GM, while 88 is open
+finish option=0                         # no available state at the finish: nothing, the drawn vars kept
+levelcap 65                             # a GM
+quest Jeuno.RidingOnTheClouds accepted  # a GM
+trigger Maat                            # accepted, no stone: 89 with the vars drawn above (not 0)
+finish
+keyitem ScowlingStone                   # a GM: the four stones
+keyitem SmilingStone
+keyitem SomberStone
+keyitem SpiritedStone
+trigger Maat                            # 90
+quest Jeuno.RidingOnTheClouds available # a GM, while 90 is open
+finish                                  # no accepted state at the finish: nothing (not completed, the stones kept, cap 65)
+trigger Maat                            # available, cap 65: the vars drawn; 88
+finish option=0                         # the vars set to 0

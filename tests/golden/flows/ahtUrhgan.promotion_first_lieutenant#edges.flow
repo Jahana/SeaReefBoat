@@ -1,0 +1,94 @@
+# Promotion: First Lieutenant's edges: the else arms by GMs. Abquhbah's Event replies alternate with his script (the
+# lookup's UseFallback local var: after an Event reply the next talk is the script's 255). A level 1 Warrior accepted at
+# Prog 1 with Wait far ahead (Wait 99999): 5088 ([0] = 1); Prog 2: 255, then 5088; Prog 3 with Wait 1 (before today):
+# 255, then 5089 ([0] = 1; importantOnce, Default after it); Prog 4 at about 12:00 (no needToZone): outside the hours:
+# 255, then 5089 ([0] = 1). The hours by GMs: Prog 4 at about 14:00: 5089; Prog 3 finished at 14:00 and at 17:00:
+# nothing; Prog 4 at 17:00: 5089. bob (AssaultPromotion 24) and carl (Second Lieutenant accepted) in area 12:
+# nothing.
+lists AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/12
+char zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=27.5,-6,-120 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=27.5,-6,-120 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant completed
+quest AhtUrhgan.PromotionSecondLieutenant completed
+quest AhtUrhgan.PromotionFirstLieutenant accepted
+charvar Quest[6][98]Prog 1
+charvar Quest[6][98]Wait 99999
+bob: quest AhtUrhgan.PromotionPrivateFirstClass completed
+bob: quest AhtUrhgan.PromotionSuperiorPrivate completed
+bob: quest AhtUrhgan.PromotionLanceCorporal completed
+bob: quest AhtUrhgan.PromotionCorporal completed
+bob: quest AhtUrhgan.PromotionSergeant completed
+bob: quest AhtUrhgan.PromotionSergeantMajor completed
+bob: quest AhtUrhgan.PromotionChiefSergeant completed
+bob: quest AhtUrhgan.PromotionSecondLieutenant completed
+bob: charvar AssaultPromotion 24
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+carl: quest AhtUrhgan.PromotionSuperiorPrivate completed
+carl: quest AhtUrhgan.PromotionLanceCorporal completed
+carl: quest AhtUrhgan.PromotionCorporal completed
+carl: quest AhtUrhgan.PromotionSergeant completed
+carl: quest AhtUrhgan.PromotionSergeantMajor completed
+carl: quest AhtUrhgan.PromotionChiefSergeant completed
+carl: quest AhtUrhgan.PromotionSecondLieutenant accepted
+carl: charvar Quest[6][97]Prog 4
+carl: charvar AssaultPromotion 25
+login
+trigger Abquhbah                        # Prog 1, Wait > today: 5088 [0] = 1
+finish
+charvar Quest[6][98]Prog 2              # a GM
+trigger Abquhbah                        # the script's turn: 255
+finish
+trigger Abquhbah                        # Prog 2, Wait > today: 5088
+finish
+charvar Quest[6][98]Prog 3              # a GM
+charvar Quest[6][98]Wait 1              # a GM
+trigger Abquhbah                        # the script's turn: 255
+finish
+trigger Abquhbah                        # Prog 3, Wait before today: 5089 [0] = 1
+finish                                  # about 12:00: nothing
+charvar Quest[6][98]Prog 4              # a GM
+trigger Abquhbah                        # the script's turn: 255
+finish
+trigger Abquhbah                        # Prog 4 about 12:00: 5089 [0] = 1 (Default: the local var)
+finish
+wait vana=2                             # about 14:00
+trigger Abquhbah                        # the script's turn: 255
+finish
+trigger Abquhbah                        # Prog 4 at 14: not 15-16: 5089 [0] = 1
+finish
+charvar Quest[6][98]Prog 3              # a GM
+trigger Abquhbah                        # the script's turn: 255
+finish
+trigger Abquhbah                        # Prog 3: 5089 [0] = 1
+finish                                  # 14:00: not 15-16: nothing (still Prog 3)
+wait vana=3                             # about 17:00
+trigger Abquhbah                        # the script's turn: 255
+finish
+trigger Abquhbah                        # 5089 [0] = 1
+finish                                  # 17:00: not before 17: nothing
+charvar Quest[6][98]Prog 4              # a GM
+trigger Abquhbah                        # the script's turn: 255
+finish
+trigger Abquhbah                        # Prog 4 at 17: 5089 [0] = 1
+finish
+logout
+bob: login
+tick 1000
+tick 1000
+tick 1000
+bob: walk 27.5,-6,-125                  # area 12, AssaultPromotion 24: nothing
+bob: finish-if-event
+bob: logout
+carl: login
+tick 1000
+tick 1000
+tick 1000
+carl: walk 27.5,-6,-125                 # area 12, Second Lieutenant not completed: nothing
+carl: finish-if-event

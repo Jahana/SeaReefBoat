@@ -1,0 +1,35 @@
+# Return to the Depths at GM Progs, each operand of the handlers' compound tests on its own: Muckvix at Prog 4 with the
+# Providence Pot but no Letter from Magriffon and with the letter but no pot (nil, 15), at Prog 1 (nil); Magriffon at
+# Prog 2 without the Letter from Muckvix and at Prog 3 with it (nil: his script), 10000 gil at Prog 2 (nil); the Oldton
+# zone-in and Tarnotik at Prog 3 (nil); Ayame at Prog 5 (neither 0 nor 10: nil, 701).
+lists LowerJeuno/Muckvix/onTrigger Kazham/Magriffon/onTrigger Kazham/Magriffon/onTrade OldtonMovalpolos/onZoneIn/1 OldtonMovalpolos/Tarnotik/onTrigger Metalworks/Ayame/onTrigger
+char zone=LowerJeuno pos=-26.8,4.6,-135.6 lvl=75 gil=20000
+quest Bastok.ReturnToTheDepths accepted
+charvar Quest[1][78]Prog 4
+keyitem ProvidencePot
+login
+trigger Muckvix                      # Prog 4, the pot but no letter: nil, 15
+finish-if-event
+delkeyitem ProvidencePot
+keyitem LetterFromMagriffon
+trigger Muckvix                      # Prog 4, the letter but no pot: nil, 15
+finish-if-event
+charvar Quest[1][78]Prog 1
+trigger Muckvix                      # Prog 1: nil, 15
+finish-if-event
+charvar Quest[1][78]Prog 2
+warp 59,-12,-36 Kazham
+trigger Magriffon                    # Prog 2, no Letter from Muckvix: nil, his script
+finish-if-event
+trade Magriffon gil=10000            # Prog 2: nil
+charvar Quest[1][78]Prog 3
+keyitem LetterFromMuckvix
+trigger Magriffon                    # Prog 3, the Letter from Muckvix: nil, his script
+finish-if-event
+warp 160.9,12,-54.2 OldtonMovalpolos # Prog 3: no zone-in event
+trigger Tarnotik                     # Prog 3: nil, his script
+finish-if-event
+charvar Quest[1][78]Prog 5
+warp 133.9,-19,34.8 Metalworks
+trigger Ayame                        # Prog 5: nil, 701
+finish-if-event

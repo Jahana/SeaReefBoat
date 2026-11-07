@@ -1,0 +1,19 @@
+# Missionary Moblin (otherAreas 103): Koblakiq's reply kinds. Koblakiq has no script (no fallback turn); against Better
+# the Demon You Know's 25 (Better accepted at Prog 2: an Event at priority 101) a Progress reply plays and an Event
+# reply loses (as a Progress it would beat 25). Missionary available: 7 (Progress) beats 25. Accepted (a GM): 8
+# (Event) loses: 25. Completed with its mustZone (GMs; For the Birds' offer is off while it is set): 12 (Event) loses:
+# 25.
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/onEventFinish/7
+char zone=OldtonMovalpolos pos=-63.4,22.8,-117.5 job=WAR lvl=75
+quest OtherAreas.BetterTheDemonYouKnow accepted
+charvar Quest[4][105]Prog 2
+login
+trigger Koblakiq                        # available: 7 (Progress) beats Better's 25 (101): 7
+finish option=0                         # nothing
+quest OtherAreas.MissionaryMoblin accepted # a GM
+trigger Koblakiq                        # 8 (Event) loses to 25: 25
+finish
+quest OtherAreas.MissionaryMoblin completed # a GM
+charvar Quest[4][103]mustZone 11        # a GM
+trigger Koblakiq                        # 12 (Event) loses to 25: 25
+finish

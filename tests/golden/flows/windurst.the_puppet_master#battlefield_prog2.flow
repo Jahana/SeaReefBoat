@@ -1,0 +1,15 @@
+# The Puppet Master (windurst 81) at Prog 1: the battlefield won (battlefieldWin 577), then Prog set to 2 by GM before
+# its 32001 finishes: the quest's 32001 handler's Prog side (Prog 1 wanted): nothing (Prog stays 2). With
+# #battlefield_prog0 it brackets the == 1 test; the entry checks Prog 1 only at registration.
+lists CloisterOfTremors/EP_Entrance/onTrade CloisterOfTremors/onEventFinish/32001
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+quest Windurst.ThePuppetMaster accepted
+charvar Quest[2][81]Prog 1
+item EarthPendulum
+login
+trade EP_Entrance EarthPendulum x1             # the 32000 menu
+update 32000 option=17                         # index 1, arena 1: registered, entered
+finish                                         # in the arena
+kill GALGALIM                                  # arena 1's mob (the battlefield's mobIds are per arena): won, battlefieldWin 577; 32001 opens
+charvar Quest[2][81]Prog 2                     # GM
+finish                                         # 32001, battlefieldWin 577 but Prog 2: nothing

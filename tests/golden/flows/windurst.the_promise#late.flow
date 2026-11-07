@@ -1,0 +1,70 @@
+# The Promise (windurst 78): started late (Windurst rank 9). Wild Card completed by GM, level 5, In a Pickle accepted.
+# Fame 324 (level 4), rank 9: 535; fame 325: 532 (0, sticker): begun at Prog 0. Prog 0, rank 9: Kohlo-Lakolo 533 (0,
+# sticker); the brigade late: 528, 525, Pichichi 530 (rank 9), 527, Shanruru 529, 526. Rank 8 by GM, Prog 0: Pichichi
+# nil (his default 364), Shanruru 529 (Prog 0), Gomada-Vulmada 528 (late: Prog 0). Prog 1 by GM, rank 9: Kohlo-Lakolo
+# 543 (0, sticker); Gomada-Vulmada 528 (late: rank 9); Pichichi 530; Shanruru 529 (rank 9). Chamama 2 by GM (Windurst
+# Waters): 798 (Chamama > 0); Shoalweed traded: nil (not 1). The sticker by GM, Prog 1, rank 9: 542 with a full bag
+# (the badge does not fit: the completion fails, nothing), then 542: completed.
+# The Star Onion quests 1-5 completed by GM (an available one's line would otherwise answer at Kohlo-Lakolo first).
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Gomada-Vulmada/onTrigger PortWindurst/Papo-Hopo/onTrigger PortWindurst/Pichichi/onTrigger PortWindurst/Pyo_Nzon/onTrigger PortWindurst/Shanruru/onTrigger PortWindurst/Yafa_Yaa/onTrigger WindurstWaters/Chamama/onTrigger WindurstWaters/Chamama/onTrade PortWindurst/onEventFinish/532 PortWindurst/onEventFinish/542
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+rank 9
+fame Windurst 324
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.OnionRings completed
+quest Windurst.CryingOverOnions completed
+quest Windurst.WildCard completed
+quest Windurst.InAPickle accepted
+item Shoalweed
+login
+trigger Kohlo-Lakolo                           # fame level 4, rank 9: 535
+finish
+fame Windurst 325
+trigger Kohlo-Lakolo                           # rank 9: 532 (0, sticker)
+finish                                         # begun; Prog 0
+trigger Kohlo-Lakolo                           # no sticker, Prog 0: 533 (0, sticker)
+finish
+trigger Gomada-Vulmada                         # late: 528
+finish
+trigger Papo-Hopo                              # 525
+finish
+trigger Pichichi                               # Prog 0, rank 9: 530
+finish
+trigger Pyo_Nzon                               # 527
+finish
+trigger Shanruru                               # Prog 0: 529
+finish
+trigger Yafa_Yaa                               # 526
+finish
+rank 8                                         # GM
+trigger Pichichi                               # Prog 0, rank 8: nil; his default 364
+finish
+trigger Shanruru                               # Prog 0, rank 8: 529
+finish
+trigger Gomada-Vulmada                         # Prog 0, rank 8: late: 528
+finish
+rank 9                                         # GM
+charvar Quest[2][78]Prog 1                     # GM
+trigger Kohlo-Lakolo                           # no sticker, Prog 1, rank 9: 543 (0, sticker)
+finish
+trigger Gomada-Vulmada                         # Prog 1, rank 9: late: 528
+finish
+trigger Pichichi                               # 530
+finish
+trigger Shanruru                               # Prog 1, rank 9: 529
+finish
+warp -68.7,-3.8,-4.4 WindurstWaters
+charvar Quest[2][78]Chamama 2                  # GM
+trigger Chamama                                # no sticker, Chamama 2: 798
+finish
+trade Chamama Shoalweed x1                     # Chamama 2: nil (her script: nothing)
+keyitem InvisibleManSticker                    # GM
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Kohlo-Lakolo                           # the sticker, Prog 1, rank 9: 542 (0, sticker)
+fill-inventory
+finish                                         # the badge does not fit: complete fails: nothing
+free-inventory
+trigger Kohlo-Lakolo                           # 542
+finish                                         # completed: fame 60, the badge; the sticker taken; SOBfinalEvent 1

@@ -1,0 +1,20 @@
+# Transporting (adoulin 82), the kind at Kongramm: a level 99 Warrior in Western Adoulin, SoA current
+# A Curse from the Past (39, a GM: Kongramm's script plays 148), the quest accepted (a GM). Kongramm at Prog 0: 2592,
+# finished: Prog 1; Prog 0 again (a GM): 2592 again (a progressEvent: his script would take an Event's second turn).
+# Prog 1, no quest action: his default 558 (the handler's turn), his script's 148 (SOA_ACFTP_Kongramm 1), default 558.
+lists WesternAdoulin/Kongramm/onTrigger WesternAdoulin/onEventFinish/2592
+char zone=WesternAdoulin pos=62.5,32,138 job=WAR lvl=99
+mission Soa ACurseFromThePast current
+quest Adoulin.Transporting accepted
+login
+trigger Kongramm                        # Prog 0: 2592
+finish                                  # Prog 1
+charvar Quest[9][82]Prog 0              # a GM
+trigger Kongramm                        # Prog 0: 2592 again (not his script's 148)
+finish                                  # Prog 1
+trigger Kongramm                        # Prog 1, no quest action: default 558
+finish-if-event
+trigger Kongramm                        # his script's turn: 148
+finish-if-event
+trigger Kongramm                        # default 558
+finish-if-event

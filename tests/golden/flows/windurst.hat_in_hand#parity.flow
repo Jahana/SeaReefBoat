@@ -1,0 +1,13 @@
+# Hat in Hand (windurst 0), completion parity: 52's finish is npcUtil.completeQuest step for step (tier 5: the
+# Windshear Hat, fame 10 Windurst, 500 gil, the two show-off vars), ending in the raw player:completeQuest, so a GM's
+# Quest[2][0]Prog survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it).
+# Accepted (GM) with the New Model Hat and the show-off count 8, beside Baren-Moren.
+char zone=WindurstWaters pos=-65.0,-2.9,-145.7 job=WAR lvl=75
+quest Windurst.HatInHand accepted
+keyitem NewModelHat
+charvar QuestHatInHand_var 255
+charvar QuestHatInHand_count 8
+login
+charvar Quest[2][0]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Baren-Moren                     # the hat, count 8: 52 (80), tier 5
+finish option=1                         # the hat, fame 10, 500 gil, the vars 0, completed; the KI taken; Prog kept

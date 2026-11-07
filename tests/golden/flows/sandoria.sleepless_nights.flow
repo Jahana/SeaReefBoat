@@ -1,0 +1,26 @@
+# Sleepless Nights (sandoria 80): Paouala in Southern San d'Oria. The guard (fame level 2): a trade while available
+# (nothing), fame level 1 (her default 82), the offer 85 declined (option 0: nothing) and taken (option 1), the accepted
+# 83, a wrong trade (nil), 84 for the Jug of Mary's Milk (completed: fame +20, 5000 gil, Sheep's Milk Deliverer; the jug
+# taken), the completed 81 (replaceDefault) and a trade then (nothing). Paouala has no script; no other quest names her.
+lists SouthernSanDoria/Paouala/onTrigger SouthernSanDoria/Paouala/onTrade SouthernSanDoria/onEventFinish/85 SouthernSanDoria/onEventFinish/84
+char zone=SouthernSanDoria pos=158.6,-6.75,18.9
+fame Sandoria 49
+item JugOfMarysMilk
+item BoneChip
+login
+trade Paouala JugOfMarysMilk x1           # available: no trade handler, nothing
+trigger Paouala                           # fame level 1: her default 82
+finish
+fame Sandoria 50
+trigger Paouala                           # fame level 2: 85
+finish                                    # option 0: nothing
+trigger Paouala                           # 85
+finish option=1                           # option 1: begun
+trigger Paouala                           # accepted: 83
+finish
+trade Paouala BoneChip x1                 # not the milk: nil
+trade Paouala JugOfMarysMilk x1           # the milk: 84
+finish                                    # completed: fame +20, 5000 gil, Sheep's Milk Deliverer, the jug taken
+trigger Paouala                           # completed: 81 (replaceDefault)
+finish
+trade Paouala BoneChip x1                 # completed: no trade handler, nothing

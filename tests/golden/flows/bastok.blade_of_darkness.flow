@@ -1,0 +1,34 @@
+# Blade of Darkness (bastok 28): Gumbah in Bastok Mines, the Zeruhn Mines zone-in from Palborough Mines, the Beadeaux
+# zone-in from Pashhow Marshlands. The guard (main level ADVANCED_JOB_LEVEL 30), the offer 99, the Zeruhn zone-in 130 at
+# Prog 0 (Chaosbringer given, Prog 1), the Zeruhn zone-in with the sword held (nil: the zone's own 150), the Beadeaux
+# zone-in with ChaosbringerKills 99 (nil) and 100 (121: completed, KI Job Gesture: Dark Knight, Dark Sider, fame +20, Dark
+# Knight unlocked, YOU_CAN_NOW_BECOME_A_DARK_KNIGHT). ChaosbringerKills is set by GM: scripts/items/chaosbringer.lua counts
+# it (a status read of this quest; it stays as it is). Palborough and Zeruhn have no zone line between them: the warp
+# from Palborough leaves prevZone at Palborough Mines, as the in-game lift does.
+# Defaults: Gumbah 52 (DefaultActions). Gumbah's other quests and missions (Inheritance, Blade of Death, Bastok 7-2 / 8-2)
+# need what this char lacks (a WAR 30 without Great Sword skill, Blade of Darkness not completed).
+lists BastokMines/Gumbah/onTrigger BastokMines/Gumbah/onTrade BastokMines/onEventFinish/99 ZeruhnMines/onZoneIn/1 ZeruhnMines/onEventFinish/130 ZeruhnMines/onEventFinish/131 Beadeaux/onZoneIn/1 Beadeaux/onEventFinish/121
+char zone=BastokMines pos=53.5,0,-35.6 lvl=30
+item BoneChip
+login
+trade Gumbah BoneChip x1             # available: no trade handler, nothing
+trigger Gumbah                       # level 30: the offer, 99
+finish                               # accepted
+trigger Gumbah                       # accepted: no handler, 52
+finish-if-event
+warp 1,0,3 ZeruhnMines               # from Bastok Mines, Prog 0: nil
+warp 250.037,-32.069,174.156 PalboroughMines
+warp 1,0,3 ZeruhnMines               # from Palborough, Prog 0: 130 (over the zone's 150), option 0: Chaosbringer, Prog 1
+warp 250.037,-32.069,174.156 PalboroughMines
+warp 1,0,3 ZeruhnMines               # from Palborough, Prog 1, the sword held: nil; the zone's own 150
+warp 580,21,-377 PashhowMarshlands
+zoneline Beadeaux                    # ChaosbringerKills 0: nil
+zoneline PashhowMarshlands
+charvar ChaosbringerKills 99
+zoneline Beadeaux                    # 99: nil
+charvar ChaosbringerKills 100
+zoneline QulunDome
+zoneline Beadeaux                    # 100, but from Qulun Dome: nil
+zoneline PashhowMarshlands
+zoneline Beadeaux                    # 100 from Pashhow: 121, option 0: completed, Dark Knight unlocked, the message
+rezone                               # completed (prevZone still Pashhow: a rezone keeps it): no section, nil

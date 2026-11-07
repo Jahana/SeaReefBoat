@@ -1,0 +1,46 @@
+# Axe the Competition (jeuno 59): the kind of each of Brutus's replies to a talk, against his script. Brutus has a
+# script, so the lookup alternates an event-priority quest reply with it (UseFallback: an event sets it, his script's
+# turn clears it), while a progressEvent plays whatever it holds. Here his script answers: Wings of Gold completed (a
+# GM, before login), Scattered into Shadow not: 134. Wings of Gold's own completed reply, 134 (replaceDefault), loses
+# to every reply of this quest. A level 75 Warrior with Axe 2400 and the Pick of Trials (0 points); Chocobo's Wounds
+# and Save My Son completed, Path of the Beastmaster accepted (no accepted section), Chocobo on the Loose completed
+# (no completed section) keep the others silent.
+# The quest accepted with the guide (a GM): 15 (1) (the event sets UseFallback); again: his script's 134; the map (a
+# GM): 16; again: his script's 134; 16; the Annals (a GM): 17 over UseFallback: completed. Completed: Wings of Gold's
+# 134 (the quest's, UseFallback 0; it sets UseFallback); the quest set available (a GM): his script's 134 (a
+# progressEvent 12 would play); 12 (oncePerZone), option 0; again: priority Ignore, his script's 134.
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/onEventFinish/12 UpperJeuno/onEventFinish/15 UpperJeuno/onEventFinish/17
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=75
+skill Axe 2400
+item PickOfTrials
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster accepted
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.AxeTheCompetition accepted
+keyitem WeaponTrainingGuide
+login
+trigger Brutus                          # accepted, the pick held: 15 (1) (UseFallback 0: the quest's; then 1)
+finish option=0                         # nothing
+trigger Brutus                          # UseFallback 1: his script's 134 (a progressEvent 15 would play); then 0
+finish
+keyitem MapToTheAnnalsOfTruth           # a GM
+trigger Brutus                          # the map: 16 (UseFallback 0; then 1)
+finish
+trigger Brutus                          # his script's 134 (a progressEvent 16 would play)
+finish
+trigger Brutus                          # 16 (then UseFallback 1)
+finish
+keyitem AnnalsOfTruth                   # a GM
+trigger Brutus                          # the Annals: 17, a progressEvent over UseFallback 1 (an event would give his script's 134)
+finish                                  # completed: fame +7 x3, the three key items deleted, Decimation learned
+trigger Brutus                          # completed: Wings of Gold's 134 (replaceDefault), UseFallback 0: the quest's; then 1
+finish
+quest Jeuno.AxeTheCompetition available # a GM
+trigger Brutus                          # available, UseFallback 1: his script's 134 (a progressEvent 12 would play)
+finish
+trigger Brutus                          # 12 (oncePerZone; then UseFallback 1)
+finish option=0                         # nothing
+trigger Brutus                          # 12 played: priority Ignore; UseFallback 1: his script's 134
+finish

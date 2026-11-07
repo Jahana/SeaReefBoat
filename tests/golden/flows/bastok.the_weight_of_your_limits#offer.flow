@@ -1,0 +1,19 @@
+# The Weight of Your Limits (bastok 66): the offer without the axe. GreatAxe 2400: 790 (once per zone); its finish with a full
+# inventory (no axe: giveItem false, not begun); a second talk in the zone falls to the default 604 (oncePerZone:
+# priority Ignore); after a rezone 790 again and begun (the axe and the guide); then 791 with the axe held (hide 1)
+# and its option 1 (the axe held: nothing).
+lists Metalworks/Iron_Eater/onTrigger Metalworks/onEventFinish/790 Metalworks/onEventFinish/791
+char zone=Metalworks pos=92,-19.6,2 job=WAR lvl=75
+skill GreatAxe 2400
+login
+trigger Iron_Eater                    # 790 (oncePerZone)
+fill-inventory
+finish                         # no axe, the inventory full: giveItem false, not begun
+free-inventory
+trigger Iron_Eater                    # 790 already played in this zone: priority Ignore, the default 604
+finish
+rezone
+trigger Iron_Eater                    # after the rezone: 790 again
+finish                         # the axe (0 points) and the Weapon Training Guide: accepted
+trigger Iron_Eater                    # the axe held: 791 with hide 1
+finish option=1                # option 1, the axe held: nothing

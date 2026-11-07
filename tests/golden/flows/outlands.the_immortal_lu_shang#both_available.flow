@@ -1,0 +1,17 @@
+# Both Irmilant quests available at once with the rod and the Serpent Rumors in hand: The Immortal Lu Shang is checked first
+# (77 before 131), Indomitable Spirit after it. Both then run on from the same NPC script.
+char zone=Rabao pos=3.78,9.54,56.21
+item BrokenLuShangsFishingRod
+item SaberShoot
+item SpoolOfOpalSilk
+keyitem SerpentRumors
+login
+trigger Irmilant                # both offers: 77 wins
+finish                          # Lu Shang accepted
+trigger Irmilant                # Lu Shang no longer offers: 131
+finish                          # Indomitable Spirit accepted
+trade Irmilant SaberShoot x1 SpoolOfOpalSilk x1   # past Lu Shang's trade check: 132
+finish                          # the timer set
+wait jst=8
+trigger Irmilant                # 134
+finish                          # completed

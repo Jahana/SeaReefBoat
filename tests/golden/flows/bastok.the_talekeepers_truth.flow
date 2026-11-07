@@ -1,0 +1,53 @@
+# The Talekeeper's Truth (bastok 55, WAR AF2): Phara and Deidogg in Bastok Mines, the ??? (qm_talekeeper) in Palborough
+# Mines. The guard (The Doorman completed, main job WAR, main level AF2_QUEST_LEVEL 50); while available, Phara's 154
+# (Prog 0 to 1; again at Prog 1 it changes nothing), Deidogg's 160 (Prog 2) and 161 (Prog 0 and accepted); then the ???
+# pops Ni'Ghu Nestfender at Prog 0 (hide 0: it stays), the Mottled Quadav Egg (162, Prog 1), event 163 at Prog 1, the
+# Parasite Skin (164, Prog 2, Timer = tomorrow), 166 before the Timer and 165 after it: the reward, The Talekeeper's
+# Gift's Timer (tomorrow) and its mustZone. After it, Deidogg's 166 replaceDefault. Defaults: Phara 150, Deidogg 32,
+# the ??? NOTHING_OUT_OF_ORDINARY. The Talekeeper's Gift also names Deidogg; it needs this quest completed.
+lists BastokMines/Phara/onTrigger BastokMines/Deidogg/onTrigger BastokMines/Deidogg/onTrade BastokMines/onEventFinish/154 BastokMines/onEventFinish/160 BastokMines/onEventFinish/161 BastokMines/onEventFinish/162 BastokMines/onEventFinish/164 BastokMines/onEventFinish/165 PalboroughMines/qm_talekeeper/onTrigger
+char zone=BastokMines pos=75,0,-80 job=WAR lvl=50
+quest Bastok.TheDoorman completed
+item BoneChip
+item MottledQuadavEgg x2
+item ParasiteSkin
+login
+trade Phara BoneChip x1         # available: no trade handler, nothing
+trigger Deidogg                 # available, Prog 0: nil, his default 32
+finish
+trade Deidogg MottledQuadavEgg x1   # available: no trade handler in section 1, nothing
+trigger Phara                   # The Doorman completed, WAR 50: 154
+finish                          # Prog 0: Prog 1
+trigger Phara                   # 154 again
+finish                          # Prog 1: nothing
+trigger Deidogg                 # Prog 1: 160
+finish                          # Prog 2
+trigger Deidogg                 # Prog 2: 161
+finish                          # Prog 0, accepted
+trigger Deidogg                 # accepted, Prog 0: nil, 32
+finish
+trade Deidogg ParasiteSkin x1   # Prog 0, the skin: nil
+trigger Phara                   # accepted: no Phara handler; The Doorman completed, so 150
+finish
+warp 15,-31,-94 PalboroughMines
+trigger qm_talekeeper           # Prog 0: Ni'Ghu Nestfender pops (claimed, the ??? stays), SENSE_OF_FOREBODING
+trigger qm_talekeeper           # Ni'Ghu up: the pop fails, nil: NOTHING_OUT_OF_ORDINARY
+kill NI_GHU_NESTFENDER          # no handler
+warp 75,0,-80 BastokMines
+trigger Deidogg                 # walk to him
+finish
+trade Deidogg MottledQuadavEgg x1   # Prog 0, the egg: 162
+finish                          # the egg taken, Prog 1
+trade Deidogg MottledQuadavEgg x1   # Prog 1, the egg: nil
+trigger Deidogg                 # Prog 1: event 163
+finish
+trade Deidogg ParasiteSkin x1   # Prog 1, the skin: 164
+finish                          # the skin taken, Prog 2, Timer = today + 1
+trigger Deidogg                 # Prog 2, the Timer not reached: event 166
+finish
+wait vana=24
+trigger Deidogg                 # Prog 2, the Timer reached: 165
+finish                          # completed: Fighter's Calligae, Bastok fame +20, The Talekeeper's Gift's Timer and mustZone
+trigger Deidogg                 # completed: 166 replaceDefault (The Talekeeper's Gift: its mustZone set)
+finish
+trade Deidogg BoneChip x1       # completed: no trade handler, nothing

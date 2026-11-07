@@ -1,0 +1,22 @@
+# Searching for the Right Words (jeuno 66): the mustZone the Vigil's reward sets. Rubbish Day and Never to Return
+# completed, fame level 6, the Vigil accepted with the Holy Candle, and Prog 1 set by a GM (as if Kurou-Morou's 17 were
+# done) so that Ilumida shows the offer: 194 completes the Vigil (mustZone set); Ilumida then has no section (189);
+# after a zone change she offers 197 (option 1: begun, Prog 3).
+lists UpperJeuno/Ilumida/onTrigger UpperJeuno/onEventFinish/194 UpperJeuno/onEventFinish/197
+char zone=UpperJeuno pos=-73.5,-1.2,57.3 job=WAR lvl=30
+quest Jeuno.ACandlelightVigil accepted
+quest Jeuno.RubbishDay completed
+quest Jeuno.NeverToReturn completed
+fame Sandoria 284
+fame Bastok 283
+fame Windurst 283
+keyitem HolyCandle
+charvar Quest[3][66]Prog 1
+login
+trigger Ilumida                         # the Vigil's 194
+finish                                  # the Vigil completed; Searching for the Right Words' mustZone
+trigger Ilumida                         # mustZone: no section; default 189
+finish
+rezone                                  # the zone change clears mustZone
+trigger Ilumida                         # Prog 1: 197
+finish option=1                         # begun, Prog 3

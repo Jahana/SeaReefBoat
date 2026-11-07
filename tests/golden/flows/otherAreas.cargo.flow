@@ -1,0 +1,45 @@
+# Cargo (otherAreas 20): Vuntar (Selbina; no DefaultActions entry, no other quest: his script calls the quest whole). A
+# WAR 20. GetSystemTime() is the harness's 1800000000; `wait jst=1` moves it by a day. Available: a berry traded:
+# nothing; 50 (4365): begun (no option read). Accepted: 51. VuntarCanBuyItem_date 1800000000 (a GM; the time not past
+# it): the 881 berry: 1134 (4365). The date 1799999999 (a GM): a cabbage: nothing; the 881 and 874 berries and the
+# cabbage: 52 (1) (the 881 arm first), option 1: the date = JstMidnight(), completed, San d'Oria and Bastok fame +15,
+# 800 gil, only the 881 berry taken (npcUtil.tradeHas confirms it alone; the 874 and the cabbage kept);
+# Quest[4][20]Prog 1 (GM) kept (the raw player:completeQuest). The 874 berry
+# before the date: 1134. Past the JST midnight: the 874 and 864 berries: 52 (2), option 2: the date, 2000 gil
+# (completed: no completion), only the 874 taken. Past it again: the 864 berry: 52 (3), option 0: the date only, the
+# berry kept; then 1134. Past it again: the 864 berry and the cabbage: 52 (3), option 3: 3000 gil, only the berry taken.
+# Completed: 51.
+char zone=Selbina pos=6.0,-2.7,-11.5 job=WAR lvl=20
+item Rolanberry881Ce x1
+item Rolanberry874Ce x1
+item Rolanberry864Ce x1
+item LaTheineCabbage x1
+login
+trade Vuntar Rolanberry881Ce x1         # available: nothing
+trigger Vuntar                          # level 20, available: 50 (4365)
+finish                                  # begun
+trigger Vuntar                          # 51 (4365)
+finish
+charvar VuntarCanBuyItem_date 1800000000  # a GM: the date is now (not past)
+trade Vuntar Rolanberry881Ce x1         # 1134 (4365)
+finish
+charvar VuntarCanBuyItem_date 1799999999  # a GM: a second before now
+trade Vuntar LaTheineCabbage x1         # past, no berry: nothing
+charvar Quest[4][20]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Vuntar Rolanberry881Ce x1 Rolanberry874Ce x1 LaTheineCabbage x1  # 52 (1): the 881 arm first
+finish option=1                         # the date; completed; fame +15 x2; 800 gil; only the 881 berry taken
+trade Vuntar Rolanberry874Ce x1         # the date not past: 1134 (4365)
+finish
+wait jst=1                              # past the date
+trade Vuntar Rolanberry874Ce x1 Rolanberry864Ce x1  # 52 (2): the 874 arm before the 864
+finish option=2                         # the date; completed already: no completion; 2000 gil; only the 874 taken
+wait jst=1
+trade Vuntar Rolanberry864Ce x1         # 52 (3)
+finish option=0                         # the date only; the berry kept
+trade Vuntar Rolanberry864Ce x1         # 1134
+finish
+wait jst=1
+trade Vuntar Rolanberry864Ce x1 LaTheineCabbage x1  # 52 (3)
+finish option=3                         # the date; 3000 gil; only the berry taken (the cabbage kept)
+trigger Vuntar                          # completed: 51
+finish

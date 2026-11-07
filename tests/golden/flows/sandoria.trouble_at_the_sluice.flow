@@ -1,0 +1,54 @@
+# Trouble at the Sluice (sandoria 68): Belgidiveau in Northern San d'Oria, Novalmauge in Bostaunieux Oubliette. Check 1's
+# operands one at a time: The Rumor not completed at fame 124 (level 2), then at fame 125 (level 3): Belgidiveau's
+# default 585 both times; The Rumor completed by GM at fame 124: 585; fame 125: 57 with option 1 (nothing: option 0
+# accepts), a trade while offered (nothing), 57 with option 0 (begun); Prog 0: his 55; Novalmauge's 15 (Prog 1); Prog 1:
+# his 16, Belgidiveau's 55; the trades (a bone chip: nil; a Dahlia with a bone chip: npcUtil.tradeHas, not exact: 17, the
+# Neutralizer, the Dahlia taken and the chip returned); Novalmauge then (no Sluice handler: The Rumor's 14); Belgidiveau's
+# 56 (completed: Heavy Axe, fame +30, the Neutralizer deleted); then his default 585. Belgidiveau has no script; his
+# default is 585. Novalmauge's script starts nothing (no Holy Crest vars), so his quest replies always play; The Rumor's
+# completed 14 (replaceDefault, priority 20) loses to this quest's 15 (Progress) and 16 (Event). He walks a patrol path:
+# every trade follows a talk. The other sides: #inventory_full, #gm (GM-set states).
+lists NorthernSanDoria/Belgidiveau/onTrigger NorthernSanDoria/onEventFinish/57 NorthernSanDoria/onEventFinish/56 BostaunieuxOubliette/Novalmauge/onTrigger BostaunieuxOubliette/Novalmauge/onTrade BostaunieuxOubliette/onEventFinish/15 BostaunieuxOubliette/onEventFinish/17
+char zone=NorthernSanDoria pos=-96.2,-0.2,69.3 job=WAR lvl=10
+fame Sandoria 124
+item BoneChip
+item Dahlia
+login
+trigger Belgidiveau                       # The Rumor not completed, fame level 2: not offered; his default 585
+finish
+fame Sandoria 125
+trigger Belgidiveau                       # fame level 3 but The Rumor not completed (the Rumor operand): 585
+finish
+quest Sandoria.TheRumor completed
+fame Sandoria 124
+trigger Belgidiveau                       # The Rumor completed, fame level 2 (the fame operand): 585
+finish
+fame Sandoria 125
+trigger Belgidiveau                       # fame level 3: 57
+finish option=1                           # option 1: nothing
+trade Belgidiveau BoneChip x1             # available, offered: no trade handler (no script): nothing
+trigger Belgidiveau                       # 57
+finish                                    # option 0: begun
+trigger Belgidiveau                       # accepted, Prog 0, no Neutralizer: 55
+finish
+warp 32.4,-24,19.8 BostaunieuxOubliette
+trigger Novalmauge                        # Prog 0: 15
+finish                                    # Prog 1
+trigger Novalmauge                        # Prog 1: 16
+finish
+warp -96.2,-0.2,69.3 NorthernSanDoria
+trigger Belgidiveau                       # Prog 1, no Neutralizer: 55
+finish
+warp 32.4,-24,19.8 BostaunieuxOubliette
+trigger Novalmauge                        # walks to him: 16
+finish
+trade Novalmauge BoneChip x1              # no Dahlia: nil, nothing
+trade Novalmauge Dahlia x1 BoneChip x1    # holds a Dahlia (tradeHas is not exact): 17
+finish                                    # the Neutralizer (KEYITEM_OBTAINED); confirmTrade takes the Dahlia, the chip returned
+trigger Novalmauge                        # the Neutralizer: no Sluice handler for him; The Rumor's 14
+finish
+warp -96.2,-0.2,69.3 NorthernSanDoria
+trigger Belgidiveau                       # the Neutralizer: 56
+finish                                    # completed: Heavy Axe, fame +30; the Neutralizer deleted
+trigger Belgidiveau                       # completed: no section; his default 585
+finish

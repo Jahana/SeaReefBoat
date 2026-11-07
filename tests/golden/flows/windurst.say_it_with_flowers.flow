@@ -1,0 +1,79 @@
+# Say it with Flowers (windurst 50): Moari-Kaaori, Ohbiru-Dohbiru and Kenapa-Keppa in Windurst Waters, the Tahrongi
+# Cacti. Food for Thought and Overnight Delivery completed by GM, so neither offers at Kenapa or Ohbiru; Overnight
+# Delivery's completed lines (Kenapa 349 / 350 at random, Ohbiru 351; replaceDefault) answer when this quest returns
+# nil. The guard (fame level 2), the second section on a GM Prog 1 while available at fame 49 (any status: 515), the
+# offer 514 (options 0 and 2: nothing; option 1: begun, Prog 1, SIWFSword 1), Moari's 515, trades that are neither the
+# cactus nor exactly one flower, Ohbiru's 516 asked about the cactus (option 7: Option 1), then 517 and Kenapa's 519,
+# two cacti (BUD_BREAKS_OFF), the first cactus traded with a bone chip (tradeHas: 520: Iron Sword, completed, fame +10,
+# the cactus taken, mustZone, Stage 1, SIWFSword 0), 521, the restart 685 (Prog 1), the second cactus (525, 400:
+# completed, +400 gil), 685 again, a Carnation (522: completed, +100 gil, the vars cleared), the restart 523, and 515
+# while completed with Prog 1.
+# Trades while available: at fame 49 (the guard false) and at fame 50 with Prog 0 (the guard met): no handler either way.
+# A zone change clears a mustZone only into another zone (player.lua), so the flow zones out to Tahrongi Canyon.
+# Defaults: Moari-Kaaori has no script and no DefaultActions entry (a talk outside the quest shows nothing); the Cacti
+# POISONOUS_LOOKING_BUDS. No other quest or mission names Moari or the Cacti; Food for Thought reads this quest's Option
+# and Prog vars (completed here, so it never asks).
+lists WindurstWaters/Moari-Kaaori/onTrigger WindurstWaters/Moari-Kaaori/onTrade WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/Kenapa-Keppa/onTrigger TahrongiCanyon/Tahrongi_Cacti/onTrigger WindurstWaters/onEventFinish/514 WindurstWaters/onEventFinish/516 WindurstWaters/onEventFinish/520 WindurstWaters/onEventFinish/522 WindurstWaters/onEventFinish/523 WindurstWaters/onEventFinish/525 WindurstWaters/onEventFinish/685
+char zone=WindurstWaters pos=-251.5,-5.31,-226.9
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+fame Windurst 49
+item Carnation x3
+item BoneChip
+login
+trade Moari-Kaaori Carnation x1         # available: no trade handler, nothing
+trigger Moari-Kaaori                    # fame 49 (level 1): not met; no default, nothing
+finish-if-event
+charvar Quest[2][50]Prog 1              # a GM sets Prog 1 while available
+trigger Moari-Kaaori                    # the second section (Prog 1, any status): event 515
+finish
+charvar Quest[2][50]Prog 0
+fame Windurst 50
+trade Moari-Kaaori Carnation x1         # available, the guard met (fame 50, Prog 0): no trade handler, nothing
+trigger Moari-Kaaori                    # 514
+finish option=0                         # not 1: nothing
+trigger Moari-Kaaori                    # 514 again
+finish option=2                         # not 1: nothing
+trigger Moari-Kaaori                    # 514 again
+finish option=1                         # SIWFSword 1, begun, Prog 1
+trigger Moari-Kaaori                    # Prog 1: event 515
+finish
+trade Moari-Kaaori BoneChip x1          # neither the cactus nor a flower: nil
+trade Moari-Kaaori Carnation x2         # two flowers: not exactly one, nil
+trade Moari-Kaaori Carnation x1 BoneChip x1  # a flower and a chip: not exactly one flower, nil
+trigger Kenapa-Keppa                    # Option 0: nil; Overnight Delivery's 349 or 350 (replaceDefault: the handler's turn)
+finish
+trigger Ohbiru-Dohbiru                  # Option 0, no mustZone: event 516 ([4] = Tahrongi Cactus)
+finish option=7                         # Option 1
+trigger Ohbiru-Dohbiru                  # Option 1: event 517
+finish
+trigger Kenapa-Keppa                    # Option 1: 519 is Event priority and his script exists: the lookup alternates, and the last talk was the handler's, so his script answers (302 or 303)
+finish
+trigger Kenapa-Keppa                    # now the handler's turn: event 519
+finish
+warp -307.2,7.48,264.45 TahrongiCanyon
+trigger Tahrongi_Cacti                  # Prog 1: a Tahrongi Cactus (silent); BUD_BREAKS_OFF
+trigger Tahrongi_Cacti                  # a second cactus
+warp -251.5,-5.31,-226.9 WindurstWaters
+trade Moari-Kaaori TahrongiCactus x1 BoneChip x1  # tradeHas (not exact): the cactus, SIWFSword 1: 520
+finish                                  # Iron Sword; completed (Cupid's Florist); the cactus taken, the chip kept; fame +10; mustZone; Stage 1; SIWFSword 0
+trigger Moari-Kaaori                    # completed, Prog 0, mustZone: event 521
+finish
+warp -307.2,7.48,264.45 TahrongiCanyon  # another zone: the mustZone cleared
+warp -251.5,-5.31,-226.9 WindurstWaters
+trigger Moari-Kaaori                    # Stage 1: 685 (0, Tahrongi Cactus)
+finish                                  # Prog 1
+trade Moari-Kaaori TahrongiCactus x1    # Prog 1, SIWFSword 0: 525 (400)
+finish                                  # completed again; the cactus taken; fame +10; +400 gil; mustZone; Stage 1
+warp -307.2,7.48,264.45 TahrongiCanyon
+warp -251.5,-5.31,-226.9 WindurstWaters
+trigger Moari-Kaaori                    # Stage 1: 685
+finish                                  # Prog 1
+trade Moari-Kaaori Carnation x1         # exactly one flower: 522
+finish                                  # completed again (the vars cleared: Stage 0); fame +10; +100 gil; mustZone
+warp -307.2,7.48,264.45 TahrongiCanyon
+warp -251.5,-5.31,-226.9 WindurstWaters
+trigger Moari-Kaaori                    # completed, Prog 0, Stage 0: 523
+finish                                  # Prog 1
+trigger Moari-Kaaori                    # completed with Prog 1: the second section's 515
+finish

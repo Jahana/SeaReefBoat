@@ -1,0 +1,13 @@
+# probe (quest rework P8): currency <name> <n>, a GM's player:addCurrency(name, n). Dances with Luopans (adoulin 118,
+# still Lua): Sylvie (Western Adoulin) sells the Matre Bell after the quest: 37, whose update on option 2 checks
+# player:getCurrency('bayld') >= 150000 (param 1, payment 2), and whose finish on option 1 then gives the bell and takes
+# the bayld (delCurrency). Completed (a GM), a level 99 Geomancer with little gil: 150000 bayld by the step, then 37,
+# update 2: param 1; finished on 1: the bell, the bayld taken.
+lists WesternAdoulin/Sylvie/onTrigger WesternAdoulin/onEventUpdate/37 WesternAdoulin/onEventFinish/37
+char zone=WesternAdoulin pos=79.594,32,135.725 job=GEO lvl=99 gil=100
+quest Adoulin.DancesWithLuopans completed
+login
+currency bayld 150000                   # a GM: 150000 bayld
+trigger Sylvie                          # completed, a Geomancer, no bell: 37
+update 37 option=2                      # 150000 bayld: param 1, payment 2
+finish option=1                         # the Matre Bell; 150000 bayld taken

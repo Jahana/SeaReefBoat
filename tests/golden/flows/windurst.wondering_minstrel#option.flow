@@ -1,0 +1,21 @@
+# Wondering Minstrel (windurst 6): finishes at options the Lua's tests do not name. 633 sets Prog 1 on option 3 only
+# (Wondering_Minstrel.lua:55): option 4 does nothing (a test of option >= 3 would set it). Ruslan's 10009 sets Prog 2 on
+# option 0 only (:91): option 2 does nothing (a test of option != 1 would set it). 634 begins the quest on option 0
+# only (:61): option 2 does nothing (likewise).
+lists WindurstWaters/Jatan-Paratan/onTrigger WindurstWaters/onEventFinish/633 WindurstWaters/onEventFinish/634 LowerJeuno/Ruslan/onTrigger LowerJeuno/onEventFinish/10009
+char zone=WindurstWaters pos=-61,-4,21.5 job=WAR lvl=10
+fame Windurst 325
+login
+trigger Jatan-Paratan                         # Prog 0: 633
+finish option=4                               # not 3: nothing, Prog 0
+trigger Jatan-Paratan                         # 633 again (Progress)
+finish option=3                               # Prog 1
+trigger Jatan-Paratan                         # Prog 1: 634
+finish option=2                               # not 0: nothing, still available
+trigger Jatan-Paratan                         # 634 again (Progress)
+finish option=0                               # begun
+warp -19.3,0,-54.6 LowerJeuno
+trigger Ruslan                                # Prog 1: 10009
+finish option=2                               # not 0: nothing, Prog 1
+trigger Ruslan                                # 10009
+finish option=0                               # Prog 2

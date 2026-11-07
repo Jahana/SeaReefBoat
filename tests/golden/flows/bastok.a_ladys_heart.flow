@@ -1,0 +1,30 @@
+# A Lady's Heart (bastok 50): Valah Molkot in Port Bastok (no NPC script, no default event; no other quest or mission
+# names him). Every talk and trade answers 160 (0, 236, n); the finish's option is the client's answer, which the flow
+# gives: 0 after a wrong item, 1 after a flower, 10 after a talk, 2002 after the Amaryllis. Available, a bone chip
+# (n 0; option 0: begun, the chip kept); accepted, a Red Rose (n 1; option 1: the rose taken), a talk (n 10; option 10:
+# nothing), the Amaryllis (n 2; option 2002: completed with fame 0, the Amaryllis taken, Mog House flag + 0x0002,
+# MOGHOUSE_EXIT); completed, the three trades (n 4, 5, 0: nothing taken, no finish handler) and a talk (n 10).
+lists PortBastok/Valah_Molkot/onTrigger PortBastok/Valah_Molkot/onTrade PortBastok/onEventFinish/160
+char zone=PortBastok pos=59.9,8.5,-221.7
+item BoneChip
+item RedRose
+item Amaryllis
+item Amaryllis
+item RedRose
+login
+trade Valah_Molkot BoneChip x1  # available, not a flower: 160 (0, 236, 0)
+finish option=0                 # option 0: nothing taken; available: begun
+trade Valah_Molkot RedRose x1   # accepted, a flower: 160 (0, 236, 1)
+finish option=1                 # option 1: the rose taken; accepted: no begin
+trigger Valah_Molkot            # 160 (0, 236, 10)
+finish option=10                # cancel: nothing
+trade Valah_Molkot Amaryllis x1 # the Amaryllis: 160 (0, 236, 2)
+finish option=2002              # completed (fame 0), the Amaryllis taken, the Mog House flag, MOGHOUSE_EXIT
+trade Valah_Molkot Amaryllis x1 # completed: 160 (0, 236, 4)
+finish option=2002              # completed: no finish handler, nothing taken
+trade Valah_Molkot RedRose x1   # completed, a flower: 160 (0, 236, 5)
+finish option=1                 # no finish handler: the rose kept
+trade Valah_Molkot BoneChip x1  # completed, not a flower: 160 (0, 236, 0)
+finish option=0
+trigger Valah_Molkot            # completed: 160 (0, 236, 10)
+finish option=10

@@ -1,0 +1,31 @@
+# Peace for the Spirit (sandoria 86): the Oaken Box's trigger arms on each operand. Available by GM at CS 4 without the
+# puller: the Guardian Statue spawns claimed (CS read in any status). The puller (GM) and the quest accepted (GM) with
+# the statue alive: FEELS_WRONG (the script's isAlive test comes before the quest's call, whose BOXES_SCATTERED arm
+# would match); set available again; killed; its body gone. Available, CS 4, the puller: not the accepted arm, not the
+# spawn (the puller held): BOXES_HERE. Traded the puller while available: nothing. Accepted at CS 0 with the puller:
+# BOXES_SCATTERED (CS not read); 14 (CS 5, the puller taken); CS 3 and CS 5 without it: BOXES_HERE.
+char zone=GarlaigeCitadel pos=-159.9,-1.0,224.5 job=RDM lvl=50
+charvar peaceForTheSpiritCS 4
+login
+trigger Oaken_Box                         # available, CS 4, no puller, not spawned: the Guardian Statue spawns claimed
+item NailPuller                           # GM
+quest Sandoria.PeaceForTheSpirit accepted
+trigger Oaken_Box                         # the statue alive, accepted, the puller: FEELS_WRONG (the script's, before the call)
+quest Sandoria.PeaceForTheSpirit available
+kill GUARDIAN_STATUE
+walk -159.9,-1.0,224.5                    # back to the Oaken Box
+tick 15000                                # its body gone (a dead statue is still spawned)
+tick 15000
+tick 15000
+tick 15000
+trigger Oaken_Box                         # available, CS 4, the puller: BOXES_HERE
+trade Oaken_Box NailPuller x1             # available: nothing
+quest Sandoria.PeaceForTheSpirit accepted
+charvar peaceForTheSpiritCS 0
+trigger Oaken_Box                         # accepted, the puller, CS 0: BOXES_SCATTERED
+trade Oaken_Box NailPuller x1             # 14
+finish                                    # the puller taken; CS 5
+charvar peaceForTheSpiritCS 3
+trigger Oaken_Box                         # accepted, CS 3, no puller: BOXES_HERE
+charvar peaceForTheSpiritCS 5
+trigger Oaken_Box                         # accepted, CS 5, no puller: BOXES_HERE

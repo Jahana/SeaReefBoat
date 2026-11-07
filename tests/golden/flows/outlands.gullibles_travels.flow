@@ -1,0 +1,32 @@
+# Gullible's Travels (outlands): Magriffon in Kazham (call-only: scripts/zones/Kazham/npcs/Magriffon.lua, which calls
+# Gullible's Travels, then Even More Gullible's Travels, then plays its own 143; he walks two nodes: `trigger` walks to
+# him). No default beside his script. Windurst fame level 5 (424): 143. 30000 gil traded while available: nothing.
+# Level 6 (425): 144 (0, the sum: math.randomInt(10, 30) * 1000, seeded, kept in MAGRIFFON_GIL_REQUEST); finished on 0:
+# not begun; again: a new sum (14000, then 13000); on 1: begun. Accepted: 145 (0, 13000). 5000 gil: less than any sum:
+# nothing (no fall to the Even More arm). 13000 gil (the sum exactly): 146, finished: the trade confirmed (its gil
+# stays), the sum taken by delGil, the var 0, Windurst fame +30, the title set, completed, needToZone (the
+# [generic]mustZone var: a rezone into Kazham keeps it). Completed at level 7 (a GM, 488) with needToZone: Even More's
+# 147; zoned out and back (Yuhtunga Jungle): Even More's 148, finished on 0.
+char zone=Kazham pos=62.6,-12,-33.9 job=WAR lvl=75 gil=100000
+fame Windurst 424
+login
+trigger Magriffon                       # level 5: 143
+finish
+trade Magriffon gil=30000               # available: nothing
+fame Windurst 425
+trigger Magriffon                       # level 6: 144 (0, the sum)
+finish option=0                         # not begun
+trigger Magriffon                       # 144: a new sum
+finish option=1                         # begun
+trigger Magriffon                       # accepted: 145 (0, the sum)
+finish
+trade Magriffon gil=5000                # less than the sum: nothing
+trade Magriffon gil=13000               # the sum exactly: 146
+finish                                  # confirmed; the sum taken; fame +30; the title; completed; needToZone
+fame Windurst 488
+trigger Magriffon                       # completed, level 7, needToZone (Even More's arm): 147
+finish
+warp -466.9,0.1,220.2 YuhtungaJungle
+warp 62.6,-12,-33.9 Kazham
+trigger Magriffon                       # zoned (Even More's arm): 148
+finish option=0                         # not begun

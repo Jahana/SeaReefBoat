@@ -1,0 +1,50 @@
+# Against All Odds' edges. The offer's operands, each false alone (the earlier COR quests completed for all): bob:
+# Navigating the Unfriendly Seas accepted, not completed; carl: a Warrior; dan: a level 49 Corsair: area 5: nothing (no
+# section), also at AF3_QUEST_LEVEL 49.4 (a number). Main (accepted by a GM): the Cutter at Prog 3: nil: its script's
+# CUTTER_NOTHING_HAPPENS; at Prog 2 with a full bag: 238: complete false (unread): nothing; room again:
+# 238: completed.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/5 ArrapagoReef/Cutter/onTrigger ArrapagoReef/onEventFinish/238
+char zone=ArrapagoReef pos=-463.026,-2,-394.478 job=COR lvl=50
+char bob zone=AhtUrhganWhitegate pos=80,-6,-140 job=COR lvl=50
+char carl zone=AhtUrhganWhitegate pos=80,-6,-140 job=WAR lvl=50
+char dan zone=AhtUrhganWhitegate pos=80,-6,-140 job=COR lvl=49
+quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+quest AhtUrhgan.AgainstAllOdds accepted
+charvar Quest[6][26]Prog 2
+bob: quest AhtUrhgan.EquippedForAllOccasions completed
+bob: quest AhtUrhgan.NavigatingTheUnfriendlySeas accepted
+carl: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+dan: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+login
+bob: login
+tick 1000
+tick 1000
+tick 1000
+bob: walk 80,-6,-130                    # Navigating not completed: not offered: nothing
+bob: logout
+carl: login
+tick 1000
+tick 1000
+tick 1000
+carl: walk 80,-6,-130                   # a Warrior: nothing
+carl: logout
+dan: login
+tick 1000
+tick 1000
+tick 1000
+dan: walk 80,-6,-130                    # level 49: nothing
+dan: walk 80,-6,-140
+setting AF3_QUEST_LEVEL 49.4
+dan: walk 80,-6,-130                    # 49 < 49.4 (the setting read as a number): nothing
+setting AF3_QUEST_LEVEL 50
+dan: logout
+charvar Quest[6][26]Prog 3              # a GM
+trigger Cutter                          # Prog 3: nil: the Cutter's script: CUTTER_NOTHING_HAPPENS
+finish-if-event
+charvar Quest[6][26]Prog 2              # a GM
+fill-inventory
+trigger Cutter                          # Prog 2: 238
+finish                                  # the tricorne does not fit: complete false (unread): nothing
+free-inventory
+trigger Cutter                          # 238
+finish                                  # completed

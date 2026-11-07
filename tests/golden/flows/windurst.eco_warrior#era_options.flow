@@ -1,0 +1,24 @@
+# Eco-Warrior (Windurst) with its era module (modules/era/lua/quests/windurst/eco_warrior.lua; RESTRICT_CONTENT 1,
+# ENABLE_ROV 0): the module's 62 at option 2 (its copy restricts on 1 only: nothing), then 1 (Level Restriction 20,
+# subPower 1: "exp uses actual level"). A level-30 WAR then kills a Ghoul of the zone (level 22-26, id 17588618): the
+# exp is graded on level 30; on the restricted 20 it would be more. Five ticks after the login first:
+# zoneutils::AfterZoneIn (4 s after it) lifts a level restriction outside a battlefield. Perfect Dodge by GM keeps the
+# char alive.
+module modules/era/lua/quests/windurst/eco_warrior.lua
+lists MazeOfShakhrami/Ahko_Mhalijikhari/onTrigger MazeOfShakhrami/onEventFinish/62
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 job=WAR lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Windurst.EcoWarrior accepted
+login
+tick 1000
+tick 1000
+tick 1000
+tick 1000                            # afterZoneIn
+tick 1000
+effect 49                            # a GM: Perfect Dodge
+trigger Ahko_Mhalijikhari            # 62
+finish option=2                      # the module's 62, not 1: nothing
+trigger Ahko_Mhalijikhari            # 62 again
+finish option=1                      # the module's 62: Level Restriction 20, subPower 1 (ON_ZONE)
+kill #17588618                       # a Ghoul: exp graded on level 30

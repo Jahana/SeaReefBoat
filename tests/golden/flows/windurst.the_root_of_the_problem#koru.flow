@@ -1,0 +1,61 @@
+# The Root of the Problem (windurst 68): Koru-Moru's other quests against 348 / 349, a BLM 75, accepted at var 1 by GM
+# (The Three Magi and Recollections completed by GM). His default 193 and his script take turns: 193, 348. Star Struck
+# completed (GM): its 213 replaces the default (213, 348). Blast from the Past accepted (GM; Windurst fame 0): its 216
+# (Event) takes turns with the script's 348; the silk: its 225 (Event: any trade but the Burnite Shell Stone) and the
+# script's 349 take turns. His script's SMN arms come before 348: CarbuncleDebacleProgress 2 (GM), Carbuncle Debacle
+# not accepted: no 416 (user ruling 2026-11-04, kept Lua bugs: the Lua's read no status there), so 348;
+# The Puppet Master and Class Reunion completed (GM): 411 (then 193: Star Struck's 213 wants The Puppet Master open).
+# The Puppet Master accepted at Prog 3 (GM): its 404 (Progress) wins the talk; its finish completes it (its mustZone
+# set): 405 (Event) takes turns with 348.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi completed
+quest Windurst.Recollections completed
+quest Windurst.TheRootOfTheProblem accepted
+charvar rootProblem 1
+item SquareOfSilkCloth x2
+login
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # the script's turn: 348
+finish
+quest Windurst.StarStruck completed     # GM
+trigger Koru-Moru                       # the default's turn: Star Struck's 213 (replaceDefault)
+finish
+trigger Koru-Moru                       # the script's turn: 348
+finish
+quest Windurst.BlastFromThePast accepted  # GM
+trigger Koru-Moru                       # Blast from the Past's turn: 216
+finish
+trigger Koru-Moru                       # the script's turn: 348
+finish
+trigger Koru-Moru                       # 216
+finish
+trade Koru-Moru SquareOfSilkCloth x1    # Blast from the Past's turn: 225 (the silk kept)
+finish
+trade Koru-Moru SquareOfSilkCloth x1    # the script's turn: 349; the silk taken, var 2
+finish
+charvar rootProblem 1
+quest Windurst.BlastFromThePast available  # GM (Windurst fame 0: no 214)
+charvar CarbuncleDebacleProgress 2
+trigger Koru-Moru                       # the script's turn: CarbuncleDebacleProgress 2: no 416: 348
+finish
+trigger Koru-Moru                       # the default's turn: 213
+finish
+charvar CarbuncleDebacleProgress 0
+quest Windurst.ThePuppetMaster completed  # GM
+quest Windurst.ClassReunion completed   # GM
+trigger Koru-Moru                       # the script's turn: 411 (before 348)
+finish
+trigger Koru-Moru                       # the default's turn: 193 (Star Struck's 213 wants The Puppet Master open)
+finish
+quest Windurst.ClassReunion available   # GM
+quest Windurst.ThePuppetMaster available  # GM: cleared first
+quest Windurst.ThePuppetMaster accepted  # GM
+charvar Quest[2][81]Prog 3
+trigger Koru-Moru                       # The Puppet Master's 404 (Progress)
+finish                                  # The Puppet Master completed; its mustZone
+trigger Koru-Moru                       # The Puppet Master's turn: 405
+finish
+trigger Koru-Moru                       # the script's turn: 348
+finish

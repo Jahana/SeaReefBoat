@@ -1,0 +1,18 @@
+# Your Crystal Ball (jeuno 9) with its era module (xi.pre(xi.expansion.SOA): RESTRICT_CONTENT 1, ENABLE_SOA 0), GM-set
+# accepted at Prog 0 with Wait already now + 60 (charvar 1800000060, the harness's wall clock 1800000000): the
+# quest's lens trade writes Wait = now + 60, the value it had, so the module's getVar(Wait) ~= previousWait is false
+# and Wait stays 1800000060 (not JstMidnight()); a JST day later the pool plays 52.
+module modules/era/lua/quests/jeuno/your_crystal_ball.lua
+lists MazeOfShakhrami/Rockwell/onTrade
+char zone=MazeOfShakhrami pos=-18,-14,181.5 job=WAR lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.YourCrystalBall accepted
+charvar Quest[3][9]Wait 1800000060
+item AhrimanLens
+login
+trade Rockwell AhrimanLens x1               # Prog 0: the lens taken, Prog 1, SUBMERGED_ITEM; Wait written the same: kept
+trigger Rockwell                            # before Wait: WAIT_A_BIT_LONGER
+wait jst=1
+trigger Rockwell                            # 52
+finish                                      # Prog 2, the Divination Sphere

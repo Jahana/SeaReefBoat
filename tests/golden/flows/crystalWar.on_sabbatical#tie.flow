@@ -1,0 +1,19 @@
+# On Sabbatical (crystalWar 32), the tie at Erlene: a level 99 Scholar in The Eldieme Necropolis [S] with A Little
+# Knowledge completed (a GM; missions as the main flow) and neither spell (so its 47 is a Progress reply too). On
+# Sabbatical available (AF1_QUEST_LEVEL 40): 18 and 47 tie: Erlene's first reply is 47 (finished: the spells, so no tie
+# remains), then 18 (finished: begun), then 19.
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/18 TheEldiemeNecropolisS/onEventFinish/47
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=SCH lvl=99
+quest CrystalWar.ALittleKnowledge completed
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erlene                          # the tie, 18 and 47: 47
+finish                                  # the spells
+trigger Erlene                          # 18 alone
+finish-if-event
+trigger Erlene                          # begun: 19
+finish-if-event

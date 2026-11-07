@@ -1,0 +1,28 @@
+# Inside the Belly (otherAreas 26) with its era module, enabled by xi.pre(ABYSSEA) alone (RESTRICT_CONTENT 1,
+# ENABLE_ABYSSEA 0; WotG, SoA and RoV on): the 2010 batch blocked; xi.pre(WOTG) is false, so Zaldon's trigger stays the
+# quest's own.
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# Completed (a GM), skill 40: the quest's 163 (with the Bladefish). A Gugru Tuna (the batch's first) and a Crocodilos (its
+# last): nothing, kept. An Ahtapot (the 2009 batch, on): 166 or 167; a Matsya (SoA, on): 166 or 167.
+module modules/era/lua/quests/otherareas/inside_the_belly.lua
+lists Selbina/Zaldon/onTrigger Selbina/Zaldon/onTrade Selbina/onEventFinish/166 Selbina/onEventFinish/167
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+setting RESTRICT_CONTENT 1
+setting ENABLE_ABYSSEA 0
+quest OtherAreas.InsideTheBelly completed
+skill Fishing 400
+item GugruTuna1
+item Crocodilos
+item Ahtapot
+item Matsya
+login
+trigger Zaldon                          # the quest's own 163
+finish
+trade Zaldon GugruTuna1 x1              # blocked: nothing; kept
+trade Zaldon Crocodilos x1              # blocked: nothing; kept
+trade Zaldon Ahtapot x1                 # on: 166 or 167
+finish                                  # 350 gil
+trade Zaldon Matsya x1                  # on: <= 12: 166 (the Shaper's Shawl), else 167
+finish                                  # 12592 gil

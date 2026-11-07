@@ -1,0 +1,24 @@
+# An Eye for Revenge (abyssea 3): a level 99 Warrior in Abyssea - La Theine with Lost Memories completed, the Vial of
+# Lambent Potion, a Filthy Gnole Claw (GMs) and 100 cruor (a GM, after the login). Curilla: the vial taken, 190,
+# finished on option 1: begun. Accepted, no eyeball: 191. At qm_lugarhoo: the claw traded (pops Lugarhoo, claimed);
+# Lugarhoo killed: Lugarhoo's Eyeball (KEYITEM_OBTAINED). Curilla with the eyeball: 192, finished: the eyeball taken,
+# 800 cruor (CRUOR_TOTAL 800, 900), completed (Scarlet Abyssite of Furtherance). Curilla (completed): 193.
+lists AbysseaLaTheine/Curilla/onTrigger AbysseaLaTheine/Lugarhoo/onMobDeath AbysseaLaTheine/onEventFinish/190 AbysseaLaTheine/onEventFinish/192 AbysseaLaTheine/onEventFinish/193
+char zone=AbysseaLaTheine pos=-465.8,-3.315,770.159 job=WAR lvl=99
+quest Abyssea.LostMemories completed
+keyitem VialOfLambentPotion
+item FilthyGnoleClaw
+login
+currency cruor 100                      # a GM
+trigger Curilla                         # Lost Memories completed: the vial taken; 190
+finish option=1                         # begun
+trigger Curilla                         # accepted, no eyeball: 191
+finish
+walk -85.313,24.379,-511.991
+trade qm_lugarhoo FilthyGnoleClaw x1    # pops Lugarhoo (claimed)
+kill LUGARHOO                           # accepted, no eyeball: Lugarhoo's Eyeball (KEYITEM_OBTAINED)
+walk -465.8,-3.315,770.159
+trigger Curilla                         # the eyeball: 192
+finish                                  # the eyeball taken; 800 cruor (900 in all); completed (the reward key item)
+trigger Curilla                         # completed: 193
+finish

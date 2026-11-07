@@ -1,0 +1,35 @@
+# Behind the Smile (otherAreas 77): Tavnazian Safehold's Enaremand (no script, default 537), Mhaura's Fyi
+# Chalmwoh (no script, no default), Carpenters' Landing's qm_behind_the_smile (default NOTHING_OUT_OF_ORDINARY) and the NM
+# Bullheaded Grosvez. A level 75 Warrior.
+# It's Raining Mannequins! not completed: no section: Enaremand's default 537. Completed (a GM): Enaremand 533, finished:
+# begun. Accepted without the Red Oil: 541 (the second Enaremand, 16883840, is cutscene_only: not talkable). The ??? at Prog 0: nil, its default.
+# Mhaura: Fyi 320, finished: Prog 1; Fyi at Prog 1: nil, nothing. The ??? at Prog 1, Grosvez not spawned: Grosvez spawned
+# and claimed, STENCH_OF_DECAY; again (spawned): nil, its default. Grosvez killed: Prog 2. The ???: Prog 3, the Red Oil
+# (npcUtil.giveKeyItem), no action; again at Prog 3: nil, its default. Enaremand with the oil: 534, finished: completed,
+# the Mannequin Pumps, the oil taken.
+lists TavnazianSafehold/Enaremand/onTrigger TavnazianSafehold/onEventFinish/533 TavnazianSafehold/onEventFinish/534 Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/onEventFinish/320 CarpentersLanding/qm_behind_the_smile/onTrigger CarpentersLanding/Bullheaded_Grosvez/onMobDeath
+char zone=TavnazianSafehold pos=97.5,-41,51.6 job=WAR lvl=75
+login
+trigger Enaremand                       # It's Raining Mannequins! not completed: no section; her default 537
+finish
+quest OtherAreas.ItsRainingMannequins completed # a GM
+trigger Enaremand                       # 533
+finish                                  # begun
+trigger Enaremand                       # no oil: 541
+finish
+warp 41.4,-7.4,-565.4 CarpentersLanding
+trigger qm_behind_the_smile             # Prog 0: nil; its default NOTHING_OUT_OF_ORDINARY
+warp -37.8,-16,70.1 Mhaura
+trigger Fyi_Chalmwoh                    # Prog 0: 320
+finish                                  # Prog 1
+trigger Fyi_Chalmwoh                    # Prog 1: nil; nothing
+finish-if-event
+warp 41.4,-7.4,-565.4 CarpentersLanding
+trigger qm_behind_the_smile             # Prog 1, Grosvez not spawned: spawned and claimed; STENCH_OF_DECAY
+trigger qm_behind_the_smile             # Grosvez spawned: nil; its default
+kill BULLHEADED_GROSVEZ                 # Prog 1: Prog 2
+trigger qm_behind_the_smile             # Prog 2: Prog 3, the Red Oil; no action
+trigger qm_behind_the_smile             # Prog 3: nil; its default
+warp 97.5,-41,51.6 TavnazianSafehold
+trigger Enaremand                       # the oil: 534
+finish                                  # completed; the Mannequin Pumps; the oil taken

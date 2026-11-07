@@ -1,0 +1,27 @@
+# Rock Racketeer (windurst 26): Varun's Option operand and the trade's item. Accepted by GM at Prog 2 with Option 0:
+# Varun 100 (Option 0 < 2), finished with option 1 (the finish sets Option 2 on any option); 101. Prog 0 by GM: a bone
+# chip traded to Varun: not the Sharp Stone: nil (user ruling 2026-11-04, kept Lua bugs: the Lua's nested-table tradeHas
+# read no item and played 102 for any trade, completing the quest); the finish after it has no event. Varun at Prog 0:
+# his script's 432. A second chip: nil. The Sharp Stone (a GM) at Prog 0: 102 (the trade reads no Prog), finished:
+# completed, the stone taken.
+lists WindurstWoods/Varun/onTrigger WindurstWoods/Varun/onTrade WindurstWoods/onEventFinish/100 WindurstWoods/onEventFinish/102
+char zone=WindurstWoods pos=9.8,-2.5,-10.06 job=WAR lvl=10
+quest Windurst.MihgosAmigo completed
+quest Windurst.RockRacketeer accepted
+charvar Quest[2][26]Prog 2
+item BoneChip
+login
+trigger Varun                                 # Prog 2, Option 0 (< 2): 100
+finish option=1                               # Option 2
+trigger Varun                                 # 101 (0, Sharp Stone)
+finish
+charvar Quest[2][26]Prog 0
+trade Varun BoneChip x1                       # not the Sharp Stone: nil
+finish                                        # no event open
+trigger Varun                                 # Prog 0: his script's 432
+finish
+trade Varun BoneChip x1                       # not the Sharp Stone: nil
+finish-if-event
+item SharpStone                               # a GM
+trade Varun SharpStone x1                     # Prog 0: the stone: 102 (the trade reads no Prog)
+finish-if-event                               # completed; the stone taken

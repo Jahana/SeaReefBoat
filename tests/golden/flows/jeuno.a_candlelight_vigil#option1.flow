@@ -1,0 +1,22 @@
+# A Candlelight Vigil (jeuno 6): 192 answered with option 1 (begun at once, Option stays 0), then 191; and a GM's
+# Option 2 while available (neither 0 nor 1: Ilumida's trigger returns nil, her default 189), and 192 answered 2 (not
+# 1: Option 1).
+lists UpperJeuno/Ilumida/onTrigger UpperJeuno/onEventFinish/192 UpperJeuno/onEventFinish/193
+char zone=UpperJeuno pos=-73.5,-1.2,57.3 job=WAR lvl=30
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 150
+charvar Quest[3][6]Option 2
+login
+trigger Ilumida                         # Option 2 (GM): neither arm, nil; default 189
+finish
+charvar Quest[3][6]Option 0             # a GM
+trigger Ilumida                         # Option 0: 192
+finish option=2                         # not 1: Option 1
+trigger Ilumida                         # Option 1: 193
+finish option=2                         # not 1: nothing
+charvar Quest[3][6]Option 0             # a GM
+trigger Ilumida                         # 192
+finish option=1                         # begun
+trigger Ilumida                         # accepted, no candle: 191
+finish

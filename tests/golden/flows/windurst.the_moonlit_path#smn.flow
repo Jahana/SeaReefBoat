@@ -1,0 +1,28 @@
+# The Moonlit Path (windurst 9): the pact bit for a char with SMN unlocked. player:hasJob(SMN) reads the unlocked jobs,
+# not the main job, so the char first completes I Can Hear a Rainbow (Lua, set up by GM: accepted with Prog 1 and a
+# Carbuncle's Ruby; the ruby to the qm3 in La Theine Plateau plays its 124, whose finish unlocks SMN). Accepted (GM)
+# with the Whisper of the Moon (GM) and the Trainer's Whistle: 846 with mask 0 (SMN unlocked without the pact; the
+# Trainer's Whistle); option 7: the Fenrir pact (silent) and FENRIR_UNLOCKED, completed. A day on: 848 option 2; the
+# whisper (GM): 850 with mask 64 (the pact known: the hasSpell half); option 6.
+lists WindurstWaters/Leepe-Hoppe/onTrigger WindurstWaters/onEventFinish/846 WindurstWaters/onEventFinish/850
+char zone=LaTheinePlateau pos=-178.2,8.845,254.327
+quest Windurst.ICanHearARainbow accepted
+charvar Quest[2][75]Prog 1
+item CarbunclesRuby
+fame Windurst 425
+quest Windurst.TheMoonlitPath accepted
+keyitem WhisperOfTheMoon
+keyitem TrainersWhistle
+login
+trade qm3 CarbunclesRuby x1             # I Can Hear a Rainbow, Prog 1: its 124
+finish                                  # completed: SMN unlocked, Carbuncle
+warp 11.4,-9.75,-195.97 WindurstWaters
+trigger Leepe-Hoppe                     # 846 (mask 0)
+finish option=7                         # the Fenrir pact (silent), FENRIR_UNLOCKED; completed; the whisper taken; Timer
+wait jst=1
+trigger Leepe-Hoppe                     # 848
+finish option=2                         # begun again, the bauble, Repeat 1
+delkeyitem MoonBauble
+keyitem WhisperOfTheMoon
+trigger Leepe-Hoppe                     # 850 (mask 64: SMN unlocked, the pact known)
+finish option=6                         # 15000 gil; completed

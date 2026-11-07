@@ -1,0 +1,43 @@
+# Exotic Delicacies (adoulin, call-only): a level 99 Warrior in Western Adoulin, with a Plate of Barnacle Paella, a
+# Plate of Flapano's Paella, a Fire Crystal and the ingredients (a Pinch of Saffron, a Mussel, two Barnacles). Flapano
+# has no default: each talk and trade runs his script. Available: a paella trade: nothing. Talks alternate on
+# Flapano_Odd_Even: 0: the offer 2860 (the var 1), finished on 0, then on 2: nothing; 1: the shop (FLAPANO_SHOP_TEXT,
+# the stock; the var 0); 2860 on 1: added. Accepted: the var 0: 2863 (the var 1). Trades while accepted: either paella:
+# 2862 (no finish: the paella stays); a Fire Crystal: nothing; the ingredients with one Barnacle (two are asked),
+# without the saffron, without the mussel: nothing. Flapano_Odd_Even 2 (a GM: no script sets it): the shop (the var 0),
+# then 2863. The completion: #completion; completed: #completed.
+# The Weatherspoon War is not accepted (its 191 not first).
+lists WesternAdoulin/Flapano/onTrigger WesternAdoulin/Flapano/onTrade WesternAdoulin/onEventFinish/2860
+char zone=WesternAdoulin pos=71.5,0,-13.5 job=WAR lvl=99
+item PlateOfBarnaclePaella
+item PlateOfFlapanosPaella
+item FireCrystal
+item 3916
+item 5949
+item 5954 x2
+login
+trade Flapano PlateOfBarnaclePaella x1  # available: nothing
+trigger Flapano                         # the var 0, available: 2860 (the var 1)
+finish option=0                         # not option 1: nothing
+trigger Flapano                         # the var 1: the shop (the var 0)
+trigger Flapano                         # 2860 (the var 1)
+finish option=2                         # not option 1: nothing
+trigger Flapano                         # the shop (the var 0)
+trigger Flapano                         # 2860 (the var 1)
+finish option=1                         # added
+trigger Flapano                         # the shop (the var 0)
+trigger Flapano                         # accepted, the var 0: 2863 (the var 1)
+finish
+trade Flapano PlateOfBarnaclePaella x1  # accepted, a paella: 2862
+finish                                  # no finish arm: the paella stays
+trade Flapano PlateOfFlapanosPaella x1  # the other paella: 2862
+finish
+trade Flapano FireCrystal x1            # accepted, neither: nothing
+trade Flapano 3916 x1 5949 x1 5954 x1   # one Barnacle of two: nothing
+trade Flapano 5949 x1 5954 x2           # no saffron: nothing
+trade Flapano 3916 x1 5954 x2           # no mussel: nothing
+trigger Flapano                         # the var 1: the shop (the var 0)
+charvar Flapano_Odd_Even 2              # a GM
+trigger Flapano                         # the var 2: the shop (the var 0)
+trigger Flapano                         # the var 0: 2863 (the var 1)
+finish

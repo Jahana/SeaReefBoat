@@ -1,0 +1,15 @@
+# Knocking on Forbidden Doors (otherAreas 78): the 200 gil pose from above. 2200 gil, the Galka Mannequin held. The Galka
+# traded: 319; option 1: 2000 taken: the Hume Male Mannequin (pose reset); 200 left. Fyi 321; option 75: 200 taken
+# (exactly; 0 left): race ((75 - 11) % 8) + 1 = 1, pose floor(75 / 32) = 2: the Hume Male's pose 2.
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/Fyi_Chalmwoh/onTrade Mhaura/onEventUpdate/321 Mhaura/onEventFinish/319 Mhaura/onEventFinish/321
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30 gil=2200
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile completed
+quest OtherAreas.KnockingOnForbiddenDoors completed
+keyitem BetterHumesAndMannequins
+item GalkaMannequin
+login
+trade Fyi_Chalmwoh GalkaMannequin x1    # 319
+finish option=1                         # 2000 taken: the Hume Male Mannequin; 200 left
+trigger Fyi_Chalmwoh                    # 321 (mask 1, ..., gil 200)
+finish option=75                        # 200 taken (exactly): race 1, pose 2; 0 left

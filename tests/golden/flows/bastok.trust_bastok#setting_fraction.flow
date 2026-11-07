@@ -1,0 +1,10 @@
+# Trust: Bastok (bastok 92): the guard xi.settings.main.ENABLE_TRUST_QUESTS == 1 compares the setting as the Lua number it
+# is, so a fraction (1.25) is not 1: a level 5 char is not offered the quest, Clarion Star's own script (442). A port that
+# rounds the setting (Settings.Main) would offer it (434). Recorded on Lua at 1e24f4b4^ (the parent of the commit that
+# deleted the Lua).
+lists PortBastok/Clarion_Star/onTrigger PortBastok/onEventFinish/434
+char zone=PortBastok pos=81.5,7.5,-24.2 lvl=5 nation=1
+setting ENABLE_TRUST_QUESTS 1.25
+login
+trigger Clarion_Star           # ENABLE_TRUST_QUESTS 1.25: not offered, 442
+finish

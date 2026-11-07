@@ -1,0 +1,19 @@
+# probe (quest rework P8): kill #<id>, a mob by its id: Abyssea - Uleguerand's IDs.lua names no mob (its mob table is
+# empty), so no key reaches its mobs. Uleguerand - Dominion Op #01 (abyssea 101, Lua then): a Mechanical_Menace
+# (17813813, 17813814, 17813815) killed while the op is accepted: dominionOnMobDeath(574): Prog 1 (FOV_DEFEATED_TARGET).
+# Killed while available: no section: nothing. Accepted (a GM): Prog 1. Prog 5 (a GM): the count is full: nothing. A
+# rezone follows each kill: after a kill the char's swing does not claim the next mob, which then dies unclaimed and
+# reaches no handler (no exp either), on both sides alike.
+# engine-small-2: re-recorded on C# (`rerecord`, the trace's recorder csharp-rerecord) when the play time
+# moved onto the steady clock and every login's 0x00A changed; a Lua record refuses, since Dominion Op #01 on C#
+# (DominionOp01Uleguerand.cs) answers it (a probe records Lua only).
+lists AbysseaUleguerand/Mechanical_Menace/onMobDeath
+char zone=AbysseaUleguerand pos=-240,-40,-520 job=WAR lvl=99
+login
+kill #17813813                          # available: no section: nothing
+rezone                                  # out and back in place: the char no longer engaged after the kill
+quest Abyssea.DominionOp01Uleguerand accepted # a GM
+kill #17813814                          # accepted: Prog 1
+rezone                                  # the same
+charvar Quest[8][101]Prog 5             # a GM
+kill #17813815                          # Prog 5: nothing

@@ -1,0 +1,30 @@
+# Elderly Pursuits (otherAreas 75): 518 with no room for the Elegant Ribbon. Accepted at Prog 3 (a GM): Despachiaire
+# nil, 106. Prog 4 (a GM) with the Cathedral Medallion; a full inventory (a GM): Despachiaire 518, finished:
+# quest:complete fails (not completed), but the medallion is taken all the same (the Lua's delKeyItem is outside the
+# if). Room again: 518, finished: completed. Available again (a GM): a trade to Despachiaire: no trade handler, nothing.
+# 518 finished while the quest is available (a GM, while it is open): no section with 518, nothing.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Despachiaire/onTrade TavnazianSafehold/onEventFinish/518
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+quest OtherAreas.SecretsOfOvensLost completed
+quest OtherAreas.ElderlyPursuits accepted
+charvar Quest[4][75]Prog 4
+keyitem CathedralMedallion
+item ChocoboFeather
+login
+charvar Quest[4][75]Prog 3              # a GM
+trigger Despachiaire                    # Prog 3: nil; 106
+finish
+charvar Quest[4][75]Prog 4              # a GM
+fill-inventory
+trigger Despachiaire                    # Prog 4: 518
+finish                                  # no room: not completed; the medallion taken anyway
+free-inventory
+trigger Despachiaire                    # 518
+finish                                  # completed; the Elegant Ribbon
+quest OtherAreas.ElderlyPursuits available # a GM
+trade Despachiaire ChocoboFeather x1    # available: no trade handler; nothing
+quest OtherAreas.ElderlyPursuits accepted # a GM
+charvar Quest[4][75]Prog 4              # a GM
+trigger Despachiaire                    # 518
+quest OtherAreas.ElderlyPursuits available # a GM, while 518 is open
+finish                                  # no 518 handler while available: nothing

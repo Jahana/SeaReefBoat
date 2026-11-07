@@ -1,0 +1,17 @@
+# The Walls of Your Mind (bastok 69): 287 with hide 0 and option 2. Accepted by GM with the guide alone (no knuckles, no map: the
+# player dropped the knuckles): 287 with hide 0, option 0 (nothing); the map by GM: 287 with hide 1, option 2 deletes the
+# quest (available again), the guide and the map. Then skill 0: not offered, the default 230.
+lists PortBastok/Oggbi/onTrigger PortBastok/onEventFinish/287
+char zone=PortBastok pos=-159,-7,5 job=MNK lvl=75
+quest Bastok.GhostsOfThePast completed    # MNK AF1 (Oggbi's 231) out of the way
+quest Bastok.TheFirstMeeting completed    # MNK AF2 (Oggbi's 233) out of the way
+quest Bastok.TheWallsOfYourMind accepted
+keyitem WeaponTrainingGuide
+login
+trigger Oggbi                    # accepted, no Annals, no knuckles, no map: 287 with hide 0
+finish option=0                # option 0: nothing
+keyitem MapToTheAnnalsOfTruth
+trigger Oggbi                    # the map: 287 with hide 1
+finish option=2                # the quest deleted, the guide and the map deleted
+trigger Oggbi                    # available, skill 0: not offered, 230
+finish

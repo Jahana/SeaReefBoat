@@ -1,0 +1,26 @@
+# Rosel the Armorer (sandoria 2): Stage and Prog set by GM, and the right prince. Available, Stage 2 (no draw): 523
+# (0, 0, 0, 0, 1); option 1: Prog 1. Prog 2: nil (ROSEL_GREETINGS). Stage 3, Prog 0: 523 (0, 0, 0, 0, 2). The receipt
+# given by GM while available: Guilerme has no section (GUILERME_DIALOG). Accepted by GM: Guilerme's 507 (..., 2),
+# option 0 (the right prince): Option 0, the receipt taken; Rosel's 527 (0, 0, 0, 0, 2, 0), option 1: 100 gil, fame
+# +10, completed (the finish's option, not the Option var, picks the pay).
+lists SouthernSanDoria/Rosel/onTrigger SouthernSanDoria/onEventFinish/523 SouthernSanDoria/onEventFinish/527 NorthernSanDoria/Guilerme/onTrigger NorthernSanDoria/onEventFinish/507
+char zone=SouthernSanDoria pos=71.4,0.0,41.1 job=WAR lvl=30
+charvar Quest[0][2]Stage 2
+login
+trigger Rosel                             # Stage 2: no draw; Prog 0: 523 (0, 0, 0, 0, 1)
+finish option=1                           # Prog 1
+charvar Quest[0][2]Prog 2
+trigger Rosel                             # Prog 2: nil; ROSEL_GREETINGS
+charvar Quest[0][2]Stage 3
+charvar Quest[0][2]Prog 0
+trigger Rosel                             # Stage 3, Prog 0: 523 (0, 0, 0, 0, 2)
+finish option=1                           # Prog 1
+keyitem ReceiptForThePrince
+warp -3.0,0.0,99.0 NorthernSanDoria
+trigger Guilerme                          # available, the receipt: no section; GUILERME_DIALOG
+quest Sandoria.RoselTheArmorer accepted
+trigger Guilerme                          # accepted, the receipt, Stage 3: 507 (0, 0, 0, 0, 0, 0, 2)
+finish                                    # option 0: Option 0; the receipt taken
+warp 71.4,0.0,41.1 SouthernSanDoria
+trigger Rosel                             # no receipt: 527 (0, 0, 0, 0, 2, 0)
+finish option=1                           # option 1 (Option is 0): 100 gil, fame +10; completed (Entrance Denied)

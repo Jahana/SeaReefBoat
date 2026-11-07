@@ -1,0 +1,26 @@
+# Inside the Belly (otherAreas 26): the FISH mod half of xi.crafting.getTotalSkill (getCharSkillLevel / 10 + getMod(FISH)).
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# A level 81 Warrior (the Fisher's Torque is level 81, all jobs: FISH +2), The Real Gift completed. Stored 289 (28, and
+# the floor drops the 9): no section: 150. The torque on: 28 + 2 = 30: 161, begun. Stored 379 + 2 = 39: 162; stored 380
+# + 2 = 40: 163.
+lists Selbina/Zaldon/onTrigger Selbina/onEventFinish/161
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=81
+setting map.FISHING_ENABLE true
+quest OtherAreas.UnderTheSea completed
+quest OtherAreas.TheSandCharm completed
+quest OtherAreas.TheRealGift completed
+skill Fishing 289
+item FishersTorque
+login
+trigger Zaldon                          # 28: no section: 150
+finish
+equip FishersTorque Neck                # FISH +2
+trigger Zaldon                          # 28 + 2 = 30: 161
+finish                                  # begun
+skill Fishing 379
+trigger Zaldon                          # 37 + 2 = 39: 162
+finish
+skill Fishing 380
+trigger Zaldon                          # 38 + 2 = 40: 163
+finish

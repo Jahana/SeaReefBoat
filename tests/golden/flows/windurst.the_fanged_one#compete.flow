@@ -1,0 +1,32 @@
+# The Fanged One (windurst 31): its Perih Vashai lines next to Sin Hunting's (the reply kinds). A level-30 WAR with Sin
+# Hunting accepted by GM at Prog 0: its 524 (an Event, no finish handler) answers at Perih Vashai on every talk; his
+# script answers nothing here. Ties rotate by the last event id; with none, the first action in the list plays, here Sin
+# Hunting's 524 (Prog 0). Available: 351 (Progress) over 524, begun; set available again by GM, 351 again
+# (a Progress 351 is no tie, so 524 never shows). Prog 0: 352 and 524 tie and take turns. Prog 1 with the fang (GM): 357
+# (Progress) over 524 twice (the first with a full bag: the completion fails), completed. Completed with the mustZone:
+# 358 and 524 take turns.
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/onEventFinish/351 WindurstWoods/onEventFinish/357
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=WAR lvl=30
+quest Windurst.SinHunting accepted
+login
+trigger Perih_Vashai                          # available: 351 (Progress) over 524
+finish                                        # begun
+quest Windurst.TheFangedOne available         # GM
+trigger Perih_Vashai                          # 351 again over 524 (351 played last)
+finish                                        # begun
+trigger Perih_Vashai                          # Prog 0: 352 and 524 tie: one of them
+finish
+trigger Perih_Vashai                          # the other
+finish
+charvar Quest[2][31]Prog 1                    # GM
+keyitem OldTigersFang                         # GM
+trigger Perih_Vashai                          # Prog 1, the fang: 357 (Progress) over 524
+fill-inventory
+finish                                        # the necklace does not fit: nothing
+free-inventory
+trigger Perih_Vashai                          # 357 again (357 played last)
+finish                                        # completed; the mustZone
+trigger Perih_Vashai                          # completed, the mustZone: 358 and 524 tie: one of them
+finish
+trigger Perih_Vashai                          # the other
+finish

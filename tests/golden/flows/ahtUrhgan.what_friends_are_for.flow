@@ -1,0 +1,39 @@
+# What Friends Are For (ahtUrhgan 19): a level 75 Warrior in Nashmau with a Chunk of Tin Ore and a Cobalt Jellyfish.
+# Tsetseroon (no script; default 4; the first of two: the second is cutscene-only), Aydeewa Subterrane's qm9 (no
+# script; default NOTHING_OUT_OF_ORDINARY). Available, Prog 0: Tsetseroon 4; the two items: no section-1 trade handler:
+# nothing. Aydeewa's trigger area 2 is never registered (its Zone.lua registers area 1 only), so the 7 that sets Prog 1
+# never plays: a GM sets Prog 1. Available, Prog 1: Tsetseroon 16, finished: Prog 2, begun. Prog 2: Tsetseroon 17; the
+# tin alone: nil; both: 18, finished: the trade confirmed, the Pot of Tsetseroon's Stew, Prog 3; Tsetseroon 19. Aydeewa:
+# qm9 with the stew at Prog 3: 8, option 1: Prog 4, the stew taken, the Map of Aydeewa Subterrane; qm9 at Prog 4: nil:
+# the default. Nashmau: Tsetseroon 20, finished: the map held: an Imperial Bronze Piece, completed; Tsetseroon 21.
+uncovered: 1/-/onTriggerAreaEnter:2 -- Aydeewa Subterrane's Zone.lua registers trigger area 1 only (registerCuboidTriggerArea(1, 378, -3, 338, 382, 3, 342)): area 2 never fires, on either side
+uncovered: 1/-/onEventFinish:7 -- 7 opens from area 2 only (above)
+lists Nashmau/Tsetseroon/onTrigger Nashmau/Tsetseroon/onTrade Nashmau/onEventFinish/16 Nashmau/onEventFinish/18 Nashmau/onEventFinish/20 AydeewaSubterrane/qm9/onTrigger AydeewaSubterrane/onEventFinish/8
+char zone=Nashmau pos=-11.5,-6,68.971 job=WAR lvl=75
+item ChunkOfTinOre
+item CobaltJellyfish
+login
+trigger Tsetseroon                      # available, Prog 0: 4
+finish
+trade Tsetseroon ChunkOfTinOre x1 CobaltJellyfish x1   # available: no trade handler: nothing
+finish-if-event
+charvar Quest[6][19]Prog 1              # a GM: area 2's 7 (never registered)
+trigger Tsetseroon                      # available, Prog 1: 16
+finish                                  # Prog 2, begun
+trigger Tsetseroon                      # Prog 2: 17
+finish
+trade Tsetseroon ChunkOfTinOre x1       # not both: nil
+finish-if-event
+trade Tsetseroon ChunkOfTinOre x1 CobaltJellyfish x1   # Prog 2, both: 18
+finish                                  # the trade confirmed; the stew; Prog 3
+trigger Tsetseroon                      # Prog 3: 19
+finish
+warp -404.4,6.514,-440.237 AydeewaSubterrane
+trigger qm9                             # Prog 3, the stew: 8
+finish option=1                         # Prog 4; the stew taken; option 1: the map
+trigger qm9                             # Prog 4: nil: NOTHING_OUT_OF_ORDINARY
+warp -11.5,-6,68.971 Nashmau
+trigger Tsetseroon                      # Prog 4: 20
+finish                                  # the map held: the bronze piece; completed
+trigger Tsetseroon                      # completed: 21
+finish

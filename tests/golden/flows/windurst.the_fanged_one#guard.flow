@@ -1,0 +1,24 @@
+# The Fanged One (windurst 31): the offer's level operand and Perih Vashai's other arms. A level-29 WAR: not offered;
+# Perih Vashai's script (nothing) and his default 338; Tiger Bones while available: no handler, MANY_TIGER_BONES.
+# Accepted by GM at Prog 0 with the Old Tiger's Fang given by GM: 352 (the Prog operand is tested first). Prog 1 by GM,
+# the fang taken by GM: nil (338). Completed by GM (no mustZone): nil (338); Tiger Bones: no handler.
+lists WindurstWoods/Perih_Vashai/onTrigger SauromugueChampaign/Tiger_Bones/onTrigger
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=WAR lvl=29
+login
+trigger Perih_Vashai                          # level 29: not offered; 338
+finish
+quest Windurst.TheFangedOne accepted
+keyitem OldTigersFang
+trigger Perih_Vashai                          # Prog 0 with the fang: 352
+finish
+charvar Quest[2][31]Prog 1
+delkeyitem OldTigersFang
+trigger Perih_Vashai                          # Prog 1, no fang: nil; 338
+finish
+quest Windurst.TheFangedOne completed
+trigger Perih_Vashai                          # completed, no mustZone: nil; 338
+finish
+warp 667,-8.7,-380.1 SauromugueChampaign
+trigger Tiger_Bones                           # completed: no handler; MANY_TIGER_BONES
+quest Windurst.TheFangedOne available
+trigger Tiger_Bones                           # available: no handler; MANY_TIGER_BONES

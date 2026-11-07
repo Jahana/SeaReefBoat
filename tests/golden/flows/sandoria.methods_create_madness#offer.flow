@@ -1,0 +1,31 @@
+# Methods Create Madness (sandoria 98): the offer's other sides. A WAR 75 (can equip the Spear of Trials), no guide:
+# polearm skill raw 2399 (/ 10 is below 240: not offered, 667), then 2400: 8 once per zone; option 0 (nothing); a second
+# talk in the zone falls to the default 667 (oncePerZone); after a rezone 8 again, option 1 with a full inventory (no
+# spear held, giveItem fails: nothing, not begun); after another rezone option 1 with room (the spear and the guide,
+# begun); then 11 with 1 and the spear at 0 weapon skill points (10, which has no finish handler: the spear kept).
+lists SouthernSanDoria/Balasiel/onTrigger SouthernSanDoria/Balasiel/onTrade SouthernSanDoria/onEventFinish/8
+char zone=SouthernSanDoria pos=-136.8,-10.8,65.8 job=WAR lvl=75
+quest Sandoria.ASquiresTest completed
+quest Sandoria.ASquiresTestIi completed
+quest Sandoria.AKnightsTest completed
+skill Polearm 2399
+login
+trigger Balasiel                          # polearm 2399 (/ 10 is 239.9): not offered, 667
+finish
+skill Polearm 2400
+trigger Balasiel                          # all three met: 8 (oncePerZone)
+finish                                    # option 0: nothing
+trigger Balasiel                          # 8 already played in this zone: the default 667
+finish
+rezone
+trigger Balasiel                          # after the rezone: 8 again
+fill-inventory
+finish option=1                           # option 1, no spear, the inventory full: giveItem false, not begun
+free-inventory
+rezone
+trigger Balasiel                          # 8
+finish option=1                           # option 1: the Spear of Trials and the Weapon Training Guide, begun
+trigger Balasiel                          # accepted, the spear held: 11 with 1
+finish
+trade Balasiel SpearOfTrials x1           # 0 weapon skill points: 10
+finish                                    # 10 has no finish handler: the spear kept

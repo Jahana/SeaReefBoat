@@ -1,0 +1,53 @@
+# The Rivalry (sandoria 75): Gallijaux, Joulet and Ufanne in Port San d'Oria. Both brothers' quests available: a carp to
+# Gallijaux (no trade handler; his script has none: nothing), Ufanne's 310, Gallijaux's 300 with option 0 (nothing),
+# with option 700 (begun). Accepted: Gallijaux's GALLIJAUX_CARP_STATUS (0 carp), Joulet's JOULET_HELP_OTHER_BROTHER,
+# Ufanne's 309 (0, 0, 0) then 310; the trades (a chip: nil; a carp and a chip: nil; two Moat Carp and a Forest Carp: 301,
+# carpsTraded 3, 35 gil, fame +10); the status (3); carpsTraded 9998 by GM, one Moat Carp (9999: 301), one Forest Carp
+# (10000: 303, completed: Lu Shang's Fishing Rod, Testimonial, Carp Diem, fame +10; carpsTraded 10000, 15 gil).
+# Completed: the status (10000), a chip (nil), a carp (301: 10001, 10 gil, fame +10), Joulet's brother message, Ufanne's
+# 309 (0, 0, 10001) and 310.
+# The status and brother messages carry Lua booleans (showName true, turn false): the NPC does not turn (no 0x00E).
+# Gallijaux's and Joulet's scripts have only onSpawn (a fishing animation): no talk or trade of theirs answers. Ufanne has
+# no script and no default. While both quests are available each has its own Ufanne 310 (the lookup cycles between the
+# two equal actions: 310 either way); two talks perform both. Ufanne's Cycle is a char local var, shared by both quests.
+lists PortSanDoria/Gallijaux/onTrigger PortSanDoria/Gallijaux/onTrade PortSanDoria/Joulet/onTrigger PortSanDoria/Ufanne/onTrigger PortSanDoria/onEventFinish/300 PortSanDoria/onEventFinish/301 PortSanDoria/onEventFinish/303
+char zone=PortSanDoria pos=-13.2,-2,-43.755 job=WAR lvl=10
+item MoatCarp1 x4
+item ForestCarp x2
+item BoneChip
+login
+trade Gallijaux MoatCarp1 x1              # available: no trade handler: nothing
+trigger Ufanne                            # both available: 310 (the first of the two quests' equal actions)
+finish
+trigger Ufanne                            # 310 again: the lookup's cycle takes the other quest's action
+finish
+trigger Gallijaux                         # 300 (Moat Carp, Forest Carp)
+finish                                    # option 0: nothing
+trigger Gallijaux                         # 300
+finish option=700                         # begun
+trigger Gallijaux                         # accepted: GALLIJAUX_CARP_STATUS, 0 carp (showName true, turn false: no turn)
+trigger Joulet                            # JOULET_HELP_OTHER_BROTHER
+trigger Ufanne                            # Cycle 0: 309 (0, 0, 0); Cycle 1
+finish
+trigger Ufanne                            # Cycle 1: 310; Cycle 0
+finish
+walk -13.2,-2,-43.755
+trade Gallijaux BoneChip x1               # no carp: nil
+trade Gallijaux MoatCarp1 x1 BoneChip x1  # the carp are not the whole trade: nil
+trade Gallijaux MoatCarp1 x2 ForestCarp x1   # 3 carp, total 3: 301
+finish                                    # the carp taken; carpsTraded 3; 35 gil; fame +10
+trigger Gallijaux                         # GALLIJAUX_CARP_STATUS, 3 carp
+charvar carpsTraded 9998
+trade Gallijaux MoatCarp1 x1              # total 9999: 301
+finish                                    # carpsTraded 9999; 10 gil; fame +10
+trade Gallijaux ForestCarp x1             # total 10000: 303
+finish                                    # completed: Lu Shang's Fishing Rod, Testimonial, Carp Diem, fame +10; the carp taken; carpsTraded 10000; 15 gil
+trigger Gallijaux                         # completed: GALLIJAUX_CARP_STATUS, 10000 carp
+trade Gallijaux BoneChip x1               # completed, no carp: nil
+trade Gallijaux MoatCarp1 x1              # completed: 301
+finish                                    # carpsTraded 10001; 10 gil; fame +10
+trigger Joulet                            # completed: JOULET_HELP_OTHER_BROTHER
+trigger Ufanne                            # completed, Cycle 0: 309 (0, 0, 10001)
+finish
+trigger Ufanne                            # Cycle 1: 310
+finish

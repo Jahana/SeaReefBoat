@@ -1,0 +1,75 @@
+# I'm on a Boat (adoulin 55): a level 99 Warrior in Foret de Hennetiel with six Squares of Dhalmel Leather, two
+# Umbril Oozes and two Twitherym Scales. A trade while available: no handler. Choubollet: 2561, finished on 3: begun
+# (any option); available again (a GM): 2561 on 0: begun. Accepted, no Watercraft: Choubollet 2562;
+# Castoff_Point_4 and _5 nil (default RIVER_UNSUITABLE_FOR_SWIMMING); a trade of two leathers, the ooze and the scale:
+# nil; of three leathers, an ooze and a scale: 2576, finished: confirmed, the Watercraft. With it at Prog 0:
+# Choubollet 2577. Castoff_Point_5: 19 (5, no title 0), finished on 0: nothing. Castoff_Point_4: 19 (4, 0), finished
+# on 0 and 4: nothing; on 3: the title Toxin Tussler; 19 (4, 1) on 1: Prog 1 (STARTED_TO_LEARN_BOAT). At Prog 1:
+# Choubollet 2577; the trade again (the Watercraft held): 2576, finished: confirmed, no key item and no message
+# (npcUtil.giveKeyItem skips a held one); Castoff_Point_4 on 3: the title again. Castoff_Point_5: 19 (5, 1) on 1: Prog 2
+# (FIGURED_OUT_BOAT, messageName); again on 1 at Prog 2: nothing. The Watercraft taken at Prog 2 (a GM):
+# Choubollet 2562; given back. Prog 3 (a GM): Castoff_Point_5 on 1: nothing; Choubollet 2577. Prog 0 (a GM):
+# Castoff_Point_5 on 1: Prog 2 (point 5 first, FIGURED_OUT_BOAT). Choubollet at Prog 2: 2563, finished:
+# YOU_HAVE_LEARNED Watercrafting, completed (500 bayld), the Watercraft taken, Watercrafting added. Completed:
+# Choubollet no section (default 2564). The pads: #pads.
+lists ForetDeHennetiel/Choubollet/onTrigger ForetDeHennetiel/Choubollet/onTrade
+lists ForetDeHennetiel/Castoff_Point_4/onTrigger ForetDeHennetiel/Castoff_Point_5/onTrigger
+lists ForetDeHennetiel/onEventFinish/2561 ForetDeHennetiel/onEventFinish/2563 ForetDeHennetiel/onEventFinish/2576
+lists ForetDeHennetiel/onEventFinish/19
+char zone=ForetDeHennetiel pos=382.318,-2.105,290.792 job=WAR lvl=99
+item SquareOfDhalmelLeather x6
+item UmbrilOoze x2
+item TwitherymScale x2
+login
+trade Choubollet SquareOfDhalmelLeather x3 UmbrilOoze x1 TwitherymScale x1  # available: no trade handler: nothing
+trigger Choubollet                      # available: 2561
+finish option=3                         # begun (any option)
+quest Adoulin.ImOnABoat available       # a GM
+trigger Choubollet                      # available: 2561
+finish option=0                         # begun
+trigger Choubollet                      # accepted, no Watercraft: 2562 (an Event)
+finish
+trigger Castoff_Point_4                 # no Watercraft: nil: default RIVER_UNSUITABLE_FOR_SWIMMING
+trigger Castoff_Point_5                 # no Watercraft: nil: default RIVER_UNSUITABLE_FOR_SWIMMING
+walk 382.318,-2.105,290.792
+trade Choubollet SquareOfDhalmelLeather x2 UmbrilOoze x1 TwitherymScale x1  # not exactly: nil
+trade Choubollet SquareOfDhalmelLeather x3 UmbrilOoze x1 TwitherymScale x1  # exactly: 2576
+finish                                  # confirmed; the Watercraft
+trigger Choubollet                      # the Watercraft, Prog 0: 2577 (an Event)
+finish
+trigger Castoff_Point_5                 # the Watercraft: 19 (5, 0)
+finish option=0                         # option 0: nothing
+trigger Castoff_Point_4                 # the Watercraft: 19 (4, 0)
+finish option=0                         # option 0: nothing
+trigger Castoff_Point_4                 # 19 (4, 0)
+finish option=4                         # option 4: nothing
+trigger Castoff_Point_4                 # 19 (4, 0)
+finish option=3                         # option 3: the title Toxin Tussler
+trigger Castoff_Point_4                 # 19 (4, 1: the title held)
+finish option=1                         # option 1, Prog 0, point 4: Prog 1, STARTED_TO_LEARN_BOAT
+trigger Choubollet                      # the Watercraft, Prog 1: 2577 (an Event)
+finish
+trade Choubollet SquareOfDhalmelLeather x3 UmbrilOoze x1 TwitherymScale x1  # Prog 1, the Watercraft held: 2576
+finish                                  # confirmed (the five taken); the Watercraft held: giveKeyItem gives nothing
+trigger Castoff_Point_4                 # 19 (4, 1)
+finish option=3                         # option 3 at Prog 1: the title again
+trigger Castoff_Point_5                 # 19 (5, 1)
+finish option=1                         # option 1, Prog 1, point 5: Prog 2, FIGURED_OUT_BOAT
+trigger Castoff_Point_5                 # 19 (5, 1)
+finish option=1                         # option 1 at Prog 2: not below 2, not option 3: nothing
+delkeyitem Watercraft                   # a GM
+trigger Choubollet                      # no Watercraft at Prog 2: 2562 (an Event)
+finish
+keyitem Watercraft                      # a GM
+charvar Quest[9][55]Prog 3              # a GM
+trigger Castoff_Point_5                 # 19 (5, 1)
+finish option=1                         # option 1 at Prog 3: nothing
+trigger Choubollet                      # the Watercraft, Prog 3: 2577 (an Event)
+finish
+charvar Quest[9][55]Prog 0              # a GM
+trigger Castoff_Point_5                 # 19 (5, 1)
+finish option=1                         # option 1, Prog 0, point 5 first: Prog 2, FIGURED_OUT_BOAT
+trigger Choubollet                      # the Watercraft, Prog 2: 2563
+finish                                  # the learned line, completed, the Watercraft taken, Watercrafting
+trigger Choubollet                      # completed: no section: default 2564
+finish-if-event

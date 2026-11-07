@@ -1,0 +1,188 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "stats.schema.json",
+   "title": "Stats",
+   "description": "What a grade is worth per level, for HP, MP and the base attributes.",
+   "type": "object",
+   "properties": {
+      "stats": {
+         "type": "object",
+         "properties": {
+            "attributes": {
+               "$ref": "#/$defs/std::map<uint8_t,grade_row>",
+               "description": "Twentieths of a point a level up grants an attribute, per grade. A race contributes through the grade it holds, so there is no racial curve. Stops at 75."
+            },
+            "hp": {
+               "type": "object",
+               "properties": {
+                  "graded": {
+                     "$ref": "#/$defs/std::map<uint8_t,grade_row>",
+                     "description": "HP a level up grants, per grade. A row holds until the next level listed."
+                  },
+                  "racial": {
+                     "$ref": "#/$defs/std::map<uint8_t,race_row>",
+                     "description": "HP a level up grants a race, since the April 2014 update gave races their own curves."
+                  }
+               },
+               "additionalProperties": false,
+               "required": [
+                  "graded",
+                  "racial"
+               ],
+               "description": "HP growth, by grade and by race."
+            },
+            "mp": {
+               "type": "object",
+               "properties": {
+                  "graded": {
+                     "type": "object",
+                     "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                           "a": {
+                              "$ref": "#/$defs/uint16_t"
+                           },
+                           "b": {
+                              "$ref": "#/$defs/uint16_t"
+                           },
+                           "c": {
+                              "$ref": "#/$defs/uint16_t"
+                           },
+                           "d": {
+                              "$ref": "#/$defs/uint16_t"
+                           },
+                           "f": {
+                              "$ref": "#/$defs/uint16_t"
+                           }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                           "a",
+                           "b",
+                           "c",
+                           "d",
+                           "f"
+                        ]
+                     },
+                     "description": "MP a level up grants, per grade."
+                  },
+                  "racial": {
+                     "$ref": "#/$defs/std::map<uint8_t,race_row>",
+                     "description": "MP a level up grants a race, since the April 2014 update."
+                  }
+               },
+               "additionalProperties": false,
+               "required": [
+                  "graded",
+                  "racial"
+               ],
+               "description": "MP growth, by grade and by race."
+            },
+            "round_once": {
+               "type": "boolean",
+               "description": "Whether the race, job and subjob attribute parts are pooled and rounded down once, or each rounded down on its own."
+            },
+            "ungraded": {
+               "type": "object",
+               "additionalProperties": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "description": "Whole points every attribute gains on each level up past 75, whatever its grade, granted to the character rather than to each part."
+            }
+         },
+         "additionalProperties": false,
+         "required": [
+            "round_once",
+            "hp",
+            "mp",
+            "attributes",
+            "ungraded"
+         ],
+         "description": "What a grade is worth per level, for HP, MP and the base attributes."
+      },
+      "meta": {
+         "$ref": "_meta.schema.json"
+      }
+   },
+   "additionalProperties": false,
+   "$defs": {
+      "std::map<uint8_t,grade_row>": {
+         "type": "object",
+         "additionalProperties": {
+            "type": "object",
+            "properties": {
+               "a": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "b": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "c": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "d": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "e": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "f": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "g": {
+                  "$ref": "#/$defs/uint16_t"
+               }
+            },
+            "additionalProperties": false,
+            "required": [
+               "a",
+               "b",
+               "c",
+               "d",
+               "e",
+               "f",
+               "g"
+            ]
+         }
+      },
+      "std::map<uint8_t,race_row>": {
+         "type": "object",
+         "additionalProperties": {
+            "type": "object",
+            "properties": {
+               "elvaan": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "galka": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "hume": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "mithra": {
+                  "$ref": "#/$defs/uint16_t"
+               },
+               "tarutaru": {
+                  "$ref": "#/$defs/uint16_t"
+               }
+            },
+            "additionalProperties": false,
+            "required": [
+               "hume",
+               "elvaan",
+               "tarutaru",
+               "mithra",
+               "galka"
+            ]
+         }
+      },
+      "uint16_t": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 65535
+      }
+   },
+   "required": [
+      "stats"
+   ]
+}

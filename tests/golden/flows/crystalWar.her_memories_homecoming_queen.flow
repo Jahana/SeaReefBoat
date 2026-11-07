@@ -1,0 +1,70 @@
+# Her Memories: Homecoming Queen (crystalWar 64): a level 99 Warrior in East Ronfaure with the WotG mission Her Memories
+# current and Of Malign Maladies completed (GMs: its available Amaura 955 would tie with this quest's 958; other logs as
+# group 1's flows), a Lilac. Southern San d'Oria from East Ronfaure: 957, finished: begun. Old Bean: Port San d'Oria:
+# Thierride 792, finished: Old Bean added, Thierride's Bean Creation; again: 794 (oncePerZone); again: nil (794 shown;
+# his default 521). Southern San d'Oria: Amaura 958, finished: the bean taken, Prog1 1; again: 959 (oncePerZone); again:
+# her default 642 (959 shown, packet @3c695a459ad1a08b; the oncePerZone 959 no longer answers). Port San d'Oria:
+# Thierride 793, finished: Old Bean completed; no tiny fragment held: FRAGMENT_FAR_TOO_SMALL, Tiny Memory Fragment 1.
+# The Faux Pas: Northern San d'Oria: Abioleget 869, finished: The Faux Pas added, Prog2 1; again: 871 (oncePerZone);
+# again: his script's ABIOLEGET_DIALOG. Bertenont (a GM puts his fallback turn first) 870, finished: The Faux Pas
+# completed; one held: FRAGMENT_FAR_TOO_SMALL, Tiny 2. The Grave Resolve: Chateau d'Oraguille: Halver 571, finished:
+# added, Prog3 1; again: 572 (oncePerZone); again: his script's 577 (a San d'Orian char), then its text (message 7909).
+# Batallia Downs: Weathered Gravestone 5, finished: Prog3 2; again: 5 (Prog3 2 too). The Lilac: confirmed, 6, finished:
+# The Grave Resolve completed; two held: FRAGMENTS_MELD, the three tiny fragments taken (in pairs order 870, 793, 6),
+# completed (Large Memory Fragment 1), checkMemoryFragments (one large: nothing).
+lists SouthernSanDoria/onZoneIn/1 SouthernSanDoria/onEventFinish/957 PortSanDoria/Thierride/onTrigger PortSanDoria/onEventFinish/792 PortSanDoria/onEventFinish/793 SouthernSanDoria/Amaura/onTrigger SouthernSanDoria/onEventFinish/958 NorthernSanDoria/Abioleget/onTrigger NorthernSanDoria/Bertenont/onTrigger NorthernSanDoria/onEventFinish/869 NorthernSanDoria/onEventFinish/870 ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/571 BatalliaDowns/Weathered_Gravestone/onTrigger BatalliaDowns/Weathered_Gravestone/onTrade BatalliaDowns/onEventFinish/5 BatalliaDowns/onEventFinish/6
+char zone=EastRonfaure pos=-258.861,-70.999,426 job=WAR lvl=99 nation=0
+mission Wotg HerMemories current
+quest CrystalWar.HerMemoriesOfMalignMaladies completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item Lilac
+login
+warp 97.4,0.0,113.6 SouthernSanDoria open # from East Ronfaure, Her Memories current: 957, left open
+finish                                  # begun
+warp -65.949,-5.496,-28.792 PortSanDoria
+trigger Thierride                       # Old Bean, Prog1 0, no bean: 792
+finish                                  # Old Bean added; Thierride's Bean Creation
+trigger Thierride                       # the bean: 794 (oncePerZone)
+finish
+trigger Thierride                       # 794 shown this zone visit: nil (his default 521)
+finish-if-event
+warp -82.867,-6.949,91.148 SouthernSanDoria
+trigger Amaura                          # the bean: 958 (8 args)
+finish                                  # the bean taken; Prog1 1
+trigger Amaura                          # Prog1 1: 959 (oncePerZone)
+finish
+trigger Amaura                          # 959 shown: her default 642
+finish-if-event
+warp -65.949,-5.496,-28.792 PortSanDoria
+trigger Thierride                       # Prog1 1: 793
+finish                                  # Old Bean completed; no tiny fragment: FRAGMENT_FAR_TOO_SMALL; Tiny Memory Fragment 1
+warp 130.271,0,118.538 NorthernSanDoria
+trigger Abioleget                       # The Faux Pas, Prog2 0: 869
+finish                                  # The Faux Pas added; Prog2 1
+trigger Abioleget                       # Prog2 1: 871 (oncePerZone)
+finish
+trigger Abioleget                       # 871 shown: his script's ABIOLEGET_DIALOG
+finish-if-event
+localvar [Action][Bertenont][onTrigger]UseFallback 1 # a GM: the fallback turn, as the cycle would give after his dialog
+trigger Bertenont                       # Prog2 1: 870 (a Progress reply, over BERTENONT_DIALOG)
+finish                                  # The Faux Pas completed; one held: FRAGMENT_FAR_TOO_SMALL; Tiny 2
+warp 31.2,0.0,-0.9 ChateauDoraguille
+trigger Halver                          # The Grave Resolve, Prog3 0: 571 (8 args)
+finish                                  # added; Prog3 1
+trigger Halver                          # Prog3 1: 572 (oncePerZone)
+finish
+trigger Halver                          # 572 shown: his script's 577
+finish-if-event
+trigger Halver                          # again: his script's text (message 7909)
+finish-if-event
+warp 151.228,-5.109,-395.121 BatalliaDowns
+trigger Weathered_Gravestone            # Prog3 1: 5 (8 args)
+finish                                  # Prog3 2
+trigger Weathered_Gravestone            # Prog3 2: 5 again
+finish                                  # Prog3 2
+walk 151.228,-5.109,-395.121            # beside the Gravestone (a trade does not walk)
+trade Weathered_Gravestone Lilac x1     # Prog3 2, the Lilac alone: confirmed; 6 (8 args)
+finish                                  # Grave Resolve completed; two held: FRAGMENTS_MELD; the three taken; completed (Large Memory Fragment 1); checkMemoryFragments: one large, nothing

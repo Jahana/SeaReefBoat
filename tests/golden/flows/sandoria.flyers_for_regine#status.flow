@@ -1,0 +1,38 @@
+# Flyers for Regine (sandoria 16), each status operand alone (the GM sets the status, the other operands hold). Regine,
+# no flyer held: the full-mask test (mask 32767): available 510 (2), completed 510 (not 603); the no-flyer test (mask
+# 0): completed 510 (not 510 (3)), accepted 510 (3); her gil trade (10 gil): completed and available nothing. A flyer to
+# Answald (mask 0): available and completed nothing, accepted FLYER_ACCEPTED; the flyer alone to Cletae: accepted
+# FLYER_REFUSED, available and completed nothing.
+char zone=PortSanDoria pos=66.3,-8.1,-73.7 job=WAR lvl=30 gil=1000
+charvar [ffr]deliveryMask 32767
+login
+trigger Regine                            # available, mask full, no flyer: 510 (2)
+finish option=4                           # nothing
+quest Sandoria.FlyersForRegine completed
+trigger Regine                            # completed, mask full, no flyer: 510 (the script's menu)
+finish option=4                           # nothing
+charvar [ffr]deliveryMask 0
+trigger Regine                            # completed, mask 0, no flyer: 510
+finish option=4                           # nothing
+quest Sandoria.FlyersForRegine available
+quest Sandoria.FlyersForRegine accepted
+trigger Regine                            # accepted, mask 0, no flyer: 510 (3)
+finish option=4                           # nothing
+quest Sandoria.FlyersForRegine completed
+trade Regine gil=10                       # completed: nothing
+quest Sandoria.FlyersForRegine available
+trade Regine gil=10                       # available: nothing
+item MagicmartFlyer x3
+warp 74.3,-16.0,-128.7 PortSanDoria
+trade Answald MagicmartFlyer x1           # available: nothing
+quest Sandoria.FlyersForRegine completed
+trade Answald MagicmartFlyer x1           # completed: nothing
+quest Sandoria.FlyersForRegine available
+quest Sandoria.FlyersForRegine accepted
+trade Answald MagicmartFlyer x1           # accepted: FLYER_ACCEPTED, FFR_ANSWALD; bit 0; the flyer taken
+warp -187.1,-8.8,14.4 SouthernSanDoria
+trade Cletae MagicmartFlyer x1            # accepted, the flyer alone: FLYER_REFUSED
+quest Sandoria.FlyersForRegine available
+trade Cletae MagicmartFlyer x1            # available: nothing
+quest Sandoria.FlyersForRegine completed
+trade Cletae MagicmartFlyer x1            # completed: nothing

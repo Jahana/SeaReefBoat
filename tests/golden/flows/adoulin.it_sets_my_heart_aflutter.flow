@@ -1,0 +1,67 @@
+# It Sets My Heart Aflutter (adoulin 79): a level 99 Warrior in Rala Waterways with the Pioneer's Badge,
+# seven Twitherym Wings and an Umbril Ooze. A trade of two while available: no handler (Saldinor has no script).
+# Saldinor: 330, finished on 0 and on 2: not begun; on 1: begun. Accepted: 333; a trade of three, of one, of two and the
+# ooze: nil (exactly two); of two: 331, finished: completed (6 Adoulin fame, 200 bayld, 500 exp), the trade confirmed,
+# ADOULIN_FAME_QUEST_TRACKER 1. Completed: a trade of two: nothing; 329. The repeat's operands (GMs): the tracker 0 with
+# the other two available, with only A Good Pair of Crocs completed, with only A Shot in the Dark completed: 329; all
+# three completed, the tracker 1 and -1: 329; 0: 332, finished on 0: deleted and begun again (accepted, not completed:
+# 333). Completed again (a GM): 332 again (no other arm at Progress), finished on 3: begun again; a trade of two: 331,
+# finished: completed again, the tracker 1. The tracker 0 and the quest accepted by a GM on the completed quest (its
+# completed bit kept): the repeat's 332 (no status read), finished: deleted, begun; 333.
+lists RalaWaterways/Saldinor/onTrigger RalaWaterways/Saldinor/onTrade RalaWaterways/onEventFinish/330
+lists RalaWaterways/onEventFinish/331 RalaWaterways/onEventFinish/332
+char zone=RalaWaterways pos=-337.382,-1,-308.252 job=WAR lvl=99
+keyitem PioneersBadge
+item TwitherymWing x7
+item UmbrilOoze
+login
+trade Saldinor TwitherymWing x2         # available: no trade handler: nothing
+trigger Saldinor                        # available, the badge: 330
+finish option=0                         # not begun
+trigger Saldinor                        # 330
+finish option=2                         # not option 1: not begun
+trigger Saldinor                        # 330
+finish option=1                         # begun
+trigger Saldinor                        # accepted: 333
+finish
+trade Saldinor TwitherymWing x3         # three: nil (tradeHasExactly two)
+trade Saldinor TwitherymWing x1         # one: nil
+trade Saldinor TwitherymWing x2 UmbrilOoze x1 # two and the ooze: nil
+trade Saldinor TwitherymWing x2         # two: 331
+finish                                  # completed (fame, bayld, exp); confirmed; tracker 1
+trade Saldinor TwitherymWing x2         # completed: no trade handler: nothing
+trigger Saldinor                        # completed, the others available, tracker 1: 329
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER 0    # a GM
+trigger Saldinor                        # the others available, tracker 0: 329
+finish
+quest Adoulin.AGoodPairOfCrocs completed # a GM
+trigger Saldinor                        # A Shot in the Dark available, tracker 0: 329
+finish
+quest Adoulin.AGoodPairOfCrocs available # a GM
+quest Adoulin.AShotInTheDark completed  # a GM
+trigger Saldinor                        # A Good Pair of Crocs available, tracker 0: 329
+finish
+quest Adoulin.AGoodPairOfCrocs completed # a GM: all three completed
+charvar ADOULIN_FAME_QUEST_TRACKER 1    # a GM
+trigger Saldinor                        # tracker 1: 329
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER -1   # a GM
+trigger Saldinor                        # tracker -1: 329
+finish
+charvar ADOULIN_FAME_QUEST_TRACKER 0    # a GM
+trigger Saldinor                        # all three completed, tracker 0: 332
+finish option=0                         # deleted, then begun again
+trigger Saldinor                        # accepted, not completed: 333
+finish
+quest Adoulin.ItSetsMyHeartAflutter completed # a GM
+trigger Saldinor                        # all three completed, tracker 0: 332 again
+finish option=3                         # deleted, then begun again (any option)
+trade Saldinor TwitherymWing x2         # two: 331
+finish                                  # completed again; confirmed; tracker 1
+charvar ADOULIN_FAME_QUEST_TRACKER 0    # a GM
+quest Adoulin.ItSetsMyHeartAflutter accepted # a GM, on the completed quest: its completed bit kept
+trigger Saldinor                        # accepted with the completed bit: the repeat, 332 (not 333)
+finish                                  # deleted (both bits), begun again
+trigger Saldinor                        # accepted: 333
+finish

@@ -1,0 +1,14 @@
+# Out of One's Shell at Prog 1 with no mustZone: Ronan's 86 with a full inventory (the Monk's Headgear does not fit: not
+# completed), then with room (completed).
+lists PortBastok/Ronan/onTrigger PortBastok/onEventFinish/86
+char zone=PortBastok pos=84.7,-8.8,21.8
+quest Bastok.TheQuadavsCurse completed
+quest Bastok.OutOfOnesShell accepted
+charvar Quest[1][5]Prog 1
+login
+fill-inventory
+trigger Ronan                        # 86
+finish                               # the inventory full: not completed
+free-inventory
+trigger Ronan                        # 86 again
+finish                               # completed

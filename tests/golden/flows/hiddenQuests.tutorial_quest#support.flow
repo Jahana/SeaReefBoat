@@ -1,0 +1,29 @@
+# Tutorial, step 11's pass arm (a support job): a level 18 Warrior with a Red Mage support job (level 9) at each tutor.
+# Prog 11 (a GM): getSubLvl() >= 1: 717 / 3660 / 1008 (nation); full: giveItem fails, Prog stays 11; with room: 12 Free
+# Chocopasses, the Echad Ring, Prog 12.
+lists BastokMarkets/Gulldago/onTrigger BastokMarkets/onEventFinish/717 SouthernSanDoria/Alaune/onTrigger SouthernSanDoria/onEventFinish/3660 WindurstWoods/Selele/onTrigger WindurstWoods/onEventFinish/1008
+char zone=BastokMarkets pos=-362,-10,-167 job=WAR lvl=18 sjob=RDM slvl=9 nation=1
+charvar HQuest[Tutorial]Prog 11
+login
+fill-inventory
+trigger Gulldago                        # 717
+finish                                  # no room: Prog stays 11
+free-inventory
+trigger Gulldago                        # 717
+finish                                  # 12 Free Chocopasses, the Echad Ring; Prog 12
+warp -90.6,1,-57.5 SouthernSanDoria
+charvar HQuest[Tutorial]Prog 11
+fill-inventory
+trigger Alaune                          # 3660
+finish                                  # no room
+free-inventory
+trigger Alaune                          # 3660
+finish                                  # Prog 12
+warp 106.8,-5,-29.5 WindurstWoods
+charvar HQuest[Tutorial]Prog 11
+fill-inventory
+trigger Selele                          # 1008
+finish                                  # no room
+free-inventory
+trigger Selele                          # 1008
+finish                                  # Prog 12

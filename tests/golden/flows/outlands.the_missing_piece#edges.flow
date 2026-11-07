@@ -1,0 +1,36 @@
+# The Missing Piece (outlands 193), the edges. main: a level 9 Warrior at Selbina-Rabao fame 225: Alfesar: the default
+# 52 (level below 10). bob: accepted at Prog 0 (a GM) in Northern San d'Oria: Charlaimagnat: nil: the default 702; Prog 1
+# (a GM): 702; Prog 3 with Wait 1800000001 (GMs): 704 (now 1800000000); Wait 1800000000: 705 (now >= Wait), finished:
+# completed. cid: accepted at Prog 3 (a GM) in Rabao: Alfesar: nil: the default 52. dan in Quicksand Caves, the quest
+# not his: qm5: no section: the default NOTHING_OUT_OF_ORDINARY (the qm stays put).
+lists Rabao/Alfesar/onTrigger QuicksandCaves/qm5/onTrigger NorthernSanDoria/Charlaimagnat/onTrigger NorthernSanDoria/onEventFinish/705
+char zone=Rabao pos=23.309,8.929,40.887 job=WAR lvl=9
+char bob zone=NorthernSanDoria pos=127.703,6.499,109.316 job=WAR lvl=10
+char cid zone=Rabao pos=23.309,8.929,40.887 job=WAR lvl=10
+char dan zone=QuicksandCaves pos=783.227,-16,-825.022 job=WAR lvl=10
+fame Sandoria 169
+fame Bastok 169                         # Selbina-Rabao 225
+bob: quest Outlands.TheMissingPiece accepted
+cid: quest Outlands.TheMissingPiece accepted
+cid: charvar Quest[5][193]Prog 3
+login
+trigger Alfesar                         # level 9: not offered: the default 52
+finish
+bob: login
+bob: trigger Charlaimagnat              # Prog 0: nil: the default 702
+bob: finish
+bob: charvar Quest[5][193]Prog 1        # a GM
+bob: trigger Charlaimagnat              # Prog 1: nil: 702
+bob: finish
+bob: charvar Quest[5][193]Prog 3
+bob: charvar Quest[5][193]Wait 1800000001
+bob: trigger Charlaimagnat              # now < Wait: 704
+bob: finish
+bob: charvar Quest[5][193]Wait 1800000000
+bob: trigger Charlaimagnat              # now = Wait: 705
+bob: finish                             # completed
+cid: login
+cid: trigger Alfesar                    # Prog 3: nil: the default 52
+cid: finish
+dan: login
+dan: trigger qm5                        # not his: no section: the default

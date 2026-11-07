@@ -1,0 +1,15 @@
+# The Weight of Your Limits (bastok 66): 791 with hide 0 and option 2. Accepted by GM with the guide alone (no axe, no map: the
+# player dropped the axe): 791 with hide 0, option 0 (nothing); the map by GM: 791 with hide 1, option 2 deletes the
+# quest (available again), the guide and the map. Then skill 0: not offered, the default 604.
+lists Metalworks/Iron_Eater/onTrigger Metalworks/onEventFinish/791
+char zone=Metalworks pos=92,-19.6,2 job=WAR lvl=75
+quest Bastok.TheWeightOfYourLimits accepted
+keyitem WeaponTrainingGuide
+login
+trigger Iron_Eater                    # accepted, no Annals, no axe, no map: 791 with hide 0
+finish option=0                # option 0: nothing
+keyitem MapToTheAnnalsOfTruth
+trigger Iron_Eater                    # the map: 791 with hide 1
+finish option=2                # the quest deleted, the guide and the map deleted
+trigger Iron_Eater                    # available, skill 0: not offered, 604
+finish

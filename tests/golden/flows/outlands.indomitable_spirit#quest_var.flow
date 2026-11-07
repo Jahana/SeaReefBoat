@@ -1,0 +1,14 @@
+# Indomitable Spirit (outlands 201), the quest's own var at the completion: accepted, IndomitableSpiritTimer 1 (past)
+# and Quest[5][201]Prog 1 (GMs). Irmilant (the second talk of a pair: his default 76 first): 134; finished:
+# npcUtil.completeQuest (the Ebisu Fishing Rod, the Indomitable Fisher title, the timer 0, completed), then
+# San d'Oria and Bastok fame +10. npcUtil.completeQuest does no cleanup: Quest[5][201]Prog stays 1 (quest:complete's
+# cleanup would clear it).
+char zone=Rabao pos=3.78,9.54,56.21
+quest Outlands.IndomitableSpirit accepted
+charvar IndomitableSpiritTimer 1
+charvar Quest[5][201]Prog 1     # a GM: the quest's own var
+login
+trigger Irmilant                # default turn: 76
+finish                          # nothing
+trigger Irmilant                # script, the timer past: 134
+finish-if-event                 # the rod; the title; the timer 0; completed, Prog kept; fame

@@ -1,0 +1,32 @@
+# The Road to Aht Urhgan (jeuno 91): timePassed's operands one at a time (Timer <= VanadielUniqueDay() and not the
+# mustZone), at Prog 2 and Prog 3, set by a GM (the harness clock is day 8000). Prog 2: Timer 8000 with the mustZone
+# (Quest[3][91]mustZone 245, as setMustZone leaves it): 10066; Timer 8001, no mustZone: 10066 (both met: #gil's
+# 10067). Prog 3 the same: 10072, 10072, 10070 (completed). Accepted, Prog 4 (a GM; set by the 10067 finish just
+# before the teleport): no Faursel answer (nil: his default 10065).
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/onEventFinish/10070
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+quest Jeuno.TheRoadToAhtUrhgan accepted
+charvar Quest[3][91]Prog 4
+login
+trigger Faursel                     # Prog 4: nil; his default 10065
+finish
+charvar Quest[3][91]Prog 3          # a GM
+charvar Quest[3][91]Timer 8000      # a GM: today
+charvar Quest[3][91]mustZone 245    # a GM: the mustZone
+trigger Faursel                     # Timer reached, the mustZone: 10072
+finish
+charvar Quest[3][91]mustZone 0      # a GM
+charvar Quest[3][91]Timer 8001      # a GM: tomorrow
+trigger Faursel                     # Timer 8001 > 8000: 10072
+finish
+charvar Quest[3][91]Prog 2          # a GM
+trigger Faursel                     # Prog 2, Timer 8001: 10066
+finish
+charvar Quest[3][91]Timer 8000      # a GM
+charvar Quest[3][91]mustZone 245    # a GM
+trigger Faursel                     # Prog 2, the mustZone: 10066
+finish
+charvar Quest[3][91]mustZone 0      # a GM
+charvar Quest[3][91]Prog 3          # a GM
+trigger Faursel                     # Prog 3, Timer 8000, no mustZone: 10070
+finish                              # completed; the Boarding Permit

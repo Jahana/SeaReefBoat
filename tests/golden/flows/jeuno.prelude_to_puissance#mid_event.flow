@@ -1,0 +1,19 @@
+# Prelude to Puissance (jeuno 170), each finish once its section no longer holds (a GM's change while the event is open):
+# a level 91 Warrior with the Limit Breaker at cap 95, Dormant Powers Dislodged completed. 10194 open, then cap 96:
+# nothing (not begun); cap 95 again: begun. Accepted: 10045 (91, 1, 6, 2, 0) open, then the quest set available (its
+# first section holds, with no 10045 handler): option 13 does nothing (not completed, no Beyond Infinity).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10194 RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=91
+keyitem LimitBreaker
+levelcap 95
+quest Jeuno.DormantPowersDislodged completed
+login
+trigger Nomad_Moogle                    # 10194 (91, 1, 6, 2)
+levelcap 96                             # a GM, 10194 open
+finish                                  # cap 96: no section: nothing (not begun)
+levelcap 95                             # a GM
+trigger Nomad_Moogle                    # 10194 (91, 1, 6, 2)
+finish                                  # begun
+trigger Nomad_Moogle                    # 10045 (91, 1, 6, 2, 0)
+quest Jeuno.PreludeToPuissance available  # a GM, 10045 open
+finish option=13                        # available: nothing

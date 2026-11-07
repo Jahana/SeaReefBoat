@@ -1,0 +1,24 @@
+# Soul Searching (outlands 162) against Rhapsodies of Zilart 5 Headstone Pilgrimage at the Zi'Tah headstone. main: the
+# mission current, the Light Fragment held, the quest accepted (GMs: the mission's 201): the mission answers nil (the
+# fragment held, the quest not completed): the quest's AIR_REMAINS_STAGNANT; the Prismatic Fragment (a GM): 202,
+# finished: completed; the headstone: the mission's ALREADY_OBTAINED_FRAG (its own messageSpecial) and noAction. bob:
+# the mission completed (its rD ZILART_MONUMENT) with the quest accepted: the quest's message (50) beats the rD (20);
+# the quest completed (a GM): the mission's ZILART_MONUMENT.
+lists TheSanctuaryOfZitah/Cermet_Headstone/onTrigger TheSanctuaryOfZitah/onEventFinish/202
+char zone=TheSanctuaryOfZitah pos=233.807,-1.098,279.952 job=WAR lvl=75
+char bob zone=TheSanctuaryOfZitah pos=233.807,-1.098,279.952 job=WAR lvl=75
+mission Zilart HeadstonePilgrimage current
+keyitem LightFragment
+quest Outlands.SoulSearching accepted
+bob: mission Zilart HeadstonePilgrimage completed
+bob: quest Outlands.SoulSearching accepted
+login
+trigger Cermet_Headstone                # the mission: nil; the quest: AIR_REMAINS_STAGNANT
+keyitem PrismaticFragment               # a GM
+trigger Cermet_Headstone                # 202
+finish                                  # completed
+trigger Cermet_Headstone                # the mission: ALREADY_OBTAINED_FRAG, noAction
+bob: login
+bob: trigger Cermet_Headstone           # the quest's AIR_REMAINS_STAGNANT over the mission's rD ZILART_MONUMENT
+bob: quest Outlands.SoulSearching completed   # a GM
+bob: trigger Cermet_Headstone           # no quest section: the mission's ZILART_MONUMENT

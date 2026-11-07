@@ -1,0 +1,33 @@
+# Shattering Stars (jeuno 132): the battlefield win's 32001 in Horlais Peak for two GM-set chars by BC_Entrance.
+# Main, a level 75 Ranger, has completed the quest (a GM) with maatsCap 1 (the Warrior's bit, a GM): its fight (index 7,
+# area 1, Maat+6) won, the 32001 finished: completed, so no scroll and no Prog; the Ranger's bit 10 is new: maatsCap
+# 1025 (the other bits kept); Maat Masher. Blm, a level 66 Black Mage, accepted with tradedTestimony 1 and maatsCap 8
+# (its own bit 3 already set, a GM): its fight (index 6, area 2, Maat+4) won, the 32001 finished: accepted, so the
+# scroll and Prog 4; the bit already set: maatsCap stays 8; Maat Masher.
+lists HorlaisPeak/BC_Entrance/onTrade HorlaisPeak/onEventFinish/32001
+char zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=RNG lvl=75
+char blm zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=BLM lvl=66
+quest Jeuno.ShatteringStars completed
+charvar maatsCap 1
+item RangersTestimony
+blm: quest Jeuno.ShatteringStars accepted
+blm: charvar Quest[3][132]tradedTestimony 1
+blm: charvar maatsCap 8
+blm: item BlackMagesTestimony
+login
+trade BC_Entrance RangersTestimony x1   # completed: the 32000 menu
+update 32000 option=113                 # Shattering Stars (RNG), index 7, area 1: registered, entered
+finish                                  # in the arena
+kill MAAT+6                             # Maat (RNG) of area 1: won, battlefieldWin 7, 32001 opens
+finish                                  # 32001, completed: no scroll, no Prog; bit 10 new: maatsCap 1025; Maat Masher
+blm: login
+blm: trade BC_Entrance BlackMagesTestimony x1  # accepted, tradedTestimony 1: the 32000 menu
+blm: update 32000 option=98             # Shattering Stars (BLM), index 6, area 2: registered, entered
+blm: finish                             # in the arena
+blm: kill MAAT+4                        # Maat (BLM) of area 2: 1 HP (unkillable), won once he yields, battlefieldWin 6
+tick 1000                               # Maat is unkillable: he yields (battlefield:win) in a later onMobFight; 32001 opens on the last tick
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+blm: finish                             # 32001, accepted: the scroll, Prog 4; bit 3 already set: maatsCap 8; Maat Masher

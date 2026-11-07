@@ -1,0 +1,41 @@
+# Return to the Depths at Prog 10 (a GM Prog, as the battlefield's win leaves it): Ayame's 881 with a full inventory
+# (the Bowyer Ring does not fit: not completed), then with room (completed: Bowyer Ring, Goblin in Disguise, fame +50);
+# then the completed lines: Ayame's 882, Tarnotik's 45 (oncePerZone) and the bottle (44: taken, the setPos into the Mine
+# Shaft, Prog untouched), Ravorara in Port Bastok with the Pungent Providence Pot (313; option 1: 1000 gil, the pot
+# deleted) and without it (314). Ravorara is Out of the Depths' too (completed here: no handler of its own).
+lists Metalworks/Ayame/onTrigger Metalworks/onEventFinish/881 OldtonMovalpolos/onZoneIn/1 OldtonMovalpolos/Tarnotik/onTrigger OldtonMovalpolos/Tarnotik/onTrade OldtonMovalpolos/onEventFinish/44 PortBastok/Ravorara/onTrigger PortBastok/onEventFinish/313
+char zone=Metalworks pos=133.9,-19,34.8 lvl=75
+fame Bastok 325
+quest Bastok.OutOfTheDepths completed
+quest Bastok.AQuestionOfFaith completed
+quest Bastok.ReturnToTheDepths accepted
+charvar Quest[1][78]Prog 10
+keyitem PungentProvidencePot
+item BottleOfAhrimanTears
+item BoneChip
+login
+trigger Ayame                        # Prog 10: 881
+fill-inventory
+finish                               # the inventory full: not completed
+free-inventory
+trigger Ayame                        # 881 again
+finish                               # completed
+trigger Ayame                        # completed: 882
+finish
+warp 160.9,12,-54.2 OldtonMovalpolos # completed: no zone-in event
+trigger Tarnotik                     # completed: 45 (oncePerZone)
+finish
+trigger Tarnotik                     # lowered: his script
+finish-if-event
+trade Tarnotik BoneChip x1           # completed, the wrong item: nil
+trade Tarnotik BottleOfAhrimanTears x1  # completed: event 44
+finish                               # the bottle taken, setPos into Mine Shaft #2716
+tick 400
+login                                # the zone change: Mine Shaft #2716
+warp -151,-6,-5.7 PortBastok
+trigger Ravorara                     # completed, the pot: 313 (0, 0, 0, pot)
+finish                               # option 0: nothing, the pot kept
+trigger Ravorara                     # 313 again
+finish option=1                      # 1000 gil, the pot deleted
+trigger Ravorara                     # no pot: 314
+finish

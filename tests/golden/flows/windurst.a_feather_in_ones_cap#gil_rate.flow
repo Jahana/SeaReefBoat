@@ -1,0 +1,17 @@
+# A Feather in One's Cap (windurst 1) at GIL_RATE 1.125 (exact in binary; setting <NAME> <decimal>, quest rework P5):
+# 79's finish adds GIL_RATE x 1500 = 1687.5 gil, a product that ends in exactly one half, so the rounding shows: the
+# engine reads addGil's amount with sol's integral getter (llround: 1688; a truncation would give 1687, reading the rate
+# as a whole number first 1500). 79's own argument stays the literal 1500. Accepted by GM, three Giant Bird Feathers:
+# 79 (1500); its finish: completed (fame 16), 1688 gil, the feathers taken, needToZone.
+char zone=WindurstWaters pos=-65.0,-2.9,-145.7 job=WAR lvl=75
+setting GIL_RATE 1.125
+fame Windurst 125
+quest Windurst.HatInHand completed
+quest Windurst.AFeatherInOnesCap accepted
+charvar Quest[2][23]Prog 1
+item GiantBirdFeather x3
+login
+trigger Baren-Moren                     # accepted: 78 (0, 842); walks to him for the trade
+finish
+trade Baren-Moren GiantBirdFeather x3   # accepted, 3 feathers: 79 (1500)
+finish                                  # completed (fame 16); 1688 gil; the feathers taken; needToZone

@@ -1,0 +1,29 @@
+# A Taste of Honey's edges: a level 75 Warrior, the quest accepted (a GM). The first Pephredo Hive with a full bag: the
+# pot does not fit (ITEM_CANNOT_BE_OBTAINED): nil: NOTHING_OUT_OF_ORDINARY (the var stays 0); freed: a pot; the second
+# hive: a pot. Two pots to Qutiba: nil; a third (a GM), three with a full bag: 580, finished: the Irmik Helvasi does not
+# fit: no completion (the pots kept); freed: 580: completed. Completed: two pots (a GM): nil.
+lists AhtUrhganWhitegate/Qutiba/onTrade WajaomWoodlands/Pephredo_Hive/onTrigger AhtUrhganWhitegate/onEventFinish/580
+char zone=WajaomWoodlands pos=-455,-24,-700 job=WAR lvl=75
+quest AhtUrhgan.ATasteOfHoney accepted
+login
+fill-inventory
+trigger Pephredo_Hive                   # the pot does not fit (ITEM_CANNOT_BE_OBTAINED): nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+free-inventory
+trigger Pephredo_Hive                   # var still 0: a pot
+finish-if-event
+trigger Pephredo_Hive+1                 # a pot
+finish-if-event
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+trade Qutiba PotOfWhiteHoney x2         # two: nil
+finish-if-event
+item PotOfWhiteHoney x1                 # a GM: the third
+fill-inventory
+trade Qutiba PotOfWhiteHoney x3         # 580
+finish                                  # full: complete false: nothing more (the pots kept)
+free-inventory
+trade Qutiba PotOfWhiteHoney x3         # 580
+finish                                  # completed; the Irmik Helvasi; the pots taken
+item PotOfWhiteHoney x2                 # a GM
+trade Qutiba PotOfWhiteHoney x2         # completed: not one: nil
+finish-if-event

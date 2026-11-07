@@ -1,0 +1,17 @@
+# probe (quest rework P5): a quest's afterZoneIn (interaction_lookup's third zone-wide key, run by luautils::AfterZoneIn
+# 4 s after the zone-in) through the C# bridge. One Good Deed? (windurst 92) at Prog 2: Boneyard Gully's
+# afterZoneIn returns progressEvent(8, 4, DEED_TO_PURGONORGO_ISLE, 0, 274, 8); its update with option 101 updateEvent(3,
+# MAP_OF_THE_ATTOHWA_CHASM, 0, 274, 8); its finish Prog 3 and the map. Recorded on the Lua quest (P5); the replay ran a
+# test-only C# copy of its Boneyard Gully handlers (removed in Windurst group 11) and now runs the port, OneGoodDeed.cs.
+# A new record refuses (a probe records Lua only). Not a quest port: the key names no quest (Program.IsProbe).
+lists BoneyardGully/afterZoneIn/1 BoneyardGully/onEventUpdate/8 BoneyardGully/onEventFinish/8
+char zone=PortWindurst pos=-181.466,-2.834,75.07 lvl=40
+quest Windurst.OneGoodDeed accepted
+keyitem DeedToPurgonorgoIsle
+charvar Quest[2][92]Prog 2
+login
+warp -709.508,18.066,456.241 BoneyardGully
+tick 3000                                 # 3.4 s after the zone-in: no afterZoneIn yet
+tick 1000                                 # 4.4 s: afterZoneIn, 8 starts
+update 8 option=101                       # updateEvent(3, MAP_OF_THE_ATTOHWA_CHASM, 0, 274, 8)
+finish                                    # Prog 3, Map of the Attohwa Chasm

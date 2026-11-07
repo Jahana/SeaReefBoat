@@ -1,0 +1,11 @@
+# Mandragora Mad (windurst 34), completion parity: each turn-in's finish (251 to 255, one handler) is
+# npcUtil.completeQuest step for step (the event's fame, Windurst), ending in the raw player:completeQuest, so a GM's
+# Quest[2][34]Prog survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it).
+# Accepted (GM) beside Yoran-Oran (his default 245 does not answer a trade).
+char zone=WindurstWalls pos=-108.5,-13.0,203.3 job=WAR lvl=75
+quest Windurst.MandragoraMad accepted
+item Cornette
+login
+charvar Quest[2][34]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Yoran-Oran Cornette x1            # 251 (200)
+finish                                  # fame 10; completed; 200 gil; the cornette taken; Prog kept

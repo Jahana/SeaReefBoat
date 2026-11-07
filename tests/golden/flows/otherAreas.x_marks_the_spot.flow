@@ -1,0 +1,61 @@
+# X Marks the Spot (otherAreas 65): Tavnazian Safehold's Despachiaire (default 106), Parelbriaux (default 294; the second
+# of the name, 16883762, is cutscene_only: not talkable) and Odeya (default 150), no scripts; Phomiuna Aqueducts' _0r9 (a script with no handlers; default
+# DOOR_FIRMLY_SHUT). CoP Ancient Vows current: CoP 2-2's completed section answers Despachiaire 106 (replaceDefault).
+# Despachiaire 144 (Progress), finished: begun. Accepted: 144 (Event, importantOnce), finished: nothing; again: the 144 is
+# down to Default: CoP 2-2's 106. Odeya at Prog 0: nil, 150. Parelbriaux 145, finished: Prog 1; again at Prog 1: 145.
+# Odeya 141 (0, the liver), finished: Prog 2. Parelbriaux at Prog 2: nil, 294. Odeya 146 (0, the
+# liver); the liver traded: 142, finished: taken, Prog 3. Odeya 147. Phomiuna: _0r9 37, finished: Prog 4; again: nil, its
+# default. Back (a zone change: the importantOnce is reset): Despachiaire 144. Odeya 143, finished: completed (4000 gil),
+# Post 1. Completed: Odeya 148, finished: Post 2; again: 148. Leaving the zone at Post 2: quest:cleanup (Post 0). Back:
+# Odeya: nil, 150.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Parelbriaux/onTrigger TavnazianSafehold/Odeya/onTrigger TavnazianSafehold/Odeya/onTrade TavnazianSafehold/onEventFinish/141 TavnazianSafehold/onEventFinish/142 TavnazianSafehold/onEventFinish/143 TavnazianSafehold/onEventFinish/144 TavnazianSafehold/onEventFinish/145 TavnazianSafehold/onEventFinish/148 PhomiunaAqueducts/_0r9/onTrigger PhomiunaAqueducts/onEventFinish/37
+lists TavnazianSafehold/onZoneOut/1
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+mission Cop AncientVows current
+item TavnazianLiver
+login
+trigger Despachiaire                    # available: 144
+finish                                  # begun
+trigger Despachiaire                    # accepted: 144 (Event, importantOnce)
+finish                                  # no accepted 144 handler: nothing
+trigger Despachiaire                    # 144 down to Default: CoP 2-2's 106
+finish
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trigger Odeya                           # Prog 0: nil; 150
+finish
+warp 116.8,-41.2,43.2 TavnazianSafehold
+trigger Parelbriaux                     # Prog 0: 145
+finish                                  # Prog 1
+trigger Parelbriaux                     # Prog 1: 145
+finish                                  # Prog 1
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trigger Odeya                           # Prog 1: 141
+finish                                  # Prog 2
+warp 116.8,-41.2,43.2 TavnazianSafehold
+trigger Parelbriaux                     # Prog 2: nil; 294
+finish
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trigger Odeya                           # Prog 2: 146
+finish
+trade Odeya TavnazianLiver x1           # Prog 2, the liver: 142
+finish                                  # the liver taken; Prog 3
+trigger Odeya                           # Prog 3: 147
+finish
+warp 140.5,-25.5,60 PhomiunaAqueducts
+trigger _0r9                            # Prog 3: 37
+finish                                  # Prog 4
+trigger _0r9                            # Prog 4: nil; DOOR_FIRMLY_SHUT
+warp 112.7,-40,-85.5 TavnazianSafehold
+trigger Despachiaire                    # a new zone: 144 again
+finish
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trigger Odeya                           # Prog 4: 143
+finish                                  # completed; 4000 gil; Post 1
+trigger Odeya                           # Post 1: 148
+finish                                  # Post 2
+trigger Odeya                           # Post 2: 148
+finish                                  # Post 2
+warp 140.5,-25.5,60 PhomiunaAqueducts   # onZoneOut at Post 2: quest:cleanup; Post 0
+warp 86.3,-34.25,-71.1 TavnazianSafehold
+trigger Odeya                           # Post 0: nil; 150
+finish

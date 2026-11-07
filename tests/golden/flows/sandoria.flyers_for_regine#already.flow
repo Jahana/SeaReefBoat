@@ -1,0 +1,18 @@
+# Flyers for Regine (sandoria 16), FLYER_ALREADY in each city (the trade zone's text, zones[player:getZoneID()]).
+# Accepted, mask 33 (bits 0 and 5) | 1024 (bit 10) = 1057. Northern: Coullene (bit 5 set) FLYER_ALREADY, the flyer kept;
+# Boncort (bit 7 unset) FLYER_ACCEPTED, FFR_BONCORT. Southern: Blendare (bit 10 set) FLYER_ALREADY, kept; Rosel (bit 11
+# unset) FLYER_ACCEPTED, FFR_ROSEL. Port: Answald (bit 0 set) FLYER_ALREADY, kept.
+char zone=NorthernSanDoria pos=144.4,0.0,127.6 job=WAR lvl=30
+item MagicmartFlyer x6
+quest Sandoria.FlyersForRegine accepted
+charvar [ffr]deliveryMask 1057
+login
+trade Coullene MagicmartFlyer x1          # bit 5 set: FLYER_ALREADY (Northern); the flyer kept
+warp -154.2,-5.2,49.2 NorthernSanDoria
+trade Boncort MagicmartFlyer x1           # bit 7 unset: FLYER_ACCEPTED, FFR_BONCORT; mask 1185
+warp 35.0,2.0,-30.1 SouthernSanDoria
+trade Blendare MagicmartFlyer x1          # bit 10 set: FLYER_ALREADY (Southern); the flyer kept
+warp 71.9,0.0,41.1 SouthernSanDoria
+trade Rosel MagicmartFlyer x1             # bit 11 unset: FLYER_ACCEPTED, FFR_ROSEL; mask 3233
+warp 74.3,-16.0,-128.7 PortSanDoria
+trade Answald MagicmartFlyer x1           # bit 0 set: FLYER_ALREADY (Port); the flyer kept

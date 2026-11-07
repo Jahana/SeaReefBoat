@@ -1,0 +1,17 @@
+# The Puppet Master (windurst 81): the completed line's reply kind at Koru-Moru (Windurst Walls). Completed by GM, Class
+# Reunion not completed, the quest's mustZone set by GM, Carbuncle Debacle accepted with CarbuncleDebacleProgress 2
+# (GMs: Koru-Moru's script answers 416; accepted since 416 wants it so, user ruling 2026-11-04, kept Lua bugs): 405
+# (Event) alternates with his script's 416 (405, 416, 405); a Progress 405 would play on every talk.
+lists WindurstWalls/Koru-Moru/onTrigger
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=40
+quest Windurst.ThePuppetMaster completed
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 2
+login
+charvar Quest[2][81]mustZone 239               # GM
+trigger Koru-Moru                              # completed, the mustZone: 405 (Event: the quest's turn)
+finish
+trigger Koru-Moru                              # his script's turn: 416
+finish
+trigger Koru-Moru                              # 405 again
+finish

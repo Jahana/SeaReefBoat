@@ -1,0 +1,64 @@
+# Rat Race (ahtUrhgan 66): a level 75 Warrior in Nashmau with an Imperial Bronze Piece and the five fish; Cook-a-roon
+# accepted (a GM: its available 241 at Ququroon is a progress event like 309, its accepted 242 an Event). Nashmau:
+# Kakkaroon 308, finished: begun, Prog 1; Kakkaroon 313; Kyokyoroon: nil: 263. Whitegate: Nadee Periyaha 849, finished:
+# Prog 2; 851; Cacaroon 853; the bronze piece: 850, finished: the trade confirmed, Prog 3; Cacaroon 854; Nadee 852.
+# Nashmau: Ququroon 309 (over Cook-a-roon's 242), finished: Prog 4; Ququroon at Prog 4: 242 (both quests answer 242);
+# Cook-a-roon set available (a GM: its accepted fish trade, 243, is a progress event like 310): the five fish: 310,
+# finished: the stew, the fish taken, Prog 5; Cook-a-roon completed (a GM: its available 241 would beat 315): Ququroon
+# at Prog 5: 315 and Cook-a-roon's completed 244 are Events: a tie, 244 plays first and 315 on the next talk;
+# Kyokyoroon: nil: 263; the stew: 311, finished: Prog 6; Kyokyoroon 316; Kakkaroon 312, finished: completed (2 gold, 2
+# mythril, 3 silver pieces). Completed: Kakkaroon 314; Kyokyoroon 317.
+lists Nashmau/Kakkaroon/onTrigger Nashmau/Kyokyoroon/onTrigger Nashmau/Kyokyoroon/onTrade Nashmau/Ququroon/onTrigger Nashmau/Ququroon/onTrade AhtUrhganWhitegate/Nadee_Periyaha/onTrigger AhtUrhganWhitegate/Cacaroon/onTrigger AhtUrhganWhitegate/Cacaroon/onTrade Nashmau/onEventFinish/308 Nashmau/onEventFinish/310 Nashmau/onEventFinish/312 AhtUrhganWhitegate/onEventFinish/850
+char zone=Nashmau pos=14.745,0,-25.307 job=WAR lvl=75
+item ImperialBronzePiece
+item Ahtapot
+item Istakoz
+item Istavrit1 x2
+item Istiridye
+item Mercanbaligi
+quest AhtUrhgan.CookARoon accepted
+login
+trigger Kakkaroon                       # available: 308
+finish                                  # begun, Prog 1
+trigger Kakkaroon                       # Prog 1: 313
+finish
+trigger Kyokyoroon                      # Prog 1: nil: 263
+finish
+warp -9.3,0,-1.198 AhtUrhganWhitegate
+trigger Nadee_Periyaha                  # Prog 1: 849
+finish                                  # Prog 2
+trigger Nadee_Periyaha                  # Prog 2: 851
+finish
+trigger Cacaroon                        # Prog 2: 853
+finish
+trade Cacaroon ImperialBronzePiece x1 Istavrit1 x1   # Prog 2 with the bronze piece among anything (tradeHas): 850
+finish                                  # the whole trade confirmed, Prog 3
+trigger Cacaroon                        # Prog 3: 854
+finish
+trigger Nadee_Periyaha                  # Prog 3: 852
+finish
+warp -0.9,0,66.824 Nashmau
+trigger Ququroon                        # Prog 3: 309 (Cook-a-roon accepted: its 242 is below)
+finish                                  # Prog 4
+trigger Ququroon                        # Prog 4: 242 (Cook-a-roon's 242 too: the same event)
+finish
+quest AhtUrhgan.CookARoon available     # a GM (its accepted trade would tie with 310)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # Prog 4, the five fish: 310
+finish                                  # the stew; the fish taken; Prog 5
+quest AhtUrhgan.CookARoon completed     # a GM (its available 241 would outrank 315)
+trigger Ququroon                        # Prog 5: 315 and Cook-a-roon's completed 244 tie (Events): 244 plays first
+finish
+trigger Ququroon                        # the tie rotates by the last event id: 315
+finish
+trigger Kyokyoroon                      # Prog 5: nil: 263
+finish
+trade Kyokyoroon BowlOfNashmauStew x1   # Prog 5, exactly the stew: 311
+finish                                  # the stew taken, Prog 6
+trigger Kyokyoroon                      # Prog 6: 316
+finish
+trigger Kakkaroon                       # Prog 6: 312
+finish                                  # completed: the coins
+trigger Kakkaroon                       # completed: 314
+finish
+trigger Kyokyoroon                      # completed: 317
+finish

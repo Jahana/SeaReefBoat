@@ -1,0 +1,19 @@
+# Too Many Chefs, Umberto out of order: the quest accepted with the var at 0 to 4 (no event), and after the completion.
+char zone=BastokMarkets pos=-57,-4,-134
+fame Bastok 325
+login
+quest Bastok.TooManyChefs accepted
+trigger Umberto                 # var 0: nothing
+finish-if-event
+charvar TOO_MANY_CHEFS 1
+trigger Umberto                 # nothing
+finish-if-event
+charvar TOO_MANY_CHEFS 3
+trigger Umberto                 # nothing
+finish-if-event
+charvar TOO_MANY_CHEFS 4
+trigger Umberto                 # nothing
+finish-if-event
+quest Bastok.TooManyChefs completed
+trigger Umberto                 # Completed: nothing
+finish-if-event

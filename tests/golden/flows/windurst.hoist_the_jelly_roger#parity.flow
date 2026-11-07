@@ -1,0 +1,10 @@
+# Hoist the Jelly, Roger (windurst 51), completion parity: 10001's finish is the Lua's raw player:completeQuest (then
+# the Super Soup Pot, the fame, the jelly), so a GM's Quest[2][51]Prog survives the completion (quest:cleanup, which a
+# called Quest.Complete() runs, would clear it). Accepted (GM) beside Maysoon.
+char zone=WindurstWaters pos=-105.5,-2.0,69.6 job=WAR lvl=75
+quest Windurst.HoistTheJellyRoger accepted
+item ServingOfRoyalJelly
+login
+charvar Quest[2][51]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Maysoon ServingOfRoyalJelly x1    # one jelly: 10001
+finish                                  # completed; the Super Soup Pot; fame 40; the jelly taken; Prog kept

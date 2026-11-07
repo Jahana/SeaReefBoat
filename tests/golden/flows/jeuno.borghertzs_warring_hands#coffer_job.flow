@@ -1,0 +1,21 @@
+# Borghertz's Warring Hands (jeuno 44): the optional coffers' status and job operands. Main: a level 75 Warrior, the
+# quest available: Castle Zvahl Baileys' coffer (the first optional zone): the coffer sections off (available): nil,
+# the coffer's own script (its loot). Bob: a level 75 Monk, the Warring Hands completed (a GM), [AF]ZilartCoffer 0: the
+# same coffer back after 180 s: the main job is not WAR: nil, the coffer's own script (the Monk's Striking Hands not
+# begun: no section).
+lists CastleZvahlBaileys/Treasure_Coffer/onTrade
+char zone=CastleZvahlBaileys pos=110.041,-20.002,106.811 job=WAR lvl=75
+char bob zone=CastleZvahlBaileys pos=110.041,-20.002,106.811 job=MNK lvl=75
+item ZvahlCofferKey
+bob: item ZvahlCofferKey
+bob: quest Jeuno.BorghertzsWarringHands completed
+login
+bob: login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer ZvahlCofferKey x1 # available: nil; the coffer's own script
+tick 4500                               # the coffer opened
+tick 190000                             # the coffer back after 180 s
+bob: trigger Treasure_Coffer            # walks to the coffer
+bob: trade Treasure_Coffer ZvahlCofferKey x1 # a Monk: nil; the coffer's own script
+tick 4500                               # the coffer opened

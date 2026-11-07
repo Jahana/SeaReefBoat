@@ -1,0 +1,54 @@
+# Riding on the Clouds (jeuno 131, limit break 4): Maat in Ru'Lude Gardens (the first of four of that name, 17772593;
+# his script plays 117 at BeatAroundTheBushin 5 only, his default is MAAT_DIALOG). A level 61 Warrior at level cap 65 (a
+# GM, before login), MAX_LEVEL 99. Available: 88 with the four drawn indexes (the seeded math.randomInt(0, 7), drawn in
+# the order San d'Oria, Bastok, Windurst, Otherlands) and 180; option 0 and option 2 set the four vars back to 0 (not
+# begun: each next talk draws again); option 1 begins with the vars drawn. Accepted: 89 with the four vars and 180; a
+# Kindred's Seal to Maat: no trade handler in either state (nil, Maat's own script has no onTrade). The four stones by
+# GM, each missing alone in turn (a GM's delkeyitem): 89 each time; with the four: 90 (completed: Cloud Breaker, the
+# stones taken, level cap 70, YOUR_LEVEL_LIMIT_IS_NOW_70). Then Shattering Stars is not offered (it wants level 66):
+# MAAT_DIALOG; a GM's cap 65 again: this quest completed, no section: MAAT_DIALOG. The NPC trades are in #sandoria,
+# #bastok, #windurst and #otherlands; the check's level, cap and MAX_LEVEL sides in #level60, #cap and #max_level; the
+# finishes run outside their states in #mid_event; the draws' range in #draws; the reply kinds in #compete. The 90 finish
+# runs with a full bag (a GM's fill-inventory): the title-only reward cannot fail.
+# Maat's other quests (the limit breaks 1-3 and 5, Beyond the Sun, Beyond Infinity's 10193, the hidden Trust: Maat):
+# none answers a level 61 char at cap 65 / 70 (their checks want cap 50 / 55 / 60 / 70 with level 66, Shattering Stars
+# completed, Beyond Infinity accepted, a trust permit).
+lists RuludeGardens/Maat/onTrigger RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/88 RuludeGardens/onEventFinish/90
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=61
+levelcap 65
+item KindredsSeal
+login
+trade Maat KindredsSeal x1              # available (cap 65): no trade handler, nothing
+trigger Maat                            # level 61, cap 65: the four vars drawn; 88 (the vars, 180)
+finish option=0                         # not 1: the four vars set to 0
+trigger Maat                            # drawn again: 88 (the new vars, 180)
+finish option=2                         # not 1: the four vars set to 0
+trigger Maat                            # drawn again: 88
+finish option=1                         # begun; the vars kept as drawn
+trigger Maat                            # accepted, no stone: 89 (the four vars, 180)
+finish
+trade Maat KindredsSeal x1              # accepted: no trade handler on Maat: nil, nothing
+keyitem SmilingStone                    # a GM: three stones, the Scowling one missing
+keyitem SomberStone
+keyitem SpiritedStone
+trigger Maat                            # Scowling missing: 89
+finish
+keyitem ScowlingStone                   # a GM: back
+delkeyitem SmilingStone                 # the Smiling one missing
+trigger Maat                            # 89
+finish
+keyitem SmilingStone
+delkeyitem SomberStone                  # the Somber one missing
+trigger Maat                            # 89
+finish
+keyitem SomberStone
+delkeyitem SpiritedStone                # the Spirited one missing
+trigger Maat                            # 89
+finish
+keyitem SpiritedStone
+fill-inventory                          # a GM: the bag full (the reward is a title only: completed all the same)
+trigger Maat                            # the four stones: 90
+finish                                  # completed: Cloud Breaker, the four stones taken, level cap 70, YOUR_LEVEL_LIMIT_IS_NOW_70
+trigger Maat                            # cap 70, level 61: Shattering Stars wants 66: no section; MAAT_DIALOG
+levelcap 65                             # a GM: cap 65 again
+trigger Maat                            # this quest completed: no section; MAAT_DIALOG

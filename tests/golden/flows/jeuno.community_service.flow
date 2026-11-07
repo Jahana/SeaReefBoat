@@ -1,0 +1,70 @@
+# Community Service (jeuno 15): Zauko and the Streetlamps _l00-_l11 in Lower Jeuno. One section for every status
+# (vars.Prog >= 0). The clock starts at Vana'diel day 8000, 12:00. Zauko has no script; his default is 118, the
+# quest's own csid: when the quest returns nil his default plays and the quest's 118 finish runs (Wait = today). His
+# trade belongs to Save the Clock Tower (C#; a petition only). The lamps have no script and no default. At 12:00 with
+# nothing done: a trade (nothing), his default 118; a lamp at Prog 0 (closed: 120 with 6, 0; option 0: nothing); 17:00
+# (not yet: default 118); at 18:00 (a tick: the run's first, which only notes the hour) the offer 116 (doneCommService
+# 0), its update (begun: Prog 1, Count 12, Timer 8000, the zone's commServiceStart 1, the name in commServicePlayer1-4;
+# updateEvent(1, 0)), 114; the twelve lamps (param 1, option 0 nothing, option 1 lit: Count down, YOU_LIGHT_THE_LAMP
+# and LAMP_MSG_OFFSET + 1 with the count; a lit one param 2; the twelfth: LAMP_MSG_OFFSET, Prog 2, allLightsLit 1; a
+# lit one at Prog 2 param 5), 117 (0, 0; option 1: completed, Torchbearer, fame +7 x3, commServiceComp 1,
+# commServicePlayer = the char's id, the Lamp Lighter's Membership Card; the quest's vars cleared), then 113 (the char
+# finished tonight), a lamp at Prog 0 lit (5).
+# A lamp whose animation is neither OPEN_DOOR nor CLOSE_DOOR (a GM's !animatenpc) is #animation; a Prog below 0 (no
+# section) is #prog_negative. Not reachable: the zone nil guards (:182, :332, :363: a char in Lower Jeuno has its zone).
+lists LowerJeuno/Zauko/onTrigger LowerJeuno/Zauko/onTrade LowerJeuno/_l00/onTrigger LowerJeuno/_l11/onTrigger LowerJeuno/onEventUpdate/116 LowerJeuno/onEventFinish/117 LowerJeuno/onEventFinish/118 LowerJeuno/onEventFinish/120 LowerJeuno/onEventFinish/131
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+item FlintStone
+login
+walk -2.9,0,14.2
+trade Zauko FlintStone x1               # no trade handler here (Save the Clock Tower's needs its petition): nothing
+trigger Zauko                           # 12:00, nothing flagged: nil; his default 118
+finish                                  # the quest's 118 finish: Wait = 8000
+trigger _l00                            # Prog 0, closed: 120 (6, 0)
+finish                                  # option 0: nothing
+wait vana=5                             # 17:00
+trigger Zauko                           # hour 17: not offered; nil, default 118
+finish                                  # Wait = 8000
+wait vana=1                             # 18:00
+tick 1000                               # the run's first tick: the time server only notes the hour (no onGameHour)
+trigger Zauko                           # 18:00, not started tonight: 116 (0)
+update 116 option=0                     # begun: Prog 1, Count 12, Timer 8000, commServiceStart 1, the name stored; updateEvent(1, 0)
+finish
+trigger Zauko                           # started: Prog 1 on time: 114
+finish
+trigger _l00                            # Prog 1, 18:00 of the Timer day, closed: 120 (1, 0)
+finish option=0                         # not 1: nothing
+trigger _l00                            # 120 (1, 0)
+finish option=1                         # lit: Count 11, YOU_LIGHT_THE_LAMP, LAMP_MSG_OFFSET + 1 (11)
+trigger _l00                            # lit: 120 (2, 0)
+finish
+trigger _l01                            # 121 (1, 1)
+finish option=1                         # Count 10
+trigger _l02                            # 122 (1, 2)
+finish option=1                         # Count 9
+trigger _l03                            # 123 (1, 3)
+finish option=1                         # Count 8
+trigger _l04                            # 124 (1, 4)
+finish option=1                         # Count 7
+trigger _l05                            # 125 (1, 5)
+finish option=1                         # Count 6
+trigger _l06                            # 126 (1, 6)
+finish option=1                         # Count 5
+trigger _l07                            # 127 (1, 7)
+finish option=1                         # Count 4
+trigger _l08                            # 128 (1, 8)
+finish option=1                         # Count 3
+trigger _l09                            # 129 (1, 9)
+finish option=1                         # Count 2
+trigger _l10                            # 130 (1, 10)
+finish option=1                         # Count 1
+trigger _l11                            # 131 (1, 11)
+finish option=1                         # Count 0: YOU_LIGHT_THE_LAMP, LAMP_MSG_OFFSET, Prog 2, allLightsLit 1
+trigger _l11                            # Prog 2, lit: 131 (5, 11)
+finish
+trigger Zauko                           # Prog 2: 117 (0, 0)
+finish option=1                         # completed: Torchbearer, fame +7 x3, commServiceComp 1, commServicePlayer, the card; vars cleared
+trigger Zauko                           # completed tonight by this char: 113
+finish
+trigger _l00                            # Prog 0 (cleared), lit: 120 (5, 0)
+finish

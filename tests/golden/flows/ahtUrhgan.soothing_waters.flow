@@ -1,0 +1,117 @@
+# Soothing Waters (ahtUrhgan 47): a level 75 Warrior with the SP Wildcat Badge, a Tuft of Colorful Hair and a Rusty
+# Medal (both rare); Saga of the Skyserpent and Ode to the Serpents completed (GMs). Fari-Wari (default 831), Eunheem
+# (no script, no default), Nadeey (default 251), Mihli Aliapoh (267), Rughadjeen (265), Gadalar (266), Zazarg (268),
+# Najelith (269), Aydeewa's qm10 (NOTHING_OUT_OF_ORDINARY): none has a script. Available: qm10's trade of the tuft: nil;
+# Fari-Wari 894, option 1: nothing; 894, option 0: begun. Prog 0: Fari-Wari 906 (replaceEvent); Nadeey: no Prog-0
+# handler: 251; Eunheem 895, finished: Prog 1. Prog 1: Fari-Wari 906, Eunheem 907, Nadeey 896, finished: Prog 2. Prog 2:
+# Nadeey 251; Fari-Wari 906, Eunheem 907; qm10's trade of the tuft: nil; Al Zahbi: Mihli Aliapoh 289, finished: Prog 3.
+# Prog 3: Mihli Aliapoh 267; Fari-Wari 906, Eunheem 907; Aydeewa's qm10: the medal: nil; the tuft and the medal: nil;
+# the tuft: the cutscene 34, finished: Prog 4, the tuft taken. Prog 4: another tuft (a GM) to qm10: nil; Eunheem 907;
+# Fari-Wari 897, finished: completed (an Imperial Gold Piece, Springserpent Sentry), 500 imperial standing,
+# BESIEGED_OFFSET. Completed: the tuft to qm10: nil; Eunheem 285; Al Zahbi: Rughadjeen 284 ([0] the mercenary rank),
+# Gadalar 285, Mihli Aliapoh 286, Zazarg 287, Najelith 288. Completed at a GM's Prog 2: Mihli Aliapoh 286; Prog 1:
+# Nadeey 251; Prog 4: Eunheem 285 (twice); Prog 3: the tuft to qm10: nil (the Prog sections test the status too).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger AhtUrhganWhitegate/Eunheem/onTrigger AhtUrhganWhitegate/Nadeey/onTrigger AlZahbi/Mihli_Aliapoh/onTrigger AlZahbi/Rughadjeen/onTrigger AlZahbi/Gadalar/onTrigger AlZahbi/Zazarg/onTrigger AlZahbi/Najelith/onTrigger AydeewaSubterrane/qm10/onTrade AhtUrhganWhitegate/onEventFinish/897
+char zone=AhtUrhganWhitegate pos=81.95,-6,-137.707 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent completed
+quest AhtUrhgan.OdeToTheSerpents completed
+keyitem SpWildcatBadge
+item TuftOfColorfulHair
+item RustyMedal
+login
+warp 353.465,1.813,376.754 AydeewaSubterrane   # beside qm10
+trade qm10 TuftOfColorfulHair x1        # available: no trade handler: nil
+finish-if-event
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # available: 894
+finish option=1                         # not 0: nothing
+trigger Fari-Wari                       # 894
+finish option=0                         # begun
+trigger Fari-Wari                       # Prog 0: 906 (replaceEvent)
+finish
+warp 81.527,-0.325,55.072 AhtUrhganWhitegate   # beside Nadeey
+trigger Nadeey                          # Prog 0: no Nadeey handler: 251
+finish
+warp -54.945,0,-3.241 AhtUrhganWhitegate       # beside Eunheem
+trigger Eunheem                         # Prog 0: 895
+finish                                  # Prog 1
+trigger Eunheem                         # Prog 1: 907 (replaceEvent)
+finish
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 1: 906
+finish
+warp 81.527,-0.325,55.072 AhtUrhganWhitegate
+trigger Nadeey                          # Prog 1: 896
+finish                                  # Prog 2
+trigger Nadeey                          # Prog 2: no Nadeey handler: 251
+finish
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 2: 906
+finish
+warp -54.945,0,-3.241 AhtUrhganWhitegate
+trigger Eunheem                         # Prog 2: 907
+finish
+warp 353.465,1.813,376.754 AydeewaSubterrane
+trade qm10 TuftOfColorfulHair x1        # Prog 2: no section-4 trade: nil
+finish-if-event
+warp -21.115,-6,78.907 AlZahbi          # beside Mihli Aliapoh
+trigger Mihli_Aliapoh                   # Prog 2: 289
+finish                                  # Prog 3
+trigger Mihli_Aliapoh                   # Prog 3: no handler: 267
+finish
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 3: 906
+finish
+warp -54.945,0,-3.241 AhtUrhganWhitegate
+trigger Eunheem                         # Prog 3: 907
+finish
+warp 353.465,1.813,376.754 AydeewaSubterrane   # beside qm10
+trade qm10 RustyMedal x1                # not the tuft: nil
+finish-if-event
+trade qm10 TuftOfColorfulHair x1 RustyMedal x1  # the tuft and more: nil
+finish-if-event
+trade qm10 TuftOfColorfulHair x1        # Prog 3: the cutscene 34
+finish                                  # Prog 4; the tuft taken
+item TuftOfColorfulHair                 # a GM: another tuft
+trade qm10 TuftOfColorfulHair x1        # Prog 4: nil
+finish-if-event
+warp -54.945,0,-3.241 AhtUrhganWhitegate
+trigger Eunheem                         # Prog 4: 907
+finish
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 4: 897
+finish                                  # completed: the Gold Piece, the title; 500 standing; BESIEGED_OFFSET
+warp 353.465,1.813,376.754 AydeewaSubterrane
+trade qm10 TuftOfColorfulHair x1        # completed: nil
+finish-if-event
+warp -54.945,0,-3.241 AhtUrhganWhitegate
+trigger Eunheem                         # completed: 285
+finish
+warp -72.65,-6,70.656 AlZahbi
+trigger Rughadjeen                      # completed: 284 ([0] the mercenary rank)
+finish
+trigger Gadalar                         # 285
+finish
+trigger Mihli_Aliapoh                   # 286
+finish
+trigger Zazarg                          # 287
+finish
+trigger Najelith                        # 288
+finish
+charvar Quest[6][47]Prog 2              # a GM: completed at Prog 2
+trigger Mihli_Aliapoh                   # completed: 286 (no Prog-2 section)
+finish
+charvar Quest[6][47]Prog 1              # a GM: completed at Prog 1
+warp 81.527,-0.325,55.072 AhtUrhganWhitegate
+trigger Nadeey                          # completed: no section: 251
+finish
+charvar Quest[6][47]Prog 4              # a GM: completed at Prog 4
+warp -54.945,0,-3.241 AhtUrhganWhitegate
+trigger Eunheem                         # completed: 285
+finish
+trigger Eunheem                         # 285
+finish
+charvar Quest[6][47]Prog 3              # a GM: completed at Prog 3
+warp 353.465,1.813,376.754 AydeewaSubterrane
+trade qm10 TuftOfColorfulHair x1        # completed: nil
+finish-if-event

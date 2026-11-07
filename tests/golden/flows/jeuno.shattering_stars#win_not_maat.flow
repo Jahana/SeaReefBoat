@@ -1,0 +1,33 @@
+# Shattering Stars (jeuno 132): the battlefield win's 32001 in Balga's Dais with a GM's battlefieldWin
+# (`localvar battlefieldWin <n>` after the kill, before the finish). Main, a level 66 Monk, accepted with tradedTestimony
+# 1 (a GM), by BC_Entrance: its fight (index 5, area 1, Maat) won, then battlefieldWin 5 (Horlais Peak's Warrior fight,
+# not one of Balga's Dais' three, 101 to 103): the 32001 finished: nothing (no scroll, Prog 0, maatsCap 0, no title).
+# Whm, a level 66 White Mage, the same: its fight (index 6, area 2, Maat+4) won, then battlefieldWin 101 (the Monk's
+# fight, one of Balga's Dais' three, not the White Mage's own 102): the 32001 finished: the White Mage's rewards (the
+# job is the char's: the scroll, Prog 3, maatsCap bit 2 (4), Maat Masher).
+lists BalgasDais/BC_Entrance/onTrade BalgasDais/onEventFinish/32001
+char zone=BalgasDais pos=300.4,-124.1,341.3 job=MNK lvl=66
+char whm zone=BalgasDais pos=300.4,-124.1,341.3 job=WHM lvl=66
+quest Jeuno.ShatteringStars accepted
+charvar Quest[3][132]tradedTestimony 1
+item MonksTestimony
+whm: quest Jeuno.ShatteringStars accepted
+whm: charvar Quest[3][132]tradedTestimony 1
+whm: item WhiteMagesTestimony
+login
+trade BC_Entrance MonksTestimony x1     # tradedTestimony 1: the 32000 menu
+update 32000 option=81                  # Shattering Stars (MNK), index 5, area 1: registered, entered
+finish                                  # in the arena
+kill MAAT                               # Maat (MNK) of area 1: won, battlefieldWin 101, 32001 opens
+localvar battlefieldWin 5               # GM: Horlais Peak's fight, not one of this zone's
+finish                                  # 32001, battlefieldWin 5: nothing
+whm: login
+whm: trade BC_Entrance WhiteMagesTestimony x1  # tradedTestimony 1: the 32000 menu
+whm: update 32000 option=98             # Shattering Stars (WHM), index 6, area 2: registered, entered
+whm: finish                             # in the arena
+whm: kill MAAT+4                        # Maat (WHM) of area 2: 1 HP (unkillable), won once he yields, battlefieldWin 102
+tick 1000                               # Maat is unkillable: he yields (battlefield:win) in a later onMobFight; 32001 opens on the last tick
+tick 1000
+tick 1000
+whm: localvar battlefieldWin 101        # GM: the Monk's fight, one of this zone's three
+whm: finish                             # 32001, battlefieldWin 101: the scroll, Prog 3, maatsCap 4, Maat Masher

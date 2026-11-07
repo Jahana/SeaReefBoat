@@ -1,0 +1,20 @@
+# The Gift (otherAreas 21): quest:complete false. Accepted (a GM), a full inventory: the Danceshroom traded: 72, finished:
+# npcUtil.completeQuest cannot give the Sleep Dagger (ITEM_CANNOT_BE_OBTAINED): not completed, no fame, the Danceshroom
+# kept. Room made: 72 again, completed. The Real Gift completed (a GM): The Gift's completed section is off (it needs The
+# Real Gift available): Oswald's 76 is The Real Gift's (a tie of replaceDefault replies would play The Gift's 78 first).
+lists Selbina/Oswald/onTrigger Selbina/Oswald/onTrade Selbina/onEventFinish/72
+char zone=Selbina pos=48.6,-15.3,8 job=WAR lvl=30
+quest OtherAreas.UnderTheSea completed
+quest OtherAreas.TheSandCharm accepted
+quest OtherAreas.TheGift accepted
+item Danceshroom
+login
+fill-inventory
+trade Oswald Danceshroom x1             # 72 (0, 4375)
+finish                                  # no room: not completed (ITEM_CANNOT_BE_OBTAINED); no fame; the Danceshroom kept
+free-inventory
+trade Oswald Danceshroom x1             # 72
+finish                                  # completed; fame +10 x2; the Danceshroom taken
+quest OtherAreas.TheRealGift completed  # a GM
+trigger Oswald                          # The Gift's section 3 off: The Real Gift's 76 (replaceDefault)
+finish

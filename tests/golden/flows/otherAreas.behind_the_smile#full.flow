@@ -1,0 +1,16 @@
+# Behind the Smile (otherAreas 77): quest:complete false. Accepted with the Red Oil (a GM), a full inventory (a GM):
+# Enaremand 534, finished: the Mannequin Pumps cannot be given: not completed, the oil kept. Room again: 534, finished:
+# completed, the pumps, the oil taken.
+lists TavnazianSafehold/Enaremand/onTrigger TavnazianSafehold/onEventFinish/534
+char zone=TavnazianSafehold pos=97.5,-41,51.6 job=WAR lvl=75
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile accepted
+charvar Quest[4][77]Prog 3
+keyitem RedOil
+login
+fill-inventory
+trigger Enaremand                       # the oil: 534
+finish                                  # no room: not completed; the oil kept
+free-inventory
+trigger Enaremand                       # 534
+finish                                  # completed; the Mannequin Pumps; the oil taken

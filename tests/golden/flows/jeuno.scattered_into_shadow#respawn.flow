@@ -1,0 +1,37 @@
+# Scattered into Shadow (jeuno 61), TEBHI_RESPAWN with two chars at Prog 4 in Castle Oztroja (each zone-in adds its own
+# listener; a login is a zone-in). Main logs in: its listener's first tick makes Tebhi NORMAL ('deru'). Bob logs in:
+# Tebhi NORMAL, both listeners return. Main trades the collar (Prog 5, respawnTime the wall clock + 180, the two
+# timers). The next tick: main's listener removes itself (Prog 5), bob's finds Tebhi NORMAL. tebhiFade ('kesu') and
+# tebhiGone (CUTSCENE_ONLY), each ticked to its deadline and 1 ms past it. Bob's listener then finds Tebhi hidden but
+# his respawnTime not reached (the harness's wall clock stands still through ticks): nothing. The wall clock a day on:
+# bob's listener's next tick makes Tebhi NORMAL ('deru'); the tick after, NORMAL: nothing. Bob's collar traded to
+# Tebhi while CUTSCENE_ONLY: nil (the trade's status test; the 0x036 trade tests a mob's status only, so it reaches
+# his onTrade).
+lists CastleOztroja/Tebhi/onTrade
+char zone=CastleOztroja pos=-134.5,24,-21 job=BST lvl=50
+char bob zone=CastleOztroja pos=-134.5,24,-19 job=BST lvl=50
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ScatteredIntoShadow accepted
+charvar Quest[3][61]Prog 4
+charvar Quest[3][61]Stage 7
+item BeastCollar
+bob: quest Jeuno.WingsOfGold completed
+bob: quest Jeuno.ScatteredIntoShadow accepted
+bob: charvar Quest[3][61]Prog 4
+bob: charvar Quest[3][61]Stage 7
+bob: item BeastCollar
+login                                       # the zone-in at Prog 4: main's TEBHI_RESPAWN listener
+tick 400                                    # Tebhi CUTSCENE_ONLY, respawnTime 0 passed: NORMAL, 'deru'
+bob: login                                  # bob's listener
+tick 400                                    # Tebhi NORMAL: both return
+trigger Tebhi                               # walk to him
+trade Tebhi BeastCollar x1                  # main: the collar taken, Prog 5, TEBHI_ACCEPTS; the two timers
+tick 2000                                   # main's listener: Prog 5, removed; bob's: NORMAL; tebhiFade at its deadline
+tick 1                                      # tebhiFade: 'kesu'
+tick 1999                                   # tebhiGone at its deadline: nothing
+tick 1                                      # tebhiGone: CUTSCENE_ONLY, continuePath; bob's listener after it: not yet
+bob: trade Tebhi BeastCollar x1             # bob at Prog 4, Tebhi CUTSCENE_ONLY: nil
+tick 1000                                   # bob's listener: hidden, respawnTime not reached: nothing
+wait jst=1                                  # the wall clock past his respawnTime
+tick 400                                    # bob's listener: NORMAL, 'deru'
+tick 400                                    # NORMAL: nothing

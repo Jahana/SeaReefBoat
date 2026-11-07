@@ -1,0 +1,30 @@
+# It's Raining Mannequins! (otherAreas 29) with its era module, modules/era/lua/quests/otherareas/its_raining_mannequins.lua,
+# enabled by xi.pre(SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0): the wait runs to JST midnight. Accepted at Prog 2 (a GM) with
+# the five parts. The trade: 309, finished: the quest's own finish (the parts taken, Prog 3, Wait 1800000000), then the
+# module's Wait = JstMidnight() (1800025200: the next JST midnight after the harness clock; the trace's char var shows it).
+# The module's trigger (GetSystemTime() >= Wait, no + 60): Wait 1800025200: 310; Wait 1800000001 (a GM, one past now):
+# 310; Wait 1800000000 (now): 311 (the quest's own trigger would answer 310: now < Wait + 60), finished: completed.
+module modules/era/lua/quests/otherareas/its_raining_mannequins.lua
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/Fyi_Chalmwoh/onTrade Mhaura/onEventFinish/309 Mhaura/onEventFinish/311
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest OtherAreas.ItsRainingMannequins accepted
+charvar Quest[4][29]Prog 2
+item MannequinHead
+item MannequinBody
+item MannequinHands
+item MannequinLegs
+item MannequinFeet
+login
+trade Fyi_Chalmwoh MannequinHead x1 MannequinBody x1 MannequinHands x1 MannequinLegs x1 MannequinFeet x1 # 309
+finish                                  # the quest's: parts taken, Prog 3, Wait now; the module's: Wait = JstMidnight()
+trigger Fyi_Chalmwoh                    # the module's trigger: now < Wait (JST midnight): 310
+finish
+charvar Quest[4][29]Wait 1800000001     # a GM: one second past now
+trigger Fyi_Chalmwoh                    # 310
+finish
+charvar Quest[4][29]Wait 1800000000     # a GM: now
+trigger Fyi_Chalmwoh                    # now >= Wait: 311 (the quest's own would answer 310)
+finish                                  # completed; the Hume Male Mannequin
+tick 1000                               # the item's exdata (setExData marks it dirty) is saved on the char's next tick

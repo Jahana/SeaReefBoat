@@ -1,0 +1,19 @@
+# Order Up (adoulin, call-only), Marjoirelle: a level 99 Warrior in Western Adoulin. She stands at 21.7 -0.2 -160.2
+# (npcs.yaml; her script's !pos is Terwok's). Talks in pairs (her default 538, then her script). Available: nothing
+# from the quest. Accepted (a GM), bit 8 unset: 68, finished: bit 8 (256); again: nothing from the quest.
+lists WesternAdoulin/Marjoirelle/onTrigger WesternAdoulin/onEventFinish/68
+char zone=WesternAdoulin pos=23.2,-0.15,-160.2 job=WAR lvl=99
+login
+trigger Marjoirelle                     # available: 538
+finish-if-event
+trigger Marjoirelle                     # her script: nothing from the quest: 538
+finish-if-event
+quest Adoulin.OrderUp accepted          # a GM
+trigger Marjoirelle                     # 538
+finish-if-event
+trigger Marjoirelle                     # bit 8 unset: 68
+finish-if-event                         # 68's finish: bit 8 (256)
+trigger Marjoirelle                     # 538
+finish-if-event
+trigger Marjoirelle                     # bit 8 set: nothing from the quest: 538
+finish-if-event

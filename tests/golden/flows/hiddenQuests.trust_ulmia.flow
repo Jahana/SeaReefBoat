@@ -1,0 +1,17 @@
+# Trust: Ulmia (hidden quest TrustUlmia): a level 99 Warrior in Misareaux Coast. The Dilapidated Gate _0p0 (no script;
+# default SNOWMINT_POINT_LOCKED). CoP past Dawn (The Last Verse) with Dawn's Status 2 (setup). No permit: the default
+# message. The San d'Oria Trust Permit (a GM): 560 (0, 0, 0, memories 0); finished on 0: nothing. Apocalypse Nigh
+# completed (a GM): memories 2; finished on 2: Ulmia learned, YOU_LEARNED_TRUST. Learned: the default message.
+lists MisareauxCoast/_0p0/onTrigger MisareauxCoast/onEventFinish/560
+char zone=MisareauxCoast pos=260,7.3,-438.5 job=WAR lvl=99
+mission Cop TheLastVerse current
+charvar Mission[6][840]Status 2
+login
+trigger _0p0                            # no permit: SNOWMINT_POINT_LOCKED
+keyitem SanDoriaTrustPermit             # a GM
+trigger _0p0                            # 560 (memories 0)
+finish option=0                         # not 2: nothing
+quest Jeuno.ApocalypseNigh completed    # a GM
+trigger _0p0                            # 560 (memories 2)
+finish option=2                         # Ulmia learned, YOU_LEARNED_TRUST
+trigger _0p0                            # learned: SNOWMINT_POINT_LOCKED

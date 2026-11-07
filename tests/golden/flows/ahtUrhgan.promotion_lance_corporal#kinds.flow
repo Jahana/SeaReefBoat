@@ -1,0 +1,25 @@
+# Promotion: Lance Corporal's 5031 (area 3) against ToAU 24 Foiled Ambition's area-3 handler (3097, Progress: no
+# mustZone and VanadielUniqueDay() >= its Timer, 0), in a GM-made state out of play order: Stage 3, Option 48 (quality
+# 6), Wait 0, the mission current (GMs). The missions' containers run before the quests'; equal ranks play the first
+# container first, then rotate. A full bag keeps both finishes from doing anything: the mission's reward (five Imperial
+# Gold Pieces) and the quest's platinum reward do not fit, so neither completes.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/3
+char zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal accepted
+charvar Quest[6][92]Stage 3
+charvar Quest[6][92]Option 48
+mission Toau FoiledAmbition current
+login
+tick 1000
+tick 1000
+tick 1000
+fill-inventory
+walk 37.024,-6.5,-56                    # area 3: 3097 and 5031 tie: 3097 (the missions first)
+finish
+walk 37.024,-6.601,-62
+walk 37.024,-6.5,-56                    # rotation: 5031
+finish
+walk 37.024,-6.601,-62
+walk 37.024,-6.5,-56                    # 3097
+finish

@@ -1,0 +1,27 @@
+# Scattered into Shadow (jeuno 61), Tebhi's timers and another char's TEBHI_RESPAWN listener in one zone tick (the P10
+# final review's M8). Two chars at Prog 4 in Castle Oztroja (Tebhi made NORMAL by the first listener tick). Main trades
+# the collar (Prog 5, respawnTime the wall clock + 180, the timers at 2000 and 4000 ms), and the wall clock moves a day
+# on before any tick. One tick of 4001 ms then holds both timers and bob's listener: as in CZoneEntities::ZoneServer,
+# Tebhi (an NPC) ticks before the chars, so tebhiFade ('kesu') and tebhiGone (CUTSCENE_ONLY) run first and bob's
+# listener, after them, finds Tebhi hidden and his respawnTime passed: NORMAL, 'deru', all in that one step. The next
+# tick: NORMAL, nothing.
+lists CastleOztroja/Tebhi/onTrade
+char zone=CastleOztroja pos=-134.5,24,-21 job=BST lvl=50
+char bob zone=CastleOztroja pos=-134.5,24,-19 job=BST lvl=50
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ScatteredIntoShadow accepted
+charvar Quest[3][61]Prog 4
+charvar Quest[3][61]Stage 7
+item BeastCollar
+bob: quest Jeuno.WingsOfGold completed
+bob: quest Jeuno.ScatteredIntoShadow accepted
+bob: charvar Quest[3][61]Prog 4
+bob: charvar Quest[3][61]Stage 7
+login                                       # main's listener
+bob: login                                  # bob's listener
+tick 400                                    # Tebhi NORMAL, 'deru'
+trigger Tebhi                               # walk to him
+trade Tebhi BeastCollar x1                  # main: Prog 5, TEBHI_ACCEPTS; the two timers
+wait jst=1                                  # the wall clock a day on, before any tick
+tick 4001                                   # tebhiFade, tebhiGone, then bob's listener: NORMAL, 'deru' (one step)
+tick 400                                    # NORMAL: nothing

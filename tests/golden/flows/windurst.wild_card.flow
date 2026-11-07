@@ -1,0 +1,76 @@
+# Wild Card (windurst 77): below Windurst rank 9 (rank 8: the Joker side). Crying Over Onions completed by GM, level 5,
+# fame 325 (level 5). Honoi-Gomoi (Windurst Waters): a trade while available (no trade handler, her script has none:
+# nothing); 780, begun; 781 (Prog 0), then her script's 650; the House of the Hero at Prog 0: nil.
+# Kohlo-Lakolo (Port Windurst): 545 (Prog 0: Prog 1), 545 again (Prog 1: nothing);
+# Papo-Hopo 509 (over Crying Over Onions' 508 replaceDefault). The House of the Hero (_6n2, Windurst Walls) at Prog 1,
+# rank 8: 386 (Prog 2); Prog 2 without the card: nil (the door's DOORS_SEALED_SHUT). Toraimarai Canal: the Treasure
+# Coffer at Prog 2 without the card, traded its key: the treasure trade with the Joker Card as its reward (no event; the
+# card 2 s later). The card held: the next key traded is nil, the coffer's own script (a regular opening; the coffer
+# hides 180 s after each opening, so the flow ticks past it). _6n2 with the card, rank 8: 387 (0, card): the card taken,
+# 8000 gil, Prog 4; again: nil. Honoi-Gomoi: 782, completed (fame 60, Dream Dweller; the local var [2][78]mustZone 1);
+# then 783 (replaceDefault), then her script's 650 (a replaceDefault line gives her script the next turn). The
+# quest's Event lines at Honoi-Gomoi alternate with her script (650, interaction_lookup.lua:449-462); each line here
+# follows a Progress line, which gives the quest the turn.
+# The Star Onion quests 1-4 completed by GM (an available one's line would otherwise answer at Kohlo-Lakolo first).
+lists WindurstWaters/Honoi-Gomoi/onTrigger PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Papo-Hopo/onTrigger ToraimaraiCanal/Treasure_Coffer/onTrade WindurstWalls/_6n2/onTrigger WindurstWaters/onEventFinish/780 PortWindurst/onEventFinish/545 WindurstWalls/onEventFinish/386 WindurstWalls/onEventFinish/387 WindurstWaters/onEventFinish/782
+char zone=WindurstWaters pos=-192.6,-10.4,-122.9 lvl=5 nation=2
+rank 8
+fame Windurst 325
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.OnionRings completed
+quest Windurst.CryingOverOnions completed
+item BoneChip
+item ToraimariCofferKey
+item ToraimariCofferKey
+login
+trade Honoi-Gomoi BoneChip x1                  # available, the check holds: no trade handler: nothing
+trigger Honoi-Gomoi                            # level 5, fame level 5, no mustZone: 780
+finish                                         # begun
+trigger Honoi-Gomoi                            # Prog 0: 781 (the quest's turn after the Progress line)
+finish
+trigger Honoi-Gomoi                            # the alternation (781 was an Event): her script's 650
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # Prog 0, no card: nil (386 needs Prog 1); DOORS_SEALED_SHUT
+finish-if-event
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Kohlo-Lakolo                           # 545
+finish                                         # Prog 0: Prog 1
+trigger Kohlo-Lakolo                           # 545
+finish                                         # Prog 1: nothing
+trigger Papo-Hopo                              # 509 (Event over Crying Over Onions' 508 replaceDefault)
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # Prog 1, rank 8: 386
+finish                                         # Prog 2
+trigger _6n2                                   # Prog 2, no card: nil; DOORS_SEALED_SHUT
+finish-if-event
+warp -10.6,-2.75,15.9 WindurstWoods
+trigger Apururu                                # Prog 2: nil; his default 274
+finish
+warp -257.5,24.0,82.0 ToraimaraiCanal
+tick 13000
+trigger Treasure_Coffer                        # the coffer's own trigger (no quest handler)
+trade Treasure_Coffer ToraimariCofferKey x1    # Prog 2, no card: the treasure trade, the Joker Card as its reward
+tick 4500                                      # the Joker Card
+tick 190000                                    # the coffer hidden 180 s
+trigger Treasure_Coffer
+trade Treasure_Coffer ToraimariCofferKey x1    # the card held: nil, the coffer's own script (a regular opening)
+tick 4500
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # Prog 2, the card, rank 8: 387 (0, card)
+finish                                         # the card taken; 8000 gil; Prog 4
+trigger _6n2                                   # Prog 4, no card: nil
+finish-if-event
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Kohlo-Lakolo                           # Prog 4: 545
+finish                                         # Prog 4: nothing (only Prog 0 moves)
+warp -192.6,-10.4,-122.9 WindurstWaters
+trigger Honoi-Gomoi                            # Prog 4: 782
+finish                                         # completed: fame 60, Dream Dweller; local var [2][78]mustZone 1
+trigger Honoi-Gomoi                            # completed: 783 (replaceDefault; the quest's turn after 782)
+finish
+trigger Honoi-Gomoi                            # the alternation after 783 (replaceDefault): her script's 650
+finish

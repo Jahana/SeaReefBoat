@@ -1,0 +1,23 @@
+# Transporting (adoulin 82) and A Certain Substitute Patrolman (78), the tie at Kongramm: a level 99 Warrior in
+# Western Adoulin, SoA 7 (a GM), both accepted (GMs), the Patrolman at Prog 2 (Kongramm's offset), Transporting at
+# Prog 0. Kongramm: the Patrolman's 2555 and Transporting's 2592 are both progressEvents: they tie, the first talk plays
+# the first in container order (the Patrolman's), finished: its Prog 3; the second talk Transporting's 2592 alone,
+# finished: its Prog 1. Both back (GMs: Prog 2, Prog 0): the tie rotates from the last one played at the tie (2555):
+# 2592, finished: Prog 1; then 2555, finished: Prog 3.
+lists WesternAdoulin/Kongramm/onTrigger WesternAdoulin/onEventFinish/2555 WesternAdoulin/onEventFinish/2592
+char zone=WesternAdoulin pos=62.5,32,138 job=WAR lvl=99
+mission Soa LifeOnTheFrontier current
+quest Adoulin.ACertainSubstitutePatrolman accepted
+quest Adoulin.Transporting accepted
+charvar Quest[9][78]Prog 2
+login
+trigger Kongramm                        # the tie: the first in container order: 2555
+finish                                  # the Patrolman's Prog 3
+trigger Kongramm                        # Transporting's 2592, alone now
+finish                                  # Transporting's Prog 1
+charvar Quest[9][78]Prog 2              # a GM
+charvar Quest[9][82]Prog 0              # a GM
+trigger Kongramm                        # the tie again: rotates past 2555: 2592
+finish                                  # Transporting's Prog 1
+trigger Kongramm                        # 2555, alone now
+finish                                  # the Patrolman's Prog 3

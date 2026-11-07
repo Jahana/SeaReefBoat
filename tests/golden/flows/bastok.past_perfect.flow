@@ -1,0 +1,36 @@
+# Past Perfect (bastok 23): Evi in Port Bastok, the qm2 in Konschtat Highlands. The guard (Bastok fame level 2); Evi's 21
+# at Prog 0 (Prog 1, still available), then 130 (begins it); while accepted, 104 without the KI Tattered Mission Orders;
+# the qm2 gives the orders; Evi's 131 completes it (Scale Mail, fame +20, the orders deleted); once completed Evi's 21
+# again (her local var EviDialog is never set), whose finish sets Prog 1 on the completed quest. The other arm (EviDialog
+# not 0: event 104) needs the char's local var set, which only a GM's !setlocalvar does: #evi_dialog (localvar). A
+# char var of that name is the wrong store and does not reach it (the last steps).
+# Defaults: Evi 21 (DefaultActions: the same csid as the quest's 21), the qm2 THOUGHT_YOU_SAW_SOMETHING. The qm2 is also
+# Forge Your Destiny's (outlands), whose guard this char does not meet.
+lists PortBastok/Evi/onTrigger PortBastok/Evi/onTrade PortBastok/onEventFinish/21 PortBastok/onEventFinish/130 PortBastok/onEventFinish/131 KonschtatHighlands/qm2/onTrigger
+char zone=PortBastok pos=-4.6,-2.1,3.2
+fame Bastok 49
+item BoneChip
+login
+trigger Evi                          # fame 49 (level 1): not the quest's; her default 21
+finish                               # the default's finish: no quest var set
+trade Evi BoneChip x1                # available: no trade handler, nothing
+fame Bastok 50
+trigger Evi                          # Prog 0: 21
+finish                               # Prog 1 (still available)
+trigger Evi                          # Prog 1: 130
+finish                               # accepted
+trigger Evi                          # accepted, no orders: event 104
+finish
+warp -201.5,16,81.2 KonschtatHighlands
+trigger qm2                          # no orders: KI Tattered Mission Orders
+finish-if-event
+trigger qm2                          # the orders held: nil, THOUGHT_YOU_SAW_SOMETHING
+finish-if-event
+warp -4.6,-2.1,3.2 PortBastok
+trigger Evi                          # the orders: 131
+finish                               # completed: Scale Mail, fame +20, the orders deleted
+trigger Evi                          # completed, EviDialog 0: 21
+finish                               # Prog 1 on the completed quest
+charvar EviDialog 1                  # a char var named EviDialog (setCharVar): not the char's local var the check reads
+trigger Evi                          # still 21: getLocalVar('EviDialog') is 0
+finish                               # Prog 1 again

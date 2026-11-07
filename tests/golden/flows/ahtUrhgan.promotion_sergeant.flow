@@ -1,0 +1,101 @@
+# Promotion: Sergeant (ahtUrhgan 94): a level 1 Warrior with the promotions up to Corporal completed (so Naja
+# offers no earlier one) and the C Wildcat Badge,
+# AssaultPromotion 25, a Bowl of Sutlac and a Bone Chip. Whitegate: Naja Salaheem (no script, no default), trigger area
+# 10 (-89 0 -8 .. -71 0 8: a floor at y 0). Nashmau: trigger area 1 (0 0 -50 .. 20 0 -35), Totoroon (no script; default
+# 246). Caedarva Mire: qm11 (no script, no default). Available: Naja 5055, finished with option 1: not begun; again,
+# option 0: begun. Prog 0: Naja 5058; again in the zone: once per zone: nothing; area 10: 5056, option 1: nothing; out
+# and in: 5056, option 0: Prog 1. Prog 1 (the warp to area 10 was a zone-in: the marks cleared): Naja 5058; again:
+# nothing (one mark, the lookup's local var by NPC, handler and csid, covers every Prog's 5058). Nashmau's area 1: day >
+# Stage 0: 303, option 3 (not 2): Stage = tomorrow; out and in: nil; a day on (day = Stage): nil; two days on: 303,
+# option 2: Prog 2. Prog 2: Whitegate: Naja 5058, again nothing; Nashmau again: Totoroon 252; a trade of the Sutlac and
+# the chip: not exactly: nil: nothing; the Sutlac alone: 304, finished: taken, Prog 3. Whitegate (a new zone-in: the
+# mark gone): Naja at Prog 3: 5058, again nothing. Caedarva: qm11 20: Prog 4. Whitegate: Naja 5057, finished: completed
+# (the S Wildcat Badge, Sergeant), AssaultPromotion 0, PROMOTION_SERGEANT, the C badge taken. bob (Corporal completed,
+# AssaultPromotion 24): nothing; carl (AssaultPromotion 25, Corporal not completed: Lance Corporal accepted, so no
+# promotion offered): nothing.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/10 AhtUrhganWhitegate/onEventFinish/5055 AhtUrhganWhitegate/onEventFinish/5056 AhtUrhganWhitegate/onEventFinish/5057 Nashmau/onTriggerAreaEnter/1 Nashmau/onEventFinish/303 Nashmau/Totoroon/onTrigger Nashmau/Totoroon/onTrade Nashmau/onEventFinish/304 CaedarvaMire/qm11/onTrigger
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+charvar AssaultPromotion 25
+keyitem CWildcatBadge
+item BowlOfSutlac
+item BoneChip
+bob: quest AhtUrhgan.PromotionCorporal completed
+bob: charvar AssaultPromotion 24
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+carl: quest AhtUrhgan.PromotionSuperiorPrivate completed
+carl: quest AhtUrhgan.PromotionLanceCorporal accepted
+carl: charvar AssaultPromotion 25
+login
+bob: login
+bob: trigger Naja_Salaheem              # AssaultPromotion 24: nothing
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trigger Naja_Salaheem             # Corporal not completed: nothing
+carl: finish-if-event
+carl: logout
+trigger Naja_Salaheem                   # available: 5055
+finish option=1                         # not begun
+trigger Naja_Salaheem                   # 5055
+finish option=0                         # begun
+trigger Naja_Salaheem                   # Prog 0: 5058 (once per zone)
+finish
+trigger Naja_Salaheem                   # Ignore: nothing
+finish-if-event
+warp -80,0,12 AhtUrhganWhitegate        # north of area 10
+tick 1000
+tick 1000
+tick 1000
+walk -80,0,0                            # area 10, Prog 0: 5056
+finish option=1                         # nothing
+walk -80,0,12
+walk -80,0,0                            # 5056
+finish option=0                         # Prog 1
+trigger Naja_Salaheem                   # Prog 1, after the warps (zone-ins: the marks cleared): 5058
+finish
+trigger Naja_Salaheem                   # Prog 1 again: once per zone: nothing
+finish-if-event
+warp 10,0,-30 Nashmau                   # north of area 1
+tick 1000
+tick 1000
+tick 1000
+walk 10,0,-42                           # area 1, day > Stage 0: 303
+finish option=3                         # not option 2: Stage = tomorrow
+walk 10,0,-30
+walk 10,0,-42                           # day < Stage: nil
+wait vana=24                            # day = Stage
+walk 10,0,-30
+walk 10,0,-42                           # not day > Stage: nil
+wait vana=24                            # day > Stage
+walk 10,0,-30
+walk 10,0,-42                           # 303
+finish option=2                         # Prog 2
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # Prog 2: 5058
+finish
+trigger Naja_Salaheem                   # once per zone: nothing
+finish-if-event
+warp 10,0,-30 Nashmau
+trigger Totoroon                        # Prog 2: 252
+finish
+trade Totoroon BowlOfSutlac x1 BoneChip x1   # not exactly the Sutlac: nil: nothing
+finish-if-event
+trade Totoroon BowlOfSutlac x1          # 304
+finish                                  # the Sutlac taken; Prog 3
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # a new zone-in: Prog 3: 5058
+finish
+trigger Naja_Salaheem                   # once per zone: nothing
+finish-if-event
+warp 196.864,1.296,-616.641 CaedarvaMire
+trigger qm11                            # Prog 3: 20
+finish                                  # Prog 4
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # Prog 4: 5057
+finish                                  # completed; AssaultPromotion 0; PROMOTION_SERGEANT; the C badge taken

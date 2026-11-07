@@ -1,0 +1,26 @@
+# Grauberg - Dominion Op #08 (abyssea 122, op 595): a level 99 Warrior in Abyssea - Grauberg; the op's target
+# Deimobugard (14 placed spawns, the first 17817839). The next op (#09, Peak_Pugil) and Altepa's #08 accepted (a GM),
+# this op available: a Deimobugard killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0, which
+# dominionOnMobDeath does not read): a Deimobugard killed: dominionOnMobDeath(595): Quest[8][122]Prog 1
+# (FOV_DEFEATED_TARGET 1 of 5). The next op's Peak_Pugil killed: Quest[8][123]Prog 1 (its own count), this op's
+# unchanged. Prog 4 (a GM): one more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing.
+# Completed (Prog 0, as completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge,
+# Invincible and Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaGrauberg/Deimobugard/onMobDeath AbysseaGrauberg/Peak_Pugil/onMobDeath
+char zone=AbysseaGrauberg pos=-555,31,-760 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp09Grauberg accepted # a GM: the next op
+quest Abyssea.DominionOp08Altepa accepted # a GM: Altepa's #08
+kill IRONCLAD_SUNDERER-202              # available: nothing (17817839)
+quest Abyssea.DominionOp08Grauberg accepted # a GM
+kill IRONCLAD_SUNDERER-201              # accepted: Prog 1 (17817840)
+kill IRONCLAD_SUNDERER-333              # Peak_Pugil: Quest[8][123]Prog 1 (17817708)
+charvar Quest[8][122]Prog 4             # a GM
+kill IRONCLAD_SUNDERER-200              # Prog 5 (17817841)
+kill IRONCLAD_SUNDERER-199              # full: nothing (17817842)
+quest Abyssea.DominionOp08Grauberg completed # a GM
+charvar Quest[8][122]Prog 0             # a GM
+kill IRONCLAD_SUNDERER-198              # completed: nothing (17817843)

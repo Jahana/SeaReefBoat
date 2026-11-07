@@ -1,0 +1,38 @@
+# Chocobo on the Loose! (jeuno 92): Brutus's Prog 4 operands one at a time. A level 25 Warrior, the quest accepted at
+# Prog 4 (a GM), Timer 8000 (today), no mustZone: 10109; the quest set completed by a GM while it is open: the finish
+# finds no 10109 handler (no egg). The quest set available, then accepted again (a GM: `accepted` over a completed
+# quest would keep the completed bit, and the quest would stay completed), Prog 4: Timer 8001: nil; Timer 8000 with
+# the mustZone (Quest[3][92]mustZone 244, as 10100 leaves it): nil; no mustZone, Prog 5: nil; Prog 4: 10109 (the three
+# operands hold again).
+# Brutus's other quests are kept silent: Chocobo's Wounds and Save My Son completed (a GM, before login: Chocobo's
+# Wounds' completed section wants Save My Son not completed), level 25 (Path of the Beastmaster wants 30); his script
+# then starts nothing (Chocobo's Wounds completed, Wings of Gold / Scattered into Shadow not); a talk with
+# no quest reply plays his default 66 (DefaultActions).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/onEventFinish/10109
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=25
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.ChocoboOnTheLoose accepted
+charvar Quest[3][92]Prog 4
+charvar Quest[3][92]Timer 8000
+login
+trigger Brutus                          # Prog 4, no mustZone, Timer 8000 = day 8000: 10109
+quest Jeuno.ChocoboOnTheLoose completed # a GM, while 10109 is open
+finish                                  # no 10109 finish in the completed state: nothing (no egg)
+quest Jeuno.ChocoboOnTheLoose available # a GM: both bits clear
+quest Jeuno.ChocoboOnTheLoose accepted  # a GM
+charvar Quest[3][92]Prog 4              # a GM
+charvar Quest[3][92]Timer 8001          # a GM
+trigger Brutus                          # Timer 8001 > day 8000: nil; the default 66
+finish
+charvar Quest[3][92]Timer 8000          # a GM
+charvar Quest[3][92]mustZone 244        # a GM: the mustZone
+trigger Brutus                          # the mustZone: nil; the default 66
+finish
+charvar Quest[3][92]mustZone 0          # a GM
+charvar Quest[3][92]Prog 5              # a GM
+trigger Brutus                          # Prog 5: nil; the default 66
+finish
+charvar Quest[3][92]Prog 4              # a GM
+trigger Brutus                          # Prog 4, Timer 8000, no mustZone: 10109
+finish                                  # the egg; completed; fame +7 x3

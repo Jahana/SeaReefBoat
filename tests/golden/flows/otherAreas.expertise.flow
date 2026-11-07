@@ -1,0 +1,58 @@
+# Expertise (otherAreas 4): Mhaura's Take and Rycharde, Selbina's Valgeir. His Name is Valgeir completed, its
+# Quest[4][3]DayCompleted 7991 (a GM: 7991 + 8 < 8000), Windurst fame 125 (level 3). A level 30 Warrior with a Scream
+# Fungus, two Slices of Land Crab Meat and a Chocobo Feather. Available: Selbina: the fungus and the meat to Valgeir (the
+# valid trade, in the wrong status): no trade handler; Valgeir: no section (his default 140, not 102). Mhaura: a trade to
+# Take: no trade handler; Rycharde 89; Take 61, finished (option 0: any option): Quest[4][3]DayCompleted 0, begun.
+# Accepted: Rycharde: no handler, his default 69; Take at Prog 0: 63. Selbina: Valgeir at Prog 0: 102 (4447, 4400),
+# finished: Prog 1; Prog 1: 104; trades: the meat alone: nil; the fungus, the meat and the feather: nil; two meat and the
+# fungus: nil; the feather and the meat (a wrong item for the fungus): nil; the fungus and the meat: 103, finished: Prog 2,
+# readyTime 1800003456 (GetSystemTime() 1800000000 + 3456), the trade taken; Prog 2 before readyTime: 141; `wait jst=1`
+# (86400 s): 105, finished: Prog 3, the Land Crab Bisque (KEYITEM_OBTAINED); Prog 3: 142. Mhaura: Take at Prog 3: 62
+# (132), finished: completed (the Tableware Set, Three Star Purveyor), the bisque taken with KEYITEM_OBTAINED + 1,
+# Quest[4][4]DayCompleted 8000. Completed: no section; The Clue's check needs fame level 5: Take's default 59.
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Mhaura/Take/onTrade Mhaura/onEventFinish/61 Mhaura/onEventFinish/62 Selbina/Valgeir/onTrigger Selbina/Valgeir/onTrade Selbina/onEventFinish/102 Selbina/onEventFinish/103 Selbina/onEventFinish/105
+char zone=Mhaura pos=22.1,-8,69.8 job=WAR lvl=30
+quest OtherAreas.HisNameIsValgeir completed
+charvar Quest[4][3]DayCompleted 7991
+fame Windurst 125
+item ScreamFungus
+item SliceOfLandCrabMeat x2
+item ChocoboFeather
+login
+warp 59,-15.27,20.2 Selbina
+trade Valgeir ScreamFungus x1 SliceOfLandCrabMeat x1 # available: no trade handler; nothing
+trigger Valgeir                         # available: no section; his default 140
+finish
+warp 22.1,-8,69.8 Mhaura
+trade Take ChocoboFeather x1            # available: no trade handler; nothing
+trigger Rycharde                        # available: 89
+finish
+trigger Take                            # fame level 3, 7991 + 8 < 8000: 61
+finish option=0                         # any option: Quest[4][3]DayCompleted 0, begun
+trigger Rycharde                        # accepted: no handler; his default 69
+finish
+trigger Take                            # Prog 0: 63
+finish
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # Prog 0: 102 (4447, 4400)
+finish                                  # Prog 1
+trigger Valgeir                         # Prog 1: 104
+finish
+trade Valgeir SliceOfLandCrabMeat x1    # the meat alone: nil
+trade Valgeir ScreamFungus x1 SliceOfLandCrabMeat x1 ChocoboFeather x1 # an extra item: nil
+trade Valgeir ScreamFungus x1 SliceOfLandCrabMeat x2 # two meat: nil
+trade Valgeir ChocoboFeather x1 SliceOfLandCrabMeat x1 # a wrong item for the fungus: nil
+trade Valgeir ScreamFungus x1 SliceOfLandCrabMeat x1 # 103
+finish                                  # Prog 2, readyTime 1800003456, the trade taken
+trigger Valgeir                         # Prog 2, 1800003456 > 1800000000: 141
+finish
+wait jst=1                              # the wall clock + 86400 s
+trigger Valgeir                         # ready: 105
+finish                                  # Prog 3, the Land Crab Bisque
+trigger Valgeir                         # Prog 3: 142
+finish
+warp 22.1,-8,69.8 Mhaura
+trigger Take                            # Prog 3: 62 (132)
+finish                                  # completed: the Tableware Set, the title; the bisque taken (KEYITEM_OBTAINED + 1); DayCompleted 8000
+trigger Take                            # completed: The Clue's section is off below fame level 5: his default 59
+finish

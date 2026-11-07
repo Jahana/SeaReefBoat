@@ -1,0 +1,69 @@
+# golden trace: abyssea.first_contact
+seed 7
+flow fa404db70ceb391d191e18684df70d7198ee51c03f8af0a9c8723748dd35ba35
+recorder csharp-rerecord
+lua-at b79efc98ef7742bfd456a985fcb0f4191b6d8420
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @7d8e5c1aad15785b (166)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @4a3da035abb42879 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @e9cae1c4bb221b99 (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @22f8d8aafbddf980 (4)
+char_recast @47069a7e0c8cbfcb (10)
+char_stats @d18aa3315b276f5f (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @ef691b31d33f3284 (41)
+ret onZoneIn=number:4294967295
+order 102/qm3/onTrigger=default,Mission[6][530],Quest[8][167],Quest[8][170],Quest[4][32],Quest[4][32]
+step trigger qm3
+packets
+  00E @556af51903399ef5
+  00E @0f570e0bbb0c6897
+  00E @a9a2f54b15ec498f
+  02A @fc6ce830ec61018e
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step finish-if-event
+packets
+step wait vana=8
+packets
+step trigger qm3
+packets
+  032 @617fcbc9ab5ef315
+  0DF @fa8efe21d9e74d78
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish-if-event
+packets
+  056 @85e20860e9ed410c
+  056 @4e8d67f167eb0bd8
+  056 @cee08bcabdeb33fc
+  0DF @fa8efe21d9e74d78
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_quest_state - quest_key=abyssea.first_contact|area=8|quest_id=167|status=1|step=0|progress=null|repeat_by=0
+char_quest_state + quest_key=abyssea.an_officer_and_a_pirate|area=8|quest_id=168|status=1|step=0|progress=null|repeat_by=0
+char_quest_state + quest_key=abyssea.first_contact|area=8|quest_id=167|status=2|step=0|progress=null|repeat_by=0
+chars quests +532:0001 +564:87
+ret onEventFinish=nil:nil
+step wait vana=8
+packets
+step trigger qm3
+packets
+  02A @fc6ce830ec61018e
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step finish-if-event
+packets

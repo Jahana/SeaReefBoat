@@ -1,0 +1,62 @@
+# Knocking on Forbidden Doors (otherAreas 78): Tavnazian Safehold's Enaremand (default 537) and Chemioue (default 280), no
+# scripts; Phomiuna Aqueducts' Wooden Ladders (a script by the char's position), LADDER_KNOCKING the 4th; Misareaux Coast's
+# qm_mire_incense and qm_alsha (no script, no default) and the NM Alsha; Mhaura's Fyi Chalmwoh (no script, no default). A
+# level 75 Warrior, 1000 gil, a Chocobo Feather.
+# It's Raining Mannequins! and Behind the Smile completed. Available: a trade to Enaremand: no trade handler, nothing; Chemioue: no section, her default 280; Enaremand 535, finished: begun; Enaremand
+# again: no section, 537. Chemioue at Prog 0: 536, finished: Prog 1; again: nil, 280. Phomiuna: LADDER_KNOCKING at Prog 1:
+# 38 (27), finished: Prog 2; again: nil, the ladder's script (the char stands 1.5 east of the ladder, at its y -1.499:
+# outside the y -1 to 1 box of ladder 24, so the script does nothing). Misareaux: qm_alsha at Prog 2 without the incense:
+# nil, nothing; qm_mire_incense: the Mire Incense (quest:keyItem); again (held): nil, nothing; qm_alsha: 556 ([1] = 709),
+# finished: Prog 3; 557 ([1] = 709), finished: Alsha popped and claimed, FOUL_STENCH_OF_DEATH; again (Alsha up): nil.
+# Alsha killed by the char (isKiller; its own Prog 3 in the alliance list): Prog 4. qm_alsha: 558, finished: Prog 5, the
+# incense taken, Better Humes and Mannequins. Prog 5: nil. Mhaura: Fyi 321 ([0] = 704, mask 0, 100000, 2000, 200, 1000
+# gil, [6] = 713); an update (option 0): no 321 update handler while accepted, nothing; finished (option 0): completed
+# (no reward table), then the completed section's 321 finish (its check holds once completed): option 0, nothing.
+# Completed with the key item: Fyi 321 (mask 0, the costs, 1000 gil); its update option 0: richEnough 0 (1000 < 100000).
+lists TavnazianSafehold/Enaremand/onTrigger TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/onEventFinish/535 TavnazianSafehold/onEventFinish/536 PhomiunaAqueducts/Wooden_Ladder/onTrigger PhomiunaAqueducts/onEventFinish/38 MisareauxCoast/qm_mire_incense/onTrigger MisareauxCoast/qm_alsha/onTrigger MisareauxCoast/Alsha/onMobDeath MisareauxCoast/onEventFinish/556 MisareauxCoast/onEventFinish/557 MisareauxCoast/onEventFinish/558 Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/onEventUpdate/321 Mhaura/onEventFinish/321
+warning: quests: otherAreas.knocking_on_forbidden_doors: one finish of 321 ran 2 handlers (2/-/onEventFinish:321, 3/-/onEventFinish:321) -- the Lua runs it twice too: its sections at Knocking_on_Forbidden_Doors.lua:184 (accepted) and :278 (completed) at lua-at 1c637f55 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=TavnazianSafehold pos=97.5,-41,51.6 job=WAR lvl=75 gil=1000
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile completed
+item ChocoboFeather
+login
+trade Enaremand ChocoboFeather x1       # available: no trade handler; nothing (kept)
+trigger Chemioue                        # available: no section; her default 280
+finish
+trigger Enaremand                       # 535
+finish                                  # begun
+trigger Enaremand                       # accepted: no section; his default 537
+finish
+trigger Chemioue                        # Prog 0: 536
+finish                                  # Prog 1
+trigger Chemioue                        # Prog 1: nil; 280
+finish
+warp -216.6,-1.5,18.1 PhomiunaAqueducts
+trigger LADDER_KNOCKING                 # Prog 1, the 4th ladder: 38 (27)
+finish                                  # Prog 2
+trigger LADDER_KNOCKING                 # Prog 2: nil; the ladder's script
+finish-if-event
+warp -154.3,-15.7,644.6 MisareauxCoast
+trigger qm_alsha                        # Prog 2, no incense: nil; nothing
+finish-if-event
+trigger qm_mire_incense                 # Prog 2, no incense: the Mire Incense
+trigger qm_mire_incense                 # held: nil; nothing
+finish-if-event
+trigger qm_alsha                        # the incense, Prog 2: 556 ([1] = 709)
+finish                                  # Prog 3
+trigger qm_alsha                        # Prog 3, Alsha not up: 557 ([1] = 709)
+finish                                  # Alsha popped, claimed; FOUL_STENCH_OF_DEATH
+trigger qm_alsha                        # Prog 3, Alsha up: nil
+finish-if-event
+kill ALSHA                              # the killer; a member (itself) at Prog 3: Prog 4
+trigger qm_alsha                        # Prog 4: 558
+finish                                  # Prog 5; the incense taken; Better Humes and Mannequins
+trigger qm_alsha                        # Prog 5: nil
+finish-if-event
+warp -37.8,-16,70.1 Mhaura
+trigger Fyi_Chalmwoh                    # Prog 5: 321 (704, 0, 100000, 2000, 200, 1000, 713)
+update 321 option=0                     # accepted: no 321 update handler; nothing
+finish option=0                         # completed; then the completed section's 321 finish: option 0, nothing
+trigger Fyi_Chalmwoh                    # completed, the key item: 321 (0, 100000, 2000, 200, 1000)
+update 321 option=0                     # richEnough 0 (1000 gil): (0, 0, 0)
+finish option=0                         # option 0: nothing

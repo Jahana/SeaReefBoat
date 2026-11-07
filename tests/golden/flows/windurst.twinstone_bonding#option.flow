@@ -1,0 +1,23 @@
+# Twinstone Bonding (windurst 62): 487's finish with a non-zero option. Gioh Ajihri's finish begins the quest and sets
+# GiohAijhriSpokenTo 1 on any option (the Lua's addQuest ignores it): option 1 as option 0 (the main flow). Accepted
+# with needToZone (a GM): 488 (the accepted arm reads no needToZone); the earring: nothing; rezoned. Accepted with the
+# var 0 (a GM): the earring: nothing; 488 (var 1), then the earring: 490 (completed).
+char zone=WindurstWoods pos=106.2,-4.75,173.9 job=WAR lvl=75
+fame Windurst 50
+item TwinstoneEarring
+login
+trigger Gioh_Ajihri                     # level 2: 487 (0, 13360)
+finish option=1                         # begun (any option); var 1
+trigger Gioh_Ajihri                     # accepted: 488 (0, 13360)
+finish                                  # var 1
+charvar [generic]mustZone 241           # needToZone (a GM)
+trigger Gioh_Ajihri                     # accepted, needToZone: 488
+finish                                  # var 1
+trade Gioh_Ajihri TwinstoneEarring x1   # accepted, var 1, needToZone: nothing
+rezone                                  # needToZone cleared
+charvar GiohAijhriSpokenTo 0
+trade Gioh_Ajihri TwinstoneEarring x1   # accepted, var 0: nothing
+trigger Gioh_Ajihri                     # accepted: 488
+finish                                  # var 1
+trade Gioh_Ajihri TwinstoneEarring x1   # var 1: 490
+finish                                  # the earring taken; needToZone; var 0; completed (Wrapped Bow, Bond Fixer)

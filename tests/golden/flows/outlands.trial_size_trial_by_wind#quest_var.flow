@@ -1,0 +1,15 @@
+# Trial-Size Trial by Wind (outlands 197), the quest's own var at the completion: a SMN of level 20 with the quest
+# accepted, the Mini Tuning Fork of Wind and Quest[5][197]Prog 1 (GMs). The fork's trade to WP_Entrance: 32000;
+# option 33 (index 2, arena 1): registered, entered, the fork taken; a GM's bfwin: 32001, finished: Garuda learned, the
+# Scroll of Instant Warp, San d'Oria and Bastok fame +10, the raw player:completeQuest. The raw completeQuest does no
+# cleanup: Quest[5][197]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByWind accepted
+item MiniTuningForkOfWind
+charvar Quest[5][197]Prog 1               # a GM: the quest's own var
+login
+trade WP_Entrance MiniTuningForkOfWind x1  # the fork: the entry menu 32000
+update 32000 option=33                    # index 2, arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+bfwin                                     # a GM's win: 32001
+finish                                    # Garuda learned; the scroll; fame +10 each; completed, Prog kept

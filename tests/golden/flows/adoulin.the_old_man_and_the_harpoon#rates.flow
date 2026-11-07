@@ -1,0 +1,19 @@
+# The Old Man and the Harpoon (adoulin, call-only), 2542's rewards at midpoint rates: a level 99 Warrior in
+# Western Adoulin, the quest accepted and the Extravagant Harpoon (GMs), and the quest's own var Quest[9][77]Prog 1
+# (a GM).
+# EXP_RATE 1.125 (562.5) and BAYLD_RATE 1.375 (412.5): the bindings round each product half away from zero (llround):
+# 563 exp, 413 bayld and BAYLD_OBTAINED 413, where a truncation or a round half to even would give 562 and 412. The raw
+# player:completeQuest leaves Quest[9][77]Prog as it is (quest:complete's cleanup would clear it). Talks in pairs
+# (Jorin's default 560, then his script).
+lists WesternAdoulin/Jorin/onTrigger WesternAdoulin/onEventFinish/2542
+char zone=WesternAdoulin pos=93.8,32,152.2 job=WAR lvl=99
+setting EXP_RATE 1.125
+setting BAYLD_RATE 1.375
+quest Adoulin.TheOldManAndTheHarpoon accepted
+keyitem ExtravagantHarpoon
+charvar Quest[9][77]Prog 1
+login
+trigger Jorin                           # 560
+finish-if-event
+trigger Jorin                           # the Extravagant Harpoon: 2542
+finish-if-event                         # 2542's finish: completed, 563 exp, 413 bayld, BAYLD_OBTAINED 413, fame 30

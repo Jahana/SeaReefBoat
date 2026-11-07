@@ -1,0 +1,51 @@
+# One Good Deed? (windurst 92): its Chipmy-Popmy lines next to Promathia 8-4's (Dawn: current, Status 4, Timer 0,
+# Option bit 1, CProg 0 by GM: her 619, a Progress; its finish sets CProg 1, so a GM sets CProg 0 again after each), so
+# a Progress and an Event line differ there. Chipmy-Popmy has no script; her default 202. A level-75 WAR at Windurst
+# fame 325 (level 5).
+lists PortWindurst/Chipmy-Popmy/onTrigger
+char zone=PortWindurst pos=-181,-2.835,73.9 job=WAR lvl=75
+fame Windurst 325
+mission Cop Dawn current
+charvar Mission[6][840]Status 4
+charvar Mission[6][840]Option 2
+login
+trigger Chipmy-Popmy                          # available: 594 (Progress) or 619 (Progress)
+finish option=0
+charvar Mission[6][840]CProg 0
+trigger Chipmy-Popmy
+finish option=0
+charvar Mission[6][840]CProg 0
+quest Windurst.OneGoodDeed accepted
+trigger Chipmy-Popmy                          # Prog 0: 596 (Event) or 619
+finish
+charvar Mission[6][840]CProg 0
+trigger Chipmy-Popmy
+finish
+charvar Mission[6][840]CProg 0
+charvar Quest[2][92]Prog 1
+trigger Chipmy-Popmy                          # Prog 1: 595 (Progress) or 619
+finish
+charvar Mission[6][840]CProg 0
+charvar Quest[2][92]Prog 1
+trigger Chipmy-Popmy
+finish
+charvar Mission[6][840]CProg 0
+charvar Quest[2][92]Prog 2
+trigger Chipmy-Popmy                          # Prog 2: 599 (Event) or 619
+finish
+charvar Mission[6][840]CProg 0
+trigger Chipmy-Popmy
+finish
+charvar Mission[6][840]CProg 0
+charvar Quest[2][92]Prog 3
+trigger Chipmy-Popmy                          # Prog 3: 597 (Progress) or 619
+finish
+charvar Mission[6][840]CProg 0
+trigger Chipmy-Popmy
+finish
+charvar Mission[6][840]CProg 0
+trigger Chipmy-Popmy                          # completed: 598 (Event) or 619
+finish
+charvar Mission[6][840]CProg 0
+trigger Chipmy-Popmy
+finish

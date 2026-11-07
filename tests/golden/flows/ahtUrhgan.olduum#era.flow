@@ -1,0 +1,26 @@
+# Olduum with its era module, modules/era/lua/quests/ahturhgan/olduum.lua, enabled by xi.pre(ROV) (RESTRICT_CONTENT 1,
+# ENABLE_ROV 0): the wait for another ring is 24 hours. Two level 75 Warriors in Wajaom Woodlands, each with a Lightning
+# Band and Olduum completed (GMs). Main: the band traded to the Leypoint: 2, finished: the module's wrap: the base gives
+# the ring, takes the band and sets Wait = now + 60; Wait changed: Wait = now + 86400 (1800086400; the quest alone sets
+# 1800000060: the trace's char var shows which). Whitegate: Dkhaaya: the ring held: 7. Bob: the band traded: 2; a GM
+# gives the ring while it is open; finished: the base does nothing (the ring held): Wait unchanged: the module nothing.
+module modules/era/lua/quests/ahturhgan/olduum.lua
+lists WajaomWoodlands/Leypoint/onTrade WajaomWoodlands/onEventFinish/2 AhtUrhganWhitegate/Dkhaaya/onTrigger
+char zone=WajaomWoodlands pos=-198.5,-8.5,80.058 job=WAR lvl=75
+char bob zone=WajaomWoodlands pos=-198.5,-8.5,81.5 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+item LightningBand
+quest AhtUrhgan.Olduum completed
+bob: item LightningBand
+bob: quest AhtUrhgan.Olduum completed
+login
+trade Leypoint LightningBand x1         # no ring, the band: 2
+finish                                  # the ring; the band taken; the module: Wait = now + 86400
+warp -71.7,0,-5.842 AhtUrhganWhitegate
+trigger Dkhaaya                         # the ring held: 7
+finish
+bob: login
+bob: trade Leypoint LightningBand x1    # bob: 2
+bob: item OlduumRing                    # a GM, while 2 is open
+bob: finish                             # the ring held: the base does nothing; Wait unchanged: the module nothing

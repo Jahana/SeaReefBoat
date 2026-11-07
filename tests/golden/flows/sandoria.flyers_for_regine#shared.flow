@@ -1,0 +1,13 @@
+# Flyers for Regine (sandoria 16) at Regine beside The Brugaire Consortium (C#, a container; at Prog 0 its Regine trade
+# takes exactly the Parcel for the Magic Shop: 535, Progress). 10 gil: the container has no action, so the script's call
+# gives a flyer; the parcel and 10 gil: not exactly the parcel (the container has no action), the script's call gives a
+# flyer (10 gil taken, the parcel kept); the parcel alone: the container's 535 (the script not reached).
+char zone=PortSanDoria pos=66.3,-8.1,-73.7 job=WAR lvl=30 gil=100
+item ParcelForTheMagicShop
+quest Sandoria.TheBrugaireConsortium accepted
+quest Sandoria.FlyersForRegine accepted
+login
+trade Regine gil=10                       # the script's call: a flyer; 10 gil taken
+trade Regine ParcelForTheMagicShop x1 gil=10  # not exactly the parcel: the script's call: a flyer; the parcel kept
+trade Regine ParcelForTheMagicShop x1     # The Brugaire Consortium: 535
+finish                                    # the parcel taken; its Prog 1

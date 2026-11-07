@@ -1,0 +1,42 @@
+# Unending Chase (otherAreas 2): Mhaura's Rycharde and Take. Way of the Cook completed, its Quest[4][1]DayCompleted 7992
+# (a GM: 7992 + 7 < 8000), Windurst fame 125 (level 3). A level 30 Warrior with two Puffballs and a Chocobo Feather.
+# Available: a Puffball (the valid trade, in the wrong status): no trade handler; Take 65; Rycharde at Prog 0: 82
+# (4448), option 0: Prog 1, Quest[4][1]DayCompleted 0, not begun; Prog 1: 84 (4448), options 0, 77 and 79: nothing;
+# 84, option 78: begun. Accepted: Rycharde 85; Take 65; trades (walked back to Rycharde): two Puffballs: nil; a Puffball
+# and the feather: nil; the feather: nil; a Puffball: 83, finished: completed (fame 30 Windurst, 2100 gil, Two Star
+# Purveyor), the Puffball taken, Quest[4][2]DayCompleted 8000. Completed: no section; His Name is Valgeir's available
+# section answers Rycharde: 75 (8000 + 2 is not below 8000); the second Puffball: no trade handler.
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/Take/onTrigger Mhaura/onEventFinish/82 Mhaura/onEventFinish/84 Mhaura/onEventFinish/83
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.WayOfTheCook completed
+charvar Quest[4][1]DayCompleted 7992
+fame Windurst 125
+item Puffball x2
+item ChocoboFeather
+login
+trade Rycharde Puffball x1              # available: no trade handler; nothing
+trigger Take                            # available: 65
+finish
+trigger Rycharde                        # Prog 0: 82 (4448)
+finish option=0                         # Prog 1, Quest[4][1]DayCompleted 0; not 77: not begun
+trigger Rycharde                        # Prog 1 (0 + 7 < 8000): 84 (4448)
+finish option=0                         # not 78: nothing
+trigger Rycharde                        # 84 (4448)
+finish option=77                        # below 78: nothing
+trigger Rycharde                        # 84 (4448)
+finish option=79                        # above 78: nothing
+trigger Rycharde                        # 84 (4448)
+finish option=78                        # begun
+trigger Rycharde                        # accepted: 85
+finish
+trigger Take                            # accepted: 65
+finish
+walk 18.9,-16,88.8                      # back to Rycharde (a trade does not walk)
+trade Rycharde Puffball x2              # two: nil
+trade Rycharde Puffball x1 ChocoboFeather x1 # an extra item: nil
+trade Rycharde ChocoboFeather x1        # a wrong item: nil
+trade Rycharde Puffball x1              # 83
+finish                                  # completed: fame 30 Windurst, 2100 gil, the title; the Puffball taken; DayCompleted 8000
+trigger Rycharde                        # completed: His Name is Valgeir available, 8000 + 2 < 8000 false: 75
+finish
+trade Rycharde Puffball x1              # completed: no trade handler; nothing

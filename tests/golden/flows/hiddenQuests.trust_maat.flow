@@ -1,0 +1,23 @@
+# Trust: Maat (hidden quest TrustMaat): a level 99 Warrior in Rulude Gardens. Maat (his script npcs/Maat.lua, the genkai
+# quests; default text MAAT_DIALOG). No permit: the check fails: his script. The Bastok Trust Permit (a GM), maatsCap 0:
+# 10242 (no finish). maatsCap 0x1001F (five of the 16 low bits and bit 16: countBits reads only 16 bits): 10242. 63 (six
+# bits): 10241, finished on 0: nothing; again 10241, finished on 2: quest:complete (true), Maat learned,
+# YOU_LEARNED_TRUST. Learned: the check fails: his script.
+lists RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/10241
+char zone=RuludeGardens pos=10.9,3.1,117.9 job=WAR lvl=99
+login
+trigger Maat                            # no permit: the check fails: his script
+finish-if-event
+keyitem BastokTrustPermit               # a GM
+trigger Maat                            # maatsCap 0: 10242
+finish
+charvar maatsCap 65567                  # a GM: 0x1001F, five of the 16 low bits
+trigger Maat                            # five: 10242
+finish
+charvar maatsCap 63                     # a GM: six bits
+trigger Maat                            # six: 10241
+finish option=0                         # not 2: nothing
+trigger Maat                            # 10241
+finish option=2                         # complete: Maat learned, YOU_LEARNED_TRUST
+trigger Maat                            # learned: the check fails: his script
+finish-if-event

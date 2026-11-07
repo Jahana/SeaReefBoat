@@ -1,0 +1,48 @@
+# Inheritance (bastok 68): Gumbah in BastokMines, qm1 in Western Altepa Desert. The natural path, with the sword of Trials already held
+# at 300 weapon skill points (item wsp=300): the trades while only available (a bone chip, the sword: no handler), the
+# offer's skill threshold (GreatSword 2499, under 250 a level: not offered; 2500: 190), 190's finish with the sword held (no
+# second sword: the Weapon Training Guide alone, begun), 191 with the sword held (hide 1), the trades while accepted (a
+# bone chip: nil; the sword at 300 points: 193, whose finish takes it and gives the Map to the Annals of Truth), 191
+# with the map and no sword (hide 1) and its option 1 (a new sword, 0 points), the trade of that sword (192, no finish
+# handler), the qm1's pop of Maharaja, the kill, the Annals of Truth and 194 (Ground Strike). Completed: no section, the default
+# and no trade handler. #offer takes the offer without the sword (a full inventory, oncePerZone, the rezone), #offer_job
+# and #offer_guide the guard's other sides, #abandon 191 with hide 0 and option 2, #gm_nomap the qm1 with no map and
+# Maharaja's death without the map.
+# Gumbah also answers Blade of Darkness (99 from level 30: set completed), Blade of Death (fame level 3: fame 0 here)
+# and Bastok missions 7-2 and 8-2 (not current). His default is 52.
+# qm1 has no script; its default is NOTHING_OUT_OF_ORDINARY.
+lists BastokMines/Gumbah/onTrigger BastokMines/Gumbah/onTrade BastokMines/onEventFinish/190 BastokMines/onEventFinish/191 BastokMines/onEventFinish/193 BastokMines/onEventFinish/194 WesternAltepaDesert/qm1/onTrigger
+char zone=BastokMines pos=52,0,-36 job=WAR lvl=75
+quest Bastok.BladeOfDarkness completed    # Gumbah's 99 (Blade of Darkness, level 30) out of the way
+skill GreatSword 2499
+item BoneChip
+item SwordOfTrials wsp=300
+login
+trade Gumbah BoneChip x1          # available: no trade handler in section 1, nothing
+trade Gumbah SwordOfTrials x1    # available: nothing, the sword kept
+trigger Gumbah                    # GreatSword 2499 (getCharSkillLevel / 10 is below 250): not offered, the default 52
+finish
+skill GreatSword 2500
+trigger Gumbah                    # can equip, GreatSword 2500, no guide: 190 (oncePerZone)
+finish                         # the sword held: no second sword, the Weapon Training Guide, accepted
+trigger Gumbah                    # accepted, no Annals, the sword held: 191 with hide 1
+finish option=0                # option 0: nothing
+trade Gumbah BoneChip x1          # not the sword: nil, nothing
+trade Gumbah SwordOfTrials x1    # 300 weapon skill points: 193
+finish                         # the sword taken, the Map to the Annals of Truth
+trigger Gumbah                    # the map, no sword: 191 with hide 1
+finish option=1                # option 1, no sword: a new sword (0 points)
+trade Gumbah SwordOfTrials x1    # 0 weapon skill points: 192
+finish                         # 192 has no finish handler: the sword kept
+warp -660,0,-338 WesternAltepaDesert
+trigger qm1                    # the map, no Annals: Maharaja popped and claimed, SENSE_OMINOUS_PRESENCE
+trigger qm1                    # Maharaja up: popFromQM false, nil: NOTHING_OUT_OF_ORDINARY
+kill MAHARAJA             # the map held: killed_wsnm 1
+trigger qm1                    # killed_wsnm 1: back to 0, the key item Annals of Truth
+trigger qm1                    # the Annals held, killed_wsnm 0: nil, NOTHING_OUT_OF_ORDINARY
+warp 52,0,-36 BastokMines
+trigger Gumbah                    # the Annals: 194
+finish                         # completed: fame +20, the guide, map and Annals deleted, Ground Strike learned, GROUND_STRIKE_LEARNED
+trigger Gumbah                    # completed: no section, 52
+finish
+trade Gumbah SwordOfTrials x1    # completed: no trade handler, nothing

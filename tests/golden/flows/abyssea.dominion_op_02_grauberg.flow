@@ -1,0 +1,26 @@
+# Grauberg - Dominion Op #02 (abyssea 116, op 589): a level 99 Warrior in Abyssea - Grauberg; the op's target Monitor
+# (31 placed spawns, the first 17817976). The next op (#03, Stygian_Djinn) and Altepa's #02 accepted (a GM), this op
+# available: a Monitor killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0, which
+# dominionOnMobDeath does not read): a Monitor killed: dominionOnMobDeath(589): Quest[8][116]Prog 1
+# (FOV_DEFEATED_TARGET 1 of 5). The next op's Stygian_Djinn killed: Quest[8][117]Prog 1 (its own count), this op's
+# unchanged. Prog 4 (a GM): one more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing.
+# Completed (Prog 0, as completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge,
+# Invincible and Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaGrauberg/Monitor/onMobDeath AbysseaGrauberg/Stygian_Djinn/onMobDeath
+char zone=AbysseaGrauberg pos=-555,31,-760 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp03Grauberg accepted # a GM: the next op
+quest Abyssea.DominionOp02Altepa accepted # a GM: Altepa's #02
+kill IRONCLAD_SUNDERER-65               # available: nothing (17817976)
+quest Abyssea.DominionOp02Grauberg accepted # a GM
+kill IRONCLAD_SUNDERER-64               # accepted: Prog 1 (17817977)
+kill IRONCLAD_SUNDERER-89               # Stygian_Djinn: Quest[8][117]Prog 1 (17817952)
+charvar Quest[8][116]Prog 4             # a GM
+kill IRONCLAD_SUNDERER-63               # Prog 5 (17817978)
+kill IRONCLAD_SUNDERER-62               # full: nothing (17817979)
+quest Abyssea.DominionOp02Grauberg completed # a GM
+charvar Quest[8][116]Prog 0             # a GM
+kill IRONCLAD_SUNDERER-61               # completed: nothing (17817980)

@@ -1,0 +1,73 @@
+# Death and Rebirth (abyssea 181): a level 99 Warrior in Port Jeuno with A Sea Dog's Summons completed, the quest
+# accepted, eight maw quests (not An Ulcerous Uragnite) and the three set quests completed (GMs). Joachim with eight: no
+# section: his script's 328. The Hall of the Gods at Prog 0 and 18:00: nothing (section 2 wants Prog 1). The ninth (a
+# GM): Joachim: 343, finished: Prog 1; 343 again at Prog 1 (section 1 has no Prog check; the reply kind: an Event-rank
+# 343 would alternate with his own onTrigger and the second talk would be his 328). The Hall of the Gods at Prog 1:
+# 12:00 and 17:00 nothing; 18:00: 7, finished: completed, Emissaries of God accepted; back to accepted at Prog 1 (GMs):
+# 04:00: 7 again; back again: 05:00: nothing. Completed (a GM) with Prog 1 and all nine: Joachim plays his 328, and the
+# Hall at 20:00 nothing.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/343 PortJeuno/onEventFinish/328 HallOfTheGods/onZoneIn/1 HallOfTheGods/onEventFinish/7
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate completed
+quest Abyssea.HeartOfMadness completed
+quest Abyssea.TenuousExistence completed
+quest Abyssea.ChampionsOfAbyssea completed
+quest Abyssea.ASeaDogsSummons completed
+quest Abyssea.DeathAndRebirth accepted
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.MegadrileMenace completed
+quest Abyssea.TheBeastOfBastore completed
+quest Abyssea.ADelectableDemon completed
+quest Abyssea.AFlutteryFiend completed
+quest Abyssea.ABeakedBlusterer completed
+quest Abyssea.AManEatingMite completed
+quest Abyssea.HeroesOfAbyssea completed
+quest Abyssea.ScarsOfAbyssea completed
+quest Abyssea.TheForbiddenFrontier completed
+login
+trigger Joachim                         # eight maw quests: no section: 328 (his script)
+finish
+wait vana=6                             # 18:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 0 at 18:00: no section: nothing
+warp -51.344,0,-9.978 PortJeuno
+quest Abyssea.AnUlcerousUragnite completed # a GM: all nine
+trigger Joachim                         # all nine: 343
+finish                                  # Prog 1
+trigger Joachim                         # Prog 1, all nine still: 343 again (the kind)
+finish                                  # Prog 1
+wait vana=18                            # 12:00 (the next day)
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 1 at 12:00: nothing
+warp -51.344,0,-9.978 PortJeuno
+wait vana=5                             # 17:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 1 at 17:00: nothing (not >= 18, not < 5)
+warp -51.344,0,-9.978 PortJeuno
+wait vana=1                             # 18:00
+warp -0.011,-1.848,-176.133 HallOfTheGods open # Prog 1 at 18:00 (>= 18): 7, left open
+finish                                  # completed; Emissaries of God accepted
+quest Abyssea.EmissariesOfGod available # a GM
+quest Abyssea.DeathAndRebirth available # a GM
+quest Abyssea.DeathAndRebirth accepted  # a GM
+charvar Quest[8][181]Prog 1             # a GM: Prog 1 again
+warp -51.344,0,-9.978 PortJeuno
+wait vana=10                            # 04:00
+warp -0.011,-1.848,-176.133 HallOfTheGods open # Prog 1 at 04:00 (< 5): 7, left open
+finish                                  # completed; Emissaries of God accepted
+quest Abyssea.EmissariesOfGod available # a GM
+quest Abyssea.DeathAndRebirth available # a GM
+quest Abyssea.DeathAndRebirth accepted  # a GM
+charvar Quest[8][181]Prog 1             # a GM: Prog 1 again
+warp -51.344,0,-9.978 PortJeuno
+wait vana=1                             # 05:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # Prog 1 at 05:00: nothing (not < 5, not >= 18)
+warp -51.344,0,-9.978 PortJeuno
+quest Abyssea.DeathAndRebirth completed # a GM
+charvar Quest[8][181]Prog 1             # a GM
+trigger Joachim                         # completed, all nine: no section: 328
+finish
+wait vana=15                            # 20:00
+warp -0.011,-1.848,-176.133 HallOfTheGods # completed at Prog 1, 20:00: no section: nothing

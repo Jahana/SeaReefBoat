@@ -1,0 +1,24 @@
+# Breaking Stones (bastok 10): Horatius in Bastok Markets. The fame guard (level 2), the offer declined and accepted
+# (option 0), the Dangruf stone trade, the completion repeated: the trade section matches accepted and completed.
+lists BastokMarkets/Horatius/onTrigger BastokMarkets/Horatius/onTrade BastokMarkets/onEventFinish/100 BastokMarkets/onEventFinish/101
+char zone=BastokMarkets pos=-157,-4.839,-116
+item DangrufStone               # it does not stack: one line each
+item DangrufStone
+item BoneChip
+fame Bastok 49                  # fame level 1
+login
+trade Horatius DangrufStone x1  # available: no trade handler, nothing
+trigger Horatius                # fame level 1: not offered, his default 110
+finish
+fame Bastok 50                  # fame level 2
+trigger Horatius                # the offer, 100
+finish option=1                 # declined: still available
+trigger Horatius                # 100 again
+finish option=0                 # accepted
+trigger Horatius                # accepted: 110
+finish
+trade Horatius BoneChip x1      # the wrong item: nothing
+trade Horatius DangrufStone x1  # 101
+finish                          # completed: 400 gil, fame 30, a stone gone
+trade Horatius DangrufStone x1  # completed: 101 again
+finish                          # the repeat: 400 gil, fame 30 again

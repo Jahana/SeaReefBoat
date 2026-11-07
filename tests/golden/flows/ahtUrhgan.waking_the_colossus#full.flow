@@ -1,0 +1,29 @@
+# Waking the Colossus's 929 with no room, accepted at Prog 5 with the Whisper (GMs), by Naja (no ToAU 48: a nil answers
+# nothing). main, a full bag: option 1: the mantle does not fit (ITEM_CANNOT_BE_OBTAINED): no completion, the Whisper
+# kept; 929 again once the bag is freed: option 1: the mantle, completed. bob, one free slot (the bag filled, then one
+# more slot: storage 31): option 1: the mantle fills it, so the completion's Imperial Gold Piece does not fit (complete
+# false, unread): the Whisper taken and DI's Timer set all the same, the quest left accepted at Prog 5 in no section
+# (the Lua's kept quirk): Naja: nothing.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/929
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+quest AhtUrhgan.WakingTheColossus accepted
+charvar Quest[6][74]Prog 5
+keyitem WhisperOfRadiance
+bob: quest AhtUrhgan.WakingTheColossus accepted
+bob: charvar Quest[6][74]Prog 5
+bob: keyitem WhisperOfRadiance
+login
+fill-inventory
+trigger Naja_Salaheem                   # 929
+finish option=1                         # full: ITEM_CANNOT_BE_OBTAINED; giveItem false: nothing else
+free-inventory
+trigger Naja_Salaheem                   # still Prog 5 with the Whisper: 929
+finish option=1                         # the mantle; completed
+bob: login
+bob: fill-inventory
+bob: storage inventory 31               # a GM: one free slot
+bob: trigger Naja_Salaheem              # 929
+bob: finish option=1                    # the mantle (the slot); no room for the Gold Piece: Whisper taken; Timer
+bob: trigger Naja_Salaheem              # accepted, Prog 5, no Whisper: no section: nothing
+bob: finish-if-event

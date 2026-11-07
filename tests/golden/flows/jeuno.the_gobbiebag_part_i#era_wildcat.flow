@@ -1,0 +1,27 @@
+# The Gobbiebag Part I (jeuno 27) with its era module (RESTRICT_CONTENT 1, ENABLE_SOA 0) against Lure of the Wildcat
+# (Jeuno) (jeuno 90, C#) at Bluffnix. At fame level 1 (a fresh char, the inventory 30) the module's state 3 answers 42
+# (31), an Event: Lure's 10056 (bit 12 unset), a Progress event, wins (no tie); a GM clears Lure's Prog: 10056 again;
+# with bit 12 set, 42 (31) alone. At fame level 3 (a GM) the module's state 1 answers 43 (31, 0, 1), a Progress event:
+# with Lure's Prog cleared the two tie, no last event (no tie played before): 10056 (the container order); the next
+# talk, the last 10056: 43, begun.
+module modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/onEventFinish/42 LowerJeuno/onEventFinish/43 LowerJeuno/onEventFinish/10056
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.LureOfTheWildcat accepted
+login
+trigger Bluffnix                        # state 3's 42 (31), an Event; 10056, a Progress event: 10056
+finish                                  # bit 12
+charvar Quest[3][90]Prog 0              # a GM
+trigger Bluffnix                        # 10056 again (a Progress event over an Event: no tie)
+finish                                  # bit 12
+trigger Bluffnix                        # bit 12 set: state 3's 42 (31) alone
+finish
+fame Sandoria 250                       # a GM: fame level 3
+charvar Quest[3][90]Prog 0              # a GM
+trigger Bluffnix                        # the module's state 1 43 (31, 0, 1) ties with 10056, no last event: 10056
+finish                                  # bit 12
+charvar Quest[3][90]Prog 0              # a GM
+trigger Bluffnix                        # the tie, the last 10056: 43 (31, 0, 1)
+finish option=0                         # begun

@@ -1,0 +1,92 @@
+# Rock Racketeer (windurst 26): Nanaa Mihgo (Windurst Woods; +99: the first entity of the name is cutscene-only), Bopa
+# Greso, Cha Lebagta, Varun (Windurst Woods), Ardea (Bastok Markets). A level-10 WAR, Mihgo's Amigo completed by GM (its
+# mustZone clear), Windurst fame 125 (level 3). Available: a bone chip traded to Nanaa Mihgo (no trade handler in
+# section 1; Mihgo's Amigo's completed trade wants four necklaces: nothing); 93, option 0 (nothing), option 1 (begun,
+# the Sharp Gray Stone). Prog 0: Nanaa Mihgo 94 (Option 0); Bopa Greso 96, Cha Lebagta 97; Varun nil (432). Ardea 261:
+# option 2 (nothing), option 1 (Option 1); Nanaa Mihgo 95 (Option 1); Ardea 261 option 0 (Prog 1, the stone taken, 10
+# gil); Ardea 262; Varun nil at Prog 1; Nanaa Mihgo 98 (Prog 2), 99; Bopa Greso 96, Cha Lebagta 97 at Prog 2; Varun 100
+# (Option 1 < 2: Option 2), 101 (0, Sharp Stone); Ardea 263. Prog 3 by GM (the Palborough Mines Mythril Seam's write,
+# with its Sharp Stone): Ardea 263 (the else arm); Nanaa Mihgo nil (76), Bopa Greso nil (77), Cha Lebagta nil (78),
+# Varun nil (432). The stone traded to Varun: 102 (2100): completed (fame 30; 2100 gil; the mustZone; confirmTrade takes
+# the stone: user ruling 2026-11-04, kept Lua bugs; the Lua's trade test read no item, so it took nothing). Completed:
+# Varun 103, Bopa Greso 96, Cha Lebagta 97 while the mustZone holds; out to Windurst Waters and back: Varun 104
+# (replaceDefault), Bopa Greso nil (77), Cha Lebagta nil (78).
+lists WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/Bopa_Greso/onTrigger WindurstWoods/Cha_Lebagta/onTrigger WindurstWoods/Varun/onTrigger WindurstWoods/Varun/onTrade WindurstWoods/onEventFinish/93 WindurstWoods/onEventFinish/98 WindurstWoods/onEventFinish/100 WindurstWoods/onEventFinish/102 BastokMarkets/Ardea/onTrigger BastokMarkets/onEventFinish/261
+char zone=WindurstWoods pos=66.5,-4.75,239.6 job=WAR lvl=10
+quest Windurst.MihgosAmigo completed
+fame Windurst 125
+item BoneChip
+login
+trade Nanaa_Mihgo+99 BoneChip x1              # available, the check holds: no trade handler: nothing
+trigger Nanaa_Mihgo+99                        # Mihgo's Amigo completed, fame level 3, its mustZone clear: 93
+finish option=0                               # declined: nothing
+trigger Nanaa_Mihgo+99                        # 93
+finish option=1                               # begun; the Sharp Gray Stone
+trigger Nanaa_Mihgo+99                        # Prog 0, Option 0: 94
+finish
+trigger Bopa_Greso                            # Prog 0 <= 2: 96
+finish
+trigger Cha_Lebagta                           # 97
+finish
+trigger Varun                                 # Prog 0: nil; his default 432
+finish
+warp -196,-6,-69 BastokMarkets
+trigger Ardea                                 # Prog 0: 261
+finish option=2                               # neither 0 nor 1: nothing
+trigger Ardea                                 # 261
+finish option=1                               # Option 1
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                        # Prog 0, Option 1: 95
+finish
+warp -196,-6,-69 BastokMarkets
+trigger Ardea                                 # 261
+finish option=0                               # Prog 1; the stone taken (silent); 10 gil
+trigger Ardea                                 # Prog 1: 262
+finish
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Varun                                 # Prog 1: nil; 432
+finish
+trigger Nanaa_Mihgo+99                        # Prog 1: 98
+finish                                        # Prog 2
+trigger Nanaa_Mihgo+99                        # Prog 2: 99
+finish
+trigger Bopa_Greso                            # Prog 2: 96
+finish
+trigger Cha_Lebagta                           # Prog 2: 97
+finish
+trigger Varun                                 # Prog 2, Option 1 (< 2): 100
+finish                                        # Option 2
+trigger Varun                                 # Option 2: 101 (0, Sharp Stone)
+finish
+warp -196,-6,-69 BastokMarkets
+trigger Ardea                                 # Prog 2: 263
+finish
+charvar Quest[2][26]Prog 3                    # GM: the Mythril Seam's write (Prog >= 2, the stone mined)
+item SharpStone
+trigger Ardea                                 # Prog 3: 263 (the else arm)
+finish
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                        # Prog 3: nil; 76
+finish
+trigger Bopa_Greso                            # Prog 3: nil; 77
+finish
+trigger Cha_Lebagta                           # Prog 3: nil; 78
+finish
+trigger Varun                                 # Prog 3: nil; 432
+finish
+trade Varun SharpStone x1                     # 102 (2100)
+finish                                        # completed: fame 30; 2100 gil; the mustZone; the stone taken
+trigger Varun                                 # completed, the mustZone: 103
+finish
+trigger Bopa_Greso                            # the mustZone: 96
+finish
+trigger Cha_Lebagta                           # the mustZone: 97 (Mihgo's Amigo's mustZone is clear: its 91 does not answer)
+finish
+warp -50.9,-6.25,109.3 WindurstWaters
+warp 66.5,-4.75,239.6 WindurstWoods           # the mustZone cleared on the zone-in
+trigger Varun                                 # no mustZone: 104 (replaceDefault)
+finish
+trigger Bopa_Greso                            # nil; 77
+finish
+trigger Cha_Lebagta                           # nil; 78
+finish

@@ -1,0 +1,40 @@
+# Lizard Skins (sandoria 15): Hanaa Punaa in Southern San d'Oria. The guard (fame level 2 and The Seamstress completed):
+# a trade while available (nothing), the guard false on The Seamstress's side (its 528) and on the fame side (The
+# Seamstress's 590), the offer 559 declined (Prog 1), 562 declined and taken, the accepted 560, the wrong trades, 561 for
+# exactly three Lizard Skins (Lizard Gloves, the skins taken, Lizard Skinner, completed: fame +10), the completed 591
+# below fame level 3, the repeat 561, and at fame level 3 Black Tiger Skins' offer instead of 591.
+# Hanaa Punaa has no script and no default event; The Seamstress and Black Tiger Skins also name her.
+lists SouthernSanDoria/Hanaa_Punaa/onTrigger SouthernSanDoria/Hanaa_Punaa/onTrade SouthernSanDoria/onEventFinish/559 SouthernSanDoria/onEventFinish/562 SouthernSanDoria/onEventFinish/561
+char zone=SouthernSanDoria pos=-178.2,-8.8,27.6
+fame Sandoria 50
+item LizardSkin x6
+item BoneChip
+login
+trade Hanaa_Punaa LizardSkin x3           # available (and The Seamstress available): no trade handler, nothing
+trigger Hanaa_Punaa                       # fame level 2, The Seamstress not completed: The Seamstress's 528
+finish option=1                           # The Seamstress: its Prog 1
+quest Sandoria.TheSeamstress completed
+fame Sandoria 49
+trigger Hanaa_Punaa                       # The Seamstress completed, fame level 1: The Seamstress's 590
+finish
+fame Sandoria 50
+trigger Hanaa_Punaa                       # fame level 2: 559
+finish option=1                           # not option 0: Prog 1
+trigger Hanaa_Punaa                       # Prog 1: 562
+finish option=1                           # not option 0: nothing
+trigger Hanaa_Punaa                       # 562
+finish                                    # option 0: begun
+trigger Hanaa_Punaa                       # accepted: 560
+finish
+trade Hanaa_Punaa BoneChip x1             # nil (The Seamstress's completed trade: nil too)
+trade Hanaa_Punaa LizardSkin x2           # two: nil
+trade Hanaa_Punaa LizardSkin x3 BoneChip x1  # not exactly three: nil
+trade Hanaa_Punaa LizardSkin x3           # exactly three: 561
+finish                                    # Lizard Gloves, the skins taken, Lizard Skinner, completed (fame 60)
+trigger Hanaa_Punaa                       # completed, fame level 2: 591
+finish
+trade Hanaa_Punaa LizardSkin x3           # completed: 561 again
+finish                                    # Lizard Gloves, the skins taken, the title, fame +10 (70); no completion
+fame Sandoria 125
+trigger Hanaa_Punaa                       # completed, fame level 3: no 591; Black Tiger Skins' offer 576
+finish option=1                           # Black Tiger Skins declined: its Prog 1

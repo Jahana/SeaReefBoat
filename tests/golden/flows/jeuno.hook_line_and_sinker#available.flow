@@ -1,0 +1,16 @@
+# Hook, Line, and Sinker (jeuno 71): the available check's CoP edge. A level 75 Warrior, CoP A Vessel Without a Captain
+# current (318), an Egret Fishing Rod: Omer's default 206; The Road Forks (325; a GM, A Vessel Without a Captain
+# completed first: addMission refuses to overwrite a current mission): the rod traded while the quest is only
+# available: no onTrade: nothing (the rod kept); 10040, begun.
+lists LowerJeuno/Omer/onTrigger LowerJeuno/Omer/onTrade LowerJeuno/onEventFinish/10040
+char zone=LowerJeuno pos=-85,0,-119.8 job=WAR lvl=75
+mission Cop AVesselWithoutACaptain current
+item EgretFishingRod
+login
+trigger Omer                            # 318: no section; 206
+finish
+mission Cop AVesselWithoutACaptain completed # a GM: the log's current mission cleared
+mission Cop TheRoadForks current        # a GM
+trade Omer EgretFishingRod x1     # available: no onTrade: nothing
+trigger Omer                            # 10040
+finish                                  # begun

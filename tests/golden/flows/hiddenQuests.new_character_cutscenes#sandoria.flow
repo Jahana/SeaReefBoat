@@ -1,0 +1,13 @@
+# New Character Cutscenes, San d'Oria. A San d'Oria char (nation 0), notSeen 1. Northern San d'Oria (login open):
+# setPos(0, 0, -12, 192), the home point, 535 (flags 0x83); finished: the text, the coupon, notSeen 0, nations 1.
+# Southern San d'Oria (notSeen 1, a GM): 503 (warp finishes it): the text, the coupon. Port San d'Oria: 500: the coupon,
+# then the text.
+lists NorthernSanDoria/onZoneIn/1 NorthernSanDoria/onEventFinish/535 SouthernSanDoria/onZoneIn/1 SouthernSanDoria/onEventFinish/503 PortSanDoria/onZoneIn/1 PortSanDoria/onEventFinish/500
+char zone=NorthernSanDoria pos=0,0,-12 job=WAR lvl=1 nation=0
+charvar HQuest[newCharacterCS]notSeen 1
+login open                              # setPos, home point; 535
+finish                                  # the text; the coupon; nations 1
+charvar HQuest[newCharacterCS]notSeen 1
+warp -100,1,-40 SouthernSanDoria        # 503: the text; the coupon
+charvar HQuest[newCharacterCS]notSeen 1
+warp -100,-8,-125 PortSanDoria          # 500: the coupon; the text

@@ -1,0 +1,46 @@
+# Stamp Hunt (bastok 16): Arawn and Pavel in Bastok Markets, Deadly Spider and Tall Mountain in Bastok Mines, Elayne
+# and Romualdo in the Metalworks, Ehrhard and Latifah in Port Bastok. Arawn's 225 (no guard: the Stamp Sheet, begun);
+# Arawn silent until all seven stamps; each stamper's event once (its bit unset), nil after; Arawn's 226 (completed:
+# the Leather Gorget, fame +20, Stampeder, the sheet deleted); completed: no section (Arawn's default 114).
+# Other quests: Lure of the Wildcat (Arawn, Pavel: accepted only), Message on the Winds (Romualdo's 952 from level 20:
+# the char is level 10), Faded Promises (Romualdo, a NIN), mission 6-1 (Tall Mountain). Defaults: Arawn 114, Pavel
+# 128, Deadly Spider 17, Tall Mountain 55, Elayne 704, Romualdo 705, Ehrhard 47, Latifah 13.
+lists BastokMarkets/Arawn/onTrigger BastokMarkets/Pavel/onTrigger BastokMarkets/onEventFinish/225 BastokMarkets/onEventFinish/226 BastokMarkets/onEventFinish/227 BastokMines/Deadly_Spider/onTrigger BastokMines/Tall_Mountain/onTrigger BastokMines/onEventFinish/85 BastokMines/onEventFinish/86 Metalworks/Elayne/onTrigger Metalworks/Romualdo/onTrigger Metalworks/onEventFinish/725 Metalworks/onEventFinish/726 PortBastok/Ehrhard/onTrigger PortBastok/Latifah/onTrigger PortBastok/onEventFinish/120 PortBastok/onEventFinish/121
+char zone=BastokMarkets pos=-121.5,-4,-123.9 job=WAR lvl=10
+item BoneChip
+login
+trade Arawn BoneChip x1        # available: no trade handler: nothing
+trigger Pavel                  # available: no handler, his default 128
+finish
+trigger Arawn                  # available: 225
+finish                         # the Stamp Sheet, begun
+trigger Arawn                  # no stamps: nil, 114
+finish
+trigger Pavel                  # bit 0 unset: 227
+finish                         # bit 0
+trigger Pavel                  # bit 0 set: nil, 128
+finish
+trigger Arawn                  # one stamp: nil, 114
+finish
+warp -57.6,-8,-55.9 BastokMines
+trigger Deadly_Spider          # bit 1 unset: 86
+finish                         # bit 1
+trigger Deadly_Spider          # set: nil, 17
+finish
+trigger Tall_Mountain          # bit 2 unset: 85
+finish                         # bit 2
+warp -36.4,8,-1.5 Metalworks
+trigger Elayne                 # bit 3 unset: 725
+finish                         # bit 3
+trigger Romualdo               # bit 4 unset: 726
+finish                         # bit 4
+warp -70.7,4.9,44.9 PortBastok
+trigger Ehrhard                # bit 5 unset: 121
+finish                         # bit 5
+trigger Latifah                # bit 6 unset: 120
+finish                         # bit 6
+warp -121.5,-4,-123.9 BastokMarkets
+trigger Arawn                  # all seven: 226
+finish                         # completed: the Leather Gorget, fame +20, Stampeder, the sheet deleted
+trigger Arawn                  # completed: no section, 114
+finish

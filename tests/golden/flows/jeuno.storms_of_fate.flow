@@ -1,0 +1,56 @@
+# Storms of Fate (jeuno 86): Ru'Lude Gardens' trigger area 1 (the palace entrance, the cuboid x -16..16, y 2..4, z
+# 32..86: entered by a walk from z 100), Misareaux Coast's _0p2 (script: startCutscene 552 while the CoP mission is past
+# An Eternal Melody; default DOOR_CLOSED), Riverne Site #B01's Unstable_Displacement (no script; the Storms of Fate
+# battlefield's entry: index 0, area 1). A level 75 Warrior, CoP Dawn current with its Status var 8 (`charvar
+# Mission[6][840]Status 8`), before login. Available: area 1 plays 142; option 0: the mustZone set (Ru'Lude Gardens,
+# 243): area 1 again: no section (nothing); out to Upper Jeuno and back (the mustZone cleared on entering another zone):
+# 142; option 1: begun. Accepted: area 1 at Prog 0: nil (nothing); _0p2: 559 (Prog 1); _0p2 at Prog 1: the quest's nil,
+# so the lookup's default (DOOR_CLOSED) and _0p2's own script take turns: DOOR_CLOSED, then the script's 552 (Dawn is
+# past An Eternal Melody): the script still runs after the quest's nil; Unstable_Displacement: 1 (Prog 2); again at Prog 2:
+# the quest's nil, the battlefield's 32000 menu (requiredVar Quest[3][86]Prog 2); entered (area 1), Bahamut killed: won
+# (battlefieldWin 896, the title Conqueror of Fate), 32001: the Whisper of the Wyrmking, Prog 3. Area 1 at Prog 3 with a
+# full bag (a GM's fill-inventory: the reward table is empty, so quest:complete cannot fail): 143: completed; Shadows of
+# the Departed's Timer = VanadielUniqueDay() + 1 (8001: the harness's Vana'diel clock starts on day 8000). Completed:
+# area 1: no section (Shadows of the Departed wants Zilart Awakening current): nothing.
+# Dawn's own area-1 handler (Status 4 and Option 0 only) is silent at Status 8; no other quest or mission plays in area 1
+# for this char. #mission takes the CoP mission / Dawn Status operands and the trade while available, #prog the accepted
+# handlers' other Prog values, #win_other the 32001's other sides, #mid_event the finishes outside their states,
+# #compete the reply kinds, #era the era module (143's Timer at JST midnight).
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/142 RuludeGardens/onEventFinish/143 MisareauxCoast/_0p2/onTrigger MisareauxCoast/onEventFinish/559 RiverneSiteB01/Unstable_Displacement/onTrigger RiverneSiteB01/onEventFinish/1 RiverneSiteB01/onEventFinish/32001
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+mission Cop Dawn current
+charvar Mission[6][840]Status 8
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # area 1, available: 142
+finish option=0                         # not 1: the mustZone set (243)
+walk 4,2.5,100                          # out of area 1
+walk 4,2.5,60                           # area 1, the mustZone set: no section; nothing
+warp -55.5,8.2,97.5 UpperJeuno          # another zone: the mustZone cleared
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # area 1: 142
+finish option=1                         # begun
+walk 4,2.5,100
+walk 4,2.5,60                           # accepted, Prog 0: the area handler's nil; nothing
+warp -258.5,-32.7,280 MisareauxCoast    # by _0p2
+trigger _0p2                            # Prog 0: 559
+finish                                  # Prog 1
+trigger _0p2                            # Prog 1: the quest's nil; the lookup's turn: the default DOOR_CLOSED
+trigger _0p2                            # Prog 1: the quest's nil; the script's turn: 552 (CoP Dawn past An Eternal Melody)
+finish                                  # 552: no finish anywhere
+warp -611.3,1.8,693.2 RiverneSiteB01    # by Unstable_Displacement
+trigger Unstable_Displacement           # Prog 1: 1
+finish                                  # Prog 2
+trigger Unstable_Displacement           # Prog 2: the quest's nil; the battlefield's 32000 menu (requiredVar Prog 2)
+update 32000 option=1                   # Storms of Fate, index 0, area 1: registered, entered (healed)
+finish                                  # in the arena
+kill BAHAMUT                            # won: battlefieldWin 896, Conqueror of Fate; 32001 opens
+finish                                  # 32001, battlefieldWin 896, Prog 2: the Whisper of the Wyrmking, Prog 3
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+fill-inventory                          # a GM: a full bag (the reward table is empty)
+walk 4,2.5,60                           # area 1, Prog 3: 143
+finish                                  # completed all the same; Shadows of the Departed's Timer 8001
+walk 4,2.5,100
+walk 4,2.5,60                           # completed: no section (Shadows of the Departed: no Zilart Awakening); nothing

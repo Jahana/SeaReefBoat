@@ -1,0 +1,40 @@
+# Sin Hunting (windurst 72): its Windurst Woods lines next to The Fanged One's (the reply kinds). A level-40 RNG with
+# The Fanged One accepted by GM at Prog 0: its 352 (Perih Vashai), 354 (Kapeh Myohrye) and 353 (Muhk Johldy) are Events
+# with no finish handler, answering on every talk. Ties rotate by the last event id (the next action in the list after
+# it); with none, the first action in the list plays, here Sin Hunting's. Perih Vashai's script answers nothing here
+# (Sin Hunting not completed). Available: 523 (Progress) over 352 on both talks (option 1: nothing; then option 0,
+# begun; a tie would give 352 after 523). Prog 0: 524 and 352 tie and take turns. Kapeh Myohrye: 526 and 354 take turns;
+# Muhk Johldy: 525 and 353 take turns. Prog 4 (GM): 527 (Progress) over 352 on both talks (a full bag: the completion
+# fails; then completed). Completed: Kapeh Myohrye's 530 and Muhk Johldy's 529 (replaceDefault) lose to 354 and 353
+# (Events).
+lists WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/Kapeh_Myohrye/onTrigger WindurstWoods/Muhk_Johldy/onTrigger WindurstWoods/onEventFinish/523 WindurstWoods/onEventFinish/527
+char zone=WindurstWoods pos=119.5,-3.7,90.45 job=RNG lvl=40
+quest Windurst.TheFangedOne accepted
+login
+trigger Perih_Vashai                          # available: 523 (Progress) over 352
+finish option=1                               # nothing
+trigger Perih_Vashai                          # 523 again (523 played last: a tie would give 352)
+finish option=0                               # begun
+trigger Perih_Vashai                          # Prog 0: 524 and 352 tie: 524 (first in the list)
+finish
+trigger Perih_Vashai                          # 352
+finish
+trigger Kapeh_Myohrye                         # 526 and 354 tie: 526
+finish
+trigger Kapeh_Myohrye                         # 354
+finish
+trigger Muhk_Johldy                           # 525 and 353 tie: 525
+finish
+trigger Muhk_Johldy                           # 353
+finish
+charvar Quest[2][72]Prog 4                    # GM
+trigger Perih_Vashai                          # Prog 4: 527 (Progress) over 352
+fill-inventory
+finish                                        # the bow does not fit: nothing
+free-inventory
+trigger Perih_Vashai                          # 527 again (527 played last: a tie would give 352)
+finish                                        # completed
+trigger Kapeh_Myohrye                         # completed: 530 (replaceDefault) under 354
+finish
+trigger Muhk_Johldy                           # 529 (replaceDefault) under 353
+finish

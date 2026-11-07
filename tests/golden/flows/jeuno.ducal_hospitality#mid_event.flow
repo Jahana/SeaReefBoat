@@ -1,0 +1,22 @@
+# Ducal Hospitality (jeuno 68): finishes outside their state. A level 75 Warrior, the quest accepted with ItemSet 2 (a
+# GM), CoP The Road Forks current, Jeuno fame level 4, set 2's items. Set 2 traded: 10058 open, the quest set available
+# by a GM: the available state has no 10058 finish: nothing (no gil, the items kept, no mustZone). 10057 (available: a
+# draw) open, the quest set completed by a GM, option 10: the completed state's finish: ItemSet 0.
+lists RuludeGardens/Taillegeas/onTrigger RuludeGardens/Taillegeas/onTrade RuludeGardens/onEventFinish/10057 RuludeGardens/onEventFinish/10058
+char zone=RuludeGardens pos=29.5,2,58 job=WAR lvl=75
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 150
+mission Cop TheRoadForks current
+quest Jeuno.DucalHospitality accepted
+charvar Quest[3][68]ItemSet 2
+item PileOfChocoboBedding
+item SetOfKaiserinCosmetics
+item MyFirstMagicKit
+login
+trade Taillegeas PileOfChocoboBedding x1 SetOfKaiserinCosmetics x1 MyFirstMagicKit x1 # 10058
+quest Jeuno.DucalHospitality available  # a GM, while 10058 is open
+finish                                  # no 10058 finish in the available state: nothing
+trigger Taillegeas                      # available: 10057, a draw (ItemSet set)
+quest Jeuno.DucalHospitality completed  # a GM, while 10057 is open
+finish option=10                        # the completed state's finish: ItemSet 0

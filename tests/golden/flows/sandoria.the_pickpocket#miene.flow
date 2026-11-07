@@ -1,0 +1,31 @@
+# The Pickpocket (sandoria 3): Miene's other arms, accepted by GM. Stage 0 with no free slot: 552. Stage 0 with a free
+# slot: 549, the bag filled by GM before its finish: npcUtil.giveItem fails, Stage stays 0. Stage 1 (by GM) with no
+# free slot (no button, no glasses): nil (her default 553). Stage 1 with room, no button, no glasses: 611, the bag
+# filled before its finish (the give fails, its result ignored: nothing); 611 again with room (the Eagle Button); then,
+# the button held: nil (553). Prog 1 by GM (accepted: check 3's status operand fails): Altiret's 547 (Event; no finish).
+char zone=PortSanDoria pos=2.25,-4,-81.438 job=WAR lvl=10
+quest Sandoria.ThePickpocket accepted
+login
+fill-inventory
+trigger Miene                             # Stage 0, no free slot: 552
+finish
+free-inventory
+trigger Miene                             # Stage 0, a free slot: 549
+fill-inventory                            # GM: the bag full before the finish
+finish                                    # giveItem fails (ITEM_CANNOT_BE_OBTAINED): no button, Stage still 0
+charvar Quest[0][3]Stage 1
+trigger Miene                             # Stage 1, no free slot: nil; her default 553
+finish
+free-inventory
+trigger Miene                             # Stage 1, a free slot, no button, no glasses: 611
+fill-inventory                            # GM: the bag full before the finish
+finish                                    # giveItem fails, ignored: nothing
+free-inventory
+trigger Miene                             # 611
+finish                                    # the Eagle Button
+trigger Miene                             # the button held: nil; 553
+finish
+charvar Quest[0][3]Prog 1                 # GM: accepted, Prog 1
+walk 22.763,-3.999,-65.776
+trigger Altiret                           # accepted, Prog 1: check 3 closed (not available); check 4's 547 (Event)
+finish                                    # check 4 has no 547 finish: Prog stays 1

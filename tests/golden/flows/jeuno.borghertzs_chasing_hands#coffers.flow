@@ -1,0 +1,19 @@
+# BORGHERTZS_CHASING_HANDS (jeuno 54): the two optional coffers' sections (status not available, main job RNG, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 RNG: CrawlersNest's Treasure Coffer opens to HuntersBraccae
+# (the item bypass; the result is the item): [AF]ZilartCoffer +2097152 (bit 21); MonasticCavern's to HuntersJerkin:
+# +4194304 (bit 22).
+lists CrawlersNest/Treasure_Coffer/onTrade MonasticCavern/Treasure_Coffer/onTrade
+char zone=CrawlersNest pos=58.9,0.4,69 job=RNG lvl=75
+quest Jeuno.BorghertzsChasingHands accepted
+item NestCofferKey
+item DavoiCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer NestCofferKey x1  # bit 21 unset: HuntersBraccae; [AF]ZilartCoffer 2097152
+tick 4500                               # the coffer opened
+warp 107.5,-3,-144 MonasticCavern
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer DavoiCofferKey x1 # bit 22 unset: HuntersJerkin; [AF]ZilartCoffer 6291456
+tick 4500                               # the coffer opened

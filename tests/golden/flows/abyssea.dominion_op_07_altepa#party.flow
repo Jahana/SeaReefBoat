@@ -1,0 +1,33 @@
+# Altepa - Dominion Op #07 (abyssea 93, op 566), kill credit: main and bob (a party) and cid (alone), level 99 Warriors
+# in Abyssea - Altepa; the op's onMobDeath runs for each member of the killer's alliance in the zone
+# (luautils::OnMobDeath, optParams.isKiller true for the killer only), and the handler reads no optParams. Bob and cid
+# accepted (a GM), main not: main kills a Desert_Puk: main (the killer, available) nothing; bob (not the killer):
+# Prog 1; cid (not in the party): nothing. Main accepted (a GM): bob kills one: bob Prog 2, main (not the killer)
+# Prog 1, cid nothing. One dead with no killer (nokiller): the lookup's handlers get no player: nothing for anyone. Cid
+# kills one: cid Prog 1; main and bob (another party) nothing. Perfect Dodge, Invincible and Elemental Sforzo (GM
+# effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaAltepa/Desert_Puk/onMobDeath
+char zone=AbysseaAltepa pos=432,0,321 job=WAR lvl=99
+char bob zone=AbysseaAltepa pos=432,0,323 job=WAR lvl=99
+char cid zone=AbysseaAltepa pos=432,0,325 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+bob: login
+bob: effect 49                          # a GM: Perfect Dodge (melee hits evaded)
+bob: effect 50                          # a GM: Invincible (no physical damage)
+bob: effect 522                         # a GM: Elemental Sforzo (no magic damage)
+cid: login
+cid: effect 49                          # a GM: Perfect Dodge (melee hits evaded)
+cid: effect 50                          # a GM: Invincible (no physical damage)
+cid: effect 522                         # a GM: Elemental Sforzo (no magic damage)
+invite bob
+bob: accept
+bob: quest Abyssea.DominionOp07Altepa accepted # a GM
+cid: quest Abyssea.DominionOp07Altepa accepted # a GM
+kill RANI_OFFSET-169                    # main the killer: bob Prog 1 (17670382)
+quest Abyssea.DominionOp07Altepa accepted # a GM
+bob: kill RANI_OFFSET-168               # bob Prog 2, main Prog 1 (17670383)
+kill RANI_OFFSET-167 nokiller           # no killer: nothing (17670384)
+cid: kill RANI_OFFSET-166               # cid Prog 1 (17670385)

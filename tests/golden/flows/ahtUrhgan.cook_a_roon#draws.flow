@@ -1,0 +1,87 @@
+# Cook-a-roon's draws: a level 75 Warrior in Nashmau with twelve of each fish (Ahtapot and Istavrit1 do not stack:
+# a row each), the quest accepted (a GM). Five unpinned accepted draws (2: the stew, 3: none; completed either way,
+# the fish taken) and four unpinned completed ones (update 243: the fish taken, Prog 0): both 2 and 3 come up on each
+# side in the trace, so the draw range and the Prog it sets show. Then the pinned draws at 3: the five fish: 243 ([7] =
+# the draw), a GM pins Prog 3; finished: no stew; completed; the fish taken. Completed: the five fish: 243, a GM pins
+# Prog 3; update 243: the fish taken, no stew, Prog 0; finished. The five fish again: 243 ([7] = the draw), finished
+# with no update: no handler: the fish kept (the completed section confirms in its update only; the trade stays open,
+# so it is the last).
+lists Nashmau/Ququroon/onTrade Nashmau/onEventFinish/243 Nashmau/onEventUpdate/243
+char zone=Nashmau pos=-0.9,0,66.824 job=WAR lvl=75
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Ahtapot
+item Istakoz x12
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istavrit1
+item Istiridye x12
+item Mercanbaligi x12
+quest AhtUrhgan.CookARoon accepted
+login
+# accepted: the draw, unpinned (2 or 3; the trace records it)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1
+finish                                  # completed; the fish taken (the stew at 2 only)
+quest AhtUrhgan.CookARoon available   # a GM
+quest AhtUrhgan.CookARoon accepted
+# accepted: the draw, unpinned (2 or 3; the trace records it)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1
+finish                                  # completed; the fish taken (the stew at 2 only)
+quest AhtUrhgan.CookARoon available   # a GM
+quest AhtUrhgan.CookARoon accepted
+# accepted: the draw, unpinned (2 or 3; the trace records it)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1
+finish                                  # completed; the fish taken (the stew at 2 only)
+quest AhtUrhgan.CookARoon available   # a GM
+quest AhtUrhgan.CookARoon accepted
+# accepted: the draw, unpinned (2 or 3; the trace records it)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1
+finish                                  # completed; the fish taken (the stew at 2 only)
+quest AhtUrhgan.CookARoon available   # a GM
+quest AhtUrhgan.CookARoon accepted
+# accepted: the draw, unpinned (2 or 3; the trace records it)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1
+finish                                  # completed; the fish taken (the stew at 2 only)
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # completed: the draw, unpinned
+update 243 option=0                     # the fish taken (the stew at 2), Prog 0
+finish
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # completed: the draw, unpinned
+update 243 option=0                     # the fish taken (the stew at 2), Prog 0
+finish
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # completed: the draw, unpinned
+update 243 option=0                     # the fish taken (the stew at 2), Prog 0
+finish
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # completed: the draw, unpinned
+update 243 option=0                     # the fish taken (the stew at 2), Prog 0
+finish
+quest AhtUrhgan.CookARoon available   # a GM
+quest AhtUrhgan.CookARoon accepted
+trigger Ququroon                        # walks beside him; accepted: 242
+finish
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # 243 ([7] = the draw)
+charvar Quest[6][15]Prog 3              # a GM pins the draw
+finish                                  # Prog 3: no stew; completed; the fish taken
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # completed: 243 ([7] = the draw)
+charvar Quest[6][15]Prog 3              # a GM pins the draw
+update 243 option=0                     # the fish taken, no stew, Prog 0
+finish
+trade Ququroon Ahtapot x1 Istakoz x1 Istavrit1 x1 Istiridye x1 Mercanbaligi x1   # completed: 243 ([7] = the draw)
+finish                                  # no update: nothing confirmed: the fish kept

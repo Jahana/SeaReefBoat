@@ -1,0 +1,17 @@
+# Trust: Cherukiki (hidden quest TrustCherukiki): a level 99 Warrior in Rulude Gardens, CoP at Flames in the Darkness
+# (between Chains and Bonds and The Warrior's Path). Taillegeas (no script; default 10061). No permit: the check fails:
+# 10061. The San d'Oria Trust Permit (a GM): 10235 (0, 0, 0, 0); finished on option 0: nothing; again, finished on 2:
+# complete (true), Cherukiki learned, YOU_LEARNED_TRUST. Learned: the check fails: 10061.
+lists RuludeGardens/Taillegeas/onTrigger RuludeGardens/onEventFinish/10235
+char zone=RuludeGardens pos=31,2,56.5 job=WAR lvl=99
+mission Cop FlamesInTheDarkness current
+login
+trigger Taillegeas                      # no permit: the check fails: 10061
+finish-if-event
+keyitem SanDoriaTrustPermit             # a GM
+trigger Taillegeas                      # 10235
+finish option=0                         # not 2: nothing
+trigger Taillegeas                      # 10235
+finish option=2                         # Cherukiki learned, YOU_LEARNED_TRUST
+trigger Taillegeas                      # learned: the check fails: 10061
+finish-if-event

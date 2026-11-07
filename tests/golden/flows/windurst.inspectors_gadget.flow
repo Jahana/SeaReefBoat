@@ -1,0 +1,138 @@
+# Inspector's Gadget! (windurst 41): Kohlo-Lakolo and the brigade (Port Windurst), Chamama (Windurst Waters). Truth,
+# Justice, and the Onion Way! and Know One's Onions completed by GM (the earlier quests silent), level 5. The offer's
+# operands: fame 49 (level 1), no mustZone: 401; fame 50 (level 2) with this quest's char-var mustZone set by GM
+# (nothing else sets it): 401; a warp out and back (the mustZone cleared): a bone chip traded while available, the check
+# holding (no trade handler: nothing); 413 option 1 and option 2 (nothing), 413 option 0 (begun). Accepted, no
+# moustache: Kohlo-Lakolo 414; the lines 417, 416, 418, 420, 419 (0, Linkshell). Chamama at Prog 0: the quest's nil (In
+# a Pickle accepted by GM, so her script answers 655 at once, with no draw); at Prog -1 (GM; `> 0`): nil, 655; four
+# balls traded at Prog 0 and at Prog 1 (the trade wants Prog 2): nil (her script: not a smooth stone: nothing).
+# Pichichi's 415 (0, moustache): Prog 0: Prog 1; again at Prog 1: stays 1; at Prog -1 (GM; `== 0`): stays -1. Chamama at
+# Prog 1: 551 (0, moustache): Prog 2; again at Prog 2: 551 again (Progress: her script never gets the turn), Prog stays
+# 2; at Prog 3 (GM; `== 1`): 551, stays 3, and four balls traded at Prog 3: nil. At Prog 2: a bone chip, three balls,
+# five balls, four plus a chip (each nil); four (552: taken, the Fake Moustache). With it: Chamama 553 (an Event: the
+# next talk is her script's turn, 655); four more balls: nil (the moustache held); Prog 0 by GM with the moustache: 553
+# (the moustache arm first). Prog 2 again; Pichichi at Prog 2: 415, stays 2. Fame 105 by GM. Kohlo-Lakolo: 421 with a
+# full bag (the Heko Obi does not fit: nothing), then 421 (completed: fame 20 (125), the obi, Fake-Moustached
+# Investigator, the player local var [2][42]mustZone 1; the moustache stays). Completed while Onion Rings is available:
+# 425, 424, 423, 426, 428, 427 (replaceDefault). Kohlo-Lakolo: Onion Rings' offer (fame level 3, its own char-var
+# mustZone 0: the local var 421 set is not read; no Old Ring): 429, finished (Onion Rings Prog 1, EndTime; still
+# available): Gomada-Vulmada 425 (Onion Rings' section 2 wants it accepted). Onion Rings accepted by GM: section 3 not
+# met; Gomada-Vulmada plays Onion Rings' in-time 435; its Prog 0 by GM (silent): 363. While this quest is available:
+# Gomada-Vulmada twice, Know One's Onions' 405 both times (section 3's status operand false: no 425). Defaults: Chamama
+# has none in DefaultActions (her script always answers). Also named: Chamama by The Promise (needs Wild Card completed:
+# silent here).
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Pichichi/onTrigger WindurstWaters/Chamama/onTrigger WindurstWaters/Chamama/onTrade PortWindurst/onEventFinish/413 PortWindurst/onEventFinish/415 PortWindurst/onEventFinish/421 WindurstWaters/onEventFinish/551 WindurstWaters/onEventFinish/552
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5
+fame Windurst 49
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InAPickle accepted
+item BoneChip
+item BallOfSarutaCotton x12
+login
+trigger Kohlo-Lakolo                           # fame level 1: 401
+finish
+fame Windurst 50                               # GM
+charvar Quest[2][41]mustZone 240               # GM
+trigger Kohlo-Lakolo                           # fame level 2, the mustZone: 401
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+warp -27.5,-8.0,189.6 PortWindurst             # the mustZone cleared
+trade Kohlo-Lakolo BoneChip x1                 # available, the check holds: no trade handler: nothing
+trigger Gomada-Vulmada                         # Know One's Onions' completed section: 405
+finish
+trigger Gomada-Vulmada                         # 405 again (section 3 wants this quest completed: no 425 to cycle with)
+finish
+trigger Kohlo-Lakolo                           # 413
+finish option=1                                # not 0: nothing
+trigger Kohlo-Lakolo                           # 413
+finish option=2                                # not 0: nothing
+trigger Kohlo-Lakolo                           # 413
+finish option=0                                # begun
+trigger Kohlo-Lakolo                           # no moustache: 414
+finish
+trigger Gomada-Vulmada                         # 417
+finish
+trigger Papo-Hopo                              # 416
+finish
+trigger Pyo_Nzon                               # 418
+finish
+trigger Shanruru                               # 420
+finish
+trigger Yafa_Yaa                               # 419 (0, Linkshell)
+finish
+warp -68.7,-3.8,-4.4 WindurstWaters
+trigger Chamama                                # Prog 0, no moustache: nil; her script: In a Pickle accepted: 655
+finish
+charvar Quest[2][41]Prog -1                    # GM
+trigger Chamama                                # Prog -1: not > 0: nil; 655
+finish
+charvar Quest[2][41]Prog 0                     # GM
+trade Chamama BallOfSarutaCotton x4            # Prog 0: nil (her script: not a smooth stone: nothing)
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Pichichi                               # 415 (0, moustache)
+finish                                         # Prog 0: Prog 1
+trigger Pichichi                               # 415
+finish                                         # Prog 1: nothing
+charvar Quest[2][41]Prog -1                    # GM
+trigger Pichichi                               # 415
+finish                                         # Prog -1: not 0: nothing
+charvar Quest[2][41]Prog 1                     # GM
+warp -68.7,-3.8,-4.4 WindurstWaters
+trade Chamama BallOfSarutaCotton x4            # Prog 1: nil
+trigger Chamama                                # Prog 1: 551 (0, moustache)
+finish                                         # Prog 2
+trigger Chamama                                # Prog 2, no moustache: 551 again (Progress)
+finish                                         # Prog 2: nothing
+charvar Quest[2][41]Prog 3                     # GM
+trigger Chamama                                # Prog 3: 551
+finish                                         # not 1: nothing
+trade Chamama BallOfSarutaCotton x4            # Prog 3: nil
+charvar Quest[2][41]Prog 2                     # GM
+trade Chamama BoneChip x1                      # wrong item: nil
+trade Chamama BallOfSarutaCotton x3            # three: nil
+trade Chamama BallOfSarutaCotton x5            # five: nil
+trade Chamama BallOfSarutaCotton x4 BoneChip x1   # four plus an extra: nil
+trade Chamama BallOfSarutaCotton x4            # 552
+finish                                         # the cotton taken; the Fake Moustache
+trigger Chamama                                # the moustache: 553 (Event)
+finish
+trigger Chamama                                # the alternation: her script's turn: 655
+finish
+trade Chamama BallOfSarutaCotton x4            # the moustache held: nil
+charvar Quest[2][41]Prog 0                     # GM
+trigger Chamama                                # the moustache, Prog 0: 553
+finish
+charvar Quest[2][41]Prog 2                     # GM
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Pichichi                               # 415
+finish                                         # Prog 2: nothing
+fame Windurst 105                              # GM
+trigger Kohlo-Lakolo                           # the moustache: 421
+fill-inventory
+finish                                         # full: quest:complete false: nothing
+free-inventory
+trigger Kohlo-Lakolo                           # 421
+finish                                         # completed: fame 20, the Heko Obi, the title; local var [2][42]mustZone 1
+trigger Gomada-Vulmada                         # Onion Rings available: 425 (replaceDefault)
+finish
+trigger Papo-Hopo                              # 424
+finish
+trigger Pichichi                               # 423
+finish
+trigger Pyo_Nzon                               # 426
+finish
+trigger Shanruru                               # 428
+finish
+trigger Yafa_Yaa                               # 427
+finish
+trigger Kohlo-Lakolo                           # Onion Rings' offer: fame 125 (level 3), no ring: its 429
+finish                                         # Onion Rings: Prog 1, EndTime 790192656 (still available)
+trigger Gomada-Vulmada                         # Onion Rings available: 425
+finish
+quest Windurst.OnionRings accepted             # GM
+trigger Gomada-Vulmada                         # section 3 not met; Onion Rings' in-time 435
+finish
+charvar Quest[2][42]Prog 0                     # GM: Onion Rings at Prog 0 (none of its sections)
+trigger Gomada-Vulmada                         # section 3's quest operand false, no other line: 363
+finish

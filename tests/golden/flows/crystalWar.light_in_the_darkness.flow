@@ -1,0 +1,119 @@
+# Light in the Darkness (crystalWar 19): a level 99 Warrior in Bastok Markets [S] with 5000 gil, The Fighting Fourth,
+# Better Part of Valor, Fires of Discontent and the WotG mission Back to the Beginning completed, Cait Sith current
+# (GMs; the other missions as group 1's flows). Blatherix is `Blatherix+13` (17134142: the first of the name, 17134129,
+# is a cutscene_only copy with no position). Engelhart's reminder 18 is an Event; Fires of Discontent's completed 165
+# is replaceDefault (rank 20, under an Event): 18 plays, each time (a second talk at Prog 0 shows no rotation).
+# Available: 5000 gil to Blatherix: no handler; Blatherix: nothing (no default). Gentle Tiger 16, finished: begun.
+# Prog 0: Gentle Tiger 17, Engelhart 18 twice, Pagdako 19, finished: Prog 1. Prog 1: Gentle Tiger 17, Engelhart 18,
+# Pagdako 20, Blatherix 21, finished: Prog 2. Prog 2: Gentle Tiger 17, Engelhart 18, Pagdako 20, Blatherix 22; 4999
+# gil: nil; 5000 gil: 23, finished: the trade confirmed, the Mine Shaft Key, Prog 3. Prog 3: Blatherix 24 and the
+# reminders; Pashhow Marshlands [S] from Bastok Markets [S]: no zone-in reply; from Grauberg [S]: 901 (left open),
+# finished: Prog 4. Prog 4: Pashhow from Grauberg again: nothing; the reminders. The Corroded Door's instance (the key
+# taken at its registration, 4, seven Quadav killed, Prog 5) is a GM's here: the harness has no instance run
+# (PLATFORM-NEEDS) and the instance script writes Quest[7][19]Prog itself, so the quest's C# has no handler there.
+# Prog 5: no section in Bastok Markets [S] (Gentle Tiger 109, Engelhart 165, Pagdako 106, Blatherix nothing); Pashhow
+# from Bastok Markets [S]: 902 (left open), finished: Prog 6. Prog 6: Engelhart 18, Pagdako 20, Blatherix 24; Gentle
+# Tiger 27, finished: completed (an Adaman Ingot), Burden of Suspicion's Timer (the next day) and mustZone set. Gentle
+# Tiger then: Burden of Suspicion available, its mustZone set: nil (109); Engelhart 165 (no section of Light's).
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/Engelhart/onTrigger BastokMarketsS/Pagdako/onTrigger BastokMarketsS/Blatherix/onTrigger BastokMarketsS/Blatherix/onTrade BastokMarketsS/onEventFinish/16 BastokMarketsS/onEventFinish/19 BastokMarketsS/onEventFinish/21 BastokMarketsS/onEventFinish/23 BastokMarketsS/onEventFinish/27 PashhowMarshlandsS/onZoneIn/1 PashhowMarshlandsS/onEventFinish/901 PashhowMarshlandsS/onEventFinish/902
+char zone=BastokMarketsS pos=-308.324,-11.999,-42.791 job=WAR lvl=99 gil=5000
+quest CrystalWar.TheFightingFourth completed
+quest CrystalWar.BetterPartOfValor completed
+quest CrystalWar.FiresOfDiscontent completed
+mission Wotg BackToTheBeginning completed
+mission Wotg CaitSith current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trade Blatherix+13 gil=5000             # available: no trade handler
+finish-if-event
+trigger Blatherix+13                    # available: nothing (no default); the mission takes no talk
+finish-if-event
+trigger Gentle_Tiger                    # 16
+finish                                  # begun
+# Prog 0
+trigger Gentle_Tiger                    # 17
+finish
+trigger Engelhart                       # 18 (Fires' 165 ranks under it)
+finish
+trigger Engelhart                       # 18 again
+finish
+trigger Pagdako                         # 19
+finish                                  # Prog 1
+# Prog 1
+trigger Gentle_Tiger                    # 17
+finish
+trigger Engelhart                       # 18
+finish
+trigger Pagdako                         # 20
+finish
+trigger Blatherix+13                    # 21
+finish                                  # Prog 2
+# Prog 2
+trigger Gentle_Tiger                    # 17
+finish
+trigger Engelhart                       # 18
+finish
+trigger Pagdako                         # 20
+finish
+trigger Blatherix+13                    # 22
+finish
+trade Blatherix+13 gil=4999             # 4999 gil: nil
+finish-if-event
+trade Blatherix+13 gil=5000             # 5000 gil alone: 23
+finish                                  # the trade confirmed (the gil gone); the Mine Shaft Key; Prog 3
+# Prog 3
+trigger Blatherix+13                    # 24
+finish
+trigger Gentle_Tiger                    # 17
+finish
+trigger Engelhart                       # 18
+finish
+trigger Pagdako                         # 20
+finish
+warp -384.102,21.97,456.359 PashhowMarshlandsS # from Bastok Markets [S]: no zone-in reply
+warp 495.063,69.903,924.102 GraubergS
+warp -384.102,21.97,456.359 PashhowMarshlandsS open # from Grauberg [S]: 901, left open
+finish                                  # Prog 4
+# Prog 4
+warp 495.063,69.903,924.102 GraubergS
+warp -384.102,21.97,456.359 PashhowMarshlandsS # from Grauberg [S] at Prog 4: nothing
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # 17
+finish
+trigger Engelhart                       # 18
+finish
+trigger Pagdako                         # 20
+finish
+trigger Blatherix+13                    # 24
+finish
+# the instance (the harness has no instance run): its registration takes the key, its completion sets Prog 5
+delkeyitem MineShaftKey                 # a GM: what the registration does
+charvar Quest[7][19]Prog 5              # a GM: what onInstanceComplete does
+# Prog 5
+trigger Gentle_Tiger                    # no section of the quest: 109
+finish-if-event
+trigger Engelhart                       # Fires of Discontent's 165 alone
+finish
+trigger Pagdako                         # 106
+finish-if-event
+trigger Blatherix+13                    # nothing
+finish-if-event
+warp -384.102,21.97,456.359 PashhowMarshlandsS open # from Bastok Markets [S] at Prog 5: 902, left open
+finish                                  # Prog 6
+# Prog 6
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Engelhart                       # 18
+finish
+trigger Pagdako                         # 20
+finish
+trigger Blatherix+13                    # 24
+finish
+trigger Gentle_Tiger                    # 27
+finish                                  # completed (Adaman Ingot); Burden of Suspicion's Timer and mustZone
+trigger Gentle_Tiger                    # Burden of Suspicion available, its mustZone set: nil: 109
+finish-if-event
+trigger Engelhart                       # completed: no section: Fires' 165
+finish

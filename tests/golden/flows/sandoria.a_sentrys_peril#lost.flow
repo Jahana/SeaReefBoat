@@ -1,0 +1,46 @@
+# A Sentry's Peril (sandoria 0): the items lost and the var's other values (accepted by GM with nothing held). Glenne
+# without the ointment: 644 (finish: the ointment again). TradedAaveleon 2 and -1 by GM (the == 0 and == 1 tests' other
+# sides): neither accepted section matches (Glenne: no handler, no default: nothing; Aaveleon: his default 101).
+# TradedAaveleon 1 by GM without the case: Aaveleon's 126 (Ointment Case); option 0 and option 2: nothing; option 1:
+# the case, which completes the quest at Glenne. Then TradedAaveleon 1 by GM once completed and while available (GM),
+# with no case: section 3 does not answer (Aaveleon: AAVELEON_HEALED once completed, 101 while available, where
+# section 3 would play 126).
+lists SouthernSanDoria/Glenne/onTrigger SouthernSanDoria/Glenne/onTrade SouthernSanDoria/onEventFinish/644 SouthernSanDoria/onEventFinish/513 WestRonfaure/Aaveleon/onTrigger WestRonfaure/onEventFinish/126
+char zone=SouthernSanDoria pos=-123.4,-2.0,14.5 job=WAR lvl=30
+quest Sandoria.ASentrysPeril accepted
+item BoneChip
+login
+trigger Glenne                            # TradedAaveleon 0, no ointment: 644
+finish                                    # the Dose of Ointment
+charvar Quest[0][0]TradedAaveleon 2
+trigger Glenne                            # TradedAaveleon 2: no section; nothing
+finish-if-event
+trade Glenne BoneChip x1                  # TradedAaveleon 2: no section; nothing
+charvar Quest[0][0]TradedAaveleon -1
+trigger Glenne                            # TradedAaveleon -1: no section; nothing
+finish-if-event
+charvar Quest[0][0]TradedAaveleon 1
+warp -431.8,-45.9,342.3 WestRonfaure
+trigger Aaveleon                          # TradedAaveleon 1, no case: 126 (Ointment Case)
+finish option=0                           # not option 1: nothing
+trigger Aaveleon                          # 126
+finish option=2                           # not option 1: nothing
+trigger Aaveleon                          # 126
+finish option=1                           # the Ointment Case
+charvar Quest[0][0]TradedAaveleon 2
+trigger Aaveleon                          # TradedAaveleon 2: no section; his default 101
+finish
+charvar Quest[0][0]TradedAaveleon -1
+trigger Aaveleon                          # TradedAaveleon -1: no section; his default 101
+finish
+charvar Quest[0][0]TradedAaveleon 1
+warp -123.4,-2.0,14.5 SouthernSanDoria
+trade Glenne OintmentCase x1              # exactly the case: 513
+finish                                    # completed; the case taken
+charvar Quest[0][0]TradedAaveleon 1
+warp -431.8,-45.9,342.3 WestRonfaure
+trigger Aaveleon                          # completed, TradedAaveleon 1, no case: AAVELEON_HEALED (section 4)
+quest Sandoria.ASentrysPeril available
+charvar Quest[0][0]TradedAaveleon 1
+trigger Aaveleon                          # available, TradedAaveleon 1, no case: no section; his default 101
+finish

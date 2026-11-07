@@ -1,0 +1,20 @@
+# It's Raining Mannequins! (otherAreas 29): 311's else arm. A Hume Male (race 1) accepted at Prog 3 by a GM with Wait
+# 1799999940. A full inventory (a GM): 311, finished: no free slot: ITEM_CANNOT_BE_OBTAINED + 4 (256), not completed.
+# Room again, the Hume Male Mannequin held (a GM): 311, finished: the chosen mannequin held: ITEM_CANNOT_BE_OBTAINED + 4
+# (256), not completed. 311 finished while the quest is completed (a GM, while it is open): no section, nothing.
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/onEventFinish/311
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30
+quest OtherAreas.ItsRainingMannequins accepted
+charvar Quest[4][29]Prog 3
+charvar Quest[4][29]Wait 1799999940
+login
+fill-inventory
+trigger Fyi_Chalmwoh                    # 311
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED + 4 (256); still accepted
+free-inventory
+item HumeMMannequin                     # a GM
+trigger Fyi_Chalmwoh                    # 311
+finish                                  # the mannequin held: ITEM_CANNOT_BE_OBTAINED + 4 (256); still accepted
+trigger Fyi_Chalmwoh                    # 311
+quest OtherAreas.ItsRainingMannequins completed # a GM, while 311 is open
+finish                                  # no 311 handler while completed: nothing

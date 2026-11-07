@@ -1,0 +1,32 @@
+# In a Stew (windurst 45): Ranpi-Monpi's operands, by GM. Accepted at Prog 1, a level-10 WAR, fame 50. A Crisis in the
+# Making accepted (QuestCrisisMaking_var 0: her script starts nothing): nil. Back to available; Chocobilious available
+# (not completed), Option 0: 554 (0, Woozyshroom); its finish sets Option 1; then 555 (Option 1, Chocobilious not
+# completed). Option 2 by GM: no arm (nil: her script's 258). Prog 2: 557. Three Woozyshrooms at Prog 2 (the stew
+# held): 556 again (kept quirk: no Prog test), Prog 2.
+lists WindurstWaters/Ranpi-Monpi/onTrigger WindurstWaters/Ranpi-Monpi/onTrade WindurstWaters/onEventFinish/554 WindurstWaters/onEventFinish/556
+char zone=WindurstWaters pos=-121.3,-3.04,63.2 job=WAR lvl=10
+quest Windurst.InAStew accepted
+charvar Quest[2][45]Prog 1
+quest Windurst.ACrisisInTheMaking accepted
+fame Windurst 50
+item Woozyshroom x3
+login
+trigger Ranpi-Monpi                           # A Crisis in the Making accepted: nil; her script (QuestCrisisMaking_var 0: nothing); no default: no event
+quest Windurst.ACrisisInTheMaking available
+trigger Ranpi-Monpi                           # Option 0, Chocobilious not completed: 554 (0, Woozyshroom) (the first talk here: the quest's turn)
+finish option=0                               # 554's finish: Option 1
+trigger Ranpi-Monpi                           # her script's turn: A Crisis in the Making's offer 258 (0, 625)
+finish option=0                               # 258's finish, option 0 (not 1 or 2): nothing
+trigger Ranpi-Monpi                           # Option 1: 555 (0, Woozyshroom) (the quest's turn)
+finish option=0
+trigger Ranpi-Monpi                           # her script's turn: 258
+finish option=0
+charvar Quest[2][45]Option 2
+trigger Ranpi-Monpi                           # Option 2, Chocobilious not completed: no arm; nil; her script: 258
+finish option=0
+charvar Quest[2][45]Prog 2
+keyitem RanpiMonpisSpecialStew
+trigger Ranpi-Monpi                           # Prog 2: 557 (the quest's turn)
+finish option=0
+trade Ranpi-Monpi Woozyshroom x3              # Prog 2: 556 again
+finish                                        # taken; the stew (held already); Prog 2

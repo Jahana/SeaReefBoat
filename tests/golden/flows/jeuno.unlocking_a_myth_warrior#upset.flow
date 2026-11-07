@@ -1,0 +1,20 @@
+# Unlocking a Myth: Warrior (jeuno 102): upsetting Zalsuhm. A level 75 Warrior wearing the Sturdy Axe: 10086 (1),
+# finished 53: Upset_Zalsuhm 1, the zoning flag set. Both: 10090. Upset_Zalsuhm 0 by a GM, the flag still set: 10086
+# (the flag alone does nothing). Upset_Zalsuhm 1 again (a GM), a rezone (the flag cleared): upset without the flag:
+# Upset_Zalsuhm reset to 0, then 10086 (1); finished 1: begun.
+lists LowerJeuno/Zalsuhm/onTrigger LowerJeuno/onEventFinish/10086
+char zone=LowerJeuno pos=-31.5,5.9,-117.5 job=WAR lvl=75
+item SturdyAxe wsp=0
+login
+equip SturdyAxe Main                    # the Main slot
+trigger Zalsuhm                         # wearing it: 10086 (1)
+finish option=53                        # Upset_Zalsuhm 1; the zoning flag
+trigger Zalsuhm                         # the flag and upset: 10090
+finish
+charvar Quest[3][102]Upset_Zalsuhm 0    # a GM
+trigger Zalsuhm                         # the flag, not upset: 10086 (1)
+finish
+charvar Quest[3][102]Upset_Zalsuhm 1    # a GM
+rezone                                  # the zoning flag cleared
+trigger Zalsuhm                         # upset, no flag: Upset_Zalsuhm 0; wearing it: 10086 (1)
+finish option=1                         # begun

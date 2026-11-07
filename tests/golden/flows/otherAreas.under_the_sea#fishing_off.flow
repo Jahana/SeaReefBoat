@@ -1,0 +1,18 @@
+# Under the Sea (otherAreas 17): FISHING_ENABLE false (settings/default/map.lua) and the fame edge. San d'Oria fame 75
+# (Selbina / Rabao level 2), fishing off: no section: Yaya's default 153. San d'Oria fame 74 (level 1): no section either.
+# Then `setting map.FISHING_ENABLE true` (P6, a step): at fame 74 no section (153); at 75: 31, finished: begun.
+lists Selbina/Yaya/onTrigger Selbina/onEventFinish/31
+char zone=Selbina pos=-17.3,-2.6,-14.9 job=WAR lvl=30
+fame Sandoria 75
+login
+trigger Yaya                            # fishing off: no section; her default 153
+finish
+fame Sandoria 74                        # Selbina / Rabao level 1
+trigger Yaya                            # no section: 153
+finish
+setting map.FISHING_ENABLE true         # a step (P6)
+trigger Yaya                            # fame 74 (level 1), fishing on: no section: 153
+finish
+fame Sandoria 75                        # level 2
+trigger Yaya                            # fishing on, level 2: 31
+finish                                  # begun

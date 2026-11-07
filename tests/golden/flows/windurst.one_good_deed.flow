@@ -1,0 +1,46 @@
+# One Good Deed? (windurst 92): Chipmy-Popmy (Port Windurst), the qm_deed and the six Peerifools (Bibiki Bay). A
+# level-75 WAR at Windurst fame 325 (level 5). Available: a bone chip traded to Chipmy-Popmy (no trade handler:
+# nothing); 594 option 0 (nothing), option 1 (begun). Prog 0: Chipmy-Popmy 596. The qm_deed (Prog 0, NMKilled 0, none
+# up): the six spawn, claimed (IT_WAS_A_TRAP, YOU_ARE_NOT_ALONE); again while they are up: nil (NOTHING_OUT_OF_ORDINARY);
+# the first killed (NMKilled 1): nil; the other five killed (NMKilled 6): cutscene 34 (Prog 1, the Deed to Purgonorgo
+# Isle); at Prog 1: nil. Chipmy-Popmy 595 (0, the deed): Prog 2; 599. The Boneyard Gully afterZoneIn (OnAfterZoneIn)
+# is #gully's. Prog 3 by GM (with the map): Chipmy-Popmy 597 completes it (fame 50, 2000 exp, 3200 gil, the
+# Map of the Attohwa Chasm again, Deed Verifier). Completed: 598.
+# The kills come one after another with no rezone between them (against the rule's rezone after a kill): a zone
+# change resets NMKilled (a local var) and the spawned Peerifools, which this flow needs to keep.
+lists PortWindurst/Chipmy-Popmy/onTrigger PortWindurst/onEventFinish/594 PortWindurst/onEventFinish/595 PortWindurst/onEventFinish/597 BibikiBay/qm_deed/onTrigger BibikiBay/onEventFinish/34
+char zone=PortWindurst pos=-181,-2.835,73.9 job=WAR lvl=75
+fame Windurst 325
+item BoneChip
+login
+trade Chipmy-Popmy BoneChip x1                # available, the check holds: no trade handler: nothing
+trigger Chipmy-Popmy                          # fame level 5: 594
+finish option=0                               # not 1: nothing
+trigger Chipmy-Popmy                          # 594
+finish option=1                               # begun
+trigger Chipmy-Popmy                          # Prog 0: 596
+finish
+warp -319.7,-2.74,-735.3 BibikiBay
+trigger qm_deed                               # Prog 0, NMKilled 0, none up: six Peerifools (claimed); IT_WAS_A_TRAP; YOU_ARE_NOT_ALONE
+trigger qm_deed                               # they are up: nil; NOTHING_OUT_OF_ORDINARY
+kill PEERIFOOL                                # Prog 0: NMKilled 1
+trigger qm_deed                               # NMKilled 1: nil
+kill PEERIFOOL+1
+kill PEERIFOOL+2
+kill PEERIFOOL+3
+kill PEERIFOOL+4
+kill PEERIFOOL+5                              # NMKilled 6
+trigger qm_deed                               # Prog 0, NMKilled 6: cutscene 34
+finish                                        # Prog 1; the Deed to Purgonorgo Isle
+trigger qm_deed                               # Prog 1: nil
+warp -181,-2.835,73.9 PortWindurst
+trigger Chipmy-Popmy                          # Prog 1: 595 (0, the deed)
+finish                                        # Prog 2
+trigger Chipmy-Popmy                          # Prog 2: 599
+finish
+charvar Quest[2][92]Prog 3                    # GM: the Boneyard Gully event's write (#gully records it)
+keyitem MapOfTheAttohwaChasm
+trigger Chipmy-Popmy                          # Prog 3: 597
+finish                                        # completed: fame 50, 2000 exp, 3200 gil, the map (held), Deed Verifier
+trigger Chipmy-Popmy                          # completed: 598
+finish

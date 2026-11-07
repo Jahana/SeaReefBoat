@@ -1,0 +1,22 @@
+# Intermediate Teamwork (sandoria 64): the race arm for main a Tarutaru female (bob an Elvaan female, carl a Tarutaru
+# male). Introduction completed and Intermediate accepted by GM. Main (race 6) leads; bob (race 4) is of another kind:
+# one of the kind (main), updateEvent(4, 2); then carl (race 5) joins, of main's kind: two, the local Prog 1,
+# updateEvent(15, 2); finish option 1: not completed.
+char zone=WestRonfaure pos=-258.861,-70.999,423.42 job=WAR lvl=10 race=6
+char bob zone=WestRonfaure pos=-258.861,-70.999,428 job=WAR lvl=10 race=4
+char carl zone=WestRonfaure pos=-256,-70.999,426 job=WAR lvl=10 race=5
+quest Sandoria.IntroductionToTeamwork completed
+quest Sandoria.IntermediateTeamwork accepted
+login
+bob: login
+carl: login
+invite bob
+bob: accept
+trigger Vilatroire                        # 129 { [1] = 2 }
+update 129 option=0                       # bob of another kind: one, updateEvent(4, 2)
+finish option=1
+invite carl
+carl: accept                              # carl of main's kind
+trigger Vilatroire                        # 129
+update 129 option=0                       # main and carl: two, the local Prog 1, updateEvent(15, 2)
+finish option=1                           # option 1: nothing

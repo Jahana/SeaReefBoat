@@ -1,0 +1,46 @@
+# Downward Helix (crystalWar 33): a level 99 Scholar in The Eldieme Necropolis [S] with A Little Knowledge and On
+# Sabbatical completed (GMs; On Sabbatical's Timer 0: its 20 sets tomorrow; missions as A Little Knowledge's flows).
+# AF2_QUEST_LEVEL 100 at first: Erlene: A Little Knowledge's 47 (no tie with this quest's 23), finished: the spells.
+# AF2_QUEST_LEVEL 50 (a setting step): Erlene 23, finished: begun. Erlene at Prog 0: 24. Southern San d'Oria [S] from
+# East Ronfaure [S] at Prog 0: 65, finished: Prog 1. Erlene 25, finished: Prog 2; Prog 2: 26. Sauromugue Champaign [S]
+# from Rolanberry Fields [S] at Prog 2: 3, finished: Prog 3. Indescript Markings 4, finished: Ulbrecht's Mortarboard,
+# Prog 4; Prog 4: nil. Erlene 27, finished: completed (Scholar's Bracers), the Timer tomorrow and the mustZone
+# (Quest[7][33]). Erlene again: A Little Knowledge's 15.
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/23 TheEldiemeNecropolisS/onEventFinish/25 TheEldiemeNecropolisS/onEventFinish/27 SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventFinish/65 SauromugueChampaignS/onZoneIn/1 SauromugueChampaignS/Indescript_Markings/onTrigger SauromugueChampaignS/onEventFinish/3 SauromugueChampaignS/onEventFinish/4
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=SCH lvl=99
+quest CrystalWar.ALittleKnowledge completed
+quest CrystalWar.OnSabbatical completed
+setting AF2_QUEST_LEVEL 100
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erlene                          # Downward Helix unavailable (level 99 < 100): A Little Knowledge's 47
+finish                                  # Embrava, Kaustra
+setting AF2_QUEST_LEVEL 50
+trigger Erlene                          # available: 23 (A Little Knowledge's 15 is an Event: lower)
+finish                                  # begun
+trigger Erlene                          # accepted, Prog 0: 24
+finish
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp -167.043,-2,55.484 SouthernSanDoriaS open # from East Ronfaure [S] at Prog 0: 65, left open
+finish                                  # Prog 1
+warp 378.436,-39.999,17.914 TheEldiemeNecropolisS
+trigger Erlene                          # Prog 1: 25
+finish                                  # Prog 2
+trigger Erlene                          # Prog 2: 26
+finish
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+warp 321.768,23.864,114.832 SauromugueChampaignS open # from Rolanberry Fields [S] at Prog 2: 3, left open
+finish                                  # Prog 3
+trigger Indescript_Markings             # Prog 3: 4
+finish                                  # Ulbrecht's Mortarboard; Prog 4
+trigger Indescript_Markings             # Prog 4: nil (no default)
+finish-if-event
+warp 378.436,-39.999,17.914 TheEldiemeNecropolisS
+trigger Erlene                          # Prog 4: 27
+finish                                  # completed (Scholar's Bracers); the Timer tomorrow, the mustZone
+trigger Erlene                          # completed: A Little Knowledge's 15
+finish

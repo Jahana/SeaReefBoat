@@ -1,0 +1,17 @@
+# Black Market (outlands 130), the quest's own var at the completion: accepted with four Northern Furs and
+# Quest[5][130]Prog 1 (GMs). Muzaffar: the furs taken, 17; finished: 1500 gil, the raw player:completeQuest (accepted),
+# Norg fame +30, the Black Marketeer title, 20. The raw completeQuest does no cleanup: Quest[5][130]Prog stays 1
+# (quest:complete's cleanup would clear it).
+char zone=Norg pos=16.7,-2,-12.6 job=WAR lvl=75
+quest Outlands.BlackMarket accepted
+item NorthernFur
+item NorthernFur
+item NorthernFur
+item NorthernFur
+charvar Quest[5][130]Prog 1             # a GM: the quest's own var
+login
+trade Muzaffar NorthernFur x4           # taken; 17
+finish                                  # 1500 gil; completed, Prog kept; fame +30; the title; 20
+finish                                  # 20
+trigger Muzaffar                        # completed: 16
+finish

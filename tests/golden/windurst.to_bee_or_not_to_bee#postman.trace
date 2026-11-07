@@ -1,0 +1,92 @@
+# golden trace: windurst.to_bee_or_not_to_bee#postman
+seed 7
+flow e84d0d7c7d46edf87267c47947083e56ffa94f03dd9d94d24f292f8fc008280a
+recorder lua
+lua-at 7892f92ee698c34883312bc487c9369fb0d81d16
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @a60394dd6ba77eb0 (173)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @3e907948536df038 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @bcbc236d2b548e3e (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @ad246d31f10d71d1 (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @4cdbd8051d2399ff (7)
+char_stats @aed604d3dea413a4 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @aa0ca5d43f46fda3 (41)
+ret onZoneIn=number:30035,onEventFinish=nil:nil
+step trigger Zayhi-Bauhi
+packets
+  00E @2549c1ebf2639269
+  00E @148ee5556de2165e
+  00E @00012ac2bd11d407
+  00E @1d1404749dd05e66
+  00E @43baed70c4b362aa
+  00E @6fa7f1eedd2816d0
+  00E @0e786a992091567e
+  00E @b90662cfd5ed797a
+  00E @ebb8e9872307a71f
+  00E @b251e8066fcd258a
+  00E @9d4590c2655daea3
+  00E @2ae81abb748bf317
+  00E @eef4ca3bec0c0780
+  00E @5623cebe87f378a4
+  00E @c8fa0c91a72f62f2
+  032 @7ba59cab7ebb0c22
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step quest Windurst.ThePostmanAlwaysKosTwice accepted
+packets
+  056 @1bcb29aaa69441e1
+char_quest_state + quest_key=windurst.the_postman_always_kos_twice|area=2|quest_id=19|status=1|step=0|progress=null|repeat_by=0
+chars quests +130:08
+step trigger Zayhi-Bauhi
+packets
+  032 @7ba59cab7ebb0c22
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step quest Windurst.ThePostmanAlwaysKosTwice completed
+packets
+  056 @d1758a5f6bb12c8c
+  056 @b90cbc81dd52d869
+char_quest_state - quest_key=windurst.the_postman_always_kos_twice|area=2|quest_id=19|status=1|step=0|progress=null|repeat_by=0
+char_quest_state + quest_key=windurst.the_postman_always_kos_twice|area=2|quest_id=19|status=2|step=0|progress=null|repeat_by=0
+chars quests +130:00 +162:08
+step trigger Zayhi-Bauhi
+packets
+  032 @8f00670de7f81cc6
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_vars + varname=ToBeeOrNot_var|value=10|expiry=0
+ret onEventFinish=nil:nil

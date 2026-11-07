@@ -1,0 +1,47 @@
+# Let Sleeping Dogs Lie (windurst 46): the Remedy arm and the Option operands. Accepted by GM at Prog 1, a level-5 WAR,
+# Teacher's Pet completed. A Remedy traded to Paku-Nakku: Option 2, 494 (no params): Prog 2, the Remedy taken.
+# Maabu-Sonbu at Prog 2, Option 2: 321 (0, Remedy); Pechiru-Mashiru 495 (..., 0). Option 0 by GM at Prog 2 (neither
+# item's arm): Maabu-Sonbu nil (227), Pechiru-Mashiru nil (her default 421). Prog 5 by GM: each child (its own handler's else arm), Paku-Nakku
+# and Pechiru-Mashiru nil (their defaults; Mashuu-Ajuu's script may answer first).
+lists WindurstWaters/Paku-Nakku/onTrigger WindurstWaters/Paku-Nakku/onTrade WindurstWaters/Pechiru-Mashiru/onTrigger WindurstWaters/Akkeke/onTrigger WindurstWaters/Chomoro-Kyotoro/onTrigger WindurstWaters/Foi-Mui/onTrigger WindurstWaters/Kirarara/onTrigger WindurstWaters/Koko_Lihzeh/onTrigger WindurstWaters/Mashuu-Ajuu/onTrigger WindurstWaters/Rukuku/onTrigger WindurstWaters/onEventFinish/494 PortWindurst/Maabu-Sonbu/onTrigger
+char zone=WindurstWaters pos=131,-5.75,165 job=WAR lvl=5
+quest Windurst.TeachersPet completed
+quest Windurst.LetSleepingDogsLie accepted
+charvar Quest[2][46]Prog 1
+item Remedy
+login
+trigger Paku-Nakku                            # Prog 1: 482 (walks beside him)
+finish
+trade Paku-Nakku Remedy x1                    # no peppers, a Remedy: Option 2; 494
+finish                                        # Prog 2; the Remedy taken
+warp -103.9,-3.25,107.9 PortWindurst
+trigger Maabu-Sonbu                           # Prog 2, Option 2: 321 (0, Remedy)
+finish
+charvar Quest[2][46]Option 0
+trigger Maabu-Sonbu                           # Prog 2, Option 0: nil; 227
+finish
+warp 131,-5.75,165 WindurstWaters
+trigger Pechiru-Mashiru                       # Prog 2, Option 0: nil; 421
+finish
+charvar Quest[2][46]Option 2
+trigger Pechiru-Mashiru                       # Prog 2, Option 2: 495 (0, Remedy, Blazing Peppers, 0)
+finish                                        # Prog 3
+charvar Quest[2][46]Prog 5
+trigger Pechiru-Mashiru                       # Prog 5: nil; 421
+finish
+trigger Paku-Nakku                            # Prog 5: nil; 431
+finish
+trigger Akkeke                                # Prog 5: nil; 427
+finish
+trigger Chomoro-Kyotoro                       # Prog 5: nil; 432
+finish
+trigger Foi-Mui                               # Prog 5: nil; 430
+finish
+trigger Kirarara                              # Prog 5: nil; 425
+finish
+trigger Koko_Lihzeh                           # Prog 5: nil; 428
+finish
+trigger Mashuu-Ajuu                           # Prog 5: nil; the first talk here: the default 429 (an action of the lookup: the script waits for the next talk)
+finish
+trigger Rukuku                                # Prog 5: nil; 426
+finish

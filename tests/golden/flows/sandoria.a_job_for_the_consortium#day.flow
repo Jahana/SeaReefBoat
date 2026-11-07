@@ -1,0 +1,38 @@
+# A Job for the Consortium (sandoria 67): the customs roll and its hour bounds. Accepted by GM, Stage 1, Prog 2, the goods
+# held, in Port Jeuno. checkSmuggle draws math.randomInt(1, 100) only when 5 < hour < 18; 25 or under catches the char
+# (Prog 1, param 1). On the pinned seed the first two draws catch and the third does not, so each bound is seen from both
+# sides: 17:00 draws (caught: a mutant `hour < 17` would not draw), 18:00 and 05:00 do not draw (param 0, though the next
+# draw would catch: a mutant `hour < 19` or `hour > 4` would draw it), 06:00 draws (caught: a mutant `hour > 6` would not).
+# Haubijoux's 54 declined (option 0: nothing, the Prog stays 1); _6u2's caught 54 taken: CONFISCATED (the goods taken, the
+# ban). Then the goods and Prog 2 again by GM: the third draw does not catch: 54 (param 0), taken: CLEARED_CUSTOMS, Prog 0.
+# Last, Prog 1 with the goods by GM (what a declined catch leaves): Yin Pocanakhu's 219 (only Prog 2 is damaged).
+char zone=PortJeuno pos=-59.5,8,58 job=WAR lvl=30
+fame Sandoria 325
+keyitem TenshodoMembersCard
+keyitem BrugaireGoods
+quest Sandoria.AJobForTheConsortium accepted
+charvar Quest[0][67]Stage 1
+charvar Quest[0][67]Prog 2
+login
+wait vana=5                               # 17:00
+trigger Haubijoux                         # 17:00 (< 18): the roll, the first draw catches: 54 (param 1); Prog 1
+finish                                    # option 0: nothing; Prog stays 1
+charvar Quest[0][67]Prog 2
+wait vana=1                               # 18:00
+trigger _6u2                              # 18:00: no roll: 54 (param 0); Prog stays 2
+finish
+wait vana=11                              # 05:00
+trigger Haubijoux                         # 05:00: no roll: 54 (param 0)
+finish
+wait vana=1                               # 06:00
+trigger _6u2                              # 06:00 (> 5): the roll, the second draw catches: 54 (param 1); Prog 1
+finish option=1                           # CONFISCATED: the goods taken; [AIRSHIP]suspended = JstMidnight()
+keyitem BrugaireGoods
+charvar Quest[0][67]Prog 2
+trigger Haubijoux                         # 06:00: the roll, the third draw does not catch: 54 (param 0)
+finish option=1                           # CLEARED_CUSTOMS; Prog 0
+charvar Quest[0][67]Prog 1
+keyitem BrugaireGoods
+warp 36.763,4.118,-46.082 LowerJeuno
+trigger Yin_Pocanakhu                     # Prog 1 (a catch declined keeps the goods): not damaged: 219
+finish                                    # PACKAGE_DELIVERED; the goods taken

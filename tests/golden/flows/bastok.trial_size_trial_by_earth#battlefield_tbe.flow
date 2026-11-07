@@ -1,0 +1,15 @@
+# Trial-Size Trial by Earth (bastok 72): this quest's 32001 handler on another fight's win. A SMN of level 20 with this
+# quest and Trial by Earth accepted and the Tuning Fork of Earth: the Trial by Earth fight (32000 option 1, GALGALIM-3).
+# The 32001 finish runs Trial-Size's handler (accepted; battlefieldWin 576 is not 578: nothing) and Trial by Earth's
+# (the Whisper of Tremors, Heir of the Great Earth).
+lists CloisterOfTremors/EP_Entrance/onTrigger CloisterOfTremors/onEventFinish/32001
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=20
+quest Bastok.TrialSizeTrialByEarth accepted
+quest Bastok.TrialByEarth accepted
+keyitem TuningForkOfEarth
+login
+trigger EP_Entrance            # the fork: the entry menu 32000
+update 32000 option=1          # Trial by Earth (index 0), arena 1: registered, entered, the fork taken
+finish                         # in the arena
+kill GALGALIM-3                # Titan_Prime_TBE of arena 1: won, 32001 opens
+finish                         # Trial-Size: 576 is not 578, nothing; Trial by Earth: the whisper, the title

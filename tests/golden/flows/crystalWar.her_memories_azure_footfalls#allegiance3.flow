@@ -1,0 +1,35 @@
+# Her Memories: Azure Footfalls (crystalWar 70) with allegiance 3 (no flow statement sets one: the char completes
+# Steamed Rams, then Snake on the Plains as the pledged flow does, a GM giving the Doors var and the key items). A level
+# 99 Warrior in Southern San d'Oria [S] with Steamed Rams accepted, the WotG mission Her Memories current and the Blue
+# Recommendation Letter. Windurst Waters [S]: Snake on the Plains pledged: allegiance 3. North Gustaberg [S], then
+# Bastok Markets [S] from there at Prog 0: nothing (Azure needs allegiance 2).
+lists SouthernSanDoriaS/Mainchelite/onTrigger WindurstWatersS/Miah_Riyuh/onTrigger WindurstWatersS/onEventFinish/105 WindurstWatersS/onEventFinish/106 BastokMarketsS/onZoneIn/1
+char zone=SouthernSanDoriaS pos=-13.849,1.398,-30.368 job=WAR lvl=99
+quest CrystalWar.SteamedRams accepted
+keyitem CharredPropeller
+keyitem OxidizedPlate
+keyitem PieceOfShatteredLumber
+keyitem BlueRecommendationLetter
+mission Wotg HerMemories current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Mainchelite                     # Steamed Rams: the three: 12
+finish                                  # Steamed Rams completed; allegiance 1; the ribbon
+warp 6.823,-1,37.462 WindurstWatersS
+keyitem GreenRecommendationLetter
+trigger Miah_Riyuh                      # the letter and an allegiance: 103
+finish option=2                         # nothing
+delkeyitem GreenRecommendationLetter
+trigger Miah_Riyuh                      # an allegiance, LetterUsed 0: 105
+finish option=0                         # begun; the putty
+charvar Quest[7][8]Doors 7              # a GM
+delkeyitem BronzeRibbonOfService
+fill-inventory
+trigger Miah_Riyuh                      # Doors full: 106
+finish option=0                         # pledged; completed; allegiance 3
+free-inventory
+warp 207.799,-20.826,669.125 NorthGustabergS
+warp -324.266,-12.601,-76.977 BastokMarketsS # from North Gustaberg [S], allegiance 3: no zone-in reply

@@ -1,0 +1,18 @@
+# Overnight Delivery (windurst 15): overdue in the small hours. Accepted by GM (Prog 4). Kotan's 141 at 03:00 of day
+# 8001 sets dueDate to that day (`VanadielHour() < 6`). A Vana'diel day later, at 03:00 of day 8002, Kenapa: `dueDate >
+# today` is false and `dueDate == today` is false, so the hour below 6 does not save it: 346 (the quest deleted, the bag
+# gone, dueDate 0, Prog 256). A port that reads `dueDate > today or hour < 6` gives 348 here.
+lists WindurstWaters/Kenapa-Keppa/onTrigger Mhaura/Kotan-Purutan/onTrigger WindurstWaters/onEventFinish/346 Mhaura/onEventFinish/141
+char zone=Mhaura pos=41.8,-8.0,44.2
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery accepted
+charvar Quest[2][15]Prog 4
+fame Windurst 50
+login
+wait vana=15                            # day 8001, 03:00
+trigger Kotan-Purutan                   # no bag, Prog 4, 03:00 (< 6): 141
+finish                                  # Small Bag; 03:00 (< 6): dueDate = today (8001)
+wait vana=24                            # day 8002, 03:00
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Kenapa-Keppa                    # the bag, due yesterday, 03:00: 346
+finish                                  # failed: the quest deleted, the bag gone, dueDate 0, Prog 256

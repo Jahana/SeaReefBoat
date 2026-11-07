@@ -1,0 +1,18 @@
+# Food for Thought (windurst 14): the egg before the order at another RNG position, with Ohbiru done but Kerutoto not
+# (GM vars kerutotoProg 1, ohbiruProg 3: the guard's first half false): Kenapa's finish marks kenapaProg 4, no
+# completion. A talk at kenapaProg 3 (GM) draws once first (randomInt(1, 3)), which moves the script RNG, so the trade's
+# randomInt(1, 100) takes the other side of the 331 / 330 draw from `#early_kenapa`.
+lists WindurstWaters/Kenapa-Keppa/onTrigger WindurstWaters/Kenapa-Keppa/onTrade WindurstWaters/onEventFinish/320 WindurstWaters/onEventFinish/330 WindurstWaters/onEventFinish/331
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought accepted
+charvar Quest[2][14]kerutotoProg 1
+charvar Quest[2][14]ohbiruProg 3
+charvar Quest[2][14]kenapaProg 3
+item HardBoiledEgg
+login
+trigger Kenapa-Keppa                    # kenapaProg 3: one draw, randomInt(1, 3): 320, 321 or 328
+finish
+charvar Quest[2][14]kenapaProg 2        # a GM puts kenapaProg back under 3
+walk 24.0,-5.38,-197.7
+trade Kenapa-Keppa HardBoiledEgg x1     # kenapaProg 2 (< 3): randomInt(1, 100): 331 or 330 (120)
+finish                                  # the egg taken, +120 gil; kerutotoProg 1: kenapaProg 4

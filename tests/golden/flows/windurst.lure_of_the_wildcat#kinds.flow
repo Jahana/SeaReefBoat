@@ -1,0 +1,12 @@
+# Lure of the Wildcat (Windurst) (windurst 94): 736's reply kind. Ibwam has a script onTrigger (740), so an Event offer
+# would alternate with it on a second talk in a row; 736 is a Progress event and plays again. The GM resets the quest
+# (available, the badge taken) between the two offers.
+lists WindurstWoods/Ibwam/onTrigger WindurstWoods/onEventFinish/736
+char zone=WindurstWoods pos=-24,2.75,-59 job=WAR lvl=20
+login
+trigger Ibwam                             # 736
+finish                                    # the badge; begun
+quest Windurst.LureOfTheWildcat available
+delkeyitem GreenSentinelBadge
+trigger Ibwam                             # 736 again (Progress)
+finish                                    # the badge; begun

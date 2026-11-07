@@ -1,0 +1,34 @@
+# Under the Sea (otherAreas 17): its reply kinds against Event-priority competitors set by a GM (both sort before
+# Under_the_Sea, so a tie would play theirs first): The Gift accepted (Oswald 71) and Inside the Belly completed (Zaldon:
+# 162 with tier 1's four fish at fishing skill 0; its completed section reads FISHING_ENABLE too, hence the header line).
+# Oswald's 32 and 37 (Progress) beat 71; completed with The Sand Charm available: 38 (replaceDefault) loses to 71 every
+# time (an Event 38 would tie and take turns). Zaldon's 34 (Progress) beats 162 (Zaldon's script has no onTrigger). Yaya's
+# 31, Jimaida's 33 and Zaldon's trades have no competitor (no other quest answers them; Zaldon's script answers an
+# Odontotyrannus only): XI.Verify.Quests `oa g2 kinds`.
+lists Selbina/Oswald/onTrigger Selbina/Zaldon/onTrigger Selbina/onEventFinish/32 Selbina/onEventFinish/34 Selbina/onEventFinish/37
+char zone=Selbina pos=48.6,-15.3,8 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.UnderTheSea accepted
+quest OtherAreas.TheGift accepted
+quest OtherAreas.InsideTheBelly completed
+login
+trigger Oswald                          # Prog 0: 32 (Progress beats The Gift's 71)
+finish                                  # Prog 1
+charvar Quest[4][17]Prog 0              # a GM
+trigger Oswald                          # 32 again
+finish                                  # Prog 1
+charvar Quest[4][17]Prog 2              # a GM
+trigger Zaldon                          # Prog 2: 34 (Progress beats Inside the Belly's 162)
+finish                                  # Prog 3
+charvar Quest[4][17]Prog 2              # a GM
+trigger Zaldon                          # 34 again
+finish                                  # Prog 3
+trigger Zaldon                          # Prog 3: Under the Sea's nil; Inside the Belly's 162
+finish
+keyitem EtchedRing                      # a GM
+trigger Oswald                          # the ring: 37 (Progress beats 71)
+finish                                  # completed; the ring taken
+trigger Oswald                          # completed: 38 (replaceDefault) loses: 71
+finish
+trigger Oswald                          # 71 again
+finish

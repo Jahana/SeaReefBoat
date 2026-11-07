@@ -1,0 +1,28 @@
+# Mandragora Mad (windurst 34) at GIL_RATE 1.0625 (exact in binary; setting <NAME> <decimal>, quest rework P5): each
+# turn-in's event argument and its addGil are the amount x GIL_RATE: 200 x 1.0625 = 212.5, 250: 265.625, 1200: 1275,
+# 120: 127.5, 5500: 5843.75 (the engine's integral getter, llround: 213, 266, 1275, 128, 5844; a truncation would give
+# 212 and 127). 249 finished with option 1: begun (any option). Accepted: each of the five turn-ins in turn (the
+# finishes read no status): 251 (213) fame 10, 252 (266) fame 10, 253 (1275) fame 22, 254 (128) fame 10, 255 (5844)
+# fame 36, each completing the quest and taking its item.
+char zone=WindurstWalls pos=-108.5,-13.0,203.3 job=WAR lvl=75
+setting GIL_RATE 1.0625
+item Cornette
+item PinchOfYuhtungaSulfur
+item ThreeLeafMandragoraBud
+item FourLeafMandragoraBud
+item SnobbyLetter
+login
+trigger Yoran-Oran                      # default 245
+finish
+trigger Yoran-Oran                      # available: 249
+finish option=1                         # begun
+trade Yoran-Oran Cornette x1            # 251 (213)
+finish                                  # fame 10; completed; 213 gil
+trade Yoran-Oran PinchOfYuhtungaSulfur x1  # 252 (266)
+finish                                  # fame 10; 266 gil
+trade Yoran-Oran ThreeLeafMandragoraBud x1  # 253 (1275)
+finish                                  # fame 22; 1275 gil
+trade Yoran-Oran FourLeafMandragoraBud x1  # 254 (128)
+finish                                  # fame 10; 128 gil
+trade Yoran-Oran SnobbyLetter x1        # 255 (5844)
+finish                                  # fame 36; 5844 gil

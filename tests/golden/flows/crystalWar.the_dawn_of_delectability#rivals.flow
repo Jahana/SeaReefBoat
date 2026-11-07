@@ -1,0 +1,37 @@
+# The Dawn of Delectability (crystalWar 5), the rival at Ranpi-Monpi (Windurst Waters): a level 99 Warrior there with
+# the four ingredients, The Dawn of Delectability accepted at Prog 1 and In a Stew (Windurst, C#) at Prog 1 with A
+# Crisis in the Making not accepted (GMs; missions as the main flow): In a Stew answers him with 554 (an Event). 978
+# (Progress) over 554, finished: Prog 2; 979 over 554, twice; the four: 983 (In a Stew trades only Woozyshrooms),
+# finished: Prog 3; 982 over 554. Prog 4 (a GM): no section here: In a Stew's 554 (an Event: it alternates with his
+# script), his script.
+lists WindurstWaters/Ranpi-Monpi/onTrigger WindurstWaters/Ranpi-Monpi/onTrade WindurstWaters/onEventFinish/978 WindurstWaters/onEventFinish/983 WindurstWaters/onEventFinish/554
+char zone=WindurstWaters pos=-121.817,-3.04,63.211 job=WAR lvl=99
+item Pepperoni
+item Walnut
+item DragonFruit
+item BastoreSweeper
+quest CrystalWar.TheDawnOfDelectability accepted
+charvar Quest[7][5]Prog 1
+quest Windurst.InAStew accepted
+charvar Quest[2][45]Prog 1
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Ranpi-Monpi                     # Prog 1: 978 over In a Stew's 554
+finish                                  # Prog 2
+trigger Ranpi-Monpi                     # Prog 2: 979 over 554
+finish
+trigger Ranpi-Monpi                     # 979 again
+finish
+trade Ranpi-Monpi Pepperoni x1 Walnut x1 DragonFruit x1 BastoreSweeper x1 # 983
+finish                                  # Prog 3; Timer = today + 1
+trigger Ranpi-Monpi                     # Timer ahead: 982 over 554
+finish
+charvar Quest[7][5]Prog 4
+trigger Ranpi-Monpi                     # Prog 4: In a Stew's 554
+finish
+trigger Ranpi-Monpi                     # his script's turn
+finish-if-event

@@ -1,0 +1,24 @@
+# Bombs Away! (otherAreas 96): Uleguerand Range's Buffalostalker Dodzbraz (no script, no DefaultActions: nil shows
+# nothing). Four Cluster Cores. Available: a trade of two cores: no trade handler; nothing (the cores kept). 6, option 0
+# and 2: nothing; option 1: begun. Accepted: 7 (event). Two cores traded: 8, finished: completed (a Chunk of Shumeyo
+# Salt), the cores taken. Completed (section 2 holds: status ~= available): 7; two more cores: 8 again, finished: a
+# second salt.
+lists UleguerandRange/Buffalostalker_Dodzbraz/onTrigger UleguerandRange/Buffalostalker_Dodzbraz/onTrade UleguerandRange/onEventFinish/6 UleguerandRange/onEventFinish/8
+char zone=UleguerandRange pos=-378.7,-23.9,-180.8 job=WAR lvl=75
+item ClusterCore x4
+login
+trade Buffalostalker_Dodzbraz ClusterCore x2 # available: no trade handler; nothing
+trigger Buffalostalker_Dodzbraz         # available: 6
+finish option=0                         # not 1: nothing
+trigger Buffalostalker_Dodzbraz         # 6
+finish option=2                         # not 1: nothing
+trigger Buffalostalker_Dodzbraz         # 6
+finish option=1                         # begun
+trigger Buffalostalker_Dodzbraz         # accepted: 7
+finish
+trade Buffalostalker_Dodzbraz ClusterCore x2 # exactly two cores: 8
+finish                                  # completed; Chunk of Shumeyo Salt; the cores taken
+trigger Buffalostalker_Dodzbraz         # completed: 7
+finish
+trade Buffalostalker_Dodzbraz ClusterCore x2 # completed: 8 again
+finish                                  # a second salt; the cores taken

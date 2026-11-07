@@ -1,0 +1,79 @@
+# Pieuje's Decision (sandoria 89, WHM AF3): the door _6h1 in Chateau d'Oraguille, the Fei'Yin zone-in from Beaucedine
+# Glacier, Fei'Yin's qm1, Narcheral in Northern San d'Oria. The door's DefaultActions text (7243) takes the first talk
+# after each zone-in and every other talk; the script (and so the quest's call) gets the even talks, and when it plays
+# nothing the door shows 7243 too. Traded a chip while available: nothing. A WHM 50 with Prelude of Black and White accepted (by GM): the script's talks (2, 4)
+# show nothing. Prelude completed by GM: talk 6 is 552 (finish option 0: begun on any option); accepted: talk 8
+# nothing. Fei'Yin entered from Beaucedine Glacier (the warp is a setPos into zone 204, whose zone change writes
+# pos_prevzone 111) at pieujesDecisionCS 0: 19, left open (no update handler), finished: pieujesDecisionCS 1; entered
+# again: nothing. The qm1: SOUL_OF_TAVNAZIA; a chip (nothing); the Tavnazia Bell and a chip (tradeHas: the bell taken,
+# the chip kept, EVIL_PRESENCE, Altedour I Tavnazia spawns claimed); the bell with him up (nothing); the inventory full,
+# killed (his drop stays in the pool): the bell with him dead but still spawned (nothing); four ticks later (his body
+# gone) the bell spawns him again; killed (the mask lands in the slot the bell freed); his body gone: the bell with the
+# mask held (nothing).
+# Narcheral: the mask and a chip (not exact: nothing); the mask (692: Paragon of White Mage Excellence,
+# pieujesDecisionCS 0, Healer's Bliaut, ITEM_OBTAINED, the mask taken, fame +20, completed); completed, the mask again:
+# nothing. Completed: the door's talk 10 nothing; the qm1 YOU_FIND_NOTHING.
+char zone=ChateauDoraguille pos=-36.0,-4.9,28.5 job=WHM lvl=50
+item BoneChip x3
+quest Sandoria.PreludeOfBlackAndWhite accepted
+login
+trade _6h1 BoneChip x1                    # available: no onTrade either side: nothing
+trigger _6h1                              # talk 1 (after the zone-in): 7243
+finish-if-event
+trigger _6h1                              # talk 2, the script: Prelude accepted: nothing (7243)
+finish-if-event
+trigger _6h1                              # talk 3: 7243
+finish-if-event
+trigger _6h1                              # talk 4, the script: nothing (7243)
+finish-if-event
+quest Sandoria.PreludeOfBlackAndWhite completed
+trigger _6h1                              # talk 5: 7243
+finish-if-event option=0
+trigger _6h1                              # talk 6, the script: Prelude completed, available: 552
+finish-if-event option=0                  # begun (any option)
+trigger _6h1                              # talk 7: 7243
+finish-if-event
+trigger _6h1                              # talk 8, the script: accepted: nothing (7243)
+finish-if-event
+warp 403.3,0.0,279.2 BeaucedineGlacier
+warp -51.0,-16.0,38.0 Feiyin open         # from Beaucedine Glacier (prevZone 111), accepted, pieujesDecisionCS 0: 19, left open
+update 19 option=0                        # no update handler either side
+finish                                    # pieujesDecisionCS 1
+warp 403.3,0.0,279.2 BeaucedineGlacier
+warp -51.0,-16.0,38.0 Feiyin              # pieujesDecisionCS 1: no 19
+trigger qm1                               # accepted: SOUL_OF_TAVNAZIA
+item TavnaziaBell x4                      # GM
+trade qm1 BoneChip x1                     # no bell: nothing
+trade qm1 TavnaziaBell x1 BoneChip x1     # tradeHas: the bell taken, the chip kept; EVIL_PRESENCE; Altedour I Tavnazia spawns claimed
+trade qm1 TavnaziaBell x1                 # he is up: nothing
+fill-inventory                            # GM: no room for his drop
+kill ALTEDOUR_I_TAVNAZIA                  # his drop (the mask) stays in the treasure pool
+walk -51.0,-16.0,38.0                     # back to the qm1
+trade qm1 TavnaziaBell x1                 # he is dead but still spawned, no mask: nothing
+tick 15000                                # his body gone
+tick 15000
+tick 15000
+tick 15000
+trade qm1 TavnaziaBell x1                 # not spawned, no mask: the bell taken; EVIL_PRESENCE; he spawns again
+kill ALTEDOUR_I_TAVNAZIA                  # his drop (the mask) lands in the slot the bell freed
+walk -51.0,-16.0,38.0
+tick 15000                                # his body gone (a Fei'Yin mob attacks meanwhile, both sides)
+tick 15000
+tick 15000
+tick 15000
+free-inventory
+tick 60000                                # the first kill's pool: nothing more given
+trade qm1 TavnaziaBell x1                 # the mask held, not spawned: nothing
+warp 126.8,-11.0,128.3 NorthernSanDoria
+trade Narcheral TavnazianMask x1 BoneChip x1  # not exact: nothing
+trade Narcheral TavnazianMask x1          # 692
+finish                                    # completed: the title, pieujesDecisionCS 0, Healer's Bliaut, the mask taken, fame +20
+item TavnazianMask                        # GM
+trade Narcheral TavnazianMask x1          # completed: nothing
+warp -36.0,-4.9,28.5 ChateauDoraguille
+trigger _6h1                              # talk 1 after the zone-in: 7243
+finish-if-event
+trigger _6h1                              # talk 2, the script: completed: nothing (7243)
+finish-if-event
+warp -51.0,-16.0,38.0 Feiyin
+trigger qm1                               # completed: YOU_FIND_NOTHING (the script's)

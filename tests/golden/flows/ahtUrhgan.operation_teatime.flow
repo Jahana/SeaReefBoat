@@ -1,0 +1,56 @@
+# Operation Teatime (ahtUrhgan): Iruki-Waraki in Whitegate, Dnegan in Nashmau, Caedarva Mire's qm10. A PUP of level 50
+# (AF2_QUEST_LEVEL) with No Strings Attached and The Wayward Automaton completed (GMs) and the Animator held. Iruki-
+# Waraki answers No Strings Attached's 267 first, his script on the next talk (UseFallback; see The Wayward
+# Automaton's flow). His script: no Wayward arm (a PUP of 50, completed), not his 267 arm (a PUP); this quest's 778
+# (finish: OperationTeaTimeProgress 1, begun); 779 at 1. The trade of a Flask of Sleeping Potion and a Cup of Chai at
+# 1: 780 (finish: OperationTeaTimeProgress 2, the trade confirmed: both taken); 781 at 2. Dnegan reads
+# OperationTeatimeProgress (small t) and sees Iruki-Waraki's 2: a char var's name is matched without case (the row
+# keeps the spelling it was made with, OperationTeaTimeProgress, through every later write). 290, option 0:
+# OTT_DayWait today; the same day: 288; `wait vana=24` (the next Vana'diel day): 290, option 1:
+# OperationTeatimeProgress 3, OTT_DayWait 0. Iruki-Waraki at 3: no script arm (his 267 again), and a second potion and chai
+# traded: nothing. qm10 at 3: 15; its finish with a full inventory: the completion fails (the Puppetry Churidars do
+# not fit); with room: the churidars, completed, OperationTeatimeProgress cleared; then NOTHING_OUT_OF_ORDINARY.
+char zone=AhtUrhganWhitegate pos=102.8,-6.0,-29.0 job=PUP lvl=50
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.TheWaywardAutomaton completed
+item Animator
+item FlaskOfSleepingPotion x2
+item CupOfChai x2
+login
+trigger Iruki-Waraki                    # No Strings Attached's 267 (UseFallback 0)
+finish
+trigger Iruki-Waraki                    # the script: no Wayward arm; this quest available: 778
+finish                                  # OperationTeaTimeProgress 1; begun
+trigger Iruki-Waraki                    # 267
+finish
+trigger Iruki-Waraki                    # accepted, OperationTeaTimeProgress 1: 779
+finish
+trade Iruki-Waraki FlaskOfSleepingPotion x1  # the potion alone: nothing (npcUtil.tradeHas wants both)
+trade Iruki-Waraki FlaskOfSleepingPotion x1 CupOfChai x1  # both, OperationTeaTimeProgress 1: 780
+finish                                  # OperationTeaTimeProgress 2; the potion and the chai taken
+trigger Iruki-Waraki                    # 267
+finish
+trigger Iruki-Waraki                    # OperationTeaTimeProgress 2: 781
+finish
+warp 31.0,-6.0,56.0 Nashmau
+trigger Dnegan                          # OperationTeatimeProgress 2 (Iruki-Waraki's), OTT_DayWait not today: 290
+finish option=0                         # OTT_DayWait today
+trigger Dnegan                          # OTT_DayWait today: no arm: his 288
+finish
+wait vana=24                            # the next Vana'diel day
+trigger Dnegan                          # OTT_DayWait yesterday: 290
+finish option=1                         # OperationTeatimeProgress 3; OTT_DayWait 0
+warp 102.8,-6.0,-29.0 AhtUrhganWhitegate
+trigger Iruki-Waraki                    # 267 (the warp cleared UseFallback)
+finish
+trigger Iruki-Waraki                    # the script at progress 3: no arm (781 wants 2): the lookup's 267
+finish
+trade Iruki-Waraki FlaskOfSleepingPotion x1 CupOfChai x1  # a second set at progress 3: nothing (the trade wants 1)
+warp 474.8,-31.8,75.5 CaedarvaMire
+trigger qm10                            # accepted, OperationTeatimeProgress 3: 15
+fill-inventory
+finish                                  # no room for the churidars: not completed
+free-inventory
+trigger qm10                            # 15
+finish                                  # the Puppetry Churidars; completed; OperationTeatimeProgress cleared
+trigger qm10                            # completed: NOTHING_OUT_OF_ORDINARY

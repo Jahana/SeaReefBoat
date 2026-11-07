@@ -1,0 +1,23 @@
+# Trial by Ice (sandoria 59), the release after a win. Entered with the fork, Shiva killed: won, 32001, finished
+# (the title Heir of the Great Ice, the Whisper of Frost). The win's cleanup ran its first pass (the leave handlers,
+# 32001) during the kill's ticks and then waits 10 s while the char is inside (CBattlefield::Cleanup). 7 s after the
+# kill the char is still in the battlefield; by 9 s the second pass has run: Shiva fades out (0x038), the char is
+# taken out and its Battlefield effect goes (the row's delete is written by the next tick's persist). Shiva's defeat
+# (onMobDeath) runs on that next tick too: a mob of a battlefield being cleaned up is not ticked
+# (CZoneEntities::ZoneServer), and Shiva left the battlefield at the second pass.
+# Ice_Protocrystal then opens no 32003 (its exit trigger wants the char in a battlefield): the default.
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=WAR lvl=75
+quest Sandoria.TrialByIce accepted
+keyitem TuningForkOfIce
+login
+trigger IP_Entrance                       # the fork: the entry menu 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+kill DRYAD-3                              # won: 32001 opens
+finish                                    # Heir of the Great Ice, the Whisper of Frost
+tick 5000
+tick 2000                                 # 7 s after the kill: still inside
+tick 2000                                 # 9 s: the cleanup's second pass; Shiva fades out, the char is out
+tick 1000                                 # the next tick: the effect row's delete written; Shiva's onMobDeath
+trigger Ice_Protocrystal                  # out of the battlefield: no 32003
+finish-if-event

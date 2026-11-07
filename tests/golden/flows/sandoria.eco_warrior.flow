@@ -1,0 +1,102 @@
+# Eco-Warrior (San d'Oria) (sandoria 97): Norejaie in Southern San d'Oria, Rojaireaut, the qm7 and Necroplasm in
+# Ordelles Caves. Norejaie's offer 677 (San d'Oria fame level 1, EcoReset 0; 682 while the Bastok or the Windurst
+# Eco-Warrior is accepted, each on its own, and before the EcoReset test; nil at EcoReset 1 or -1; the Bastok one
+# completed is not accepted: 677; option 0 and 2: nothing, option 1 begins it; a trade while available: no handler),
+# Rojaireaut's 51 (option 1: Level Restriction 25, ON_ZONE), the qm7 under the restriction at Prog 0 (Necroplasm popped,
+# claimed, OINTMENT_DRAWS_CREATURE; while it is up popFromQM refuses), Necroplasm killed without the restriction
+# (nothing) and under it (Prog 1), the qm7's KI Indigested Stalagmite, Rojaireaut's 54 (option 0: Informed 1) and 53
+# (option 0: the restriction off), Norejaie's 679 without the stalagmite and 681 with it (completed: Dragon Chronicles,
+# 5000 gil, Vermillion Venturer, fame +20, the stalagmite deleted, EcoReset 1 until the next conquest tally); once
+# completed: 682 for either other nation's, nil while EcoReset is 1, and 677 (option 1 deletes the quest and begins it
+# again).
+# The restriction is ON_ZONE: a warp, even inside Ordelles Caves, zones the char and drops it, so the flow moves between
+# Rojaireaut and the qm7 by `trigger` (which walks) and uses `rezone` only to drop it on purpose. A dead Necroplasm
+# despawns between 15 and 45 s after the kill (two ticks), as Bastok's Puddings.
+# Defaults: Norejaie 678, Rojaireaut 50, the qm7 NOTHING_OUT_OF_ORDINARY (DefaultActions; no scripts; no other quest or
+# mission names them in these zones). The Bastok and Windurst Eco-Warriors (both C#) read this quest's status.
+# #gm takes the GM-set vars, #tally the EcoReset expiry, #inventory_full the failed completion, #era the era module.
+lists SouthernSanDoria/Norejaie/onTrigger SouthernSanDoria/onEventFinish/677 SouthernSanDoria/onEventFinish/681 OrdellesCaves/Rojaireaut/onTrigger OrdellesCaves/qm7/onTrigger OrdellesCaves/Necroplasm/onMobDeath OrdellesCaves/onEventFinish/51 OrdellesCaves/onEventFinish/53 OrdellesCaves/onEventFinish/54
+char zone=SouthernSanDoria pos=85.4,1.0,110.5 lvl=30
+charvar EcoReset 1
+item BoneChip
+login
+trigger Norejaie                          # available, EcoReset 1: nil; 678
+finish-if-event
+charvar EcoReset -1
+trigger Norejaie                          # available, EcoReset -1 (not 0): nil; 678
+finish-if-event
+quest Bastok.EcoWarrior accepted
+trigger Norejaie                          # the Bastok Eco-Warrior accepted (EcoReset -1: the first arm comes first): 682
+finish
+charvar EcoReset 0
+trade Norejaie BoneChip x1                # available, the offer's state: no trade handler; nothing
+trigger Norejaie                          # the Bastok Eco-Warrior accepted: 682
+finish
+quest Bastok.EcoWarrior completed
+trigger Norejaie                          # the Bastok Eco-Warrior completed (not accepted): 677
+finish option=0                           # declined: still available
+quest Bastok.EcoWarrior available
+quest Windurst.EcoWarrior accepted
+trigger Norejaie                          # the Windurst Eco-Warrior accepted: 682
+finish
+quest Windurst.EcoWarrior available
+trigger Norejaie                          # the offer, 677
+finish option=2                           # not option 1: still available
+trigger Norejaie                          # 677 again
+finish option=1                           # accepted
+trigger Norejaie                          # accepted, no stalagmite: 679
+finish
+warp -90.3,0.5,587.9 OrdellesCaves
+trigger Rojaireaut                        # no stalagmite, no restriction: 51
+finish option=0                           # no ointment
+trigger Rojaireaut                        # 51 again
+finish option=2                           # not option 1: no ointment
+trigger Rojaireaut                        # 51 again
+finish option=1                           # Level Restriction 25 (ON_ZONE)
+trigger Rojaireaut                        # no stalagmite, the restriction: 53
+finish option=1                           # kept
+trigger qm7                               # walks; Prog 0, the restriction: Necroplasm popped; OINTMENT_DRAWS_CREATURE
+finish-if-event
+trigger qm7                               # Necroplasm up: popFromQM false; Prog 0: nil; NOTHING_OUT_OF_ORDINARY
+finish-if-event
+rezone                                    # ON_ZONE: the restriction gone (Necroplasm stays up)
+kill NECROPLASM                           # no restriction: nothing; Prog 0
+tick 15000                                # the dead Necroplasm despawning (the death and the despawn each take a zone tick)
+tick 30000                                # despawned
+trigger qm7                               # Prog 0, no restriction: nil; NOTHING_OUT_OF_ORDINARY
+finish-if-event
+trigger Rojaireaut                        # no stalagmite, no restriction: 51
+finish option=1                           # the restriction again
+trigger qm7                               # Necroplasm popped again
+finish-if-event
+kill NECROPLASM                           # the restriction: Prog 1
+trigger qm7                               # Prog 1 (first arm false on Prog), no stalagmite: KI Indigested Stalagmite
+finish-if-event
+trigger qm7                               # the stalagmite held: nil; NOTHING_OUT_OF_ORDINARY
+finish-if-event
+trigger Rojaireaut                        # the stalagmite, Informed 0: 54
+finish option=1                           # Informed stays 0
+trigger Rojaireaut                        # 54 again
+finish                                    # option 0: Informed 1
+trigger Rojaireaut                        # the stalagmite, Informed 1, the restriction: 53
+finish                                    # option 0: the restriction off
+trigger Rojaireaut                        # the stalagmite, Informed 1, no restriction: nil; 50
+finish-if-event
+warp 85.4,1.0,110.5 SouthernSanDoria
+trigger Norejaie                          # the stalagmite: 681
+finish                                    # completed: Dragon Chronicles, 5000 gil, Vermillion Venturer, fame +20; EcoReset 1
+trigger Norejaie                          # completed, EcoReset 1: nil; 678
+finish-if-event
+charvar EcoReset 0
+quest Bastok.EcoWarrior accepted
+trigger Norejaie                          # completed, the Bastok one accepted: 682
+finish
+quest Bastok.EcoWarrior available
+quest Windurst.EcoWarrior accepted
+trigger Norejaie                          # completed, the Windurst one accepted: 682
+finish
+quest Windurst.EcoWarrior available
+trigger Norejaie                          # completed, EcoReset 0: 677
+finish option=0                           # nothing
+trigger Norejaie                          # 677 again
+finish option=1                           # the quest deleted and begun again: accepted, Prog 0

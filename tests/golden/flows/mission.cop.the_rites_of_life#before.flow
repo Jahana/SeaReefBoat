@@ -1,0 +1,25 @@
+# The Rites of Life (CoP 1-1) before it begins: a fresh char (current 101, Status 0). A level 75 Warrior of Bastok in
+# Upper Jeuno: the login plays no 2 (section 2 needs current 110); Rosaline and Monberaux: no section (their defaults /
+# script). Ru'Lude Gardens: Auchefort, Baran, Colti: no section 4 (not completed, Status 0): their defaults (145, 150,
+# 153). Into Lower Delkfutt's Tower from Ru'Lude Gardens (prevZone not Qufim): no 22; afterZoneIn: the var 0: nothing.
+# Back to Qufim Island, then in with ENABLE_COP 0 (a GM's setting): section 1 fails: no 22.
+lists UpperJeuno/onZoneIn/1 UpperJeuno/Rosaline/onTrigger UpperJeuno/Monberaux/onTrigger RuludeGardens/Auchefort/onTrigger LowerDelkfuttsTower/onZoneIn/1 LowerDelkfuttsTower/afterZoneIn/1
+char zone=UpperJeuno pos=-4.2,1.3,47.5 job=WAR lvl=75 nation=1
+login                                   # not current: no 2
+trigger Rosaline                        # no section 4: her default 97
+finish
+walk -41.9,-0.5,-1.9                    # by Monberaux
+trigger Monberaux here                  # no section: his script: 109 (the introduction), then 28
+finish                                  # 109: the introduction seen
+finish                                  # 28
+warp 4,2.5,100 RuludeGardens
+trigger Auchefort                       # no section 4: his default 145
+finish
+trigger Baran                           # 150
+finish
+trigger Colti                           # 153
+finish
+warp 460.022,-1.77,-103.442 LowerDelkfuttsTower   # from Ru'Lude Gardens: no 22; afterZoneIn: the var 0: nothing
+warp -286.271,-21.619,320.084 QufimIsland
+setting ENABLE_COP 0
+warp 460.022,-1.77,-103.442 LowerDelkfuttsTower   # from Qufim, ENABLE_COP 0: section 1 fails: no 22

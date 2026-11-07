@@ -1,0 +1,23 @@
+# Knocking on Forbidden Doors (otherAreas 78): the shop below the purchase cost, 99999 gil, the Galka Mannequin held (pose
+# 0; the chain before it completed). Update option 0: richEnough 0 (99999); 18: the Galka's pose (0). Finish option 10:
+# 200 taken: race ((10 - 11) % 8) + 1 = 8 (Lua's floored %), pose floor(10 / 32) = 0; 99799 left. Option 82: 200 taken:
+# race ((82 - 11) % 8) + 1 = 8, pose floor(82 / 32) = 2: the Galka's pose 2 (its exdata); 99599 left; update 18: (1, 128,
+# 18, 2). The purchase short of 100000 (option 1 at 99999: delGil fails) is not in the trace: the engine's `lua: delGil`
+# line is refused by the recorder; XI.Verify.Quests `oa g4 kofd` proves it.
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/Fyi_Chalmwoh/onTrade Mhaura/onEventUpdate/321 Mhaura/onEventFinish/319 Mhaura/onEventFinish/321
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30 gil=99999
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile completed
+quest OtherAreas.KnockingOnForbiddenDoors completed
+keyitem BetterHumesAndMannequins
+item GalkaMannequin
+login
+trigger Fyi_Chalmwoh                    # 321 (mask 128, ..., gil 99999)
+update 321 option=0                     # richEnough 0 (99999): (0, 128, 0)
+update 321 option=18                    # the Galka's pose: (1, 128, 18, 0)
+finish option=10                        # 200 taken: race 8 (floored %), pose 0; 99799
+trigger Fyi_Chalmwoh                    # 321
+finish option=82                        # 200 taken: race 8, pose 2; 99599
+trigger Fyi_Chalmwoh                    # 321
+update 321 option=18                    # the Galka's pose: (1, 128, 18, 2)
+finish option=0                         # nothing

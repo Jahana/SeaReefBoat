@@ -1,0 +1,76 @@
+# Raptor Rapture (adoulin, call-only): a level 99 Warrior in Western Adoulin. Status 4 while available (a GM): Gontrain
+# (default 5042: his talks go in pairs): nothing from the quest. Status 2 (a GM: nothing in the game sets it, see
+# #intro): the zone-in by warp: 5056, finished on 0: status 3; status 2 again, finished on 2: status 3. Pagnelle: 5061,
+# finished on 0, on 2: nothing; on 1: added, status 4. A rezone at 4: no 5056. Status 4: Pagnelle 5033; Gontrain 5034,
+# finished: status 5; Gontrain at 5: nothing. Status 5: Pagnelle 5035, finished: status 6. Status 6: without the
+# Rockberries 5036; with two of the three (each left out in turn, GMs) 5036; with the three 5037, finished: the berries
+# taken, status 7. Status 7: 5038. Status 9, 3 (GMs): nothing. Status 8 (a GM; nothing sets it): 5039, finished:
+# status 0, completed (the raw completeQuest), 1000 bayld, BAYLD_OBTAINED, 30 fame, needToZone. Completed: 5040; after a
+# rezone 5041. Gontrain at status 4, completed (a GM): nothing from the quest.
+lists WesternAdoulin/Pagnelle/onTrigger WesternAdoulin/Gontrain/onTrigger WesternAdoulin/onZoneIn/1 WesternAdoulin/onEventFinish/5056 WesternAdoulin/onEventFinish/5061 WesternAdoulin/onEventFinish/5034 WesternAdoulin/onEventFinish/5035 WesternAdoulin/onEventFinish/5037 WesternAdoulin/onEventFinish/5039
+char zone=WesternAdoulin pos=-6.5,0,-100 job=WAR lvl=99
+login
+charvar Raptor_Rapture_Status 4         # a GM
+trigger Gontrain                        # available at 4: 5042
+finish-if-event
+trigger Gontrain                        # his script, available: nothing: 5042
+finish-if-event
+charvar Raptor_Rapture_Status 2         # a GM
+warp -6.5,0,-100 WesternAdoulin option=0  # the zone-in at status 2: 5056, finished on 0: status 3
+charvar Raptor_Rapture_Status 2         # a GM
+warp -6.5,0,-100 WesternAdoulin option=2  # 5056, finished on 2: status 3
+trigger Pagnelle                        # available, status 3: 5061
+finish option=0                         # not option 1: nothing
+trigger Pagnelle                        # 5061
+finish option=2                         # not option 1: nothing
+trigger Pagnelle                        # 5061
+finish option=1                         # added; status 4
+rezone                                  # the zone-in at status 4: no 5056
+trigger Pagnelle                        # status 4: 5033
+finish
+trigger Gontrain                        # status 4: 5042
+finish-if-event
+trigger Gontrain                        # his script, status 4: 5034
+finish-if-event                         # 5034's finish: status 5
+trigger Gontrain                        # status 5: 5042
+finish-if-event
+trigger Gontrain                        # his script, status 5: nothing: 5042
+finish-if-event
+trigger Pagnelle                        # status 5: 5035
+finish                                  # status 6
+trigger Pagnelle                        # status 6, no berries: 5036
+finish
+keyitem Rockberry2                      # GMs (nothing gives them)
+keyitem Rockberry3
+trigger Pagnelle                        # no Rockberry1: 5036
+finish
+keyitem Rockberry1                      # a GM
+delkeyitem Rockberry2                   # a GM
+trigger Pagnelle                        # no Rockberry2: 5036
+finish
+keyitem Rockberry2                      # a GM
+delkeyitem Rockberry3                   # a GM
+trigger Pagnelle                        # no Rockberry3: 5036
+finish
+keyitem Rockberry3                      # a GM
+trigger Pagnelle                        # status 6 with the berries: 5037
+finish                                  # the berries taken; status 7
+trigger Pagnelle                        # status 7: 5038
+finish
+charvar Raptor_Rapture_Status 9         # a GM
+trigger Pagnelle                        # accepted, status 9: no arm: nothing
+charvar Raptor_Rapture_Status 3         # a GM
+trigger Pagnelle                        # accepted, status 3: no arm: nothing
+charvar Raptor_Rapture_Status 8         # a GM (nothing sets it)
+trigger Pagnelle                        # status 8: 5039
+finish                                  # status 0, completed, 1000 bayld, BAYLD_OBTAINED, 30 fame, needToZone
+trigger Pagnelle                        # completed, needing to zone: 5040
+finish
+rezone
+trigger Pagnelle                        # completed, zoned: 5041
+finish
+charvar Raptor_Rapture_Status 4         # a GM
+trigger Gontrain                        # completed at 4: 5042
+finish-if-event
+trigger Gontrain                        # his script, completed: nothing: 5042
+finish-if-event

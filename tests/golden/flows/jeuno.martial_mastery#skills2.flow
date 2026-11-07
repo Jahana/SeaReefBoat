@@ -1,0 +1,35 @@
+# Martial Mastery (jeuno 167), the listed skills a Warrior has no 357 in, each alone at 357 on a level 96 char whose job
+# caps it at 357 or more: Hand-to-Hand (main, a Monk), Katana (nin, a Ninja), Great Katana (sam, a Samurai), Archery and
+# Marksmanship (rng, a Ranger). Each: progressEvent 10196, finished (begun), the quest set available again by a GM and
+# the skill back to 0. The Ninja's Throwing at 357 (its cap at 96 is 403; Throwing is not in the list): the default
+# 10045 (0, 0, 2, 0).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10196
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=MNK lvl=96
+char nin zone=RuludeGardens pos=10.0,1.5,119.9 job=NIN lvl=96
+char sam zone=RuludeGardens pos=10.0,1.5,119.9 job=SAM lvl=96
+char rng zone=RuludeGardens pos=10.0,1.5,119.9 job=RNG lvl=96
+login
+skill HandToHand 3570                   # a GM
+trigger Nomad_Moogle                    # Hand-to-Hand 357: 10196
+finish                                  # begun
+nin: login
+nin: skill Throwing 3570                # a GM
+nin: trigger Nomad_Moogle               # Throwing 357, not a listed skill: the default 10045 (0, 0, 2, 0)
+nin: finish
+nin: skill Throwing 0
+nin: skill Katana 3570
+nin: trigger Nomad_Moogle               # Katana 357: 10196
+nin: finish                             # begun
+sam: login
+sam: skill GreatKatana 3570
+sam: trigger Nomad_Moogle               # Great Katana 357: 10196
+sam: finish                             # begun
+rng: login
+rng: skill Archery 3570
+rng: trigger Nomad_Moogle               # Archery 357: 10196
+rng: finish                             # begun
+rng: quest Jeuno.MartialMastery available
+rng: skill Archery 0
+rng: skill Marksmanship 3570
+rng: trigger Nomad_Moogle               # Marksmanship 357: 10196
+rng: finish                             # begun

@@ -1,0 +1,28 @@
+# Omens' 32001 arms the main flow leaves: two level 50 Blue Mages with Omens accepted at Prog 0 (a GM), at the Navukgo
+# Execution Chamber's gate. Main: entered (option 33: index 2, area 1), IMMORTAL_FLAN killed: won, 32001 opens in the
+# kill step; battlefieldWin cleared by a GM with 32001 open: finished: nothing (Prog 0). bob: entered in area 2 (option
+# 34; main stays in area 1), Prog 2 set by a GM inside (the entry needs the requiredValue 0), area 2's flan
+# (IMMORTAL_FLAN+7) killed: 32001 with battlefieldWin 1122 at Prog 2 (not 0): nothing (Prog stays 2).
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventFinish/32001
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=BLU lvl=50
+char bob zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=BLU lvl=50
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings completed
+quest AhtUrhgan.Omens accepted
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: quest AhtUrhgan.Beginnings completed
+bob: quest AhtUrhgan.Omens accepted
+login
+trigger _1s0                            # Prog 0: the 32000 menu
+update 32000 option=33                  # area 1: registered, entered
+finish
+kill IMMORTAL_FLAN                      # won: 32001 opens
+localvar battlefieldWin 0               # a GM, 32001 open
+finish                                  # battlefieldWin 0: nothing (Prog 0)
+bob: login
+bob: trigger _1s0                       # Prog 0: the menu
+bob: update 32000 option=34             # area 2: registered, entered
+bob: finish
+bob: charvar Quest[6][22]Prog 2         # a GM, inside
+bob: kill IMMORTAL_FLAN+7               # area 2's flan: won: 32001 opens
+bob: finish                             # battlefieldWin 1122 but Prog 2: nothing

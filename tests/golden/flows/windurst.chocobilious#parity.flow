@@ -1,0 +1,13 @@
+# Chocobilious (windurst 27), completion parity: 231's finish is npcUtil.completeQuest step for step (fame 20 Windurst,
+# the gil, ChocobiliousQuest cleared), ending in the raw player:completeQuest, so a GM's Quest[2][27]Prog survives the
+# completion (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) at var 2 beside
+# Kuoh Rhel.
+char zone=WindurstWoods pos=129.5,-5.0,-104.0 job=WAR lvl=75
+login
+quest Windurst.Chocobilious accepted
+charvar ChocobiliousQuest 2
+charvar Quest[2][27]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Kuoh_Rhel                       # his default 222
+finish
+trigger Kuoh_Rhel                       # his script, accepted, var 2: 231
+finish                                  # fame 20; 1500 gil; var cleared; completed; needToZone; Prog kept

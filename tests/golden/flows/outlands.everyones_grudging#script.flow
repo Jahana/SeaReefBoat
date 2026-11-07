@@ -1,0 +1,32 @@
+# Everyone's Grudging: Jakoh's Events (108, 110) and Romaa's (276) alternate with their scripts (UseFallback). A level 75
+# Warrior at Windurst fame 488, A Question of Taste completed at Prog 0 (no reply of it at Jakoh), Everyone's Grudging
+# accepted at Prog 0 and TuningOut_Progress 2 (GMs: Jakoh's script starts 294, Romaa's 295). Jakoh: 108, then his
+# script's 294, then 108 again (UseFallback set); Prog 1 (a GM): his script's turn: 294 (a progress event would play
+# 110 here). Romaa: 276, then her script's 295 (its finish: TuningOut_Progress 3), 276 again, then her script's 296
+# (TuningOut_Progress 3). Jakoh: 110 (his script does nothing at 3), finished: completed (fame +60, 11000 gil).
+lists Kazham/Jakoh_Wahcondalo/onTrigger Kazham/Romaa_Mihgo/onTrigger
+char zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+fame Windurst 488
+quest Outlands.AQuestionOfTaste completed
+quest Outlands.EveryonesGrudging accepted
+charvar TuningOut_Progress 2
+login
+trigger Jakoh_Wahcondalo                # Prog 0: 108
+finish
+trigger Jakoh_Wahcondalo                # his script's turn: 294
+finish
+trigger Jakoh_Wahcondalo                # 108
+finish
+charvar Quest[5][4]Prog 1               # a GM
+trigger Jakoh_Wahcondalo                # his script's turn: 294
+finish
+trigger Romaa_Mihgo                     # 276
+finish
+trigger Romaa_Mihgo                     # her script's turn: 295
+finish                                  # her script: TuningOut_Progress 3
+trigger Romaa_Mihgo                     # 276
+finish
+trigger Romaa_Mihgo                     # her script's turn: 296 (TuningOut_Progress 3)
+finish
+trigger Jakoh_Wahcondalo                # Prog 1: 110 (his script does nothing at 3)
+finish                                  # completed: Windurst fame +60, 11000 gil

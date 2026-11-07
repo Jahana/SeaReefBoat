@@ -1,0 +1,47 @@
+# The Weekly Adventurer (crystalWar 2): a level 99 Warrior in Crawlers' Nest [S] (missions as A Little Knowledge's
+# flows). Naiko-Paneiko 16, finished: the Scoop-Dedicated Linkpearl, begun; Prog 0: 21. Rolanberry Fields [S]: Rakula-
+# Motakula 3, finished on option 1 (the wrong category): Prog 2; Prog 2: nil (I_CANNOT_HELP_YOU_NOW). Crawlers' Nest
+# [S]: Naiko-Paneiko at Prog 2: Prog 4 at the talk, 17. Rakula-Motakula at Prog 4: 3 (0, 0, 0, 0, 0, 0, 0, 1),
+# finished on option 2 (wrong information): Prog 3. Naiko-Paneiko at Prog 3: Prog 4, 18; Prog 4: 21. Rakula-Motakula
+# at Prog 4: 3, finished on option 0 (passed): Prog 1; Prog 1: nil. Naiko-Paneiko at Prog 1: 19 (171, 1, 2984, 3, 0,
+# 10, 0, 0), finished: the linkpearl taken, completed (2000 exp, 2000 gil x GIL_RATE 1.03125 = 2062.5 paid as 2063,
+# the Map of Fort Karugo-Narugo). Naiko-Paneiko: 20 (replaceDefault).
+lists CrawlersNestS/Naiko-Paneiko/onTrigger CrawlersNestS/onEventFinish/16 CrawlersNestS/onEventFinish/19 RolanberryFieldsS/Rakula-Motakula/onTrigger RolanberryFieldsS/onEventFinish/3
+char zone=CrawlersNestS pos=295.53,-33.443,-28.637 job=WAR lvl=99
+setting GIL_RATE 1.03125
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Naiko-Paneiko                   # available: 16
+finish                                  # the linkpearl; begun
+trigger Naiko-Paneiko                   # Prog 0: 21
+finish
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+trigger Rakula-Motakula                 # Prog 0: 3
+finish option=1                         # the wrong category: Prog 2
+trigger Rakula-Motakula                 # Prog 2: nil (I_CANNOT_HELP_YOU_NOW)
+finish-if-event
+warp 295.53,-33.443,-28.637 CrawlersNestS
+trigger Naiko-Paneiko                   # Prog 2: Prog 4 at the talk; 17
+finish
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+trigger Rakula-Motakula                 # Prog 4: 3 (0, 0, 0, 0, 0, 0, 0, 1)
+finish option=2                         # wrong information: Prog 3
+warp 295.53,-33.443,-28.637 CrawlersNestS
+trigger Naiko-Paneiko                   # Prog 3: Prog 4 at the talk; 18
+finish
+trigger Naiko-Paneiko                   # Prog 4: 21
+finish
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+trigger Rakula-Motakula                 # Prog 4: 3 (..., 1)
+finish option=0                         # the quiz passed: Prog 1
+trigger Rakula-Motakula                 # Prog 1: nil (I_CANNOT_HELP_YOU_NOW)
+finish-if-event
+warp 295.53,-33.443,-28.637 CrawlersNestS
+trigger Naiko-Paneiko                   # Prog 1: 19 (171, 1, 2984, 3, 0, 10, 0, 0)
+finish                                  # the linkpearl taken (silently); completed (2000 exp, 2063 gil, the map)
+trigger Naiko-Paneiko                   # completed: 20 (replaceDefault)
+finish

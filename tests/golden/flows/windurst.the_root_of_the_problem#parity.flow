@@ -1,0 +1,14 @@
+# The Root of the Problem (windurst 68), completion parity: 281's finish with the petasos given is the Lua's raw
+# player:completeQuest (then the fame, the title, the key item), so a GM's Quest[2][68]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). The Three Magi and Recollections completed and
+# this quest accepted at rootProblem 3 with the Sluice Surveyor MK I (GM), beside Chumimi.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi completed
+quest Windurst.Recollections completed
+quest Windurst.TheRootOfTheProblem accepted
+charvar rootProblem 3
+keyitem SluiceSurveyorMkI
+login
+charvar Quest[2][68]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Chumimi                         # var 3: 281
+finish                                  # the Wizard's Petasos; completed; fame 20; the title; the KI taken; Prog kept

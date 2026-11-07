@@ -1,0 +1,22 @@
+# Shady Business (bastok 8): Talib in Port Bastok. The Beauty and the Galka guard, the event 90 begin only while
+# available, the zinc trade (four chunks, not three), the completion repeated: the section holds once Beauty and the
+# Galka is completed, and its trade answers only while the quest is accepted or completed (user ruling 2026-11-05, kept
+# bugs: the Lua's trade also answered while available; #unaccepted).
+lists PortBastok/Talib/onTrigger PortBastok/Talib/onTrade PortBastok/onEventFinish/90 PortBastok/onEventFinish/91
+char zone=PortBastok pos=-100,4.649,28.8
+item ChunkOfZincOre x11
+login
+trigger Talib                   # Beauty and the Galka not completed: its offer 2, not 90
+finish-if-event                 # Beauty and the Galka accepted
+quest Bastok.BeautyAndTheGalka completed
+trigger Talib                   # 90
+finish                          # available: accepted
+trigger Talib                   # 90 again
+finish                          # accepted: no change
+trade Talib ChunkOfZincOre x3   # three chunks: nothing
+trade Talib ChunkOfZincOre x4   # 91
+finish                          # completed: 350 gil, Norg fame 30, four chunks gone
+trigger Talib                   # completed: 90 still
+finish                          # completed: not accepted again
+trade Talib ChunkOfZincOre x4   # completed: 91 again
+finish                          # the repeat: 350 gil, Norg fame 30 again

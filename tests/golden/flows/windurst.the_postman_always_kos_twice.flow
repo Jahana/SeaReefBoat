@@ -1,0 +1,79 @@
+# The Postman Always KO's Twice (windurst 19): Ambrosius, Orudoba-Sondeba, Tsuaora-Tsuora (Windurst Walls; no default
+# action, no container). The four letters are rare (one each held): GM `item` steps give them again between trades.
+# Available: Orudoba-Sondeba 43, Tsuaora-Tsuora 42 (their scripts); Ambrosius 48, option 1: nothing; a letter: nothing;
+# 48, option 0: begun. Accepted: 49; Orudoba-Sondeba 51, Tsuaora-Tsuora 50; a letter and another item: nothing (count 2,
+# one point); the four: 55 (500, 4): the four taken, 500 gil, fame 10, completed. Completed: 56; Orudoba-Sondeba 43,
+# Tsuaora-Tsuora 42; one / two / three / four letters: 57 (50) / 58 (150, 2) / 59 (250, 3) /
+# 60 (500, 4): taken, the gil, fame 10. Set accepted again (GMs): one letter: 52 (50): completed;
+# again, two: 53 (150, 2); again, three: 54 (250, 3).
+char zone=WindurstWalls pos=63.5,-2.5,-63.2 job=WAR lvl=75
+item TornEpistle
+item MuddyBarTab
+item OddPostcard
+item DampEnvelope
+item BlockOfAnimalGlue
+login
+trigger Orudoba-Sondeba                 # not accepted: his 43
+finish
+trigger Tsuaora-Tsuora                  # not accepted: her 42
+finish
+trigger Ambrosius                       # available: 48
+finish option=1                         # not 0: nothing
+trade Ambrosius TornEpistle x1          # available: nothing
+trigger Ambrosius                       # 48
+finish option=0                         # begun
+trigger Ambrosius                       # accepted: 49
+finish
+trigger Orudoba-Sondeba                 # accepted: 51
+finish
+trigger Tsuaora-Tsuora                  # accepted: 50
+finish
+trigger Ambrosius                       # 49 (back beside him)
+finish
+trade Ambrosius TornEpistle x1 BlockOfAnimalGlue x1  # one point, two items: nothing
+trade Ambrosius TornEpistle x1 MuddyBarTab x1 OddPostcard x1 DampEnvelope x1  # four: 55 (500, 4)
+finish                                  # the four taken; 500 gil; fame 10; completed
+trigger Ambrosius                       # completed: 56
+finish
+trigger Orudoba-Sondeba                 # completed: his 43
+finish
+trigger Tsuaora-Tsuora                  # completed: her 42
+finish
+trigger Ambrosius                       # 56 (back beside him)
+finish
+item TornEpistle
+trade Ambrosius TornEpistle x1          # completed, one: 57 (50)
+finish                                  # taken; 50 gil; fame 10
+item TornEpistle
+item MuddyBarTab
+trade Ambrosius TornEpistle x1 MuddyBarTab x1  # two: 58 (150, 2)
+finish                                  # taken; 150 gil; fame 10
+item TornEpistle
+item MuddyBarTab
+item OddPostcard
+trade Ambrosius TornEpistle x1 MuddyBarTab x1 OddPostcard x1  # three: 59 (250, 3)
+finish                                  # taken; 250 gil; fame 10
+item TornEpistle
+item MuddyBarTab
+item OddPostcard
+item DampEnvelope
+trade Ambrosius TornEpistle x1 MuddyBarTab x1 OddPostcard x1 DampEnvelope x1  # four: 60 (500, 4)
+finish                                  # taken; 500 gil; fame 10
+quest Windurst.ThePostmanAlwaysKosTwice available
+quest Windurst.ThePostmanAlwaysKosTwice accepted
+item OddPostcard
+trade Ambrosius OddPostcard x1          # accepted, one: 52 (50)
+finish                                  # taken; 50 gil; fame 10; completed
+quest Windurst.ThePostmanAlwaysKosTwice available
+quest Windurst.ThePostmanAlwaysKosTwice accepted
+item OddPostcard
+item DampEnvelope
+trade Ambrosius OddPostcard x1 DampEnvelope x1  # accepted, two: 53 (150, 2)
+finish                                  # taken; 150 gil; fame 10; completed
+quest Windurst.ThePostmanAlwaysKosTwice available
+quest Windurst.ThePostmanAlwaysKosTwice accepted
+item TornEpistle
+item OddPostcard
+item DampEnvelope
+trade Ambrosius TornEpistle x1 OddPostcard x1 DampEnvelope x1  # accepted, three: 54 (250, 3)
+finish                                  # taken; 250 gil; fame 10; completed

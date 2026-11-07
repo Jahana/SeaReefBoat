@@ -1,0 +1,35 @@
+# Confessions of a Bellmaker (otherAreas 79): Riverne - Site #A01's Stone Monument (no script; default MONUMENT) and the
+# NM Arcane Phantasm; Bastok Markets' Reinberta and Northern San d'Oria's Mevreauche (guild masters: a script,
+# xi.crafting.guildMasterOnTrigger: 300 / 626). Available: a trade to the Monument: no trade handler (nothing). The
+# Monument 101, finished: begun, the Ornamented Scroll. The Monument at Prog 0: nil (MONUMENT). Reinberta, Prog 0: 402
+# (Progress), finished: Prog 1; again (Prog 1): nil: her guild script runs (300). Mevreauche, Prog 1: 74, finished: Prog
+# 2; again: nil: his guild script (626). The Monument, Prog 2: 102, finished: Prog 3. Prog 3: Arcane Phantasm popped
+# (claimed), noAction; again (up: popFromQM refuses): noAction. Killed: Prog 4. The Monument: 103, finished: completed
+# (Minstrel's Dagger), the scroll taken. Completed: no section: MONUMENT.
+lists RiverneSiteA01/Stone_Monument/onTrigger RiverneSiteA01/Arcane_Phantasm/onMobDeath RiverneSiteA01/onEventFinish/101 RiverneSiteA01/onEventFinish/102 RiverneSiteA01/onEventFinish/103 BastokMarkets/Reinberta/onTrigger BastokMarkets/onEventFinish/402 NorthernSanDoria/Mevreauche/onTrigger NorthernSanDoria/onEventFinish/74
+char zone=RiverneSiteA01 pos=-731.6,-45.9,-300.7 job=WAR lvl=75
+item ChocoboFeather
+login
+trade Stone_Monument ChocoboFeather x1  # available: no trade handler; nothing
+trigger Stone_Monument                  # available: 101
+finish                                  # begun; the Ornamented Scroll
+trigger Stone_Monument                  # Prog 0: nil; MONUMENT
+warp -189.1,-6.8,-59.4 BastokMarkets
+trigger Reinberta                       # Prog 0: 402
+finish                                  # Prog 1
+trigger Reinberta                       # Prog 1: nil; her guild script: 300
+finish
+warp -192.1,11,148.7 NorthernSanDoria
+trigger Mevreauche                      # Prog 1: 74
+finish                                  # Prog 2
+trigger Mevreauche                      # Prog 2: nil; his guild script: 626
+finish
+warp -731.6,-45.9,-300.7 RiverneSiteA01
+trigger Stone_Monument                  # Prog 2: 102
+finish                                  # Prog 3
+trigger Stone_Monument                  # Prog 3: Arcane Phantasm popped (claimed); noAction
+trigger Stone_Monument                  # Prog 3, up: popFromQM refuses; noAction
+kill ARCANE_PHANTASM                    # Prog 4
+trigger Stone_Monument                  # Prog 4: 103
+finish                                  # completed; Minstrel's Dagger; the scroll taken
+trigger Stone_Monument                  # completed: no section; MONUMENT

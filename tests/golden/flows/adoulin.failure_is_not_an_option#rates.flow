@@ -1,0 +1,15 @@
+# F.A.I.L.ure Is Not an Option (adoulin 29, call-only), the rewards at fractional rates: a level 99 Warrior in
+# Western Adoulin, EXP_RATE 1.0625 and BAYLD_RATE 1.375 (settings), the quest accepted with the Hunk of Bedrock (GMs).
+# Clautaire: 545, then 76, finished: 1000 * 1.0625 = 1062.5 exp and 500 * 1.375 = 687.5 bayld, each read into an integer
+# half away from zero (1063, 688), BAYLD_OBTAINED with the same amount; 30 fame.
+lists WesternAdoulin/Clautaire/onTrigger WesternAdoulin/onEventFinish/76
+char zone=WesternAdoulin pos=42.5,4,-159 job=WAR lvl=99
+setting EXP_RATE 1.0625
+setting BAYLD_RATE 1.375
+quest Adoulin.FailureIsNotAnOption accepted
+keyitem HunkOfBedrock
+login
+trigger Clautaire                       # the Hunk: 76 or 545
+finish-if-event
+trigger Clautaire                       # the other; 76's finish: 1062.5 exp, 687.5 bayld
+finish-if-event

@@ -1,0 +1,16 @@
+# The Goblin Tailor (jeuno 42): the chests' section runs at status >= accepted, so while completed too. Completed by a
+# GM, [RSE]Gear 15, a Hume male in week 1000: Gusgen Mines' chest, no pattern: the Magical Pattern; Guttrix: [RSE]Gear
+# 15 first: 10019 (the pattern held).
+lists LowerJeuno/Guttrix/onTrigger LowerJeuno/onEventFinish/10016 LowerJeuno/onEventFinish/10018 GusgenMines/Treasure_Chest/onTrade MazeOfShakhrami/Treasure_Chest/onTrade OrdellesCaves/Treasure_Chest/onTrade
+char zone=GusgenMines pos=208.7,-59.2,-101 job=WAR lvl=75
+quest Jeuno.TheGoblinTailor completed
+charvar [RSE]Gear 15
+item GusgenChestKey
+login
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest GusgenChestKey x1  # completed, the week's chest, no pattern: the Magical Pattern
+tick 4500                               # the chest opened
+warp -34.5,5.5,-139.7 LowerJeuno
+trigger Guttrix                         # [RSE]Gear 15 first: 10019 (the pattern held)
+finish

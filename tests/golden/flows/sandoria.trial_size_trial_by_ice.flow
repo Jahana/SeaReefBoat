@@ -1,0 +1,44 @@
+# Trial Size Trial by Ice (sandoria 107): Castilchat in Northern San d'Oria (no default action: 711 is his script's
+# else). The guard (main level 20, main job SMN, San d'Oria fame level 2): fame 49 not offered (711); the offer 733 (0,
+# Mini Tuning Fork of Ice, 4, 20) declined (option 0, then option 2: only 1 begins), then option 1 with a full inventory
+# (ITEM_CANNOT_BE_OBTAINED: not begun), then with exactly one free slot (GM storage 31) begun (the fork, ITEM_OBTAINED);
+# 708 while the fork is held; the trades (a bone chip: nothing; the fork with a bone chip: two items, nothing; the fork
+# alone: 734, option 2 nothing, option 0 another fork (rare and held: addItem fails, ITEM_OBTAINED all the same), option
+# 1 xi.teleport.to the Cloister of Frost, the fork kept; the tick and the login finish the zone change). Completed by
+# GM: 736; the fork's trade: nothing. The fork-lost arms are #fork_lost, the level and job sides #level19 and #not_smn,
+# the battlefield #battlefield and #battlefield_held.
+char zone=NorthernSanDoria pos=-187.2,0,109.3 job=SMN lvl=20
+fame Sandoria 49
+item BoneChip
+login
+trigger Castilchat                        # fame 49 (level 1): the quest's nil; his 711
+finish
+fame Sandoria 50
+trigger Castilchat                        # SMN 20, fame level 2: 733 (0, fork, 4, 20)
+finish option=0                           # declined: nothing
+trigger Castilchat                        # 733
+finish option=2                           # option 2: nothing (only option 1 begins)
+trigger Castilchat                        # 733
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork); not begun
+storage inventory 31                      # a GM: one free slot
+trigger Castilchat                        # 733
+finish option=1                           # one free slot: begun; the Mini Tuning Fork of Ice, ITEM_OBTAINED
+free-inventory
+trigger Castilchat                        # accepted, the fork held: 708
+finish
+trade Castilchat BoneChip x1              # SMN, accepted, not the fork: nothing
+trade Castilchat MiniTuningForkOfIce x1 BoneChip x1 # the fork and a chip (two items): nothing
+trade Castilchat MiniTuningForkOfIce x1   # SMN, accepted, the fork alone: 734 (0, fork, 4, 20)
+finish option=2                           # option 2: nothing
+trade Castilchat MiniTuningForkOfIce x1   # 734
+finish option=0                           # another fork: rare and held, addItem fails; ITEM_OBTAINED
+trade Castilchat MiniTuningForkOfIce x1   # 734
+finish option=1                           # xi.teleport.to the Cloister of Frost (the fork kept)
+tick 400                                  # the teleport's zone change: saved at the Cloister of Frost
+login                                     # back in at the teleport's destination (550.403, 0.006, 584.820)
+quest Sandoria.TrialSizeTrialByIce completed
+warp -187.2,0,109.3 NorthernSanDoria
+trigger Castilchat                        # completed: 736
+finish
+trade Castilchat MiniTuningForkOfIce x1   # completed: nothing

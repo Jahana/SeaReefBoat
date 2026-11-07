@@ -1,0 +1,22 @@
+# Trial-Size Trial by Earth (bastok 72): the battlefield. A SMN of level 20 with this quest accepted, Trial by Earth
+# accepted too (no Tuning Fork, so it is not on the menu) and the Mini Tuning Fork of Earth. The fork's trade to
+# EP_Entrance opens the entry menu 32000; its update with option 33 (index 2, arena 1) registers and enters (the fork
+# taken); Titan_Prime_TSTBE of arena 1 (GALGALIM+3) is killed and the win's 32001 opens within the kill step. Its finish
+# runs the handlers in the 32001 order: the battlefield's onEventFinishWin first (Titan learned, TITAN_UNLOCKED, the
+# Scroll of Instant Warp, Bastok fame +20, completeQuest), then this quest's, whose section-2 check now fails (completed:
+# no handler), then Trial by Earth's (accepted; battlefieldWin 578 is not 576: nothing). Back in Port Bastok, Ferrol's
+# 300.
+lists CloisterOfTremors/EP_Entrance/onTrade CloisterOfTremors/onEventFinish/32001 PortBastok/Ferrol/onTrigger
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=20
+quest Bastok.TrialSizeTrialByEarth accepted
+quest Bastok.TrialByEarth accepted
+item MiniTuningForkOfEarth
+login
+trade EP_Entrance MiniTuningForkOfEarth x1  # the fork: the entry menu 32000
+update 32000 option=33         # Trial-Size Trial by Earth (index 2), arena 1: registered, entered, the fork taken
+finish                         # in the arena
+kill GALGALIM+3                # Titan_Prime_TSTBE of arena 1: won, 32001 opens
+finish                         # the battlefield's: Titan, the scroll, fame +20, completed; this quest's: no section; Trial by Earth's: nothing
+warp 33.7,6.5,-39.4 PortBastok
+trigger Ferrol                 # completed: 300
+finish

@@ -1,0 +1,58 @@
+# The Puppet Master (windurst 81): Juroro's arms (Port Bastok) beside Trial by Earth (bastok 61, C#), whose lines on
+# Juroro are the reply-kind competitors: 249 (Progress; offered at Bastok fame level 6, or when completed with its Timer
+# gone), 250 (Event, accepted with the fork). Accepted at Prog 1 by GM, no pendulum:
+# - Trial by Earth accepted (with the fork): the 257 arm is locked; The Puppet Master's 253 and Trial by Earth's 250 are
+#   both Event lines: they cycle (Trial by Earth's container is the earlier: 250 first);
+# - Trial by Earth completed (Timer 0: its 249): 257 (0, the pendulum) and 249 are both Progress: they cycle; 249 declined
+#   (option 0), 257 finished with a full bag (giveItem false, unchecked: nothing);
+# - Trial by Earth available, Bastok fame 0 (not offered): 257 alone, finished with room (the pendulum; Prog stays 1);
+# - the pendulum held, fame 425 (Trial by Earth offered): 249 (Progress) on two talks, 253 (Event) loses.
+# Prog 0 by GM, the pendulum held, fame 425: 256 (progress) and 249 cycle; 256's giveItem fails (the pendulum is rare and
+# held): Prog stays 0. Prog -1 and fame 0: nil (his default 253, no arguments). Prog 2 with Trial by Earth accepted: 258
+# (Progress) beats 250 on two talks (Prog set back to 2 by GM between). Prog 3: nil (Trial by Earth's 250 answers).
+lists PortBastok/Juroro/onTrigger PortBastok/onEventFinish/249 PortBastok/onEventFinish/256 PortBastok/onEventFinish/257 PortBastok/onEventFinish/258
+char zone=PortBastok pos=32.0,7.0,-41.0 job=SMN lvl=75
+quest Windurst.ThePuppetMaster accepted
+charvar Quest[2][81]Prog 1
+quest Bastok.TrialByEarth accepted
+keyitem TuningForkOfEarth
+login
+trigger Juroro                                 # Trial by Earth accepted: 257 locked; Trial by Earth's 250 (both Event: the earlier container's first)
+finish
+trigger Juroro                                 # 253 (0,0,0,0,0, the pendulum, 1) (the cycle)
+finish
+quest Bastok.TrialByEarth completed            # GM (its Timer 0: its 249 again)
+trigger Juroro                                 # Trial by Earth's 249 (both Progress: the earlier container's first)
+fill-inventory
+finish option=0                                # 249 declined: nothing
+trigger Juroro                                 # 257 (0, the pendulum) (the cycle)
+finish option=0                                # 257 with a full bag: giveItem false (unchecked): nothing
+free-inventory
+quest Bastok.TrialByEarth available            # GM (Bastok fame 0: not offered)
+trigger Juroro                                 # Prog 1, no pendulum, Trial by Earth not accepted: 257 (0, the pendulum)
+finish                                         # the Earth Pendulum (Prog stays 1)
+trigger Juroro                                 # the pendulum held: 253 (0,0,0,0,0, the pendulum, 1)
+finish
+fame Bastok 425                                # GM: Trial by Earth offered
+trigger Juroro                                 # Trial by Earth's 249 (Progress) over 253 (Event)
+finish option=0                                # declined
+trigger Juroro                                 # 249 again
+finish option=0                                # declined
+charvar Quest[2][81]Prog 0                     # GM
+trigger Juroro                                 # Trial by Earth's 249 first (both Progress)
+finish option=0                                # 249 declined
+trigger Juroro                                 # 256 (0, the fork, 0, the pendulum) (the cycle)
+finish option=0                                # 256: giveItem false (the pendulum is rare and held): Prog stays 0
+fame Bastok 0                                  # GM
+charvar Quest[2][81]Prog -1                    # GM
+trigger Juroro                                 # Prog -1: nil; his default 253 (no arguments)
+finish-if-event
+quest Bastok.TrialByEarth accepted             # GM
+charvar Quest[2][81]Prog 2                     # GM
+trigger Juroro                                 # Prog 2: 258 (Progress) over Trial by Earth's 250
+finish                                         # Prog 3
+charvar Quest[2][81]Prog 2                     # GM
+trigger Juroro                                 # 258 again
+finish                                         # Prog 3
+trigger Juroro                                 # Prog 3: nil; Trial by Earth's 250
+finish

@@ -1,0 +1,32 @@
+# Missionary Moblin (otherAreas 103): Oldton Movalpolos' Koblakiq (no script; default event 13). A Soiled Letter and a
+# Chocobo Feather. Available: a trade of the letter: no trade handler (the letter kept; nothing). Koblakiq 7, option 0
+# and 2: nothing; option 1: begun. Accepted: 8 (event). The letter traded: 9, finished: completed (4000 gil), the letter
+# taken, the mustZone set (Oldton Movalpolos). Completed with the mustZone: 12. A rezone (the same zone): the mustZone
+# kept (the zone-in clears it only in another zone): 12 again. A warp to Castle Oztroja and back: cleared: Missionary's
+# section off; For the Birds' offer: 14 (0, Arnica Root), finished with option 0: nothing.
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/Koblakiq/onTrade OldtonMovalpolos/onEventFinish/7 OldtonMovalpolos/onEventFinish/9 OldtonMovalpolos/onEventFinish/14
+char zone=OldtonMovalpolos pos=-63.4,22.8,-117.5 job=WAR lvl=75
+item SoiledLetter
+item ChocoboFeather
+login
+trade Koblakiq SoiledLetter x1          # available: no trade handler; nothing (the letter kept)
+trigger Koblakiq                        # available: 7
+finish option=0                         # not 1: nothing
+trigger Koblakiq                        # 7
+finish option=2                         # not 1: nothing
+trigger Koblakiq                        # 7
+finish option=1                         # begun
+trigger Koblakiq                        # accepted: 8
+finish
+trade Koblakiq ChocoboFeather x1        # no letter: nil; nothing (no trade default)
+trade Koblakiq SoiledLetter x1          # the letter: 9
+finish                                  # completed; 4000 gil; the letter taken; mustZone 11
+trigger Koblakiq                        # completed, mustZone: 12
+finish
+rezone                                  # the same zone: the mustZone kept
+trigger Koblakiq                        # 12 again
+finish
+warp -156.5,-17.2,193.5 CastleOztroja   # another zone: the mustZone cleared
+warp -63.4,22.8,-117.5 OldtonMovalpolos
+trigger Koblakiq                        # Missionary off; For the Birds: 14 (0, 1663)
+finish option=0                         # nothing

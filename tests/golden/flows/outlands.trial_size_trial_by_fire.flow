@@ -1,0 +1,58 @@
+# Trial-Size Trial by Fire (outlands 15): Dodmos in Kazham. His default 275 (Kazham's DefaultActions) alternates with
+# his script (interaction_lookup's UseFallback, a local var cleared by zoning): with UseFallback 0 a talk plays 275 and
+# sets it to 1; the next talk runs the script (the call) and resets it to 0, and plays 275 again when the script starts
+# nothing. So each script talk below follows a default talk. The guard (main level 20, main job SMN, Windurst fame level
+# 2): fame 49 not offered (275 on both talks); the offer 286 (0, Mini Tuning Fork of Fire, 2, 20) declined, option 2
+# (nothing), option 1 with a full inventory (ITEM_CANNOT_BE_OBTAINED: not begun), then begun with one free slot (the
+# fork, ITEM_OBTAINED); 272 while the fork is held; the trades (a bone chip: nothing; the fork: 287, declined, option 2
+# (nothing), then option 1: xi.teleport.to the Cloister of Flames, the fork kept; the tick and the login finish the zone
+# change). A trade while available is #level19's. Completed by GM: 289; the fork's trade: nothing. The fork-lost arms
+# are #fork_lost, the level and job sides #level19 and #not_smn, the battlefield #battlefield.
+char zone=Kazham pos=100.4,-14.0,-97.7 job=SMN lvl=20
+fame Windurst 49
+item BoneChip
+login
+trigger Dodmos                            # UseFallback 0: the default 275
+finish
+trigger Dodmos                            # the script: fame 49 (level 1): the quest's nil; the default 275
+finish
+fame Windurst 50
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # the script: SMN 20, fame level 2: 286 (0, fork, 0, 20)
+finish option=0                           # declined: nothing
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # 286
+finish option=2                           # option 2: nothing (the finish wants option 1)
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # 286
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork); not begun
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # 286
+finish option=1                           # begun; the Mini Tuning Fork of Fire, ITEM_OBTAINED
+free-inventory
+trigger Dodmos                            # the default 275
+finish
+trigger Dodmos                            # accepted, the fork held: 272
+finish
+trade Dodmos BoneChip x1                  # SMN, accepted, not the fork: nothing
+trade Dodmos MiniTuningForkOfFire x1      # SMN, accepted, the fork: 287 (0, fork, 0, 20)
+finish option=0                           # option 0: nothing, the fork kept
+trade Dodmos MiniTuningForkOfFire x1      # 287
+finish option=2                           # option 2: nothing, the fork kept
+trade Dodmos MiniTuningForkOfFire x1      # 287 again
+finish option=1                           # xi.teleport.to the Cloister of Flames (the fork kept)
+tick 400                                  # the zone change the teleport set: the char saved at the Cloister of Flames (207)
+login                                     # back in at the teleport's destination (-716.461, 0.407, -606.661)
+quest Outlands.TrialSizeTrialByFire completed
+warp 100.4,-14.0,-97.7 Kazham
+trigger Dodmos                            # the default 275 (the zone change cleared UseFallback)
+finish
+trigger Dodmos                            # completed: 289
+finish
+trade Dodmos MiniTuningForkOfFire x1      # completed: nothing

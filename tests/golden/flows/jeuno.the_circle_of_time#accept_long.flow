@@ -1,0 +1,27 @@
+# The Circle of Time (jeuno 65), Imasuke's long offer 30 accepted at once (option 1: begun, Prog 3), and Chalvatot's 99
+# accepted at once (option 1: the Moon Ring, Prog 7) from a GM-set Prog 5, each first answered with option 2 (neither
+# branch: nothing); then Imasuke at Prog 7 (accepted, none of
+# Prog 3-5: nil, his default 12).
+lists PortJeuno/Imasuke/onTrigger PortJeuno/onEventFinish/30 ChateauDoraguille/Chalvatot/onTrigger ChateauDoraguille/onEventFinish/99
+char zone=PortJeuno pos=-165,11,94.5 job=BRD lvl=50
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+quest Jeuno.PathOfTheBard completed
+quest Jeuno.PainfulMemory completed
+quest Jeuno.TheRequiem completed
+keyitem StarRing1
+charvar Quest[3][65]Prog 1
+login
+trigger Imasuke                             # Prog 1: 30
+finish option=2                             # neither 1 nor 0: nothing (Prog stays 1)
+trigger Imasuke                             # 30 again
+finish option=1                             # begun, Prog 3
+charvar Quest[3][65]Prog 5
+warp -104,0,70.5 ChateauDoraguille
+trigger Chalvatot                           # Prog 5: 99
+finish option=2                             # neither 1 nor 0: nothing (Prog stays 5)
+trigger Chalvatot                           # 99 again
+finish option=1                             # the Moon Ring, Prog 7
+warp -165,11,94.5 PortJeuno
+trigger Imasuke                             # accepted, Prog 7: nil; default 12
+finish

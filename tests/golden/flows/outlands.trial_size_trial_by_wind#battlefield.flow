@@ -1,0 +1,24 @@
+# Trial-Size Trial by Wind (outlands 197): the battlefield. A SMN of level 20 with this quest accepted and the Mini
+# Tuning Fork. The fork's trade to WP_Entrance opens the entry menu 32000; its update with option 33 (index 2,
+# arena 1) registers and enters (the fork taken); the inventory filled by GM inside the arena; Garuda_Prime_TSTBW of
+# arena 1 (OGMIOS+3) is killed and the win's 32001 opens within the kill step. Its finish runs
+# content:onEventFinishWin, which calls this quest: Garuda learned (GARUDA_UNLOCKED 0, 0, 3); the Scroll of Instant
+# Warp does not fit (npcUtil.giveItem: ITEM_CANNOT_BE_OBTAINED), the completion goes on: San d'Oria and Bastok fame
+# +10, completed. Back in town, Rahi Fohlatti's default 71, then her script's 111. A win while completed (the spell
+# known, the scroll given) is #battlefield_again (a second entry here would land in the won arena, which the char has not left).
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByWind accepted
+item MiniTuningForkOfWind
+login
+trade WP_Entrance MiniTuningForkOfWind x1  # the fork: the entry menu 32000
+update 32000 option=33                    # Trial-Size Trial by Wind (index 2), arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+fill-inventory
+kill OGMIOS+3                             # Garuda_Prime_TSTBW of arena 1: won, 32001 opens
+finish                                    # Garuda learned; the scroll does not fit; San d'Oria and Bastok fame +10; completed
+free-inventory
+warp -13.5,7.9,-9.5 Rabao
+trigger Rahi_Fohlatti                     # UseFallback 0: the default 71
+finish
+trigger Rahi_Fohlatti                     # completed: 111
+finish

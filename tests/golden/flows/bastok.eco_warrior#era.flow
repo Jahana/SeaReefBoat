@@ -1,0 +1,20 @@
+# Eco-Warrior (Bastok) with its era module (modules/era/lua/quests/bastok/eco_warrior.lua, enabled by its condition
+# xi.pre(xi.expansion.ROV): RESTRICT_CONTENT 1, ENABLE_ROV 0), which replaces state 2's Gusgen Mines finish of 13 with a
+# copy whose Level Restriction is 20 (the quest's own is 25). Accepted, no ore, at Degga: 13 with option 0 (the module's
+# handler, its option-not-1 side: nothing), 13 with option 1 (the module's handler: Level Restriction 20, ON_ZONE: the
+# char's level shows 20), then the restriction's 15 (the quest's own, option 0: off) and 13 again.
+module modules/era/lua/quests/bastok/eco_warrior.lua
+lists GusgenMines/Degga/onTrigger GusgenMines/onEventFinish/13 GusgenMines/onEventFinish/15
+char zone=GusgenMines pos=40.2,-68.1,-256.3 lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Bastok.EcoWarrior accepted
+login
+trigger Degga                        # no ore, no restriction: 13
+finish option=0                      # the module's 13, option 0: nothing
+trigger Degga                        # 13 again
+finish option=1                      # the module's 13: Level Restriction 20 (ON_ZONE)
+trigger Degga                        # the restriction: 15
+finish                               # option 0: the restriction off (the quest's own 15)
+trigger Degga                        # no ore, no restriction: 13
+finish option=0

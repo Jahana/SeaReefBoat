@@ -1,0 +1,20 @@
+# Reap What You Sow (windurst 29): the Deathball's first completion and the completed fungus. Accepted (GM): no free
+# slot: 477 (700): ITEM_CANNOT_BE_OBTAINED (the Stationery Set), the ball kept; 477: 700 gil, the ball taken,
+# needToZone, completed, fame 10, the Stationery Set. Completed at var 0 (no repeat accepted): a fungus: 475: 500 gil,
+# needToZone, fame 10, var 0, with no free slot too (no item given once completed).
+char zone=WindurstWaters pos=129.6,-5.75,167.5 job=WAR lvl=75
+item Deathball x2
+item SobbingFungus
+login
+quest Windurst.ReapWhatYouSow accepted
+trigger Mashuu-Ajuu                     # his default 429 (beside him)
+finish
+fill-inventory
+trade Mashuu-Ajuu Deathball x1          # accepted: 477 (700)
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (the Stationery Set); the ball kept
+free-inventory
+trade Mashuu-Ajuu Deathball x1          # 477
+finish                                  # 700 gil; the ball taken; needToZone; completed; fame 10; the Stationery Set
+fill-inventory
+trade Mashuu-Ajuu SobbingFungus x1      # completed, var 0: 475 (500, 131)
+finish                                  # completed: no slot needed: 500 gil; fungus taken; needToZone; fame 10; var 0

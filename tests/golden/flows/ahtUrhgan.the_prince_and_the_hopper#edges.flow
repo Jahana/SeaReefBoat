@@ -1,0 +1,25 @@
+# The Prince and the Hopper's edges: a level 75 Warrior in Mamook, the quest accepted at Prog 5 (GMs). Footprint1: the
+# six popped; Prog 4 (a GM): the Poroggo Casanova killed: Prog not 5: no Prog change, the five despawned all the same;
+# Footprint1 (shown by a GM) at Prog 4: 223 again, finished: Prog 5. Prog 7 (a GM) in Whitegate with a full bag:
+# Maudaal 890, finished: the gorget does not fit: not completed; freed: 890: completed.
+lists Mamook/Toads_Footprint1/onTrigger Mamook/Poroggo_Casanova/onMobDeath AhtUrhganWhitegate/Maudaal/onTrigger AhtUrhganWhitegate/onEventFinish/890
+char zone=Mamook pos=-41.3,5.968,-100.554 job=WAR lvl=75
+quest AhtUrhgan.ThePrinceAndTheHopper accepted
+charvar Quest[6][67]Prog 5
+login
+trigger Toads_Footprint1                # Prog 5: the six popped; IMPENDING_BATTLE
+finish-if-event
+charvar Quest[6][67]Prog 4              # a GM
+kill POROGGO_CASANOVA                   # Prog 4: no change; the five despawned
+tick 2000
+npcstatus Toads_Footprint1 normal       # a GM: the footprint stays hidden after the kill
+trigger Toads_Footprint1                # Prog 4: 223
+finish                                  # Prog 5
+charvar Quest[6][67]Prog 7              # a GM
+warp -145.7,1.8,-3.121 AhtUrhganWhitegate
+fill-inventory
+trigger Maudaal                         # Prog 7: 890
+finish                                  # the gorget does not fit: not completed
+free-inventory
+trigger Maudaal                         # 890
+finish                                  # completed

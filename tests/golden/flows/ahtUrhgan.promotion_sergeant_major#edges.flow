@@ -1,0 +1,53 @@
+# Promotion: Sergeant Major's other path: a level 1 Warrior with Sergeant completed, AssaultPromotion 25. 5048 with
+# option 3: begun, Stage 0. A day on: Stage 0: 5049, option 3: nothing (Prog today); a day on: 5049, option 2: Stage 1;
+# a day on: 5050, option 2: Stage 3; a day on: 5052, option 2: Stage 5. AssaultPromotion 24 with Sergeant completed
+# (bob): no section: nothing. carl (AssaultPromotion 25, Sergeant accepted at Prog 1, not completed): Naja 5058
+# (Sergeant's), then nothing.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/5048 AhtUrhganWhitegate/onEventFinish/5049 AhtUrhganWhitegate/onEventFinish/5050 AhtUrhganWhitegate/onEventFinish/5052
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+charvar AssaultPromotion 25
+bob: quest AhtUrhgan.PromotionPrivateFirstClass completed
+bob: quest AhtUrhgan.PromotionSuperiorPrivate completed
+bob: quest AhtUrhgan.PromotionLanceCorporal completed
+bob: quest AhtUrhgan.PromotionCorporal completed
+bob: quest AhtUrhgan.PromotionSergeant completed
+bob: charvar AssaultPromotion 24
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+carl: quest AhtUrhgan.PromotionSuperiorPrivate completed
+carl: quest AhtUrhgan.PromotionLanceCorporal completed
+carl: quest AhtUrhgan.PromotionCorporal completed
+carl: quest AhtUrhgan.PromotionSergeant accepted
+carl: charvar Quest[6][94]Prog 1
+carl: charvar AssaultPromotion 25
+login
+bob: login
+bob: trigger Naja_Salaheem              # AssaultPromotion 24: no section: nothing
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trigger Naja_Salaheem             # Sergeant accepted (not completed): Sergeant's 5058, not 5048
+carl: finish
+carl: trigger Naja_Salaheem             # 5058's mark used: nothing
+carl: finish-if-event
+carl: logout
+trigger Naja_Salaheem                   # 5048
+finish option=3                         # begun; not 2: Stage 0
+wait vana=24
+trigger Naja_Salaheem                   # Stage 0: 5049
+finish option=3                         # not 2: Prog today only
+wait vana=24
+trigger Naja_Salaheem                   # 5049
+finish option=2                         # Stage 1
+wait vana=24
+trigger Naja_Salaheem                   # Stage 1: 5050
+finish option=2                         # Stage 3
+wait vana=24
+trigger Naja_Salaheem                   # Stage 3: 5052
+finish option=2                         # Stage 5

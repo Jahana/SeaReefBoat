@@ -1,0 +1,23 @@
+# Candle Making (jeuno 22): Rouliette in Upper Jeuno (no script; default 30; no other quest or mission names her).
+# A Candlelight Vigil accepted (GM): a Lanolin Cube while available (the available section has no trade handler:
+# nothing), 36 (any option: begun), 36 again while accepted (the accepted section has no 36 finish: nothing), two cubes
+# (not tradeMatches: nil), one cube (37: completed, the Holy Candle, Believer of Altana, fame +13 x3, the cube taken),
+# then completed: her default 30, and a cube (no section: nothing).
+# Not reachable: :60 complete false (a key item and a title: nothing can fail).
+lists UpperJeuno/Rouliette/onTrigger UpperJeuno/Rouliette/onTrade UpperJeuno/onEventFinish/36 UpperJeuno/onEventFinish/37
+char zone=UpperJeuno pos=-19.7,-1.5,12.6 job=WAR lvl=30
+quest Jeuno.ACandlelightVigil accepted
+item LanolinCube x4
+login
+walk -20.2,-1.5,12.6
+trade Rouliette LanolinCube x1          # available: no trade handler, nothing
+trigger Rouliette                       # A Candlelight Vigil accepted: 36
+finish option=1                         # begun (the finish reads no option)
+trigger Rouliette                       # accepted: 36
+finish                                  # the accepted section has no 36 finish: nothing
+trade Rouliette LanolinCube x2          # two cubes: not tradeMatches, nil
+trade Rouliette LanolinCube x1          # 37
+finish                                  # completed: Holy Candle, Believer of Altana, fame +13 x3, the cube taken
+trigger Rouliette                       # completed: no section; default 30
+finish
+trade Rouliette LanolinCube x1          # completed: no section, nothing

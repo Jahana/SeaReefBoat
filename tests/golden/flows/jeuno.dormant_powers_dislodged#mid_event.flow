@@ -1,0 +1,37 @@
+# Dormant Powers Dislodged (jeuno 136), each handler once its section no longer holds (a GM's change while the event is
+# open): a level 86 Warrior with the Limit Breaker at cap 90, Beyond the Stars completed, 10 merit points. 10045 open,
+# then cap 91: update 8 does nothing (no reply), finish options 12 and 11 do nothing (no Option, not begun); cap 90
+# again: begun. Accepted, itemWanted 3 (a GM): a crest and the Orcish Plate Armor, 10191 open, then the quest set
+# available (its first section holds; 10191's finish is the accepted section's): nothing (the pair kept, merits 10, Prog
+# 0). Accepted again (a GM), Prog 1: 10192 open, then the quest set available: update 600 and finish 600 do nothing (no
+# reply; not completed, cap 90).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventUpdate/10045 RuludeGardens/onEventUpdate/10192 RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10191 RuludeGardens/onEventFinish/10192
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=86
+keyitem LimitBreaker
+levelcap 90
+merits 10
+quest Jeuno.BeyondTheStars completed
+item KindredsCrest
+item OrcishPlateArmor
+login
+trigger Nomad_Moogle                    # 10045 (86, 1, 4, 0, 0, drawn)
+levelcap 91                             # a GM, 10045 open
+update 10045 option=8                   # cap 91: no section: nothing
+finish option=12                        # cap 91: nothing (no Option)
+levelcap 90                             # a GM
+trigger Nomad_Moogle                    # 10045 (86, 1, 4, 0, 0, drawn)
+levelcap 91                             # a GM, 10045 open
+finish option=11                        # cap 91: nothing (not begun)
+levelcap 90                             # a GM
+trigger Nomad_Moogle                    # 10045 (86, 1, 4, 0, 0, drawn)
+finish option=11                        # begun
+charvar Quest[3][136]itemWanted 3       # a GM: index 2, the Orcish Plate Armor
+trade Nomad_Moogle KindredsCrest x1 OrcishPlateArmor x1  # 10191
+quest Jeuno.DormantPowersDislodged available  # a GM, 10191 open
+finish                                  # available: nothing
+quest Jeuno.DormantPowersDislodged accepted   # a GM
+charvar Quest[3][136]Prog 1             # a GM
+trigger Nomad_Moogle                    # Prog 1: 10192 (86, 0, 0, 2)
+quest Jeuno.DormantPowersDislodged available  # a GM, 10192 open
+update 10192 option=600                 # available: no update handler: nothing
+finish option=600                       # available: nothing (not completed, cap 90)

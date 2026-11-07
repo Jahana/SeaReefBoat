@@ -1,0 +1,72 @@
+# Promotion: Private First Class's reply kinds at Naja Salaheem (no script, no default), against rival lines of known
+# rank in GM-made states out of play order (the lookup ranks only the actions up at the talk). The containers run in
+# file order: Corporal, Lance Corporal, Private First Class, Sergeant, Superior Private; equal ranks play the first
+# container first, then rotate. Main (AssaultPromotion 25, Corporal completed by a GM: Sergeant's 5055 up): PFC's 5000
+# (Progress) ties 5055 (Progress): 5000 (the first container), finished: begun. Accepted: 5001 (Event) under 5055
+# (Progress): 5055, finished with option 1 (not begun), twice. Then Sergeant accepted by GMs at each Prog, each after a
+# zone-in (5058's once-per-zone mark is the lookup's local var by NPC, handler and csid, so one mark covers every Prog's
+# 5058): 5058 (Progress) over 5001; a repeat in the zone (its mark used, Ignore): 5001; Prog 2 before its zone-in: 5001
+# (Prog 1's mark); Prog 4: 5057 over 5001, finished: Sergeant completed. bob (PFC
+# and Superior Private accepted by GMs, no hoofprint): 5001 and 5021 (both Events) tie: 5001, then 5021 (rotation), then
+# 5001 (5021's mark used); the Dark Rider Hoofprint (a GM): 5022 (Progress) over 5001, finished: Superior
+# Private completed. carl (the same two accepted; the mustZone set by a GM): 5001 first, then 5021 [0] = 1, [1] = 1.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+charvar AssaultPromotion 25
+quest AhtUrhgan.PromotionCorporal completed
+bob: quest AhtUrhgan.PromotionPrivateFirstClass accepted
+bob: quest AhtUrhgan.PromotionSuperiorPrivate accepted
+carl: quest AhtUrhgan.PromotionPrivateFirstClass accepted
+carl: quest AhtUrhgan.PromotionSuperiorPrivate accepted
+login
+trigger Naja_Salaheem                   # 5000 ties 5055: 5000 (the first container)
+finish                                  # Private First Class begun
+trigger Naja_Salaheem                   # 5001 (Event) under 5055 (Progress): 5055
+finish option=1                         # Sergeant not begun
+trigger Naja_Salaheem                   # 5055 again
+finish option=1
+quest AhtUrhgan.PromotionSergeant accepted   # a GM; Prog 0
+trigger Naja_Salaheem                   # Prog 0: 5058 over 5001
+finish
+trigger Naja_Salaheem                   # 5058's mark used (Ignore): 5001
+finish-if-event
+charvar Quest[6][94]Prog 1              # a GM
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate   # a zone-in: the once-per-zone marks cleared
+trigger Naja_Salaheem                   # Prog 1: 5058 over 5001
+finish
+charvar Quest[6][94]Prog 2              # a GM
+trigger Naja_Salaheem                   # Prog 2, no zone-in since Prog 1's 5058: its mark (same csid) covers this one:
+                                        # 5001
+finish
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # Prog 2: 5058 over 5001
+finish
+charvar Quest[6][94]Prog 3              # a GM
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # Prog 3: 5058 over 5001
+finish
+charvar Quest[6][94]Prog 4              # a GM
+trigger Naja_Salaheem                   # Prog 4: 5057 over 5001
+finish                                  # Sergeant completed
+trigger Naja_Salaheem                   # 5001 alone
+finish
+logout
+bob: login
+bob: trigger Naja_Salaheem              # 5001 and 5021 tie: 5001
+bob: finish
+bob: trigger Naja_Salaheem              # rotation: 5021
+bob: finish
+bob: trigger Naja_Salaheem              # 5021's mark used: 5001
+bob: finish-if-event
+bob: keyitem DarkRiderHoofprint         # a GM
+bob: trigger Naja_Salaheem              # 5022 (Progress) over 5001
+bob: finish                             # Superior Private completed
+bob: logout
+carl: login
+carl: charvar Quest[6][91]mustZone 50   # a GM (after the zone-in)
+carl: trigger Naja_Salaheem             # 5001 first
+carl: finish
+carl: trigger Naja_Salaheem             # rotation: 5021 [0] = 1, [1] = 1
+carl: finish

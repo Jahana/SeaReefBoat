@@ -1,0 +1,18 @@
+# Trial by Water (outlands 133): the battlefield won while accepted. With the Tuning Fork of Water, at WP_Entrance the
+# fork opens the entry menu 32000; its update with option 1 (index 0, arena 1) registers and enters (the fork taken);
+# Leviathan_Prime_TBW of arena 1 (LEVIATHAN_PRIME_ASA-21: mob 17641473; the zone's only IDs.lua mob key is 17641494) is
+# killed, and the win's 32001 opens within the kill step. Its finish runs content:onEventFinishWin, which calls this
+# quest: Heir of the Great Water, the Whisper of Tides. In Norg, Edal-Tahdal's 112 (the whisper, no fork) and option 5
+# (10000 gil) complete it.
+char zone=CloisterOfTides pos=557.5,35.1,563.0 job=WAR lvl=75
+quest Outlands.TrialByWater accepted
+keyitem TuningForkOfWater
+login
+trigger WP_Entrance                       # the fork: the entry menu 32000
+update 32000 option=1                     # Trial by Water (index 0), arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+kill LEVIATHAN_PRIME_ASA-21               # Leviathan_Prime_TBW of arena 1: the battlefield won, 32001 opens
+finish                                    # Heir of the Great Water, the Whisper of Tides
+warp -13.0,1.1,-19.0 Norg
+trigger Edal-Tahdal                       # the whisper, no fork: 112
+finish option=5                           # 10000 gil: completed

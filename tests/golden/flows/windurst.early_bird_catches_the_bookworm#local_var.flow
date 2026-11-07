@@ -1,0 +1,15 @@
+# Early Bird Catches the Bookworm (windurst 20): Glyph Hanger's completion sets the player local var
+# Quest[2][20]mustZone (this quest's prefix), but this quest's offer reads quest:getMustZone, the char var of that name:
+# so the offer is there at once, with no zone change (a kept quirk). The fame is raised before Glyph Hanger's
+# completion (50, then 70: level 2), so the offer's other sides are met. Glyph Hanger completes on C# here (only this
+# quest's Lua is laid over), as its own traces prove it against its Lua.
+lists WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/Hariga-Origa/onTrigger WindurstWaters/onEventFinish/385 WindurstWaters/onEventFinish/387
+char zone=WindurstWaters pos=-60.5,-5.5,105.2
+quest Windurst.GlyphHanger accepted
+keyitem NoteFromIpupu
+fame Windurst 50
+login
+trigger Hariga-Origa                # Glyph Hanger accepted, Ipupu's note held: 385
+finish                              # Glyph Hanger completed (fame 70); local var Quest[2][20]mustZone 1
+trigger Tosuka-Porika               # available, Glyph Hanger completed, fame level 2, the char var 0: 387 (the local var does not gate it)
+finish option=1                     # declined: nothing

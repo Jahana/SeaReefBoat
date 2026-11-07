@@ -1,0 +1,37 @@
+# The Lost Cardian (jeuno 18): GM-set states no play reaches, where the Lua's checks still decide (each a step a GM
+# can take). Panta-Putta: The Wonder Magic Set available (fame level 1, no key item) with theLostCardianVar 1: not 30
+# (it wants The Wonder Magic Set completed): her 78. This quest completed with the var 1 (The Kind Cardian available):
+# not 30 (it wants this quest available): her 78. This quest available again, the var 0, The Kind Cardian accepted
+# with theKindCardianVar 2: Panta-Putta's 40 comes before The Kind Cardian's 35, Teigero-Bangero's 29 before its 66.
+# Monberaux: this quest completed with the var 2, then 3 (Cook's Pride completed, The Kind Cardian available): not 33 /
+# 34 (they want this quest available): no arm.
+char zone=LowerJeuno pos=-60.8,-0.3,-140.0 job=WAR lvl=75
+charvar theLostCardianVar 1
+login
+trigger Panta-Putta                     # The Wonder Magic Set available, fame level 1: no arm; the var 1: not 30: 78
+finish
+quest Jeuno.TheWonderMagicSet completed
+quest Jeuno.CooksPride completed
+quest Jeuno.TheLostCardian completed
+trigger Panta-Putta                     # this quest completed, the var 1: not 30; The Kind Cardian available: 78
+finish
+charvar theLostCardianVar 0
+quest Jeuno.TheLostCardian available
+quest Jeuno.TheKindCardian accepted
+charvar theKindCardianVar 2
+trigger Panta-Putta                     # this quest available, the var 0: 40 (before The Kind Cardian's 35)
+finish
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # this quest available, the var 0: 29 (before The Kind Cardian's 66)
+finish                                  # the var 1
+warp -40.9,-0.5,-1.9 UpperJeuno         # beside Monberaux
+quest Jeuno.TheKindCardian available
+quest Jeuno.TheLostCardian completed
+charvar theLostCardianVar 2
+trigger Monberaux                       # this quest completed, the var 2: not 33; The Kind Cardian available: 109 (28 queued)
+finish
+finish
+charvar theLostCardianVar 3
+trigger Monberaux                       # the var 3: not 34: 28
+finish

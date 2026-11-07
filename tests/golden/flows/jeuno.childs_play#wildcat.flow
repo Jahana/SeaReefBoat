@@ -1,0 +1,21 @@
+# Child's Play (jeuno 23): the kinds of Karl's replies, against Lure of the Wildcat (Jeuno)'s. Karl has no script; Lure
+# of the Wildcat (Jeuno) accepted (a GM, before login) answers him with 316 (a progressEvent) while its Prog bit 16 is
+# clear, and its finish sets the bit (cleared again by a GM). A level 75 Warrior, The Wonder Magic Set accepted (a GM).
+# Available: 0 and 316, both progressEvents, tie: the lookup plays the first in its list, Child's Play's 0 (an event 0
+# would lose to 316); 0 begins the quest. Accepted: 316 (a progressEvent) beats 61 (an event; a progressEvent 61 would
+# tie with 316 and play first), every time.
+lists PortJeuno/Karl/onTrigger PortJeuno/onEventFinish/0 PortJeuno/onEventFinish/316
+char zone=PortJeuno pos=-59.4,0,-8.9 job=WAR lvl=75
+quest Jeuno.TheWonderMagicSet accepted
+quest Jeuno.LureOfTheWildcat accepted
+login
+trigger Karl                            # available: 0 and 316 tie: 0, the first in the list
+finish                                  # begun
+trigger Karl                            # accepted: 316 over 61
+finish                                  # the Wildcat's bit 16
+charvar Quest[3][90]Prog 0              # a GM: the bit clear
+trigger Karl                            # 316 over 61
+finish
+charvar Quest[3][90]Prog 0              # a GM
+trigger Karl                            # 316 over 61
+finish

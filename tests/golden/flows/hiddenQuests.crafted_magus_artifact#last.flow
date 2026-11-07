@@ -1,0 +1,43 @@
+# Crafted Magus Artifact (hidden quest MagusArtifact), the last piece (the jubbah, events at offset 16): a level 99
+# Warrior in Aht Urhgan Whitegate, Transformations completed, [BLUAF]Remaining 4 (two made, GMs). Lathuya: 746 ([7] 3),
+# its updates: 2 and 5 (pieces 1 and 2, already made): nothing; 8 (8 % 3 == 2: piece 3): Current 3, updateEvent(0, the
+# jubbah's four materials); 9: updateEvent(0, coin, 4). 747 (0, coin, 4); the materials: 748; 749; four coins: 750 (the
+# slip, mustZone); 751; zoned: 752 (the jubbah), finished with the inventory full: giveItem fails: nothing; with room:
+# given, Remaining 0, RestingDay 0, the slip taken. All made: 753 (replaceDefault). A trade with Remaining 0: nothing.
+lists AhtUrhganWhitegate/Lathuya/onTrigger AhtUrhganWhitegate/Lathuya/onTrade AhtUrhganWhitegate/onEventUpdate/746 AhtUrhganWhitegate/onEventFinish/748 AhtUrhganWhitegate/onEventFinish/750 AhtUrhganWhitegate/onEventFinish/752
+char zone=AhtUrhganWhitegate pos=-95.1,-6,33.1 job=WAR lvl=99
+quest AhtUrhgan.Transformations completed
+charvar [BLUAF]Remaining 4
+item SquareOfVelvetCloth
+item VialOfChimeraBlood
+item SquareOfKarakulCloth
+item SquareOfImperialSilkCloth
+item ImperialMythrilPiece x8
+login
+trigger Lathuya                         # one left: 746 ([7] 3)
+update 746 option=2                     # piece 1, already made: nothing
+update 746 option=5                     # piece 2, already made: nothing
+update 746 option=8                     # piece 3: Current 3, updateEvent(0, the materials)
+update 746 option=9                     # the fee: updateEvent(0, coin, 4)
+finish option=8
+trigger Lathuya                         # stage 0: 747 (0, coin, 4)
+finish
+trade Lathuya SquareOfVelvetCloth x1 VialOfChimeraBlood x1 SquareOfKarakulCloth x1 SquareOfImperialSilkCloth x1   # 748
+finish                                  # stage 1, taken
+trigger Lathuya                         # stage 1: 749
+finish
+trade Lathuya ImperialMythrilPiece x4   # 750 (0, coin, 4)
+finish                                  # taken, stage 2, PaymentDay today, mustZone, the slip
+trigger Lathuya                         # not yet: 751
+finish
+charvar [BLUAF]PaymentDay 0             # a GM: the day past
+rezone
+fill-inventory
+trigger Lathuya                         # 752 (the jubbah)
+finish                                  # no room: nothing
+free-inventory
+trigger Lathuya                         # 752
+finish                                  # given; Remaining 0; RestingDay 0; the slip taken
+trigger Lathuya                         # all made: 753 (replaceDefault)
+finish
+trade Lathuya ImperialMythrilPiece x4   # Remaining 0: nothing

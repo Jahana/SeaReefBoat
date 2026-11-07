@@ -1,0 +1,47 @@
+# Storm on the Horizon (crystalWar 35): a level 99 Warrior in Bastok Markets [S] with Burden of Suspicion completed (a
+# GM; missions as group 1's flows). Blatherix is `Blatherix+13` (17134142; see group 3). Blatherix: Prog 0: 37,
+# finished: an Elixir, Prog 1, the Timer (tomorrow) and the quest's mustZone, the quest still available; Prog 1: 38.
+# North Gustaberg [S] (the mustZone cleared), then Bastok Markets [S]: the Timer past today: no zone-in reply. A
+# Vana'diel day on: North Gustaberg [S], then Bastok Markets [S]: 56 (left open), finished: begun, Prog 2. Gentle Tiger
+# 57, finished: Prog 3; 58. North Gustaberg [S]: the Monument 4, finished: Prog 4; Prog 4: nil. Grauberg [S]: qm5 16,
+# finished: completed (an Icarus Wing). Fire in the Hole (the next quest) wants the WotG mission In the Name of the
+# Father: a fresh char's is earlier, so no zone-in of Fire's plays here. Accepted: Blatherix nothing (his 37 / 38 are
+# the available section's). Completed (no section): Bastok Markets [S] from Grauberg [S]: Gentle Tiger 109, Blatherix
+# nothing.
+lists BastokMarketsS/onZoneIn/1 BastokMarketsS/Blatherix/onTrigger BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/37 BastokMarketsS/onEventFinish/56 BastokMarketsS/onEventFinish/57 NorthGustabergS/Monument/onTrigger NorthGustabergS/onEventFinish/4 GraubergS/qm5/onTrigger GraubergS/onEventFinish/16
+char zone=BastokMarketsS pos=-308.324,-11.999,-42.791 job=WAR lvl=99
+quest CrystalWar.BurdenOfSuspicion completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Blatherix+13                    # available, Prog 0: 37
+finish                                  # the Elixir; Prog 1; Timer tomorrow; mustZone (87)
+trigger Blatherix+13                    # Prog 1: 38
+finish
+warp 380.038,-2.25,147.627 NorthGustabergS # the mustZone cleared
+warp -308.324,-11.999,-42.791 BastokMarketsS # from North Gustaberg [S], the Timer tomorrow: nil
+wait vana=24
+warp 380.038,-2.25,147.627 NorthGustabergS
+warp -202.432,-9.998,2.237 BastokMarketsS open # from North Gustaberg [S], the day turned: 56, left open
+finish                                  # begun; Prog 2
+trigger Blatherix+13                    # accepted: the available section's Blatherix is gone: nothing (no default)
+finish-if-event
+trigger Gentle_Tiger                    # Prog 2: 57
+finish                                  # Prog 3
+trigger Gentle_Tiger                    # Prog 3: 58
+finish
+warp 301.429,-62.8,497.289 NorthGustabergS
+trigger Monument                        # Prog 3: 4
+finish                                  # Prog 4
+trigger Monument                        # Prog 4: nil (no default)
+finish-if-event
+warp 261.293,33.192,515.257 GraubergS
+trigger qm5                             # Prog 4: 16
+finish                                  # completed (an Icarus Wing)
+warp -202.432,-9.998,2.237 BastokMarketsS # from Grauberg [S]: nothing
+trigger Gentle_Tiger                    # completed (no section): 109
+finish-if-event
+trigger Blatherix+13                    # completed: nothing
+finish-if-event

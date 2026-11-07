@@ -1,0 +1,46 @@
+# The Sacred Katana (outlands 140): a level 40 Samurai (AF1_QUEST_LEVEL 40), Forge Your Destiny completed (a GM: no
+# Mumeito held), 30000 gil. Available: Jaucribaix 139, option 0: not begun; Ranemaud: his default 68; the 30000 gil
+# traded (the accepted trade arm; the status the only change): nothing; 139, option 1: begun. Accepted: Jaucribaix
+# 143 (no Mumeito); Ranemaud 144 (no Mumeito), 30000 gil traded: 145 (the Mumeito, the gil taken); Ranemaud again (the
+# Mumeito held): nil: his default 68; Jaucribaix 140 (the Mumeito held). Zi'Tah's qm3: the local Prog 0: nil: its
+# default NOTHING_OUT_OF_ORDINARY; a Sack of Fish Bait traded: Isonade popped (claimed), SENSE_OF_FOREBODING; Isonade
+# killed: the local Prog 1; qm3: the Handful of Crystal Scales (a keyItem reply); qm3 again (the scales held): nil: the
+# default. Norg: Jaucribaix 140, then the Mumeito traded with the scales: 141: completed (Magoroku, fame), the Mumeito
+# and the scales taken, Yomi Okuri's mustZone and Timer (now + 60). Jaucribaix again: Yomi Okuri needs AF2_QUEST_LEVEL
+# 50: no section holds: his default 71 (the 142 / 146 offer: yomi_okuri's main flow).
+lists Norg/Jaucribaix/onTrigger Norg/Ranemaud/onTrigger Norg/Ranemaud/onTrade TheSanctuaryOfZitah/qm3/onTrigger TheSanctuaryOfZitah/qm3/onTrade Norg/onEventFinish/141
+warning: quests: outlands.the_sacred_katana: one finish of 139 ran 2 handlers (1/-/onEventFinish:139, 2/-/onEventFinish:139) -- the Lua runs it twice too: its sections at SAM_AF1_The_Sacred_Katana.lua:37 (available) and :89 (accepted) at lua-at e251af4f hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=Norg pos=91,-7,-8 job=SAM lvl=40 gil=30000
+quest Outlands.ForgeYourDestiny completed
+login
+trigger Jaucribaix                      # available: 139
+finish option=0                         # not begun
+trigger Ranemaud                        # available: no section: default 68
+finish
+trade Ranemaud gil=30000                # available, no Mumeito (the accepted trade arm): nothing
+trigger Jaucribaix                      # 139
+finish option=1                         # begun
+trigger Jaucribaix                      # no Mumeito: 143
+finish
+trigger Ranemaud                        # no Mumeito: 144
+finish
+trade Ranemaud gil=30000                # 145
+finish                                  # the Mumeito; the gil taken
+trigger Ranemaud                        # the Mumeito held: nil: default 68
+finish
+trigger Jaucribaix                      # the Mumeito held: 140
+finish
+warp -416,0,46 TheSanctuaryOfZitah
+trigger qm3                             # local Prog 0: nil: default NOTHING_OUT_OF_ORDINARY
+item SackOfFishBait                     # a GM
+trade qm3 SackOfFishBait x1             # Isonade popped and claimed; the bait taken; SENSE_OF_FOREBODING
+kill ISONADE                            # the quest's local Prog 1
+trigger qm3                             # Prog 1, no scales: the Handful of Crystal Scales
+trigger qm3                             # the scales held: nil: default
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # 140
+finish
+trade Jaucribaix Mumeito x1             # the scales held: 141
+finish                                  # completed; the Mumeito and the scales taken; Yomi Okuri's mustZone, Timer now + 60
+trigger Jaucribaix                      # level 40: Yomi Okuri off: default 71
+finish

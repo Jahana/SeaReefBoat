@@ -1,0 +1,44 @@
+# Borghertz's Chasing Hands (jeuno 54): the template for xi.job.RNG (11), after a completed Borghertz quest: every
+# handler of the quest once (the Warring Hands' flows take the template's edges). A level 75 RNG, 1000 gil, its
+# prerequisite (Windurst.FireAndBrimstone) completed, Borghertz's Harmonious Hands completed (a GM; entry 9 of the loop), a
+# GarlaigeCofferKey. Guslam: 155 (Option 11); begun; 43 (no Old Gauntlets). GarlaigeCitadel's Treasure Coffer: the Old Gauntlets.
+# Guslam 26; finished at Prog 0, a Borghertz quest completed: Prog 3 (the intermediaries skipped). Deadly Minnow at
+# Prog 3: nil (his shop). Prog 1 (a GM): Deadly Minnow 24; finished: Prog 2. Yin Pocanakhu 220; its update: the gil
+# taken, Prog 3. qm1 20; finished 1: Prog 4. The Torch: Dark Spark popped; its death: Prog 5; the Torch: the Shadow
+# Flames. qm1 48; finished: completed (HuntersBracers), fame +7 x3, both key items taken.
+lists UpperJeuno/Guslam/onTrigger UpperJeuno/onEventFinish/155 UpperJeuno/onEventFinish/26 UpperJeuno/onEventFinish/24 UpperJeuno/Deadly_Minnow/onTrigger LowerJeuno/Yin_Pocanakhu/onTrigger LowerJeuno/onEventUpdate/220 PortJeuno/qm1/onTrigger PortJeuno/onEventFinish/20 PortJeuno/onEventFinish/48 CastleZvahlBaileys/Torch/onTrigger CastleZvahlBaileys/Dark_Spark/onMobDeath GarlaigeCitadel/Treasure_Coffer/onTrade
+char zone=UpperJeuno pos=-4.2,1.3,47.5 job=RNG lvl=75 gil=1000
+quest Windurst.FireAndBrimstone completed
+quest Jeuno.BorghertzsHarmoniousHands completed
+item GarlaigeCofferKey
+login
+trigger Guslam                          # available: 155 (Option 11)
+finish                                  # begun
+trigger Guslam                          # accepted, no Old Gauntlets: 43
+finish
+warp -282.3,0,263.2 GarlaigeCitadel
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer GarlaigeCofferKey x1   # the old-gauntlet zone: the Old Gauntlets
+tick 4500                               # the coffer opened
+warp -4.2,1.3,47.5 UpperJeuno
+trigger Guslam                          # the Old Gauntlets: 26
+finish                                  # Prog 0, not the first: Prog 3
+trigger Deadly_Minnow                   # Prog 3: nil; his own script (his shop)
+charvar Quest[3][54]Prog 1              # a GM
+trigger Deadly_Minnow                   # Prog 1: 24
+finish                                  # Prog 2
+warp 35.3,4.1,-44 LowerJeuno
+trigger Yin_Pocanakhu                   # Prog 2: 220
+update 220 option=0                     # 1000 gil: taken; Prog 3; updateEvent(1, 1, 0, 0)
+finish
+warp -52.7,6.1,-4.6 PortJeuno
+trigger qm1                             # Prog 3: 20
+finish option=1                         # Prog 4
+warp 61.4,-26.2,15 CastleZvahlBaileys
+trigger Torch                           # Prog 4: Dark Spark popped; SENSE_OF_FOREBODING
+kill DARK_SPARK                         # its death: Prog 5
+trigger Torch                           # Prog 5, no flames: the Shadow Flames; noAction
+warp -52.7,6.1,-4.6 PortJeuno
+trigger qm1                             # Prog 5, the flames: 48
+finish                                  # completed: HuntersBracers; fame +7 x3; both key items taken

@@ -1,0 +1,74 @@
+# Ayame and Kaede (bastok 60): Kaede, Kagetora and Ensetsu in Port Bastok, qm2 and the Korroloka Leeches in Korroloka
+# Tunnel, Ryoma in Norg. The guard (main level >= ADVANCED_JOB_LEVEL, 30): Kaede's 240 (begun); Kagetora's 241 (Prog
+# 1), nil at Prog 1-2, 244 from Prog 3; Ensetsu nil at Prog 0, 242 at Prog 1 and 2, 245 at 3, 243 at 4, 246 at 5;
+# qm2: the three leeches spawned and claimed (HAIR_STANDS_ON_END), nil while one is up, the coral after a kill (Prog 3,
+# the qm2 hidden for 300 s because this char spawned them), nil at Prog 3; Ryoma's 95 at Prog 4 (the Sealed Dagger for
+# the coral, Prog 5), nil after; Ensetsu's 246 completes it (Job Gesture: Ninja, Shadow Walker, the dagger deleted, NIN
+# unlocked, UNLOCK_NINJA); completed: Kaede's 248 (replaceDefault), and Ensetsu's own script reads the completed status
+# (247: Twenty in Pirate Years' lead-in, while that quest is available). #level29 is the guard's other side.
+# Other quests: Lure of the Wildcat (Kaede: accepted only), LB04 (Kaede), Faded Promises (Kagetora: a NIN with the
+# diary), Chasing Dreams (Kagetora), I'll Take the Big Box (Ensetsu, Ryoma), Bugi Soden (Ryoma). Ensetsu's script
+# starts nothing until A&K is completed; the lookup alternates his DefaultActions 27 (an Event) with that script, which
+# answers nothing, so he plays 27 each time until then. Defaults: Kaede 26, Kagetora 23, Ensetsu 27, Ryoma 94, qm2
+# NOTHING_OUT_OF_ORDINARY. The leeches attack the char; they despawn between 15 and 45 s after the kills.
+lists PortBastok/Kaede/onTrigger PortBastok/Kagetora/onTrigger PortBastok/Ensetsu/onTrigger PortBastok/onEventFinish/240 PortBastok/onEventFinish/241 PortBastok/onEventFinish/242 PortBastok/onEventFinish/245 PortBastok/onEventFinish/246 KorrolokaTunnel/qm2/onTrigger KorrolokaTunnel/Korroloka_Leech/onMobDeath Norg/Ryoma/onTrigger Norg/onEventFinish/95
+char zone=PortBastok pos=48,-6,67 job=WAR lvl=30
+item BoneChip
+login
+trade Kaede BoneChip x1        # available: no trade handler in any section: nothing
+trigger Ensetsu                # available: no handler; the lookup's first try is his DefaultActions 27
+finish-if-event
+trigger Kaede                  # level 30: 240
+finish                         # begun
+trigger Kaede                  # accepted: no handler, 26
+finish
+trigger Ensetsu                # Prog 0: nil; the lookup alternates to his script (nothing here), then his 27
+finish-if-event
+trigger Kagetora               # Prog 0: 241
+finish                         # Prog 1
+trigger Kagetora               # Prog 1: nil, 23
+finish
+trigger Ensetsu                # Prog 1: 242
+finish                         # Prog 2
+trigger Ensetsu                # Prog 2: 242 again
+finish                         # Prog 2
+trigger Kagetora               # Prog 2: nil, 23
+finish
+warp -206.8,-9.9,176.2 KorrolokaTunnel
+trigger qm2                    # Prog 2, no leech up, nmDefeated 0: isActor 1, three leeches spawned and claimed,
+                               # HAIR_STANDS_ON_END
+trigger qm2                    # a leech up: nil, NOTHING_OUT_OF_ORDINARY
+kill KORROLOKA_LEECH           # Prog 2, a leech dead: nmDefeated 1
+kill KORROLOKA_LEECH+1         # nmDefeated already 1
+kill KORROLOKA_LEECH+2
+tick 15000                     # the leeches still despawning
+trigger qm2                    # a leech still spawned: nil, NOTHING_OUT_OF_ORDINARY
+tick 30000                     # the leeches despawned
+trigger qm2                    # none up, Prog 2, nmDefeated 1: Prog 3, isActor 1 -> 0, the qm2 hidden 300 s, the coral
+trigger qm2                    # the qm2 hidden: no answer
+tick 301000                    # the qm2 shown again
+trigger qm2                    # Prog 3: nil, NOTHING_OUT_OF_ORDINARY
+warp -96,-2,29 PortBastok
+trigger Kagetora               # Prog 3: 244
+finish
+trigger Ensetsu                # Prog 3: 245
+finish                         # Prog 4
+trigger Ensetsu                # Prog 4: 243
+finish
+warp -23,0,-9 Norg
+trigger Ryoma                  # Prog 4: 95
+finish                         # the Sealed Dagger, the coral deleted, Prog 5
+trigger Ryoma                  # Prog 5: nil, 94
+finish
+warp 33,-6,67 PortBastok
+trigger Ensetsu                # Prog 5: 246 (the dagger)
+finish                         # completed: fame +20, Job Gesture: Ninja, Shadow Walker, the dagger deleted, NIN
+                               # unlocked, UNLOCK_NINJA
+trigger Kaede                  # completed: 248 (replaceDefault)
+finish
+trigger Ensetsu                # completed: no section; after the Progress 246 the lookup tries its DefaultActions 27
+                               # first
+finish
+trigger Ensetsu                # then his own script: 247 (A&K completed, Twenty in Pirate Years available: a status
+                               # read)
+finish

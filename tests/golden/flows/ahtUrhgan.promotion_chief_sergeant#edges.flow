@@ -1,0 +1,88 @@
+# Promotion: Chief Sergeant's edges. Main (a level 1 Warrior, accepted at Prog 2 by GMs). Aydeewa: patch 0 at Prog 2:
+# no section: NOTHING_OUT_OF_ORDINARY. Prog 3 (a GM) with patch 0 planted (MPatch0 2, a GM) and Option 1: 21 (the
+# draws: [3] = 5 when randomInt(1, 100) >= 75), option 100: nothing (still planted), seven times; 21, option 0: 0 + 1:
+# picked, Option 1. Patch 0 planted again (a GM); at about 05:00 (the hour bonus: a second draw >= 50 gives [0] = 2):
+# 21, option 100, five times. MPatch0 4 (a GM: no stage of the table): the function's own NOTHING_OUT_OF_ORDINARY.
+# Whitegate: Abquhbah 5061 ([0] = 0, [1] = 1), option 20 with a full bag: quest:complete false (the Imperial Mythril
+# Piece does not fit): nothing; room again: option 20: completed, no Gold Piece. bob (Sergeant Major completed,
+# AssaultPromotion 24): Abquhbah: no section: 255. carl (AssaultPromotion 25, Sergeant Major accepted): no section: 255.
+lists AydeewaSubterrane/Mushroom_Patch/onTrigger AydeewaSubterrane/onEventFinish/21 AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/onEventFinish/5061
+char zone=AydeewaSubterrane pos=124.319,36.844,5.795 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant accepted
+charvar Quest[6][96]Prog 2
+charvar AssaultPromotion 25
+bob: quest AhtUrhgan.PromotionPrivateFirstClass completed
+bob: quest AhtUrhgan.PromotionSuperiorPrivate completed
+bob: quest AhtUrhgan.PromotionLanceCorporal completed
+bob: quest AhtUrhgan.PromotionCorporal completed
+bob: quest AhtUrhgan.PromotionSergeant completed
+bob: quest AhtUrhgan.PromotionSergeantMajor completed
+bob: charvar AssaultPromotion 24
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+carl: quest AhtUrhgan.PromotionSuperiorPrivate completed
+carl: quest AhtUrhgan.PromotionLanceCorporal completed
+carl: quest AhtUrhgan.PromotionCorporal completed
+carl: quest AhtUrhgan.PromotionSergeant completed
+carl: quest AhtUrhgan.PromotionSergeantMajor accepted
+carl: charvar Quest[6][95]Prog 99999
+carl: charvar AssaultPromotion 25
+login
+trigger Mushroom_Patch                  # Prog 2: no section: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][96]Prog 3              # a GM
+charvar Quest[6][96]MPatch0 2           # a GM: planted
+charvar Quest[6][96]Option 1            # a GM
+trigger Mushroom_Patch                  # planted, ready, no needToZone: 21
+finish option=100                       # nothing
+trigger Mushroom_Patch                  # 21 again (a new draw)
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=0                         # 0 + 1: picked; Option 1
+charvar Quest[6][96]MPatch0 2           # a GM: planted again
+wait vana=17                            # about 05:00
+trigger Mushroom_Patch                  # 21: the hour bonus draw
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+trigger Mushroom_Patch                  # 21
+finish option=100
+charvar Quest[6][96]MPatch0 4           # a GM: no stage of the table
+trigger Mushroom_Patch                  # triggerPatch's own NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp 37.024,-6.601,-62 AhtUrhganWhitegate
+fill-inventory
+trigger Abquhbah                        # Option 1: 5061 [0] = 0, [1] = 1
+finish option=20                        # the reward does not fit: complete false: nothing
+free-inventory
+trigger Abquhbah                        # 5061
+finish option=20                        # completed (no Gold Piece); AssaultPromotion 0
+logout
+bob: login
+bob: trigger Abquhbah                   # AssaultPromotion 24: no section: 255
+bob: finish
+bob: logout
+carl: login
+carl: trigger Abquhbah                  # Sergeant Major not completed: no section: 255
+carl: finish

@@ -1,0 +1,64 @@
+# Wish Upon a Star (bastok 64): Zacc, Malene and Enu in Bastok Markets, a Logging Point in Yuhtunga Jungle. The guard
+# (Bastok fame level 5), Zacc's 329 (Prog 1), Malene's 330 (Prog 2), Enu's 332 (begun); each NPC is silent (nil) at the
+# other Progs; accepted: Enu's 333, a bone chip to Enu (nil), the logging point's trades (a bone chip: nil, the point's
+# HELM trade; a Hatchet without a Fallen Star and the inventory full: giveItem false, nil, the HELM trade; with room:
+# the star (silent), the hatchet taken, 205; a Hatchet with the star: nil, the HELM trade); the star to Enu by day and
+# at night, both with sunshine (337: the weather is not NONE); completed (by GM): Enu's 335, Zacc's 336
+# (replaceDefault).
+# Enu's 334 (the completion) needs player:getWeather() == NONE at NIGHT or MIDNIGHT. Bastok Markets' zone_weather table
+# has no NONE in any day's three weathers (794 entries, each field 1 to 19; a 0x0000 day keeps the last entry), and the
+# zone is a city (no fog), so the weather is never NONE there: only a GM's setWeather reaches 334 (`weather 0`):
+# #weather (DAY with NONE: 337; MIDNIGHT with NONE: 334, completed) and #inventory_full (NIGHT with NONE: 334, the
+# bags not fitting, then completed).
+# Other quests: The Cold Light of Day (C#) offers 102 at Malene to anyone (a Progress, which would alternate with 330):
+# the setup completes it, so Malene answers its Event 102 (below 330). Defaults: Enu 327, Zacc 328. Lamepaue's hint
+# list reads this quest's completed status (a read).
+lists BastokMarkets/Zacc/onTrigger BastokMarkets/Malene/onTrigger BastokMarkets/Enu/onTrigger BastokMarkets/Enu/onTrade BastokMarkets/onEventFinish/329 BastokMarkets/onEventFinish/330 BastokMarkets/onEventFinish/332 BastokMarkets/onEventFinish/334 YuhtungaJungle/Logging_Point/onTrade
+char zone=BastokMarkets pos=-255.7,-13,-91.4 lvl=30
+fame Bastok 324
+quest Bastok.TheColdLightOfDay completed
+item Hatchet
+item Hatchet
+item Hatchet
+item BoneChip
+login
+trigger Zacc                   # fame 324 (level 4): not offered, the default 328
+finish
+fame Bastok 325
+trigger Enu                    # Prog 0: nil, 327
+finish
+trade Enu BoneChip x1          # available: no trade handler (section 1 has none): nothing
+trigger Malene                 # Prog 0: nil, The Cold Light of Day's 102
+finish
+trigger Zacc                   # fame level 5, Prog 0: 329
+finish                         # Prog 1
+trigger Zacc                   # Prog 1: nil, 328
+finish
+trigger Malene                 # Prog 1: 330
+finish                         # Prog 2
+trigger Enu                    # Prog 2: 332
+finish                         # begun
+trigger Enu                    # accepted: 333
+finish
+trade Enu BoneChip x1          # not the star: nil, nothing
+warp -219.1,1.3,-141 YuhtungaJungle
+trade Logging_Point BoneChip x1  # not a hatchet: nil; the point's HELM trade answers its message (no tool)
+fill-inventory
+trade Logging_Point Hatchet x1   # no star, the bag full: giveItem false, nil; the HELM trade's 205 (689, not given)
+finish-if-event
+free-inventory
+trade Logging_Point Hatchet x1   # no star: a Fallen Star (silent), the hatchet taken, 205 (Fallen Star)
+finish
+trade Logging_Point Hatchet x1   # the star held: nil; the HELM trade's 205 (a log, 940)
+finish-if-event
+warp -253.7,-13,-92.3 BastokMarkets
+trade Enu FallenStar x1        # 12:00 (DAY), the weather sunshine (not NONE): 337
+finish                         # 337 has no finish handler: the star kept
+wait vana=10                   # 22:00: NIGHT
+trade Enu FallenStar x1        # NIGHT, but the weather (sunshine) is not NONE: 337 again
+finish
+quest Bastok.WishUponAStar completed  # GM: the completed side (334 itself: #weather, #inventory_full)
+trigger Enu                    # completed: 335 (replaceDefault)
+finish
+trigger Zacc                   # completed: 336 (replaceDefault)
+finish

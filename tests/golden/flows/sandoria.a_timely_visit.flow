@@ -1,0 +1,114 @@
+# A Timely Visit (sandoria 105): Deraquien and Phillone in Southern San d'Oria, Halver in Chateau d'Oraguille, Narvecaint
+# on La Theine Plateau, qm1 and the two NMs in Jugner Forest. Fame 224 (level 3): Deraquien's script (18); fame 225: a
+# chip while available (check 1 holds: nothing), 33 declined (Option 1), 47 declined (nothing), 47 taken (begun, Option
+# 0). Stage 0: Deraquien's 34; Phillone (Prog 0: nil, his default 29); Halver (Prog 0: nil, his default text);
+# Narvecaint's 0 (Prog 1), 6; Deraquien's 80 (Prog 2), 20; Halver's 112 (Prog 3), then (Prog 3: nil, his default text);
+# Narvecaint's 7; Deraquien's 87 (Prog 4), 30; Phillone's 78 (Prog 5), 91; Deraquien's 38 (Stage 1). Stage 1:
+# Deraquien's 27, Phillone's 48, Narvecaint's 7; in Jugner Forest at 12:00 qm1's UNABLE_TO_INVESTIGATE; at 20:00 both
+# NMs popped and claimed (SENSE_OF_FOREBODING); qm1 with them up (nil: its default DUG_UP); Giollemitte killed at Prog
+# 5 (NMKilled 1), despawned (its onMobDespawn sets qm1's Wait); qm1 with the Skeleton Esquire still up (the second
+# operand of mobsSpawned: nil); Prog 4 by GM, the Skeleton Esquire killed (its handler's Prog operand fails: nothing),
+# Prog 5 by GM, despawned; qm1's 18 (NMKilled from Giollemitte alone; Prog 6); qm1 then (Prog 6: nil); Phillone's 21
+# (Prog 7), 49; Narvecaint's 1 (Prog 8), 8; Phillone's 14 (completed: Medieval Collar, fame +40, Obsidian Storm).
+# Completed: Phillone's 28 (replaceDefault), Deraquien's script (18); Stage 1 by GM (check 3's status operand fails):
+# Phillone's 28.
+# The harness's Vana'diel clock starts at 12:00 (daytime: 6-17), so `wait vana=8` makes it night. Deraquien's script
+# always starts 18: the quest's replies are Progress events or setPriority(101), over Event (100), so they always win.
+# Phillone has no script (default 29); Narvecaint none (default RESCUE_DRILL + 37 text). Halver's default action (the
+# text HALVER_OFFSET + 1092) answers before his script whenever no quest does. Lure of the Wildcat names Deraquien only while accepted (not here); no Sandy mission
+# is current. Jugner's qm1 default is DUG_UP; no other quest's qm1 handler opens for this char.
+lists SouthernSanDoria/Deraquien/onTrigger SouthernSanDoria/Phillone/onTrigger SouthernSanDoria/onEventFinish/33 SouthernSanDoria/onEventFinish/47 SouthernSanDoria/onEventFinish/80 SouthernSanDoria/onEventFinish/87 SouthernSanDoria/onEventFinish/78 SouthernSanDoria/onEventFinish/38 SouthernSanDoria/onEventFinish/21 SouthernSanDoria/onEventFinish/14 ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/112 LaTheinePlateau/Narvecaint/onTrigger LaTheinePlateau/onEventFinish/0 LaTheinePlateau/onEventFinish/1 JugnerForest/qm1/onTrigger JugnerForest/onEventFinish/18 JugnerForest/Giollemitte_B_Feroun/onMobDeath JugnerForest/Skeleton_Esquire_NM/onMobDeath
+char zone=SouthernSanDoria pos=-97.198,-2,32.056 job=WAR lvl=75 nation=0
+fame Sandoria 224
+item BoneChip
+login
+trigger Deraquien                         # fame level 3: not offered; his script's 18
+finish
+fame Sandoria 225
+trade Deraquien BoneChip x1               # available (check 1 holds): no trade handler; his script has no onTrade: nothing
+trigger Deraquien                         # fame level 4, Option 0: 33
+finish                                    # option 0: Option 1 (declined)
+trigger Deraquien                         # Option 1: 47
+finish                                    # option 0: nothing
+trigger Deraquien                         # 47
+finish option=1                           # begun; Option 0
+trigger Deraquien                         # Stage 0, Prog 0: 34 (priority 101)
+finish
+trigger Phillone                          # Prog 0: nil; his default 29
+finish
+warp 3.92,0,1.966 ChateauDoraguille
+trigger Halver                            # Prog 0: nil; his default text
+finish
+warp -260.436,23.144,127.61 LaTheinePlateau
+trigger Narvecaint                        # Prog 0: 0
+finish                                    # Prog 1
+trigger Narvecaint                        # Prog 1: 6 (priority 101)
+finish
+warp -97.198,-2,32.056 SouthernSanDoria
+trigger Deraquien                         # Prog 1: 80
+finish                                    # Prog 2
+trigger Deraquien                         # Prog 2: 20
+finish
+warp 3.92,0,1.966 ChateauDoraguille
+trigger Halver                            # Prog 2: 112
+finish                                    # Prog 3
+trigger Halver                            # Prog 3: nil; his default text
+finish
+warp -260.436,23.144,127.61 LaTheinePlateau
+trigger Narvecaint                        # Prog 3: 7
+finish
+warp -97.198,-2,32.056 SouthernSanDoria
+trigger Deraquien                         # Prog 3: 87
+finish                                    # Prog 4
+trigger Deraquien                         # Prog 4: 30
+finish
+trigger Phillone                          # Prog 4: 78
+finish                                    # Prog 5
+trigger Phillone                          # Prog 5: 91
+finish
+trigger Deraquien                         # Prog 5: 38
+finish                                    # Stage 1
+trigger Deraquien                         # Stage 1: 27
+finish
+trigger Phillone                          # Stage 1, Prog 5: 48
+finish
+warp -260.436,23.144,127.61 LaTheinePlateau
+trigger Narvecaint                        # Stage 1, Prog 5: 7
+finish
+warp -309.382,-0.139,407.377 JugnerForest
+trigger qm1                               # 12:00, daytime: UNABLE_TO_INVESTIGATE
+wait vana=8
+trigger qm1                               # 20:00, no Wait, NMs down: both popped and claimed; SENSE_OF_FOREBODING
+trigger qm1                               # NMs up: nil; DUG_UP
+kill GIOLLEMITTE                          # Prog 5, its own id: NMKilled 1
+tick 15000                                # the death's fade (0x038)
+tick 15000                                # Giollemitte despawns: qm1's Wait set
+trigger qm1                               # NMKilled 1, Prog 5, the Skeleton Esquire up: nil; DUG_UP
+charvar Quest[0][105]Prog 4               # GM: Prog 4 at the Skeleton Esquire's death
+kill GIOLLEMITTE+1                        # Prog 4: nothing
+charvar Quest[0][105]Prog 5
+tick 15000                                # the death's fade (0x038)
+tick 15000                                # the Skeleton Esquire despawns
+trigger qm1                               # NMKilled 1 (Giollemitte's), Prog 5, both gone: 18
+finish                                    # Prog 6
+trigger qm1                               # Prog 6: nil; DUG_UP
+warp -207.332,-2.949,67.189 SouthernSanDoria
+trigger Phillone                          # Prog 6: 21
+finish                                    # Prog 7
+trigger Phillone                          # Prog 7: 49
+finish
+warp -260.436,23.144,127.61 LaTheinePlateau
+trigger Narvecaint                        # Prog 7: 1
+finish                                    # Prog 8
+trigger Narvecaint                        # Prog 8: 8
+finish
+warp -207.332,-2.949,67.189 SouthernSanDoria
+trigger Phillone                          # Prog 8: 14
+finish                                    # completed: Medieval Collar, fame +40, Obsidian Storm
+trigger Phillone                          # completed: 28 (replaceDefault)
+finish
+trigger Deraquien                         # completed: no section; his script's 18
+finish
+charvar Quest[0][105]Stage 1              # GM: completed, Stage 1
+trigger Phillone                          # completed, Stage 1: check 3 closed (not accepted); 28 (replaceDefault)
+finish

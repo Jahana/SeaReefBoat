@@ -1,0 +1,61 @@
+# Shadows of the Departed (jeuno 88): Ru'Lude Gardens' trigger area 1 (entered by a walk from z 100, after the 2.5 s
+# zone-in lock), the Promyvion crystals _0id (Promyvion-Dem), _0gc (Promyvion-Holla), _0k0 (Promyvion-Mea) (no scripts;
+# default BARRIER_WOVEN). A level 75 Warrior, Storms of Fate completed and Zilart Awakening current (a GM, before
+# login), the Timer 0. The Zilart mission status is Awakening's own bit field: Norg's zone-in plays Awakening's 176 (bit
+# 0, +1), Lower Jeuno's _6tc its 20 (bit 1, +2). Area 1 at status 0: no section (nothing). Norg (176, answered by the
+# warp: status 1); area 1: nothing; _6tc: 20, finished (status 3); area 1: 161: the Note Written by Eshantarl, begun.
+# Accepted: area 1 with no sliver: nil (nothing); each crystal gives its sliver (a keyItem action), then nil
+# (BARRIER_WOVEN) once held; area 1 with each sliver missing alone (a GM's delkeyitem): nil; with the three and a full
+# bag (a GM's fill-inventory: the reward table is empty, quest:complete cannot fail): 162: completed, the three slivers
+# taken, YOU_HAND_THE_THREE_SLIVERS, Apocalypse Nigh's Timer 8001 and its mustZone (243) set. Then area 1: Apocalypse Nigh
+# waits for its Timer and mustZone: nothing. The Note is never taken (kept quirk).
+# #status takes the check's mission / status / Storms of Fate operands and the trade while available, #timer the Timer
+# edge, #compete the reply kinds, #mid_event the finishes outside their states, #era the era module.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/161 RuludeGardens/onEventFinish/162 PromyvionDem/_0id/onTrigger PromyvionHolla/_0gc/onTrigger PromyvionMea/_0k0/onTrigger
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+quest Jeuno.StormsOfFate completed
+mission Zilart Awakening current
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # Awakening at status 0: no section; nothing
+warp 120.9,-8,-12 Norg                  # Norg's zone-in: Awakening's 176 (status bit 0 clear), answered by the warp: status 1
+warp 4,2.5,100 RuludeGardens
+tick 3000
+walk 4,2.5,60                           # status 1: no section; nothing
+warp 39.6,-1.6,-16.6 LowerJeuno         # by _6tc
+trigger _6tc                            # Awakening's 20 (bit 1 clear)
+finish                                  # status 3
+warp 4,2.5,100 RuludeGardens
+tick 3000
+walk 4,2.5,60                           # status 3, Timer 0: 161
+finish                                  # the Note Written by Eshantarl; begun
+walk 4,2.5,100
+walk 4,2.5,60                           # accepted, no sliver: nil; nothing
+warp 101.5,-3,-140 PromyvionHolla       # by _0gc
+trigger _0gc                            # the Promyvion-Holla Sliver
+trigger _0gc                            # held: nil; BARRIER_WOVEN
+warp 221.5,-2.5,340 PromyvionDem        # by _0id
+trigger _0id                            # the Promyvion-Dem Sliver
+trigger _0id                            # held: nil; BARRIER_WOVEN
+warp 261.5,-2.5,180 PromyvionMea        # by _0k0
+trigger _0k0                            # the Promyvion-Mea Sliver
+trigger _0k0                            # held: nil; BARRIER_WOVEN
+warp 4,2.5,100 RuludeGardens
+tick 3000
+delkeyitem PromyvionHollaSliver         # a GM: the Holla one missing (358, the loop's first)
+walk 4,2.5,60                           # nil; nothing
+walk 4,2.5,100
+keyitem PromyvionHollaSliver            # a GM: back
+delkeyitem PromyvionDemSliver           # the Dem one missing (359)
+walk 4,2.5,60                           # nil; nothing
+walk 4,2.5,100
+keyitem PromyvionDemSliver
+delkeyitem PromyvionMeaSliver           # the Mea one missing (360, the loop's last)
+walk 4,2.5,60                           # nil; nothing
+walk 4,2.5,100
+keyitem PromyvionMeaSliver
+fill-inventory                          # a GM: a full bag
+walk 4,2.5,60                           # the three: 162
+finish                                  # completed all the same; the slivers taken; YOU_HAND_THE_THREE_SLIVERS; Apocalypse Nigh's Timer 8001, its mustZone 243
+walk 4,2.5,100
+walk 4,2.5,60                           # completed; Apocalypse Nigh: Timer 8001 and the mustZone: no section; nothing

@@ -1,0 +1,15 @@
+# A Pioneer's Best (Imaginary) Friend (adoulin 75, call-only), the rewards at fractional rates: a level 99 Warrior in
+# Western Adoulin, EXP_RATE 1.125 and BAYLD_RATE 1.3125 (settings), the quest accepted and Ionis on (GMs). Merleg: 543,
+# then 2522, finished: 500 * 1.125 = 562.5 exp (563: the binding rounds half away from zero), npcUtil.giveCurrency's 200
+# * 1.3125 = 262.5 bayld (263, and BAYLD_OBTAINED 263), the badge, 30 fame.
+lists WesternAdoulin/Merleg/onTrigger WesternAdoulin/onEventFinish/2522
+char zone=WesternAdoulin pos=32.5,0,-131 job=WAR lvl=99
+setting EXP_RATE 1.125
+setting BAYLD_RATE 1.3125
+quest Adoulin.APioneersBestImaginaryFriend accepted
+login
+effect 512                              # a GM: Ionis
+trigger Merleg                          # Ionis on: 2522 or 543
+finish-if-event
+trigger Merleg                          # the other; 2522's finish: 562.5 exp, 262.5 bayld
+finish-if-event

@@ -1,0 +1,24 @@
+# Apocalypse Nigh (jeuno 89): the accepted handlers' other Prog values (GMs). A level 75 Warrior by _iya in the Grand
+# Palace of Hu'Xzoi, the quest accepted at Prog 0. _iya at Prog 0 (the handler wants 1): the quest's nil, no other
+# container answers (Garden of Antiquity and A Fate Decided want their CoP mission current), so _iya's own script
+# plays its 52: finished 0 (its finish sets the char down only on option 1); Prog 2: nil, the script's 52 again. Empyreal
+# Paradox: TR_Entrance at Prog 1 (it wants 2; the battlefield wants 3): nothing. The zone-in at Prog 3 and at Prog 5 (it
+# wants 4): rezone open: no event. Sealion's Den's zone-in at Prog 1 is in the main flow.
+lists GrandPalaceOfHuxzoi/_iya/onTrigger EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/onZoneIn/1
+char zone=GrandPalaceOfHuxzoi pos=-18.5,-2.3,-280.2 job=WAR lvl=75
+quest Jeuno.ApocalypseNigh accepted
+login
+trigger _iya                            # Prog 0: the quest's nil; _iya's script: 52
+finish option=0                         # not 1: no set-down
+charvar Quest[3][89]Prog 2              # a GM
+trigger _iya                            # Prog 2: the quest's nil; the script's 52
+finish option=0
+charvar Quest[3][89]Prog 1              # a GM
+warp 541.5,-1.2,-597.7 EmpyrealParadox  # by TR_Entrance; the zone-in at Prog 1: no event
+trigger TR_Entrance                     # Prog 1: the quest's nil; no battlefield menu (requiredVar Prog 3); nothing
+charvar Quest[3][89]Prog 3              # a GM
+rezone open                             # the zone-in at Prog 3: no event
+finish-if-event
+charvar Quest[3][89]Prog 5              # a GM
+rezone open                             # the zone-in at Prog 5: no event
+finish-if-event

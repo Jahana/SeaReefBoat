@@ -1,0 +1,17 @@
+# Making Amens! (windurst 8) beside Rubbish Day (jeuno 13) at Mashira (Garlaige Citadel): both accepted (GMs), Rubbish
+# Day at Prog 0, the Magic Trash held, no Broken Wand. Rubbish Day's ProgressEvent 11 (1) takes the talk over his
+# script; option 0: Rubbish Day does nothing, and his script's finish (interaction_lookup runs it too) gives the Broken
+# Wand (Making Amens! accepted, option 0). Again 11 (1); option 1: Rubbish Day takes the trash
+# (Prog 1), his script's finish does nothing (option 1). Prog 1: Rubbish Day answers nil; Making Amens! accepted with
+# the wand: his standard 11 (3); option 0: the wand already held, nothing more.
+char zone=GarlaigeCitadel pos=141.5,-6.0,139.1 job=WAR lvl=75
+keyitem MagicTrash
+login
+quest Jeuno.RubbishDay accepted
+quest Windurst.MakingAmens accepted
+trigger Mashira                         # Rubbish Day at Prog 0: 11 (1) (Progress over his script)
+finish option=0                         # Rubbish Day: nothing; his finish: the Broken Wand
+trigger Mashira                         # still Prog 0: 11 (1)
+finish option=1                         # Rubbish Day: the trash taken, Prog 1; his finish: option 1, nothing
+trigger Mashira                         # Prog 1: Rubbish Day nil; accepted with the wand: his standard 11 (3)
+finish option=0                         # the wand held: nothing more

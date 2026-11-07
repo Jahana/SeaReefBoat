@@ -1,0 +1,83 @@
+# Riding on the Clouds (jeuno 131): the San d'Oria NPCs (npcSandoria, the Scowling Stone). A level 61 Warrior at level cap 65
+# (a GM, before login), MAX_LEVEL 99, so the available check holds where it stands. Each NPC's onTrade handler
+# compares npcSandoria with its index (0 to 7, the Lua file's order): for each, a GM sets the var to the index on each side
+# (k-1 and k+1; index 7: 0 and 8; the trade: nil, then the NPC's own onTrade runs: the step comment says what it
+# shows), then to the NPC's own
+# (a Kindred's Seal alone: npcSandoria 8, the seal taken, the Scowling Stone, KEYITEM_OBTAINED; the handler still
+# returns nil), and a GM drops the stone again so the next give shows. The seal's exactness is tried at
+# Raminel (index 0): a wrong item, the seal with an extra item, two seals; and npcSandoria 8 after the give.
+# Raminel walks a path (his onSpawn sets him at its first node, -138.436 -2 16.227): the char starts 1.5 yalms east of
+# that node (a trade is sent from where the char stands; no step before Sobane's warp lets the zone tick).
+# First, while the quest is only available: a seal to Raminel (no trade handler in the available state: nothing).
+# The quests named in the comments are the NPCs' other quests and missions: none takes a Kindred's Seal (the port
+# agent checks each step's 'ret onTrade' and packets against its comment).
+lists SouthernSanDoria/Raminel/onTrade SouthernSanDoria/Sobane/onTrade NorthernSanDoria/Taurette/onTrade NorthernSanDoria/Maloquedil/onTrade PortSanDoria/Sheridan/onTrade PortSanDoria/Fontoumant/onTrade PortSanDoria/Brifalien/onTrade PortSanDoria/Rugiette/onTrade
+char zone=SouthernSanDoria pos=-136.936,-2,16.227 job=WAR lvl=61
+levelcap 65
+item KindredsSeal x12
+item FlintStone
+login
+trade Raminel KindredsSeal x1          # available: no trade handler in the available state; a script with no onTrade: nothing, the seal kept
+quest Jeuno.RidingOnTheClouds accepted  # a GM: accepted, the four vars 0
+trade Raminel FlintStone x1            # npcSandoria 0 (index 0): a flint stone is not the seal: nil; nothing
+trade Raminel KindredsSeal x1 FlintStone x1  # the seal and an extra item: not exact: nil; nothing
+trade Raminel KindredsSeal x2          # two seals: not exact: nil; nothing
+trade Raminel KindredsSeal x1   # npcSandoria 0: npcSandoria 8, the seal taken, the Scowling Stone
+trade Raminel KindredsSeal x1   # npcSandoria 8: nil; a script with no onTrade: nothing, the seal kept
+delkeyitem ScowlingStone   # a GM: the stone dropped, so the next give shows it
+warp -187.533,-2.949,99.154 SouthernSanDoria   # by Sobane
+charvar Quest[3][131]npcSandoria 0   # a GM: the index below Sobane's
+trade Sobane KindredsSeal x1   # npcSandoria 0, not 1: nil; no script; Sharpening the Sword, Signed in Blood, Tea with a Tonberry take no seal
+charvar Quest[3][131]npcSandoria 2   # a GM: the index above Sobane's
+trade Sobane KindredsSeal x1   # npcSandoria 2, not 1: nil; no script; Sharpening the Sword, Signed in Blood, Tea with a Tonberry take no seal
+charvar Quest[3][131]npcSandoria 1   # a GM: Sobane's index
+trade Sobane KindredsSeal x1   # npcSandoria 1: npcSandoria 8, the seal taken, the Scowling Stone
+delkeyitem ScowlingStone   # a GM: the stone dropped, so the next give shows it
+warp -160.345,0,89.975 NorthernSanDoria   # by Taurette
+charvar Quest[3][131]npcSandoria 1   # a GM: the index below Taurette's
+trade Taurette KindredsSeal x1   # npcSandoria 1, not 2: nil; no script
+charvar Quest[3][131]npcSandoria 3   # a GM: the index above Taurette's
+trade Taurette KindredsSeal x1   # npcSandoria 3, not 2: nil; no script
+charvar Quest[3][131]npcSandoria 2   # a GM: Taurette's index
+trade Taurette KindredsSeal x1   # npcSandoria 2: npcSandoria 8, the seal taken, the Scowling Stone
+delkeyitem ScowlingStone   # a GM: the stone dropped, so the next give shows it
+warp 36.618,-0.199,60.354 NorthernSanDoria   # by Maloquedil
+charvar Quest[3][131]npcSandoria 2   # a GM: the index below Maloquedil's
+trade Maloquedil KindredsSeal x1   # npcSandoria 2, not 3: nil; a script with no onTrade; Warding Vampires takes no seal
+charvar Quest[3][131]npcSandoria 4   # a GM: the index above Maloquedil's
+trade Maloquedil KindredsSeal x1   # npcSandoria 4, not 3: nil; a script with no onTrade; Warding Vampires takes no seal
+charvar Quest[3][131]npcSandoria 3   # a GM: Maloquedil's index
+trade Maloquedil KindredsSeal x1   # npcSandoria 3: npcSandoria 8, the seal taken, the Scowling Stone
+delkeyitem ScowlingStone   # a GM: the stone dropped, so the next give shows it
+warp -17.65,-8,-129.728 PortSanDoria   # by Sheridan
+charvar Quest[3][131]npcSandoria 3   # a GM: the index below Sheridan's
+trade Sheridan KindredsSeal x1   # npcSandoria 3, not 4: nil; no script; The Pickpocket takes no seal
+charvar Quest[3][131]npcSandoria 5   # a GM: the index above Sheridan's
+trade Sheridan KindredsSeal x1   # npcSandoria 5, not 4: nil; no script; The Pickpocket takes no seal
+charvar Quest[3][131]npcSandoria 4   # a GM: Sheridan's index
+trade Sheridan KindredsSeal x1   # npcSandoria 4: npcSandoria 8, the seal taken, the Scowling Stone
+delkeyitem ScowlingStone   # a GM: the stone dropped, so the next give shows it
+warp -9.133,-8,-122.199 PortSanDoria   # by Fontoumant
+charvar Quest[3][131]npcSandoria 4   # a GM: the index below Fontoumant's
+trade Fontoumant KindredsSeal x1   # npcSandoria 4, not 5: nil; no script; The Brugaire Consortium takes no seal
+charvar Quest[3][131]npcSandoria 6   # a GM: the index above Fontoumant's
+trade Fontoumant KindredsSeal x1   # npcSandoria 6, not 5: nil; no script; The Brugaire Consortium takes no seal
+charvar Quest[3][131]npcSandoria 5   # a GM: Fontoumant's index
+trade Fontoumant KindredsSeal x1   # npcSandoria 5: npcSandoria 8, the seal taken, the Scowling Stone
+delkeyitem ScowlingStone   # a GM: the stone dropped, so the next give shows it
+warp -17.798,-4,-74.169 PortSanDoria   # by Brifalien
+charvar Quest[3][131]npcSandoria 5   # a GM: the index below Brifalien's
+trade Brifalien KindredsSeal x1   # npcSandoria 5, not 6: nil; a script with no onTrade; The Pickpocket takes no seal
+charvar Quest[3][131]npcSandoria 7   # a GM: the index above Brifalien's
+trade Brifalien KindredsSeal x1   # npcSandoria 7, not 6: nil; a script with no onTrade; The Pickpocket takes no seal
+charvar Quest[3][131]npcSandoria 6   # a GM: Brifalien's index
+trade Brifalien KindredsSeal x1   # npcSandoria 6: npcSandoria 8, the seal taken, the Scowling Stone
+delkeyitem ScowlingStone   # a GM: the stone dropped, so the next give shows it
+warp 72.86,-8.102,-73.724 PortSanDoria   # by Rugiette
+charvar Quest[3][131]npcSandoria 0   # a GM: an index below Rugiette's (the lowest)
+trade Rugiette KindredsSeal x1   # npcSandoria 0, not 7: nil; a script with no onTrade
+charvar Quest[3][131]npcSandoria 8   # a GM: the index above Rugiette's
+trade Rugiette KindredsSeal x1   # npcSandoria 8, not 7: nil; a script with no onTrade
+charvar Quest[3][131]npcSandoria 7   # a GM: Rugiette's index
+trade Rugiette KindredsSeal x1   # npcSandoria 7: npcSandoria 8, the seal taken, the Scowling Stone
+delkeyitem ScowlingStone   # a GM: the stone dropped, so the next give shows it

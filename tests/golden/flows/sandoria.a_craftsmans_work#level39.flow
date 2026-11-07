@@ -1,0 +1,16 @@
+# A Craftsman's Work (sandoria 94): the level guard. A DRG 39 (below AF1_QUEST_LEVEL 40): 11 (the job guard is #war).
+# AF1_QUEST_LEVEL 39 (a GM's setting): 73, option 1: begun at once (aCraftsmanWork 1). AF1_QUEST_LEVEL 40 again: the
+# accepted arms read no level: 69; the stone (GM): 70, its finish: the Peregrine, completed.
+char zone=NorthernSanDoria pos=-167.6,4,158.7 job=DRG lvl=39
+login
+trigger Miaux                             # DRG 39: no arm: 11
+finish
+setting AF1_QUEST_LEVEL 39                # a GM's setting
+trigger Miaux                             # DRG 39 at AF1_QUEST_LEVEL 39, available, has_seen 0: 73
+finish option=1                           # begun at once; has_seen 0; aCraftsmanWork 1
+setting AF1_QUEST_LEVEL 40
+trigger Miaux                             # accepted, no stone (level 39 below 40: no level read): 69
+finish
+keyitem AltepaPolishingStone              # GM: the Eastern Altepa qm's
+trigger Miaux                             # accepted with the stone: 70
+finish                                    # the Peregrine; aCraftsmanWork 0; the stone taken; fame 20; completed

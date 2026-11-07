@@ -1,0 +1,41 @@
+# Megadrile Menace (abyssea 165): a level 99 Warrior in Tahrongi Canyon by the Cavernous Maw with The Truth Beckons
+# completed and Dawn of Death accepted (GMs), no Traverser Stone, 2 maw quests completed (A Goldstruck Gigas, To Paste a
+# Peiste) and The Beast of Bastore accepted (GMs; an accepted one does not count). 100 cruor (a GM, after the login).
+# The maw, no stone: no section: its own warp event 100 (entranceMawOnTrigger), finished on option 0: no warp. Traverser
+# Stone 3 (a GM, one stone: `>= 1`): 38 (a Progress), finished on option 0: begun, 50 cruor (CRUOR_TOTAL 50, 150). Back
+# to available (a GM): the maw again with no other talk between: 38 again (an Event-rank 38 would alternate with the
+# maw's own onTrigger: 100), finished on option 2: begun (any option), 50 cruor (CRUOR_TOTAL 50, 200). Accepted: the
+# maw: no handler: 100. A zone-in, accepted with no Glavoid title: nothing. The title (a GM): the zone-in plays 39 (left
+# open); its update on option 0 and on option 2: nothing; on option 1: updateEvent(the key item for 2 completed: Ivory
+# Abyssite of Acumen); finished: Ivory Abyssite of Acumen given, then completed. Completed (title, stone and Dawn of
+# Death still held): a zone-in: nothing; the maw: 100.
+lists TahrongiCanyon/Cavernous_Maw/onTrigger TahrongiCanyon/onEventFinish/38 TahrongiCanyon/onEventFinish/100 TahrongiCanyon/onZoneIn/1 TahrongiCanyon/onEventUpdate/39 TahrongiCanyon/onEventFinish/39
+char zone=TahrongiCanyon pos=-26.5,46,-685 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath accepted
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.TheBeastOfBastore accepted
+login
+currency cruor 100                      # a GM
+trigger Cavernous_Maw                   # no stone: no section: the maw's warp event 100
+finish                                  # option 0: no warp
+keyitem TraverserStone3                 # a GM: one stone
+trigger Cavernous_Maw                   # available, one stone, Dawn of Death accepted: 38
+finish                                  # option 0: begun (50 cruor, 150)
+quest Abyssea.MegadrileMenace available # a GM
+trigger Cavernous_Maw                   # 38 again (the kind)
+finish option=2                         # begun (any option) (50 cruor, 200)
+trigger Cavernous_Maw                   # accepted: no maw handler: 100
+finish                                  # option 0: no warp
+rezone                                  # accepted, no title: nothing
+title GlavoidStampeder                  # a GM
+rezone open                             # the title: 39, left open
+update 39 option=0                      # option 0: nothing
+update 39 option=2                      # option 2: nothing
+update 39 option=1                      # option 1: updateEvent(Ivory Abyssite of Acumen)
+finish                                  # Ivory Abyssite of Acumen given; completed
+rezone                                  # completed: nothing
+trigger Cavernous_Maw                   # completed: no section: 100
+finish                                  # option 0: no warp

@@ -1,0 +1,23 @@
+# Silence of the Rams (bastok 48): Paujean in Port Bastok. The guard (Norg fame level 2), the two-horn trade, the
+# message while accepted, the Purple Belt reward, no repeat. Paujean's default is 25; no other quest names him.
+lists PortBastok/Paujean/onTrigger PortBastok/Paujean/onTrade PortBastok/onEventFinish/195 PortBastok/onEventFinish/196
+char zone=PortBastok pos=-93.7,4.649,35.3
+fame Norg 49
+item LumberingHorn
+item LumberingHorn
+item RampagingHorn
+item RampagingHorn
+login
+trade Paujean LumberingHorn x1 RampagingHorn x1  # available: no trade handler, nothing
+trigger Paujean                 # Norg fame 49 (level 1): his default 25
+finish
+fame Norg 50
+trigger Paujean                 # Norg fame level 2: the offer, 195
+finish                          # accepted
+trigger Paujean                 # accepted: PAUJEAN_DIALOG_1 (messageName)
+trade Paujean LumberingHorn x1  # one horn: nothing
+trade Paujean LumberingHorn x1 RampagingHorn x1  # 196
+finish                          # completed: Purple Belt, Norg fame +20, the Purple Belt title, both horns gone
+trigger Paujean                 # completed: 25
+finish
+trade Paujean LumberingHorn x1 RampagingHorn x1  # completed: nothing

@@ -1,0 +1,14 @@
+# Lovers in the Dusk with a full inventory: qm4's 204 at dusk plays, the Siren Flute does not fit, the quest stays
+# accepted and the Chanson is kept; once there is room the same 204 completes it.
+char zone=TheSanctuaryOfZitah pos=21.6,0.483,94.6 lvl=75
+keyitem ChansonDeLiberte
+quest Bastok.LoversInTheDusk accepted
+login
+wait vana=5                    # 17:00, dusk
+tick 1000
+fill-inventory
+trigger qm4                    # dusk: 204
+finish                         # the inventory full: not completed, the Chanson kept
+free-inventory
+trigger qm4                    # 204 again
+finish                         # completed: Siren Flute, fame +70, the Chanson deleted

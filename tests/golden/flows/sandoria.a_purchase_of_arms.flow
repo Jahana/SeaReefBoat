@@ -1,0 +1,32 @@
+# A Purchase of Arms (sandoria 27): Helbort in Southern San d'Oria, Alexius in Jugner Forest. Father and Son completed:
+# at fame level 1 Helbort's default; at level 2 a trade (no trade handler: nothing), his 594 (option 1: nothing; option
+# 0: the Weapons Order, begun); HELBORT_ORDERS with the order; Alexius's 5 (the Weapons Receipt, the order deleted),
+# then his ALEXIUS_ORDERS (messageName with the receipt and the Lua booleans true, false: his name shown, the NPC does
+# not turn); Helbort's 607 (completed: Elm Staff, fame +20, Arms Trader, the receipt deleted), then his
+# HELBORT_ORDERS + 3. Alexius once completed: nothing.
+# Helbort has no script; his default is text HELBORT_DIALOG (Father and Son's 593 is not offered once it is completed).
+# Alexius has no script and no default.
+lists SouthernSanDoria/Helbort/onTrigger SouthernSanDoria/onEventFinish/594 SouthernSanDoria/onEventFinish/607 JugnerForest/Alexius/onTrigger JugnerForest/onEventFinish/5
+char zone=SouthernSanDoria pos=68.8,0,62.4 job=WAR lvl=10
+quest Sandoria.FatherAndSon completed
+fame Sandoria 49
+item BoneChip
+login
+trigger Helbort                           # fame level 1: not offered; HELBORT_DIALOG
+fame Sandoria 50
+trade Helbort BoneChip x1                 # available, fame level 2: no trade handler, nothing
+trigger Helbort                           # fame level 2: 594
+finish option=1                           # not option 0: nothing
+trigger Helbort                           # 594
+finish                                    # option 0: the Weapons Order, begun
+trigger Helbort                           # the order held: HELBORT_ORDERS
+warp 99.9,5.4,383.9 JugnerForest
+trigger Alexius                           # the order: 5
+finish                                    # the Weapons Receipt, the order deleted
+trigger Alexius                           # no order: ALEXIUS_ORDERS (the receipt; showName true, turn false: no turn)
+warp 68.8,0,62.4 SouthernSanDoria
+trigger Helbort                           # no order: 607
+finish                                    # completed: Elm Staff, fame +20, Arms Trader; the receipt deleted
+trigger Helbort                           # completed: HELBORT_ORDERS + 3
+warp 99.9,5.4,383.9 JugnerForest
+trigger Alexius                           # completed: no section, no script, no default: nothing

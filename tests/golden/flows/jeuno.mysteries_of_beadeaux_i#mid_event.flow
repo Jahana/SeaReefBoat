@@ -1,0 +1,14 @@
+# Mysteries of Beadeaux I (jeuno 31): finishes outside their state. 89 (0) open, the quest set accepted by a GM: the
+# finish finds no 89 handler (Mysteries of Beadeaux II not added). 91 open (the trade's rosary and fame already given),
+# the quest set completed by a GM: the finish finds no 91 handler (no KEYITEM_OBTAINED).
+lists LowerJeuno/Sattal-Mansal/onTrigger LowerJeuno/Sattal-Mansal/onTrade LowerJeuno/onEventFinish/89 LowerJeuno/onEventFinish/91
+char zone=LowerJeuno pos=42.6,3.9,-54 job=WAR lvl=75
+keyitem SilverBell
+item QuadavCharm
+login
+trigger Sattal-Mansal               # available: 89 (0)
+quest Jeuno.MysteriesOfBeadeauxI accepted # a GM, while 89 is open
+finish                              # no 89 finish while accepted: II not added
+trade Sattal-Mansal QuadavCharm x1  # the rosary, fame +7 x3, the charm taken; 91
+quest Jeuno.MysteriesOfBeadeauxI completed # a GM, while 91 is open
+finish                              # no 91 finish while completed: no message

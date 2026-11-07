@@ -1,0 +1,31 @@
+# Redeeming Rocks (crystalWar 4, call-only), the edges: a level 99 Warrior in Windurst Waters [S] (missions as the main
+# flow). Available: Rohn 440; Vunkerl Inlet [S] qm4 at Prog 0: NOTHING_OUT_OF_ORDINARY. Kocco 108, finished: added, Prog
+# 1. Kocco again at Prog 1 (RedeemingDay 0, not today): 111 at once; the bag full (a GM): finished: not completed. The
+# bag freed (a GM): 111, finished: completed with no Kionite. Completed, RedeemingRocksProg 3 (a GM): qm4 reads no
+# status: the Kionite again, Prog 4; Kocco: completed: 140.
+lists WindurstWatersS/Kocco_Ehllek/onTrigger WindurstWatersS/Rohn_Ehlbalna/onTrigger VunkerlInletS/qm4/onTrigger WindurstWatersS/onEventFinish/108 WindurstWatersS/onEventFinish/111
+char zone=WindurstWatersS pos=-41.973,-3.5,46.496 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rohn_Ehlbalna                   # available: 440
+finish
+warp -411.583,-28.953,-45.12 VunkerlInletS
+trigger qm4                             # Prog 0: NOTHING_OUT_OF_ORDINARY
+warp -39.965,-1.125,-163.018 WindurstWatersS
+trigger Kocco_Ehllek                    # available: 108
+finish                                  # added; Prog 1
+fill-inventory                          # a GM: no slot free
+trigger Kocco_Ehllek                    # accepted, Prog 1, RedeemingDay 0: 111 (the early completion)
+finish                                  # no room for the earring: not completed
+free-inventory                          # a GM
+trigger Kocco_Ehllek                    # 111 again
+finish                                  # completed (Kocco's Earring), no Kionite ever
+charvar RedeemingRocksProg 3            # a GM
+warp -411.583,-28.953,-45.12 VunkerlInletS
+trigger qm4                             # completed, Prog 3 (no status read): the Kionite; Prog 4
+warp -39.965,-1.125,-163.018 WindurstWatersS
+trigger Kocco_Ehllek                    # completed: 140
+finish

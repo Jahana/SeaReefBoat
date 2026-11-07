@@ -1,0 +1,84 @@
+# Promotion: Second Lieutenant (ahtUrhgan 97): a level 1 Warrior with Private First Class to Chief Sergeant completed
+# and the CS Wildcat Badge, AssaultPromotion 25, three Imperial Gold Pieces, ten Imperial Mythril Pieces, a Troll
+# Pauldron, a Bone Chip. Abquhbah (his script: 255; no onTrade of his own) stands in trigger area 3 (31 -7 -60 .. 39 -6
+# -52), whose handler also answers 5071 while the quest is available: the talks here stand south-east of the area (x
+# 39.5, z -62), so his own 5071 shows; `#edges` shows the area's. Available: Abquhbah 5071: begun. Prog 0: 5072 (once
+# per zone); again: 255; two Gold Pieces: not exactly three: nil: nothing; three: 5073: taken, Prog 1, the Officer
+# Academy Manual. Prog 1: Abquhbah, local Prog 0: 5074 (local 1); again: nil: 255; two Mythril Pieces: 5075, option 2
+# (not 1): taken, local 0, still Prog 1: 5074 again; 5075, option 1: Prog 2. Prog 2: 5074; Nashmau and back (a zone-in
+# drops the local var): 5074 again; two Mythril Pieces: 5076: Prog 3. Prog 3: 5079 (once per zone); again: 255; the Bone
+# Chip: no beastmen item: nil; the Troll Pauldron alone: 5077: taken, local 0, Prog 4. Prog 4: 5074; two Mythril Pieces:
+# 5078, option 2: taken, local 0, not completed: 5074; again, option 1: completed (the SL Wildcat Badge, Second
+# Lieutenant), AssaultPromotion 0, the CS badge taken, SECOND_LIEUTENANT (user ruling 2026-11-04, kept Lua bugs: the
+# Lua dropped it).
+lists AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/Abquhbah/onTrade AhtUrhganWhitegate/onEventFinish/5071 AhtUrhganWhitegate/onEventFinish/5073 AhtUrhganWhitegate/onEventFinish/5074 AhtUrhganWhitegate/onEventFinish/5075 AhtUrhganWhitegate/onEventFinish/5076 AhtUrhganWhitegate/onEventFinish/5077 AhtUrhganWhitegate/onEventFinish/5078
+char zone=AhtUrhganWhitegate pos=39.524,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant completed
+charvar AssaultPromotion 25
+keyitem CsWildcatBadge
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item ImperialMythrilPiece
+item TrollPauldron
+item BoneChip
+login
+trigger Abquhbah at=4                   # available: 5071 (area 3 not entered: x 39.5)
+finish                                  # begun
+trigger Abquhbah at=4                   # Prog 0: 5072 (once per zone)
+finish
+trigger Abquhbah at=4                   # Ignore: 255
+finish
+trade Abquhbah ImperialGoldPiece x2     # not exactly three: nil: nothing
+finish-if-event
+trade Abquhbah ImperialGoldPiece x3     # 5073
+finish                                  # taken; Prog 1; the Officer Academy Manual
+trigger Abquhbah at=4                   # Prog 1, local 0: 5074
+finish                                  # local Prog 1
+trigger Abquhbah at=4                   # local 1: nil: 255
+finish
+trade Abquhbah ImperialMythrilPiece x2  # 5075
+finish option=2                         # not 1: taken; local 0; still Prog 1
+trigger Abquhbah at=4                   # local 0 again: 5074
+finish
+trade Abquhbah ImperialMythrilPiece x2  # 5075
+finish option=1                         # Prog 2
+trigger Abquhbah at=4                   # Prog 2, local 0: 5074
+finish
+warp 17.413,0,-32.676 Nashmau
+warp 39.524,-6.601,-62 AhtUrhganWhitegate   # a zone-in: the local var gone
+trigger Abquhbah at=4                   # 5074 again
+finish
+trade Abquhbah ImperialMythrilPiece x2  # 5076
+finish                                  # Prog 3
+trigger Abquhbah at=4                   # Prog 3: 5079 (once per zone)
+finish
+trigger Abquhbah at=4                   # its mark used: 255
+finish
+trade Abquhbah BoneChip x1              # no beastmen item: nil: nothing
+finish-if-event
+trade Abquhbah TrollPauldron x1         # 5077
+finish                                  # taken; local 0; Prog 4
+trigger Abquhbah at=4                   # Prog 4, local 0: 5074
+finish
+trade Abquhbah ImperialMythrilPiece x2  # 5078
+finish option=2                         # not 1: taken; local 0; not completed
+trigger Abquhbah at=4                   # local 0: 5074
+finish
+trade Abquhbah ImperialMythrilPiece x2  # 5078
+finish option=1                         # completed; AssaultPromotion 0; the CS badge taken; SECOND_LIEUTENANT

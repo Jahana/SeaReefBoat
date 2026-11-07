@@ -1,0 +1,28 @@
+# Recycling Rods (otherAreas 30): Mhaura's Keshab-Menjab (no script, no default; no other quest answers him, so his reply
+# kinds are not observable). A level 30 Warrior with a Clean Snap Rod and a Chocobo Feather.
+# Available: the rod: no trade handler, nothing (kept). 313, option 0: nothing; option 2: nothing; option 1: begun.
+# Accepted: 315; the feather: 316; the rod and the feather: 316 (tradeHasExactly); the rod: 317, finished: completed (1500
+# gil), the rod taken. Completed: 314; the feather: no trade handler, nothing.
+lists Mhaura/Keshab-Menjab/onTrigger Mhaura/Keshab-Menjab/onTrade Mhaura/onEventFinish/313 Mhaura/onEventFinish/317
+char zone=Mhaura pos=-14.2,-8,54 job=WAR lvl=30
+item CleanSnapRod
+item ChocoboFeather
+login
+trade Keshab-Menjab CleanSnapRod x1     # available: no trade handler; nothing (the rod kept)
+trigger Keshab-Menjab                   # 313
+finish option=0                         # not 1: nothing
+trigger Keshab-Menjab                   # 313
+finish option=2                         # not 1: nothing
+trigger Keshab-Menjab                   # 313
+finish option=1                         # begun
+trigger Keshab-Menjab                   # accepted: 315
+finish
+trade Keshab-Menjab ChocoboFeather x1   # not the rod: 316
+finish
+trade Keshab-Menjab CleanSnapRod x1 ChocoboFeather x1 # an extra item: 316
+finish
+trade Keshab-Menjab CleanSnapRod x1     # 317
+finish                                  # completed: 1500 gil; the rod taken
+trigger Keshab-Menjab                   # completed: 314
+finish
+trade Keshab-Menjab ChocoboFeather x1   # completed: no trade handler; nothing

@@ -1,0 +1,25 @@
+# The Goblin Tailor (jeuno 42): the offer's operands and the level check while accepted (two chars: the level is a char
+# line's). Main at level 9, fame level 3: 10020; bob at level 10, fame level 2 ((249 + 0 + 0) / 2 = 124): 10020; bob's
+# fame 250 (a GM): 10016 (1, 1), begun. Main accepted (a GM) at level 9: 10020; [RSE]Gear 15 (a GM) at level 9: 10019
+# (the gear check first).
+lists LowerJeuno/Guttrix/onTrigger LowerJeuno/onEventFinish/10016
+char zone=LowerJeuno pos=-34.5,5.5,-139.7 job=WAR lvl=9
+char bob zone=LowerJeuno pos=-34.5,5.5,-138.2 job=WAR lvl=10
+fame Sandoria 250
+bob: fame Sandoria 249
+login
+trigger Guttrix                         # level 9: 10020
+finish
+bob: login
+bob: trigger Guttrix                    # level 10, fame level 2: 10020
+bob: finish
+bob: fame Sandoria 250                  # a GM: fame level 3
+bob: trigger Guttrix                    # level 10, fame level 3: 10016 (1, 1)
+bob: finish                             # begun
+quest Jeuno.TheGoblinTailor available   # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGoblinTailor accepted    # a GM
+trigger Guttrix                         # accepted, level 9: 10020
+finish
+charvar [RSE]Gear 15                    # a GM
+trigger Guttrix                         # [RSE]Gear 15 first: 10019
+finish

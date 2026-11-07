@@ -1,0 +1,32 @@
+# Blue Ribbon Blues (windurst 17): the timer's edge and 360's give. Accepted by GM (Prog 0). The harness's system time
+# is 1800000000: Timer 1800000001 (a second ahead): 359; Timer 1800000000 (exactly now, `<` false): 360. 360 with a
+# full bag: giveItem fails, Prog stays 0; with room: a ribbon, Prog 1. GM Prog 0 with the ribbon held: 360, whose give
+# fails (the ribbon is rare), Prog stays 0. Then the Lich killed while Prog is not 1: the ribbon to the Hume Bones at
+# Prog 1 pops it, GM Prog 0, the kill sets no local var, so the Hume Bones give nothing (their default).
+lists WindurstWaters/Kerutoto/onTrigger WindurstWaters/onEventFinish/360 TheEldiemeNecropolis/Hume_Bones/onTrigger TheEldiemeNecropolis/Lich_C_Magnus/onMobDeath
+char zone=WindurstWaters pos=13.0,-4.71,-155.9 job=WAR lvl=75
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+quest Windurst.WaterWayToGo completed
+quest Windurst.BlueRibbonBlues accepted
+fame Windurst 325
+login
+charvar Quest[2][17]Timer 1800000001
+trigger Kerutoto                        # Prog 0, now < Timer (one second): 359
+finish
+charvar Quest[2][17]Timer 1800000000
+trigger Kerutoto                        # Prog 0, now == Timer: 360
+fill-inventory
+finish                                  # no room: nothing, Prog 0
+free-inventory
+trigger Kerutoto                        # 360 again
+finish                                  # a ribbon; Prog 1
+charvar Quest[2][17]Prog 0
+trigger Kerutoto                        # Prog 0, the timer passed: 360
+finish                                  # the ribbon held (rare): giveItem fails, Prog 0
+charvar Quest[2][17]Prog 1
+warp 301.5,-0.25,19.99 TheEldiemeNecropolis
+trade Hume_Bones PurpleRibbon x1        # Prog 1: Lich C. Magnus pops; the ribbon taken; RETURN_RIBBON_TO_HER
+charvar Quest[2][17]Prog 0
+kill LICH_C_MAGNUS                      # onMobDeath, Prog 0: no local var
+trigger Hume_Bones                      # local Prog 0: nil; NOTHING_OUT_OF_ORDINARY

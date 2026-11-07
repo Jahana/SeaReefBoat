@@ -1,0 +1,21 @@
+# The Antique Collector (jeuno 25): the kinds of Imasuke's replies, against The Circle of Time's. Imasuke has no
+# script; The Circle of Time accepted at Prog 3 (a GM, before login) answers him with 32 (an event). A level 75 Bard at
+# Jeuno fame level 2 ((100 + 0 + 0) / 2 = 50). Available: 13 (a progressEvent) beats 32, option 0: nothing; 13 again,
+# option 1: begun. Accepted: 14 and 32, both events, tie: the lookup plays them in turn (by the last event id), so two
+# talks show both.
+lists PortJeuno/Imasuke/onTrigger PortJeuno/onEventFinish/13
+char zone=PortJeuno pos=-164.3,11,96.4 job=BRD lvl=75
+fame Sandoria 100
+quest Jeuno.TheCircleOfTime accepted
+charvar Quest[3][65]Prog 3
+login
+trigger Imasuke                         # 13 over the Circle's 32
+finish option=0                         # nothing
+trigger Imasuke                         # 13 again
+finish option=1                         # begun
+trigger Imasuke                         # accepted: 14 and 32 tie: the first in the list
+finish
+trigger Imasuke                         # the other
+finish
+trigger Imasuke                         # the first again
+finish

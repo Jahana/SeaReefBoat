@@ -1,0 +1,42 @@
+# A Question of Faith (bastok 77): Ayame in Metalworks, Virnage in Bastok Mines, Rakorok and Bugallug in Oldton
+# Movalpolos. The fame / completed-quest guard, Altana's Sorrow cycling at Virnage, the ??? pop, the mob kill, three
+# zones. A WAR 75 for Bugallug. From XI.Verify.QuestScripts.Live's RunAQuestionOfFaith twin.
+lists Metalworks/Ayame/onTrigger Metalworks/onEventFinish/875 BastokMines/Virnage/onTrigger BastokMines/onEventFinish/239 BastokMines/onEventFinish/241 OldtonMovalpolos/Rakorok/onTrigger OldtonMovalpolos/Bugallug/onMobDeath OldtonMovalpolos/onEventFinish/6
+char zone=Metalworks pos=132.5,-19,33.3 lvl=75
+fame Bastok 225                 # fame level 4, Out of the Depths not completed
+login
+trigger Ayame                   # not offered
+finish-if-event
+quest Bastok.OutOfTheDepths completed
+fame Bastok 224                 # fame level 3
+trigger Ayame                   # not offered
+finish-if-event
+fame Bastok 225                 # fame level 4
+trigger Ayame                   # both: the offer, 875
+finish                          # accepted
+route BastokMarkets BastokMines
+trigger Virnage                 # no talisman, Prog 0: 239
+finish option=0                 # no talisman
+trigger Virnage                 # the lookup's cycle: Altana's Sorrow's 141
+finish option=1                 # declined
+trigger Virnage                 # 239 again
+finish option=1                 # the Dawn Talisman
+trigger Virnage                 # Altana's Sorrow's 141 outranks the quest's 242
+finish option=1
+quest Bastok.AltanasSorrow completed
+trigger Virnage                 # the talisman held: 242
+finish
+route SouthGustaberg NorthGustaberg OldtonMovalpolos
+trigger Rakorok                 # the talisman, Prog 0: Bugallug up, claimed, no event
+trigger Rakorok                 # Bugallug still up: no pop, not 6
+finish-if-event
+kill BUGALLUG                   # Prog 1
+trigger Rakorok                 # Prog 1 with the talisman: 6
+finish                          # the talisman taken
+trigger Rakorok                 # no talisman: not 6
+finish-if-event
+route NorthGustaberg SouthGustaberg BastokMines
+trigger Virnage                 # Prog 1, no talisman: 241
+finish                          # completed: 3000 gil, fame + 40
+trigger Virnage                 # after the completion
+finish-if-event

@@ -1,0 +1,16 @@
+# Tutorial, level edges: a level 5 Warrior with a Red Mage support job at level 1 (nation 1) in Bastok Markets.
+# Prog 7 (a GM): level 5 >= 5: 709; Prog 11 (a GM): getSubLvl() 1 >= 1: 717. Prog 4 (a GM), only Hand-to-Hand 5 (the
+# first combat skill): 703.
+lists BastokMarkets/Gulldago/onTrigger BastokMarkets/onEventFinish/709 BastokMarkets/onEventFinish/717
+char zone=BastokMarkets pos=-362,-10,-167 job=WAR lvl=5 sjob=RDM slvl=1 nation=1
+charvar HQuest[Tutorial]Prog 7
+login
+trigger Gulldago                        # level 5: 709
+finish                                  # the Raising Earring; Prog 8
+charvar HQuest[Tutorial]Prog 11         # a GM
+trigger Gulldago                        # support level 1: 717
+finish                                  # 12 Free Chocopasses, the Echad Ring; Prog 12
+charvar HQuest[Tutorial]Prog 4         # a GM
+skill HandToHand 50
+trigger Gulldago                        # Hand-to-Hand 5 is a learnt weaponskill: 703
+finish                                  # the gil; Prog 5

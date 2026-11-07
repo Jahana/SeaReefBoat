@@ -1,0 +1,86 @@
+# Knight Stalker (sandoria 96, DRG AF3; call-only): Rahal (Chateau d'Oraguille), Ceraulian (Port San d'Oria), Balasiel
+# (Southern San d'Oria; default 667: after each zone-in the first talk plays it, then his talks alternate between his
+# script and the default), the Temple of Uggalepih qm15. Rahal, Ceraulian and the qm15 have no default
+# (529 / 587 / SOME_SORT_OF_CEREMONY are their scripts'). The Holy Crest, A Craftsman's Work, Chasing Quotas and
+# Balasiel's four quests completed by GM (else their C# states and The Holy Crest's arm answer Ceraulian and Balasiel
+# first). The Kuftal Tunnel coffer's challenge and the NMs' kill var are set by GM (Lua; the NMs pop only with a wyvern
+# out).
+# A DRG 75: Rahal 121, option 0 (Declined 1); Declined 0 (GM): 121, option 2 (Declined 1); 120,
+# option 0 and 2 (nothing); 120, option 1 (begun, Declined 0); 119. Ceraulian 19 (Progress 1); 23; the challenge: 20.
+# Rahal 78 (2); 69. Balasiel 63 (3); then no arm (his default). Rahal 110 (4); then the accepted arm plays nothing.
+# qm15: Kill 0, no wyvern: SOME_SORT_OF_CEREMONY; Kill 2 (GM): the same; Kill 1 (GM): 67 with a full inventory
+# (npcUtil.completeQuest fails: nothing). Quest[0][96]Prog 1 (GM). 67 with room: the Drachen Armet,
+# The Paragon of Dragoon Excellence, Kill and Progress 0, completed (no fame: the table has no fameArea), the challenge
+# taken, Option1 1, Option2 1; Quest[0][96]Prog kept (the raw completeQuest). Ceraulian 22 (Option1 0); 21.
+# Rahal 118 (Option2 0, Lua); 529.
+char zone=ChateauDoraguille pos=-29.5,0,-8.4 job=DRG lvl=75
+quest Sandoria.TheHolyCrest completed     # (GM) else The Holy Crest's arm answers Ceraulian first (level 75, available)
+quest Sandoria.ACraftsmansWork completed
+quest Sandoria.ChasingQuotas completed
+quest Sandoria.ASquiresTest completed     # (GM) else Balasiel's C# quests answer first
+quest Sandoria.ASquiresTestIi completed
+quest Sandoria.AKnightsTest completed
+quest Sandoria.MethodsCreateMadness completed
+login
+trigger Rahal                             # Chasing Quotas completed, available, DRG, Declined 0: 121
+finish option=0                           # KnightStalker_Declined 1
+charvar KnightStalker_Declined 0          # a GM
+trigger Rahal                             # Declined 0: 121
+finish option=2                           # any option but 1 declines: Declined 1
+trigger Rahal                             # Declined 1: 120
+finish option=0                           # nothing
+trigger Rahal                             # 120
+finish option=2                           # nothing (only option 1 begins)
+trigger Rahal                             # 120
+finish option=1                           # begun; Declined 0
+trigger Rahal                             # accepted, Progress 0: 119
+finish
+warp 0.6,-8,-121.9 PortSanDoria
+trigger Ceraulian                         # The Holy Crest completed: no arm; accepted, Progress 0: 19
+finish                                    # KnightStalker_Progress 1
+trigger Ceraulian                         # Progress 1 without the challenge: 23
+finish
+keyitem ChallengeToTheRoyalKnights        # GM: the Kuftal Tunnel Treasure Coffer's reward at Progress 1 (Lua)
+trigger Ceraulian                         # Progress 1 with the challenge: 20
+finish
+warp -29.5,0,-8.4 ChateauDoraguille
+trigger Rahal                             # accepted, the challenge, Progress 1: 78
+finish                                    # Progress 2
+trigger Rahal                             # Progress 2: 69
+finish
+warp -136.8,-10.8,65.8 SouthernSanDoria
+trigger Balasiel                          # default 667
+finish
+trigger Balasiel                          # accepted, Progress 2: 63
+finish                                    # Progress 3
+trigger Balasiel                          # default 667
+finish
+trigger Balasiel                          # Progress 3: no arm; his script starts nothing: the default 667
+finish
+warp -29.5,0,-8.4 ChateauDoraguille
+trigger Rahal                             # Progress 3: 110
+finish                                    # Progress 4
+trigger Rahal                             # accepted, Progress 4: the arm taken, nothing at all (no 529)
+warp 61.5,1.4,-70.2 TempleOfUggalepih
+trigger qm15                              # no wyvern: no pop (Lua); Kill 0: no arm; SOME_SORT_OF_CEREMONY
+charvar KnightStalker_Kill 2              # a GM
+trigger qm15                              # Kill 2: no pop (Lua), no arm: SOME_SORT_OF_CEREMONY
+charvar KnightStalker_Kill 1              # GM: an NM's death at Progress 4 (Lua)
+trigger qm15                              # Kill 1: 67
+fill-inventory
+finish                                    # no free slot: ITEM_CANNOT_BE_OBTAINED; nothing else
+free-inventory
+charvar Quest[0][96]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger qm15                              # 67
+finish                                    # see the header: completed
+trigger qm15                              # Kill 0: SOME_SORT_OF_CEREMONY
+warp 0.6,-8,-121.9 PortSanDoria
+trigger Ceraulian                         # Option1 1: 22
+finish                                    # Option1 0
+trigger Ceraulian                         # completed: 21
+finish
+warp -29.5,0,-8.4 ChateauDoraguille
+trigger Rahal                             # completed: no arm; Option2 1: 118 (Lua)
+finish                                    # Option2 0 (Lua)
+trigger Rahal                             # 529
+finish

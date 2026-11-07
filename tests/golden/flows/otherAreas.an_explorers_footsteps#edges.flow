@@ -1,0 +1,66 @@
+# An Explorer's Footsteps (otherAreas 19): the edges. Bob, level 9: Abelard: no section: 1130 (the default). Main, level
+# 10: 40, option 99 and 101: nothing; option 100 with a full inventory: the clay not given: nothing (not begun). With
+# room: begun. A monument while available (bob): no section: the clay kept. The monument (main): a clay and a feather:
+# nil (exact); one clay: a tablet (two clays cannot be held: the clay is rare). Abelard: the tablet and a feather: nil
+# (exact). The bitmask 0x1FFFF and count 16 (GMs) with a West Ronfaure tablet: bit 0 set: 45 (the count is not reached:
+# the bit test comes first). The bitmask 0x1FFFE (GM): bit 0 clear: count 17: 47, finished: 800 gil, the bitmask and
+# count 0, the map, completed. Completed: 48 (replaceDefault). Available again (a GM): the bitmask -1 (a GM, not 0): 42,
+# option 0: nothing; the bitmask 0x1FFFF (a GM): 42, option 100: a clay; every bit set: TargetMonument unchanged (5, a
+# GM before); begun: 43 (5). The clay pressed at West Ronfaure; the bitmask 0x1FFFE and count 17 (GMs): bit 0 clear:
+# count 18 (not 17), requested 5: 46, finished: 800 gil. The count's other side (16th tablet: 41) is #all_monuments'
+# sixteenth credit.
+lists Selbina/Abelard/onTrigger Selbina/Abelard/onTrade Selbina/onEventFinish/40 Selbina/onEventFinish/42 Selbina/onEventFinish/45 Selbina/onEventFinish/47 WestRonfaure/Stone_Monument/onTrade
+char zone=Selbina pos=-50.6,-11.3,-13.1 job=WAR lvl=10
+char bob zone=Selbina pos=-50.6,-11.3,-11.6 job=WAR lvl=9
+item ChocoboFeather
+bob: item LumpOfSelbinaClay
+login
+bob: login
+bob: trigger Abelard                    # level 9: no section: 1130
+bob: finish
+trigger Abelard                         # level 10: 40
+finish option=99                        # nothing
+trigger Abelard                         # 40
+finish option=101                       # nothing
+fill-inventory
+trigger Abelard                         # 40
+finish option=100                       # no room: the clay not given; not begun
+free-inventory
+trigger Abelard                         # 40
+finish option=100                       # a clay; begun
+warp -182.2,-12.7,-395.7 WestRonfaure
+bob: warp -182.2,-12.7,-394.2 WestRonfaure
+bob: trade Stone_Monument LumpOfSelbinaClay x1 # bob available: no section; nothing (the clay kept)
+trade Stone_Monument LumpOfSelbinaClay x1 ChocoboFeather x1 # not exact: nil
+trade Stone_Monument LumpOfSelbinaClay x1 # a tablet; TabletZoneId 100
+warp -50.6,-11.3,-13.1 Selbina
+trade Abelard ClayTablet x1 ChocoboFeather x1 # not exact: nil; nothing
+charvar [EF]MonumentBitmask 131071      # a GM: 0x1FFFF
+charvar [EF]MonumentCount 16            # a GM
+trade Abelard ClayTablet x1             # bit 0 set: 45 (the count not read)
+finish                                  # a clay; the tablet taken
+warp -182.2,-12.7,-395.7 WestRonfaure
+trade Stone_Monument LumpOfSelbinaClay x1 # a tablet (100)
+warp -50.6,-11.3,-13.1 Selbina
+charvar [EF]MonumentBitmask 131070      # a GM: 0x1FFFE
+trade Abelard ClayTablet x1             # bit 0 clear: bitmask 0x1FFFF, count 17: 47
+finish                                  # 800 gil; the bitmask and count 0; the map; completed
+trigger Abelard                         # completed: 48 (replaceDefault)
+finish
+quest OtherAreas.AnExplorersFootsteps available # a GM
+charvar [EF]MonumentBitmask -1          # a GM
+trigger Abelard                         # the bitmask -1 (not 0): 42
+finish option=0                         # nothing
+charvar [EF]MonumentBitmask 131071      # a GM: every bit
+charvar Quest[4][19][EF]TargetMonument 5 # a GM
+trigger Abelard                         # the bitmask set: 42
+finish option=100                       # a clay; every bit set: TargetMonument kept (5); begun
+trigger Abelard                         # 43 (5)
+finish
+warp -182.2,-12.7,-395.7 WestRonfaure
+trade Stone_Monument LumpOfSelbinaClay x1 # a tablet (100)
+warp -50.6,-11.3,-13.1 Selbina
+charvar [EF]MonumentBitmask 131070      # a GM: bit 0 clear
+charvar [EF]MonumentCount 17            # a GM
+trade Abelard ClayTablet x1             # bit 0 clear: count 18 (not 17); requested 5: 46
+finish option=0                         # the tablet taken; 800 gil

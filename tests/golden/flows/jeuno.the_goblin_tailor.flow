@@ -1,0 +1,56 @@
+# The Goblin Tailor (jeuno 42): Lower Jeuno's Guttrix (no script, no default) and the Treasure Chests of Gusgen Mines,
+# the Maze of Shakhrami and Ordelle's Caves. The harness clock starts in Vana'diel week 1000 (day 8000):
+# VanadielRSERace() = 1000 % 8 + 1 = 1 (Hume male), VanadielRSELocation() = 1000 % 3 = 1 (Gusgen Mines). A level 75
+# Hume male Warrior at Jeuno fame level 3 ((250 + 0 + 0) / 2 = 125). Available: 10016 (1, 1); begun. Accepted: no
+# pattern: 10017 (1, 1). Gusgen Mines' chest, the week's location and race, no pattern: the Gusgen Chest Key opens it
+# to the Magical Pattern (the treasure's key-item bypass), the lookup stops (noAction). Guttrix: 10018 (0); finish
+# option 0 (< 1): nothing; 5 (> 4): nothing; the pattern taken by a GM while 10018 is open: nothing; option 1 (the
+# pattern held again, a GM before the talk): the Custom Tunic, the pattern taken, [RSE]Gear 1, completed (Goblin's
+# Exclusive Fashion Mannequin), fame +5 x3. Completed: no pattern: 10017 (1, 1); the pattern (a GM): 10018 (1); option
+# 1 (made): nothing; a full bag, option 2: nothing (the pattern kept); option 2: the Custom M Gloves ([RSE]Gear 3),
+# complete again (the title again), fame +5 x3; option 3 (a GM's pattern): the Custom Slacks (7); option 4: the Custom
+# M Boots (15). [RSE]Gear 15: 10019.
+lists LowerJeuno/Guttrix/onTrigger LowerJeuno/onEventFinish/10016 LowerJeuno/onEventFinish/10018 GusgenMines/Treasure_Chest/onTrade MazeOfShakhrami/Treasure_Chest/onTrade OrdellesCaves/Treasure_Chest/onTrade
+char zone=LowerJeuno pos=-34.5,5.5,-139.7 job=WAR lvl=75
+fame Sandoria 250
+item GusgenChestKey
+login
+trigger Guttrix                         # available, level 75, fame level 3: 10016 (1, 1)
+finish                                  # begun
+trigger Guttrix                         # accepted, no pattern: 10017 (1, 1)
+finish
+warp 208.7,-59.2,-101 GusgenMines
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest GusgenChestKey x1  # location 1, race 1, no pattern: the Magical Pattern; noAction
+tick 4500                               # the chest opened
+warp -34.5,5.5,-139.7 LowerJeuno
+trigger Guttrix                         # the pattern: 10018 (0)
+finish option=0                         # option < 1: nothing
+trigger Guttrix                         # 10018 (0)
+finish option=5                         # option > 4: nothing
+trigger Guttrix                         # 10018 (0)
+delkeyitem MagicalPattern               # a GM, while 10018 is open
+finish option=1                         # no pattern: nothing
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (0)
+finish option=1                         # the Custom Tunic; the pattern taken; [RSE]Gear 1; completed; fame +5 x3
+trigger Guttrix                         # completed, no pattern: 10017 (1, 1)
+finish
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (1)
+finish option=1                         # bit 0 set: nothing (the pattern kept)
+fill-inventory
+trigger Guttrix                         # 10018 (1)
+finish option=2                         # a full bag: giveItem fails: nothing (the pattern kept)
+free-inventory
+trigger Guttrix                         # 10018 (1)
+finish option=2                         # the Custom M Gloves; [RSE]Gear 3; quest:complete again (the title); fame +5 x3
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (3)
+finish option=3                         # the Custom Slacks; [RSE]Gear 7
+keyitem MagicalPattern                  # a GM
+trigger Guttrix                         # 10018 (7)
+finish option=4                         # the Custom M Boots; [RSE]Gear 15
+trigger Guttrix                         # [RSE]Gear 15: 10019
+finish

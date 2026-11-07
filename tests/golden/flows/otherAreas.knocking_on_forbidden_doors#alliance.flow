@@ -1,0 +1,32 @@
+# Knocking on Forbidden Doors (otherAreas 78): Alsha's death in a party (probe.mob_death's steps, quest rework P7) and
+# 557's failed pop. Alsha's onMobDeath gets optParams (the third argument luautils::OnMobDeath passes the lookup, once per
+# alliance member in the killer's zone; isKiller true for the killer only): for the killer only, the killer's Prog 4 when
+# any member of its alliance (the killer too) is at Prog 3. Main and bob (a party; both accepted at Prog 3 by a GM) at
+# qm_alsha. Main: 557 (left open); bob: 557, finished: Alsha popped and claimed by bob, FOUL_STENCH_OF_DEATH to bob; main's
+# 557 finished: Prog 3 but npcUtil.popFromQM fails (Alsha up): no message. Bob at Prog 0 (a GM) kills her: bob's handler
+# (the killer) finds main's Prog 3 in the alliance list: bob's Prog 4 (bob's own Prog was 0); main's handler (not the
+# killer) does nothing: main stays at Prog 3. Bob at Prog 3 again (a GM); main's 557, finished: Alsha popped for main; main
+# kills her: main (the killer) Prog 4; bob (not the killer, at Prog 3) stays at 3.
+lists MisareauxCoast/qm_alsha/onTrigger MisareauxCoast/Alsha/onMobDeath MisareauxCoast/onEventFinish/557
+char zone=MisareauxCoast pos=-152.8,-15.7,644.6 job=WAR lvl=75
+char bob zone=MisareauxCoast pos=-152.8,-15.7,646.1 job=WAR lvl=75
+quest OtherAreas.KnockingOnForbiddenDoors accepted
+charvar Quest[4][78]Prog 3
+bob: quest OtherAreas.KnockingOnForbiddenDoors accepted
+bob: charvar Quest[4][78]Prog 3
+login
+bob: login
+invite bob
+bob: accept
+trigger qm_alsha                        # main, Prog 3, Alsha not up: 557 (left open)
+bob: trigger qm_alsha                   # bob, Prog 3, Alsha not up: 557
+bob: finish                             # Alsha popped, claimed by bob; FOUL_STENCH_OF_DEATH
+finish                                  # main's: Prog 3, Alsha up: popFromQM fails; no message
+bob: charvar Quest[4][78]Prog 0         # a GM
+bob: kill ALSHA                         # bob the killer: main at Prog 3 in the list: bob's Prog 4; main (not the killer): stays 3
+tick 15000                              # Alsha's body despawning (the death and the despawn each take a zone tick)
+tick 30000                              # despawned: popFromQM refuses a spawned mob
+bob: charvar Quest[4][78]Prog 3         # a GM
+trigger qm_alsha                        # main, Prog 3, Alsha not up: 557
+finish                                  # Alsha popped, claimed by main; FOUL_STENCH_OF_DEATH
+kill ALSHA                              # main the killer: Prog 4; bob (not the killer, at Prog 3): stays 3

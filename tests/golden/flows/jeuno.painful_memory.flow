@@ -1,0 +1,37 @@
+# Painful Memory (jeuno 63): Mertaire in Lower Jeuno, the Waters of Oblivion in Ranguemont Pass. A level 40 bard with
+# Path of the Bard completed: Mertaire's 138 (Progress, over Path of the Bard's Event 103; option 0: Option 1), a bone
+# chip while offered (no trade handler: nil), 137
+# (option 0: nothing; option 1: begun, Mertaire's Bracelet), 136; the Waters at Prog 0 with the bracelet (Tros popped,
+# claimed; noAction), again with Tros up (the pop fails: still noAction), Tros's death (Prog 1), the Waters' 8 with a
+# full bag (not completed) and with room (completed: Paper Knife, fame +7 x3, the bracelet deleted), the Waters
+# completed (no section: WATERS_OF_OBLIVION), Mertaire completed (135).
+lists LowerJeuno/Mertaire/onTrigger LowerJeuno/Mertaire/onTrade RanguemontPass/Waters_of_Oblivion/onTrigger RanguemontPass/Tros/onMobDeath LowerJeuno/onEventFinish/137 LowerJeuno/onEventFinish/138 RanguemontPass/onEventFinish/8
+char zone=LowerJeuno pos=-19.5,0,-59 job=BRD lvl=40
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+quest Jeuno.PathOfTheBard completed
+item BoneChip
+login
+trigger Mertaire                            # available, Option 0: 138
+finish option=0                             # declined: Option 1
+trade Mertaire BoneChip x1                  # available: no trade handler, nil
+trigger Mertaire                            # Option 1: 137
+finish option=0                             # not 1: nothing
+trigger Mertaire                            # 137
+finish option=1                             # begun: Mertaire's Bracelet
+trigger Mertaire                            # accepted: 136 (Path of the Bard's arm: Painful Memory is not available)
+finish
+warp -289,-45,214 RanguemontPass
+trigger Waters_of_Oblivion                  # Prog 0, the bracelet: Tros popped (claimed); noAction
+trigger Waters_of_Oblivion                  # Tros up: the pop fails, noAction all the same
+kill TROS                                   # Prog 1
+trigger Waters_of_Oblivion                  # Prog 1: cutscene 8
+fill-inventory
+finish                                      # no room for the knife: not completed, the bracelet kept
+free-inventory
+trigger Waters_of_Oblivion                  # cutscene 8 again
+finish                                      # completed: Paper Knife, fame +7 x3, the bracelet deleted
+trigger Waters_of_Oblivion                  # completed: no section; WATERS_OF_OBLIVION
+warp -19.5,0,-59 LowerJeuno
+trigger Mertaire                            # completed: 135
+finish

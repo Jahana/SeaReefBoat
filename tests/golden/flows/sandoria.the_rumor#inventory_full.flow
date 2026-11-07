@@ -1,0 +1,16 @@
+# The Rumor (sandoria 61) with the vial and a full inventory: 12 does not complete it (the Scroll of Drain cannot be
+# given) and the vial is not taken (no confirmTrade); with room, 12 again completes it.
+char zone=BostaunieuxOubliette pos=32.4,-24,19.8 job=WAR lvl=5
+quest Sandoria.TheRumor accepted
+item VialOfBeastmanBlood
+login
+fill-inventory
+trigger Novalmauge                        # walks to him; accepted: 11
+finish
+trade Novalmauge VialOfBeastmanBlood x1   # 12
+finish                                    # no room: not completed, the vial kept
+free-inventory
+trigger Novalmauge                        # 11 (walks to him again)
+finish
+trade Novalmauge VialOfBeastmanBlood x1   # 12
+finish                                    # completed: Scroll of Drain, fame +30; the vial taken

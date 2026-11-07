@@ -1,0 +1,21 @@
+# Portal Charm: the section's nation term alone. A Windurst char of Windurst rank 3 with Written in the Stars completed
+# changes its nation to Bastok at Mythily in Metalworks (her 360, option 1: setNation(Bastok), the fee taken;
+# char_profile keeps the Windurst rank 3; HQuest[newCharacterCS]nations has the Bastok bit (2, by GM), so her finish
+# returns before its random setPos), as windurst.the_moonlit_path#nation does. Back at Kupipi with one Rolanberry: a
+# Bastok citizen at Windurst rank 3: the check fails on the nation only: the trade gets nil (Kupipi has no onTrade),
+# the trigger her script's 251.
+# Kupipi+1 is the Kupipi a client sees (17768467, status normal); the first (17768466) is cutscene_only.
+char zone=HeavensTower pos=2,0,30.9 job=WAR lvl=75 nation=2 gil=40000
+rank 3
+mission Windurst WrittenInTheStars completed
+charvar HQuest[newCharacterCS]nations 2
+item Rolanberry
+login
+warp 94,-20,-8 Metalworks
+trigger Mythily                           # 360: the nation change offered
+finish option=1                           # setNation(1), the fee taken; the Bastok bit set: no setPos
+warp 2,0,30.9 HeavensTower
+trade Kupipi+1 Rolanberry x1              # a Bastok citizen at Windurst rank 3: nil
+finish-if-event
+trigger Kupipi+1                          # her script (251)
+finish-if-event

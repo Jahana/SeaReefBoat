@@ -1,0 +1,22 @@
+# Food for Thought (windurst 14): Say It with Flowers' char vars gate the offer lines (`~= 1`). Option 2
+# (Quest[2][50]Option, GM): Kenapa's 310. Option 1: 310 returns nil; Say It with Flowers' own section needs its Prog 1, so
+# his script answers (302 or 303). Prog 2 (Quest[2][50]Prog, GM): Ohbiru's 308. Prog 1: 309 returns nil and Say It with
+# Flowers' section answers Ohbiru (Option 1: event 517; a 309 would be a progressEvent and win). Kenapa then gets Say It
+# with Flowers' 519 (an event: the lookup's turn, after his script's).
+lists WindurstWaters/Kenapa-Keppa/onTrigger WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/onEventFinish/308
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+charvar Quest[2][50]Option 2
+login
+trigger Kenapa-Keppa                    # SIWF Option 2 (not 1): 310
+finish
+charvar Quest[2][50]Option 1
+trigger Kenapa-Keppa                    # SIWF Option 1: nil; his script 302 or 303
+finish
+charvar Quest[2][50]Prog 2
+trigger Ohbiru-Dohbiru                  # SIWF Prog 2 (not 1): 308
+finish                                  # ohbiruProg 1
+charvar Quest[2][50]Prog 1
+trigger Ohbiru-Dohbiru                  # SIWF Prog 1: nil; SIWF's section: Option 1, 517
+finish
+trigger Kenapa-Keppa                    # SIWF's section: Option 1, 519 (the handler's turn)
+finish

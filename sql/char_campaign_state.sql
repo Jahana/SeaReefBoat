@@ -1,0 +1,13 @@
+--
+-- Table structure for table `char_campaign_state`
+-- (the C# server's campaign row, one per char: XI.Quests.CampaignStateSchema; map.QUEST_STATE_ROWS)
+--
+
+DROP TABLE IF EXISTS `char_campaign_state`;
+CREATE TABLE IF NOT EXISTS `char_campaign_state` (
+  `charid`         int(10) unsigned NOT NULL,
+  `current`        smallint(5) unsigned NOT NULL DEFAULT 0,
+  `completed_mask` varbinary(64) NOT NULL DEFAULT '',
+  `updated_at`     timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`charid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -1,0 +1,40 @@
+# The All-New C-3000 (windurst 18): Kopuro-Popuro (Windurst Woods; no default action). A level-75 WAR; The All-New
+# C-2000, A Greeting Cardian and Legendary Plan B completed (GMs). Available: fame level 3: no arm (Legendary Plan B's
+# 316); the two traded: nothing; level 4 with needToZone (a GM's flag, as Legendary Plan B's completion sets it): 316
+# (this quest's arm); rezoned: 655 (0, 889, 939), option 1: begun (any option). Accepted: no trigger arm (Legendary Plan
+# B's 316); each one of the two traded: 656; both and a Bone Chip (tradeHas): 657: 600 gil (GIL_OBTAINED), no fame (no
+# fameArea), completed, the two taken (the chip kept). Completed: 659; one of the two: 656; both: 657 again (600 gil,
+# completed again).
+char zone=WindurstWoods pos=-1.0,-4.75,-21.0 job=WAR lvl=75
+fame Windurst 224
+item BeetleShell x3
+item HecteyesEye x3
+item BoneChip
+login
+quest Windurst.TheAllNewC2000 completed
+quest Windurst.AGreetingCardian completed
+quest Windurst.LegendaryPlanB completed
+trigger Kopuro-Popuro                   # available, fame level 3: no arm; Legendary Plan B completed: 316
+finish
+trade Kopuro-Popuro BeetleShell x1 HecteyesEye x1  # available: no trade arm: nothing
+fame Windurst 225
+charvar [generic]mustZone 241           # needToZone (a GM)
+trigger Kopuro-Popuro                   # level 4, needToZone: 316 (this quest's arm)
+finish
+rezone                                  # needToZone cleared
+trigger Kopuro-Popuro                   # 655 (0, 889, 939)
+finish option=1                         # begun (any option)
+trigger Kopuro-Popuro                   # accepted: no arm here; Legendary Plan B's 316
+finish
+trade Kopuro-Popuro BeetleShell x1      # no eye: 656 (0, 889, 939)
+finish
+trade Kopuro-Popuro HecteyesEye x1      # no shell: 656
+finish
+trade Kopuro-Popuro BeetleShell x1 HecteyesEye x1 BoneChip x1  # both: 657 (0, 889, 939)
+finish                                  # 600 gil (GIL_OBTAINED); no fame; completed; the two taken
+trigger Kopuro-Popuro                   # completed: 659 (0, 889, 939)
+finish
+trade Kopuro-Popuro HecteyesEye x1      # completed, one of the two: 656
+finish
+trade Kopuro-Popuro BeetleShell x1 HecteyesEye x1  # completed: 657
+finish                                  # 600 gil again; completed again; the two taken

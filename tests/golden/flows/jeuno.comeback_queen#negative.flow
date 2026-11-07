@@ -1,0 +1,21 @@
+# Comeback Queen (jeuno 98) accepted at Prog -1 (a GM): the "<=" arms take it. Olgald 10150 (Prog <= 2), Rhea 10145
+# (Prog <= 1); Laila (Prog <= 3, offset -3): with Timer ahead (a GM's 9000) progressEvent(10148 + 4 * -3) = 10136 (no
+# finish acts on it: The Road to Divadom is completed), with Timer 0 10151 (-3), answered 0 (Timer 8001, mustZone, Prog 3).
+lists UpperJeuno/Laila/onTrigger UpperJeuno/Rhea_Myuliah/onTrigger UpperJeuno/Olgald/onTrigger UpperJeuno/onEventFinish/10136 UpperJeuno/onEventFinish/10151
+char zone=UpperJeuno pos=-52.5,0,101 job=DNC lvl=75
+quest Jeuno.LakesideMinuet completed
+quest Jeuno.TheUnfinishedWaltz completed
+quest Jeuno.TheRoadToDivadom completed
+quest Jeuno.ComebackQueen accepted
+charvar Quest[3][98]Prog -1
+login
+trigger Olgald                          # Prog -1: 10150
+finish
+trigger Rhea_Myuliah                    # Prog -1: 10145
+finish
+charvar Quest[3][98]Timer 9000          # a GM
+trigger Laila                           # Prog -1, Timer ahead: 10136
+finish                                  # nothing
+charvar Quest[3][98]Timer 0             # a GM
+trigger Laila                           # Prog -1, Timer 0: 10151 (-3)
+finish option=0                         # Timer 8001, mustZone, Prog 3

@@ -1,0 +1,99 @@
+# Waking the Beast (otherAreas 32): the edges. Carbuncle's Pole is rare: one completion with room per flow (the main
+# flow has the other). Available, no spells, the Faded Ruby (a GM): no section (section 2 needs accepted or completed).
+# Completed (a GM) with the resonator: no section. With the ruby and completedThisWeek 1 (GMs, no expiry): no section;
+# -1 (a GM): no section, and none held (the ruby taken, a GM): no section (both checks read == 0). completedThisWeek 0,
+# a full inventory: section 1 off (the ruby), section 2: 208, finished: complete false (no room for the pole): the ruby
+# kept, the week open. The ruby taken (a GM): 207, finished: the resonator (completed: not begun). Completed with the
+# resonator at the Cloister of Flames (BattlefieldQuest lets a completed char in; its win sets the local battlefieldWin
+# for a completed char too, user ruling 2026-11-05, kept bugs: upstream set it only while accepted, no eye): 546: the
+# Eye of Flames; 546 (a GM) before the finish: the eye again (held: nothing); the eye taken (a GM), 546 and the
+# resonator taken (GMs) inside: section 4 off: no eye. Accepted (a GM): the win sets 546; available (a GM) before the finish:
+# section 4 off: no eye. Accepted again (a GM), won, the resonator taken (a GM) before the finish: section 4 off: no
+# eye. Completed, the ruby (GMs), Option 0: 208 with room: completed, the pole, completedThisWeek 1 until the tally
+# (1800198000), the ruby taken, Disturber of Slumber. Two JST days on (Sunday: before the tally): kept: no section. One
+# more (Monday: past the tally): the var expired: 207.
+lists LaTheinePlateau/qm3/onTrigger LaTheinePlateau/onEventFinish/207 LaTheinePlateau/onEventFinish/208 CloisterOfFlames/onEventFinish/32001
+char zone=LaTheinePlateau pos=-178.2,8.8,254.3 job=SMN lvl=75
+login
+keyitem FadedRuby                       # a GM
+trigger qm3                             # available, no spells, the ruby: no section; STRANGE_ENERGY
+quest OtherAreas.WakingTheBeast completed # a GM
+delkeyitem FadedRuby                    # a GM
+keyitem RainbowResonator                # a GM
+trigger qm3                             # completed, the resonator held: no section; STRANGE_ENERGY
+delkeyitem RainbowResonator             # a GM
+keyitem FadedRuby                       # a GM
+charvar Quest[4][32]completedThisWeek 1 # a GM (no expiry)
+trigger qm3                             # the ruby, completedThisWeek 1: no section; STRANGE_ENERGY
+charvar Quest[4][32]completedThisWeek -1 # a GM
+trigger qm3                             # the ruby, completedThisWeek -1 (not 0): no section; STRANGE_ENERGY
+delkeyitem FadedRuby                    # a GM
+trigger qm3                             # completed, none held, completedThisWeek -1: no section; STRANGE_ENERGY
+keyitem FadedRuby                       # a GM
+charvar Quest[4][32]completedThisWeek 0 # a GM
+fill-inventory
+trigger qm3                             # the ruby, the week open: section 1 off; section 2: 208
+finish                                  # no room for the pole: complete false; the ruby kept; the week open
+free-inventory
+delkeyitem FadedRuby                    # a GM
+trigger qm3                             # completed, none held: 207
+finish                                  # the resonator; completed: not begun
+warp -720.6,-1.4,-598 CloisterOfFlames
+trigger FP_Entrance                     # completed, the resonator: the 32000 menu
+update 32000 option=33                  # area 1 (546)
+finish                                  # entered
+kill IFRIT_PRIME_ASA-15                 # WON; 32001 (completed: battlefieldWin 546, user ruling 2026-11-05)
+finish                                  # battlefieldWin 546: the Eye of Flames
+trigger Fire_Protocrystal               # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp -720.6,-1.4,-598 CloisterOfFlames
+trigger FP_Entrance
+update 32000 option=33
+finish
+kill IFRIT_PRIME_ASA-15                 # WON; 32001
+localvar battlefieldWin 546             # a GM: this Cloister's id
+finish                                  # completed: battlefieldWin 546: the Eye of Flames again (held: nothing)
+trigger Fire_Protocrystal               # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+delkeyitem EyeOfFlames                  # a GM
+warp -720.6,-1.4,-598 CloisterOfFlames
+trigger FP_Entrance
+update 32000 option=33
+finish
+kill IFRIT_PRIME_ASA-15                 # WON; 32001
+localvar battlefieldWin 546             # a GM
+delkeyitem RainbowResonator             # a GM: section 4 off
+finish                                  # no handler: no eye
+trigger Fire_Protocrystal               # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+keyitem RainbowResonator                # a GM
+quest OtherAreas.WakingTheBeast accepted # a GM
+warp -720.6,-1.4,-598 CloisterOfFlames
+trigger FP_Entrance
+update 32000 option=33
+finish
+kill IFRIT_PRIME_ASA-15                 # WON; 32001 (accepted: battlefieldWin 546)
+quest OtherAreas.WakingTheBeast available # a GM: section 4 off
+finish                                  # available: no handler: no eye
+trigger Fire_Protocrystal               # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+quest OtherAreas.WakingTheBeast accepted # a GM
+warp -720.6,-1.4,-598 CloisterOfFlames
+trigger FP_Entrance
+update 32000 option=33
+finish
+kill IFRIT_PRIME_ASA-15                 # WON; 32001 (accepted: battlefieldWin 546)
+delkeyitem RainbowResonator             # a GM: section 4 off
+finish                                  # accepted, no resonator: no handler: no eye
+trigger Fire_Protocrystal               # the exit: 32003
+finish option=4                         # left the battlefield (its effect gone)
+warp -178.2,8.8,254.3 LaTheinePlateau
+quest OtherAreas.WakingTheBeast completed # a GM
+keyitem FadedRuby                       # a GM
+trigger qm3                             # 208
+finish                                  # completed; the pole; completedThisWeek 1 until the tally; the ruby taken; Option 0: Disturber of Slumber
+wait jst=2                              # Sunday: before the tally (1800198000): completedThisWeek kept
+trigger qm3                             # no section; STRANGE_ENERGY
+wait jst=1                              # Monday: past the tally: completedThisWeek expired
+trigger qm3                             # completed, none held, the week open: 207
+finish                                  # the resonator

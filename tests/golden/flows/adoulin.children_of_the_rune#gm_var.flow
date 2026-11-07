@@ -1,0 +1,12 @@
+# Children of the Rune (adoulin 119): the script's reward attempt follows every one of Octavien's event finishes, whatever
+# the csid. A GM's RUN_COTR 3 set while the standard dialog (27) is open: its finish gives the reward and completes the
+# quest; set again after it, the Completed talk (28) finishes into the attempt too (the claymore held, rare: not given).
+char zone=EasternAdoulin pos=2.444,-11.439,-16.595 job=WHM lvl=30
+setting ADVANCED_JOB_LEVEL 31
+login
+trigger Octavien                # below the gate: 27
+charvar RUN_COTR 3              # a GM, with the event open
+finish                          # the reward: completed
+charvar RUN_COTR 3
+trigger Octavien                # Completed first: 28
+finish                          # the attempt: the claymore held, nothing

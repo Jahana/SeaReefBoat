@@ -1,0 +1,59 @@
+# Exit the Gambler (sandoria 101): Aurege and Guilberdrier in Northern San d'Oria, Varchet in Southern San d'Oria.
+# Stage 0, available (check 1 holds): a chip to Aurege (no trade handler, no script: nothing); Aurege's 521 (Stage 1).
+# Stage 1, Prog 0: Aurege's GAMBLING_IS_THE_RUIN, Guilberdrier's WHO_DOES_HE_THINK, a chip to Guilberdrier (no quest
+# trade handler; his script: Flyers for Regine not accepted, nothing); Varchet with mustZone set by GM (643), without
+# (638, once per zone), again (638 spent in this zone: his default 525); a chip to Varchet (his script's 608); three
+# 5-gil dice games with Varchet (his script's 519; the pinned seed draws a win, a tie, a loss): the win at Stage 1 sets
+# this quest's Prog 1 and shows VARCHET_KEEP_PROMISE (Varchet.lua:47-53, which stays). Prog 1: Varchet's 643; Aurege's
+# 516 (completed though never accepted: 2000 exp, fame +20, the Map of King Ranperre's Tomb, Daybreak Gambler; the vars
+# cleared). Completed: Aurege's 514, Guilberdrier's HE_WAS_JUST_HERE (each replaceDefault); with Stage 1 set by GM,
+# section 2 answers whatever the status: Aurege's GAMBLING_IS_THE_RUIN; Stage 0 again: Varchet's
+# NOBODY_ONE_WANTS_TO_PLAY; two more games (a loss, then a win at Stage 0: 10 gil only, no Prog, no text).
+# Guilberdrier's 521 and 518 are #guilberdrier.
+# The Pickpocket (available, Prog 0) has no section for Aurege or Guilberdrier. Aurege has no script and no default;
+# Guilberdrier's script has only onTrade; Varchet's script has onTrade (the dice) and its finish, no onTrigger; his
+# default is 525.
+lists NorthernSanDoria/Aurege/onTrigger NorthernSanDoria/Guilberdrier/onTrigger NorthernSanDoria/onEventFinish/521 NorthernSanDoria/onEventFinish/516 SouthernSanDoria/Varchet/onTrigger
+char zone=NorthernSanDoria pos=-154.753,12,253.691 job=WAR lvl=10 gil=1000
+item BoneChip
+login
+trade Aurege BoneChip x1                  # available, Stage 0: no trade handler, no script: nothing
+trigger Aurege                            # Stage 0: 521
+finish                                    # Stage 1
+trigger Aurege                            # Stage 1, Prog 0: GAMBLING_IS_THE_RUIN
+trigger Guilberdrier                      # Prog 0: WHO_DOES_HE_THINK
+trade Guilberdrier BoneChip x1            # no quest trade handler; his script: nothing
+warp 117.984,0,91.554 SouthernSanDoria
+charvar Quest[0][101]mustZone 230         # GM: mustZone set
+trigger Varchet                           # Prog 0, mustZone: 643
+finish
+charvar Quest[0][101]mustZone 0
+trigger Varchet                           # Prog 0, no mustZone: 638 (once per zone)
+finish
+trigger Varchet                           # 638 spent in this zone: his default 525
+finish
+trade Varchet BoneChip x1                 # his script: not 5 gil: 608
+finish
+trade Varchet gil=5                       # his script: the dice (seeded), 519 (2+1 against 3+3)
+finish                                    # the seed's win at Stage 1: 10 gil; this quest's Prog 1; VARCHET_KEEP_PROMISE
+trade Varchet gil=5                       # 519 (5+3 against 4+4)
+finish                                    # a tie: the 5 gil back
+trade Varchet gil=5                       # 519 (5+4 against 2+2)
+finish                                    # a loss: VARCHET_BET_LOST
+trigger Varchet                           # Prog 1, no mustZone: 643
+finish
+warp -154.753,12,253.691 NorthernSanDoria
+trigger Aurege                            # Prog 1: 516
+finish                                    # completed: 2000 exp, fame +20, Map of King Ranperre's Tomb, Daybreak Gambler; vars cleared
+trigger Aurege                            # completed: 514 (replaceDefault)
+finish
+trigger Guilberdrier                      # completed: HE_WAS_JUST_HERE
+charvar Quest[0][101]Stage 1              # GM: Stage 1 on a completed quest
+trigger Aurege                            # section 2 ignores the status: GAMBLING_IS_THE_RUIN
+charvar Quest[0][101]Stage 0
+warp 117.984,0,91.554 SouthernSanDoria
+trigger Varchet                           # completed: NOBODY_ONE_WANTS_TO_PLAY
+trade Varchet gil=5                       # completed, Stage 0: his script's dice, 519 (6+6 against 4+3)
+finish                                    # a loss: VARCHET_BET_LOST
+trade Varchet gil=5                       # 519 (2+1 against 3+3)
+finish                                    # a win at Stage 0: 10 gil only (Varchet's Stage check fails: no Prog, no VARCHET_KEEP_PROMISE)

@@ -1,0 +1,37 @@
+# For the Birds (otherAreas 104): the Prog 2 arm of GeFhu's trigger, per NM id: 17379784 and 17379785. Accepted at
+# Prog 2 (GMs) with the Glittering Fragment. Each spawn arm at Prog 2: Prog 3, TAKEN_FROM_YOU, QUADAV_ARE_ATTACKING;
+# Prog 2 again (a GM) before the kills (a death at Prog 2 counts nothing).
+# GeFhu Yagudoeye's spawn checks read MAGNES (17379784), MAGNES + 1 (17379785, NICKEL), NICKEL (17379785 again) and
+# NICKEL + 1 (17379786); MAGNES + 3 (17379787, the second Nickel) is never read. Each round: the four up, the other
+# three killed and their corpses left to despawn: one NM up: nil (HUURR); that one killed and gone: none up: the arm
+# spawns the four again. The checks are split over four flows (two NMs each), with the char at level 99: one flow of
+# every round left the char (at level 75, and again at 99) dead to the NM left up and a Beadeaux Emerald Quadav.
+lists Beadeaux/GeFhu_Yagudoeye/onTrigger Beadeaux/Magnes_Quadav_NM/onMobDeath Beadeaux/Nickel_Quadav_NM/onMobDeath Beadeaux/onEventFinish/124
+char zone=Beadeaux pos=-89.9,-3.25,-127.8 job=WAR lvl=99
+quest OtherAreas.ForTheBirds accepted
+charvar Quest[4][104]Prog 2
+keyitem GlitteringFragment
+login
+trigger GeFhu_Yagudoeye                 # Prog 2, none up: Prog 3; four spawned; TAKEN_FROM_YOU; QUADAV_ARE_ATTACKING
+charvar Quest[4][104]Prog 2             # a GM
+kill MAGNES_QUADAV_NM+1                 # Prog 2: no count
+kill MAGNES_QUADAV_NM+2
+kill MAGNES_QUADAV_NM+3
+tick 15000                              # the corpses despawning
+tick 30000
+trigger GeFhu_Yagudoeye                 # Prog 2, only 17379784 up: nil; HUURR
+kill MAGNES_QUADAV_NM
+tick 15000
+tick 30000
+trigger GeFhu_Yagudoeye                 # none up: Prog 3; four spawned; TAKEN_FROM_YOU; QUADAV_ARE_ATTACKING
+charvar Quest[4][104]Prog 2             # a GM
+kill MAGNES_QUADAV_NM
+kill MAGNES_QUADAV_NM+2
+kill MAGNES_QUADAV_NM+3
+tick 15000
+tick 30000
+trigger GeFhu_Yagudoeye                 # Prog 2, only 17379785 up (MAGNES + 1, NICKEL): nil; HUURR
+kill NICKEL_QUADAV_NM
+tick 15000
+tick 30000
+trigger GeFhu_Yagudoeye                 # none up: Prog 3; four spawned; TAKEN_FROM_YOU; QUADAV_ARE_ATTACKING

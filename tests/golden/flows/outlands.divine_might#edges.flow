@@ -1,0 +1,74 @@
+# Divine Might (outlands 163), the edges. main: a level 75 Warrior on Zilart THE_GATE_OF_THE_GODS (below ARK_ANGELS)
+# with the Shard of Envy: blank: nil: the default. bob: THE_SEALED_SHRINE with no shard: nil: the default; at status 1
+# (a GM: the 54 arm reads ARK_ANGELS itself): nil. cid: ARK_ANGELS at status 0 with the Shard of Rage: the mission's 53
+# (progress) and the quest's 56 (event): the progress plays; finished: status 1; status 0 again (a GM): a second talk:
+# 53 again (no tie to rotate: the progress outranks the event); finished: status 1; blank: 54 (status 1 comes first),
+# finished: begun. eve: ARK_ANGELS at status 2 (a GM): no shard: nil: the default; the Shard of Apathy (a GM, the loop's
+# first id): 56. fay: no Zilart mission (the log's current mission reads 65535, above ARK_ANGELS) with the Shard of
+# Rage: 56. dan: accepted (a GM) in Ro'Maeve, two pairs, a Bone Chip, an extra bottle of illuminink. Day 8022 (the full
+# moon): 05:00: the pair: 7, finished: the Ark Pentasphere, the pair taken; bob (available) in Ro'Maeve: the pair: no
+# section: nothing; 06:00: the pair: nothing; 17:00: nothing; 18:00: the illuminink alone: nothing; the pair with the
+# chip: nothing; the pair: 7, finished: the pentasphere held (rare): giveItem false: nothing taken. Day 8029, 00:00 (93%
+# waning: not the full moon): the pair: nothing.
+lists TheShrineOfRuavitau/blank_divine_might/onTrigger Romaeve/QuHau_Spring/onTrade TheShrineOfRuavitau/onEventFinish/54 Romaeve/onEventFinish/7
+char zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+char bob zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+char cid zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+char dan zone=Romaeve pos=1.748,-27.402,67.751 job=WAR lvl=75
+char eve zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+char fay zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+mission Zilart TheGateOfTheGods current
+keyitem ShardOfEnvy
+bob: mission Zilart TheSealedShrine current
+bob: item SheetOfParchment
+bob: item BottleOfIlluminink
+cid: mission Zilart ArkAngels current
+cid: keyitem ShardOfRage
+dan: quest Outlands.DivineMight accepted
+dan: item SheetOfParchment x2
+dan: item BottleOfIlluminink
+dan: item BottleOfIlluminink
+dan: item BottleOfIlluminink
+dan: item BoneChip
+eve: mission Zilart ArkAngels current
+fay: keyitem ShardOfRage
+login
+trigger blank_divine_might              # below ARK_ANGELS, a shard: nil: the default
+bob: login
+bob: trigger blank_divine_might         # past ARK_ANGELS, no shard: nil: the default
+bob: missionstatus Zilart 1             # a GM
+bob: trigger blank_divine_might         # past ARK_ANGELS at status 1, no shard: nil: the default
+cid: login
+cid: trigger blank_divine_might         # status 0: the mission's 53 beats the quest's 56
+cid: finish                             # status 1
+cid: missionstatus Zilart 0             # a GM
+cid: trigger blank_divine_might         # status 0 again: 53 again (it outranks 56)
+cid: finish                             # status 1
+cid: trigger blank_divine_might         # status 1: 54
+cid: finish                             # begun
+eve: login
+eve: missionstatus Zilart 2             # a GM
+eve: trigger blank_divine_might         # ARK_ANGELS at status 2, no shard: nil: the default
+eve: keyitem ShardOfApathy              # a GM
+eve: trigger blank_divine_might         # status 2, a shard: 56
+eve: finish                             # begun
+fay: login
+fay: trigger blank_divine_might         # no Zilart mission (65535), a shard: 56
+fay: finish                             # begun
+dan: login
+wait vana=521                           # day 8022, 05:00 (FULL_MOON)
+dan: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # hour 5: 7
+dan: finish                             # the Ark Pentasphere; the pair taken
+bob: warp 1.748,-27.402,67.751 Romaeve
+bob: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # available: no section: nothing
+wait vana=1                             # 06:00
+dan: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # hour 6: nothing
+wait vana=11                            # 17:00
+dan: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # hour 17: nothing
+wait vana=1                             # 18:00
+dan: trade QuHau_Spring BottleOfIlluminink x1   # the illuminink alone: nothing
+dan: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1 BoneChip x1   # not exactly: nothing
+dan: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # hour 18: 7
+dan: finish                             # the pentasphere held (rare): giveItem false: nothing taken
+wait vana=150                           # day 8029, 00:00 (93% waning: not the full moon)
+dan: trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # nothing

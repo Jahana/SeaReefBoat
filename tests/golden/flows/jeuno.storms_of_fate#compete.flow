@@ -1,0 +1,37 @@
+# Storms of Fate (jeuno 86): the reply kinds. Ru'Lude Gardens' trigger area 1 has no NPC script (the zone's own
+# onTriggerAreaEnter runs beside the lookup), so a reply's kind shows only against another container's: ToAU mission
+# Easterly Winds (current by a GM) plays progressEvent 10094 in area 1 whatever its state, and its container comes before
+# this quest's. Two progressEvents with two csids take turns, where an event would always lose to 10094. A full bag (a
+# GM's fill-inventory) keeps Easterly Winds current: its 10094 finish with option 1 completes it only when the ten Imperial
+# Bronze Pieces are given. A level 75 Warrior, CoP Dawn current with Status 8, Easterly Winds current: area 1: 10094
+# (the first), finished 1 (kept); area 1: 142 (the turn passes), begun. Misareaux Coast's _0p2 has a script (552 here),
+# with which an event takes turns: Prog 0: 559, finished (Prog 1); Prog 0 again (a GM): 559 again (an event would have
+# let the lookup's other turn play). Prog 3 (a GM), back in area 1: 10094 (the cycle starts again), then 143: completed. Unstable_Displacement's 1 has no rival (no script; the battlefields want Prog 2 or
+# the quest completed): its kind is not observable.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/142 RuludeGardens/onEventFinish/143 MisareauxCoast/_0p2/onTrigger
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+mission Cop Dawn current
+charvar Mission[6][840]Status 8
+mission Toau EasterlyWinds current
+login
+fill-inventory                          # a GM: Easterly Winds' 10094 finish cannot complete it
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # available: 10094 and 142 tie (progressEvents): the first, 10094
+finish option=1                         # the Bronze Pieces not given: Easterly Winds kept
+walk 4,2.5,100
+walk 4,2.5,60                           # the turn: 142
+finish option=1                         # begun
+warp -258.5,-32.7,280 MisareauxCoast    # by _0p2
+trigger _0p2                            # Prog 0: 559
+finish                                  # Prog 1
+charvar Quest[3][86]Prog 0              # a GM
+trigger _0p2                            # Prog 0: 559 again (a progressEvent wins on the script's turn too)
+finish                                  # Prog 1
+charvar Quest[3][86]Prog 3              # a GM
+warp 4,2.5,100 RuludeGardens
+tick 3000                               # the zone-in lock
+walk 4,2.5,60                           # accepted, Prog 3: 10094 and 143 tie: 10094 (the cycle starts again)
+finish option=1                         # kept
+walk 4,2.5,100
+walk 4,2.5,60                           # the turn: 143
+finish                                  # completed

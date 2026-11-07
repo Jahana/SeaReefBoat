@@ -1,0 +1,14 @@
+# Save the Children (battlefield.save_the_children): the registrant's requirement reads the current mission. A level
+# 75 Warrior of San d'Oria whose current San d'Oria mission is another one (1-2 Bat Hunt, 1-1 completed; Resonance
+# current keeps RoV 1-1 out) at Status 2 (a GM, after the login): Hut_Door's trigger. BattlefieldMission's
+# checkRequirements wants 1-3 current at Status 2 (the registrant arm); 1-3 is not current: no Save the Children in the
+# menu, and no other fight at Hut_Door without a trade: no menu. Pins the current == mission test of both arms: with it
+# dropped, Status 2 alone would pass and the menu would open.
+lists GhelsbaOutpost/Hut_Door/onTrigger
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt current
+login
+missionstatus Sandoria 2                # a GM
+trigger Hut_Door                        # 1-2 current, not 1-3: no Save the Children: no menu

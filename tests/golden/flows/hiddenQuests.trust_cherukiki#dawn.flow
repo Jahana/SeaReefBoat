@@ -1,0 +1,13 @@
+# Trust: Cherukiki, on Dawn: CoP at Dawn, the Bastok Trust Permit. Dawn's Status 1: the check fails: 10061 ("past the
+# boss" is Status 2 or more). Status 2 (a GM): 10235, finished on option 0: nothing.
+lists RuludeGardens/Taillegeas/onTrigger RuludeGardens/onEventFinish/10235
+char zone=RuludeGardens pos=31,2,56.5 job=WAR lvl=99
+keyitem BastokTrustPermit
+mission Cop Dawn current
+charvar Mission[6][840]Status 1
+login
+trigger Taillegeas                      # Dawn, Status 1: the check fails: 10061
+finish-if-event
+charvar Mission[6][840]Status 2         # a GM
+trigger Taillegeas                      # Dawn, Status 2: 10235
+finish option=0                         # not 2: nothing

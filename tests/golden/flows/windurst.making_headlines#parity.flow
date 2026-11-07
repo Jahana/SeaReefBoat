@@ -1,0 +1,12 @@
+# Making Headlines (windurst 37), completion parity: 670 / 674's finish is npcUtil.completeQuest step for step (the
+# gil with GIL_OBTAINED, the title, the var cleared), ending in the raw player:completeQuest, so a GM's
+# Quest[2][37]Prog survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it).
+# GIL_RATE 1.0025: 560 x 1.0025 = 561.4 (llround 561). Accepted (GM) with all five bits beside Naiko-Paneiko.
+char zone=WindurstWaters pos=-245.4,-5.3,-308.0 job=WAR lvl=75
+setting GIL_RATE 1.0025
+login
+quest Windurst.MakingHeadlines accepted
+charvar QuestMakingHeadlines_var 31
+charvar Quest[2][37]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Naiko-Paneiko                   # 674 or 670 (the roll)
+finish                                  # 561 gil; Editor's Hatchet Man; the var cleared; completed; Prog kept

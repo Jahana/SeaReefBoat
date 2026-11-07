@@ -1,0 +1,16 @@
+# probe (quest rework P8): spell <id>, a spell the char knows: a char_spells row before the login, a GM's
+# player:addSpell(<id>) after it. Waking the Beast (otherAreas 32, still Lua): La Theine's qm3 plays 207 the first time
+# only when the char knows the six avatar spells (Ifrit 298, Titan 299, Leviathan 300, Garuda 301, Shiva 302, Ramuh 303).
+# Five by header lines: qm3: no section (STRANGE_ENERGY). Ramuh by a step: 207; finished: the Rainbow Resonator, begun.
+lists LaTheinePlateau/qm3/onTrigger LaTheinePlateau/onEventFinish/207
+char zone=LaTheinePlateau pos=-178.2,8.8,254.3 job=SMN lvl=75
+spell 298
+spell 299
+spell 300
+spell 301
+spell 302
+login
+trigger qm3                             # five of the six: no section; STRANGE_ENERGY
+spell 303                               # a GM: Ramuh
+trigger qm3                             # the six: 207
+finish                                  # the Rainbow Resonator; begun

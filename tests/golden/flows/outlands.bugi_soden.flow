@@ -1,0 +1,41 @@
+# Bugi Soden (outlands 147): a level 75 Ninja, katana skill 250 (2500), a Kodachi of Trials with 300 weapon skill points
+# (a GM), Twenty in Pirate Years accepted without the Trick Box (a GM: Ryoma's script then does nothing; available it
+# would offer 133 to a Ninja from 40, on the script's turn). Available: the kodachi traded: no trade handler: nothing;
+# Ryoma 184 (Event, once per zone), option 0: nothing; again: 184 performed this zone: its secondary priority Ignore
+# leaves it out: the lookup's default action 94; out of Norg and back: 184, option 1 (the kodachi held): the Weapon
+# Training Guide, begun. Accepted: 185, option 1: the kodachi held: nothing; the kodachi traded (300 points): 187 (the
+# kodachi taken by confirmTrade; the Map to the Annals of Truth); 188 (the map). Labyrinth of Onzozo's qm1: the map, no
+# annals: Megapod Megalops popped (claimed), SENSE_OMINOUS_PRESENCE; killed: killed_wsnm 1; qm1: cleared, the Annals of
+# Truth (a keyItem reply); qm1 again: nil: its default NOTHING_OUT_OF_ORDINARY. Norg: Ryoma 189: completed (Norg fame
+# 20), the three key items taken, Blade: Ku learnt, BLADE_KU_LEARNED; again: no section: the default 94.
+lists Norg/Ryoma/onTrigger Norg/Ryoma/onTrade LabyrinthOfOnzozo/qm1/onTrigger LabyrinthOfOnzozo/Megapod_Megalops/onMobDeath Norg/onEventFinish/189
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+skill Katana 2500
+item KodachiOfTrials wsp=300
+quest Outlands.TwentyInPirateYears accepted
+login
+trade Ryoma KodachiOfTrials x1          # available: no trade handler: nothing
+trigger Ryoma                           # 184 (Event, once per zone)
+finish option=0                         # nothing
+trigger Ryoma                           # 184 performed this zone: ignored: the default 94
+finish-if-event
+warp -94.579,-2.299,30.463 PortBastok   # out of Norg and back: the once-per-zone mark cleared
+warp -26.276,0.53,-8.323 Norg
+trigger Ryoma                           # 184
+finish option=1                         # the kodachi held: the guide; begun
+trigger Ryoma                           # accepted: 185
+finish option=1                         # the kodachi held: nothing
+trade Ryoma KodachiOfTrials x1          # 300 points: 187
+finish                                  # the kodachi taken; the Map to the Annals of Truth
+trigger Ryoma                           # the map: 188
+finish
+warp 110.479,14.976,161.904 LabyrinthOfOnzozo
+trigger qm1                             # the map, no annals: Megapod Megalops popped; SENSE_OMINOUS_PRESENCE
+kill MEGAPOD_MEGALOPS                   # the map held: killed_wsnm 1
+trigger qm1                             # killed_wsnm 1: cleared; the Annals of Truth
+trigger qm1                             # the annals held: nil: the default NOTHING_OUT_OF_ORDINARY
+warp -26.276,0.53,-8.323 Norg
+trigger Ryoma                           # the annals: 189
+finish                                  # completed; the key items taken; Blade: Ku; BLADE_KU_LEARNED
+trigger Ryoma                           # completed: no section: the default 94
+finish-if-event

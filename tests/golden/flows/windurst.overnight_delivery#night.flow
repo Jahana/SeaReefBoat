@@ -1,0 +1,19 @@
+# Overnight Delivery (windurst 15): the small hours. At 03:00 the offer is not given (hour < 7: his script answers).
+# Accepted by GM (Prog 4), Kotan's 141 at 03:00 sets dueDate to today (`VanadielHour() < 6`), and Kenapa's 348 at 03:00
+# of that day completes the quest (the `dueDate == today and hour < 6` side).
+lists WindurstWaters/Kenapa-Keppa/onTrigger Mhaura/Kotan-Purutan/onTrigger WindurstWaters/onEventFinish/348 Mhaura/onEventFinish/141
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought completed
+fame Windurst 50
+login
+wait vana=15                            # day 8001, 03:00
+trigger Kenapa-Keppa                    # available, Prog 0, 03:00: nil; his script 302 or 303
+finish
+quest Windurst.OvernightDelivery accepted
+charvar Quest[2][15]Prog 4
+warp 41.8,-8.0,44.2 Mhaura
+trigger Kotan-Purutan                   # 03:00 (< 6): 141
+finish                                  # Small Bag; 03:00 (< 6): dueDate = today
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Kenapa-Keppa                    # due today, 03:00 (< 6): 348
+finish                                  # completed: fame +20, Power Gi; the bag gone; mustZone

@@ -1,0 +1,90 @@
+# I'll Take the Big Box's reply kinds against Ayame and Kaede (Ryoma 95 P at Prog 4; Ensetsu 242 P at Prog 1 or 2, 243
+# E at Prog 4) and the NPC scripts (Ensetsu's 263 at twentyInPirateYearsCS 4; Leodarion's True Will 98 at trueWillCS 2
+# without the Large Trick Box). Ayame and Kaede's container comes first in a tie (bastok before outlands).
+# main (Norg, a level 50 Ninja, Twenty in Pirate Years completed, Ayame and Kaede accepted at Prog 4, GMs): Ryoma 95 and
+# 135 (both Progress) tie: 95 (Ayame and Kaede Prog 5); Prog 4 again (a GM): the last id 95: 135 (begun); then 95 alone.
+# bob (Port Bastok; Big Box accepted at Prog 0, Ayame and Kaede accepted at Prog 1, GMs): Ensetsu 242 and 264 tie: 242
+# (Prog 2); Prog 1 again (a GM): the last id 242: 264 (Big Box Prog 1); 242 (Progress) beats 265 (Event); Prog 4 (a GM):
+# 243 and 265 tie: the last id 242: 243, then 265, then 243.
+# carl (Port Bastok; Big Box at Prog 1, twentyInPirateYearsCS 4, GMs): Ensetsu 265 alternates with his script's 263.
+# dan (Rabao; Big Box at Prog 1, True Will accepted, trueWillCS 2, GMs): Leodarion 90 (Progress) on the handler's turn
+# (Prog 2); then 91 (Event) and his script's 98 alternate; Prog 3 with the Timer ahead (GMs): his script's turn (98), 93,
+# 98; the Timer cleared (a GM): 94 (Progress) over the script's turn (the staff, Prog 4); 95 and 98 alternate.
+lists Norg/Ryoma/onTrigger PortBastok/Ensetsu/onTrigger Rabao/Leodarion/onTrigger
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=50
+char bob zone=PortBastok pos=31.966,-6.771,68.784 job=NIN lvl=50
+char carl zone=PortBastok pos=31.966,-6.771,68.784 job=NIN lvl=50
+char dan zone=Rabao pos=-49.513,7.999,41.323 job=NIN lvl=50
+quest Outlands.TwentyInPirateYears completed
+quest Bastok.AyameAndKaede accepted
+charvar Quest[1][60]Prog 4
+bob: quest Outlands.ILlTakeTheBigBox accepted
+bob: quest Bastok.AyameAndKaede accepted
+bob: charvar Quest[1][60]Prog 1
+carl: quest Outlands.ILlTakeTheBigBox accepted
+carl: charvar Quest[5][144]Prog 1
+carl: charvar twentyInPirateYearsCS 4
+dan: quest Outlands.ILlTakeTheBigBox accepted
+dan: charvar Quest[5][144]Prog 1
+dan: quest Outlands.TrueWill accepted
+dan: charvar trueWillCS 2
+login
+trigger Ryoma                           # 95 and 135 tie: 95
+finish
+charvar Quest[1][60]Prog 4              # a GM
+trigger Ryoma                           # the last id 95: 135
+finish                                  # Big Box begun
+trigger Ryoma                           # 95 alone
+finish
+logout
+bob: login
+bob: trigger Ensetsu                    # 242 and 264 tie: 242
+bob: finish
+bob: charvar Quest[1][60]Prog 1         # a GM
+bob: trigger Ensetsu                    # the last id 242: 264
+bob: finish                             # Big Box Prog 1
+bob: trigger Ensetsu                    # 242 (Progress) beats 265
+bob: finish
+bob: charvar Quest[1][60]Prog 4         # a GM
+bob: trigger Ensetsu                    # 243 and 265 tie: the last id 242: 243
+bob: finish
+bob: trigger Ensetsu                    # the cycle: 265
+bob: finish
+bob: trigger Ensetsu                    # the cycle wraps: 243
+bob: finish
+bob: logout
+carl: login
+carl: trigger Ensetsu                   # 265
+carl: finish
+carl: trigger Ensetsu                   # his script's turn: 263
+carl: finish
+carl: trigger Ensetsu                   # 265
+carl: finish
+carl: logout
+dan: login
+dan: trigger Leodarion                  # 90 (Progress)
+dan: finish                             # Prog 2
+dan: trigger Leodarion                  # 91
+dan: finish
+dan: trigger Leodarion                  # his script's turn: 98
+dan: finish
+dan: trigger Leodarion                  # 91
+dan: finish
+dan: charvar Quest[5][144]Prog 3        # a GM
+dan: charvar Quest[5][144]Timer 999999  # a GM: the day far ahead
+dan: trigger Leodarion                  # his script's turn: 98
+dan: finish
+dan: trigger Leodarion                  # 93
+dan: finish
+dan: trigger Leodarion                  # his script's turn: 98
+dan: finish
+dan: charvar Quest[5][144]Timer 0       # a GM
+dan: trigger Leodarion                  # 94 (Progress) over his script's turn
+dan: finish                             # the Seance Staff; Prog 4
+dan: trigger Leodarion                  # 95
+dan: finish
+dan: trigger Leodarion                  # his script's turn: 98
+dan: finish
+dan: trigger Leodarion                  # 95
+dan: finish
+dan: logout

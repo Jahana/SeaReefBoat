@@ -1,0 +1,19 @@
+# Lure of the Wildcat (San d'Oria) (sandoria 113): the guard xi.settings.main.ENABLE_TOAU == 1 (a number setting:
+# settings/default/main.lua has 1, and survival_guide.lua multiplies it). 0, 2 and 1.25 (a fraction: Lua compares the
+# number as it is, so 1.25 is not 1; a port that rounds the setting would offer it) are not 1: not offered, Amutiyaal's
+# own script (816). Then 1: 812 (its finish gives the badge and begins it).
+lists SouthernSanDoria/Amutiyaal/onTrigger SouthernSanDoria/onEventFinish/812
+char zone=SouthernSanDoria pos=118.0,0.0,84.7 job=WAR lvl=20
+setting ENABLE_TOAU 0
+login
+trigger Amutiyaal                         # ENABLE_TOAU 0: not offered; 816
+finish
+setting ENABLE_TOAU 2
+trigger Amutiyaal                         # ENABLE_TOAU 2: not offered; 816
+finish
+setting ENABLE_TOAU 1.25
+trigger Amutiyaal                         # ENABLE_TOAU 1.25: not offered; 816
+finish
+setting ENABLE_TOAU 1
+trigger Amutiyaal                         # ENABLE_TOAU 1: 812
+finish                                    # the Red Sentinel Badge; begun

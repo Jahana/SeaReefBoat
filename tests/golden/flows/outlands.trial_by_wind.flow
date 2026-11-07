@@ -1,0 +1,80 @@
+# Trial by Wind (outlands 194): Agado-Pugado in Rabao. Available: a trade (his script has no onTrade: nothing);
+# Selbina-Rabao fame (derived: (San d'Oria + Bastok) * 2 / 3) level 4: 70 (the script's, after the quest's nil, and
+# after his Carbuncle Debacle arms, #carbuncle_debacle); level 5: 66 (0, 331: the Tuning Fork of Wind's id, a literal),
+# declined (option 0), option 2 (nothing: the finish wants option 1), accepted (option 1: TrialByWind_date 0, the fork).
+# Accepted: 67 (0, fork, 3) with the fork; the fork deleted by GM: 107 (finish: a new fork); the Whisper of Gales by GM with the fork held
+# (the battlefield's 32001 is #battlefield): 69 once per reward option. Each completion sets TrialByWind_date to the
+# next JST midnight (1800025200 from the harness's 1800000000): 70 while it lies ahead; `wait jst=1` moves the clock a
+# day (1800086400), past it: 66 again, whose option 1 deletes the quest and begins it anew. The strict
+# GetSystemTime() > TrialByWind_date at its edge: the date equal to the clock: 70; one second behind: 66. 69's last
+# argument grows by the rewards held: 1 Garuda's Dagger, 2 the Wind Belt, 4 the Wind Ring, 8 the Bubbly Water, 32 the
+# Garuda spell. Option 0 and options above 6 with room are not taken: player:addItem(0) only warns in the engine and
+# the finish completes with no reward, which the recorder refuses to trace (any lua: warning line); a fake check proves
+# it (as Trial by Ice's); with no room they are #inventory_full's.
+char zone=Rabao pos=-16.5,7.8,-10.5 job=WAR lvl=75
+fame Sandoria 244
+fame Bastok 243                           # Selbina-Rabao (244 + 243) * 2 / 3 = 324
+item BoneChip
+login
+trade Agado-Pugado BoneChip x1          # available: no onTrade in his script; nothing
+trigger Agado-Pugado                      # fame level 4: the quest's nil; 70
+finish
+fame Sandoria 244
+fame Bastok 244                           # Selbina-Rabao 325
+trigger Agado-Pugado                      # fame level 5: 66 (0, fork)
+finish option=0                           # declined: nothing
+trigger Agado-Pugado                      # 66
+finish option=2                           # option 2: nothing
+trigger Agado-Pugado                      # 66
+finish option=1                           # begun; TrialByWind_date 0; the Tuning Fork of Wind
+trigger Agado-Pugado                      # accepted, the fork, no whisper: 67 (0, fork, 3)
+finish
+delkeyitem TuningForkOfWind
+trigger Agado-Pugado                      # accepted, neither key item: 107 (0, fork)
+finish                                    # a new fork
+keyitem WhisperOfGales                    # GM: the battlefield win (#battlefield)
+trigger Agado-Pugado                      # the fork and the whisper: 69 (0, fork, 3, 0, 0)
+finish option=1                           # Garuda's Dagger, ITEM_OBTAINED; Heir of the Great Wind; the whisper taken; date; San d'Oria and Bastok fame +30; completed
+trigger Agado-Pugado                      # completed, TrialByWind_date 1800025200 ahead: 70
+finish
+charvar TrialByWind_date 1800000000      # GM: the date equal to the clock
+trigger Agado-Pugado                      # not past (strict >): 70
+finish
+charvar TrialByWind_date 1799999999      # GM: one second behind
+trigger Agado-Pugado                      # past: 66
+finish option=1                           # the quest deleted and begun again; TrialByWind_date 0; the fork already held
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # 69, mask 1
+finish option=2                           # the Wind Belt: completed; TrialByWind_date 1800025200
+trigger Agado-Pugado                      # ahead: 70
+finish
+wait jst=1                                # the clock 1800086400, past the JST midnight
+trigger Agado-Pugado                      # completed, TrialByWind_date behind: 66
+finish option=1                           # begun again
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # 69, mask 3
+finish option=3                           # the Wind Ring: completed
+charvar TrialByWind_date 1
+trigger Agado-Pugado                      # 66
+finish option=1
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # 69, mask 7
+finish option=4                           # the Bubbly Water: completed
+charvar TrialByWind_date 1
+trigger Agado-Pugado                      # 66
+finish option=1
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # 69, mask 15
+finish option=5                           # 10000 gil: completed
+charvar TrialByWind_date 1
+trigger Agado-Pugado                      # 66
+finish option=1
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # 69, mask 15
+finish option=6                           # the Garuda spell, GARUDA_UNLOCKED (0, 0, 3): completed
+charvar TrialByWind_date 1
+trigger Agado-Pugado                      # 66
+finish option=1
+keyitem WhisperOfGales
+trigger Agado-Pugado                      # 69, mask 47 (32: Garuda)
+finish option=2                           # the Wind Belt again: rare, addItem fails (no row), ITEM_OBTAINED all the same; completed

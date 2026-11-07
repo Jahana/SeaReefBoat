@@ -1,0 +1,32 @@
+# Trial by Fire's edges. Accepted with neither the fork nor the whisper (the fork used up by a lost fight; a GM): 285 (0,
+# fork) gives a new fork; then 271. The whisper (a GM) with a full inventory: 273, option 1 (Ifrit's Blade): giveItem
+# false: not completed, the whisper kept; 273 again, option 6 with the bag still full: the spell (no item): completed.
+# Dodmos's 272 (an Event) alternates with his script (UseFallback) when the script acts: bob, a level 75 Summoner at
+# Windurst fame 425 (Trial-Size Trial by Fire available: his script offers it, 286), Trial by Fire accepted (a GM):
+# 272, then his script's 286 (option 0: declined), then 272.
+lists Kazham/Ronta-Onta/onTrigger Kazham/onEventFinish/273 Kazham/onEventFinish/285 Kazham/Dodmos/onTrigger
+char zone=Kazham pos=100.37,-13.999,-97.676 job=WAR lvl=75
+char bob zone=Kazham pos=102.647,-13.999,-97.664 job=SMN lvl=75
+quest Outlands.TrialByFire accepted
+bob: fame Windurst 425
+bob: quest Outlands.TrialByFire accepted
+login
+trigger Ronta-Onta                      # no whisper, no fork: 285 (0, fork)
+finish                                  # a new Tuning Fork of Fire
+trigger Ronta-Onta                      # the fork: 271
+finish
+keyitem WhisperOfFlames                 # a GM
+trigger Ronta-Onta                      # 273 (32)
+fill-inventory
+finish option=1                         # giveItem false: nothing (still accepted, the whisper kept)
+trigger Ronta-Onta                      # 273
+finish option=6                         # the Ifrit spell (no item): completed; the whisper taken
+free-inventory
+bob: login
+bob: trigger Dodmos                     # 272
+bob: finish
+bob: trigger Dodmos                     # his script's turn: Trial-Size Trial by Fire's 286
+bob: finish option=0                    # declined
+bob: trigger Dodmos                     # 272
+bob: finish
+bob: logout

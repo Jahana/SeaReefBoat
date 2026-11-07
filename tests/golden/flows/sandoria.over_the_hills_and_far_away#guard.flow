@@ -1,0 +1,34 @@
+# Over the Hills and Far Away (sandoria 112): Antreneau's guard, one operand false at a time (each script talk follows a
+# default talk), at fame level 8 (550) with A Taste for Meat completed. DiaryPage 3: no arm. DiaryPage 4, The Medicine
+# Woman available: no arm. A Taste for Meat set available, then accepted (GM; accepted alone over a completed quest
+# keeps it completed): not completed, and none of its C# states answers Antreneau: no arm. Completed again, its var
+# Option 2 (GM): A Taste for Meat's 530 wants 1, and Antreneau's guard wants 0: no arm. Option 1: A Taste for Meat's
+# completed state (main's ATasteForMeat.cs) answers first with 530 (the hare, Option 0). Then the default, and with
+# every operand true: 725, begun.
+char zone=PortSanDoria pos=-70,-5.5,-41.1 lvl=75
+quest Sandoria.ATasteForMeat completed
+fame Sandoria 550
+charvar DiaryPage 3
+login
+quest Sandoria.TheMedicineWoman completed
+trigger Antreneau                         # default
+trigger Antreneau                         # DiaryPage 3: no arm: the default
+charvar DiaryPage 4
+quest Sandoria.TheMedicineWoman available
+trigger Antreneau                         # default
+trigger Antreneau                         # The Medicine Woman available: no arm: the default
+quest Sandoria.TheMedicineWoman completed
+quest Sandoria.ATasteForMeat available    # a GM (accepted alone keeps the completed bit)
+quest Sandoria.ATasteForMeat accepted     # a GM: not completed, and none of its states answers
+trigger Antreneau                         # default
+trigger Antreneau                         # A Taste for Meat not completed: no arm: the default
+quest Sandoria.ATasteForMeat completed
+charvar Quest[0][100]Option 2             # a GM
+trigger Antreneau                         # default
+trigger Antreneau                         # Option 2: no arm: the default
+charvar Quest[0][100]Option 1
+trigger Antreneau                         # Option 1: A Taste for Meat's completed state answers first: 530
+finish                                    # its finish: a Slice of Grilled Hare, Option 0 (its C#)
+trigger Antreneau                         # default
+trigger Antreneau                         # Option 0 again, all the guards hold, available: 725
+finish option=0                           # begun

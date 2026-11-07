@@ -1,0 +1,19 @@
+# Overnight Delivery (windurst 15): 348 with a full bag: quest:complete fails (the Power Gi does not fit), nothing
+# changes, the Small Bag is kept; with room, 348 again completes it.
+lists WindurstWaters/Kenapa-Keppa/onTrigger Mhaura/Kotan-Purutan/onTrigger WindurstWaters/onEventFinish/348 Mhaura/onEventFinish/141
+char zone=Mhaura pos=41.8,-8.0,44.2
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery accepted
+charvar Quest[2][15]Prog 4
+fame Windurst 50
+login
+wait vana=6                             # 18:00
+trigger Kotan-Purutan                   # 141
+finish                                  # Small Bag; dueDate = today + 1
+warp 24.0,-5.38,-197.7 WindurstWaters
+fill-inventory
+trigger Kenapa-Keppa                    # the bag, due tomorrow: 348
+finish                                  # inventory full: not completed, the bag kept
+free-inventory
+trigger Kenapa-Keppa                    # 348 again
+finish                                  # completed

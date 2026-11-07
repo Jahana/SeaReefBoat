@@ -1,0 +1,94 @@
+# Under Oath (sandoria 92, PLD AF3): the door _6h0 (Chateau d'Oraguille), Vemalpeau (Southern San d'Oria), and the Lua
+# steps between (Najjar, Ullasa, the picture qm3, Exoroche, Ailbeche; the Castle Zvahl coffer, the Davoi well and the
+# Jugner Forest trigger area by GM). The door, Ailbeche and Exoroche have a default action (ITS_LOCKED, 868, 76): after
+# each zone-in the first talk plays it, the next his script ("default"). Vemalpeau, Najjar, Ullasa and qm3 have none.
+# A PLD 60 with A Boy's Dream completed (GM): 90, option 0 and option 2: nothing; 90, option 1: begun, UnderOathCS 0.
+# Vemalpeau 7 (UnderOathCS 1); 1 (no arm). Najjar 16 (2), Ullasa 40 (3). Vemalpeau at 3 without the paintbrush: 1;
+# Mique's Paintbrush (GM: the coffer's reward): 5 (4, the brush taken). Vemalpeau at 4 without the sheet: 1. qm3 41,
+# option 0: nothing; option 1: the Strange Sheet of Paper. Vemalpeau 3 (no change). Exoroche 77 (5). Vemalpeau at 5 with
+# the sheet: 1. UnderOathCS 6, the Knight's Confession, the sheet taken (GM: the well's 113). Vemalpeau at 6 with the
+# confession: 1. Ailbeche 59 (7). UnderOathCS 8 (GM: Jugner's 14): Ailbeche 13. The door 89 with a full inventory:
+# ITEM_CANNOT_BE_OBTAINED; with exactly one free slot and a GM var Quest[0][92]Prog 1: the Gallant Surcoat,
+# ITEM_OBTAINED, UnderOathCS 9, fame 20, Paragon of Paladin Excellence, completed (player:completeQuest: the GM var
+# kept). The door: completed: no arm. Vemalpeau 2 (UnderOathCS 0, the confession taken); then 1.
+# Father and Son completed and Sharpening the Sword accepted by GM: Sharpening's 42 takes Ailbeche's first talk after
+# each zone-in and every other talk ("42"), his script the others (42 again when it plays nothing). Sharpening
+# completed is only in sandoria.a_boys_dream#offer and sandoria.sharpening_the_sword#completed: while A Boy's Dream is
+# available, its check 4 answers Ailbeche's talks with AILBECHE_WHEN_FISHING (over his default 868).
+char zone=ChateauDoraguille pos=-38.0,-4.9,73.5 job=PLD lvl=60
+quest Sandoria.FatherAndSon completed
+quest Sandoria.SharpeningTheSword accepted
+quest Sandoria.ABoysDream completed
+login
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # PLD 60, A Boy's Dream completed, available: 90
+finish option=0                         # nothing
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # 90
+finish option=2                         # nothing
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # 90
+finish option=1                         # begun; UnderOathCS 0
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # accepted, UnderOathCS 0: no arm (no trust, rank 1): ITS_LOCKED
+warp 155.5,-0.9,65.0 SouthernSanDoria
+trigger Vemalpeau                       # accepted, UnderOathCS 0: 7
+finish                                  # UnderOathCS 1
+trigger Vemalpeau                       # UnderOathCS 1: 1 (his script)
+finish
+trigger Najjar                          # UnderOathCS 1: 16 (Lua)
+finish                                  # UnderOathCS 2
+trigger Ullasa                          # UnderOathCS 2: 40 (Lua)
+finish                                  # UnderOathCS 3
+trigger Vemalpeau                       # UnderOathCS 3, no paintbrush: 1
+finish
+keyitem MiquesPaintbrush                # GM: the Castle Zvahl Baileys coffer's reward
+trigger Vemalpeau                       # UnderOathCS 3 with the paintbrush: 5
+finish                                  # UnderOathCS 4; the paintbrush taken
+trigger Vemalpeau                       # UnderOathCS 4, no sheet: 1
+finish
+trigger qm3                             # UnderOathCS 4: 41 (Lua)
+finish option=0                         # nothing
+trigger qm3                             # 41
+finish option=1                         # the Strange Sheet of Paper
+trigger Vemalpeau                       # UnderOathCS 4 with the sheet: 3
+finish                                  # no change
+trigger Exoroche                        # default 76
+finish
+trigger Exoroche                        # UnderOathCS 4 with the sheet: 77 (Lua)
+finish                                  # UnderOathCS 5
+trigger Vemalpeau                       # UnderOathCS 5 with the sheet: 1
+finish
+charvar UnderOathCS 6                   # GM: the Davoi well's 113
+keyitem KnightsConfession
+delkeyitem StrangeSheetOfPaper
+trigger Vemalpeau                       # UnderOathCS 6 with the confession: 1
+finish
+warp 6.5,0.5,26.9 NorthernSanDoria
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # aBoysDreamCS 0: no arm; UnderOathCS 6 with the confession: 59 (Lua)
+finish                                  # UnderOathCS 7
+charvar UnderOathCS 8                   # GM: Jugner Forest's trigger area 14
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # aBoysDreamCS 0: no arm; UnderOathCS 8: 13 (Lua)
+finish
+charvar Quest[0][92]Prog 1              # GM: a quest var no script sets
+warp -38.0,-4.9,73.5 ChateauDoraguille
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # UnderOathCS 8: 89
+fill-inventory
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (Gallant Surcoat); nothing else
+storage inventory 31                    # exactly one free slot
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # 89
+finish                                  # the surcoat; ITEM_OBTAINED; UnderOathCS 9; fame 20; the title; completed
+free-inventory
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # completed, UnderOathCS 9: no arm; nothing (ITS_LOCKED)
+warp 155.5,-0.9,65.0 SouthernSanDoria
+trigger Vemalpeau                       # UnderOathCS 9 with the confession: 2
+finish                                  # UnderOathCS 0; the confession taken
+trigger Vemalpeau                       # completed, UnderOathCS 0: 1
+finish

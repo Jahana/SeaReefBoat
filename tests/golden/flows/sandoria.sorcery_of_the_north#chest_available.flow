@@ -1,0 +1,11 @@
+# Sorcery of the North (sandoria 83) available: the Fei'Yin chest's trade is the chest's own script
+# (xi.treasure.onTrade(..., 0, 0): its loot draw, here 5580 gil with CHEST_UNLOCKED (7384) 2 s later, and on a reward the
+# expeditionary force's onChestOpen); the quest's handler wants the status accepted. A chest is placed 10 s after its
+# zone starts (hence the tick).
+char zone=Feiyin pos=168.7,-24.0,210.8 job=WAR lvl=50
+item FeiyinChestKey
+login
+tick 13000
+trigger Treasure_Chest                    # the chest's own trigger
+trade Treasure_Chest FeiyinChestKey x1    # available: the quest's nil; the chest's own script
+tick 4500

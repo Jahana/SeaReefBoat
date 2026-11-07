@@ -1,0 +1,22 @@
+# A Pioneer's Best (Imaginary) Friend (adoulin 75, call-only), Ionis on before the quest begins: a level 99 Warrior in
+# Western Adoulin, SoA Life on the Frontier current, the quest accepted (GMs). Ruth: 503 (the default's turn),
+# then 2523, finished: Ionis. The quest set available again (a GM; Ionis stays). Merleg: 543, then 2520, finished:
+# added, and with Ionis on the finish starts 2522 itself (player:startEvent from the finish: it plays in the same step);
+# 2522 finished: completed, 500 exp, 200 bayld, the F.A.I.L. Badge, 30 Adoulin fame.
+lists WesternAdoulin/Merleg/onTrigger WesternAdoulin/Ruth/onTrigger WesternAdoulin/onEventFinish/2520
+lists WesternAdoulin/onEventFinish/2522 WesternAdoulin/onEventFinish/2523
+char zone=WesternAdoulin pos=-142.5,4,-10 job=WAR lvl=99
+mission Soa LifeOnTheFrontier current
+quest Adoulin.APioneersBestImaginaryFriend accepted
+login
+trigger Ruth                            # 2523 or 503 (the turn)
+finish-if-event
+trigger Ruth                            # the other; 2523's finish: Ionis
+finish-if-event
+quest Adoulin.APioneersBestImaginaryFriend available # a GM
+warp 32.5,0,-131 WesternAdoulin         # beside Merleg
+trigger Merleg                          # available: 2520 or 543
+finish-if-event
+trigger Merleg                          # the other; 2520's finish: added; Ionis on: 2522 started
+finish-if-event
+finish                                  # 2522's finish: completed, exp, bayld, the badge, fame

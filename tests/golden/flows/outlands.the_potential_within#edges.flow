@@ -1,0 +1,110 @@
+# The Potential Within's edges; every char has the SAM chain completed (GMs: A Thief in Norg!?'s 165 is Jaucribaix's
+# other reply). Section 1 off, one operand each: bob (a Warrior: cannot wear the tachi; skill 2500): 165; carl (a
+# Samurai, skill 2499): 165; dan (a Samurai, skill 2500, the Weapon Training Guide held): 165. Main (a Samurai, skill
+# 2500, a Tachi of Trials with 299 points): available, the tachi traded (the accepted trade; the status the only
+# change): nothing. 178, option 2: nothing; out of Norg and back: 178, option 1 (the tachi held): begun. 179 (1),
+# options 0 and 3: the tachi held: nothing. The tachi with a
+# Hatchet: nil; the tachi alone (299): 180 (unfinished; kept). 179, option 2: the quest dropped, the guide and the map
+# taken. Available again, 178 performed this zone: ignored: 165. ed (a Samurai, skill 2500, no tachi): 178, option 1
+# with a full inventory: giveItem false: not begun; out of Norg and back: 178, option 1: the tachi given, begun. fred
+# (accepted by a GM, no tachi): 179 (0), option 0: the tachi given; the map held (a GM): 182. Kuftal Tunnel's qm3
+# (fred): the map and the annals held (GMs): nil; the annals taken: Kettenkaefer popped; qm3 again (Kettenkaefer up:
+# popFromQM false): nil; the map taken (a GM), Kettenkaefer killed: no killed_wsnm; qm3: nil; its body gone: qm3 with
+# neither the map nor the annals: nil (no pop).
+lists Norg/Jaucribaix/onTrigger Norg/Jaucribaix/onTrade Norg/onEventFinish/179 KuftalTunnel/qm3/onTrigger
+char zone=Norg pos=91,-7,-8 job=SAM lvl=75
+char bob zone=Norg pos=91,-7,-8 job=WAR lvl=75
+char carl zone=Norg pos=91,-7,-8 job=SAM lvl=75
+char dan zone=Norg pos=91,-7,-8 job=SAM lvl=75
+char ed zone=Norg pos=91,-7,-8 job=SAM lvl=75
+char fred zone=Norg pos=91,-7,-8 job=SAM lvl=75
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+quest Outlands.AThiefInNorg completed
+skill GreatKatana 2500
+item TachiOfTrials wsp=299
+item Hatchet
+bob: quest Outlands.ForgeYourDestiny completed
+bob: quest Outlands.AThiefInNorg completed
+bob: skill GreatKatana 2500
+carl: quest Outlands.ForgeYourDestiny completed
+carl: quest Outlands.TheSacredKatana completed
+carl: quest Outlands.YomiOkuri completed
+carl: quest Outlands.AThiefInNorg completed
+carl: skill GreatKatana 2499
+dan: quest Outlands.ForgeYourDestiny completed
+dan: quest Outlands.TheSacredKatana completed
+dan: quest Outlands.YomiOkuri completed
+dan: quest Outlands.AThiefInNorg completed
+dan: skill GreatKatana 2500
+dan: keyitem WeaponTrainingGuide
+ed: quest Outlands.ForgeYourDestiny completed
+ed: quest Outlands.TheSacredKatana completed
+ed: quest Outlands.YomiOkuri completed
+ed: quest Outlands.AThiefInNorg completed
+ed: skill GreatKatana 2500
+fred: quest Outlands.ForgeYourDestiny completed
+fred: quest Outlands.TheSacredKatana completed
+fred: quest Outlands.YomiOkuri completed
+fred: quest Outlands.AThiefInNorg completed
+fred: quest Outlands.ThePotentialWithin accepted
+login
+bob: login
+bob: trigger Jaucribaix                 # a Warrior (cannot wear the tachi): 165
+bob: finish
+bob: logout
+carl: login
+carl: trigger Jaucribaix                # skill 2499 (249.9 < 250): 165
+carl: finish
+carl: logout
+dan: login
+dan: trigger Jaucribaix                 # the guide held: 165
+dan: finish
+dan: logout
+trade Jaucribaix TachiOfTrials x1       # available: no trade arm: nothing
+trigger Jaucribaix                      # 178
+finish option=2                         # not 1: nothing
+warp -63,7,0 PortJeuno                  # the once-per-zone mark cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # 178
+finish option=1                         # the tachi held: the guide; begun
+trigger Jaucribaix                      # 179 (1)
+finish option=0                         # the tachi held: nothing
+trigger Jaucribaix                      # 179 (1)
+finish option=3                         # not 2, the tachi held: nothing
+trade Jaucribaix TachiOfTrials x1 Hatchet x1 # not the tachi alone: nil
+trade Jaucribaix TachiOfTrials x1       # 299 points: 180 (the tachi kept)
+finish
+trigger Jaucribaix                      # 179 (1)
+finish option=2                         # dropped: the guide and the map taken
+trigger Jaucribaix                      # available again, 178 performed this zone: ignored: 165
+finish
+ed: login
+ed: trigger Jaucribaix                  # 178
+ed: fill-inventory
+ed: finish option=1                     # no tachi, giveItem false: nothing
+ed: free-inventory
+ed: warp -63,7,0 PortJeuno              # the once-per-zone mark cleared
+ed: warp 91,-7,-8 Norg
+ed: trigger Jaucribaix                  # 178
+ed: finish option=1                     # the tachi given; the guide; begun
+ed: logout
+fred: login
+fred: trigger Jaucribaix                # no tachi: 179 (0)
+fred: finish option=0                   # not 2, no tachi: the tachi given
+fred: keyitem MapToTheAnnalsOfTruth     # a GM
+fred: trigger Jaucribaix                # the map: 182
+fred: finish
+fred: keyitem AnnalsOfTruth             # a GM
+fred: warp 200,11,99 KuftalTunnel
+fred: trigger qm3                       # the map and the annals: nil: default
+fred: delkeyitem AnnalsOfTruth          # a GM
+fred: trigger qm3                       # Kettenkaefer popped; SENSE_OMINOUS_PRESENCE
+fred: trigger qm3                       # Kettenkaefer up: popFromQM false: nil: default
+fred: delkeyitem MapToTheAnnalsOfTruth  # a GM
+fred: kill KETTENKAEFER                 # no map: no killed_wsnm
+fred: trigger qm3                       # killed_wsnm 0, no map: nil: default
+tick 15000                              # Kettenkaefer's body despawns
+tick 4000                               # and fades
+fred: trigger qm3                       # no map, no annals, Kettenkaefer gone: nil: default (no pop)

@@ -1,0 +1,36 @@
+# Snake on the Plains (crystalWar 8) with a campaign allegiance (no flow statement sets one: the char completes Steamed
+# Rams first, allegiance 1). A level 99 Warrior in Southern San d'Oria [S] with Steamed Rams accepted and its three key
+# items (GMs; missions as Steamed Rams' main flow): Mainchelite 12: Steamed Rams completed, allegiance 1, the Bronze
+# Ribbon. Windurst Waters [S]: Miah Riyuh: the Green letter (a GM) and an allegiance: 103 (the letter first), option
+# 2: nothing; the letter taken (a GM): an allegiance, LetterUsed 0: 105, accepted: begun, the putty. Doors 7 (a GM),
+# the ribbon taken (a GM), a full inventory: 106, option 0: pledged: no shoes (the full bag no matter), completed, no
+# ribbon, allegiance 3, NOW_ALLIED_WITH 3. Completed: 107.
+lists SouthernSanDoriaS/Mainchelite/onTrigger WindurstWatersS/Miah_Riyuh/onTrigger WindurstWatersS/onEventFinish/103 WindurstWatersS/onEventFinish/105 WindurstWatersS/onEventFinish/106
+char zone=SouthernSanDoriaS pos=-13.849,1.398,-30.368 job=WAR lvl=99
+quest CrystalWar.SteamedRams accepted
+keyitem CharredPropeller
+keyitem OxidizedPlate
+keyitem PieceOfShatteredLumber
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Mainchelite                     # Steamed Rams: the three: 12
+finish                                  # Steamed Rams completed; allegiance 1; the ribbon
+warp 6.823,-1,37.462 WindurstWatersS
+keyitem GreenRecommendationLetter
+trigger Miah_Riyuh                      # the letter and an allegiance: 103
+finish option=2                         # nothing
+delkeyitem GreenRecommendationLetter
+trigger Miah_Riyuh                      # an allegiance, LetterUsed 0: 105
+finish option=0                         # begun; the putty
+charvar Quest[7][8]Doors 7
+delkeyitem BronzeRibbonOfService
+fill-inventory
+trigger Miah_Riyuh                      # Doors full: 106
+finish option=0                         # pledged: no shoes; completed; no ribbon; allegiance 3; NOW_ALLIED_WITH 3
+free-inventory
+trigger Miah_Riyuh                      # completed, allegiance 3: 107
+finish

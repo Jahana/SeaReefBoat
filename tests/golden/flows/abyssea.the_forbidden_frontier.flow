@@ -1,0 +1,23 @@
+# The Forbidden Frontier (abyssea 166): a level 99 Warrior in Port Jeuno with A Journey Begins completed (no story
+# quest past it: Joachim's script plays nothing) and A Goldstruck Gigas accepted (GMs). Joachim (available, one of the
+# three begun): 331, finished: begun. Joachim (accepted, none of the three completed): no section: nothing (his script:
+# Dawn of Death not accepted). A Goldstruck Gigas and To Paste a Peiste completed (GMs): two of three: nothing.
+# Megadrile Menace completed: 332, finished: completed (no reward). Joachim (completed): no section: nothing.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/331 PortJeuno/onEventFinish/332
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.AGoldstruckGigas accepted
+login
+trigger Joachim                         # available, A Goldstruck Gigas accepted: 331
+finish                                  # begun
+trigger Joachim                         # accepted, none completed: nothing
+finish-if-event
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+trigger Joachim                         # two of three completed: nothing
+finish-if-event
+quest Abyssea.MegadrileMenace completed
+trigger Joachim                         # all three: 332
+finish                                  # completed
+trigger Joachim                         # completed: nothing
+finish-if-event

@@ -1,0 +1,48 @@
+# Hide and Go Peak (adoulin 57): a level 99 Warrior in Marjami Ravine. Toppled Tree: 3, finished on 2: begun (any
+# option); available again (a GM): 3 on 0: begun. Prog 0: Toppled Tree 4; Scalable_Area_2 nil
+# (default SHARP_THORNS_PROTRUDE); Velkk Cache (no strip, Prog 0): LEATHER_SCRAPS_STREWN, Prog 1, the
+# Large Strip of Velkk Hide (the key item action). Velkk Cache with the strip: nil (default LEATHER_SCRAPS_STREWN), at
+# Prog 1 and at Prog 0 (a GM); without it at Prog 1 (a GM): nil. Scalable_Area_2 at Prog 1: nil (default). Toppled Tree
+# at Prog 1: 5, finished: the strip taken, Prog 2, KEYITEM_LOST. Velkk Cache at Prog 2, no strip: nil (default).
+# Toppled Tree at Prog 2: 6. Prog 3 (a GM): Toppled Tree nothing, Scalable_Area_2 nil (default); Prog 2 again.
+# Scalable_Area_2 at Prog 2: 7, finished: the Pair of Velkk Gloves, Climbing, YOU_HAVE_LEARNED Climbing, completed
+# (500 bayld). Completed: Toppled Tree no section: nothing; Velkk Cache: its default. Accepted again at Prog -1 (a GM):
+# Toppled Tree nothing. The pads: #pads.
+lists MarjamiRavine/Toppled_Tree/onTrigger MarjamiRavine/Velkk_Cache/onTrigger MarjamiRavine/Scalable_Area_2/onTrigger
+lists MarjamiRavine/onEventFinish/3 MarjamiRavine/onEventFinish/5 MarjamiRavine/onEventFinish/7
+char zone=MarjamiRavine pos=357.772,-59.701,149.993 job=WAR lvl=99
+login
+trigger Toppled_Tree                    # available: 3
+finish option=2                         # begun (any option)
+quest Adoulin.HideAndGoPeak available   # a GM
+trigger Toppled_Tree                    # available: 3
+finish option=0                         # begun
+trigger Toppled_Tree                    # Prog 0: 4 (an Event)
+finish
+trigger Scalable_Area_2                 # Prog 0: nil: default SHARP_THORNS_PROTRUDE
+trigger Velkk_Cache                     # no strip, Prog 0: LEATHER_SCRAPS_STREWN, Prog 1, the strip (key item action)
+trigger Velkk_Cache                     # the strip held, Prog 1: nil: default LEATHER_SCRAPS_STREWN
+charvar Quest[9][57]Prog 0              # a GM
+trigger Velkk_Cache                     # the strip held, Prog 0: nil: default
+charvar Quest[9][57]Prog 1              # a GM
+delkeyitem LargeStripOfVelkkHide        # a GM
+trigger Velkk_Cache                     # no strip, Prog 1: nil: default
+keyitem LargeStripOfVelkkHide           # a GM
+trigger Scalable_Area_2                 # Prog 1: nil: default
+trigger Toppled_Tree                    # Prog 1: 5
+finish                                  # the strip taken, Prog 2, KEYITEM_LOST
+trigger Velkk_Cache                     # no strip, Prog 2: nil: default
+trigger Toppled_Tree                    # Prog 2: 6 (an Event)
+finish
+charvar Quest[9][57]Prog 3              # a GM
+trigger Toppled_Tree                    # Prog 3: no arm: nothing (no script, no default)
+trigger Scalable_Area_2                 # Prog 3: nil: default
+charvar Quest[9][57]Prog 2              # a GM
+trigger Scalable_Area_2                 # Prog 2: 7
+finish                                  # the gloves, Climbing, the learned line, completed
+trigger Toppled_Tree                    # completed: no section: nothing
+trigger Velkk_Cache                     # completed: no section: default
+quest Adoulin.HideAndGoPeak available   # a GM
+quest Adoulin.HideAndGoPeak accepted    # a GM
+charvar Quest[9][57]Prog -1             # a GM
+trigger Toppled_Tree                    # accepted, Prog -1: no arm: nothing

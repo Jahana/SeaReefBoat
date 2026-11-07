@@ -1,0 +1,17 @@
+# Trial by Ice (sandoria 59): completed by GM (TrialByIce_date 0), the fork by GM: the battlefield's entry holds for a
+# completed quest (status >= accepted), and 32001's finish gives the title and the Whisper of Frost in any status (kept
+# Lua quirk; battlefieldWin is not read). Gulmama then answers 706 (completed, TrialByIce_date behind), not 709.
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=WAR lvl=75
+quest Sandoria.TrialByIce completed
+keyitem TuningForkOfIce
+login
+trigger IP_Entrance                       # completed, the fork: the entry menu 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+kill DRYAD-3                              # the battlefield won, 32001 opens (canSkipCS 1)
+finish                                    # completed: Heir of the Great Ice, the Whisper of Frost all the same
+warp -185.5,0.0,110.1 NorthernSanDoria
+trigger Gulmama                           # completed, TrialByIce_date 0, the whisper held: 706
+finish option=1                           # the quest deleted and begun; the fork
+trigger Gulmama                           # accepted, the whisper: 709
+finish option=4                           # Rust 'B' Gone: completed

@@ -1,0 +1,138 @@
+# Let Sleeping Dogs Lie (windurst 46): Paku-Nakku, Pechiru-Mashiru and the school (Windurst Waters), Maabu-Sonbu (Port
+# Windurst). A level-5 WAR (Making the Grade needs level 10: never available here), Windurst fame 225 (level 4),
+# Teacher's Pet completed by GM (available, Moreno-Toeno's 437 Progress would cover this quest's 491; completed, its 439
+# Event takes turns with 491 and with his script's 441 / 469). NPCs with a script (Moreno-Toeno: a random 441 / 469;
+# Mashuu-Ajuu: Reap What You Sow's random 463 or nothing; Fuepepe, Pechiru-Mashiru: nothing here) take turns with an
+# Event reply (the lookup's alternation, group 5's tables): the flow talks to Mashuu-Ajuu twice and to Moreno-Toeno three times
+# (this quest's 491, his script, Teacher's Pet's 439); a zone change resets the turns.
+# Available: Blazing Peppers traded to Paku-Nakku (no trade handler in section 1: nothing); the children's lines; 481,
+# begun. Prog 0: Paku-Nakku 482, Pechiru-Mashiru 490, the children (<= 3), Fuepepe 493, Moreno-Toeno 491; the peppers
+# at Prog 0: nil. Maabu-Sonbu 319 (Prog 1), 320. Prog 1: Pechiru-Mashiru 492; a bone chip: nil; the peppers with a
+# Remedy (tradeHas, peppers first): Option 1, 494 (0, 1): Prog 2, the peppers taken, the Remedy kept. Prog 2: Paku-Nakku
+# 482, Maabu-Sonbu 321 (0, peppers); Pechiru-Mashiru 495 (..., 1): Prog 3; 496; Paku-Nakku 499 option 1 (nothing),
+# option 2 (Spoilsport, Prog 4). Prog 4: the children's 501-507, Fuepepe and Moreno-Toeno nil, Paku-Nakku 500,
+# Maabu-Sonbu nil (227); Pechiru-Mashiru 497 with a full bag (nothing, Prog 4), 497: completed (fame 40, the Hypno
+# Staff). Completed: no section; Paku-Nakku 431, Akkeke 427.
+lists WindurstWaters/Paku-Nakku/onTrigger WindurstWaters/Paku-Nakku/onTrade WindurstWaters/Pechiru-Mashiru/onTrigger WindurstWaters/Akkeke/onTrigger WindurstWaters/Chomoro-Kyotoro/onTrigger WindurstWaters/Foi-Mui/onTrigger WindurstWaters/Kirarara/onTrigger WindurstWaters/Koko_Lihzeh/onTrigger WindurstWaters/Mashuu-Ajuu/onTrigger WindurstWaters/Rukuku/onTrigger WindurstWaters/Fuepepe/onTrigger WindurstWaters/Moreno-Toeno/onTrigger WindurstWaters/onEventFinish/481 WindurstWaters/onEventFinish/494 WindurstWaters/onEventFinish/495 WindurstWaters/onEventFinish/497 WindurstWaters/onEventFinish/499 PortWindurst/Maabu-Sonbu/onTrigger PortWindurst/onEventFinish/319
+char zone=WindurstWaters pos=131,-5.75,165 job=WAR lvl=5
+quest Windurst.TeachersPet completed
+fame Windurst 225
+item BoneChip
+item BlazingPeppers
+item Remedy
+login
+trigger Paku-Nakku                            # fame level 4: 481 (walks beside him)
+finish option=1                               # 481's finish begins on any option
+quest Windurst.LetSleepingDogsLie available   # GM: back to available, to take the section's other lines
+trade Paku-Nakku BlazingPeppers x1            # available, the check holds: no trade handler: nothing
+trigger Akkeke                                # available: 484
+finish
+trigger Chomoro-Kyotoro                       # 489
+finish
+trigger Foi-Mui                               # 486
+finish
+trigger Kirarara                              # 485
+finish
+trigger Koko_Lihzeh                           # 488
+finish
+trigger Mashuu-Ajuu                           # 483 (the first talk here: the quest's turn)
+finish
+trigger Rukuku                                # 487
+finish
+trigger Paku-Nakku                            # 481
+finish                                        # begun
+trigger Paku-Nakku                            # Prog 0: 482
+finish
+trade Paku-Nakku BlazingPeppers x1            # Prog 0: nil
+trigger Pechiru-Mashiru                       # Prog 0: 490
+finish
+trigger Akkeke                                # Prog 0 <= 3: 484
+finish
+trigger Chomoro-Kyotoro                       # 489
+finish
+trigger Foi-Mui                               # 486
+finish
+trigger Kirarara                              # 485
+finish
+trigger Koko_Lihzeh                           # 488
+finish
+trigger Mashuu-Ajuu                           # his script's turn (the quest answered the last talk): Reap What You Sow's 463
+finish
+trigger Mashuu-Ajuu                           # the quest's turn: 483
+finish
+trigger Rukuku                                # 487
+finish
+trigger Fuepepe                               # 493
+finish
+trigger Moreno-Toeno                          # the quest's turn, the first Event line: this quest's 491
+finish
+trigger Moreno-Toeno                          # his script's turn: 469
+finish
+trigger Moreno-Toeno                          # the quest's turn, the next Event line: Teacher's Pet's 439
+finish
+warp -103.9,-3.25,107.9 PortWindurst
+trigger Maabu-Sonbu                           # Prog 0: 319 (0, Remedy, Blazing Peppers, Sickle)
+finish                                        # Prog 1
+trigger Maabu-Sonbu                           # Prog 1: 320
+finish
+warp 131,-5.75,165 WindurstWaters
+trigger Pechiru-Mashiru                       # Prog 1: 492
+finish
+trigger Paku-Nakku                            # Prog 1: 482
+finish
+trade Paku-Nakku BoneChip x1                  # Prog 1, neither item: nil
+trade Paku-Nakku BlazingPeppers x1 Remedy x1  # the peppers first: Option 1; 494 (0, 1)
+finish                                        # Prog 2; the peppers taken (the Remedy kept: not confirmed)
+trigger Paku-Nakku                            # Prog 2: 482
+finish
+trade Paku-Nakku Remedy x1                    # Prog 2: nil
+warp -103.9,-3.25,107.9 PortWindurst
+trigger Maabu-Sonbu                           # Prog 2, Option 1: 321 (0, Blazing Peppers)
+finish
+warp 131,-5.75,165 WindurstWaters
+trigger Pechiru-Mashiru                       # Prog 2, Option 1: 495 (0, Remedy, Blazing Peppers, 1)
+finish                                        # Prog 3
+trigger Pechiru-Mashiru                       # Prog 3: 496
+finish
+trigger Akkeke                                # Prog 3 (<= 3): 484
+finish
+trigger Paku-Nakku                            # Prog 3: 499
+finish option=1                               # not 2: nothing; Prog 3
+trigger Paku-Nakku                            # 499
+finish option=2                               # Spoilsport; Prog 4
+trigger Paku-Nakku                            # Prog 4: 500
+finish
+trigger Akkeke                                # Prog 4: 502
+finish
+trigger Chomoro-Kyotoro                       # 507
+finish
+trigger Foi-Mui                               # 504
+finish
+trigger Kirarara                              # 503
+finish
+trigger Koko_Lihzeh                           # 506
+finish
+trigger Mashuu-Ajuu                           # 501 (the warps reset the turns: the quest's)
+finish
+trigger Mashuu-Ajuu                           # his script's turn: 463
+finish
+trigger Rukuku                                # 505
+finish
+trigger Fuepepe                               # Prog 4: nil; his script (nothing); 423
+finish
+trigger Moreno-Toeno                          # Prog 4: nil; the warps reset the turns: Teacher's Pet's 439
+finish
+warp -103.9,-3.25,107.9 PortWindurst
+trigger Maabu-Sonbu                           # Prog 4: nil; 227
+finish
+warp 131,-5.75,165 WindurstWaters
+trigger Pechiru-Mashiru                       # Prog 4: 497
+fill-inventory
+finish                                        # the staff does not fit: complete fails: nothing; Prog 4
+free-inventory
+trigger Pechiru-Mashiru                       # 497
+finish                                        # completed: fame 40, the Hypno Staff
+trigger Paku-Nakku                            # completed: no section; 431
+finish
+trigger Akkeke                                # 427
+finish

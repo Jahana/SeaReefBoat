@@ -1,0 +1,27 @@
+# Curses, Foiled A-Golem!? (windurst 63): Mind Hoarder's death handler. Mind Hoarder (17612859) is a lottery NM: its
+# spawn slot (feiyin/mobs.yaml) holds the placeholder Clockwork Pod 17612857 (MIND_HOARDER-2) and the NM at a 15%
+# chance. Each kill of the placeholder opens the slot's lottery; at the slot's next spawn the engine's RNG rolls for the
+# NM (SpawnSlot.TrySpawn). With the harness's pinned seed the three placeholder rounds below (kill, then 2 x 310 s:
+# the placeholder is not back after the first 310 s) leave Mind Hoarder up after the last tick (quest rework P9, D1:
+# each kill claims its mob, so no kill may find the placeholder's body). The mobs' recasts expire since 8da64d7f, which
+# moves the RNG draws: the ten rounds it took before now find the NM up from the fourth. The quest accepted by GM at
+# Prog 1, no spell held during the rounds (the placeholder is a Clockwork Pod, whose own handler would take the New
+# Spell); then Shantotto's New Spell by GM and the Mind Hoarder kill: the New Spell taken, the Ex-Spell given.
+lists Feiyin/onEventFinish/14
+char zone=Feiyin pos=-182.5,-2.0,190.0 job=WAR lvl=75
+quest Windurst.CursesFoiledAgain1 completed
+quest Windurst.CursesFoiledAgain2 completed
+quest Windurst.CursesFoiledAGolem accepted
+charvar Quest[2][63]Prog 1
+login
+kill MIND_HOARDER-2                                 # the placeholder (round 1)
+tick 310000
+tick 310000
+kill MIND_HOARDER-2                                 # the placeholder (round 2)
+tick 310000
+tick 310000
+kill MIND_HOARDER-2                                 # the placeholder (round 3)
+tick 310000
+tick 310000
+keyitem ShantottosNewSpell
+kill MIND_HOARDER                                   # the New Spell held: taken; Shantotto's Ex-Spell

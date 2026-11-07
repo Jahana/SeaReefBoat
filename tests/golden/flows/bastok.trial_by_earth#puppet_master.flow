@@ -1,0 +1,19 @@
+# Trial by Earth (bastok 61): the offer's SMN AF arguments. The Puppet Master (windurst 81) accepted at Prog 0: smnAF is
+# false on its Prog side, so 249 has the plain arguments (0, fork); The Puppet Master's own 256 (a progress too) comes
+# after Trial by Earth in Juroro's order and does not play. At Prog 1 smnAF is true: 249's fourth, sixth and seventh
+# arguments are 1, the Earth Pendulum and 1; the char holds the pendulum, so The Puppet Master answers 253 (an Event,
+# below 249's Progress). Then completed with the Timer gone: the same arguments on the repeat offer.
+lists PortBastok/Juroro/onTrigger PortBastok/onEventFinish/249
+char zone=PortBastok pos=32,7,-41 job=SMN lvl=75
+fame Bastok 425
+quest Windurst.ThePuppetMaster accepted
+item EarthPendulum
+login
+trigger Juroro                 # The Puppet Master at Prog 0: smnAF false, 249 (0, fork)
+finish option=0                # declined: nothing
+charvar Quest[2][81]Prog 1
+trigger Juroro                 # 249 (0, fork, 0, 1, 0, Earth Pendulum, 1)
+finish option=0                # declined
+quest Bastok.TrialByEarth completed
+trigger Juroro                 # completed, Timer 0: 249 with the same arguments
+finish option=0                # declined

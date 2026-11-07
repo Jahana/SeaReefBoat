@@ -1,0 +1,37 @@
+# Drachenfall (bastok 31): Black Mud in Bastok Mines (he patrols x 35..89, waiting 4 s at each end), the Waterfall Base in
+# North Gustaberg. The guard (Bastok fame level 2), the offer 101 (Brass Canteen given, accepted), the canteen at the
+# Waterfall Base (a full inventory: the Canteen of Drachenfall Water does not fit, nothing taken; with room: the water
+# given, the canteen taken), the water traded to Black Mud (103: completed, 2000 gil, Drachenfall Ascetic, fame +20, the
+# water taken).
+# Defaults: Black Mud 100 (DefaultActions; his script only walks him), the Waterfall Base REACH_WATER_FROM_HERE. No other
+# quest or mission names either. A trade does not walk: each Black Mud trade follows a trigger at once, while he is near
+# (each trade's step has its ret onTrade).
+lists BastokMines/Black_Mud/onTrigger BastokMines/Black_Mud/onTrade BastokMines/onEventFinish/101 BastokMines/onEventFinish/102 BastokMines/onEventFinish/103 NorthGustaberg/Waterfall_Base/onTrade NorthGustaberg/Waterfall_Base/onTrigger
+char zone=BastokMines pos=60,7,0.5
+fame Bastok 49
+item BoneChip
+login
+trigger Black_Mud                    # fame 49 (level 1): not offered, 100
+finish-if-event
+trade Black_Mud BoneChip x1          # available: no trade handler, nothing
+fame Bastok 50
+trigger Black_Mud                    # fame level 2: the offer, 101
+finish                               # Brass Canteen given, accepted
+trigger Black_Mud                    # accepted, the canteen held: nil, 100
+finish-if-event
+trade Black_Mud BrassCanteen x1      # not the water: nil, nothing
+warp -216,98.6,464.7 NorthGustaberg
+trigger Waterfall_Base               # no onTrigger in the quest: REACH_WATER_FROM_HERE
+finish-if-event
+trade Waterfall_Base BoneChip x1     # the wrong item: nil, nothing
+fill-inventory
+trade Waterfall_Base BrassCanteen x1 # the inventory full: the water not given (ITEM_CANNOT_BE_OBTAINED), the canteen kept
+free-inventory
+trade Waterfall_Base BrassCanteen x1 # the water given, the canteen taken
+warp 60,7,0.5 BastokMines
+trigger Black_Mud                    # the water held: nil, 100
+finish-if-event
+trade Black_Mud CanteenOfDrachenfallWater x1  # 103
+finish                               # completed: 2000 gil, fame +20, Drachenfall Ascetic, the water taken
+trigger Black_Mud                    # completed: no handler, 100
+finish-if-event

@@ -1,0 +1,56 @@
+# Axe the Competition (jeuno 59): the offer without the pick. Axe 2400: 12; option 1 with a full inventory (no pick:
+# giveItem false, not begun); after a rezone 12 again, option 1: the pick (0 points) and the guide, begun; 15 with the
+# pick held (1), option 1: the pick held: nothing; a trade of the 0-point pick: 14 (no finish). A MNK char (cannot equip
+# the pick) with Axe 2400: not offered. A char with the guide held (another weapon-skill quest's): not offered. A level
+# 70 Warrior with Axe 2400 (the pick is level 71): not offered.
+# Brutus's other quests are kept silent for a level 75 Warrior: Chocobo's Wounds and Save My Son completed, Path of
+# the Beastmaster accepted (a GM, before login: it has no accepted section; available it would play 70, completed 20),
+# Chocobo on the Loose completed (no completed section); his script then starts nothing, and a talk with no
+# quest reply plays his default 66 (DefaultActions).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/Brutus/onTrade UpperJeuno/onEventFinish/12 UpperJeuno/onEventFinish/15
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=75
+char mnk zone=UpperJeuno pos=-55.5,8.2,97.5 job=MNK lvl=75
+char guide zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=75
+char low zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=70
+skill Axe 2400
+mnk: skill Axe 2400
+guide: skill Axe 2400
+guide: keyitem WeaponTrainingGuide
+low: skill Axe 2400
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster accepted
+quest Jeuno.ChocoboOnTheLoose completed
+mnk: quest Jeuno.ChocobosWounds completed
+mnk: quest Jeuno.SaveMySon completed
+mnk: quest Jeuno.PathOfTheBeastmaster accepted
+mnk: quest Jeuno.ChocoboOnTheLoose completed
+guide: quest Jeuno.ChocobosWounds completed
+guide: quest Jeuno.SaveMySon completed
+guide: quest Jeuno.PathOfTheBeastmaster accepted
+guide: quest Jeuno.ChocoboOnTheLoose completed
+low: quest Jeuno.ChocobosWounds completed
+low: quest Jeuno.SaveMySon completed
+low: quest Jeuno.PathOfTheBeastmaster accepted
+low: quest Jeuno.ChocoboOnTheLoose completed
+login
+trigger Brutus                          # 12
+fill-inventory
+finish option=1                         # no pick, the inventory full: giveItem false, not begun
+free-inventory
+rezone
+trigger Brutus                          # 12 again
+finish option=1                         # the pick (0 points) and the guide: begun
+trigger Brutus                          # the pick held: 15 (1)
+finish option=1                         # option 1, the pick held: nothing
+trade Brutus PickOfTrials x1            # 0 points: 14
+finish                                  # no 14 finish: the pick kept
+mnk: login
+mnk: trigger Brutus                     # cannot equip: not offered; the default 66
+mnk: finish
+guide: login
+guide: trigger Brutus                   # the guide held: not offered; the default 66
+guide: finish
+low: login
+low: trigger Brutus                     # level 70 (the Pick of Trials is level 71; canEquipItem checks the level): not offered; the default 66
+low: finish

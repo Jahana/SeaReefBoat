@@ -1,0 +1,13 @@
+---@meta
+
+---@class TNpcEntity
+---@field onEventUpdate? fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
+---@field onEventFinish? fun(player: CBaseEntity, csid: integer, option: integer, npc: CBaseEntity)
+---@field onPath? fun(npc: CBaseEntity)
+---@field onPathComplete? fun(npc: CBaseEntity)
+---@field onPathPoint? fun(npc: CBaseEntity)
+---@field onShopBuy? fun(player: CBaseEntity, npc: CBaseEntity, itemId: integer, quantity: integer, gil: integer)
+---@field onSpawn? fun(npc: CBaseEntity)
+---@field onTimeTrigger? fun(npc: CBaseEntity, triggerId: integer)
+---@field onTrade? fun(player: CBaseEntity, npc: CBaseEntity, trade: CTradeContainer)
+---@field onTrigger? fun(player: CBaseEntity, npc: CBaseEntity): -1|nil

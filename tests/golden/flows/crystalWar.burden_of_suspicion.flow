@@ -1,0 +1,45 @@
+# Burden of Suspicion (crystalWar 20): a level 99 Warrior in Bastok Markets [S] with the Warning Letter, The Fighting
+# Fourth, Better Part of Valor, Fires of Discontent and Light in the Darkness completed (GMs: no Timer, no mustZone;
+# the WotG mission Back to the Beginning completed, Cait Sith current; the others as group 1's flows). Fires of
+# Discontent's completed 165 at Engelhart is replaceDefault (rank 20): this quest's Events rank over it. Gentle Tiger
+# 30, finished: begun, the Warning Letter taken. Prog 0: Gentle Tiger 31; Engelhart 32, finished: Prog 1. Prog 1:
+# Engelhart 33; Gentle Tiger 28. The Eldieme Necropolis [S]: Sarcophagus 17, finished: Prog 2; Prog 2: nil (no script,
+# no default). Bastok Markets [S]: Engelhart 36; Gentle Tiger 34, finished: completed (Assistant Detective).
+# Completed (no section): Engelhart: Fires' 165. Storm on the Horizon (group 4) wants this quest completed: no Gentle
+# Tiger talk after it.
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/Engelhart/onTrigger BastokMarketsS/onEventFinish/30 BastokMarketsS/onEventFinish/32 BastokMarketsS/onEventFinish/34 TheEldiemeNecropolisS/Sarcophagus/onTrigger TheEldiemeNecropolisS/onEventFinish/17
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+keyitem WarningLetter
+quest CrystalWar.TheFightingFourth completed
+quest CrystalWar.BetterPartOfValor completed
+quest CrystalWar.FiresOfDiscontent completed
+quest CrystalWar.LightInTheDarkness completed
+mission Wotg BackToTheBeginning completed
+mission Wotg CaitSith current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # no mustZone, Timer 0: 30; the mission takes no talk
+finish                                  # begun; the Warning Letter taken
+trigger Gentle_Tiger                    # Prog 0: 31
+finish
+trigger Engelhart                       # Prog 0: 32 (over Fires' 165)
+finish                                  # Prog 1
+trigger Engelhart                       # Prog 1: 33
+finish
+trigger Gentle_Tiger                    # Prog 1: 28
+finish
+warp 348.367,-32.407,-125.985 TheEldiemeNecropolisS
+trigger Sarcophagus                     # Prog 1: 17
+finish                                  # Prog 2
+trigger Sarcophagus                     # Prog 2: nil
+finish-if-event
+warp -78.585,-4.425,-125.327 BastokMarketsS
+trigger Engelhart                       # Prog 2: 36
+finish
+trigger Gentle_Tiger                    # Prog 2: 34
+finish                                  # completed (Assistant Detective)
+trigger Engelhart                       # completed: no section: Fires' 165
+finish

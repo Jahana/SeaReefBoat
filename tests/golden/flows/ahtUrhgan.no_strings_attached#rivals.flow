@@ -1,0 +1,65 @@
+# No Strings Attached / Puppetmaster Blues / Achieving True Power sharing Shamarhaan (Bastok Markets) and
+# Iruki-Waraki (Whitegate, whose own script offers The Wayward Automaton 774 and is the lookup fallback after an
+# Event). Task 8 review lesson: rival containers, each NPC triggered twice. Iruki: NSA 266 (P, Prog 4) with the
+# script's accepted Wayward Automaton; NSA completed (the script's 774) with PB 782 (P, Operation Teatime
+# completed); NSA 261 (E) with PB 783 (E). Shamarhaan: NSA 434 (P, Option 0) with Achieving True Power 441 (P, PB
+# completed); NSA 435 (E) with PB 437 (P) and ATP 442 (E); NSA 435 (E, Option 1) with PB 439 (P) and ATP 442 (E).
+lists AhtUrhganWhitegate/Iruki-Waraki/onTrigger BastokMarkets/Shamarhaan/onTrigger
+char zone=AhtUrhganWhitegate pos=101.329,-6.999,-29.042 job=PUP lvl=75
+char bob zone=AhtUrhganWhitegate pos=101.329,-6.999,-29.042 job=PUP lvl=75
+char carl zone=AhtUrhganWhitegate pos=101.329,-6.999,-29.042 job=PUP lvl=75
+char dave zone=BastokMarkets pos=-285.382,-12.021,-84.743 job=PUP lvl=75
+char erin zone=BastokMarkets pos=-285.382,-12.021,-84.743 job=PUP lvl=75
+char faye zone=BastokMarkets pos=-285.382,-12.021,-84.743 job=PUP lvl=75
+quest AhtUrhgan.NoStringsAttached accepted
+charvar Quest[6][7]Prog 4
+quest AhtUrhgan.TheWaywardAutomaton accepted
+charvar TheWaywardAutomatonProgress 1
+bob: quest AhtUrhgan.NoStringsAttached completed
+bob: quest AhtUrhgan.OperationTeatime completed
+bob: quest AhtUrhgan.PuppetmasterBlues available
+carl: quest AhtUrhgan.NoStringsAttached accepted
+carl: quest AhtUrhgan.PuppetmasterBlues accepted
+carl: charvar Quest[6][29]Prog 0
+dave: quest AhtUrhgan.PuppetmasterBlues completed
+dave: quest AhtUrhgan.NoStringsAttached available
+dave: charvar Quest[6][7]Option 0
+erin: quest AhtUrhgan.NoStringsAttached accepted
+erin: quest AhtUrhgan.PuppetmasterBlues accepted
+erin: charvar Quest[6][29]Prog 0
+erin: quest Bastok.AchievingTruePower accepted
+faye: quest AhtUrhgan.NoStringsAttached available
+faye: charvar Quest[6][7]Option 1
+faye: quest AhtUrhgan.PuppetmasterBlues accepted
+faye: charvar Quest[6][29]Prog 2
+faye: quest Bastok.AchievingTruePower accepted
+login
+trigger Iruki-Waraki
+finish
+trigger Iruki-Waraki
+finish
+bob: login
+bob: trigger Iruki-Waraki
+bob: finish
+bob: trigger Iruki-Waraki
+bob: finish
+carl: login
+carl: trigger Iruki-Waraki
+carl: finish
+carl: trigger Iruki-Waraki
+carl: finish
+dave: login
+dave: trigger Shamarhaan
+dave: finish
+dave: trigger Shamarhaan
+dave: finish
+erin: login
+erin: trigger Shamarhaan
+erin: finish
+erin: trigger Shamarhaan
+erin: finish
+faye: login
+faye: trigger Shamarhaan
+faye: finish
+faye: trigger Shamarhaan
+faye: finish

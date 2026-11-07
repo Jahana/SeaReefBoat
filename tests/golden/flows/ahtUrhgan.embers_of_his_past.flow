@@ -1,0 +1,87 @@
+# Embers of His Past (ahtUrhgan 48): a level 75 Warrior with a Hydrangea; Saga of the Skyserpent, Ode to the Serpents
+# and Soothing Waters completed (GMs). Fari-Wari (default 831); Mount Zhayolm's Sprightly Footsteps
+# (NOTHING_OUT_OF_ORDINARY) and Withered Petals (no default); no scripts. Available: Fari-Wari 916, finished: Prog 1,
+# begun, set at 0 0 0 in Wajaom. Each zone change below is `tick 400` then `login` (`login open` where a zone-in event
+# follows). Wajaom at Prog 1: 16, finished: Prog 2, Wajaom again; Prog 2: 17, finished: Prog 3, set down in
+# Whitegate (80 -6 -123). Prog 3: Fari-Wari 917 (an Event); Sprightly Footsteps by day (about 12:00): nil: the default;
+# seven hours on (about 19:00): the cutscene 15, finished: Prog 4. Prog 4: Withered Petals: the cutscene 16, finished:
+# Prog 5, set down in Whitegate (141.74 -2 0). Prog 5: Fari-Wari 924 (an Event); a Rusty Medal: nil (no match); the
+# Hydrangea with the medal: nil (not exactly the flower); the Hydrangea: 918, finished: Prog 6 (the flower kept),
+# Wajaom at 0 0 0. Prog 6: 18, finished: Prog 7, Wajaom again; Prog 7: 19, finished: ITEM_RETURNED (the Hydrangea),
+# Prog 8, and a 1000 ms timer (player:timer; C#: q.Player.Timer): 500 ms on: nothing; 1000 ms on, the deadline itself:
+# nothing (not strictly past it); 1001 ms on: strictly past it: the char set down in Whitegate (80 -6 -123,
+# rotation 55), its zone change in that step. Prog 8: Fari-Wari 919 (an Event); Mount Zhayolm, still in the evening
+# hours: the Hydrangea traded to Withered Petals: the cutscene 17, finished: the flower taken, the cutscene 18 started;
+# finished: Prog 9. Prog 9: Fari-Wari 920, finished: completed (an Imperial Gold Piece, Flameserpent Facilitator),
+# 500 imperial standing, BESIEGED_OFFSET, needToZone, Option 1. Completed and needing to zone: no section: 831. After a
+# zone change: 921, finished: the Mercenary Camp Entry Slip, Option 0; then 923 (replaceDefault).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger AhtUrhganWhitegate/Fari-Wari/onTrade WajaomWoodlands/onZoneIn/1 MountZhayolm/Sprightly_Footsteps/onTrigger MountZhayolm/Withered_Petals/onTrigger MountZhayolm/Withered_Petals/onTrade AhtUrhganWhitegate/onEventFinish/920 AhtUrhganWhitegate/onEventFinish/921
+char zone=AhtUrhganWhitegate pos=81.95,-6,-137.707 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent completed
+quest AhtUrhgan.OdeToTheSerpents completed
+quest AhtUrhgan.SoothingWaters completed
+item Hydrangea
+item RustyMedal
+login
+trigger Fari-Wari                       # available: 916
+finish                                  # Prog 1, begun; set at 0 0 0 in Wajaom
+tick 400
+login open                              # Wajaom, Prog 1: the zone-in's 16, left open
+finish                                  # Prog 2; Wajaom again at 0 0 0
+tick 400
+login open                              # Prog 2: 17
+finish                                  # Prog 3; set down in Whitegate
+tick 400
+login                                   # Whitegate
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 3: 917 (an Event)
+finish
+warp 823.526,-17.956,176.317 MountZhayolm      # beside Sprightly Footsteps
+trigger Sprightly_Footsteps             # about 12:00: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+wait vana=7                             # about 19:00
+trigger Sprightly_Footsteps             # 18:00 or later: the cutscene 15
+finish                                  # Prog 4
+warp 858.653,-14.539,248.601 MountZhayolm      # beside Withered Petals
+trigger Withered_Petals                 # Prog 4, the evening: the cutscene 16
+finish                                  # Prog 5; set down in Whitegate (141.74 -2 0)
+tick 400
+login                                   # Whitegate
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 5: 924 (an Event)
+finish
+trade Fari-Wari RustyMedal x1           # not the Hydrangea: nil
+finish-if-event
+trade Fari-Wari Hydrangea x1 RustyMedal x1     # not exactly the Hydrangea: nil
+finish-if-event
+trade Fari-Wari Hydrangea x1            # 918
+finish                                  # Prog 6 (the Hydrangea kept); set at 0 0 0 in Wajaom
+tick 400
+login open                              # Prog 6: 18
+finish                                  # Prog 7; Wajaom again
+tick 400
+login open                              # Prog 7: 19
+finish                                  # ITEM_RETURNED (the Hydrangea); Prog 8; the 1000 ms timer armed
+tick 500                                # 500 ms on: nothing
+tick 500                                # 1000 ms on, the deadline: not strictly past it: nothing
+tick 1                                  # 1001 ms on: past it: set down in Whitegate (80 -6 -123), the zone change
+tick 400
+login                                   # Whitegate
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 8: 919 (an Event)
+finish
+warp 858.653,-14.539,248.601 MountZhayolm
+trade Withered_Petals Hydrangea x1      # Prog 8, the evening: the cutscene 17
+finish                                  # the Hydrangea taken; the cutscene 18 started
+finish                                  # Prog 9
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 9: 920
+finish                                  # completed; 500 standing; BESIEGED_OFFSET; needToZone; Option 1
+trigger Fari-Wari                       # completed, needing to zone: no section: 831
+finish
+warp -64.3,-6,69.273 AlZahbi            # another zone: the zoning flag cleared
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # completed, Option 1: 921
+finish                                  # the Mercenary Camp Entry Slip; Option 0
+trigger Fari-Wari                       # Option 0: 923 (replaceDefault)
+finish

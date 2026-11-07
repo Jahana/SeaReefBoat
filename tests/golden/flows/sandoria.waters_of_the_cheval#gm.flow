@@ -1,0 +1,19 @@
+# Waters of the Cheval (sandoria 1): each accepted-section trade handler while the quest is available and once it is
+# completed (GM), with the items it wants: the river water to Miageau (section 2's 515), 10 gil to Nouveil (571), the
+# waterskin to the Cheval River (the river water). No section answers: nothing happens, nothing is taken.
+lists NorthernSanDoria/Miageau/onTrade NorthernSanDoria/Nouveil/onTrade EastRonfaure/Cheval_River/onTrade
+char zone=NorthernSanDoria pos=115.6,0.0,109.2 job=WAR lvl=30 gil=1000
+item SkinOfChevalRiverWater
+item BlessedWaterskin
+login
+trade Miageau SkinOfChevalRiverWater x1   # available: no section; nothing
+walk 126.4,0.0,105.7                      # to Nouveil (a trade does not walk)
+trade Nouveil gil=10                      # available: no section; nothing
+warp 222.3,-58.2,427.4 EastRonfaure
+trade Cheval_River BlessedWaterskin x1    # available: no section; nothing
+quest Sandoria.WatersOfTheCheval completed
+trade Cheval_River BlessedWaterskin x1    # completed: no section; nothing
+warp 115.6,0.0,109.2 NorthernSanDoria
+trade Miageau SkinOfChevalRiverWater x1   # completed: no section; nothing
+walk 126.4,0.0,105.7                      # to Nouveil (a trade does not walk)
+trade Nouveil gil=10                      # completed: no section; nothing

@@ -1,0 +1,20 @@
+# Wrath of the Opo-Opos (outlands 160) against Rhapsodies of Zilart 5 at the Yuhtunga headstone. main: the mission
+# current, the Fire Fragment held, the quest accepted (GMs): the mission answers nil: the quest's TOUCHING_RED_JEWEL; a
+# Garnet: 202, finished: completed; the headstone: the mission's ALREADY_OBTAINED_FRAG and noAction. bob: the mission
+# completed (its rD ZILART_MONUMENT), the quest accepted: the quest's message (50) beats the rD (20).
+lists YuhtungaJungle/Cermet_Headstone/onTrigger YuhtungaJungle/Cermet_Headstone/onTrade YuhtungaJungle/onEventFinish/202
+char zone=YuhtungaJungle pos=495.415,19.658,303.495 job=WAR lvl=75
+char bob zone=YuhtungaJungle pos=495.415,19.658,303.495 job=WAR lvl=75
+mission Zilart HeadstonePilgrimage current
+keyitem FireFragment
+quest Outlands.WrathOfTheOpoOpos accepted
+item Garnet
+bob: mission Zilart HeadstonePilgrimage completed
+bob: quest Outlands.WrathOfTheOpoOpos accepted
+login
+trigger Cermet_Headstone                # the mission: nil; the quest: TOUCHING_RED_JEWEL
+trade Cermet_Headstone Garnet x1        # 202
+finish                                  # completed; the garnet taken
+trigger Cermet_Headstone                # the mission: ALREADY_OBTAINED_FRAG, noAction
+bob: login
+bob: trigger Cermet_Headstone           # the quest's TOUCHING_RED_JEWEL over the mission's rD ZILART_MONUMENT

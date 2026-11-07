@@ -1,0 +1,43 @@
+# Spice Gals (sandoria 110): Rouva in Southern San d'Oria, the qm_rivernewort in Riverne Sites A01 and B01. CoP 2-5
+# (Ancient Vows) completed: the char is put on the next CoP mission, A Transient Dream, before the login (a CoP mission
+# counts as completed when it is below the current one; no script names A Transient Dream's NPCs). 724 (begun, Prog 1);
+# 728 (once per zone), then her default; Site A01's qm gives Rivernewort, then (held) its default NOTHING_OUT_OF_ORDINARY;
+# Rouva's 725 (completed: Miratete's Memoirs; the herb taken; Wait = the next conquest tally, 1800198000; Prog cleared);
+# then Wait at the tally (not before it): her default. The tally's bound by GM: Wait one second before it: 726 (Prog 1);
+# 728; Site B01's qm, the herb, then its default; Rouva's 727, whose complete fails: the Memoirs are rare and still held
+# (the herb kept, Prog 1, Wait unchanged). A 727 that completes, and the tally passing, are #repeat; without CoP is
+# #no_cop.
+# Rouva's script has empty onTrigger and onEventFinish: the quest's replies play. Distant Loyalties (accepted only) and
+# Elderly Pursuits (its own offer) do not open for Rouva here. NextConquestTally is the next JST week (the server's
+# clock, which `wait jst` moves).
+lists SouthernSanDoria/Rouva/onTrigger SouthernSanDoria/Rouva/onTrade SouthernSanDoria/onEventFinish/724 SouthernSanDoria/onEventFinish/725 SouthernSanDoria/onEventFinish/726 SouthernSanDoria/onEventFinish/727 RiverneSiteA01/qm_rivernewort/onTrigger RiverneSiteB01/qm_rivernewort/onTrigger
+char zone=SouthernSanDoria pos=-14.694,2.101,11.805 job=WAR lvl=75
+mission Cop ATransientDream current
+item BoneChip
+login
+trade Rouva BoneChip x1                    # available, Prog 0: no onTrade answers; her script has none: nothing
+trigger Rouva                             # Prog 0, Wait 0, available: 724
+finish                                    # begun; Prog 1
+trigger Rouva                             # Prog 1, accepted, no herb: 728 (once per zone; section 1's Prog operand: its 724 would win)
+finish
+trigger Rouva                             # 728 spent in this zone: her default 662
+finish
+warp -513.217,-6.684,-407.314 RiverneSiteA01
+trigger qm_rivernewort                    # no herb: Rivernewort
+trigger qm_rivernewort                    # held: nil; NOTHING_OUT_OF_ORDINARY
+warp -14.694,2.101,11.805 SouthernSanDoria
+trigger Rouva                             # Prog 1, accepted, the herb: 725
+finish                                    # completed: Miratete's Memoirs; the herb taken; Wait = the next tally
+trigger Rouva                             # Prog 0, Wait == the tally (not before it): no section; her default 662
+finish
+charvar Quest[0][110]Wait 1800197999
+trigger Rouva                             # Prog 0, Wait one second before the tally, completed: 726
+finish                                    # Prog 1
+trigger Rouva                             # Prog 1, completed, no herb: 728
+finish
+warp -515.637,0.094,689.199 RiverneSiteB01
+trigger qm_rivernewort                    # no herb: Rivernewort
+trigger qm_rivernewort                    # held: nil; NOTHING_OUT_OF_ORDINARY
+warp -14.694,2.101,11.805 SouthernSanDoria
+trigger Rouva                             # Prog 1, completed, the herb: 727
+finish                                    # the Memoirs (rare) still held: not completed; the herb kept; Prog 1

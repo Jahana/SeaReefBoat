@@ -1,0 +1,38 @@
+# Beans Ahoy (crystalWar 29, call-only), the edges: a level 99 Warrior in Southern San d'Oria [S] (missions as the main
+# flow), three Chunks of Lufet Salt. Available: a salt: 339. 334, finished: added. Two salts at once: 339 (getItemCount
+# 2). BeansAhoy 1 (a GM), not needToZone, the bag full (a GM): a salt: 340, finished: no room: ITEM_CANNOT_BE_OBTAINED,
+# not completed, the salt kept. The bag freed, completed by a GM (ConquestWeek 0, no cassoulet held): 342, finished: the
+# cassoulet, ConquestWeek 1 (no completion again, no trade); 341. Completed: a salt: 339. Every script talk is
+# preceded by the default 333 (talks alternate with his script).
+lists SouthernSanDoriaS/Thierride/onTrigger SouthernSanDoriaS/Thierride/onTrade SouthernSanDoriaS/onEventFinish/334 SouthernSanDoriaS/onEventFinish/340 SouthernSanDoriaS/onEventFinish/342
+char zone=SouthernSanDoriaS pos=-123.038,-2,14.598 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item ChunkOfLufetSalt x3
+login
+trade Thierride ChunkOfLufetSalt x1     # available: 339
+finish
+trigger Thierride                       # the default 333 (talks alternate with his script)
+finish-if-event
+trigger Thierride                       # 334
+finish                                  # added
+trade Thierride ChunkOfLufetSalt x2     # two salts: 339
+finish
+charvar BeansAhoy 1                     # a GM
+fill-inventory                          # a GM: no slot free
+trade Thierride ChunkOfLufetSalt x1     # BeansAhoy 1, not needToZone: 340
+finish                                  # no room: ITEM_CANNOT_BE_OBTAINED; not completed; the salt kept
+free-inventory                          # a GM
+quest CrystalWar.BeansAhoy completed    # a GM (ConquestWeek 0, no cassoulet held)
+trigger Thierride                       # the default 333 (talks alternate with his script)
+finish-if-event
+trigger Thierride                       # completed, ConquestWeek 0: 342
+finish                                  # the cassoulet; ConquestWeek 1 (no completion again, no trade)
+trigger Thierride                       # the default 333 (talks alternate with his script)
+finish-if-event
+trigger Thierride                       # ConquestWeek 1: 341
+finish
+trade Thierride ChunkOfLufetSalt x1     # completed: 339
+finish

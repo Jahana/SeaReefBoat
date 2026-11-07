@@ -1,0 +1,47 @@
+# In a Pickle (windurst 5): the other operands; her draws as the seed plays them after the colon. Available with the
+# repeat var 1 (a GM): the available arm comes first: 654; option 0: nothing. Completed (GM) with var 1: 655. Completed
+# with var 0, a stone (rare, stack 1: a GM gives each): 657; 662 (needToZone, 200 gil, fame 10, var 0); with needToZone
+# 662 again and 658 (the trade reads neither the var nor needToZone). With needToZone and var 1 (GM): 655 before 660.
+# Set available again (GM) with needToZone: her last else, 651. Rezoned: available, no needToZone: 651; 654, option 2:
+# nothing. Completed (GM) with var 2: 661 or 651 (var ~= 1), not 655: 651, 651, 661; 661 with option 2 (not 1): nothing.
+char zone=WindurstWaters pos=-69.0,-3.8,-4.4 job=WAR lvl=75
+charvar QuestInAPickle_var 1
+login
+trigger Chamama                         # available, no needToZone, var 1: 654 or 651 (not 655): 654
+finish option=0                         # nothing
+quest Windurst.InAPickle completed
+trigger Chamama                         # completed, var 1: 655
+finish
+charvar QuestInAPickle_var 0
+item SmoothStone
+trade Chamama SmoothStone x1            # completed, var 0: 662 / 657 / 658: 657
+finish
+item SmoothStone
+trade Chamama SmoothStone x1            # 662 (200)
+finish                                  # needToZone, 200 gil, fame 10, var 0
+item SmoothStone
+trade Chamama SmoothStone x1            # needToZone (not read): 662
+finish
+item SmoothStone
+trade Chamama SmoothStone x1            # 658
+finish
+charvar QuestInAPickle_var 1
+trigger Chamama                         # completed, needToZone, var 1: 655, not 660
+finish
+charvar QuestInAPickle_var 0
+quest Windurst.InAPickle available
+trigger Chamama                         # available with needToZone: her last else, 651
+finish option=0
+rezone
+trigger Chamama                         # available, no needToZone: 654 or 651: 651
+finish option=0
+trigger Chamama                         # 654
+finish option=2                         # option 2 (not 1): nothing
+quest Windurst.InAPickle completed
+charvar QuestInAPickle_var 2
+trigger Chamama                         # completed, no needToZone, var 2 (~= 1): 661 or 651, not 655: 651
+finish option=0
+trigger Chamama                         # 651
+finish option=0
+trigger Chamama                         # 661
+finish option=2                         # option 2 (not 1): nothing (the var stays 2)

@@ -1,0 +1,95 @@
+# golden trace: mission.sandoria.save_the_children#other_win
+seed 7
+flow 1d92b97b7b5d37ff4f91d75372e678a085302885e145a454a7bdf9d8dd1280f4
+recorder lua
+lua-at 74aad1acaeb5c835934443517646f869c3045c7b
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @eaf44da44a67d17c (168)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @d1c6d829e6402b90 (2)
+char_jobs @3e907948536df038 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @2106238913a2d8a3 (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @4cdbd8051d2399ff (7)
+char_stats @aed604d3dea413a4 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @d82ab8cfef7700b9 (41)
+ret onZoneIn=number:4294967295
+order 140/Hut_Door/onTrade=Battlefield[33]
+order 140/onEventFinish/32001=Battlefield[33],Mission[0][2]
+step missionstatus Sandoria 2
+packets
+char_mission_state - area=0|current=2|status=0|completed_mask=3|progress=null
+char_mission_state + area=0|current=2|status=2|completed_mask=3|progress=null
+chars - assault=null
+chars - campaign=null
+chars + assault=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+chars + campaign=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+chars missions +4:02
+step trade Hut_Door CloudyOrb x1
+packets
+  034 @87c795a60d869fc0
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step update 32000 option=33
+packets
+  01B @6c7325d6662ea32f
+  061 @57a38f7049e4ef54
+  062 @7f5083e6f3860602
+  119 @ed001e613156aa53
+  0AC @529cdf9cd7f6e181
+  0AA @31f1ce1924233c8c
+  037 @211191f1c8450db0
+  067 @8c71f583e5e03d94
+  029 @e9a5f11e435fcee3
+  02A @881e147e98a6455b
+  02A @0a13b43abf699fcb
+  02A @dd0a48b69777dbca
+  02A @3c5cd90e24b68ddd
+  075 @ebb239d5fba06418
+  05C @827219155087c95d
+  05D @3e1dc80a22aa8f07
+  052 @3c1f8adddcc5ad8a
+  0DF @f6c7890e6483fbfb
+  037 @a57009c371eb897f
+char_inventory - location=0|slot=1|itemId=1551|quantity=1|bazaar=0|signature=|extra=null
+char_inventory + location=0|slot=1|itemId=1551|quantity=1|bazaar=0|signature=|extra=010000000000000000000000000000000000000000000000
+char_stats - mlvl=75
+char_stats - slvl=1
+char_stats + mlvl=20
+char_stats + slvl=0
+ret onEventUpdate=nil:nil
+step finish
+packets
+  0DF @f6c7890e6483fbfb
+  037 @97b8e55bcaa93193
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step bfwin
+packets
+  037 @97b8e55bcaa93193
+  067 @8c71f583e5e03d94
+  063 @2735a70cc45da34f
+  034 @3de917536ad31193
+  0DF @f6c7890e6483fbfb
+  037 @a57009c371eb897f
+char_effects + effectid=143|icon=143|power=20|tick=0|duration=0|subid=0|subpower=0|tier=0|flags=142606848|timestamp=1799999999|sourcetype=0|sourcetypeparam=0|originid=0
+char_effects + effectid=254|icon=254|power=34|tick=0|duration=0|subid=$char|subpower=1|tier=1|flags=143130624|timestamp=1799999999|sourcetype=0|sourcetypeparam=0|originid=0
+step finish
+packets
+  0DF @f6c7890e6483fbfb
+  037 @97b8e55bcaa93193
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil

@@ -1,0 +1,15 @@
+# Beyond the Sun (jeuno 76), its finish once its section no longer holds (a GM's change while the event is open): a
+# level 66 Warrior, Shattering Stars completed and maatsCap 32767 (GM); 74 open, then Shattering Stars set back to
+# available (a GM's delQuest; an addQuest alone would leave it completed): 74 answered: nothing (not completed, no
+# Maat's Cap). Shattering Stars completed again: 74, answered: completed.
+lists RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/74
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=WAR lvl=66
+quest Jeuno.ShatteringStars completed
+charvar maatsCap 32767
+login
+trigger Maat                            # 74
+quest Jeuno.ShatteringStars available   # a GM, 74 open
+finish                                  # this quest's check fails: nothing (not completed)
+quest Jeuno.ShatteringStars completed   # a GM
+trigger Maat                            # 74
+finish                                  # completed: Maat's Cap, Ultimate Champion of the World

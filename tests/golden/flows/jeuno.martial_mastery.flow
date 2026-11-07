@@ -1,0 +1,28 @@
+# Martial Mastery (jeuno 167): the Nomad Moogle in Ru'Lude Gardens (default 10045 (0, 0, 2, 0)). A level 96 Warrior at
+# the fresh cap 50 (no limit break answers), Great Axe skill 357 (3570 stored; a Warrior's cap at 96 is 403), 15 merit
+# points. Available: a flint stone (no trade handler: nothing); progressEvent 10196, finished: begun. Accepted: a flint
+# stone (nothing); 14 merit points (a GM): no section, the default; 15: progressEvent 10198, finished with 20 merit points
+# (a GM, 10198 open) and a full bag (a key item and title reward: completed anyway): the Heart of the Bushin, Bushin-Ryu
+# Inheritor, 20 - 15 = 5 merit points, LEARNED_SECRET_TECHNIQUE. Completed: the default; a flint stone: nothing.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventFinish/10196 RuludeGardens/onEventFinish/10198
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=96
+skill GreatAxe 3570
+merits 15
+item FlintStone
+login
+trade Nomad_Moogle FlintStone x1        # available: no trade handler, nothing
+trigger Nomad_Moogle                    # level 96, Great Axe 357: progressEvent 10196
+finish                                  # begun
+trade Nomad_Moogle FlintStone x1        # accepted: no trade handler, nothing
+merits 14                               # a GM
+trigger Nomad_Moogle                    # accepted, 14 merit points: no section; the default 10045 (0, 0, 2, 0)
+finish
+merits 15                               # a GM
+trigger Nomad_Moogle                    # accepted, 15 merit points: progressEvent 10198
+merits 20                               # a GM, 10198 open
+fill-inventory
+finish                                  # completed: the Heart of the Bushin, the title, merits 5, the message
+free-inventory
+trigger Nomad_Moogle                    # completed: the default 10045 (0, 0, 2, 0)
+finish
+trade Nomad_Moogle FlintStone x1        # completed: nothing

@@ -1,0 +1,49 @@
+# The Walls of Your Mind (bastok 69): Oggbi in PortBastok, qm1 in Bostaunieux Oubliette. The natural path, with the knuckles of Trials already held
+# at 300 weapon skill points (item wsp=300): the trades while only available (a bone chip, the knuckles: no handler), the
+# offer's skill threshold (HandToHand 2499, under 250 a level: not offered; 2500: 286), 286's finish with the knuckles held (no
+# second knuckles: the Weapon Training Guide alone, begun), 287 with the knuckles held (hide 1), the trades while accepted (a
+# bone chip: nil; the knuckles at 300 points: 289, whose finish takes it and gives the Map to the Annals of Truth), 287
+# with the map and no knuckles (hide 1) and its option 1 (a new knuckles, 0 points), the trade of that knuckles (288, no finish
+# handler), the qm1's pop of Bodach, the kill, the Annals of Truth and 290 (Asuran Fists). Completed: no section, the default
+# and no trade handler. #offer takes the offer without the knuckles (a full inventory, oncePerZone, the rezone), #offer_job
+# and #offer_guide the guard's other sides, #abandon 287 with hide 0 and option 2, #gm_nomap the qm1 with no map and
+# Bodach's death without the map.
+# Oggbi also answers MNK AF1 Ghosts of the Past and MNK AF2 The First Meeting (a MNK): the flows set both completed.
+# His default is 230.
+# qm1 has no script; its default is NOTHING_OUT_OF_ORDINARY.
+lists PortBastok/Oggbi/onTrigger PortBastok/Oggbi/onTrade PortBastok/onEventFinish/286 PortBastok/onEventFinish/287 PortBastok/onEventFinish/289 PortBastok/onEventFinish/290 BostaunieuxOubliette/qm1/onTrigger
+char zone=PortBastok pos=-159,-7,5 job=MNK lvl=75
+quest Bastok.GhostsOfThePast completed    # MNK AF1 (Oggbi's 231) out of the way
+quest Bastok.TheFirstMeeting completed    # MNK AF2 (Oggbi's 233) out of the way
+skill HandToHand 2499
+item BoneChip
+item KnucklesOfTrials wsp=300
+login
+trade Oggbi BoneChip x1          # available: no trade handler in section 1, nothing
+trade Oggbi KnucklesOfTrials x1    # available: nothing, the knuckles kept
+trigger Oggbi                    # HandToHand 2499 (getCharSkillLevel / 10 is below 250): not offered, the default 230
+finish
+skill HandToHand 2500
+trigger Oggbi                    # can equip, HandToHand 2500, no guide: 286 (oncePerZone)
+finish                         # the knuckles held: no second knuckles, the Weapon Training Guide, accepted
+trigger Oggbi                    # accepted, no Annals, the knuckles held: 287 with hide 1
+finish option=0                # option 0: nothing
+trade Oggbi BoneChip x1          # not the knuckles: nil, nothing
+trade Oggbi KnucklesOfTrials x1    # 300 weapon skill points: 289
+finish                         # the knuckles taken, the Map to the Annals of Truth
+trigger Oggbi                    # the map, no knuckles: 287 with hide 1
+finish option=1                # option 1, no knuckles: a new knuckles (0 points)
+trade Oggbi KnucklesOfTrials x1    # 0 weapon skill points: 288
+finish                         # 288 has no finish handler: the knuckles kept
+warp 20,17,-140 BostaunieuxOubliette
+trigger qm1                    # the map, no Annals: Bodach popped and claimed, SENSE_OMINOUS_PRESENCE
+trigger qm1                    # Bodach up: popFromQM false, nil: NOTHING_OUT_OF_ORDINARY
+kill BODACH             # the map held: killed_wsnm 1
+trigger qm1                    # killed_wsnm 1: back to 0, the key item Annals of Truth
+trigger qm1                    # the Annals held, killed_wsnm 0: nil, NOTHING_OUT_OF_ORDINARY
+warp -159,-7,5 PortBastok
+trigger Oggbi                    # the Annals: 290
+finish                         # completed: fame +20, the guide, map and Annals deleted, Asuran Fists learned, ASURAN_FISTS_LEARNED
+trigger Oggbi                    # completed: no section, 230
+finish
+trade Oggbi KnucklesOfTrials x1    # completed: no trade handler, nothing

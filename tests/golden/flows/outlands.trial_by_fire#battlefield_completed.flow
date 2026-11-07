@@ -1,0 +1,15 @@
+# Trial by Fire (outlands 12), completed (a GM) with the fork (a GM): the battlefield's entry holds for a completed quest
+# (status accepted or more: a status read in its Lua file). Entered, Ifrit_Prime_TBF killed: won; battlefieldWin is set
+# only while accepted, so a GM sets it to 544 with 32001 open (canSkipCS 1): finished: the quest's 32001 handler is the
+# accepted section's: nothing (no whisper, no title).
+lists CloisterOfFlames/FP_Entrance/onTrigger CloisterOfFlames/onEventFinish/32001
+char zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+quest Outlands.TrialByFire completed
+keyitem TuningForkOfFire
+login
+trigger FP_Entrance                     # completed, the fork: 32000
+update 32000 option=1                   # arena 1: registered, entered, the fork taken
+finish                                  # in the arena
+kill IFRIT_PRIME_ASA-21                 # won while completed: 32001 opens (canSkipCS 1), battlefieldWin not set
+localvar battlefieldWin 544             # a GM, 32001 open
+finish                                  # completed: no 32001 handler: nothing

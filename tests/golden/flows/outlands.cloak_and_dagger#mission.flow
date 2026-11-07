@@ -1,0 +1,110 @@
+# The Zilart missions that share Jakoh Wahcondalo, against the quests' replies; no script turn (TuningOut_Progress 0), so
+# every talk goes on through the tie. The mission's actions come first in the tied list (the missions' containers before
+# the quests'), and a tie rotates by the last event id (interaction_lookup.lua's performNextAction).
+# main (a Warrior, Windurst fame 488, A Question of Taste completed, rancorCurse 1; RoTZ 3 Kazham's Chieftainess current):
+# RoTZ 3's 114 (progressEvent) and Everyone's Grudging's offer 107 (progressCutscene) tie at Progress: 114 (the list's
+# first); finished: the mission completed, the Sacrificial Chamber Key, RoTZ 4 current. Then 107 alone at Progress (115 is
+# an Event): begun. 115 and 108 (Events) tie: the last id 107 is neither: 115, then 108, then 115 again. Prog 1 (a GM):
+# 115 and 110 tie: the last id 115: 110; finished: Everyone's Grudging completed; then 115 alone.
+# bob (a Thief, dagger skill 2300, Cloak and Dagger accepted with the guide, the map and the annals; RoTZ 3 current):
+# 114 and Cloak and Dagger's 284 (progressEvent) tie at Progress: 114; finished: RoTZ 4 current. 284 alone at Progress
+# (over 115): Cloak and Dagger completed. Then 115 alone.
+# carl (a Thief, dagger skill 2300, the Dagger of Trials held, Windurst fame 425, A Question of Taste accepted at Prog 0;
+# RoTZ 4 The Temple of Uggalepih current): RoTZ 4's 115 (event) ties with A Question of Taste's 46 and Cloak and Dagger's
+# 279 (Events): 115, 46, 279 (finished: the guide; begun). 115, 46 and 280: the last id 279 is none of them: 115, 46,
+# 280. The map (a GM): 115, 46 and 283: the last id 280: 115, 46, 283. Prog 2 (a GM): 115, 48 and 283: the last id 283:
+# the cycle wraps: 115, 48, 283.
+# dan (a Warrior, Windurst fame 425, A Question of Taste completed with its mustZone 250 set in Kazham; RoTZ 4 current):
+# 115 and A Question of Taste's completed 52 tie: 115, 52. The mustZone cleared and Prog 1 (GMs): 115 and 56: 115, 56.
+# Not flowed: Windurst 7-2 (Awakening of the Gods) at Jakoh.
+lists Kazham/Jakoh_Wahcondalo/onTrigger
+char zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+char bob zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+char carl zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+char dan zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+fame Windurst 488
+quest Outlands.AQuestionOfTaste completed
+charvar rancorCurse 1
+mission Zilart KazhamsChieftainess current
+bob: skill Dagger 2300
+bob: quest Outlands.CloakAndDagger accepted
+bob: keyitem WeaponTrainingGuide
+bob: keyitem MapToTheAnnalsOfTruth
+bob: keyitem AnnalsOfTruth
+bob: mission Zilart KazhamsChieftainess current
+carl: skill Dagger 2300
+carl: item DaggerOfTrials
+carl: fame Windurst 425
+carl: quest Outlands.AQuestionOfTaste accepted
+carl: mission Zilart TheTempleOfUggalepih current
+dan: fame Windurst 425
+dan: quest Outlands.AQuestionOfTaste completed
+dan: charvar Quest[5][3]mustZone 250
+dan: mission Zilart TheTempleOfUggalepih current
+login
+trigger Jakoh_Wahcondalo                # 114 and 107 tie: 114
+finish                                  # RoTZ 3 completed; RoTZ 4 current
+trigger Jakoh_Wahcondalo                # 107 alone at Progress
+finish                                  # Everyone's Grudging begun
+trigger Jakoh_Wahcondalo                # 115 and 108 tie: the last id 107: 115
+finish
+trigger Jakoh_Wahcondalo                # the cycle: 108
+finish
+trigger Jakoh_Wahcondalo                # the cycle wraps: 115
+finish
+charvar Quest[5][4]Prog 1               # a GM
+trigger Jakoh_Wahcondalo                # 115 and 110 tie: the last id 115: 110
+finish                                  # Everyone's Grudging completed
+trigger Jakoh_Wahcondalo                # 115 alone
+finish
+trigger Jakoh_Wahcondalo                # 115 alone
+finish
+logout
+bob: login
+bob: trigger Jakoh_Wahcondalo           # 114 and 284 tie: 114
+bob: finish                             # RoTZ 4 current
+bob: trigger Jakoh_Wahcondalo           # 284 alone at Progress
+bob: finish                             # Cloak and Dagger completed
+bob: trigger Jakoh_Wahcondalo           # 115 alone
+bob: finish
+bob: logout
+carl: login
+carl: trigger Jakoh_Wahcondalo          # 115, 46 and 279 tie: 115
+carl: finish
+carl: trigger Jakoh_Wahcondalo          # the cycle: 46
+carl: finish
+carl: trigger Jakoh_Wahcondalo          # the cycle: 279
+carl: finish                            # the guide; Cloak and Dagger begun
+carl: trigger Jakoh_Wahcondalo          # 115, 46 and 280: the last id 279: 115
+carl: finish option=0
+carl: trigger Jakoh_Wahcondalo          # the cycle: 46
+carl: finish option=0
+carl: trigger Jakoh_Wahcondalo          # the cycle: 280 (the dagger held: 2)
+carl: finish option=0                   # nothing
+carl: keyitem MapToTheAnnalsOfTruth     # a GM
+carl: trigger Jakoh_Wahcondalo          # 115, 46 and 283: the last id 280: 115
+carl: finish
+carl: trigger Jakoh_Wahcondalo          # the cycle: 46
+carl: finish
+carl: trigger Jakoh_Wahcondalo          # the cycle: 283
+carl: finish
+carl: charvar Quest[5][3]Prog 2         # a GM
+carl: trigger Jakoh_Wahcondalo          # 115, 48 and 283: the last id 283: the cycle wraps: 115
+carl: finish
+carl: trigger Jakoh_Wahcondalo          # the cycle: 48
+carl: finish
+carl: trigger Jakoh_Wahcondalo          # the cycle: 283
+carl: finish
+carl: logout
+dan: login
+dan: trigger Jakoh_Wahcondalo           # 115 and 52 tie: 115
+dan: finish
+dan: trigger Jakoh_Wahcondalo           # the cycle: 52
+dan: finish
+dan: charvar Quest[5][3]mustZone 0      # a GM
+dan: charvar Quest[5][3]Prog 1          # a GM
+dan: trigger Jakoh_Wahcondalo           # 115 and 56: the last id 52: 115
+dan: finish
+dan: trigger Jakoh_Wahcondalo           # the cycle: 56
+dan: finish
+dan: logout

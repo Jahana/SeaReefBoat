@@ -1,0 +1,37 @@
+# Beat Around the Bushin (jeuno 67): the finishes when the status changed under them. A MNK 71, Norg fame 425. 160 open,
+# the quest set accepted by a GM: the finish finds it not available: nothing (the var stays 0). The var 2 (a GM): the
+# Wyrm Beard: 156 open, the quest set available by a GM: no status read: the var 3, the beard taken. The same for the
+# Behemoth Tongue at var 4 (157: var 5) and the Adamantoise Egg at var 6 (158: var 7). Accepted, the var 7 (a GM): the
+# Brown Belt: 159 open, the quest set available by a GM: completed anyway (Black Belt, title, var 0, fame);
+# Quest[3][67]Prog 1 (GM) kept (the raw player:completeQuest).
+char zone=LowerJeuno pos=45.8,3.9,-45.4 job=MNK lvl=71
+fame Norg 425
+item WyrmBeard
+item BehemothTongue
+item AdamantoiseEgg
+item BrownBelt
+login
+trigger Vola                            # 160
+quest Jeuno.BeatAroundTheBushin accepted  # a GM, while 160 is open
+finish                                  # not available: nothing (the var stays 0)
+walk 39.6,-1.6,-16.6                    # to the door (trades are refused from afar)
+charvar BeatAroundTheBushin 2           # a GM
+trade _6tc WyrmBeard x1                 # accepted, var 2: 156
+quest Jeuno.BeatAroundTheBushin available  # a GM, while 156 is open
+finish                                  # no status read: the var 3; the beard taken
+quest Jeuno.BeatAroundTheBushin accepted  # a GM
+charvar BeatAroundTheBushin 4           # a GM
+trade _6tc BehemothTongue x1            # 157
+quest Jeuno.BeatAroundTheBushin available  # a GM, while 157 is open
+finish                                  # no status read: the var 5; the tongue taken
+quest Jeuno.BeatAroundTheBushin accepted  # a GM
+charvar BeatAroundTheBushin 6           # a GM
+trade _6tc AdamantoiseEgg x1            # 158
+quest Jeuno.BeatAroundTheBushin available  # a GM, while 158 is open
+finish                                  # no status read: the var 7; the egg taken
+quest Jeuno.BeatAroundTheBushin accepted  # a GM
+charvar BeatAroundTheBushin 7           # a GM
+charvar Quest[3][67]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade _6tc BrownBelt x1                 # 159
+quest Jeuno.BeatAroundTheBushin available  # a GM, while 159 is open
+finish                                  # no status read: Black Belt (title, item); var 0; fame +60; taken; completed

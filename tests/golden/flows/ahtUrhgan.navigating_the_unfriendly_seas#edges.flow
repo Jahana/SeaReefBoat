@@ -1,0 +1,63 @@
+# Navigating the Unfriendly Seas' edges. The offer's operands, each false alone (Luck of the Draw completed for all):
+# bob: Equipped for All Occasions accepted, not completed (its Prog 0: qm6 nil): NOTHING_OUT_OF_ORDINARY; carl: a
+# Warrior; dan: a level 49 Corsair, also at AF2_QUEST_LEVEL 49.4 (a number). Main (accepted by a GM, a Hydrogauge): the
+# gauge to the Leypoint at Prog 0: nil; at Prog 3 (a GM): nil; the Leypoint at Prog 3: nil: LEYPOINT; Prog 0 (a GM): the
+# gauge to Leleroon: 283; Prog 2 set by a GM with 283 open: its finish tests Prog again: nothing (Prog 2 kept); Leleroon
+# at Prog 2: 292; qm6 at Prog 4 (a GM): nil: NOTHING_OUT_OF_ORDINARY; its 233 at Prog 3 with a full bag: complete false
+# (unread): nothing; room again: 233: completed.
+lists ArrapagoReef/qm6/onTrigger Nashmau/Leleroon/onTrigger WajaomWoodlands/Leypoint/onTrade WajaomWoodlands/Leypoint/onTrigger ArrapagoReef/onEventFinish/233
+char zone=WajaomWoodlands pos=-198.527,-8.5,80.058 job=COR lvl=50
+char bob zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=50
+char carl zone=ArrapagoReef pos=470.267,-12.292,111.817 job=WAR lvl=50
+char dan zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=49
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.EquippedForAllOccasions completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas accepted
+item Hydrogauge
+bob: quest AhtUrhgan.LuckOfTheDraw completed
+bob: quest AhtUrhgan.EquippedForAllOccasions accepted
+carl: quest AhtUrhgan.LuckOfTheDraw completed
+carl: quest AhtUrhgan.EquippedForAllOccasions completed
+dan: quest AhtUrhgan.LuckOfTheDraw completed
+dan: quest AhtUrhgan.EquippedForAllOccasions completed
+login
+bob: login
+bob: trigger qm6                        # Equipped accepted (Prog 0: its qm6 nil): NOTHING_OUT_OF_ORDINARY
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trigger qm6                       # a Warrior: NOTHING_OUT_OF_ORDINARY
+carl: finish-if-event
+carl: logout
+dan: login
+dan: trigger qm6                        # level 49: NOTHING_OUT_OF_ORDINARY
+dan: finish-if-event
+setting AF2_QUEST_LEVEL 49.4
+dan: trigger qm6                        # 49 < 49.4 (the setting read as a number): NOTHING_OUT_OF_ORDINARY
+dan: finish-if-event
+setting AF2_QUEST_LEVEL 50
+dan: logout
+trade Leypoint Hydrogauge x1            # Prog 0: nil
+charvar Quest[6][25]Prog 3              # a GM
+trade Leypoint Hydrogauge x1            # Prog 3: nil
+trigger Leypoint                        # Prog 3: nil: LEYPOINT
+finish-if-event
+charvar Quest[6][25]Prog 0              # a GM
+warp -13.187,0,25.114 Nashmau
+trade Leleroon Hydrogauge x1            # Prog 0, a gauge: 283
+charvar Quest[6][25]Prog 2              # a GM, 283 open
+finish                                  # 283 at Prog 2: nothing (Prog 2 kept)
+trigger Leleroon                        # Prog 2: 292
+finish
+charvar Quest[6][25]Prog 3              # a GM
+warp 470.267,-12.292,111.817 ArrapagoReef
+charvar Quest[6][25]Prog 4              # a GM
+trigger qm6                             # Prog 4: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[6][25]Prog 3              # a GM
+fill-inventory
+trigger qm6                             # Prog 3: 233
+finish                                  # the culottes do not fit: complete false (unread): nothing
+free-inventory
+trigger qm6                             # 233
+finish                                  # completed

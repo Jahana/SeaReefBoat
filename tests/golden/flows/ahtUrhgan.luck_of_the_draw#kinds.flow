@@ -1,0 +1,23 @@
+# Luck of the Draw's 3 (Progress) at Talacca Cove's _1l0 (no script; default messageSpecial -1), against the
+# battlefields' entry handler (Battlefield.onEntryTrigger, an Event: the 32000 menu when a battlefield is open to the
+# char). A level 50 Corsair at Prog 4 with the Forgotten Hexagun and a Confidential Imperial Order (GMs: Call to Arms
+# needs only that key item), a full bag (3's completion fails, so the state stays): each talk: 3 (the Progress beats the
+# menu); an Event would tie with the menu and rotate with it. The menu itself is shown with Prog 5 (a GM: Luck of the
+# Draw has no _1l0 reply there): 32000, finished with option 0: nothing.
+lists TalaccaCove/_1l0/onTrigger
+char zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=50
+quest AhtUrhgan.LuckOfTheDraw accepted
+charvar Quest[6][6]Prog 4
+keyitem ForgottenHexagun
+keyitem ConfidentialImperialOrder
+login
+fill-inventory
+trigger _1l0                            # Prog 4: 3 (over the battlefields' 32000)
+finish                                  # the die does not fit: nothing
+trigger _1l0                            # 3 again
+finish
+trigger _1l0                            # 3 again
+finish
+charvar Quest[6][6]Prog 5               # a GM
+trigger _1l0                            # Prog 5: no quest reply: the battlefields' 32000 menu
+finish option=0                         # nothing

@@ -1,0 +1,45 @@
+# The Fighting Fourth (crystalWar 7) completed by a GM, with no campaign allegiance: its completed replies against the
+# NPCs' other answers. A level 99 Warrior in the Eldieme Necropolis [S] (missions as Steamed Rams' main flow).
+# Turbulent Storm: the quest's 9 (replaceDefault), then the script's 7 (no allegiance, no RED letter); the RED letter (a
+# GM): the quest's 9, then the script's 8. Bastok Markets [S], Her Memories: Azure Footfalls (group 10, on Lua) accepted
+# at Prog 5 (GMs): Adelbrecht: 162 (replaceDefault) under Azure's 360 (a Progress): 360 (Azure completed); Azure
+# accepted at Prog 5 again: 360 again. North Gustaberg [S] (Better Part of Valor's zone-in 1 plays: an opener is
+# completed), Azure accepted at Prog 2: Gebhardt: 108 (replaceDefault) under Azure's 14 (a Progress): 14; Azure's Prog
+# set back: 14 again.
+lists TheEldiemeNecropolisS/Turbulent_Storm/onTrigger BastokMarketsS/Adelbrecht/onTrigger NorthGustabergS/Gebhardt/onTrigger
+char zone=TheEldiemeNecropolisS pos=423.961,-48,-47.308 job=WAR lvl=99
+quest CrystalWar.TheFightingFourth completed
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Turbulent_Storm                 # completed: the quest's 9
+finish
+trigger Turbulent_Storm                 # the script's 7 (no allegiance, no RED letter)
+finish option=1                         # nothing
+keyitem RedRecommendationLetter
+trigger Turbulent_Storm                 # the quest's 9
+finish
+trigger Turbulent_Storm                 # the script's 8 (the RED letter)
+finish
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # completed: 162 (replaceDefault) under Azure Footfalls' 360: 360
+finish                                  # Azure completed
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 5
+trigger Adelbrecht                      # 360 again
+finish
+quest CrystalWar.HerMemoriesAzureFootfalls available
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 2
+warp 207.799,-20.826,669.125 NorthGustabergS
+trigger Gebhardt                        # completed: 108 (replaceDefault) under Azure Footfalls' 14: 14
+finish                                  # Azure Prog 3
+charvar Quest[7][70]Prog 2
+trigger Gebhardt                        # 14 again
+finish

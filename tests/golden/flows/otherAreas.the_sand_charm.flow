@@ -1,0 +1,59 @@
+# The Sand Charm (otherAreas 8): Mhaura's Blandine (no script, default 122; two NPCs share the name and the Lua handler,
+# but the first, 17797133 at -29.952,-16,65.766, is cutscene_only: a talk gets a release and no handler; only the
+# second, Blandine+20 = 17797153 at the dock end, 23.118,-7.758,39.575, answers), Zexu (no script, default 121) and
+# Celestina (17797132; a goldsmiths' guild shop script, onTrigger only; Riding on the Clouds (jeuno, Lua) has a trade
+# handler on her that answers a Kindred's Seal at its npcOtherlands 4 only; the second Celestina is cutscene_only).
+# A level 30 Warrior at Windurst fame 50 (level 2) with a Sand Charm and a Chocobo Feather.
+# Available: a trade to Celestina: no trade handler (section 2 is off: the status operand); Zexu, Celestina and Blandine
+# at each Prog: Zexu 123 at Prog 1 only (0 and 2 nil: 121), Blandine 125 at Prog 0 and 124 at Prog 2 (1 and 3 nil: 122),
+# Celestina 126 at Prog 3 only (0, 1, 2: her shop). Accepted: Celestina's trigger: no handler (her shop); Blandine: no
+# section (122); the feather: nil; the charm and the feather (npcUtil.tradeHas: extras allowed): 127 (0, 13095),
+# finished: completed (2000 exp, 2000 gil, the Map of Bostaunieux Oubliette, fame 40 Windurst), both items taken
+# (tradeComplete), BlandineDialog 1. Completed: Blandine 128, finished: BlandineDialog 0; 129 (replaceDefault over her
+# 122) at 0 and at 2 (a GM); a charm traded while completed: no section 2, nothing.
+lists Mhaura/Blandine/onTrigger Mhaura/Zexu/onTrigger Mhaura/Celestina/onTrigger Mhaura/Celestina/onTrade Mhaura/onEventFinish/123 Mhaura/onEventFinish/124 Mhaura/onEventFinish/125 Mhaura/onEventFinish/126 Mhaura/onEventFinish/127 Mhaura/onEventFinish/128
+char zone=Mhaura pos=24.6,-7.758,39.575 job=WAR lvl=30
+fame Windurst 50
+item SandCharm
+item ChocoboFeather
+login
+walk -36.1,-16.05,75.7                  # to Celestina
+trade Celestina SandCharm x1            # available: no trade handler; nothing
+trigger Zexu                            # Prog 0: nil; his default 121
+finish
+trigger Celestina                       # Prog 0: nil; her script: the guild shop (no event)
+trigger Blandine+20                     # Prog 0, the town side: 125
+finish                                  # Prog 1
+trigger Blandine+20                     # Prog 1: nil; her default 122
+finish
+trigger Celestina                       # Prog 1: nil; her shop
+trigger Zexu                            # Prog 1: 123
+finish                                  # Prog 2
+trigger Zexu                            # Prog 2: nil; 121
+finish
+trigger Celestina                       # Prog 2: nil; her shop
+trigger Blandine+20                     # Prog 2 (z 39.575: the town side): 124
+finish                                  # Prog 3
+trigger Blandine+20                     # Prog 3: nil; 122
+finish
+trigger Zexu                            # Prog 3: nil; 121
+finish
+trigger Celestina                       # Prog 3: 126 (13095)
+finish                                  # begun
+trigger Celestina                       # accepted: no trigger handler; her shop
+trigger Blandine+20                     # accepted: no section; 122
+finish
+walk -36.1,-16.05,75.7                  # to Celestina
+trade Celestina ChocoboFeather x1       # no charm: nil
+trade Celestina SandCharm x1 ChocoboFeather x1 # the charm among other items: 127 (0, 13095)
+finish                                  # completed: 2000 exp, 2000 gil, the map, fame 40 Windurst; both items taken; BlandineDialog 1
+trigger Blandine+20                     # completed, BlandineDialog 1: 128
+finish                                  # BlandineDialog 0
+trigger Blandine+20                     # BlandineDialog 0: 129 (replaceDefault)
+finish
+charvar BlandineDialog 2                # a GM
+trigger Blandine+20                     # BlandineDialog 2: 129
+finish
+item SandCharm                          # a GM
+walk -36.1,-16.05,75.7                  # to Celestina
+trade Celestina SandCharm x1            # completed: no section 2; nothing (the charm kept)

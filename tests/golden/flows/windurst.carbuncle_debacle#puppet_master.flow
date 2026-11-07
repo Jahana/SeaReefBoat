@@ -1,0 +1,19 @@
+# Carbuncle Debacle (windurst 83): The Puppet Master's status operand, an SMN 75 with The Puppet Master accepted
+# (GM; Prog 0) and Class Reunion completed (GM). The door: The Puppet Master's 403 (Event priority) takes turns with the
+# script, whose 415 wants The Puppet Master completed: nothing, so 403 again. This quest completed too (GM): Koru-Moru's
+# 420 and Class Reunion's 411 want The Puppet Master completed: his 193 on both turns (The Puppet Master's 404 wants
+# Prog 3).
+char zone=WindurstWalls pos=-24.5,-14.5,263.0 job=SMN lvl=75
+quest Windurst.ThePuppetMaster accepted
+quest Windurst.ClassReunion completed
+login
+trigger _6n2                            # The Puppet Master accepted: 403
+finish
+trigger _6n2                            # the script's turn: TPM not completed: no 415: 403 again
+finish
+quest Windurst.CarbuncleDebacle completed  # GM
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # TPM accepted: no 420, no 411: 193
+finish

@@ -1,0 +1,16 @@
+# A Chocobo's Tale (jeuno 72): a finish outside its state. A level 75 Warrior, the quest accepted at Prog 5 with the
+# collar (a GM). 10017 open, the quest set available by a GM: no 10017 finish in the available state: nothing (no gil,
+# the collar kept). 10015 open (available), the quest set completed by a GM: nothing (not begun).
+lists UpperJeuno/Nevela/onTrigger UpperJeuno/onEventFinish/10015 UpperJeuno/onEventFinish/10017
+char zone=UpperJeuno pos=-58.6,0,81.1 job=WAR lvl=75
+mission Cop TheRoadForks current
+quest Jeuno.AChocobosTale accepted
+charvar Quest[3][72]Prog 5
+keyitem SilverCometsCollar
+login
+trigger Nevela                          # Prog 5: 10017
+quest Jeuno.AChocobosTale available     # a GM, while 10017 is open
+finish                                  # nothing
+trigger Nevela                          # available: 10015
+quest Jeuno.AChocobosTale completed     # a GM, while 10015 is open
+finish                                  # nothing

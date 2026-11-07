@@ -1,0 +1,67 @@
+# Trial by Water (outlands 133), each status operand of Edal-Tahdal's arms alone (GM-set statuses, the rest held
+# still). 109's two halves: TrialByWater_date 1 (behind) at fame level 3: available 113, completed 109; fame level 4 with
+# the date ahead (2000000000): completed 113, available 109. The accepted arms at fame level 1 with the date ahead: no
+# key item: available 113, completed 113, accepted 190; the fork: available 113, accepted 110, completed 113; the
+# whisper: available 113, accepted 112, completed 113. The finishes read no status (GM changes while the event is open):
+# 109 option 1 finished while accepted (addQuest on an accepted quest: no change; TrialByWater_date 0; the fork), 190
+# finished while completed (a fork), 112 finished while available (the Eye of Nept, completed from available).
+char zone=Norg pos=-13.0,1.1,-19.0 job=WAR lvl=75
+fame Norg 224
+charvar TrialByWater_date 1
+login
+trigger Edal-Tahdal                       # available, fame level 3, date behind: 113
+finish
+quest Outlands.TrialByWater completed
+trigger Edal-Tahdal                       # completed, date behind: 109
+finish option=0                           # declined
+fame Norg 225
+charvar TrialByWater_date 2000000000
+trigger Edal-Tahdal                       # completed, fame level 4, date ahead: 113
+finish
+quest Outlands.TrialByWater available
+trigger Edal-Tahdal                       # available, fame level 4: 109
+finish option=0                           # declined
+fame Norg 0
+trigger Edal-Tahdal                       # available, fame level 1, no key item: 113
+finish
+quest Outlands.TrialByWater completed
+trigger Edal-Tahdal                       # completed (date ahead), no key item: 113
+finish
+quest Outlands.TrialByWater available
+quest Outlands.TrialByWater accepted
+trigger Edal-Tahdal                       # accepted, no key item: 190
+finish                                    # the fork
+quest Outlands.TrialByWater completed
+trigger Edal-Tahdal                       # completed (date ahead), the fork: 113
+finish
+quest Outlands.TrialByWater available
+trigger Edal-Tahdal                       # available, the fork: 113
+finish
+quest Outlands.TrialByWater accepted
+trigger Edal-Tahdal                       # accepted, the fork: 110
+finish
+delkeyitem TuningForkOfWater
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # accepted, the whisper alone: 112 (0, fork, 2)
+finish option=3                           # the Water Ring: completed; TrialByWater_date 1800025200
+keyitem WhisperOfTides
+trigger Edal-Tahdal                       # completed (date ahead), the whisper: 113
+finish
+quest Outlands.TrialByWater available
+trigger Edal-Tahdal                       # available, fame level 1, the whisper: 113
+finish
+quest Outlands.TrialByWater accepted
+trigger Edal-Tahdal                       # 112
+quest Outlands.TrialByWater available
+finish option=4                           # finished while available: the Eye of Nept; completed from available
+quest Outlands.TrialByWater available
+quest Outlands.TrialByWater accepted
+delkeyitem TuningForkOfWater
+trigger Edal-Tahdal                       # accepted, no key item: 190
+quest Outlands.TrialByWater completed
+finish                                    # finished while completed: the fork
+fame Norg 225
+quest Outlands.TrialByWater available
+trigger Edal-Tahdal                       # available, fame level 4: 109
+quest Outlands.TrialByWater accepted
+finish option=1                           # finished while accepted: no change of status; TrialByWater_date 0; the fork held

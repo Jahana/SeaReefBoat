@@ -1,0 +1,45 @@
+# Twinstone Bonding (windurst 62): Gioh Ajihri and Wani Casdohry (Windurst Woods; no default, no container; their
+# standards 424 / 425 and Wani's Mihgo's Amigo line 86 are their scripts': #amigo; Lost Chick answers Gioh's 424
+# updates: hiddenQuests.lost_chick#windurst_owners). The trade reads GiohAijhriSpokenTo and needToZone, not the status.
+# Fame 49 (level 1): 424; Wani 425. Level 2: 487 (0, 13360), option 0: begun, var 1. Accepted: Wani 489; a bone chip:
+# nothing; the earring (the var 1 from 487's finish): 490: taken, needToZone, var 0, completed (a Wrapped Bow, fame 16,
+# Bond Fixer). Completed with needToZone: 491; the earring (var 0): nothing; Wani 492. Rezoned (needToZone cleared on
+# the zone-in): the earring (var 0): nothing; 488 (var 1); a bone chip: nothing; needToZone again (a GM): the earring:
+# nothing; 491; rezoned: 490: fame 16, 900 gil, needToZone, var 0 (no completion).
+char zone=WindurstWoods pos=106.2,-4.75,173.9 job=WAR lvl=75
+fame Windurst 49
+item TwinstoneEarring
+item TwinstoneEarring
+item BoneChip
+login
+trigger Gioh_Ajihri                     # fame level 1: his 424
+finish
+trigger Wani_Casdohry                   # not started (Mihgo's Amigo not accepted): his 425
+finish
+fame Windurst 50
+trigger Gioh_Ajihri                     # level 2: 487 (0, 13360)
+finish option=0                         # begun (any option); var 1
+trigger Wani_Casdohry                   # accepted: 489 (0, 13360)
+finish
+trigger Gioh_Ajihri                     # accepted: 488 (0, 13360) (beside him)
+finish                                  # var 1
+trade Gioh_Ajihri BoneChip x1           # var 1, no needToZone, no earring: nothing
+trade Gioh_Ajihri TwinstoneEarring x1   # var 1, no needToZone: 490
+finish                                  # the earring taken; needToZone; var 0; completed (Wrapped Bow, Bond Fixer)
+trigger Gioh_Ajihri                     # completed, needToZone: 491 (0, 13360)
+finish
+trade Gioh_Ajihri TwinstoneEarring x1   # var 0: nothing
+trigger Wani_Casdohry                   # completed: 492 (0, 13360)
+finish
+rezone                                  # needToZone cleared
+trade Gioh_Ajihri TwinstoneEarring x1   # var 0, no needToZone: nothing
+trigger Gioh_Ajihri                     # completed, no needToZone: 488 (0, 13360)
+finish                                  # var 1
+trade Gioh_Ajihri BoneChip x1           # var 1, no earring: nothing
+charvar [generic]mustZone 241           # needToZone (a GM)
+trade Gioh_Ajihri TwinstoneEarring x1   # needToZone: nothing
+trigger Gioh_Ajihri                     # completed, needToZone: 491
+finish
+rezone
+trade Gioh_Ajihri TwinstoneEarring x1   # var 1, no needToZone: 490
+finish                                  # completed: fame 16; 900 gil; the earring taken; needToZone; var 0

@@ -1,0 +1,26 @@
+# I'll Take the Big Box's Selbina zone-in: the Lua table { 1101, -1, RESET_CAMERA | NO_PCS | NO_NPCS } (0x13), the C#
+# Event(1101).TextTable(-1).Flags(0x13) (quest rework P8's OnZoneIn table reply). A level 50 Ninja, accepted at Prog 5
+# with the Seance Staff (GMs), RoV 1-04 Set Free current (on RoV 1-02, a fresh char's mission, its Selbina zone-in 176
+# comes first in the lookup and plays instead). Selbina at Prog 4 (a GM): the quest's zone-in answers nothing, and
+# nothing else plays; at Prog 5: 1101 with flags 0x13, left open, finished with a full
+# inventory: complete false (no room for the Ninja Hakama): still accepted, the staff kept; out and back: 1101 again,
+# finished: completed (the hakama, Norg fame 20), the staff taken; Selbina again (rezone): completed: no zone-in event.
+lists Selbina/onZoneIn/1 Selbina/onEventFinish/1101
+char zone=PortBastok pos=31.966,-6.771,68.784 job=NIN lvl=50
+quest Outlands.ILlTakeTheBigBox accepted
+charvar Quest[5][144]Prog 5
+keyitem SeanceStaff
+mission Rov SetFree current             # past RoV 1-02, whose Selbina zone-in 176 comes first in the lookup
+login
+charvar Quest[5][144]Prog 4             # a GM
+warp -52.121,-11.338,-13.067 Selbina    # Prog 4: the quest's zone-in nil: no event
+charvar Quest[5][144]Prog 5             # a GM
+warp 31.966,-6.771,68.784 PortBastok
+warp -52.121,-11.338,-13.067 Selbina open   # Prog 5: 1101 (the table: textTable -1, flags 0x13), left open
+fill-inventory
+finish                                  # complete false: still accepted; the staff kept
+free-inventory
+warp 31.966,-6.771,68.784 PortBastok
+warp -52.121,-11.338,-13.067 Selbina open   # 1101 again
+finish                                  # completed: the Ninja Hakama, Norg fame 20; the staff taken
+rezone                                  # completed: no zone-in event

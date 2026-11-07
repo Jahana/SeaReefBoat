@@ -1,0 +1,72 @@
+# Olduum's operands, each false alone, and the full bags (GMs make each state; Olduum completed, Reissue 1, Wait 0
+# unless said). Aydeewa Subterrane, an Excavation Site: main, Reissue 0 (nothing held, Wait 0): one Pickaxe: nil;
+# Reissue 1 (a GM): two Pickaxes at once: not exactly one: nil; one, the Electrocell held: nil. Bob: one, the Olduum
+# Ring held: nil. Carl: one, a Lightning Band held: nil. Whitegate: dan (the Electrocell, Prog 1): Dkhaaya 8; a GM sets
+# Wait an hour ahead while it is open: finished: Wait ahead: nothing. Eve, Olduum accepted at Prog 1 with the
+# Electrocell: Dkhaaya 6; a full bag: finished: complete false: not completed, the cell kept; freed: 6, finished:
+# completed (the band), the cell taken. Wajaom: the band with a Pickaxe to the Leypoint: not the band alone: nil; the
+# band alone: 2; the bag filled while it is open: finished: the ring does not fit: nothing (the band kept, Wait
+# unchanged); freed: 2, finished: the ring, the band taken, Wait = now + 60.
+lists AydeewaSubterrane/Excavation_Site/onTrade AhtUrhganWhitegate/onEventFinish/8 AhtUrhganWhitegate/onEventFinish/6 WajaomWoodlands/onEventFinish/2
+char zone=AydeewaSubterrane pos=392,0.984,349.642 job=WAR lvl=75
+char bob zone=AydeewaSubterrane pos=392,0.984,349.642 job=WAR lvl=75
+char carl zone=AydeewaSubterrane pos=392,0.984,349.642 job=WAR lvl=75
+char dan zone=AhtUrhganWhitegate pos=-71.7,0,-5.842 job=WAR lvl=75
+char eve zone=AhtUrhganWhitegate pos=-71.7,0,-5.842 job=WAR lvl=75
+item Pickaxe x3
+quest AhtUrhgan.Olduum completed
+bob: item Pickaxe
+bob: item OlduumRing
+bob: quest AhtUrhgan.Olduum completed
+bob: charvar Quest[6][2]Reissue 1
+carl: item Pickaxe
+carl: item LightningBand
+carl: quest AhtUrhgan.Olduum completed
+carl: charvar Quest[6][2]Reissue 1
+dan: quest AhtUrhgan.Olduum completed
+dan: charvar Quest[6][2]Reissue 1
+dan: charvar Quest[6][2]Prog 1
+dan: keyitem Electrocell
+eve: quest AhtUrhgan.Olduum accepted
+eve: charvar Quest[6][2]Prog 1
+eve: keyitem Electrocell
+eve: item Pickaxe
+login
+trade Excavation_Site Pickaxe x1        # completed, Reissue 0, Wait 0, nothing held, one Pickaxe: nil
+finish-if-event
+charvar Quest[6][2]Reissue 1            # a GM
+trade Excavation_Site Pickaxe x2        # completed, Reissue 1, nothing held, not exactly one Pickaxe: nil
+finish-if-event
+keyitem Electrocell                     # a GM
+trade Excavation_Site Pickaxe x1        # the cell held: nil
+finish-if-event
+logout
+bob: login
+bob: trade Excavation_Site Pickaxe x1   # the ring held: nil
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trade Excavation_Site Pickaxe x1  # the band held: nil
+carl: finish-if-event
+carl: logout
+dan: login
+dan: trigger Dkhaaya                    # Reissue 1, the cell: 8 ([0] = Electrocell)
+dan: charvar Quest[6][2]Wait 1800003600 # a GM, while 8 is open
+dan: finish                             # Wait ahead: nothing (the cell kept, no band)
+dan: logout
+eve: login
+eve: trigger Dkhaaya                    # accepted, the cell: 6 ([0] = Electrocell)
+eve: fill-inventory
+eve: finish                             # the band does not fit: complete false: not completed, the cell kept
+eve: free-inventory
+eve: trigger Dkhaaya                    # 6
+eve: finish                             # completed: the band; the Electrocell taken
+eve: warp -198.5,-8.5,80.058 WajaomWoodlands
+eve: trade Leypoint LightningBand x1 Pickaxe x1 # not the band alone: nil
+eve: finish-if-event
+eve: trade Leypoint LightningBand x1    # no ring, the band, a free slot: 2
+eve: fill-inventory                     # a GM, while 2 is open
+eve: finish                             # the ring does not fit: nothing (the band kept, Wait unchanged)
+eve: free-inventory
+eve: trade Leypoint LightningBand x1    # 2
+eve: finish                             # the ring; the band taken; Wait = now + 60

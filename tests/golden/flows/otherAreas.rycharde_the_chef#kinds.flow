@@ -1,0 +1,38 @@
+# Rycharde the Chef (otherAreas 0): its reply kinds against The Clue accepted (a GM), whose Rycharde 85 and Take 65 are
+# Event priority. A Progress reply beats an Event one every time; two Event replies take turns (the lookup's action
+# cycle, a local var per NPC and handler: the first tie plays the first container's action, and RQ1_Rycharde_the_Chef
+# sorts before RQ6_The_Clue). Available Prog 1: Take's 60 (Progress) twice; Prog 2: Take's 68 (Event), then The Clue's
+# 65; Rycharde's 70 (Progress) twice; Prog 3: Rycharde's 71 (Progress) twice. Accepted: Rycharde's 72 (Event), then 85;
+# Take's 68 (Event; the cycle's last was 65, so it starts over), then 65. An Event 60 / 70 / 71 would have taken turns
+# with 65 / 85; a Progress 68 / 72 would have played twice. The trade replies (73 Event, 74 Progress) have no competitor
+# (no other quest answers a meat trade).
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Mhaura/onEventFinish/60 Mhaura/onEventFinish/70 Mhaura/onEventFinish/71
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.TheClue accepted
+charvar Quest[4][0]Prog 1
+login
+trigger Take                            # Prog 1: 60 (Progress beats The Clue's 65)
+finish                                  # Prog 2
+charvar Quest[4][0]Prog 1               # a GM
+trigger Take                            # 60 again: Progress every time
+finish                                  # Prog 2
+trigger Take                            # Prog 2: 68 (a tie with 65: the first container's)
+finish
+trigger Take                            # 65 (the cycle's next)
+finish
+trigger Rycharde                        # Prog 2: 70 (Progress beats 85)
+finish option=0
+trigger Rycharde                        # 70 again
+finish option=70                        # Prog 3
+trigger Rycharde                        # Prog 3: 71 (Progress beats 85)
+finish option=0
+trigger Rycharde                        # 71 again
+finish option=72                        # begun
+trigger Rycharde                        # accepted: 72 (a tie with 85)
+finish
+trigger Rycharde                        # 85
+finish
+trigger Take                            # accepted: 68 (a tie with 65; the last was 65, so the cycle starts over)
+finish
+trigger Take                            # 65
+finish

@@ -1,0 +1,24 @@
+# Trial-Size Trial by Fire (outlands 15): the battlefield. A SMN of level 20 with this quest accepted and the Mini
+# Tuning Fork. The fork's trade to FP_Entrance opens the entry menu 32000; its update with option 17 (index 1,
+# arena 1) registers and enters (the fork taken); the inventory filled by GM inside the arena; Ifrit_Prime_TSTBF of
+# arena 1 (IFRIT_PRIME_ASA-18) is killed and the win's 32001 opens within the kill step. Its finish runs
+# content:onEventFinishWin, which calls this quest: Ifrit learned (IFRIT_UNLOCKED 0, 0, 0); the Scroll of Instant
+# Warp does not fit (npcUtil.giveItem: ITEM_CANNOT_BE_OBTAINED), the completion goes on: Windurst fame +20, completed. Back
+# in town, Dodmos's default 275, then his script's 289. A win while completed (the spell known, the scroll
+# given) is #battlefield_again (a second entry here would land in the won arena, which the char has not left).
+char zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByFire accepted
+item MiniTuningForkOfFire
+login
+trade FP_Entrance MiniTuningForkOfFire x1  # the fork: the entry menu 32000
+update 32000 option=17                    # Trial-Size Trial by Fire (index 1), arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+fill-inventory
+kill IFRIT_PRIME_ASA-18                   # Ifrit_Prime_TSTBF of arena 1: won, 32001 opens
+finish                                    # Ifrit learned; the scroll does not fit; Windurst fame +20; completed
+free-inventory
+warp 100.4,-14.0,-97.7 Kazham
+trigger Dodmos                            # UseFallback 0: the default 275
+finish
+trigger Dodmos                            # completed: 289
+finish

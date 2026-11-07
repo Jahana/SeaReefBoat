@@ -1,0 +1,23 @@
+# Beyond Infinity (jeuno 137): the finishes when their state no longer holds (a GM changes it while the event is open).
+# A level 91 Warrior at level cap 95, Prelude to Puissance completed, the Limit Breaker and the Soul Gem Clasp held,
+# MAX_LEVEL 99. The available 10045 open, a GM's cap 94: the finish (option 13) finds no state: not begun. Accepted with
+# Prog 1 (a GM): 10139 open, the quest set available by a GM: the finish finds only the available state (no 10139
+# finish): nothing (not completed, cap 95).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10139
+char zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=91
+levelcap 95
+quest Jeuno.PreludeToPuissance completed
+keyitem LimitBreaker
+keyitem SoulGemClasp
+login
+trigger Nomad_Moogle                    # available: 10045 (91, 1, 5, 0, 0)
+levelcap 94                             # a GM, while 10045 is open
+finish option=13                        # no state at the finish: not begun
+levelcap 95                             # a GM
+quest Jeuno.BeyondInfinity accepted     # a GM
+charvar Quest[3][137]Prog 1             # a GM: Prog 1
+trigger Nomad_Moogle                    # accepted, Prog 1: 10139 (75, 1)
+quest Jeuno.BeyondInfinity available    # a GM, while 10139 is open
+finish                                  # only the available state holds: no 10139 finish: nothing (cap 95)
+trigger Nomad_Moogle                    # available: 10045 (91, 1, 5, 0, 0)
+finish option=0                         # nothing

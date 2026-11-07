@@ -1,0 +1,24 @@
+# Trial by Water (outlands 133): completed by GM (TrialByWater_date 0), the fork by GM: the battlefield's entry holds for
+# a completed quest (status >= accepted), and 32001's finish gives the title and the Whisper of Tides in any status (kept
+# Lua quirk; battlefieldWin is not read). Edal-Tahdal: available (a GM) at fame level 1 with the whisper: 113;
+# completed by GM (date 0): 109, whose option 1 deletes and begins it; accepted with the whisper: 112. The win
+# while available is #battlefield_available (a second entry in this flow would land in the won arena, which the char
+# has not left).
+char zone=CloisterOfTides pos=557.5,35.1,563.0 job=WAR lvl=75
+quest Outlands.TrialByWater completed
+keyitem TuningForkOfWater
+login
+trigger WP_Entrance                       # completed, the fork: the entry menu 32000
+update 32000 option=1                     # registered, entered, the fork taken
+finish                                    # in the arena
+kill LEVIATHAN_PRIME_ASA-21               # the battlefield won, 32001 opens (canSkipCS 1)
+finish                                    # completed: Heir of the Great Water, the Whisper of Tides all the same
+warp -13.0,1.1,-19.0 Norg
+quest Outlands.TrialByWater available
+trigger Edal-Tahdal                       # available, fame level 1, the whisper: 113
+finish
+quest Outlands.TrialByWater completed
+trigger Edal-Tahdal                       # completed, TrialByWater_date 0 behind: 109
+finish option=1                           # the quest deleted and begun; the fork
+trigger Edal-Tahdal                       # accepted, the whisper: 112
+finish option=4                           # the Eye of Nept: completed

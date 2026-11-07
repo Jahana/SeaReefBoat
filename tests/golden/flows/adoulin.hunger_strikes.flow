@@ -1,0 +1,35 @@
+# Hunger Strikes (adoulin 76): a level 99 Warrior in Western Adoulin with The Starving completed (a GM: its 3005 would
+# tie with 2530), a Bowl of Wisdom Soup and a Strip of Meat Jerky; Adoulin fame level 1. A trade of the soup while
+# available: no quest trade handler: his script (a food, ATWTTB_Can_Trade_Gruel 0: nothing). Westerly Breeze: 2530,
+# finished on 0: begun (any option); available again (a GM): 2530, finished on 3: begun. Accepted, the section
+# registered under Western Adoulin (user ruling 2026-11-04, kept Lua bugs: the Lua's has no zone key and never
+# registered, so it answered nothing): two talks: 2531 each (his script has nothing at fame level 1); a trade of the
+# jerky (a food): 2533, finished: its confirmTrade takes nothing (the Lua's trade confirms no item); a trade of the
+# soup: 2532, finished: completed (fame 30, 500 bayld, 1000 exp), the soup taken, The Starving's Timer tomorrow. A
+# talk: 553. The Starving available again (a GM): its Timer tomorrow: no 3005: 553.
+lists WesternAdoulin/Westerly_Breeze/onTrigger WesternAdoulin/Westerly_Breeze/onTrade WesternAdoulin/onEventFinish/2530
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+quest Adoulin.TheStarving completed
+item BowlOfWisdomSoup
+item StripOfMeatJerky
+login
+trade Westerly_Breeze BowlOfWisdomSoup x1 # available: no quest trade handler: his script: nothing
+finish-if-event
+trigger Westerly_Breeze                 # available: 2530
+finish option=0                         # begun (any option)
+quest Adoulin.HungerStrikes available   # a GM
+trigger Westerly_Breeze                 # available: 2530
+finish option=3                         # begun
+trigger Westerly_Breeze                 # accepted: 2531 (an event)
+finish-if-event
+trigger Westerly_Breeze                 # his script's turn (fame level 1: nothing): 2531
+finish-if-event
+trade Westerly_Breeze StripOfMeatJerky x1 # a food: 2533
+finish-if-event                         # nothing taken (no item confirmed)
+trade Westerly_Breeze BowlOfWisdomSoup x1 # the soup: 2532
+finish-if-event                         # completed; the soup taken; The Starving's Timer tomorrow
+trigger Westerly_Breeze                 # completed: 553
+finish-if-event
+quest Adoulin.TheStarving available     # a GM
+trigger Westerly_Breeze                 # The Starving's Timer tomorrow: no 3005: 553
+finish-if-event

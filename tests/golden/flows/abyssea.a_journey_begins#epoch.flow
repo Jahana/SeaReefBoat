@@ -1,0 +1,18 @@
+# A Journey Begins (abyssea 160), the epoch: a level 99 Warrior in Port Jeuno with the quest accepted (a GM). The
+# login's zone-in: 324, finished: Prog 1. Joachim: 325, finished: completed, the traverser epoch set (now), The Truth
+# Beckons accepted. A day later (wait jst=1: 24 hours, one stone per 20), The Truth Beckons completed and Dawn of Death
+# accepted (GMs, no maw quest): no quest answers, so Joachim's script plays 328, its stones counted from 325's epoch:
+# one available (message type 0). No zone-in between, so the login's epoch fix-up (globals/player.lua:204-209) cannot
+# set it instead: without 325's epoch the menu would show none (type 2).
+lists PortJeuno/Joachim/onTrigger PortJeuno/onZoneIn/1 PortJeuno/onEventFinish/324 PortJeuno/onEventFinish/325 PortJeuno/onEventFinish/328
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins accepted
+login open                              # Prog 0: 324
+finish                                  # Prog 1
+trigger Joachim                         # 325
+finish                                  # completed; setTraverserEpoch; The Truth Beckons accepted
+wait jst=1                              # 24 hours on
+quest Abyssea.TheTruthBeckons completed # a GM
+quest Abyssea.DawnOfDeath accepted      # a GM: no maw quest, so no section
+trigger Joachim                         # 328 (his script): one stone available, counted from 325's epoch
+finish

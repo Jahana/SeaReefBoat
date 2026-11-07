@@ -1,0 +1,39 @@
+# The Starving (adoulin 84): a level 99 Warrior in Western Adoulin with Hunger Strikes completed (a GM: no tie), a
+# Bottle of Goblin Drink, a Bottle of Orange Juice and a Strip of Meat Jerky; Adoulin fame level 1; Vana'diel day 8000.
+# The Timer 8001 (a GM): no section: a trade of the drink: his script: nothing; a talk: his default 553. The Timer 8000
+# (a GM): 3005, finished on 0: begun (any option); available again, the Timer 7999 (GMs): 3005, finished on 2: begun.
+# Accepted, the section registered under Western Adoulin (user ruling 2026-11-04, kept Lua bugs: the Lua's has no zone
+# key and never registered, so it answered nothing): a talk: 3006; a trade of the orange juice (a drink): 3008,
+# finished: its confirmTrade takes nothing (the Lua's trade confirms no item); of the jerky: 3006; of the goblin drink:
+# 3007, finished: completed (fame 30, 500 bayld, 1000 exp), the drink taken (user ruling 2026-11-04: the Lua's 3007
+# has no confirmTrade), Always More Quoth the Ravenous' mustZone (Western Adoulin) and Timer (tomorrow) set. A talk:
+# 553.
+lists WesternAdoulin/Westerly_Breeze/onTrigger WesternAdoulin/Westerly_Breeze/onTrade WesternAdoulin/onEventFinish/3005
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+quest Adoulin.HungerStrikes completed
+item BottleOfGoblinDrink
+item BottleOfOrangeJuice
+item StripOfMeatJerky
+charvar Quest[9][84]Timer 8001
+login
+trade Westerly_Breeze BottleOfGoblinDrink x1 # available: no quest trade handler: his script: nothing
+finish-if-event
+trigger Westerly_Breeze                 # the Timer tomorrow: no section: default 553
+finish-if-event
+charvar Quest[9][84]Timer 8000          # a GM: today
+trigger Westerly_Breeze                 # available, the Timer today: 3005
+finish option=0                         # begun (any option)
+quest Adoulin.TheStarving available     # a GM
+charvar Quest[9][84]Timer 7999          # a GM: yesterday
+trigger Westerly_Breeze                 # available, the Timer passed: 3005
+finish option=2                         # begun
+trigger Westerly_Breeze                 # accepted: 3006 (an event)
+finish-if-event
+trade Westerly_Breeze BottleOfOrangeJuice x1 # a drink: 3008
+finish-if-event                         # nothing taken (no item confirmed)
+trade Westerly_Breeze StripOfMeatJerky x1 # not a drink: 3006
+finish-if-event
+trade Westerly_Breeze BottleOfGoblinDrink x1 # the goblin drink: 3007
+finish-if-event                         # completed; the drink taken; the next quest's mustZone and Timer
+trigger Westerly_Breeze                 # completed: 553
+finish-if-event

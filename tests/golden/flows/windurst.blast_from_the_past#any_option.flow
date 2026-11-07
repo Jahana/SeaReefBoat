@@ -1,0 +1,17 @@
+# Blast from the Past (windurst 11): the turn-in reads no Option (kept as the Lua file has it: Koru-Moru's trade tests
+# the stone alone). Accepted by GM at Option 1 with the Burnite Shell Stone: the stone alone with a full bag (224: the
+# club does not fit, nothing, the stone kept); Option 0 by GM: the stone alone (224: completed, fame 30, the Great Club,
+# Fossilized Sea Farer, the stone taken, Nothing Matters' mustZone 239). The main flow turns it in at Option 2.
+lists WindurstWalls/Koru-Moru/onTrade WindurstWalls/onEventFinish/224
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 lvl=75
+quest Windurst.BlastFromThePast accepted
+charvar Quest[2][11]Option 1
+item BurniteShellStone
+login
+fill-inventory
+trade Koru-Moru BurniteShellStone x1           # Option 1, the stone alone: 224
+finish                                         # full: quest:complete false: nothing, the stone kept
+free-inventory
+charvar Quest[2][11]Option 0                   # GM
+trade Koru-Moru BurniteShellStone x1           # Option 0, the stone alone: 224
+finish                                         # completed; the stone taken; Quest[2][79]mustZone 239

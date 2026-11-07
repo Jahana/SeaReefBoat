@@ -1,0 +1,24 @@
+# A Sentry's Peril (sandoria 0) at Aaveleon against The Pickpocket (C#), whose state 2 (available at Step 1, or accepted
+# without the Gilt Glasses) answers Aaveleon with the message PICKPOCKET_AAVELEON (Message priority). Available: a trade
+# to Aaveleon (no handler: nothing; section 2's 106 would play) and a talk (The Pickpocket's message). Accepted,
+# TradedAaveleon 0 (section 2 has no Aaveleon talk): The Pickpocket's message. TradedAaveleon 1 with the case:
+# AAVELEON_HEALED (a Message) ties with The Pickpocket's, so the lookup's action cycle plays one then the other; without
+# the case 126 (Progress) wins. Completed: AAVELEON_HEALED and The Pickpocket's message tie again.
+lists WestRonfaure/Aaveleon/onTrigger WestRonfaure/Aaveleon/onTrade WestRonfaure/onEventFinish/126
+char zone=WestRonfaure pos=-431.8,-45.9,342.3 job=WAR lvl=30
+quest Sandoria.ThePickpocket accepted
+item BoneChip
+login
+trade Aaveleon BoneChip x1                # A Sentry's Peril available: no handler; nothing
+trigger Aaveleon                          # available: The Pickpocket's PICKPOCKET_AAVELEON
+quest Sandoria.ASentrysPeril accepted
+trigger Aaveleon                          # TradedAaveleon 0: no quest talk; The Pickpocket's message
+charvar Quest[0][0]TradedAaveleon 1
+trigger Aaveleon                          # no case: 126 (Progress) over the message
+finish option=1                           # the Ointment Case
+trigger Aaveleon                          # the case: AAVELEON_HEALED and PICKPOCKET_AAVELEON tie: the cycle's first, AAVELEON_HEALED
+trigger Aaveleon                          # the cycle's second: PICKPOCKET_AAVELEON
+trigger Aaveleon                          # AAVELEON_HEALED again
+quest Sandoria.ASentrysPeril completed
+trigger Aaveleon                          # completed: the two messages tie: the cycle goes on, PICKPOCKET_AAVELEON
+trigger Aaveleon                          # AAVELEON_HEALED

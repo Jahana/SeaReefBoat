@@ -1,0 +1,84 @@
+# A Thief in Norg!? (outlands 142): a level 50 Samurai (AF3_QUEST_LEVEL 50), Yomi Okuri completed, as its 156 leaves it
+# (GMs: the mustZone 252, Timer now + 60). Available: Jaucribaix 157 (the mustZone); out of Norg and back: 157 (now <
+# Timer); a day on: 158, option 0: not begun; 158, option 1: begun, Prog 1. Jaucribaix 159. Port Jeuno: Sanosuke 304
+# (Prog 2), 305. Mhaura: Phoochuchu 301 (Prog 3), 303. Port Jeuno: Sanosuke 306. Bastok Mines: the door _6i8 186 (Prog
+# 4). Mhaura: Phoochuchu 302. Waughroon Shrine's zone-in at Prog 4: 2, answered by the warp: Prog 5. Norg: Jaucribaix
+# 166 (the Banishing Charm, Prog 6); 167 (the charm held). Waughroon Shrine: the charm traded to BC_Entrance: the 32000
+# menu, Thief in Norg (index 4) in area 1 (option 65): registered and entered, the charm kept; the three Gaki of area 1
+# killed: won (battlefieldWin 68), 32001: CHARM_DAMAGED, the Charred Helm, Prog 7. Norg: Jaucribaix 160 (Prog 8); 161; a
+# Spool of Gold Thread traded with the helm: 162 (the thread and the helm taken, Prog 9, the mustZone, Wait now + 60);
+# 163 (the mustZone); out and back: 163 (now < Wait); a day on: 164: completed (Myochin Kabuto, Paragon of Samurai
+# Excellence, fame); Jaucribaix again: 165 (replaceDefault).
+lists Norg/Jaucribaix/onTrigger Norg/Jaucribaix/onTrade PortJeuno/Sanosuke/onTrigger Mhaura/Phoochuchu/onTrigger BastokMines/_6i8/onTrigger WaughroonShrine/onZoneIn/1 WaughroonShrine/onEventFinish/32001
+char zone=Norg pos=91,-7,-8 job=SAM lvl=50
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+charvar Quest[5][142]mustZone 252
+charvar Quest[5][142]Timer 1800000060
+item SpoolOfGoldThread
+login
+trigger Jaucribaix                      # the mustZone set: 157
+finish
+warp -63,7,0 PortJeuno                  # out of Norg: the mustZone cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # now < Timer: 157
+finish
+wait jst=1                              # Timer passed
+trigger Jaucribaix                      # 158
+finish option=0                         # not begun
+trigger Jaucribaix                      # 158
+finish option=1                         # begun; Prog 1
+trigger Jaucribaix                      # Prog 1 (<= 4): 159
+finish
+warp -63,7,0 PortJeuno
+trigger Sanosuke                        # Prog 1: 304
+finish                                  # Prog 2
+trigger Sanosuke                        # Prog 2: 305
+finish
+warp -4,-4,69 Mhaura
+trigger Phoochuchu                      # Prog 2: 301
+finish                                  # Prog 3
+trigger Phoochuchu                      # Prog 3: 303
+finish
+warp -63,7,0 PortJeuno
+trigger Sanosuke                        # Prog 3 (>= 3): 306
+finish
+warp 70,7,2 BastokMines
+trigger _6i8                            # Prog 3: 186
+finish                                  # Prog 4
+warp -4,-4,69 Mhaura
+trigger Phoochuchu                      # Prog 4 (>= 4): 302
+finish
+warp -338.1,104.3,-260.3 WaughroonShrine   # the zone-in at Prog 4: 2, answered with option 0: Prog 5
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # Prog 5: 166
+finish                                  # the Banishing Charm; Prog 6
+trigger Jaucribaix                      # Prog 6, the charm held: 167
+finish
+warp -338.1,104.3,-260.3 WaughroonShrine   # by BC_Entrance; Prog 6: no zone-in event
+trade BC_Entrance BanishingCharm x1     # the battlefield's entry trade (Prog 6, the charm): the 32000 menu
+update 32000 option=65                  # Thief in Norg (index 4), area 1: registered, entered; the charm kept
+finish                                  # in the arena
+kill GAKI                               # area 1's three Gaki
+kill GAKI+1
+kill GAKI+2                             # all three dead: won (battlefieldWin 68); 32001 opens within the kill
+finish                                  # 32001, battlefieldWin 68: CHARM_DAMAGED; the Charred Helm; Prog 7
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # Prog 7: 160
+finish                                  # Prog 8
+trigger Jaucribaix                      # Prog 8: 161
+finish
+trade Jaucribaix SpoolOfGoldThread x1   # the helm held: 162
+finish                                  # the thread and the helm taken; Prog 9; the mustZone; Wait now + 60
+trigger Jaucribaix                      # Prog 9, the mustZone: 163
+finish
+warp -63,7,0 PortJeuno                  # the mustZone cleared
+warp 91,-7,-8 Norg
+trigger Jaucribaix                      # now < Wait: 163
+finish
+wait jst=1
+trigger Jaucribaix                      # 164
+finish                                  # completed: Myochin Kabuto, the title, fame
+trigger Jaucribaix                      # completed: 165 (replaceDefault)
+finish

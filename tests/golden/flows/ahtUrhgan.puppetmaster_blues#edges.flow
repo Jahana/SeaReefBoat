@@ -1,0 +1,38 @@
+# Puppetmaster Blues' edges: a level 75 Warrior, Operation Teatime completed (a GM): not a Puppetmaster: no section:
+# Iruki-Waraki answers No Strings Attached's YOU_LOST_YOUR_ANIMATOR (a Message, not an Event). The quest accepted (a
+# GM): Mount Zhayolm qm8 at Prog 0: nil; Nashmau Sajhra at Prog 0: nil: his script's 220. Talacca Cove with both key
+# items (GMs): entered, VALKENG killed, battlefieldWin cleared by a GM with 32001 open: finished: nothing (the key
+# items kept, Prog 0). Whitegate: Iruki-Waraki at Prog 6 (a GM): 786 (the else arm), finished with a full bag: the
+# Puppetry Taj does not fit: no completion; freed: 786: completed.
+lists AhtUrhganWhitegate/Iruki-Waraki/onTrigger MountZhayolm/qm8/onTrigger Nashmau/Sajhra/onTrigger TalaccaCove/onEventFinish/32001 AhtUrhganWhitegate/onEventFinish/786
+char zone=AhtUrhganWhitegate pos=101.329,-6,-29.042 job=WAR lvl=75
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.TheWaywardAutomaton completed
+quest AhtUrhgan.OperationTeatime completed
+login
+trigger Iruki-Waraki                    # not a PUP: no section: YOU_LOST_YOUR_ANIMATOR (a Message)
+finish-if-event
+quest AhtUrhgan.PuppetmasterBlues accepted   # a GM
+warp 760.798,-14.972,3 MountZhayolm
+trigger qm8                             # Prog 0: nil: nothing
+finish-if-event
+warp 14.83,0,-59.5 Nashmau
+trigger Sajhra                          # Prog 0: nil: 220
+finish
+keyitem ValkengsMemoryChip              # GMs
+keyitem ToggleSwitch
+warp -100,-9.399,-85 TalaccaCove
+trigger _1l0                            # the 32000 menu
+update 32000 option=33                  # area 1: registered, entered
+finish
+kill VALKENG                            # won: 32001 opens
+localvar battlefieldWin 0               # a GM, 32001 open
+finish                                  # battlefieldWin 0: nothing (the key items kept)
+warp 101.329,-6,-29.042 AhtUrhganWhitegate
+charvar Quest[6][29]Prog 6              # a GM
+fill-inventory
+trigger Iruki-Waraki                    # Prog 6: 786
+finish                                  # full: complete false: nothing more
+free-inventory
+trigger Iruki-Waraki                    # 786
+finish                                  # completed

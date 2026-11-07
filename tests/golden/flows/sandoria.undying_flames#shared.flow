@@ -1,0 +1,22 @@
+# Undying Flames (sandoria 26) at Pagisalis beside Enveloped in Darkness (C#, a container; its Pagisalis section while
+# accepted: Event 48, a trade only for the velvet). The container's Event and the script alternate: at fame level 1 the
+# script's call finds no quest arm (the script's own 564); accepted, the call's 565. Two lumps of beeswax: the container
+# has no action for them, so the script's call plays 563 (completed).
+char zone=NorthernSanDoria pos=136.6,6.5,131.7 job=WAR lvl=30
+item LumpOfBeeswax x2
+fame Sandoria 49
+quest Sandoria.EnvelopedInDarkness accepted
+login
+trigger Pagisalis                         # Enveloped in Darkness: 48
+finish
+trigger Pagisalis                         # the script: Undying Flames available, fame level 1: 564
+finish
+trigger Pagisalis                         # 48
+finish
+quest Sandoria.UndyingFlames accepted
+trigger Pagisalis                         # the script: 565
+finish
+trigger Pagisalis                         # 48
+finish
+trade Pagisalis LumpOfBeeswax x2          # the container has no action: the script's 563
+finish                                    # completed

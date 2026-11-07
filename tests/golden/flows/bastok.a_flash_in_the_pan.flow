@@ -1,0 +1,41 @@
+# A Flash in the Pan (bastok 14): Aquillina in Bastok Markets. No guard: the offer 217 (begins it), Four Flint Stones
+# traded (219: completed, 100 gil, fame +10, the stones taken, her local var tradeCooldown set to GetSystemTime() + 900).
+# During the cooldown her trigger is nil (her default 116) and any trade plays 218; after it, the completed side's trigger
+# is a plain 217 and the trade completes the quest again. A GM delQuest puts it back to available while the cooldown runs,
+# so the available side's cooldown arms and its 219 without a talk ("She does NOT care if you ever spoke to her") are
+# taken too. GetSystemTime follows the harness's JST clock, which `tick` does not move: `wait jst=1` ends the cooldown.
+# Defaults: Aquillina 116 (DefaultActions); she has no script and no other quest or mission.
+lists BastokMarkets/Aquillina/onTrigger BastokMarkets/Aquillina/onTrade BastokMarkets/onEventFinish/217 BastokMarkets/onEventFinish/218 BastokMarkets/onEventFinish/219
+warning: quests: bastok.a_flash_in_the_pan: one finish of 219 ran 2 handlers (1/-/onEventFinish:219, 2/-/onEventFinish:219) -- the Lua runs it twice too: its sections at A_Flash_in_the_Pan.lua:53 (available) and :91 (not available) at lua-at 767ba9b8 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match (since user ruling 2026-11-05, kept bugs, the second only clears the first's latch: paid once)
+char zone=BastokMarkets pos=-98.9,-4.8,-77.5
+item FlintStone x12
+item BoneChip
+login
+trade Aquillina BoneChip x1          # available, no cooldown, the wrong item: nil, nothing
+trade Aquillina FlintStone x3        # three stones: nil, nothing
+trigger Aquillina                    # available, no cooldown: 217
+finish                               # accepted
+trigger Aquillina                    # accepted, no cooldown: event 217
+finish                               # (217's finish is in the available section only: nothing)
+trade Aquillina FlintStone x4        # accepted: 219
+finish                               # completed: 100 gil, fame +10, four stones taken, the cooldown set
+trigger Aquillina                    # completed, the cooldown: nil, 116
+finish-if-event
+trade Aquillina BoneChip x1          # the cooldown: 218, whatever the trade
+finish
+quest Bastok.AFlashInThePan available
+trigger Aquillina                    # available, the cooldown: nil, 116
+finish-if-event
+trade Aquillina FlintStone x4        # available, the cooldown: 218
+finish
+wait jst=1                           # the cooldown over
+trade Aquillina FlintStone x4        # available, no talk: 219
+finish                               # completed from the available side, rewarded once: the completed section's 219 finish
+                                     # runs after the available one's and only clears its latch (user ruling 2026-11-05;
+                                     # the Lua paid twice: 200 gil, fame +20)
+trigger Aquillina                    # completed, the cooldown: nil, 116
+finish-if-event
+wait jst=1
+trigger Aquillina                    # completed, no cooldown: event 217
+finish                               # nothing
+trade Aquillina BoneChip x1          # completed, no cooldown, the wrong item: nil

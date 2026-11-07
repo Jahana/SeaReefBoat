@@ -1,0 +1,61 @@
+# Fire in the Hole (crystalWar 36): a level 99 Warrior in North Gustaberg [S] with Storm on the Horizon completed and
+# the WotG mission In the Name of the Father current (GMs; the other missions as group 1's flows; that mission's only
+# section is Southern San d'Oria [S]'s Lion Springs: it plays nothing here). Bastok Markets [S] from North Gustaberg
+# [S]: 60 (left open), finished: the quest's finish starts 77 (player:startEvent); 77 finished: begun, the Silvermine
+# Key. North Gustaberg [S] (from Bastok Markets [S] at Prog 0: nothing): Solitary Ant Prog 0 with the key: 7 (no
+# finish). Stonehoused Adit Prog 0 with the key: 5, finished: Prog 1 (the Adit's own onEventFinish runs too:
+# xi.instance.onEventFinish, nothing with no instance). Prog 0 again (a GM): 5 again (a Progress: the Adit has a
+# script, and an Event would give it the next turn), finished: Prog 1. Prog 1: nil, then the Adit's own script,
+# xi.instance.onTrigger: with the Mine Shaft Key held (a GM) instance 9300's registration requirement holds first and
+# it plays 3 (finished on option 0: no instance asked for). Without the Mine Shaft Key the script raises (9300 fails,
+# 9301 "Fire in the Hole" has no instance script: GetCachedInstanceScript gives nil, instance.lua:310 indexes it),
+# which the recorder refuses: no flow talks to the Adit without it. Solitary Ant Prog 1 with the key: 7 (no finish).
+# Nothing on Lua sets Prog 2 (the instance 9301 is not implemented): Prog 2 and the key taken (GMs): Solitary Ant 8,
+# finished: the key again, Prog 1. A warp into Ruhotz Silvermines with no instance puts the char back into the previous
+# zone at 0,0,0, its previous zone Ruhotz Silvermines (ZoneHost InstanceCharAttach, CZoneInstance::IncreaseZoneCounter's
+# way; the zone's onInstanceLoadFailed names no exit): so North Gustaberg [S] from Ruhotz Silvermines at Prog 1: nil;
+# Prog 3 (a GM: what Ruhotz Silvermines' 10000 finish does at Prog 2; that event is the instance's and is waived, see
+# `#edges`): 6 (left open), finished: Prog 4. Bastok Markets [S] from North Gustaberg [S]: 62 (left open), finished:
+# Prog 5. Gentle Tiger 63, finished: Prog 6; 65, finished: completed (a Republican Silver Medal, Mythril Musketeer
+# No. 6).
+lists BastokMarketsS/onZoneIn/1 BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/60 BastokMarketsS/onEventFinish/77 BastokMarketsS/onEventFinish/62 BastokMarketsS/onEventFinish/63 BastokMarketsS/onEventFinish/65 NorthGustabergS/onZoneIn/1 NorthGustabergS/Stonehoused_Adit/onTrigger NorthGustabergS/Solitary_Ant/onTrigger NorthGustabergS/onEventFinish/5 NorthGustabergS/onEventFinish/6 NorthGustabergS/onEventFinish/8
+char zone=NorthGustabergS pos=380.038,-2.25,147.627 job=WAR lvl=99
+quest CrystalWar.StormOnTheHorizon completed
+mission Wotg InTheNameOfTheFather current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+warp -202.432,-9.998,2.237 BastokMarketsS open # from North Gustaberg [S]: 60, left open
+finish                                  # its finish starts 77
+finish                                  # 77: begun; the Silvermine Key
+warp -433.155,36.708,279.983 NorthGustabergS # from Bastok Markets [S], accepted at Prog 0: no zone-in reply
+trigger Solitary_Ant                    # Prog 0, the key: 7
+finish                                  # no finish handler
+trigger Stonehoused_Adit                # Prog 0, the key: 5
+finish                                  # Prog 1
+charvar Quest[7][36]Prog 0              # a GM: a second 5 shows its kind (an Event would alternate with the script)
+trigger Stonehoused_Adit                # Prog 0, the key: 5 again (a Progress: the Adit's script gets no turn)
+finish                                  # Prog 1
+keyitem MineShaftKey                    # a GM: the Adit's script finds 9300 first (9301 has no script: it raises)
+trigger Stonehoused_Adit                # Prog 1: nil: the Adit's own script: 9300's registration, 3
+finish                                  # option 0: no instance asked for
+delkeyitem MineShaftKey                 # a GM
+warp 376.532,0.865,151.645 NorthGustabergS
+trigger Solitary_Ant                    # Prog 1, the key: 7
+finish                                  # no finish handler
+charvar Quest[7][36]Prog 2              # a GM: nothing on Lua sets Prog 2
+delkeyitem SilvermineKey                # a GM
+trigger Solitary_Ant                    # Prog 2, no key: 8
+finish                                  # its npc Solitary Ant: the key again; Prog 1
+warp 0,0,0 RuhotzSilvermines            # no instance: put back in North Gustaberg [S], from Ruhotz: Prog 1: nil
+charvar Quest[7][36]Prog 3              # a GM: what the instance's 10000 finish does at Prog 2
+warp 0,0,0 RuhotzSilvermines open       # no instance: back in North Gustaberg [S], from Ruhotz: Prog 3: 6, left open
+finish                                  # Prog 4
+warp -202.432,-9.998,2.237 BastokMarketsS open # from North Gustaberg [S] at Prog 4: 62, left open
+finish                                  # Prog 5
+trigger Gentle_Tiger                    # Prog 5: 63
+finish                                  # Prog 6
+trigger Gentle_Tiger                    # Prog 6: 65
+finish                                  # completed (Republican Silver Medal, Mythril Musketeer No. 6)

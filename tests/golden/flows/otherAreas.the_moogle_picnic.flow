@@ -1,0 +1,66 @@
+# The Moogle's Picnic! (otherAreas 101): the Moogle of Bastok Mines' Mog House (its script: xi.moghouse.moogleTrigger,
+# the Moogle menu; moogleTrade: nothing). A Bastok char (nation 1) with fame level 5 (325) and a bed placed 61 seconds
+# before the clock (bedPlacedTime 1799999939, a GM: no furniture step; the Mahogany Bed's onFurniturePlaced writes it).
+# Give a Moogle a Break completed (a header line). AMK 1 off (ENABLE_AMK 0: its 30023 ties at the Moogle: #kinds). Into
+# the Mog House: the zone's only line to itself (zmrg). Available: the lure and the butter traded: no quest trade: the
+# script's (nothing). The Moogle 30009 (0, 0, 0, 4, 0, Shrimp Lure, Stick of Selbina Butter), option 0: questSeen 1, not
+# begun. questSeen 0 (a GM): 30009 again at once (Progress: an Event would take the fallback turn, the menu first).
+# Again: questSeen 1: no section: the menu. Out of the zone and back (questSeen is a local var): 30009, option 1: begun.
+# Accepted, questSeen 1: nil: the menu. Out and back: Prog 0: 30010 (0, 0, 0, 0, 0, the lure, the butter), finished:
+# questSeen 1; questSeen 0 (a GM): 30010 again at once, finished: questSeen 1: nil: the menu. The lure and the butter
+# traded: 30011, finished: both taken, Prog 1, Timer now + 60; the two again (GMs), traded: 30011 again at once. Out and
+# back: Prog 1, the Timer ahead: nil: the menu. A day later (wait jst=1): 30012, finished: completed (Mog's
+# Exceptionally Kind Master), the Mog Safe and Mog Safe 2 + 10. Available, then accepted again with Prog 1 (GMs: a
+# status set back from completed keeps the completed bit, so available first): 30012 again at once, finished: completed
+# again (the safes + 10 again). Completed: no section: the menu.
+lists BastokMines/Moogle/onTrigger BastokMines/Moogle/onTrade BastokMines/onEventFinish/30009 BastokMines/onEventFinish/30010 BastokMines/onEventFinish/30011 BastokMines/onEventFinish/30012
+char zone=BastokMines pos=116.9,-1.6,-72 job=WAR lvl=75 nation=1
+setting ENABLE_AMK 0                    # AMK 1 (30023 at the Moogle) off: #kinds shows it
+quest OtherAreas.GiveAMoogleABreak completed
+fame Bastok 325
+charvar Quest[4][101]bedPlacedTime 1799999939
+item ShrimpLure
+item StickOfSelbinaButter
+login
+zoneline BastokMines                    # into the Mog House (zmrg: the zone's only line to itself)
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # available: no quest trade; the script's moogleTrade: nothing
+trigger Moogle                          # available: 30009
+finish option=0                         # questSeen 1; not begun
+localvar Quest[4][101]questSeen 0       # a GM
+trigger Moogle                          # 30009 again at once (Progress: no fallback turn)
+finish option=0                         # questSeen 1; not begun
+trigger Moogle                          # questSeen 1: section 1 off: the Moogle menu
+warp -6,0,-50 BastokMarkets             # out (the local questSeen cleared)
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines                    # back in
+trigger Moogle                          # 30009
+finish option=1                         # questSeen 1; begun
+trigger Moogle                          # accepted, questSeen 1: nil; the menu
+warp -6,0,-50 BastokMarkets
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+trigger Moogle                          # Prog 0: 30010
+finish                                  # questSeen 1
+localvar Quest[4][101]questSeen 0       # a GM
+trigger Moogle                          # 30010 again at once (Progress: no fallback turn)
+finish                                  # questSeen 1
+trigger Moogle                          # questSeen 1: nil; the menu
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # both taken; Prog 1; Timer now + 60
+item ShrimpLure                         # a GM
+item StickOfSelbinaButter               # a GM
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011 again at once (Progress: no fallback turn)
+finish                                  # both taken; Prog 1; Timer now + 60
+warp -6,0,-50 BastokMarkets
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+trigger Moogle                          # Prog 1, Timer ahead: nil; the menu
+wait jst=1                              # the Timer passed (GetSystemTime moves by days only)
+trigger Moogle                          # Timer < now: 30012
+finish                                  # completed; Mog's Exceptionally Kind Master; Mog Safe and Mog Safe 2 + 10
+quest OtherAreas.TheMooglePicnic available # a GM: the completed bit cleared
+quest OtherAreas.TheMooglePicnic accepted # a GM: accepted again
+charvar Quest[4][101]Prog 1             # a GM (the Timer cleared: 0 < now)
+trigger Moogle                          # 30012 again at once (Progress: no fallback turn)
+finish                                  # completed again; the safes + 10 again
+trigger Moogle                          # completed: no section (Wild: fame 5 < 7); the menu

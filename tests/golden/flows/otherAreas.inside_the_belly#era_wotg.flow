@@ -1,0 +1,42 @@
+# Inside the Belly (otherAreas 26) with its era module: modules/era/lua/quests/otherareas/inside_the_belly.lua, enabled by
+# xi.pre(WOTG) (RESTRICT_CONTENT 1, ENABLE_WOTG 0; the other three expansions on): the 2009-2010 batch blocked, and
+# Zaldon's trigger replaced by the stock hint lists in sections 2 and 3.
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# Accepted (a GM), skill 40: the module's 163 (Zafmlug Bass, Giant Donko, Bhefhel Marlin, Jungle Catfish, Silver Shark;
+# the quest's own has the Bladefish where this has the Jungle Catfish). An Ahtapot (in the batch) and a Mola Mola (its
+# last): the wrap returns nothing: no reply (Zaldon's default is a trigger's, though the module's comment says his default
+# plays), the fish kept, not completed. A Grimmonite (the 2010 Abyssea batch, on): the quest's own trade: 166 or 167;
+# a GM completes the quest before the finish (the accepted section's finish is the #accepted flow's), so the
+# completed section's finish plays: 350 gil. Completed: the Ahtapot again: nothing, kept; skill 75:
+# the module's 165 (eight fish, Ryugu Titan, Lik and Gugrusaurus at the end); skill 39: 162 (the same list as the
+# quest's); skill 50: the module's 164 (`<= 50` would play 163).
+module modules/era/lua/quests/otherareas/inside_the_belly.lua
+lists Selbina/Zaldon/onTrigger Selbina/Zaldon/onTrade Selbina/onEventFinish/166 Selbina/onEventFinish/167
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+setting RESTRICT_CONTENT 1
+setting ENABLE_WOTG 0
+quest OtherAreas.InsideTheBelly accepted
+skill Fishing 400
+item Ahtapot
+item MolaMola
+item Grimmonite
+login
+trigger Zaldon                          # the module's 163 (the stock tier-2 list)
+finish
+trade Zaldon Ahtapot x1                 # blocked: nothing (no default on a trade); the fish kept
+trade Zaldon MolaMola x1                # blocked: nothing; kept
+trade Zaldon Grimmonite x1              # not blocked: roll <= 50 / 100 / 150: 166 (a ring), else 167
+quest OtherAreas.InsideTheBelly completed # a GM (see the #accepted flow)
+finish                                  # the completed section's: 350 gil (a ring on a 166)
+trade Zaldon Ahtapot x1                 # completed: blocked too: nothing; kept
+skill Fishing 750
+trigger Zaldon                          # the module's 165
+finish
+skill Fishing 399
+trigger Zaldon                          # 162
+finish
+skill Fishing 500
+trigger Zaldon                          # the module's 164 (`<= 50`: 163)
+finish

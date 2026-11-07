@@ -1,0 +1,31 @@
+# Perils of the Griffon (crystalWar 37), the edges: a level 99 Warrior in Southern San d'Oria [S] with Wrath of the
+# Griffon completed and Purple, the New Black not (missions as the main flow). Rholont: no section (32). The mission
+# completed (a GM): Daigraffeaux at Prog 0: nil (620). Prog 3 (a GM): Rholont 632, finished on option 1: begun (any
+# option). The body (a GM) and a full inventory: Rholont 633, finished: the Elixir does not fit: not completed; freed:
+# 633: completed.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Daigraffeaux/onTrigger SouthernSanDoriaS/onEventFinish/632 SouthernSanDoriaS/onEventFinish/633
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.WrathOfTheGriffon completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # Purple, the New Black not completed: no section (32)
+finish-if-event
+mission Wotg PurpleTheNewBlack current # a GM
+mission Wotg PurpleTheNewBlack completed # a GM
+walk -6.157,1.999,-89.209
+trigger Daigraffeaux                    # Prog 0: nil (620)
+finish-if-event
+charvar Quest[7][37]Prog 3              # a GM
+walk -167.043,-2,55.484
+trigger Rholont                         # Prog 3: 632
+finish option=1                         # begun (any option)
+keyitem OrcishWarmachineBody            # a GM
+fill-inventory
+trigger Rholont                         # the body: 633
+finish                                  # no room: not completed
+free-inventory
+trigger Rholont                         # 633
+finish                                  # completed

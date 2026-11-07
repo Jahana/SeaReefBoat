@@ -1,0 +1,98 @@
+# Beginnings' edges: the offer's operands, each false alone, and the accepted arms the main flow leaves. bob: no
+# Immortal Sentries: not offered: An Empty Vessel's 78; then accepted by a GM with 500 gil: 706 (500), option 1: under
+# 1000 gil: nothing. carl: An Empty Vessel not completed: not offered: An Empty Vessel's own available 60 (level 40 >=
+# 30); its mustZone (a GM): An Empty Vessel's 63 (an Event: an offered 705 would beat it). dan: a Thief (neither Blue
+# Mage nor Warrior): not offered: 78; accepted by a GM: a Thief: no section 2: 78; Meyaada: no section: her script
+# 4 (a fresh char's ToAU mission is not at or past President Salaheem). ed: a level 39 Blue Mage: not offered: 78, also
+# at AF1_QUEST_LEVEL 39.4 (the setting read as a number). fred: An Empty Vessel's completeEvent 1: not offered: An
+# Empty Vessel's 69, twice (an offered 705 would tie and rotate in). Main: accepted (a GM) with the five brands (GMs): each brand taken alone (a GM): 706; a full bag:
+# 707's quest:complete false (the scimitar does not fit): nothing, still accepted; room again: 707: completed.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/onEventFinish/706 AhtUrhganWhitegate/onEventFinish/707 ArrapagoReef/Meyaada/onTrigger
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=40 gil=5000
+char bob zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=40 gil=500
+char carl zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=40 gil=5000
+char dan zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=THF lvl=40 gil=5000
+char ed zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=39 gil=5000
+char fred zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=40 gil=5000
+mission Toau ImmortalSentries completed
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings accepted
+keyitem BrandOfTheSpringserpent
+keyitem BrandOfTheGaleserpent
+keyitem BrandOfTheFlameserpent
+keyitem BrandOfTheSkyserpent
+keyitem BrandOfTheStoneserpent
+bob: quest AhtUrhgan.AnEmptyVessel completed
+carl: mission Toau ImmortalSentries completed
+dan: mission Toau ImmortalSentries completed
+dan: quest AhtUrhgan.AnEmptyVessel completed
+ed: mission Toau ImmortalSentries completed
+ed: quest AhtUrhgan.AnEmptyVessel completed
+fred: mission Toau ImmortalSentries completed
+fred: quest AhtUrhgan.AnEmptyVessel completed
+fred: charvar Quest[6][5]completeEvent 1
+login
+bob: login
+bob: trigger Waoud                      # no Immortal Sentries: not offered: An Empty Vessel's 78 (500)
+bob: finish option=0
+bob: quest AhtUrhgan.Beginnings accepted   # a GM
+bob: trigger Waoud                      # accepted, no brands: 706 (500)
+bob: finish option=1                    # under 1000 gil: nothing
+bob: logout
+carl: login
+carl: trigger Waoud                     # An Empty Vessel not completed: its own 60 (5000)
+carl: finish option=0
+carl: charvar Quest[6][5]mustZone 50    # a GM
+carl: trigger Waoud                     # An Empty Vessel's mustZone: its 63 (Event)
+carl: finish
+carl: logout
+dan: login
+dan: trigger Waoud                      # a Thief: not offered: 78
+dan: finish option=0
+dan: quest AhtUrhgan.Beginnings accepted   # a GM
+dan: trigger Waoud                      # accepted, a Thief: no section: 78
+dan: finish option=0
+dan: warp 23.946,-7.92,573.39 ArrapagoReef
+dan: trigger Meyaada                    # no section: her script's 4 (no ToAU mission at or past President Salaheem)
+dan: finish-if-event
+dan: logout
+ed: login
+ed: trigger Waoud                       # level 39: not offered: 78
+ed: finish option=0
+setting AF1_QUEST_LEVEL 39.4
+ed: trigger Waoud                       # 39 < 39.4 (the setting read as a number): not offered: 78
+ed: finish option=0
+setting AF1_QUEST_LEVEL 40
+ed: logout
+fred: login
+fred: trigger Waoud                     # completeEvent 1: not offered: An Empty Vessel's 69
+fred: finish option=0
+fred: trigger Waoud                     # 69 again
+fred: finish option=0
+fred: logout
+delkeyitem BrandOfTheSpringserpent      # a GM: four brands
+trigger Waoud                           # one brand missing: 706 (5000)
+finish option=0
+keyitem BrandOfTheSpringserpent         # a GM: the five again
+delkeyitem BrandOfTheGaleserpent        # a GM: four brands
+trigger Waoud                           # one brand missing: 706 (5000)
+finish option=0
+keyitem BrandOfTheGaleserpent           # a GM: the five again
+delkeyitem BrandOfTheFlameserpent       # a GM: four brands
+trigger Waoud                           # one brand missing: 706 (5000)
+finish option=0
+keyitem BrandOfTheFlameserpent          # a GM: the five again
+delkeyitem BrandOfTheSkyserpent         # a GM: four brands
+trigger Waoud                           # one brand missing: 706 (5000)
+finish option=0
+keyitem BrandOfTheSkyserpent            # a GM: the five again
+delkeyitem BrandOfTheStoneserpent       # a GM: four brands
+trigger Waoud                           # one brand missing: 706 (5000)
+finish option=0
+keyitem BrandOfTheStoneserpent          # a GM: the five again
+fill-inventory
+trigger Waoud                           # the five brands: 707
+finish                                  # the scimitar does not fit: quest:complete false: nothing
+free-inventory
+trigger Waoud                           # still accepted: 707
+finish                                  # completed; Omens' mustZone and Timer

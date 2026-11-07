@@ -1,0 +1,14 @@
+# Your Crystal Ball (jeuno 9) with its era module, GM-set accepted at Prog 0 with Wait far in the future (charvar
+# 1900000000, above both now + 60 and JstMidnight()): the quest's lens trade writes Wait = now + 60, a value LOWER than
+# before, so the module's getVar(Wait) ~= previousWait is true (a > would be false) and Wait becomes JstMidnight()
+# (1800025200).
+module modules/era/lua/quests/jeuno/your_crystal_ball.lua
+lists MazeOfShakhrami/Rockwell/onTrade
+char zone=MazeOfShakhrami pos=-18,-14,181.5 job=WAR lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.YourCrystalBall accepted
+charvar Quest[3][9]Wait 1900000000
+item AhrimanLens
+login
+trade Rockwell AhrimanLens x1               # Prog 0: the lens taken, Prog 1; Wait 1900000000 -> now + 60 -> JstMidnight()

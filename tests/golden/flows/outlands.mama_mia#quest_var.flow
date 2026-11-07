@@ -1,0 +1,14 @@
+# Mama Mia (outlands 131), the quest's own var at the completion: accepted, all seven items given (tradesMamaMia 127),
+# MamaMia_date at GetSystemTime() and Quest[5][131]Prog 1 (GMs). Mamaulabion: 197; finished: the Evoker's Ring,
+# ITEM_OBTAINED, Norg fame +40, the raw player:completeQuest, tradesMamaMia 0. The raw completeQuest does no cleanup:
+# Quest[5][131]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=Norg pos=-55.9,-9.4,68.7 job=SMN lvl=75
+quest Outlands.MamaMia accepted
+charvar tradesMamaMia 127
+charvar MamaMia_date 1800000000
+charvar Quest[5][131]Prog 1             # a GM: the quest's own var
+login
+trigger Mamaulabion                     # not before the date: 197
+finish                                  # the Evoker's Ring; fame +40; completed, Prog kept; tradesMamaMia 0
+trigger Mamaulabion                     # completed, the ring held: 198
+finish

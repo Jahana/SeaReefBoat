@@ -1,0 +1,47 @@
+# Shoot First, Ask Questions Later (bastok 67): Cid in Metalworks, qm1 in the Boyahda Tree. The natural path, with the gun of Trials already held
+# at 300 weapon skill points (item wsp=300): the trades while only available (a bone chip, the gun: no handler), the
+# offer's skill threshold (Marksmanship 2499, under 250 a level: not offered; 2500: 795), 795's finish with the gun held (no
+# second gun: the Weapon Training Guide alone, begun), 796 with the gun held (hide 1), the trades while accepted (a
+# bone chip: nil; the gun at 300 points: 798, whose finish takes it and gives the Map to the Annals of Truth), 796
+# with the map and no gun (hide 1) and its option 1 (a new gun, 0 points), the trade of that gun (797, no finish
+# handler), the qm1's pop of the Beet Leafhopper, the kill, the Annals of Truth and 799 (Detonator). Completed: no section, the default
+# and no trade handler. #offer takes the offer without the gun (a full inventory, oncePerZone, the rezone), #offer_job
+# and #offer_guide the guard's other sides, #abandon 796 with hide 0 and option 2, #gm_nomap the qm1 with no map and
+# the Beet Leafhopper's death without the map.
+# Cid also answers Cid's Secret (fame level 4), Chips (accepted), DRK AF2 (a DRK), Bastok mission 7-1 and the CoP
+# missions; fame 0 and the job keep them silent. His default is 500.
+# qm1 has no script; its default is NOTHING_OUT_OF_ORDINARY.
+lists Metalworks/Cid/onTrigger Metalworks/Cid/onTrade Metalworks/onEventFinish/795 Metalworks/onEventFinish/796 Metalworks/onEventFinish/798 Metalworks/onEventFinish/799 TheBoyahdaTree/qm1/onTrigger
+char zone=Metalworks pos=-12,-12,1 job=RNG lvl=75
+skill Marksmanship 2499
+item BoneChip
+item GunOfTrials wsp=300
+login
+trade Cid BoneChip x1          # available: no trade handler in section 1, nothing
+trade Cid GunOfTrials x1    # available: nothing, the gun kept
+trigger Cid                    # Marksmanship 2499 (getCharSkillLevel / 10 is below 250): not offered, the default 500
+finish
+skill Marksmanship 2500
+trigger Cid                    # can equip, Marksmanship 2500, no guide: 795 (oncePerZone)
+finish                         # the gun held: no second gun, the Weapon Training Guide, accepted
+trigger Cid                    # accepted, no Annals, the gun held: 796 with hide 1
+finish option=0                # option 0: nothing
+trade Cid BoneChip x1          # not the gun: nil, nothing
+trade Cid GunOfTrials x1    # 300 weapon skill points: 798
+finish                         # the gun taken, the Map to the Annals of Truth
+trigger Cid                    # the map, no gun: 796 with hide 1
+finish option=1                # option 1, no gun: a new gun (0 points)
+trade Cid GunOfTrials x1    # 0 weapon skill points: 797
+finish                         # 797 has no finish handler: the gun kept
+warp -11,-19,-177 TheBoyahdaTree
+trigger qm1                    # the map, no Annals: the Beet Leafhopper popped and claimed, SENSE_OMINOUS_PRESENCE
+trigger qm1                    # the Beet Leafhopper up: popFromQM false, nil: NOTHING_OUT_OF_ORDINARY
+kill BEET_LEAFHOPPER             # the map held: killed_wsnm 1
+trigger qm1                    # killed_wsnm 1: back to 0, the key item Annals of Truth
+trigger qm1                    # the Annals held, killed_wsnm 0: nil, NOTHING_OUT_OF_ORDINARY
+warp -12,-12,1 Metalworks
+trigger Cid                    # the Annals: 799
+finish                         # completed: fame +20, the guide, map and Annals deleted, Detonator learned, DETONATOR_LEARNED
+trigger Cid                    # completed: no section, 500
+finish
+trade Cid GunOfTrials x1    # completed: no trade handler, nothing

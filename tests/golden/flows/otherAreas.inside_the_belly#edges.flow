@@ -1,0 +1,63 @@
+# Inside the Belly (otherAreas 26): the checks and the tier edges.
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# The Real Gift accepted (a GM), skill 30: no section: Zaldon's 150 (default). The Real Gift completed, skill 29 (299
+# stored): no section; 30 (300): 161, begun. Accepted at skill 29: no section (the accepted check reads the skill): 150; a
+# fish: nothing, the fish kept. Tier edges (total skill = stored / 10, floored): 39 (399): 162; 40 (400): 163; 49 (499):
+# 163; 50 (500): 164; 74 (749): 164; 75 (750): 165. Completed (a GM) at skill 0: the completed section reads no skill:
+# 162. Each section's FISHING_ENABLE side: the setting off as a step (a GM's assignment), Zaldon's 150.
+lists Selbina/Zaldon/onTrigger Selbina/Zaldon/onTrade Selbina/onEventFinish/161
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.UnderTheSea completed
+quest OtherAreas.TheSandCharm completed
+quest OtherAreas.TheRealGift accepted
+skill Fishing 300
+item ZafmlugBass
+login
+trigger Zaldon                          # The Real Gift accepted: no section: 150
+finish
+quest OtherAreas.TheRealGift completed  # a GM
+skill Fishing 299                       # a GM: 29
+trigger Zaldon                          # 29 < 30: no section: 150
+finish
+skill Fishing 300                       # 30
+setting map.FISHING_ENABLE false        # a step: the available check's FISHING_ENABLE side
+trigger Zaldon                          # fishing off: no section: 150
+finish
+setting map.FISHING_ENABLE true
+trigger Zaldon                          # 161
+finish                                  # begun
+setting map.FISHING_ENABLE false        # the accepted check's FISHING_ENABLE side
+trigger Zaldon                          # accepted, skill 30, fishing off: no section: 150
+finish
+setting map.FISHING_ENABLE true
+skill Fishing 299                       # 29
+trigger Zaldon                          # accepted, 29: no section: 150
+finish
+trade Zaldon ZafmlugBass x1             # no section: nothing; the bass kept
+skill Fishing 399
+trigger Zaldon                          # 39: 162
+finish
+skill Fishing 400
+trigger Zaldon                          # 40: 163 (the tier-2 list)
+finish
+skill Fishing 499
+trigger Zaldon                          # 49: 163
+finish
+skill Fishing 500
+trigger Zaldon                          # 50: 164 (the tier-3 list)
+finish
+skill Fishing 749
+trigger Zaldon                          # 74: 164
+finish
+skill Fishing 750
+trigger Zaldon                          # 75: 165 (the tier-4 list)
+finish
+quest OtherAreas.InsideTheBelly completed # a GM
+skill Fishing 0
+trigger Zaldon                          # completed, skill 0: 162
+finish
+setting map.FISHING_ENABLE false        # the completed check's FISHING_ENABLE side
+trigger Zaldon                          # completed, fishing off: no section: 150
+finish

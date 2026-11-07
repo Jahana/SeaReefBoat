@@ -1,0 +1,13 @@
+# Community Service (jeuno 15) with a GM's Prog of -1: the one section's check (vars.Prog >= 0) is false, so the quest
+# has no section. Zauko plays his default 118 and the quest's 118 finish does not run (no Wait written); at 18:00 no
+# 116 is offered (the default 118 again); a lamp (no script, no default) plays nothing.
+lists LowerJeuno/Zauko/onTrigger LowerJeuno/_l00/onTrigger LowerJeuno/onEventFinish/118
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+charvar Quest[3][15]Prog -1
+login
+trigger Zauko                           # no section: his default 118
+finish                                  # the quest's 118 finish does not run: no Wait
+trigger _l00                            # no section: nothing
+wait vana=6                             # 18:00
+trigger Zauko                           # no section, no 116: his default 118
+finish                                  # no Wait

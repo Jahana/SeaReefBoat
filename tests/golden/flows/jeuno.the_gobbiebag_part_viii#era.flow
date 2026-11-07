@@ -1,0 +1,47 @@
+# The Gobbiebag Part VIII (jeuno 94) with its era module (quest rework B3b Jeuno, P4):
+# modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua, enabled by xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1,
+# ENABLE_SOA 0), raises the part's fame level to 7 (states 1 and 2's checks replaced) and adds state 3 (available, the
+# start size, the previous part, fame below 7: 42 with the inventory + 1). The inventory at 65 (storage, after a first
+# talk at 30: no state 3, 43 (81)), Parts I-VII completed (the chain's earlier parts, by a GM). Fame level 6 (975 / 2 =
+# 487): state 3's 42 (66); Part VII set accepted (a GM): no section (43 (81)); completed again; fame level 7 (976, a
+# GM): 43 (66, 0, 1), begun; accepted at fame level 6: the module's state 2 check fails: no section, a trade: nothing;
+# at 7: the four items: 73 (71), completed. A GM sets a part available before accepted (accepted over completed keeps it
+# completed).
+module modules/era/lua/quests/jeuno/the_gobbiebag_part_1_to_10.lua
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/Bluffnix/onTrade LowerJeuno/onEventFinish/43 LowerJeuno/onEventFinish/73
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+fame Sandoria 975
+quest Jeuno.TheGobbiebagPartI completed
+quest Jeuno.TheGobbiebagPartIi completed
+quest Jeuno.TheGobbiebagPartIii completed
+quest Jeuno.TheGobbiebagPartIv completed
+quest Jeuno.TheGobbiebagPartV completed
+quest Jeuno.TheGobbiebagPartVi completed
+quest Jeuno.TheGobbiebagPartVii completed
+item SquareOfSmilodonLeather
+item ElectrumIngot
+item SquareOfCilice
+item Angelstone
+login
+trigger Bluffnix                        # available, fame below the era level, the inventory 30, not 65: no state 3; 43 (81)
+finish
+storage inventory 65                    # a GM: the part's start size
+trigger Bluffnix                        # fame level 6, below the era level: state 3: 42 (66)
+finish
+quest Jeuno.TheGobbiebagPartVii available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartVii accepted # a GM
+trigger Bluffnix                        # state 3: the previous part not completed: no section; 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartVii completed # a GM
+fame Sandoria 976                       # a GM: fame level 7
+trigger Bluffnix                        # the module's state 1 check: 43 (66, 0, 1)
+finish option=0                         # begun
+fame Sandoria 975                       # a GM: fame level 6
+trigger Bluffnix                        # accepted, the module's state 2 check fails: no section; 43 (81)
+finish
+trade Bluffnix SquareOfSmilodonLeather x1 ElectrumIngot x1 SquareOfCilice x1 Angelstone x1 # no section: nothing
+fame Sandoria 976                       # a GM
+trade Bluffnix SquareOfSmilodonLeather x1 ElectrumIngot x1 SquareOfCilice x1 Angelstone x1 # the module's state 2 check: 73 (71)
+finish                                  # completed; inventory 70; INVENTORY_INCREASED

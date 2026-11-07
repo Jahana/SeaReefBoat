@@ -1,0 +1,19 @@
+# BORGHERTZS_CALLING_HANDS (jeuno 58): the two optional coffers' sections (status not available, main job SMN, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 SMN: TempleOfUggalepih's Treasure Coffer opens to
+# EvokersDoublet (the item bypass; the result is the item): [AF]ZilartCoffer +536870912 (bit 29); ToraimaraiCanal's to
+# EvokersPigaches: +1073741824 (bit 30).
+lists TempleOfUggalepih/Treasure_Coffer/onTrade ToraimaraiCanal/Treasure_Coffer/onTrade
+char zone=TempleOfUggalepih pos=219.7,-8.1,205.8 job=SMN lvl=75
+quest Jeuno.BorghertzsCallingHands accepted
+item UggalepihCofferKey
+item ToraimariCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer UggalepihCofferKey x1 # bit 29 unset: EvokersDoublet; [AF]ZilartCoffer 536870912
+tick 4500                               # the coffer opened
+warp -257.5,24.0,82.0 ToraimaraiCanal
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer ToraimariCofferKey x1 # bit 30 unset: EvokersPigaches; [AF]ZilartCoffer 1610612736
+tick 4500                               # the coffer opened

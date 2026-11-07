@@ -1,0 +1,23 @@
+# Boy and the Beast (crystalWar 24) against the WotG mission The Will of the World (id 24, its Raustigne event 149):
+# a level 99 Warrior in Southern San d'Oria [S] with Claws of the Griffon and the WotG mission Back to the Beginning
+# completed (so the quest is available) and The Will of the World current (GMs; the other missions as the main
+# flow). Raustigne: the quest's 55 and the mission's 149 are both Progress replies: they tie: the first tie takes
+# container order, and the rotation var, written only once two or more replies tie, plays the other on the next.
+# Finished: that event's result (149 completes the mission). The mission set current again (a GM) and a second talk:
+# the other one. The mission is not outranked by the quest.
+lists SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/55 VunkerlInletS/qm7/onTrigger VunkerlInletS/Leafy_Patch/onTrigger VunkerlInletS/onEventFinish/108
+char zone=SouthernSanDoriaS pos=5.479,-1.999,44.456 job=WAR lvl=99
+quest CrystalWar.ClawsOfTheGriffon completed
+mission Wotg BackToTheBeginning completed
+mission Wotg TheWillOfTheWorld current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Raustigne                       # the quest (55) and the mission (149) tie
+finish                                  # that event's result
+mission Wotg FateInHaze completed       # a GM: the next mission (current after the finish) cleared
+mission Wotg TheWillOfTheWorld current  # a GM: the mission answers again
+trigger Raustigne                       # the other one of the pair
+finish

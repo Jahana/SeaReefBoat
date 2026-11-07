@@ -1,0 +1,66 @@
+# The Trader in the Forest (sandoria 7): Abeaule in Northern San d'Oria, Phairet in West Ronfaure. A trade while
+# available (nothing); 524 with option 0 and a full inventory (no order: Prog 1, the kept quirk); 592 declined (nothing),
+# with option 0 and a full inventory (nothing), taken (a Supplies Order, begun, Prog 0); Abeaule's 593 (option 0:
+# nothing; option 1 with the order held: it is rare, giveItem fails; option 1 at Prog 2 with no order: a new order);
+# a wrong trade to Abeaule (nil). Phairet at Prog 0:
+# trigger (nil: his default 117), a bone chip (nil), 50 gil with a full inventory (giveItem fails: nil, nothing taken),
+# 50 gil (a Clump of Batagreens at once, no event, the gil taken), the order with a full inventory (124: no clump, the
+# order kept), the order (124: a clump, the order taken, Prog 2), trigger at Prog 2 (127), a bone chip at Prog 2 (125).
+# Abeaule: two clumps (not exactly one: nil), one clump (525: completed, Robe, fame +20, Green Grocer; the clump taken),
+# then (completed, fame 20: The Medicine Woman needs fame level 3) his default ABEAULE_DIALOG_THANKS. Phairet once
+# completed: 127; a bone chip: 125; the order from 593: 124 (a clump, no Prog: not accepted).
+# Abeaule has no script; The Medicine Woman also names him. Phairet has no script; no other quest names him.
+lists NorthernSanDoria/Abeaule/onTrigger NorthernSanDoria/Abeaule/onTrade NorthernSanDoria/onEventFinish/524 NorthernSanDoria/onEventFinish/592 NorthernSanDoria/onEventFinish/593 NorthernSanDoria/onEventFinish/525 WestRonfaure/Phairet/onTrigger WestRonfaure/Phairet/onTrade WestRonfaure/onEventFinish/124
+char zone=NorthernSanDoria pos=-136.9,-2.2,55.2 gil=1000
+item BoneChip
+login
+trade Abeaule BoneChip x1                 # available: no trade handler, nothing
+trigger Abeaule                           # Prog 0: 524
+fill-inventory
+finish                                    # option 0, no room: the order not given; else side: Prog 1
+free-inventory
+trigger Abeaule                           # Prog 1: 592
+finish option=1                           # not option 0: nothing
+trigger Abeaule                           # 592
+fill-inventory
+finish                                    # option 0, no room: nothing
+free-inventory
+trigger Abeaule                           # 592
+finish                                    # option 0: a Supplies Order, begun, Prog 0
+trigger Abeaule                           # accepted: 593
+finish                                    # option 0: nothing
+trigger Abeaule                           # 593
+finish option=1                           # option 1, the order held (rare): ITEM_CANNOT_BE_OBTAINED, nothing
+trade Abeaule BoneChip x1                 # not the batagreens: nil
+warp -56.9,-2,-503 WestRonfaure
+trigger Phairet                           # accepted, Prog 0: nil, his default 117
+finish
+trade Phairet BoneChip x1                 # not the order, no gil, Prog 0: nil, nothing
+fill-inventory
+trade Phairet gil=50                      # 50 gil, no room: giveItem false; Prog 0: nil, the gil kept
+free-inventory
+trade Phairet gil=50                      # 50 gil: a Clump of Batagreens, the gil taken, no event
+fill-inventory
+trade Phairet SuppliesOrder x1            # exactly the order: 124
+finish                                    # no room: no clump, the order kept
+free-inventory
+trade Phairet SuppliesOrder x1            # 124
+finish                                    # a Clump of Batagreens, the order taken, accepted: Prog 2
+trigger Phairet                           # Prog 2: 127 (the batagreens)
+finish
+trade Phairet BoneChip x1                 # Prog 2: 125
+finish
+warp -136.9,-2.2,55.2 NorthernSanDoria
+trigger Abeaule                           # accepted, Prog 2, the order taken by Phairet: 593
+finish option=1                           # option 1, no order held: giveItem succeeds, a new Supplies Order
+trade Abeaule ClumpOfBatagreens x2        # two: not exactly one, nil
+trade Abeaule ClumpOfBatagreens x1        # one: 525
+finish                                    # completed: Robe, fame +20, Green Grocer; one clump taken
+trigger Abeaule                           # completed, fame 20 (The Medicine Woman needs level 3): ABEAULE_DIALOG_THANKS
+warp -56.9,-2,-503 WestRonfaure
+trigger Phairet                           # completed: 127
+finish
+trade Phairet BoneChip x1                 # completed: 125
+finish
+trade Phairet SuppliesOrder x1            # completed, the order from 593: 124
+finish                                    # a clump, the order taken; not accepted: Prog untouched

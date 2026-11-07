@@ -1,0 +1,74 @@
+# The Lost Book (crystalWar 26), the edges: two Warriors in Windurst Waters [S] (missions as the main flow). Main, level
+# 30 with a Mythril Beastcoin and a Sheet of Vellum but no Bronze Ribbon of Service: the Rhinostery door: nil; the
+# Optistery door: the vellum: nil. Giddeus while available: Quu Bokye: the beastcoin: nil; a talk: his default 56. The
+# ribbon (a GM): the Rhinostery door 143, finished with option 1: begun (any option), Prog 1. Bob, level 29 with the
+# ribbon: nil. Main at Prog 1: the Optistery door: nil; Quu Bokye: the vellum: nil. Prog 2 (a GM): Quu Bokye: his
+# default; the beastcoin: nil. Prog 4 without the Lynx Pelt (a GM): the Optistery door: the vellum: nil; a talk: nil.
+# The pelt (a GM): a talk: nil; the beastcoin: nil. Prog 5, Timer 0 (GMs), a full inventory: 147, finished: the Scroll
+# of Retrace does not fit: not completed; again: 147; freed: 147: completed.
+lists WindurstWatersS/Door_Rhinostery_South/onTrigger WindurstWatersS/Door_Optistery/onTrigger WindurstWatersS/Door_Optistery/onTrade WindurstWatersS/onEventFinish/143 WindurstWatersS/onEventFinish/147 Giddeus/Quu_Bokye/onTrigger Giddeus/Quu_Bokye/onTrade
+char zone=WindurstWatersS pos=4.668,-5.812,-197 job=WAR lvl=30
+item MythrilBeastcoin
+item SheetOfVellum
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+char bob zone=WindurstWatersS pos=4.668,-5.812,-195.5 job=WAR lvl=29
+bob: keyitem BronzeRibbonOfService
+bob: mission Wotg BackToTheBeginning current
+bob: mission Asa BurgeoningDread current
+bob: mission Acp ACrystallineProphecyFin current
+bob: mission Rov ARhapsodyForTheAges current
+bob: mission Soa Abomination current
+login
+trigger Door_Rhinostery_South           # no ribbon: nil
+finish-if-event
+warp -55.452,-6.249,92.029 WindurstWatersS
+trade Door_Optistery SheetOfVellum x1   # available: nil
+finish-if-event
+warp -159.992,17.137,181.502 Giddeus
+trade Quu_Bokye MythrilBeastcoin x1     # available: nil
+finish-if-event
+trigger Quu_Bokye                       # available: his default 56
+finish-if-event
+warp 4.668,-5.812,-197 WindurstWatersS
+keyitem BronzeRibbonOfService
+trigger Door_Rhinostery_South           # level 30 and the ribbon: 143
+finish option=1                         # begun (any option); Prog 1
+bob: login
+bob: trigger Door_Rhinostery_South      # level 29: nil
+bob: finish-if-event
+warp -55.452,-6.249,92.029 WindurstWatersS
+trigger Door_Optistery                  # Prog 1: nil
+finish-if-event
+warp -159.992,17.137,181.502 Giddeus
+trade Quu_Bokye SheetOfVellum x1        # Prog 1, not the beastcoin: nil
+finish-if-event
+charvar Quest[7][26]Prog 2
+trigger Quu_Bokye                       # Prog 2: his default 56
+finish-if-event
+trade Quu_Bokye MythrilBeastcoin x1     # Prog 2: nil
+finish-if-event
+charvar Quest[7][26]Prog 4
+warp -55.452,-6.249,92.029 WindurstWatersS
+trade Door_Optistery SheetOfVellum x1   # Prog 4, no pelt: nil
+finish-if-event
+trigger Door_Optistery                  # Prog 4, no pelt: nil
+finish-if-event
+keyitem LynxPelt
+trigger Door_Optistery                  # Prog 4, the pelt: a talk: nil
+finish-if-event
+trade Door_Optistery MythrilBeastcoin x1 # the pelt, not the vellum: nil
+finish-if-event
+charvar Quest[7][26]Prog 5
+charvar Quest[7][26]Timer 0
+fill-inventory
+trigger Door_Optistery                  # Prog 5, Timer 0: 147
+finish                                  # no room: not completed
+trigger Door_Optistery                  # 147 again
+finish                                  # still no room
+free-inventory
+trigger Door_Optistery                  # 147
+finish                                  # completed (Scroll of Retrace)

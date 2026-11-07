@@ -1,0 +1,32 @@
+# Forever to Hold (bastok 17): Qiji and Romilda in Port Bastok. The guard (Bastok fame level 2), the offer 123, the Brass
+# Hairpin shown to Qiji (124, kept), given to Romilda (125, Prog 1), Qiji's 126 and the reward. Qiji's default is 33 and
+# Romilda's 34; Till Death Do Us Part also names Romilda (its offer once this quest is completed). No mission names them.
+lists PortBastok/Qiji/onTrigger PortBastok/Qiji/onTrade PortBastok/Romilda/onTrigger PortBastok/Romilda/onTrade PortBastok/onEventFinish/123 PortBastok/onEventFinish/125 PortBastok/onEventFinish/126
+char zone=PortBastok pos=4.8,4.898,-17.7
+fame Bastok 49
+item BrassHairpin
+item BrassHairpin
+item BoneChip
+login
+trade Qiji BrassHairpin x1      # available: no trade handler, nothing
+trade Romilda BrassHairpin x1   # available: nothing
+trigger Qiji                    # fame 49 (level 1): his default 33
+finish
+fame Bastok 50
+trigger Qiji                    # fame level 2: the offer, 123
+finish                          # accepted
+trigger Qiji                    # accepted, Prog 0: his default 33
+finish
+trade Qiji BoneChip x1          # the wrong item: nothing
+trade Qiji BrassHairpin x1      # 124 (no tradeComplete)
+finish                          # nothing: the hairpin kept
+trade Romilda BoneChip x1       # the wrong item: nothing
+trade Romilda BrassHairpin x1   # 125
+finish                          # a hairpin gone, Prog 1
+trigger Qiji                    # Prog 1: 126
+finish                          # completed: 300 gil, fame +20, Qiji's Friend
+trigger Qiji                    # completed: 33
+finish
+trade Qiji BrassHairpin x1      # completed: nothing
+trigger Romilda                 # completed: Till Death Do Us Part's guard met, fame 70 (level 2): its 127
+finish

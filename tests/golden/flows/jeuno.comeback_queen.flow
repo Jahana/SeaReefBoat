@@ -1,0 +1,92 @@
+# Comeback Queen (jeuno 98, DNC AF3): Laila, Rhea Myuliah, Olgald, Alfrieda, Finnela, Turlough in Upper Jeuno (no
+# scripts; the first of each name), Harmodios in Bastok Markets (his script: HARMODIOS_SHOP_DIALOG and his shop). A
+# level 75 Dancer (male), the three earlier Dancer quests completed (by GM: Timer 0, no mustZone,
+# HQuest[DncArtifact]Prog 0 so the crafted artifact's Olgald is silent; The Road to Divadom's completed section answers
+# Laila 10140 / Rhea 10141 at priority 20). A stone to Laila while available (no trade handler: nothing), 10143 (begun,
+# Wyatt's Proposal); Prog 0: Laila 10144, Olgald 10146 (priority 995), Rhea 10145; Harmodios 490 (the proposal taken,
+# Prog 1), 491 once per zone, then his script; Prog 1: no zone-in event, Rhea 10145, Olgald 10150, Laila 10147 (Timer
+# 8001, Prog 2); Prog 2: Laila 10148, Rhea 10149, Olgald 10150; day 8001 (= Timer): 10151 (0) answered 0 (Timer 8002,
+# mustZone, Prog 3); Prog 3: Laila 10152 (the accepted section reads no mustZone), Olgald 10153, Rhea 10149; day 8002:
+# 10151 (1) answered 1 (Prog 4, set down in place: a zone-in), 10208, 10209, 10210 (each Prog + 1 and a zone-in), 10211
+# with a full bag (Prog 8), Laila 10154 with a full bag (nothing), 10154 (the Dancer's Casaque (M) 14578, completed,
+# Elegant Dancer, Quest[3][99]Timer and the local var Quest[3][99]mustZone); completed: Laila 10154 (no finish acts on
+# it now), a stone (nothing), then the six NPCs' events (replaceDefault).
+# A script's setPos zones the char at the next tick: the flow follows each such finish with `tick 400` and `login` (the
+# client's zone-in; its zone-in event answered 0), as `warp` does after its own setPos.
+# Elsewhere: 10151 answered 1 at Prog 2, Prog 5 at Laila / Olgald / Rhea and the zone-in at Prog 3 and 5 are #skip; Prog
+# -1 is #negative; Olgald against the crafted artifact's events is #olgald; 10211 with room (a female char) is
+# #casaque; a Warrior and level 49 are #not_dnc and #level49.
+lists UpperJeuno/Laila/onTrigger UpperJeuno/Laila/onTrade UpperJeuno/Rhea_Myuliah/onTrigger UpperJeuno/Olgald/onTrigger UpperJeuno/Alfrieda/onTrigger UpperJeuno/Finnela/onTrigger UpperJeuno/Turlough/onTrigger UpperJeuno/onZoneIn/1 UpperJeuno/onEventFinish/10143 UpperJeuno/onEventFinish/10147 UpperJeuno/onEventFinish/10151 UpperJeuno/onEventFinish/10154 UpperJeuno/onEventFinish/10208 UpperJeuno/onEventFinish/10209 UpperJeuno/onEventFinish/10210 UpperJeuno/onEventFinish/10211 BastokMarkets/Harmodios/onTrigger BastokMarkets/onEventFinish/490
+char zone=UpperJeuno pos=-52.5,0,101 job=DNC lvl=75
+quest Jeuno.LakesideMinuet completed
+quest Jeuno.TheUnfinishedWaltz completed
+quest Jeuno.TheRoadToDivadom completed
+item FlintStone x2
+login
+trade Laila FlintStone x1               # available: no trade handler, nothing
+trigger Laila                           # 10143
+finish                                  # begun, Wyatt's Proposal
+trigger Laila                           # Prog 0: 10144
+finish
+trigger Olgald                          # Prog 0: 10146 (priority 995)
+finish
+trigger Rhea_Myuliah                    # Prog 0: 10145
+finish
+warp -78.4,-4.8,-135.1 BastokMarkets
+trigger Harmodios                       # Prog 0: 490
+finish                                  # the proposal taken, Prog 1
+trigger Harmodios                       # Prog 1: 491 (once per zone)
+finish
+trigger Harmodios                       # 491 spent: his script: HARMODIOS_SHOP_DIALOG and the shop
+warp -52.5,0,101 UpperJeuno             # Prog 1: no zone-in event
+trigger Rhea_Myuliah                    # Prog 1: 10145
+finish
+trigger Olgald                          # Prog 1: 10150
+finish
+trigger Laila                           # Prog 1: 10147
+finish                                  # Timer 8001, Prog 2
+trigger Laila                           # Prog 2, before Timer: 10148
+finish
+trigger Rhea_Myuliah                    # Prog 2: 10149
+finish
+trigger Olgald                          # Prog 2: 10150
+finish
+wait vana=24                            # day 8001
+trigger Laila                           # Prog 2, Timer reached: 10151 (0)
+finish option=0                         # Timer 8002, mustZone, Prog 3
+trigger Laila                           # Prog 3, before Timer: 10152 (the accepted section reads no mustZone)
+finish
+trigger Olgald                          # Prog 3: 10153
+finish
+trigger Rhea_Myuliah                    # Prog 3: 10149
+finish
+wait vana=24                            # day 8002
+trigger Laila                           # Prog 3, Timer reached: 10151 (1)
+finish option=1                         # Prog 4, setPos in place
+tick 400
+login                                   # zone-in, Prog 4: 10208, answered 0: Prog 5, setPos
+tick 400
+login                                   # 10209: Prog 6, setPos
+tick 400
+login                                   # 10210: Prog 7, setPos
+fill-inventory
+tick 400
+login                                   # 10211, no room for the casaque: Prog 8
+trigger Laila                           # Prog 8: 10154
+finish                                  # still no room: nothing
+free-inventory
+trigger Laila                           # 10154
+finish                                  # the Dancer's Casaque (M), completed, Elegant Dancer, Quest[3][99]Timer 8003, local var mustZone
+trigger Laila                           # completed: 10154 (replaceDefault; no finish acts on it now)
+finish
+trade Laila FlintStone x1               # completed: no trade handler, nothing
+trigger Olgald                          # 10156 (replaceDefault)
+finish
+trigger Rhea_Myuliah                    # 10155
+finish
+trigger Alfrieda                        # 10157
+finish
+trigger Finnela                         # 10159
+finish
+trigger Turlough                        # 10158 (The Queen of the Dance mission is not current)
+finish

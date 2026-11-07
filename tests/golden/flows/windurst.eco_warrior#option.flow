@@ -1,0 +1,32 @@
+# Eco-Warrior (Windurst) (windurst 84): each finish at an option the Lua's test does not name (Eco_Warrior.lua: 818
+# begins on 1 (:58, :212), 62 restricts on 1 (:134), 64 lifts on 0 (:145), 65 informs on 0 (:151)): option 2 does
+# nothing at each (a test of option != 0 or != 1 would act). 818 (available) 2, then 1 (begun); Ahko Mhalijikhari's 62
+# with 2 (no restriction), then 1 (the restriction); 64 with 2 (kept), then 0 (off); the meat by GM: 65 with 2 (Informed
+# stays 0), then 0 (Informed 1); completed by GM: 818 with 2 (still completed), then 1 (deleted and begun again).
+lists WindurstWaters/Lumomo/onTrigger WindurstWaters/onEventFinish/818 MazeOfShakhrami/Ahko_Mhalijikhari/onTrigger MazeOfShakhrami/onEventFinish/62 MazeOfShakhrami/onEventFinish/64 MazeOfShakhrami/onEventFinish/65
+char zone=WindurstWaters pos=-55.8,-4.5,20.9 lvl=30
+login
+trigger Lumomo                       # available: 818
+finish option=2                      # not 1: nothing
+trigger Lumomo                       # 818
+finish option=1                      # begun
+warp -342.6,-11.2,-166.2 MazeOfShakhrami
+trigger Ahko_Mhalijikhari            # no meat, no restriction: 62
+finish option=2                      # not 1: no restriction
+trigger Ahko_Mhalijikhari            # 62
+finish option=1                      # Level Restriction 25 (ON_ZONE)
+trigger Ahko_Mhalijikhari            # the restriction: 64
+finish option=2                      # not 0: the restriction kept
+trigger Ahko_Mhalijikhari            # 64
+finish option=0                      # the restriction off
+keyitem IndigestedMeat
+trigger Ahko_Mhalijikhari            # the meat, Informed 0: 65
+finish option=2                      # not 0: Informed stays 0
+trigger Ahko_Mhalijikhari            # 65
+finish option=0                      # Informed 1
+quest Windurst.EcoWarrior completed
+warp -55.8,-4.5,20.9 WindurstWaters
+trigger Lumomo                       # completed, EcoReset 0: 818
+finish option=2                      # not 1: nothing, still completed
+trigger Lumomo                       # 818
+finish option=1                      # the quest deleted and begun again

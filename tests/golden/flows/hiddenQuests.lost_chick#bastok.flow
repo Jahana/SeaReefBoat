@@ -1,0 +1,18 @@
+# Lost Chick, Bastok: a wrong guess. Owner 4 (Gerbaum), 3 clues, Bastok (4 + 0x30 + 0x80 = 180). Deegis (no ask) plays
+# 537 (1); an update on 2 (neither his guess 1 nor a map vendor): nothing; on 1 (his guess): wrong: updateEvent(0, 0,
+# 0), the var WRONG_OWNER (0x20000), no story. Zopago: 542 ([0] = 1, [1] = 0, [7] = 2); the finish: the result cleared
+# (0). Then the setting off with a chick at Bastok: Deegis's own script.
+lists BastokMines/Deegis/onTrigger BastokMines/Zopago/onTrigger BastokMines/onEventUpdate/537 BastokMines/onEventFinish/542
+char zone=BastokMines pos=50,0,-109 job=WAR lvl=30
+charvar [ChocoboRaising]LostChick 180
+login
+trigger Deegis                          # 537 (1)
+update 537 option=2                     # not his guess: nothing
+update 537 option=1                     # wrong owner: updateEvent(0, 0, 0); WRONG_OWNER
+finish
+trigger Zopago                          # 542 ([0] = 1, [1] = 0, [7] = 2)
+finish                                  # the result cleared
+charvar [ChocoboRaising]LostChick 180   # a GM: a chick again
+setting ENABLE_CHOCOBO_RAISING false
+trigger Deegis                          # the setting off: the check fails: his script
+finish-if-event

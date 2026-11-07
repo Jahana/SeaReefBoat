@@ -1,0 +1,58 @@
+# Trial-Size Trial by Water (outlands 148): Verctissa in Norg. Her default 114 (Norg's DefaultActions) alternates with
+# her script (interaction_lookup's UseFallback, a local var cleared by zoning): with UseFallback 0 a talk plays 114 and
+# sets it to 1; the next talk runs the script (the call) and resets it to 0, and plays 114 again when the script starts
+# nothing. So each script talk below follows a default talk. The guard (main level 20, main job SMN, Norg fame level 2):
+# fame 49 not offered (114 on both talks); the offer 199 (0, Mini Tuning Fork of Water, 2, 20) declined, option 2
+# (nothing), option 1 with a full inventory (ITEM_CANNOT_BE_OBTAINED: not begun), then begun with one free slot (the
+# fork, ITEM_OBTAINED); 111 while the fork is held; the trades (a bone chip: nothing; the fork: 200, declined, option 2
+# (nothing), then option 1: xi.teleport.to the Cloister of Tides, the fork kept; the tick and the login finish the zone
+# change). A trade while available is #level19's. Completed by GM: 202; the fork's trade: nothing. The fork-lost arms
+# are #fork_lost, the level and job sides #level19 and #not_smn, the battlefield #battlefield.
+char zone=Norg pos=-12.5,1.1,-22.5 job=SMN lvl=20
+fame Norg 49
+item BoneChip
+login
+trigger Verctissa                         # UseFallback 0: the default 114
+finish
+trigger Verctissa                         # the script: fame 49 (level 1): the quest's nil; the default 114
+finish
+fame Norg 50
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # the script: SMN 20, fame level 2: 199 (0, fork, 2, 20)
+finish option=0                           # declined: nothing
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # 199
+finish option=2                           # option 2: nothing (the finish wants option 1)
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # 199
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork); not begun
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # 199
+finish option=1                           # begun; the Mini Tuning Fork of Water, ITEM_OBTAINED
+free-inventory
+trigger Verctissa                         # the default 114
+finish
+trigger Verctissa                         # accepted, the fork held: 111
+finish
+trade Verctissa BoneChip x1               # SMN, accepted, not the fork: nothing
+trade Verctissa MiniTuningForkOfWater x1  # SMN, accepted, the fork: 200 (0, fork, 2, 20)
+finish option=0                           # option 0: nothing, the fork kept
+trade Verctissa MiniTuningForkOfWater x1  # 200
+finish option=2                           # option 2: nothing, the fork kept
+trade Verctissa MiniTuningForkOfWater x1  # 200 again
+finish option=1                           # xi.teleport.to the Cloister of Tides (the fork kept)
+tick 400                                  # the zone change the teleport set: the char saved at the Cloister of Tides (211)
+login                                     # back in at the teleport's destination (570.294, 36.757, 546.895)
+quest Outlands.TrialSizeTrialByWater completed
+warp -12.5,1.1,-22.5 Norg
+trigger Verctissa                         # the default 114 (the zone change cleared UseFallback)
+finish
+trigger Verctissa                         # completed: 202
+finish
+trade Verctissa MiniTuningForkOfWater x1  # completed: nothing

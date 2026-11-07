@@ -1,0 +1,13 @@
+# Chasing Tales (windurst 13): the offer's nation and mission sides for a Windurst char. With no Windurst mission current
+# the or's second side is true: 403. With The Jester Who'd Be King (8-2) current the quest returns nil; 8-2's Tosuka
+# action answers only at mission status 1 (here 0), so his script answers (no Windurst mission completed: 370).
+lists WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/onEventFinish/403
+char zone=WindurstWaters pos=-27.2,-5.25,104.4 nation=2
+quest Windurst.EarlyBirdCatchesTheBookworm completed
+fame Windurst 125
+login
+trigger Tosuka-Porika               # Windurst nation, no Windurst mission current: 403
+finish option=1                     # declined: nothing
+mission Windurst TheJesterWhodBeKing current
+trigger Tosuka-Porika               # 8-2 current: nil; his script 370
+finish

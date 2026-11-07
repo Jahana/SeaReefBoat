@@ -1,0 +1,46 @@
+# Her Memories: Operation Cupid (crystalWar 68): a level 99 Warrior in Jugner Forest [S] with the WotG mission Her
+# Memories current (a GM; other logs as group 1's flows), a Bottle of Rice Vinegar, a Jar of Ground Wasabi and a Sprig
+# of Holy Basil. Batallia Downs [S] from Jugner Forest [S]: 23, finished: begun. Sauromugue Champaign [S]: Bulwark Gate
+# at Prog 0: 11, finished: Prog 1; Prog 1: 12 (oncePerZone); again: nil (DOOR_FIRMLY_SEALED). Vunkerl Inlet [S]:
+# Leadavox, no pot: nil (100); the three: 4, finished: confirmed, the Pot of Martial Relish; the pot: 5 (oncePerZone).
+# Sauromugue Champaign [S]: Bulwark Gate, the pot: 13, finished: Prog 2, the pot taken; Prog 2: 14 (oncePerZone); again:
+# nil (DOOR_FIRMLY_SEALED). Rolanberry Fields [S], then Batallia Downs [S] from there at Prog 2: 24, finished: completed
+# (Large Memory Fragment 3), checkMemoryFragments (one large: nothing).
+lists BatalliaDownsS/onZoneIn/1 BatalliaDownsS/onEventFinish/23 BatalliaDownsS/onEventFinish/24 SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/onEventFinish/11 SauromugueChampaignS/onEventFinish/13 VunkerlInletS/Leadavox/onTrigger VunkerlInletS/Leadavox/onTrade VunkerlInletS/onEventFinish/4
+char zone=JugnerForestS pos=-262.344,5.713,151.392 job=WAR lvl=99
+mission Wotg HerMemories current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item BottleOfRiceVinegar
+item JarOfGroundWasabi
+item SprigOfHolyBasil
+login
+warp -71.66,-2.58,450.114 BatalliaDownsS open # from Jugner Forest [S], Her Memories current: 23, left open
+finish                                  # begun
+warp -445.674,-1.831,342.417 SauromugueChampaignS
+trigger Bulwark_Gate                    # no pot, Prog 0: 11
+finish                                  # Prog 1
+trigger Bulwark_Gate                    # Prog 1: 12 (oncePerZone)
+finish
+trigger Bulwark_Gate                    # 12 shown: nil (DOOR_FIRMLY_SEALED)
+finish-if-event
+warp 208.581,-32.002,315.458 VunkerlInletS
+trigger Leadavox                        # no pot: nil (100)
+finish-if-event
+walk 208.581,-32.002,315.458            # beside Leadavox (a trade does not walk)
+trade Leadavox BottleOfRiceVinegar x1 JarOfGroundWasabi x1 SprigOfHolyBasil x1 # Prog 1, the three alone: 4
+finish                                  # confirmed; the Pot of Martial Relish
+trigger Leadavox                        # the pot: 5 (oncePerZone)
+finish
+warp -445.674,-1.831,342.417 SauromugueChampaignS
+trigger Bulwark_Gate                    # the pot: 13
+finish                                  # Prog 2; the pot taken
+trigger Bulwark_Gate                    # Prog 2: 14 (oncePerZone)
+finish
+trigger Bulwark_Gate                    # 14 shown: nil (DOOR_FIRMLY_SEALED)
+finish-if-event
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+warp -71.66,-2.58,450.114 BatalliaDownsS open # from Rolanberry Fields [S] at Prog 2: 24, left open
+finish                                  # completed (Large Memory Fragment 3); checkMemoryFragments: nothing

@@ -1,0 +1,31 @@
+# Onion Rings (windurst 42): late, completed at Kohlo-Lakolo. The two first quests and Inspector's Gadget! completed by
+# GM, level 5, fame 125. 429 (Prog 1, EndTime now + 3456), the ring by GM, 430 (in time, Prog 1: begun). Prog 2 by GM:
+# no section (section 2 wants Prog 1): Kohlo-Lakolo's default 361, Gomada-Vulmada's 363; Prog 0: the same. Prog 1
+# again. A JST day later (wait jst=1: VanadielTime 790275600, past EndTime 790192656): late: 433, completed (fame 30,
+# the title; the ring taken; the player local var [2][76]mustZone 1).
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/onEventFinish/433
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5
+fame Windurst 125
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+login
+trigger Kohlo-Lakolo                           # 429
+finish                                         # Prog 1, EndTime 790192656
+keyitem OldRing                                # GM
+trigger Kohlo-Lakolo                           # the ring, in time, Prog 1: 430
+finish                                         # begun
+charvar Quest[2][42]Prog 2                     # GM
+trigger Kohlo-Lakolo                           # Prog 2: no section: 361
+finish
+trigger Gomada-Vulmada                         # 363
+finish
+charvar Quest[2][42]Prog 0                     # GM
+trigger Kohlo-Lakolo                           # Prog 0: no section: 361
+finish
+trigger Gomada-Vulmada                         # 363
+finish
+charvar Quest[2][42]Prog 1                     # GM
+wait jst=1                                     # VanadielTime 790275600: past EndTime
+trigger Kohlo-Lakolo                           # late: 433
+finish                                         # completed: fame 30, the title; the ring taken; local var [2][76]mustZone 1

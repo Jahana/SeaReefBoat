@@ -1,0 +1,45 @@
+# Cook's Pride (jeuno 16): Naruru and Teigero-Bangero (Lower Jeuno; call-only: their scripts' arms). A WAR 75.
+# Turns: Teigero-Bangero's default 34 takes the first turn. Naruru has no default (98 is her script's else).
+# The Wonder Magic Set accepted (GM): no arm at Naruru (nor The Lost Cardian's, nor The Kind Cardian's): her 98.
+# Completed (GM): 189 (CooksPrideVar 0); option 2: nothing; option 1: the var 1; then 188; option 1: nothing; option 0:
+# begun. Accepted without the Super Soup Pot: 186. Teigero-Bangero: not completed: the draw (75 or 32). The pot (GM:
+# Hoist the Jelly, Roger's reward): 187 refused on a full inventory, then Mercy Errand Runner, the pot taken, the var 0,
+# 3000 gil, a Mythril Ring, fame +13 x3, completed. Completed and The Kind Cardian available: The Lost Cardian's 31
+# (its var 0).
+char zone=LowerJeuno pos=-53.2,-0.1,-139.5 job=WAR lvl=75
+quest Jeuno.TheWonderMagicSet accepted
+login
+trigger Naruru                          # The Wonder Magic Set not completed: no arm: 98
+finish
+quest Jeuno.TheWonderMagicSet completed
+trigger Naruru                          # available, the var 0: 189
+finish option=2                         # nothing
+trigger Naruru                          # 189
+finish option=1                         # the var 1
+trigger Naruru                          # the var 1: 188
+finish option=1                         # nothing
+trigger Naruru                          # 188
+finish option=0                         # begun
+trigger Naruru                          # accepted, no pot: 186
+finish
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # The Wonder Magic Set completed; this quest accepted: the draw: 75 or 32
+finish
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # the draw again
+finish
+trigger Teigero-Bangero                 # the turn: 34
+finish
+trigger Teigero-Bangero                 # the draw again
+finish
+keyitem SuperSoupPot                    # GM: Hoist the Jelly, Roger's reward (Windurst Waters Maysoon)
+fill-inventory
+trigger Naruru                          # the pot: 187
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (13446); nothing else
+free-inventory
+trigger Naruru                          # 187
+finish                                  # Mercy Errand Runner; the pot taken; var 0; 3000 gil; Mythril Ring; fame +13 x3; completed
+trigger Naruru                          # completed, The Kind Cardian available, theLostCardianVar 0: 31 (The Lost Cardian's)
+finish

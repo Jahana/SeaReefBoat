@@ -1,0 +1,24 @@
+# Raptor Rapture (adoulin, call-only), the introduction as the scripts have it: a level 99 Warrior in Western Adoulin.
+# Pagnelle (no default), available, status 0: status 1, 5032, finished: player:setPos(0, 0, 0, 0, 258): the char zones
+# out at the next tick (tick 2000) and logs into Rala Waterways (rezone), where nothing reads the status (it stays 1:
+# the Lua's dead link to 5056). Back in Western Adoulin (a warp), status 1: no zone-in event; Pagnelle
+# again: 5032 (status 1 below 3), finished the same way. Back again; status 2 (a GM, after the zone-in):
+# Pagnelle: 5032 (status 1), finished the same way.
+lists WesternAdoulin/Pagnelle/onTrigger WesternAdoulin/onEventFinish/5032
+char zone=WesternAdoulin pos=-6.5,0,-100 job=WAR lvl=99
+login
+trigger Pagnelle                        # available, status 0: status 1, 5032
+finish                                  # setPos(0, 0, 0, 0, 258): to Rala Waterways
+tick 2000                               # the zone change
+rezone                                  # the login in Rala Waterways
+warp -6.5,0,-100 WesternAdoulin         # status 1: no 5056
+trigger Pagnelle                        # status 1 below 3: 5032 again
+finish                                  # to Rala Waterways again
+tick 2000
+rezone
+warp -6.5,0,-100 WesternAdoulin         # status 1: no 5056
+charvar Raptor_Rapture_Status 2         # a GM
+trigger Pagnelle                        # status 2 below 3: status 1, 5032
+finish                                  # to Rala Waterways
+tick 2000
+rezone

@@ -1,0 +1,46 @@
+# The Tigress Strikes (crystalWar 18): a level 99 Warrior in Windurst Waters [S] with The Tigress Stirs completed (a GM;
+# missions as The Tigress Stirs' main flow). Dhea Prandoleh (default 136) 133, finished: begun; Prog 0: 135 (an Event).
+# Fort Karugo-Narugo [S]: Rotih Moalghett (no script, no default) 101, finished: Prog 1; 104 (an Event). qm4 (default
+# NOTHING_OUT_OF_ORDINARY): Prog 1: 102, finished: Prog 2; Prog 2: the lynx (TIGRESS_STRIKES_WAR_LYNX) spawns, claimed,
+# the quest answers noAction (no default message); the lynx up: nil: the default. The lynx killed: LynxKilled 1. qm4:
+# 103, finished: Prog 3; again (LynxKilled still 1): 103, finished: Prog 3 again. Rotih Moalghett at Prog 3: 104.
+# Windurst Waters [S]: Dhea Prandoleh 134, finished: completed (Star Globe, Ajido-Marujido's Minder), needToZone; again:
+# both quests completed: her default 136.
+lists WindurstWatersS/Dhea_Prandoleh/onTrigger WindurstWatersS/onEventFinish/133 WindurstWatersS/onEventFinish/134 FortKarugoNarugoS/Rotih_Moalghett/onTrigger FortKarugoNarugoS/qm4/onTrigger FortKarugoNarugoS/War_Lynx/onMobDeath FortKarugoNarugoS/onEventFinish/101 FortKarugoNarugoS/onEventFinish/102 FortKarugoNarugoS/onEventFinish/103
+char zone=WindurstWatersS pos=4.667,-1,15.545 job=WAR lvl=99
+quest CrystalWar.TheTigressStirs completed
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Dhea_Prandoleh                  # 133; the mission takes no talk
+finish                                  # begun
+trigger Dhea_Prandoleh                  # Prog 0: 135
+finish
+warp -63.309,-75.585,3.608 FortKarugoNarugoS
+trigger Rotih_Moalghett                 # Prog 0: 101
+finish                                  # Prog 1
+trigger Rotih_Moalghett                 # 104
+finish
+warp 209.248,-30.19,54.052 FortKarugoNarugoS
+trigger qm4                             # Prog 1: 102
+finish                                  # Prog 2
+trigger qm4                             # Prog 2, no lynx: it spawns, claimed; noAction
+finish-if-event
+trigger qm4                             # the lynx up: nil: the default message
+finish-if-event
+kill TIGRESS_STRIKES_WAR_LYNX           # LynxKilled 1
+trigger qm4                             # LynxKilled: 103
+finish                                  # Prog 3
+trigger qm4                             # still LynxKilled: 103
+finish                                  # Prog 3 again
+warp -63.309,-75.585,3.608 FortKarugoNarugoS
+trigger Rotih_Moalghett                 # Prog 3: 104
+finish
+warp 4.667,-1,15.545 WindurstWatersS
+trigger Dhea_Prandoleh                  # Prog 3: 134
+finish                                  # completed (Star Globe, title); needToZone
+trigger Dhea_Prandoleh                  # both completed: her default 136
+finish-if-event

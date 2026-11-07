@@ -1,0 +1,13 @@
+# Chocobo Whistle, the names of the string event: a level 30 Warrior in Southern San d'Oria trades a Chocobo Egg
+# (Faintly Warm) to Hantileon (the chocobo raising library's trade event 826, finished on option 252: the chocobo is
+# raised, the egg taken, named at random from the seeded names). The raising library writes Prog (a GM's charvar here:
+# 1); Hantileon starts the string event 829 with the chocobo's full, first and last name.
+lists SouthernSanDoria/Hantileon/onTrigger SouthernSanDoria/onEventFinish/829
+char zone=SouthernSanDoria pos=-1,0,-105 job=WAR lvl=30
+item ChocoboEggFaintlyWarm
+login
+trade Hantileon ChocoboEggFaintlyWarm x1   # 826 (the library's)
+finish option=252                       # the chocobo raised, the egg taken
+charvar HQuest[ChocoboWhistle]Prog 1    # a GM: SEE_HANTILEON
+trigger Hantileon                       # 829 (the three names, '', VanadielTime, 0, 0, 2); noAction
+finish-if-event

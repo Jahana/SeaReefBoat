@@ -1,0 +1,40 @@
+# Give Peace a Chance (ahtUrhgan 9): a level 75 Warrior. Mishhar (no script; default event 590). Available: Mishhar 562,
+# finished: begun. Accepted, Prog 0: Mishhar 587 (an Event; no script, so no fallback turn: 587 again). Wajaom
+# Woodlands' qm8 (no script, no default) by day (the harness's clock, about 12:00): nil: nothing; nine Vana'diel hours
+# on (about 21:00, NIGHT): the cutscene 504, finished: Prog 1; again: Prog 1: nil. Whitegate: Mishhar 575, finished:
+# Prog 2; Mishhar 588 (an Event). Mamook's qm4 (no script, no default) at Prog 2: the cutscene 211, finished: Prog 3;
+# again: nil. Whitegate: Mishhar 576, finished: completed (an Imperial Silver Piece), the zoning flag, Quest[6][30]Stage
+# = the next JST midnight. Completed: no section of this quest; Moment of Truth available (this quest completed): its
+# 800.
+lists AhtUrhganWhitegate/Mishhar/onTrigger WajaomWoodlands/qm8/onTrigger Mamook/qm4/onTrigger AhtUrhganWhitegate/onEventFinish/576
+char zone=AhtUrhganWhitegate pos=-10.7,-6,29.371 job=WAR lvl=75
+login
+trigger Mishhar                         # available: 562
+finish                                  # begun
+trigger Mishhar                         # Prog 0: 587 (an Event)
+finish
+trigger Mishhar                         # 587 again
+finish
+warp 418.2,-24,220.8 WajaomWoodlands    # beside qm8
+trigger qm8                             # day: nil: nothing (no default)
+finish-if-event
+wait vana=9                             # about 21:00: NIGHT
+trigger qm8                             # NIGHT, Prog 0: 504 (a cutscene)
+finish                                  # Prog 1
+trigger qm8                             # Prog 1: nil: nothing
+finish-if-event
+warp -10.7,-6,29.371 AhtUrhganWhitegate
+trigger Mishhar                         # Prog 1: 575
+finish                                  # Prog 2
+trigger Mishhar                         # Prog 2: 588 (an Event)
+finish
+warp 348.6,-12.1,-256.4 Mamook          # beside qm4
+trigger qm4                             # Prog 2: 211 (a cutscene)
+finish                                  # Prog 3
+trigger qm4                             # Prog 3: nil: nothing
+finish-if-event
+warp -10.7,-6,29.371 AhtUrhganWhitegate
+trigger Mishhar                         # Prog 3: 576
+finish                                  # completed: a Silver Piece; needToZone; Quest[6][30]Stage = JstMidnight
+trigger Mishhar                         # completed: Moment of Truth available: its 800
+finish option=1                         # Moment of Truth begun (its 800 begins on any option)

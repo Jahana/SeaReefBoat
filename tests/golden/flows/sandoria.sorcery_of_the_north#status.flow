@@ -1,0 +1,61 @@
+# Sorcery of the North (sandoria 83), each status operand alone (GM-set statuses), at Eperdur (each answer below is his
+# script's turn; 678 is the lookup's). Fame level 1, so Healing the Land's 681 never plays. 684 / 685's Healing the Land
+# operand: Healing the Land available: nothing (678); completed: 685; accepted: Healing the Land's own 683 comes first.
+# Their own-status operand (Healing the Land completed): accepted 686, completed nothing. 686 / 687's: with the tome and
+# Healing the Land available: available nothing, accepted 687, completed nothing. The finishes read no status (GM
+# changes while the event is open): 685 option 0 finished while completed (addQuest: the log's current bit, still
+# completed); 687 finished while available (completed from available).
+char zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=50
+login
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # Healing the Land available: nothing; 678
+finish-if-event
+quest Sandoria.HealingTheLand completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # Healing the Land completed: 685
+finish-if-event option=1                  # declined
+quest Sandoria.HealingTheLand available
+quest Sandoria.HealingTheLand accepted
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # Healing the Land accepted, no seal: its 683 (not 685)
+finish-if-event                           # Healing the Land completed (Teleport-Holla); needToZone
+warp -165.9,1.0,312.8 GusgenMines         # needToZone cleared
+warp 126.3,-6.5,95.7 NorthernSanDoria
+quest Sandoria.SorceryOfTheNorth accepted
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted: 686
+finish-if-event
+quest Sandoria.SorceryOfTheNorth completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # completed: nothing; 678
+finish-if-event
+quest Sandoria.SorceryOfTheNorth available
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # 685
+quest Sandoria.SorceryOfTheNorth completed
+finish-if-event option=0                  # finished while completed: addQuest (the current bit); still completed
+quest Sandoria.HealingTheLand available
+quest Sandoria.SorceryOfTheNorth available
+keyitem FeiyinMagicTome
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # available, the tome: nothing; 678
+finish-if-event
+quest Sandoria.SorceryOfTheNorth completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # completed, the tome: nothing; 678
+finish-if-event
+quest Sandoria.SorceryOfTheNorth available
+quest Sandoria.SorceryOfTheNorth accepted
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted, the tome: 687
+quest Sandoria.SorceryOfTheNorth available
+finish-if-event                           # finished while available: Teleport-Vahzl; the tome taken; completed

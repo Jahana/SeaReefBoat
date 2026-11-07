@@ -1,0 +1,51 @@
+# The Clue (otherAreas 5): its reply kinds against Event-priority competitors set by a GM: Rycharde the Chef accepted
+# (Rycharde 72, Take 68; RQ1 sorts before RQ6) and The Basics completed with Quest[4][6]CommentaryValgeir 1 (Valgeir 107,
+# Event; RQ7 sorts after; its Rycharde 98 and Take 67 are replaceDefault and lose to any Event). On a tie the lookup's
+# action cycle plays the actions in container order, one per talk, from where it last stopped. Available: Rycharde's 90
+# and 91 (Progress: an Event one would tie and the cycle would play 72 first); not due: The Clue's nil, 72 alone; Take's
+# 64 (Event): 68, then 64; Valgeir's 143 (Event): 143, then 107 (whose finish clears the var: a GM sets it again).
+# Accepted: Rycharde's 85 (Event): 72, then 85; Take's 65 (Event): 68, then 65; Valgeir's 143: 143, then 107. The trade
+# replies (92 Progress, 93 Event) have no competitor.
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Selbina/Valgeir/onTrigger Mhaura/onEventFinish/90 Mhaura/onEventFinish/91 Selbina/onEventFinish/107
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.Expertise completed
+quest OtherAreas.RychardeTheChef accepted
+quest OtherAreas.TheBasics completed
+charvar Quest[4][4]DayCompleted 7992
+charvar Quest[4][6]CommentaryValgeir 1
+fame Windurst 325
+login
+trigger Rycharde                        # Prog 0: 90 (Progress beats 72)
+finish option=0                         # Prog 1, Quest[4][4]DayCompleted 0
+trigger Rycharde                        # Prog 1: 91 (Progress beats 72)
+finish option=0
+charvar Quest[4][4]DayCompleted 7993    # a GM: not due
+trigger Rycharde                        # The Clue's nil: 72 alone
+finish
+trigger Take                            # 68 (a tie with 64: the first container's)
+finish
+trigger Take                            # 64
+finish
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # 143 (a tie with The Basics' 107: The Clue's first)
+finish
+trigger Valgeir                         # 107
+finish                                  # CommentaryValgeir 0
+charvar Quest[4][6]CommentaryValgeir 1  # a GM
+warp 19,-16,88.8 Mhaura
+charvar Quest[4][4]DayCompleted 7992
+trigger Rycharde                        # Prog 1: 91
+finish option=83                        # begun
+trigger Rycharde                        # accepted: 72 (a tie with 85)
+finish
+trigger Rycharde                        # 85
+finish
+trigger Take                            # 68 (a tie with 65; the warp cleared the cycle: it starts over)
+finish
+trigger Take                            # 65
+finish
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # 143 (a tie with 107; the warp cleared the cycle: it starts over)
+finish
+trigger Valgeir                         # 107
+finish

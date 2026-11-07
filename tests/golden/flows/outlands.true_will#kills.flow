@@ -1,0 +1,69 @@
+# True Will, the Kappa NMs' kill count (Yhoator Jungle; qm3 has no default): a death counts (trueWillKilledNM + 1) only
+# while the quest is accepted and the other two are not alive. The main flow kills Akuso, Bonze, Biwa; here the other five
+# orders, so each Kappa dies first (both others alive), second after each of the others (one dead, one alive) and last
+# (both dead). Accepted (a GM), a level 75 Ninja at qm3.
+# Each round: qm3 pops the three (CHILL_RUNS_DOWN); three kills; qm3: the Old Trick Box, the var 0; the box taken again
+# (a GM) and the bodies left to despawn (they stay spawned past 32 s, and popFromQM refuses while any is) before the next
+# pop. Round 3 sets the var to 5 (a GM) before its last kill: 6 (an increment, not a set). Round 6: Akuso and Bonze die
+# while accepted (no count), the quest is completed (a GM), Biwa dies (both others dead, but not accepted): no count;
+# qm3: NOTHING_OUT_OF_ORDINARY.
+char zone=YhoatorJungle pos=204.5,0.1,82 job=NIN lvl=75
+quest Outlands.TrueWill accepted
+login
+trigger qm3                             # round 1 (Akuso, Biwa, Bonze): CHILL_RUNS_DOWN; the three popped
+kill KAPPA_AKUSO                        # both others alive: no count
+kill KAPPA_BIWA                         # Akuso dead, Bonze alive: no count
+kill KAPPA_BONZE                        # both dead: trueWillKilledNM 1
+trigger qm3                             # the Old Trick Box; the var 0
+delkeyitem OldTrickBox                  # a GM
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+trigger qm3                             # round 2 (Bonze, Akuso, Biwa): CHILL_RUNS_DOWN; popped
+kill KAPPA_BONZE                        # both others alive: no count
+kill KAPPA_AKUSO                        # Bonze dead, Biwa alive: no count
+kill KAPPA_BIWA                         # both dead: 1
+trigger qm3                             # the Old Trick Box; the var 0
+delkeyitem OldTrickBox                  # a GM
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+trigger qm3                             # round 3 (Bonze, Biwa, Akuso): CHILL_RUNS_DOWN; popped
+kill KAPPA_BONZE                        # both others alive: no count
+kill KAPPA_BIWA                         # Bonze dead, Akuso alive: no count
+charvar trueWillKilledNM 5              # a GM
+kill KAPPA_AKUSO                        # both dead: 6
+trigger qm3                             # the Old Trick Box; the var 0
+delkeyitem OldTrickBox                  # a GM
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+trigger qm3                             # round 4 (Biwa, Akuso, Bonze): CHILL_RUNS_DOWN; popped
+kill KAPPA_BIWA                         # both others alive: no count
+kill KAPPA_AKUSO                        # Biwa dead, Bonze alive: no count
+kill KAPPA_BONZE                        # both dead: 1
+trigger qm3                             # the Old Trick Box; the var 0
+delkeyitem OldTrickBox                  # a GM
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+trigger qm3                             # round 5 (Biwa, Bonze, Akuso): CHILL_RUNS_DOWN; popped
+kill KAPPA_BIWA                         # both others alive: no count
+kill KAPPA_BONZE                        # Biwa dead, Akuso alive: no count
+kill KAPPA_AKUSO                        # both dead: 1
+trigger qm3                             # the Old Trick Box; the var 0
+delkeyitem OldTrickBox                  # a GM
+tick 30000
+tick 30000
+tick 30000
+tick 2000
+trigger qm3                             # round 6: CHILL_RUNS_DOWN; popped
+kill KAPPA_AKUSO                        # no count
+kill KAPPA_BONZE                        # no count
+quest Outlands.TrueWill completed       # a GM
+kill KAPPA_BIWA                         # both dead, but completed: no count
+trigger qm3                             # completed: NOTHING_OUT_OF_ORDINARY

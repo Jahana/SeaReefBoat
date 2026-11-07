@@ -1,0 +1,32 @@
+# The Gobbiebag Part I (jeuno 27) against Lure of the Wildcat (Jeuno) (jeuno 90, C#) at Bluffnix: the Wildcat's 10056
+# (bit 12 unset) and Part I's 43 (a fresh char: fame level 1, the inventory 30) are both Progress events, so the two tie
+# (Bluffnix has no script: no UseFallback alternation). A tie plays the action after the last one played (the player's
+# local var of the last event id), the container order when none: 10056 first; a GM clears the Wildcat's Prog, the next
+# talk plays 43 (the last was 10056), the next 10056 again (the last was 43: it wraps). With bit 12 set, 43 alone (a lone
+# action leaves the local var as it was: 10056); Part I begun, its accepted 43 ties with 10056 the same way: 43 (the
+# last still 10056), then 10056. A zone change clears the local var: the container order again (10056, where the last
+# 10056 would have given 43).
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/onEventFinish/43 LowerJeuno/onEventFinish/10056
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=20
+quest Jeuno.LureOfTheWildcat accepted
+login
+trigger Bluffnix                        # the tie, no last event: 10056 (the container order)
+finish                                  # bit 12
+charvar Quest[3][90]Prog 0              # a GM
+trigger Bluffnix                        # the tie, the last 10056: Part I's 43 (31, 0, 1)
+finish option=1                         # not 0: not begun
+trigger Bluffnix                        # the tie, the last 43: 10056 (wraps)
+finish                                  # bit 12
+trigger Bluffnix                        # bit 12 set: Part I's 43 (31, 0, 1) alone (the local var kept: 10056)
+finish option=0                         # begun
+charvar Quest[3][90]Prog 0              # a GM
+trigger Bluffnix                        # the accepted 43 (31, 1, 1) ties with 10056, the last 10056: 43
+finish                                  # no 43 finish while accepted: nothing
+charvar Quest[3][90]Prog 0              # a GM (Prog already 0)
+trigger Bluffnix                        # the tie, the last 43: 10056
+finish                                  # bit 12
+charvar Quest[3][90]Prog 0              # a GM
+warp -52.5,0,101 UpperJeuno             # a zone change: the local var cleared
+warp -41.7,5.9,-113 LowerJeuno
+trigger Bluffnix                        # the tie, no last event: 10056 (the last 10056 would give 43)
+finish                                  # bit 12

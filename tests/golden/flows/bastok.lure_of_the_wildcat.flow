@@ -1,0 +1,78 @@
+# Lure of the Wildcat (Bastok) (bastok 84): Alib-Mufalib in Port Bastok and twenty NPCs in the four Bastok zones. The
+# guard (ENABLE_TOAU 1, the default): 357 (the Blue Sentinel Badge, begun); Alib-Mufalib's 358 at Prog 0, 359 with some
+# bits, 360 with all twenty (the badge taken, KEYITEM_LOST, completed: the Blue Invitation Card, fame 0); each NPC's
+# event once (its bit unset) and nil after (Kaede in Port Bastok is talked to twice). Completed: Alib-Mufalib's own
+# script (361 before ToAU's President Salaheem). #toau_off is the guard's other side.
+# The char is a WAR of level 20 at fame 0, so the other quests at these NPCs stay silent: Ayame and Kaede (Kaede's 240
+# from level 30), Faded Promises (a NIN at Ayame and Kagetora), A Question of Faith (Ayame, fame level 4), Cid's
+# Secret / The Usual / LB04 (Hilda), Teak Me to the Stars / DRK AF1 (Raibaht), The Siren's Tear (Echo Hawk), WAR AF2 /
+# AF3 (Deidogg), DNC AF3 (Harmodios), Chasing Dreams (Patient Wheel), Stamp Hunt (Arawn's 225 is an offer to anyone: a
+# Progress that alternates with 429; the setup completes Stamp Hunt), Breaking Stones (Horatius, C#), Vengeful Wrath
+# (Goraow, C#), Silence of the Rams (Paujean, C#). Check each first talk's answer with show and fix the comments.
+lists PortBastok/Alib-Mufalib/onTrigger PortBastok/onEventFinish/357 PortBastok/onEventFinish/360 PortBastok/Kaede/onTrigger PortBastok/Patient_Wheel/onTrigger PortBastok/Paujean/onTrigger PortBastok/Hilda/onTrigger PortBastok/Tilian/onTrigger Metalworks/Raibaht/onTrigger Metalworks/Invincible_Shield/onTrigger Metalworks/Manilam/onTrigger Metalworks/Kaela/onTrigger Metalworks/Ayame/onTrigger BastokMarkets/Harmodios/onTrigger BastokMarkets/Arawn/onTrigger BastokMarkets/Horatius/onTrigger BastokMarkets/Ken/onTrigger BastokMarkets/Pavel/onTrigger BastokMines/Griselda/onTrigger BastokMines/Goraow/onTrigger BastokMines/Echo_Hawk/onTrigger BastokMines/Deidogg/onTrigger BastokMines/Vaghron/onTrigger
+char zone=PortBastok pos=116.1,7.4,-31.8 job=WAR lvl=20
+quest Bastok.StampHunt completed
+item BoneChip
+login
+trade Alib-Mufalib BoneChip x1 # available: no trade handler; his script's trade (300 gil only): nothing
+trigger Kaede                  # available: no handler, Kaede's default 26
+finish
+trigger Alib-Mufalib           # ENABLE_TOAU 1: 357
+finish                         # the Blue Sentinel Badge, begun
+trigger Alib-Mufalib           # Prog 0: 358
+finish
+trigger Kaede                  # bit 0 unset: 352
+finish                         # bit 0
+trigger Kaede                  # bit 0 set: nil, 26
+finish
+trigger Alib-Mufalib           # some bits: the quest's Event 359, but his last answer was the Event 358, so the lookup
+                               # alternates to his script (UseFallback): 361
+finish
+trigger Alib-Mufalib           # some bits: 359
+finish
+trigger Patient_Wheel          # 354
+finish                         # bit 1
+trigger Paujean                # 355
+finish                         # bit 2
+trigger Hilda                  # 356
+finish                         # bit 3
+trigger Tilian                 # 353
+finish                         # bit 4
+warp -27,-10,-1 Metalworks
+trigger Raibaht                # 933
+finish                         # bit 5
+trigger Invincible_Shield      # 932
+finish                         # bit 6
+trigger Manilam                # 931
+finish                         # bit 7
+trigger Kaela                  # 934
+finish                         # bit 8
+trigger Ayame                  # 935
+finish                         # bit 9
+warp -79.9,-4.8,-135.1 BastokMarkets
+trigger Harmodios              # 430
+finish                         # bit 10
+trigger Arawn                  # 429
+finish                         # bit 11
+trigger Horatius               # 428
+finish                         # bit 12
+trigger Ken                    # 432
+finish                         # bit 13
+trigger Pavel                  # 431
+finish                         # bit 14
+warp -25.7,0,52.4 BastokMines
+trigger Griselda               # 507
+finish                         # bit 15
+trigger Goraow                 # 506
+finish                         # bit 16
+trigger Echo_Hawk              # 505
+finish                         # bit 17
+trigger Deidogg                # 504
+finish                         # bit 18
+trigger Vaghron                # 503
+finish                         # bit 19: Prog 0xFFFFF
+warp 116.1,7.4,-31.8 PortBastok
+trigger Alib-Mufalib           # all twenty: 360
+finish                         # the badge taken, KEYITEM_LOST, completed: the Blue Invitation Card
+trigger Alib-Mufalib           # completed: no section, his own script's 361
+finish

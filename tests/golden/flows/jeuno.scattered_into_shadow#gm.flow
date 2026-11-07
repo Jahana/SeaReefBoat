@@ -1,0 +1,38 @@
+# Scattered into Shadow (jeuno 61), GM-set states. Accepted at Prog 3 with no sprig, logged in in Castle Oztroja: the
+# zone-in at Prog 3 adds no listener; a GM's Prog 4 at once (before any tick): with no listener Tebhi stays
+# CUTSCENE_ONLY through the ticks. Brutus at Prog 2 with no sprig: no arm of his answers (nil: Path of the
+# Beastmaster's 20, then his script's 134). Osker at Prog 2: nil (Path of the Beastmaster's 45). The middle pool at
+# Prog 2 with Aquaflora 3 given back: 18 (Prog 2 is tested first). At Prog 1 with Aquaflora 3: Dabotz's Ghost popped;
+# Aquaflora 3 taken by a GM before the kill: its death leaves Prog 1; the pool then: nil.
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/Osker/onTrigger Feiyin/Underground_Pool/onTrigger Feiyin/Dabotzs_Ghost/onMobDeath
+char zone=CastleOztroja pos=-134.5,24,-21 job=BST lvl=50
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster completed
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ScatteredIntoShadow accepted
+charvar Quest[3][61]Prog 3
+charvar Quest[3][61]Stage 7
+login                                       # the zone-in at Prog 3: no listener
+charvar Quest[3][61]Prog 4                  # a GM's Prog 4, no zone-in
+tick 1000                                   # no listener: Tebhi stays CUTSCENE_ONLY
+tick 1000
+charvar Quest[3][61]Prog 2
+warp -55.5,8.2,97.5 UpperJeuno
+trigger Brutus                              # Prog 2, no sprig: no arm (nil): Path of the Beastmaster's 20
+finish-if-event
+trigger Brutus                              # the next turn
+finish-if-event
+trigger Osker                               # Prog 2: nil; Path of the Beastmaster's 45
+finish-if-event
+warp 11.5,0,250 Feiyin
+keyitem Aquaflora3
+trigger Underground_Pool+1                  # Prog 2: 18 (before the sprig)
+finish                                      # Aquaflora 3 deleted, Prog 3, Stage bit 2
+keyitem Aquaflora3
+charvar Quest[3][61]Prog 1
+trigger Underground_Pool+1                  # Prog 1, Aquaflora 3: the ghost popped; noAction
+delkeyitem Aquaflora3
+kill DABOTZS_GHOST                          # its death without Aquaflora 3: Prog stays 1
+trigger Underground_Pool+1                  # Prog 1, no Aquaflora 3: nil

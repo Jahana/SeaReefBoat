@@ -1,0 +1,23 @@
+# Elderly Pursuits (otherAreas 75): Para popped twice in one flow, the corpse's despawn run while the char is in another
+# zone. Accepted at Prog 1 with the amulet: the ??? pops Para; the kill: Prog 2. A warp to Southern San d'Oria
+# (onZoneOut at Prog 2: Prog 1). Carpenters' Landing keeps ticking with nobody in it. The ticks are cut to the ms: the
+# kill's second 1 s tick and the warp's 400 ms come after the death, so 13601 ms more puts the clock 15001 ms after it,
+# past the 15 s death state (the test is strict: a tick at exactly 15000 ms would not end it), and the 3 s fade-out
+# begins (CDespawnState). After the 2600 ms tick Para is still fading; the warp back's own 400 ms tick reaches the 3 s
+# and it fades out. A tick runs the zones once, as the C++ test simulation's skipTime does, so a corpse's despawn takes
+# two ticks (one long tick leaves it fading). Back at Prog 1: the ??? pops Para again, and the second kill: Prog 2.
+lists CarpentersLanding/onZoneOut/1 CarpentersLanding/qm_para/onTrigger CarpentersLanding/Para/onMobDeath
+char zone=CarpentersLanding pos=-414.6,0,-363.5 job=WAR lvl=75
+quest OtherAreas.SecretsOfOvensLost completed
+quest OtherAreas.ElderlyPursuits accepted
+charvar Quest[4][75]Prog 1
+keyitem AntiqueAmulet
+login
+trigger qm_para                         # Prog 1: Para popped
+kill PARA                               # Prog 2
+warp -14.7,2.1,11.8 SouthernSanDoria    # onZoneOut at Prog 2: Prog 1
+tick 13601                              # 15001 ms after the death (strict): the fade-out begins
+tick 2600                               # 2600 ms into the fade: still fading
+warp -414.6,0,-363.5 CarpentersLanding  # its 400 ms tick: 3 s into the fade, Para fades out
+trigger qm_para                         # Prog 1: Para popped again
+kill PARA                               # Prog 2

@@ -1,0 +1,59 @@
+# No Strings Attached's replies, two triggers each, the quest reset between the two when its finish moves it:
+# Shamarhaan at exactly level 30 (the gate is >= 30), Iruki-Waraki 260 (Option 1) and 261 at Prog 3 (the Prog bound),
+# Ghatsad 262 / 263 (an Event, once per zone) / 264 (the Antique Automaton) / 265 (the Timer passed). Shamarhaan has no
+# script, so his repeat is 435 (his default is 433); Iruki's repeat 261 comes by the fallback after his script does
+# nothing; Ghatsad's script plays 256 after 263 was shown. A GM localvar clears the once-per-zone and fallback marks
+# of 263, which shows it is an Event: his script's 256 plays instead of 263 (a Progress would show 263).
+lists BastokMarkets/Shamarhaan/onTrigger AhtUrhganWhitegate/Iruki-Waraki/onTrigger AhtUrhganWhitegate/Ghatsad/onTrigger
+char zone=BastokMarkets pos=-285.382,-12.021,-84.743 job=WAR lvl=30
+login
+trigger Shamarhaan                      # level 30, Option 0: 434 (Progress)
+finish option=1                         # Option 1
+trigger Shamarhaan                      # 435 (Event)
+finish
+trigger Shamarhaan                      # 435 again (no script)
+finish
+warp 101.329,-6,-29.042 AhtUrhganWhitegate
+trigger Iruki-Waraki                    # Option 1: 260 (Progress)
+finish                                  # begun
+quest AhtUrhgan.NoStringsAttached available
+charvar Quest[6][7]Option 1
+trigger Iruki-Waraki                    # 260 again
+finish
+charvar Quest[6][7]Prog 3
+trigger Iruki-Waraki                    # Prog 3: 261 (Event)
+finish
+trigger Iruki-Waraki                    # 261 again, by the fallback
+finish
+charvar Quest[6][7]Prog 0
+trigger Ghatsad                         # Prog 0: 262 (Progress)
+finish                                  # Prog 1
+charvar Quest[6][7]Prog 0
+trigger Ghatsad                         # 262 again
+finish
+trigger Ghatsad                         # Prog 1: 263 (Event, once per zone)
+finish
+trigger Ghatsad                         # the second: not again in this zone: his script, 256
+finish
+trigger Ghatsad                         # the third: 256
+finish
+localvar [Action][Ghatsad][onTrigger]UseFallback 1
+localvar [Action][Ghatsad][onTrigger]263 0
+trigger Ghatsad                         # Event: his script's 256; a Progress would show 263
+finish
+keyitem AntiqueAutomaton
+charvar Quest[6][7]Prog 2
+trigger Ghatsad                         # Prog 2 with the automaton: 264 (Progress)
+finish                                  # Prog 3; the Timer; the automaton taken
+keyitem AntiqueAutomaton
+charvar Quest[6][7]Prog 2
+trigger Ghatsad                         # 264 again
+finish
+charvar Quest[6][7]Timer 0
+charvar Quest[6][7]Prog 3
+trigger Ghatsad                         # Prog 3, the Timer passed: 265 (Progress)
+finish                                  # Prog 4
+charvar Quest[6][7]Timer 0
+charvar Quest[6][7]Prog 3
+trigger Ghatsad                         # 265 again
+finish

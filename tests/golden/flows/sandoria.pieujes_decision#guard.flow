@@ -1,0 +1,17 @@
+# Pieuje's Decision (sandoria 89): the door's guard, which stays in the script. A WHM of main level 49 (AF2_QUEST_LEVEL
+# 50) with Prelude of Black and White completed: not the WHM block, the door's 523. A WAR 50 likewise: 523. Each talks
+# twice: the door's DefaultActions text (7243) takes the first talk after the zone-in, the script the second.
+char zone=ChateauDoraguille pos=-36.0,-4.9,28.5 job=WHM lvl=49
+char war zone=ChateauDoraguille pos=-36.0,-4.9,28.5 job=WAR lvl=50
+quest Sandoria.PreludeOfBlackAndWhite completed
+war: quest Sandoria.PreludeOfBlackAndWhite completed
+login
+trigger _6h1                              # 7243
+finish-if-event
+trigger _6h1                              # WHM 49: 523 (the script's)
+finish-if-event
+war: login
+war: trigger _6h1                         # 7243
+war: finish-if-event
+war: trigger _6h1                         # WAR 50: 523 (the script's)
+war: finish-if-event

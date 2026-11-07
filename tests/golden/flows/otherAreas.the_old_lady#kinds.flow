@@ -1,0 +1,51 @@
+# The Old Lady (otherAreas 10) and Elder Memories (otherAreas 24): the mutual exclusion and the reply kinds on Vera and
+# Isacio, from The Old Lady's side. Elder Memories accepted (a GM): The Old Lady's available section is off: Vera's 130
+# (Elder Memories' replaceDefault) instead of 131; Elder Memories completed: 130 again. Both accepted (Elder Memories
+# available, then accepted), Prog 0: Vera's 132 (Event) beats 130 (replaceDefault) every time; Prog 3: The Old Lady's
+# nil: 130 alone. The Old Lady completed: Elder Memories' 130 and its 138 (both replaceDefault) tie: 130 first
+# (Elder_Memories sorts first), then 138, then 130 (a Progress or Event 138 or 130 would play every time). Selbina:
+# Isacio: Elder Memories' 114 (Event, Prog 0) beats The Old Lady's completed 99 (replaceDefault) every time (an Event 99
+# would tie and take its turn second); The Old Lady accepted again (a GM): 114 beats the accepted 99 too. Elder
+# Memories completed: 118 and the accepted 99 (both replaceDefault) take turns, 118 first.
+lists Mhaura/Vera/onTrigger Selbina/Isacio/onTrigger
+char zone=Mhaura pos=-51.5,-3.9,17.2 job=WAR lvl=30
+quest OtherAreas.ElderMemories accepted
+login
+trigger Vera                            # Elder Memories accepted: The Old Lady off: 130 (replaceDefault)
+finish
+quest OtherAreas.ElderMemories completed # a GM
+trigger Vera                            # Elder Memories completed: The Old Lady off: 130
+finish
+quest OtherAreas.ElderMemories available # a GM
+quest OtherAreas.ElderMemories accepted # a GM
+quest OtherAreas.TheOldLady accepted    # a GM: both accepted
+trigger Vera                            # Prog 0: 132 (542) (Event beats 130)
+finish
+trigger Vera                            # 132 again
+finish
+charvar Quest[4][10]Prog 3              # a GM
+trigger Vera                            # The Old Lady's nil: 130
+finish
+quest OtherAreas.TheOldLady completed   # a GM
+trigger Vera                            # 130 (a tie of replaceDefault replies: Elder Memories' first)
+finish
+trigger Vera                            # 138
+finish
+trigger Vera                            # 130
+finish
+warp -56.6,-0.9,-46.4 Selbina
+trigger Isacio                          # Elder Memories at Prog 0: 114 (538) beats the completed 99
+finish
+trigger Isacio                          # 114 again
+finish
+quest OtherAreas.TheOldLady available   # a GM
+quest OtherAreas.TheOldLady accepted    # a GM
+trigger Isacio                          # 114 beats the accepted 99
+finish
+trigger Isacio                          # 114 again
+finish
+quest OtherAreas.ElderMemories completed # a GM
+trigger Isacio                          # 118 (Elder Memories' first)
+finish
+trigger Isacio                          # 99
+finish

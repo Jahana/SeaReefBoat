@@ -1,0 +1,35 @@
+# A Greeting Cardian with its era module (modules/era/lua/quests/windurst/a_greeting_cardian.lua), enabled by its
+# condition xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0). It wraps section 1's Windurst Woods 295
+# finish: the base finish, then Wait = JstMidnight() (1800025200; now 1800000000), on every option. The harness wall
+# clock moves by whole days only (wait jst=), so the module's write is shown by an escape: 295 option 0 teaches nothing
+# in the base (Wait stays 0) but the module still writes Wait. Greeting 1 by GM (no mustZone: the escape sets none):
+# Kororo nil (277; the base would play 298); a day later (wait jst=1): 298. Then 295 option 3: Greeting 3, the mustZone
+# and Wait = the next JST midnight; out and back: nil (277); wait jst=1: 298, option 1 begun.
+module modules/era/lua/quests/windurst/a_greeting_cardian.lua
+lists WindurstWoods/Kororo/onTrigger WindurstWoods/Spare_One/onTrigger WindurstWoods/onEventFinish/295 WindurstWoods/onEventFinish/298
+char zone=WindurstWoods pos=-10,-2.75,7.5 job=WAR lvl=10
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+fame Windurst 125
+quest Windurst.TheAllNewC2000 completed
+login
+trigger Spare_One                             # 295
+finish option=0                               # an escape: the base teaches nothing; the module: Wait = 1800025200
+charvar Quest[2][43]Greeting 1
+trigger Kororo                                # Greeting 1, no mustZone, now < Wait: nil; 277
+finish
+wait jst=1                                    # now 1800086400
+trigger Kororo                                # now >= Wait: 298
+finish option=0                               # declined
+trigger Spare_One                             # Greeting 1: 495 (0, 1)
+finish
+charvar Quest[2][43]Greeting 0
+trigger Spare_One                             # 295
+finish option=3                               # Greeting 3, the mustZone; Wait = 1800111600 (the module over now + 60)
+warp -50.9,-6.25,109.3 WindurstWaters
+warp -10,-2.75,7.5 WindurstWoods              # the mustZone cleared
+trigger Kororo                                # now < Wait: nil; 277
+finish
+wait jst=1                                    # now 1800172800
+trigger Kororo                                # 298
+finish option=1                               # begun

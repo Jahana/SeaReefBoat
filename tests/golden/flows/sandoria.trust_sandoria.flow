@@ -1,0 +1,57 @@
+# Trust: San d'Oria (sandoria 119): Gondebaud (Southern San d'Oria) and Excenmille (Northern San d'Oria; the first of
+# the two, 17723601: the second is TVR content with no position). Neither has a DefaultActions entry (3505 / 29 are
+# their scripts'). A Windurst char (nation 2, rank 2 (GM): rank3 0, the rank one below 3) of level 5, no other trust
+# quest begun. Gondebaud 3500: options 0 and 1 nothing; option 2 begun, the Red Institute Card. Accepted with the card:
+# 3501. Accepted without the card (GM delkeyitem): no arm (not completed), his 3505; the card given back by GM.
+# Excenmille 893 (memories 0, rank3 0): Excenmille learned, SandoriaFirstTrust 1; 894 (ExcenmilleTrustChatFlag set); the
+# flag set: no arm, his 29. The var 3 (GM): no arm, 29. Quest[0][119]Prog 1 (GM). The var 2 (GM: the Excenmille trust
+# cast in Ronfaure stays Lua): 895: the card taken, the permit, The Trustworthy, the var 0, completed (Quest[0][119]Prog
+# kept), CALL_MULTIPLE_ALTER_EGO. Completed, the flag still set this zone: 29; after a rezone: 896 (no memories, rank3
+# 0; flag set), then 29; after another rezone with the Curilla trust known (GM spell 902): no arm, 29. Gondebaud: 3502;
+# the card given back by GM: 3501 (the card arm comes first).
+char zone=SouthernSanDoria pos=122.3,0,92.1 lvl=5 nation=2
+rank 2                                    # rank3 0 (below 3)
+login
+trigger Gondebaud                         # level 5, trusts on, available, Windurst's and Bastok's available: 3500
+finish option=0                           # declined: nothing
+trigger Gondebaud                         # 3500
+finish option=1                           # option 1: nothing (only option 2 begins)
+trigger Gondebaud                         # 3500
+finish option=2                           # begun; the Red Institute Card
+trigger Gondebaud                         # accepted, the card held: 3501
+finish
+delkeyitem RedInstituteCard               # a GM: accepted, the card gone
+trigger Gondebaud                         # accepted, no card: no arm (the completed arm wants completed): 3505
+finish
+keyitem RedInstituteCard                  # a GM: the card back
+warp -227.8,8,23 NorthernSanDoria
+trigger Excenmille                        # accepted, SandoriaFirstTrust 0: 893 (0, 0, 0, 0, 0, 0, 0, 0)
+finish                                    # Excenmille learned (YOU_LEARNED_TRUST); the var 1
+trigger Excenmille                        # the var 1, flag 0: 894; ExcenmilleTrustChatFlag 1
+finish
+trigger Excenmille                        # the var 1, flag 1: no arm: 29
+finish
+charvar SandoriaFirstTrust 3
+trigger Excenmille                        # the var 3: no arm: 29
+finish
+charvar Quest[0][119]Prog 1               # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+charvar SandoriaFirstTrust 2              # GM: the Excenmille trust's cast (Lua)
+trigger Excenmille                        # the var 2: 895
+finish                                    # see the header: completed
+trigger Excenmille                        # completed, no Curilla trust, the flag still 1 (this zone): 29
+finish
+rezone
+trigger Excenmille                        # completed, flag 0: 896 (0, 0, 0, 0, 0, 0, 0, 0); the flag 1
+finish
+trigger Excenmille                        # flag 1: 29
+finish
+rezone
+spell 902                                 # a GM: the Curilla trust
+trigger Excenmille                        # completed, flag 0, Curilla known: no arm: 29
+finish
+warp 122.3,0,92.1 SouthernSanDoria
+trigger Gondebaud                         # completed, no card: 3502
+finish
+keyitem RedInstituteCard
+trigger Gondebaud                         # completed, the card held (GM): 3501 (before the completed arm)
+finish

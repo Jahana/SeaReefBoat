@@ -1,0 +1,69 @@
+# Chocobo on the Loose! (jeuno 92): Upper Jeuno's Brutus (script), La Theine Plateau's Chocobo_Tracks (default
+# CHOCOBO_TRACKS), Southern San d'Oria's Hantileon (script: the VCS chocobo trainer). A level 25 Warrior, ENABLE_TOAU 1
+# (the default). Available: a trade to Brutus (no trade handler: nothing); 10093: begun. Accepted: Brutus at Prog 0:
+# 10094 (once per zone); again: priority Ignore, his default 66; the Tracks: 209 (Prog 1); again: nil
+# (CHOCOBO_TRACKS); Hantileon at Prog 1: nil (his script); Brutus at Prog 1: 10095 (Prog 2), at Prog 2: 10099;
+# Hantileon at Prog 2: 821 (Prog 3), at Prog 2 again (a GM): 821 again, at Prog 3: 822 (no finish), twice (the second
+# talks show the progressEvents' kind against his script); Brutus at Prog 3: 10100 (Prog 4, Timer 8001, the mustZone);
+# at Prog 4 with the mustZone: nil; out (Hantileon at Prog 4: nil, his script) and back (cleared), Timer 8001 > day
+# 8000: nil; `wait vana=12` (day 8001): 10109; a full bag: the egg not given, not completed; 10109 again: the Chocobo
+# Egg (faintly warm), completed, fame +7 x3. Completed: no section. The kinds of Brutus's replies: #kinds.
+# Brutus's other quests are kept silent: Chocobo's Wounds and Save My Son completed (a GM, before login: Chocobo's
+# Wounds' completed section wants Save My Son not completed), level 25 (Path of the Beastmaster wants 30); his script
+# then starts nothing (Chocobo's Wounds completed, Wings of Gold / Scattered into Shadow not); a talk with
+# no quest reply plays his default 66 (DefaultActions).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/Brutus/onTrade UpperJeuno/onEventFinish/10093 UpperJeuno/onEventFinish/10095 UpperJeuno/onEventFinish/10100 UpperJeuno/onEventFinish/10109 LaTheinePlateau/Chocobo_Tracks/onTrigger LaTheinePlateau/onEventFinish/209 SouthernSanDoria/Hantileon/onTrigger SouthernSanDoria/onEventFinish/821
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=25
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+item BoneChip
+login
+trade Brutus BoneChip x1                # available: no trade handler (his script has none): nothing, the chip kept
+trigger Brutus                          # available, level 25: 10093
+finish                                  # begun
+trigger Brutus                          # Prog 0: 10094 (oncePerZone)
+finish
+trigger Brutus                          # 10094 played in this zone: priority Ignore; the default 66
+finish
+warp -555.2,0,523.8 LaTheinePlateau     # by the Chocobo Tracks
+trigger Chocobo_Tracks                  # Prog 0: 209
+finish                                  # Prog 1
+trigger Chocobo_Tracks                  # Prog 1: nil; CHOCOBO_TRACKS
+warp -1.2,-0.1,-105.3 SouthernSanDoria  # by Hantileon
+trigger Hantileon                       # Prog 1: nil; his script
+finish-if-event
+warp -55.5,8.2,97.5 UpperJeuno          # by Brutus
+trigger Brutus                          # Prog 1: 10095
+finish                                  # Prog 2
+trigger Brutus                          # Prog 2: 10099
+finish
+warp -1.2,-0.1,-105.3 SouthernSanDoria  # by Hantileon
+trigger Hantileon                       # Prog 2: 821
+finish                                  # Prog 3
+charvar Quest[3][92]Prog 2              # a GM: Prog 2 again
+trigger Hantileon                       # 821 again: a progressEvent plays whatever UseFallback holds (an event would give way to his script)
+finish                                  # Prog 3
+trigger Hantileon                       # Prog 3: 822
+finish                                  # no 822 finish
+trigger Hantileon                       # 822 again: a progressEvent, as above
+finish
+warp -55.5,8.2,97.5 UpperJeuno          # by Brutus
+trigger Brutus                          # Prog 3: 10100
+finish                                  # Prog 4, Timer 8001, the mustZone (Upper Jeuno)
+trigger Brutus                          # Prog 4, the mustZone: nil; the default 66
+finish
+warp -1.2,-0.1,-105.3 SouthernSanDoria  # another zone: the mustZone cleared; by Hantileon
+trigger Hantileon                       # Prog 4: nil; his script
+finish-if-event
+warp -55.5,8.2,97.5 UpperJeuno          # by Brutus
+trigger Brutus                          # Timer 8001 > day 8000: nil; the default 66
+finish
+wait vana=12                            # day 8001
+fill-inventory
+trigger Brutus                          # Timer 8001 <= day 8001: 10109
+finish                                  # the egg cannot be given: not completed
+free-inventory
+trigger Brutus                          # 10109
+finish                                  # the Chocobo Egg (faintly warm); completed; fame +7 x3
+trigger Brutus                          # completed: no section; the default 66
+finish

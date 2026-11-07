@@ -1,0 +1,19 @@
+# Save My Sister (jeuno 1), the other entry and a full inventory: Baudin's 172 (Prog 0 -> 1), then a GM sets Prog 4;
+# Baudin's 107 with no room for the Holy Mace (not completed, Prog kept), then with room (completed).
+# Jeuno fame 225 (level 4): 150/150/150.
+lists UpperJeuno/Baudin/onTrigger UpperJeuno/onEventFinish/172 UpperJeuno/onEventFinish/107
+char zone=UpperJeuno pos=-74.9,-1.2,80.0
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 150
+quest Jeuno.CrestOfDavoi completed
+login
+trigger Baudin                        # Prog 0: 172
+finish                                # Prog 1
+charvar Quest[3][1]Prog 4             # a GM
+trigger Baudin                        # Prog 4: 107
+fill-inventory
+finish                                # no room for the Holy Mace: not completed, nothing given, Prog 4 kept
+free-inventory
+trigger Baudin                        # 107 again
+finish                                # completed: 3000 gil, Holy Mace, Exorcist in Training, fame +13 x3

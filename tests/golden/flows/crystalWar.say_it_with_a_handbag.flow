@@ -1,0 +1,63 @@
+# Say It with a Handbag (crystalWar 41, call-only): a level 99 Warrior in Windurst Waters [S] (missions as group 1's
+# flows), a Square of Sheep Leather and a Spool of Silk Thread. Hampu-Kampu 169, finished: the quest added; again: 170.
+# The Acolyte Hostel door 171, option 0: nothing; 171, option 1: CS 1; again: nothing (CS 1). Hampu-Kampu 172,
+# finished: the Torn Patches of Leather; again: 173. Southern San d'Oria: Kipopo (the first, 17719381): the patches and
+# CS 1: 908, option 0: the image support's finish; 908, option 1: CS 2; again: 909. The 910 trade (item 2012, a Square
+# of Laminated Ram Leather, by id, with the sheep leather and the silk thread, alone), finished: the patches taken, CS
+# 3, needToZone; 911; after a warp out and back: CS 3, not needToZone: 912, finished: the Repaired Handbag, CS 4;
+# again: 913. Windurst Waters [S]: Hampu-Kampu 174, finished: completed (the Trainee's Needle, CS deleted), the
+# handbag taken, BonusCS 1; again: 175. Southern San d'Oria: Kipopo 914, finished: BonusCS 0; again: the image
+# support (his script).
+lists WindurstWatersS/Hampu-Kampu/onTrigger WindurstWatersS/Door_Acolyte_Hostel_up/onTrigger WindurstWatersS/onEventFinish/169 WindurstWatersS/onEventFinish/171 WindurstWatersS/onEventFinish/172 WindurstWatersS/onEventFinish/174 SouthernSanDoria/Kipopo/onTrigger SouthernSanDoria/Kipopo/onTrade SouthernSanDoria/onEventFinish/908 SouthernSanDoria/onEventFinish/910 SouthernSanDoria/onEventFinish/911 SouthernSanDoria/onEventFinish/912 SouthernSanDoria/onEventFinish/914
+char zone=WindurstWatersS pos=-114.097,-1,-158.703 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item SquareOfSheepLeather
+item SpoolOfSilkThread
+login
+trigger Hampu-Kampu                     # available: 169
+finish                                  # the quest added
+trigger Hampu-Kampu                     # accepted, CS 0: 170
+finish
+warp 148.119,-8.525,242.874 WindurstWatersS
+trigger Door_Acolyte_Hostel_up          # accepted, CS 0: 171
+finish option=0                         # nothing
+trigger Door_Acolyte_Hostel_up          # 171
+finish option=1                         # CS 1
+trigger Door_Acolyte_Hostel_up          # CS 1: nothing
+finish-if-event
+warp -114.097,-1,-158.703 WindurstWatersS
+trigger Hampu-Kampu                     # accepted, CS 1: 172
+finish                                  # the Torn Patches of Leather
+trigger Hampu-Kampu                     # the patches: 173
+finish
+warp -189.55,-1.15,12.285 SouthernSanDoria
+trigger Kipopo                          # the patches, CS 1: 908
+finish option=0                         # the image support's finish (the script's else)
+trigger Kipopo                          # 908
+finish option=1                         # CS 2
+trigger Kipopo                          # CS 2: 909
+finish
+item 2012                               # a Square of Laminated Ram Leather (no xi.item name: by id)
+trade Kipopo 2012 x1 SquareOfSheepLeather x1 SpoolOfSilkThread x1 # the patches, CS 2, the three alone: 910
+finish                                  # the patches taken; CS 3; needToZone; confirmed
+trigger Kipopo                          # CS 3, needToZone: 911
+finish
+warp -114.097,-1,-158.703 WindurstWatersS         # clears needToZone (a same-zone rezone does not)
+warp -189.55,-1.15,12.285 SouthernSanDoria
+trigger Kipopo                          # CS 3, not needToZone: 912
+finish                                  # the Repaired Handbag; CS 4
+trigger Kipopo                          # the handbag, CS 4: 913
+finish
+warp -114.097,-1,-158.703 WindurstWatersS
+trigger Hampu-Kampu                     # the handbag, CS 4: 174
+finish                                  # completed (the Trainee's Needle; CS deleted); the handbag taken; BonusCS 1
+trigger Hampu-Kampu                     # completed: 175
+finish
+warp -189.55,-1.15,12.285 SouthernSanDoria
+trigger Kipopo                          # completed, BonusCS 1: 914
+finish                                  # BonusCS 0
+trigger Kipopo                          # nothing for the quest: the image support (oldImageSupportOnTrigger)
+finish-if-event

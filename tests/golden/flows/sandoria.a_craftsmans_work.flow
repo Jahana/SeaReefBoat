@@ -1,0 +1,37 @@
+# A Craftsman's Work (sandoria 94, DRG AF1; call-only): Miaux (Northern San d'Oria, no default action: 11 is his
+# script's), and the Lua steps in Eastern Altepa Desert (the qm and Decurio I-III, walked). A DRG 40 (AF1_QUEST_LEVEL),
+# available: 73 (has_seen_drgaf1_quest_already 0): option 0 nothing; option 2 declined (the var 1); 71:
+# option 0 and 2 nothing; option 1 begun (the var 0, aCraftsmanWork 1). 69 without the stone. The qm pops Decurio I-III
+# (FEEL_A_HOSTILE_GAZE), its death sets Decurio_I_IIIKilled 1, the qm then gives the Altepa Polishing Stone
+# (aCraftsmanWork 2); then REMNANTS_OF_A_PAST_AGE. 70 with a full inventory: npcUtil.giveItem fails
+# (ITEM_CANNOT_BE_OBTAINED), nothing else. Quest[0][94]Prog 1 (GM). 70 with room: the Peregrine, aCraftsmanWork 0, the
+# stone taken, fame 20, completed; Quest[0][94]Prog kept (the raw completeQuest). Completed: 11.
+char zone=NorthernSanDoria pos=-167.6,4,158.7 job=DRG lvl=40
+login
+trigger Miaux                             # DRG 40, available, has_seen 0: 73
+finish option=0                           # nothing
+trigger Miaux                             # 73
+finish option=2                           # declined: has_seen_drgaf1_quest_already 1
+trigger Miaux                             # has_seen 1: 71 (the short version)
+finish option=0                           # nothing
+trigger Miaux                             # 71
+finish option=2                           # nothing (only option 1 accepts)
+trigger Miaux                             # 71
+finish option=1                           # begun; has_seen 0; aCraftsmanWork 1
+trigger Miaux                             # accepted, no stone: 69
+finish
+warp 113.4,-8.7,-72.8 EasternAltepaDesert
+trigger qm                                # work 1, kill var 0: Decurio I-III popped; FEEL_A_HOSTILE_GAZE (Lua)
+kill DECURIO_I_III                        # its death: Decurio_I_IIIKilled 1 (Lua)
+trigger qm                                # kill var 1: Altepa Polishing Stone; work 2; kill var 0 (Lua)
+trigger qm                                # aCraftsmanWork 2: REMNANTS_OF_A_PAST_AGE (Lua)
+warp -167.6,4,158.7 NorthernSanDoria
+trigger Miaux                             # accepted with the stone: 70
+fill-inventory
+finish                                    # no free slot: ITEM_CANNOT_BE_OBTAINED (the Peregrine); nothing else
+free-inventory
+charvar Quest[0][94]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Miaux                             # 70
+finish                                    # the Peregrine; aCraftsmanWork 0; the stone taken; fame 20; completed
+trigger Miaux                             # completed: no arm: 11
+finish

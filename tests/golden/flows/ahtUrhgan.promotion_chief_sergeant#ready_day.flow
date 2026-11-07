@@ -1,0 +1,26 @@
+# Promotion: Chief Sergeant, a planted patch's day: a level 1 Warrior accepted at Prog 3 with the Scourshroom (GMs) in
+# Aydeewa Subterrane. Patch 3: 19, option 0: planted, needToZone, the Scourshroom taken, MPatch_Time3 tomorrow. Out and
+# back on the same day: patch 3: not ready: 20 (user ruling 2026-11-04, kept Lua bugs: a patch reads its own
+# MPatch_Time<n>; the Lua read MPatch_Time, which nothing sets, so it played 21 as soon as the char had zoned). The
+# next day: 21, option 100: nothing (still planted). The 21s are finished on 100 so that both sides stay planted.
+lists AydeewaSubterrane/Mushroom_Patch/onTrigger AydeewaSubterrane/onEventFinish/19 AydeewaSubterrane/onEventFinish/21
+char zone=AydeewaSubterrane pos=118.947,36.826,-45.499 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant accepted
+charvar Quest[6][96]Prog 3
+keyitem Scourshroom
+login
+trigger Mushroom_Patch+3                # the Scourshroom, untouched: 19
+finish option=0                         # planted; needToZone; the Scourshroom taken; MPatch_Time3 tomorrow
+warp -619.539,-10.483,-69.223 WajaomWoodlands
+warp 118.947,36.826,-45.499 AydeewaSubterrane   # needToZone cleared
+trigger Mushroom_Patch+3                # planted on this day: not ready: 20
+finish option=100                       # (on 100, as the 21 the Lua played here: nothing)
+wait vana=24                            # the next day: MPatch_Time3 reached
+trigger Mushroom_Patch+3                # ready: 21
+finish option=100                       # nothing (still planted)

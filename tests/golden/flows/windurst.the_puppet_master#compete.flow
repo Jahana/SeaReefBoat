@@ -1,0 +1,20 @@
+# The Puppet Master (windurst 81): reply kinds at the House of the Hero (_6n2, Windurst Walls), against I Can Hear a
+# Rainbow's 385 (Event, oncePerZone; accepted at Prog 0 by GM). The door's script answers nothing here (The Puppet Master
+# not completed). Available (SMN, level 40): 402 (Progress) beats 385, begun; made available again by GM: 402 again (an
+# Event 402 would tie with 385 and the cycle would play 385 now). Accepted: 403 and 385 are both Event lines: they cycle
+# (403 first: The Puppet Master's container is the earlier), then 385 is spent for this zone visit (oncePerZone): 403 alone.
+lists WindurstWalls/_6n2/onTrigger WindurstWalls/onEventFinish/402
+char zone=WindurstWalls pos=-24.5,-14.498,262.994 job=SMN lvl=40
+quest Windurst.ICanHearARainbow accepted
+login
+trigger _6n2                                   # 402 (Progress) over 385 (Event)
+finish                                         # begun
+quest Windurst.ThePuppetMaster available       # GM
+trigger _6n2                                   # 402 again
+finish                                         # begun
+trigger _6n2                                   # accepted: 403 (both Event: the earlier container's first)
+finish
+trigger _6n2                                   # 385 (the cycle)
+finish
+trigger _6n2                                   # 385 spent (oncePerZone): 403
+finish

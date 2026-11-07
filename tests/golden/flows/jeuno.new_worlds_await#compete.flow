@@ -1,0 +1,23 @@
+# New Worlds Await (jeuno 133), its trigger replies' kinds against other quests' at the same time. The lookup plays the
+# highest priority (a progressEvent 1000 over an event 100); equal ones take turns by the action's id, which is the
+# event id: replies with the same csid (10045) all match the id last played, so the first in container order (133, 134,
+# 135, 136, 170, 137, 167) plays every time. A level 75 Warrior with the Limit Breaker at cap 75. New Worlds Await
+# available, Prelude to Puissance accepted (a GM): two progressEvents 10045, New Worlds Await's (75, 1, 1, 0) first
+# (finished with option 1: neither quest's option). Accepted too (a GM): Prelude to Puissance's progressEvent (75, 1, 6,
+# 2, 0) over New Worlds Await's event. Prelude to Puissance available again (a GM; its own check fails at cap 75) and
+# Expanding Horizons accepted (a GM): two events 10045, New Worlds Await's (75, 1, 1, 1) first.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=75
+keyitem LimitBreaker
+levelcap 75
+quest Jeuno.PreludeToPuissance accepted
+login
+trigger Nomad_Moogle                    # NWA available and PtP accepted, both progressEvent 10045: NWA's (75, 1, 1, 0)
+finish option=1                         # nothing (neither NWA's 4 / 5 nor PtP's completing options)
+quest Jeuno.NewWorldsAwait accepted     # a GM
+trigger Nomad_Moogle                    # PtP's progressEvent over NWA's reminder: 10045 (75, 1, 6, 2, 0)
+finish option=1                         # nothing
+quest Jeuno.PreludeToPuissance available  # a GM
+quest Jeuno.ExpandingHorizons accepted  # a GM
+trigger Nomad_Moogle                    # two reminders, both event 10045: NWA's (75, 1, 1, 1)
+finish

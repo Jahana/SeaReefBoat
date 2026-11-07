@@ -1,0 +1,75 @@
+# Blackmail (sandoria 71): Dauperiat in Northern San d'Oria, Halver in Chateau d'Oraguille. A San d'Oria char (nation 0).
+# Available: a chip to Dauperiat (nothing); fame 124 (level 2), rank 1: 641 (needToZone set), 642 (needToZone); a
+# rezone clears it; rank 3 at fame 124 (only the fame operand fails): 641; fame 125, rank 2 (only the rank operand
+# fails): 642; rank 3: 643 (the Suspicious Envelope, begun). The envelope: his 645; Halver's 549 (the envelope
+# deleted, Prog 1). Prog 1 with the envelope back by GM: sections 2 and 3 both hold, and 646 (Progress) wins over 645
+# (Event); the envelope taken again: the plans traded at accepted Prog 1 (check 6's status operand fails: nil); 646
+# (option [1] the plans) declined, taken (Prog 2). Prog 2: his 647; a chip (nil), the plans with a chip (tradeHas: 648,
+# completed: 900 gil, fame +16, the plans taken, the chip kept, Prog cleared). Completed, Prog 0: his 650 declined, taken (Prog 1);
+# Prog 1: 647, a chip (nil), the plans (648: Prog 0, the plans taken, 900 gil, fame +16); Prog 0: 650. Completed with
+# the envelope by GM (section 2's status operand fails): Halver's default text. Completed, Prog 2 by GM (check 4's status
+# operand fails): Dauperiat nothing.
+# Dauperiat has no script and no default. Halver's default action (DefaultActions.lua: the text HALVER_OFFSET + 1092)
+# answers whenever no quest does, so his script's 577 never plays. No Sandy mission is current (setRank only), so the
+# missions naming Halver stay silent.
+lists NorthernSanDoria/Dauperiat/onTrigger NorthernSanDoria/Dauperiat/onTrade NorthernSanDoria/onEventFinish/641 NorthernSanDoria/onEventFinish/643 NorthernSanDoria/onEventFinish/646 NorthernSanDoria/onEventFinish/648 NorthernSanDoria/onEventFinish/650 ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/549
+char zone=NorthernSanDoria pos=-18.45,-0.199,-26.68 job=WAR lvl=10 nation=0
+fame Sandoria 124
+item BoneChip
+item CopyOfTheCastleFloorPlans
+item CopyOfTheCastleFloorPlans
+login
+trade Dauperiat BoneChip x1               # available: no trade handler, no script: nothing
+trigger Dauperiat                         # fame level 2, rank 1: 641
+finish                                    # needToZone set
+trigger Dauperiat                         # needToZone: 642
+finish
+rezone                                    # needToZone cleared
+rank 3
+trigger Dauperiat                         # fame level 2, rank 3: not 643; 641
+finish                                    # needToZone set
+fame Sandoria 125
+rank 2
+trigger Dauperiat                         # fame level 3, rank 2: not 643; needToZone: 642
+finish
+rank 3
+trigger Dauperiat                         # fame level 3, rank 3: 643
+finish                                    # the Suspicious Envelope; begun
+trigger Dauperiat                         # the envelope: 645
+finish
+warp 3.92,0,1.966 ChateauDoraguille
+trigger Halver                            # the envelope: 549
+finish                                    # the envelope deleted; Prog 1
+warp -18.45,-0.199,-26.68 NorthernSanDoria
+keyitem SuspiciousEnvelope                # GM: the envelope back at Prog 1
+trigger Dauperiat                         # sections 2 (645, Event) and 3 (646, Progress) both hold: 646
+finish
+delkeyitem SuspiciousEnvelope
+trade Dauperiat CopyOfTheCastleFloorPlans x1   # accepted, Prog 1: check 6 closed (not completed); section 3 has no trade: nil
+trigger Dauperiat                         # Prog 1: 646 (option [1] the plans)
+finish                                    # option 0: nothing
+trigger Dauperiat                         # 646
+finish option=1                           # Prog 2
+trigger Dauperiat                         # Prog 2: 647
+finish
+trade Dauperiat BoneChip x1               # no plans: nil
+trade Dauperiat CopyOfTheCastleFloorPlans x1 BoneChip x1   # holds the plans: 648
+finish                                    # completed: 900 gil, fame +16; the plans taken, the chip kept; Prog cleared
+trigger Dauperiat                         # completed, Prog 0: 650
+finish                                    # option 0: nothing
+trigger Dauperiat                         # 650
+finish option=1                           # Prog 1
+trigger Dauperiat                         # completed, Prog 1: 647
+finish
+trade Dauperiat BoneChip x1               # no plans: nil
+trade Dauperiat CopyOfTheCastleFloorPlans x1   # 648
+finish                                    # Prog 0; the plans taken; 900 gil; fame +16
+trigger Dauperiat                         # completed, Prog 0: 650
+finish
+keyitem SuspiciousEnvelope                # GM: completed with the envelope
+warp 3.92,0,1.966 ChateauDoraguille
+trigger Halver                            # completed: section 2 closed; his default text (HALVER_OFFSET + 1092)
+finish
+warp -18.45,-0.199,-26.68 NorthernSanDoria
+charvar Quest[0][71]Prog 2                # GM: completed, Prog 2
+trigger Dauperiat                         # completed, Prog 2: check 4 closed (not accepted), checks 5 and 6 closed: nothing

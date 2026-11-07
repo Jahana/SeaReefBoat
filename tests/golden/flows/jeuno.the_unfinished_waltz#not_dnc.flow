@@ -1,0 +1,14 @@
+# The Unfinished Waltz (jeuno 96) for a level 75 Warrior with Lakeside Minuet completed: the job alone fails check 1 (not
+# offered: Lakeside Minuet's 10119). Accepted by a GM: the ??? at Prog 0 without the key item (the Prog operand alone:
+# nil, no default), then at Prog 1 with hippoEvent 0 but not a Dancer: ATTEND_TO_MORE_PRESSING.
+lists UpperJeuno/Laila/onTrigger GraubergS/qm1/onTrigger
+char zone=UpperJeuno pos=-52.5,0,101 job=WAR lvl=75
+quest Jeuno.LakesideMinuet completed
+login
+trigger Laila                           # not a Dancer: no section; Lakeside Minuet's 10119
+finish
+quest Jeuno.TheUnfinishedWaltz accepted
+warp 329.9,-47.8,93.2 GraubergS
+trigger qm1                             # Prog 0, no key item: nil
+charvar Quest[3][96]Prog 1
+trigger qm1                             # Prog 1, hippoEvent 0, a Warrior: ATTEND_TO_MORE_PRESSING

@@ -1,0 +1,16 @@
+# Trust: Bastok (bastok 92): Naji's 984 against Prog 1. Accepted; Naji's 980 first (Naji learned, Prog 1): Naji's
+# 981 would follow at Prog 1. Trust: Windurst then completed by GM: the other-nation test comes first, so 984 plays
+# at Prog 1 (not 981): completed at once (Naji learned again, the card deleted, KEYITEM_LOST) and Prog cleared by the
+# completion.
+lists Metalworks/Naji/onTrigger Metalworks/onEventFinish/980 Metalworks/onEventFinish/984
+char zone=Metalworks pos=64,-14,-4 lvl=75 nation=1
+quest Bastok.TrustBastok accepted
+keyitem BlueInstituteCard
+login
+trigger Naji                   # Prog 0: 980
+finish                         # Naji learned, Prog 1
+trigger Naji                   # Prog 1, no other nation: 981
+finish
+quest Windurst.TrustWindurst completed
+trigger Naji                   # Windurst's completed: 984, not 981
+finish                         # completed, Naji learned (already known), the card deleted

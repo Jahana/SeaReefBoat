@@ -1,0 +1,22 @@
+# Expanding Horizons (jeuno 134), its trigger replies' kinds against other quests' at the same time (a progressEvent over
+# an event; equal replies with one csid: the first in container order, 133, 134, 135, 136, 170, 137, 167). A level 76
+# Warrior with the Limit Breaker at cap 80, New Worlds Await completed. Expanding Horizons available, Prelude to
+# Puissance accepted (a GM): two progressEvents 10045, Expanding Horizons' (76, 1, 2, 0) first. Accepted too (a GM):
+# Prelude to Puissance's (76, 1, 6, 2, 0) over Expanding Horizons' event. Prelude to Puissance available again (a GM)
+# and Beyond the Stars accepted (a GM): two events 10045, Expanding Horizons' (76, 1, 2, 1) first.
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=76
+keyitem LimitBreaker
+levelcap 80
+quest Jeuno.NewWorldsAwait completed
+quest Jeuno.PreludeToPuissance accepted
+login
+trigger Nomad_Moogle                    # EH available and PtP accepted, both progressEvent 10045: EH's (76, 1, 2, 0)
+finish option=1                         # nothing (neither EH's 7 nor PtP's completing options)
+quest Jeuno.ExpandingHorizons accepted  # a GM
+trigger Nomad_Moogle                    # PtP's progressEvent over EH's reminder: 10045 (76, 1, 6, 2, 0)
+finish option=1                         # nothing
+quest Jeuno.PreludeToPuissance available  # a GM
+quest Jeuno.BeyondTheStars accepted     # a GM
+trigger Nomad_Moogle                    # two reminders, both event 10045: EH's (76, 1, 2, 1)
+finish

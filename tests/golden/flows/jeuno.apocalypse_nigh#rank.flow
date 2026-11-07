@@ -1,0 +1,18 @@
+# Apocalypse Nigh (jeuno 89): Aldo's operands. A level 75 Warrior of Bastok (nation 1) at rank 4, the quest accepted at
+# Prog 4 (a GM). Aldo (no script, no default): Prog 4, rank 4: nil (neither arm: nothing); rank 5 (a GM, the edge):
+# 10057, finished: Prog 5. Prog 3 (a GM; the first arm's Prog under 4): nil; Prog 6 (over 5): nil. The main flow takes
+# Prog 4 at rank 6 and Prog 5 (10058).
+lists LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/10057
+char zone=LowerJeuno pos=22.5,3.9,-61.5 job=WAR lvl=75 nation=1
+rank 4
+quest Jeuno.ApocalypseNigh accepted
+charvar Quest[3][89]Prog 4
+login
+trigger Aldo                            # Prog 4, rank 4: nil; nothing
+rank 5                                  # a GM
+trigger Aldo                            # Prog 4, rank 5: 10057
+finish                                  # Prog 5
+charvar Quest[3][89]Prog 3              # a GM
+trigger Aldo                            # Prog 3: nil; nothing
+charvar Quest[3][89]Prog 6              # a GM
+trigger Aldo                            # Prog 6: nil; nothing

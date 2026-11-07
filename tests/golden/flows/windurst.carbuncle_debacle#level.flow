@@ -1,0 +1,16 @@
+# Carbuncle Debacle (windurst 83): the AF3 level gate at the door, an SMN 49 with The Puppet Master and Class Reunion
+# completed by GM. AF3_QUEST_LEVEL 50 (the default) and 49.4: nothing (49 under both; MainNumber reads 49.4 as it
+# is); 49 at 49: 415, option 1: begun (any option).
+char zone=WindurstWalls pos=-24.5,-14.5,263.0 job=SMN lvl=49
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion completed
+login
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # 49 under AF3 50: nothing (the message again)
+setting AF3_QUEST_LEVEL 49.4
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # 49 under 49.4: nothing (the message again)
+setting AF3_QUEST_LEVEL 49
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # 49 at 49: 415
+finish option=1                         # begun (any option); CarbuncleDebacleProgress 1

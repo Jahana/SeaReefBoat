@@ -1,0 +1,50 @@
+# Saga of the Skyserpent's edges: a level 75 Warrior. Available: Biyaada: no section: 250; Halvung's qm7: nothing (no
+# default); Wajaom's zone-in: nil. Accepted (a GM), Prog 0: the Wajaom zone-in: nil (section 2 has none); qm7 with the
+# Lilac Ribbon already held (a GM): Prog 1, the key item action all the same. Prog 2 (a GM): the Wajaom zone-in: nil;
+# qm7: nothing. Prog 3 (a GM): Fari-Wari: no section: 831. Prog 2 with a full bag: Fari-Wari 825, finished: the Gold
+# Piece does not fit (complete false): no standing, no message (still Prog 2); the bag freed: 825: completed. Completed:
+# qm7: nothing; Biyaada: 250, also at a GM's Prog 1 and Prog 2 (the Prog sections test the status too).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger AlZahbi/Biyaada/onTrigger Halvung/qm7/onTrigger WajaomWoodlands/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/825
+char zone=AlZahbi pos=-64.3,-6,69.273 job=WAR lvl=75
+login
+trigger Biyaada                         # available: no section: 250
+finish
+warp -10.11,7.935,-185.469 Halvung
+trigger qm7                             # available: nothing
+finish-if-event
+warp 610.542,-28.547,356.247 WajaomWoodlands   # available: the zone-in nil
+quest AhtUrhgan.SagaOfTheSkyserpent accepted   # a GM: Prog 0
+warp -10.11,7.935,-185.469 Halvung
+warp 610.542,-28.547,356.247 WajaomWoodlands   # Prog 0: no zone-in arm: nil
+keyitem LilacRibbon                     # a GM: the ribbon held already
+warp -10.11,7.935,-185.469 Halvung
+trigger qm7                             # Prog 0: Prog 1; the key item action with the ribbon held
+finish-if-event
+charvar Quest[6][43]Prog 2              # a GM
+warp 610.542,-28.547,356.247 WajaomWoodlands   # Prog 2: the zone-in nil
+warp -10.11,7.935,-185.469 Halvung
+trigger qm7                             # Prog 2: nothing
+finish-if-event
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+charvar Quest[6][43]Prog 3              # a GM: Prog 3
+trigger Fari-Wari                       # Prog 3: no section: the default 831
+finish
+charvar Quest[6][43]Prog 2              # a GM
+fill-inventory
+trigger Fari-Wari                       # 825
+finish                                  # full: ITEM_CANNOT_BE_OBTAINED: nothing more
+free-inventory
+trigger Fari-Wari                       # 825
+finish                                  # completed; 1000 imperial standing; BESIEGED_OFFSET
+warp -10.11,7.935,-185.469 Halvung
+trigger qm7                             # completed: nothing
+finish-if-event
+warp -64.3,-6,69.273 AlZahbi
+trigger Biyaada                         # completed: no section: 250
+finish
+charvar Quest[6][43]Prog 1              # a GM: completed at Prog 1
+trigger Biyaada                         # completed: no section: 250
+finish
+charvar Quest[6][43]Prog 2              # a GM: completed at Prog 2
+trigger Biyaada                         # 250
+finish

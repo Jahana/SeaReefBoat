@@ -1,0 +1,22 @@
+# A Foreman's Best Friend (bastok 9): Gudav and Dehlner in Port Bastok. The offer, Dehlner's 111 while accepted, the dog
+# collar trade, the Map of the Gusgen Mines (not held), no repeat.
+lists PortBastok/Gudav/onTrigger PortBastok/Gudav/onTrade PortBastok/Dehlner/onTrigger PortBastok/onEventFinish/110 PortBastok/onEventFinish/112
+char zone=PortBastok pos=-3,1.407,49
+item DogCollar                  # it does not stack: one line each
+item DogCollar
+item BoneChip
+login
+trigger Dehlner                 # available: his default 46
+finish
+trigger Gudav                   # the offer, 110
+finish                          # accepted
+trigger Dehlner                 # accepted: 111
+finish
+trigger Gudav                   # accepted: his default 31
+finish
+trade Gudav BoneChip x1         # the wrong item: nothing
+trade Gudav DogCollar x1        # 112
+finish                          # completed: fame 20, the collar gone, the Map of the Gusgen Mines
+trigger Dehlner                 # completed: 46
+finish
+trade Gudav DogCollar x1        # completed: nothing

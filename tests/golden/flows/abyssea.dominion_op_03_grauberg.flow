@@ -1,0 +1,26 @@
+# Grauberg - Dominion Op #03 (abyssea 117, op 590): a level 99 Warrior in Abyssea - Grauberg; the op's target
+# Stygian_Djinn (23 placed spawns, the first 17817952). The next op (#04, Faunus_Wyvern) and Altepa's #03 accepted (a
+# GM), this op available: a Stygian_Djinn killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0,
+# which dominionOnMobDeath does not read): a Stygian_Djinn killed: dominionOnMobDeath(590): Quest[8][117]Prog 1
+# (FOV_DEFEATED_TARGET 1 of 5). The next op's Faunus_Wyvern killed: Quest[8][118]Prog 1 (its own count), this op's
+# unchanged. Prog 4 (a GM): one more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing.
+# Completed (Prog 0, as completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge,
+# Invincible and Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaGrauberg/Stygian_Djinn/onMobDeath AbysseaGrauberg/Faunus_Wyvern/onMobDeath
+char zone=AbysseaGrauberg pos=-555,31,-760 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp04Grauberg accepted # a GM: the next op
+quest Abyssea.DominionOp03Altepa accepted # a GM: Altepa's #03
+kill IRONCLAD_SUNDERER-89               # available: nothing (17817952)
+quest Abyssea.DominionOp03Grauberg accepted # a GM
+kill IRONCLAD_SUNDERER-88               # accepted: Prog 1 (17817953)
+kill IRONCLAD_SUNDERER-252              # Faunus_Wyvern: Quest[8][118]Prog 1 (17817789)
+charvar Quest[8][117]Prog 4             # a GM
+kill IRONCLAD_SUNDERER-87               # Prog 5 (17817954)
+kill IRONCLAD_SUNDERER-86               # full: nothing (17817955)
+quest Abyssea.DominionOp03Grauberg completed # a GM
+charvar Quest[8][117]Prog 0             # a GM
+kill IRONCLAD_SUNDERER-85               # completed: nothing (17817956)

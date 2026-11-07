@@ -1,0 +1,13 @@
+# Too Many Chefs, Umberto with a full inventory: 473 plays, the reward is refused with the message, the quest stays open;
+# once there is room the same visit completes it.
+char zone=BastokMarkets pos=-57,-4,-134
+fame Bastok 325
+login
+quest Bastok.TooManyChefs accepted
+charvar TOO_MANY_CHEFS 5
+fill-inventory
+trigger Umberto                 # 473
+finish                          # the inventory full: not completed, TOO_MANY_CHEFS stays 5
+free-inventory
+trigger Umberto                 # 473 again
+finish                          # Aileen's Delight, 50 fame, completed

@@ -1,0 +1,61 @@
+# Fist of the People (ahtUrhgan 46): a level 75 Warrior with a Rusty Medal and a Frayed Arrow (both rare); Saga of the
+# Skyserpent completed (a GM: its 823 would answer at Fari-Wari). Talhaal (no script; default 256), Fari-Wari (no
+# script; default 831), the Leypoint (no script; default LEYPOINT). Ode to the Serpents not held: Talhaal: not
+# available: 256; Ode completed (a GM): 256. Ode accepted (GMs): available: the Leypoint's trade of the medal: nil;
+# Talhaal 282, finished on option 1: begun (any option); Talhaal again: no accepted handler: 256. Prog 0: the
+# Leypoint's trade of the medal: nil; Fari-Wari 884 (beats Ode's 891), finished: Prog 1. Prog 1: Fari-Wari: Ode's 891.
+# The Leypoint: the arrow: nil; the medal and the arrow: nil; at Prog 2 (a GM): the medal: nil; Prog 1 again: the
+# medal: 511, finished: completed (Stoneserpent Shocktrooper), the medal taken, INCREASED_STANDING,
+# 500 imperial standing. Completed: another medal (a GM): nil, also at a GM's Prog 1; the Leypoint's talk: no section:
+# LEYPOINT; Talhaal 256.
+lists AlZahbi/Talhaal/onTrigger AhtUrhganWhitegate/Fari-Wari/onTrigger WajaomWoodlands/Leypoint/onTrade WajaomWoodlands/onEventFinish/511
+char zone=AlZahbi pos=-34.4,-6,107.16 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent completed
+item RustyMedal
+item FrayedArrow
+login
+trigger Talhaal                         # Fist not available (Ode not accepted): 256
+finish
+quest AhtUrhgan.OdeToTheSerpents completed  # a GM
+trigger Talhaal                         # Ode completed: not available: 256
+finish
+quest AhtUrhgan.OdeToTheSerpents available  # GMs: Ode accepted
+quest AhtUrhgan.OdeToTheSerpents accepted
+warp -198.5,-8.5,80.058 WajaomWoodlands # beside the Leypoint
+trade Leypoint RustyMedal x1            # available: no trade handler: nil
+finish-if-event
+warp -34.4,-6,107.16 AlZahbi
+trigger Talhaal                         # available: 282
+finish option=1                         # begun (any option)
+trigger Talhaal                         # accepted: no Talhaal handler: 256
+finish
+warp -198.5,-8.5,80.058 WajaomWoodlands
+trade Leypoint RustyMedal x1            # Prog 0: no section-2 trade: nil
+finish-if-event
+warp 81.95,-6,-137.707 AhtUrhganWhitegate
+trigger Fari-Wari                       # Prog 0: 884 (Ode's 891 loses)
+finish                                  # Prog 1
+trigger Fari-Wari                       # Prog 1: Ode's 891
+finish
+warp -198.5,-8.5,80.058 WajaomWoodlands
+trade Leypoint FrayedArrow x1           # not the medal: nil
+finish-if-event
+trade Leypoint RustyMedal x1 FrayedArrow x1   # the medal and more: nil
+finish-if-event
+charvar Quest[6][46]Prog 2              # a GM: Prog 2
+trade Leypoint RustyMedal x1            # Prog 2: no section: nil
+finish-if-event
+charvar Quest[6][46]Prog 1              # a GM
+trade Leypoint RustyMedal x1            # Prog 1: 511
+finish                                  # completed: the title; the medal taken; INCREASED_STANDING; 500 standing
+item RustyMedal                         # a GM: another medal
+trade Leypoint RustyMedal x1            # completed: no section: nil
+finish-if-event
+charvar Quest[6][46]Prog 1              # a GM: completed at Prog 1
+trade Leypoint RustyMedal x1            # completed: no section: nil
+finish-if-event
+trigger Leypoint                        # completed: no section: LEYPOINT
+finish-if-event
+warp -34.4,-6,107.16 AlZahbi
+trigger Talhaal                         # completed: 256
+finish

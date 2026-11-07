@@ -1,0 +1,41 @@
+# Guest of Hauteur (bastok 3): Powhatan and Steel Bones in Port Bastok. The guard (Bastok fame level 3, main level 31,
+# Welcome to Bastok completed), the offer 55 (declined, then accepted), 56 without the letter, Steel Bones' 57 with a
+# Maul in the main hand (the Letter from Domien), then 58 and the reward. Powhatan's default is the text
+# POWHATAN_DIALOG_1, Steel Bones' is event 29. Welcome to Bastok (C#) also names Powhatan: available it offers 50, so
+# it starts accepted (Powhatan's 51) and is then set completed. The char is a WHM, who can wear the Maul (level 31, WHM /
+# GEO).
+lists PortBastok/Powhatan/onTrigger PortBastok/Powhatan/onTrade PortBastok/Steel_Bones/onTrigger PortBastok/onEventFinish/55 PortBastok/onEventFinish/57 PortBastok/onEventFinish/58
+char zone=PortBastok pos=-150,-7.48,19 job=WHM lvl=31
+fame Bastok 125
+quest Bastok.WelcomeToBastok accepted
+item Maul
+item BoneChip
+login
+trade Powhatan BoneChip x1     # available: no trade handler, nothing
+trigger Powhatan               # Welcome to Bastok not completed (accepted): its 51
+finish
+quest Bastok.WelcomeToBastok completed
+fame Bastok 124
+trigger Powhatan               # fame 124 (level 2): his default text
+finish-if-event
+fame Bastok 125
+trigger Powhatan               # fame level 3, level 31, Welcome to Bastok completed: the offer, 55
+finish option=1                # declined: nothing
+trigger Powhatan               # 55 again
+finish                         # option 0: accepted
+trigger Powhatan               # accepted, no letter: 56
+finish
+trade Powhatan BoneChip x1     # accepted: no trade handler, nothing
+trigger Steel_Bones            # no Maul in the main hand: nil, his default 29
+finish
+equip Maul Main
+trigger Steel_Bones            # the Maul, no letter: 57
+finish                         # the Letter from Domien
+trigger Steel_Bones            # the letter held: nil, 29
+finish
+trigger Powhatan               # the letter held: 58
+finish                         # completed: Targe, fame +30, the letter deleted
+trigger Powhatan               # completed: no handler, his default text
+finish-if-event
+trigger Steel_Bones            # completed (the Maul still held): no handler, 29
+finish

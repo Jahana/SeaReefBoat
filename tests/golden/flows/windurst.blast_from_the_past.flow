@@ -1,0 +1,93 @@
+# Blast from the Past (windurst 11): Koru-Moru and Yoran-Oran (Windurst Walls), Tokaka (Port Windurst), the Fossil Rocks
+# (Maze of Shakhrami). Star Struck completed by GM (no mustZone), fame 125 (level 3): 214, option 0: begun (Option 0).
+# Option 0: Koru-Moru 216; Yoran-Oran's quest nil (Mandragora Mad completed by GM, so his script answers nothing: his
+# default 245); Tokaka 318 (Option 1); Tokaka at Option 1: the quest's nil, so his default 207, then his script's
+# Something Fishy offer 208 (the default and the script alternate; 208's finish adds that quest and TokakaSpokenTo 1,
+# his script's); Option -1 by GM: nil again (207). Option 1: Koru-Moru 216; Yoran-Oran 221 (Option 2); Koru-Moru 215; Yoran-Oran 222 (importantEvent:
+# Progress the first time, then Event, which alternates with his script; his script answers nothing, so 222 again);
+# Option 3 by GM: Koru-Moru 216, Yoran-Oran nil (245); back to 2. The Fossil Rocks: the first (offset 0), the seventh and
+# the ninth: nil (the rock's default JUST_A_ROCK); the eighth (offset 8), Ichorous Ire not up, no stone: spawned and
+# claimed (the handler returns nil: the default JUST_A_ROCK follows); again with the NM up: FOSSIL_EXTRACTED + 2
+# (7075); the NM killed (it drops the stone): FOSSIL_EXTRACTED + 2 again (the stone held; #stone_held: the stone alone).
+# Koru-Moru's trades: a bone chip (225), the stone plus a bone chip (225), the stone alone with a full bag (224: the club
+# does not fit, nothing, the stone kept), the stone alone (224: completed, fame 30, the Great Club, Fossilized Sea
+# Farer, the stone taken, Nothing Matters' mustZone 239). Completed: Koru-Moru plays Star Struck's 213 (this quest's
+# offer, whose operands but the status all hold now, would win with 214). Completed with Nothing Matters' mustZone: not
+# met (Yoran-Oran's default 245); a warp out and back: 223 (importantEvent: Progress, then Event), twice.
+# Defaults: Koru-Moru 193, Yoran-Oran 245, Tokaka 207, Fossil_Rock JUST_A_ROCK (no script). Also named: Yoran-Oran by
+# Toraimarai Turmoil (accepted only), CoP 3-3 / 5-3 and Windurst 9-1 (not current); Fossil_Rock by Windurst 2-1 (not
+# current); Koru-Moru by Star Struck (completed by GM: its 213 is below 214 and the Event lines), The Puppet Master
+# (available: no Koru-Moru line). Reply kinds: windurst.blast_from_the_past#compete.
+lists WindurstWalls/Koru-Moru/onTrigger WindurstWalls/Koru-Moru/onTrade WindurstWalls/Yoran-Oran/onTrigger PortWindurst/Tokaka/onTrigger MazeOfShakhrami/Fossil_Rock/onTrigger WindurstWalls/onEventFinish/214 WindurstWalls/onEventFinish/221 WindurstWalls/onEventFinish/224 PortWindurst/onEventFinish/318
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 lvl=75
+fame Windurst 125
+quest Windurst.StarStruck completed
+quest Windurst.MandragoraMad completed
+item BoneChip
+login
+trigger Koru-Moru                              # 214
+finish option=0                                # begun
+trigger Koru-Moru                              # Option 0: 216
+finish
+trigger Yoran-Oran                             # Option 0: the quest's nil; his script (Mandragora Mad completed): nothing; his default 245
+finish-if-event
+warp -188.2,-2.0,66.3 PortWindurst
+trigger Tokaka                                 # Option 0: 318
+finish                                         # Option 1
+trigger Tokaka                                 # Option 1: the quest's nil; his default 207 (the default's turn)
+finish
+trigger Tokaka                                 # his script's turn: Something Fishy's offer 208 (the script still runs after the quest's nil)
+finish
+charvar Quest[2][11]Option -1                  # GM: below 0
+trigger Tokaka                                 # Option -1: nil; his default 207
+finish-if-event
+charvar Quest[2][11]Option 1                   # GM: back
+warp -108.5,-13.0,203.3 WindurstWalls
+trigger Koru-Moru                              # Option 1: 216
+finish
+trigger Yoran-Oran                             # Option 1: 221
+finish                                         # Option 2
+trigger Koru-Moru                              # Option 2: 215
+finish
+trigger Yoran-Oran                             # Option 2: 222 (importantEvent: at Progress this time)
+finish
+trigger Yoran-Oran                             # 222 now at Event: the script's turn, his script nothing: 222 again
+finish
+trigger Yoran-Oran                             # 222
+finish
+charvar Quest[2][11]Option 3                   # GM: above 2
+trigger Koru-Moru                              # Option 3: 216
+finish
+trigger Yoran-Oran                             # Option 3: nil; his default 245
+finish-if-event
+charvar Quest[2][11]Option 2                   # GM: back
+warp -89.8,13.6,-105.0 MazeOfShakhrami
+trigger Fossil_Rock                            # offset 0: nil; the default JUST_A_ROCK
+trigger Fossil_Rock+7                          # offset 7: nil; JUST_A_ROCK
+trigger Fossil_Rock+9                          # offset 9: nil; JUST_A_ROCK
+trigger Fossil_Rock+8                          # offset 8, not spawned, no stone: Ichorous Ire spawned, claimed; nil: the default JUST_A_ROCK
+trigger Fossil_Rock+8                          # the NM up, no stone: FOSSIL_EXTRACTED + 2
+kill ICHOROUS_IRE                              # its own script: the title Jellybane; its drop: the Burnite Shell Stone
+tick 30000                                     # 30 s after the kill
+trigger Fossil_Rock+8                          # the stone held: FOSSIL_EXTRACTED + 2
+warp -120.2,-5.5,122.4 WindurstWalls
+trade Koru-Moru BoneChip x1                    # not the stone: 225
+finish
+trade Koru-Moru BurniteShellStone x1 BoneChip x1   # the stone plus an extra: not exact: 225
+finish
+fill-inventory
+trade Koru-Moru BurniteShellStone x1           # 224
+finish                                         # full: quest:complete false (the Great Club does not fit): nothing, the stone kept
+free-inventory
+trade Koru-Moru BurniteShellStone x1           # 224
+finish                                         # completed: fame 30, the Great Club, Fossilized Sea Farer; the stone taken; Quest[2][79]mustZone 239
+trigger Koru-Moru                              # completed: Star Struck's 213 (this quest's offer is only for the available status)
+finish
+trigger Yoran-Oran                             # completed, Nothing Matters' mustZone: not met; his default 245
+finish-if-event
+warp -188.2,-2.0,66.3 PortWindurst
+warp -108.5,-13.0,203.3 WindurstWalls          # Nothing Matters' mustZone cleared (Port Windurst, not Windurst Woods: A Shantotto Ascension's zone-in wants Woods or Waters)
+trigger Yoran-Oran                             # 223 (importantEvent: Progress)
+finish
+trigger Yoran-Oran                             # 223 at Event (his script nothing: 223 again)
+finish

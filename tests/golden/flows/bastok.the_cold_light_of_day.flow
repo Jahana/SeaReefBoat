@@ -1,0 +1,29 @@
+# The Cold Light of Day (bastok 11): Malene and Gwill in Bastok Markets. The offer (102), the steam clock trade, the gil
+# reward, completed again on each later clock: the second section matches accepted and completed. Gwill gives 103 in
+# that section and his default 113 outside it; The Return of the Adventurer (also on Gwill) needs Bastok fame level 3,
+# which this char never has. Malene has no script and no default.
+lists BastokMarkets/Malene/onTrigger BastokMarkets/Malene/onTrade BastokMarkets/Gwill/onTrigger BastokMarkets/onEventFinish/102 BastokMarkets/onEventFinish/104
+char zone=BastokMarkets pos=-173.8,-4.839,64.6
+item SteamClock
+item SteamClock
+item SteamClock
+item BoneChip
+login
+trade Malene SteamClock x1      # available: no trade handler, nothing
+trigger Gwill                   # available: his default 113
+finish
+trigger Malene                  # the offer, 102
+finish                          # accepted
+trigger Gwill                   # accepted: 103
+finish
+trigger Malene                  # accepted: 102 again, its finish does nothing
+finish                          # still accepted
+trade Malene BoneChip x1        # the wrong item: nothing
+trade Malene SteamClock x1      # 104
+finish                          # completed: 500 gil, fame +10, Crab Crusher, a clock gone
+trigger Malene                  # completed: 102, nothing
+finish
+trade Malene SteamClock x1      # completed: 104 again
+finish                          # completed again: 500 gil, fame +10, a clock gone
+trigger Gwill                   # completed: 103
+finish

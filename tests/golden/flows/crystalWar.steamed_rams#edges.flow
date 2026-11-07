@@ -1,0 +1,62 @@
+# Steamed Rams (crystalWar 9), the no-allegiance edges: a level 99 Warrior in Southern San d'Oria [S] (missions as in
+# the main flow). Available: Mainchelite: The Fighting Fourth accepted (a GM): 9; it set available, Snake on the Plains
+# accepted: 9; with the Red letter too (a GM): still 9 (the other quests first); Snake set available: the letter: 7,
+# accepted: begun, the letter taken. Accepted: The Fighting Fourth accepted (the accepted section reads no other quest):
+# 13, option 1: the letter given back, the quest deleted (Option stays 0); it set available. 7, accepted: begun again.
+# Two of the three key items (GMs), each one missing in turn: 13, 13, 13. The three, a full inventory: 12, finished:
+# the shoes do not fit: nothing more (still accepted, the key items kept). Snake on the Plains accepted (a GM): 12 again,
+# freed inventory: completed. Completed: The Fighting Fourth accepted (a GM): still 5 (no other-quest check once
+# completed); it set available, Snake still accepted: 5.
+lists SouthernSanDoriaS/Mainchelite/onTrigger SouthernSanDoriaS/onEventFinish/7 SouthernSanDoriaS/onEventFinish/12 SouthernSanDoriaS/onEventFinish/13
+char zone=SouthernSanDoriaS pos=-13.849,1.398,-30.368 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+quest CrystalWar.TheFightingFourth accepted
+trigger Mainchelite                     # The Fighting Fourth accepted: 9
+finish
+quest CrystalWar.TheFightingFourth available
+quest CrystalWar.SnakeOnThePlains accepted
+trigger Mainchelite                     # Snake on the Plains accepted: 9
+finish
+keyitem RedRecommendationLetter
+trigger Mainchelite                     # Snake accepted, the letter held: still 9
+finish
+quest CrystalWar.SnakeOnThePlains available
+trigger Mainchelite                     # the letter: 7
+finish option=0                         # begun; the letter taken
+quest CrystalWar.TheFightingFourth accepted
+trigger Mainchelite                     # accepted (no other-quest check), nothing held: 13
+finish option=1                         # the letter back; the quest deleted
+quest CrystalWar.TheFightingFourth available
+trigger Mainchelite                     # the letter, Option 0: 7
+finish option=0                         # begun again; the letter taken
+keyitem CharredPropeller
+keyitem OxidizedPlate
+trigger Mainchelite                     # no Lumber: 13
+finish option=0                         # nothing
+keyitem PieceOfShatteredLumber
+delkeyitem OxidizedPlate
+trigger Mainchelite                     # no Plate: 13
+finish option=0                         # nothing
+keyitem OxidizedPlate
+delkeyitem CharredPropeller
+trigger Mainchelite                     # no Propeller: 13
+finish option=0                         # nothing
+keyitem CharredPropeller
+fill-inventory
+trigger Mainchelite                     # the three: 12
+finish                                  # the shoes do not fit: nothing more
+quest CrystalWar.SnakeOnThePlains accepted
+free-inventory
+trigger Mainchelite                     # still 12 (no other-quest check while accepted)
+finish                                  # Sprinter's Shoes; completed; Bronze Ribbon; allegiance 1; the three taken
+quest CrystalWar.TheFightingFourth accepted
+trigger Mainchelite                     # completed: 5
+finish
+quest CrystalWar.TheFightingFourth available
+trigger Mainchelite                     # completed, Snake accepted: 5
+finish

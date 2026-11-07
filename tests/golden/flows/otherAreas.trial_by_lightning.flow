@@ -1,0 +1,79 @@
+# Trial by Lightning (otherAreas 27): Ripapa in Mhaura (no default; his 10020 is his script's standard dialog, after
+# his Carbuncle Debacle arms (#carbuncle_debacle) and this quest's call). Available: a trade (his script has no
+# onTrade: nothing); Windurst fame 424 (level 5): 10020; 425 (level 6): 10016 (0, 333: the Tuning Fork of Lightning),
+# declined (option 0), option 2 (nothing: the finish wants option 1), accepted (option 1: TrialByLightning_date 0, the
+# fork). Accepted: 10017 (0, fork, 5) with the fork; the fork deleted by GM: 10024 (finish: a new fork); the Whisper
+# of Storms by GM with the fork held (the battlefield's 32001 is #battlefield): 10019 once per reward option. Each
+# completion sets TrialByLightning_date to the next JST midnight (1800025200 from the harness's 1800000000): 10020
+# while it lies ahead; `wait jst=1` moves the clock a day (1800086400), past it: 10016 again, whose option 1 deletes
+# the quest and begins it anew. The strict GetSystemTime() > TrialByLightning_date at its edge: the date equal to the
+# clock: 10020; one second behind: 10016. 10019's last argument grows by the rewards held: 1 Ramuh's Staff, 2 the
+# Lightning Belt, 4 the Lightning Ring, 8 the Elder Branch, 32 the Ramuh spell. Option 0 and options above 6 with room
+# are not taken: player:addItem(0) only warns in the engine and the finish completes with no reward, which the
+# recorder refuses to trace (any lua: warning line); a fake check proves it (as Trial by Ice's); with no room they are
+# #inventory_full's.
+char zone=Mhaura pos=30.6,-15.6,56.0 job=WAR lvl=75
+fame Windurst 424
+item BoneChip
+login
+trade Ripapa BoneChip x1                  # available: no onTrade in his script; nothing
+trigger Ripapa                            # fame level 5: the quest's nil; 10020
+finish
+fame Windurst 425
+trigger Ripapa                            # fame level 6: 10016 (0, fork)
+finish option=0                           # declined: nothing
+trigger Ripapa                            # 10016
+finish option=2                           # option 2: nothing
+trigger Ripapa                            # 10016
+finish option=1                           # begun; TrialByLightning_date 0; the Tuning Fork of Lightning
+trigger Ripapa                            # accepted, the fork, no whisper: 10017 (0, fork, 5)
+finish
+delkeyitem TuningForkOfLightning
+trigger Ripapa                            # accepted, neither key item: 10024 (0, fork)
+finish                                    # a new fork
+keyitem WhisperOfStorms                   # GM: the battlefield win (#battlefield)
+trigger Ripapa                            # the fork and the whisper: 10019 (0, fork, 5, 0, 0)
+finish option=1                           # Ramuh's Staff; the title; the whisper taken; date; fame +60; completed
+trigger Ripapa                            # completed, TrialByLightning_date 1800025200 ahead: 10020
+finish
+charvar TrialByLightning_date 1800000000  # GM: the date equal to the clock
+trigger Ripapa                            # not past (strict >): 10020
+finish
+charvar TrialByLightning_date 1799999999  # GM: one second behind
+trigger Ripapa                            # past: 10016
+finish option=1                           # deleted and begun again; the date 0; the fork already held
+keyitem WhisperOfStorms
+trigger Ripapa                            # 10019, mask 1
+finish option=2                           # the Lightning Belt: completed; TrialByLightning_date 1800025200
+trigger Ripapa                            # ahead: 10020
+finish
+wait jst=1                                # the clock 1800086400, past the JST midnight
+trigger Ripapa                            # completed, TrialByLightning_date behind: 10016
+finish option=1                           # begun again
+keyitem WhisperOfStorms
+trigger Ripapa                            # 10019, mask 3
+finish option=3                           # the Lightning Ring: completed
+charvar TrialByLightning_date 1
+trigger Ripapa                            # 10016
+finish option=1
+keyitem WhisperOfStorms
+trigger Ripapa                            # 10019, mask 7
+finish option=4                           # the Elder Branch: completed
+charvar TrialByLightning_date 1
+trigger Ripapa                            # 10016
+finish option=1
+keyitem WhisperOfStorms
+trigger Ripapa                            # 10019, mask 15
+finish option=5                           # 10000 gil: completed
+charvar TrialByLightning_date 1
+trigger Ripapa                            # 10016
+finish option=1
+keyitem WhisperOfStorms
+trigger Ripapa                            # 10019, mask 15
+finish option=6                           # the Ramuh spell, RAMUH_UNLOCKED (0, 0, 5): completed
+charvar TrialByLightning_date 1
+trigger Ripapa                            # 10016
+finish option=1
+keyitem WhisperOfStorms
+trigger Ripapa                            # 10019, mask 47 (32: Ramuh)
+finish option=2                           # the Lightning Belt again: rare, addItem fails (no row); completed

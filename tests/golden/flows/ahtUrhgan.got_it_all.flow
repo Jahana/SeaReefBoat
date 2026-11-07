@@ -1,0 +1,68 @@
+# Got It All (ahtUrhgan 3): a level 75 Warrior. Available: Zabahf 533, Ekhu Pesshyadha 532 (Events); Tehf Kimasnahya
+# 520, finished: begun, Prog 1. Prog 1: Tehf 521; Zabahf 533 (the else arm); Ekhu 522, finished: Prog 2. Prog 2: Ekhu
+# 536; Zabahf 523, finished: Prog 3; Zabahf 523 again at Prog 3 (Prog 3 again). Ekhu 524, finished: the Vial of Luminous
+# Water (KEYITEM_OBTAINED), Prog 4. Prog 4: Ekhu 537; Zabahf 533; Tehf 525, option 1: nothing; option 0: Prog 5, the
+# vial taken. Prog 5: Tehf 534; Zabahf 538; into trigger area 1: 526, finished: Prog 6 (the zone's own finish:
+# gotitallCS 6, the char at 60 0 -71). Prog 6: Zabahf 540; Tehf 527, finished: Prog 7, the zoning flag. Prog 7: Tehf 539
+# (the flag); Zabahf 535; out of Whitegate and back: Tehf 528, finished: completed (a Bibiki Seashell). Completed (Three
+# Men and a Closet not completed): Ekhu 531; Tehf, Zabahf: no section: their defaults 529, 530.
+lists AhtUrhganWhitegate/Tehf_Kimasnahya/onTrigger AhtUrhganWhitegate/Ekhu_Pesshyadha/onTrigger AhtUrhganWhitegate/Zabahf/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/1 AhtUrhganWhitegate/onEventFinish/525 AhtUrhganWhitegate/onEventFinish/526 AhtUrhganWhitegate/onEventFinish/527 AhtUrhganWhitegate/onEventFinish/528
+char zone=AhtUrhganWhitegate pos=-89.897,0,6.199 job=WAR lvl=75
+login
+trigger Zabahf                          # available: 533
+finish
+trigger Ekhu_Pesshyadha                 # available: 532
+finish
+trigger Tehf_Kimasnahya                 # available: 520
+finish                                  # begun; Prog 1
+trigger Tehf_Kimasnahya                 # Prog 1: 521
+finish
+trigger Zabahf                          # Prog 1: 533
+finish
+trigger Ekhu_Pesshyadha                 # Prog 1: 522
+finish                                  # Prog 2
+trigger Ekhu_Pesshyadha                 # Prog 2: 536
+finish
+trigger Zabahf                          # Prog 2: 523
+finish                                  # Prog 3
+trigger Zabahf                          # Prog 3: 523
+finish                                  # Prog 3 again
+trigger Ekhu_Pesshyadha                 # Prog 3: 524
+finish                                  # the Vial of Luminous Water; Prog 4
+trigger Ekhu_Pesshyadha                 # Prog 4: 537
+finish
+trigger Zabahf                          # Prog 4: 533
+finish
+trigger Tehf_Kimasnahya                 # Prog 4: 525
+finish option=1                         # not option 0: nothing
+trigger Tehf_Kimasnahya                 # 525
+finish option=0                         # Prog 5; the vial taken
+trigger Tehf_Kimasnahya                 # Prog 5: 534
+finish
+trigger Zabahf                          # Prog 5: 538
+finish
+warp 59.5,0,-76 AhtUrhganWhitegate      # south of trigger area 1
+tick 1000
+tick 1000
+tick 1000
+walk 59.5,0,-67                         # into area 1 at Prog 5: 526
+finish                                  # Prog 6 (the zone's finish: gotitallCS 6, the char at 60 0 -71)
+warp -89.897,0,6.199 AhtUrhganWhitegate
+trigger Zabahf                          # Prog 6: 540
+finish
+trigger Tehf_Kimasnahya                 # Prog 6: 527
+finish                                  # Prog 7; needToZone
+trigger Tehf_Kimasnahya                 # Prog 7, the zoning flag: 539
+finish
+trigger Zabahf                          # Prog 7: 535
+finish
+warp -64,-7,38 AlZahbi                  # the zoning flag cleared
+warp -89.897,0,6.199 AhtUrhganWhitegate
+trigger Tehf_Kimasnahya                 # Prog 7: 528
+finish                                  # completed; the Bibiki Seashell
+trigger Ekhu_Pesshyadha                 # completed, Three Men and a Closet not completed: 531
+finish
+trigger Tehf_Kimasnahya                 # no section: 529 (Three Men and a Closet available: Kubhe Ijyuhla only)
+finish
+trigger Zabahf                          # no section: 530
+finish

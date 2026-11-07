@@ -1,0 +1,45 @@
+# Twenty in Pirate Years, the edges of Ryoma's start (Norg; his default 94 alternates with his script, so each script
+# turn is the second of a pair): a level 39 Ninja: nothing; a level 40 Warrior (bob): nothing. True Will's arms answer
+# nothing for both (I'll Take the Big Box not completed, no Old Trick Box, trueWillCS 0), so the default plays after the
+# script.
+# carl (a level 45 Ninja; Twenty accepted with the Trick Box and trueWillCS 1, GMs; a state no play reaches, as True
+# Will needs the Big Box completed): Ryoma's chain asks Twenty first and stops when it answers: 134 (True Will's 138
+# would play if the order were swapped, and after it if the early return were dropped); finished: completed. Then
+# Twenty answers nothing and True Will's 138 (trueWillCS 1, any status) plays. Level 45: the Big Box (AF2_QUEST_LEVEL
+# 50) stays silent once Twenty is completed.
+# At AF1_QUEST_LEVEL 39 (then 40 again): the level 39 Ninja gets 133; finished: begun, twentyInPirateYearsCS 1 (user
+# ruling 2026-11-04, kept Lua bugs: the Lua's literal 40 gave nothing there too).
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=39
+char bob zone=Norg pos=-26.276,0.53,-8.323 job=WAR lvl=40
+char carl zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=45
+carl: quest Outlands.TwentyInPirateYears accepted
+carl: keyitem TrickBox
+carl: charvar trueWillCS 1
+login
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, level 39: nothing (94 after it)
+finish
+setting AF1_QUEST_LEVEL 39
+trigger Ryoma                           # default turn: 94
+finish
+trigger Ryoma                           # script, level 39 at AF1 39: 133
+finish                                  # begun; twentyInPirateYearsCS 1
+setting AF1_QUEST_LEVEL 40
+logout
+bob: login
+bob: trigger Ryoma                      # default turn: 94
+bob: finish
+bob: trigger Ryoma                      # script, a Warrior: nothing (94 after it)
+bob: finish
+bob: logout
+carl: login
+carl: trigger Ryoma                     # default turn: 94
+carl: finish
+carl: trigger Ryoma                     # script: Twenty first (accepted, the Trick Box): 134, not 138
+carl: finish                            # completed: Anju, Zushio, the box taken
+carl: trigger Ryoma                     # default turn: 94
+carl: finish
+carl: trigger Ryoma                     # script: Twenty nothing; True Will, trueWillCS 1: 138
+carl: finish
+carl: logout

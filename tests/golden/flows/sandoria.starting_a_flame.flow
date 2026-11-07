@@ -1,0 +1,25 @@
+# Starting a Flame (sandoria 77): Legata in Southern San d'Oria, no guard, no reward table. A trade while available
+# (nothing), the offer 37 declined (option 0: nothing) and taken (option 1), the accepted 35, the wrong trades (a bone
+# chip, three Flint Stones: nil), 36 for four Flint Stones and a bone chip (tradeHas is not exact: the four taken, the
+# chip kept; completed, fame +10, 100 gil), the completed 37 with option [7] = 1 (no finish handler), and the repeat 36
+# with five stones (four taken; fame +10, 100 gil, no completion). Legata has no script; no other quest names her.
+lists SouthernSanDoria/Legata/onTrigger SouthernSanDoria/Legata/onTrade SouthernSanDoria/onEventFinish/37 SouthernSanDoria/onEventFinish/36
+char zone=SouthernSanDoria pos=83.1,1,114.9
+item FlintStone x12
+item BoneChip
+login
+trade Legata FlintStone x4                # available: no trade handler, nothing
+trigger Legata                            # available: 37
+finish                                    # option 0: nothing
+trigger Legata                            # 37
+finish option=1                           # option 1: begun
+trigger Legata                            # accepted: 35
+finish
+trade Legata BoneChip x1                  # nil
+trade Legata FlintStone x3                # three: nil
+trade Legata FlintStone x4 BoneChip x1    # four and more: 36
+finish                                    # completed (no reward), fame +10, 100 gil, four stones taken, the chip kept
+trigger Legata                            # completed: 37 with option [7] = 1
+finish                                    # no finish handler for 37 once completed: nothing
+trade Legata FlintStone x5                # completed: 36
+finish                                    # not accepted: no completion; fame +10, 100 gil, four stones taken (one kept)

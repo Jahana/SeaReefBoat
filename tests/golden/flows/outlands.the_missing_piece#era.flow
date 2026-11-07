@@ -1,0 +1,23 @@
+# The Missing Piece (outlands 193) with its era module, modules/era/lua/quests/outlands/the_missing_piece.lua, enabled
+# by xi.pre(SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0): 703's finish runs the base handler, then Wait = JstMidnight()
+# (1800025200, the next JST midnight after the harness clock; the base alone sets 1800000060: the trace's char var shows
+# which). A level 10 Warrior in Northern San d'Oria, accepted at Prog 2 with the tablet and the letter (GMs).
+# Charlaimagnat 703, finished: the title, the key items taken, Prog 3, Wait 1800025200; 704; Wait 1800025199 is not set
+# here (the clock does not move between steps): `wait jst=1` (past JST midnight): 705, finished: completed.
+module modules/era/lua/quests/outlands/the_missing_piece.lua
+lists NorthernSanDoria/Charlaimagnat/onTrigger NorthernSanDoria/onEventFinish/703 NorthernSanDoria/onEventFinish/705
+char zone=NorthernSanDoria pos=127.703,6.499,109.316 job=WAR lvl=10
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Outlands.TheMissingPiece accepted
+charvar Quest[5][193]Prog 2
+keyitem TabletOfAncientMagic
+keyitem LetterFromAlfesar
+login
+trigger Charlaimagnat                   # Prog 2: 703
+finish                                  # the base: Wait +60, the title, the key items taken, Prog 3; the module: Wait = JstMidnight
+trigger Charlaimagnat                   # now < Wait: 704
+finish
+wait jst=1                              # past JST midnight
+trigger Charlaimagnat                   # 705
+finish                                  # completed: the scroll; fame

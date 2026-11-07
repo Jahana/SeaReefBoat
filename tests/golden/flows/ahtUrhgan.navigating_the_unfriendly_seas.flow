@@ -1,0 +1,45 @@
+# Navigating the Unfriendly Seas (ahtUrhgan 25, COR AF2): a level 50 Corsair, Luck of the Draw and Equipped for All
+# Occasions completed (GMs), a Hydrogauge and a Bone Chip. Arrapago Reef: qm6 (no script; default
+# NOTHING_OUT_OF_ORDINARY). Nashmau: Leleroon (no script; default 264). Wajaom Woodlands: the Leypoint (no script;
+# default LEYPOINT). Available: a trade to qm6: nothing; qm6 232, finished: begun. Accepted: qm6 Prog 0: nil:
+# NOTHING_OUT_OF_ORDINARY. Nashmau: Leleroon Prog 0: nil: 264; a Bone Chip: nil; the gauge at Prog 0: 283, finished:
+# Prog 1 (the gauge kept); the gauge again at Prog 1: nil; Leleroon Prog 1: 292. Wajaom: the Leypoint Prog 1: nil:
+# LEYPOINT; the gauge with a Bone Chip: not exactly the gauge: nil; the gauge alone: confirmed (taken), Prog 2, Wait =
+# now + 60, PLACE_HYDROGAUGE; the Leypoint Prog 2, Wait > now: ENIGMATIC_LIGHT; a JST day on (`wait jst=1`): 508 (Prog
+# 3, Wait 0). Nashmau: Leleroon Prog 3: nil: 264. qm6 Prog 3: 233: completed (Corsair's Culottes).
+lists ArrapagoReef/qm6/onTrigger Nashmau/Leleroon/onTrade Nashmau/Leleroon/onTrigger WajaomWoodlands/Leypoint/onTrade WajaomWoodlands/Leypoint/onTrigger WajaomWoodlands/onEventFinish/508
+char zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=50
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.EquippedForAllOccasions completed
+item Hydrogauge
+item BoneChip
+login
+trade qm6 BoneChip x1                   # available: no trade handler: nothing
+trigger qm6                             # 232
+finish                                  # begun
+trigger qm6                             # Prog 0: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp -13.187,0,25.114 Nashmau           # beside Leleroon
+trigger Leleroon                        # Prog 0: nil: 264
+finish
+trade Leleroon BoneChip x1              # no gauge: nil
+trade Leleroon Hydrogauge x1            # Prog 0, a gauge: 283
+finish                                  # Prog 1; the gauge kept
+trade Leleroon Hydrogauge x1            # Prog 1: nil
+trigger Leleroon                        # Prog 1: 292
+finish
+warp -198.527,-8.5,80.058 WajaomWoodlands   # beside the Leypoint
+trigger Leypoint                        # Prog 1: nil: LEYPOINT
+finish-if-event
+trade Leypoint Hydrogauge x1 BoneChip x1   # not exactly the gauge: nil
+trade Leypoint Hydrogauge x1            # Prog 1, the gauge alone: confirmed; Prog 2; Wait = now + 60; PLACE_HYDROGAUGE
+trigger Leypoint                        # Prog 2, Wait > now: ENIGMATIC_LIGHT
+wait jst=1                              # GetSystemTime() past Wait
+trigger Leypoint                        # 508
+finish                                  # Prog 3; Wait 0
+warp -13.187,0,25.114 Nashmau
+trigger Leleroon                        # Prog 3: nil: 264
+finish
+warp 470.267,-12.292,111.817 ArrapagoReef
+trigger qm6                             # Prog 3: 233
+finish                                  # completed: Corsair's Culottes

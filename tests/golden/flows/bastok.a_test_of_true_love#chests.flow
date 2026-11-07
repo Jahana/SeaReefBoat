@@ -1,0 +1,39 @@
+# A Test of True Love, the chests' other sides: Castle Zvahl Keep's chest without Un Moment (the treasure trade gives it),
+# then Castle Zvahl Baileys' with Un Moment held, Onzozo's with L'Ancienne and the Grotto's with L'Ephemere held (each
+# nil: the chest's own script, a regular opening); last, Carmelo with Prog 2, which nothing sets (a GM's var): nil, 182.
+char zone=CastleZvahlKeep pos=-299.787,-48,24.873 lvl=75
+fame Bastok 425
+charvar Quest[1][0]Prog 2
+quest Bastok.TheSirensTear completed
+quest Bastok.LoveAndIce completed
+quest Bastok.ATestOfTrueLove accepted
+item ZvahlChestKey
+item ZvahlChestKey
+item OnzozoChestKey
+item GrottoChestKey
+login
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest ZvahlChestKey x1  # no Un Moment: the chest opens
+tick 4500                      # Un Moment
+warp 110.041,-20.002,106.811 CastleZvahlBaileys
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest ZvahlChestKey x1  # Un Moment held: nil, the chest's own script
+tick 4500
+keyitem Lancienne
+keyitem Lephemere
+warp 50.829,3.684,-27.560 LabyrinthOfOnzozo
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest OnzozoChestKey x1  # L'Ancienne held: nil, the chest's own script
+tick 4500
+warp 189.673,18.999,30.161 SeaSerpentGrotto
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest GrottoChestKey x1  # L'Ephemere held: nil, the chest's own script
+tick 4500
+warp -146.5,-7.48,13 PortBastok
+charvar Quest[1][62]Prog 2
+trigger Carmelo                # Prog 2: nil, 182
+finish

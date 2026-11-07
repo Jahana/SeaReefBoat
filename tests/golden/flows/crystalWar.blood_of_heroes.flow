@@ -1,0 +1,54 @@
+# Blood of Heroes (crystalWar 52): a level 99 Warrior in Southern San d'Oria [S] with Songbirds in a Snowstorm completed
+# (a GM; the WotG mission The Scent of Battle current, other logs as group 1's flows). Rholont (available): 656.
+# Xarcabard [S]: Animal Spoor 1, finished: begun. Wheel Rut 2, finished: Prog 1; Prog 1: nil (NOTHING_OUT_OF_ORDINARY).
+# Animal Spoor 3, finished: the Vial of Military Prism Powder, Prog 2. Forbidding Portal 4, finished: Prog 3; Prog 3:
+# nil (NO_RESPONSE). Animal Spoor, Prog 3, the vial held: nil. The vial taken (a GM): the Timer 0: 13, finished: the
+# vial; taken again and the Timer 99999 (GMs: nothing sets it; the Lua's NOTE): 15. Ghoyu's Reverie's 10000 (Prog 4,
+# setPos) is waived in `#edges`: Prog 4 by a GM; the Xarcabard [S] zone-in at Prog 4 (any zone): 6, finished: Prog 5.
+# Wheel Rut 7 with a full inventory, finished: the Ram Staff does not fit: not completed. Room again: 7, finished:
+# completed (the Ram Staff, House Aurchiat Retainer), Chasing Shadows' Timer tomorrow (user ruling 2026-11-04, kept Lua
+# bugs: the Lua's xi.quest.setVar(player, 7, CHASING_SHADOWS, VanadielUniqueDay() + 1) named no var, gave
+# player:setVar a nil value and raised; its baseline holds that step as finish expect-error).
+lists SouthernSanDoriaS/Rholont/onTrigger XarcabardS/Animal_Spoor/onTrigger XarcabardS/Wheel_Rut/onTrigger XarcabardS/Forbidding_Portal/onTrigger XarcabardS/onZoneIn/1 XarcabardS/onEventFinish/1 XarcabardS/onEventFinish/2 XarcabardS/onEventFinish/3 XarcabardS/onEventFinish/4 XarcabardS/onEventFinish/6 XarcabardS/onEventFinish/7 XarcabardS/onEventFinish/13
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.SongbirdsInASnowstorm completed
+mission Wotg TheScentOfBattle current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # available: 656
+finish
+warp 543.954,-0.522,-290.313 XarcabardS # available: no zone-in reply
+trigger Animal_Spoor                    # available: 1
+finish                                  # begun
+trigger Wheel_Rut                       # Prog 0: 2
+finish                                  # Prog 1
+trigger Wheel_Rut                       # Prog 1: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+trigger Animal_Spoor                    # Prog 1: 3
+finish                                  # the Vial of Military Prism Powder; Prog 2
+trigger Forbidding_Portal               # Prog 2: 4
+finish                                  # Prog 3
+trigger Forbidding_Portal               # Prog 3: nil (NO_RESPONSE; the instance's entry is not here)
+finish-if-event
+trigger Animal_Spoor                    # Prog 3, the vial held: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+delkeyitem VialOfMilitaryPrismPowder    # a GM: what the instance's registration would take (CHECK)
+charvar Quest[7][52]Timer 8000          # a GM: today (the harness's day)
+trigger Animal_Spoor                    # Prog 3, no vial, the Timer today: 13
+finish                                  # the vial again
+delkeyitem VialOfMilitaryPrismPowder    # a GM
+charvar Quest[7][52]Timer 99999         # a GM: what the instance's failure would set (the Lua's NOTE)
+trigger Animal_Spoor                    # the Timer to come: 15
+finish
+charvar Quest[7][52]Prog 4              # a GM: what Ghoyu's Reverie's 10000 does
+rezone open                             # Prog 4 (any zone): 6, left open
+finish                                  # Prog 5
+fill-inventory
+trigger Wheel_Rut                       # Prog 5: 7
+finish                                  # no room for the Ram Staff: not completed
+free-inventory
+trigger Wheel_Rut                       # Prog 5: 7
+finish                                  # completed; Chasing Shadows' Timer tomorrow

@@ -1,0 +1,41 @@
+# The Wyrm God (abyssea 184): a level 99 Warrior in Abyssea - Empyreal Paradox with Beneath a Blood Red Sky completed
+# and the quest accepted (GMs). Prishe at Prog 0: nil: her default 205. TR_Entrance at Prog 0: 208, finished: Prog 1; at
+# Prog 1: nil (no script, no default: nothing). Prishe at Prog 1: 205. The 32001 battlefield finish cannot play (no
+# battlefield, and its check compares with xi.battlefield.id.THE_WYRM_GOD, nil): waived; Prog 2 by a GM. Prishe at Prog
+# 2: 203, finished: completed, Meanwhile, Back on Abyssea accepted. Completed: Prishe: 206 (replaceDefault); TR_Entrance
+# (Prog 0): nothing; Prishe at Prog 2 (a GM): 206 again.
+uncovered: 1/-/onEventFinish:32001 -- Abyssea - Empyreal Paradox has no battlefield, and xi.battlefield.id.THE_WYRM_GOD is nil, so the arm never sets Prog 2
+lists AbysseaEmpyrealParadox/TR_Entrance/onTrigger AbysseaEmpyrealParadox/Prishe/onTrigger AbysseaEmpyrealParadox/onEventFinish/208 AbysseaEmpyrealParadox/onEventFinish/203 AbysseaEmpyrealParadox/onEventFinish/205 AbysseaEmpyrealParadox/onEventFinish/206
+char zone=AbysseaEmpyrealParadox pos=540,-500,-597.5 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate completed
+quest Abyssea.HeartOfMadness completed
+quest Abyssea.TenuousExistence completed
+quest Abyssea.ChampionsOfAbyssea completed
+quest Abyssea.ASeaDogsSummons completed
+quest Abyssea.DeathAndRebirth completed
+quest Abyssea.EmissariesOfGod completed
+quest Abyssea.BeneathABloodRedSky completed
+quest Abyssea.TheWyrmGod accepted
+login
+trigger Prishe                          # Prog 0: nil: default 205
+finish
+trigger TR_Entrance                     # Prog 0: 208
+finish                                  # Prog 1
+trigger TR_Entrance                     # Prog 1: nil: nothing
+finish-if-event
+trigger Prishe                          # Prog 1: nil: 205
+finish
+charvar Quest[8][184]Prog 2             # a GM: what the 32001 arm means to write
+trigger Prishe                          # Prog 2: 203
+finish                                  # completed; Meanwhile, Back on Abyssea accepted
+trigger Prishe                          # completed: 206 (replaceDefault)
+finish
+trigger TR_Entrance                     # completed, Prog 0: no section: nothing
+finish-if-event
+charvar Quest[8][184]Prog 2             # a GM
+trigger Prishe                          # completed at Prog 2: 206 (not 203)
+finish

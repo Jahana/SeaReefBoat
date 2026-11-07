@@ -1,0 +1,25 @@
+# Your Crystal Ball (jeuno 9) with its era module (quest rework B3b Jeuno, P4): modules/era/lua/quests/jeuno/
+# your_crystal_ball.lua, enabled by its condition xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0), wraps
+# state 2's Maze of Shakhrami Rockwell onTrade: the quest's handler runs, and when it changed Wait, Wait becomes
+# JstMidnight() (the next JST midnight; the harness's wall clock is 1800000000, 17:00 JST, so 1800025200). GM-set
+# accepted at Prog 0: two lenses (the quest's: nil, Wait unchanged, the module writes nothing), one lens (the quest's:
+# taken, Prog 1, Wait = now + 60, SUBMERGED_ITEM; changed, so Wait = JstMidnight()), another (MORE_THAN_ONE, Wait
+# unchanged), the pool before Wait (WAIT_A_BIT_LONGER), a JST day later 52 (Prog 2, the Divination Sphere). The
+# unchanged side of the ~= at a write is #era_same_wait.
+# The condition's false side cannot be a module flow (the harness fails a flow whose module is not enabled); the
+# quest's own flows are that side.
+module modules/era/lua/quests/jeuno/your_crystal_ball.lua
+lists MazeOfShakhrami/Rockwell/onTrigger MazeOfShakhrami/Rockwell/onTrade MazeOfShakhrami/onEventFinish/52
+char zone=MazeOfShakhrami pos=-18,-14,181.5 job=WAR lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.YourCrystalBall accepted
+item AhrimanLens x3
+login
+trade Rockwell AhrimanLens x2               # not one lens: nil, Wait unchanged: nothing more
+trade Rockwell AhrimanLens x1               # Prog 0: the lens taken, Prog 1, SUBMERGED_ITEM; Wait = JstMidnight()
+trade Rockwell AhrimanLens x1               # Prog 1: MORE_THAN_ONE, Wait unchanged
+trigger Rockwell                            # before Wait: WAIT_A_BIT_LONGER
+wait jst=1                                  # GetSystemTime past Wait
+trigger Rockwell                            # 52
+finish                                      # Prog 2, the Divination Sphere

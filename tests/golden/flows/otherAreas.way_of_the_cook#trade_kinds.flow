@@ -1,0 +1,28 @@
+# Way of the Cook (otherAreas 1): its trade replies' kinds against Rycharde the Chef accepted (a GM), whose trade answers
+# exactly one meat among the items (hasItemQty(meat, 1)) with 73 (Event; RQ1 sorts before RQ2). Accepted (a GM), EndTime
+# 790189201 (a GM: one second left): the meat and the chip: Way of the Cook's 80 (Progress beats RQ1's 73; a Progress 73
+# would tie and play first, as RQ1 is the earlier container), finished: completed, 1500 gil. Made available and accepted
+# again (a GM), EndTime 790189200 (none left), a meat and a chip again (a GM); Take: RQ1's 68, then Way of the Cook's
+# accepted 65 (Event: a tie, the cycle's next); back at Rycharde: 81 (Progress beats 73), finished: completed, 1000 gil.
+lists Mhaura/Rycharde/onTrade Mhaura/onEventFinish/80 Mhaura/onEventFinish/81
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.RychardeTheChef accepted
+quest OtherAreas.WayOfTheCook accepted
+charvar Quest[4][1]EndTime 790189201
+item SliceOfDhalmelMeat
+item BeehiveChip
+login
+trade Rycharde SliceOfDhalmelMeat x1 BeehiveChip x1 # in time: 80 (Progress beats RQ1's 73)
+finish                                  # completed: the trade taken, 1500 gil, DayCompleted 8000
+quest OtherAreas.WayOfTheCook available # a GM
+quest OtherAreas.WayOfTheCook accepted  # a GM
+charvar Quest[4][1]EndTime 790189200    # a GM: none left
+item SliceOfDhalmelMeat                 # a GM
+item BeehiveChip                        # a GM
+trigger Take                            # accepted: RQ1's 68 (a tie with Way of the Cook's 65: the first container's)
+finish
+trigger Take                            # Way of the Cook's 65 (Event; a Progress 65 would have played first)
+finish
+walk 18.9,-16,88.8                      # back to Rycharde (a trade does not walk)
+trade Rycharde SliceOfDhalmelMeat x1 BeehiveChip x1 # late: 81 (Progress beats RQ1's 73)
+finish                                  # completed: the trade taken, 1000 gil

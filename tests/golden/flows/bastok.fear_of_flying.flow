@@ -1,0 +1,25 @@
+# Fear of Flying (bastok 35): Kurando in Port Bastok. The guard (Bastok fame level 3), the offer 170, the Silkworm Egg
+# trade (171), the Black Silk Neckerchief, then 172 once (the Option var) and 173 (replaceDefault). Kurando's default is
+# 28; no other quest or mission names him.
+lists PortBastok/Kurando/onTrigger PortBastok/Kurando/onTrade PortBastok/onEventFinish/170 PortBastok/onEventFinish/171 PortBastok/onEventFinish/172
+char zone=PortBastok pos=-23.9,4.898,1.9
+fame Bastok 124
+item SilkwormEgg x2
+item BoneChip
+login
+trade Kurando SilkwormEgg x1    # available: no trade handler, nothing
+trigger Kurando                 # fame 124 (level 2): his default 28
+finish
+fame Bastok 125
+trigger Kurando                 # fame level 3: the offer, 170
+finish                          # accepted
+trigger Kurando                 # accepted: no trigger in section 2, 28
+finish
+trade Kurando BoneChip x1       # the wrong item: nothing
+trade Kurando SilkwormEgg x1    # 171
+finish                          # completed: the neckerchief, fame +30, Airship Denouncer, an egg gone, Option 1
+trigger Kurando                 # Option 1: 172
+finish                          # Option 0
+trigger Kurando                 # Option 0: 173
+finish
+trade Kurando SilkwormEgg x1    # completed: nothing

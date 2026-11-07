@@ -1,0 +1,80 @@
+# golden trace: bastok.drachenfall#lost_canteen
+seed 7
+flow 4a9c8787d3395cc0ec27524ded7288afc16f7ad67558b55ad121368f26c2ed66
+recorder lua
+lua-at 767ba9b834af8ffb831c7245442065e92568eaed
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @3fedbfe4e281f01a (173)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @27ea52c8fa126bff (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @bcbc236d2b548e3e (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @bfa44062b86a600c (19)
+char_quest_state @8259d0d010f6c1ac (2)
+char_recast @67a27677bd1e54e5 (2)
+char_stats @019b7fd8799a85e6 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @6004e92bcad9a640 (41)
+ret onZoneIn=number:30035,onEventFinish=nil:nil
+order 234/Black_Mud/onTrigger=default,Quest[1][31],Quest[1][31]
+order 234/onEventFinish/102=Quest[1][31]
+step trigger Black_Mud
+packets
+  00E @9bcca15832acafed
+  00E @7561ea12c24eac21
+  00E @61d39474e65d2a15
+  00E @3584395978e92439
+  00E @2be43a39f18aeb47
+  00E @7fb2b92a8394edf4
+  00E @bf740c3e0c4eea04
+  00E @509af510aaef127d
+  00E @f403ddc028497c58
+  00E @637866f44deee399
+  00E @a8b03d1b567a4694
+  00E @0931c5ad5d54be7e
+  00E @ae2a6b5a78d8c1ae
+  00E @e70dd9607b51c28b
+  00E @cb8dfdb10cf87adb
+  00E @d54cca17cf3ecad5
+  00E @204d43d11b3d1c93
+  00E @12a2c615845b0f16
+  00E @6167d8818bdd74c8
+  00E @a9938d5da2a60ebe
+  00E @af1f727e38eb430a
+  00E @5c8480f314f17807
+  032 @e253bf282aa4f09a
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  020 @36a1ecb903969900
+  01D @f8579df92de4b1ca
+  02A @76636d30d5b7f7d7
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory + location=0|slot=1|itemId=493|quantity=1|bazaar=0|signature=|extra=000000000000000000000000000000000000000000000000
+ret onEventFinish=nil:nil
+step trigger Black_Mud
+packets
+  032 @cc548498230d3728
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish-if-event
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil

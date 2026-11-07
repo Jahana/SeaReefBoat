@@ -1,0 +1,53 @@
+# It's Raining Mannequins! (otherAreas 29): Mhaura's Fyi Chalmwoh (no script, no default), Selbina's Ramona (her script:
+# 170 / 172 / 175), Northern San d'Oria's Cheupirudaux (the woodworking guild master's script). A level 30 Hume Warrior
+# (race 1) with the five mannequin parts and a Chocobo Feather; GetSystemTime() is the harness's 1800000000 throughout.
+# Available: a trade to Fyi: no trade handler, nothing; Fyi 305, finished: begun. Prog 0: Fyi 306; the five parts: no
+# trade handler at Prog 0, nothing. Selbina: Ramona 1103, finished: Ye Olde Mannequin Catalogue, Prog 1; Ramona at Prog
+# 1: no section, her script's 170. Northern San d'Oria: Cheupirudaux 759, finished: the Mannequin Joint Diagrams, Prog 2;
+# again: no section, his guild script. Mhaura: Fyi 308; four parts: nil; the five and the feather: nil (tradeHasExactly);
+# the five: 309, finished: the parts taken, Prog 3, Wait 1800000000. Fyi 310 (Wait + 60 > now). Wait 1799999941 (a GM:
+# now = Wait + 59): 310; 1799999940 (now = Wait + 60): 311, finished: completed (no reward table), tradeComplete with no
+# trade open, the Hume Male Mannequin (256) with its exdata race 1, ITEM_OBTAINED. Completed: no section, nothing.
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/Fyi_Chalmwoh/onTrade Mhaura/onEventFinish/305 Mhaura/onEventFinish/309 Mhaura/onEventFinish/311 Selbina/Ramona/onTrigger Selbina/onEventFinish/1103 NorthernSanDoria/Cheupirudaux/onTrigger NorthernSanDoria/onEventFinish/759
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30
+item MannequinHead
+item MannequinBody
+item MannequinHands
+item MannequinLegs
+item MannequinFeet
+item ChocoboFeather
+login
+trade Fyi_Chalmwoh MannequinHead x1     # available: no trade handler; nothing (the head kept)
+trigger Fyi_Chalmwoh                    # 305
+finish                                  # begun
+trigger Fyi_Chalmwoh                    # Prog 0: 306
+finish
+trade Fyi_Chalmwoh MannequinHead x1 MannequinBody x1 MannequinHands x1 MannequinLegs x1 MannequinFeet x1 # Prog 0: no trade handler; nothing
+warp 14,-7.3,2.9 Selbina
+trigger Ramona                          # Prog 0: 1103
+finish                                  # Ye Olde Mannequin Catalogue; Prog 1
+trigger Ramona                          # Prog 1: no section; her script: 170
+finish
+warp -136.7,12,250.9 NorthernSanDoria
+trigger Cheupirudaux                    # Prog 1: 759
+finish                                  # the Mannequin Joint Diagrams; Prog 2
+trigger Cheupirudaux                    # Prog 2: no section; his guild script
+finish-if-event
+warp -37.8,-16,70.1 Mhaura
+trigger Fyi_Chalmwoh                    # Prog 2: 308
+finish
+trade Fyi_Chalmwoh MannequinHead x1 MannequinBody x1 MannequinHands x1 MannequinLegs x1 # four parts: nil
+trade Fyi_Chalmwoh MannequinHead x1 MannequinBody x1 MannequinHands x1 MannequinLegs x1 MannequinFeet x1 ChocoboFeather x1 # an extra item: nil
+trade Fyi_Chalmwoh MannequinHead x1 MannequinBody x1 MannequinHands x1 MannequinLegs x1 MannequinFeet x1 # 309
+finish                                  # the parts taken; Prog 3; Wait 1800000000
+trigger Fyi_Chalmwoh                    # now < Wait + 60: 310
+finish
+charvar Quest[4][29]Wait 1799999941     # a GM: now = Wait + 59
+trigger Fyi_Chalmwoh                    # 310
+finish
+charvar Quest[4][29]Wait 1799999940     # a GM: now = Wait + 60
+trigger Fyi_Chalmwoh                    # 311
+finish                                  # completed; the Hume Male Mannequin (exdata race 1); ITEM_OBTAINED
+tick 1000                               # the item's exdata (setExData marks it dirty) is saved on the char's next tick
+trigger Fyi_Chalmwoh                    # completed: no section; nothing
+finish-if-event

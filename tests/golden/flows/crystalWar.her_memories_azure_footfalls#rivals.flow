@@ -1,0 +1,30 @@
+# Her Memories: Azure Footfalls (crystalWar 70), the rival at Roderich: a level 99 Warrior in North Gustaberg [S] with
+# the WotG mission Her Memories current (a GM; other logs as group 1's flows), Azure accepted at Prog 3 (a GM) and What
+# Price Loyalty (crystalWar 50, group 5) accepted at Prog 0 with the Sack of Victuals (GMs). Roderich answers Azure's
+# 15 and What Price Loyalty's 10, both Progress: the tie goes to the first container, Azure: 15, finished: Prog 4.
+# Prog 3 again (a GM): the tie rotates: 10, finished: What Price Loyalty Prog 1, the sack taken. Prog 3 again and the
+# lookup's cycle put at 15 (GMs): 15 (Progress) over What Price Loyalty's 11 (an Event; a Progress 11 would tie and
+# rotate to it), finished: Prog 4. Then 11 alone.
+lists NorthGustabergS/Roderich/onTrigger NorthGustabergS/onEventFinish/10 NorthGustabergS/onEventFinish/15
+char zone=NorthGustabergS pos=-398.539,39.991,-90.445 job=WAR lvl=99
+mission Wotg HerMemories current
+quest CrystalWar.HerMemoriesAzureFootfalls accepted
+charvar Quest[7][70]Prog 3
+quest CrystalWar.WhatPriceLoyalty accepted
+keyitem SackOfVictuals
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Roderich                        # 15 and 10 tie (Progress): 15, the first container
+finish                                  # Prog 4
+charvar Quest[7][70]Prog 3              # a GM
+trigger Roderich                        # the tie rotates: 10
+finish                                  # What Price Loyalty Prog 1; the sack taken
+charvar Quest[7][70]Prog 3              # a GM
+localvar [Action][Roderich][onTrigger] 15 # a GM: the cycle at 15
+trigger Roderich                        # 15 (Progress) over 11 (an Event)
+finish                                  # Prog 4
+trigger Roderich                        # Prog 4: 11 alone
+finish

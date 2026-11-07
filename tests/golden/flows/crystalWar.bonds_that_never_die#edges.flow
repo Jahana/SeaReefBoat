@@ -1,0 +1,53 @@
+# Bonds That Never Die (crystalWar 45), the edges: a level 99 Warrior in Pashhow Marshlands [S] without The Price of
+# Valor completed (missions as the main flow). The letter (a GM): Shimmering Pondweed: no section (nothing). The
+# Price of Valor completed (a GM): the letter taken (a GM): Pondweed: no letter: nil; the letter again (a GM): 107,
+# finished on option 1: begun (any option). Jugner Forest [S] at Prog 0 with a full inventory: Overgrown Mushrooms
+# 212, finished: the Hatchet does not fit: no Prog; freed: 212: Prog 1. Prog 2 (a GM) with the ivy: Mushrooms: nil.
+# Prog 3 (a GM): a zone-in: nothing; Prog 5: a zone-in: nothing. Southern San d'Oria [S]: Rongelouts N Distaud at
+# Prog 3: nil (604). Prog 5 (a GM), a full inventory: 650, finished: the horn does not fit: not completed (no
+# Option); freed: 650: completed.
+uncovered: 2/-/onEventFinish:10000 -- Everbloom Hollow's 10000 is the instance's clear (Everbloom Hollow has no instance script; its zone-in sends a char with no instance away), so no flow opens it; the main flow sets Prog 4 by a GM
+lists PashhowMarshlandsS/Shimmering_Pondweed/onTrigger PashhowMarshlandsS/onEventFinish/107 JugnerForestS/Overgrown_Mushrooms/onTrigger JugnerForestS/onZoneIn/1 JugnerForestS/onEventFinish/212 SouthernSanDoriaS/Rongelouts_N_Distaud/onTrigger SouthernSanDoriaS/onEventFinish/650
+char zone=PashhowMarshlandsS pos=-196.855,24.999,407.678 job=WAR lvl=99
+keyitem LetterToCountAurchiat           # a GM
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Shimmering_Pondweed             # The Price of Valor not completed: no section (nothing)
+finish-if-event
+quest CrystalWar.ThePriceOfValor completed # a GM
+delkeyitem LetterToCountAurchiat        # a GM
+trigger Shimmering_Pondweed             # no letter: nil
+finish-if-event
+keyitem LetterToCountAurchiat           # a GM
+trigger Shimmering_Pondweed             # 107
+finish option=1                         # begun (any option); the letter taken
+warp -361.432,4.908,-332.018 JugnerForestS
+fill-inventory
+trigger Overgrown_Mushrooms             # Prog 0: 212
+finish                                  # no room for the Hatchet: no Prog
+free-inventory
+trigger Overgrown_Mushrooms             # 212
+finish                                  # the Hatchet; Prog 1
+keyitem LengthOfJugnerIvy               # a GM
+charvar Quest[7][45]Prog 2              # a GM
+trigger Overgrown_Mushrooms             # Prog 2, the ivy held: nil (the 213 test is Prog 1 only)
+finish-if-event
+delkeyitem LengthOfJugnerIvy            # a GM
+charvar Quest[7][45]Prog 3              # a GM
+rezone                                  # Prog 3: no zone-in reply
+charvar Quest[7][45]Prog 5              # a GM
+rezone                                  # Prog 5: no zone-in reply (the test is Prog 4 only)
+charvar Quest[7][45]Prog 3              # a GM: back
+warp 1.5,1.999,-22.006 SouthernSanDoriaS
+trigger Rongelouts_N_Distaud            # Prog 3: nil (604)
+finish-if-event
+charvar Quest[7][45]Prog 5              # a GM
+fill-inventory
+trigger Rongelouts_N_Distaud            # Prog 5: 650
+finish                                  # no room: not completed
+free-inventory
+trigger Rongelouts_N_Distaud            # 650
+finish                                  # completed; Option 1

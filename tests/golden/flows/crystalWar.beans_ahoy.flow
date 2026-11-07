@@ -1,0 +1,44 @@
+# Beans Ahoy (crystalWar 29, call-only): a level 99 Warrior in Southern San d'Oria [S] (missions as group 1's flows),
+# three Chunks of Lufet Salt and a Lilac. Thierride 334, finished: the quest added; again: 335. A salt alone, BeansAhoy
+# 0: 337, finished: the salt taken (tradeComplete), BeansAhoy 1, needToZone. A salt again, needToZone: no reply at all.
+# The Lilac: his script's 339. Zoned: a salt: 340, finished: the Angler's Cassoulet (ITEM_OBTAINED), ConquestWeek 1 to
+# the tally, completed (the bit alone), BeansAhoy 0, the salt taken. Completed, ConquestWeek 1: 341. ConquestWeek 0 (a
+# GM): 342, finished: the cassoulet in the bag is held: ITEM_CANNOT_BE_OBTAINED, ConquestWeek stays 0 (user ruling
+# 2026-11-04, kept Lua bugs: the Lua's hasItem(cassoulet, 1) read the Mog Safe only, so the rare cassoulet's addItem
+# failed while ITEM_OBTAINED was sent and ConquestWeek set). Thierride has a default action (DefaultActions 333) and
+# talks alternate between it and his script (UseFallback): every script talk is preceded by a default 333, and a trade
+# or a script talk puts the default next.
+lists SouthernSanDoriaS/Thierride/onTrigger SouthernSanDoriaS/Thierride/onTrade SouthernSanDoriaS/onEventFinish/334 SouthernSanDoriaS/onEventFinish/337 SouthernSanDoriaS/onEventFinish/340 SouthernSanDoriaS/onEventFinish/342
+char zone=SouthernSanDoriaS pos=-123.038,-2,14.598 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item ChunkOfLufetSalt x3
+item Lilac
+login
+trigger Thierride                       # the default 333 (talks alternate with his script)
+finish-if-event
+trigger Thierride                       # available: 334
+finish                                  # the quest added
+trigger Thierride                       # the default 333 (talks alternate with his script)
+finish-if-event
+trigger Thierride                       # accepted: 335
+finish
+trade Thierride ChunkOfLufetSalt x1     # accepted, a salt alone, BeansAhoy 0: 337
+finish                                  # the salt taken; BeansAhoy 1; needToZone
+trade Thierride ChunkOfLufetSalt x1     # BeansAhoy 1, needToZone: no reply at all
+trade Thierride Lilac x1                # not the salt: 339
+finish
+rezone                                  # needToZone cleared
+trade Thierride ChunkOfLufetSalt x1     # BeansAhoy 1, zoned: 340
+finish                                  # the Angler's Cassoulet; ConquestWeek 1; completed; BeansAhoy 0; the salt taken
+trigger Thierride                       # the default 333 (talks alternate with his script)
+finish-if-event
+trigger Thierride                       # completed, ConquestWeek 1: 341
+finish
+charvar BeansAhoy_ConquestWeek 0        # a GM: the tally passed
+trigger Thierride                       # the default 333 (talks alternate with his script)
+finish-if-event
+trigger Thierride                       # completed, ConquestWeek 0: 342
+finish                                  # the bag's cassoulet is held: ITEM_CANNOT_BE_OBTAINED

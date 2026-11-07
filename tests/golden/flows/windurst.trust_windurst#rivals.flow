@@ -1,0 +1,33 @@
+# Trust: Windurst (windurst 96): the handlers that answer at Kupipi before her script (and so before this quest's
+# call). A level 75 Bastok char, this quest accepted by GM (with the card), the var 0. Bastok mission 2-3 The Emissary
+# (Windurst) current at status 3: its 239 (a progress event) outranks: 435 is not played; its finish sets status 4,
+# where the mission has no Kupipi arm: 435. Status 5: the mission's 240 is an Event (Default priority), so the lookup
+# takes turns between it and her script (240, then the script's 436, then 240). Waking the Colossus accepted (GM, the
+# Imperial Missive) at Prog 2 without the Windurstian letter, after a rezone (the flag cleared): its 429 (a progress
+# event) outranks 436; option 0: the letter; then this quest's 436.
+char zone=HeavensTower pos=2,0.1,30 lvl=75 nation=1
+quest Windurst.TrustWindurst accepted
+keyitem GreenInstituteCard
+mission Bastok TheEmissaryWindurst current
+login
+missionstatus Bastok 3
+trigger Kupipi+1                        # Bastok 2-3 at status 3: 239
+finish                                  # status 4; the Sword Offering; Semih's cipher
+trigger Kupipi+1                        # status 4: no mission arm: 435
+finish                                  # Kupipi learned; the var 1
+missionstatus Bastok 5
+trigger Kupipi+1                        # status 5: the mission's turn: 240
+finish
+trigger Kupipi+1                        # the script's turn: the var 1, flag 0: 436
+finish
+trigger Kupipi+1                        # the mission's turn: 240
+finish
+missionstatus Bastok 4
+quest AhtUrhgan.WakingTheColossus accepted
+keyitem ImperialMissive
+charvar Quest[6][74]Prog 2
+rezone
+trigger Kupipi+1                        # Waking the Colossus Prog 2, no letter: 429
+finish option=0                         # the Windurstian Approval Letter
+trigger Kupipi+1                        # the letter held: the var 1, flag 0: 436
+finish

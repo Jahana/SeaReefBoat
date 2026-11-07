@@ -1,0 +1,30 @@
+# Beyond the Stars (jeuno 135), each handler once its section no longer holds (a GM's change while the event is open): a
+# level 81 Warrior with the Limit Breaker at cap 85, the two earlier limit breaks completed, 5 merit points. 10045 open,
+# then cap 86: finish option 9 does nothing (not begun); cap 85 again: begun. Accepted: ten crests, 10137 open, then the
+# quest set available (its first section holds; 10137's finish is the accepted section's): nothing (crests kept, merits
+# 5, Prog 0). Accepted again (a GM) with Prog 1: 10161 open, then the quest set available: the update does nothing (no
+# reply) and finish option 254 does nothing (not completed, cap 85).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventUpdate/10161 RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10137 RuludeGardens/onEventFinish/10161
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=81
+keyitem LimitBreaker
+levelcap 85
+merits 5
+quest Jeuno.NewWorldsAwait completed
+quest Jeuno.ExpandingHorizons completed
+item KindredsCrest x10
+login
+trigger Nomad_Moogle                    # 10045 (81, 1, 3, 0)
+levelcap 86                             # a GM, 10045 open
+finish option=9                         # cap 86: no section: nothing (not begun)
+levelcap 85                             # a GM
+trigger Nomad_Moogle                    # 10045 (81, 1, 3, 0)
+finish option=9                         # begun
+trade Nomad_Moogle KindredsCrest x10    # 10137
+quest Jeuno.BeyondTheStars available    # a GM, 10137 open
+finish                                  # available: nothing (no Prog, merits 5, crests kept)
+quest Jeuno.BeyondTheStars accepted     # a GM
+charvar Quest[3][135]Prog 1             # a GM
+trigger Nomad_Moogle                    # Prog 1: 10161 (81, 0)
+quest Jeuno.BeyondTheStars available    # a GM, 10161 open
+update 10161 option=21                  # available: no update handler: nothing
+finish option=254                       # available: nothing (not completed, cap 85)

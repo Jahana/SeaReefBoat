@@ -1,0 +1,23 @@
+# Gates to Paradise (sandoria 18), each status operand alone (the GM sets the status, the other operands hold).
+# Olbergieut at fame level 2, no key item: available 619, accepted OLBERGIEUT_DIALOG (not 619), completed 612 (the
+# script's). Faurbellant with the Wind: available FAURBELLANT_1 (the script's), completed FAURBELLANT_4, accepted
+# FAURBELLANT_2 (the Wind taken, the Water given).
+char zone=NorthernSanDoria pos=91.0,0.0,118.5 job=WAR lvl=30
+fame Sandoria 50
+keyitem ScriptureOfWind
+login
+trigger Olbergieut                        # available, fame level 2: 619
+finish option=1                           # declined: nothing
+quest Sandoria.GatesToParadise accepted
+trigger Olbergieut                        # accepted, fame level 2: OLBERGIEUT_DIALOG
+quest Sandoria.GatesToParadise completed
+trigger Olbergieut                        # completed, fame level 2: 612
+finish
+warp 479.3,24.0,-89.9 LaTheinePlateau
+quest Sandoria.GatesToParadise available
+trigger Faurbellant                       # available, the Wind: FAURBELLANT_1
+quest Sandoria.GatesToParadise completed
+trigger Faurbellant                       # completed, the Wind: FAURBELLANT_4
+quest Sandoria.GatesToParadise available
+quest Sandoria.GatesToParadise accepted
+trigger Faurbellant                       # accepted, the Wind: FAURBELLANT_2; the Wind taken, the Water given

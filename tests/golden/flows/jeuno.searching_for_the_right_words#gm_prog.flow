@@ -1,0 +1,23 @@
+# Searching for the Right Words (jeuno 66): a GM's Prog 3 while available (the begin alone sets it): Kurou-Morou's
+# trigger has no arm for it (nil: Never to Return's completed 204), Chululu's neither (not 1 or 2: nil, Rubbish Day's
+# completed 199), Ilumida's neither (not 1 or 2: nil, her default 189).
+lists LowerJeuno/Kurou-Morou/onTrigger LowerJeuno/Chululu/onTrigger UpperJeuno/Ilumida/onTrigger
+char zone=LowerJeuno pos=-1.2,-6.7,-30.1 job=WAR lvl=30
+quest Jeuno.CollectTarutCards completed            # (Rubbish Day needs it; else its offer 28 answers at Chululu)
+quest Jeuno.YourCrystalBall completed              # (Never to Return needs it; else its offer 194 answers at Kurou-Morou)
+charvar Quest[3][166]Date 2000000000               # All in the Cards waits (Date ahead): no 10110 at Chululu
+quest Jeuno.ACandlelightVigil completed
+quest Jeuno.RubbishDay completed
+quest Jeuno.NeverToReturn completed
+fame Sandoria 284
+fame Bastok 283
+fame Windurst 283
+charvar Quest[3][66]Prog 3
+login
+trigger Kurou-Morou                     # available, Prog 3: nil; Never to Return's 204
+finish
+trigger Chululu                         # Prog 3: nil; Rubbish Day's 199
+finish
+warp -73.5,-1.2,57.3 UpperJeuno
+trigger Ilumida                         # Prog 3: nil; default 189
+finish

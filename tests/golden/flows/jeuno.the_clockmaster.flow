@@ -1,0 +1,34 @@
+# The Clockmaster (jeuno 21): the door _6s2 and Collet in Upper Jeuno. The guard (Save the Clock Tower completed,
+# Jeuno fame level 5), the door's 152 (a full bag: not completed; with room: completed, Time Hammer, 1200 gil,
+# Timekeeper, fame +17 x3), then the door's 110 and Collet's 163 (both replaceDefault).
+# A Clock Most Delicate is set completed (it answers the door at fame level 2 otherwise). Jeuno fame: 216/217/216 is
+# 324 (level 4), 216/217/217 is 325 (level 5). Collet's default 114, the door's NO_ONES_HOME.
+lists UpperJeuno/_6s2/onTrigger UpperJeuno/Collet/onTrigger UpperJeuno/onEventFinish/152
+char zone=UpperJeuno pos=-80.1,-2.7,107.5
+fame Sandoria 216
+fame Bastok 217
+fame Windurst 216
+quest Jeuno.AClockMostDelicate completed
+item BoneChip
+login
+trigger _6s2                                # Save the Clock Tower available: no section; NO_ONES_HOME
+quest Jeuno.SaveTheClockTower completed     # a GM
+trigger _6s2                                # Jeuno fame 324: no section; NO_ONES_HOME
+fame Windurst 217                           # 325: level 5
+trade _6s2 BoneChip x1                      # available: no trade handler; nothing
+trigger _6s2                                # available: 152
+fill-inventory
+finish                                      # no room for the hammer: not completed
+free-inventory
+walk -42.2,0,107
+trigger Collet                              # available: no handler; 114
+finish
+trade Collet BoneChip x1                    # available: no trade handler; nothing
+walk -80.1,-2.7,107.5
+trigger _6s2                                # 152 again
+finish                                      # completed: Time Hammer, 1200 gil, Timekeeper, fame +17 x3
+trigger _6s2                                # completed: 110 (replaceDefault)
+finish
+walk -42.2,0,107
+trigger Collet                              # completed: 163 (replaceDefault)
+finish

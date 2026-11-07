@@ -1,0 +1,14 @@
+# Lost Chick (hidden quest LostChick), the map vendor: a level 30 Warrior in Southern San d'Oria with 1000 gil, the
+# chick at owner 1 (Coderiant), 3 clues, San d'Oria (113). Violitte (no ask) plays 851 (1); an update whose option is
+# not her guess (2) goes on to the map vendor's xi.maps.onEventUpdate(595, option): a purchase (map 1, option & 0xF ==
+# 1) takes the gil and gives the map; map 0 with the buy bit (the map of the zone); a non-buy option (low nibble 0)
+# buys nothing.
+lists SouthernSanDoria/Violitte/onTrigger SouthernSanDoria/onEventUpdate/851
+char zone=SouthernSanDoria pos=-1,0,-105 job=WAR lvl=30 gil=1000
+login
+charvar [ChocoboRaising]LostChick 113
+trigger Violitte                        # 851 (1)
+update 851 option=65537                 # map 1, buy: the map vendor's purchase
+update 851 option=65536                 # map 1, low nibble 0: no purchase
+update 851 option=1                     # map 0, buy
+finish

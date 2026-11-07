@@ -1,0 +1,48 @@
+# Unforgiven (otherAreas 72): Tavnazian Safehold, no scripts: Elysia (default 190), Pradiulot (two: +1 is cutscene_only
+# and answers with a release only, so no step talks to it; 192), qm_unforgiven (NOTHING_OUT_OF_ORDINARY). CoP
+# Slanderous Utterings current (An Invitation West or later).
+# A trade to Elysia while available: no trade handler. Elysia 200, finished: begun; 201 (event). Pradiulot at Prog 0: nil, 192. The ???: the hairpin (keyItem); again: nil.
+# Elysia 202, finished: the hairpin taken, Prog 1; 203 (event). The ???: the hairpin again; Elysia 202 again (Prog 1).
+# Pradiulot 204, finished: completed (2000 exp, the Map of Tavnazia), Post 1. Completed: Pradiulot at Post 1: nil; Elysia
+# 205, finished: Post 2; again: nil, 190. Pradiulot: 206, finished: quest:cleanup (Post 0); Pradiulot: nil.
+lists TavnazianSafehold/Elysia/onTrigger TavnazianSafehold/Pradiulot/onTrigger TavnazianSafehold/qm_unforgiven/onTrigger TavnazianSafehold/onEventFinish/200 TavnazianSafehold/onEventFinish/202 TavnazianSafehold/onEventFinish/204 TavnazianSafehold/onEventFinish/205 TavnazianSafehold/onEventFinish/206
+char zone=TavnazianSafehold pos=-49,-22.2,-41.7 job=WAR lvl=75
+mission Cop SlanderousUtterings current
+item ChocoboFeather
+login
+trade Elysia ChocoboFeather x1          # available: no trade handler; nothing
+trigger Elysia                          # available: 200
+finish                                  # begun
+trigger Elysia                          # no hairpin, Prog 0: 201
+finish
+warp -19.2,-22,8.2 TavnazianSafehold
+trigger Pradiulot                       # Prog 0: nil; 192
+finish
+warp 111.8,-40.85,-53 TavnazianSafehold
+trigger qm_unforgiven                   # no hairpin: the hairpin
+trigger qm_unforgiven                   # held: nil; its default
+warp -49,-22.2,-41.7 TavnazianSafehold
+trigger Elysia                          # the hairpin: 202
+finish                                  # taken; Prog 1
+trigger Elysia                          # Prog 1: 203
+finish
+warp 111.8,-40.85,-53 TavnazianSafehold
+trigger qm_unforgiven                   # no hairpin: the hairpin again
+warp -49,-22.2,-41.7 TavnazianSafehold
+trigger Elysia                          # the hairpin: 202 again
+finish                                  # Prog 1
+warp -19.2,-22,8.2 TavnazianSafehold
+trigger Pradiulot                       # Prog 1: 204
+finish                                  # completed; Post 1
+trigger Pradiulot                       # Post 1: nil; 192
+finish
+warp -49,-22.2,-41.7 TavnazianSafehold
+trigger Elysia                          # Post 1: 205
+finish                                  # Post 2
+trigger Elysia                          # Post 2: nil; 190
+finish
+warp -19.2,-22,8.2 TavnazianSafehold
+trigger Pradiulot                       # Post 2: 206
+finish                                  # quest:cleanup; Post 0
+trigger Pradiulot                       # Post 0: nil; 192
+finish

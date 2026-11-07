@@ -1,0 +1,19 @@
+# BORGHERTZS_WARRING_HANDS (jeuno 44): the two optional coffers' sections (status not available, main job WAR, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 WAR: CastleZvahlBaileys's Treasure Coffer opens to
+# FightersCuisses (the item bypass; the result is the item): [AF]ZilartCoffer +2 (bit 1); CrawlersNest's to
+# FightersMask: +4 (bit 2).
+lists CastleZvahlBaileys/Treasure_Coffer/onTrade CrawlersNest/Treasure_Coffer/onTrade
+char zone=CastleZvahlBaileys pos=110.041,-20.002,106.811 job=WAR lvl=75
+quest Jeuno.BorghertzsWarringHands accepted
+item ZvahlCofferKey
+item NestCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer ZvahlCofferKey x1 # bit 1 unset: FightersCuisses; [AF]ZilartCoffer 2
+tick 4500                               # the coffer opened
+warp 58.9,0.4,69 CrawlersNest
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer NestCofferKey x1  # bit 2 unset: FightersMask; [AF]ZilartCoffer 6
+tick 4500                               # the coffer opened

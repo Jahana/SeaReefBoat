@@ -1,0 +1,33 @@
+# The Puppet Master (windurst 81): Koru-Moru's Prog edge and the completed line's operands (Windurst Walls). Accepted by GM
+# at Prog 2 and Prog 4: nil (his default 193); Prog 3: 404 (finished with a full bag: nothing). The quest's mustZone set
+# by GM while accepted at Prog 0: no 405 (the completed status wanted): 193. Completed by GM with the mustZone and Class
+# Reunion accepted (not completed; his script wants ClassReunionProgress 1 or more: nothing): 405; Class Reunion
+# completed: not met, his default 193 and his script's 411 (The Puppet Master and Class Reunion completed) alternate.
+lists WindurstWalls/Koru-Moru/onTrigger WindurstWalls/onEventFinish/404
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=40
+quest Windurst.ThePuppetMaster accepted
+charvar Quest[2][81]Prog 2
+login
+trigger Koru-Moru                              # Prog 2: nil; his default 193
+finish-if-event
+charvar Quest[2][81]Prog 4                     # GM
+trigger Koru-Moru                              # Prog 4: nil; 193
+finish-if-event
+charvar Quest[2][81]Prog 3                     # GM
+trigger Koru-Moru                              # Prog 3: 404
+fill-inventory
+finish                                         # full: quest:complete false: nothing (Prog 3)
+free-inventory
+charvar Quest[2][81]Prog 0                     # GM
+charvar Quest[2][81]mustZone 239               # GM
+trigger Koru-Moru                              # accepted with the mustZone: no 405; 193
+finish-if-event
+quest Windurst.ThePuppetMaster completed       # GM
+quest Windurst.ClassReunion accepted           # GM
+trigger Koru-Moru                              # completed, the mustZone, Class Reunion accepted (not completed): 405
+finish
+quest Windurst.ClassReunion completed          # GM
+trigger Koru-Moru                              # Class Reunion completed: not met; his default 193 (the default's turn)
+finish
+trigger Koru-Moru                              # his script's turn: 411 (The Puppet Master and Class Reunion completed)
+finish

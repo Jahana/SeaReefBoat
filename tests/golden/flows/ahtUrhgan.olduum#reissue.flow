@@ -1,0 +1,50 @@
+# Olduum's reissue: a level 75 Warrior in Whitegate with two Pickaxes, Olduum completed (a GM), no ring, band or cell.
+# Dkhaaya: Wait 0, Reissue 0: 7 ([7] = 1); finished with option 0: not 99: nothing; 7 ([7] = 1), option 99: Reissue 1;
+# Dkhaaya: Reissue 1, no cell: 7 ([7] = 2), finished. Aydeewa: one Pickaxe (Reissue 1, Wait past, no ring, band, cell):
+# the draw; a GM pins a failure (mineFail 1): finished: mineFail cleared, no cell, the pickaxe taken; the second
+# Pickaxe: the draw; a GM pins a success with the Electropot (mineFail 0, Prog 2): finished: the Electropot. Whitegate:
+# Dkhaaya 8 ([0] = Electropot); update option 1: updateEvent(Electropot); finished with a full bag: the band does not
+# fit: nothing; freed: 8 again, a GM sets Reissue 0 while it is open: finished: Reissue not 1: nothing; Reissue 1 (a
+# GM): 8, finished: the band, the Electropot taken, Prog 0, Reissue 0. Wajaom: the band with a full bag:
+# ITEM_CANNOT_BE_OBTAINED (the ring); freed: 2, a GM gives the ring while it is open: finished: the ring held: nothing
+# (the band kept); the band again: the ring held: nil.
+lists AhtUrhganWhitegate/Dkhaaya/onTrigger AhtUrhganWhitegate/onEventUpdate/8 AhtUrhganWhitegate/onEventFinish/7 AhtUrhganWhitegate/onEventFinish/8 AydeewaSubterrane/Excavation_Site/onTrade AydeewaSubterrane/onEventFinish/0 WajaomWoodlands/Leypoint/onTrade WajaomWoodlands/onEventFinish/2
+char zone=AhtUrhganWhitegate pos=-71.7,0,-5.842 job=WAR lvl=75
+item Pickaxe x2
+quest AhtUrhgan.Olduum completed
+login
+trigger Dkhaaya                         # completed, nothing held, Reissue 0: 7 ([7] = 1)
+finish option=0                         # not 99: nothing
+trigger Dkhaaya                         # 7 ([7] = 1)
+finish option=99                        # Reissue 1
+trigger Dkhaaya                         # Reissue 1, no cell: 7 ([7] = 2)
+finish
+warp 392,0.984,349.642 AydeewaSubterrane
+trade Excavation_Site Pickaxe x1        # Reissue 1, Wait past, nothing held: the draw; 0
+localvar mineFail 1                     # a GM pins a failure
+finish                                  # mineFail cleared; no cell; the pickaxe taken
+trade Excavation_Site Pickaxe x1        # the draw; 0
+localvar mineFail 0                     # a GM pins a success
+charvar Quest[6][2]Prog 2               # a GM pins the Electropot
+finish                                  # the Electropot; the pickaxe taken
+warp -71.7,0,-5.842 AhtUrhganWhitegate
+trigger Dkhaaya                         # Reissue 1, the Electropot: 8 ([0] = Electropot)
+update 8 option=1                       # updateEvent(keyItems[2]) = Electropot
+fill-inventory
+finish                                  # the band does not fit: nothing more
+free-inventory
+trigger Dkhaaya                         # 8 ([0] = Electropot)
+charvar Quest[6][2]Reissue 0            # a GM, while 8 is open
+finish                                  # Reissue not 1: nothing
+charvar Quest[6][2]Reissue 1            # a GM
+trigger Dkhaaya                         # 8
+finish                                  # the band; the Electropot taken; Prog 0, Reissue 0
+warp -198.5,-8.5,80.058 WajaomWoodlands
+fill-inventory
+trade Leypoint LightningBand x1         # no free slot: ITEM_CANNOT_BE_OBTAINED (the ring)
+free-inventory
+trade Leypoint LightningBand x1         # a free slot: 2
+item OlduumRing                         # a GM, while 2 is open
+finish                                  # the ring held: nothing (the band kept, Wait unchanged)
+trade Leypoint LightningBand x1         # the ring held: nil
+finish-if-event

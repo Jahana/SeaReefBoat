@@ -1,0 +1,44 @@
+# Tenshodo Membership (jeuno 17): the invite trade, straight from available (no fame, no form needed). A level 75
+# Warrior at fame level 1 with two Tenshodo Invites and a Chocobo Feather. Ghebi: fame level 1: nil (her script 106
+# (4)). Two invites: nil (tradeMatches wants one); an invite and the feather: nil; one invite: 108; a full bag: not completed, the invite kept; 108 again, finished: completed
+# (a new invite, the Members Card), the traded invite taken (tradeComplete), no form to take. Silver Owl at Prog 1 (a
+# GM: the quest available again and Prog 1) with no form: 151 (1), finished: the form; the form deleted (a GM): 151 (1)
+# again (a progressEvent over UseFallback), the form again; no form, Prog 2 (a GM): Silver Owl and Jabbar: nil (their
+# scripts). A second char with the form and an invite: 108, finished: completed, the invite and the form taken.
+lists LowerJeuno/Ghebi_Damomohe/onTrigger LowerJeuno/Ghebi_Damomohe/onTrade LowerJeuno/onEventFinish/108 PortBastok/Silver_Owl/onTrigger PortBastok/onEventFinish/151
+char zone=LowerJeuno pos=17,-0.1,-7.6 job=WAR lvl=75
+char form zone=LowerJeuno pos=17,-0.1,-7.6 job=WAR lvl=75
+item TenshodoInvite
+item TenshodoInvite
+item ChocoboFeather
+form: keyitem TenshodoApplicationForm
+form: item TenshodoInvite
+login
+trigger Ghebi_Damomohe                  # fame level 1: nil; her script's 106 (4)
+finish
+trade Ghebi_Damomohe TenshodoInvite x2  # two: nil
+trade Ghebi_Damomohe TenshodoInvite x1 ChocoboFeather x1 # an extra item: nil
+trade Ghebi_Damomohe TenshodoInvite x1  # 108
+fill-inventory
+finish                                  # the new invite cannot be given (a full bag): not completed, the invite kept
+free-inventory
+trade Ghebi_Damomohe TenshodoInvite x1  # 108
+finish                                  # completed: a new invite, the Members Card; the traded invite taken
+quest Jeuno.TenshodoMembership available # a GM
+charvar Quest[3][17]Prog 1              # a GM
+warp -97.7,4.6,23.3 PortBastok          # by Silver Owl
+trigger Silver_Owl                      # no form, Prog 1: 151 (1)
+finish                                  # the form
+delkeyitem TenshodoApplicationForm      # a GM
+trigger Silver_Owl                      # 151 (1) again (an event would give her script's shop now: the Members Card)
+finish                                  # the form again
+delkeyitem TenshodoApplicationForm      # a GM
+charvar Quest[3][17]Prog 2              # a GM: Prog 2 (no script sets it)
+trigger Silver_Owl                      # no form, Prog 2: nil; her script (the Members Card: her shop)
+finish-if-event
+warp -98.2,-2.3,26 PortBastok           # by Jabbar
+trigger Jabbar                          # no form, Prog 2: nil; his script (the Members Card: his shop)
+finish-if-event
+form: login
+form: trade Ghebi_Damomohe TenshodoInvite x1 # the form held, fame level 1: 108
+form: finish                            # completed: a new invite, the Members Card; the traded invite taken; the form taken

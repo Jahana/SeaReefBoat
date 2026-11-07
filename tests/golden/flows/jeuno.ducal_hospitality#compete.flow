@@ -1,0 +1,38 @@
+# Ducal Hospitality (jeuno 68): Taillegeas shared with Trust: Cherukiki (a hidden quest: ENABLE_TRUST_QUESTS 1, a trust
+# permit, Cherukiki not learned, CoP Dawn current with Status 2 or more), whose onTrigger answers progressEvent 10235.
+# Both containers answer each talk, so the kind of the quest's reply decides which plays (a progressEvent ties with
+# 10235 and the tie rotates by the last event id; an event loses to it). A level 75 Warrior at Jeuno fame level 4, CoP Dawn
+# current with Status 2 (The Warrior's Path completed: [0] 1), a Windurst Trust Permit. Available: the talk (the quest
+# draws a set either way); the finish with option 10 (not 2: Cherukiki not learned; the quest not begun). Accepted with
+# ItemSet 2 (a GM): the talk again (10059 against 10235). Completed with the mustZone (a GM): 10060 against 10235; then
+# ItemSet 3 (a GM): 10059 against 10235; then ItemSet 0 and no mustZone (out and back): a draw, 10057 against 10235.
+lists RuludeGardens/Taillegeas/onTrigger RuludeGardens/onEventFinish/10057 RuludeGardens/onEventFinish/10059 RuludeGardens/onEventFinish/10060 RuludeGardens/onEventFinish/10235
+char zone=RuludeGardens pos=29.5,2,58 job=WAR lvl=75
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 150
+mission Cop Dawn current
+charvar Mission[6][840]Status 2
+keyitem WindurstTrustPermit
+login
+trigger Taillegeas                      # available: 10057 (P, a draw) against 10235 (P)
+finish option=10                        # not begun; Cherukiki not learned
+quest Jeuno.DucalHospitality accepted   # a GM
+charvar Quest[3][68]ItemSet 2           # a GM
+trigger Taillegeas                      # accepted: 10059 (P) against 10235 (P)
+finish
+quest Jeuno.DucalHospitality completed  # a GM
+charvar Quest[3][68]ItemSet 0           # a GM
+charvar Quest[3][68]mustZone 243        # a GM: the mustZone
+trigger Taillegeas                      # completed, the mustZone: 10060 (P) against 10235 (P); 10235 plays (the tie goes to it), 10060 on the next trigger
+finish
+trigger Taillegeas                      # the mustZone again: the last event was 10235, so the tie rotates to the other container; 10060 as a progressEvent wins it, as an event it would lose
+finish
+charvar Quest[3][68]ItemSet 3           # a GM
+trigger Taillegeas                      # ItemSet 3: 10059 (P) against 10235 (P)
+finish
+charvar Quest[3][68]ItemSet 0           # a GM
+warp -55.5,8.2,97.5 UpperJeuno          # another zone: the mustZone cleared
+warp 29.5,2,58 RuludeGardens
+trigger Taillegeas                      # completed, no set, no mustZone: 10057 (P, a draw) against 10235 (P)
+finish option=10                        # ItemSet 0 (the completed finish); Cherukiki not learned

@@ -1,0 +1,51 @@
+# Borghertz's Warring Hands (jeuno 44): Yin Pocanakhu and Deadly Minnow off their steps, and their reply kinds. Both
+# have an NPC script, so an action played at Event priority (or lower) makes the next talk run the NPC's own script
+# first (interaction_lookup.lua's fallback); a progress event does not. Accepted by a GM, the Old Gauntlets, Prog 2, 999
+# gil: 220; its update: under 1000: YIN_POCANAKHU_GET_LOST (shown with the name, mode 0), (0, 1, 0, 0), Prog 2;
+# finished: nothing. Prog 3: 221 (an event), then again: his own 209. Prog 4: 221. Prog 5: nil (his own 209), and
+# again: nil (209). Deadly Minnow at Prog 1 (a GM): 24 (a progress event); finished: Prog 2; Prog 1 again (a GM): 24
+# again (no fallback). Prog 5: nil (his own script: his shop). Guslam 26 at Prog 5, finished: Prog not 0: nothing; at
+# Prog 0 (a GM) with the Calling Hands completed (a GM: the loop's last entry): not the first: Prog 3. Without the Old
+# Gauntlets (a GM) at Prog 2: Yin's own 209 (the gauntlets section off).
+lists LowerJeuno/Yin_Pocanakhu/onTrigger LowerJeuno/onEventUpdate/220 UpperJeuno/Guslam/onTrigger UpperJeuno/Deadly_Minnow/onTrigger UpperJeuno/onEventFinish/24 UpperJeuno/onEventFinish/26
+char zone=LowerJeuno pos=35.3,4.1,-44 job=WAR lvl=50 gil=999
+quest Jeuno.BorghertzsWarringHands accepted
+keyitem OldGauntlets
+charvar Quest[3][44]Prog 2
+login
+trigger Yin_Pocanakhu                   # Prog 2: 220
+update 220 option=0                     # 999 gil: YIN_POCANAKHU_GET_LOST; updateEvent(0, 1, 0, 0)
+finish                                  # Prog 2
+charvar Quest[3][44]Prog 3              # a GM
+trigger Yin_Pocanakhu                   # Prog 3: 221 (an event)
+finish
+trigger Yin_Pocanakhu                   # Prog 3 again: the fallback: his own 209
+finish
+charvar Quest[3][44]Prog 4              # a GM
+trigger Yin_Pocanakhu                   # Prog 4: 221
+finish
+charvar Quest[3][44]Prog 5              # a GM
+trigger Yin_Pocanakhu                   # Prog 5: nil; his own 209
+finish
+trigger Yin_Pocanakhu                   # Prog 5 again: nil; his own 209
+finish
+warp -4.2,1.3,47.5 UpperJeuno
+charvar Quest[3][44]Prog 1              # a GM
+trigger Deadly_Minnow                   # Prog 1: 24 (a progress event)
+finish                                  # Prog 2
+charvar Quest[3][44]Prog 1              # a GM
+trigger Deadly_Minnow                   # Prog 1 again: 24 (no fallback after a progress event)
+finish                                  # Prog 2
+charvar Quest[3][44]Prog 5              # a GM
+trigger Deadly_Minnow                   # Prog 5: nil; his own script (DURABLE_SHIELDS_SHOP_DIALOG, his shop)
+trigger Guslam                          # the gauntlets: 26
+finish                                  # Prog 5: nothing
+charvar Quest[3][44]Prog 0              # a GM
+quest Jeuno.BorghertzsCallingHands completed # a GM: the last Borghertz quest completed
+trigger Guslam                          # the gauntlets: 26
+finish                                  # Prog 0, the Calling Hands completed: not the first: Prog 3
+delkeyitem OldGauntlets                 # a GM
+charvar Quest[3][44]Prog 2              # a GM
+warp 35.3,4.1,-44 LowerJeuno
+trigger Yin_Pocanakhu                   # no gauntlets: the section off; his own 209
+finish

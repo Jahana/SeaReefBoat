@@ -1,0 +1,32 @@
+# Trial by Earth (battlefield.trial_by_earth): the battlefieldWin contract across fights. A level 20 Summoner with
+# Trial by Earth and Trial-Size Trial by Earth completed, the Tuning Fork of Earth and the Mini Tuning Fork of Earth.
+# The fork: Trial by Earth's fight (32000 option 1), Titan_Prime_TBE killed: won; BattlefieldQuest's onBattlefieldWin
+# sets no battlefieldWin (completed, not repeatable); the 32001 finish: nothing. The won arena's cleanup takes the char
+# out. GMs: Trial by Earth dropped and accepted again (addQuest alone keeps the completed bit, which getQuestStatus
+# reads first). The mini fork traded: Trial-Size's fight (32000 option 33), Titan_Prime_TSTBE killed: won; its win
+# sets no battlefieldWin either (completed, not repeatable). The 32001 finish: the battlefield's onEventFinishWin, then
+# Trial by Earth's accepted handler: battlefieldWin is not 576: nothing (no Whisper of Tremors, no title). Pins the
+# quest status test of the win: with it dropped, the first win would leave battlefieldWin 576 behind and this finish
+# would give the whisper and the title.
+lists CloisterOfTremors/EP_Entrance/onTrigger CloisterOfTremors/EP_Entrance/onTrade CloisterOfTremors/onEventFinish/32001
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=20
+quest Bastok.TrialByEarth completed
+quest Bastok.TrialSizeTrialByEarth completed
+keyitem TuningForkOfEarth
+item MiniTuningForkOfEarth
+login
+trigger EP_Entrance                     # completed, the fork: the menu 32000
+update 32000 option=1                   # Trial by Earth (index 0), arena 1: entered, the fork taken
+finish                                  # in the arena
+kill GALGALIM-3                         # Titan_Prime_TBE: won; completed: no battlefieldWin; 32001
+finish                                  # nothing
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield (no warp: a zone change clears local vars)
+walk -538.4,0.455,-493.9                # back by EP_Entrance
+quest Bastok.TrialByEarth available     # a GM: delQuest (both bits cleared)
+quest Bastok.TrialByEarth accepted      # a GM: accepted again (as Juroro's 249 repeat: delQuest, then begun)
+trade EP_Entrance MiniTuningForkOfEarth x1  # the mini fork: the menu 32000
+update 32000 option=33                  # Trial-Size Trial by Earth (index 2), arena 1: entered, the fork taken
+finish                                  # in the arena
+kill GALGALIM+3                         # Titan_Prime_TSTBE: won; completed: no battlefieldWin; 32001
+finish                                  # Trial by Earth's handler: battlefieldWin is not 576: nothing

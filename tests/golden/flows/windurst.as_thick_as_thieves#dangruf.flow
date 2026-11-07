@@ -1,0 +1,191 @@
+# As Thick as Thieves (windurst 70): the three goblins' dice games in Dangruf Wadi. Accepted by GM (a THF at level 50,
+# The Tenshodo Showdown completed by GM). Each game draws rand1, rand2 (math.randomInt(1, 999)): rand1 > rand2 wins (the
+# win event: Regal Die, 0, rand1, rand2), else the loss event (0, 0, rand1, rand2); YOU_PLACE_ITEM (0, the item) first
+# either way. The pinned seed picks each game's side; the flow sets Prog (and failedGame at Saltvix) by GM before each
+# game, and the options are chosen from the recorded sides so that every win and loss event (136 / 142 / 137 / 138 and
+# 139 / 145 / 140 / 141) is finished with each of its three options. Every finish confirms the trade (the item taken).
+# Win finishes: option 0: failedGame 0 (136 / 142 only), YOU_BEAT_GOBLIN, Prog + 1; option 2: failedGame 1 (136 / 142
+# only), YOU_GAVE_UP; option 1: nothing more. Loss finishes: failedGame 1 (139 / 145 only); option 1 GOBLIN_BEAT_YOU,
+# option 2 YOU_GAVE_UP, option 0 nothing more.
+# Out of turn first: qm3 a bone chip, the salt plus a chip: nil; qm3 at Prog 0: nil; qm4 at Prog 1 (DONT_WASTE_TIME),
+# the grass plus a chip: nil; qm5 at Prog 1 (JUST_WONT_DO), the egg plus a chip: nil; qm3 at Prog 2 (BEAT_SALTVIX,
+# returns nil); qm4 at Prog 3 (BEAT_GRASSWIX); qm5 at Prog 4 (BEAT_EGGBLIX); a bone chip to qm4 and qm5: nil. After the
+# games: qm3 the salt plus a chip at Prog 1: nil; qm5 at Prog 2: JUST_WONT_DO.
+lists DangrufWadi/qm3/onTrade DangrufWadi/qm4/onTrade DangrufWadi/qm5/onTrade DangrufWadi/onEventFinish/136 DangrufWadi/onEventFinish/137 DangrufWadi/onEventFinish/138 DangrufWadi/onEventFinish/139 DangrufWadi/onEventFinish/140 DangrufWadi/onEventFinish/141 DangrufWadi/onEventFinish/142 DangrufWadi/onEventFinish/145
+char zone=DangrufWadi pos=-365.9,3.0,229.0 job=THF lvl=50
+quest Windurst.TheTenshodoShowdown completed
+quest Windurst.AsThickAsThieves accepted
+item BoneChip x3
+item ChunkOfRockSalt x12
+item ChunkOfRockSalt x6
+item ClumpOfGausebitWildgrass x10
+item LizardEgg x11
+login
+trade qm3 BoneChip x1                          # not the salt: nil
+trade qm3 ChunkOfRockSalt x1 BoneChip x1       # the salt plus an extra: nil
+trade qm3 ChunkOfRockSalt x1                   # Prog 0: nil (not 1, not > 1)
+charvar Quest[2][70]Prog 1                     # GM
+walk -373.9,-2.22,445.0
+trade qm4 ClumpOfGausebitWildgrass x1          # Prog 1: DONT_WASTE_TIME
+trade qm4 ClumpOfGausebitWildgrass x1 BoneChip x1 # plus an extra: nil
+trade qm4 BoneChip x1                          # not the grass: nil
+walk -460.9,2.456,-141.2
+trade qm5 LizardEgg x1                         # Prog 1: JUST_WONT_DO
+trade qm5 LizardEgg x1 BoneChip x1             # plus an extra: nil
+trade qm5 BoneChip x1                          # not the egg: nil
+charvar Quest[2][70]Prog 2                     # GM
+walk -365.9,3.0,229.0
+trade qm3 ChunkOfRockSalt x1                   # Prog 2: BEAT_SALTVIX (sent, not returned): nil
+charvar Quest[2][70]Prog 3                     # GM
+walk -373.9,-2.22,445.0
+trade qm4 ClumpOfGausebitWildgrass x1          # Prog 3: BEAT_GRASSWIX
+charvar Quest[2][70]Prog 4                     # GM
+walk -460.9,2.456,-141.2
+trade qm5 LizardEgg x1                         # Prog 4: BEAT_EGGBLIX
+walk -365.9,3.0,229.0
+charvar Quest[2][70]Prog 1                     # GM: game 1
+charvar Quest[2][70]failedGame 0               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 139 (the seed's side)
+finish option=0                                # nothing; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 2
+charvar Quest[2][70]failedGame 0               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 139 (the seed's side)
+finish option=1                                # GOBLIN_BEAT_YOU; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 3
+charvar Quest[2][70]failedGame 0               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 139 (the seed's side)
+finish option=2                                # YOU_GAVE_UP; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 4
+charvar Quest[2][70]failedGame 0               # GM
+trade qm3 ChunkOfRockSalt x1                   # won: 136 (the seed's side)
+charvar Quest[2][70]failedGame 1               # GM, the event open
+finish option=0                                # YOU_BEAT_GOBLIN; failedGame 0; Prog 2
+charvar Quest[2][70]Prog 1                     # GM: game 5
+charvar Quest[2][70]failedGame 0               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 139 (the seed's side)
+finish option=0                                # nothing; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 6
+charvar Quest[2][70]failedGame 0               # GM
+trade qm3 ChunkOfRockSalt x1                   # won: 136 (the seed's side)
+finish option=1                                # nothing; failedGame 0
+charvar Quest[2][70]Prog 1                     # GM: game 7
+charvar Quest[2][70]failedGame 0               # GM
+trade qm3 ChunkOfRockSalt x1                   # won: 136 (the seed's side)
+finish option=2                                # YOU_GAVE_UP; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 8
+charvar Quest[2][70]failedGame 0               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 139 (the seed's side)
+finish option=1                                # GOBLIN_BEAT_YOU; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 9
+charvar Quest[2][70]failedGame 1               # GM
+trade qm3 ChunkOfRockSalt x1                   # won: 142 (the seed's side)
+finish option=0                                # YOU_BEAT_GOBLIN; failedGame 0; Prog 2
+charvar Quest[2][70]Prog 1                     # GM: game 10
+charvar Quest[2][70]failedGame 1               # GM
+trade qm3 ChunkOfRockSalt x1                   # won: 142 (the seed's side)
+finish option=1                                # nothing; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 11
+charvar Quest[2][70]failedGame 1               # GM
+trade qm3 ChunkOfRockSalt x1                   # won: 142 (the seed's side)
+charvar Quest[2][70]failedGame 0               # GM, the event open
+finish option=2                                # YOU_GAVE_UP; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 12
+charvar Quest[2][70]failedGame 1               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 145 (the seed's side)
+charvar Quest[2][70]failedGame 0               # GM, the event open
+finish option=0                                # nothing; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 13
+charvar Quest[2][70]failedGame 1               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 145 (the seed's side)
+charvar Quest[2][70]failedGame 0               # GM, the event open
+finish option=1                                # GOBLIN_BEAT_YOU; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 14
+charvar Quest[2][70]failedGame 1               # GM
+trade qm3 ChunkOfRockSalt x1                   # won: 142 (the seed's side)
+finish option=0                                # YOU_BEAT_GOBLIN; failedGame 0; Prog 2
+charvar Quest[2][70]Prog 1                     # GM: game 15
+charvar Quest[2][70]failedGame 1               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 145 (the seed's side)
+charvar Quest[2][70]failedGame 0               # GM, the event open
+finish option=2                                # YOU_GAVE_UP; failedGame 1
+charvar Quest[2][70]Prog 1                     # GM: game 16
+charvar Quest[2][70]failedGame 1               # GM
+trade qm3 ChunkOfRockSalt x1                   # lost: 145 (the seed's side)
+charvar Quest[2][70]failedGame 0               # GM, the event open
+finish option=0                                # nothing; failedGame 1
+walk -373.9,-2.22,445.0
+charvar Quest[2][70]Prog 2                     # GM: game 17
+charvar Quest[2][70]failedGame 0               # GM
+trade qm4 ClumpOfGausebitWildgrass x1          # lost: 140 (the seed's side)
+finish option=0                                # nothing; failedGame 0
+charvar Quest[2][70]Prog 2                     # GM: game 18
+charvar Quest[2][70]failedGame 0               # GM
+trade qm4 ClumpOfGausebitWildgrass x1          # lost: 140 (the seed's side)
+finish option=1                                # GOBLIN_BEAT_YOU; failedGame 0
+charvar Quest[2][70]Prog 2                     # GM: game 19
+charvar Quest[2][70]failedGame 1               # GM
+trade qm4 ClumpOfGausebitWildgrass x1          # won: 137 (the seed's side)
+finish option=0                                # YOU_BEAT_GOBLIN; failedGame 1; Prog 3
+charvar Quest[2][70]Prog 2                     # GM: game 20
+charvar Quest[2][70]failedGame 0               # GM
+trade qm4 ClumpOfGausebitWildgrass x1          # lost: 140 (the seed's side)
+finish option=2                                # YOU_GAVE_UP; failedGame 0
+charvar Quest[2][70]Prog 2                     # GM: game 21
+charvar Quest[2][70]failedGame 0               # GM
+trade qm4 ClumpOfGausebitWildgrass x1          # won: 137 (the seed's side)
+finish option=1                                # nothing; failedGame 0
+charvar Quest[2][70]Prog 2                     # GM: game 22
+charvar Quest[2][70]failedGame 0               # GM
+trade qm4 ClumpOfGausebitWildgrass x1          # won: 137 (the seed's side)
+finish option=2                                # YOU_GAVE_UP; failedGame 0
+charvar Quest[2][70]Prog 2                     # GM: game 23
+charvar Quest[2][70]failedGame 1               # GM
+trade qm4 ClumpOfGausebitWildgrass x1          # won: 137 (the seed's side)
+finish option=0                                # YOU_BEAT_GOBLIN; failedGame 1; Prog 3
+charvar Quest[2][70]Prog 2                     # GM: game 24
+charvar Quest[2][70]failedGame 0               # GM
+trade qm4 ClumpOfGausebitWildgrass x1          # won: 137 (the seed's side)
+finish option=1                                # nothing; failedGame 0
+walk -460.9,2.456,-141.2
+charvar Quest[2][70]Prog 3                     # GM: game 25
+charvar Quest[2][70]failedGame 0               # GM
+trade qm5 LizardEgg x1                         # lost: 141 (the seed's side)
+finish option=0                                # nothing; failedGame 0
+charvar Quest[2][70]Prog 3                     # GM: game 26
+charvar Quest[2][70]failedGame 1               # GM
+trade qm5 LizardEgg x1                         # won: 138 (the seed's side)
+finish option=0                                # YOU_BEAT_GOBLIN; failedGame 1; Prog 4
+charvar Quest[2][70]Prog 3                     # GM: game 27
+charvar Quest[2][70]failedGame 0               # GM
+trade qm5 LizardEgg x1                         # lost: 141 (the seed's side)
+finish option=1                                # GOBLIN_BEAT_YOU; failedGame 0
+charvar Quest[2][70]Prog 3                     # GM: game 28
+charvar Quest[2][70]failedGame 0               # GM
+trade qm5 LizardEgg x1                         # won: 138 (the seed's side)
+finish option=1                                # nothing; failedGame 0
+charvar Quest[2][70]Prog 3                     # GM: game 29
+charvar Quest[2][70]failedGame 0               # GM
+trade qm5 LizardEgg x1                         # lost: 141 (the seed's side)
+finish option=2                                # YOU_GAVE_UP; failedGame 0
+charvar Quest[2][70]Prog 3                     # GM: game 30
+charvar Quest[2][70]failedGame 0               # GM
+trade qm5 LizardEgg x1                         # lost: 141 (the seed's side)
+finish option=0                                # nothing; failedGame 0
+charvar Quest[2][70]Prog 3                     # GM: game 31
+charvar Quest[2][70]failedGame 0               # GM
+trade qm5 LizardEgg x1                         # lost: 141 (the seed's side)
+finish option=1                                # GOBLIN_BEAT_YOU; failedGame 0
+charvar Quest[2][70]Prog 3                     # GM: game 32
+charvar Quest[2][70]failedGame 0               # GM
+trade qm5 LizardEgg x1                         # lost: 141 (the seed's side)
+finish option=2                                # YOU_GAVE_UP; failedGame 0
+charvar Quest[2][70]Prog 3                     # GM: game 33
+charvar Quest[2][70]failedGame 0               # GM
+trade qm5 LizardEgg x1                         # won: 138 (the seed's side)
+finish option=2                                # YOU_GAVE_UP; failedGame 0
+walk -365.9,3.0,229.0
+charvar Quest[2][70]Prog 1                     # GM
+trade qm3 ChunkOfRockSalt x1 BoneChip x1       # Prog 1, the salt plus an extra: nil
+walk -460.9,2.456,-141.2
+charvar Quest[2][70]Prog 2                     # GM
+trade qm5 LizardEgg x1                         # Prog 2: JUST_WONT_DO

@@ -1,0 +1,57 @@
+# Chocobo on the Loose! (jeuno 92): the kind of each of Brutus's replies, against his script. Brutus has a script, so
+# the lookup alternates an event-priority quest reply with it (UseFallback: an event sets it, his script's turn clears
+# it), while a progressEvent plays whatever it holds. Here his script answers: Wings of Gold completed (a GM, before
+# login), Scattered into Shadow not: 134. Wings of Gold's own completed reply, 134 (replaceDefault), loses to every
+# reply of this quest. Chocobo's Wounds and Save My Son completed and level 25 keep the others silent (Path of the
+# Beastmaster wants 30, Scattered into Shadow a beastmaster).
+# The quest accepted at Prog 2 (a GM): 10099 (the event sets UseFallback); again: his script's 134; again: 10099. Prog
+# 0 (a GM): his script's 134 (a progressEvent 10094 would play); 10094; again: priority Ignore, his script's 134. Prog 2
+# (a GM): 10099; Prog 1 (a GM): 10095 over UseFallback (Prog 2); 10099; Prog 3 (a GM): 10100 over UseFallback (Prog 4,
+# the Timer, the mustZone); the mustZone and the Timer cleared, Prog 2 (a GM): 10099; Prog 4 (a GM): 10109 over
+# UseFallback: completed. Completed: Wings of Gold's 134 (replaceDefault; it sets UseFallback); the quest set available
+# (a GM): 10093 over UseFallback: begun.
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/onEventFinish/10093 UpperJeuno/onEventFinish/10095 UpperJeuno/onEventFinish/10100 UpperJeuno/onEventFinish/10109
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=25
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ChocoboOnTheLoose accepted
+charvar Quest[3][92]Prog 2
+login
+trigger Brutus                          # Prog 2: 10099 (UseFallback 0: the quest's; then 1)
+finish
+trigger Brutus                          # UseFallback 1: his script's 134 (a progressEvent 10099 would play); then 0
+finish
+trigger Brutus                          # 10099 (UseFallback 1)
+finish
+charvar Quest[3][92]Prog 0              # a GM
+trigger Brutus                          # Prog 0, UseFallback 1: his script's 134 (a progressEvent 10094 would play)
+finish
+trigger Brutus                          # 10094 (oncePerZone; UseFallback 1)
+finish
+trigger Brutus                          # 10094 played: priority Ignore; Wings of Gold's 134 and UseFallback 1: his script's 134
+finish
+charvar Quest[3][92]Prog 2              # a GM
+trigger Brutus                          # 10099 (UseFallback 1)
+finish
+charvar Quest[3][92]Prog 1              # a GM
+trigger Brutus                          # Prog 1: 10095, a progressEvent over UseFallback 1 (an event would give his script's 134)
+finish                                  # Prog 2
+trigger Brutus                          # 10099 (UseFallback 1)
+finish
+charvar Quest[3][92]Prog 3              # a GM
+trigger Brutus                          # Prog 3: 10100 over UseFallback 1
+finish                                  # Prog 4, the Timer (tomorrow), the mustZone
+charvar Quest[3][92]mustZone 0          # a GM
+charvar Quest[3][92]Timer 0             # a GM
+charvar Quest[3][92]Prog 2              # a GM
+trigger Brutus                          # 10099 (UseFallback 1)
+finish
+charvar Quest[3][92]Prog 4              # a GM
+trigger Brutus                          # Prog 4, no mustZone, Timer 0: 10109 over UseFallback 1
+finish                                  # the egg; completed; fame +7 x3
+trigger Brutus                          # completed: Wings of Gold's 134 (replaceDefault), UseFallback 0: the quest's; then 1
+finish
+quest Jeuno.ChocoboOnTheLoose available # a GM
+trigger Brutus                          # available: 10093 over UseFallback 1 (an event would give his script's 134)
+finish                                  # begun

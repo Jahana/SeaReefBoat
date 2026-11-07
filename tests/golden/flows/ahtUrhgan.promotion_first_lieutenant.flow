@@ -1,0 +1,82 @@
+# Promotion: First Lieutenant (ahtUrhgan 98): a level 1 Warrior with Second Lieutenant completed and the SL Wildcat
+# Badge, AssaultPromotion 25, six Imperial Gold Pieces. Whitegate: trigger area 12 (25 -7 -127 .. 30 -5 -123), Abquhbah
+# (his script: 255). The harness clock starts at day 8000, 12:00. Available: area 12: 5080: begun. Prog 0, Wait 0:
+# Abquhbah 5087 (an Event, once per zone); again: 255; four Gold Pieces: under five: nil; six: 5081: five taken
+# (tradeHas confirms only them), Wait today. Wait today: 5088 (an Event). A day on: 5082 ([0] = 0), option 2: Stage 1,
+# Wait today; 5088; then the script's turn: 255. A day on: 5082 ([0] = 1), option 1: Prog 1, Stage 0. Prog 1, Wait
+# today: 5083 ([0] = 0), option 2: Stage 1; 5083 ([0] = 1), option 1: Prog 2. Prog 2: 5084 ([0] = 0), option 1: Stage 1;
+# 5084 ([0] = 1), option 0: Prog 3. Prog 3: 5089 ([0] = 0: Wait is today; importantOnce), finished at about 12:30: not
+# 15:00-16:59: nothing; again (Default now; the script's turn): 255. Three hours on (about 15:30): 5089 (Default),
+# finished: Prog 4, needToZone. Prog 4 with needToZone: 5089 keeps importantOnce's Default (the lookup's local var by
+# csid) and the script has its turn: 255; then 5089 ([0] = 1). Nashmau and back (the local vars cleared): 5085:
+# completed (the FL Wildcat Badge, First Lieutenant), the SL badge taken, FIRST_LIEUTENANT (user ruling 2026-11-04,
+# kept Lua bugs: the Lua dropped it), AssaultPromotion 0.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/12 AhtUrhganWhitegate/onEventFinish/5080 AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/Abquhbah/onTrade AhtUrhganWhitegate/onEventFinish/5081 AhtUrhganWhitegate/onEventFinish/5082 AhtUrhganWhitegate/onEventFinish/5083 AhtUrhganWhitegate/onEventFinish/5084 AhtUrhganWhitegate/onEventFinish/5089 AhtUrhganWhitegate/onEventFinish/5085
+char zone=AhtUrhganWhitegate pos=27.5,-6,-120 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant completed
+quest AhtUrhgan.PromotionSecondLieutenant completed
+charvar AssaultPromotion 25
+keyitem SlWildcatBadge
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialGoldPiece
+item ImperialGoldPiece
+login
+tick 1000
+tick 1000
+tick 1000
+walk 27.5,-6,-125                       # area 12, available: 5080
+finish                                  # begun
+warp 37.024,-6.601,-62 AhtUrhganWhitegate
+trigger Abquhbah                        # Prog 0, Wait 0: 5087 (once per zone)
+finish
+trigger Abquhbah                        # Ignore: 255
+finish
+trade Abquhbah ImperialGoldPiece x4     # under five: nil: nothing
+finish-if-event
+trade Abquhbah ImperialGoldPiece x6     # 5081
+finish                                  # five taken; Wait today
+trigger Abquhbah                        # Wait today: 5088
+finish
+wait vana=24
+trigger Abquhbah                        # Wait < today: 5082 [0] = 0
+finish option=2                         # not 1: Stage 1; Wait today
+trigger Abquhbah                        # 5088
+finish
+trigger Abquhbah                        # the script's turn (UseFallback): 255
+finish
+wait vana=24
+trigger Abquhbah                        # 5082 [0] = 1
+finish option=1                         # Prog 1; Stage 0; Wait today
+trigger Abquhbah                        # Prog 1, Wait today: 5083 [0] = 0
+finish option=2                         # not 1: Stage 1
+trigger Abquhbah                        # 5083 [0] = 1
+finish option=1                         # Prog 2; Stage 0
+trigger Abquhbah                        # Prog 2: 5084 [0] = 0
+finish option=1                         # Stage 1
+trigger Abquhbah                        # 5084 [0] = 1
+finish option=0                         # Prog 3
+trigger Abquhbah                        # Prog 3: 5089 [0] = 0 (importantOnce)
+finish                                  # about 12:30: nothing
+trigger Abquhbah                        # 5089 at Default: the script's turn: 255
+finish
+wait vana=3                             # about 15:30
+trigger Abquhbah                        # 5089 [0] = 0 (Default)
+finish                                  # 15:00-16:59: Prog 4; needToZone
+trigger Abquhbah                        # Prog 4: 5089 keeps its Default (the local var by csid) and the script's turn:
+                                        # 255
+finish
+trigger Abquhbah                        # Prog 4, needToZone: 5089 [0] = 1
+finish
+warp 17.413,0,-32.676 Nashmau           # needToZone cleared
+warp 37.024,-6.601,-62 AhtUrhganWhitegate
+trigger Abquhbah                        # 15:00-16:59, no needToZone: 5085
+finish                                  # completed; the SL badge taken; FIRST_LIEUTENANT; AssaultPromotion 0

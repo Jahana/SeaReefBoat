@@ -1,0 +1,50 @@
+# Tuning In (windurst 90) and Tuning Out (windurst 91): Leepe-Hoppe (Windurst Waters; default event 345: after a zone-in
+# the first talk plays it, the next his script, "default"; a talk his script answers with nothing plays the default
+# again). Windurst fame 224 (level 3) with the CoP mission Distant Beliefs current (a setup row): nothing. Fame 225
+# (level 4): 884 (0, 1696, 1697, 1698), option 0: begun (any option). Accepted: 885. Two of the three items: nothing;
+# the three and a Bone Chip (tradeHasExactly: not exactly them): nothing; the three: 886: 4000 gil, Fine Tuner,
+# completed, the items taken. Tuning Out: 888: TuningOut_Progress 1, begun; 889; TuningOut_Progress 8 (GM: the Kazham,
+# Norg, Beaucedine and Yuhtunga steps stay Lua): 897: the Cache-Nez, Friend of the Helmed, fame 40, completed,
+# TuningOut_Progress 0. Both completed: nothing.
+char zone=WindurstWaters pos=12.9,-9.7,-197.5 job=WAR lvl=75
+fame Windurst 224
+mission Cop DistantBeliefs current
+item MagickedSteelIngot
+item PieceOfSpruceLumber
+item ExtraFineFile
+item BoneChip
+login
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # fame level 3, Distant Beliefs: nothing from his script, so 345 again
+finish
+fame Windurst 225
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # level 4, Distant Beliefs: 884 (0, 1696, 1697, 1698)
+finish option=0                         # begun (any option)
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # Tuning In accepted: 885
+finish
+trade Leepe-Hoppe MagickedSteelIngot x1 PieceOfSpruceLumber x1  # not the three: nothing
+trade Leepe-Hoppe MagickedSteelIngot x1 PieceOfSpruceLumber x1 ExtraFineFile x1 BoneChip x1  # not exactly: nothing
+trade Leepe-Hoppe MagickedSteelIngot x1 PieceOfSpruceLumber x1 ExtraFineFile x1  # accepted: 886
+finish                                  # 4000 gil; Fine Tuner; completed; the items taken
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # Tuning In completed, Tuning Out available: 888
+finish option=0                         # TuningOut_Progress 1; Tuning Out begun
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # Tuning Out accepted, progress 1: 889
+finish
+charvar TuningOut_Progress 8            # GM: the Lua steps in Kazham, Norg, Beaucedine Glacier, Yuhtunga Jungle
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # progress 8: 897
+finish                                  # the Cache-Nez; Friend of the Helmed; fame 40; completed; progress 0
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # both completed: nothing from his script, so 345 again
+finish

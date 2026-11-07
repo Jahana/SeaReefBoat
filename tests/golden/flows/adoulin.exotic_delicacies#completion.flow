@@ -1,0 +1,22 @@
+# Exotic Delicacies (adoulin, call-only), the completion: a level 99 Warrior in Western Adoulin, the quest accepted
+# (a GM), Flapano_Odd_Even 1, with the ingredients (a Pinch of Saffron, a Mussel, two Barnacles) and a
+# Plate of Barnacle Paella. The bag filled (no free slot): the ingredients with the paella: 2861 (the ingredients'
+# arm first), finished: npcUtil.completeQuest cannot give the Plate of Flapano's Paella: nothing (the trade kept, the
+# var 1). One free slot (the bag grown to 31): 2861, finished: completed with 500 bayld, the paella and 1000 exp; the
+# trade taken, the var 0. Completed: the shop (the var 0, not touched).
+lists WesternAdoulin/Flapano/onTrigger WesternAdoulin/Flapano/onTrade WesternAdoulin/onEventFinish/2861
+char zone=WesternAdoulin pos=71.5,0,-13.5 job=WAR lvl=99
+quest Adoulin.ExoticDelicacies accepted
+charvar Flapano_Odd_Even 1
+item 3916
+item 5949
+item 5954 x2
+item PlateOfBarnaclePaella
+login
+fill-inventory                          # no free slot
+trade Flapano 3916 x1 5949 x1 5954 x2 PlateOfBarnaclePaella x1   # the ingredients first: 2861
+finish                                  # no slot for the reward: nothing, the trade kept, the var 1
+storage inventory 31                    # one free slot
+trade Flapano 3916 x1 5949 x1 5954 x2   # 2861
+finish                                  # completed: bayld, the paella, exp; the trade taken, the var 0
+trigger Flapano                         # completed: the shop

@@ -1,0 +1,37 @@
+# Way of the Cook (otherAreas 1): its reply kinds against The Clue accepted (a GM: Rycharde 85, Take 65, both Event; the
+# lookup's action cycle plays the first container's action on a tie, and RQ2_Way_of_the_Cook sorts before RQ6_The_Clue).
+# Available: Rycharde's 76 (Progress) twice; Take's 68 (Event), then 65; not due: Rycharde's 75 (Event), then 85.
+# Accepted: Rycharde's 78 (Event; the cycle's last was 85, so it starts over), then 85; past EndTime: 79 (Event), then 85.
+# The trade replies (73 Event, 80 / 81 Progress) have no competitor (The Clue's trade answers eggs only).
+lists Mhaura/Rycharde/onTrigger Mhaura/Take/onTrigger Mhaura/onEventFinish/76
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+quest OtherAreas.RychardeTheChef completed
+quest OtherAreas.TheClue accepted
+charvar Quest[4][0]DayCompleted 7992
+fame Windurst 125
+login
+trigger Rycharde                        # 76 (Progress beats 85)
+finish option=0
+trigger Rycharde                        # 76 again
+finish option=0
+trigger Take                            # 68 (a tie with 65: the first container's)
+finish
+trigger Take                            # 65
+finish
+charvar Quest[4][0]DayCompleted 7993    # a GM: not due
+trigger Rycharde                        # 75 (a tie with 85)
+finish
+trigger Rycharde                        # 85
+finish
+charvar Quest[4][0]DayCompleted 7992
+trigger Rycharde                        # 76
+finish option=74                        # begun, EndTime 790199568
+trigger Rycharde                        # accepted: 78 (72) (a tie with 85; the cycle starts over)
+finish
+trigger Rycharde                        # 85
+finish
+charvar Quest[4][1]EndTime 790189200    # a GM: no time left
+trigger Rycharde                        # 79 (a tie with 85; the cycle starts over)
+finish
+trigger Rycharde                        # 85
+finish

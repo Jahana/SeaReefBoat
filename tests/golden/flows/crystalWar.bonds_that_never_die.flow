@@ -1,0 +1,50 @@
+# Bonds That Never Die (crystalWar 45): a level 99 Warrior in Southern San d'Oria [S] with The Price of Valor completed
+# (a GM; missions as group 1's flows). Rholont 649, finished: the Letter to Count Aurchiat; Rholont: the letter: 651.
+# Pashhow Marshlands [S]: Shimmering Pondweed 107, finished: begun, the letter taken. Jugner Forest [S]: Overgrown
+# Mushrooms 212, finished: a Hatchet, Prog 1; Mushrooms: no Length of Jugner Ivy: nil. The ivy (a GM: Jugner Forest [S]
+# logging gives it at random): 213, finished: Prog 2. Mossy Stump 214, finished: Prog 3; Mossy Stump: Prog 3: nil
+# (NO_RESPONSE). Everbloom Hollow's 10000 finish (Prog 4, the setPos) is waived in `#edges`: Prog 4 by a GM. The Jugner
+# Forest [S] zone-in at Prog 4 (any zone): 215, finished: Prog 5. Southern San d'Oria [S]: Rholont (accepted): 651.
+# Rongelouts N Distaud 650, finished: completed (a Behemoth Horn), Option 1, Songbirds in a Snowstorm's Timer and
+# mustZone. Completed: Rongelouts: Option 1: 654, finished: Option 0; again: nil (604).
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Rongelouts_N_Distaud/onTrigger SouthernSanDoriaS/onEventFinish/649 SouthernSanDoriaS/onEventFinish/650 SouthernSanDoriaS/onEventFinish/654 PashhowMarshlandsS/Shimmering_Pondweed/onTrigger PashhowMarshlandsS/onEventFinish/107 JugnerForestS/Overgrown_Mushrooms/onTrigger JugnerForestS/Mossy_Stump/onTrigger JugnerForestS/onZoneIn/1 JugnerForestS/onEventFinish/212 JugnerForestS/onEventFinish/213 JugnerForestS/onEventFinish/214 JugnerForestS/onEventFinish/215
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.ThePriceOfValor completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # available, no letter: 649
+finish                                  # the Letter to Count Aurchiat
+trigger Rholont                         # the letter held: 651
+finish
+warp -196.855,24.999,407.678 PashhowMarshlandsS
+trigger Shimmering_Pondweed             # the letter: 107
+finish                                  # begun; the letter taken
+warp -361.432,4.908,-332.018 JugnerForestS
+trigger Overgrown_Mushrooms             # Prog 0: 212
+finish                                  # a Hatchet; Prog 1
+trigger Overgrown_Mushrooms             # Prog 1, no ivy: nil
+finish-if-event
+keyitem LengthOfJugnerIvy               # a GM: the Jugner Forest [S] logging's (random)
+trigger Overgrown_Mushrooms             # Prog 1, the ivy: 213
+finish                                  # Prog 2
+walk -288.136,-0.147,86.352
+trigger Mossy_Stump                     # Prog 2: 214
+finish                                  # Prog 3
+trigger Mossy_Stump                     # Prog 3: nil (NO_RESPONSE)
+finish-if-event
+charvar Quest[7][45]Prog 4              # a GM: what Everbloom Hollow's 10000 does
+rezone open                             # Prog 4 (any zone): 215, left open
+finish                                  # Prog 5
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # accepted: 651
+finish
+walk 1.5,1.999,-22.006
+trigger Rongelouts_N_Distaud            # Prog 5: 650
+finish                                  # completed (a Behemoth Horn); Option 1; Songbirds' Timer and mustZone
+trigger Rongelouts_N_Distaud            # completed, Option 1: 654
+finish                                  # Option 0
+trigger Rongelouts_N_Distaud            # Option 0: nil (604)
+finish-if-event

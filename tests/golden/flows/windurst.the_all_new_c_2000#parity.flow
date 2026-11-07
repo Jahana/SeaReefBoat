@@ -1,0 +1,12 @@
+# The All-New C-2000 (windurst 24), completion parity: 292's finish is the Lua's raw player:completeQuest (then fame,
+# title, gil, the trade), so a GM's Quest[2][24]Prog survives the completion (quest:cleanup, which a called
+# Quest.Complete() runs, would clear it). Accepted (GM) beside Kopuro-Popuro.
+char zone=WindurstWoods pos=-1.0,-4.75,-21.0 job=WAR lvl=75
+item InsectWing
+item RabbitHide
+item TwoLeafMandragoraBud
+login
+quest Windurst.TheAllNewC2000 accepted
+charvar Quest[2][24]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Kopuro-Popuro InsectWing x1 RabbitHide x1 TwoLeafMandragoraBud x1  # the three: 292 (200)
+finish                                  # completed; fame 20; Cardian Tutor; 200 gil; the three taken; Prog kept

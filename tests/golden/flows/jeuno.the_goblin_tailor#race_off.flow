@@ -1,0 +1,28 @@
+# The Goblin Tailor (jeuno 42): each chest's race operand alone (the week's location, no pattern, another race): the
+# quest's nil, the chest's own script (its key opens it to its own loot). Accepted by a GM. Bob, a Hume female (race 2),
+# at Gusgen Mines in week 1000 (location 1, race 1). Main, a Hume male (race 1), at the Maze of Shakhrami in week 1001
+# (`wait vana=180`: location 2, race 2), then at Ordelle's Caves in week 1002 (`wait vana=192` more: location 0, race 3).
+lists GusgenMines/Treasure_Chest/onTrade MazeOfShakhrami/Treasure_Chest/onTrade OrdellesCaves/Treasure_Chest/onTrade
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 job=WAR lvl=75
+char bob zone=GusgenMines pos=208.7,-59.2,-101 job=WAR lvl=75 race=2
+quest Jeuno.TheGoblinTailor accepted
+item ShakhramiChestKey
+item OrdelleChestKey
+bob: quest Jeuno.TheGoblinTailor accepted
+bob: item GusgenChestKey
+login
+bob: login
+tick 13000                              # the chests placed
+bob: trigger Treasure_Chest             # walks to the chest
+bob: trade Treasure_Chest GusgenChestKey x1 # week 1000: location 1, race 1 is not 2: nil; the chest's own script
+tick 4500                               # the chest opened
+wait vana=180                           # week 1001 (race 2, location 2)
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest ShakhramiChestKey x1 # location 2, race 2 is not 1: nil; the chest's own script
+tick 4500                               # the chest opened
+wait vana=192                           # week 1002 (race 3, location 0)
+warp -49.4,-1.07,7.2 OrdellesCaves
+tick 13000                              # the chest placed
+trigger Treasure_Chest                  # walks to the chest
+trade Treasure_Chest OrdelleChestKey x1 # location 0, race 3 is not 1: nil; the chest's own script
+tick 4500                               # the chest opened

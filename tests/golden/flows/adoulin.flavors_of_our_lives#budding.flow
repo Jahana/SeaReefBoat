@@ -1,0 +1,25 @@
+# Flavors of Our Lives (adoulin 46) and SoA 2-1-0 Budding Prospects (missions/soa/2_1_0_Budding_Prospects.lua, which
+# reads this quest at Masad): a level 99 Warrior in Western Adoulin, Budding Prospects current, the quest accepted at
+# Prog 0 (a GM); Vana'diel day 8000. Masad: the mission gives nothing (the quest not completed, the mission's Timer 0);
+# the quest's 83 (SoA 11 <= Budding Prospects: Mission[12][11]Timer 8001, its mustZone, the quest's Timer 8001),
+# finished: Prog 1. Prog 1: the mission nothing (the quest's Prog 1 < 2); the quest's 104. Dewalt 85: Prog 2. Masad at
+# Prog 2: the mission's Timer 8001 (to come): nothing; its Timer 0 (a GM): nothing (`waitTimer ~= 0`); 8000 (today, a
+# GM): the mission's 8 (the quest's Prog 2, read through xi.quest.getVar), finished: Budding Prospects completed.
+lists WesternAdoulin/Masad/onTrigger WesternAdoulin/Dewalt/onTrigger WesternAdoulin/onEventFinish/83
+lists WesternAdoulin/onEventFinish/85 WesternAdoulin/onEventFinish/8
+char zone=WesternAdoulin pos=-26.682,-0.65,-91.991 job=WAR lvl=99
+mission Soa BuddingProspects current
+quest Adoulin.FlavorsOfOurLives accepted
+login
+trigger Masad                           # Prog 0, SoA 11: the mission's Timer and mustZone, the quest's Timer; 83
+finish                                  # Prog 1
+trigger Masad                           # Prog 1: 104 (the quest's Timer to come); the mission: nothing (Prog 1 < 2)
+finish
+trigger Dewalt                          # Prog 1: 85
+finish                                  # Prog 2
+trigger Masad                           # Prog 2: the mission's Timer 8001: nothing; no quest section: nothing
+charvar Mission[12][11]Timer 0          # a GM
+trigger Masad                           # the mission's Timer 0: nothing
+charvar Mission[12][11]Timer 8000       # a GM: today
+trigger Masad                           # the mission: Timer today and the quest's Prog >= 2: 8
+finish                                  # Budding Prospects completed (next: The Light Shining in Your Eyes)

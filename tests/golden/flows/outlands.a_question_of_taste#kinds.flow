@@ -1,0 +1,57 @@
+# A Question of Taste's Etteh replies (accepted) against Everyone's Grudging's 109 (an Event), both accepted by GMs.
+# Etteh has no script: Event ties cycle by the last event id, the first in container order (A Question of Taste
+# first). Prog 0: 45 then 109. Prog 1: 47 (Progress) beats 109; finished (Prog 2), Prog 1 again (a GM): 47 again (the
+# last id is 47, so a tie would now play 109). Prog 2: 49 then 109. Prog 4: 50 (Progress); A Question of Taste set
+# available by a GM before the finish (the accepted section's Kazham 50 finish does not run: nothing), then accepted
+# again at Prog 4: 50 again (the last id 50); finished: completed (3000 gil, fame +16, the mustZone). The completed
+# replies (the mustZone cleared by two zone changes; rancorCurse 0, Prog 0, Option 0): 53 (Progress) beats 109, option
+# 2: Option 1; Option 0 again (a GM): 53 again (the last id 53); 54 (Option 1) beats 109, option 2: nothing; 54 again
+# (the last id 54), option 1: begun (Prog 1, still completed); Prog 3 (a GM): 57 beats 109; set available by a GM before
+# the finish (nothing), completed again with Prog 3 (GMs): 57 again (the last id 57); finished: completed again.
+lists Kazham/Etteh_Sulaej/onTrigger
+char zone=Kazham pos=93.981,-14.5,-110.818 job=WAR lvl=75
+fame Windurst 425
+quest Outlands.AQuestionOfTaste accepted
+quest Outlands.EveryonesGrudging accepted
+login
+trigger Etteh_Sulaej                    # Prog 0: 45 and 109 (Events) tie: 45
+finish
+trigger Etteh_Sulaej                    # the cycle: 109
+finish
+charvar Quest[5][3]Prog 1               # a GM
+trigger Etteh_Sulaej                    # Prog 1: 47 (Progress) beats 109
+finish                                  # Prog 2
+charvar Quest[5][3]Prog 1               # a GM
+trigger Etteh_Sulaej                    # 47 again (the last id 47)
+finish                                  # Prog 2
+trigger Etteh_Sulaej                    # Prog 2: 49 and 109 tie: the last id 47 is neither: 49
+finish
+trigger Etteh_Sulaej                    # the cycle: 109
+finish
+charvar Quest[5][3]Prog 4               # a GM
+trigger Etteh_Sulaej                    # Prog 4: 50 (Progress) beats 109
+quest Outlands.AQuestionOfTaste available   # a GM, 50 open
+finish                                  # available: no Kazham 50 finish there: nothing
+quest Outlands.AQuestionOfTaste accepted    # a GM
+charvar Quest[5][3]Prog 4               # a GM
+trigger Etteh_Sulaej                    # 50 again (the last id 50)
+finish                                  # completed: 3000 gil; fame +16; the mustZone
+warp -64.619,-9.25,-8.853 WindurstWaters   # the mustZone cleared
+warp 93.981,-14.5,-110.818 Kazham
+trigger Etteh_Sulaej                    # completed, Prog 0, Option 0: 53 (Progress) beats 109
+finish option=2                         # Option 1
+charvar Quest[5][3]Option 0             # a GM
+trigger Etteh_Sulaej                    # 53 again (the last id 53)
+finish option=2                         # Option 1
+trigger Etteh_Sulaej                    # Option 1: 54 (Progress) beats 109
+finish option=2                         # not 1: nothing
+trigger Etteh_Sulaej                    # 54 again (the last id 54)
+finish option=1                         # Prog 1; begun (still completed); Final Fantasy Part II
+charvar Quest[5][3]Prog 3               # a GM
+trigger Etteh_Sulaej                    # Prog 3: 57 (Progress) beats 109
+quest Outlands.AQuestionOfTaste available   # a GM, 57 open
+finish                                  # available: no 57 finish there: nothing
+quest Outlands.AQuestionOfTaste completed   # a GM
+charvar Quest[5][3]Prog 3               # a GM
+trigger Etteh_Sulaej                    # 57 again (the last id 57)
+finish                                  # completed again: 3000 gil; fame +16; the mustZone

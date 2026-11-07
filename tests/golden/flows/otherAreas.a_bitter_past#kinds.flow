@@ -1,0 +1,33 @@
+# A Bitter Past (otherAreas 66): its reply kinds. CoP Sheltering Doubt current (past Darkness Named: In Search of the Truth
+# is available; accepted, a GM, its Raminey 549 is Progress). Accepted (a GM). Raminey 152 (Progress) against 549: a tie,
+# A_Bitter_Past sorts first: 152, finished; Prog 0 again (a GM): the cycle, 549, finished (its bit 1). Equette 153
+# (Progress, Prog 1) against The Call of the Sea's 170 (available, Prog 0: Progress): a tie, A Bitter Past first: 153;
+# Prog 1 again (a GM): the cycle, 170, finished (its Prog 1). Completed (a GM): Equette 155 (Event, importantOnce)
+# against The Call of the Sea's 170 (its Prog 0 again, a GM): 170 every time. Frescheque has no other quest.
+lists TavnazianSafehold/Frescheque/onTrigger TavnazianSafehold/Raminey/onTrigger TavnazianSafehold/Equette/onTrigger TavnazianSafehold/onEventFinish/151 TavnazianSafehold/onEventFinish/152 TavnazianSafehold/onEventFinish/153 TavnazianSafehold/onEventFinish/154 LufaiseMeadows/qm_bitter_past/onTrigger LufaiseMeadows/Blackbone_Frazdiz/onMobDeath LufaiseMeadows/Rainbringer_Yjatvot/onMobDeath
+lists TavnazianSafehold/onEventFinish/549 TavnazianSafehold/onEventFinish/170
+char zone=TavnazianSafehold pos=19.4,-36,11.8 job=WAR lvl=75
+mission Cop ShelteringDoubt current
+quest OtherAreas.ABitterPast accepted
+quest OtherAreas.InSearchOfTheTruth accepted
+login
+warp 83.9,-36,49.7 TavnazianSafehold
+trigger Raminey                         # 152 and 549 tie: 152
+finish                                  # Prog 1
+charvar Quest[4][66]Prog 0              # a GM
+trigger Raminey                         # the cycle: 549
+finish                                  # In Search's bit 1
+charvar Quest[4][66]Prog 1              # a GM
+warp 4,-22.3,-17.3 TavnazianSafehold
+trigger Equette                         # 153 and 170 tie: 153
+finish                                  # Prog 2
+charvar Quest[4][66]Prog 1              # a GM
+trigger Equette                         # the cycle: 170
+finish                                  # The Call of the Sea's Prog 1
+quest OtherAreas.ABitterPast completed  # a GM
+charvar Quest[4][67]Prog 0              # a GM
+trigger Equette                         # 170 beats 155 (Event)
+finish                                  # The Call of the Sea's Prog 1
+charvar Quest[4][67]Prog 0              # a GM
+trigger Equette                         # 170 again
+finish

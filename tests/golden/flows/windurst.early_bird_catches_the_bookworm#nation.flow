@@ -1,0 +1,19 @@
+# Early Bird Catches the Bookworm (windurst 20): the offer's nation and mission sides for a Windurst char. With no
+# Windurst mission current the or's second side is true: 387. With Lost for Words (2-1) current the quest returns nil:
+# 2-1 at status 0 has no Tosuka-Porika action, so his script answers (no mission completed: 370, toggle 1). With The
+# Sixth Ministry (7-1) current the quest returns nil and 7-1's own Tosuka action answers (status 0: 715, 0, Optistery
+# Ring); its finish (the mission's, not this quest's) sets the mission status 1 and gives the Optistery Ring.
+lists WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/onEventFinish/387
+char zone=WindurstWaters pos=-26.5,-5.25,104.4 nation=2
+quest Windurst.GlyphHanger completed
+fame Windurst 50
+login
+trigger Tosuka-Porika               # Windurst nation, no Windurst mission current: 387
+finish option=1                     # declined: nothing
+mission Windurst LostForWords current
+trigger Tosuka-Porika               # Lost for Words current: nil; his script 370
+finish
+mission Windurst LostForWords completed  # a GM: 2-1 done, so no mission current (addMission refuses to overwrite one)
+mission Windurst TheSixthMinistry current
+trigger Tosuka-Porika               # The Sixth Ministry current: nil; 7-1's 715 (0, Optistery Ring)
+finish option=1                     # 7-1's finish: mission status 1, Optistery Ring

@@ -1,0 +1,27 @@
+# Requiem of Sin (otherAreas 83), the battlefield won the way a player wins it. Despachiaire's 578 (the letter Y,
+# Prog 1), then battlefield 678 entered. The three Shikarees killed: their group's allDeath (handleAllMonstersDefeated)
+# shows the Armoury Crate and sets no status. The crate's trigger: the loot, WON, cutsceneTimer 5. Each battlefield
+# tick (CBattlefield::onTick, once its 1 s has passed) reads the timer and counts it down; the sixth reads 0 and
+# cleans up, whose onBattlefieldLeave (won) opens 32001. A 2 s tick runs one battlefield tick each (the 1 s is strict,
+# so 1 s ticks run one every other tick). Finished: completed (battlefieldWin 678).
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/578 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+quest OtherAreas.TangoWithATracker completed
+login
+trigger Despachiaire                    # available, the wait 0, Prog 0: 578
+finish                                  # the letter Y; the wait 1800198000; Prog 1
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081                            # the letter: the 32000 menu
+update 32000 option=97                  # index 6, area 1: Requiem of Sin (678)
+finish                                  # in 678: begun; the letter spent
+kill SHIKAREE_Z_ROS
+kill SHIKAREE_Y_ROS_TWT
+kill SHIKAREE_X_ROS_TWT                 # all three down: the Armoury Crate shows
+trigger Armoury_Crate+84                # the loot; WON, cutsceneTimer 5
+tick 2000                               # reads 5
+tick 2000                               # 4
+tick 2000                               # 3
+tick 2000                               # 2
+tick 2000                               # 1
+tick 2000                               # 0: the cleanup; 32001
+finish                                  # battlefieldWin 678: completed

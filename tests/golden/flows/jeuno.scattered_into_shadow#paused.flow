@@ -1,0 +1,26 @@
+# Scattered into Shadow (jeuno 61), Tebhi paused from the trade to tebhiGone (clearPath(true): pauseNPCPathing). The
+# other flows tick that window in two or three steps, which the trigger's CTriggerState hold (two AI ticks) covers;
+# here ticks of 400 ms each: the hold ends 800 ms after the trigger, and then a Tebhi walking his patrol would show in
+# a position update each tick. Paused, he shows none but tebhiFade's ('kesu', 2001 ms) until tebhiGone (4001 ms:
+# CUTSCENE_ONLY and continuePath).
+lists CastleOztroja/Tebhi/onTrade
+char zone=CastleOztroja pos=-134.5,24,-21 job=BST lvl=50
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ScatteredIntoShadow accepted
+charvar Quest[3][61]Prog 4
+charvar Quest[3][61]Stage 7
+item BeastCollar
+login                                       # the listener
+tick 400                                    # Tebhi NORMAL, 'deru'
+trigger Tebhi                               # walk to him
+trade Tebhi BeastCollar x1                  # Prog 5, TEBHI_ACCEPTS; clearPath(true), the two timers
+tick 400                                    # the trigger's hold
+tick 400                                    # the hold's end
+tick 400                                    # paused: no position update
+tick 400                                    # paused
+tick 401                                    # tebhiFade: 'kesu'
+tick 400                                    # paused
+tick 400                                    # paused
+tick 400                                    # paused
+tick 400                                    # paused
+tick 400                                    # tebhiGone: CUTSCENE_ONLY, continuePath

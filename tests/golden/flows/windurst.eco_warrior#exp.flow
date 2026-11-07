@@ -1,0 +1,18 @@
+# Eco-Warrior (Windurst) (windurst 84): 62's restriction carries subPower 1 (Eco_Warrior.lua:137: "exp uses actual
+# level and not the restricted level"), which only experience shows. A level-30 WAR under Level Restriction 25 kills a
+# Ghoul of the zone (level 22-26, id 17588618, near Ahko Mhalijikhari): the exp is graded on level 30 (subPower 1); on
+# the restricted 25 it would be more. Five ticks after the login first: zoneutils::AfterZoneIn (4 s after it) lifts a
+# level restriction outside a battlefield, so the restriction goes on after it. Perfect Dodge by GM keeps the char alive.
+lists MazeOfShakhrami/Ahko_Mhalijikhari/onTrigger MazeOfShakhrami/onEventFinish/62
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 job=WAR lvl=30
+quest Windurst.EcoWarrior accepted
+login
+tick 1000
+tick 1000
+tick 1000
+tick 1000                            # afterZoneIn
+tick 1000
+effect 49                            # a GM: Perfect Dodge
+trigger Ahko_Mhalijikhari            # 62
+finish option=1                      # Level Restriction 25, subPower 1 (ON_ZONE)
+kill #17588618                       # a Ghoul: exp graded on level 30

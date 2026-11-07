@@ -1,0 +1,85 @@
+# The Holy Crest (sandoria 93, the DRG unlock; call-only): Arminibit and Ceraulian (Port San d'Oria), Morjean
+# (Northern San d'Oria), Rahal (Chateau d'Oraguille), the Ghelsba Outpost battlefield (Hut_Door, index 1). Morjean has a
+# default action (601): after each zone-in the first talk plays it, then his talks alternate between his script and the
+# default (the default again when his script plays nothing). Arminibit, Ceraulian and Rahal have none
+# (587 / 587 / 529 are their scripts'). The Lua steps between (Novalmauge in Bostaunieux Oubliette, the
+# Maze of Shakhrami Excavation Point, the Meriphataud Mountains qm1) are set by GM; Morjean's 62 and
+# Rahal's 60 / 122 are walked (Lua).
+# A WAR 30, available: Arminibit 24 (TheHolyCrest_Event 1); Ceraulian 24 (1); the var 2 (GM: Novalmauge's 6):
+# Arminibit 24 again sets it back to 1 (24 reads no var). Morjean at 1: no arm (601). The var 2 again:
+# Morjean 65 (begun, 3); 3 without the egg: no arm; the Wyvern Egg (GM): 62, option 1 nothing, option 0 the
+# var 4; 4: 62. The var 5 (GM: Meriphataud's 56): Rahal 60 (the Dragon Curse Remedy), 122. Accepted: Arminibit and
+# Ceraulian 587. The battlefield: entered, a tick for Cyranuce M Cutauleon to spawn, killed: 32001 with option 0:
+# nothing (the remedy kept, still accepted); the won arena's cleanup (21 s of ticks) takes the char out of it.
+# Quest[0][93]Prog 1 (GM). Entered again, won by a GM's bfwin (Cyranuce does not spawn again this soon in the harness),
+# option 5: the remedy taken, DRG unlocked, the wyvern named 6, YOU_CAN_NOW_BECOME_A_DRAGOON, Job Gesture: Dragoon,
+# fame 20, Heir to the Holy Crest, the var cleared, completed; Quest[0][93]Prog kept (npcUtil.completeQuest, no
+# quest:complete cleanup). Then Arminibit and Ceraulian: 587.
+char zone=PortSanDoria pos=0.6,-8,-121.9 job=WAR lvl=30
+login
+trigger Arminibit                         # level 30, available: 24
+finish                                    # TheHolyCrest_Event 1
+trigger Ceraulian                         # level 30 (ADVANCED_JOB_LEVEL), available: 24 (first in his chain)
+finish                                    # TheHolyCrest_Event 1
+charvar TheHolyCrest_Event 2              # GM: Novalmauge's 6 (Bostaunieux Oubliette, Lua)
+trigger Arminibit                         # available: 24 (reads no var)
+finish                                    # TheHolyCrest_Event back to 1
+warp 100.1,0,114.1 NorthernSanDoria
+trigger Morjean                           # default 601
+finish
+trigger Morjean                           # TheHolyCrest_Event 1: no arm, no 62: the default 601
+finish
+charvar TheHolyCrest_Event 2              # GM: Novalmauge's 6 again
+trigger Morjean                           # default 601
+finish
+trigger Morjean                           # TheHolyCrest_Event 2: 65
+finish                                    # begun; TheHolyCrest_Event 3
+trigger Morjean                           # default 601
+finish
+trigger Morjean                           # 3 without the Wyvern Egg: no Holy Crest arm, no 62: the default 601
+finish
+item WyvernEgg                            # GM: the Maze of Shakhrami Excavation Point's (a Pickaxe traded at 3, Lua)
+trigger Morjean                           # default 601
+finish
+trigger Morjean                           # 3 with the egg: 62 (Lua)
+finish option=1                           # nothing
+trigger Morjean                           # default 601
+finish
+trigger Morjean                           # 62
+finish option=0                           # TheHolyCrest_Event 4 (Lua)
+trigger Morjean                           # default 601
+finish
+trigger Morjean                           # 4: 62
+finish option=1                           # nothing
+charvar TheHolyCrest_Event 5              # GM: the Meriphataud Mountains qm1's 56 (the egg traded, Lua)
+warp -29.5,0,-8.4 ChateauDoraguille
+trigger Rahal                             # 5 without the remedy: 60 (Lua)
+finish                                    # the Dragon Curse Remedy (KEYITEM_OBTAINED)
+trigger Rahal                             # 5 with the remedy: 122 (Lua)
+finish
+warp 0.6,-8,-121.9 PortSanDoria
+trigger Arminibit                         # accepted: no arm: 587
+finish
+trigger Ceraulian                         # accepted: no Holy Crest arm; Knight Stalker none: 587
+finish
+warp -163.5,-11.7,77.8 GhelsbaOutpost
+trigger Hut_Door                          # accepted with the remedy: the entry menu 32000
+update 32000 option=17                    # The Holy Crest (index 1), area 1: registered, entered
+finish                                    # in the arena
+tick 2000                                 # the arena's first tick: Cyranuce M Cutauleon spawned
+kill CYRANUCE_M_CUTAULEON                 # won: 32001 opens
+finish option=0                           # option 0: nothing (the remedy kept, still accepted)
+tick 11000                                # the won arena's cleanup: Cyranuce M Cutauleon despawned
+tick 10000                                # the char out of the battlefield (its effect gone)
+warp -163.5,-11.7,77.8 GhelsbaOutpost     # back by Hut_Door
+charvar Quest[0][93]Prog 1                # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+trigger Hut_Door                          # accepted with the remedy: 32000
+update 32000 option=17                    # registered, entered
+finish                                    # in the arena
+bfwin                                     # a GM's win (Cyranuce does not spawn again this soon): 32001
+finish option=5                           # see the header: completed
+warp 0.6,-8,-121.9 PortSanDoria
+trigger Arminibit                         # completed: no arm: 587
+finish
+trigger Ceraulian                         # completed: no Holy Crest arm; Knight Stalker none: 587
+finish

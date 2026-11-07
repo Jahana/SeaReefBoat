@@ -1,0 +1,21 @@
+# Community Service (jeuno 15): a lamp whose animation is neither OPEN_DOOR (8) nor CLOSE_DOOR (9), set by a GM's
+# !animatenpc. Prog 1 with Timer today (8000) at 18:00, in time: getLampParam's in-time arm has neither the open (2)
+# nor the closed (1) answer and returns nil: _l04's 124 (nil, 4), sent as (0, 4); option 1 lights it anyway (lightLamp
+# does not look at the animation: Count 11, the lamp opened, YOU_LIGHT_THE_LAMP and LAMP_MSG_OFFSET + 1 with 11), then
+# it is lit: 124 (2, 4). At Prog 0 (GM) another lamp at animation 0: not OPEN_DOOR, so the else arm: 125 (6, 5).
+lists LowerJeuno/_l04/onTrigger LowerJeuno/_l05/onTrigger LowerJeuno/onEventFinish/124 LowerJeuno/onEventFinish/125
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+charvar Quest[3][15]Prog 1
+charvar Quest[3][15]Count 12
+charvar Quest[3][15]Timer 8000
+login
+wait vana=6                             # 18:00
+animatenpc _l04 0                       # a GM: animation 0, neither open nor closed
+trigger _l04                            # Prog 1 in time, neither animation: 124 (nil, 4)
+finish option=1                         # lit: Count 11, the lamp opened, LAMP_MSG_OFFSET + 1 (11)
+trigger _l04                            # lit: 124 (2, 4)
+finish
+charvar Quest[3][15]Prog 0              # a GM
+animatenpc _l05 0                       # a GM
+trigger _l05                            # Prog 0, not OPEN_DOOR: 125 (6, 5)
+finish

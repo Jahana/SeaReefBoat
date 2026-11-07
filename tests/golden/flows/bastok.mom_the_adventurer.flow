@@ -1,0 +1,64 @@
+# Mom, the Adventurer? (bastok 21): Nbu Latteh and Parnika in Bastok Markets, Roh Latteh in Bastok Mines. The offer 230
+# (no guard) with a full inventory (no Fire Crystal: not begun), then begun; accepted: Nbu's 231, Parnika's 232, Roh's
+# trades (a bone chip: nil; a Copper Ring: 95, the ring taken, the Letter from Roh Latteh; another ring with the
+# letter: nil); Nbu's 233 (the letter not seen: completed, fame +10, Ringbearer, 200 gil, the letter deleted, the
+# mustZone set). Completed with the mustZone set: no section (Nbu's default 127); out and back: the repeat at fame
+# level 1 (Prog 0): Roh's ring trade at Prog 0 (nil), 230 with a full inventory (Prog stays 0), 230 (Prog 1), 231,
+# Parnika's 232, Roh's 95, the letter seen, Nbu's 234 (completed again: 100 gil).
+# The Signpost Marks the Spot (C#) also names Nbu and Roh: it needs Bastok fame level 2, and the char stays at fame 0.
+# Defaults: Nbu 127, Parnika 136, Roh 29.
+lists BastokMarkets/Nbu_Latteh/onTrigger BastokMarkets/Nbu_Latteh/onTrade BastokMarkets/Parnika/onTrigger BastokMarkets/onEventFinish/230 BastokMarkets/onEventFinish/233 BastokMarkets/onEventFinish/234 BastokMines/Roh_Latteh/onTrade BastokMines/onEventFinish/95
+char zone=BastokMines pos=-11.8,7,-9.2 lvl=10
+item BoneChip
+item CopperRing
+item CopperRing
+item CopperRing
+login
+trade Roh_Latteh CopperRing x1 # available: no handler (section 1 has none at Roh): nothing, the ring kept
+warp -114.8,-4,-112.3 BastokMarkets
+trade Nbu_Latteh BoneChip x1   # no trade handler: nothing
+trigger Parnika                # available: no handler, 136
+finish
+trigger Nbu_Latteh             # available: 230
+fill-inventory
+finish                         # the crystal does not fit: not begun
+free-inventory
+trigger Nbu_Latteh             # 230 again
+finish                         # a Fire Crystal, begun
+trigger Nbu_Latteh             # no letter: 231
+finish
+trigger Parnika                # accepted: 232
+finish
+warp -11.8,7,-9.2 BastokMines
+trade Roh_Latteh BoneChip x1   # not a ring: nil, nothing
+trade Roh_Latteh CopperRing x1 # no letter: 95
+finish                         # the ring taken, the Letter from Roh Latteh
+trade Roh_Latteh CopperRing x1 # the letter held: nil
+warp -114.8,-4,-112.3 BastokMarkets
+trigger Nbu_Latteh             # the letter, not seen: 233
+finish                         # completed: fame +10, Ringbearer, the letter deleted, 200 gil, mustZone set
+trigger Nbu_Latteh             # completed, mustZone set: no section, 127
+finish
+zoneline BastokMines           # mustZone cleared
+walk -11.8,7,-9.2              # trade does not walk
+trade Roh_Latteh CopperRing x1 # completed, Prog 0: nil
+zoneline BastokMarkets
+trigger Nbu_Latteh             # completed, fame level 1, Prog 0: 230 (the repeat)
+fill-inventory
+finish                         # the crystal does not fit: Prog stays 0
+free-inventory
+trigger Nbu_Latteh             # 230 again
+finish                         # a Fire Crystal, Prog 1
+trigger Nbu_Latteh             # Prog 1: 231
+finish
+trigger Parnika                # completed: 232
+finish
+warp -11.8,7,-9.2 BastokMines
+trade Roh_Latteh BoneChip x1   # completed, Prog 1, no letter, not a ring: nil
+trade Roh_Latteh CopperRing x1 # Prog 1, no letter: 95
+finish                         # the letter
+trade Roh_Latteh CopperRing x1 # completed, Prog 1, the letter held: nil
+seekeyitem LetterFromRohLatteh
+warp -114.8,-4,-112.3 BastokMarkets
+trigger Nbu_Latteh             # the letter seen: 234
+finish                         # completed again: fame +10, the letter deleted, 100 gil, mustZone set

@@ -1,0 +1,60 @@
+# Always More Quoth the Ravenous (adoulin, call-only): a level 99 Warrior in Western Adoulin; Hunger Strikes and
+# The Starving completed (GMs: their available offers would answer Westerly Breeze first). Two Goblin Drinks, two
+# Apple Juices, a Fire Crystal, an Apple Pie, a Bowl of Vegetable Gruel, two Cursed Beverages. Westerly Breeze's talks
+# go in pairs (his default 553, then his script; 553 again when it plays nothing). Fame level 1: nothing from the
+# script. 50 fame (level 2): nothing (below 3). 125 (level 3): 3010, finished: added. Accepted: 3011. Trades: an
+# Apple Juice (a drink, 58): 3014, finished: taken; a Goblin Drink: 3013 (no finish); two Goblin Drinks: nothing; the
+# Fire Crystal (neither food nor drink, not the beverage): nothing; gil alone, a Goblin Drink with gil: nothing; the
+# Apple Pie (a food, 57; ATWTTB_Can_Trade_Gruel 0): nothing; the gruel at ATWTTB_Can_Trade_Gruel 1 (a GM): 5068 (the
+# script's, not the quest's), finished: taken, 19716 gil, the var 0; a Cursed Beverage: 3012, finished: taken, completed
+# (the raw completeQuest), 1500 exp, 1000 bayld, BAYLD_OBTAINED, 30 fame (Westerly_Breeze_Wait 0 already). Completed:
+# talks: nothing; an Apple Juice, a Cursed Beverage: nothing.
+lists WesternAdoulin/Westerly_Breeze/onTrigger WesternAdoulin/Westerly_Breeze/onTrade WesternAdoulin/onEventFinish/3010 WesternAdoulin/onEventFinish/3012 WesternAdoulin/onEventFinish/3014
+char zone=WesternAdoulin pos=63.5,32,123 job=WAR lvl=99
+quest Adoulin.HungerStrikes completed
+quest Adoulin.TheStarving completed
+item BottleOfGoblinDrink x2
+item BottleOfAppleJuice x2
+item FireCrystal
+item ApplePie
+item BowlOfVegetableGruel
+item BottleOfCursedBeverage x2
+login
+trigger Westerly_Breeze                 # fame level 1: 553
+finish-if-event
+trigger Westerly_Breeze                 # his script: nothing: 553
+finish-if-event
+fame Adoulin 50                         # a GM: level 2
+trigger Westerly_Breeze                 # 553
+finish-if-event
+trigger Westerly_Breeze                 # level 2, below 3: nothing: 553
+finish-if-event
+fame Adoulin 125                        # a GM: level 3
+trigger Westerly_Breeze                 # 553
+finish-if-event
+trigger Westerly_Breeze                 # level 3, available: 3010
+finish-if-event                         # added (player:addQuest)
+trigger Westerly_Breeze                 # 553
+finish-if-event
+trigger Westerly_Breeze                 # accepted: 3011
+finish-if-event
+trade Westerly_Breeze BottleOfAppleJuice x1   # a drink, accepted: 3014
+finish                                  # tradeComplete
+trade Westerly_Breeze BottleOfGoblinDrink x1  # the Goblin Drink: 3013 (refused)
+finish
+trade Westerly_Breeze BottleOfGoblinDrink x2  # two items: nothing
+trade Westerly_Breeze FireCrystal x1    # neither food nor drink, not the beverage: nothing
+trade Westerly_Breeze gil=100           # gil alone: nothing
+trade Westerly_Breeze BottleOfGoblinDrink x1 gil=100  # a drink and gil: nothing
+trade Westerly_Breeze ApplePie x1       # a food, ATWTTB_Can_Trade_Gruel 0: nothing
+charvar ATWTTB_Can_Trade_Gruel 1        # a GM
+trade Westerly_Breeze BowlOfVegetableGruel x1  # the gruel: 5068 (the script's)
+finish                                  # taken, 19716 gil, the var 0
+trade Westerly_Breeze BottleOfCursedBeverage x1  # the Cursed Beverage, accepted: 3012
+finish                                  # taken, completed, 1500 exp, 1000 bayld, BAYLD_OBTAINED, 30 fame
+trigger Westerly_Breeze                 # completed: 553
+finish-if-event
+trigger Westerly_Breeze                 # his script: nothing: 553
+finish-if-event
+trade Westerly_Breeze BottleOfAppleJuice x1   # a drink, completed: nothing
+trade Westerly_Breeze BottleOfCursedBeverage x1  # the beverage, completed: nothing

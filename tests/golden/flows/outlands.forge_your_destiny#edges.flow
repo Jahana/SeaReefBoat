@@ -1,0 +1,108 @@
+# Forge Your Destiny's Norg edges. bob (level 29, under ADVANCED_JOB_LEVEL 30): no section: Jaucribaix's default 71;
+# ADVANCED_JOB_LEVEL 29.4 (the setting compared as a number: 29 < 29.4): 71 again; main (level 30): 25, options 0 and
+# 2: not begun. Available: the
+# bomb steel and the branch traded to Jaucribaix, a Chunk of Darksteel Ore to Aeka, two gold and a platinum to Ranemaud
+# (each an accepted trade arm; the status the only change): nothing; Aeka and Ranemaud talk: their defaults 75 / 68.
+# Begun. Accepted: Jaucribaix: the bomb steel alone: nil; both and an ore: nil; both: 27 (waitTime now + 10368).
+# waitTime by a GM (the 28 parameter is timeRemaining / 144, a Lua float the event's parameter rounds half away from
+# zero, llround): 216 s left: 28 (2: 1.5); 144 s: 28 (1); 143 s: 28 (1: 0.993); 72 s: 28 (1: 0.5); 71 s: 28 (0:
+# 0.493); 1 s: 28 (0); 0 s (waitTime = now): 29, finished with a full inventory: quest:complete false (no room for the
+# Mumeito): no unlock, still accepted. waitTime 0 (a GM). Aeka: 44 finished with a full inventory: giveItem false, bit
+# 0 stays clear; a Chunk of Darksteel Ore traded with bit 0 clear: nil; Option 1 (a GM: bit 0): 46; two ores: nil; an
+# ore and a gold: nil; one: 47 (the oriental steel, the ore taken); one again (the steel held, a rare item): 47,
+# giveItem false: the ore kept. Ranemaud: 40 finished with a full inventory: bit 1 stays clear; two gold and a platinum
+# traded with bit 1 clear: nil; Option 3 (a GM: bits 0 and 1): 42; gold 1, gold 3, platinum 2, a fourth item (count
+# 4): nil each; two gold and a platinum: 43 (the sprig, the ores taken); again with the sprig held: 43, giveItem false:
+# the ores kept. (Aeka at waitTime = now: 50, the waitTime ~= 0 arm, between the 28s and the 29.)
+lists Norg/Jaucribaix/onTrigger Norg/Jaucribaix/onTrade Norg/Aeka/onTrade Norg/Ranemaud/onTrade Norg/onEventFinish/43
+char zone=Norg pos=91,-7,-8 job=WAR lvl=30
+char bob zone=Norg pos=91,-7,-8 job=WAR lvl=29
+item LumpOfBombSteel
+item SacredBranch
+item ChunkOfDarksteelOre x3
+item ChunkOfGoldOre x3
+item ChunkOfPlatinumOre x2
+login
+bob: login
+bob: trigger Jaucribaix                 # level 29: no section: default 71
+bob: finish
+setting ADVANCED_JOB_LEVEL 29.4
+bob: trigger Jaucribaix                 # 29 < 29.4: no section: default 71
+bob: finish
+setting ADVANCED_JOB_LEVEL 30
+bob: logout
+trigger Jaucribaix                      # level 30: 25
+finish option=0
+trigger Jaucribaix                      # 25
+finish option=2                         # not 1: not begun
+trade Jaucribaix LumpOfBombSteel x1 SacredBranch x1 # available: no trade arm: nothing
+trigger Aeka                            # available: no section: default 75
+finish
+trade Aeka ChunkOfDarksteelOre x1       # available: no trade arm: nothing
+trigger Ranemaud                        # available: no section: default 68
+finish
+trade Ranemaud ChunkOfGoldOre x2 ChunkOfPlatinumOre x1 # available: no trade arm: nothing
+trigger Jaucribaix                      # 25
+finish option=1                         # begun
+trade Jaucribaix LumpOfBombSteel x1     # the branch missing: nil
+trade Jaucribaix LumpOfBombSteel x1 SacredBranch x1 ChunkOfDarksteelOre x1 # a third item: nil
+trade Jaucribaix LumpOfBombSteel x1 SacredBranch x1 # 27
+finish                                  # taken; waitTime 1800010368
+charvar Quest[5][129]waitTime 1800000216   # a GM: 216 s left
+trigger Jaucribaix                      # 28 (2: 1.5 rounded away from zero)
+finish
+charvar Quest[5][129]waitTime 1800000144   # 144 s left
+trigger Jaucribaix                      # 28 (1)
+finish
+charvar Quest[5][129]waitTime 1800000143   # 143 s left
+trigger Jaucribaix                      # 28 (1: 0.993)
+finish
+charvar Quest[5][129]waitTime 1800000072   # 72 s left
+trigger Jaucribaix                      # 28 (1: 0.5)
+finish
+charvar Quest[5][129]waitTime 1800000071   # 71 s left
+trigger Jaucribaix                      # 28 (0: 0.493)
+finish
+charvar Quest[5][129]waitTime 1800000001   # 1 s left
+trigger Jaucribaix                      # 28 (0: 0.007)
+finish
+charvar Quest[5][129]waitTime 1800000000   # now: timeRemaining 0
+trigger Aeka                            # waitTime now (not 0, not ahead): 50
+finish
+trigger Jaucribaix                      # 29 (Mumeito)
+fill-inventory
+finish                                  # complete false: no Mumeito, no unlock; still accepted
+free-inventory
+charvar Quest[5][129]waitTime 0         # a GM
+trigger Aeka                            # no steel, bit 0 clear: 44
+fill-inventory
+finish                                  # giveItem false: bit 0 stays clear
+free-inventory
+trade Aeka ChunkOfDarksteelOre x1       # bit 0 clear: nil
+charvar Quest[5][129]Option 1           # a GM: bit 0
+trigger Aeka                            # bit 0 set, no steel: 46
+finish
+trade Aeka ChunkOfDarksteelOre x2       # two ores: nil
+trade Aeka ChunkOfDarksteelOre x1 ChunkOfGoldOre x1 # an ore and another item: nil
+trade Aeka ChunkOfDarksteelOre x1       # 47
+finish                                  # the oriental steel; the ore taken
+trade Aeka ChunkOfDarksteelOre x1       # 47 (the steel held)
+finish                                  # giveItem false (rare, held): the ore kept
+trigger Ranemaud                        # waitTime 0, no branch, no sprig, bit 1 clear: 40
+fill-inventory
+finish                                  # giveItem false: bit 1 stays clear
+free-inventory
+trade Ranemaud ChunkOfGoldOre x2 ChunkOfPlatinumOre x1 # bit 1 clear: nil
+charvar Quest[5][129]Option 3           # a GM: bits 0 and 1
+trigger Ranemaud                        # bit 1 set, no sprig: 42
+finish
+trade Ranemaud ChunkOfGoldOre x1 ChunkOfPlatinumOre x1 # gold 1: nil
+trade Ranemaud ChunkOfGoldOre x3 ChunkOfPlatinumOre x1 # gold 3: nil
+trade Ranemaud ChunkOfGoldOre x2 ChunkOfPlatinumOre x2 # platinum 2: nil
+trade Ranemaud ChunkOfGoldOre x2 ChunkOfPlatinumOre x1 ChunkOfDarksteelOre x1 # count 4: nil
+trade Ranemaud ChunkOfGoldOre x2 ChunkOfPlatinumOre x1 # 43
+finish                                  # the sprig; the ores taken
+item ChunkOfGoldOre x2                  # a GM: gold again
+item ChunkOfPlatinumOre                 # a GM
+trade Ranemaud ChunkOfGoldOre x2 ChunkOfPlatinumOre x1 # 43 (the sprig held)
+finish                                  # giveItem false (rare, held): the ores kept

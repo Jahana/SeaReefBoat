@@ -1,0 +1,52 @@
+# The Basics (otherAreas 6): the available check (fame level 5, The Clue completed) and Rycharde's wait, bracketed; 94's
+# options; the trade's Prog test, both sides. The Clue completed, Windurst fame 324 (level 4): no section: Valgeir 140;
+# Mhaura: Take 59 (defaults). Fame 325: Valgeir 144. Mhaura: Quest[4][5]DayCompleted 7993 (7993 + 7 = 8000, not below):
+# Rycharde nil (69); Prog 1 (a GM) and a popoto while available (the valid trade, in the wrong status): no trade
+# handler. Prog 0, 7992: 94, option 84 (below 85): nothing; option 86 (above 85): nothing; option 85: begun. Accepted:
+# the popoto at Prog 0: nil; at Prog 2 (a GM): nil. Selbina: Valgeir at Prog -1 (a GM, below 0): 145. The Clue made
+# accepted (a GM: available, then accepted) and The Basics available (a GM): The Clue's section only (Rycharde 85, not
+# The Basics' 94; Take 65).
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/Take/onTrigger Selbina/Valgeir/onTrigger Mhaura/onEventFinish/94
+char zone=Selbina pos=59,-15.27,20.2 job=WAR lvl=30
+quest OtherAreas.TheClue completed
+charvar Quest[4][5]DayCompleted 7993
+fame Windurst 324
+item BakedPopoto
+login
+trigger Valgeir                         # fame level 4: no section; his default 140
+finish
+fame Windurst 325                       # level 5
+trigger Valgeir                         # available: 144
+finish
+warp 19,-16,88.8 Mhaura
+fame Windurst 324
+trigger Take                            # no section: his default 59
+finish
+fame Windurst 325
+trigger Rycharde                        # 7993 + 7 < 8000 false: nil; his default 69
+finish
+charvar Quest[4][6]Prog 1               # a GM: the valid trade's Prog
+trade Rycharde BakedPopoto x1           # available: no trade handler; nothing
+charvar Quest[4][6]Prog 0               # a GM
+charvar Quest[4][5]DayCompleted 7992    # 7999 < 8000
+trigger Rycharde                        # 94
+finish option=84                        # below 85: nothing
+trigger Rycharde                        # 94
+finish option=86                        # above 85: nothing
+trigger Rycharde                        # 94
+finish option=85                        # the couscous, begun
+trade Rycharde BakedPopoto x1           # Prog 0 (below 1): nil
+charvar Quest[4][6]Prog 2               # a GM
+trade Rycharde BakedPopoto x1           # Prog 2 (above 1): nil
+warp 59,-15.27,20.2 Selbina
+charvar Quest[4][6]Prog -1              # a GM: below 0
+trigger Valgeir                         # Prog -1: 145
+finish
+warp 19,-16,88.8 Mhaura
+quest OtherAreas.TheBasics available    # a GM
+quest OtherAreas.TheClue available      # a GM (delQuest: addQuest alone leaves a completed quest completed)
+quest OtherAreas.TheClue accepted       # a GM: The Clue no longer completed
+trigger Rycharde                        # The Clue's section: 85; The Basics' is off
+finish
+trigger Take                            # The Clue's section: 65
+finish

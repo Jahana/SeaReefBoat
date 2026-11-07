@@ -1,0 +1,67 @@
+# A Little Knowledge (crystalWar 6), the edges: a level 29 Black Mage in The Eldieme Necropolis [S] (missions as the
+# main flow). Erlene below ADVANCED_JOB_LEVEL 30: no section: her default 15; a trade of 12 sheets while available: no
+# trade handler (nothing). ADVANCED_JOB_LEVEL 29 (a setting step): 10 (1), finished: begun. Crawlers' Nest [S]: Tucker
+# at Option 0, 12 berries: 14 (the test fails at Option 0); 6, finished: Option 1; 11 berries: 14; 12 berries and a
+# Flint Stone: 14 (not berries alone); a full inventory, 12 berries: 8 (1), finished: the sheet does not fit: nothing
+# confirmed, Option 1 kept; freed: 8, finished: one sheet, Option 2; 18 berries (12 and 6): 10 (one sheet: floor(18/12);
+# 12 taken, 6 back), finished: Option 3. Option 4 (a GM), 12 berries: 14 (the test wants 1-3); Option 5 (a GM): nil.
+# Eldieme [S]: Erlene, 11 or 13 sheets: nil; 12: 12 (1: a Black Mage), finished: Prog 1; 12 again at Prog 1: nil. Tucker
+# at Prog 1: nil. Erlene at Prog 2 (a GM): nil.
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/Erlene/onTrade TheEldiemeNecropolisS/onEventFinish/10 TheEldiemeNecropolisS/onEventFinish/12 CrawlersNestS/Tucker/onTrigger CrawlersNestS/Tucker/onTrade CrawlersNestS/onEventFinish/6 CrawlersNestS/onEventFinish/8 CrawlersNestS/onEventFinish/10
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=BLM lvl=29
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item SheetOfVellum x12
+item SheetOfVellum x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item Rolanberry x12
+item FlintStone
+login
+trigger Erlene                          # level 29, below ADVANCED_JOB_LEVEL 30: no section: 15 (her default)
+finish-if-event
+trade Erlene SheetOfVellum x12          # available: no trade handler (nothing)
+setting ADVANCED_JOB_LEVEL 29
+trigger Erlene                          # level 29 at the gate: 10 (1)
+finish option=0                         # begun
+warp 218.263,-32.441,-20.239 CrawlersNestS # beside Tucker
+trade Tucker Rolanberry x12             # Option 0: 14 (the test fails)
+finish                                  # no finish handler here (14 is Erlene's, in Eldieme [S])
+trigger Tucker                          # Option 0: 6
+finish                                  # Option 1
+trade Tucker Rolanberry x11             # 11 berries: 14
+finish
+trade Tucker Rolanberry x12 FlintStone x1 # not berries alone: 14
+finish
+fill-inventory
+trade Tucker Rolanberry x12             # Option 1, one stack: 8 (numAwarded 1)
+finish                                  # no room for the sheet: nothing confirmed, Option 1
+free-inventory
+trade Tucker Rolanberry x12             # 8 (1)
+finish                                  # one sheet; the stack taken; Option 2
+trade Tucker Rolanberry x18             # Option 2, 18 berries (12 and 6): 10 (floor(18/12) = 1; 12 confirmed)
+finish                                  # one more sheet; 12 taken, 6 back; Option 3
+charvar Quest[7][6]Option 4             # a GM
+trade Tucker Rolanberry x12             # Option 4: 14 (the test wants 1-3)
+finish
+charvar Quest[7][6]Option 5             # a GM
+trigger Tucker                          # Option 5: nil
+finish-if-event
+warp 378.436,-39.999,17.914 TheEldiemeNecropolisS # beside Erlene
+trade Erlene SheetOfVellum x11          # Prog 0, 11 sheets: nil
+trade Erlene SheetOfVellum x13          # 13 sheets: nil (not exactly 12)
+trade Erlene SheetOfVellum x12          # 12 sheets: 12 (1: a Black Mage)
+finish                                  # the sheets taken; Prog 1
+trade Erlene SheetOfVellum x12          # Prog 1: nil
+warp 218.263,-32.441,-20.239 CrawlersNestS
+trigger Tucker                          # Prog 1: nil
+finish-if-event
+warp 378.436,-39.999,17.914 TheEldiemeNecropolisS
+charvar Quest[7][6]Prog 2               # a GM
+trigger Erlene                          # Prog 2: nil (15)
+finish-if-event

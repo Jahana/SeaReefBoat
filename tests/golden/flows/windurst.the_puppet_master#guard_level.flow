@@ -1,0 +1,16 @@
+# The Puppet Master (windurst 81): the offer's level operand, getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL, at the
+# House of the Hero (_6n2, Windurst Walls). A SMN at level 39: with the setting at 40 (default): not met, the door's
+# default DOORS_SEALED_SHUT (its script: nothing); at 39.4 (a decimal: Lua compares 39 >= 39.4, false; a rounded read
+# would be 39 and pass): not met; at 39: met, 402, begun. The met side at the default setting is the main flow's
+# level 40; the other operands: the job (#guard_job), the mustZone (main).
+lists WindurstWalls/_6n2/onTrigger WindurstWalls/onEventFinish/402
+char zone=WindurstWalls pos=-24.5,-14.498,262.994 job=SMN lvl=39
+login
+trigger _6n2                                   # level 39 < 40: not met; DOORS_SEALED_SHUT
+finish-if-event
+setting AF1_QUEST_LEVEL 39.4
+trigger _6n2                                   # 39 < 39.4: not met; DOORS_SEALED_SHUT
+finish-if-event
+setting AF1_QUEST_LEVEL 39
+trigger _6n2                                   # 39 >= 39: 402
+finish                                         # begun

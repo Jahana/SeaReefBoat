@@ -1,0 +1,20 @@
+# Blood and Glory (windurst 87): the offer without the pole, and the level edge's met side. A level-71 WAR (the Pole of
+# Trials' level) at Staff 2300: 445 (oncePerZone); its finish with a full bag (no pole: giveItem false, not begun); a
+# second talk in the zone falls to the Golem's 343 (oncePerZone: priority Ignore); after a rezone 445 again, begun (the
+# pole, 0 weapon skill points, and the Weapon Training Guide).
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/onEventFinish/445
+char zone=WindurstWalls pos=122.6,-3.0,111.6 job=WAR lvl=71
+quest Windurst.CursesFoiledAgain1 completed
+quest Windurst.CursesFoiledAgain2 completed
+quest Windurst.CursesFoiledAGolem completed
+skill Staff 2300
+login
+trigger Shantotto                                   # level 71, Staff 2300, no guide: event 445 (oncePerZone)
+fill-inventory
+finish                                              # no pole, the bag full: giveItem false, not begun
+free-inventory
+trigger Shantotto                                   # 445 played this zone: the Golem's 343
+finish
+rezone
+trigger Shantotto                                   # after the rezone: 445 again
+finish                                              # the Pole of Trials and the Weapon Training Guide: begun

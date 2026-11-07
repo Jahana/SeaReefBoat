@@ -1,0 +1,34 @@
+# Trial Size Trial by Ice (sandoria 107): the battlefield. A SMN of level 20 with this quest accepted and the
+# Mini Tuning Fork of Ice; Quest[0][107]Prog 1 (GM). The fork's trade to IP_Entrance opens the entry menu 32000; its
+# update with option 33 (index 2, arena 1) registers and enters (the fork taken); the inventory filled by GM inside the
+# arena; Shiva_Prime_TSTBI of arena 1 (SHIVA_PRIME_ASA-18: mob 17608726) is killed and the win's 32001 opens within the
+# kill step. Its finish runs content:onEventFinishWin, which calls this quest: Shiva learned (SHIVA_UNLOCKED 0, 0, 4);
+# the Scroll of Instant Warp does not fit (npcUtil.giveItem: ITEM_CANNOT_BE_OBTAINED), the completion goes on:
+# San d'Oria fame +20, completed (Quest[0][107]Prog kept). The won arena's cleanup (21 s of ticks) takes the char out. A
+# second run (the fork by GM, completed: the entry holds for a completed quest), the inventory freed, won by a GM's
+# bfwin (Shiva does not spawn again this soon in the harness): Shiva known (no message), the scroll given, fame
+# +20 again, completeQuest again. Back in Northern San d'Oria, Castilchat's 736.
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=SMN lvl=20
+quest Sandoria.TrialSizeTrialByIce accepted
+item MiniTuningForkOfIce
+charvar Quest[0][107]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+login
+trade IP_Entrance MiniTuningForkOfIce x1  # the fork: the entry menu 32000
+update 32000 option=33                    # index 2, arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+fill-inventory
+kill SHIVA_PRIME_ASA-18                   # Shiva_Prime_TSTBI of arena 1: won, 32001 opens
+finish                                    # Shiva learned; the scroll does not fit; San d'Oria fame +20; completed
+free-inventory
+item MiniTuningForkOfIce                  # a GM
+tick 11000                                # the won arena's cleanup
+tick 10000                                # the char out of the battlefield (its effect gone)
+warp 558.5,-0.8,600.0 CloisterOfFrost     # back by IP_Entrance
+trade IP_Entrance MiniTuningForkOfIce x1  # completed: the entry menu 32000
+update 32000 option=33                    # registered, entered, the fork taken
+finish                                    # in the arena
+bfwin                                     # a GM's win (Shiva does not spawn again this soon): 32001
+finish                                    # Shiva known: nothing; the Scroll of Instant Warp; fame +20; completed again
+warp -187.2,0,109.3 NorthernSanDoria
+trigger Castilchat                        # completed: 736
+finish

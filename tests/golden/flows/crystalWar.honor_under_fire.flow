@@ -1,0 +1,68 @@
+# Honor Under Fire (crystalWar 43): a level 99 Warrior in Bastok Markets [S] with Quelling the Storm completed and the
+# WotG mission Crossroads of Time current (GMs; that mission's sections are Southern San d'Oria [S]'s: it plays nothing
+# here; the other missions as group 1's flows). Gentle Tiger 66, finished: begun; Prog 0: 67. Vunkerl Inlet [S]: the
+# Beastman Ensign at Prog 0: nil (no default); qm8 114, finished: Prog 1; qm8 at Prog 1: nil. Bastok Markets [S]:
+# Gentle Tiger 67 (Prog 1). Vunkerl Inlet [S]: the Ensign 115, finished: Prog 2; at Prog 2: nil. Bastok Markets [S]:
+# Gentle Tiger 68, finished: the Flare Grenade, Prog 3; 69. Vunkerl Inlet [S]: the Ensign 116, finished: Prog 4. Bastok
+# Markets [S]: Gentle Tiger, the grenade held: 69; the grenade taken (a GM): 70, finished: the grenade again. A warp
+# into Everbloom Hollow with no instance puts the char back into the previous zone at 0,0,0, its previous zone
+# Everbloom Hollow (ZoneHost InstanceCharAttach; the zone's onInstanceLoadFailed names no exit): from Vunkerl Inlet
+# [S], at Prog 4: nil. Prog 5 is Everbloom Hollow's 10000 finish (the instance, not implemented; waived in `#edges`): a
+# GM here. Prog 5: Gentle Tiger: no handler (109); Vunkerl Inlet [S] from Bastok Markets [S]: nil; from Everbloom
+# Hollow (the warp put back): 117 (left open), finished: Prog 6. Bastok Markets [S]: Gentle Tiger 71, finished:
+# completed (an Elixir Tank).
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/66 BastokMarketsS/onEventFinish/68 BastokMarketsS/onEventFinish/70 BastokMarketsS/onEventFinish/71 VunkerlInletS/onZoneIn/1 VunkerlInletS/qm8/onTrigger VunkerlInletS/Beastman_Ensign/onTrigger VunkerlInletS/onEventFinish/114 VunkerlInletS/onEventFinish/115 VunkerlInletS/onEventFinish/116 VunkerlInletS/onEventFinish/117
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+quest CrystalWar.QuellingTheStorm completed
+mission Wotg CrossroadsOfTime current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # 66
+finish                                  # begun
+trigger Gentle_Tiger                    # Prog 0: 67
+finish
+warp 242.5,-31.995,242.999 VunkerlInletS
+trigger Beastman_Ensign                 # Prog 0: nil
+finish-if-event
+warp -355.028,-32.084,286.333 VunkerlInletS
+trigger qm8                             # Prog 0: 114
+finish                                  # Prog 1
+trigger qm8                             # Prog 1: nil
+finish-if-event
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 1: 67
+finish
+warp 242.5,-31.995,242.999 VunkerlInletS
+trigger Beastman_Ensign                 # Prog 1: 115
+finish                                  # Prog 2
+trigger Beastman_Ensign                 # Prog 2: nil
+finish-if-event
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 2: 68
+finish                                  # the Flare Grenade; Prog 3
+trigger Gentle_Tiger                    # Prog 3: 69
+finish
+warp 242.5,-31.995,242.999 VunkerlInletS
+trigger Beastman_Ensign                 # Prog 3: 116
+finish                                  # Prog 4
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 4, the grenade held: 69
+finish
+delkeyitem FlareGrenade                 # a GM
+trigger Gentle_Tiger                    # Prog 4, no grenade: 70
+finish                                  # the grenade again
+warp 242.5,-31.995,242.999 VunkerlInletS # from Bastok Markets [S] at Prog 4: nil
+warp 0,0,0 EverbloomHollow              # no instance: put back in Vunkerl Inlet [S], from Everbloom Hollow: Prog 4: nil
+warp -202.432,-9.998,2.237 BastokMarketsS
+charvar Quest[7][43]Prog 5              # a GM: what Everbloom Hollow's 10000 finish does
+trigger Gentle_Tiger                    # Prog 5: no handler: 109
+finish-if-event
+warp 242.5,-31.995,242.999 VunkerlInletS # from Bastok Markets [S] at Prog 5: nil
+warp 0,0,0 EverbloomHollow open         # no instance: back in Vunkerl Inlet [S], from Everbloom: Prog 5: 117, left open
+finish                                  # Prog 6
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 6: 71
+finish                                  # completed (an Elixir Tank)

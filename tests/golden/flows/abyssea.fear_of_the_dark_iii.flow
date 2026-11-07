@@ -1,0 +1,25 @@
+# Fear of the Dark III (abyssea 2): a level 99 Warrior in Abyssea - La Theine with ten Clionid Wings and 100 cruor (a
+# GM, after the login). A trade of three while available: no handler. Secodiand: 161, finished on option 0: not begun;
+# 161, finished on option 2: begun (any option but 0). Accepted: Secodiand 159; a trade of two: nil; of four: 160 (three
+# at least), finished: confirmed, 200 cruor (CRUOR_TOTAL 200, 300), completed (10 Abyssea - La Theine fame). Completed:
+# Secodiand 159; three more: 160 again, finished: 200 cruor more, completed again (the second section matches a
+# completed quest).
+lists AbysseaLaTheine/Secodiand/onTrigger AbysseaLaTheine/Secodiand/onTrade AbysseaLaTheine/onEventFinish/161 AbysseaLaTheine/onEventFinish/159 AbysseaLaTheine/onEventFinish/160
+char zone=AbysseaLaTheine pos=-488,-2.946,759.171 job=WAR lvl=99
+item ClionidWing x10
+login
+currency cruor 100                      # a GM
+trade Secodiand ClionidWing x3          # available: no trade handler: nothing
+trigger Secodiand                       # available: 161
+finish option=0                         # not begun
+trigger Secodiand                       # 161
+finish option=2                         # begun (any option but 0)
+trigger Secodiand                       # accepted: 159
+finish
+trade Secodiand ClionidWing x2          # two: nil
+trade Secodiand ClionidWing x4          # four (three at least): 160
+finish                                  # confirmed; 200 cruor (300 in all); completed: 10 fame
+trigger Secodiand                       # completed: 159
+finish
+trade Secodiand ClionidWing x3          # completed: 160 again
+finish                                  # confirmed; 200 cruor (500 in all); completed again (the reward again)

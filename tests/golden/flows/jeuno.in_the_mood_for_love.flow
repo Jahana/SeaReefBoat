@@ -1,0 +1,30 @@
+# In the Mood for Love (jeuno 69): Lower Jeuno's Odasel (no script; default 162) and Matoaka (script: her shop). A level
+# 75 Warrior, CoP The Road Forks current (past A Vessel Without a Captain), two Chameleon Diamonds and a Chocobo Feather.
+# Available: 10035 (0, Chameleon Diamond): begun. Accepted: Odasel's 10037 (0, Chameleon Diamond); Matoaka: no section
+# (her shop); two diamonds: nil; the diamond and the feather: nil; the diamond: 10036, finished: completed (4800 gil,
+# Pick-up Artist), fame +7 x3, the diamond taken, Option 1. Completed: Odasel's 10038; the other diamond: no onTrade; Matoaka at Option 1: 10039 (Option
+# 0); again: nil (her shop).
+lists LowerJeuno/Odasel/onTrigger LowerJeuno/Odasel/onTrade LowerJeuno/Matoaka/onTrigger LowerJeuno/onEventFinish/10035 LowerJeuno/onEventFinish/10036 LowerJeuno/onEventFinish/10039
+char zone=LowerJeuno pos=-56.9,-6,-111.7 job=WAR lvl=75
+mission Cop TheRoadForks current
+item ChameleonDiamond x2
+item ChocoboFeather
+login
+trigger Odasel                          # available: 10035 (0, Chameleon Diamond)
+finish                                  # begun
+trigger Odasel                          # accepted: 10037
+finish
+warp -35.7,-6.1,-121.9 LowerJeuno       # by Matoaka
+trigger Matoaka                         # accepted: no section; her shop
+warp -56.9,-6,-111.7 LowerJeuno         # by Odasel
+trade Odasel ChameleonDiamond x2        # two: nil; nothing
+trade Odasel ChameleonDiamond x1 ChocoboFeather x1 # an extra item: nil
+trade Odasel ChameleonDiamond x1        # 10036
+finish                                  # completed: 4800 gil, Pick-up Artist; fame +7 x3; the diamond taken; Option 1
+trigger Odasel                          # completed: 10038
+finish
+trade Odasel ChameleonDiamond x1        # completed: no onTrade: nothing (the second diamond kept)
+warp -35.7,-6.1,-121.9 LowerJeuno       # by Matoaka
+trigger Matoaka                         # Option 1: 10039
+finish                                  # Option 0
+trigger Matoaka                         # Option 0: nil; her shop

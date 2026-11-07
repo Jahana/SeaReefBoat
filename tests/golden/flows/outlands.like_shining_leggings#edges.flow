@@ -1,0 +1,29 @@
+# Like Shining Leggings (outlands 139), the edges: a level 75 Warrior, accepted at Prog 8 (a GM's char var), 5 Rusty
+# Leggings, a Bone Chip. The chip: not a legging: 128 (8). Two leggings: 8 + 2 = 10: 129 (nothing taken yet); finished with a full inventory: quest:complete false (the
+# scroll not given): the leggings kept, still accepted at Prog 8. Freed: three leggings: 11: 129 again; finished:
+# completed, the three taken (tradeComplete), two left. The Lua's inner `turnedInVar <= 9` nil arm cannot be reached
+# (below 10 with a legging in the trade, the var is at most 8).
+lists Norg/Heizo/onTrigger Norg/Heizo/onTrade Norg/onEventFinish/129
+char zone=Norg pos=-1.106,-4.756,22.777 job=WAR lvl=75
+fame Norg 125
+quest Outlands.LikeShiningLeggings accepted
+charvar Quest[5][139]Prog 8
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item RustyLeggings
+item BoneChip
+login
+trigger Heizo                           # 128 (8)
+finish
+trade Heizo BoneChip x1                 # not a legging: 128 (8)
+finish
+trade Heizo RustyLeggings x2            # 10: 129
+fill-inventory
+finish                                  # inventory full: complete false: nothing taken
+free-inventory
+trigger Heizo                           # 128 (8): still accepted
+finish
+trade Heizo RustyLeggings x3            # 11: 129
+finish                                  # completed; the three taken

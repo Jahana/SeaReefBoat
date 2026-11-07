@@ -1,0 +1,64 @@
+# What Price Loyalty (crystalWar 50): a level 99 Warrior in Bastok Markets [S] with Beneath the Mask completed and the
+# WotG mission Fate in Haze current (GMs; that mission plays nothing here; the other missions as group 1's flows; The
+# Fighting Fourth left available: no section at Roderich). Gentle Tiger 348, finished: begun, the Sack of Victuals;
+# Prog 0: 354. North Gustaberg [S]: Roderich 10, finished: Prog 1, the sack taken; 11. Bastok Markets [S]: Gentle
+# Tiger 349, finished: Prog 2; 355. Xarcabard [S] (from Bastok Markets [S]: any zone): 8 (left open), finished: Prog
+# 3, the Commander's Endorsement. Bastok Markets [S]: Gentle Tiger 355. Xarcabard [S] (Prog 3: no zone-in reply): the
+# Forbidding Portal 9, finished: Prog 4; Prog 4: no handler: its default NO_RESPONSE. Bastok Markets [S]: Gentle
+# Tiger, the endorsement held: 355; taken (a GM): 357, finished: the endorsement again. Prog 5 is Everbloom Hollow's
+# 10000 finish (the instance, not implemented; waived in `#edges`): a GM here. Xarcabard [S] from Bastok Markets [S]
+# at Prog 5: nil. A warp into Everbloom Hollow with no instance puts the char back into the previous zone at 0,0,0,
+# its previous zone Everbloom Hollow (ZoneHost InstanceCharAttach; Xarcabard [S]'s zone-in sets the 0,0,0 arrival
+# down at -414 -46.5 20): from Everbloom Hollow at Prog 5: 10 (left open), finished: Prog 6. Bastok Markets [S]:
+# Gentle Tiger 350, finished: completed (a Fourth Staff); completed: 356, twice (The Truth Lies Hid wants Adieu,
+# Lilisette: not offered).
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/348 BastokMarketsS/onEventFinish/349 BastokMarketsS/onEventFinish/357 BastokMarketsS/onEventFinish/350 NorthGustabergS/Roderich/onTrigger NorthGustabergS/onEventFinish/10 XarcabardS/onZoneIn/1 XarcabardS/Forbidding_Portal/onTrigger XarcabardS/onEventFinish/8 XarcabardS/onEventFinish/9 XarcabardS/onEventFinish/10
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+quest CrystalWar.BeneathTheMask completed
+mission Wotg FateInHaze current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # 348
+finish                                  # begun; the Sack of Victuals
+trigger Gentle_Tiger                    # Prog 0, the sack: 354
+finish
+warp -398.539,39.991,-90.445 NorthGustabergS
+trigger Roderich                        # Prog 0, the sack: 10
+finish                                  # Prog 1; the sack taken
+trigger Roderich                        # Prog 1: 11
+finish
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 1: 349
+finish                                  # Prog 2
+trigger Gentle_Tiger                    # Prog 2: 355
+finish
+warp -414,-46.5,20 XarcabardS open      # Prog 2, from Bastok Markets [S] (any zone): 8, left open
+finish                                  # Prog 3; the Commander's Endorsement
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 3, the endorsement: 355
+finish
+warp 321.5,-10.835,158.699 XarcabardS   # Prog 3: no zone-in reply
+trigger Forbidding_Portal               # Prog 3, the endorsement: 9
+finish                                  # Prog 4
+trigger Forbidding_Portal               # Prog 4: no handler: NO_RESPONSE
+finish-if-event
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 4, the endorsement held: 355
+finish
+delkeyitem CommandersEndorsement        # a GM
+trigger Gentle_Tiger                    # Prog 4, no endorsement: 357
+finish                                  # the endorsement again
+charvar Quest[7][50]Prog 5              # a GM: what Everbloom Hollow's 10000 finish does
+warp 321.5,-10.835,158.699 XarcabardS   # from Bastok Markets [S] at Prog 5: nil
+warp 0,0,0 EverbloomHollow open         # no instance: back in Xarcabard [S], from Everbloom: Prog 5: 10, left open
+finish                                  # Prog 6
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 6: 350
+finish                                  # completed (a Fourth Staff)
+trigger Gentle_Tiger                    # completed: 356
+finish
+trigger Gentle_Tiger                    # completed: 356 again (no rival)
+finish

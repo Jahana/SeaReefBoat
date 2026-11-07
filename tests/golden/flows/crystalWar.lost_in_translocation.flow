@@ -1,0 +1,44 @@
+# Lost in Translocation (crystalWar 0): a level 99 Warrior in Batallia Downs [S] (missions as A Little Knowledge's
+# flows). Thorben 103, finished: begun. Thorben, no piece, Option 0: 104. The Eldieme Necropolis [S]: Erik 3,
+# finished: the left map piece; Erik again: nil (his default 1). Batallia Downs [S]: Thorben, one piece: 105,
+# finished: Option 1; again: 106. Eldieme [S]: Gravestone 4, finished: the middle piece; again: nil
+# (NAMES_CARVED_ON_STONE). Sarcophagus_map_quest 5, finished: the right piece; again: nil (SARCOPHAGUS_SEALED).
+# Batallia Downs [S]: Thorben, the three: 107, finished: completed (2000 gil x GIL_RATE 1.03125 = 2062.5, paid as
+# 2063, 2000 exp, the Map of Grauberg), the pieces taken. Thorben: nil (108).
+lists BatalliaDownsS/Thorben/onTrigger BatalliaDownsS/onEventFinish/103 BatalliaDownsS/onEventFinish/105 BatalliaDownsS/onEventFinish/107 TheEldiemeNecropolisS/Erik/onTrigger TheEldiemeNecropolisS/Gravestone/onTrigger TheEldiemeNecropolisS/Sarcophagus_map_quest/onTrigger TheEldiemeNecropolisS/onEventFinish/3 TheEldiemeNecropolisS/onEventFinish/4 TheEldiemeNecropolisS/onEventFinish/5
+char zone=BatalliaDownsS pos=176.846,8.038,-419.244 job=WAR lvl=99
+setting GIL_RATE 1.03125
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Thorben                         # available: 103
+finish                                  # begun
+trigger Thorben                         # no piece, Option 0: 104
+finish
+warp 258.643,-33.249,101.401 TheEldiemeNecropolisS
+trigger Erik                            # no left piece: 3
+finish                                  # the left map piece
+trigger Erik                            # the piece held: nil (his default 1)
+finish-if-event
+warp 176.846,8.038,-419.244 BatalliaDownsS
+trigger Thorben                         # one piece: 105
+finish                                  # Option 1
+trigger Thorben                         # Option 1: 106
+finish
+warp 254.428,-32.999,21.501 TheEldiemeNecropolisS
+trigger Gravestone                      # no middle piece: 4
+finish                                  # the middle piece
+trigger Gravestone                      # held: nil (NAMES_CARVED_ON_STONE)
+finish-if-event
+trigger Sarcophagus_map_quest           # no right piece: 5
+finish                                  # the right piece
+trigger Sarcophagus_map_quest           # held: nil (SARCOPHAGUS_SEALED)
+finish-if-event
+warp 176.846,8.038,-419.244 BatalliaDownsS
+trigger Thorben                         # the three: 107
+finish                                  # completed (2063 gil, 2000 exp, the Map of Grauberg); pieces taken
+trigger Thorben                         # completed: nil (108)
+finish-if-event

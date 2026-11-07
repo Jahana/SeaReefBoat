@@ -1,0 +1,36 @@
+# Recollections (windurst 67): a WAR 75, The Three Magi completed by GM: 268 (not BLM). Chumimi's seeds, not accepted:
+# nothing. Laityn, not accepted: 10006. The Ore Door's key, not accepted: nothing, also at var 2 (GM). Accepted by GM,
+# no Foe Finder MK I: no 268 (it needs this quest available): her 259; the seeds at var 0 (Laityn skipped): 271: var
+# 2; Laityn at var 2: 10006. Foe Finder MK I (GM): 275 (no job read): Wizard's Sabots, completed. Completed: her 259
+# (WAR: no 276).
+char zone=HeavensTower pos=0.0,30.75,21.5 job=WAR lvl=75
+quest Windurst.TheThreeMagi completed
+item BagOfSeeds
+item WhineCellarKey
+login
+trigger Chumimi                         # The Three Magi completed, available, not BLM: 268
+finish
+trade Chumimi BagOfSeeds x1             # not accepted: nothing
+warp -38.7,0.0,-58.2 RuludeGardens
+trigger Laityn                          # not accepted: his 10006
+finish
+warp -18.75,-3.0,68.5 CastleZvahlKeep
+trade _4i5 WhineCellarKey x1            # not accepted: nothing
+charvar recollectionsQuest 2
+trade _4i5 WhineCellarKey x1            # var 2, not accepted: nothing
+charvar recollectionsQuest 0
+quest Windurst.Recollections accepted   # GM
+warp 0.0,30.75,21.5 HeavensTower
+trigger Chumimi                         # accepted, no key item: no 268: her 259
+finish
+trade Chumimi BagOfSeeds x1             # accepted, var 0: 271 (0, 520)
+finish                                  # the seeds taken; var 2
+warp -38.7,0.0,-58.2 RuludeGardens
+trigger Laityn                          # var 2: his 10006
+finish
+warp 0.0,30.75,21.5 HeavensTower
+keyitem FoeFinderMkI
+trigger Chumimi                         # accepted, the key item (WAR): 275
+finish                                  # Wizard's Sabots; var 0; the key item taken; fame 20; completed
+trigger Chumimi                         # completed, WAR: her 259
+finish

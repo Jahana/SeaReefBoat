@@ -1,0 +1,20 @@
+# Say It with a Handbag (crystalWar 41), the quest's own var at the completion (missions as the main flow's): accepted,
+# sayItWithAHandbagCS 4, the Repaired Handbag and Quest[7][41]Prog 1 (GMs). Hampu-Kampu: 174; finished:
+# npcUtil.completeQuest (the Trainee's Needle, the CS var 0, completed), then the handbag taken and
+# sayItWithAHandbagBonusCS 1. npcUtil.completeQuest does no cleanup: Quest[7][41]Prog stays 1 (quest:complete's cleanup
+# would clear it).
+lists WindurstWatersS/Hampu-Kampu/onTrigger WindurstWatersS/onEventFinish/174
+char zone=WindurstWatersS pos=-114.097,-1,-158.703 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+quest CrystalWar.SayItWithAHandbag accepted
+charvar sayItWithAHandbagCS 4
+keyitem RepairedHandbag
+charvar Quest[7][41]Prog 1              # a GM: the quest's own var
+login
+trigger Hampu-Kampu                     # the handbag, CS 4: 174
+finish                                  # the Trainee's Needle; the CS var 0; completed, Prog kept; the handbag taken
+trigger Hampu-Kampu                     # completed: 175
+finish

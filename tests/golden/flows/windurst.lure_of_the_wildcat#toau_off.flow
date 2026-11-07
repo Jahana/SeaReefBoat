@@ -1,0 +1,19 @@
+# Lure of the Wildcat (Windurst) (windurst 94): the guard xi.settings.main.ENABLE_TOAU == 1 (a number setting:
+# settings/default/main.lua has 1). 0, 2 and 1.25 (a fraction: Lua compares the number as it is, so 1.25 is not 1; a
+# port that rounds the setting would offer it) are not 1: not offered, Ibwam's own script (740). Then 1: 736 (its
+# finish gives the badge and begins it).
+lists WindurstWoods/Ibwam/onTrigger WindurstWoods/onEventFinish/736
+char zone=WindurstWoods pos=-24,2.75,-59 job=WAR lvl=20
+setting ENABLE_TOAU 0
+login
+trigger Ibwam                             # ENABLE_TOAU 0: not offered; 740
+finish
+setting ENABLE_TOAU 2
+trigger Ibwam                             # ENABLE_TOAU 2: not offered; 740
+finish
+setting ENABLE_TOAU 1.25
+trigger Ibwam                             # ENABLE_TOAU 1.25: not offered; 740
+finish
+setting ENABLE_TOAU 1
+trigger Ibwam                             # ENABLE_TOAU 1: 736
+finish                                    # the Green Sentinel Badge; begun

@@ -1,0 +1,54 @@
+# The Brugaire Consortium (sandoria 12): Fontoumant, Regine, Apstaule and Thierride in Port San d'Oria; the deliveries.
+# Available: 100 gil to Fontoumant (no trade handler: nothing); 509 with option 1 (nothing: option 0 accepts); 509 with
+# option 0 (the Parcel for the Magic Shop, begun). Prog 0 / Option 0: his 560; 99 gil (fewer than 100: nil); 101 gil
+# (not exactly 100: nil); a chip to Regine (nil; her script: Flyers for Regine not accepted, nothing); the parcel and a
+# chip (not exactly the parcel: nil); the parcel (535: taken, Prog 1); 100 gil at Prog 1 / Option 0 (Prog != Option:
+# nil); his 511 (the Parcel for the Auction House, Option 1); his 560; the parcel and a chip to Apstaule (nil), the
+# parcel (540: Prog 2); his 512 (the Parcel for the Pub, Option 2); the parcel and a chip to Thierride (nil: A Taste for
+# Meat's 529 or his script's 529), the parcel (539: Prog 3); his 515 (completed: Lauan Shield, fame +20, Courier
+# Extraordinaire); then his default 561, and 100 gil (nothing). The paid deliveries (608-610) and each parcel at the
+# wrong Prog are #gil; Prog 3 = Option 3 (the Prog < 3 operand) is #prog3.
+# Fontoumant and Apstaule have no script (defaults 561, 542). Regine's script always starts 510 on a talk (not used
+# here) and takes 10 gil for Flyers for Regine (not accepted). Thierride's script starts 529 on any trade; A Taste for
+# Meat (available, Prog 0) answers his trades with 529 too; 539 (Progress) wins over both. Riding on the Clouds (LB4) and
+# Her Memories name Fontoumant and Thierride but are closed to a WAR 10.
+lists PortSanDoria/Fontoumant/onTrigger PortSanDoria/Fontoumant/onTrade PortSanDoria/Regine/onTrade PortSanDoria/Apstaule/onTrade PortSanDoria/Thierride/onTrade PortSanDoria/onEventFinish/509 PortSanDoria/onEventFinish/511 PortSanDoria/onEventFinish/512 PortSanDoria/onEventFinish/515 PortSanDoria/onEventFinish/535 PortSanDoria/onEventFinish/539 PortSanDoria/onEventFinish/540
+char zone=PortSanDoria pos=-9.133,-8,-122.199 job=WAR lvl=10 gil=1000
+item BoneChip
+login
+trade Fontoumant gil=100                  # available: no trade handler, no script: nothing
+trigger Fontoumant                        # 509
+finish option=1                           # option 1: nothing
+trigger Fontoumant                        # 509
+finish                                    # option 0: the Parcel for the Magic Shop; begun
+trigger Fontoumant                        # Prog 0 = Option 0: 560 (Event)
+finish
+trade Fontoumant gil=99                   # fewer than 100 gil: nil
+trade Fontoumant gil=101                  # not exactly 100 gil: nil
+walk 69.801,-8.102,-73.724
+trade Regine BoneChip x1                  # Prog 0, not the parcel: nil; her script: nothing
+trade Regine ParcelForTheMagicShop x1 BoneChip x1   # Prog 0, not exactly the parcel: nil
+trade Regine ParcelForTheMagicShop x1     # Prog 0, exactly the parcel: 535
+finish                                    # the parcel taken; Prog 1
+walk -9.133,-8,-122.199
+trade Fontoumant gil=100                  # Prog 1, Option 0 (not equal): nil
+trigger Fontoumant                        # Prog 1 > Option 0: 511
+finish                                    # the Parcel for the Auction House; Option 1
+trigger Fontoumant                        # Prog 1 = Option 1: 560
+finish
+walk -5.483,-13.3,-157.517
+trade Apstaule ParcelForTheAuctionHouse x1 BoneChip x1   # Prog 1, not exactly the parcel: nil (no script)
+trade Apstaule ParcelForTheAuctionHouse x1   # Prog 1: 540
+finish                                    # the parcel taken; Prog 2
+trigger Fontoumant                        # Prog 2 > Option 1: 512
+finish                                    # the Parcel for the Pub; Option 2
+walk -65.949,-5.496,-28.792
+trade Thierride ParcelForThePub x1 BoneChip x1   # Prog 2, not exactly the parcel: nil; A Taste for Meat's / his script's 529
+finish
+trade Thierride ParcelForThePub x1        # Prog 2: 539
+finish                                    # the parcel taken; Prog 3
+trigger Fontoumant                        # Prog 3 > Option 2: 515
+finish                                    # completed: Lauan Shield, fame +20, Courier Extraordinaire
+trigger Fontoumant                        # completed: no section; his default 561
+finish
+trade Fontoumant gil=100                  # completed: no trade handler: nothing

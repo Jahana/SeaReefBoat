@@ -1,0 +1,153 @@
+# The Moogle's Picnic! (otherAreas 101) with its era module (xi.pre(SOA): RESTRICT_CONTENT 1, ENABLE_SOA 0): the
+# module's 30011 finish copy in every Mog House zone but Bastok Mines (#era's). Accepted (a GM), inside each zone's
+# Mog House: the trade: 30011, finished: the module's copy: Prog 1, the Timer = JstMidnight() (1800025200; the
+# quest's own would set now + 60). The items given again (GMs) for the next zone (the trade checks no Prog). First,
+# in Bastok Mines' Mog House, the module's check's edges: the previous quest not completed (Picnic, Wild; at the
+# quest's fame level), the fame level below, the local mustZone 1, no bed: each the menu; then the offer (option
+# 0: questSeen 1); questSeen 1: the menu; in Al Zahbi's (not the home nation): the menu.
+module modules/era/lua/quests/otherareas/the_moogles_picnic.lua
+lists BastokMines/Moogle/onTrigger BastokMines/onEventFinish/30009 AlZahbi/Moogle/onTrigger AlZahbi/Moogle/onTrade AlZahbi/onEventFinish/30011 AhtUrhganWhitegate/Moogle/onTrade AhtUrhganWhitegate/onEventFinish/30011 SouthernSanDoriaS/Moogle/onTrade SouthernSanDoriaS/onEventFinish/30011 BastokMarketsS/Moogle/onTrade BastokMarketsS/onEventFinish/30011 WindurstWatersS/Moogle/onTrade WindurstWatersS/onEventFinish/30011 SouthernSanDoria/Moogle/onTrade SouthernSanDoria/onEventFinish/30011 NorthernSanDoria/Moogle/onTrade NorthernSanDoria/onEventFinish/30011 PortSanDoria/Moogle/onTrade PortSanDoria/onEventFinish/30011 BastokMarkets/Moogle/onTrade BastokMarkets/onEventFinish/30011 PortBastok/Moogle/onTrade PortBastok/onEventFinish/30011 WindurstWaters/Moogle/onTrade WindurstWaters/onEventFinish/30011 WindurstWalls/Moogle/onTrade WindurstWalls/onEventFinish/30011 PortWindurst/Moogle/onTrade PortWindurst/onEventFinish/30011 WindurstWoods/Moogle/onTrade WindurstWoods/onEventFinish/30011 RuludeGardens/Moogle/onTrade RuludeGardens/onEventFinish/30011 UpperJeuno/Moogle/onTrade UpperJeuno/onEventFinish/30011 LowerJeuno/Moogle/onTrade LowerJeuno/onEventFinish/30011 PortJeuno/Moogle/onTrade PortJeuno/onEventFinish/30011 WesternAdoulin/Moogle/onTrade WesternAdoulin/onEventFinish/30011 EasternAdoulin/Moogle/onTrade EasternAdoulin/onEventFinish/30011
+char zone=BastokMines pos=116.9,-1.6,-72 job=WAR lvl=75 nation=1
+setting ENABLE_AMK 0                    # AMK 1 (30023 at the Moogle) off: #kinds shows it
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+fame Bastok 325
+charvar Quest[4][101]bedPlacedTime 1799593199
+login
+zoneline BastokMines                    # into the Mog House
+trigger Moogle                          # GiveAMoogleABreak available (no bed of its own: no reply), not completed: the menu
+quest OtherAreas.GiveAMoogleABreak completed # a GM
+fame Bastok 324                         # a GM: level 4
+trigger Moogle                          # fame level 4: the menu
+fame Bastok 325                         # a GM: level 5
+localvar Quest[4][101]mustZone 1        # a GM
+trigger Moogle                          # the local mustZone 1: the menu
+localvar Quest[4][101]mustZone 0        # a GM
+charvar Quest[4][101]bedPlacedTime 0    # a GM
+trigger Moogle                          # no bed: the menu
+charvar Quest[4][101]bedPlacedTime 1799593199 # a GM: before the tally - 7 days
+trigger Moogle                          # 30009
+finish option=0                         # questSeen 1
+trigger Moogle                          # questSeen 1: the menu
+warp -106.3,0,60 AlZahbi
+zoneline AlZahbi                        # into the Mog House (questSeen cleared)
+trigger Moogle                          # not the home nation: the menu
+quest OtherAreas.TheMooglePicnic accepted # a GM
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp 100.023,0,-91.762 AhtUrhganWhitegate
+zoneline AhtUrhganWhitegate             # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -176.1,-2,38.7 SouthernSanDoriaS
+zoneline SouthernSanDoriaS              # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -59,-4,-139 BastokMarketsS
+zoneline BastokMarketsS                 # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -29.8,-3.5,42.6 WindurstWatersS
+zoneline WindurstWatersS                # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp 123.7,0,92.1 SouthernSanDoria
+zoneline SouthernSanDoria               # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp 128.3,-6.5,97.2 NorthernSanDoria
+zoneline NorthernSanDoria               # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -17.65,-8,-129.728 PortSanDoria
+zoneline PortSanDoria                   # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -98.9,-4.8,-77.5 BastokMarkets
+zoneline BastokMarkets                  # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -3,1.407,49 PortBastok
+zoneline PortBastok                     # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -50.9,-6.25,109.3 WindurstWaters
+zoneline WindurstWaters                 # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -120.188,-5.5,122.428 WindurstWalls
+zoneline WindurstWalls                  # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp 0.201,-6,186.699 PortWindurst
+zoneline PortWindurst                   # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -23.8,2.5,-44.6 WindurstWoods
+zoneline WindurstWoods                  # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp 4,2.5,100 RuludeGardens
+zoneline RuludeGardens                  # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -73.5,-1.2,57.3 UpperJeuno
+zoneline UpperJeuno                     # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp 15.5,-0.1,-6.1 LowerJeuno
+zoneline LowerJeuno                     # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp -52.7,6.1,-4.6 PortJeuno
+zoneline PortJeuno                      # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp 79.594,32,135.725 WesternAdoulin
+zoneline WesternAdoulin                 # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200
+warp 2.444,-11.439,-16.595 EasternAdoulin
+zoneline EasternAdoulin                 # into the Mog House
+item ShrimpLure
+item StickOfSelbinaButter
+trade Moogle ShrimpLure x1 StickOfSelbinaButter x1 # 30011
+finish                                  # the module's copy: Prog 1, Timer 1800025200

@@ -1,0 +1,26 @@
+# Vanishing Act's edges: a level 75 Warrior, Delivering the Goods completed (a GM: no Stage, no zoning flag). Available:
+# Qutiba 42 at once, finished with option 2: still available; again, option 0: begun. Accepted, Prog 0: into trigger
+# area 2: nil (and the zone's switch: vanishingactCS 0: nothing). The Rainbow Berry (a GM) at Prog 0: Ulamaal 45 with a
+# full bag, finished: the silver piece does not fit: no completion (the berry kept, no zoning flag); freed: Ulamaal 45:
+# completed, the berry taken.
+lists AhtUrhganWhitegate/Qutiba/onTrigger AhtUrhganWhitegate/Ulamaal/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/2 AhtUrhganWhitegate/onEventFinish/42 AhtUrhganWhitegate/onEventFinish/45
+char zone=AhtUrhganWhitegate pos=92.341,-6.5,-127.5 job=WAR lvl=75
+quest AhtUrhgan.DeliveringTheGoods completed
+login
+trigger Qutiba                          # no Stage, no flag: 42
+finish option=2                         # not option 0: still available
+trigger Qutiba                          # 42
+finish option=0                         # Stage 0; begun
+warp -80,-6,115 AhtUrhganWhitegate      # south of trigger area 2
+tick 1000
+tick 1000
+tick 1000
+walk -80,-6,125                         # into area 2 at Prog 0: nil
+finish-if-event
+keyitem RainbowBerry                    # a GM
+fill-inventory
+trigger Ulamaal                         # the berry: 45
+finish                                  # full: complete false: nothing more
+free-inventory
+trigger Ulamaal                         # the berry still held: 45
+finish                                  # completed; silver piece; needToZone; berry taken; ATOH Stage now + 60

@@ -1,0 +1,12 @@
+# The Talekeeper's Gift (bastok 56): its Timer reached (none set) but its mustZone set (by GM, after the login): not
+# offered, The Talekeeper's Truth's 166 answers (at Prog 0 the offer would be 170); after a rezone clears it, 170. The
+# check's last condition alone: the main flow's 165 sets the Timer too, which the check reads first.
+char zone=BastokMines pos=-13,7,29 job=WAR lvl=50
+quest Bastok.TheTalekeepersTruth completed
+login
+charvar Quest[1][56]mustZone 234
+trigger Deidogg                 # Prog 0, the mustZone set: not offered; 166
+finish
+rezone                          # the mustZone cleared
+trigger Deidogg                 # offered, Prog 0: 170
+finish                          # Prog 1

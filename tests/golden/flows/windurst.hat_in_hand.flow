@@ -1,0 +1,71 @@
+# Hat in Hand (windurst 0): Baren-Moren in Windurst Waters (no DefaultActions entry: his script answers every talk; with
+# no quest arm it plays one of six standard events by math.randomInt, the seeded script RNG, the same on both sides).
+# Available with All At Sea's Prog var 1, then 2 (GMs): no offer; his random standard event. The New Model Hat by GM while
+# available: 52 (the hat arm reads no status), declined (option 0: nothing). Prog var 0: 48, options 0 and 2: nothing;
+# option 1: begun, the hat (KEYITEM_OBTAINED). The show-off count (QuestHatInHand_count, a GM: the eight show-off NPCs
+# stay Lua) picks 52's argument and the local var hatRewardTier: 0-1 none / tier 1, 2-3 (20) / 2, 4-5 (30) / 3, 6-7 (50)
+# / 4, 8+ (80) / 5; each edge shown (option 0), then each tier finished with option 1 (tier 2 with option 2: 52 reads
+# option >= 1): tier 1 300 gil, tier 2 150, tier 3 300, tier 5 500 and the Windshear Hat (with a full inventory first:
+# the hat does not fit, nothing else happens), tier 4 with the rare hat held: refused (tier 4's completion is #tier4);
+# each completion: Windurst fame 10, GIL_OBTAINED, both show-off vars 0, completed, the New Model Hat taken, needToZone.
+# A 52 finished with hatRewardTier 0 (a GM inside the event): fame alone, completed.
+char zone=WindurstWaters pos=-65.0,-2.9,-145.7 job=WAR lvl=75
+charvar Quest[2][23]Prog 1
+login
+trigger Baren-Moren                     # available, All At Sea's Prog 1: no offer; a random standard event
+finish
+charvar Quest[2][23]Prog 2
+trigger Baren-Moren                     # Prog 2: no offer; a random standard event
+finish
+keyitem NewModelHat
+trigger Baren-Moren                     # the hat held while available: 52 (count 0: tier 1)
+finish option=0                         # option 0: nothing
+delkeyitem NewModelHat
+charvar Quest[2][23]Prog 0
+trigger Baren-Moren                     # available, Prog 0: 48
+finish option=0                         # declined: nothing
+trigger Baren-Moren                     # 48
+finish option=2                         # option 2: nothing (48 begins on option 1 only)
+trigger Baren-Moren                     # 48
+finish option=1                         # begun; the New Model Hat
+trigger Baren-Moren                     # accepted, Prog 0, the hat, count 0: 52 (tier 1), not 48
+finish option=0
+charvar QuestHatInHand_count 1
+trigger Baren-Moren                     # count 1: 52 (tier 1)
+finish option=0
+charvar QuestHatInHand_count 3
+trigger Baren-Moren                     # count 3: 52 (20) (tier 2)
+finish option=0
+charvar QuestHatInHand_count 5
+trigger Baren-Moren                     # count 5: 52 (30) (tier 3)
+finish option=0
+charvar QuestHatInHand_count 7
+trigger Baren-Moren                     # count 7: 52 (50) (tier 4)
+finish option=0
+charvar QuestHatInHand_count 0
+trigger Baren-Moren                     # count 0: 52 (tier 1)
+finish option=1                         # 300 gil; fame 10; vars 0; completed; the hat taken; needToZone
+keyitem NewModelHat
+charvar QuestHatInHand_count 2
+trigger Baren-Moren                     # completed, the hat (a GM), count 2: 52 (20)
+finish option=2                         # option 2 (>= 1): 150 gil; completed again; the hat taken
+keyitem NewModelHat
+charvar QuestHatInHand_count 4
+trigger Baren-Moren                     # count 4: 52 (30)
+finish option=1                         # 300 gil
+keyitem NewModelHat
+charvar QuestHatInHand_count 8
+trigger Baren-Moren                     # count 8: 52 (80)
+fill-inventory
+finish option=1                         # the Windshear Hat does not fit: npcUtil.giveItem's message; nothing else (the New Model Hat kept)
+free-inventory
+trigger Baren-Moren                     # count 8 (not cleared): 52 (80)
+finish option=1                         # the Windshear Hat; 500 gil; completed; the New Model Hat taken
+keyitem NewModelHat
+charvar QuestHatInHand_count 6
+trigger Baren-Moren                     # count 6: 52 (50)
+finish option=1                         # the Windshear Hat held (rare): npcUtil.giveItem refuses; nothing else (tier 4's completion: #tier4)
+charvar QuestHatInHand_count 0
+trigger Baren-Moren                     # count 0, the New Model Hat still held: 52 (tier 1)
+localvar hatRewardTier 0                # a GM: no tier
+finish option=1                         # no gil, no item: fame 10, vars 0, completed; the hat taken

@@ -1,0 +1,13 @@
+# Delivering the Goods past its steps (task 7 mutants): a GM's Prog 2 is neither the quest's Prog 0 nor its Prog 1:
+# Fochacha, Qutiba and Ulamaal answer nothing of the quest (no script of theirs plays: onTrigger returns -1).
+lists AhtUrhganWhitegate/Fochacha/onTrigger AhtUrhganWhitegate/Qutiba/onTrigger AhtUrhganWhitegate/Ulamaal/onTrigger
+char zone=AhtUrhganWhitegate pos=2.897,0,-10.781 job=WAR lvl=75
+quest AhtUrhgan.DeliveringTheGoods accepted
+charvar Quest[6][61]Prog 2
+login
+trigger Fochacha                        # Prog 2: nil (not the 41 of Prog 1)
+finish-if-event
+trigger Qutiba                          # nil (not the 52 of Prog 1)
+finish-if-event
+trigger Ulamaal                         # nil (not the 53 of Prog 1)
+finish-if-event

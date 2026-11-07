@@ -1,0 +1,15 @@
+# Chips completed (by GM), section 3's no-free-slot side (Chips.lua:103-108, its own copy of section 2's check): the
+# three chips at Cid with the inventory full and no CCB Polymer held show ITEM_CANNOT_BE_OBTAINED (nil); with room
+# again the same trade plays 884.
+lists Metalworks/Cid/onTrade Metalworks/onEventFinish/884
+char zone=Metalworks pos=-12.6,-11,4
+quest Bastok.Chips completed
+item CarmineChip
+item CyanChip
+item GrayChip
+login
+fill-inventory
+trade Cid CarmineChip x1 CyanChip x1 GrayChip x1  # completed, no free slot: ITEM_CANNOT_BE_OBTAINED (nil)
+free-inventory
+trade Cid CarmineChip x1 CyanChip x1 GrayChip x1  # room: 884
+finish                               # completed again: CCB Polymer, San d'Oria +5, Bastok +5, the chips taken

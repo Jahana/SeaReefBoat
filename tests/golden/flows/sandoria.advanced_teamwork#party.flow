@@ -1,0 +1,67 @@
+# Advanced Teamwork (sandoria 65): 129 in a party, formed by the engine's own invite and accept. Introduction and
+# Intermediate completed and Advanced accepted by GM. Main (a WAR) leads; bob is a WHM, carl and dave WARs. Vilatroire's
+# trigger moves main to (-258.861, -70.999, 423.42). The update counts the members (main among them) of main's main job,
+# after each member's zone and distance, and needs exactly 2 (== partySizeRequirement, not >=: the kept quirk):
+# - main and bob: one, updateEvent(5, 3); finish option 0 with the local Prog 0: nothing;
+# - bob exactly 15 yalms off: in range, updateEvent(5, 3); 15.01 yalms: updateEvent(1);
+# - bob in East Ronfaure, 2.58 yalms from main's coordinates: updateEvent(1);
+# - bob logs out while 129 is open: #party below 2: updateEvent(1); alone, the next talk is his default 136;
+# - main and carl: two WARs, the local Prog 1, updateEvent(15, 3); finish option 1: nothing; again with a full bag and
+#   option 0: complete fails (Horn Ring), not completed, the local Prog stays 1;
+# - main, carl and dave: three WARs, not exactly 2: updateEvent(5, 3); but the local Prog is still 1, so finish option 0
+#   completes it (Horn Ring, fame +40, First-Rate Organizer): the kept quirks;
+# - completed: section 3, Vilatroire's 130.
+lists WestRonfaure/Vilatroire/onTrigger WestRonfaure/onEventUpdate/129 WestRonfaure/onEventFinish/129
+char zone=WestRonfaure pos=-258.861,-70.999,423.42 job=WAR lvl=10
+char bob zone=WestRonfaure pos=-258.861,-70.999,428 job=WHM lvl=10
+char carl zone=WestRonfaure pos=-256,-70.999,426 job=WAR lvl=10
+char dave zone=WestRonfaure pos=-256,-70.999,421 job=WAR lvl=10
+quest Sandoria.IntroductionToTeamwork completed
+quest Sandoria.IntermediateTeamwork completed
+quest Sandoria.AdvancedTeamwork accepted
+login
+bob: login
+carl: login
+dave: login
+invite bob
+bob: accept                               # main leads, bob joins
+trigger Vilatroire                        # a party of two: 129 { [1] = 3 }
+update 129 option=0                       # main WAR, bob WHM: one, updateEvent(5, 3)
+finish                                    # option 0, the local Prog 0: nothing
+bob: walk -258.861,-70.999,438.42         # exactly 15 yalms from main's spot at Vilatroire
+trigger Vilatroire                        # 129
+update 129 option=0                       # checkDistance 15, not > 15: in range; one: updateEvent(5, 3)
+finish option=1
+bob: walk -258.861,-70.999,438.43         # 15.01 yalms
+trigger Vilatroire                        # 129
+update 129 option=0                       # bob out of range: updateEvent(1)
+finish option=1
+bob: warp -258.861,-70.999,426 EastRonfaure   # another zone, 2.58 yalms from main's coordinates
+tick 400                                  # bob's zone-in reload: in main's party, in another zone
+trigger Vilatroire                        # #party 2: 129
+update 129 option=0                       # bob's zone is not main's: updateEvent(1)
+finish option=1
+trigger Vilatroire                        # 129
+bob: logout                               # bob leaves the process: main alone
+tick 400
+update 129 option=0                       # #party 1, below 2: updateEvent(1)
+finish option=1
+trigger Vilatroire                        # alone now (#party 1): the trigger's nil, his default 136
+finish
+invite carl
+carl: accept                              # main and carl, both WARs
+trigger Vilatroire                        # 129
+update 129 option=0                       # exactly two: the local Prog 1, updateEvent(15, 3)
+finish option=1                           # option 1: nothing (the local Prog stays 1)
+fill-inventory
+trigger Vilatroire                        # 129
+update 129 option=0                       # two: the local Prog 1, updateEvent(15, 3)
+finish                                    # option 0, Prog 1, a full bag: complete fails, not completed
+free-inventory
+invite dave
+dave: accept                              # main, carl and dave: three WARs
+trigger Vilatroire                        # 129
+update 129 option=0                       # three, not == 2: updateEvent(5, 3), the local Prog left at 1
+finish                                    # option 0, the stale Prog 1: completed (Horn Ring, fame +40, First-Rate Organizer)
+trigger Vilatroire                        # completed: section 3, 130
+finish

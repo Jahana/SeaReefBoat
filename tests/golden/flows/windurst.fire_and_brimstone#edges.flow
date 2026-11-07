@@ -1,0 +1,73 @@
+# Fire and Brimstone (windurst 73): the other operands, on a WAR 60 (The Fanged One completed by GM so its Progress 351
+# stays away; Sin Hunting's 523 wants a RNG). Sin Hunting available, var 0: the default 338; the earring: nothing. The
+# var arms read no status: var 2 on the available quest (Sin Hunting not completed, so 528 stays away): 532; var 5 and
+# the earring: 537: the available quest completed (the reward given). Sin Hunting completed, not RNG: 528; also at
+# var 2 / 4 / 5 (GM: 528 comes before the var arms); accepted or completed at var 0: 338. Completed: var 1: 532;
+# var 4: 535: var 5; 536; the earring: 537 again:
+# npcUtil.completeQuest refuses (Hunter's Beret is rare and held: ITEM_CANNOT_BE_OBTAINED): the earring kept, var 5.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=WAR lvl=60
+quest Windurst.TheFangedOne completed
+item OldEarring
+item OldEarring
+login
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Sin Hunting available, var 0: his default 338
+finish
+trade Perih_Vashai OldEarring x1        # var 0: nothing
+charvar fireAndBrimstone 2
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 2 (available, Sin Hunting not completed): 532
+finish
+charvar fireAndBrimstone 5
+trade Perih_Vashai OldEarring x1        # var 5: 537
+finish                                  # the available quest completed: the beret, fame 20, var 0; the earring taken
+quest Windurst.FireAndBrimstone available
+quest Windurst.SinHunting completed
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Sin Hunting completed, WAR, available: 528
+finish
+charvar fireAndBrimstone 2
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Sin Hunting completed, available, var 2 (GM): 528, not 532
+finish
+charvar fireAndBrimstone 4
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Sin Hunting completed, available, var 4 (GM): 528, not 535
+finish
+charvar fireAndBrimstone 5
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Sin Hunting completed, available, var 5 (GM): 528, not 536
+finish
+charvar fireAndBrimstone 0
+quest Windurst.FireAndBrimstone accepted
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # accepted, var 0: 338
+finish
+quest Windurst.FireAndBrimstone completed
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # completed, var 0 (WAR: no 541): 338
+finish
+charvar fireAndBrimstone 1
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # completed, var 1: 532
+finish
+charvar fireAndBrimstone 4
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # completed, var 4: 535
+finish                                  # var 5
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # completed, var 5: 536
+finish
+trade Perih_Vashai OldEarring x1        # completed, var 5: 537
+finish                                  # the beret is rare and held: npcUtil.completeQuest refuses, nothing changes

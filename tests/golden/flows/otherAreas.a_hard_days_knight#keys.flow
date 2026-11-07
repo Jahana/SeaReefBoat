@@ -1,0 +1,23 @@
+# A Hard Day's Knight (otherAreas 64): the completed trigger's readings of the crest keys (player:findItem, Sealion
+# first). Completed (a GM) with a Sealion Crest Key alone: 631 (1658, 0). A Coral key given (a GM), both traded: Prog 2,
+# 631, 632: both taken, Prog 0, the Temple Knight Key. No key held: 631 (0, 0). A Coral key given (a GM): 631 (1659, 0).
+# Prog 3 (a GM): 631, finished: no 632 (the finish reads Prog == 2).
+lists TavnazianSafehold/Quelveuiat/onTrigger TavnazianSafehold/Quelveuiat/onTrade TavnazianSafehold/onEventFinish/631 TavnazianSafehold/onEventFinish/632
+char zone=TavnazianSafehold pos=4.3,-22.75,-25.9 job=WAR lvl=75
+quest OtherAreas.AHardDaysKnight completed
+item SealionCrestKey
+login
+trigger Quelveuiat                      # the Sealion key alone: 631 (1658, 0)
+finish                                  # Prog 0: nothing
+item CoralCrestKey                      # a GM
+trade Quelveuiat SealionCrestKey x1 CoralCrestKey x1 # both: Prog 2; 631
+finish                                  # 632 started
+finish                                  # both taken; Prog 0; the key
+trigger Quelveuiat                      # no crest key: 631 (0, 0)
+finish
+item CoralCrestKey                      # a GM
+trigger Quelveuiat                      # the Coral key alone: 631 (1659, 0)
+finish
+charvar Quest[4][64]Prog 3              # a GM
+trigger Quelveuiat                      # 631 (1659, 0)
+finish                                  # Prog 3: no 632

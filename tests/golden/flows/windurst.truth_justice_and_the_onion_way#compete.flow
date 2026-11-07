@@ -1,0 +1,61 @@
+# Truth, Justice, and the Onion Way! (windurst 36): the reply kinds, against Inspector's Gadget! (windurst 41, a later
+# container on the same seven NPCs). Inspector's Gadget accepted by GM, no Fake Moustache: its section 2 answers every
+# brigade member with an Event (Kohlo-Lakolo 414, Gomada-Vulmada 417, Papo-Hopo 416, Pichichi 415, Pyo Nzon 418,
+# Shanruru 420, Yafa Yaa 419). A level-1 char: Know One's Onions' check fails, so its sections stay silent.
+# - This quest available: its 368 (Progress) beats 414 (Event), twice (option 1: nothing). An Event 368 would tie with
+#   414 and the lookup's cycle would play 414 on the second talk.
+# - This quest accepted by GM: each NPC's two Event lines tie; the lookup plays the first container's (this quest's) on
+#   the first talk and cycles to Inspector's Gadget's on the second. A Progress line of either quest would play on both
+#   talks; a lower one would never play. Pichichi's 415 sets Inspector's Gadget's Prog 1 (its section 2 holds).
+# - Completed by GM, Know One's Onions available: each new default (replaceDefault, 20) loses to Inspector's Gadget's
+#   Event line (100); without replaceDefault it would tie and play first.
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Gomada-Vulmada/onTrigger PortWindurst/Papo-Hopo/onTrigger PortWindurst/Pichichi/onTrigger PortWindurst/Pyo_Nzon/onTrigger PortWindurst/Shanruru/onTrigger PortWindurst/Yafa_Yaa/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6
+quest Windurst.InspectorsGadget accepted
+login
+trigger Kohlo-Lakolo                           # 368 (Progress) over Inspector's Gadget's 414
+finish option=1                                # nothing
+trigger Kohlo-Lakolo                           # 368 again
+finish option=1                                # nothing
+quest Windurst.TruthJusticeAndTheOnionWay accepted   # GM
+trigger Kohlo-Lakolo                           # 371 and 414 tie: 371
+finish
+trigger Kohlo-Lakolo                           # the cycle: 414
+finish
+trigger Gomada-Vulmada                         # 373 and 417 tie: 373
+finish
+trigger Gomada-Vulmada                         # 417
+finish
+trigger Papo-Hopo                              # 372 and 416: 372
+finish
+trigger Papo-Hopo                              # 416
+finish
+trigger Pichichi                               # 374 and 415: 374
+finish
+trigger Pichichi                               # 415 (0, moustache)
+finish                                         # Inspector's Gadget: Prog 1
+trigger Pyo_Nzon                               # 375 and 418: 375
+finish
+trigger Pyo_Nzon                               # 418
+finish
+trigger Shanruru                               # 377 and 420: 377
+finish
+trigger Shanruru                               # 420
+finish
+trigger Yafa_Yaa                               # 376 and 419: 376
+finish
+trigger Yafa_Yaa                               # 419 (0, Linkshell)
+finish
+quest Windurst.TruthJusticeAndTheOnionWay completed  # GM; Know One's Onions available: section 3
+trigger Gomada-Vulmada                         # 381 (replaceDefault) under 417: 417
+finish
+trigger Papo-Hopo                              # 380 under 416: 416
+finish
+trigger Pichichi                               # 385 under 415: 415
+finish
+trigger Pyo_Nzon                               # 382 under 418: 418
+finish
+trigger Shanruru                               # 384 under 420: 420
+finish
+trigger Yafa_Yaa                               # 383 under 419: 419
+finish

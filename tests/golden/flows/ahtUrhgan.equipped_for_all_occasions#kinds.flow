@@ -1,0 +1,93 @@
+# Arrapago Reef qm6's reply kinds (no script; default NOTHING_OUT_OF_ORDINARY). Its lines are the COR chain's, each a
+# Progress, and each section is open at a different point of the chain, so a GM puts two of them open together (out of
+# play order: a Corsair with Luck of the Draw accepted): Luck of the Draw's 211 (a progress cutscene, Prog 2) against
+# each of the others. The two tie: the first talk plays the container listed first, a later one rotates. An Event in
+# place of either would lose every talk. Each finish is undone by a GM (or fails on a full bag), so the tie stays. All
+# five Corsairs have Luck of the Draw accepted at Prog 2. bob (40): Equipped for All Occasions available: 211 and 228.
+# carl (40): Equipped accepted at Prog 3: 211 and 231. dan (50): Equipped completed, Navigating the Unfriendly Seas
+# available: 211 and 232. ed (50): Navigating accepted at Prog 3: 211 and 233 (a full bag: its completion fails). fred
+# (66): Against All Odds completed, Breaking the Bonds of Fate available: 211 and 234 (finished on option 1: not begun).
+lists ArrapagoReef/qm6/onTrigger
+char zone=ArrapagoReef pos=470.267,-12.292,111.817 job=WAR lvl=20
+char bob zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=40
+char carl zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=40
+char dan zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=50
+char ed zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=50
+char fred zone=ArrapagoReef pos=470.267,-12.292,111.817 job=COR lvl=66
+bob: quest AhtUrhgan.LuckOfTheDraw accepted
+bob: charvar Quest[6][6]Prog 2
+carl: quest AhtUrhgan.LuckOfTheDraw accepted
+carl: charvar Quest[6][6]Prog 2
+carl: quest AhtUrhgan.EquippedForAllOccasions accepted
+carl: charvar Quest[6][24]Prog 3
+dan: quest AhtUrhgan.LuckOfTheDraw accepted
+dan: charvar Quest[6][6]Prog 2
+dan: quest AhtUrhgan.EquippedForAllOccasions completed
+ed: quest AhtUrhgan.LuckOfTheDraw accepted
+ed: charvar Quest[6][6]Prog 2
+ed: quest AhtUrhgan.EquippedForAllOccasions completed
+ed: quest AhtUrhgan.NavigatingTheUnfriendlySeas accepted
+ed: charvar Quest[6][25]Prog 3
+fred: quest AhtUrhgan.LuckOfTheDraw accepted
+fred: charvar Quest[6][6]Prog 2
+fred: quest AhtUrhgan.EquippedForAllOccasions completed
+fred: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+fred: quest AhtUrhgan.AgainstAllOdds completed
+login
+bob: login
+bob: trigger qm6                        # 211 and 228 tie: the first container's
+bob: finish                             # 211: Prog 3; or 228: begun
+bob: charvar Quest[6][6]Prog 2          # a GM
+bob: quest AhtUrhgan.EquippedForAllOccasions available   # a GM
+bob: trigger qm6                        # rotated
+bob: finish
+bob: charvar Quest[6][6]Prog 2          # a GM
+bob: quest AhtUrhgan.EquippedForAllOccasions available   # a GM
+bob: trigger qm6                        # rotated again
+bob: finish
+bob: logout
+carl: login
+carl: trigger qm6                       # 211 and 231 tie: the first container's
+carl: finish                            # 211: Prog 3; or 231: Prog 4
+carl: charvar Quest[6][6]Prog 2         # a GM
+carl: charvar Quest[6][24]Prog 3        # a GM
+carl: trigger qm6                       # rotated
+carl: finish
+carl: charvar Quest[6][6]Prog 2         # a GM
+carl: charvar Quest[6][24]Prog 3        # a GM
+carl: trigger qm6                       # rotated again
+carl: finish
+carl: logout
+dan: login
+dan: trigger qm6                        # 211 and 232 tie: the first container's
+dan: finish                             # 211: Prog 3; or 232: begun
+dan: charvar Quest[6][6]Prog 2          # a GM
+dan: quest AhtUrhgan.NavigatingTheUnfriendlySeas available   # a GM
+dan: trigger qm6                        # rotated
+dan: finish
+dan: charvar Quest[6][6]Prog 2          # a GM
+dan: quest AhtUrhgan.NavigatingTheUnfriendlySeas available   # a GM
+dan: trigger qm6                        # rotated again
+dan: finish
+dan: logout
+ed: login
+ed: fill-inventory
+ed: trigger qm6                         # 211 and 233 tie: the first container's
+ed: finish                              # 211: Prog 3; or 233: the culottes do not fit (nothing)
+ed: charvar Quest[6][6]Prog 2           # a GM
+ed: trigger qm6                         # rotated
+ed: finish
+ed: charvar Quest[6][6]Prog 2           # a GM
+ed: trigger qm6                         # rotated again
+ed: finish
+ed: logout
+fred: login
+fred: trigger qm6                       # 211 and 234 tie: the first container's
+fred: finish option=1                   # 211: Prog 3; or 234 on option 1: nothing
+fred: charvar Quest[6][6]Prog 2         # a GM
+fred: trigger qm6                       # rotated
+fred: finish option=1
+fred: charvar Quest[6][6]Prog 2         # a GM
+fred: trigger qm6                       # rotated again
+fred: finish option=1
+fred: logout

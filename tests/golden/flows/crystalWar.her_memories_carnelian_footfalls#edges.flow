@@ -1,0 +1,56 @@
+# Her Memories: Carnelian Footfalls (crystalWar 69), the edges: a level 99 Warrior in Southern San d'Oria [S] with the
+# WotG mission Her Memories current (a GM; other logs as the main flow), the Red Recommendation Letter. No allegiance:
+# East Ronfaure [S], then Southern San d'Oria [S] from there: nothing (not available). Allegiance 1 (Steamed Rams as the
+# main flow). Mainchelite at Prog 0: nil (Steamed Rams' completed 5 answers). From Jugner Forest [S] at Prog 0: nothing
+# (East Ronfaure [S] only). Mainchelite at Prog 2 while available (a GM): nil. From East Ronfaure [S] at Prog 1 (a GM):
+# nothing (Prog 0 only). Prog 1: 171, finished on option 1: begun (any option). Accepted, Prog 1: East Ronfaure [S] from
+# Jugner Forest [S]: nothing (Southern San d'Oria [S] only). East Ronfaure [S] from Southern San d'Oria [S] at Prog 2 (a
+# GM): nothing. qm5 at Option 3 (a GM): 15 (its bit not set), finished: Option 7. Option 3 (a GM): Mainchelite: 173 (not
+# 7). Option 9 (a GM), a new visit to the zone: 173 again (only 7 plays 172).
+lists SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventFinish/171 SouthernSanDoriaS/Mainchelite/onTrigger EastRonfaureS/onZoneIn/1 EastRonfaureS/qm5/onTrigger EastRonfaureS/onEventFinish/15
+char zone=SouthernSanDoriaS pos=-13.849,1.398,-30.368 job=WAR lvl=99
+keyitem RedRecommendationLetter
+mission Wotg HerMemories current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp -13.849,1.398,-30.368 SouthernSanDoriaS # from East Ronfaure [S], no allegiance: not available, no zone-in reply
+trigger Mainchelite                     # Steamed Rams: 7
+finish option=0                         # Steamed Rams begun
+keyitem CharredPropeller
+keyitem OxidizedPlate
+keyitem PieceOfShatteredLumber
+trigger Mainchelite                     # Steamed Rams: 12
+finish                                  # Steamed Rams completed; allegiance 1
+trigger Mainchelite                     # Carnelian available, Prog 0: nil (Steamed Rams' completed 5)
+finish-if-event
+warp -262.344,5.713,151.392 JugnerForestS
+warp -13.849,1.398,-30.368 SouthernSanDoriaS # from Jugner Forest [S] at Prog 0: no zone-in reply (East Ronfaure [S] only)
+charvar Quest[7][69]Prog 2              # a GM, while available
+trigger Mainchelite                     # Prog 2 (not begun): nil (Steamed Rams' completed 5)
+finish-if-event
+charvar Quest[7][69]Prog 1              # a GM
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp -13.849,1.398,-30.368 SouthernSanDoriaS # from East Ronfaure [S] at Prog 1: no zone-in reply (Prog 0 only)
+trigger Mainchelite                     # Prog 1: 171
+finish option=1                         # begun (any option)
+warp -262.344,5.713,151.392 JugnerForestS
+warp 314.321,-30.495,-67.15 EastRonfaureS # from Jugner Forest [S] at Prog 1: no zone-in reply (Southern San d'Oria [S] only)
+warp -13.849,1.398,-30.368 SouthernSanDoriaS # accepted: no zone-in reply
+charvar Quest[7][69]Prog 2              # a GM
+warp 314.321,-30.495,-67.15 EastRonfaureS # from Southern San d'Oria [S] at Prog 2: no zone-in reply
+charvar Quest[7][69]Option 3            # a GM
+trigger qm5                             # bit 2 not set: 15
+finish                                  # Option 7
+charvar Quest[7][69]Option 3            # a GM
+warp -13.849,1.398,-30.368 SouthernSanDoriaS
+trigger Mainchelite                     # Option 3: 173 (oncePerZone; Steamed Rams' 5 sits under it)
+finish
+warp 314.321,-30.495,-67.15 EastRonfaureS
+charvar Quest[7][69]Option 9            # a GM
+warp -13.849,1.398,-30.368 SouthernSanDoriaS
+trigger Mainchelite                     # Option 9: 173 (only Option 7 plays 172)
+finish

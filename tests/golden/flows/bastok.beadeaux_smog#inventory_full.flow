@@ -1,0 +1,12 @@
+# Beadeaux Smog with a full inventory: 732 plays, the Chakram does not fit (npcUtil.giveItem fails), the quest stays
+# accepted; once there is room the same talk completes it.
+char zone=Metalworks pos=25.2,-14,5.5
+keyitem CorruptedDirt
+quest Bastok.BeadeauxSmog accepted
+login
+fill-inventory
+trigger High_Bear               # the dirt held: 732
+finish                          # the inventory full: no Chakram, not completed
+free-inventory
+trigger High_Bear               # 732 again
+finish                          # completed: Chakram, fame +40, Beadeaux Surveyor

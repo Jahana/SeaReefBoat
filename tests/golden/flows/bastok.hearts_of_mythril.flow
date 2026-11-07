@@ -1,0 +1,30 @@
+# Hearts of Mythril (bastok 6): Elki in Bastok Mines, the Monument in North Gustaberg. Options, a key item across
+# zones, another quest's mustZone. From XI.Verify.QuestScripts.Live's RunHeartsOfMythril twin.
+lists BastokMines/Elki/onTrigger BastokMines/onEventFinish/41 BastokMines/onEventFinish/42 NorthGustaberg/Monument/onTrigger NorthGustaberg/onEventFinish/11
+char zone=BastokMines pos=-15.6,0,52.7
+login
+trigger Elki                    # the offer, 41
+finish option=1                 # declined: no bouquet
+trigger Elki                    # the offer again
+finish option=0                 # accepted: the bouquet
+trigger Elki                    # Prog 0: not 42
+finish-if-event
+route SouthGustaberg NorthGustaberg
+trigger Monument                # the bouquet held: 11
+finish option=1                 # the bouquet kept
+trigger Monument                # 11 again
+finish option=0                 # the bouquet laid, Prog 1
+trigger Monument                # no bouquet: not 11
+finish-if-event
+route SouthGustaberg BastokMines
+fill-inventory
+trigger Elki                    # Prog 1: 42
+finish                          # the inventory full: not completed, no mustZone
+free-inventory
+trigger Elki                    # 42
+finish                          # completed: the Sitabaki, 20 fame, The Eleventh's Hour's mustZone set
+trigger Elki                    # before zoning
+finish-if-event
+route BastokMarkets BastokMines # zoned: the mustZone cleared
+trigger Elki                    # after zoning
+finish-if-event

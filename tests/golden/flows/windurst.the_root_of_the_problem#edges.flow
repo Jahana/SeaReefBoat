@@ -1,0 +1,31 @@
+# The Root of the Problem (windurst 68): the var and status edges, a BLM 75, accepted by GM (The Three Magi and
+# Recollections completed by GM). Chumimi's silk at var 0: nothing. Koru-Moru's silk reads no var: at var 3 (GM): 349:
+# the silk taken, var 2. Completed by GM, var 1: Koru-Moru: 193 on both turns (no 348); the silk: nothing. Accepted
+# again by GM, var 3, Wizard's Petasos held (GM): 281; npcUtil.giveItem refuses the rare petasos: nothing (the key
+# item kept, still accepted).
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi completed
+quest Windurst.Recollections completed
+quest Windurst.TheRootOfTheProblem accepted
+item SquareOfSilkCloth x3
+login
+trade Chumimi SquareOfSilkCloth x1      # var 0: nothing
+warp -120.2,-5.5,122.4 WindurstWalls
+charvar rootProblem 3
+trade Koru-Moru SquareOfSilkCloth x1    # accepted, var 3: 349; the silk taken, var 2
+finish
+quest Windurst.TheRootOfTheProblem completed  # GM
+charvar rootProblem 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # the script's turn: completed, var 1: nothing: 193
+finish
+trade Koru-Moru SquareOfSilkCloth x1    # completed: nothing
+warp 0.0,30.75,21.5 HeavensTower
+quest Windurst.TheRootOfTheProblem available  # GM: cleared first
+quest Windurst.TheRootOfTheProblem accepted  # GM
+charvar rootProblem 3
+keyitem SluiceSurveyorMkI
+item WizardsPetasos
+trigger Chumimi                         # var 3: 281
+finish                                  # the petasos held (rare): refused; nothing changes

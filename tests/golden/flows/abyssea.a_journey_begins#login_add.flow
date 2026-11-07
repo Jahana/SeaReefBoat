@@ -1,0 +1,13 @@
+# A Journey Begins (abyssea 160), the login's add: a level 99 Warrior in Port Jeuno with the quest available. The
+# login: onZoneIn runs first (available: no section, no 324), then xi.player.onGameIn adds the quest (ENABLE_ABYSSEA 1,
+# available: player:addQuest; globals/player.lua:196-201). Joachim at Prog 0: nil (his script: Dawn of Death not
+# accepted, so nothing). Out and back in: 324, finished: Prog 1. Joachim: 325, finished: completed.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onZoneIn/1 PortJeuno/onEventFinish/324 PortJeuno/onEventFinish/325
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+login                                   # no 324 (available at the zone-in); onGameIn adds the quest
+trigger Joachim                         # Prog 0: nil; his script plays nothing (Dawn of Death not accepted)
+finish-if-event
+rezone open                             # accepted, Prog 0: 324, left open
+finish                                  # Prog 1
+trigger Joachim                         # Prog 1: 325
+finish                                  # completed; The Truth Beckons accepted

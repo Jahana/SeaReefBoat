@@ -1,0 +1,24 @@
+# Fear of the Dark II (ahtUrhgan 14): a level 75 Warrior with five Imp Wings. Al Zahbi: Suldiran (no script, no
+# default). Available: Suldiran 14, option 0: still available; option 1: begun. Accepted: Suldiran 15; a trade of one
+# wing: nil (nothing); two: 16, finished: completed (200 gil, Dark Resistant), the wings taken. Completed: Suldiran 17;
+# a trade of two wings: 18, finished: the wings taken, 200 gil; the last wing: nil.
+lists AlZahbi/Suldiran/onTrigger AlZahbi/Suldiran/onTrade AlZahbi/onEventFinish/14 AlZahbi/onEventFinish/16 AlZahbi/onEventFinish/18
+char zone=AlZahbi pos=41.658,-5.999,-42.528 job=WAR lvl=75
+item ImpWing x5
+login
+trigger Suldiran                        # available: 14
+finish option=0                         # not option 1: still available
+trigger Suldiran                        # 14
+finish option=1                         # begun
+trigger Suldiran                        # accepted: 15
+finish
+trade Suldiran ImpWing x1               # not two: nil: nothing
+finish-if-event
+trade Suldiran ImpWing x2               # 16
+finish                                  # completed; 200 gil; Dark Resistant; the wings taken
+trigger Suldiran                        # completed: 17
+finish
+trade Suldiran ImpWing x2               # completed: 18
+finish                                  # the wings taken; 200 gil
+trade Suldiran ImpWing x1               # one left: nil
+finish-if-event

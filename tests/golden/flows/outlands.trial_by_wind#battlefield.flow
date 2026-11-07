@@ -1,0 +1,18 @@
+# Trial by Wind (outlands 194): the battlefield won while accepted. With the Tuning Fork of Wind, at WP_Entrance the
+# fork opens the entry menu 32000; its update with option 1 (index 0, arena 1) registers and enters (the fork taken);
+# Garuda_Prime_TBW of arena 1 (OGMIOS-3: mob 17600513; OGMIOS is 17600516) is
+# killed, and the win's 32001 opens within the kill step. Its finish runs content:onEventFinishWin, which calls this
+# quest: Heir of the Great Wind, the Whisper of Gales. In Rabao, Agado-Pugado's 69 (the whisper, no fork) and option 5
+# (10000 gil) complete it.
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Outlands.TrialByWind accepted
+keyitem TuningForkOfWind
+login
+trigger WP_Entrance                       # the fork: the entry menu 32000
+update 32000 option=1                     # Trial by Wind (index 0), arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+kill OGMIOS-3                             # Garuda_Prime_TBW of arena 1: the battlefield won, 32001 opens
+finish                                    # Heir of the Great Wind, the Whisper of Gales
+warp -16.5,7.8,-10.5 Rabao
+trigger Agado-Pugado                      # the whisper, no fork: 69
+finish option=5                           # 10000 gil: completed

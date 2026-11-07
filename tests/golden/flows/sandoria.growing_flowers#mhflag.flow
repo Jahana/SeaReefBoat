@@ -1,0 +1,14 @@
+# Growing Flowers (sandoria 58): the Mog House flag the completion adds to is not 0. Bastok's A Lady's Heart (on C#)
+# is completed first in Port Bastok (the Amaryllis, 2002: flag 0x0002); then the Marguerite to Kuu Mohzolhi (1002):
+# flag 0x0002 + 0x0001 = 0x0003 (a fixed SetMoghouseFlag(1) would leave 1). No statement sets the flag directly; A
+# Lady's Heart's finish is the one script that does it, outside this quest.
+lists NorthernSanDoria/Kuu_Mohzolhi/onTrade NorthernSanDoria/onEventFinish/605
+char zone=PortBastok pos=59.9,8.5,-221.7
+item Amaryllis
+item Marguerite
+login
+trade Valah_Molkot Amaryllis x1           # A Lady's Heart, available, the Amaryllis: 160 (0, 236, 2)
+finish option=2002                        # A Lady's Heart completed; Mog House flag 0x0002
+warp -121.6,-0.2,80.5 NorthernSanDoria
+trade Kuu_Mohzolhi Marguerite x1          # available, the Marguerite: 605 (0, 231, 2)
+finish option=1002                        # completed; the Marguerite taken; Mog House flag 0x0003; MOGHOUSE_EXIT

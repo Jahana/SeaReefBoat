@@ -1,0 +1,23 @@
+# A Beaked Blusterer (abyssea 176), the edges: a level 99 Warrior in South Gustaberg with The Truth Beckons completed,
+# Traverser Stones 1 and 2 (two stones: `>= 1`), 2 maw quests completed (A Man-eating Mite, An Ulcerous Uragnite) (GMs),
+# Dawn of Death available. The maw: no section (Dawn of Death available): 914. Dawn of Death completed (a GM; `>=`
+# accepted): 0, finished on option 1: begun (any option). The title (a GM): the zone-in's 1, its update on option 1:
+# updateEvent(the key item for 2 completed: Ivory Abyssite of Acumen); finished: it is given, completed.
+lists SouthGustaberg/Cavernous_Maw/onTrigger SouthGustaberg/onEventFinish/0 SouthGustaberg/onEventFinish/914 SouthGustaberg/onZoneIn/1 SouthGustaberg/onEventUpdate/1 SouthGustaberg/onEventFinish/1
+char zone=SouthGustaberg pos=341.5,-0.5,-680 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+keyitem TraverserStone1
+keyitem TraverserStone2
+quest Abyssea.AManEatingMite completed
+quest Abyssea.AnUlcerousUragnite completed
+login
+trigger Cavernous_Maw                   # Dawn of Death available: no section: 914
+finish                                  # option 0: no warp
+quest Abyssea.DawnOfDeath completed     # a GM
+trigger Cavernous_Maw                   # Dawn of Death completed, two stones: 0
+finish option=1                         # begun (any option)
+title BennuDeplumer                     # a GM
+rezone open                             # 1, left open
+update 1 option=1                       # updateEvent(Ivory Abyssite of Acumen)
+finish                                  # Ivory Abyssite of Acumen given; completed

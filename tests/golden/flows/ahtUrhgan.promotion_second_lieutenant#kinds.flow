@@ -1,0 +1,29 @@
+# Promotion: Second Lieutenant's area-3 5071 against ToAU 24 Foiled Ambition's area-3 handler (3097, Progress), in a
+# GM-made state out of play order (the mission current by a GM): Chief Sergeant completed, AssaultPromotion 25. The
+# missions' containers run before the quests'; equal ranks play the first container first, then rotate (an Event 5071
+# would lose to 3097 every time). A full bag keeps 3097's finish from completing the mission (its five Imperial Gold
+# Pieces do not fit). Area 3: 3097; again: 5071, finished: begun; again: 3097.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/3
+char zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant completed
+charvar AssaultPromotion 25
+mission Toau FoiledAmbition current
+login
+tick 1000
+tick 1000
+tick 1000
+fill-inventory
+walk 37.024,-6.5,-56                    # area 3: 3097 and 5071 tie: 3097 (the missions first)
+finish
+walk 37.024,-6.601,-62
+walk 37.024,-6.5,-56                    # rotation: 5071
+finish                                  # begun
+walk 37.024,-6.601,-62
+walk 37.024,-6.5,-56                    # 3097 alone
+finish

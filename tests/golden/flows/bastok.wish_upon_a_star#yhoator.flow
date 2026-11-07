@@ -1,0 +1,22 @@
+# Wish Upon a Star (bastok 64): Yhoator Jungle's Logging Point. Accepted by GM, no star: first with a full inventory
+# (the star does not fit: giveItem false, so nil, and the point's own HELM trade runs: its 10, the hatchet broken into
+# 689), then with room (the Fallen Star, the hatchet taken, 10); then a hatchet with the star held (nil: the HELM
+# trade's 10, a 731) and a bone chip (nil: the HELM trade's message).
+lists YhoatorJungle/Logging_Point/onTrade
+char zone=YhoatorJungle pos=-341.3,4.7,16.4 lvl=30
+quest Bastok.WishUponAStar accepted
+item Hatchet
+item Hatchet
+item Hatchet
+item BoneChip
+login
+fill-inventory
+trade Logging_Point Hatchet x1   # no star, the bag full: giveItem false, nil; the HELM trade's 10 (689)
+finish-if-event
+free-inventory
+trade Logging_Point Hatchet x1   # no star: the Fallen Star, the hatchet taken, 10 (Fallen Star)
+finish
+trade Logging_Point Hatchet x1   # the star held: nil; the HELM trade's 10 (731)
+finish-if-event
+trade Logging_Point BoneChip x1  # not a hatchet: nil; the HELM trade's message
+finish-if-event

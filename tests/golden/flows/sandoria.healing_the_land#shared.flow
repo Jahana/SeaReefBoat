@@ -1,0 +1,24 @@
+# Healing the Land (sandoria 82): the other answers at Eperdur, Progress events of quest containers that come before
+# his script (and his DefaultActions 678) on every talk. Altana's Sorrow (C#) accepted with the Letter from Virnage:
+# 679 at fame level 4, main level 10 (not 681); its finish completes it (Scroll of Teleport-Dem, the letter taken).
+# Then the lookup's 678 and the script's 681. Acting in Good Faith (Lua) accepted with Gantineux's Letter: 680; its
+# finish completes it (Scroll of Teleport-Mea). Then 678, the script's 681.
+char zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=10
+fame Sandoria 225
+quest Bastok.AltanasSorrow accepted
+keyitem LetterFromVirnage
+login
+trigger Eperdur                           # Altana's Sorrow: 679
+finish-if-event                           # Altana's Sorrow completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # the script: 681
+finish-if-event option=1                  # declined
+quest Windurst.ActingInGoodFaith accepted
+keyitem GantineuxsLetter
+trigger Eperdur                           # Acting in Good Faith: 680
+finish-if-event                           # Acting in Good Faith completed
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # the script: 681
+finish-if-event option=1                  # declined

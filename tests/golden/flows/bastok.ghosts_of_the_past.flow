@@ -1,0 +1,42 @@
+# Ghosts of the Past (bastok 51, MNK AF1): Oggbi in Port Bastok, the ??? (qm4) and the Wandering Ghost in Gusgen Mines.
+# The guard (main job MNK, main level AF1_QUEST_LEVEL 40, in Oggbi's handler), the offer 231; the Pickaxe to the ???
+# (not taken: trade:getItemQty only looks): available or completed, YOU_CANNOT_EVEN_DIG; accepted, with no Miner's
+# Pendant and no ghost up, the Wandering Ghost spawned and claimed and the same message, else the message from the
+# player (the handler returns nil; the ??? has no default trade answer); the Miner's Pendant (the ghost's drop, with the
+# harness's pinned seed) to Oggbi: 232, the reward and The First Meeting's mustZone. Defaults: Oggbi 230, the ??? SMALL_OPENING.
+# The Walls of Your Mind also names Oggbi: it needs Hand-to-Hand skill 250.
+lists PortBastok/Oggbi/onTrigger PortBastok/Oggbi/onTrade PortBastok/onEventFinish/231 PortBastok/onEventFinish/232 GusgenMines/qm4/onTrade
+char zone=PortBastok pos=-159,-7,5 job=MNK lvl=40
+item BoneChip
+item Pickaxe
+login
+trade Oggbi BoneChip x1         # available (the char starts at him): no trade handler, nothing
+warp -174,0,369 GusgenMines
+trigger qm4                     # SMALL_OPENING (no trigger handler)
+trade qm4 Pickaxe x1            # available, the Pickaxe: YOU_CANNOT_EVEN_DIG
+trade qm4 BoneChip x1           # available, no Pickaxe: nil
+warp -159,-7,5 PortBastok
+trigger Oggbi                   # MNK 40: 231
+finish                          # accepted
+trigger Oggbi                   # accepted: no trigger handler, 230
+finish
+trade Oggbi BoneChip x1         # accepted, not the pendant: nil
+warp -174,0,369 GusgenMines
+trigger qm4                     # SMALL_OPENING
+trade qm4 BoneChip x1           # accepted, no Pickaxe: the player's YOU_CANNOT_EVEN_DIG, nil
+trade qm4 Pickaxe x1            # the Pickaxe, no pendant, no ghost: the Wandering Ghost spawned and claimed, YOU_CANNOT_EVEN_DIG
+trade qm4 Pickaxe x1            # the ghost up: the player's message, nil
+kill WANDERING_GHOST            # no handler; it drops the Miner's Pendant (the pinned seed)
+trade qm4 Pickaxe x1            # the pendant held: the player's message, nil
+warp -159,-7,5 PortBastok
+trigger Oggbi                   # walk to him: 230
+finish
+trade Oggbi MinersPendant x1    # 232
+finish                          # completed: Beat Cesti, Bastok fame +20, the pendant taken, The First Meeting's mustZone
+trade Oggbi BoneChip x1         # completed: no trade handler, nothing
+trigger Oggbi                   # completed, level 40: The First Meeting not offered; 230
+finish
+warp -174,0,369 GusgenMines
+trigger qm4                     # SMALL_OPENING
+trade qm4 Pickaxe x1            # completed, the Pickaxe: YOU_CANNOT_EVEN_DIG
+trade qm4 BoneChip x1           # completed, no Pickaxe: nil

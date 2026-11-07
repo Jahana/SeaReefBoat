@@ -1,0 +1,13 @@
+# Path of the Beastmaster (jeuno 19) below ADVANCED_JOB_LEVEL (30), Save My Son completed: no section. No quest acts
+# at Brutus (Chocobo's Wounds' 22 needs Save My Son not completed), so his default 66 and his silent script take turns:
+# 66 both times (the script's turn falls back to the default when it does nothing).
+lists UpperJeuno/Brutus/onTrigger
+char zone=UpperJeuno pos=-55.5,8.2,97.5 lvl=29
+quest Jeuno.ChocoboOnTheLoose completed
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+login
+trigger Brutus                  # level 29: no section; the default 66
+finish
+trigger Brutus                  # the script's turn, silent: the default 66 again
+finish

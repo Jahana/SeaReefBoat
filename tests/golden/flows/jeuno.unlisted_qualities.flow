@@ -1,0 +1,75 @@
+# Unlisted Qualities (jeuno 77): the adventuring fellow. Upper Jeuno's Luto Mewrilah (no script; default 10034) and
+# Bheem (no script; default 157), Ru'Lude Gardens' Akta (no script; 116), Lower Jeuno's Kuah Dakonsa (no script; 190),
+# Port Jeuno's Red Ghost (a patrol script, no onTrigger; 34). A level 20 Warrior. Available: a trade: no handler; 10031
+# (importantOnce: Event, then Default once played, tied with his default 10034: later talks alternate 10034 / 10031)
+# cancelled (option 1073741824): nothing; option 8 (name 8): nothing; option 19 (name 3, race 1: a female fellow):
+# begun, Data 15728659 (an unset face packs as 15 << 20). Prog 0: Luto's 10033; Bheem's 10037 once per zone, then 157;
+# Akta's 10103 ([7] = Data) with option 0 / 4: nothing, option 2: size 2 (Data 16252947); then nil; Kuah's 20000 with
+# option 16: nothing, option 15: face 15 packed, read back as unset (quirk: Data unchanged), option 4: face 4 (Data
+# 4718611); then nil; Red Ghost's 320 with option 2 (a male personality for a female fellow): nothing, option 12 (past
+# the range; the dead `and` guard lets it through): nothing, option 7: personality 8 (Data 4726803): all three set, Prog
+# 1. Prog 1: Red Ghost and Luto: no handler (their defaults); Bheem's 10171 ([7] = 4726803), its update: no handler (the
+# Lua's ['Bheem'].onEventUpdate is dead), finish cancelled: Prog 1 stays; 10171 again, option 0: Prog 2. Prog 2: Luto's
+# 10032 (Progress, no finish: never completed); Bheem: nil, 157.
+lists UpperJeuno/Luto_Mewrilah/onTrigger UpperJeuno/Luto_Mewrilah/onTrade UpperJeuno/Bheem/onTrigger UpperJeuno/onEventFinish/10031 UpperJeuno/onEventFinish/10171 UpperJeuno/onEventUpdate/10171 RuludeGardens/Akta/onTrigger RuludeGardens/onEventFinish/10103 LowerJeuno/Kuah_Dakonsa/onTrigger LowerJeuno/onEventFinish/20000 PortJeuno/Red_Ghost/onTrigger PortJeuno/onEventFinish/320
+char zone=UpperJeuno pos=-53.9,-0.3,44.9 job=WAR lvl=20
+item BoneChip
+login
+trade Luto_Mewrilah BoneChip x1  # available: no trade handler; nothing
+trigger Luto_Mewrilah          # available: 10031 (importantOnce)
+finish option=1073741824       # EVENT_CANCELLED_OPTION: nothing
+trigger Luto_Mewrilah          # 10031 played once: Default priority, tied with his default 10034; the tie rotates by
+finish                         # the last event: 10034 (no handler)
+trigger Luto_Mewrilah          # 10031
+finish option=8                # name 8 (> 7): nothing
+trigger Luto_Mewrilah          # 10034
+finish
+trigger Luto_Mewrilah          # 10031
+finish option=19               # name 3, race 1: begun, Data 15728659
+trigger Luto_Mewrilah          # Prog 0: 10033
+finish
+trigger Bheem                  # Prog 0: 10037 (oncePerZone)
+finish
+trigger Bheem                  # played in this zone: Ignore; his default 157
+finish
+warp 8.5,0,-67.2 RuludeGardens
+trigger Akta                   # size unset: 10103, [7] = 15728659
+finish option=0                # below 1: nothing
+trigger Akta                   # 10103
+finish option=4                # above 3: nothing
+trigger Akta                   # 10103
+finish option=2                # size 2: Data 16252947; face and personality unset: Prog 0
+trigger Akta                   # size set: nil, 116
+finish
+warp -41.2,0,-65.9 LowerJeuno
+trigger Kuah_Dakonsa           # face unset: 20000, [7] = 16252947
+finish option=16               # above 15: nothing
+trigger Kuah_Dakonsa           # 20000
+finish option=15               # face 15: packed as 15, unpacked as unset: Data 16252947 unchanged
+trigger Kuah_Dakonsa           # face still unset: 20000
+finish option=4                # face 4: Data 4718611
+trigger Kuah_Dakonsa           # face set: nil, 190
+finish
+warp -95,0,-3.3 PortJeuno
+trigger Red_Ghost              # personality unset: 320, [7] = 4718611
+finish option=2                # a female fellow (race 1), a male option: nothing
+trigger Red_Ghost              # 320
+finish option=12               # past 11: in neither range: nothing
+trigger Red_Ghost              # 320
+finish option=7                # female, 7: personality 8, Data 4726803; all three set: Prog 1
+trigger Red_Ghost              # Prog 1: no handler; 34
+finish
+warp -53.9,-0.3,44.9 UpperJeuno
+trigger Luto_Mewrilah          # Prog 1: no handler; 10034
+finish
+trigger Bheem                  # Prog 1: 10171, [7] = 4726803
+update 10171 option=0          # no onEventUpdate handler for 10171 (Bheem's is keyed by his name: dead); no updateEvent: released
+finish option=1073741824       # cancelled: Prog 1 stays
+trigger Bheem                  # 10171
+finish option=0                # Prog 2
+trigger Luto_Mewrilah          # Prog 2: 10032
+finish                         # no 10032 finish: still accepted
+trigger Luto_Mewrilah          # 10032 again
+finish
+trigger Bheem                  # Prog 2: no handler; 157
+finish

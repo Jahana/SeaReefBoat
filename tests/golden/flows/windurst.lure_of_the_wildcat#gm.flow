@@ -1,0 +1,26 @@
+# Lure of the Wildcat (Windurst) (windurst 94): Prog set by GM, isFull(Prog, 20)'s edges. Accepted with the badge
+# (GM): Prog 0x7FFFF (bit 19 missing: 738); 0xFFFFE (bit 0 missing: 738); 0x100000 (bit 20 only, not 0: 738); -1 (every
+# bit: full: 739, completed). 738 is an Event, so the talk after the first two 738s alternates to his script's 740
+# (UseFallback). 739 comes straight after the third 738, so it plays only as a Progress event: an Event would fall back
+# to 740 there (the main flow's 739 follows zone changes, which clear the alternation).
+lists WindurstWoods/Ibwam/onTrigger WindurstWoods/onEventFinish/739
+char zone=WindurstWoods pos=-24,2.75,-59 job=WAR lvl=20
+quest Windurst.LureOfTheWildcat accepted
+keyitem GreenSentinelBadge
+charvar Quest[2][94]Prog 524287
+login
+trigger Ibwam                             # Prog 0x7FFFF: not full: 738
+finish
+trigger Ibwam                             # after the Event 738: his script's 740
+finish
+charvar Quest[2][94]Prog 1048574
+trigger Ibwam                             # Prog 0xFFFFE: not full: 738
+finish
+trigger Ibwam                             # his script's 740
+finish
+charvar Quest[2][94]Prog 1048576
+trigger Ibwam                             # Prog 0x100000: not 0, not full: 738
+finish
+charvar Quest[2][94]Prog -1
+trigger Ibwam                             # Prog -1: every bit set: full: 739 right after the Event 738 (a Progress event)
+finish                                    # the badge taken; KEYITEM_LOST; completed: the Green Invitation Card

@@ -1,0 +1,15 @@
+# Scattered into Shadow (jeuno 61), the Castle Oztroja chest with the Beast Collar already held (Prog 4, Stage 7): nil,
+# the chest's own script (a regular opening). An opened chest leaves for a while, so this side is its own flow.
+lists CastleOztroja/Treasure_Chest/onTrade
+char zone=CastleOztroja pos=-134.5,24,-21 job=BST lvl=50
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ScatteredIntoShadow accepted
+charvar Quest[3][61]Prog 4
+charvar Quest[3][61]Stage 7
+item BeastCollar
+item OztrojaChestKey
+login
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest OztrojaChestKey x1     # the collar held: nil; the chest's own script opens it
+tick 4500

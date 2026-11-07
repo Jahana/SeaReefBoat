@@ -1,0 +1,16 @@
+# True Strength (bastok 53): accepted (GM), a MNK 75 (for Huu Xalmo the Savage). The ??? in Castle Oztroja: the Bottle of
+# Yagudo Drink with no Xalmo Feather and no Huu Xalmo up pops him (npcUtil.popFromQM, hide 0: the ??? stays) and takes the
+# drink (YOU_HOLD); else nil, nothing taken: another item, Huu Xalmo up, the feather held.
+lists CastleOztroja/qm_truestrength/onTrade
+char zone=CastleOztroja pos=-99,-75,-129 job=MNK lvl=75
+quest Bastok.TheFirstMeeting completed
+quest Bastok.TrueStrength accepted
+item BoneChip
+item BottleOfYagudoDrink x2
+login
+trigger qm_truestrength         # FLAME_BURNING (no trigger handler)
+trade qm_truestrength BoneChip x1   # not the drink: nil
+trade qm_truestrength BottleOfYagudoDrink x1   # the drink, no feather, Huu Xalmo not up: he pops, the drink taken, YOU_HOLD
+trade qm_truestrength BottleOfYagudoDrink x1   # Huu Xalmo up: the pop fails, nil, nothing taken
+kill HUU_XALMO_THE_SAVAGE       # no handler; he drops the Xalmo Feather (the pinned seed)
+trade qm_truestrength BottleOfYagudoDrink x1   # the feather held: nil

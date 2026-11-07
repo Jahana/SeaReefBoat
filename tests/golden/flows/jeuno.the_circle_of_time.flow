@@ -1,0 +1,93 @@
+# The Circle of Time (jeuno 65): Mertaire (Lower Jeuno), Imasuke (Port Jeuno), the Perennial Snow (Xarcabard),
+# Chalvatot (Chateau d'Oraguille), the Altar (Monastic Cavern). A level 50 bard (AF3_QUEST_LEVEL) with The Requiem
+# completed and Star Ring 1 kept: Mertaire's 139 (Progress, over Painful Memory's Event 135; option 1: nothing; option 0:
+# Prog 1; again at Prog 1: nothing), a bone chip to Mertaire and to Imasuke while offered (no trade handler: nil),
+# Imasuke's 30 (option 0: Prog 2), 29 (option 0: nothing; option 1: begun, Prog 3),
+# 32; the snow's 3 (option 1: nothing; option 0: Buried = now + 30), PERENNIAL_SNOW_WAIT, a JST day later 2 (option 1:
+# nothing; option 0: Prog 4), the snow at Prog 4 (nil); Imasuke's 33 (option 1: nothing; option 0: Prog 5), 31; Chalvatot's 99 (option 0:
+# Prog 6), 98 (option 0: nothing; option 1: the Moon Ring, Prog 7), 97; the Altar (Bugaboo popped; noAction; again with
+# it up: the pop fails, nil, the Altar's default ALTAR), Chalvatot at Prog 7 (97), Bugaboo's death (Prog 8), Chalvatot
+# at Prog 8 (nil: default 531), the Altar's 3 (option 1: nothing; option 0: both rings deleted, Prog 9), Chalvatot's 96
+# (option 1: nothing; a full bag: not completed; with room: completed, Choral Justaucorps, Paragon of Bard Excellence,
+# fame +7 x3), then Chalvatot (default 531), Mertaire (Painful Memory's 135).
+lists LowerJeuno/Mertaire/onTrigger LowerJeuno/Mertaire/onTrade PortJeuno/Imasuke/onTrigger PortJeuno/Imasuke/onTrade Xarcabard/Perennial_Snow/onTrigger ChateauDoraguille/Chalvatot/onTrigger MonasticCavern/Altar/onTrigger MonasticCavern/Bugaboo/onMobDeath LowerJeuno/onEventFinish/139 PortJeuno/onEventFinish/29 PortJeuno/onEventFinish/30 PortJeuno/onEventFinish/33 Xarcabard/onEventFinish/2 Xarcabard/onEventFinish/3 ChateauDoraguille/onEventFinish/96 ChateauDoraguille/onEventFinish/98 ChateauDoraguille/onEventFinish/99 MonasticCavern/onEventFinish/3
+char zone=LowerJeuno pos=-19.5,0,-59 job=BRD lvl=50
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+quest Jeuno.PathOfTheBard completed
+quest Jeuno.PainfulMemory completed
+quest Jeuno.TheRequiem completed
+keyitem StarRing1
+item BoneChip
+login
+trigger Mertaire                            # available, Prog 0: 139
+finish option=1                             # not 0: nothing
+trigger Mertaire                            # 139
+finish option=0                             # Prog 1
+trigger Mertaire                            # 139 (it repeats)
+finish option=0                             # Prog already 1: nothing
+trade Mertaire BoneChip x1                  # available: no trade handler, nil
+warp -165,11,94.5 PortJeuno
+trigger Imasuke                             # a bard at 50, Prog 1: 30
+finish option=0                             # declined: Prog 2
+trade Imasuke BoneChip x1                   # available: no trade handler, nil
+trigger Imasuke                             # Prog 2: 29
+finish option=0                             # not 1: nothing
+trigger Imasuke                             # 29
+finish option=1                             # begun, Prog 3
+trigger Imasuke                             # accepted, Prog 3: 32
+finish
+warp 337.5,0,-378 Xarcabard
+trigger Perennial_Snow                      # Prog 3, Buried 0: 3
+finish option=1                             # not 0: nothing
+trigger Perennial_Snow                      # 3 again
+finish option=0                             # Buried = now + 30
+trigger Perennial_Snow                      # before the time: PERENNIAL_SNOW_WAIT (Star Ring 1)
+wait jst=1                                  # GetSystemTime past Buried
+trigger Perennial_Snow                      # 2
+finish option=1                             # not 0: nothing
+trigger Perennial_Snow                      # 2 again
+finish option=0                             # Prog 4
+trigger Perennial_Snow                      # Prog 4: nil; its script's PERENNIAL_SNOW_DEFAULT
+warp -165,11,94.5 PortJeuno
+trigger Imasuke                             # Prog 4: 33
+finish option=1                             # not 0: nothing
+trigger Imasuke                             # 33 again
+finish option=0                             # Prog 5
+trigger Imasuke                             # Prog 5: 31
+finish
+warp -104,0,70.5 ChateauDoraguille
+trigger Chalvatot                           # Prog 5: 99
+finish option=0                             # Prog 6
+trigger Chalvatot                           # Prog 6: 98
+finish option=0                             # not 1: nothing
+trigger Chalvatot                           # 98
+finish option=1                             # the Moon Ring, Prog 7
+trigger Chalvatot                           # Prog 7: 97
+finish
+warp 107.5,-3,-144 MonasticCavern
+trigger Altar                               # Prog 7: Bugaboo popped; noAction
+trigger Altar                               # Bugaboo up: the pop fails, nil; ALTAR
+kill BUGABOO                                # Prog 8
+warp -104,0,70.5 ChateauDoraguille
+trigger Chalvatot                           # Prog 8: nil; default 531
+finish
+warp 107.5,-3,-144 MonasticCavern
+trigger Altar                               # Prog 8: 3
+finish option=1                             # not 0: nothing
+trigger Altar                               # 3 again
+finish option=0                             # Star Ring 1 and the Moon Ring deleted, Prog 9
+warp -104,0,70.5 ChateauDoraguille
+trigger Chalvatot                           # Prog 9: 96
+finish option=1                             # not 0: nothing (complete is not called)
+trigger Chalvatot                           # 96 again
+fill-inventory
+finish option=0                             # no room for the justaucorps: not completed
+free-inventory
+trigger Chalvatot                           # 96 again
+finish option=0                             # completed: Choral Justaucorps, Paragon of Bard Excellence, fame +7 x3
+trigger Chalvatot                           # completed: no section; default 531
+finish
+warp -19.5,0,-59 LowerJeuno
+trigger Mertaire                            # completed: Painful Memory's 135
+finish

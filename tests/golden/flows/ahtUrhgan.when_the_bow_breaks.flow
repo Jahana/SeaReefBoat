@@ -1,0 +1,41 @@
+# When the Bow Breaks (ahtUrhgan 45): a level 75 Warrior with a Frayed Arrow and a Rusty Medal (both rare). Gaweesh (no
+# script; default 258), the Giwahb Watchtower (no script; default GIWAHB_WATCHTOWER_LOCKED). Ode not held: Gaweesh 258;
+# Ode completed (a GM): 258. Ode accepted (GMs): available: the Watchtower's trade of the arrow: nil; Gaweesh 280,
+# finished on option 1: begun (any option); Gaweesh again: 258. Accepted: the medal: nil; the arrow and the medal: nil;
+# the arrow: 512, finished: completed (Galeserpent Guardian), the arrow taken, INCREASED_STANDING,
+# 500 imperial standing. Completed: the arrow again: nil; the Watchtower's talk: GIWAHB_WATCHTOWER_LOCKED; Gaweesh 258.
+lists AlZahbi/Gaweesh/onTrigger WajaomWoodlands/Giwahb_Watchtower/onTrade WajaomWoodlands/onEventFinish/512
+char zone=AlZahbi pos=-63.037,-7,37.928 job=WAR lvl=75
+item FrayedArrow
+item RustyMedal
+login
+trigger Gaweesh                         # not available (Ode not accepted): 258
+finish
+quest AhtUrhgan.OdeToTheSerpents completed  # a GM
+trigger Gaweesh                         # Ode completed: not available: 258
+finish
+quest AhtUrhgan.OdeToTheSerpents available  # GMs: Ode accepted
+quest AhtUrhgan.OdeToTheSerpents accepted
+warp -338.164,-37.215,654.51 WajaomWoodlands   # beside the Watchtower
+trade Giwahb_Watchtower FrayedArrow x1  # available: no trade handler: nil
+finish-if-event
+warp -63.037,-7,37.928 AlZahbi
+trigger Gaweesh                         # available: 280
+finish option=1                         # begun (any option)
+trigger Gaweesh                         # accepted: 258
+finish
+warp -338.164,-37.215,654.51 WajaomWoodlands
+trade Giwahb_Watchtower RustyMedal x1   # not the arrow: nil
+finish-if-event
+trade Giwahb_Watchtower FrayedArrow x1 RustyMedal x1   # the arrow and more: nil
+finish-if-event
+trade Giwahb_Watchtower FrayedArrow x1  # 512
+finish                                  # completed: the title; the arrow taken; INCREASED_STANDING; 500 standing
+item FrayedArrow                        # a GM: another arrow
+trade Giwahb_Watchtower FrayedArrow x1  # completed: no section: nil
+finish-if-event
+trigger Giwahb_Watchtower               # completed: GIWAHB_WATCHTOWER_LOCKED
+finish-if-event
+warp -63.037,-7,37.928 AlZahbi
+trigger Gaweesh                         # completed: 258
+finish

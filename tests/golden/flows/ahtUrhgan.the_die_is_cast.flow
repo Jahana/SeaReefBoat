@@ -1,0 +1,45 @@
+# The Die is Cast (ahtUrhgan 16): a level 20 Warrior (under ADVANCED_JOB_LEVEL: Luck of the Draw is not offered, so
+# Ratihb has only this quest's 591), a Bone Chip. Ratihb (no script; default 603), Ekhu Pesshyadha (no script; default
+# 532; Got It All's available section answers him with its own Event 532), Jijiroon (Nashmau; no script; default 1), qm9
+# (Arrapago; no script; default NOTHING_OUT_OF_ORDINARY). Available: a trade to Ratihb: nothing; Ekhu: Got It All's 532;
+# Ratihb 591, finished: begun. Prog 0: Ratihb: no handler: 603; Ekhu 592 (Prog 1). Prog 1: Ekhu: Got It All's 532;
+# Jijiroon 245 (Prog 2). Prog 2: Jijiroon: 1; qm9 212 (Prog 3). Prog 3: qm9: Bukki popped (the qm not hidden):
+# SPINE_CHILL; again with Bukki up: popFromQM false: nil: NOTHING_OUT_OF_ORDINARY; Bukki killed: Prog 4. Prog 4: qm9 213
+# (Prog 5, the Bag of Gold Pieces). Prog 5: qm9: NOTHING_OUT_OF_ORDINARY; Ratihb 593: completed (a Random Ring), the bag
+# taken. Completed: Ratihb: 603.
+lists AhtUrhganWhitegate/Ratihb/onTrigger AhtUrhganWhitegate/Ekhu_Pesshyadha/onTrigger Nashmau/Jijiroon/onTrigger ArrapagoReef/qm9/onTrigger ArrapagoReef/Bukki/onMobDeath AhtUrhganWhitegate/onEventFinish/593
+char zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=20
+item BoneChip
+login
+trade Ratihb BoneChip x1                # available: no trade handler: nothing
+trigger Ekhu_Pesshyadha                 # available: no handler here; Got It All's 532
+finish
+trigger Ratihb                          # 591
+finish                                  # begun
+trigger Ratihb                          # Prog 0: no handler: 603
+finish
+trigger Ekhu_Pesshyadha                 # Prog 0: 592 (over Got It All's 532)
+finish                                  # Prog 1
+trigger Ekhu_Pesshyadha                 # Prog 1: no section-2 handler: Got It All's 532
+finish
+warp 17.413,0,-32.676 Nashmau           # beside Jijiroon
+trigger Jijiroon                        # Prog 1: 245
+finish                                  # Prog 2
+trigger Jijiroon                        # Prog 2: no section-3 handler: 1
+finish
+warp 312.588,-3.882,170.124 ArrapagoReef   # beside qm9
+trigger qm9                             # Prog 2: 212
+finish                                  # Prog 3
+trigger qm9                             # Prog 3: Bukki popped: SPINE_CHILL
+trigger qm9                             # Bukki up: popFromQM false: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+kill BUKKI                              # Prog 3: Prog 4
+trigger qm9                             # Prog 4: 213
+finish                                  # Prog 5; the Bag of Gold Pieces
+trigger qm9                             # Prog 5: no handler: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp 76.725,-6,-137.203 AhtUrhganWhitegate
+trigger Ratihb                          # Prog 5: 593
+finish                                  # completed: Random Ring; the bag taken
+trigger Ratihb                          # completed: no section: 603
+finish

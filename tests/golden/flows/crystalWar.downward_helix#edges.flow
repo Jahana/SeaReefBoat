@@ -1,0 +1,47 @@
+# Downward Helix (crystalWar 33), the edges: a level 99 Scholar in The Eldieme Necropolis [S] with A Little Knowledge
+# and On Sabbatical completed and On Sabbatical's Timer 99999 (GMs; missions as the main flow). The Timer to come: no
+# section: Erlene: A Little Knowledge's 47, finished: the spells; then its 15. The Timer 0 (a GM): 23, finished on
+# option 1: begun (any option). Southern San d'Oria [S] from The Eldieme Necropolis [S] at Prog 0: nothing; Prog 1 (a
+# GM), from East Ronfaure [S]: nothing. Prog 2 (a GM): Sauromugue Champaign [S] from Southern San d'Oria [S]: nothing.
+# Prog 1 (a GM): from Rolanberry Fields [S]: nothing; Indescript Markings at Prog 1: nil. Eldieme [S]: Erlene at Prog
+# 3 (a GM): 26. Prog 4, a full inventory: 27, finished: the bracers do not fit: not completed; freed: 27: completed.
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/23 TheEldiemeNecropolisS/onEventFinish/27 SouthernSanDoriaS/onZoneIn/1 SauromugueChampaignS/onZoneIn/1 SauromugueChampaignS/Indescript_Markings/onTrigger
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=SCH lvl=99
+quest CrystalWar.ALittleKnowledge completed
+quest CrystalWar.OnSabbatical completed
+charvar Quest[7][32]Timer 99999         # a GM: On Sabbatical's 20 sets tomorrow
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erlene                          # On Sabbatical's Timer to come: no section: A Little Knowledge's 47
+finish                                  # the spells
+trigger Erlene                          # A Little Knowledge's 15
+finish
+charvar Quest[7][32]Timer 0             # a GM
+trigger Erlene                          # 23
+finish option=1                         # begun (any option)
+warp -167.043,-2,55.484 SouthernSanDoriaS # from The Eldieme Necropolis [S] at Prog 0: no zone-in reply
+charvar Quest[7][33]Prog 1              # a GM
+warp 314.321,-30.495,-67.15 EastRonfaureS
+warp -167.043,-2,55.484 SouthernSanDoriaS # from East Ronfaure [S] at Prog 1: no zone-in reply
+charvar Quest[7][33]Prog 2              # a GM
+warp 321.768,23.864,114.832 SauromugueChampaignS # from Southern San d'Oria [S] at Prog 2: no zone-in reply
+charvar Quest[7][33]Prog 1              # a GM
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+warp 321.768,23.864,114.832 SauromugueChampaignS # from Rolanberry Fields [S] at Prog 1: no zone-in reply
+trigger Indescript_Markings             # Prog 1: nil
+finish-if-event
+warp 378.436,-39.999,17.914 TheEldiemeNecropolisS
+charvar Quest[7][33]Prog 3              # a GM
+trigger Erlene                          # Prog 3: 26
+finish
+charvar Quest[7][33]Prog 4              # a GM
+fill-inventory
+trigger Erlene                          # Prog 4: 27
+finish                                  # no room for the bracers: not completed
+free-inventory
+trigger Erlene                          # 27
+finish                                  # completed

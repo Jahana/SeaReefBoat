@@ -1,0 +1,45 @@
+# A New Dawn (jeuno 62): the finishes read no status. A BST 75 with Scattered into Shadow and the BST chain completed
+# (GM), the Tamer's Whistle held. 4 open at the var 1 while the var is set 0 (GM): option 0 sets nothing (the var stays
+# 0). 5 open while the quest is set accepted (GM): option 0 still sets the var 1. Set available (GM); 4 open while it is
+# set accepted (GM): option 1 still sets the var 2 (addQuest over an accepted quest). Completed with the var 6 (GM): 0
+# open while it is set available (GM): the var 0. At the Sarcophagus, accepted with the var 5 (GM): 45 open while it is
+# set available (GM): still completed (the Beast Trousers, the title), the var 6, the whistle taken;
+# Quest[3][62]Prog 1 (GM) kept (the Lua's npcUtil.completeQuest has no cleanup).
+char zone=LowerJeuno pos=-80.7,-7.65,-168.8 job=BST lvl=75
+quest Jeuno.ScatteredIntoShadow completed
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+quest Jeuno.PathOfTheBeastmaster completed
+keyitem TamersWhistle
+login
+charvar ANewDawn_Event 1
+trigger _6t2                            # the turn: 132
+finish
+trigger _6t2                            # available, the var 1: 4
+charvar ANewDawn_Event 0
+finish option=0                         # option 0: nothing (the var stays 0: no var 1 set)
+trigger _6t2                            # the turn: 132
+finish
+trigger _6t2                            # available, the var 0: 5
+quest Jeuno.ANewDawn accepted
+finish option=0                         # accepted: the var 1 all the same
+quest Jeuno.ANewDawn available
+trigger _6t2                            # the turn: 132
+finish
+trigger _6t2                            # available, the var 1: 4
+quest Jeuno.ANewDawn accepted
+finish option=1                         # accepted: addQuest (no change), the var 2
+quest Jeuno.ANewDawn completed
+charvar ANewDawn_Event 6
+trigger _6t2                            # the turn: 132
+finish
+trigger _6t2                            # completed, the var 6: 0
+quest Jeuno.ANewDawn available
+finish                                  # available: the var 0 all the same
+quest Jeuno.ANewDawn accepted
+charvar ANewDawn_Event 5
+warp -410.4,6.5,503.0 TheEldiemeNecropolis
+charvar Quest[3][62]Prog 1              # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+trigger Sarcophagus                     # accepted, the first, the var 5: 45
+quest Jeuno.ANewDawn available
+finish                                  # available: completed all the same (Beast Trousers, the title); the var 6; the whistle taken

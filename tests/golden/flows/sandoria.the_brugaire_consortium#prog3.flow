@@ -1,0 +1,12 @@
+# The Brugaire Consortium (sandoria 12): accepted by GM with Prog 3 and Option 3 (a GM-set state: Option only reaches 2
+# in play). 100 gil to Fontoumant: Prog = Option, but Prog < 3 fails: nil (without that operand it would be 611); his
+# trigger: Prog = Option: 560. Prog > Option with Option 3 (parcelItemIds[3] is nil: a script error) is a Lua-bug arm,
+# not recorded.
+char zone=PortSanDoria pos=-9.133,-8,-122.199 job=WAR lvl=10 gil=1000
+quest Sandoria.TheBrugaireConsortium accepted
+charvar Quest[0][12]Prog 3
+charvar Quest[0][12]Option 3
+login
+trade Fontoumant gil=100                  # Prog 3 = Option 3, not < 3: nil
+trigger Fontoumant                        # Prog 3 = Option 3: 560
+finish

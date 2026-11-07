@@ -1,0 +1,13 @@
+# Tea with a Tonberry? at Prog 5 with a full inventory: 740's finish calls quest:complete, which fails (the torque
+# cannot be given); the quest stays accepted at Prog 5 (the Lua ignores the result); with room, 740 again completes it.
+char zone=SouthernSanDoria pos=-189,-2.9,97.2 job=WAR lvl=75
+quest Sandoria.SignedInBlood completed
+quest Sandoria.TeaWithATonberry accepted
+charvar Quest[0][109]Prog 5
+login
+fill-inventory
+trigger Sobane                            # Prog 5: 740
+finish                                    # no room: not completed
+free-inventory
+trigger Sobane                            # 740
+finish                                    # completed: Willpower Torque, fame +40, Talks with Tonberries

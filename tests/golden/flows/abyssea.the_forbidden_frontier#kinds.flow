@@ -1,0 +1,27 @@
+# The Forbidden Frontier (abyssea 166), the reply kind: a level 99 Warrior in Port Jeuno with A Journey Begins, The
+# Truth Beckons, Dawn of Death and the quest's three maw quests completed (GMs; Dawn of Death makes his script answer,
+# which does nothing before it is accepted, so the lookup would play the quest's action anyway). Joachim: 331, finished:
+# begun. The quest back to available (a GM): 331 again, finished: begun. Joachim: 332, finished: completed. The quest
+# back to available, then accepted (GMs): Joachim again: 332 again. Joachim has his own onTrigger
+# (xi.abyssea.traverserNPCOnTrigger): an Event-rank 331 or 332 would alternate with it (interaction_lookup.lua's
+# UseFallback) and the second talk would go to his script (his 328).
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/331 PortJeuno/onEventFinish/332
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.MegadrileMenace completed
+login
+trigger Joachim                         # available, its maw quests begun: 331
+finish option=1                         # begun
+quest Abyssea.TheForbiddenFrontier available # a GM
+trigger Joachim                         # 331 again (the kind)
+finish option=1                         # begun again
+trigger Joachim                         # all three completed: 332
+finish                                  # completed
+quest Abyssea.TheForbiddenFrontier available # a GM
+quest Abyssea.TheForbiddenFrontier accepted # a GM
+trigger Joachim                         # 332 again (the kind)
+finish                                  # completed again

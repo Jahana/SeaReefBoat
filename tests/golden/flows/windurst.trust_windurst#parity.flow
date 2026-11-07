@@ -1,0 +1,20 @@
+# Trust: Windurst (windurst 96), completion parity: 437's and 439's finishes are npcUtil.completeQuest step for step
+# (437: the permit, The Trustworthy, the var; 439: the permit), each ending in the raw player:completeQuest, so a GM's
+# Quest[2][96]Prog survives each completion (quest:cleanup, which a called Quest.Complete() runs, would clear it).
+# Accepted (GM) at WindurstFirstTrust 2 with the Green Institute Card: 437. Then available and accepted again (GM), the
+# card again, Quest[2][96]Prog 2 (GM) and Trust: San d'Oria completed: 439.
+char zone=HeavensTower pos=2,0.1,30 lvl=5 nation=1
+quest Windurst.TrustWindurst accepted
+keyitem GreenInstituteCard
+charvar WindurstFirstTrust 2
+login
+charvar Quest[2][96]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Kupipi+1                        # accepted, the var 2: 437
+finish                                  # the card taken; the permit; The Trustworthy; var 0; completed; Prog kept
+quest Windurst.TrustWindurst available
+quest Windurst.TrustWindurst accepted
+keyitem GreenInstituteCard
+quest Sandoria.TrustSandoria completed
+charvar Quest[2][96]Prog 2              # a GM: the var again, for the second completion
+trigger Kupipi+1                        # accepted, San d'Oria's completed: 439 (0, 0, 0, 0, 0, 0, 0, 0)
+finish                                  # Kupipi learned; the card taken; the permit; completed; Prog kept

@@ -1,0 +1,64 @@
+# Transformations (ahtUrhgan 23, BLU AF3): a level 50 Blue Mage with 5000 gil, An Empty Vessel, Beginnings and Omens
+# completed (GMs: no Transformations mustZone, Timer 0). Waoud (no script; default 61) also answers for An Empty Vessel's
+# completed section (78, an Event); Imperial Whitegate (no script; default GATE_IS_FIRMLY_CLOSED) for the ToAU missions
+# 17, 26, 46 (their mission current: never here). Available: a trade to Waoud: nothing; Imperial Whitegate Prog 0: nil:
+# GATE_IS_FIRMLY_CLOSED; Waoud 720 (5000), option 0: nothing; 720, option 1: 1000 gil, Prog 1 (still available); Prog 1
+# 721 (4000), option 1: 1000 gil; 721, option 0: nothing; Imperial Whitegate Prog 1: 722: begun, [BLUAF]Remaining 7.
+# Accepted: Waoud 723 (3000), option 1: 1000 gil; 723, option 0: nothing; Imperial Whitegate: no section-2 handler:
+# GATE_IS_FIRMLY_CLOSED. Alzadaal Undersea Ruins: area 24 at Prog 1: 2 (Prog 2); area 24 again at Prog 2: nil; area 25
+# at Prog 2: 3 (Prog 3); blank_transformations Prog 3, the Soulflayer down: 4: popped (claimed; the qm not hidden);
+# again with it up: nil: NOTHING_OUT_OF_ORDINARY; the Soulflayer killed at Prog 3: Prog 4; blank_transformations Prog 4:
+# 5: completed (Magus Keffiyeh, Paragon of Blue Mage Excellence), The Beast Within's Timer = now + 60; completed: no
+# section: NOTHING_OUT_OF_ORDINARY. xi.player.onGameIn's ZoningIn lock keeps trigger areas off for 2.5 s after a
+# zone-in (hence the ticks); the zone's own onTriggerAreaEnter has no case for 24 or 25.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/Imperial_Whitegate/onTrigger AhtUrhganWhitegate/onEventFinish/720 AlzadaalUnderseaRuins/onTriggerAreaEnter/24 AlzadaalUnderseaRuins/onTriggerAreaEnter/25 AlzadaalUnderseaRuins/blank_transformations/onTrigger AlzadaalUnderseaRuins/Nepionic_Soulflayer/onMobDeath
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings completed
+quest AhtUrhgan.Omens completed
+item BoneChip
+login
+trade Waoud BoneChip x1                 # available: no trade handler: nothing
+trigger Imperial_Whitegate              # Prog 0: nil: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+trigger Waoud                           # no mustZone, Timer 0, Prog 0: 720 (5000)
+finish option=0                         # nothing
+trigger Waoud                           # 720
+finish option=1                         # 1000 gil, PAY_DIVINATION; Prog 1
+trigger Waoud                           # Prog 1: 721 (4000)
+finish option=1                         # 1000 gil, PAY_DIVINATION
+trigger Waoud                           # 721 (3000)
+finish option=0                         # nothing
+trigger Imperial_Whitegate              # Prog 1: 722
+finish                                  # begun; [BLUAF]Remaining 7
+trigger Waoud                           # accepted: 723 (3000)
+finish option=1                         # 1000 gil, PAY_DIVINATION
+trigger Waoud                           # 723 (2000)
+finish option=0                         # nothing
+trigger Imperial_Whitegate              # accepted: no handler: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+warp 59.5,0,770 AlzadaalUnderseaRuins   # south of area 24 (CHECK the floor height)
+tick 1000
+tick 1000
+tick 1000
+walk 59.5,0,776                         # area 24 at Prog 1: 2
+finish                                  # Prog 2
+walk 59.5,0,770
+walk 59.5,0,776                         # area 24 at Prog 2: nil
+walk 59.5,0,770
+warp 140,0,-588 AlzadaalUnderseaRuins   # south of area 25
+tick 1000
+tick 1000
+tick 1000
+walk 140,0,-580.5                       # area 25 at Prog 2: 3
+finish                                  # Prog 3
+warp -528.204,0,649.682 AlzadaalUnderseaRuins   # beside blank_transformations
+trigger blank_transformations           # Prog 3, the Soulflayer down: 4
+finish                                  # the Soulflayer popped, claimed
+trigger blank_transformations           # Prog 3, the Soulflayer up: nil: NOTHING_OUT_OF_ORDINARY
+finish-if-event
+kill NEPIONIC_SOULFLAYER                # Prog 3: Prog 4
+trigger blank_transformations           # Prog 4: 5
+finish                                  # completed: Magus Keffiyeh, Paragon of Blue Mage Excellence; The Beast Within's Timer = now + 60
+trigger blank_transformations           # completed: no section: NOTHING_OUT_OF_ORDINARY
+finish-if-event

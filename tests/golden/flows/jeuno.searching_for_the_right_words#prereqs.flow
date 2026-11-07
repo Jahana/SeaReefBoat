@@ -1,0 +1,28 @@
+# Searching for the Right Words (jeuno 66): the check's quest conjuncts one at a time, at Kurou-Morou (fame level 6).
+# Your Crystal Ball is completed, so while this quest has no section Never to Return (available, Prog 0) answers with
+# its reading 204 (answered 1: not counted). None of the three completed: 204; the Vigil completed (Rubbish Day not):
+# 204; Rubbish Day too (Never to Return not): 204; Never to Return too: 17 (Progress, over Never to Return's completed
+# 204; declined, Prog 0). Ilumida at Prog 0: nil, her default 189.
+lists LowerJeuno/Kurou-Morou/onTrigger LowerJeuno/onEventFinish/17 UpperJeuno/Ilumida/onTrigger
+char zone=LowerJeuno pos=-1.2,-6.7,-30.1 job=WAR lvl=30
+quest Jeuno.CollectTarutCards completed            # (Rubbish Day needs it; else its offer 28 answers at Chululu)
+quest Jeuno.YourCrystalBall completed              # (Never to Return needs it; else its offer 194 answers at Kurou-Morou)
+charvar Quest[3][166]Date 2000000000               # All in the Cards waits (Date ahead): no 10110 at Chululu
+fame Sandoria 284
+fame Bastok 283
+fame Windurst 283
+login
+trigger Kurou-Morou                     # A Candlelight Vigil not completed: no section; Never to Return's 204
+finish option=1                         # not counted
+quest Jeuno.ACandlelightVigil completed
+trigger Kurou-Morou                     # Rubbish Day not completed: no section; 204
+finish option=1
+quest Jeuno.RubbishDay completed
+trigger Kurou-Morou                     # Never to Return not completed: no section; 204
+finish option=1
+quest Jeuno.NeverToReturn completed
+trigger Kurou-Morou                     # all three: 17 (over Never to Return's 204)
+finish option=1                         # nothing
+warp -73.5,-1.2,57.3 UpperJeuno
+trigger Ilumida                         # available, Prog 0: nil; default 189
+finish

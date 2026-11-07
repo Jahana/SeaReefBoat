@@ -1,0 +1,94 @@
+# The Wayward Automaton (ahtUrhgan): the other operands. A WAR 75 with No Strings Attached completed and the Animator:
+# Iruki-Waraki's script finds none of this quest's arms while available (not a PUP), then his own 267 arm (not a PUP,
+# No Strings Attached completed); completed by GM: 777 (not a PUP). Bob, a PUP of level 39 with No Strings Attached
+# completed: no arm (below AF1_QUEST_LEVEL), none of Operation Teatime's: the script starts nothing and the lookup
+# answers its 267; the same at progress 1 and 3 by GM (775 and 776 want the quest accepted). Carl, a PUP of level 50
+# with this quest completed: not below AF2_QUEST_LEVEL: no arm of this quest; Operation Teatime's 778 (available).
+# Dnegan: progress 0: none: his 288; progress 1 while available: 288; progress 2 by GM while available: 289 (no status
+# test), its finish sets progress 2; progress 3: 288. qm9 while available: SOMEONE_SLIPPED; accepted at progress 1:
+# SOMEONE_SLIPPED. The toad's death off its arm: spawned at progress 2, killed at progress 3 (a GM): no count; qm9 at
+# progress 2 spawns it again; killed: NM 1. NM 2 by GM: qm9's 14 (NM 1 or more). Spawned again, NM 2 by GM: the kill
+# does not count (NM stays 2); spawned again, the quest available by GM: the kill does not count.
+char zone=AhtUrhganWhitegate pos=102.8,-6.0,-29.0 job=WAR lvl=75
+char bob zone=AhtUrhganWhitegate pos=102.8,-6.0,-28.0 job=PUP lvl=39
+char carl zone=AhtUrhganWhitegate pos=102.8,-6.0,-30.0 job=PUP lvl=50
+quest AhtUrhgan.NoStringsAttached completed
+item Animator
+bob: quest AhtUrhgan.NoStringsAttached completed
+bob: item Animator
+carl: quest AhtUrhgan.NoStringsAttached completed
+carl: quest AhtUrhgan.TheWaywardAutomaton completed
+carl: item Animator
+login
+trigger Iruki-Waraki                    # No Strings Attached's 267 (UseFallback 0)
+finish
+trigger Iruki-Waraki                    # the script: not a PUP, available: none of this quest's arms; his 267
+finish
+quest AhtUrhgan.TheWaywardAutomaton completed
+trigger Iruki-Waraki                    # 267
+finish
+trigger Iruki-Waraki                    # not a PUP, completed: 777
+finish
+bob: login
+bob: trigger Iruki-Waraki               # 267
+bob: finish
+bob: trigger Iruki-Waraki               # the script, PUP 39: no arm of either quest, not his 267 arm: the lookup's 267
+bob: finish
+bob: charvar TheWaywardAutomatonProgress 1
+bob: trigger Iruki-Waraki               # 267
+bob: finish
+bob: trigger Iruki-Waraki               # available at progress 1: no 775 (accepted only): the lookup's 267
+bob: finish
+bob: charvar TheWaywardAutomatonProgress 3
+bob: trigger Iruki-Waraki               # 267
+bob: finish
+bob: trigger Iruki-Waraki               # available at progress 3: no 776 (accepted only): the lookup's 267
+bob: finish
+carl: login
+carl: trigger Iruki-Waraki              # 267
+carl: finish
+carl: trigger Iruki-Waraki              # PUP 50, completed: not below AF2: none; Operation Teatime available: 778
+carl: finish                            # (Operation Teatime begun: its flows go on from here)
+warp 31.0,-6.0,56.0 Nashmau
+quest AhtUrhgan.TheWaywardAutomaton available
+trigger Dnegan                          # progress 0: none of either quest: his 288
+finish
+charvar TheWaywardAutomatonProgress 1
+trigger Dnegan                          # available, progress 1: no arm: 288
+finish
+charvar TheWaywardAutomatonProgress 2
+trigger Dnegan                          # available, progress 2: 289 (no status test)
+finish                                  # progress 2
+warp 130.4,1.4,-631.4 CaedarvaMire
+trigger qm9                             # available: SOMEONE_SLIPPED
+quest AhtUrhgan.TheWaywardAutomaton accepted
+charvar TheWaywardAutomatonProgress 1
+trigger qm9                             # accepted, progress 1: SOMEONE_SLIPPED
+charvar TheWaywardAutomatonProgress 2
+trigger qm9                             # accepted, progress 2, NM 0: HIDEOUS_BEAST_EMERGES; the toad spawned
+charvar TheWaywardAutomatonProgress 3
+kill CAEDARVA_TOAD                      # progress 3: the death's else: no count (NM stays 0)
+tick 15000                              # the dead toad despawns (a dead mob stays spawned through one long tick)
+tick 30000
+charvar TheWaywardAutomatonProgress 2
+trigger qm9                             # NM 0, the toad down: spawned again (the death did not count)
+kill CAEDARVA_TOAD                      # progress 2: NM 1
+charvar TheWaywardAutomatonNM 2
+trigger qm9                             # NM 2: 14
+finish                                  # progress 3; NM 0
+tick 15000                              # the toad despawns
+tick 30000
+charvar TheWaywardAutomatonProgress 2
+trigger qm9                             # spawned again
+charvar TheWaywardAutomatonNM 2
+kill CAEDARVA_TOAD                      # NM 2: no count (NM stays 2)
+tick 15000
+tick 30000
+charvar TheWaywardAutomatonNM 0
+trigger qm9                             # spawned again
+quest AhtUrhgan.TheWaywardAutomaton available
+kill CAEDARVA_TOAD                      # available: no count (NM stays 0)
+warp 31.0,-6.0,56.0 Nashmau
+charvar TheWaywardAutomatonProgress 3
+trigger Dnegan                          # available, progress 3 (past the arm's == 2): no arm: 288
+finish

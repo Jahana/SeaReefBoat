@@ -1,0 +1,105 @@
+# The Sahagin's Key (outlands 128; call-only, no quest log: no script reads or writes its status): Gimb (Norg; his
+# script: always 69, SahaginKeyProgress 1), Bou the Righteous (Sea Serpent Grotto; always 108, Progress 2), Hurr the
+# Betrayer (Sea Serpent Grotto: the key). None of them has a default. The Ornamented Door _4wa (stays Lua: it reads no
+# quest var) takes a Sahagin Key from anyone. A level 99 Warrior with 12 Mythril Beastcoins, 3 Gold Beastcoins and a
+# Norg Shell (rare: one at a time, the next ones by GM).
+# Gimb 69 (Progress 1). Hurr at Progress 1: 104; a trade at SahaginKeyItems 0: nothing. Bou 108 (Progress 2). Hurr at
+# Progress 2 without the key: 105 (Items 1). Trades at Items 1: a Gold Beastcoin and the shell, two Mythril Beastcoins
+# and the shell, three without the shell: nothing; three and the shell: 107, finished with a full bag (the key not
+# given, ITEM_CANNOT_BE_OBTAINED: nothing taken, Progress 2); again with room: the key, the coins and the shell taken,
+# Progress 3, Items 0. Hurr at Progress 3, Items 0 with the key: 104. The door takes the key (Lua). Hurr at Progress 3,
+# Items 0 without the key: the script's math.randomInt(1, 100) <= 50: 105 (Items 1), else 106 (Items 2): 106 three
+# times, then 105 (Items 0 again by GM before each). Items 1: 105; Items 2: 106. Trades at Items 2: three Mythril
+# Beastcoins and the shell, the Gold Beastcoin alone: nothing; the Gold Beastcoin and the shell: 107, a full bag:
+# nothing; with room: the key, the coin and the shell taken, Items 0 (Progress stays 3). Items 1 with the key (GM): 105
+# (that arm reads no key); 107 (a new shell, GM), finished: the key held (rare): ITEM_CANNOT_BE_OBTAINED, nothing.
+# Items 3 (GM): 104; a trade: nothing. Bou at Progress 3: 108, Progress 2 (he reads nothing). Hurr at Progress 2 with
+# the key: 104. Items 1 (GM): 107 at Progress 2 with the key held: no key (the Progress 3 arm not taken: nothing). Gimb
+# at Progress 2: 69, Progress 1. The door takes the key; Hurr's trade at Progress 1, Items 1: 107 (the trade reads no
+# Progress), finished: nothing (no arm at Progress 1).
+# The deliberate log writes (user ruling 2026-11-04) are the C# port's, not the Lua's: this trace is a csharp-rerecord
+# of the Lua recording (lua-at kept), the difference the log's 0x056 pages, chars.quests and char_quest_state only.
+char zone=Norg pos=-5,-1,-44 job=WAR lvl=99
+item MythrilBeastcoin x12
+item GoldBeastcoin x3
+item NorgShell
+login
+trigger Gimb                              # 69, SahaginKeyProgress 1 (added)
+finish
+warp 307.4,27.768,234.3 SeaSerpentGrotto  # beside Hurr the Betrayer
+trigger Hurr_the_Betrayer                 # Progress 1: 104
+finish
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # SahaginKeyItems 0: nothing
+warp -123.5,47.568,-334.8 SeaSerpentGrotto  # beside Bou the Righteous
+trigger Bou_the_Righteous                 # 108, Progress 2
+finish
+warp 307.4,27.768,234.3 SeaSerpentGrotto
+trigger Hurr_the_Betrayer                 # Progress 2, no key: 105, Items 1
+finish
+trade Hurr_the_Betrayer GoldBeastcoin x1 NorgShell x1  # Items 1, the gold coin: nothing
+trade Hurr_the_Betrayer MythrilBeastcoin x2 NorgShell x1  # two coins: nothing
+trade Hurr_the_Betrayer MythrilBeastcoin x3  # no shell: nothing
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # 107
+fill-inventory
+finish                                    # no room: ITEM_CANNOT_BE_OBTAINED; nothing taken, Progress 2
+free-inventory
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # 107
+finish                                    # the Sahagin Key; 3 coins and the shell taken; Progress 3, Items 0; completed
+trigger Hurr_the_Betrayer                 # Progress 3, Items 0, the key held: 104
+finish
+warp 101.5,-2.2,41.5 SeaSerpentGrotto     # outside the Ornamented Door
+trade _4wa SahaginKey x1                  # the door (Lua): opens, SAHAGIN_DOOR_TRADED, the key taken
+warp 307.4,27.768,234.3 SeaSerpentGrotto
+trigger Hurr_the_Betrayer                 # Progress 3, Items 0, no key: the roll: 106, Items 2
+finish
+charvar SahaginKeyItems 0                 # a GM
+trigger Hurr_the_Betrayer                 # the roll: 106, Items 2
+finish
+charvar SahaginKeyItems 0
+trigger Hurr_the_Betrayer                 # the roll: 106, Items 2
+finish
+charvar SahaginKeyItems 0
+trigger Hurr_the_Betrayer                 # the roll: 105, Items 1
+finish
+charvar SahaginKeyItems 1                 # a GM
+trigger Hurr_the_Betrayer                 # Progress 3, Items 1: 105
+finish
+charvar SahaginKeyItems 2
+trigger Hurr_the_Betrayer                 # Progress 3, Items 2: 106
+finish
+item NorgShell                            # a GM
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # Items 2, the mythril coins: nothing
+trade Hurr_the_Betrayer GoldBeastcoin x1  # no shell: nothing
+trade Hurr_the_Betrayer GoldBeastcoin x1 NorgShell x1  # 107
+fill-inventory
+finish                                    # no room: nothing
+free-inventory
+trade Hurr_the_Betrayer GoldBeastcoin x1 NorgShell x1  # 107
+finish                                    # the key; the coin and the shell taken; Items 0, Progress 3
+charvar SahaginKeyItems 1                 # a GM
+trigger Hurr_the_Betrayer                 # Progress 3, Items 1, the key held: 105
+finish
+item NorgShell                            # a GM
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # 107
+finish                                    # the key held (rare): ITEM_CANNOT_BE_OBTAINED; nothing taken
+charvar SahaginKeyItems 3                 # a GM
+trigger Hurr_the_Betrayer                 # Items 3: 104
+finish
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # Items 3: nothing
+warp -123.5,47.568,-334.8 SeaSerpentGrotto
+trigger Bou_the_Righteous                 # Progress 3: 108, Progress 2
+finish
+warp 307.4,27.768,234.3 SeaSerpentGrotto
+trigger Hurr_the_Betrayer                 # Progress 2, the key held: 104
+finish
+charvar SahaginKeyItems 1                 # a GM
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # 107
+finish                                    # Progress 2, the key held: ITEM_CANNOT_BE_OBTAINED; nothing
+warp -5,-1,-44 Norg
+trigger Gimb                              # Progress 2: 69, Progress 1
+finish
+warp 101.5,-2.2,41.5 SeaSerpentGrotto
+trade _4wa SahaginKey x1                  # the door takes the key (Lua)
+warp 307.4,27.768,234.3 SeaSerpentGrotto
+trade Hurr_the_Betrayer MythrilBeastcoin x3 NorgShell x1  # Items 1: 107 (no Progress read)
+finish                                    # Progress 1: nothing (no key, nothing taken)

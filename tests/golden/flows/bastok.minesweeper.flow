@@ -1,0 +1,18 @@
+# Minesweeper (bastok 39): Gerbaum in Bastok Mines. The offer, the soot trade (three pinches, not two), the completion
+# repeated: the trade section matches every status but available.
+lists BastokMines/Gerbaum/onTrigger BastokMines/Gerbaum/onTrade BastokMines/onEventFinish/108 BastokMines/onEventFinish/109
+char zone=BastokMines pos=-118,-3.492,-74
+item PinchOfZeruhnSoot x8
+login
+trade Gerbaum PinchOfZeruhnSoot x3  # available: no trade handler, nothing
+trigger Gerbaum                 # the offer, 108
+finish                          # accepted
+trigger Gerbaum                 # accepted: his script's 22 or 23
+finish
+trade Gerbaum PinchOfZeruhnSoot x2  # two pinches: nothing
+trade Gerbaum PinchOfZeruhnSoot x3  # 109
+finish                          # completed: 150 gil, Zeruhn Sweeper, fame 10, three pinches gone
+trigger Gerbaum                 # completed: his script's 22 or 23
+finish
+trade Gerbaum PinchOfZeruhnSoot x3  # completed: 109 again
+finish                          # the repeat: 150 gil, fame 10 again

@@ -1,0 +1,89 @@
+# Wonder Wands (windurst 48): 267's nine arms (the roll 1 / 2 / 3 by math.randomInt, the seeded script RNG, times no
+# free slot / one / more). Completed with SecondRewardVar 1 (GMs). Hakkuru-Rinkuru's script talks follow Making Amends'
+# 281 (its turns). Available with SecondRewardVar 1 (a GM; the offer's conditions unmet): nothing (267 wants the quest
+# completed). Inventory full (30 Bronze Swords): six 267s, each ITEM_CANNOT_BE_OBTAINED for both items of its roll, the
+# var kept (rolls 1, 1, 2, 2, 3, 2). One free slot (inventory 31): six 267s, each ITEM_CANNOT_BE_OBTAINED for the roll's
+# second item only, the var kept (rolls 2 or 3 four times: the Rose Wand; 1 twice: the Mythril Rod). Freed: four 267s
+# (the var set again by a GM before each), each giving the roll's two items, var 0 (rolls 3, 3, 2, 2; roll 1 freed is in
+# the main flow). The C# folds the nine arms into the roll's two items.
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=75
+fame Windurst 325
+login
+quest Windurst.MakingAmends completed
+charvar SecondRewardVar 1
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # available, SecondRewardVar 1, Making Amens! not completed: nothing; 281 again
+finish
+quest Windurst.MakingAmens completed
+quest Windurst.WonderWands completed
+fill-inventory                          # no free slot
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED for both items of the roll; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED for both items of the roll; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED for both items of the roll; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED for both items of the roll; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED for both items of the roll; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED for both items of the roll; var kept
+storage inventory 31                    # one free slot
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # one free slot: ITEM_CANNOT_BE_OBTAINED for the second; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # one free slot: ITEM_CANNOT_BE_OBTAINED for the second; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # one free slot: ITEM_CANNOT_BE_OBTAINED for the second; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # one free slot: ITEM_CANNOT_BE_OBTAINED for the second; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # one free slot: ITEM_CANNOT_BE_OBTAINED for the second; var kept
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # one free slot: ITEM_CANNOT_BE_OBTAINED for the second; var kept
+free-inventory
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # free: the roll's two items; SecondRewardVar 0
+charvar SecondRewardVar 1               # a GM
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # free: the roll's two items; SecondRewardVar 0
+charvar SecondRewardVar 1               # a GM
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # free: the roll's two items; SecondRewardVar 0
+charvar SecondRewardVar 1               # a GM
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 267
+finish                                  # free: the roll's two items; SecondRewardVar 0

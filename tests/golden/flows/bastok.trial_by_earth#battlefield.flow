@@ -1,0 +1,19 @@
+# Trial by Earth (bastok 61): the battlefield. Accepted with the Tuning Fork of Earth, at EP_Entrance the fork opens the
+# entry menu 32000; its update with option 1 (index 0, arena 1) registers and enters (the fork taken); Titan_Prime_TBE
+# of arena 1 (GALGALIM-3, below every IDs.lua key of the zone) is killed, and the win's 32001 opens within the kill step.
+# Its finish runs the battlefield's onEventFinishWin (no title, no XP: nothing) and this quest's handler
+# (battlefieldWin 576: the Whisper of Tremors, Heir of the Great Earth). In Port Bastok, Juroro's 252 and option 5
+# (10000 gil) complete it.
+lists CloisterOfTremors/EP_Entrance/onTrigger CloisterOfTremors/onEventFinish/32001 PortBastok/Juroro/onTrigger
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=WAR lvl=75
+quest Bastok.TrialByEarth accepted
+keyitem TuningForkOfEarth
+login
+trigger EP_Entrance            # the fork: the entry menu 32000
+update 32000 option=1          # Trial by Earth (index 0), arena 1: registered, entered, the fork taken
+finish                         # in the arena
+kill GALGALIM-3                # Titan_Prime_TBE of arena 1: the battlefield won, 32001 opens
+finish                         # battlefieldWin 576: the Whisper of Tremors, Heir of the Great Earth
+warp 32,7,-41 PortBastok
+trigger Juroro                 # the whisper: 252
+finish option=5                # 10000 gil: completed, the whisper deleted, the Timer set

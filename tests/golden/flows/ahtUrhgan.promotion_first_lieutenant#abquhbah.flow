@@ -1,0 +1,35 @@
+# Promotion: First Lieutenant's Event lines at Abquhbah (his script: 255) against his script's turn: the lookup gives the
+# script a turn after an Event or a lower reply (interaction_lookup.lua's UseFallback var), not after a Progress one. A
+# level 1 Warrior with Second Lieutenant completed, First Lieutenant accepted at Prog 0 with Wait 99999 by GMs. 5088 (an
+# Event); Wait 0 (a GM): the script's turn: 255; 5087 (an Event, once per zone); the script's turn: 255; 5087's mark
+# used (no action): 255. Prog 4 (a GM) at about 12:00: 5089 [0] = 1 (an Event); the script's turn: 255.
+lists AhtUrhganWhitegate/Abquhbah/onTrigger
+char zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant completed
+quest AhtUrhgan.PromotionSecondLieutenant completed
+quest AhtUrhgan.PromotionFirstLieutenant accepted
+charvar Quest[6][98]Wait 99999
+charvar AssaultPromotion 25
+login
+trigger Abquhbah                        # Prog 0, Wait ahead: 5088 (an Event)
+finish
+charvar Quest[6][98]Wait 0              # a GM
+trigger Abquhbah                        # Wait 0: 5087 (an Event) after an Event: the script's turn: 255
+finish
+trigger Abquhbah                        # 5087 (once per zone)
+finish
+trigger Abquhbah                        # after an Event: the script's turn: 255
+finish
+trigger Abquhbah                        # 5087's mark used: no action: 255
+finish
+charvar Quest[6][98]Prog 4              # a GM
+trigger Abquhbah                        # Prog 4, about 12:00: 5089 [0] = 1 (an Event)
+finish                                  # not 15:00-16:59: nothing
+trigger Abquhbah                        # after an Event: the script's turn: 255
+finish

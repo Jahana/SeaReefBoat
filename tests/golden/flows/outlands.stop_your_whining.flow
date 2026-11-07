@@ -1,0 +1,33 @@
+# Stop Your Whining (outlands 132): a level 75 Warrior in Norg, a Bone Chip. Washu's other replies: Yomi Okuri (a Samurai's
+# quest: none here) and Chasing Dreams (not set up). Fame 224 (level 3): a chip to Washu: no section: nothing; Washu: the
+# default 80. Fame 225 (level 4, a GM): the chip: no trade handler: nothing; Washu 21, option 0: nothing; 21, option 2:
+# nothing (not 1); 21, option 1:
+# begun, the Empty Barrel. Accepted: Washu 22 (the barrel; no finish). Yhoator Jungle's qm2: the barrel: TREE_CHECK, the
+# barrel taken, the Barrel of Opo-opo Brew (a keyItem reply); qm2 again: TREE_FULL. Norg: Washu 23: completed (the Scroll
+# of Hojo: Ichi, Norg fame 40, Apprentice Sommelier), the brew taken; Washu 24 (replaceDefault).
+lists Norg/Washu/onTrigger Norg/Washu/onTrade YhoatorJungle/qm2/onTrigger Norg/onEventFinish/23
+char zone=Norg pos=51.041,-6.282,15.546 job=WAR lvl=75
+fame Norg 224
+item BoneChip
+login
+trade Washu BoneChip x1                 # fame level 3: no section: nothing
+trigger Washu                           # the default 80
+finish
+fame Norg 225                           # a GM: level 4
+trade Washu BoneChip x1                 # no trade handler: nothing
+trigger Washu                           # 21
+finish option=0                         # nothing
+trigger Washu                           # 21
+finish option=2                         # not 1: nothing
+trigger Washu                           # 21
+finish option=1                         # begun; the Empty Barrel
+trigger Washu                           # the barrel: 22
+finish                                  # no finish handler
+warp -302.183,1.703,18.208 YhoatorJungle
+trigger qm2                             # the barrel: TREE_CHECK; the barrel taken; the Barrel of Opo-opo Brew
+trigger qm2                             # the brew: TREE_FULL
+warp 51.041,-6.282,15.546 Norg
+trigger Washu                           # the brew: 23
+finish                                  # completed: the scroll, Norg fame 40, the title; the brew taken
+trigger Washu                           # completed: 24 (replaceDefault)
+finish

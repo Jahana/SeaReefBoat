@@ -1,0 +1,16 @@
+# Return to the Depths at Prog 9: the battlefield won, then its 32001 finished after a GM clears the local var
+# battlefieldWin (`localvar battlefieldWin 0`): the quest's 32001 handler's other side (the var is not 737): nothing,
+# Prog stays 9, no gil.
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/onEventFinish/32001
+char zone=MineShaft2716 pos=-93.657,-120,-583.561 lvl=75
+quest Bastok.OutOfTheDepths completed
+quest Bastok.AQuestionOfFaith completed
+quest Bastok.ReturnToTheDepths accepted
+charvar Quest[1][78]Prog 9
+login
+trigger _0d0                         # Prog 9: the quest's handler nil; the battlefield's 32000 menu
+update 32000 option=17               # index 1, area 1: registered, entered
+finish                               # in the arena
+kill TWILOTAK                        # area 1: won (his death alone ends it here), battlefieldWin 737, 32001 opens
+localvar battlefieldWin 0            # GM: the win's local var cleared
+finish                               # 32001, battlefieldWin 0: nothing (Prog 9)

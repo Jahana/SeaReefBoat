@@ -1,0 +1,36 @@
+# Go! Go! Gobmuffin! (otherAreas 69): Tavnazian Safehold's Epinolle (no script; default 230); Riverne - Site #B01's Spatial
+# Displacement DISPLACEMENT_OFFSET+15 (its script's optional cutscene 17) and the NMs SPELL_SPITTER_SPILUSPOK (Spell
+# Spitter Spilospok), +1 (Chemical Cook Chemachiq), +2 (Book Browser Bokabraq). CoP Slanderous Utterings current
+# (Sheltering Doubt completed).
+# A trade to Epinolle while available: no trade handler. Epinolle 232, finished: begun; again: 233 (event). Riverne: the
+# displacement's 17, finished: the three spawned and claimed (seen from 40 yalms: the displacement stands 190 yalms off,
+# past the 50-yalm render range); 17 again (up): nothing. +0 killed: GobmuffinNM 1; +1: 3; +2: all three, Prog 1 (the
+# local var not written). Epinolle 234, finished: completed (2000 exp, 2000 gil, the Map of Cape Riverne). Completed:
+# 235 (replaceDefault).
+lists TavnazianSafehold/Epinolle/onTrigger TavnazianSafehold/onEventFinish/232 TavnazianSafehold/onEventFinish/234 RiverneSiteB01/onEventFinish/17 RiverneSiteB01/Book_Browser_Bokabraq/onMobDeath RiverneSiteB01/Chemical_Cook_Chemachiq/onMobDeath RiverneSiteB01/Spell_Spitter_Spilospok/onMobDeath
+lists TavnazianSafehold/Epinolle/onTrade
+char zone=TavnazianSafehold pos=-100.7,-27.25,58.8 job=WAR lvl=75
+mission Cop SlanderousUtterings current
+item ChocoboFeather
+login
+trade Epinolle ChocoboFeather x1        # available: no trade handler; nothing
+trigger Epinolle                        # available: 232
+finish                                  # begun
+trigger Epinolle                        # Prog 0: 233
+finish
+warp 387.2,49.8,693.7 RiverneSiteB01
+trigger DISPLACEMENT_OFFSET+15          # 17 (the script's optional cutscene)
+finish option=0                         # Prog 0, none up: the three spawned
+walk 300,88,808                         # 40 yalms from the NMs: the three seen
+trigger DISPLACEMENT_OFFSET+15          # 17
+finish option=0                         # up: nothing
+kill SPELL_SPITTER_SPILUSPOK            # bit 0: GobmuffinNM 1
+kill SPELL_SPITTER_SPILUSPOK+1          # bit 1: 3
+# (no rezone between the kills: a zone change clears the local var GobmuffinNM. The warp's afterZoneIn, 4 s after the
+# zone-in, falls in this second kill's step, since the steps before did not reach it: so its ret shows here)
+kill SPELL_SPITTER_SPILUSPOK+2          # bit 2: 7: Prog 1
+warp -100.7,-27.25,58.8 TavnazianSafehold
+trigger Epinolle                        # Prog 1: 234
+finish                                  # completed
+trigger Epinolle                        # completed: 235
+finish

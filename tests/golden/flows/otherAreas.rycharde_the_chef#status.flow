@@ -1,0 +1,24 @@
+# Rycharde the Chef (otherAreas 0): each section's status operand alone, set by a GM. Available section (status only):
+# Prog 2 while completed (a GM): Rycharde answers with Way of the Cook's section (75: Quest[4][0]DayCompleted 0 + 8 <=
+# 8000 but fame level 1), not 70; Take with Way of the Cook's 68 (the same id as the available section's 68: Rycharde
+# is the step that tells them apart). Prog 1 while accepted (a GM): Take 68 (the accepted section's), not 60; 60 opened
+# while available, the quest made accepted by a GM, finished: no 60 handler while accepted (Prog stays 1). Accepted
+# section (status only): two meat while completed: nothing (no 74).
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/Take/onTrigger Mhaura/onEventFinish/60 Mhaura/onEventFinish/74
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+item SliceOfDhalmelMeat x2
+quest OtherAreas.RychardeTheChef completed
+charvar Quest[4][0]Prog 2
+login
+trigger Rycharde                        # completed, Prog 2: Way of the Cook's 75 (fame level 1)
+finish
+trade Rycharde SliceOfDhalmelMeat x2    # completed: no trade handler; nothing
+quest OtherAreas.RychardeTheChef available # a GM (delQuest: addQuest alone leaves a completed quest completed)
+quest OtherAreas.RychardeTheChef accepted # a GM: accepted (Prog 2)
+charvar Quest[4][0]Prog 1               # a GM
+trigger Take                            # accepted, Prog 1: 68 (not 60)
+finish
+quest OtherAreas.RychardeTheChef available # a GM
+trigger Take                            # available, Prog 1: 60
+quest OtherAreas.RychardeTheChef accepted # a GM, while 60 is open
+finish                                  # no 60 handler while accepted: Prog stays 1

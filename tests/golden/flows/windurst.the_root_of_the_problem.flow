@@ -1,0 +1,59 @@
+# The Root of the Problem (windurst 68, BLM AF3): Chumimi (Heaven's Tower) and Koru-Moru (Windurst Walls). Koru-Moru's
+# default 193 is a Default-priority action, so the lookup takes turns with his script: the default's turn, the
+# script's turn, ... (his containers: Star Struck, Blast from the Past, Making the Grade, The Puppet Master,
+# Riding on the Clouds: none started here; his SMN AF arms stay in his script, not reached). Recollections completed by
+# GM.
+# BLM 75: 276 (0, 829), option 0: begun, var 1. Var 1: 277. Chumimi's silk with another item: nothing; alone:
+# 278 (no finish: the silk kept, var 1). Koru-Moru: 193, then 348; the silk with gil: nothing; with another item:
+# nothing; alone: 349: taken, var 2 (in onTrade, after the event starts); then 193 on both turns. Chumimi: the silk at
+# var 2: nothing; 279: Sluice Surveyor MK I; again 279. Var 4 and var 0 (GM): nothing at all (her 259 not played).
+# Var 3 (GM; the Toraimarai steps stay Lua): 281; full inventory: refused; then Wizard's Petasos, completed, fame 20,
+# Paragon of Black Mage Excellence, the key item taken (the var stays 3). Completed: her 259; the silk at var 1 (GM):
+# nothing.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi completed
+quest Windurst.Recollections completed
+item SquareOfSilkCloth x4
+item BlockOfAnimalGlue
+login
+trigger Chumimi                         # Recollections completed, available, BLM 75, no needToZone: 276 (0, 829)
+finish option=0                         # begun (any option); var 1
+trigger Chumimi                         # accepted, var 1: 277 (0, 829)
+finish
+trade Chumimi SquareOfSilkCloth x1 BlockOfAnimalGlue x1  # two items: nothing
+trade Chumimi SquareOfSilkCloth x1      # accepted, var 1, the silk alone: 278
+finish                                  # no finish handler: nothing (the silk kept, var 1)
+warp -120.2,-5.5,122.4 WindurstWalls    # beside Koru-Moru
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # the script's turn: SMN arms not met; accepted, var 1: 348 (0, 829)
+finish
+trade Koru-Moru SquareOfSilkCloth x1 gil=10  # gil in the trade: nothing
+trade Koru-Moru SquareOfSilkCloth x1 BlockOfAnimalGlue x1  # two items: nothing
+trade Koru-Moru SquareOfSilkCloth x1    # accepted: 349; the silk taken, var 2
+finish
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # the script's turn: var 2: nothing: 193
+finish
+warp 0.0,30.75,21.5 HeavensTower
+trade Chumimi SquareOfSilkCloth x1      # var 2: nothing
+trigger Chumimi                         # var 2: 279
+finish                                  # Sluice Surveyor MK I
+trigger Chumimi                         # var 2: 279 again
+finish                                  # npcUtil.giveKeyItem again
+charvar rootProblem 4
+trigger Chumimi                         # accepted, var 4: nothing at all (no event; her 259 not played)
+charvar rootProblem 0
+trigger Chumimi                         # accepted, var 0: nothing at all
+charvar rootProblem 3
+fill-inventory
+trigger Chumimi                         # var 3: 281
+finish                                  # no free slot: npcUtil.giveItem refuses the petasos: nothing
+free-inventory
+trigger Chumimi                         # var 3: 281
+finish                                  # petasos; completed; fame 20; Paragon of Black Mage Excellence; key item taken
+trigger Chumimi                         # completed: her 259
+finish
+charvar rootProblem 1
+trade Chumimi SquareOfSilkCloth x1      # completed, var 1 (GM): nothing

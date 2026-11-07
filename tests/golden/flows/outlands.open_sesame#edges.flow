@@ -1,0 +1,31 @@
+# Open Sesame (outlands 165), the other trade options, all accepted (GMs). main: a Tremorstone and 13 Soil Geodes: 11
+# geodes with the stone: 23; 13: 23; 12: 22, finished: completed, the stone and the 12 taken. bob: a Tremorstone, a Soil
+# Gem, a Bone Chip: the gem, the stone and the chip (getItemQty only: the chip rides along): 22, finished: completed, all
+# three taken (tradeComplete). cid: a Tremorstone, two Meteorites: two meteorites with the stone: 23.
+lists EasternAltepaDesert/Lokpix/onTrade EasternAltepaDesert/onEventFinish/22
+char zone=EasternAltepaDesert pos=-53.999,3.949,224.154 job=WAR lvl=75
+char bob zone=EasternAltepaDesert pos=-53.999,3.949,224.154 job=WAR lvl=75
+char cid zone=EasternAltepaDesert pos=-53.999,3.949,224.154 job=WAR lvl=75
+quest Outlands.OpenSesame accepted
+item Tremorstone
+item SoilGeode x13
+bob: quest Outlands.OpenSesame accepted
+bob: item Tremorstone
+bob: item SoilGem
+bob: item BoneChip
+cid: quest Outlands.OpenSesame accepted
+cid: item Tremorstone
+cid: item Meteorite x2
+login
+trade Lokpix SoilGeode x11 Tremorstone x1   # 11: 23
+finish
+trade Lokpix SoilGeode x13 Tremorstone x1   # 13: 23
+finish
+trade Lokpix SoilGeode x12 Tremorstone x1   # option 3: 22
+finish                                  # completed; the stone and the 12 taken
+bob: login
+bob: trade Lokpix SoilGem x1 Tremorstone x1 BoneChip x1   # option 2, the chip along: 22
+bob: finish                             # completed; all three taken
+cid: login
+cid: trade Lokpix Meteorite x2 Tremorstone x1   # two meteorites: 23
+cid: finish

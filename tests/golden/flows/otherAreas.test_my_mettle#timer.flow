@@ -1,0 +1,67 @@
+# Test My Mettle (otherAreas 25): the timer edges, 122 / 123 / 125, the repeat after a completion, and the vars 123
+# leaves behind. now = 1800000000. Accepted (a GM), Reward 777 (a GM), the Power Sandals and a Chocobo Feather held.
+# The feather traded: nil (not the sandals); the sandals with the feather: nil (not exactly the sandals); both kept.
+# Timer now + 144: Devean 121 (the sandals, 1); now + 143: 121 (the sandals, 0: floored). Timer now + 1: the sandals
+# traded: 122; finished: completed, 777 gil, the sandals taken, fame +5 x2, the vars cleared, Repeat = JstMidnight();
+# Devean 124 (no section).
+# The repeat (a Lua quirk, kept): a JST day later, completed: 120; option 1001: 1000 gil taken, Timer and Reward set,
+# quest:begin's addQuest sets the current bit, but getQuestStatus answers completed while the completed bit is set (the
+# engine's order, as LSB's C++), so the quest is never accepted again: Devean 120 again, and the sandals traded: no
+# section 2: nothing, kept.
+# A GM then makes it available and accepted (the completed bit cleared). Timer = now (a GM; the timer is over at 0): the
+# sandals held, Option 0: 125; finished: Option 1. Again: 123; finished: no trade to confirm, delCurrentQuest (available:
+# no completed bit), Repeat = JstMidnight(); Timer, Reward and Option kept. 124 until a JST day later: 120, option 1001,
+# begun: Option is still 1: with the timer over and the sandals held, 123 (not 125); finished: off the current list,
+# the sandals kept. Accepted again (a GM), the sandals traded with the timer over: 123; finished: the sandals taken
+# (confirmTrade). Accepted again, Option 0 (a GM), no sandals: 123.
+lists Selbina/Devean/onTrigger Selbina/Devean/onTrade Selbina/onEventFinish/120 Selbina/onEventFinish/122 Selbina/onEventFinish/123 Selbina/onEventFinish/125
+char zone=Selbina pos=41.4,-14.6,40 job=WAR lvl=10 nation=1 gil=5000
+rank 2
+fame Sandoria 75
+quest OtherAreas.TestMyMettle accepted
+charvar Quest[4][25]Reward 777
+item PowerSandals
+item ChocoboFeather
+login
+trade Devean ChocoboFeather x1          # not the sandals: nil
+trade Devean PowerSandals x1 ChocoboFeather x1 # not exactly the sandals: nil; both kept
+charvar Quest[4][25]Timer 1800000144    # a GM
+trigger Devean                          # 144 s left: 121 (Power Sandals, 1)
+finish
+charvar Quest[4][25]Timer 1800000143
+trigger Devean                          # 143 s left: 121 (Power Sandals, 0)
+finish
+charvar Quest[4][25]Timer 1800000001
+trade Devean PowerSandals x1            # 1 s left: 122
+finish                                  # completed; the sandals taken; 777 gil; fame +5 x2; vars cleared; Repeat = JstMidnight()
+trigger Devean                          # Repeat in the future: 124
+finish
+wait jst=1
+trigger Devean                          # completed, Repeat passed: 120
+finish option=1001                      # 1000 gil taken; Timer now + 144; Reward 3000; addQuest: still completed
+trigger Devean                          # the completed bit wins: 120 again (not 121)
+finish option=0
+item PowerSandals                       # a GM
+trade Devean PowerSandals x1            # completed: no section 2: nothing; kept
+quest OtherAreas.TestMyMettle available # a GM: both bits cleared
+quest OtherAreas.TestMyMettle accepted  # a GM
+charvar Quest[4][25]Timer 1800086400    # a GM: Timer = now
+trigger Devean                          # 0 left, the sandals held, Option 0: 125
+finish                                  # Option 1
+trigger Devean                          # Option 1: 123
+finish                                  # no trade; delCurrentQuest (available); Repeat = JstMidnight(); Timer, Reward, Option kept
+trigger Devean                          # Repeat in the future: 124
+finish
+wait jst=1
+trigger Devean                          # 120
+finish option=1001                      # begun; Timer now + 144; Reward 3000; Option still 1
+charvar Quest[4][25]Timer 1800172800    # a GM: Timer = now
+trigger Devean                          # the sandals held, but Option 1: 123
+finish                                  # off the current list again; the sandals kept
+quest OtherAreas.TestMyMettle accepted  # a GM
+trade Devean PowerSandals x1            # 0 left: 123
+finish                                  # the sandals taken (confirmTrade); off the current list
+quest OtherAreas.TestMyMettle accepted  # a GM
+charvar Quest[4][25]Option 0            # a GM
+trigger Devean                          # no sandals, Option 0: 123
+finish

@@ -1,0 +1,20 @@
+# A Sentry's Peril (sandoria 0): Aaveleon's free-slot test (getFreeSlotsCount() == 0) on both sides of its edge. The
+# bag is filled (0 free: 118), then one slot is freed by The Vicasque's Sermon's Andelain (accepted, Prog 0 by GM: the
+# Pod of Blue Peas traded, 19, whose finish takes the pod), so exactly 1 slot is free: 100 (finish: the case in that
+# slot, the ointment taken, TradedAaveleon 1).
+lists WestRonfaure/Aaveleon/onTrade WestRonfaure/onEventFinish/100 EastRonfaure/Andelain/onTrade EastRonfaure/onEventFinish/19
+char zone=WestRonfaure pos=-431.8,-45.9,342.3 job=WAR lvl=30
+quest Sandoria.ASentrysPeril accepted
+quest Sandoria.TheVicasquesSermon accepted
+item DoseOfOintment
+item PodOfBluePeas
+login
+fill-inventory
+trade Aaveleon DoseOfOintment x1          # no free slot: 118
+finish
+warp 665.7,-11.8,-539.4 EastRonfaure
+trade Andelain PodOfBluePeas x1           # the Sermon at Prog 0: THANKS_TO_GODDESS; 19
+finish                                    # the pod taken: 1 slot free; the Sermon's Prog 1
+warp -431.8,-45.9,342.3 WestRonfaure
+trade Aaveleon DoseOfOintment x1          # exactly 1 free slot: 100
+finish                                    # the Ointment Case; the ointment taken; TradedAaveleon 1

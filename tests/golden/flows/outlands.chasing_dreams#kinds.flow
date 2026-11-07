@@ -1,0 +1,112 @@
+# Chasing Dreams' reply kinds against the other quests and missions at its NPCs. In a tie the containers come in file
+# order (missions, then bastok, otherAreas, outlands, sandoria), and the next talk takes the one after the last id.
+# main (Norg, a level 75 Warrior; Chasing Dreams accepted at Prog 4 with the Storeroom Key, GMs): Gimb 211 (Progress);
+# the key again (a GM): 211 again over his script's turn (an Event would hand that turn to his script's 69); no key: 69.
+# bob (Port Bastok; Chasing Dreams at Prog 5, Ayame and Kaede accepted at Prog 0, GMs): Kagetora 241 and 322 (both
+# Progress) tie: 241 (Ayame and Kaede Prog 1); Prog 0 again (a GM): the last id 241: 322 (Prog 6); 241 (Progress) beats
+# 324 (Event); Prog 3 (a GM): Ayame and Kaede's 244 and 324 (Events) tie: the last id 241: 244, then 324, then 244.
+# carl (Port Bastok; Chasing Dreams at Prog 6, twentyInPirateYearsCS 1, GMs): Kagetora 324 (the handler's turn), his
+# script's 261 (twentyInPirateYearsCS 2), 324, 324 (the script's turn: nothing).
+# dan (Port Bastok; Chasing Dreams at Prog 6, Lure of the Wildcat accepted with no bit set, GMs): Patient_Wheel 354
+# (Progress) over 326 (Event); its bit cleared (a GM): the last id 354, and 354 again (a Progress 326 would tie and take
+# this turn); then 326 alone. Prog 7: the same with 327.
+# ed (Selbina, level 75; Chasing Dreams at Prog 7, An Explorer's Footsteps available): Abelard 40 and 1108 (both Progress)
+# tie: 40 (option 0: nothing), 1108 (Prog 8), then 40 alone.
+# fred (Selbina, level 9: An Explorer's Footsteps off; Chasing Dreams at Prog 7, RoV 1-04 Set Free current, Signed in
+# Blood accepted at Prog 2, GMs): 1108 (Progress) over RoV's 181 (importantOnce: an Event) and Signed in Blood's 1105
+# (Event); then 181 (the mission's container first).
+# The Sahagin's Key's deliberate log write (user ruling 2026-11-04): Gimb's 69 adds it while available, so this
+# trace is a csharp-rerecord of its Lua recording (lua-at kept), the difference its log entry only.
+lists Norg/Gimb/onTrigger PortBastok/Kagetora/onTrigger PortBastok/Patient_Wheel/onTrigger Selbina/Abelard/onTrigger
+char zone=Norg pos=-5,-1,-44 job=WAR lvl=75
+char bob zone=PortBastok pos=-94.579,-2.299,30.463 job=WAR lvl=75
+char carl zone=PortBastok pos=-94.579,-2.299,30.463 job=WAR lvl=75
+char dan zone=PortBastok pos=-108,4.9,52.6 job=WAR lvl=75
+char ed zone=Selbina pos=-52.121,-11.338,-13.067 job=WAR lvl=75
+char fred zone=Selbina pos=-52.121,-11.338,-13.067 job=WAR lvl=9
+quest Outlands.ChasingDreams accepted
+charvar Quest[5][199]Prog 4
+keyitem StoreroomKey
+bob: quest Outlands.ChasingDreams accepted
+bob: charvar Quest[5][199]Prog 5
+bob: quest Bastok.AyameAndKaede accepted
+carl: quest Outlands.ChasingDreams accepted
+carl: charvar Quest[5][199]Prog 6
+carl: charvar twentyInPirateYearsCS 1
+dan: quest Outlands.ChasingDreams accepted
+dan: charvar Quest[5][199]Prog 6
+dan: quest Bastok.LureOfTheWildcat accepted
+ed: quest Outlands.ChasingDreams accepted
+ed: charvar Quest[5][199]Prog 7
+fred: quest Outlands.ChasingDreams accepted
+fred: charvar Quest[5][199]Prog 7
+fred: mission Rov SetFree current
+fred: quest Sandoria.SignedInBlood accepted
+fred: charvar Quest[0][108]Prog 2
+login
+trigger Gimb                            # the key: 211
+finish                                  # the key taken; Prog 5
+keyitem StoreroomKey                    # a GM
+trigger Gimb                            # 211 again
+finish
+trigger Gimb                            # no key: his script's 69 (The Sahagin's Key added)
+finish
+logout
+bob: login
+bob: trigger Kagetora                   # 241 and 322 tie: 241
+bob: finish
+bob: charvar Quest[1][60]Prog 0         # a GM
+bob: trigger Kagetora                   # the last id 241: 322
+bob: finish                             # Prog 6
+bob: trigger Kagetora                   # 241 (Progress) beats 324
+bob: finish
+bob: charvar Quest[1][60]Prog 3         # a GM
+bob: trigger Kagetora                   # 244 and 324 tie: the last id 241: 244
+bob: finish
+bob: trigger Kagetora                   # the cycle: 324
+bob: finish
+bob: trigger Kagetora                   # the cycle wraps: 244
+bob: finish
+bob: logout
+carl: login
+carl: trigger Kagetora                  # 324
+carl: finish
+carl: trigger Kagetora                  # his script's turn: 261
+carl: finish
+carl: trigger Kagetora                  # 324
+carl: finish
+carl: trigger Kagetora                  # the script's turn (nothing now): 324
+carl: finish
+carl: logout
+dan: login
+dan: trigger Patient_Wheel              # 354 (Progress) over 326
+dan: finish
+dan: charvar Quest[1][84]Prog 0         # a GM
+dan: trigger Patient_Wheel              # the last id 354: 354 again
+dan: finish
+dan: trigger Patient_Wheel              # 326 alone
+dan: finish
+dan: charvar Quest[5][199]Prog 7        # a GM
+dan: charvar Quest[1][84]Prog 0         # a GM
+dan: trigger Patient_Wheel              # 354 over 327
+dan: finish
+dan: charvar Quest[1][84]Prog 0         # a GM
+dan: trigger Patient_Wheel              # the last id 354: 354 again
+dan: finish
+dan: trigger Patient_Wheel              # 327 alone
+dan: finish
+dan: logout
+ed: login
+ed: trigger Abelard                     # 40 and 1108 tie: 40
+ed: finish option=0                      # nothing
+ed: trigger Abelard                     # the cycle: 1108
+ed: finish option=0                      # Prog 8
+ed: trigger Abelard                     # 40 alone
+ed: finish option=0
+ed: logout
+fred: login
+fred: trigger Abelard                   # 1108 over 181 and 1105
+fred: finish
+fred: trigger Abelard                   # 181 and 1105 tie: 181
+fred: finish
+fred: logout

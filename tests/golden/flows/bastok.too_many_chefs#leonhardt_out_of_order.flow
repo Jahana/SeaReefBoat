@@ -1,0 +1,25 @@
+# Too Many Chefs, Leonhardt out of order: the quest accepted with the var at 0, 2, 4 and 5 (the standard 945, no trade
+# taken), and the mitt traded at 1, 2 and 4.
+char zone=Metalworks pos=-14,-10,-27
+item RedOvenMitt x3
+fame Bastok 325
+login
+quest Bastok.TooManyChefs accepted
+trigger Leonhardt               # var 0: 945
+finish-if-event
+trade Leonhardt RedOvenMitt x1  # var 0: nothing
+finish-if-event
+charvar TOO_MANY_CHEFS 1
+trade Leonhardt RedOvenMitt x1  # var 1: nothing
+finish-if-event
+charvar TOO_MANY_CHEFS 2
+trigger Leonhardt               # var 2: 945
+finish-if-event
+charvar TOO_MANY_CHEFS 4
+trigger Leonhardt               # 945
+finish-if-event
+trade Leonhardt RedOvenMitt x1  # var 4: nothing
+finish-if-event
+charvar TOO_MANY_CHEFS 5
+trigger Leonhardt               # 945
+finish-if-event

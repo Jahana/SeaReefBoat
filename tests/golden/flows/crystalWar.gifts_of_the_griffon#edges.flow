@@ -1,0 +1,45 @@
+# Gifts of the Griffon (crystalWar 15), the edges: a level 99 Warrior in Southern San d'Oria [S] with a Plume d'Or and
+# no nation opener completed (missions as the main flow). No opener: Louxiard: no section (37). Steamed Rams completed
+# (a GM): the plume to Louxiard while available: no trade handler (nothing). Rholont at Prog 0: nil (32). Louxiard 21,
+# out to Garlaige Citadel [S] and back, 22: Prog 2; Louxiard at Prog 2: nil (37). Rholont 23, finished on option 1:
+# begun (any option), 7 more plumes. Two plumes to Sabiliont: not exactly one: nil. Option 127 (a GM) and a full
+# inventory: Rholont 24, finished: not completed; freed: 24: completed.
+lists SouthernSanDoriaS/Louxiard/onTrigger SouthernSanDoriaS/Louxiard/onTrade SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Sabiliont/onTrade SouthernSanDoriaS/onEventFinish/21 SouthernSanDoriaS/onEventFinish/22 SouthernSanDoriaS/onEventFinish/23 SouthernSanDoriaS/onEventFinish/24
+char zone=SouthernSanDoriaS pos=-92.005,-4,49.356 job=WAR lvl=99
+item PlumeDor
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Louxiard                        # no nation opener completed: no section (37)
+finish-if-event
+quest CrystalWar.SteamedRams completed  # a GM
+trade Louxiard PlumeDor x1              # available: no trade handler
+finish-if-event
+walk -167.043,-2,55.484
+trigger Rholont                         # available, Prog 0: nil (32)
+finish-if-event
+walk -92.005,-4,49.356
+trigger Louxiard                        # 21
+finish                                  # Prog 1
+warp 62.849,-6.078,137.438 GarlaigeCitadelS # the mustZone cleared
+warp -92.005,-4,49.356 SouthernSanDoriaS
+trigger Louxiard                        # 22
+finish                                  # Prog 2
+trigger Louxiard                        # Prog 2: nil (37)
+finish-if-event
+walk -167.043,-2,55.484
+trigger Rholont                         # 23
+finish option=1                         # begun (any option); 7 more plumes
+walk 10.853,1.999,-87.515
+trade Sabiliont PlumeDor x2             # not exactly one: nil
+finish-if-event
+charvar Quest[7][15]Option 127          # a GM: all seven traded
+walk -167.043,-2,55.484
+fill-inventory
+trigger Rholont                         # 7 traded: 24
+finish                                  # no room for the Deathstone: not completed (no Claws Timer)
+free-inventory
+trigger Rholont                         # 24
+finish                                  # completed; Claws' Timer

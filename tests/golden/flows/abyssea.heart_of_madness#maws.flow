@@ -1,0 +1,39 @@
+# Heart of Madness (abyssea 169), the maw list: a level 99 Warrior in Port Jeuno with the quest accepted, its story
+# quests before it and the three set quests completed (GMs: their offers would tie with 335). The section counts the
+# nine maw quests of its list (1 A Goldstruck Gigas, 2 To Paste a Peiste, 3 Megadrile Menace, 4 The Beast of Bastore, 5
+# A Delectable Demon, 6 A Fluttery Fiend, 7 A Beaked Blusterer, 8 A Man-eating Mite, 9 An Ulcerous Uragnite) and wants
+# 5. Joachim with 4 of them completed (GMs), in 2 sets {2,4,6,8} {3,5,7,9}: no section each time: his script's 328. Each
+# list entry n has a set holding n + 1 but not n (the last: one without 9; A Journey Begins, completed, stands after
+# it), so an entry read as the next quest would count 5 there. Then 1 completed too: 5: 335, finished: completed,
+# Tenuous Existence accepted.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/328 PortJeuno/onEventFinish/335
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate completed
+quest Abyssea.HeartOfMadness accepted
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.TheBeastOfBastore completed
+quest Abyssea.AFlutteryFiend completed
+quest Abyssea.AManEatingMite completed
+quest Abyssea.HeroesOfAbyssea completed
+quest Abyssea.ScarsOfAbyssea completed
+quest Abyssea.TheForbiddenFrontier completed
+login
+trigger Joachim                         # {2,4,6,8}: 4: no section: 328 (his script)
+finish
+quest Abyssea.ToPasteAPeiste available
+quest Abyssea.TheBeastOfBastore available
+quest Abyssea.AFlutteryFiend available
+quest Abyssea.AManEatingMite available
+quest Abyssea.MegadrileMenace completed
+quest Abyssea.ADelectableDemon completed
+quest Abyssea.ABeakedBlusterer completed
+quest Abyssea.AnUlcerousUragnite completed
+trigger Joachim                         # {3,5,7,9}: 4: no section: 328 (his script)
+finish
+quest Abyssea.AGoldstruckGigas completed # a GM: {1,3,5,7,9}: 5
+trigger Joachim                         # 335
+finish                                  # completed; Tenuous Existence accepted

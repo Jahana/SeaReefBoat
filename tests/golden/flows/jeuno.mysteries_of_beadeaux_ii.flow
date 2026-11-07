@@ -1,0 +1,22 @@
+# Mysteries of Beadeaux II (jeuno 32): Lower Jeuno's Sattal-Mansal (no script; default 96). An accepted section only
+# (flagged by Mysteries of Beadeaux I's 89). A level 75 Warrior with two Quadav Augury Shells and a Chocobo Feather, no
+# Silver Bell (Mysteries of Beadeaux I silent). Available: a trade: no section, nothing. Accepted (a GM, as I's 89 does):
+# no trigger handler: 96; two shells: nil; a shell and the feather: nil; the feather: nil; a shell: the Black Matinee
+# Necklace added (no message), fame +7 x3, the trade completed, 92; finished: completed (player:completeQuest),
+# KEYITEM_OBTAINED (the necklace). Completed: no section: 96.
+lists LowerJeuno/Sattal-Mansal/onTrigger LowerJeuno/Sattal-Mansal/onTrade LowerJeuno/onEventFinish/92
+char zone=LowerJeuno pos=42.6,3.9,-54 job=WAR lvl=75
+item QuadavAuguryShell x2
+item ChocoboFeather
+login
+trade Sattal-Mansal QuadavAuguryShell x1 # available: no section; nothing
+quest Jeuno.MysteriesOfBeadeauxIi accepted # a GM: I's 89 finish does this
+trigger Sattal-Mansal               # accepted: no trigger handler; 96
+finish
+trade Sattal-Mansal QuadavAuguryShell x2 # two: nil
+trade Sattal-Mansal QuadavAuguryShell x1 ChocoboFeather x1 # an extra item: nil
+trade Sattal-Mansal ChocoboFeather x1 # no shell: nil
+trade Sattal-Mansal QuadavAuguryShell x1 # the Black Matinee Necklace (no message), fame +7 x3, the shell taken; 92
+finish                              # completed (no reward table); KEYITEM_OBTAINED
+trigger Sattal-Mansal               # completed: no section; 96
+finish

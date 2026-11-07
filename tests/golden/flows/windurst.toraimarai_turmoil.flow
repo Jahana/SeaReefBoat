@@ -1,0 +1,77 @@
+# Toraimarai Turmoil (windurst 80): Ohbiru-Dohbiru and Leepe-Hoppe in Windurst Waters, Polikal-Ramikal and Yoran-Oran in
+# Windurst Walls. Food for Thought, Overnight Delivery and Water Way to Go completed by GM. The guard (each side: Blue
+# Ribbon Blues completed, fame level 6, the quest's own mustZone), the offer 785 (option 0: nothing; option 1: begun, the
+# Rhinostery Certificate), the reminders 786 (Ohbiru), 790 (Leepe), 391 (Polikal), 392 (Yoran), the shells (a chip, two,
+# four, three and a chip: nil; exactly three: 791: completed, 4500 gil, fame +16, Certified Rhinostery Venturer, the
+# shells taken), the repeat 795 (option 0: nothing; three shells at Prog 0: nil; option 1: Prog 1), 786, the shells at
+# Prog 1 (a chip: nil; three: 791, but Prog reset to 0 by GM while it is open: nothing, the shells kept), 791 again
+# (Prog 0, the shells taken, fame +16, 4500 gil by giveCurrency).
+# Trades with no handler: Ohbiru while the guard fails and while it holds (section 1 has no onTrade).
+# Defaults: Ohbiru 344 (no script); Leepe-Hoppe 345, his script acts only for Tuning In / Out (never here); Polikal-Ramikal
+# 320 (no script); Yoran-Oran 245, his script offers Mandragora Mad (249) while it is available, on its turn of the
+# lookup's alternation with this quest's Event line, so the flow talks to him twice. Also named: Ohbiru by Food for
+# Thought (completed by GM: nothing), Overnight Delivery (completed: 351 below fame level 6, nil at 6), Water Way to Go
+# (completed, Prog 0: 352 below fame level 5, nil at 5 and above), Say It with Flowers (its Prog 0: nothing); Leepe by
+# Food for Thought (accepted only) and The Moonlit Path (its offer 842 needs fame level 6: the Leepe talk is at level
+# 5); Yoran by Blast from the Past (accepted or completed only), CoP 3-3 / 5-3 and Windurst 9-1 (not current).
+lists WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/Ohbiru-Dohbiru/onTrade WindurstWaters/Leepe-Hoppe/onTrigger WindurstWalls/Polikal-Ramikal/onTrigger WindurstWalls/Yoran-Oran/onTrigger WindurstWaters/onEventFinish/785 WindurstWaters/onEventFinish/791 WindurstWaters/onEventFinish/795
+warning: quests: windurst.toraimarai_turmoil: one finish of 791 ran 2 handlers (2/-/onEventFinish:791, 3/-/onEventFinish:791) -- the Lua runs it twice too: its sections at Toraimarai_Turmoil.lua:73 (accepted) and :119 (completed) at lua-at 5189735d hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=WindurstWaters pos=22.7,-5.38,-196.5
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+quest Windurst.WaterWayToGo completed
+fame Windurst 425
+item StarmiteShell x12
+item BoneChip
+login
+trade Ohbiru-Dohbiru StarmiteShell x3       # Blue Ribbon Blues not completed: no section, nothing
+trigger Ohbiru-Dohbiru                      # not met; Overnight Delivery (fame level 6) and Water Way to Go (level 5+) return nil: his default 344
+finish
+quest Windurst.BlueRibbonBlues completed
+fame Windurst 424
+trigger Ohbiru-Dohbiru                      # fame 424 (level 5): not met; Overnight Delivery's 351
+finish
+fame Windurst 425
+charvar Quest[2][80]mustZone 238            # the quest's mustZone set by GM
+trigger Ohbiru-Dohbiru                      # not met; 344
+finish
+charvar Quest[2][80]mustZone 0
+trade Ohbiru-Dohbiru StarmiteShell x3       # the guard met: no section-1 onTrade, nothing
+trigger Ohbiru-Dohbiru                      # guard met: 785 (4500, Rhinostery Certificate, Starmite Shell)
+finish option=0                             # nothing
+trigger Ohbiru-Dohbiru                      # 785 again
+finish option=1                             # begun; the Rhinostery Certificate
+trigger Ohbiru-Dohbiru                      # accepted: event 786
+finish
+fame Windurst 424                           # below level 6, so The Moonlit Path does not offer at Leepe
+trigger Leepe-Hoppe                         # accepted: event 790 (0, Rhinostery Certificate)
+finish
+warp 16.9,-17.69,195.3 WindurstWalls
+trigger Polikal-Ramikal                     # accepted: event 391
+finish
+trigger Yoran-Oran                          # accepted: event 392, or his script's 249 on its turn
+finish
+trigger Yoran-Oran                          # the other turn
+finish
+warp 22.7,-5.38,-196.5 WindurstWaters
+fame Windurst 425                           # level 6 again: Overnight Delivery's 351 no longer answers Ohbiru
+trade Ohbiru-Dohbiru BoneChip x1            # not the shells: nil
+trade Ohbiru-Dohbiru StarmiteShell x2       # two shells: not exact, nil
+trade Ohbiru-Dohbiru StarmiteShell x4       # four shells: not exact, nil
+trade Ohbiru-Dohbiru StarmiteShell x3 BoneChip x1  # three and a chip: not exact, nil
+trade Ohbiru-Dohbiru StarmiteShell x3       # exactly three: 791
+finish                                      # completed: 4500 gil, fame +16, the title; the shells taken
+trigger Ohbiru-Dohbiru                      # completed, Prog 0: event 795 (4500, 0, Starmite Shell)
+finish option=0                             # nothing
+trade Ohbiru-Dohbiru StarmiteShell x3       # completed, Prog 0: nil
+trigger Ohbiru-Dohbiru                      # 795 again
+finish option=1                             # Prog 1
+trigger Ohbiru-Dohbiru                      # Prog 1: event 786
+finish
+trade Ohbiru-Dohbiru BoneChip x1            # Prog 1, not the shells: nil
+trade Ohbiru-Dohbiru StarmiteShell x3       # Prog 1: 791
+charvar Quest[2][80]Prog 0                  # GM: Prog 0 while 791 is open
+finish                                      # Prog 0: nothing, the shells kept
+charvar Quest[2][80]Prog 1
+trade Ohbiru-Dohbiru StarmiteShell x3       # Prog 1: 791
+finish                                      # Prog 0; the shells taken; fame +16; 4500 gil (giveCurrency)

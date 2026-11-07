@@ -1,0 +1,114 @@
+# Yomi Okuri's Valkurm Dunes edges: main, bob and carl (level 50 Samurai), accepted at Prog 5 with the Yomotsu Hirasaka
+# (GMs). The night's bounds (the harness clock starts at Vana'diel 12:00): 17:00 nil (qm3's default
+# YOU_SENSE_AN_EVIL_PRESENCE); 18:00: 10 (option 2: nothing); 04:00 (next day): 10; 05:00: nil. At 18:00 again: main's 10 from 2.05 yalms,
+# option 1: MUST_BE_CLOSER (> 2); main's 10 from 1.95 yalms and carl's 10 left open; bob's 10, option 1: SUDDEN_CHILL,
+# both spawned (bob's claim). Bob kills Doman (Onryo alive: nothing); Doman despawned: main's open 10, option 1: Onryo
+# up: nothing; bob's qm3: WHAT_DO_YOU_THINK (Onryo up); bob kills Onryo (Doman not spawned: bob's valkurmNM 1); bob's qm3
+# 11, options 1 and 2: nothing; 11, option 0: the faded hirasaka; qm3: nil (the default). Onryo despawned: main's 10, option 1
+# (1.5 yalms): spawned (main's claim); main kills Onryo (Doman alive: nothing), Onryo despawned: carl's open 10, option 1:
+# Doman up: nothing; carl's qm3: WHAT_DO_YOU_THINK; main kills Doman (Onryo not spawned: main's valkurmNM 1): qm3 11,
+# option 1: nothing; by day (06:00) still 11 (valkurmNM 1 and the hirasaka, any hour); the hirasaka taken (a GM): nil.
+# Out of the zone and back: the local var lost; at night (18:00): 10, option 1: spawned; main kills Onryo, then Doman
+# (Onryo dead, its body still spawned: valkurmNM 1): 11. Out and back again: 10, option 1: spawned; the hirasaka taken,
+# both killed: no valkurmNM; given back: WHAT_DO_YOU_THINK while the bodies stay; despawned: 10 (valkurmNM still 0).
+# Again 10, option 1: spawned; the hirasaka taken, Onryo then Doman killed (Doman's death with Onryo dead, no
+# hirasaka): no valkurmNM; given back: WHAT_DO_YOU_THINK.
+lists ValkurmDunes/qm3/onTrigger ValkurmDunes/onEventFinish/10 ValkurmDunes/Doman/onMobDeath ValkurmDunes/Onryo/onMobDeath
+char zone=ValkurmDunes pos=-767,-4,192 job=SAM lvl=50
+char bob zone=ValkurmDunes pos=-767,-4,192 job=SAM lvl=50
+char carl zone=ValkurmDunes pos=-767,-4,192 job=SAM lvl=50
+quest Outlands.YomiOkuri accepted
+charvar Quest[5][141]Prog 5
+keyitem YomotsuHirasaka
+bob: quest Outlands.YomiOkuri accepted
+bob: charvar Quest[5][141]Prog 5
+bob: keyitem YomotsuHirasaka
+carl: quest Outlands.YomiOkuri accepted
+carl: charvar Quest[5][141]Prog 5
+carl: keyitem YomotsuHirasaka
+login
+wait vana=5                             # 17:00
+trigger qm3                             # not night: nil: default YOU_SENSE_AN_EVIL_PRESENCE
+wait vana=1                             # 18:00
+trigger qm3                             # 10
+finish option=2                         # not 1: nothing
+wait vana=10                            # 04:00
+trigger qm3                             # 10
+finish option=0
+wait vana=1                             # 05:00
+trigger qm3                             # not night: nil: default
+wait vana=13                            # 18:00
+trigger qm3 at=2.05                     # 10
+finish option=1                         # 2.05 > 2: MUST_BE_CLOSER (Yomotsu Hirasaka)
+trigger qm3 at=1.95                     # 10, left open
+carl: login
+carl: trigger qm3                       # 10, left open
+bob: login
+bob: trigger qm3                        # 10
+bob: finish option=1                    # SUDDEN_CHILL; Doman and Onryo spawned, claimed by bob
+bob: kill DOMAN                         # Onryo alive: nothing
+tick 15000                              # Doman's body despawns
+tick 4000                               # and fades
+finish option=1                         # main's 10 (1.95 yalms): Onryo up, Doman not spawned: nothing
+bob: trigger qm3                        # bob's valkurmNM 0, Onryo up: WHAT_DO_YOU_THINK
+bob: kill ONRYO                         # Doman not spawned: bob's valkurmNM 1
+bob: trigger qm3                        # 11
+bob: finish option=1                    # not 0: nothing
+bob: trigger qm3                        # 11
+bob: finish option=2                    # not 0: nothing
+bob: trigger qm3                        # 11
+bob: finish option=0                    # the hirasaka taken; the Faded Yomotsu Hirasaka
+bob: trigger qm3                        # no hirasaka: nil: default
+bob: logout
+tick 15000                              # Onryo's body despawns
+tick 4000                               # and fades
+trigger qm3                             # main: valkurmNM 0, night, neither up: 10
+finish option=1                         # 1.5 yalms: SUDDEN_CHILL; spawned, claimed by main
+kill ONRYO                              # Doman alive: nothing
+tick 15000
+tick 4000                               # Onryo despawned
+carl: finish option=1                   # carl's 10: Doman up, Onryo not spawned: nothing
+carl: trigger qm3                       # Doman up: WHAT_DO_YOU_THINK
+carl: logout
+kill DOMAN                              # Onryo not spawned: main's valkurmNM 1
+trigger qm3                             # valkurmNM 1, the hirasaka: 11
+finish option=1                         # nothing
+wait vana=12                            # day
+trigger qm3                             # valkurmNM 1, the hirasaka (any hour): 11
+finish option=1
+delkeyitem YomotsuHirasaka              # a GM
+trigger qm3                             # no hirasaka: nil: default
+keyitem YomotsuHirasaka                 # a GM
+tick 15000
+tick 4000                               # Doman despawned
+warp -176,10,-60 LabyrinthOfOnzozo      # out of the zone: the local var lost
+warp -767,-4,192 ValkurmDunes
+wait vana=12                            # night
+trigger qm3                             # valkurmNM 0, night, neither up: 10
+finish option=1                         # spawned
+kill ONRYO                              # Doman alive: nothing
+kill DOMAN                              # Onryo dead, its body still spawned: valkurmNM 1
+trigger qm3                             # 11
+finish option=1
+tick 15000
+tick 4000                               # both despawned
+warp -176,10,-60 LabyrinthOfOnzozo      # the local var lost
+warp -767,-4,192 ValkurmDunes
+trigger qm3                             # valkurmNM 0: 10
+finish option=1                         # spawned
+delkeyitem YomotsuHirasaka              # a GM
+kill DOMAN                              # no hirasaka: nothing
+kill ONRYO                              # no hirasaka: nothing
+keyitem YomotsuHirasaka                 # a GM
+trigger qm3                             # valkurmNM 0, the bodies spawned: WHAT_DO_YOU_THINK
+tick 15000
+tick 4000                               # despawned
+trigger qm3                             # valkurmNM still 0: 10
+finish option=0
+trigger qm3 at=1.5                      # valkurmNM 0: 10
+finish option=1                         # spawned
+delkeyitem YomotsuHirasaka              # a GM
+kill ONRYO                              # no hirasaka: nothing
+kill DOMAN                              # Onryo dead, no hirasaka: nothing
+keyitem YomotsuHirasaka                 # a GM
+trigger qm3                             # valkurmNM 0, the bodies spawned: WHAT_DO_YOU_THINK

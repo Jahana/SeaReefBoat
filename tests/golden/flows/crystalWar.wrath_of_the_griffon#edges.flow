@@ -1,0 +1,25 @@
+# Wrath of the Griffon (crystalWar 25), the edges: a level 99 Warrior in Southern San d'Oria [S] without Boy and the
+# Beast completed (missions as the main flow). Rholont: no section (32). Accepted (a GM): Rholont at Prog 2: 61. Jugner
+# Forest [S]: Prog 1 (a GM): qm8 205, finished: the NM spawned; Prog 0 (a GM): the NM killed: not Prog 1: no change; qm8
+# at Prog 0: 204 (its finish: Prog 1).
+lists SouthernSanDoriaS/Rholont/onTrigger JugnerForestS/qm8/onTrigger JugnerForestS/Cobraclaw_Buchzvotch/onMobDeath JugnerForestS/onEventFinish/204 JugnerForestS/onEventFinish/205
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # Boy and the Beast not completed: no section (32)
+finish-if-event
+quest CrystalWar.WrathOfTheGriffon accepted # a GM
+charvar Quest[7][25]Prog 2              # a GM
+trigger Rholont                         # Prog 2 (below 3): 61
+finish
+warp -4.6,0.23,-294.975 JugnerForestS
+charvar Quest[7][25]Prog 1              # a GM
+trigger qm8                             # 205
+finish                                  # the NM spawned, claimed
+charvar Quest[7][25]Prog 0              # a GM
+kill COBRACLAW_BUCHZVOTCH               # Prog 0: no change
+trigger qm8                             # still Prog 0: 204
+finish                                  # Prog 1

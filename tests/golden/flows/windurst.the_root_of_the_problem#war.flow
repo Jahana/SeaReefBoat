@@ -1,0 +1,32 @@
+# The Root of the Problem (windurst 68): a WAR 75, The Three Magi and Recollections completed by GM: no 276 (not BLM):
+# Chumimi's 259; her silk: nothing (not accepted). Koru-Moru: his default 193 on both turns (Star Struck available:
+# its 197 wants a Torn Epistle); the silk, not accepted: nothing, also at var 1 (GM). Accepted by GM at var 1 (no job
+# read): Chumimi's 277; Koru-Moru: 193, then 348.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=WAR lvl=75
+quest Windurst.TheThreeMagi completed
+quest Windurst.Recollections completed
+item SquareOfSilkCloth x2
+login
+trigger Chumimi                         # WAR: no quest reply: her 259
+finish
+trade Chumimi SquareOfSilkCloth x1      # not accepted: nothing
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # the script's turn: not accepted: nothing: 193
+finish
+trade Koru-Moru SquareOfSilkCloth x1    # not accepted: nothing
+charvar rootProblem 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # the script's turn: var 1, not accepted: nothing: 193
+finish
+trade Koru-Moru SquareOfSilkCloth x1    # var 1, not accepted: nothing
+quest Windurst.TheRootOfTheProblem accepted  # GM
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # the script's turn: accepted, var 1 (WAR): 348
+finish
+warp 0.0,30.75,21.5 HeavensTower
+trigger Chumimi                         # accepted, var 1 (WAR): 277
+finish

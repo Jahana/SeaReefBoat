@@ -1,0 +1,17 @@
+# Paying Lip Service (windurst 60) at GIL_RATE 1.0625: the 477 / 478 args are GIL_RATE x 150 and x 200 (159.375 -> 159;
+# 212.5 -> 213, where a round-half-even would give 212) and the 479 finish pays the same (npcUtil.giveCurrency): 159 gil
+# for option 0, 213 gil for option 1. Available: 477 (...159, 213), begun; accepted: 478; three chips: 479, option 0:
+# completed, 159 gil; completed: two shells, option 1: 213 gil.
+char zone=WindurstWoods pos=49.5,-3.75,54.4 job=WAR lvl=75
+setting GIL_RATE 1.0625
+item BeehiveChip x3
+item RemiShell x2
+login
+trigger Tapoh_Lihzeh                    # available: 477 (0, 912, 1016, 159, 213)
+finish option=1                         # begun
+trigger Tapoh_Lihzeh                    # accepted: 478 (..., 159, 213)
+finish
+trade Tapoh_Lihzeh BeehiveChip x3       # 479
+finish option=0                         # completed; 159 gil; the chips taken
+trade Tapoh_Lihzeh RemiShell x2         # completed, shells: 479
+finish option=1                         # fame 10; 213 gil

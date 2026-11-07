@@ -1,0 +1,87 @@
+# Waking the Colossus's edges, round 2 (the gates the first edges flow cannot tell apart): a level 75 Warrior of
+# Bastok, ToAU 48 current (a GM). Available, Prog 1 with the missive held: the gate nil; no missive, Prog 2: nil.
+# Accepted at Prog 1 with no missive: no section: the Rulude Gardens door nil. Prog 2, the missive, two of the three
+# letters held (each pair): 10116 nil. Prog 2, no letters: Iron Eater 968 and Kupipi 429 finish with option 1: no
+# letter given; their letters held at Prog 2: nil; Prog 3 with no letter: nil; Halver Prog 3: nil. The Present and the
+# Shopping List both held: the door nil. Prog 6 with the Whisper: Naja's 929 nil (3151). Alexander held: 929's mask.
+lists AhtUrhganWhitegate/Imperial_Whitegate/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrigger RuludeGardens/_6r9/onTrigger ChateauDoraguille/Halver/onTrigger Metalworks/Iron_Eater/onTrigger HeavensTower/Kupipi/onTrigger MountZhayolm/Acid-eaten_Door/onTrigger
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75 nation=1
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+mission Toau EternalMercenary current   # a GM
+keyitem ImperialMissive                 # a GM: available, Prog 1, the missive held
+charvar Quest[6][74]Prog 1
+trigger Imperial_Whitegate              # available: the missive held: nil: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+delkeyitem ImperialMissive              # a GM
+charvar Quest[6][74]Prog 2
+trigger Imperial_Whitegate              # available: Prog 2 (not 1): nil
+finish-if-event
+quest AhtUrhgan.WakingTheColossus accepted
+charvar Quest[6][74]Prog 1
+warp 0,-5,66 RuludeGardens
+trigger _6r9                            # accepted, no missive: no section: nil
+finish-if-event
+keyitem ImperialMissive                 # a GM
+charvar Quest[6][74]Prog 2
+keyitem SanDorianApprovalLetter
+keyitem BastokanApprovalLetter
+trigger _6r9                            # the Windurstian letter missing: nil
+finish-if-event
+delkeyitem BastokanApprovalLetter       # a GM
+keyitem WindurstianApprovalLetter
+trigger _6r9                            # the Bastokan letter missing: nil
+finish-if-event
+delkeyitem SanDorianApprovalLetter      # a GM
+keyitem BastokanApprovalLetter
+trigger _6r9                            # the San d'Orian letter missing: nil
+finish-if-event
+delkeyitem BastokanApprovalLetter       # GMs
+delkeyitem WindurstianApprovalLetter
+warp 91,-19,1 Metalworks
+trigger Iron_Eater                      # Prog 2, no letter: 968
+finish option=1                         # not 0: no letter given
+trigger Iron_Eater                      # 968 again
+finish option=1
+keyitem BastokanApprovalLetter          # a GM
+trigger Iron_Eater                      # the letter held: nil
+finish
+delkeyitem BastokanApprovalLetter       # a GM
+charvar Quest[6][74]Prog 3
+trigger Iron_Eater                      # Prog 3, no letter: nil
+finish
+warp 2,0,30 HeavensTower
+trigger Kupipi+1                        # Prog 3, no letter: nil
+finish
+charvar Quest[6][74]Prog 2              # a GM
+trigger Kupipi+1                        # Prog 2: 429
+finish option=1                         # not 0: no letter given
+trigger Kupipi+1                        # 429 again
+finish option=1
+keyitem WindurstianApprovalLetter       # a GM
+trigger Kupipi+1                        # the letter held: nil
+finish
+delkeyitem WindurstianApprovalLetter    # a GM
+charvar Quest[6][74]Prog 3
+warp 2.4,0,0 ChateauDoraguille
+trigger Halver                          # Prog 3, no letter: nil (his script's showText)
+finish-if-event
+keyitem PresentForMegomak               # GMs
+keyitem MegomaksShoppingList
+warp 271.9,-32,-88 MountZhayolm
+trigger Acid-eaten_Door                 # both held: nil: ACID_EATEN_DOOR
+finish-if-event
+delkeyitem PresentForMegomak            # GMs
+delkeyitem MegomaksShoppingList
+delkeyitem ImperialMissive
+keyitem WhisperOfRadiance
+charvar Quest[6][74]Prog 6
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # Prog 6 (not 5): nil: ToAU 48's 3151
+finish
+spell 306                               # a GM: Alexander held
+charvar Quest[6][74]Prog 5
+trigger Naja_Salaheem                   # 929: the mask carries the Alexander bit
+finish option=0                         # no pick: completed

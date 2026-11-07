@@ -1,0 +1,56 @@
+# Flyers for Regine (sandoria 16), GM-set masks: accepted by GM, no flyer: Regine's 510 (3); 10 gil with a full
+# inventory (no flyer, the gil kept) and with room (a flyer). The isFull(mask, 15) edge: 32766 (bit 0 unset) and 16383
+# (bit 14 unset) with a flyer held: 510; Answald's flyer sets bit 0 (32767): 603. Quest[0][16]Prog 1 (GM) at the first
+# completion, kept (the Lua's npcUtil.completeQuest has no cleanup). GIL_RATE 1.0625: each 603 pays
+# 440 x GIL_RATE = 467.5, which the engine rounds half away from zero to 468 (addGil and GIL_OBTAINED). 603 on any
+# option, and its finish after a GM delQuest while it is open (the Lua's finish reads no status: completed from
+# available). With no flyer: 32767 plays 603 (the full test before the no-flyer test), 65535 and -1 too (isFull reads
+# the low 15 bits), 16383 plays 510 (3). A flyer to Answald with bit 15 set (32768) sets only bit 0 (32769).
+char zone=PortSanDoria pos=66.3,-8.1,-73.7 job=WAR lvl=30 gil=1000
+setting GIL_RATE 1.0625                   # 440 x 1.0625 = 467.5: the engine's llround pays 468
+quest Sandoria.FlyersForRegine accepted
+login
+trigger Regine                            # accepted, mask 0, no flyer: 510 (3)
+finish option=4                           # nothing
+fill-inventory
+trade Regine gil=10                       # no room: ITEM_CANNOT_BE_OBTAINED; no flyer, the gil kept
+free-inventory
+trade Regine gil=10                       # a flyer; 10 gil taken
+charvar [ffr]deliveryMask 32766
+trigger Regine                            # bit 0 unset, a flyer held: 510
+finish option=4                           # nothing
+charvar [ffr]deliveryMask 16383
+trigger Regine                            # bit 14 unset, a flyer held: 510
+finish option=4                           # nothing
+charvar [ffr]deliveryMask 32766
+warp 74.3,-16.0,-128.7 PortSanDoria
+trade Answald MagicmartFlyer x1           # bit 0 unset: FLYER_ACCEPTED, FFR_ANSWALD; mask 32767
+warp 66.3,-8.1,-73.7 PortSanDoria
+charvar Quest[0][16]Prog 1                # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+trigger Regine                            # mask full, no flyer: 603
+finish option=4                           # 603 on any option: completed; the mask var deleted; Quest[0][16]Prog kept
+quest Sandoria.FlyersForRegine available
+quest Sandoria.FlyersForRegine accepted
+charvar [ffr]deliveryMask 32767
+trigger Regine                            # accepted again, full, no flyer: 603 (before 510 (3))
+quest Sandoria.FlyersForRegine available
+finish                                    # 603 finished while available: completed (the finish reads no status)
+quest Sandoria.FlyersForRegine available
+quest Sandoria.FlyersForRegine accepted
+charvar [ffr]deliveryMask 65535
+trigger Regine                            # the low 15 bits set (bit 15 too): 603
+finish                                    # completed
+quest Sandoria.FlyersForRegine available
+quest Sandoria.FlyersForRegine accepted
+charvar [ffr]deliveryMask -1
+trigger Regine                            # every bit set: 603
+finish                                    # completed
+quest Sandoria.FlyersForRegine available
+quest Sandoria.FlyersForRegine accepted
+charvar [ffr]deliveryMask 16383
+trigger Regine                            # bit 14 unset, no flyer: 510 (3)
+finish option=4                           # nothing
+trade Regine gil=10                       # a flyer
+charvar [ffr]deliveryMask 32768
+warp 74.3,-16.0,-128.7 PortSanDoria
+trade Answald MagicmartFlyer x1           # bit 0 unset (bit 15 set): FLYER_ACCEPTED; mask 32769

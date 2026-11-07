@@ -1,0 +1,64 @@
+# Divine Might (Repeat) (outlands 164): blank_divine_might, the Qu'Hau Spring and the La'Loff battlefield as Divine Might
+# (see outlands.divine_might.flow). A level 75 Warrior on Zilart THE_SEALED_SHRINE, Divine Might completed (a GM), no
+# earring, DM_Earring 14739 (a GM), two Chunks of Light Ore, two sheets of parchment, two bottles of illuminink.
+# blank: a light ore traded while available: no trade handler: nothing; no earring held (< NUMBER_OF_DM_EARRINGS 1): 57
+# (14739), finished: the quest deleted and begun. Accepted, Prog 0, no ore: 58. Ro'Maeve on day 8000 12:00: a light ore:
+# nothing. Day 8022 00:00 (the full moon): a light ore: 8, finished: the Moonlight Ore (npcUtil.giveKeyItem), the ore
+# taken; a light ore again (the ore held; not the pair): nothing; the pair: 7, finished: the Ark Pentasphere, the pair
+# taken; the pair again: 7, finished: the pentasphere held (rare): giveItem false: nothing taken. Shrine: Prog 0 with the
+# ore: 56 (917, 1408, 1550). La'Loff: Invincible (a GM: the five would kill a level 75 Warrior before the last falls), the
+# pentasphere at qm1_1, 32000 option 81, the five killed, 32001: battlefieldWin 293 with the ore: Prog 1 (Divine Might's
+# own handler: completed, no section). Shrine: 59; update option 2: the earrings; option 0: nothing; 59, update option 1:
+# nothing, finish with a full inventory, option 2: nothing; freed: 59, option 2: the Knight's Earring: completed
+# (Pentacide Perpetrator), DM_Earring 14740, the ore kept. blank: completed, one earring held: nil: the default.
+lists TheShrineOfRuavitau/blank_divine_might/onTrigger Romaeve/QuHau_Spring/onTrade TheShrineOfRuavitau/onEventFinish/57 TheShrineOfRuavitau/onEventUpdate/59 TheShrineOfRuavitau/onEventFinish/59 Romaeve/onEventFinish/7 Romaeve/onEventFinish/8 LaloffAmphitheater/onEventFinish/32001
+char zone=TheShrineOfRuavitau pos=-38.533,-1.648,-148.199 job=WAR lvl=75
+mission Zilart TheSealedShrine current
+quest Outlands.DivineMight completed
+charvar DM_Earring 14739
+item ChunkOfLightOre x2
+item SheetOfParchment x2
+item BottleOfIlluminink
+item BottleOfIlluminink
+login
+trade blank_divine_might ChunkOfLightOre x1   # available: no trade handler: nothing
+trigger blank_divine_might              # no earring held: 57 (14739)
+finish                                  # deleted, begun
+trigger blank_divine_might              # Prog 0, no ore: 58
+finish
+warp 1.748,-27.402,67.751 Romaeve
+trade QuHau_Spring ChunkOfLightOre x1   # day 8000, 12:00: not the full moon: nothing
+wait vana=516                           # day 8022, 00:00 (FULL_MOON), hour 0
+trade QuHau_Spring ChunkOfLightOre x1   # no ore: 8
+finish                                  # the Moonlight Ore; the light ore taken
+trade QuHau_Spring ChunkOfLightOre x1   # the ore held: nothing
+trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # 7 (917, 1408)
+finish                                  # the Ark Pentasphere; the pair taken
+trade QuHau_Spring SheetOfParchment x1 BottleOfIlluminink x1   # 7
+finish                                  # the pentasphere held (rare): giveItem false: nothing taken
+warp -38.533,-1.648,-148.199 TheShrineOfRuavitau
+trigger blank_divine_might              # Prog 0, the ore: 56
+finish
+warp -603.563,-22.681,483.937 LaloffAmphitheater
+effect 50                               # a GM: Invincible
+trade qm1_1 ArkPentasphere x1           # 32000 (the repeat accepted: the entry requirement)
+update 32000 option=81                  # index 5, arena 1: entered, the pentasphere worn
+finish
+kill ARK_ANGEL_HM+24
+kill ARK_ANGEL_MR+22
+kill ARK_ANGEL_EV+16
+kill ARK_ANGEL_TT+14
+kill ARK_ANGEL_GK+12                    # won: 32001
+finish                                  # battlefieldWin 293, the ore: Prog 1
+warp -38.533,-1.648,-148.199 TheShrineOfRuavitau
+trigger blank_divine_might              # Prog 1, the ore: 59
+update 59 option=2                      # the earrings (updateEvent)
+finish option=0                         # nil: nothing
+trigger blank_divine_might              # 59
+update 59 option=1                      # not 2: nothing
+fill-inventory
+finish option=2                         # giveItem false: nothing
+free-inventory
+trigger blank_divine_might              # 59
+finish option=2                         # the Knight's Earring: completed; DM_Earring 14740
+trigger blank_divine_might              # completed, one earring held: nil: the default

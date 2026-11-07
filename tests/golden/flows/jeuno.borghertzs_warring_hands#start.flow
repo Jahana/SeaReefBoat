@@ -1,0 +1,39 @@
+# Borghertz's Warring Hands (jeuno 44): canStartQuest's operands one at a time, and 155's Option. Main: a level 50
+# Warrior, The Talekeeper's Truth available: Guslam: nil (his default 154). The prerequisite completed (a GM),
+# Borghertz's Striking Hands accepted (a GM): the Warring Hands nil; the Striking Hands' accepted section answers 43. Striking Hands available again: 155 (Option 1); the Option set to 2
+# by a GM while 155 is open: finished: Option 2 is not WAR (1): not begun; 155 again (Option 1): begun. Bob: a level 49
+# Warrior with the prerequisite: 154. Cid: a level 50 Monk with the Warrior's prerequisite (The First Meeting
+# available): every Borghertz quest silent: 154. Dan: a level 50 Monk with the Striking Hands' prerequisite (The First
+# Meeting) completed and the Warring Hands accepted (canStartQuest's loop entry 0): the Striking Hands silent; the
+# Warring Hands' accepted section answers 43.
+lists UpperJeuno/Guslam/onTrigger UpperJeuno/onEventFinish/155
+char zone=UpperJeuno pos=-4.2,1.3,47.5 job=WAR lvl=50
+char bob zone=UpperJeuno pos=-4.2,1.3,46 job=WAR lvl=49
+char cid zone=UpperJeuno pos=-5.5,1.3,47.5 job=MNK lvl=50
+char dan zone=UpperJeuno pos=-5.5,1.3,46 job=MNK lvl=50
+bob: quest Bastok.TheTalekeepersTruth completed
+cid: quest Bastok.TheTalekeepersTruth completed
+dan: quest Bastok.TheFirstMeeting completed
+dan: quest Jeuno.BorghertzsWarringHands accepted
+login
+bob: login
+cid: login
+dan: login
+trigger Guslam                          # the prerequisite available: nil; 154
+finish
+quest Bastok.TheTalekeepersTruth completed # a GM
+quest Jeuno.BorghertzsStrikingHands accepted # a GM
+trigger Guslam                          # another Borghertz quest accepted: nil; the Striking Hands' 43
+finish
+quest Jeuno.BorghertzsStrikingHands available # a GM
+trigger Guslam                          # 155 (Option 1)
+charvar Quest[3][44]Option 2            # a GM, while 155 is open
+finish                                  # Option 2 is not the main job: not begun
+trigger Guslam                          # 155 (Option 1)
+finish                                  # begun
+bob: trigger Guslam                     # level 49: 154
+bob: finish
+cid: trigger Guslam                     # a Monk: the WAR quest not; the MNK quest's prerequisite available: 154
+cid: finish
+dan: trigger Guslam                     # the Warring Hands accepted: the Striking Hands nil; the Warring Hands' 43
+dan: finish

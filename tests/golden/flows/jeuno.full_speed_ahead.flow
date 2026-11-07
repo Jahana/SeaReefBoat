@@ -1,0 +1,54 @@
+# Full Speed Ahead! (jeuno 179): Mapitoto (Upper Jeuno; default 10222 and a script: the default takes the first turn,
+# each script talk follows a default talk). A WAR 20 with a Tiger mount item.
+# No Chocobo License: nothing (10222); the Tiger item with no Trainer's Whistle: nothing (his trade). The license alone:
+# nothing. The license and the Map of the Jeuno Area (GM): 10223 (0, 0, 4); option 0: nothing; option 2: begun (no
+# race). Accepted: 10224 (1); options 0 and 2: nothing. The race won (GM: the var 4; the race in Batallia Downs stays
+# Lua): 10225 (3055, 15533, Mapitoto's id): the var 0, completed, fame +7 x3, Trainer's Whistle, Raptor Companion.
+# Completed: 10226; completed with the var 4 (GM): 10226 all the same. The Tiger item with the whistle (his trade,
+# Lua): 10227, its finish takes the item and gives the Tiger Companion.
+char zone=UpperJeuno pos=-52.8,8.2,85.9 job=WAR lvl=20
+item MountTiger
+login
+trigger Mapitoto                        # the turn: his default 10222
+finish
+trigger Mapitoto                        # no license: no arm (10222 again)
+finish
+trade Mapitoto MountTiger x1            # no Trainer's Whistle: nothing (his trade)
+keyitem ChocoboLicense
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # the license, no map: no arm
+finish
+keyitem MapOfTheJeunoArea
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # the license, the map, level 20: 10223 (0, 0, 4)
+finish option=0                         # nothing
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # 10223
+finish option=2                         # begun (no race)
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # accepted: 10224 (1)
+finish option=0                         # nothing
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # accepted: 10224 (1)
+finish option=2                         # nothing (option 2 begins only on 10223)
+charvar [QUEST]FullSpeedAhead 4         # GM: the race won (full_speed_ahead.lua / Batallia Downs stay Lua)
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # the var 4: 10225 (3055, 15533, Mapitoto's id)
+finish                                  # the var 0; completed; fame +7 x3; Trainer's Whistle; Raptor Companion
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # completed: 10226
+finish
+charvar [QUEST]FullSpeedAhead 4         # GM: completed with the var 4
+trigger Mapitoto                        # the turn: 10222
+finish
+trigger Mapitoto                        # completed first: 10226
+finish
+trade Mapitoto MountTiger x1            # the whistle held (his trade): 10227 (10050, 3055, 2)
+finish                                  # the item taken; Tiger Companion

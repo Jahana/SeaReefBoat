@@ -1,0 +1,46 @@
+# Petals for Parelbriaux (otherAreas 74): Tavnazian Safehold, no scripts: Chemioue (two; default 280), Parelbriaux (two;
+# 294), Ondieulix (two; 285); Lufaise Meadows' qm_baumesel (default NOTHING_OUT_OF_ORDINARY) and the NM Baumesel. CoP
+# Sheltering Doubt current (Darkness Named completed): CoP 2-3's / 3-5's completed sections answer Chemioue 281 / 282 (a
+# tie: they take turns) and Parelbriaux 296 (replaceDefault).
+# Chemioue 512, finished: Prog 1; again: nil, 281. Parelbriaux 513, finished: Prog 2; again: nil, 296. Ondieulix 514,
+# finished: Prog 3, begun; again: nil, 285. Lufaise: the ??? in clear weather: nil, its default. Fog (weather 3, a GM): the
+# ???: Baumesel popped, SPINE_CHILLING_PRESENCE; again (up): nil. Baumesel killed: the local NMKilled 1. The ???: the
+# petal, 115 (progressCutscene), finished: Prog 4; again: nil; again in fog once Baumesel's corpse is gone: nil. Ondieulix 516, finished: completed (the Powerful Rope, Putrid
+# Purveyor of Pungent Petals), the petal taken. Completed: Ondieulix: nil, 285.
+lists TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/Parelbriaux/onTrigger TavnazianSafehold/Ondieulix/onTrigger TavnazianSafehold/onEventFinish/512 TavnazianSafehold/onEventFinish/513 TavnazianSafehold/onEventFinish/514 TavnazianSafehold/onEventFinish/516 LufaiseMeadows/qm_baumesel/onTrigger LufaiseMeadows/Baumesel/onMobDeath LufaiseMeadows/onEventFinish/115
+char zone=TavnazianSafehold pos=83.5,-34,67.6 job=WAR lvl=75
+mission Cop ShelteringDoubt current
+login
+trigger Chemioue                        # available, Prog 0: 512
+finish                                  # Prog 1
+trigger Chemioue                        # Prog 1: nil; 2-3's 281
+finish
+warp 116.8,-41.2,43.2 TavnazianSafehold
+trigger Parelbriaux                     # Prog 1: 513
+finish                                  # Prog 2
+trigger Parelbriaux                     # Prog 2: nil; 3-5's 296
+finish
+warp 8.3,-25,65.4 TavnazianSafehold
+trigger Ondieulix                       # Prog 2: 514
+finish                                  # Prog 3; begun
+trigger Ondieulix                       # accepted, Prog 3: nil; 285
+finish
+warp -209,-16.2,288.9 LufaiseMeadows
+trigger qm_baumesel                     # Prog 3, not fog: nil; its default
+weather 3                               # a GM: fog
+trigger qm_baumesel                     # fog, Baumesel not up: popped; SPINE_CHILLING_PRESENCE
+trigger qm_baumesel                     # Baumesel up: nil; its default
+kill BAUMESEL                           # NMKilled 1
+trigger qm_baumesel                     # Prog 3, NMKilled 1: the petal; 115
+finish                                  # Prog 4
+trigger qm_baumesel                     # Prog 4: nil; its default
+tick 15000                              # Baumesel's corpse despawns
+tick 15000
+tick 15000
+weather 3                               # a GM: fog again (in case the weather rolled)
+trigger qm_baumesel                     # Prog 4, fog, Baumesel gone: nil; its default
+warp 8.3,-25,65.4 TavnazianSafehold
+trigger Ondieulix                       # Prog 4: 516
+finish                                  # completed; the petal taken
+trigger Ondieulix                       # completed: no section; 285
+finish

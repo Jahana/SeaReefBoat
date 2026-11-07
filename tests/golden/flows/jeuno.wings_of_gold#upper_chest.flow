@@ -1,0 +1,18 @@
+# Wings of Gold (jeuno 60), the Upper Delkfutt's Tower chest without the bell (the treasure trade gives it; noAction).
+# An opened chest leaves for a while, so this side is its own flow. Then the Middle tower chest with the bell held (nil:
+# the chest's own script opens it).
+lists UpperDelkfuttsTower/Treasure_Chest/onTrade MiddleDelkfuttsTower/Treasure_Chest/onTrade
+char zone=UpperDelkfuttsTower pos=-300,-175.924,20 job=BST lvl=40
+quest Jeuno.PathOfTheBeastmaster completed
+quest Jeuno.WingsOfGold accepted
+item DelkfuttChestKey x2
+login
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest DelkfuttChestKey x1    # no bell: the treasure trade, bypass 2: the Guiding Bell; noAction
+tick 4500                                   # the Guiding Bell
+warp -40,-47.852,90 MiddleDelkfuttsTower
+tick 13000
+trigger Treasure_Chest
+trade Treasure_Chest DelkfuttChestKey x1    # the bell held: nil; the chest's own script opens it
+tick 4500

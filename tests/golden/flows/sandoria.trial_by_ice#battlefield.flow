@@ -1,0 +1,17 @@
+# Trial by Ice (sandoria 59): the battlefield won while accepted. With the Tuning Fork of Ice, at IP_Entrance the fork
+# opens the entry menu 32000; its update with option 1 (index 0, arena 1) registers and enters (the fork taken);
+# Shiva_Prime_TBI of arena 1 (DRYAD-3: mob 17608705, below every IDs.lua key of the zone) is killed, and the win's 32001
+# opens within the kill step. Its finish runs content:onEventFinishWin, which calls this quest: Heir of the Great Ice,
+# the Whisper of Frost. In Northern San d'Oria, Gulmama's 709 (the whisper, no fork) and option 5 (10000 gil) complete it.
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=WAR lvl=75
+quest Sandoria.TrialByIce accepted
+keyitem TuningForkOfIce
+login
+trigger IP_Entrance                       # the fork: the entry menu 32000
+update 32000 option=1                     # Trial by Ice (index 0), arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+kill DRYAD-3                              # Shiva_Prime_TBI of arena 1: the battlefield won, 32001 opens
+finish                                    # Heir of the Great Ice, the Whisper of Frost
+warp -185.5,0.0,110.1 NorthernSanDoria
+trigger Gulmama                           # the whisper, no fork: 709
+finish option=5                           # 10000 gil: completed

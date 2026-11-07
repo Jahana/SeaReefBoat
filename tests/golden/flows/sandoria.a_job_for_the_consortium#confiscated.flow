@@ -1,0 +1,59 @@
+# A Job for the Consortium (sandoria 67): the confiscation and the airship ban. Accepted by GM, Stage 1, Prog 1
+# (CONFISCATED, as a daytime catch leaves it), the goods held, in Port Jeuno at 20:00 (no roll: the Prog stays 1). A
+# departures gate before the ban: its script (no airship pass: 46). _6u2's 54 taken: the goods taken, the ban to the next
+# JST midnight (1800025200), CONFISCATED. Under the ban (priority 200, over the scripts): the four gates and four clerks,
+# 40-43. The ban's bound by GM: [AIRSHIP]suspended at exactly now (42), one second before now (the gate's script, 46).
+# Portaure's 654 (completed); his LAY_LOW (Stage 0, banned); a JST day later the ban is over: 651; the gate's script again.
+# The gates' and clerks' scripts check the airship passes; this char has none.
+lists PortJeuno/_6u4/onTrigger PortJeuno/_6u8/onTrigger PortJeuno/_6ua/onTrigger PortJeuno/_6ue/onTrigger PortJeuno/Illauvolahaut/onTrigger PortJeuno/Omiro-Zamiro/onTrigger PortJeuno/Purequane/onTrigger PortJeuno/Zedduva/onTrigger PortJeuno/onEventFinish/54 PortSanDoria/Portaure/onTrigger PortSanDoria/onEventFinish/654
+char zone=PortJeuno pos=-75.5,8,54.7 job=WAR lvl=30 gil=1000
+fame Sandoria 325
+keyitem TenshodoMembersCard
+keyitem BrugaireGoods
+quest Sandoria.AJobForTheConsortium accepted
+charvar Quest[0][67]Stage 1
+charvar Quest[0][67]Prog 1
+login
+wait vana=8                               # 20:00: no roll
+trigger _6u4                              # no ban: its script, no airship pass: 46
+finish
+warp -59.5,8,58 PortJeuno
+trigger _6u2                              # 54 (param 0); Prog stays 1
+finish option=1                           # CONFISCATED: the goods taken; [AIRSHIP]suspended = JstMidnight()
+warp -75.5,8,54.7 PortJeuno
+trigger _6u4                              # banned: 42 (priority 200)
+finish
+trigger Purequane                         # 42
+finish
+charvar [AIRSHIP]suspended 1800000000
+trigger _6u4                              # suspended == now (>=): 42
+finish
+charvar [AIRSHIP]suspended 1799999999
+trigger _6u4                              # suspended one second before now: no section; its script's 46
+finish
+charvar [AIRSHIP]suspended 1800025200
+warp -11.025,8,54.7 PortJeuno
+trigger _6u8                              # 41
+finish
+trigger Illauvolahaut                     # 41
+finish
+warp -61.5,8,-54.9 PortJeuno
+trigger _6ua                              # 40
+finish
+trigger Zedduva                           # 40
+finish
+warp 2.5,8,-54.3 PortJeuno
+trigger _6ue                              # 43
+finish
+trigger Omiro-Zamiro                      # 43
+finish
+warp -20.499,-4,-106.877 PortSanDoria
+trigger Portaure                          # Stage 1, no goods: 653 + 1: 654
+finish                                    # completed; vars cleared (Stage 0)
+trigger Portaure                          # Stage 0, banned: LAY_LOW
+wait jst=1                                # past the next JST midnight: the ban is over
+trigger Portaure                          # 651 ([0] = 1)
+finish                                    # option 0: nothing
+warp -75.5,8,54.7 PortJeuno
+trigger _6u4                              # no ban: its script's 46
+finish

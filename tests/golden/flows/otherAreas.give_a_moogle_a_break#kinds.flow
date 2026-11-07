@@ -1,0 +1,27 @@
+# The Mog House Moogle's reply kinds: Give a Moogle a Break (100), The Moogle's Picnic! (101), Moogles in the Wild
+# (102), AMK 1 A Moogle Kupo d'Etat (30023, Progress, with ENABLE_AMK 1, the mission current, level 10+ and the hidden
+# moghouseExpo's notSeen 0; its finish completes the mission) and the Moogle's script (the menu). A Bastok char, fame
+# 488 (level 7), the beds placed (GMs). Give available: 30005 (Progress) and AMK's 30023 (Progress): a tie: the
+# mission's container first: 30023, finished: AMK 1 completed. Again: Give's 30005 alone (the menu is the script's, run
+# on the quests' nil only). Give and Picnic completed (GMs), out and back: Wild's 30013 (Progress). The accepted replies
+# (30006 / 30010 / 30014, Progress) are the main flows' (no rival once AMK 1 is done).
+lists BastokMines/Moogle/onTrigger BastokMines/onEventFinish/30005 BastokMines/onEventFinish/30013
+char zone=BastokMines pos=116.9,-1.6,-72 job=WAR lvl=75 nation=1
+fame Bastok 488
+setting ENABLE_AMK 1
+mission Amk AMoogleKupoDetat current
+charvar Quest[4][100]bedPlacedTime 1799999939
+charvar Quest[4][102]bedPlacedTime 1799999939
+login
+zoneline BastokMines                    # into the Mog House
+trigger Moogle                          # Give's 30005 and AMK's 30023 (Progress): a tie: the mission's container first: 30023
+finish option=0                         # AMK 1 completed
+trigger Moogle                          # Give's 30005 alone
+finish option=0
+quest OtherAreas.GiveAMoogleABreak completed # a GM
+quest OtherAreas.TheMooglePicnic completed # a GM
+warp -6,0,-50 BastokMarkets
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+trigger Moogle                          # Wild's 30013
+finish option=0

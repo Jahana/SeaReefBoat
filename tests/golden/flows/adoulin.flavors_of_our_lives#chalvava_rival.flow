@@ -1,0 +1,28 @@
+# Flavors of Our Lives (adoulin 46), the SoA rivals at Chalvava: a level 99 Warrior in Rala Waterways, SoA current
+# Calamity in the Kitchen (27, a GM: Chalvava's mission handler plays 344 at mission status 0, else 345, both
+# progressEvents), the quest accepted at Prog 2 (GMs). Chalvava's order line: Mission[12][27], Mission[12][29],
+# Mission[12][94], Mission[12][95], then the quest. Prog 2: 8 and 344 tie: the first in container order plays (344),
+# finished on 0: the mission's status 1; then the mission's 345 (a new id: the rotation starts again from the first);
+# then 8 (the rotation), finished: Prog 3. Prog 3: 9 (an Event) under 345, finished on 1: Calamity in the Kitchen
+# completed, SoA Arciela's Promise (29, Chalvava: 360, an Event once per zone). Then 9 and 360 tie: 360 first, then 9
+# (the rotation), then 9 again (360 spent in this zone visit).
+lists RalaWaterways/Chalvava/onTrigger RalaWaterways/onEventFinish/8
+char zone=RalaWaterways pos=-316.5,-1,-318 job=WAR lvl=99
+mission Soa CalamityInTheKitchen current
+quest Adoulin.FlavorsOfOurLives accepted
+charvar Quest[9][46]Prog 2
+login
+trigger Chalvava                        # Prog 2: 8 and the mission's 344 (both progressEvents) tie: 344
+finish option=0                         # the mission's status 1
+trigger Chalvava                        # the mission's 345 (a new id: the rotation starts again)
+finish                                  # option 0: nothing
+trigger Chalvava                        # the rotation: 8
+finish                                  # Prog 3
+trigger Chalvava                        # Prog 3: 9 (an Event) under the mission's 345
+finish option=1                         # Calamity in the Kitchen completed: SoA Arciela's Promise
+trigger Chalvava                        # 9 and the mission's 360 (Events) tie: 360
+finish
+trigger Chalvava                        # the rotation: 9
+finish
+trigger Chalvava                        # 360 spent in this zone visit: 9
+finish

@@ -1,0 +1,16 @@
+# One Good Deed? (windurst 92): the Peerifool death's Prog operand. Accepted by GM at Prog 0, a level-75 WAR in Bibiki
+# Bay, under Perfect Dodge by GM (effect 49). The qm_deed spawns the six; Prog 1 and NMKilled 5 by GM: PEERIFOOL
+# killed, no count (NMKilled stays 5); Prog 0 by GM: the qm_deed: nil (the cutscene needs 6). One kill only: a later
+# kill with no rezone can reach onMobDeath with no player credited, skipping the quest's handler (TODO row: "Golden
+# kill leaves the char engaged on the dead mob").
+lists BibikiBay/qm_deed/onTrigger BibikiBay/onEventFinish/34
+char zone=BibikiBay pos=-319.7,-2.74,-735.3 job=WAR lvl=75
+quest Windurst.OneGoodDeed accepted
+login
+effect 49                                     # a GM: Perfect Dodge (every melee hit evaded)
+trigger qm_deed                               # Prog 0, NMKilled 0, none up: the six spawn
+charvar Quest[2][92]Prog 1
+localvar NMKilled 5
+kill PEERIFOOL                                # Prog 1: no count (NMKilled stays 5)
+charvar Quest[2][92]Prog 0
+trigger qm_deed                               # Prog 0, NMKilled 5: nil (NOTHING_OUT_OF_ORDINARY)

@@ -1,0 +1,29 @@
+# Bite the Dust (bastok 46): Yazan in Port Bastok. The guard (Bastok fame level 2), the offer 191, the reminder 192, the
+# Sand Bat Fang trade (193), then 194 once per zone. The second section matches accepted and completed, so the trade
+# completes it again each time. Yazan's default is 190; no other quest or mission names him.
+lists PortBastok/Yazan/onTrigger PortBastok/Yazan/onTrade PortBastok/onEventFinish/191 PortBastok/onEventFinish/193
+char zone=PortBastok pos=-20,-3.3,25.5
+fame Bastok 49
+item SandBatFang x3
+item BoneChip
+login
+trade Yazan SandBatFang x1      # available: no trade handler, nothing
+trigger Yazan                   # fame 49 (level 1): his default 190
+finish
+fame Bastok 50
+trigger Yazan                   # fame level 2: the offer, 191
+finish                          # accepted
+trigger Yazan                   # accepted: 192
+finish
+trade Yazan BoneChip x1         # the wrong item: nothing
+trade Yazan SandBatFang x1      # 193
+finish                          # completed: 350 gil, fame +10, Sand Blaster, a fang gone
+trigger Yazan                   # completed: 194 (oncePerZone)
+finish
+trigger Yazan                   # 194 once performed is ignored this zone-in: his default 190
+finish
+rezone                          # the priority var is cleared on zoning
+trigger Yazan                   # 194 again
+finish
+trade Yazan SandBatFang x1      # completed: 193 again
+finish                          # completed again: 350 gil, fame +10, a fang gone

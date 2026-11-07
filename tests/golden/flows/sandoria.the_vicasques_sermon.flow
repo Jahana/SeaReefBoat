@@ -1,0 +1,55 @@
+# The Vicasque's Sermon (sandoria 9): Abioleget in Northern San d'Oria, Andelain in East Ronfaure (no scripts; defaults
+# ABIOLEGET_DIALOG and ANDELAIN_DIALOG; Her Memories: Homecoming Queen (Crystal War) names Abioleget, not begun here: its
+# competing state is #her_memories). Available: Waters of the Cheval not begun / accepted (hasCompletedQuest: no section,
+# Abioleget's default); completed (GM): a trade of 70 gil to Abioleget and the peas to Andelain (no available trade
+# handler: nothing; section 2's 591 / 19 would play), Andelain's talk (his default); 589 with option 0 (begun), the quest
+# reset by GM, 589 with option 1 (begun: any option). Accepted, Prog 0: WILL_PROVIDE_PITTANCE (Pod of Blue Peas, 70); 69
+# gil (nil); a chip (no gil: nil); exactly 70 gil (591; finish: the peas, the 70 gil taken); 100 gil and a chip (tradeHas:
+# 591; finish: a second pod, 70 gil taken, 30 and the chip back). Andelain: a talk at Prog 0 (MAY_ONLY_EAT); a chip
+# (CANNOT_ACCEPT_ALMS); the peas and a chip (tradeHas, Prog 0: THANKS_TO_GODDESS, 19; finish: one pod taken, the chip
+# kept, Prog 1, GATES_OF_PARADISE_OPEN); the peas at Prog 1 (APPRECIATE_OFFER_DECLINE); a talk at Prog 1 (19; finish:
+# GATES_OF_PARADISE_OPEN only). Abioleget at Prog 1: 600 (completed: Brass Ring, fame +20, The Benevolent One).
+# Completed: both defaults; a trade to each does nothing. #gm takes the full bag and Prog 2 / -1.
+lists NorthernSanDoria/Abioleget/onTrigger NorthernSanDoria/Abioleget/onTrade NorthernSanDoria/onEventFinish/589 NorthernSanDoria/onEventFinish/591 NorthernSanDoria/onEventFinish/600 EastRonfaure/Andelain/onTrigger EastRonfaure/Andelain/onTrade EastRonfaure/onEventFinish/19
+char zone=NorthernSanDoria pos=130.3,0.0,118.5 job=WAR lvl=30 gil=1000
+item BoneChip
+item BoneChip
+item PodOfBluePeas
+login
+trigger Abioleget                         # Waters of the Cheval not begun: no section; ABIOLEGET_DIALOG
+quest Sandoria.WatersOfTheCheval accepted
+trigger Abioleget                         # Waters of the Cheval accepted (not completed): ABIOLEGET_DIALOG
+quest Sandoria.WatersOfTheCheval completed
+trade Abioleget gil=70                    # available: no trade handler; nothing (section 2's 591 would play)
+warp 665.7,-11.8,-539.4 EastRonfaure
+trigger Andelain                          # available: no section; ANDELAIN_DIALOG (section 2's MAY_ONLY_EAT would play)
+trade Andelain PodOfBluePeas x1           # available: no section; nothing (section 2's 19 would play)
+warp 130.3,0.0,118.5 NorthernSanDoria
+trigger Abioleget                         # 589
+finish option=0                           # begun
+quest Sandoria.TheVicasquesSermon available
+trigger Abioleget                         # 589 again
+finish option=1                           # begun (any option)
+trigger Abioleget                         # Prog 0: WILL_PROVIDE_PITTANCE (Pod of Blue Peas, 70)
+trade Abioleget gil=69                    # under 70: nil; nothing
+trade Abioleget BoneChip x1               # no gil: nil; nothing
+trade Abioleget gil=70                    # exactly 70 (tradeHas): 591
+finish                                    # the Pod of Blue Peas; the 70 gil taken
+trade Abioleget BoneChip x1 gil=100       # 70 or more, a chip besides (tradeHas): 591
+finish                                    # a second pod; 70 gil taken, 30 and the chip given back
+warp 665.7,-11.8,-539.4 EastRonfaure
+trigger Andelain                          # Prog 0: MAY_ONLY_EAT (Pod of Blue Peas)
+trade Andelain BoneChip x1                # no peas: CANNOT_ACCEPT_ALMS
+trade Andelain PodOfBluePeas x1 BoneChip x1   # the peas (tradeHas), Prog 0: THANKS_TO_GODDESS; 19
+finish                                    # Prog 0: one pod taken, the chip kept; Prog 1; GATES_OF_PARADISE_OPEN
+trade Andelain PodOfBluePeas x1           # Prog 1: APPRECIATE_OFFER_DECLINE
+trigger Andelain                          # Prog 1: 19
+finish                                    # Prog 1: nothing taken; GATES_OF_PARADISE_OPEN
+warp 130.3,0.0,118.5 NorthernSanDoria
+trigger Abioleget                         # Prog 1: 600
+finish                                    # completed: Brass Ring, fame +20, The Benevolent One
+trigger Abioleget                         # completed: no section; ABIOLEGET_DIALOG
+trade Abioleget gil=70                    # completed: no section; nothing
+warp 665.7,-11.8,-539.4 EastRonfaure
+trigger Andelain                          # completed: no section; ANDELAIN_DIALOG
+trade Andelain PodOfBluePeas x1           # completed: no section; nothing

@@ -1,0 +1,28 @@
+# Portal Charm (hidden quest portalCharm): a Windurst char (nation 2) in Heaven's Tower with two Rolanberries. Rank 2:
+# the check fails: Kupipi's script (251). Rank 3 (a GM): her trigger, Prog 0: nil (her script's 251). A trade of two
+# Rolanberries: not exactly one: nil. One: Written in the Stars not completed: 292; finished: the berry taken, Prog 1.
+# The trigger, Prog 1 but the mission not completed: nil. The mission completed (a GM): 293; finished: quest:complete
+# (the Portal Charm; Prog cleared). A trade with the charm held: nil.
+# Kupipi+1 is the Kupipi a client sees (17768467, status normal); the first (17768466) is cutscene_only.
+lists HeavensTower/Kupipi/onTrigger HeavensTower/Kupipi/onTrade HeavensTower/onEventFinish/292 HeavensTower/onEventFinish/293
+char zone=HeavensTower pos=2,0,30.9 job=WAR lvl=75 nation=2
+rank 2
+item Rolanberry x2
+login
+trigger Kupipi+1                          # rank 2: the check fails: her script
+finish-if-event
+rank 3
+trigger Kupipi+1                          # Prog 0: nil: her script / quests
+finish-if-event
+trade Kupipi+1 Rolanberry x2              # not exactly one: nil
+finish-if-event
+trade Kupipi+1 Rolanberry x1              # the mission not completed: 292
+finish                                  # the berry taken; Prog 1
+trigger Kupipi+1                          # Prog 1, the mission not completed: nil (251)
+finish-if-event
+mission Windurst WrittenInTheStars current     # a GM: completeMission wants the mission current
+mission Windurst WrittenInTheStars completed
+trigger Kupipi+1                          # 293
+finish                                  # complete: the Portal Charm
+trade Kupipi+1 Rolanberry x1              # the charm held: nil
+finish-if-event

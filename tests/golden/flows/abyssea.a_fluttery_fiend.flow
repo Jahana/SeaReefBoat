@@ -1,0 +1,43 @@
+# A Fluttery Fiend (abyssea 174): a level 99 Warrior in Buburimu Peninsula by the Cavernous Maw with The Truth Beckons
+# completed and Dawn of Death accepted (GMs), no Traverser Stone, 5 maw quests completed (A Goldstruck Gigas, To Paste a
+# Peiste, Megadrile Menace, The Beast of Bastore, A Delectable Demon) and A Beaked Blusterer accepted (GMs; an accepted
+# one does not count). The maw, no stone: no section: its own warp event 61 (entranceMawOnTrigger), finished on option
+# 0: no warp. Traverser Stone 6 (a GM, one stone: `>= 1`): 62 (a Progress), finished on option 0: begun. Back to
+# available (a GM): the maw again with no other talk between: 62 again (an Event-rank 62 would alternate with the maw's
+# own onTrigger: 61), finished on option 2: begun (any option). Accepted: the maw: no handler: 61. A zone-in, accepted
+# with no Itzpapalotl title: nothing. The title (a GM): the zone-in plays 63 (left open); its update on option 0 and on
+# option 2: nothing; on option 1: updateEvent(the key item for 5 completed: Ivory Abyssite of Guerdon); finished: Ivory
+# Abyssite of Guerdon given, then completed. Completed (title, stone and Dawn of Death still held): a zone-in: nothing;
+# the maw: 61.
+lists BuburimuPeninsula/Cavernous_Maw/onTrigger BuburimuPeninsula/onEventFinish/62 BuburimuPeninsula/onEventFinish/61 BuburimuPeninsula/onZoneIn/1 BuburimuPeninsula/onEventUpdate/63 BuburimuPeninsula/onEventFinish/63
+char zone=BuburimuPeninsula pos=-342.896,-24.941,52.581 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath accepted
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.MegadrileMenace completed
+quest Abyssea.TheBeastOfBastore completed
+quest Abyssea.ADelectableDemon completed
+quest Abyssea.ABeakedBlusterer accepted
+login
+trigger Cavernous_Maw                   # no stone: no section: the maw's warp event 61
+finish                                  # option 0: no warp
+keyitem TraverserStone6                 # a GM: one stone
+trigger Cavernous_Maw                   # available, one stone, Dawn of Death accepted: 62
+finish                                  # option 0: begun
+quest Abyssea.AFlutteryFiend available  # a GM
+trigger Cavernous_Maw                   # 62 again (the kind)
+finish option=2                         # begun (any option)
+trigger Cavernous_Maw                   # accepted: no maw handler: 61
+finish                                  # option 0: no warp
+rezone                                  # accepted, no title: nothing
+title ItzpapalotlDeclawer               # a GM
+rezone open                             # the title: 63, left open
+update 63 option=0                      # option 0: nothing
+update 63 option=2                      # option 2: nothing
+update 63 option=1                      # option 1: updateEvent(Ivory Abyssite of Guerdon)
+finish                                  # Ivory Abyssite of Guerdon given; completed
+rezone                                  # completed: nothing
+trigger Cavernous_Maw                   # completed: no section: 61
+finish                                  # option 0: no warp

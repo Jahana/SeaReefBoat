@@ -1,0 +1,73 @@
+# Fire in the Hole (crystalWar 36), the edges: a level 99 Warrior in North Gustaberg [S] with the WotG mission In the
+# Name of the Father current (missions as the main flow). Storm on the Horizon not completed: Bastok Markets [S] from
+# North Gustaberg [S]: no section, no zone-in reply. Storm completed (a GM): Bastok Markets [S] from Vunkerl Inlet [S]:
+# nil; from North Gustaberg [S]: 60, finished: 77, finished on option 1: begun (any option), the key. The key taken (a
+# GM): Stonehoused Adit Prog 0 without it: nil, the Adit's script (the Mine Shaft Key held by a GM: 9300's 3; see the
+# main flow); Solitary Ant Prog 0 without it: nil (112); Prog 1 without it (a GM): nil (112). Prog 2 with the key (GMs):
+# Solitary Ant nil (112). Prog 3 and the key taken (GMs): Solitary Ant 8 (Prog 2 or more), finished: the key again, Prog
+# 1. Prog 3 again (a GM): North Gustaberg [S] from Bastok Markets [S]: nil; Bastok Markets [S] from North Gustaberg [S]
+# at Prog 3: nil. Prog 4 (a GM): North Gustaberg [S] from Bastok Markets [S], and from Ruhotz Silvermines (the warp put
+# back, see the main flow): nil; Bastok Markets [S] from Vunkerl Inlet [S]: nil; Gentle Tiger at Prog 4: nil (109); Prog
+# 7 (a GM): nil (109). Prog 6 (a GM): Bastok Markets [S] from North Gustaberg [S]: nil; with a full inventory: Gentle
+# Tiger 65, finished: the medal does not fit: not completed; freed: 65: completed.
+# 8's finish when its npc is not Solitary Ant: no other North Gustaberg [S] entity plays 8 (the zone, its NPC scripts,
+# its other quests), so that arm is unreachable (pinned by XI.Verify.Quests crystalwar g4 on the fake's Npc.Name).
+uncovered: 2/-/onEventFinish:10000 -- Ruhotz Silvermines' 10000 is the instance's completion cutscene (Light in the Darkness's onInstanceComplete starts it; Fire in the Hole's instance 9301 has no script): no flow can open it without an instance run (PLATFORM-NEEDS: an instance run); the flows set Prog 3 by a GM
+lists BastokMarketsS/onZoneIn/1 BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/60 BastokMarketsS/onEventFinish/77 BastokMarketsS/onEventFinish/65 NorthGustabergS/onZoneIn/1 NorthGustabergS/Stonehoused_Adit/onTrigger NorthGustabergS/Solitary_Ant/onTrigger
+char zone=NorthGustabergS pos=380.038,-2.25,147.627 job=WAR lvl=99
+mission Wotg InTheNameOfTheFather current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+warp -202.432,-9.998,2.237 BastokMarketsS # Storm on the Horizon not completed: no zone-in reply
+quest CrystalWar.StormOnTheHorizon completed
+warp 208.581,-32.002,315.458 VunkerlInletS
+warp -202.432,-9.998,2.237 BastokMarketsS # from Vunkerl Inlet [S]: nil
+warp 380.038,-2.25,147.627 NorthGustabergS
+warp -202.432,-9.998,2.237 BastokMarketsS open # from North Gustaberg [S]: 60, left open
+finish                                  # 77 starts
+finish option=1                         # 77: begun (any option); the key
+delkeyitem SilvermineKey                # a GM
+warp -433.155,36.708,279.983 NorthGustabergS
+keyitem MineShaftKey                    # a GM: the Adit's script finds 9300 first (9301 has no script: it raises)
+trigger Stonehoused_Adit                # Prog 0, no key: nil: the Adit's own script: 9300's registration, 3
+finish                                  # option 0: no instance asked for
+delkeyitem MineShaftKey                 # a GM
+trigger Solitary_Ant                    # Prog 0, no key: nil: 112
+finish-if-event
+charvar Quest[7][36]Prog 1              # a GM
+trigger Solitary_Ant                    # Prog 1, no key: nil: 112
+finish-if-event
+keyitem SilvermineKey                   # a GM
+charvar Quest[7][36]Prog 2              # a GM
+trigger Solitary_Ant                    # Prog 2 with the key: nil: 112
+finish-if-event
+charvar Quest[7][36]Prog 3              # a GM
+delkeyitem SilvermineKey                # a GM
+trigger Solitary_Ant                    # Prog 3 (2 or more), no key: 8
+finish                                  # its npc Solitary Ant: the key again; Prog 1
+charvar Quest[7][36]Prog 3              # a GM
+warp -202.432,-9.998,2.237 BastokMarketsS
+warp 376.532,0.865,151.645 NorthGustabergS # from Bastok Markets [S] at Prog 3: nil
+warp -202.432,-9.998,2.237 BastokMarketsS # from North Gustaberg [S] at Prog 3: nil
+charvar Quest[7][36]Prog 4              # a GM
+warp 376.532,0.865,151.645 NorthGustabergS # from Bastok Markets [S] at Prog 4: nil
+warp 0,0,0 RuhotzSilvermines            # no instance: back in North Gustaberg [S], from Ruhotz Silvermines: Prog 4: nil
+warp 208.581,-32.002,315.458 VunkerlInletS
+warp -202.432,-9.998,2.237 BastokMarketsS # from Vunkerl Inlet [S] at Prog 4: nil
+trigger Gentle_Tiger                    # Prog 4: nil: 109
+finish-if-event
+charvar Quest[7][36]Prog 7              # a GM: past 6 (no script sets it)
+trigger Gentle_Tiger                    # Prog 7: nil: 109
+finish-if-event
+charvar Quest[7][36]Prog 6              # a GM
+warp 376.532,0.865,151.645 NorthGustabergS
+warp -202.432,-9.998,2.237 BastokMarketsS # from North Gustaberg [S] at Prog 6: nil
+fill-inventory
+trigger Gentle_Tiger                    # Prog 6: 65
+finish                                  # no room for the medal: not completed
+free-inventory
+trigger Gentle_Tiger                    # 65
+finish                                  # completed

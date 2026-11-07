@@ -1,0 +1,34 @@
+# The Kuftal Tour (outlands 195), the qm's alliance test and the offer's guard. main: a level 30 Warrior in Kuftal
+# Tunnel, the quest accepted (a GM), with bob (level 30) by the qm: a party of 2: 14, finished: Prog 1; bob walks 15.5
+# yalms east (15.53 from main): nil: the default (his checkDistance to main above 15); bob back by the qm: 14. cid (level 30, accepted)
+# with dan (level 41) by the qm: a party of 2, dan above 40: nil: the default. eve in Rabao, Selbina-Rabao fame 125
+# without The Gustaberg Tour: no section: Datta's default 73.
+lists KuftalTunnel/qm5/onTrigger KuftalTunnel/onEventFinish/14 Rabao/Datta/onTrigger
+char zone=KuftalTunnel pos=-27.695,-22.159,-183.716 job=WAR lvl=30
+char bob zone=KuftalTunnel pos=-27.695,-22.159,-182.716 job=WAR lvl=30
+char cid zone=KuftalTunnel pos=-27.695,-22.159,-184.716 job=WAR lvl=30
+char dan zone=KuftalTunnel pos=-26.695,-22.159,-184.716 job=WAR lvl=41
+char eve zone=Rabao pos=-23.268,8.324,70.722 job=WAR lvl=30
+quest Outlands.TheKuftalTour accepted
+cid: quest Outlands.TheKuftalTour accepted
+eve: fame Sandoria 94
+eve: fame Bastok 94                     # Selbina-Rabao 125
+login
+bob: login
+invite bob
+bob: accept
+trigger qm5                             # main and bob: 14
+finish                                  # Prog 1
+bob: walk -12.195,-22.159,-182.716      # 15.5 yalms east (15.53 from main)
+trigger qm5                             # bob beyond 15 yalms: nil: the default
+bob: walk -27.695,-22.159,-182.716      # back by the qm
+trigger qm5                             # 14
+finish
+cid: login
+dan: login
+cid: invite dan
+dan: accept
+cid: trigger qm5                        # dan level 41: nil: the default
+eve: login
+eve: trigger Datta                      # no Gustaberg Tour: no section: the default 73
+eve: finish

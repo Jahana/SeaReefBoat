@@ -1,0 +1,16 @@
+# Wish Upon a Star (bastok 64): Enu's test with the weather NONE, which Bastok Markets' table never rolls (every day's
+# three weathers are 1 or more, and a city has no fog): a GM's setWeather (`weather 0`) sets it. Accepted by GM with a
+# Fallen Star. 12:00 (DAY) with NONE: 337 (the not-night side); 02:00 (MIDNIGHT, the isNight test's second side) with
+# NONE: 334, completed (four Bags of Cactus Stems, fame +50, the star taken). The zone's weather timer does not reroll
+# the GM's weather here: no tick reaches its next roll (`wait` moves only the Vana'diel clock).
+lists BastokMarkets/Enu/onTrade BastokMarkets/onEventFinish/334
+char zone=BastokMarkets pos=-253.7,-13,-92.3 lvl=30
+quest Bastok.WishUponAStar accepted
+item FallenStar
+login
+weather 0                      # GM: the weather NONE
+trade Enu FallenStar x1        # 12:00, DAY, NONE: not night: 337
+finish                         # 337 has no finish handler: the star kept
+wait vana=14                   # 02:00: MIDNIGHT
+trade Enu FallenStar x1        # MIDNIGHT, NONE: 334
+finish                         # completed: four Bags of Cactus Stems, fame +50, the star taken

@@ -1,0 +1,46 @@
+# Mog House Exposition (hidden quest moghouseExpo): a Bastok char (nation 1) in Bastok Mines with notSeen 1 (charCreate
+# writes it; a GM's charvar here: the flow's char is not created by charCreate). San d'Oria's Mog House first (Northern
+# San d'Oria's line to itself): not the home nation: the check fails: no zone-in event. Bastok Mines' Mog House: the
+# home nation: the zone-in 30000 (the zoneline finishes it with 0): quest:complete (the vars cleared), oNation 1. The
+# Moogle there (home): section 2 fails: his script (the menu). Northern San d'Oria's Mog House: the zone-in's check
+# fails (notSeen 0); the Moogle: 30001; finished: quest:complete (oNation cleared). The Moogle again: the menu.
+# `zoneline <Zone>` is the zone's line to its own Mog House (otherAreas group 9's way).
+lists BastokMines/onZoneIn/1 BastokMines/onEventFinish/30000 BastokMines/Moogle/onTrigger NorthernSanDoria/onZoneIn/1 NorthernSanDoria/Moogle/onTrigger NorthernSanDoria/onEventFinish/30001
+uncovered: 1/-/onZoneIn@AlZahbi -- section 1 needs xi.moghouse.inMogHouseInHomeNation, false in every Mog House outside the nations; XI.Verify.Quests hidden g4 mog zones
+uncovered: 1/-/onEventFinish:30000@AlZahbi -- the same
+uncovered: 1/-/onZoneIn@AhtUrhganWhitegate -- the same
+uncovered: 1/-/onEventFinish:30000@AhtUrhganWhitegate -- the same
+uncovered: 1/-/onZoneIn@SouthernSanDoriaS -- the same
+uncovered: 1/-/onEventFinish:30000@SouthernSanDoriaS -- the same
+uncovered: 1/-/onZoneIn@BastokMarketsS -- the same
+uncovered: 1/-/onEventFinish:30000@BastokMarketsS -- the same
+uncovered: 1/-/onZoneIn@WindurstWatersS -- the same
+uncovered: 1/-/onEventFinish:30000@WindurstWatersS -- the same
+uncovered: 1/-/onZoneIn@RuludeGardens -- the same
+uncovered: 1/-/onEventFinish:30000@RuludeGardens -- the same
+uncovered: 1/-/onZoneIn@UpperJeuno -- the same
+uncovered: 1/-/onEventFinish:30000@UpperJeuno -- the same
+uncovered: 1/-/onZoneIn@LowerJeuno -- the same
+uncovered: 1/-/onEventFinish:30000@LowerJeuno -- the same
+uncovered: 1/-/onZoneIn@PortJeuno -- the same
+uncovered: 1/-/onEventFinish:30000@PortJeuno -- the same
+uncovered: 1/-/onZoneIn@WesternAdoulin -- the same
+uncovered: 1/-/onEventFinish:30000@WesternAdoulin -- the same
+uncovered: 1/-/onZoneIn@EasternAdoulin -- the same
+uncovered: 1/-/onEventFinish:30000@EasternAdoulin -- the same
+char zone=NorthernSanDoria pos=-192.1,11,148.7 job=WAR lvl=1 nation=1
+charvar HQuest[moghouseExpo]notSeen 1
+login                                   # not in a Mog House: the check fails
+zoneline NorthernSanDoria               # San d'Oria's Mog House: not the home nation: no zone-in event
+trigger Moogle                          # oNation 0: section 2 fails: his script (the menu)
+finish-if-event
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines                    # the home Mog House: 30000 (finished with 0): complete; oNation 1
+trigger Moogle                          # home nation: section 2 fails: the menu
+finish-if-event
+warp -192.1,11,148.7 NorthernSanDoria
+zoneline NorthernSanDoria               # notSeen 0: no zone-in event
+trigger Moogle                          # not home, in the Mog House, oNation 1: 30001
+finish                                  # complete: oNation cleared
+trigger Moogle                          # oNation 0: the menu
+finish-if-event

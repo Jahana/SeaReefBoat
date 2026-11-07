@@ -1,0 +1,78 @@
+# The Beast Within's edges. The offer's operands, each false alone (An Empty Vessel completed for all): bob:
+# Transformations not completed (Omens completed, level 66: Transformations' own 720; its Timer past now (a GM): its
+# nil: 78); carl: a Warrior: 78, and accepted
+# (a GM) as a Warrior: no section 2: 78; dan: a level 65
+# Blue Mage: 78. ed (all met): Timer = now + 1 (a GM): nil: 78; Timer = now: 760. fred: accepted (a GM) as a level 65
+# Blue Mage: no section: Waoud 78; Imperial Whitegate: the testimony: no section: nothing. Main (accepted by a GM, 500
+# gil): 761, option 1: under 1000 gil: nothing; Prog 2 (a GM): the testimony to Imperial Whitegate: 763, option 1:
+# nothing; Prog 3 (a GM): 762, option 1: nothing; Prog 2 (a GM): 763, option 0: setPos into Jade Sepulcher; the zone-in at Prog 2: nil.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/Imperial_Whitegate/onTrade AhtUrhganWhitegate/onEventFinish/761 AhtUrhganWhitegate/onEventFinish/763 JadeSepulcher/onZoneIn/1
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=70 gil=500
+char bob zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=66 gil=5000
+char carl zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=WAR lvl=66 gil=5000
+char dan zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=65 gil=5000
+char ed zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=66 gil=5000
+char fred zone=AhtUrhganWhitegate pos=155.796,-4.199,0.03 job=BLU lvl=65 gil=5000
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Transformations completed
+quest AhtUrhgan.TheBeastWithin accepted
+item BlueMagesTestimony
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: quest AhtUrhgan.Omens completed
+carl: quest AhtUrhgan.AnEmptyVessel completed
+carl: quest AhtUrhgan.Transformations completed
+dan: quest AhtUrhgan.AnEmptyVessel completed
+dan: quest AhtUrhgan.Transformations completed
+ed: quest AhtUrhgan.AnEmptyVessel completed
+ed: quest AhtUrhgan.Transformations completed
+ed: charvar Quest[6][40]Timer 1800000001
+fred: quest AhtUrhgan.AnEmptyVessel completed
+fred: quest AhtUrhgan.Transformations completed
+fred: quest AhtUrhgan.TheBeastWithin accepted
+fred: item BlueMagesTestimony
+login
+bob: login
+bob: trigger Waoud                      # Transformations not completed: its own 720 (5000)
+bob: finish option=0
+bob: charvar Quest[6][23]Timer 1800000001   # a GM: Transformations' Waoud nil (now < Timer)
+bob: trigger Waoud                      # Transformations not completed: not offered: An Empty Vessel's 78
+bob: finish option=0
+bob: logout
+carl: login
+carl: trigger Waoud                     # a Warrior: 78
+carl: finish option=0
+carl: quest AhtUrhgan.TheBeastWithin accepted   # a GM
+carl: trigger Waoud                     # accepted, a Warrior: no section 2: 78
+carl: finish option=0
+carl: logout
+dan: login
+dan: trigger Waoud                      # level 65: 78
+dan: finish option=0
+dan: logout
+ed: login
+ed: trigger Waoud                       # now < Timer: nil: 78
+ed: finish option=0
+ed: charvar Quest[6][40]Timer 1800000000   # a GM: now
+ed: trigger Waoud                       # 760
+ed: finish option=1                     # nothing
+ed: logout
+fred: login
+fred: trade Imperial_Whitegate BlueMagesTestimony x1   # accepted, level 65: no section: nothing
+fred: trigger Waoud                     # no section: 78
+fred: finish option=0
+fred: logout
+trigger Waoud                           # 761
+finish option=1                         # under 1000 gil: nothing
+charvar Quest[6][40]Prog 2              # a GM
+walk 155.796,-4.199,0.03
+trade Imperial_Whitegate BlueMagesTestimony x1   # Prog 2: 763
+finish option=1                         # nothing
+charvar Quest[6][40]Prog 3              # a GM
+trade Imperial_Whitegate BlueMagesTestimony x1   # Prog 3 (not 2): 762
+finish option=1                         # nothing
+charvar Quest[6][40]Prog 2              # a GM
+trade Imperial_Whitegate BlueMagesTestimony x1   # 763
+finish option=0                         # setPos into Jade Sepulcher (Prog 2 kept)
+tick 400
+login open                              # the zone change; Prog 2: no zone-in event (nothing left open)
+warp 300,-2.517,-198.5 JadeSepulcher    # the flow checker's zone

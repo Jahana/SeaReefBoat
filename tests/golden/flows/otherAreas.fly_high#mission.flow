@@ -1,0 +1,36 @@
+# Fly High (otherAreas 71), the mission operands. CoP completion reads the current mission (hasCompletedMission: a
+# mission below the current one), and a completeMission leaves the current mission 0 (nothing completed). The Secrets
+# of Worship current (the mission after The Savage; The Savage completed): 241 (begun, option 0). Its completion (a GM:
+# current 0): no arm (the default 240). Sheltering Doubt current (the one before): no arm. The trade reads no mission:
+# accepted with Sheltering Doubt current, two feathers: 243, the Mistmelt, completed. Still no arm once completed; The
+# Secrets of Worship current again: 244.
+char zone=TavnazianSafehold pos=-68.0,-11.3,-5.0 job=WAR lvl=75
+mission Cop TheSecretsOfWorship current
+item HippogryphTailfeather x2
+login
+trigger Ferchinne                       # UseFallback 0: the default 240
+finish
+trigger Ferchinne                       # The Savage below the current mission, available: 241
+finish option=0                         # begun (no option read)
+mission Cop TheSecretsOfWorship completed   # a GM: current 0
+trigger Ferchinne                       # the default 240
+finish
+trigger Ferchinne                       # no mission completed: no arm: the default 240
+finish
+mission Cop ShelteringDoubt current     # a GM: before The Savage
+trigger Ferchinne                       # the default 240
+finish
+trigger Ferchinne                       # no arm: the default 240
+finish
+trade Ferchinne HippogryphTailfeather x2   # accepted, no mission read: 243
+finish                                  # the Mistmelt; completed; the feathers taken
+trigger Ferchinne                       # the default 240
+finish
+trigger Ferchinne                       # completed, no arm: the default 240
+finish
+mission Cop ShelteringDoubt completed   # a GM (addMission warns over a current mission)
+mission Cop TheSecretsOfWorship current # a GM
+trigger Ferchinne                       # the default 240
+finish
+trigger Ferchinne                       # completed: 244
+finish

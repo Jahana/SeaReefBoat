@@ -1,0 +1,44 @@
+# Promotion: Superior Private (ahtUrhgan 91): a level 1 Warrior with Private First Class completed and the PFC Wildcat
+# Badge, AssaultPromotion 25; Naja Salaheem (no script, no default). bob: Private First Class not completed: Private
+# First Class's own 5000 (not this quest).
+# carl: Private First Class completed, AssaultPromotion 24: nothing.
+# Main: 5020, finished: begun, the mustZone set. Accepted, no hoofprint: Naja 5021 with [0] = 1, [1] = 1 (the
+# mustZone); again in the zone: once per zone (Ignore): nothing. Nashmau and back (the mustZone cleared, the zone's
+# local vars too): 5021 with no options; again: nothing. The Warhorse Hoofprints stay hidden (DISAPPEAR) until the Dark
+# Rider's run: `#hoofprint` shows them by GMs; here a GM gives the Dark Rider Hoofprint. Naja 5022, finished: completed
+# (the SP Wildcat Badge, Superior Private), AssaultPromotion 0, the PFC badge and the hoofprint taken, SUPERIOR_PRIVATE.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/5020 AhtUrhganWhitegate/onEventFinish/5022
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+charvar AssaultPromotion 25
+keyitem PfcWildcatBadge
+bob: charvar AssaultPromotion 25
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+carl: charvar AssaultPromotion 24
+login
+bob: login
+bob: trigger Naja_Salaheem              # Private First Class not completed (and its own check: available, 25): its 5000
+bob: finish                             # Private First Class begun (not this quest)
+bob: logout
+carl: login
+carl: trigger Naja_Salaheem             # AssaultPromotion 24: nothing
+carl: finish-if-event
+carl: logout
+trigger Naja_Salaheem                   # 5020
+finish                                  # begun; the mustZone set
+trigger Naja_Salaheem                   # no hoofprint, the mustZone: 5021 [0] = 1, [1] = 1
+finish
+trigger Naja_Salaheem                   # once per zone: Ignore: nothing
+finish-if-event
+warp 17.413,0,-32.676 Nashmau           # out: the mustZone cleared
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # 5021, no options
+finish
+trigger Naja_Salaheem                   # once per zone: nothing
+finish-if-event
+keyitem DarkRiderHoofprint              # a GM (the Hoofprints are hidden: #hoofprint)
+trigger Naja_Salaheem                   # the hoofprint held: 5022
+finish                                  # completed; AssaultPromotion 0; the PFC badge and the hoofprint taken;
+                                        # SUPERIOR_PRIVATE

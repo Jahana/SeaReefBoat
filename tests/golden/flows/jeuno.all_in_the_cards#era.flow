@@ -1,0 +1,37 @@
+# All in the Cards (jeuno 166) with its era module (quest rework B3b Jeuno, P4): modules/era/lua/quests/jeuno/
+# all_in_the_cards.lua, enabled by its condition xi.pre(xi.expansion.ABYSSEA) (RESTRICT_CONTENT 1, ENABLE_ABYSSEA 0),
+# replaces the checks of state 1 (available: the first offer) and state 2 (completed: the repeat offer) with false; a
+# char already holding the quest can still turn it in (state 3 is the quest's own). Collect Tarut Cards and Rubbish Day
+# completed (Rubbish Day's Event 199 stays at Chululu), Date 0: available and past Date, no 10110 (the quest's own
+# offers it); GM-accepted, past Date: the quest's own Event 10112 takes turns with 199 (the patched container is last
+# in the list, so 199 comes first: a restart at the first, as no cycle var was written), 10112 (a new batch whatever
+# the option, Date = the next JST midnight), the four cards (10114: completed, 600 gil, Card Collector, fame +16 x3,
+# Date = the next JST midnight, the value it had); completed a JST day later, past Date: no 10113 (the quest's own
+# offers it again).
+# The condition's false side cannot be a module flow (the harness fails a flow whose module is not enabled); the
+# quest's own flows are that side.
+module modules/era/lua/quests/jeuno/all_in_the_cards.lua
+lists LowerJeuno/Chululu/onTrigger LowerJeuno/Chululu/onTrade LowerJeuno/onEventFinish/10112 LowerJeuno/onEventFinish/10114
+char zone=LowerJeuno pos=-9,-6.7,-42.5 job=WAR lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_ABYSSEA 0
+quest Jeuno.CollectTarutCards completed
+quest Jeuno.RubbishDay completed
+item TarutCardTheFool
+item TarutCardDeath
+item TarutCardTheHermit
+item TarutCardTheKing
+login
+walk -11.5,-6.7,-42
+trigger Chululu                             # available, past Date: no offer; Rubbish Day's 199
+finish option=1
+quest Jeuno.AllInTheCards accepted
+trigger Chululu                             # accepted, past Date: the cycle's first, Rubbish Day's 199
+finish option=1
+trigger Chululu                             # the cycle's next: 10112
+finish option=1                             # a new batch whatever the option, Date = the next JST midnight
+trade Chululu TarutCardTheFool x1 TarutCardDeath x1 TarutCardTheHermit x1 TarutCardTheKing x1  # the four: 10114
+finish                                      # completed: 600 gil, Card Collector, fame +16 x3, the cards taken, Date kept (the same midnight)
+wait jst=1                                  # past Date
+trigger Chululu                             # completed, past Date: no repeat offer; Rubbish Day's 199
+finish option=1

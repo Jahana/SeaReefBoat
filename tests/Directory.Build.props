@@ -1,0 +1,8 @@
+<Project>
+  <!-- Every test project: the shipped settings only (XI_SETTINGS_DEFAULTS_ONLY, read by Settings.Load, the Lua
+       settings::init and the search whitelist), so the local settings/*.lua overrides of the live server don't change
+       what the suites see. TestSettingsDefaults.cs sets it before Main; child XI.Host processes inherit it. -->
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)TestSettingsDefaults.cs" Link="TestSettingsDefaults.cs" />
+  </ItemGroup>
+</Project>

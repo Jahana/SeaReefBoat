@@ -1,0 +1,23 @@
+# The Quadav's Curse (bastok 4): Corann in Port Bastok. The offer 80 (no guard), the Quadav Backplate trade (81), the
+# Bronze Subligar reward, 87 (replaceDefault) once completed while Out of One's Shell is not. Corann's default is 38; Out
+# of One's Shell also names him (88 once it is completed), and its offer is Ronan's, not his.
+lists PortBastok/Corann/onTrigger PortBastok/Corann/onTrade PortBastok/onEventFinish/80 PortBastok/onEventFinish/81
+char zone=PortBastok pos=90.9,-8.772,33.5
+item QuadavBackplate
+item QuadavBackplate
+item BoneChip
+login
+trade Corann QuadavBackplate x1 # available: no trade handler, nothing
+trigger Corann                  # available: the offer, 80
+finish                          # accepted
+trigger Corann                  # accepted: no trigger in section 2, his default 38
+finish
+trade Corann BoneChip x1        # the wrong item: nothing
+trade Corann QuadavBackplate x1 # 81
+finish                          # completed: Bronze Subligar, fame +20, a backplate gone
+trigger Corann                  # completed, Out of One's Shell not: 87
+finish
+trade Corann QuadavBackplate x1 # completed: nothing
+quest Bastok.OutOfOnesShell completed
+trigger Corann                  # Out of One's Shell completed: section 3 fails; that quest's 88
+finish

@@ -1,0 +1,72 @@
+# Trial by Ice (sandoria 59), each status operand of Gulmama's arms alone (GM-set statuses, the rest held still).
+# 706's two halves: TrialByIce_date 1 (behind) at fame level 5: available 710, completed 706; fame level 6 with the
+# date ahead (2000000000): completed 710, available 706. The accepted arms at fame level 1 with the date ahead: no key
+# item: available 710, completed 710, accepted 718; the fork: available 710, accepted 707, completed 710; the whisper:
+# available 710, accepted 709, completed 710. The finishes read no status (GM changes while the event is open): 706
+# option 1 finished while accepted (addQuest on an accepted quest: no change; TrialByIce_date 0; the fork), 718 finished
+# while completed (a fork), 709 finished while available (Rust 'B' Gone, completed from available). Available at fame
+# level 7: 706.
+char zone=NorthernSanDoria pos=-185.5,0.0,110.1 job=WAR lvl=75
+fame Sandoria 424
+charvar TrialByIce_date 1
+login
+trigger Gulmama                           # available, fame level 5, date behind: 710
+finish
+quest Sandoria.TrialByIce completed
+trigger Gulmama                           # completed, date behind: 706
+finish option=0                           # declined
+fame Sandoria 425
+charvar TrialByIce_date 2000000000
+trigger Gulmama                           # completed, fame level 6, date ahead: 710
+finish
+quest Sandoria.TrialByIce available
+trigger Gulmama                           # available, fame level 6: 706
+finish option=0                           # declined
+fame Sandoria 0
+trigger Gulmama                           # available, fame level 1, no key item: 710
+finish
+quest Sandoria.TrialByIce completed
+trigger Gulmama                           # completed (date ahead), no key item: 710
+finish
+quest Sandoria.TrialByIce available
+quest Sandoria.TrialByIce accepted
+trigger Gulmama                           # accepted, no key item: 718
+finish                                    # the fork
+quest Sandoria.TrialByIce completed
+trigger Gulmama                           # completed (date ahead), the fork: 710
+finish
+quest Sandoria.TrialByIce available
+trigger Gulmama                           # available, the fork: 710
+finish
+quest Sandoria.TrialByIce accepted
+trigger Gulmama                           # accepted, the fork: 707
+finish
+delkeyitem TuningForkOfIce
+keyitem WhisperOfFrost
+trigger Gulmama                           # accepted, the whisper alone: 709 (0, fork, 4)
+finish option=3                           # the Ice Ring: completed; TrialByIce_date 1800025200
+keyitem WhisperOfFrost
+trigger Gulmama                           # completed (date ahead), the whisper: 710
+finish
+quest Sandoria.TrialByIce available
+trigger Gulmama                           # available, fame level 1, the whisper: 710
+finish
+quest Sandoria.TrialByIce accepted
+trigger Gulmama                           # 709
+quest Sandoria.TrialByIce available
+finish option=4                           # finished while available: Rust 'B' Gone; completed from available
+quest Sandoria.TrialByIce available
+quest Sandoria.TrialByIce accepted
+delkeyitem TuningForkOfIce
+trigger Gulmama                           # accepted, no key item: 718
+quest Sandoria.TrialByIce completed
+finish                                    # finished while completed: the fork
+fame Sandoria 425
+quest Sandoria.TrialByIce available
+trigger Gulmama                           # available, fame level 6: 706
+quest Sandoria.TrialByIce accepted
+finish option=1                           # finished while accepted: no change of status; TrialByIce_date 0; the fork held
+quest Sandoria.TrialByIce available
+fame Sandoria 488
+trigger Gulmama                           # available, fame level 7: 706
+finish option=0                           # declined

@@ -1,0 +1,31 @@
+# Arts and Crafts' 514 (a Progress) against the Progress replies of the other Whitegate quests at Qutiba (task 7 review
+# of the mutants): Delivering the Goods' 40 (accepted, Prog 0), Vanishing Act's 42 (available) and A Taste of Honey's
+# 579 (available). The trace order line says which container plays first on each tie; the quests' own kinds can only
+# be told apart by a container that sorts before Arts and Crafts' (see AhtUrhganGroup7).
+lists AhtUrhganWhitegate/Qutiba/onTrigger
+char zone=AhtUrhganWhitegate pos=92.341,-6.5,-127.5 job=WAR lvl=75
+char bob zone=AhtUrhganWhitegate pos=92.341,-6.5,-127.5 job=WAR lvl=75
+char carl zone=AhtUrhganWhitegate pos=92.341,-6.5,-127.5 job=WAR lvl=75
+quest AhtUrhgan.LedAstray completed
+quest AhtUrhgan.ArtsAndCrafts accepted
+quest AhtUrhgan.DeliveringTheGoods accepted
+bob: quest AhtUrhgan.ArtsAndCrafts accepted
+bob: quest AhtUrhgan.DeliveringTheGoods completed
+carl: quest AhtUrhgan.ArtsAndCrafts accepted
+carl: quest AhtUrhgan.DeliveringTheGoods completed
+carl: quest AhtUrhgan.VanishingAct completed
+login
+trigger Qutiba                          # 40 and 514 tie: the order line says who is first
+finish
+trigger Qutiba                          # the other one (or 40 again if 514 went first and its bit is set)
+finish
+bob: login
+bob: trigger Qutiba                     # 42 and 514 tie
+bob: finish option=0
+bob: trigger Qutiba
+bob: finish
+carl: login
+carl: trigger Qutiba                    # 579 and 514 tie
+carl: finish
+carl: trigger Qutiba
+carl: finish

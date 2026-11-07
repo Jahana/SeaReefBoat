@@ -1,0 +1,76 @@
+# Chasing Dreams (outlands 199): a level 75 Warrior; An Explorer's Footsteps completed (a GM: Abelard's 48 replaceDefault,
+# which 1108 beats; available, its 40 ties 1108: #kinds); five Eastern Gems. Available: a Bone Chip to Rudolfo: no trade
+# handler: nothing; Rudolfo 117: begun; again: no section: the default 125. Rabao: Zoriboh 119 (Prog 1), 120. Norg:
+# Washu at Prog 1: nil: the default 80; Sohyon 209 (Prog 2), 213; Washu 221: Washu's Flask, Prog 3. Korroloka Tunnel:
+# _4t0 (bit 1): Option 2, FILL_FLASK, STILL_LIGHT (no action); _4t0 again (its bit set): CLAM_EMPTY; _4t1, _4t2 (Option 6,
+# 14): FILL_FLASK, STILL_LIGHT; _4t3 (Option 30): FILL_FLASK, the flask taken, FLASK_FULL, the Flask of Clam Water, Prog
+# 4; _4t3 again: Prog 4: no section, no default: nothing. Norg: Sohyon 210 (the water taken, the Storeroom Key); Sohyon
+# (the key held): nil: the default 212; Gimb 211 (0, Pinch of Prism Powder: the key taken, Prog 5); Gimb again: nil: his
+# script's 69 (SahaginKeyProgress 1). Port Bastok (Rhapsodies of Vana'diel's 30035 at the zone-in): Kagetora 322 (0,
+# Eastern Gem: Prog 6), 324; Patient_Wheel 326 (0, Eastern Gem); five Eastern Gems: 323 (confirmed, Prog 7); 327.
+# Selbina (RoV 1-02's 176 at the zone-in): Abelard 1108 (Prog 8). Lufaise Meadows' zone-in left open: 4, finished: Prog 9.
+# Rabao: Zoriboh 121: completed (the Venerer Ring, 4000 gil), San d'Oria and Bastok fame +10; Zoriboh again: no section:
+# the default 127.
+# The Sahagin's Key's deliberate log write (user ruling 2026-11-04): Gimb's 69 adds it while available, so this
+# trace is a csharp-rerecord of its Lua recording (lua-at kept), the difference its log entry only.
+lists Rabao/Rudolfo/onTrigger Rabao/Rudolfo/onTrade Rabao/Zoriboh/onTrigger Norg/Sohyon/onTrigger Norg/Washu/onTrigger Norg/Gimb/onTrigger KorrolokaTunnel/_4t0/onTrigger PortBastok/Kagetora/onTrigger PortBastok/Patient_Wheel/onTrigger PortBastok/Patient_Wheel/onTrade Selbina/Abelard/onTrigger LufaiseMeadows/onZoneIn/1 Rabao/onEventFinish/121
+char zone=Rabao pos=119.593,8,50.945 job=WAR lvl=75
+quest OtherAreas.AnExplorersFootsteps completed
+item EasternGem x5
+item BoneChip
+login
+trade Rudolfo BoneChip x1               # available: no trade handler: nothing
+trigger Rudolfo                         # 117
+finish                                  # begun
+trigger Rudolfo                         # accepted: no section: the default 125
+finish
+trigger Zoriboh                         # Prog 0: 119
+finish                                  # Prog 1
+trigger Zoriboh                         # Prog 1: 120
+finish
+warp 47.286,-6.282,13.873 Norg
+trigger Washu                           # Prog 1: nil: the default 80
+finish
+trigger Sohyon                          # Prog 1: 209
+finish                                  # Prog 2
+trigger Sohyon                          # Prog 2: 213
+finish
+trigger Washu                           # Prog 2: 221
+finish                                  # Washu's Flask; Prog 3
+warp 105.479,-5.915,13.928 KorrolokaTunnel
+trigger _4t0                            # the flask, bit 1 clear: Option 2; FILL_FLASK; STILL_LIGHT; no action
+trigger _4t0                            # bit 1 set: CLAM_EMPTY
+trigger _4t1                            # Option 6; FILL_FLASK; STILL_LIGHT
+trigger _4t2                            # Option 14; FILL_FLASK; STILL_LIGHT
+trigger _4t3                            # Option 30: FILL_FLASK; the flask taken; FLASK_FULL; the Flask of Clam Water; Prog 4
+trigger _4t3                            # Prog 4: no section, no default: nothing
+warp 47.286,-6.282,13.873 Norg
+trigger Sohyon                          # the water, no key: 210
+finish                                  # the water taken; the Storeroom Key
+trigger Sohyon                          # the key held: nil: the default 212
+finish
+trigger Gimb                            # the key: 211 (0, Pinch of Prism Powder)
+finish                                  # the key taken; Prog 5
+trigger Gimb                            # no key: nil: his script's 69 (SahaginKeyProgress 1; The Sahagin's Key added)
+finish
+warp -94.579,-2.299,30.463 PortBastok
+trigger Kagetora                        # Prog 5: 322 (0, Eastern Gem)
+finish                                  # Prog 6
+trigger Kagetora                        # Prog 6: 324 (his script: no Twenty in Pirate Years)
+finish
+trigger Patient_Wheel                   # Prog 6: 326 (0, Eastern Gem)
+finish
+trade Patient_Wheel EasternGem x5       # Prog 6, five gems alone: 323
+finish                                  # the gems taken; Prog 7
+trigger Patient_Wheel                   # Prog 7 (> 6): 327
+finish
+warp -52.121,-11.338,-13.067 Selbina
+trigger Abelard                         # Prog 7: 1108 (beats An Explorer's Footsteps' 48)
+finish                                  # Prog 8
+warp 458,6,-4 LufaiseMeadows open       # Prog 8: the zone-in's 4, left open
+finish                                  # Prog 9
+warp 119.593,8,50.945 Rabao
+trigger Zoriboh                         # Prog 9: 121
+finish                                  # completed: the Venerer Ring, 4000 gil; San d'Oria and Bastok fame +10
+trigger Zoriboh                         # completed: no section: the default 127
+finish

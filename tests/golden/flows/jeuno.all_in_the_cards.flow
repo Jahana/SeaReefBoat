@@ -1,0 +1,62 @@
+# All in the Cards (jeuno 166): Chululu in Lower Jeuno. Collect Tarut Cards completed, Date 0 (past), Rubbish Day
+# completed (it stays on Lua: its Event 199 cycles with this quest's Event 10111 / 10112, a C# / Lua mix once this
+# quest is ported, and loses to its Progress 10110 / 10113 / 10114): the four cards while available (no trade handler:
+# nil), 10110 (option 1: nothing; option 0 with a full bag: not begun; option 0: five cards, Date = the next JST
+# midnight, begun), 10111 before Date, 10112 a JST day later (a new batch whatever the option; a full bag: nothing),
+# three cards (not tradeMatches: nil), the four (10114: completed, 600 gil, Card Collector, fame +16 x3, the cards
+# taken, Date moved), completed before Date (no section: Rubbish Day's 199; a trade: nil), completed a JST day later
+# (10113: option 1, nothing; option 0 with a full bag: not begun; option 0: five cards, Date moved, begun again).
+# The cycle (interaction_lookup performNextAction) writes the id of the action it played, only when two or more actions
+# tie (a single-action trigger writes nothing), and plays the one after the remembered id, wrapping to the first; when
+# the remembered id is not in the list (this quest's action changed, 10111 to 10112 or back), it restarts at the first,
+# this quest's action.
+lists LowerJeuno/Chululu/onTrigger LowerJeuno/Chululu/onTrade LowerJeuno/onEventFinish/10110 LowerJeuno/onEventFinish/10112 LowerJeuno/onEventFinish/10113 LowerJeuno/onEventFinish/10114
+char zone=LowerJeuno pos=-9,-6.7,-42.5 job=WAR lvl=30
+quest Jeuno.CollectTarutCards completed
+quest Jeuno.RubbishDay completed
+item TarutCardTheFool x2
+item TarutCardDeath
+item TarutCardTheHermit
+item TarutCardTheKing
+login
+walk -11.5,-6.7,-42
+trade Chululu TarutCardTheFool x1 TarutCardDeath x1 TarutCardTheHermit x1 TarutCardTheKing x1  # available: no trade handler, nil
+trigger Chululu                             # available, past Date: 10110 (Progress, over Rubbish Day's Event 199)
+finish option=1                             # not 0: nothing
+trigger Chululu                             # 10110
+fill-inventory
+finish option=0                             # no room for the cards: not begun, Date kept
+free-inventory
+trigger Chululu                             # 10110
+finish option=0                             # five of one random card, Date = the next JST midnight, begun
+trigger Chululu                             # accepted, before Date: 10111 (Event: first in the cycle with Rubbish Day's Event 199)
+finish
+trigger Chululu                             # the cycle's next: Rubbish Day's 199
+finish
+wait jst=1                                  # past Date
+trigger Chululu                             # 10112 (remembered 199, the last of [10112, 199]: the cycle wraps to the first)
+finish option=1                             # a new batch whatever the option, Date moved
+trigger Chululu                             # before Date again, 10111 (remembered 10112, not in [10111, 199]: a restart)
+finish option=1
+wait jst=1                                  # past Date again
+trigger Chululu                             # 10112 (remembered 10111, not in [10112, 199]: a restart)
+fill-inventory
+finish option=1                             # 10112 with a full bag: giveCards false, Date kept
+free-inventory
+trigger Chululu                             # the cycle's next (remembered 10112): Rubbish Day's 199
+finish option=1
+trade Chululu TarutCardTheFool x1 TarutCardDeath x1 TarutCardTheHermit x1  # three cards: nil
+trade Chululu TarutCardTheFool x1 TarutCardDeath x1 TarutCardTheHermit x1 TarutCardTheKing x1  # the four: 10114
+finish                                      # completed: 600 gil, Card Collector, fame +16 x3, the cards taken, Date moved
+trigger Chululu                             # completed, before Date: no section; Rubbish Day's 199
+finish
+trade Chululu TarutCardTheFool x1           # completed: no trade handler, nil (the second Fool of the setup)
+wait jst=1
+trigger Chululu                             # completed, past Date: 10113 (Progress)
+finish option=1                             # not 0: nothing
+trigger Chululu                             # 10113
+fill-inventory
+finish option=0                             # no room for the cards: not begun, Date kept
+free-inventory
+trigger Chululu                             # 10113
+finish option=0                             # five cards, Date moved, begun again

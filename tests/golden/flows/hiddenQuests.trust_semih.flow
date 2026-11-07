@@ -1,0 +1,18 @@
+# Trust: Semih (hidden quest TrustSemih): a level 99 Warrior in Heaven's Tower. Kupipi (her script npcs/Kupipi.lua; no
+# default; the other quests that answer her: Trust: Windurst, Portal Charm, missions). RoV The Path Untraveled completed
+# (setup). No permit: the check fails: her script. The Windurst Trust Permit (a GM): every talk gives the cipher (the
+# stopgap) and plays noAction; with a full inventory the giveItem fails (its message, no cipher). The cipher held: the
+# check fails: her script. Kupipi+1 is the Kupipi a client sees (the first is cutscene_only).
+lists HeavensTower/Kupipi/onTrigger
+char zone=HeavensTower pos=2,0,30.9 job=WAR lvl=99
+mission Rov ThePathUntraveled completed
+login
+trigger Kupipi+1                          # no permit: the check fails: her script / other quests
+finish-if-event
+keyitem WindurstTrustPermit             # a GM
+fill-inventory
+trigger Kupipi+1                          # no room: giveItem fails; noAction
+free-inventory
+trigger Kupipi+1                          # the cipher; noAction
+trigger Kupipi+1                          # the cipher held: the check fails
+finish-if-event

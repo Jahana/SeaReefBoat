@@ -1,0 +1,31 @@
+# Blood and Glory (windurst 87): the qm3 and Cailleach Bheur in Ifrit's Cauldron with GM-set states. Available with the
+# map (GM): no handler, nothing pops (the qm3's default NOTHING_OUT_OF_ORDINARY). Accepted without the map: nil. The
+# map: Cailleach Bheur pops; the map taken by GM before the kill: her death sets nothing, so the next qm3 talk (no map,
+# killed_wsnm 0) is nil. The map again, and a wait for her body to go (popFromQM needs her despawned): she pops again;
+# the quest deleted by GM (available) before the kill: no death handler, killed_wsnm not set; accepted again by GM,
+# after the wait the qm3 (the map, killed_wsnm 0): she pops a third time, no Annals of Truth.
+lists IfritsCauldron/qm3/onTrigger
+char zone=IfritsCauldron pos=118.8,20.0,141.8 job=WAR lvl=75
+login
+keyitem MapToTheAnnalsOfTruth
+trigger qm3                                         # available, the map: no handler; nothing pops; NOTHING_OUT_OF_ORDINARY
+quest Windurst.BloodAndGlory accepted
+delkeyitem MapToTheAnnalsOfTruth
+trigger qm3                                         # accepted, no map: nil; NOTHING_OUT_OF_ORDINARY
+keyitem MapToTheAnnalsOfTruth
+trigger qm3                                         # the map: Cailleach Bheur pops (claimed); SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth
+kill CAILLEACH_BHEUR                                # no map: killed_wsnm not set
+trigger qm3                                         # no map, killed_wsnm 0: nil; NOTHING_OUT_OF_ORDINARY
+keyitem MapToTheAnnalsOfTruth
+tick 15000                                          # her body despawns: one zone tick per tick statement
+tick 15000
+tick 15000
+trigger qm3                                         # the map: she pops again; SENSE_OMINOUS_PRESENCE
+quest Windurst.BloodAndGlory available
+kill CAILLEACH_BHEUR                                # the quest available: no death handler; killed_wsnm not set
+quest Windurst.BloodAndGlory accepted
+tick 15000
+tick 15000
+tick 15000
+trigger qm3                                         # killed_wsnm 0, the map: she pops again; SENSE_OMINOUS_PRESENCE

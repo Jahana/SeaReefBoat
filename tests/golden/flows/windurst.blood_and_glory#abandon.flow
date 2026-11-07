@@ -1,0 +1,32 @@
+# Blood and Glory (windurst 87): 446 without the pole and its options. Accepted by GM with the guide alone: 446 (param
+# 0), option 0, 2 and 4 (nothing); option 1 with a full bag (giveItem fails: nothing); option 1 (the pole, 0 weapon
+# skill points); the pole traded: 447 (no finish handler); 446 (param 2), the Map to the Annals of Truth given by GM
+# while it is open, option 3: the quest deleted, the guide and the map taken. Then available, Staff 0: not offered (343).
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/Shantotto/onTrade WindurstWalls/onEventFinish/446
+char zone=WindurstWalls pos=122.6,-3.0,111.6 job=WAR lvl=75
+quest Windurst.CursesFoiledAgain1 completed
+quest Windurst.CursesFoiledAgain2 completed
+quest Windurst.CursesFoiledAGolem completed
+quest Windurst.BloodAndGlory accepted
+keyitem WeaponTrainingGuide
+login
+trigger Shantotto                                   # accepted, no key items, no pole: event 446 (0, Pole of Trials, 0, 0, 0)
+finish option=0                                     # nothing
+trigger Shantotto                                   # 446 again
+finish option=2                                     # neither 1 nor 3: nothing
+trigger Shantotto                                   # 446 again
+finish option=4                                     # nothing
+trigger Shantotto                                   # 446 again
+fill-inventory
+finish option=1                                     # no pole, the bag full: giveItem fails (its message)
+free-inventory
+trigger Shantotto                                   # 446 again
+finish option=1                                     # no pole: the Pole of Trials (0 weapon skill points)
+walk 122.6,-3.0,111.6
+trade Shantotto PoleOfTrials x1                     # 0 weapon skill points: event 447
+finish                                              # 447 has no finish handler: the pole kept
+trigger Shantotto                                   # the pole held: 446 (..., 2)
+keyitem MapToTheAnnalsOfTruth                       # the map given by GM while 446 is open
+finish option=3                                     # the quest deleted; the guide and the map taken
+trigger Shantotto                                   # available, Staff 0: not offered; the Golem's 343
+finish

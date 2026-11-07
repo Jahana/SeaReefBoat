@@ -1,0 +1,21 @@
+# Spice Gals (sandoria 110) completed by GM (no Memoirs held), Wait at the conquest tally (1800198000) by GM, Prog 0,
+# A Transient Dream current (CoP 2-5 completed): her default (Wait not before the tally). Three JST days later the tally
+# is the next week's: 726 (Prog 1). Rivernewort by GM; a full inventory: 727 does not complete it (the Memoirs cannot be
+# given; the herb kept); with room, 727 completes it again (Wait = the next tally, 1800802800).
+char zone=SouthernSanDoria pos=-14.694,2.101,11.805 job=WAR lvl=75
+mission Cop ATransientDream current
+quest Sandoria.SpiceGals completed
+charvar Quest[0][110]Wait 1800198000
+login
+trigger Rouva                             # completed, Prog 0, Wait == the tally: no section; her default 662
+finish
+wait jst=3                                # past the tally: NextConquestTally is the next week's
+trigger Rouva                             # Prog 0, Wait before the next tally, completed: 726
+finish                                    # Prog 1
+keyitem Rivernewort
+fill-inventory
+trigger Rouva                             # Prog 1, completed, the herb: 727
+finish                                    # no room: not completed; the herb kept
+free-inventory
+trigger Rouva                             # 727
+finish                                    # completed again: Miratete's Memoirs; the herb taken; Wait = the next tally

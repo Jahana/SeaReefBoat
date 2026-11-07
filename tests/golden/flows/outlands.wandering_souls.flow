@@ -1,0 +1,26 @@
+# Wandering Souls (outlands 161): the Cermet Headstone in Cape Teriggan (no script; the default CANNOT_REMOVE_FRAG;
+# Rhapsodies of Zilart 5's monument: not current here). A level 75 Warrior, no Zilart mission, two Rain Lilies, a Bone
+# Chip. Available: the headstone: the default; a lily: no section: nothing. Accepted (a GM): MUST_BE_A_WAY_TO_SOOTHE; the
+# chip: nil: nothing; a lily with the chip: not exactly: nothing; two lilies: not exactly: nothing; a lily: 202 (the
+# lily); finished with a full inventory: complete false: the lily kept; freed: 202, finished: completed (the Flagellant's
+# Rope, Bearer of Bonds Beyond Time), the lily taken (confirmTrade). Completed: the default; a lily: nothing.
+lists CapeTeriggan/Cermet_Headstone/onTrigger CapeTeriggan/Cermet_Headstone/onTrade CapeTeriggan/onEventFinish/202
+char zone=CapeTeriggan pos=-108.084,-8.841,453.989 job=WAR lvl=75
+item RainLily x2
+item BoneChip
+login
+trigger Cermet_Headstone                # no section: the default CANNOT_REMOVE_FRAG
+trade Cermet_Headstone RainLily x1      # no section: nothing
+quest Outlands.WanderingSouls accepted  # a GM
+trigger Cermet_Headstone                # MUST_BE_A_WAY_TO_SOOTHE
+trade Cermet_Headstone BoneChip x1      # not the lily: nothing
+trade Cermet_Headstone RainLily x1 BoneChip x1   # not exactly: nothing
+trade Cermet_Headstone RainLily x2      # two lilies: not exactly: nothing
+trade Cermet_Headstone RainLily x1      # 202 (the lily)
+fill-inventory
+finish                                  # complete false: the lily kept
+free-inventory
+trade Cermet_Headstone RainLily x1      # 202
+finish                                  # completed: the rope, the title; the lily taken
+trigger Cermet_Headstone                # completed: the default
+trade Cermet_Headstone RainLily x1      # nothing

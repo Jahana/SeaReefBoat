@@ -1,0 +1,57 @@
+# Rank 2 Mission 2 (battlefield.rank_2_mission_2): San d'Orian helpers who finished 2-3 or Journey Abroad. Three level
+# 75 Warriors of San d'Oria: main with Journey to Bastok (the second) current at Status 10 and the Dark Key (the
+# registrant), eve with Journey Abroad (San d'Oria 5) and Journey to Bastok (the second) completed, fay with Journey
+# Abroad completed (GMs). main leads eve and fay; main's menu, area 1: registered, eve and fay registered with it;
+# main enters. eve with the clearance: entryRequirement as no registrant: hasCompletedMission(nation 0, 5) (Journey
+# Abroad): nonRegistrantReqs: the menu (enterExisting 1). eve's update for area 2: registerBattlefield finds eve's
+# registration (area 1), not the area asked: INCREMENT_REQUEST, answered as WAIT (0x05C [1]); area 1: entered.
+# checkSkipCutscene: 2-3 completed (its San d'Oria hasCompletedMission operand): true, but updateEvent keeps only
+# number params, so the boolean never reaches the 0x05C (eve's update reads as a non-skippable one). fay with the
+# clearance: the menu (enterExisting 1), no update yet. main claims Dark_Dragon: LOCKED; onBattlefieldStatusChange
+# takes the clearance from fay, outside. fay's update for area 2: no clearance, EnterExisting 1, registered in area
+# 1, another area asked: WAIT (EnterExisting kept); for area 1: LOCKED (0x05C [4]). The pair killed (Dark_Dragon's
+# onMobDeath: its title to all three, fay outside too): no crate: the cutscene timer 5, WON; at the fifth tick the
+# cleanup: 32001 (battlefieldWin 64; a plain Battlefield: no canSkipCS) to main and eve. main's finish:
+# San d'Oria 2-3's handler: the Kindred Crest, the Dark Key taken, Status 11. eve's finish: 2-3 is not current: no
+# 2-3 section: nothing. No RNG dependency; the 32001 tick is the timer's (see #sandoria).
+lists WaughroonShrine/BC_Entrance/onTrigger WaughroonShrine/onEventUpdate/32000 WaughroonShrine/onEventFinish/32000 WaughroonShrine/onEventFinish/32001
+char zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=WAR lvl=75 nation=0
+char eve zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=WAR lvl=75 nation=0
+char fay zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=WAR lvl=75 nation=0
+mission Sandoria JourneyToBastok2 current
+keyitem DarkKey
+eve: mission Sandoria JourneyAbroad completed
+eve: mission Sandoria JourneyToBastok2 completed
+fay: mission Sandoria JourneyAbroad completed
+login
+missionstatus Sandoria 10               # a GM
+eve: login
+fay: login
+invite eve
+eve: accept
+invite fay
+fay: accept
+trigger BC_Entrance                     # the menu 32000
+update 32000 option=1                   # area 1: registered; eve and fay registered with it; main entered
+finish                                  # in arena 1
+eve: trigger BC_Entrance                # the clearance, Journey Abroad completed: the menu (enterExisting)
+eve: update 32000 option=2              # registered in area 1, area 2 asked: INCREMENT_REQUEST: WAIT
+eve: update 32000 option=1              # area 1: entered
+eve: finish                             # in arena 1
+fay: trigger BC_Entrance                # the clearance: the menu (enterExisting)
+tick 2000                               # Dark_Dragon and Seeker spawn
+claim #17367041                         # Dark_Dragon: LOCKED; the clearance taken from fay
+tick 1000
+fay: update 32000 option=2              # registered in area 1, area 2 asked: WAIT
+fay: update 32000 option=1              # area 1, locked: LOCKED
+fay: finish
+kill #17367041                          # Dark_Dragon
+kill #17367042                          # Seeker: allDeath: no crate: the cutscene timer 5, WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000                               # the timer out: the cleanup: 32001 to main and eve
+tick 2000                               # nothing more
+finish                                  # 2-3: the Kindred Crest, the Dark Key taken, Status 11
+eve: finish                             # eve: 2-3 not current: nothing

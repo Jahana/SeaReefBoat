@@ -1,0 +1,37 @@
+# Lure of the Wildcat (Jeuno) (jeuno 90): the kinds of the NPC events, at the NPCs whose own scripts answer a talk:
+# Hinda (161 / 10128), Sutarara (211, with Tenshodo Membership completed by a GM), Naruru (98), Shami (23), Sagheera
+# (SAGHEERA_NO_LIMBUS_ACCESS). Each event is a Progress event: after its finish (the bit set) a GM clears Prog and the
+# next talk plays the event again, where an Event would make the lookup fall back to the NPC's script (UseFallback).
+# Accepted by a GM at Prog 0.
+lists UpperJeuno/Hinda/onTrigger LowerJeuno/Sutarara/onTrigger LowerJeuno/Naruru/onTrigger PortJeuno/Shami/onTrigger PortJeuno/Sagheera/onTrigger UpperJeuno/onEventFinish/10087 LowerJeuno/onEventFinish/10055 LowerJeuno/onEventFinish/10053 PortJeuno/onEventFinish/317 PortJeuno/onEventFinish/313
+char zone=UpperJeuno pos=-25.6,-1.5,19.9 job=WAR lvl=20
+quest Jeuno.LureOfTheWildcat accepted
+quest Jeuno.TenshodoMembership completed
+login
+trigger Hinda                  # 10087
+finish                         # bit 9
+charvar Quest[3][90]Prog 0     # a GM
+trigger Hinda                  # 10087 again
+finish                         # bit 9
+warp 31.2,-0.1,-1.1 LowerJeuno
+trigger Sutarara               # 10055
+finish                         # bit 10
+charvar Quest[3][90]Prog 0     # a GM
+trigger Sutarara               # 10055 again
+finish                         # bit 10
+trigger Naruru                 # 10053
+finish                         # bit 13
+charvar Quest[3][90]Prog 0     # a GM
+trigger Naruru                 # 10053 again
+finish                         # bit 13
+warp -95,0,-3.3 PortJeuno
+trigger Shami                  # 317
+finish                         # bit 17
+charvar Quest[3][90]Prog 0     # a GM
+trigger Shami                  # 317 again
+finish                         # bit 17
+trigger Sagheera               # 313
+finish                         # bit 19
+charvar Quest[3][90]Prog 0     # a GM
+trigger Sagheera               # 313 again
+finish                         # bit 19

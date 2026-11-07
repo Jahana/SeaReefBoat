@@ -1,0 +1,106 @@
+# An Empty Vessel's edges. bob (level 29): no section: Waoud's default 61, also at ADVANCED_JOB_LEVEL 29.4 (a number). Main (level 30, 500 gil): 60 (500); option 40 with no right answer: updateEvent(500, 0, 0, 0, 0, 0, 0, 10); finished with option 45 and
+# 500 gil: nothing (no mustZone, no Timer, no gil taken); 60 again, two right answers (2, 6), finished with option 51:
+# not 50 (nor 45): nothing, not begun, numCorrect reset; 60: option 40 at once: 10 (the count reset); option 2 given
+# twice counts twice, eight more (ten counts), with option 40 at 1, 4, 6, 8 and 9 (10, 30, 40, 60, 60), an option past 40 (41): nothing, then 40: the draw, finished with option 50: begun. A GM
+# pins Option 2 (the sunsand) and clears the Timer (0): the mustZone alone: Waoud 64; the mustZone left by zoning. Prog 3 (a GM): Waoud nil
+# (the default 61). Aydeewa: area 1 at Prog 2 (a GM) without the sunsand: nil; the sunsand given (a GM), Prog 1: nil;
+# Prog 2 with it: 3 (503), option 0: nothing; entered again: 3 (503), option 14: nothing; Prog 3 with it: nil; Option 3 (a GM) with the sunsand only: nil; the Dangruf
+# Stone given, Timer 1 (a GM): 3 (553), option 7 (Yasfel refused): Prog, Timer and Option 0, the quest deleted,
+# setPos Whitegate -17.5 -6 39.6. Available again: Waoud 60. carl (completed, completeEvent 0, 500 gil): 78, finished with
+# option 1: under 1000 gil: nothing; 78 again, update option 41: nothing, option 0: nothing; completeEvent 2 (a GM): not
+# 1: 78. Not reachable: 3's quest:complete false (a title
+# reward only); Option outside 1..3 at Prog 1 or 2 (only a GM's).
+lists AhtUrhganWhitegate/Waoud/onTrigger AydeewaSubterrane/onTriggerAreaEnter/1 AydeewaSubterrane/onEventFinish/3 AhtUrhganWhitegate/onEventFinish/78
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=WAR lvl=30 gil=500
+char bob zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=WAR lvl=29
+char carl zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=WAR lvl=30 gil=500
+carl: quest AhtUrhgan.AnEmptyVessel completed
+login
+bob: login
+bob: trigger Waoud                      # level 29: no section: the default 61
+bob: finish
+setting ADVANCED_JOB_LEVEL 29.4
+bob: trigger Waoud                      # 29 < 29.4 (the setting read as a number): no section: 61
+bob: finish
+setting ADVANCED_JOB_LEVEL 30
+bob: logout
+trigger Waoud                           # 60 (500)
+update 60 option=40                     # numCorrect 0: updateEvent(500, 0, 0, 0, 0, 0, 0, 10)
+finish option=45                        # 500 gil: nothing (numCorrect 0)
+trigger Waoud                           # no mustZone: 60
+update 60 option=2                      # numCorrect 1
+update 60 option=6                      # numCorrect 2
+finish option=51                        # numCorrect reset to 0; not 50 (nor 45): nothing, not begun
+trigger Waoud                           # 60
+update 60 option=40                     # numCorrect 0 (reset by the finish): updateEvent(500, 0, 0, 0, 0, 0, 0, 10)
+update 60 option=2
+update 60 option=40                     # numCorrect 1: updateEvent(500, 0, 0, 0, 0, 0, 0, 10) (floor(1 / 2) + 1 = 1: Spring)
+update 60 option=2                      # the same right answer again: numCorrect 2
+update 60 option=6
+update 60 option=9                      # 4
+update 60 option=40                     # updateEvent(500, 0, 0, 0, 0, 0, 0, 30) (floor(4 / 2) + 1 = 3: Gale)
+update 60 option=12
+update 60 option=13                     # 6
+update 60 option=40                     # updateEvent(..., 40) (4: Flame)
+update 60 option=18
+update 60 option=21                     # 8
+update 60 option=40                     # updateEvent(..., 60) (5: Sky)
+update 60 option=24                     # 9
+update 60 option=40                     # updateEvent(..., 60) (floor(9 / 2) + 1 = 5)
+update 60 option=26                     # numCorrect 10
+update 60 option=41                     # neither under 40 nor 40: nothing
+update 60 option=40                     # the draw: Option, updateEvent(500, 0, 0, 0, 0, 0, Option, 70)
+finish option=50                        # begun; mustZone; Timer = day + 1
+charvar Quest[6][5]Option 2             # a GM: the sunsand
+charvar Quest[6][5]Timer 0              # a GM
+trigger Waoud                           # Prog 0, Timer 0 but the mustZone: 64
+finish
+warp -64,-7,38 AlZahbi                  # the mustZone cleared
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+charvar Quest[6][5]Prog 3               # a GM
+trigger Waoud                           # Prog 3: nil: the default 61
+finish
+charvar Quest[6][5]Prog 2               # a GM
+warp 372,0,340 AydeewaSubterrane
+tick 1000
+tick 1000
+tick 1000
+walk 380,0,340                          # area 1 at Prog 2, no sunsand: nil
+walk 372,0,340
+item PinchOfValkurmSunsand              # a GM
+charvar Quest[6][5]Prog 1               # a GM
+walk 380,0,340                          # Prog 1, the sunsand: nil
+walk 372,0,340
+charvar Quest[6][5]Prog 2               # a GM
+walk 380,0,340                          # Prog 2, the sunsand: 3 (503)
+finish option=0                         # nothing
+walk 372,0,340
+walk 380,0,340                          # again: 3 (503)
+finish option=14                        # not 13 (nor 7): nothing
+walk 372,0,340
+charvar Quest[6][5]Prog 3               # a GM
+walk 380,0,340                          # Prog 3, the sunsand: nil
+walk 372,0,340
+charvar Quest[6][5]Prog 2               # a GM
+charvar Quest[6][5]Option 3             # a GM: the Dangruf Stone
+walk 380,0,340                          # Option 3, the sunsand only: nil
+walk 372,0,340
+item DangrufStone                       # a GM
+charvar Quest[6][5]Timer 1              # a GM: a Timer the refusal clears (1 <= today: no wait either way)
+walk 380,0,340                          # Prog 2, Option 3, the stone: 3 (553)
+finish option=7                         # refused: Prog, Timer (1), Option 0; deleted; setPos Whitegate -17.5 -6 39.6
+tick 400
+login
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+trigger Waoud                           # available again, no mustZone, Timer 0: 60
+finish option=0
+carl: login
+carl: trigger Waoud                     # completed, completeEvent 0, Timer 0: 78 (500)
+carl: finish option=1                   # under 1000 gil: nothing
+carl: trigger Waoud                     # 78
+carl: update 78 option=41               # not 40: nothing
+carl: finish option=0                   # nothing
+carl: charvar Quest[6][5]completeEvent 2   # a GM: neither 1 nor 0
+carl: trigger Waoud                     # completeEvent 2: not 1: 78 (500)
+carl: finish option=0                   # nothing
+carl: charvar Quest[6][5]completeEvent 0   # a GM

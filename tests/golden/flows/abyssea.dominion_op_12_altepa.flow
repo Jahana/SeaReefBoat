@@ -1,0 +1,26 @@
+# Altepa - Dominion Op #12 (abyssea 98, op 571): a level 99 Warrior in Abyssea - Altepa; the op's target Akrab
+# (17 placed spawns, the first 17670228). The next op (#13, Fear_Dearg) and Grauberg's #12 accepted (a GM), this op
+# available: an Akrab killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0, which
+# dominionOnMobDeath does not read): an Akrab killed: dominionOnMobDeath(571): Quest[8][98]Prog 1
+# (FOV_DEFEATED_TARGET 1 of 5). The next op's Fear_Dearg killed: Quest[8][99]Prog 1 (its own count), this op's
+# unchanged. Prog 4 (a GM): one more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing.
+# Completed (Prog 0, as completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge,
+# Invincible and Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaAltepa/Akrab/onMobDeath AbysseaAltepa/Fear_Dearg/onMobDeath
+char zone=AbysseaAltepa pos=432,0,321 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp13Altepa accepted # a GM: the next op
+quest Abyssea.DominionOp12Grauberg accepted # a GM: Grauberg's #12
+kill RANI_OFFSET-323                    # available: nothing (17670228)
+quest Abyssea.DominionOp12Altepa accepted # a GM
+kill RANI_OFFSET-322                    # accepted: Prog 1 (17670229)
+kill RANI_OFFSET-107                    # Fear_Dearg: Quest[8][99]Prog 1 (17670444)
+charvar Quest[8][98]Prog 4              # a GM
+kill RANI_OFFSET-321                    # Prog 5 (17670230)
+kill RANI_OFFSET-320                    # full: nothing (17670231)
+quest Abyssea.DominionOp12Altepa completed # a GM
+charvar Quest[8][98]Prog 0              # a GM
+kill RANI_OFFSET-319                    # completed: nothing (17670232)

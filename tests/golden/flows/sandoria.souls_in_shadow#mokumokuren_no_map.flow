@@ -1,0 +1,12 @@
+# Souls in Shadow (sandoria 99): Mokumokuren's death without the map. Only a map holder pops Mokumokuren, and the map
+# leaves only through 5 or 3's option 2, so a GM deletes the map while it is up: the death handler's
+# hasKeyItem(MAP_TO_THE_ANNALS_OF_TRUTH) is false and killed_wsnm stays 0, so the next qm talk gives nothing.
+char zone=DenOfRancor pos=119.4,35.892,-280.779 job=DRK lvl=75
+quest Sandoria.SoulsInShadow accepted
+keyitem WeaponTrainingGuide
+keyitem MapToTheAnnalsOfTruth
+login
+trigger qm_mokumokuren                    # the map, no Annals: Mokumokuren popped and claimed, SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth
+kill MOKUMOKUREN                          # no map: killed_wsnm not set
+trigger qm_mokumokuren                    # killed_wsnm 0, no map: nil, NOTHING_OUT_OF_ORDINARY (no Annals)

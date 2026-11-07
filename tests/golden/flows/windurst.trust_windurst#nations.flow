@@ -1,0 +1,48 @@
+# Trust: Windurst (windurst 96): the other nations' trust quests (their status reads). A level 5 Bastok char. Wetata,
+# this quest available: San d'Oria's accepted (GM; Bastok's available) and Bastok's accepted (San d'Oria's available):
+# neither inner arm, the outer arm taken: nothing at all (no 868). San d'Oria's completed: 867, option 0: nothing;
+# option 2: begun, the card. Kupipi, accepted: San d'Oria's accepted (Bastok's available): 435, not 439; San d'Oria's
+# completed at the var 1 (flag 0): 439 (memories 0, rank3 0; before 436): Kupipi learned, the card taken, the permit,
+# completed (no title, the var not cleared); then 438. Windurst's and San d'Oria's made available again, Bastok's
+# completed (GM): Wetata 867, option 2; Kupipi at the var 2: 439 (before 437; the permit held: no KEYITEM_OBTAINED).
+# Accepted again by GM at the var 0 without the card: 439 (before 435; KEYITEM_LOST still sent), option 1.
+char zone=WindurstWoods pos=-23.8,2.5,-44.6 lvl=5 nation=1
+quest Sandoria.TrustSandoria accepted
+login
+trigger Wetata                          # available, San d'Oria's accepted, Bastok's available: nothing at all
+finish-if-event
+quest Sandoria.TrustSandoria available
+quest Bastok.TrustBastok accepted
+trigger Wetata                          # available, Bastok's accepted, San d'Oria's available: nothing at all
+finish-if-event
+quest Bastok.TrustBastok available
+quest Sandoria.TrustSandoria completed
+trigger Wetata                          # San d'Oria's completed: 867
+finish option=0                         # nothing
+trigger Wetata                          # 867
+finish option=2                         # begun; the Green Institute Card
+quest Sandoria.TrustSandoria available
+quest Sandoria.TrustSandoria accepted
+warp 2,0.1,30 HeavensTower
+trigger Kupipi+1                        # accepted, San d'Oria's accepted, Bastok's available, the var 0: 435
+finish                                  # Kupipi learned; the var 1
+quest Sandoria.TrustSandoria completed
+trigger Kupipi+1                        # San d'Oria's completed, the var 1, flag 0: 439 (0, 0, 0, 0, 0, 0, 0, 0)
+finish                                  # Kupipi learned again (silent addSpell); the card taken; the permit; completed
+trigger Kupipi+1                        # completed, flag 0: 438
+finish
+quest Windurst.TrustWindurst available
+quest Sandoria.TrustSandoria available
+quest Bastok.TrustBastok completed
+warp -23.8,2.5,-44.6 WindurstWoods
+trigger Wetata                          # available, Bastok's completed: 867
+finish option=2                         # begun; the card
+warp 2,0.1,30 HeavensTower
+charvar WindurstFirstTrust 2
+trigger Kupipi+1                        # accepted, Bastok's completed, the var 2: 439
+finish                                  # the permit already held: no KEYITEM_OBTAINED; completed
+quest Windurst.TrustWindurst available
+quest Windurst.TrustWindurst accepted
+charvar WindurstFirstTrust 0
+trigger Kupipi+1                        # accepted, Bastok's completed, the var 0, no card: 439
+finish option=1                         # any option: KEYITEM_LOST sent for the card not held; completed

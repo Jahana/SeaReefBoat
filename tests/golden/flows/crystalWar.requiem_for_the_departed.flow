@@ -1,0 +1,30 @@
+# Requiem for the Departed (crystalWar 23, call-only): a level 99 Warrior in the Eldieme Necropolis [S] with the Bronze
+# Ribbon of Service (missions as group 1's flows). Heptachiond 105, finished: the quest added; again: 106. Fort
+# Karugo-Narugo [S]: Pecca-Pocca 234, finished: the Sheaf of Handmade Incense; again: her script's 233. Eldieme [S]:
+# Heptachiond 107, finished: completed (the Scroll of Recall-Meriph), the incense taken; again: 108. Pecca-Pocca
+# completed: 233.
+lists TheEldiemeNecropolisS/Heptachiond/onTrigger FortKarugoNarugoS/Pecca-Pocca/onTrigger TheEldiemeNecropolisS/onEventFinish/105 TheEldiemeNecropolisS/onEventFinish/107 FortKarugoNarugoS/onEventFinish/234
+char zone=TheEldiemeNecropolisS pos=257.696,-31.999,20.073 job=WAR lvl=99
+keyitem BronzeRibbonOfService
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Heptachiond                     # available, the ribbon, level 30+: 105
+finish                                  # the quest added
+trigger Heptachiond                     # accepted, no incense: 106
+finish
+warp -161.478,-67.999,-155.099 FortKarugoNarugoS
+trigger Pecca-Pocca                     # accepted, no incense: 234
+finish                                  # the Sheaf of Handmade Incense
+trigger Pecca-Pocca                     # the incense: her script's 233
+finish
+warp 257.696,-31.999,20.073 TheEldiemeNecropolisS
+trigger Heptachiond                     # the incense: 107
+finish                                  # completed (the Scroll of Recall-Meriph); the incense taken
+trigger Heptachiond                     # completed: 108
+finish
+warp -161.478,-67.999,-155.099 FortKarugoNarugoS
+trigger Pecca-Pocca                     # completed: 233
+finish

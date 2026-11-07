@@ -1,0 +1,18 @@
+# Tiger's Teeth (sandoria 23) at a fractional GIL_RATE (setting <NAME> <decimal>, quest rework P5): npcUtil.completeQuest
+# and npcUtil.giveCurrency multiply the gil by xi.settings.main.GIL_RATE. Accepted, GIL_RATE 1.5 before the login: the
+# completion pays 2100 x 1.5 = 3150 (GIL_OBTAINED 3150; Fang Finder); the repeat (Option 1, 572) 3150 again, fame +16;
+# GIL_RATE 1.25 as a step: the next repeat 2625.
+lists SouthernSanDoria/Taumila/onTrade SouthernSanDoria/onEventFinish/572
+warning: quests: sandoria.tigers_teeth: one finish of 572 ran 2 handlers (2/-/onEventFinish:572, 3/-/onEventFinish:572) -- the Lua runs it twice too: its sections at Tigers_Teeth.lua:61 (accepted) and :92 (completed) at lua-at 134c87af hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=SouthernSanDoria pos=-138.3,-6,-9.7
+setting GIL_RATE 1.5
+quest Sandoria.TigersTeeth accepted
+item BlackTigerFang x9
+login
+trade Taumila BlackTigerFang x3           # exactly three: 572
+finish                                    # completed: 3150 gil (2100 x 1.5), Fang Finder; the fangs taken
+trade Taumila BlackTigerFang x3           # completed, exactly three: Option 1, 572
+finish                                    # Option 1: 3150 gil, Option 0, the fangs taken, fame +16
+setting GIL_RATE 1.25
+trade Taumila BlackTigerFang x3           # 572 again
+finish                                    # 2625 gil (2100 x 1.25)

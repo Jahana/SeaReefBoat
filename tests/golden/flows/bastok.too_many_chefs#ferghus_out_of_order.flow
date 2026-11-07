@@ -1,0 +1,21 @@
+# Too Many Chefs, Ferghus out of order: not started, the quest accepted with each other value of TOO_MANY_CHEFS (nothing
+# but the default 420), and the WOTG fame guard is covered by the full run.
+char zone=Metalworks pos=-23,-10,-27
+fame Bastok 325
+login
+quest Bastok.TooManyChefs accepted
+charvar TOO_MANY_CHEFS 0
+trigger Ferghus                 # accepted, var 0: 420
+finish-if-event
+charvar TOO_MANY_CHEFS 2
+trigger Ferghus                 # 420
+finish-if-event
+charvar TOO_MANY_CHEFS 3
+trigger Ferghus                 # 420
+finish-if-event
+charvar TOO_MANY_CHEFS 5
+trigger Ferghus                 # 420
+finish-if-event
+quest Bastok.TooManyChefs completed
+trigger Ferghus                 # Completed: 420
+finish-if-event

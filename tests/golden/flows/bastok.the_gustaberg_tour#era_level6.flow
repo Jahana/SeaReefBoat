@@ -1,0 +1,32 @@
+# The Gustaberg Tour with its era module (quest rework P4; see #era): a full party of six in range with one member at
+# level 6. The module's Hunting_Bear onTrigger plays 21 (a member over level 5), where the quest's own plays 22 (all at
+# level 15 or below, more than one member).
+module modules/era/lua/quests/bastok/the_gustaberg_tour.lua
+lists NorthGustaberg/Hunting_Bear/onTrigger
+char zone=NorthGustaberg pos=-233.9,41.465,426.5 lvl=5
+char p2 zone=NorthGustaberg pos=-233,41.465,427 lvl=5
+char p3 zone=NorthGustaberg pos=-232.5,41.465,426 lvl=5
+char p4 zone=NorthGustaberg pos=-233.5,41.465,428 lvl=5
+char p5 zone=NorthGustaberg pos=-232,41.465,427.5 lvl=5
+char p6 zone=NorthGustaberg pos=-234,41.465,427.5 lvl=6
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Bastok.TheGustabergTour accepted
+login
+p2: login
+invite p2
+p2: accept
+p3: login
+invite p3
+p3: accept
+p4: login
+invite p4
+p4: accept
+p5: login
+invite p5
+p5: accept
+p6: login
+invite p6
+p6: accept
+trigger Hunting_Bear           # six in range, p6 at level 6: 21
+finish

@@ -1,0 +1,62 @@
+# Under Oath (sandoria 92): the other operands. The 90 offer: a WAR 60 with A Boy's Dream completed: no 90; A Boy's
+# Dream accepted (GM): no 90. Vemalpeau's 7 wants accepted: available with UnderOathCS 0: 1. His other arms read no
+# status: the paintbrush and the sheet at 0: 1; available, UnderOathCS 3 with the paintbrush: 5 (4, the brush taken); 4
+# with the sheet: 3; 9 with the confession: 2 (0, the confession taken). The key items at another value: the paintbrush
+# and the sheet at 9: 1; the sheet at 9: 1; the confession at 10: 1. Ailbeche, A Boy's Dream's arm first: aBoysDreamCS 7
+# with UnderOathCS 6 and the confession: 25, not Under Oath's 59. 89 reads no status: UnderOathCS 8 (GM) while
+# available: 89 completes it.
+# Father and Son completed and Sharpening the Sword accepted by GM: Sharpening's 42 takes Ailbeche's first talk after
+# each zone-in and every other talk ("42"), his script the others (42 again when it plays nothing). Sharpening
+# completed is only in sandoria.a_boys_dream#offer and sandoria.sharpening_the_sword#completed: while A Boy's Dream is
+# available, its check 4 answers Ailbeche's talks with AILBECHE_WHEN_FISHING (over his default 868).
+char zone=ChateauDoraguille pos=-38.0,-4.9,73.5 job=WAR lvl=60
+quest Sandoria.FatherAndSon completed
+quest Sandoria.SharpeningTheSword accepted
+quest Sandoria.ABoysDream completed
+login
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # WAR: no 90; nothing (ITS_LOCKED)
+quest Sandoria.ABoysDream accepted
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # A Boy's Dream accepted (aBoysDreamCS 0): no 90, no 88; nothing (ITS_LOCKED)
+warp 155.5,-0.9,65.0 SouthernSanDoria
+keyitem MiquesPaintbrush
+keyitem StrangeSheetOfPaper
+trigger Vemalpeau                       # available, UnderOathCS 0, the paintbrush and the sheet: 1
+finish
+delkeyitem StrangeSheetOfPaper
+charvar UnderOathCS 3
+trigger Vemalpeau                       # available, UnderOathCS 3 with the paintbrush: 5
+finish                                  # UnderOathCS 4; the paintbrush taken
+keyitem StrangeSheetOfPaper
+trigger Vemalpeau                       # available, UnderOathCS 4 with the sheet: 3
+finish                                  # no change
+charvar UnderOathCS 9
+keyitem MiquesPaintbrush
+trigger Vemalpeau                       # UnderOathCS 9, the paintbrush and the sheet, no confession: 1
+finish
+delkeyitem MiquesPaintbrush
+trigger Vemalpeau                       # UnderOathCS 9, the sheet, no confession: 1
+finish
+delkeyitem StrangeSheetOfPaper
+keyitem KnightsConfession
+trigger Vemalpeau                       # available, UnderOathCS 9 with the confession: 2
+finish                                  # UnderOathCS 0; the confession taken
+charvar UnderOathCS 10
+keyitem KnightsConfession
+trigger Vemalpeau                       # UnderOathCS 10 with the confession: 1
+finish
+charvar UnderOathCS 6
+keyitem KnightsConfession
+charvar aBoysDreamCS 7
+warp 6.5,0.5,26.9 NorthernSanDoria
+trigger Ailbeche                        # 42
+finish
+trigger Ailbeche                        # aBoysDreamCS 7: 25 (before Under Oath's 59)
+finish                                  # CS 7: no change
+charvar aBoysDreamCS 0
+charvar UnderOathCS 8
+warp -38.0,-4.9,73.5 ChateauDoraguille
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # available, UnderOathCS 8: 89
+finish                                  # the surcoat; ITEM_OBTAINED; UnderOathCS 9; fame 20; the title; completed

@@ -1,0 +1,29 @@
+# Teak Me to the Stars (bastok 79): Raibaht in the Metalworks. The guard (Bastok fame level 3), the offer 864 (its last
+# argument 0 without The Call of the Wyrmking: #wyrmking has 2), 871 while accepted (setPriority(10): it cycles with his
+# default 501), the Garhada Teak Lumber trade (865, an event), the 2100 gil reward and Hyper Active's mustZone. Raibaht's
+# default is 501; DRK AF1 (DRK only), The Usual (Cid's Secret and fame level 5) and LB04 also name him, and this char
+# meets none of them.
+lists Metalworks/Raibaht/onTrigger Metalworks/Raibaht/onTrade Metalworks/onEventFinish/864 Metalworks/onEventFinish/865
+char zone=Metalworks pos=-26.3,-10,-2.6
+fame Bastok 124
+item GarhadaTeakLumber x2
+item BoneChip
+login
+trade Raibaht GarhadaTeakLumber x1  # available: no trade handler, nothing
+trigger Raibaht                 # fame 124 (level 2): his default 501
+finish
+fame Bastok 125
+trigger Raibaht                 # fame level 3: the offer, 864 with option 0
+finish                          # accepted
+trigger Raibaht                 # accepted: 871 and his default 501 at the same priority, in turn: 501 first
+finish
+trigger Raibaht                 # 871
+finish
+trigger Raibaht                 # 501
+finish
+trade Raibaht BoneChip x1       # the wrong item: nothing
+trade Raibaht GarhadaTeakLumber x1  # 865
+finish                          # completed: 2100 gil, fame +30, the lumber gone, Hyper Active's mustZone set
+trigger Raibaht                 # completed: 501
+finish
+trade Raibaht GarhadaTeakLumber x1  # completed: nothing

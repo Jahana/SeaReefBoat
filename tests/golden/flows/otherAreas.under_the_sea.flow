@@ -1,0 +1,52 @@
+# Under the Sea (otherAreas 17): Selbina's Oswald (no script, default 30), Jimaida (default 152), Zaldon (a script with
+# A Boy's Dream's trade only, an Odontotyrannus at aBoysDreamCS 5; default 150). Only the available section reads
+# xi.settings.map.FISHING_ENABLE (false by default), so this flow starts from the quest accepted by a GM (Yaya's offer
+# is `#offer`). A level 30 Warrior with three Fat Greedies and a Chocobo Feather. Accepted: Jimaida at Prog 0: nil
+# (152); Zaldon at Prog 0: nil (150); Oswald at Prog 0: 32, finished: Prog 1; Oswald at Prog 1 without the ring: nil
+# (30); Zaldon at Prog 1: nil; Jimaida at Prog 1: 33, finished: Prog 2; Jimaida at Prog 2: nil; Oswald at Prog 2: nil; a
+# Greedie to Zaldon at Prog 2: nil; Zaldon at Prog 2: 34 (4501), finished: Prog 3; Zaldon at Prog 3: nil; trades at Prog
+# 3: two Greedies, a Greedie and the feather, the feather: nil; one Greedie: math.randomInt(1, 100) <= 20: 35, else 36
+# (Event); the pinned stream draws 1-20 here: 35, finished: the Greedie taken, the Etched Ring (KEYITEM_OBTAINED), Prog
+# 4 (36 and the range are `#draws`). The GM's Etched Ring line then changes nothing (it stays for 36). Oswald 37,
+# finished: completed (the Amber Earring, Lil' Cupid), fame +10 San d'Oria and Bastok, the ring taken. Completed, The
+# Sand Charm available: Oswald 38 (replaceDefault over his 30).
+lists Selbina/Oswald/onTrigger Selbina/Jimaida/onTrigger Selbina/Zaldon/onTrigger Selbina/Zaldon/onTrade Selbina/onEventFinish/32 Selbina/onEventFinish/33 Selbina/onEventFinish/34 Selbina/onEventFinish/35 Selbina/onEventFinish/36 Selbina/onEventFinish/37
+char zone=Selbina pos=48.6,-15.3,8 job=WAR lvl=30
+quest OtherAreas.UnderTheSea accepted
+item FatGreedie
+item FatGreedie
+item FatGreedie
+item ChocoboFeather
+login
+trigger Jimaida                         # Prog 0: nil; her default 152
+finish
+trigger Zaldon                          # Prog 0: nil; his default 150
+finish
+trigger Oswald                          # Prog 0: 32
+finish                                  # Prog 1
+trigger Oswald                          # Prog 1, no ring: nil; his default 30
+finish
+trigger Zaldon                          # Prog 1: nil; 150
+finish
+trigger Jimaida                         # Prog 1: 33
+finish                                  # Prog 2
+trigger Jimaida                         # Prog 2: nil; 152
+finish
+trigger Oswald                          # Prog 2, no ring: nil; 30
+finish
+walk -10.3,-7.287,-6.742                # to Zaldon
+trade Zaldon FatGreedie x1              # Prog 2: nil; his script: nothing
+trigger Zaldon                          # Prog 2: 34 (4501)
+finish                                  # Prog 3
+trigger Zaldon                          # Prog 3: nil; 150
+finish
+trade Zaldon FatGreedie x2              # two: nil
+trade Zaldon FatGreedie x1 ChocoboFeather x1 # an extra item: nil
+trade Zaldon ChocoboFeather x1          # no Greedie: nil
+trade Zaldon FatGreedie x1              # the draw: 35
+finish                                  # the Greedie taken; the Etched Ring; Prog 4
+keyitem EtchedRing                      # a GM (already held)
+trigger Oswald                          # the ring: 37
+finish                                  # completed: the Amber Earring, the title; fame +10 San d'Oria and Bastok; the ring taken
+trigger Oswald                          # completed, The Sand Charm available: 38 (replaceDefault)
+finish

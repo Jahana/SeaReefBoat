@@ -1,0 +1,78 @@
+# Ratihb's reply kinds (no script; default 603): every quest line of his is a Progress, and each meets The Die is Cast's
+# (591 while available, 593 at Prog 5), so the two tie: the first talk plays the container listed first, a later one
+# rotates (tied actions rotate by the last event id). An Event in place of either Progress would lose every talk. Each
+# pair is a state a player can be in (the earlier quests done in another order), and each finish is undone by a GM (or
+# fails on a full bag) so the tie stays. bob: Luck of the Draw completed (Stage 0, Equipped for All Occasions not
+# completed), The Die is Cast available: 552 and 591. carl (a level 40 Corsair): Equipped for All Occasions accepted at
+# Prog 4 with Stage 1, The Die is Cast available: 772 (a full bag: its completion fails) and 591. dan (a level 50
+# Corsair): Against All Odds accepted at Prog 1, no float, Wait 0: 798 and 591. ed (level 30): Luck of the Draw
+# available, The Die is Cast at Prog 5 with the bag: 547 and 593 (a full bag: 593's completion fails).
+lists AhtUrhganWhitegate/Ratihb/onTrigger
+char zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=20
+char bob zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=30
+char carl zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=COR lvl=40
+char dan zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=COR lvl=50
+char ed zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=WAR lvl=30
+quest AhtUrhgan.TheDieIsCast completed
+bob: quest AhtUrhgan.LuckOfTheDraw completed
+carl: quest AhtUrhgan.LuckOfTheDraw completed
+carl: quest AhtUrhgan.EquippedForAllOccasions accepted
+carl: charvar Quest[6][24]Prog 4
+carl: charvar Quest[6][24]Stage 1
+dan: quest AhtUrhgan.LuckOfTheDraw completed
+dan: quest AhtUrhgan.EquippedForAllOccasions completed
+dan: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+dan: quest AhtUrhgan.AgainstAllOdds accepted
+dan: charvar Quest[6][26]Prog 1
+ed: quest AhtUrhgan.TheDieIsCast accepted
+ed: charvar Quest[6][16]Prog 5
+ed: keyitem BagOfGoldPieces
+login
+bob: login
+bob: trigger Ratihb                     # 552 and 591 tie: the first container's
+bob: finish                             # 552: Stage 1; or 591: begun
+bob: charvar Quest[6][24]Stage 0        # a GM
+bob: quest AhtUrhgan.TheDieIsCast available   # a GM
+bob: trigger Ratihb                     # the tie again: rotated
+bob: finish
+bob: charvar Quest[6][24]Stage 0        # a GM
+bob: quest AhtUrhgan.TheDieIsCast available   # a GM
+bob: trigger Ratihb                     # rotated again
+bob: finish
+bob: logout
+carl: login
+carl: fill-inventory
+carl: trigger Ratihb                    # 772 and 591 tie: the first container's
+carl: finish                            # 772: the gun does not fit (nothing); or 591: begun
+carl: quest AhtUrhgan.TheDieIsCast available  # a GM
+carl: trigger Ratihb                    # rotated
+carl: finish
+carl: quest AhtUrhgan.TheDieIsCast available  # a GM
+carl: trigger Ratihb                    # rotated again
+carl: finish
+carl: logout
+dan: login
+dan: trigger Ratihb                     # 798 and 591 tie: the first container's
+dan: finish                             # 798: the float, Wait; or 591: begun
+dan: delkeyitem LifeFloat               # a GM
+dan: charvar Quest[6][26]Wait 0         # a GM
+dan: quest AhtUrhgan.TheDieIsCast available   # a GM
+dan: trigger Ratihb                     # rotated
+dan: finish
+dan: delkeyitem LifeFloat               # a GM
+dan: charvar Quest[6][26]Wait 0         # a GM
+dan: quest AhtUrhgan.TheDieIsCast available   # a GM
+dan: trigger Ratihb                     # rotated again
+dan: finish
+dan: logout
+ed: login
+ed: fill-inventory
+ed: trigger Ratihb                      # 547 and 593 tie: the first container's
+ed: finish                              # 547: begun; or 593: the ring does not fit (nothing)
+ed: quest AhtUrhgan.LuckOfTheDraw available   # a GM
+ed: trigger Ratihb                      # rotated
+ed: finish
+ed: quest AhtUrhgan.LuckOfTheDraw available   # a GM
+ed: trigger Ratihb                      # rotated again
+ed: finish
+ed: logout

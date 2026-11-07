@@ -1,0 +1,12 @@
+# Recollections (windurst 67), completion parity: 275's finish with the sabots given is the Lua's raw
+# player:completeQuest (after the var, the key item and the fame), so a GM's Quest[2][67]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). The Three Magi completed and this quest
+# accepted with Foe Finder MK I (GM), beside Chumimi.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi completed
+quest Windurst.Recollections accepted
+keyitem FoeFinderMkI
+login
+charvar Quest[2][67]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Chumimi                         # accepted, Foe Finder MK I: 275
+finish                                  # the Wizard's Sabots; var 0; the key item taken; fame 20; completed; Prog kept

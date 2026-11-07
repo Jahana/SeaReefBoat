@@ -1,0 +1,96 @@
+# Apocalypse Nigh (jeuno 89): Ru'Lude Gardens' trigger area 1 (a walk from z 100, after the 2.5 s zone-in lock);
+# Sealion's Den's zone-in; the Grand Palace of Hu'Xzoi's _iya (script: event 52 always); Empyreal Paradox's TR_Entrance
+# (no script; the Apocalypse Nigh battlefield's entry: index 1) and its zone-in; Lower Jeuno's Aldo (no script, no
+# default); Norg's door _700 (no script; default DOOR_IS_LOCKED) and Gilgamesh (no script, no default); Empyreal
+# Paradox's qm1 (no script; default AIR_WARPED_AND_DISTORTED). A level 75 Warrior of Bastok (nation 1) at rank 6,
+# Shadows of the Departed completed (a GM, before login), Timer 0, no mustZone.
+# Available: area 1: 123, begun. Accepted at Prog 0: area 1: nothing (no area handler in the accepted state). Sealion's
+# Den, warp ... open: the zone-in's 29 left open: update option 0: updateEvent(0, 0, 0, 0, 32, 3, 0, 0); update option 1:
+# nothing; finish: Prog 1. rezone open at Prog 1: no zone-in event. _iya at Prog 1: 4: Prog 2, set down in The Garden of
+# Ru'Hmet. Empyreal Paradox: no zone-in event at Prog 2; TR_Entrance: 4: Prog 3; again at Prog 3: the quest's nil, the
+# battlefield's 32000 menu (requiredVar Quest[3][89]Prog 3); entered (area 1), Kamlanaut and Ealdnarche killed: won
+# (battlefieldWin 1057), 32001: Prog 4, Timer 8001; the battlefield's win finish sets the char down at 540 0 -514
+# (Empyreal Paradox again), whose zone-in at Prog 4 plays 7 (login open: left open): update option 0:
+# updateEvent(36, 1430550, 2964, 1013, 36, 1, 0, 0); update option 1: nothing; finish: Breaker of the Chains, set down in
+# Al'Taieu. Aldo at Prog 4, rank 6: 10057: Prog 5; at Prog 5: 10058. Norg: Gilgamesh at Prog 5, Timer 8001 (day 8000):
+# nil (only the Timer is off); _700 at Prog 5, Timer 8001 > day 8000: 235: the mustZone (Norg, 252); `wait vana=12` (day
+# 8001): Gilgamesh, the mustZone set (only it off): nil; _700, Timer 8001 > day 8001 false: nil (DOOR_IS_LOCKED); out to
+# Lower Jeuno and back (the mustZone cleared): Gilgamesh: 232 (252, 6) (Timer = day); update 99: the four earrings;
+# updates 98 and 100: nothing; finish 0: Prog 6; 234 (252), finish 5: Prog 6; a full bag: 234, finish 1: the Static
+# Earring not given: nothing (Prog 6, not completed); 234, update 99, finish 4: the Ethereal Earring (Static + 3),
+# completed. Completed: Gilgamesh: 233 (replacing his default; he has none); Empyreal Paradox's qm1 with the Ethereal
+# Earring held: nil (AIR_WARPED_AND_DISTORTED).
+# Dawn's and Awakening's own 232 / 234 finishes and their Gilgamesh, TR_Entrance and 32001 handlers want their mission
+# current: this char has none. #available, #rank, #norg, #prog, #win_other, #completed, #mid_event, #compete, #era and
+# #era_win take the other sides.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/123 SealionsDen/onZoneIn/1 SealionsDen/onEventUpdate/29 SealionsDen/onEventFinish/29 GrandPalaceOfHuxzoi/_iya/onTrigger EmpyrealParadox/onZoneIn/1 EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/onEventFinish/4 EmpyrealParadox/onEventFinish/32001 EmpyrealParadox/onEventUpdate/7 EmpyrealParadox/onEventFinish/7 LowerJeuno/Aldo/onTrigger Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Norg/onEventUpdate/232 Norg/onEventFinish/232 Norg/onEventFinish/234 EmpyrealParadox/qm1/onTrigger
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75 nation=1
+rank 6
+quest Jeuno.ShadowsOfTheDeparted completed
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # available: 123
+finish                                  # begun
+walk 4,2.5,100
+walk 4,2.5,60                           # accepted: no area handler; nothing
+warp 600.1,130.4,797.6 SealionsDen open # the zone-in at Prog 0: 29, left open
+update 29 option=0                      # updateEvent(0, 0, 0, 0, 32, 3, 0, 0)
+update 29 option=1                      # not 0: nothing
+finish                                  # Prog 1
+rezone open                             # Prog 1: the zone-in's nil: no event
+finish-if-event
+warp -18.5,-2.3,-280.2 GrandPalaceOfHuxzoi  # by _iya
+trigger _iya                            # Prog 1: 4
+finish                                  # Prog 2; set down in The Garden of Ru'Hmet (-419.995 0 248.483)
+tick 400                                # the zone change runs at the tick
+login                                   # in The Garden of Ru'Hmet
+warp 541.5,-1.2,-597.7 EmpyrealParadox open  # by TR_Entrance; the zone-in at Prog 2: no event
+finish-if-event
+trigger TR_Entrance                     # Prog 2: 4
+finish                                  # Prog 3
+trigger TR_Entrance                     # Prog 3: the quest's nil; the battlefield's 32000 menu
+update 32000 option=17                  # Apocalypse Nigh, index 1, area 1: registered, entered
+finish                                  # in the arena
+kill KAMLANAUT                          # area 1's Kamlanaut
+kill KAMLANAUT+1                        # and Ealdnarche: won (superlink, allDeath), battlefieldWin 1057, 32001 opens
+finish                                  # 32001: Prog 4, Timer 8001; the win's set-down to 540 0 -514
+tick 400                                # the zone change
+login open                              # the zone-in at Prog 4: 7, left open
+update 7 option=0                       # updateEvent(36, 1430550, 2964, 1013, 36, 1, 0, 0)
+update 7 option=1                       # not 0: nothing
+finish                                  # Breaker of the Chains; set down in Al'Taieu
+tick 400
+login                                   # in Al'Taieu
+warp 22.5,3.9,-61.5 LowerJeuno          # by Aldo
+trigger Aldo                            # Prog 4, rank 6: 10057
+finish                                  # Prog 5
+trigger Aldo                            # Prog 5: 10058
+finish
+warp 120.9,-8,-12 Norg                  # by Gilgamesh
+trigger Gilgamesh                       # Prog 5, no mustZone, day 8000 < Timer 8001: nil; nothing
+warp 103.5,-8.6,-12 Norg                # by _700
+trigger _700                            # Prog 5, Timer 8001 > day 8000: 235
+finish                                  # the mustZone (252)
+wait vana=12                            # day 8001
+trigger Gilgamesh                       # the Timer reached, the mustZone set: nil; nothing
+trigger _700                            # Timer 8001 > day 8001 false: nil; DOOR_IS_LOCKED
+warp 22.5,3.9,-61.5 LowerJeuno          # another zone: the mustZone cleared
+warp 120.9,-8,-12 Norg                  # by Gilgamesh
+trigger Gilgamesh                       # Prog 5, Timer 8001 = day 8001: 232 (252, 6)
+update 232 option=99                    # the four earrings (updateEvent(252, Static, Magnetic, Hollow, Ethereal))
+update 232 option=98                    # not 99: nothing
+update 232 option=100                   # not 99: nothing
+finish option=0                         # not 1-4: Prog 6
+trigger Gilgamesh                       # Prog 6: 234 (252)
+finish option=5                         # not 1-4: Prog 6
+fill-inventory
+trigger Gilgamesh                       # 234 (252)
+finish option=1                         # the Static Earring cannot be given: nothing (Prog 6, not completed)
+free-inventory
+trigger Gilgamesh                       # 234 (252)
+update 234 option=99                    # the four earrings
+finish option=4                         # the Ethereal Earring (Static + 3); completed
+trigger Gilgamesh                       # completed: 233
+finish
+warp 534.6,-1,-592.2 EmpyrealParadox    # by qm1
+trigger qm1                             # the Ethereal Earring held: nil; AIR_WARPED_AND_DISTORTED

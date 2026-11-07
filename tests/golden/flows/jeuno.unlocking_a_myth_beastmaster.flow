@@ -1,0 +1,19 @@
+# Unlocking a Myth: Beastmaster (jeuno 110): Lower Jeuno's Zalsuhm (no script; default 10085), the template
+# UnlockingAMyth for xi.job.BST (9). A level 75 BST with the DoubleAxe (its Vigil weapon, Main slot) at 250 weapon
+# skill points. Available: a trade: no trade handler; not wearing it: 10085; worn: 10086 (9), finished 0: nothing;
+# 10086 again, finished 9: begun. Accepted: the cutscene 10087. (The worn weapon cannot be traded: #trade trades it
+# unworn.) The other nineteen jobs' quests are silent (each check reads the main job).
+lists LowerJeuno/Zalsuhm/onTrigger LowerJeuno/Zalsuhm/onTrade LowerJeuno/onEventFinish/10086
+char zone=LowerJeuno pos=-31.5,5.9,-117.5 job=BST lvl=75
+item DoubleAxe wsp=250
+login
+trade Zalsuhm DoubleAxe x1              # available: no trade handler; nothing
+trigger Zalsuhm                         # not wearing the weapon: 10085
+finish
+equip DoubleAxe Main                    # the Main slot
+trigger Zalsuhm                         # wearing it: 10086 (9)
+finish option=0                         # neither 53 nor 9: nothing
+trigger Zalsuhm                         # 10086 (9)
+finish option=9                         # begun
+trigger Zalsuhm                         # accepted: the cutscene 10087
+finish

@@ -1,0 +1,19 @@
+# The Doorman (bastok 54): the hide flap's 110 when the NMs died without nmClaimed. The 110 spawns and claims both NMs
+# (nmClaimed 1); a rezone clears the local vars while the NMs stay up; their deaths then set no nmKilled bit, so the next
+# 110 with the bodies still spawned does nothing, and once they are gone it spawns both again.
+char zone=Davoi pos=263,4,-249 job=WAR lvl=75   # 75: the NMs cannot kill it while it waits
+quest Bastok.TheDoorman accepted
+login
+trigger Hide_Flap_1 at=0.5      # FIND_ORC_TENT, 110
+finish                          # neither spawned: YOU_FIND_NOTHING, both spawned and claimed, nmClaimed 1
+rezone                          # the local vars gone: nmClaimed 0
+kill GAVOTVUT                   # nmClaimed 0: no bit
+kill BARAKBOK                   # nmClaimed 0: no bit
+trigger Hide_Flap_1 at=0.5      # both dead: FIND_ORC_TENT, 110
+finish                          # no KI, nmKilled 0, the bodies still spawned: nothing
+tick 30000                      # the bodies stay spawned past 32 s; gone within 92 s
+tick 30000
+tick 30000
+tick 2000
+trigger Hide_Flap_1 at=0.5      # 110
+finish                          # neither spawned: YOU_FIND_NOTHING, both spawned and claimed again

@@ -1,0 +1,62 @@
+# Test My Mettle (otherAreas 25): getSelectedOption's bets and getRewardMultiplier's rows, each edge bracketed. Each
+# round: Devean's 120, a finish with the option, then a GM makes the quest available again (the vars kept: each round
+# writes Timer and Reward anew, seen on the trace). The bet is the first of 1000, 500, 250, 100 the option exceeds, the
+# hours the rest; the multiplier: hours > 72: 1; <= 24: 3.0; <= 36: 2.5; <= 48: 2.0; <= 60: 1.5; <= 72: 1.2. Option 100
+# exceeds no bet: the Lua errors there on `player:getGil() >= nil` (a `lua:` line, which the recorder refuses), so it is
+# left out; XI.Verify.Quests `oa g3 tmm` proves the C# does nothing. 20000 gil: every bet affordable (the gil edge is
+# `#edges`).
+lists Selbina/Devean/onTrigger Selbina/onEventFinish/120
+char zone=Selbina pos=41.4,-14.6,40 job=WAR lvl=10 nation=1 gil=20000
+rank 2
+fame Sandoria 75
+login
+trigger Devean
+finish option=1001                      # bet 1000, 1 h: Timer now + 144; Reward 3000 (x 3.0); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1024                      # bet 1000, 24 h: Timer now + 3456; Reward 3000 (x 3.0); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1025                      # bet 1000, 25 h: Timer now + 3600; Reward 2500 (x 2.5); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1036                      # bet 1000, 36 h: Timer now + 5184; Reward 2500 (x 2.5); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1037                      # bet 1000, 37 h: Timer now + 5328; Reward 2000 (x 2.0); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1048                      # bet 1000, 48 h: Timer now + 6912; Reward 2000 (x 2.0); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1049                      # bet 1000, 49 h: Timer now + 7056; Reward 1500 (x 1.5); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1060                      # bet 1000, 60 h: Timer now + 8640; Reward 1500 (x 1.5); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1061                      # bet 1000, 61 h: Timer now + 8784; Reward 1200 (x 1.2); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1072                      # bet 1000, 72 h: Timer now + 10368; Reward 1200 (x 1.2); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1073                      # bet 1000, 73 h: Timer now + 10512; Reward 1000 (x 1); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=1000                      # bet 500, 500 h: Timer now + 72000; Reward 500 (x 1); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=501                       # bet 500, 1 h: Timer now + 144; Reward 1500 (x 3.0); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=500                       # bet 250, 250 h: Timer now + 36000; Reward 250 (x 1); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=251                       # bet 250, 1 h: Timer now + 144; Reward 750 (x 3.0); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=250                       # bet 100, 150 h: Timer now + 21600; Reward 100 (x 1); begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean
+finish option=101                       # bet 100, 1 h: Timer now + 144; Reward 300 (x 3.0); begun

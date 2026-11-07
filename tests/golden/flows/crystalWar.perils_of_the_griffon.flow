@@ -1,0 +1,56 @@
+# Perils of the Griffon (crystalWar 37): a level 99 Warrior in Southern San d'Oria [S] with Wrath of the Griffon and the
+# WotG mission Purple, the New Black completed (GMs; missions as group 1's flows; CHECK the next WotG mission plays at
+# none of these NPCs). Wrath's 60 sets this quest's Timer (tomorrow) and mustZone (the charvar `Quest[7][37]mustZone`,
+# the zone id): set here by GMs. The Timer 99999: Rholont 49; the Timer 0 and the mustZone 80: 49; out to Garlaige
+# Citadel [S] and back (the mustZone cleared: another zone): 629, finished: Prog 1. The mustZone 80 again (a GM): 634;
+# out and back: 630, finished: Prog 2. Prog 2: 635. Daigraffeaux 631, finished: Prog 3. Rholont 632, finished: begun.
+# Rholont: no Orcish Warmachine Body: 636. Jugner Forest [S]: qm6 210, finished: the body; qm6: the body held: nil
+# (YOU_FIND_NOTHING_ORDINARY). Rholont 633, finished: completed (an Elixir, Knight of the Swiftwing Griffin). Rholont
+# again: In a Haze of Glory's available 637.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Daigraffeaux/onTrigger SouthernSanDoriaS/onEventFinish/629 SouthernSanDoriaS/onEventFinish/630 SouthernSanDoriaS/onEventFinish/631 SouthernSanDoriaS/onEventFinish/632 SouthernSanDoriaS/onEventFinish/633 JugnerForestS/qm6/onTrigger JugnerForestS/onEventFinish/210
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.WrathOfTheGriffon completed
+mission Wotg PurpleTheNewBlack completed
+charvar Quest[7][37]Timer 99999         # a GM: a day to come
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # Prog 0, the Timer to come: 49
+finish
+charvar Quest[7][37]Timer 0             # a GM
+charvar Quest[7][37]mustZone 80         # a GM: the mustZone (Wrath's 60 sets it in Southern San d'Oria [S])
+trigger Rholont                         # Prog 0, the mustZone set: 49
+finish
+warp 62.849,-6.078,137.438 GarlaigeCitadelS # another zone: the mustZone cleared
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 0: 629
+finish                                  # Prog 1
+charvar Quest[7][37]mustZone 80         # a GM
+trigger Rholont                         # Prog 1, the mustZone set: 634
+finish
+warp 62.849,-6.078,137.438 GarlaigeCitadelS
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 1: 630
+finish                                  # Prog 2
+trigger Rholont                         # Prog 2: 635
+finish
+walk -6.157,1.999,-89.209
+trigger Daigraffeaux                    # Prog 2: 631
+finish                                  # Prog 3
+walk -167.043,-2,55.484
+trigger Rholont                         # Prog 3: 632
+finish                                  # begun
+trigger Rholont                         # accepted, no body: 636
+finish
+warp 69.511,-0.677,323.781 JugnerForestS
+trigger qm6                             # no body: 210
+finish                                  # the Orcish Warmachine Body
+trigger qm6                             # the body held: nil (YOU_FIND_NOTHING_ORDINARY)
+finish-if-event
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # the body: 633
+finish                                  # completed (an Elixir; Knight of the Swiftwing Griffin)
+trigger Rholont                         # In a Haze of Glory available: 637
+finish

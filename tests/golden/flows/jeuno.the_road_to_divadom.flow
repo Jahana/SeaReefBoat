@@ -1,0 +1,64 @@
+# The Road to Divadom (jeuno 97, DNC AF2): Laila and Rhea Myuliah in Upper Jeuno (no scripts; defaults 10120 / 10121),
+# the Glowing Pebbles in Jugner Forest [S] (no script; default YOU_FIND_SPARKLING_STONE). A level 75 Dancer (male: race
+# 1, getGender() 1), Lakeside Minuet and The Unfinished Waltz completed (by GM: Timer 0, no mustZone; the Waltz's
+# completed section answers Laila 10134 / Rhea 10135 at priority 20). A stone to Laila while available (no trade
+# handler: nothing), Jugner Forest [S] entered and the glue traded to the pebbles while available (no zone-in, no
+# trade handler: nothing), 10136 (begun), 10137, Rhea 10138; Jugner Forest [S] entered at Prog 0: 105 (Prog 1); the glue at
+# Prog 1 (nil); the pebbles 106 (Prog 2); the glue with a stone at Prog 2 (not exactly the glue: nil), the glue (107:
+# confirmed, Prog 3); the pebbles at Prog 3 (nil: YOU_FIND_SPARKLING_STONE); a rezone at Prog 3 (no 105); Laila at Prog
+# 3: 10139 started, 10214 and 10215 queued, then 10170 (each answered; a full bag at 10170: no tights, Prog 4); 10170 at
+# Prog 4 (the Dancer's Tights (M) 15659, completed, Stardust Dancer, Quest[3][98]Timer = tomorrow, the local var
+# Quest[3][98]mustZone (read by nobody: getMustZone reads the char var), HQuest[DncArtifact]Prog 1). Then Comeback
+# Queen's check 1 by operand: Timer ahead alone (this quest's 10140, Rhea 10141: replaceDefault), mustZone alone (a GM's
+# Timer 0 and char var mustZone 244: 10140); a day later (day 8001 = Timer) its 10143 (begun, Wyatt's Proposal).
+# Elsewhere: level 49 and a trade while available are #level49; a Warrior (check 1 and check 2) is #not_dnc; Laila at
+# Prog 2 is #prog2; the tights for a female char are #female.
+lists UpperJeuno/Laila/onTrigger UpperJeuno/Laila/onTrade UpperJeuno/Rhea_Myuliah/onTrigger UpperJeuno/onEventFinish/10136 UpperJeuno/onEventFinish/10170 UpperJeuno/onEventFinish/10143 JugnerForestS/Glowing_Pebbles/onTrigger JugnerForestS/Glowing_Pebbles/onTrade JugnerForestS/onZoneIn/1 JugnerForestS/onEventFinish/105 JugnerForestS/onEventFinish/106 JugnerForestS/onEventFinish/107
+char zone=UpperJeuno pos=-52.5,0,101 job=DNC lvl=75
+quest Jeuno.LakesideMinuet completed
+quest Jeuno.TheUnfinishedWaltz completed
+item BlockOfYagudoGlue x2
+item FlintStone x2
+login
+trade Laila FlintStone x1               # available: no trade handler, nothing
+warp 99,6.4,442.6 JugnerForestS         # available: no zone-in event (the Prog 0 105 belongs to the accepted section)
+trade Glowing_Pebbles BlockOfYagudoGlue x1  # available: no trade handler, nothing
+warp -52.5,0,101 UpperJeuno
+trigger Laila                           # 10136
+finish                                  # begun
+trigger Laila                           # Prog 0: 10137
+finish
+trigger Rhea_Myuliah                    # 10138 (Event, over the Waltz's 10135)
+finish
+warp 99,6.4,442.6 JugnerForestS         # zone-in at Prog 0: 105, answered 0: Prog 1
+trade Glowing_Pebbles BlockOfYagudoGlue x1  # Prog 1: nil
+trigger Glowing_Pebbles                 # Prog 1: 106
+finish                                  # Prog 2
+trade Glowing_Pebbles BlockOfYagudoGlue x1 FlintStone x1  # not the glue alone: nil
+trade Glowing_Pebbles BlockOfYagudoGlue x1  # 107
+finish                                  # the glue taken (confirmTrade), Prog 3
+trigger Glowing_Pebbles                 # Prog 3: nil; YOU_FIND_SPARKLING_STONE
+rezone                                  # Prog 3: no 105
+warp -52.5,0,101 UpperJeuno
+trigger Laila                           # Prog 3: 10139 started, 10214, 10215 queued, then 10170
+finish                                  # 10139
+finish                                  # 10214
+finish                                  # 10215
+fill-inventory
+finish                                  # 10170, no room: Prog 4
+free-inventory
+trigger Laila                           # Prog 4: 10170
+finish                                  # the Dancer's Tights (M), completed, Stardust Dancer, Comeback Queen's Timer 8001 and local var mustZone, HQuest Prog 1
+trigger Laila                           # Comeback Queen: Timer ahead; this quest's completed 10140 (replaceDefault)
+finish
+trigger Rhea_Myuliah                    # 10141 (replaceDefault)
+finish
+charvar Quest[3][98]Timer 0             # a GM
+charvar Quest[3][98]mustZone 244        # a GM: the char var getMustZone reads
+trigger Laila                           # Comeback Queen: mustZone alone; 10140
+finish
+charvar Quest[3][98]mustZone 0          # a GM
+charvar Quest[3][98]Timer 8001          # a GM: as the finish set it
+wait vana=24                            # day 8001
+trigger Laila                           # Comeback Queen: Timer 8001 = today: 10143
+finish                                  # Comeback Queen begun, Wyatt's Proposal

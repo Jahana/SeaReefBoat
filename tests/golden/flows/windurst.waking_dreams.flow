@@ -1,0 +1,74 @@
+# Waking Dreams (windurst 93): Kerutoto in Windurst Waters. A WAR (SMN not unlocked: the pact bit 5 is always set). CoP
+# 4-1 Sheltering Doubt current before login, so CoP 3-5 Darkness Named counts as completed (a CoP mission is completed
+# when it is below the current one); the guard's other side is #cop. Food for Thought completed by GM (its available 312
+# would cycle with this quest's Event lines). 918 (begun, the Vial of Dream Incense), 919 (Option 1), 789; the Whisper of
+# Dreams given by GM (the Diabolos battlefield gives it), with a Diabolos's Ring held: 920 (mask bit 2 and bit 5: 36);
+# escaped (option 0) and out of range (7): nothing; option 5: 15000 gil, completed (fame +60, the whisper taken,
+# Darkness_Named_date = the next JST midnight 1800025200, mustZone). Completed with the mustZone: section 3 not met
+# (306); after a zone change within the lockout: 789 (replaceDefault). The lockout's edge at Option 0 (cleared by the
+# completion): the date one second ahead (789), the date exactly now (`<` false: 919, Option 1); then 789 (the else).
+# The whisper again: 920 (repeat param 1, mask 36), option 0 (escaped), option 1 (Diabolos's Pole; the whisper taken, the
+# date again: 789). A day on, the vial taken by GM, no whisper: 918 (repeat param 1), option 0 ("Not yet.": nothing),
+# option 1 (a vial). The whisper again: 920 (mask 37: the pole too), option 6 (the Diabolos pact for a WAR, silent,
+# DIABOLOS_UNLOCKED; the whisper taken, the date). A day on, the whisper again: 920 (mask 37), option 3 (Diabolos's Ring
+# held, rare: giveItem fails, nothing, the whisper kept).
+# Trades with no handler: Kerutoto while available (the guard met) and while accepted.
+# Defaults: Kerutoto 306 (no script). Also named: Kerutoto by Food for Thought (completed: no mustZone, nothing), Blue
+# Ribbon Blues (needs Water Way to Go: never here), LB04 (accepted only), CoP 5-3 and mission 7-2 (not current). A
+# mustZone clears only on entering another zone, so the flow zones out and back.
+lists WindurstWaters/Kerutoto/onTrigger WindurstWaters/Kerutoto/onTrade WindurstWaters/onEventFinish/918 WindurstWaters/onEventFinish/919 WindurstWaters/onEventFinish/920
+char zone=WindurstWaters pos=13.0,-4.71,-155.9
+mission Cop ShelteringDoubt current
+quest Windurst.FoodForThought completed
+item BoneChip
+login
+trade Kerutoto BoneChip x1              # available, the guard met: no trade handler anywhere, nothing
+trigger Kerutoto                        # 918
+finish                                  # begun; the Vial of Dream Incense
+trade Kerutoto BoneChip x1              # accepted: nothing
+trigger Kerutoto                        # accepted, no whisper, Option 0: 919
+finish                                  # Option 1
+trigger Kerutoto                        # Option 1: event 789
+finish
+keyitem WhisperOfDreams                 # a GM gives the battlefield's key item
+item DiabolossRing                      # a GM gives one reward item (mask bit 2)
+trigger Kerutoto                        # the whisper: 920 (pole, earring, ring, torque, 0, 0, 0, mask 36)
+finish option=0                         # escaped: nothing
+trigger Kerutoto                        # 920 again
+finish option=7                         # out of range: nothing
+trigger Kerutoto                        # 920 again
+finish option=5                         # 15000 gil; completed: fame +60; the whisper taken; Darkness_Named_date; mustZone
+trigger Kerutoto                        # completed with the mustZone: section 3 not met; 306
+finish
+warp 22.0,-4.25,-155.6 WindurstWoods
+warp 13.0,-4.71,-155.9 WindurstWaters   # the mustZone cleared
+trigger Kerutoto                        # within the lockout: event 789 (replaceDefault)
+finish
+charvar Darkness_Named_date 1800000001
+trigger Kerutoto                        # now < the date (one second): 789
+finish
+charvar Darkness_Named_date 1800000000
+trigger Kerutoto                        # now == the date: no whisper, the vial still held, Option 0: 919
+finish                                  # Option 1
+trigger Kerutoto                        # Option 1: event 789
+finish
+keyitem WhisperOfDreams
+trigger Kerutoto                        # the whisper: 920 (..., 0, 0, 1, mask 36)
+finish option=0                         # escaped: nothing
+trigger Kerutoto                        # 920 again
+finish option=1                         # Diabolos's Pole; the whisper taken; Darkness_Named_date
+trigger Kerutoto                        # within the lockout: 789 (replaceDefault)
+finish
+wait jst=1                              # past the JST midnight
+delkeyitem VialOfDreamIncense
+trigger Kerutoto                        # no whisper, no vial: 918 (0, 0, 0, 0, 0, 0, 1)
+finish option=0                         # "Not yet.": nothing
+trigger Kerutoto                        # 918 again
+finish option=1                         # the Vial of Dream Incense
+keyitem WhisperOfDreams
+trigger Kerutoto                        # 920 (..., 1, mask 37: the pole and the ring held, no SMN)
+finish option=6                         # the Diabolos pact (silent) and DIABOLOS_UNLOCKED; the whisper taken; the date
+wait jst=1
+keyitem WhisperOfDreams
+trigger Kerutoto                        # 920 (mask 37: the pole and the ring held; no SMN, the pact known)
+finish option=3                         # Diabolos's Ring held (rare): giveItem fails, nothing, the whisper kept

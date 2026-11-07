@@ -1,0 +1,16 @@
+# Atop the Highest Mountains (jeuno 129), accepted (a GM), OLDSCHOOL_G2 0, a level 75 Warrior in Xarcabard beside the
+# qm_boreal_tiger: `not xi.settings.main.OLDSCHOOL_G2 or ...:isDead()` is Lua's truthiness, and 0 is true in Lua, so the
+# ??? wants the Boreal Tiger dead, as with true (#oldschool_tiger). A port that reads the setting as a number (Main == 0)
+# would give the Round Frigicite at once; Settings.MainTruthy (quest rework P9) does not. The trigger right after the
+# login, before any tick, finds the ??? still shown (the NMs' onMobSpawn, whose own `if OLDSCHOOL_G2` is also true for 0,
+# queues its hiding) and the Tiger alive: nil, its default ONLY_SHARDS. The Tiger killed: the Round Frigicite. Recorded
+# on Lua at 49dabcc9^ (the parent of the commit that deleted the Lua).
+lists Xarcabard/qm_boreal_tiger/onTrigger
+char zone=Xarcabard pos=340.3,-28.2,381.3 job=WAR lvl=75
+quest Jeuno.AtopTheHighestMountains accepted
+setting OLDSCHOOL_G2 0
+login
+trigger qm_boreal_tiger   # OLDSCHOOL_G2 0 (truthy), the Tiger alive: nil; ONLY_SHARDS
+tick 400     # the zone's first tick: the ??? hidden (the onMobSpawn's showNPC(0))
+kill BOREAL_TIGER      # BLOCKS_OF_ICE; the ??? shown
+trigger qm_boreal_tiger   # the Tiger dead: the Round Frigicite

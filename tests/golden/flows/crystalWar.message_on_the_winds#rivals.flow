@@ -1,0 +1,30 @@
+# Message on the Winds (crystalWar 1), the rival at the Metalworks' Romualdo: a level 20 Warrior in the Metalworks with
+# Stamp Hunt accepted (a GM; missions as the main flow). Stamp Hunt answers Romualdo with 726 (Progress) while its bit
+# 4 is unset; 952 and 953 are Progress too, so they tie and rotate by the last tied event. 726 and 952 tie: 726 (its
+# container comes first), finished: bit 4. 952 alone, finished: Prog 1 (not begun). Bit 4 unset (a GM): the tie after
+# 726: 952; then 726, finished: bit 4. Completed (a GM), PostCS 1 (a GM), bit 4 unset (a GM): the tie after 726: 953,
+# finished: PostCS 2; then 726 (953 gone), finished: bit 4.
+lists Metalworks/Romualdo/onTrigger Metalworks/onEventFinish/952 Metalworks/onEventFinish/953 Metalworks/onEventFinish/726
+char zone=Metalworks pos=136.535,-18.475,-37.419 job=WAR lvl=20
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+quest Bastok.StampHunt accepted
+login
+trigger Romualdo                        # 952 and 726 tie: 726 (its container first)
+finish                                  # bit 4
+trigger Romualdo                        # bit 4 set: 952 alone
+finish                                  # Prog 1 (not begun)
+charvar Quest[1][16]Prog 0              # a GM: bit 4 unset
+trigger Romualdo                        # the tie after 726: 952
+finish
+trigger Romualdo                        # the tie after 952: 726
+finish                                  # bit 4
+quest CrystalWar.MessageOnTheWinds completed # a GM
+charvar Quest[7][1]PostCS 1             # a GM
+charvar Quest[1][16]Prog 0              # a GM: bit 4 unset
+trigger Romualdo                        # the tie after 726: 953
+finish                                  # PostCS 2
+trigger Romualdo                        # PostCS 2: 953 gone: 726
+finish                                  # bit 4

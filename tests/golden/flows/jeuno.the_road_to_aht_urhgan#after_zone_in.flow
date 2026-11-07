@@ -1,0 +1,18 @@
+# The Road to Aht Urhgan (jeuno 91): Wajaom Woodlands' afterZoneIn reads Prog. Accepted by a GM at Prog 3: the
+# zone-in (a warp to the leypoint) and 4 s: nothing; Prog 4 (a GM): out and back in: the Boarding Permit and the Map of
+# Wajaom Woodlands, Prog 5; a second zone-in at Prog 5: nothing.
+lists WajaomWoodlands/afterZoneIn/1
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+quest Jeuno.TheRoadToAhtUrhgan accepted
+charvar Quest[3][91]Prog 3
+login
+warp -200.1,-10,79.9 WajaomWoodlands
+tick 4500                           # afterZoneIn at Prog 3: nothing
+charvar Quest[3][91]Prog 4          # a GM
+warp 39.5,4.1,-45.2 LowerJeuno
+warp -200.1,-10,79.9 WajaomWoodlands
+tick 3000                           # no afterZoneIn yet
+tick 1000                           # afterZoneIn at Prog 4: the Boarding Permit, the Map of Wajaom Woodlands; Prog 5
+warp 39.5,4.1,-45.2 LowerJeuno
+warp -200.1,-10,79.9 WajaomWoodlands
+tick 4500                           # afterZoneIn at Prog 5: nothing

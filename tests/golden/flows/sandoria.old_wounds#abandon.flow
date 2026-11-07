@@ -1,0 +1,23 @@
+# Old Wounds (sandoria 102): accepted by GM with the guide, no sapara, no map, starting in the Quicksand Caves: qm3 with
+# no map (nil); then Curilla's 46 with 0, option 0 (nothing), option 1 (no sapara: the Sapara of Trials given), 46 with
+# 1, option 2 (the quest deleted, available again; the guide deleted, the map not held). Then, sword skill 0, the char
+# is not offered: her script's 530. Each 46 is an Event, so her script takes every other talk (530).
+lists QuicksandCaves/qm3/onTrigger ChateauDoraguille/Curilla/onTrigger ChateauDoraguille/onEventFinish/46
+char zone=QuicksandCaves pos=-144.9,1.9,448.1 job=WAR lvl=75
+quest Sandoria.OldWounds accepted
+keyitem WeaponTrainingGuide
+login
+trigger qm3                               # accepted, no map: nil, NOTHING_OUT_OF_ORDINARY
+warp 29.2,0,1.1 ChateauDoraguille
+trigger Curilla                           # accepted, no Annals, no map, no sapara: 46 with 0
+finish                                    # option 0: nothing
+trigger Curilla                           # the script's turn: 530
+finish
+trigger Curilla                           # 46 with 0
+finish option=1                           # option 1, no sapara: the Sapara of Trials given
+trigger Curilla                           # the script's turn: 530
+finish
+trigger Curilla                           # the sapara held: 46 with 1
+finish option=2                           # the quest deleted, the guide deleted
+trigger Curilla                           # available, skill 0: not offered; her script's 530
+finish

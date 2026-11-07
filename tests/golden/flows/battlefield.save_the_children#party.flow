@@ -1,0 +1,60 @@
+# Save the Children (battlefield.save_the_children): a party. Four level 75 Warriors of San d'Oria by Hut_Door: main
+# with 1-3 current at Status 2 (the registrant), bob with 1-3 completed (a helper), cid with 1-3 current at Status 1,
+# dan with no mission (GMs). main leads bob and cid. main's menu, area 1: registered; onEntryEventUpdate registers the
+# party members in the zone (the clearance copied, registerBattlefield); main enters. bob, holding the clearance:
+# onEntryTrigger's entered-party arm: checkRequirements as no registrant (completed): the menu (enterExisting 1);
+# updated: entered (checkSkipCutscene: completed: skippable). cid, holding it: checkRequirements fails (Status 1, below
+# 2): nothing; cid's trade: the clearance held: WAIT_LONGER. dan joins after the registration (no clearance): his
+# trigger: a member holds one, dan none registered: PARTY_MEMBERS_ARE_ENGAGED; his trade: a member holds one:
+# WAIT_LONGER. main claims a Fodderchief: its enmity locks the battlefield; onBattlefieldStatusChange (LOCKED, once:
+# statusRemoval 1) takes the clearance from the members outside it (cid). cid's trigger: no clearance, a member holds
+# one, cid registered and the battlefield not open: CLEARED_BUT_MEMBERS_ENGAGED. The three killed: won; 32001 to main
+# (1-3 current: battlefieldWin 32, canSkipCS 0) and to bob (completed, not current: no battlefieldWin, canSkipCS 1);
+# main's finish: 1-3's handler (the key, the title, Status 3); bob's: nothing.
+lists GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/Hut_Door/onTrade GhelsbaOutpost/onEventUpdate/32000 GhelsbaOutpost/onEventFinish/32000 GhelsbaOutpost/onEventFinish/32001
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+char bob zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+char cid zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+char dan zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren current
+bob: mission Sandoria SmashTheOrcishScouts completed
+bob: mission Sandoria BatHunt completed
+bob: mission Sandoria SaveTheChildren completed
+cid: mission Sandoria SmashTheOrcishScouts completed
+cid: mission Sandoria BatHunt completed
+cid: mission Sandoria SaveTheChildren current
+dan: item ChunkOfCopperOre
+cid: item ChunkOfCopperOre
+login
+missionstatus Sandoria 2                # a GM
+bob: login
+cid: login
+cid: missionstatus Sandoria 1           # a GM
+dan: login
+invite bob
+bob: accept
+invite cid
+cid: accept
+trigger Hut_Door                        # the menu 32000
+update 32000 option=1                   # registered in area 1; bob and cid registered with it
+finish                                  # main entered
+bob: trigger Hut_Door                   # bob's clearance: no registrant, completed: the menu (enterExisting)
+bob: update 32000 option=1              # entered (skippable)
+bob: finish
+cid: trigger Hut_Door                   # cid's clearance: Status 1: checkRequirements fails: nothing
+cid: trade Hut_Door ChunkOfCopperOre x1 # the clearance held: WAIT_LONGER
+invite dan
+dan: accept
+dan: trigger Hut_Door                   # no clearance, a member's: PARTY_MEMBERS_ARE_ENGAGED
+dan: trade Hut_Door ChunkOfCopperOre x1 # a member's clearance: WAIT_LONGER
+tick 2000                               # the Fodderchiefs spawn
+claim FODDERCHIEF_VOKDEK                # its enmity: LOCKED; the clearance taken from cid
+tick 1000
+cid: trigger Hut_Door                   # registered, the battlefield locked: CLEARED_BUT_MEMBERS_ENGAGED
+kill FODDERCHIEF_VOKDEK
+kill FODDERCHIEF_VOKDEK+1
+kill FODDERCHIEF_VOKDEK+2               # won: 32001 to main and bob
+finish                                  # 1-3: the key, the title, Status 3
+bob: finish                             # bob: nothing

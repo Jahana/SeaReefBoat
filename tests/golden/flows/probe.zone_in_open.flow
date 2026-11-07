@@ -1,0 +1,19 @@
+# probe (quest rework P5): a zone-in event left open (rezone open) reaches its onEventUpdate, which the zone-in's own
+# answers (a 0x05B finish) never could. I Can Hear a Rainbow (windurst 75; recorded on its Lua, which group 5 deleted: it now replays against ICanHearARainbow.cs) at Prog 0 in West Ronfaure with
+# Carbuncle's Ruby: its zone-in plays 51 when the zone's weather is one whose element the Light var lacks. The login's
+# zone-in plays 51 for the seeded weather and answers it at once (Light 1). Rain (6) set by GM, rezone open: 51 open (the
+# Weather local var 6); its update: updateEvent(0, 1, 6, 1 light); its finish: Light 65 (the water bit). Thunder (14),
+# rezone open: 51; update: updateEvent(0, 1, 14, 2 lights); finish: Light 97 (the thunder bit).
+# Not a quest port: the key names no quest (Program.IsProbe).
+char zone=WestRonfaure pos=-258.5,-71,423.4 job=SMN lvl=30
+quest Windurst.ICanHearARainbow accepted
+item CarbunclesRuby
+login                       # 51 for the seeded weather, answered: Light 1
+weather 6                   # RAIN
+rezone open                 # 51 open
+update 51 option=0          # updateEvent(0, 1, 6, 1)
+finish                      # Light 65: the water bit
+weather 14                  # THUNDER
+rezone open                 # 51 open
+update 51 option=0          # updateEvent(0, 1, 14, 2)
+finish                      # Light 97: the thunder bit

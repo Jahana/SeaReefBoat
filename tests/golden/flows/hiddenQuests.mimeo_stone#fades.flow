@@ -1,0 +1,31 @@
+# Mimeo Stone, the fades (stoneTimer, a callback arming itself again). The second Luminant (16806291): the stone, the
+# timer. Each 50-90 s (math.randomInt: the harness's seeded RNG, the same draws on both sides; stable shows them
+# repeatable): NumFades + 1 and MIMEO_JEWEL_OFFSET + fades - 1 (four fades: steps 5, 9, 11 and 14); the fifth run
+# (step 17): MIMEO_JEWEL_OFFSET + 4, the stone taken, no timer again. After the first fade the Cradle shows
+# BRIGHTNESS + 1, and with the Rebirth Feather held: CANNOT_OBTAIN_ITEM, noAction (the timer keeps running). Ticks of 30 s each,
+# under the 50 s floor, so each fade has a step of its own. The Luminant's trigger also says NOTHING_OUT_OF_ORDINARY:
+# its section 1 handler returns nil once the stone is given, and the lookup then runs section 2's Luminant, whose check
+# now holds (the Lua as it is).
+lists AttohwaChasm/Luminant/onTrigger AttohwaChasm/Cradle_of_Rebirth/onTrigger
+char zone=AttohwaChasm pos=444,19,-170 job=WAR lvl=75
+item RebirthFeather
+login
+trigger Luminant+1                      # the stone; the timer
+tick 30000
+tick 30000
+tick 30000                              # one fade by 90 s: MIMEO_JEWEL_OFFSET + 0, NumFades 1
+trigger Cradle_of_Rebirth               # BRIGHTNESS + 1; the Rebirth Feather held: CANNOT_OBTAIN_ITEM; noAction
+tick 30000
+tick 30000
+tick 30000                              # the second fade: MIMEO_JEWEL_OFFSET + 1
+tick 30000
+tick 30000                              # the third: + 2
+tick 30000
+tick 30000
+tick 30000                              # the fourth: + 3
+tick 30000
+tick 30000
+tick 30000                              # the fifth run: MIMEO_JEWEL_OFFSET + 4, the stone taken
+tick 30000                              # no timer left: nothing
+trigger Cradle_of_Rebirth               # no stone: its script
+finish-if-event

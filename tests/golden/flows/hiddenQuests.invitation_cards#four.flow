@@ -1,0 +1,27 @@
+# Invitation Cards, four cards at Prog 0 and 75's other arms. The four cards: 74 (text_table 0); an update on 1:
+# updateEvent(4, Imperial Mythril Piece, 1); finished on 3: one Mythril Piece, the cards taken, Prog stays 0 (cards < 4
+# fails: no completion). Then Prog 1 (a GM) and the Red card: 75; an update on 0: nothing; finished on 0: the local
+# only, and she is silent after it; with no room, finished on 3: giveItem fails.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventUpdate/74 AhtUrhganWhitegate/onEventUpdate/75 AhtUrhganWhitegate/onEventFinish/74 AhtUrhganWhitegate/onEventFinish/75
+char zone=AhtUrhganWhitegate pos=22.7,-7.8,-43 job=WAR lvl=75
+keyitem RedInvitationCard
+keyitem BlueInvitationCard
+keyitem GreenInvitationCard
+keyitem WhiteInvitationCard
+login
+trigger Naja_Salaheem                   # Prog 0: 74 (text_table 0)
+update 74 option=1                      # updateEvent(4, Imperial Mythril Piece, 1)
+finish option=3                         # one Mythril Piece; the cards taken; Prog stays 0
+charvar HQuest[Invitation_Cards]Prog 1  # a GM
+keyitem RedInvitationCard
+localvar HQuest[Invitation_Cards]Option 0
+trigger Naja_Salaheem                   # Prog 1: 75 (text_table 0)
+update 75 option=0                      # nothing
+finish option=0                         # the local Option 1 only
+trigger Naja_Salaheem                   # the local Option 1: silent
+finish-if-event
+localvar HQuest[Invitation_Cards]Option 0
+fill-inventory
+trigger Naja_Salaheem                   # 75
+finish option=3                         # no room: giveItem fails; the card kept
+free-inventory

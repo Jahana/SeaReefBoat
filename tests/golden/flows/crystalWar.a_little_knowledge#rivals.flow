@@ -1,0 +1,33 @@
+# A Little Knowledge (crystalWar 6), the rivals at Erlene: a level 99 Scholar in The Eldieme Necropolis [S] with A
+# Little Knowledge accepted at Prog 0 (a GM; missions as the main flow) and On Sabbatical available (AF1_QUEST_LEVEL 40;
+# its replies are Progress, and Progress beats Event). Prog 0: 18 (not 11), finished: On Sabbatical begun; then 19 (not
+# 11). Prog 1 (a GM): 19 (not 13). A Little Knowledge completed (a GM) with Embrava and Kaustra known: 19 (not its 15, a
+# replaceDefault Event). On Sabbatical at Prog 2 (a GM): 20 (not 15), finished: completed.
+lists TheEldiemeNecropolisS/Erlene/onTrigger TheEldiemeNecropolisS/onEventFinish/18 TheEldiemeNecropolisS/onEventFinish/20
+char zone=TheEldiemeNecropolisS pos=378.436,-39.999,17.914 job=SCH lvl=99
+quest CrystalWar.ALittleKnowledge accepted
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Erlene                          # Prog 0: 18 beats 11
+finish                                  # On Sabbatical begun
+trigger Erlene                          # 19 beats 11
+finish-if-event
+charvar Quest[7][6]Prog 1               # a GM
+trigger Erlene                          # Prog 1, no effect: 19 beats 13
+finish-if-event
+trigger Erlene                          # Prog 1 again, same state: 19 beats 13
+finish-if-event
+spell 478                               # a GM: Embrava
+spell 502                               # a GM: Kaustra
+quest CrystalWar.ALittleKnowledge completed
+trigger Erlene                          # completed, spells known: 19 beats 15
+finish-if-event
+trigger Erlene                          # completed again, same state: 19 beats 15
+finish-if-event
+charvar Quest[7][32]Prog 2              # a GM
+trigger Erlene                          # On Sabbatical at Prog 2: 20 beats 15
+finish                                  # completed

@@ -1,0 +1,21 @@
+# Wondering Minstrel (windurst 6), accepted by GM, Prog's other values. Prog 0: Ruslan 10010 (the == 1 test's lower
+# side), Jatan-Paratan's lumber trade nil (the == 2 test). Prog 3: Ruslan 10010, the lumber trade nil (the == 2 test's
+# upper side). Prog 2: the lumber: 638 (completed).
+lists WindurstWaters/Jatan-Paratan/onTrade WindurstWaters/onEventFinish/638 LowerJeuno/Ruslan/onTrigger LowerJeuno/onEventFinish/10009
+char zone=LowerJeuno pos=-19.3,0,-54.6 job=WAR lvl=10
+fame Windurst 325
+quest Windurst.WonderingMinstrel accepted
+item PieceOfRosewoodLumber
+login
+trigger Ruslan                                # Prog 0: 10010 (0, Piece of Rosewood Lumber)
+finish
+charvar Quest[2][6]Prog 3
+trigger Ruslan                                # Prog 3: 10010
+finish
+warp -61,-4,21.5 WindurstWaters
+trade Jatan-Paratan PieceOfRosewoodLumber x1  # Prog 3: nil
+charvar Quest[2][6]Prog 0
+trade Jatan-Paratan PieceOfRosewoodLumber x1  # Prog 0: nil
+charvar Quest[2][6]Prog 2
+trade Jatan-Paratan PieceOfRosewoodLumber x1  # Prog 2: 638
+finish                                        # completed; the lumber taken; needToZone

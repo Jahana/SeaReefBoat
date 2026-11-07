@@ -1,0 +1,21 @@
+# Eco-Warrior (Windurst) (windurst 84), accepted by GM, the vars' other values. Under the restriction with the Wyrmflies
+# down: Prog -1 (the qm2's == 0 test's lower side: nil) and Prog 2 without the meat (the == 1 test's upper side: nil).
+# The meat by GM with Informed -1 (Ahko Mhalijikhari's == 0 test's lower side: 64 under the restriction, then nil).
+lists MazeOfShakhrami/Ahko_Mhalijikhari/onTrigger MazeOfShakhrami/qm2/onTrigger MazeOfShakhrami/onEventFinish/62 MazeOfShakhrami/onEventFinish/64
+char zone=MazeOfShakhrami pos=-342.6,-11.2,-166.2 lvl=30
+quest Windurst.EcoWarrior accepted
+login
+trigger Ahko_Mhalijikhari                 # no meat, no restriction: 62
+finish option=1                           # Level Restriction 25 (ON_ZONE)
+charvar Quest[2][84]Prog -1
+trigger qm2                               # walks; Prog -1, the restriction: neither arm; nil; NOTHING_OUT_OF_ORDINARY
+finish-if-event
+charvar Quest[2][84]Prog 2
+trigger qm2                               # Prog 2, no meat: neither arm; nil
+finish-if-event
+keyitem IndigestedMeat
+charvar Quest[2][84]Informed -1
+trigger Ahko_Mhalijikhari                 # the meat, Informed -1 (not 0), the restriction: 64
+finish                                    # option 0: the restriction off
+trigger Ahko_Mhalijikhari                 # the meat, Informed -1, no restriction: nil; 61
+finish-if-event

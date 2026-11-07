@@ -1,0 +1,52 @@
+# Wayward Waypoints (adoulin, call-only): a level 99 Warrior in Western Adoulin, SoA Pioneer Registration completed
+# and Life on the Frontier current. Nothing begins or completes the quest or sets WW_Need_Shipilolo (GMs). Talks in
+# pairs (Shipilolo's default, Pioneer Registration's 535 replaceDefault, then his script). Available, the var at 1:
+# nothing; a trade: no onTrade, nothing. Accepted, the var at 0: nothing.
+# The var at 2, Fertile Ground accepted without its bottle (GMs): Fertile Ground's 2850 answers first. Then 79,
+# finished: the Waypoint Recalibration Kit (addKeyItem, no message), the var 0. The kit taken, the var at 1 (GMs): 79
+# again. The var at 1 (a GM), the kit held: nothing. The kit taken, the quest completed (GMs), the var at 1: nothing.
+lists WesternAdoulin/Shipilolo/onTrigger WesternAdoulin/onEventFinish/2850 WesternAdoulin/onEventFinish/79
+char zone=WesternAdoulin pos=86,0,-60.6 job=WAR lvl=99
+mission Soa PioneerRegistration completed
+mission Soa LifeOnTheFrontier current
+charvar WW_Need_Shipilolo 1
+item FlintStone
+login
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # available, the var at 1: nothing: 535
+finish-if-event
+trade Shipilolo FlintStone x1           # available: no onTrade: nothing, the stone kept
+quest Adoulin.WaywardWaypoints accepted # a GM
+charvar WW_Need_Shipilolo 0             # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # the var at 0: nothing: 535
+finish-if-event
+charvar WW_Need_Shipilolo 2             # a GM
+quest Adoulin.FertileGround accepted    # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # Fertile Ground first: 2850
+finish-if-event                         # 2850's finish: the bottle
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # the var at 2, no kit: 79
+finish-if-event                         # 79's finish: the kit, the var 0
+delkeyitem WaypointRecalibrationKit     # a GM
+charvar WW_Need_Shipilolo 1             # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # the var at 1, no kit: 79 again
+finish-if-event                         # 79's finish: the kit, the var 0
+charvar WW_Need_Shipilolo 1             # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # the kit held: nothing: 535
+finish-if-event
+delkeyitem WaypointRecalibrationKit     # a GM
+quest Adoulin.WaywardWaypoints completed   # a GM
+trigger Shipilolo                       # 535
+finish-if-event
+trigger Shipilolo                       # completed, the var at 1, no kit: nothing: 535
+finish-if-event

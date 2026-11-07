@@ -1,0 +1,43 @@
+# Curses, Foiled Again! (1) (windurst 32): Shantotto in Windurst Walls. The offer 171 (options 0, 2 and 4: nothing;
+# option 3: begun), 172, the trades (two chips without the ash; the ash and one chip; the ash and three chips; the set
+# and an extra Bomb Arm: nil; the set, the ash and two chips: 173), 173 with a full bag (the Brass Rod does not fit:
+# complete fails, nothing, the items kept), then completed (fame +20, the Brass Rod; the items taken; Curses, Foiled
+# Again!? (2)'s Timer = the next Vana'diel day; this quest's mustZone 239). Fame starts at 30, so the completion reaches
+# level 2 and (2)'s offer section answers with its wait (174); a trade then (completed: no section of this quest).
+# Trades with no handler: Shantotto while available (the section 1 check, the status alone, holds).
+# Defaults: Shantotto 164; her script acts only for Class Reunion (accepted, ClassReunionProgress 3: never here), so her
+# quest Event lines answer on both turns of the alternation. Also named: Shantotto by (2), Curses, Foiled A-Golem!?
+# (both need this quest completed), Blood and Glory (staff skill 230: never here), Trust: Shantotto (the Windurst Trust
+# Permit: never here), AMK 5 / 6 and Windurst 8-2 (not current). The first of the four Shantotto entities in
+# windurst_walls/npcs.yaml (17756186, 122.6, -3.0, 113.6) is the one `trigger Shantotto` names.
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/Shantotto/onTrade WindurstWalls/onEventFinish/171 WindurstWalls/onEventFinish/173
+char zone=WindurstWalls pos=122.6,-3.0,111.6
+fame Windurst 30
+item PinchOfBombAsh
+item BoneChip x3
+item BombArm
+login
+trade Shantotto BoneChip x1                         # available: no trade handler in section 1, nothing
+trigger Shantotto                                   # event 171 (0, 0, 0, 0, 0, 0, Bomb Ash, Bone Chip)
+finish option=0                                     # nothing
+trigger Shantotto                                   # 171 again
+finish option=2                                     # below 3: nothing
+trigger Shantotto                                   # 171 again
+finish option=4                                     # above 3: nothing
+trigger Shantotto                                   # 171 again
+finish option=3                                     # begun
+trigger Shantotto                                   # accepted: event 172
+finish
+trade Shantotto BoneChip x2                         # no ash: nil
+trade Shantotto PinchOfBombAsh x1 BoneChip x1       # one chip: nil
+trade Shantotto PinchOfBombAsh x1 BoneChip x3       # three chips: not exact, nil
+trade Shantotto PinchOfBombAsh x1 BoneChip x2 BombArm x1   # the set and an extra item: not exact, nil
+fill-inventory
+trade Shantotto PinchOfBombAsh x1 BoneChip x2       # exact: 173
+finish                                              # no room for the Brass Rod: complete fails, nothing
+free-inventory
+trade Shantotto PinchOfBombAsh x1 BoneChip x2       # 173
+finish                                              # completed: fame 50, the Brass Rod; the items taken; (2)'s Timer; the mustZone
+trigger Shantotto                                   # (2) available (level 2), its Timer ahead: event 174
+finish
+trade Shantotto BoneChip x1                         # completed: no section here; (2) has no trade handler in its offer: nothing

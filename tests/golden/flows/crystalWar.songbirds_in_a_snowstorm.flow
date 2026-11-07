@@ -1,0 +1,74 @@
+# Songbirds in a Snowstorm (crystalWar 51): a level 99 Warrior in Southern San d'Oria [S] with Bonds That Never Die and
+# the WotG mission The Will of the World completed (GMs; the WotG mission then The Scent of Battle, which answers none
+# of these NPCs and zones; the other logs as group 1's flows). Bonds' 650 sets this quest's Timer (tomorrow) and
+# mustZone: set here by GMs. The Timer 99999: Rholont: nil (32); the Timer today (8000) and the mustZone 80: nil (32);
+# out to Garlaige Citadel [S] and back (the mustZone cleared: another zone): Prog 0: 113, finished: Prog 1. Prog 1,
+# Option 0: 655, finished: Option 1; again: 49. Daigraffeaux 114, finished: begun. Rholont (accepted): 656. Beaucedine
+# Glacier [S] at Prog 1: 1, left open: an update on option 0 (nothing), one on option 11 (0, 23, 1756, 0, 0, 5832718, 0,
+# 1), finished: Prog 2. Colossal Footprint 2, finished: Prog 3; Prog 3, no key items: nil (NOTHING_OUT_OF_ORDINARY).
+# Rocky Perch: Prog 3: NONDESCRIPT_MASS, a Goliath Worm. The Lance Fish, Paladin Lobster and Scutum Crab (GMs: fished at
+# the zone's ponds; no script gives them): the Footprint 3 (136), finished: Prog 4. Charred Firewood, a Flint Stone: 4,
+# finished: Prog 5 (the flint kept). Compressed Snow 5, finished: Prog 6; 27, finished: the Orcish Bloodletter spawned,
+# claimed (scripted: not up at zone load); the NM up: nil (NOTHING_OUT_OF_ORDINARY). The NM killed at Prog 6: Prog 7.
+# Compressed Snow 6, finished: completed (an Icarus Wing). Southern San d'Oria [S]: Rholont: Blood of Heroes' available
+# 656.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Daigraffeaux/onTrigger SouthernSanDoriaS/onEventFinish/113 SouthernSanDoriaS/onEventFinish/114 SouthernSanDoriaS/onEventFinish/655 BeaucedineGlacierS/onZoneIn/1 BeaucedineGlacierS/onEventUpdate/1 BeaucedineGlacierS/onEventFinish/1 BeaucedineGlacierS/Colossal_Footprint/onTrigger BeaucedineGlacierS/Rocky_Perch/onTrigger BeaucedineGlacierS/Charred_Firewood/onTrade BeaucedineGlacierS/Compressed_Snow/onTrigger BeaucedineGlacierS/Orcish_Bloodletter/onMobDeath BeaucedineGlacierS/onEventFinish/2 BeaucedineGlacierS/onEventFinish/3 BeaucedineGlacierS/onEventFinish/4 BeaucedineGlacierS/onEventFinish/5 BeaucedineGlacierS/onEventFinish/6 BeaucedineGlacierS/onEventFinish/27
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.BondsThatNeverDie completed
+mission Wotg TheWillOfTheWorld completed
+mission Wotg TheScentOfBattle current
+charvar Quest[7][51]Timer 99999         # a GM: a day to come
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item FlintStone
+login
+trigger Rholont                         # Prog 0, the Timer to come: nil (32)
+finish-if-event
+charvar Quest[7][51]Timer 8000          # a GM: today (the harness's day)
+charvar Quest[7][51]mustZone 80         # a GM: the mustZone (Bonds' 650 sets it in Southern San d'Oria [S])
+trigger Rholont                         # the mustZone set: nil (32)
+finish-if-event
+warp 62.849,-6.078,137.438 GarlaigeCitadelS # another zone: the mustZone cleared (a rezone keeps it)
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Prog 0: 113
+finish                                  # Prog 1
+trigger Rholont                         # Prog 1, Option 0: 655
+finish                                  # Option 1
+trigger Rholont                         # Prog 1, Option 1: 49
+finish
+trigger Daigraffeaux                    # Prog 1: 114
+finish                                  # begun
+trigger Rholont                         # accepted: 656
+finish
+warp 82.144,-19.038,139.249 BeaucedineGlacierS open # Prog 1 (any zone): 1, left open
+update 1 option=0                       # not 11: no update
+update 1 option=11                      # (0, 23, 1756, 0, 0, 5832718, 0, 1)
+finish                                  # Prog 2
+trigger Colossal_Footprint              # Prog 2, no key items: 2
+finish                                  # Prog 3
+trigger Colossal_Footprint              # Prog 3, no key items: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+trigger Rocky_Perch                     # Prog 3: NONDESCRIPT_MASS, a Goliath Worm, no event
+finish-if-event
+keyitem LanceFish                       # a GM: fished in the zone
+keyitem PaladinLobster                  # a GM
+keyitem ScutumCrab                      # a GM
+trigger Colossal_Footprint              # the three: 3 (136)
+finish                                  # Prog 4
+walk 84.796,-58.472,175.2               # beside the Charred Firewood (a trade does not walk)
+trade Charred_Firewood FlintStone x1    # Prog 4, the flint alone: 4
+finish                                  # Prog 5 (the flint kept)
+trigger Compressed_Snow                 # Prog 5: 5
+finish                                  # Prog 6
+trigger Compressed_Snow                 # Prog 6, the NM not up: 27
+finish                                  # the Orcish Bloodletter spawned, claimed
+trigger Compressed_Snow                 # the NM up: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+kill ORCISH_BLOODLETTER                 # Prog 6: Prog 7
+trigger Compressed_Snow                 # Prog 7: 6
+finish                                  # completed (an Icarus Wing)
+warp -167.043,-2,55.484 SouthernSanDoriaS
+trigger Rholont                         # Blood of Heroes' available: 656
+finish

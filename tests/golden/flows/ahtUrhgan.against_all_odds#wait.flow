@@ -1,0 +1,19 @@
+# Against All Odds' Ratihb at the edge of Wait: a level 50 Corsair, the earlier COR quests and The Die is Cast
+# completed (GMs: no other Ratihb reply), accepted at Prog 1 without the Life Float, Wait set by a GM to the harness's
+# GetSystemTime() (1800000000) at login: Wait < now is false (and Wait is not 0): nil: 603; Wait one second before now
+# (a GM): 798, finished: the float, Wait = JstMidnight().
+lists AhtUrhganWhitegate/Ratihb/onTrigger
+char zone=AhtUrhganWhitegate pos=76.725,-6,-137.203 job=COR lvl=50
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.EquippedForAllOccasions completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+quest AhtUrhgan.TheDieIsCast completed
+quest AhtUrhgan.AgainstAllOdds accepted
+charvar Quest[6][26]Prog 1
+charvar Quest[6][26]Wait 1800000000
+login
+trigger Ratihb                          # Wait == now: not past: nil: 603
+finish
+charvar Quest[6][26]Wait 1799999999     # a GM: one second before now
+trigger Ratihb                          # Wait < now: 798
+finish                                  # the float; Wait = JstMidnight()

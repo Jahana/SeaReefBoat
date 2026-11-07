@@ -1,0 +1,80 @@
+# Snake on the Plains (crystalWar 8), the edges: a level 99 Warrior in West Sarutabaruta [S] (missions as Steamed Rams'
+# main flow). Available: Sealed Entrance 1, 2 and 3: DOOR_OFFSET + 3. Windurst Waters [S]: Miah Riyuh: Steamed Rams
+# accepted (a GM): 122; with the Green letter too (a GM): still 122 (the other quests first); Steamed Rams set
+# available, The Fighting Fourth accepted: 122; it set available: the letter: 103, option 2: nothing; 103, option 0:
+# begun, the putty, LetterUsed, the letter taken. Accepted: Steamed Rams accepted (a GM): 122; it set available, The
+# Fighting Fourth accepted: 122; it set available. Sealed Entrance 1 (bit 0): DOOR_OFFSET + 1; Miah Riyuh 104 ([7] 1),
+# option 1: deleted, the putty taken, Doors 0 (LetterUsed stays). LetterUsed: 105, option 0: begun, the putty. Doors 8
+# (a GM: bit 3 only): 104 ([7] 0: bits 0 to 2 counted). Sealed Entrance 1: bit 0 new (Doors 9, not full): DOOR_OFFSET
+# + 1; Miah Riyuh 104 ([7] 1). The putty taken (a GM): no putty, not full: 121. Doors 15 (a GM: bits 0 to 3), a full
+# inventory: 106, option 0: the shoes do not fit: nothing more; freed: 106: completed, allegiance 3. Completed: Steamed
+# Rams accepted (a GM): 122; it set available, The Fighting Fourth accepted: 122.
+lists WindurstWatersS/Miah_Riyuh/onTrigger WindurstWatersS/onEventFinish/103 WindurstWatersS/onEventFinish/104 WindurstWatersS/onEventFinish/105 WindurstWatersS/onEventFinish/106 WestSarutabarutaS/Sealed_Entrance_1/onTrigger WestSarutabarutaS/Sealed_Entrance_2/onTrigger WestSarutabarutaS/Sealed_Entrance_3/onTrigger
+char zone=WestSarutabarutaS pos=-243.5,-18.1,660 job=WAR lvl=99
+mission Wotg BackToTheBeginning current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Sealed_Entrance_1               # available: DOOR_OFFSET + 3
+warp 265.1,-6.512,40 WestSarutabarutaS
+trigger Sealed_Entrance_2               # available: DOOR_OFFSET + 3
+warp -338.5,1.825,-364.825 WestSarutabarutaS
+trigger Sealed_Entrance_3               # available: DOOR_OFFSET + 3
+warp 6.823,-1,37.462 WindurstWatersS
+quest CrystalWar.SteamedRams accepted
+trigger Miah_Riyuh                      # Steamed Rams accepted: 122
+finish
+keyitem GreenRecommendationLetter
+trigger Miah_Riyuh                      # Steamed Rams accepted, the letter: still 122
+finish
+quest CrystalWar.SteamedRams available
+quest CrystalWar.TheFightingFourth accepted
+trigger Miah_Riyuh                      # The Fighting Fourth accepted: 122
+finish
+quest CrystalWar.TheFightingFourth available
+trigger Miah_Riyuh                      # the letter: 103
+finish option=2                         # nothing
+trigger Miah_Riyuh                      # 103
+finish option=0                         # begun; the putty; LetterUsed 1; the letter taken
+quest CrystalWar.SteamedRams accepted
+trigger Miah_Riyuh                      # accepted, Steamed Rams accepted: 122
+finish
+quest CrystalWar.SteamedRams available
+quest CrystalWar.TheFightingFourth accepted
+trigger Miah_Riyuh                      # accepted, The Fighting Fourth accepted: 122
+finish
+quest CrystalWar.TheFightingFourth available
+warp -243.5,-18.1,660 WestSarutabarutaS
+trigger Sealed_Entrance_1               # bit 0: DOOR_OFFSET + 1
+warp 6.823,-1,37.462 WindurstWatersS
+trigger Miah_Riyuh                      # 104 ([7] 1)
+finish option=1                         # deleted; the putty taken; Doors 0
+trigger Miah_Riyuh                      # LetterUsed: 105
+finish option=0                         # begun; the putty
+charvar Quest[7][8]Doors 8
+trigger Miah_Riyuh                      # Doors 8: not full, 104 ([7] 0)
+finish option=0                         # nothing
+warp -243.5,-18.1,660 WestSarutabarutaS
+trigger Sealed_Entrance_1               # bit 0 new (Doors 9, not full): DOOR_OFFSET + 1
+warp 6.823,-1,37.462 WindurstWatersS
+trigger Miah_Riyuh                      # 104 ([7] 1)
+finish option=0                         # nothing
+delkeyitem ZonpaZippasAllPurposePutty
+trigger Miah_Riyuh                      # no putty, not full: 121
+finish
+charvar Quest[7][8]Doors 15
+fill-inventory
+trigger Miah_Riyuh                      # Doors 15 (bits 0 to 2 set): 106
+finish option=0                         # the shoes do not fit: nothing more
+free-inventory
+trigger Miah_Riyuh                      # 106
+finish option=0                         # completed; allegiance 3
+quest CrystalWar.SteamedRams accepted
+trigger Miah_Riyuh                      # completed, Steamed Rams accepted: 122
+finish
+quest CrystalWar.SteamedRams available
+quest CrystalWar.TheFightingFourth accepted
+trigger Miah_Riyuh                      # completed, The Fighting Fourth accepted: 122
+finish

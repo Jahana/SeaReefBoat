@@ -1,0 +1,108 @@
+# To Bee or Not to Bee? (windurst 35): Zayhi-Bauhi, Raamimi, Kalupa-Tawalupa, Rutango-Botango (Windurst Walls; no
+# default action, no container; the standards 299 / 296 / 298 / 297 are their scripts'). A level-75 WAR with 5 Pots of
+# Honey. The Postman Always KO's Twice not completed: the four standards; a honey traded: nothing. Completed (GM), fame
+# 49 (level 1): 299; 50: 64 (var 10, no quest); Kalupa-Tawalupa 66, Rutango-Botango 65; 64 again. Raamimi 67 with no
+# free slot: ITEM_CANNOT_BE_OBTAINED, not begun; freed: begun, a honey. Accepted: Raamimi 68; Zayhi-Bauhi var 10: 64;
+# two honeys: nothing; one: 69 (var 1); Kalupa-Tawalupa 72, Rutango-Botango 71; the trigger at var 1: 69 (var 1 again);
+# then the honeys 70 (2), 73 (3), 74 (4) with a trigger at each, and 75: completed, fame 20, var 5, needToZone.
+# Completed with needToZone: 78, 77, 76; Raamimi var 5: 80 with no free slot: ITEM_CANNOT_BE_OBTAINED (Mulsum); freed:
+# var 0, 3 Mulsum, needToZone; then 79. needToZone with the quest available / accepted (GMs): 298 / 297. Rezoned: the
+# four standards. Also: a honey while available: nothing; a honey and another item, or another item alone: nothing.
+char zone=WindurstWalls pos=-88.0,-9.5,106.0 job=WAR lvl=75
+fame Windurst 50
+item PotOfHoney x5
+login
+trigger Zayhi-Bauhi                     # Postman not completed: his 299
+finish
+trade Zayhi-Bauhi PotOfHoney x1         # not accepted: nothing
+trigger Raamimi                         # var 0: his 296
+finish
+trigger Kalupa-Tawalupa                 # his 298
+finish
+trigger Rutango-Botango                 # his 297
+finish
+quest Windurst.ThePostmanAlwaysKosTwice completed
+fame Windurst 49
+trigger Zayhi-Bauhi                     # fame level 1: 299
+finish
+fame Windurst 50
+trigger Zayhi-Bauhi                     # level 2, Postman completed, available: 64
+finish                                  # var 10 (no quest yet)
+trigger Kalupa-Tawalupa                 # var 10: 66
+finish
+trigger Rutango-Botango                 # var 10: 65
+finish
+trigger Zayhi-Bauhi                     # available: 64 again
+finish
+trade Zayhi-Bauhi PotOfHoney x1         # available, var 10: nothing
+fill-inventory                          # no free slot
+trigger Raamimi                         # var 10, available: 67
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (honey); not begun
+free-inventory
+trigger Raamimi                         # 67
+finish                                  # begun; a Pot of Honey (ITEM_OBTAINED)
+trigger Raamimi                         # accepted: 68
+finish
+trigger Zayhi-Bauhi                     # accepted, var 10: 64
+finish                                  # var 10
+trade Zayhi-Bauhi PotOfHoney x2         # two: nothing
+item BlockOfAnimalGlue
+trade Zayhi-Bauhi PotOfHoney x1 BlockOfAnimalGlue x1  # a honey and another item: nothing
+trade Zayhi-Bauhi BlockOfAnimalGlue x1  # not a honey: nothing
+trade Zayhi-Bauhi PotOfHoney x1         # var 10: 69
+finish                                  # the honey taken; var 1
+trigger Kalupa-Tawalupa                 # accepted, var 1: 72
+finish
+trigger Rutango-Botango                 # accepted, var 1: 71
+finish
+trigger Zayhi-Bauhi                     # var 1: 69
+finish                                  # var 1 (tradeComplete with no trade)
+trade Zayhi-Bauhi PotOfHoney x1         # var 1: 70
+finish                                  # var 2
+trigger Zayhi-Bauhi                     # var 2: 70
+finish
+trade Zayhi-Bauhi PotOfHoney x1         # var 2: 73
+finish                                  # var 3
+trigger Zayhi-Bauhi                     # var 3: 73
+finish
+trade Zayhi-Bauhi PotOfHoney x1         # var 3: 74
+finish                                  # var 4
+trigger Zayhi-Bauhi                     # var 4: 74
+finish
+trade Zayhi-Bauhi PotOfHoney x1         # var 4: 75
+finish                                  # the honey taken; var 5; fame 20; completed; needToZone
+trigger Zayhi-Bauhi                     # completed, needToZone: 78
+finish
+trigger Kalupa-Tawalupa                 # completed, needToZone: 77
+finish
+trigger Rutango-Botango                 # completed, needToZone: 76
+finish
+rezone                                  # needToZone cleared: 80's finish sets it again
+fill-inventory
+trigger Raamimi                         # completed, var 5: 80
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (4156); var kept
+free-inventory
+trigger Raamimi                         # 80
+finish                                  # var 0; 3 Bottles of Mulsum (ITEMS_OBTAINED); needToZone
+trigger Raamimi                         # completed, var 0, needToZone: 79
+finish
+quest Windurst.ToBeeOrNotToBee available
+trigger Kalupa-Tawalupa                 # available, needToZone: 298
+finish
+trigger Rutango-Botango                 # available, needToZone: 297
+finish
+quest Windurst.ToBeeOrNotToBee accepted
+trigger Kalupa-Tawalupa                 # accepted, var 0, needToZone: 298
+finish
+trigger Rutango-Botango                 # accepted, var 0, needToZone: 297
+finish
+quest Windurst.ToBeeOrNotToBee completed
+rezone                                  # needToZone cleared
+trigger Zayhi-Bauhi                     # completed, no needToZone: 299
+finish
+trigger Raamimi                         # 296
+finish
+trigger Kalupa-Tawalupa                 # 298
+finish
+trigger Rutango-Botango                 # 297
+finish

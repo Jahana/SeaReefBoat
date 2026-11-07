@@ -1,0 +1,39 @@
+# Recollections (windurst 67): completed-state variants, a BLM 75 (The Three Magi completed by GM). 270, option 0:
+# begun; Laityn at var 0: 10003; Chumimi: the seeds: 271; the door: 8: Foe Finder MK I; Chumimi: 275: completed. Then
+# with a GM's vars, items and key item: the seeds at var 0: nothing; Laityn at var 0: 10006; the door's key at var 2:
+# nothing. Accepted again by GM with the key item (GM) and Wizard's Sabots held (the first completion's reward): 275;
+# npcUtil.giveItem refuses the rare sabots: nothing (the key item kept, still accepted).
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi completed
+item BagOfSeeds
+item WhineCellarKey
+login
+trigger Chumimi                         # 270
+finish option=0                         # begun
+warp -38.7,0.0,-58.2 RuludeGardens
+trigger Laityn                          # 10003
+finish                                  # var 1
+warp 0.0,30.75,21.5 HeavensTower
+trade Chumimi BagOfSeeds x1             # 271
+finish                                  # var 2
+warp -18.75,-3.0,68.5 CastleZvahlKeep
+trade _4i5 WhineCellarKey x1            # 8
+finish                                  # var 3; Foe Finder MK I
+warp 0.0,30.75,21.5 HeavensTower
+trigger Chumimi                         # 275
+finish                                  # completed; var 0
+item BagOfSeeds
+trade Chumimi BagOfSeeds x1             # completed, var 0: nothing
+warp -38.7,0.0,-58.2 RuludeGardens
+trigger Laityn                          # completed, var 0: his 10006
+finish
+warp -18.75,-3.0,68.5 CastleZvahlKeep
+item WhineCellarKey
+charvar recollectionsQuest 2
+trade _4i5 WhineCellarKey x1            # completed, var 2: nothing
+warp 0.0,30.75,21.5 HeavensTower
+quest Windurst.Recollections available  # GM: cleared first
+quest Windurst.Recollections accepted   # GM
+keyitem FoeFinderMkI
+trigger Chumimi                         # 275
+finish                                  # the sabots held (rare): refused; nothing changes

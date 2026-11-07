@@ -1,0 +1,25 @@
+# Inside the Belly (otherAreas 26): the accepted section's 166 / 167 finish.
+# FISHING_ENABLE (P6): `setting map.FISHING_ENABLE true` in the header; every section reads xi.settings.map.FISHING_ENABLE == true
+# (false in settings/default/map.lua).
+# Accepted (a GM), skill 30. A Sekiryu traded: confirmed now, <= 481: 166 (0, the Sekiryu's Liver); the finish gives the
+# liver and 1512 gil, completes the quest and adds fame +10 San d'Oria and Bastok. A GM then makes the quest available
+# and accepted again; a Zafmlug Bass traded: > 14: 167; the finish gives 15 gil, completes the quest and adds the fame.
+# A deliberate change from the Lua (user ruling 2026-11-04, kept Lua bugs): the lookup then runs the completed section's
+# finish too (its check holds once completed); the Lua's giveReward reads the cleared fishId (0) and raises on
+# fishRewards[0] (Inside_the_Belly.lua:546), the C# gives nothing there.
+warning: quests: otherAreas.inside_the_belly: one finish of 166 ran 2 handlers (2/-/onEventFinish:166, 3/-/onEventFinish:166) -- the Lua runs it twice too: its sections' checks at Inside_the_Belly.lua:651 (accepted) and :692 (completed) at lua-at 3cb2f487 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's completion lets the second match (on Lua it raises)
+warning: quests: otherAreas.inside_the_belly: one finish of 167 ran 2 handlers (2/-/onEventFinish:167, 3/-/onEventFinish:167) -- the Lua runs it twice too: its sections' checks at Inside_the_Belly.lua:651 (accepted) and :692 (completed) at lua-at 3cb2f487 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's completion lets the second match (on Lua it raises)
+lists Selbina/Zaldon/onTrade Selbina/onEventFinish/166 Selbina/onEventFinish/167
+char zone=Selbina pos=-10.3,-7.287,-6.742 job=WAR lvl=30
+setting map.FISHING_ENABLE true
+quest OtherAreas.InsideTheBelly accepted
+skill Fishing 300
+item Sekiryu
+item ZafmlugBass
+login
+trade Zaldon Sekiryu x1                 # accepted: confirmed now; <= 481: 166 (0, the liver)
+finish                                  # the liver, 1512 gil, completed, fame; the completed section's finish: nothing
+quest OtherAreas.InsideTheBelly available # a GM
+quest OtherAreas.InsideTheBelly accepted # a GM
+trade Zaldon ZafmlugBass x1             # accepted: confirmed now; > 14: 167
+finish                                  # 15 gil, completed, fame; the completed section's: nothing

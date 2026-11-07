@@ -1,0 +1,53 @@
+# The Sweetest Things (sandoria 8): Raimbroy in Southern San d'Oria (no NPC script, no default; Mixed Signals names him
+# in a .todo file only, not loaded). Fame 49 (level 1): no section, nothing. Fame 50: a trade while available (no trade
+# handler: nothing); 532 (Prog 1); 533 option 1 (Prog 2); 534 option 1 (nothing); 534 option 0 (begun). Accepted: 536
+# twice; a chip (522); four pots (522); five pots and a chip (522); six pots (522); five pots: 535 (400 x GIL_RATE: 400); its finish completes
+# it (fame +10, Apiarist), takes the pots, adds 400 gil and sets the local var Quest[0][8]firstComplete 1; the completed
+# state's finish of the same 535 then runs (firstComplete 1: cleared to 0, no second reward). Completed: 537; five pots
+# again: 535, finish (firstComplete 0): the pots taken, Apiarist, 400 gil, fame +10. A chip once completed: 522. A
+# local var 1 set by GM: five pots, 535, finish: only the latch cleared (the pots kept).
+# Both finishes run on the completing 535 (the latch is set and cleared in the same step): its finish (trace step 27)
+# pays once (gil 1000 to 1400), and the repeat's finish (trace step 31) pays (1400 to 1800, firstComplete 0).
+lists SouthernSanDoria/Raimbroy/onTrigger SouthernSanDoria/Raimbroy/onTrade SouthernSanDoria/onEventFinish/532 SouthernSanDoria/onEventFinish/533 SouthernSanDoria/onEventFinish/534 SouthernSanDoria/onEventFinish/535
+warning: quests: sandoria.the_sweetest_things: one finish of 535 ran 2 handlers (2/-/onEventFinish:535, 3/-/onEventFinish:535) -- the Lua runs it twice too: its sections at The_Sweetest_Things.lua:88 (accepted) and :118 (completed) at lua-at 9bfe87f0 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=SouthernSanDoria pos=-139.4,-3.0,34.7 job=WAR lvl=30
+fame Sandoria 49
+item PotOfHoney x12
+item PotOfHoney x12
+item BoneChip x2
+login
+trigger Raimbroy                          # fame level 1: no section; no script, no default: nothing
+finish-if-event
+fame Sandoria 50
+trade Raimbroy BoneChip x1                # available: no trade handler; nothing
+trigger Raimbroy                          # Prog 0: 532
+finish                                    # Prog 1
+trigger Raimbroy                          # Prog 1: 533
+finish option=1                           # not option 0: Prog 2
+trigger Raimbroy                          # Prog 2: 534
+finish option=1                           # not option 0: nothing
+trigger Raimbroy                          # 534
+finish                                    # option 0: begun
+trigger Raimbroy                          # accepted: 536
+finish
+trigger Raimbroy                          # accepted: 536 again (a completed-section 537 would take its turn in the action cycle)
+finish
+trade Raimbroy BoneChip x1                # not the honey: 522
+finish
+trade Raimbroy PotOfHoney x4              # four: 522
+finish
+trade Raimbroy PotOfHoney x5 BoneChip x1  # five and a chip (not exact): 522
+finish
+trade Raimbroy PotOfHoney x6              # six (not exact): 522
+finish
+trade Raimbroy PotOfHoney x5              # exactly five: 535 (400)
+finish                                    # completed: fame +10, Apiarist; the pots taken; 400 gil; firstComplete 1, then cleared by the completed state's 535
+trigger Raimbroy                          # completed: 537
+finish
+trade Raimbroy PotOfHoney x5              # completed, five pots: 535 (400)
+finish                                    # firstComplete 0: the pots taken; Apiarist; 400 gil; fame +10
+trade Raimbroy BoneChip x1                # completed, not the honey: 522
+finish
+localvar Quest[0][8]firstComplete 1
+trade Raimbroy PotOfHoney x5              # completed, five pots: 535 (400)
+finish                                    # firstComplete 1: cleared to 0; the pots kept, no reward

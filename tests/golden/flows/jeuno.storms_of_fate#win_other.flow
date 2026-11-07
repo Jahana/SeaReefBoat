@@ -1,0 +1,55 @@
+# Storms of Fate (jeuno 86): the 32001 handler's other sides, each a real win of the Storms of Fate battlefield (index 0,
+# area 1, the zone's only one) with one operand changed by a GM while 32001 is open. A level 75 Warrior by
+# Unstable_Displacement in Riverne Site #B01, the quest accepted at Prog 2 (a GM, before login; the battlefield takes a
+# registrant only at Prog 2). After each finish the char is warped out of the arena (a zone change: the battlefield
+# empties and closes) and enters again:
+# - battlefieldWin 895 (a GM; the fight's id is 896): nothing (no key item, Prog 2);
+# - battlefieldWin 897: nothing;
+# - Prog 1 (a GM): nothing (no key item, Prog 1); Prog 2 again by a GM;
+# - Prog 3 (a GM): nothing (no key item, Prog 3); Prog 2 again;
+# - the quest set available by a GM: no state holds a 32001 finish: nothing.
+lists RiverneSiteB01/Unstable_Displacement/onTrigger RiverneSiteB01/onEventFinish/32001
+char zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+quest Jeuno.StormsOfFate accepted
+charvar Quest[3][86]Prog 2
+login
+trigger Unstable_Displacement           # Prog 2: the 32000 menu
+update 32000 option=1                   # index 0, area 1: registered, entered
+finish
+kill BAHAMUT                            # won: battlefieldWin 896, 32001 opens
+localvar battlefieldWin 895             # a GM
+finish                                  # 32001, battlefieldWin 895: nothing (Prog 2, no key item)
+warp -611.3,1.8,693.2 RiverneSiteB01    # a GM: out of the arena
+tick 10000                              # the battlefield closes (an entry right after a win is refused)
+trigger Unstable_Displacement           # Prog 2: the 32000 menu
+update 32000 option=1
+finish
+kill BAHAMUT                            # won: battlefieldWin 896, 32001 opens
+localvar battlefieldWin 897             # a GM
+finish                                  # 32001, battlefieldWin 897: nothing
+warp -611.3,1.8,693.2 RiverneSiteB01
+tick 10000
+trigger Unstable_Displacement
+update 32000 option=1
+finish
+kill BAHAMUT                            # won: battlefieldWin 896, 32001 opens
+charvar Quest[3][86]Prog 1              # a GM, while 32001 is open
+finish                                  # 32001, Prog 1: nothing (no key item)
+charvar Quest[3][86]Prog 2              # a GM
+warp -611.3,1.8,693.2 RiverneSiteB01
+tick 10000
+trigger Unstable_Displacement
+update 32000 option=1
+finish
+kill BAHAMUT                            # won: battlefieldWin 896, 32001 opens
+charvar Quest[3][86]Prog 3              # a GM, while 32001 is open
+finish                                  # 32001, Prog 3: nothing (no key item, Prog 3)
+charvar Quest[3][86]Prog 2              # a GM
+warp -611.3,1.8,693.2 RiverneSiteB01
+tick 10000
+trigger Unstable_Displacement
+update 32000 option=1
+finish
+kill BAHAMUT                            # won: battlefieldWin 896, 32001 opens
+quest Jeuno.StormsOfFate available      # a GM, while 32001 is open
+finish                                  # no state with a 32001 finish: nothing (no key item)

@@ -1,0 +1,36 @@
+# Peace for the Spirit (sandoria 86): the Northern San d'Oria zone-in (CS == 5 and a free slot, in any status) and 49's
+# finish (npcUtil.completeQuest's result decides the CS reset). Accepted by GM, Flyers for Regine accepted by GM with a
+# Magicmart Flyer; the first visit's two mission events first (30035, RoV 1-1's; 878, SoA 1-1's). CS 4 and CS 6: no 49; CS 5 with a
+# full inventory: no 49; Coullene takes the flyer (exactly one slot free): 49, left open, no update handler; the slot
+# filled by GM while it is open: the finish cannot give the chapeau (ITEM_CANNOT_BE_OBTAINED), not completed, CS stays
+# 5; room again: 49, completed, CS 0. Set available, then completed, at CS 5: 49 each time, the chapeau held (rare):
+# ITEM_CANNOT_BE_OBTAINED, CS stays 5 (#available completes it from available).
+char zone=NorthernSanDoria pos=144.4,0.0,127.6 job=RDM lvl=50
+quest Sandoria.PeaceForTheSpirit accepted
+quest Sandoria.FlyersForRegine accepted
+item MagicmartFlyer
+login                                     # the first visit: 30035 (RoV 1-1 Rhapsodies of Vana'diel; wins over the zone's onZoneIn, which runs too)
+rezone                                    # 878 (SoA 1-1 Rumors from the West; wins over the zone's onZoneIn, which runs too)
+charvar peaceForTheSpiritCS 4
+rezone                                    # CS 4: no 49
+charvar peaceForTheSpiritCS 6
+rezone                                    # CS 6: no 49
+charvar peaceForTheSpiritCS 5
+fill-inventory
+rezone                                    # CS 5, no free slot: no 49
+trade Coullene MagicmartFlyer x1          # Flyers for Regine: the flyer taken; one slot free
+rezone open                               # CS 5, exactly one free slot: 49, left open
+update 49 option=0                        # no update handler either side
+fill-inventory                            # GM, 49 open: no slot free
+finish                                    # the chapeau cannot be given: not completed; CS stays 5
+free-inventory
+rezone open                               # CS 5, free slots: 49
+finish                                    # completed: Warlock's Chapeau, the title; CS 0
+quest Sandoria.PeaceForTheSpirit available
+charvar peaceForTheSpiritCS 5
+rezone open                               # available, CS 5: 49
+finish option=1                           # the option is not read; the chapeau held (rare): not completed, CS stays 5
+quest Sandoria.PeaceForTheSpirit completed
+charvar peaceForTheSpiritCS 5
+rezone open                               # completed, CS 5: 49
+finish                                    # the chapeau held

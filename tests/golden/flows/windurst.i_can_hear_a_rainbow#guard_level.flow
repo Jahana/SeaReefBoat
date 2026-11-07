@@ -1,0 +1,16 @@
+# I Can Hear a Rainbow (windurst 75): the offer's level operand, getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL, at
+# the House of the Hero (_6n2, Windurst Walls), with the ruby. Level 29: with the setting at 30 (default): not met, the
+# door's default DOORS_SEALED_SHUT; at 29.4 (a decimal: Lua compares 29 >= 29.4, false; a rounded read would pass): not
+# met; at 29: met, 384 (0, the ruby), begun. The met side at the default setting is the main flow's level 30.
+lists WindurstWalls/_6n2/onTrigger WindurstWalls/onEventFinish/384
+char zone=WindurstWalls pos=-24.5,-14.498,262.994 lvl=29
+item CarbunclesRuby
+login
+trigger _6n2                                   # level 29 < 30: not met; DOORS_SEALED_SHUT
+finish-if-event
+setting ADVANCED_JOB_LEVEL 29.4
+trigger _6n2                                   # 29 < 29.4: not met; DOORS_SEALED_SHUT
+finish-if-event
+setting ADVANCED_JOB_LEVEL 29
+trigger _6n2                                   # 29 >= 29: 384 (0, the ruby)
+finish                                         # begun

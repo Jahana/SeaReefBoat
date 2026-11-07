@@ -1,0 +1,74 @@
+# Promotion: Second Lieutenant's edges. Main (Chief Sergeant completed, AssaultPromotion 25): walked into area 3 from
+# the south: 5071, finished: begun. bob (accepted at Prog 1 by GMs, the local var 1 by a GM, two Mythril Pieces and a
+# Troll Pauldron): Abquhbah nil: 255; the Troll Pauldron at Prog 1: no match: nil; two Mythril Pieces: 5075, option 1:
+# Prog 2, local 0. Prog 3 (a GM) with the Troll Pauldron and a Bone Chip together: not one item alone: nil: nothing.
+# carl (Chief Sergeant completed, AssaultPromotion 24): 255; dan (AssaultPromotion 25, Chief Sergeant accepted): 255.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventFinish/5071 AhtUrhganWhitegate/Abquhbah/onTrigger AhtUrhganWhitegate/Abquhbah/onTrade
+char zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=39.524,-6.601,-62 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=39.524,-6.601,-62 job=WAR lvl=1
+char dan zone=AhtUrhganWhitegate pos=39.524,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionSergeantMajor completed
+quest AhtUrhgan.PromotionChiefSergeant completed
+charvar AssaultPromotion 25
+bob: quest AhtUrhgan.PromotionPrivateFirstClass completed
+bob: quest AhtUrhgan.PromotionSuperiorPrivate completed
+bob: quest AhtUrhgan.PromotionLanceCorporal completed
+bob: quest AhtUrhgan.PromotionCorporal completed
+bob: quest AhtUrhgan.PromotionSergeant completed
+bob: quest AhtUrhgan.PromotionSergeantMajor completed
+bob: quest AhtUrhgan.PromotionChiefSergeant completed
+bob: quest AhtUrhgan.PromotionSecondLieutenant accepted
+bob: charvar Quest[6][97]Prog 1
+bob: item ImperialMythrilPiece
+bob: item ImperialMythrilPiece
+bob: item TrollPauldron
+bob: item BoneChip
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+carl: quest AhtUrhgan.PromotionSuperiorPrivate completed
+carl: quest AhtUrhgan.PromotionLanceCorporal completed
+carl: quest AhtUrhgan.PromotionCorporal completed
+carl: quest AhtUrhgan.PromotionSergeant completed
+carl: quest AhtUrhgan.PromotionSergeantMajor completed
+carl: quest AhtUrhgan.PromotionChiefSergeant completed
+carl: charvar AssaultPromotion 24
+dan: quest AhtUrhgan.PromotionPrivateFirstClass completed
+dan: quest AhtUrhgan.PromotionSuperiorPrivate completed
+dan: quest AhtUrhgan.PromotionLanceCorporal completed
+dan: quest AhtUrhgan.PromotionCorporal completed
+dan: quest AhtUrhgan.PromotionSergeant completed
+dan: quest AhtUrhgan.PromotionSergeantMajor completed
+dan: quest AhtUrhgan.PromotionChiefSergeant accepted
+dan: charvar Quest[6][96]Prog 3
+dan: charvar AssaultPromotion 25
+login
+tick 1000
+tick 1000
+tick 1000
+walk 37.024,-6.5,-56                    # area 3, available: 5071
+finish                                  # begun
+logout
+bob: login
+bob: localvar Quest[6][97]Prog 1        # a GM: the reminder seen
+bob: trigger Abquhbah at=4              # Prog 1, local 1: nil: 255
+bob: finish
+bob: trade Abquhbah TrollPauldron x1    # Prog 1: no match: nil: nothing
+bob: finish-if-event
+bob: trade Abquhbah ImperialMythrilPiece x2   # 5075
+bob: finish option=1                    # Prog 2; local 0
+bob: charvar Quest[6][97]Prog 3         # a GM
+bob: trade Abquhbah TrollPauldron x1 BoneChip x1   # not one item alone: nil: nothing
+bob: finish-if-event
+bob: logout
+carl: login
+carl: trigger Abquhbah at=4             # AssaultPromotion 24: no section: 255
+carl: finish
+carl: logout
+dan: login
+dan: trigger Abquhbah at=4              # Chief Sergeant accepted (Prog 3, no sprouts): its nil: 255
+dan: finish

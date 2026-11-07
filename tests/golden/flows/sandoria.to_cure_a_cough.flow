@@ -1,0 +1,60 @@
+# To Cure a Cough (sandoria 20): Nenne and Amaura in Southern San d'Oria, the qm1 in Davoi. Available, The Medicine Woman
+# not completed: Nenne's 584 (the script's). The Diary (its script, Lua) read to page 2 (639 option 0, 640 option 2):
+# Amaura answers with her default 642 only (the quest silent). The Diary's page 3 (641 option 3, The Medicine Woman and A
+# Squire's Test II both available). The Medicine Woman completed (GM): Nenne's 538 (toCureaCough 1), then 584. Amaura
+# at DiaryPage 3: her default 642 and the quest's 645 alternate (the script runs on every second talk); 645's finish
+# begins the quest, and again (addQuest, still accepted). Accepted: the qm1 gives the Thyme Moss, then nothing (the moss
+# held); Amaura's 646 (the moss taken, the Cough Medicine given); with the medicine only the quest is silent (642);
+# Nenne's 647 (A Moss Kind Person, toCureaCough 0, the medicine taken, the Scroll of Treasure, fame +30, completed).
+# Completed: Nenne's 584, the qm1 nothing.
+char zone=SouthernSanDoria pos=-112.6,-6.9,105.2 job=WAR lvl=30
+login
+trigger Nenne                             # available, The Medicine Woman not completed: 584
+finish
+warp -71.3,-12.8,65.7 SouthernSanDoria
+trigger Diary                             # page 0: 639
+finish option=0                           # DiaryPage 1
+trigger Diary                             # 640
+finish option=2                           # DiaryPage 2
+warp -82.4,-6.9,91.1 SouthernSanDoria
+trigger Amaura                            # DiaryPage 2, available: 642 (default)
+finish-if-event
+trigger Amaura                            # the script: the quest silent; 642
+finish-if-event
+warp -71.3,-12.8,65.7 SouthernSanDoria
+trigger Diary                             # page 2, The Medicine Woman and A Squire's Test II available: 641
+finish option=3                           # DiaryPage 3
+quest Sandoria.TheMedicineWoman completed
+warp -112.6,-6.9,105.2 SouthernSanDoria
+trigger Nenne                             # available, toCureaCough 0, The Medicine Woman completed: 538
+finish                                    # toCureaCough 1
+trigger Nenne                             # toCureaCough 1: 584
+finish
+warp -82.4,-6.9,91.1 SouthernSanDoria
+trigger Amaura                            # DiaryPage 3, available, no key item
+finish-if-event
+trigger Amaura                            # 645 (the previous talk, line 34, took 642)
+finish-if-event                           # 645: begun
+trigger Amaura                            # accepted, no key item
+finish-if-event
+trigger Amaura                            # 645 again (the previous talk, line 38, took 642)
+finish-if-event                           # 645: addQuest again, still accepted
+warp -113.8,-0.4,-184.3 Davoi
+trigger qm1                               # accepted, no moss: the Thyme Moss
+trigger qm1                               # the moss held: nothing
+warp -82.4,-6.9,91.1 SouthernSanDoria
+trigger Amaura                            # the moss
+finish-if-event
+trigger Amaura                            # 646 (the previous talk, line 46, took 642)
+finish-if-event                           # 646: the moss taken; the Cough Medicine
+trigger Amaura                            # the medicine, no moss: the quest silent
+finish-if-event
+trigger Amaura
+finish-if-event
+warp -112.6,-6.9,105.2 SouthernSanDoria
+trigger Nenne                             # the medicine: 647
+finish                                    # completed: A Moss Kind Person, toCureaCough 0, the Scroll of Treasure, fame +30
+trigger Nenne                             # completed, no medicine: 584
+finish
+warp -113.8,-0.4,-184.3 Davoi
+trigger qm1                               # completed: nothing

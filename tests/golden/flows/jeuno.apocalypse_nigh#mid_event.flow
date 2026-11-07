@@ -1,0 +1,76 @@
+# Apocalypse Nigh (jeuno 89): the updates and finishes when their state no longer holds (a GM changes the quest's status
+# while the event is open). A level 75 Warrior of Bastok at rank 6, Shadows of the Departed completed.
+# - 123 open, Shadows of the Departed set available (not completed): the finish finds no state: not begun.
+# - Accepted (a GM), Sealion's Den (warp open): 29 open; the quest set available: update 0: nothing; finish: nothing (Prog 0).
+# - Accepted at Prog 1: _iya's 4 open; available: finish: nothing (Prog 1, no set-down).
+# - Accepted at Prog 2: TR_Entrance's 4 open; available: finish: nothing (Prog 2).
+# - Accepted at Prog 4: rezone open: 7 open; available: update 0: nothing; finish: nothing (no title, no set-down).
+# - Accepted at Prog 4: Aldo's 10057 open; available: finish: nothing (Prog 4).
+# - Accepted at Prog 5, Timer 8001: _700's 235 open; available: finish: nothing (no mustZone).
+# - Accepted at Prog 5, Timer 0: Gilgamesh's 232 open; available: update 99: nothing; finish 4: nothing (no earring, Prog 5).
+# - Accepted at Prog 6: Gilgamesh's 234 open; available: finish 0: nothing (Prog 6 kept, not set).
+# - Completed: qm1's 5 open; accepted: finish 1: nothing (no mission rewound, no quest deleted).
+lists RuludeGardens/onEventFinish/123 SealionsDen/onEventUpdate/29 SealionsDen/onEventFinish/29 GrandPalaceOfHuxzoi/onEventFinish/4 EmpyrealParadox/onEventFinish/4 EmpyrealParadox/onEventUpdate/7 EmpyrealParadox/onEventFinish/7 LowerJeuno/onEventFinish/10057 Norg/onEventFinish/235 Norg/onEventUpdate/232 Norg/onEventFinish/232 Norg/onEventFinish/234 EmpyrealParadox/onEventFinish/5
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75 nation=1
+rank 6
+quest Jeuno.ShadowsOfTheDeparted completed
+mission Cop TheLastVerse current
+mission Zilart TheLastVerse current
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # 123
+quest Jeuno.ShadowsOfTheDeparted available  # a GM, while 123 is open (delQuest: the completed bit cleared)
+finish                                  # no state: not begun
+quest Jeuno.ShadowsOfTheDeparted completed  # a GM
+quest Jeuno.ApocalypseNigh accepted     # a GM
+warp 600.1,130.4,797.6 SealionsDen open # Prog 0: 29 open
+quest Jeuno.ApocalypseNigh available    # a GM, while 29 is open
+update 29 option=0                      # no state: nothing
+finish                                  # no state: nothing (Prog 0)
+quest Jeuno.ApocalypseNigh accepted     # a GM
+charvar Quest[3][89]Prog 1              # a GM
+warp -18.5,-2.3,-280.2 GrandPalaceOfHuxzoi  # by _iya
+trigger _iya                            # Prog 1: 4
+quest Jeuno.ApocalypseNigh available    # a GM
+finish                                  # nothing: Prog 1, no set-down
+quest Jeuno.ApocalypseNigh accepted     # a GM
+charvar Quest[3][89]Prog 2              # a GM
+warp 541.5,-1.2,-597.7 EmpyrealParadox  # by TR_Entrance
+trigger TR_Entrance                     # Prog 2: 4
+quest Jeuno.ApocalypseNigh available    # a GM
+finish                                  # nothing: Prog 2
+quest Jeuno.ApocalypseNigh accepted     # a GM
+charvar Quest[3][89]Prog 4              # a GM
+rezone open                             # the zone-in at Prog 4: 7 open
+quest Jeuno.ApocalypseNigh available    # a GM
+update 7 option=0                       # no state: nothing
+finish                                  # nothing: no title, no set-down
+quest Jeuno.ApocalypseNigh accepted     # a GM
+warp 22.5,3.9,-61.5 LowerJeuno          # by Aldo
+trigger Aldo                            # Prog 4, rank 6: 10057
+quest Jeuno.ApocalypseNigh available    # a GM
+finish                                  # nothing: Prog 4
+quest Jeuno.ApocalypseNigh accepted     # a GM
+charvar Quest[3][89]Prog 5              # a GM
+charvar Quest[3][89]Timer 8001          # a GM
+warp 103.5,-8.6,-12 Norg                # by _700
+trigger _700                            # Prog 5, Timer 8001: 235
+quest Jeuno.ApocalypseNigh available    # a GM
+finish                                  # nothing: no mustZone
+quest Jeuno.ApocalypseNigh accepted     # a GM
+charvar Quest[3][89]Timer 0             # a GM
+trigger Gilgamesh                       # Prog 5: 232 (252, 6)
+quest Jeuno.ApocalypseNigh available    # a GM
+update 232 option=99                    # no state: nothing
+finish option=4                         # no state: nothing (no earring, Prog 5)
+quest Jeuno.ApocalypseNigh accepted     # a GM
+charvar Quest[3][89]Prog 6              # a GM
+trigger Gilgamesh                       # Prog 6: 234 (252)
+quest Jeuno.ApocalypseNigh available    # a GM
+finish option=0                         # no state: nothing
+quest Jeuno.ApocalypseNigh completed    # a GM
+warp 534.6,-1,-592.2 EmpyrealParadox    # by qm1
+trigger qm1                             # completed, no earring: 5
+quest Jeuno.ApocalypseNigh available    # a GM (completeQuest's bit cleared)
+quest Jeuno.ApocalypseNigh accepted     # a GM
+finish option=1                         # accepted: no 5 finish: nothing (no mission rewound)

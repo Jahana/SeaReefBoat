@@ -1,0 +1,12 @@
+# Gullible's Travels, Magriffon's trade if / elseif: Gullible's Travels accepted (a GM) with MAGRIFFON_GIL_REQUEST 40000
+# (a GM: above any sum the script draws) and Even More Gullible's Travels accepted at progress 0 (a GM). 35000 gil traded:
+# less than the sum: nothing; the Gullible's arm ends the trade, so Even More's 150 (35000) is not tried. Talk: 145 (0,
+# 40000): the Gullible's arm first.
+char zone=Kazham pos=62.6,-12,-33.9 job=WAR lvl=75 gil=100000
+quest Outlands.GulliblesTravels accepted
+quest Outlands.EvenMoreGulliblesTravels accepted
+charvar MAGRIFFON_GIL_REQUEST 40000
+login
+trade Magriffon gil=35000               # Gullible's accepted, less than 40000: nothing (no fall to Even More's 150)
+trigger Magriffon                       # Gullible's accepted: 145 (0, 40000)
+finish

@@ -1,0 +1,35 @@
+# Requiem of Sin (otherAreas 83): Tavnazian Safehold's Despachiaire (no script, default 106) and Boneyard Gully's
+# battlefield 678 (entry _081, index 6; its own checkRequirements: the Letter from Shikaree Y or the Letter from the
+# Mithran Trackers, no quest status). Tango with a Tracker completed (a GM); a fresh CoP log (no mission reply).
+# NextConquestTally() is 1800198000. Despachiaire (the wait 0, Prog 0): 578, finished: the letter Y, the wait
+# 1800198000, Prog 1; again: nil, 106; again with the wait 0 (a GM; Prog 1 alone keeps it off): nil, 106; the wait back
+# (a GM). The battlefield entered: begun, the letter spent; won by bfwin (the three Shikarees' deaths open an Armoury
+# Crate, whose trigger sets the win with a 5-tick exit delay that no flow step reached), 32001 (battlefieldWin 678),
+# finished: completed (Disciple of Justice). Completed, the wait = the tally: no section, 106. Three JST days on: 579,
+# finished: the Letter from the Mithran Trackers, the wait 1800802800; again: no section, 106.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/578 TavnazianSafehold/onEventFinish/579 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+quest OtherAreas.TangoWithATracker completed
+login
+trigger Despachiaire                    # available, the wait 0, Prog 0: 578
+finish                                  # the letter Y; the wait 1800198000; Prog 1
+trigger Despachiaire                    # Prog 1: nil; 106
+finish
+charvar ShikareeBattleWait 0            # a GM
+trigger Despachiaire                    # Prog 1, the wait below the tally: nil; 106
+finish
+charvar ShikareeBattleWait 1800198000   # a GM: back to the tally
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081                            # the letter: the 32000 menu
+update 32000 option=97                  # index 6, area 1: Requiem of Sin (678)
+finish                                  # in 678: begun; the letter spent
+bfwin                                   # a GM: won; 32001
+finish                                  # battlefieldWin 678: completed
+warp 112.7,-40,-85.5 TavnazianSafehold
+trigger Despachiaire                    # completed, the wait = the tally: no section; 106
+finish
+wait jst=3                              # Monday: the tally 1800802800
+trigger Despachiaire                    # 579
+finish                                  # the Mithran Trackers' letter; the wait 1800802800
+trigger Despachiaire                    # the wait = the tally: no section; 106
+finish

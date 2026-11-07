@@ -1,0 +1,35 @@
+# Dances with Luopans (adoulin 118), the Matre Bell's sale for gil: a level 99 Geomancer in Western Adoulin, the quest
+# completed (a GM), no Matre Bell, 300000 gil, no bayld. Sylvie: 37 (MatreBellPayment 0); update 1: param 1
+# (payment 1); finished on 0, and again on 2: the payment cleared, nothing. Update 1, then update 2 (no bayld): the
+# payment back to 0, param 0; finished on 1: nothing. Update 1, the inventory filled (a GM, the event open), finished
+# on 1: npcUtil.giveItem fails: no gil taken. Full: update 1: param 2; finished on 1: nothing. One free slot (a GM,
+# inventory 31): update 1: param 1; finished on 1: the Matre Bell, 300000 gil taken. With the bell: 39. The bayld:
+# #bell_bayld; too little: #bell_poor.
+lists WesternAdoulin/Sylvie/onTrigger WesternAdoulin/onEventUpdate/37 WesternAdoulin/onEventFinish/37
+char zone=WesternAdoulin pos=79.594,32,135.725 job=GEO lvl=99 gil=300000
+quest Adoulin.DancesWithLuopans completed
+login
+trigger Sylvie                          # completed, a Geomancer, no bell: 37 (MatreBellPayment 0)
+update 37 option=1                      # 300000 gil: param 1, payment 1
+finish option=0                         # payment cleared; not option 1: nothing
+trigger Sylvie                          # 37
+update 37 option=1                      # param 1, payment 1
+finish option=2                         # payment cleared; not option 1: nothing
+trigger Sylvie                          # 37
+update 37 option=1                      # param 1, payment 1
+update 37 option=2                      # no bayld: payment 0 again, param 0
+finish option=1                         # no payment: nothing
+trigger Sylvie                          # 37
+update 37 option=1                      # param 1, payment 1
+fill-inventory                          # a GM, the event open
+finish option=1                         # npcUtil.giveItem fails (no room): no gil taken
+trigger Sylvie                          # 37
+update 37 option=1                      # no free slot: param 2
+finish option=1                         # no payment: nothing
+storage inventory 31                    # a GM: one free slot
+trigger Sylvie                          # 37
+update 37 option=1                      # one free slot (not below 1): param 1, payment 1
+finish option=1                         # the Matre Bell (in the free slot); 300000 gil taken
+free-inventory
+trigger Sylvie                          # the bell held: 39 (replaceDefault)
+finish

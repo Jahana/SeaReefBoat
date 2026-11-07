@@ -1,0 +1,123 @@
+# The Pickpocket (sandoria 3): Miene and Altiret in Port San d'Oria, Esca in West Ronfaure, and 31 bystanders in Port
+# and Northern San d'Oria and West Ronfaure. Prog 0 (check 1 holds): Answald (no section: his default 584), Altiret
+# (his default 559), a chip to Altiret (no quest trade handler: his script's 551), a chip to Miene (her script: Flyers
+# for Regine not accepted, nothing); Miene's 502 (Prog 1). Prog 1 (available): a chip to Miene (nothing); Miene's 554;
+# Answald's line (check 2's first operand); Comittie's line once per zone, then his script's delivery text and send box;
+# a chip to Altiret (551); Altiret's 547 (begun, Prog 0). Accepted without the glasses (check 2's second operand):
+# every other bystander's line (Meinemelle twice, as Comittie; Aurege's important once, then Exit the Gambler's 514;
+# Maurinne's sequence); Miene's 549 (the Eagle Button, Stage 1), then nil (the button held: her default 553); Esca's
+# 120, a chip (122), the button and a chip (not tradeMatches: 122), the button (121: the Gilt Glasses, the button
+# taken), her 123; with the glasses Adalefont is back to his default (check 2 false); Miene with the glasses (nil, 553).
+# Altiret's 547, a chip (551), the glasses and a chip (551), the glasses (550: completed, Light Axe, fame +20,
+# Pickpocket Pincher, the glasses taken); then his 580, Answald's default, Esca's 123. Completed with Prog 1 by GM (the
+# status operands of check 2's first disjunct and of check 3): Adalefont's default, Altiret's 580.
+# Exit the Gambler is completed in the setup so Aurege and Guilberdrier answer for this quest (its available 521, a
+# Progress event, would win; completed, its replies are replaceDefault, priority 20, under these lines' 50 / 100).
+# Scripts: Miene, Altiret, Answald, Guilberdrier have only onTrade; Artinien and Brifalien only onSpawn (they walk);
+# Parcarin's onTrigger does nothing; Comittie's and Meinemelle's always show ITEM_DELIVERY_DIALOG and open the send box;
+# Palcomondau's and Zovriace's (they walk) always show a line: their bystander line plays on the first talk (the
+# alternation's quest turn), so each is talked to once. The rest have no script. The char is a Bastok char (no nation=).
+lists PortSanDoria/Miene/onTrigger PortSanDoria/Altiret/onTrigger PortSanDoria/Altiret/onTrade PortSanDoria/onEventFinish/502 PortSanDoria/onEventFinish/547 PortSanDoria/onEventFinish/549 PortSanDoria/onEventFinish/550 PortSanDoria/Answald/onTrigger PortSanDoria/Comittie/onTrigger NorthernSanDoria/Aurege/onTrigger NorthernSanDoria/Maurinne/onTrigger WestRonfaure/Esca/onTrigger WestRonfaure/Esca/onTrade WestRonfaure/onEventFinish/121 WestRonfaure/Adalefont/onTrigger
+char zone=PortSanDoria pos=2.25,-4,-81.438 job=WAR lvl=10
+quest Sandoria.ExitTheGambler completed
+item BoneChip
+login
+trigger Answald                           # Prog 0: no section; his default 584
+finish
+trigger Altiret                           # Prog 0: no section; his default 559
+finish
+trade Altiret BoneChip x1                 # available, Prog 0: no quest trade handler; his script's 551
+finish
+walk 2.25,-4,-81.438
+trade Miene BoneChip x1                   # available, Prog 0: no quest trade handler; her script: nothing
+trigger Miene                             # Prog 0: 502
+finish                                    # Prog 1
+trade Miene BoneChip x1                   # available, Prog 1: nothing
+trigger Miene                             # Prog 1: 554
+finish
+trigger Answald                           # Prog 1 (available): PICKPOCKET_ANSWALD
+trigger Comittie                          # PICKPOCKET_COMITTIE (once per zone)
+trigger Comittie                          # spent in this zone: his script's ITEM_DELIVERY_DIALOG, the send box
+walk 22.763,-3.999,-65.776
+trade Altiret BoneChip x1                 # available, Prog 1: no quest trade handler; his script's 551
+finish
+trigger Altiret                           # Prog 1: 547
+finish                                    # begun; Prog 0
+trigger Artinien                          # accepted, no glasses: PICKPOCKET_ARTINIEN
+trigger Avandale                          # PICKPOCKET_AVANDALE
+trigger Brifalien                         # PICKPOCKET_BRIFALIEN
+trigger Coribalgeant                      # PICKPOCKET_CORIBALGEANT
+trigger Crilde                            # PICKPOCKET_CRILDE
+trigger Eaugouint                         # PICKPOCKET_EAUGOUINT
+trigger Laucimercen                       # PICKPOCKET_LAUCIMERCEN
+trigger Marquie                           # PICKPOCKET_MARQUIE
+trigger Maunadolace                       # PICKPOCKET_MAUNADOLACE
+trigger Meinemelle                        # PICKPOCKET_MEINEMELLE (once per zone)
+trigger Meinemelle                        # spent: her script's ITEM_DELIVERY_DIALOG, the send box
+trigger Meuxtajean                        # PICKPOCKET_MEUXTAJEAN
+trigger Noquerelle                        # PICKPOCKET_NOQUERELLE
+trigger Parcarin                          # PICKPOCKET_PARCARIN
+trigger Rielle                            # PICKPOCKET_RIELLE
+trigger Sheridan                          # PICKPOCKET_SHERIDAN
+trigger Solgierte                         # PICKPOCKET_SOLGIERTE
+trigger Miene                             # Stage 0, a free slot: 549
+finish                                    # the Eagle Button; Stage 1
+trigger Miene                             # Stage 1, the button held: nil; her default 553
+finish
+warp -154.753,12,253.691 NorthernSanDoria
+trigger Aurege                            # PICKPOCKET_AUREGE (important once: priority Event)
+trigger Aurege                            # performed: priority Default; Exit the Gambler's completed 514 (replaceDefault)
+finish
+trigger Guilberdrier                      # PICKPOCKET_GUILBERDRIER (over Exit the Gambler's HE_WAS_JUST_HERE)
+trigger Pepigort                          # PICKPOCKET_PEPIGORT
+trigger Gilipese                          # PICKPOCKET_GILIPESE
+trigger Maurinne                          # the sequence: PICKPOCKET_MAURINNE, 1 s, the next line facing 82, 2 s, face 115
+tick 4000                                 # the sequence's waits run out; released
+trigger Rodaillece                        # PICKPOCKET_RODAILLECE (important once)
+warp -431.753,-45.942,342.29 WestRonfaure
+trigger Aaveleon                          # PICKPOCKET_AAVELEON (A Sentry's Peril not accepted)
+trigger Palcomondau                       # PICKPOCKET_PALCOMONDAU (the quest's turn)
+warp -174.5,-61.999,380 WestRonfaure
+trigger Adalefont                         # PICKPOCKET_ADALEFONT
+trigger Gachemage                         # PICKPOCKET_GACHEMAGE
+trigger Colmaie                           # PICKPOCKET_COLMAIE
+trigger Laillera                          # PICKPOCKET_LAILLERA
+warp -444.849,-15.272,-260.577 WestRonfaure
+trigger Zovriace                          # PICKPOCKET_ZOVRIACE (the quest's turn)
+warp -622.731,-51.499,278.369 WestRonfaure
+trigger Esca                              # no glasses: 120
+finish
+trade Esca BoneChip x1                    # not the button: 122
+finish
+trade Esca EagleButton x1 BoneChip x1     # not just one button (tradeMatches): 122
+finish
+trade Esca EagleButton x1                 # just the button: 121
+finish                                    # the Gilt Glasses (fromTrade); the button taken
+trigger Esca                              # the glasses: 123
+finish
+warp -174.5,-61.999,380 WestRonfaure
+trigger Adalefont                         # the glasses held: check 2 false; his default ADALEFONT_DIALOG
+warp 22.763,-3.999,-65.776 PortSanDoria
+trigger Miene                             # Stage 1, the glasses held: nil; her default 553
+finish
+trigger Altiret                           # accepted: 547 (Event)
+finish
+trade Altiret BoneChip x1                 # not the glasses: the quest's 551 (its turn of the alternation with his script's)
+finish
+trade Altiret GiltGlasses x1 BoneChip x1  # not just one Gilt Glasses (tradeMatches): 551, his script's turn (onTrade nil)
+finish
+trade Altiret GiltGlasses x1              # 550
+finish                                    # completed: Light Axe (fromTrade), fame +20, Pickpocket Pincher; the glasses taken
+trigger Altiret                           # completed: 580
+finish
+trigger Answald                           # completed: no section; his default 584
+finish
+warp -622.731,-51.499,278.369 WestRonfaure
+trigger Esca                              # completed: 123
+finish
+charvar Quest[0][3]Prog 1                 # GM: completed, Prog 1
+warp -174.5,-61.999,380 WestRonfaure
+trigger Adalefont                         # completed, Prog 1: check 2's first operand fails (not available); his default
+warp 22.763,-3.999,-65.776 PortSanDoria
+trigger Altiret                           # completed, Prog 1: check 3 closed (not available); 580
+finish

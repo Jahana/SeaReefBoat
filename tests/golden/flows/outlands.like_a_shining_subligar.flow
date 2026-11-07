@@ -1,0 +1,53 @@
+# Like a Shining Subligar (outlands 138): Heiji in Norg (no script; the default 122). A level 75 Warrior with a Bone
+# Chip and 12 Rusty Subligars (one a slot). Fame 124 (level 2): Heiji: the default 122; a subligar: no section: nothing.
+# Fame 125 (a GM): no trade handler: nothing; 123, finished: begun. Accepted: Heiji 124 (0); the chip alone: 124 (0); a
+# subligar with the chip: 124 (0), nothing taken; four subligars: taken at once, Prog 4, 124 (4); five: Prog 9, 124 (9);
+# the chip again: 124 (9);
+# two: 11: 125; finished with a full inventory: complete false, nothing taken; freed: one: 10: 125; finished: completed
+# (the Scroll of Kurayami: Ichi, Norg fame 30, Looks Sublime in a Subligar), the subligar taken. Completed: the default.
+lists Norg/Heiji/onTrigger Norg/Heiji/onTrade Norg/onEventFinish/123 Norg/onEventFinish/125
+char zone=Norg pos=1.597,-4.868,23.066 job=WAR lvl=75
+fame Norg 124
+item BoneChip
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+item RustySubligar
+login
+trigger Heiji                           # fame level 2: the default 122
+finish
+trade Heiji RustySubligar x1            # no section: nothing
+fame Norg 125                           # a GM: level 3
+trade Heiji RustySubligar x1            # no trade handler: nothing
+trigger Heiji                           # 123
+finish                                  # begun
+trigger Heiji                           # 124 (0)
+finish
+trade Heiji BoneChip x1                 # no subligar: 124 (0)
+finish
+trade Heiji RustySubligar x1 BoneChip x1   # another item with it: 124 (0), nothing taken
+finish
+trade Heiji RustySubligar x4            # taken at once; Prog 4; 124 (4)
+finish
+trade Heiji RustySubligar x5            # taken; Prog 9; 124 (9)
+finish
+trade Heiji BoneChip x1                 # no subligar: 124 (9)
+finish
+trade Heiji RustySubligar x2            # 11: 125
+fill-inventory
+finish                                  # inventory full: complete false: nothing taken
+free-inventory
+trigger Heiji                           # 124 (9)
+finish
+trade Heiji RustySubligar x1            # 10: 125
+finish                                  # completed: the scroll, fame, the title; the subligar taken
+trigger Heiji                           # completed: no section: the default 122
+finish

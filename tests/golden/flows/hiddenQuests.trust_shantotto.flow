@@ -1,0 +1,22 @@
+# Trust: Shantotto (hidden quest TrustShantotto): a level 99 Warrior in Windurst Walls. Shantotto (her script
+# npcs/Shantotto.lua; default 171, her failing talks play 171: talk twice, the second turn shows the alternation). The
+# Bastok Trust Permit only: the check (the Windurst permit) fails: her script. The Windurst Trust Permit (a GM):
+# Curses, Foiled... not completed: 529 (a plain event, importantEvent), finished on 0: nothing; again on 2: Shantotto
+# learned (the finish reads only the option), YOU_LEARNED_TRUST. Learned: the check fails: her script (twice).
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/onEventFinish/529
+char zone=WindurstWalls pos=122.6,-3,112.1 job=WAR lvl=99
+keyitem BastokTrustPermit
+login
+trigger Shantotto                       # no Windurst permit: the check fails: her script
+finish-if-event
+trigger Shantotto                       # the second talk: the default / her script turn
+finish-if-event
+keyitem WindurstTrustPermit             # a GM
+trigger Shantotto                       # Curses, Foiled... not completed: 529 (importantEvent)
+finish option=0                         # not 2: nothing
+trigger Shantotto                       # 529 (importantEvent)
+finish option=2                         # Shantotto learned, YOU_LEARNED_TRUST
+trigger Shantotto                       # learned: the check fails: her script
+finish-if-event
+trigger Shantotto                       # the second talk
+finish-if-event

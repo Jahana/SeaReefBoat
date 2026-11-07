@@ -1,0 +1,28 @@
+# Advanced Teamwork (sandoria 65): Vilatroire in West Ronfaure. Introduction and Intermediate Teamwork completed by GM
+# (their completion needs a party; Introduction completed, else its own offer answers). A WAR 10 at fame 224 (level 3):
+# 130 (replaceDefault, over his default 136); a trade while available: nothing; fame 225 (level 4): 131 declined
+# (nothing), 131 taken (begun); accepted, alone: the trigger returns nil, so his default 136; a trade: nothing;
+# completed by GM (its completion needs a party): 130 (Event); a trade: nothing. 129 (and its update and finish) starts
+# only in a party of two or more: the #party flows take it. Vilatroire has no script; his default is 136.
+lists WestRonfaure/Vilatroire/onTrigger WestRonfaure/onEventFinish/131 WestRonfaure/onEventUpdate/129 WestRonfaure/onEventFinish/129
+char zone=WestRonfaure pos=-258.4,-71,423.4 job=WAR lvl=10
+fame Sandoria 224
+quest Sandoria.IntroductionToTeamwork completed
+quest Sandoria.IntermediateTeamwork completed
+item BoneChip
+login
+trigger Vilatroire                        # Intermediate completed, fame level 3: 130 (replaceDefault)
+finish
+trade Vilatroire BoneChip x1              # available: no trade handler, no script: nothing
+fame Sandoria 225
+trigger Vilatroire                        # fame level 4, level 10: 131
+finish                                    # option 0: nothing
+trigger Vilatroire                        # 131
+finish option=1                           # begun
+trigger Vilatroire                        # accepted, alone (#party 1): nil; his default 136
+finish
+trade Vilatroire BoneChip x1              # accepted: no trade handler: nothing
+quest Sandoria.AdvancedTeamwork completed # GM: the completion needs a party
+trigger Vilatroire                        # completed: 130 (Event)
+finish
+trade Vilatroire BoneChip x1              # completed: no trade handler: nothing

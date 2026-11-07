@@ -1,0 +1,17 @@
+# Under Oath (sandoria 92): the offer's level against a fractional AF2_QUEST_LEVEL. 49.4 (GM setting), a PLD 49 with
+# A Boy's Dream completed: 49 >= 49.4 is false in Lua: no 90; nothing (a rounded read, 49, would offer it). 48.6, the
+# same PLD 49: 90 (a rounded read, 49, would too). 49, the same PLD 49: 90.
+char zone=ChateauDoraguille pos=-38.0,-4.9,73.5 job=PLD lvl=49
+setting AF2_QUEST_LEVEL 49.4
+quest Sandoria.ABoysDream completed
+login
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # 49 < 49.4: no 90; nothing (ITS_LOCKED)
+setting AF2_QUEST_LEVEL 48.6
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # 49 >= 48.6: 90
+finish option=0                         # nothing
+setting AF2_QUEST_LEVEL 49
+trigger _6h0                            # default ITS_LOCKED
+trigger _6h0                            # 49 >= 49: 90
+finish option=0                         # nothing

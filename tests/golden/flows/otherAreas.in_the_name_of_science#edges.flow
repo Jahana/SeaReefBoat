@@ -1,0 +1,21 @@
+# In the Name of Science (otherAreas 76), a negative target (a GM's NAME_OF_SCIENCE_target -1): the organ arm and the
+# pie arm test the target > 0 and the base arm == 0, so every trade answers nothing, accepted and completed (no arm
+# indexes nosTrades with it; the trigger would, and raises in the Lua: not taken). Emptiness Bleeds current.
+char zone=TavnazianSafehold pos=82.5,-25.0,3.5 job=WAR lvl=75
+mission Cop EmptinessBleeds current
+quest OtherAreas.InTheNameOfScience accepted
+charvar NAME_OF_SCIENCE_target -1
+item SilverObi
+item RedChip
+item ApplePie
+item PhuaboOrgan x7
+item XzomitOrgan x3
+item SampleOfLuminianTissue x3
+login
+trade Yurim SilverObi x1 RedChip x1     # accepted, the target -1: no arm: nothing
+trade Yurim ApplePie x1                 # the pie arm's target test fails: nothing
+trade Yurim PhuaboOrgan x7 XzomitOrgan x3 SampleOfLuminianTissue x3   # the organ arm's target test fails: nothing
+trade Yurim ApplePie x1 SilverObi x1 RedChip x1   # nothing
+quest OtherAreas.InTheNameOfScience completed   # a GM
+trade Yurim SilverObi x1 RedChip x1     # completed, the target -1: nothing
+trade Yurim ApplePie x1                 # nothing

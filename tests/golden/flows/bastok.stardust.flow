@@ -1,0 +1,46 @@
+# Stardust (bastok 24): Baldric in the Metalworks, Drangord in Bastok Mines. The guard (Bastok fame level 2), the offer
+# 554, Drangord's 97 while accepted, a Pinch of Valkurm Sunsand (555: completed, 300 gil, fame +10, the sunsand taken,
+# mustZone set). Once completed: Baldric's 554 at Prog 0 with no mustZone (Prog 1), the sunsand at Prog 1 (555: completed
+# again unless the mustZone is set; with it set, 555's finish does nothing and keeps the sunsand).
+# Defaults: Baldric 552, Drangord 21 (DefaultActions; no scripts, no other quest or mission). A rezone in the same zone
+# does not clear a mustZone: the flow zones to Bastok Markets and back.
+lists Metalworks/Baldric/onTrigger Metalworks/Baldric/onTrade Metalworks/onEventFinish/554 Metalworks/onEventFinish/555 BastokMines/Drangord/onTrigger
+warning: quests: bastok.stardust: one finish of 555 ran 2 handlers (2/-/onEventFinish:555, 3/-/onEventFinish:555) -- the Lua runs it twice too: its sections at Stardust.lua:57 (accepted) and :106 (completed) at lua-at e5cf832d hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=Metalworks pos=-50.9,2.8,-29.6
+fame Bastok 49
+item PinchOfValkurmSunsand x3
+item BoneChip
+login
+trigger Baldric                      # fame 49 (level 1): not offered, 552
+finish-if-event
+trade Baldric PinchOfValkurmSunsand x1  # available: no trade handler, nothing
+fame Bastok 50
+trigger Baldric                      # fame level 2: the offer, 554
+finish                               # accepted
+trigger Baldric                      # accepted: no trigger handler, 552
+finish-if-event
+trade Baldric BoneChip x1            # the wrong item: nil
+warp -162.5,-3.5,-4.3 BastokMines
+trigger Drangord                     # accepted: 97
+finish
+warp -50.9,2.8,-29.6 Metalworks
+trade Baldric PinchOfValkurmSunsand x1  # 555
+finish                               # completed: 300 gil, fame +10, the sunsand taken, mustZone set
+trigger Baldric                      # completed, Prog 0, mustZone: nil, 552
+finish-if-event
+trade Baldric PinchOfValkurmSunsand x1  # completed, Prog 0: nil
+zoneline BastokMarkets               # another zone: mustZone cleared
+zoneline Metalworks
+trigger Baldric                      # completed, Prog 0, no mustZone: 554
+finish                               # Prog 1
+trigger Baldric                      # Prog 1: nil, 552
+finish-if-event
+trade Baldric BoneChip x1            # Prog 1, the wrong item: nil
+trade Baldric PinchOfValkurmSunsand x1  # Prog 1: 555
+finish                               # no mustZone: completed again, 300 gil, fame +10, the sunsand taken, mustZone set
+charvar Quest[1][24]Prog 1
+trade Baldric PinchOfValkurmSunsand x1  # Prog 1 (GM), mustZone set: 555
+finish                               # the mustZone: nothing, the sunsand kept
+warp -162.5,-3.5,-4.3 BastokMines
+trigger Drangord                     # completed: no handler, 21
+finish-if-event

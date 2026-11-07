@@ -1,0 +1,18 @@
+# Achieving True Power on a WAR 75: not offered (main job not PUP: 433); accepted by GM on the WAR (the accepted guard's
+# job side false: no handler, 433 for a talk, nothing for the testimony); then completed: Shamarhaan's 444
+# (replaceDefault), whatever the job.
+lists BastokMarkets/Shamarhaan/onTrigger BastokMarkets/Shamarhaan/onTrade
+char zone=BastokMarkets pos=-285.4,-12,-83.2 job=WAR lvl=75
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.PuppetmasterBlues completed
+item PuppetmastersTestimony
+login
+trigger Shamarhaan                   # WAR: not offered, 433
+finish-if-event
+quest Bastok.AchievingTruePower accepted
+trigger Shamarhaan                   # accepted, WAR: the guard false, 433
+finish-if-event
+trade Shamarhaan PuppetmastersTestimony x1  # accepted, WAR: the guard false, nothing
+quest Bastok.AchievingTruePower completed
+trigger Shamarhaan                   # completed: 444
+finish

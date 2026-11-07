@@ -1,0 +1,24 @@
+# The Weekly Adventurer (crystalWar 2), the edges: a level 99 Warrior in Rolanberry Fields [S] (missions as the main
+# flow). Available: Rakula-Motakula: no handler: I_CANNOT_HELP_YOU_NOW. Crawlers' Nest [S]: Naiko-Paneiko 16, finished
+# on option 1: the linkpearl, begun (any option). Rolanberry Fields [S]: Rakula-Motakula 3, finished on option 3:
+# nothing (Prog 0). Crawlers' Nest [S]: Naiko-Paneiko at Prog 5 (a GM): nil.
+lists CrawlersNestS/Naiko-Paneiko/onTrigger CrawlersNestS/onEventFinish/16 RolanberryFieldsS/Rakula-Motakula/onTrigger RolanberryFieldsS/onEventFinish/3
+char zone=RolanberryFieldsS pos=-316.786,-12.448,-117.221 job=WAR lvl=99
+mission Wotg PillarOfHope current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rakula-Motakula                 # available: no handler: I_CANNOT_HELP_YOU_NOW
+finish-if-event
+warp 295.53,-33.443,-28.637 CrawlersNestS
+trigger Naiko-Paneiko                   # 16
+finish option=1                         # the linkpearl; begun (any option)
+warp -316.786,-12.448,-117.221 RolanberryFieldsS
+trigger Rakula-Motakula                 # Prog 0: 3
+finish option=3                         # no arm for option 3: Prog 0
+warp 295.53,-33.443,-28.637 CrawlersNestS
+charvar Quest[7][2]Prog 5               # a GM
+trigger Naiko-Paneiko                   # Prog 5: nil (no default)
+finish-if-event

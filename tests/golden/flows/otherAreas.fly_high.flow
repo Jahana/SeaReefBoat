@@ -1,0 +1,44 @@
+# Fly High (otherAreas 71): Ferchinne (Tavnazian Safehold; her DefaultActions 240 alternates with her script: each
+# script talk follows a default talk, and a script talk that plays nothing plays the default instead). A WAR 75.
+# Sheltering Doubt current (the CoP mission before The Savage): no arm (240). A trade while available: nothing. The
+# Savage current (a GM): 241, its finish (no option read): begun. Accepted: 242. One feather: nothing. Three (at least
+# two): 243; a full bag: npcUtil.completeQuest's giveItem false (ITEM_CANNOT_BE_OBTAINED), nothing else; one free slot
+# (the bag one larger: the test is < 1): the Mistmelt, completed, two feathers taken (one kept). Completed: 244. One
+# feather: nothing. Two: 245; a full bag: giveItem false; one free slot: a second Mistmelt (not rare), the feathers
+# taken.
+char zone=TavnazianSafehold pos=-68.0,-11.3,-5.0 job=WAR lvl=75
+mission Cop ShelteringDoubt current
+item HippogryphTailfeather x9
+login
+trigger Ferchinne                       # UseFallback 0: the default 240
+finish
+trigger Ferchinne                       # the script: Sheltering Doubt current: no arm: the default 240
+finish
+trade Ferchinne HippogryphTailfeather x2   # available: nothing (accepted or completed wanted)
+mission Cop ShelteringDoubt completed   # a GM (no current mission: addMission warns over a current one)
+mission Cop TheSavage current           # a GM
+trigger Ferchinne                       # the default 240
+finish
+trigger Ferchinne                       # The Savage current, available: 241
+finish option=1                         # begun (no option read)
+trigger Ferchinne                       # the default 240
+finish
+trigger Ferchinne                       # accepted: 242
+finish
+trade Ferchinne HippogryphTailfeather x1   # accepted, one: nothing
+fill-inventory
+trade Ferchinne HippogryphTailfeather x3   # accepted, three: 243
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (Mistmelt); not completed; kept
+storage inventory 31                    # one free slot
+trade Ferchinne HippogryphTailfeather x3   # 243
+finish option=2                         # (no option read) the Mistmelt, ITEM_OBTAINED; completed; two feathers taken
+trigger Ferchinne                       # the default 240
+finish
+trigger Ferchinne                       # completed: 244
+finish
+trade Ferchinne HippogryphTailfeather x1   # completed, one: nothing
+trade Ferchinne HippogryphTailfeather x2   # completed: 245
+finish                                  # the bag full again: ITEM_CANNOT_BE_OBTAINED (Mistmelt); kept
+storage inventory 32                    # one free slot
+trade Ferchinne HippogryphTailfeather x2   # 245
+finish option=1                         # (no option read) a second Mistmelt, ITEM_OBTAINED; the feathers taken

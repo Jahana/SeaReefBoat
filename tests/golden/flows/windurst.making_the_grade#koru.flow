@@ -1,0 +1,32 @@
+# Making the Grade (windurst 4): Koru-Moru's and Fuepepe's other arms, by GM. Accepted at Prog 0, a level-10 WAR,
+# Teacher's Pet completed, fame 125. Koru-Moru: no sheets held: nil (193); the sheets held: 287; the sheets traded at
+# Prog 0: 287 (not Prog 1); at Prog 2 (GM, with the Tattered Test Sheet): the trade 287, the talk 286. Fuepepe at Prog 2
+# (before Chomoro-Kyotoro's 460): 458: completed (kept quirk: the Tattered Test Sheet stays). Fuepepe at Prog -1 (GM,
+# available, then accepted again): no arm, nil (423).
+lists WindurstWalls/Koru-Moru/onTrigger WindurstWalls/Koru-Moru/onTrade WindurstWaters/Fuepepe/onTrigger WindurstWaters/onEventFinish/458
+char zone=WindurstWalls pos=-119.7,-5.5,122.4 job=WAR lvl=10
+quest Windurst.TeachersPet completed
+fame Windurst 125
+quest Windurst.MakingTheGrade accepted
+login
+trigger Koru-Moru                             # Prog 0, no sheets: nil; 193
+finish
+item PileOfAnswerSheets
+trigger Koru-Moru                             # Prog 0, the sheets held: 287
+finish
+trade Koru-Moru PileOfAnswerSheets x1         # Prog 0: 287 (no finish handler: the sheets kept)
+finish
+charvar Quest[2][4]Prog 2
+keyitem TatteredTestSheet
+trade Koru-Moru PileOfAnswerSheets x1         # Prog 2: 287
+finish
+trigger Koru-Moru                             # Prog 2: 286
+finish
+warp 165.5,-1.25,161.1 WindurstWaters
+trigger Fuepepe                               # Prog 2: 458
+finish                                        # completed: fame 30, the scroll; the mustZone; the test sheet kept
+quest Windurst.MakingTheGrade available        # GM: a GM accept over a completed quest keeps it completed
+quest Windurst.MakingTheGrade accepted
+charvar Quest[2][4]Prog -1
+trigger Fuepepe                               # Prog -1: no arm; nil; 423
+finish

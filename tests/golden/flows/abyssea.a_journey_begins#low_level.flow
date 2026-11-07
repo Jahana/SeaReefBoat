@@ -1,0 +1,13 @@
+# A Journey Begins (abyssea 160), below level 30: a level 29 Warrior in Port Jeuno with the quest accepted (a GM). The
+# login's zone-in: no section (level 29): no 324. Joachim at Prog 0 and, after a GM's Prog 1, at Prog 1: no section: his
+# script plays nothing (Dawn of Death not accepted).
+lists PortJeuno/Joachim/onTrigger PortJeuno/onZoneIn/1
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=29
+quest Abyssea.AJourneyBegins accepted
+login                                   # level 29: no section: no 324
+trigger Joachim                         # no section: nothing
+finish-if-event
+charvar Quest[8][160]Prog 1             # a GM
+trigger Joachim                         # level 29 at Prog 1: no section: nothing
+finish-if-event
+rezone                                  # no 324

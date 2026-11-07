@@ -1,0 +1,100 @@
+# The Sacred Katana's edges. Section 1 off, one operand each: bob (a level 39 Samurai, Forge Your Destiny completed):
+# the default 71, and 71 again at AF1_QUEST_LEVEL 39.4 (the setting compared as a number: 39 < 39.4); carl (a level 40
+# Warrior, completed): 71; dan (a level 40 Samurai, Forge Your Destiny available): Forge Your Destiny's 25 twice (no tie
+# with a 139). Main (a level 40 Samurai, Forge Your Destiny completed, the Mumeito, a Hatchet, 60000 gil and the scales
+# by a GM). Available: the Mumeito traded to Jaucribaix with the scales held, the bait to Zi'Tah's qm3 (each an
+# accepted trade arm; the status the only change): nothing (no Isonade); Ranemaud and qm3 talk: their defaults (68,
+# NOTHING_OUT_OF_ORDINARY); Ranemaud's 30000 gil while available is the main flow's. 139 open, the
+# quest accepted by a GM, option 1: section 2's 139 runs (begin while accepted: still accepted). Accepted: a Mumeito
+# with a Hatchet: nil; the scales taken (a GM), the Mumeito: nil; the scales again (a GM), the Mumeito: 141, finished
+# with a full inventory: quest:complete false (no room for the Magoroku): nothing taken, still accepted. Ranemaud with
+# the Mumeito held: nil (default 68); 30000 gil traded: nil. 141 again: completed (the Mumeito taken); deleted and
+# accepted again by GMs: Ranemaud 144 (no Mumeito); 29999 gil: nil; 30001 gil: nil; 30000 gil: 145, finished with a
+# full inventory: giveItem false: the gil kept; 145 again: the Mumeito. Zi'Tah's qm3: the bait with a Hatchet (count 2):
+# nil; the bait: Isonade popped; a bait again (a GM; a rare item, one at a time) with Isonade up: popFromQM false: nil,
+# the bait kept; Isonade killed: the local Prog 1: the scales taken (a GM): qm3 gives them; to Norg and back (the local
+# var lost with the zone change): qm3 nil (the default).
+lists Norg/Jaucribaix/onTrigger Norg/Jaucribaix/onTrade Norg/Ranemaud/onTrade Norg/onEventFinish/139 TheSanctuaryOfZitah/qm3/onTrade
+char zone=Norg pos=91,-7,-8 job=SAM lvl=40 gil=60000
+char bob zone=Norg pos=91,-7,-8 job=SAM lvl=39
+char carl zone=Norg pos=91,-7,-8 job=WAR lvl=40
+char dan zone=Norg pos=91,-7,-8 job=SAM lvl=40
+quest Outlands.ForgeYourDestiny completed
+item Mumeito
+keyitem HandfulOfCrystalScales
+item Hatchet
+item SackOfFishBait
+bob: quest Outlands.ForgeYourDestiny completed
+carl: quest Outlands.ForgeYourDestiny completed
+login
+bob: login
+bob: trigger Jaucribaix                 # level 39 < AF1_QUEST_LEVEL 40: no section: default 71
+bob: finish
+setting AF1_QUEST_LEVEL 39.4
+bob: trigger Jaucribaix                 # 39 < 39.4: no section: default 71
+bob: finish
+setting AF1_QUEST_LEVEL 40
+bob: logout
+carl: login
+carl: trigger Jaucribaix                # a Warrior: no section: default 71
+carl: finish
+carl: logout
+dan: login
+dan: trigger Jaucribaix                 # Forge Your Destiny available: its 25 (no 139 to tie with)
+dan: finish option=0
+dan: trigger Jaucribaix                 # 25 again (a tie would have cycled to 139)
+dan: finish option=0
+dan: logout
+trigger Jaucribaix                      # available: 139
+finish option=0
+trigger Jaucribaix                      # 139
+finish option=2                         # not 1: not begun
+trade Jaucribaix Mumeito x1             # available, the scales held: no trade arm: nothing
+trigger Ranemaud                        # available: no section: default 68
+finish
+warp -416,0,46 TheSanctuaryOfZitah
+trigger qm3                             # available: no section: default NOTHING_OUT_OF_ORDINARY
+trade qm3 SackOfFishBait x1             # available: no trade arm: nothing (no Isonade)
+warp 15,0,23 Norg
+trigger Jaucribaix                      # 139
+quest Outlands.TheSacredKatana accepted # a GM, 139 open
+finish option=1                         # section 2's 139: begin while accepted: still accepted
+trade Jaucribaix Mumeito x1 Hatchet x1  # a second item: nil
+delkeyitem HandfulOfCrystalScales       # a GM
+trade Jaucribaix Mumeito x1             # no scales: nil
+keyitem HandfulOfCrystalScales          # a GM
+trade Jaucribaix Mumeito x1             # 141
+fill-inventory
+finish                                  # complete false (no room): nothing taken; still accepted
+free-inventory
+trigger Ranemaud                        # the Mumeito held: nil: default 68
+finish
+trade Ranemaud gil=30000                # the Mumeito held: nil
+trigger Jaucribaix                      # 140
+finish
+trade Jaucribaix Mumeito x1             # 141
+finish                                  # completed: the Mumeito and the scales taken
+quest Outlands.TheSacredKatana available   # a GM
+quest Outlands.TheSacredKatana accepted # a GM
+trigger Ranemaud                        # no Mumeito: 144
+finish
+trade Ranemaud gil=29999                # 29999 gil: nil
+trade Ranemaud gil=30001                # 30001 gil: nil
+trade Ranemaud gil=30000                # 145
+fill-inventory
+finish                                  # giveItem false: the gil kept
+free-inventory
+trade Ranemaud gil=30000                # 145
+finish                                  # the Mumeito; the gil taken
+warp -416,0,46 TheSanctuaryOfZitah
+trigger qm3                             # local Prog 0: nil: default
+trade qm3 SackOfFishBait x1 Hatchet x1  # count 2: nil
+trade qm3 SackOfFishBait x1             # Isonade popped and claimed; the bait taken; SENSE_OF_FOREBODING
+item SackOfFishBait                     # a GM
+trade qm3 SackOfFishBait x1             # Isonade up: popFromQM false: nil; the bait kept
+kill ISONADE                            # local Prog 1
+trigger qm3                             # Prog 1, no scales: the scales
+warp 15,0,23 Norg                       # out of the zone
+delkeyitem HandfulOfCrystalScales       # a GM
+warp -416,0,46 TheSanctuaryOfZitah      # and back
+trigger qm3                             # the local var lost: nil: default

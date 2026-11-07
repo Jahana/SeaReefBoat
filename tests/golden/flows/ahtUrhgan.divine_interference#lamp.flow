@@ -1,0 +1,17 @@
+# Divine Interference's blank_lamp (hidden at load, as Waking the Colossus's `#lamp`: a GM shows it, `npcstatus
+# blank_lamp normal`). Accepted (GMs): Prog 2 without the cell: nil: the default DEVICE_MALFUNCTIONING; with the
+# Lightning Cell: 308, finished: Prog 3; again: nil: the default.
+lists AlzadaalUnderseaRuins/blank_lamp/onTrigger AlzadaalUnderseaRuins/onEventFinish/308
+char zone=AlzadaalUnderseaRuins pos=208.05,-1.5,20.05 job=WAR lvl=75
+quest AhtUrhgan.DivineInterference accepted
+charvar Quest[6][75]Prog 2
+login
+npcstatus blank_lamp normal           # a GM: shown
+trigger blank_lamp                    # Prog 2, no cell: nil: DEVICE_MALFUNCTIONING
+finish-if-event
+keyitem LightningCell                   # a GM
+trigger blank_lamp                    # the cell, Prog 2: 308
+finish                                # Prog 3
+trigger blank_lamp                    # Prog 3: nil: DEVICE_MALFUNCTIONING
+finish-if-event
+warp 180,-0.05,20 AlzadaalUnderseaRuins # Prog 3: the zone-in nil

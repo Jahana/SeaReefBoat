@@ -1,0 +1,50 @@
+# A Taste for Meat (sandoria 100): Antreneau and Thierride in Port San d'Oria. Prog 0: a slice to Antreneau (532: the
+# Prog operand alone fails),
+# Thierride's trigger (nil: his default 521) and a trade to him (529); Antreneau's 527 (Prog 1); Prog 1: his 525, a
+# trade holding a Slice of Hare Meat (531, no finish handler: the meat kept), a trade without (532); Thierride's 526,
+# four slices (529), five and a chip (529), exactly five (528: begun and completed, 150 gil, fame +20, Rabbiter, the meat
+# taken, Option 1). Completed: Thierride's 524 (replaceDefault), a trade to him (no quest handler: his script's 529);
+# Antreneau's 530 (a Slice of Grilled Hare, Option 0), then nothing (nil: his script starts nothing, so his default
+# message ANTRENEAU_READY_TO_EAT), a trade (his script's 532).
+# Antreneau's script: onTrade always starts 532; onTrigger only for Over the Hills and Far Away (fame level 8, here 1):
+# nothing. The quest's Event-priority replies (532, 525, 529) alternate with the scripts (interaction_lookup's
+# UseFallback): on the script's turn Antreneau's and Thierride's scripts start the same 532 / 529 on a trade, and on a
+# talk start nothing, so the quest's reply plays; every step shows the same event either way. Thierride's script has
+# only onTrade (529); his default is 521. Port San d'Oria has a second, cutscene-only Thierride (README check first).
+# The Brugaire Consortium (available, not begun) has no Thierride handler while available.
+lists PortSanDoria/Antreneau/onTrigger PortSanDoria/Antreneau/onTrade PortSanDoria/Thierride/onTrigger PortSanDoria/Thierride/onTrade PortSanDoria/onEventFinish/527 PortSanDoria/onEventFinish/528 PortSanDoria/onEventFinish/530
+char zone=PortSanDoria pos=-69.965,-5.497,-41.081 job=WAR lvl=10
+item SliceOfHareMeat x6
+item BoneChip
+login
+trade Antreneau SliceOfHareMeat x1        # Prog 0, holds a slice: 532 (Event)
+finish
+trigger Thierride                         # Prog 0: nil; his default 521
+finish
+trade Thierride SliceOfHareMeat x5        # Prog 0: 529
+finish
+trigger Antreneau                         # Prog 0: 527
+finish                                    # Prog 1
+trigger Antreneau                         # Prog 1: 525 (Event)
+finish
+trade Antreneau SliceOfHareMeat x1        # Prog 1, holds a slice: 531
+finish                                    # no finish handler: nothing, the slice kept
+trade Antreneau BoneChip x1               # Prog 1, no slice: 532
+finish
+trigger Thierride                         # Prog 1: 526
+finish
+trade Thierride SliceOfHareMeat x4        # not exactly five: 529
+finish
+trade Thierride SliceOfHareMeat x5 BoneChip x1   # not exactly five: 529
+finish
+trade Thierride SliceOfHareMeat x5        # exactly five: 528
+finish                                    # begun and completed: 150 gil, fame +20, Rabbiter; the meat taken; Option 1
+trigger Thierride                         # completed: 524 (replaceDefault)
+finish
+trade Thierride BoneChip x1               # completed: no quest trade handler; his script's 529
+finish
+trigger Antreneau                         # completed, Option 1: 530
+finish                                    # a Slice of Grilled Hare; Option 0
+trigger Antreneau                         # Option 0: nil; his script starts nothing; ANTRENEAU_READY_TO_EAT (his default)
+trade Antreneau BoneChip x1               # completed: no quest trade handler; his script's 532
+finish

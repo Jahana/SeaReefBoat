@@ -1,0 +1,14 @@
+# New Character Cutscenes, Windurst. A Windurst char (nation 2), notSeen 1. Windurst Waters (login open): nations 0:
+# setPos(-40, -5, 100, 64) and the home point, then setPos(-40.611, -5, 102.5, 57); 531 (flags 0x93: NO_NPCS too); an
+# update: updateEvent({ [7] = 0 }); finished: the text, the coupon, nations 4. Windurst Woods (notSeen 1, a GM): 367
+# (warp finishes it). Port Windurst: nations 4: no home point; setPos(-140, -7, 172, 32); 305 (warp finishes it).
+lists WindurstWaters/onZoneIn/1 WindurstWaters/onEventUpdate/531 WindurstWaters/onEventFinish/531 WindurstWoods/onZoneIn/1 WindurstWoods/onEventFinish/367 PortWindurst/onZoneIn/1 PortWindurst/onEventFinish/305
+char zone=WindurstWaters pos=-40.6,-5,102.5 job=WAR lvl=1 nation=2
+charvar HQuest[newCharacterCS]notSeen 1
+login open                              # the home point spot, the exit; 531
+update 531 option=0                     # updateEvent({ [7] = 0 })
+finish                                  # the text; the coupon; nations 4
+charvar HQuest[newCharacterCS]notSeen 1
+warp 30,2,-40 WindurstWoods             # 367: the text; the coupon
+charvar HQuest[newCharacterCS]notSeen 1
+warp -140,-7,172 PortWindurst           # nations 4: no home point; 305: the text; the coupon

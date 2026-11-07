@@ -1,0 +1,42 @@
+# Water Way to Go (windurst 16): the completed section's other arms. Completed by GM (no mustZone, Prog 0): Ohbiru
+# takes the water all the same (355: completed again, fame +16, +900 gil, mustZone); the spring takes nothing at Prog 0,
+# nor a bone chip at Prog 1 (GM); 55 with a full bag keeps the canteen; with room it fills it; Ohbiru's 353 with the
+# water; the water handed in (355: Prog 1 cleared); at Prog 1 again (GM) with no canteen, Ohbiru's 354 gives one, then
+# 353; at a GM Prog 2, nil (Overnight Delivery's 351).
+lists WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/Ohbiru-Dohbiru/onTrade Giddeus/Giddeus_Spring/onTrade WindurstWaters/onEventFinish/354 WindurstWaters/onEventFinish/355 Giddeus/onEventFinish/55
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought completed
+quest Windurst.OvernightDelivery completed
+quest Windurst.WaterWayToGo completed
+fame Windurst 141
+item CanteenOfGiddeusWater
+item RhinosteryCanteen
+item BoneChip
+login
+trade Ohbiru-Dohbiru CanteenOfGiddeusWater x1  # completed, Prog 0: 355 (900) all the same
+finish                                      # completed again: fame +16; the water taken; +900 gil; mustZone 238
+warp 228.4,0.2,-299.3 Giddeus
+trade Giddeus_Spring RhinosteryCanteen x1   # completed, Prog 0: nil
+charvar Quest[2][16]Prog 1
+trade Giddeus_Spring BoneChip x1            # completed, Prog 1, not the canteen: nil
+fill-inventory
+trade Giddeus_Spring RhinosteryCanteen x1   # completed, Prog 1: 55
+finish                                      # no room for the water: nothing, the canteen kept
+free-inventory
+trade Giddeus_Spring RhinosteryCanteen x1   # 55
+finish                                      # the water; the canteen taken
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Ohbiru-Dohbiru                      # completed, no mustZone, Prog 1, the water held: 353
+finish
+trade Ohbiru-Dohbiru CanteenOfGiddeusWater x1  # 355 (900)
+finish                                      # completed again: fame +16, +900 gil; Prog 1 cleared; mustZone
+warp 228.4,0.2,-299.3 Giddeus               # another zone: the mustZone cleared
+warp 24.0,-5.38,-197.7 WindurstWaters
+charvar Quest[2][16]Prog 1
+trigger Ohbiru-Dohbiru                      # Prog 1, no canteen: 354
+finish                                      # a Rhinostery Canteen
+trigger Ohbiru-Dohbiru                      # Prog 1, the canteen held: 353
+finish
+charvar Quest[2][16]Prog 2                  # a GM sets Prog 2
+trigger Ohbiru-Dohbiru                      # Prog neither 0 nor 1: nil; Overnight Delivery's 351
+finish

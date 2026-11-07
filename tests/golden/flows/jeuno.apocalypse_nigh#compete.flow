@@ -1,0 +1,88 @@
+# Apocalypse Nigh (jeuno 89): the reply kinds, each against a rival that makes them show. A progressEvent beats an event;
+# two progressEvents (or two events) with two csids take turns; on an NPC with a script, an event takes turns with the
+# script where a progressEvent always plays. A level 75 Warrior of Bastok at rank 6, Shadows of the Departed completed;
+# CoP Dawn current (Status 0), ToAU Easterly Winds and Zilart The Temple of Desolation current (GMs, before login).
+# - Ru'Lude Gardens' area 1 (no script): Easterly Winds' progressEvent 10094 (whatever its state; a full bag keeps it
+#   current through its finish) and 123: 10094 first, then 123 (begun).
+# - _iya (script: 52) at Prog 1: 4; the quest set available while it is open (finish: nothing), accepted again: 4 again
+#   (an event would have let the script's 52 play); finished: Prog 2, set down in The Garden of Ru'Hmet.
+# - TR_Entrance (no script) at Prog 2: Dawn's progressEvent 2 (Status 0) and 4 take turns: 2 (finished: Dawn Status 1,
+#   set back to 0 by a GM), then 4 (Prog 3).
+# - Aldo (no script) against The Temple of Desolation's event 24: Prog 4: 10057, finished (Prog 5); Prog 4 again (a GM):
+#   10057 again (a progressEvent wins); Prog 5: 24 and 10058 take turns (both events).
+# - Gilgamesh (no script) against the mission's event 10: Prog 5, Timer 0: 232, finished 0 (Prog 6); Prog 5 again: 232;
+#   Prog 6: 234, finished 5; 234 again.
+# - _700 (no script; default DOOR_IS_LOCKED) against Zilart Welcome to Norg's progressEvent 2 (the Temple completed and
+#   Welcome to Norg current by GMs): Prog 5, Timer 8001: 2 (finished 1: nothing), then 235 (the mustZone).
+# - Gilgamesh, the quest completed (a GM), The Temple of Desolation current again: 233 is an event set to the
+#   replaceDefault priority (20), under the mission's event 10 (100): 10, and 10 again.
+# qm1's 5 and the Sealion's Den / Empyreal Paradox zone-ins (a csid number, no action) have no rival: not observable.
+lists RuludeGardens/onTriggerAreaEnter/1 GrandPalaceOfHuxzoi/_iya/onTrigger EmpyrealParadox/TR_Entrance/onTrigger LowerJeuno/Aldo/onTrigger Norg/Gilgamesh/onTrigger Norg/_700/onTrigger
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75 nation=1
+rank 6
+quest Jeuno.ShadowsOfTheDeparted completed
+mission Cop Dawn current
+mission Toau EasterlyWinds current
+mission Zilart TheTempleOfDesolation current
+login
+fill-inventory                          # a GM: Easterly Winds kept on its finish
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # 10094 and 123 tie: 10094
+finish option=1                         # kept
+walk 4,2.5,100
+walk 4,2.5,60                           # the turn: 123
+finish                                  # begun
+free-inventory
+charvar Quest[3][89]Prog 1              # a GM
+warp -18.5,-2.3,-280.2 GrandPalaceOfHuxzoi  # by _iya
+trigger _iya                            # Prog 1: 4
+quest Jeuno.ApocalypseNigh available    # a GM, while 4 is open
+finish                                  # no state: nothing
+quest Jeuno.ApocalypseNigh accepted     # a GM
+trigger _iya                            # Prog 1: 4 again
+finish                                  # Prog 2; set down in The Garden of Ru'Hmet
+tick 400
+login                                   # in The Garden of Ru'Hmet
+warp 541.5,-1.2,-597.7 EmpyrealParadox  # by TR_Entrance
+trigger TR_Entrance                     # Prog 2, Dawn Status 0: Dawn's 2 and 4 tie: the first
+finish                                  # 2: Dawn Status 1 / 4: Prog 3
+charvar Mission[6][840]Status 0         # a GM
+trigger TR_Entrance                     # the other
+finish
+charvar Quest[3][89]Prog 4              # a GM
+warp 22.5,3.9,-61.5 LowerJeuno          # by Aldo
+trigger Aldo                            # Prog 4, rank 6: 10057 (over the mission's event 24)
+finish                                  # Prog 5
+charvar Quest[3][89]Prog 4              # a GM
+trigger Aldo                            # 10057 again
+finish                                  # Prog 5
+trigger Aldo                            # Prog 5: 10058 and 24 tie (events): the first
+finish
+trigger Aldo                            # the other
+finish
+warp 120.9,-8,-12 Norg                  # by Gilgamesh
+trigger Gilgamesh                       # Prog 5, Timer 0: 232 (over the mission's event 10)
+finish option=0                         # Prog 6
+charvar Quest[3][89]Prog 5              # a GM
+trigger Gilgamesh                       # 232 again
+finish option=0                         # Prog 6
+trigger Gilgamesh                       # Prog 6: 234
+finish option=5                         # Prog 6
+trigger Gilgamesh                       # 234 again
+finish option=5
+mission Zilart TheTempleOfDesolation completed  # a GM
+mission Zilart WelcomeTnorg current     # a GM
+charvar Quest[3][89]Prog 5              # a GM
+charvar Quest[3][89]Timer 8001          # a GM
+warp 103.5,-8.6,-12 Norg                # by _700
+trigger _700                            # Prog 5, Timer 8001: Welcome to Norg's 2 and 235 tie: the first
+finish option=1                         # 2: not 0: nothing / 235: the mustZone
+trigger _700                            # the other
+finish option=1
+mission Zilart WelcomeTnorg completed   # a GM
+mission Zilart TheTempleOfDesolation current  # a GM
+quest Jeuno.ApocalypseNigh completed    # a GM
+trigger Gilgamesh                       # completed: 233 (replaceDefault, 20) under the mission's 10: 10
+finish
+trigger Gilgamesh                       # 10 again
+finish

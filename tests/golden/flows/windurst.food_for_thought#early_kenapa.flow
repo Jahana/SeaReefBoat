@@ -1,0 +1,12 @@
+# Food for Thought (windurst 14): the egg before the order, with Kerutoto and Ohbiru done (GM vars): kenapaProg 0 (< 3)
+# draws randomInt(1, 100): <= 50 is 331, else 330 (120). Kenapa's finish then completes the quest (+120 gil, fame +20,
+# Fast Food Deliverer, vars cleared, mustZone). The draw is not stored; `#early_kenapa_rng` takes the other side.
+lists WindurstWaters/Kenapa-Keppa/onTrade WindurstWaters/onEventFinish/330 WindurstWaters/onEventFinish/331
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought accepted
+charvar Quest[2][14]kerutotoProg 2
+charvar Quest[2][14]ohbiruProg 3
+item HardBoiledEgg
+login
+trade Kenapa-Keppa HardBoiledEgg x1     # kenapaProg 0 (< 3): randomInt(1, 100): 331 or 330 (120)
+finish                                  # the egg taken, +120 gil; the other two done: completed, mustZone

@@ -1,0 +1,23 @@
+# Empty Memories (jeuno 70): the finishes when their state no longer holds. A level 75 Warrior with 5000 gil, the quest
+# accepted (a GM), CoP The Mothercrystals current. The Recollection of Suffering traded: 110 open, the quest set
+# available by a GM: the finish finds the available state only (no 110 finish there): nothing (no Hamayumi, the
+# recollection kept). Accepted again (a GM): the Recollection of Pain with 2000 gil: 109 open, available again: nothing
+# (no Hysteroanima, no gil taken). Available: 113 open, the quest set completed by a GM: the completed state has no 113
+# finish: not begun.
+lists RuludeGardens/Harith/onTrade RuludeGardens/Harith/onTrigger RuludeGardens/onEventFinish/109 RuludeGardens/onEventFinish/110 RuludeGardens/onEventFinish/113
+char zone=RuludeGardens pos=-4.3,2,132.5 job=WAR lvl=75 gil=5000
+mission Cop TheMothercrystals current
+quest Jeuno.EmptyMemories accepted
+item RecollectionOfSuffering
+item RecollectionOfPain
+login
+trade Harith RecollectionOfSuffering x1 # 110
+quest Jeuno.EmptyMemories available     # a GM, while 110 is open
+finish                                  # no 110 finish in the available state: nothing
+quest Jeuno.EmptyMemories accepted      # a GM
+trade Harith gil=2000 RecollectionOfPain x1  # 109
+quest Jeuno.EmptyMemories available     # a GM, while 109 is open
+finish                                  # nothing
+trigger Harith                          # available: 113
+quest Jeuno.EmptyMemories completed     # a GM, while 113 is open
+finish option=1                         # the completed state has no 113 finish: nothing

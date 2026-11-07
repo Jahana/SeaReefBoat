@@ -1,0 +1,24 @@
+# Three Men and a Closet's edges: a level 75 Warrior, Got It All not completed: Kubhe Ijyuhla: no section: his default
+# 662. Got It All completed and this quest accepted (GMs), Prog 0: Wajaom Woodlands from Al Zahbi: no event (prevZone
+# not Whitegate). Prog 1 (a GM): from Whitegate: no event. Prog 4 (a GM) with a full bag: Kubhe 845, finished: the
+# bronze piece does not fit: no completion; freed: 845: completed.
+lists AhtUrhganWhitegate/Kubhe_Ijyuhla/onTrigger WajaomWoodlands/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/845
+char zone=AhtUrhganWhitegate pos=23.257,0,21.532 job=WAR lvl=75
+login
+trigger Kubhe_Ijyuhla                   # Got It All not completed: no section: 662
+finish
+quest AhtUrhgan.GotItAll completed      # GMs
+quest AhtUrhgan.ThreeMenAndACloset accepted
+warp -64,-7,38 AlZahbi
+warp 610.542,-28.547,356.247 WajaomWoodlands   # from Al Zahbi at Prog 0: no event
+charvar Quest[6][31]Prog 1              # a GM
+warp 23.257,0,23 AhtUrhganWhitegate
+warp 610.542,-28.547,356.247 WajaomWoodlands   # from Whitegate at Prog 1: no event
+charvar Quest[6][31]Prog 4              # a GM
+warp 23.257,0,23 AhtUrhganWhitegate
+fill-inventory
+trigger Kubhe_Ijyuhla                   # Prog 4: 845
+finish                                  # full: complete false: nothing more
+free-inventory
+trigger Kubhe_Ijyuhla                   # 845
+finish                                  # completed

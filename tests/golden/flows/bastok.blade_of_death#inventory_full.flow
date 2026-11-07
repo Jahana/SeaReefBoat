@@ -1,0 +1,16 @@
+# Blade of Death at the qm2 with ChaosbringerKills 200: 10 with a full inventory (the Deathbringer does not fit: not
+# completed, the sword and the letter kept), then again with room (completed).
+lists GusgenMines/qm2/onTrade GusgenMines/onEventFinish/10
+char zone=GusgenMines pos=208.7,-59.2,-101 lvl=30
+quest Bastok.BladeOfDarkness completed
+quest Bastok.BladeOfDeath accepted
+keyitem LetterFromZeid
+charvar ChaosbringerKills 200
+item Chaosbringer
+login
+fill-inventory
+trade qm2 Chaosbringer x1            # 10
+finish                               # the inventory full: not completed, nothing taken
+free-inventory
+trade qm2 Chaosbringer x1            # 10 again
+finish                               # completed: Deathbringer, the sword taken (onItemDrop: ChaosbringerKills 0), the letter deleted

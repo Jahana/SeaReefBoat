@@ -1,0 +1,35 @@
+# Over the Hills and Far Away (sandoria 112): the ??? in Uleguerand Range's other arms. Available: the trigger's
+# SOMETHING_GLITTERING_BUT; the hotrok's trade: nothing (the trade wants accepted). Accepted by GM with the title
+# Companion of Louverance, the CoP Louverance nibble 0: 10 (0, 1729, the map, 0, 1, 0, 0), completed, the hotrok taken.
+# Set available, then accepted again (GM), the hotrok and the nibble 14 (GM missionstatus Cop 14 pos=2):
+# 10 (0, 1729, the map, 0, 0, 1, 0). cara (True Companion of Louverance, nibble 0): 10 (0, 1729, the map, 0, 1, 0, 0).
+# bob (no title, nibble 14): 10 (0, 1729, the map, 1, 0, 1, 0). Each finish completes and takes the hotrok.
+char zone=UleguerandRange pos=-298.3,-51.9,-18.9 lvl=75
+char bob zone=UleguerandRange pos=-298.3,-51.9,-18.9 lvl=75
+char cara zone=UleguerandRange pos=-298.3,-51.9,-18.9 lvl=75
+item MoblinHotrok
+bob: item MoblinHotrok
+bob: quest Sandoria.OverTheHillsAndFarAway accepted
+cara: item MoblinHotrok
+cara: quest Sandoria.OverTheHillsAndFarAway accepted
+cara: title TrueCompanionOfLouverance
+login
+trigger qm_moblin_hotrok                  # available: SOMETHING_GLITTERING_BUT
+trade qm_moblin_hotrok MoblinHotrok x1    # available: nothing
+quest Sandoria.OverTheHillsAndFarAway accepted
+title CompanionOfLouverance
+trade qm_moblin_hotrok MoblinHotrok x1    # Louverance status 0, Companion of Louverance: 10 (0, 1729, map, 0, 1, 0, 0)
+finish                                    # completed (fame, map, gil, exp); the hotrok taken
+quest Sandoria.OverTheHillsAndFarAway available
+quest Sandoria.OverTheHillsAndFarAway accepted
+item MoblinHotrok                         # a GM
+missionstatus Cop 14 pos=2                # a GM: the CoP Louverance nibble 14
+trade qm_moblin_hotrok MoblinHotrok x1    # status 14, Companion of Louverance: 10 (0, 1729, map, 0, 0, 1, 0)
+finish                                    # completed again; the hotrok taken
+cara: login
+cara: trade qm_moblin_hotrok MoblinHotrok x1  # status 0, True Companion of Louverance: 10 (0, 1729, map, 0, 1, 0, 0)
+cara: finish                              # completed; the hotrok taken
+bob: login
+bob: missionstatus Cop 14 pos=2           # a GM
+bob: trade qm_moblin_hotrok MoblinHotrok x1  # status 14, no title: 10 (0, 1729, map, 1, 0, 1, 0)
+bob: finish                               # completed; the hotrok taken

@@ -1,0 +1,22 @@
+# Community Service (jeuno 15) in GM-set states. Prog 1 with Timer today (8000) at 12:00: getLampParam has neither
+# time arm (not hour >= 18 on the Timer day, not a later day) and returns nil: _l02's 122 (nil, 2), sent as (0, 2);
+# Zauko: Prog 1, not late: 114. Timer tomorrow (8001): the same nil at _l03, 123 (0, 3). Then Prog 0 (GM): a closed
+# lamp's 121 (6, 1) answered 1 (lightLamp does not check Prog: Count 0 - 1 = -1, the lamp opened, YOU_LIGHT_THE_LAMP
+# and LAMP_MSG_OFFSET + 1 with -1), then that lamp lit at Prog 0 (5).
+lists LowerJeuno/Zauko/onTrigger LowerJeuno/_l01/onTrigger LowerJeuno/_l02/onTrigger LowerJeuno/_l03/onTrigger LowerJeuno/onEventFinish/121 LowerJeuno/onEventFinish/122
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+charvar Quest[3][15]Prog 1
+charvar Quest[3][15]Timer 8000
+login
+trigger _l02                            # Prog 1, Timer today, hour 12: nil parameter; 122 (nil, 2)
+finish
+trigger Zauko                           # Prog 1, not late: 114
+finish
+charvar Quest[3][15]Timer 8001          # a GM: Timer tomorrow
+trigger _l03                            # neither arm: 123 (nil, 3)
+finish
+charvar Quest[3][15]Prog 0              # a GM
+trigger _l01                            # Prog 0, closed: 121 (6, 1)
+finish option=1                         # lit anyway: Count -1, the lamp opened, LAMP_MSG_OFFSET + 1 (-1)
+trigger _l01                            # Prog 0, lit: 121 (5, 1)
+finish

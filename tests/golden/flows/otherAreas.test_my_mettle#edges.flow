@@ -1,0 +1,29 @@
+# Test My Mettle (otherAreas 25): the offer's check, bracketed. A level 10 Warrior of Bastok (level 9 is `#level`), 1000
+# gil, the Power Sandals. Rank 1: 124 (the default); rank 2: 120. Fame level 1 (San d'Oria 74: 49): 124; 75 (50): 120.
+# Repeat = now + 1 (a GM): 124; Repeat = now (1800000000): 120. The sandals traded while available (section 1 holds):
+# no trade handler: nothing, kept. The gil: exactly the bet (option 1001: the 1000 bet, 1 hour): begun, 0 gil left,
+# Timer now + 144, Reward 3000; made available (a GM, the vars kept), option 101 (the 100 bet) with 0 gil:
+# DONT_HAVE_ENOUGH_GIL, not begun.
+lists Selbina/Devean/onTrigger Selbina/Devean/onTrade Selbina/onEventFinish/120
+char zone=Selbina pos=41.4,-14.6,40 job=WAR lvl=10 nation=1 gil=1000
+rank 1
+fame Sandoria 75
+item PowerSandals
+login
+trigger Devean                          # rank 1: no section: 124
+finish
+rank 2                                  # a GM
+fame Sandoria 74                        # fame level 1
+trigger Devean                          # 124
+finish
+fame Sandoria 75                        # fame level 2
+charvar Quest[4][25]Repeat 1800000001   # a GM: Repeat one second ahead
+trigger Devean                          # 124
+finish
+charvar Quest[4][25]Repeat 1800000000   # Repeat = now
+trade Devean PowerSandals x1            # section 1 holds: no trade handler: nothing; the sandals kept
+trigger Devean                          # 120
+finish option=1001                      # 1000 gil >= 1000: taken (0 left); Timer now + 144; Reward 3000; begun
+quest OtherAreas.TestMyMettle available # a GM
+trigger Devean                          # 120
+finish option=101                       # the 100 bet, 0 gil: DONT_HAVE_ENOUGH_GIL; not begun

@@ -1,0 +1,136 @@
+# Crying Over Onions (windurst 76): Kohlo-Lakolo and the brigade (Port Windurst), Honoi-Gomoi (Windurst Waters), Nanaa
+# Mihgo (Windurst Woods; +99: the first entity of that name, 17764367, is cutscene-only). The Star Onion quests 1-4
+# completed and Mihgo's Amigo accepted by GM (its available 81, a Progress line, would otherwise take turns with 598 at
+# Nanaa Mihgo), level 5, fame 325 (level 5). Available: a trade (no trade handler: nothing); Reward 0, no mustZone: 449
+# with a full bag (the Bouncer Club does not fit: nothing), then 449 (the club, Reward 1, the quest's mustZone 240);
+# Reward 1 with the mustZone: 450; a warp out and back: 496, begun. Prog 0: Kohlo-Lakolo 498, Gomada-Vulmada nil (his
+# default 363); Nanaa Mihgo at Prog 0: nil (Mihgo's Amigo's 82); Honoi-Gomoi: a spinel trade at Prog 0 (nil), 774 (0, spinel: Prog 1); Prog 1: 777; trades: a bone
+# chip, the spinel plus a chip (nil); the spinel alone with a full bag (775: the Star Necklace does not fit, nothing,
+# the spinel kept). Nanaa Mihgo: 598 (Prog 2); again: nil (Mihgo's Amigo's 82). Prog 2: Honoi-Gomoi 777, then her
+# script's 650; the spinel alone (775: the necklace, the spinel taken, Prog 3); Prog 3: 778, then 650; a second spinel
+# traded: nil (not Prog 1 or 2). The brigade at Prog 3: nil, their defaults 363, 362, 364, 366, 367, 365 (each
+# brigade line is its own handler). Kohlo-Lakolo: 497 (Prog 4), then 512; the brigade's Prog 4 lines 500, 501, 503, 502,
+# 504, 499. Honoi-Gomoi's 776: completed (fame 50, the local var [2][77]mustZone 1); Wild Card's mustZone by GM: its
+# 779 (an Event line, the quest's turn after 776). Completed while The Promise is available: 507, 508, 511, 510, 504,
+# 506 (replaceDefault); The Promise accepted by GM: not met, Gomada-Vulmada plays The Promise's 528 (Prog 0: late).
+# Defaults: Honoi-Gomoi has none in DefaultActions (her script: 650, or Hat in Hand's 59 with its hat); Nanaa Mihgo 76
+# (her script: the trust offer only, with its permit). The quest's Event lines at Honoi-Gomoi alternate with her script
+# (interaction_lookup.lua:451-460, the player local var 'UseFallback', which a zone change clears): a Progress line
+# gives the quest the next turn, an Event line gives it to her script, so the flow talks again after each Event line.
+# Her script has no onTrade: the quest answers every trade.
+# Truth, Justice, and the Onion Way!, Know One's Onions and Inspector's Gadget! completed by GM (each one's available
+# line would otherwise answer at Kohlo-Lakolo first).
+lists PortWindurst/Kohlo-Lakolo/onTrigger WindurstWaters/Honoi-Gomoi/onTrigger WindurstWaters/Honoi-Gomoi/onTrade WindurstWoods/Nanaa_Mihgo/onTrigger PortWindurst/onEventFinish/449 PortWindurst/onEventFinish/497 WindurstWaters/onEventFinish/775 WindurstWaters/onEventFinish/776
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5
+fame Windurst 325
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.OnionRings completed
+quest Windurst.MihgosAmigo accepted            # GM: otherwise its available 81 (Progress) shares Nanaa Mihgo's turns with 598
+item BoneChip
+item StarSpinel
+item StarSpinel
+login
+trade Kohlo-Lakolo BoneChip x1                 # available, the check holds: no trade handler: nothing
+trigger Kohlo-Lakolo                           # Reward 0, no mustZone: 449
+fill-inventory
+finish                                         # giveItem false: nothing (Reward 0)
+free-inventory
+trigger Kohlo-Lakolo                           # 449
+finish                                         # the Bouncer Club; Reward 1; Quest[2][76]mustZone 240
+trigger Kohlo-Lakolo                           # Reward 1, the mustZone: 450
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+warp -27.5,-8.0,189.6 PortWindurst             # the mustZone cleared
+trigger Kohlo-Lakolo                           # Reward 1, level 5, fame level 5, no mustZone: 496
+finish                                         # begun
+trigger Kohlo-Lakolo                           # Prog 0: 498
+finish
+trigger Gomada-Vulmada                         # Prog 0: nil; his default 363
+finish
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                         # Prog 0: the quest nil (598 needs Prog 1); Mihgo's Amigo's 82
+finish
+warp -192.6,-10.4,-122.9 WindurstWaters
+trade Honoi-Gomoi StarSpinel x1                # Prog 0: nil
+trigger Honoi-Gomoi                            # Prog 0: 774 (0, spinel)
+finish                                         # Prog 1
+trigger Honoi-Gomoi                            # Prog 1: 777
+finish
+trade Honoi-Gomoi BoneChip x1                  # Prog 1, not the spinel: nil
+trade Honoi-Gomoi StarSpinel x1 BoneChip x1    # the spinel plus an extra: nil
+fill-inventory
+trade Honoi-Gomoi StarSpinel x1                # Prog 1, the spinel alone: 775 (0, spinel)
+finish                                         # giveItem false: nothing, the spinel kept, Prog 1
+free-inventory
+warp 66.5,-4.75,239.6 WindurstWoods
+trigger Nanaa_Mihgo+99                         # Prog 1: 598
+finish                                         # Prog 2
+trigger Nanaa_Mihgo+99                         # Prog 2: the quest nil; Mihgo's Amigo's 82 (an Event over her default 76; the handler's turn after 598)
+finish
+warp -192.6,-10.4,-122.9 WindurstWaters
+trigger Honoi-Gomoi                            # Prog 2: 777 (the warps cleared the turn var)
+finish
+trigger Honoi-Gomoi                            # the alternation (777 was an Event): her script's 650
+finish
+trade Honoi-Gomoi StarSpinel x1                # Prog 2, the spinel alone: 775 (0, spinel)
+finish                                         # the Star Necklace; one spinel taken; Prog 3
+trigger Honoi-Gomoi                            # Prog 3: 778 (the quest's turn after 650)
+finish
+trigger Honoi-Gomoi                            # the alternation (778 was an Event): her script's 650
+finish
+trade Honoi-Gomoi StarSpinel x1                # Prog 3: nil
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Gomada-Vulmada                         # Prog 3: nil (the brigade's lines need Prog 4); his default 363
+finish
+trigger Papo-Hopo                              # Prog 3: nil; the default 362
+finish
+trigger Pichichi                               # Prog 3: nil; the default 364
+finish
+trigger Pyo_Nzon                               # Prog 3: nil; the default 366
+finish
+trigger Shanruru                               # Prog 3: nil; the default 367
+finish
+trigger Yafa_Yaa                               # Prog 3: nil; the default 365
+finish
+trigger Kohlo-Lakolo                           # Prog 3: 497
+finish                                         # Prog 4
+trigger Kohlo-Lakolo                           # Prog 4: 512
+finish
+trigger Gomada-Vulmada                         # 500
+finish
+trigger Papo-Hopo                              # 501
+finish
+trigger Pichichi                               # 503
+finish
+trigger Pyo_Nzon                               # 502
+finish
+trigger Shanruru                               # 504
+finish
+trigger Yafa_Yaa                               # 499
+finish
+warp -192.6,-10.4,-122.9 WindurstWaters
+trigger Honoi-Gomoi                            # Prog 4: 776
+finish                                         # completed: fame 50; local var [2][77]mustZone 1
+charvar Quest[2][77]mustZone 240               # GM: Wild Card's offer answers its Event line
+trigger Honoi-Gomoi                            # Wild Card available, the mustZone: 779 (the quest's turn after 776, a Progress line)
+finish
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Gomada-Vulmada                         # The Promise available: 507 (replaceDefault)
+finish
+trigger Papo-Hopo                              # 508
+finish
+trigger Pichichi                               # 511
+finish
+trigger Pyo_Nzon                               # 510
+finish
+trigger Shanruru                               # 504
+finish
+trigger Yafa_Yaa                               # 506
+finish
+quest Windurst.ThePromise accepted             # GM
+trigger Gomada-Vulmada                         # not met; The Promise at Prog 0: its 528
+finish
+trigger Pichichi                               # not met; The Promise at Prog 0, rank 1: nil (no 511); his default 364
+finish

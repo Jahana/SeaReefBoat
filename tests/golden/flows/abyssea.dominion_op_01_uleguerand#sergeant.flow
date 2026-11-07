@@ -1,0 +1,40 @@
+# Uleguerand - Dominion Op #01 (abyssea 101, op 574), through the sergeant: a level 99 Warrior in Abyssea - Uleguerand
+# beside DSgt_Zazarg. No active op: 502 (the packed influence, the op mask, the notes); update on option 18
+# (type 2, op 1): updateEvent(5, 0, 0, 0, 0, 0, 0, 574); finished on 18: the op added (player:addQuest),
+# activeDominionOp 574, DOMINION_SIGNED_ON. DSgt_Zazarg with the op on: 502 (the op, 5, 0, status 1), finished on 0:
+# nothing. Five Mechanical_Menace killed: Prog 1 to 5. DSgt_Zazarg (5 of 5): 502 (status 2); finished on 8 (type 8):
+# completeDominionOp: the op completed, 1000 exp, 200 cruor, 100 dominion notes, the vars cleared. A Mechanical_Menace
+# killed: completed: nothing. Signed on again (18): addQuest leaves the completed op completed, so a Mechanical_Menace
+# killed counts nothing; DSgt_Zazarg: 502 (the op, 5, 0, status 1). Cancelled (3): delQuest, the vars cleared,
+# CANCELED_OBJECTIVE; a Mechanical_Menace killed: nothing. Op #02 signed on (34: type 2, op 2): a Spectator killed:
+# Quest[8][102]Prog 1. The status changes are all the global's (globals/abyssea/dominion.lua); the C# quests are the
+# count only. Abyssea - Uleguerand's IDs.lua names no mob, so each kill names its mob by id (kill #<id>). Perfect Dodge,
+# Invincible and Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaUleguerand/Mechanical_Menace/onMobDeath AbysseaUleguerand/Spectator/onMobDeath AbysseaUleguerand/DSgt_Zazarg/onTrigger AbysseaUleguerand/onEventUpdate/502 AbysseaUleguerand/onEventFinish/502
+char zone=AbysseaUleguerand pos=-244.118,-176.195,233.764 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+trigger DSgt_Zazarg                     # no active op: 502
+update 502 option=18                    # type 2, op 1: updateEvent(5, ..., 574)
+finish option=18                        # type 2: the op added, activeDominionOp set
+trigger DSgt_Zazarg                     # the op on: 502 (status 1)
+finish                                  # type 0: nothing
+kill #17813813                          # Prog 1
+kill #17813814                          # Prog 2
+kill #17813815                          # Prog 3
+kill #17813816                          # Prog 4
+kill #17813817                          # Prog 5
+trigger DSgt_Zazarg                     # 5 of 5: 502 (status 2)
+finish option=8                         # type 8: completed; exp, cruor, notes; vars cleared
+kill #17813818                          # completed: nothing
+trigger DSgt_Zazarg                     # no active op: 502
+finish option=18                        # type 2: addQuest on the completed op
+kill #17813819                          # still completed: nothing
+trigger DSgt_Zazarg                     # the op on: 502 (0 of 5, status 1)
+finish option=3                         # type 3: cancelled (delQuest), vars cleared
+kill #17813820                          # cancelled: nothing
+trigger DSgt_Zazarg                     # no active op: 502
+finish option=34                        # type 2, op 2: op #02 added
+kill #17813789                          # Spectator: Quest[8][102]Prog 1

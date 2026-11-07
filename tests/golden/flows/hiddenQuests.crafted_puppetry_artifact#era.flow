@@ -1,0 +1,34 @@
+# Crafted Puppetry Artifact (hidden quest PuppetryArtifact) with its era module, modules/era/lua/quests/hiddenquests/
+# crafted_puppetry_artifact.lua, enabled by xi.pre(ROV) (RESTRICT_CONTENT 1, ENABLE_ROV 0): a piece is ready at JST
+# midnight instead of a Vana'diel day after the materials. A level 99 Warrior in Aht Urhgan Whitegate, Puppetmaster
+# Blues accepted (a GM), the tobe ordered (orderId, stage 1; GMs). The materials: 795, finished: the base, then
+# orderWait = JstMidnight(). Dhima: orderStage 2 with orderWait set: 796 although the base's day is past (a GM:
+# orderTime 0); orderWait 0 (a GM): the module sets orderTime 0 and the base hands the tobe over (792). Stage 1 with
+# orderWait set (a GM): the module leaves the stage 1 talk to the base: 790.
+module modules/era/lua/quests/hiddenquests/crafted_puppetry_artifact.lua
+lists AhtUrhganWhitegate/Dhima_Polevhia/onTrigger AhtUrhganWhitegate/onEventFinish/795 AhtUrhganWhitegate/onEventFinish/792
+char zone=AhtUrhganWhitegate pos=67.8,-6,27.8 job=WAR lvl=99
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest AhtUrhgan.PuppetmasterBlues accepted
+charvar [PUP]orderId 14523
+charvar [PUP]orderStage 1
+item Ruby
+item SquareOfMoblinweave
+item SquareOfScarletLinenCloth
+item SquareOfWamouraCloth
+item ImperialGoldPiece
+login
+charvar [PUP]orderWait 1                # a GM: stage 1 with orderWait set
+trigger Dhima_Polevhia                  # stage 1: not the module's: the base's 790
+finish
+charvar [PUP]orderWait 0                # a GM
+trade Dhima_Polevhia Ruby x1 SquareOfMoblinweave x1 SquareOfScarletLinenCloth x1 SquareOfWamouraCloth x1 ImperialGoldPiece x1   # 795
+finish                                  # the base: stage 2, orderTime today; then orderWait = JstMidnight()
+charvar [PUP]orderTime 0                # a GM: the day past
+trigger Dhima_Polevhia                  # orderWait set: the module's 796 (the base would be 792)
+finish
+charvar [PUP]orderWait 0                # a GM: the JST midnight passed
+charvar [PUP]orderTime 5000000          # a GM: far in the future
+trigger Dhima_Polevhia                  # the module sets orderTime 0: the base's 792
+finish                                  # the tobe

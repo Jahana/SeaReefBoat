@@ -1,0 +1,17 @@
+# Storms of Fate (jeuno 86) with its era module (quest rework B3b Jeuno, P4): modules/era/lua/quests/jeuno/
+# storms_of_fate.lua, enabled by xi.pre(xi.expansion.SOA) (RESTRICT_CONTENT 1, ENABLE_SOA 0), replaces state 2's 143
+# finish: Shadows of the Departed's Timer = JstMidnight() (the next JST midnight after the harness's wall clock
+# 1800000000: 1800025200), where the quest has VanadielUniqueDay() + 1. A level 75 Warrior, accepted at Prog 3 (a GM):
+# area 1: 143; completed, the Timer at JST midnight. The condition's false side is the quest's own main flow (no module
+# line).
+module modules/era/lua/quests/jeuno/storms_of_fate.lua
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/143
+char zone=RuludeGardens pos=4,2.5,100 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Jeuno.StormsOfFate accepted
+charvar Quest[3][86]Prog 3
+login
+tick 3000                               # the zone-in lock (2.5 s) keeps trigger areas off
+walk 4,2.5,60                           # accepted, Prog 3: 143
+finish                                  # the module's finish: completed; Shadows of the Departed's Timer = JstMidnight()

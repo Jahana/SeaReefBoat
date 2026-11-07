@@ -1,0 +1,28 @@
+# Lost Memories (abyssea 9): a level 99 Warrior in Abyssea - La Theine with 325 Abyssea - La Theine fame (level 5), five
+# Lambent Scales and 100 cruor (a GM, after the login). A trade of two while available: no handler. Halver: 165,
+# finished on option 0: not begun; 165, finished on option 2: begun (any option but 0). Accepted: Halver 163; a trade of
+# one scale: nil; of three: 164 (two at least), finished: the trade confirmed, 480 cruor (CRUOR_TOTAL 480, 580),
+# completed (the Vial of Lambent Potion). Completed: Halver: no section: nothing; a trade of two: nothing.
+lists AbysseaLaTheine/Halver/onTrigger AbysseaLaTheine/Halver/onTrade AbysseaLaTheine/onEventFinish/165 AbysseaLaTheine/onEventFinish/164
+char zone=AbysseaLaTheine pos=598.313,40,-516.663 job=WAR lvl=99
+fame AbysseaLatheine 325
+item LambentScale
+item LambentScale
+item LambentScale
+item LambentScale
+item LambentScale
+login
+currency cruor 100                      # a GM
+trade Halver LambentScale x2            # available: no trade handler: nothing
+trigger Halver                          # fame level 5: 165
+finish option=0                         # option 0: not begun
+trigger Halver                          # 165
+finish option=2                         # begun (any option but 0)
+trigger Halver                          # accepted: 163
+finish
+trade Halver LambentScale x1            # one scale: nil
+trade Halver LambentScale x3            # three (two at least): 164
+finish                                  # confirmed; 480 cruor (580 in all); completed: the Vial of Lambent Potion
+trigger Halver                          # completed: no section: nothing
+finish-if-event
+trade Halver LambentScale x2            # completed: no section: nothing

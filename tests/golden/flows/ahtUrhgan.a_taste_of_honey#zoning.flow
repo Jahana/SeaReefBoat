@@ -1,0 +1,21 @@
+# A Taste of Honey's available arm, the zoning flag alone (task 7 review of the mutants): Vanishing Act's 45 sets the
+# flag and a Stage one minute on; after a JST day the Stage is past but the flag still holds, so Qutiba and Ulamaal
+# answer 55 and 56; after a zone-out and back the same talks answer 579.
+lists AhtUrhganWhitegate/Qutiba/onTrigger AhtUrhganWhitegate/Ulamaal/onTrigger
+char zone=AhtUrhganWhitegate pos=92.341,-6.5,-127.5 job=WAR lvl=75
+quest AhtUrhgan.DeliveringTheGoods completed
+quest AhtUrhgan.VanishingAct accepted
+charvar Quest[6][62]Prog 2
+keyitem RainbowBerry
+login
+trigger Ulamaal                         # the berry: 45
+finish                                  # completed; needToZone; A Taste of Honey's Stage now + 60
+wait jst=1                              # past the Stage
+trigger Qutiba                          # the flag holds: 55
+finish
+trigger Ulamaal                         # the flag holds: 56
+finish
+warp -64,-7,38 AlZahbi                  # the zoning flag cleared
+warp 92.341,-6.5,-127.5 AhtUrhganWhitegate
+trigger Qutiba                          # 579
+finish option=0

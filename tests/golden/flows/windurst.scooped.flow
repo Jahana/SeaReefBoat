@@ -1,0 +1,43 @@
+# Scooped! (windurst 38): Naiko-Paneiko and Chyuk-Kochak in Windurst Waters. Making Headlines accepted by GM (not
+# completed: not available; Naiko's script answers it with a reminder, a random one of 666 / 671; a trade: nothing),
+# then completed by GM: the trade while the check holds (nothing), 676 (begun), 677 and the script's turn (663), 679,
+# the trades (a chip; the box and a chip: nil; the Bronze Box: 680, completed: fame +20, 1500 gil, the box taken), 663
+# and 682 (replaceDefault), and a trade while completed (nothing).
+# Defaults: Naiko-Paneiko's script: Making Headlines available 665 (its finish adds that quest), accepted reminders
+# (666 / 671 by math.randomInt, until the scoops are in), completed 663; it has no onTrade. Chyuk-Kochak 664 (no
+# script). The lookup alternates Naiko's Event / replaceDefault lines with his script; Progress lines win. Also named:
+# Naiko-Paneiko by LB04 (accepted only) and The Weekly Adventurer (Windurst Waters [S]'s Naiko-Paneiko); Chyuk-Kochak by
+# no other quest.
+lists WindurstWaters/Naiko-Paneiko/onTrigger WindurstWaters/Naiko-Paneiko/onTrade WindurstWaters/Chyuk-Kochak/onTrigger WindurstWaters/onEventFinish/676 WindurstWaters/onEventFinish/680
+char zone=WindurstWaters pos=-246.9,-5.31,-306.0
+quest Windurst.MakingHeadlines accepted
+item BronzeBox
+item BoneChip
+login
+trade Naiko-Paneiko BronzeBox x1                    # Making Headlines not completed: no section, no script onTrade: nothing
+trigger Naiko-Paneiko                               # not available: his script's Making Headlines reminder (666 or 671)
+finish
+quest Windurst.MakingHeadlines completed
+walk -246.9,-5.31,-306.0
+trade Naiko-Paneiko BronzeBox x1                    # available: no trade handler in section 1, nothing
+trigger Naiko-Paneiko                               # available: progressEvent 676
+finish                                              # begun
+trigger Naiko-Paneiko                               # accepted: event 677 (the handler's turn)
+finish
+trigger Naiko-Paneiko                               # the script's turn: Making Headlines completed, 663
+finish
+trigger Chyuk-Kochak                                # accepted: event 679
+finish
+walk -246.9,-5.31,-306.0
+trade Naiko-Paneiko BoneChip x1                     # not the box: nil
+trade Naiko-Paneiko BronzeBox x1 BoneChip x1        # the box and a chip: not exact, nil
+trade Naiko-Paneiko BronzeBox x1                    # the box: progressEvent 680
+finish                                              # the box taken; completed: fame +20, 1500 gil
+trigger Naiko-Paneiko                               # completed: 663 (replaceDefault, the handler's turn)
+finish
+trigger Naiko-Paneiko                               # the script's turn: 663
+finish
+trigger Chyuk-Kochak                                # completed: 682 (replaceDefault)
+finish
+walk -246.9,-5.31,-306.0
+trade Naiko-Paneiko BoneChip x1                     # completed: no trade handler, nothing

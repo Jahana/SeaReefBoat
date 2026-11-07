@@ -1,0 +1,39 @@
+# Redeeming Rocks (crystalWar 4, call-only): a level 99 Warrior in Windurst Waters [S] (missions as group 1's flows).
+# Kocco Ehllek 108, finished: the quest added, RedeemingRocksProg 1. Rohn Ehlbalna 114, finished: Prog 2; again: his
+# script's 440. Kocco 109, finished: Prog 3. Vunkerl Inlet [S]: qm4: the Piece of Kionite, Prog 4; again: its script's
+# NOTHING_OUT_OF_ORDINARY. Windurst Waters [S]: Kocco 110, finished: Prog 0, RedeemingDay today; again (today): his
+# script's 140. A Vana'diel day later: 111, finished: completed (Kocco's Earring, RedeemingDay deleted). Completed:
+# Kocco 140, Rohn 440.
+lists WindurstWatersS/Kocco_Ehllek/onTrigger WindurstWatersS/Rohn_Ehlbalna/onTrigger VunkerlInletS/qm4/onTrigger WindurstWatersS/onEventFinish/108 WindurstWatersS/onEventFinish/109 WindurstWatersS/onEventFinish/110 WindurstWatersS/onEventFinish/111 WindurstWatersS/onEventFinish/114
+char zone=WindurstWatersS pos=-39.965,-1.125,-163.018 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Kocco_Ehllek                    # available: 108
+finish                                  # the quest added; Prog 1
+warp -41.973,-3.5,46.496 WindurstWatersS
+trigger Rohn_Ehlbalna                   # accepted, Prog 1: 114
+finish                                  # Prog 2
+trigger Rohn_Ehlbalna                   # Prog 2: his script's 440
+finish
+warp -39.965,-1.125,-163.018 WindurstWatersS
+trigger Kocco_Ehllek                    # Prog 2: 109
+finish                                  # Prog 3
+warp -411.583,-28.953,-45.12 VunkerlInletS
+trigger qm4                             # Prog 3: the Piece of Kionite (KEYITEM_OBTAINED); Prog 4
+trigger qm4                             # Prog 4: NOTHING_OUT_OF_ORDINARY
+warp -39.965,-1.125,-163.018 WindurstWatersS
+trigger Kocco_Ehllek                    # Prog 4: 110
+finish                                  # Prog 0; RedeemingDay today
+trigger Kocco_Ehllek                    # RedeemingDay today: his script's 140
+finish
+wait vana=24                            # a Vana'diel day
+trigger Kocco_Ehllek                    # RedeemingDay not today: 111
+finish                                  # completed (Kocco's Earring); RedeemingDay deleted
+trigger Kocco_Ehllek                    # completed: 140
+finish
+warp -41.973,-3.5,46.496 WindurstWatersS
+trigger Rohn_Ehlbalna                   # completed: 440
+finish

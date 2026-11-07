@@ -1,0 +1,196 @@
+# The Opo-Opo and I (outlands 11): the ten Opo-opo handlers of Kazham, the straight way through. Nine of them have the
+# default text OPO_OPO (Kazham DefaultActions), which alternates with their scripts (interaction_lookup's UseFallback,
+# per NPC): with UseFallback 0 a talk shows the text and sets it to 1; the next talk runs the script (the call) and
+# resets it to 0, showing the text again when the script starts nothing. So each script talk to them follows a default
+# talk (finish-if-event: a text, no event). Lalapp has no default (his script's 205 while not accepted). Trades do not
+# alternate (no default trade action).
+# Lulupp: no BathedInScent: nothing (the text twice); a trade while available: nothing. Lalapp, available (no scent, then
+# scent): 205. BathedInScent 2 (a GM): nothing (the test is == 1). BathedInScent 1 (Personal Hygiene's, a GM): 217
+# (0, 483), declined (option 0, option 2: the finish wants 1), then begun. Each handler k in turn: the ask (progress k),
+# its item: the good event (progress k: the item taken, progress k + 1, failed 0), the thanks. A bone chip at Lulupp
+# (neither his item nor another's): nothing; the Workbench at Lulupp at progress 1 (not his turn): nothing; Kukupp's
+# Workbench with a Wyvern Skull: 220 (the wanted item first), both taken. Nenepp's 241 with no free slot / 3 free slots:
+# ITEM_CANNOT_BE_OBTAINED (no item), nothing taken; with 4 (the test is >= 4): the egg taken, Windurst fame +70,
+# completed, the Opo-opo Crown and 3 pamamas, the vars 0, King of the Opo-Opos. Completed: Lalapp 205; Lulupp: nothing
+# (the text); Nenepp: nothing; Kakapp at OPO_OPO_PROGRESS 7 (a GM, with a Wyvern Skull): his talk and his item's trade
+# answer nothing (213 / 226 only while accepted).
+# The walking handlers (Lulupp, Kukupp, Mumupp, Roropp, Tatapp, Lalapp, Nenepp patrol) are traded right after a talk
+# (trigger stands the char by the NPC; trade does not walk).
+char zone=Kazham pos=-25.0,-2.5,-3.5 job=WAR lvl=75
+item BoneChip
+item BrokenMithranFishingRod
+item Workbench
+item TenOfCoinsCard
+item HandfulOfTheSandsOfSilence
+item WanderingBulb
+item SetOfGiantFishBones
+item BlackenedToad
+item WyvernSkull x2
+item RockOfAncientSalt
+item LuckyEgg
+login
+trigger Lulupp                          # UseFallback 0: the default OPO_OPO text
+finish-if-event
+trigger Lulupp                          # the script: available, no BathedInScent: the quest's nil; the text
+finish-if-event
+trade Lulupp BrokenMithranFishingRod x1 # available: nothing
+warp -64.0,-11.0,-96.0 Kazham
+trigger Lalapp                          # available, no scent: 205 (no default)
+finish
+charvar BathedInScent 1
+trigger Lalapp                          # available, bathed: 205
+finish
+warp -25.0,-2.5,-3.5 Kazham
+charvar BathedInScent 2
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # BathedInScent 2: nothing (== 1); the text
+finish-if-event
+charvar BathedInScent 1
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # bathed, available: 217 (0, 483)
+finish option=0                         # declined: nothing
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 217
+finish option=2                         # nothing (the finish wants option 1)
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # 217
+finish option=1                         # begun
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # accepted, progress 0: 207
+finish
+trade Lulupp BoneChip x1                # progress 0, neither the rod nor another's item: nothing
+trade Lulupp BrokenMithranFishingRod x1 # the rod: 219
+finish                                  # progress 0: the rod taken; OPO_OPO_PROGRESS 1
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # progress 1: 242
+finish
+trade Lulupp Workbench x1               # progress 1, failed 0: not his turn: nothing
+warp 42.0,-11.0,-178.0 Kazham
+trigger Kukupp                          # the text
+finish-if-event
+trigger Kukupp                          # progress 1: 208
+finish
+trade Kukupp Workbench x1 WyvernSkull x1  # the workbench and another's item: 220 (the wanted item first)
+finish                                  # tradeComplete: the workbench and a skull taken; progress 2, failed 0
+trigger Kukupp                          # the text
+finish-if-event
+trigger Kukupp                          # progress 2: 243
+finish
+warp 93.0,-15.0,-114.0 Kazham
+trigger Mumupp                          # the text
+finish-if-event
+trigger Mumupp                          # progress 2: 209
+finish
+trade Mumupp TenOfCoinsCard x1          # 221
+finish                                  # the card taken; progress 3
+trigger Mumupp                          # the text
+finish-if-event
+trigger Mumupp                          # progress 3: 244
+finish
+warp 15.0,-8.0,-108.0 Kazham
+trigger Roropp                          # the text
+finish-if-event
+trigger Roropp                          # progress 3: 210
+finish
+trade Roropp HandfulOfTheSandsOfSilence x1  # 222
+finish                                  # the sands taken; progress 4
+trigger Roropp                          # the text
+finish-if-event
+trigger Roropp                          # progress 4: 245
+finish
+warp 15.6,-8.0,-80.8 Kazham
+trigger Popopp                          # the text
+finish-if-event
+trigger Popopp                          # progress 4: 210
+finish
+trade Popopp WanderingBulb x1           # 223
+finish                                  # the bulb taken; progress 5
+trigger Popopp                          # the text
+finish-if-event
+trigger Popopp                          # progress 5: 246
+finish
+warp 67.7,-11.0,-48.0 Kazham
+trigger Bubupp                          # the text
+finish-if-event
+trigger Bubupp                          # progress 5: 211
+finish
+trade Bubupp SetOfGiantFishBones x1     # 224
+finish                                  # the bones taken; progress 6
+trigger Bubupp                          # the text
+finish-if-event
+trigger Bubupp                          # progress 6: 247
+finish
+trigger Tatapp                          # the text (Tatapp walks Kazham's long loop: trigger stands the char by him)
+finish-if-event
+trigger Tatapp                          # progress 6: 212
+finish
+trade Tatapp BlackenedToad x1           # 225
+finish                                  # the toad taken; progress 7
+trigger Tatapp                          # the text
+finish-if-event
+trigger Tatapp                          # progress 7: 248
+finish
+warp 102.8,-15.0,-108.0 Kazham
+trigger Kakapp                          # the text
+finish-if-event
+trigger Kakapp                          # progress 7: 213
+finish
+trade Kakapp WyvernSkull x1             # 226
+finish                                  # the skull taken; progress 8
+trigger Kakapp                          # the text
+finish-if-event
+trigger Kakapp                          # progress 8: 249
+finish
+warp -64.0,-11.0,-96.0 Kazham
+trigger Lalapp                          # no default: progress 8: 214
+finish
+trade Lalapp RockOfAncientSalt x1       # 227
+finish                                  # the salt taken; progress 9
+trigger Lalapp                          # progress 9: 250
+finish
+warp 30.0,-11.0,-182.0 Kazham
+trigger Nenepp                          # the text
+finish-if-event
+trigger Nenepp                          # progress 9: 212
+finish
+fill-inventory
+trade Nenepp LuckyEgg x1                # 241
+finish                                  # no free slot (< 4): ITEM_CANNOT_BE_OBTAINED (no item); nothing taken
+storage inventory 33                    # 3 free slots
+trigger Nenepp                          # the text (by the walking Nenepp again)
+finish-if-event
+trade Nenepp LuckyEgg x1                # 241
+finish                                  # 3 free slots (< 4): ITEM_CANNOT_BE_OBTAINED; nothing taken
+storage inventory 34                    # 4 free slots
+trigger Nenepp                          # the script: progress 9: 212 (by him again)
+finish
+trade Nenepp LuckyEgg x1                # 241
+finish                                  # 4 free: the egg taken; Windurst fame +70; completed; the crown, 3 pamamas; vars 0; King of the Opo-Opos
+free-inventory
+trigger Nenepp                          # the text
+finish-if-event
+trigger Nenepp                          # completed: the quest's nil; the text
+finish-if-event
+charvar OPO_OPO_PROGRESS 7
+item WyvernSkull
+warp 102.8,-15.0,-108.0 Kazham
+trigger Kakapp                          # the text
+finish-if-event
+trigger Kakapp                          # completed, progress 7: the quest's nil (213 only while accepted); the text
+finish-if-event
+trade Kakapp WyvernSkull x1             # completed, progress 7, his item: nothing (226 only while accepted)
+warp -64.0,-11.0,-96.0 Kazham
+trigger Lalapp                          # completed: 205
+finish
+warp -25.0,-2.5,-3.5 Kazham
+trigger Lulupp                          # the text
+finish-if-event
+trigger Lulupp                          # completed: the quest's nil; the text
+finish-if-event
+trade Lulupp BoneChip x1                # completed: nothing

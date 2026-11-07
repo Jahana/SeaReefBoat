@@ -1,0 +1,53 @@
+# Black Market (outlands): Muzaffar in Norg (call-only: scripts/zones/Norg/npcs/Muzaffar.lua; no default, so no
+# alternation). Available: four furs traded: nothing (the trade arm needs accepted or completed). 15; finished on 0: not
+# begun; on 1: begun. Accepted: 16. Three furs: nothing; four furs and a mummy (five items): nothing. Four furs: the trade
+# taken, 17 (furs); finished: 1500 gil, completed, Norg fame +30, the Black Marketeer title, 20 (started by the finish).
+# Completed: 16; four pottery and a pebble (five items): nothing; four pottery: 18 (2000 gil, fame +40, no completion,
+# 20); four mummies and a pebble: nothing; four mummies: 19 (3000 gil, fame +50, 20); four furs again: 17 (1500 gil, fame
+# +30, no completion, 20). 18 and 19 while accepted: #pottery, #mummies. Furs, pottery and mummies do not stack: one
+# item line each.
+char zone=Norg pos=16.7,-2,-12.6 job=WAR lvl=75
+item NorthernFur
+item NorthernFur
+item NorthernFur
+item NorthernFur
+item NorthernFur
+item NorthernFur
+item NorthernFur
+item NorthernFur
+item PieceOfEasternPottery
+item PieceOfEasternPottery
+item PieceOfEasternPottery
+item PieceOfEasternPottery
+item SouthernMummy
+item SouthernMummy
+item SouthernMummy
+item SouthernMummy
+item SouthernMummy
+item Pebble
+login
+trade Muzaffar NorthernFur x4           # available: nothing
+trigger Muzaffar                        # available: 15
+finish option=0                         # not begun
+trigger Muzaffar                        # 15
+finish option=1                         # begun
+trigger Muzaffar                        # accepted: 16
+finish
+trade Muzaffar NorthernFur x3           # three: nothing
+trade Muzaffar NorthernFur x4 SouthernMummy x1   # five items: nothing
+trade Muzaffar NorthernFur x4           # taken; 17 (furs)
+finish                                  # 1500 gil; completed; fame +30; the title; 20
+finish                                  # 20
+trigger Muzaffar                        # completed: 16
+finish
+trade Muzaffar PieceOfEasternPottery x4 Pebble x1   # five items: nothing
+trade Muzaffar PieceOfEasternPottery x4 # taken; 18
+finish                                  # 2000 gil; fame +40; the title; 20
+finish
+trade Muzaffar SouthernMummy x4 Pebble x1   # five items: nothing
+trade Muzaffar SouthernMummy x4         # taken; 19
+finish                                  # 3000 gil; fame +50; the title; 20
+finish
+trade Muzaffar NorthernFur x4           # taken; 17
+finish                                  # 1500 gil; fame +30; the title; 20
+finish

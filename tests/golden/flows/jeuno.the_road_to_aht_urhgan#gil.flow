@@ -1,0 +1,35 @@
+# The Road to Aht Urhgan (jeuno 91): the purchase and the trip. A level 75 Warrior with 500000 gil (the edge: >=), Prog
+# 1 by a GM while available. 10063, update 14: (1, 1, 1, 1, 1, 1, 500000, 1); finished 3: begun, the gil taken,
+# PAY_FAURSEL (500000), Prog 2, the mustZone, Timer 8001. Prog 2: the mustZone: 10066; out and back, Timer 8001 > day
+# 8000: 10066; `wait vana=12` (day 8001): 10067 (15, 1, 3, -1, 541, 540, 0, 99); update 29: nothing; update 30:
+# (79, 1, 0, 34, 910, 540, 99, 99); finished: Prog 4, xi.teleport.to the Wajaom leypoint (-200.1 -10 79.9). The tick
+# zones the char, the login brings it in at Wajaom Woodlands; 4 s after the zone-in, afterZoneIn at Prog 4: the Boarding
+# Permit and the Map of Wajaom Woodlands, Prog 5. Back in Lower Jeuno, Prog 5: 10068; finished: completed (its result
+# ignored). Completed: 10071.
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/onEventUpdate/10063 LowerJeuno/onEventUpdate/10067 LowerJeuno/onEventFinish/10063 LowerJeuno/onEventFinish/10067 LowerJeuno/onEventFinish/10068 WajaomWoodlands/afterZoneIn/1
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75 gil=500000
+charvar Quest[3][91]Prog 1
+login
+trigger Faursel                     # available, Prog 1: 10063 (0, 0, 0, 0, 0, 0)
+update 10063 option=14              # updateEvent(1, 1, 1, 1, 1, 1, 500000, 1)
+finish option=3                     # begun; 500000 gil taken, PAY_FAURSEL; Prog 2; the mustZone; Timer 8001
+trigger Faursel                     # Prog 2, the mustZone: 10066
+finish
+warp -52.5,0,101 UpperJeuno         # another zone: the mustZone cleared
+warp 39.5,4.1,-45.2 LowerJeuno
+trigger Faursel                     # Timer 8001 > day 8000: 10066
+finish
+wait vana=12                        # day 8001
+trigger Faursel                     # 10067 (15, 1, 3, -1, 541, 540, 0, 99)
+update 10067 option=29              # not 30: nothing
+update 10067 option=30              # updateEvent(79, 1, 0, 34, 910, 540, 99, 99)
+finish                              # Prog 4; xi.teleport.to WAJAOM_LEYPOINT
+tick 400                            # the zone change the teleport set: the char saved at Wajaom Woodlands (51)
+login                               # back in at the leypoint
+tick 3000                           # 3.4 s after the zone-in: no afterZoneIn yet
+tick 1000                           # 4.4 s: afterZoneIn at Prog 4: the Boarding Permit, the Map of Wajaom Woodlands; Prog 5
+warp 39.5,4.1,-45.2 LowerJeuno
+trigger Faursel                     # Prog 5: 10068
+finish                              # completed (no reward)
+trigger Faursel                     # completed: 10071
+finish

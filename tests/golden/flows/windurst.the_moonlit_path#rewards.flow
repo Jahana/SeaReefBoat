@@ -1,0 +1,28 @@
+# The Moonlit Path (windurst 9): the whistle option, the whistle bit and the Dark Mana Orb. A Windurst char at rank 10
+# who completed The Promise, holding the Trainer's Whistle (bit 7 clear), accepted with the Whisper of the Moon (GM):
+# 846 (mask 64: no SMN). Option 3 (Fenrir's Torque) with a full bag: nothing (the quest stays accepted, the whisper
+# kept); option 8: the Fenrir Whistle, completed, the whisper taken, Timer, the Dark Mana Orb (all three operands
+# true). A day on: 848 option 2 (begun again, the bauble, Repeat 1); the whisper (GM): 850 with the Fenrir Whistle held
+# (bit 7 set again: mask 192); option 2 (Fenrir's Cape): completed, Repeat 1, the orb again (already held).
+lists WindurstWaters/Leepe-Hoppe/onTrigger WindurstWaters/onEventFinish/846 WindurstWaters/onEventFinish/850
+char zone=WindurstWaters pos=11.4,-9.75,-195.97 nation=2
+rank 10
+fame Windurst 425
+quest Windurst.TheMoonlitPath accepted
+quest Windurst.ThePromise completed
+keyitem WhisperOfTheMoon
+keyitem TrainersWhistle
+login
+trigger Leepe-Hoppe                     # 846 (mask 64: no SMN; the Trainer's Whistle, no Fenrir Whistle: bit 7 clear)
+fill-inventory
+finish option=3                         # no room for the torque: nothing, the whisper kept
+free-inventory
+trigger Leepe-Hoppe                     # 846 again
+finish option=8                         # the Fenrir Whistle; completed; the whisper taken; Timer; Windurst, rank 10, The Promise: the Dark Mana Orb
+wait jst=1
+trigger Leepe-Hoppe                     # Timer 0: 848
+finish option=2                         # the quest deleted; the Moon Bauble; begun; Repeat 1
+delkeyitem MoonBauble
+keyitem WhisperOfTheMoon
+trigger Leepe-Hoppe                     # Repeat 1: 850 (mask 192: the Fenrir Whistle held sets bit 7)
+finish option=2                         # Fenrir's Cape; completed; Repeat 1; the orb (held)

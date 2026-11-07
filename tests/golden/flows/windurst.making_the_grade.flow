@@ -1,0 +1,92 @@
+# Making the Grade (windurst 4): Fuepepe, Chomoro-Kyotoro and the school (Windurst Waters), Koru-Moru (Windurst Walls;
+# the first of the name, the second is cutscene-only). A level-10 WAR, Teacher's Pet completed by GM, Windurst fame 125
+# (level 3: Let Sleeping Dogs Lie, level 4, stays unavailable, so its section-1 child lines do not take turns here).
+# NPCs with a script take turns with an Event reply (Moreno-Toeno: 441 / 469 and Teacher's Pet's 439 too; Mashuu-Ajuu:
+# Reap What You Sow's random 463; Fuepepe, Pechiru-Mashiru, Koru-Moru: nothing here): talked to twice where it shows.
+# Available: the answer sheets traded to Fuepepe (no trade handler: nothing); 442 option 0 (nothing), option 1 (begun).
+# Prog 0: Fuepepe 443, Chomoro-Kyotoro 454, the school's 444-453; a chip, the sheets with a chip: nil; the sheets: 455
+# (Prog 1; the sheets kept, kept quirk); the sheets again at Prog 1: nil. Prog 1: Fuepepe 456, Chomoro-Kyotoro 457;
+# Koru-Moru nil (193); the sheets with a chip: nil; the sheets: 285 (taken; the Tattered Test Sheet; Prog 2); Koru-Moru
+# 286. Prog 2: Chomoro-Kyotoro 460 (the test sheet taken, Prog 3), 461. Fuepepe 458 with a full bag (nothing), 458:
+# completed (fame 30, the Scroll of Aspir; the mustZone). Completed with the mustZone: no section (nil: 423); out to
+# Port Windurst and back: Fuepepe 459 (importantEvent: Progress the first time, then an Event).
+lists WindurstWaters/Fuepepe/onTrigger WindurstWaters/Fuepepe/onTrade WindurstWaters/Chomoro-Kyotoro/onTrigger WindurstWaters/Akkeke/onTrigger WindurstWaters/Foi-Mui/onTrigger WindurstWaters/Kirarara/onTrigger WindurstWaters/Koko_Lihzeh/onTrigger WindurstWaters/Mashuu-Ajuu/onTrigger WindurstWaters/Moreno-Toeno/onTrigger WindurstWaters/Paku-Nakku/onTrigger WindurstWaters/Pechiru-Mashiru/onTrigger WindurstWaters/Rukuku/onTrigger WindurstWaters/Tauwawa/onTrigger WindurstWaters/onEventFinish/442 WindurstWaters/onEventFinish/455 WindurstWaters/onEventFinish/458 WindurstWaters/onEventFinish/460 WindurstWalls/Koru-Moru/onTrigger WindurstWalls/Koru-Moru/onTrade WindurstWalls/onEventFinish/285
+char zone=WindurstWaters pos=165.5,-1.25,161.1 job=WAR lvl=10
+quest Windurst.TeachersPet completed
+fame Windurst 125
+item BoneChip
+item PileOfAnswerSheets
+login
+trade Fuepepe PileOfAnswerSheets x1           # available, the check holds: no trade handler: nothing
+trigger Fuepepe                               # Teacher's Pet completed, fame level 3, level 10: 442
+finish option=0                               # not 1: nothing
+trigger Fuepepe                               # 442
+finish option=1                               # begun
+trigger Fuepepe                               # Prog 0: 443
+finish
+trigger Chomoro-Kyotoro                       # Prog 0: 454
+finish
+trigger Akkeke                                # 453
+finish
+trigger Foi-Mui                               # 449
+finish
+trigger Kirarara                              # 447
+finish
+trigger Koko_Lihzeh                           # 451
+finish
+trigger Mashuu-Ajuu                           # 448 (the first talk here: the quest's turn)
+finish
+trigger Mashuu-Ajuu                           # his script's turn: Reap What You Sow's 463
+finish
+trigger Paku-Nakku                            # 452
+finish
+trigger Pechiru-Mashiru                       # 445
+finish
+trigger Rukuku                                # 450
+finish
+trigger Tauwawa                               # 446
+finish
+trigger Moreno-Toeno                          # the quest's turn, the first Event line: this quest's 444
+finish
+trigger Moreno-Toeno                          # his script's turn: 469
+finish
+trigger Moreno-Toeno                          # the quest's turn, the next Event line: Teacher's Pet's 439
+finish
+trigger Fuepepe                               # 443 (stands beside him)
+finish
+trade Fuepepe BoneChip x1                     # not the sheets: nil
+trade Fuepepe PileOfAnswerSheets x1 BoneChip x1   # with an extra: nil
+trade Fuepepe PileOfAnswerSheets x1           # Prog 0, the sheets alone: 455
+finish                                        # Prog 1; no confirmTrade: the sheets kept
+trade Fuepepe PileOfAnswerSheets x1           # Prog 1: nil
+trigger Fuepepe                               # Prog 1: 456
+finish
+trigger Chomoro-Kyotoro                       # Prog 1: 457
+finish
+warp -119.7,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                             # Prog 1: nil; his script (nothing); 193
+finish
+trade Koru-Moru PileOfAnswerSheets x1 BoneChip x1  # with an extra: nil
+trade Koru-Moru PileOfAnswerSheets x1         # Prog 1: 285
+finish                                        # the sheets taken; the Tattered Test Sheet; Prog 2
+trigger Koru-Moru                             # Prog 2: 286
+finish
+warp 165.5,-1.25,161.1 WindurstWaters
+trigger Chomoro-Kyotoro                       # Prog 2: 460
+finish                                        # the test sheet taken; Prog 3
+trigger Chomoro-Kyotoro                       # Prog 3: 461
+finish
+trigger Fuepepe                               # Prog 3 (>= 2): 458
+fill-inventory
+finish                                        # the scroll does not fit: complete fails: nothing
+free-inventory
+trigger Fuepepe                               # 458
+finish                                        # completed: fame 30, the Scroll of Aspir; the mustZone
+trigger Fuepepe                               # completed, the mustZone: no section; his script (nothing); 423
+finish
+warp -103.9,-3.25,107.9 PortWindurst          # the mustZone cleared on the zone change
+warp 165.5,-1.25,161.1 WindurstWaters         # back
+trigger Fuepepe                               # completed, no mustZone: 459 (importantEvent: Progress the first time)
+finish
+trigger Fuepepe                               # 459 again (now an Event: his script's turn, which answers nothing, then the quest's 459)
+finish

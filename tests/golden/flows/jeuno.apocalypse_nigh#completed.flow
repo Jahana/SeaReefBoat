@@ -1,0 +1,46 @@
+# Apocalypse Nigh (jeuno 89) completed, by Empyreal Paradox's qm1 (no script; default AIR_WARPED_AND_DISTORTED). Main,
+# Shadows of the Departed and this quest completed, CoP The Last Verse and Zilart The Last Verse current (GMs, before
+# login), holding the Musical Earring (15961, Static - 1) and the Fox Earring (15966, Static + 4): outside the loop's
+# four: qm1: 5; option 0: nothing; 5 again, option 2: nothing; 5 again, option 1: CoP The Last Verse and Zilart The Last
+# Verse deleted, CoP Dawn and Zilart Awakening added, the Zilart status 3, Dawn's Status 8, Shadows of the Departed and
+# this quest deleted; then qm1: this quest available: no section; AIR_WARPED_AND_DISTORTED; this quest accepted (a GM):
+# no qm1 handler there: AIR_WARPED_AND_DISTORTED. Four more chars, each holding one earring (Static, Magnetic, Hollow,
+# Ethereal: the loop's four, each alone): qm1: nil (AIR_WARPED_AND_DISTORTED). Gilgamesh's 233 is in the main flow.
+lists EmpyrealParadox/qm1/onTrigger EmpyrealParadox/onEventFinish/5
+char zone=EmpyrealParadox pos=534.6,-1,-592.2 job=WAR lvl=75
+char e1 zone=EmpyrealParadox pos=534.6,-1,-592.2 job=WAR lvl=75
+char e2 zone=EmpyrealParadox pos=534.6,-1,-592.2 job=WAR lvl=75
+char e3 zone=EmpyrealParadox pos=534.6,-1,-592.2 job=WAR lvl=75
+char e4 zone=EmpyrealParadox pos=534.6,-1,-592.2 job=WAR lvl=75
+quest Jeuno.ShadowsOfTheDeparted completed
+quest Jeuno.ApocalypseNigh completed
+mission Cop TheLastVerse current
+mission Zilart TheLastVerse current
+item MusicalEarring
+item FoxEarring
+e1: quest Jeuno.ApocalypseNigh completed
+e1: item StaticEarring
+e2: quest Jeuno.ApocalypseNigh completed
+e2: item MagneticEarring
+e3: quest Jeuno.ApocalypseNigh completed
+e3: item HollowEarring
+e4: quest Jeuno.ApocalypseNigh completed
+e4: item EtherealEarring
+login
+trigger qm1                             # completed, none of the four: 5
+finish option=0                         # not 1: nothing
+trigger qm1                             # 5
+finish option=2                         # not 1: nothing
+trigger qm1                             # 5
+finish option=1                         # the missions rewound (Dawn, Awakening at status 3, Dawn Status 8); both quests deleted
+trigger qm1                             # this quest available: no section; AIR_WARPED_AND_DISTORTED
+quest Jeuno.ApocalypseNigh accepted     # a GM
+trigger qm1                             # accepted: no qm1 handler; AIR_WARPED_AND_DISTORTED
+e1: login
+e1: trigger qm1                         # the Static Earring held: nil; AIR_WARPED_AND_DISTORTED
+e2: login
+e2: trigger qm1                         # the Magnetic Earring held: nil
+e3: login
+e3: trigger qm1                         # the Hollow Earring held: nil
+e4: login
+e4: trigger qm1                         # the Ethereal Earring held: nil

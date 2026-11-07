@@ -1,0 +1,20 @@
+# Trial Size Trial by Ice (sandoria 107): accepted by GM with no Mini Tuning Fork of Ice (used up by a lost
+# fight): 737 (0, fork, 4, 20); its finish gives a fork on any option (`csid == 734 and option == 0 or csid == 737`):
+# option 0 with a full inventory: ITEM_CANNOT_BE_OBTAINED; one free slot (GM storage 31), option 0 finished while
+# completed (a GM inside the event; 737's finish reads no status): a new fork, ITEM_OBTAINED. Then (the quest set
+# available, then accepted: a GM's accepted over a completed quest keeps it completed) 708 with the fork held.
+char zone=NorthernSanDoria pos=-187.2,0,109.3 job=SMN lvl=20
+quest Sandoria.TrialSizeTrialByIce accepted
+login
+trigger Castilchat                        # accepted, no fork: 737 (0, fork, 4, 20)
+fill-inventory
+finish option=0                           # any option: no free slot: ITEM_CANNOT_BE_OBTAINED (the fork)
+storage inventory 31                      # a GM: one free slot
+trigger Castilchat                        # 737
+quest Sandoria.TrialSizeTrialByIce completed
+finish option=0                           # finished while completed, one free slot: a new fork, ITEM_OBTAINED
+free-inventory
+quest Sandoria.TrialSizeTrialByIce available
+quest Sandoria.TrialSizeTrialByIce accepted
+trigger Castilchat                        # accepted, the fork held: 708
+finish

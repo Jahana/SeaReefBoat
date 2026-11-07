@@ -1,0 +1,65 @@
+# You Call That a Knife (outlands 6): a level 75 Warrior at Windurst fame 425 (level 6), two Sandfish, a Bone Chip, a
+# Tonberry Board. Available, Prog 0: a Bone Chip to Mhebi: nil; Mhebi: nil: the default 125; the shed _6y9: nil: the
+# default 126; Pula 269 (0, Sandfish). A Sandfish to Mhebi: 127 (0, Sandfish), option 0: nothing (the fish kept); 127,
+# option 511: Prog 1, the fish taken (confirmTrade). Prog 1: a Sandfish: nil (Prog 0 only); Mhebi 318; _6y9 128, option
+# 0: nothing; 128, option 2: nothing; 128, option 1: begun. Accepted without the knife: Mhebi 129, Pula 269; Vah 130 (Prog 2), then 131. The
+# Temple: a Bone Chip to Chef Nonberry: 28: the chip taken (tradeComplete); now >= cooldown (0): the four cooks popped
+# (claimed), cooldown now + 600; the Tonberry Board: 27: confirmed, Nonberry's Knife. Kazham: with the knife: Vah 132;
+# Mhebi 133: completed (Windurst fame 60, 7200 gil, Ya Done Good), the knife taken, the mustZone; Mhebi 134; out of Kazham
+# and back: 135; Pula: no section: the default 92; Vah: no section: his script (no BathedInScent), the default 124.
+lists Kazham/Mhebi_Juhbily/onTrigger Kazham/Mhebi_Juhbily/onTrade Kazham/Pula_Rhatti/onTrigger Kazham/_6y9/onTrigger Kazham/Vah_Keshura/onTrigger TempleOfUggalepih/Chef_Nonberry/onTrade TempleOfUggalepih/onEventFinish/28
+char zone=Kazham pos=40.063,-11,-161.234 job=WAR lvl=75
+fame Windurst 425
+item Sandfish x2
+item BoneChip x2
+item TonberryBoard
+login
+trade Mhebi_Juhbily BoneChip x1         # not the fish: nil
+trigger Mhebi_Juhbily                   # Prog 0: nil: the default 125
+finish
+trigger _6y9                            # Prog 0: nil: the default 126
+finish
+trigger Pula_Rhatti                     # 269 (0, Sandfish)
+finish
+walk 40.063,-11,-159.734                # beside Mhebi again
+trade Mhebi_Juhbily Sandfish x1         # Prog 0, the fish alone: 127 (0, Sandfish)
+finish option=0                         # nothing: the fish kept
+trade Mhebi_Juhbily Sandfish x1         # 127
+finish option=511                       # Prog 1; the fish taken
+trade Mhebi_Juhbily Sandfish x1         # Prog 1: nil
+trigger Mhebi_Juhbily                   # Prog 1: 318
+finish
+trigger _6y9                            # Prog 1: 128
+finish option=0                         # nothing
+trigger _6y9                            # 128
+finish option=2                         # not 1: nothing
+trigger _6y9                            # 128
+finish option=1                         # begun
+trigger Mhebi_Juhbily                   # accepted, no knife: 129
+finish
+trigger Pula_Rhatti                     # 269
+finish
+trigger Vah_Keshura                     # Prog 1: 130
+finish                                  # Prog 2
+trigger Vah_Keshura                     # Prog 2: 131
+finish
+warp -135.225,0,-90.732 TempleOfUggalepih   # beside Chef Nonberry
+trade Chef_Nonberry BoneChip x1         # not the board: 28
+finish                                  # the chip taken; cooldown 0 <= now: the four cooks popped, claimed; cooldown now + 600
+trade Chef_Nonberry TonberryBoard x1    # 27
+finish                                  # confirmed; Nonberry's Knife
+warp 27.997,-8.5,-104.267 Kazham
+trigger Vah_Keshura                     # the knife: 132
+finish
+trigger Mhebi_Juhbily                   # the knife: 133
+finish                                  # completed: Windurst fame +60, 7200 gil, Ya Done Good; the knife taken; the mustZone
+trigger Mhebi_Juhbily                   # completed, the mustZone: 134
+finish
+warp -64.619,-9.25,-8.853 WindurstWaters   # the mustZone cleared
+warp 40.063,-11,-161.234 Kazham
+trigger Mhebi_Juhbily                   # 135
+finish
+trigger Pula_Rhatti                     # completed: no section: the default 92
+finish
+trigger Vah_Keshura                     # completed: his script (nothing), the default 124
+finish

@@ -1,0 +1,37 @@
+# Beauty and the Galka (bastok 1): Talib in Port Bastok, Parraggoh in Bastok Mines. Accepted at once on Talib's offer
+# (2, option 0); the zinc ore trade for the Palborough Mines Logs (not while they are held); Parraggoh's two random
+# lines while the logs are missing (8 or 9, math.randomInt(1, 100) <= 50); the logs to Parraggoh (10, with the Prog var:
+# 0 here) for the Bronze Knife; Parraggoh's 12 afterwards (replaceDefault). Talib has no script and no default; Shady
+# Business (C#, also on Talib) needs this quest completed. Parraggoh's default is 11; The Eleventh's Hour also names him
+# and is not open to this char.
+lists PortBastok/Talib/onTrigger PortBastok/Talib/onTrade PortBastok/onEventFinish/2 PortBastok/onEventFinish/3 BastokMines/Parraggoh/onTrigger BastokMines/onEventFinish/7 BastokMines/onEventFinish/10
+char zone=PortBastok pos=-101.1,4.649,29.8
+item ChunkOfZincOre x3
+item BoneChip
+login
+trade Talib ChunkOfZincOre x1   # available: no trade handler, nothing
+trigger Talib                   # the offer, 2
+finish option=0                 # accepted (any option but 1)
+trigger Talib                   # accepted: 4
+finish
+trade Talib BoneChip x1         # no logs, the wrong item: nothing
+warp -14.4,6.999,56 BastokMines
+trigger Parraggoh               # accepted, no logs: 8 (math.randomInt(1, 100) <= 50)
+finish
+trigger Parraggoh               # 8
+finish
+trigger Parraggoh               # 8
+finish
+trigger Parraggoh               # 8
+finish
+trigger Parraggoh               # 9 (the roll above 50)
+finish
+warp -101.1,4.649,29.8 PortBastok
+trade Talib ChunkOfZincOre x1   # no logs, one zinc: 3
+finish                          # the zinc gone, the Palborough Mines Logs
+trade Talib ChunkOfZincOre x1   # the logs held: nothing
+warp -14.4,6.999,56 BastokMines
+trigger Parraggoh               # the logs: 10 (Prog 0)
+finish                          # completed: Bronze Knife, Norg fame +30, the logs gone
+trigger Parraggoh               # completed: 12 (replaceDefault over his 11)
+finish

@@ -1,0 +1,56 @@
+# Against All Odds' trigger-area replies against the ToAU missions' at the same areas: a trigger area ranks only its
+# own actions, and each pair here is two Progress that tie: the first entry plays the container listed first, a later
+# one rotates. An Event in place of the quest's would lose every entry. Each finish leaves the state as it was or is
+# undone by a GM, so the tie stays. Main (a level 50 Corsair, Navigating the Unfriendly Seas completed, ToAU 7
+# Westerly Winds current at mission status 0, a full bag): Whitegate's area 5: 797 and 3027 (797 begins the quest:
+# available again by a GM; 3027's finish gives nothing to a full bag). bob (the same, Against All Odds accepted at Prog
+# 0, ToAU 34 Testing the Waters current with the Ephramadian Gold Coin): Arrapago Reef's area 1: 237 and 15 (237's
+# finish starts 240, whose finish sets Prog 1: Prog 0 again by a GM; 15 finished on option 0 sets the mission's
+# mustZone: cleared by a GM).
+lists AhtUrhganWhitegate/onTriggerAreaEnter/5 ArrapagoReef/onTriggerAreaEnter/1
+char zone=AhtUrhganWhitegate pos=80,-6,-140 job=COR lvl=50
+char bob zone=ArrapagoReef pos=-450,-2,-400 job=COR lvl=50
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.EquippedForAllOccasions completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+mission Toau WesterlyWinds current
+bob: quest AhtUrhgan.LuckOfTheDraw completed
+bob: quest AhtUrhgan.EquippedForAllOccasions completed
+bob: quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+bob: quest AhtUrhgan.AgainstAllOdds accepted
+bob: mission Toau TestingTheWaters current
+bob: keyitem EphramadianGoldCoin
+login
+fill-inventory
+tick 1000
+tick 1000
+tick 1000
+walk 80,-6,-130                         # area 5: 797 and 3027 tie: the first container's
+finish                                  # 797: begun (the float, Wait); or 3027: a full bag: nothing
+quest AhtUrhgan.AgainstAllOdds available   # a GM
+walk 80,-6,-140
+walk 80,-6,-130                         # rotated
+finish
+quest AhtUrhgan.AgainstAllOdds available   # a GM
+walk 80,-6,-140
+walk 80,-6,-130                         # rotated again
+finish
+bob: login
+tick 1000
+tick 1000
+tick 1000
+bob: walk -458,-2,-400                  # area 1: 237 and 15 tie: the first container's
+bob: finish option=0                    # 237 (240 started) or 15 (option 0: the mission's mustZone)
+bob: finish-if-event                    # 240: Prog 1
+bob: charvar Quest[6][26]Prog 0         # a GM
+bob: charvar Mission[4][33]mustZone 0   # a GM
+bob: walk -450,-2,-400
+bob: walk -458,-2,-400                  # rotated
+bob: finish option=0
+bob: finish-if-event
+bob: charvar Quest[6][26]Prog 0         # a GM
+bob: charvar Mission[4][33]mustZone 0   # a GM
+bob: walk -450,-2,-400
+bob: walk -458,-2,-400                  # rotated again
+bob: finish option=0
+bob: finish-if-event

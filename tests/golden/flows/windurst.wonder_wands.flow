@@ -1,0 +1,103 @@
+# Wonder Wands (windurst 48): Hakkuru-Rinkuru (Port Windurst; +7: the first of the name is cutscene-only; default action
+# 224; once Making Amends is completed its container answers him with 281 (replaceDefault, no mustZone), which takes
+# turns with his script; while it is accepted, its 275; a script talk that starts nothing plays the container's event
+# again), Goltata and Yaman-Hachuman (no default; their standards 232 / 233 in their scripts). A level-75 WAR, Making
+# Amends and Making Amens! completed by GMs (no mustZone). Available: Goltata 232, Yaman-Hachuman 233; fame level 4:
+# nothing; the three traded: nothing (not accepted). Level 5 with needToZone (a GM's flag): nothing; rezoned. Making
+# Amends accepted (GM): nothing; Making Amens! accepted (GM): nothing. Both completed: 259, option 0: nothing; option 1:
+# begun. Accepted: 260; two of the three traded: 260 (0, 17091, 17061, 17053); three items with one of the three missing
+# (each in turn): 260; the three and a fourth item: 260; Goltata 257 (0, 0, 17091), Yaman-Hachuman 256 (0, 0, 0, 17061).
+# No free slot, the three alone: 265; its finish: ITEM_CANNOT_BE_OBTAINED only, SecondRewardVar not set (user ruling
+# 2026-11-04, kept Lua bugs: the Lua's trade set it before 265, whatever the space). The trigger: 260. One free slot
+# (inventory 31), the three: 265: SecondRewardVar 1, the trade taken, 4800 gil, the New Moon Armlets, fame 50, the
+# title, completed. Completed, SecondRewardVar 1: 267: two of the three back by the roll (here 1:
+# the staff and the rod), var 0; then nothing; the trade: nothing; Goltata 269, Yaman-Hachuman 268.
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=75
+fame Windurst 324
+item OakStaff
+item MythrilRod
+item RoseWand
+item BlockOfAnimalGlue
+login
+quest Windurst.MakingAmends completed
+quest Windurst.MakingAmens completed
+trigger Goltata                         # available: his 232
+finish
+trigger Yaman-Hachuman                  # available: his 233
+finish
+trigger Hakkuru-Rinkuru+7               # Making Amends' 281 (replaceDefault)
+finish
+trigger Hakkuru-Rinkuru+7               # his script: fame level 4: nothing; 281 again
+finish
+trade Hakkuru-Rinkuru+7 OakStaff x1 MythrilRod x1 RoseWand x1  # available: no arm: nothing
+fame Windurst 325
+charvar [generic]mustZone 240           # needToZone (a GM)
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # level 5, needToZone: nothing; 281 again
+finish
+rezone                                  # needToZone cleared (and the turns)
+quest Windurst.MakingAmends available
+quest Windurst.MakingAmends accepted
+trigger Hakkuru-Rinkuru+7               # Making Amends' 275
+finish
+trigger Hakkuru-Rinkuru+7               # his script: Making Amends accepted: nothing; its 275 again
+finish
+quest Windurst.MakingAmends completed
+quest Windurst.MakingAmens available
+quest Windurst.MakingAmens accepted
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # Making Amens! accepted: nothing; 281 again
+finish
+quest Windurst.MakingAmens completed
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # level 5, no needToZone: 259
+finish option=0                         # not 1: nothing
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # 259
+finish option=1                         # begun
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # accepted: 260
+finish
+trade Hakkuru-Rinkuru+7 OakStaff x1 MythrilRod x1  # two of the three: 260 (0, 17091, 17061, 17053)
+finish
+trade Hakkuru-Rinkuru+7 OakStaff x1 MythrilRod x1 BlockOfAnimalGlue x1  # no Rose Wand, count 3: 260
+finish
+trade Hakkuru-Rinkuru+7 OakStaff x1 BlockOfAnimalGlue x1 RoseWand x1  # no Mythril Rod, count 3: 260
+finish
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1 MythrilRod x1 RoseWand x1  # no Oak Staff, count 3: 260
+finish
+trade Hakkuru-Rinkuru+7 OakStaff x1 MythrilRod x1 RoseWand x1 BlockOfAnimalGlue x1  # four items: 260
+finish
+trigger Goltata                         # accepted: 257 (0, 0, 17091)
+finish
+trigger Yaman-Hachuman                  # accepted: 256 (0, 0, 0, 17061)
+finish
+trigger Hakkuru-Rinkuru+7               # 281 (and back beside him)
+finish
+fill-inventory                          # no free slot
+trade Hakkuru-Rinkuru+7 OakStaff x1 MythrilRod x1 RoseWand x1  # the three alone: 265 (0, ...)
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (the armlets); nothing else
+trigger Hakkuru-Rinkuru+7               # accepted: 260
+finish
+storage inventory 31                    # one free slot
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trade Hakkuru-Rinkuru+7 OakStaff x1 MythrilRod x1 RoseWand x1  # 265 (one free slot: the finish gives)
+finish                                  # the var 1; the trade; 4800 gil; the armlets; fame 50; the title; completed
+free-inventory
+trigger Hakkuru-Rinkuru+7               # completed, SecondRewardVar 1: 267
+finish                                  # the roll's two items (ITEM_OBTAINED each); SecondRewardVar 0
+trigger Hakkuru-Rinkuru+7               # 281
+finish
+trigger Hakkuru-Rinkuru+7               # completed, var 0: nothing; 281 again
+finish
+trade Hakkuru-Rinkuru+7 BlockOfAnimalGlue x1  # completed: no arm: nothing
+trigger Goltata                         # completed: 269
+finish
+trigger Yaman-Hachuman                  # completed: 268
+finish

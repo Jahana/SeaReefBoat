@@ -1,0 +1,14 @@
+# Shoot First, Ask Questions Later (bastok 67): the qm1 without the map. Available: no section-2 handler (the default
+# NOTHING_OUT_OF_ORDINARY); accepted by GM with no map: nil; the map by GM pops the Beet Leafhopper; the map deleted by GM before
+# the kill: the Beet Leafhopper's death sets nothing, so the next qm1 talk (no map, killed_wsnm 0) is nil again.
+lists TheBoyahdaTree/qm1/onTrigger
+char zone=TheBoyahdaTree pos=-11,-19,-177 job=RNG lvl=75
+login
+trigger qm1                    # available: no handler, NOTHING_OUT_OF_ORDINARY
+quest Bastok.ShootFirstAskQuestionsLater accepted
+trigger qm1                    # accepted, no map: nil, NOTHING_OUT_OF_ORDINARY
+keyitem MapToTheAnnalsOfTruth
+trigger qm1                    # the map: the Beet Leafhopper popped and claimed, SENSE_OMINOUS_PRESENCE
+delkeyitem MapToTheAnnalsOfTruth
+kill BEET_LEAFHOPPER             # no map: killed_wsnm not set
+trigger qm1                    # killed_wsnm 0, no map: nil, NOTHING_OUT_OF_ORDINARY

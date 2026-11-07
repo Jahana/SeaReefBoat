@@ -1,0 +1,22 @@
+# An Empty Vessel at exactly 1000 gil (the `getGil() >= 1000` tests; the main and #edges flows hold 4000+ and 500).
+# Main (level 30, 1000 gil): Waoud 60 (1000), finished with option 46: nothing; 60, finished with option 45: 1000 >= 1000: mustZone, Timer = day + 1, the
+# 1000 gil taken (PAY_DIVINATION); Waoud 63 (the mustZone). carl (completed, completeEvent 0, 1000 gil): 78 (1000),
+# finished with option 2: nothing; 78, finished with option 1: mustZone, Timer, the 1000 gil taken; 63.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/onEventFinish/60 AhtUrhganWhitegate/onEventFinish/78
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=WAR lvl=30 gil=1000
+char carl zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=WAR lvl=30 gil=1000
+carl: quest AhtUrhgan.AnEmptyVessel completed
+login
+trigger Waoud                           # 60 (1000)
+finish option=46                        # not 45 (nor 50): nothing at 1000 gil
+trigger Waoud                           # 60 (1000)
+finish option=45                        # 1000 >= 1000: mustZone, Timer = day + 1, the 1000 gil taken, PAY_DIVINATION
+trigger Waoud                           # mustZone: 63
+finish
+carl: login
+carl: trigger Waoud                     # completed, completeEvent 0: 78 (1000)
+carl: finish option=2                   # not 1: nothing at 1000 gil
+carl: trigger Waoud                     # 78 (1000)
+carl: finish option=1                   # 1000 >= 1000: mustZone, Timer, the 1000 gil taken, PAY_DIVINATION
+carl: trigger Waoud                     # mustZone: 63
+carl: finish

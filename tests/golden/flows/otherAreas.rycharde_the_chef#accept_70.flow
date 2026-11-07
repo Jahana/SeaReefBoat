@@ -1,0 +1,15 @@
+# Rycharde the Chef (otherAreas 0): 70's accepting option and a finish out of its state. Prog 2 (a GM): Rycharde's 70,
+# option 71: begun (Prog stays 2). Accepted: two meat: 74; the quest made available again by a GM while 74 is open: no
+# 74 handler in the available section (nothing given, the meat kept).
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/onEventFinish/70 Mhaura/onEventFinish/74
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30
+item SliceOfDhalmelMeat x2
+charvar Quest[4][0]Prog 2
+login
+trigger Rycharde                        # Prog 2: 70 (4359)
+finish option=71                        # begun
+trigger Rycharde                        # accepted: 72
+finish
+trade Rycharde SliceOfDhalmelMeat x2    # 74
+quest OtherAreas.RychardeTheChef available # a GM, while 74 is open
+finish                                  # no 74 handler while available: nothing (the meat kept, no reward)

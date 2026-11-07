@@ -1,0 +1,27 @@
+# Trust: Bastok (bastok 92): the states only a GM reaches. Accepted by GM (no Blue Institute Card): Naji's 980 (Prog 0;
+# Naji learned, Prog 1); Prog 3 and Prog -1 by GM (no branch sets either): Naji's else, nil (700); Clarion Star while
+# accepted without the card: nil (442). Then completed by GM with Naji known and Ayame not: Lucius' 986 option 2
+# (Volker), so Iron Eater's test fails on Ayame alone (nil, 604); Naji's 983 (Ayame not known).
+lists PortBastok/Clarion_Star/onTrigger Metalworks/Naji/onTrigger Metalworks/Lucius/onTrigger Metalworks/Iron_Eater/onTrigger Metalworks/onEventFinish/980 Metalworks/onEventFinish/986
+char zone=Metalworks pos=64,-14,-4 lvl=5 nation=1
+quest Bastok.TrustBastok accepted
+login
+trigger Naji                   # accepted, Prog 0: 980 (0, 0, 0, 0, 0, 0, 0, 0)
+finish                         # Naji learned, YOU_LEARNED_TRUST, Prog 1
+charvar Quest[1][92]Prog 3
+trigger Naji                   # Prog 3: none of 984 / 980 / 981 / 982: nil, 700
+finish
+charvar Quest[1][92]Prog -1
+trigger Naji                   # Prog -1: nil, 700
+finish
+warp 81.5,7.5,-24.2 PortBastok
+trigger Clarion_Star           # accepted, no card: nil, 442
+finish
+quest Bastok.TrustBastok completed
+warp 64,-14,-4 Metalworks
+trigger Lucius                 # completed, no Volker: 986 (0, 0, 0, 0, 0, 0, 0, 0)
+finish option=2                # Volker learned
+trigger Iron_Eater             # Naji and Volker known, Ayame not: nil, 604
+finish
+trigger Naji                   # completed, no Ayame: 983 (rank3 0)
+finish

@@ -1,0 +1,13 @@
+# Twinstone Bonding (windurst 62): the trade reads the var, not the status. Available at fame level 1: 424. With
+# GiohAijhriSpokenTo 2 (a GM; the trade wants exactly 1): the earring: nothing. With the var 1 (a GM): the earring: 490:
+# not accepted: fame 16, 900 gil, needToZone, var 0, the earring taken (no quest).
+char zone=WindurstWoods pos=106.2,-4.75,173.9 job=WAR lvl=75
+item TwinstoneEarring
+charvar GiohAijhriSpokenTo 2
+login
+trigger Gioh_Ajihri                     # available, fame level 1: his 424 (and beside him)
+finish
+trade Gioh_Ajihri TwinstoneEarring x1   # var 2: nothing
+charvar GiohAijhriSpokenTo 1
+trade Gioh_Ajihri TwinstoneEarring x1   # var 1, available: 490
+finish                                  # not accepted: fame 16; 900 gil; the earring taken; needToZone; var 0

@@ -1,0 +1,36 @@
+# Trial by Lightning (otherAreas 27): Ripapa's Carbuncle Debacle arms (Windurst's quest, kept in his script) answer
+# before this quest. At Windurst fame level 6, Carbuncle Debacle accepted with CarbuncleDebacleProgress 3 and no
+# Lightning Pendulum: 10023 (not 10016); its finish with a full bag: ITEM_CANNOT_BE_OBTAINED, no pendulum, progress 3
+# kept (the patched script's elseif, after the call's three csids); with room: the pendulum. Progress 3 with the
+# pendulum: the call runs: 10016, declined. Progress 2: 10022, with a full bag (nothing) and then with room (a second
+# pendulum: rare, addItem fails, ITEM_OBTAINED all the same; progress 3). Progress 4: the call runs: 10016, accepted,
+# then 10017. Carbuncle Debacle completed with progress 2 (a GM): the call runs: 10017.
+char zone=Mhaura pos=30.6,-15.6,56.0 job=SMN lvl=75
+fame Windurst 425                         # level 6
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 3
+login
+fill-inventory
+trigger Ripapa                            # Carbuncle Debacle, progress 3, no pendulum: 10023 (the script's)
+finish                                    # no free slot: ITEM_CANNOT_BE_OBTAINED (the pendulum), nothing given
+free-inventory
+trigger Ripapa                            # still no pendulum: 10023 again
+finish                                    # the Lightning Pendulum; CarbuncleDebacleProgress 3
+trigger Ripapa                            # progress 3, the pendulum held: the quest's 10016
+finish option=0                           # declined
+charvar CarbuncleDebacleProgress 2
+fill-inventory
+trigger Ripapa                            # progress 2: 10022
+finish                                    # no free slot: ITEM_CANNOT_BE_OBTAINED, progress 2 kept
+free-inventory
+trigger Ripapa                            # progress 2: 10022
+finish                                    # a second pendulum: rare, addItem fails; ITEM_OBTAINED; progress 3
+charvar CarbuncleDebacleProgress 4
+trigger Ripapa                            # progress 4: the quest's 10016
+finish option=1                           # begun; the fork
+trigger Ripapa                            # accepted, the fork: 10017
+finish
+charvar CarbuncleDebacleProgress 2
+quest Windurst.CarbuncleDebacle completed
+trigger Ripapa                            # Carbuncle Debacle completed, progress 2: the quest's 10017
+finish

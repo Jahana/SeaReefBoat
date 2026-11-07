@@ -1,0 +1,595 @@
+{
+   "$schema": "https://json-schema.org/draft/2020-12/schema",
+   "$id": "npcs.schema.json",
+   "title": "Zone NPCs",
+   "description": "Static NPC placements and appearance for one zone.",
+   "type": "object",
+   "properties": {
+      "npcs": {
+         "type": "object",
+         "additionalProperties": {
+            "type": "object",
+            "properties": {
+               "animation_speed": {
+                  "anyOf": [
+                     {
+                        "$ref": "#/$defs/uint8_t"
+                     },
+                     {
+                        "type": "null"
+                     }
+                  ],
+                  "description": "Animation speed sent to the client. Defaults to 50.",
+                  "minimum": 0,
+                  "maximum": 255
+               },
+               "at": {
+                  "anyOf": [
+                     {
+                        "type": "array",
+                        "items": {
+                           "$ref": "#/$defs/float"
+                        }
+                     },
+                     {
+                        "type": "null"
+                     }
+                  ],
+                  "description": "Position as x, y, z and optionally a facing of 0-255. Defaults to 0, 0, 0 facing 0."
+               },
+               "content": {
+                  "anyOf": [
+                     {
+                        "type": "string",
+                        "title": "Content",
+                        "enum": [
+                           "none",
+                           "rotz",
+                           "cop",
+                           "toau",
+                           "wotg",
+                           "acp",
+                           "amk",
+                           "asa",
+                           "abyssea",
+                           "soa",
+                           "rov",
+                           "tvr",
+                           "voidwatch",
+                           "field_manuals",
+                           "grounds_tomes",
+                           "survival_guide",
+                           "daily_tally",
+                           "trust_quests"
+                        ]
+                     },
+                     {
+                        "type": "null"
+                     }
+                  ],
+                  "description": "Content tag gating this NPC. Omitted means always enabled."
+               },
+               "display_name": {
+                  "type": [
+                     "string",
+                     "null"
+                  ],
+                  "description": "Name sent to the client."
+               },
+               "elevator": {
+                  "anyOf": [
+                     {
+                        "type": "object",
+                        "properties": {
+                           "door_delay": {
+                              "anyOf": [
+                                 {
+                                    "$ref": "#/$defs/uint32_t"
+                                 },
+                                 {
+                                    "type": "null"
+                                 }
+                              ],
+                              "description": "Milliseconds the shut door waits before the platform leaves. Defaults to none."
+                           },
+                           "lever": {
+                              "anyOf": [
+                                 {
+                                    "type": "string",
+                                    "title": "Elevator",
+                                    "enum": [
+                                       "timed_automatic",
+                                       "davoi_lift",
+                                       "palborough_mines_lift",
+                                       "fort_ghelsba_lift"
+                                    ]
+                                 },
+                                 {
+                                    "type": "null"
+                                 }
+                              ],
+                              "description": "Which lever drives this lift. Omitted means it runs on its own schedule."
+                           },
+                           "lower_door": {
+                              "type": "string",
+                              "description": "Client name of the door at the bottom of the shaft."
+                           },
+                           "period": {
+                              "anyOf": [
+                                 {
+                                    "$ref": "#/$defs/uint32_t"
+                                 },
+                                 {
+                                    "type": "null"
+                                 }
+                              ],
+                              "description": "Milliseconds for one leg, travel plus the wait at the floor. Retail periods are not whole seconds. Lever-driven lifts ignore it."
+                           },
+                           "reversed": {
+                              "type": [
+                                 "boolean",
+                                 "null"
+                              ],
+                              "description": "True when the up animation sends the platform down. Defaults to false."
+                           },
+                           "travel": {
+                              "$ref": "#/$defs/uint8_t",
+                              "description": "Seconds the platform spends between floors. The client animates against the same figure."
+                           },
+                           "upper_door": {
+                              "type": "string",
+                              "description": "Client name of the door at the top."
+                           }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                           "lower_door",
+                           "upper_door",
+                           "travel"
+                        ]
+                     },
+                     {
+                        "type": "null"
+                     }
+                  ],
+                  "description": "Present when this NPC is an elevator platform."
+               },
+               "look_at": {
+                  "anyOf": [
+                     {
+                        "$ref": "#/$defs/uint16_t"
+                     },
+                     {
+                        "type": "null"
+                     }
+                  ],
+                  "description": "ActIndex this NPC faces. Omitted means none."
+               },
+               "render": {
+                  "type": "object",
+                  "properties": {
+                     "animation": {
+                        "anyOf": [
+                           {
+                              "type": "string",
+                              "title": "Animation",
+                              "enum": [
+                                 "none",
+                                 "attack",
+                                 "despawn",
+                                 "death",
+                                 "event",
+                                 "chocobo",
+                                 "fishing",
+                                 "open_door",
+                                 "close_door",
+                                 "elevator_up",
+                                 "elevator_down",
+                                 "animation_18",
+                                 "animation_19",
+                                 "animation_20",
+                                 "animation_21",
+                                 "animation_22",
+                                 "animation_23",
+                                 "animation_24",
+                                 "animation_25",
+                                 "animation_27",
+                                 "animation_29",
+                                 "fishing_npc",
+                                 "healing",
+                                 "animation_34",
+                                 "fishing_fish",
+                                 "fishing_caught",
+                                 "fishing_rod_break",
+                                 "fishing_line_break",
+                                 "fishing_monster",
+                                 "fishing_stop",
+                                 "synth",
+                                 "sit",
+                                 "ranged",
+                                 "fishing_start",
+                                 "fishing_fight_1",
+                                 "fishing_fight_2",
+                                 "fishing_fight_3",
+                                 "animation_55",
+                                 "new_fishing_start",
+                                 "new_fishing_fish",
+                                 "new_fishing_caught",
+                                 "new_fishing_rod_break",
+                                 "new_fishing_line_break",
+                                 "new_fishing_monster",
+                                 "new_fishing_stop",
+                                 "sitchair_0",
+                                 "sitchair_1",
+                                 "sitchair_2",
+                                 "sitchair_3",
+                                 "sitchair_4",
+                                 "sitchair_5",
+                                 "sitchair_6",
+                                 "sitchair_7",
+                                 "sitchair_8",
+                                 "sitchair_9",
+                                 "sitchair_10",
+                                 "mount",
+                                 "trust"
+                              ]
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Idle animation. Defaults to none."
+                     },
+                     "animation_sub": {
+                        "anyOf": [
+                           {
+                              "$ref": "#/$defs/uint8_t"
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Sub-animation selector. Defaults to 0.",
+                        "minimum": 0,
+                        "maximum": 255
+                     },
+                     "door_id": {
+                        "anyOf": [
+                           {
+                              "$ref": "#/$defs/uint32_t"
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Identity the client reads for a door, elevator or ship. Elevators and ships send it with a timestamp appended. Nothing reads it on a mob."
+                     },
+                     "entity_flags": {
+                        "anyOf": [
+                           {
+                              "$ref": "#/$defs/uint32_t"
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Entity behaviour bitmask sent to the client. Defaults to 0 on a mob and 3 on an npc.",
+                        "minimum": 0,
+                        "maximum": 4294967295
+                     },
+                     "hitbox": {
+                        "anyOf": [
+                           {
+                              "$ref": "#/$defs/uint8_t"
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Hitbox radius in tenths of a yalm. Defaults to 0.",
+                        "minimum": 0,
+                        "maximum": 255
+                     },
+                     "king": {
+                        "type": [
+                           "boolean",
+                           "null"
+                        ],
+                        "description": "Whether the entity stays spawned beyond render range. Defaults to false."
+                     },
+                     "look": {
+                        "anyOf": [
+                           {
+                              "type": "object",
+                              "properties": {
+                                 "body": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Equipped body model. Omitted means empty."
+                                 },
+                                 "face": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint8_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Face, for equipped models."
+                                 },
+                                 "feet": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Equipped feet model. Omitted means empty."
+                                 },
+                                 "hands": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Equipped hands model. Omitted means empty."
+                                 },
+                                 "head": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Equipped head model. Omitted means empty. On a chocobo the slots hold small barding indices, not equipment ids."
+                                 },
+                                 "legs": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Equipped legs model. Omitted means empty."
+                                 },
+                                 "main": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Equipped main weapon model. Omitted means empty."
+                                 },
+                                 "model": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Model id, for standard, misc and automaton."
+                                 },
+                                 "race": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint8_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Race, for equipped models. On a chocobo this pair carries its colour instead."
+                                 },
+                                 "ranged": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Equipped ranged weapon model. Omitted means empty."
+                                 },
+                                 "sub": {
+                                    "anyOf": [
+                                       {
+                                          "$ref": "#/$defs/uint16_t"
+                                       },
+                                       {
+                                          "type": "null"
+                                       }
+                                    ],
+                                    "description": "Equipped sub weapon model. Omitted means empty."
+                                 },
+                                 "type": {
+                                    "type": "string",
+                                    "description": "Which look fields the client reads, matching the packet's SubKind. door, elevator and ship carry no model: the client names them from the packet. standard, misc and automaton each carry one model id under a different SubKind, so the same id means a different model in each. misc is SubKind 5, which the packet code still calls MODEL_UNK_5, and is used by Fomors; automaton is SubKind 6 and covers trolls, lamia and mamool ja despite the name. chocobo reads the same nine fields as equipped.",
+                                    "enum": [
+                                       "standard",
+                                       "equipped",
+                                       "door",
+                                       "elevator",
+                                       "ship",
+                                       "misc",
+                                       "automaton",
+                                       "chocobo"
+                                    ]
+                                 }
+                              },
+                              "additionalProperties": false,
+                              "required": [
+                                 "type"
+                              ]
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Appearance. On a mob it inherits through the species chain; on an npc, omitted means an empty look."
+                     },
+                     "model_size": {
+                        "anyOf": [
+                           {
+                              "$ref": "#/$defs/uint8_t"
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Graphic size the client draws the entity at, 0 to 3. Defaults to 0.",
+                        "minimum": 0,
+                        "maximum": 3
+                     },
+                     "moving": {
+                        "anyOf": [
+                           {
+                              "$ref": "#/$defs/uint16_t"
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Movement flag word sent alongside the position. Defaults to 0."
+                     },
+                     "name_prefix": {
+                        "anyOf": [
+                           {
+                              "$ref": "#/$defs/uint8_t"
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Byte 0x27 of the entity update: gender, plus the article the client shows before the name. Defaults to 0.",
+                        "minimum": 0,
+                        "maximum": 255
+                     },
+                     "name_vis": {
+                        "anyOf": [
+                           {
+                              "$ref": "#/$defs/uint8_t"
+                           },
+                           {
+                              "type": "null"
+                           }
+                        ],
+                        "description": "Name display bitmask. Defaults to 0.",
+                        "minimum": 0,
+                        "maximum": 255
+                     }
+                  },
+                  "additionalProperties": false,
+                  "description": "How it is drawn and named."
+               },
+               "script": {
+                  "type": [
+                     "string",
+                     "null"
+                  ],
+                  "description": "Script identity, resolving to scripts/zones/<zone>/npcs/<script>.lua."
+               },
+               "speed": {
+                  "anyOf": [
+                     {
+                        "$ref": "#/$defs/uint8_t"
+                     },
+                     {
+                        "type": "null"
+                     }
+                  ],
+                  "description": "Movement speed. Defaults to 50.",
+                  "minimum": 0,
+                  "maximum": 255
+               },
+               "status": {
+                  "anyOf": [
+                     {
+                        "type": "string",
+                        "title": "Status",
+                        "enum": [
+                           "normal",
+                           "update",
+                           "disappear",
+                           "invisible",
+                           "status_4",
+                           "status_5",
+                           "cutscene_only",
+                           "status_7",
+                           "status_18",
+                           "shutdown"
+                        ]
+                     },
+                     {
+                        "type": "null"
+                     }
+                  ],
+                  "description": "Spawn status. Defaults to disappear."
+               },
+               "widescan": {
+                  "type": [
+                     "boolean",
+                     "null"
+                  ],
+                  "description": "Whether the NPC appears on widescan. Defaults to false."
+               }
+            },
+            "additionalProperties": false,
+            "required": [
+               "render"
+            ]
+         },
+         "description": "NPCs keyed by their fully qualified entity id."
+      },
+      "meta": {
+         "$ref": "_meta.schema.json"
+      }
+   },
+   "additionalProperties": false,
+   "$defs": {
+      "float": {
+         "type": "number",
+         "minimum": -3.4028234663852886E38,
+         "maximum": 3.4028234663852886E38
+      },
+      "uint16_t": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 65535
+      },
+      "uint32_t": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 4294967295
+      },
+      "uint8_t": {
+         "type": "integer",
+         "minimum": 0,
+         "maximum": 255
+      }
+   },
+   "required": [
+      "npcs"
+   ]
+}

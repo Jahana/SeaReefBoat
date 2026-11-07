@@ -1,0 +1,33 @@
+# Lure of the Wildcat (Jeuno) (jeuno 90): the kinds of Ajithaam's replies. With ToAU's President Salaheem current (a
+# GM, before login) his script answers 10176 whenever the lookup falls back to it (UseFallback: after an Event reply,
+# the next talk tries his script first). 10088 is a Progress event: it plays again after a GM reset (available, the
+# badge taken), where an Event would fall back to 10176. 10089 and 10090 are Events: the talk after each falls back to
+# his 10176. 10091 is a Progress event: it plays right after an Event (10090), where an Event would fall back.
+lists UpperJeuno/Ajithaam/onTrigger UpperJeuno/onEventFinish/10088 UpperJeuno/onEventFinish/10091
+char zone=UpperJeuno pos=-79.7,0,161.5 job=WAR lvl=20
+mission Toau PresidentSalaheem current
+login
+trigger Ajithaam               # available: 10088
+finish                         # the badge, begun
+quest Jeuno.LureOfTheWildcat available # a GM
+delkeyitem WhiteSentinelBadge  # a GM
+trigger Ajithaam               # 10088 again (Progress: no fallback)
+finish                         # the badge, begun
+trigger Ajithaam               # Prog 0: 10089 (an Event)
+finish
+trigger Ajithaam               # after the Event: his script's 10176
+finish
+trigger Ajithaam               # 10089
+finish
+charvar Quest[3][90]Prog 1     # a GM: bit 0
+trigger Ajithaam               # after the Event: his script's 10176
+finish
+trigger Ajithaam               # some bits: 10090 (an Event)
+finish
+trigger Ajithaam               # after the Event: his script's 10176
+finish
+trigger Ajithaam               # 10090
+finish
+charvar Quest[3][90]Prog 1048575 # a GM: all twenty bits
+trigger Ajithaam               # 10091 right after the Event 10090 (Progress: no fallback)
+finish                         # the badge taken, KEYITEM_LOST, completed: the White Invitation Card

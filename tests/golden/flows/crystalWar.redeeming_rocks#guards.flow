@@ -1,0 +1,30 @@
+# Redeeming Rocks (crystalWar 4, call-only), the guards: a level 99 Warrior in Windurst Waters [S] (missions as the
+# main flow). Available, RedeemingRocksProg 1 (a GM): Rohn answers his script's 440 (114 needs the accepted quest).
+# Accepted (a GM), Prog 5, the bag full (a GM): Kocco 111 (110 is Prog 4 exactly), finished: no room: not completed.
+# Prog 0, RedeemingDay far ahead of today (a GM): 111 again (any day but today), not completed. Completed (a GM), Prog
+# 2: Kocco's script 140 (109 needs the accepted quest).
+lists WindurstWatersS/Kocco_Ehllek/onTrigger WindurstWatersS/Rohn_Ehlbalna/onTrigger WindurstWatersS/onEventFinish/111
+char zone=WindurstWatersS pos=-41.973,-3.5,46.496 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+charvar RedeemingRocksProg 1            # a GM
+trigger Rohn_Ehlbalna                   # available, Prog 1: his script's 440
+finish
+quest CrystalWar.RedeemingRocks accepted # a GM
+charvar RedeemingRocksProg 5            # a GM
+fill-inventory                          # a GM: no slot free
+warp -39.965,-1.125,-163.018 WindurstWatersS
+trigger Kocco_Ehllek                    # accepted, Prog 5, RedeemingDay 0: 111
+finish                                  # no room for the earring: not completed
+charvar RedeemingRocksProg 0            # a GM
+charvar RedeemingDay 999999             # a GM: a day ahead of today
+trigger Kocco_Ehllek                    # RedeemingDay is not today: 111
+finish                                  # no room: not completed
+free-inventory                          # a GM
+quest CrystalWar.RedeemingRocks completed # a GM
+charvar RedeemingRocksProg 2            # a GM
+trigger Kocco_Ehllek                    # completed, Prog 2: his script's 140
+finish

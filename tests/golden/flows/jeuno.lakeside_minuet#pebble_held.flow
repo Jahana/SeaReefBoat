@@ -1,0 +1,15 @@
+# Lakeside Minuet (jeuno 95): each operand of the Glowing Pebbles' check (Prog 3 and no Stardust Pebble) failing alone.
+# Accepted at Prog 3 with the pebble (a GM): nil, their default YOU_FIND_SPARKLING_STONE; the pebble taken (a GM) and
+# Prog 2: nil again; Prog 3: 100.
+lists JugnerForestS/Glowing_Pebbles/onTrigger
+char zone=JugnerForestS pos=99,6.4,442.6 job=WAR lvl=30
+quest Jeuno.LakesideMinuet accepted
+charvar Quest[3][95]Prog 3
+keyitem StardustPebble
+login
+trigger Glowing_Pebbles                 # Prog 3, the pebble held: nil; YOU_FIND_SPARKLING_STONE
+delkeyitem StardustPebble
+charvar Quest[3][95]Prog 2
+trigger Glowing_Pebbles                 # Prog 2, no pebble: nil; YOU_FIND_SPARKLING_STONE
+charvar Quest[3][95]Prog 3
+trigger Glowing_Pebbles                 # Prog 3, no pebble: 100

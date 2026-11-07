@@ -1,0 +1,27 @@
+# Olduum's edges: a level 75 Warrior in Aydeewa Subterrane with an Olduum Ring and a Pickaxe, Olduum accepted (a GM).
+# Accepted, the ring held: a Pickaxe: nil. Completed (a GM), Reissue 0, the ring held: a Pickaxe: nil. No statement
+# takes an item, so the Wait arms run on a second char: bob, Olduum completed, no ring, Reissue 1 and Wait an hour ahead
+# (GMs: the harness clock starts at 1800000000): Dkhaaya: Wait: 7 (no parameter); finished with option 99: Wait:
+# nothing; an Excavation Site: Wait ahead: nil.
+lists AydeewaSubterrane/Excavation_Site/onTrade AhtUrhganWhitegate/Dkhaaya/onTrigger AhtUrhganWhitegate/onEventFinish/7
+char zone=AydeewaSubterrane pos=392,0.984,349.642 job=WAR lvl=75
+char bob zone=AhtUrhganWhitegate pos=-71.7,0,-5.842 job=WAR lvl=75
+item OlduumRing
+item Pickaxe
+quest AhtUrhgan.Olduum accepted
+bob: item Pickaxe
+bob: quest AhtUrhgan.Olduum completed
+bob: charvar Quest[6][2]Reissue 1
+bob: charvar Quest[6][2]Wait 1800003600
+login
+trade Excavation_Site Pickaxe x1        # accepted, the ring held: nil
+finish-if-event
+quest AhtUrhgan.Olduum completed        # a GM
+trade Excavation_Site Pickaxe x1        # completed, Reissue 0: nil
+finish-if-event
+bob: login
+bob: trigger Dkhaaya                    # completed, Wait in the future: 7
+bob: finish option=99                   # Wait: nothing
+bob: warp 392,0.984,349.642 AydeewaSubterrane
+bob: trade Excavation_Site Pickaxe x1   # Reissue 1, Wait in the future: nil
+bob: finish-if-event

@@ -1,0 +1,26 @@
+# The Gift (otherAreas 21): Selbina's Oswald (no script; default 30). Only the available section reads
+# xi.settings.map.FISHING_ENABLE (false by default), so this flow starts from the quest accepted by a GM (the offer is
+# `#offer`). Under the Sea completed, The Sand Charm accepted (so The Real Gift is off and Under the Sea's 38 is off). A
+# level 30 Warrior with three Danceshrooms (they stack) and a Chocobo Feather. Accepted: Oswald 71; trades: two
+# Danceshrooms: nil; a Danceshroom and the feather: nil; the feather: nil; a Danceshroom: 72 (0, 4375), finished:
+# completed (the Sleep Dagger, Savior of Love), fame +10 San d'Oria and Bastok, the Danceshroom taken. Completed, The
+# Real Gift available (its own section off: The Sand Charm is not completed, fishing off): Oswald 78 (a progressEvent
+# with replaceDefault, over his 30). A Danceshroom traded while completed: no section 2, nothing.
+lists Selbina/Oswald/onTrigger Selbina/Oswald/onTrade Selbina/onEventFinish/72
+char zone=Selbina pos=48.6,-15.3,8 job=WAR lvl=30
+quest OtherAreas.UnderTheSea completed
+quest OtherAreas.TheSandCharm accepted
+quest OtherAreas.TheGift accepted
+item Danceshroom x3
+item ChocoboFeather
+login
+trigger Oswald                          # accepted: 71
+finish
+trade Oswald Danceshroom x2             # two: nil
+trade Oswald Danceshroom x1 ChocoboFeather x1 # an extra item: nil
+trade Oswald ChocoboFeather x1          # no Danceshroom: nil
+trade Oswald Danceshroom x1             # 72 (0, 4375)
+finish                                  # completed: the Sleep Dagger, the title; fame +10 San d'Oria and Bastok; the Danceshroom taken
+trigger Oswald                          # completed, The Real Gift available: 78 (replaceDefault)
+finish
+trade Oswald Danceshroom x1             # completed: no section 2; nothing

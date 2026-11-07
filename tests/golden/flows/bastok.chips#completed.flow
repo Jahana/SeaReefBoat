@@ -1,0 +1,22 @@
+# Chips completed (by GM) with no CCB Polymer held: the three chips at Cid play 884; a full inventory filled while 884 is
+# open makes its quest:complete fail (not completed again, the chips kept); with room 884 completes it again; then, with
+# the polymer held, the trade shows ITEM_CANNOT_BE_OBTAINED (nil).
+lists Metalworks/Cid/onTrade Metalworks/onEventFinish/884
+char zone=Metalworks pos=-12.6,-11,4
+quest Bastok.Chips completed
+item CarmineChip
+item CyanChip
+item GrayChip
+item CarmineChip
+item CyanChip
+item GrayChip
+item BoneChip
+login
+trade Cid BoneChip x1                # completed, the wrong item: nil
+trade Cid CarmineChip x1 CyanChip x1 GrayChip x1  # completed, room, no polymer: 884
+fill-inventory
+finish                               # the inventory full: the polymer not given, not completed again, the chips kept
+free-inventory
+trade Cid CarmineChip x1 CyanChip x1 GrayChip x1  # 884 again
+finish                               # completed again: CCB Polymer, San d'Oria +5, Bastok +5, the chips taken
+trade Cid CarmineChip x1 CyanChip x1 GrayChip x1  # the polymer held: ITEM_CANNOT_BE_OBTAINED (nil)

@@ -1,0 +1,52 @@
+# Monstrosity (otherAreas 34): the edges. ENABLE_MONSTROSITY 0: the Hume: no section; the script does nothing either. 1
+# (a GM): 40, finished: begun. Port Bastok's Suspicious Galka: no ring: 418; a Rabbit Hide and a feather: nil
+# (tradeMatches is exact: the script has no onTrade); two hides: nil; one hide: MONSTROSITY_UNLOCK 1, 419 (856), the
+# local cleared by a GM before the finish: species 0: nothing (the hide kept, no ring). The hide again: 419, finished:
+# the ring, setMonstrosityData(1, 1). The ring held: a hide: nil (nothing). The Galka: 420 (HAS_RING). Port Windurst's
+# Suspicious Tarutaru: the ring: 882 (880 + HAS_RING); the ring taken (a GM): 880 (INTRO); a Two-Leaf Mandragora Bud:
+# 881 (4368), finished: species 18, the ring again. ENABLE_MONSTROSITY 0 (a GM) while accepted: the Galka: no section:
+# the script's 417 (CHATTER). 1 again: the Feretory updated with option 0: no updateIntroEvent; finished: completed.
+# tradeComplete false (no trade held at 883 / 419 / 881's finish): not reachable from a client (the event follows the
+# trade); the arm stays a branch-table row.
+lists PashhowMarshlands/Suspicious_Hume/onTrigger PashhowMarshlands/onEventFinish/40 PortBastok/Suspicious_Galka/onTrigger PortBastok/Suspicious_Galka/onTrade PortBastok/onEventFinish/419 PortWindurst/Suspicious_Tarutaru/onTrigger PortWindurst/Suspicious_Tarutaru/onTrade PortWindurst/onEventFinish/881 Feretory/onZoneIn/1 Feretory/onEventUpdate/2 Feretory/onEventFinish/2
+char zone=PashhowMarshlands pos=-490.3,25,-618.6 job=WAR lvl=75
+setting ENABLE_MONSTROSITY 0
+setting ENABLE_SOA 0
+setting ENABLE_ROV 0
+item RabbitHide x3
+item TwoLeafMandragoraBud
+item ChocoboFeather
+login
+trigger Suspicious_Hume                 # ENABLE_MONSTROSITY 0: no section; the script: nothing
+setting ENABLE_MONSTROSITY 1
+trigger Suspicious_Hume                 # 40
+finish                                  # begun
+warp 83.1,8.5,-229.1 PortBastok
+trigger Suspicious_Galka                # no ring: 418 (INTRO)
+finish
+trade Suspicious_Galka RabbitHide x1 ChocoboFeather x1 # not exact: nil; nothing
+trade Suspicious_Galka RabbitHide x2    # two: nil; nothing
+trade Suspicious_Galka RabbitHide x1    # MONSTROSITY_UNLOCK 1; 419 (856)
+localvar MONSTROSITY_UNLOCK 0           # a GM, before the finish
+finish                                  # species 0: nothing (the hide kept, no ring)
+trade Suspicious_Galka RabbitHide x1    # 419 (856)
+finish                                  # the hide taken; the ring; setMonstrosityData(1, 1)
+trade Suspicious_Galka RabbitHide x1    # the ring held: nil; nothing
+trigger Suspicious_Galka                # the ring: 420 (HAS_RING)
+finish
+warp 222.8,-12,225.3 PortWindurst
+trigger Suspicious_Tarutaru             # the ring: 882 (HAS_RING)
+finish
+delkeyitem RingOfSupernalDisjunction    # a GM
+trigger Suspicious_Tarutaru             # no ring: 880 (INTRO)
+finish
+trade Suspicious_Tarutaru TwoLeafMandragoraBud x1 # MONSTROSITY_UNLOCK 18; 881 (4368)
+finish                                  # the bud taken; the ring; setMonstrosityData(18, 18)
+setting ENABLE_MONSTROSITY 0
+warp 83.1,8.5,-229.1 PortBastok
+trigger Suspicious_Galka                # ENABLE_MONSTROSITY 0: no section; the script: 417 (CHATTER)
+finish
+setting ENABLE_MONSTROSITY 1
+warp -358,-3.4,-440 Feretory open       # 2, left open
+update 2 option=0                       # not 1: no updateIntroEvent
+finish                                  # completed

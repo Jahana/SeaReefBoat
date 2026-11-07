@@ -1,0 +1,26 @@
+# The Vicasque's Sermon (sandoria 9): accepted by GM. A full bag at 591 (no peas: the 70 gil kept) and at 600 (no room
+# for the Brass Ring: not completed, Prog 1 kept). Prog 2 by GM (the == 1 tests' upper side): Abioleget's
+# WILL_PROVIDE_PITTANCE; Andelain's talk MAY_ONLY_EAT; the peas THANKS_TO_GODDESS and 19, whose finish takes nothing
+# (Prog not 0) and shows GATES_OF_PARADISE_OPEN. Prog -1 by GM (19's finish's == 0 lower side): the peas, 19, nothing
+# taken.
+lists NorthernSanDoria/Abioleget/onTrigger NorthernSanDoria/Abioleget/onTrade NorthernSanDoria/onEventFinish/591 NorthernSanDoria/onEventFinish/600 EastRonfaure/Andelain/onTrigger EastRonfaure/Andelain/onTrade EastRonfaure/onEventFinish/19
+char zone=NorthernSanDoria pos=130.3,0.0,118.5 job=WAR lvl=30 gil=1000
+quest Sandoria.TheVicasquesSermon accepted
+item PodOfBluePeas
+login
+fill-inventory
+trade Abioleget gil=70                    # 591
+finish                                    # no room: no peas; the gil kept
+charvar Quest[0][9]Prog 1
+trigger Abioleget                         # Prog 1: 600
+finish                                    # no room for the Brass Ring: not completed; Prog 1 kept
+free-inventory
+charvar Quest[0][9]Prog 2
+trigger Abioleget                         # Prog 2 (not 1): WILL_PROVIDE_PITTANCE
+warp 665.7,-11.8,-539.4 EastRonfaure
+trigger Andelain                          # Prog 2 (not 1): MAY_ONLY_EAT
+trade Andelain PodOfBluePeas x1           # Prog 2 (not 1): THANKS_TO_GODDESS; 19
+finish                                    # Prog 2 (not 0): nothing taken; GATES_OF_PARADISE_OPEN
+charvar Quest[0][9]Prog -1
+trade Andelain PodOfBluePeas x1           # Prog -1 (not 1): THANKS_TO_GODDESS; 19
+finish                                    # Prog -1 (not 0): nothing taken; GATES_OF_PARADISE_OPEN

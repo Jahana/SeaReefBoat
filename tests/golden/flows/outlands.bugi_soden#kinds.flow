@@ -1,0 +1,63 @@
+# Ryoma's reply kinds (Norg; his script: Twenty in Pirate Years / True Will; default 94) between Bugi Soden (184 E once
+# per zone; 185 / 188 E, 189 P), I'll Take the Big Box (135 P, available) and Ayame and Kaede (95 P at Prog 4).
+# main (a level 75 Ninja, katana skill 2500, the Kodachi of Trials held, Twenty in Pirate Years completed, a GM): both
+# offers: 135 (Progress) beats 184 (Event); finished: Big Box begun. 184 (handler's turn), option 1: Bugi Soden begun.
+# 185 on the script's turn (his script does nothing: the lookup goes on), option 1: the kodachi held: nothing. True Will
+# accepted with trueWillCS 1 (GMs): 185 (the handler's turn), his script's 138, 185; the map (a GM): 138 (the script's
+# turn), 188; the annals (a GM): 189 (Progress) over the script's turn: completed.
+# bob (the same, Big Box and True Will completed: his script does nothing; Ayame and Kaede accepted at Prog 4, GMs): 95
+# (Progress) beats 184; finished: Ayame and Kaede Prog 5. 184, option 1: begun. The annals and Ayame and Kaede's Prog 4
+# (GMs): 95 and 189 tie: the last id 184: 95 (bastok's container first); Prog 4 again (a GM): the last id 95: 189
+# (completed); then 95 alone.
+lists Norg/Ryoma/onTrigger
+char zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+char bob zone=Norg pos=-26.276,0.53,-8.323 job=NIN lvl=75
+skill Katana 2500
+item KodachiOfTrials
+quest Outlands.TwentyInPirateYears completed
+bob: skill Katana 2500
+bob: item KodachiOfTrials
+bob: quest Outlands.TwentyInPirateYears completed
+bob: quest Outlands.ILlTakeTheBigBox completed
+bob: quest Outlands.TrueWill completed
+bob: quest Bastok.AyameAndKaede accepted
+bob: charvar Quest[1][60]Prog 4
+login
+trigger Ryoma                           # 135 (Progress) beats 184 (Event)
+finish                                  # Big Box begun
+trigger Ryoma                           # 184
+finish option=1                         # Bugi Soden begun
+trigger Ryoma                           # the script's turn (nothing): 185
+finish option=1                         # the kodachi held: nothing
+quest Outlands.TrueWill accepted        # a GM
+charvar trueWillCS 1                    # a GM
+trigger Ryoma                           # the handler's turn: 185
+finish option=1
+trigger Ryoma                           # his script's turn: 138
+finish
+trigger Ryoma                           # 185
+finish option=1
+keyitem MapToTheAnnalsOfTruth           # a GM
+trigger Ryoma                           # his script's turn: 138
+finish
+trigger Ryoma                           # 188
+finish
+keyitem AnnalsOfTruth                   # a GM
+trigger Ryoma                           # 189 (Progress) over his script's turn
+finish                                  # completed
+logout
+bob: login
+bob: trigger Ryoma                      # 95 (Progress) beats 184
+bob: finish                             # Ayame and Kaede Prog 5
+bob: trigger Ryoma                      # 184
+bob: finish option=1                    # begun
+bob: keyitem AnnalsOfTruth              # a GM
+bob: charvar Quest[1][60]Prog 4         # a GM
+bob: trigger Ryoma                      # 95 and 189 tie: the last id 184: 95
+bob: finish
+bob: charvar Quest[1][60]Prog 4         # a GM
+bob: trigger Ryoma                      # the last id 95: 189
+bob: finish                             # completed
+bob: trigger Ryoma                      # 95 alone
+bob: finish
+bob: logout

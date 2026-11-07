@@ -1,0 +1,13 @@
+# Shady Business, never accepted: the zinc trade answers nothing while available (user ruling 2026-11-05, kept bugs: the
+# Lua's trade completed it from available, 350 gil and Norg fame 30, and event 90 then did not accept it); event 90
+# accepts it; the zinc: 91, completed (350 gil, Norg fame 30).
+char zone=PortBastok pos=-100,4.649,28.8
+item ChunkOfZincOre x8
+quest Bastok.BeautyAndTheGalka completed
+login
+trade Talib ChunkOfZincOre x4   # available: no trade handler: nothing
+finish-if-event
+trigger Talib                   # 90
+finish                          # accepted
+trade Talib ChunkOfZincOre x4   # accepted: 91
+finish                          # completed: 350 gil, Norg fame 30

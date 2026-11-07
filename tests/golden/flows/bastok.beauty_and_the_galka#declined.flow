@@ -1,0 +1,21 @@
+# Beauty and the Galka, declined on Talib (2, option 1: Prog 1): Talib's 4 while available, Parraggoh's 7 (declined
+# with option 1, accepted with option 0), then 10 carries Prog 1. Before the decline Parraggoh has nothing from the
+# quest (his default 11). The logs are given by GM here; the trade is the main flow's.
+lists PortBastok/Talib/onTrigger BastokMines/Parraggoh/onTrigger PortBastok/onEventFinish/2 BastokMines/onEventFinish/7 BastokMines/onEventFinish/10
+char zone=BastokMines pos=-14.4,6.999,56
+login
+trigger Parraggoh               # available, Prog 0: no quest action, his default 11
+finish
+warp -101.1,4.649,29.8 PortBastok
+trigger Talib                   # the offer, 2
+finish option=1                 # declined: Prog 1, still available
+trigger Talib                   # Prog 1: 4
+finish                          # no finish handler for 4: still available
+warp -14.4,6.999,56 BastokMines
+trigger Parraggoh               # Prog 1: 7
+finish option=1                 # not accepted
+trigger Parraggoh               # 7 again
+finish option=0                 # accepted
+keyitem PalboroughMinesLogs
+trigger Parraggoh               # the logs: 10 (Prog 1)
+finish                          # completed: Bronze Knife, Norg fame +30, the logs gone

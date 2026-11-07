@@ -1,0 +1,26 @@
+# Altepa - Dominion Op #02 (abyssea 88, op 561): a level 99 Warrior in Abyssea - Altepa; the op's target Surveyor
+# (26 placed spawns, the first 17670496). The next op (#03, Bonfire) and Grauberg's #02 accepted (a GM), this op
+# available: a Surveyor killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0, which
+# dominionOnMobDeath does not read): a Surveyor killed: dominionOnMobDeath(561): Quest[8][88]Prog 1 (FOV_DEFEATED_TARGET
+# 1 of 5). The next op's Bonfire killed: Quest[8][89]Prog 1 (its own count), this op's unchanged. Prog 4 (a GM): one
+# more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing. Completed (Prog 0, as
+# completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge, Invincible and Elemental
+# Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaAltepa/Surveyor/onMobDeath AbysseaAltepa/Bonfire/onMobDeath
+char zone=AbysseaAltepa pos=432,0,321 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp03Altepa accepted # a GM: the next op
+quest Abyssea.DominionOp02Grauberg accepted # a GM: Grauberg's #02
+kill RANI_OFFSET-55                     # available: nothing (17670496)
+quest Abyssea.DominionOp02Altepa accepted # a GM
+kill RANI_OFFSET-54                     # accepted: Prog 1 (17670497)
+kill RANI_OFFSET-78                     # Bonfire: Quest[8][89]Prog 1 (17670473)
+charvar Quest[8][88]Prog 4              # a GM
+kill RANI_OFFSET-53                     # Prog 5 (17670498)
+kill RANI_OFFSET-52                     # full: nothing (17670499)
+quest Abyssea.DominionOp02Altepa completed # a GM
+charvar Quest[8][88]Prog 0              # a GM
+kill RANI_OFFSET-51                     # completed: nothing (17670500)

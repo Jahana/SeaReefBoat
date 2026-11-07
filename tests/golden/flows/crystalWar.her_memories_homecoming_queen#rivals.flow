@@ -1,0 +1,29 @@
+# Her Memories: Homecoming Queen (crystalWar 64), the rival at Halver: a San d'Orian level 99 Warrior in Chateau
+# d'Oraguille with the WotG mission Her Memories current (a GM; other logs as group 1's flows), Homecoming Queen
+# accepted (a GM) and Waking the Colossus (Aht Urhgan 74) accepted at Prog 2 with the Imperial Missive and no San
+# d'Orian approval letter (GMs). Halver answers its 567 and The Grave Resolve's 571 (Prog3 0), both Progress: the tie
+# goes to the first container, Waking the Colossus: 567, finished on option 1 (no letter); again: the tie rotates: 571,
+# finished: The Grave Resolve added, Prog3 1. Prog3 1: 567 (Progress) over 572 (an Event), finished on option 0: the
+# letter. Then 572 alone (oncePerZone); then, 572 shown, his script (a San d'Orian: 577).
+lists ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/567 ChateauDoraguille/onEventFinish/571
+char zone=ChateauDoraguille pos=31.2,0.0,-0.9 job=WAR lvl=99 nation=0
+mission Wotg HerMemories current
+quest CrystalWar.HerMemoriesHomecomingQueen accepted
+quest AhtUrhgan.WakingTheColossus accepted
+charvar Quest[6][74]Prog 2
+keyitem ImperialMissive
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Halver                          # 567 and 571 tie (Progress): 567, the first container
+finish option=1                         # no letter
+trigger Halver                          # the tie rotates: 571 (8 args)
+finish option=1                         # The Grave Resolve added; Prog3 1
+trigger Halver                          # Prog3 1: 567 (Progress) over 572 (an Event)
+finish option=0                         # the San d'Orian approval letter
+trigger Halver                          # the letter held: 572 alone (oncePerZone)
+finish
+trigger Halver                          # 572 shown: his script's 577
+finish-if-event

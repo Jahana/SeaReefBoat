@@ -1,0 +1,52 @@
+# Community Service (jeuno 15) with a second char, bob, in Lower Jeuno: one char per night. At 18:00 both open 116
+# (nothing started yet); main's update begins it (updateEvent(1, 0)), bob's then finds it started (updateEvent(0, 0):
+# someone else flagged it). Bob, at Prog 0 with the night's quest started and not finished: nil, Zauko's default 118
+# (the quest's 118 finish: bob's Wait = 8000). Main lights the twelve lamps (allLightsLit 1): bob gets 113 (all the
+# lamps lit, not turned in). Main turns it in (117, option 0: no card): bob gets 113 with [0] = 1 and the finisher's
+# name (main's, decoded from commServicePlayer1-4: 13 letters, all four vars), main 113 alone.
+lists LowerJeuno/Zauko/onTrigger LowerJeuno/onEventUpdate/116 LowerJeuno/onEventFinish/117 LowerJeuno/onEventFinish/118 LowerJeuno/onEventFinish/113
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+char bob zone=LowerJeuno pos=-2.4,0,16.2 job=WAR lvl=30
+login
+bob: login
+wait vana=6                             # 18:00
+trigger Zauko                           # 116 (0)
+bob: trigger Zauko                      # 116 (0): nothing started yet
+update 116 option=0                     # main begun: Prog 1, Count 12, Timer 8000, commServiceStart 1, main's name stored; updateEvent(1, 0)
+finish
+bob: update 116 option=0                # started: updateEvent(0, 0)
+bob: finish
+bob: trigger Zauko                      # started, bob at Prog 0, nobody finished, not all lit, hour 18: nil; default 118
+bob: finish                             # the quest's 118 finish: bob's Wait = 8000
+trigger _l00                            # 120 (1, 0)
+finish option=1                         # Count 11
+trigger _l01                            # 121 (1, 1)
+finish option=1                         # Count 10
+trigger _l02                            # 122 (1, 2)
+finish option=1                         # Count 9
+trigger _l03                            # 123 (1, 3)
+finish option=1                         # Count 8
+trigger _l04                            # 124 (1, 4)
+finish option=1                         # Count 7
+trigger _l05                            # 125 (1, 5)
+finish option=1                         # Count 6
+trigger _l06                            # 126 (1, 6)
+finish option=1                         # Count 5
+trigger _l07                            # 127 (1, 7)
+finish option=1                         # Count 4
+trigger _l08                            # 128 (1, 8)
+finish option=1                         # Count 3
+trigger _l09                            # 129 (1, 9)
+finish option=1                         # Count 2
+trigger _l10                            # 130 (1, 10)
+finish option=1                         # Count 1
+trigger _l11                            # 131 (1, 11)
+finish option=1                         # Count 0: Prog 2, allLightsLit 1
+bob: trigger Zauko                      # bob at Prog 0, nobody finished, allLightsLit 1: 113
+bob: finish
+trigger Zauko                           # main Prog 2: 117 (0, 0)
+finish option=0                         # completed, no card; commServiceComp 1, commServicePlayer = main's id
+bob: trigger Zauko                      # finished tonight by another char: 113 with [0] = 1 and main's name
+bob: finish
+trigger Zauko                           # finished tonight by this char: 113
+finish

@@ -1,0 +1,14 @@
+# The Road to Aht Urhgan (jeuno 91): the 10062 finish sets Prog 1 on option 1 only (option == 1). A level 75 Warrior,
+# ENABLE_TOAU 1, Prog 0: 10062, option 2: nothing (Prog 0); 10062 again, option -1 (0xFFFFFFFF): nothing; 10062,
+# option 1: Prog 1; 10063 (0, 0, 0, 0, 0, 0), option 0: nothing.
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/onEventFinish/10062 LowerJeuno/onEventFinish/10063
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75
+login
+trigger Faursel                         # Prog 0: 10062
+finish option=2                         # not 1: nothing
+trigger Faursel                         # still Prog 0: 10062
+finish option=-1                        # not 1: nothing
+trigger Faursel                         # still Prog 0: 10062
+finish option=1                         # Prog 1
+trigger Faursel                         # Prog 1: 10063 (0, 0, 0, 0, 0, 0)
+finish option=0                         # not 2 / 3: nothing

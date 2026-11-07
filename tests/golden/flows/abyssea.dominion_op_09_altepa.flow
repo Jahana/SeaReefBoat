@@ -1,0 +1,26 @@
+# Altepa - Dominion Op #09 (abyssea 95, op 568): a level 99 Warrior in Abyssea - Altepa; the op's target Dune_Cockatrice
+# (19 placed spawns, the first 17670342). The next op (#10, Gastornis) and Grauberg's #09 accepted (a GM), this op
+# available: a Dune_Cockatrice killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0, which
+# dominionOnMobDeath does not read): a Dune_Cockatrice killed: dominionOnMobDeath(568): Quest[8][95]Prog 1
+# (FOV_DEFEATED_TARGET 1 of 5). The next op's Gastornis killed: Quest[8][96]Prog 1 (its own count), this op's unchanged.
+# Prog 4 (a GM): one more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing. Completed
+# (Prog 0, as completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge, Invincible and
+# Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaAltepa/Dune_Cockatrice/onMobDeath AbysseaAltepa/Gastornis/onMobDeath
+char zone=AbysseaAltepa pos=432,0,321 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp10Altepa accepted # a GM: the next op
+quest Abyssea.DominionOp09Grauberg accepted # a GM: Grauberg's #09
+kill RANI_OFFSET-209                    # available: nothing (17670342)
+quest Abyssea.DominionOp09Altepa accepted # a GM
+kill RANI_OFFSET-208                    # accepted: Prog 1 (17670343)
+kill RANI_OFFSET-228                    # Gastornis: Quest[8][96]Prog 1 (17670323)
+charvar Quest[8][95]Prog 4              # a GM
+kill RANI_OFFSET-207                    # Prog 5 (17670344)
+kill RANI_OFFSET-206                    # full: nothing (17670345)
+quest Abyssea.DominionOp09Altepa completed # a GM
+charvar Quest[8][95]Prog 0              # a GM
+kill RANI_OFFSET-205                    # completed: nothing (17670346)

@@ -1,0 +1,27 @@
+# In the Mood for Love (jeuno 69): finishes outside their state. A level 75 Warrior, the quest accepted (a GM), a
+# Chameleon Diamond. 10036 open, the quest set available by a GM: no 10036 finish there: nothing (no gil, the diamond
+# kept, no Option). Completed with Option 1 (a GM): Matoaka's 10039 open, the quest set available by a GM (not
+# accepted: addQuest over a completed quest keeps the completed bit, so the completed finish would run): no 10039 finish
+# in the available state: nothing. Then completed again (a GM): 10039 twice (Option 1 reset between), the second talk
+# shows the quest's progressEvent against her shop (the fallback an event would alternate to).
+lists LowerJeuno/Odasel/onTrade LowerJeuno/Matoaka/onTrigger LowerJeuno/onEventFinish/10036 LowerJeuno/onEventFinish/10039
+char zone=LowerJeuno pos=-56.9,-6,-111.7 job=WAR lvl=75
+mission Cop TheRoadForks current
+quest Jeuno.InTheMoodForLove accepted
+item ChameleonDiamond
+login
+trade Odasel ChameleonDiamond x1        # 10036
+quest Jeuno.InTheMoodForLove available  # a GM, while 10036 is open
+finish                                  # nothing
+quest Jeuno.InTheMoodForLove completed  # a GM
+charvar Quest[3][69]Option 1            # a GM
+warp -35.7,-6.1,-121.9 LowerJeuno       # by Matoaka
+trigger Matoaka                         # 10039
+quest Jeuno.InTheMoodForLove available  # a GM, while 10039 is open
+finish                                  # no 10039 finish in the available state: nothing
+quest Jeuno.InTheMoodForLove completed  # a GM: the completed state again (Option 1 kept)
+trigger Matoaka                         # 10039 (P) against her shop (her onTrigger is the fallback)
+finish                                  # the 10039 finish: Option 0
+charvar Quest[3][69]Option 1            # a GM
+trigger Matoaka                         # 10039 again: a progressEvent ties the shop, an event would alternate to the shop
+finish

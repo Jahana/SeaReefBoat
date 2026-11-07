@@ -1,0 +1,42 @@
+# Blast from the Past (windurst 11): the offer check's operands, each alone, at Koru-Moru in Windurst Walls. Star Struck
+# accepted (not completed: not met; Star Struck's 198). Star Struck completed through Koru-Moru's 211 at fame 125: its
+# finish sets this quest's mustZone (239): not met; Star Struck's 213 answers. A warp out and back clears the mustZone:
+# the stone traded while available (the accepted section's valid trade, its status alone differing: no quest trade
+# handler; his script: nothing), then 214 (option 1: nothing). Class Reunion accepted by GM: not met (213; Koru-Moru's
+# script wants ClassReunionProgress 1 or more: nothing); Class Reunion completed by GM (not accepted): 214 again (option
+# 1); Class Reunion back to available. Fame 124 (level 2): not met, 213; fame 125: 214, option 0: begun.
+# The fame is set back to 125 after Star Struck's +20 (145) so the level-3 edge is the one probed.
+lists WindurstWalls/Koru-Moru/onTrigger WindurstWalls/Koru-Moru/onTrade WindurstWalls/onEventFinish/211 WindurstWalls/onEventFinish/214
+char zone=WindurstWalls pos=-120.2,-5.5,122.4
+fame Windurst 125
+quest Windurst.StarStruck accepted
+item Meteorite
+item BurniteShellStone
+login
+trigger Koru-Moru                              # Star Struck accepted, not completed: Blast not available; Star Struck's 198
+finish
+trade Koru-Moru Meteorite x1                   # Star Struck's 211
+finish                                         # Star Struck completed (fame 145); Quest[2][11]mustZone 239
+fame Windurst 125
+trigger Koru-Moru                              # the mustZone: not met; Star Struck's 213 (replaceDefault)
+finish
+warp -188.2,-2.0,66.3 PortWindurst
+warp -120.2,-5.5,122.4 WindurstWalls           # the mustZone cleared (another zone, then back)
+trade Koru-Moru BurniteShellStone x1           # available (every operand holds): no quest trade handler; his script: nothing
+trigger Koru-Moru                              # Star Struck completed, Class Reunion available, fame level 3, no mustZone: 214
+finish option=1                                # not 0: nothing
+trigger Koru-Moru                              # 214 again
+finish option=2                                # not 0: nothing
+quest Windurst.ClassReunion accepted           # GM
+trigger Koru-Moru                              # Class Reunion accepted: not met; Star Struck's 213 (his script: ClassReunionProgress 0, nothing)
+finish
+quest Windurst.ClassReunion completed          # GM: completed is not accepted
+trigger Koru-Moru                              # met: 214
+finish option=1                                # nothing
+quest Windurst.ClassReunion available          # GM
+fame Windurst 124
+trigger Koru-Moru                              # fame level 2: not met; 213
+finish
+fame Windurst 125
+trigger Koru-Moru                              # met: 214
+finish option=0                                # begun

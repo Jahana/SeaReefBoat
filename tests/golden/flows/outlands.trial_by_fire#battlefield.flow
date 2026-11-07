@@ -1,0 +1,19 @@
+# Trial by Fire (outlands 12): the battlefield won while accepted. With the Tuning Fork of Fire, at FP_Entrance the fork
+# opens the entry menu 32000; its update with option 1 (index 0, arena 1) registers and enters (the fork taken);
+# Ifrit_Prime_TBF of arena 1 (17625089: IFRIT_PRIME_ASA-21, below the zone's only IDs.lua mob key) is killed, and the
+# win's 32001 opens within the kill step. Its finish runs the battlefield's onEventFinishWin and this quest's handler
+# (battlefieldWin 544: the Whisper of Flames, Heir of the Great Fire). In Kazham, Ronta's 273 (the whisper) and option 5
+# (10000 gil) complete it.
+lists CloisterOfFlames/FP_Entrance/onTrigger CloisterOfFlames/onEventFinish/32001 Kazham/Ronta-Onta/onTrigger
+char zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+quest Outlands.TrialByFire accepted
+keyitem TuningForkOfFire
+login
+trigger FP_Entrance                     # the fork: the entry menu 32000
+update 32000 option=1                   # Trial by Fire (index 0), arena 1: registered, entered, the fork taken
+finish                                  # in the arena
+kill IFRIT_PRIME_ASA-21                 # Ifrit_Prime_TBF of arena 1: the battlefield won, 32001 opens
+finish                                  # battlefieldWin 544: the Whisper of Flames; Heir of the Great Fire
+warp 100.37,-13.999,-97.676 Kazham
+trigger Ronta-Onta                      # the whisper: 273 (0, 1, 0, 0, 32)
+finish option=5                         # 10000 gil: completed, the whisper taken, the Timer set

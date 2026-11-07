@@ -1,0 +1,42 @@
+# Chips (bastok 82): Ghebi Damomohe in Lower Jeuno, Cid in the Metalworks. The guard (the quest's mustZone clear, and CoP
+# One to be Feared completed, or current with Mission[6][638]Status at 1 or more), the offer 169 (option 0 begins it,
+# option 1 sets the mustZone, another option does nothing), a Carmine, a Cyan and a Gray Chip at Cid (883: completed, CCB
+# Polymer, San d'Oria and Bastok fame +5 each); with no free slot or a CCB Polymer held, ITEM_CANNOT_BE_OBTAINED instead
+# (the handler returns messageSpecial's nil). Once completed the same trade plays 884 (#completed).
+# Ghebi Damomohe has his own script (the Astral Covenant ENM, Tenshodo Membership; nothing for this char) and is CoP 3-5's.
+# Cid's default 500; his other quests and missions need what this char lacks (Dark Puppet: DRK 50; Shoot First: its own
+# guard; CoP 3-1 onward at Cid: this char is on 6-4, check the trace for a CoP 6-4 action at Cid). CoP missions are set
+# current, never `completed` (that writes no flag for CoP); "completed" is the next mission current (#cop_done). The
+# mission is set before login: after login addMission warns that it overwrites the fresh char's CoP mission (a script
+# error to the recorder), so the side with no CoP 6-4 is #no_cop.
+lists LowerJeuno/Ghebi_Damomohe/onTrigger LowerJeuno/onEventFinish/169 Metalworks/Cid/onTrade Metalworks/onEventFinish/883
+char zone=LowerJeuno pos=15.5,-0.1,-6.1
+mission Cop OneToBeFeared current
+item CarmineChip
+item CyanChip
+item GrayChip
+login
+trigger Ghebi_Damomohe               # 6-4 current, Status 0: nil, his script
+finish-if-event
+charvar Mission[6][638]Status 1
+trigger Ghebi_Damomohe               # 6-4 current, Status 1: 169
+finish option=1                      # the mustZone set
+trigger Ghebi_Damomohe               # the mustZone: nil, his script
+finish-if-event
+zoneline PortJeuno                   # another zone: the mustZone cleared
+zoneline LowerJeuno
+trigger Ghebi_Damomohe               # 169
+finish option=2                      # neither 0 nor 1: nothing
+trigger Ghebi_Damomohe               # 169
+finish                               # option 0: accepted
+warp -12.6,-11,4 Metalworks
+trade Cid CarmineChip x1 CyanChip x1 # two chips: nil
+fill-inventory
+trade Cid CarmineChip x1 CyanChip x1 GrayChip x1  # no free slot: ITEM_CANNOT_BE_OBTAINED (nil)
+free-inventory
+trade Cid CarmineChip x1 CyanChip x1 GrayChip x1  # 883
+fill-inventory
+finish                               # the inventory filled while 883 is open: the polymer not given, not completed
+free-inventory
+trade Cid CarmineChip x1 CyanChip x1 GrayChip x1  # 883 again
+finish                               # completed: CCB Polymer, San d'Oria +5, Bastok +5, the chips taken

@@ -1,0 +1,13 @@
+# The Usual with a full inventory: 136 plays, the Speed Bow does not fit, the quest stays accepted and the invitation is
+# kept; once there is room the same 136 completes it.
+char zone=PortBastok pos=-155.4,-11.38,18.66
+keyitem SteamingSheepInvitation
+quest Bastok.TheUsual accepted
+charvar Quest[1][27]Prog 1
+login
+fill-inventory
+trigger Hilda                  # Prog 1: 136
+finish                         # the inventory full: not completed, the invitation kept
+free-inventory
+trigger Hilda                  # 136 again
+finish                         # completed: Speed Bow, fame +50, Steaming Sheep Regular, the invitation deleted

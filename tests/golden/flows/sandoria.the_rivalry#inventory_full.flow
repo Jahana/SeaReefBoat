@@ -1,0 +1,14 @@
+# The Rivalry (sandoria 75): accepted by GM, carpsTraded 9999, a full inventory: a Moat Carp plays 303, which cannot
+# complete it (no room for the rod): the carp is not taken, carpsTraded stays 9999, no gil; with room, 303 again
+# completes it.
+char zone=PortSanDoria pos=-13.2,-2,-43.755 job=WAR lvl=10
+quest Sandoria.TheRivalry accepted
+charvar carpsTraded 9999
+item MoatCarp1 x2
+login
+fill-inventory
+trade Gallijaux MoatCarp1 x1              # total 10000: 303
+finish                                    # no room: not completed; nothing taken or given
+free-inventory
+trade Gallijaux MoatCarp1 x1              # 303
+finish                                    # completed: Lu Shang's Fishing Rod, Testimonial, Carp Diem, fame +10; carpsTraded 10000; 10 gil

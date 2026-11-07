@@ -1,0 +1,22 @@
+# Save the Children (battlefield.save_the_children): a wipe. A level 1 Warrior of San d'Oria with 1-3 current at Status
+# 2 (GMs) enters (area 1) and claims a Fodderchief, which kills her at the next tick. The tick after the death:
+# handleWipe: nobody alive, no wipe time yet: onBattlefieldWipe (hasWipeGrace): THE_PARTY_WILL_BE_REMOVED (3 minutes),
+# setWipeTime. Over 3 minutes later: handleWipe sets LOST; the next tick reads LOST: PARTY_MEMBERS_HAVE_FALLEN, the
+# forced cleanup: onBattlefieldLeave (LOST): 32002 to the dead char; finished: leaveBattlefield(1). (The arm that
+# cancels the wipe time when a member lives again needs a raise, which no statement gives: left out.)
+lists GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/onEventFinish/32002
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=1 nation=0
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren current
+login
+missionstatus Sandoria 2                # a GM
+trigger Hut_Door                        # the menu 32000
+update 32000 option=1                   # area 1: registered, entered
+finish                                  # in the arena
+tick 2000                               # the Fodderchiefs spawn
+claim FODDERCHIEF_VOKDEK                # claimed; the Fodderchiefs fight back
+tick 2000                               # dead; the wipe: THE_PARTY_WILL_BE_REMOVED
+tick 181000                             # past the 3 minutes: LOST
+tick 2000                               # LOST read: PARTY_MEMBERS_HAVE_FALLEN, cleanup: 32002
+finish                                  # leaveBattlefield(1)

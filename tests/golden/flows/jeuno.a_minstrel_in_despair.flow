@@ -1,0 +1,28 @@
+# A Minstrel in Despair (jeuno 12): Mertaire, Bki Tbujhja and Mataligeat in Lower Jeuno, the Song Runes of Buburimu
+# Peninsula. The Old Monument completed (never begun): Bki's 182, Mataligeat's 144, Mertaire's
+# MERTAIRE_MALLIEBELL_LEFT (messageName(..., true, false): showName, no turn), a sheet to Bki and Mataligeat while
+# offered (no trade handler: nil), a trade without the Poetic Parchment (nil), the runes' failsafe (SONG_RUNES_REQUIRE; two sheets: nil; one sheet: 2, the sheet taken, a new Poetic
+# Parchment, SONG_RUNES_WRITING), then the parchment with a sheet to Mertaire (tradeHas, not exact: 101; completed,
+# 2100 gil, fame +7 x3, only the parchment taken). Completed: Path of the Bard's Mertaire (COULD_HE_BE).
+lists LowerJeuno/Mertaire/onTrigger LowerJeuno/Mertaire/onTrade LowerJeuno/Bki_Tbujhja/onTrigger LowerJeuno/Bki_Tbujhja/onTrade LowerJeuno/Mataligeat/onTrigger LowerJeuno/Mataligeat/onTrade BuburimuPeninsula/Song_Runes/onTrigger BuburimuPeninsula/Song_Runes/onTrade BuburimuPeninsula/onEventFinish/2 LowerJeuno/onEventFinish/101
+char zone=LowerJeuno pos=-19.5,0,-59 job=WAR lvl=30
+quest Jeuno.TheOldMonument completed
+item SheetOfParchment x3
+login
+trigger Bki_Tbujhja                         # available: 182
+finish
+trade Bki_Tbujhja SheetOfParchment x1       # available: no trade handler, nil
+trigger Mataligeat                          # 144
+finish
+trade Mataligeat SheetOfParchment x1        # available: no trade handler, nil
+trigger Mertaire                            # MERTAIRE_MALLIEBELL_LEFT (showName, no turn)
+trade Mertaire SheetOfParchment x1          # no Poetic Parchment: nil; nothing
+warp -244,16,-280 BuburimuPeninsula
+trigger Song_Runes                          # SONG_RUNES_REQUIRE
+trade Song_Runes SheetOfParchment x2        # not exactly one sheet: nil
+trade Song_Runes SheetOfParchment x1        # cutscene 2
+finish                                      # the sheet taken, a Poetic Parchment, SONG_RUNES_WRITING
+warp -19.5,0,-59 LowerJeuno
+trade Mertaire PoeticParchment x1 SheetOfParchment x1  # holds the parchment (not exact): 101
+finish                                      # completed: 2100 gil, fame +7 x3; the parchment taken, the sheet handed back
+trigger Mertaire                            # completed: Path of the Bard's COULD_HE_BE

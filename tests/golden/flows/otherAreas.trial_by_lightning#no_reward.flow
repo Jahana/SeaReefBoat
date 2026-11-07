@@ -1,0 +1,22 @@
+# Trial by Lightning (otherAreas 27), 10019 answered with no reward option, with room (P9, D6; Other Areas Task 11
+# waiver W1): option 0, and above 6 (7), take the finish's last branch, player:addItem(0): the engine only warns (C++
+# ShowWarning "AddItem: Item <0> is not found in a database"; the C# engine logs it as a lua: line), gives nothing,
+# and the finish goes on: ITEM_OBTAINED 0, Heir of the Great Lightning, the whisper taken, TrialByLightning_date set,
+# the fame, completed. Accepted by GM with the whisper; after the first completion the date is set behind (GM) for
+# 10016 (Windurst fame level 6), whose option 1 begins the quest again.
+warning: lua: AddItem: Item <0> is not found in a database -- 10019 at 0 / 7: addItem(0) warns; the finish completes
+char zone=Mhaura pos=30.6,-15.6,56.0 job=WAR lvl=75
+fame Windurst 425
+quest OtherAreas.TrialByLightning accepted
+keyitem WhisperOfStorms
+login
+trigger Ripapa                            # accepted, the whisper: 10019
+finish option=0                           # no reward option: addItem(0) warns; ITEM_OBTAINED 0; completed
+trigger Ripapa                            # completed, the date ahead: 10020
+finish
+charvar TrialByLightning_date 1           # GM: the date behind
+trigger Ripapa                            # 10016
+finish option=1                           # begun again; the fork
+keyitem WhisperOfStorms
+trigger Ripapa                            # 10019
+finish option=7                           # above 6: the same as 0; completed

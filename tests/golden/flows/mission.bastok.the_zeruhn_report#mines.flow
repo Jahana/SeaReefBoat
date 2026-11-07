@@ -1,0 +1,12 @@
+# The Zeruhn Report (Bastok 1-1, mission.bastok.the_zeruhn_report): begun in Bastok Mines. A level 10 Warrior of
+# Bastok (rank 1, no mission; a GM's Resonance current keeps RoV 1-1's 30035 out of the login). Section 1: Rashid's
+# 1000; finished with 0: Bastok Mines' own 1000 registration (handleAcceptMission): begun, YOU_ACCEPT_THE_MISSION.
+# Section 2: Rashid's ORIGINAL_MISSION_OFFSET. (The main flow begins at Port Bastok's Argus; in C# each zone's 1000
+# finish is its own registration.) No timing or RNG dependency.
+lists BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1000
+char zone=BastokMines pos=-8.4,-1,-121 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+login
+trigger Rashid                          # section 1: 1000
+finish option=0                         # 0: begun, YOU_ACCEPT_THE_MISSION
+trigger Rashid                          # section 2: ORIGINAL_MISSION_OFFSET

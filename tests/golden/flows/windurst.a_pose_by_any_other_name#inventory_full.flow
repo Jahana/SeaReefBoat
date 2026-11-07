@@ -1,0 +1,20 @@
+# A Pose By Any Other Name (windurst 7): a SAM of level 10, whose pose body is the Kenpogi (poseItems' SAM row, poseGear
+# 6: the second job row and the gap in poseGear), and the completion with a full bag. Accepted, Prog 0: 92 (Prog =
+# 12584). No body: 94 (6, ...). The Kenpogi worn: 96, whose quest:complete fails with a full bag (the Copy of Ancient
+# Blood does not fit): not completed, nothing given, Prog and Wait kept. With room, 96 again completes it.
+lists WindurstWaters/Angelica/onTrigger WindurstWaters/onEventFinish/96
+char zone=WindurstWaters pos=-63.1,-9.25,-8.85 job=SAM lvl=10
+quest Windurst.APoseByAnyOtherName accepted
+item Kenpogi
+login
+trigger Angelica                    # accepted, Prog 0: 92 (Prog 12584 the Kenpogi, Wait = now + 3600)
+finish
+trigger Angelica                    # in time, no body: 94 (6, harness, robe, tunic, vest, robe, kenpogi)
+finish
+equip Kenpogi Body
+fill-inventory
+trigger Angelica                    # in time, the Kenpogi worn: 96
+finish                              # inventory full: not completed, nothing given
+free-inventory
+trigger Angelica                    # 96 again
+finish                              # completed: the reward, mustZone

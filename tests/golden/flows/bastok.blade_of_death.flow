@@ -1,0 +1,40 @@
+# Blade of Death (bastok 47): Gumbah in Bastok Mines, the Zeruhn Mines zone-in from Palborough Mines, Gusgen Mines' qm2.
+# The guard (Blade of Darkness completed, Bastok fame level 3), the offer 130 (begins it, KI Letter from Zeid), the
+# Zeruhn zone-in from Palborough without the Chaosbringer (131: given), with it (nil: the zone's own 150), the
+# Chaosbringer traded at qm2 with ChaosbringerKills 199 (nil) and 200 (10: completed, Deathbringer, Black Death, fame +30,
+# the sword taken, the letter deleted). ChaosbringerKills is set by GM (scripts/items/chaosbringer.lua counts it; a status
+# read, it stays).
+# Defaults: Gumbah 52; qm2 SEE_MONSTER_TRACKS. The qm2 is also Bastok mission 3-2's (To the Forsaken Mines), which this
+# char is not on. Blade of Darkness (completed here) and Inheritance (no Great Sword skill) stay silent at Gumbah.
+lists BastokMines/Gumbah/onTrigger BastokMines/Gumbah/onTrade BastokMines/onEventFinish/130 ZeruhnMines/onZoneIn/1 ZeruhnMines/onEventFinish/131 GusgenMines/qm2/onTrade GusgenMines/qm2/onTrigger GusgenMines/onEventFinish/10
+char zone=BastokMines pos=53.5,0,-35.6 lvl=30
+fame Bastok 124
+quest Bastok.BladeOfDarkness completed
+item BoneChip
+login
+trade Gumbah BoneChip x1             # available: no trade handler, nothing
+trigger Gumbah                       # fame 124 (level 2): not offered, 52
+finish-if-event
+fame Bastok 125
+trigger Gumbah                       # fame level 3: the offer, 130
+finish                               # accepted, KI Letter from Zeid
+trigger Gumbah                       # accepted: no handler, 52
+finish-if-event
+warp 1,0,3 ZeruhnMines               # from Bastok Mines, no sword: nil
+warp 250.037,-32.069,174.156 PalboroughMines
+warp 1,0,3 ZeruhnMines               # from Palborough, no sword: 131 (over the zone's 150), option 0: Chaosbringer
+warp 250.037,-32.069,174.156 PalboroughMines
+warp 1,0,3 ZeruhnMines               # from Palborough, the sword held: nil; the zone's own 150
+warp 208.7,-59.2,-101 GusgenMines
+trigger qm2                          # no onTrigger in the quest: SEE_MONSTER_TRACKS
+finish-if-event
+trade qm2 Chaosbringer x1            # ChaosbringerKills 0: nil
+charvar ChaosbringerKills 199
+trade qm2 Chaosbringer x1            # 199: nil
+charvar ChaosbringerKills 200
+trade qm2 BoneChip x1                # 200, the wrong item: nil
+trade qm2 Chaosbringer x1            # 200: 10
+finish                               # completed: Deathbringer, Black Death, fame +30, the sword taken, the letter deleted;
+                                     # the sword's tradeComplete runs chaosbringer.lua's onItemDrop: ChaosbringerKills 0
+trigger qm2                          # completed: SEE_MONSTER_TRACKS
+finish-if-event

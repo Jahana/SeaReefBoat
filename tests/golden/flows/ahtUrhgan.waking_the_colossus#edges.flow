@@ -1,0 +1,59 @@
+# Waking the Colossus's edges: a level 75 Warrior of Bastok, three Slabs of Plumbago. No ToAU 48: area 13: not
+# available: nothing; the gate: no section: GATE_IS_FIRMLY_CLOSED; Naja: no mission, no quest: nothing. GMs: ToAU 48
+# current, the quest accepted at Prog 1 with the missive (before 10115): Halver nil (his script's showText), Iron Eater
+# nil (his default 604), Kupipi nil (his script's 251). GMs: the Jeuno letter and the Present both held: section 3's
+# gate nil (the Present held), section 4 has none: the default. GMs: the Shopping List and the Lightning Cell at Prog 2:
+# the door nil (the list held): ACID_EATEN_DOOR; three slabs with the cell held: nil; the Alzadaal zone-in at Prog 2
+# (section 5 by the cell, Prog not 4): nil: nothing open. GMs: Prog 4, the Whisper, no cell: the zone-in nil (the
+# Whisper held); Naja at Prog 4 (section 6 wants 5): nil: ToAU 48's 3151.
+lists AhtUrhganWhitegate/Imperial_Whitegate/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/13 ChateauDoraguille/Halver/onTrigger Metalworks/Iron_Eater/onTrigger HeavensTower/Kupipi/onTrigger MountZhayolm/Acid-eaten_Door/onTrigger MountZhayolm/Acid-eaten_Door/onTrade AlzadaalUnderseaRuins/onZoneIn/1
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75 nation=1
+item SlabOfPlumbago x3
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+walk 35,-6.6,-45                        # area 13: no ToAU 48: not available: nothing
+walk 24.2,-7.804,-45.591
+trigger Imperial_Whitegate              # no section: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+trigger Naja_Salaheem                   # no mission, no quest: nothing
+finish-if-event
+mission Toau EternalMercenary current   # a GM
+quest AhtUrhgan.WakingTheColossus accepted
+keyitem ImperialMissive
+charvar Quest[6][74]Prog 1
+warp 2.4,0,0 ChateauDoraguille
+trigger Halver                          # Prog 1 (not 2): nil: his script (Bastok: a showText)
+finish-if-event
+warp 91,-19,1 Metalworks
+trigger Iron_Eater                      # Prog 1: nil: his default 604
+finish
+warp 2,0,30 HeavensTower
+trigger Kupipi+1                        # Prog 1: nil: his script's 251
+finish
+delkeyitem ImperialMissive              # a GM
+keyitem JeunoanApprovalLetter
+keyitem PresentForMegomak
+warp 155.796,-4.199,0.03 AhtUrhganWhitegate
+trigger Imperial_Whitegate              # section 3: the Present held: nil; section 4: no gate handler: GATE_IS_CLOSED
+finish-if-event
+delkeyitem JeunoanApprovalLetter        # GMs
+delkeyitem PresentForMegomak
+keyitem MegomaksShoppingList
+keyitem LightningCell
+charvar Quest[6][74]Prog 2
+warp 271.9,-32,-88 MountZhayolm
+trigger Acid-eaten_Door                 # the list held: nil: ACID_EATEN_DOOR
+finish-if-event
+trade Acid-eaten_Door SlabOfPlumbago x3 # the cell held: nil
+finish-if-event
+warp 180,-0.05,20 AlzadaalUnderseaRuins # section 5 (the cell), Prog 2: the zone-in nil: nothing open
+delkeyitem LightningCell                # GMs
+delkeyitem MegomaksShoppingList
+keyitem WhisperOfRadiance
+charvar Quest[6][74]Prog 4
+warp 180,-0.05,20 AlzadaalUnderseaRuins # section 5 (Prog 4), the Whisper held: nil
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # section 6, Prog 4: nil: ToAU 48's 3151
+finish

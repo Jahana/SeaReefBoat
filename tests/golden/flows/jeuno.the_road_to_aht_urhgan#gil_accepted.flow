@@ -1,0 +1,13 @@
+# The Road to Aht Urhgan (jeuno 91): the purchase from the accepted state's 10064 (its own selection finish). A level 75
+# Warrior with 500000 gil, accepted by a GM at Prog 1. 10064, update 14: (1, 1, 1, 1, 1, 1, 500000, 1); finished 3: the
+# gil taken, PAY_FAURSEL (500000), Prog 2, the mustZone, Timer 8001. Prog 2 with the mustZone: 10066.
+lists LowerJeuno/Faursel/onTrigger LowerJeuno/onEventUpdate/10064 LowerJeuno/onEventFinish/10064
+char zone=LowerJeuno pos=39.5,4.1,-45.2 job=WAR lvl=75 gil=500000
+quest Jeuno.TheRoadToAhtUrhgan accepted
+charvar Quest[3][91]Prog 1
+login
+trigger Faursel                     # accepted, Prog 1: 10064 (0, 0, 0, 0, 0, 0)
+update 10064 option=14              # updateEvent(1, 1, 1, 1, 1, 1, 500000, 1)
+finish option=3                     # 500000 gil taken, PAY_FAURSEL; Prog 2; the mustZone; Timer 8001
+trigger Faursel                     # Prog 2, the mustZone: 10066
+finish

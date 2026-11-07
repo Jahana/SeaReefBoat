@@ -1,0 +1,46 @@
+# Boy and the Beast (crystalWar 24) beside Perils of the Griffon (a Lua quest) and In a Haze of Glory (a Lua quest,
+# available once Perils is completed; its Rholont reply is the Event 637 in every state): a level 99 Warrior in
+# Southern San d'Oria [S] with Perils, Claws of the Griffon and the WotG mission Back to the Beginning completed
+# (GMs; missions as the main flow). Rholont at Prog 1: 56 (Progress) beats 637 every time (twice); Prog 2: 57 (Event)
+# ties 637 and they rotate (57, then 637). Prog 3: not 57: 637. Vunkerl Inlet [S], Prog 3 and the quest available (a
+# GM): qm7 answers nothing. Accepted by a GM at Prog 2 with no herb, 16:00 sharp (4 hours on from the harness's 12:00):
+# Leafy Patch 107 (2), finished: the herb; qm7 109 takes it; 08:00 sharp the next day: 107 (1).
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onEventFinish/56 VunkerlInletS/qm7/onTrigger VunkerlInletS/Leafy_Patch/onTrigger VunkerlInletS/onEventFinish/107 VunkerlInletS/onEventFinish/109
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+quest CrystalWar.PerilsOfTheGriffon completed # In a Haze of Glory available: Rholont 637 (an Event)
+quest CrystalWar.ClawsOfTheGriffon completed
+mission Wotg BackToTheBeginning completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+charvar Quest[7][24]Prog 1              # a GM
+trigger Rholont                         # Prog 1: 56 over 637
+finish                                  # Prog 2
+charvar Quest[7][24]Prog 1              # a GM
+trigger Rholont                         # the same state again: 56
+finish
+trigger Rholont                         # Prog 2: 57 (an Event), first in order
+finish-if-event
+trigger Rholont                         # the same state again: 637
+finish-if-event
+charvar Quest[7][24]Prog 3              # a GM
+trigger Rholont                         # Prog 3: no quest reply: 637
+finish-if-event
+warp -24.775,-32.004,366.937 VunkerlInletS
+trigger qm7                             # available, Prog 3: nothing
+finish-if-event
+quest CrystalWar.BoyAndTheBeast accepted # a GM: no herb, no memo
+charvar Quest[7][24]Prog 2              # a GM
+wait vana=4                             # 16:00 (12:00 at the harness's start)
+walk -425.564,-31.019,581.825
+trigger Leafy_Patch                     # no herb, 16:00 sharp: 107 (2)
+finish option=0                         # the herb
+walk -24.775,-32.004,366.937
+trigger qm7                             # the herb, Prog 2: 109
+finish                                  # the herb taken
+wait vana=16                            # 08:00 the next day
+walk -425.564,-31.019,581.825
+trigger Leafy_Patch                     # no herb, 08:00 sharp: 107 (1)
+finish option=0

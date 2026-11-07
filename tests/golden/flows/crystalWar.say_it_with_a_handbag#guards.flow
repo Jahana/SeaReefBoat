@@ -1,0 +1,68 @@
+# Say It with a Handbag (crystalWar 41, call-only), the guards: a level 99 Warrior in Southern San d'Oria (missions as
+# the main flow), a Square of Sheep Leather, a Spool of Silk Thread and a Square of Laminated Ram Leather (item 2012).
+# Kipopo, the quest available, each guard's missing half: CS 1 without the patches: the image support (908 needs them);
+# the three-item trade at CS 2 without the patches, and with the patches at CS 1: nothing; CS 4 without the handbag, the
+# handbag at CS 0: the image support (913 needs both). Windurst Waters [S], the door, available, CS 0: nothing (171
+# needs the accepted quest). Hampu-Kampu, available, CS 1: 169, finished: the quest added (172 needs it). Accepted:
+# the handbag at CS 2, CS 4 without the handbag: 170 (174 needs both); CS 3 without the patches: 173. The door, CS 0,
+# finished on option 2: nothing (CS stays 0); again: 171. Kipopo, BonusCS 1, accepted, then completed with BonusCS 2:
+# the image support (914 needs the completed quest and BonusCS 1).
+lists SouthernSanDoria/Kipopo/onTrigger SouthernSanDoria/Kipopo/onTrade WindurstWatersS/Hampu-Kampu/onTrigger WindurstWatersS/Door_Acolyte_Hostel_up/onTrigger WindurstWatersS/onEventFinish/169 WindurstWatersS/onEventFinish/171
+char zone=SouthernSanDoria pos=-189.55,-1.15,12.285 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item SquareOfSheepLeather
+item SpoolOfSilkThread
+item 2012
+login
+charvar sayItWithAHandbagCS 1           # a GM
+trigger Kipopo                          # CS 1, no patches: the image support
+finish-if-event
+charvar sayItWithAHandbagCS 2           # a GM
+trade Kipopo 2012 x1 SquareOfSheepLeather x1 SpoolOfSilkThread x1 # CS 2, no patches: nothing
+keyitem TornPatchesOfLeather            # a GM
+charvar sayItWithAHandbagCS 1           # a GM
+trade Kipopo 2012 x1 SquareOfSheepLeather x1 SpoolOfSilkThread x1 # the patches, CS 1: nothing
+delkeyitem TornPatchesOfLeather         # a GM
+charvar sayItWithAHandbagCS 4           # a GM
+trigger Kipopo                          # CS 4, no handbag: the image support
+finish-if-event
+keyitem RepairedHandbag                 # a GM
+charvar sayItWithAHandbagCS 0           # a GM
+trigger Kipopo                          # the handbag, CS 0: the image support
+finish-if-event
+delkeyitem RepairedHandbag              # a GM
+warp 148.119,-8.525,242.874 WindurstWatersS
+trigger Door_Acolyte_Hostel_up          # available, CS 0: nothing
+finish-if-event
+charvar sayItWithAHandbagCS 1           # a GM
+warp -114.097,-1,-158.703 WindurstWatersS
+trigger Hampu-Kampu                     # available, CS 1: 169
+finish                                  # the quest added
+keyitem RepairedHandbag                 # a GM
+charvar sayItWithAHandbagCS 2           # a GM
+trigger Hampu-Kampu                     # accepted, the handbag, CS 2: 170
+finish
+delkeyitem RepairedHandbag              # a GM
+charvar sayItWithAHandbagCS 4           # a GM
+trigger Hampu-Kampu                     # accepted, CS 4, no handbag: 170
+finish
+charvar sayItWithAHandbagCS 3           # a GM
+trigger Hampu-Kampu                     # accepted, CS 3, no patches: 173
+finish
+charvar sayItWithAHandbagCS 0           # a GM
+warp 148.119,-8.525,242.874 WindurstWatersS
+trigger Door_Acolyte_Hostel_up          # accepted, CS 0: 171
+finish option=2                         # nothing: CS stays 0
+trigger Door_Acolyte_Hostel_up          # CS 0 still: 171
+finish option=0
+charvar sayItWithAHandbagBonusCS 1      # a GM
+warp -189.55,-1.15,12.285 SouthernSanDoria
+trigger Kipopo                          # accepted, BonusCS 1: the image support
+finish-if-event
+quest CrystalWar.SayItWithAHandbag completed # a GM
+charvar sayItWithAHandbagBonusCS 2      # a GM
+trigger Kipopo                          # completed, BonusCS 2: the image support
+finish-if-event

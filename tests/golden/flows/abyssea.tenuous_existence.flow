@@ -1,0 +1,32 @@
+# Tenuous Existence (abyssea 170): a level 99 Warrior in La Theine Plateau with Heart of Madness completed and the
+# quest accepted (GMs). Section 1 wants the hour from 18:00 to 4:59 (user ruling 2026-11-04, kept Lua bugs: the Lua's
+# VanadielHour() >= 18 and VanadielHour() < 5 was never true; the C# reads it as an `or`): qm3 at 12:00 plays its
+# default (STRANGE_ENERGY); at 20:00 12, finished: Prog 1; at 04:00 12 again (section 1 reads no Prog), Prog 1 again.
+# To Port Jeuno: Joachim at Prog 1: 336, finished: completed, Champions of Abyssea accepted. A GM's Prog 1 on the
+# completed quest; Joachim: Champions of Abyssea has no section (no maw quest completed): his script's 328, twice.
+lists LaTheinePlateau/qm3/onTrigger PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/336 PortJeuno/onEventFinish/328
+char zone=LaTheinePlateau pos=-177.5,8,254 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact completed
+quest Abyssea.AnOfficerAndAPirate completed
+quest Abyssea.HeartOfMadness completed
+quest Abyssea.TenuousExistence accepted
+login
+trigger qm3                             # 12:00: no section (outside 18:00 to 4:59): STRANGE_ENERGY (default)
+finish-if-event
+wait vana=8                             # 20:00: VanadielHour() >= 18
+trigger qm3                             # 12
+finish-if-event                         # Prog 1
+wait vana=8                             # 04:00: VanadielHour() < 5
+trigger qm3                             # 12 again
+finish-if-event                         # Prog 1
+warp -51.344,0,-9.978 PortJeuno
+trigger Joachim                         # Prog 1: 336
+finish                                  # completed; Champions of Abyssea accepted
+charvar Quest[8][170]Prog 1             # a GM: Prog 1 on the completed quest
+trigger Joachim                         # Champions of Abyssea, no maw quest: 328
+finish
+trigger Joachim                         # 328 again
+finish

@@ -1,0 +1,48 @@
+# Class Reunion (windurst 82): Koru-Moru's arm order across his three quests' calls (GM-set states that open two arms
+# at once), an SMN 75 with The Puppet Master completed. Class Reunion accepted at var 1 with Carbuncle Debacle accepted
+# at CarbuncleDebacleProgress 2 (GMs; accepted since 416 wants it so, user ruling 2026-11-04, kept Lua bugs): 416, not
+# 412 (Carbuncle Debacle's arms first); at var 4: 417, not 412. The Root of the Problem accepted at var 1 too,
+# Carbuncle Debacle available at var 0: 412, not 348 (Class Reunion before The Root of the Problem); at var 2: 414, not
+# 348. All three SMN quests completed: 420, not 411; CarbuncleDebacleProgress 2 then: 420 still (416 wants the quest
+# accepted; the Lua's played it here).
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 1
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 2
+login
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # Carbuncle Debacle accepted, var 2: 416, not 412
+finish                                  # CarbuncleDebacleProgress 2
+quest Windurst.CarbuncleDebacle accepted  # GM
+charvar CarbuncleDebacleProgress 4
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # Carbuncle Debacle accepted, var 4: 417, not 412
+finish                                  # CarbuncleDebacleProgress 5; the Daze Breaker Charm
+quest Windurst.CarbuncleDebacle available  # GM
+charvar CarbuncleDebacleProgress 0
+quest Windurst.TheRootOfTheProblem accepted  # GM
+charvar rootProblem 1
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # Class Reunion var 1 and rootProblem 1: 412, not 348
+finish                                  # the tear (not held) taken; var 2
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # Class Reunion var 2 and rootProblem 1: 414, not 348
+finish
+quest Windurst.TheRootOfTheProblem available  # GM
+quest Windurst.ClassReunion completed   # GM
+quest Windurst.CarbuncleDebacle completed  # GM
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # all three completed: 420, not 411
+finish
+charvar CarbuncleDebacleProgress 2
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # all three completed, CarbuncleDebacleProgress 2: 420 (no 416)
+finish

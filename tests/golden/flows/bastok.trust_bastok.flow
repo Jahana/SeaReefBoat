@@ -1,0 +1,74 @@
+# Trust: Bastok (bastok 92): Clarion Star in Port Bastok; Naji, Ayame, Lucius and Iron Eater in the Metalworks. The
+# guard (level 5, ENABLE_TRUST_QUESTS 1): the setting off (not offered), on: 434 (no other trust quest begun) declined
+# (option 0), a trade while it is available (no handler; Clarion Star's own onTradeCipher: not a cipher, nothing), then
+# 434 option 2 (begun, the Blue Institute Card); Clarion Star's 435; Naji's 980 (Naji learned, YOU_LEARNED_TRUST, Prog
+# 1), 981 once per zone (then his default), Prog 2 by GM (the Naji trust cast in North / South Gustaberg sets it:
+# scripts/actions/spells/trust/naji.lua writes this same char var Quest[1][92]Prog; no flow statement casts a spell),
+# 982 (completed: the Bastok Trust Permit, The Trustworthy, the card taken, KEYITEM_LOST, CALL_MULTIPLE_ALTER_EGO);
+# completed: Naji's 983 once per zone until Ayame is learned, Ayame's 985 (option 0, then 2: Ayame learned), Lucius'
+# 986 (option 0, then 2: Volker), Iron Eater's 988 once per zone (option 0; a rezone; 2: Iron Eater), each silent once
+# its trust is known; Clarion Star's 436. The char is a level 5 Bastok WAR, rank 1, with no missions: every memory and
+# rank argument is 0 (#memories sets them).
+# Other quests and missions at these NPCs: Naji (WAR AF1, WotG 12, LB04, Bastok missions 1-1, 2-1, 2-3, 3-1, 5-1, 6-2),
+# Ayame (Faded Promises, A Question of Faith, MNK AF3, Out of / Return to the Depths, missions 2-1, 3-1), Lucius (LB04,
+# 3-3 Jeuno), Iron Eater (The Weight of Your Limits, Waking the Colossus, WotG 2, missions 2-3, 3-1, 8-1, 8-2, 9-2):
+# none applies to this char (Bastok 1-1 The Zeruhn Report starts at Cleades, not Naji). Defaults: Clarion Star 442 (his
+# script has the cipher trades only), Naji 700, Ayame 701, Lucius 320, Iron Eater 604.
+lists PortBastok/Clarion_Star/onTrigger PortBastok/onEventFinish/434 PortBastok/onEventFinish/438 Metalworks/Naji/onTrigger Metalworks/Ayame/onTrigger Metalworks/Lucius/onTrigger Metalworks/Iron_Eater/onTrigger Metalworks/onEventFinish/980 Metalworks/onEventFinish/982 Metalworks/onEventFinish/984 Metalworks/onEventFinish/985 Metalworks/onEventFinish/986 Metalworks/onEventFinish/988
+char zone=PortBastok pos=81.5,7.5,-24.2 lvl=5 nation=1
+item BoneChip
+setting ENABLE_TRUST_QUESTS 0
+login
+trigger Clarion_Star           # ENABLE_TRUST_QUESTS 0: not offered, 442
+finish
+setting ENABLE_TRUST_QUESTS 1
+trigger Clarion_Star           # level 5, no other trust quest begun: 434
+finish option=0                # not option 2: nothing
+trade Clarion_Star BoneChip x1 # available, the check holds: no handler; onTradeCipher: not a cipher, nothing
+trigger Clarion_Star           # 434 again
+finish option=2                # begun, the Blue Institute Card
+trigger Clarion_Star           # accepted, the card: 435
+finish
+warp 64,-14,-4 Metalworks
+trigger Naji                   # no other trust completed, Prog 0: 980 (0, 0, 0, 0, 0, 0, 0, 0)
+finish                         # Naji learned, YOU_LEARNED_TRUST, Prog 1
+trigger Naji                   # Prog 1: 981 (oncePerZone)
+finish
+trigger Naji                   # 981 played in this zone: his default 700
+finish
+charvar Quest[1][92]Prog 2     # GM: the Naji trust's onSpellCast in North / South Gustaberg at Prog 1
+trigger Naji                   # Prog 2: 982
+finish                         # completed: the permit, The Trustworthy, the card deleted, KEYITEM_LOST, CALL_MULTIPLE_ALTER_EGO
+trigger Naji                   # completed, no Ayame: 983 (rank3 0, oncePerZone)
+finish
+trigger Naji                   # 983 played: 700
+finish
+trigger Ayame                  # no Ayame: 985 (memories 0, rank3 0)
+finish option=0                # nothing
+trigger Ayame                  # 985 again
+finish option=2                # Ayame learned, YOU_LEARNED_TRUST
+trigger Ayame                  # Ayame known: nil, 701
+finish
+rezone
+trigger Naji                   # Ayame known (a new zone visit): nil, 700
+finish
+trigger Iron_Eater             # Naji and Ayame known, Volker not: nil, 604
+finish
+trigger Lucius                 # no Volker: 986 (memories 0, rank6 0)
+finish option=0                # nothing
+trigger Lucius                 # 986 again
+finish option=2                # Volker learned
+trigger Lucius                 # Volker known: nil, 320
+finish
+trigger Iron_Eater             # Naji, Ayame, Volker known, no Iron Eater: 988 (0, 0, 0, 0; oncePerZone)
+finish option=0                # nothing
+trigger Iron_Eater             # 988 played in this zone: 604
+finish
+rezone
+trigger Iron_Eater             # after the rezone: 988
+finish option=2                # Iron Eater learned
+trigger Iron_Eater             # Iron Eater known: nil, 604
+finish
+warp 81.5,7.5,-24.2 PortBastok
+trigger Clarion_Star           # completed: 436
+finish

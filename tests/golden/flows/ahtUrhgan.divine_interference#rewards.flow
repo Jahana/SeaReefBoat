@@ -1,0 +1,53 @@
+# Divine Interference's 932 options the other flows leave, one char each, every one accepted at Prog 4 with the Whisper
+# (GMs), by Naja (no ToAU 48 here). main holds the Colossus's Earring and Torque: 932 [7] 6 (bits 1 and 2); option 0:
+# rewardItems[-1] is nil: completed with no pick (the title, an Imperial Gold Piece; the Whisper taken; Timer 1). bob
+# option 1: the Colossus's Mantle, completed. carl option 3: the Torque, completed. dan option 5: Alexander learnt,
+# ALEXANDER_UNLOCKED, completed. eve option 6: no reward arm: completed. fay option -1 (an int32 below 0): nil:
+# completed.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/932
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char dan zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char eve zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+char fay zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75
+quest AhtUrhgan.DivineInterference accepted
+charvar Quest[6][75]Prog 4
+keyitem WhisperOfRadiance
+item ColossussEarring
+item ColossussTorque
+bob: quest AhtUrhgan.DivineInterference accepted
+bob: charvar Quest[6][75]Prog 4
+bob: keyitem WhisperOfRadiance
+carl: quest AhtUrhgan.DivineInterference accepted
+carl: charvar Quest[6][75]Prog 4
+carl: keyitem WhisperOfRadiance
+dan: quest AhtUrhgan.DivineInterference accepted
+dan: charvar Quest[6][75]Prog 4
+dan: keyitem WhisperOfRadiance
+eve: quest AhtUrhgan.DivineInterference accepted
+eve: charvar Quest[6][75]Prog 4
+eve: keyitem WhisperOfRadiance
+fay: quest AhtUrhgan.DivineInterference accepted
+fay: charvar Quest[6][75]Prog 4
+fay: keyitem WhisperOfRadiance
+login
+trigger Naja_Salaheem                   # 932 ([0] 0, [7] 6)
+finish option=0                         # no pick: completed anyway
+bob: login
+bob: trigger Naja_Salaheem
+bob: finish option=1                    # the Colossus's Mantle; completed
+carl: login
+carl: trigger Naja_Salaheem
+carl: finish option=3                   # the Colossus's Torque; completed
+dan: login
+dan: trigger Naja_Salaheem
+dan: finish option=5                    # Alexander, ALEXANDER_UNLOCKED; completed
+dan: trigger Naja_Salaheem              # completed, the Timer set: nothing
+dan: finish-if-event
+eve: login
+eve: trigger Naja_Salaheem
+eve: finish option=6                    # no reward arm: completed
+fay: login
+fay: trigger Naja_Salaheem
+fay: finish option=-1                   # below 1: nil: completed (the packet carries -1 as 0xFFFFFFFF; both read -1)

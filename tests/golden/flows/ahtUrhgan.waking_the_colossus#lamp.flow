@@ -1,0 +1,19 @@
+# Waking the Colossus's blank_lamp (Alzadaal, !pos 206.55 -1.5 20.05). It has no status in npcs.yaml, so it loads
+# hidden (DISAPPEAR) and no script shows it (ToAU 42 and 44 use it too): a GM shows it, `npcstatus blank_lamp normal`.
+# Accepted (GMs) with the Lightning Cell: Prog 1: nil: the default DEVICE_MALFUNCTIONING; Prog 2: 306, finished: Prog 3;
+# again: nil: the default. Then the zone-in at Prog 3: nil.
+lists AlzadaalUnderseaRuins/blank_lamp/onTrigger AlzadaalUnderseaRuins/onEventFinish/306
+char zone=AlzadaalUnderseaRuins pos=208.05,-1.5,20.05 job=WAR lvl=75
+quest AhtUrhgan.WakingTheColossus accepted
+keyitem LightningCell
+charvar Quest[6][74]Prog 1
+login
+npcstatus blank_lamp normal           # a GM: shown
+trigger blank_lamp                    # Prog 1: nil: DEVICE_MALFUNCTIONING
+finish-if-event
+charvar Quest[6][74]Prog 2              # a GM
+trigger blank_lamp                    # the cell, Prog 2: 306
+finish                                # Prog 3
+trigger blank_lamp                    # Prog 3: nil: DEVICE_MALFUNCTIONING
+finish-if-event
+warp 180,-0.05,20 AlzadaalUnderseaRuins # section 5 (the cell), Prog 3: the zone-in nil

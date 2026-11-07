@@ -1,0 +1,15 @@
+# Trial by Earth (bastok 61): 252's item option with a full inventory. Accepted by GM with the fork and the Whisper of
+# Tremors: 252, option 1 (the Titan's Cudgel) does not fit, so giveQuestReward returns false: not completed, the
+# whisper kept, no Timer. With room again, 252 and option 1 complete it.
+lists PortBastok/Juroro/onTrigger PortBastok/onEventFinish/252
+char zone=PortBastok pos=32,7,-41 job=WAR lvl=75
+quest Bastok.TrialByEarth accepted
+keyitem TuningForkOfEarth
+keyitem WhisperOfTremors
+login
+fill-inventory
+trigger Juroro                 # the whisper: 252, mask 0
+finish option=1                # the cudgel does not fit: nothing
+free-inventory
+trigger Juroro                 # 252 again
+finish option=1                # the Titan's Cudgel: completed, the whisper deleted, Timer set

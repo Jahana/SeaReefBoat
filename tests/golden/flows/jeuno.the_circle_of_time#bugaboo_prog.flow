@@ -1,0 +1,17 @@
+# The Circle of Time (jeuno 65), Bugaboo killed at another Prog (GM state, charvar after the login): accepted at Prog 7,
+# the Altar pops Bugaboo (noAction); a GM Prog 6, then Bugaboo killed: its onMobDeath needs Prog 7, so Prog stays 6.
+lists MonasticCavern/Altar/onTrigger MonasticCavern/Bugaboo/onMobDeath
+char zone=MonasticCavern pos=107.5,-3,-144 job=BRD lvl=50
+quest Jeuno.TheOldMonument completed
+quest Jeuno.AMinstrelInDespair completed
+quest Jeuno.PathOfTheBard completed
+quest Jeuno.PainfulMemory completed
+quest Jeuno.TheRequiem completed
+quest Jeuno.TheCircleOfTime accepted
+charvar Quest[3][65]Prog 7
+keyitem StarRing1
+keyitem MoonRing
+login
+trigger Altar                               # Prog 7: Bugaboo popped (claimed); noAction
+charvar Quest[3][65]Prog 6
+kill BUGABOO                                # Prog 6 (not 7): nothing; Prog stays 6

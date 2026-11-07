@@ -1,0 +1,75 @@
+# Truth, Justice, and the Onion Way! (windurst 36): Kohlo-Lakolo and the Star Onion Brigade in Port Windurst. A level-5
+# char of Windurst at rank 2 (so Know One's Onions' offer answers once this quest is completed). Available: a rarab tail
+# traded (section 1 has no trade handler: nothing); Gomada-Vulmada while this quest is available and Know One's Onions
+# too (section 3's status operand false alone): his default 363; 368 option 1 and option 2 (not 0: nothing), option 0
+# (begun). Accepted: Kohlo-Lakolo 371; the reminder lines 373, 372, 374, 375, 377, 376; trades: a bone chip (wrong
+# item: nil), the tail plus a bone chip (an extra: nil), two tails (nil), the tail alone with a full bag (378 (0, tail,
+# badge): the Justice Badge does not fit, quest:complete false, nothing, the tail kept), the tail alone (378:
+# completed, fame 20, the badge, Star Onion Brigade Member, the tail taken, the player local var [2][40]mustZone 1).
+# Completed while Know One's Onions is available: the new defaults 381, 380, 385, 382, 384, 383 (replaceDefault).
+# Kohlo-Lakolo: Know One's Onions' 391 (its check holds; its offer reads its own char var Quest[2][40]mustZone, not
+# the local var 378 set), begun (Prog 1); Gomada-Vulmada: section 3 not met (Know One's Onions accepted), Know One's
+# Onions' 394. Its Prog set to 0 by GM (rank 2: none of its sections): section 3's quest operand false alone, 363.
+# Defaults (no scripts): Kohlo-Lakolo 361, Gomada-Vulmada 363, Papo-Hopo 362, Pichichi 364, Pyo Nzon 366, Shanruru 367,
+# Yafa Yaa 365. Also named: all seven by the other Star Onion quests (Know One's Onions as above; the others need the
+# quest before them completed: silent here); Shanruru by LB04 (accepted only, a trade). Kohlo-Lakolo, Pichichi and
+# Shanruru each have a second, cutscene-only entity after the first: the triggers take the first.
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Kohlo-Lakolo/onTrade PortWindurst/Gomada-Vulmada/onTrigger PortWindurst/Shanruru/onTrigger PortWindurst/onEventFinish/368 PortWindurst/onEventFinish/378 PortWindurst/onEventFinish/391
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+rank 2
+item BoneChip
+item RarabTail x2
+login
+trade Kohlo-Lakolo RarabTail x1                # available: no trade handler: nothing
+trigger Gomada-Vulmada                         # this quest available (section 3 wants completed): his default 363
+finish
+trigger Kohlo-Lakolo                           # 368
+finish option=1                                # not 0: nothing
+trigger Kohlo-Lakolo                           # 368
+finish option=2                                # not 0: nothing
+trigger Kohlo-Lakolo                           # 368
+finish option=0                                # begun
+trigger Kohlo-Lakolo                           # 371
+finish
+trigger Gomada-Vulmada                         # 373
+finish
+trigger Papo-Hopo                              # 372
+finish
+trigger Pichichi                               # 374
+finish
+trigger Pyo_Nzon                               # 375
+finish
+trigger Shanruru                               # 377
+finish
+trigger Yafa_Yaa                               # 376
+finish
+trigger Kohlo-Lakolo                           # 371 (back beside him for the trades)
+finish
+trade Kohlo-Lakolo BoneChip x1                 # not the tail: nil
+trade Kohlo-Lakolo RarabTail x1 BoneChip x1    # the tail plus an extra: nil
+trade Kohlo-Lakolo RarabTail x2                # two tails: nil
+fill-inventory
+trade Kohlo-Lakolo RarabTail x1                # 378 (0, the tail, the badge)
+finish                                         # full: quest:complete false: nothing, the tail kept
+free-inventory
+trade Kohlo-Lakolo RarabTail x1                # 378
+finish                                         # completed: fame 20, the Justice Badge, the title; the tail taken; local var [2][40]mustZone 1
+trigger Gomada-Vulmada                         # Know One's Onions available: 381 (replaceDefault)
+finish
+trigger Papo-Hopo                              # 380
+finish
+trigger Pichichi                               # 385
+finish
+trigger Pyo_Nzon                               # 382
+finish
+trigger Shanruru                               # 384
+finish
+trigger Yafa_Yaa                               # 383
+finish
+trigger Kohlo-Lakolo                           # Know One's Onions' offer (level 5, rank 2, its char-var mustZone 0): 391 (0, onion)
+finish                                         # Know One's Onions: Prog 1, begun
+trigger Gomada-Vulmada                         # Know One's Onions accepted: section 3 not met; its in-time 394
+finish
+charvar Quest[2][40]Prog 0                     # GM: Know One's Onions at Prog 0, rank 2: none of its sections
+trigger Gomada-Vulmada                         # section 3 not met: 363
+finish

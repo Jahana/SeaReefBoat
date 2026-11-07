@@ -1,0 +1,41 @@
+# A Feather in One's Cap (windurst 1): the other operands. Fame level 3 (125), All At Sea's Prog var 1 (Hat in Hand's 48
+# not offered). Hat in Hand accepted without the New Model Hat (GM): no Hat in Hand arm, and the offer wants Hat in Hand
+# completed: his random standard event. Hat in Hand completed (GM). Available, 3 feathers, the repeat var 0: nothing
+# (neither accepted nor the var). The var 1 by GM while available: the trade plays 79, and its finish (available) takes
+# the else: fame 16, the var 0, 1500 gil, the trade confirmed, needToZone. After a rezone: 75; set accepted inside the
+# event (a GM), option 1: neither arm (nothing). Completed (GM) with Hat in Hand available (GM) and no needToZone: Hat in
+# Hand's 48 not offered (Prog 1), the third arm's 75 (the repeat) does not read Hat in Hand. Then the New Model Hat (GM)
+# with this quest completed (no needToZone), and accepted (GM: available first, since addQuest keeps a completed bit):
+# Hat in Hand's 52 before this quest's 75 / 78 (his script's one if-chain: Hat in Hand's arms first). Accepted, 3
+# feathers and a pebble: 79 (npcUtil.tradeHas is not exact), its finish: completed, 1500 gil, the feathers taken.
+char zone=WindurstWaters pos=-65.0,-2.9,-145.7 job=WAR lvl=75
+fame Windurst 125
+quest Windurst.HatInHand accepted
+charvar Quest[2][23]Prog 1
+item GiantBirdFeather x6
+item Pebble
+login
+trigger Baren-Moren                     # Hat in Hand accepted, no hat; this quest available: a random standard event
+finish
+quest Windurst.HatInHand completed
+trade Baren-Moren GiantBirdFeather x3   # available, the var 0: nothing
+charvar QuestFeatherInOnesCap_var 1
+trade Baren-Moren GiantBirdFeather x3   # the var 1: 79 (1500)
+finish                                  # available: the else: fame 16; the var 0; 1500 gil; the feathers taken; needToZone
+rezone
+trigger Baren-Moren                     # Hat in Hand completed, available, level 3: 75
+quest Windurst.AFeatherInOnesCap accepted
+finish option=1                         # finished while accepted: no arm; nothing
+quest Windurst.AFeatherInOnesCap completed
+quest Windurst.HatInHand available
+trigger Baren-Moren                     # Hat in Hand available, All At Sea's Prog 1: no 48; completed: 75 (the repeat)
+finish option=0
+keyitem NewModelHat
+trigger Baren-Moren                     # the hat, count 0, this quest completed: 52 (Hat in Hand's arm first), not 75
+finish option=0
+quest Windurst.AFeatherInOnesCap available
+quest Windurst.AFeatherInOnesCap accepted
+trigger Baren-Moren                     # the hat, this quest accepted: 52, not 78
+finish option=0
+trade Baren-Moren GiantBirdFeather x3 Pebble x1   # accepted, 3 feathers and a pebble: 79 (1500)
+finish                                  # completed (fame 16); 1500 gil; the feathers taken (tradeHas confirms them), the pebble kept; needToZone

@@ -1,0 +1,14 @@
+# Fire and Brimstone (windurst 73), completion parity: 537's finish is npcUtil.completeQuest step for step
+# (Hunter's Beret, stopping when it cannot be given; fame 20 Windurst; the var cleared), ending in the raw
+# player:completeQuest, so a GM's Quest[2][73]Prog survives the completion (quest:cleanup, which a called
+# Quest.Complete() runs, would clear it). Accepted (GM) at fireAndBrimstone 5 beside Perih Vashai (his default 338 does
+# not answer a trade).
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=RNG lvl=50
+quest Windurst.SinHunting completed
+quest Windurst.FireAndBrimstone accepted
+charvar fireAndBrimstone 5
+item OldEarring
+login
+charvar Quest[2][73]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Perih_Vashai OldEarring x1        # var 5, the earring: 537 (0, 13360)
+finish                                  # Hunter's Beret, fame 20, var 0, completed; the earring taken; Prog kept

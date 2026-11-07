@@ -1,0 +1,59 @@
+# Moogles in the Wild (otherAreas 102): the edges of the check and the trade. The Moogle's Picnic! accepted: its own
+# reply; then available (its own sections off) at fame level 7 (GMs): this quest off: the menu; then completed (a GM):
+# on. A Bastok char in Bastok Mines' Mog House (zmrg). GetSystemTime() is the harness's 1800000000 throughout (no step
+# but `wait jst=` moves it). Fame 487 (level 6): the menu; 488 (level 7): 30013 (finished with option 0: questSeen 1;
+# out and back clears it). The local mustZone 1 (a GM, as the bed's placing sets it): the menu. bedPlacedTime 0: the
+# menu; now - 60 (not >): the menu; now - 61: 30013. Accepted (a GM): the mantle alone; the mantle, the hat and a
+# feather: nil (tradeMatches is exact): the script's trade (nothing). Prog 2, then -1 (GMs): nil: the menu. Prog 1,
+# Timer now (a GM): not < now: nil; Timer now - 1: 30016, finished: completed.
+lists BastokMines/Moogle/onTrigger BastokMines/Moogle/onTrade BastokMines/onEventFinish/30013 BastokMines/onEventFinish/30016
+char zone=BastokMines pos=116.9,-1.6,-72 job=WAR lvl=75 nation=1
+setting ENABLE_AMK 0                    # AMK 1 (30023, the Moogle, ENABLE_AMK 1) off: #kinds shows it
+quest OtherAreas.TheMooglePicnic accepted
+fame Bastok 487
+charvar Quest[4][102]bedPlacedTime 1799999939
+item RaptorMantle
+item WoolHat
+item ChocoboFeather
+login
+zoneline BastokMines                    # into the Mog House
+trigger Moogle                          # The Moogle's Picnic! not completed (accepted): its own reply; this quest off
+finish-if-event
+quest OtherAreas.TheMooglePicnic available # a GM: The Moogle's Picnic! not completed (its own sections off)
+fame Bastok 488                         # a GM: level 7
+trigger Moogle                          # The Moogle's Picnic! not completed: this quest off: the menu
+fame Bastok 487                         # a GM: level 6 again
+quest OtherAreas.TheMooglePicnic completed # a GM
+trigger Moogle                          # fame level 6: the menu
+fame Bastok 488                         # a GM: level 7
+trigger Moogle                          # 30013
+finish option=0                         # questSeen 1
+warp -6,0,-50 BastokMarkets             # out: questSeen cleared
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+localvar Quest[4][102]mustZone 1        # a GM (the bed's placing sets it)
+trigger Moogle                          # the local mustZone 1: the menu
+localvar Quest[4][102]mustZone 0        # a GM
+charvar Quest[4][102]bedPlacedTime 0    # a GM
+trigger Moogle                          # no bed: the menu
+charvar Quest[4][102]bedPlacedTime 1799999940 # a GM: now - 60
+trigger Moogle                          # not > bedPlacedTime + 60: the menu
+charvar Quest[4][102]bedPlacedTime 1799999939 # a GM: now - 61
+trigger Moogle                          # 30013
+finish option=0
+quest OtherAreas.MooglesInTheWild accepted # a GM
+warp -6,0,-50 BastokMarkets
+warp 116.9,-1.6,-72 BastokMines
+zoneline BastokMines
+trade Moogle RaptorMantle x1                # the mantle alone: nil; the script's trade
+trade Moogle RaptorMantle x1 WoolHat x1 ChocoboFeather x1 # with a feather: nil (exact)
+charvar Quest[4][102]Prog 2             # a GM
+trigger Moogle                          # Prog 2: nil; the menu
+charvar Quest[4][102]Prog -1            # a GM
+trigger Moogle                          # Prog -1: nil; the menu
+charvar Quest[4][102]Prog 1             # a GM
+charvar Quest[4][102]Timer 1800000000   # a GM: now
+trigger Moogle                          # Timer not < now: nil; the menu
+charvar Quest[4][102]Timer 1799999999   # a GM: now - 1
+trigger Moogle                          # 30016
+finish                                  # completed; the safes + 10

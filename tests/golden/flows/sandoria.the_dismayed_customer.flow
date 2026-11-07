@@ -1,0 +1,35 @@
+# The Dismayed Customer (sandoria 6): Gulemont in Port San d'Oria, qm1-qm3 in West Ronfaure. A Taste for Meat not
+# completed: Gulemont's default 593; completed by GM: 605 with option 1 (nothing: option 0 accepts), a trade while
+# available (nothing), 605 with option 0 (begun; Stage = math.randomInt(1, 3), the seeded RNG: 1). The GM then sets
+# Stage 1 so the qm steps do not depend on the seed (#stage2, #stage3 take the other two). Accepted: 606; qm2 (Stage 1: nil,
+# its default DISMAYED_CUSTOMER); qm1 (Stage 0, Gulemont's Document); qm1 again (nil); qm3 (nil); Gulemont's 607
+# (completed: 560 gil, fame +20, Lost & Found Officer, the document deleted); then his default 593.
+# Gulemont has no script; his default is 593. qm1-qm3 have no script; their default is DISMAYED_CUSTOMER (no other quest
+# names West Ronfaure's qm1-qm3).
+lists PortSanDoria/Gulemont/onTrigger PortSanDoria/onEventFinish/605 PortSanDoria/onEventFinish/607 WestRonfaure/qm1/onTrigger WestRonfaure/qm2/onTrigger WestRonfaure/qm3/onTrigger
+char zone=PortSanDoria pos=-66.351,-5.496,-39.084 job=WAR lvl=10
+item BoneChip
+login
+trigger Gulemont                          # A Taste for Meat not completed: not offered; his default 593
+finish
+quest Sandoria.ATasteForMeat completed
+trigger Gulemont                          # 605
+finish option=1                           # option 1: nothing
+trade Gulemont BoneChip x1                # available: no trade handler, no script: nothing
+trigger Gulemont                          # 605
+finish                                    # option 0: begun; Stage = randomInt(1, 3)
+charvar Quest[0][6]Stage 1                # GM: Stage 1 (the seed drew 1 at flow:20; pinned so the qm steps do not depend on it)
+trigger Gulemont                          # no document: 606
+finish
+warp -550.842,0,-541.652 WestRonfaure
+trigger qm2                               # Stage 1: nil; DISMAYED_CUSTOMER
+warp -453.113,-20.092,-232.121 WestRonfaure
+trigger qm1                               # Stage 1: Stage 0, the key item Gulemont's Document
+trigger qm1                               # Stage 0: nil; DISMAYED_CUSTOMER
+warp -397.779,-9.999,-439.431 WestRonfaure
+trigger qm3                               # Stage 0: nil; DISMAYED_CUSTOMER
+warp -66.351,-5.496,-39.084 PortSanDoria
+trigger Gulemont                          # the document: 607
+finish                                    # completed: 560 gil, fame +20, Lost & Found Officer; the document deleted
+trigger Gulemont                          # completed: no section; his default 593
+finish

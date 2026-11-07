@@ -1,0 +1,50 @@
+# Knot Quite There (crystalWar 27), the rival at Bulwark Gate: a level 99 Warrior in Sauromugue Champaign [S] with a
+# 108-Knot Quipu, Knot Quite There accepted at Prog 0 and Her Memories: Operation Cupid (group 10, Lua) accepted at
+# Prog 1 (GMs; missions as the main flow). Cupid answers Bulwark Gate with 11 (Progress) at Prog 0, 14 (an Event,
+# oncePerZone) at Prog 2 and 12 (an Event, oncePerZone) else. Knot 105 (Progress) over Cupid 12: 105, finished: Prog 1.
+# Knot 107 and Cupid 12 tie (Events): the tie plays Cupid 12 first (its container comes first), then 107; 12 drops for the zone: 107. The quipu:
+# 106 (Cupid has no trade there), finished: Prog 2. 108 over the dropped 12. Cupid Prog 2 (a GM): 108 and 14 tie: 14
+# first, then 108. Cupid Prog 0 (a GM): its 11 (Progress) over 108, finished: Cupid Prog 1. Both at Prog 0 (GMs): 105 and 11
+# tie (Progress): 11 first, then 105, each finished, with the Progs set back between.
+lists SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/Bulwark_Gate/onTrade SauromugueChampaignS/onEventFinish/105 SauromugueChampaignS/onEventFinish/106 SauromugueChampaignS/onEventFinish/11
+char zone=SauromugueChampaignS pos=-445.674,-1.831,342.417 job=WAR lvl=99
+item OneHundredEightKnotQuipu
+quest CrystalWar.TheTigressStrikes completed
+quest CrystalWar.KnotQuiteThere accepted
+quest CrystalWar.HerMemoriesOperationCupid accepted
+charvar Quest[7][68]Prog 1
+mission Wotg BackToTheBeginning completed
+mission Wotg TheQueenOfTheDance current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Bulwark_Gate                    # Knot Prog 0: 105 over Cupid's 12
+finish                                  # Knot Prog 1
+trigger Bulwark_Gate                    # 107 and 12 tie: Cupid 12 first
+finish
+trigger Bulwark_Gate                    # then 107
+finish
+trigger Bulwark_Gate                    # 12 shown once this zone: 107
+finish
+trade Bulwark_Gate OneHundredEightKnotQuipu x1 # 106
+finish                                  # the trade confirmed; Knot Prog 2
+trigger Bulwark_Gate                    # 108 (12 dropped)
+finish
+charvar Quest[7][68]Prog 2
+trigger Bulwark_Gate                    # 108 and Cupid's 14 tie: 14 first
+finish
+trigger Bulwark_Gate                    # then 108
+finish
+charvar Quest[7][68]Prog 0
+trigger Bulwark_Gate                    # Cupid's 11 (Progress) over 108
+finish                                  # Cupid Prog 1
+charvar Quest[7][68]Prog 0
+charvar Quest[7][27]Prog 0
+trigger Bulwark_Gate                    # 105 and 11 tie (Progress): 11 first
+finish
+charvar Quest[7][68]Prog 0
+charvar Quest[7][27]Prog 0
+trigger Bulwark_Gate                    # then 105
+finish

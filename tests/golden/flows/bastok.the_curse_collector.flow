@@ -1,0 +1,70 @@
+# The Curse Collector (bastok 34): Zon-Fobun in Bastok Markets, The Mute and the Afflictors' trigger areas in Beadeaux.
+# The fame guard, the trigger areas, var bits, a full inventory. A WAR 75 for Beadeaux.
+# From XI.Verify.QuestScripts.Live's RunTheCurseCollector twin.
+lists BastokMarkets/Zon-Fobun/onTrigger BastokMarkets/onEventFinish/251 BastokMarkets/onEventFinish/252 Beadeaux/The_Mute/onTrigger Beadeaux/onTriggerAreaEnter/1 Beadeaux/onTriggerAreaEnter/2 Beadeaux/onTriggerAreaEnter/3 Beadeaux/onTriggerAreaEnter/4 Beadeaux/onTriggerAreaEnter/5 Beadeaux/onTriggerAreaEnter/6
+char zone=BastokMarkets pos=-239.5,-2,64 lvl=75
+fame Bastok 224                 # fame level 3
+login
+trigger Zon-Fobun               # fame level 3: not offered
+finish-if-event
+fame Bastok 225                 # fame level 4
+trigger Zon-Fobun               # the offer, 251
+finish                          # accepted, the Cursepaper
+trigger Zon-Fobun               # Prog 0: not 252
+finish-if-event
+route SouthGustaberg NorthGustaberg KonschtatHighlands PashhowMarshlands Beadeaux
+tick 1000                       # xi.player.onGameIn's ZoningIn: no trigger areas for 2.5 s after the zone-in
+tick 1000
+tick 1000
+# the Afflictors' areas, each probe walked in from a spot outside all of them; Prog cleared (a GM setCharVar) after each
+# probe that set bit 1. Areas 1 and 2 need no height; 4 needs y above 35; 3, 5 and 6 y above 20; an area entered with
+# bit 1 set writes nothing
+walk 0,0,-300
+walk -209,0,-131                # area 2: Prog 2
+charvar Quest[1][34]Prog 0
+walk 0,0,-300
+walk -163,0,-137                # area 1: Prog 2
+charvar Quest[1][34]Prog 0
+walk 0,0,-300
+walk 261,30,140                 # area 4 at y 30: nothing
+walk 0,0,-300
+walk 261,35,140                 # area 4 at y 35: nothing
+walk 0,0,-300
+walk 261,40,140                 # area 4 at y 40: Prog 2
+charvar Quest[1][34]Prog 0
+walk 0,0,-300
+walk -140,10,20                 # area 3 at y 10: nothing
+walk 0,0,-300
+walk -140,25,20                 # area 3 at y 25: Prog 2
+charvar Quest[1][34]Prog 0
+walk 0,0,-300
+walk 380,10,60                  # area 6 at y 10: nothing
+walk 0,0,-300
+walk 380,25,60                  # area 6 at y 25: Prog 2
+charvar Quest[1][34]Prog 0
+walk 0,0,-300
+walk 340,20,100                 # area 5 at y 20: nothing
+walk 0,0,-300
+walk 340,25,100                 # area 5 at y 25: Prog 2
+walk 0,0,-300
+walk -163,0,-137                # area 1 with bit 1 set: still Prog 2
+route PashhowMarshlands KonschtatHighlands NorthGustaberg SouthGustaberg BastokMarkets
+trigger Zon-Fobun               # Prog 2 (bit 1 only): not 252
+finish-if-event
+route SouthGustaberg NorthGustaberg KonschtatHighlands PashhowMarshlands Beadeaux
+tick 1000
+tick 1000
+tick 1000
+trigger The_Mute                # bit 0: Prog 3
+finish-if-event
+trigger The_Mute                # again: Prog 3
+finish-if-event
+route PashhowMarshlands KonschtatHighlands NorthGustaberg SouthGustaberg BastokMarkets
+fill-inventory
+trigger Zon-Fobun               # Prog 3: 252
+finish                          # the inventory full: not completed, the Cursepaper kept
+free-inventory
+trigger Zon-Fobun               # 252
+finish                          # completed: the Poison Cesti, the Cursepaper taken, fame + 40
+trigger Zon-Fobun               # after the completion
+finish-if-event

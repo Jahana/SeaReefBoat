@@ -1,0 +1,42 @@
+# A Hard Day's Knight (otherAreas 64): Tavnazian Safehold's Quelveuiat (a script that only walks him between two nodes,
+# 35 s at each: no onTrigger; default 122), Lufaise Meadows' qm_hard_days_knight (default NOTHING_OUT_OF_ORDINARY) and
+# the NM Splinterspine Grukjuk. Two Sealion and two Coral Crest Keys. Quelveuiat 119, option 0: nothing; option 3: begun.
+# Prog 0: 120 (event); again (the script has no onTrigger: 120 again). Lufaise: the ???: SURVEY_THE_SURROUNDINGS,
+# Splinterspine spawned and claimed, MURDEROUS_PRESENCE; again (up): nil. Killed: Prog 1. The ???: nil (Prog 1).
+# Quelveuiat 121, finished: completed (2100 gil, Tavnazian Squire). Completed: his trigger: 631 (the keys found:
+# Sealion, Coral), finished: Prog 0: nothing. The Sealion key traded: 631 (1658), finished: nothing. Two Sealion keys
+# traded: nil. Both traded: Prog 2,
+# 631, finished: 632 started, finished: both taken, Prog 0, the Temple Knight Key. Both again (the key held): nil. His
+# trigger with the key held: 631 all the same.
+lists TavnazianSafehold/Quelveuiat/onTrigger TavnazianSafehold/Quelveuiat/onTrade TavnazianSafehold/onEventFinish/119 TavnazianSafehold/onEventFinish/121 TavnazianSafehold/onEventFinish/631 TavnazianSafehold/onEventFinish/632 LufaiseMeadows/qm_hard_days_knight/onTrigger LufaiseMeadows/Splinterspine_Grukjuk/onMobDeath
+char zone=TavnazianSafehold pos=4.3,-22.75,-25.9 job=WAR lvl=75
+item SealionCrestKey x2
+item CoralCrestKey x2
+login
+trigger Quelveuiat                      # available: 119
+finish option=0                         # not 3: nothing
+trigger Quelveuiat                      # 119
+finish option=3                         # begun
+trigger Quelveuiat                      # Prog 0: 120
+finish
+trigger Quelveuiat                      # Prog 0 again: 120 (his script has no onTrigger to take the turn)
+finish
+warp -37.1,-9,-290.7 LufaiseMeadows
+trigger qm_hard_days_knight             # not up, Prog 0: SURVEY_THE_SURROUNDINGS; spawned; MURDEROUS_PRESENCE
+trigger qm_hard_days_knight             # up: nil; its default
+kill SPLINTERSPINE_GRUKJUK              # Prog 1
+trigger qm_hard_days_knight             # Prog 1: nil; its default
+warp 4.3,-22.75,-25.9 TavnazianSafehold
+trigger Quelveuiat                      # Prog 1: 121
+finish                                  # completed; 2100 gil; Tavnazian Squire
+trigger Quelveuiat                      # completed: 631 (1658, 1659)
+finish                                  # Prog 0: nothing
+trade Quelveuiat SealionCrestKey x1     # exactly the Sealion key: 631 (1658)
+finish                                  # Prog 0: nothing
+trade Quelveuiat SealionCrestKey x2     # two Sealion keys: nil
+trade Quelveuiat SealionCrestKey x1 CoralCrestKey x1 # both: Prog 2; 631
+finish                                  # Prog 2: 632 started
+finish                                  # 632: both taken; Prog 0; the Temple Knight Key
+trade Quelveuiat SealionCrestKey x1 CoralCrestKey x1 # the key held: nil
+trigger Quelveuiat                      # the key held: 631 (1658, 1659) all the same
+finish

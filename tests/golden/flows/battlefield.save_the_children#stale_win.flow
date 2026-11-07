@@ -1,0 +1,48 @@
+# Save the Children (battlefield.save_the_children): the battlefieldWin contract across fights. Two level 75 Warriors
+# of San d'Oria by Hut_Door (Resonance current keeps RoV 1-1 out): main with 1-3 current at Status 2 (the registrant),
+# bob with 1-3 completed, not current, and The Holy Crest completed (a helper). main leads bob; both enter area 1; the
+# three Fodderchiefs killed: won. BattlefieldMission's onBattlefieldWin sets battlefieldWin 32 for main only (1-3
+# current); bob's is left unset (1-3 not current). main's 32001 finish: 1-3's handler (the key, the title, Status 3);
+# bob's: nothing. The won arena's cleanup takes them out. GMs: 1-3 current for bob, Status 2. bob enters The Holy Crest
+# (index 1, area 1; its entryRequirement accepts a completed quest) and a GM wins it (bfwin): BattlefieldQuest sets no
+# battlefieldWin for a completed quest that is not repeatable. bob's 32001 finish reaches 1-3's Status 2 handler:
+# battlefieldWin is not 32: nothing (no key, no title, Status 2 kept). Pins the current == mission test of the win:
+# with it dropped, bob's first win would leave battlefieldWin 32 behind and this finish would advance 1-3.
+lists GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/onEventUpdate/32000 GhelsbaOutpost/onEventFinish/32001
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+char bob zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=WAR lvl=75 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren current
+bob: mission Rov Resonance current
+bob: mission Sandoria SmashTheOrcishScouts completed
+bob: mission Sandoria BatHunt completed
+bob: mission Sandoria SaveTheChildren completed
+bob: quest Sandoria.TheHolyCrest completed
+login
+missionstatus Sandoria 2                # a GM
+bob: login
+invite bob
+bob: accept
+trigger Hut_Door                        # the menu 32000
+update 32000 option=1                   # registered in area 1; bob registered with it
+finish                                  # main entered
+bob: trigger Hut_Door                   # bob's clearance: no registrant, completed: the menu
+bob: update 32000 option=1              # entered
+bob: finish
+tick 2000                               # the Fodderchiefs spawn
+kill FODDERCHIEF_VOKDEK
+kill FODDERCHIEF_VOKDEK+1
+kill FODDERCHIEF_VOKDEK+2               # won: 32001 to main (battlefieldWin 32) and bob (none)
+finish                                  # 1-3: the key, the title, Status 3
+bob: finish                             # bob: nothing
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield (no warp: a zone change clears local vars)
+bob: mission Sandoria SaveTheChildren current # a GM
+bob: missionstatus Sandoria 2           # a GM
+bob: trigger Hut_Door                   # The Holy Crest completed: the menu 32000
+bob: update 32000 option=17             # The Holy Crest (index 1), area 1: registered, entered
+bob: finish                             # in the arena
+bob: bfwin                              # a GM's win: completed, not repeatable: no battlefieldWin; 32001
+bob: finish                             # 1-3's Status 2 handler: battlefieldWin is not 32: nothing

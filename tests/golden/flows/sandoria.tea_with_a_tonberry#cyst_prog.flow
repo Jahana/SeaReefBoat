@@ -1,0 +1,11 @@
+# Tea with a Tonberry? (sandoria 109): the Hematic Cyst's death when Prog is not 3. Only the Prog 3 trade pops the Cyst
+# and its death sets Prog 4, so a GM sets Prog 2 while it is up: the death handler's check is false, Prog stays 2.
+char zone=Davoi pos=189.2,1.26,-381.9 job=WAR lvl=75
+quest Sandoria.SignedInBlood completed
+quest Sandoria.TeaWithATonberry accepted
+charvar Quest[0][109]Prog 3
+item IngotOfRoyalTreasuryGold
+login
+trade qm2 IngotOfRoyalTreasuryGold x1     # Prog 3: the Hematic Cyst popped, the gold taken, UNDER_ATTACK
+charvar Quest[0][109]Prog 2
+kill HEMATIC_CYST                         # Prog 2: nothing

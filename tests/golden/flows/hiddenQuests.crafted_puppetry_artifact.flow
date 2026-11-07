@@ -1,0 +1,35 @@
+# Crafted Puppetry Artifact (hidden quest PuppetryArtifact), the tobe: a level 99 Warrior in Aht Urhgan Whitegate. Dhima
+# Polevhia (default 788, the same event as "all made"): Puppetmaster Blues available: the check fails: 788. Accepted (a
+# GM): a trade with no order: nothing. None made: 789, finished on 0: nothing; on 1: orderId the tobe, stage 1. 790 (0,
+# 0, 0, 1). The ruby alone: nothing (tradeMatches); the five items: 795, finished: taken, stage 2, orderTime today. 796
+# (not yet). orderTime 0 (a GM): 792, finished: the tobe, [AF]pupCrafted 2, the order vars 0. One made: 791 (0, 2),
+# finished on 2: orderId the dastanas, stage 1.
+lists AhtUrhganWhitegate/Dhima_Polevhia/onTrigger AhtUrhganWhitegate/Dhima_Polevhia/onTrade AhtUrhganWhitegate/onEventFinish/789 AhtUrhganWhitegate/onEventFinish/791 AhtUrhganWhitegate/onEventFinish/792 AhtUrhganWhitegate/onEventFinish/795
+char zone=AhtUrhganWhitegate pos=67.8,-6,27.8 job=WAR lvl=99
+item Ruby
+item SquareOfMoblinweave
+item SquareOfScarletLinenCloth
+item SquareOfWamouraCloth
+item ImperialGoldPiece
+login
+trigger Dhima_Polevhia                  # Puppetmaster Blues available: 788
+finish
+trade Dhima_Polevhia Ruby x1            # the check fails: nothing
+quest AhtUrhgan.PuppetmasterBlues accepted   # a GM
+trade Dhima_Polevhia Ruby x1            # no order: nothing
+trigger Dhima_Polevhia                  # none made: 789
+finish option=0                         # not 1-3: nothing
+trigger Dhima_Polevhia                  # 789
+finish option=1                         # orderId the tobe, stage 1
+trigger Dhima_Polevhia                  # stage 1: 790 (0, 0, 0, 1)
+finish
+trade Dhima_Polevhia Ruby x1            # not the five: nothing
+trade Dhima_Polevhia Ruby x1 SquareOfMoblinweave x1 SquareOfScarletLinenCloth x1 SquareOfWamouraCloth x1 ImperialGoldPiece x1   # 795
+finish                                  # taken, stage 2, orderTime today
+trigger Dhima_Polevhia                  # not yet: 796
+finish
+charvar [PUP]orderTime 0                # a GM: the day past
+trigger Dhima_Polevhia                  # 792
+finish                                  # the tobe; pupCrafted 2; the order vars 0
+trigger Dhima_Polevhia                  # one made: 791 (0, 2)
+finish option=2                         # orderId the dastanas, stage 1

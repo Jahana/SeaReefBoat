@@ -1,0 +1,20 @@
+# The Sahagin's Stash (outlands 136), the level guard and the statue lost: a level 4 Warrior at Norg fame 225:
+# Laisrean: the default 83; a level 5 char (bob): 33 ([7] = 0), option 1: begun. bob at qm2: 1, the statue; deleted (a
+# GM): qm2 again: 1 (no Prog: the statue given again).
+lists Norg/Laisrean/onTrigger SeaSerpentGrotto/qm2/onTrigger SeaSerpentGrotto/onEventFinish/1
+char zone=Norg pos=-2.047,0,21.651 job=WAR lvl=4
+char bob zone=Norg pos=-2.047,0,21.651 job=WAR lvl=5
+fame Norg 225
+bob: fame Norg 225
+login
+trigger Laisrean                        # level 4: the default 83
+finish
+bob: login
+bob: trigger Laisrean                   # level 5: 33 ([7] = 0)
+bob: finish option=1                    # begun
+bob: warp 296.776,27.129,213.043 SeaSerpentGrotto
+bob: trigger qm2                        # 1
+bob: finish                             # the statue
+bob: delkeyitem SeaSerpentStatue        # a GM
+bob: trigger qm2                        # no statue: 1 again
+bob: finish                             # the statue again

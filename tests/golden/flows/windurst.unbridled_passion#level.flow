@@ -1,0 +1,39 @@
+# Unbridled Passion (windurst 74): the AF3 level gate and the Fire and Brimstone / status operands of 541, on a RNG 49
+# (Sin Hunting and The Fanged One completed by GM). Fire and Brimstone accepted, var 0: 338 (its 531 / 528 want it
+# available). Completed: AF3_QUEST_LEVEL 50 (the default) and 49.4: 338; 49: 541, option 2: begun (any option), var 1.
+# Fire and Brimstone available with Sin Hunting available (AF1_QUEST_LEVEL 100 keeps its 523 away): 338.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=RNG lvl=49
+quest Windurst.SinHunting completed
+quest Windurst.TheFangedOne completed
+quest Windurst.FireAndBrimstone accepted
+setting AF3_QUEST_LEVEL 49
+login
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Fire and Brimstone accepted, var 0, RNG at the AF3 level: 338
+finish
+quest Windurst.FireAndBrimstone completed
+setting AF3_QUEST_LEVEL 50
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # level 49 under AF3_QUEST_LEVEL 50: 338
+finish
+setting AF3_QUEST_LEVEL 49.4
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # 49 under 49.4: 338
+finish
+setting AF3_QUEST_LEVEL 49
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # 49 at 49: 541 (0, 13360)
+finish option=2                         # begun (any option); var 1
+setting AF1_QUEST_LEVEL 100
+quest Windurst.SinHunting available
+quest Windurst.FireAndBrimstone available
+quest Windurst.UnbridledPassion available
+charvar unbridledPassion 0
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Fire and Brimstone available (no 531: Sin Hunting not completed): 338
+finish

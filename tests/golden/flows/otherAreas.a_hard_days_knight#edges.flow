@@ -1,0 +1,41 @@
+# A Hard Day's Knight (otherAreas 64): the edges. One Sealion and one Coral Crest Key, a Chocobo Feather. Available: a
+# trade to Quelveuiat: no trade handler; 119 option 1, 2 and 4: nothing. Accepted (a GM): a trade: no trade handler; at
+# Prog 1 (a GM, Splinterspine never spawned): the ???: nil (the Prog arm alone); Prog 2 (a GM): Quelveuiat nil, 122.
+# Completed (a GM), Prog 0 (a GM): his trigger with both keys held: 631 (1658, 1659). The Coral key traded: 631 (1659).
+# A Sealion key and a feather: nil. Prog 2 (a GM): his trigger's 631, finished: 632 started (the trigger path too),
+# finished: confirmTrade (no trade: nothing taken), Prog 0, the key. The key held: the Coral key traded: nil. The
+# one-key and no-key readings of his trigger are #keys.
+lists TavnazianSafehold/Quelveuiat/onTrigger TavnazianSafehold/Quelveuiat/onTrade TavnazianSafehold/onEventFinish/119 TavnazianSafehold/onEventFinish/121 TavnazianSafehold/onEventFinish/631 TavnazianSafehold/onEventFinish/632 LufaiseMeadows/qm_hard_days_knight/onTrigger LufaiseMeadows/Splinterspine_Grukjuk/onMobDeath
+char zone=TavnazianSafehold pos=4.3,-22.75,-25.9 job=WAR lvl=75
+item SealionCrestKey
+item CoralCrestKey
+item ChocoboFeather
+login
+trigger Quelveuiat                      # 119 (the trigger walks to him: he patrols)
+finish option=1                         # nothing
+trade Quelveuiat SealionCrestKey x1     # available: no trade handler; nothing
+trigger Quelveuiat                      # 119
+finish option=2                         # nothing
+trigger Quelveuiat                      # 119
+finish option=4                         # nothing (option == 3, not >= 3)
+quest OtherAreas.AHardDaysKnight accepted # a GM
+trade Quelveuiat SealionCrestKey x1     # accepted: no trade handler; nothing
+charvar Quest[4][64]Prog 2              # a GM
+trigger Quelveuiat                      # accepted, Prog 2: nil; 122
+finish
+charvar Quest[4][64]Prog 1              # a GM
+warp -37.1,-9,-290.7 LufaiseMeadows
+trigger qm_hard_days_knight             # Prog 1, not up: nil; its default
+warp 4.3,-22.75,-25.9 TavnazianSafehold
+quest OtherAreas.AHardDaysKnight completed # a GM
+charvar Quest[4][64]Prog 0              # a GM
+trigger Quelveuiat                      # 631 (1658, 1659)
+finish                                  # Prog 0: nothing
+trade Quelveuiat CoralCrestKey x1       # exactly the Coral key: 631 (1659)
+finish                                  # nothing
+trade Quelveuiat SealionCrestKey x1 ChocoboFeather x1 # a key and a feather: nil
+charvar Quest[4][64]Prog 2              # a GM
+trigger Quelveuiat                      # 631 (the keys found)
+finish                                  # Prog 2: 632 started
+finish                                  # 632: no trade to confirm; Prog 0; the key
+trade Quelveuiat CoralCrestKey x1       # the key held: nil

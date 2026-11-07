@@ -1,0 +1,28 @@
+# Till Death Do Us Part (bastok 18): Romilda in Port Bastok. The guard (Forever to Hold completed), the fame side inside
+# the trigger (127 below fame level 3, the offer 128 at 3), the Cotton Gloves trade, the 2000 gil reward. Romilda's
+# default is 34; Forever to Hold also names her (a hairpin trade while it is accepted), and this char never accepts it.
+lists PortBastok/Romilda/onTrigger PortBastok/Romilda/onTrade PortBastok/onEventFinish/128 PortBastok/onEventFinish/129
+char zone=PortBastok pos=5.4,4.898,-17.7
+fame Bastok 124
+item CottonGloves
+item CottonGloves
+item BoneChip
+login
+trade Romilda CottonGloves x1   # available, Forever to Hold not completed: no trade handler, nothing
+trigger Romilda                 # Forever to Hold not completed: her default 34
+finish
+quest Bastok.ForeverToHold completed
+trigger Romilda                 # Forever to Hold completed, fame 124 (level 2): 127
+finish
+trade Romilda CottonGloves x1   # available, the guard met: no trade handler in section 1, nothing
+fame Bastok 125
+trigger Romilda                 # fame level 3: the offer, 128
+finish                          # accepted
+trigger Romilda                 # accepted: no trigger in section 2, her default 34
+finish
+trade Romilda BoneChip x1       # the wrong item: nothing
+trade Romilda CottonGloves x1   # 129
+finish                          # completed: 2000 gil, fame +30, Qiji's Rival, the gloves gone
+trigger Romilda                 # completed: 34
+finish
+trade Romilda CottonGloves x1   # completed: nothing

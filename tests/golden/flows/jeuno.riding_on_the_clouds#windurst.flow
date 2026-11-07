@@ -1,0 +1,87 @@
+# Riding on the Clouds (jeuno 131): the Windurst NPCs (npcWindurst, the Spirited Stone). A level 61 Warrior at level cap 65
+# (a GM, before login), MAX_LEVEL 99, so the available check holds where it stands. Each NPC's onTrade handler
+# compares npcWindurst with its index (0 to 7, the Lua file's order): for each, a GM sets the var to the index on each side
+# (k-1 and k+1; index 7: 0 and 8; the trade: nil, then the NPC's own onTrade runs: the step comment says what it
+# shows), then to the NPC's own
+# (a Kindred's Seal alone: npcWindurst 8, the seal taken, the Spirited Stone, KEYITEM_OBTAINED; the handler still
+# returns nil), and a GM drops the stone again so the next give shows. The seal's exactness is tried at
+# Koko_Lihzeh (index 0): a wrong item, the seal with an extra item, two seals; and npcWindurst 8 after the give.
+# The quests named in the comments are the NPCs' other quests and missions: none takes a Kindred's Seal (the port
+# agent checks each step's 'ret onTrade' and packets against its comment).
+# After Koru-Moru's give, the quest's nil is shown to let the NPC's own script run: npcWindurst back at his index, The
+# Root of the Problem accepted (a GM), a Square of Silk Cloth alone: the quest's handler takes its own branch and replies
+# nothing (not the seal), then Koru-Moru.lua's onTrade plays 349 (the cloth taken, rootProblem 2).
+lists WindurstWaters/Koko_Lihzeh/onTrade WindurstWaters/Naiko-Paneiko/onTrade WindurstWaters/Kerutoto/onTrade WindurstWalls/Koru-Moru/onTrade PortWindurst/Shanruru/onTrade WindurstWoods/Boizo-Naizo/onTrade WindurstWoods/Sola_Jaab/onTrade HeavensTower/Kupipi/onTrade
+char zone=WindurstWaters pos=134.391,-5.749,162.51 job=WAR lvl=61
+levelcap 65
+item KindredsSeal x12
+item FlintStone
+item SquareOfSilkCloth
+login
+quest Jeuno.RidingOnTheClouds accepted  # a GM: accepted, the four vars 0
+trade Koko_Lihzeh FlintStone x1            # npcWindurst 0 (index 0): a flint stone is not the seal: nil; nothing
+trade Koko_Lihzeh KindredsSeal x1 FlintStone x1  # the seal and an extra item: not exact: nil; nothing
+trade Koko_Lihzeh KindredsSeal x2          # two seals: not exact: nil; nothing
+trade Koko_Lihzeh KindredsSeal x1   # npcWindurst 0: npcWindurst 8, the seal taken, the Spirited Stone
+trade Koko_Lihzeh KindredsSeal x1   # npcWindurst 8: nil; no script; Let Sleeping Dogs Lie, Making the Grade, mission 2-2 take no seal: nothing, the seal kept
+delkeyitem SpiritedStone   # a GM: the stone dropped, so the next give shows it
+warp -245.416,-5.314,-308.059 WindurstWaters   # by Naiko-Paneiko
+charvar Quest[3][131]npcWindurst 0   # a GM: the index below Naiko-Paneiko's
+trade Naiko-Paneiko KindredsSeal x1   # npcWindurst 0, not 1: nil; a script with no onTrade; The Weekly Adventurer, Scooped take no seal
+charvar Quest[3][131]npcWindurst 2   # a GM: the index above Naiko-Paneiko's
+trade Naiko-Paneiko KindredsSeal x1   # npcWindurst 2, not 1: nil; a script with no onTrade; The Weekly Adventurer, Scooped take no seal
+charvar Quest[3][131]npcWindurst 1   # a GM: Naiko-Paneiko's index
+trade Naiko-Paneiko KindredsSeal x1   # npcWindurst 1: npcWindurst 8, the seal taken, the Spirited Stone
+delkeyitem SpiritedStone   # a GM: the stone dropped, so the next give shows it
+warp 14.548,-4.711,-157.394 WindurstWaters   # by Kerutoto
+charvar Quest[3][131]npcWindurst 1   # a GM: the index below Kerutoto's
+trade Kerutoto KindredsSeal x1   # npcWindurst 1, not 2: nil; no script; Blue Ribbon Blues, Food for Thought, Waking Dreams, the missions take no seal
+charvar Quest[3][131]npcWindurst 3   # a GM: the index above Kerutoto's
+trade Kerutoto KindredsSeal x1   # npcWindurst 3, not 2: nil; no script; Blue Ribbon Blues, Food for Thought, Waking Dreams, the missions take no seal
+charvar Quest[3][131]npcWindurst 2   # a GM: Kerutoto's index
+trade Kerutoto KindredsSeal x1   # npcWindurst 2: npcWindurst 8, the seal taken, the Spirited Stone
+delkeyitem SpiritedStone   # a GM: the stone dropped, so the next give shows it
+warp -120.188,-5.5,122.428 WindurstWalls   # by Koru-Moru
+charvar Quest[3][131]npcWindurst 2   # a GM: the index below Koru-Moru's
+trade Koru-Moru KindredsSeal x1   # npcWindurst 2, not 3: nil; the first of two; its script onTrade (neither silk cloth nor astragaloi): nothing; Blast from the Past, Making the Grade, The Puppet Master, Star Struck take no seal
+charvar Quest[3][131]npcWindurst 4   # a GM: the index above Koru-Moru's
+trade Koru-Moru KindredsSeal x1   # npcWindurst 4, not 3: nil; the first of two; its script onTrade (neither silk cloth nor astragaloi): nothing; Blast from the Past, Making the Grade, The Puppet Master, Star Struck take no seal
+charvar Quest[3][131]npcWindurst 3   # a GM: Koru-Moru's index
+trade Koru-Moru KindredsSeal x1   # npcWindurst 3: npcWindurst 8, the seal taken, the Spirited Stone
+delkeyitem SpiritedStone   # a GM: the stone dropped, so the next give shows it
+charvar Quest[3][131]npcWindurst 3   # a GM: Koru-Moru's index again (the handler's own branch)
+quest Windurst.TheRootOfTheProblem accepted   # a GM: Koru-Moru's script reads it
+trade Koru-Moru SquareOfSilkCloth x1   # npcWindurst 3, not the seal: the quest's handler nil; Koru-Moru.lua's onTrade runs: the cloth alone, The Root of the Problem accepted: 349, the cloth taken, rootProblem 2
+finish                                 # 349: Koru-Moru.lua has no arm for it: nothing
+warp 0.201,-6,186.699 PortWindurst   # by Shanruru
+charvar Quest[3][131]npcWindurst 3   # a GM: the index below Shanruru's
+trade Shanruru KindredsSeal x1   # npcWindurst 3, not 4: nil; the first of two; no script; the onion quests take no seal
+charvar Quest[3][131]npcWindurst 5   # a GM: the index above Shanruru's
+trade Shanruru KindredsSeal x1   # npcWindurst 5, not 4: nil; the first of two; no script; the onion quests take no seal
+charvar Quest[3][131]npcWindurst 4   # a GM: Shanruru's index
+trade Shanruru KindredsSeal x1   # npcWindurst 4: npcWindurst 8, the seal taken, the Spirited Stone
+delkeyitem SpiritedStone   # a GM: the stone dropped, so the next give shows it
+warp -8.081,-2.75,-26.062 WindurstWoods   # by Boizo-Naizo
+charvar Quest[3][131]npcWindurst 4   # a GM: the index below Boizo-Naizo's
+trade Boizo-Naizo KindredsSeal x1   # npcWindurst 4, not 5: nil; a script with no onTrade; A Greeting Cardian takes no seal
+charvar Quest[3][131]npcWindurst 6   # a GM: the index above Boizo-Naizo's
+trade Boizo-Naizo KindredsSeal x1   # npcWindurst 6, not 5: nil; a script with no onTrade; A Greeting Cardian takes no seal
+charvar Quest[3][131]npcWindurst 5   # a GM: Boizo-Naizo's index
+trade Boizo-Naizo KindredsSeal x1   # npcWindurst 5: npcWindurst 8, the seal taken, the Spirited Stone
+delkeyitem SpiritedStone   # a GM: the stone dropped, so the next give shows it
+warp 110.883,-4.999,-25.925 WindurstWoods   # by Sola_Jaab
+charvar Quest[3][131]npcWindurst 5   # a GM: the index below Sola_Jaab's
+trade Sola_Jaab KindredsSeal x1   # npcWindurst 5, not 6: nil; no script; the Windurst missions take no seal
+charvar Quest[3][131]npcWindurst 7   # a GM: the index above Sola_Jaab's
+trade Sola_Jaab KindredsSeal x1   # npcWindurst 7, not 6: nil; no script; the Windurst missions take no seal
+charvar Quest[3][131]npcWindurst 6   # a GM: Sola_Jaab's index
+trade Sola_Jaab KindredsSeal x1   # npcWindurst 6: npcWindurst 8, the seal taken, the Spirited Stone
+delkeyitem SpiritedStone   # a GM: the stone dropped, so the next give shows it
+warp 3.55,0,32.4 HeavensTower   # by Kupipi
+charvar Quest[3][131]npcWindurst 0   # a GM: an index below Kupipi's (the lowest)
+trade Kupipi KindredsSeal x1   # npcWindurst 0, not 7: nil; the first of two; a script with no onTrade; Waking the Colossus, Portal Charm, Trust: Semih, the missions take no seal
+charvar Quest[3][131]npcWindurst 8   # a GM: the index above Kupipi's
+trade Kupipi KindredsSeal x1   # npcWindurst 8, not 7: nil; the first of two; a script with no onTrade; Waking the Colossus, Portal Charm, Trust: Semih, the missions take no seal
+charvar Quest[3][131]npcWindurst 7   # a GM: Kupipi's index
+trade Kupipi KindredsSeal x1   # npcWindurst 7: npcWindurst 8, the seal taken, the Spirited Stone
+delkeyitem SpiritedStone   # a GM: the stone dropped, so the next give shows it

@@ -1,0 +1,78 @@
+# I Can Hear a Rainbow (windurst 75): the House of the Hero (_6n2, Windurst Walls) and the qm3 (La Theine Plateau). A
+# level-30 char (ADVANCED_JOB_LEVEL, the edge's met side) without a Carbuncle's Ruby: not met (the door's script answers
+# nothing: its default DOORS_SEALED_SHUT). The ruby given by GM; in La Theine Plateau while available: a zone-in with
+# NONE and Light 0 plays nothing (the zone-in handlers are the accepted section's), and the ruby traded to the qm3 (the
+# Prog 1 section's valid trade, its status alone differing): no trade handler. Back in Windurst Walls: 384 (0, the
+# ruby), begun. Prog 0: 385 (0, the ruby; oncePerZone), then the door's default; after a warp out and back, Prog -1 and
+# Prog 1 by GM: no 385 (the door's default); Prog 0: 385 again.
+# Light 127 by GM before La Theine (no zone-in event). At the qm3: Prog 0, Prog 2 and Prog -1 (GM): a ruby trade: nothing
+# (only the Prog 1 section has a qm3 line). Prog 1 by GM (the seventh light's update sets it: #zones_1, #zones_2): a
+# rezone plays nothing; a bone chip: nil; the ruby plus a bone chip: nil; the ruby alone: 124, completed (fame 20, the
+# summoner's job gesture, Rainbow Weaver; quest:complete cannot fail: no item reward), the ruby taken, SMN unlocked,
+# Carbuncle, UNLOCK_SUMMONER and UNLOCK_CARBUNCLE, the rainbow's (_2u0) local var setRainbow 1: the GM weathers after it
+# show it (beside the rainbow, La Theine's onZoneWeatherChange opens it in daylight with setRainbow 1 and closes it in
+# RAIN, resetting setRainbow). Completed: a trade to the qm3: nothing; with Prog 1 by GM and the ruby again: nothing (the Prog 1 section
+# wants the accepted status); with Prog 0 and Light 0: a rezone plays nothing (the Prog 0 section too); the door with the
+# ruby at level 30: its default (the offer wants the available status).
+# Defaults: _6n2 DOORS_SEALED_SHUT, the La Theine qm3 STRANGE_ENERGY (no script). Also named: _6n2 by The Puppet Master
+# (a WAR: never offered), the Star Onion quests and Windurst 2-1 (not started); the La Theine qm3 by First Contact,
+# Tenuous Existence, Waking the Beast, CoP 5-3 (none started; onTrigger lines only).
+lists WindurstWalls/_6n2/onTrigger WindurstWalls/onEventFinish/384 LaTheinePlateau/onZoneIn/1 LaTheinePlateau/qm3/onTrade LaTheinePlateau/onEventFinish/124
+char zone=WindurstWalls pos=-24.5,-14.498,262.994 lvl=30
+item BoneChip
+login
+trigger _6n2                                   # level 30, no ruby: not met; DOORS_SEALED_SHUT
+finish-if-event
+item CarbunclesRuby                            # GM
+warp -178.2,8.845,254.327 LaTheinePlateau      # available: no zone-in event
+weather 0                                      # GM: NONE
+rezone                                         # available, NONE, Light 0: no event (the accepted section's handler)
+trade qm3 CarbunclesRuby x1                    # available: no qm3 trade handler: nothing
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # level 30, the ruby: 384 (0, the ruby)
+finish                                         # begun
+trigger _6n2                                   # accepted, Prog 0: 385 (0, the ruby)
+finish
+trigger _6n2                                   # 385 spent this zone visit (oncePerZone): the door's default DOORS_SEALED_SHUT
+finish-if-event
+warp -188.2,-2.0,66.3 PortWindurst            # Port Windurst is not a light zone
+warp -24.5,-14.498,262.994 WindurstWalls
+charvar Quest[2][75]Prog -1                    # GM
+trigger _6n2                                   # Prog -1: no section: the door's default
+finish-if-event
+charvar Quest[2][75]Prog 1                     # GM
+trigger _6n2                                   # Prog 1: no 385: the door's default
+finish-if-event
+charvar Quest[2][75]Prog 0                     # GM
+trigger _6n2                                   # 385 again (a new zone visit)
+finish
+charvar Quest[2][75]Light 127                  # GM: every light, so the La Theine zone-in plays nothing
+warp -178.2,8.845,254.327 LaTheinePlateau      # Light 127: no event
+trade qm3 CarbunclesRuby x1                    # Prog 0: no qm3 line: nothing
+charvar Quest[2][75]Prog 2                     # GM
+trade qm3 CarbunclesRuby x1                    # Prog 2: nothing
+charvar Quest[2][75]Prog -1                    # GM
+trade qm3 CarbunclesRuby x1                    # Prog -1: nothing
+charvar Quest[2][75]Prog 1                     # GM (the seventh light's update: #zones_1, #zones_2)
+charvar Quest[2][75]Light 0                    # GM
+rezone                                         # Prog 1, NONE, Light 0: no zone-in event (the Prog 0 section's handler)
+trade qm3 BoneChip x1                          # not the ruby: nil
+trade qm3 CarbunclesRuby x1 BoneChip x1        # the ruby plus an extra: not exact: nil
+trade qm3 CarbunclesRuby x1                    # 124
+finish                                         # completed; the ruby taken; SMN unlocked; Carbuncle; two messages; setRainbow 1
+walk 515.0,24.0,-160.0                         # beside the rainbow (_2u0, 520 24 -166), so its updates reach the char
+weather 4                                      # GM: HOT_SPELL: setRainbow 1 in daylight: the rainbow opens (its 00E: animation 8, OPEN_DOOR)
+weather 6                                      # GM: RAIN: the rainbow closes (animation 9), setRainbow 0
+weather 4                                      # GM: HOT_SPELL: setRainbow 0 now: no rainbow update
+trigger qm3                                    # back at the qm3 (Waking the Beast et al. not started: its default)
+finish-if-event
+trade qm3 BoneChip x1                          # completed: nothing
+charvar Quest[2][75]Prog 1                     # GM
+item CarbunclesRuby                            # GM
+trade qm3 CarbunclesRuby x1                    # completed at Prog 1: no section: nothing
+charvar Quest[2][75]Prog 0                     # GM
+weather 0                                      # GM: NONE
+rezone                                         # completed at Prog 0, Light 0: no zone-in event
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # completed, level 30, the ruby: no 384 (the available status wanted): the door's default
+finish-if-event

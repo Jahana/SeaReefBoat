@@ -1,0 +1,16 @@
+# A Timely Visit (sandoria 105): qm1's daytime bounds (hour >= 6 and hour <= 17). Stage 1, Prog 5 by GM, no NM up, no
+# Wait. From 12:00: 17:00 (day): UNABLE_TO_INVESTIGATE; 06:00 (day): UNABLE_TO_INVESTIGATE; 05:00 (night): both NMs
+# popped (SENSE_OF_FOREBODING); 18:00 with them up (night: not UNABLE_TO_INVESTIGATE): nil, DUG_UP.
+char zone=JugnerForest pos=-309.382,-0.139,407.377 job=WAR lvl=75
+quest Sandoria.ATimelyVisit accepted
+charvar Quest[0][105]Prog 5
+charvar Quest[0][105]Stage 1
+login
+wait vana=5
+trigger qm1                               # 17:00, day: UNABLE_TO_INVESTIGATE
+wait vana=13
+trigger qm1                               # 06:00, day: UNABLE_TO_INVESTIGATE
+wait vana=23
+trigger qm1                               # 05:00, night: both popped and claimed; SENSE_OF_FOREBODING
+wait vana=13
+trigger qm1                               # 18:00, NMs up, night: nil; DUG_UP

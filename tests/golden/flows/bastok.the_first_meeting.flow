@@ -1,0 +1,22 @@
+# The First Meeting (bastok 52, MNK AF2): Oggbi in Port Bastok; Hide Flap (2), Bilopdop and Deloknok in Davoi; the
+# zone-in to Fei'Yin from Qubia Arena. This flow: the guard (Ghosts of the Past completed, its mustZone clear, main job
+# MNK, main level AF2_QUEST_LEVEL 50), the offer 233, Oggbi's 234 with both key items (GM-given here; earned in #davoi)
+# and the reward. Default: Oggbi 230. The Walls of Your Mind also names Oggbi: it needs Hand-to-Hand skill 250.
+lists PortBastok/Oggbi/onTrigger PortBastok/onEventFinish/233 PortBastok/onEventFinish/234
+char zone=PortBastok pos=-159,-7,5 job=MNK lvl=50
+quest Bastok.GhostsOfThePast completed
+item BoneChip
+login
+trade Oggbi BoneChip x1         # available (the char starts at him): no trade handler, nothing
+trigger Oggbi                   # Ghosts of the Past completed, no mustZone, MNK 50: 233
+finish                          # accepted
+trigger Oggbi                   # accepted, no key items: nil, 230
+finish
+keyitem LetterFromDalzakk
+trigger Oggbi                   # the letter alone: nil, 230
+finish
+keyitem SanDorianMartialArtsScroll
+trigger Oggbi                   # both: 234
+finish                          # completed: Temple Gaiters, Bastok fame +20, both key items taken
+trigger Oggbi                   # completed, level 50: True Strength is not Oggbi's; 230
+finish

@@ -1,0 +1,31 @@
+# Wild Card (windurst 77): the offer's operands. Crying Over Onions accepted at Prog 5 (no Honoi-Gomoi arm): not
+# available, nil: her script's 650. Completed by GM: fame 324 (level 4): 779; fame 325 with the char-var mustZone set by
+# GM: 779 (the second Event-level talk is her script's 650 on the alternation, so the flow talks twice); a warp out and
+# back: 780, begun.
+# The Star Onion quests 1-4 completed by GM (an available one's line would otherwise answer at Kohlo-Lakolo first).
+lists WindurstWaters/Honoi-Gomoi/onTrigger
+char zone=WindurstWaters pos=-192.6,-10.4,-122.9 lvl=5 nation=2
+rank 8
+fame Windurst 324
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.OnionRings completed
+quest Windurst.CryingOverOnions accepted
+charvar Quest[2][76]Prog 5
+login
+trigger Honoi-Gomoi                            # Crying Over Onions at Prog 5: no action: her script's 650
+finish
+quest Windurst.CryingOverOnions completed      # GM
+trigger Honoi-Gomoi                            # fame level 4: 779
+finish
+fame Windurst 325
+charvar Quest[2][77]mustZone 240               # GM
+trigger Honoi-Gomoi                            # the alternation: her script's 650
+finish
+trigger Honoi-Gomoi                            # the mustZone: 779
+finish
+warp -27.5,-8.0,189.6 PortWindurst
+warp -192.6,-10.4,-122.9 WindurstWaters        # the mustZone cleared
+trigger Honoi-Gomoi                            # 780
+finish                                         # begun

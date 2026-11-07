@@ -1,0 +1,42 @@
+# Only the Best (otherAreas 18): Melyon (Selbina; no DefaultActions entry; his script calls the quest whole; Riding on
+# the Clouds' C# handler answers his trade first only at its npcOtherlands 2, not held here). A WAR 20. Available: 5
+# cabbages: nothing; 60 (4366, 629, 919); option 0, then 11: nothing; option 10: begun. Accepted: 61. 4 cabbages:
+# nothing; 2 millioncorn: nothing. 5 cabbages: 62 (0, 4366); option 0, then 12: nothing; 62 option 11: 100 gil, Bastok
+# and San d'Oria fame +4, completed, the 5 taken. Completed: 3 millioncorn: 63 (0, 629), option 13: nothing (kept);
+# option 12: 120 gil, fame +6, completed again. The moss: 64 (0, 919), option 12: nothing (kept); option 13: 600 gil,
+# fame +8. 5 cabbages and 3 millioncorn: 62 (the first arm), option 11: only the cabbages taken. Completed: 61.
+char zone=Selbina pos=24.5,-6.5,5.5 job=WAR lvl=20
+item LaTheineCabbage x12
+item EarOfMillioncorn x6
+item ClumpOfBoyahdaMoss x1
+login
+trade Melyon LaTheineCabbage x5         # available: nothing
+trigger Melyon                          # 60 (4366, 629, 919)
+finish option=0                         # nothing
+trigger Melyon                          # 60
+finish option=11                        # nothing
+trigger Melyon                          # 60
+finish option=10                        # begun
+trigger Melyon                          # accepted: 61
+finish
+trade Melyon LaTheineCabbage x4         # 4: nothing
+trade Melyon EarOfMillioncorn x2        # 2: nothing
+trade Melyon LaTheineCabbage x5         # 62 (0, 4366)
+finish option=0                         # nothing: the cabbages kept
+trade Melyon LaTheineCabbage x5         # 62
+finish option=12                        # not 11: nothing, the cabbages kept
+charvar Quest[4][18]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Melyon LaTheineCabbage x5         # 62
+finish option=11                        # 100 gil; fame +4 x2; completed; the 5 taken; Prog kept
+trade Melyon EarOfMillioncorn x3        # 63 (0, 629)
+finish option=13                        # not 12: nothing, the millioncorn kept
+trade Melyon EarOfMillioncorn x3        # 63
+finish option=12                        # 120 gil; fame +6 x2; completed again; taken
+trade Melyon ClumpOfBoyahdaMoss x1      # 64 (0, 919)
+finish option=12                        # not 13: nothing, the moss kept
+trade Melyon ClumpOfBoyahdaMoss x1      # 64
+finish option=13                        # 600 gil; fame +8 x2; taken
+trade Melyon LaTheineCabbage x5 EarOfMillioncorn x3  # 62 (the first arm)
+finish option=11                        # 100 gil; fame +4 x2; only the 5 cabbages taken (the millioncorn kept)
+trigger Melyon                          # completed: 61
+finish

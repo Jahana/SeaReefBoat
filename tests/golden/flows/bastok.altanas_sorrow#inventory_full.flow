@@ -1,0 +1,15 @@
+# Altana's Sorrow accepted, at Eperdur: no letter (nil, his own script), then the letter (a GM key item) with a full
+# inventory (679: the scroll does not fit, not completed, the letter kept), then with room (completed).
+lists NorthernSanDoria/Eperdur/onTrigger NorthernSanDoria/onEventFinish/679
+char zone=NorthernSanDoria pos=128.3,-6.5,97.2 lvl=10
+quest Bastok.AltanasSorrow accepted
+login
+trigger Eperdur                      # no letter: nil, his script
+finish-if-event
+keyitem LetterFromVirnage
+fill-inventory
+trigger Eperdur                      # the letter: 679
+finish                               # the inventory full: not completed
+free-inventory
+trigger Eperdur                      # 679 again
+finish                               # completed

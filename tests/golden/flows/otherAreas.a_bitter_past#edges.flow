@@ -1,0 +1,53 @@
+# A Bitter Past (otherAreas 66): the edges. The Call of the Sea completed (a GM). Available: a trade to Frescheque: no trade
+# handler. Accepted at Prog 0 (a GM) with the wristlet (a GM): Frescheque 154 (any Prog); a full inventory: finished: not
+# completed, the wristlet kept. Lufaise at Prog 1 (a GM): the ???: nil (Prog 1, nmKilled 0). nmKilled 1 at Prog 1 (a GM),
+# the wristlet taken away: the ??? gives it (the second arm reads no Prog). nmKilled 0, Prog 2 (a GM): the ??? pops both;
+# Rainbringer killed first (Blackbone alive): nothing; Blackbone killed (Rainbringer dead): nmKilled 1. Prog 1 (a GM),
+# both popped again (Prog 2, nmKilled 0, a GM: the ???), Prog 1 (a GM) before the kills: both deaths at Prog 1: nothing,
+# Blackbone first; a third pop the same way, Rainbringer first (each NM's death at Prog 1 with the other dead).
+# Room again: Frescheque 154, finished: completed.
+lists TavnazianSafehold/Frescheque/onTrigger TavnazianSafehold/Raminey/onTrigger TavnazianSafehold/Equette/onTrigger TavnazianSafehold/onEventFinish/151 TavnazianSafehold/onEventFinish/152 TavnazianSafehold/onEventFinish/153 TavnazianSafehold/onEventFinish/154 LufaiseMeadows/qm_bitter_past/onTrigger LufaiseMeadows/Blackbone_Frazdiz/onMobDeath LufaiseMeadows/Rainbringer_Yjatvot/onMobDeath
+char zone=TavnazianSafehold pos=19.4,-36,11.8 job=WAR lvl=75
+quest OtherAreas.TheCallOfTheSea completed
+item ChocoboFeather
+login
+trade Frescheque ChocoboFeather x1      # available: no trade handler; nothing
+quest OtherAreas.ABitterPast accepted   # a GM
+keyitem TinyWristlet                    # a GM
+fill-inventory
+trigger Frescheque                      # Prog 0, the wristlet: 154
+finish                                  # no room: not completed; the wristlet kept
+free-inventory
+charvar Quest[4][66]Prog 1              # a GM
+delkeyitem TinyWristlet                 # a GM
+warp 59.5,-7.3,27.5 LufaiseMeadows
+trigger qm_bitter_past                  # Prog 1, nmKilled 0: nil; its default
+charvar Quest[4][66]nmKilled 1          # a GM
+trigger qm_bitter_past                  # Prog 1, nmKilled 1, no wristlet: the wristlet; noAction
+charvar Quest[4][66]nmKilled 0          # a GM
+charvar Quest[4][66]Prog 2              # a GM
+trigger qm_bitter_past                  # Prog 2, nmKilled 0: both popped
+kill BLACKBONE_FRAZDIZ+1                # Rainbringer first; Blackbone alive: nothing
+kill BLACKBONE_FRAZDIZ                  # Rainbringer dead: nmKilled 1
+# (no rezone between the kills: the warp's afterZoneIn, 4 s after the zone-in, falls in this second kill's step, since
+# the first kill's clock did not reach it: so its ret shows here; the later kills come long after it and carry none)
+charvar Quest[4][66]nmKilled 0          # a GM
+tick 15000                              # the corpses despawn (isSpawned false again): one tick 30000 is
+tick 15000                              # not enough (the first record's re-pop failed); a scratch record
+tick 15000                              # re-popped after two of 15000
+trigger qm_bitter_past                  # Prog 2, nmKilled 0: both popped
+charvar Quest[4][66]Prog 1              # a GM, before the kills
+kill BLACKBONE_FRAZDIZ                  # Prog 1: nothing
+kill BLACKBONE_FRAZDIZ+1                # Prog 1, Blackbone dead: nothing
+trigger qm_bitter_past                  # nmKilled 0, Prog 1: nil; its default
+charvar Quest[4][66]Prog 2              # a GM
+tick 15000                              # the corpses despawn
+tick 15000
+tick 15000
+trigger qm_bitter_past                  # Prog 2, nmKilled 0: both popped
+charvar Quest[4][66]Prog 1              # a GM, before the kills
+kill BLACKBONE_FRAZDIZ+1                # Prog 1: nothing
+kill BLACKBONE_FRAZDIZ                  # Prog 1, Rainbringer dead: nothing
+warp 19.4,-36,11.8 TavnazianSafehold
+trigger Frescheque                      # the wristlet: 154
+finish                                  # completed

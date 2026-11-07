@@ -1,0 +1,110 @@
+# Curses, Foiled A-Golem!? (windurst 63): Shantotto in Windurst Walls, Torino-Samarino in Beaucedine Glacier, the Cermet
+# Door (_no4) and eight mob families in Fei'Yin. A level-75 WAR; (1) and (2) completed by GM. The guard's fame side
+# (224: level 3) and mustZone side (GM, 239) (the level side and (2)'s status in #guard / #level9), the trade while the
+# check holds (no handler anywhere: nothing), 340 (options 0 and 2: Total Loser by setTitle, not begun; option 1:
+# begun), 341, Torino 104 (options 0, 2: nothing; option 1: Shantotto's New Spell, Prog 1), 105, the Lua's
+# Leigon-Moigon / Potete entries with the New Spell (never looked up: their defaults 103 / 102), a Fei'Yin kill with the
+# New Spell (Jenglot: the Ex-Spell), six other families (nothing; Mind Hoarder, a lottery NM, in #mind_hoarder; a tick
+# after each kill lets the char disengage, so the next kill claims its mob), the door's 13, Torino's 108 (the Ex-Spell
+# taken, Timer = the next Vana'diel day), 113 (the Timer ahead), 109 the next day (Timer == today: a New Spell), the
+# door's 14 (Prog 2, the spell taken), the door's nil (default 11), a kill with no spell held (nothing), Torino's 110, Leigon-Moigon / Potete at Prog 2
+# (103 / 102), Shantotto's 342 with a full bag (Total Loser by addTitle; the Scroll of Warp II does not fit: not
+# completed) and with room (completed: fame +40, the scroll, the title), 343, and a trade while completed (nothing).
+# Defaults: Shantotto 164 (her script acts only for Class Reunion: never here); Torino-Samarino 101 (his script answers
+# Tuning Out only: TuningOut_Progress 7 / 8, never here, so his Event lines answer on both turns); Leigon-Moigon 103 and
+# Potete 102 (no script; CoP 5-2 not current); the Cermet Door 11 (no script; Windurst 8-2 not current). Also named:
+# Shantotto by (2)'s completed section (184 replaceDefault while this quest is not completed: under this quest's Event
+# and Progress lines) and Blood and Glory (staff skill 0: never here); Torino-Samarino by CoP 5-2 (not current).
+# The kills: kill takes an IDs.lua key plus an offset. Fei'Yin's keys include MIND_HOARDER (17612859) and
+# ALTEDOUR_I_TAVNAZIA (17612836); the offsets name a spawn of each family (feiyin/mobs.yaml): Drone +1 (17612860),
+# Ore_Golem +3 (17612862), Clockwork_Pod +98 (17612957, template Clockwork_Pod_FY, script Clockwork_Pod), Talos +110
+# (17612969), Droma +114 (17612973, template Droma_FY, script Droma), Colossus +141 (17613000), Jenglot =
+# ALTEDOUR_I_TAVNAZIA+4 (17612840).
+lists WindurstWalls/Shantotto/onTrigger WindurstWalls/onEventFinish/340 WindurstWalls/onEventFinish/342 BeaucedineGlacier/Torino-Samarino/onTrigger BeaucedineGlacier/Leigon-Moigon/onTrigger BeaucedineGlacier/Potete/onTrigger BeaucedineGlacier/onEventFinish/104 BeaucedineGlacier/onEventFinish/108 BeaucedineGlacier/onEventFinish/109 Feiyin/_no4/onTrigger Feiyin/onEventFinish/14
+char zone=WindurstWalls pos=122.6,-3.0,111.6 job=WAR lvl=75
+quest Windurst.CursesFoiledAgain1 completed
+quest Windurst.CursesFoiledAgain2 completed
+fame Windurst 224
+item BoneChip
+login
+trigger Shantotto                                   # fame level 3: not met; (2)'s 184 (replaceDefault)
+finish
+fame Windurst 225
+charvar Quest[2][63]mustZone 239                    # the quest's mustZone, by GM
+trigger Shantotto                                   # the mustZone: not met; 184
+finish
+charvar Quest[2][63]mustZone 0
+walk 122.6,-3.0,111.6
+trade Shantotto BoneChip x1                         # the check holds: no trade handler in any section, nothing
+trigger Shantotto                                   # met: progressEvent 340
+finish option=0                                     # the title Total Loser; not begun
+trigger Shantotto                                   # 340 again
+finish option=2                                     # not 1: Total Loser; not begun
+trigger Shantotto                                   # 340 again
+finish option=1                                     # begun
+trigger Shantotto                                   # accepted, Prog 0: event 341
+finish
+warp 106.1,-20.25,140.2 BeaucedineGlacier
+trigger Torino-Samarino                             # Prog 0: progressEvent 104
+finish option=0                                     # nothing
+trigger Torino-Samarino                             # 104 again
+finish option=2                                     # not 1: nothing
+trigger Torino-Samarino                             # 104 again
+finish option=1                                     # Shantotto's New Spell; Prog 1
+trigger Torino-Samarino                             # the New Spell: event 105
+finish
+trigger Leigon-Moigon                               # the New Spell: the Lua entry is never looked up; his default 103
+finish
+trigger Potete                                      # the same: her default 102
+finish
+warp -182.5,-2.0,190.0 Feiyin
+kill ALTEDOUR_I_TAVNAZIA+4                          # Jenglot, the New Spell held: taken; Shantotto's Ex-Spell
+tick 5000                                           # the char disengages before the next claim
+kill MIND_HOARDER+1                                 # Drone: no New Spell, nothing
+tick 5000
+kill MIND_HOARDER+3                                 # Ore_Golem: nothing
+tick 5000
+kill MIND_HOARDER+98                                # Clockwork_Pod: nothing
+tick 5000
+kill MIND_HOARDER+110                               # Talos: nothing
+tick 5000
+kill MIND_HOARDER+114                               # Droma: nothing
+tick 5000
+kill MIND_HOARDER+141                               # Colossus: nothing
+tick 5000
+walk -182.5,-2.0,190.0
+trigger _no4                                        # the Ex-Spell: event 13
+finish
+warp 106.1,-20.25,140.2 BeaucedineGlacier
+trigger Torino-Samarino                             # Prog 1, the Ex-Spell: progressEvent 108
+finish                                              # the Ex-Spell taken; Timer = tomorrow
+trigger Torino-Samarino                             # no spell, the Timer ahead: event 113
+finish
+wait vana=24                                        # Timer == today
+trigger Torino-Samarino                             # the Timer reached: progressEvent 109
+finish                                              # Shantotto's New Spell
+warp -182.5,-2.0,190.0 Feiyin
+trigger _no4                                        # the New Spell: progressEvent 14
+finish                                              # Prog 2; the New Spell taken
+trigger _no4                                        # no spell: nil; the door's default 11
+finish
+kill MIND_HOARDER+4                                 # an Ore_Golem, no spell held (Prog 2): nothing
+tick 5000
+warp 106.1,-20.25,140.2 BeaucedineGlacier
+trigger Torino-Samarino                             # Prog 2: event 110
+finish
+trigger Leigon-Moigon                               # Prog 2: never looked up; 103
+finish
+trigger Potete                                      # Prog 2: 102
+finish
+warp 122.6,-3.0,111.6 WindurstWalls
+trigger Shantotto                                   # Prog 2: progressEvent 342
+fill-inventory
+finish                                              # Total Loser; no room for the scroll: not completed
+free-inventory
+trigger Shantotto                                   # 342 again
+finish                                              # Total Loser; completed: fame +40, the Scroll of Warp II, the title
+trigger Shantotto                                   # completed: 343 (replaceDefault)
+finish
+walk 122.6,-3.0,111.6
+trade Shantotto BoneChip x1                         # completed: no trade handler, nothing

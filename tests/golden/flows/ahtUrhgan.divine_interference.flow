@@ -1,0 +1,77 @@
+# Divine Interference (ahtUrhgan 75): a level 75 Warrior with ToAU 48 Eternal Mercenary current, the SP Wildcat Badge
+# (mercenary rank 3), the Colossus's Mantle, six Slabs of Plumbago; Waking the Colossus accepted at Prog 5 with the
+# Whisper (GMs). Naja 929 ([7] 1: the mantle), option 5: Alexander learnt (ALEXANDER_UNLOCKED); Waking the Colossus
+# completed; Quest[6][75]Timer 1 until the next JST midnight. Area 13 (after the zone-in lock): the Timer set: not
+# available: nothing. A JST day later (the Timer gone): area 13 again: 930 ([0] 3, [1] 1), finished: Prog 1; the gate
+# (no script; default GATE_IS_FIRMLY_CLOSED) at Prog 1: 931, option 0: nothing; 931, option 1: begun; the gate again:
+# accepted: no gate handler: the default. Mount Zhayolm: three Slabs at Prog 1: nil; the door 157, finished: Prog 2;
+# again: nil: ACID_EATEN_DOOR; two Slabs: nil; three: 158, finished: the Lightning Cell, the trade taken; three more
+# with the cell: nil. blank_lamp (308, Prog 3) loads hidden: `#lamp`; a GM sets Prog 3; the Nyzul Isle instance (the
+# cell taken, Prog 4) by GMs (PLATFORM-NEEDS: an instance run). Alzadaal's zone-in at Prog 4 without the Whisper: 309,
+# finished: the Whisper. Naja 932 ([0] 3, [7] 17: the mantle and Alexander), option 2: the Colossus's Earring; completed
+# (Heir of the Blessed Radiance, an Imperial Gold Piece); the Whisper taken; Timer 1. The gate: completed, the Timer
+# set: no section: the default. A JST day later: the gate 931 (the repeat), finished with option 0: the quest deleted,
+# begun, Prog 1; the gate: accepted: the default; the door at Prog 1: 157 again.
+lists AhtUrhganWhitegate/Imperial_Whitegate/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/13 MountZhayolm/Acid-eaten_Door/onTrigger MountZhayolm/Acid-eaten_Door/onTrade AlzadaalUnderseaRuins/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/931 AhtUrhganWhitegate/onEventFinish/932
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=75 nation=1
+mission Toau EternalMercenary current
+quest AhtUrhgan.WakingTheColossus accepted
+charvar Quest[6][74]Prog 5
+keyitem WhisperOfRadiance
+keyitem SpWildcatBadge
+item ColossussMantle
+item SlabOfPlumbago x6
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+trigger Naja_Salaheem                   # Waking the Colossus at Prog 5: 929 ([0] 3, [7] 1)
+finish option=5                         # Alexander, ALEXANDER_UNLOCKED; WtC completed; DI's Timer 1 (JST midnight)
+walk 35,-6.6,-45                        # area 13: DI's Timer 1: not available; WtC completed: nothing
+walk 24.2,-7.804,-45.591
+wait jst=1                              # past the JST midnight: the Timer gone
+walk 35,-6.6,-45                        # available, Prog 0: 930 ([0] 3, [1] 1)
+finish                                  # Prog 1
+walk 24.2,-7.804,-45.591
+walk 35,-6.6,-45                        # Prog 1: nil: nothing
+trigger Imperial_Whitegate              # Prog 1: 931
+finish option=0                         # not 1: nothing
+trigger Imperial_Whitegate              # 931
+finish option=1                         # begun (Prog 1 kept)
+trigger Imperial_Whitegate              # accepted: no gate handler: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+warp 271.9,-32,-88 MountZhayolm
+walk 270.65,-33,-88                     # beside the door (a trade does not walk)
+trade Acid-eaten_Door SlabOfPlumbago x3 # Prog 1 (not 2 or more): nil
+finish-if-event
+trigger Acid-eaten_Door                 # Prog 1: 157
+finish                                  # Prog 2
+trade Acid-eaten_Door SlabOfPlumbago x2 # not exactly three: nil
+finish-if-event
+trigger Acid-eaten_Door                 # Prog 2: nil: ACID_EATEN_DOOR
+finish-if-event
+trade Acid-eaten_Door SlabOfPlumbago x3 # Prog 2, no cell: 158
+finish                                  # the Lightning Cell; the slabs taken
+trade Acid-eaten_Door SlabOfPlumbago x3 # the cell held: nil
+finish-if-event
+# blank_lamp (hidden at load; `#lamp` shows it): its 308 at Prog 2 with the cell sets Prog 3
+charvar Quest[6][75]Prog 3              # a GM: 308's write
+# the Nyzul Isle instance (PLATFORM-NEEDS: an instance run): the cell taken at registration, Prog 4 at its completion
+delkeyitem LightningCell                # a GM
+charvar Quest[6][75]Prog 4              # a GM
+warp 180,-0.05,20 AlzadaalUnderseaRuins open   # Prog 4, no Whisper: the zone-in's 309, left open
+finish                                  # the Whisper of Radiance
+warp 24.2,-7.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # the Whisper: 932 ([0] 3, [7] 17)
+finish option=2                         # the Colossus's Earring; completed; the Whisper taken; Timer 1
+warp 155.796,-4.199,0.03 AhtUrhganWhitegate
+trigger Imperial_Whitegate              # completed, Timer 1: no section: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+wait jst=1                              # the Timer gone
+trigger Imperial_Whitegate              # the repeat: 931
+finish option=0                         # any option: deleted, begun, Prog 1
+trigger Imperial_Whitegate              # accepted: GATE_IS_FIRMLY_CLOSED
+finish-if-event
+warp 271.9,-32,-88 MountZhayolm
+trigger Acid-eaten_Door                 # Prog 1 again: 157
+finish                                  # Prog 2

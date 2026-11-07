@@ -1,0 +1,51 @@
+# No Strings Attached (ahtUrhgan 7): a level 75 Warrior (ADVANCED_JOB_LEVEL 30). Available, Option 0: Iruki-Waraki: nil:
+# his default 259. Bastok Markets: Shamarhaan 434, finished: Option
+# 1; Shamarhaan 435 (an Event). Whitegate: Iruki-Waraki 260 (Option 1), finished: begun. Accepted: Iruki-Waraki 261 (an
+# Event, Prog 0); Ghatsad 262, finished: Prog 1; Ghatsad 263 (an Event, once per zone); again: nil: his script's 256
+# (the quest not completed). Arrapago Reef: qm10 214 (a progress cutscene), finished: the Antique Automaton
+# (KEYITEM_OBTAINED), Prog 2; again: PILE_OF_DISCARDED_MATERIALS. Whitegate: Ghatsad 264, finished: Prog 3, Timer = the
+# next Vana'diel day, the automaton taken; again: Timer later than today: nil: 256. Thirteen Vana'diel hours later (past
+# midnight): Ghatsad 265, finished: Prog 4. Iruki-Waraki 266, finished with option 2: completed (the Animator, the PUP
+# job gesture, Proud Automaton Owner), PUP unlocked, YOU_CAN_BECOME_PUP, the automaton named 120, the Harlequin Frame
+# and Head unlocked. Completed with the Animator: Iruki-Waraki 267 (an Event: the next talk goes to his script, which
+# for a non-PUP with this quest completed plays 267 too).
+lists BastokMarkets/Shamarhaan/onTrigger AhtUrhganWhitegate/Iruki-Waraki/onTrigger AhtUrhganWhitegate/Ghatsad/onTrigger ArrapagoReef/qm10/onTrigger AhtUrhganWhitegate/onEventFinish/264 AhtUrhganWhitegate/onEventFinish/266 ArrapagoReef/onEventFinish/214
+char zone=AhtUrhganWhitegate pos=101.329,-6,-29.042 job=WAR lvl=75
+login
+trigger Iruki-Waraki                    # Option 0: nil: his default 259
+finish-if-event
+warp -285.382,-12.021,-84.743 BastokMarkets
+trigger Shamarhaan                      # available, Option 0: 434
+finish                                  # Option 1
+trigger Shamarhaan                      # Option 1: 435
+finish
+warp 101.329,-6,-29.042 AhtUrhganWhitegate
+trigger Iruki-Waraki                    # Option 1: 260
+finish                                  # begun
+trigger Iruki-Waraki                    # Prog 0: 261
+finish
+trigger Ghatsad                         # Prog 0: 262
+finish                                  # Prog 1
+trigger Ghatsad                         # Prog 1: 263 (once per zone)
+finish
+trigger Ghatsad                         # 263 spent: nil: his script's 256
+finish
+warp 457.128,-8.249,62 ArrapagoReef
+trigger qm10                            # Prog 1: 214
+finish                                  # the Antique Automaton; Prog 2
+trigger qm10                            # Prog 2: PILE_OF_DISCARDED_MATERIALS
+finish-if-event
+warp 34.325,-7.804,57.511 AhtUrhganWhitegate
+trigger Ghatsad                         # Prog 2, the automaton: 264
+finish                                  # Prog 3; Timer = tomorrow; the automaton taken
+trigger Ghatsad                         # Timer later than today: nil: 256
+finish
+wait vana=13                            # past Vana'diel midnight
+trigger Ghatsad                         # Timer <= today: 265
+finish                                  # Prog 4
+trigger Iruki-Waraki                    # Prog 4: 266
+finish option=2                         # completed; PUP; YOU_CAN_BECOME_PUP; named 120; Harlequin frame, head
+trigger Iruki-Waraki                    # completed, the Animator held: 267
+finish
+trigger Iruki-Waraki                    # the alternation: his script: 267
+finish

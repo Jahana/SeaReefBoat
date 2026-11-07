@@ -1,0 +1,17 @@
+# To Catch a Falling Star (windurst 53) with a full inventory (accepted by a GM). The Twinkle Tree at 00:00: the scales:
+# the two messages; npcUtil.giveItem refuses the tear (ITEM_CANNOT_BE_OBTAINED), nothing taken, prog 0; with room: the
+# tear, the scales taken, prog 1. Sigismund with the inventory full again: the tear: 199; its finish takes the tear
+# first (player:tradeComplete), so the Fish Scale Shield (player:addItem, no space check) fits: completed, prog 2.
+char zone=WestSarutabaruta pos=154.5,-40.75,333.7 job=WAR lvl=75
+item HandfulOfPugilScales x2
+login
+quest Windurst.ToCatchAFallingStar accepted
+wait vana=12                            # 00:00
+fill-inventory
+trade Twinkle_Tree HandfulOfPugilScales x1  # full: the two messages; ITEM_CANNOT_BE_OBTAINED; nothing taken; prog 0
+free-inventory
+trade Twinkle_Tree HandfulOfPugilScales x1  # the two messages; the Starfall Tear; the scales taken; prog 1
+warp -109.04,-9.0,80.56 PortWindurst    # beside Sigismund
+fill-inventory
+trade Sigismund StarfallTear x1         # accepted, the tear alone: 199
+finish                                  # the tear taken; completed; fame 20; the Fish Scale Shield fits; prog 2

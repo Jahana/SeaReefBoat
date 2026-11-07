@@ -1,0 +1,50 @@
+# Out of One's Shell (bastok 5): Ronan, Mine Konte, Panana and Corann in Port Bastok. The guard (The Quadav's Curse
+# completed, Bastok fame level 2), the offer 82, Ronan's RONAN_DIALOG_1 at Prog 0, Mine Konte's and Panana's 83 at Prog 0,
+# three Shell Bugs (84: the bugs taken, Prog 1, mustZone set), Ronan's 85 until the char zones, then 86 (completed: Monk's
+# Headgear, Shell Outer, fame +20); once completed Ronan's 89 and Corann's 88 (replaceDefault).
+# Defaults: Ronan 37, Mine Konte 42, Panana 43, Corann 38 (DefaultActions; no scripts). Corann is The Quadav's Curse's
+# (C#: its 87 while this quest is not completed, its offer 80 while it is available; here it is completed).
+lists PortBastok/Ronan/onTrigger PortBastok/Ronan/onTrade PortBastok/Mine_Konte/onTrigger PortBastok/Panana/onTrigger PortBastok/Corann/onTrigger PortBastok/onEventFinish/82 PortBastok/onEventFinish/84 PortBastok/onEventFinish/86
+char zone=PortBastok pos=84.7,-8.8,21.8
+fame Bastok 50
+item ShellBug x7
+item BoneChip
+login
+trigger Ronan                        # The Quadav's Curse not completed: not offered, 37
+finish-if-event
+quest Bastok.TheQuadavsCurse completed
+fame Bastok 49
+trigger Ronan                        # fame 49 (level 1): not offered, 37
+finish-if-event
+fame Bastok 50
+trade Ronan ShellBug x3              # available: no trade handler, nothing
+trigger Ronan                        # the offer, 82
+finish                               # accepted
+trigger Ronan                        # Prog 0: messageName RONAN_DIALOG_1
+finish-if-event
+trade Ronan BoneChip x1              # the wrong item: nil
+trade Ronan ShellBug x2              # two bugs: nil
+trigger Mine_Konte                   # Prog 0: 83
+finish
+trigger Panana                       # Prog 0: 83
+finish
+trigger Ronan
+finish-if-event
+trade Ronan ShellBug x3              # Prog 0, three bugs: 84
+finish                               # the bugs taken, Prog 1, mustZone set
+trade Ronan ShellBug x3              # Prog 1: nil (the bugs kept)
+trigger Ronan                        # Prog 1, mustZone: 85
+finish
+trigger Mine_Konte                   # Prog 1: nil, 42
+finish-if-event
+trigger Panana                       # Prog 1: nil, 43
+finish-if-event
+zoneline BastokMarkets               # another zone: mustZone cleared
+zoneline PortBastok
+trigger Ronan                        # Prog 1, no mustZone: 86
+finish                               # completed: Monk's Headgear, Shell Outer, fame +20
+trigger Ronan                        # completed: 89 (replaceDefault)
+finish
+trade Ronan ShellBug x3              # completed: no trade handler, nothing
+trigger Corann                       # completed: 88 (replaceDefault)
+finish

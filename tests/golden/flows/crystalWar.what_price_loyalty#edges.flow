@@ -1,0 +1,55 @@
+# What Price Loyalty (crystalWar 50), the edges: a level 99 Warrior in Bastok Markets [S] with the WotG mission Fate in
+# Haze current (missions as the main flow); Beneath the Mask not completed. Gentle Tiger: no section (109). Beneath
+# completed (a GM): 348, finished on option 1: begun (any option), the sack. The sack taken (a GM): Prog 0 without it:
+# no section: Gentle Tiger 109; North Gustaberg [S]: Roderich his default 111. Prog 2 (a GM): Roderich 111 (11 is Prog
+# 1's). Prog 3 without the endorsement (a GM): Xarcabard [S] (from North Gustaberg [S], no zone-in reply at Prog 3):
+# the Forbidding Portal: no section: NO_RESPONSE. Prog 4 (a GM): from Everbloom Hollow (the put-back warp, see the main
+# flow): nil (10 is Prog 5's). Prog 5 (a GM): Xarcabard [S] from North Gustaberg [S]: nil; Prog 6 (a GM): from
+# Everbloom Hollow: nil. Bastok Markets [S]: Prog 5 (a GM): Gentle Tiger: no handler (109). Prog 6 (a GM) with a full
+# inventory: Gentle Tiger 350, finished: the staff does not fit: not completed; freed: 350: completed.
+# The mission before Fate in Haze is the #mission flow.
+uncovered: 6/-/onEventFinish:10000 -- Everbloom Hollow's 10000 is the What Price Loyalty instance's completion cutscene ("not implemented currently": nothing in Everbloom Hollow starts it): no flow can open it without an instance run (PLATFORM-NEEDS: an instance run); the main flow sets Prog 5 by a GM
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/onEventFinish/348 BastokMarketsS/onEventFinish/350 NorthGustabergS/Roderich/onTrigger XarcabardS/onZoneIn/1 XarcabardS/Forbidding_Portal/onTrigger
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99
+mission Wotg FateInHaze current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # Beneath the Mask not completed: no section: 109
+finish-if-event
+quest CrystalWar.BeneathTheMask completed # a GM
+trigger Gentle_Tiger                    # 348
+finish option=1                         # begun (any option); the sack
+delkeyitem SackOfVictuals               # a GM
+trigger Gentle_Tiger                    # Prog 0 without the sack: no section: 109
+finish-if-event
+warp -398.539,39.991,-90.445 NorthGustabergS
+trigger Roderich                        # Prog 0 without the sack: his default 111
+finish-if-event
+charvar Quest[7][50]Prog 2              # a GM
+trigger Roderich                        # Prog 2: his default 111
+finish-if-event
+charvar Quest[7][50]Prog 3              # a GM, no endorsement
+warp 321.5,-10.835,158.699 XarcabardS   # Prog 3: no zone-in reply
+trigger Forbidding_Portal               # Prog 3 without the endorsement: no section: NO_RESPONSE
+finish-if-event
+charvar Quest[7][50]Prog 4              # a GM
+warp 0,0,0 EverbloomHollow              # no instance: back in Xarcabard [S], from Everbloom: Prog 4: nil
+charvar Quest[7][50]Prog 5              # a GM
+warp -398.539,39.991,-90.445 NorthGustabergS
+warp 321.5,-10.835,158.699 XarcabardS   # Prog 5 from North Gustaberg [S]: nil
+charvar Quest[7][50]Prog 6              # a GM
+warp 0,0,0 EverbloomHollow              # no instance: back in Xarcabard [S], from Everbloom: Prog 6: nil
+charvar Quest[7][50]Prog 5              # a GM
+warp -202.432,-9.998,2.237 BastokMarketsS
+trigger Gentle_Tiger                    # Prog 5: no handler: 109
+finish-if-event
+charvar Quest[7][50]Prog 6              # a GM
+fill-inventory
+trigger Gentle_Tiger                    # Prog 6: 350
+finish                                  # no room for the staff: not completed
+free-inventory
+trigger Gentle_Tiger                    # 350
+finish                                  # completed

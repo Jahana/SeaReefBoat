@@ -1,0 +1,26 @@
+# Stop Your Whining's edges. bob (a level 9 Warrior, Norg fame 225): not offered: the default 80. Main (level 75, fame
+# 225, accepted by a GM with neither barrel): Washu: nil: the default 80; Yhoator's qm2: nil: its default
+# NOTHING_OUT_OF_ORDINARY. The brew (a GM): Washu 23 finished with a full inventory: complete false (no room for the
+# scroll): the brew kept; 23 again: completed.
+lists Norg/Washu/onTrigger YhoatorJungle/qm2/onTrigger Norg/onEventFinish/23
+char zone=YhoatorJungle pos=-302.183,1.703,18.208 job=WAR lvl=75
+char bob zone=Norg pos=51.041,-6.282,15.546 job=WAR lvl=9
+fame Norg 225
+quest Outlands.StopYourWhining accepted
+bob: fame Norg 225
+login
+bob: login
+bob: trigger Washu                      # level 9 < 10: the default 80
+bob: finish
+bob: logout
+trigger qm2                             # neither barrel: nil: the default NOTHING_OUT_OF_ORDINARY
+warp 51.041,-6.282,15.546 Norg
+trigger Washu                           # neither barrel: nil: the default 80
+finish
+keyitem BarrelOfOpoOpoBrew              # a GM
+trigger Washu                           # the brew: 23
+fill-inventory
+finish                                  # complete false: still accepted; the brew kept
+free-inventory
+trigger Washu                           # 23
+finish                                  # completed; the brew taken

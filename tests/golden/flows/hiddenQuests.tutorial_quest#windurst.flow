@@ -1,0 +1,67 @@
+# Tutorial, Windurst: a level 1 Warrior (nation 2) in Windurst Woods, Selele (no script; her default). Prog 0: 1010
+# (Prog 1); 988 (Prog 2); no Signet: 989. Prog 3: 991. Prog 4: no skill: 993; Sword 5: 994: the gil, Prog 5. 995;
+# the Memorandoll: 996: Bird Egg, Pot of Honey, Water Crystal, Prog 6. 997; the Auction Counter (Windurst Woods'):
+# Option 1, the menu; 998: the voucher, Prog 7. Level 1: 999. Prog 8 (a GM): 1001; the Windurst Trust Permit: 1002: the
+# Warp Ring, Prog 9. 1003 (2); Port Windurst's guide: 0 -> 1; West Sarutabaruta's: 1 -> 2; 1004 (2): Saltena, Prog 10.
+# Level 1: 1005. Prog 11 (a GM): 1007 (2). Prog 12: 1009.
+# The Signet (effect 253: 990) and food (effect 251: 992) by a GM's effect; the support job arm (1008): #support; 1006
+# (level 18): #later's shape.
+lists WindurstWoods/Selele/onTrigger WindurstWoods/Auction_Counter/onTrigger PortWindurst/Survival_Guide/onTrigger WestSarutabaruta/Survival_Guide/onTrigger WindurstWoods/onEventFinish/1010 WindurstWoods/onEventFinish/988 WindurstWoods/onEventFinish/994 WindurstWoods/onEventFinish/996 WindurstWoods/onEventFinish/998 WindurstWoods/onEventFinish/1002 WindurstWoods/onEventFinish/1004
+char zone=WindurstWoods pos=106.8,-5,-29.5 job=WAR lvl=1 nation=2
+login
+trigger Selele                          # Prog 0: 1010
+finish                                  # Prog 1
+trigger Selele                          # 988
+finish                                  # Prog 2
+trigger Selele                          # no Signet: 989
+finish
+effect 253                              # a GM: the Signet
+trigger Selele                          # 990
+finish                                  # 6 Meat Jerky; Prog 3
+trigger Selele                          # no food: 991
+finish
+effect 251                              # a GM: food
+trigger Selele                          # 992
+finish                                  # Prog 4
+trigger Selele                          # no skill at 5: 993
+finish
+skill Sword 50
+trigger Selele                          # 994
+finish                                  # the gil; Prog 5
+trigger Selele                          # no Memorandoll: 995
+finish
+keyitem Memorandoll
+trigger Selele                          # 996
+finish                                  # Bird Egg, Pot of Honey, Water Crystal; Prog 6
+trigger Selele                          # Option 0: 997
+finish
+trigger Auction_Counter                 # Option 1; the menu; noAction
+trigger Selele                          # 998
+finish                                  # the voucher; Prog 7; Option 0
+trigger Selele                          # level 1: 999
+finish
+charvar HQuest[Tutorial]Prog 8          # a GM
+trigger Selele                          # no permit: 1001
+finish
+keyitem WindurstTrustPermit
+trigger Selele                          # 1002
+finish                                  # the Warp Ring; Prog 9
+trigger Selele                          # 1003 (2)
+finish
+warp -220,-8.3,181 PortWindurst
+trigger Survival_Guide                  # 0 -> 1; 8500; nil
+finish-if-event
+warp -13.3,-12.5,317.7 WestSarutabaruta
+trigger Survival_Guide                  # 1 -> 2; 8500; nil
+finish-if-event
+warp 106.8,-5,-29.5 WindurstWoods
+trigger Selele                          # 1004 (2)
+finish                                  # 12 Saltena; Prog 10; TutorialBypass 0
+trigger Selele                          # level 1: 1005
+finish
+charvar HQuest[Tutorial]Prog 11         # a GM
+trigger Selele                          # no support job: 1007 (2)
+finish
+charvar HQuest[Tutorial]Prog 12         # a GM
+trigger Selele                          # 1009
+finish

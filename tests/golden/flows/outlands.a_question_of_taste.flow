@@ -1,0 +1,105 @@
+# A Question of Taste (outlands 3): a level 75 Warrior at Windurst fame 425 (level 6), A Pose By Any Other Name completed
+# (a GM; no mustZone). Available: a Bone Chip traded to Etteh: no trade handler: nothing; Etteh 44 (a progress
+# cutscene): begun, the Letter to Angelica. Prog 0: Etteh 45, Jakoh 46. Windurst Waters: Angelica 771 (Progress beats her
+# script): Prog 1, Final Fantasy, Angelica's Letter, the Letter to Angelica taken; 772 (an Event: the quest's turn); her
+# script's turn: 86 (an Event on a scripted NPC alternates with its script: interaction_lookup's UseFallback var).
+# Kazham: Jakoh 46 (Prog 1), Etteh 47 (Prog 2, Angelica's Letter taken), 49; Jakoh 48. The Temple: the frame 50 (Final Fantasy), option 0:
+# nothing; 50, option 1: Final Fantasy taken, Trompe L'Oeil spawned and claimed, Wait now + 900; the frame: Wait ahead:
+# FRAME_FOR_A_PAINTING + 1 and STILL_HANGS_ON_THE_WALL; Trompe L'Oeil killed: Prog 3; the frame: the Ripped Final Fantasy
+# Painting, Prog 4 (no action); the frame: nil: the default FRAME_FOR_A_PAINTING. Kazham: Etteh 50: completed (3000
+# gil), Windurst fame +16, the painting taken, the mustZone; Etteh 51, Jakoh 52 (the mustZone).
+# The repeat (completed, the vars cleared by complete): Windurst Waters (the mustZone cleared): Angelica 773
+# (replaceDefault; the fallback var cleared by the zone change: the quest's turn). Kazham: Jakoh: Prog 0, no mustZone:
+# nil: his script (no Tuning Out: nothing), the default 113; Etteh (rancorCurse 0) 53 (Option 0), option 2: Option 1;
+# 54, option 0: nothing; 54, option 1: Prog 1, begun (addQuest on the completed quest: still completed), Final Fantasy
+# Part II; Etteh 55, Jakoh 56. Windurst Waters: Angelica 772; her script's turn: 86. The Temple: the frame 51 (Final Fantasy Part II), option 1:
+# FF II taken, Trompe L'Oeil spawned, Wait; the frame: the Wait messages; Trompe L'Oeil killed: Prog 2; the frame: the
+# painting, Prog 3; the frame: nil: the default. Windurst Waters: Angelica 773; her script's turn: 86. Kazham: Etteh 57:
+# completed again (3000 gil, fame +16, the painting taken, the mustZone); Etteh 51.
+lists Kazham/Etteh_Sulaej/onTrigger Kazham/Etteh_Sulaej/onTrade Kazham/Jakoh_Wahcondalo/onTrigger WindurstWaters/Angelica/onTrigger TempleOfUggalepih/Stone_Picture_Frame_QoT/onTrigger TempleOfUggalepih/Trompe_LOeil/onMobDeath Kazham/onEventFinish/53 TempleOfUggalepih/onEventFinish/50
+char zone=Kazham pos=93.981,-14.5,-110.818 job=WAR lvl=75
+fame Windurst 425
+quest Windurst.APoseByAnyOtherName completed
+item BoneChip
+login
+trade Etteh_Sulaej BoneChip x1          # available: no trade handler: nothing
+trigger Etteh_Sulaej                    # fame level 6: 44 (a progress cutscene)
+finish                                  # begun; the Letter to Angelica
+trigger Etteh_Sulaej                    # Prog 0: 45
+finish
+trigger Jakoh_Wahcondalo                # Prog 0: 46
+finish
+warp -64.619,-9.25,-8.853 WindurstWaters
+trigger Angelica                        # A Pose completed, its mustZone clear, Prog 0: 771
+finish                                  # Prog 1; Final Fantasy; Angelica's Letter; the Letter to Angelica taken
+trigger Angelica                        # Prog 1: 772 (the quest's turn)
+finish
+trigger Angelica                        # her script's turn: 86 (the quest's Event set UseFallback)
+finish
+warp 93.981,-14.5,-110.818 Kazham
+trigger Jakoh_Wahcondalo                # Prog 1 (< 2): 46
+finish
+trigger Etteh_Sulaej                    # Prog 1: 47
+finish                                  # Prog 2; Angelica's Letter taken
+trigger Etteh_Sulaej                    # Prog 2 (>= 2): 49
+finish
+trigger Jakoh_Wahcondalo                # Prog 2: 48
+finish
+warp 79.876,0.5,-36.964 TempleOfUggalepih
+trigger Stone_Picture_Frame_QoT         # Prog 2, Wait 0, Trompe L'Oeil not spawned: 50 (Final Fantasy)
+finish option=0                         # nothing
+trigger Stone_Picture_Frame_QoT         # 50
+finish option=1                         # Final Fantasy taken; Trompe L'Oeil spawned, claimed; Wait now + 900
+trigger Stone_Picture_Frame_QoT         # Wait ahead: FRAME_FOR_A_PAINTING + 1; STILL_HANGS_ON_THE_WALL
+kill TROMPE_LOEIL                       # Prog 2: Prog 3
+tick 15000                              # the body despawns
+tick 4000                               # it fades: not spawned
+trigger Stone_Picture_Frame_QoT         # Prog 3: the Ripped Final Fantasy Painting; Prog 4; no action
+trigger Stone_Picture_Frame_QoT         # Prog 4: nil: the default FRAME_FOR_A_PAINTING
+warp 93.981,-14.5,-110.818 Kazham
+trigger Etteh_Sulaej                    # Prog 4: 50
+finish                                  # completed: 3000 gil; Windurst fame +16; the painting taken; the mustZone
+trigger Etteh_Sulaej                    # completed, the mustZone: 51
+finish
+trigger Jakoh_Wahcondalo                # the mustZone: 52
+finish
+warp -64.619,-9.25,-8.853 WindurstWaters   # the mustZone cleared
+trigger Angelica                        # completed, Prog 0: 773 (replaceDefault)
+finish
+warp 93.981,-14.5,-110.818 Kazham
+trigger Jakoh_Wahcondalo                # Prog 0, no mustZone: nil: his script (nothing), the default 113
+finish
+trigger Etteh_Sulaej                    # rancorCurse 0; Prog 0, Option 0: 53
+finish option=2                         # Option 1
+trigger Etteh_Sulaej                    # Option 1: 54
+finish option=0                         # nothing
+trigger Etteh_Sulaej                    # 54
+finish option=1                         # Prog 1; begun (still completed); Final Fantasy Part II
+trigger Etteh_Sulaej                    # Prog 1 (>= 1): 55
+finish
+trigger Jakoh_Wahcondalo                # Prog 1: 56
+finish
+warp -64.619,-9.25,-8.853 WindurstWaters
+trigger Angelica                        # Prog 1: 772
+finish
+trigger Angelica                        # her script's turn: 86
+finish
+warp 79.876,0.5,-36.964 TempleOfUggalepih
+trigger Stone_Picture_Frame_QoT         # Prog 1, Wait 0 (cleared by complete), Trompe L'Oeil down: 51 (FF Part II)
+finish option=1                         # FF Part II taken; Trompe L'Oeil spawned, claimed; Wait now + 900
+trigger Stone_Picture_Frame_QoT         # Wait ahead: FRAME_FOR_A_PAINTING + 1; STILL_HANGS_ON_THE_WALL
+kill TROMPE_LOEIL                       # Prog 1: Prog 2
+tick 15000                              # the body despawns
+tick 4000                               # it fades: not spawned
+trigger Stone_Picture_Frame_QoT         # Prog 2: the painting; Prog 3; no action
+trigger Stone_Picture_Frame_QoT         # Prog 3: nil: the default
+warp -64.619,-9.25,-8.853 WindurstWaters
+trigger Angelica                        # Prog 3: 773 (replaceDefault)
+finish
+trigger Angelica                        # her script's turn: 86 (spokenAngelica, a local var, cleared by the zone changes)
+finish
+warp 93.981,-14.5,-110.818 Kazham
+trigger Etteh_Sulaej                    # Prog 3: 57
+finish                                  # completed again: 3000 gil; fame +16; the painting taken; the mustZone
+trigger Etteh_Sulaej                    # the mustZone: 51
+finish

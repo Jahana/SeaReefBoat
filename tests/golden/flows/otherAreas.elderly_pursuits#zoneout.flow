@@ -1,0 +1,54 @@
+# Elderly Pursuits (otherAreas 75): Carpenters' Landing's onZoneOut (Prog 2: Prog 1) and the other arms of the ???,
+# Para's death and Rouva. It holds probe.zone_out's steps (P7: a warp and a logout out of Carpenters' Landing at Prog 2,
+# a warp at Prog 3 and at Prog 1). Accepted at Prog 1 (a GM) with the amulet. The ???: Para popped; Prog 0 (a GM) before
+# the kill: Para's death at Prog 0 sets nothing. Prog 2 (a GM): leaving the zone (a warp to Southern San d'Oria): Prog
+# 1. Back; Prog 2 (a GM): a logout (it leaves the zone too): Prog 1. Prog 2 (a GM), the amulet taken away (a GM): the
+# ??? at Prog 2 without it: nil, its default. The amulet back (a GM): Prog 3, the medallion, the amulet taken. Leaving
+# at Prog 3: no handler (section 2 is off above Prog 2): Prog 3 kept. The medallion taken away, the amulet given back
+# (GMs): Rouva at Prog 3 with the amulet and without the medallion: section 2 off (Prog above 2), section 3's test
+# fails: nil (her script does nothing; 662). Available (a GM) at Prog 0 with the amulet: no section (section 2 wants the
+# quest accepted): 662. Accepted again (a GM), the amulet taken away: Rouva at Prog 0 without it: nil, 662. The ??? at
+# Prog 0: nil (neither arm). Prog 1 (a GM), left: Prog 1 kept (the handler's Prog 2 test). The Prog 1 kill (Prog 2) is
+# in the main flow; a second pop in one flow fails (the corpse stays up while the zone is empty).
+# Not taken: onMobDeath's `mob:getID() == ID.mob.PARA` false side (a clone of Para). The clones (PARA+1 to +4) spawn
+# only from Para's own weapon skills under 50% HP (Para.lua onMobWeaponSkill); no flow statement spawns a mob, and a
+# kill of a mob that is not up runs no death (a `kill PARA+1` at Prog 1, tried on Lua, recorded no onMobDeath).
+# XI.Verify.Quests `oa g5 para` proves the C# arm on the fake.
+lists CarpentersLanding/onZoneOut/1 CarpentersLanding/qm_para/onTrigger CarpentersLanding/Para/onMobDeath SouthernSanDoria/Rouva/onTrigger
+char zone=CarpentersLanding pos=-414.6,0,-363.5 job=WAR lvl=75
+quest OtherAreas.SecretsOfOvensLost completed
+quest OtherAreas.ElderlyPursuits accepted
+charvar Quest[4][75]Prog 1
+keyitem AntiqueAmulet
+login
+trigger qm_para                         # Prog 1: Para popped; STENCH_OF_DECAY
+charvar Quest[4][75]Prog 0              # a GM, before the kill
+kill PARA                               # Prog 0: nothing
+charvar Quest[4][75]Prog 2              # a GM
+warp -14.7,2.1,11.8 SouthernSanDoria    # onZoneOut at Prog 2: Prog 1
+warp -414.6,0,-363.5 CarpentersLanding
+charvar Quest[4][75]Prog 2              # a GM
+logout                                  # onZoneOut at Prog 2: Prog 1
+login
+charvar Quest[4][75]Prog 2              # a GM
+delkeyitem AntiqueAmulet                # a GM
+trigger qm_para                         # Prog 2, no amulet: nil; its default
+keyitem AntiqueAmulet                   # a GM
+trigger qm_para                         # Prog 3; the medallion; the amulet taken
+warp -14.7,2.1,11.8 SouthernSanDoria    # Prog 3: section 2 off, no onZoneOut: Prog 3 kept
+delkeyitem CathedralMedallion           # a GM
+keyitem AntiqueAmulet                   # a GM
+trigger Rouva                           # Prog 3, the amulet, no medallion: nil; 662
+finish-if-event
+quest OtherAreas.ElderlyPursuits available # a GM
+charvar Quest[4][75]Prog 0              # a GM
+trigger Rouva                           # available, the amulet: no section; 662
+finish-if-event
+quest OtherAreas.ElderlyPursuits accepted # a GM
+delkeyitem AntiqueAmulet                # a GM
+trigger Rouva                           # Prog 0, no amulet: nil; 662
+finish-if-event
+warp -414.6,0,-363.5 CarpentersLanding
+trigger qm_para                         # Prog 0: nil; its default
+charvar Quest[4][75]Prog 1              # a GM
+warp -14.7,2.1,11.8 SouthernSanDoria    # onZoneOut at Prog 1: Prog 1 kept

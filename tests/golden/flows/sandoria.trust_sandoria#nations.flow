@@ -1,0 +1,31 @@
+# Trust: San d'Oria (sandoria 119): the other nations' trust quests. A Windurst char of level 5. Trust: Windurst
+# accepted (GM: neither available nor completed): Gondebaud's available arm plays nothing at all (no 3505). Windurst's
+# completed: 3504, option 2: begun, the card. Quest[0][119]Prog 1 (GM). Excenmille: accepted and Windurst's
+# completed: 897 (memories 0, rank3 0): Excenmille learned, the card taken, the permit, completed (no title, the var not
+# cleared; Quest[0][119]Prog kept). Completed, Windurst's still completed: 896 (the 897 arm wants accepted), the flag
+# set. Then San d'Oria's and Windurst's made available again and Bastok's completed (GM): Excenmille while available:
+# his 29 (no arm); Gondebaud 3504, option 2; Excenmille 897 through Bastok's.
+char zone=SouthernSanDoria pos=122.3,0,92.1 lvl=5 nation=2
+quest Windurst.TrustWindurst accepted
+login
+trigger Gondebaud                         # available, Windurst's accepted, Bastok's available: nothing at all
+quest Windurst.TrustWindurst completed
+trigger Gondebaud                         # Windurst's completed: 3504
+finish option=2                           # begun; the Red Institute Card
+warp -227.8,8,23 NorthernSanDoria
+charvar Quest[0][119]Prog 1               # a GM: the quest's own var (npcUtil.completeQuest keeps it)
+trigger Excenmille                        # accepted, Windurst's completed: 897 (0, 0, 0, 0, 0, 0, 0, 0)
+finish                                    # Excenmille learned; the card taken; the permit; completed
+trigger Excenmille                        # completed, Windurst's completed, no Curilla, flag 0: 896; the flag 1
+finish
+quest Sandoria.TrustSandoria available
+quest Windurst.TrustWindurst available
+quest Bastok.TrustBastok completed
+trigger Excenmille                        # available, Bastok's completed: no arm: 29
+finish
+warp 122.3,0,92.1 SouthernSanDoria
+trigger Gondebaud                         # available, Bastok's completed: 3504
+finish option=2                           # begun; the card
+warp -227.8,8,23 NorthernSanDoria
+trigger Excenmille                        # accepted, Bastok's completed: 897
+finish                                    # completed (Excenmille learned again: silent addSpell)

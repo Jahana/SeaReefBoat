@@ -1,0 +1,126 @@
+# The Opo-Opo and I (outlands 11): each middle handler's wrong item and "start over" talk. Accepted by GM. Kukupp at
+# progress 0 (not his turn): a talk: none of his arms (the quest's nil; the text); the workbench: nothing. At progress 1
+# a bone chip (neither his item nor another's): nothing. Then for k = 1 .. 8, the vars set by GM (OPO_OPO_PROGRESS k,
+# failed 0, retry 0): a talk (the default text, which also stands the char by a walking handler), another handler's
+# item (handler k gets handler k - 1's: the rod at Kukupp .. the skull at Lalapp): the bad event (failed 1, OPO_OPO_RETRY
+# k + 1), then the script's talk: retry: the handler's "start over" event. Lalapp has no default: his first talk is the
+# script's (214 at his turn). Then GM states play cannot reach: Kukupp at progress 0, failed 3 (failed k + 2 with no
+# progress): 243; Nenepp at progress 10: 250 (the thanks; 241 completes instead in play), at progress 0: nothing. Lalapp at
+# progress 0: nothing. Nenepp's 238 is #replay's, Lulupp's 229 #lulupp's.
+char zone=Kazham pos=42.0,-11.0,-178.0 job=WAR lvl=75
+quest Outlands.TheOpoOpoAndI accepted
+item BoneChip
+item BrokenMithranFishingRod
+item Workbench
+item TenOfCoinsCard
+item HandfulOfTheSandsOfSilence
+item WanderingBulb
+item SetOfGiantFishBones
+item BlackenedToad
+item WyvernSkull
+login
+trigger Kukupp                          # UseFallback 0: the default OPO_OPO text
+finish-if-event
+trigger Kukupp                          # the script: progress 0, failed 0, retry 0: none of his arms; the text
+finish-if-event
+trade Kukupp Workbench x1               # progress 0: not his turn: nothing
+charvar OPO_OPO_PROGRESS 1
+trade Kukupp BoneChip x1                # his turn, neither item: nothing
+trade Kukupp BrokenMithranFishingRod x1 # his turn, another's item (the rod): 230
+finish                                  # failed 1, OPO_OPO_RETRY 2
+trigger Kukupp                          # the text
+finish-if-event
+trigger Kukupp                          # retry: 198
+finish
+charvar OPO_OPO_PROGRESS 0
+charvar OPO_OPO_FAILED 3
+charvar OPO_OPO_RETRY 0
+trigger Kukupp                          # the text
+finish-if-event
+trigger Kukupp                          # progress 0, failed 3 (k + 2): 243
+finish
+warp 93.0,-15.0,-114.0 Kazham
+charvar OPO_OPO_PROGRESS 2
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 0
+trigger Mumupp                          # the text
+finish-if-event
+trade Mumupp Workbench x1               # 231
+finish                                  # failed 1, retry 3
+trigger Mumupp                          # retry: 199
+finish
+warp 15.0,-8.0,-108.0 Kazham
+charvar OPO_OPO_PROGRESS 3
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 0
+trigger Roropp                          # the text
+finish-if-event
+trade Roropp TenOfCoinsCard x1          # 232
+finish                                  # failed 1, retry 4
+trigger Roropp                          # retry: 200
+finish
+warp 15.6,-8.0,-80.8 Kazham
+charvar OPO_OPO_PROGRESS 4
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 0
+trigger Popopp                          # the text
+finish-if-event
+trade Popopp HandfulOfTheSandsOfSilence x1  # 233
+finish                                  # failed 1, retry 5
+trigger Popopp                          # retry: 201
+finish
+warp 67.7,-11.0,-48.0 Kazham
+charvar OPO_OPO_PROGRESS 5
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 0
+trigger Bubupp                          # the text
+finish-if-event
+trade Bubupp WanderingBulb x1           # 234
+finish                                  # failed 1, retry 6
+trigger Bubupp                          # retry: 202
+finish
+charvar OPO_OPO_PROGRESS 6
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 0
+trigger Tatapp                          # the text (stands the char by the walking Tatapp)
+finish-if-event
+trade Tatapp SetOfGiantFishBones x1     # 235
+finish                                  # failed 1, retry 7
+trigger Tatapp                          # retry: 203
+finish
+warp 102.8,-15.0,-108.0 Kazham
+charvar OPO_OPO_PROGRESS 7
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 0
+trigger Kakapp                          # the text
+finish-if-event
+trade Kakapp BlackenedToad x1           # 236
+finish                                  # failed 1, retry 8
+trigger Kakapp                          # retry: 204
+finish
+warp -64.0,-11.0,-96.0 Kazham
+charvar OPO_OPO_PROGRESS 8
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 0
+trigger Lalapp                          # no default: his turn: 214
+finish
+trade Lalapp WyvernSkull x1             # 237
+finish                                  # failed 1, retry 9
+trigger Lalapp                          # retry: 205
+finish
+charvar OPO_OPO_PROGRESS 0
+charvar OPO_OPO_FAILED 0
+charvar OPO_OPO_RETRY 0
+trigger Lalapp                          # progress 0: none of his arms: nothing (no default)
+finish-if-event
+warp 30.0,-11.0,-182.0 Kazham
+charvar OPO_OPO_PROGRESS 10
+trigger Nenepp                          # the text
+finish-if-event
+trigger Nenepp                          # progress 10: 250
+finish
+charvar OPO_OPO_PROGRESS 0
+trigger Nenepp                          # the text
+finish-if-event
+trigger Nenepp                          # progress 0: none of his arms; the text
+finish-if-event

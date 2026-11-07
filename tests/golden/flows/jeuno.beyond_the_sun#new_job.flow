@@ -1,0 +1,19 @@
+# Beyond the Sun (jeuno 76), Shattering Stars completed and maatsCap 32767 (GM), the job either side of 15: main a level
+# 75 Blue Mage (job 16): available: MAAT_CAP_PLACEHOLDER; smn a level 66 Summoner (job 15): 74 (completed: Maat's Cap,
+# Ultimate Champion of the World), then 78 (15). Main completed (a GM): job 16: nil; MAAT_DIALOG.
+lists RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/74
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=BLU lvl=75
+char smn zone=RuludeGardens pos=12.4,3.1,119.5 job=SMN lvl=66
+quest Jeuno.ShatteringStars completed
+charvar maatsCap 32767
+smn: quest Jeuno.ShatteringStars completed
+smn: charvar maatsCap 32767
+login
+trigger Maat                            # job 16: MAAT_CAP_PLACEHOLDER
+smn: login
+smn: trigger Maat                       # job 15, full: 74
+smn: finish                             # completed: Maat's Cap, Ultimate Champion of the World
+smn: trigger Maat                       # completed, job 15 at 66: 78 (15)
+smn: finish
+quest Jeuno.BeyondTheSun completed      # a GM
+trigger Maat                            # completed, job 16: nil; MAAT_DIALOG

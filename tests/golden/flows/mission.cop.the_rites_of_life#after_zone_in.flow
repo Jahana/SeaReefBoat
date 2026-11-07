@@ -1,0 +1,15 @@
+# The Rites of Life (CoP 1-1): section 1's afterZoneIn, run by zoneutils::AfterZoneIn 4 s after a zone-in (tick 5000;
+# the main flow's rezone has no tick, so its afterZoneIn never runs). A fresh char (current 101, section 1 holds),
+# a level 75 Warrior of Bastok logged in at Lower Delkfutt's Tower: no 22 (prevZone not Qufim); afterZoneIn with
+# [COP]TalesBeginning 0: nothing. Out to Qufim Island and back: 22, finished with 0: the var 1, the two Tales' Beginning
+# NPCs enabled, the partial mission log. A rezone: no 22 (the var 1); afterZoneIn with the var 1: the two NPCs enabled
+# again (0x077).
+lists LowerDelkfuttsTower/onZoneIn/1 LowerDelkfuttsTower/afterZoneIn/1 LowerDelkfuttsTower/onEventFinish/22
+char zone=LowerDelkfuttsTower pos=460.022,-1.77,-103.442 job=WAR lvl=75 nation=1
+login                                   # prevZone not Qufim: no 22
+tick 5000                               # afterZoneIn, the var 0: nothing
+warp -286.271,-21.619,320.084 QufimIsland
+warp 460.022,-1.77,-103.442 LowerDelkfuttsTower open  # from Qufim, the var 0: 22 left open
+finish option=0                         # not 1: [COP]TalesBeginning 1, the NPCs enabled, the partial mission log
+rezone                                  # prevZone Qufim kept, the var 1: no 22
+tick 5000                               # afterZoneIn, the var 1: the NPCs enabled (0x077)

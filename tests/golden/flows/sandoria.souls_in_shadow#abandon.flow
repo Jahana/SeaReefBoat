@@ -1,0 +1,19 @@
+# Souls in Shadow (sandoria 99): accepted by GM with the guide, no scythe, no map, starting in the Den of Rancor: the qm
+# with no map (nil); then Novalmauge's 3 with 0, option 0 (nothing), option 1 (no scythe: the Scythe of Trials given), 3
+# with 1, option 2 (the quest deleted, available again; the guide deleted, the map not held). Then, scythe skill 0, the
+# char is not offered: his default 10.
+lists DenOfRancor/qm_mokumokuren/onTrigger BostaunieuxOubliette/Novalmauge/onTrigger BostaunieuxOubliette/onEventFinish/3
+char zone=DenOfRancor pos=119.4,35.892,-280.779 job=DRK lvl=75
+quest Sandoria.SoulsInShadow accepted
+keyitem WeaponTrainingGuide
+login
+trigger qm_mokumokuren                    # accepted, no map: nil, NOTHING_OUT_OF_ORDINARY
+warp 32.4,-24,19.8 BostaunieuxOubliette
+trigger Novalmauge                        # accepted, no Annals, no map, no scythe: 3 with 0
+finish                                    # option 0: nothing
+trigger Novalmauge                        # 3 with 0
+finish option=1                           # option 1, no scythe: the Scythe of Trials given
+trigger Novalmauge                        # the scythe held: 3 with 1
+finish option=2                           # the quest deleted, the guide deleted
+trigger Novalmauge                        # available, skill 0: not offered; his default 10
+finish

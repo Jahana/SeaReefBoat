@@ -1,0 +1,18 @@
+# Martial Mastery (jeuno 167), each finish once its section no longer holds (a GM's change while the event is open): a
+# level 96 Warrior, Great Axe 357, 15 merit points. 10196 open, then Great Axe 0: nothing (not begun); 357 again: begun.
+# Accepted: 10198 open, then the quest set available (its first section holds; 10198's finish is the accepted
+# section's): nothing (not completed, merits 15).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10196 RuludeGardens/onEventFinish/10198
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=96
+skill GreatAxe 3570
+merits 15
+login
+trigger Nomad_Moogle                    # 10196
+skill GreatAxe 0                        # a GM, 10196 open
+finish                                  # no skill: no section: nothing (not begun)
+skill GreatAxe 3570                     # a GM
+trigger Nomad_Moogle                    # 10196
+finish                                  # begun
+trigger Nomad_Moogle                    # 10198
+quest Jeuno.MartialMastery available    # a GM, 10198 open
+finish                                  # available: nothing

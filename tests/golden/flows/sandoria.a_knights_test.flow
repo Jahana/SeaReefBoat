@@ -1,0 +1,50 @@
+# A Knight's Test (sandoria 29, PLD unlock): Balasiel, Baunise and Cahaurme in Southern San d'Oria, the Disused Well in
+# Davoi. The guard (A Squire's Test II completed, level ADVANCED_JOB_LEVEL 30): A Squire's Test II's 625 while it is not
+# completed; a trade while available (no trade handler: nothing); Baunise before the quest (no section: NOTHING_TO_REPORT); the offer 627 declined (Option 1), 635 declined
+# and taken (the Book of Tasks, begun); Balasiel's 669; the well with no book (nil: A_WELL), Baunise's 634 (the Book of
+# the West) and DO_NOT_FRET, the well with one book (A_WELL), Cahaurme's 633 (the Book of the East) and
+# TRIAL_IS_DIFFICULT, the well with both (the Knight's Soul) and again (YOU_FIND_NOTHING); Balasiel's 628 (completed:
+# Kite Shield, the Paladin gesture, fame +20, Tried and Tested Knight; PLD unlocked, UNLOCK_PALADIN, the four key items
+# deleted); the completed messages YOUVE_DONE_WELL and MAKE_EXCELLENT_KNIGHT (replaceDefault); Balasiel's default 667
+# (Methods Create Madness needs polearm skill 240). Baunise and Cahaurme have no script, default NOTHING_TO_REPORT; the
+# Disused Well's default is A_WELL.
+lists SouthernSanDoria/Balasiel/onTrigger SouthernSanDoria/Balasiel/onTrade SouthernSanDoria/Baunise/onTrigger SouthernSanDoria/Cahaurme/onTrigger SouthernSanDoria/onEventFinish/627 SouthernSanDoria/onEventFinish/635 SouthernSanDoria/onEventFinish/628 SouthernSanDoria/onEventFinish/633 SouthernSanDoria/onEventFinish/634 Davoi/Disused_Well/onTrigger
+char zone=SouthernSanDoria pos=-136.8,-10.8,65.8 lvl=30
+quest Sandoria.ASquiresTest completed
+item BoneChip
+login
+trigger Balasiel                          # A Squire's Test II not completed: its 625
+finish                                    # A Squire's Test II begun
+quest Sandoria.ASquiresTestIi completed
+trade Balasiel BoneChip x1                # available: no trade handler, nothing
+trigger Baunise                           # available: no section, NOTHING_TO_REPORT
+trigger Balasiel                          # level 30, Option 0: 627
+finish option=1                           # not option 0: Option 1
+trigger Balasiel                          # Option 1: 635
+finish option=1                           # not option 0: nothing
+trigger Balasiel                          # 635
+finish                                    # option 0: the Book of Tasks, begun
+trigger Balasiel                          # accepted, no soul: 669
+finish
+warp -220.1,2.8,-295.4 Davoi
+trigger Disused_Well                      # no book: nil, A_WELL
+warp -54.2,-8.6,-29.3 SouthernSanDoria
+trigger Baunise                           # no Book of the West: 634
+finish                                    # the Book of the West
+trigger Baunise                           # the book held: DO_NOT_FRET
+warp -220.1,2.8,-295.4 Davoi
+trigger Disused_Well                      # the West book only: nil, A_WELL
+warp 57.2,-8.6,-29.4 SouthernSanDoria
+trigger Cahaurme                          # no Book of the East: 633
+finish                                    # the Book of the East
+trigger Cahaurme                          # the book held: TRIAL_IS_DIFFICULT
+warp -220.1,2.8,-295.4 Davoi
+trigger Disused_Well                      # both books, no soul: the key item Knight's Soul
+trigger Disused_Well                      # the soul held: YOU_FIND_NOTHING
+warp -136.8,-10.8,65.8 SouthernSanDoria
+trigger Balasiel                          # the soul: 628
+finish                                    # completed: Kite Shield, the gesture, fame +20, the title; PLD unlocked, UNLOCK_PALADIN; four KIs deleted
+trigger Baunise                           # completed: YOUVE_DONE_WELL
+trigger Cahaurme                          # completed: MAKE_EXCELLENT_KNIGHT
+trigger Balasiel                          # completed: no section; Methods Create Madness not offered (skill 0): 667
+finish

@@ -1,0 +1,33 @@
+# The Wisdom of Elders (bastok 36): Benita and Tete in Port Bastok. The offer (174), Tete's 175 (importantOnce: Prog
+# set to 1 the first time, left at 1 after), the bomb ash trade, the Traveler's Hat reward, no repeat. Benita's own
+# script answers her trigger outside the offer (102 or 103 at random) and has no onTrade; Tete's default is 35. No
+# other quest names either.
+lists PortBastok/Benita/onTrigger PortBastok/Benita/onTrade PortBastok/Tete/onTrigger PortBastok/onEventFinish/174 PortBastok/onEventFinish/175 PortBastok/onEventFinish/176
+char zone=PortBastok pos=49.7,-4.771,37.2
+item PinchOfBombAsh x3
+item BoneChip
+login
+trade Benita PinchOfBombAsh x1  # available: no trade handler, her script has none: nothing
+trigger Tete                    # available: his default 35
+finish
+trigger Benita                  # the offer, 174
+finish                          # accepted
+trigger Benita                  # accepted: her script, 102 or 103 at random (102 here)
+finish
+trigger Tete                    # accepted: 175 (importantOnce)
+finish                          # Prog 0: Prog set to 1
+trigger Tete                    # 175 once performed drops to Default priority: his default 35 wins
+finish
+rezone                          # the action's priority var is cleared on zoning
+trigger Tete                    # 175 again
+finish                          # Prog already 1: no change
+walk 49.7,-4.771,37.2           # back to Benita (a trade does not walk to the NPC)
+trade Benita BoneChip x1        # the wrong item: nothing
+trade Benita PinchOfBombAsh x1  # 176
+finish                          # completed: Traveler's Hat, fame +20, an ash gone, the Prog var cleared
+trigger Tete                    # completed: 35
+finish
+walk 49.7,-4.771,37.2
+trade Benita PinchOfBombAsh x1  # completed: nothing
+trigger Benita                  # completed: her script (102 here)
+finish

@@ -1,0 +1,31 @@
+# Hoist the Jelly, Roger (windurst 51): Maysoon (Windurst Waters; no default action). Available, Cook's Pride (Jeuno)
+# available: a jelly: nothing (the trade wants this quest accepted); 266. Cook's Pride completed (GM): 266. Cook's Pride
+# available, then accepted (GM: a status reads completed while the completed bit is set): 10000, option 1: begun (any
+# option). Accepted: 266; a jelly and 10 gil: nothing; two jellies (hasItemQty is exact): nothing; a jelly and a Bone
+# Chip (getItemCount 2): nothing; a Bone Chip (no jelly): nothing; one jelly: 10001: completed, the Super Soup Pot
+# (KEYITEM_OBTAINED), fame 40, the jelly taken. Completed: a jelly: nothing; 266 (Cook's Pride still accepted).
+char zone=WindurstWaters pos=-105.5,-2.0,69.6 job=WAR lvl=75
+item ServingOfRoyalJelly x6
+item BoneChip x2
+login
+trade Maysoon ServingOfRoyalJelly x1    # available: nothing
+trigger Maysoon                         # Cook's Pride available: 266
+finish
+quest Jeuno.CooksPride completed        # GM
+trigger Maysoon                         # Cook's Pride completed: 266
+finish
+quest Jeuno.CooksPride available        # GM (the completed bit wins over the current one)
+quest Jeuno.CooksPride accepted         # GM
+trigger Maysoon                         # Cook's Pride accepted, this quest available: 10000
+finish option=1                         # begun (any option)
+trigger Maysoon                         # accepted: 266
+finish
+trade Maysoon ServingOfRoyalJelly x1 gil=10  # the gil: nothing
+trade Maysoon ServingOfRoyalJelly x2    # two (hasItemQty exact): nothing
+trade Maysoon ServingOfRoyalJelly x1 BoneChip x1  # getItemCount 2: nothing
+trade Maysoon BoneChip x1               # no jelly: nothing
+trade Maysoon ServingOfRoyalJelly x1    # one jelly: 10001
+finish                                  # completed; the Super Soup Pot; fame 40; the jelly taken
+trade Maysoon ServingOfRoyalJelly x1    # completed: nothing
+trigger Maysoon                         # completed: 266
+finish

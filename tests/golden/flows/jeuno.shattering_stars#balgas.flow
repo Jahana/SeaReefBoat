@@ -1,0 +1,58 @@
+# Shattering Stars (jeuno 132) accepted (a GM) by level 66 chars of the jobs Balga's Dais serves: MNK (2), WHM (3), SMN (15),
+# one char each (main the first). Each trades its job's testimony (64 with its job id) and answers 1: tradedTestimony
+# 1, set down at Balga's Dais (299.316 -123.591 353.760, zone 146); the char zones at the next tick.
+# Then each char, in the flow's order, enters its own Maat fight in its own area (1, 2, 3: the fights of one zone
+# run side by side): a GM warp by BC_Entrance (the flow parser follows zones by warp), the testimony traded (the 32000
+# menu), 32000 updated with option index * 16 + area (registered, entered; the testimony wears), finished; that
+# area's Maat "killed" (unkillable: 1 HP; he yields, battlefield:win, at a later onMobFight, so some kills take ticks
+# before the 32001 opens; battlefieldWin the fight's id), and the win's 32001 finished: accepted, so a Scroll of
+# Instant Warp, Prog = the job id, the job's maatsCap bit (1 << (job - 1): a fresh char's maatsCap is 0), Maat Masher.
+lists RuludeGardens/Maat/onTrade RuludeGardens/onEventFinish/64 BalgasDais/BC_Entrance/onTrade BalgasDais/onEventFinish/32001
+char zone=RuludeGardens pos=12.4,3.1,119.5 job=MNK lvl=66
+char whm zone=RuludeGardens pos=12.4,3.1,119.5 job=WHM lvl=66
+char smn zone=RuludeGardens pos=12.4,3.1,119.5 job=SMN lvl=66
+levelcap 70
+quest Jeuno.ShatteringStars accepted
+item MonksTestimony
+whm: levelcap 70
+whm: quest Jeuno.ShatteringStars accepted
+whm: item WhiteMagesTestimony
+smn: levelcap 70
+smn: quest Jeuno.ShatteringStars accepted
+smn: item SummonersTestimony
+login
+trade Maat MonksTestimony x1            # MNK's testimony, Prog 0: 64 (2)
+finish option=1                         # tradedTestimony 1; set down at Balga's Dais
+tick 400
+login                                   # in Balga's Dais
+whm: login
+whm: trade Maat WhiteMagesTestimony x1  # WHM's testimony, Prog 0: 64 (3)
+whm: finish option=1                    # tradedTestimony 1; set down at Balga's Dais
+tick 400
+whm: login                              # in Balga's Dais
+smn: login
+smn: trade Maat SummonersTestimony x1   # SMN's testimony, Prog 0: 64 (15)
+smn: finish option=1                    # tradedTestimony 1; set down at Balga's Dais
+tick 400
+smn: login                              # in Balga's Dais
+warp 300.4,-124.1,341.3 BalgasDais      # by BC_Entrance
+trade BC_Entrance MonksTestimony x1     # tradedTestimony 1: the 32000 menu
+update 32000 option=81                  # Shattering Stars (MNK), index 5, area 1: registered, entered
+finish                                  # in the arena
+kill MAAT                               # Maat (MNK) of area 1: won, battlefieldWin 101, 32001 opens
+finish                                  # 32001, accepted: the scroll, Prog 2, maatsCap 2, Maat Masher
+whm: warp 300.4,-124.1,341.3 BalgasDais # by BC_Entrance
+whm: trade BC_Entrance WhiteMagesTestimony x1  # tradedTestimony 1: the 32000 menu
+whm: update 32000 option=98             # Shattering Stars (WHM), index 6, area 2: registered, entered
+whm: finish                             # in the arena
+whm: kill MAAT+4                        # Maat (WHM) of area 2: 1 HP (unkillable), won once he yields, battlefieldWin 102
+tick 1000                               # Maat is unkillable: he yields (battlefield:win) in a later onMobFight; 32001 opens on the last tick
+tick 1000
+tick 1000
+whm: finish                             # 32001, accepted: the scroll, Prog 3, maatsCap 4, Maat Masher
+smn: warp 300.4,-124.1,341.3 BalgasDais # by BC_Entrance
+smn: trade BC_Entrance SummonersTestimony x1  # tradedTestimony 1: the 32000 menu
+smn: update 32000 option=115            # Shattering Stars (SMN), index 7, area 3: registered, entered
+smn: finish                             # in the arena
+smn: kill MAAT+10                       # Maat (SMN) of area 3: won, battlefieldWin 103, 32001 opens
+smn: finish                             # 32001, accepted: the scroll, Prog 15, maatsCap 16384, Maat Masher

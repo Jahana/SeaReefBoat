@@ -1,0 +1,24 @@
+# New Character Cutscenes next to the zone-ins of Southern San d'Oria that run before its own (the trace order lines):
+# Another World (945) and Her Memories: Homecoming Queen (957), both from East Ronfaure, and the Heir to the Light's
+# Option 1 zone-in (0). A level 75 char of nation 0, ROV off, notSeen 1 (a GM).
+char zone=SouthernSanDoria pos=-5,-2,40 job=WAR lvl=75 nation=0
+setting ENABLE_ROV 0
+login                                   # the quest's own (notSeen 0 after)
+finish
+mission Wotg AnotherWorld current       # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp 314.321,-30.495,-67.15 EastRonfaure  # not a zone with a handler
+warp -5,-2,40 SouthernSanDoria          # from East Ronfaure: Another World (945) wins
+finish
+mission Wotg AnotherWorld completed     # a GM
+mission Wotg HerMemories current        # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp 314.321,-30.495,-67.15 EastRonfaure
+warp -5,-2,40 SouthernSanDoria          # from East Ronfaure: Homecoming Queen (957) wins
+finish
+mission Sandoria TheHeirToTheLight current # a GM
+mission Sandoria TheHeirToTheLight completed # a GM: the section that reads Option
+charvar Mission[0][23]Option 1          # a GM: the Option 1 zone-in
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp -5,-2,40 SouthernSanDoria          # Heir to the Light (0) wins
+finish

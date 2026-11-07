@@ -1,0 +1,33 @@
+# Mog House Exposition next to the zone-ins that have no Mog House guard (the trace order lines), a char of nation 0 in
+# the home Mog Houses (zoneline), ROV off, both the quest's and New Character Cutscenes' notSeen 1 (a GM; charCreate
+# writes both). Northern San d'Oria: CoP's Road Forks, then the Heir to the Light at status 0. Port San d'Oria:
+# Three Paths at Ulmia's status. Southern San d'Oria: none before ours (a tie with the other quest).
+char zone=NorthernSanDoria pos=128.3,-6.5,97.2 job=WAR lvl=75 nation=0
+setting ENABLE_ROV 0
+login
+mission Cop AncientFlamesBeckon completed # a GM
+mission Cop TheRoadForks current        # a GM
+charvar HQuest[moghouseExpo]notSeen 1   # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+zoneline NorthernSanDoria               # the home Mog House: Road Forks first
+finish
+mission Cop TheRoadForks completed      # a GM
+mission Sandoria TheHeirToTheLight current # a GM
+missionstatus Sandoria 0                # a GM
+charvar HQuest[moghouseExpo]notSeen 1   # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp 128.3,-6.5,97.2 NorthernSanDoria   # out of the Mog House
+zoneline NorthernSanDoria               # the home Mog House: the Heir to the Light first
+finish
+mission Cop ThreePaths current          # a GM
+missionstatus Cop 2 pos=4               # a GM: Ulmia's path
+charvar HQuest[moghouseExpo]notSeen 1   # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp -80,-4,-20 PortSanDoria
+zoneline PortSanDoria                   # the home Mog House: Three Paths first
+finish
+charvar HQuest[moghouseExpo]notSeen 1   # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp -5,-2,40 SouthernSanDoria
+zoneline SouthernSanDoria               # the home Mog House: ours first, the other quest's table after
+finish

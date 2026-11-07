@@ -1,0 +1,28 @@
+# The Promise (windurst 78): the offer's operands, rank 8. Wild Card accepted (not completed; Prog 0): not available;
+# Kohlo-Lakolo answers Wild Card's 545 (finished: Wild Card's Prog 1, nothing of this quest). Completed by GM: fame 324
+# (level 4): 505; fame 325 with the char-var mustZone set by GM: 505; a warp out and back: 513, begun.
+# The Star Onion quests 1-5 completed by GM (an available one's line would otherwise answer at Kohlo-Lakolo first).
+lists PortWindurst/Kohlo-Lakolo/onTrigger
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5 nation=2
+rank 8
+fame Windurst 324
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.OnionRings completed
+quest Windurst.CryingOverOnions completed
+quest Windurst.WildCard accepted
+login
+trigger Kohlo-Lakolo                           # Wild Card accepted: its 545
+finish                                         # Wild Card's Prog 1
+quest Windurst.WildCard completed              # GM
+trigger Kohlo-Lakolo                           # fame level 4, rank 8: 505
+finish
+fame Windurst 325
+charvar Quest[2][78]mustZone 240               # GM
+trigger Kohlo-Lakolo                           # the mustZone: 505
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+warp -27.5,-8.0,189.6 PortWindurst             # the mustZone cleared
+trigger Kohlo-Lakolo                           # 513 (0, sticker)
+finish                                         # begun; Prog 1

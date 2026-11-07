@@ -1,0 +1,36 @@
+# X Marks the Spot (otherAreas 65): its reply kinds. CoP Sheltering Doubt current (Darkness Named completed): CoP 3-5's
+# completed section answers Despachiaire 315 and Parelbriaux 296 (replaceDefault). Login plays the mission's 107; Despachiaire
+# first answers its 108 (Status 1 to 2). Then available 144 (Progress)
+# beats 315, finished: begun; accepted: 144 (importantOnce: Event) beats 315; again: 315 (the 144 down to Default); a zone
+# change: 144 again. Parelbriaux 145 (Progress) against Petals for Parelbriaux's 513 (Progress, its Prog 1 a GM): a tie,
+# Petals_for_Parelbriaux sorts first: 513, finished (Petals Prog 2); Petals Prog 1 again (a GM): the cycle, 145. Odeya
+# (141 Progress, 146 / 147 Event) has no other quest and no script: not observable.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Parelbriaux/onTrigger TavnazianSafehold/Odeya/onTrigger TavnazianSafehold/Odeya/onTrade TavnazianSafehold/onEventFinish/141 TavnazianSafehold/onEventFinish/142 TavnazianSafehold/onEventFinish/143 TavnazianSafehold/onEventFinish/144 TavnazianSafehold/onEventFinish/145 TavnazianSafehold/onEventFinish/148 PhomiunaAqueducts/_0r9/onTrigger PhomiunaAqueducts/onEventFinish/37
+lists TavnazianSafehold/onZoneOut/1
+lists TavnazianSafehold/onEventFinish/513
+char zone=TavnazianSafehold pos=112.7,-40,-85.5 job=WAR lvl=75
+mission Cop ShelteringDoubt current
+login                                   # the mission's zone-in cutscene 107
+trigger Despachiaire                    # the mission's 108 (Status 1, an Event: it beats the quest's Progress 144)
+finish                                  # mission Status 2
+trigger Despachiaire                    # 144 (Progress) beats 315
+finish                                  # begun
+trigger Despachiaire                    # 144 (Event) beats 315
+finish
+trigger Despachiaire                    # 144 down to Default: 315
+finish
+warp 140.5,-25.5,60 PhomiunaAqueducts
+warp 112.7,-40,-85.5 TavnazianSafehold
+trigger Despachiaire                    # a new zone: 144
+finish
+charvar Quest[4][74]Prog 1              # a GM: Petals' Parelbriaux 513
+warp 116.8,-41.2,43.2 TavnazianSafehold
+trigger Parelbriaux                     # 513 and 145 tie: 513
+finish                                  # Petals Prog 2
+charvar Quest[4][74]Prog 1              # a GM
+trigger Parelbriaux                     # the cycle: 145
+finish                                  # Prog 1
+trigger Parelbriaux                     # the cycle: 513
+finish                                  # Petals Prog 2
+trigger Parelbriaux                     # 513 off: 145
+finish                                  # Prog 1

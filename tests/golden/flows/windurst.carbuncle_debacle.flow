@@ -1,0 +1,90 @@
+# Carbuncle Debacle (windurst 83, SMN AF3): the door _6n2 and Koru-Moru (Windurst Walls), Ripapa (Mhaura),
+# Agado-Pugado (Rabao). The Puppet Master completed and Class Reunion accepted at its last step by GM; SMN 75.
+# Turns as in windurst.class_reunion: _6n2 and Koru-Moru have a Default-priority default and a script, so each script
+# talk follows a default's turn. Ripapa and Agado-Pugado have no default (10020 / 70 are their scripts').
+# Koru-Moru's 410 completes Class Reunion and sets needToZone: _6n2's offer refused (`trigger` walks; a warp would
+# zone); after a rezone, 415: begun, var 1; the door again: nothing (accepted). Koru-Moru 416: var 2; again 416
+# (var 2). Ripapa 10022: the Lightning Pendulum, var 3; again: no arm (Trial by Lightning: Windurst fame 0): his
+# 10020. Koru-Moru at var 3: no arm of this quest: Class Reunion's 411. Var 4 (GM: the Cloister of Storms win,
+# var-only, stays Lua): Koru-Moru 417: var 5, the Daze Breaker Charm; 418. Agado-Pugado 86: the Wind Pendulum,
+# var 6; 88 (the pendulum held). Koru-Moru at var 6: 411. Var 7 (GM: the Cloister of Gales win, var-only, takes the
+# charm; the charm taken by GM): 419 refused on a full inventory, then Evoker's Horn, Paragon of Summoner Excellence,
+# completed, fame 20, var 0, needToZone. All three completed: 420. Through Windurst Waters (a zone change clears
+# needToZone) back to the door: nothing (both completed).
+char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
+quest Windurst.ThePuppetMaster completed
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 6
+charvar ClassReunion_TalkedToFupepe 1
+charvar ClassReunion_TalkedToFurakku 1
+login
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # Carbuncle Debacle available, var 0: nothing; Class Reunion's 410
+finish                                  # Class Reunion completed; needToZone
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # Class Reunion completed: no 413; needToZone: no 415 (the message again)
+rezone
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # TPM and Class Reunion completed, available, SMN 75, no needToZone: 415
+finish option=0                         # begun; CarbuncleDebacleProgress 1
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # accepted: no 415 (the message again)
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # accepted, var 1: 416
+finish                                  # var 2
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 2: 416 again
+finish                                  # var 2
+warp 31.1,-15.7,55.4 Mhaura             # beside Ripapa
+trigger Ripapa                          # accepted, var 2: 10022
+finish                                  # the Lightning Pendulum; var 3
+trigger Ripapa                          # var 3, the pendulum held: no arm; Trial by Lightning (Windurst fame 0): 10020
+finish
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # accepted, var 3: no arm of this quest: Class Reunion's 411
+finish
+charvar CarbuncleDebacleProgress 4      # GM: the Cloister of Storms win (carbuncle_debacle.lua, var-only) stays Lua
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 4: 417
+finish                                  # var 5; the Daze Breaker Charm
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 5: 418 (no finish)
+finish
+warp -16.5,7.8,-10.5 Rabao              # beside Agado-Pugado
+trigger Agado-Pugado                    # accepted, var 5, the charm: 86
+finish                                  # the Wind Pendulum; var 6
+trigger Agado-Pugado                    # var 6, the pendulum held: 88 (no finish)
+finish
+warp -120.2,-5.5,122.4 WindurstWalls
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # accepted, var 6: no arm of this quest: 411
+finish
+charvar CarbuncleDebacleProgress 7      # GM: the Cloister of Gales win (var 6 -> 7, the charm taken) stays Lua
+delkeyitem DazeBreakerCharm
+fill-inventory
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # var 7: 419
+finish                                  # no free slot: ITEM_CANNOT_BE_OBTAINED (12520); nothing else
+free-inventory
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # 419
+finish                                  # Evoker's Horn; the title; completed; fame 20; var 0; needToZone
+trigger Koru-Moru                       # the default's turn: 193
+finish
+trigger Koru-Moru                       # TPM, Class Reunion and this quest completed: 420
+finish
+warp 165.0,-1.25,161.1 WindurstWaters   # a zone change: needToZone cleared
+warp -24.5,-14.5,263.0 WindurstWalls    # a mission's zone-in event (514)
+trigger _6n2                            # the default's turn: DOORS_SEALED_SHUT
+trigger _6n2                            # both completed, no needToZone: nothing (the message again)

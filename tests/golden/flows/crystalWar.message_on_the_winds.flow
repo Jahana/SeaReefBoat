@@ -1,0 +1,48 @@
+# Message on the Winds (crystalWar 1): a level 20 Warrior (the 952 check is 20 or more) in the Metalworks (missions as
+# group 1's flows). Romualdo 952, finished: Prog 1 (not begun); again (available, Prog 1): 952. Batallia Downs [S]:
+# Romualdo 109, finished: begun, Prog 2; again: 110 (no finish). Grauberg [S]: Childerich 1, finished: Prog 3; 2; qm3 3,
+# finished: Prog 4; Childerich 4, finished: Prog 5; 5. Batallia Downs [S]: Romualdo 111, finished: completed (fame 20
+# Bastok, the Smart Grenade), PostCS 1; again: 112 (completed, replaceDefault). Metalworks: Romualdo 953, finished:
+# PostCS 2; again: nil (705). Grauberg [S]: Childerich 6, finished: PostCS 0, Windtalker; again: 7 (replaceDefault).
+lists Metalworks/Romualdo/onTrigger Metalworks/onEventFinish/952 Metalworks/onEventFinish/953 BatalliaDownsS/Romualdo/onTrigger BatalliaDownsS/onEventFinish/109 BatalliaDownsS/onEventFinish/111 GraubergS/Childerich/onTrigger GraubergS/qm3/onTrigger GraubergS/onEventFinish/1 GraubergS/onEventFinish/3 GraubergS/onEventFinish/4 GraubergS/onEventFinish/6
+char zone=Metalworks pos=136.535,-18.475,-37.419 job=WAR lvl=20
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Romualdo                        # available, level 20+: 952
+finish                                  # Prog 1 (not begun)
+trigger Romualdo                        # available, Prog 1: 952 again
+finish                                  # Prog 1
+warp 55.804,-13.836,141.055 BatalliaDownsS
+trigger Romualdo                        # Prog 1: 109
+finish                                  # begun; Prog 2
+trigger Romualdo                        # accepted, Prog 2: 110 (no finish)
+finish
+warp -311.344,16.23,-514.973 GraubergS
+trigger Childerich                      # Prog 2: 1
+finish                                  # Prog 3
+trigger Childerich                      # Prog 3: 2
+finish
+trigger qm3                             # Prog 3: 3
+finish                                  # Prog 4
+trigger Childerich                      # Prog 4: 4
+finish                                  # Prog 5
+trigger Childerich                      # Prog 5: 5
+finish
+warp 55.804,-13.836,141.055 BatalliaDownsS
+trigger Romualdo                        # Prog 5: 111
+finish                                  # completed (fame 20 Bastok, the Smart Grenade); PostCS 1
+trigger Romualdo                        # completed: 112 (replaceDefault)
+finish
+warp 136.535,-18.475,-37.419 Metalworks
+trigger Romualdo                        # completed, PostCS 1: 953
+finish                                  # PostCS 2
+trigger Romualdo                        # PostCS 2: nil (705)
+finish-if-event
+warp -311.344,16.23,-514.973 GraubergS
+trigger Childerich                      # PostCS 2: 6
+finish                                  # PostCS 0; Windtalker
+trigger Childerich                      # Windtalker: 7 (replaceDefault)
+finish

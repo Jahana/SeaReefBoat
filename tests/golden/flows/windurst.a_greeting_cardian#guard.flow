@@ -1,0 +1,42 @@
+# A Greeting Cardian (windurst 43): the offer's operands, each bracketed. A level-10 WAR in Windurst Woods. The
+# All-New C-2000 accepted by GM (not completed): not offered; Spare One 278 (no script); Kororo's and Boizo-Naizo's
+# scripts (291, 290 while C-2000 is accepted) take turns with their defaults (277, 275). Completed, fame 124 (level 2):
+# Spare One 278; fame 125: 295, option 1 (the low edge: Greeting 1, Wait = now + 60, the mustZone). The mustZone
+# cleared by a rezone; then the Wait edge: Wait = now + 1: Kororo nil (277); Wait = now: 298, options 0 and 2 (not 1: nothing).
+lists WindurstWoods/Kororo/onTrigger WindurstWoods/Spare_One/onTrigger WindurstWoods/Boizo-Naizo/onTrigger WindurstWoods/onEventFinish/295
+char zone=WindurstWoods pos=-10,-2.75,7.5 job=WAR lvl=10
+fame Windurst 125
+quest Windurst.TheAllNewC2000 accepted
+login
+trigger Spare_One                             # C-2000 accepted: not offered; 278
+finish
+trigger Kororo                                # not offered: his default 277 or his script's 291
+finish
+trigger Kororo
+finish
+trigger Kororo
+finish
+walk -9.6,-2.75,-24.5
+trigger Boizo-Naizo                           # not offered: his default 275 or his script's 290
+finish
+trigger Boizo-Naizo
+finish
+walk -10,-2.75,7.5
+quest Windurst.TheAllNewC2000 completed
+fame Windurst 124
+trigger Spare_One                             # fame level 2: not offered; 278
+finish
+fame Windurst 125
+trigger Spare_One                             # 295
+finish option=1                               # Greeting 1, Wait = now + 60, the mustZone
+trigger Kororo                                # the mustZone: nil; 277
+finish
+rezone                                        # the mustZone cleared
+charvar Quest[2][43]Wait 1800000001
+trigger Kororo                                # Greeting 1, no mustZone, now < Wait: nil; 277
+finish
+charvar Quest[2][43]Wait 1800000000
+trigger Kororo                                # now >= Wait: 298
+finish option=0
+trigger Kororo                                # 298
+finish option=2                               # not 1: nothing

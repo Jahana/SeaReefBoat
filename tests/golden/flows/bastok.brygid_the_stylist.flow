@@ -1,0 +1,25 @@
+# Brygid the Stylist (bastok 44): Brygid in Bastok Markets. The offer (310), 310 again until a Robe and a Bronze Subligar
+# are worn together (each piece alone is not enough), the Gloves reward, no repeat. The quest has no trade handler. A
+# MNK: a WAR cannot wear the Robe.
+# Brygid's default is 119; Brygid the Stylist Returns (also on Brygid) needs artifact armor worn, which this char never
+# wears.
+lists BastokMarkets/Brygid/onTrigger BastokMarkets/Brygid/onTrade BastokMarkets/onEventFinish/310 BastokMarkets/onEventFinish/311
+char zone=BastokMarkets pos=-90.2,-4.302,-107.5 job=MNK lvl=10
+item Robe
+item BronzeSubligar
+item BoneChip
+login
+trade Brygid BoneChip x1        # available: no trade handler, nothing
+trigger Brygid                  # the offer, 310
+finish                          # accepted
+trigger Brygid                  # accepted, nothing worn: 310 again
+finish                          # no change
+equip Robe Body
+trigger Brygid                  # the Robe only: 310
+finish
+trade Brygid BoneChip x1        # accepted: no trade handler, nothing
+equip BronzeSubligar Legs
+trigger Brygid                  # the Robe and the Bronze Subligar: 311
+finish                          # completed: Gloves, fame +20, Brygid-Approved
+trigger Brygid                  # completed: her default 119
+finish

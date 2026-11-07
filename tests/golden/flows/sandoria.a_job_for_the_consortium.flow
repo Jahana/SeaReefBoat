@@ -1,0 +1,77 @@
+# A Job for the Consortium (sandoria 67): Portaure in Port San d'Oria, the customs (_6u2, Haubijoux) in Port Jeuno, Yin
+# Pocanakhu in Lower Jeuno. Fame 324 (level 4) with the Tenshodo Members Card: Portaure's 571 once (Option 1); then (no
+# section open) his default 650; a chip (no quest trade handler; his script: Flyers for Regine not accepted, nothing).
+# Fame 325 (level 5): 651 ([0] = 0) declined; the ban bound: [AIRSHIP]suspended at exactly now (LAY_LOW), one second
+# before now (651); 651 taken (Brugaire Goods, begun, Prog 2, Stage 1); 652 (section 4's goods operand: its Progress
+# 655 would win). Port Jeuno at 20:00 (night: no customs roll): _6u2's 54 (param 0) declined; Haubijoux's 54 taken
+# (CLEARED_CUSTOMS, Prog 0). Yin Pocanakhu's 219 (PACKAGE_DELIVERED, the goods taken); again without the goods (section
+# 3's goods operand): his script. Portaure's 653 (completed: 1000 gil, Norg fame +20; the vars cleared). Completed at
+# fame 324 (section 1's status operand, Stage 0 and Option 0 after the cleanup): 650. Again (repeatable): 651 ([0] = 1)
+# taken (begun again, Prog 2, Stage 1); straight to Yin Pocanakhu: 218 (damaged); Portaure's 655 (completed). Then by
+# GM: available with Stage 2 and Option 0 (the Stage operands of sections 1, 2 and 4; then with the goods, section 3's):
+# 650; accepted at Stage 0 (firstTime 1): 651; Stage 0 without the card (section 2's card operand): 650.
+# The confiscation and the airship ban are #confiscated; the daytime roll and its hour bounds are #day.
+# Portaure's script has only onTrade (Flyers for Regine); his default is 650. Yin Pocanakhu's script: 209 (no Magicite
+# mission); the quest's replies are Progress events and win. Norg fame level 1 holds for every char (levels start at 1).
+lists PortSanDoria/Portaure/onTrigger PortSanDoria/onEventFinish/571 PortSanDoria/onEventFinish/651 PortSanDoria/onEventFinish/653 PortSanDoria/onEventFinish/655 PortJeuno/_6u2/onTrigger PortJeuno/Haubijoux/onTrigger PortJeuno/onEventFinish/54 LowerJeuno/Yin_Pocanakhu/onTrigger LowerJeuno/onEventFinish/218 LowerJeuno/onEventFinish/219
+char zone=PortSanDoria pos=-20.499,-4,-106.877 job=WAR lvl=30
+fame Sandoria 324
+keyitem TenshodoMembersCard
+item BoneChip
+login
+trigger Portaure                          # available, Stage 0, Option 0: 571 (importantOnce)
+finish                                    # Option 1
+trigger Portaure                          # Option 1, fame level 4: no section; his default 650
+finish
+trade Portaure BoneChip x1                # no quest trade handler; his script: nothing
+fame Sandoria 325
+trigger Portaure                          # Stage 0, the card, fame level 5, no ban: 651 ([0] = 0, the first time)
+finish                                    # option 0: nothing
+charvar [AIRSHIP]suspended 1800000000
+trigger Portaure                          # suspended == now (>=): LAY_LOW
+charvar [AIRSHIP]suspended 1799999999
+trigger Portaure                          # suspended one second before now: 651
+finish option=1                           # Brugaire Goods; begun; Prog 2 (damaged); Stage 1
+trigger Portaure                          # Stage 1, the goods: 652
+finish
+warp -59.5,8,58 PortJeuno
+wait vana=8                               # 20:00: no customs roll at night
+trigger _6u2                              # 54 (param 0)
+finish                                    # option 0: nothing
+trigger Haubijoux                         # 54 (param 0)
+finish option=1                           # not caught: CLEARED_CUSTOMS; Prog 0
+warp 36.763,4.118,-46.082 LowerJeuno
+trigger Yin_Pocanakhu                     # Prog 0: 219
+finish                                    # PACKAGE_DELIVERED; the goods taken
+trigger Yin_Pocanakhu                     # Stage 1, no goods: no section; his script's 209
+finish
+warp -20.499,-4,-106.877 PortSanDoria
+trigger Portaure                          # Stage 1, no goods: 653 + 0
+finish                                    # completed: 1000 gil, Norg fame +20; vars cleared (Stage 0, Option 0)
+fame Sandoria 324
+trigger Portaure                          # completed, Stage 0, Option 0, fame level 4: no section (section 1's status operand); 650
+finish
+fame Sandoria 325
+trigger Portaure                          # completed, Stage 0, the card: 651 ([0] = 1)
+finish option=1                           # Brugaire Goods; begun again; Prog 2; Stage 1
+warp 36.763,4.118,-46.082 LowerJeuno
+trigger Yin_Pocanakhu                     # Prog 2 (damaged): 218
+finish                                    # DAMANGED_PACKAGE_DELIVERED; the goods taken
+warp -20.499,-4,-106.877 PortSanDoria
+trigger Portaure                          # 653 + 2: 655
+finish                                    # completed
+quest Sandoria.AJobForTheConsortium available
+charvar Quest[0][67]Stage 2
+trigger Portaure                          # available, Stage 2, Option 0, the card, fame 5, no goods: no section; 650
+finish
+keyitem BrugaireGoods
+trigger Portaure                          # Stage 2 with the goods: no section (section 3's Stage operand); 650
+finish
+delkeyitem BrugaireGoods
+quest Sandoria.AJobForTheConsortium accepted
+charvar Quest[0][67]Stage 0
+trigger Portaure                          # accepted, Stage 0, the card: 651 ([0] = 1); section 1 closed (status)
+finish                                    # option 0: nothing
+delkeyitem TenshodoMembersCard
+trigger Portaure                          # Stage 0, no card: no section (section 2's card operand); 650
+finish

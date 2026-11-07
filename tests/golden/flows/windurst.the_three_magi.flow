@@ -1,0 +1,42 @@
+# The Three Magi (windurst 66, BLM AF1): Chumimi (Heaven's Tower; no default, no container; her 259 in her script) and
+# the Xarcabard ??? qm1. BLM 75: 260, option 3: begun, theThreeMagiSupport 3. Accepted: 261.
+# qm1: SENSE_EVIL; a Faded Crystal with a Block of Animal Glue (npcUtil.tradeHas, not exact): Chaos Elemental popped,
+# the crystal taken, the glue kept; DO_NOT_SENSE while it is up; the crystal while it is up: npcUtil.popFromQM refuses,
+# the crystal kept. Killed (its drop: the Glowstone) and gone: SENSE_EVIL; the crystal with the Glowstone held: nothing.
+# Chumimi: the Glowstone with another item: nothing; the glue alone: nothing; the stone alone: 269: Casting Wand,
+# Professor Koru-Moru Supporter, the stone taken, needToZone, var 0, fame 20, completed. Completed with needToZone:
+# Recollections' 270 skipped: her 259. qm1, completed: NOTHING_OUT_OF_ORDINARY; the crystal: nothing. Back in
+# Heaven's Tower (needToZone gone): 270. The Glowstone again (GM), completed: nothing.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+item FadedCrystal x4
+item BlockOfAnimalGlue
+login
+trigger Chumimi                         # available, BLM 75: 260 (0, 613, 0, 0, 582, 1104)
+finish option=3                         # begun; theThreeMagiSupport 3 (Koru-Moru)
+trigger Chumimi                         # accepted: 261 (0, 0, 0, 0, 582, 1104)
+finish
+warp -333.5,-26.4,-49.2 Xarcabard       # beside qm1
+trigger qm1                             # accepted, Chaos Elemental not up: SENSE_EVIL
+trade qm1 FadedCrystal x1 BlockOfAnimalGlue x1  # not exact: Chaos Elemental popped; the crystal taken, the glue kept
+trigger qm1                             # Chaos Elemental up: DO_NOT_SENSE
+trade qm1 FadedCrystal x1               # up: npcUtil.popFromQM refuses: nothing (the crystal kept)
+kill CHAOS_ELEMENTAL                    # its drop: the Glowstone
+tick 15000
+tick 30000                              # gone (a dead mob stays through one long tick)
+trigger qm1                             # accepted, not up: SENSE_EVIL
+trade qm1 FadedCrystal x1               # the Glowstone held: nothing (no pop, the crystal kept)
+warp 0.0,30.75,21.5 HeavensTower
+trade Chumimi Glowstone x1 BlockOfAnimalGlue x1  # two items: nothing
+trade Chumimi BlockOfAnimalGlue x1      # not the stone: nothing
+trade Chumimi Glowstone x1              # accepted, the stone alone: 269
+finish                                  # wand; Koru-Moru Supporter; stone taken; needToZone; var 0; fame 20; completed
+trigger Chumimi                         # completed, needToZone (BLM 75): no 270: her 259
+finish
+warp -333.5,-26.4,-49.2 Xarcabard
+trigger qm1                             # completed: NOTHING_OUT_OF_ORDINARY
+trade qm1 FadedCrystal x1               # completed: nothing
+warp 0.0,30.75,21.5 HeavensTower
+trigger Chumimi                         # no needToZone: 270 (0, 1105)
+finish option=0                         # Recollections begun
+item Glowstone                          # GM
+trade Chumimi Glowstone x1              # The Three Magi completed: nothing

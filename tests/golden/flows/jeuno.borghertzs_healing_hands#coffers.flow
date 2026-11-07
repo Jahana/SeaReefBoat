@@ -1,0 +1,19 @@
+# BORGHERTZS_HEALING_HANDS (jeuno 46): the two optional coffers' sections (status not available, main job WHM, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 WHM: CrawlersNest's Treasure Coffer opens to
+# HealersPantaloons (the item bypass; the result is the item): [AF]ZilartCoffer +32 (bit 5); GarlaigeCitadel's to
+# HealersCap: +64 (bit 6).
+lists CrawlersNest/Treasure_Coffer/onTrade GarlaigeCitadel/Treasure_Coffer/onTrade
+char zone=CrawlersNest pos=58.9,0.4,69 job=WHM lvl=75
+quest Jeuno.BorghertzsHealingHands accepted
+item NestCofferKey
+item GarlaigeCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer NestCofferKey x1  # bit 5 unset: HealersPantaloons; [AF]ZilartCoffer 32
+tick 4500                               # the coffer opened
+warp -282.3,0,263.2 GarlaigeCitadel
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer GarlaigeCofferKey x1 # bit 6 unset: HealersCap; [AF]ZilartCoffer 96
+tick 4500                               # the coffer opened

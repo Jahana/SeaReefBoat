@@ -1,0 +1,66 @@
+# Striking a Balance (ahtUrhgan 63): a level 75 Warrior in Whitegate. Wazyih (no script; default 699), Saliyahf (700);
+# trigger area 9 (-103 0 -16 .. -100 0 -12), walked into after the zone-in lock; Al Zahbi's blank_striking_a_balance (no
+# script; default NOTHING_OUT_OF_ORDINARY). Available: area 9: no handler: nothing; Wazyih, local Option 0: 684,
+# finished: Option 1; Wazyih: 685; Saliyahf 686, finished: Option 0, begun. Prog 0: Saliyahf 687; Wazyih 688, finished:
+# Prog 1. Prog 1: Saliyahf 687; Wazyih 689; area 9: 690, finished: Prog 2; area 9 again: nothing. Prog 2: Saliyahf,
+# Option 0: 692, finished: Option 1; Saliyahf: 693; Wazyih 691, finished: Prog 3. Prog 3: Saliyahf 693; Wazyih 694; out
+# to Al Zahbi and back (Option, a local var, cleared): Saliyahf 692, finished: Option 1; Saliyahf: 693. Al Zahbi: the
+# blank: Prog 4, moved (its first spot is in no row: a row of 2-7 is drawn), the reply keyItem: Munahda's Package; the
+# blank at its new spot: no Prog-4 handler: NOTHING_OUT_OF_ORDINARY. Whitegate at Prog 4: the zone-in's 695, finished:
+# the package taken, Prog 5. Wazyih 697; Saliyahf 696, finished: completed (three Imperial Bronze Pieces); Saliyahf: no
+# section: 700.
+lists AhtUrhganWhitegate/Wazyih/onTrigger AhtUrhganWhitegate/Saliyahf/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/9 AhtUrhganWhitegate/onEventFinish/684 AhtUrhganWhitegate/onEventFinish/692 AhtUrhganWhitegate/onZoneIn/1 AlZahbi/blank_striking_a_balance/onTrigger AhtUrhganWhitegate/onEventFinish/696
+char zone=AhtUrhganWhitegate pos=-92.5,-6,-93.455 job=WAR lvl=75
+login
+tick 1000
+tick 1000
+tick 1000                               # past the zone-in lock
+walk -101.5,0,-14                       # area 9, available: no handler: nothing
+walk -95,0,-20
+trigger Wazyih                          # available, Option 0: 684
+finish                                  # Option 1
+trigger Wazyih                          # Option 1: 685
+finish
+trigger Saliyahf                        # available: 686
+finish                                  # Option 0; begun
+trigger Saliyahf                        # Prog 0: 687 (replaceEvent)
+finish
+trigger Wazyih                          # Prog 0: 688
+finish                                  # Prog 1
+trigger Saliyahf                        # Prog 1: 687
+finish
+trigger Wazyih                          # Prog 1: 689
+finish
+walk -95,0,-20
+walk -101.5,0,-14                       # area 9, Prog 1: 690
+finish                                  # Prog 2
+walk -95,0,-20
+walk -101.5,0,-14                       # area 9, Prog 2: nothing
+trigger Saliyahf                        # Prog 2, Option 0: 692
+finish                                  # Option 1
+trigger Saliyahf                        # Option 1: 693
+finish
+trigger Wazyih                          # Prog 2: 691
+finish                                  # Prog 3
+trigger Saliyahf                        # Prog 3, Option 1: 693
+finish
+trigger Wazyih                          # Prog 3: 694
+finish
+warp -64,-7,38 AlZahbi
+warp -58.4,0,64.855 AhtUrhganWhitegate  # Prog 3: no zone-in event; Option cleared
+trigger Saliyahf                        # Prog 3, Option 0: 692
+finish                                  # Prog 3's 692: Option 1
+trigger Saliyahf                        # Prog 3, Option 1: 693
+finish
+warp -41.1,0,8.942 AlZahbi
+trigger blank_striking_a_balance        # Prog 3: Prog 4; the blank moved; the package
+finish-if-event
+trigger blank_striking_a_balance        # its new spot; Prog 4: nil: NOTHING_OUT_OF_ORDINARY
+warp -58.4,0,64.855 AhtUrhganWhitegate open   # Prog 4: 695
+finish                                  # the package taken; Prog 5
+trigger Wazyih                          # Prog 5: 697
+finish
+trigger Saliyahf                        # Prog 5: 696
+finish                                  # completed: the bronze pieces
+trigger Saliyahf                        # completed: no section: 700
+finish

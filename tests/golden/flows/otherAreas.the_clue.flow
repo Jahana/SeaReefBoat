@@ -1,0 +1,52 @@
+# The Clue (otherAreas 5): Mhaura's Rycharde and Take, Selbina's Valgeir. Expertise completed, its Quest[4][4]DayCompleted
+# 7992 (a GM: 7992 + 7 < 8000), Windurst fame 325 (level 5). A level 30 Warrior with five Crawler Eggs, a Chocobo Feather
+# and 1000 gil. Available: a trade: no trade handler; Take 64; Rycharde at Prog 0: 90 (4357), option 0: Prog 1,
+# Quest[4][4]DayCompleted 0, not begun; Prog 1: 91 (4357), option 0: nothing; 91, option 83: begun. Accepted: Take 65;
+# Rycharde 85; trades (hasItemQty(egg, getItemCount()) and a count below 4: 93): one egg: 93; three: 93; five: nil (not
+# below 4); two and the feather: nil (eggs 2, count 3); the feather: nil; 100 gil: nil (count 1, no egg); four and the
+# feather: nil; four: 92, finished: completed (fame 50 Windurst, 3000 gil, Four Star Purveyor), the eggs taken,
+# Quest[4][5]DayCompleted 8000. Selbina: Valgeir 143. Completed: no section; The Basics available: Rycharde nil (8000 + 7
+# is not below 8000; his default 69), Take 66; four eggs (three given by a GM): no trade handler.
+lists Mhaura/Rycharde/onTrigger Mhaura/Rycharde/onTrade Mhaura/Take/onTrigger Selbina/Valgeir/onTrigger Mhaura/onEventFinish/90 Mhaura/onEventFinish/91 Mhaura/onEventFinish/92 Mhaura/onEventFinish/93
+char zone=Mhaura pos=18.9,-16,88.8 job=WAR lvl=30 gil=1000
+quest OtherAreas.Expertise completed
+charvar Quest[4][4]DayCompleted 7992
+fame Windurst 325
+item CrawlerEgg x5
+item ChocoboFeather
+login
+trade Rycharde CrawlerEgg x4            # available: no trade handler; nothing
+trigger Take                            # available: 64
+finish
+trigger Rycharde                        # Prog 0: 90 (4357)
+finish option=0                         # Prog 1, Quest[4][4]DayCompleted 0; not 83: not begun
+trigger Rycharde                        # Prog 1 (0 + 7 < 8000): 91 (4357)
+finish option=0                         # not 83: nothing
+trigger Rycharde                        # 91 (4357)
+finish option=83                        # begun
+trigger Take                            # accepted: 65
+finish
+trigger Rycharde                        # accepted: 85
+finish
+trade Rycharde CrawlerEgg x1            # one egg alone: 93
+finish
+trade Rycharde CrawlerEgg x3            # three alone: 93
+finish
+trade Rycharde CrawlerEgg x5            # five: not below 4: nil
+trade Rycharde CrawlerEgg x2 ChocoboFeather x1 # eggs 2, count 3: nil
+trade Rycharde ChocoboFeather x1        # a wrong item, no egg: nil
+trade Rycharde gil=100                  # the gil slot counts 1, no egg: nil
+trade Rycharde CrawlerEgg x4 ChocoboFeather x1 # not exactly four eggs: nil
+warp 59,-15.27,20.2 Selbina
+trigger Valgeir                         # accepted: 143
+finish
+warp 19,-16,88.8 Mhaura
+trade Rycharde CrawlerEgg x4            # four alone: 92
+finish                                  # completed: fame 50 Windurst, 3000 gil, the title; the eggs taken; DayCompleted 8000
+trigger Rycharde                        # completed: The Basics available, 8000 + 7 < 8000 false: nil; his default 69
+finish
+trigger Take                            # The Basics available: 66
+finish
+item CrawlerEgg x3                      # a GM: four eggs again
+walk 18.9,-16,88.8                      # back to Rycharde (a trade does not walk)
+trade Rycharde CrawlerEgg x4            # completed: no trade handler; nothing

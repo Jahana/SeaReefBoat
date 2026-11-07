@@ -1,0 +1,22 @@
+# The Pickpocket (sandoria 3) with a full inventory at the two fromTrade gives: Esca's 121 (the Gilt Glasses) and
+# Altiret's 550 (the Light Axe). npcUtil.giveItem checks the free slots before anything (fromTrade only picks the text,
+# ITEM_CANNOT_BE_OBTAINED + 4), so each fails: the traded item is kept, and 550 does not complete the quest. With room,
+# each succeeds.
+char zone=WestRonfaure pos=-622.731,-51.499,278.369 job=WAR lvl=10
+quest Sandoria.ThePickpocket accepted
+charvar Quest[0][3]Stage 1
+item EagleButton
+login
+fill-inventory
+trade Esca EagleButton x1                 # 121
+finish                                    # no room: no glasses; the button kept
+free-inventory
+trade Esca EagleButton x1                 # 121
+finish                                    # the Gilt Glasses; the button taken
+warp 22.763,-3.999,-65.776 PortSanDoria
+fill-inventory
+trade Altiret GiltGlasses x1              # 550
+finish                                    # no room: not completed; the glasses kept
+free-inventory
+trade Altiret GiltGlasses x1              # 550
+finish                                    # completed: Light Axe, fame +20, Pickpocket Pincher; the glasses taken

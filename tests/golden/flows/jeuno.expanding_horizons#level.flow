@@ -1,0 +1,24 @@
+# Expanding Horizons (jeuno 134), the level either side of 75 (> 75 / == 75 / below) and the Limit Breaker: Warriors at
+# cap 80, New Worlds Await completed (level 76 with the key is the main flow's). Level 74 (main): 10045 (74, 1, 0, 0);
+# level 75 (c75): 10045 (75, 1, 1, 2); level 76 without the Limit Breaker (nokey): 10045 (76, 2, 0, 0).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/onEventFinish/10045
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=74
+char c75 zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=75
+char nokey zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=76
+keyitem LimitBreaker
+levelcap 80
+quest Jeuno.NewWorldsAwait completed
+c75: keyitem LimitBreaker
+c75: levelcap 80
+c75: quest Jeuno.NewWorldsAwait completed
+nokey: levelcap 80
+nokey: quest Jeuno.NewWorldsAwait completed
+login
+trigger Nomad_Moogle                    # level 74: 10045 (74, 1, 0, 0)
+finish option=0
+c75: login
+c75: trigger Nomad_Moogle               # level 75: 10045 (75, 1, 1, 2)
+c75: finish option=0
+nokey: login
+nokey: trigger Nomad_Moogle             # no Limit Breaker: 10045 (76, 2, 0, 0)
+nokey: finish option=0

@@ -1,0 +1,14 @@
+# Blackmail (sandoria 71) for a Bastok char (nation 1): the rank check reads the rank of the char's own nation
+# (getRank(getNation())). Bastok rank 3 at San d'Oria fame 125: 643 (the San d'Oria rank is a fresh char's 1). The
+# envelope taken away by GM (accepted, Prog 0, no envelope: section 2's key item operand fails, and no other section
+# holds): Dauperiat nothing, Halver his default text.
+char zone=NorthernSanDoria pos=-18.45,-0.199,-26.68 job=WAR lvl=10 nation=1
+fame Sandoria 125
+rank 3
+login
+trigger Dauperiat                         # fame level 3, Bastok rank 3: 643
+finish                                    # the Suspicious Envelope; begun
+delkeyitem SuspiciousEnvelope             # GM: the envelope gone at Prog 0
+trigger Dauperiat                         # accepted, Prog 0, no envelope: no section; no default: nothing
+warp 3.92,0,1.966 ChateauDoraguille
+trigger Halver                            # no section: his default text (HALVER_OFFSET + 1092)

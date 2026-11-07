@@ -1,0 +1,73 @@
+# Gifts of the Griffon (crystalWar 15): a level 99 Warrior in Southern San d'Oria [S] with Steamed Rams completed (a GM;
+# hasCompletedFirstQuest; missions as group 1's flows). Louxiard 21, finished: the mustZone and Prog 1; Louxiard: the
+# mustZone set: nil (his default 37). Out to Garlaige Citadel [S] and back: Louxiard 22, finished: Prog 2. Rholont 23,
+# finished: begun, 7 Plumes d'Or. Rholont: a plume held, none traded: 33. A plume each to Rongelouts N Distaud (25),
+# Louxiard (26), Sabiliont (27), Machionage (28), Loillie (29), Elnonde (30), Illeuse (31), finished: confirmed, their
+# bits; Rongelouts again: his bit set: nil. Option 63 (a GM: Illeuse's bit cleared, no plume held): Rholont: fewer than
+# 7, the Timer 0: 34, finished: the Timer the next conquest tally; Rholont: before it: 46. The Timer 1 (a GM, a past
+# time): 35, finished: the Timer 0, one plume (7 - 6 traded). Rholont: the plume held: 33. Illeuse 31, finished: the
+# seventh bit. Rholont: 7 traded: 24, finished: completed (a Deathstone), Claws of the Griffon's Timer the next day;
+# Rholont: Claws available, its Timer tomorrow: nil (32).
+lists SouthernSanDoriaS/Louxiard/onTrigger SouthernSanDoriaS/Louxiard/onTrade SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Elnonde/onTrade SouthernSanDoriaS/Illeuse/onTrade SouthernSanDoriaS/Loillie/onTrade SouthernSanDoriaS/Machionage/onTrade SouthernSanDoriaS/Rongelouts_N_Distaud/onTrade SouthernSanDoriaS/Sabiliont/onTrade SouthernSanDoriaS/onEventFinish/21 SouthernSanDoriaS/onEventFinish/22 SouthernSanDoriaS/onEventFinish/23 SouthernSanDoriaS/onEventFinish/24 SouthernSanDoriaS/onEventFinish/34 SouthernSanDoriaS/onEventFinish/35
+char zone=SouthernSanDoriaS pos=-92.005,-4,49.356 job=WAR lvl=99
+quest CrystalWar.SteamedRams completed  # hasCompletedFirstQuest (Steamed Rams' arm)
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Louxiard                        # available, Prog 0: 21
+finish                                  # the mustZone; Prog 1
+trigger Louxiard                        # Prog 1, the mustZone set: nil (37)
+finish-if-event
+warp 62.849,-6.078,137.438 GarlaigeCitadelS # out of the zone: the mustZone cleared (a rezone keeps it: the same zone)
+warp -92.005,-4,49.356 SouthernSanDoriaS
+trigger Louxiard                        # Prog 1: 22
+finish                                  # Prog 2
+walk -167.043,-2,55.484
+trigger Rholont                         # Prog 2: 23
+finish                                  # begun; 7 Plumes d'Or
+trigger Rholont                         # a plume held, 0 traded: 33
+finish
+walk 1.5,1.999,-22.006
+trade Rongelouts_N_Distaud PlumeDor x1  # 25
+finish                                  # confirmed; bit 0
+trade Rongelouts_N_Distaud PlumeDor x1  # bit 0 set: nil
+finish-if-event
+walk -92.005,-4,49.356
+trade Louxiard PlumeDor x1              # 26
+finish                                  # bit 1
+walk 10.853,1.999,-87.515
+trade Sabiliont PlumeDor x1             # 27
+finish                                  # bit 2
+walk -253.751,-3.601,109.453
+trade Machionage PlumeDor x1            # 28
+finish                                  # bit 3
+walk 79.831,-7.798,-22.367
+trade Loillie PlumeDor x1               # 29
+finish                                  # bit 4
+walk 87.144,1.999,-0.122
+trade Elnonde PlumeDor x1               # 30
+finish                                  # bit 5
+walk -42.748,1.999,-36.378
+trade Illeuse PlumeDor x1               # 31
+finish                                  # bit 6: all seven traded, no plume left
+charvar Quest[7][15]Option 63           # a GM: Illeuse's bit cleared (6 traded, no plume held)
+walk -167.043,-2,55.484
+trigger Rholont                         # no plume, 6 traded, the Timer 0: 34
+finish                                  # the Timer: NextConquestTally()
+trigger Rholont                         # before the Timer: 46
+finish
+charvar Quest[7][15]Timer 1             # a GM: a time past
+trigger Rholont                         # at or past the Timer: 35
+finish                                  # the Timer 0; 1 plume (7 - 6)
+trigger Rholont                         # the plume held: 33
+finish
+walk -42.748,1.999,-36.378
+trade Illeuse PlumeDor x1               # bit 6 unset: 31
+finish                                  # bit 6: 7 traded
+walk -167.043,-2,55.484
+trigger Rholont                         # 7 traded: 24
+finish                                  # completed (a Deathstone); Claws of the Griffon's Timer: tomorrow
+trigger Rholont                         # Claws available, its Timer tomorrow: nil (32)
+finish-if-event

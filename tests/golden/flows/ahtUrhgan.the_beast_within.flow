@@ -1,0 +1,55 @@
+# The Beast Within (ahtUrhgan 40, BLU limit break): a level 66 Blue Mage, level cap 70, 5000 gil, An Empty Vessel,
+# Beginnings, Omens and Transformations completed (GMs: The Beast Within's Timer 0), a Blue Mage's Testimony and a Bone
+# Chip. Waoud (no script; default 61) also answers for An Empty Vessel's completed section (78, an Event); Imperial
+# Whitegate (no script; default GATE_IS_FIRMLY_CLOSED). Available: a trade to Waoud: nothing; the testimony to Imperial
+# Whitegate: no section-1 trade handler: nothing; Waoud 760, option 1: nothing; 760, option 0: begun. Accepted: Waoud 761;
+# its update option 1: nothing; option 0: updateEvent(5000); finished with option 0: nothing; 761, option 1: 1000 gil
+# (PAY_DIVINATION). Imperial Whitegate: a Bone Chip: nil; the testimony at Prog 0: 762, option 1: nothing; 762, option 0:
+# Prog 1, setPos into Jade Sepulcher (300.28 -0.853 -177.745). The zone change (`tick 400`, `login open`, as the harness's
+# warp does it, the zone-in's event left open): Prog 1: 2; finished: Prog 2. The battlefield: the testimony traded to
+# _1v0 (requiredItems; requiredVar Prog 2): the 32000 menu; option 33 (index 2 << 4 | area 1) enters; RAUBAHN (area 1)
+# brought to 1 HP (setUnkillable; his onMobFight calls battlefield:win() under 20% HP), 32001 opens; finished: battlefieldWin 1154: the quest starts 6; finished: the cap 70 raised to
+# 75 (YOUR_LEVEL_LIMIT_IS_NOW_75), a Scroll of Instant Warp, completed (Master of Ambition). Whitegate: completed: no
+# section: Waoud: An Empty Vessel's 78.
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/Imperial_Whitegate/onTrade AhtUrhganWhitegate/onEventFinish/762 JadeSepulcher/onZoneIn/1 JadeSepulcher/_1v0/onTrade JadeSepulcher/onEventFinish/32001 JadeSepulcher/onEventFinish/6
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=66 gil=5000
+levelcap 70
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings completed
+quest AhtUrhgan.Omens completed
+quest AhtUrhgan.Transformations completed
+item BlueMagesTestimony
+item BoneChip
+login
+trade Waoud BoneChip x1                 # available: no trade handler: nothing
+trigger Waoud                           # Timer 0: 760
+finish option=1                         # not 0: nothing
+trigger Waoud                           # 760
+finish option=0                         # begun
+trigger Waoud                           # accepted, BLU 70: 761
+update 761 option=1                     # not 0: nothing
+update 761 option=0                     # updateEvent(5000)
+finish option=0                         # not 1: nothing
+trigger Waoud                           # 761
+finish option=1                         # 1000 gil, PAY_DIVINATION
+walk 155.796,-4.199,0.03                # beside Imperial Whitegate
+trade Imperial_Whitegate BoneChip x1    # no testimony: nil
+trade Imperial_Whitegate BlueMagesTestimony x1   # Prog 0: 762
+finish option=1                         # nothing
+trade Imperial_Whitegate BlueMagesTestimony x1   # 762
+finish option=0                         # Prog 1; setPos into Jade Sepulcher
+tick 400
+login open                              # the zone change: Jade Sepulcher; Prog 1: the zone-in's 2, left open
+finish                                  # Prog 2
+warp 300,-2.517,-198.5 JadeSepulcher    # by the door _1v0 (and the flow checker's zone); Prog 2: no zone-in reply
+trade _1v0 BlueMagesTestimony x1        # Prog 2: the battlefield's 32000 menu
+update 32000 option=33                  # The Beast Within (index 2), area 1: registered, entered
+finish                                  # in the arena
+kill RAUBAHN                            # area 1: Raubahn is unkillable: left at 1 HP (his onMobFight wins the fight under 20% HP)
+tick 1000                               # (CHECK where 32001 opens)
+tick 1000
+finish                                  # 32001: battlefieldWin 1154: 6 started
+finish                                  # 6: cap 70 -> 75, YOUR_LEVEL_LIMIT_IS_NOW_75; the Scroll of Instant Warp; completed: Master of Ambition
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+trigger Waoud                           # completed: no section: An Empty Vessel's 78
+finish option=0

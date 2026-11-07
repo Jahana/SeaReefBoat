@@ -1,0 +1,12 @@
+# Community Service (jeuno 15): the offer answered too late. 116 at 22:00; the update at 23:00 re-checks the hour: not
+# begun, updateEvent(0, 0). At 23:00 Zauko has no reply (hour 23, nothing flagged, no card): his default 118.
+lists LowerJeuno/Zauko/onTrigger LowerJeuno/onEventUpdate/116 LowerJeuno/onEventFinish/118
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+login
+wait vana=10                            # 22:00
+trigger Zauko                           # 116 (0)
+wait vana=1                             # 23:00, the event still open
+update 116 option=0                     # hour 23: not begun; updateEvent(0, 0)
+finish
+trigger Zauko                           # 23:00: nil; his default 118
+finish                                  # the quest's 118 finish: Wait = 8000

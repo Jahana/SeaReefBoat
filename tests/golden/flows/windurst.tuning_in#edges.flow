@@ -1,0 +1,59 @@
+# Tuning In (windurst 90) and Tuning Out (windurst 91): the other operands. The three items while available: nothing
+# (tradeHasExactly holds, the status does not). Fame level 4 with the CoP mission The Lost City current (a setup row;
+# 218, one before Distant Beliefs' 228): nothing. Tuning In accepted (GM), Tuning Out available with TuningOut_Progress
+# 8 (GM): 885 (897 needs Tuning Out accepted). Both accepted, progress 1: Tuning In's 885 comes before Tuning Out's 889.
+# Progress 8: Tuning Out's 897 comes first in his chain (Tuning In's reminder yields); 897 with a full inventory:
+# npcUtil.completeQuest refuses (the Cache-Nez does not fit): Tuning Out stays accepted, the progress stays 8; with
+# room: completed, progress 0. Tuning Out completed, progress 8 again (GM): Tuning In's 885. The three items: 886,
+# completed. Both completed with progress 8: nothing (897 needs Tuning Out accepted). The three items again (GM) with
+# Tuning In completed: nothing.
+char zone=WindurstWaters pos=12.9,-9.7,-197.5 job=WAR lvl=75
+fame Windurst 225
+mission Cop TheLostCity current
+item MagickedSteelIngot
+item PieceOfSpruceLumber
+item ExtraFineFile
+login
+trade Leepe-Hoppe MagickedSteelIngot x1 PieceOfSpruceLumber x1 ExtraFineFile x1  # available: nothing
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # level 4, The Lost City: nothing from his script, so 345 again
+finish
+quest Windurst.TuningIn accepted        # GM
+charvar TuningOut_Progress 8            # GM, Tuning Out available
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # Tuning Out available, progress 8: 885
+finish
+quest Windurst.TuningOut accepted       # GM
+charvar TuningOut_Progress 1
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # both accepted, progress 1: Tuning In's 885 (before Tuning Out's 889)
+finish
+charvar TuningOut_Progress 8
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # progress 8: Tuning Out's 897 (Tuning In's reminder yields)
+fill-inventory
+finish                                  # the Cache-Nez does not fit: nothing completes; progress 8
+free-inventory
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # 897
+finish                                  # the Cache-Nez; the title; fame 40; Tuning Out completed; progress 0
+charvar TuningOut_Progress 8            # GM
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # Tuning Out completed, progress 8: Tuning In's 885
+finish
+trade Leepe-Hoppe MagickedSteelIngot x1 PieceOfSpruceLumber x1 ExtraFineFile x1  # accepted: 886
+finish                                  # 4000 gil; Fine Tuner; completed; the items taken
+trigger Leepe-Hoppe                     # default 345
+finish
+trigger Leepe-Hoppe                     # both completed, progress 8: nothing from his script, so 345 again
+finish
+item MagickedSteelIngot
+item PieceOfSpruceLumber
+item ExtraFineFile
+trade Leepe-Hoppe MagickedSteelIngot x1 PieceOfSpruceLumber x1 ExtraFineFile x1  # Tuning In completed: nothing

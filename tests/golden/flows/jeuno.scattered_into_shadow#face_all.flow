@@ -1,0 +1,20 @@
+# Scattered into Shadow (jeuno 61), Tebhi turned for everyone: npc:facePlayer(player, false) turns him in the zone (not
+# for the trading char's client alone, which would turn him back after the packet). Main at Prog 4 in Castle Oztroja
+# (Tebhi made NORMAL by the listener's first tick) trades the collar: Tebhi stopped (clearPath) and turned to main.
+# Bob (no quest) logs in while Tebhi stands paused and walks to him: Tebhi's spawn for bob carries the turned
+# rotation (0x00; his path's was 0x5C). Then the two timers ('kesu', CUTSCENE_ONLY and continuePath).
+lists CastleOztroja/Tebhi/onTrade
+char zone=CastleOztroja pos=-134.5,24,-21 job=BST lvl=50
+char bob zone=CastleOztroja pos=-130.5,24,-17 job=WAR lvl=50
+quest Jeuno.WingsOfGold completed
+quest Jeuno.ScatteredIntoShadow accepted
+charvar Quest[3][61]Prog 4
+charvar Quest[3][61]Stage 7
+item BeastCollar
+login                                       # main's listener
+tick 400                                    # Tebhi NORMAL, 'deru'
+trigger Tebhi                               # walk to him
+trade Tebhi BeastCollar x1                  # Prog 5, TEBHI_ACCEPTS; stopped, turned to main; the two timers
+bob: login                                  # bob in the zone
+bob: trigger Tebhi                          # bob walks to him: Tebhi's spawn turned to main; no handler, no default
+tick 4001                                   # tebhiFade, tebhiGone

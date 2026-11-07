@@ -1,0 +1,69 @@
+# Dark Legacy (bastok 57, DRK AF1): Raibaht and Mighty Fist in the Metalworks, Cochal-Monchal in Windurst Waters, Quu
+# Bokye, the qm1 and Vaa Huja the Erudite in Giddeus. The guard (main job DRK, main level AF1_QUEST_LEVEL 40), the offer
+# 751, Mighty Fist's 752 (the Letter from the Darksteel Forge, Prog 1), Cochal-Monchal's 697 (the letter deleted, Prog 2)
+# and 698, Quu Bokye's 61 and his cherry trade 62 (the cherry taken, Option 1), a Yagudo Cherry at the qm1 (Vaa Huja
+# popped and claimed, SENSE_OF_FOREBODING), the kill (Prog 3), the qm1's Darksteel Formula, Cochal-Monchal's 699, Mighty
+# Fist's 754, Raibaht's 755 and the reward (Raven Scythe, fame +20, the formula deleted).
+# Defaults: Raibaht 501 (DefaultActions), Cochal-Monchal 696, Quu Bokye 56, the qm1 NOTHING_OUT_OF_ORDINARY. Mighty Fist
+# has his own script (561 until its finish sets his local var spokenMetalFist, 560 after); the lookup alternates an
+# Event-priority quest action (754) with it, while a Progress one (752) always wins.
+# Shared NPCs this char never meets: Raibaht (Teak Me to the Stars from Bastok fame level 3, The Usual with the
+# invitation, LB04), Mighty Fist (The Darksmith from fame level 3), Quu Bokye (The Lost Book, Early Bird Catches the
+# Bookworm). The char has Bastok fame 0.
+lists Metalworks/Raibaht/onTrigger Metalworks/Raibaht/onTrade Metalworks/Mighty_Fist/onTrigger Metalworks/onEventFinish/751 Metalworks/onEventFinish/752 Metalworks/onEventFinish/755 WindurstWaters/Cochal-Monchal/onTrigger WindurstWaters/onEventFinish/697 Giddeus/qm1/onTrigger Giddeus/qm1/onTrade Giddeus/Quu_Bokye/onTrigger Giddeus/Quu_Bokye/onTrade Giddeus/Vaa_Huja_the_Erudite/onMobDeath Giddeus/onEventFinish/62
+char zone=Metalworks pos=-26.3,-10,-2.1 job=DRK lvl=40
+item YagudoCherry x4
+item BoneChip
+login
+trade Raibaht BoneChip x1            # available: no trade handler, nothing
+trigger Mighty_Fist                  # available: no handler of this quest at Mighty Fist; his script, 561
+finish                               # his script: spokenMetalFist 1
+trigger Raibaht                      # DRK 40: the offer, 751
+finish                               # accepted
+trigger Raibaht                      # accepted, no formula: nil, his default 501
+finish-if-event
+trigger Mighty_Fist                  # Prog 0: 752 (Progress priority: over his script)
+finish                               # KI Letter from the Darksteel Forge, Prog 1
+trigger Mighty_Fist                  # Prog 1, no formula: nil; his script, 560
+finish-if-event
+warp -50.9,-6.25,109.3 WindurstWaters
+trigger Cochal-Monchal               # Prog 1: 697
+finish                               # the letter deleted, Prog 2
+trigger Cochal-Monchal               # Prog 2: 698
+finish
+warp -160,17,180 Giddeus
+trigger Quu_Bokye                    # Prog 2: 61
+finish
+trade Quu_Bokye BoneChip x1          # the wrong item: nil, nothing
+trade Quu_Bokye YagudoCherry x1      # Prog 2, Option 0, one cherry: 62
+finish                               # the cherry taken (tradeComplete), Option 1
+trade Quu_Bokye YagudoCherry x1      # Option 1: nil, nothing (the cherry kept)
+warp -60,-3.7,-446.5 Giddeus
+trigger qm1                          # Prog 2: nil, NOTHING_OUT_OF_ORDINARY
+finish-if-event
+trade qm1 BoneChip x1                # Prog 2, the wrong item: nil, nothing
+trade qm1 YagudoCherry x1            # Prog 2, Vaa Huja not up: the cherry taken, Vaa Huja popped and claimed, SENSE_OF_FOREBODING
+trade qm1 YagudoCherry x1            # Vaa Huja up: nil, nothing (the cherry kept)
+kill VAA_HUJA_THE_ERUDITE            # Prog 2: Prog 3
+trade qm1 YagudoCherry x1            # Prog 3: nil, nothing
+trigger qm1                          # Prog 3, no formula: KI Darksteel Formula
+finish-if-event
+trigger qm1                          # the formula held: nil, NOTHING_OUT_OF_ORDINARY
+finish-if-event
+warp -160,17,180 Giddeus
+trigger Quu_Bokye                    # Prog 3: nil, his default 56
+finish-if-event
+trade Quu_Bokye YagudoCherry x1      # Prog 3: nil, nothing
+warp -50.9,-6.25,109.3 WindurstWaters
+trigger Cochal-Monchal               # Prog 3, the formula: 699
+finish
+warp -45.2,2.777,-31.2 Metalworks
+trigger Mighty_Fist                  # the formula: 754 (Event priority, the lookup's first turn)
+finish-if-event
+trigger Mighty_Fist                  # the lookup alternates: his script, 561 (spokenMetalFist is a local var, lost with the zone changes)
+finish-if-event
+trigger Raibaht                      # the formula: 755
+finish                               # completed: Raven Scythe, fame +20, the formula deleted
+trigger Raibaht                      # completed: no handler, 501
+finish-if-event
+trade Raibaht BoneChip x1            # completed: nothing

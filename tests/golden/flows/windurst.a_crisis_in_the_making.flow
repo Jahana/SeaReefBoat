@@ -1,0 +1,70 @@
+# A Crisis in the Making (windurst 2): Ranpi-Monpi (Windurst Waters; no DefaultActions entry: with no quest arm his
+# script plays one of three standard events by math.randomInt, the seeded script RNG) and the Altar of Offerings
+# (Giddeus; its standard 60). In a Stew (C#, its container at Ranpi-Monpi) is never started, so it never answers.
+# Windurst fame 49 (level 1): no offer; 50 (level 2): 258 (0, 625), option 0: nothing; option 2: needToZone (then no
+# offer: his standard event); rezoned, option 1: begun, QuestCrisisMaking_var 1, needToZone. Accepted, var 1: 262. The
+# altar: 53, options 0 and 2: nothing; option 1: the Off Offering, var 2; again: 60. Ranpi-Monpi at var 2 (the warp
+# cleared needToZone): 267: 400 gil, var 0, the offering taken, fame 10, completed, needToZone. Completed with
+# needToZone: his standard event. needToZone is the char var [generic]mustZone holding Windurst Waters' id: a zone-in
+# clears it in another zone, but in Windurst Waters only on a same-zone zone-in from Windurst Waters itself (player.lua's
+# mog-house clause), so the first `rezone` (no other zone visited yet) clears it and, once the char came back from
+# Giddeus (the previous zone stays Giddeus), a warp out and back does. Cleared: 259 (the repeat), option 0: nothing (no
+# needToZone): 259 again, option 2: needToZone (his standard event); cleared, option 1: var 1, needToZone; 262
+# (needToZone not read); cleared: 262 (the repeat offer wants var 0); the altar (completed, var 1): 53, option 1: the
+# offering, var 2; Ranpi-Monpi (no needToZone, var 2): 268: 400 gil, var 0, the offering taken, fame 10 (no
+# completion), needToZone.
+char zone=WindurstWaters pos=-122.0,-3.0,63.2 job=WAR lvl=75
+fame Windurst 49
+login
+trigger Ranpi-Monpi                     # fame level 1: no offer; a standard event
+finish
+fame Windurst 50
+trigger Ranpi-Monpi                     # level 2, available, no needToZone: 258 (0, 625)
+finish option=0                         # nothing
+trigger Ranpi-Monpi                     # 258
+finish option=2                         # refused: needToZone
+trigger Ranpi-Monpi                     # needToZone: no offer; a standard event
+finish
+rezone                                  # needToZone cleared (no other zone visited yet)
+trigger Ranpi-Monpi                     # 258
+finish option=1                         # begun; QuestCrisisMaking_var 1; needToZone
+trigger Ranpi-Monpi                     # accepted, var 1: 262 (0, 625)
+finish
+warp -133.0,17.0,180.0 Giddeus
+trigger Altar_of_Offerings              # accepted, var 1: 53
+finish option=0                         # nothing
+trigger Altar_of_Offerings              # 53
+finish option=2                         # nothing (53 gives on option 1 only)
+trigger Altar_of_Offerings              # 53
+finish option=1                         # the Off Offering; var 2
+trigger Altar_of_Offerings              # var 2: its standard 60
+finish
+warp -122.0,-3.0,63.2 WindurstWaters
+trigger Ranpi-Monpi                     # accepted, var 2: 267
+finish                                  # 400 gil; var 0; the offering taken; fame 10; completed; needToZone
+trigger Ranpi-Monpi                     # completed, needToZone: a standard event
+finish
+warp -133.0,17.0,180.0 Giddeus          # needToZone cleared (the var holds Windurst Waters' id)
+warp -122.0,-3.0,63.2 WindurstWaters
+trigger Ranpi-Monpi                     # completed, var 0, no needToZone: 259 (0, 625)
+finish option=0                         # nothing
+trigger Ranpi-Monpi                     # 259
+finish option=2                         # needToZone
+trigger Ranpi-Monpi                     # needToZone: a standard event
+finish
+warp -133.0,17.0,180.0 Giddeus
+warp -122.0,-3.0,63.2 WindurstWaters
+trigger Ranpi-Monpi                     # 259
+finish option=1                         # var 1; needToZone
+trigger Ranpi-Monpi                     # completed, var 1: 262 (needToZone not read)
+finish
+warp -133.0,17.0,180.0 Giddeus
+warp -122.0,-3.0,63.2 WindurstWaters
+trigger Ranpi-Monpi                     # completed, var 1, no needToZone: 262, not 259
+finish
+warp -133.0,17.0,180.0 Giddeus
+trigger Altar_of_Offerings              # completed, var 1: 53
+finish option=1                         # the Off Offering; var 2
+warp -122.0,-3.0,63.2 WindurstWaters
+trigger Ranpi-Monpi                     # completed, var 2, no needToZone: 268, not 259
+finish                                  # 400 gil; var 0; the offering taken; fame 10; needToZone

@@ -1,0 +1,35 @@
+# Atelloune's Lament (sandoria 114): Atelloune in Southern San d'Oria (no NPC script; default 884; no other quest or
+# mission names her). The offer wants fame level 2 and the Crystal War quest Seeing Spots completed. Fame 50 without
+# Seeing Spots: no section, 884; Seeing Spots accepted (GM: not completed, the status test is `== COMPLETED`): 884;
+# Seeing Spots completed (GM) at fame 49: 884; at fame 50: a trade (no trade handler while available: nothing), 890
+# (option 1: begun; any option begins it, #inventory_full takes option 0). Accepted: 892; a chip (not the wing: nil), a
+# wing and a chip, two wings (not exactly one: nil, nothing); one wing: 891 (completed: Trainee Gloves, fame +20; the
+# wing taken). Completed: no section, 884.
+lists SouthernSanDoria/Atelloune/onTrigger SouthernSanDoria/Atelloune/onTrade SouthernSanDoria/onEventFinish/890 SouthernSanDoria/onEventFinish/891
+char zone=SouthernSanDoria pos=124.9,0.0,84.7 job=WAR lvl=30
+fame Sandoria 50
+item LadybugWing x3
+item BoneChip
+login
+trigger Atelloune                         # fame level 2, Seeing Spots not begun: no section; 884
+finish
+quest CrystalWar.SeeingSpots accepted
+trigger Atelloune                         # fame level 2, Seeing Spots accepted (not completed): no section; 884
+finish
+quest CrystalWar.SeeingSpots completed
+fame Sandoria 49
+trigger Atelloune                         # Seeing Spots completed, fame level 1: no section; 884
+finish
+fame Sandoria 50
+trade Atelloune BoneChip x1               # available, offered: no trade handler; no script: nothing
+trigger Atelloune                         # fame level 2, Seeing Spots completed: 890
+finish option=1                           # begun (any option)
+trigger Atelloune                         # accepted: 892
+finish
+trade Atelloune BoneChip x1               # not the wing: nil; nothing
+trade Atelloune LadybugWing x1 BoneChip x1   # not exactly the wing: nil; nothing
+trade Atelloune LadybugWing x2            # two wings: nil; nothing
+trade Atelloune LadybugWing x1            # exactly the wing: 891
+finish                                    # completed: Trainee Gloves, fame +20; the wing taken
+trigger Atelloune                         # completed: no section; 884
+finish

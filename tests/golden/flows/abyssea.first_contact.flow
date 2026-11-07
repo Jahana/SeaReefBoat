@@ -1,0 +1,20 @@
+# First Contact (abyssea 167): a level 99 Warrior in La Theine Plateau with Dawn of Death completed and the quest
+# accepted (GMs). Its only section wants the hour from 18:00 to 4:59 (user ruling 2026-11-04, kept Lua bugs: the Lua's
+# VanadielHour() >= 18 and VanadielHour() < 5 was never true; the C# reads it as an `or`). qm3 at 12:00 plays its
+# default (STRANGE_ENERGY); at 20:00 11, finished: completed, An Officer and a Pirate accepted; at 04:00 (completed, no
+# completed section) its default again. The 04:00 side of the hour is Tenuous Existence's flow.
+lists LaTheinePlateau/qm3/onTrigger
+char zone=LaTheinePlateau pos=-177.5,8,254 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath completed
+quest Abyssea.FirstContact accepted
+login
+trigger qm3                             # 12:00: no section (outside 18:00 to 4:59): STRANGE_ENERGY (default)
+finish-if-event
+wait vana=8                             # 20:00: VanadielHour() >= 18
+trigger qm3                             # 11
+finish-if-event                         # completed; An Officer and a Pirate accepted
+wait vana=8                             # 04:00
+trigger qm3                             # completed (no section): STRANGE_ENERGY
+finish-if-event

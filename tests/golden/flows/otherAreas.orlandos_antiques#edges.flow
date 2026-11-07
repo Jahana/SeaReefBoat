@@ -1,0 +1,25 @@
+# Orlando's Antiques (otherAreas 7): the OrlandoRepeat and count edges. Accepted (a GM), Windurst fame 50 and the
+# Chocobo License. 8 Beastcoins and a Goblin Die (8 of the slot's item, 9 items): nothing. 103 while accepted: its
+# finish sets nothing (not completed), so once completed (a GM) 8 Beastcoins: nothing (OrlandoRepeat 0). 103:
+# OrlandoRepeat 1; 8: 102 (600, 656), finished: OrlandoRepeat 0, so 8 more: nothing. OrlandoRepeat 2 (a GM; no script
+# sets it): 8: nothing (the trade reads OrlandoRepeat == 1).
+char zone=Mhaura pos=-36.5,-8.0,59.3 job=WAR lvl=20
+fame Windurst 50
+keyitem ChocoboLicense
+quest OtherAreas.OrlandosAntiques accepted
+item Beastcoin x12
+item Beastcoin x12
+item GoblinDie x1
+login
+trade Orlando Beastcoin x8 GoblinDie x1 # accepted, 8 of the slot's item, 9 items: nothing
+trigger Orlando                         # accepted: 103
+finish                                  # not completed: OrlandoRepeat stays 0
+quest OtherAreas.OrlandosAntiques completed  # a GM
+trade Orlando Beastcoin x8              # completed, OrlandoRepeat 0: nothing
+trigger Orlando                         # completed: 103
+finish                                  # OrlandoRepeat 1
+trade Orlando Beastcoin x8              # 102 (600, 656)
+finish                                  # the 8 taken; 600 gil; OrlandoRepeat 0
+trade Orlando Beastcoin x8              # OrlandoRepeat 0: nothing
+localvar OrlandoRepeat 2                # a GM
+trade Orlando Beastcoin x8              # OrlandoRepeat 2, not 1: nothing

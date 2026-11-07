@@ -1,0 +1,48 @@
+# Her Memories: Azure Footfalls (crystalWar 70), the edges: a level 99 Warrior in Bastok Markets [S] with the WotG
+# mission Her Memories current (a GM; other logs as the main flow), the Blue Recommendation Letter. No allegiance: North
+# Gustaberg [S], then Bastok Markets [S] from there: nothing (not available). Allegiance 2 (The Fighting Fourth as the
+# main flow). Adelbrecht at Prog 0: nil (The Fighting Fourth's completed 162). From Jugner Forest [S] at Prog 0: nothing
+# (North Gustaberg [S] only). Adelbrecht at Prog 2 before it is begun (a GM): nil (162). Prog 1 (a GM), from North
+# Gustaberg [S]: nothing (Prog 0 only). Adelbrecht 359, finished on option 1: begun (any option), Prog 2. North
+# Gustaberg [S]: Roderich and the Barricade at Prog 2: nil (Fighting Fourth's completed 109; NO_WAY_PAST_BARRIER).
+# Bastok Markets [S]: Adelbrecht at Prog 4 and Prog 6 (a GM): nil (162).
+lists BastokMarketsS/onZoneIn/1 BastokMarketsS/Adelbrecht/onTrigger BastokMarketsS/onEventFinish/359 NorthGustabergS/Roderich/onTrigger NorthGustabergS/Barricade/onTrigger
+char zone=BastokMarketsS pos=-324.266,-12.601,-76.977 job=WAR lvl=99
+keyitem BlueRecommendationLetter
+mission Wotg HerMemories current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+warp 207.799,-20.826,669.125 NorthGustabergS
+warp -324.266,-12.601,-76.977 BastokMarketsS # from North Gustaberg [S], no allegiance: no zone-in reply
+trigger Adelbrecht                      # The Fighting Fourth: the letter: 139 (0, 0)
+finish option=1                         # The Fighting Fourth begun
+charvar Quest[7][7]Prog 3               # a GM
+trigger Adelbrecht                      # 143
+finish                                  # The Fighting Fourth completed; allegiance 2
+trigger Adelbrecht                      # Azure available, Prog 0: nil (The Fighting Fourth's completed 162)
+finish-if-event
+warp -262.344,5.713,151.392 JugnerForestS
+warp -324.266,-12.601,-76.977 BastokMarketsS # from Jugner Forest [S] at Prog 0: no zone-in reply (North Gustaberg [S] only)
+charvar Quest[7][70]Prog 2              # a GM, while available
+trigger Adelbrecht                      # Prog 2 (not begun): nil (162)
+finish-if-event
+charvar Quest[7][70]Prog 1              # a GM
+warp 207.799,-20.826,669.125 NorthGustabergS
+warp -324.266,-12.601,-76.977 BastokMarketsS # from North Gustaberg [S] at Prog 1: no zone-in reply (Prog 0 only)
+trigger Adelbrecht                      # Prog 1: 359
+finish option=1                         # begun (any option); Prog 2
+warp -398.539,39.991,-90.445 NorthGustabergS
+trigger Roderich                        # Prog 2: nil (The Fighting Fourth's completed 109)
+finish-if-event
+trigger Barricade                       # Prog 2: nil (NO_WAY_PAST_BARRIER)
+finish-if-event
+charvar Quest[7][70]Prog 4              # a GM
+warp -324.266,-12.601,-76.977 BastokMarketsS
+trigger Adelbrecht                      # Prog 4: nil (162)
+finish-if-event
+charvar Quest[7][70]Prog 6              # a GM
+trigger Adelbrecht                      # Prog 6: nil (162)
+finish-if-event

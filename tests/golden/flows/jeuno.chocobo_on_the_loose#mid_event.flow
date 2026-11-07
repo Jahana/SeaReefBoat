@@ -1,0 +1,19 @@
+# Chocobo on the Loose! (jeuno 92): finishes outside their state. A level 25 Warrior. 10093 open, the quest set
+# accepted by a GM: no 10093 finish there: nothing. Prog 3 (a GM): 10100 open, the quest set available by a GM: nothing
+# (Prog 3, no Timer, no mustZone).
+# Brutus's other quests are kept silent: Chocobo's Wounds and Save My Son completed (a GM, before login: Chocobo's
+# Wounds' completed section wants Save My Son not completed), level 25 (Path of the Beastmaster wants 30); his script
+# then starts nothing (Chocobo's Wounds completed, Wings of Gold / Scattered into Shadow not); a talk with
+# no quest reply plays his default 66 (DefaultActions).
+lists UpperJeuno/Brutus/onTrigger UpperJeuno/onEventFinish/10093 UpperJeuno/onEventFinish/10100
+char zone=UpperJeuno pos=-55.5,8.2,97.5 job=WAR lvl=25
+quest Jeuno.ChocobosWounds completed
+quest Jeuno.SaveMySon completed
+login
+trigger Brutus                          # 10093
+quest Jeuno.ChocoboOnTheLoose accepted  # a GM, while 10093 is open
+finish                                  # nothing
+charvar Quest[3][92]Prog 3              # a GM
+trigger Brutus                          # Prog 3: 10100
+quest Jeuno.ChocoboOnTheLoose available # a GM, while 10100 is open
+finish                                  # nothing

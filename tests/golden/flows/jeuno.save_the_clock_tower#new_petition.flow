@@ -1,0 +1,17 @@
+# Save the Clock Tower (jeuno 3), Derrick's option 30 when no petition is held (the quest set accepted by a GM, with
+# two signatures): a new petition and Prog 0, which Zauko's 50 then shows (9 minus 0 bits).
+# The harness cannot drop an item, so the petition-less accepted state is a GM's.
+lists LowerJeuno/Derrick/onTrigger LowerJeuno/Zauko/onTrade LowerJeuno/onEventFinish/230 LowerJeuno/onEventFinish/50
+char zone=LowerJeuno pos=-32.4,-1,-6.1
+fame Sandoria 216
+fame Bastok 217
+fame Windurst 217
+quest Jeuno.AClockMostDelicate completed
+quest Jeuno.SaveTheClockTower accepted
+charvar Quest[3][3]Prog 5
+login
+trigger Derrick                             # accepted, no pass: 230 (4, 10)
+finish option=30                            # no petition held: a new one, Prog 0
+walk -2.4,0,14.2
+trade Zauko ClockTowerPetition x1           # bit 2 clear, no bits: 50 (9)
+finish                                      # bit 2 (Prog 4)

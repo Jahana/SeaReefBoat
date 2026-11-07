@@ -1,0 +1,32 @@
+# Food for Thought (windurst 14): each half of the completion guards false alone (GM vars), so a port that tests one
+# half only completes where the Lua does not. Kerutoto's 332 needs kenapaProg 4 and ohbiruProg 3: kenapaProg 4 with
+# ohbiruProg 2, then kenapaProg 3 with ohbiruProg 3: kerutotoProg 2 both times. Ohbiru's 322 needs kerutotoProg 2 and
+# kenapaProg 4: kerutotoProg 1 with kenapaProg 4: ohbiruProg 3. (Kenapa's finish: the main flow has its second half
+# false, `#early_kenapa_rng` its first; Ohbiru's second half: `#early_ohbiru_rng`.)
+lists WindurstWaters/Kerutoto/onTrigger WindurstWaters/Kerutoto/onTrade WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/Ohbiru-Dohbiru/onTrade WindurstWaters/onEventFinish/322 WindurstWaters/onEventFinish/332
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought accepted
+charvar Quest[2][14]kerutotoProg 1
+charvar Quest[2][14]kenapaProg 4
+charvar Quest[2][14]ohbiruProg 2
+item SliceOfGrilledHare x2
+item CupOfWindurstianTea
+item Tortilla
+item ClumpOfPamtamKelp
+login
+trigger Kerutoto                        # kerutotoProg 1: 315
+finish
+trade Kerutoto SliceOfGrilledHare x1    # 332 (440)
+finish                                  # +440 gil; kenapaProg 4 but ohbiruProg 2: kerutotoProg 2, not completed
+charvar Quest[2][14]kerutotoProg 1
+charvar Quest[2][14]kenapaProg 3
+charvar Quest[2][14]ohbiruProg 3
+trade Kerutoto SliceOfGrilledHare x1    # 332 (440)
+finish                                  # +440 gil; ohbiruProg 3 but kenapaProg 3: kerutotoProg 2, not completed
+charvar Quest[2][14]kerutotoProg 1
+charvar Quest[2][14]kenapaProg 4
+charvar Quest[2][14]ohbiruProg 2
+trigger Ohbiru-Dohbiru                  # ohbiruProg 2: 317
+finish
+trade Ohbiru-Dohbiru CupOfWindurstianTea x1 Tortilla x1 ClumpOfPamtamKelp x1  # ohbiruProg 2: 322 (440)
+finish                                  # +440 gil; kenapaProg 4 but kerutotoProg 1: ohbiruProg 3, not completed

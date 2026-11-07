@@ -1,0 +1,16 @@
+# Trust: Zeid II (hidden quest TrustZeidII): a level 99 Warrior in Norg. The door _700 (no script; default
+# DOOR_IS_LOCKED); no permit asked for. RoV Volto Oscuro completed (setup). Every talk gives the cipher (the stopgap)
+# and plays noAction; with a full inventory the giveItem fails (its message, no cipher). The cipher held:
+# DOOR_IS_LOCKED.
+lists Norg/_700/onTrigger
+char zone=Norg pos=100.5,-8.55,-12 job=WAR lvl=99
+mission Rov VoltoOscuro completed
+login
+fill-inventory
+trigger _700                            # no room: giveItem fails; noAction
+finish-if-event
+free-inventory
+trigger _700                            # the cipher; noAction
+finish-if-event
+trigger _700                            # the cipher held: DOOR_IS_LOCKED
+finish-if-event

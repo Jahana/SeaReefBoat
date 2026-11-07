@@ -1,0 +1,39 @@
+# Beginnings (ahtUrhgan 21) with its era module, modules/era/lua/quests/ahturhgan/beginnings.lua, enabled by
+# xi.pre(ROV) (RESTRICT_CONTENT 1, ENABLE_ROV 0): Omens is offered at JST midnight. A level 50 Blue Mage, Beginnings
+# accepted with the five brands (GMs), An Empty Vessel completed. A full bag: Waoud 707, finished: the module's copy:
+# quest:complete false: nothing (no Omens mustZone, no Timer); room again: 707, finished: the module's copy: completed, Omens'
+# mustZone, its Timer = JstMidnight() (1800025200; the quest alone sets 1800000060: the trace's char var shows which).
+# Waoud: Omens available (level 50) but its mustZone: nil: An Empty Vessel's 78; out of Whitegate and back: now < Timer:
+# nil: 78; Timer 1800000001 (a GM): 78; Timer 1800000000 (now): Omens' 710.
+module modules/era/lua/quests/ahturhgan/beginnings.lua
+lists AhtUrhganWhitegate/Waoud/onTrigger AhtUrhganWhitegate/onEventFinish/707
+char zone=AhtUrhganWhitegate pos=67.116,-6,-78.222 job=BLU lvl=50 gil=5000
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+mission Toau ImmortalSentries completed
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Beginnings accepted
+keyitem BrandOfTheSpringserpent
+keyitem BrandOfTheGaleserpent
+keyitem BrandOfTheFlameserpent
+keyitem BrandOfTheSkyserpent
+keyitem BrandOfTheStoneserpent
+login
+fill-inventory
+trigger Waoud                           # the five brands: 707
+finish                                  # the module's copy: the scimitar does not fit: quest:complete false: nothing (no Omens mustZone, no Timer)
+free-inventory
+trigger Waoud                           # still accepted: 707
+finish                                  # the module's copy: completed; Omens' mustZone; Timer = JstMidnight()
+trigger Waoud                           # Omens' mustZone: nil: An Empty Vessel's 78
+finish option=0
+warp -64,-7,38 AlZahbi                  # the mustZone cleared
+warp 67.116,-6,-78.222 AhtUrhganWhitegate
+trigger Waoud                           # now < Timer (JST midnight): nil: 78
+finish option=0
+charvar Quest[6][22]Timer 1800000001    # a GM: one second past now
+trigger Waoud                           # 78
+finish option=0
+charvar Quest[6][22]Timer 1800000000    # a GM: now
+trigger Waoud                           # Omens' 710
+finish                                  # Omens begun

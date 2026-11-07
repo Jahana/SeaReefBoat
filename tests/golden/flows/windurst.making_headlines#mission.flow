@@ -1,0 +1,17 @@
+# Making Headlines (windurst 37): the Mahogany Door _5ca (Inner Horutoto Ruins) while Windurst mission 2-1 (Lost for
+# Words) is current at mission status 5 (GM), where the mission plays its progressCutscene 46 at the door. Accepted with
+# the four scoops by GM (the var 15). The mission's 46 answers first (Progress; its finish: status 6, the Hideout Key
+# taken), then the default's 44 (the lookup's turn), then the script's turn: CAT_BURGLARS_HIDEOUT (1, 43) and bit 4,
+# then the default's 44.
+char zone=InnerHorutotoRuins pos=-14.0,-2.2,20.0 job=WAR lvl=75
+mission Windurst LostForWords current
+login
+missionstatus Windurst 5
+quest Windurst.MakingHeadlines accepted
+charvar QuestMakingHeadlines_var 15
+trigger _5ca                            # the mission's 46
+finish                                  # mission status 6
+trigger _5ca                            # the default's turn: 44
+finish
+trigger _5ca                            # the script's turn: CAT_BURGLARS_HIDEOUT (1, 43); bit 4; then 44
+finish

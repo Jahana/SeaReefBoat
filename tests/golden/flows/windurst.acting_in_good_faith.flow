@@ -1,0 +1,45 @@
+# Acting in Good Faith (windurst 64): Gantineux (Windurst Waters), the qm1 (The Eldieme Necropolis, at I-10 when the
+# zone loads), Eperdur (Northern San d'Oria). A level-10 WAR at Windurst fame 225 (level 4). Available: 10019 option 1
+# (nothing), option 0 (the Spirit Incense, begun). Accepted: Gantineux 10020 (the incense); Eperdur without the letter:
+# nil (his script: Healing the Land needs San d'Oria fame level 4: nothing; his default 678); the qm1 with the incense:
+# 50 (SPIRIT_INCENSE_EMITS_PUTRID_ODOR, the incense taken, the qm1 moved to one of four places by math.randomInt(1, 4));
+# the qm1 again (no incense: nil, NOTHING_OUT_OF_ORDINARY; trigger walks to wherever it went); Gantineux 10021 (neither
+# key item: Gantineux's Letter), 10022 (the letter); Eperdur 680 with a full bag (complete fails: the letter kept), 680
+# (completed: fame 40, the Scroll of Teleport-Mea, Pilgrim to Mea; the letter taken). Completed: Gantineux 10023
+# (replaceDefault). #eperdur shows 680's kind beside Eperdur's script; #qm1 repeats 50 (the qm1's moves).
+lists WindurstWaters/Gantineux/onTrigger WindurstWaters/Gantineux/onTrade WindurstWaters/onEventFinish/10019 WindurstWaters/onEventFinish/10021 TheEldiemeNecropolis/qm1/onTrigger TheEldiemeNecropolis/onEventFinish/50 NorthernSanDoria/Eperdur/onTrigger NorthernSanDoria/onEventFinish/680
+char zone=WindurstWaters pos=-83.5,-9.25,3.5 job=WAR lvl=10
+fame Windurst 225
+item BoneChip
+login
+trade Gantineux BoneChip x1                   # available: no trade handler either way (no script): nothing
+trigger Gantineux                             # fame level 4, level 10: 10019
+finish option=1                               # not 0: nothing
+trigger Gantineux                             # 10019
+finish option=0                               # the Spirit Incense; begun
+trigger Gantineux                             # the incense: 10020
+finish
+warp 126.5,-6.5,97.5 NorthernSanDoria
+trigger Eperdur                               # no letter: nil; his default 678 (his script answers nothing at San d'Oria fame 0)
+finish
+warp -19.6,-1.63,58.4 TheEldiemeNecropolis
+trigger qm1                                   # the incense: 50
+finish                                        # SPIRIT_INCENSE_EMITS_PUTRID_ODOR; the incense taken; the qm1 moved (RandomInt 1-4)
+trigger qm1                                   # no incense: nil; NOTHING_OUT_OF_ORDINARY
+warp -83.5,-9.25,3.5 WindurstWaters
+trigger Gantineux                             # neither key item: 10021
+finish                                        # Gantineux's Letter
+trigger Gantineux                             # the letter: 10022
+finish
+warp 126.5,-6.5,97.5 NorthernSanDoria
+trigger Eperdur                               # the letter: 680
+fill-inventory
+finish                                        # the scroll does not fit: complete fails: the letter kept
+free-inventory
+trigger Eperdur                               # 680
+finish                                        # completed: fame 40, the Scroll of Teleport-Mea, Pilgrim to Mea; the letter taken
+trigger Eperdur                               # completed: no section; his default 678
+finish
+warp -83.5,-9.25,3.5 WindurstWaters
+trigger Gantineux                             # completed: 10023 (replaceDefault)
+finish

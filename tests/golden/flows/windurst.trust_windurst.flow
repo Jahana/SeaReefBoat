@@ -1,0 +1,55 @@
+# Trust: Windurst (windurst 96): Wetata (Windurst Woods) and Kupipi (Heaven's Tower; Kupipi+1: the first Kupipi
+# (17768466) is cutscene_only). Neither has a DefaultActions entry (868 / 251 are their scripts'). A Bastok char
+# (nation 1, rank 1: rank3 0) of level 5, no other trust quest begun, no mission.
+# Wetata 863: options 0, 1 and 3: nothing; option 2: begun, the Green Institute Card. A trade (not a cipher): her
+# script's onTradeCipher, nothing. Accepted with the card: 864. Kupipi 435 (memories 0, rank3 0), option 1
+# (no option test): Kupipi learned, WindurstFirstTrust 1; 436 (KupipiTrustChatFlag set); the flag set: no arm,
+# her 251 (not a Windurst char). The var 3 (GM): no arm, 251. The var 2 (GM: the Kupipi trust cast in East / West
+# Sarutabaruta stays Lua, as Trust: Bastok's Naji cast): 437 (the flag not read): the card taken, the permit,
+# The Trustworthy, the var 0, completed, CALL_MULTIPLE_ALTER_EGO. Completed, the flag still set this zone: 251; after
+# a rezone: 438 (flag set), then 251. The Nanaa Mihgo trust known (GM `spell`), after a rezone: no arm, 251.
+# Wetata: 861; the card given back by GM: 864 (the card arm comes before the completed one).
+char zone=WindurstWoods pos=-23.8,2.5,-44.6 lvl=5 nation=1
+item BoneChip
+login
+trigger Wetata                          # level 5, trusts on, available, Bastok's and San d'Oria's available: 863
+finish option=0                         # declined: nothing
+trigger Wetata                          # 863
+finish option=1                         # not option 2: nothing
+trigger Wetata                          # 863
+finish option=3                         # not option 2 (above it): nothing
+trade Wetata BoneChip x1                # her onTradeCipher: not a cipher, nothing
+trigger Wetata                          # 863
+finish option=2                         # begun; the Green Institute Card
+trigger Wetata                          # accepted, the card held: 864
+finish
+warp 2,0.1,30 HeavensTower
+trigger Kupipi+1                        # accepted, WindurstFirstTrust 0: 435 (0, 0, 0, 0, 0, 0, 0, 0)
+finish option=1                         # any option: Kupipi learned (YOU_LEARNED_TRUST); the var 1
+trigger Kupipi+1                        # the var 1, flag 0: 436; KupipiTrustChatFlag 1
+finish
+trigger Kupipi+1                        # the var 1, flag 1: no arm; her nation arm (Bastok): 251
+finish
+charvar WindurstFirstTrust 3
+trigger Kupipi+1                        # the var 3: no arm: 251
+finish
+charvar WindurstFirstTrust 2            # GM: the Kupipi trust's cast in East / West Sarutabaruta (kupipi.lua)
+trigger Kupipi+1                        # the var 2 (the flag still 1, not read): 437
+finish                                  # the card taken; the permit; The Trustworthy; var 0; completed; the call text
+trigger Kupipi+1                        # completed, no Nanaa Mihgo trust, the flag still 1 (this zone): 251
+finish
+rezone
+trigger Kupipi+1                        # completed, flag 0: 438; the flag 1
+finish
+trigger Kupipi+1                        # flag 1: 251
+finish
+spell 901                               # GM: the Nanaa Mihgo trust (xi.magic.spell.NANAA_MIHGO)
+rezone
+trigger Kupipi+1                        # completed, flag 0, Nanaa Mihgo known: no arm: 251
+finish
+warp -23.8,2.5,-44.6 WindurstWoods
+trigger Wetata                          # completed, no card: 861
+finish
+keyitem GreenInstituteCard
+trigger Wetata                          # completed, the card held (GM): 864 (before the completed arm)
+finish

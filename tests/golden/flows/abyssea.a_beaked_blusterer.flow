@@ -1,0 +1,44 @@
+# A Beaked Blusterer (abyssea 176): a level 99 Warrior in South Gustaberg by the Cavernous Maw with The Truth Beckons
+# completed and Dawn of Death accepted (GMs), no Traverser Stone, 6 maw quests completed (A Goldstruck Gigas, To Paste a
+# Peiste, Megadrile Menace, The Beast of Bastore, A Delectable Demon, A Fluttery Fiend) and A Man-eating Mite accepted
+# (GMs; an accepted one does not count). The maw, no stone: no section: its own warp event 914 (entranceMawOnTrigger),
+# finished on option 0: no warp. Traverser Stone 1 (a GM, one stone: `>= 1`): 0 (a Progress), finished on option 0:
+# begun. Back to available (a GM): the maw again with no other talk between: 0 again (an Event-rank 0 would alternate
+# with the maw's own onTrigger: 914), finished on option 2: begun (any option). Accepted: the maw: no handler: 914. A
+# zone-in, accepted with no Bennu title: nothing. The title (a GM): the zone-in plays 1 (left open); its update on
+# option 0 and on option 2: nothing; on option 1: updateEvent(the key item for 6 completed: Lunar Abyssite III);
+# finished: Lunar Abyssite III given, then completed. Completed (title, stone and Dawn of Death still held): a zone-in:
+# nothing; the maw: 914.
+lists SouthGustaberg/Cavernous_Maw/onTrigger SouthGustaberg/onEventFinish/0 SouthGustaberg/onEventFinish/914 SouthGustaberg/onZoneIn/1 SouthGustaberg/onEventUpdate/1 SouthGustaberg/onEventFinish/1
+char zone=SouthGustaberg pos=341.5,-0.5,-680 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath accepted
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.MegadrileMenace completed
+quest Abyssea.TheBeastOfBastore completed
+quest Abyssea.ADelectableDemon completed
+quest Abyssea.AFlutteryFiend completed
+quest Abyssea.AManEatingMite accepted
+login
+trigger Cavernous_Maw                   # no stone: no section: the maw's warp event 914
+finish                                  # option 0: no warp
+keyitem TraverserStone1                 # a GM: one stone
+trigger Cavernous_Maw                   # available, one stone, Dawn of Death accepted: 0
+finish                                  # option 0: begun
+quest Abyssea.ABeakedBlusterer available # a GM
+trigger Cavernous_Maw                   # 0 again (the kind)
+finish option=2                         # begun (any option)
+trigger Cavernous_Maw                   # accepted: no maw handler: 914
+finish                                  # option 0: no warp
+rezone                                  # accepted, no title: nothing
+title BennuDeplumer                     # a GM
+rezone open                             # the title: 1, left open
+update 1 option=0                       # option 0: nothing
+update 1 option=2                       # option 2: nothing
+update 1 option=1                       # option 1: updateEvent(Lunar Abyssite III)
+finish                                  # Lunar Abyssite III given; completed
+rezone                                  # completed: nothing
+trigger Cavernous_Maw                   # completed: no section: 914
+finish                                  # option 0: no warp

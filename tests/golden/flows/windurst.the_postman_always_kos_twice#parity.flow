@@ -1,0 +1,10 @@
+# The Postman Always KO's Twice (windurst 19), completion parity: 52's finish (52 to 55 share it) is the Lua's raw
+# player:completeQuest (after the trade, the gil, the fame), so a GM's Quest[2][19]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) beside Ambrosius.
+char zone=WindurstWalls pos=63.5,-2.5,-63.2 job=WAR lvl=75
+item TornEpistle
+login
+quest Windurst.ThePostmanAlwaysKosTwice accepted
+charvar Quest[2][19]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Ambrosius TornEpistle x1          # accepted, one: 52 (50)
+finish                                  # taken; 50 gil; fame 10; completed; Prog kept

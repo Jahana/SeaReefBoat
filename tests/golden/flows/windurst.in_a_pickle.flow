@@ -1,0 +1,52 @@
+# In a Pickle (windurst 5): Chamama (Windurst Waters; no DefaultActions entry; every answer of her script is this
+# quest's). Her answers draw math.randomInt (the seeded script RNG, the same draws on both sides): the comments give the
+# choices and, after the colon, the one the seed plays. The Smooth Stone is rare (stack 1): one is held at a time, a GM
+# gives the next. Available: a stone traded: nothing. A talk: 654 (0, Rarab Tail), option 1: begun. Accepted: 655. A
+# stone and a pebble, a stone and gil, a pebble: nothing. One stone at a time: 657 (the stone taken at the trade); 659
+# (the stone taken, completed, needToZone, the Bone Hairpin, ITEM_OBTAINED, 200 gil, GIL_OBTAINED, fame 10); completed:
+# 662 (200) (the stone taken, 200 gil with no message, fame 10, the repeat var 0), 658, 658, 662, 657. Completed with
+# needToZone: 660; rezoned: 651, then 661 (option 1: the repeat var 1); var 1: 655; a stone: 662 (var 0, needToZone).
+char zone=WindurstWaters pos=-69.0,-3.8,-4.4 job=WAR lvl=75 gil=100
+item SmoothStone
+item Pebble
+login
+trade Chamama SmoothStone x1            # available: nothing
+trigger Chamama                         # available, no needToZone: 654 or 651: 654 (0, Rarab Tail)
+finish option=1                         # begun
+trigger Chamama                         # accepted: 655 (0, Rarab Tail)
+finish
+trade Chamama SmoothStone x1 Pebble x1  # a stone and a pebble (two items): nothing
+trade Chamama SmoothStone x1 gil=10     # a stone and gil: nothing
+trade Chamama Pebble x1                 # not a stone: nothing
+trade Chamama SmoothStone x1            # accepted: 659 / 657 / 658: 657 (the stone taken)
+finish                                  # nothing
+item SmoothStone
+trade Chamama SmoothStone x1            # accepted: 659
+finish                                  # the stone taken, completed, needToZone, the hairpin, 200 gil, fame 10
+item SmoothStone
+trade Chamama SmoothStone x1            # completed: 662 / 657 / 658: 662 (200)
+finish                                  # the stone taken, 200 gil (no message), fame 10, the var 0
+item SmoothStone
+trade Chamama SmoothStone x1            # 658 (the stone taken)
+finish
+item SmoothStone
+trade Chamama SmoothStone x1            # 658
+finish
+item SmoothStone
+trade Chamama SmoothStone x1            # 662 (200)
+finish
+item SmoothStone
+trade Chamama SmoothStone x1            # 657
+finish
+trigger Chamama                         # completed, needToZone: 660
+finish
+rezone
+trigger Chamama                         # completed, no needToZone, var 0: 661 or 651: 651
+finish option=1                         # nothing
+trigger Chamama                         # 661
+finish option=1                         # the repeat var 1
+trigger Chamama                         # var 1: 655
+finish
+item SmoothStone
+trade Chamama SmoothStone x1            # completed: 662 (200)
+finish                                  # the stone taken, needToZone, 200 gil, fame 10, var 0

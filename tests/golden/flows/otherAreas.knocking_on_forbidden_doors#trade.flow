@@ -1,0 +1,31 @@
+# Knocking on Forbidden Doors (otherAreas 78): the mannequin trade (319) and its 2000 gil from above (the chain before it
+# completed). 4200 gil, the Galka Mannequin held. A pose (option 82: race 8, pose 2) takes 200: 4000. A mannequin and a
+# feather, a mannequin with gil: not exactly one mannequin: nil (npcUtil.tradeHasExactly counts the gil too). The Galka
+# traded: 319 (2, mask 128, 100000, 2000, 1); option 1: 2000 taken (2000 left): the trade confirmed (the Galka gone), the
+# Hume Male Mannequin given, its pose reset (race 1). The Hume Male traded: 319 (mask 1); option 8: 2000 taken (exactly:
+# 0 left): the Galka given, pose reset. The Galka: 319; options 0 and 9: not 1 to 8, no delGil: nothing (kept). Two
+# mannequins (a GM gives the Hume Male): nil. The trade short of 2000 (delGil fails) is not in the trace: the engine's
+# `lua: delGil` line is refused by the recorder; XI.Verify.Quests `oa g4 kofd` proves it.
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/Fyi_Chalmwoh/onTrade Mhaura/onEventUpdate/321 Mhaura/onEventFinish/319 Mhaura/onEventFinish/321
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30 gil=4200
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile completed
+quest OtherAreas.KnockingOnForbiddenDoors completed
+keyitem BetterHumesAndMannequins
+item GalkaMannequin
+item ChocoboFeather
+login
+trigger Fyi_Chalmwoh                    # 321
+finish option=82                        # 200 taken: race 8, pose 2; 4000
+trade Fyi_Chalmwoh GalkaMannequin x1 ChocoboFeather x1 # an extra item: nil
+trade Fyi_Chalmwoh GalkaMannequin x1 gil=100 # gil with it: nil
+trade Fyi_Chalmwoh GalkaMannequin x1    # 319 (2, 128, 100000, 2000, 1)
+finish option=1                         # 2000 taken (2000 left): the Galka taken; the Hume Male Mannequin; pose reset (1, 0)
+trade Fyi_Chalmwoh HumeMMannequin x1    # 319 (2, 1, 100000, 2000, 1)
+finish option=8                         # 2000 taken (exactly; 0 left): the Hume Male taken; the Galka Mannequin; pose reset (8, 0)
+trade Fyi_Chalmwoh GalkaMannequin x1    # 319
+finish option=0                         # not 1 to 8: nothing
+trade Fyi_Chalmwoh GalkaMannequin x1    # 319
+finish option=9                         # not 1 to 8: nothing
+item HumeMMannequin                     # a GM
+trade Fyi_Chalmwoh GalkaMannequin x1 HumeMMannequin x1 # two mannequins: nil

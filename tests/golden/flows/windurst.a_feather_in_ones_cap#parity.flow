@@ -1,0 +1,10 @@
+# A Feather in One's Cap (windurst 1), completion parity: 79's finish while accepted is npcUtil.completeQuest step for
+# step (fame 16 Windurst), ending in the raw player:completeQuest, so a GM's Quest[2][1]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) beside Baren-Moren.
+char zone=WindurstWaters pos=-65.0,-2.9,-145.7 job=WAR lvl=75
+quest Windurst.AFeatherInOnesCap accepted
+item GiantBirdFeather x3
+login
+charvar Quest[2][1]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Baren-Moren GiantBirdFeather x3   # accepted, 3 feathers: 79 (1500)
+finish                                  # fame 16, completed; 1500 gil; the feathers taken; needToZone; Prog kept

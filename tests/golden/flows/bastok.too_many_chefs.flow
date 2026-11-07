@@ -1,0 +1,53 @@
+# Too Many Chefs (bastok 86): Ferghus and Leonhardt in Metalworks, Raginmund in Bastok Markets [S] (a past zone), Umberto in
+# Bastok Markets; one NPC-script quest over five states of the char var TOO_MANY_CHEFS. A full run: the fame guard, the offer
+# declined then accepted, each step in order, a wrong trade, the Red Oven Mitt, Aileen's Delight at the end. The NPCs' defaults
+# stay in their scripts. Ferghus offers it only with ENABLE_WOTG on (the default).
+char zone=Metalworks pos=-23,-10,-27
+item RedOvenMitt x2
+item SilverBeastcoin
+fame Bastok 324                 # fame level 4
+login
+trigger Ferghus                 # not offered: 420
+finish-if-event
+trigger Leonhardt               # 945
+finish-if-event
+fame Bastok 325                 # fame level 5
+trigger Ferghus                 # the offer, 946
+finish option=1                 # declined
+trigger Ferghus                 # 946 again
+finish option=0                 # accepted, TOO_MANY_CHEFS 1
+trigger Ferghus                 # 420
+finish-if-event
+trigger Leonhardt               # part 2, 948
+finish                          # TOO_MANY_CHEFS 2
+trigger Leonhardt               # 945
+finish-if-event
+trade Leonhardt RedOvenMitt x1  # not yet at 3: nothing
+finish-if-event
+warp -59,-4,-139 BastokMarketsS
+trigger Raginmund               # part 3, 112
+finish                          # TOO_MANY_CHEFS 3
+trigger Raginmund               # 111
+finish-if-event
+warp -14,-10,-27 Metalworks
+trigger Leonhardt               # 945
+finish-if-event
+trade Leonhardt SilverBeastcoin x1   # a wrong item: nothing
+finish-if-event
+trade Leonhardt RedOvenMitt x1  # 950, the mitt taken
+finish                          # TOO_MANY_CHEFS 4
+trade Leonhardt RedOvenMitt x1  # past 3: nothing
+finish-if-event
+warp -23,-10,-27 Metalworks
+trigger Ferghus                 # after the trade to Leonhardt: 947
+finish                          # TOO_MANY_CHEFS 5
+trigger Ferghus                 # 420
+finish-if-event
+warp -57,-4,-134 BastokMarkets
+trigger Umberto                 # 473
+finish                          # Aileen's Delight, 50 fame, completed
+trigger Umberto                 # nothing
+finish-if-event
+warp -23,-10,-27 Metalworks
+trigger Ferghus                 # Completed: 420
+finish-if-event

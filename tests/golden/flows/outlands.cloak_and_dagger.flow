@@ -1,0 +1,34 @@
+# Cloak and Dagger (outlands 13): a level 75 Thief, dagger skill 230 (2300), a Dagger of Trials with 300 weapon skill
+# points held (a GM). Jakoh's other replies: A Question of Taste and Everyone's Grudging not set up (no reply); his script
+# acts for Tuning Out only; his default 113. Available: the dagger traded: no trade handler: nothing; Jakoh 279 (Event,
+# once per zone), finished: the dagger held: the Weapon Training Guide, begun (279 reads no option). Accepted: 280 (0,
+# dagger, 0, 0, 2: the dagger held), option 1: the dagger held: nothing; the dagger traded (300 points): 282 (0, Annals of
+# Truth: the dagger taken by confirmTrade; the Map to the Annals of Truth); 283 (the map). Gustav Tunnel's qm1: the map,
+# no annals: the Baronial Bat popped (claimed), SENSE_OMINOUS_PRESENCE; the bat killed: killed_wsnm 1; qm1: the local var
+# cleared, the Annals of Truth (a keyItem reply); qm1 again: nil: its default NOTHING_OUT_OF_ORDINARY. Kazham: Jakoh 284:
+# completed (Windurst fame 20), the three key items taken, Evisceration learnt, EVISCERATION_LEARNED; again: no section:
+# his script, the default 113.
+lists Kazham/Jakoh_Wahcondalo/onTrigger Kazham/Jakoh_Wahcondalo/onTrade GustavTunnel/qm1/onTrigger GustavTunnel/Baronial_Bat/onMobDeath Kazham/onEventFinish/284
+char zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+skill Dagger 2300
+item DaggerOfTrials wsp=300
+login
+trade Jakoh_Wahcondalo DaggerOfTrials x1   # available: no trade handler: nothing
+trigger Jakoh_Wahcondalo                # 279 (Event, once per zone)
+finish                                  # the dagger held: the Weapon Training Guide; begun
+trigger Jakoh_Wahcondalo                # accepted: 280 (0, dagger, 0, 0, 2)
+finish option=1                         # the dagger held: nothing
+trade Jakoh_Wahcondalo DaggerOfTrials x1   # 300 points: 282 (0, Annals of Truth)
+finish                                  # the dagger taken; the Map to the Annals of Truth
+trigger Jakoh_Wahcondalo                # the map: 283
+finish
+warp 52.761,-0.999,19.852 GustavTunnel
+trigger qm1                             # the map, no annals: the Baronial Bat popped; SENSE_OMINOUS_PRESENCE
+kill BARONIAL_BAT                       # the map held: killed_wsnm 1
+trigger qm1                             # killed_wsnm 1: cleared; the Annals of Truth
+trigger qm1                             # the annals held: nil: the default NOTHING_OUT_OF_ORDINARY
+warp 101.702,-15.023,-115.841 Kazham
+trigger Jakoh_Wahcondalo                # the annals: 284
+finish                                  # completed; the key items taken; Evisceration; EVISCERATION_LEARNED
+trigger Jakoh_Wahcondalo                # completed: no section: his script, the default 113
+finish

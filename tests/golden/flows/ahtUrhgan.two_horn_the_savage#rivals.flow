@@ -1,0 +1,61 @@
+# Cacaroon's quests against each other (he has no script, so a lone event always plays): a level 75 Warrior beside him
+# with Two Horn the Savage at Prog 1 (608, an Event, once per zone), Rat Race at Prog 2 (853) or Prog 3 (854), both
+# Events, and Led Astray at Prog 2 (812, a Progress while its Stage bit 2 is clear; a GM clears the Stage after each
+# talk), all by GMs. Four talks each: all three (812 over the Events); Led Astray off, Rat Race 853 and Two Horn 608
+# alone (a tie of Events: 608 plays once per zone, then 853 or 854 alone); Rat Race at Prog 3 with Led Astray (812 over
+# 854), then with Led Astray off (854 and 608).
+lists AhtUrhganWhitegate/Cacaroon/onTrigger AhtUrhganWhitegate/onEventFinish/812
+char zone=AhtUrhganWhitegate pos=-70.5,0,-82.337 job=WAR lvl=75
+quest AhtUrhgan.TwoHornTheSavage accepted
+charvar Quest[6][17]Prog 1
+quest AhtUrhgan.LedAstray accepted
+charvar Quest[6][65]Prog 2
+quest AhtUrhgan.RatRace accepted
+charvar Quest[6][66]Prog 2
+login
+trigger Cacaroon                        # all three: 812 over 853 and 608
+finish
+charvar Quest[6][65]Stage 0              # a GM
+trigger Cacaroon                        # all three: 812 over 853 and 608
+finish
+charvar Quest[6][65]Stage 0              # a GM
+trigger Cacaroon                        # all three: 812 over 853 and 608
+finish
+charvar Quest[6][65]Stage 0              # a GM
+trigger Cacaroon                        # all three: 812 over 853 and 608
+finish
+charvar Quest[6][65]Stage 0              # a GM
+quest AhtUrhgan.LedAstray available       # a GM
+trigger Cacaroon                        # Led Astray off: 853: a tie with 608 (Events), rotation starts here
+finish
+trigger Cacaroon                        # Led Astray off: 608 (the tie rotates; once per zone)
+finish
+trigger Cacaroon                        # Led Astray off: 853: 608 is Ignore now
+finish
+trigger Cacaroon                        # Led Astray off: 853
+finish
+warp -64,-7,38 AlZahbi
+warp -70.5,0,-82.337 AhtUrhganWhitegate  # zoned: 608 plays again
+charvar Quest[6][66]Prog 3              # a GM
+trigger Cacaroon                        # Rat Race Prog 3, Two Horn: 854: a tie with 608 (Events), rotation starts here
+finish
+trigger Cacaroon                        # Rat Race Prog 3, Two Horn: 608 (the tie rotates; once per zone)
+finish
+trigger Cacaroon                        # Rat Race Prog 3, Two Horn: 854: 608 is Ignore now
+finish
+trigger Cacaroon                        # Rat Race Prog 3, Two Horn: 854
+finish
+quest AhtUrhgan.LedAstray accepted        # a GM
+charvar Quest[6][65]Prog 2
+trigger Cacaroon                        # Led Astray Prog 2 again: 812 over 854 and 608
+finish
+charvar Quest[6][65]Stage 0              # a GM
+trigger Cacaroon                        # Led Astray Prog 2 again: 812 over 854 and 608
+finish
+charvar Quest[6][65]Stage 0              # a GM
+trigger Cacaroon                        # Led Astray Prog 2 again: 812 over 854 and 608
+finish
+charvar Quest[6][65]Stage 0              # a GM
+trigger Cacaroon                        # Led Astray Prog 2 again: 812 over 854 and 608
+finish
+charvar Quest[6][65]Stage 0              # a GM

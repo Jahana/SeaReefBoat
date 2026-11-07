@@ -1,0 +1,21 @@
+# Heroes of Abyssea (abyssea 179), the partial: a level 99 Warrior in Port Jeuno with A Journey Begins completed and the
+# quest accepted (GMs). Each pair of its three maw quests completed with the third missing (An Ulcerous Uragnite
+# missing, A Beaked Blusterer missing, A Man-eating Mite missing): the completion section needs all three, so Joachim
+# offers nothing each time.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/341
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.HeroesOfAbyssea accepted
+quest Abyssea.ABeakedBlusterer completed
+quest Abyssea.AManEatingMite completed
+login
+trigger Joachim                         # An Ulcerous Uragnite missing: nothing
+finish-if-event
+quest Abyssea.ABeakedBlusterer available
+quest Abyssea.AnUlcerousUragnite completed
+trigger Joachim                         # A Beaked Blusterer missing: nothing
+finish-if-event
+quest Abyssea.AManEatingMite available
+quest Abyssea.ABeakedBlusterer completed
+trigger Joachim                         # A Man-eating Mite missing: nothing
+finish-if-event

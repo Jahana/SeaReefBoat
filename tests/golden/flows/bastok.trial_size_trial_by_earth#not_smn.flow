@@ -1,0 +1,13 @@
+# Trial-Size Trial by Earth (bastok 72): a WAR of level 20 at fame level 2 is not offered (254); accepted by GM, the
+# WAR's trade of the fork returns nil (the SMN test of the trade), and the talk is 251.
+lists PortBastok/Ferrol/onTrigger PortBastok/Ferrol/onTrade
+char zone=PortBastok pos=33.7,6.5,-39.4 job=WAR lvl=20
+fame Bastok 50
+item MiniTuningForkOfEarth
+login
+trigger Ferrol                 # not a SMN: not offered, 254
+finish
+quest Bastok.TrialSizeTrialByEarth accepted
+trade Ferrol MiniTuningForkOfEarth x1  # not a SMN: nil, nothing
+trigger Ferrol                 # the fork held: 251
+finish

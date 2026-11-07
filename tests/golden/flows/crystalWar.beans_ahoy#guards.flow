@@ -1,0 +1,21 @@
+# Beans Ahoy (crystalWar 29, call-only), the guards: a level 99 Warrior in Southern San d'Oria [S] (missions as the
+# main flow), three Chunks of Lufet Salt and a Lilac. Accepted (a GM), BeansAhoy 0: a salt and the Lilac: 339 (the
+# salt alone is 337). BeansAhoy 1 (a GM), the bag full (a GM), then one free slot (storage inventory 31): a salt: 340,
+# finished: the Angler's Cassoulet fits the one free slot (ITEM_OBTAINED), completed, BeansAhoy 0, the salt taken.
+lists SouthernSanDoriaS/Thierride/onTrigger SouthernSanDoriaS/Thierride/onTrade SouthernSanDoriaS/onEventFinish/340
+char zone=SouthernSanDoriaS pos=-123.038,-2,14.598 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item ChunkOfLufetSalt x3
+item Lilac
+login
+quest CrystalWar.BeansAhoy accepted     # a GM
+trade Thierride ChunkOfLufetSalt x1 Lilac x1 # accepted, BeansAhoy 0, a salt and another item: 339
+finish
+charvar BeansAhoy 1                     # a GM
+fill-inventory                          # a GM: no slot free
+storage inventory 31                    # a GM: exactly one free slot
+trade Thierride ChunkOfLufetSalt x1     # BeansAhoy 1, not needToZone: 340
+finish                                  # the cassoulet in the one free slot; completed; BeansAhoy 0; the salt taken

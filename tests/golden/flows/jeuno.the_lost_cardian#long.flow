@@ -1,0 +1,34 @@
+# The Lost Cardian (jeuno 18): Monberaux's edges. The Wonder Magic Set completed, Cook's Pride accepted and
+# theLostCardianVar 2 (GM): no arm (Cook's Pride not completed): his introduction 109, then 28; the var 3: no arm
+# either: 28. Cook's Pride completed (GM), the var 1: no arm: 28. The var 2: 33; option 2: nothing (the var stays 2).
+# The var 3: 34; option 2: nothing.
+# The var 2: 33 again, option 0 (the long scene's completion): Two's Company, the var 0, 2100 gil, Two of Swords,
+# fame +7 x3, completed, The Kind Cardian begun; Quest[3][18]Prog 1 (GM) kept (the raw player:completeQuest).
+char zone=UpperJeuno pos=-40.9,-0.5,-1.9 job=WAR lvl=75
+quest Jeuno.TheWonderMagicSet completed
+quest Jeuno.CooksPride accepted
+charvar theLostCardianVar 2
+login
+trigger Monberaux                       # Cook's Pride not completed: no arm: 109 (28 queued)
+finish                                  # 109 done; 28 starts
+finish                                  # 28
+charvar theLostCardianVar 3
+trigger Monberaux                       # Cook's Pride not completed, the var 3: no arm (not 34): 28
+finish
+quest Jeuno.CooksPride completed
+charvar theLostCardianVar 1
+trigger Monberaux                       # the var 1: no arm: 28
+finish
+charvar theLostCardianVar 2
+trigger Monberaux                       # the var 2: 33 (28 queued)
+finish option=2                         # nothing; 28 starts
+finish
+charvar theLostCardianVar 3
+trigger Monberaux                       # the var 3: 34 (28 queued)
+finish option=2                         # nothing; 28 starts
+finish
+charvar theLostCardianVar 2
+charvar Quest[3][18]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Monberaux                       # the var 2: 33
+finish option=0                         # completed; The Kind Cardian begun; 28 starts
+finish

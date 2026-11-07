@@ -1,0 +1,29 @@
+# Gates to Paradise (sandoria 18): Olbergieut in Northern San d'Oria, Faurbellant on La Theine Plateau. Available:
+# Faurbellant's FAURBELLANT_1 (the script's), Olbergieut at fame level 1 (612, the script's), at level 2 (619; option
+# 1 declined, option 0 begun with the Scripture of Wind). Accepted: Olbergieut's OLBERGIEUT_DIALOG (Scripture of Wind);
+# Faurbellant with the Wind: FAURBELLANT_2, the Wind taken, the Scripture of Water given; again FAURBELLANT_3.
+# Olbergieut with the Water: 620 (completed: Cotton Cape, fame +20, The Pious One, the Water taken). Completed:
+# Olbergieut's 612, Faurbellant's FAURBELLANT_4.
+char zone=LaTheinePlateau pos=479.3,24.0,-89.9 job=WAR lvl=30
+fame Sandoria 49
+login
+trigger Faurbellant                       # available: no section; FAURBELLANT_1
+warp 91.0,0.0,118.5 NorthernSanDoria
+trigger Olbergieut                        # available, fame level 1: no section; 612
+finish
+fame Sandoria 50
+trigger Olbergieut                        # fame level 2: 619
+finish option=1                           # declined: not begun
+trigger Olbergieut                        # 619
+finish option=0                           # begun; the Scripture of Wind
+trigger Olbergieut                        # accepted, no Water: OLBERGIEUT_DIALOG (Scripture of Wind)
+warp 479.3,24.0,-89.9 LaTheinePlateau
+trigger Faurbellant                       # accepted, the Wind: FAURBELLANT_2; the Wind taken, the Water given
+trigger Faurbellant                       # accepted, no Wind: FAURBELLANT_3 (Scripture of Water)
+warp 91.0,0.0,118.5 NorthernSanDoria
+trigger Olbergieut                        # the Water: 620
+finish                                    # completed: Cotton Cape, fame +20, The Pious One; the Water taken
+trigger Olbergieut                        # completed: no section; 612
+finish
+warp 479.3,24.0,-89.9 LaTheinePlateau
+trigger Faurbellant                       # completed: FAURBELLANT_4

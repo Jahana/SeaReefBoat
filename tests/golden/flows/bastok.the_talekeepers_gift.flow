@@ -1,0 +1,44 @@
+# The Talekeeper's Gift (bastok 56, WAR AF3): Deidogg and Detzo in Bastok Mines, the ??? (qm_talekeeper) and Picklix
+# Longindex, Moxnix Nightgoggle and Doglix Muttsnout (TALEKEEPERS_GIFT_OFFSET + 0, 1, 2) in Behemoth's Dominion, the
+# zone-in to Qufim Island. The guard (The Talekeeper's Truth completed, main job WAR, main level AF3_QUEST_LEVEL 50, its
+# own Timer reached and no mustZone): The Talekeeper's Truth's 165 is played here, so its completion sets both. While
+# available, Deidogg's 170 (Prog 1), Detzo's 171 (Prog 2), the Ginger Cookie at Prog 2 (172: accepted, Prog 0); then
+# the ???'s 100 (declined; then the three NMs: Picklix claimed, the others on enmity), the kills (Prog bits 2, 1, 0: 7)
+# and the zone-in to Qufim Island from Behemoth's Dominion at Prog 7: 100, the reward (those in #nms, at level 75 for the
+# NMs). Defaults: Deidogg 32 (but The
+# Talekeeper's Truth's 166 replaceDefault once completed), Detzo 30, the ??? NOTHING_OUT_OF_ORDINARY. Detzo's mission
+# (8-2) needs what this char lacks.
+lists BastokMines/Deidogg/onTrigger BastokMines/Deidogg/onTrade BastokMines/Detzo/onTrigger BastokMines/onEventFinish/170 BastokMines/onEventFinish/171 BastokMines/onEventFinish/172 BehemothsDominion/qm_talekeeper/onTrigger BehemothsDominion/onEventFinish/100 QufimIsland/onZoneIn/1 QufimIsland/onEventFinish/100
+char zone=BastokMines pos=-13,7,29 job=WAR lvl=50
+quest Bastok.TheTalekeepersTruth accepted
+charvar Quest[1][55]Prog 2
+item BoneChip
+item GingerCookie x2
+login
+trigger Deidogg                 # The Talekeeper's Truth, Prog 2, no Timer: its 165
+finish                          # The Talekeeper's Truth completed: this quest's Timer (tomorrow) and mustZone
+trigger Deidogg                 # the Timer and the mustZone: not offered; The Talekeeper's Truth's 166
+finish
+trade Deidogg GingerCookie x1   # not offered: nothing
+rezone                          # the mustZone cleared
+trigger Deidogg                 # the Timer not reached: not offered; 166
+finish
+wait vana=24
+trade Deidogg GingerCookie x1   # offered, Prog 0, the cookie: nil
+trigger Detzo                   # available, Prog 0: nil, his default 30
+finish
+trigger Deidogg                 # Prog 0: 170
+finish                          # Prog 1
+trigger Deidogg                 # Prog 1: nil; 166
+finish
+trigger Detzo                   # Prog 1: 171
+finish                          # Prog 2
+trigger Detzo                   # Prog 2: nil, 30
+finish
+trigger Deidogg                 # Prog 2: nil; 166
+finish
+trade Deidogg BoneChip x1       # Prog 2, not the cookie: nil
+trade Deidogg GingerCookie x1   # Prog 2, the cookie: 172
+finish                          # the cookie taken, accepted, Prog 0
+trigger Deidogg                 # accepted: no handler; 166
+finish

@@ -1,0 +1,41 @@
+# Missionary Man (outlands): Rauteinot in Kazham (call-only: scripts/zones/Kazham/npcs/Rauteinot.lua); no default beside
+# his script. Mulaujeant's part (Northern San d'Oria) stays Lua and is a GM here. Windurst fame level 2 (124): 136 (the
+# script's). Level 3 (125): the marble traded (the var 0): nothing; 137 (0, 1146); finished on 0: not begun; on 1:
+# begun, MissionaryManVar 1. 138 (0, 1146). The marble and a pebble: nothing; a pebble: nothing. The marble: 139,
+# finished: MissionaryManVar 2, Rauteinot's Parcel, the marble taken. 140. MissionaryManVar 3 (a GM: Mulaujeant's 698):
+# 140. 4 and the Sublime Statue (a GM: Mulaujeant's 700): 141; the inventory full: the scroll's message, nothing more;
+# with room: the Scroll of Teleport-Yhoat, the var 0, the statue taken, fame +30, completed. Completed: 142.
+char zone=Kazham pos=-37.9,-10,-89.7 job=WHM lvl=75
+fame Windurst 124
+item SlabOfElshimoMarble
+item Pebble x2
+login
+trigger Rauteinot                       # level 2: 136
+finish
+fame Windurst 125
+trade Rauteinot SlabOfElshimoMarble x1  # the var 0: nothing
+trigger Rauteinot                       # 137
+finish option=0                         # not begun
+trigger Rauteinot                       # 137
+finish option=1                         # begun; the var 1
+trigger Rauteinot                       # 138
+finish
+trade Rauteinot SlabOfElshimoMarble x1 Pebble x1   # two items: nothing
+trade Rauteinot Pebble x1               # no marble: nothing
+trade Rauteinot SlabOfElshimoMarble x1  # 139
+finish                                  # the var 2; the parcel; the marble taken
+trigger Rauteinot                       # 2: 140
+finish
+charvar MissionaryManVar 3              # a GM: Mulaujeant's 698
+trigger Rauteinot                       # 3: 140
+finish
+charvar MissionaryManVar 4              # a GM: Mulaujeant's 700
+keyitem SublimeStatueOfTheGoddess
+fill-inventory
+trigger Rauteinot                       # 4: 141
+finish                                  # no room: the scroll's message only
+free-inventory
+trigger Rauteinot                       # 141
+finish                                  # the scroll; the var 0; the statue taken; fame +30; completed
+trigger Rauteinot                       # completed: 142
+finish

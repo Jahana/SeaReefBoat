@@ -1,0 +1,30 @@
+# Grave Concerns (sandoria 11) and San d'Oria mission 1-2 Bat Hunt on the Tombstone: the reply kind of the quest's 2.
+# A San d'Oria char on Bat Hunt (mission status 0: its section 2, the Tombstone's progressCutscene 4) with Grave
+# Concerns accepted by GM and the skin held (the quest's first arm: progressEvent 2, no side effect). Both replies are
+# Progress priority: the lookup's action cycle (the char's local var [Action][Tombstone_Upper][onTrigger], the last
+# event id it played) plays 4 first. 4's finish would close Bat Hunt's section (mission status 2; neither `mission ...
+# completed` nor `mission ... current` resets it, and addMission refuses to overwrite a current mission), so the event
+# is left by a rezone instead: no finish runs (the status stays 0), but the zone change drops the cycle's local var.
+# The GM sets it back to 4, and the next talk, both sections open, moves on to the quest's 2. An Event-priority 2 would
+# lose to 4 there. No other quest or mission names the Tombstone.
+# The local var's name is the lookup's: interaction_lookup.lua:384 names the cycle var with
+# actionUtil.getActionVarName(containerId, handlerId), and action_util.lua:127 formats it as '[Action][%s][%s]%s' (no
+# suffix here): [Action][Tombstone_Upper][onTrigger]. The localvar step below writes that name; a change to the format
+# needs this step changed with it.
+lists KingRanperresTomb/Tombstone_Upper/onTrigger KingRanperresTomb/onEventFinish/2 KingRanperresTomb/onEventFinish/4
+char zone=KingRanperresTomb pos=1.0,-1.4,-102.0 job=WAR lvl=30 nation=0
+mission Sandoria BatHunt current
+quest Sandoria.GraveConcerns accepted
+item SkinOfWellWater
+login
+trigger Tombstone_Upper                   # Bat Hunt's 4 and the quest's 2 tie (Progress): the cycle's first, 4
+rezone                                    # out and back in with 4 open: no finish, Bat Hunt's status stays 0; the cycle var is gone
+trigger Tombstone_Upper                   # 4 again (the cycle starts over)
+rezone                                    # left again with no finish
+localvar [Action][Tombstone_Upper][onTrigger] 4   # GM: the cycle's last action, 4
+trigger Tombstone_Upper                   # both open, the cycle past 4: the quest's 2
+finish                                    # DroppedWaterskin 0 (the skin held): nothing
+trigger Tombstone_Upper                   # the cycle past 2: Bat Hunt's 4
+finish                                    # Bat Hunt: mission status 2 (its section closes)
+trigger Tombstone_Upper                   # Bat Hunt's section shut: the quest's 2 alone
+finish

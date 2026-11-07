@@ -1,0 +1,45 @@
+# Wild Card (windurst 77): at Windurst rank 9 (the Apururu side of each rank test). Accepted by GM at Prog 1 (Crying
+# Over Onions completed, level 5, fame 325). _6n2 (Windurst Walls), Prog 1, rank 9: 388 (Prog 3); Prog 3 without the
+# card: nil. Apururu (Windurst Woods) at Prog 3: 600 (no card held: the card "taken", 8000 gil, Prog 4: kept quirk); at
+# Prog 4: nil: his default 274 (the handler's turn after 600, a Progress line). Prog 3 by GM: the Toraimarai Canal
+# coffer at Prog 3 without the card: the Joker Card. _6n2 with the card, Prog 3, rank 9: 389: the card taken, 8000 gil,
+# Prog 4. Last, Prog 1 with the card held by GM: the Prog 1 arm first: 388 (not 389).
+# The Star Onion quests 1-4 completed by GM (an available one's line would otherwise answer at Kohlo-Lakolo first).
+lists WindurstWalls/_6n2/onTrigger WindurstWoods/Apururu/onTrigger ToraimaraiCanal/Treasure_Coffer/onTrade WindurstWalls/onEventFinish/388 WindurstWalls/onEventFinish/389 WindurstWoods/onEventFinish/600
+char zone=WindurstWalls pos=-24.5,-14.498,262.994 lvl=5 nation=2
+rank 9
+fame Windurst 325
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.OnionRings completed
+quest Windurst.CryingOverOnions completed
+quest Windurst.WildCard accepted
+charvar Quest[2][77]Prog 1
+item ToraimariCofferKey
+login
+trigger _6n2                                   # Prog 1, rank 9: 388
+finish                                         # Prog 3
+trigger _6n2                                   # Prog 3, no card: nil; DOORS_SEALED_SHUT
+finish-if-event
+warp -192.6,-10.4,-122.9 WindurstWaters
+trigger Honoi-Gomoi                            # Prog 3: 781 (not Prog 4)
+finish
+warp -10.6,-2.75,15.9 WindurstWoods
+trigger Apururu                                # Prog 3: 600
+finish                                         # no card to take; 8000 gil; Prog 4
+trigger Apururu                                # Prog 4: nil; his default 274 (the handler's turn after 600)
+finish
+charvar Quest[2][77]Prog 3                     # GM
+warp -257.5,24.0,82.0 ToraimaraiCanal
+tick 13000
+trigger Treasure_Coffer
+trade Treasure_Coffer ToraimariCofferKey x1    # Prog 3, no card: the treasure trade, the Joker Card
+tick 4500
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # Prog 3, the card, rank 9: 389
+finish                                         # the card taken; 8000 gil; Prog 4
+charvar Quest[2][77]Prog 1                     # GM
+keyitem JokerCard                              # GM
+trigger _6n2                                   # Prog 1 with the card: the Prog 1 arm: 388
+finish                                         # Prog 3

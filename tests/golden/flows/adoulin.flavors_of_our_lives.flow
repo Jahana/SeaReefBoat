@@ -1,0 +1,81 @@
+# Flavors of Our Lives (adoulin 46): a level 99 Warrior in Western Adoulin, SoA at its start (current 0, before
+# Budding Prospects); Vana'diel day 8000. Berghent: the local var Flavors_of_Our_Lives_Refused 2 (a GM): 80 (only 1
+# counts), finished on 0: refused (the var 1); 81, finished on 0 and on 2: nothing; on 1: begun. Prog 0: Berghent 82;
+# Dewalt: nothing from the quest (his script / default 5017); Masad: SoA 0 <= Budding Prospects:
+# Mission[12][11]Timer 8001 and its mustZone, this quest's Timer 8001; 83, finished: Prog 1. Prog 1: Masad 104 (a
+# progressEvent: the Timer to come); the Timer 8000 (today, a GM): 104 as an Event once per zone, then nothing on a
+# second talk; a zone change: 104 again; the Timer 7999 (a GM): 104 once more. Berghent 82; Dewalt 85, finished: Prog 2.
+# Prog 2: Masad nothing (no section holds him); Berghent 82; Dewalt 105. Rala Waterways: Chalvava 8, finished: Prog 3;
+# Chalvava 9. Prog 3 without the Blightberry: Masad nothing; Berghent 82, Dewalt 105. The Blightberry by a GM (the
+# Harvesting Point's trade gives it only through the HELM wait: #harvest). Prog 3 with it: Dewalt nothing from the
+# quest; Chalvava nothing; Berghent 87, finished: completed (300 bayld, 500 exp, Potation Pathfinder; no fame area), the
+# Blightberry kept. Completed: Berghent 88; Dewalt, Masad: nothing.
+lists WesternAdoulin/Berghent/onTrigger WesternAdoulin/Masad/onTrigger WesternAdoulin/Dewalt/onTrigger
+lists RalaWaterways/Chalvava/onTrigger WesternAdoulin/onEventFinish/80 WesternAdoulin/onEventFinish/81
+lists WesternAdoulin/onEventFinish/83 WesternAdoulin/onEventFinish/85 RalaWaterways/onEventFinish/8
+lists WesternAdoulin/onEventFinish/87
+char zone=WesternAdoulin pos=97.221,-0.148,-28.68 job=WAR lvl=99
+login
+localvar Flavors_of_Our_Lives_Refused 2 # a GM
+trigger Berghent                        # available, the var 2 (not 1): 80
+finish option=0                         # refused: Flavors_of_Our_Lives_Refused 1
+trigger Berghent                        # refused before: 81
+finish option=0                         # nothing
+trigger Berghent                        # 81
+finish option=2                         # not option 1: nothing
+trigger Berghent                        # 81
+finish option=1                         # begun
+trigger Berghent                        # Prog 0: 82 (an Event)
+finish
+trigger Dewalt                          # Prog 0: nothing from the quest: his script / default 5017
+finish-if-event
+trigger Masad                           # Prog 0, SoA 0: the mission's Timer and mustZone, the quest's Timer; 83
+finish                                  # Prog 1
+trigger Masad                           # Prog 1, the Timer 8001: 104 (a progressEvent)
+finish
+charvar Quest[9][46]Timer 8000          # a GM: today
+trigger Masad                           # Prog 1, the Timer today: 104 (an Event, once per zone)
+finish
+trigger Masad                           # the same zone: 104 is spent: nothing (no script, no default)
+warp -316.5,-1,-318 RalaWaterways
+warp -26.682,-0.65,-91.991 WesternAdoulin
+trigger Masad                           # a new zone visit: 104
+finish
+warp -316.5,-1,-318 RalaWaterways
+warp -26.682,-0.65,-91.991 WesternAdoulin
+charvar Quest[9][46]Timer 7999          # a GM: yesterday
+trigger Masad                           # Prog 1, the Timer passed: 104 (an Event)
+finish
+trigger Berghent                        # Prog 1: 82
+finish
+trigger Dewalt                          # Prog 1: 85
+finish                                  # Prog 2
+trigger Masad                           # Prog 2: no section holds Masad: nothing
+trigger Berghent                        # Prog 2: 82
+finish
+trigger Dewalt                          # Prog 2: 105 (an Event)
+finish
+warp -316.5,-1,-318 RalaWaterways
+trigger Chalvava                        # Prog 2: 8
+finish                                  # Prog 3
+trigger Chalvava                        # Prog 3, no Blightberry: 9 (an Event)
+finish
+warp 97.221,-0.148,-28.68 WesternAdoulin
+trigger Masad                           # Prog 3: nothing
+trigger Berghent                        # Prog 3, no Blightberry: 82
+finish
+trigger Dewalt                          # Prog 3, no Blightberry: 105
+finish
+keyitem Blightberry                     # a GM (the Harvesting Point's trade raises before it: #harvest)
+trigger Dewalt                          # Prog 3 with the Blightberry: nothing from the quest
+finish-if-event
+warp -316.5,-1,-318 RalaWaterways
+trigger Chalvava                        # Prog 3 with the Blightberry: nothing
+warp 97.221,-0.148,-28.68 WesternAdoulin
+trigger Berghent                        # Prog 3 with the Blightberry: 87
+finish                                  # completed: 300 bayld, 500 exp, Potation Pathfinder; the Blightberry kept
+trigger Berghent                        # completed: 88 (an Event)
+finish
+trigger Dewalt                          # completed: nothing from the quest
+finish-if-event
+trigger Masad                           # completed: nothing

@@ -1,0 +1,20 @@
+# Seeing Spots (crystalWar 10), the edges: a level 99 Warrior in Southern San d'Oria [S] (missions as the main
+# flow), five Ladybug Wings. Available: four wings: nil (no available trade). Wyatt 2, finished on option 1: begun (any
+# option). Three wings: nil; five: nil (not exactly four). Four wings, the bag full (a GM): 4, finished: the
+# completion gives gil and a title only, so it does not fail: completed, confirmed.
+lists SouthernSanDoriaS/Wyatt/onTrigger SouthernSanDoriaS/Wyatt/onTrade SouthernSanDoriaS/onEventFinish/2 SouthernSanDoriaS/onEventFinish/4
+char zone=SouthernSanDoriaS pos=125.517,0,84.169 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+item LadybugWing x5
+login
+trade Wyatt LadybugWing x4              # available: nil (WYATT_DIALOG is a talk default only)
+trigger Wyatt                           # 2
+finish option=1                         # begun (any option)
+trade Wyatt LadybugWing x3              # three: nil
+trade Wyatt LadybugWing x5              # five: nil
+fill-inventory                          # a GM: no slot free
+trade Wyatt LadybugWing x4              # four alone: 4
+finish                                  # no item in the reward: completed; confirmed

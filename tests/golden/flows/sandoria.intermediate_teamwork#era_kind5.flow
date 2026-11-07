@@ -1,0 +1,35 @@
+# Intermediate Teamwork (sandoria 64) with its era module (quest rework B3b, Task 9): five Humes in a party of six. The
+# module (xi.pre(xi.expansion.ROV): RESTRICT_CONTENT 1, ENABLE_ROV 0) needs six of main's kind (same-race count >= 6);
+# fay is an Elvaan male (race 3): #party 6 passes, the count is 5, updateEvent(4, 2) (the quest's own: 15, 2); finish
+# option 0 with the local Prog 0: nothing.
+module modules/era/lua/quests/sandoria/intermediate_teamwork.lua
+lists WestRonfaure/Vilatroire/onTrigger WestRonfaure/onEventUpdate/129 WestRonfaure/onEventFinish/129
+char zone=WestRonfaure pos=-258.861,-70.999,423.42 job=WAR race=1 lvl=10
+char bob zone=WestRonfaure pos=-258.861,-70.999,428 job=WAR race=2 lvl=10
+char carl zone=WestRonfaure pos=-256,-70.999,426 job=WAR race=1 lvl=10
+char dave zone=WestRonfaure pos=-256,-70.999,421 job=WAR race=2 lvl=10
+char eve zone=WestRonfaure pos=-261.5,-70.999,426 job=WAR race=1 lvl=10
+char fay zone=WestRonfaure pos=-261.5,-70.999,421 job=WAR race=3 lvl=10
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Sandoria.IntroductionToTeamwork completed
+quest Sandoria.IntermediateTeamwork accepted
+login
+bob: login
+carl: login
+dave: login
+eve: login
+fay: login
+invite bob
+bob: accept
+invite carl
+carl: accept
+invite dave
+dave: accept
+invite eve
+eve: accept
+invite fay
+fay: accept                               # six: five Humes, fay an Elvaan
+trigger Vilatroire                        # 129 { [1] = 2 }
+update 129 option=0                       # #party 6; five Humes (below 6): updateEvent(4, 2)
+finish                                    # option 0, the local Prog 0: nothing

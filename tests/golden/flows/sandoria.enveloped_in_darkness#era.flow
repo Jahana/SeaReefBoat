@@ -1,0 +1,29 @@
+# Enveloped in Darkness (sandoria 85) with its era module (quest rework B3b, Task 9):
+# modules/era/lua/quests/sandoria/enveloped_in_darkness.lua, enabled by its condition xi.pre(xi.expansion.SOA)
+# (RESTRICT_CONTENT 1, ENABLE_SOA 0), replaces section 2's Crawlers' Nest onEventFinish 4 with a copy of the quest's own
+# whose option 1 sets Time = JstMidnight() (1800025200, seven hours after the harness clock's 1800000000), where the
+# quest's own sets now + 30 (1800000030). Accepted by GM at Prog 3 with the Crawler Blood and the Old Boots, beside qm8:
+# 4 finished with option 0 and with option 2 (both sides of option == 1: nothing), then with option 1 (the module's
+# Time, both key items deleted, YOU_BURY_THE); EQUIPMENT_NOT_PURIFIED before the JST midnight; a JST day later 5
+# (completed: Warlock's Boots, fame +20).
+module modules/era/lua/quests/sandoria/enveloped_in_darkness.lua
+lists CrawlersNest/qm8/onTrigger CrawlersNest/onEventFinish/4 CrawlersNest/onEventFinish/5
+char zone=CrawlersNest pos=58.9,0.4,69 job=RDM lvl=50
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+quest Sandoria.TheCrimsonTrial completed
+quest Sandoria.EnvelopedInDarkness accepted
+charvar Quest[0][85]Prog 3
+keyitem CrawlerBlood
+keyitem OldBoots
+login
+trigger qm8                               # Prog 3, no Time, the blood and the boots: 4
+finish                                    # option 0 (below 1): nothing; the key items kept
+trigger qm8                               # 4
+finish option=2                           # option 2 (above 1): nothing
+trigger qm8                               # 4
+finish option=1                           # Time = JstMidnight() (the module), not now + 30; both deleted; YOU_BURY_THE
+trigger qm8                               # Time not reached: EQUIPMENT_NOT_PURIFIED
+wait jst=1                                # past the next JST midnight
+trigger qm8                               # Time reached: 5
+finish                                    # completed: Warlock's Boots, fame +20

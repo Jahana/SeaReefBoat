@@ -1,0 +1,20 @@
+# Blade of Evil at Prog 1: area 8's 14 with a full inventory (the Chaos Burgeonet does not fit: not completed), then
+# again with room (completed).
+lists MiddleDelkfuttsTower/onTriggerAreaEnter/8 MiddleDelkfuttsTower/onEventFinish/14
+char zone=MiddleDelkfuttsTower pos=86.9,-79.6,79 job=DRK lvl=50
+quest Bastok.DarkPuppet completed
+quest Bastok.BladeOfEvil accepted
+charvar Quest[1][59]Prog 1
+login
+tick 1000
+tick 1000
+tick 1000
+fill-inventory
+walk 86.5,-81.5,86                   # area 8 at Prog 1: 14
+finish                               # option 0, the inventory full: not completed, Prog 1 kept
+finish-if-event                      # the porter's 7, queued behind 14 (the lookup runs the zone's fallback after the quest's action); option 0 moves nobody
+free-inventory
+walk 86.9,-79.6,79
+walk 86.5,-81.5,86                   # 14 again
+finish                               # completed
+finish-if-event                      # the porter's 7, queued behind 14 (the lookup runs the zone's fallback after the quest's action); option 0 moves nobody

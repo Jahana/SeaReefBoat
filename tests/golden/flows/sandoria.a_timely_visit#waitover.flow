@@ -1,0 +1,14 @@
+# A Timely Visit (sandoria 105): qm1's Wait at its edge, set by a GM (npclocalvar, quest rework P5): only the NMs' mob
+# scripts set it (GetSystemTime() + 180 at their despawn). Stage 1, Prog 5, at 20:00. The harness's GetSystemTime() is
+# 1800000000 (its clock moves only with wait jst). Wait one second ahead: the wait not over, no NM up, night: nil (the
+# qm's own DUG_UP). Wait at GetSystemTime() itself: over (GetSystemTime() >= Wait), both NMs pop; SENSE_OF_FOREBODING.
+char zone=JugnerForest pos=-309.382,-0.139,407.377 job=WAR lvl=75
+quest Sandoria.ATimelyVisit accepted
+charvar Quest[0][105]Prog 5
+charvar Quest[0][105]Stage 1
+login
+wait vana=8
+npclocalvar qm1 Wait 1800000001
+trigger qm1                               # the wait not over: nil
+npclocalvar qm1 Wait 1800000000
+trigger qm1                               # GetSystemTime() >= Wait: both popped and claimed; SENSE_OF_FOREBODING

@@ -1,0 +1,23 @@
+# Sorcery of the North (sandoria 83): accepted by GM with the tome (Healing the Land not completed: the status alone
+# opens Eperdur's 687); a full inventory at 687 (no scroll: not completed; the tome kept); then Coullene takes a flyer
+# (Flyers for Regine accepted by GM; the flyer was alone in its slot), so exactly 1 slot is free: completed,
+# Quest[0][83]Prog 1 (GM) kept (the raw player:completeQuest).
+char zone=NorthernSanDoria pos=126.3,-6.5,95.7 job=WAR lvl=50
+quest Sandoria.SorceryOfTheNorth accepted
+quest Sandoria.FlyersForRegine accepted
+keyitem FeiyinMagicTome
+item MagicmartFlyer
+login
+fill-inventory
+trigger Eperdur                           # 678
+finish-if-event
+trigger Eperdur                           # accepted, the tome: 687
+finish-if-event                           # no room for the scroll: not completed; the tome kept
+warp 144.4,0.0,127.6 NorthernSanDoria
+trade Coullene MagicmartFlyer x1          # Flyers for Regine: the flyer taken; 1 slot free
+warp 126.3,-6.5,95.7 NorthernSanDoria
+trigger Eperdur                           # 678
+finish-if-event
+charvar Quest[0][83]Prog 1                # a GM: the quest's own var (the raw completeQuest keeps it)
+trigger Eperdur                           # 687
+finish-if-event                           # exactly 1 free slot: completed; Quest[0][83]Prog kept

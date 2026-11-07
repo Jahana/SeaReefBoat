@@ -1,0 +1,47 @@
+# Everyone's Grudge (outlands): Magephaud in Norg (call-only: scripts/zones/Norg/npcs/Magephaud.lua). He has a default
+# (DefaultActions 115) beside his script, so the lookup alternates: the first talk plays 115, the next runs his script
+# (when the script starts nothing, the lookup plays 115 after it), and so on; each script turn is the second of a pair.
+# Available at Norg fame level 2 with no tonberry kill: nothing (115). EVERYONES_GRUDGE_KILLS 1 (a GM: the tonberry mixin
+# counts it) at fame level 1: nothing (115). Level 2: three coins traded: not accepted: nothing; 116 (Gold Beastcoin),
+# finished: begun, EveryonesGrudgeStarted 1. 117. Two coins: nothing; three coins and a pebble: nothing. Three coins: 118,
+# finished: completed, the coins taken, fame +20, the Tonberry Priest Key, Started 0, the title. Completed: 119; three
+# coins: not accepted: nothing. Started 1 again (a GM): 117 (the var arm comes before the completed one).
+char zone=Norg pos=13,0,7 job=WAR lvl=75
+fame Norg 50
+item GoldBeastcoin x6
+item Pebble
+login
+trigger Magephaud                       # default turn: 115
+finish
+trigger Magephaud                       # script, no kill: nothing; then 115
+finish
+charvar EVERYONES_GRUDGE_KILLS 1        # a GM: the tonberry mixin's count
+fame Norg 49
+trigger Magephaud                       # default turn: 115
+finish
+trigger Magephaud                       # script, fame level 1: nothing; then 115
+finish
+fame Norg 50
+trade Magephaud GoldBeastcoin x3        # available: nothing
+trigger Magephaud                       # default turn: 115
+finish
+trigger Magephaud                       # script: 116 (Gold Beastcoin)
+finish                                  # begun; Started 1
+trigger Magephaud                       # default turn: 115
+finish
+trigger Magephaud                       # script, Started 1: 117
+finish
+trade Magephaud GoldBeastcoin x2        # two: nothing
+trade Magephaud GoldBeastcoin x3 Pebble x1   # four items: nothing
+trade Magephaud GoldBeastcoin x3        # 118
+finish                                  # completed; taken; fame +20; the key; Started 0; the title
+trigger Magephaud                       # default turn: 115
+finish
+trigger Magephaud                       # script, completed: 119
+finish
+trade Magephaud GoldBeastcoin x3        # completed: nothing
+charvar EveryonesGrudgeStarted 1        # a GM
+trigger Magephaud                       # default turn: 115
+finish
+trigger Magephaud                       # script, Started 1 before completed: 117
+finish

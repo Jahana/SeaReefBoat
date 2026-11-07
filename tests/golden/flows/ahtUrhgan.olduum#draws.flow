@@ -1,0 +1,38 @@
+# Olduum's draws, with no GM pin: a level 75 Warrior in Aydeewa Subterrane with six Pickaxes, Olduum accepted at Prog 2
+# (GMs). Each Pickaxe to an Excavation Site draws randomInt(1, 100) <= 50 from the world's seeded RNG; a GM takes any
+# cell after each finish so the next trade is taken. The seed draws: a success (Prog 1, the Electrocell), a success
+# (Prog 2, the Electropot), a failure (mineFail 1: 0 ([1] = 1); finished: mineFail cleared, no cell, Prog 2 kept), a
+# success after it (mineFail 0 again: the Electropot), then two failures.
+lists AydeewaSubterrane/Excavation_Site/onTrade AydeewaSubterrane/onEventFinish/0
+char zone=AydeewaSubterrane pos=392,0.984,349.642 job=WAR lvl=75
+item Pickaxe x6
+quest AhtUrhgan.Olduum accepted
+charvar Quest[6][2]Prog 2
+login
+trade Excavation_Site Pickaxe x1        # a success: Prog 1, 0 ([0] = Electrocell)
+finish                                  # the Electrocell; the pickaxe taken
+delkeyitem Electrocell                  # a GM (each cell, held or not)
+delkeyitem Electropot
+delkeyitem Electrolocomotive
+trade Excavation_Site Pickaxe x1        # a success: Prog 2, 0 ([0] = Electropot)
+finish                                  # the Electropot; the pickaxe taken
+delkeyitem Electrocell                  # a GM (each cell, held or not)
+delkeyitem Electropot
+delkeyitem Electrolocomotive
+trade Excavation_Site Pickaxe x1        # a failure: mineFail 1, 0 ([1] = 1)
+finish                                  # mineFail: cleared; no cell; the pickaxe taken
+delkeyitem Electrocell                  # a GM (each cell, held or not)
+delkeyitem Electropot
+delkeyitem Electrolocomotive
+trade Excavation_Site Pickaxe x1        # a success: 0 ([0] = Electropot)
+finish                                  # mineFail 0: the Electropot; the pickaxe taken
+delkeyitem Electrocell                  # a GM (each cell, held or not)
+delkeyitem Electropot
+delkeyitem Electrolocomotive
+trade Excavation_Site Pickaxe x1        # a failure: 0 ([1] = 1)
+finish                                  # mineFail: cleared; the pickaxe taken
+delkeyitem Electrocell                  # a GM (each cell, held or not)
+delkeyitem Electropot
+delkeyitem Electrolocomotive
+trade Excavation_Site Pickaxe x1        # a failure: 0 ([1] = 1)
+finish                                  # mineFail: cleared; the pickaxe taken

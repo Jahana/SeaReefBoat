@@ -1,0 +1,33 @@
+# Making Amens! (windurst 8): the other operands. Kuroido-Moido: Making Amends completed, level 4, the Broken Wand held
+# (a GM's): 280 (the wand not read), option 1: begun (any option). Completed with the wand: 286 (0, 937), not 284 (284
+# wants the quest accepted). The wand taken (a GM). Mashira: completed: his standard 11 (3), option 0: nothing (not
+# accepted: no wand). Available: 11 (3), option 0: nothing. Accepted (GM): 11 (0); the quest set available inside the
+# event (GM), option 0: nothing (the finish reads the status). Accepted again (GM): a Bone Chip traded (he has no
+# onTrade: nothing); 11 (0), option 0: the wand; the chip kept (user ruling 2026-11-04, kept Lua bugs: the Lua's
+# player:tradeComplete() there took the chip still in the trade container).
+char zone=PortWindurst pos=-109.1,-4.25,102.06 job=WAR lvl=75
+fame Windurst 225
+keyitem BrokenWand
+item BoneChip
+login
+quest Windurst.MakingAmends completed
+trigger Kuroido-Moido+7                 # Making Amends completed, level 4, available: 280 (the wand not read)
+finish option=1                         # begun (any option)
+quest Windurst.MakingAmens completed
+trigger Kuroido-Moido+7                 # completed, the wand held: 286 (0, 937), not 284
+finish
+delkeyitem BrokenWand                   # a GM
+warp 141.5,-6.0,139.1 GarlaigeCitadel
+trigger Mashira                         # completed: his standard 11 (3)
+finish option=0                         # not accepted: nothing (no wand)
+quest Windurst.MakingAmens available
+trigger Mashira                         # available: his standard 11 (3)
+finish option=0                         # not accepted: nothing
+quest Windurst.MakingAmens accepted
+trigger Mashira                         # accepted, no wand: 11 (0)
+quest Windurst.MakingAmens available
+finish option=0                         # available at the finish: nothing
+quest Windurst.MakingAmens accepted
+trade Mashira BoneChip x1               # no onTrade: nothing
+trigger Mashira                         # accepted, no wand: 11 (0)
+finish option=0                         # the Broken Wand; the Bone Chip kept

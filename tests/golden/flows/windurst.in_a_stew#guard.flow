@@ -1,0 +1,31 @@
+# In a Stew (windurst 45): section 1's operands, by GM, a level-10 WAR at Kuoh Rhel. Each line changes one operand from
+# the met state (Chocobilious completed, its mustZone clear, fame 50, Prog 0, Wait 0): fame 49 (level 1): not met (nil;
+# his script; 222); Chocobilious's mustZone 241: not met; Chocobilious accepted: not met (the default 222 on the action's
+# turn: his script's 225 would answer the next talk); Wait 1800198000 (== the tally): not met; Wait 1800197999: met, 235. Accepted by GM at Prog 0:
+# met with the status accepted: 234 (not 235).
+lists WindurstWoods/Kuoh_Rhel/onTrigger
+char zone=WindurstWoods pos=133.4,-5,-102.7 job=WAR lvl=10
+quest Windurst.Chocobilious completed
+fame Windurst 49
+login
+trigger Kuoh_Rhel                             # fame level 1: not met; nil; 222
+finish
+fame Windurst 50
+charvar Quest[2][27]mustZone 241
+trigger Kuoh_Rhel                             # Chocobilious's mustZone: not met; nil; his script's turn (nothing); 222
+finish
+charvar Quest[2][27]mustZone 0
+quest Windurst.Chocobilious available          # GM: a GM accept over a completed quest keeps it completed
+quest Windurst.Chocobilious accepted
+trigger Kuoh_Rhel                             # Chocobilious not completed: not met; the default's turn: 222 (his script's 225 would answer the next talk)
+finish
+quest Windurst.Chocobilious completed
+charvar Quest[2][45]Wait 1800198000
+trigger Kuoh_Rhel                             # Wait == NextConquestTally(): not met (<); nil
+finish
+charvar Quest[2][45]Wait 1800197999
+trigger Kuoh_Rhel                             # Wait one second before the tally: met; available: 235
+finish option=0                               # 235's finish begins on any option; Prog 1
+charvar Quest[2][45]Prog 0
+trigger Kuoh_Rhel                             # Prog 0 again, accepted: section 1; 234
+finish option=0

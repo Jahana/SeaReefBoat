@@ -1,0 +1,34 @@
+# Uleguerand - Dominion Op #07 (abyssea 107, op 580), kill credit: main and bob (a party) and cid (alone), level 99
+# Warriors in Abyssea - Uleguerand; the op's onMobDeath runs for each member of the killer's alliance in the zone
+# (luautils::OnMobDeath, optParams.isKiller true for the killer only), and the handler reads no optParams. Bob and cid
+# accepted (a GM), main not: main kills a Svelldrake: main (the killer, available) nothing; bob (not the killer):
+# Prog 1; cid (not in the party): nothing. Main accepted (a GM): bob kills one: bob Prog 2, main (not the killer)
+# Prog 1, cid nothing. One dead with no killer (nokiller): the lookup's handlers get no player: nothing for anyone. Cid
+# kills one: cid Prog 1; main and bob (another party) nothing. Abyssea - Uleguerand's IDs.lua names no mob, so each kill
+# names its mob by id (kill #<id>). Perfect Dodge, Invincible and Elemental Sforzo (GM effects) keep the chars alive
+# through the kills (the Abyssea mobs aggro and link).
+lists AbysseaUleguerand/Svelldrake/onMobDeath
+char zone=AbysseaUleguerand pos=-240,-40,-520 job=WAR lvl=99
+char bob zone=AbysseaUleguerand pos=-240,-40,-518 job=WAR lvl=99
+char cid zone=AbysseaUleguerand pos=-240,-40,-516 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+bob: login
+bob: effect 49                          # a GM: Perfect Dodge (melee hits evaded)
+bob: effect 50                          # a GM: Invincible (no physical damage)
+bob: effect 522                         # a GM: Elemental Sforzo (no magic damage)
+cid: login
+cid: effect 49                          # a GM: Perfect Dodge (melee hits evaded)
+cid: effect 50                          # a GM: Invincible (no physical damage)
+cid: effect 522                         # a GM: Elemental Sforzo (no magic damage)
+invite bob
+bob: accept
+bob: quest Abyssea.DominionOp07Uleguerand accepted # a GM
+cid: quest Abyssea.DominionOp07Uleguerand accepted # a GM
+kill #17813715                          # main the killer: bob Prog 1
+quest Abyssea.DominionOp07Uleguerand accepted # a GM
+bob: kill #17813716                     # bob Prog 2, main Prog 1
+kill #17813717 nokiller                 # no killer: nothing
+cid: kill #17813718                     # cid Prog 1

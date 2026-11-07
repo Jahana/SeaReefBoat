@@ -1,0 +1,23 @@
+# Unlocking a Myth: Warrior (jeuno 102) under the era module modules/era/lua/globals/equipment/unlocking_a_myth.lua
+# (Module:new('unlocking_a_myth', xi.pre(xi.expansion.ABYSSEA)): RESTRICT_CONTENT 1, ENABLE_ABYSSEA 0). The module
+# overrides the global xi.equipment.vigilWeaponRequiredWsPoints (by NyzulFloorProgress) and the Vigil weapons'
+# onItemEquip, not the quest, so the server's Lua module loader applies it on both sides (platform round P11) and the C#
+# quest reads the global through Player.VigilWeaponRequiredWsPoints. Accepted by a GM, the Sturdy Axe at 250 points:
+# NyzulFloorProgress 0: 16000 required: 250 <= 3200: 10091; 80: 880 required: 250 <= 704: 10092; 100: 250 required:
+# 10088, completed.
+module modules/era/lua/globals/equipment/unlocking_a_myth.lua
+lists LowerJeuno/Zalsuhm/onTrade LowerJeuno/onEventFinish/10088
+char zone=LowerJeuno pos=-31.5,5.9,-117.5 job=WAR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_ABYSSEA 0
+quest Jeuno.UnlockingAMythWarrior accepted
+item SturdyAxe wsp=250
+login
+trade Zalsuhm SturdyAxe x1              # no Nyzul progress: 16000 required: 10091
+finish
+charvar NyzulFloorProgress 80           # a GM
+trade Zalsuhm SturdyAxe x1              # 880 required: 250 <= 704: 10092
+finish
+charvar NyzulFloorProgress 100          # a GM
+trade Zalsuhm SturdyAxe x1              # 250 required: 10088 (1)
+finish                                  # completed; MYTHIC_LEARNED (1); King's Justice

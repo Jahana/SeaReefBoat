@@ -1,0 +1,11 @@
+# Paying Lip Service (windurst 60), completion parity: 479's finish while accepted is npcUtil.completeQuest step for
+# step (the title; no fameArea, so no fame), ending in the raw player:completeQuest, so a GM's Quest[2][60]Prog survives
+# the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it). Accepted (GM) beside
+# Tapoh Lihzeh.
+char zone=WindurstWoods pos=49.5,-3.75,54.4 job=WAR lvl=75
+quest Windurst.PayingLipService accepted
+item BeehiveChip x3
+login
+charvar Quest[2][60]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Tapoh_Lihzeh BeehiveChip x3       # 479
+finish option=0                         # Kisser Make-Upper; completed; 150 gil; the chips taken; Prog kept

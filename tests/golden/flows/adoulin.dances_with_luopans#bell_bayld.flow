@@ -1,0 +1,17 @@
+# Dances with Luopans (adoulin 118), the Matre Bell's sale for bayld: a level 99 Geomancer in Western Adoulin, the
+# quest completed (a GM), no Matre Bell, 300000 gil, 150000 bayld (a GM). Sylvie: 37; update 2: param 1 (payment 2);
+# finished on 0: nothing. Update 2, finished on 1: the Matre Bell, 150000 bayld taken (delCurrency), the gil kept.
+# With the bell: 39.
+lists WesternAdoulin/Sylvie/onTrigger WesternAdoulin/onEventUpdate/37 WesternAdoulin/onEventFinish/37
+char zone=WesternAdoulin pos=79.594,32,135.725 job=GEO lvl=99 gil=300000
+quest Adoulin.DancesWithLuopans completed
+login
+currency bayld 150000                   # a GM
+trigger Sylvie                          # completed, a Geomancer, no bell: 37
+update 37 option=2                      # 150000 bayld: param 1, payment 2
+finish option=0                         # payment cleared; not option 1: nothing
+trigger Sylvie                          # 37
+update 37 option=2                      # param 1, payment 2
+finish option=1                         # the Matre Bell; 150000 bayld taken (delCurrency), the gil kept
+trigger Sylvie                          # the bell held: 39
+finish

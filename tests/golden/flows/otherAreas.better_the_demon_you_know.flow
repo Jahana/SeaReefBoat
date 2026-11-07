@@ -1,0 +1,42 @@
+# Better the Demon You Know (otherAreas 105): Oldton Movalpolos' Koblakiq (default 13), Castle Zvahl Baileys' qm2
+# (default YOU_FIND_NOTHING), Marquis Andrealphus (MARQUIS_ANDREALPUS 17436966) and the four demons after him (+1..+4).
+# Missionary Moblin and For the Birds completed (GMs), For's mustZone clear. Two Demon Pens. A trade of a pen while
+# Better is available: no trade handler; nothing. Koblakiq 20 (0, 1653), finished (option 0): begun. Prog 0: 21 (0,
+# 1653; priority 101). The pen traded: 22, finished: the pen taken, Prog 1, Wait = now + 60. Prog 1 before the wait: 23
+# (priority 101). A day later (wait jst=1: GetSystemTime moves by days only): 24, finished: Prog 2. Prog 2: 25
+# (priority 101). The qm2 at Prog 2, none up: the five spawned and claimed, MOBLIN_EARPLUG_ON_THE_GROUND,
+# MARQUIS_ATTACKS. Again (up, no NMKilled): nil (YOU_FIND_NOTHING). The Marquis killed: NMKilled 1 (his mob script's
+# onMobDeath despawns the four demons). The qm2: the earplug, Prog 3, KEYITEM_OBTAINED. The qm2 at Prog 3: nil.
+# Koblakiq Prog 3: 26, finished: completed (Goblin Grenade, Apostate for Hire), the earplug taken. Completed: 27
+# (replaceDefault).
+lists OldtonMovalpolos/Koblakiq/onTrigger OldtonMovalpolos/Koblakiq/onTrade OldtonMovalpolos/onEventFinish/20 OldtonMovalpolos/onEventFinish/22 OldtonMovalpolos/onEventFinish/24 OldtonMovalpolos/onEventFinish/26 CastleZvahlBaileys/qm2/onTrigger CastleZvahlBaileys/Marquis_Andrealphus/onMobDeath
+char zone=OldtonMovalpolos pos=-63.4,22.8,-117.5 job=WAR lvl=75
+quest OtherAreas.MissionaryMoblin completed
+quest OtherAreas.ForTheBirds completed
+item DemonPen x2
+login
+trade Koblakiq DemonPen x1              # Better available: no trade handler; nothing
+trigger Koblakiq                        # available: 20 (0, 1653)
+finish                                  # begun (any option)
+trigger Koblakiq                        # Prog 0: 21 (0, 1653)
+finish
+trade Koblakiq DemonPen x1              # 22
+finish                                  # the pen taken; Prog 1; Wait now + 60
+trigger Koblakiq                        # Prog 1, now < Wait: 23
+finish
+wait jst=1                              # the wait over
+trigger Koblakiq                        # Prog 1, now >= Wait: 24
+finish                                  # Prog 2
+trigger Koblakiq                        # Prog 2: 25
+finish
+warp 20.9,-24.1,19.2 CastleZvahlBaileys
+trigger qm2                             # Prog 2, none up: five spawned; MOBLIN_EARPLUG_ON_THE_GROUND; MARQUIS_ATTACKS
+trigger qm2                             # up, no NMKilled: nil; YOU_FIND_NOTHING
+kill MARQUIS_ANDREALPUS                 # Prog 2: NMKilled 1 (his script despawns the demons)
+trigger qm2                             # NMKilled 1, Prog 2: the earplug; Prog 3; KEYITEM_OBTAINED
+trigger qm2                             # Prog 3: nil; YOU_FIND_NOTHING
+warp -63.4,22.8,-117.5 OldtonMovalpolos
+trigger Koblakiq                        # Prog 3: 26
+finish                                  # completed; Goblin Grenade; Apostate for Hire; the earplug taken
+trigger Koblakiq                        # completed: 27 (replaceDefault)
+finish

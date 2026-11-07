@@ -1,0 +1,66 @@
+# Community Service (jeuno 15) again, by a card holder: completed before, the Lamp Lighter's Membership Card held (GM).
+# Day 8001 4:00 (hour < 5): nil, his default 118 (the quest's finish: Wait = 8001); a GM's Wait 0; 5:00: 118 (1)
+# (option 0: Wait = 8001); asked today (Wait == today): nil, default 118 (the finish again); a GM's Wait 0; 17:00 (hour
+# < 18): 118 (1); 18:00 (onGameHour's notification: ZAUKO_IS_RECRUITING to the holder): 116 (1), the update
+# (updateEvent(1, 1)), the twelve lamps, 117 (1, 1) answered 0 (completed again, no card given: the card is still
+# held). Day 8002 5:00
+# (onGameHour: the lamps closed and the zone vars cleared): 118 (1) (option 1: the card returned, YOU_RETURN_THE), then
+# his default 118 (no card); a lamp at Prog 0 closed again (6).
+lists LowerJeuno/Zauko/onTrigger LowerJeuno/_l00/onTrigger LowerJeuno/onEventUpdate/116 LowerJeuno/onEventFinish/117 LowerJeuno/onEventFinish/118 LowerJeuno/onEventFinish/120 LowerJeuno/onEventFinish/131
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+quest Jeuno.CommunityService completed
+keyitem LampLightersMembershipCard
+login
+tick 1000                               # the time server's first tick only notes the hour: the 18:00 tick below runs the hooks
+wait vana=16                            # day 8001, 4:00
+trigger Zauko                           # hour 4, the card, Wait 0: nil; his default 118
+finish option=0                         # the quest's 118 finish: Wait = 8001
+charvar Quest[3][15]Wait 0              # a GM
+wait vana=1                             # 5:00
+trigger Zauko                           # hour 5, the card, Wait 0 < 8001: 118 (1)
+finish option=0                         # Wait = 8001
+trigger Zauko                           # asked today: nil; his default 118
+finish option=0                         # the quest's 118 finish again: Wait = 8001
+charvar Quest[3][15]Wait 0              # a GM
+wait vana=12                            # 17:00
+trigger Zauko                           # hour 17, the card, Wait 0: 118 (1)
+finish option=0                         # Wait = 8001
+wait vana=1                             # 18:00
+tick 1000                               # onGameHour 18: communityServiceNotification, ZAUKO_IS_RECRUITING (the card)
+trigger Zauko                           # completed before: 116 (1)
+update 116 option=0                     # begun again: Prog 1, Count 12, Timer 8001; updateEvent(1, 1)
+finish
+trigger _l00                            # 120 (1, 0)
+finish option=1                         # Count 11
+trigger _l01                            # 121 (1, 1)
+finish option=1                         # Count 10
+trigger _l02                            # 122 (1, 2)
+finish option=1                         # Count 9
+trigger _l03                            # 123 (1, 3)
+finish option=1                         # Count 8
+trigger _l04                            # 124 (1, 4)
+finish option=1                         # Count 7
+trigger _l05                            # 125 (1, 5)
+finish option=1                         # Count 6
+trigger _l06                            # 126 (1, 6)
+finish option=1                         # Count 5
+trigger _l07                            # 127 (1, 7)
+finish option=1                         # Count 4
+trigger _l08                            # 128 (1, 8)
+finish option=1                         # Count 3
+trigger _l09                            # 129 (1, 9)
+finish option=1                         # Count 2
+trigger _l10                            # 130 (1, 10)
+finish option=1                         # Count 1
+trigger _l11                            # 131 (1, 11)
+finish option=1                         # Count 0: LAMP_MSG_OFFSET, Prog 2, allLightsLit 1
+trigger Zauko                           # Prog 2: 117 (1, 1)
+finish option=0                         # completed: Torchbearer, fame +7 x3; option 0: no card
+wait vana=11                            # day 8002, 5:00
+tick 1000                               # onGameHour 5: communityServiceCleanup (lamps closed, zone vars 0)
+trigger Zauko                           # 5:00, the card, Wait 0 (cleared at completion): 118 (1)
+finish option=1                         # Wait = 8002, the card returned, YOU_RETURN_THE
+trigger Zauko                           # no card: nil; his default 118
+finish                                  # Wait = 8002
+trigger _l00                            # Prog 0, closed again: 120 (6, 0)
+finish

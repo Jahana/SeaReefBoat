@@ -1,0 +1,28 @@
+# The Gobbiebag Part IV (jeuno 30): reqsMet's operands one at a time, in both checks. Parts I-III completed (the chain's
+# earlier parts, by a GM). The inventory at 30 (a fresh char): no section (43 (81)); at 45 (storage, a GM's
+# player:changeContainerSize): Part III set accepted (a GM): no section; all met: 43 (46, 0, 1), begun. Accepted: Part
+# III accepted: no section (Part III itself: its size 40 unmet); all met: 43 (46, 1, 1). A GM sets a part available
+# before accepted (accepted over completed keeps it completed).
+lists LowerJeuno/Bluffnix/onTrigger LowerJeuno/onEventFinish/43
+char zone=LowerJeuno pos=-41.7,5.9,-113 job=WAR lvl=75
+quest Jeuno.TheGobbiebagPartI completed
+quest Jeuno.TheGobbiebagPartIi completed
+quest Jeuno.TheGobbiebagPartIii completed
+login
+trigger Bluffnix                        # the inventory 30, not 45: no section; 43 (81)
+finish
+storage inventory 45                    # a GM's player:changeContainerSize to the part's start size
+quest Jeuno.TheGobbiebagPartIii available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartIii accepted # a GM: Part III not completed
+trigger Bluffnix                        # no section (Part III: inventory 45 is not its 40); 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartIii completed # a GM
+trigger Bluffnix                        # all met: 43 (46, 0, 1)
+finish option=0                         # begun
+quest Jeuno.TheGobbiebagPartIii available # a GM: accepted over completed keeps it completed
+quest Jeuno.TheGobbiebagPartIii accepted # a GM
+trigger Bluffnix                        # accepted, the previous part not completed: no section; 43 (81)
+finish
+quest Jeuno.TheGobbiebagPartIii completed # a GM
+trigger Bluffnix                        # all met: 43 (46, 1, 1)
+finish

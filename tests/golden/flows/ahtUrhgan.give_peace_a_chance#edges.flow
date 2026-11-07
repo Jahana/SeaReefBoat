@@ -1,0 +1,25 @@
+# Give Peace a Chance's edges: a level 75 Warrior, accepted (GMs). Mamook's qm4 at Prog 0: nil: nothing. Wajaom's qm8 by
+# night at Prog 2: nil. Prog 3 with a full bag: Mishhar 576, finished: the Silver Piece does not fit (complete false:
+# ITEM_CANNOT_BE_OBTAINED): Prog 4; Mishhar 589, finished still full: nothing (Prog 4 kept); the bag freed: 589,
+# finished: completed (the Silver Piece), the zoning flag, Quest[6][30]Stage.
+lists AhtUrhganWhitegate/Mishhar/onTrigger WajaomWoodlands/qm8/onTrigger Mamook/qm4/onTrigger AhtUrhganWhitegate/onEventFinish/576 AhtUrhganWhitegate/onEventFinish/589
+char zone=Mamook pos=348.6,-12.1,-256.4 job=WAR lvl=75
+quest AhtUrhgan.GivePeaceAChance accepted
+login
+trigger qm4                             # Prog 0: nil: nothing
+finish-if-event
+charvar Quest[6][9]Prog 2               # a GM
+warp 418.2,-24,220.8 WajaomWoodlands
+wait vana=9                             # NIGHT
+trigger qm8                             # NIGHT, Prog 2 (not 0): nil
+finish-if-event
+charvar Quest[6][9]Prog 3               # a GM
+warp -10.7,-6,29.371 AhtUrhganWhitegate
+fill-inventory
+trigger Mishhar                         # Prog 3: 576
+finish                                  # full: complete false: Prog 4
+trigger Mishhar                         # Prog 4: 589
+finish                                  # still full: nothing
+free-inventory
+trigger Mishhar                         # 589
+finish                                  # completed: the Silver Piece; needToZone; Quest[6][30]Stage

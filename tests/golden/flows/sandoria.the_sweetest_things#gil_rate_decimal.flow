@@ -1,0 +1,16 @@
+# The Sweetest Things (sandoria 8) at a fractional GIL_RATE (setting <NAME> <decimal>, quest rework P5): 1.5. The Lua
+# multiplies the rate as it is (400 x 1.5 = 600) and the engine reads the product with sol's integral getter (llround),
+# so 535's argument and both addGil are 600; reading the rate as a whole number first (Settings.Main: 1.5 is 2) would
+# pay 800. Accepted by GM; five pots: 535 (600); its finish completes it and adds 600 gil (the completed state's finish
+# clears the latch); five pots again: 535 (600), the repeat reward with 600 gil.
+lists SouthernSanDoria/Raimbroy/onTrade SouthernSanDoria/onEventFinish/535
+warning: quests: sandoria.the_sweetest_things: one finish of 535 ran 2 handlers (2/-/onEventFinish:535, 3/-/onEventFinish:535) -- the Lua runs it twice too: its sections at The_Sweetest_Things.lua:88 (accepted) and :118 (completed) at lua-at 9bfe87f0 hold the finish, and the lookup reads each check after the earlier handlers ran, so the first's status change lets the second match
+char zone=SouthernSanDoria pos=-139.4,-3.0,34.7 job=WAR lvl=30
+setting GIL_RATE 1.5
+quest Sandoria.TheSweetestThings accepted
+item PotOfHoney x10
+login
+trade Raimbroy PotOfHoney x5              # exactly five: 535 (600)
+finish                                    # completed: fame +10, Apiarist; the pots taken; 600 gil
+trade Raimbroy PotOfHoney x5              # completed: 535 (600)
+finish                                    # firstComplete 0: the pots taken; Apiarist; 600 gil; fame +10

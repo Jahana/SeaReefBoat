@@ -1,0 +1,26 @@
+# Waking Dreams (windurst 93): 920's item options when the give fails. Accepted (GM) with the whisper (GM): option 3
+# (Diabolos's Ring) with a full bag gives nothing, so the quest stays accepted and the whisper is kept; with room,
+# option 4 (Diabolos's Torque) completes it. The repeat (a zone change, a day on, the whisper again): option 1
+# (Diabolos's Pole) with a full bag gives nothing and keeps the whisper; option 2 (Diabolos's Earring) with room.
+lists WindurstWaters/Kerutoto/onTrigger WindurstWaters/onEventFinish/920
+char zone=WindurstWaters pos=13.0,-4.71,-155.9
+quest Windurst.FoodForThought completed
+quest Windurst.WakingDreams accepted
+keyitem WhisperOfDreams
+login
+trigger Kerutoto                        # 920 (mask 32)
+fill-inventory
+finish option=3                         # no room for the ring: nothing, the whisper kept
+free-inventory
+trigger Kerutoto                        # 920 again
+finish option=4                         # Diabolos's Torque; completed; the whisper taken; the date; mustZone
+warp 22.0,-4.25,-155.6 WindurstWoods
+warp 13.0,-4.71,-155.9 WindurstWaters   # the mustZone cleared
+wait jst=1                              # past the lockout
+keyitem WhisperOfDreams
+trigger Kerutoto                        # completed, the whisper: 920 (repeat, mask 40: the torque held, no SMN)
+fill-inventory
+finish option=1                         # no room for the pole: nothing, the whisper kept
+free-inventory
+trigger Kerutoto                        # 920 again
+finish option=2                         # Diabolos's Earring; the whisper taken; the date

@@ -1,0 +1,101 @@
+# Promotions II: the reply kinds at Abquhbah (his script: 255). The lookup gives the script a turn after an Event or a
+# lower reply (interaction_lookup.lua's UseFallback var), not after a Progress one: so a Progress line talked to right
+# after an Event reply plays, an Event there gives the script's 255. The Event reply here is First Lieutenant's 5088
+# (Prog 0 to 2 with Wait ahead), the other quests' lines set up and put away by GMs, out of play order. Main
+# (AssaultPromotion 25, Private First Class to Sergeant completed, First Lieutenant accepted at Prog 1 with Wait 99999):
+# 5088; Sergeant Major completed: 5060; Chief Sergeant at Prog 3 with no sprouts (no line): 5088; Prog 0: 5062; 5088;
+# Prog 1: 5068; 5088; Prog 2: 5069; 5088; Prog 3, Option 1: 5061; Option 0: 5088; Chief Sergeant completed: 5071;
+# Second Lieutenant at Prog 1, local var 1 (no line): 5088; Prog 0: 5072; 5088; Prog 1, local var 0: 5074; 5088; Prog
+# 3: 5079; First Lieutenant's own: 5088; Wait 1: 5083; 5088; Prog 2, Wait 1: 5084; 5088 (Prog 0); Wait 1: 5082; 5088;
+# at about 15:00, Prog 4: 5085, finished: completed.
+lists AhtUrhganWhitegate/Abquhbah/onTrigger
+char zone=AhtUrhganWhitegate pos=37.024,-6.601,-62 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+quest AhtUrhgan.PromotionCorporal completed
+quest AhtUrhgan.PromotionSergeant completed
+quest AhtUrhgan.PromotionFirstLieutenant accepted
+charvar Quest[6][98]Prog 1
+charvar Quest[6][98]Wait 99999
+charvar AssaultPromotion 25
+login
+trigger Abquhbah                        # First Lieutenant, Wait ahead: 5088 (an Event)
+finish
+quest AhtUrhgan.PromotionSergeantMajor completed   # a GM: Chief Sergeant available
+trigger Abquhbah                        # 5060 (Progress) after the Event: 5060
+finish                                  # Chief Sergeant begun
+charvar Quest[6][96]Prog 3              # a GM: no sprouts, no line
+trigger Abquhbah                        # 5088
+finish
+charvar Quest[6][96]Prog 0              # a GM
+trigger Abquhbah                        # 5062 after the Event
+finish
+charvar Quest[6][96]Prog 3              # a GM
+trigger Abquhbah                        # 5088
+finish
+charvar Quest[6][96]Prog 1              # a GM
+trigger Abquhbah                        # 5068 after the Event
+finish                                  # Prog 2
+charvar Quest[6][96]Prog 3              # a GM
+trigger Abquhbah                        # 5088
+finish
+charvar Quest[6][96]Prog 2              # a GM
+trigger Abquhbah                        # 5069 after the Event
+finish
+trigger Abquhbah                        # 5069's mark used: 5088
+finish
+charvar Quest[6][96]Prog 3              # a GM
+charvar Quest[6][96]Option 1            # a GM
+trigger Abquhbah                        # 5061 after the Event
+finish option=15                        # nothing
+charvar Quest[6][96]Option 0            # a GM
+trigger Abquhbah                        # 5088
+finish
+quest AhtUrhgan.PromotionChiefSergeant completed   # a GM: Second Lieutenant available
+trigger Abquhbah                        # 5071 after the Event
+finish                                  # Second Lieutenant begun
+charvar Quest[6][97]Prog 1              # a GM
+localvar Quest[6][97]Prog 1             # a GM: the reminder seen: no line
+trigger Abquhbah                        # 5088
+finish
+charvar Quest[6][97]Prog 0              # a GM
+trigger Abquhbah                        # 5072 after the Event
+finish
+charvar Quest[6][97]Prog 1              # a GM (the local var still 1)
+trigger Abquhbah                        # 5088
+finish
+localvar Quest[6][97]Prog 0             # a GM
+trigger Abquhbah                        # 5074 after the Event
+finish                                  # the local var 1
+trigger Abquhbah                        # 5088
+finish
+charvar Quest[6][97]Prog 3              # a GM
+trigger Abquhbah                        # 5079 after the Event
+finish
+charvar Quest[6][97]Prog 1              # a GM (the local var 1: no line)
+trigger Abquhbah                        # 5088
+finish
+charvar Quest[6][98]Wait 1              # a GM
+trigger Abquhbah                        # Prog 1, Wait before today: 5083 after the Event
+finish option=2                         # not 1: Stage 1, Wait today
+charvar Quest[6][98]Wait 99999          # a GM
+trigger Abquhbah                        # 5088
+finish
+charvar Quest[6][98]Prog 2              # a GM
+charvar Quest[6][98]Wait 1              # a GM
+trigger Abquhbah                        # 5084 after the Event
+finish option=1                         # not 0: Stage 1, Wait today
+charvar Quest[6][98]Prog 0              # a GM
+charvar Quest[6][98]Wait 99999          # a GM
+trigger Abquhbah                        # Prog 0, Wait ahead: 5088
+finish
+charvar Quest[6][98]Wait 1              # a GM
+trigger Abquhbah                        # 5082 after the Event
+finish option=2                         # not 1: Stage 1, Wait today
+trigger Abquhbah                        # Prog 0, Wait today: 5088
+finish
+wait vana=3                             # about 15:00
+charvar Quest[6][98]Prog 4              # a GM
+trigger Abquhbah                        # 15:00-16:59, no needToZone: 5085 after the Event
+finish                                  # completed

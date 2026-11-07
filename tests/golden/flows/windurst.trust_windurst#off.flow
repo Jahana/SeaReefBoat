@@ -1,0 +1,25 @@
+# Trust: Windurst (windurst 96): the guard xi.settings.main.ENABLE_TRUST_QUESTS == 1 compares the setting as the Lua
+# value it is. A level 5 Bastok char: 0, a fraction (1.25: not 1) and a boolean (true: Lua's `true == 1` is false):
+# not offered, her 868 (a port that rounds the setting or reads true as 1 would offer 863). The card held (GM) with
+# the setting 0: the card arm, 864; the setting 1 with the card held: 863 (the offer comes before the card arm),
+# option 2: begun; the card already held: npcUtil.giveKeyItem gives nothing and sends no KEYITEM_OBTAINED.
+char zone=WindurstWoods pos=-23.8,2.5,-44.6 lvl=5 nation=1
+setting ENABLE_TRUST_QUESTS 0
+login
+trigger Wetata                          # trust quests off: no arm: 868
+finish
+setting ENABLE_TRUST_QUESTS 1.25
+trigger Wetata                          # 1.25 is not 1: 868
+finish
+setting ENABLE_TRUST_QUESTS true
+trigger Wetata                          # true is not 1: 868
+finish
+keyitem GreenInstituteCard
+setting ENABLE_TRUST_QUESTS 0
+trigger Wetata                          # off, the card held: 864
+finish
+setting ENABLE_TRUST_QUESTS 1
+trigger Wetata                          # on, available, the card held: 863
+finish                                  # option 0: nothing
+trigger Wetata                          # 863
+finish option=2                         # begun; the card held: no KEYITEM_OBTAINED

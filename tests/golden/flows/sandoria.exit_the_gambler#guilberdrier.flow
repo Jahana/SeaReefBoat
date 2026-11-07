@@ -1,0 +1,16 @@
+# Exit the Gambler (sandoria 101) through Guilberdrier: his 521 (Stage 1). Accepted by GM (Nonterene's script reads
+# the status: 523); section 2 at Stage 1 answers an accepted char too: WHO_DOES_HE_THINK. Prog 1 by GM: his 518
+# (completed from accepted).
+char zone=NorthernSanDoria pos=-157.582,12,253.794 job=WAR lvl=10
+login
+trigger Guilberdrier                      # Stage 0: 521
+finish                                    # Stage 1
+trigger Nonterene                         # available: his script's 503
+finish
+quest Sandoria.ExitTheGambler accepted    # GM: accepted, Stage 1 kept
+trigger Nonterene                         # accepted: his script's 523
+finish
+trigger Guilberdrier                      # accepted, Stage 1, Prog 0: WHO_DOES_HE_THINK
+charvar Quest[0][101]Prog 1               # GM: the dice game's win
+trigger Guilberdrier                      # Prog 1: 518
+finish                                    # completed: 2000 exp, fame +20, Map of King Ranperre's Tomb, Daybreak Gambler

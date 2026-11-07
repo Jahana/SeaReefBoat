@@ -1,0 +1,28 @@
+# You Call That a Knife: Vah's Events (131, 132) alternate with his script (UseFallback); 130 (Progress) does not. A level
+# 75 Warrior at Windurst fame 425, the quest accepted at Prog 0 and BathedInScent 1 (GMs: his script starts 187, with no
+# finish). 131, then his script's 187, then 131 again (UseFallback set). Prog 1 (a GM): 130 (a progress event plays over
+# his script's turn), finished: Prog 2. 131, then 187. Nonberry's Knife (a GM): 132, then 187.
+lists Kazham/Vah_Keshura/onTrigger
+char zone=Kazham pos=27.997,-8.5,-104.267 job=WAR lvl=75
+fame Windurst 425
+quest Outlands.YouCallThatAKnife accepted
+charvar BathedInScent 1
+login
+trigger Vah_Keshura                     # Prog 0: 131
+finish
+trigger Vah_Keshura                     # his script's turn: 187
+finish
+trigger Vah_Keshura                     # 131
+finish
+charvar Quest[5][6]Prog 1               # a GM
+trigger Vah_Keshura                     # Prog 1: 130 (Progress) over his script's turn
+finish                                  # Prog 2
+trigger Vah_Keshura                     # Prog 2: 131
+finish
+trigger Vah_Keshura                     # his script's turn: 187
+finish
+keyitem NonberrysKnife                  # a GM
+trigger Vah_Keshura                     # the knife: 132
+finish
+trigger Vah_Keshura                     # his script's turn: 187
+finish

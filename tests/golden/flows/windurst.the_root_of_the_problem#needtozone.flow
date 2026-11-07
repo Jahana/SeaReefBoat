@@ -1,0 +1,17 @@
+# The Root of the Problem (windurst 68): 276's needToZone operand, a BLM 75. The Three Magi accepted by GM
+# (theThreeMagiSupport 3), Recollections completed by GM: the Glowstone: 269: The Three Magi completed, needToZone set.
+# Then no 276: her 259. Zoned out and back (needToZone gone): 276.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi accepted
+quest Windurst.Recollections completed
+charvar theThreeMagiSupport 3
+item Glowstone
+login
+trade Chumimi Glowstone x1              # 269
+finish                                  # The Three Magi completed; needToZone
+trigger Chumimi                         # needToZone: no 276: her 259
+finish
+warp -120.2,-5.5,122.4 WindurstWalls
+warp 0.0,30.75,21.5 HeavensTower
+trigger Chumimi                         # no needToZone: 276
+finish option=0                         # begun; var 1

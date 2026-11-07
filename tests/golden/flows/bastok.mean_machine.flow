@@ -1,0 +1,21 @@
+# Mean Machine (bastok 25): Unlucky Rat in Metalworks. The fame guard (level 2), the accepted reminder 559, the slime oil
+# trade, no repeat.
+lists Metalworks/Unlucky_Rat/onTrigger Metalworks/Unlucky_Rat/onTrade Metalworks/onEventFinish/556 Metalworks/onEventFinish/557
+char zone=Metalworks pos=-58,2,30
+item VialOfSlimeOil x2
+item BoneChip
+fame Bastok 49                  # fame level 1
+login
+trigger Unlucky_Rat             # fame level 1: not offered, its default 550
+finish
+fame Bastok 50                  # fame level 2
+trigger Unlucky_Rat             # the offer, 556
+finish                          # accepted
+trigger Unlucky_Rat             # accepted: 559
+finish
+trade Unlucky_Rat BoneChip x1   # the wrong item: nothing
+trade Unlucky_Rat VialOfSlimeOil x1  # 557
+finish                          # completed: the Scroll of Warp, fame 20, an oil gone
+trigger Unlucky_Rat             # completed: 550
+finish
+trade Unlucky_Rat VialOfSlimeOil x1  # completed: nothing

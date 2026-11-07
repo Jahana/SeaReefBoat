@@ -1,0 +1,21 @@
+# Scars of Abyssea (abyssea 175), the partial: a level 99 Warrior in Port Jeuno with A Journey Begins completed and the
+# quest accepted (GMs). Each pair of its three maw quests completed with the third missing (The Beast of Bastore
+# missing, A Delectable Demon missing, A Fluttery Fiend missing): the completion section needs all three, so Joachim
+# offers nothing each time.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/338
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.ScarsOfAbyssea accepted
+quest Abyssea.ADelectableDemon completed
+quest Abyssea.AFlutteryFiend completed
+login
+trigger Joachim                         # The Beast of Bastore missing: nothing
+finish-if-event
+quest Abyssea.ADelectableDemon available
+quest Abyssea.TheBeastOfBastore completed
+trigger Joachim                         # A Delectable Demon missing: nothing
+finish-if-event
+quest Abyssea.AFlutteryFiend available
+quest Abyssea.ADelectableDemon completed
+trigger Joachim                         # A Fluttery Fiend missing: nothing
+finish-if-event

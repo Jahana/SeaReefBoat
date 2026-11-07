@@ -1,0 +1,23 @@
+# Scars of Abyssea (abyssea 175): a level 99 Warrior in Port Jeuno with A Journey Begins completed (no story quest past
+# it: Joachim's script plays nothing) and The Beast of Bastore accepted (GMs). Joachim (available, one of the three
+# begun): 337, finished: begun. Joachim (accepted, none of the three completed): no section: nothing (his script: Dawn
+# of Death not accepted). The Beast of Bastore and A Delectable Demon completed (GMs): two of three: nothing. A
+# Fluttery Fiend completed: 338, finished: completed (no reward). Joachim (completed): no section: nothing.
+lists PortJeuno/Joachim/onTrigger PortJeuno/onEventFinish/337 PortJeuno/onEventFinish/338
+char zone=PortJeuno pos=-51.344,0,-9.978 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheBeastOfBastore accepted
+login
+trigger Joachim                         # available, The Beast of Bastore accepted: 337
+finish                                  # begun
+trigger Joachim                         # accepted, none completed: nothing
+finish-if-event
+quest Abyssea.TheBeastOfBastore completed
+quest Abyssea.ADelectableDemon completed
+trigger Joachim                         # two of three completed: nothing
+finish-if-event
+quest Abyssea.AFlutteryFiend completed
+trigger Joachim                         # all three: 338
+finish                                  # completed
+trigger Joachim                         # completed: nothing
+finish-if-event

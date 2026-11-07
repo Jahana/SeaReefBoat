@@ -1,0 +1,16 @@
+# In the Mood for Love (jeuno 69): the available check's CoP edge. A level 75 Warrior, CoP A Vessel Without a Captain
+# current (318, not past it), a Chameleon Diamond: Odasel's default 162; The Road Forks (325; a GM, A Vessel Without a
+# Captain completed first: addMission refuses to overwrite a current mission): the diamond traded while the quest is
+# only available: no onTrade: nothing (the diamond kept); 10035, begun.
+lists LowerJeuno/Odasel/onTrigger LowerJeuno/Odasel/onTrade LowerJeuno/onEventFinish/10035
+char zone=LowerJeuno pos=-56.9,-6,-111.7 job=WAR lvl=75
+mission Cop AVesselWithoutACaptain current
+item ChameleonDiamond
+login
+trigger Odasel                          # 318: no section; 162
+finish
+mission Cop AVesselWithoutACaptain completed # a GM: the log's current mission cleared
+mission Cop TheRoadForks current        # a GM
+trade Odasel ChameleonDiamond x1  # available: no onTrade: nothing
+trigger Odasel                          # 10035
+finish                                  # begun

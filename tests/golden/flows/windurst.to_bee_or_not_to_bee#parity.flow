@@ -1,0 +1,12 @@
+# To Bee or Not to Bee? (windurst 35), completion parity: 75's finish is the Lua's raw player:completeQuest (after the
+# trade, the var 5, the fame; then needToZone), so a GM's Quest[2][35]Prog survives the completion (quest:cleanup, which
+# a called Quest.Complete() runs, would clear it). Accepted (GM) at ToBeeOrNot_var 4 beside Zayhi-Bauhi.
+char zone=WindurstWalls pos=-88.0,-9.5,106.0 job=WAR lvl=75
+item PotOfHoney
+charvar ToBeeOrNot_var 4
+login
+quest Windurst.ToBeeOrNotToBee accepted
+charvar Quest[2][35]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+walk -90.6,-11.2,110.1                  # beside Zayhi-Bauhi (the trade does not walk)
+trade Zayhi-Bauhi PotOfHoney x1         # var 4: 75
+finish                                  # the honey taken; var 5; fame 20; completed; needToZone; Prog kept

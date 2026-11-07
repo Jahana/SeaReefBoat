@@ -1,0 +1,59 @@
+# Light in the Darkness (crystalWar 19), the edges: a level 99 Warrior in Bastok Markets [S] with 1000 gil and 40 Chunks
+# of Goblin Chocolate (one stack), The Fighting Fourth and Better Part of Valor completed, the WotG mission Back to the
+# Beginning completed, Cait Sith current, Fires of Discontent available (missions as the main flow). Blatherix is
+# `Blatherix+13` (see the main flow). Gentle Tiger: Fires not completed: no section: 109. Fires completed (a GM):
+# Gentle Tiger 16, finished on option 1: begun (any option). Prog 2 (a GM): Blatherix 22; 29 chocolates: nil; 30: 23,
+# finished: the trade confirmed (10 left), the Mine Shaft Key, Prog 3. Prog 7 (a GM, the key taken: what the
+# instance's registration and onInstanceFailure do): Gentle Tiger 17, Engelhart 18, Pagdako 20, Blatherix 25; 999 gil:
+# nil; 1000 gil: 23, finished: the trade confirmed, the key, Prog stays 7; 10 chocolates: 23, finished: the trade
+# confirmed, the key already held (no message), Prog 7. Prog 6 (a GM) with a full inventory: Gentle Tiger 27, finished:
+# the ingot does not fit: not completed (no Timer, no mustZone), twice; freed: 27, finished: completed.
+lists BastokMarketsS/Gentle_Tiger/onTrigger BastokMarketsS/Engelhart/onTrigger BastokMarketsS/Pagdako/onTrigger BastokMarketsS/Blatherix/onTrigger BastokMarketsS/Blatherix/onTrade BastokMarketsS/onEventFinish/16 BastokMarketsS/onEventFinish/23 BastokMarketsS/onEventFinish/27
+char zone=BastokMarketsS pos=-202.432,-9.998,2.237 job=WAR lvl=99 gil=1000
+item ChunkOfGoblinChocolate x40
+quest CrystalWar.TheFightingFourth completed
+quest CrystalWar.BetterPartOfValor completed
+mission Wotg BackToTheBeginning completed
+mission Wotg CaitSith current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Gentle_Tiger                    # Fires of Discontent not completed: no section: 109
+finish-if-event
+quest CrystalWar.FiresOfDiscontent completed
+trigger Gentle_Tiger                    # 16
+finish option=1                         # begun (any option)
+charvar Quest[7][19]Prog 2              # a GM
+trigger Blatherix+13                    # 22
+finish
+trade Blatherix+13 ChunkOfGoblinChocolate x29 # 29: nil
+finish-if-event
+trade Blatherix+13 ChunkOfGoblinChocolate x30 # 30 alone: 23
+finish                                  # the trade confirmed (10 left); the Mine Shaft Key; Prog 3
+delkeyitem MineShaftKey                 # a GM: the instance's registration
+charvar Quest[7][19]Prog 7              # a GM: onInstanceFailure at Prog 4
+trigger Gentle_Tiger                    # 17
+finish
+trigger Engelhart                       # 18
+finish
+trigger Pagdako                         # 20
+finish
+trigger Blatherix+13                    # 25
+finish
+trade Blatherix+13 gil=999              # 999 gil: nil
+finish-if-event
+trade Blatherix+13 gil=1000             # 1000 gil alone: 23
+finish                                  # the trade confirmed; the key; Prog 7
+trade Blatherix+13 ChunkOfGoblinChocolate x10 # 10 alone: 23
+finish                                  # the trade confirmed; the key held: no message; Prog 7
+charvar Quest[7][19]Prog 6              # a GM
+fill-inventory
+trigger Gentle_Tiger                    # 27
+finish                                  # no room for the ingot: not completed
+trigger Gentle_Tiger                    # 27 again
+finish                                  # still no room
+free-inventory
+trigger Gentle_Tiger                    # 27
+finish                                  # completed; Burden of Suspicion's Timer and mustZone

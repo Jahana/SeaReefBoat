@@ -1,0 +1,24 @@
+# Trial-Size Trial by Water (outlands 148): the battlefield. A SMN of level 20 with this quest accepted and the Mini
+# Tuning Fork. The fork's trade to WP_Entrance opens the entry menu 32000; its update with option 17 (index 1,
+# arena 1) registers and enters (the fork taken); the inventory filled by GM inside the arena; Leviathan_Prime_TSTBW of
+# arena 1 (LEVIATHAN_PRIME_ASA-18) is killed and the win's 32001 opens within the kill step. Its finish runs
+# content:onEventFinishWin, which calls this quest: Leviathan learned (LEVIATHAN_UNLOCKED 0, 0, 2); the Scroll of Instant
+# Warp does not fit (npcUtil.giveItem: ITEM_CANNOT_BE_OBTAINED), the completion goes on: Norg fame +20, completed. Back
+# in town, Verctissa's default 114, then her script's 202. A win while completed (the spell known, the scroll
+# given) is #battlefield_again (a second entry here would land in the won arena, which the char has not left).
+char zone=CloisterOfTides pos=557.5,35.1,563.0 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByWater accepted
+item MiniTuningForkOfWater
+login
+trade WP_Entrance MiniTuningForkOfWater x1  # the fork: the entry menu 32000
+update 32000 option=17                    # Trial-Size Trial by Water (index 1), arena 1: registered, entered, the fork taken
+finish                                    # in the arena
+fill-inventory
+kill LEVIATHAN_PRIME_ASA-18               # Leviathan_Prime_TSTBW of arena 1: won, 32001 opens
+finish                                    # Leviathan learned; the scroll does not fit; Norg fame +20; completed
+free-inventory
+warp -12.5,1.1,-22.5 Norg
+trigger Verctissa                         # UseFallback 0: the default 114
+finish
+trigger Verctissa                         # completed: 202
+finish

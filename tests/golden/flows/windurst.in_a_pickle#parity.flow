@@ -1,0 +1,10 @@
+# In a Pickle (windurst 5), completion parity: 659's finish is the Lua's raw player:completeQuest (after the stone;
+# then needToZone, the hairpin, the gil, the fame), so a GM's Quest[2][5]Prog survives the completion (quest:cleanup,
+# which a called Quest.Complete() runs, would clear it). Accepted (GM) beside Chamama; the trade's draw as in #gil_rate.
+char zone=WindurstWaters pos=-69.0,-3.8,-4.4 job=WAR lvl=75
+quest Windurst.InAPickle accepted
+login
+item SmoothStone
+charvar Quest[2][5]Prog 1               # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Chamama SmoothStone x1            # accepted: 659 / 657 / 658: 659
+finish                                  # the stone taken, completed, needToZone, the hairpin, 200 gil, fame 10

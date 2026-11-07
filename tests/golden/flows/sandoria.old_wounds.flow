@@ -1,0 +1,47 @@
+# Old Wounds (sandoria 102): Curilla in Chateau d'Oraguille, qm3 and Girtablulu in the Quicksand Caves. A WAR 75 with
+# sword skill 240 (raw 2400) and the Sapara of Trials already held at 300 weapon skill points: a trade while available
+# (nothing), the offer 43 (oncePerZone) taken with option 1 (the sapara held: none given; the Weapon Training Guide,
+# begun); 46 with 1 (the sapara held), option 1 (nothing); the wrong trades (a bone chip; the sapara and a chip: not
+# exactly); the sapara at 300 points (44: the sapara taken, the Map to the Annals of Truth); Curilla's 47; the qm3 pop of
+# Girtablulu (SENSE_OMINOUS_PRESENCE), qm3 while it is up (nil), the kill (killed_wsnm 1), the Annals of Truth, qm3 with
+# the Annals (nil); 48 (completed: fame +20, the three key items deleted, Savage Blade, SAVAGE_BLADE_LEARNED); once
+# completed her script's 530 and a trade (nothing).
+# Curilla's script always starts an event (530 here: no Trust permit, Enveloped in Darkness not completed); the quest's
+# Event-priority replies (43, 46, 47) alternate with it (interaction_lookup's UseFallback); 48 is a Progress event and
+# always wins. Her script has no onTrade. A WAR 75 at fame 0 meets no other Curilla quest (The General's Secret needs
+# fame level 2, Enveloped in Darkness an RDM). qm3 has no script; its default is NOTHING_OUT_OF_ORDINARY. No Sandy
+# mission is current. The other sides: #offer (the skill threshold, oncePerZone, the sapara given, a full bag, 45),
+# #offer_job, #offer_guide, #abandon, #girtablulu_no_map.
+lists ChateauDoraguille/Curilla/onTrigger ChateauDoraguille/Curilla/onTrade ChateauDoraguille/onEventFinish/43 ChateauDoraguille/onEventFinish/46 ChateauDoraguille/onEventFinish/44 ChateauDoraguille/onEventFinish/48 QuicksandCaves/qm3/onTrigger QuicksandCaves/Girtablulu/onMobDeath
+char zone=ChateauDoraguille pos=29.2,0,1.1 job=WAR lvl=75
+skill Sword 2400
+item SaparaOfTrials wsp=300
+item BoneChip
+login
+trade Curilla BoneChip x1                 # available: no trade handler (her script has none): nothing
+trigger Curilla                           # can equip the sapara, sword 240, no guide: 43 (oncePerZone)
+finish option=1                           # option 1, the sapara held: none given; the Weapon Training Guide, begun
+trigger Curilla                           # the script's turn: 530
+finish
+trigger Curilla                           # accepted, no Annals, no map, the sapara held: 46 with 1
+finish option=1                           # option 1, the sapara held: nothing
+trade Curilla BoneChip x1                 # not the sapara: nil
+trade Curilla SaparaOfTrials x1 BoneChip x1   # not exactly the sapara: nil
+trade Curilla SaparaOfTrials x1           # 300 weapon skill points: 44
+finish                                    # the sapara taken, the Map to the Annals of Truth
+trigger Curilla                           # the script's turn (after 46): 530
+finish
+trigger Curilla                           # the map: 47 (Event)
+finish
+warp -144.9,1.9,448.1 QuicksandCaves
+trigger qm3                               # the map, no Annals: Girtablulu popped and claimed, SENSE_OMINOUS_PRESENCE
+trigger qm3                               # Girtablulu up: popFromQM false, nil: NOTHING_OUT_OF_ORDINARY
+kill GIRTABLULU                           # the map held: killed_wsnm 1
+trigger qm3                               # killed_wsnm 1: back to 0, the key item Annals of Truth
+trigger qm3                               # the Annals held, killed_wsnm 0: nil, NOTHING_OUT_OF_ORDINARY
+warp 29.2,0,1.1 ChateauDoraguille
+trigger Curilla                           # the Annals: 48
+finish                                    # completed: fame +20; map, Annals and guide deleted; Savage Blade learned, SAVAGE_BLADE_LEARNED
+trigger Curilla                           # completed: no section; her script's 530
+finish
+trade Curilla BoneChip x1                 # completed: no trade handler, nothing

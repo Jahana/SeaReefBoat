@@ -1,0 +1,15 @@
+# The First Meeting (bastok 52): not offered while Ghosts of the Past is only accepted, nor after its completion until
+# a zone (its 232 sets this quest's mustZone); after a rezone, 233.
+char zone=PortBastok pos=-159,-7,5 job=MNK lvl=50
+quest Bastok.GhostsOfThePast accepted
+item MinersPendant
+login
+trigger Oggbi                   # Ghosts of the Past accepted: 230
+finish
+trade Oggbi MinersPendant x1    # Ghosts of the Past's 232
+finish                          # Ghosts of the Past completed; this quest's mustZone
+trigger Oggbi                   # the mustZone: not offered, 230
+finish
+rezone                          # the mustZone cleared
+trigger Oggbi                   # 233
+finish                          # accepted

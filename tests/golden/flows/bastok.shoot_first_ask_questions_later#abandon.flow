@@ -1,0 +1,15 @@
+# Shoot First, Ask Questions Later (bastok 67): 796 with hide 0 and option 2. Accepted by GM with the guide alone (no gun, no map: the
+# player dropped the gun): 796 with hide 0, option 0 (nothing); the map by GM: 796 with hide 1, option 2 deletes the
+# quest (available again), the guide and the map. Then skill 0: not offered, the default 500.
+lists Metalworks/Cid/onTrigger Metalworks/onEventFinish/796
+char zone=Metalworks pos=-12,-12,1 job=RNG lvl=75
+quest Bastok.ShootFirstAskQuestionsLater accepted
+keyitem WeaponTrainingGuide
+login
+trigger Cid                    # accepted, no Annals, no gun, no map: 796 with hide 0
+finish option=0                # option 0: nothing
+keyitem MapToTheAnnalsOfTruth
+trigger Cid                    # the map: 796 with hide 1
+finish option=2                # the quest deleted, the guide and the map deleted
+trigger Cid                    # available, skill 0: not offered, 500
+finish

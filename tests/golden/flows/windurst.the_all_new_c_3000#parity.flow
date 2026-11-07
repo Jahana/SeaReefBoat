@@ -1,0 +1,13 @@
+# The All-New C-3000 (windurst 18), completion parity: 657's finish is npcUtil.completeQuest step for step (the gil;
+# no fameArea, so no fame), ending in the raw player:completeQuest, so a GM's Quest[2][18]Prog survives the completion
+# (quest:cleanup, which a called Quest.Complete() runs, would clear it). GIL_RATE 1.0025: 600 x 1.0025 = 601.5
+# (llround 602, GIL_OBTAINED 602). Accepted (GM) beside Kopuro-Popuro.
+char zone=WindurstWoods pos=-1.0,-4.75,-21.0 job=WAR lvl=75
+setting GIL_RATE 1.0025
+item BeetleShell
+item HecteyesEye
+login
+quest Windurst.TheAllNewC3000 accepted
+charvar Quest[2][18]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Kopuro-Popuro BeetleShell x1 HecteyesEye x1  # both: 657 (0, 889, 939)
+finish                                  # 602 gil (GIL_OBTAINED); no fame; completed; the two taken; Prog kept

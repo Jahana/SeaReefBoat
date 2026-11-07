@@ -1,0 +1,22 @@
+# A Timely Visit (sandoria 105): the Skeleton Esquire's death alone sets NMKilled, and the first operand of mobsSpawned.
+# Stage 1, Prog 5 by GM; at 20:00 both NMs popped; the Skeleton Esquire killed at Prog 5 (NMKilled 1), despawned; qm1
+# with Giollemitte still up: nil (DUG_UP); Prog 4 by GM, Giollemitte killed (nothing), Prog 5 by GM, despawned; qm1's 18
+# (Prog 6).
+char zone=JugnerForest pos=-309.382,-0.139,407.377 job=WAR lvl=75
+quest Sandoria.ATimelyVisit accepted
+charvar Quest[0][105]Prog 5
+charvar Quest[0][105]Stage 1
+login
+wait vana=8
+trigger qm1                               # 20:00: both popped and claimed; SENSE_OF_FOREBODING
+kill GIOLLEMITTE+1                        # Prog 5, its own id: NMKilled 1
+tick 15000                                # the death's fade (0x038)
+tick 15000                                # the Skeleton Esquire despawns
+trigger qm1                               # NMKilled 1, Prog 5, Giollemitte up: nil; DUG_UP
+charvar Quest[0][105]Prog 4               # GM: Prog 4 at Giollemitte's death
+kill GIOLLEMITTE                          # Prog 4: nothing
+charvar Quest[0][105]Prog 5
+tick 15000                                # the death's fade (0x038)
+tick 15000                                # Giollemitte despawns
+trigger qm1                               # NMKilled 1 (the Skeleton Esquire's), both gone: 18
+finish                                    # Prog 6

@@ -1,0 +1,44 @@
+# Grave Concerns (sandoria 11), the second ending: accepted by GM with no skin (as if the skin was lost). Andecia (no
+# skin, DroppedWaterskin 0): DroppedWaterskin 1, 622; then 623 (Dropped 1). A Well, the skin not held: a chip (not the
+# waterskin: nil). The Tombstone (no skin, no waterskin, OfferingWaterOK 0): DroppedWaterskin 1 again, 2; its finish
+# (Dropped 1, no skin) gives the Tomb Guard's Waterskin; the Tombstone again (the waterskin held: nil, its default). A
+# Well: the waterskin and a chip (not exact: nil), the waterskin (no skin held: the Skin of Well Water given, the
+# waterskin taken; nil after it, no message); a second waterskin (GM) with the skin held (nil). Andecia with the skin
+# (TO_GET). The Tombstone with the skin and Dropped 1 (first arm false on Dropped; second false on the skin: nil); the
+# skin to it (a second waterskin given: OfferingWaterOK 1). Andecia at OfferingWaterOK 1 with no skin (TO_GET: the
+# OfferingWaterOK 0 arm would play 623); a Well at OfferingWaterOK 1, the waterskin traded with no skin held
+# (DONT_NEED_MORE_WATER: the second arm would swap it). Andecia: the waterskin (Dropped 1: 624: completed, one
+# waterskin taken).
+lists SouthernSanDoria/Andecia/onTrigger SouthernSanDoria/Andecia/onTrade SouthernSanDoria/Well/onTrade SouthernSanDoria/onEventFinish/622 SouthernSanDoria/onEventFinish/623 SouthernSanDoria/onEventFinish/624 KingRanperresTomb/Tombstone_Upper/onTrigger KingRanperresTomb/Tombstone_Upper/onTrade KingRanperresTomb/onEventFinish/2
+char zone=SouthernSanDoria pos=171.1,-0.9,45.0 job=WAR lvl=30
+quest Sandoria.GraveConcerns accepted
+item BoneChip
+item BoneChip
+login
+trigger Andecia                           # OfferingWaterOK 0, no skin, DroppedWaterskin 0: DroppedWaterskin 1; 622
+finish
+trigger Andecia                           # DroppedWaterskin 1: 623
+finish
+warp -276.0,-4.6,118.8 SouthernSanDoria
+trade Well BoneChip x1                    # OfferingWaterOK 0, no skin, not the waterskin: nil; nothing
+warp 1.0,-1.4,-102.0 KingRanperresTomb
+trigger Tombstone_Upper                   # no skin, no waterskin, OfferingWaterOK 0: DroppedWaterskin 1; 2
+finish                                    # DroppedWaterskin 1, no skin: the Tomb Guard's Waterskin
+trigger Tombstone_Upper                   # the waterskin held: nil; HERE_LIES_KING_RANPERRE
+warp -276.0,-4.6,118.8 SouthernSanDoria
+trade Well TombGuardsWaterskin x1 BoneChip x1   # not exactly the waterskin: nil; nothing
+trade Well TombGuardsWaterskin x1         # no skin, exactly the waterskin: the Skin of Well Water; the waterskin taken
+item TombGuardsWaterskin                  # GM: a second waterskin
+trade Well TombGuardsWaterskin x1         # the skin held: nil; nothing
+warp 171.1,-0.9,45.0 SouthernSanDoria
+trigger Andecia                           # OfferingWaterOK 0, the skin: TO_GET_TO_KING_RANPERRES
+warp 1.0,-1.4,-102.0 KingRanperresTomb
+trigger Tombstone_Upper                   # the skin, OfferingWaterOK 0, DroppedWaterskin 1: first arm false; the skin held: second false; nil, HERE_LIES
+trade Tombstone_Upper SkinOfWellWater x1  # OfferingWaterOK 0, the skin: another Tomb Guard's Waterskin; OfferingWaterOK 1; CHANGE_WATER
+warp 171.1,-0.9,45.0 SouthernSanDoria
+trigger Andecia                           # OfferingWaterOK 1, no skin, DroppedWaterskin 1: TO_GET_TO_KING_RANPERRES
+warp -276.0,-4.6,118.8 SouthernSanDoria
+trade Well TombGuardsWaterskin x1         # OfferingWaterOK 1 (no skin, exactly the waterskin): DONT_NEED_MORE_WATER; nothing taken
+warp 171.1,-0.9,45.0 SouthernSanDoria
+trade Andecia TombGuardsWaterskin x1      # OfferingWaterOK 1, DroppedWaterskin 1: 624
+finish                                    # completed: fame +20, 560 gil, Royal Grave Keeper; one waterskin taken

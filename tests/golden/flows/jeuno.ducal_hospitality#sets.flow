@@ -1,0 +1,48 @@
+# Ducal Hospitality (jeuno 68): the five item sets. A level 75 Warrior, the quest completed (a GM), CoP The Road Forks
+# current, set 3's, 4's and 5's items. For each set n (a GM sets ItemSet n): 10059 with the set's items and text option
+# (set 1: 0; 2: 1; 3-5: 4), and for sets 3-5 the set traded: 10058 ([6] = n - 1), finished: 4000 gil, the mustZone,
+# ItemSet 0; out to Upper Jeuno and back between them (the mustZone cleared).
+lists RuludeGardens/Taillegeas/onTrigger RuludeGardens/Taillegeas/onTrade RuludeGardens/onEventFinish/10057 RuludeGardens/onEventFinish/10058 RuludeGardens/onEventFinish/10059
+char zone=RuludeGardens pos=29.5,2,58 job=WAR lvl=75
+quest Jeuno.DucalHospitality completed
+mission Cop TheRoadForks current
+item PieceOfEasternPaper
+item Shuriken
+item SilverObi
+item TonosamaRiceBall
+item Dart
+item KongouInaho
+item NyumomoDoll
+item ConeOfSnollGelato
+item CopyOfFernansDiaries
+item NaphillePochette
+item SpheneEarring
+item TurquoiseRing
+login
+charvar Quest[3][68]ItemSet 1           # a GM
+trigger Taillegeas                      # 10059, set 1
+finish
+charvar Quest[3][68]ItemSet 2           # a GM
+trigger Taillegeas                      # 10059, set 2
+finish
+charvar Quest[3][68]ItemSet 3           # a GM
+trigger Taillegeas                      # 10059, set 3
+finish
+trade Taillegeas PieceOfEasternPaper x1 Shuriken x1 SilverObi x1 TonosamaRiceBall x1 # 10058, [6] 2
+finish                                  # 4000 gil, the mustZone, ItemSet 0
+warp -55.5,8.2,97.5 UpperJeuno          # the mustZone cleared
+warp 29.5,2,58 RuludeGardens
+charvar Quest[3][68]ItemSet 4           # a GM
+trigger Taillegeas                      # 10059, set 4
+finish
+trade Taillegeas Dart x1 KongouInaho x1 NyumomoDoll x1 ConeOfSnollGelato x1 # 10058, [6] 3
+finish                                  # 4000 gil, the mustZone, ItemSet 0
+warp -55.5,8.2,97.5 UpperJeuno          # the mustZone cleared
+warp 29.5,2,58 RuludeGardens
+charvar Quest[3][68]ItemSet 5           # a GM
+trigger Taillegeas                      # 10059, set 5
+finish
+trade Taillegeas CopyOfFernansDiaries x1 NaphillePochette x1 SpheneEarring x1 TurquoiseRing x1 # 10058, [6] 4
+finish                                  # 4000 gil, the mustZone, ItemSet 0
+warp -55.5,8.2,97.5 UpperJeuno          # the mustZone cleared
+warp 29.5,2,58 RuludeGardens

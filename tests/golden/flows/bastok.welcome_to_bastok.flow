@@ -1,0 +1,23 @@
+# Welcome to Bastok (bastok 2): Powhatan and Bartolomeo in Port Bastok. Cutscene options, a worn shield.
+# From XI.Verify.QuestScripts.Live's RunWelcomeToBastok twin.
+lists PortBastok/Powhatan/onTrigger PortBastok/Bartolomeo/onTrigger PortBastok/onEventFinish/50 PortBastok/onEventFinish/52 PortBastok/onEventFinish/53
+char zone=PortBastok pos=-150.6,-7.48,19
+item ShellShield
+login
+trigger Powhatan                # the offer, 50
+finish option=1                 # declined
+trigger Powhatan                # the offer again
+finish option=0                 # accepted
+trigger Powhatan                # Prog 0: 51
+finish
+trigger Bartolomeo              # no Shell Shield worn: not 52
+finish-if-event
+equip ShellShield Sub
+trigger Bartolomeo              # the shield worn, Prog 0: 52
+finish                          # Prog 1
+trigger Bartolomeo              # Prog 1: not 52 again
+finish-if-event
+trigger Powhatan                # Prog 1: 53
+finish                          # completed: the Spatha, 20 fame
+trigger Powhatan                # completed: not offered again
+finish-if-event

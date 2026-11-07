@@ -1,0 +1,17 @@
+# Trust: Halver (hidden quest TrustHalver): a level 99 Warrior in the Chateau d'Oraguille. Halver (his script
+# npcs/Halver.lua; default text HALVER_OFFSET + 1092). RoV The Path Untraveled completed (setup). No permit: the check
+# fails: his script. The San d'Oria Trust Permit (a GM): every talk gives the cipher (the stopgap) and plays noAction.
+# With a full inventory the giveItem fails (its message, no cipher). The cipher held: the check fails: his script.
+lists ChateauDoraguille/Halver/onTrigger
+char zone=ChateauDoraguille pos=2.4,0,3.4 job=WAR lvl=99
+mission Rov ThePathUntraveled completed
+login
+trigger Halver                          # no permit: the check fails: his script
+finish-if-event
+keyitem SanDoriaTrustPermit             # a GM
+fill-inventory
+trigger Halver                          # no room: giveItem fails; noAction
+free-inventory
+trigger Halver                          # the cipher; noAction
+trigger Halver                          # the cipher held: the check fails: his script
+finish-if-event

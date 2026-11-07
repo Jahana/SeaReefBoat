@@ -1,0 +1,33 @@
+# Trial-Size Trial by Wind (outlands 197): accepted by GM with no Mini Tuning Fork (used up by a lost fight): 112 (0,
+# fork, 2, 20), declined (option 0: nothing), option 2 (nothing), option 1 with a full inventory
+# (ITEM_CANNOT_BE_OBTAINED), then option 1 with one free slot (a new fork); then 68. Each script talk follows the
+# default 71 (UseFallback; see the main flow). 112's finish reads no status: 112 finished while completed (a GM inside
+# the event) still gives a fork.
+char zone=Rabao pos=-13.5,7.9,-9.5 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByWind accepted
+login
+trigger Rahi_Fohlatti                     # UseFallback 0: the default 71
+finish
+trigger Rahi_Fohlatti                     # the script: accepted, no fork: 112 (0, fork, 3, 20)
+finish option=0                           # nothing
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # 112
+finish option=2                           # option 2: nothing
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # 112
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork)
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # 112
+quest Outlands.TrialSizeTrialByWind completed
+finish option=1                           # finished while completed: a new Mini Tuning Fork of Wind, ITEM_OBTAINED
+quest Outlands.TrialSizeTrialByWind available
+quest Outlands.TrialSizeTrialByWind accepted
+trigger Rahi_Fohlatti                     # the default 71
+finish
+trigger Rahi_Fohlatti                     # the fork held: 68
+finish

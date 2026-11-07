@@ -1,0 +1,63 @@
+# Tea with a Tonberry? (sandoria 109): Sobane in Southern San d'Oria, Anguenet in Carpenters' Landing, Riche in the
+# Phanauet Channel, qm2 and the Hematic Cyst in Davoi. Signed in Blood completed: fame level 3, Sobane's default; level 4:
+# a trade (no trade handler: nothing), 738 (begun). Sobane's 739 until Prog 5. Riche at Prog 0 without the blackboard
+# (nil: TONBERRY_MSG). Anguenet: the ginseng at Prog 0 (nil), 27 (Prog 1), 28 (replaceEvent), a bone
+# chip (nil), the Attohwa Ginseng (29: the Tonberry Blackboard, Prog 2, the ginseng taken), his default at Prog 2. Davoi
+# qm2 at Prog 2: its default; the gold at Prog 2: nil. Riche: 5 with the blackboard (Prog 3, the blackboard deleted),
+# then RICHE_DAVOI_WATERFALL (replaceDefault). qm2 at Prog 3: WHERE_THE_TONBERRY_TOLD_YOU; a bone chip (nil); the Royal
+# Treasury Gold (the Hematic Cyst popped within a yalm, the gold taken, UNDER_ATTACK); a second gold with the Cyst up
+# (popFromQM false: nil, the gold kept); the kill (Prog 4); 126 (Prog 5); NOTHING_TO_DO. Sobane's 740 (completed:
+# Willpower Torque, fame +40, Talks with Tonberries), then her default.
+# Sobane has no script (default text SOBANE_DIALOG). Anguenet, Riche, qm2 have no script; defaults 21, TONBERRY_MSG,
+# NOTHING_OUT_OF_ORDINARY. No other quest names Davoi's qm2, Anguenet or Riche. Riche rides the barge only on the South
+# Landing and Emfea routes (19:15-08:55 Vana'diel); the barge zone shows Roi instead on the others, hence the wait.
+lists SouthernSanDoria/Sobane/onTrigger SouthernSanDoria/onEventFinish/738 SouthernSanDoria/onEventFinish/740 CarpentersLanding/Anguenet/onTrigger CarpentersLanding/Anguenet/onTrade CarpentersLanding/onEventFinish/27 CarpentersLanding/onEventFinish/29 PhanauetChannel/Riche/onTrigger PhanauetChannel/onEventFinish/5 Davoi/qm2/onTrigger Davoi/qm2/onTrade Davoi/Hematic_Cyst/onMobDeath Davoi/onEventFinish/126
+char zone=SouthernSanDoria pos=-189,-2.9,97.2 job=WAR lvl=75
+quest Sandoria.SignedInBlood completed
+fame Sandoria 224
+item BoneChip
+item PieceOfAttohwaGinseng
+item IngotOfRoyalTreasuryGold
+login
+trigger Sobane                            # fame level 3: not offered; Signed in Blood: no needToZone, no section; SOBANE_DIALOG
+fame Sandoria 225
+trade Sobane BoneChip x1                  # available, fame level 4: no trade handler, nothing
+trigger Sobane                            # fame level 4: 738
+finish                                    # begun (any option)
+trigger Sobane                            # Prog 0: 739
+finish
+wait vana=8                               # about 20:00: the barge's route is South Landing, Riche aboard (barge.lua npcList)
+warp 5.9,-2.75,15.6 PhanauetChannel
+trigger Riche                             # Prog 0, no blackboard: nil; TONBERRY_MSG
+warp 214.7,-2,-525.6 CarpentersLanding
+trade Anguenet PieceOfAttohwaGinseng x1   # Prog 0: nil, nothing
+trigger Anguenet                          # Prog 0: 27 (0, ginseng)
+finish                                    # Prog 1
+trigger Anguenet                          # Prog 1: 28 (0, ginseng; replaceEvent)
+finish
+trade Anguenet BoneChip x1                # not the ginseng: nil
+trade Anguenet PieceOfAttohwaGinseng x1   # 29
+finish                                    # the Tonberry Blackboard, Prog 2, the ginseng taken
+trigger Anguenet                          # Prog 2: nil; his default 21
+finish
+warp 189.2,1.26,-381.9 Davoi
+trigger qm2                               # Prog 2: nil; NOTHING_OUT_OF_ORDINARY
+trade qm2 IngotOfRoyalTreasuryGold x1     # Prog 2: nil, nothing
+warp 5.9,-2.75,15.6 PhanauetChannel
+trigger Riche                             # the blackboard: 5 (1, 627, gold, 63, 3, 30, 30, 0)
+finish                                    # Prog 3, the blackboard deleted (no message)
+trigger Riche                             # Prog 3: RICHE_DAVOI_WATERFALL (0, 0, gold; replaceDefault)
+warp 189.2,1.26,-381.9 Davoi
+trigger qm2                               # Prog 3: WHERE_THE_TONBERRY_TOLD_YOU (0, gold)
+trade qm2 BoneChip x1                     # not the gold: nil
+trade qm2 IngotOfRoyalTreasuryGold x1     # the Hematic Cyst popped (radius 1, claimed), the gold taken, UNDER_ATTACK
+item IngotOfRoyalTreasuryGold
+trade qm2 IngotOfRoyalTreasuryGold x1     # the Cyst up: popFromQM false, nil, the gold kept
+kill HEMATIC_CYST                         # Prog 3: Prog 4
+trigger qm2                               # Prog 4: 126 (149, gold)
+finish                                    # Prog 5
+trigger qm2                               # Prog 5: NOTHING_TO_DO
+warp -189,-2.9,97.2 SouthernSanDoria
+trigger Sobane                            # Prog 5: 740
+finish                                    # completed: Willpower Torque, fame +40, Talks with Tonberries
+trigger Sobane                            # completed: no section; SOBANE_DIALOG

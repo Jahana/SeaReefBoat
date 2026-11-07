@@ -1,0 +1,15 @@
+# Trust: Bastok (bastok 92): Ayame's 985 against another quest's handler at the same NPC. Trust: Bastok completed (by
+# GM) and Out of the Depths accepted (by GM), whose Ayame reminder is Event(860) with setPriority 101: it outranks
+# Trust: Bastok's 985 (an Event, priority 100), so Ayame plays 860. A progress event (1000) would outrank the reminder
+# and play 985, so this flow fixes 985 as an Event. Ayame is not yet learned (985 would be offered). Out of the Depths
+# done (GM) afterwards, 985 plays again.
+lists Metalworks/Ayame/onTrigger
+char zone=Metalworks pos=64,-14,-4 lvl=75 nation=1
+quest Bastok.TrustBastok completed
+quest Bastok.OutOfTheDepths accepted
+login
+trigger Ayame                  # Out of the Depths' reminder wins (101 over Trust: Bastok's event, 100): 860
+finish
+quest Bastok.OutOfTheDepths completed
+trigger Ayame                  # Out of the Depths done: Trust: Bastok's 985 (0, 0, 0, 0, 0, 0, 0, 0)
+finish option=0

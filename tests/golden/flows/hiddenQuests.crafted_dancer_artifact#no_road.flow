@@ -1,0 +1,13 @@
+# Crafted Dancer Artifact (hidden quest DncArtifact), section 1's quest check alone: a level 99 Dancer in Upper Jeuno
+# with HQuest[DncArtifact]Prog 1 (a GM) but The Road to Divadom not completed (accepted): the check fails: Olgald's
+# default 10122. Completed (a GM): 10167.
+lists UpperJeuno/Olgald/onTrigger UpperJeuno/onEventFinish/10167
+char zone=UpperJeuno pos=-53,0,101.9 job=DNC lvl=99 race=1
+quest Jeuno.TheRoadToDivadom accepted
+charvar HQuest[DncArtifact]Prog 1
+login
+trigger Olgald                          # the Road to Divadom not completed: 10122
+finish
+quest Jeuno.TheRoadToDivadom completed  # a GM
+trigger Olgald                          # 10167
+finish

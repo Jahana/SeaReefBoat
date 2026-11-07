@@ -1,0 +1,13 @@
+# Trial by Earth (battlefield.trial_by_earth): the requirement arms. Main, a level 75 Summoner with the quest accepted
+# but no Tuning Fork of Earth: EP_Entrance: the key item check fails (and no other fight of the zone is on offer): no
+# options, and the zone has no NO_BATTLEFIELD_ENTRY text: EP_Entrance's default PROTOCRYSTAL. bob, a level 75 Summoner
+# with the fork but the quest only available: BattlefieldQuest's check (accepted or more) fails: PROTOCRYSTAL.
+lists CloisterOfTremors/EP_Entrance/onTrigger
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+char bob zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+quest Bastok.TrialByEarth accepted
+bob: keyitem TuningForkOfEarth
+login
+trigger EP_Entrance                     # accepted, no fork: no options: the default PROTOCRYSTAL
+bob: login
+bob: trigger EP_Entrance                # the fork, available: no options: PROTOCRYSTAL

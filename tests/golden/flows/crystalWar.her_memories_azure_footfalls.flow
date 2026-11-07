@@ -1,0 +1,43 @@
+# Her Memories: Azure Footfalls (crystalWar 70): a level 99 Warrior in Bastok Markets [S] with the WotG mission Her
+# Memories current (a GM; other logs as group 1's flows) and the Blue Recommendation Letter. No flow statement sets a
+# campaign allegiance: the char earns 2 through The Fighting Fourth first (Adelbrecht 139, option 1: begun; Prog 3 (a
+# GM): 143, completed, allegiance 2). North Gustaberg [S], then Bastok Markets [S] from there at Prog 0: 358, finished:
+# Prog 1. Adelbrecht: Prog 1: 359, finished: begun, Prog 2. North Gustaberg [S]: Gebhardt 14, finished: Prog 3; Roderich
+# 15, finished: Prog 4; Barricade 16, finished: Prog 5. Bastok Markets [S] (accepted: no zone-in reply): Adelbrecht 360,
+# finished: completed (Large Memory Fragment 4), checkMemoryFragments (one large: nothing). Each of the three again once
+# done: nil.
+lists BastokMarketsS/onZoneIn/1 BastokMarketsS/Adelbrecht/onTrigger BastokMarketsS/onEventFinish/358 BastokMarketsS/onEventFinish/359 BastokMarketsS/onEventFinish/360 NorthGustabergS/Gebhardt/onTrigger NorthGustabergS/Roderich/onTrigger NorthGustabergS/Barricade/onTrigger NorthGustabergS/onEventFinish/14 NorthGustabergS/onEventFinish/15 NorthGustabergS/onEventFinish/16
+char zone=BastokMarketsS pos=-324.266,-12.601,-76.977 job=WAR lvl=99
+keyitem BlueRecommendationLetter
+mission Wotg HerMemories current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Adelbrecht                      # The Fighting Fourth: the letter: 139 (0, 0) (Azure not available: no allegiance)
+finish option=1                         # the letter taken; the Battle Rations; The Fighting Fourth begun
+charvar Quest[7][7]Prog 3               # a GM
+trigger Adelbrecht                      # The Fighting Fourth, Prog 3: 143
+finish                                  # The Fighting Fourth completed; allegiance 2
+warp 207.799,-20.826,669.125 NorthGustabergS
+warp -324.266,-12.601,-76.977 BastokMarketsS open # from North Gustaberg [S], Prog 0: 358, left open
+finish                                  # Prog 1
+trigger Adelbrecht                      # Prog 1: 359
+finish                                  # begun; Prog 2
+warp 207.799,-20.826,669.125 NorthGustabergS # accepted: no zone-in reply
+trigger Gebhardt                        # Prog 2: 14
+finish                                  # Prog 3
+trigger Gebhardt                        # Prog 3: nil (The Fighting Fourth's completed 108)
+finish-if-event
+trigger Roderich                        # Prog 3: 15
+finish                                  # Prog 4
+trigger Roderich                        # Prog 4: nil (The Fighting Fourth's completed 109)
+finish-if-event
+trigger Barricade                       # Prog 4: 16
+finish                                  # Prog 5
+trigger Barricade                       # Prog 5: nil (NO_WAY_PAST_BARRIER)
+finish-if-event
+warp -324.266,-12.601,-76.977 BastokMarketsS # accepted: no zone-in reply
+trigger Adelbrecht                      # Prog 5: 360
+finish                                  # completed (Large Memory Fragment 4); checkMemoryFragments: nothing

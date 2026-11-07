@@ -1,0 +1,45 @@
+# The Signpost Marks the Spot (bastok 22): Nbu Latteh in Bastok Markets, Signpost3 in Konschtat Highlands, Roh Latteh in
+# Bastok Mines. The guard (fame level 2, Mom the Adventurer completed and its mustZone clear), the offer 235 declined
+# (option 1) then accepted, the Painting of a Windmill from the signpost, Roh's 96 and the Linen Robe. Mom the Adventurer
+# also names Nbu (its offer 230, its repeat at fame level 1, 231 once its Prog is 1) and Roh (a Copper Ring trade).
+# Nbu's default is 127, Roh's 29, the signpost's the SIGNPOST3_DIALOG_1 message.
+lists BastokMarkets/Nbu_Latteh/onTrigger BastokMarkets/Nbu_Latteh/onTrade BastokMarkets/onEventFinish/235 KonschtatHighlands/Signpost3/onTrigger BastokMines/Roh_Latteh/onTrigger BastokMines/onEventFinish/96
+char zone=BastokMarkets pos=-114.8,-4,-112.3
+fame Bastok 50
+item BoneChip
+login
+trade Nbu_Latteh BoneChip x1    # available: no trade handler, nothing
+trigger Nbu_Latteh              # Mom the Adventurer available: its offer, 230
+finish                          # Mom accepted, a Fire Crystal
+quest Bastok.MomTheAdventurer completed
+charvar Quest[1][21]mustZone 235
+trigger Nbu_Latteh              # Mom completed, its mustZone set: neither guard, Nbu's default 127
+finish
+zoneline BastokMines            # out and back: Mom's mustZone cleared
+zoneline BastokMarkets
+fame Bastok 49
+trigger Nbu_Latteh              # fame 49 (level 1): Mom's repeat, 230
+finish                          # Mom's Prog 1, a Fire Crystal
+fame Bastok 50
+trigger Nbu_Latteh              # fame level 2: the offer, 235
+finish option=1                 # declined
+trigger Nbu_Latteh              # 235 again
+finish option=0                 # accepted
+trigger Nbu_Latteh              # accepted: Mom's 231 (its Prog 1)
+finish-if-event
+warp -11.8,6.999,-8.2 BastokMines
+trigger Roh_Latteh              # no painting: his default 29
+finish
+warp -183.6,64.734,598.2 KonschtatHighlands
+trigger Signpost3               # no painting: SIGNPOST3_DIALOG_2 and the Painting of a Windmill
+finish-if-event
+trigger Signpost3               # the painting held: the default SIGNPOST3_DIALOG_1
+finish-if-event
+warp -11.8,6.999,-8.2 BastokMines
+trigger Roh_Latteh              # the painting held: 96
+finish                          # completed: Linen Robe, fame +20, Treasure Scavenger, the painting gone
+trigger Roh_Latteh              # completed: 29
+finish
+warp -183.6,64.734,598.2 KonschtatHighlands
+trigger Signpost3               # completed: the default message
+finish-if-event

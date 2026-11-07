@@ -1,0 +1,50 @@
+# Recollections (windurst 67, BLM AF2): Chumimi (Heaven's Tower), Laityn (Ru'Lude Gardens; his 10006 in his script),
+# the Ore Door _4i5 (Castle Zvahl Keep; its trigger 9 in its script). The Three Magi completed by GM (no needToZone).
+# BLM 75: 270 (0, 1105), option 0: begun. Accepted, no Foe Finder: her 259. Laityn var 0: 10003: var 1; then 10006.
+# Chumimi: the seeds with another item: nothing; another item alone: nothing; the seeds alone: 271 (0, 520): taken,
+# var 2; seeds again (GM) at var 2: nothing. The door: 9 (its script); the key at var 2 with another item: nothing;
+# alone: 8 (1106): taken, var 3, Foe Finder MK I; a key again (GM) at var 3: nothing. Chumimi: 275; full inventory:
+# refused; then Wizard's Sabots, var 0, the key item taken, fame 20, completed.
+# Completed: The Root of the Problem's 276. Foe Finder MK I again (GM), completed: no 275: its 277.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+quest Windurst.TheThreeMagi completed
+item BagOfSeeds
+item WhineCellarKey
+item BlockOfAnimalGlue
+login
+trigger Chumimi                         # The Three Magi completed, BLM 75, no needToZone, available: 270 (0, 1105)
+finish option=0                         # begun
+trigger Chumimi                         # accepted, no Foe Finder MK I: no quest reply: her 259
+finish
+warp -38.7,0.0,-58.2 RuludeGardens      # beside Laityn
+trigger Laityn                          # accepted, var 0: 10003
+finish                                  # var 1
+trigger Laityn                          # var 1: his 10006
+finish
+warp 0.0,30.75,21.5 HeavensTower
+trade Chumimi BagOfSeeds x1 BlockOfAnimalGlue x1  # two items: nothing
+trade Chumimi BlockOfAnimalGlue x1      # not the seeds: nothing
+trade Chumimi BagOfSeeds x1             # accepted, var 1 (< 2): 271 (0, 520)
+finish                                  # the seeds taken; var 2
+item BagOfSeeds
+trade Chumimi BagOfSeeds x1             # var 2: nothing
+warp -18.75,-3.0,68.5 CastleZvahlKeep   # beside the Ore Door
+trigger _4i5                            # its script: 9
+finish
+trade _4i5 WhineCellarKey x1 BlockOfAnimalGlue x1  # two items: nothing
+trade _4i5 WhineCellarKey x1            # accepted, var 2: 8 (1106)
+finish                                  # the key taken; var 3; Foe Finder MK I
+item WhineCellarKey
+trade _4i5 WhineCellarKey x1            # var 3: nothing
+warp 0.0,30.75,21.5 HeavensTower
+fill-inventory
+trigger Chumimi                         # accepted, Foe Finder MK I: 275
+finish                                  # no free slot: npcUtil.giveItem refuses the sabots: nothing
+free-inventory
+trigger Chumimi                         # 275
+finish                                  # Wizard's Sabots; var 0; the key item taken; fame 20; completed
+trigger Chumimi                         # completed: The Root of the Problem's 276 (its C#)
+finish option=0
+keyitem FoeFinderMkI                    # GM
+trigger Chumimi                         # completed, Foe Finder MK I: no 275: The Root of the Problem's 277
+finish

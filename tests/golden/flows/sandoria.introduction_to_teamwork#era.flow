@@ -1,0 +1,63 @@
+# Introduction to Teamwork (sandoria 63) with its era module (quest rework B3b, Task 9):
+# modules/era/lua/quests/sandoria/introduction_to_teamwork.lua, enabled by its condition xi.pre(xi.expansion.ROV)
+# (RESTRICT_CONTENT 1, ENABLE_ROV 0), replaces section 2's West Ronfaure onEventUpdate 129 with a copy of the quest's
+# own whose partySizeRequirement is 6, not 2: both #party >= 6 and the same-nation count >= 6. Accepted by GM; all six
+# chars San d'Oria (nation 0), main leading. Vilatroire's trigger moves main to (-258.861, -70.999, 423.42):
+# - five members, all of the nation: #party 5 below 6, updateEvent(1) (the quest's own: 15, 1);
+# - fay joins: six of six, the local Prog 1, updateEvent(15, 1); finish option 1: nothing;
+# - fay exactly 15 yalms off (z + 15): in range, updateEvent(15, 1); 15.01 yalms: updateEvent(1);
+# - fay in East Ronfaure, 2.58 yalms from main's coordinates (only the zone check fails): updateEvent(1);
+# - fay back beside main: updateEvent(15, 1); finish option 0 with the local Prog 1: completed (Shell Ring, fame +20,
+#   Third-Rate Organizer; the quest's own finish).
+# Five of the nation in a party of six: #era_nation.
+module modules/era/lua/quests/sandoria/introduction_to_teamwork.lua
+lists WestRonfaure/Vilatroire/onTrigger WestRonfaure/onEventUpdate/129 WestRonfaure/onEventFinish/129
+char zone=WestRonfaure pos=-258.861,-70.999,423.42 job=WAR lvl=10 nation=0
+char bob zone=WestRonfaure pos=-258.861,-70.999,428 job=WAR lvl=10 nation=0
+char carl zone=WestRonfaure pos=-256,-70.999,426 job=WAR lvl=10 nation=0
+char dave zone=WestRonfaure pos=-256,-70.999,421 job=WAR lvl=10 nation=0
+char eve zone=WestRonfaure pos=-261.5,-70.999,426 job=WAR lvl=10 nation=0
+char fay zone=WestRonfaure pos=-261.5,-70.999,421 job=WAR lvl=10 nation=0
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+quest Sandoria.IntroductionToTeamwork accepted
+login
+bob: login
+carl: login
+dave: login
+eve: login
+fay: login
+invite bob
+bob: accept
+invite carl
+carl: accept
+invite dave
+dave: accept
+invite eve
+eve: accept                               # main, bob, carl, dave and eve: five of the nation
+trigger Vilatroire                        # 129 { [1] = 1 }
+update 129 option=0                       # #party 5, below 6: updateEvent(1)
+finish option=1
+invite fay
+fay: accept                               # six of the nation
+trigger Vilatroire                        # 129
+update 129 option=0                       # six (>= 6): the local Prog 1, updateEvent(15, 1)
+finish option=1                           # option 1: nothing (the local Prog stays 1)
+fay: walk -258.861,-70.999,438.42         # exactly 15 yalms from main's spot at Vilatroire
+trigger Vilatroire                        # 129
+update 129 option=0                       # checkDistance 15, not > 15: in range; six: updateEvent(15, 1)
+finish option=1
+fay: walk -258.861,-70.999,438.43         # 15.01 yalms
+trigger Vilatroire                        # 129
+update 129 option=0                       # fay out of range: updateEvent(1)
+finish option=1
+fay: warp -258.861,-70.999,426 EastRonfaure   # another zone, 2.58 yalms from main's coordinates
+tick 400                                  # fay's zone-in reload: in main's party, in another zone
+trigger Vilatroire                        # #party 6: 129
+update 129 option=0                       # fay's zone is not main's: updateEvent(1)
+finish option=1
+fay: warp -261.5,-70.999,421 WestRonfaure     # back beside main
+tick 400
+trigger Vilatroire                        # 129
+update 129 option=0                       # six: the local Prog 1, updateEvent(15, 1)
+finish                                    # option 0, Prog 1: completed (Shell Ring, fame +20, Third-Rate Organizer)

@@ -1,0 +1,19 @@
+# To Cure a Cough (sandoria 20) at Amaura beside The Medicine Woman (C#, a container; its Amaura section while
+# accepted), DiaryPage 3, no key item of this quest: The Medicine Woman's 636 (Progress) beats the script on every talk
+# (option 1: no formula). With Amaura's Formula (GM): its AMAURA_DIALOG_COMEBACK (a message) and the script alternate,
+# so this quest's 645 plays on the second talk (the script's call), the message on the third.
+char zone=SouthernSanDoria pos=-82.4,-6.9,91.1 job=WAR lvl=30
+quest Sandoria.TheMedicineWoman accepted
+charvar DiaryPage 3
+login
+trigger Amaura                            # The Medicine Woman: 636
+finish option=1                           # no formula
+trigger Amaura                            # 636 again (Progress: no fallback to the script)
+finish option=1
+keyitem AmaurasFormula
+trigger Amaura                            # AMAURA_DIALOG_COMEBACK
+finish-if-event
+trigger Amaura                            # the script: 645
+finish-if-event                           # begun
+trigger Amaura                            # AMAURA_DIALOG_COMEBACK
+finish-if-event

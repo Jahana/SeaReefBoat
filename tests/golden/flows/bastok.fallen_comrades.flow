@@ -1,0 +1,27 @@
+# Fallen Comrades (bastok 19): Pavvke in Bastok Mines. The guard (Bastok fame level 2), the silver name tag trade: 91
+# while accepted, 92 once completed (the second section matches accepted and completed), each completing the quest
+# again; 92 adds 10 more Bastok fame. Pavvke's default is 75; Out of the Depths, The Eleventh's Hour and missions 5-2 and
+# 8-2 also name him, and this char meets none of them.
+lists BastokMines/Pavvke/onTrigger BastokMines/Pavvke/onTrade BastokMines/onEventFinish/90 BastokMines/onEventFinish/91 BastokMines/onEventFinish/92
+char zone=BastokMines pos=16.6,6.985,-13.8
+fame Bastok 49
+item SilverNameTag
+item SilverNameTag
+item SilverNameTag
+item BoneChip
+login
+trade Pavvke SilverNameTag x1   # available: no trade handler, nothing
+trigger Pavvke                  # fame 49 (level 1): his default 75
+finish
+fame Bastok 50
+trigger Pavvke                  # fame level 2: the offer, 90
+finish                          # accepted
+trigger Pavvke                  # accepted: no trigger in section 2, 75
+finish
+trade Pavvke BoneChip x1        # the wrong item: nothing
+trade Pavvke SilverNameTag x1   # not completed yet: 91
+finish                          # completed: 550 gil, fame +10, a tag gone
+trigger Pavvke                  # completed: 75
+finish
+trade Pavvke SilverNameTag x1   # completed: 92
+finish                          # completed again: 550 gil, fame +10 and +10 more, a tag gone

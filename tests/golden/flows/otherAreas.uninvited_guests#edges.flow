@@ -1,0 +1,53 @@
+# Uninvited Guests (otherAreas 81): the edges. CoP Slanderous Utterings current (at The Secrets of Worship, the
+# boundary, CoP 4-3's Justinius 131 beats 570 on the first talk: #worship). A trade to Justinius while available: no
+# trade handler. A stale reward var (a GM: UninvitedGuestsReward 4279). Justinius 570, option 2: nothing; option 1:
+# started (the var cleared). The permit taken (a GM): Prog 3, 575 (not 572: the var is 0), finished: Wait, Prog 4. Prog
+# 2 (a GM), a full inventory: 572, finished: the reward rolled, not given (no room): kept in the char var, not
+# completed; room: 572 (the char var's item again), finished: completed with the gil. Completed, Wait 0 (a GM): 573,
+# option 2: nothing; option 1: started (Prog 1). Prog 1 with the permit: 571. Prog 0 (a GM) with a reward pending (the
+# char var, a GM): 572, finished: that item given, no gil (completed before), completed again. Prog 4, Wait 0 (a GM):
+# 574, finished: started. Prog 3 (a GM): 575, finished: Wait set, Prog 4. Wait 1800198001 (a GM: not over, and not the
+# tally): 575, finished: nothing (Prog 4).
+lists TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/onEventFinish/570 TavnazianSafehold/onEventFinish/572 TavnazianSafehold/onEventFinish/573 TavnazianSafehold/onEventFinish/574 TavnazianSafehold/onEventFinish/575 MonarchLinn/onEventFinish/32001
+lists TavnazianSafehold/Justinius/onTrade
+char zone=TavnazianSafehold pos=80.2,-34,70.5 job=WAR lvl=75
+mission Cop SlanderousUtterings current
+item ChocoboFeather
+login
+trade Justinius ChocoboFeather x1       # available: no trade handler; nothing
+charvar UninvitedGuestsReward 4279      # a GM: a stale reward var
+trigger Justinius                       # available: 570
+finish option=2                         # nothing
+trigger Justinius                       # 570
+finish option=1                         # the permit; Prog 1; the var 0; begun
+delkeyitem MonarchLinnPatrolPermit      # a GM: the fight lost
+trigger Justinius                       # Prog 1, no permit: Prog 3; 575 (the var cleared: not 572)
+finish                                  # Wait 1800198000; Prog 4
+charvar Quest[4][81]Prog 2              # a GM
+fill-inventory
+trigger Justinius                       # Prog 2: 572
+finish                                  # rolled; no room: kept; not completed
+free-inventory
+trigger Justinius                       # 572
+finish                                  # the same item; 10000 gil; completed
+charvar Quest[4][81]Wait 0              # a GM
+trigger Justinius                       # completed, Prog 0, the wait over: 573
+finish option=2                         # nothing
+trigger Justinius                       # 573
+finish option=1                         # started: Prog 1
+trigger Justinius                       # Prog 1, the permit: 571
+finish
+charvar Quest[4][81]Prog 0              # a GM
+charvar UninvitedGuestsReward 4279      # a GM: a reward pending (Tavnazian Salad)
+trigger Justinius                       # Prog 0, a reward pending: 572
+finish                                  # that item; no gil (completed before); completed again
+charvar Quest[4][81]Prog 4              # a GM
+charvar Quest[4][81]Wait 0              # a GM
+trigger Justinius                       # Prog 4, the wait over: 574
+finish                                  # started: Prog 1
+charvar Quest[4][81]Prog 3              # a GM
+trigger Justinius                       # Prog 3: 575
+finish                                  # Wait 1800198000; Prog 4
+charvar Quest[4][81]Wait 1800198001     # a GM: the wait not over, and not the tally
+trigger Justinius                       # Prog 4, the wait not over: 575
+finish                                  # Prog 4: nothing (Wait kept)

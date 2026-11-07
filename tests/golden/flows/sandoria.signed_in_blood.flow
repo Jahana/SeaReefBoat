@@ -1,0 +1,61 @@
+# Signed in Blood (sandoria 108): Sobane in Southern San d'Oria, Abelard in Selbina, the Treasure Chest of Ordelle's
+# Caves. Fame level 2: Sobane's default; level 3: a trade (no trade handler: nothing), 732 (option 0: nothing; option 1:
+# begun). Prog 0: a bone chip (nil),
+# 733, the Cathedral Tapestry (734: Prog 1, the tapestry taken). Prog 1: Sobane's 735, Abelard's 1104 (Prog 2). Prog 2:
+# Abelard's 1105, Sobane's 735, the chest opened with an Ordelle Chest Key (xi.treasure.onTrade: the Torn-Out Pages),
+# Abelard's 1106 (Prog 3). Prog 3: Abelard's 48, Sobane's 736 (completed: Cunning Earring, fame +30, 3500 gil, the
+# pages deleted, needToZone), Sobane's 737 while needToZone; after zoning elsewhere and back her default (Tea with a
+# Tonberry needs fame level 4: 155 is level 3). A chest trade once the pages are held is not taken here (#chest_held).
+# The char is level 9: An Explorer's Footsteps (level 10, available) also offers Abelard's 40 at the same priority, and
+# the lookup would alternate it with this quest's events. The chest opens with its zone key at any level.
+# Sobane has no script; her default is text SOBANE_DIALOG. Abelard has no script; his default is 1130 (the RoV mission
+# that names him is not current). The chest's script runs xi.treasure; a chest is placed 10 s after its zone starts
+# (hence the tick) and leaves for a while once opened.
+lists SouthernSanDoria/Sobane/onTrigger SouthernSanDoria/Sobane/onTrade SouthernSanDoria/onEventFinish/732 SouthernSanDoria/onEventFinish/734 SouthernSanDoria/onEventFinish/736 Selbina/Abelard/onTrigger Selbina/onEventFinish/1104 Selbina/onEventFinish/1106 OrdellesCaves/Treasure_Chest/onTrade
+char zone=SouthernSanDoria pos=-189,-2.9,97.2 job=WAR lvl=9
+fame Sandoria 124
+item BoneChip
+item CathedralTapestry
+item OrdelleChestKey
+login
+trigger Sobane                            # fame level 2: not offered; SOBANE_DIALOG
+fame Sandoria 125
+trade Sobane BoneChip x1                  # available, fame level 3: no trade handler, nothing
+trigger Sobane                            # fame level 3: 732 (0, Cathedral Tapestry)
+finish                                    # option 0: nothing
+trigger Sobane                            # 732
+finish option=1                           # begun
+trade Sobane BoneChip x1                  # Prog 0, not the tapestry: nil, nothing
+trigger Sobane                            # Prog 0: 733 (0, Cathedral Tapestry)
+finish
+trade Sobane CathedralTapestry x1         # 734 (0, Cathedral Tapestry)
+finish                                    # Prog 1, the tapestry taken
+trigger Sobane                            # Prog 1: 735
+finish
+warp -52.1,-11.3,-11.1 Selbina
+trigger Abelard                           # Prog 1: 1104
+finish                                    # Prog 2
+trigger Abelard                           # Prog 2, no pages: 1105
+finish
+warp -189,-2.9,97.2 SouthernSanDoria
+trigger Sobane                            # Prog 2: 735
+finish
+warp -49.4,-1.07,7.2 OrdellesCaves
+tick 13000                                # the chest placed
+trigger Treasure_Chest                    # walks to the chest (no quest trigger handler: the chest's own script)
+trade Treasure_Chest OrdelleChestKey x1   # Prog 2, no pages: xi.treasure.onTrade(.., 2, TORN_OUT_PAGES): the chest opens
+tick 4500                                 # the Torn-Out Pages
+warp -52.1,-11.3,-11.1 Selbina
+trigger Abelard                           # the pages: 1106
+finish                                    # Prog 3
+trigger Abelard                           # Prog 3: 48
+finish
+warp -189,-2.9,97.2 SouthernSanDoria
+trade Sobane BoneChip x1                  # Prog 3: no trade handler, nothing
+trigger Sobane                            # Prog 3: 736
+finish                                    # completed: Cunning Earring, fame +30, 3500 gil; the pages deleted; needToZone
+trigger Sobane                            # completed, needToZone: 737
+finish
+warp 5.3,0.5,24.9 NorthernSanDoria       # another zone: needToZone ([generic]mustZone 230) cleared
+warp -189,-2.9,97.2 SouthernSanDoria
+trigger Sobane                            # completed: no section; fame 155 (level 3): no Tea with a Tonberry; SOBANE_DIALOG

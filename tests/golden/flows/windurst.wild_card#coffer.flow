@@ -1,0 +1,28 @@
+# Wild Card (windurst 77): the coffer's Prog operand. Accepted by GM at Prog 1 (the card not held): the key traded to the
+# Toraimarai Canal Treasure Coffer is nil, the coffer's own script (a regular opening: gil, no Joker Card). Prog 4 by GM,
+# the coffer back after its 180 s: nil again, the coffer's own script, which now answers with its illusion (the cooldown
+# the first opening set; the quest's bypass type 2 skips that test, so a quest action here would give the card).
+# The Star Onion quests 1-4 completed by GM (an available one's line would otherwise answer at Kohlo-Lakolo first).
+lists ToraimaraiCanal/Treasure_Coffer/onTrade
+char zone=ToraimaraiCanal pos=-257.5,24.0,82.0 lvl=5 nation=2
+rank 8
+fame Windurst 325
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+quest Windurst.OnionRings completed
+quest Windurst.CryingOverOnions completed
+quest Windurst.WildCard accepted
+charvar Quest[2][77]Prog 1
+item ToraimariCofferKey
+item ToraimariCofferKey
+login
+tick 13000
+trigger Treasure_Coffer
+trade Treasure_Coffer ToraimariCofferKey x1    # Prog 1: nil, the coffer's own script
+tick 4500
+charvar Quest[2][77]Prog 4                     # GM
+tick 190000                                    # the coffer hidden 180 s
+trigger Treasure_Coffer
+trade Treasure_Coffer ToraimariCofferKey x1    # Prog 4: nil, the coffer's own script: the illusion (bypass type 0 within its cooldown)
+tick 4500

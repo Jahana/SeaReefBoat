@@ -1,0 +1,26 @@
+# Altepa - Dominion Op #14 (abyssea 100, op 573): a level 99 Warrior in Abyssea - Altepa; the op's target Barrens_Treant
+# (16 placed spawns, the first 17670427). The next op (#01, Sand_Sweeper) and Grauberg's #14 accepted (a GM), this op
+# available: a Barrens_Treant killed: no section: nothing. This op accepted (a GM; activeDominionOp stays 0, which
+# dominionOnMobDeath does not read): a Barrens_Treant killed: dominionOnMobDeath(573): Quest[8][100]Prog 1
+# (FOV_DEFEATED_TARGET 1 of 5). The next op's Sand_Sweeper killed: Quest[8][87]Prog 1 (its own count), this op's
+# unchanged. Prog 4 (a GM): one more: Prog 5 (5 of 5); another: the count is full (numDefeated < 5 is false): nothing.
+# Completed (Prog 0, as completeDominionOp leaves it; a GM): another killed: no section: nothing. Perfect Dodge,
+# Invincible and Elemental Sforzo (GM effects) keep the chars alive through the kills (the Abyssea mobs aggro and link).
+lists AbysseaAltepa/Barrens_Treant/onMobDeath AbysseaAltepa/Sand_Sweeper/onMobDeath
+char zone=AbysseaAltepa pos=432,0,321 job=WAR lvl=99
+login
+effect 49                               # a GM: Perfect Dodge (melee hits evaded)
+effect 50                               # a GM: Invincible (no physical damage)
+effect 522                              # a GM: Elemental Sforzo (no magic damage)
+quest Abyssea.DominionOp01Altepa accepted # a GM: the next op
+quest Abyssea.DominionOp14Grauberg accepted # a GM: Grauberg's #14
+kill RANI_OFFSET-124                    # available: nothing (17670427)
+quest Abyssea.DominionOp14Altepa accepted # a GM
+kill RANI_OFFSET-123                    # accepted: Prog 1 (17670428)
+kill RANI_OFFSET-28                     # Sand_Sweeper: Quest[8][87]Prog 1 (17670523)
+charvar Quest[8][100]Prog 4             # a GM
+kill RANI_OFFSET-122                    # Prog 5 (17670429)
+kill RANI_OFFSET-121                    # full: nothing (17670430)
+quest Abyssea.DominionOp14Altepa completed # a GM
+charvar Quest[8][100]Prog 0             # a GM
+kill RANI_OFFSET-120                    # completed: nothing (17670431)

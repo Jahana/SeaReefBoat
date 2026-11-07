@@ -1,0 +1,49 @@
+# The Call of the Sea (otherAreas 67): Tavnazian Safehold, no scripts: Equette (default 162), Leporaitceau (180),
+# Anteurephiaux (177); Misareaux Coast's qm_bloody_coffin (default NOTHING_OUT_OF_ORDINARY) and the NM Bloody Coffin. A
+# fresh CoP log; A Bitter Past available (it answers Frescheque only).
+# Available: Leporaitceau 171, finished: Option 1; again: nil, 180. Anteurephiaux at Prog 0: nil, 177. Equette 170,
+# finished: Prog 1; again: nil, 162. Anteurephiaux 172, finished: begun, Prog 2; again: nil, 177. Misareaux: the ???: Bloody
+# Coffin popped, FOUL_STENCH_OF_DEATH; again (up): nil. Killed: the local NMKilled 1. The ???: the Whispering Conch, Prog 3,
+# noAction; again: nil; again once the corpse is gone: nil. Anteurephiaux 173, finished: the conch taken, Prog 4. Equette 174, finished: completed (the Memento
+# Muffler). Completed: Equette nil, 162; Leporaitceau nil, 180.
+lists TavnazianSafehold/Equette/onTrigger TavnazianSafehold/Leporaitceau/onTrigger TavnazianSafehold/Anteurephiaux/onTrigger TavnazianSafehold/onEventFinish/170 TavnazianSafehold/onEventFinish/171 TavnazianSafehold/onEventFinish/172 TavnazianSafehold/onEventFinish/173 TavnazianSafehold/onEventFinish/174 MisareauxCoast/qm_bloody_coffin/onTrigger MisareauxCoast/Bloody_Coffin/onMobDeath
+char zone=TavnazianSafehold pos=77.5,-25,13.2 job=WAR lvl=75
+login
+trigger Leporaitceau                    # available, Option 0: 171
+finish                                  # Option 1
+trigger Leporaitceau                    # Option 1: nil; 180
+finish
+warp 84.1,-25,-3.3 TavnazianSafehold
+trigger Anteurephiaux                   # Prog 0: nil; 177
+finish
+warp 4,-22.3,-17.3 TavnazianSafehold
+trigger Equette                         # Prog 0: 170
+finish                                  # Prog 1
+trigger Equette                         # Prog 1: nil; 162
+finish
+warp 84.1,-25,-3.3 TavnazianSafehold
+trigger Anteurephiaux                   # Prog 1: 172
+finish                                  # begun; Prog 2
+trigger Anteurephiaux                   # Prog 2: nil; 177
+finish
+warp 642.8,0.3,-516.6 MisareauxCoast
+trigger qm_bloody_coffin                # Prog 2, not up: popped; FOUL_STENCH_OF_DEATH
+trigger qm_bloody_coffin                # up: nil; its default
+kill BLOODY_COFFIN                      # NMKilled 1
+trigger qm_bloody_coffin                # NMKilled 1: the conch; Prog 3; noAction
+trigger qm_bloody_coffin                # Prog 3: nil; its default
+tick 15000                              # Bloody Coffin's corpse despawns
+tick 15000
+tick 15000
+trigger qm_bloody_coffin                # Prog 3, the NM gone: nil; its default
+warp 84.1,-25,-3.3 TavnazianSafehold
+trigger Anteurephiaux                   # Prog 3: 173
+finish                                  # the conch taken; Prog 4
+warp 4,-22.3,-17.3 TavnazianSafehold
+trigger Equette                         # Prog 4: 174
+finish                                  # completed; the Memento Muffler
+trigger Equette                         # completed: nil; 162
+finish
+warp 77.5,-25,13.2 TavnazianSafehold
+trigger Leporaitceau                    # completed: nil; 180
+finish

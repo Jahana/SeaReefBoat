@@ -1,0 +1,13 @@
+# The Immortal Lu Shang (outlands 196), the quest's own var at the completion: accepted with the lumber, the broken rod
+# and a Light Crystal, and Quest[5][196]Prog 1 (GMs). Irmilant: the trade, 78; finished: npcUtil.completeQuest
+# (Lu Shang's Fishing Rod, the title, completed), then San d'Oria and Bastok fame +10 and the trade confirmed.
+# npcUtil.completeQuest does no cleanup: Quest[5][196]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=Rabao pos=3.78,9.54,56.21
+quest Outlands.TheImmortalLuShang accepted
+item PieceOfAncientLumber
+item BrokenLuShangsFishingRod
+item LightCrystal
+charvar Quest[5][196]Prog 1     # a GM: the quest's own var
+login
+trade Irmilant PieceOfAncientLumber x1 BrokenLuShangsFishingRod x1 LightCrystal x1   # 78
+finish                          # the rod; the title; completed, Prog kept; fame; the trade taken

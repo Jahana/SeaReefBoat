@@ -1,0 +1,16 @@
+# Redeeming Rocks (crystalWar 4), the quest's own var at the completion (missions as the main flow's): accepted,
+# RedeemingRocksProg 0, RedeemingDay 1 (not today) and Quest[7][4]Prog 1 (GMs). Kocco Ehllek: 111; finished:
+# npcUtil.completeQuest (Kocco's Earring, RedeemingDay 0, completed). npcUtil.completeQuest does no cleanup:
+# Quest[7][4]Prog stays 1 (quest:complete's cleanup would clear it).
+lists WindurstWatersS/Kocco_Ehllek/onTrigger WindurstWatersS/onEventFinish/111
+char zone=WindurstWatersS pos=-39.965,-1.125,-163.018 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+quest CrystalWar.RedeemingRocks accepted
+charvar RedeemingDay 1
+charvar Quest[7][4]Prog 1               # a GM: the quest's own var
+login
+trigger Kocco_Ehllek                    # RedeemingDay not today: 111
+finish                                  # Kocco's Earring; RedeemingDay 0; completed, Prog kept

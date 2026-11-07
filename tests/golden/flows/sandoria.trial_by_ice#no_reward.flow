@@ -1,0 +1,22 @@
+# Trial by Ice (sandoria 59), 709 answered with no reward option, with room (quest rework P9, D6): option 0, and above
+# 6 (7), take the finish's last branch, player:addItem(0): the engine only warns (C++ ShowWarning "AddItem: Item <0> is
+# not found in a database"; the C# engine logs it as a lua: line), gives nothing, and the finish goes on: ITEM_OBTAINED
+# 0, Heir of the Great Ice, the whisper taken, TrialByIce_date set, fame +60, completed. The recorder counted the warning
+# as a script error and refused the arm until the warning: line below names it. Accepted by GM with the whisper; after
+# the first completion the date is set behind (GM) for 706, whose option 1 begins the quest again.
+warning: lua: AddItem: Item <0> is not found in a database -- 709 at option 0 / 7: player:addItem(0) warns and gives nothing; the finish completes
+char zone=NorthernSanDoria pos=-185.5,0.0,110.1 job=WAR lvl=75
+fame Sandoria 425
+quest Sandoria.TrialByIce accepted
+keyitem WhisperOfFrost
+login
+trigger Gulmama                           # accepted, the whisper: 709
+finish option=0                           # no reward option: addItem(0) warns; ITEM_OBTAINED 0; completed
+trigger Gulmama                           # completed, the date ahead: 710
+finish
+charvar TrialByIce_date 1                 # GM: the date behind
+trigger Gulmama                           # 706
+finish option=1                           # begun again
+keyitem WhisperOfFrost
+trigger Gulmama                           # 709
+finish option=7                           # above 6: the same as 0; completed

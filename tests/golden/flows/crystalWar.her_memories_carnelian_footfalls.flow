@@ -1,0 +1,51 @@
+# Her Memories: Carnelian Footfalls (crystalWar 69): a level 99 Warrior in Southern San d'Oria [S] with the WotG mission
+# Her Memories current (a GM; other logs as group 1's flows) and the Red Recommendation Letter. No flow statement sets a
+# campaign allegiance: the char earns 1 through Steamed Rams first (Mainchelite 7, begun; the three (GMs): 12,
+# completed, allegiance 1). East Ronfaure [S], then Southern San d'Oria [S] from there at Prog 0: 170, finished: Prog 1.
+# Mainchelite: Prog 1: 171 (80, 90), finished: begun. Accepted, Option 0: 173 (oncePerZone; Steamed Rams' completed 5 is
+# no rival: it sits at replaceDefault under 173, which plays (event 0xAD in the 032 packet @e1d2e9c3bd8dd5a4); a GM sets
+# the lookup's cycle (the last action played) to 173 first, so a tie of the two would rotate to 5). East Ronfaure [S]
+# from Southern San d'Oria [S] at Prog 1: 12, finished: Prog 2. qm3 13, finished: bit 0; again: 4. qm4 14, finished: bit
+# 1; again: 5. qm5 15, finished: bit 2; again: 6. Southern San d'Oria [S] (accepted: no zone-in reply): Mainchelite:
+# Option 7: 172 (1, 23, 1749), finished: completed (Large Memory Fragment 4), checkMemoryFragments (one large: nothing).
+lists SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventFinish/170 SouthernSanDoriaS/onEventFinish/171 SouthernSanDoriaS/onEventFinish/172 SouthernSanDoriaS/Mainchelite/onTrigger EastRonfaureS/onZoneIn/1 EastRonfaureS/onEventFinish/12 EastRonfaureS/onEventFinish/13 EastRonfaureS/onEventFinish/14 EastRonfaureS/onEventFinish/15 EastRonfaureS/qm3/onTrigger EastRonfaureS/qm4/onTrigger EastRonfaureS/qm5/onTrigger
+char zone=SouthernSanDoriaS pos=-13.849,1.398,-30.368 job=WAR lvl=99
+keyitem RedRecommendationLetter
+mission Wotg HerMemories current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Mainchelite                     # Steamed Rams: 7 (Carnelian not available: no allegiance)
+finish option=0                         # Steamed Rams begun
+keyitem CharredPropeller
+keyitem OxidizedPlate
+keyitem PieceOfShatteredLumber
+trigger Mainchelite                     # Steamed Rams: 12
+finish                                  # Steamed Rams completed; allegiance 1
+warp 314.321,-30.495,-67.15 EastRonfaureS # from Southern San d'Oria [S], Carnelian available: no East Ronfaure [S] zone-in there
+warp -13.849,1.398,-30.368 SouthernSanDoriaS open # from East Ronfaure [S], Prog 0: 170, left open
+finish                                  # Prog 1
+trigger Mainchelite                     # Prog 1: 171 (80, 90)
+finish                                  # begun
+localvar [Action][Mainchelite][onTrigger] 173 # a GM: the cycle past 173
+trigger Mainchelite                     # accepted, Option 0: 173 (oncePerZone; Steamed Rams' 5 sits under it)
+finish
+warp 314.321,-30.495,-67.15 EastRonfaureS open # from Southern San d'Oria [S], Prog 1: 12, left open
+finish                                  # Prog 2
+trigger qm3                             # bit 0 not set: 13 (8 args)
+finish                                  # bit 0
+trigger qm3                             # bit 0 set: 4
+finish
+trigger qm4                             # bit 1 not set: 14
+finish                                  # bit 1
+trigger qm4                             # bit 1 set: 5
+finish
+trigger qm5                             # bit 2 not set: 15
+finish                                  # bit 2 (Option 7)
+trigger qm5                             # bit 2 set: 6
+finish
+warp -13.849,1.398,-30.368 SouthernSanDoriaS # accepted: no zone-in reply
+trigger Mainchelite                     # Option 7: 172 (1, 23, 1749)
+finish                                  # completed (Large Memory Fragment 4); checkMemoryFragments: nothing

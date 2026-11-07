@@ -1,0 +1,223 @@
+# golden trace: sandoria.tigers_teeth
+seed 7
+flow 50d80cb7942ab045d902e2e5f9ef7b65016a906489ee7720fbea16bd3f50cd7c
+recorder lua
+lua-at 134c87afa00c8afcc1b4995bc4f1d58753889652
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @97ea462c2b02cdd2 (175)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @ad97dcd1d6ba83a0 (3)
+char_jobs @27ea52c8fa126bff (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @bcbc236d2b548e3e (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @aaaa7de24fa8efd1 (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @67a27677bd1e54e5 (2)
+char_stats @019b7fd8799a85e6 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @6423a89adc192eda (41)
+ret onZoneIn=number:30035,onEventFinish=nil:nil
+order 230/Taumila/onTrigger=default,Quest[0][23],Quest[0][23],Quest[0][23]
+order 230/Taumila/onTrade=Quest[0][23],Quest[0][23]
+order 230/onEventFinish/574=Quest[0][23]
+order 230/onEventFinish/572=Quest[0][23],Quest[0][23]
+step trade Taumila BlackTigerFang x3
+packets
+ret onTrade=nil:nil
+step trigger Taumila
+packets
+  00E @557a4efeec76c64c
+  00E @a68e4a18e4ec7e8a
+  00E @cef148824cee955c
+  00E @ab6dd934c89295f5
+  00E @14f69f000c1adbc3
+  00E @536974671ee67ac3
+  00E @99a268e9ccaab223
+  00E @f5abd326c47da6c0
+  00E @1eca0dbdfd9b817c
+  00E @01bf5792e969f58e
+  00E @d24de459061b601a
+  00E @7a7ed30fb378b887
+  00E @403d2f70ad824ede
+  00E @39de72b8ff69aa06
+  00E @2c6bb52faa041c43
+  00E @2b978f48a3248eaa
+  00E @f04910a279313327
+  00E @7c446aa51a0265ec
+  00E @6173d33e5d8e5bb7
+  00E @a7ceadb9fbf12bd6
+  00E @7ed685dabff4d968
+  00E @924a66af1a49f568
+  00E @32e56741f04711cc
+  00E @4c93e370c6eaac5d
+  00E @7e2c798b817e4bbd
+  00E @d2cefb1bacdd6d21
+  00E @c10a579f16c5f83d
+  00E @a04b3d8d7369208c
+  036 @bbccb621809ffef5
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step finish-if-event
+packets
+step fame Sandoria 125
+packets
+char_profile - fame_sandoria=124
+char_profile + fame_sandoria=125
+step trigger Taumila
+packets
+  032 @cf8083ca997ee7ee
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish option=1
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Taumila
+packets
+  032 @cf8083ca997ee7ee
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  056 @0f926eaeb72b8f0e
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_quest_state + quest_key=sandoria.tigers_teeth|area=0|quest_id=23|status=1|step=0|progress=null|repeat_by=0
+chars quests +2:80
+ret onEventFinish=nil:nil
+step trigger Taumila
+packets
+  032 @bc110b1a5b363ab4
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Taumila BoneChip x1
+packets
+  032 @8fa7d878a821c245
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Taumila BlackTigerFang x2
+packets
+  032 @8fa7d878a821c245
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Taumila BlackTigerFang x3 BoneChip x1
+packets
+  032 @8fa7d878a821c245
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Taumila BlackTigerFang x3
+packets
+  032 @cee3866deb88178c
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  01E @522dd9b03b751c6a
+  02A @c219ea96967457c4
+  061 @206e97fd0630bd8c
+  056 @2567b5fa4a207790
+  056 @a7f9970eb3fac3ec
+  01E @c03972649ac85c4f
+  01D @f8579df92de4b1ca
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory - location=0|slot=0|itemId=65535|quantity=1000|bazaar=0|signature=|extra=null
+char_inventory - location=0|slot=1|itemId=884|quantity=6|bazaar=0|signature=|extra=null
+char_inventory + location=0|slot=0|itemId=65535|quantity=3100|bazaar=0|signature=|extra=null
+char_inventory + location=0|slot=1|itemId=884|quantity=3|bazaar=0|signature=|extra=null
+char_quest_state - quest_key=sandoria.tigers_teeth|area=0|quest_id=23|status=1|step=0|progress=null|repeat_by=0
+char_quest_state + quest_key=sandoria.tigers_teeth|area=0|quest_id=23|status=2|step=0|progress=null|repeat_by=0
+char_stats - title=0
+char_stats + title=61
+chars quests +2:00 +34:80
+chars titles +7:20
+ret onEventFinish=nil:nil
+step trigger Taumila
+packets
+  032 @c55df98832506d3e
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Taumila BoneChip x1
+packets
+  032 @8fa7d878a821c245
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trade Taumila BlackTigerFang x3
+packets
+  032 @cee3866deb88178c
+  0DF @c9a9c76cd64a8249
+  037 @676c09eb86d9e153
+ret onTrade=number:0
+step finish
+packets
+  01E @b6ac42e3d0df0db0
+  02A @c219ea96967457c4
+  020 @a6804f916f69b514
+  01D @f8579df92de4b1ca
+  0DF @c9a9c76cd64a8249
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_inventory - location=0|slot=0|itemId=65535|quantity=3100|bazaar=0|signature=|extra=null
+char_inventory - location=0|slot=1|itemId=884|quantity=3|bazaar=0|signature=|extra=null
+char_inventory + location=0|slot=0|itemId=65535|quantity=5200|bazaar=0|signature=|extra=null
+char_profile - fame_sandoria=125
+char_profile + fame_sandoria=141
+ret onEventFinish=nil:nil

@@ -1,0 +1,12 @@
+# New Character Cutscenes next to Enter the Talekeeper (Bastok Mines from Zeruhn Mines at status 5: 176), which runs
+# before the quest's. A Bastok char (nation 1), ROV off, notSeen 1 (a GM).
+char zone=BastokMines pos=50,0,-30 job=WAR lvl=75 nation=1
+setting ENABLE_ROV 0
+login                                   # the quest's own (notSeen 0 after)
+finish
+mission Bastok EnterTheTalekeeper current # a GM
+missionstatus Bastok 5                  # a GM
+charvar HQuest[newCharacterCS]notSeen 1 # a GM
+warp 0,0,0 ZeruhnMines                  # the mission's other zone
+warp 50,0,-30 BastokMines               # from Zeruhn Mines: Enter the Talekeeper (176) wins
+finish

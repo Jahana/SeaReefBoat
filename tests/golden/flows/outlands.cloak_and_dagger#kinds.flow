@@ -1,0 +1,33 @@
+# Jakoh's reply kinds: Cloak and Dagger (279 E once per zone; 280 / 283 E, 284 P) against Everyone's Grudging (107 P, a
+# progress cutscene; 108 / 110 E) and A Question of Taste (completed at Prog 0, no mustZone: no reply). A level 75 Thief,
+# dagger skill 2300, the Dagger of Trials held, Windurst fame 488, A Question of Taste completed, rancorCurse 1 (GMs).
+# Both offers: 107 (Progress) beats 279 (Event); finished: Everyone's Grudging begun. Then 279 and 108 (both Event) tie:
+# the last id 107 is neither: the container order (Cloak and Dagger first): 279; its finish begins Cloak and Dagger
+# (the dagger held). 280 and 108 tie: the last id 279 is neither: 280, then the cycle: 108. Prog 1 (a GM): 280 and 110
+# tie: the last id 108 is neither: 280 (option 0: nothing), then 110, finished: Everyone's Grudging completed. The map and
+# the annals (GMs): 284 (Progress) alone: completed.
+lists Kazham/Jakoh_Wahcondalo/onTrigger
+char zone=Kazham pos=101.702,-15.023,-115.841 job=THF lvl=75
+skill Dagger 2300
+item DaggerOfTrials
+fame Windurst 488
+quest Outlands.AQuestionOfTaste completed
+charvar rancorCurse 1
+login
+trigger Jakoh_Wahcondalo                # 107 (Progress) beats 279 (Event)
+finish                                  # Everyone's Grudging begun
+trigger Jakoh_Wahcondalo                # 279 and 108 tie: 279
+finish                                  # Cloak and Dagger begun
+trigger Jakoh_Wahcondalo                # 280 and 108 tie: the last id 279: 280
+finish
+trigger Jakoh_Wahcondalo                # the cycle: 108
+finish
+charvar Quest[5][4]Prog 1               # a GM
+trigger Jakoh_Wahcondalo                # Prog 1: 280 and 110 tie: the last id 108: 280
+finish                                  # 280, option 0: nothing
+trigger Jakoh_Wahcondalo                # the cycle: 110
+finish                                  # Everyone's Grudging completed
+keyitem MapToTheAnnalsOfTruth           # a GM
+keyitem AnnalsOfTruth                   # a GM
+trigger Jakoh_Wahcondalo                # 284 alone
+finish                                  # Cloak and Dagger completed

@@ -1,0 +1,29 @@
+# A Timely Visit (sandoria 105): 33 taken, and the Prog arms only a GM reaches. Fame 225: Deraquien's 33, option 1
+# (begun; Option stays 0). Stage 0, Prog 6 by GM (past every Stage 0 arm): Deraquien nil (his script's 18), Phillone nil
+# (his default 29), Narvecaint nil (his default text); Narvecaint at Prog 2 (6, the <= 2 bound), Prog 5 (7, the <= 5
+# bound). Stage 1: Prog 6 (7, the <= 6 bound), Prog 9 (8, the else arm).
+char zone=SouthernSanDoria pos=-97.198,-2,32.056 job=WAR lvl=75 nation=0
+fame Sandoria 225
+login
+trigger Deraquien                         # fame level 4, Option 0: 33
+finish option=1                           # begun
+charvar Quest[0][105]Prog 6               # GM: Stage 0, Prog 6
+trigger Deraquien                         # Stage 0, Prog 6: nil; his script's 18
+finish
+trigger Phillone                          # Stage 0, Prog 6: nil; his default 29
+finish
+warp -260.436,23.144,127.61 LaTheinePlateau
+trigger Narvecaint                        # Stage 0, Prog 6: nil; his default text
+charvar Quest[0][105]Prog 2
+trigger Narvecaint                        # Prog 2: 6 (priority 101)
+finish
+charvar Quest[0][105]Prog 5
+trigger Narvecaint                        # Prog 5: 7 (priority 101)
+finish
+charvar Quest[0][105]Stage 1
+charvar Quest[0][105]Prog 6
+trigger Narvecaint                        # Stage 1, Prog 6: 7 (priority 101)
+finish
+charvar Quest[0][105]Prog 9
+trigger Narvecaint                        # Stage 1, Prog 9: 8 (priority 101)
+finish

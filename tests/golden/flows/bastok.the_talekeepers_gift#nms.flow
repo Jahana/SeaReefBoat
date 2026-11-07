@@ -1,0 +1,25 @@
+# The Talekeeper's Gift (bastok 56): accepted (GM), a WAR 75 (the three NMs at once would kill a 50). The zone-in to
+# Qufim Island at Prog 0 (nothing), the ???'s 100 (declined, then the three NMs: Picklix Longindex claimed, Moxnix
+# Nightgoggle and Doglix Muttsnout on enmity), the kills (Prog bits 2, 1, 0: 7), the ??? at Prog 7, and the zone-in from
+# Behemoth's Dominion at Prog 7: 100, the reward.
+lists BehemothsDominion/qm_talekeeper/onTrigger BehemothsDominion/onEventFinish/100 QufimIsland/onZoneIn/1 QufimIsland/onEventFinish/100
+char zone=BehemothsDominion pos=211,4,-79 job=WAR lvl=75
+quest Bastok.TheTalekeepersTruth completed
+quest Bastok.TheTalekeepersGift accepted
+login
+zoneline QufimIsland            # Prog 0: no zone-in event
+zoneline BehemothsDominion
+trigger qm_talekeeper           # Prog 0, none spawned: THERE_ARE_SYMBOLS, 100
+finish option=1                 # declined: nothing
+trigger qm_talekeeper           # 100
+finish                          # the three NMs spawned (Picklix claimed, the others on enmity), YOU_HEAR_A_NOISE
+trigger qm_talekeeper           # the NMs up: nil, NOTHING_OUT_OF_ORDINARY
+kill TALEKEEPERS_GIFT_OFFSET    # Picklix Longindex: Prog bit 2 (4)
+kill TALEKEEPERS_GIFT_OFFSET+1  # Moxnix Nightgoggle: Prog bit 1 (6)
+kill TALEKEEPERS_GIFT_OFFSET+2  # Doglix Muttsnout: Prog bit 0 (7)
+trigger qm_talekeeper           # Prog 7: nil, NOTHING_OUT_OF_ORDINARY
+zoneline QufimIsland            # from Behemoth's Dominion at Prog 7: 100, answered 0; completed: Fighter's Lorica, Bastok
+                                # fame +20, Paragon of Warrior Excellence
+warp -13,7,29 BastokMines
+trigger Deidogg                 # completed: no handler; 166
+finish

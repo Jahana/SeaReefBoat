@@ -1,0 +1,83 @@
+# Lure of the Wildcat (Windurst) (windurst 94): Ibwam in Windurst Woods and twenty NPCs in the four Windurst zones. The
+# guard (ENABLE_TOAU 1, the default): 736 (the Green Sentinel Badge, begun); Ibwam's 737 at Prog 0, 738 with some bits,
+# 739 with all twenty (the badge taken, KEYITEM_LOST, completed: the Green Invitation Card, fame 0); each NPC's event
+# once (its bit unset) and nil after (Soni-Muni is talked to twice). Completed: Ibwam's own script (740 before ToAU's
+# President Salaheem). #toau_off is the guard's other side, #gm isFull's edges, #kinds repeats 736.
+# Ibwam's script always answers (740): the quest's Events 737 / 738 take turns with it (the lookup's alternation), so
+# he is talked to twice with some bits; 739 is a Progress event (#gm: right after an Event 738). Each NPC's event is a
+# Progress event: Soni-Muni's 735 plays again after a GM reset of her bit, where an Event would fall back to her script.
+# The char is a WAR of level 20 at fame 0, Mihgo's Amigo completed by GM (its offer 80 at Nanaa Mihgo is a Progress at
+# any fame; completed without a mustZone it is nil), so the other quests at these NPCs stay silent: The Amazin' Scorpio
+# (Soni-Muni's script, fame level 2), Making Headlines (Umumu's script, not accepted), Curses Foiled Again (Shantotto:
+# its Event 171 at any fame, under the wildcat Progress), Wonder Wands (Yaman-Hachuman's script), mission 3-3 (Kyume-Romeh,
+# Yujuju: not current). Each NPC's first talk is the wildcat Progress; the NPC is not talked to again.
+lists WindurstWoods/Ibwam/onTrigger WindurstWoods/Ibwam/onTrade WindurstWoods/onEventFinish/736 WindurstWoods/onEventFinish/739 WindurstWoods/Soni-Muni/onTrigger WindurstWoods/Etsa_Rhuyuli/onTrigger WindurstWoods/Cayu_Pensharhumi/onTrigger WindurstWoods/Umumu/onTrigger WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWalls/Yoriri/onTrigger WindurstWalls/Shantotto/onTrigger WindurstWalls/Moan-Maon/onTrigger WindurstWalls/Chomomo/onTrigger WindurstWalls/Naih_Arihmepp/onTrigger WindurstWaters/Npopo/onTrigger WindurstWaters/Lago-Charago/onTrigger WindurstWaters/Amagusa-Chigurusa/onTrigger WindurstWaters/Funpo-Shipo/onTrigger WindurstWaters/Kyume-Romeh/onTrigger PortWindurst/Kunchichi/onTrigger PortWindurst/Yaman-Hachuman/onTrigger PortWindurst/Choyi_Totlihpa/onTrigger PortWindurst/Three_of_Clubs/onTrigger PortWindurst/Yujuju/onTrigger
+char zone=WindurstWoods pos=-24,2.75,-59 job=WAR lvl=20
+quest Windurst.MihgosAmigo completed
+item BoneChip
+login
+trade Ibwam BoneChip x1        # available: no trade handler; his script's trade (300 gil only): nothing
+trigger Soni-Muni              # available: no handler, her script's 421 (fame 0)
+finish
+trigger Ibwam                  # ENABLE_TOAU 1: 736
+finish                         # the Green Sentinel Badge, begun
+trigger Ibwam                  # Prog 0: 737
+finish
+trigger Soni-Muni              # 735
+finish                         # bit 0
+charvar Quest[2][94]Prog 0
+trigger Soni-Muni              # bit 0 unset again (GM): 735, a Progress event (an Event would fall back to her script)
+finish                         # bit 0
+trigger Soni-Muni              # bit 0 set: nil, her script's 421
+finish
+trigger Ibwam                  # some bits: the quest's Event 738, but his last answer was the Event 737, so the lookup
+                               # alternates to his script (UseFallback): 740
+finish
+trigger Ibwam                  # some bits: 738
+finish
+trigger Etsa_Rhuyuli           # 734
+finish                         # bit 1
+trigger Cayu_Pensharhumi       # 733
+finish                         # bit 2
+trigger Umumu                  # 731
+finish                         # bit 3
+trigger Nanaa_Mihgo+99         # 732
+finish                         # bit 4
+warp 65,-7.5,-56 WindurstWalls
+trigger Yoriri                 # 496
+finish                         # bit 5
+trigger Shantotto              # 498
+finish                         # bit 6
+trigger Moan-Maon              # 497
+finish                         # bit 7
+trigger Chomomo                # 499
+finish                         # bit 8
+trigger Naih_Arihmepp          # 500
+finish                         # bit 9
+warp -35,-5,237 WindurstWaters
+trigger Npopo                  # 936
+finish                         # bit 10
+trigger Lago-Charago           # 940
+finish                         # bit 11
+trigger Amagusa-Chigurusa      # 937
+finish                         # bit 12
+trigger Funpo-Shipo            # 938
+finish                         # bit 13
+trigger Kyume-Romeh            # 939
+finish                         # bit 14
+warp -114,-3.25,108 PortWindurst
+trigger Kunchichi              # 623
+finish                         # bit 15
+trigger Yaman-Hachuman         # 624
+finish                         # bit 16
+trigger Choyi_Totlihpa         # 622
+finish                         # bit 17
+trigger Three_of_Clubs         # 625
+finish                         # bit 18
+trigger Yujuju                 # 621
+finish                         # bit 19: Prog 0xFFFFF
+warp -24,2.75,-59 WindurstWoods
+trigger Ibwam                  # all twenty: 739
+finish                         # the badge taken, KEYITEM_LOST, completed: the Green Invitation Card
+trigger Ibwam                  # completed: no section, his own script's 740
+finish

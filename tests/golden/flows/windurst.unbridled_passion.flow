@@ -1,0 +1,59 @@
+# Unbridled Passion (windurst 74, RNG AF3): Perih Vashai (see Fire and Brimstone's flow for his containers; Sin Hunting,
+# The Fanged One and Fire and Brimstone completed by GM). The steps between stay in Lua (they set only the var and
+# Koh's Letter): the flow sets them by GM. Each quest talk follows a default's turn (338: the interaction framework
+# alternates his DefaultActions event with his script). RNG 50 (AF3_QUEST_LEVEL 50), the quest available: var 3 / 7
+# (GM): 541 (it comes before the var arms), begun, then made available again by GM; var 0: 541 (0, 13360), option 0:
+# begun, var 1. Accepted, var 0: 338. Var 1 / 6: 542; var 8: 338; var 7 and Koh's Letter (GM): 546: completed
+# (Hunter's Socks, fame 20, var 0), the letter taken. Completed, var 0: his default 338.
+char zone=WindurstWoods pos=116.0,-3.7,90.45 job=RNG lvl=50
+quest Windurst.SinHunting completed
+quest Windurst.TheFangedOne completed
+quest Windurst.FireAndBrimstone completed
+login
+charvar unbridledPassion 3
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # available, RNG 50, var 3 (GM): 541, not 542
+finish option=0                         # begun; var 1
+quest Windurst.UnbridledPassion available
+charvar unbridledPassion 7
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # available, RNG 50, var 7 (GM): 541, not 546
+finish option=0                         # begun; var 1
+quest Windurst.UnbridledPassion available
+charvar unbridledPassion 0
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # Fire and Brimstone completed, RNG 50 (AF3 level), available: 541 (0, 13360)
+finish option=0                         # begun; var 1
+charvar unbridledPassion 0
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # accepted, var 0: 338
+finish
+charvar unbridledPassion 1
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 1: 542
+finish
+charvar unbridledPassion 6
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 6: 542
+finish
+charvar unbridledPassion 8
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 8: 338
+finish
+charvar unbridledPassion 7
+keyitem KohsLetter
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # var 7: 546 (0, 14099)
+finish                                  # completed: Hunter's Socks, fame 20, var 0; Koh's Letter taken
+trigger Perih_Vashai                    # the default's turn: 338
+finish
+trigger Perih_Vashai                    # completed, var 0: no reply: his default 338
+finish

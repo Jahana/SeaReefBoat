@@ -1,0 +1,29 @@
+# The Brugaire Consortium (sandoria 12): every delivery paid off with exactly 100 gil (Prog < 3 and Prog = Option): 608
+# (Prog 1), 511 (the auction house parcel, Option 1), 609 (Prog 2), 512 (the pub parcel, Option 2), 610 (Prog 3), 515
+# (completed). The parcels paid off stay in the inventory, and each is then traded at the wrong Prog: the magic shop
+# parcel to Regine at Prog 1 (nil; her script: nothing), the auction house parcel to Apstaule at Prog 2 (nil), the pub
+# parcel to Thierride at Prog 3 (nil: A Taste for Meat's / his script's 529).
+lists PortSanDoria/Fontoumant/onTrigger PortSanDoria/Fontoumant/onTrade PortSanDoria/Regine/onTrade PortSanDoria/Apstaule/onTrade PortSanDoria/Thierride/onTrade PortSanDoria/onEventFinish/509 PortSanDoria/onEventFinish/511 PortSanDoria/onEventFinish/512 PortSanDoria/onEventFinish/515 PortSanDoria/onEventFinish/608 PortSanDoria/onEventFinish/609 PortSanDoria/onEventFinish/610
+char zone=PortSanDoria pos=-9.133,-8,-122.199 job=WAR lvl=10 gil=1000
+login
+trigger Fontoumant                        # 509
+finish                                    # option 0: the Parcel for the Magic Shop; begun
+trade Fontoumant gil=100                  # Prog 0 = Option 0: 608
+finish                                    # the gil taken; Prog 1 (the parcel kept)
+walk 69.801,-8.102,-73.724
+trade Regine ParcelForTheMagicShop x1     # Prog 1: nil; her script: nothing
+trigger Fontoumant                        # Prog 1 > Option 0: 511
+finish                                    # the Parcel for the Auction House; Option 1
+trade Fontoumant gil=100                  # Prog 1 = Option 1: 609
+finish                                    # Prog 2
+walk -5.483,-13.3,-157.517
+trade Apstaule ParcelForTheAuctionHouse x1   # Prog 2: nil (no script)
+trigger Fontoumant                        # 512
+finish                                    # the Parcel for the Pub; Option 2
+trade Fontoumant gil=100                  # Prog 2 = Option 2: 610
+finish                                    # Prog 3
+walk -65.949,-5.496,-28.792
+trade Thierride ParcelForThePub x1        # Prog 3: nil; A Taste for Meat's / his script's 529
+finish
+trigger Fontoumant                        # Prog 3 > Option 2: 515
+finish                                    # completed: Lauan Shield, fame +20, Courier Extraordinaire

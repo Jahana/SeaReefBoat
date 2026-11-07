@@ -1,0 +1,63 @@
+# Face of the Future (crystalWar 61), the edges: a level 99 Warrior in Ghelsba Outpost with Chasing Shadows completed
+# and this quest accepted (GMs; missions as the main flow). Prog 0: the Ghelsba zone-in: nothing (a login's); Jugner
+# Forest from Ghelsba Outpost at Prog 0: nothing; Metallic Hodgepodge at Prog 0: nil. Prog 1 (a GM): Jugner Forest from
+# Batallia Downs: nothing. Prog 4 (a GM): the Yughott Grotto zone-in: nothing. Prog 6 (a GM): the Batallia Downs maw,
+# the bit not held: nil, so its script plays the maw's 500 (no Pure White Feather; startCutscene), finished: nothing.
+# The Batallia Downs [S] maw: 100, finished on option 0: nothing; 100 again, finished on option 1: the bit, setPos into
+# Batallia Downs. Prog 5 (a GM): the maw, the bit held: nil, so its script's 910 (an optional cutscene), finished on
+# option 0: nothing. Prog 8 (a GM): the Batallia Downs zone-in: nothing. Prog 9: the Xarcabard [S] zone-in: nothing.
+# Prog 10, a full inventory: the Batallia Downs zone-in 507, finished: not completed, no setPos; freed: 507: completed,
+# setPos into Batallia Downs [S].
+uncovered: 1/-/onEventFinish:10000 -- Everbloom Hollow's 10000 is the instance's clear (Everbloom Hollow has no instance script; its zone-in sends a char with no instance away), so no flow opens it; the main flow sets Prog 5 by a GM
+lists JugnerForest/onZoneIn/1 JugnerForest/Metallic_Hodgepodge/onTrigger GhelsbaOutpost/onZoneIn/1 YughottGrotto/onZoneIn/1 BatalliaDowns/onZoneIn/1 BatalliaDowns/Cavernous_Maw/onTrigger BatalliaDowns/onEventFinish/507 XarcabardS/onZoneIn/1
+char zone=GhelsbaOutpost pos=55.474,-2.046,36.147 job=WAR lvl=99
+quest CrystalWar.ChasingShadows completed
+quest CrystalWar.FaceOfTheFuture accepted
+mission Wotg TheScentOfBattle current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login                                   # Prog 0: no Ghelsba zone-in reply
+warp -285.493,-7.819,-163.707 JugnerForest # from Ghelsba Outpost at Prog 0: no zone-in reply
+trigger Metallic_Hodgepodge             # Prog 0: nil (NOTHING_OUT_OF_ORDINARY)
+finish-if-event
+charvar Quest[7][61]Prog 1              # a GM
+warp -48,0.1,435 BatalliaDowns
+warp -285.493,-7.819,-163.707 JugnerForest # from Batallia Downs at Prog 1: no zone-in reply
+charvar Quest[7][61]Prog 4              # a GM
+warp -7.817,0.132,-62.194 YughottGrotto # Prog 4: no zone-in reply
+charvar Quest[7][61]Prog 6              # a GM
+warp -7.817,0.132,-62.194 YughottGrotto # Prog 6: no zone-in reply
+warp -48,0.1,435 BatalliaDowns          # Prog 6: no zone-in reply
+trigger Cavernous_Maw                   # Prog 6, the bit not held: nil; the maw's own 500 (xi.maws.onTrigger)
+finish                                  # nothing (500 is neither the warp's nor an add's)
+warp -48,0.1,435 BatalliaDownsS
+trigger Cavernous_Maw                   # the [S] maw: 100
+finish option=0                         # declined: nothing
+trigger Cavernous_Maw                   # 100
+finish option=1                         # the bit; setPos into Batallia Downs
+tick 400
+login                                   # the zone change: Batallia Downs (Prog 6: no zone-in reply)
+warp -48,0.1,435 BatalliaDowns          # the same spot: for the flow checker's zone
+charvar Quest[7][61]Prog 5              # a GM
+trigger Cavernous_Maw                   # Prog 5, the bit held: nil; the maw's own 910 (an optional cutscene)
+finish option=0                         # nothing
+charvar Quest[7][61]Prog 7              # a GM
+trigger Cavernous_Maw                   # Prog 7, the bit held: nil; the maw's own 910
+finish option=0                         # nothing
+charvar Quest[7][61]Prog 8              # a GM
+rezone                                  # Prog 8: no Batallia Downs zone-in reply
+charvar Quest[7][61]Prog 9              # a GM
+warp -105.798,-25.522,-53.499 XarcabardS # Prog 9: no Xarcabard [S] zone-in reply
+charvar Quest[7][61]Prog 11             # a GM
+warp -48,0.1,435 BatalliaDowns          # Prog 11: no Batallia Downs zone-in reply
+charvar Quest[7][61]Prog 10             # a GM
+fill-inventory
+rezone open                             # Prog 10: 507, left open
+finish                                  # no room for the Griffon Ring: not completed, no setPos
+free-inventory
+rezone open                             # Prog 10: 507, left open
+finish                                  # completed; setPos into Batallia Downs [S]
+tick 400
+login                                   # the zone change: Batallia Downs [S]

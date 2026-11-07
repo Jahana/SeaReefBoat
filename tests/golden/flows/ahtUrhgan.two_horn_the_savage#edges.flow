@@ -1,0 +1,38 @@
+# Two Horn the Savage's edges: a level 75 Warrior in Mamook, the quest accepted at Prog 2 (GMs). The quest's liquid:
+# the Mamool Ja popped: IMPENDING_BATTLE (a Message: it leaves UseFallback 1); killed and gone with Prog 2 reset (GMs):
+# the next talk is the script's turn, whose handler pops the NM silently: 214, and again with the NM up: 214; Prog 4 (a
+# GM); the Mamool Ja killed at Prog 4: nothing (Prog stays 4); the liquid at Prog 4: nil: the script's 214
+# (UseFallback's turn either way); Prog 0 (only Prog 1 is 212): nil: 214; Prog 3: 213 is a Progress (the liquid has a
+# script): it plays on the next talk too (a GM resets the Prog 213's finish moved). Whitegate: Milazahn at Prog 5 (only
+# Prog 4 is 596): nil: the default 594.
+lists Mamook/Viscous_Liquid/onTrigger Mamook/Mamool_Ja/onMobDeath AhtUrhganWhitegate/Milazahn/onTrigger Mamook/onEventFinish/213
+char zone=Mamook pos=-258.7,3.882,-141.086 job=WAR lvl=75
+quest AhtUrhgan.TwoHornTheSavage accepted
+charvar Quest[6][17]Prog 2
+login
+trigger Viscous_Liquid+5                # Prog 2: the Mamool Ja popped, claimed: IMPENDING_BATTLE
+kill MAMOOL_JA                          # Prog 3
+charvar Quest[6][17]Prog 2              # a GM
+tick 15000
+tick 30000                              # the NM gone
+trigger Viscous_Liquid+5                # UseFallback 1, the NM down: the script's turn, the pop runs: 214, no message
+finish option=0
+trigger Viscous_Liquid+5                # the NM up again: the pop fails: nil: 214
+finish option=0
+charvar Quest[6][17]Prog 4              # a GM
+kill MAMOOL_JA                          # Prog 4: nothing
+trigger Viscous_Liquid+5                # Prog 4: nil: 214
+finish option=0
+charvar Quest[6][17]Prog 0              # a GM
+trigger Viscous_Liquid+5                # Prog 0: nil: 214
+finish option=0
+charvar Quest[6][17]Prog 3              # a GM
+trigger Viscous_Liquid+5                # Prog 3: 213
+finish                                  # Prog 4
+charvar Quest[6][17]Prog 3              # a GM
+trigger Viscous_Liquid+5                # 213 again (a Progress)
+finish
+warp -70.5,0,-82.337 AhtUrhganWhitegate
+charvar Quest[6][17]Prog 5              # a GM
+trigger Milazahn                        # Prog 5: nil: 594
+finish option=0

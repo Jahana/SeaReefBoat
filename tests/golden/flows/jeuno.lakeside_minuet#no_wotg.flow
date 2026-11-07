@@ -1,0 +1,15 @@
+# Lakeside Minuet (jeuno 95) at level 30 with ENABLE_WOTG 0 (a number: the check compares with 1): WotG alone fails
+# check 1; no section; Laila's default 10120. Then ENABLE_WOTG 1.25 (a step): the Lua's 1.25 == 1 fails too (a
+# rounded read would pass): the default 10120; then 1: check 1 holds: 10111.
+lists UpperJeuno/Laila/onTrigger
+char zone=UpperJeuno pos=-52.5,0,101 job=WAR lvl=30
+setting ENABLE_WOTG 0
+login
+trigger Laila                           # WotG off: no section; default 10120
+finish
+setting ENABLE_WOTG 1.25
+trigger Laila                           # 1.25 is not 1: no section; default 10120
+finish
+setting ENABLE_WOTG 1
+trigger Laila                           # WotG on, level 30: 10111
+finish                                  # option 0: not begun

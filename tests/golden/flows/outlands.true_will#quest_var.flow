@@ -1,0 +1,14 @@
+# True Will (outlands 145), the quest's own var at the completion: accepted, trueWillCS 2, the Large Trick Box and
+# Quest[5][145]Prog 1 (GMs). Leodarion (the second talk of a pair: his default 89 first): 99; finished:
+# npcUtil.completeQuest (the Ninja Chainmail, Norg fame +20, the title, trueWillCS 0, completed), then the box taken.
+# npcUtil.completeQuest does no cleanup: Quest[5][145]Prog stays 1 (quest:complete's cleanup would clear it).
+char zone=Rabao pos=-49.513,7.999,41.323 job=NIN lvl=75
+quest Outlands.TrueWill accepted
+charvar trueWillCS 2
+keyitem LargeTrickBox
+charvar Quest[5][145]Prog 1             # a GM: the quest's own var
+login
+trigger Leodarion                       # default turn: 89
+finish
+trigger Leodarion                       # script, 2 and the Large Trick Box: 99
+finish                                  # the Ninja Chainmail; fame +20; the title; completed, Prog kept; the box taken

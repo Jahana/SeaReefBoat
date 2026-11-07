@@ -1,0 +1,16 @@
+# Waking the Colossus' 306 at the blank lamp (a Progress, Prog 2 with the Lightning Cell) against Path of Darkness' 6
+# (ToAU 42 current, status 0; a Progress): the two tie, the mission's first, so the first talk plays 6 and the next
+# rotates to 306. An Event in place of 306 would lose both. The lamp loads hidden: shown by a GM. 6's finish on option
+# 1 changes nothing.
+lists AlzadaalUnderseaRuins/blank_lamp/onTrigger
+char zone=AlzadaalUnderseaRuins pos=208.05,-1.5,20.05 job=WAR lvl=75 nation=1
+quest AhtUrhgan.WakingTheColossus accepted
+keyitem LightningCell
+charvar Quest[6][74]Prog 2
+mission Toau PathOfDarkness current
+login
+npcstatus blank_lamp normal             # a GM: shown
+trigger blank_lamp                      # 6 and 306 tie: the mission's first
+finish option=1
+trigger blank_lamp                      # rotated: 306 (Prog 3)
+finish

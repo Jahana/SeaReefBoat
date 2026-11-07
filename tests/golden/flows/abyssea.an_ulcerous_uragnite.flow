@@ -1,0 +1,45 @@
+# An Ulcerous Uragnite (abyssea 178): a level 99 Warrior in North Gustaberg by the Cavernous Maw 2 with The Truth
+# Beckons completed and Dawn of Death accepted (GMs), no Traverser Stone, 8 maw quests completed (A Goldstruck Gigas, To
+# Paste a Peiste, Megadrile Menace, The Beast of Bastore, A Delectable Demon, A Fluttery Fiend, A Beaked Blusterer, A
+# Man-eating Mite) (GMs). The maw, no stone: no section: its own warp event 908 (entranceMawOnTrigger), finished on
+# option 0: no warp. Traverser Stone 3 (a GM, one stone: `>= 1`): 0 (a Progress), finished on option 0: begun. Back to
+# available (a GM): the maw again with no other talk between: 0 again (an Event-rank 0 would alternate with the maw's
+# own onTrigger: 908), finished on option 2: begun (any option). Accepted: the maw: no handler: 908. A zone-in, accepted
+# with no Amphitrite title: nothing. The title (a GM): the zone-in plays 1 (left open); its update on option 0 and on
+# option 2: nothing; on option 1: updateEvent(the key item for 8 completed: Ivory Abyssite of Destiny); finished: Ivory
+# Abyssite of Destiny given, then completed. Completed (title, stone and Dawn of Death still held): a zone-in: nothing;
+# the maw: 908.
+lists NorthGustaberg/Cavernous_Maw_2/onTrigger NorthGustaberg/onEventFinish/0 NorthGustaberg/onEventFinish/908 NorthGustaberg/onZoneIn/1 NorthGustaberg/onEventUpdate/1 NorthGustaberg/onEventFinish/1
+char zone=NorthGustaberg pos=-76.5,-0.5,600 job=WAR lvl=99
+quest Abyssea.AJourneyBegins completed
+quest Abyssea.TheTruthBeckons completed
+quest Abyssea.DawnOfDeath accepted
+quest Abyssea.AGoldstruckGigas completed
+quest Abyssea.ToPasteAPeiste completed
+quest Abyssea.MegadrileMenace completed
+quest Abyssea.TheBeastOfBastore completed
+quest Abyssea.ADelectableDemon completed
+quest Abyssea.AFlutteryFiend completed
+quest Abyssea.ABeakedBlusterer completed
+quest Abyssea.AManEatingMite completed
+login
+trigger Cavernous_Maw_2                 # no stone: no section: the maw's warp event 908
+finish                                  # option 0: no warp
+keyitem TraverserStone3                 # a GM: one stone
+trigger Cavernous_Maw_2                 # available, one stone, Dawn of Death accepted: 0
+finish                                  # option 0: begun
+quest Abyssea.AnUlcerousUragnite available # a GM
+trigger Cavernous_Maw_2                 # 0 again (the kind)
+finish option=2                         # begun (any option)
+trigger Cavernous_Maw_2                 # accepted: no maw handler: 908
+finish                                  # option 0: no warp
+rezone                                  # accepted, no title: nothing
+title AmphitriteShucker                 # a GM
+rezone open                             # the title: 1, left open
+update 1 option=0                       # option 0: nothing
+update 1 option=2                       # option 2: nothing
+update 1 option=1                       # option 1: updateEvent(Ivory Abyssite of Destiny)
+finish                                  # Ivory Abyssite of Destiny given; completed
+rezone                                  # completed: nothing
+trigger Cavernous_Maw_2                 # completed: no section: 908
+finish                                  # option 0: no warp

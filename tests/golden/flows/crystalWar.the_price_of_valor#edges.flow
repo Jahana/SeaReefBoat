@@ -1,0 +1,64 @@
+# The Price of Valor (crystalWar 44), the edges: a level 99 Warrior in Southern San d'Oria [S] without In a Haze of
+# Glory completed (missions as the main flow). Rholont: no section (32). Haze completed (a GM): Tree Hollow / Well
+# at Prog 0: nil. Prog 1 and the flask (GMs): Well: the flask held: nil. Jugner Forest [S]: Felled Trees at Prog 1:
+# nil. Prog 2: 211, finished on option 1: begun (any option). Vunkerl Inlet [S]: Toppled Cresset 2 at Prog 2: nil;
+# Prog 3 (a GM): Toppled Cresset 1 nil, Underbrush nil. Prog 5 (a GM): Underbrush 205: the NM spawned; Prog 4 (a
+# GM): the NM killed: not Prog 5: nmDefeated stays 0; Prog 5 (a GM): Underbrush: the NM killed at Prog 4 still
+# counts as spawned: NOW_IS_NOT_THE_TIME (6411), so the death set nothing. Pashhow Marshlands [S]: Prog 5:
+# Shimmering Pondweed: nil. Prog 6 (a GM), a full inventory: 105, finished: the skin does not fit: not completed;
+# freed: 105: completed.
+lists SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/Tree_Hollow/onTrigger SouthernSanDoriaS/Well/onTrigger JugnerForestS/Felled_Trees/onTrigger JugnerForestS/onEventFinish/211 VunkerlInletS/Toppled_Cresset_1/onTrigger VunkerlInletS/Toppled_Cresset_2/onTrigger VunkerlInletS/Underbrush/onTrigger VunkerlInletS/Madthrasher_Zradbodd/onMobDeath VunkerlInletS/onEventFinish/205 PashhowMarshlandsS/Shimmering_Pondweed/onTrigger PashhowMarshlandsS/onEventFinish/105
+char zone=SouthernSanDoriaS pos=-167.043,-2,55.484 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Rholont                         # Haze not completed: no section (32)
+finish-if-event
+quest CrystalWar.InAHazeOfGlory completed # a GM
+trigger Tree_Hollow                     # Prog 0: nil
+finish-if-event
+walk -151.676,-4.789,57.37
+trigger Well                            # Prog 0: nil
+finish-if-event
+charvar Quest[7][44]Prog 1              # a GM
+keyitem FlaskOfKingdomWater             # a GM
+trigger Well                            # the flask held: nil
+finish-if-event
+warp -262.344,5.713,151.392 JugnerForestS
+trigger Felled_Trees                    # Prog 1: nil
+finish-if-event
+charvar Quest[7][44]Prog 2              # a GM
+trigger Felled_Trees                    # 211
+finish option=1                         # begun (any option)
+warp -391.386,-32.396,-45.692 VunkerlInletS
+trigger Toppled_Cresset_2               # Prog 2: nil
+finish-if-event
+charvar Quest[7][44]Prog 3              # a GM
+walk 140.377,-31.939,107.459
+trigger Toppled_Cresset_1               # Prog 3: nil
+finish-if-event
+walk -330.161,-39.57,-696.664
+trigger Underbrush                      # Prog 3: nil
+finish-if-event
+charvar Quest[7][44]Prog 5              # a GM
+trigger Underbrush                      # 205
+finish                                  # the NM spawned, claimed
+charvar Quest[7][44]Prog 4              # a GM
+kill BIG_BANG+211                       # Prog 4: nmDefeated stays 0
+charvar Quest[7][44]Prog 5              # a GM
+trigger Underbrush                      # nmDefeated 0 and the NM killed at Prog 4 still counts as spawned (the dead mob
+                                        # is up for one tick): 6411 NOW_IS_NOT_THE_TIME, which only the nmDefeated 0 arm
+                                        # plays, so the death at Prog 4 set nothing
+finish-if-event                         # nothing to close
+warp -196.855,24.999,407.678 PashhowMarshlandsS
+trigger Shimmering_Pondweed             # Prog 5: nil
+finish-if-event
+charvar Quest[7][44]Prog 6              # a GM
+fill-inventory
+trigger Shimmering_Pondweed             # Prog 6: 105
+finish                                  # no room: not completed
+free-inventory
+trigger Shimmering_Pondweed             # 105
+finish                                  # completed

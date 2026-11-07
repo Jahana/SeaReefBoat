@@ -1,0 +1,19 @@
+# Sin Hunting (windurst 72): Alexius's lines next to A Purchase of Arms' (the reply kinds). A level-40 RNG in Jugner
+# Forest, Sin Hunting accepted by GM at Prog 2, A Purchase of Arms accepted by GM without the Weapons Order: its
+# ALEXIUS_ORDERS (a name message, no state change) answers at Alexius on every talk. Prog 2: 10 (Progress) on both talks
+# (option 1: nothing, Prog 2 kept). Prog 3 (GM): 11 (Progress) over ALEXIUS_ORDERS on both talks.
+lists JugnerForest/Alexius/onTrigger
+char zone=JugnerForest pos=101.9,5.4,386 job=RNG lvl=40
+quest Windurst.SinHunting accepted
+charvar Quest[2][72]Prog 2
+quest Sandoria.APurchaseOfArms accepted
+login
+trigger Alexius                               # Prog 2: 10 (Progress) over ALEXIUS_ORDERS
+finish option=1                               # nothing
+trigger Alexius                               # 10 again
+finish option=1
+charvar Quest[2][72]Prog 3                    # GM
+trigger Alexius                               # Prog 3: 11 (Progress) over ALEXIUS_ORDERS
+finish-if-event
+trigger Alexius                               # 11 again
+finish-if-event

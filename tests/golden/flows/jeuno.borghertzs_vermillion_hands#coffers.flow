@@ -1,0 +1,19 @@
+# BORGHERTZS_VERMILLION_HANDS (jeuno 48): the two optional coffers' sections (status not available, main job RDM, the
+# [AF]ZilartCoffer bit unset). Accepted by a GM, a level 75 RDM: CastleOztroja's Treasure Coffer opens to
+# WarlocksTabard (the item bypass; the result is the item): [AF]ZilartCoffer +512 (bit 9); GarlaigeCitadel's to
+# WarlocksTights: +1024 (bit 10).
+lists CastleOztroja/Treasure_Coffer/onTrade GarlaigeCitadel/Treasure_Coffer/onTrade
+char zone=CastleOztroja pos=-99,-75,-129 job=RDM lvl=75
+quest Jeuno.BorghertzsVermillionHands accepted
+item OztrojaCofferKey
+item GarlaigeCofferKey
+login
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer OztrojaCofferKey x1 # bit 9 unset: WarlocksTabard; [AF]ZilartCoffer 512
+tick 4500                               # the coffer opened
+warp -282.3,0,263.2 GarlaigeCitadel
+tick 13000                              # the coffer placed
+trigger Treasure_Coffer                 # walks to the coffer
+trade Treasure_Coffer GarlaigeCofferKey x1 # bit 10 unset: WarlocksTights; [AF]ZilartCoffer 1536
+tick 4500                               # the coffer opened

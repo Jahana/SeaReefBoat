@@ -1,0 +1,28 @@
+# Buckets of Gold (bastok 41): Foss in Bastok Markets. The offer declined and accepted (option 0), the rusty bucket trade
+# (five, not four), the completion repeated: the trade section matches every status but available.
+lists BastokMarkets/Foss/onTrigger BastokMarkets/Foss/onTrade BastokMarkets/onEventFinish/271 BastokMarkets/onEventFinish/272
+char zone=BastokMarkets pos=-281,-12,-36
+# a rusty bucket does not stack: one item line each (item RustyBucket x10 would be one slot of 10)
+item RustyBucket
+item RustyBucket
+item RustyBucket
+item RustyBucket
+item RustyBucket
+item RustyBucket
+item RustyBucket
+item RustyBucket
+item RustyBucket
+item RustyBucket
+login
+trade Foss RustyBucket x5       # available: no trade handler, nothing
+trigger Foss                    # the offer, 271
+finish option=1                 # declined: still available
+trigger Foss                    # 271 again
+finish option=0                 # accepted
+trigger Foss                    # accepted: his default 270
+finish
+trade Foss RustyBucket x4       # four buckets: nothing
+trade Foss RustyBucket x5       # 272
+finish                          # completed: 300 gil, Bucket Fisher, fame 10, five buckets gone
+trade Foss RustyBucket x5       # completed: 272 again
+finish                          # the repeat: 300 gil, fame 10 again

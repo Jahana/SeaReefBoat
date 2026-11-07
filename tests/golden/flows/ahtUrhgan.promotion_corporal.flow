@@ -1,0 +1,48 @@
+# Promotion: Corporal (ahtUrhgan 93): a level 1 Warrior with Private First Class, Superior Private and
+# Lance Corporal completed (so Naja offers no earlier promotion) and the LC Wildcat Badge; Naja Salaheem (no script, no
+# default). AssaultPromotion 24: nothing. 25 (a GM): 5045, finished: begun, the Quartz
+# Transmitter. The transmitter held: Naja 5047; again in the zone: once per zone: nothing. The Hoofprints are hidden
+# until the Dark Rider's run (`#hoofprint` shows them by GMs); here a GM does what Mount Zhayolm's would (the
+# transmitter taken, Prog 3). No transmitter: Naja 5046 ([0] = 3), finished: completed (the C Wildcat Badge, Corporal),
+# AssaultPromotion 0 (player:setVar), the LC badge taken, no message. bob (accepted by a GM, the transmitter taken by a
+# GM at Prog 0): 5046 [0] = 0, finished: completed. carl (AssaultPromotion 25, Lance Corporal accepted: not completed):
+# nothing.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/5045 AhtUrhganWhitegate/onEventFinish/5046
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char bob zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+char carl zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+quest AhtUrhgan.PromotionPrivateFirstClass completed
+quest AhtUrhgan.PromotionSuperiorPrivate completed
+quest AhtUrhgan.PromotionLanceCorporal completed
+charvar AssaultPromotion 24
+keyitem LcWildcatBadge
+bob: quest AhtUrhgan.PromotionPrivateFirstClass completed
+bob: quest AhtUrhgan.PromotionSuperiorPrivate completed
+bob: quest AhtUrhgan.PromotionLanceCorporal completed
+bob: quest AhtUrhgan.PromotionCorporal accepted
+carl: quest AhtUrhgan.PromotionPrivateFirstClass completed
+carl: quest AhtUrhgan.PromotionSuperiorPrivate completed
+carl: quest AhtUrhgan.PromotionLanceCorporal accepted
+carl: charvar AssaultPromotion 25
+login
+trigger Naja_Salaheem                   # AssaultPromotion 24: no section: nothing
+finish-if-event
+charvar AssaultPromotion 25             # a GM
+trigger Naja_Salaheem                   # available: 5045
+finish                                  # begun; the Quartz Transmitter
+trigger Naja_Salaheem                   # the transmitter held: 5047
+finish
+trigger Naja_Salaheem                   # once per zone: nothing
+finish-if-event
+delkeyitem QuartzTransmitter            # a GM: Mount Zhayolm's Hoofprint (#hoofprint)
+charvar Quest[6][93]Prog 3              # a GM: the same
+trigger Naja_Salaheem                   # no transmitter: 5046 [0] = 3
+finish                                  # completed; AssaultPromotion 0; the LC badge taken
+logout
+bob: login
+bob: trigger Naja_Salaheem              # accepted, no transmitter, Prog 0: 5046 [0] = 0
+bob: finish                             # completed
+bob: logout
+carl: login
+carl: trigger Naja_Salaheem             # Lance Corporal not completed: nothing
+carl: finish-if-event

@@ -1,0 +1,55 @@
+# Grave Concerns (sandoria 11): Andecia and the Wells in Southern San d'Oria, the Tombstone (Tombstone_Upper) in King
+# Ranperre's Tomb; the first ending (558). Available at fame 0 (fame level 1, the floor: the check's fame operand always
+# holds): a trade to Andecia (no trade handler, no script: nothing); 540 (Introduction 1); 541 declined (option 1:
+# nothing), then taken (option 0: the Skin of Well Water, begun). Accepted, OfferingWaterOK 0: Andecia's
+# TO_GET_TO_KING_RANPERRES (the skin held); the skin to Andecia (not the waterskin: nil); a Well's YOU_FIND_A_WELL and a
+# chip to it with the skin held (nil). The Tombstone with the skin (DroppedWaterskin 0): 2, whose finish gives nothing
+# (Dropped 0, the skin held); a chip to it (no skin in the trade: nil); the skin and a chip (hasItemQty, not exact: the
+# Tomb Guard's Waterskin, both taken, OfferingWaterOK 1, CHANGE_WATER); the Tombstone now (OfferingWaterOK 1, the
+# waterskin held: nil, HERE_LIES_KING_RANPERRE); a second skin (GM): the Tombstone with it (first arm false on
+# OfferingWaterOK alone: nil) and the skin to it (OfferingWaterOK 1: nil). Back in town: Andecia's reminder
+# (OfferingWaterOK 1); the waterskin and a chip (not exact: nil); the waterskin (558: completed, fame +20, 560 gil, Royal
+# Grave Keeper, the waterskin taken); Andecia's I_THANK_YOU_ADVENTURER; a chip to her; a Well once completed (no
+# section: nothing for a trade, its default YOU_FIND_A_WELL for a talk).
+# Andecia has no script and no default; a Well has no script (default YOU_FIND_A_WELL; The Price of Valor's Well is in
+# Southern San d'Oria [S], another zone); the Tombstone has no script (default HERE_LIES_KING_RANPERRE; Bat Hunt's 4
+# needs that mission current: #bat_hunt). There are five Wells: `trigger Well` / `trade Well` use the first by id
+# (-277.5, -4.6, 118.8); the Lua names them by name, so any of them answers alike.
+lists SouthernSanDoria/Andecia/onTrigger SouthernSanDoria/Andecia/onTrade SouthernSanDoria/Well/onTrigger SouthernSanDoria/Well/onTrade SouthernSanDoria/onEventFinish/540 SouthernSanDoria/onEventFinish/541 SouthernSanDoria/onEventFinish/558 KingRanperresTomb/Tombstone_Upper/onTrigger KingRanperresTomb/Tombstone_Upper/onTrade KingRanperresTomb/onEventFinish/2
+char zone=SouthernSanDoria pos=171.1,-0.9,45.0 job=WAR lvl=30
+item BoneChip
+item BoneChip
+item BoneChip
+item BoneChip
+login
+trade Andecia BoneChip x1                 # available: no trade handler; no script: nothing
+trigger Andecia                           # Introduction 0: 540
+finish                                    # Introduction 1
+trigger Andecia                           # Introduction 1: 541
+finish option=1                           # not option 0: nothing; still available
+trigger Andecia                           # 541
+finish                                    # option 0: the Skin of Well Water; begun
+trigger Andecia                           # OfferingWaterOK 0, the skin held: TO_GET_TO_KING_RANPERRES
+trade Andecia SkinOfWellWater x1          # not the waterskin: nil; nothing
+warp -276.0,-4.6,118.8 SouthernSanDoria
+trigger Well                              # YOU_FIND_A_WELL (the quest's message)
+trade Well BoneChip x1                    # OfferingWaterOK 0, the skin held: nil; nothing
+warp 1.0,-1.4,-102.0 KingRanperresTomb
+trigger Tombstone_Upper                   # the skin, OfferingWaterOK 0, DroppedWaterskin 0: 2
+finish                                    # DroppedWaterskin 0 (and the skin held): nothing given
+trade Tombstone_Upper BoneChip x1         # no skin in the trade: nil; nothing
+trade Tombstone_Upper SkinOfWellWater x1 BoneChip x1   # the skin (not exact): the Tomb Guard's Waterskin; both taken (tradeComplete); OfferingWaterOK 1; CHANGE_WATER
+trigger Tombstone_Upper                   # OfferingWaterOK 1, the waterskin held, no skin: nil; HERE_LIES_KING_RANPERRE
+item SkinOfWellWater                      # GM: a second skin
+trigger Tombstone_Upper                   # the skin, OfferingWaterOK 1, DroppedWaterskin 0: first arm false on OfferingWaterOK alone; second false on the skin: nil; HERE_LIES
+trade Tombstone_Upper SkinOfWellWater x1  # OfferingWaterOK 1: nil; the skin kept
+warp 171.1,-0.9,45.0 SouthernSanDoria
+trigger Andecia                           # OfferingWaterOK 1: TO_GET_TO_KING_RANPERRES
+trade Andecia TombGuardsWaterskin x1 BoneChip x1   # not exactly the waterskin: nil
+trade Andecia TombGuardsWaterskin x1      # OfferingWaterOK 1, DroppedWaterskin 0: 558
+finish                                    # completed: fame +20, 560 gil, Royal Grave Keeper; the waterskin taken
+trigger Andecia                           # completed: I_THANK_YOU_ADVENTURER
+trade Andecia BoneChip x1                 # completed: no trade handler; nothing
+warp -276.0,-4.6,118.8 SouthernSanDoria
+trade Well SkinOfWellWater x1             # completed: no section; nothing
+trigger Well                              # completed: no section; its default YOU_FIND_A_WELL

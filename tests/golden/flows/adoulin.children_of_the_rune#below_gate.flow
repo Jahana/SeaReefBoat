@@ -1,0 +1,14 @@
+# Children of the Rune (adoulin 119): below the level gate (ADVANCED_JOB_LEVEL 31, level 30) Octavien has his standard
+# dialog (27, the script's own) and the Yahse Wildflower nothing; the gate lowered to 30 after the login, the offer (23).
+char zone=EasternAdoulin pos=2.444,-11.439,-16.595 job=WHM lvl=30
+setting ADVANCED_JOB_LEVEL 31
+login
+trigger Octavien                # level 30 below the gate 31: 27
+finish
+warp 370.713,0.680,153.281 YahseHuntingGrounds
+trigger Yahse_Wildflower        # Available: nothing
+finish-if-event
+warp 2.444,-11.439,-16.595 EasternAdoulin
+setting ADVANCED_JOB_LEVEL 30
+trigger Octavien                # at the gate: 23
+finish option=1                 # accepted

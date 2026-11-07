@@ -1,0 +1,17 @@
+# probe (quest rework P8): npcstatus <Npc> <normal|disappear>, a GM's GetNPCByID(id):setStatus(xi.status.<STATUS>).
+# Promotion: Superior Private (ahtUrhgan 91, still Lua): Wajaom Woodlands' Warhorse_Hoofprint gives the Dark Rider
+# Hoofprint (quest:keyItem) while the quest is accepted and the key item not held. The Hoofprints load hidden (npcs.yaml
+# gives them no status; globals/dark_rider.lua shows them after a Dark Rider run), and the engine answers a trigger on a
+# hidden NPC with a release only. Hidden: nothing. Shown (normal): the key item. Hidden again (disappear): nothing.
+lists WajaomWoodlands/Warhorse_Hoofprint/onTrigger
+char zone=WajaomWoodlands pos=-619.539,-10.483,-69.223 job=WAR lvl=1
+quest AhtUrhgan.PromotionSuperiorPrivate accepted
+charvar AssaultPromotion 25
+login
+trigger Warhorse_Hoofprint              # hidden: a release only, no handler
+npcstatus Warhorse_Hoofprint normal     # a GM: shown
+trigger Warhorse_Hoofprint              # accepted, no hoofprint: the Dark Rider Hoofprint (KEYITEM_OBTAINED)
+finish-if-event
+delkeyitem DarkRiderHoofprint           # a GM
+npcstatus Warhorse_Hoofprint disappear  # a GM: hidden again
+trigger Warhorse_Hoofprint              # hidden: a release only

@@ -1,0 +1,48 @@
+# A Chocobo's Tale (jeuno 72): the qm's and the Badshahs' operands. Two level 75 Warriors by the qm, both accepted
+# (a GM). Main at Prog 3: the qm: nil. Prog 4 (a GM): the five spawned; Prog 3 (a GM) while they die: the five killed
+# (onMobDeath at Prog 3: no nmDefeated); Prog 4 (a GM): the qm spawns them again (nmDefeated 0); +0 .. +3 killed
+# (nmDefeated 1) and despawned, +4 left up alone (isNMSpawned's last id). Other at Prog 4: the qm with +4 up: nil. +4
+# killed by main. Other: none up, its own nmDefeated 0: the five spawned, claimed by other; other kills them: its
+# nmDefeated; the qm: the collar (Prog 5). Main: the collar (its local var kept).
+lists BatalliaDowns/qm_chocobotale/onTrigger BatalliaDowns/Badshah/onMobDeath
+char zone=BatalliaDowns pos=-37.9,-11.1,307.3 job=WAR lvl=75
+char other zone=BatalliaDowns pos=-37.9,-11.1,307.3 job=WAR lvl=75
+quest Jeuno.AChocobosTale accepted
+charvar Quest[3][72]Prog 3
+other: quest Jeuno.AChocobosTale accepted
+other: charvar Quest[3][72]Prog 4
+login
+trigger qm_chocobotale                  # Prog 3: nil; YOU_FIND_NOTHING
+charvar Quest[3][72]Prog 4              # a GM
+trigger qm_chocobotale                  # the five spawned; YOU_ARE_BEING_ATTACKED
+charvar Quest[3][72]Prog 3              # a GM, while they are up
+kill BADSHAH_OFFSET                     # onMobDeath at Prog 3: no nmDefeated
+kill BADSHAH_OFFSET+1
+kill BADSHAH_OFFSET+2
+kill BADSHAH_OFFSET+3
+kill BADSHAH_OFFSET+4
+tick 15000                              # the Badshahs despawning (the death and the despawn each take a zone tick)
+tick 30000                              # despawned
+charvar Quest[3][72]Prog 4              # a GM
+trigger qm_chocobotale                  # none up, nmDefeated 0: the five spawned again
+kill BADSHAH_OFFSET                     # Prog 4: nmDefeated 1
+kill BADSHAH_OFFSET+1
+kill BADSHAH_OFFSET+2
+kill BADSHAH_OFFSET+3
+tick 15000                              # +0 .. +3 despawning
+tick 30000                              # despawned; +4 still up
+other: login
+other: trigger qm_chocobotale           # +4 up alone: nil; YOU_FIND_NOTHING
+kill BADSHAH_OFFSET+4                   # the last one
+tick 15000                              # the Badshahs despawning (the death and the despawn each take a zone tick)
+tick 30000                              # despawned
+other: trigger qm_chocobotale           # none up, other's nmDefeated 0: the five spawned, claimed by other
+other: kill BADSHAH_OFFSET              # other's nmDefeated 1
+other: kill BADSHAH_OFFSET+1
+other: kill BADSHAH_OFFSET+2
+other: kill BADSHAH_OFFSET+3
+other: kill BADSHAH_OFFSET+4
+tick 15000                              # the Badshahs despawning (the death and the despawn each take a zone tick)
+tick 30000                              # despawned
+other: trigger qm_chocobotale           # the collar; Prog 5
+trigger qm_chocobotale                  # main's nmDefeated still 1: the collar; Prog 5

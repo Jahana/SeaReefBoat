@@ -1,0 +1,14 @@
+# Crimson Orb, the pond count is over four bits: a level 75 Warrior (race 1) in Davoi with Prog 2 and Option 22
+# (a GM: bits 1, 2 and 4; only bits 0..3 are a pond's). _45g shows 2 ponds done (a fifth bit does not count): the
+# cutscene 50 (0, 2, 1); its finish sets bit 0 (Option 23), the Red Orb for the Blood Orb (2 done: not the fourth, no
+# Curse I). _45j then counts 3 done: the fourth pond: Curse I, Prog 3.
+lists Davoi/_45g/onTrigger Davoi/_45j/onTrigger Davoi/onEventFinish/50 Davoi/onEventFinish/53
+char zone=Davoi pos=187,-3,-115 job=WAR lvl=75 race=1
+charvar HQuest[CrimsonOrb]Prog 2
+charvar HQuest[CrimsonOrb]Option 22
+keyitem RedOrb
+login
+trigger _45g                            # cutscene 50 (0, 2, 1)
+finish                                  # bit 0; Red -> Blood; not the fourth
+trigger _45j                            # cutscene 53 (0, 3, 1)
+finish                                  # the fourth: Curse I; Prog 3

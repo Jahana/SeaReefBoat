@@ -1,0 +1,33 @@
+# Promotion: Private First Class (ahtUrhgan 90): a level 1 Warrior with the PSC Wildcat Badge, two Imp Wings and a
+# Bone Chip; Naja Salaheem (no script, no default: a nil answers nothing). AssaultPromotion 24: no section: nothing. 25
+# (a GM): 5000, finished: begun. Accepted: Naja 5001 (an Event); trades: the Bone Chip: nil: nothing; two Imp Wings: no
+# match (tradeMatches wants exactly one): nil; one wing and the chip: no match either (an item more): nil; one Imp Wing:
+# 5002, finished: completed (the PFC Wildcat Badge, Private First Class), AssaultPromotion 0, the wing taken
+# (tradeComplete), the PSC badge taken, PRIVATE_FIRST_CLASS. Completed (AssaultPromotion 0: Superior Private not
+# offered): nothing.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrade AhtUrhganWhitegate/onEventFinish/5000 AhtUrhganWhitegate/onEventFinish/5002
+char zone=AhtUrhganWhitegate pos=24.2,-7.804,-45.591 job=WAR lvl=1
+charvar AssaultPromotion 24
+keyitem PscWildcatBadge
+item ImpWing
+item ImpWing
+item BoneChip
+login
+trigger Naja_Salaheem                   # AssaultPromotion 24: no section: nothing
+finish-if-event
+charvar AssaultPromotion 25             # a GM
+trigger Naja_Salaheem                   # available: 5000
+finish                                  # begun
+trigger Naja_Salaheem                   # accepted: 5001
+finish
+trade Naja_Salaheem BoneChip x1         # no match: nil: nothing
+finish-if-event
+trade Naja_Salaheem ImpWing x2          # two: tradeMatches false: nil
+finish-if-event
+trade Naja_Salaheem ImpWing x1 BoneChip x1   # one wing and the chip: tradeMatches false (an item more): nil
+finish-if-event
+trade Naja_Salaheem ImpWing x1          # 5002
+finish                                  # completed; AssaultPromotion 0; the wing and the PSC badge taken;
+                                        # PRIVATE_FIRST_CLASS
+trigger Naja_Salaheem                   # completed, AssaultPromotion 0: nothing
+finish-if-event

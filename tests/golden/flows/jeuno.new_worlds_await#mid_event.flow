@@ -1,0 +1,27 @@
+# New Worlds Await (jeuno 133), each handler once its section no longer holds (a GM's change while the event is open): a
+# level 75 Warrior at cap 75. 10045 open, then cap 76: update option 4 and finish option 4 do nothing (no fixed reply,
+# no Limit Breaker), and finish option 5 after another trigger does nothing (not begun). Cap 75 again: the Limit Breaker,
+# begun. Accepted, 3 merit points, five seals: 10135 open, then the quest set available (its first section holds, but
+# 10135's finish is the accepted section's): nothing (not completed, the seals kept, merits 3, cap 75).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Nomad_Moogle/onTrade RuludeGardens/onEventUpdate/10045 RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10135
+char zone=RuludeGardens pos=10.0,1.5,119.9 job=WAR lvl=75
+levelcap 75
+merits 3
+item KindredsSeal x5
+login
+trigger Nomad_Moogle                    # 10045 (75, 2, 0, 0)
+levelcap 76                             # a GM, 10045 open
+update 10045 option=4                   # cap 76: no section: nothing (no fixed reply)
+finish option=4                         # cap 76: nothing (no Limit Breaker)
+levelcap 75                             # a GM
+trigger Nomad_Moogle                    # 10045 (75, 2, 0, 0)
+levelcap 76                             # a GM, 10045 open
+finish option=5                         # cap 76: nothing (not begun)
+levelcap 75                             # a GM
+trigger Nomad_Moogle                    # 10045 (75, 2, 0, 0)
+finish option=4                         # the Limit Breaker
+trigger Nomad_Moogle                    # 10045 (75, 1, 1, 0)
+finish option=5                         # begun
+trade Nomad_Moogle KindredsSeal x5      # 10135
+quest Jeuno.NewWorldsAwait available    # a GM, 10135 open
+finish                                  # available: 10135's finish is the accepted section's: nothing

@@ -1,0 +1,33 @@
+# Trial-Size Trial by Lightning (otherAreas 28): accepted by GM with no Mini Tuning Fork (used up by a lost fight):
+# 10029 (0, fork, 5, 20), declined (option 0: nothing), option 2 (nothing), option 1 with a full inventory
+# (ITEM_CANNOT_BE_OBTAINED), then option 1 with one free slot (a new fork); then 10018. Each script talk follows the
+# default 10021 (UseFallback; see the main flow). 10029's finish reads no status: 10029 finished while completed (a GM
+# inside the event) still gives a fork.
+char zone=Mhaura pos=30.6,-15.6,56.0 job=SMN lvl=20
+quest OtherAreas.TrialSizeTrialByLightning accepted
+login
+trigger Lacia                             # UseFallback 0: the default 10021
+finish
+trigger Lacia                             # the script: accepted, no fork: 10029 (0, fork, 5, 20)
+finish option=0                           # nothing
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # 10029
+finish option=2                           # option 2: nothing
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # 10029
+fill-inventory
+finish option=1                           # no free slot: ITEM_CANNOT_BE_OBTAINED (the fork)
+storage inventory 31                      # one free slot (the bag one larger): the test is == 0
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # 10029
+quest OtherAreas.TrialSizeTrialByLightning completed
+finish option=1                           # finished while completed: a new Mini Tuning Fork of Lightning, ITEM_OBTAINED
+quest OtherAreas.TrialSizeTrialByLightning available
+quest OtherAreas.TrialSizeTrialByLightning accepted
+trigger Lacia                             # the default 10021
+finish
+trigger Lacia                             # the fork held: 10018
+finish

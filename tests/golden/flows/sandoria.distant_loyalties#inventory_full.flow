@@ -1,0 +1,24 @@
+# Distant Loyalties (sandoria 74) accepted by GM (no Goldsmithing Order): Michea at Prog 0 without the order (nil, his
+# default 125), with finalCS 1 by GM (section 3's status operand: accepted, not completed, so no 319). Then Prog 3 and
+# the Mythril Hearts by GM, a full inventory: Femitte's 665 does not complete it (the White Cape cannot be given; finalCS
+# stays 0, the hearts kept); with room, 665 completes it.
+# Michea's other quests are closed: The Elvaan Goldsmith and Father Figure completed, Bastok fame level 2.
+char zone=BastokMarkets pos=-296.096,-15.948,-157.074 job=WAR lvl=30
+quest Sandoria.DistantLoyalties accepted
+quest Bastok.TheElvaanGoldsmith completed
+quest Bastok.FatherFigure completed
+fame Bastok 50
+charvar Quest[0][74]finalCS 1
+login
+trigger Michea                            # accepted, Prog 0, no order, finalCS 1: nil; his default 125
+finish
+charvar Quest[0][74]finalCS 0
+charvar Quest[0][74]Prog 3
+keyitem MythrilHearts
+warp -15.654,2.101,12.203 SouthernSanDoria
+fill-inventory
+trigger Femitte                           # Prog 3, the hearts: 665
+finish                                    # no room: not completed; the hearts kept
+free-inventory
+trigger Femitte                           # 665
+finish                                    # completed: White Cape, fame +40; finalCS 1; the hearts taken

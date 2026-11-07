@@ -1,0 +1,101 @@
+# Overnight Delivery (windurst 15): Kenapa-Keppa and Ohbiru-Dohbiru in Windurst Waters, Kotan-Purutan in Mhaura. The
+# harness clock starts on Vana'diel day 8000 at 12:00:00 and moves only by `wait vana=` (whole hours). Food for Thought
+# completed by GM (so its mustZone is clear). The guard (each side: fame level 2, Food for Thought's mustZone; the
+# `#fft_open` flow has Food for Thought not completed), a GM Prog 5 while available (nil), the four
+# talks 336-339 (declined at 339: Prog 0, then again and accepted: Prog 4), the reminders 340-343 (Prog 5, 6, 7, 4), a
+# GM Prog 8 (Kenapa nil; Kotan 142), Kotan's Prog 3 (142) and Prog 7 (144: the `<= 7` edge), Kotan's day line 144 at
+# 12:00, the night hand-over 141 at 18:00 (the `>= 18` edge: Small Bag, dueDate = the next day), 142 with the bag,
+# Kenapa's 348 before the due day (completed: fame +20, Power Gi; the bag gone; mustZone), and the completed section:
+# Ohbiru 351 at fame level 5 (nil at level 6), Kenapa 349 or 350 at random, Kotan 143 (all replaceDefault).
+# Trades while available: at fame 49 (the guard false) and at Prog 0 with the guard met (no trade handler either way).
+# Defaults: Kenapa's script plays 302 or 303 at random; Ohbiru 344; Kotan-Purutan 140 (DefaultActions; no script).
+# Also named: Kenapa and Ohbiru by Food for Thought (completed, no mustZone: nothing), Say It with Flowers (Prog 0:
+# nothing), Water Way to Go (Ohbiru; needs this quest's mustZone clear and fame level 3: its mustZone is set when Ohbiru
+# is talked to here); Kotan by no other quest or mission.
+lists WindurstWaters/Kenapa-Keppa/onTrigger WindurstWaters/Kenapa-Keppa/onTrade WindurstWaters/Ohbiru-Dohbiru/onTrigger Mhaura/Kotan-Purutan/onTrigger WindurstWaters/onEventFinish/336 WindurstWaters/onEventFinish/337 WindurstWaters/onEventFinish/338 WindurstWaters/onEventFinish/339 WindurstWaters/onEventFinish/340 WindurstWaters/onEventFinish/341 WindurstWaters/onEventFinish/342 WindurstWaters/onEventFinish/343 WindurstWaters/onEventFinish/348 Mhaura/onEventFinish/141
+char zone=WindurstWaters pos=24.0,-5.38,-197.7
+quest Windurst.FoodForThought completed
+fame Windurst 49
+item BoneChip
+login
+trade Kenapa-Keppa BoneChip x1          # available: no trade handler, nothing
+trigger Kenapa-Keppa                    # fame 49 (level 1): not met; his script 302 or 303
+finish
+fame Windurst 50
+charvar Quest[2][14]mustZone 238        # Food for Thought's mustZone set by GM
+trigger Kenapa-Keppa                    # not met; his script
+finish
+charvar Quest[2][14]mustZone 0
+charvar Quest[2][15]Prog 5              # a GM sets Prog 5 while available
+trigger Kenapa-Keppa                    # 12:00, Prog 5: neither 256 nor 0-3, nil; his script
+finish
+charvar Quest[2][15]Prog 0
+trade Kenapa-Keppa BoneChip x1          # available, the guard met (fame 50, no mustZone, Prog 0, 12:00): no trade handler, nothing
+trigger Kenapa-Keppa                    # 12:00, Prog 0: 336
+finish                                  # Prog 1
+trigger Kenapa-Keppa                    # 337
+finish                                  # Prog 2
+trigger Kenapa-Keppa                    # 338
+finish                                  # Prog 3
+trigger Kenapa-Keppa                    # 339
+finish option=1                         # declined: Prog 0
+trigger Kenapa-Keppa                    # 336 again
+finish                                  # Prog 1
+trigger Kenapa-Keppa                    # 337
+finish                                  # Prog 2
+trigger Kenapa-Keppa                    # 338
+finish                                  # Prog 3
+trigger Kenapa-Keppa                    # 339
+finish option=0                         # begun, Prog 4
+trigger Kenapa-Keppa                    # accepted, no bag, Prog 4: 340
+finish                                  # Prog 5
+trigger Kenapa-Keppa                    # 341
+finish                                  # Prog 6
+trigger Kenapa-Keppa                    # 342
+finish                                  # Prog 7
+trigger Kenapa-Keppa                    # 343
+finish                                  # Prog 4
+charvar Quest[2][15]Prog 8              # a GM sets Prog 8
+trigger Kenapa-Keppa                    # no bag, Prog 8: nil; his script
+finish
+warp 41.8,-8.0,44.2 Mhaura
+trigger Kotan-Purutan                   # no bag, Prog 8 (> 7): event 142
+finish
+charvar Quest[2][15]Prog 3
+trigger Kotan-Purutan                   # no bag, Prog 3 (< 4): event 142
+finish
+charvar Quest[2][15]Prog 7
+trigger Kotan-Purutan                   # no bag, Prog 7, 12:00 (day): event 144
+finish
+charvar Quest[2][15]Prog 4
+wait vana=6                             # 18:00
+trigger Kotan-Purutan                   # night (>= 18): 141
+finish                                  # Small Bag; 18:00 (not < 6): dueDate = today + 1
+trigger Kotan-Purutan                   # the bag held: event 142
+finish
+warp 24.0,-5.38,-197.7 WindurstWaters
+trigger Kenapa-Keppa                    # the bag, dueDate > today: 348
+finish                                  # completed: fame +20, Power Gi; the bag gone; mustZone 238
+fame Windurst 424
+trigger Ohbiru-Dohbiru                  # completed, fame 424 (level 5 < 6): 351 (replaceDefault)
+finish
+fame Windurst 425
+trigger Ohbiru-Dohbiru                  # fame level 6: nil; Water Way to Go needs this quest's mustZone clear: his default 344
+finish
+trigger Kenapa-Keppa                    # completed: randomInt(1, 100): 349 or 350 (replaceDefault: the handler's turn)
+finish
+trigger Kenapa-Keppa                    # replaceDefault is under Event priority and his script exists: the lookup alternates, his script (302 or 303)
+finish
+trigger Kenapa-Keppa                    # the handler's turn: the next draw, 349 or 350
+finish
+trigger Kenapa-Keppa                    # his script
+finish
+trigger Kenapa-Keppa                    # the handler's turn
+finish
+trigger Kenapa-Keppa                    # his script
+finish
+trigger Kenapa-Keppa                    # the handler's turn
+finish
+warp 41.8,-8.0,44.2 Mhaura
+trigger Kotan-Purutan                   # completed: 143 (replaceDefault)
+finish

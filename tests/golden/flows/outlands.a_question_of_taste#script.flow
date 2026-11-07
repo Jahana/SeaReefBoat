@@ -1,0 +1,33 @@
+# A Question of Taste: Jakoh's Events (accepted 46 / 48; completed 52 / 56) alternate with his script (interaction_lookup's
+# UseFallback var: an Event-priority reply sets it, and the next talk runs his script first). TuningOut_Progress 2 (a GM)
+# makes his script start 294 (its finish sets nothing). A level 75 Warrior at Windurst fame 425, A Question of Taste
+# accepted at Prog 0 (a GM): 46, then his script's 294; Prog 2: 48, then 294. Completed (a GM, Prog 2 kept) with the
+# mustZone (Quest[5][3]mustZone 250, set in Kazham by a GM): 52, then 294; the mustZone cleared and Prog 1 (GMs): 56,
+# then 294.
+lists Kazham/Jakoh_Wahcondalo/onTrigger
+char zone=Kazham pos=101.702,-15.023,-115.841 job=WAR lvl=75
+fame Windurst 425
+quest Outlands.AQuestionOfTaste accepted
+charvar TuningOut_Progress 2
+login
+trigger Jakoh_Wahcondalo                # Prog 0: 46
+finish
+trigger Jakoh_Wahcondalo                # his script's turn: 294
+finish
+charvar Quest[5][3]Prog 2               # a GM
+trigger Jakoh_Wahcondalo                # Prog 2: 48
+finish
+trigger Jakoh_Wahcondalo                # his script's turn: 294
+finish
+quest Outlands.AQuestionOfTaste completed   # a GM: Prog 2 kept
+charvar Quest[5][3]mustZone 250         # a GM: the mustZone, set in Kazham
+trigger Jakoh_Wahcondalo                # completed, the mustZone: 52
+finish
+trigger Jakoh_Wahcondalo                # his script's turn: 294
+finish
+charvar Quest[5][3]mustZone 0           # a GM
+charvar Quest[5][3]Prog 1               # a GM
+trigger Jakoh_Wahcondalo                # completed, Prog 1: 56
+finish
+trigger Jakoh_Wahcondalo                # his script's turn: 294
+finish

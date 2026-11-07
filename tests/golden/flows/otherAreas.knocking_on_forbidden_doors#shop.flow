@@ -1,0 +1,37 @@
+# Knocking on Forbidden Doors (otherAreas 78): Fyi's mannequin shop (completed, Better Humes and Mannequins held; the chain
+# before it completed), 100000 gil: the purchase edge from above (exactly the cost). 321's update: option 0: richEnough 1
+# at exactly 100000; 11 and 18: the pose of race 1's and race 8's mannequin (none held: 0); 10 and 19: neither arm,
+# nothing. The bag filled, then grown to 31 (a GM): one free slot. 321's finish, option 8: 100000 taken (gil 0):
+# ITEM_OBTAINED (263), the Galka Mannequin added in the last slot, its pose reset (race 8, pose 0). Again: the mask 128;
+# update 0: richEnough 0; 18: the Galka's pose 0; finish option 3: no free slot: ITEM_CANNOT_BE_OBTAINED (258), whatever
+# the option. Room again (a GM): finish options 0 and 9: no arm, no delGil, nothing. A feather traded: not a mannequin: nil.
+# The delGil false arms (an option 1 to 8 short of 100000, an option of 10 or more short of 200) are not in any trace: the
+# engine logs `lua: delGil : Not enough Gil in currency slot`, which the recorder refuses as a script error (the harness
+# quirk of `lua:` lines); XI.Verify.Quests `oa g4 kofd` proves them.
+lists Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/Fyi_Chalmwoh/onTrade Mhaura/onEventUpdate/321 Mhaura/onEventFinish/319 Mhaura/onEventFinish/321
+char zone=Mhaura pos=-37.8,-16,70.1 job=WAR lvl=30 gil=100000
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile completed
+quest OtherAreas.KnockingOnForbiddenDoors completed
+keyitem BetterHumesAndMannequins
+item ChocoboFeather
+login
+trigger Fyi_Chalmwoh                    # 321 (mask 0, 100000, 2000, 200, gil 100000)
+update 321 option=0                     # richEnough 1 (exactly 100000): (1, 0, 0)
+update 321 option=11                    # race 1's pose: (1, 0, 11, 0)
+update 321 option=18                    # race 8's pose: (1, 0, 18, 0)
+update 321 option=10                    # neither arm: nothing
+update 321 option=19                    # neither arm: nothing
+fill-inventory
+storage inventory 31                    # a GM: one free slot (the full test is == 0)
+finish option=8                         # 100000 taken (exactly): ITEM_OBTAINED (263); the Galka Mannequin in the last slot; pose reset (8, 0)
+trigger Fyi_Chalmwoh                    # 321 (mask 128, ..., gil 0)
+update 321 option=0                     # richEnough 0: (0, 128, 0)
+update 321 option=18                    # the Galka's pose: (1, 128, 18, 0)
+finish option=3                         # no free slot: ITEM_CANNOT_BE_OBTAINED (258)
+free-inventory
+trigger Fyi_Chalmwoh                    # 321
+finish option=0                         # no arm: nothing
+trigger Fyi_Chalmwoh                    # 321
+finish option=9                         # no arm (not 1 to 8, below 10): nothing
+trade Fyi_Chalmwoh ChocoboFeather x1    # not a mannequin: nil

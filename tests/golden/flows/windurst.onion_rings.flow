@@ -1,0 +1,90 @@
+# Onion Rings (windurst 42): no Old Ring at the start, completed in time at the House of the Hero. The three earlier
+# quests completed by GM (silent), level 5, fame 125 (level 3). The harness clock: VanadielTime() reads the wall clock,
+# 1800000000 - 1009810800 = 790189200, which only `wait jst=` moves. Available: a bone chip traded (no trade handler:
+# nothing); Gomada-Vulmada: Inspector's Gadget's 425 (its completed section: this quest available). 429: Prog 1, EndTime
+# 790192656 (now + 3456), the quest still available (Gomada-Vulmada still 425: section 2 wants it accepted); 429 again
+# (Prog 1: nothing changes); at Prog -1 (GM): 429, nothing changes. Prog 1, EndTime now + 1 (790189201) by GM, the ring
+# by GM: in time at Prog 1: 430 (0, the ring), begun. Accepted at Prog 1, EndTime now + 1 (790189200 < 790189201: in
+# time): 431, 435, 434, 438, 436, 439, 437. EndTime set by GM to now (790189200, not <: late): 442, 441, 445, 443, 446,
+# 444; the House of the Hero late: nil (its default: DOORS_SEALED_SHUT). EndTime back to now + 1: 289, completed (fame
+# 30, Star Onion Brigadier: nothing that can fail; the ring taken, the player local var [2][76]mustZone 1). Completed
+# while Crying Over Onions is available: 442, 441, 445, 443, 446, 444 (replaceDefault). Kohlo-Lakolo: Crying Over
+# Onions' first line (its Reward var 0, its own char-var mustZone 0: the local var 289 set is not read): 449, finished
+# (the Bouncer Club; its Reward 1 and mustZone). Crying Over Onions accepted by GM (Prog 0: no brigade line): section 3
+# not met; Gomada-Vulmada's default 363.
+lists PortWindurst/Kohlo-Lakolo/onTrigger PortWindurst/Gomada-Vulmada/onTrigger WindurstWalls/_6n2/onTrigger PortWindurst/onEventFinish/429 PortWindurst/onEventFinish/430 WindurstWalls/onEventFinish/289
+char zone=PortWindurst pos=-27.5,-8.0,189.6 lvl=5
+fame Windurst 125
+quest Windurst.TruthJusticeAndTheOnionWay completed
+quest Windurst.KnowOnesOnions completed
+quest Windurst.InspectorsGadget completed
+item BoneChip
+login
+trade Kohlo-Lakolo BoneChip x1                 # available, the check holds: no trade handler: nothing
+trigger Gomada-Vulmada                         # Inspector's Gadget's completed section: 425
+finish
+trigger Kohlo-Lakolo                           # no ring: 429
+finish                                         # Prog 0: Prog 1, EndTime 790192656
+trigger Gomada-Vulmada                         # still available (Prog 1): 425
+finish
+trigger Kohlo-Lakolo                           # 429
+finish                                         # Prog 1: nothing
+charvar Quest[2][42]Prog -1                    # GM
+trigger Kohlo-Lakolo                           # 429
+finish                                         # Prog -1: not 0: nothing
+charvar Quest[2][42]Prog 1                     # GM
+charvar Quest[2][42]EndTime 790189201          # GM: now + 1
+keyitem OldRing                                # GM
+trigger Kohlo-Lakolo                           # the ring, 790189200 < 790189201, Prog 1: 430 (0, the ring)
+finish                                         # begun
+trigger Kohlo-Lakolo                           # accepted, Prog 1, in time: 431
+finish
+trigger Gomada-Vulmada                         # 435
+finish
+trigger Papo-Hopo                              # 434
+finish
+trigger Pichichi                               # 438
+finish
+trigger Pyo_Nzon                               # 436
+finish
+trigger Shanruru                               # 439
+finish
+trigger Yafa_Yaa                               # 437
+finish
+charvar Quest[2][42]EndTime 790189200          # GM: now
+trigger Gomada-Vulmada                         # not <: late: 442
+finish
+trigger Papo-Hopo                              # 441
+finish
+trigger Pichichi                               # 445
+finish
+trigger Pyo_Nzon                               # 443
+finish
+trigger Shanruru                               # 446
+finish
+trigger Yafa_Yaa                               # 444
+finish
+warp -24.5,-14.498,262.994 WindurstWalls
+trigger _6n2                                   # late: nil; DOORS_SEALED_SHUT
+finish-if-event
+charvar Quest[2][42]EndTime 790189201          # GM: now + 1
+trigger _6n2                                   # in time: 289
+finish                                         # completed: fame 30, the title; the ring taken; local var [2][76]mustZone 1
+warp -27.5,-8.0,189.6 PortWindurst
+trigger Gomada-Vulmada                         # Crying Over Onions available: 442 (replaceDefault)
+finish
+trigger Papo-Hopo                              # 441
+finish
+trigger Pichichi                               # 445
+finish
+trigger Pyo_Nzon                               # 443
+finish
+trigger Shanruru                               # 446
+finish
+trigger Yafa_Yaa                               # 444
+finish
+trigger Kohlo-Lakolo                           # Crying Over Onions: 449
+finish                                         # the Bouncer Club; its Reward 1, its mustZone
+quest Windurst.CryingOverOnions accepted       # GM
+trigger Gomada-Vulmada                         # section 3 not met; Crying Over Onions at Prog 0: nil; 363
+finish

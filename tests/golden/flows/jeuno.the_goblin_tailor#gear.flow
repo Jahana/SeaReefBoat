@@ -1,0 +1,36 @@
+# The Goblin Tailor (jeuno 42): Guttrix's answers at their boundaries, no pattern. Week 1000 (location 1, race 1): main,
+# a level 75 Hume male Warrior, accepted: 10019 needs [RSE]Gear exactly 15 (rseTracker == 15): [RSE]Gear 16 (a GM: a
+# bit past the four pieces): 10017 (1, 1); 31: 10017 (1, 1); 14: 10017 (1, 1); 15: 10019. Bob, a level 10 Hume male
+# Warrior, accepted: not below 10 (level < 10): 10017 (1, 1). Week 1002 (race 3, location 0: the two differ): main at
+# [RSE]Gear 0 (a GM): 10017 (0, 3); carl, a level 75 Hume male Warrior at Jeuno fame level 3, available: 10016 (0, 3),
+# begun.
+lists LowerJeuno/Guttrix/onTrigger LowerJeuno/onEventFinish/10016
+char zone=LowerJeuno pos=-34.5,5.5,-139.7 job=WAR lvl=75
+char bob zone=LowerJeuno pos=-34.5,5.5,-138.2 job=WAR lvl=10
+char carl zone=LowerJeuno pos=-34.5,5.5,-140.9 job=WAR lvl=75
+quest Jeuno.TheGoblinTailor accepted
+charvar [RSE]Gear 16
+bob: quest Jeuno.TheGoblinTailor accepted
+carl: fame Sandoria 250
+login
+trigger Guttrix                         # [RSE]Gear 16, not 15; no pattern: 10017 (1, 1)
+finish
+charvar [RSE]Gear 31                    # a GM
+trigger Guttrix                         # 31, not 15: 10017 (1, 1)
+finish
+charvar [RSE]Gear 14                    # a GM
+trigger Guttrix                         # 14, not 15: 10017 (1, 1)
+finish
+charvar [RSE]Gear 15                    # a GM
+trigger Guttrix                         # 15: 10019
+finish
+bob: login
+bob: trigger Guttrix                    # level 10, not below 10; no pattern: 10017 (1, 1)
+bob: finish
+wait vana=372                           # day 8016: week 1002 (race 3, location 0)
+charvar [RSE]Gear 0                     # a GM
+trigger Guttrix                         # 10017 (0, 3)
+finish
+carl: login
+carl: trigger Guttrix                   # available, level 75, fame level 3: 10016 (0, 3)
+carl: finish                            # begun

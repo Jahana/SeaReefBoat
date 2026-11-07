@@ -1,0 +1,50 @@
+# The Usual (bastok 27): Hilda in Port Bastok, Raibaht in the Metalworks. The guard (Cid's Secret completed, Bastok fame
+# level 5), the offer 134 (declined, then accepted), the King Truffle trade (135, the Steaming Sheep Invitation),
+# Raibaht's 510 (declined, then Prog 1), Hilda's 136 and the reward. Hilda's default is 48, and Cid's Secret, once
+# completed, answers her with 49 (replaceDefault) whenever The Usual does not act. Raibaht's default is 501. Teak Me to
+# the Stars is set completed: at fame level 3 and up its offer (864) would take Raibaht first. Dark Legacy (a DRK quest),
+# LB04 and mission 7-2 need what this char lacks. The char starts on the first node of Hilda's path, where she waits
+# 10 s after the zone starts, so the first trade reaches her.
+lists PortBastok/Hilda/onTrigger PortBastok/Hilda/onTrade Metalworks/Raibaht/onTrigger PortBastok/onEventFinish/134 PortBastok/onEventFinish/135 PortBastok/onEventFinish/136 Metalworks/onEventFinish/510
+char zone=PortBastok pos=-155.4,-11.38,18.66
+fame Bastok 324
+quest Bastok.TeakMeToTheStars completed
+item KingTruffle x2
+item BoneChip
+login
+trade Hilda KingTruffle x1     # available: no trade handler, nothing
+trigger Hilda                  # Cid's Secret not completed: her default 48
+finish
+quest Bastok.CidsSecret completed
+trigger Hilda                  # fame 324 (level 4): Cid's Secret's 49
+finish
+fame Bastok 325
+trigger Hilda                  # fame level 5: the offer, 134
+finish option=1                # declined: nothing
+trigger Hilda                  # 134 again
+finish                         # option 0: accepted
+trigger Hilda                  # accepted, Prog 0: nil, Cid's Secret's 49
+finish
+trade Hilda BoneChip x1        # the wrong item: nil, nothing
+warp -26.3,-10,-2.6 Metalworks
+trigger Raibaht                # no invitation: nil, his default 501
+finish
+warp -155.4,-11.38,18.66 PortBastok
+trigger Hilda                  # 49
+finish
+trade Hilda KingTruffle x1     # no invitation, the King Truffle: 135
+finish                         # a truffle taken, the Steaming Sheep Invitation
+trade Hilda KingTruffle x1     # the invitation held: nil, nothing
+warp -26.3,-10,-2.6 Metalworks
+trigger Raibaht                # the invitation, Prog 0: 510
+finish option=1                # declined: Prog stays 0
+trigger Raibaht                # 510 again
+finish                         # option 0: Prog 1
+trigger Raibaht                # Prog 1: nil, 501
+finish
+warp -155.4,-11.38,18.66 PortBastok
+trigger Hilda                  # Prog 1: 136
+finish                         # completed: Speed Bow, fame +50, Steaming Sheep Regular, the invitation deleted
+trigger Hilda                  # completed: no handler, Cid's Secret's 49
+finish
+trade Hilda BoneChip x1        # completed: no trade handler, nothing

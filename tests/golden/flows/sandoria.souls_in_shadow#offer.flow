@@ -1,0 +1,32 @@
+# Souls in Shadow (sandoria 99): the offer's other sides. A DRK 75 (can equip the Scythe of Trials), no guide: scythe
+# skill raw 2399 (/ 10 is below 240: not offered, his default 10), then 2400: 0 once per zone, an Event; option 0
+# (nothing); the next talk is his default 10 (0 spent in this zone; his script starts nothing); a trade while available
+# (section 1 has no trade handler, his script has none: nothing); after a rezone 0 again, option 1 with a full inventory
+# (no scythe held, giveItem fails: nothing, not begun); after another rezone option 1 with room (the scythe and the
+# guide, begun); then 3 with 1 and the scythe at 0 weapon skill points (2, which has no finish handler: the scythe
+# kept).
+lists BostaunieuxOubliette/Novalmauge/onTrigger BostaunieuxOubliette/Novalmauge/onTrade BostaunieuxOubliette/onEventFinish/0
+char zone=BostaunieuxOubliette pos=32.4,-24,19.8 job=DRK lvl=75
+skill Scythe 2399
+item BoneChip
+login
+trigger Novalmauge                        # scythe 2399 (/ 10 is 239.9): not offered; his default 10
+finish
+skill Scythe 2400
+trigger Novalmauge                        # all three met: 0 (oncePerZone)
+finish                                    # option 0: nothing
+trigger Novalmauge                        # 0 already played in this zone (oncePerZone): his default 10
+finish
+trade Novalmauge BoneChip x1              # available, offered: no trade handler, nothing
+rezone
+trigger Novalmauge                        # after the rezone: 0 again
+fill-inventory
+finish option=1                           # option 1, no scythe, the inventory full: giveItem false, not begun
+free-inventory
+rezone
+trigger Novalmauge                        # 0
+finish option=1                           # option 1: the Scythe of Trials and the Weapon Training Guide, begun
+trigger Novalmauge                        # accepted, the scythe held: 3 with 1
+finish
+trade Novalmauge ScytheOfTrials x1        # 0 weapon skill points: 2
+finish                                    # 2 has no finish handler: the scythe kept

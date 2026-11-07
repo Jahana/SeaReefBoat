@@ -1,0 +1,43 @@
+# Divine Might (Repeat) (outlands 164), the battlefield's other arms: two level 75 Warriors on THE_SEALED_SHRINE, Divine
+# Might completed and the repeat accepted (GMs), an Ark Pentasphere each; Invincible (a GM: the five would kill a level 75
+# Warrior before the last falls). main, no Moonlight Ore: La'Loff 32000, option 81 (arena 1), the five killed, 32001
+# (293) without the ore: nothing (Prog 0). bob, the ore: 32000, option 82 (arena 2), the five of arena 2 killed,
+# battlefieldWin 292 (a GM) with the ore: nothing. Shrine: bob at Prog 0 with the ore: 56.
+lists LaloffAmphitheater/onEventFinish/32001 TheShrineOfRuavitau/blank_divine_might/onTrigger
+char zone=LaloffAmphitheater pos=-603.563,-22.681,483.937 job=WAR lvl=75
+char bob zone=LaloffAmphitheater pos=-603.563,-22.681,483.937 job=WAR lvl=75
+mission Zilart TheSealedShrine current
+quest Outlands.DivineMight completed
+quest Outlands.DivineMightRepeat accepted
+item ArkPentasphere
+bob: mission Zilart TheSealedShrine current
+bob: quest Outlands.DivineMight completed
+bob: quest Outlands.DivineMightRepeat accepted
+bob: item ArkPentasphere
+bob: keyitem MoonlightOre
+login
+effect 50                               # a GM: Invincible
+trade qm1_1 ArkPentasphere x1           # 32000
+update 32000 option=81                  # index 5, arena 1: entered
+finish
+kill ARK_ANGEL_HM+24
+kill ARK_ANGEL_MR+22
+kill ARK_ANGEL_EV+16
+kill ARK_ANGEL_TT+14
+kill ARK_ANGEL_GK+12                    # won: 32001
+finish                                  # 293, no ore: nothing
+bob: login
+bob: effect 50                          # a GM: Invincible
+bob: trade qm1_1 ArkPentasphere x1      # 32000
+bob: update 32000 option=82             # index 5, arena 2: entered
+bob: finish
+bob: kill ARK_ANGEL_HM+32
+bob: kill ARK_ANGEL_MR+30
+bob: kill ARK_ANGEL_EV+24
+bob: kill ARK_ANGEL_TT+22
+bob: kill ARK_ANGEL_GK+20               # won: 32001
+bob: localvar battlefieldWin 292        # a GM, 32001 open
+bob: finish                             # not 293: nothing
+bob: warp -38.533,-1.648,-148.199 TheShrineOfRuavitau
+bob: trigger blank_divine_might         # Prog 0, the ore: 56
+bob: finish

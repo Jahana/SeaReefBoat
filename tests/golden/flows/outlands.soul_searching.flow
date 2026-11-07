@@ -1,0 +1,24 @@
+# Soul Searching (outlands 162): the Cermet Headstone in The Sanctuary of Zi'Tah (no script; the default
+# CANNOT_REMOVE_FRAG; Rhapsodies of Zilart 5's monument, whose sections need the mission current or completed: none here).
+# A level 75 Warrior, no Zilart mission, a Bone Chip. Available: no section: the default; a trade: no trade handler:
+# nothing. Accepted (a GM: the mission's 201 adds it): no Prismatic Fragment: AIR_REMAINS_STAGNANT; a trade: nothing; the
+# fragment (a GM): 202 (the fragment); finished with a full inventory: complete false (the Bat Earring not given): still
+# accepted; freed: 202, finished: completed (the earring, Guider of Souls to the Sanctuary), the fragment kept.
+# Completed: the default.
+lists TheSanctuaryOfZitah/Cermet_Headstone/onTrigger TheSanctuaryOfZitah/Cermet_Headstone/onTrade TheSanctuaryOfZitah/onEventFinish/202
+char zone=TheSanctuaryOfZitah pos=233.807,-1.098,279.952 job=WAR lvl=75
+item BoneChip
+login
+trigger Cermet_Headstone                # no section: the default CANNOT_REMOVE_FRAG
+trade Cermet_Headstone BoneChip x1      # available: no trade handler: nothing
+quest Outlands.SoulSearching accepted   # a GM
+trigger Cermet_Headstone                # no fragment: AIR_REMAINS_STAGNANT
+trade Cermet_Headstone BoneChip x1      # accepted: no trade handler: nothing
+keyitem PrismaticFragment               # a GM
+trigger Cermet_Headstone                # 202 (the fragment)
+fill-inventory
+finish                                  # complete false: nothing
+free-inventory
+trigger Cermet_Headstone                # 202
+finish                                  # completed: the Bat Earring, the title
+trigger Cermet_Headstone                # completed: the default

@@ -1,0 +1,46 @@
+# Rank 2 Mission 2 (battlefield.rank_2_mission_2) by Bastok chars, who never register it: entryRequirement's
+# current-mission test reads only the San d'Oria and Windurst logs (getCurrentMission of each), while its status and
+# completed tests read the char's own nation's log (getMissionStatus(nation), hasCompletedMission(nation, 5): The
+# Emissary for a Bastok char). Main, a level 75 Warrior of Bastok with The Emissary (Bastok 5) completed; bob, one
+# of Bastok with nothing; sando, one of San d'Oria with Journey to Bastok (the second) current at Status 10 (GMs). Main
+# alone: BC_Entrance: no options: NO_BATTLEFIELD_ENTRY. sando leads main and bob; sando's menu, area 3 (option 3):
+# registered, main and bob registered with it (the clearance copied); sando enters. Main with the clearance:
+# entryRequirement as no registrant: The Emissary completed (nonRegistrantReqs): the menu (enterExisting); entered
+# (checkSkipCutscene: no completed or current 2-3: not skippable). bob with the clearance: as no registrant, nothing
+# completed: nothing. Main leaves by arena 3's Burning_Circle: 32003, finished with 4: leaveBattlefield(1). sando kills
+# arena 3's pair (Dark_Dragon's title to sando): the timer, WON; at the fifth tick the cleanup: 32001 to sando (main
+# left); finished: San d'Oria 2-3's handler: the Kindred Crest, Status 11 (no Dark Key held: delKeyItem of none).
+lists WaughroonShrine/BC_Entrance/onTrigger WaughroonShrine/onEventUpdate/32000 WaughroonShrine/Burning_Circle/onTrigger WaughroonShrine/onEventFinish/32003 WaughroonShrine/onEventFinish/32001
+char zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=WAR lvl=75 nation=1
+char bob zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=WAR lvl=75 nation=1
+char sando zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=WAR lvl=75 nation=0
+mission Bastok TheEmissary completed
+sando: mission Sandoria JourneyToBastok2 current
+login
+trigger BC_Entrance                     # alone, Bastok: NO_BATTLEFIELD_ENTRY
+bob: login
+sando: login
+sando: missionstatus Sandoria 10        # a GM
+sando: invite main
+accept
+sando: invite bob
+bob: accept
+sando: trigger BC_Entrance              # the menu 32000
+sando: update 32000 option=3            # area 3: registered; main and bob registered with it; sando entered
+sando: finish
+trigger BC_Entrance                     # the clearance, The Emissary completed: the menu (enterExisting)
+update 32000 option=3                   # entered (not skippable)
+finish                                  # in the arena
+bob: trigger BC_Entrance                # the clearance, nothing completed: nothing
+trigger Burning_Circle+2                # arena 3's exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 2000                               # the pair spawns
+sando: kill #17367045                   # Dark_Dragon of arena 3
+sando: kill #17367046                   # Seeker of arena 3: the timer, WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000                               # the timer out: the cleanup: 32001 to sando
+tick 2000                               # nothing more
+sando: finish                          # 2-3: the Kindred Crest, Status 11

@@ -1,0 +1,41 @@
+# A Squire's Test II (sandoria 19): Balasiel and Chanpau in Southern San d'Oria, Morjean in Northern San d'Oria, qm2 and
+# qm3 in Ordelle's Caves. A Squire's Test completed by GM; a trade while available (no trade
+# handler: nothing); level 10: the offer 625 (any option begins it); Balasiel's 630; Morjean before Chanpau (Option 0: nil); Chanpau's 629 (Option 1) and, on the next talk, his script's 566 (an
+# Event-priority action alternates with the NPC script: interaction_lookup.lua); Morjean's 602; qm3 before qm2 (Timer
+# 0: DEW_SLIPS_THROUGH_FINGERS), qm2 (Timer = system time + 30, PLACE_HANDS_IN_POOL), qm3 within the 30 s (the
+# Stalactite Dew), qm3 again (ALREADY_OBTAINED_DEW), qm2 with the dew (no Timer, the message); Balasiel's 626 (completed:
+# fame +20, the Squire Certificate, Spelunker; the dew deleted); A Knight's Test's 670 afterwards (level 10, below 30).
+# Balasiel's default 667; Chanpau's script: 566 (The Brugaire Consortium not completed); Morjean's script answers The
+# Holy Crest only (TheHolyCrest_Event 2-4), his default 601; qm2 / qm3 default NOTHING_OUT_OF_ORDINARY.
+lists SouthernSanDoria/Balasiel/onTrigger SouthernSanDoria/Balasiel/onTrade SouthernSanDoria/Chanpau/onTrigger SouthernSanDoria/onEventFinish/625 SouthernSanDoria/onEventFinish/626 SouthernSanDoria/onEventFinish/629 NorthernSanDoria/Morjean/onTrigger OrdellesCaves/qm2/onTrigger OrdellesCaves/qm3/onTrigger
+char zone=SouthernSanDoria pos=-136.8,-10.8,65.8 lvl=10
+quest Sandoria.ASquiresTest completed
+item BoneChip
+login
+trade Balasiel BoneChip x1                # available: no trade handler, nothing
+trigger Balasiel                          # A Squire's Test completed, level 10: 625
+finish option=1                           # any option: begun
+trigger Balasiel                          # accepted, no dew: 630
+finish
+warp 97,0,114 NorthernSanDoria
+trigger Morjean                           # Option 0: nil; his script answers nothing: his default 601
+finish-if-event
+warp -152.7,-2,56.3 SouthernSanDoria
+trigger Chanpau                           # accepted: 629
+finish                                    # Option 1
+trigger Chanpau                           # the NPC script's turn: his 566
+finish
+warp 97,0,114 NorthernSanDoria
+trigger Morjean                           # Option 1: 602
+finish
+warp -90.2,1.2,276.2 OrdellesCaves
+trigger qm3                               # no dew, Timer 0: DEW_SLIPS_THROUGH_FINGERS
+trigger qm2                               # no dew: Timer = now + 30, PLACE_HANDS_IN_POOL
+trigger qm3                               # within the 30 s: the key item Stalactite Dew
+trigger qm3                               # the dew held: ALREADY_OBTAINED_DEW
+trigger qm2                               # the dew held: no Timer, PLACE_HANDS_IN_POOL
+warp -136.8,-10.8,65.8 SouthernSanDoria
+trigger Balasiel                          # the dew: 626
+finish                                    # completed: fame +20, the Squire Certificate, Spelunker; the dew deleted
+trigger Balasiel                          # completed: A Knight's Test, level 10: its 670
+finish

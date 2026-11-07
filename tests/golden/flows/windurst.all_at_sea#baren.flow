@@ -1,0 +1,22 @@
+# All at Sea (windurst 23): Baren-Moren's other arms, by GM, a level-10 WAR at fame 125 in Windurst Waters. Accepted at
+# Prog 3 by GM without the cap: four hides: nil (Prog >= 1, the hides, no cap, but neither Prog 1 nor 2). Prog 2
+# without the cap: four hides: 549 (0, 0, 1), option 1 (the hides taken, the Sailor's Cap; Prog 2 kept). Prog 3 by GM:
+# the talk nil (his script's line), four hides nil (the held cap). Prog 1: the Ripped Cap: nil (the cap arm is Prog 0's).
+lists WindurstWaters/Baren-Moren/onTrigger WindurstWaters/Baren-Moren/onTrade WindurstWaters/onEventFinish/549
+char zone=WindurstWaters pos=-64.6,-2.875,-145.7 job=WAR lvl=10
+fame Windurst 125
+quest Windurst.AllAtSea accepted
+charvar Quest[2][23]Prog 3
+item DhalmelHide x12
+item RippedCap
+login
+trade Baren-Moren DhalmelHide x4              # Prog 3, four hides, no cap: nil (neither Prog 1 nor 2)
+charvar Quest[2][23]Prog 2
+trade Baren-Moren DhalmelHide x4              # Prog 2, no cap: 549 (0, 0, 1)
+finish option=1                               # the hides taken; the Sailor's Cap; Prog 2
+charvar Quest[2][23]Prog 3
+trigger Baren-Moren                           # Prog 3: nil; his script's line
+finish option=0
+trade Baren-Moren DhalmelHide x4              # Prog 3 (the cap held too): nil
+charvar Quest[2][23]Prog 1
+trade Baren-Moren RippedCap x1                # Prog 1: nil (the cap arm is Prog 0's)

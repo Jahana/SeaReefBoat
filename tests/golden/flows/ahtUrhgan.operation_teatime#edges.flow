@@ -1,0 +1,73 @@
+# Operation Teatime (ahtUrhgan): the other operands. A WAR 75 with no other quest of Iruki-Waraki's (No Strings
+# Attached available: its section-1 handler answers only with its Option var 1, so the lookup has his default 259):
+# the default 259 first (UseFallback 0), then his script. The chai and potion traded at OperationTeaTimeProgress 0:
+# nothing; at 1 while available (a GM; no status test), with a third item in the trade (at least the two): 780, its
+# finish OperationTeaTimeProgress 2, only the potion and the chai taken; again at 2: nothing. His script at 2 while
+# available: no 781 (accepted only): 259. Completed by GM at 1 (No Strings Attached and The Wayward Automaton not
+# completed, not a PUP): no 779 (accepted only): his script's last arm: 777. Dan, a PUP of 50 with neither No Strings
+# Attached nor The Wayward Automaton: no 774 (No Strings Attached); The Wayward Automaton completed by GM: no 778 (No
+# Strings Attached): the default 259 each time. Eve, a PUP of 50 with No Strings Attached completed and The Wayward
+# Automaton accepted at 2: no 778 (The Wayward Automaton not completed): the lookup's 267. Dnegan:
+# OperationTeatimeProgress 2 while completed (no status test): 290, its option 2: neither arm of its finish
+# (OTT_DayWait unset, the var stays 2): 290 again; progress 1 or 3 by GM: no arm: 288. qm10 while available at
+# OperationTeatimeProgress 3: NOTHING_OUT_OF_ORDINARY; accepted at 2: NOTHING_OUT_OF_ORDINARY.
+char zone=AhtUrhganWhitegate pos=102.8,-6.0,-29.0 job=WAR lvl=75
+char dan zone=AhtUrhganWhitegate pos=102.8,-6.0,-28.0 job=PUP lvl=50
+char eve zone=AhtUrhganWhitegate pos=102.8,-6.0,-30.0 job=PUP lvl=50
+item FlaskOfSleepingPotion x2
+item CupOfChai x2
+item Animator
+eve: quest AhtUrhgan.NoStringsAttached completed
+eve: item Animator
+eve: quest AhtUrhgan.TheWaywardAutomaton accepted
+eve: charvar TheWaywardAutomatonProgress 2
+login
+trade Iruki-Waraki FlaskOfSleepingPotion x1 CupOfChai x1  # OperationTeaTimeProgress 0: nothing
+charvar OperationTeaTimeProgress 1
+trade Iruki-Waraki FlaskOfSleepingPotion x1 CupOfChai x1 Animator x1  # available, progress 1, a third item too: 780
+finish                                  # OperationTeaTimeProgress 2; the potion and the chai taken, the Animator stays
+trade Iruki-Waraki FlaskOfSleepingPotion x1 CupOfChai x1  # progress 2 (the trade wants 1): nothing
+trigger Iruki-Waraki                    # the default 259 (UseFallback 0)
+finish
+trigger Iruki-Waraki                    # the script: available, not a PUP: no arm of either quest, no 267 arm: 259
+finish
+charvar OperationTeaTimeProgress 1
+quest AhtUrhgan.OperationTeatime completed
+trigger Iruki-Waraki                    # the default 259
+finish
+trigger Iruki-Waraki                    # the script: completed (at 1: 779 wants it accepted): 777
+finish
+dan: login
+dan: trigger Iruki-Waraki               # the default 259
+dan: finish
+dan: trigger Iruki-Waraki               # the script: PUP 50, No Strings Attached available: no 774: 259
+dan: finish
+dan: quest AhtUrhgan.TheWaywardAutomaton completed
+dan: trigger Iruki-Waraki               # 259
+dan: finish
+dan: trigger Iruki-Waraki               # The Wayward Automaton completed, No Strings Attached not: no 778: 259
+dan: finish
+eve: login
+eve: trigger Iruki-Waraki               # No Strings Attached's 267
+eve: finish
+eve: trigger Iruki-Waraki               # the script: The Wayward Automaton accepted at 2: no 778: the lookup's 267
+eve: finish
+charvar OperationTeatimeProgress 2
+warp 31.0,-6.0,56.0 Nashmau
+trigger Dnegan                          # OperationTeatimeProgress 2, completed: 290 (no status test)
+finish option=2                         # neither option arm: nothing
+trigger Dnegan                          # still 2, OTT_DayWait unset: 290
+finish option=2
+charvar OperationTeatimeProgress 1
+trigger Dnegan                          # OperationTeatimeProgress 1: no arm: 288
+finish
+charvar OperationTeatimeProgress 3
+trigger Dnegan                          # progress 3 (past the arm's == 2): no arm: 288
+finish
+warp 474.8,-31.8,75.5 CaedarvaMire
+quest AhtUrhgan.OperationTeatime available
+charvar OperationTeatimeProgress 3
+trigger qm10                            # available at progress 3: NOTHING_OUT_OF_ORDINARY
+quest AhtUrhgan.OperationTeatime accepted
+charvar OperationTeatimeProgress 2
+trigger qm10                            # accepted, progress 2: NOTHING_OUT_OF_ORDINARY

@@ -1,0 +1,71 @@
+# Against All Odds (ahtUrhgan 26, COR AF3): a level 50 Corsair, Luck of the Draw, Equipped for All Occasions, Navigating
+# the Unfriendly Seas and The Die is Cast completed (GMs: no other Ratihb reply). Whitegate's trigger area 5 (64 -7 -137
+# .. 95 -5 -123; the zone's own switch has no case 5; ToAU mission 4's handler needs that mission current), Ratihb (no
+# script; default 603); Arrapago Reef: trigger area 1 (-462 -4 -420 .. -455 -1 -392), the Cutter (its script: the
+# instance entry, else CUTTER_NOTHING_HAPPENS). Available: Ratihb: no handler: 603; area 5: 797, finished: begun, the
+# Life Float, Wait = JstMidnight(); area 5 again (accepted): no section-2 handler. Ratihb Prog 0: nil: 603. Arrapago:
+# area 1 at Prog 0 (walked into from the east: the Cutter stands west of it, and a trigger's walk to him from the east
+# would cross it): 237, finished: 240 started; finished: Prog 1; area 1 again at Prog 1: nil; the float gone (a GM: with
+# it the Cutter's script would open the instance's entry): the Cutter at Prog 1: nil: CUTTER_NOTHING_HAPPENS. Whitegate:
+# Ratihb at Prog 1, no float, Wait = JstMidnight() > now: nil: 603; Wait 0 (a GM): 798 (the float, Wait =
+# JstMidnight()); the float held: nil: 603, also a JST day on (`wait jst=1`: Wait < now); the float gone (a GM): 798.
+# Prog 2 with Wait 0 and no float (GMs: the state the instance leaves, its afterInstanceRegister taking the float and
+# its onInstanceComplete setting Prog 2 and Wait 0): Ratihb: nil (Prog not 1): 603; the Cutter: 238: completed
+# (Corsair's Tricorne, Paragon of Corsair Excellence). xi.player.onGameIn's ZoningIn lock keeps trigger areas off for
+# 2.5 s after a zone-in (hence the ticks).
+lists AhtUrhganWhitegate/onTriggerAreaEnter/5 AhtUrhganWhitegate/Ratihb/onTrigger ArrapagoReef/onTriggerAreaEnter/1 ArrapagoReef/Cutter/onTrigger ArrapagoReef/onEventFinish/237 ArrapagoReef/onEventFinish/238
+char zone=AhtUrhganWhitegate pos=80,-6,-140 job=COR lvl=50
+quest AhtUrhgan.LuckOfTheDraw completed
+quest AhtUrhgan.EquippedForAllOccasions completed
+quest AhtUrhgan.NavigatingTheUnfriendlySeas completed
+quest AhtUrhgan.TheDieIsCast completed
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Ratihb                          # available: no Ratihb handler: 603
+finish
+walk 80,-6,-140                         # out of area 5 (south of it)
+walk 80,-6,-130                         # area 5, available: 797
+finish                                  # begun; the Life Float; Wait = JstMidnight()
+walk 80,-6,-140
+walk 80,-6,-130                         # accepted: no section-2 area handler: nothing
+walk 80,-6,-140
+trigger Ratihb                          # Prog 0: nil: 603
+finish
+warp -450,-2,-400 ArrapagoReef          # east of area 1
+tick 1000
+tick 1000
+tick 1000
+walk -458,-2,-400                       # area 1 at Prog 0: 237
+finish                                  # 240 started
+finish                                  # 240: Prog 1
+walk -450,-2,-400
+walk -458,-2,-400                       # area 1 at Prog 1: nil
+walk -450,-2,-400
+delkeyitem LifeFloat                    # a GM (the instance's registry wants the float: no entry event)
+warp -463.026,-2,-394.478 ArrapagoReef  # beside the Cutter, west of area 1
+trigger Cutter                          # Prog 1: nil: the Cutter's script: no float: CUTTER_NOTHING_HAPPENS
+finish-if-event
+warp 76.725,-6,-137.203 AhtUrhganWhitegate
+trigger Ratihb                          # Prog 1, no float, Wait = JstMidnight() > now: nil: 603
+finish
+charvar Quest[6][26]Wait 0              # a GM
+trigger Ratihb                          # no float, Wait 0: 798
+finish                                  # the Life Float; Wait = JstMidnight()
+trigger Ratihb                          # the float held: nil: 603
+finish
+wait jst=1                              # now past Wait
+trigger Ratihb                          # the float held, Wait < now: nil: 603
+finish
+delkeyitem LifeFloat                    # a GM
+trigger Ratihb                          # no float, Wait < now: 798
+finish                                  # the float again
+charvar Quest[6][26]Prog 2              # a GM (the instance's onInstanceComplete: Prog 2, Wait 0)
+charvar Quest[6][26]Wait 0              # a GM
+delkeyitem LifeFloat                    # a GM (the instance's afterInstanceRegister takes it)
+trigger Ratihb                          # Prog 2, no float, Wait 0: nil: 603
+finish
+warp -463.026,-2,-394.478 ArrapagoReef  # beside the Cutter
+trigger Cutter                          # Prog 2: 238
+finish                                  # completed: Corsair's Tricorne, Paragon of Corsair Excellence

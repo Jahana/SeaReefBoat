@@ -1,0 +1,14 @@
+# Legendary Plan B (windurst 44), completion parity: 314's finish is npcUtil.completeQuest step for step (the armlets,
+# stopping when they cannot be given; fame 30 Windurst; the gil), ending in the raw player:completeQuest, so a GM's
+# Quest[2][44]Prog survives the completion (quest:cleanup, which a called Quest.Complete() runs, would clear it).
+# GIL_RATE 1.0025: 700 x 1.0025 = 701.75 (llround 702, GIL_OBTAINED 702). Accepted (GM) beside Kopuro-Popuro.
+char zone=WindurstWoods pos=-1.0,-4.75,-21.0 job=WAR lvl=75
+setting GIL_RATE 1.0025
+item 529
+item WolfHide
+item RevivalTreeRoot
+login
+quest Windurst.LegendaryPlanB accepted
+charvar Quest[2][44]Prog 1              # a GM: the quest's own var (the raw completeQuest keeps it)
+trade Kopuro-Popuro 529 x1 WolfHide x1 RevivalTreeRoot x1  # 314 (0, 529, 940, 858)
+finish                                  # the armlets, fame 30, 702 gil, completed; the three taken; needToZone

@@ -1,0 +1,16 @@
+# A Greeting Cardian (windurst 43): Five of Spades' greeting operand. Accepted by GM at Prog 1, a level-10 WAR in
+# Buburimu Peninsula: Greeting 1: messageName FIVEOFSPADES_GREETING_OFFSET + 1; Greeting 3: + 3. Prog 0, Greeting 3:
+# 1 (118, 3), finish option 1 (still Prog 1).
+lists BuburimuPeninsula/Five_of_Spades/onTrigger BuburimuPeninsula/onEventFinish/1
+char zone=BuburimuPeninsula pos=-476.5,-32.12,46 job=WAR lvl=10
+quest Windurst.AGreetingCardian accepted
+charvar Quest[2][43]Prog 1
+charvar Quest[2][43]Greeting 1
+login
+trigger Five_of_Spades                        # Prog 1, Greeting 1: messageName FIVEOFSPADES_GREETING_OFFSET + 1
+charvar Quest[2][43]Greeting 3
+trigger Five_of_Spades                        # Greeting 3: + 3
+charvar Quest[2][43]Prog 0
+trigger Five_of_Spades                        # Prog 0: 1 (118, 3)
+finish option=1                               # Prog 1
+trigger Five_of_Spades                        # + 3

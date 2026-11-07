@@ -1,0 +1,27 @@
+# Gifts of the Griffon (crystalWar 15) at Louxiard beside the WotG mission Proof of Valor (current: a GM; its Louxiard
+# reply is the Progress 119 while bit 4 of its Status is unset). The two Progress replies tie and rotate by the last
+# event id: the first talk plays the mission's 119 (first in container order), the next the quest's. Louxiard: 119,
+# finished; the Status cleared (a GM): 21, finished: the mustZone and Prog 1. Out to Garlaige Citadel [S] and back: 119,
+# finished; the Status cleared: 22, finished: Prog 2.
+lists SouthernSanDoriaS/Louxiard/onTrigger SouthernSanDoriaS/onEventFinish/21 SouthernSanDoriaS/onEventFinish/22 SouthernSanDoriaS/onEventFinish/119
+char zone=SouthernSanDoriaS pos=-92.005,-4,49.356 job=WAR lvl=99
+quest CrystalWar.SteamedRams completed  # hasCompletedFirstQuest (Steamed Rams' arm)
+mission Wotg ProofOfValor current
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+trigger Louxiard                        # Prog 0: 119 and 21 tie: the mission first
+finish
+charvar Mission[5][20]Status 0          # a GM: bit 4 clear again
+trigger Louxiard                        # the same state again: 21
+finish                                  # the mustZone; Prog 1
+warp 62.849,-6.078,137.438 GarlaigeCitadelS # out of the zone: the mustZone cleared
+warp -92.005,-4,49.356 SouthernSanDoriaS
+charvar Mission[5][20]Status 0          # a GM
+trigger Louxiard                        # Prog 1: 119 and 22 tie: 119
+finish
+charvar Mission[5][20]Status 0          # a GM
+trigger Louxiard                        # the same state again: 22
+finish                                  # Prog 2

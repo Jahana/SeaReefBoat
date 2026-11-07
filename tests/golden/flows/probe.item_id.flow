@@ -1,0 +1,21 @@
+# probe (quest rework P8): an item by id, item <id> [x<n>] and trade <Npc> <id> x<n> (item 2012, a square of laminated
+# ram leather, has no xi.item name). Say It with a Handbag (crystalWar, its Lua in Kipopo's own script, Southern San
+# d'Oria): Kipopo's trade at sayItWithAHandbagCS 2 with the Torn Patches of Leather is npcUtil.tradeHasExactly(trade,
+# { 2012, 850, 816 }): 910, finished: the patches taken, CS 3, needToZone, the three items taken. The flow holds 2012 by
+# a header line (by id) and one more by a step (a GM's addItem by id); a trade without 2012 first (850 and 816 only: no
+# match, nothing), then the three, one of them named and two by id.
+lists SouthernSanDoria/Kipopo/onTrade SouthernSanDoria/Kipopo/onTrigger
+char zone=SouthernSanDoria pos=-189.55,-2.15,12.285 job=WAR lvl=30
+keyitem TornPatchesOfLeather
+charvar sayItWithAHandbagCS 2
+item 2012
+item SquareOfSheepLeather
+item 816
+login
+trigger Kipopo                          # CS 2: 909
+finish
+item 2012 x1                            # a GM: a second square, by id
+trade Kipopo SquareOfSheepLeather x1 816 x1 # without 2012: not exactly the three: nothing
+finish-if-event
+trade Kipopo 2012 x1 850 x1 SpoolOfSilkThread x1 # the three (two by id): 910
+finish                                  # the patches taken; CS 3; needToZone; the three taken (one 2012 left)

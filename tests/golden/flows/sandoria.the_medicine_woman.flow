@@ -1,0 +1,53 @@
+# The Medicine Woman (sandoria 30): Abeaule in Northern San d'Oria, Amaura in Southern San d'Oria. The guard (The Trader
+# in the Forest completed, fame level 3): The Trader in the Forest's 524 while it is not completed; a trade
+# while available (no trade handler: nothing); fame 124 (his
+# default ABEAULE_DIALOG_THANKS); 613 declined (Prog 1), 615 declined and taken (begun, Prog 0); Abeaule's
+# ABEAULE_DIALOG_HOME. Amaura: a trade without the formula (nil), 636 declined (option 1: nothing) and taken (Amaura's
+# Formula), AMAURA_DIALOG_COMEBACK, the wrong trades (a bone chip; two of the three; the three and a chip: not exact),
+# 637 (the trade taken, the formula deleted, the Cold Medicine), AMAURA_DIALOG_DELIVER. Abeaule's 614 (completed: fame
+# +30, 2100 gil, Traveling Medicine Man; the medicine deleted), then his default. Amaura once completed: no section, her
+# default 642. Amaura's script answers To Cure a Cough only (DiaryPage 3 or that quest accepted); her Crystal War quests
+# and WotG mission need what this char lacks. Messages alternate with her script's turn (it does nothing, so the
+# message plays anyway).
+lists NorthernSanDoria/Abeaule/onTrigger NorthernSanDoria/Abeaule/onTrade NorthernSanDoria/onEventFinish/613 NorthernSanDoria/onEventFinish/615 NorthernSanDoria/onEventFinish/614 SouthernSanDoria/Amaura/onTrigger SouthernSanDoria/Amaura/onTrade SouthernSanDoria/onEventFinish/636 SouthernSanDoria/onEventFinish/637
+char zone=NorthernSanDoria pos=-136.9,-2.2,55.2
+fame Sandoria 125
+item MalboroVine
+item ChunkOfZincOre
+item InsectWing
+item BoneChip
+login
+trigger Abeaule                           # The Trader in the Forest not completed: its 524
+finish option=1                           # The Trader in the Forest: its Prog 1
+quest Sandoria.TheTraderInTheForest completed
+trade Abeaule BoneChip x1                 # available: no trade handler, nothing
+fame Sandoria 124
+trigger Abeaule                           # fame level 2: ABEAULE_DIALOG_THANKS
+fame Sandoria 125
+trigger Abeaule                           # Prog 0: 613
+finish option=1                           # not option 0: Prog 1
+trigger Abeaule                           # Prog 1: 615
+finish option=1                           # not option 0: nothing
+trigger Abeaule                           # 615
+finish                                    # option 0: begun, Prog 0
+trigger Abeaule                           # accepted, no medicine: ABEAULE_DIALOG_HOME
+warp -82.9,-6.9,91.1 SouthernSanDoria
+trade Amaura MalboroVine x1 ChunkOfZincOre x1 InsectWing x1   # no formula: nil
+trigger Amaura                            # neither key item: 636
+finish option=1                           # not option 0: nothing
+trigger Amaura                            # 636
+finish                                    # option 0: Amaura's Formula
+trigger Amaura                            # the formula: AMAURA_DIALOG_COMEBACK
+trade Amaura BoneChip x1                  # nil
+trade Amaura MalboroVine x1 ChunkOfZincOre x1   # two of the three: nil
+trade Amaura MalboroVine x1 ChunkOfZincOre x1 InsectWing x1 BoneChip x1   # not exact: nil
+trade Amaura MalboroVine x1 ChunkOfZincOre x1 InsectWing x1   # exactly the three: 637
+finish                                    # the three taken, the formula deleted, the Cold Medicine
+trigger Amaura                            # the medicine: AMAURA_DIALOG_DELIVER
+warp -136.9,-2.2,55.2 NorthernSanDoria
+trigger Abeaule                           # the medicine: 614
+finish                                    # completed: fame +30, 2100 gil, Traveling Medicine Man; the medicine deleted
+trigger Abeaule                           # completed: ABEAULE_DIALOG_THANKS
+warp -82.9,-6.9,91.1 SouthernSanDoria
+trigger Amaura                            # completed: no section; her script nothing; her default 642
+finish

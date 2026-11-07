@@ -1,0 +1,43 @@
+# The Old Lady (otherAreas 10): Mhaura's Vera (no script, no default); Selbina's Isacio (no script, no default). A level
+# 18 Warrior (SUBJOB_QUEST_LEVEL 18) with a Wild Rabbit Tail, a Cup of Dhalmel Saliva, a Bloody Robe and a Chocobo
+# Feather (none of the four stacks). Available (Elder Memories available): a trade: no trade handler; Vera 131 (542),
+# option 0: nothing; option 40: begun. Accepted, Prog 0: Vera 132 (542); the saliva: nil (Prog 0 asks the tail); the tail
+# and the feather: nil (tradeMatches is exact); the tail: 135 (541), finished: the tail taken, Prog 1; Vera 132 (541);
+# the saliva: 136 (540), finished: Prog 2; Vera 132 (540). Selbina: Isacio 99 (replaceDefault; Elder Memories' section
+# is off). Mhaura: the robe: 137, finished: completed (no reward table), the robe taken, the subjob unlocked
+# (SUBJOB_UNLOCKED). Completed: Vera 138 (replaceDefault); Selbina: Isacio 99 (replaceDefault).
+lists Mhaura/Vera/onTrigger Mhaura/Vera/onTrade Selbina/Isacio/onTrigger Mhaura/onEventFinish/131 Mhaura/onEventFinish/135 Mhaura/onEventFinish/136 Mhaura/onEventFinish/137
+char zone=Mhaura pos=-51.5,-3.9,17.2 job=WAR lvl=18
+item WildRabbitTail
+item CupOfDhalmelSaliva
+item BloodyRobe
+item ChocoboFeather
+login
+trade Vera WildRabbitTail x1            # available: no trade handler; nothing
+trigger Vera                            # level 18 >= 18: 131 (542)
+finish option=0                         # not 40: nothing
+trigger Vera                            # 131 (542)
+finish option=40                        # begun
+trigger Vera                            # Prog 0: 132 (542)
+finish
+trade Vera CupOfDhalmelSaliva x1        # Prog 0 asks the tail: nil
+trade Vera WildRabbitTail x1 ChocoboFeather x1 # an extra item: nil
+trade Vera WildRabbitTail x1            # 135 (541)
+finish                                  # the tail taken, Prog 1
+trigger Vera                            # Prog 1: 132 (541)
+finish
+trade Vera CupOfDhalmelSaliva x1        # 136 (540)
+finish                                  # the saliva taken, Prog 2
+trigger Vera                            # Prog 2: 132 (540)
+finish
+warp -56.6,-0.9,-46.4 Selbina
+trigger Isacio                          # accepted: 99 (replaceDefault)
+finish
+warp -51.5,-3.9,17.2 Mhaura
+trade Vera BloodyRobe x1                # Prog 2, no next item: 137
+finish                                  # completed; the robe taken; the subjob unlocked (SUBJOB_UNLOCKED)
+trigger Vera                            # completed: 138 (replaceDefault)
+finish
+warp -56.6,-0.9,-46.4 Selbina
+trigger Isacio                          # completed: 99 (replaceDefault)
+finish

@@ -1,0 +1,20 @@
+# I Can Hear a Rainbow (windurst 75): reply kinds at the House of the Hero (_6n2, Windurst Walls), against The Puppet
+# Master's 403 (Event; accepted by GM: an earlier container on the door). The door's script answers nothing here. Level
+# 30 with the ruby: 384 (Progress) beats 403, begun; made available again by GM: 384 again. Accepted at Prog 0: 385
+# (Event, oncePerZone) and 403 cycle (403 first: The Puppet Master's container is the earlier); then 385 is spent: 403 alone.
+lists WindurstWalls/_6n2/onTrigger WindurstWalls/onEventFinish/384
+char zone=WindurstWalls pos=-24.5,-14.498,262.994 lvl=30
+quest Windurst.ThePuppetMaster accepted
+item CarbunclesRuby
+login
+trigger _6n2                                   # 384 (Progress) over The Puppet Master's 403 (Event)
+finish                                         # begun
+quest Windurst.ICanHearARainbow available      # GM
+trigger _6n2                                   # 384 again
+finish                                         # begun
+trigger _6n2                                   # accepted, Prog 0: 403 (both Event: the earlier container's first)
+finish
+trigger _6n2                                   # 385 (the cycle)
+finish
+trigger _6n2                                   # 385 spent (oncePerZone): 403
+finish

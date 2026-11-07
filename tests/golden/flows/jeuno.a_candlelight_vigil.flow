@@ -1,0 +1,42 @@
+# A Candlelight Vigil (jeuno 6): Ilumida (the first of the two of that name: 17776667; 17776670 is cutscene_only) and
+# Rouliette in Upper Jeuno. Ilumida has no script (default 189); Searching for the Right Words also names her. Jeuno
+# fame level 4 exactly ((150 + 150 + 150) / 2 = 225): a cube to Ilumida while available (no trade handler: nothing),
+# 192 (option 0: Option 1), 193 (option 0: nothing; option 1: begun, Option 0), a cube while accepted (nothing), 191
+# without the candle; Candle Making at Rouliette (36, the cube: 37, the Holy Candle); 194 with a full bag (the Flower
+# Necklace cannot be given: nothing), 194 (completed: Flower Necklace, Activist for Kindness, fame +13 x3, the candle
+# taken, Searching for the Right Words' mustZone set), then completed: Ilumida's default 189 (no section of this quest;
+# Searching for the Right Words needs Rubbish Day and Never to Return), a cube (nothing).
+lists UpperJeuno/Ilumida/onTrigger UpperJeuno/Ilumida/onTrade UpperJeuno/Rouliette/onTrigger UpperJeuno/Rouliette/onTrade UpperJeuno/onEventFinish/192 UpperJeuno/onEventFinish/193 UpperJeuno/onEventFinish/194 UpperJeuno/onEventFinish/36 UpperJeuno/onEventFinish/37
+char zone=UpperJeuno pos=-73.5,-1.2,57.3 job=WAR lvl=30
+fame Sandoria 150
+fame Bastok 150
+fame Windurst 150
+item LanolinCube x4
+login
+walk -74.0,-1.2,57.3
+trade Ilumida LanolinCube x1            # available: no trade handler, nothing
+trigger Ilumida                         # fame level 4, Option 0: 192
+finish option=0                         # not 1: Option 1
+trigger Ilumida                         # Option 1: 193
+finish option=0                         # not 1: nothing
+trigger Ilumida                         # 193
+finish option=1                         # begun, Option 0
+walk -74.0,-1.2,57.3
+trade Ilumida LanolinCube x1            # accepted: no trade handler, nothing
+trigger Ilumida                         # accepted, no Holy Candle: 191
+finish
+trigger Rouliette                       # Candle Making: 36
+finish                                  # Candle Making begun
+walk -20.2,-1.5,12.6
+trade Rouliette LanolinCube x1          # 37
+finish                                  # Candle Making completed: the Holy Candle
+trigger Ilumida                         # the candle: 194
+fill-inventory
+finish                                  # no room for the Flower Necklace: not completed
+free-inventory
+trigger Ilumida                         # 194
+finish                                  # completed: Flower Necklace, Activist for Kindness, fame +13 x3, the candle taken, Searching's mustZone
+trigger Ilumida                         # completed: no section; Searching not offered (Rubbish Day, Never to Return); default 189
+finish
+walk -74.0,-1.2,57.3
+trade Ilumida LanolinCube x1            # completed: nothing

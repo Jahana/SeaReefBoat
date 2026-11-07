@@ -1,0 +1,42 @@
+# The Three Magi (windurst 66): Chumimi's arm order across her three quests (GM-set states that make two arms open), a
+# BLM 75. AF1_QUEST_LEVEL 100: The Three Magi available but not offered, Recollections and The Root of the Problem
+# available: no 270 and no 276 (each needs the quest before it completed): her 259. AF1 40 again, Recollections
+# accepted with Foe Finder MK I (GM): 260, not 275; option 3: begun. Accepted: 261, not 275; with
+# The Root of the Problem accepted at var 1 too: 261, not 277. The Three Magi completed (GM): 275, not 277; its finish:
+# Recollections completed. Then 277. The Three Magi available again with The Root of the Problem available (GM): 260,
+# not 276; accepted: 261, not 276. The Three Magi completed, Recollections available, The Root of the Problem accepted
+# at var 2 (GM): 270, not 279.
+char zone=HeavensTower pos=0.0,30.75,21.5 job=BLM lvl=75
+login
+setting AF1_QUEST_LEVEL 100
+trigger Chumimi                         # no 260 (AF1 100), no 270, no 276: her 259
+finish
+setting AF1_QUEST_LEVEL 40
+quest Windurst.Recollections accepted   # GM
+keyitem FoeFinderMkI
+trigger Chumimi                         # 260 (before 275)
+finish option=3                         # begun
+trigger Chumimi                         # 261 (before 275)
+finish
+quest Windurst.TheRootOfTheProblem accepted  # GM
+charvar rootProblem 1
+trigger Chumimi                         # 261 (before 277)
+finish
+quest Windurst.TheThreeMagi completed   # GM
+trigger Chumimi                         # 275 (before 277)
+finish                                  # Wizard's Sabots; the key item taken; fame 20; Recollections completed
+trigger Chumimi                         # The Root of the Problem accepted, var 1: 277
+finish
+quest Windurst.TheThreeMagi available   # GM
+quest Windurst.TheRootOfTheProblem available  # GM
+charvar rootProblem 0
+trigger Chumimi                         # 260 (before 276)
+finish option=2                         # begun
+trigger Chumimi                         # 261 (before 276)
+finish
+quest Windurst.TheThreeMagi completed   # GM
+quest Windurst.Recollections available  # GM
+quest Windurst.TheRootOfTheProblem accepted  # GM
+charvar rootProblem 2
+trigger Chumimi                         # 270 (before 279)
+finish option=0                         # Recollections begun

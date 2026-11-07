@@ -1,0 +1,70 @@
+# An Explorer's Footsteps (otherAreas 19): Selbina's Abelard (no script; DefaultActions event 1130) and the Stone
+# Monuments (no scripts). The Lump of Selbina Clay and the Clay Tablet are rare: one of each at most. A feather.
+# Available: a feather traded to Abelard: no trade handler; nothing. Abelard 40, option 0: nothing; 40, option 100: a
+# clay, ClayRecieved 1, TargetMonument 0 (the bitmask 0), begun. Abelard, the clay held: 43 (0). West Ronfaure's
+# monument: the clay pressed: taken, a tablet, TabletZoneId 100 (the trade answers nil). Abelard, the tablet held (no
+# clay, ClayRecieved cleared by the warps): 43 (0). The tablet: bit 0 clear: bitmask 1, count 1; requested 0: 41,
+# finished with option 0: the tablet taken, 800 gil, no new clay. No tablet, no clay, ClayRecieved 0: 44, finished: a
+# clay, ClayRecieved 1. West Ronfaure again: a tablet (100). Abelard: bit 0 set: 45 (event), finished: a clay, the
+# tablet taken, ClayRecieved 1. Batallia Downs: the clay pressed (105). Abelard: bit 5 clear, requested 0: 46, finished
+# with option 111 (neither 100 nor 110): 10000 gil, no clay. ClayRecieved 1 (a GM) with neither: 43 (0); 0 (a GM): 44,
+# finished: a clay. TargetMonument 9 (a GM): 49 (0); 16 (a GM): 49 (7). Out to West Ronfaure and back (ClayRecieved
+# cleared; the clay kept): 8 (a GM): 43 (8). La Theine Plateau: the clay pressed (102). Abelard: bit 2 clear, requested
+# 8: 46, finished with option 110: 1000 gil, delQuest (available; the bitmask 0x25 kept). Abelard: available, the
+# bitmask set: 42, option 100: a clay, TargetMonument 1 (the first clear bit), begun: 43 (1).
+lists Selbina/Abelard/onTrigger Selbina/Abelard/onTrade Selbina/onEventFinish/40 Selbina/onEventFinish/41 Selbina/onEventFinish/42 Selbina/onEventFinish/44 Selbina/onEventFinish/45 Selbina/onEventFinish/46 WestRonfaure/Stone_Monument/onTrade BatalliaDowns/Stone_Monument/onTrade LaTheinePlateau/Stone_Monument/onTrade
+char zone=Selbina pos=-50.6,-11.3,-13.1 job=WAR lvl=75
+item ChocoboFeather
+login
+trade Abelard ChocoboFeather x1         # available: no trade handler; nothing
+trigger Abelard                         # the bitmask 0: 40
+finish option=0                         # not 100: nothing
+trigger Abelard                         # 40
+finish option=100                       # a clay; ClayRecieved 1; TargetMonument 0; begun
+trigger Abelard                         # the clay held: 43 (0)
+finish
+warp -182.2,-12.7,-395.7 WestRonfaure
+trade Stone_Monument LumpOfSelbinaClay x1 # the clay taken; a tablet; TabletZoneId 100; nil
+warp -50.6,-11.3,-13.1 Selbina
+trigger Abelard                         # the tablet held (ClayRecieved cleared): 43 (0)
+finish
+trade Abelard ClayTablet x1             # bit 0 clear: bitmask 1, count 1; requested 0: 41
+finish option=0                         # the tablet taken; 800 gil; no new clay
+trigger Abelard                         # no tablet, no clay, ClayRecieved 0: 44
+finish                                  # a clay; ClayRecieved 1
+warp -182.2,-12.7,-395.7 WestRonfaure
+trade Stone_Monument LumpOfSelbinaClay x1 # a tablet; TabletZoneId 100
+warp -50.6,-11.3,-13.1 Selbina
+trade Abelard ClayTablet x1             # bit 0 set: 45
+finish                                  # a clay; the tablet taken; ClayRecieved 1
+warp 187.2,9,-614 BatalliaDowns         # (the local ClayRecieved cleared)
+trade Stone_Monument LumpOfSelbinaClay x1 # a tablet; TabletZoneId 105
+warp -50.6,-11.3,-13.1 Selbina
+trade Abelard ClayTablet x1             # bit 5 clear: bitmask 0x21, count 2; requested 0: 46
+finish option=111                       # not 100 or 110: the tablet taken; 10000 gil; no clay
+localvar [EF]ClayRecieved 1             # a GM
+trigger Abelard                         # neither held, ClayRecieved 1: 43 (0)
+finish
+localvar [EF]ClayRecieved 0             # a GM
+trigger Abelard                         # no tablet, no clay, ClayRecieved 0: 44
+finish                                  # a clay; ClayRecieved 1
+charvar Quest[4][19][EF]TargetMonument 9 # a GM
+trigger Abelard                         # the clay held: 49 (0)
+finish
+charvar Quest[4][19][EF]TargetMonument 16 # a GM
+trigger Abelard                         # the clay held: 49 (7)
+finish
+warp -182.2,-12.7,-395.7 WestRonfaure   # out (ClayRecieved cleared; the clay kept)
+warp -50.6,-11.3,-13.1 Selbina
+charvar Quest[4][19][EF]TargetMonument 8 # a GM
+trigger Abelard                         # the clay held, ClayRecieved 0: 43 (8)
+finish
+warp 335.6,50.6,141.2 LaTheinePlateau
+trade Stone_Monument LumpOfSelbinaClay x1 # a tablet; TabletZoneId 102
+warp -50.6,-11.3,-13.1 Selbina
+trade Abelard ClayTablet x1             # bit 2 clear: bitmask 0x25, count 3; requested 8: 46
+finish option=110                       # the tablet taken; 1000 gil; delQuest: available
+trigger Abelard                         # available, level 75, the bitmask set: 42
+finish option=100                       # a clay; TargetMonument 1; begun
+trigger Abelard                         # the clay held: 43 (1)
+finish

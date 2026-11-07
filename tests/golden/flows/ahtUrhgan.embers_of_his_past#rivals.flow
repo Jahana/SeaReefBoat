@@ -1,0 +1,106 @@
+# Embers of His Past's rivals at Fari-Wari (GM states out of play order): a level 75 Warrior with a Hydrangea, Saga of
+# the Skyserpent completed, Ode to the Serpents accepted (its 891, an Event). A Progress beats an Event, an Event beats
+# a replaceEvent (923), and equal kinds take turns, so each pair is talked to twice. Soothing Waters accepted at Prog 5
+# (no Fari-Wari section of its own there): Embers not offered: 891. Soothing completed: 916 beats 891 (twice; each
+# finish with Embers accepted at Prog 0 set first by a GM, so no section's 916 finish runs). Accepted: Prog 2: 891;
+# Prog 3: 917 and 891 take turns; Prog 4: the same; Prog 5: 924 and 891 take turns; the Hydrangea at Prog 4 and 8: nil;
+# Prog 7: 891; Prog 8: 919 and 891 take turns; Prog 9: 920 beats 891 (twice; each finish with Prog 0 set first). Then
+# Fist of the People accepted (a GM: its 884, a Progress): Prog 9: 920 and 884 take turns; available: 916 and 884 take
+# turns (Fist Prog 0 set again after each 884); completed, Option 1, a full bag: 921 and 884 take turns (the slip does
+# not fit: Option 1 kept). Fist available again (a GM): 921 beats 891 (twice); Option 0: 891 beats 923 (twice).
+lists AhtUrhganWhitegate/Fari-Wari/onTrigger AhtUrhganWhitegate/Fari-Wari/onTrade
+char zone=AhtUrhganWhitegate pos=81.95,-6,-137.707 job=WAR lvl=75
+quest AhtUrhgan.SagaOfTheSkyserpent completed
+quest AhtUrhgan.OdeToTheSerpents accepted
+quest AhtUrhgan.SoothingWaters accepted
+charvar Quest[6][47]Prog 5
+item Hydrangea
+login
+trigger Fari-Wari                       # Soothing accepted: Embers not offered: Ode's 891
+finish
+quest AhtUrhgan.SoothingWaters completed       # a GM
+trigger Fari-Wari                       # available: 916 (beats 891)
+quest AhtUrhgan.EmbersOfHisPast accepted       # a GM: Prog 0, no section's 916 finish
+finish
+quest AhtUrhgan.EmbersOfHisPast available
+trigger Fari-Wari                       # 916 again
+quest AhtUrhgan.EmbersOfHisPast accepted
+finish
+charvar Quest[6][48]Prog 2              # a GM
+trigger Fari-Wari                       # Prog 2: 891
+finish
+charvar Quest[6][48]Prog 3
+trigger Fari-Wari                       # Prog 3: 917 or 891 (Events: turns)
+finish
+trigger Fari-Wari                       # the other
+finish
+charvar Quest[6][48]Prog 4
+trigger Fari-Wari                       # Prog 4: 917 or 891
+finish
+trigger Fari-Wari                       # the other
+finish
+trade Fari-Wari Hydrangea x1            # Prog 4: nil
+finish-if-event
+charvar Quest[6][48]Prog 5
+trigger Fari-Wari                       # Prog 5: 924 or 891
+finish
+trigger Fari-Wari                       # the other
+finish
+charvar Quest[6][48]Prog 7
+trigger Fari-Wari                       # Prog 7: 891
+finish
+charvar Quest[6][48]Prog 8
+trigger Fari-Wari                       # Prog 8: 919 or 891
+finish
+trigger Fari-Wari                       # the other
+finish
+trade Fari-Wari Hydrangea x1            # Prog 8: nil
+finish-if-event
+charvar Quest[6][48]Prog 9
+trigger Fari-Wari                       # Prog 9: 920 (beats 891)
+charvar Quest[6][48]Prog 0              # a GM: no section's 920 finish
+finish
+charvar Quest[6][48]Prog 9
+trigger Fari-Wari                       # 920 again
+charvar Quest[6][48]Prog 0
+finish
+quest AhtUrhgan.FistOfThePeople accepted       # a GM: Fist's 884 (a Progress) at Prog 0
+charvar Quest[6][48]Prog 9
+trigger Fari-Wari                       # Prog 9: 920 or 884 (Progresses: turns)
+charvar Quest[6][48]Prog 0
+finish
+charvar Quest[6][46]Prog 0              # GMs
+charvar Quest[6][48]Prog 9
+trigger Fari-Wari                       # the other
+charvar Quest[6][48]Prog 0
+finish
+charvar Quest[6][46]Prog 0
+quest AhtUrhgan.EmbersOfHisPast available      # a GM
+trigger Fari-Wari                       # available: 916 or 884
+quest AhtUrhgan.EmbersOfHisPast accepted
+finish
+charvar Quest[6][46]Prog 0
+quest AhtUrhgan.EmbersOfHisPast available
+trigger Fari-Wari                       # the other
+quest AhtUrhgan.EmbersOfHisPast accepted
+finish
+charvar Quest[6][46]Prog 0
+quest AhtUrhgan.EmbersOfHisPast completed      # GMs
+charvar Quest[6][48]Option 1
+fill-inventory
+trigger Fari-Wari                       # completed, Option 1: 921 or 884
+finish                                  # 921: the slip does not fit, Option 1 kept
+charvar Quest[6][46]Prog 0
+trigger Fari-Wari                       # the other
+finish
+charvar Quest[6][46]Prog 0
+quest AhtUrhgan.FistOfThePeople available      # a GM: no 884
+trigger Fari-Wari                       # 921 (beats 891)
+finish
+trigger Fari-Wari                       # 921 again
+finish
+charvar Quest[6][48]Option 0
+trigger Fari-Wari                       # Option 0: 891 (beats 923)
+finish
+trigger Fari-Wari                       # 891 again
+finish

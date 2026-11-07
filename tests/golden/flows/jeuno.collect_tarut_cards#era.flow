@@ -1,0 +1,32 @@
+# Collect Tarut Cards (jeuno 10) with its era module (quest rework B3b Jeuno, P4): modules/era/lua/quests/jeuno/
+# collect_tarut_cards.lua, enabled by its condition xi.pre(xi.expansion.ABYSSEA) (RESTRICT_CONTENT 1, ENABLE_ABYSSEA 0),
+# replaces state 2's Lower Jeuno Chululu onTrigger with quest:event(27), the reminder, whatever the Date: no new batch
+# (the quest's own plays Progress 10112 once GetSystemTime() is past Date, else Progress 27). Jeuno fame level 3: her
+# 28 (the quest's own; option 0: five cards, begun, Date = the next JST midnight), 27 before Date, 27 a JST day later
+# (past Date: the quest's own plays 10112), then the four cards (200, the quest's own: completed). The module's 27 is
+# an Event, not a Progress event: #era_cycle shows it taking turns with another quest's Event.
+# The condition's false side cannot be a module flow (the harness fails a flow whose module is not enabled); the
+# quest's own flows are that side.
+module modules/era/lua/quests/jeuno/collect_tarut_cards.lua
+lists LowerJeuno/Chululu/onTrigger LowerJeuno/Chululu/onTrade LowerJeuno/onEventFinish/28 LowerJeuno/onEventFinish/10112 LowerJeuno/onEventFinish/200
+char zone=LowerJeuno pos=-9,-6.7,-42.5 job=WAR lvl=30
+setting RESTRICT_CONTENT 1
+setting ENABLE_ABYSSEA 0
+fame Sandoria 84
+fame Bastok 83
+fame Windurst 83
+item TarutCardTheFool
+item TarutCardDeath
+item TarutCardTheHermit
+item TarutCardTheKing
+login
+walk -11.5,-6.7,-42
+trigger Chululu                             # available, fame level 3: 28 (the quest's own)
+finish option=0                             # five of one random card; begun, Date = the next JST midnight
+trigger Chululu                             # accepted, before Date: 27 (an Event)
+finish
+wait jst=1                                  # GetSystemTime past Date
+trigger Chululu                             # past Date: 27 (the quest's own: 10112)
+finish option=0
+trade Chululu TarutCardTheFool x1 TarutCardDeath x1 TarutCardTheHermit x1 TarutCardTheKing x1  # the four: 200
+finish                                      # completed: Card Collector, fame +7 x3, the cards taken, All in the Cards' Date

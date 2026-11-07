@@ -1,0 +1,22 @@
+# Hook, Line, and Sinker (jeuno 71): Lower Jeuno's Omer (no script; default 206). A level 75 Warrior, CoP The Road Forks
+# current, two Egret Fishing Rods and a Chocobo Feather. Available: 10040 (0, Three-eyed Fish, Crescent Fish, 0, Egret
+# Fishing Rod): begun. Accepted: 10041 (0, 0, 0, 0, Egret Fishing Rod); two rods: nil; the rod and the feather: nil; the
+# rod: 10042, finished: completed (3000 gil, Rod Retriever), fame +7 x3, the rod taken. Completed: no section (206; the
+# other rod traded: nothing).
+lists LowerJeuno/Omer/onTrigger LowerJeuno/Omer/onTrade LowerJeuno/onEventFinish/10040 LowerJeuno/onEventFinish/10042
+char zone=LowerJeuno pos=-85,0,-119.8 job=WAR lvl=75
+mission Cop TheRoadForks current
+item EgretFishingRod x2
+item ChocoboFeather
+login
+trigger Omer                            # available: 10040
+finish                                  # begun
+trigger Omer                            # accepted: 10041
+finish
+trade Omer EgretFishingRod x2           # two: nil; nothing
+trade Omer EgretFishingRod x1 ChocoboFeather x1 # an extra item: nil
+trade Omer EgretFishingRod x1           # 10042
+finish                                  # completed: 3000 gil, Rod Retriever; fame +7 x3; the rod taken
+trigger Omer                            # completed: no section; 206
+finish
+trade Omer EgretFishingRod x1           # completed: no section: nothing (the second rod kept)

@@ -1,0 +1,52 @@
+# A Smudge on One's Record (windurst 12): Hariga-Origa and Serukoko in Windurst Waters. The guard (Chasing Tales
+# completed, fame level 4, no mustZone; each side), the offer 413 (declined, then accepted), Hariga's 414 and Serukoko's 415, the
+# trade of exactly a Vial of Slime Oil and a Frost Turnip (417 (5000): completed with the Map of Feiyin, 5000 gil, fame
+# +40, exp 2000; the items taken; mustZone set), and the completed 418 / 419 (importantOnce) until the char zones.
+# Hariga's and Serukoko's scripts hold only an idle animation; defaults 372 and 373. Glyph Hanger also names both: it is
+# set completed, so its completed section answers Hariga (386) until Chasing Tales is completed (the first talk). No
+# mission names them.
+lists WindurstWaters/Hariga-Origa/onTrigger WindurstWaters/Hariga-Origa/onTrade WindurstWaters/Serukoko/onTrigger WindurstWaters/onEventFinish/413 WindurstWaters/onEventFinish/417
+char zone=WindurstWaters pos=-60.5,-5.5,105.2
+quest Windurst.GlyphHanger completed
+fame Windurst 225
+item VialOfSlimeOil x2
+item FrostTurnip x2
+item BoneChip
+login
+trade Hariga-Origa VialOfSlimeOil x1 FrostTurnip x1  # available: no trade handler, nothing
+trigger Hariga-Origa                # Chasing Tales not completed: not met; Glyph Hanger's completed 386 (replaceDefault) answers
+finish
+quest Windurst.ChasingTales completed
+fame Windurst 224
+trigger Hariga-Origa                # fame 224 (level 3): not met; her default 372
+finish
+fame Windurst 225
+charvar Quest[2][12]mustZone 238    # a GM sets the quest's mustZone
+trigger Hariga-Origa                # mustZone set: not met; 372
+finish
+charvar Quest[2][12]mustZone 0
+trigger Hariga-Origa                # guard met: 413 (0, slime oil, frost turnip)
+finish option=1                     # declined: nothing
+trigger Hariga-Origa                # 413 again
+finish option=0                     # begun
+trigger Serukoko                    # accepted: 415 (0, slime oil, frost turnip)
+finish
+trigger Hariga-Origa                # accepted: 414 (0, slime oil, frost turnip)
+finish
+trade Hariga-Origa BoneChip x1      # not the two items: nil
+trade Hariga-Origa VialOfSlimeOil x1  # the oil alone: not exact, nil
+trade Hariga-Origa VialOfSlimeOil x1 FrostTurnip x1 BoneChip x1  # the two and more: not exact, nil
+trade Hariga-Origa VialOfSlimeOil x1 FrostTurnip x1  # exactly the two: 417 (5000)
+finish                              # completed: Map of Feiyin, 5000 gil, fame +40, exp 2000; the two items taken; mustZone 238
+trigger Serukoko                    # completed, mustZone: 419 (importantOnce)
+finish
+trigger Hariga-Origa                # completed, mustZone: 418 (importantOnce: Event priority once, then Default)
+finish
+trigger Hariga-Origa                # Default priority now, a tie with her default 372: the lookup's cycle plays 372
+finish
+trigger Hariga-Origa                # the cycle: 418 again
+finish
+trade Hariga-Origa VialOfSlimeOil x1 FrostTurnip x1  # completed: no trade handler, nothing
+rezone                              # the mustZone cleared
+trigger Hariga-Origa                # no section: 372
+finish

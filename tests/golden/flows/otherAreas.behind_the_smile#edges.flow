@@ -1,0 +1,29 @@
+# Behind the Smile (otherAreas 77): Grosvez's death away from Prog 1, and 320 / 534 finished out of their states.
+# Accepted at Prog 1 (a GM): the ??? spawns Grosvez (STENCH_OF_DECAY); Prog 0 (a GM) before the kill: the death sets
+# nothing (Prog stays 0). Prog 2 (a GM): the ??? gives the oil (Prog 3); Grosvez despawned, Prog 3: nil, its default.
+# Fyi's 320 at Prog 0 (a GM), finished while the quest is completed (a GM, while it is open): no section with 320,
+# nothing. Available again (a GM; It's Raining Mannequins! completed): a trade to Enaremand: no trade handler, nothing.
+lists CarpentersLanding/qm_behind_the_smile/onTrigger CarpentersLanding/Bullheaded_Grosvez/onMobDeath Mhaura/Fyi_Chalmwoh/onTrigger Mhaura/onEventFinish/320 TavnazianSafehold/Enaremand/onTrade
+char zone=CarpentersLanding pos=41.4,-7.4,-565.4 job=WAR lvl=75
+quest OtherAreas.ItsRainingMannequins completed
+quest OtherAreas.BehindTheSmile accepted
+charvar Quest[4][77]Prog 1
+item ChocoboFeather
+login
+trigger qm_behind_the_smile             # Prog 1: Grosvez spawned and claimed; STENCH_OF_DECAY
+charvar Quest[4][77]Prog 0              # a GM
+kill BULLHEADED_GROSVEZ                 # Prog 0: the death sets nothing
+trigger qm_behind_the_smile             # Prog 0: nil; its default
+charvar Quest[4][77]Prog 2              # a GM
+trigger qm_behind_the_smile             # Prog 2: Prog 3, the Red Oil
+tick 15000                              # Grosvez's body despawning
+tick 30000                              # despawned
+trigger qm_behind_the_smile             # Prog 3, Grosvez not up: nil; its default (the spawn only at Prog 1)
+warp -37.8,-16,70.1 Mhaura
+charvar Quest[4][77]Prog 0              # a GM
+trigger Fyi_Chalmwoh                    # Prog 0: 320
+quest OtherAreas.BehindTheSmile completed # a GM, while 320 is open
+finish                                  # no 320 handler while completed: Prog stays 0
+quest OtherAreas.BehindTheSmile available # a GM
+warp 97.5,-41,51.6 TavnazianSafehold
+trade Enaremand ChocoboFeather x1       # available: no trade handler; nothing

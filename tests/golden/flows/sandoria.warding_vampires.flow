@@ -1,0 +1,28 @@
+# Warding Vampires (sandoria 79): Maloquedil in Northern San d'Oria. A trade while available (nothing), fame level 2
+# (event 21), at fame level 3 the offer 24 declined (option 0: nothing) and taken (option 1), the accepted 22, a wrong
+# trade (nil), 23 for two Bulbs of Shaman Garlic (completed: fame +16, Vampire Hunter D-Minus; 900 gil; the bulbs taken),
+# the completed 24 with option [7] = 1 (no finish handler then), and the repeat 23 with three bulbs (fame +16, 900 gil, two
+# taken). Maloquedil's script answers nothing; LB04 (Riding on the Clouds) names him only while it is accepted.
+lists NorthernSanDoria/Maloquedil/onTrigger NorthernSanDoria/Maloquedil/onTrade NorthernSanDoria/onEventFinish/24 NorthernSanDoria/onEventFinish/23
+char zone=NorthernSanDoria pos=36.6,-0.2,60.4
+fame Sandoria 124
+item BulbOfShamanGarlic x5
+item BoneChip
+login
+trade Maloquedil BulbOfShamanGarlic x2    # available: no trade handler, nothing
+trigger Maloquedil                        # fame level 2: 21
+finish
+fame Sandoria 125
+trigger Maloquedil                        # fame level 3: 24
+finish                                    # option 0: nothing
+trigger Maloquedil                        # 24
+finish option=1                           # option 1: begun
+trigger Maloquedil                        # accepted: 22
+finish
+trade Maloquedil BoneChip x1              # nil
+trade Maloquedil BulbOfShamanGarlic x2    # two: 23
+finish                                    # accepted: completed (fame +16, the title); 900 gil; the bulbs taken
+trigger Maloquedil                        # completed: 24 with option [7] = 1
+finish                                    # no finish handler for 24 once completed: nothing
+trade Maloquedil BulbOfShamanGarlic x3    # completed: 23
+finish                                    # not accepted: fame +16; 900 gil; two taken, one kept

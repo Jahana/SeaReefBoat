@@ -1,0 +1,13 @@
+-----------------------------------
+-- Area: Kuftal Tunnel
+--  Mob: Goblin Mercenary
+-- Note: Place Holder for Bloodthirster Madkix
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.onMobDeath = function(mob, player, optParams)
+    xi.regime.checkRegime(player, mob, 740, 2, xi.regime.type.GROUNDS)
+end
+
+return entity

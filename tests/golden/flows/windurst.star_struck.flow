@@ -1,0 +1,53 @@
+# Star Struck (windurst 10): Koru-Moru and Luuh Koplehn in Windurst Walls. Available with no Torn Epistle: the quest's
+# nil (his script answers nothing for a fresh char: his default 193). The epistle given by GM: a trade of it while
+# available (the accepted section's valid trade, its status alone differing: no quest trade handler, his script's trade
+# wants silk or astragaloi: nothing); 197, option 1 and option 2 (not 0: nothing), option 0 (begun; the epistle kept).
+# Accepted: 198, Luuh Koplehn's 200; trades: a bone chip (neither: nil), the epistle plus a bone chip (not exact: nil),
+# the epistle alone (199: taken, 50 gil); the meteorite plus a bone chip (nil), two meteorites (not exact: nil), the
+# meteorite alone with a full bag (211: the circlet does not fit, quest:complete false: nothing, the meteorite kept),
+# then with room (211: completed, fame 20, the Compound Eye Circlet, the meteorite taken, Blast from the Past's mustZone
+# 239). Completed, The Puppet Master not: 213 (replaceDefault); a trade: no handler. The Puppet Master completed by GM:
+# not met, his default 193 (The Puppet Master's own completed line wants its mustZone: nil).
+# Fame stays at level 1 (20 points), so Blast from the Past is never offered here (its 214 would win).
+# Defaults: Koru-Moru 193 (his script acts on Class Reunion, Carbuncle Debacle, The Root of the Problem only), Luuh
+# Koplehn 322 (no script). Also named: Koru-Moru by Blast from the Past, The Puppet Master (this group), Making the Grade
+# (group 10: accepted only), LB04 (accepted only). Reply kinds: windurst.star_struck#compete.
+lists WindurstWalls/Koru-Moru/onTrigger WindurstWalls/Koru-Moru/onTrade WindurstWalls/Luuh_Koplehn/onTrigger WindurstWalls/onEventFinish/197 WindurstWalls/onEventFinish/199 WindurstWalls/onEventFinish/211
+char zone=WindurstWalls pos=-120.2,-5.5,122.4
+item BoneChip
+login
+trigger Koru-Moru                              # available, no epistle: the quest's nil; his default 193
+finish-if-event
+item TornEpistle                               # GM
+trade Koru-Moru TornEpistle x1                 # available: no quest trade handler, his script's trade: nothing
+trigger Koru-Moru                              # the epistle held: 197
+finish option=1                                # not 0: nothing (still available)
+trigger Koru-Moru                              # 197 again
+finish option=2                                # not 0: nothing
+trigger Koru-Moru                              # 197 again
+finish option=0                                # begun; the epistle kept
+trigger Koru-Moru                              # accepted: 198
+finish
+trigger Luuh_Koplehn                           # 200
+finish
+trigger Koru-Moru                              # 198 (back beside him for the trades)
+finish
+trade Koru-Moru BoneChip x1                    # neither the epistle nor the meteorite: nil
+trade Koru-Moru TornEpistle x1 BoneChip x1     # the epistle plus an extra: not exact (neither): nil
+trade Koru-Moru TornEpistle x1                 # the epistle alone: 199
+finish                                         # the epistle taken; 50 gil
+item Meteorite x2                              # GM
+trade Koru-Moru Meteorite x1 BoneChip x1       # the meteorite plus an extra: nil
+trade Koru-Moru Meteorite x2                   # two meteorites: not exact: nil
+fill-inventory
+trade Koru-Moru Meteorite x1                   # the meteorite alone: 211
+finish                                         # full: quest:complete false (the circlet does not fit): nothing, the meteorite kept
+free-inventory
+trade Koru-Moru Meteorite x1                   # 211
+finish                                         # completed: fame 20, the Compound Eye Circlet; one meteorite taken; Quest[2][11]mustZone 239
+trigger Koru-Moru                              # completed, The Puppet Master not completed: 213 (replaceDefault)
+finish
+trade Koru-Moru Meteorite x1                   # completed: no trade handler: nothing
+quest Windurst.ThePuppetMaster completed       # GM
+trigger Koru-Moru                              # not met; The Puppet Master's 405 wants its mustZone (none): his default 193
+finish-if-event

@@ -1,0 +1,61 @@
+# The Beast Within's 32001 and 6 arms the main flow leaves: two level 75 Blue Mages at level cap 75, The Beast Within
+# accepted at Prog 2 (a GM), each with a Blue Mage's Testimony, by the Jade Sepulcher's door _1v0 (maxPlayers 1: one
+# char per area). Main: the testimony traded (requiredItems: its wear count rises; the item kept): the 32000 menu; area
+# 1 (option 33); RAUBAHN brought to 1 HP (unkillable; his onMobFight wins the fight under 20% HP): 32001 opens;
+# battlefieldWin cleared by a GM with 32001 open: finished: no 6 (still accepted). bob: area 2 (option 34), RAUBAHN+1
+# (area 2's): 32001: battlefieldWin 1154: 6 started; a full bag: 6 finished: cap 75 (not 70): kept, no message; the
+# Scroll of Instant Warp does not fit (giveItem unchecked); completed whatever (Master of Ambition). carl (a level 66
+# Blue Mage at level cap 69, a GM's): area 3 (option 35), RAUBAHN+2: 6: cap 69 (not 70): kept, no message; the scroll;
+# completed.
+lists JadeSepulcher/_1v0/onTrade JadeSepulcher/onEventFinish/32001 JadeSepulcher/onEventFinish/6
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char bob zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char carl zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=66
+levelcap 75
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Transformations completed
+quest AhtUrhgan.TheBeastWithin accepted
+charvar Quest[6][40]Prog 2
+item BlueMagesTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: quest AhtUrhgan.Transformations completed
+bob: quest AhtUrhgan.TheBeastWithin accepted
+bob: charvar Quest[6][40]Prog 2
+bob: item BlueMagesTestimony
+carl: levelcap 69
+carl: quest AhtUrhgan.AnEmptyVessel completed
+carl: quest AhtUrhgan.Transformations completed
+carl: quest AhtUrhgan.TheBeastWithin accepted
+carl: charvar Quest[6][40]Prog 2
+carl: item BlueMagesTestimony
+login
+trade _1v0 BlueMagesTestimony x1        # Prog 2: the 32000 menu
+update 32000 option=33                  # area 1
+finish
+kill RAUBAHN                            # 1 HP
+tick 1000                               # (CHECK where 32001 opens)
+tick 1000
+localvar battlefieldWin 0               # a GM, 32001 open
+finish                                  # battlefieldWin 0: no 6
+bob: login
+bob: trade _1v0 BlueMagesTestimony x1   # Prog 2: the 32000 menu
+bob: update 32000 option=34             # area 2
+bob: finish
+bob: kill RAUBAHN+1                     # area 2's Raubahn: 1 HP
+tick 1000                               # (CHECK where 32001 opens)
+tick 1000
+bob: finish                             # battlefieldWin 1154: 6 started
+bob: fill-inventory
+bob: finish                             # 6: cap 75 kept, no message; no scroll (full); completed
+carl: login
+carl: trade _1v0 BlueMagesTestimony x1  # Prog 2: the 32000 menu
+carl: update 32000 option=35            # area 3
+carl: finish
+carl: kill RAUBAHN+2                    # area 3's Raubahn: 1 HP
+tick 1000
+tick 1000
+tick 1000
+tick 1000                               # his onMobFight wins: 32001 opens
+carl: finish                            # battlefieldWin 1154: 6 started
+carl: finish                            # 6: cap 69 (not 70) kept, no message; the scroll; completed

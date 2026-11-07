@@ -1,0 +1,74 @@
+# In a Stew (windurst 45): Kuoh Rhel and Matata (Windurst Woods), Ranpi-Monpi (Windurst Waters). A level-10 WAR,
+# Chocobilious completed by GM (its mustZone clear), Windurst fame 50 (level 2). The harness's wall clock is
+# 1800000000 (Friday 17:00 JST): NextConquestTally() is 1800198000 (Monday 00:00 JST). All three NPCs have scripts
+# that take turns with an Event reply: Kuoh Rhel's (Chocobilious completed: 232 only while needToZone; else nothing),
+# Matata's (Chocobilious completed: 226, always), Ranpi-Monpi's (A Crisis in the Making available at fame level 2:
+# 258; else a random 249 / 251 / 256): each talked to twice where it shows. A zone change resets the turns, and a
+# default line (Kuoh Rhel 222, Matata 223) is an action of the lookup, which takes the action's turn. Available (Prog 0, Wait 0): Woozyshrooms
+# traded to Kuoh Rhel (no trade handler: nothing); 235: begun, Prog 1. Prog 1: Kuoh Rhel 236, Matata 237; Ranpi-Monpi
+# 555 (0, Woozyshroom; Chocobilious completed); two, three with a chip, four: nil; three: 556 (taken; the Special
+# Stew; Prog 2); 557. Kuoh Rhel 239: completed (fame 10, 900 gil; the mustZone; the stew taken; Wait 1800198000).
+# Completed: Kuoh Rhel 240, Matata 241 (mustZone); out to Windurst Waters and back: Kuoh Rhel nil (222), Matata nil
+# (the default 223: the action's turn after the zone change). wait jst=3 (the wall clock 1800259200; the next tally 1800802800 > Wait): Kuoh Rhel 234
+# (Progress); option 0 (nothing), option 1 (Prog 1); 236; three more Woozyshrooms (556, Prog 2); 239 with a full bag
+# (fame and gil only: complete does not fail): completed again.
+lists WindurstWoods/Kuoh_Rhel/onTrigger WindurstWoods/Matata/onTrigger WindurstWoods/onEventFinish/234 WindurstWoods/onEventFinish/235 WindurstWoods/onEventFinish/239 WindurstWaters/Ranpi-Monpi/onTrigger WindurstWaters/Ranpi-Monpi/onTrade WindurstWaters/onEventFinish/556
+char zone=WindurstWoods pos=133.4,-5,-102.7 job=WAR lvl=10
+quest Windurst.Chocobilious completed
+fame Windurst 50
+item BoneChip
+item Woozyshroom x10
+login
+trade Kuoh_Rhel Woozyshroom x3                # section 1's check holds: no trade handler: nothing
+trigger Kuoh_Rhel                             # available: 235
+finish                                        # begun; Prog 1
+trigger Kuoh_Rhel                             # Prog 1: 236 (the quest's turn)
+finish
+trigger Matata                                # 237 (the first talk here: the quest's turn)
+finish
+trigger Matata                                # his script's turn: 226
+finish
+warp -121.3,-3.04,63.2 WindurstWaters
+trigger Ranpi-Monpi                           # Prog 1, Chocobilious completed: 555 (0, Woozyshroom) (the first talk here: the quest's turn)
+finish
+trigger Ranpi-Monpi                           # her script's turn: A Crisis in the Making's offer 258 (0, 625)
+finish option=0
+trade Ranpi-Monpi Woozyshroom x2              # two: nil
+trade Ranpi-Monpi Woozyshroom x3 BoneChip x1  # three and a chip: nil
+trade Ranpi-Monpi Woozyshroom x4              # four: nil
+trade Ranpi-Monpi Woozyshroom x3              # three exactly: 556
+finish                                        # taken; Ranpi-Monpi's Special Stew; Prog 2
+trigger Ranpi-Monpi                           # Prog 2: 557 (the quest's turn)
+finish option=0
+trigger Ranpi-Monpi                           # her script's turn: 258
+finish option=0
+warp 133.4,-5,-102.7 WindurstWoods
+trigger Kuoh_Rhel                             # Prog 2: 239
+finish                                        # completed: fame 10, 900 gil; the mustZone; the stew taken; Wait = 1800198000
+trigger Kuoh_Rhel                             # completed, the mustZone (Wait == the tally: no section 1): 240
+finish
+trigger Matata                                # the mustZone: 241 (the quest's turn)
+finish
+trigger Matata                                # his script's turn: 226
+finish
+warp -121.3,-3.04,63.2 WindurstWaters         # the mustZone cleared on the zone change
+warp 133.4,-5,-102.7 WindurstWoods            # back
+trigger Kuoh_Rhel                             # no section (Wait == the tally): nil; the warps reset the turns: the default 222
+finish
+trigger Matata                                # nil; the warps reset the turns: the default 223 (his script's 226 waits for the next talk)
+finish
+wait jst=3                                    # the wall clock 1800259200: the next tally 1800802800 > Wait
+trigger Kuoh_Rhel                             # Prog 0, Wait < the tally, completed: 234
+finish option=0                               # not 1: nothing
+trigger Kuoh_Rhel                             # 234
+finish option=1                               # Prog 1
+trigger Kuoh_Rhel                             # Prog 1: 236
+finish
+warp -121.3,-3.04,63.2 WindurstWaters
+trade Ranpi-Monpi Woozyshroom x3              # 556
+finish                                        # taken; the stew; Prog 2
+warp 133.4,-5,-102.7 WindurstWoods
+trigger Kuoh_Rhel                             # 239
+fill-inventory
+finish                                        # a full bag (fame and gil only: complete cannot fail): completed again: fame 10, 900 gil; the mustZone; Wait = the new tally
+free-inventory

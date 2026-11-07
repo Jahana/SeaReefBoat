@@ -1,0 +1,14 @@
+# Trust: Bastok (bastok 92): Iron Eater's test with Naji not known. Completed by GM (no trust learned): Iron Eater nil
+# (604); Ayame's 985 and Lucius' 986 option 2 (Ayame, Volker); Iron Eater's test then fails on Naji alone: nil, 604.
+lists Metalworks/Ayame/onTrigger Metalworks/Lucius/onTrigger Metalworks/Iron_Eater/onTrigger Metalworks/onEventFinish/985 Metalworks/onEventFinish/986
+char zone=Metalworks pos=64,-14,-4 lvl=5 nation=1
+quest Bastok.TrustBastok completed
+login
+trigger Iron_Eater             # no trust known: nil, 604
+finish
+trigger Ayame                  # 985 (0, 0, 0, 0, 0, 0, 0, 0)
+finish option=2                # Ayame learned
+trigger Lucius                 # 986 (0, 0, 0, 0, 0, 0, 0, 0)
+finish option=2                # Volker learned
+trigger Iron_Eater             # Ayame and Volker known, Naji not: nil, 604
+finish

@@ -1,0 +1,55 @@
+# Beyond Infinity (jeuno 137): the kinds of its trigger replies, against New Worlds Await's reminder on the Nomad Moogle
+# (event 10045 (level, limit breaker, 1, 1), the first container: 133 comes before 137) and against Maat's own script on
+# Maat (Maat.lua's 117 while BeatAroundTheBushin is 5). A progressEvent wins over an event; two events with one csid
+# go to the first container; with two csids they take turns; a quest event takes turns with Maat's script. A level 91
+# Warrior at level cap 95 with the Limit Breaker, Prelude to Puissance completed, New Worlds Await accepted,
+# BeatAroundTheBushin 5 (a GM, before login). Available: its progressEvent (91, 1, 5, 0, 0). Accepted with the Soul Gem
+# Clasp (a GM): New Worlds Await's event (91, 1, 1, 1) (Beyond Infinity's own is an event with the same csid); Maat:
+# 10193, then 117 (the script's turn). The clasp dropped (a GM, state 4): its progressEvent (91, 1, 5, 3, 0, 0, 0).
+# Prog 1 (a GM): 10139 (75, 1) twice (an event would take turns with New Worlds Await's 10045; the first left open while
+# a GM sets the quest available, so it does not complete; accepted and Prog 1 again by a GM); the second finished:
+# completed. Completed at level 91: New Worlds Await's event (Beyond Infinity's is an event with the same csid). A
+# level 99 char (hi), Beyond Infinity completed, New Worlds Await accepted, no Limit Breaker: 10240 (99, 2) twice, the
+# second with option 28 (the Job Breaker); then New Worlds Await's event (99, 2, 1, 1).
+lists RuludeGardens/Nomad_Moogle/onTrigger RuludeGardens/Maat/onTrigger RuludeGardens/onEventFinish/10045 RuludeGardens/onEventFinish/10139 RuludeGardens/onEventFinish/10240
+char zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=91
+char hi zone=RuludeGardens pos=11.5,2.5,121.9 job=WAR lvl=99
+levelcap 95
+keyitem LimitBreaker
+quest Jeuno.PreludeToPuissance completed
+quest Jeuno.NewWorldsAwait accepted
+charvar BeatAroundTheBushin 5
+hi: levelcap 99
+hi: quest Jeuno.BeyondInfinity completed
+hi: quest Jeuno.NewWorldsAwait accepted
+login
+trigger Nomad_Moogle                    # BI available (progressEvent) over NWA's event: 10045 (91, 1, 5, 0, 0)
+finish option=0                         # not a begin option: nothing
+quest Jeuno.BeyondInfinity accepted     # a GM
+keyitem SoulGemClasp                    # a GM: state 2
+trigger Nomad_Moogle                    # BI's event and NWA's, one csid: NWA's (the first container): 10045 (91, 1, 1, 1)
+finish option=0                         # BI state 2's finish: 0, nothing
+trigger Maat                            # state 2: event 10193 (the quest's turn)
+finish
+trigger Maat                            # the script's turn: Maat.lua's 117
+finish                                  # Maat.lua: BeatAroundTheBushin 6
+delkeyitem SoulGemClasp                 # a GM: state 4
+trigger Nomad_Moogle                    # BI state 4's progressEvent over NWA's event: 10045 (91, 1, 5, 3, 0, 0, 0)
+finish option=0                         # 0: no clasp
+charvar Quest[3][137]Prog 1             # a GM: state 5
+trigger Nomad_Moogle                    # 10139 (75, 1) over NWA's event
+quest Jeuno.BeyondInfinity available    # a GM, while 10139 is open
+finish                                  # no 10139 finish in the available state: nothing
+quest Jeuno.BeyondInfinity accepted     # a GM
+charvar Quest[3][137]Prog 1             # a GM
+trigger Nomad_Moogle                    # 10139 (75, 1) again: a progressEvent (an event would give NWA's 10045 its turn)
+finish                                  # completed: Bushin Aspirant, level cap 99
+trigger Nomad_Moogle                    # completed, level 91: BI's event and NWA's, one csid: NWA's 10045 (91, 1, 1, 1)
+finish
+hi: login
+hi: trigger Nomad_Moogle                # level 99, no Job Breaker: 10240 (99, 2) over NWA's event
+hi: finish option=0                     # not 28: nothing
+hi: trigger Nomad_Moogle                # 10240 (99, 2) again
+hi: finish option=28                    # the Job Breaker
+hi: trigger Nomad_Moogle                # the Job Breaker held: BI's event and NWA's, one csid: NWA's 10045 (99, 2, 1, 1)
+hi: finish

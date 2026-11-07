@@ -1,0 +1,20 @@
+# Rock Bottom's edges: a level 75 Warrior with the Map of Mount Zhayolm, two Pickaxes (one stack) and a Mythril Pick +1,
+# accepted at Prog 1 with no zoning flag (GMs): the two Pickaxes: nil (tradeMatches wants one). Prog 3 (a GM): the
+# pick +1: nil. Prog 2 (a GM): the pick +1: 9 ([0] 16670), finished: completed, the pick taken, the map held: 2000 gil
+# (GIL_OBTAINED).
+lists MountZhayolm/blank11/onTrade MountZhayolm/onEventFinish/9
+char zone=MountZhayolm pos=839.743,-14.475,231.871 job=WAR lvl=75
+quest AhtUrhgan.RockBottom accepted
+charvar Quest[6][20]Prog 1
+keyitem MapOfMountZhayolm
+item Pickaxe x2
+item MythrilPickHq
+login
+trade blank11 Pickaxe x2                # Prog 1, two pickaxes: nil
+finish-if-event
+charvar Quest[6][20]Prog 3              # a GM
+trade blank11 MythrilPickHq x1          # Prog 3: nil
+finish-if-event
+charvar Quest[6][20]Prog 2              # a GM
+trade blank11 MythrilPickHq x1          # Prog 2: 9 ([0] 16670)
+finish                                  # completed; the pick taken; the map held: 2000 gil (GIL_OBTAINED)

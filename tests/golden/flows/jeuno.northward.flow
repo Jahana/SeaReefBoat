@@ -1,0 +1,31 @@
+# Northward (jeuno 24): Ru'Lude Gardens' Radeivepart (no script; default 159, no options). A level 75 Warrior at Jeuno
+# fame level 4 ((450 + 0 + 0) / 2 = 225), two Flame Degens and a Chocobo Feather. Available: a trade: no handler; 159
+# ([0] = 1, [7] = 8), options 0 and 2: nothing; option 1: begun. Accepted: 159 ([0] = 2, [7] = 8), no finish handler; two
+# degens: nil; the degen and the feather: nil; the feather: nil; the degen: 61, finished: completed (2000 exp, 2000 gil,
+# the Map of Castle Zvahl, Envoy to the North), fame +13 x3, the degen taken. Completed: 159 ([0] = 3, [7] = 8),
+# replaceDefault (over his default 159).
+lists RuludeGardens/Radeivepart/onTrigger RuludeGardens/Radeivepart/onTrade RuludeGardens/onEventFinish/159 RuludeGardens/onEventFinish/61
+char zone=RuludeGardens pos=5.9,9,-38.7 job=WAR lvl=75
+fame Sandoria 450
+item FlameDegen
+item FlameDegen
+item ChocoboFeather
+login
+trade Radeivepart FlameDegen x1     # available: no trade handler; nothing
+trigger Radeivepart                 # fame level 4: 159 (1, ..., 8)
+finish option=0                     # nothing
+trigger Radeivepart                 # 159 (1, ..., 8)
+finish option=2                     # not 1: nothing
+trigger Radeivepart                 # 159 (1, ..., 8)
+finish option=1                     # begun
+trigger Radeivepart                 # accepted: 159 (2, ..., 8)
+finish option=1                     # no 159 finish while accepted: nothing
+trade Radeivepart FlameDegen x2     # two: nil
+trade Radeivepart FlameDegen x1 ChocoboFeather x1 # an extra item: nil
+trade Radeivepart ChocoboFeather x1 # no degen: nil
+trade Radeivepart FlameDegen x1     # 61
+finish                              # completed: 2000 exp, 2000 gil, the map, the title; fame +13 x3; the degen taken
+trigger Radeivepart                 # completed: 159 (3, ..., 8), replaceDefault
+finish option=1                     # no 159 finish while completed: nothing
+trigger Radeivepart                 # completed again: 159 (3, ..., 8) (replaceDefault: no tie with his default)
+finish

@@ -1,0 +1,14 @@
+# Community Service (jeuno 15) failed two days on: begun at 18:00 on day 8000; at 0:00 of day 8002 (timer + 1 < date)
+# a lamp is too late (3) and Zauko (hour 0: no offer) plays 119.
+lists LowerJeuno/Zauko/onTrigger LowerJeuno/_l00/onTrigger LowerJeuno/onEventUpdate/116 LowerJeuno/onEventFinish/119 LowerJeuno/onEventFinish/120
+char zone=LowerJeuno pos=-2.4,0,14.2 job=WAR lvl=30
+login
+wait vana=6                             # 18:00
+trigger Zauko                           # 116 (0)
+update 116 option=0                     # begun: Timer 8000
+finish
+wait vana=30                            # day 8002, 0:00
+trigger _l00                            # timer + 1 < date: 120 (3, 0)
+finish
+trigger Zauko                           # Prog 1, timer + 1 < date: 119
+finish                                  # Prog 0

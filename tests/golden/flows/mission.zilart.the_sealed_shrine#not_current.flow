@@ -1,0 +1,19 @@
+# The Sealed Shrine not current (The Chamber of Oracles current): _700 is Norg's DefaultActions DOOR_IS_LOCKED,
+# Gilgamesh and Aldo say nothing, and the Shrine's zone-in at Zilart status 1 plays nothing.
+lists Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Norg/onEventFinish/172 LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/111 TheShrineOfRuavitau/onZoneIn/1 TheShrineOfRuavitau/onEventFinish/51
+char zone=Norg pos=98,-7,-12 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheChamberOfOracles current
+login
+trigger _700                            # DOOR_IS_LOCKED
+finish-if-event
+trigger Gilgamesh                       # nothing
+finish-if-event
+warp 23,3,-58 LowerJeuno
+trigger Aldo                            # nothing
+finish-if-event
+missionstatus Zilart 1                  # a GM
+warp -40,-2,-230 TheShrineOfRuavitau open  # nothing

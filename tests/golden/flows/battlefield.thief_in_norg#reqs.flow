@@ -1,0 +1,15 @@
+# A Thief in Norg?! (battlefield.thief_in_norg): the requirement arms. Main, a level 50 Samurai with the quest accepted and
+# the charm but Prog 5: BC_Entrance: the registrant's check (requiredVar 6 not met): no options. bob, Prog 6 and the charm,
+# the quest only available: fails.
+lists WaughroonShrine/BC_Entrance/onTrade
+char zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=SAM lvl=50
+char bob zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=SAM lvl=50
+quest Outlands.AThiefInNorg accepted
+charvar Quest[5][142]Prog 5
+item BanishingCharm
+bob: charvar Quest[5][142]Prog 6
+bob: item BanishingCharm
+login
+trade BC_Entrance BanishingCharm x1     # Prog 5: no options
+bob: login
+bob: trade BC_Entrance BanishingCharm x1 # available: no options

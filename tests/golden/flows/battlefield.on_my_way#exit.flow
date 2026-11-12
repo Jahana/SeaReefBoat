@@ -1,0 +1,41 @@
+# The exit of the battlefield on_my_way (Waughroon Shrine, index 3, Bastok 7-2, status 2): Burning_Circle 32003,
+# option 0: stays; option 4: out. Area 2 entered after, Burning_Circle+1 (area 2's) 32003, option 4: out.
+lists WaughroonShrine/BC_Entrance/onTrigger WaughroonShrine/BC_Entrance/onTrade WaughroonShrine/onEventUpdate/32000 WaughroonShrine/onEventFinish/32000 WaughroonShrine/onEventFinish/32001 WaughroonShrine/onEventFinish/32002 WaughroonShrine/onEventFinish/32003 WaughroonShrine/Burning_Circle/onTrigger
+char zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay current
+rank 7
+login
+missionstatus Bastok 2
+trigger BC_Entrance
+update 32000 option=49
+finish
+trigger Burning_Circle                  # 32003
+finish option=0                         # stays
+trigger Burning_Circle
+finish option=4                         # out
+tick 2000
+warp -338.1,104.3,-260.3 WaughroonShrine
+trigger BC_Entrance
+update 32000 option=50
+finish
+trigger Burning_Circle+1                # area 2's: 32003
+finish option=4                         # out

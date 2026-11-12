@@ -1,0 +1,55 @@
+# Shield of Diplomacy: LOCKED, and a menu outliving its fight (as save_the_children#busy): bob is offered the
+# menu while main is in, and does not answer it; cid's and eve's clearances taken at the lock; cid's late update
+# (LOCKED); after the win and cleanup eve's update (REQS_NOT_MET).
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001 NavukgoExecutionChamber/onEventFinish/32002
+char zone=NavukgoExecutionChamber pos=-600,8,-100 job=WAR lvl=75 nation=1
+char bob zone=NavukgoExecutionChamber pos=-600,8,-100 job=WAR lvl=75 nation=1
+char cid zone=NavukgoExecutionChamber pos=-600,8,-100 job=WAR lvl=75 nation=1
+char eve zone=NavukgoExecutionChamber pos=-600,8,-100 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ShieldOfDiplomacy current
+bob: mission Asa BurgeoningDread current
+bob: mission Acp ACrystallineProphecyFin current
+bob: mission Rov ARhapsodyForTheAges current
+bob: mission Soa Abomination current
+bob: mission Toau ShieldOfDiplomacy current
+cid: mission Asa BurgeoningDread current
+cid: mission Acp ACrystallineProphecyFin current
+cid: mission Rov ARhapsodyForTheAges current
+cid: mission Soa Abomination current
+cid: mission Toau ShieldOfDiplomacy completed
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Toau ShieldOfDiplomacy completed
+login
+missionstatus Toau 2
+bob: login
+bob: missionstatus Toau 2
+cid: login
+eve: login
+invite cid
+cid: accept
+invite eve
+eve: accept
+trigger _1s0
+update 32000 option=65
+finish
+bob: trigger _1s0
+cid: trigger _1s0
+eve: trigger _1s0
+tick 2000
+claim KHIMAIRA_13
+tick 1000
+cid: update 32000 option=65
+cid: finish
+kill KHIMAIRA_13
+finish
+tick 11000
+tick 10000
+eve: update 32000 option=65
+eve: finish

@@ -31,7 +31,7 @@ namespace XI.QuestContent.Battlefields.ChamberOfOracles
                 WearMessage = Text.ChamberOfOracles.A_CRACK_HAS_FORMED,
                 WornMessage = Text.ChamberOfOracles.ORB_IS_CRACKED,
             },
-            EssentialMobs = new List<string[]> { new[] { "Sabotender_Campeon", "Sabotender_Amante" } },
+            EssentialMobs = { new[] { "Sabotender_Campeon", "Sabotender_Amante" } },
             Loot = new List<BattlefieldLootGroup>
             {
                 new BattlefieldLootGroup

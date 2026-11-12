@@ -1,0 +1,29 @@
+# Appointment to Jeuno (San d'Oria 3-3, mission.sandoria.appointment_to_jeuno). A level 30 Warrior of San d'Oria in
+# Southern San d'Oria, 3-2 completed (none current). Endracion's own 1009; option 250 nothing, option 12 begins the
+# mission (no message). Status 0: Endracion and Ambrotien say ORIGINAL_MISSION_OFFSET + 74. Status 2: their own 1001 and
+# 2001.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Arsha/onTrigger ChateauDoraguille/Chupaile/onTrigger ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h4/onTrigger ChateauDoraguille/onEventFinish/508 ChateauDoraguille/onEventFinish/537 RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/onEventFinish/39 RuludeGardens/onEventFinish/42 LowerDelkfuttsTower/_541/onTrade LowerDelkfuttsTower/_541/onTrigger LowerDelkfuttsTower/onEventFinish/0
+char zone=SouthernSanDoria pos=-110,1,-35 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+login
+trigger Endracion                       # section 1: 1009
+finish option=250                       # not 12: nothing
+trigger Endracion
+finish option=12                        # begun
+trigger Endracion                       # status 0: ORIGINAL_MISSION_OFFSET + 74
+finish-if-event
+trigger Ambrotien                       # ORIGINAL_MISSION_OFFSET + 74
+finish-if-event
+missionstatus Sandoria 2
+trigger Endracion                       # status 2: nothing from the mission
+finish-if-event
+trigger Ambrotien
+finish-if-event

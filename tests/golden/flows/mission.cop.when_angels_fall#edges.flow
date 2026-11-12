@@ -1,0 +1,39 @@
+# When Angels Fall (CoP 8-3): the brands, and each handler at a status it does not answer (GMs set Status). At
+# Status 1, _0zu without Brand of Dawn: optional cutscene 110; finished 0: nothing; finished 1: Brand of Dawn (710);
+# _0zu again: no reply (a lone release; no default). _0zv: 111, finished 1: Brand of Twilight (711); again: no
+# reply. Status 3: _iz2: NO_NEED_INVESTIGATE (7644, the default); _0zt: PORTAL_SEALED (7673, the default). Status 0:
+# _iz2: 7644; _0z0: the battlefield entry refuses (a lone release). Status 6: _0z0 the same. Status 2: the rezone:
+# nothing (the zone-in answers Status 0 only). Al'Taieu's zone-in at Status 2 and 5: nothing.
+lists TheGardenOfRuhmet/onZoneIn/1 TheGardenOfRuhmet/_0zu/onTrigger TheGardenOfRuhmet/_0zv/onTrigger TheGardenOfRuhmet/onEventFinish/110 TheGardenOfRuhmet/onEventFinish/111 TheGardenOfRuhmet/_iz2/onTrigger TheGardenOfRuhmet/_0z0/onTrigger TheGardenOfRuhmet/_0zt/onTrigger Altaieu/onZoneIn/1
+char zone=TheGardenOfRuhmet pos=-420,-2,-284 job=WAR lvl=75 nation=0
+mission Cop WhenAngelsFall current
+charvar Mission[6][828]Status 1
+login
+trigger _0zu
+finish option=0
+trigger _0zu
+finish option=1
+trigger _0zu
+finish-if-event
+trigger _0zv
+finish option=1
+trigger _0zv
+finish-if-event
+charvar Mission[6][828]Status 3
+trigger _iz2
+finish-if-event
+trigger _0zt
+finish-if-event
+charvar Mission[6][828]Status 0
+trigger _iz2
+finish-if-event
+trigger _0z0
+finish-if-event
+charvar Mission[6][828]Status 6
+trigger _0z0
+finish-if-event
+charvar Mission[6][828]Status 2
+rezone
+warp -422,0,-532 Altaieu
+charvar Mission[6][828]Status 5
+warp -422,0,-532 Altaieu

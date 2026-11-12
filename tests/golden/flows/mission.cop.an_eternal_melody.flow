@@ -1,0 +1,31 @@
+# An Eternal Melody (CoP 2-4, mission.cop.an_eternal_melody). A level 75 Warrior of San d'Oria with 2-4 current (a GM;
+# Status 0) in Tavnazian Safehold. Justinius (Status 0): 125 replaces the default. Parelbriaux (Status 0): nothing. The
+# Walnut Door _0qa: 104; finished: the Mysterious Amulet, Status 1. Justinius (Status 1): 127; Parelbriaux 126. Misareaux
+# Coast's gate _0p0 (Status 1): cutscene 5; finished: Status 2. The walks into the trigger area do not fire it here (no zone
+# tick since the login or the warp): the area is proved by #area. _0qa (Status 2, the mission still current): nothing.
+# The two walks to (0,-22,22) and the lone finish after the last one change nothing in this trace.
+# (The trigger area 1 at Status 1 and 2, and 105's finish, are reached by mission.cop.an_eternal_melody#area.)
+lists TavnazianSafehold/_0qa/onTrigger TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/Parelbriaux/onTrigger TavnazianSafehold/onTriggerAreaEnter/1 TavnazianSafehold/onEventFinish/104 TavnazianSafehold/onEventFinish/105 MisareauxCoast/_0p0/onTrigger MisareauxCoast/onEventFinish/5
+char zone=TavnazianSafehold pos=100,-42,41 job=WAR lvl=75 nation=0
+mission Cop AnEternalMelody current
+login
+trigger Justinius                       # Status 0: 125
+finish-if-event
+trigger Parelbriaux                     # Status 0: nothing
+finish-if-event
+trigger _0qa                            # 104
+finish                                  # the amulet, Status 1
+trigger Justinius                       # 127
+finish-if-event
+trigger Parelbriaux                     # 126
+finish-if-event
+walk 0,-22,22                           # no zone tick yet: the area does not fire
+walk 0,-22,10
+warp 260,7.3,-437 MisareauxCoast
+trigger _0p0                            # Status 1: cutscene 5
+finish                                  # Status 2
+warp 0,-22,10 TavnazianSafehold
+walk 0,-22,22                           # no zone tick since the warp: the area does not fire
+finish                                  # no event: nothing changes
+trigger _0qa                            # nothing
+finish-if-event

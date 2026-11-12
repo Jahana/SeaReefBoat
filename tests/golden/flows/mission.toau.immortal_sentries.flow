@@ -1,0 +1,30 @@
+# Immortal Sentries (ToAU 2, mission.toau.immortal_sentries). A level 75 Warrior of Bastok in Aht Urhgan Whitegate with
+# it current and the Supplies Package: Naja Salaheem 3001 (the default dialog; text table 0). Arrapago Reef: Meyaada 5,
+# finished with option 0: nothing; again, option 1: handlePackage (the package deleted, 150 imperial standing) and the
+# HAND_OVER_TO_IMMORTAL and YOUR_IMPERIAL_STANDING messages. Without the package: Meyaada 6. Naja without it: 3002,
+# finished: the two messages around the completion, the PSC Wildcat Badge, Private Second Class, President Salaheem
+# current. The other zones' arms are the #bhaflau, #caedarva and #zhayolm flows.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3002 ArrapagoReef/Meyaada/onTrigger ArrapagoReef/onEventFinish/5
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ImmortalSentries current
+keyitem SuppliesPackage
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # the package: 3001
+finish
+warp 22.446,-7.92,573.39 ArrapagoReef
+trigger Meyaada                         # the package: 5
+finish option=0                         # not 1: nothing
+trigger Meyaada                         # 5
+finish option=1                         # handed over
+trigger Meyaada                         # no package: 6
+finish
+warp 22.7,-8.804,-45.591 AhtUrhganWhitegate
+trigger Naja_Salaheem                   # no package: 3002
+finish                                  # the messages, completed

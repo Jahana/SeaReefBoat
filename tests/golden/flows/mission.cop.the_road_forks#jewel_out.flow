@@ -1,0 +1,21 @@
+# The Road Forks, the Jewel and the zone-out (mission.cop.the_road_forks#jewel_out). A level 75 Warrior of Windurst
+# with 3-3 current, the Windurst status 8 and the Lioumere's status 1 (GMs): Attohwa Chasm, Loose Sand at its feet: the
+# Jewel. Cradle of Rebirth with no Jewel (a GM took it): nothing. The Jewel held again (a GM): the zone-out:
+# MIMEO_JEWEL_OFFSET + 4, the Jewel taken. The zone-out with no Jewel: nothing.
+lists AttohwaChasm/Loose_Sand/onTrigger AttohwaChasm/Cradle_of_Rebirth/onTrigger
+char zone=AttohwaChasm pos=478.8,20,41.7 job=WAR lvl=75 nation=2
+mission Cop TheRoadForks current
+login
+tick 1000
+tick 1000
+tick 1000
+missionstatus Cop 8 pos=1               # a GM
+charvar Mission[6][325]Status 1         # a GM
+trigger Loose_Sand here                 # the Jewel; the timer
+finish-if-event
+delkeyitem MimeoJewel                   # a GM
+trigger Cradle_of_Rebirth               # no Jewel: nothing
+finish-if-event
+keyitem MimeoJewel                      # a GM
+warp 0,0,0 Metalworks                   # the zone-out: the Jewel taken
+warp 478.8,20,41.7 AttohwaChasm         # the zone-out: no Jewel

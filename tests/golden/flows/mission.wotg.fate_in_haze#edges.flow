@@ -1,0 +1,20 @@
+# Fate in Haze (WotG 26), update option 0. Status 1 (a GM): the zone-in plays 154, an update with option 0 sends no
+# packet, the finish sets Status 2; the zone-in plays 155, update option 0 sends no packet, the finish completes.
+lists SouthernSanDoriaS/Lion_Springs/onTrigger SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventUpdate/154 SouthernSanDoriaS/onEventUpdate/155 SouthernSanDoriaS/onEventFinish/151 SouthernSanDoriaS/onEventFinish/154 SouthernSanDoriaS/onEventFinish/155
+char zone=SouthernSanDoriaS pos=100.801,1,103.211 job=WAR lvl=99
+quest CrystalWar.WhatPriceLoyalty completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg FateInHaze current
+login
+charvar Mission[5][25]Status 1
+tick 400
+login open                                 # 154
+update 154 option=0
+finish
+tick 400
+login open                                 # 155
+update 155 option=0
+finish

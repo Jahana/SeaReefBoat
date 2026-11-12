@@ -1,0 +1,96 @@
+# Magicite (San d'Oria 4-1, mission.sandoria.magicite) played through: a level 50 San d'Orian at rank 4 with the 2152
+# rank points, ACP and RoV current (their zone-ins quiet) and the nation's missions before it completed. Nelcabrit 45
+# (progress), the door _6r5 130 (0): begun at status 1 with YOU_ACCEPT_THE_MISSION and the permit. Nelcabrit 133, _6r9
+# 128 (the Letter to Aldo, status 2); Nelcabrit's own 102 (the alternation after the event 133), 136; at status 2 the
+# mission leaves _6r9 to his own 138 (1: the permit held). Aldo 152 (0, 1) (status 3, the Silver Bell); the key item
+# hunt as Bastok's (Muckvix, Geebeh's default text, Paya-Sabya 80 and 23, Muckvix 184 and 81, Paya-Sabya's default 79,
+# the Altar Room zone-in 10000, the three Magicite and their own messages, Aldo 161 and 183); Nelcabrit 136, _6r9 60 (0,
+# 0): status 4. Status 4: Aldo 183, Nelcabrit 36 (progress): completed (rank 5, 10000 gil, the Message to Jeuno).
+# Completed: Nelcabrit's own 56.
+lists RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/130 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/36 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=RuludeGardens pos=-32,9,-47 job=WAR lvl=50 nation=0
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+rank 4 points=2152
+login
+trigger Nelcabrit                       # section 1, the rank points met: 45 (progress)
+finish
+trigger _6r5                            # 130 (0: no permit)
+finish option=1                         # begun, status 1, YOU_ACCEPT_THE_MISSION, the permit
+trigger Nelcabrit                       # status 1: 133
+finish-if-event
+trigger _6r9                            # status 1: 128
+finish                                  # status 2, the Letter to Aldo
+trigger Nelcabrit                       # the alternation after 133: Nelcabrit's own
+finish-if-event
+trigger Nelcabrit                       # status 2: 136
+finish-if-event
+trigger _6r9                            # status 2: _6r9's own 138 (1: the permit held)
+finish-if-event
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # status 2, no bell: 152 (0, 1)
+finish                                  # status 3, the letter taken, the Silver Bell given
+trigger Aldo                            # no stone: 161
+finish-if-event
+trigger Muckvix                         # no torch, Option 0: 80
+finish-if-event
+warp 9,1,72 UpperJeuno
+trigger Geebeh                          # Option 0: Geebeh's default text (7453)
+finish-if-event
+trigger Paya-Sabya                      # Option 0: 80 (progress)
+finish                                  # Option 1
+trigger Geebeh                          # Option 1, no torch: WITHER_AND_DIE
+finish-if-event
+trigger Paya-Sabya                      # Option 1: 23
+finish-if-event
+warp -26.8,4.6,-135 LowerJeuno
+trigger Muckvix                         # Option 1: 184
+finish                                  # the Yagudo Torch, Option 2
+trigger Muckvix                         # the torch, Option 2: 81
+finish-if-event
+warp 9,1,72 UpperJeuno
+trigger Paya-Sabya                      # the torch: Paya-Sabya's default 79
+finish-if-event
+trigger Geebeh                          # the torch: Geebeh's default text (7453)
+finish-if-event
+warp -342,25,43 AltarRoom open          # Option 2: 10000
+finish                                  # Option 0
+trigger Magicite                        # no stone: 44 (152)
+finish                                  # the Orastone
+trigger Magicite                        # the Orastone held: its own message (7126)
+finish-if-event
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # a stone held: 183
+finish-if-event
+warp -158,-8,8 MonasticCavern
+trigger Magicite                        # the Orastone alone: 0 (150)
+finish                                  # the Optistone
+trigger Magicite                        # the Optistone held: its own message (7291)
+finish-if-event
+warp 13,25,-81 QulunDome
+trigger Magicite                        # the Optistone and the Orastone: 0 (1, 46, 47)
+finish                                  # the Aurastone
+trigger Magicite                        # the Aurastone held: its own message (7275)
+finish-if-event
+warp -32,9,-47 RuludeGardens
+trigger Nelcabrit                       # status 3: 136
+finish-if-event
+trigger _6r9                            # the three stones, no pass: 60 (0, 0)
+finish                                  # the stones taken, the Airship Pass, the title, status 4
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # status 4: 183
+finish-if-event
+warp -32,9,-47 RuludeGardens
+trigger Nelcabrit                       # status 4: 36 (progress)
+finish                                  # completed: rank 5, 10000 gil, the Message to Jeuno
+trigger Nelcabrit                       # completed: Nelcabrit's own 56
+finish-if-event

@@ -1,0 +1,55 @@
+# Three Paths (CoP 5-3, mission.cop.three_paths), Louverance's path. A level 75 Warrior with 5-3 current (a GM; no
+# status). Metalworks, Cid (all three paths 0): 851 (arg 0); finished: nothing in the trace (the Lua's local cidOption
+# 1); again: event 500 (Metalworks DefaultActions). Tavnazian Safehold, Despachiaire (Louverance 0): 118; finished: 2;
+# again (2): event 144 (X Marks the Spot's; its finish writes the quest log). The warp into Windurst Woods plays
+# Rhapsodies of Vana'diel's zone-in 30035, finished there (RoV, area 13, current 2). Perih Vashai (2): 686; finished: 3;
+# again (3): 687. Bibiki Bay, Warmachine (3): cutscene 33; finished: 6. Windurst Walls, Yoran-Oran (6): 481. Oldton
+# Movalpolos' zone-in (6): event 1, finished by the warp: 8; Tarnotik (8): event 31 (Tarnotik's own NPC script). A GM
+# sets 9: Cid 852; finished: 11 (and the local cidOption 0). Tarnotik (11): 34. Mine Shaft, _0d0 (11): the battlefield
+# framework's refusal (message 7097); the Gold Key traded: message 7097 (the battlefield's entry trade), then event 3;
+# finished: 12. Cid (12): 853; finished: 14, the title; again: 851 (arg 1).
+lists Metalworks/Cid/onTrigger Metalworks/onEventFinish/851 Metalworks/onEventFinish/852 Metalworks/onEventFinish/853 TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/118 WindurstWoods/Perih_Vashai/onTrigger WindurstWoods/onEventFinish/686 BibikiBay/Warmachine/onTrigger BibikiBay/onEventFinish/33 WindurstWalls/Yoran-Oran/onTrigger OldtonMovalpolos/Tarnotik/onTrigger OldtonMovalpolos/onZoneIn/1 OldtonMovalpolos/onEventFinish/1 MineShaft2716/_0d0/onTrade MineShaft2716/onEventFinish/3
+char zone=Metalworks pos=-12,-12,1 job=WAR lvl=75 nation=1
+mission Cop ThreePaths current
+login
+trigger Cid                             # all 0: 851 (arg 0)
+finish                                  # nothing in the trace (the local cidOption 1)
+trigger Cid                             # 500 (Metalworks DefaultActions)
+finish-if-event
+warp 108,-40,-83 TavnazianSafehold
+trigger Despachiaire                    # 0: 118
+finish                                  # 2
+trigger Despachiaire                    # 2: 144 (X Marks the Spot's)
+finish-if-event
+warp 117,-3,92 WindurstWoods            # zone-in: Rhapsodies of Vana'diel's 30035, finished
+trigger Perih_Vashai                    # 2: 686
+finish                                  # 3
+trigger Perih_Vashai                    # 3: 687
+finish-if-event
+warp -345.2,-3.2,-976.5 BibikiBay
+trigger Warmachine                      # 3: cutscene 33
+finish                                  # 6
+warp -110,-14,203.3 WindurstWalls
+trigger Yoran-Oran                      # 6: 481
+finish-if-event
+warp 160.9,11,-55.7 OldtonMovalpolos    # zone-in at 6: event 1, finished: 8
+trigger Tarnotik                        # 8: 31 (Tarnotik's own NPC script)
+finish-if-event
+missionstatus Cop 9 pos=2               # a GM
+warp -12,-12,1 Metalworks
+trigger Cid                             # 9: 852
+finish                                  # 11 (and the local cidOption 0)
+warp 160.9,11,-55.7 OldtonMovalpolos
+trigger Tarnotik                        # 11: 34
+finish-if-event
+item GoldKey x1
+warp -93.657,-120,-583.561 MineShaft2716
+trigger _0d0                            # 11: the framework's refusal (message 7097)
+finish-if-event
+trade _0d0 GoldKey x1                   # 11: message 7097, then 3
+finish                                  # 12
+warp -12,-12,1 Metalworks
+trigger Cid                             # 12: 853 (arg 0)
+finish                                  # 14, the title
+trigger Cid                             # 14: 851 (arg 1)
+finish

@@ -1,6 +1,6 @@
 // Tango with a Tracker (Log ID 4, Quest ID 82), a line-for-line port of scripts/quests/otherAreas/Tango_with_a_Tracker.lua
 // (quest rework B3b). Tavnazian Safehold: Despachiaire !pos 111.209 -40.015 -85.481 (no script, default 106); Boneyard
-// Gully: the battlefield Tango with a Tracker (scripts/battlefields/Boneyard_Gully/tango_with_a_tracker.lua, a
+// Gully: the battlefield Tango with a Tracker (Battlefields/BoneyardGully/TangoWithATracker.cs, a
 // BattlefieldQuest: id 677, index 5, entry _081; its own checkRequirements asks the registrant for the Letter from Shikaree
 // X through Battlefield's, not BattlefieldQuest's, so no quest status: the available quest enters and begins inside).
 // Available once CoP's A Fate Decided is completed: Despachiaire at Prog 0: 576, whose finish gives the Letter from

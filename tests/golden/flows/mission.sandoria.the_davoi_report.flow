@@ -1,0 +1,51 @@
+# The Davoi Report (San d'Oria 2-2, mission.sandoria.the_davoi_report). A level 10 Warrior of San d'Oria with 1-1
+# completed (a GM; Resonance current keeps RoV 1-1 out). Section 1 (no current mission, a San d'Orian): Endracion's
+# script plays 1009; its finish with option 1 does nothing; again, with option 104: begun. Section 2 (2-2 current):
+# Endracion at status 0 plays ORIGINAL_MISSION_OFFSET + 44. Davoi: Zantaviat at status 0: 100, whose finish sets
+# status 1; Zantaviat at status 1 with no Lost Document: his script's 101. The first, second and third "!" (x
+# 294, 335 and 163: not between 210 and 212): Davoi's YOU_SEE_NOTHING, 7433 (from DefaultActions: "!" has no NPC
+# script); the fourth (x 211.2): the Lost Document and status 2; the fourth again (the document held): 7433 again.
+# Zantaviat with the document: 104, whose finish sets status 3, takes the document and gives the Temple Knights Davoi
+# Report. Endracion at status 3, not completed: 1028 with the arguments 0, 0, 0, 44 (no handler finishes it). Northern
+# San d'Oria's Papal Chambers door: not completed, the report held: 695, whose finish completes the mission (350 rank
+# points) and takes the report. The mission current again (a GM), status 3 and the report: Papal Chambers door
+# (completed): ITS_LOCKED, 11558; Endracion (completed): 1006, whose finish completes it again. Rival zone-in, another
+# mission's script: the warp to Northern San d'Oria plays Seekers of Adventure's Rumors from the West onZoneIn, which
+# returns 878 (no event packet), and area 12's status goes from 0 to 1.
+lists SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/1006 Davoi/Zantaviat/onTrigger Davoi/!/onTrigger Davoi/onEventFinish/100 Davoi/onEventFinish/104 NorthernSanDoria/_6fc/onTrigger NorthernSanDoria/onEventFinish/695
+char zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+login
+trigger Endracion                       # section 1: his script's 1009
+finish option=1                         # not 104: nothing
+trigger Endracion                       # 1009 again
+finish option=104                       # 104: begun
+trigger Endracion                       # section 2, status 0: ORIGINAL_MISSION_OFFSET + 44
+warp 215,0.1,-10 Davoi
+trigger Zantaviat                       # status 0: 100
+finish                                  # status 1
+trigger Zantaviat                       # status 1, no document: his script's 101
+finish-if-event
+trigger !                               # x 294: out of 210..212: YOU_SEE_NOTHING 7433
+trigger !+1                             # x 335: 7433
+trigger !+2                             # x 163: 7433
+trigger !+3                             # x 211.2: the Lost Document, status 2
+finish-if-event
+trigger !+3                             # the document held: 7433
+trigger Zantaviat                       # the document held: 104
+finish                                  # status 3, the document taken, the Davoi Report given
+warp -108.5,1,-34 SouthernSanDoria
+trigger Endracion                       # status 3, not completed: 1028
+finish
+warp 131,-11,122 NorthernSanDoria
+trigger _6fc                            # not completed, the report held: 695
+finish                                  # completed (350 rank points), the report taken
+mission Sandoria TheDavoiReport current # a GM
+missionstatus Sandoria 3
+keyitem TempleKnightsDavoiReport
+trigger _6fc                            # completed: ITS_LOCKED 11558
+finish-if-event
+warp -108.5,1,-34 SouthernSanDoria
+trigger Endracion                       # status 3, completed: 1006
+finish                                  # completed again, the report taken

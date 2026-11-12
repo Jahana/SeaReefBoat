@@ -1,0 +1,36 @@
+# The Davoi Report (San d'Oria 2-2), Grilau's route. A level 10 Warrior of San d'Oria with 1-1 completed (a GM;
+# Resonance current keeps RoV 1-1 out), in Northern San d'Oria. Grilau's script plays 1009 (section 1); its finish
+# with option 104 begins the mission. Status 0: Grilau answers Northern San d'Oria's ORIGINAL_MISSION_OFFSET + 44, and
+# a trigger straight after a text plays his script's 1001; status 2 (a GM) answers the text again. Status 3: not
+# completed, so 1028 with the arguments 0, 0, 0, 44 (no handler finishes it). The mission completed through the Papal
+# Chambers door (350 rank points) and then current again at status 3 with the report (GMs): completed, so Grilau plays
+# 1006, whose finish completes the mission again and takes the report.
+# Rival zone-in, another mission's script: the login in Northern San d'Oria plays Seekers of Adventure's Rumors from the
+# West onZoneIn, which returns 878 (the trace records only that return, with no event packet).
+lists NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1006 NorthernSanDoria/_6fc/onTrigger NorthernSanDoria/onEventFinish/695
+char zone=NorthernSanDoria pos=-240.5,7,57.9 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+login
+trigger Grilau                          # section 1: his script's 1009
+finish option=104                       # begun
+trigger Grilau                          # status 0: Northern ORIGINAL_MISSION_OFFSET + 44
+finish-if-event
+trigger Grilau                          # straight after a text: his script's 1001
+finish-if-event
+missionstatus Sandoria 2                # a GM
+trigger Grilau                          # status 2: Northern ORIGINAL_MISSION_OFFSET + 44
+finish-if-event
+missionstatus Sandoria 3                # a GM
+trigger Grilau                          # status 3, not completed: 1028
+finish-if-event
+keyitem TempleKnightsDavoiReport
+warp 131,-11,122 NorthernSanDoria
+trigger _6fc                            # not completed, the report held: 695
+finish                                  # completed (350 rank points), the report taken
+mission Sandoria TheDavoiReport current # a GM
+missionstatus Sandoria 3
+keyitem TempleKnightsDavoiReport
+warp -240.5,7,57.9 NorthernSanDoria
+trigger Grilau                          # status 3, completed: 1006
+finish                                  # completed again, the report taken

@@ -1,0 +1,32 @@
+# Sentinels' Honor (ToAU 33) with the RoV era module: the time has passed only when the Timer var is 0. The Timer 1:
+# 3120 (dialog cycling 0, 2); the must-zone var set with the Timer 0: 3120 (dialog 2); after a rezone: 3130; finished:
+# completed.
+module modules/era/lua/missions/mission_adjustments.lua
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3130
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau SentinelsHonor current
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+login
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][32]Timer 1
+trigger Naja_Salaheem                   # the Timer 1: 3120, dialog 0
+finish-if-event
+trigger Naja_Salaheem                   # dialog 2
+finish-if-event
+charvar Mission[4][32]Timer 0
+charvar Mission[4][32]mustZone 1
+trigger Naja_Salaheem                   # must zone alone: 3120, dialog 2
+finish-if-event
+rezone
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # 3130
+finish                                  # completed

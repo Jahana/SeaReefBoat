@@ -1,0 +1,23 @@
+# A Mercenary Life with its SoA era module (modules/era/lua/missions/mission_adjustments.lua, RESTRICT_CONTENT 1,
+# ENABLE_SOA 0): section 2's area 3 plays 3050 (with its operands all 3, the last 0) only when the mission's Timer var is
+# 0. Timer 1 (a GM, as Westerly Winds' finish leaves it): nothing; a JST day on: 3050, finished: completed.
+module modules/era/lua/missions/mission_adjustments.lua
+lists AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventFinish/3050
+char zone=AhtUrhganWhitegate pos=34.7,-6.6,-40 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau AMercenaryLife current
+charvar Mission[4][7]Timer 1
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+login
+tick 1000
+tick 1000
+tick 1000
+walk 34.7,-6.6,-54.1                    # Timer 1: nothing
+walk 34.7,-6.6,-40
+wait jst=1                              # the Timer expired
+walk 34.7,-6.6,-54.1                    # 3050
+finish                                  # completed

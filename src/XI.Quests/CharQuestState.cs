@@ -133,6 +133,11 @@ namespace XI.Quests
         public static bool IsMission(string key) => key.StartsWith("mission.", StringComparison.Ordinal);
 
         public static bool IsBattlefield(string key) => key.StartsWith("battlefield.", StringComparison.Ordinal);
+
+        // roe.<topic>: a Records of Eminence flow's key. No container: the whole RoE port is one coverage key
+        public const string RoeCoverage = "roe";
+
+        public static bool IsRoe(string key) => key.StartsWith("roe.", StringComparison.Ordinal);
     }
 
     // Unpacks the legacy per-character quest state into normalized rows, and projects rows

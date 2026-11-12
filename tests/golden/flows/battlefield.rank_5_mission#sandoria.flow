@@ -1,0 +1,42 @@
+# Qu'Bia Arena's Rank 5 Mission (battlefield 512) by a San d'Orian White Mage on The Ruins of Fei'Yin at status 11: area
+# 2; Dia on area 2's Archlich (+7); at the kill the allDeath's despawn updates show the Sorcerers and two Warriors (+10,
+# +11: one pulse); WON; 32001: Archmage Assassin and the mission's finish (the Burnt Seal, status 12, the New Fei'Yin
+# Seal taken).
+lists QubiaArena/BC_Entrance/onTrigger QubiaArena/Burning_Circle/onTrigger QubiaArena/onEventUpdate/32000 QubiaArena/onEventFinish/32000 QubiaArena/onEventFinish/32003 QubiaArena/onEventFinish/32001 QubiaArena/onEventFinish/32002
+char zone=QubiaArena pos=-212.2,-24.6,20.1 job=WHM lvl=75 nation=0
+spell 23
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin current
+keyitem NewFeiyinSeal
+login
+missionstatus Sandoria 11
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=2                   # area 2: entered
+finish
+tick 2000                               # the first tick: the groups spawn
+cast Dia ARCHLICH_TABERQUOAN+7          # Dia on area 2's Archlich
+tick 1000
+tick 1000
+tick 1000
+tick 1000                               # he engages (00E animation 1): his target the char
+kill ARCHLICH_TABERQUOAN+7              # allDeath: Sorcerers, Warriors +10, +11 told despawned; WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish                                  # 32001: Archmage Assassin; The Ruins of Fei'Yin: the Burnt Seal, status 12
+tick 11000
+tick 10000

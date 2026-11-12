@@ -1,0 +1,48 @@
+# Carbuncle Debacle (battlefield.carbuncle_debacle_cloister_of_gales, CloisterOfGales): the helpers. Four level 75
+# Warriors by WP_Entrance. main (the quest accepted, CarbuncleDebacleProgress 6, the pendulum, the Daze Breaker Charm
+# held) registers and leads bob (nothing but CarbuncleDebacleProgress 9, an out-of-range value, and the charm) and dan
+# (the quest accepted, CarbuncleDebacleProgress 6, no pendulum, the Daze Breaker Charm held): anyone but the registrant
+# passes the handler's isValidEntry (the entry NPC) whatever it holds. cat (accepted, CarbuncleDebacleProgress 6, no
+# pendulum) is not in the party and has no clearance, so he is judged as a registrant and fails. bob and dan, holding
+# the clearance: the menu, entered. Area 1's group killed: won; 32001 for each. Each finish, onEventFinishWin, and the
+# Daze Breaker Charm is taken: main 6 -> 7, the charm gone; bob (var 9, not 6): the var kept, the charm gone; dan (the
+# var 6, no pendulum): 6 -> 7, the charm gone.
+lists CloisterOfGales/WP_Entrance/onTrade CloisterOfGales/WP_Entrance/onTrigger CloisterOfGales/onEventUpdate/32000 CloisterOfGales/onEventFinish/32000 CloisterOfGales/onEventFinish/32001
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char bob zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char cat zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char dan zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 6
+item WindPendulum
+keyitem DazeBreakerCharm
+bob: charvar CarbuncleDebacleProgress 9
+bob: keyitem DazeBreakerCharm
+cat: quest Windurst.CarbuncleDebacle accepted
+cat: charvar CarbuncleDebacleProgress 6
+dan: quest Windurst.CarbuncleDebacle accepted
+dan: charvar CarbuncleDebacleProgress 6
+dan: keyitem DazeBreakerCharm
+login
+bob: login
+cat: login
+dan: login
+invite bob
+bob: accept
+invite dan
+dan: accept
+trade WP_Entrance WindPendulum x1      # the menu 32000
+update 32000 option=17                  # registered in area 1; bob and dan registered with it
+finish                                  # main entered
+bob: trigger WP_Entrance               # no registrant, nothing held: the menu
+bob: update 32000 option=17             # entered
+bob: finish
+cat: trigger WP_Entrance               # accepted, no pendulum, not in the party: no options
+dan: trigger WP_Entrance               # no registrant, no pendulum: the menu
+dan: update 32000 option=17             # entered
+dan: finish
+kill OGMIOS
+finish                                  # main
+bob: finish                             # bob: the var is not 6
+dan: finish                             # dan: the var 6
+tick 11000                              # the won arena's cleanup

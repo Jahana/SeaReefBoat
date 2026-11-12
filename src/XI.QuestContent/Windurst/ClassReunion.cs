@@ -26,8 +26,9 @@
 // ClassReunion_TalkedToFurakku 1). Gulmama, before Trial by Ice's call: accepted, the var 4: 713 (0, Ice Pendulum);
 // the var 5 without the pendulum: 712 (0, Ice Pendulum); their finish: a free slot: the pendulum
 // (addItem, ITEM_OBTAINED), the var 5; else ITEM_CANNOT_BE_OBTAINED.
-// The Cloister of Frost battlefield's win (class_reunion.lua onEventFinishWin: the var 5 -> 6) never names the quest:
-// it stays in Lua (its BattlefieldQuest entry reads this quest's status there).
+// The Cloister of Frost battlefield's win (Battlefields/CloisterOfFrost/ClassReunion.cs, onEventFinishWin: the var
+// 5 -> 6) never names the quest: it is the battlefield's, not this quest's (its BattlefieldQuest entry reads this
+// quest's status).
 // Kept as the Lua has it: 413 begins on any option; no finish reads the status; Furakku-Norakku's and Gulmama's
 // scripts compare the status with the literal 1 (QUEST_ACCEPTED); a talk var other than 1 counts as not talked to;
 // the var 3, 4, 5, or 7 and up with both students talked to plays nothing of this quest at Koru-Moru (his other arms

@@ -1,0 +1,155 @@
+# Moon Reading (Windurst 9-2, mission.windurst.moon_reading) played through: a level 75 Windurstian Warrior at rank 9
+# with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before it completed.
+# Rakoh Buuma's 114, option 23: begun. _6q2 384 (status 1); the verses: Ro'Maeve's Qu'Hau Spring 4, the Temple of
+# Uggalepih's qm 68, the Chamber of Oracles zone-in from the Quicksand Caves 3 (a table: flags); _6q2 385 (status 2);
+# the Full Moon Fountain's MS_Entrance 32000, option 17 (index 1, area 1); the GM effects keep the char up; the four
+# phase 1 cards' allDeath plays 32004 (phase 2 spawned, Ajido-Marujido, the set-down); the last two dead: WON, 32001
+# opens in the kill step; its finish (the mission's, battlefieldWin 225 at status 2): status 3, the verses taken.
+# Kupipi 400 (importantOnce: her own 251 next); section 3's eighteen Heaven's Tower lines; _6q2 386 (4), 407: the set-
+# down in Windurst Walls, whose zone-in (the login) plays 443: completed (100000 gil, the flag, rank 10, Vestal
+# Chamberlain). Section 4: Janshura-Rashura 567 (once a zone), Mokyokyo 837, Tosuka-Porika 380, Rakoh Buuma 632; Zubaba
+# 387 (section 3).
+char zone=WindurstWoods pos=106,-5,-21 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+mission Windurst TheJesterWhodBeKing completed
+mission Windurst DollOfTheDead completed
+rank 9
+login
+trigger Rakoh_Buuma                     # no mission current: the guard's own mission list
+finish option=24                        # no mission's option (this mission takes 23): not begun
+trigger Rakoh_Buuma                     # the list again
+finish option=23                        # begun, YOU_ACCEPT_THE_MISSION
+warp 2,0,30 HeavensTower
+trigger Kupipi+1                        # status 0: nothing from the mission
+finish-if-event
+trigger Zubaba                          # status 0: nothing from the mission
+finish-if-event
+trigger _6q2                            # status 0: 384
+finish                                  # status 1
+trigger _6q2                            # status 1, no verse: nothing from the mission
+finish-if-event
+warp 1.748,-27.402,67.751 Romaeve
+trigger QuHau_Spring                    # status 1, no verse: 4
+finish                                  # the Ancient Verse of Ro'Maeve
+trigger QuHau_Spring                    # held: nothing from the mission
+finish-if-event
+warp -239.4,-1,-16.9 TempleOfUggalepih
+trigger qm_windy_9_2                    # status 1, no verse: 68
+finish                                  # the Ancient Verse of Uggalepih
+trigger qm_windy_9_2                    # held: nothing from the mission
+finish-if-event
+warp -504,19,-419 QuicksandCaves
+warp -218.6,-1.9,23.0 ChamberOfOracles open  # from Quicksand Caves, status 1, no verse: 3
+finish                                  # the Ancient Verse of Altepa
+warp 2,0,30 HeavensTower
+trigger _6q2                            # status 1, the three verses: 385
+finish                                  # status 2
+warp -301.3,9.5,-260.0 FullMoonFountain
+trigger MS_Entrance                     # status 2: the 32000 menu
+update 32000 option=17                  # index 1, area 1: entered
+finish
+tick 2000                               # the first tick: phase 1 spawns
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill ACE_OF_CUPS
+kill ACE_OF_CUPS+1
+kill ACE_OF_CUPS+2
+kill ACE_OF_CUPS+3                      # phase 1 dead: allDeath: 32004
+finish                                  # 32004: phase 2 spawned, Ajido-Marujido, the set-down
+tick 2000
+kill ACE_OF_CUPS+4
+kill ACE_OF_CUPS+5                      # phase 2 dead: WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish-if-event                         # 32001: the mission's finish: status 3
+tick 11000
+tick 10000
+warp 2,0,30 HeavensTower
+trigger Kupipi+1                        # status 3: 400
+finish
+trigger Kupipi+1                        # again: the once is spent
+finish-if-event
+trigger Aeshushu                        # section 3: 391
+finish-if-event
+trigger Boycoco                         # section 3: 388
+finish-if-event
+trigger Churara                         # section 3: 390
+finish-if-event
+trigger Dattata                         # section 3: 392
+finish-if-event
+trigger Foo_Beibo                       # section 3: 403
+finish-if-event
+trigger Heruru                          # section 3: 393
+finish-if-event
+trigger Ikucheechee                     # section 3: 394
+finish-if-event
+trigger Kinono                          # section 3: 398
+finish-if-event
+trigger Kiwawa                          # section 3: 389
+finish-if-event
+trigger Nayutata                        # section 3: 395
+finish-if-event
+trigger Nebibi                          # section 3: 399
+finish-if-event
+trigger Rhy_Epocan                      # section 3: 405
+finish-if-event
+trigger Shaz_Norem                      # section 3: 401
+finish-if-event
+trigger Tsuryarya                       # section 3: 396
+finish-if-event
+trigger Ufu_Koromoa                     # section 3: 402
+finish-if-event
+trigger Utsuitsui                       # section 3: 397
+finish-if-event
+trigger Vahn_Paineesha                  # section 3: 404
+finish-if-event
+trigger Zubaba                          # section 3: 387
+finish-if-event
+trigger _6q2                            # status 3: 386
+finish                                  # status 4
+trigger _6q2                            # status 4, a free slot: 407
+finish                                  # the set-down in Windurst Walls
+tick 400
+login open                              # status 4: the zone-in 443
+finish                                  # completed: 100000 gil, the flag, rank 10, the title
+warp -227,-8,186 PortWindurst
+trigger Janshura-Rashura                # section 4: 567
+finish
+trigger Janshura-Rashura                # once a zone: spent
+finish-if-event
+warp -55,-8,229 WindurstWaters
+trigger Mokyokyo                        # 837
+finish
+trigger Tosuka-Porika                   # 380
+finish
+warp 106,-5,-21 WindurstWoods
+trigger Rakoh_Buuma                     # 632
+finish
+warp 2,0,30 HeavensTower
+trigger Zubaba                          # completed: section 3: 387
+finish-if-event

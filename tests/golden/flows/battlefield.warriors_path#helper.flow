@@ -1,0 +1,49 @@
+# The Warrior's Path (battlefield.warriors_path, Sealion's Den): helpers. Main (7-5 Status 1) registers area 1 (17) and
+# invites bob (7-5 at Status 3), cat (Garden of Antiquity current: 7-5 completed) and dan (Calm Before the Storm
+# current). bob and cat get the menu and enter; dan gets IRON_GATE_LOCKED (7110, the zone's default). Tenzen killed (the
+# win at 15%), with his mob script's texts: his engage line (7937), then at 15% his 7939 and the three Tarus' 7946, 7951
+# and 7957, one round a tick: 32001 to the three (bob and cat with the skip flag 1); each finish gives the battlefield's
+# two titles; 7-5's own 32001 finish moves only main's Status (1 to 2).
+lists SealionsDen/_0w0/onTrigger SealionsDen/onEventUpdate/32000 SealionsDen/onEventFinish/32000 SealionsDen/onEventFinish/32001
+char zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+char bob zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+char cat zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+char dan zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+mission Cop TheWarriorsPath current
+charvar Mission[6][748]Status 1
+bob: mission Cop TheWarriorsPath current
+bob: charvar Mission[6][748]Status 3
+cat: mission Cop GardenOfAntiquity current
+dan: mission Cop CalmBeforeTheStorm current
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trigger _0w0
+update 32000 option=17
+finish
+bob: trigger _0w0
+bob: update 32000 option=17
+bob: finish
+cat: trigger _0w0
+cat: update 32000 option=17
+cat: finish
+dan: trigger _0w0
+dan: update 32000 option=17
+dan: finish-if-event
+tick 2000
+kill TENZEN
+tick 1000
+tick 1000
+tick 1000
+finish
+bob: finish
+cat: finish
+dan: finish-if-event
+tick 11000

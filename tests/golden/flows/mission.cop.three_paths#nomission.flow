@@ -1,0 +1,12 @@
+# Three Paths (mission.cop.three_paths#nomission). A level 75 Warrior with no CoP mission current; a GM sets Tenzen 12
+# (the path field only; no mission is current). Metalworks, Cid: event 500 (Metalworks DefaultActions); Tavnazian
+# Safehold, Despachiaire: event 106 (Tavnazian Safehold DefaultActions).
+lists Metalworks/Cid/onTrigger Metalworks/onEventFinish/851 Metalworks/onEventFinish/853 Metalworks/onEventFinish/854 TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/118
+char zone=Metalworks pos=-12,-12,1 job=WAR lvl=75 nation=1
+login
+missionstatus Cop 12 pos=3              # a GM
+trigger Cid
+finish-if-event
+warp 108,-40,-83 TavnazianSafehold
+trigger Despachiaire
+finish-if-event

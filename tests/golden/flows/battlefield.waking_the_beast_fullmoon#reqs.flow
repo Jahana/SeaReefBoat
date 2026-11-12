@@ -1,0 +1,29 @@
+# Waking the Beast (battlefield.waking_the_beast_fullmoon, FullMoonFountain): the requirement arms of MS_Entrance, three level 99
+# Warriors registering. main: accepted, the six eyes, no Rainbow Resonator: entryRequirement fails. bob: completed, no key
+# items: a registrant needs the key items (a completed char is let in only as a helper): fails. cat: the seven key items, the
+# quest never accepted: entryRequirement passes, BattlefieldQuest's quest check fails. Each: message 7355, no menu.
+lists FullMoonFountain/MS_Entrance/onTrigger
+char zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+char bob zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+char cat zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+quest OtherAreas.WakingTheBeast accepted
+keyitem EyeOfFlames
+keyitem EyeOfFrost
+keyitem EyeOfGales
+keyitem EyeOfStorms
+keyitem EyeOfTides
+keyitem EyeOfTremors
+bob: quest OtherAreas.WakingTheBeast completed
+cat: keyitem EyeOfFlames
+cat: keyitem EyeOfFrost
+cat: keyitem EyeOfGales
+cat: keyitem EyeOfStorms
+cat: keyitem EyeOfTides
+cat: keyitem EyeOfTremors
+cat: keyitem RainbowResonator
+login
+trigger MS_Entrance                     # no resonator: refused
+bob: login
+bob: trigger MS_Entrance                # completed, a registrant: refused
+cat: login
+cat: trigger MS_Entrance                # the quest not accepted: refused

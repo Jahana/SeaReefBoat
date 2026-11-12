@@ -1,0 +1,29 @@
+# Carbuncle Debacle (battlefield.carbuncle_debacle_cloister_of_storms, CloisterOfStorms): the requirement arms of the
+# registrant (BattlefieldQuest's check: only the registrant needs the quest state and the item). Main, a level 75
+# Warrior with the quest accepted and the pendulum but CarbuncleDebacleProgress 2: the trade to LP_Entrance: no options.
+# bob, CarbuncleDebacleProgress 3 and the pendulum, the quest only available: no options. cat, accepted and
+# CarbuncleDebacleProgress 3 but no pendulum (no trade): no options. dan, the quest completed, CarbuncleDebacleProgress
+# 3 and the pendulum: a registrant needs accepted: no options.
+lists CloisterOfStorms/LP_Entrance/onTrade CloisterOfStorms/LP_Entrance/onTrigger
+char zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+char bob zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+char cat zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+char dan zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 2
+item LightningPendulum
+bob: charvar CarbuncleDebacleProgress 3
+bob: item LightningPendulum
+cat: quest Windurst.CarbuncleDebacle accepted
+cat: charvar CarbuncleDebacleProgress 3
+dan: quest Windurst.CarbuncleDebacle completed
+dan: charvar CarbuncleDebacleProgress 3
+dan: item LightningPendulum
+login
+trade LP_Entrance LightningPendulum x1      # CarbuncleDebacleProgress 2: no options
+bob: login
+bob: trade LP_Entrance LightningPendulum x1 # available: no options
+cat: login
+cat: trigger LP_Entrance               # no pendulum traded: no options
+dan: login
+dan: trade LP_Entrance LightningPendulum x1 # completed: no options

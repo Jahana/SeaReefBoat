@@ -1,0 +1,26 @@
+# Waking Dreams (battlefield.waking_dreams#areas, The Shrouded Maw): Area 2 (option 34): kill DIABOLOS_WD+7: event
+# 32001 (2,1800,0,6,10,2). The first finish gives the Whisper of Dreams (message 6398) and the title (the battlefield's
+# onEventFinishWin, WakingDreams.cs). Then the vial again and area 3 (option 35, update 2,2,102): kill DIABOLOS_WD+14:
+# event 32001 (3,6,1,6,10,2). The second finish only takes the vial (the Whisper and the title are already held).
+lists TheShroudedMaw/MC_Entrance/onTrigger TheShroudedMaw/onEventUpdate/32000 TheShroudedMaw/onEventFinish/32000 TheShroudedMaw/onEventFinish/32001
+char zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+quest Windurst.WakingDreams accepted
+keyitem VialOfDreamIncense
+login
+trigger MC_Entrance
+update 32000 option=34
+finish
+tick 2000
+kill DIABOLOS_WD+7
+finish
+tick 11000
+tick 10000
+keyitem VialOfDreamIncense
+trigger MC_Entrance
+update 32000 option=35
+finish
+tick 2000
+kill DIABOLOS_WD+14
+finish
+tick 11000
+tick 10000

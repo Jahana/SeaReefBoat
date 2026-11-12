@@ -1,0 +1,44 @@
+# Carbuncle Debacle (battlefield.carbuncle_debacle_cloister_of_storms, CloisterOfStorms): the helpers. Four level 75
+# Warriors by LP_Entrance. main (the quest accepted, CarbuncleDebacleProgress 3, the pendulum) registers and leads bob
+# (nothing but CarbuncleDebacleProgress 9, an out-of-range value) and dan (the quest accepted, CarbuncleDebacleProgress
+# 3, no pendulum): anyone but the registrant passes the handler's isValidEntry (the entry NPC) whatever it holds. cat
+# (accepted, CarbuncleDebacleProgress 3, no pendulum) is not in the party and has no clearance, so he is judged as a
+# registrant and fails. bob and dan, holding the clearance: the menu, entered. Area 1's group killed: won; 32001 for
+# each. Each finish, onEventFinishWin: main 3 -> 4; bob (var 9, not 3): unchanged; dan (the var 3, no pendulum): 3 -> 4.
+lists CloisterOfStorms/LP_Entrance/onTrade CloisterOfStorms/LP_Entrance/onTrigger CloisterOfStorms/onEventUpdate/32000 CloisterOfStorms/onEventFinish/32000 CloisterOfStorms/onEventFinish/32001
+char zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+char bob zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+char cat zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+char dan zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 3
+item LightningPendulum
+bob: charvar CarbuncleDebacleProgress 9
+cat: quest Windurst.CarbuncleDebacle accepted
+cat: charvar CarbuncleDebacleProgress 3
+dan: quest Windurst.CarbuncleDebacle accepted
+dan: charvar CarbuncleDebacleProgress 3
+login
+bob: login
+cat: login
+dan: login
+invite bob
+bob: accept
+invite dan
+dan: accept
+trade LP_Entrance LightningPendulum x1      # the menu 32000
+update 32000 option=17                  # registered in area 1; bob and dan registered with it
+finish                                  # main entered
+bob: trigger LP_Entrance               # no registrant, nothing held: the menu
+bob: update 32000 option=17             # entered
+bob: finish
+cat: trigger LP_Entrance               # accepted, no pendulum, not in the party: no options
+dan: trigger LP_Entrance               # no registrant, no pendulum: the menu
+dan: update 32000 option=17             # entered
+dan: finish
+kill LIGHTNING_GREMLIN
+kill LIGHTNING_GREMLIN+1
+finish                                  # main
+bob: finish                             # bob: the var is not 3
+dan: finish                             # dan: the var 3
+tick 11000                              # the won arena's cleanup

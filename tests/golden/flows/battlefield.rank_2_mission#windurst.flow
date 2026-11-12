@@ -1,0 +1,42 @@
+# Rank 2 Mission (battlefield.rank_2_mission) with a Windurst char. A level 75 Warrior of Windurst with The Three
+# Kingdoms completed and no mission current, plus bob (Windurst) and sando (San d'Oria, Journey to Windurst (the
+# second) current at status 8 and the Dark Key). Alone, BC_Entrance plays NO_BATTLEFIELD_ENTRY (7251). sando invites
+# the main char and bob; sando registers area 3 (option 3); the main char, whose nation's rank 2 is completed, enters
+# it as a non-registrant; bob triggers and is refused (the entry already closed). The main char's Burning_Circle+2
+# plays 32003; its finish with option 4 leaves. sando's pair of arena 3 killed: the timer, WON, 32001; sando finished:
+# status 9 and the Kindred Crest.
+lists BalgasDais/BC_Entrance/onTrigger BalgasDais/BC_Entrance/onTrade BalgasDais/onEventUpdate/32000 BalgasDais/onEventFinish/32000 BalgasDais/Burning_Circle/onTrigger BalgasDais/onEventFinish/32003 BalgasDais/onEventFinish/32001
+char zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=2
+char bob zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=2
+char sando zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=0
+mission Windurst TheThreeKingdoms completed
+sando: mission Sandoria JourneyToWindurst2 current
+sando: keyitem DarkKey
+login
+trigger BC_Entrance
+bob: login
+sando: login
+sando: missionstatus Sandoria 8
+sando: invite main
+accept
+sando: invite bob
+bob: accept
+sando: trigger BC_Entrance
+sando: update 32000 option=3
+sando: finish
+trigger BC_Entrance
+update 32000 option=3
+finish
+bob: trigger BC_Entrance
+trigger Burning_Circle+2
+finish option=4
+tick 2000
+sando: kill #17375237
+sando: kill #17375238
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+sando: finish

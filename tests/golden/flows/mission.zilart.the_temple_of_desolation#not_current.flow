@@ -1,0 +1,22 @@
+# The Temple of Desolation not current (The Gate of the Gods current): Aldo and Gilgamesh say nothing, _700 is Norg's
+# DefaultActions DOOR_IS_LOCKED, Kamui its DefaultActions 61, and _6z0 the NPC's own 1, whose finish does nothing.
+lists LowerJeuno/Aldo/onTrigger Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Norg/Kamui/onTrigger HallOfTheGods/_6z0/onTrigger HallOfTheGods/onEventFinish/1
+char zone=LowerJeuno pos=23,3,-58 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheGateOfTheGods current
+login
+trigger Aldo                            # nothing
+finish-if-event
+warp 98,-7,-12 Norg
+trigger _700                            # DOOR_IS_LOCKED
+finish-if-event
+trigger Gilgamesh                       # nothing
+finish-if-event
+trigger Kamui                           # DefaultActions' 61
+finish-if-event
+warp 0,-14,46 HallOfTheGods
+trigger _6z0                            # the NPC's own 1
+finish                                  # nothing

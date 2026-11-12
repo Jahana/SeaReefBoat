@@ -1,0 +1,27 @@
+# The Mithra and the Crystal: a party's kill. Main spawns the Ancient Vessel and kills it with bob in the party: both
+# chars' onMobDeath run (main the killer), so bob's nmDefeated is set too and bob's qm7 plays 13, whose option 1 gives
+# bob the Scrap of Papyrus.
+lists LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/111 Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Rabao/Maryoh_Comyujah/onTrigger Rabao/onEventFinish/81 Rabao/onEventFinish/83 QuicksandCaves/qm7/onTrigger QuicksandCaves/onEventFinish/12 QuicksandCaves/onEventFinish/13 QuicksandCaves/Ancient_Vessel/onMobDeath HallOfTheGods/_6z0/onTrigger HallOfTheGods/Shimmering_Circle/onTrigger HallOfTheGods/onEventFinish/3
+char zone=QuicksandCaves pos=-504,19,-419 job=WAR lvl=75 nation=0
+char bob zone=QuicksandCaves pos=-504,19,-419 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheMithraAndTheCrystal current
+bob: mission Asa BurgeoningDread current
+bob: mission Acp ACrystallineProphecyFin current
+bob: mission Rov ARhapsodyForTheAges current
+bob: mission Soa Abomination current
+bob: mission Zilart TheMithraAndTheCrystal current
+login
+bob: login
+invite bob
+bob: accept
+missionstatus Zilart 1                  # a GM
+bob: missionstatus Zilart 1             # a GM
+trigger qm7 at=1                        # 12
+finish option=1                         # SOMETHING_ATTACKING_YOU
+kill ANCIENT_VESSEL                     # main the killer; bob's handler too
+bob: trigger qm7 at=1                   # 13
+bob: finish option=1                    # bob's papyrus

@@ -1,0 +1,40 @@
+# The fight of the battlefield saintly_invitation (Balga's Dais, index 3, Windurst 6-2, status 1): a level 75
+# Windurstian with Saintly Invitation current at status 1. BC_Entrance 32000 (the menu, [0,0,0,8]); update option 0:
+# ignored; option 49: area 1 entered (7610, 7543, 7546). The group of four spawns on the first tick; all killed:
+# allDeath, WON, 32001; its finish runs the battlefield's and the mission's (the certificate, status 2). The leave
+# ticks after.
+lists BalgasDais/BC_Entrance/onTrigger BalgasDais/BC_Entrance/onTrade BalgasDais/onEventUpdate/32000 BalgasDais/onEventFinish/32000 BalgasDais/onEventFinish/32001 BalgasDais/onEventFinish/32002 BalgasDais/onEventFinish/32003 BalgasDais/Burning_Circle/onTrigger
+char zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation current
+rank 6
+login
+missionstatus Windurst 1
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=0                   # ignored
+update 32000 option=49                  # index 3, area 1: entered
+finish
+tick 2000                               # the group spawns
+kill BUU_XOLO_THE_BLOODFACED
+kill BUU_XOLO_THE_BLOODFACED+1
+kill BUU_XOLO_THE_BLOODFACED+2
+kill BUU_XOLO_THE_BLOODFACED+3          # allDeath: WON, 32001
+finish                                  # 32001: the mission's finish
+tick 11000
+tick 10000

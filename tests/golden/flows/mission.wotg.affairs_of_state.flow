@@ -1,0 +1,18 @@
+# Affairs of State (WotG 12). Velda-Galda in Windurst Waters [S] at status 0: 178; finished: status 1 and the
+# WindurstFirst var. At status 1: 180 (the reminder). Radford in Bastok Markets [S] at status 1: 176; finished: the
+# mission completes (Count Borel's Letter, Borne by the Wind current).
+lists WindurstWatersS/Velda-Galda/onTrigger WindurstWatersS/onEventFinish/178 WindurstWatersS/onEventFinish/179 BastokMarketsS/Radford/onTrigger BastokMarketsS/onEventFinish/175 BastokMarketsS/onEventFinish/176
+char zone=WindurstWatersS pos=138.631,-2.112,61.658 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg AffairsOfState current
+login
+trigger Velda-Galda                     # status 0: 178
+finish                                  # status 1; WindurstFirst
+trigger Velda-Galda                     # status 1, Windurst first: 180
+finish-if-event
+warp -205.303,-8,26.874 BastokMarketsS
+trigger Radford                         # status 1: 176
+finish                                  # completed

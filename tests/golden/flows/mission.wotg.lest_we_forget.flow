@@ -1,0 +1,26 @@
+# Lest We Forget (WotG 54) at Status 1 (A Token of Troth's finish sets it), in Grauberg [S]. afterZoneIn at Status 1
+# sets nothing. The Veridical Conflux plays 39 [89, 23, 1756]; the update with option 131074 (selections 1 and 1) sends
+# 05C [404161282, 59] ((3 << 27) + (23 << 16) + 770, (0 << 11) + 59); the finish with that option adds the Moonshade
+# Earring (item 11697: the trace's row has an empty extra, since the positional addItem takes no augments), says
+# ITEM_OBTAINED (6395) and clears Status. After a rezone, the earring held, afterZoneIn sets nothing: the qm_reset
+# answers with Grauberg [S]'s DefaultActions AIR_WARPED_AND_DISTORTED (8413), and the Veridical Conflux at Status 0 with
+# MYSTERIOUS_COLUMN_ROTATES (8387).
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/qm_reset/onTrigger GraubergS/afterZoneIn/1 GraubergS/onEventUpdate/39 GraubergS/onEventFinish/39 GraubergS/onEventFinish/46
+char zone=GraubergS pos=-140.28,-6.749,585.24 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg LestWeForget current
+charvar Mission[5][53]Status 1
+login
+tick 5000                                  # afterZoneIn: Status 1, nothing
+trigger Veridical_Conflux                  # 39
+update 39 option=131074                    # selections 1 and 1: the augment parameters
+finish option=131074                       # the earring: ACC+4, Regain +10; Status 0
+rezone
+tick 5000                                  # the earring held: nothing
+trigger qm_reset                           # Option 0: nothing
+finish-if-event
+trigger Veridical_Conflux                  # Status 0: nothing
+finish-if-event

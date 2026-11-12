@@ -1,0 +1,32 @@
+# Stirrings of War (ToAU 38). The mission is live only with the must-zone var clear and the Timer passed. The must-zone
+# var set (Timer 0): Naja's trigger and the area 5 play nothing; after a rezone, the Timer in the future (var clear):
+# nothing; the Timer 0: Naja plays 3134, the area 5 plays 3136 (progress); finished: completed (the Allied Council
+# Summons).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/5 AhtUrhganWhitegate/onEventFinish/3136
+char zone=AhtUrhganWhitegate pos=80,-6,-140 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau StirringsOfWar current
+login
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][37]mustZone 1
+trigger Naja_Salaheem                   # must zone alone: nothing
+walk 80,-6,-130                         # nothing
+walk 80,-6,-140
+rezone
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][37]Timer 999999999
+trigger Naja_Salaheem                   # the Timer alone: nothing
+walk 80,-6,-130                         # nothing
+walk 80,-6,-140
+charvar Mission[4][37]Timer 0
+trigger Naja_Salaheem                   # 3134
+finish-if-event
+walk 80,-6,-130                         # 3136
+finish                                  # completed

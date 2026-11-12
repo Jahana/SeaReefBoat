@@ -1,0 +1,16 @@
+# Sheltering Doubt (CoP 4-1) played through: 107 at the zone-in (Status 0), Despachiaire 108 (Status 1), Justinius
+# 109 (Status 2), Justinius at Status 3 (an earlier CoP mission's handler answers first, so the 266 arm is only in
+# the fake checks), then the Dilapidated Gate's cutscene 7 completes the mission.
+lists TavnazianSafehold/onZoneIn/1 TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/onEventFinish/107 TavnazianSafehold/onEventFinish/108 TavnazianSafehold/onEventFinish/109 MisareauxCoast/_0p0/onTrigger MisareauxCoast/onEventFinish/7
+char zone=TavnazianSafehold pos=78.7,-34,68 job=WAR lvl=75 nation=0
+mission Cop ShelteringDoubt current
+login                                   # Status 0: 107, finished: Status 1
+trigger Despachiaire                    # Status 1: 108
+finish                                  # Status 2
+trigger Justinius                       # Status 2: 109
+finish                                  # Status 3
+trigger Justinius                       # Status 3
+finish-if-event
+warp 260,9,-435 MisareauxCoast
+trigger _0p0                            # Status 3: 7
+finish                                  # complete

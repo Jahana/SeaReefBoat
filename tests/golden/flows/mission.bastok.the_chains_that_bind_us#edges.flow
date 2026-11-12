@@ -1,0 +1,77 @@
+# The Chains That Bind Us (Bastok 8-1, mission.bastok.the_chains_that_bind_us), the arms the play-through skips: 767
+# declined (option 1) twice; status 3: Iron Eater and _6ld 702; status 2: their own 604 and qm4's own text; status 0:
+# nothing from the mission at qm6 (DefaultActions' ANCIENT_LETTERS_UNREAD). Then each soldier alone (a GM spawn; the
+# others never spawned, so not spawned counts as gone): Centurio at status 0 sets nothing; at status 1 each of
+# Centurio, Triarius and Princeps sets status 2 (while one is up, qm6 gives only DefaultActions'
+# ANCIENT_LETTERS_UNREAD). Two 30 s ticks let a corpse go before the next spawn.
+char zone=Metalworks pos=92,-19.5,4 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+rank 8
+mission Bastok TheChainsThatBindUs current
+login
+trigger Iron_Eater                      # status 0: 767
+finish option=1                         # declined: status stays 0
+trigger Iron_Eater                      # status 0: 767 again
+finish option=1
+missionstatus Bastok 3
+trigger Iron_Eater                      # status 3: 702
+finish
+trigger _6ld                            # status 3: 702
+finish
+missionstatus Bastok 2
+trigger Iron_Eater                      # status 2: nothing from the mission
+finish-if-event
+trigger _6ld                            # status 2: nothing from the mission
+finish-if-event
+warp -469,0,618 QuicksandCaves
+trigger qm4                             # status 2: nothing from the mission
+finish-if-event
+missionstatus Bastok 0
+trigger qm6                             # status 0: nothing from the mission (DefaultActions' ANCIENT_LETTERS_UNREAD)
+finish-if-event
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+spawn CENTURIO_IV_VII                   # a GM: Centurio alone
+tick 2000
+kill CENTURIO_IV_VII                    # status 0: nothing
+tick 30000
+tick 30000
+missionstatus Bastok 1
+spawn CENTURIO_IV_VII                   # a GM: Centurio alone
+trigger qm6                             # status 1, Centurio up: DefaultActions' ANCIENT_LETTERS_UNREAD
+finish-if-event
+kill CENTURIO_IV_VII                    # the other two never spawned: status 2
+tick 30000
+tick 30000
+missionstatus Bastok 1
+spawn TRIARIUS_IV_XIV                   # a GM: Triarius alone
+trigger qm6                             # status 1, Triarius up: DefaultActions' ANCIENT_LETTERS_UNREAD
+finish-if-event
+kill TRIARIUS_IV_XIV                    # Centurio dead, Princeps never spawned: status 2
+tick 30000
+tick 30000
+missionstatus Bastok 1
+spawn PRINCEPS_IV_XLV                   # a GM: Princeps alone
+trigger qm6                             # status 1, Princeps up: DefaultActions' ANCIENT_LETTERS_UNREAD
+finish-if-event
+kill PRINCEPS_IV_XLV                    # the other two dead: status 2

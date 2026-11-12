@@ -1,0 +1,18 @@
+# When Wills Collide (WotG 46) edges in the Walk of Echoes: the Ornate Door (_521) plays 1; the update with option 4
+# sends no update packet; the finish sets Status 1. Status 2 (a GM): the rezone plays the zone-in 2; the update with
+# option 4 sends no update packet; the finish completes the mission (Whispers of Dawn current).
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/Veridical_Conflux/onTrade GraubergS/onEventFinish/29 GraubergS/onEventFinish/42 WalkOfEchoes/_521/onTrigger WalkOfEchoes/onZoneIn/1 WalkOfEchoes/onEventUpdate/1 WalkOfEchoes/onEventUpdate/2 WalkOfEchoes/onEventFinish/1 WalkOfEchoes/onEventFinish/2
+char zone=WalkOfEchoes pos=-700.042,0.4,-441.301 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg WhenWillsCollide current
+login
+trigger _521                               # 1
+update 1 option=4                          # not 5: no update packet
+finish                                     # Status 1
+charvar Mission[5][45]Status 2
+rezone open                                # 2
+update 2 option=4                          # not 5: no update packet
+finish                                     # completed

@@ -1,0 +1,19 @@
+# Omens (battlefield.omens#exit, Navukgo Execution Chamber): The exit NPCs _1s1 (update 32003 option 1, finish 0), _1s2
+# (finish 0) and _1s3 (finish 4), then a warp out and the entry again.
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/_1s1/onTrigger NavukgoExecutionChamber/_1s2/onTrigger NavukgoExecutionChamber/_1s3/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventUpdate/32003 NavukgoExecutionChamber/onEventFinish/32003
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+quest AhtUrhgan.Omens accepted
+charvar Quest[6][22]Prog 0
+login
+trigger _1s0
+update 32000 option=33
+finish
+trigger _1s1
+update 32003 option=1
+finish option=0
+trigger _1s2
+finish option=0
+trigger _1s3
+finish option=4
+warp -598.5,8,-100 NavukgoExecutionChamber
+trigger _1s0

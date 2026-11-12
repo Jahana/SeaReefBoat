@@ -1,0 +1,52 @@
+# The Final Seal (Windurst 5-1): the arms the main flow does not take. _6q2 at 12 without the Burnt Seal and at 11 with
+# it: the zone's default VESTAL_CHAMBERS_LOCKED (310); Fei'Yin at 11: no zone-in event; two Qu'Bia Arena wins by a GM
+# (status 10 inside the event; battlefieldWin 0): the title only.
+lists WindurstWaters/Mokyokyo/onTrigger PortWindurst/Janshura-Rashura/onTrigger WindurstWoods/Rakoh_Buuma/onTrigger WindurstWalls/Zokima-Rokima/onTrigger HeavensTower/_6q2/onTrigger HeavensTower/onEventFinish/166 HeavensTower/onEventFinish/190 HeavensTower/onEventFinish/192 Feiyin/onZoneIn/1 Feiyin/onEventFinish/1 QubiaArena/BC_Entrance/onTrigger QubiaArena/Burning_Circle/onTrigger QubiaArena/onEventUpdate/32000 QubiaArena/onEventFinish/32000 QubiaArena/onEventFinish/32003 QubiaArena/onEventFinish/32001 QubiaArena/onEventFinish/32002
+char zone=HeavensTower pos=2,0.1,30 job=WAR lvl=75 nation=2
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+rank 5
+mission Windurst TheFinalSeal current
+keyitem NewFeiyinSeal
+login
+missionstatus Windurst 12
+trigger _6q2                            # status 12, no Burnt Seal: nothing from the mission
+finish-if-event
+keyitem BurntSeal
+missionstatus Windurst 11
+trigger _6q2                            # status 11, the Burnt Seal: nothing from the mission
+finish-if-event
+delkeyitem BurntSeal
+warp -51.0,-16.0,38.0 Feiyin            # status 11: no zone-in event
+warp -212.2,-24.6,20.1 QubiaArena
+missionstatus Windurst 11
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 512, 32001
+missionstatus Windurst 10               # a GM, inside the event
+finish                                  # 32001 at status 10: the title; the mission does nothing
+tick 11000
+tick 10000
+missionstatus Windurst 11
+warp -212.2,-24.6,20.1 QubiaArena
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 512, 32001
+localvar battlefieldWin 0               # a GM, inside the event
+finish                                  # 32001 with battlefieldWin 0: the title; the mission does nothing
+tick 11000
+tick 10000

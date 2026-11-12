@@ -1,0 +1,41 @@
+# When Wills Collide (WotG 46), the whole run. With the Bottled Punch Bug the Veridical Conflux plays the event 29 [89,
+# 6]; its finish with option 99 sets the char down at -700.042 0.4 -441.301 rot 192 in the Walk of Echoes (the next
+# tick). The login there at Status 0 plays no zone-in event, nor does the warp that gives the flow its zone. The Ornate
+# Door (_521) plays 1; the update with option 5 sends 05C [119, 0, 0, 8, 8, 21, 0, 1] (the face 0; nothing equipped:
+# head 0, body and hands 8, main 21, sub 0, the bare models); the finish sets Status 1. At Status 1 the door sends only
+# the release. A Bronze Cap, Harness, Mittens, Sword and Lauan Shield equipped; Status 2 (a GM, for the fight no
+# battlefield file holds): the rezone plays the zone-in 2; the update with option 5 sends 05C [182, 0, 15, 15, 15, 268,
+# 37]; the finish completes the mission (Whispers of Dawn current).
+uncovered: 1/-/onEventFinish:32001 -- no battlefield file holds When Wills Collide's fight (no scripts/battlefields/Walk_of_Echoes folder, no C# battlefield in WalkOfEchoes, no xi.battlefield.id constant), so nothing opens 32001 in the Walk of Echoes; the finish (Status 2 and the set-down) is pinned by the fake check c3 T8 wotg 46 in tests/XI.Verify.Quests/C3ToauT8.cs
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/Veridical_Conflux/onTrade GraubergS/onEventFinish/29 GraubergS/onEventFinish/42 WalkOfEchoes/_521/onTrigger WalkOfEchoes/onZoneIn/1 WalkOfEchoes/onEventUpdate/1 WalkOfEchoes/onEventUpdate/2 WalkOfEchoes/onEventFinish/1 WalkOfEchoes/onEventFinish/2
+char zone=GraubergS pos=-140.28,-6.749,585.24 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg WhenWillsCollide current
+keyitem BottledPunchBug
+item BronzeCap
+item BronzeHarness
+item BronzeMittens
+item BronzeSword
+item LauanShield
+login
+trigger Veridical_Conflux                  # the key item: 29
+finish option=99                           # set down in the Walk of Echoes
+tick 400
+login                                      # Status 0: no zone-in event
+warp -700.042,0.4,-441.301 WalkOfEchoes    # the parse zone (the harness reads no setPos)
+trigger _521                               # 1
+update 1 option=5                          # the face and the models (nothing equipped)
+finish                                     # Status 1
+trigger _521                               # Status 1: nothing
+equip BronzeCap Head
+equip BronzeHarness Body
+equip BronzeMittens Hands
+equip BronzeSword Main
+equip LauanShield Sub
+charvar Mission[5][45]Status 2             # a GM: the fight no battlefield file holds
+rezone open                                # 2
+update 2 option=5                          # the face and the models
+finish                                     # completed

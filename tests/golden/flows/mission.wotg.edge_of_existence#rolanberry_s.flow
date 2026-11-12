@@ -1,0 +1,13 @@
+# Edge of Existence (WotG 40) in Rolanberry Fields [S]: the Cavernous Maw plays 702 [1, 0, 0, 0, 0, 0, 3, 1]; its finish
+# completes the mission (Her Memories current), then xi.maws.goToMaw gets the zone's id where it wants a maw table and
+# raises "attempt to index local 'maw' (a number value)" (the step's expect-error): the char stays where it is.
+lists RolanberryFieldsS/Cavernous_Maw/onTrigger RolanberryFieldsS/onEventFinish/702
+char zone=RolanberryFieldsS pos=-198,8,360 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg EdgeOfExistence current
+login
+trigger Cavernous_Maw                      # 702
+finish expect-error "attempt to index local 'maw' (a number value)"

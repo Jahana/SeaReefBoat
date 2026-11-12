@@ -1,0 +1,37 @@
+# Ancient Flames Beckon, Spire of Dem (battlefield.ancient_flames_beckon_spire_of_dem, a Battlefield: index 0, 30
+# minutes, six players, entry NPC _0j0). A level 75 Warrior of San d'Oria with Below the Arks current (a GM): the menu
+# 32000 (index 0); the updates: option 0 ignored; 17 (index 1, not in the menu): REQS_NOT_MET; 1 (area 1): entered;
+# finished. The Progenerator of area 1 spawns at the first tick; killed: allDeath sets WON; the win: newPromy 1,
+# battlefieldWin 800, 32001 (the area, the clear time, the party size, the time inside, the zone, the index, repeatClear
+# 0, one light: arg8 1); finished: the mission's handler (the light of Dem, 1-2 complete, the teleport out). The grant:
+# no XP in the trace's lines of its own (grantXP 1500 with grantXPLockout). Out after the cleanup. Below the Arks again
+# with the light gone (GMs): entered again; the time prompts on the golden clock: TIME_LEFT 600, 300, 60, 30, 10; time
+# up: TIME_IN_THE_BATTLEFIELD_IS_UP, LOST, the forced cleanup: 32002; finished: leaveBattlefield(1).
+lists SpireOfDem/_0j0/onTrigger SpireOfDem/onEventUpdate/32000 SpireOfDem/onEventFinish/32000 SpireOfDem/onEventFinish/32001 SpireOfDem/onEventFinish/32002
+char zone=SpireOfDem pos=0,-3.8,240 job=WAR lvl=75 nation=0
+mission Cop BelowTheArks current        # a GM
+login
+trigger _0j0                            # the menu 32000 (index 0)
+update 32000 option=0                   # 0: ignored
+update 32000 option=17                  # index 1, not in the menu: REQS_NOT_MET
+update 32000 option=1                   # area 1: entered
+finish                                  # in the arena
+tick 2000                               # area 1's Progenerator spawns
+kill PROGENERATOR                       # allDeath: WON; the win: newPromy 1, 32001
+finish                                  # the light of Dem, 1-2 complete
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield
+delkeyitem LightOfDem                   # a GM
+warp 135,19,220 KonschtatHighlands
+warp 0,-3.8,240 SpireOfDem
+trigger _0j0                            # the menu 32000
+update 32000 option=1                   # entered again
+finish                                  # in the arena
+tick 1201000                            # 599 s left: TIME_LEFT 600
+tick 300000                             # 299 s left: 300
+tick 240000                             # 59 s left: 60
+tick 30000                              # 29 s left: 30
+tick 20000                              # 9 s left: 10
+tick 10000                              # time up: LOST, the forced cleanup: 32002
+finish                                  # leaveBattlefield(1)
+tick 10000                              # the clearance gone

@@ -1,0 +1,19 @@
+# Return to the Depths (battlefield.return_to_the_depths, Mine Shaft #2716): a level 75 char with the quest accepted
+# and Quest[1][78]Prog 9 triggers the entrance. Updates 0 (ignored), 4, 16 and 20 (REQS_NOT_MET), then 17 (area 1):
+# registered and entered. The Twilotak killed (its onMobDeath wins): the win, event 32001, its finish, the cleanup.
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/onEventUpdate/32000 MineShaft2716/onEventFinish/32000 MineShaft2716/onEventFinish/32001
+char zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75
+quest Bastok.ReturnToTheDepths accepted
+charvar Quest[1][78]Prog 9
+login
+trigger _0d0
+update 32000 option=0
+update 32000 option=4
+update 32000 option=16
+update 32000 option=20
+update 32000 option=17
+finish
+kill TWILOTAK
+finish
+tick 11000
+tick 10000

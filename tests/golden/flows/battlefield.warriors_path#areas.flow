@@ -1,0 +1,28 @@
+# The Warrior's Path (battlefield.warriors_path, Sealion's Den): areas 2 and 3. Main (7-5 Status 1) enters area 2 (18),
+# bob (Status 1) area 3 (19). Each fight is won with bfwin (a GM), not by killing Tenzen: in areas 2 and 3 Tenzen's own
+# script raises a Lua error when he falls to 15% HP, before its battlefield:win() (Tenzen.lua:250-259: its taruOffsets
+# hold area 1's Taru ids only; not recorded here). Each: 32001 (2, then 3); its finish: the battlefield's two titles,
+# and 7-5's own 32001 finish (battlefieldWin is this battlefield, Status 1): Status 2.
+lists SealionsDen/_0w0/onTrigger SealionsDen/onEventUpdate/32000 SealionsDen/onEventFinish/32000 SealionsDen/onEventFinish/32001
+char zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+char bob zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+mission Cop TheWarriorsPath current
+charvar Mission[6][748]Status 1
+bob: mission Cop TheWarriorsPath current
+bob: charvar Mission[6][748]Status 1
+login
+trigger _0w0
+update 32000 option=18
+finish
+tick 2000
+bfwin
+finish
+bob: login
+bob: trigger _0w0
+bob: update 32000 option=19
+bob: finish
+tick 2000
+bob: bfwin
+bob: finish
+tick 11000
+tick 10000

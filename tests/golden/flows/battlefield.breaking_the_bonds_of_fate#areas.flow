@@ -1,0 +1,58 @@
+# Breaking the Bonds of Fate (battlefield.breaking_the_bonds_of_fate#areas, Talacca Cove): four chars, each a level 75
+# Corsair at level cap 75, Breaking the Bonds of Fate accepted at Quest[6][41]Prog 1 (GMs), one Corsair's Testimony; one
+# player to a battlefield. main enters area 1 (49), bob area 2 (50), cat area 3 (51), each by the testimony:
+# TESTIMONY_WEARS (3 shown, 2 left). dan's trade with all three areas taken: NO_BATTLEFIELD_ENTRY 7376, no menu. bob's
+# QULTADA+1 brought to 1 HP: in the kill step QULTADA_LADY_DESTINY, QULTADA_GO_EASY, QULTADA_HEAT_UP, QULTADA_NOT_BAD
+# (his mob script) and 32001 (area 2); finished: the scroll, completed. cat's QULTADA+2: in the kill step
+# QULTADA_QUICK_START, QULTADA_GO_EASY, QULTADA_HEAT_UP, QULTADA_NOT_BAD and 32001 (area 3); at the next tick bob's
+# QULTADA+1 (area 2) QULTADA_CHIPS_ARE_DOWN (Qultada.lua:76, a timer's random text); finished: the scroll, completed.
+lists TalaccaCove/_1l0/onTrade TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/onEventFinish/32001
+char zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char bob zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char cat zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char dan zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+levelcap 75
+quest AhtUrhgan.AgainstAllOdds completed
+quest AhtUrhgan.BreakingTheBondsOfFate accepted
+charvar Quest[6][41]Prog 1
+item CorsairsTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.AgainstAllOdds completed
+bob: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+bob: charvar Quest[6][41]Prog 1
+bob: item CorsairsTestimony
+cat: levelcap 75
+cat: quest AhtUrhgan.AgainstAllOdds completed
+cat: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+cat: charvar Quest[6][41]Prog 1
+cat: item CorsairsTestimony
+dan: levelcap 75
+dan: quest AhtUrhgan.AgainstAllOdds completed
+dan: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+dan: charvar Quest[6][41]Prog 1
+dan: item CorsairsTestimony
+login
+bob: login
+cat: login
+dan: login
+trade _1l0 CorsairsTestimony x1
+update 32000 option=49
+finish
+bob: trade _1l0 CorsairsTestimony x1
+bob: update 32000 option=50
+bob: finish
+cat: trade _1l0 CorsairsTestimony x1
+cat: update 32000 option=51
+cat: finish
+dan: trade _1l0 CorsairsTestimony x1
+dan: finish-if-event
+bob: kill QULTADA+1
+tick 1000
+tick 1000
+bob: finish
+bob: finish-if-event
+cat: kill QULTADA+2
+tick 1000
+tick 1000
+cat: finish
+cat: finish-if-event

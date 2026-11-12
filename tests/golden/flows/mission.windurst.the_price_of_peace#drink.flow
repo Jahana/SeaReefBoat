@@ -1,0 +1,19 @@
+# The Price of Peace (Windurst 1-3): the Drink Offering first. A level 10 Warrior of Windurst with 1-3 current at status
+# 2 and both offerings (a GM). In Giddeus Ghoo Pakya plays cutscene 49, whose finish takes the Drink Offering (one of
+# two); a second finish with none left changes nothing; Laa Mozi plays 45, whose finish takes the Food Offering and sets
+# status 3.
+lists Giddeus/Laa_Mozi/onTrigger Giddeus/Ghoo_Pakya/onTrigger Giddeus/onEventFinish/45 Giddeus/onEventFinish/49
+char zone=Giddeus pos=-139,0,145 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+mission Windurst ThePriceOfPeace current
+login
+missionstatus Windurst 2                # a GM
+keyitem FoodOffering                    # a GM
+keyitem DrinkOffering                   # a GM
+trigger Ghoo_Pakya                      # cutscene 49
+finish                                  # the Drink Offering offered, one of two
+trigger Ghoo_Pakya                      # 49 again
+finish                                  # no Drink Offering left: nothing changes
+warp -22,0,146 Giddeus
+trigger Laa_Mozi                        # cutscene 45
+finish                                  # the Food Offering offered, both: status 3

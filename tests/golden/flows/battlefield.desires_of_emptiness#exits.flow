@@ -1,0 +1,29 @@
+# Desires of Emptiness's exits (battlefield.desires_of_emptiness#exits): the leave NPCs _0n1 to _0n3, one per arena. A
+# level 75 Warrior of San d'Oria with 5-2 current at Status 2 (a GM) enters arena 1, 2 and 3 in turn and leaves each by
+# its exit NPC: 32003, finished with 4: leaveBattlefield(1).
+lists SpireOfVahzl/_0n0/onTrigger SpireOfVahzl/onEventUpdate/32000 SpireOfVahzl/_0n1/onTrigger SpireOfVahzl/_0n2/onTrigger SpireOfVahzl/_0n3/onTrigger SpireOfVahzl/onEventFinish/32000 SpireOfVahzl/onEventFinish/32003
+char zone=SpireOfVahzl pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop DesiresOfEmptiness current
+charvar Mission[6][518]Status 2
+login
+trigger _0n0                            # the menu 32000
+update 32000 option=1                  # arena 1: entered
+finish                                  # in the arena
+trigger _0n1                           # arena 1's exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield
+warp 0,0,0 SpireOfVahzl
+trigger _0n0                            # the menu 32000
+update 32000 option=2                  # arena 2: entered
+finish                                  # in the arena
+trigger _0n2                           # arena 2's exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield
+warp 0,0,0 SpireOfVahzl
+trigger _0n0                            # the menu 32000
+update 32000 option=3                  # arena 3: entered
+finish                                  # in the arena
+trigger _0n3                           # arena 3's exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield
+warp 0,0,0 SpireOfVahzl

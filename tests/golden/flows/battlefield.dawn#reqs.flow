@@ -1,0 +1,22 @@
+# Dawn (battlefield.dawn, Empyreal Paradox): the registrant's requirements (8-4 current, Mission[6][840]Status 1).
+# Each gets a lone release (no menu): main (8-4 at Status 4), bob (The Last Verse current with Status 1) and cat
+# (When Angels Fall current with Status 1).
+lists EmpyrealParadox/TR_Entrance/onTrigger
+char zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+char bob zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+char cat zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+mission Cop Dawn current
+charvar Mission[6][840]Status 4
+bob: mission Cop TheLastVerse current
+bob: charvar Mission[6][840]Status 1
+cat: mission Cop WhenAngelsFall current
+cat: charvar Mission[6][840]Status 1
+login
+trigger TR_Entrance
+finish-if-event
+bob: login
+bob: trigger TR_Entrance
+bob: finish-if-event
+cat: login
+cat: trigger TR_Entrance
+cat: finish-if-event

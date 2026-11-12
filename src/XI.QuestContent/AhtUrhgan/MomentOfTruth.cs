@@ -2,7 +2,7 @@
 // rework B3b Aht Urhgan, draft). Aht Urhgan Whitegate: Mishhar !pos -12 -6 29 (no script; default event 590), trigger
 // area 5 (64 -7 -137 .. 95 -5 -123, the Shaharat Teahouse; the zone's own switch has no case for it). Mamook: qm7 !pos
 // 216.9 -26.1 -94.6 (no script; default NOTHING_OUT_OF_ORDINARY). Jade Sepulcher: the Ornamental Door _1v0 (no script;
-// default messageSpecial -1), the battlefield Moment of Truth (scripts/battlefields/Jade_Sepulcher/moment_of_truth.lua:
+// default messageSpecial -1), the battlefield Moment of Truth (Battlefields/JadeSepulcher/MomentOfTruth.cs:
 // index 3, entry _1v0 by talk, no item, up to 6 chars, requiredVar Quest[6][30]Prog 4; area 1's six mobs are
 // SHADOWHAND_KAJEEL_JA + 0 .. + 5, all to die). Available with Give Peace a Chance completed: Mishhar 800, whose finish
 // begins it. Accepted: Mishhar by Prog: 0 801 (an Event), 1 803 (Prog 2), 2 588 (an Event), 3 and 4 804 (an Event), 5

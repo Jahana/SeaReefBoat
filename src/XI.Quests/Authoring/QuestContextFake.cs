@@ -219,6 +219,9 @@ namespace XI.Quests.Authoring
         public virtual void AddTitle(int title) => Record("Player", "AddTitle", title);
         // recorded as Player.SetTitle(<title>)
         public virtual void SetTitle(int title) => Record("Player", "SetTitle", title);
+        // recorded as Player.InstanceOnEventFinish(<csid>, <option>)
+        public virtual void InstanceOnEventFinish(int csid, int option) =>
+            Record("Player", "InstanceOnEventFinish", csid, option);
         public int FreeSlots { get; set; } = 30;
         public virtual int FreeSlotCount => FreeSlots;
         public HashSet<int> Items { get; } = new HashSet<int>();
@@ -439,6 +442,17 @@ namespace XI.Quests.Authoring
         // xi.equipment.vigilWeaponRequiredWsPoints(player): the global's 250 unless a test sets it (an era override)
         public int VigilWsPoints { get; set; } = 250;
         public virtual int VigilWeaponRequiredWsPoints => VigilWsPoints;
+        // the gates a test opens (xi.soa.helpers.imprimaturGate, xi.wotg.helpers.meetsMission<n>Reqs)
+        public bool SoaGateOpen { get; set; }
+        public HashSet<int> WotgReqsMet { get; } = new HashSet<int>();
+        public virtual bool SoaImprimaturGate(int gateAmount) => SoaGateOpen;
+        public virtual bool WotgMeetsMissionReqs(int mission) => WotgReqsMet.Contains(mission);
+        // whitegateShared.doRoyalPalaceArmorCheck's answer (a test sets it)
+        public bool RoyalPalaceArmorOk { get; set; }
+        public virtual bool RoyalPalaceArmorCheck() => RoyalPalaceArmorOk;
+        // the missions xi.mission.getMissionRankPoints answers true for (a test sets it)
+        public HashSet<int> RankPointsMet { get; } = new HashSet<int>();
+        public virtual bool MissionRankPoints(int mission) => RankPointsMet.Contains(mission);
         // zones[zone].npc[key]: the IDs.lua npc keys a test sets; an unknown key throws, as the Lua's nil arithmetic does
         public Dictionary<string, int> NpcIds { get; } = new Dictionary<string, int>();
         public virtual int NpcIdOf(string npcKey) =>
@@ -493,6 +507,9 @@ namespace XI.Quests.Authoring
         // player:inMogHouse()
         public bool InAMogHouse { get; set; }
         public virtual bool InMogHouse => InAMogHouse || InMogHouseHome;
+        // player:isEngaged()
+        public bool Engaged { get; set; }
+        public virtual bool IsEngaged => Engaged;
         // xi.monstrosity.hasUnlockedSpecies(player, species): the species held
         public HashSet<int> UnlockedSpecies { get; } = new HashSet<int>();
         public virtual bool MonstrosityHasUnlockedSpecies(int species) => UnlockedSpecies.Contains(species);
@@ -533,6 +550,42 @@ namespace XI.Quests.Authoring
         // recorded as Player.AddLearnedWeaponskill(<wsUnlock>) / Player.TeleportTo(<destination>)
         public virtual void AddLearnedWeaponskill(int wsUnlock) => Record("Player", "AddLearnedWeaponskill", wsUnlock);
         public virtual void TeleportTo(int destination) => Record("Player", "TeleportTo", destination);
+        public virtual void GotoRandomMaw() => Record("Player", "GotoRandomMaw");
+        public virtual void AddMaw() => Record("Player", "AddMaw");
+        // recorded as Player.GoToMaw(<maw>); MawThrows makes it throw as the Lua global does with a number
+        public bool MawThrows { get; set; }
+        public virtual void GoToMaw(int maw)
+        {
+            Record("Player", "GoToMaw", maw);
+            if (MawThrows) throw new System.InvalidOperationException("attempt to index local 'maw' (a number value)");
+        }
+        // recorded as Player.GoToPastMaw(<zone>); a zone with no past maw throws as the Lua global does with a nil
+        public HashSet<int> PastMawZones { get; } = new HashSet<int> { 105, 110, 120, 104, 90, 97, 101, 106, 115, 84,
+            91, 98, 82, 109, 119, 81, 88, 95 };
+        public virtual void GoToPastMaw(int zone)
+        {
+            Record("Player", "GoToPastMaw", zone);
+            if (!PastMawZones.Contains(zone))
+                throw new System.InvalidOperationException("attempt to index local 'maw' (a nil value)");
+        }
+        // recorded as Player.RemoveMemoryFragments()
+        public virtual void RemoveMemoryFragments() => Record("Player", "RemoveMemoryFragments");
+        // recorded as Player.AddItemAugmented(<item>,<qty>,<augment0>,<value0>,<augment1>,<value1>)
+        public virtual void AddItemAugmented(int item, int qty, int augment0, int value0, int augment1, int value1)
+            => Record("Player", "AddItemAugmented", item, qty, augment0, value0, augment1, value1);
+        // player:getFace() / player:getEquipmentModelIds()
+        public int FaceId { get; set; }
+        public virtual int Face => FaceId;
+        public (int Head, int Body, int Hands, int Main, int Sub) Models { get; set; }
+        public virtual (int Head, int Body, int Hands, int Main, int Sub) EquipmentModelIds => Models;
+        // recorded as Player.GiveItem(<item>) or Player.GiveItem(nil); a nil item answers true, as npcUtil.giveItem
+        // does
+        public virtual bool GiveItemOrNil(int? item)
+        {
+            if (item is int i) return GiveItem(i);
+            Record("Player", "GiveItem", "nil");
+            return true;
+        }
         // player:getNation()
         public int NationId { get; set; }
         public virtual int Nation => NationId;
@@ -588,6 +641,9 @@ namespace XI.Quests.Authoring
         // recorded as Player.ShowText(<zone>:<NAME>,args)
         public virtual void ShowText(ZoneText text, params int[] args) =>
             Record("Player", "ShowText", new object[] { text }.Concat(args.Cast<object>()).ToArray());
+        // recorded as Player.ShowText(<id>,args)
+        public virtual void ShowText(int textId, params int[] args) =>
+            Record("Player", "ShowText", new object[] { textId }.Concat(args.Cast<object>()).ToArray());
         // player:hasJob(job): the unlocked jobs
         public HashSet<int> UnlockedJobs { get; } = new HashSet<int>();
         public virtual bool HasJob(int job) => UnlockedJobs.Contains(job);
@@ -634,6 +690,15 @@ namespace XI.Quests.Authoring
             CurrentMissions[nextMissionLog] = nextMission;
             return true;
         }
+        // recorded as Player.CompleteMissionRaw(<log>,<mission>); the engine's change when it is the log's current
+        // mission: the current cleared (0 above log 2, else 65535), the completed bit set outside CoP below id 64
+        public virtual void CompleteMissionRaw(int missionLog, int mission)
+        {
+            Record("Player", "CompleteMissionRaw", missionLog, mission);
+            if (!CurrentMissions.TryGetValue(missionLog, out var current) || current != mission) return;
+            CurrentMissions[missionLog] = missionLog > 2 ? 0 : 0xFFFF;
+            if (missionLog != 6 && mission < 64) CompletedMissions.Add($"{missionLog}/{mission}");
+        }
         // recorded as Player.SetMissionMustZone(<log>,<mission>)
         public virtual void SetMissionMustZone(int missionLog, int mission) =>
             Record("Player", "SetMissionMustZone", missionLog, mission);
@@ -671,6 +736,9 @@ namespace XI.Quests.Authoring
         // player:hasTitle(title): the titles held
         public HashSet<int> Titles { get; } = new HashSet<int>();
         public virtual bool HasTitle(int title) => Titles.Contains(title);
+        // player:getTitle()
+        public int CurrentTitleId { get; set; }
+        public virtual int CurrentTitle => CurrentTitleId;
         // player:getPlaytime()
         public int PlaytimeSeconds { get; set; }
         public virtual int Playtime => PlaytimeSeconds;
@@ -693,6 +761,18 @@ namespace XI.Quests.Authoring
         public virtual bool MobIsAlive(string mobName, int offset = 0) => AliveMobs.Contains($"{mobName}+{offset}");
         // isDead: not alive (a mob never spawned counts as dead, as CBattleEntity::isDead has it)
         public virtual bool MobIsDead(string mobName, int offset = 0) => !AliveMobs.Contains($"{mobName}+{offset}");
+        // the mobs GetMobByID finds not nil, keyed "<mobName>+<offset>" (a test removes one to make it nil); their
+        // local vars, keyed "<mobName>+<offset>:<name>" (0 when unset); a missing mob's local var throws, as the Lua's
+        // call on nil does
+        public HashSet<string> MissingMobs { get; } = new HashSet<string>();
+        public Dictionary<string, int> MobLocalVars { get; } = new Dictionary<string, int>();
+        public virtual bool MobExists(string mobName, int offset = 0) => !MissingMobs.Contains($"{mobName}+{offset}");
+        public virtual int MobLocalVar(string mobName, string name, int offset = 0)
+        {
+            if (!MobExists(mobName, offset))
+                throw new System.InvalidOperationException($"GetMobByID of {mobName} is nil");
+            return MobLocalVars.TryGetValue($"{mobName}+{offset}:{name}", out var v) ? v : 0;
+        }
         public virtual void SpawnMob(string mobName, int offset, bool claim)
         {
             Record("Player", "SpawnMob", mobName, offset, claim);
@@ -714,6 +794,14 @@ namespace XI.Quests.Authoring
             SpawnedMobs.Add($"{mobName}+0");
             AliveMobs.Add($"{mobName}+0");
         }
+        // SpawnMob(name + offset) with no claim or enmity: recorded as Player.SpawnMob(<name>,<offset>), and spawned
+        // and alive at that offset
+        public virtual void SpawnMob(string mobName, int offset)
+        {
+            Record("Player", "SpawnMob", mobName, offset);
+            SpawnedMobs.Add($"{mobName}+{offset}");
+            AliveMobs.Add($"{mobName}+{offset}");
+        }
         // zone entities by name (Player.MobIdByName): a test sets them; an unknown name throws, as the Lua's index of
         // nil does
         public Dictionary<string, int> MobIdsByName { get; } = new Dictionary<string, int>();
@@ -727,6 +815,42 @@ namespace XI.Quests.Authoring
             Record("Player", "SpawnMobById", id, claim);
             SpawnedMobIds.Add(id);
         }
+        // recorded as Player.SpawnMobEntityById(<id>,<zeroEnmity>); the id spawned; false (GetMobByID's nil) for an id
+        // in NoMobIds
+        public HashSet<int> NoMobIds { get; } = new HashSet<int>();
+        public virtual bool SpawnMobEntityById(int id, bool zeroEnmity)
+        {
+            if (NoMobIds.Contains(id)) return false;
+            Record("Player", "SpawnMobEntityById", id, zeroEnmity);
+            SpawnedMobIds.Add(id);
+            return true;
+        }
+        // recorded as Player.PopFromQmIds(<id>;<id>...,<hide>); answers PopResult
+        public virtual bool PopFromQmIds(int[] ids, int hide)
+        {
+            Record("Player", "PopFromQmIds", string.Join(";", ids), hide);
+            return PopResult;
+        }
+        // recorded as Player.LuaPrint(<message>)
+        public virtual void LuaPrint(string message) => Record("Player", "LuaPrint", message);
+        // recorded as Player.PopFromQm(<name>;<name>...,<hide>,<claim>); answers PopResult
+        public virtual bool PopFromQm(string[] mobNames, int hide, bool claim)
+        {
+            Record("Player", "PopFromQm", string.Join(";", mobNames), hide, claim);
+            return PopResult;
+        }
+        // recorded as Player.PopFromQmSeriesRadius(<name>,<count>,<claim>,<look>,<radius>); answers PopResult
+        public virtual bool PopFromQmSeriesRadius(string mobName, int count, bool claim, bool look, int radius)
+        {
+            Record("Player", "PopFromQmSeriesRadius", mobName, count, claim, look, radius);
+            return PopResult;
+        }
+        // recorded as Player.MobLookAtPlayer(<name>,<offset>)
+        public virtual void MobLookAtPlayer(string mobName, int offset = 0) =>
+            Record("Player", "MobLookAtPlayer", mobName, offset);
+        // recorded as Player.MobUpdateClaim(<name>,<offset>)
+        public virtual void MobUpdateClaim(string mobName, int offset = 0) =>
+            Record("Player", "MobUpdateClaim", mobName, offset);
         // recorded as Player.SpawnMobWithNpcCooldown(<name>,<npcId>,<npcVar>,<seconds>); spawned and alive at offset 0 and
         // true, unless SpawnResult is false (SpawnMob's nil)
         public bool SpawnResult { get; set; } = true;
@@ -762,6 +886,9 @@ namespace XI.Quests.Authoring
             Record("Player", "StartEventFlags", csid, flags, isHidden);
         // recorded as Player.StartEventHidden(<csid>)
         public virtual void StartEventHidden(int csid) => Record("Player", "StartEventHidden", csid);
+        // recorded as Player.StartEventHiddenParam(<csid>, <index>, <value>)
+        public virtual void StartEventHiddenParam(int csid, int index, int value) =>
+            Record("Player", "StartEventHiddenParam", csid, index, value);
         // recorded as Player.EnableEntities(<id;id;...>) (the ids joined by ';', none for the empty table)
         public virtual void EnableEntities(params int[] ids) =>
             Record("Player", "EnableEntities", string.Join(";", ids));
@@ -932,6 +1059,9 @@ namespace XI.Quests.Authoring
         public virtual bool GiveCurrency(string currency, double amount) { Record("Player", "GiveCurrency", currency, amount); return GiveResult; }
         // recorded as Player.PopFromQm(<name>,<claim>,<hide>,radius=<radius>)
         public virtual bool PopFromQm(string mobName, bool claim, int hide, int radius) { Record("Player", "PopFromQm", mobName, claim, hide, $"radius={radius}"); return PopResult; }
+        // recorded as Player.SetMobSpawn(<name>,<x>,<y>,<z>,<rot>), the name as <name>+<offset> with an offset
+        public virtual void SetMobSpawn(string mobName, int offset, double x, double y, double z, int rot) =>
+            Record("Player", "SetMobSpawn", offset == 0 ? mobName : $"{mobName}+{offset}", x, y, z, rot);
         // recorded as Player.PopFromQm(<name>,<claim>,<hide>), the name as <name>+<offset> with an offset
         public virtual bool PopFromQm(string mobName, int hide, bool claim = true, int offset = 0)
         {
@@ -1071,10 +1201,15 @@ namespace XI.Quests.Authoring
         // recorded as Text.MessageName(<zone>:<NAME>,args)
         public virtual void MessageName(ZoneText text, params int[] args) =>
             Record("Text", "MessageName", new object[] { text }.Concat(args.Cast<object>()).ToArray());
+        // recorded as Text.MessageNameOfPlayer(<zone>:<NAME>,args)
+        public virtual void MessageNameOfPlayer(ZoneText text, params int[] args) =>
+            Record("Text", "MessageNameOfPlayer", new object[] { text }.Concat(args.Cast<object>()).ToArray());
         // recorded as Text.MessageText(<zone>:<NAME>,<showName>,<mode>)
         public virtual void MessageText(ZoneText text, bool showName, int mode) => Record("Text", "MessageText", text, showName, mode);
         // recorded as Text.MessageTextFromPlayer(<zone>:<NAME>)
         public virtual void MessageTextFromPlayer(ZoneText text) => Record("Text", "MessageTextFromPlayer", text);
+        // recorded as Text.MessageTextFromNpc(<zone>:<NAME>)
+        public virtual void MessageTextFromNpc(ZoneText text) => Record("Text", "MessageTextFromNpc", text);
         // recorded as Text.Special(#<id>,args)
         public virtual void Special(int textId, params int[] args) =>
             Record("Text", "Special", new object[] { "#" + textId }.Concat(args.Cast<object>()).ToArray());
@@ -1127,8 +1262,12 @@ namespace XI.Quests.Authoring
         // recorded as Npc.ShowText(<zone>:<NAME>,args)
         public void ShowText(ZoneText text, params int[] args) =>
             calls_?.Add($"Npc.ShowText({string.Join(",", new object[] { text }.Concat(args.Cast<object>()))})");
+        // npc:messageText(player, text), recorded as Npc.MessageText(<zone>:<NAME>)
+        public void MessageText(ZoneText text) => calls_?.Add($"Npc.MessageText({text})");
         // npc:hideNPC(seconds), recorded as Npc.Hide(<seconds>)
         public void Hide(int seconds) => calls_?.Add($"Npc.Hide({seconds})");
+        // mob:messageText(mob, text), recorded as Npc.MessageTextOwn(<zone>:<NAME>)
+        public void MessageTextOwn(ZoneText text) => calls_?.Add($"Npc.MessageTextOwn({text})");
         // npc:getXPos() / getYPos() / getZPos()
         public double XPos { get; set; }
         public double YPos { get; set; }
@@ -1266,10 +1405,11 @@ namespace XI.Quests.Authoring
             owner_.MissionStatuses[LogId] = (int)(status & ~mask | ((uint)value & 0xF) << 4 * pos);
         }
 
-        // recorded as Mission.SetVar(<name>,<value>)
-        public void SetVar(string name, int value)
+        // recorded as Mission.SetVar(<name>,<value>), with the expiry after them when there is one
+        public void SetVar(string name, int value, uint expiry = 0)
         {
-            owner_.RecordFrom("Mission", "SetVar", name, value);
+            if (expiry == 0) owner_.RecordFrom("Mission", "SetVar", name, value);
+            else owner_.RecordFrom("Mission", "SetVar", name, value, expiry);
             owner_.MissionVars[VarKey(name)] = value;
         }
 
@@ -1287,11 +1427,36 @@ namespace XI.Quests.Authoring
             owner_.MissionLocalVars[name] = value;
         }
 
+        public bool IsVarBitsSet(string name, params int[] bits) => bits.All(b => (Var(name) & 1 << b) != 0);
+
+        // recorded as Mission.SetVarBit(<name>,<bit>); the bit set in the mission var
+        public void SetVarBit(string name, int bit)
+        {
+            owner_.RecordFrom("Mission", "SetVarBit", name, bit);
+            owner_.MissionVars[VarKey(name)] = Var(name) | 1 << bit;
+        }
+
+        // recorded as Mission.IncrementVar(<name>,<value>); the mission var raised by value
+        public void IncrementVar(string name, int value)
+        {
+            owner_.RecordFrom("Mission", "IncrementVar", name, value);
+            owner_.MissionVars[VarKey(name)] = Var(name) + value;
+        }
+
         // recorded as Mission.Cleanup(); the mission's vars cleared
         public void Cleanup()
         {
             owner_.RecordFrom("Mission", "Cleanup");
             ClearVars();
+        }
+
+        // recorded as Mission.SetAllianceLocalVars(<name>=<value>;...); the fake's char is its own alliance, so its
+        // mission local vars are set
+        public void SetAllianceLocalVars(params (string Name, int Value)[] vars)
+        {
+            owner_.RecordFrom("Mission", "SetAllianceLocalVars",
+                string.Join(";", vars.Select(v => $"{v.Name}={v.Value}")));
+            foreach (var (name, value) in vars) owner_.MissionLocalVars[name] = value;
         }
     }
 }

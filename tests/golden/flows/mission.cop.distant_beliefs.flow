@@ -1,0 +1,26 @@
+# Distant Beliefs (CoP 2-3, mission.cop.distant_beliefs). A level 75 Warrior of San d'Oria with 2-3 current (a GM; Status
+# 0) in the Phomiuna Aqueducts. Status 0: the Ornate Gate _0r5: nothing. The Minotaur (16887889) killed: Status 1. _0r5
+# (Status 1): nothing. The wooden ladder at (-159.3, -2.5, 60) (Status 1): 35, finished by the ladder's own script: Status
+# 2. _0r5 (Status 2): cutscene 36; finished: Status 3. In Tavnazian Safehold Justinius, Status 3: 113; finished: the mission
+# completes (An Eternal Melody current). Section 2 (2-3 completed): Chemioue 281, Mengrenaux 271, each replacing the default.
+lists PhomiunaAqueducts/_0r5/onTrigger PhomiunaAqueducts/Minotaur/onMobDeath PhomiunaAqueducts/onEventFinish/36 TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/Mengrenaux/onTrigger TavnazianSafehold/onEventFinish/113
+char zone=PhomiunaAqueducts pos=60,0.5,296 job=WAR lvl=75 nation=0
+mission Cop DistantBeliefs current
+login
+trigger _0r5                            # Status 0: nothing
+finish-if-event
+kill #16887889                          # the Minotaur: Status 1
+trigger _0r5                            # Status 1: nothing
+finish-if-event
+walk -158.5,-1,60
+trigger Wooden_Ladder+7 here            # the ladder script: 35
+finish                                  # Status 2
+trigger _0r5                            # Status 2: cutscene 36
+finish                                  # Status 3
+warp 78.7,-34,68 TavnazianSafehold
+trigger Justinius                       # Status 3: 113
+finish                                  # complete: 2-4 current
+trigger Chemioue                        # section 2: 281
+finish-if-event
+trigger Mengrenaux                      # section 2: 271
+finish-if-event

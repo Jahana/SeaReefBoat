@@ -1,0 +1,31 @@
+# Sentinels' Honor (ToAU 33). Naja's trigger with the Timer in the future: 3120, the dialog operand cycling 0, 2, 0 (the
+# Option var). The must-zone var set with the Timer 0: 3120 with the dialog 2; after a rezone (it clears the var): 3130;
+# finished: completed.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3130
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau SentinelsHonor current
+login
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][32]Timer 999999999
+trigger Naja_Salaheem                   # the Timer in the future: 3120, dialog 0
+finish-if-event
+trigger Naja_Salaheem                   # dialog 2
+finish-if-event
+trigger Naja_Salaheem                   # dialog 0
+finish-if-event
+charvar Mission[4][32]Timer 0
+charvar Mission[4][32]mustZone 1
+trigger Naja_Salaheem                   # must zone alone: 3120, dialog 2
+finish-if-event
+rezone
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # 3130
+finish                                  # completed

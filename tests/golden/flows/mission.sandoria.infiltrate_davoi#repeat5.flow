@@ -1,0 +1,25 @@
+# Infiltrate Davoi repeated, holding the South Block Code: at status 5 the east '!' says its own message; at 6 the south
+# '!' (held) its own message; at 9 the north '!' gives the North Block Code and sets status 10.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/1012 SouthernSanDoria/onEventFinish/2012 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1012 ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/onEventFinish/553 ChateauDoraguille/onEventFinish/554 Davoi/Quemaricond/onTrigger Davoi/Zantaviat/onTrigger Davoi/onZoneIn/1 Davoi/onEventFinish/102 Davoi/onEventFinish/105 Davoi/onEventFinish/116 Davoi/onEventFinish/117
+char zone=Davoi pos=211,0,-9 job=WAR lvl=75 nation=0
+mission Rov Resonance current
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria InfiltrateDavoi current
+keyitem SouthBlockCode
+login
+missionstatus Sandoria 5
+trigger !                               # status 5: nothing
+finish-if-event
+missionstatus Sandoria 6
+trigger !+1                             # the South Block Code held: nothing
+finish-if-event
+missionstatus Sandoria 9
+trigger !+2                             # status 9: the North Block Code, status 10
+finish-if-event

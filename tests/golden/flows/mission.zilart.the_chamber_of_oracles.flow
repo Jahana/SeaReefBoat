@@ -1,0 +1,40 @@
+# The Chamber of Oracles (Zilart 7, mission.zilart.the_chamber_of_oracles): the eight fragments held. Each
+# pedestal adds its bit to the Zilart status and says YOU_PLACE_THE (7645, its fragment): Fire 1, Darkness 2,
+# Earth 4, Ice 8, Light 16, Lightning 32, Water 64, Wind 128; a set bit says IS_SET_IN_THE_PEDESTAL (7646).
+# The pedestal that brings the status to 255 also plays 1; its finish takes the eight fragments and completes
+# the mission: the Prismatic Fragment (KEYITEM_OBTAINED 6398), the Lightweaver title, Return to Delkfutt's
+# Tower current. Completed, each pedestal says HAS_LOST_ITS_POWER (7647, its fragment).
+lists ChamberOfOracles/Pedestal_of_Fire/onTrigger ChamberOfOracles/Pedestal_of_Darkness/onTrigger ChamberOfOracles/Pedestal_of_Earth/onTrigger ChamberOfOracles/Pedestal_of_Ice/onTrigger ChamberOfOracles/Pedestal_of_Light/onTrigger ChamberOfOracles/Pedestal_of_Lightning/onTrigger ChamberOfOracles/Pedestal_of_Water/onTrigger ChamberOfOracles/Pedestal_of_Wind/onTrigger ChamberOfOracles/onEventFinish/1
+char zone=ChamberOfOracles pos=200.3419,-2.25,37.12 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheChamberOfOracles current
+keyitem FireFragment
+keyitem WaterFragment
+keyitem EarthFragment
+keyitem WindFragment
+keyitem LightningFragment
+keyitem IceFragment
+keyitem LightFragment
+keyitem DarkFragment
+login
+trigger Pedestal_of_Fire                # +1: status 1
+trigger Pedestal_of_Fire                # bit 1 set: IS_SET_IN_THE_PEDESTAL
+trigger Pedestal_of_Darkness            # +2: status 3
+trigger Pedestal_of_Earth               # +4: status 7
+trigger Pedestal_of_Ice                 # +8: status 15
+trigger Pedestal_of_Light               # +16: status 31
+trigger Pedestal_of_Lightning           # +32: status 63
+trigger Pedestal_of_Water               # +64: status 127
+trigger Pedestal_of_Wind                # +128: status 255, then 1
+finish                                  # the fragments taken, completed
+trigger Pedestal_of_Fire                # completed: HAS_LOST_ITS_POWER
+trigger Pedestal_of_Darkness            # completed: HAS_LOST_ITS_POWER
+trigger Pedestal_of_Earth               # completed: HAS_LOST_ITS_POWER
+trigger Pedestal_of_Ice                 # completed: HAS_LOST_ITS_POWER
+trigger Pedestal_of_Light               # completed: HAS_LOST_ITS_POWER
+trigger Pedestal_of_Lightning           # completed: HAS_LOST_ITS_POWER
+trigger Pedestal_of_Water               # completed: HAS_LOST_ITS_POWER
+trigger Pedestal_of_Wind                # completed: HAS_LOST_ITS_POWER

@@ -1,0 +1,29 @@
+# Infiltrate Davoi repeated, in Southern San d'Oria. Status 0: Endracion and Ambrotien say ORIGINAL_MISSION_OFFSET + 60.
+# Status 6: Endracion's own 1001. Status 10: Endracion 1012, whose finish completes the mission (300 rank points); begun
+# again by a GM at 10: Ambrotien 2012, whose finish completes it (600).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/1012 SouthernSanDoria/onEventFinish/2012 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1012 ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/onEventFinish/553 ChateauDoraguille/onEventFinish/554 Davoi/Quemaricond/onTrigger Davoi/Zantaviat/onTrigger Davoi/onZoneIn/1 Davoi/onEventFinish/102 Davoi/onEventFinish/105 Davoi/onEventFinish/116 Davoi/onEventFinish/117
+char zone=SouthernSanDoria pos=-110,1,-35 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria InfiltrateDavoi current
+login
+trigger Endracion                       # status 0: ORIGINAL_MISSION_OFFSET + 60
+finish-if-event
+trigger Ambrotien                       # ORIGINAL_MISSION_OFFSET + 60
+finish-if-event
+missionstatus Sandoria 6
+trigger Endracion                       # status 6: nothing from the mission
+finish-if-event
+missionstatus Sandoria 10
+trigger Endracion                       # 1012
+finish                                  # completed (300 rank points)
+mission Sandoria InfiltrateDavoi current
+missionstatus Sandoria 10
+trigger Ambrotien                       # 2012
+finish                                  # completed

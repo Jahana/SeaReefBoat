@@ -1,0 +1,48 @@
+# Three Paths (mission.cop.three_paths#edges). A level 75 Warrior with 5-3 current (a GM). Tavnazian Safehold,
+# Despachiaire with Louverance 14: event 144 (X Marks the Spot's; its finish writes the quest log); with 15: event 144
+# again, so the trace cannot tell 14 from 15 (the bound is pinned by a fake check). Upper Jeuno, Rosaline with Tenzen
+# 14: 96; with 15: 97 (Upper Jeuno DefaultActions). Psoxja's zone-in with Tenzen 9 at x 100: no event in the trace; with
+# Tenzen 2 at x 220: none. Mine Shaft #2716, _0d0: the battlefield framework's refusal (message 7097); a Gold Key traded
+# with Louverance 12: message 7097 only (the battlefield's entry trade); an Onion Sword traded with Louverance 11:
+# message 7097 only. Lower Delkfutt's Tower, _545 (Tenzen 8, no device): message 160 (Lower Delkfutt's Tower
+# DefaultActions); with the device and Tenzen 7: message 160 again.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/118 UpperJeuno/Rosaline/onTrigger Psoxja/onZoneIn/4 Psoxja/onEventFinish/4 MineShaft2716/_0d0/onTrigger MineShaft2716/_0d0/onTrade MineShaft2716/onEventFinish/3 LowerDelkfuttsTower/_545/onTrigger LowerDelkfuttsTower/onEventFinish/25
+char zone=TavnazianSafehold pos=108,-40,-83 job=WAR lvl=75 nation=1
+mission Cop ThreePaths current
+login
+missionstatus Cop 14 pos=2              # a GM
+trigger Despachiaire                    # 14: 144 (X Marks the Spot's); the bound is pinned by a fake check
+finish-if-event
+missionstatus Cop 15 pos=2              # a GM
+trigger Despachiaire                    # 15: 144 again
+finish-if-event
+warp -42,0,-2 UpperJeuno
+missionstatus Cop 14 pos=3              # a GM
+trigger Rosaline                        # 14: 96
+finish-if-event
+missionstatus Cop 15 pos=3              # a GM
+trigger Rosaline                        # 15: 97 (Upper Jeuno DefaultActions)
+finish-if-event
+missionstatus Cop 9 pos=3               # a GM
+warp 100,0,0 Psoxja                     # x 100 at 9: none
+missionstatus Cop 2 pos=3               # a GM
+warp 220,0,0 Psoxja                     # x 220 at 2: none
+missionstatus Cop 12 pos=2              # a GM
+item GoldKey x1
+warp -93.657,-120,-583.561 MineShaft2716
+trigger _0d0                            # the framework's refusal
+finish-if-event
+trade _0d0 GoldKey x1                   # Louverance 12: message 7097 only
+finish-if-event
+missionstatus Cop 11 pos=2              # a GM
+item OnionSword x1
+trade _0d0 OnionSword x1                # 11, another item: message 7097 only
+finish-if-event
+missionstatus Cop 8 pos=3               # a GM
+warp 460,-2.5,125.8 LowerDelkfuttsTower
+trigger _545                            # 8 without the device: 160 (DefaultActions)
+finish-if-event
+keyitem DelkfuttRecognitionDevice       # a GM
+missionstatus Cop 7 pos=3               # a GM
+trigger _545                            # 7 with the device: 160 again
+finish-if-event

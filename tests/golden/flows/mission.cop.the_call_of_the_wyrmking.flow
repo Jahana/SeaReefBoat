@@ -1,0 +1,16 @@
+# The Call of the Wyrmking (CoP 3-1, mission.cop.the_call_of_the_wyrmking). A level 75 Warrior of San d'Oria with 3-1
+# current (a GM; Status 0). South Gustaberg's zone-in (Status 0): 906; finished: Status 1. Port Bastok's trigger area 1
+# (Status 1): 305; finished: Status 2. Metalworks Cid (Status 2): 845; finished: the mission completes (3-2 current).
+lists SouthGustaberg/onZoneIn/1 SouthGustaberg/onEventFinish/906 PortBastok/onTriggerAreaEnter/1 PortBastok/onEventFinish/305 Metalworks/Cid/onTrigger Metalworks/onEventFinish/845
+char zone=SouthGustaberg pos=100,-20,100 job=WAR lvl=75 nation=0
+mission Cop TheCallOfTheWyrmking current
+login                                   # Status 0: 906; Status 1
+warp -90,0,-10 PortBastok
+tick 1000
+tick 1000
+tick 1000
+walk -104,0,-10                         # trigger area 1, Status 1: 305
+finish                                  # Status 2
+warp 0,0,0 Metalworks
+trigger Cid                             # Status 2: 845
+finish                                  # complete: 3-2 current

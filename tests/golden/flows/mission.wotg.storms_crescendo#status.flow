@@ -1,0 +1,17 @@
+# Storm's Crescendo (WotG 32) at Status 5 (a GM): the login plays no zone-in event; Rally Point: Blue plays nothing and
+# shows nothing (Lua returns true); Red plays nothing (a release only, Lua returns -1). At Status 4 (a GM) Blue plays
+# nothing and shows nothing (Lua returns true).
+lists XarcabardS/Rally_Point_Green/onTrigger XarcabardS/Rally_Point_Blue/onTrigger XarcabardS/Rally_Point_Red/onTrigger XarcabardS/onZoneIn/1 XarcabardS/onEventFinish/19 XarcabardS/onEventFinish/20 XarcabardS/onEventFinish/23 XarcabardS/onEventFinish/26 XarcabardS/onEventFinish/39
+char zone=XarcabardS pos=-106.071,-25.5,-50 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg StormsCrescendo current
+charvar Mission[5][31]Status 5
+login                                      # Status 5: no zone-in event
+trigger Rally_Point_Blue                   # Status 5: nothing
+trigger Rally_Point_Red                    # Status 5: not the mission's
+finish-if-event
+charvar Mission[5][31]Status 4
+trigger Rally_Point_Blue                   # Status 4: nothing

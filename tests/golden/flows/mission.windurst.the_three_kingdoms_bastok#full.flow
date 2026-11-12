@@ -1,0 +1,20 @@
+# The Three Kingdoms Bastok with a full inventory at status 4: Grohm 423, whose finish cannot give the Pickaxes (the
+# cannot-obtain message) and sets the Option var 1; Grohm then plays 425, whose finish still cannot give them and does
+# nothing more. With room: 425 again, whose finish gives five Pickaxes, sets status 5 and Option 0; then Grohm 424 (no
+# Mythril Sand).
+lists Metalworks/Grohm/onTrigger Metalworks/Pius/onTrigger Metalworks/Patt-Pott/onTrade Metalworks/Mih_Ketto/onTrigger Metalworks/Moyoyo/onTrigger Metalworks/Topuru-Kuperu/onTrigger Metalworks/onEventFinish/255 Metalworks/onEventFinish/355 Metalworks/onEventFinish/423 Metalworks/onEventFinish/425
+char zone=Metalworks pos=-18,-11,-27 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdomsBastok current
+login
+fill-inventory
+missionstatus Windurst 4
+trigger Grohm                           # 423
+finish                                  # no Pickaxes: Option 1
+trigger Grohm                           # 425
+finish                                  # still full: nothing
+free-inventory
+trigger Grohm                           # 425
+finish                                  # Pickaxes, status 5, Option 0
+trigger Grohm
+finish-if-event

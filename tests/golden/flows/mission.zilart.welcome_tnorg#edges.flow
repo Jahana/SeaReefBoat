@@ -1,0 +1,19 @@
+# Welcome t'Norg: option 1 and The New Frontier's section 2. _700 plays 2; its update on option 1 answers
+# nothing and its finish on option 1 does nothing (still current); played again, option 0 completes the
+# mission. Then _700 plays The New Frontier's 5 (01_The_New_Frontier's section 2: completed).
+lists Norg/_700/onTrigger Norg/onEventUpdate/2 Norg/onEventFinish/2
+char zone=Norg pos=98,-7,-12 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheNewFrontier completed
+mission Zilart WelcomeTnorg current
+login
+trigger _700                            # 2
+update 2 option=1                       # option 1: no update
+finish option=1                         # option 1: nothing
+trigger _700                            # 2
+finish option=0                         # completed
+trigger _700                            # not current: The New Frontier's 5 (its section 2)
+finish

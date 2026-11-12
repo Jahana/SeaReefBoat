@@ -1,0 +1,26 @@
+# A Thief in Norg?! (battlefield.thief_in_norg, Waughroon Shrine, a BattlefieldQuest of outlands.a_thief_in_norg; index 4, 30
+# minutes, 6 players, the Banishing Charm required and kept, Quest[5][142]Prog 6 required, Burning_Circle the exit). A level
+# 50 Samurai with the quest accepted, Prog 6 and the charm. The trade to BC_Entrance: the menu 32000 (index 4). Updates: 0 and
+# 68 (area 4 of index 4): REQS_NOT_MET; 65 (area 1): registered, entered, the charm kept. Group 1 of area 1 (the three Gaki
+# GAKI, +1, +2) killed: WON (the Elemental and the Avatar groups are no part of the win); the win: 32001; its finish; the
+# cleanup.
+lists WaughroonShrine/BC_Entrance/onTrade WaughroonShrine/onEventUpdate/32000 WaughroonShrine/onEventFinish/32000 WaughroonShrine/onEventFinish/32001
+char zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=SAM lvl=50
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+quest Outlands.AThiefInNorg accepted
+charvar Quest[5][142]Prog 6
+item BanishingCharm
+login
+trade BC_Entrance BanishingCharm x1     # Prog 6: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=68                  # index 4, area 4: REQS_NOT_MET
+update 32000 option=65                  # index 4, area 1: registered, entered, the charm kept
+finish                                  # in the arena
+kill GAKI
+kill GAKI+1
+kill GAKI+2                             # group 1 of area 1: WON; 32001
+finish                                  # the battlefield's finish, the quest's handler
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

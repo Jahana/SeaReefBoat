@@ -1,0 +1,17 @@
+# Darkness Named's Diremites (battlefield.darkness_named#mites). A level 75 Warrior of San d'Oria with Darkness Named
+# current at Status 4 (GMs), in area 1: the first Diremite killed; the ticks that follow: it despawns, then the tick
+# respawns it 10 seconds after (deathTime).
+lists TheShroudedMaw/MC_Entrance/onTrigger TheShroudedMaw/onEventUpdate/32000 TheShroudedMaw/onEventFinish/32000
+char zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop DarknessNamed current
+charvar Mission[6][358]Status 4
+login
+trigger MC_Entrance                     # the menu 32000
+update 32000 option=1                   # area 1: entered
+finish                                  # in the arena
+tick 2000                               # Diabolos and the Diremites spawn
+kill DIABOLOS+1                         # a Diremite dies
+tick 11000
+tick 11000                              # it despawns
+tick 11000                              # the tick respawns it
+tick 11000

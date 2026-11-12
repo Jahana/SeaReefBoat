@@ -40,6 +40,14 @@ using XI.Quests.Authoring;
 //                                  A second selector (`replay a b`) is refused (PositionalError), not dropped. A base
 //                                  flow's name is its quest's key, so <key> is every flow of the quest; flow:<name>
 //                                  (carry-harness-2) is the one flow of that name (flow:bastok.the_doorman)
+//   replay <selection> --no-gate   (harness-speed) the startup gate skipped (Gate), and one line says so (NoGateLine): a
+//                                  mutant run's replays, whose gate replay all, the lane gate and main's run. Refused
+//                                  with all, --jobs, --shard, --counts and any other mode (NoGateError). Only with the
+//                                  flag, the selection parses only the flows it picks (LoadSelected, Speed.cs): each
+//                                  keeps its index in all's name order, so its char ids
+//   select-check                   (harness-speed) LoadSelected against LoadFlows over every flow file, every flow:<name>,
+//                                  key and name: the same flows, indices, char ids, coverage lines and item stack problems
+//                                  (no database)
 //   replay all --jobs <n>          n child processes `replay all --shard i/n --counts <tmp>/<i>.txt` at once, their
 //                                  output printed in shard order, their counts merged and the coverage gate run once.
 //                                  A shard's flows are dealt by expected cost (quest rework P8: ShardsByCost, FlowCost),
@@ -156,6 +164,7 @@ internal static partial class Program
         bool failFast = args.Remove("--fail-fast");
         explain_ = args.Remove("--explain");
         bool showAll = args.Remove("--all");
+        bool noGate = args.Remove(NoGateFlag);
         if (PositionalError(args) is { } positionalError)
         {
             Console.WriteLine(positionalError);
@@ -163,6 +172,11 @@ internal static partial class Program
         }
         string mode = args.Count > 0 ? args[0] : "replay";
         string sel = args.Count > 1 ? args[1] : "all";
+        if (noGate && NoGateError(mode, sel, jobs != null, shard != null, countsPath != null) is { } noGateError)
+        {
+            Console.WriteLine($"{noGateError}: {string.Join(" ", argv)}");
+            return 1;
+        }
         var clock = Stopwatch.StartNew();
         dataDir_ = FindDataDir();
 
@@ -173,11 +187,15 @@ internal static partial class Program
             return _fail == 0 ? 0 : 1;
         }
         if (mode == "show") return Show(args.Count > 1 ? args[1] : "", showAll, outDir);
+        if (mode == "select-check") return SelectCheck(clock);
+        // mutant-design (option 3): the schema generator (no database) and the mutants process (MutantsMode.cs)
+        if (mode == "schema") return SchemaArgs(args, outDir);
+        if (mode == "mutants") return Mutants(argv, args, clock);
         if (mode is not ("replay" or "record" or "rerecord" or "stable" or "startup" or "world-snapshot"
                          or "item-stacks"))
         {
             Console.WriteLine($"unknown mode {mode}: replay, record, rerecord, stable, startup, world-snapshot, " +
-                              "item-stacks, show or --selftest");
+                              "item-stacks, show, select-check, schema, mutants or --selftest");
             return 1;
         }
         if (synthetic > 0 && mode != "startup")
@@ -238,7 +256,10 @@ internal static partial class Program
                 Startup(synthetic);
                 return Done(clock);
             }
-            var all = LoadFlows(NpcInZoneData, ItemIsWeapon, ItemExists);
+            // harness-speed: replay <selection> --no-gate parses only the flows it picks (LoadSelected)
+            var all = LazyMode(mode, sel, noGate)
+                ? LoadSelected(FlowPaths(), sel, path => Flow.Load(path, NpcInZoneData, ItemIsWeapon, ItemExists), Flow.LoadStub)
+                : LoadFlows(NpcInZoneData, ItemIsWeapon, ItemExists);
             if (all == null) return Done(clock);
             if (mode == "item-stacks")
             {
@@ -249,6 +270,9 @@ internal static partial class Program
             if (!ItemStackGate(all)) return Done(clock);
             var chosen = Select(all, sel);
             if (chosen == null) return Done(clock);
+            // LoadSelected parsed every flow the selector picks: one it did not is a bug, never a run on a stub
+            if (chosen.FirstOrDefault(f => f.Stub) is { } stub)
+                throw new InvalidOperationException($"{stub.Name}: picked, but LoadSelected left it unparsed");
             if (mode == "replay")
             {
                 if (shard != null)
@@ -272,11 +296,13 @@ internal static partial class Program
                 if (!LockChars(settings, ids)) return Done(clock);
                 OpenWorldTables($"c{ids.Min()}");
                 handlerCalled_ = (key, label) => coverage_.Add(key, label, replaying_);
-                Gate();
+                // --no-gate (harness-speed): a selection's replay skips the startup gate, and says so
+                if (noGate) Console.WriteLine(NoGateLine);
+                else Gate();
                 CleanupPartyCheck(ids);
                 var store = PacketStore.Load(GoldenDir);
                 // --fail-fast: the first failing flow (or the startup gate) stops the run
-                string stoppedAt = failFast && _fail > 0 ? "the startup gate" : null;
+                string stoppedAt = failFast && _fail > 0 ? GateStopLabel(noGate) : null;
                 var ran = new List<string>();
                 // a shard's flows are indexed in the shard's list, the others in all's (the ids they always have)
                 var index = shard != null ? chosen : all;
@@ -295,7 +321,7 @@ internal static partial class Program
                     if (sel == "all" && shard == null) OrphanTraces(all);
                     bool every = sel == "all" && shard == null;
                     if (countsPath == null)
-                        CoverageGate(coverage_, all, every ? CSharpContainerKeys() : null,
+                        CoverageGate(coverage_, all, every ? CoverageGateKeys() : null,
                                      every ? CSharpModuleFiles() : null);
                 }
             }
@@ -413,7 +439,9 @@ internal static partial class Program
             zone.ZoneInfoOf(235);
             runs.Add(worldClock_.Elapsed.TotalMilliseconds);
             var line = log.Select(RegisteredLine).LastOrDefault(x => x != null);
-            if (line == null) throw new InvalidOperationException($"{label}: no `quests: <n> C# quests registered in <ms> ms` line");
+            if (line == null)
+                throw new InvalidOperationException($"{label}: no `quests: <q> C# quests, <m> C# missions and <b> C# " +
+                                                    "battlefields registered in <ms> ms` line");
             regs.Add(line.Value.Ms);
             r.Registered = line.Value.Count;
             r.NpcCallLines = log.Count(l => l.StartsWith("quests: npc call: ", StringComparison.Ordinal));
@@ -593,12 +621,17 @@ internal static partial class Program
         return int.Parse(m.Groups[1].Value);
     }
 
-    // the registration line, `quests: <n> C# quests registered in <ms> ms` (ZoneHost.RegisterQuestScripts)
-    private static readonly Regex RegisteredRe = new(@"^quests: (\d+) C# quests registered in (\d+) ms$");
+    // the registration line, `quests: <q> C# quests, <m> C# missions and <b> C# battlefields registered in <ms> ms`
+    // (ZoneHost.RegisterQuestScripts)
+    private static readonly Regex RegisteredRe =
+        new(@"^quests: (\d+) C# quests, (\d+) C# missions and (\d+) C# battlefields registered in (\d+) ms$");
 
-    // the count and the ms of a registered line; null for any other line
-    private static (int Count, int Ms)? RegisteredLine(string line) =>
-        line != null && RegisteredRe.Match(line) is { Success: true } m ? (int.Parse(m.Groups[1].Value), int.Parse(m.Groups[2].Value)) : null;
+    // the counts and the ms of a registered line; null for any other line
+    private static (int Count, int Missions, int Battlefields, int Ms)? RegisteredLine(string line) =>
+        line != null && RegisteredRe.Match(line) is { Success: true } m
+            ? (int.Parse(m.Groups[1].Value), int.Parse(m.Groups[2].Value), int.Parse(m.Groups[3].Value),
+               int.Parse(m.Groups[4].Value))
+            : null;
 
     // a child `startup` run's cold (first) run and warm median, in ms. A build from before the cold line (B3a's) runs 5
     // worlds and prints them sorted (its median counts the cold one): patched by PatchFirstRun it prints its first run too,
@@ -713,11 +746,15 @@ internal static partial class Program
         return _fail == 0 ? 0 : 1;
     }
 
+    // the flow files in name order (the file names', .flow included): a flow's index in it gives its char ids
+    private static List<string> FlowPaths() =>
+        Directory.GetFiles(FlowsDir, "*.flow").OrderBy(p => Path.GetFileName(p), StringComparer.Ordinal).ToList();
+
     // every flow, in name order (that order gives the char ids); a parse error fails the run
     private static List<Flow> LoadFlows(Flow.NpcResolver npcs, Flow.WeaponResolver weapons = null, Flow.ItemResolver items = null)
     {
         var flows = new List<Flow>();
-        foreach (var path in Directory.GetFiles(FlowsDir, "*.flow").OrderBy(p => Path.GetFileName(p), StringComparer.Ordinal))
+        foreach (var path in FlowPaths())
         {
             try
             {
@@ -827,7 +864,8 @@ internal static partial class Program
             {
                 string file = Path.Combine(dataDir_, "zones", XI.Zone.ZoneInfo.FolderName(r.Get<string>("name")), "npcs.yaml");
                 if (File.Exists(file))
-                    foreach (System.Text.RegularExpressions.Match m in ScriptLine.Matches(File.ReadAllText(file))) names.Add(m.Groups[1].Value);
+                    foreach (System.Text.RegularExpressions.Match m in ScriptLine.Matches(File.ReadAllText(file)))
+                        names.Add(m.Groups[1].Value.Trim('\''));
             }
             zoneNpcs_[zoneId] = names;
         }
@@ -866,7 +904,7 @@ internal static partial class Program
     {
         ["login"] = 400, ["warp"] = 200, ["zoneline"] = 300, ["rezone"] = 150, ["route"] = 700, ["walk"] = 150,
         ["invite"] = 150, ["accept"] = 150, ["decline"] = 150, ["kill"] = 100, ["claim"] = 100, ["tick"] = 60, ["wait"] = 60,
-        ["bfwin"] = 500, ["weather"] = 400, ["npclocalvar"] = 400, ["missionstatus"] = 250,
+        ["cast"] = 100, ["bfwin"] = 500, ["weather"] = 400, ["npclocalvar"] = 400, ["missionstatus"] = 250,
     };
     internal static long FlowCost(Flow f) => 1800 + f.Steps.Sum(st => VerbCost.TryGetValue(st.Verb, out int ms) ? ms : 15);
 
@@ -911,13 +949,34 @@ internal static partial class Program
     // unknown xi.cs.quest key, a quest that failed with no Lua fallback, a C# handler that threw)
     private static Trace RunFlow(Flow f, IReadOnlyList<uint> charIds, bool luaSide, IReadOnlyList<Mask> masks, List<string> problems)
     {
+        try
+        {
+            return RunFlowBody(f, charIds, luaSide, masks, problems);
+        }
+        finally
+        {
+            if (world_ != null) world_.Chars = null;
+            // the chars' rows go with the run (Cleanup otherwise runs only at the next flow's start): char_profile's unity
+            // leader would be counted into unity_system by the hourly recount of every later trace on the lane. A failure
+            // here must not hide the run's own (the exception in flight, or the problems)
+            foreach (var id in charIds)
+            {
+                try { Cleanup(db, id); }
+                catch (Exception e) { Console.WriteLine($"WARN {f.Name}: cleanup of char {id} failed: {e.Message}"); }
+            }
+        }
+    }
+
+    private static Trace RunFlowBody(Flow f, IReadOnlyList<uint> charIds, bool luaSide, IReadOnlyList<Mask> masks, List<string> problems)
+    {
         if (charIds.Count != f.Chars.Count) throw new InvalidOperationException($"{f.Name}: {f.Chars.Count} chars, {charIds.Count} ids");
         foreach (var id in charIds) Cleanup(db, id);
         var off = luaSide ? RecordOff(f) : Array.Empty<string>();
         // a probe: the C# quests its run reaches (their handlers' calls), none of them the coverage gate's
         var probeQuests = new SortedSet<string>(StringComparer.Ordinal);
         var coverageHook = handlerCalled_;
-        if (IsProbe(f.Key)) handlerCalled_ = (key, _) => probeQuests.Add(key);
+        // RoE is no quest: it runs on C# for every record, also on a probe's Lua side
+        if (IsProbe(f.Key)) handlerCalled_ = (key, _) => { if (key != ContainerKeys.RoeCoverage) probeQuests.Add(key); };
         // a probe's C# run: its test-only twins of the Lua quests it rides on (Twins.cs)
         if (!luaSide && IsProbe(f.Key)) twins_ = TwinsOf(f.Name, CSharpQuestKeys());
         var runTwinKeys = twins_?.Select(TwinKey).ToList() ?? new List<string>();
@@ -930,6 +989,7 @@ internal static partial class Program
             handlerCalled_ = coverageHook;
             twins_ = null;
         }
+        if (world_ != null) world_.Chars = charIds.ToList();
         SetActors(f.Chars.Select(cs => cs.Name).ToList(), charIds);
         // more than one char: the world routes the party's IPC back (a one-char flow's world drops every message)
         if (f.Chars.Count > 1) RouteIpc();
@@ -939,7 +999,7 @@ internal static partial class Program
         t.Masks.AddRange(masks);
         t.Chars.AddRange(f.Chars.Skip(1).Select(cs => cs.Name));
         // the C# side needs the quest in C#: a quest left to Lua would replay Lua against Lua (a probe has no quest)
-        if (!luaSide && !IsProbe(f.Key) && !CSharpQuestLive(f.Key)) problems.Add($"{f.Key}: no C# quest is registered; replay would compare Lua with Lua");
+        if (!luaSide && !IsProbe(f.Key) && !ContainerKeys.IsRoe(f.Key) && !CSharpQuestLive(f.Key)) problems.Add($"{f.Key}: no C# quest is registered; replay would compare Lua with Lua");
         Statement current = null;
         stepWarnings_.Clear();
         var stepLogs = new List<StepLog>();
@@ -1069,6 +1129,7 @@ internal static partial class Program
                 case "merits": SetMeritsRow(st.Amount); break;
                 case "storage": SetStorageRow(st.Name, st.Amount); break;
                 case "spell": SetSpellRow(st.Value); break;
+                case "unity": SetUnityRow(st.Value); break;
             }
     }
 
@@ -1078,7 +1139,7 @@ internal static partial class Program
         // the registry's size, logged by every load of the quest registry
         new(@"^quests: \d+ quest keys$"),
         // how many C# quests the load registered, logged by every load
-        new(@"^quests: \d+ C# quests registered in \d+ ms$"),
+        new(@"^quests: \d+ C# quests, \d+ C# missions and \d+ C# battlefields registered in \d+ ms$"),
     };
 
     // the lines a record's own CSHARP_QUESTS_OFF makes (Lua side only): a recorded key with no C# quest yet (its flows are
@@ -1196,6 +1257,17 @@ internal static partial class Program
                 RefuseInEvent(st, c);
                 HealStep(st.Amount);
                 break;
+            // quest rework C4
+            case "cast":
+                RefuseInEvent(st, c);
+                CastStep(st);
+                break;
+            case "record":
+                if (st.Status is "take" or "remove" or "claim") RefuseInEvent(st, c);
+                RoeStep(st);
+                break;
+            case "spawn": SpawnStep(StatementMob(st)); break;
+            case "unity": UnityStep(st.Value); break;
             default: throw new InvalidOperationException($"no runner for {st.Verb}");
         }
     }
@@ -1216,10 +1288,18 @@ internal static partial class Program
         ? $"{label}: event {csid} is open, and the engine drops a trade sent in an event (BlockedState.InEvent), so the step would record nothing: finish or update it first"
         : verb == "heal"
         ? $"{label}: event {csid} is open, and the engine drops a 0x0E8 sent in an event (BlockedState.InEvent), so the step would record nothing: finish or update it first"
+        : verb == "record"
+        ? $"{label}: event {csid} is open, and the engine drops a 0x10C to 0x10E sent in an event (BlockedState.InEvent), so the step would record nothing: finish or update it first"
         : $"{label}: event {csid} is open, and a client sends no {verb} while a cutscene is open (the engine would queue its event behind the open one, which no player can do): finish or update it first";
 
     // the statement's option: option=$<name> that char's id, else the number (0 when not given)
     private static uint OptionOf(Statement st) => st.OptionChar is int who ? actors_[who].Id : st.Option ?? 0;
+
+    // the Lua file of a roe.<topic> key, its record's Legacy: the overlay takes it, and what it requires, from the commit
+    internal const string RoeLuaFile = "scripts/globals/roe.lua";
+
+    // the key a flow counts under in the coverage gate: its container's, or for every roe.<topic> flow the one RoE key
+    internal static string CoverageKey(string key) => ContainerKeys.IsRoe(key) ? ContainerKeys.RoeCoverage : key;
 
     // a probe flow (tests/golden/flows/probe.<name>.flow, quest rework P3): a harness check, no quest's. Its key names no
     // quest: a record turns no quest off and runs the scripts at hand (no lua-at), a replay needs no C# quest, and the
@@ -1317,6 +1397,7 @@ internal static partial class Program
     // battlefield's by its LegacyPath file
     private static bool LuaCodeGone(string key)
     {
+        if (ContainerKeys.IsRoe(key)) return !File.Exists(Path.Combine(scripts.ScriptsDir, "globals", "roe.lua"));
         if (log.Any(l => l == $"quests: {key} in CSHARP_QUESTS_OFF has no Lua file; it stays in C#")) return true;
         string scriptRoot = Path.GetDirectoryName(scripts.ScriptsDir);
         if (CSharpContainerOf(key) is not { } c) return false;
@@ -1395,6 +1476,7 @@ internal static partial class Program
     // A mission key's log is xi.mission.area's name of the log
     internal static string LuaIdConstant(string key)
     {
+        if (ContainerKeys.IsRoe(key)) return "xi.roe.records";
         string table = "xi.quest.id";
         if (ContainerKeys.IsMission(key)) (table, key) = ("xi.mission.id", key.Substring("mission.".Length));
         else if (ContainerKeys.IsBattlefield(key))
@@ -1415,6 +1497,10 @@ internal static partial class Program
     // C# mission or battlefield with no flow fails as a quest does
     private static List<string> CSharpContainerKeys() =>
         CSharpContainers().Select(c => c.Key).ToList();
+
+    // the coverage gate's keys: every C# container's, and RoE's now its Lua is gone
+    private static List<string> CoverageGateKeys() =>
+        CSharpContainerKeys().Append(ContainerKeys.RoeCoverage).ToList();
 
     // the quest's key (ContainerScript.Key): <xi.quest.area[log]>.<const>, or a hidden quest's hiddenQuests.<file>
     // (quest rework P9)
@@ -1453,6 +1539,7 @@ internal static partial class Program
     // branches replaced by the calls). A mission's scripts are those and the battlefield files (quest rework C2)
     private static bool LuaPresentAtHead(string key)
     {
+        if (ContainerKeys.IsRoe(key)) return File.Exists(Path.Combine(Root, RoeLuaFile));
         var c = CSharpContainerOf(key);
         if (c?.LegacyPath != null) return File.Exists(Path.Combine(Root, c.LegacyPath + ".lua"));
         string constant = LuaIdConstant(key);
@@ -1571,7 +1658,7 @@ internal static partial class Program
         list.Insert(at < 0 ? list.Count : at, (BattlefieldFramework, text, text));
         return list;
     }
-    // Quest rework C2 Task 10: a taken file that is the LegacyPath file of another C# mission or battlefield
+    // Quest rework C2 Task 10: a taken file that is the LegacyPath file of another C# container
     // (owners: the file to its container's key) turns that container off too. The mission and battlefield files
     // name each other (save_the_children.lua names its mission, 1_3_Save_the_Children.lua its battlefield), so a
     // record of one brings the other's Lua back, and that Lua must run, not the C# container registered over it
@@ -1628,11 +1715,10 @@ internal static partial class Program
         return (list, taken, off);
     }
 
-    // the LegacyPath file (scripts/....lua) of each C# mission and battlefield, to its key: the owners OverlayPlan
-    // turns off when it takes their files
+    // the LegacyPath file (scripts/....lua) of each C# container, to its key: the owners OverlayPlan turns off when it
+    // takes their files
     internal static Dictionary<string, string> OverlayOwners(IEnumerable<ContainerScript> containers) =>
-        containers.Where(c => c.LegacyPath != null &&
-                              (ContainerKeys.IsMission(c.Key) || ContainerKeys.IsBattlefield(c.Key)))
+        containers.Where(c => c.LegacyPath != null)
             .ToDictionary(c => c.LegacyPath + ".lua", c => c.Key, StringComparer.Ordinal);
 
     // require('<name>') / require("<name>") outside a -- comment: the require names a Lua text loads
@@ -1719,7 +1805,8 @@ internal static partial class Program
             int files = LinkTree(Path.Combine(Root, "scripts"), Path.Combine(tmp, "scripts"), out int links);
             Console.WriteLine($"  scripts/ in {tmp}: {files} files, {links} of them hard links");
         }
-        var quests = keys.Select(k => (Key: k, Legacy: CSharpContainerOf(k)?.LegacyPath is { } lp ? lp + ".lua" : null,
+        var quests = keys.Select(k => (Key: k, Legacy: ContainerKeys.IsRoe(k) ? RoeLuaFile
+                                       : CSharpContainerOf(k)?.LegacyPath is { } lp ? lp + ".lua" : null,
                                        Constant: LuaIdConstant(k))).ToList();
         var (code, diff, error) = RunBytes("git", Root, "diff", "--name-status", "--no-renames", commit, "HEAD", "--", "scripts/");
         if (code != 0) throw new InvalidOperationException($"git diff {commit} HEAD exited {code}: {error}");
@@ -2035,13 +2122,14 @@ internal static partial class Program
         {
             replaying_ = null;
         }
-        // the flow ran: its quest's handlers as this world declares them, for the coverage gate (a probe has no quest);
-        // a mission's by its key alike (ZoneHost.HandlerLabels finds the C# mission, quest rework C2)
-        if (!IsProbe(f.Key))
+        // the flow ran: its quest's handlers as this world declares them, for the coverage gate (a probe has no quest); a
+        // mission's by its key alike. A roe flow counts once C# runs RoE; on Lua it compares Lua with Lua, as a probe does
+        if (!IsProbe(f.Key) && !(ContainerKeys.IsRoe(f.Key) && zone.RoeOnLua))
         {
+            string covered = CoverageKey(f.Key);
             coverage_.Ran.Add(f.Name);
-            if (zone.HandlerLabels(f.Key) is { } labels) coverage_.Declared[f.Key] = labels.ToList();
-            else coverage_.NoHandlers.Add(f.Key);
+            if (zone.HandlerLabels(covered) is { } labels) coverage_.Declared[covered] = labels.ToList();
+            else coverage_.NoHandlers.Add(covered);
         }
         // each module the flow loads: its overrides' labels as this world applied them (null: not enabled here)
         foreach (var m in f.Modules)
@@ -2089,10 +2177,10 @@ internal static partial class Program
         var lines = new List<string>();
         if (questKeys != null)
         {
-            var flowKeys = all.Select(f => f.Key).ToHashSet(StringComparer.Ordinal);
+            var flowKeys = all.Select(f => CoverageKey(f.Key)).ToHashSet(StringComparer.Ordinal);
             lines.AddRange(questKeys.Distinct().Where(k => !flowKeys.Contains(k)).OrderBy(k => k, StringComparer.Ordinal).Select(k => $"FAIL coverage {k}: no flows"));
         }
-        foreach (var group in all.GroupBy(f => f.Key).OrderBy(g => g.Key, StringComparer.Ordinal))
+        foreach (var group in all.GroupBy(f => CoverageKey(f.Key)).OrderBy(g => g.Key, StringComparer.Ordinal))
         {
             string key = group.Key;
             var ran = group.Where(f => cov.Ran.Contains(f.Name)).ToList();
@@ -2235,7 +2323,7 @@ internal static partial class Program
             _pass += merged.Pass;
             _fail += merged.Fail;
             OrphanTraces(all);
-            CoverageGate(merged, all, CSharpContainerKeys(), CSharpModuleFiles());
+            CoverageGate(merged, all, CoverageGateKeys(), CSharpModuleFiles());
         }
         finally
         {
@@ -2259,6 +2347,13 @@ internal static partial class Program
         Check("gate: no NPC call problems in any script", "", string.Join(" | ", zone.ValidateNpcCalls(Path.Combine(Root, "scripts"))));
         // quest rework P4: every C# module, enabled or not, applies to the quests it names and they pass the validator
         Check("gate: every C# module applies to its quests", "", string.Join(" | ", zone.CheckQuestModules()));
+
+        // quest rework C4: the Lua is gone; replay would compare Lua with Lua otherwise, and a require left behind fails here
+        Check("gate: RoE runs on C#", false, zone.RoeOnLua);
+        Check("gate: no global script failed to load", 0, scripts.LoadErrors);
+        // both RoE Lua files stay deleted: a roe.lua left behind passes its replays with no coverage verdict
+        foreach (var gone in new[] { "roe.lua", "roe_records.lua" })
+            Check($"gate: scripts/globals/{gone} stays deleted", false, File.Exists(Path.Combine(Root, "scripts", "globals", gone)));
 
         // every C# container's LegacyPath file, every kind (quest rework C2: a mission's, a battlefield's)
         var hidden = new List<string>();
@@ -2470,6 +2565,9 @@ internal sealed class Coverage
         sb.Append($"pass\t{Pass}\nfail\t{Fail}\n");
         foreach (var r in Ran) sb.Append($"ran\t{r}\n");
         foreach (var k in NoHandlers) sb.Append($"nohandlers\t{k}\n");
+        // a key whose C# script declares no handler (WotG 41 Her Memories) has no label line; this keeps it known
+        var noLabels = Declared.Where(x => x.Value.Count == 0).Select(x => x.Key);
+        foreach (var k in noLabels.OrderBy(k => k, StringComparer.Ordinal)) sb.Append($"declared\t{k}\n");
         foreach (var key in Declared.Keys.Union(Calls.Keys).OrderBy(k => k, StringComparer.Ordinal))
         {
             var labels = Declared.TryGetValue(key, out var d) ? d.ToList() : new List<string>();
@@ -2507,6 +2605,11 @@ internal sealed class Coverage
             if (p.Length == 2 && p[0] == "nohandlers")
             {
                 cov.NoHandlers.Add(p[1]);
+                continue;
+            }
+            if (p.Length == 2 && p[0] == "declared")
+            {
+                if (!cov.Declared.ContainsKey(p[1])) cov.Declared[p[1]] = new List<string>();
                 continue;
             }
             if (p.Length != 4 || !int.TryParse(p[2], out int count) || count < 0)

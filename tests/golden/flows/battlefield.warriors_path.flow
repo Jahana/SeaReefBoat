@@ -1,0 +1,28 @@
+# The Warrior's Path (battlefield.warriors_path, Sealion's Den). A level 75 Warrior of San d'Oria with 7-5 current at
+# Status 1 (a GM) triggers _0w0: the menu (0, 0, 0, 2: index 1). Update 0: nothing; 1 (One to Be Feared's index 0), 16
+# and 20: REQS_NOT_MET (5); 17 (area 1): ENTERING_THE_BATTLEFIELD_FOR (7609) and entered. Tenzen killed: he is
+# unkillable, his own script wins the fight at 15% HP; his mob script's texts: his engage line (7937), then at 15% his
+# 7939 and the three Tarus' 7946, 7951 and 7957, one round a tick; 32001; its finish: The Chebukki's Worst Nightmare
+# (this battlefield's onEventFinishWin) and Unquenchable Light (the BattlefieldMission title), and 7-5's own 32001
+# finish (battlefieldWin is this battlefield, Status 1): Status 2; the setPos zones the char out. The cleanup.
+uncovered: group:1:allDeath -- Tenzen is unkillable (Tenzen.lua:120, setUnkillable(true) in onMobSpawn): kill brings him down to his 15% check, not to death, and his mob script wins the fight with battlefield:win() (Tenzen.lua:264); the allDeath is pinned by the c3 C4 group check
+lists SealionsDen/_0w0/onTrigger SealionsDen/onEventUpdate/32000 SealionsDen/onEventFinish/32000 SealionsDen/onEventFinish/32001
+char zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+mission Cop TheWarriorsPath current
+charvar Mission[6][748]Status 1
+login
+trigger _0w0
+update 32000 option=0                   # nothing
+update 32000 option=1
+update 32000 option=16
+update 32000 option=20
+update 32000 option=17                  # area 1: entered
+finish
+tick 2000
+kill TENZEN                             # unkillable: the win at 15%
+tick 1000
+tick 1000
+tick 1000
+finish
+tick 11000
+tick 10000

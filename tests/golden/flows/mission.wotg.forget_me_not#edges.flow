@@ -1,0 +1,23 @@
+# Forget Me Not (WotG 42) edges, from Batallia Downs. Status 1 (a GM): the Cavernous Maw plays its own script's event
+# 500 (xi.maws.onTrigger), whose finish changes nothing. A warp to Grauberg [S] at Status 1 with no Option plays the
+# zone-in 33; its finish sets Status 2, then xi.maws.goToMaw gets xi.maws.pastMaws[0], a nil, and raises "attempt to
+# index local 'maw' (a nil value)" (the step's expect-error): the char stays. A rezone at Status 2 in Grauberg [S] and
+# at Status 0 plays no zone-in event, and the warp to Batallia Downs at Status 0 completes nothing.
+lists BatalliaDowns/Cavernous_Maw/onTrigger BatalliaDowns/onEventFinish/4 GraubergS/onZoneIn/1 GraubergS/onEventFinish/33
+char zone=BatalliaDowns pos=-48,0.1,435 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg ForgetMeNot current
+charvar Mission[5][41]Status 1
+login
+trigger Cavernous_Maw                      # Status 1: the maw's own script
+finish-if-event
+warp -140.28,-6.749,585.24 GraubergS open  # Status 1, Option 0: 33
+finish expect-error "attempt to index local 'maw' (a nil value)"
+tick 400
+rezone                                     # Status 2 in Grauberg [S]: no zone-in event
+charvar Mission[5][41]Status 0
+rezone                                     # Status 0: no zone-in event
+warp -48,0.1,435 BatalliaDowns             # Status 0 in Batallia Downs: no completion

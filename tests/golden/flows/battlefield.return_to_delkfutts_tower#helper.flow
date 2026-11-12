@@ -1,0 +1,33 @@
+# Return to Delkfutt's Tower: a helper, area 2. Main (current; the login's zone-in 0 sets status 1) and eve
+# (the mission completed, Ro'Maeve current) both get the menu (bit 1) and enter area 2 (option 2). Area 2's
+# Kamlanaut (+1) dies: 32001 to both (eve's with a seventh param, 1). Eve's finish gives the Destroyer of
+# Antiquity title; main's gives it too and, as Return to Delkfutt's Tower's
+# (mission.zilart.return_to_delkfutts_tower), sets status 2.
+lists StellarFulcrum/_4z0/onTrigger StellarFulcrum/onEventUpdate/32000 StellarFulcrum/onEventFinish/32000 StellarFulcrum/onEventFinish/32001 StellarFulcrum/onEventFinish/32002 StellarFulcrum/onZoneIn/1 StellarFulcrum/onEventFinish/17 StellarFulcrum/_4z1/onTrigger
+char zone=StellarFulcrum pos=-520,-4,17 job=WAR lvl=75 nation=0
+char eve zone=StellarFulcrum pos=-520,-4,17 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ReturnToDelkfuttsTower current
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Zilart ReturnToDelkfuttsTower completed
+eve: mission Zilart Romaeve current
+login                                   # the mission's zone-in 0 at status 0, answered: status 1
+eve: login
+invite eve
+eve: accept
+trigger _4z0
+update 32000 option=2                   # index 0, area 2: entered
+finish
+eve: trigger _4z0
+eve: update 32000 option=2
+eve: finish
+tick 2000
+kill KAMLANAUT+1                        # dead: won, 32001 to both
+eve: finish                             # eve (not current): the title
+finish                                  # main: the title; the mission's: status 2

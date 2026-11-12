@@ -1,0 +1,19 @@
+# Trial-Size Trial by Fire (battlefield.trial_size_trial_by_fire, CloisterOfFlames, a BattlefieldQuest; 15 minutes, one player
+# capped at 20, the MiniTuningForkOfFire required, Fire_Protocrystal the exit). A level 20 Summoner with the quest accepted and the fork.
+# The trade to FP_Entrance: the menu 32000. Updates: 0 and an area past the zone's arenas: REQS_NOT_MET; the fight's
+# option, area 1: registered, entered (the fork taken). The boss of arena 1 killed: WON; the win: 32001; its finish:
+# the battlefield's onEventFinishWin (and the quest's handler). After the cleanup, out.
+lists CloisterOfFlames/FP_Entrance/onTrade CloisterOfFlames/onEventUpdate/32000 CloisterOfFlames/onEventFinish/32000 CloisterOfFlames/onEventFinish/32001
+char zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByFire accepted
+item MiniTuningForkOfFire
+login
+trade FP_Entrance MiniTuningForkOfFire x1  # the fork: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=20                  # past the arenas: REQS_NOT_MET
+update 32000 option=17                   # area 1: registered, entered, the fork taken
+finish                                  # in the arena
+kill IFRIT_PRIME_ASA-18                  # the boss of arena 1: WON; 32001
+finish                                  # the battlefield's finish
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

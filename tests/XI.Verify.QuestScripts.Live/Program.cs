@@ -65,6 +65,8 @@ internal static partial class Program
     {
         [FixtureLuaFile] = FixtureSourceFile,
         [HiddenFixtureLuaFile] = HiddenFixtureSourceFile,
+        [SampleLuaFile] = SampleSourceFile,
+        [CopSampleLuaFile] = CopSampleSourceFile,
     };
     // PlatformP10's other quest key (P10ForeignQuest, P10DoubleExportQuest): free as the fixture's is (TestKeysFree),
     // after the fixture's in key order (the registration's order for test quests with no LegacyPath)
@@ -126,6 +128,8 @@ internal static partial class Program
             dbName = args[at + 1];
             args.RemoveRange(at, 2);
         }
+        // --c3-pr2 (quest rework C3 PR2's mutant runs): after the setup, only the PR2 live checks (C3Callbacks.cs)
+        bool pr2Only = args.Remove("--c3-pr2");
         int dbPort = args.Count > 0 ? int.Parse(args[0]) : 3307;
         var settings = new NetworkSettings { SqlHost = "127.0.0.1", SqlPort = dbPort, SqlLogin = "root", SqlPassword = "root", SqlDatabase = dbName };
         using var database = new MySqlDatabase(settings);
@@ -144,6 +148,12 @@ internal static partial class Program
         {
             Cleanup(database);
             Setup(database);
+            if (pr2Only)
+            {
+                RunC3PR2Live();
+                Console.WriteLine($"{_pass} passed, {_fail} failed");
+                return _fail == 0 ? 0 : 1;
+            }
             RunConstants();
             RunRegistration();
             RunEntityNames();
@@ -467,7 +477,8 @@ internal static partial class Program
     // checked against the recorded order as it is (the fixtures' containers, which only these worlds list, left out);
     // ScriptEngine.HiddenContainerFiles is proved on a Lua file that exists (the first mission file) and on the fixture
     private static List<string> WithoutFixtures(IEnumerable<string> ids) =>
-        ids.Where(id => id != FixtureContainer && id != HiddenFixtureContainer).ToList();
+        ids.Where(id => id != FixtureContainer && id != HiddenFixtureContainer && id != SampleContainer &&
+                        id != CopSampleContainer).ToList();
 
     private static void RunOrder()
     {
@@ -537,9 +548,17 @@ internal static partial class Program
             .Select(t => (QuestScript)Activator.CreateInstance(t))
             .Where(Taken).Select(s => s.GetType().Name).ToList();
         Check("test keys: no C# quest has a fixture's key or P10's other key", "", string.Join(",", taken));
+        var takenMissions = typeof(XI.QuestContent.Zone).Assembly.GetTypes()
+            .Where(t => t.IsClass && !t.IsAbstract && typeof(MissionScript).IsAssignableFrom(t) &&
+                        t.GetConstructor(Type.EmptyTypes) != null)
+            .Select(t => (MissionScript)Activator.CreateInstance(t))
+            .Where(m => m.Key == SampleKey || m.Key == CopSampleKey)
+            .Select(m => m.GetType().Name).ToList();
+        Check("test keys: no C# mission has a sample mission's key", "", string.Join(",", takenMissions));
         string root = Path.GetDirectoryName(dataDir_);
         string[] names = { $"xi.quest.id.jeuno.{FixtureConst}", $"xi.quest.id.jeuno.{P10OtherConst}", $"'{HiddenFixtureName}'",
-                           $"\"{HiddenFixtureName}\"" };
+                           $"\"{HiddenFixtureName}\"", "xi.mission.id.rov.THE_ENDLESS_SKY",
+                           "xi.mission.id.cop.DESCENDANTS_OF_A_LINE_LOST" };
         var luaFiles = new[] { "scripts", "modules" }
             .SelectMany(d => new[] { "*.lua", "*.lua.todo" }
                 .SelectMany(p => Directory.EnumerateFiles(Path.Combine(root, d), p, SearchOption.AllDirectories)))
@@ -551,6 +570,8 @@ internal static partial class Program
         Check("test keys: the containers list holds each fixture's container once, P10's other key's none", "1|1|0",
               $"{order.Count(id => id == FixtureContainer)}|{order.Count(id => id == HiddenFixtureContainer)}|" +
               $"{order.Count(id => id == P10OtherContainer)}");
+        Check("test keys: the containers list holds each sample mission's Lua container once", "1|1",
+              $"{order.Count(id => id == SampleContainer)}|{order.Count(id => id == CopSampleContainer)}");
         Check("  the fixtures' containers are their files' (Lua quests, not C#)", $"{FixtureLuaFile}|{HiddenFixtureLuaFile}",
               Lua($"report(tostring(InteractionGlobal.lookup.containers['{FixtureContainer}'] and package.loaded['{FixtureLuaFile}'].filename) .. '|' .. " +
                   $"tostring(package.loaded['{HiddenFixtureLuaFile}'] and package.loaded['{HiddenFixtureLuaFile}'].filename))"));
@@ -558,10 +579,14 @@ internal static partial class Program
 
     // ---- the registration ------------------------------------------------------------------------------------------
 
-    // the registered line (quests: <n> C# quests registered in <ms> ms) and the same without its time, compared by count
-    private static readonly System.Text.RegularExpressions.Regex RegisteredTime = new(@"^(quests: \d+ C# quests registered) in \d+ ms$");
+    // the registered line (quests: <q> C# quests, <m> C# missions and <b> C# battlefields registered in <ms> ms);
+    // Untimed gives the quest count's part, the form the checks compare
+    private static readonly System.Text.RegularExpressions.Regex RegisteredTime =
+        new(@"^quests: (\d+) C# quests, (\d+) C# missions and (\d+) C# battlefields registered in \d+ ms$");
     private static bool IsRegistered(string l) => l != null && RegisteredTime.IsMatch(l);
-    private static string Untimed(string l) => l == null ? null : RegisteredTime.Replace(l, "$1");
+    private static string Untimed(string l) =>
+        l == null ? null : RegisteredTime.Replace(l, "quests: $1 C# quests registered");
+    private static string RegisteredKinds(string l) => RegisteredTime.Replace(l, "$1/$2/$3");
 
     private static void RunRegistration()
     {

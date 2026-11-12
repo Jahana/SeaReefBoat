@@ -1,0 +1,48 @@
+# Class Reunion (battlefield.class_reunion, CloisterOfFrost): the helpers. Four level 75 Warriors by IP_Entrance. main
+# (the quest accepted, ClassReunionProgress 5, the pendulum) registers and leads bob (nothing but ClassReunionProgress
+# 9, an out-of-range value) and dan (the quest accepted, ClassReunionProgress 5, no pendulum): anyone but the registrant
+# passes the handler's isValidEntry (the entry NPC) whatever it holds. cat (accepted, ClassReunionProgress 5, no
+# pendulum) is not in the party and has no clearance, so he is judged as a registrant and fails. bob and dan, holding
+# the clearance: the menu, entered. Area 1's group killed: won; 32001 for each. Each finish, onEventFinishWin: main 5 ->
+# 6; bob (var 9, not 5): unchanged; dan (the var 5, no pendulum): 5 -> 6.
+lists CloisterOfFrost/IP_Entrance/onTrade CloisterOfFrost/IP_Entrance/onTrigger CloisterOfFrost/onEventUpdate/32000 CloisterOfFrost/onEventFinish/32000 CloisterOfFrost/onEventFinish/32001
+char zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+char bob zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+char cat zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+char dan zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 5
+item IcePendulum
+bob: charvar ClassReunionProgress 9
+cat: quest Windurst.ClassReunion accepted
+cat: charvar ClassReunionProgress 5
+dan: quest Windurst.ClassReunion accepted
+dan: charvar ClassReunionProgress 5
+login
+bob: login
+cat: login
+dan: login
+invite bob
+bob: accept
+invite dan
+dan: accept
+trade IP_Entrance IcePendulum x1      # the menu 32000
+update 32000 option=17                  # registered in area 1; bob and dan registered with it
+finish                                  # main entered
+bob: trigger IP_Entrance               # no registrant, nothing held: the menu
+bob: update 32000 option=17             # entered
+bob: finish
+cat: trigger IP_Entrance               # accepted, no pendulum, not in the party: no options
+dan: trigger IP_Entrance               # no registrant, no pendulum: the menu
+dan: update 32000 option=17             # entered
+dan: finish
+kill DRYAD
+kill DRYAD+1
+kill DRYAD+2
+kill DRYAD+3
+kill DRYAD+4
+kill DRYAD+5
+finish                                  # main
+bob: finish                             # bob: the var is not 5
+dan: finish                             # dan: the var 5
+tick 11000                              # the won arena's cleanup

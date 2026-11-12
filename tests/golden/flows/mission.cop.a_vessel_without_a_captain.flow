@@ -1,0 +1,25 @@
+# A Vessel Without a Captain (CoP 3-2, mission.cop.a_vessel_without_a_captain). A level 75 Warrior of San d'Oria with
+# 3-2 current (a GM; Status 0). Metalworks Cid: 861, once a zone (the second trigger: nothing). Lower Jeuno _6tc
+# (Status 0): 86; finished: Status 1. Harnek (Status 1): event 12. Ru'Lude Gardens' trigger area 1 (Status 1), The
+# Shadow Lord not completed: 65; finished: the mission completes (3-3 current).
+lists Metalworks/Cid/onTrigger LowerJeuno/_6tc/onTrigger LowerJeuno/Harnek/onTrigger RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/65
+char zone=Metalworks pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop AVesselWithoutACaptain current
+login
+trigger Cid                             # 861
+finish-if-event
+trigger Cid                             # once a zone: nothing
+finish-if-event
+warp 15.5,-0.1,-6.1 LowerJeuno
+trigger Harnek                          # Status 0: nothing
+finish-if-event
+trigger _6tc                            # Status 0: 86
+finish                                  # Status 1
+trigger Harnek                          # Status 1: event 12
+finish-if-event
+warp 0,3,10 RuludeGardens
+tick 1000
+tick 1000
+tick 1000
+walk 0,3,50                             # trigger area 1, Status 1: 65
+finish                                  # complete: 3-3 current

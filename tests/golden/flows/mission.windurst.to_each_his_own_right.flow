@@ -1,0 +1,58 @@
+# To Each His Own Right (Windurst 3-1, mission.windurst.to_each_his_own_right). A level 30 Warrior of Windurst in
+# Heaven's Tower with the mission current (a GM; 1-1 to 2-3 completed; a GM's Resonance current keeps RoV 1-1 out).
+# Status 0: Foo Beibo and Rhy Epocan answer their own defaults 87 and 93; Kupipi 103 with the Starway Stairway Bauble in
+# slot 2, whose finish gives the bauble and sets status 1. Status 1: Kupipi 104; Rhy Epocan 107, whose finish sets
+# status 2. Status 2: Rhy Epocan 108; the Sibyl Guards Foo Beibo 112, Shaz Norem 110, Ufu Koromoa 111, Vahn Paineesha
+# 109; Kupipi answers her own 251. Status 4: Kupipi 113; Shaz Norem his own 91; Rhy Epocan 114, whose finish completes
+# the mission (450 rank points). Section 3 (completed, none current): Foo Beibo 162, Rhy Epocan 115, Shaz Norem 117, Ufu
+# Koromoa 118, Vahn Paineesha 116, each over its default.
+lists PortWindurst/Hakkuru-Rinkuru/onTrigger PortWindurst/onEventFinish/78 PortWindurst/onEventFinish/147 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/Sola_Jaab/onTrigger WindurstWoods/Tih_Pikeh/onTrigger WindurstWoods/onEventFinish/114 CastleOztroja/onEventFinish/43 HeavensTower/Foo_Beibo/onTrigger HeavensTower/Kupipi/onTrigger HeavensTower/Rhy_Epocan/onTrigger HeavensTower/Shaz_Norem/onTrigger HeavensTower/Ufu_Koromoa/onTrigger HeavensTower/Vahn_Paineesha/onTrigger HeavensTower/onEventFinish/103 HeavensTower/onEventFinish/107 HeavensTower/onEventFinish/114
+char zone=HeavensTower pos=2,0.1,30 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight current
+login
+trigger Foo_Beibo                       # status 0: nothing from the mission
+finish-if-event
+trigger Rhy_Epocan
+finish-if-event
+trigger Kupipi+1                        # 103
+finish                                  # status 1, the bauble
+trigger Kupipi+1                        # 104
+finish-if-event
+trigger Rhy_Epocan                      # 107
+finish                                  # status 2
+trigger Rhy_Epocan                      # 108
+finish-if-event
+trigger Foo_Beibo                       # 112
+finish-if-event
+trigger Shaz_Norem                      # 110
+finish-if-event
+trigger Ufu_Koromoa                     # 111
+finish-if-event
+trigger Vahn_Paineesha                  # 109
+finish-if-event
+trigger Kupipi+1                        # status 2: nothing from the mission
+finish-if-event
+missionstatus Windurst 4
+trigger Kupipi+1                        # 113
+finish-if-event
+trigger Shaz_Norem
+finish-if-event
+trigger Rhy_Epocan                      # 114
+finish                                  # completed (450 rank points)
+trigger Foo_Beibo                       # section 3: 162
+finish-if-event
+trigger Rhy_Epocan                      # 115
+finish-if-event
+trigger Shaz_Norem                      # 117
+finish-if-event
+trigger Ufu_Koromoa                     # 118
+finish-if-event
+trigger Vahn_Paineesha                  # 116
+finish-if-event

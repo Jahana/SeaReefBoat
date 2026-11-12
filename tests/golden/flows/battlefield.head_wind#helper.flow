@@ -1,0 +1,57 @@
+# Head Wind (battlefield.head_wind#helper): a party of five, all in Boneyard Gully. Main at Ulmia 7 enters option 1. Bob
+# (8, a helper) enters too. Cat (6) is refused with no menu (an event release with mode 0, no message): her update and
+# finish send nothing. Dan (Three Paths completed, For Whom the Verse is Sung current) enters. Eve (The Road Forks
+# current) is refused. Kills: the win event 32001 goes to main, bob and dan; each finishes: 1000 XP and title 358 for
+# all three; Three Paths' Boneyard Gully 32001 moves only main's Ulmia field, 7 to 8.
+lists BoneyardGully/_081/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75 nation=0
+char bob zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75 nation=0
+char cat zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75 nation=0
+char dan zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75 nation=0
+char eve zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75 nation=0
+mission Cop ThreePaths current
+bob: mission Cop ThreePaths current
+cat: mission Cop ThreePaths current
+dan: mission Cop ForWhomTheVerseIsSung current
+eve: mission Cop TheRoadForks current
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+missionstatus Cop 7 pos=4               # a GM
+bob: missionstatus Cop 8 pos=4          # a GM
+cat: missionstatus Cop 6 pos=4          # a GM
+trigger _081
+update 32000 option=1
+finish
+bob: trigger _081
+bob: update 32000 option=1
+bob: finish
+cat: trigger _081
+cat: update 32000 option=1
+cat: finish
+dan: trigger _081
+dan: update 32000 option=1
+dan: finish
+eve: trigger _081
+eve: update 32000 option=1
+eve: finish
+tick 2000
+kill SHIKAREE_Z_HW
+kill SHIKAREE_Y_HW
+kill SHIKAREE_X_HW
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

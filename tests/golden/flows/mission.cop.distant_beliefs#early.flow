@@ -1,0 +1,14 @@
+# Distant Beliefs, the early states. 2-3 current (a GM; Status 0). Justinius (Tavnazian Safehold, not Status 3): 123
+# replaces the default. In the Phomiuna Aqueducts the ladder at Status 0 (not the mission's 35): its own optional cutscene.
+# The Minotaur killed: Status 1.
+lists PhomiunaAqueducts/_0r5/onTrigger PhomiunaAqueducts/Minotaur/onMobDeath PhomiunaAqueducts/onEventFinish/36 TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/onEventFinish/113
+char zone=TavnazianSafehold pos=78.7,-34,68 job=WAR lvl=75 nation=0
+mission Cop DistantBeliefs current
+login
+trigger Justinius                       # Status 0: 123
+warp 60,0.5,296 PhomiunaAqueducts
+walk -158.5,-1,60
+trigger Wooden_Ladder+7 here            # Status 0: the ladder's optional cutscene
+finish-if-event
+walk 60,0.5,296
+kill #16887889                          # Status 1

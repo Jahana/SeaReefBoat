@@ -1,0 +1,24 @@
+# Puppetmaster Blues (battlefield.puppetmaster_blues#reqs, Talacca Cove): All four chars are refused; each gets
+# NO_BATTLEFIELD_ENTRY 7376 (the framework's trigger), then the entry NPC's default 32767 (DefaultActions.lua): main
+# accepted with the switch only, bob accepted with the chip only, cat available with both key items, dan accepted with
+# neither.
+lists TalaccaCove/_1l0/onTrigger
+char zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+char bob zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+char cat zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+char dan zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+quest AhtUrhgan.PuppetmasterBlues accepted
+keyitem ToggleSwitch
+bob: quest AhtUrhgan.PuppetmasterBlues accepted
+bob: keyitem ValkengsMemoryChip
+cat: keyitem ToggleSwitch
+cat: keyitem ValkengsMemoryChip
+dan: quest AhtUrhgan.PuppetmasterBlues accepted
+login
+bob: login
+cat: login
+dan: login
+trigger _1l0
+bob: trigger _1l0
+cat: trigger _1l0
+dan: trigger _1l0

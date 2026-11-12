@@ -1,0 +1,23 @@
+# Omens (battlefield.omens#reqs, Navukgo Execution Chamber): All four chars are refused; each gets NO_BATTLEFIELD_ENTRY
+# 7277 (the framework's trigger), then the entry NPC's default 32767 (DefaultActions.lua): main at Prog 1, bob accepted
+# at Prog 2, cat available at Prog 0, dan completed at Prog 0.
+lists NavukgoExecutionChamber/_1s0/onTrigger
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char bob zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char cat zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char dan zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+quest AhtUrhgan.Omens accepted
+charvar Quest[6][22]Prog 1
+bob: quest AhtUrhgan.Omens accepted
+bob: charvar Quest[6][22]Prog 2
+cat: charvar Quest[6][22]Prog 0
+dan: quest AhtUrhgan.Omens completed
+dan: charvar Quest[6][22]Prog 0
+login
+bob: login
+cat: login
+dan: login
+trigger _1s0
+bob: trigger _1s0
+cat: trigger _1s0
+dan: trigger _1s0

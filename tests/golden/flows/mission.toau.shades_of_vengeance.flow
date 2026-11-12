@@ -1,0 +1,31 @@
+# Shades of Vengeance (ToAU 31). Naja's trigger (3119). A warp into Caedarva Mire at Status 0: nothing. Nahshib with
+# the Timer in the future and no permit: his own event 7; the Timer 0 with the permit held: his own event 7; neither:
+# 22 (progress), finished: the Periqia Assault Area Entry Permit. Status 1, a warp into Caedarva Mire: the zone-in 21;
+# finished: completed (the Nashmeira's Mercenary title).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger CaedarvaMire/Nahshib/onTrigger CaedarvaMire/onZoneIn/1 CaedarvaMire/onEventFinish/21 CaedarvaMire/onEventFinish/22
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ShadesOfVengeance current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # 3119
+finish-if-event
+warp -274.334,-9.287,-64.255 CaedarvaMire   # Status 0: nothing
+charvar Mission[4][30]Timer 999999999
+trigger Nahshib                         # the Timer in the future: the NPC's own dialog (7), not the mission's
+finish-if-event
+charvar Mission[4][30]Timer 0
+keyitem PeriqiaAssaultAreaEntryPermit
+trigger Nahshib                         # the permit held: the NPC's own dialog (7), not the mission's
+finish-if-event
+delkeyitem PeriqiaAssaultAreaEntryPermit
+trigger Nahshib                         # 22
+finish                                  # the permit given
+missionstatus Toau 1
+warp -274.334,-9.287,-64.255 CaedarvaMire open   # Status 1: 21
+finish                                  # completed

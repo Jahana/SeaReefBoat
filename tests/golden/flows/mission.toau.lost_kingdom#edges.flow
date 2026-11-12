@@ -1,0 +1,21 @@
+# Lost Kingdom's edges. The headstone at status 0 without the vial: nothing; at status 2 (a GM): cutscene 9 even
+# with no vial held (delKeyItem of a key item not held, then completed). The Jazaraat's death at status 0 (a GM moves
+# status back): status stays 0 (only status 1 moves it).
+lists CaedarvaMire/Jazaraats_Headstone/onTrigger CaedarvaMire/Jazaraat/onMobDeath CaedarvaMire/onEventFinish/9
+char zone=CaedarvaMire pos=-385,6,-565 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau LostKingdom current
+login
+trigger Jazaraats_Headstone             # status 0, no vial: nothing
+finish-if-event
+missionstatus Toau 1                    # a GM
+trigger Jazaraats_Headstone             # Jazaraat spawned
+finish-if-event
+missionstatus Toau 0                    # a GM
+kill JAZARAAT                           # the death at status 0: nothing
+missionstatus Toau 2                    # a GM
+trigger Jazaraats_Headstone             # 9
+finish                                  # completed

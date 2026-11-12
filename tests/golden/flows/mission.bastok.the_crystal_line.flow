@@ -1,0 +1,72 @@
+# The Crystal Line (Bastok 2-1, mission.bastok.the_crystal_line). A level 10 Warrior of Bastok (1-1 to 1-3 completed by
+# a GM: no mission current; a GM's Resonance current keeps RoV 1-1's 30035 out of the logins). Section 1 (no current
+# mission, a Bastokan): the gate guards play their script's mission list 1001; Bastok Markets', Bastok Mines' and
+# Metalworks' finish with option 0 (not 3) does nothing; Port Bastok's with option 3 begins the mission
+# (YOU_ACCEPT_THE_MISSION). Section 2 (2-1 current): Argus, Cleades, Rashid and Malduc each play their zone's
+# ORIGINAL_MISSION_OFFSET + 19. Metalworks: Naji and Ayame (no report): their scripts' own talk; Cid at status 0: 505,
+# whose finish with option 1 does nothing and with option 0 gives a random crystal and moves to status 1; a trade of a
+# faded crystal at status 0: no event. Status 1: Cid plays event 502; two faded crystals: no match; one: 506 (the
+# crystal taken, the C. L. Report given). With the report: Cid answers MISSION_DIALOG_CID_TO_AYAME; Naji plays 711;
+# Ayame plays 712, whose finish completes the mission (200 rank points) and takes the report. Completed: Cid and Ayame
+# have no section; the mission current again (a GM) with the report given again: 712 completes it once more. Rival
+# zone-in, another mission's script: the login in Bastok Markets plays Seekers of Adventure's Rumors from the West
+# onZoneIn, which returns 22 (the trace records only that return, with no event packet).
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/Cid/onTrigger Metalworks/Cid/onTrade Metalworks/Ayame/onTrigger Metalworks/Naji/onTrigger Metalworks/onEventFinish/1001 Metalworks/onEventFinish/505 Metalworks/onEventFinish/506 Metalworks/onEventFinish/712 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001
+char zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+item FadedCrystal x2
+login
+trigger Cleades                         # section 1: no handler: his script's 1001
+finish option=0                         # not 3: nothing
+warp -8.4,-1,-121 BastokMines
+trigger Rashid                          # section 1: 1001
+finish option=0                         # not 3: nothing
+warp 64,-14,-4 Metalworks
+trigger Malduc                          # section 1: 1001
+finish option=0                         # not 3: nothing
+warp 132,8.5,-4 PortBastok
+trigger Argus                           # section 1: 1001
+finish option=3                         # 3: begun, YOU_ACCEPT_THE_MISSION
+trigger Argus                           # section 2: ORIGINAL_MISSION_OFFSET + 19
+warp -358,-10,-168 BastokMarkets
+trigger Cleades                         # section 2: ORIGINAL_MISSION_OFFSET + 19
+warp -8.4,-1,-121 BastokMines
+trigger Rashid                          # section 2: ORIGINAL_MISSION_OFFSET + 19
+warp 64,-14,-4 Metalworks
+trigger Malduc                          # section 2: ORIGINAL_MISSION_OFFSET + 19
+trigger Naji                            # no report: his script's talk
+finish-if-event
+warp 133,-19,34 Metalworks
+trigger Ayame                           # no report: her script's talk
+finish-if-event
+warp -12,-12,1 Metalworks
+walk -11,-12,1
+trade Cid FadedCrystal x1               # status 0: no event
+trigger Cid                             # status 0: 505
+finish option=1                         # not 0: nothing
+trigger Cid                             # 505 again
+finish option=0                         # a random crystal given: status 1
+trigger Cid                             # status 1: event 502
+finish
+trade Cid FadedCrystal x2               # two crystals: tradeMatches fails: no event
+trade Cid FadedCrystal x1               # 506
+finish option=0                         # the crystal taken, the report given
+trigger Cid                             # the report: MISSION_DIALOG_CID_TO_AYAME
+warp 64,-14,-4 Metalworks
+trigger Naji                            # the report: 711
+finish
+warp 133,-19,34 Metalworks
+trigger Ayame                           # the report: 712
+finish                                  # completed: 200 rank points; the report taken
+trigger Ayame                           # completed, no report: her script's talk
+finish-if-event
+warp -12,-12,1 Metalworks
+trigger Cid                             # completed: no section: his script's talk
+finish-if-event
+mission Bastok TheCrystalLine current   # a GM
+keyitem CLReport
+trigger Ayame                           # 712 once more
+finish                                  # completed again

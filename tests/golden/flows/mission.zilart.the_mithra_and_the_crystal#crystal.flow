@@ -1,0 +1,40 @@
+# The Mithra and the Crystal: the papyrus held (a GM) at status 1. qm7 says YOU_FIND_NOTHING; Maryoh_Comyujah plays the
+# progress 83, whose finish takes the papyrus, gives the Cerulean Crystal and sets status 2; at status 2 she plays 84;
+# Gilgamesh plays 171 with the crystal; the Hall of the Gods' _6z0 plays the progress 4 and Shimmering_Circle the
+# progress 3, whose finish completes the mission (The Gate of the Gods next). After it Shimmering_Circle is the NPC's
+# own 10 and _6z0 its own 2; Maryoh_Comyujah plays 85 and qm7 says YOU_FIND_NOTHING (the completed sections).
+lists LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/111 Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Rabao/Maryoh_Comyujah/onTrigger Rabao/onEventFinish/81 Rabao/onEventFinish/83 QuicksandCaves/qm7/onTrigger QuicksandCaves/onEventFinish/12 QuicksandCaves/onEventFinish/13 QuicksandCaves/Ancient_Vessel/onMobDeath HallOfTheGods/_6z0/onTrigger HallOfTheGods/Shimmering_Circle/onTrigger HallOfTheGods/onEventFinish/3
+char zone=QuicksandCaves pos=-504,19,-419 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheMithraAndTheCrystal current
+keyitem ScrapOfPapyrus
+login
+missionstatus Zilart 1                  # a GM
+trigger qm7 at=1                        # papyrus: YOU_FIND_NOTHING
+finish-if-event
+warp -1,8,73 Rabao
+trigger Maryoh_Comyujah                 # papyrus: 83
+finish                                  # Cerulean Crystal, status 2
+trigger Maryoh_Comyujah                 # status 2: 84
+finish
+warp 98,-7,-12 Norg
+trigger Gilgamesh                       # crystal: 171
+finish
+warp 0,-14,46 HallOfTheGods
+trigger _6z0                            # crystal: 4
+finish
+trigger Shimmering_Circle               # crystal: 3
+finish                                  # completed
+trigger Shimmering_Circle               # the NPC's own 10
+finish
+trigger _6z0                            # the NPC's own 2
+finish
+warp -1,8,73 Rabao
+trigger Maryoh_Comyujah                 # completed: 85
+finish
+warp -504,19,-419 QuicksandCaves
+trigger qm7 at=1                        # completed: YOU_FIND_NOTHING
+finish-if-event

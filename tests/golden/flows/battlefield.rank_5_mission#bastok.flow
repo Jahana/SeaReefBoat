@@ -1,0 +1,49 @@
+# Qu'Bia Arena's Rank 5 Mission (battlefield 512) by a level 75 Bastokan White Mage on Darkness Rising at status 11 with
+# the New Fei'Yin Seal: BC_Entrance 32000, area 1; Dia on the Archlich: he engages her (his target); the battlefield
+# tick's pulses spawn the Warriors out of her sight (no 00E: nothing shows when); at the kill the allDeath tells her
+# client of the two Sorcerers and the four Warriors (+3 to +6) as despawned and WON; the win's 32001 finish runs the
+# battlefield's (Archmage Assassin) and Darkness Rising's (the Burnt Seal, status 12, the New Fei'Yin Seal taken).
+lists QubiaArena/BC_Entrance/onTrigger QubiaArena/Burning_Circle/onTrigger QubiaArena/onEventUpdate/32000 QubiaArena/onEventFinish/32000 QubiaArena/onEventFinish/32003 QubiaArena/onEventFinish/32001 QubiaArena/onEventFinish/32002
+char zone=QubiaArena pos=-212.2,-24.6,20.1 job=WHM lvl=75 nation=1
+spell 23
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising current
+keyitem NewFeiyinSeal
+login
+missionstatus Bastok 11
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000                               # the first tick: the groups spawn; not locked: no Warrior
+cast Dia ARCHLICH_TABERQUOAN            # Dia on the Archlich: claimed (00E: his claimer the char)
+tick 1000
+tick 1000
+tick 1000
+tick 1000                               # he engages (00E animation 1): his target the char
+wait jst=1                              # the wall clock a day on: the next pulse due
+tick 1000
+tick 1000
+wait jst=1                              # again
+tick 1000
+tick 1000
+kill ARCHLICH_TABERQUOAN                # allDeath: Sorcerers, Warriors +3 to +6 told despawned; WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish                                  # 32001: Archmage Assassin; Darkness Rising: the Burnt Seal, status 12
+tick 11000
+tick 10000

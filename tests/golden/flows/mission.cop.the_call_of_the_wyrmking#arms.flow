@@ -1,0 +1,24 @@
+# The Call of the Wyrmking, the other statuses (mission.cop.the_call_of_the_wyrmking#arms). 3-1 current with Status 1
+# (a GM): South Gustaberg's zone-in: nothing. Port Bastok's area walked at Status 0 and at Status 2: nothing.
+# Metalworks Cid at Status 0 and 1: nothing.
+lists SouthGustaberg/onZoneIn/1 PortBastok/onTriggerAreaEnter/1 Metalworks/Cid/onTrigger
+char zone=SouthGustaberg pos=100,-20,100 job=WAR lvl=75 nation=0
+mission Cop TheCallOfTheWyrmking current
+charvar Mission[6][258]Status 1         # a GM
+login                                   # Status 1: nothing
+warp -90,0,-10 PortBastok
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[6][258]Status 0         # a GM
+walk -104,0,-10                         # Status 0: nothing
+walk -90,0,-10
+charvar Mission[6][258]Status 2         # a GM
+walk -104,0,-10                         # Status 2: nothing
+warp 0,0,0 Metalworks
+charvar Mission[6][258]Status 0         # a GM
+trigger Cid                             # Status 0: nothing
+finish-if-event
+charvar Mission[6][258]Status 1         # a GM
+trigger Cid                             # Status 1: nothing
+finish-if-event

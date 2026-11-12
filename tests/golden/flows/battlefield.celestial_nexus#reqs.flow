@@ -1,0 +1,22 @@
+# The Celestial Nexus: the entry requirements. At Zilart status 1 _513 opens no menu (the zone has no
+# NO_BATTLEFIELD_ENTRY text) and the zone's DefaultActions answer with messageSpecial -1 (sent as 32767); at status 0 it
+# opens the menu; level synced the framework says MEMBERS_LEVELS_ARE_RESTRICTED, then the DefaultActions' -1; with
+# Awakening current (and still synced) the same.
+warning: lua: addMission: overwriting current mission 28 of log 3 with 30 -- the GM's mission line: Awakening over The Celestial Nexus (not current)
+lists TheCelestialNexus/_513/onTrigger TheCelestialNexus/onEventUpdate/32000 TheCelestialNexus/onEventFinish/32000 TheCelestialNexus/onEventFinish/32001 TheCelestialNexus/onEventFinish/32002 TheCelestialNexus/onEventFinish/32004 TheCelestialNexus/_514/onTrigger TheCelestialNexus/_515/onTrigger TheCelestialNexus/onEventFinish/32003
+char zone=TheCelestialNexus pos=-580,-8,-30 job=WAR lvl=99 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheCelestialNexus current
+login
+missionstatus Zilart 1                  # a GM
+trigger _513                            # status 1: no menu: DefaultActions' -1 (32767)
+missionstatus Zilart 0                  # a GM
+trigger _513                            # the menu
+finish
+effect 269                              # a GM: level sync
+trigger _513                            # MEMBERS_LEVELS_ARE_RESTRICTED, then the -1
+mission Zilart Awakening current        # a GM
+trigger _513                            # not current (still synced): the same

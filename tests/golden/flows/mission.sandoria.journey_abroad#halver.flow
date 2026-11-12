@@ -1,0 +1,26 @@
+# Journey Abroad at Halver in Chateau d'Oraguille, a level 30 Warrior of San d'Oria with the mission current,
+# ENABLE_TRUST_QUESTS 1 and neither Halver's spell nor his cipher. Status 0: Halver plays 505 with the eighth
+# parameter 1; its finish moves to status 2, gives the Letter to the Consuls and the Cipher of Halver's Alter Ego.
+# Status 1, 5 and 10: 532. Status 11 with the Kindred Report: 507; its finish completes the mission (3000 gil, rank 3,
+# the certificate and its title) and takes the Kindred Report.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/505 ChateauDoraguille/onEventFinish/507 Metalworks/Chantain/onTrigger Metalworks/Lutia/onTrigger Metalworks/Riault/onTrigger Metalworks/Savae_E_Paleade/onTrigger Metalworks/onEventFinish/204 Metalworks/onEventFinish/206 WindurstWoods/Catalia/onTrigger WindurstWoods/Erpolant/onTrigger WindurstWoods/Forine/onTrigger WindurstWoods/Mourices/onTrigger WindurstWoods/onEventFinish/448 WindurstWoods/onEventFinish/462
+char zone=ChateauDoraguille pos=2,0.1,0.1 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria JourneyAbroad current
+setting ENABLE_TRUST_QUESTS 1
+login
+trigger Halver
+finish
+missionstatus Sandoria 1
+trigger Halver
+finish-if-event
+missionstatus Sandoria 5
+trigger Halver
+finish-if-event
+missionstatus Sandoria 10
+trigger Halver
+finish-if-event
+missionstatus Sandoria 11
+keyitem KindredReport
+trigger Halver
+finish

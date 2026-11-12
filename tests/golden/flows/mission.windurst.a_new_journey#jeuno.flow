@@ -1,0 +1,43 @@
+# A New Journey in Ru'Lude Gardens with the Letter to the Ambassador. Status 0: Pakh Jatalfih answers his own 103.
+# Status 1: the Embassy Door _6r8 says its own message; Pakh Jatalfih 43, whose finish takes the letter and sets status
+# 2. Status 2: 68. Status 3: 141, whose finish sets status 4. Status 4: Pakh Jatalfih his own 103; the door 40, whose
+# finish completes the mission (5000 gil, rank 4). Then a rank 4 Windurstian with no mission current and no rank points:
+# Pakh Jatalfih's 54 is Magicite's (Windurst 4-1: its section 1 event 54, priority Event 100), which wins
+# over this mission's section 3 replaceDefault 54 (priority 20: it runs, and loses); with Magicite completed by a GM:
+# his own 103.
+lists HeavensTower/_6q2/onTrigger HeavensTower/Foo_Beibo/onTrigger HeavensTower/Kupipi/onTrigger HeavensTower/Rhy_Epocan/onTrigger HeavensTower/Ufu_Koromoa/onTrigger HeavensTower/onEventFinish/153 LowerDelkfuttsTower/_540/onTrade LowerDelkfuttsTower/_540/onTrigger LowerDelkfuttsTower/onEventFinish/2 RuludeGardens/_6r8/onTrigger RuludeGardens/Pakh_Jatalfih/onTrigger RuludeGardens/onEventFinish/40 RuludeGardens/onEventFinish/43 RuludeGardens/onEventFinish/141 PortWindurst/onEventFinish/78 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/Miiri-Wohri/onTrigger WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/Sola_Jaab/onTrigger WindurstWoods/Tih_Pikeh/onTrigger WindurstWoods/onEventFinish/114
+char zone=RuludeGardens pos=34,9,-36 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney current
+keyitem LetterToTheAmbassador
+login
+trigger Pakh_Jatalfih                   # status 0: nothing from the mission
+finish-if-event
+missionstatus Windurst 1
+trigger _6r8                            # status 1: nothing from the mission
+finish-if-event
+trigger Pakh_Jatalfih                   # 43
+finish                                  # status 2, the letter taken
+trigger Pakh_Jatalfih                   # 68
+finish-if-event
+missionstatus Windurst 3
+trigger Pakh_Jatalfih                   # 141
+finish                                  # status 4
+trigger Pakh_Jatalfih                   # status 4: nothing from the mission
+finish-if-event
+trigger _6r8                            # 40
+finish                                  # completed: 5000 gil, rank 4
+trigger Pakh_Jatalfih                   # Magicite's 54 (4-1), over section 3's
+finish-if-event
+mission Windurst Magicite current
+mission Windurst Magicite completed
+trigger Pakh_Jatalfih                   # Magicite completed: nothing from the mission
+finish-if-event

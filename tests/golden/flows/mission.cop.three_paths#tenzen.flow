@@ -1,0 +1,55 @@
+# Three Paths (mission.cop.three_paths#tenzen), Tenzen's path. A level 75 Warrior with 5-3 current (a GM). La Theine
+# Plateau, qm3 (Tenzen 0): 203; finished: 2; again: message 7590 (La Theine Plateau DefaultActions). Psoxja, _09g (2):
+# cutscene 3; finished: 3. Upper Jeuno, Monberaux (3): 74; finished: the Envelope from Monberaux, 5; again (5): 5;
+# Rosaline: 96. Ru'Lude Gardens, Pherimociel (5): 58; finished: 6. Monberaux (6): 6. Batallia Downs, qm4 (6, Option 0):
+# cutscene 0; finished: Option 1; again: 1; finished: the Delkfutt's Recognition Device, Option 0, 8. Monberaux (8): 7.
+# Lower Delkfutt's Tower, _545 (8, the device): the Disaster Idol pops (SOMETHING_HUGE_BEARING_DOWN); again while it
+# lives: message 160 (Lower Delkfutt's Tower DefaultActions); the Idol killed: message 8669 (not from this mission) and
+# 60 experience points; _545: cutscene 25; finished: 9. Psoxja's zone-in at x 220 (9): event 4; finished: 11. _09h (11):
+# cutscene 5; finished: 12. Metalworks, Cid (12): 854; finished: 14, the title.
+lists LaTheinePlateau/qm3/onTrigger LaTheinePlateau/onEventFinish/203 Psoxja/_09g/onTrigger Psoxja/_09h/onTrigger Psoxja/onZoneIn/4 Psoxja/onEventFinish/3 Psoxja/onEventFinish/4 Psoxja/onEventFinish/5 UpperJeuno/Monberaux/onTrigger UpperJeuno/Rosaline/onTrigger UpperJeuno/onEventFinish/74 RuludeGardens/Pherimociel/onTrigger RuludeGardens/onEventFinish/58 BatalliaDowns/qm4/onTrigger BatalliaDowns/onEventFinish/0 BatalliaDowns/onEventFinish/1 LowerDelkfuttsTower/_545/onTrigger LowerDelkfuttsTower/Disaster_Idol/onMobDeath LowerDelkfuttsTower/onEventFinish/25 Metalworks/Cid/onTrigger Metalworks/onEventFinish/854
+char zone=LaTheinePlateau pos=-179.7,8.8,254.3 job=WAR lvl=75 nation=1
+mission Cop ThreePaths current
+login
+trigger qm3                             # Tenzen 0: 203
+finish                                  # 2
+trigger qm3                             # 2: message 7590 (La Theine Plateau DefaultActions)
+finish-if-event
+warp 241,5,-20 Psoxja
+trigger _09g                            # 2: cutscene 3
+finish                                  # 3
+warp -42,0,-2 UpperJeuno
+trigger Monberaux                       # 3: 74
+finish                                  # the Envelope, 5
+trigger Monberaux                       # 5: 5
+finish-if-event
+trigger Rosaline                        # 96
+finish-if-event
+warp -31.6,1,68 RuludeGardens
+trigger Pherimociel                     # 5: 58
+finish                                  # 6
+warp -42,0,-2 UpperJeuno
+trigger Monberaux                       # 6: 6
+finish-if-event
+warp 426.3,8.6,-163.3 BatalliaDowns
+trigger qm4                             # 6, Option 0: cutscene 0
+finish                                  # Option 1
+trigger qm4                             # Option 1: 1
+finish                                  # the device, Option 0, 8
+warp -42,0,-2 UpperJeuno
+trigger Monberaux                       # 8: 7
+finish-if-event
+warp 460,-2.5,125.8 LowerDelkfuttsTower
+trigger _545                            # 8 with the device: the Idol pops
+finish-if-event
+trigger _545                            # the Idol alive: message 160 (Lower Delkfutt's Tower DefaultActions)
+finish-if-event
+kill DISASTER_IDOL                      # message 8669, 60 experience points
+trigger _545                            # cutscene 25
+finish                                  # 9
+warp 220,0,0 Psoxja                     # x 220 at 9: event 4, finished: 11
+trigger _09h                            # 11: cutscene 5
+finish                                  # 12
+warp -12,-12,1 Metalworks
+trigger Cid                             # 12: 854
+finish                                  # 14, the title

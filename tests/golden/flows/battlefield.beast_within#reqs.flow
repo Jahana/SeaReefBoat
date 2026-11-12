@@ -1,0 +1,71 @@
+# The Beast Within (battlefield.beast_within#reqs, Jade Sepulcher): six chars at _1v0, each refused with
+# NO_BATTLEFIELD_ENTRY 7377 (the Lua framework's entry hooks, which Battlefield[1153], Shadows of the Mind, set up on
+# _1v0) and no menu. Main (a level 75 Blue Mage at level cap 75, The Beast Within accepted at Quest[6][40]Prog 2 (GMs),
+# one Blue Mage's Testimony): a trigger with no trade (a testimony fight's registrant must trade): 7377, then the door's
+# default (DefaultActions.lua messageSpecial -1, shown as 32767); a trade of the Corsair's Testimony (not the required
+# item): 7377. Each other trades a Blue Mage's Testimony, all else as main: bob a level 65 Blue Mage (the level alone);
+# cat at Quest[6][40]Prog 3 (the var alone: the registrant's must be 2); dan with the quest available (the quest alone);
+# eve with it completed (a registrant's must be accepted); fay a level 75 Warrior (the job alone).
+lists JadeSepulcher/_1v0/onTrade JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char bob zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=65
+char cat zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char dan zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char eve zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char fay zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+levelcap 75
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Transformations completed
+quest AhtUrhgan.TheBeastWithin accepted
+charvar Quest[6][40]Prog 2
+item BlueMagesTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: quest AhtUrhgan.Transformations completed
+bob: quest AhtUrhgan.TheBeastWithin accepted
+bob: charvar Quest[6][40]Prog 2
+bob: item BlueMagesTestimony
+cat: levelcap 75
+cat: quest AhtUrhgan.AnEmptyVessel completed
+cat: quest AhtUrhgan.Transformations completed
+cat: quest AhtUrhgan.TheBeastWithin accepted
+cat: charvar Quest[6][40]Prog 3
+cat: item BlueMagesTestimony
+dan: levelcap 75
+dan: quest AhtUrhgan.AnEmptyVessel completed
+dan: quest AhtUrhgan.Transformations completed
+dan: charvar Quest[6][40]Prog 2
+dan: item BlueMagesTestimony
+eve: levelcap 75
+eve: quest AhtUrhgan.AnEmptyVessel completed
+eve: quest AhtUrhgan.Transformations completed
+eve: quest AhtUrhgan.TheBeastWithin completed
+eve: charvar Quest[6][40]Prog 2
+eve: item BlueMagesTestimony
+fay: levelcap 75
+fay: quest AhtUrhgan.AnEmptyVessel completed
+fay: quest AhtUrhgan.Transformations completed
+fay: quest AhtUrhgan.TheBeastWithin accepted
+fay: charvar Quest[6][40]Prog 2
+fay: item BlueMagesTestimony
+item CorsairsTestimony
+login
+bob: login
+cat: login
+dan: login
+eve: login
+fay: login
+trigger _1v0
+finish-if-event
+trade _1v0 CorsairsTestimony x1
+finish-if-event
+bob: trade _1v0 BlueMagesTestimony x1
+bob: finish-if-event
+cat: trade _1v0 BlueMagesTestimony x1
+cat: finish-if-event
+dan: trade _1v0 BlueMagesTestimony x1
+dan: finish-if-event
+eve: trade _1v0 BlueMagesTestimony x1
+eve: finish-if-event
+fay: trade _1v0 BlueMagesTestimony x1
+fay: finish-if-event

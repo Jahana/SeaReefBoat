@@ -1,0 +1,26 @@
+# Into the Beast's Maw (WotG 33) at Status 1 (a GM): the login plays no zone-in event. At Status 3 without the flare (a
+# GM) the Ornate Block plays nothing of the mission's (its DefaultActions NOTHING_OUT_OF_ORDINARY, 6409), and the
+# Peculiar Glint neither (its DefaultActions NO_RESPONSE, 7905). At Status 2 (a GM) the zone-in plays 14; the update
+# with option 4 sends no 05C; the finish sets Status 3, and the next tick shows the set-down (the 00B zone-out, the char
+# at 183.405 -24.041 100.041 rot 126). The login plays 15; its finish gives the flare and sets Status 4.
+lists XarcabardS/Rally_Point_Red/onTrigger CastleZvahlBaileysS/Ornate_Block/onTrigger CastleZvahlBaileysS/Peculiar_Glint/onTrigger CastleZvahlBaileysS/onZoneIn/1 CastleZvahlBaileysS/onEventUpdate/14 CastleZvahlBaileysS/onEventFinish/1 CastleZvahlBaileysS/onEventFinish/2 CastleZvahlBaileysS/onEventFinish/3 CastleZvahlBaileysS/onEventFinish/11 CastleZvahlBaileysS/onEventFinish/14 CastleZvahlBaileysS/onEventFinish/15
+char zone=CastleZvahlBaileysS pos=179.4,-24.1,98 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg IntoTheBeastsMaw current
+charvar Mission[5][32]Status 1
+login                                      # Status 1: no zone-in event
+charvar Mission[5][32]Status 3
+trigger Ornate_Block                       # Status 3, no flare: not the mission's
+finish-if-event
+trigger Peculiar_Glint                     # Status 3: not the mission's
+finish-if-event
+charvar Mission[5][32]Status 2
+rezone open                                # 14
+update 14 option=4                         # not 5: no packet
+finish                                     # Status 3, set down
+tick 400
+login open                                 # 15
+finish                                     # the flare, Status 4

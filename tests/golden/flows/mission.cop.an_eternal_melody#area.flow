@@ -1,0 +1,16 @@
+# An Eternal Melody, the trigger area (mission.cop.an_eternal_melody#area). 2-4 current with Status 2 (a GM), in Tavnazian
+# Safehold. After the warp and three zone ticks the walk into area 1 (cuboid -5..5, -24..-20, 18..27): 105; finished: the
+# mission completes (Ancient Vows current). The earlier walk, at Status 1, enters the area too and answers nothing.
+lists TavnazianSafehold/onTriggerAreaEnter/1 TavnazianSafehold/onEventFinish/105
+char zone=TavnazianSafehold pos=100,-42,41 job=WAR lvl=75 nation=0
+mission Cop AnEternalMelody current
+charvar Mission[6][238]Status 1         # a GM
+login
+tick 1000
+tick 1000
+tick 1000
+walk 0,-22,22                           # trigger area 1, Status 1: nothing
+walk 0,-22,10
+charvar Mission[6][238]Status 2         # a GM
+walk 0,-22,22                           # Status 2: 105
+finish                                  # complete: Ancient Vows current

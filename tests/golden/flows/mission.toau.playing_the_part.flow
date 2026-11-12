@@ -1,0 +1,30 @@
+# Playing the Part (ToAU 25). The must-zone var set: Naja's trigger three times (the Option var's dialog cycle). A
+# rezone (it clears the var), the Timer in the future: Naja. The Timer 0: Naja 3110, finished: completed.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3110
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PlayingThePart current
+login
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][24]mustZone 1
+trigger Naja_Salaheem
+finish-if-event
+trigger Naja_Salaheem
+finish-if-event
+trigger Naja_Salaheem
+finish-if-event
+rezone
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][24]Timer 999999999
+trigger Naja_Salaheem
+finish-if-event
+charvar Mission[4][24]Timer 0
+trigger Naja_Salaheem
+finish

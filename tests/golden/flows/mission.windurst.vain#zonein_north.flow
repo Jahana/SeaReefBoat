@@ -1,0 +1,76 @@
+# Vain (Windurst 8-1, mission.windurst.vain), the northern zone-ins (the Ronfaures, La Theine, Batallia, Beaucedine,
+# Xarcabard, Konschtat, Valkurm). Status 1 (a GM): each zone-in plays its event, left open; its update sends the sky
+# (0, 0, 0, 0, 0, n) the position or the zone before picks, or nothing; the finish closes it. A warp to 0,0,0 is 1,0,1
+# (a zone's onZoneIn sets a char at 0,0,0 down at its own spot); a warp inside a zone keeps the zone before it.
+# Valkurm's inner 3 arm stays unreached (kept: z above 45 is above -301).
+char zone=WindurstWaters pos=-55,-8,229 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+rank 8
+mission Windurst Vain current
+login
+missionstatus Windurst 1
+warp -440,24,-220 WestRonfaure open     # status 1: 53
+update 53 option=0                      # 5
+finish
+warp 200,-20,-480 EastRonfaure open     # status 1: 23
+update 23 option=0                      # y -20 (at least -22): 7
+finish
+warp 200,-30,-480 EastRonfaure open     # status 1: 23
+update 23 option=0                      # y -30: 6
+finish
+warp -280,8,-100 LaTheinePlateau open   # status 1: 125
+update 125 option=0                     # 2
+finish
+warp 1,0,1 BatalliaDowns open           # status 1: 903
+update 903 option=0                     # z 1 (above -331): 3
+finish
+warp 0,0,-400 BatalliaDowns open        # status 1: 903
+update 903 option=0                     # z -400: 2
+finish
+warp 1,0,1 BeaucedineGlacier open       # status 1: 116
+update 116 option=0                     # 4
+finish
+warp 1,0,1 Xarcabard open               # status 1: 11
+update 11 option=0                      # from Beaucedine Glacier: 2
+finish
+warp 1,0,1 Davoi                        # Davoi (a warp inside a zone keeps the zone before it)
+warp 1,0,1 Xarcabard open               # status 1: 11
+update 11 option=0                      # from Davoi: 3
+finish
+warp 0,0,900 KonschtatHighlands open    # status 1: 106
+update 106 option=0                     # z 900: 2
+finish
+warp 100,0,0 KonschtatHighlands open    # status 1: 106
+update 106 option=0                     # x 100: 1
+finish
+warp 1,0,1 KonschtatHighlands open      # status 1: 106
+update 106 option=0                     # x 1: nothing
+finish
+warp 400,0,0 KonschtatHighlands open    # status 1: 106
+update 106 option=0                     # x 400: nothing
+finish
+warp 0,0,100 ValkurmDunes open          # status 1: 5
+update 5 option=0                       # z 100 (above 45): 1
+finish
+warp 1,0,1 ValkurmDunes open            # status 1: 5
+update 5 option=0                       # z 1: nothing
+finish

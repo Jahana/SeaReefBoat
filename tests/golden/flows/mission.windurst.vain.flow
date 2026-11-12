@@ -1,0 +1,80 @@
+# Vain (Windurst 8-1, mission.windurst.vain) played through: a level 75 Windurstian Warrior at rank 8 with the ASA,
+# ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before it completed and a Curse Wand.
+# Mokyokyo's 111, option 20: begun (YOU_ACCEPT_THE_MISSION), then his 748. Status 0: Fuepepe, Pechiru-Mashiru and
+# Tauwawa their own; Moreno-Toeno 752: status 1, the Star Seeker, the title. Status 1: Teacher's Pet's 437 (a quest's
+# progress event) answers Moreno over the mission's 753; Fuepepe 755, Pechiru-Mashiru 754, Tauwawa 756, Dagoza-Beruza
+# 749, Mimomo 757, Panna-Donna 750, Ten of Hearts 751. Ro'Maeve: the zone-in 3; Qu'Hau Spring 2 (status 2). Davoi:
+# Sedal-Godjal 118 (the seeker drained, status 3), 119; the Curse Wand: 120 (status 4), 121. Moreno-Toeno 758:
+# completed (750 rank points), the drained seeker taken.
+char zone=WindurstWaters pos=-55,-8,229 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+rank 8
+item CurseWand
+login
+trigger Mokyokyo                        # no mission current: the guard's own mission list
+finish option=24                        # no mission's option (this mission takes 20): not begun
+trigger Mokyokyo                        # the list again
+finish option=20                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Mokyokyo                        # current: 748
+finish
+trigger Fuepepe                         # status 0: nothing from the mission
+finish-if-event
+trigger Pechiru-Mashiru                 # status 0: nothing from the mission
+finish-if-event
+trigger Tauwawa                         # status 0: nothing from the mission
+finish-if-event
+trigger Moreno-Toeno                    # status 0: 752
+finish                                  # status 1, the Star Seeker, the title
+trigger Moreno-Toeno                    # status 1: Teacher's Pet's 437 (progress) over the mission's 753
+finish
+trigger Fuepepe                         # status 1: 755
+finish
+trigger Pechiru-Mashiru                 # status 1: 754
+finish
+trigger Tauwawa                         # status 1: 756
+finish
+trigger Dagoza-Beruza                   # 749
+finish
+trigger Mimomo                          # 757
+finish
+trigger Panna-Donna                     # 750
+finish
+trigger Ten_of_Hearts                   # 751
+finish
+warp 1.748,-27.402,67.751 Romaeve open  # status 1: 3
+finish
+trigger QuHau_Spring                    # status 1: 2
+finish                                  # status 2
+trigger QuHau_Spring                    # status 2: nothing from the mission
+finish-if-event
+warp 187,-3,-116 Davoi
+trigger Sedal-Godjal                    # status 2, the Star Seeker: 118
+finish                                  # the seeker drained, status 3
+trigger Sedal-Godjal                    # status 3: 119
+finish
+trade Sedal-Godjal CurseWand x1         # status 3, drained: 120
+finish                                  # the wand taken, status 4
+trigger Sedal-Godjal                    # status 4, drained: 121
+finish
+warp 169,-1.25,161 WindurstWaters
+trigger Moreno-Toeno                    # status 4: 758
+finish                                  # completed: 750 rank points, the drained seeker taken

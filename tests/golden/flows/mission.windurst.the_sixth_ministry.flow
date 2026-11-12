@@ -1,0 +1,62 @@
+# The Sixth Ministry (Windurst 7-1, mission.windurst.the_sixth_ministry) played through: a level 75 Windurstian at
+# rank 7, ASA, ACP, RoV and SoA current (their content quiet) and the nation's missions before it completed.
+# Mokyokyo's own 111, option 18: begun, YOU_ACCEPT_THE_MISSION; current: the mission's 711. Tosuka-Porika 715 (param
+# the Optistery Ring): the ring (KEYITEM_OBTAINED), status 1; then 716. Toraimarai Canal: _4pc with a Hinge Oil alive:
+# 70 (param 1); the four killed; _4pc: the cutscene 70 (param 2); the fifth Tome of Magic (TOME_OF_MAGIC_OFFSET+4) at
+# status 1: 69, status 2; the first tome: nothing from the mission, its script's 65. Tosuka-Porika 724: completed, the
+# Blank Book of the Gods, 700 rank points, the ring taken; completed: his script's 379. Toraimarai completed: _4pc 70
+# (param 2) from the section for current or completed; the fifth tome: its script's 72.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWalls/Zokima-Rokima/onTrigger WindurstWalls/onEventFinish/93 WindurstWaters/Mokyokyo/onTrigger WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/onEventFinish/114 WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/onEventFinish/715 WindurstWaters/onEventFinish/724 ToraimaraiCanal/_4pc/onTrigger ToraimaraiCanal/Tome_of_Magic/onTrigger ToraimaraiCanal/onEventFinish/69
+char zone=WindurstWaters pos=-55,-8,229 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+rank 7
+login
+trigger Mokyokyo                        # his own 111
+finish option=18                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Mokyokyo                        # current: 711
+finish
+warp -24,-6,103 WindurstWaters
+trigger Tosuka-Porika                   # status 0: 715
+finish                                  # the Optistery Ring, status 1
+trigger Tosuka-Porika                   # status 1: 716
+finish
+warp 130,12,-19 ToraimaraiCanal
+trigger _4pc                            # a Hinge Oil alive: 70 (1)
+finish
+kill HINGE_OILS_OFFSET
+kill HINGE_OILS_OFFSET+1
+kill HINGE_OILS_OFFSET+2
+kill HINGE_OILS_OFFSET+3
+trigger _4pc                            # the four dead: cutscene 70 (2)
+finish
+trigger TOME_OF_MAGIC_OFFSET+4          # the fifth tome, current, status 1: 69
+finish                                  # status 2
+trigger TOME_OF_MAGIC_OFFSET            # the first tome: nothing from the mission
+finish-if-event
+warp -24,-6,103 WindurstWaters
+trigger Tosuka-Porika                   # status 2: 724
+finish                                  # completed: the Blank Book of the Gods, 700 rank points; the ring taken
+trigger Tosuka-Porika                   # completed: nothing from the mission
+finish-if-event
+warp 130,12,-19 ToraimaraiCanal
+trigger _4pc                            # completed: the door
+finish
+trigger TOME_OF_MAGIC_OFFSET+4          # completed: nothing
+finish-if-event

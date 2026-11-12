@@ -1,0 +1,25 @@
+# Written in the Stars section 1 in Windurst Woods. The login plays SoA's Rumors from the West zone-in 839 (that
+# mission's event, not this one's). Rakoh Buuma's own script plays the gate guards' mission list 114; its finish with
+# option 0 does nothing, with option 11 begins the mission and says YOU_ACCEPT_THE_MISSION. Then Rakoh Buuma 188, Sola
+# Jaab 190, Tih Pikeh 189.
+lists HeavensTower/Kiwawa/onTrigger HeavensTower/Nebibi/onTrigger HeavensTower/Zubaba/onTrigger HeavensTower/Zubaba/onTrade HeavensTower/Kupipi/onTrigger HeavensTower/onEventFinish/121 HeavensTower/onEventFinish/135 HeavensTower/onEventFinish/151 HeavensTower/onEventFinish/257 PortWindurst/onEventFinish/78 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/Sola_Jaab/onTrigger WindurstWoods/Tih_Pikeh/onTrigger WindurstWoods/onEventFinish/114 InnerHorutotoRuins/_5ci/onTrigger InnerHorutotoRuins/onEventFinish/41
+char zone=WindurstWoods pos=108,-5,-24 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+login
+trigger Rakoh_Buuma                            # section 1: 114
+finish option=0                         # not 11: nothing
+trigger Rakoh_Buuma
+finish option=11                        # begun
+trigger Rakoh_Buuma                     # 188
+finish-if-event
+trigger Sola_Jaab                       # 190
+finish-if-event
+trigger Tih_Pikeh                       # 189
+finish-if-event

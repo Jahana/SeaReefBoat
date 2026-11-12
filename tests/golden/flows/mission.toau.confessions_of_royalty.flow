@@ -1,0 +1,30 @@
+# Confessions of Royalty (ToAU 5, mission.toau.confessions_of_royalty). A level 75 Warrior of Bastok (rank 1, no
+# Bastok mission: not allowed into the Chateau) with it current and the Raillefal's Letter, in Aht Urhgan Whitegate:
+# Cacaroon 3023, Nadeey 3025 and Naja 3021 (the static and one-line handlers). Northern San d'Oria: Guilerme 810,
+# finished with option 0: nothing; again, option 1: the Option var 1 and a setPos into Chateau d'Oraguille: its
+# zone-in plays 563 (Option 1), finished: the letter deleted, completed (Easterly Winds current), set into Northern San
+# d'Oria. The Chateau's Halver with the mission done: nothing in this section.
+lists AhtUrhganWhitegate/Cacaroon/onTrigger AhtUrhganWhitegate/Nadeey/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrigger NorthernSanDoria/Guilerme/onTrigger NorthernSanDoria/onEventFinish/810 ChateauDoraguille/onZoneIn/1 ChateauDoraguille/onEventFinish/563
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ConfessionsOfRoyalty current
+mission Bastok TheZeruhnReport current  # below 5: the Chateau stays shut (a fresh char's none reads as 5 or more)
+keyitem RaillefalsLetter
+login
+trigger Cacaroon                        # 3023
+finish
+trigger Nadeey                          # 3025
+finish
+trigger Naja_Salaheem                   # 3021
+finish
+warp 0,0,0 NorthernSanDoria
+trigger Guilerme                        # the letter, no access: 810
+finish option=0                         # not 1: nothing
+trigger Guilerme
+finish option=1                         # Option 1; into the Chateau
+tick 2000                               # the zone change
+rezone                                  # the login in the Chateau: its zone-in plays 563
+finish                                  # 563: completed, set out

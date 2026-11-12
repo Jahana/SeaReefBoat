@@ -1,0 +1,12 @@
+# Trial by Ice (battlefield.trial_by_ice): the requirement arms. Main, a level 75 Warrior with the quest accepted but no
+# Tuning Fork of Ice: IP_Entrance: the key item check fails: no options: the default. bob, with the fork but the quest
+# only available: BattlefieldQuest's check (accepted or more) fails: the default.
+lists CloisterOfFrost/IP_Entrance/onTrigger
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=WAR lvl=75
+char bob zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=WAR lvl=75
+quest Sandoria.TrialByIce accepted
+bob: keyitem TuningForkOfIce
+login
+trigger IP_Entrance                     # accepted, no fork: no options
+bob: login
+bob: trigger IP_Entrance                # the fork, available: no options

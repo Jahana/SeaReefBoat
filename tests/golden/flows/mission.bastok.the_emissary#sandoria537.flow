@@ -1,0 +1,17 @@
+# The Emissary in Northern San d'Oria at status 7 with the letter to the consuls (the mission current): Shakir plays
+# 556; Helaku plays 537, whose finish with option 1 (not 0) does nothing and with option 0 ends The Emissary, begins
+# The Emissary Sandoria 2, takes the letter and moves to status 8. Rival zone-in, another mission's script: the login
+# plays Rumors from the West, 878.
+lists NorthernSanDoria/Baraka/onTrigger NorthernSanDoria/Helaku/onTrigger NorthernSanDoria/Shakir/onTrigger NorthernSanDoria/onEventFinish/537 NorthernSanDoria/onEventFinish/581
+char zone=NorthernSanDoria pos=36,-2,-2 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheEmissary current
+keyitem LetterToTheConsulsBastok
+login
+missionstatus Bastok 7
+trigger Shakir
+finish-if-event
+trigger Helaku
+finish option=1
+trigger Helaku
+finish option=0

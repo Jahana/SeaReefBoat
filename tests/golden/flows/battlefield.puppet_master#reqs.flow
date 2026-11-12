@@ -1,0 +1,14 @@
+# The Puppet Master (battlefield.puppet_master): the requirement arms. Main, a level 75 Summoner with the quest accepted
+# and the pendulum but Prog 0: EP_Entrance: the registrant's check (requiredVar 1 not met): no options: the default. bob,
+# Prog 1 and the pendulum, the quest only available: fails: the default.
+lists CloisterOfTremors/EP_Entrance/onTrade
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+char bob zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+quest Windurst.ThePuppetMaster accepted
+item EarthPendulum
+bob: charvar Quest[2][81]Prog 1
+bob: item EarthPendulum
+login
+trade EP_Entrance EarthPendulum x1      # Prog 0: no options
+bob: login
+bob: trade EP_Entrance EarthPendulum x1 # available: no options

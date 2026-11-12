@@ -1,0 +1,71 @@
+# golden trace: battlefield.moon_reading#notcurrent
+seed 7
+flow 5cfe489feb1f82f8ddf732a4d9eb690166600098564f45dfe0915534791ab752
+recorder lua
+lua-at 2c8c605ec54f350f0a5c22b3e0f0a729ea4ca318
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @f1c8488acb8ce4d9 (167)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @3e907948536df038 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @6c754e43ddae19ea (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @460fa2b5fa0dcab5 (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @4cdbd8051d2399ff (7)
+char_stats @aed604d3dea413a4 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @e8a425b9208d2495 (41)
+ret onZoneIn=number:4294967295
+step trigger MS_Entrance
+packets
+  00E @8966be5e52d94955
+  00E @9e186d1bd3f2f874
+  02A @4f70def29c1b5e32
+  052 @992a1d6976db40ee
+ret onTrigger=number:4294967295
+step finish-if-event
+packets
+step mission Windurst MoonReading current
+packets
+  056 @cc81605e840d046e
+char_mission_state - area=2|current=65535|status=0|completed_mask=8387647|progress=null
+char_mission_state + area=2|current=23|status=0|completed_mask=8387647|progress=null
+chars - assault=null
+chars - campaign=null
+chars + assault=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+chars + campaign=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+chars missions +140:1700
+step missionstatus Windurst 1
+packets
+char_mission_state - area=2|current=23|status=0|completed_mask=8387647|progress=null
+char_mission_state + area=2|current=23|status=1|completed_mask=8387647|progress=null
+chars missions +144:01
+step trigger MS_Entrance
+packets
+  02A @4f70def29c1b5e32
+  052 @992a1d6976db40ee
+ret onTrigger=number:4294967295
+step finish-if-event
+packets
+step missionstatus Windurst 3
+packets
+char_mission_state - area=2|current=23|status=1|completed_mask=8387647|progress=null
+char_mission_state + area=2|current=23|status=3|completed_mask=8387647|progress=null
+chars missions +144:03
+step trigger MS_Entrance
+packets
+  02A @4f70def29c1b5e32
+  052 @992a1d6976db40ee
+ret onTrigger=number:4294967295
+step finish-if-event
+packets

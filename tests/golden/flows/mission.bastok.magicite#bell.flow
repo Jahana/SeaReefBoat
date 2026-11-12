@@ -1,0 +1,25 @@
+# Magicite (Bastok 4-1) at Aldo with the Silver Bell (a GM's key item): at status 0 Aldo has nothing (no script, no
+# default action: the event released); at 1 152 (1) (progress), whose finish sets status 2 and takes the letter, the
+# bell kept.
+lists RuludeGardens/_6r2/onTrigger RuludeGardens/Goggehn/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/129 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/35 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=LowerJeuno pos=20,3,-56 job=WAR lvl=50 nation=1
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite current
+keyitem LetterToAldo
+keyitem SilverBell
+login
+trigger Aldo                            # status 0: nothing from the mission
+finish-if-event
+missionstatus Bastok 1
+trigger Aldo                            # status 1, the bell held: 152 (1)
+finish                                  # status 2, the letter taken, the bell kept

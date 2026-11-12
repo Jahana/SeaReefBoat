@@ -1,0 +1,25 @@
+# Carbuncle Debacle (battlefield.carbuncle_debacle_cloister_of_storms, CloisterOfStorms, a BattlefieldQuest of
+# Windurst.CarbuncleDebacle, a C# quest; index 1, 30 minutes, 18 players, no experience lost, the LightningPendulum
+# required and kept, CarbuncleDebacleProgress 3 required, Lightning_Protocrystal the exit). A level 75 Warrior with the
+# quest accepted, the var 3 and the pendulum. The trade to LP_Entrance: the menu 32000 (index 1). Updates: 0: ignored; 4
+# (index 0, not in the menu): REQS_NOT_MET; 16 (index 1, area 0) and 20 (area 4, past the zone's arenas): REQS_NOT_MET;
+# 17 (area 1): registered, entered, the pendulum kept. Area 1's group killed (LIGHTNING_GREMLIN and +1): WON; the win:
+# battlefieldWin 449, 32001; its finish: onEventFinishWin: the var 3 -> 4. After the cleanup, out.
+lists CloisterOfStorms/LP_Entrance/onTrade CloisterOfStorms/onEventUpdate/32000 CloisterOfStorms/onEventFinish/32000 CloisterOfStorms/onEventFinish/32001
+char zone=CloisterOfStorms pos=536.6,-14.9,493.0 job=WAR lvl=75
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 3
+item LightningPendulum
+login
+trade LP_Entrance LightningPendulum x1      # the pendulum, the var: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=4                   # index 0, not in the menu: REQS_NOT_MET
+update 32000 option=16                  # index 1, area 0: REQS_NOT_MET
+update 32000 option=20                  # index 1, area 4: REQS_NOT_MET
+update 32000 option=17                  # index 1, area 1: registered, entered, the pendulum kept
+finish                                  # in the arena
+kill LIGHTNING_GREMLIN
+kill LIGHTNING_GREMLIN+1
+finish                                  # the battlefield's finish: onEventFinishWin: the var 3 -> 4
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

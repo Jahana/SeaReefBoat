@@ -1,0 +1,24 @@
+# The Three Kingdoms in Northern San d'Oria with the letter. The login plays SoA's Rumors from the West zone-in 878
+# (that mission's event, not this one's). Status 0: Heruze-Moruze answers his own 554, Kasaroro his own 548, nothing
+# from the mission; at status 1 Kasaroro 548 again. Status 1: Heruze-Moruze 582 with no parameters (no RoV The Path
+# Untraveled), whose finish sets status 2; then Heruze-Moruze 554 (his own); Kasaroro 546, whose finish ends this
+# mission and begins The Three Kingdoms San d'Oria at status 3.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWalls/Zokima-Rokima/onTrigger WindurstWalls/onEventFinish/93 WindurstWaters/Dagoza-Beruza/onTrigger WindurstWaters/Mokyokyo/onTrigger WindurstWaters/Panna-Donna/onTrigger WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/onEventFinish/114 HeavensTower/Kupipi/onTrigger HeavensTower/onEventFinish/95 HeavensTower/onEventFinish/97 HeavensTower/onEventFinish/98 HeavensTower/onEventFinish/101 Metalworks/Mih_Ketto/onTrigger Metalworks/Moyoyo/onTrigger Metalworks/Patt-Pott/onTrigger Metalworks/Topuru-Kuperu/onTrigger Metalworks/onEventFinish/254 Metalworks/onEventFinish/256 NorthernSanDoria/Heruze-Moruze/onTrigger NorthernSanDoria/Kasaroro/onTrigger NorthernSanDoria/onEventFinish/546 NorthernSanDoria/onEventFinish/547 NorthernSanDoria/onEventFinish/582
+char zone=NorthernSanDoria pos=-56,-3,36 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdoms current
+keyitem LetterToTheConsulsWindurst
+login
+trigger Heruze-Moruze                   # status 0: nothing
+finish-if-event
+trigger Kasaroro
+finish-if-event
+missionstatus Windurst 1
+trigger Kasaroro
+finish-if-event
+trigger Heruze-Moruze                   # 582
+finish                                  # status 2
+trigger Heruze-Moruze
+finish-if-event
+trigger Kasaroro                        # 546
+finish                                  # to The Three Kingdoms San d'Oria, status 3

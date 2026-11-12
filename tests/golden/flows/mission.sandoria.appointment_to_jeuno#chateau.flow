@@ -1,0 +1,27 @@
+# Appointment to Jeuno in Chateau d'Oraguille. Status 0: Arsha answers her own 513, the Great Hall door _6h4 its own
+# message; Halver 508, whose finish sets status 2. Status 2: Halver says his own message; Arsha 85, Chupaile 86; the
+# door 537, whose finish gives the Letter to the Ambassador and sets status 3. Status 3: Arsha and Chupaile their own
+# 513 and 514.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Arsha/onTrigger ChateauDoraguille/Chupaile/onTrigger ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h4/onTrigger ChateauDoraguille/onEventFinish/508 ChateauDoraguille/onEventFinish/537 RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/onEventFinish/39 RuludeGardens/onEventFinish/42 LowerDelkfuttsTower/_541/onTrade LowerDelkfuttsTower/_541/onTrigger LowerDelkfuttsTower/onEventFinish/0
+char zone=ChateauDoraguille pos=2,0.1,0.1 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria AppointmentToJeuno current
+login
+trigger Arsha                           # status 0: nothing from the mission
+finish-if-event
+trigger _6h4
+finish-if-event
+trigger Halver                          # 508
+finish                                  # status 2
+trigger Halver                          # status 2: nothing from the mission
+finish-if-event
+trigger Arsha                           # 85
+finish-if-event
+trigger Chupaile                        # 86
+finish-if-event
+trigger _6h4                            # 537
+finish                                  # status 3, the letter to the ambassador
+trigger Arsha                           # status 3: nothing from the mission
+finish-if-event
+trigger Chupaile
+finish-if-event

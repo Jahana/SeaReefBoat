@@ -1,0 +1,59 @@
+# The Jester Who'd be King (Windurst 8-2, mission.windurst.the_jester_whod_be_king), each ring's finish with the other
+# two held and missing (GM key items): status 2 only with all three.
+char zone=WindurstWaters pos=-55,-8,229 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+rank 8
+mission Windurst TheJesterWhodBeKing current
+login
+missionstatus Windurst 1
+keyitem AurasteryRing                   # a GM
+trigger Tosuka-Porika                   # no Optistery: 801
+finish                                  # the Optistery; Rhinostery missing: status 1
+delkeyitem OptisteryRing                # a GM
+keyitem RhinosteryRing                  # a GM
+trigger Tosuka-Porika                   # 801
+finish                                  # the three held: status 2
+missionstatus Windurst 1
+delkeyitem AurasteryRing                # a GM
+delkeyitem OptisteryRing                # a GM
+warp 187,-3,-116 Davoi
+trigger Sedal-Godjal                    # no Aurastery: 122
+finish                                  # Rhinostery held, Optistery missing: status 1
+delkeyitem AurasteryRing                # a GM
+keyitem OptisteryRing                   # a GM
+trigger Sedal-Godjal                    # 122
+finish                                  # the three held: status 2
+missionstatus Windurst 1
+delkeyitem RhinosteryRing               # a GM
+warp -51.0,-16.0,38.0 Feiyin
+delkeyitem OptisteryRing                # a GM
+trigger _no4                            # no Rhinostery: 22
+finish                                  # Aurastery held, Optistery missing: status 1
+delkeyitem RhinosteryRing               # a GM
+keyitem OptisteryRing                   # a GM
+delkeyitem AurasteryRing                # a GM
+trigger _no4                            # 22
+finish                                  # Aurastery missing: status 1
+missionstatus Windurst 2
+trigger _no4                            # status 2, the ring held: DefaultActions' 11
+finish-if-event

@@ -1,0 +1,65 @@
+# Qu'Bia Arena's The Heir to the Light (battlefield 516, San d'Oria 9-2's), area 1: a level 75 San d'Orian Warrior with
+# 9-2 current at status 3. Qu'Bia Arena's BC_Entrance 32000, option 65 (index 4, area 1); the GM effects keep the char
+# up; the eleven phase 1 orcs' allDeath plays 32004 (the mission's finish sets Intro 1; phase 2 spawned, Trion, the
+# set-down); the Warlord and his hands dead: WON, 32001 opens in the kill step; its finish (the mission's,
+# battlefieldWin 516 at status 3): status 4.
+char zone=QubiaArena pos=-212.2,-24.6,20.1 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+mission Sandoria Lightbringer completed
+mission Sandoria BreakingBarriers completed
+rank 9
+mission Sandoria TheHeirToTheLight current
+login
+missionstatus Sandoria 3
+trigger BC_Entrance                     # status 3: the 32000 menu
+update 32000 option=65                  # index 4, area 1: entered
+finish
+tick 2000                               # the first tick: phase 1 spawns
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill WARLORD_ROJGNOJ+3
+kill WARLORD_ROJGNOJ+4
+kill WARLORD_ROJGNOJ+5
+kill WARLORD_ROJGNOJ+6
+kill WARLORD_ROJGNOJ+7
+kill WARLORD_ROJGNOJ+8
+kill WARLORD_ROJGNOJ+9
+kill WARLORD_ROJGNOJ+10
+kill WARLORD_ROJGNOJ+11
+kill WARLORD_ROJGNOJ+12
+kill WARLORD_ROJGNOJ+13                 # phase 1 dead: allDeath: 32004
+finish                                  # 32004: the mission's Intro 1; phase 2 spawned, Trion, the set-down
+tick 2000
+kill WARLORD_ROJGNOJ
+kill WARLORD_ROJGNOJ+1
+kill WARLORD_ROJGNOJ+2                  # phase 2 dead: WON: 32001 opens
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish-if-event                         # 32001: the mission's finish: status 4
+tick 11000
+tick 10000

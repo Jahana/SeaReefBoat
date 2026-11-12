@@ -1,0 +1,24 @@
+# A Dreamy Interlude (WotG 48) after Whispers of Dawn. Whispers of Dawn's 26 [89, 23, 1756, 0, 0, 8323073], finished
+# with option 1, makes A Dreamy Interlude current with Timer 8001 and mustZone 89. The trigger plays 27 [89, 12354,
+# 59449, 120, 0, 8323089]. A warp to Batallia Downs [S] clears the mustZone; back in Grauberg [S] the Timer is still
+# ahead: 27 again (once per zone, a new zone). A wait of 24 Vana'diel hours makes the day 8001, the Timer's own day: 36
+# [89, 1, 596904, 1000, 0, 8323089]; its finish completes the mission (Cait in the Woods current).
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/onEventFinish/26 GraubergS/onEventFinish/36
+char zone=GraubergS pos=-140.28,-6.749,585.24 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg WhispersOfDawn current
+login
+trigger Veridical_Conflux                  # Whispers of Dawn's 26
+finish option=1                            # A Dreamy Interlude current, Timer day + 1, mustZone
+trigger Veridical_Conflux                  # 27
+finish
+warp -48,0,435 BatalliaDownsS              # another zone: mustZone cleared
+warp -140.28,-6.749,585.24 GraubergS
+trigger Veridical_Conflux                  # the Timer still ahead: 27
+finish
+wait vana=24                               # the next day: Timer == the day
+trigger Veridical_Conflux                  # 36
+finish                                     # completed

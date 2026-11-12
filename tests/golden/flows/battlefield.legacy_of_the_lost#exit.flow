@@ -1,0 +1,29 @@
+# Legacy of the Lost: in the arena, the first exit door: option 0 stays, option 4 leaves; a warp back to the entry
+# door, in again; the second exit door with option 4: out; the same again with the third exit door: out.
+lists TalaccaCove/_1l0/onTrigger TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/onEventFinish/32001 TalaccaCove/onEventFinish/32002 TalaccaCove/_1l1/onTrigger TalaccaCove/_1l2/onTrigger TalaccaCove/_1l3/onTrigger TalaccaCove/onEventFinish/32003
+char zone=TalaccaCove pos=-88.879,-7.318,-109.233 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau LegacyOfTheLost current
+login
+trigger _1l0
+update 32000 option=65
+finish
+trigger _1l1
+finish option=0
+trigger _1l1
+finish option=4
+warp -88.879,-7.318,-109.233 TalaccaCove
+trigger _1l0
+update 32000 option=65
+finish
+trigger _1l2
+finish option=4
+warp -88.879,-7.318,-109.233 TalaccaCove
+trigger _1l0
+update 32000 option=65
+finish
+trigger _1l3
+finish option=4

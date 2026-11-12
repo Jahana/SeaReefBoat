@@ -1,0 +1,18 @@
+# Pillar of Hope (WotG 43), the whole run, in Grauberg [S]. With nothing equipped the Veridical Conflux plays 28 [89,
+# 23, 1743] (not repeated, no weapons); its finish with option 0 sets Option 1. With a Bronze Sword in the main slot it
+# plays 28 [89, 23, 1743, 1, 0, 0, 0, 1]; its finish with option 1 completes the mission (Glimmer of Life current) and
+# writes Glimmer of Life's Timer 8001 (the Vana'diel day + 1) and mustZone 89.
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/onEventFinish/28
+char zone=GraubergS pos=-140.28,-6.749,585.24 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg PillarOfHope current
+item BronzeSword
+login
+trigger Veridical_Conflux                  # 28, not repeated, no weapons
+finish option=0                            # Option 1
+equip BronzeSword Main
+trigger Veridical_Conflux                  # 28, repeated, a main weapon
+finish option=1                            # completed; Glimmer of Life's Timer and mustZone

@@ -1,0 +1,19 @@
+# The Moonlit Path (battlefield.moonlit_path): the exit. The char enters arena 1, then Moon_Spiral (arena 1's), in the battlefield:
+# 32003 (an optional cutscene, skippable); its update: nothing; finished with 0: not 4: still inside. Again, finished with
+# 4: leaveBattlefield(1) (no win, no loss event). MS_Entrance with the clearance and the bauble kept: checkRequirements as
+# no registrant fails: the handler returns nothing: the default.
+lists FullMoonFountain/MS_Entrance/onTrigger FullMoonFountain/Moon_Spiral/onTrigger FullMoonFountain/onEventUpdate/32003 FullMoonFountain/onEventFinish/32003
+char zone=FullMoonFountain pos=-301.3,9.5,-260.0 job=WAR lvl=75
+quest Windurst.TheMoonlitPath accepted
+keyitem MoonBauble
+login
+trigger MS_Entrance                     # the bauble: the menu 32000
+update 32000 option=1                   # area 1: entered
+finish                                  # in the arena
+trigger Moon_Spiral                  # in the battlefield: 32003
+update 32003 option=1                   # onExitEventUpdate: nothing
+finish option=0                         # not 4: still inside
+trigger Moon_Spiral                  # 32003
+finish option=4                         # leaveBattlefield(1): out
+warp -301.3,9.5,-260.0 FullMoonFountain
+trigger MS_Entrance                     # the clearance, the bauble kept: the default

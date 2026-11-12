@@ -1,0 +1,30 @@
+# Through the Quicksand Caves (Zilart 6, mission.zilart.through_the_quicksand_caves): Norg's Gilgamesh plays
+# 12. In the Chamber of Oracles SC_Entrance opens the menu (32000, the fight's bit 1); option 1 (index 0,
+# area 1) enters it (ENTERING_THE_BATTLEFIELD_FOR 7609, the party and time lines 7543 and 7546). The three
+# Centurio V-III of area 1 (by id) die: the fight is won (battlefield.through_the_quicksand_caves) and 32001
+# plays; its finish completes the mission (no key item, no title; The Chamber of Oracles current). The
+# next ticks end the fight (0x075) and drop the battlefield effects; warped to Norg, Gilgamesh plays
+# nothing.
+lists Norg/Gilgamesh/onTrigger ChamberOfOracles/SC_Entrance/onTrigger ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/onEventUpdate/32000 ChamberOfOracles/onEventFinish/32000 ChamberOfOracles/onEventFinish/32001
+char zone=Norg pos=120,-8,-12 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ThroughTheQuicksandCaves current
+login
+trigger Gilgamesh                       # 12
+finish
+warp -218.6,-1.9,23.0 ChamberOfOracles
+trigger SC_Entrance                     # the menu 32000 (bit 1)
+update 32000 option=1                   # index 0, area 1: entered
+finish
+tick 2000
+kill CENTURIO_V_III
+kill CENTURIO_V_III+1
+kill CENTURIO_V_III+2                   # all three dead: won, 32001
+finish                                  # the mission's 32001: completed
+tick 11000
+tick 10000
+warp 120,-8,-12 Norg
+trigger Gilgamesh                       # nothing

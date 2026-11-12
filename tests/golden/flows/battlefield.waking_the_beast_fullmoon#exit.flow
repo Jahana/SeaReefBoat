@@ -1,0 +1,28 @@
+# Waking the Beast (battlefield.waking_the_beast_fullmoon, FullMoonFountain): the exit. The char (level 99 Warrior, the
+# quest accepted, the seven key items) enters area 1, then Moon_Spiral in the battlefield: 32003; its update: nothing;
+# finished with 0: still inside. The main Carbuncle killed to 1 HP; Moon_Spiral again, finished with 4: out; the
+# battlefield's effect gone.
+lists FullMoonFountain/MS_Entrance/onTrigger FullMoonFountain/Moon_Spiral/onTrigger FullMoonFountain/onEventUpdate/32003 FullMoonFountain/onEventFinish/32003
+char zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+quest OtherAreas.WakingTheBeast accepted
+keyitem EyeOfFlames
+keyitem EyeOfFrost
+keyitem EyeOfGales
+keyitem EyeOfStorms
+keyitem EyeOfTides
+keyitem EyeOfTremors
+keyitem RainbowResonator
+login
+trigger MS_Entrance
+update 32000 option=33
+finish
+trigger Moon_Spiral
+update 32003 option=1                   # nothing
+finish option=0                         # 0: still inside
+tick 2000
+kill CARBUNCLE_PRIME                    # unkillable: killed to 1 HP
+trigger Moon_Spiral
+finish option=4                         # 4: out of the battlefield
+tick 1000
+tick 8000
+tick 10000

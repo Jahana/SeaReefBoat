@@ -1,0 +1,27 @@
+# Uninvited Guests (battlefield.uninvited_guests, Monarch Linn): the registrant's requirements (Quest[4][81]Prog 1
+# and the permit). Each char triggers SD_Entrance and gets the requirements message (7150) and a release, no menu:
+# main (accepted, Prog 1) has no permit; bob (accepted, Prog 0) has the permit; cat (accepted, Prog 2) has the
+# permit; dan (quest not accepted, Prog 1) has the permit.
+lists MonarchLinn/SD_Entrance/onTrigger
+char zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+char bob zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+char cat zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+char dan zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+quest OtherAreas.UninvitedGuests accepted
+charvar Quest[4][81]Prog 1
+bob: quest OtherAreas.UninvitedGuests accepted
+bob: charvar Quest[4][81]Prog 0
+bob: keyitem MonarchLinnPatrolPermit
+cat: quest OtherAreas.UninvitedGuests accepted
+cat: charvar Quest[4][81]Prog 2
+cat: keyitem MonarchLinnPatrolPermit
+dan: charvar Quest[4][81]Prog 1
+dan: keyitem MonarchLinnPatrolPermit
+login
+bob: login
+cat: login
+dan: login
+trigger SD_Entrance
+bob: trigger SD_Entrance
+cat: trigger SD_Entrance
+dan: trigger SD_Entrance

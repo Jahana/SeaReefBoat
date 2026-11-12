@@ -1,0 +1,21 @@
+# Uninvited Guests (battlefield.uninvited_guests, Monarch Linn): a level 75 char with the quest accepted and
+# Quest[4][81]Prog 1 and the permit triggers the entrance. Updates 0 (ignored), 4, 96 and 100 (REQS_NOT_MET), then
+# 97 (area 1): registered and entered. bfwin (a GM WON: Mammet-800's onMobDeath wins only after an engage sets
+# parentMammet, and no flow engages): event 32001, its finish, the cleanup.
+lists MonarchLinn/SD_Entrance/onTrigger MonarchLinn/onEventUpdate/32000 MonarchLinn/onEventFinish/32000 MonarchLinn/onEventFinish/32001
+char zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+quest OtherAreas.UninvitedGuests accepted
+charvar Quest[4][81]Prog 1
+keyitem MonarchLinnPatrolPermit
+login
+trigger SD_Entrance
+update 32000 option=0
+update 32000 option=4
+update 32000 option=96
+update 32000 option=100
+update 32000 option=97
+finish
+bfwin
+finish
+tick 11000
+tick 10000

@@ -1,0 +1,20 @@
+# Trial-Size Trial by Ice (battlefield.trial_size_trial_by_ice, CloisterOfFrost, a BattlefieldQuest; 15 minutes, one player
+# capped at 20, the MiniTuningForkOfIce required, Ice_Protocrystal the exit). A level 20 Summoner with the quest accepted and the fork.
+# The trade to IP_Entrance: the menu 32000. Updates: 0 and an area past the zone's arenas: REQS_NOT_MET; the fight's
+# option, area 1: registered, entered (the fork taken). The boss of arena 1 killed: WON; the win: 32001; its finish:
+# the battlefield's onEventFinishWin (and the quest's handler). After the cleanup, out.
+lists CloisterOfFrost/IP_Entrance/onTrade CloisterOfFrost/onEventUpdate/32000 CloisterOfFrost/onEventFinish/32000 CloisterOfFrost/onEventFinish/32001
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=SMN lvl=20
+quest Sandoria.TrialSizeTrialByIce accepted
+item MiniTuningForkOfIce
+charvar Quest[0][107]Prog 1
+login
+trade IP_Entrance MiniTuningForkOfIce x1  # the fork: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=36                  # past the arenas: REQS_NOT_MET
+update 32000 option=33                   # area 1: registered, entered, the fork taken
+finish                                  # in the arena
+kill SHIVA_PRIME_ASA-18                  # the boss of arena 1: WON; 32001
+finish                                  # the battlefield's finish
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

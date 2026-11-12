@@ -1,0 +1,29 @@
+# Carbuncle Debacle (battlefield.carbuncle_debacle_cloister_of_gales, CloisterOfGales): the requirement arms of the
+# registrant (BattlefieldQuest's check: only the registrant needs the quest state and the item). Main, a level 75
+# Warrior with the quest accepted and the pendulum but CarbuncleDebacleProgress 5: the trade to WP_Entrance: no options.
+# bob, CarbuncleDebacleProgress 6 and the pendulum, the quest only available: no options. cat, accepted and
+# CarbuncleDebacleProgress 6 but no pendulum (no trade): no options. dan, the quest completed, CarbuncleDebacleProgress
+# 6 and the pendulum: a registrant needs accepted: no options.
+lists CloisterOfGales/WP_Entrance/onTrade CloisterOfGales/WP_Entrance/onTrigger
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char bob zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char cat zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char dan zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 5
+item WindPendulum
+bob: charvar CarbuncleDebacleProgress 6
+bob: item WindPendulum
+cat: quest Windurst.CarbuncleDebacle accepted
+cat: charvar CarbuncleDebacleProgress 6
+dan: quest Windurst.CarbuncleDebacle completed
+dan: charvar CarbuncleDebacleProgress 6
+dan: item WindPendulum
+login
+trade WP_Entrance WindPendulum x1      # CarbuncleDebacleProgress 5: no options
+bob: login
+bob: trade WP_Entrance WindPendulum x1 # available: no options
+cat: login
+cat: trigger WP_Entrance               # no pendulum traded: no options
+dan: login
+dan: trade WP_Entrance WindPendulum x1 # completed: no options

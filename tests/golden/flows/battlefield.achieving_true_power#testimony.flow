@@ -1,0 +1,28 @@
+# Achieving True Power (battlefield.achieving_true_power#testimony, Navukgo Execution Chamber): a level 75 Puppetmaster
+# at level cap 75, Achieving True Power accepted at Quest[1][85]Prog 1 (GMs), one Puppetmaster's Testimony, with
+# modules/era/lua/globals/testimony_single_use.lua enabled by xi.pre(ABYSSEA) (RESTRICT_CONTENT 1, ENABLE_ABYSSEA 0): it
+# overrides Battlefield.onBattlefieldEnter. The testimony traded: the 32000 menu; 49 (area 1): registered, entered: wear
+# 0 -> 3 (testimony_single_use.lua:21-22 wears it to totalUses - 1 = 2, then its super at :26, the framework's
+# onBattlefieldEnter, once more) and TESTIMONY_WEARS 7296 (the item, 1 shown, 0 left), then the framework's other three
+# texts (without the module: 3 shown, 2 left, wear 1: #exit). Finished: in. _1s1, option 4: out. 10 s; a warp back to
+# _1s0; the testimony traded again: TESTIMONY_IS_TORN 7295 with the item, no menu.
+module modules/era/lua/globals/testimony_single_use.lua
+lists NavukgoExecutionChamber/_1s0/onTrade NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/_1s1/onTrigger NavukgoExecutionChamber/onEventFinish/32003
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_ABYSSEA 0
+levelcap 75
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.PuppetmasterBlues completed
+quest Bastok.AchievingTruePower accepted
+charvar Quest[1][85]Prog 1
+item PuppetmastersTestimony
+login
+trade _1s0 PuppetmastersTestimony x1
+update 32000 option=49
+finish
+trigger _1s1
+finish option=4
+tick 10000
+warp -598.5,8,-100 NavukgoExecutionChamber
+trade _1s0 PuppetmastersTestimony x1

@@ -1,0 +1,23 @@
+# Omens (battlefield.omens#areas, Navukgo Execution Chamber): Area 2: kill IMMORTAL_FLAN+7, event 32001 (2,...). Then
+# the char vars set again and area 3: kill IMMORTAL_FLAN+14, event 32001 (3,...). The finish runs the quest's 32001
+# (Omens.cs): main's Prog 0 -> 1.
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+quest AhtUrhgan.Omens accepted
+charvar Quest[6][22]Prog 0
+login
+trigger _1s0
+update 32000 option=34
+finish
+kill IMMORTAL_FLAN+7
+finish
+tick 11000
+tick 10000
+charvar Quest[6][22]Prog 0
+trigger _1s0
+update 32000 option=35
+finish
+kill IMMORTAL_FLAN+14
+finish
+tick 11000
+tick 10000

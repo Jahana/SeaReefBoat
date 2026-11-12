@@ -8,33 +8,36 @@ using XI.Quests.Authoring;
 using QC = XI.QuestContent;
 
 // quest rework C2 Task 3 (docs/superpowers/specs/2026-11-05-quest-rework-c2-mission-platform-design.md, sections 3.2
-// and 3.7): a test-only C# mission, Bastok 1-2 at Naji (never in XI.QuestContent), registered through
-// ZoneHost.TestQuestScripts while scripts/missions/bastok/1_2_A_Geological_Survey.lua is there. It takes the Lua
-// Mission container's place (Mission[1][1]) at its index; with the Lua file hidden it takes the file's slot by its
+// and 3.7): a test-only C# mission, the RoV fixture mission at Naji (never in XI.QuestContent), registered through
+// ZoneHost.TestQuestScripts while its Lua fixture (Fixtures/C3_Mission_Rov.lua) is listed. It takes the Lua
+// Mission container's place (Mission[13][60]) at its index; with the Lua file hidden it takes the file's slot by its
 // LegacyPath; CSHARP_QUESTS_OFF leaves the Lua file in charge, and with no file logs that it stays in C#; a broken one
 // with no file logs the no-fallback line. In play its section checks read the current mission and the status from
 // Mission's check arguments, and its q.Mission.Complete() leaves the char (missions blob, rank points, char_vars)
-// as the Lua Mission:complete with the same reward leaves another, on Bastok and on CoP (whose status
+// as the Lua Mission:complete with the same reward leaves another, on RoV and on CoP (whose status
 // Mission:complete keeps)
 internal static partial class Program
 {
-    // the test missions' keys: Bastok 1-2 and CoP 1-2, whose Lua files stay (Bastok 1-1's and CoP 1-1's are gone since
-    // quest rework C2 Task 7, which put them in C#)
-    private const string SampleKey = "mission.bastok.geological_survey";
-    private const string SampleLuaFile = "scripts/missions/bastok/1_2_A_Geological_Survey";
-    private const string SampleContainer = "Mission[1][1]";
-    private const string CopSampleKey = "mission.cop.below_the_arks";
-    private const string CopSampleContainer = "Mission[6][118]";
+    // the test missions' keys: constants no Lua file or C# mission names (RunTestKeysFree holds them so). Their Lua
+    // containers are Fixtures/C3_Mission_Rov.lua and C3_Mission_Cop.lua, so no lane's port moves them
+    private const string SampleKey = "mission.rov.the_endless_sky";
+    private const string SampleLuaFile = "scripts/missions/rov/QSL_Mission_Fixture";
+    private const string SampleSourceFile = "tests/XI.Verify.QuestScripts.Live/Fixtures/C3_Mission_Rov.lua";
+    private const string SampleContainer = "Mission[13][60]";
+    private const string CopSampleKey = "mission.cop.descendants_of_a_line_lost";
+    private const string CopSampleLuaFile = "scripts/missions/cop/QSL_Mission_Fixture";
+    private const string CopSampleSourceFile = "tests/XI.Verify.QuestScripts.Live/Fixtures/C3_Mission_Cop.lua";
+    private const string CopSampleContainer = "Mission[6][335]";
 
-    // Bastok 1-2 at Naji (Metalworks): status 0 plays 1000 and sets status 1; status 1 plays 1001 and completes with
-    // 400 rank points. legacyPath: its LegacyPath (null: none, the Lua container's slot)
+    // the RoV fixture mission at Naji (Metalworks): status 0 plays 1000 and sets status 1; status 1 plays 1001 and
+    // completes with 400 rank points. legacyPath: its LegacyPath (null: none, the Lua container's slot)
     private sealed class SampleMission : MissionScript
     {
         private readonly string legacyPath_;
         private readonly ushort zone_;
 
         public SampleMission(string legacyPath = null, ushort zone = QC.Zone.Metalworks)
-            : base(MissionLog.Bastok, "GEOLOGICAL_SURVEY")
+            : base(MissionLog.RoV, "THE_ENDLESS_SKY")
         {
             legacyPath_ = legacyPath;
             zone_ = zone;
@@ -52,10 +55,11 @@ internal static partial class Program
         }
     }
 
-    // CoP 1-2 at Naji: status 3 plays 1002 and completes, its reward the next mission (The Mothercrystals)
+    // the CoP fixture mission at Naji: status 3 plays 1002 and completes, its reward the next mission
+    // (The Mothercrystals)
     private sealed class SampleCopMission : MissionScript
     {
-        public SampleCopMission() : base(MissionLog.CoP, "BELOW_THE_ARKS") { }
+        public SampleCopMission() : base(MissionLog.CoP, "DESCENDANTS_OF_A_LINE_LOST") { }
 
         protected override void Build(MissionScriptBuilder b)
         {
@@ -73,6 +77,11 @@ internal static partial class Program
         RunC2Calls();
         // quest rework C2 Task 8: the battlefield kind (C2Battlefields.cs)
         RunC2Battlefields();
+        RunC3Prep();
+        // quest rework C3 PR1: testimony_single_use on a C# battlefield (C3Testimony.cs)
+        RunC3Testimony();
+        // quest rework C3 PR2: a C# battlefield's deferred callbacks (C3Callbacks.cs)
+        RunC3PR2Live();
         zone.TestQuestScripts.Clear();
         NewWorld();
     }
@@ -97,23 +106,23 @@ internal static partial class Program
     {
         string root = Path.GetDirectoryName(dataDir_);
         Check("c2 mission: the Lua file is there", "True",
-            File.Exists(Path.Combine(root, SampleLuaFile + ".lua")).ToString());
+            File.Exists(Path.Combine(root, SampleSourceFile)).ToString());
         NewWorld();
         var luaOrder = zone.ContainerOrder(lua);
         int luaAt = luaOrder.IndexOf(SampleContainer);
-        Check("c2 mission: Mission[1][1] is the Lua file's", $"True {SampleLuaFile}",
+        Check($"c2 mission: {SampleContainer} is the Lua file's", $"True {SampleLuaFile}",
             $"{luaAt >= 0} {ContainerFile(SampleContainer)}");
 
         int mark = log.Count;
         zone.TestQuestScripts.Add(new SampleMission());
         Lua("InteractionGlobal.reload(true)");
         var order = zone.ContainerOrder(lua);
-        Check("c2 mission: registered, the container at Mission[1][1]'s index is the C# mission's",
+        Check($"c2 mission: registered, the container at {SampleContainer}'s index is the C# mission's",
             $"{luaAt} csharp:{SampleKey}", $"{order.IndexOf(SampleContainer)} {ContainerFile(SampleContainer)}");
         Check("  the list is otherwise the same", string.Join("\n", luaOrder), string.Join("\n", order));
         Check("  CSharpQuests.live has it", SampleKey,
             Lua($"report(tostring(CSharpQuests.live['{SampleContainer}']))"));
-        Check("  Naji's onTrigger entries of Mission[1][1] are the C# mission's two sections",
+        Check($"  Naji's onTrigger entries of {SampleContainer} are the C# mission's two sections",
             $"csharp:{SampleKey};csharp:{SampleKey}", Owners(QC.Zone.Metalworks, "Naji", "onTrigger", SampleContainer));
         Check("  no quests: line", "",
             string.Join(" | ", log.Skip(mark).Where(l => l.StartsWith("quests: ") && !IsRegistered(l))));
@@ -191,28 +200,33 @@ internal static partial class Program
                $"vars={string.Join(",", vars)} | rows={string.Join(",", rows)}";
     }
 
-    // the C# mission's Complete() against Mission:complete on two fresh fixture chars at Naji, on Bastok 1-2 (status
-    // 1, the reward's 400 rank points) and CoP 1-2 (status 3, kept; the reward's next mission), each mission's
-    // Option var set before
+    // the C# mission's Complete() against Mission:complete on two fresh fixture chars at Naji, on the RoV fixture
+    // (status 1, the reward's 400 rank points) and the CoP fixture (status 3, kept; the reward's next mission), each
+    // mission's Option var set before
     private static void RunC2Complete()
     {
         NewWorld();
         zone.TestQuestScripts.Add(new SampleMission());
         zone.TestQuestScripts.Add(new SampleCopMission());
         Lua("InteractionGlobal.reload(true)");
-        Check("c2 mission: the CoP sample replaces Mission[6][118]", $"csharp:{CopSampleKey}",
+        Check($"c2 mission: the CoP sample replaces {CopSampleContainer}", $"csharp:{CopSampleKey}",
             ContainerFile(CopSampleContainer));
 
         foreach (var (label, ml, id, status, reward, csid) in new[]
                  {
-                     ("bastok", 1, QC.Mission.Bastok.GeologicalSurvey, 1, "{ rankPoints = 400 }", 1001),
-                     ("cop", 6, QC.Mission.Cop.BelowTheArks, 3,
+                     ("rov", 13, QC.Mission.Rov.TheEndlessSky, 1, "{ rankPoints = 400 }", 1001),
+                     ("cop", 6, QC.Mission.Cop.DescendantsOfALineLost, 3,
                       $"{{ nextMission = {{ 6, {QC.Mission.Cop.TheMothercrystals} }} }}", 1002),
                  })
         {
-            // CoP's fresh current mission (Ancient Flames Beckon) dropped first: addMission logs an overwrite
+            // the log's fresh current mission (CoP: Ancient Flames Beckon, RoV: Resonance) dropped first: addMission
+            // logs an overwrite. A RoV char also gets a current Bastok mission (Geological Survey): with none,
+            // Metalworks' 1000 finish at Naji would begin The Zeruhn Report (its state for a Bastokan with no Bastok
+            // mission), and that would change the Bastok log on the C# side only
             string Setup(int s) =>
-                (ml == 6 ? $"player:delMission(6, {QC.Mission.Cop.AncientFlamesBeckon}) " : "") +
+                (ml == 6 ? $"player:delMission(6, {QC.Mission.Cop.AncientFlamesBeckon}) " :
+                 $"player:delMission(13, {QC.Mission.Rov.Resonance}) " +
+                 $"player:addMission(1, {QC.Mission.Bastok.GeologicalSurvey}) ") +
                 $"player:addMission({ml}, {id}) player:setMissionStatus({ml}, {s}) " +
                 $"player:setCharVar('Mission[{ml}][{id}]Option', 2)";
 
@@ -230,7 +244,7 @@ internal static partial class Program
             Fixture(csChar, QC.Zone.Metalworks, 64.0f, -14.0f, -4.0f, 0);
             Login();
             uint naji = NpcId("Naji");
-            if (label == "bastok")
+            if (label == "rov")
             {
                 // status 0: the first state plays 1000, its finish sets status 1 (q.Mission.SetStatus)
                 Lua(Setup(0));
@@ -248,7 +262,7 @@ internal static partial class Program
             Check($"c2 mission ({label}): Mission:complete answered true", "true", done);
             Check($"c2 mission ({label}): Complete() leaves the char as Mission:complete does", luaSide, csSide);
             Check($"  ({label}) the status after it (CoP keeps it)", ml == 6 ? $"{status}" : "0", StatusOf(ml));
-            Check($"  ({label}) the mission's vars cleared, the rank points", $"False {(ml == 1 ? 400 : 0)}",
+            Check($"  ({label}) the mission's vars cleared, the rank points", $"False {(ml == 13 ? 400 : 0)}",
                 $"{csSide.Contains($"Mission[{ml}][{id}]")} " +
                 DbRow("rank_points", "FROM char_profile WHERE charid = ?"));
             Cleanup(db, luaChar);
@@ -271,23 +285,15 @@ internal static partial class Program
     // the test-only NPC script whose mission branches are the calls (xi.cs.mission, xi.cs.missionEvent)
     private const string C2CallFixture = "tests/XI.Verify.QuestScripts.Live/Fixtures/C2_Mission_Call.lua";
 
-    // Bastok 1-2 as a call-only mission at Gerbaum (Bastok Mines): status 0 plays 1000, its finish sets status 1;
-    // status 1 plays 1001, and the zone-in of status 1 is 1002. Its finish of 32001 in Riverne - Site #B01 is for the
-    // scan only (a battlefield folder named with '_' for the zone name's '-')
+    // the RoV fixture mission as a call-only mission at Gerbaum (Bastok Mines): status 0 plays 1000, its finish
+    // sets status 1; status 1 plays 1001, and the zone-in of status 1 is 1002. Its finish of 32001 in Riverne - Site
+    // #B01 is for the scan only (a battlefield folder named with '_' for the zone name's '-')
     private sealed class CallMission : MissionScript
     {
-        public CallMission() : base(MissionLog.Bastok, "GEOLOGICAL_SURVEY") { }
+        public CallMission() : base(MissionLog.RoV, "THE_ENDLESS_SKY") { }
 
-        protected override void Build(MissionScriptBuilder b)
-        {
-            b.State(current: true, status: 0).Npc(QC.Zone.BastokMines, QC.Npc.BastokMines.Gerbaum).Called()
-                .OnTrigger(QuestReply.Event(1000))
-                .OnEventFinish(QC.Zone.BastokMines, 1000, q => q.Mission.SetStatus(1));
-            b.State(current: true, status: 1).Npc(QC.Zone.BastokMines, QC.Npc.BastokMines.Gerbaum).Called()
-                .OnTrigger(QuestReply.Event(1001))
-                .OnZoneIn(QC.Zone.BastokMines, q => QuestReply.Event(1002))
-                .OnEventFinish(QC.Zone.RiverneSiteB01, 32001, q => { });
-        }
+        protected override void Build(MissionScriptBuilder b) =>
+            C2CallMissionBody.Build(b, last => last.OnEventFinish(QC.Zone.RiverneSiteB01, 32001, q => { }));
     }
 
     // xi.cs.mission, missionEvent and missionZoneIn on a call-only test mission through the fixture NPC script; the
@@ -304,7 +310,7 @@ internal static partial class Program
             "function/function/function",
             Lua("report(type(xi.cs.mission) .. '/' .. type(xi.cs.missionEvent) .. '/' .. " +
                 "type(xi.cs.missionZoneIn))"));
-        Check("c2 mission call: a call-only mission registers as a call; Mission[1][1] stays the Lua file's",
+        Check($"c2 mission call: a call-only mission registers as a call; {SampleContainer} stays the Lua file's",
             $"True||{SampleLuaFile}",
             $"{zone.IsNpcCallQuest(SampleKey)}|" +
             string.Join(" | ", log.Skip(mark).Where(l => l.Contains(SampleKey))) +
@@ -324,10 +330,11 @@ internal static partial class Program
         string EventFinish(int csid) =>
             Lua($"local e = dofile('{fixture}') " +
                 $"report(tostring(e.onEventFinish(player, {csid}, 0, GetNPCByID({gerbaum}))))");
-        string Status() => Lua("report(tostring(player:getMissionStatus(1)))");
+        string Status() => Lua("report(tostring(player:getMissionStatus(13)))");
         string ZoneIn() =>
             Lua($"report(tostring(xi.cs.missionZoneIn(player, '{SampleKey}', {QC.Zone.BastokMarkets})))");
-        Lua($"player:addMission(1, {QC.Mission.Bastok.GeologicalSurvey}) player:setMissionStatus(1, 0)");
+        Lua($"player:delMission(13, {QC.Mission.Rov.Resonance}) " +
+            $"player:addMission(13, {QC.Mission.Rov.TheEndlessSky}) player:setMissionStatus(13, 0)");
 
         Check("c2 mission call: current at status 0: xi.cs.mission acted (true)", "true", Trigger());
         Check("  Gerbaum plays 1000 through player:startEvent", $"{id}:1000", EvId());
@@ -340,7 +347,7 @@ internal static partial class Program
         Check("  xi.cs.missionZoneIn at status 1: 1002", "1002", ZoneIn());
 
         // another current mission: nothing matches, the script's own branch plays
-        Lua($"player:delMission(1, {QC.Mission.Bastok.GeologicalSurvey})");
+        Lua($"player:delMission(13, {QC.Mission.Rov.TheEndlessSky})");
         Check("c2 mission call: not current: false, the script's fallback 22", $"false/{id}:22",
             Trigger() + "/" + EvId());
         Finish();

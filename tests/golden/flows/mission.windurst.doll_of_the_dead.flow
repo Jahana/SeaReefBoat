@@ -1,0 +1,66 @@
+# Doll of the Dead (Windurst 9-1, mission.windurst.doll_of_the_dead) played through: a level 75 Windurstian Warrior at
+# rank 9 with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before it
+# completed and a Clump of Goobbue Humus. Rakoh Buuma's 114, option 22: begun. Apururu 619 (status 1); the Heaven's
+# Tower zone-in 335 (2); _6q2 362 (3); Apururu 620 (4); Yoran-Oran 439 (5); the Boyahda Tree's Mandragora Warden speaks
+# WARDEN_SPEECH (MessageTextFromNpc) and says WARDEN_TRANSLATION; the humus traded: 13 (status 6, the letter); Apururu
+# 621 (7, the letter taken); the Full Moon Fountain zone-in 61: completed (Guiding Star, 800 rank points).
+char zone=WindurstWoods pos=106,-5,-21 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+mission Windurst TheJesterWhodBeKing completed
+rank 9
+item ClumpOfGoobbueHumus
+login
+trigger Rakoh_Buuma                     # no mission current: the guard's own mission list
+finish option=24                        # no mission's option (this mission takes 22): not begun
+trigger Rakoh_Buuma                     # the list again
+finish option=22                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Apururu                         # status 0: 619
+finish                                  # status 1
+trigger Apururu                         # status 1: nothing from the mission
+finish-if-event
+warp 2,0,30 HeavensTower open           # status 1: 335
+finish                                  # status 2
+trigger _6q2                            # status 2: 362
+finish                                  # status 3
+trigger _6q2                            # status 3: nothing from the mission
+finish-if-event
+warp -9,-2,13 WindurstWoods
+trigger Apururu                         # status 3: 620
+finish                                  # status 4
+warp -108,-14,203.3 WindurstWalls
+trigger Yoran-Oran                      # status 4: 439
+finish                                  # status 5
+trigger Yoran-Oran                      # status 5: nothing from the mission
+finish-if-event
+warp 81.981,7.593,141.5 TheBoyahdaTree
+trigger Mandragora_Warden               # status 5: WARDEN_SPEECH, WARDEN_TRANSLATION
+finish-if-event
+trade Mandragora_Warden ClumpOfGoobbueHumus x1  # status 5, the humus: 13
+finish                                  # the humus taken, status 6, the letter
+trigger Mandragora_Warden               # status 6: nothing from the mission
+finish-if-event
+warp -9,-2,13 WindurstWoods
+trigger Apururu                         # status 6: 621
+finish                                  # status 7, the letter taken
+warp -301.3,9.5,-260.0 FullMoonFountain open  # status 7: 61
+finish                                  # completed: the title, 800 rank points

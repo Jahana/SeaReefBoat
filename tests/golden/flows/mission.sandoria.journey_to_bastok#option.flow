@@ -1,0 +1,17 @@
+# Journey to Bastok in Metalworks with the mission's Option var set to 1 at status 0 (a GM): Grohm 425 (Option 1
+# decides before the status), whose finish gives three Pickaxes, moves to status 5 and sets Option to 0. Then at
+# status 5 without sand Grohm 424 twice.
+lists Metalworks/Grohm/onTrigger Metalworks/Pius/onTrigger Metalworks/Savae_E_Paleade/onTrade Metalworks/onEventFinish/205 Metalworks/onEventFinish/355 Metalworks/onEventFinish/423 Metalworks/onEventFinish/425
+char zone=Metalworks pos=-18,-11,-27 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria JourneyToBastok current
+charvar Mission[0][6]Option 1
+login
+missionstatus Sandoria 0
+trigger Grohm
+finish
+missionstatus Sandoria 5
+trigger Grohm
+finish
+trigger Grohm
+finish-if-event

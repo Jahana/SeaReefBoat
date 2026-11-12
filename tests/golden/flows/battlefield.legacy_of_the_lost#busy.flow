@@ -1,0 +1,53 @@
+# Legacy of the Lost: LOCKED, and a menu outliving its fight (as save_the_children#busy): bob is offered the menu
+# while main is in, and does not answer it; cid's and eve's clearances taken at the lock; cid's late update (LOCKED);
+# after the win and cleanup eve's update (REQS_NOT_MET).
+lists TalaccaCove/_1l0/onTrigger TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/onEventFinish/32001 TalaccaCove/onEventFinish/32002 TalaccaCove/_1l1/onTrigger
+char zone=TalaccaCove pos=-88.879,-7.318,-109.233 job=WAR lvl=75 nation=1
+char bob zone=TalaccaCove pos=-88.879,-7.318,-109.233 job=WAR lvl=75 nation=1
+char cid zone=TalaccaCove pos=-88.879,-7.318,-109.233 job=WAR lvl=75 nation=1
+char eve zone=TalaccaCove pos=-88.879,-7.318,-109.233 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau LegacyOfTheLost current
+bob: mission Asa BurgeoningDread current
+bob: mission Acp ACrystallineProphecyFin current
+bob: mission Rov ARhapsodyForTheAges current
+bob: mission Soa Abomination current
+bob: mission Toau LegacyOfTheLost current
+cid: mission Asa BurgeoningDread current
+cid: mission Acp ACrystallineProphecyFin current
+cid: mission Rov ARhapsodyForTheAges current
+cid: mission Soa Abomination current
+cid: mission Toau LegacyOfTheLost completed
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Toau LegacyOfTheLost completed
+login
+bob: login
+cid: login
+eve: login
+invite cid
+cid: accept
+invite eve
+eve: accept
+trigger _1l0
+update 32000 option=65
+finish
+bob: trigger _1l0
+cid: trigger _1l0
+eve: trigger _1l0
+tick 2000
+claim GESSHO
+tick 1000
+cid: update 32000 option=65
+cid: finish
+kill GESSHO
+finish
+tick 11000
+tick 10000
+eve: update 32000 option=65
+eve: finish

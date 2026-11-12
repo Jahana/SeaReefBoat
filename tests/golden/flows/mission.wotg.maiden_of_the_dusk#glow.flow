@@ -1,0 +1,23 @@
+# Maiden of the Dusk (WotG 51) at Status 3 without the Primal Glow: the Veridical Conflux plays 44 [89, 23, 1756, 0,
+# 68032378, 209748094, 1] (Timer 0); its finish writes Timer 8001 and gives the Primal Glow (1731, message 6398). With
+# it held: Grauberg [S]'s DefaultActions MYSTERIOUS_COLUMN_ROTATES (8387). With it taken (a GM) and the Timer ahead: the
+# event 45 [89, 23, 1756, 0, 68032378, 209748094, 1], finished with no change; once per zone, so the next trigger gets
+# 8387.
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/onEventFinish/38 GraubergS/onEventFinish/44 WalkOfEchoes/_521/onTrigger WalkOfEchoes/onZoneIn/1 WalkOfEchoes/onEventUpdate/6 WalkOfEchoes/onEventUpdate/7 WalkOfEchoes/onEventUpdate/8 WalkOfEchoes/onEventFinish/4 WalkOfEchoes/onEventFinish/5 WalkOfEchoes/onEventFinish/6 WalkOfEchoes/onEventFinish/7 WalkOfEchoes/onEventFinish/8 WalkOfEchoes/onEventFinish/9
+char zone=GraubergS pos=-140.28,-6.749,585.24 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg MaidenOfTheDusk current
+charvar Mission[5][50]Status 3
+login
+trigger Veridical_Conflux                  # no Primal Glow, Timer 0: 44
+finish                                     # Timer day + 1, the Primal Glow
+trigger Veridical_Conflux                  # held: nothing of the mission
+finish-if-event
+delkeyitem PrimalGlow
+trigger Veridical_Conflux                  # Timer ahead: 45, once per zone
+finish
+trigger Veridical_Conflux                  # not again
+finish-if-event

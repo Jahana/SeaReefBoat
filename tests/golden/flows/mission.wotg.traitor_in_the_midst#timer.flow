@@ -1,0 +1,24 @@
+# Traitor in the Midst (WotG 18), the Timer. A finish with option 1 and no update sets bit 0 (Timer 0). On pawprint
+# 4: update 1, a day on, update 2 (Timer back to 0), update 1 (Timer now), finish under 20 s: nothing; then update
+# 1, a day on, update 1 again (the Timer kept), finish: bit 1.
+lists BeaucedineGlacierS/Regal_Pawprints_3/onTrigger BeaucedineGlacierS/Regal_Pawprints_4/onTrigger BeaucedineGlacierS/Regal_Pawprints_5/onTrigger BeaucedineGlacierS/Regal_Pawprints_6/onTrigger BeaucedineGlacierS/Regal_Pawprints_7/onTrigger BeaucedineGlacierS/Regal_Pawprints_1/onTrigger BeaucedineGlacierS/onEventUpdate/8 BeaucedineGlacierS/onEventUpdate/9 BeaucedineGlacierS/onEventUpdate/10 BeaucedineGlacierS/onEventUpdate/11 BeaucedineGlacierS/onEventUpdate/12 BeaucedineGlacierS/onEventFinish/8 BeaucedineGlacierS/onEventFinish/9 BeaucedineGlacierS/onEventFinish/10 BeaucedineGlacierS/onEventFinish/11 BeaucedineGlacierS/onEventFinish/12 BeaucedineGlacierS/onEventFinish/14
+char zone=BeaucedineGlacierS pos=-23.803,-60.055,-72.156 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg TraitorInTheMidst current
+login
+trigger Regal_Pawprints_3
+finish option=1                            # no update: Timer 0
+trigger Regal_Pawprints_4
+update 9 option=1
+wait jst=1
+update 9 option=2                          # Timer 0
+update 9 option=1                          # Timer now
+finish option=1                            # under 20 s
+trigger Regal_Pawprints_4
+update 9 option=1
+wait jst=1
+update 9 option=1                          # Timer kept
+finish option=1                            # 20 s on: bit 1

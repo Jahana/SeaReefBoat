@@ -1,0 +1,23 @@
+# Easterly Winds with its SoA era module (modules/era/lua/missions/mission_adjustments.lua, RESTRICT_CONTENT 1,
+# ENABLE_SOA 0): trigger area 1 plays 10094 only when the mission's Timer var is 0. Timer 1 (a GM, as Confessions of
+# Royalty's finish leaves it): nothing; a JST day on: 10094, finished: completed.
+module modules/era/lua/missions/mission_adjustments.lua
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/10094
+char zone=RuludeGardens pos=0,3,20 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau EasterlyWinds current
+charvar Mission[4][5]Timer 1
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+login
+tick 1000
+tick 1000
+tick 1000
+walk 0,3,50                             # Timer 1: nothing
+walk 0,3,20
+wait jst=1                              # the Timer expired
+walk 0,3,50                             # 10094
+finish option=0                         # completed

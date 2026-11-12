@@ -1,0 +1,17 @@
+# Waking the Beast (battlefield.waking_the_beast_cloister_of_flames, CloisterOfFlames): the requirement arms of FP_Entrance. Main, a level 75 Warrior with the quest accepted but no
+# Rainbow Resonator: the registrant's entryRequirement fails (it needs the resonator): no options, the default. bob, the
+# quest completed and no resonator, a registrant too: fails the same way (a completed char is let in only as a helper).
+# cat, the resonator and the quest only available: entryRequirement passes (the resonator, as registrant), then BattlefieldQuest's accepted-or-more check fails: the default.
+lists CloisterOfFlames/FP_Entrance/onTrigger
+char zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+char bob zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+char cat zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+quest OtherAreas.WakingTheBeast accepted
+bob: quest OtherAreas.WakingTheBeast completed
+cat: keyitem RainbowResonator
+login
+trigger FP_Entrance                     # accepted, no resonator: no options
+bob: login
+bob: trigger FP_Entrance                # completed, no resonator, a registrant: no options
+cat: login
+cat: trigger FP_Entrance                # the resonator, available: no options

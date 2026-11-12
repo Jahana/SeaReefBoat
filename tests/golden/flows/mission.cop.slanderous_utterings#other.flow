@@ -1,0 +1,21 @@
+# Slanderous Utterings, the statuses the main flow skips: the Sealion's Den door at Status 0 (no 4-4 reply), then the
+# trigger area 2 at Status 1 (no reply: only Status 0 plays 112) and again at Status 2 (a GM), then the door at Status
+# 2.
+lists TavnazianSafehold/onTriggerAreaEnter/2 TavnazianSafehold/onEventFinish/112 SealionsDen/_0w0/onTrigger SealionsDen/onEventFinish/13
+char zone=TavnazianSafehold pos=100,-42,41 job=WAR lvl=75 nation=0
+mission Cop SlanderousUtterings current
+login
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[6][438]Status 1         # a GM
+walk 108,-40,-82                        # trigger area 2, Status 1: no 4-4 reply
+walk 100,-42,41
+charvar Mission[6][438]Status 2         # a GM
+walk 108,-40,-82                        # Status 2: no 4-4 reply
+warp 600,132,772 SealionsDen
+trigger _0w0                            # Status 2: no 4-4 reply
+finish-if-event
+charvar Mission[6][438]Status 0         # a GM
+trigger _0w0                            # Status 0: no 4-4 reply
+finish-if-event

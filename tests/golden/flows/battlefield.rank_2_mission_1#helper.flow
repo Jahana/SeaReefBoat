@@ -1,0 +1,48 @@
+# Rank 2 Mission 1 (battlefield.rank_2_mission_1) with helpers. A level 75 Warrior of Windurst with The Three Kingdoms
+# (San d'Oria, the second) current at status 9 and the Dark Key (a GM), the party leader, invites eve (San d'Oria,
+# rank 2 completed) and fay (San d'Oria, nothing completed). eve alone is refused (NO_BATTLEFIELD_ENTRY), with no
+# registered fight to join. The leader registers area 1; eve, a non-registrant with her nation's rank 2 completed,
+# picks area 2 (the other arena's menu: update params 1) and then area 1. fay triggers while the fight starts, the
+# first mob is claimed (the arena locked: update params 1 and 4). The pair killed: the timer, WON, 32001 for the
+# leader and eve; the leader finished: status 10; eve's finish gives nothing.
+lists HorlaisPeak/BC_Entrance/onTrigger HorlaisPeak/BC_Entrance/onTrade HorlaisPeak/onEventUpdate/32000 HorlaisPeak/onEventFinish/32000 HorlaisPeak/Burning_Circle/onTrigger HorlaisPeak/onEventFinish/32003 HorlaisPeak/onEventFinish/32001
+char zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=WAR lvl=75 nation=2
+char eve zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=WAR lvl=75 nation=0
+char fay zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=WAR lvl=75 nation=1
+mission Windurst TheThreeKingdomsSandoria2 current
+keyitem DarkKey
+eve: mission Sandoria JourneyAbroad completed
+fay: mission Bastok TheEmissary completed
+login
+missionstatus Windurst 9
+eve: login
+fay: login
+eve: trigger BC_Entrance
+invite eve
+eve: accept
+invite fay
+fay: accept
+trigger BC_Entrance
+update 32000 option=1
+finish
+eve: trigger BC_Entrance
+eve: update 32000 option=2
+eve: update 32000 option=1
+eve: finish
+fay: trigger BC_Entrance
+tick 2000
+claim #17346561
+tick 1000
+fay: update 32000 option=2
+fay: update 32000 option=1
+fay: finish
+kill #17346561
+kill #17346562
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish
+eve: finish

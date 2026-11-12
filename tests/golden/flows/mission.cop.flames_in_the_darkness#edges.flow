@@ -1,0 +1,32 @@
+# Flames in the Darkness (CoP 7-2): each handler at a status it does not answer (GMs set Status). Sueleen at Status 0
+# and 2: her default event 20 (the zone's DefaultActions). _0p2 at Status 2: DOOR_CLOSED (7372, the zone's default).
+# Ru'Lude Gardens' area 1 at Status
+# 1 and 3: nothing. _6s1 at Status 2 and 4: its own event 124 (0, 1).
+lists MisareauxCoast/_0p2/onTrigger SealionsDen/Sueleen/onTrigger RuludeGardens/onTriggerAreaEnter/1 UpperJeuno/_6s1/onTrigger
+char zone=SealionsDen pos=612,132,776 job=WAR lvl=75 nation=0
+mission Cop FlamesInTheDarkness current
+login
+trigger Sueleen                         # Status 0: her default 20
+finish-if-event
+charvar Mission[6][718]Status 2         # a GM
+trigger Sueleen                         # Status 2: her default 20
+finish-if-event
+warp -257,-32.7,277 MisareauxCoast
+trigger _0p2                            # Status 2: 7372
+finish-if-event
+charvar Mission[6][718]Status 1         # a GM
+warp 0,3,100 RuludeGardens
+tick 3000
+walk 0,3,60                             # Status 1: nothing
+finish-if-event
+charvar Mission[6][718]Status 3         # a GM
+walk 0,3,100
+walk 0,3,60                             # Status 3: nothing
+finish-if-event
+warp -95,-1.7,88 UpperJeuno
+charvar Mission[6][718]Status 2         # a GM
+trigger _6s1                            # Status 2: its own 124
+finish-if-event
+charvar Mission[6][718]Status 4         # a GM
+trigger _6s1                            # Status 4: its own 124
+finish-if-event

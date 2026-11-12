@@ -1,0 +1,47 @@
+# The Three Kingdoms Bastok 2 (Windurst 2-3, mission.windurst.the_three_kingdoms_bastok2). A level 30 Warrior of
+# Windurst in Metalworks with the mission current (a GM; a GM's Resonance current keeps RoV 1-1 out). Status 0: Grohm
+# 427, Pius 356, Patt-Pott 258. Status 8: Pius 355 with parameter 1, whose finish sets status 9; Pius 356. Status 9:
+# Grohm 426 with parameter 1, whose finish sets status 10; Grohm 427; Mih Ketto 267, Moyoyo 264, Topuru-Kuperu 261; Iron
+# Eater and the door _6ld 702; Patt-Pott 258. With the Kindred Crest at status 11: Pius answers his own default 350;
+# Patt-Pott 257, whose finish completes the mission (no reward table), begins The Three Kingdoms, takes the crest, gives
+# the Kindred Report and sets status 11; Patt-Pott then plays The Three Kingdoms' 259.
+lists Metalworks/Grohm/onTrigger Metalworks/Pius/onTrigger Metalworks/Patt-Pott/onTrigger Metalworks/_6ld/onTrigger Metalworks/Iron_Eater/onTrigger Metalworks/Mih_Ketto/onTrigger Metalworks/Moyoyo/onTrigger Metalworks/Topuru-Kuperu/onTrigger Metalworks/onEventFinish/257 Metalworks/onEventFinish/355 Metalworks/onEventFinish/426 WaughroonShrine/onEventFinish/32001
+char zone=Metalworks pos=-18,-11,-27 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdomsBastok2 current
+login
+trigger Grohm                           # status 0: 427
+finish-if-event
+trigger Pius                            # 356
+finish-if-event
+trigger Patt-Pott                       # 258
+finish-if-event
+missionstatus Windurst 8
+trigger Pius                            # 355
+finish                                  # status 9
+trigger Pius                            # 356
+finish-if-event
+trigger Grohm                           # 426
+finish                                  # status 10
+trigger Grohm                           # 427
+finish-if-event
+trigger Mih_Ketto                       # 267
+finish-if-event
+trigger Moyoyo                          # 264
+finish-if-event
+trigger Topuru-Kuperu                   # 261
+finish-if-event
+trigger Iron_Eater                      # 702
+finish-if-event
+trigger _6ld                            # 702
+finish-if-event
+trigger Patt-Pott                       # 258
+finish-if-event
+keyitem KindredCrest
+missionstatus Windurst 11
+trigger Pius                            # nothing from the mission
+finish-if-event
+trigger Patt-Pott                       # 257
+finish                                  # completed, The Three Kingdoms begun, the crest for the report, status 11
+trigger Patt-Pott
+finish-if-event

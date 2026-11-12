@@ -1,16 +1,15 @@
-# Carbuncle Debacle (windurst 83, SMN AF3): the door _6n2 and Koru-Moru (Windurst Walls), Ripapa (Mhaura),
-# Agado-Pugado (Rabao). The Puppet Master completed and Class Reunion accepted at its last step by GM; SMN 75.
-# Turns as in windurst.class_reunion: _6n2 and Koru-Moru have a Default-priority default and a script, so each script
-# talk follows a default's turn. Ripapa and Agado-Pugado have no default (10020 / 70 are their scripts').
-# Koru-Moru's 410 completes Class Reunion and sets needToZone: _6n2's offer refused (`trigger` walks; a warp would
-# zone); after a rezone, 415: begun, var 1; the door again: nothing (accepted). Koru-Moru 416: var 2; again 416
-# (var 2). Ripapa 10022: the Lightning Pendulum, var 3; again: no arm (Trial by Lightning: Windurst fame 0): his
-# 10020. Koru-Moru at var 3: no arm of this quest: Class Reunion's 411. Var 4 (GM: the Cloister of Storms win,
-# var-only, stays Lua): Koru-Moru 417: var 5, the Daze Breaker Charm; 418. Agado-Pugado 86: the Wind Pendulum,
-# var 6; 88 (the pendulum held). Koru-Moru at var 6: 411. Var 7 (GM: the Cloister of Gales win, var-only, takes the
-# charm; the charm taken by GM): 419 refused on a full inventory, then Evoker's Horn, Paragon of Summoner Excellence,
-# completed, fame 20, var 0, needToZone. All three completed: 420. Through Windurst Waters (a zone change clears
-# needToZone) back to the door: nothing (both completed).
+# Carbuncle Debacle (windurst 83, SMN AF3): the door _6n2 and Koru-Moru (Windurst Walls), Ripapa (Mhaura), Agado-Pugado
+# (Rabao). The Puppet Master completed and Class Reunion accepted at its last step by GM; SMN 75. Turns as in
+# windurst.class_reunion: _6n2 and Koru-Moru have a Default-priority default and a script, so each script talk follows a
+# default's turn. Ripapa and Agado-Pugado have no default (10020 / 70 are their scripts'). Koru-Moru's 410 completes
+# Class Reunion and sets needToZone: _6n2's offer refused (`trigger` walks; a warp would zone); after a rezone, 415:
+# begun, var 1; the door again: nothing (accepted). Koru-Moru 416: var 2; again 416 (var 2). Ripapa 10022: the Lightning
+# Pendulum, var 3; again: no arm (Trial by Lightning: Windurst fame 0): his 10020. Koru-Moru at var 3: no arm of this
+# quest: Class Reunion's 411. Var 4 (GM: the Cloister of Storms win, battlefield.carbuncle_debacle_cloister_of_storms):
+# Koru-Moru 417: var 5, the Daze Breaker Charm; 418. Agado-Pugado 86: the Wind Pendulum, var 6; 88 (the pendulum held).
+# Koru-Moru at var 6: 411. Var 7 (GM: the Cloister of Gales win, takes the charm; the charm taken by GM): 419 refused on
+# a full inventory, then Evoker's Horn, Paragon of Summoner Excellence, completed, fame 20, var 0, needToZone. All three
+# completed: 420. Through Windurst Waters (a zone change clears needToZone) back to the door: nothing (both completed).
 char zone=WindurstWalls pos=-120.2,-5.5,122.4 job=SMN lvl=75
 quest Windurst.ThePuppetMaster completed
 quest Windurst.ClassReunion accepted
@@ -49,7 +48,8 @@ trigger Koru-Moru                       # the default's turn: 193
 finish
 trigger Koru-Moru                       # accepted, var 3: no arm of this quest: Class Reunion's 411
 finish
-charvar CarbuncleDebacleProgress 4      # GM: the Cloister of Storms win (carbuncle_debacle.lua, var-only) stays Lua
+# GM: the Cloister of Storms win (battlefield.carbuncle_debacle_cloister_of_storms)
+charvar CarbuncleDebacleProgress 4
 trigger Koru-Moru                       # the default's turn: 193
 finish
 trigger Koru-Moru                       # var 4: 417
@@ -68,7 +68,8 @@ trigger Koru-Moru                       # the default's turn: 193
 finish
 trigger Koru-Moru                       # accepted, var 6: no arm of this quest: 411
 finish
-charvar CarbuncleDebacleProgress 7      # GM: the Cloister of Gales win (var 6 -> 7, the charm taken) stays Lua
+# GM: the Cloister of Gales win (battlefield.carbuncle_debacle_cloister_of_gales: var 6 -> 7, the charm taken)
+charvar CarbuncleDebacleProgress 7
 delkeyitem DazeBreakerCharm
 fill-inventory
 trigger Koru-Moru                       # the default's turn: 193

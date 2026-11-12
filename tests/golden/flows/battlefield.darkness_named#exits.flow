@@ -1,0 +1,26 @@
+# Darkness Named's exits (battlefield.darkness_named#exits): the leave NPC Memento_Circle. A level 75 Warrior of San
+# d'Oria with Darkness Named current at Status 4 (GMs) enters arena 1, 2 and 3 in turn (options 1, 2, 3 of the menu
+# 32000) and leaves each by the exit NPC: 32003, finished with 4: leaveBattlefield(1).
+lists TheShroudedMaw/MC_Entrance/onTrigger TheShroudedMaw/onEventUpdate/32000 TheShroudedMaw/Memento_Circle/onTrigger TheShroudedMaw/onEventFinish/32000 TheShroudedMaw/onEventFinish/32003
+char zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop DarknessNamed current
+charvar Mission[6][358]Status 4
+login
+trigger MC_Entrance                     # the menu 32000
+update 32000 option=1                   # arena 1: entered
+finish                                  # in the arena
+trigger Memento_Circle                  # the exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield
+trigger MC_Entrance                     # the menu 32000
+update 32000 option=2                   # arena 2: entered
+finish                                  # in the arena
+trigger Memento_Circle                  # the exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield
+trigger MC_Entrance                     # the menu 32000
+update 32000 option=3                   # arena 3: entered
+finish                                  # in the arena
+trigger Memento_Circle                  # the exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield

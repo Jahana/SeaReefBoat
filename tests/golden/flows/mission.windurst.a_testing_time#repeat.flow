@@ -1,0 +1,79 @@
+# A Testing Time (2-2), a repeat with 2-2 already cleared. Janshura-Rashura plays 78 (option 4 begins it), then, with
+# the mission still current at status 2, the section-2 event 133 (its finish with option 4 does nothing). Moreno-Toeno
+# plays 687 (option 1 does nothing, option 2 starts the window), 204 twice (48 hours left), then 208, 209, 206 and 202
+# end the runs.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWaters/Moreno-Toeno/onTrigger WindurstWaters/onEventFinish/181 WindurstWaters/onEventFinish/182 WindurstWaters/onEventFinish/198 WindurstWaters/onEventFinish/199 WindurstWaters/onEventFinish/200 WindurstWaters/onEventFinish/201 WindurstWaters/onEventFinish/202 WindurstWaters/onEventFinish/206 WindurstWaters/onEventFinish/208 WindurstWaters/onEventFinish/209 WindurstWaters/onEventFinish/687
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+login
+mission Windurst TheHorutotoRuinsExperiment current
+mission Windurst TheHorutotoRuinsExperiment completed   # a GM: 1-1 done
+mission Windurst TheHeartOfTheMatter current
+mission Windurst TheHeartOfTheMatter completed          # a GM: 1-2 done
+mission Windurst ThePriceOfPeace current
+mission Windurst ThePriceOfPeace completed              # a GM: 1-3 done
+mission Windurst LostForWords current
+mission Windurst LostForWords completed                 # a GM: 2-1 done
+mission Windurst ATestingTime current
+mission Windurst ATestingTime completed                 # a GM: 2-2 done
+trigger Janshura-Rashura                # 78
+finish option=4                         # begun (a repeat)
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # a repeat: not 2: nothing
+finish option=1
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # a repeat accepted (two days)
+finish option=2
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # a repeat, 48 hours to go
+finish
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+trigger Janshura-Rashura                # the section-2 event 133 (the mission is still current)
+finish option=4                         # nothing
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # 204 again (48 hours left)
+finish option=2                         # nothing
+charvar Mission[2][4]EndTime 790189200        # a GM: the window ends now
+charvar Mission[2][4]KillCount 29              # a GM: the kills
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # 29 kills: fails
+finish
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+trigger Janshura-Rashura                # 78
+finish option=4                         # begun again (a repeat)
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # a repeat accepted
+finish option=2
+charvar Mission[2][4]EndTime 790189200        # a GM: the window ends now
+charvar Mission[2][4]KillCount 30              # a GM: the kills
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # 30 kills: cleared
+finish
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+trigger Janshura-Rashura                # 78
+finish option=4                         # begun again (a repeat)
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # a repeat accepted
+finish option=2
+charvar Mission[2][4]EndTime 790189200        # a GM: the window ends now
+charvar Mission[2][4]KillCount 35              # a GM: the kills
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # 35 kills: cleared
+finish
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+trigger Janshura-Rashura                # 78
+finish option=4                         # begun again (a repeat)
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # a repeat accepted
+finish option=2
+charvar Mission[2][4]EndTime 790189199        # a GM: the window ends now
+charvar Mission[2][4]KillCount 0              # a GM: the kills
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # too late: fails
+finish

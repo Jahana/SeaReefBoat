@@ -1,0 +1,29 @@
+# The Road Forks (CoP 3-3, mission.cop.the_road_forks), the San d'Oria path. A level 75 Warrior of San d'Oria with 3-3
+# current (a GM; no status). Northern San d'Oria's zone-in (San d'Oria status 0): 14; finished: 1. Arnau (1): 51;
+# finished: 2. Chasalvige (2): 38; finished: 5; again (5): event 6. Carpenter's Landing, Guilloud (5), the Overgrown
+# Ivy not spawned: the two messages, the Ivy spawned and claimed, noAction; again (spawned): BEGONE_TRESPASSER. The Ivy
+# killed (5): ivyDefeated. Guilloud: cutscene 0 (a San d'Orian); finished: 9. Southern San d'Oria, Hinaree (9): 23;
+# finished: 14; again (14): event 24.
+lists NorthernSanDoria/onZoneIn/1 NorthernSanDoria/onEventFinish/14 NorthernSanDoria/Arnau/onTrigger NorthernSanDoria/onEventFinish/51 NorthernSanDoria/Chasalvige/onTrigger NorthernSanDoria/onEventFinish/38 CarpentersLanding/Guilloud/onTrigger CarpentersLanding/Overgrown_Ivy/onMobDeath CarpentersLanding/onEventFinish/0 SouthernSanDoria/Hinaree/onTrigger SouthernSanDoria/onEventFinish/23
+char zone=NorthernSanDoria pos=148,0,139 job=WAR lvl=75 nation=0
+mission Cop TheRoadForks current
+login                                   # status 0: 14; 1
+trigger Arnau                           # 1: 51
+finish                                  # 2
+trigger Chasalvige                      # 2: 38
+finish                                  # 5
+trigger Chasalvige                      # 5: event 6
+finish-if-event
+warp -123.7,-6.6,-469 CarpentersLanding
+trigger Guilloud                        # 5, no Ivy: the messages, the Ivy spawned and claimed
+finish-if-event
+trigger Guilloud                        # the Ivy spawned: BEGONE_TRESPASSER
+finish-if-event
+kill OVERGROWN_IVY                      # ivyDefeated
+trigger Guilloud                        # cutscene 0
+finish                                  # 9
+warp -301.5,-10.1,97.7 SouthernSanDoria
+trigger Hinaree                         # 9: 23
+finish                                  # 14
+trigger Hinaree                         # 14: event 24
+finish-if-event

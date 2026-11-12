@@ -1,0 +1,42 @@
+# A Place to Return (CoP 6-2), the other arms. 6-2 current at Status 0 (a GM): Pherimociel (no 6-2 reply: 155),
+# Auchefort (8) and the gate (_0p0, message 7375): no 6-2 reply; the three Wardens killed (spawned by a GM): no Option
+# bits. Status 1: trigger area 1: no event (walked out and in); the gate with only one Warder alive (each of the
+# three in turn): message 7375.
+lists RuludeGardens/Pherimociel/onTrigger RuludeGardens/Auchefort/onTrigger RuludeGardens/onTriggerAreaEnter/1 MisareauxCoast/_0p0/onTrigger MisareauxCoast/Warder_Aglaia/onMobDeath MisareauxCoast/Warder_Euphrosyne/onMobDeath MisareauxCoast/Warder_Thalia/onMobDeath
+char zone=RuludeGardens pos=0,3,10 job=WAR lvl=75 nation=0
+mission Cop APlaceToReturn current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Pherimociel                     # Status 0: no 6-2 reply (155)
+finish-if-event
+trigger Auchefort                       # Status 0: no 6-2 reply (8)
+finish-if-event
+warp 260,7.3,-436 MisareauxCoast
+trigger _0p0                            # Status 0: message 7375
+finish-if-event
+spawn PM6_2_MOB_OFFSET
+spawn PM6_2_MOB_OFFSET+1
+spawn PM6_2_MOB_OFFSET+2
+tick 2000
+kill PM6_2_MOB_OFFSET                   # Status 0: no bit
+kill PM6_2_MOB_OFFSET+1
+kill PM6_2_MOB_OFFSET+2
+charvar Mission[6][618]Status 1         # a GM
+spawn PM6_2_MOB_OFFSET
+trigger _0p0                            # the first Warder alive: message 7375
+finish-if-event
+kill PM6_2_MOB_OFFSET
+spawn PM6_2_MOB_OFFSET+1
+trigger _0p0                            # the second alive: message 7375
+finish-if-event
+kill PM6_2_MOB_OFFSET+1
+spawn PM6_2_MOB_OFFSET+2
+trigger _0p0                            # the third alive: message 7375
+finish-if-event
+warp 0,3,10 RuludeGardens
+tick 1000
+tick 1000
+tick 1000
+walk 0,3,50                             # area 1 at Status 1: no event

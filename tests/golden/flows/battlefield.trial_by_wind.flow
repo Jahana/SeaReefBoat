@@ -1,0 +1,20 @@
+# Trial by Wind (battlefield.trial_by_wind, CloisterOfGales, a BattlefieldQuest of Outlands.TrialByWind, a C# quest; index 0, 30
+# minutes, 6 players, the Tuning Fork of Wind required, Wind_Protocrystal the exit). A level 75 Warrior with the quest accepted and
+# the fork. The trigger: the menu 32000. Updates: 0 (index 0, area 0) and 4 (past the zone's arenas): REQS_NOT_MET; 1
+# (area 1): registered, entered (the fork taken). The boss of arena 1 killed: its group's allDeath sets WON; the win
+# (BattlefieldQuest's onBattlefieldWin, accepted): battlefieldWin set, 32001; its finish: the battlefield's
+# onEventFinishWin, then the quest's 32001 handler. After the cleanup, out.
+lists CloisterOfGales/WP_Entrance/onTrigger CloisterOfGales/onEventUpdate/32000 CloisterOfGales/onEventFinish/32000 CloisterOfGales/onEventFinish/32001
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Outlands.TrialByWind accepted
+keyitem TuningForkOfWind
+login
+trigger WP_Entrance                     # the fork: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=4                   # area 4: REQS_NOT_MET
+update 32000 option=1                   # area 1: registered, entered, the fork taken
+finish                                  # in the arena
+kill OGMIOS-3                  # the boss of arena 1: WON; 32001
+finish                                  # the battlefield's finish, then the quest's handler
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

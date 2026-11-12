@@ -51,6 +51,9 @@ internal static partial class Program
         Check("c2 keys: every battlefield key is a battlefield key", "",
             string.Join(",", ConstStrings(typeof(XI.QuestContent.BattlefieldKey))
                 .Where(k => !ContainerKeys.IsBattlefield(k))));
+        Check("c4 keys: IsRoe, a key no quest, mission or battlefield has", "True/False/False",
+              $"{ContainerKeys.IsRoe("roe.rewards")}/{ContainerKeys.IsRoe("mission.cop.the_rites_of_life")}/" +
+              ConstStrings(typeof(XI.QuestContent.QuestKey)).Any(ContainerKeys.IsRoe));
     }
 
     // the const string fields of a generated key class, nested classes included

@@ -1,0 +1,25 @@
+# Forget Me Not (WotG 42) from Sauromugue Champaign, the four Large Memory Fragments held: the Cavernous Maw plays 503
+# [2, 0, 0, 0, 0, 651, 636808, 1]; its finish sets Status 1 and Option 120, and the next tick shows the set-down at 800
+# 71.839 770 rot 63 in Grauberg [S]. The login there at Status 1 plays the zone-in 33, left open; the finish sets Status
+# 2 and xi.maws.goToMaw sends the char to xi.maws.pastMaws[120]: the next tick shows Sauromugue Champaign [S] at 366.858
+# 8.545 -228.861 rot 95. The login there at Status 2 completes the mission (Pillar of Hope current) and takes the four
+# fragments (xi.wotg.helpers.removeMemoryFragments).
+lists SauromugueChampaign/Cavernous_Maw/onTrigger SauromugueChampaign/onEventFinish/503 GraubergS/onZoneIn/1 GraubergS/onEventUpdate/33 GraubergS/onEventFinish/33 SauromugueChampaignS/onZoneIn/1
+char zone=SauromugueChampaign pos=369,8,-227 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg ForgetMeNot current
+keyitem LargeMemoryFragment1
+keyitem LargeMemoryFragment2
+keyitem LargeMemoryFragment3
+keyitem LargeMemoryFragment4
+login
+trigger Cavernous_Maw                      # 503
+finish                                     # Status 1, Option the zone; set down in Grauberg [S]
+tick 400
+login open                                 # Status 1: 33
+finish                                     # Status 2; goToMaw: the maw's other side
+tick 400
+login                                      # Status 2: completed, the fragments removed

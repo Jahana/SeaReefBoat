@@ -1,0 +1,66 @@
+# Enter the Talekeeper (Bastok 8-2, mission.bastok.enter_the_talekeeper), the arms the play-through skips: Drake Fang
+# 203 at status 3, his own 108 at 5; qm5 12 declined (option 1); one ghost (a GM spawn) dead with the others never
+# spawned: status 3; at status 3 a death sets nothing; two ghosts up: the first death nothing, the second status 3. No
+# GM effects (with them the ghosts' claim fails), so the ghosts' hits kill the char in the last kill's step (hp 0,
+# level 74, expLost 2400); the zone-in arms below read only the status. The Bastok Mines zone-in plays nothing at
+# status 4 from Zeruhn Mines, nor at status 5 from the Metalworks.
+char zone=ZeruhnMines pos=-74,0.1,60 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+mission Bastok TheChainsThatBindUs completed
+rank 8
+mission Bastok EnterTheTalekeeper current
+login
+missionstatus Bastok 3
+trigger Drake_Fang                      # status 3: 203
+finish
+missionstatus Bastok 5
+trigger Drake_Fang                      # status 5: nothing from the mission
+finish-if-event
+missionstatus Bastok 1
+warp -27.695,-22.159,-183.716 KuftalTunnel
+trigger qm5                             # status 1: 12
+finish option=1                         # declined: nothing
+missionstatus Bastok 2
+spawn TALEKEEPER_OFFSET+1               # a GM: one ghost
+trigger qm6                             # status 2, a ghost up: DefaultActions' DO_NOT_SEE_ANYTHING
+finish-if-event
+kill TALEKEEPER_OFFSET+1                # the others never spawned: status 3
+tick 30000
+tick 30000
+spawn TALEKEEPER_OFFSET+2               # a GM
+trigger qm6                             # status 3, a ghost up: DefaultActions' DO_NOT_SEE_ANYTHING
+finish-if-event
+kill TALEKEEPER_OFFSET+2                # status 3: nothing
+tick 30000
+tick 30000
+missionstatus Bastok 2
+spawn TALEKEEPER_OFFSET                 # a GM
+spawn TALEKEEPER_OFFSET+2               # a GM
+tick 2000
+kill TALEKEEPER_OFFSET                  # a ghost up: nothing
+kill TALEKEEPER_OFFSET+2                # none up: status 3; the char dies (level 74, expLost 2400)
+missionstatus Bastok 4
+warp -74,0.1,60 ZeruhnMines
+warp -8,-2,-121 BastokMines             # from Zeruhn Mines at status 4: no zone-in event
+missionstatus Bastok 5
+warp 92,-19.5,4 Metalworks
+warp -8,-2,-121 BastokMines             # from the Metalworks at status 5: no zone-in event

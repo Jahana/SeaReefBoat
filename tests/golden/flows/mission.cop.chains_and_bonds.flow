@@ -1,0 +1,32 @@
+# Chains and Bonds (CoP 7-1) played through. A level 75 Warrior of San d'Oria with 7-1 current (a GM; Status 0),
+# logging in to Lufaise Meadows: zone-in 111; update 111 sends (0, Ducal Guard's Ring); finished with room: the ring and
+# Status 1. qm_chains_and_bonds (RingStashed 0): no 7-1 reply (NOTHING_OUT_OF_ORDINARY, 6409, the zone's default).
+# Tavnazian Safehold's
+# zone-in at Status 1: 114 (finished: Status 2). _0q1 (Option bit 1 unset): 116 (finished: bit 1); _0q1 again: no 7-1
+# reply (DOOR_IS_LOCKED_TIGHT, 11040, the zone's default). Despachiaire plays 144 (X Marks the Spot's; its finish
+# accepts that quest) and Justinius 570 (Uninvited Guests'): the 7-1 events 318 and 135 lose to them. Sealion's Den's
+# zone-in (bit 2 unset): 14 (finished: bit 2). The rezone there: nothing (bit 2 set). _0qa (bit 0 unset): 115; its
+# finish sets bit 0, Option is 7 and the mission completes (Flames in the Darkness current).
+lists LufaiseMeadows/onZoneIn/1 LufaiseMeadows/onEventUpdate/111 LufaiseMeadows/onEventFinish/111 LufaiseMeadows/qm_chains_and_bonds/onTrigger TavnazianSafehold/onZoneIn/1 TavnazianSafehold/onEventFinish/114 TavnazianSafehold/_0q1/onTrigger TavnazianSafehold/_0qa/onTrigger TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/onEventFinish/115 TavnazianSafehold/onEventFinish/116 SealionsDen/onZoneIn/1 SealionsDen/onEventFinish/14
+char zone=LufaiseMeadows pos=393,-0.1,-75 job=WAR lvl=75 nation=0
+mission Cop ChainsAndBonds current
+login open                              # Status 0, RingStashed 0: 111
+update 111 option=0                     # (0, ring)
+finish                                  # the ring; Status 1
+trigger qm_chains_and_bonds             # RingStashed 0: no 7-1 reply (6409)
+warp 28,-13.8,49 TavnazianSafehold open # Status 1: 114
+finish                                  # Status 2
+trigger _0q1                            # bit 1 unset: 116
+finish                                  # bit 1 (Option 2)
+trigger _0q1                            # bit 1 set: no 7-1 reply (11040)
+finish-if-event
+trigger Despachiaire                    # 144 (X Marks the Spot's), not 7-1's 318
+finish-if-event                         # X Marks the Spot accepted
+trigger Justinius                       # 570 (Uninvited Guests'), not 7-1's 135
+finish-if-event
+warp 612,132,776 SealionsDen open       # bit 2 unset: 14
+finish                                  # bit 2 (Option 6)
+rezone                                  # bit 2 set: nothing
+warp 117,-42.8,45 TavnazianSafehold
+trigger _0qa                            # bit 0 unset: 115
+finish                                  # Option 7: completed

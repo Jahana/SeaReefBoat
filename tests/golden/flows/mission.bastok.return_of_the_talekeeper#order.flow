@@ -1,0 +1,34 @@
+# Return of the Talekeeper: the sphinxes killed the other way round. At status 1 without the nmDefeated var qm2 gives
+# nothing from the mission (the default 7393); at status 2: both spawned (7394); the Western killed with the Eastern
+# up: qm2 7393; the Eastern killed: nmDefeated, qm2: status 3, the moonpebble.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 BastokMines/Medicine_Eagle/onTrigger BastokMines/Tall_Mountain/onTrigger BastokMines/onEventFinish/180 BastokMines/onEventFinish/182 ZeruhnMines/Drake_Fang/onTrigger ZeruhnMines/onEventFinish/200 WesternAltepaDesert/qm2/onTrigger
+char zone=WesternAltepaDesert pos=-323,0,-111 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper current
+rank 6
+login
+missionstatus Bastok 1
+trigger qm2                             # status 1, no var: nothing
+finish-if-event
+missionstatus Bastok 2
+trigger qm2                             # status 2: both spawned
+kill WESTERN_SPHINX                     # Eastern up: nothing
+trigger qm2                             # Eastern up: nothing
+finish-if-event
+kill EASTERN_SPHINX                     # Western dead: nmDefeated
+trigger qm2                             # nmDefeated: status 3, the moonpebble

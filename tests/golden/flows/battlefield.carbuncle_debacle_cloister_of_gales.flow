@@ -1,0 +1,26 @@
+# Carbuncle Debacle (battlefield.carbuncle_debacle_cloister_of_gales, CloisterOfGales, a BattlefieldQuest of
+# Windurst.CarbuncleDebacle, a C# quest; index 1, 30 minutes, 18 players, no experience lost, the WindPendulum required
+# and kept, CarbuncleDebacleProgress 6 required, Wind_Protocrystal the exit). A level 75 Warrior with the quest
+# accepted, the var 6 and the pendulum, the Daze Breaker Charm held. The trade to WP_Entrance: the menu 32000 (index 1).
+# Updates: 0: ignored; 4 (index 0, not in the menu): REQS_NOT_MET; 16 (index 1, area 0) and 20 (area 4, past the zone's
+# arenas): REQS_NOT_MET; 17 (area 1): registered, entered, the pendulum kept. Area 1's group killed (OGMIOS): WON; the
+# win: battlefieldWin 417, 32001; its finish: onEventFinishWin: the var 6 -> 7, and the Daze Breaker Charm is taken.
+# After the cleanup, out.
+lists CloisterOfGales/WP_Entrance/onTrade CloisterOfGales/onEventUpdate/32000 CloisterOfGales/onEventFinish/32000 CloisterOfGales/onEventFinish/32001
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 6
+item WindPendulum
+keyitem DazeBreakerCharm
+login
+trade WP_Entrance WindPendulum x1      # the pendulum, the var: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=4                   # index 0, not in the menu: REQS_NOT_MET
+update 32000 option=16                  # index 1, area 0: REQS_NOT_MET
+update 32000 option=20                  # index 1, area 4: REQS_NOT_MET
+update 32000 option=17                  # index 1, area 1: registered, entered, the pendulum kept
+finish                                  # in the arena
+kill OGMIOS
+finish                                  # the battlefield's finish: onEventFinishWin: the var 6 -> 7, and the Daze Breaker Charm is taken
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

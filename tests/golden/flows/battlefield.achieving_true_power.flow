@@ -1,0 +1,32 @@
+# Achieving True Power (battlefield.achieving_true_power, Navukgo Execution Chamber): a level 75 Puppetmaster at level
+# cap 75, Achieving True Power accepted at Quest[1][85]Prog 1 (GMs), one Puppetmaster's Testimony. The testimony traded
+# to _1s0: the 32000 menu (0,0,0,8: index 3). Updates: 0 ignored; 48 (area 0) and 52 (area 4): REQS_NOT_MET (5); 49
+# (area 1): registered, entered: TESTIMONY_WEARS 7296 (the item, 3 shown, 2 left: its wear 0 -> 1),
+# ENTERING_THE_BATTLEFIELD_FOR, MEMBERS_OF_YOUR_PARTY (1), TIME_LIMIT_FOR_THIS_BATTLE_IS (10); the testimony kept.
+# Finished: in the arena. SHAMARHAAN brought to 1 HP (he is unkillable): in the kill step his mob script's
+# SHAMARHAAN_AUTOMATON_POWER, SHAMARHAAN_UNDERESTIMATED, SHAMARHAAN_MAGNIFICENT and 32001 (1,600,0,2,64,3: area 1, index
+# 3, the skip flag 0). Finished: the battlefield's onEventFinishWin, then the quest's 32001
+# (bastok.achieving_true_power, C#; battlefieldWin set by the win): a Scroll of Instant Warp (ITEM_OBTAINED), the title
+# 494 (Master of Manipulation), completed (the cap 75 kept, no message). 11 s, then 10 s: the effects 143 and 254 (the
+# battlefield's) removed.
+uncovered: group:1:allDeath -- Shamarhaan is unkillable (Shamarhaan.lua:31, setUnkillable(true) in onMobSpawn): kill and kill nokiller leave him alive (a #alldeath flow's record failed: 'the mob did not die'), and his mob script wins the fight with battlefield:win() (Shamarhaan.lua:101); the allDeath is pinned by the c3 Q4 group check
+lists NavukgoExecutionChamber/_1s0/onTrade NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+levelcap 75
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.PuppetmasterBlues completed
+quest Bastok.AchievingTruePower accepted
+charvar Quest[1][85]Prog 1
+item PuppetmastersTestimony
+login
+trade _1s0 PuppetmastersTestimony x1
+update 32000 option=0
+update 32000 option=48
+update 32000 option=52
+update 32000 option=49
+finish
+kill SHAMARHAAN
+finish
+finish-if-event
+tick 11000
+tick 10000

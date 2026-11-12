@@ -1,0 +1,50 @@
+# The Holy Crest (battlefield.holy_crest, Ghelsba Outpost): main registers and invites bob (completed, no remedy),
+# cat (accepted, no remedy), dan (remedy, quest available) and eve. Only bob enters; cat, dan and eve get no
+# options. Cyranuce killed: the win, each finish.
+lists GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/onEventUpdate/32000 GhelsbaOutpost/onEventFinish/32000 GhelsbaOutpost/onEventFinish/32001
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=DRG lvl=30
+char bob zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=DRG lvl=30
+char cat zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=DRG lvl=30
+char dan zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=DRG lvl=30
+char eve zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=DRG lvl=30
+quest Sandoria.TheHolyCrest accepted
+keyitem DragonCurseRemedy
+bob: quest Sandoria.TheHolyCrest completed
+cat: quest Sandoria.TheHolyCrest accepted
+dan: keyitem DragonCurseRemedy
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+trigger Hut_Door
+update 32000 option=17
+finish
+bob: trigger Hut_Door
+bob: update 32000 option=17
+bob: finish
+cat: trigger Hut_Door
+cat: update 32000 option=17
+cat: finish
+dan: trigger Hut_Door
+dan: update 32000 option=17
+dan: finish
+eve: trigger Hut_Door
+eve: update 32000 option=17
+eve: finish
+tick 2000
+kill CYRANUCE_M_CUTAULEON
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

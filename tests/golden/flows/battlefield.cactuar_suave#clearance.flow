@@ -1,0 +1,12 @@
+# Cactuar Suave (battlefield.cactuar_suave): REQS_NOT_MET with the clearance deleted. A level 75 Warrior with a Clotho
+# Orb: traded, the menu 32000. A GM gives effect 254 with no battlefield behind it. Option 81 (index 5, area 1): the
+# register finds no battlefield for the held clearance and answers REQS_NOT_MET (ZoneHost.Battlefield.cs:215,
+# battlefield_handler.cpp:248); onEntryEventUpdate deletes the effect (battlefield.lua:857-859) and replies [5].
+lists ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/onEventUpdate/32000
+char zone=ChamberOfOracles pos=-218.6,-1.9,23.0 job=WAR lvl=75
+item ClothoOrb
+login
+trade SC_Entrance ClothoOrb x1          # the menu 32000
+effect 254                              # a GM: the clearance with no battlefield
+update 32000 option=81                  # REQS_NOT_MET: the effect deleted, [5]
+finish                                  # the menu closes

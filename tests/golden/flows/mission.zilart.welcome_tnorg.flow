@@ -1,0 +1,16 @@
+# Welcome t'Norg (Zilart 2, mission.zilart.welcome_tnorg): _700 plays 2; its update on option 0 answers
+# (252, 0, 1, MAX_UINT32 - 72454152, 66977791, 222376875, 4031, 4); its finish on option 0 completes the
+# mission (no key item, no title; Kazham's Chieftainess current). Then _700 says DOOR_IS_LOCKED (10380, Norg's
+# DefaultActions): The New Frontier is not completed here, so its section 2 does not answer.
+lists Norg/_700/onTrigger Norg/onEventUpdate/2 Norg/onEventFinish/2
+char zone=Norg pos=98,-7,-12 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart WelcomeTnorg current
+login
+trigger _700                            # 2
+update 2 option=0                       # option 0: the update
+finish option=0                         # option 0: completed
+trigger _700                            # not current, The New Frontier not completed: DOOR_IS_LOCKED

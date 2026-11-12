@@ -1,0 +1,56 @@
+# Waking the Beast (battlefield.waking_the_beast_fullmoon, FullMoonFountain): the helpers. Four level 99 Warriors by
+# MS_Entrance. main (accepted, the seven key items) registers area 1 and leads bob (completed, no key items:
+# entryRequirement's non-registrant arm lets a completed char in), dan (accepted, the seven: the key item arm) and cat
+# (accepted, the resonator alone, never completed: refused, no menu). bfwin (a GM): WON; 32001 to main, bob and dan.
+# Finished on 1: main and dan the Faded Ruby; bob (completed): nothing. The last tick (11 s): the cleanup's 075 to main,
+# bob and dan; for all four, cat included, the zone's ambience (039) and afterZoneIn, and the battlefield's effect (254)
+# saved, cat's at tier 0. The trace ends there, the effect still on all four.
+lists FullMoonFountain/MS_Entrance/onTrigger FullMoonFountain/onEventUpdate/32000 FullMoonFountain/onEventFinish/32000 FullMoonFountain/onEventFinish/32001
+char zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+char bob zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+char cat zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+char dan zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+quest OtherAreas.WakingTheBeast accepted
+keyitem EyeOfFlames
+keyitem EyeOfFrost
+keyitem EyeOfGales
+keyitem EyeOfStorms
+keyitem EyeOfTides
+keyitem EyeOfTremors
+keyitem RainbowResonator
+bob: quest OtherAreas.WakingTheBeast completed
+cat: quest OtherAreas.WakingTheBeast accepted
+cat: keyitem RainbowResonator
+dan: quest OtherAreas.WakingTheBeast accepted
+dan: keyitem EyeOfFlames
+dan: keyitem EyeOfFrost
+dan: keyitem EyeOfGales
+dan: keyitem EyeOfStorms
+dan: keyitem EyeOfTides
+dan: keyitem EyeOfTremors
+dan: keyitem RainbowResonator
+login
+bob: login
+cat: login
+dan: login
+invite bob
+bob: accept
+invite dan
+dan: accept
+invite cat
+cat: accept
+trigger MS_Entrance
+update 32000 option=33
+finish
+bob: trigger MS_Entrance
+bob: update 32000 option=33
+bob: finish
+cat: trigger MS_Entrance                # the resonator alone: refused, no menu
+dan: trigger MS_Entrance
+dan: update 32000 option=33
+dan: finish
+bfwin                                   # a GM: WON; 32001 to the three inside
+finish option=1                         # the Faded Ruby
+bob: finish option=1                    # completed: nothing
+dan: finish option=1                    # the Faded Ruby
+tick 11000

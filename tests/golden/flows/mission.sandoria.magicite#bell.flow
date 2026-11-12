@@ -1,0 +1,26 @@
+# Magicite (San d'Oria 4-1) at Aldo with the Silver Bell (a GM's key item): at status 1 Aldo has nothing (no script, no
+# default action: the event released); at 2 152 (1) (progress), whose finish sets status 3 and takes the letter, the
+# bell kept.
+lists RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/130 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/36 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=LowerJeuno pos=20,3,-56 job=WAR lvl=50 nation=0
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite current
+keyitem LetterToAldo
+keyitem SilverBell
+login
+missionstatus Sandoria 1
+trigger Aldo                            # status 1: nothing from the mission
+finish-if-event
+missionstatus Sandoria 2
+trigger Aldo                            # status 2, the bell held: 152 (1)
+finish                                  # status 3, the letter taken, the bell kept

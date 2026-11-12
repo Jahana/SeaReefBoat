@@ -1,0 +1,33 @@
+# A Mercenary Life (ToAU 8, mission.toau.a_mercenary_life). A level 75 Warrior of Bastok with it current and its
+# must-zone flag set (a GM, as Westerly Winds leaves it), in Aht Urhgan Whitegate: section 1: Naja 3029, the Option var
+# cycling 2, 0, 2 (the dialog operand). Section 2 (not must zone) is off: area 3 (31 -7 -60 .. 39 -6 -52) nothing. A
+# rezone clears the flag: area 3: 3050, its updates (option 1: bit 0; 2: bit 1), finished: completed (Undersea
+# Scouting current).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventUpdate/3050 AhtUrhganWhitegate/onEventFinish/3050
+char zone=AhtUrhganWhitegate pos=34.7,-6.6,-40 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau AMercenaryLife current
+login
+tick 1000
+tick 1000
+tick 1000
+localvar Mission[4][7]mustZone 1        # a GM
+trigger Naja_Salaheem                   # Option 0: dialog 2
+finish
+trigger Naja_Salaheem                   # Option 2: dialog 0
+finish
+trigger Naja_Salaheem                   # Option 0: dialog 2
+finish
+walk 34.7,-6.6,-54.1                    # must zone: no section 2: nothing
+walk 34.7,-6.6,-40
+rezone
+tick 1000
+tick 1000
+tick 1000
+walk 34.7,-6.6,-54.1                    # area 3: 3050
+update 3050 option=1                    # bit 0
+update 3050 option=2                    # bit 1
+finish                                  # completed

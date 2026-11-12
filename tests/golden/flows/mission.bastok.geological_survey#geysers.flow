@@ -1,0 +1,33 @@
+# A Geological Survey (Bastok 1-2): Dangruf Wadi's other two geysers, and the geysers without the Blue tester. A level
+# 10 Warrior of Bastok with 1-2 current and the Blue Acidity Tester (GMs; Resonance current keeps RoV 1-1 out). Area 2
+# (the H-8 geyser): 11, finished: the Blue tester turned into the Red one. A GM gives the Blue one back and takes the
+# Red one: area 3 (the J-3 geyser): 12, finished: turned again. Without the Blue tester (the Red one held): area 1 plays
+# 10 and its finish does nothing, as do area 2's 11 and area 3's 12. (Metalworks' Cid has no part here.)
+lists DangrufWadi/onTriggerAreaEnter/1 DangrufWadi/onTriggerAreaEnter/2 DangrufWadi/onTriggerAreaEnter/3 DangrufWadi/onEventFinish/10 DangrufWadi/onEventFinish/11 DangrufWadi/onEventFinish/12
+char zone=DangrufWadi pos=-217,3,93.3 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+mission Bastok GeologicalSurvey current
+keyitem BlueAcidityTester
+login
+tick 1000
+tick 1000
+tick 1000
+walk -213.1,3,93.3                      # area 2: 11
+finish                                  # the Blue tester turned into the Red one
+delkeyitem RedAcidityTester             # a GM
+keyitem BlueAcidityTester               # a GM
+warp -70,3,533.4 DangrufWadi
+tick 1000
+tick 1000
+tick 1000
+walk -66.8,3,533.4                      # area 3: 12
+finish                                  # turned again: the Red tester
+walk -136,3,133                         # out of area 3
+walk -133.1,3,133.2                     # area 1, the Red tester only: 10
+finish                                  # nothing
+walk -217,3,93.3                        # out
+walk -213.1,3,93.3                      # area 2, the Red tester only: 11
+finish                                  # nothing
+walk -70,3,533.4                        # out
+walk -66.8,3,533.4                      # area 3, the Red tester only: 12
+finish                                  # nothing

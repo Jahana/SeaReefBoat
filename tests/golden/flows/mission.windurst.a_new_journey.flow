@@ -1,0 +1,35 @@
+# A New Journey (Windurst 3-3, mission.windurst.a_new_journey). A level 30 Warrior of Windurst in Heaven's Tower with
+# the mission current and the Star-Crested Summons (a GM; a GM's Resonance current keeps RoV 1-1 out). Status 0: Foo
+# Beibo answers his own 87; Kupipi 155; the Vestal Chambers door _6q2 153, whose finish takes the summons, gives the
+# Letter to the Ambassador and sets status 1. Status 1: the door says its own VESTAL_CHAMBERS_LOCKED, Kupipi her own
+# 251; Foo Beibo 162, Rhy Epocan 160, Ufu Koromoa 161.
+lists HeavensTower/_6q2/onTrigger HeavensTower/Foo_Beibo/onTrigger HeavensTower/Kupipi/onTrigger HeavensTower/Rhy_Epocan/onTrigger HeavensTower/Ufu_Koromoa/onTrigger HeavensTower/onEventFinish/153 LowerDelkfuttsTower/_540/onTrade LowerDelkfuttsTower/_540/onTrigger LowerDelkfuttsTower/onEventFinish/2 RuludeGardens/_6r8/onTrigger RuludeGardens/Pakh_Jatalfih/onTrigger RuludeGardens/onEventFinish/40 RuludeGardens/onEventFinish/43 RuludeGardens/onEventFinish/141 PortWindurst/onEventFinish/78 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/Miiri-Wohri/onTrigger WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/Sola_Jaab/onTrigger WindurstWoods/Tih_Pikeh/onTrigger WindurstWoods/onEventFinish/114
+char zone=HeavensTower pos=2,0.1,30 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney current
+keyitem StarCrestedSummons1
+login
+trigger Foo_Beibo                       # status 0: nothing from the mission
+finish-if-event
+trigger Kupipi+1                        # 155
+finish-if-event
+trigger _6q2                            # 153
+finish                                  # status 1, the summons for the letter to the ambassador
+trigger _6q2                            # status 1: nothing from the mission
+finish-if-event
+trigger Kupipi+1                        # status 1: nothing from the mission
+finish-if-event
+trigger Foo_Beibo                       # 162
+finish-if-event
+trigger Rhy_Epocan                      # 160
+finish-if-event
+trigger Ufu_Koromoa                     # 161
+finish-if-event

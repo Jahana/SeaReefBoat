@@ -1,0 +1,22 @@
+# Storms of Fate (battlefield.storms_of_fate, Riverne Site #B01): The entry menu (event 32000, params 0,0,0,1): option 0
+# releases only, option 4 (index 0, area 4) registers the fixed area 1 (update 2,0,0,1800; a kept Lua quirk), then
+# options 2, 3 and 1 answer update 1 (already registered). Finish, tick 2000, kill BAHAMUT (his allDeath wins): event
+# 32001 (1,1800,0,6,29). The finish runs the quest's 32001 (StormsOfFate.cs): main gets the Whisper of the Wyrmking and
+# Prog 2 -> 3.
+lists RiverneSiteB01/Unstable_Displacement/onTrigger RiverneSiteB01/onEventUpdate/32000 RiverneSiteB01/onEventFinish/32000 RiverneSiteB01/onEventFinish/32001
+char zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+quest Jeuno.StormsOfFate accepted
+charvar Quest[3][86]Prog 2
+login
+trigger Unstable_Displacement
+update 32000 option=0
+update 32000 option=4
+update 32000 option=2
+update 32000 option=3
+update 32000 option=1
+finish
+tick 2000
+kill BAHAMUT
+finish
+tick 11000
+tick 10000

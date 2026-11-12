@@ -1,0 +1,57 @@
+# Purple, the New Black: LOCKED, and a menu outliving its fight (as puppet_in_peril#busy): bob, cid and eve are each
+# offered the menu while main is in; bob does not answer it; cid's late update is answered with [4] and cid finishes;
+# the win's finish sets main's WotG 7 status 2; after the win and cleanup eve's update is answered with [5].
+lists LaVauleS/_2d1/onTrigger LaVauleS/onEventFinish/2 LaVauleS/onEventUpdate/32000 LaVauleS/onEventFinish/32000 LaVauleS/onEventFinish/32001 LaVauleS/onEventFinish/32002 LaVauleS/_2d3/onTrigger
+char zone=LaVauleS pos=-260.44,0.134,-156.652 job=WAR lvl=99 nation=1
+char bob zone=LaVauleS pos=-260.44,0.134,-156.652 job=WAR lvl=99 nation=1
+char cid zone=LaVauleS pos=-260.44,0.134,-156.652 job=WAR lvl=99 nation=1
+char eve zone=LaVauleS pos=-260.44,0.134,-156.652 job=WAR lvl=99 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg PurpleTheNewBlack current
+bob: mission Asa BurgeoningDread current
+bob: mission Acp ACrystallineProphecyFin current
+bob: mission Rov ARhapsodyForTheAges current
+bob: mission Soa Abomination current
+bob: mission Wotg PurpleTheNewBlack current
+cid: mission Asa BurgeoningDread current
+cid: mission Acp ACrystallineProphecyFin current
+cid: mission Rov ARhapsodyForTheAges current
+cid: mission Soa Abomination current
+cid: mission Wotg PurpleTheNewBlack completed
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Wotg PurpleTheNewBlack completed
+login
+missionstatus Wotg 1
+bob: login
+bob: missionstatus Wotg 1
+cid: login
+eve: login
+cid: missionstatus Wotg 1
+eve: missionstatus Wotg 1
+invite cid
+cid: accept
+invite eve
+eve: accept
+trigger _2d1
+update 32000 option=17
+finish
+bob: trigger _2d1
+cid: trigger _2d1
+eve: trigger _2d1
+tick 2000
+claim GALARHIGG
+tick 1000
+cid: update 32000 option=17
+cid: finish
+kill GALARHIGG
+finish
+tick 11000
+tick 10000
+eve: update 32000 option=17
+eve: finish

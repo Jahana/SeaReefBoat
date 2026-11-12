@@ -1,0 +1,28 @@
+# More Questions than Answers (CoP 6-3), the other Status arms. 6-3 current at Status 0 (a GM): the Audience Chamber
+# door (_6r9) no 6-3 reply (138), Auchefort 9, Selbina's Mathilde no 6-3 reply (171, another script's). Status 1:
+# Mathilde no 6-3 reply (171). Status 3 (past the last): Pherimociel no 6-3 reply (155), _6r9 no 6-3 reply (138),
+# Auchefort 9.
+lists RuludeGardens/_6r9/onTrigger RuludeGardens/Pherimociel/onTrigger RuludeGardens/Auchefort/onTrigger Selbina/Mathilde/onTrigger
+char zone=RuludeGardens pos=-31.6,2,66 job=WAR lvl=75 nation=0
+mission Cop MoreQuestionsThanAnswers current
+login
+trigger _6r9                            # Status 0: no 6-3 reply (138)
+finish-if-event
+trigger Auchefort                       # Status 0: 9
+finish-if-event
+warp 12.5,-7.3,-7 Selbina
+trigger Mathilde                        # Status 0: no 6-3 reply (171)
+finish-if-event
+charvar Mission[6][628]Status 1         # a GM
+trigger Mathilde                        # Status 1: no 6-3 reply (171)
+finish-if-event
+charvar Mission[6][628]Status 3         # a GM
+trigger Mathilde                        # Status 3: no 6-3 reply (171)
+finish-if-event
+warp -31.6,2,66 RuludeGardens
+trigger Pherimociel                     # Status 3: no 6-3 reply (155)
+finish-if-event
+trigger _6r9                            # Status 3: no 6-3 reply (138)
+finish-if-event
+trigger Auchefort                       # Status 3: 9
+finish-if-event

@@ -1,0 +1,37 @@
+# Imperial Schemes (ToAU 11, mission.toau.imperial_schemes). A level 75 Warrior of Bastok with it current, its must-zone
+# flag set and its Timer far in the future (GMs; Astral Waves leaves the next Vana'diel day), in Aht Urhgan Whitegate:
+# Naja 3053, the Option var cycling 2, 0, 2 (the dialog operand). Area 6 (30 -6.6 -60 .. 39 -6.6 -50): must zone:
+# nothing. A rezone clears the flag: the Timer in the future: nothing. Timer 0 (a GM): 3070 (text table 0), its updates
+# (option 1: nothing; option 2: updateEvent(0, ..., 4)), finished: completed (Royal Puppeteer current).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/6 AhtUrhganWhitegate/onEventUpdate/3070 AhtUrhganWhitegate/onEventFinish/3070
+char zone=AhtUrhganWhitegate pos=34.7,-6.6,-40 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ImperialSchemes current
+charvar Mission[4][10]Timer 99999999
+login
+tick 1000
+tick 1000
+tick 1000
+localvar Mission[4][10]mustZone 1       # a GM
+trigger Naja_Salaheem                   # Option 0: dialog 2
+finish
+trigger Naja_Salaheem                   # dialog 0
+finish
+trigger Naja_Salaheem                   # dialog 2
+finish
+walk 34.7,-6.6,-54.1                    # must zone: nothing
+walk 34.7,-6.6,-40
+rezone
+tick 1000
+tick 1000
+tick 1000
+walk 34.7,-6.6,-54.1                    # the Timer in the future: nothing
+walk 34.7,-6.6,-40
+charvar Mission[4][10]Timer 0           # a GM
+walk 34.7,-6.6,-54.1                    # 3070
+update 3070 option=1                    # nothing
+update 3070 option=2                    # updateEvent(0, ..., 4)
+finish                                  # completed

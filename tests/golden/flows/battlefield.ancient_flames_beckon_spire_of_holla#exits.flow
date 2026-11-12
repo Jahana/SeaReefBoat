@@ -1,0 +1,31 @@
+# Ancient Flames Beckon, Holla's exits (battlefield.ancient_flames_beckon_spire_of_holla#exits): the leave NPCs _0h1 to _0h3, one
+# per arena. A level 75 Warrior of San d'Oria with Below the Arks current (a GM) enters arena 1, 2 and 3 in turn (option
+# 1, 2, 3 of the menu 32000) and leaves each by its exit NPC: 32003, finished with 4: leaveBattlefield(1).
+lists SpireOfHolla/_0h0/onTrigger SpireOfHolla/onEventUpdate/32000 SpireOfHolla/_0h1/onTrigger SpireOfHolla/_0h2/onTrigger SpireOfHolla/_0h3/onTrigger SpireOfHolla/onEventFinish/32000 SpireOfHolla/onEventFinish/32003
+char zone=SpireOfHolla pos=0,-3.8,-240 job=WAR lvl=75 nation=0
+mission Cop BelowTheArks current        # a GM
+login
+trigger _0h0                            # the menu 32000
+update 32000 option=1                   # arena 1: entered
+finish                                  # in the arena
+trigger _0h1                            # arena 1's exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield
+warp 334,19,-60 LaTheinePlateau
+warp 0,-3.8,-240 SpireOfHolla
+trigger _0h0                            # the menu 32000
+update 32000 option=2                   # arena 2: entered
+finish                                  # in the arena
+trigger _0h2                            # arena 2's exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield
+warp 334,19,-60 LaTheinePlateau
+warp 0,-3.8,-240 SpireOfHolla
+trigger _0h0                            # the menu 32000
+update 32000 option=3                   # arena 3: entered
+finish                                  # in the arena
+trigger _0h3                            # arena 3's exit: 32003
+finish option=4                         # leaveBattlefield(1)
+tick 10000                              # out of the battlefield
+warp 334,19,-60 LaTheinePlateau
+warp 0,-3.8,-240 SpireOfHolla

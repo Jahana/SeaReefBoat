@@ -1,0 +1,83 @@
+# Moon Reading (Windurst 9-2, mission.windurst.moon_reading), the arms the play-through skips: Kupipi, Zubaba and _6q2
+# at status 2, _6q2 at 1 with a verse missing; the verse givers at 2; the Chamber of Oracles zone-in at status 2, with
+# the verse held and from Windurst Walls; Windurst Walls at 3; the 32001 finish at status 1 and with battlefieldWin 0
+# (a GM's bfwin, then a GM's status / local var inside the event): nothing.
+char zone=HeavensTower pos=2,0,30 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+mission Windurst TheJesterWhodBeKing completed
+mission Windurst DollOfTheDead completed
+rank 9
+mission Windurst MoonReading current
+login
+missionstatus Windurst 2
+trigger Kupipi+1                        # status 2: nothing from the mission
+finish-if-event
+trigger Zubaba                          # status 2: nothing from the mission
+finish-if-event
+trigger _6q2                            # status 2: nothing from the mission
+finish-if-event
+keyitem AncientVerseOfRomaeve
+keyitem AncientVerseOfAltepa
+missionstatus Windurst 1
+trigger _6q2                            # status 1, Uggalepih missing: nothing from the mission
+finish-if-event
+missionstatus Windurst 2
+warp 1.748,-27.402,67.751 Romaeve
+delkeyitem AncientVerseOfRomaeve        # a GM
+trigger QuHau_Spring                    # status 2: nothing from the mission
+finish-if-event
+warp -239.4,-1,-16.9 TempleOfUggalepih
+trigger qm_windy_9_2                    # status 2: nothing from the mission
+finish-if-event
+warp -504,19,-419 QuicksandCaves
+warp -218.6,-1.9,23.0 ChamberOfOracles  # from Quicksand Caves at status 2: no zone-in event
+missionstatus Windurst 1
+warp -504,19,-419 QuicksandCaves
+warp -218.6,-1.9,23.0 ChamberOfOracles  # status 1, the Altepa verse held: no zone-in event
+delkeyitem AncientVerseOfAltepa         # a GM
+warp 0,-16,126 WindurstWalls            # out (status 1: no Windurst Walls zone-in)
+warp -218.6,-1.9,23.0 ChamberOfOracles  # from Windurst Walls, status 1, no verse: no zone-in event
+missionstatus Windurst 3
+warp 0,-16,126 WindurstWalls            # status 3: no zone-in event
+missionstatus Windurst 2
+warp -301.3,9.5,-260.0 FullMoonFountain
+trigger MS_Entrance                     # the 32000 menu
+update 32000 option=17                  # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 225, 32001
+missionstatus Windurst 1                # a GM, inside the event
+finish                                  # 32001 at status 1: the mission does nothing
+tick 11000
+tick 10000
+missionstatus Windurst 2
+warp -301.3,9.5,-260.0 FullMoonFountain
+trigger MS_Entrance                     # the 32000 menu
+update 32000 option=17                  # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, 32001
+localvar battlefieldWin 0               # a GM, inside the event
+finish                                  # 32001 with battlefieldWin 0: the mission does nothing
+tick 11000
+tick 10000

@@ -1,0 +1,104 @@
+# The Heart of the Matter (Windurst 1-2, mission.windurst.the_heart_of_the_matter). A level 10 Warrior of Windurst (a
+# GM's Resonance current keeps RoV 1-1 out) who has completed 1-1 (a GM). Section 1 (no mission current):
+# Janshura-Rashura of Port Windurst plays 78; its finish with option 0 does nothing, with option 1 begins the mission.
+# Section 2 (1-2 current): Janshura-Rashura, Nine of Clubs, Puo Rhen and Ten of Clubs play 105, 106, 108 and 107. Status
+# 1: Apururu of Windurst Woods plays 137, whose finish gives the six Dark Mana Orbs (status 2). Status 2: Apururu plays
+# 138; Pore-Ohre of East Sarutabaruta plays cutscene 46, which gives the Southeastern Star Charm (status 3). Status 3
+# and 4: Pore-Ohre plays 47. Outer Horutoto Ruins at status 3: the gate _5e9 says DOOR_FIRMLY_SHUT (text 7278, no event)
+# while fewer than six orbs are placed; each gizmo plays its placing cutscene (58 to 63), and each placing finish sends
+# SPECIAL 1 (msgBase+1; third parameter 37, 51, 52, 53, 54, 55); the first one triggered again says ORB_ALREADY_PLACED,
+# and the sixth placing also says the all-placed text (msgBase+5); with six placed the gate says STAR_CHARM_DISAPPEARS
+# and plays 44 (status 4); each gizmo plays its collecting cutscene (46 to 51), and each collect finish sends SPECIAL
+# 6603 (first parameter 59 to 64); the first one triggered again says its already-retrieved message (SPECIAL 3); the
+# sixth collect also sends SPECIAL 4 and sets status 5. Status 5 (the orbs kept): Apururu plays 145, whose finish takes
+# the orbs and completes the mission. Completed (no mission, 1-3 not completed): Apururu plays 144 (important once),
+# then DefaultActions' 274; Nine of Clubs 74, Puo Rhen 79 and Ten of Clubs 80. Rival zone-in: entering Windurst Woods
+# plays Seekers of Adventure's Rumors from the West, 839 (another mission's script), whose finish writes that mission's
+# status 4 (area 12). The last section has no NONE check in the Lua (a kept bug), so it answers for Port Windurst's 1-3
+# NPCs too (see The Price of Peace).
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/Nine_of_Clubs/onTrigger PortWindurst/Puo_Rhen/onTrigger PortWindurst/Ten_of_Clubs/onTrigger PortWindurst/onEventFinish/78 WindurstWoods/Apururu/onTrigger WindurstWoods/onEventFinish/137 WindurstWoods/onEventFinish/145 EastSarutabaruta/Pore-Ohre/onTrigger EastSarutabaruta/onEventFinish/46 OuterHorutotoRuins/_5ee/onTrigger OuterHorutotoRuins/_5e9/onTrigger OuterHorutotoRuins/onEventFinish/58 OuterHorutotoRuins/onEventFinish/46 OuterHorutotoRuins/onEventFinish/44
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+login
+mission Windurst TheHorutotoRuinsExperiment current
+mission Windurst TheHorutotoRuinsExperiment completed   # a GM: 1-1 done
+trigger Janshura-Rashura                # section 1: 78
+finish option=0                         # not 1: nothing
+trigger Janshura-Rashura                # 78 again
+finish option=1                         # begun (status 1, YOU_ACCEPT_THE_MISSION)
+trigger Janshura-Rashura                # section 2: 105
+finish
+trigger Nine_of_Clubs                   # 106
+finish
+trigger Puo_Rhen                        # 108
+finish
+trigger Ten_of_Clubs                    # 107
+finish
+warp -11,-2,13 WindurstWoods
+trigger Apururu                         # status 1: 137
+finish                                  # the six Dark Mana Orbs, status 2
+trigger Apururu                         # status 2: 138
+finish
+warp 261,-17,-458 EastSarutabaruta
+trigger Pore-Ohre                       # cutscene 46
+finish                                  # the Southeastern Star Charm, status 3
+trigger Pore-Ohre                       # 47
+finish
+warp 590,-1,-660 OuterHorutotoRuins
+trigger _5e9                            # fewer than six orbs placed: DOOR_FIRMLY_SHUT, no event
+finish-if-event
+warp 542,-3,-618 OuterHorutotoRuins
+trigger _5ee                            # gizmo 1: 58
+finish                                  # the first Dark Mana Orb placed
+trigger _5ee                            # ORB_ALREADY_PLACED (msgBase+0)
+warp 500,-3,-573 OuterHorutotoRuins
+trigger _5ef                            # gizmo 2: 59
+finish
+warp 458,-3,-618 OuterHorutotoRuins
+trigger _5eg                            # gizmo 3: 60
+finish
+warp 458,-3,-702 OuterHorutotoRuins
+trigger _5eh                            # gizmo 4: 61
+finish
+warp 500,-3,-747 OuterHorutotoRuins
+trigger _5ei                            # gizmo 5: 62
+finish
+warp 542,-3,-702 OuterHorutotoRuins
+trigger _5ej                            # gizmo 6: 63
+finish                                  # the sixth orb placed: the all-placed text (msgBase+5)
+warp 590,-1,-660 OuterHorutotoRuins
+trigger _5e9                            # six placed: STAR_CHARM_DISAPPEARS, 44
+finish                                  # the charm taken, status 4, ALL_G_ORBS_ENERGIZED
+warp 542,-3,-618 OuterHorutotoRuins
+trigger _5ee                            # status 4, gizmo 1: 46
+finish                                  # the first Glowing Mana Orb
+trigger _5ee                            # already retrieved
+warp 500,-3,-573 OuterHorutotoRuins
+trigger _5ef                            # gizmo 2: 47
+finish
+warp 458,-3,-618 OuterHorutotoRuins
+trigger _5eg                            # gizmo 3: 48
+finish
+warp 458,-3,-702 OuterHorutotoRuins
+trigger _5eh                            # gizmo 4: 49
+finish
+warp 500,-3,-747 OuterHorutotoRuins
+trigger _5ei                            # gizmo 5: 50
+finish
+warp 542,-3,-702 OuterHorutotoRuins
+trigger _5ej                            # gizmo 6: 51
+finish                                  # all six retrieved, status 5
+warp -11,-2,13 WindurstWoods
+trigger Apururu                         # status 5, the orbs kept: 145
+finish                                  # the orbs taken, completed (250 rank points)
+trigger Apururu                         # completed section: 144, important once
+finish
+trigger Apururu                         # the second time: DefaultActions' 274
+finish-if-event
+warp -227,-8,182 PortWindurst
+trigger Nine_of_Clubs                   # 74
+finish
+trigger Puo_Rhen                        # 79
+finish
+trigger Ten_of_Clubs                    # 80
+finish

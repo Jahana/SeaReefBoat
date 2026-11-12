@@ -1,0 +1,66 @@
+# Lightbringer (San d'Oria 8-2, mission.sandoria.lightbringer), the arms the play-through skips: qm_key1 at status 0,
+# _4fv with a piece missing and at status 4 (YOU_CANNOT_OPEN_THIS_DOOR), Nio-Hum dying first, the Nio at status 4 (a GM
+# spawn): nothing; at status 3 the Chateau's own lines.
+char zone=TempleOfUggalepih pos=-13,-17,-149 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+rank 8
+mission Sandoria Lightbringer current
+login
+trigger qm_key1                         # status 0: nothing from the mission
+finish-if-event
+trigger qm17                            # SLIGHTLY_QUIVERS
+missionstatus Sandoria 5
+keyitem PieceOfABrokenKey1
+keyitem PieceOfABrokenKey2
+trigger _4fv                            # status 5, the third piece missing: YOU_CANNOT_OPEN_THIS_DOOR
+keyitem PieceOfABrokenKey3
+missionstatus Sandoria 4
+trigger _4fv                            # status 4, the three pieces: YOU_CANNOT_OPEN_THIS_DOOR
+missionstatus Sandoria 5
+trigger _4fv                            # status 5: both spawned, BEGINS_TO_QUIVER
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill NIO_HUM                            # Nio-A up: nothing
+kill NIO_A                              # Nio-Hum dead: Prog 1
+tick 30000
+tick 30000
+missionstatus Sandoria 4
+spawn NIO_A                             # a GM
+tick 2000
+kill NIO_A                              # status 4: nothing
+tick 30000
+tick 30000
+spawn NIO_HUM                           # a GM
+tick 2000
+kill NIO_HUM                            # status 4: nothing
+warp 0,0,0 ChateauDoraguille
+missionstatus Sandoria 3
+trigger Curilla                         # status 3: nothing from the mission
+finish-if-event
+trigger Aramaviont                      # status 3: nothing from the mission
+finish-if-event
+trigger Milchupain                      # status 3: nothing from the mission
+finish-if-event
+trigger Halver                          # status 3: nothing from the mission
+finish-if-event

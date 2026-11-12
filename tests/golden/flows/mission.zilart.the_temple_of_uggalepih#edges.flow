@@ -1,0 +1,22 @@
+# The Temple of Uggalepih: status 3 and option 1. At status 3 (a GM) the Sacrificial Chamber zone-in plays nothing. At
+# status 1 it plays 7, whose update on option 1 answers nothing and whose finish still sets status 2; the next tick
+# moves the char (0x00B); 8's update on option 1 answers nothing and its finish completes the mission.
+lists Norg/Gilgamesh/onTrigger Kazham/Jakoh_Wahcondalo/onTrigger SacrificialChamber/onZoneIn/1 SacrificialChamber/onEventUpdate/7 SacrificialChamber/onEventUpdate/8 SacrificialChamber/onEventFinish/7 SacrificialChamber/onEventFinish/8 SacrificialChamber/_4j0/onTrigger SacrificialChamber/_4j0/onTrade SacrificialChamber/onEventUpdate/32000 SacrificialChamber/onEventFinish/32000 SacrificialChamber/onEventFinish/32001
+char zone=Norg pos=120,-8,-12 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheTempleOfUggalepih current
+keyitem SacrificialChamberKey
+login
+missionstatus Zilart 3                  # a GM
+warp 299,0.1,349 SacrificialChamber     # status 3: no zone-in event
+missionstatus Zilart 1                  # a GM
+rezone open                             # status 1: 7 left open
+update 7 option=1                       # option 1: no update
+finish                                  # status 2; the next tick moves the char (0x00B)
+tick 400
+login open                              # status 2: 8 left open
+update 8 option=1                       # option 1: no update
+finish                                  # completed

@@ -1,0 +1,70 @@
+# The Jester Who'd be King (Windurst 8-2, mission.windurst.the_jester_whod_be_king), the arms the play-through skips:
+# _5e5 at status 3 and with a queen up; the Queen of Swords dying second (status 5); the queens at status 3; _5cb at 3;
+# Kupipi at 5, Apururu at 5 and 11: nothing.
+char zone=OuterHorutotoRuins pos=-421,0,619.75 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+rank 8
+mission Windurst TheJesterWhodBeKing current
+login
+missionstatus Windurst 3
+trigger _5e5                            # status 3: nothing from the mission
+finish-if-event
+missionstatus Windurst 4
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+spawn JESTER_WHOD_BE_KING_OFFSET        # a GM: the Queen of Swords alone
+trigger _5e5                            # status 4, a queen up: nothing
+finish-if-event
+spawn JESTER_WHOD_BE_KING_OFFSET+1      # a GM: the Queen of Coins
+tick 2000
+kill JESTER_WHOD_BE_KING_OFFSET+1       # Coins first: the Queen of Swords alive: nothing
+trigger _5e5                            # status 4, the Queen of Swords up: nothing
+finish-if-event
+kill JESTER_WHOD_BE_KING_OFFSET         # Swords: the Queen of Coins dead: status 5
+tick 30000
+tick 30000
+missionstatus Windurst 3
+spawn JESTER_WHOD_BE_KING_OFFSET        # a GM
+tick 2000
+kill JESTER_WHOD_BE_KING_OFFSET         # status 3: nothing
+tick 30000
+tick 30000
+spawn JESTER_WHOD_BE_KING_OFFSET+1      # a GM
+tick 2000
+kill JESTER_WHOD_BE_KING_OFFSET+1       # status 3: nothing
+warp -226,0,99 InnerHorutotoRuins
+trigger _5cb                            # status 3: nothing from the mission
+finish-if-event
+warp 2,0,30 HeavensTower
+trigger Kupipi+1                        # status 3: 326
+finish
+missionstatus Windurst 5
+trigger Kupipi+1                        # status 5: nothing from the mission
+finish-if-event
+warp -9,-2,13 WindurstWoods
+trigger Apururu                         # status 5: nothing from the mission
+finish-if-event
+missionstatus Windurst 11
+trigger Apururu                         # status 11: nothing from the mission
+finish-if-event

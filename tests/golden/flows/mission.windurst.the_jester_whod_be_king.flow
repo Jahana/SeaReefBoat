@@ -1,0 +1,115 @@
+# The Jester Who'd be King (Windurst 8-2, mission.windurst.the_jester_whod_be_king) played through: a level 75
+# Windurstian Warrior at rank 8 with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's
+# missions before it completed. Rakoh Buuma's 114, option 21: begun, his 584. Apururu 588 (status 1, the Manustery
+# Ring), 589. The rings: Tosuka-Porika 801 (the Optistery), 802; Davoi's Sedal-Godjal 122 (the Aurastery); Fei'Yin's
+# _no4 22 (the Rhinostery, the three held: status 2). Apururu 601 (status 3); Heaven's Tower Kupipi 326 (status 4),
+# 327. Outer Horutoto's _5e5 with neither queen up spawns both (no claim) and says GUARDIAN_BLOCKING_WAY; the Queen of
+# Coins' death with the Queen of Swords dead: status 5; _5e5 71: the Orastery Ring (status 6). Apururu 590 (7), 591;
+# Shantotto 397: the glove, the rings taken (8); Apururu 592 (9), 593; the Inner Horutoto _5cb 75 with the Book of the
+# Gods (a GM): status 10; Apururu 609: completed (80000 gil, rank 9), Option 1. Section 3: Apururu 605, Shantotto 399
+# (Option 0).
+char zone=WindurstWoods pos=106,-5,-21 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+rank 8
+login
+trigger Rakoh_Buuma                     # no mission current: the guard's own mission list
+finish option=24                        # no mission's option (this mission takes 21): not begun
+trigger Rakoh_Buuma                     # the list again
+finish option=21                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Rakoh_Buuma                     # status 0: 584
+finish
+trigger Apururu                         # status 0: 588
+finish                                  # status 1, the Manustery Ring
+trigger Apururu                         # status 1: 589
+finish
+trigger Rakoh_Buuma                     # status 1: nothing from the mission
+finish-if-event
+warp -55,-8,229 WindurstWaters
+trigger Mokyokyo                        # status 1: nothing from the mission
+finish-if-event
+trigger Tosuka-Porika                   # status 1, no Optistery: 801
+finish                                  # the Optistery Ring; the other two missing: status 1
+trigger Tosuka-Porika                   # the Optistery held: 802
+finish
+warp 187,-3,-116 Davoi
+trigger Sedal-Godjal                    # status 1, no Aurastery: 122
+finish                                  # the Aurastery Ring; no Rhinostery: status 1
+trigger Sedal-Godjal                    # held: nothing from the mission
+finish-if-event
+warp -51.0,-16.0,38.0 Feiyin
+trigger _no4                            # status 1, no Rhinostery: 22
+finish                                  # the Rhinostery Ring; the other two held: status 2
+trigger _no4                            # status 2: nothing from the mission
+finish-if-event
+warp -9,-2,13 WindurstWoods
+trigger Apururu                         # status 2: 601
+finish                                  # status 3
+trigger Apururu                         # status 3: 601
+finish
+warp 2,0,30 HeavensTower
+trigger Kupipi+1                        # status 3: 326
+finish                                  # status 4
+trigger Kupipi+1                        # status 4: 327
+finish
+warp -421,0,619.75 OuterHorutotoRuins
+trigger _5e5                            # status 4, neither queen up: both spawned, GUARDIAN_BLOCKING_WAY
+trigger _5e5                            # both up: nothing from the mission
+finish-if-event
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill JESTER_WHOD_BE_KING_OFFSET         # the Queen of Swords: the Queen of Coins alive: nothing
+kill JESTER_WHOD_BE_KING_OFFSET+1       # the Queen of Coins: the Queen of Swords dead: status 5
+trigger _5e5                            # status 5: 71
+finish                                  # the Orastery Ring, status 6
+warp -9,-2,13 WindurstWoods
+trigger Apururu                         # status 6: 590
+finish                                  # status 7
+trigger Apururu                         # status 7: 591
+finish
+warp 122,-2,114 WindurstWalls
+trigger Shantotto                       # status 7: 397
+finish                                  # the Glove of Perpetual Twilight, the five rings taken, status 8
+trigger Shantotto                       # status 8: nothing from the mission
+finish-if-event
+warp -9,-2,13 WindurstWoods
+trigger Apururu                         # status 8: 592
+finish                                  # the glove taken, status 9
+trigger Apururu                         # status 9: 593
+finish
+keyitem BookOfTheGods                   # a GM: the book (another quest's)
+warp -226,0,99 InnerHorutotoRuins
+trigger _5cb                            # status 9: 75
+finish                                  # the book taken, status 10
+trigger _5cb                            # status 10: nothing from the mission
+finish-if-event
+warp -9,-2,13 WindurstWoods
+trigger Apururu                         # status 10: 609
+finish                                  # completed: 80000 gil, rank 9; Option 1
+trigger Apururu                         # section 3: 605
+finish
+warp 122,-2,114 WindurstWalls
+trigger Shantotto                       # Option 1: 399
+finish                                  # Option 0
+trigger Shantotto                       # Option 0: nothing from the mission
+finish-if-event

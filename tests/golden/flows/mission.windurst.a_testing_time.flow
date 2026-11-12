@@ -1,0 +1,62 @@
+# A Testing Time (Windurst 2-2). Janshura-Rashura plays 78 (the finish with option 0 does nothing, option 4 begins the
+# mission; the next trigger plays the section-2 event 133). Moreno-Toeno plays 182 (the finish with option 1 does
+# nothing, option 2 starts the window and gives the key item), then 183 (too early; 2 hours left at the second one), a
+# failed run's 198 (3 kills), and, after the fail, Teacher's Pet's 437 (its finish writes windurst.teachers_pet step 1
+# and Quest[2][28]Prog 1), then its 438 after a zone (its finish sets windurst.teachers_pet to status 1, accepted). A
+# retry: Janshura 78 begins again, Moreno plays 181 (option 1 does nothing, option 2 starts the window again).
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWaters/Moreno-Toeno/onTrigger WindurstWaters/onEventFinish/181 WindurstWaters/onEventFinish/182 WindurstWaters/onEventFinish/198
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+login
+mission Windurst TheHorutotoRuinsExperiment current
+mission Windurst TheHorutotoRuinsExperiment completed   # a GM: 1-1 done
+mission Windurst TheHeartOfTheMatter current
+mission Windurst TheHeartOfTheMatter completed          # a GM: 1-2 done
+mission Windurst ThePriceOfPeace current
+mission Windurst ThePriceOfPeace completed              # a GM: 1-3 done
+mission Windurst LostForWords current
+mission Windurst LostForWords completed                 # a GM: 2-1 done
+trigger Janshura-Rashura                # 78
+finish option=0                         # not 4: nothing
+trigger Janshura-Rashura                # 78
+finish option=4                         # begun
+trigger Janshura-Rashura                # section 2: 133
+finish
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # status 1
+finish option=1
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # status 1
+finish option=2
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # status 2, 24 hours to go
+finish
+charvar Mission[2][4]EndTime 790189345        # a GM: one second past the hour window
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # too early
+finish
+charvar Mission[2][4]EndTime 790189344        # a GM: the hour window
+charvar Mission[2][4]KillCount 3              # a GM: the kills
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # too few kills: fails
+finish
+trigger Moreno-Toeno                    # after the fail: Teacher's Pet's 437
+finish
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # zoned: Teacher's Pet's 438
+finish
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+trigger Janshura-Rashura                # 78
+finish option=4                         # begun
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # status 1, a retry
+finish option=1
+warp -227,-8,182 PortWindurst           # zoned: his event plays as a first
+warp 169,-1,160 WindurstWaters
+trigger Moreno-Toeno                    # a retry accepted
+finish option=2

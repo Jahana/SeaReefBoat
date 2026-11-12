@@ -1,0 +1,21 @@
+# Awakening (Zilart 17), current; the status a bit field. The zone-in to Norg plays 176 while bit 0 is clear (its finish
+# adds 1), then nothing; Gilgamesh plays 177; Lower Jeuno's _6tc plays 20 while bit 1 is clear (its finish adds 2), then
+# the handler returns nil and _6tc is the NPC's own ITS_LOCKED.
+lists Norg/onZoneIn/1 Norg/onEventFinish/176 Norg/Gilgamesh/onTrigger Norg/onEventFinish/232 Norg/onEventFinish/234 LowerJeuno/_6tc/onTrigger LowerJeuno/onEventFinish/20
+char zone=LowerJeuno pos=36,0,-15 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart Awakening current
+login
+warp 98,-7,-12 Norg open                    # bit 0 clear: 176
+finish                                  # status 1
+trigger Gilgamesh                       # 177
+finish
+warp 98,-7,-12 Norg open                    # bit 0 set: nothing
+warp 36,0,-15 LowerJeuno
+trigger _6tc                            # bit 1 clear: 20
+finish                                  # status 3
+trigger _6tc                            # bit 1 set: the NPC's own ITS_LOCKED
+finish-if-event

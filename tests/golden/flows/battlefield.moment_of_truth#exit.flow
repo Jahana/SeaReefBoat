@@ -1,0 +1,19 @@
+# Moment of Truth (battlefield.moment_of_truth#exit, Jade Sepulcher): The exit NPCs _1v1 (update 32003 option 1, finish
+# 0), _1v2 (finish 0) and _1v3 (finish 4), then a warp out and the entry again.
+lists JadeSepulcher/_1v0/onTrigger JadeSepulcher/_1v1/onTrigger JadeSepulcher/_1v2/onTrigger JadeSepulcher/_1v3/onTrigger JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventUpdate/32003 JadeSepulcher/onEventFinish/32003
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+quest AhtUrhgan.MomentOfTruth accepted
+charvar Quest[6][30]Prog 4
+login
+trigger _1v0
+update 32000 option=49
+finish
+trigger _1v1
+update 32003 option=1
+finish option=0
+trigger _1v2
+finish option=0
+trigger _1v3
+finish option=4
+warp 300,-2.517,-198.5 JadeSepulcher
+trigger _1v0

@@ -199,26 +199,27 @@ namespace XI.Zone
             return problems;
         }
 
-        // the quest's exports after its registration, by the state of package.loaded[module] (design section 3.4):
+        // the container's exports after its registration, by the state of package.loaded[module] (design section 3.4):
         // nothing loaded: the bridge claims it (CSharpQuests.claim) and sets each global; the bridge's own claim
         // (a reload(true)): kept, the globals set again; a Lua module's table
-        // (the quest's file still there and loaded: a twin, a port not yet deleted, a quest in CSHARP_QUESTS_OFF): the
-        // bridge stands down, the Lua's own functions stay. A registered quest's globals run its callbacks
-        // (context as a player timer's: the first argument the char); a quest not registered
+        // (the container's file still there and loaded: a twin, a port not yet deleted, a quest in CSHARP_QUESTS_OFF):
+        // the bridge stands down, the Lua's own functions stay. A registered container's globals run its callbacks
+        // (context as a player timer's: the first argument the char); a container not registered
         // (refused, switched off, CSHARP_QUESTS false) still claims the module, its globals set to a no-op that logs
         // once per process, so a script requiring the deleted file (healing.lua) still loads and does the rest of what
-        // it does. A module or a global another quest of this pass claimed is left to it
-        // (that quest's refusal is logged). Not run for a quest refused because another C# quest has its key: the
-        // ownership checks below go by key, so its no-ops would replace the first quest's functions
+        // it does. A module or a global another container of this pass claimed is left to it
+        // (that container's refusal is logged). Not run for a container refused because another C# container has its
+        // key: the ownership checks below go by key, so its no-ops would replace the first container's functions
         // (RegisterQuestScripts skips it)
-        private void ClaimExports(LuaState l, CompiledQuestScript q, string key, QuestScriptBinding bound)
+        private void ClaimExports(LuaState l, ContainerScript script, QuestScriptDefinition own, string key,
+                                  QuestScriptBinding bound)
         {
-            var def = bound?.Def ?? q.Def;
+            var def = bound?.Def ?? own;
             if (def == null || def.Exports.Count == 0 || key == null) return;
             int top = l.Top;
             try
             {
-                foreach (var group in def.Exports.GroupBy(e => ExportModule(e, q.Script?.LegacyPath)))
+                foreach (var group in def.Exports.GroupBy(e => ExportModule(e, script?.LegacyPath)))
                 {
                     string module = group.Key;
                     if (module == null || exportModules_.TryGetValue(module, out var owner) && owner != key) continue;

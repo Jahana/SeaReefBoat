@@ -1,0 +1,31 @@
+# Rank 2 Mission 1 (battlefield.rank_2_mission_1) with four Windurst chars, all with The Three Kingdoms (San d'Oria,
+# the second) current at status 9 and the Dark Key (GMs): the first registers area 1; bob picks area 1 (taken: update
+# params 1) and then area 2; cid picks area 3; dan triggers with all three arenas taken: NO_BATTLEFIELD_ENTRY (7251).
+lists HorlaisPeak/BC_Entrance/onTrigger HorlaisPeak/BC_Entrance/onTrade HorlaisPeak/onEventUpdate/32000 HorlaisPeak/onEventFinish/32000 HorlaisPeak/Burning_Circle/onTrigger HorlaisPeak/onEventFinish/32003 HorlaisPeak/onEventFinish/32001
+char zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=WAR lvl=75 nation=2
+char bob zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=WAR lvl=75 nation=2
+char cid zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=WAR lvl=75 nation=2
+char dan zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=WAR lvl=75 nation=2
+mission Windurst TheThreeKingdomsSandoria2 current
+bob: mission Windurst TheThreeKingdomsSandoria2 current
+cid: mission Windurst TheThreeKingdomsSandoria2 current
+dan: mission Windurst TheThreeKingdomsSandoria2 current
+login
+missionstatus Windurst 9
+bob: login
+bob: missionstatus Windurst 9
+cid: login
+cid: missionstatus Windurst 9
+dan: login
+dan: missionstatus Windurst 9
+trigger BC_Entrance
+update 32000 option=1
+finish
+bob: trigger BC_Entrance
+bob: update 32000 option=1
+bob: update 32000 option=2
+bob: finish
+cid: trigger BC_Entrance
+cid: update 32000 option=3
+cid: finish
+dan: trigger BC_Entrance

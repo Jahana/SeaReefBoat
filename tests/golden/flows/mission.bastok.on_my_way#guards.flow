@@ -1,0 +1,60 @@
+# On My Way: the guards. Cleades, Rashid and Argus at status 3 with Option 1: 1011; Cleades at status 2, Rashid with
+# Option 0 and Argus at status 0: the mission drops its message, their own 1002. Completed (a GM) with Option 1:
+# Argus, Rashid, Cleades and Malduc 1011 from the letter section.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 BastokMines/Gumbah/onTrigger BastokMines/onEventFinish/175 BastokMines/onEventFinish/177 Metalworks/Franziska/onTrigger Metalworks/Karst/onTrigger Metalworks/_6lg/onTrigger Metalworks/onEventFinish/765 Metalworks/onEventFinish/766 Metalworks/onEventFinish/621 Metalworks/onEventFinish/622 PortBastok/Hilda/onTrigger PortBastok/onEventFinish/255 WaughroonShrine/BC_Entrance/onTrigger WaughroonShrine/onEventUpdate/32000 WaughroonShrine/onEventFinish/32000 WaughroonShrine/onEventFinish/32001
+char zone=BastokMarkets pos=-356,-10,-168 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay current
+rank 7
+charvar Mission[1][19]Option 1
+login
+missionstatus Bastok 3
+trigger Cleades                         # status 3, Option 1: 1011
+finish
+missionstatus Bastok 2
+trigger Cleades                         # status 2: the dropped message: his 1002
+finish-if-event
+warp -8.4,-2,-121.5 BastokMines
+missionstatus Bastok 3
+trigger Rashid                          # status 3, Option 1: 1011
+finish
+charvar Mission[1][19]Option 0
+trigger Rashid                          # Option 0: the dropped message: his 1002
+finish-if-event
+charvar Mission[1][19]Option 1
+warp 130,7.5,-2 PortBastok
+trigger Argus                           # status 3, Option 1: 1011
+finish
+missionstatus Bastok 0
+trigger Argus                           # status 0: the dropped message: his 1002
+finish-if-event
+mission Bastok OnMyWay completed        # a GM: completed, Option 1
+trigger Argus                           # completed, Option 1: 1011
+finish
+warp -8.4,-2,-121.5 BastokMines
+trigger Rashid                          # completed, Option 1: 1011
+finish
+warp -356,-10,-168 BastokMarkets
+trigger Cleades                         # completed, Option 1: 1011
+finish
+warp 64,-15,4 Metalworks
+trigger Malduc                          # completed, Option 1: 1011
+finish

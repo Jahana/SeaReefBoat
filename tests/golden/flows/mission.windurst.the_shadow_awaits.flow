@@ -1,0 +1,78 @@
+# The Shadow Awaits (Windurst 5-2, mission.windurst.the_shadow_awaits) played through: a level 75 Windurstian at rank 5,
+# ACP and RoV current (their zone-ins quiet) and the nation's missions before it completed. Janshura-Rashura's own 78
+# (the mission list), option 15: begun, YOU_ACCEPT_THE_MISSION, the Star-Crested Summons. Heavens Tower: Zubaba 157,
+# _6q2 214 (status 2, Star-Ordained Warrior, the summons taken). The Throne Room: _4l1 at status 2: the battlefield's
+# entry trigger refuses (NO_BATTLEFIELD_ENTRY 7254) and the mission's 6 plays (status 3); _4l1 32000, area 1; phase 1
+# killed: 32004 (1), whose finish (onEventFinishBattlefield) despawns phase 1 and spawns phase 2; phase 2 (unkillable)
+# takes the blow at 1 HP; after two days (wait jst=1 twice) he acts (an 028) and drops, and the next tick has him dead:
+# WON, 32001; its finish runs the battlefield's (Shadow Banisher) and the mission's (Zilart's The New Frontier added:
+# the engine's warning over the 65535 Zilart row; PostBattle 1; the set-down at 90.425 -5.749 0.089 in the Throne Room,
+# whose zone change shows at the next tick 400). The zone-in 7 (-1, flags 8): status 4, PostBattle 0, the Shadow
+# Fragment; the Throne Room Zone.lua's own 7 finish sets the char down in Castle Zvahl Baileys (the next tick 400).
+# Heavens Tower's zone-in 215 (-1, flags 0x13): ReturnCS 1; Zubaba 194, _6q2 216: completed (rank 6, 20000 gil, the
+# fragment taken); then the zone's default VESTAL_CHAMBERS_LOCKED (310).
+lists PortWindurst/onEventFinish/78 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/onEventFinish/114 HeavensTower/onZoneIn/1 HeavensTower/_6q2/onTrigger HeavensTower/Zubaba/onTrigger HeavensTower/onEventFinish/214 HeavensTower/onEventFinish/215 HeavensTower/onEventFinish/216 ThroneRoom/_4l1/onTrigger ThroneRoom/_4l2/onTrigger ThroneRoom/onZoneIn/1 ThroneRoom/onEventUpdate/32000 ThroneRoom/onEventFinish/32000 ThroneRoom/onEventFinish/32001 ThroneRoom/onEventFinish/32002 ThroneRoom/onEventFinish/32003 ThroneRoom/onEventFinish/32004 ThroneRoom/onEventFinish/6 ThroneRoom/onEventFinish/7
+char zone=PortWindurst pos=-227,-8,186 job=WAR lvl=75 nation=2
+warning: lua: addMission: overwriting current mission 65535 of log 3 with 0 -- the 32001 finish adds Zilart's The New Frontier while the char's Zilart log holds 65535 (no Zilart row yet): the engine's C++ ShowWarning, the mission is added
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+rank 5
+mission Windurst TheFinalSeal completed
+login
+trigger Janshura-Rashura                # section 1: her own 78 (the mission list)
+finish option=15                        # begun: YOU_ACCEPT_THE_MISSION, the Star-Crested Summons
+warp 2,0.1,30 HeavensTower
+trigger Zubaba                          # the summons: 157
+finish-if-event
+trigger _6q2                            # the summons: 214
+finish                                  # status 2, Star-Ordained Warrior, the summons taken
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 2: the battlefield refuses (7254); the mission's 6
+finish                                  # status 3
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000                               # the first tick: phase 1 spawns; not locked yet
+kill SHADOW_LORD_RANK_5_OFFSET          # phase 1 dead: the group's death: 32004 (1)
+finish                                  # 32004: onEventFinishBattlefield: phase 1 despawned, phase 2 spawned
+tick 2000
+kill SHADOW_LORD_RANK_5_OFFSET+3        # phase 2 (unkillable) takes the blow: 1 HP
+tick 1000                               # nothing yet
+wait jst=1                              # the wall clock a day on
+tick 1000
+tick 1000
+wait jst=1
+tick 1000                               # the second day: phase 2 acts (an 028), HP 0
+tick 1000                               # phase 2 dead: WON, 32001
+tick 1000                               # nothing
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish                                  # 32001: the title; the mission: Zilart 1-1 added, PostBattle 1, setPos
+tick 400                                # the setPos runs: a zone change into the Throne Room
+login open                              # status 3, PostBattle 1: the zone-in's 7 (-1, flags 8)
+finish                                  # 7: status 4, PostBattle 0, the Shadow Fragment
+tick 400                                # Zone.lua 7 finish: setPos to Castle Zvahl Baileys, a zone change
+login
+warp 2,0.1,30 HeavensTower open         # status 4, ReturnCS 0, the fragment: 215
+finish                                  # ReturnCS 1
+trigger Zubaba                          # the fragment: 194
+finish-if-event
+trigger _6q2                            # the fragment: 216
+finish                                  # completed: rank 6, 20000 gil, the fragment taken
+trigger _6q2                            # completed: nothing from the mission
+finish-if-event

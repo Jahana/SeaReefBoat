@@ -1,0 +1,25 @@
+# Return to Delkfutt's Tower (battlefield.return_to_delkfutts_tower): the mission current. The login's zone-in at status
+# 0 plays the mission's 0, answered at login, which sets status 1. _4z0 opens the menu (32000, bit 1). Update option 0
+# answers nothing; option 17 (index 1, not offered) answers 5; option 1 (index 0, area 1) enters:
+# ENTERING_THE_BATTLEFIELD_FOR (7610), the party and time lines (7543, 7546), the update (2, 0, 0, 1800). Area 1's
+# Kamlanaut dies: won, 32001. Its finish gives the Destroyer of Antiquity title (the fight's) and, as the mission's
+# (mission.zilart.return_to_delkfutts_tower), sets status 2; the next tick moves the char (0x00B). At login the zone-in
+# plays the mission's 17, answered: completed (Ro'Maeve current; the login bundle also carries 7610, 7543 and 7546).
+lists StellarFulcrum/_4z0/onTrigger StellarFulcrum/onEventUpdate/32000 StellarFulcrum/onEventFinish/32000 StellarFulcrum/onEventFinish/32001 StellarFulcrum/onEventFinish/32002 StellarFulcrum/onZoneIn/1 StellarFulcrum/onEventFinish/17 StellarFulcrum/_4z1/onTrigger
+char zone=StellarFulcrum pos=-520,-4,17 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ReturnToDelkfuttsTower current
+login                                   # the mission's zone-in 0 at status 0, answered: status 1
+trigger _4z0                            # the menu 32000 (bit 1)
+update 32000 option=0                   # ignored
+update 32000 option=17                  # index 1, not offered: 5
+update 32000 option=1                   # index 0, area 1: entered
+finish
+tick 2000                               # placed in area 1
+kill KAMLANAUT                          # dead: won, 32001
+finish                                  # the title; the mission's: status 2 (moved at the next tick)
+tick 400
+login                                   # status 2: the mission's 17, answered: completed

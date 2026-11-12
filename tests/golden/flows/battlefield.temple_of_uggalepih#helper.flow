@@ -1,0 +1,36 @@
+# The Temple of Uggalepih: a helper, area 2. Main (current, status 0) and eve (the mission completed,
+# Headstone Pilgrimage current, no key) both get the menu (bit 1) and enter area 2 (option 2). The three
+# Gravitons of area 2 (+5 to +7) die: 32001 to both (eve's with a seventh param, 1). Eve's finish changes
+# nothing; main's is The Temple of Uggalepih's (mission.zilart.the_temple_of_uggalepih): status 1. Each
+# kill also counts EVERYONES_GRUDGE_KILLS for both (Everyone's Grudge, another script).
+lists SacrificialChamber/_4j0/onTrigger SacrificialChamber/_4j0/onTrade SacrificialChamber/onEventUpdate/32000 SacrificialChamber/onEventFinish/32000 SacrificialChamber/onEventFinish/32001 SacrificialChamber/onEventFinish/32002 SacrificialChamber/onZoneIn/1 SacrificialChamber/_4j2/onTrigger
+char zone=SacrificialChamber pos=299,0.1,349 job=WAR lvl=75 nation=0
+char eve zone=SacrificialChamber pos=299,0.1,349 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheTempleOfUggalepih current
+keyitem SacrificialChamberKey
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Zilart TheTempleOfUggalepih completed
+eve: mission Zilart HeadstonePilgrimage current
+login
+eve: login
+invite eve
+eve: accept
+trigger _4j0
+update 32000 option=2                   # index 0, area 2: entered
+finish
+eve: trigger _4j0
+eve: update 32000 option=2
+eve: finish
+tick 2000
+kill GRAVITON+5
+kill GRAVITON+6
+kill GRAVITON+7                         # all three dead: won, 32001 to both
+eve: finish                             # eve (not current): nothing
+finish                                  # main: the mission's 32001, status 1

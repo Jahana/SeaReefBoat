@@ -1,0 +1,24 @@
+# The Road Forks, Loose Sand and the Lioumere (mission.cop.the_road_forks#sand). A level 75 Warrior of Windurst with
+# 3-3 current (a GM). Attohwa Chasm, Loose Sand with the Windurst status 0 at its feet: nothing. Status 8: Loose Sand
+# spawns and claims the Lioumere; again while it lives: nothing; the Lioumere killed: status 1. With the Jewel held (a
+# GM): Loose Sand: nothing; at 1.5 yalms: MUST_MOVE_CLOSER.
+lists AttohwaChasm/Loose_Sand/onTrigger AttohwaChasm/Lioumere/onMobDeath
+char zone=AttohwaChasm pos=478.8,20,41.7 job=WAR lvl=75 nation=2
+mission Cop TheRoadForks current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Loose_Sand here                 # status 0: nothing
+finish-if-event
+missionstatus Cop 8 pos=1               # a GM
+trigger Loose_Sand here                 # 8: the Lioumere spawned and claimed
+finish-if-event
+trigger Loose_Sand here                 # spawned: nothing
+finish-if-event
+kill LIOUMERE                           # status 1
+keyitem MimeoJewel                      # a GM
+trigger Loose_Sand here                 # Jewel held: nothing
+finish-if-event
+trigger Loose_Sand                      # 1.5 yalms: MUST_MOVE_CLOSER
+finish-if-event

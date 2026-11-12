@@ -1,0 +1,33 @@
+# Moment of Truth (battlefield.moment_of_truth#areas, Jade Sepulcher): Option 50 (area 2): kill the six Shadowhand
+# Kajeel-Ja +6 to +11, event 32001 (2,...), finish, two ticks. Then Prog set again and option 51 (area 3): kill +12 to
+# +17, event 32001 (3,...), finish, two ticks. The finish runs the quest's 32001 (MomentOfTruth.cs): main's Prog 4 -> 5.
+lists JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+quest AhtUrhgan.MomentOfTruth accepted
+charvar Quest[6][30]Prog 4
+login
+trigger _1v0
+update 32000 option=50
+finish
+kill SHADOWHAND_KAJEEL_JA+6
+kill SHADOWHAND_KAJEEL_JA+7
+kill SHADOWHAND_KAJEEL_JA+8
+kill SHADOWHAND_KAJEEL_JA+9
+kill SHADOWHAND_KAJEEL_JA+10
+kill SHADOWHAND_KAJEEL_JA+11
+finish
+tick 11000
+tick 10000
+charvar Quest[6][30]Prog 4
+trigger _1v0
+update 32000 option=51
+finish
+kill SHADOWHAND_KAJEEL_JA+12
+kill SHADOWHAND_KAJEEL_JA+13
+kill SHADOWHAND_KAJEEL_JA+14
+kill SHADOWHAND_KAJEEL_JA+15
+kill SHADOWHAND_KAJEEL_JA+16
+kill SHADOWHAND_KAJEEL_JA+17
+finish
+tick 11000
+tick 10000

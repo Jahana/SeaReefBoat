@@ -1,0 +1,20 @@
+# Slanderous Utterings (CoP 4-4). A level 75 Warrior of San d'Oria with 4-4 current (a GM; Status 0): Despachiaire's
+# important event. Tavnazian Safehold's trigger area 2 after three zone ticks and the walk in: 112; finished: Status 1.
+# Despachiaire again (Status 1): 144, another script's event, not 4-4's 132. The Sealion's Den door _0w0 at Status 1:
+# 13; finished: the mission completes.
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onTriggerAreaEnter/2 TavnazianSafehold/onEventFinish/112 SealionsDen/_0w0/onTrigger SealionsDen/onEventFinish/13
+char zone=TavnazianSafehold pos=100,-42,41 job=WAR lvl=75 nation=0
+mission Cop SlanderousUtterings current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Despachiaire                    # the important event
+finish-if-event
+walk 108,-40,-82                        # trigger area 2, Status 0: 112
+finish                                  # Status 1
+trigger Despachiaire                    # Status 1: 144, not 4-4's 132
+finish-if-event
+warp 600,132,772 SealionsDen
+trigger _0w0                            # Status 1: 13
+finish                                  # complete

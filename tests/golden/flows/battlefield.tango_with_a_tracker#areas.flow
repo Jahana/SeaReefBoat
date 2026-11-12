@@ -1,0 +1,28 @@
+# Tango with a Tracker (battlefield.tango_with_a_tracker#areas, Boneyard Gully): Area 2 (option 82): kill the Shikarees
+# +6: event 32001 (2,1800,0,16,8,5). Then the Letter from Shikaree X again and area 3 (option 83, update 2,5,105): kill
+# +12: event 32001 (3,16,1,16,8,5). Each finish changes nothing: the quest's 32001 (OtherAreas/TangoWithATracker.cs)
+# completes it only when accepted with battlefieldWin set to the battlefield, and no char here has the quest accepted
+# (the quest flows prove the completion).
+lists BoneyardGully/_081/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75
+keyitem LetterFromShikareeX
+login
+trigger _081
+update 32000 option=82
+finish
+tick 2000
+kill SHIKAREE_Y_ROS_TWT+6
+kill SHIKAREE_X_ROS_TWT+6
+finish
+tick 11000
+tick 10000
+keyitem LetterFromShikareeX
+trigger _081
+update 32000 option=83
+finish
+tick 2000
+kill SHIKAREE_Y_ROS_TWT+12
+kill SHIKAREE_X_ROS_TWT+12
+finish
+tick 11000
+tick 10000

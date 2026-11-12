@@ -212,6 +212,18 @@ internal static partial class Program
         Check("p4:   one the settings of now take: named without a branch", $"p4_live_branch: {GustabergKey}: has no state 9 (it has 3) for its check",
               string.Join(" | ", zone.CheckQuestModules().Where(p => p.StartsWith("p4_live_branch", StringComparison.Ordinal))));
         zone.TestQuestModules.RemoveAll(m => m.Name == "p4_live_branch");
+        // a module whose every override sits under m.Pre (a mission's recipe form) is not "no override" on the other branch;
+        // a module declaring none under any branch is still refused
+        zone.TestQuestModules.Add(new P4LiveModule("p4_live_allpre", m =>
+        {
+            if (m.Pre(QuestExpansion.Rov)) m.Quest(GustabergKey).State(1).ReplaceCheck(q => true);
+        }));
+        zone.TestQuestModules.Add(new P4LiveModule("p4_live_empty", m => { }));
+        Check("p4: CheckQuestModules: an all-Pre module is checked clean; a module with no override under any branch is refused",
+              "|p4_live_empty: it declares no override",
+              string.Join(" | ", zone.CheckQuestModules().Where(p => p.StartsWith("p4_live_allpre", StringComparison.Ordinal))) + "|" +
+              string.Join(" | ", zone.CheckQuestModules().Where(p => p.StartsWith("p4_live_empty", StringComparison.Ordinal))));
+        zone.TestQuestModules.RemoveAll(m => m.Name == "p4_live_allpre" || m.Name == "p4_live_empty");
 
         zone.TestQuestModules.Add(new P4LiveModule("p4_live_second", m => m.Quest(GustabergKey)
             .State(3).Npc(Zone.NorthGustaberg, XI.QuestContent.Npc.NorthGustaberg.HuntingBear).WrapOnTrigger((q, b) => b(q))));

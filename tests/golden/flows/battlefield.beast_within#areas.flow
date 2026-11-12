@@ -1,0 +1,66 @@
+# The Beast Within (battlefield.beast_within#areas, Jade Sepulcher): four chars, each a level 75 Blue Mage at level cap
+# 75, The Beast Within accepted at Quest[6][40]Prog 2 (GMs), one Blue Mage's Testimony; one player to a battlefield.
+# main enters area 1 (33), bob area 2 (34), cat area 3 (35), each by the testimony: TESTIMONY_WEARS (3 shown, 2 left).
+# dan's trade with all three areas taken: NO_BATTLEFIELD_ENTRY 7377, no menu. bob's RAUBAHN+1 brought to 1 HP: in the
+# kill step RAUBAHN_YOUR_SOUL and RAUBAHN_GREATER_POWER (his mob script); at the fourth tick RAUBAHN_STRENGTH_FAILED_ME
+# and 32001 (area 2); finished: event 6; finished: the scroll, completed. cat's RAUBAHN+2: in the kill step
+# RAUBAHN_YOUR_SOUL, RAUBAHN_GREATER_POWER, RAUBAHN_STRENGTH_FAILED_ME and 32001 (area 3); four ticks; finished: event
+# 6; finished: the scroll, completed.
+lists JadeSepulcher/_1v0/onTrade JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001 JadeSepulcher/onEventFinish/6
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char bob zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char cat zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char dan zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+levelcap 75
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Transformations completed
+quest AhtUrhgan.TheBeastWithin accepted
+charvar Quest[6][40]Prog 2
+item BlueMagesTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: quest AhtUrhgan.Transformations completed
+bob: quest AhtUrhgan.TheBeastWithin accepted
+bob: charvar Quest[6][40]Prog 2
+bob: item BlueMagesTestimony
+cat: levelcap 75
+cat: quest AhtUrhgan.AnEmptyVessel completed
+cat: quest AhtUrhgan.Transformations completed
+cat: quest AhtUrhgan.TheBeastWithin accepted
+cat: charvar Quest[6][40]Prog 2
+cat: item BlueMagesTestimony
+dan: levelcap 75
+dan: quest AhtUrhgan.AnEmptyVessel completed
+dan: quest AhtUrhgan.Transformations completed
+dan: quest AhtUrhgan.TheBeastWithin accepted
+dan: charvar Quest[6][40]Prog 2
+dan: item BlueMagesTestimony
+login
+bob: login
+cat: login
+dan: login
+trade _1v0 BlueMagesTestimony x1
+update 32000 option=33
+finish
+bob: trade _1v0 BlueMagesTestimony x1
+bob: update 32000 option=34
+bob: finish
+cat: trade _1v0 BlueMagesTestimony x1
+cat: update 32000 option=35
+cat: finish
+dan: trade _1v0 BlueMagesTestimony x1
+dan: finish-if-event
+bob: kill RAUBAHN+1
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+bob: finish
+bob: finish-if-event
+cat: kill RAUBAHN+2
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+cat: finish
+cat: finish-if-event

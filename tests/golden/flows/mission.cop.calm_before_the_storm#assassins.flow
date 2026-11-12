@@ -1,0 +1,29 @@
+# Calm Before the Storm (CoP 7-4): the Cryptonberry Assassins' deaths. A level 75 Warrior of San d'Oria with 7-4 current
+# (a GM; the CID status nibble 0) at Carpenters' Landing's qm_cryptonberries: the Executor spawned and claimed,
+# CRYPTONBERRY_EXECUTOR_POP (7271). A GM spawns two of the three Assassins (CRYPTONBERRY_EXECUTOR+1 and +2), which in
+# play the Executor's own script calls once the char's first swing raises his enmity (here kill takes him at once, as he
+# is the char's already). The Executor killed: CRYPTONBERRY_EXECUTOR_DIE (7496) twice, 7-4's messageText and the mob's
+# own script; qm_cryptonberries with the two Assassins (and the Executor's body) up: CRYPTONBERRY_FALLEN_TREE (7270, the
+# zone's default). Both killed; two ticks (20 s, then 4 s) let the three bodies despawn (the 038 despawn animations,
+# then their 00E updates); a GM spawns the third (+3); qm_cryptonberries with only it up: 7270 again. The third killed;
+# qm_cryptonberries with carpentersNm 15 from the four deaths, no GM local var: 37; finished: bit 1 (the nibble 2);
+# again: 7270.
+lists CarpentersLanding/qm_cryptonberries/onTrigger CarpentersLanding/Cryptonberry_Assassin/onMobDeath CarpentersLanding/onEventFinish/37
+char zone=CarpentersLanding pos=117,-5.5,-387 job=WAR lvl=75 nation=0
+mission Cop CalmBeforeTheStorm current
+login
+trigger qm_cryptonberries               # the Executor spawned: 7271
+spawn CRYPTONBERRY_EXECUTOR+1           # a GM
+spawn CRYPTONBERRY_EXECUTOR+2           # a GM
+kill CRYPTONBERRY_EXECUTOR              # 7496 twice
+trigger qm_cryptonberries               # two Assassins up: 7270 (the default)
+kill CRYPTONBERRY_EXECUTOR+1            # the first Assassin
+kill CRYPTONBERRY_EXECUTOR+2            # the second
+tick 20000                              # the three bodies start to despawn
+tick 4000                               # their fade ends
+spawn CRYPTONBERRY_EXECUTOR+3           # a GM
+trigger qm_cryptonberries               # only the third up: 7270 (the default)
+kill CRYPTONBERRY_EXECUTOR+3            # the third
+trigger qm_cryptonberries               # 15 from the four deaths: 37
+finish                                  # bit 1
+trigger qm_cryptonberries               # bit 1 set: 7270

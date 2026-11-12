@@ -1,7 +1,8 @@
 // XI.Quests -- a module's overrides applied to a compiled quest (quest rework P4). The registration calls Apply when an
 // enabled module patches a C# quest, before the quest's container is built and placed, and runs the validator on the
 // result; Apply refuses an override of a handler or state the quest does not have (or an add of one it has) with a message
-// that names it as its handler label does (<state>/<entity or ->/<trigger>, in zone <id>).
+// that names it as its handler label does (<state>/<entity or ->/<trigger>, in zone <id>). The overrides cover a
+// mission's states too (handler and check overrides only).
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,11 +44,17 @@ namespace XI.Quests.Authoring
             var rewardModule = def.RewardModule;
             var steps = def.DeclaredSteps.ToList();
             string Where() => $"{info.Name}: {key}";
+            // a mission's states match on MissionMatches; it has no reward or steps of a quest's (its reward is its
+            // own)
+            bool mission = ContainerKeys.IsMission(key);
 
             foreach (var op in patch.Ops)
             {
                 switch (op)
                 {
+                    case QuestRewardOverride or QuestRemoveStateOverride or QuestAddStatesOverride when mission:
+                        problems.Add($"{Where()}: a mission takes handler and check overrides only");
+                        continue;
                     case QuestHandlerOverride h:
                     {
                         string label = $"{h.State}/{h.Entity ?? "-"}/{Trigger(h.Kind, h.Id)} in zone {h.Zone}";
@@ -117,15 +124,25 @@ namespace XI.Quests.Authoring
                             continue;
                         }
                         var s = states[c.State - 1];
-                        var matches = s.Matches;
-                        bool hidden = def.Hidden;
-                        Func<IQuestCheck, bool> baseCheck = q => MatchesOf(matches, q, hidden);
                         var wrap = c.Check;
                         int number = c.State;
+                        Func<IQuestCheck, bool> baseCheck;
+                        if (mission)
+                        {
+                            var missionMatches = s.MissionMatches;
+                            baseCheck = q => QuestStateDecl.AnyMissionMatch(missionMatches, q);
+                        }
+                        else
+                        {
+                            var matches = s.Matches;
+                            bool hidden = def.Hidden;
+                            baseCheck = q => MatchesOf(matches, q, hidden);
+                        }
                         Func<IQuestCheck, bool> when = checkCalled == null
                             ? q => wrap(q, baseCheck)
                             : q => { checkCalled(number); return wrap(q, baseCheck); };
-                        s.Matches = new List<QuestMatch> { new QuestMatch(default, null, when, anyStatus: true) };
+                        if (mission) s.MissionMatches = new List<MissionMatch> { new MissionMatch(null, null, when) };
+                        else s.Matches = new List<QuestMatch> { new QuestMatch(default, null, when, anyStatus: true) };
                         s.CheckModule = info;
                         break;
                     }
@@ -188,7 +205,8 @@ namespace XI.Quests.Authoring
             if (problems.Count > 0) return new QuestOverrideResult(null, problems);
             // copies of the quest's own (QuestScriptDefinition.With, QuestStateDecl.With): a member a port adds later is kept
             var result = def.With(reward, rewardModule,
-                states.Select(s => s.Source.With(s.Matches.ToArray(), s.Handlers.ToArray(), s.CheckModule, s.RemovedBy, s.RemovedMatches)).ToArray(),
+                states.Select(s => s.Source.With(s.Matches.ToArray(), s.Handlers.ToArray(), s.CheckModule, s.RemovedBy,
+                                                 s.RemovedMatches, s.MissionMatches.ToArray())).ToArray(),
                 steps.ToArray());
             return new QuestOverrideResult(result, Array.Empty<string>());
 
@@ -248,6 +266,7 @@ namespace XI.Quests.Authoring
             {
                 Source = s;
                 Matches = s.Matches.ToList();
+                MissionMatches = s.MissionMatches?.ToList() ?? new List<MissionMatch>();
                 Handlers = s.Handlers.ToList();
                 CheckModule = s.CheckModule;
                 RemovedBy = s.RemovedBy;
@@ -257,6 +276,7 @@ namespace XI.Quests.Authoring
 
             public readonly QuestStateDecl Source;
             public List<QuestMatch> Matches;
+            public List<MissionMatch> MissionMatches;
             public readonly List<QuestHandlerDecl> Handlers;
             public QuestModuleInfo CheckModule;
             public bool Removed;

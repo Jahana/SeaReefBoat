@@ -1,0 +1,48 @@
+# Below the Arks, the Dem crag (CoP 1-2). Status 1 (a GM). The Konschtat telepoint (Option 0): 913 with the first-entry
+# flag, finished with 1: nothing; again, finished with 0: the Hall of Transference. _0e5 (Option 0): 160 sends the char to
+# Promyvion - Dem (crag 2: ceil(5 / 3)); its zone-in: 50, finished: Option 2. In the Hall: _0e1 (location 2 = Option 2)
+# gives no message (the NPC's script), _0e2 (location 3) is shut. _0e5 (Option 2, no light of Dem): 125, finished with
+# 0: Option 0 and out to Konschtat. La Theine's telepoint with Option 2 (a GM): not its crag, not 0, fewer than two
+# lights: the seal 212 (Option - 1), finished with 1: nothing; with 0: Option 0 and MEMORIES_SEALED_OFF. Konschtat with
+# Option 1 (a GM): the seal 918, finished with 0. The Spire of Dem: _0j0, the fight won (area 1: the Progenerator): 32001
+# (newPromy 1, the light of Dem, one light at 1-2: complete).
+lists KonschtatHighlands/Shattered_Telepoint/onTrigger KonschtatHighlands/onEventFinish/913 KonschtatHighlands/onEventFinish/918 LaTheinePlateau/Shattered_Telepoint/onTrigger LaTheinePlateau/onEventFinish/212 HallOfTransference/_0e1/onTrigger HallOfTransference/_0e2/onTrigger HallOfTransference/_0e5/onTrigger HallOfTransference/onEventFinish/125 HallOfTransference/onEventFinish/160 PromyvionDem/onZoneIn/1 PromyvionDem/onEventFinish/50 SpireOfDem/onEventFinish/32001
+char zone=KonschtatHighlands pos=135,19,220 job=WAR lvl=75 nation=0
+mission Cop BelowTheArks current
+charvar Mission[6][118]Status 1
+login
+trigger Shattered_Telepoint             # Option 0: 913, the first-entry flag
+finish option=1                         # not 0: nothing
+trigger Shattered_Telepoint
+finish option=0                         # setPos to the Hall of Transference
+warp -267.194,-40.634,-280.019 HallOfTransference
+trigger _0e5                            # Option 0, 1-2: 160
+finish                                  # the Dem promyvion
+warp 185.891,0,-52.331 PromyvionDem     # 50
+finish                                  # Option 2
+warp -216.449,-48.635,-280 HallOfTransference
+trigger _0e1                            # location 2 = Option 2: no message, the door's own event 150
+finish
+trigger _0e2                            # location 3: DOOR_FIRMLY_SHUT
+trigger _0e5                            # Option 2 = crag 2, no light: 125
+finish option=0                         # Option 0; out to Konschtat
+warp 135,19,220 KonschtatHighlands
+charvar Mission[6][118]Option 2         # a GM
+warp 334,19,-60 LaTheinePlateau
+trigger Shattered_Telepoint             # Option 2: the seal 212 (1)
+finish option=1                         # not 0: nothing
+trigger Shattered_Telepoint
+finish option=0                         # Option 0, MEMORIES_SEALED_OFF
+charvar Mission[6][118]Option 1         # a GM
+warp 135,19,220 KonschtatHighlands
+trigger Shattered_Telepoint             # Option 1: the seal 918 (0)
+finish option=1                         # not 0: nothing
+trigger Shattered_Telepoint
+finish option=0                         # Option 0, MEMORIES_SEALED_OFF
+warp 0,-3.8,240 SpireOfDem
+trigger _0j0
+update 32000 option=1
+finish
+tick 2000
+kill PROGENERATOR
+finish                                  # 32001: the light of Dem, the mission complete

@@ -1,0 +1,34 @@
+# The Davoi Report (San d'Oria 2-2), Ambrotien's route. Main, a level 10 Warrior of San d'Oria with 1-1 and 2-2
+# completed (GMs; Resonance current keeps RoV 1-1 out): Ambrotien's script plays 2009 (section 1 has no completed
+# check); its finish with option 104 begins the mission. Status 0: Ambrotien answers ORIGINAL_MISSION_OFFSET + 44, and
+# a trigger straight after a text plays his script's 2001; status 1 answers the text again. Status 3 (a GM) with the
+# Temple Knights Davoi Report: completed before, so 2006, whose finish completes the mission again and takes the
+# report. bob, with 1-1 completed and 2-2 current at status 3 and never completed (GMs): Ambrotien plays 2028 with the
+# arguments 0, 0, 0, 44 (no handler finishes it).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/2006
+char zone=SouthernSanDoria pos=93.4,0,-55.5 job=WAR lvl=10 nation=0
+char bob zone=SouthernSanDoria pos=93.4,0,-55.5 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+bob: mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+bob: mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria TheDavoiReport completed
+bob: mission Sandoria TheDavoiReport current
+login
+trigger Ambrotien                       # section 1: his script's 2009
+finish option=104                       # begun
+trigger Ambrotien                       # status 0: ORIGINAL_MISSION_OFFSET + 44
+finish-if-event
+trigger Ambrotien                       # straight after a text: his script's 2001
+finish-if-event
+missionstatus Sandoria 1                # a GM
+trigger Ambrotien                       # status 1: ORIGINAL_MISSION_OFFSET + 44
+finish-if-event
+missionstatus Sandoria 3                # a GM
+keyitem TempleKnightsDavoiReport
+trigger Ambrotien                       # status 3, completed before: 2006
+finish                                  # completed again, the report taken
+bob: login
+bob: missionstatus Sandoria 3           # a GM
+bob: trigger Ambrotien                  # status 3, never completed: 2028
+bob: finish-if-event

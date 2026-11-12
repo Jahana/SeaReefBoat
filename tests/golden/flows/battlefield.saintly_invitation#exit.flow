@@ -1,0 +1,39 @@
+# The exit of the battlefield saintly_invitation (Balga's Dais, index 3, Windurst 6-2, status 1): Burning_Circle
+# 32003, option 0: stays; option 4: out. Area 2 entered after, Burning_Circle+1 (area 2's) 32003, option 4: out.
+lists BalgasDais/BC_Entrance/onTrigger BalgasDais/BC_Entrance/onTrade BalgasDais/onEventUpdate/32000 BalgasDais/onEventFinish/32000 BalgasDais/onEventFinish/32001 BalgasDais/onEventFinish/32002 BalgasDais/onEventFinish/32003 BalgasDais/Burning_Circle/onTrigger
+char zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation current
+rank 6
+login
+missionstatus Windurst 1
+trigger BC_Entrance
+update 32000 option=49
+finish
+trigger Burning_Circle                  # 32003
+finish option=0                         # stays
+trigger Burning_Circle
+finish option=4                         # out
+tick 2000
+warp 300.4,-124.1,341.3 BalgasDais
+trigger BC_Entrance
+update 32000 option=50
+finish
+trigger Burning_Circle+1                # area 2's: 32003
+finish option=4                         # out

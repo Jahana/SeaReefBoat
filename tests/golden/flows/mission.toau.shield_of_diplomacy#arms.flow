@@ -1,0 +1,20 @@
+# Shield of Diplomacy (ToAU 22): zone-ins at Status 1 and at Status 2 (a warp into the Chamber each: no event), then
+# the entry door at Status 0.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger NavukgoExecutionChamber/onZoneIn/1 NavukgoExecutionChamber/onEventFinish/1 NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventFinish/2 NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ShieldOfDiplomacy current
+login
+tick 1000
+tick 1000
+tick 1000
+missionstatus Toau 1
+warp -600,8,-100 NavukgoExecutionChamber
+missionstatus Toau 2
+warp 280,-126,380 NavukgoExecutionChamber
+missionstatus Toau 0
+trigger _1s0
+finish-if-event

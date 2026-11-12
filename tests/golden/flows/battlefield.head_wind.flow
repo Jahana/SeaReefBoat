@@ -1,0 +1,23 @@
+# Head Wind (battlefield.head_wind, Boneyard Gully: a BattlefieldMission, index 0, 30 minutes, entry NPC _081). A level
+# 75 Warrior with Three Paths current and Ulmia's field at 7 (a GM): the menu 32000; option 0 gets only the event
+# release, option 4 an event update (params [5]) and the release, option 1 enters area 1. Kills Shikaree Z, Y, X in
+# turn: the shikaree death messages 7731 and 7742, the third kill the win: 32001; finished: Three Paths' Boneyard Gully
+# 32001 moves Ulmia's field 7 to 8, the title (358) and 1000 XP. X's death message 7753 comes only in the final tick
+# 10000, after the win.
+lists BoneyardGully/_081/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75 nation=0
+mission Cop ThreePaths current
+login
+missionstatus Cop 7 pos=4               # a GM: Ulmia's field 7
+trigger _081
+update 32000 option=0
+update 32000 option=4
+update 32000 option=1
+finish
+tick 2000
+kill SHIKAREE_Z_HW
+kill SHIKAREE_Y_HW
+kill SHIKAREE_X_HW
+finish
+tick 11000
+tick 10000

@@ -1,0 +1,18 @@
+# The Three Kingdoms San d'Oria, Warchief Vatgit killed at status 4: the death sets status 5 (the kill also drops gil,
+# and gives the title WARCHIEF_WRECKER from Vatgit's own mob script and a Hand-to-Hand skill-up). The warp to Northern
+# San d'Oria plays SoA's Rumors from the West zone-in 878 (its finish sets that mission's status); Kasaroro plays 550,
+# whose finish completes the mission and begins The Three Kingdoms at status 6.
+lists ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/502 GhelsbaOutpost/Warchief_Vatgit/onMobDeath NorthernSanDoria/Kasaroro/onTrigger NorthernSanDoria/onEventFinish/550
+char zone=GhelsbaOutpost pos=-84.454,-33.723,265.104 job=WAR lvl=99 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdomsSandoria current
+login
+effect 49
+effect 50
+effect 522
+missionstatus Windurst 4
+spawn #17350665
+kill #17350665
+warp -72,-3,34 NorthernSanDoria
+trigger Kasaroro
+finish-if-event

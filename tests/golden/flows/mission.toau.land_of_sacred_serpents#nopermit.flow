@@ -1,0 +1,17 @@
+# Land of Sacred Serpents without the Boarding Permit: the section's check fails (the permit, a guard the Lua adds):
+# area 3 plays nothing. The permit given (a GM): 3000.
+lists AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventFinish/3000
+char zone=AhtUrhganWhitegate pos=34.7,-6.6,-40 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+login
+tick 1000
+tick 1000
+tick 1000
+walk 34.7,-6.6,-54.1                    # no permit: nothing
+walk 34.7,-6.6,-40
+keyitem BoardingPermit                  # a GM
+walk 34.7,-6.6,-54.1                    # 3000
+finish

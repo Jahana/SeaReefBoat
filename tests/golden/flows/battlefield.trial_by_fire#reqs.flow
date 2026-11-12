@@ -1,0 +1,12 @@
+# Trial by Fire (battlefield.trial_by_fire): the requirement arms. Main, a level 75 Warrior with the quest accepted but no
+# Tuning Fork of Fire: FP_Entrance: the key item check fails: no options: the default. bob, with the fork but the quest
+# only available: BattlefieldQuest's check (accepted or more) fails: the default.
+lists CloisterOfFlames/FP_Entrance/onTrigger
+char zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+char bob zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+quest Outlands.TrialByFire accepted
+bob: keyitem TuningForkOfFire
+login
+trigger FP_Entrance                     # accepted, no fork: no options
+bob: login
+bob: trigger FP_Entrance                # the fork, available: no options

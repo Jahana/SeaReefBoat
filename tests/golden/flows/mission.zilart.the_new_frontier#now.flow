@@ -1,0 +1,17 @@
+# The New Frontier: rank 7 in Bastok, the full cutscene at once. The afterZoneIn (the var 0) plays 1; its
+# finish on option 1 completes the mission (the Map of Norg, KEYITEM_OBTAINED 6420) without touching the
+# var (never set) or the NPCs (no 0x077). Then _700 plays Welcome t'Norg's 2, whose finish completes that
+# mission too (Kazham's Chieftainess current; 02_Welcome_to_Norg's reply).
+lists Norg/afterZoneIn/1 Norg/Tales_Beginning/onTrigger Norg/onEventUpdate/1 Norg/onEventFinish/1 Norg/onEventFinish/293 Norg/_700/onTrigger Norg/Comitiolus/onTrigger
+char zone=Norg pos=-22,1,-38 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheNewFrontier current
+rank 7
+login
+tick 5000                               # afterZoneIn, the var 0: 1
+finish option=1                         # option 1, the var 0: completed, no var or NPC change
+trigger _700                            # Welcome t'Norg current: its 2
+finish

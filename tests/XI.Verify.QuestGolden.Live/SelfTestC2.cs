@@ -112,11 +112,15 @@ internal static partial class Program
         const string StcMi = "scripts/missions/sandoria/1_3_Save_the_Children.lua";
         const string Fw = "scripts/globals/battlefield.lua";
         const string BfKey = "battlefield.save_the_children", MiKey = "mission.sandoria.save_the_children";
+        const string ElvaanFile = "scripts/quests/bastok/The_Elvaan_Goldsmith.lua";
+        const string WishFile = "scripts/quests/bastok/Wish_Upon_a_Star.lua";
+        const string ElvaanKey = "bastok.the_elvaan_goldsmith", WishKey = "bastok.wish_upon_a_star";
         var owners = OverlayOwners(CSharpContainers());
-        Check("c2 harness: the overlay's owners: each Save the Children file to its C# container; no quest's file",
-              $"{BfKey}/{MiKey}/False",
+        Check("c2 harness: the overlay's owners: each Save the Children file to its C# container; a quest's file to " +
+              "its quest",
+              $"{BfKey}/{MiKey}/{ElvaanKey}",
               $"{owners.GetValueOrDefault(StcBf)}/{owners.GetValueOrDefault(StcMi)}/" +
-              $"{owners.Values.Any(k => !ContainerKeys.IsMission(k) && !ContainerKeys.IsBattlefield(k))}");
+              owners.GetValueOrDefault(ElvaanFile));
         const string BfText = "    mission               = xi.mission.id.sandoria.SAVE_THE_CHILDREN,\n";
         const string MiText = "if player:getLocalVar('battlefieldWin') == xi.battlefield.id.SAVE_THE_CHILDREN then\n";
         const string FwText = "-- the framework at the commit";
@@ -141,6 +145,21 @@ internal static partial class Program
             new[] { (MiKey, StcMi, "xi.mission.id.sandoria.SAVE_THE_CHILDREN") }, owners, () => FwText);
         Check("c2 harness: ... its own LegacyPath file and an unowned file turn no other container off",
               "", string.Join(",", off));
+        // Task 10 of C3 Prep: a taken quest file turns its C# quest off too. Wish Upon a Star's file names The Elvaan
+        // Goldsmith's constant here (test text), so a record of the Goldsmith takes it
+        const string ElvaanText =
+            "player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH)\n";
+        (_, taken, off) = OverlayPlanFor(
+            new[] { (WishFile, ElvaanText, "") },
+            new[] { (ElvaanKey, ElvaanFile, "xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH") }, owners, () => FwText);
+        Check("c3 harness: a quest record that takes another ported quest's file turns that C# quest off",
+              $"{WishFile}|{WishKey}", $"{string.Join(",", taken)}|{string.Join(",", off)}");
+        // the record's own file: it is in keys, so it adds nothing to off
+        (_, taken, off) = OverlayPlanFor(
+            new[] { (ElvaanFile, ElvaanText, "") },
+            new[] { (ElvaanKey, ElvaanFile, "xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH") }, owners, () => FwText);
+        Check("c3 harness: a quest record that takes its own file adds nothing to off",
+              $"{ElvaanFile}|", $"{string.Join(",", taken)}|{string.Join(",", off)}");
     }
 
     // the mission calls are calls of a key, as the quest calls

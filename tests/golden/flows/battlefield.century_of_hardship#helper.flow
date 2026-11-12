@@ -1,0 +1,60 @@
+# A Century of Hardship (battlefield.century_of_hardship#helper): the requirement arms (BattlefieldMission's
+# checkRequirements, requiredMissionStatus 8 at Louverance). Five level 75 Warriors, partied: main (Three Paths current,
+# Louverance 8), bob (For Whom the Verse Is Sung current: Three Paths completed), cat (Three Paths, 7), dan (Three
+# Paths, 9), eve (Desires of Emptiness current, 8). Before the battlefield is open, as registrants: dan (9 is not 8) and
+# eve (not on Three Paths): NO_BATTLEFIELD_ENTRY 7097 (the framework's own handler), then the door's default
+# (messageSpecial -1, shown as 32767), no menu. Main: the 32000 menu (0,0,0,1); option 1 (area 1): registered, entered
+# (7610, 7384 (6), 7387 (30), the 05C (2,0,0,1800)). bob (completed): the menu, option 1: entered, the same lines. cat
+# (7, under 8) and eve (another mission): the default 32767 only, no menu. dan (Three Paths at 9 >= 8, not a
+# registrant): the menu, option 1: entered. Won by bfwin (a GM): 32001 to main (1,1800,0,2,13: the skip flag 0) and to
+# bob and dan (1,1800,0,2,13,0,1: the skip flag 1, Three Paths completed or Louverance past 8). Each finishes: the
+# battlefield's onEventFinishWin gives each XP 1000 (war 0 -> 1000) and the Battlefield[736]XP var; Three Paths' Mine
+# Shaft 32001 (C#) moves main's Louverance 8 to 9; dan's 9 stays, bob has no Three Paths. 11 s: 075 to the three; the
+# effects 143 and 254 saved for bob and dan, 254 (tier 0) for cat and eve outside; 10 s: removed.
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/onEventUpdate/32000 MineShaft2716/onEventFinish/32000 MineShaft2716/onEventFinish/32001
+char zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+char bob zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+char cat zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+char dan zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+char eve zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+mission Cop ThreePaths current
+bob: mission Cop ForWhomTheVerseIsSung current
+cat: mission Cop ThreePaths current
+dan: mission Cop ThreePaths current
+eve: mission Cop DesiresOfEmptiness current
+login
+bob: login
+cat: login
+dan: login
+eve: login
+invite bob
+bob: accept
+invite cat
+cat: accept
+invite dan
+dan: accept
+invite eve
+eve: accept
+missionstatus Cop 8 pos=2
+cat: missionstatus Cop 7 pos=2
+dan: missionstatus Cop 9 pos=2
+eve: missionstatus Cop 8 pos=2
+dan: trigger _0d0
+eve: trigger _0d0
+trigger _0d0
+update 32000 option=1
+finish
+bob: trigger _0d0
+bob: update 32000 option=1
+bob: finish
+cat: trigger _0d0
+eve: trigger _0d0
+dan: trigger _0d0
+dan: update 32000 option=1
+dan: finish
+bfwin
+finish
+bob: finish
+dan: finish
+tick 11000
+tick 10000

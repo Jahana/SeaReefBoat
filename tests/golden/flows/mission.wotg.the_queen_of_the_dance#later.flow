@@ -1,0 +1,33 @@
+# The Queen of the Dance (WotG 4) with no Crystal War quest completed: Lion Springs at status 1 plays 69 and at status 2
+# plays 70 (the requirement is only read at status 0); Lion Springs at status 0 gives DOOR_IS_FIRMLY_LOCKED
+# (DefaultActions); Turlough at status 0 plays his DefaultActions event 10124. The zone-in at status 3 and 4 plays 152
+# and 153, each updated with option 0 (no update reply) and finished; 153's finish completes the mission although no
+# ticket is held.
+lists SouthernSanDoriaS/Lion_Springs/onTrigger SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventUpdate/152 SouthernSanDoriaS/onEventUpdate/153 SouthernSanDoriaS/onEventFinish/68 SouthernSanDoriaS/onEventFinish/70 SouthernSanDoriaS/onEventFinish/152 SouthernSanDoriaS/onEventFinish/153 UpperJeuno/Turlough/onTrigger UpperJeuno/onEventFinish/10172
+char zone=SouthernSanDoriaS pos=100.801,1,103.211 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg TheQueenOfTheDance current
+login
+trigger Lion_Springs                    # status 0, no requirement: DOOR_IS_FIRMLY_LOCKED (DefaultActions), not 68
+finish-if-event
+warp -58.697,0,103.553 UpperJeuno
+trigger Turlough                        # status 0: Turlough's DefaultActions 10124
+finish-if-event
+warp 96,0,106 SouthernSanDoriaS
+missionstatus Wotg 1
+trigger Lion_Springs                    # status 1: 69
+finish-if-event
+missionstatus Wotg 2
+trigger Lion_Springs                    # status 2: 70
+finish                                  # status 3; setPos
+tick 400
+login open                              # 152
+update 152 option=0
+finish                                  # status 4; setPos
+tick 400
+login open                              # 153
+update 153 option=0
+finish

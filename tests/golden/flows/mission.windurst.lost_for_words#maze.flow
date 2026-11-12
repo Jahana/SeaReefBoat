@@ -1,0 +1,24 @@
+# Lost for Words (Windurst 2-1): the fossil rocks of Maze of Shakhrami. A level 10 Warrior of Windurst with 2-1
+# current at status 3 (a GM) and the fourth rock (index 3) the right one (a GM). A wrong rock of the first eight
+# (indexes 0 and 7) says it is just a rock; one of the other six (8 and 13) says nothing is embedded in it. The right
+# rock gives the Lapis Coral (status 4); at status 4 it says it needs no more investigation, and a wrong rock answers
+# as before. With the rock var 0 (a GM) and status 3 (a GM), the first rock sets status 4 only: nothing is given or
+# said, the Lapis Coral is already held from the right rock above.
+lists MazeOfShakhrami/Fossil_Rock/onTrigger
+char zone=MazeOfShakhrami pos=17,18,184 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+mission Windurst LostForWords current
+login
+missionstatus Windurst 3                # a GM
+charvar Mission[2][3]Rock 3             # a GM: the fourth rock is the one
+trigger Fossil_Rock                     # a wrong rock: JUST_A_ROCK
+trigger Fossil_Rock+7                   # the last of the eight: JUST_A_ROCK
+trigger Fossil_Rock+8                   # the ninth: NOTHING_FOSSIL
+trigger Fossil_Rock+13                  # the last: NOTHING_FOSSIL
+trigger Fossil_Rock+3                   # the right rock: the Lapis Coral, status 4
+trigger Fossil_Rock+3                   # status 4: NO_NEED_INVESTIGATE
+trigger Fossil_Rock+1                   # status 4, a wrong rock: JUST_A_ROCK
+trigger Fossil_Rock+9                   # NOTHING_FOSSIL
+charvar Mission[2][3]Rock 0             # a GM: the first rock is the one
+missionstatus Windurst 3                # a GM
+trigger Fossil_Rock                     # the first rock: status 4; nothing given or said (the Coral is already held)

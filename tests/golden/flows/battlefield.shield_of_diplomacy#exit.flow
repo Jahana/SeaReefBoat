@@ -1,0 +1,30 @@
+# Shield of Diplomacy: in the arena, the first exit door: option 0 stays, option 4 leaves; a warp back to the entry
+# door, in again; the second exit door with option 4: out; the same again with the third exit door: out.
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001 NavukgoExecutionChamber/onEventFinish/32002 NavukgoExecutionChamber/_1s1/onTrigger NavukgoExecutionChamber/_1s2/onTrigger NavukgoExecutionChamber/_1s3/onTrigger NavukgoExecutionChamber/onEventFinish/32003
+char zone=NavukgoExecutionChamber pos=-600,8,-100 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ShieldOfDiplomacy current
+login
+missionstatus Toau 2
+trigger _1s0
+update 32000 option=65
+finish
+trigger _1s1
+finish option=0
+trigger _1s1
+finish option=4
+warp -600,8,-100 NavukgoExecutionChamber
+trigger _1s0
+update 32000 option=65
+finish
+trigger _1s2
+finish option=4
+warp -600,8,-100 NavukgoExecutionChamber
+trigger _1s0
+update 32000 option=65
+finish
+trigger _1s3
+finish option=4

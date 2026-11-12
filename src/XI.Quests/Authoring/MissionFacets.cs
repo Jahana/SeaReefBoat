@@ -21,6 +21,8 @@ namespace XI.Quests.Authoring
         bool MustZone { get; }
         // mission:getLocalVar(player, name)
         int LocalVar(string name);
+        // Container:isVarBitsSet(player, name, bits...): every bit of the char var Mission[<log>][<id>]<name> set
+        bool IsVarBitsSet(string name, params int[] bits);
     }
 
     // q.Mission in a handler (IQuestContext.Mission): the reads and the mission's effects, each the Lua call the
@@ -40,13 +42,20 @@ namespace XI.Quests.Authoring
         void SetStatus(int value);
         // player:setMissionStatus(log, value, pos): the 4-bit field at pos
         void SetStatusAt(int value, int pos);
-        // mission:setVar(player, name, value)
-        void SetVar(string name, int value);
+        // mission:setVar(player, name, value, expiry): an expiry of 0 is no expiry (nil)
+        void SetVar(string name, int value, uint expiry = 0);
         // mission:setMustZone(player)
         void SetMustZone();
         // mission:setLocalVar(player, name, value)
         void SetLocalVar(string name, int value);
+        // Container:setVarBit(player, name, bit): writes only when the bit is clear
+        void SetVarBit(string name, int bit);
+        // Container:incrementVar(player, name, value): player:incrementCharVar(prefix .. name, value)
+        void IncrementVar(string name, int value);
         // mission:cleanup(player): player:clearVarsWithPrefix('Mission[<log>][<id>]')
         void Cleanup();
+        // (quest rework C3 C4, CoP 8-1's Rubious Crystals) for _, member in ipairs(player:getAlliance()) do
+        // mission:setLocalVar(member, name, value) ... end: each var in order, on each alliance member in turn
+        void SetAllianceLocalVars(params (string Name, int Value)[] vars);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using XI.Map;
 using XI.Persistence;
 using XI.Quests;
+using XI.Quests.Authoring;
 using XI.Script;
 
 namespace XI.Zone
@@ -14,7 +15,8 @@ namespace XI.Zone
     public sealed partial class ZoneHost
     {
         // the stable quest keys (quest rework B1): xi.quest.id.<log name>.<CONST> for every CONST = id with a log name in
-        // xi.quest.area and the id in range; empty without Lua (every key synthetic). A key or id taken twice keeps the first
+        // QuestScript.AreaName and the id in range; empty without Lua (every key synthetic). A key or id taken twice
+        // keeps the first
         private QuestKeyRegistry BuildQuestKeyRegistry()
         {
             var reg = new QuestKeyRegistry();
@@ -22,38 +24,33 @@ namespace XI.Zone
             int top = lua_.Top;
             try
             {
-                lua_.GetPath("xi.quest.area");
-                int areas = lua_.Top;
                 lua_.GetPath("xi.quest.id");
                 int ids = lua_.Top;
-                if (!lua_.IsTable(areas) || !lua_.IsTable(ids)) return reg;
-                lua_.PushNil();
-                while (lua_.Next(areas))
+                if (!lua_.IsTable(ids)) return reg;
+                for (int area = 0; area < QuestBitBlob.Areas; area++)
                 {
-                    if (lua_.IsNumber(-2) && lua_.IsString(-1))
+                    string areaName = QuestScript.AreaName((QuestLog)area);
+                    if (areaName == null) continue;
+                    lua_.GetField(ids, areaName);
+                    int t = lua_.Top;
+                    if (lua_.IsTable(t))
                     {
-                        long area = lua_.ToIntegral(-2);
-                        string areaName = lua_.ToStringValue(-1);
-                        lua_.GetField(ids, areaName);
-                        int t = lua_.Top;
-                        if (lua_.IsTable(t) && area >= 0 && area < QuestBitBlob.Areas)
+                        lua_.PushNil();
+                        while (lua_.Next(t))
                         {
-                            lua_.PushNil();
-                            while (lua_.Next(t))
+                            if (lua_.IsString(-2) && lua_.IsNumber(-1))
                             {
-                                if (lua_.IsString(-2) && lua_.IsNumber(-1))
-                                {
-                                    string name = lua_.ToStringValue(-2);
-                                    double v = lua_.ToNumber(-1);
-                                    long id = (long)v;
-                                    if (v == Math.Floor(v) && id >= 0 && id < QuestBitBlob.MaxQuestId &&
-                                        !reg.Register(QuestKeyRegistry.KeyFor(areaName, name), new QuestWireRef((QuestLog)area, (ushort)id)))
-                                        log_($"quests: {areaName}.{name} ({area}/{id}) not registered: its key or id is taken");
-                                }
-                                lua_.Pop(1);
+                                string name = lua_.ToStringValue(-2);
+                                double v = lua_.ToNumber(-1);
+                                long id = (long)v;
+                                if (v == Math.Floor(v) && id >= 0 && id < QuestBitBlob.MaxQuestId &&
+                                    !reg.Register(QuestKeyRegistry.KeyFor(areaName, name),
+                                                  new QuestWireRef((QuestLog)area, (ushort)id)))
+                                    log_($"quests: {areaName}.{name} ({area}/{id}) not registered: " +
+                                         "its key or id is taken");
                             }
+                            lua_.Pop(1);
                         }
-                        lua_.Pop(1);
                     }
                     lua_.Pop(1);
                 }

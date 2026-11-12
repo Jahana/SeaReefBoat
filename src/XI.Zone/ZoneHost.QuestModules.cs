@@ -9,7 +9,8 @@ using XI.Script;
 namespace XI.Zone
 {
     // Quest rework P4: the C# quest modules (every QuestModule in XI.QuestContent), the C# ports of the Lua modules that patch
-    // quest containers with xi.module.modifyInteractionEntry. The Lua module itself runs too (platform round P11,
+    // quest and mission containers with xi.module.modifyInteractionEntry (C3 prep: a module's Mission(key) patches a C#
+    // mission's handlers and checks as Quest(key) does a quest's). The Lua module itself runs too (platform round P11,
     // ZoneHost.LuaModules), its modifyInteractionEntry of a C# quest skipped; a C# module is enabled when
     // modules/init.txt lists its Lua file or a folder above it (QuestModuleList: the C++ server's rules) and its condition
     // (xi.pre over xi.settings.main) holds. Each registration pass (CSharpQuests.register) works out the enabled modules
@@ -105,7 +106,7 @@ namespace XI.Zone
             var modules = AllQuestModules();
             foreach (var error in questModuleErrors_) log_($"modules: {error}");
             var settings = new ModuleSettings(l);
-            var quests = QuestsByKey(l);
+            var quests = PatchTargets();
             foreach (var file in QuestModuleList.LoadOrder(entries, modules.Select(m => m.LuaFile)))
             {
                 var ports = modules.Where(m => m.LuaFile == file).ToList();
@@ -184,7 +185,8 @@ namespace XI.Zone
 
         // the module's patched definitions, by quest key; problems: why the module is refused (empty when it is not).
         // honourOff: a quest in CSHARP_QUESTS_OFF is left to its Lua (logged), not patched
-        private List<(string Key, QuestScriptDefinition Def)> Patch(QuestModule m, IQuestSettings settings, Dictionary<string, CompiledQuestScript> quests,
+        private List<(string Key, QuestScriptDefinition Def)> Patch(QuestModule m, IQuestSettings settings,
+                                                                    Dictionary<string, PatchTarget> targets,
                                                                     out List<string> problems, bool honourOff)
         {
             problems = new List<string>();
@@ -199,13 +201,15 @@ namespace XI.Zone
                 problems.Add($"its Build threw: {e.Message}");
                 return patched;
             }
-            if (md.Patches.Count == 0) problems.Add("it declares no override");
+            // no override is a problem only when no xi.pre branch declares any: a runtime branch with none is enabled, empty
+            if (md.Patches.Count == 0 && m.PatchedKeys(settings).Count == 0) problems.Add("it declares no override");
             foreach (var patch in md.Patches)
             {
                 string key = patch.Key;
-                if (!quests.TryGetValue(key, out var q) || q.Def == null)
+                if (!targets.TryGetValue(key, out var q) || q.Def == null)
                 {
-                    problems.Add(q == null ? $"{key} is not a C# quest" : $"{key} did not compile: {q.Error}");
+                    string kind = ContainerKeys.IsMission(key) ? "mission" : "quest";
+                    problems.Add(q == null ? $"{key} is not a C# {kind}" : $"{key} did not compile: {q.Error}");
                     continue;
                 }
                 if (honourOff && CSharpQuestsOff.Contains(key))
@@ -225,7 +229,7 @@ namespace XI.Zone
                     continue;
                 }
                 // the validator on the patched script, the registration's own checks (entity names) included
-                var invalid = ValidateQuestScript(result.Definition);
+                var invalid = q.Validate(result.Definition);
                 if (invalid.Count > 0)
                 {
                     problems.AddRange(invalid.Select(p => $"{key} patched: {p}"));
@@ -261,15 +265,34 @@ namespace XI.Zone
             }
         }
 
-        // the compiled quests (XI.QuestContent's, then the test ones) by key; the first of a key
-        private Dictionary<string, CompiledQuestScript> QuestsByKey(LuaState l)
+        // what a module may patch: a compiled quest or mission, by its core definition, and the registration's checks
+        // for it
+        private sealed class PatchTarget
         {
-            var byKey = new Dictionary<string, CompiledQuestScript>(StringComparer.Ordinal);
+            public QuestScriptDefinition Def;
+            public string Error;
+            public Func<QuestScriptDefinition, IReadOnlyList<string>> Validate;
+        }
+
+        // the compiled quests and missions (XI.QuestContent's, then the test ones) by key; the first of a key
+        private Dictionary<string, PatchTarget> PatchTargets()
+        {
+            var byKey = new Dictionary<string, PatchTarget>(StringComparer.Ordinal);
             foreach (var q in questScripts_.Concat(TestQuestScripts.OfType<QuestScript>().Select(CompiledTest)))
             {
                 if (q.Script == null) continue;
                 string key = QuestKeyOf(q.Script);
-                if (key != null) byKey.TryAdd(key, q);
+                if (key != null)
+                    byKey.TryAdd(key, new PatchTarget { Def = q.Def, Error = q.Error, Validate = ValidateQuestScript });
+            }
+            var missions = missionScripts_.Concat(TestQuestScripts.OfType<MissionScript>().Select(CompiledTestMission));
+            foreach (var m in missions)
+            {
+                if (m.Script == null) continue;
+                byKey.TryAdd(m.Script.Key, new PatchTarget
+                {
+                    Def = m.Def?.Core, Error = m.Error, Validate = core => ValidateMissionScript(m.Def.WithCore(core)),
+                });
             }
             return byKey;
         }
@@ -309,7 +332,7 @@ namespace XI.Zone
                 var modules = AllQuestModules();
                 problems.AddRange(questModuleErrors_);
                 var settings = new ModuleSettings(lua_);
-                var quests = QuestsByKey(lua_);
+                var quests = PatchTargets();
                 foreach (var dup in modules.GroupBy(m => m.LuaFile).Where(g => g.Count() > 1))
                     problems.Add($"{dup.Key}: more than one C# module ports it");
                 foreach (var m in modules)

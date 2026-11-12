@@ -1,0 +1,19 @@
+# Waking Dreams (battlefield.waking_dreams, The Shrouded Maw): The entry menu (event 32000, params 0,0,0,4): option 0
+# releases only, option 4 answers update 5, option 33 (index 2, area 1) answers update (2,2,0,1800) with the messages
+# 7610, 7384 and 7387. Finish, tick 2000, kill DIABOLOS_WD: event 32001 (1,1800,0,6,10,2). The finish answers message
+# 6398 (the battlefield's onEventFinishWin, WakingDreams.cs). Then ticks 11000 and 10000.
+lists TheShroudedMaw/MC_Entrance/onTrigger TheShroudedMaw/onEventUpdate/32000 TheShroudedMaw/onEventFinish/32000 TheShroudedMaw/onEventFinish/32001
+char zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+quest Windurst.WakingDreams accepted
+keyitem VialOfDreamIncense
+login
+trigger MC_Entrance
+update 32000 option=0
+update 32000 option=4
+update 32000 option=33
+finish
+tick 2000
+kill DIABOLOS_WD
+finish
+tick 11000
+tick 10000

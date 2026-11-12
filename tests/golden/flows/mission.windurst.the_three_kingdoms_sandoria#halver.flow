@@ -1,0 +1,16 @@
+# The Three Kingdoms San d'Oria in Chateau d'Oraguille, ENABLE_TRUST_QUESTS 1, neither Halver's spell nor his cipher.
+# Status 0: Halver says HALVER_OFFSET + 279 (no event). Status 3: 502 with parameter 7 = 1; its finish gives Halver's
+# cipher and sets status 4; Halver then says HALVER_OFFSET + 279 again.
+lists ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/502 GhelsbaOutpost/Warchief_Vatgit/onMobDeath NorthernSanDoria/Kasaroro/onTrigger NorthernSanDoria/onEventFinish/550
+char zone=ChateauDoraguille pos=2,0.1,0.1 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdomsSandoria current
+setting ENABLE_TRUST_QUESTS 1
+login
+trigger Halver                          # status 0: a message
+finish-if-event
+missionstatus Windurst 3
+trigger Halver                          # 502
+finish                                  # status 4
+trigger Halver                          # a message
+finish-if-event

@@ -1,0 +1,24 @@
+# Three Paths (mission.cop.three_paths#century_helper). Main (5-3 current, Louverance 8) and bob (5-3 current,
+# Louverance 11, a helper) in Mine Shaft #2716, partied. Main enters Century of Hardship; bob enters. Won by bfwin (a
+# GM): 32001 to both (the Century of Hardship's win); each finishes: Three Paths' Mine Shaft 32001 moves main's
+# Louverance 8 to 9; bob's 11 stays.
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/onEventUpdate/32000 MineShaft2716/onEventFinish/32000 MineShaft2716/onEventFinish/32001
+char zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+char bob zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+mission Cop ThreePaths current
+bob: mission Cop ThreePaths current
+login
+bob: login
+invite bob
+bob: accept
+missionstatus Cop 8 pos=2               # a GM
+bob: missionstatus Cop 11 pos=2         # a GM
+trigger _0d0
+update 32000 option=1
+finish
+bob: trigger _0d0
+bob: update 32000 option=1
+bob: finish
+bfwin
+finish
+bob: finish

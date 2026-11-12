@@ -1,0 +1,38 @@
+# Dawn (CoP 8-4): the colored drop (Status 4, Timer 0, Option 2: bit 1; GMs). Warmachine at CProg 0, no drop
+# stored: no 8-4 reply (CLUNK_CLUNK_WHIRL_WHIZZ, 7394, the zone's default). CProg 1, a full bag: 43; finished: the
+# drop (Clear Drop) cannot be given (6387): coloredDropId stored, bit 1 cleared (Option 0). Warmachine with the drop
+# stored (the section stays open by it): the give fails again (6387), then CProg 1: 43 again; finished: a new drop
+# (Red Drop) stored over it. With room: the drop given (6395), coloredDropId 0, then no 8-4 reply: 7394 (the zone's
+# default). Section closed:
+# 7394. Option 2, CProg 0 in Port Windurst (its zone-in plays Rhapsodies' 30035): Chipmy-Popmy: 619 (CProg 1); at
+# CProg 1: her default 202 (the zone's DefaultActions); Option 0 and CProg 0 (section closed): 202.
+lists PortWindurst/Chipmy-Popmy/onTrigger BibikiBay/Warmachine/onTrigger BibikiBay/onEventFinish/43
+char zone=BibikiBay pos=-345.2,-3.2,-976.5 job=WAR lvl=75 nation=0
+mission Cop Dawn current
+charvar Mission[6][840]Status 4
+charvar Mission[6][840]Option 2
+login
+trigger Warmachine                      # CProg 0: 7394 (the default)
+finish-if-event
+charvar Mission[6][840]CProg 1          # a GM
+fill-inventory
+trigger Warmachine                      # CProg 1: 43
+finish                                  # full: 6387; drop stored; Option 0
+trigger Warmachine                      # 6387; CProg 1: 43
+finish                                  # a new drop stored
+free-inventory
+trigger Warmachine                      # the drop given; 7394
+finish-if-event
+trigger Warmachine                      # closed: 7394
+finish-if-event
+charvar Mission[6][840]Option 2         # a GM
+charvar Mission[6][840]CProg 0          # a GM
+warp -183,-2.8,70 PortWindurst          # Rhapsodies' 30035, finished
+trigger Chipmy-Popmy                    # CProg 0: 619
+finish                                  # CProg 1
+trigger Chipmy-Popmy                    # CProg 1: her default 202
+finish-if-event
+charvar Mission[6][840]Option 0         # a GM
+charvar Mission[6][840]CProg 0          # a GM
+trigger Chipmy-Popmy                    # closed: 202
+finish-if-event

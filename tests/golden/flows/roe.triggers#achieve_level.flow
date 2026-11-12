@@ -1,0 +1,10 @@
+# ACHIEVE_LEVEL and the level-up re-entry: a level 29 Warrior with the exp rate at 20 takes 1200 (Level 30 Warrior,
+# retro: its check fails at the take) and 2. The kill completes 2, its addExp levels the char up, which re-enters the
+# dispatch with ACHIEVE_LEVEL, and 1200 completes inside 2's completion.
+char zone=WestRonfaure pos=0,0,0 job=WAR lvl=29
+setting ROE_EXP_RATE 20
+login
+tick 2000
+record take 1200
+record take 2
+kill #17186822

@@ -1,0 +1,12 @@
+# Trial by Wind (battlefield.trial_by_wind): the requirement arms. Main, a level 75 Warrior with the quest accepted but no
+# Tuning Fork of Wind: WP_Entrance: the key item check fails: no options: the default. bob, with the fork but the quest
+# only available: BattlefieldQuest's check (accepted or more) fails: the default.
+lists CloisterOfGales/WP_Entrance/onTrigger
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char bob zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Outlands.TrialByWind accepted
+bob: keyitem TuningForkOfWind
+login
+trigger WP_Entrance                     # accepted, no fork: no options
+bob: login
+bob: trigger WP_Entrance                # the fork, available: no options

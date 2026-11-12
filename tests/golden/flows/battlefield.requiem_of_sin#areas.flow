@@ -1,0 +1,45 @@
+# Requiem of Sin (battlefield.requiem_of_sin#areas, Boneyard Gully): Area 2 (option 98): kill the Shikarees +6, then a
+# trigger of the armoury crate +90 (its loot to main's inventory: three items): event 32001 (2,1800,0,37,8,6). Then the
+# Letter from Shikaree Y again and area 3 (option 99, update 2,6,106): kill +12, trigger the crate +96 (its loot to
+# main's inventory: two items): event 32001 (3,37,1,37,8,6). Each finish changes nothing: the quest's 32001
+# (OtherAreas/RequiemOfSin.cs) completes it only when accepted with battlefieldWin set to the battlefield, and no char
+# here has the quest accepted (the quest flows prove the completion).
+lists BoneyardGully/_081/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75
+keyitem LetterFromShikareeY
+login
+trigger _081
+update 32000 option=98
+finish
+tick 2000
+kill SHIKAREE_Z_ROS+6
+kill SHIKAREE_Y_ROS_TWT+6
+kill SHIKAREE_X_ROS_TWT+6
+trigger Armoury_Crate+90
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish
+tick 11000
+tick 10000
+keyitem LetterFromShikareeY
+trigger _081
+update 32000 option=99
+finish
+tick 2000
+kill SHIKAREE_Z_ROS+12
+kill SHIKAREE_Y_ROS_TWT+12
+kill SHIKAREE_X_ROS_TWT+12
+trigger Armoury_Crate+96
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish
+tick 11000
+tick 10000

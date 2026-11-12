@@ -39,13 +39,32 @@ namespace XI.Quests.Authoring
         // allowedAreas: the areas the arenas may be entered in (null: the Lua's nil, every area)
         public int[] AllowedAreas;
         public int CsParam7; public int CsParam8;
-        public List<string[]> EssentialMobs = new();   // addEssentialMobs, in call order
+        public List<BattlefieldEssentialMobs> EssentialMobs = new();   // addEssentialMobs, in call order
         public List<BattlefieldLootGroup> Loot = new();
         public List<BattlefieldGroup> Groups = new();  // content.groups
         // armouryCrates: the crate of each area, the first for area 1 (null: the Lua's false)
         public BattlefieldArmouryCrate[] ArmouryCrates;
         // content.paths: a mob's patrol path, keyed by its mob id
         public List<BattlefieldPath> Paths = new();
+        // fields beyond Battlefield:new's that another script reads from the content (content.positions, read by
+        // Memory_Receptacle_Red.lua:57), set on the proxy as they are: a number, a string, a bool, an object[] (a Lua
+        // array) or a Dictionary<string, object> (a table with names). A name the framework uses is refused
+        public Dictionary<string, object> ProxyFields = new();
+        // content.sections' own event handlers in the zone (one_to_be_feared.lua:91), by csid. The zone's hooks go in
+        // the same tables, so the framework's ids 32000 to 32005 are refused
+        public Dictionary<int, BattlefieldEventHandler> OnEventUpdate = new();
+        public Dictionary<int, BattlefieldEventHandler> OnEventFinish = new();
+        // the deferred callbacks its hooks arm (quest rework C3 PR2: mob:timer, mob:queue, addListener closures); an
+        // arming of one not in this list is refused
+        public List<BattlefieldCallback> Callbacks = new();
+
+        // a callback declared: added to Callbacks, its handle returned
+        public BattlefieldCallback Callback(string name, BattlefieldCallbackBody run)
+        {
+            var cb = new BattlefieldCallback(name, run);
+            Callbacks.Add(cb);
+            return cb;
+        }
 
         // the requiredItems' array part: what Battlefield:new copies into tradeItems
         public int[] TradeItems => RequiredItems?.Items ?? Array.Empty<int>();
@@ -138,6 +157,22 @@ namespace XI.Quests.Authoring
         public ZoneText? DeleteMessage;
     }
 
+    // one content:addEssentialMobs(names): its names, and the one field a file sets on the group after the call
+    // (royal_jelly.lua:24, content.groups[1].spawned = false). An array converts: EssentialMobs = { new[] { "A" } }
+    public sealed class BattlefieldEssentialMobs : IEnumerable<string>
+    {
+        public string[] Mobs;
+        // null: the field left out (the engine's default, true)
+        public bool? Spawned;
+
+        public static implicit operator BattlefieldEssentialMobs(string[] mobs) =>
+            new BattlefieldEssentialMobs { Mobs = mobs };
+
+        public IEnumerator<string> GetEnumerator() =>
+            ((IEnumerable<string>)(Mobs ?? Array.Empty<string>())).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
     // one entry of a loot group: { itemId = ..., weight = ..., amount = ... }
     public sealed class BattlefieldLootEntry
     {
@@ -210,6 +245,10 @@ namespace XI.Quests.Authoring
     public delegate void BattlefieldGroupCallback(IBattlefieldContext q, IBattlefieldMob mob);
     // death(battlefield, mob, deathCount)
     public delegate void BattlefieldDeathCallback(IBattlefieldContext q, IBattlefieldMob mob, int deathCount);
+    // setup(battlefield, mobs): the group's mobs once they are spawned (CLuaBattlefield::addGroups)
+    public delegate void BattlefieldSetupCallback(IBattlefieldContext q, IReadOnlyList<IBattlefieldMob> mobs);
+    // a zone section's onEventUpdate or onEventFinish handler: (player, csid, option, npc), q.Player and q.Npc
+    public delegate void BattlefieldEventHandler(IBattlefieldContext q, int csid, int option);
 
     // one group of content.groups: the fields CLuaBattlefield::addGroups reads, and its callbacks
     public sealed class BattlefieldGroup
@@ -221,6 +260,9 @@ namespace XI.Quests.Authoring
         public bool Superlink; public bool IsParty;
         // spawned / stationary: null for the field left out (both default to true in the engine)
         public bool? Spawned; public bool? Stationary;
+        // superlinkGroup: the group's mobs join this superlink group (null: the field left out)
+        public int? SuperlinkGroup;
+        public BattlefieldSetupCallback Setup;
         public BattlefieldGroupCallback AllDeath;
         public BattlefieldGroupCallback RandomDeath;
         public BattlefieldDeathCallback Death;
@@ -232,6 +274,8 @@ namespace XI.Quests.Authoring
     // an action a hook returns to the interaction lookup (the Lua Event a section handler returns)
     public interface IBattlefieldAction
     {
+        // action:setPriority(n): the same action answered
+        IBattlefieldAction SetPriority(int priority);
     }
 
     public abstract class BattlefieldScript : ContainerScript
@@ -395,7 +439,8 @@ namespace XI.Quests.Authoring
         // the coverage gate's labels of the battlefield (quest rework C2, spec section 3.8): each hook its class
         // overrides (hook:<Name>), and each part of its data that drives a framework arm: an essential group's
         // allDeath (essentialMobs:<n>), a group callback (group:<n>:allDeath, ...), the required item's wear and worn
-        // messages, the required key items' consumption, the loot rolls, and each exit NPC's trigger (exit:<npc>)
+        // messages, the required key items' consumption, the loot rolls, each exit NPC's trigger (exit:<npc>), and
+        // each deferred callback (callback:<name>, quest rework C3 PR2)
         public IReadOnlyList<string> CoverageLabels()
         {
             var labels = HookNames.Where(Overrides).Select(n => "hook:" + n).ToList();
@@ -406,14 +451,20 @@ namespace XI.Quests.Authoring
                 if (d.Groups[i].AllDeath != null) labels.Add($"group:{i + 1}:allDeath");
                 if (d.Groups[i].Death != null) labels.Add($"group:{i + 1}:death");
                 if (d.Groups[i].RandomDeath != null) labels.Add($"group:{i + 1}:randomDeath");
+                if (d.Groups[i].Setup != null) labels.Add($"group:{i + 1}:setup");
             }
             if (d.RequiredItems?.WearMessage != null) labels.Add(LabelWear);
             if (d.RequiredItems?.WornMessage != null) labels.Add(LabelWorn);
             if (d.RequiredKeyItems is { Items.Count: > 0 }) labels.Add(LabelKeyItems);
             if (d.Loot.Count > 0) labels.Add(LabelLoot);
             foreach (var npc in d.ExitNpcs ?? Array.Empty<string>()) labels.Add("exit:" + npc);
+            foreach (int csid in d.OnEventUpdate.Keys.OrderBy(k => k)) labels.Add(SectionLabel("onEventUpdate", csid));
+            foreach (int csid in d.OnEventFinish.Keys.OrderBy(k => k)) labels.Add(SectionLabel("onEventFinish", csid));
+            foreach (var cb in d.Callbacks.Where(c => c != null)) labels.Add(cb.Label);
             return labels;
         }
+
+        public static string SectionLabel(string kind, int csid) => $"section:{kind}:{csid}";
 
         public const string LabelWear = "requiredItems:wear";
         public const string LabelWorn = "requiredItems:worn";
@@ -443,6 +494,9 @@ namespace XI.Quests.Authoring
                 problems.Add("no data");
                 return problems;
             }
+            // the bridge, the validator and each hook read Data on their own: an expression body building a new
+            // object per read would give each its own lists
+            if (!ReferenceEquals(d, s.Data)) problems.Add("Data is not a stored instance: each read built a new one");
             if (d.ZoneId <= 0) problems.Add("no zone");
             if (d.BattlefieldId < 0) problems.Add("no battlefield id");
             if (d.MaxPlayers < 1) problems.Add("maxPlayers below 1");
@@ -474,8 +528,8 @@ namespace XI.Quests.Authoring
                     problems.Add("requiredKeyItems message args with no text");
             }
             for (int i = 0; i < d.EssentialMobs.Count; i++)
-                if (d.EssentialMobs[i] == null || d.EssentialMobs[i].Length == 0 ||
-                    d.EssentialMobs[i].Any(string.IsNullOrEmpty))
+                if (d.EssentialMobs[i]?.Mobs == null || d.EssentialMobs[i].Mobs.Length == 0 ||
+                    d.EssentialMobs[i].Mobs.Any(string.IsNullOrEmpty))
                     problems.Add($"essential mobs {i + 1}: no mob names");
             for (int i = 0; i < d.Groups.Count; i++)
             {
@@ -501,7 +555,35 @@ namespace XI.Quests.Authoring
                 else if (g.Entries.Any(e => e.Weight <= 0)) problems.Add($"loot group {i + 1}: a weight below 1");
                 if (g?.Quantity is < 1) problems.Add($"loot group {i + 1}: quantity below 1");
             }
+            foreach (var (field, value) in d.ProxyFields.OrderBy(f => f.Key, StringComparer.Ordinal))
+                if (ProxyValueProblem(value) is { } bad) problems.Add($"proxy field {field}: {bad}");
+            foreach (int csid in d.OnEventFinish.Keys.Where(IsFrameworkEvent).OrderBy(k => k))
+                problems.Add($"onEventFinish {csid} is the framework's");
+            foreach (int csid in d.OnEventUpdate.Keys.Where(IsFrameworkEvent).OrderBy(k => k))
+                problems.Add($"onEventUpdate {csid} is the framework's");
+            // the callbacks: each named once, by the label's pattern
+            var names = new HashSet<string>(StringComparer.Ordinal);
+            for (int i = 0; i < d.Callbacks.Count; i++)
+            {
+                var cb = d.Callbacks[i];
+                if (cb == null) problems.Add($"callback {i + 1} is null");
+                else if (!BattlefieldCallback.NamePattern.IsMatch(cb.Name)) problems.Add($"callback name {cb.Name}");
+                else if (!names.Add(cb.Name)) problems.Add($"callback {cb.Name} declared twice");
+            }
             return problems;
         }
+
+        // Battlefield:register's event ids (battlefield.lua:514-558)
+        static bool IsFrameworkEvent(int csid) => csid >= 32000 && csid <= 32005;
+
+        // what the bridge can push; null when fine
+        static string ProxyValueProblem(object value) => value switch
+        {
+            null => "a null value",
+            int or double or bool or string => null,
+            object[] array => array.Select(ProxyValueProblem).FirstOrDefault(p => p != null),
+            Dictionary<string, object> table => table.Values.Select(ProxyValueProblem).FirstOrDefault(p => p != null),
+            _ => $"a {value.GetType().Name} value",
+        };
     }
 }

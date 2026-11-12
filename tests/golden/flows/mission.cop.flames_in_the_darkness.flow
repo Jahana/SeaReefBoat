@@ -1,0 +1,30 @@
+# Flames in the Darkness (CoP 7-2) played through. A level 75 Warrior of San d'Oria with 7-2 current (a GM; Status
+# 0). Misareaux Coast's _0p2 at Status 0: progressCutscene 12 (finished: Status 1); again at Status 1: no 7-2 reply
+# (DOOR_CLOSED, 7372, the zone's default). Sealion's Den's Sueleen at Status 1: 16 (finished: Status 2); again: her
+# default event 20 (the zone's DefaultActions). Ru'Lude Gardens' trigger area 1 at Status 2 (after the zone-in
+# lock): 10051 (finished: Status 3); out
+# and in again at Status 3: nothing. Upper Jeuno's _6s1 at Status 3: 10012; finished: the title Eshantarl's Comrade in
+# Arms and the mission completes (Fire in the Eyes of Men current).
+lists MisareauxCoast/_0p2/onTrigger MisareauxCoast/onEventFinish/12 SealionsDen/Sueleen/onTrigger SealionsDen/onEventFinish/16 RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/10051 UpperJeuno/_6s1/onTrigger UpperJeuno/onEventFinish/10012
+char zone=MisareauxCoast pos=-257,-32.7,277 job=WAR lvl=75 nation=0
+mission Cop FlamesInTheDarkness current
+login
+trigger _0p2                            # Status 0: 12
+finish                                  # Status 1
+trigger _0p2                            # Status 1: no 7-2 reply (7372)
+finish-if-event
+warp 612,132,776 SealionsDen
+trigger Sueleen                         # Status 1: 16
+finish                                  # Status 2
+trigger Sueleen                         # Status 2: her default 20
+finish-if-event
+warp 0,3,100 RuludeGardens
+tick 3000                               # the zone-in lock
+walk 0,3,60                             # area 1, Status 2: 10051
+finish                                  # Status 3
+walk 0,3,100
+walk 0,3,60                             # Status 3: nothing
+finish-if-event
+warp -95,-1.7,88 UpperJeuno
+trigger _6s1                            # Status 3: 10012
+finish                                  # the title; completed

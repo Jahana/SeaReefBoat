@@ -1,0 +1,26 @@
+# Magicite (Windurst 4-1) at Aldo with the Silver Bell (a GM's key item): at status 1 Aldo has nothing (no script, no
+# default action: the event released); at 2 152 (1, 1) (progress), whose finish sets status 3 and takes the letter, the
+# bell kept.
+lists RuludeGardens/_6r8/onTrigger RuludeGardens/Pakh_Jatalfih/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/131 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/37 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=LowerJeuno pos=20,3,-56 job=WAR lvl=50 nation=2
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite current
+keyitem LetterToAldo
+keyitem SilverBell
+login
+missionstatus Windurst 1
+trigger Aldo                            # status 1: nothing from the mission
+finish-if-event
+missionstatus Windurst 2
+trigger Aldo                            # status 2, the bell held: 152 (1, 1)
+finish                                  # status 3, the letter taken, the bell kept

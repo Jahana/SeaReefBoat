@@ -1,0 +1,52 @@
+# When Angels Fall (CoP 8-3) played through. A level 75 Warrior of San d'Oria (a Hume, race 1) with 8-3 current (a
+# GM; Status 0) logs in to The Garden of Ru'Hmet: zone-in 201; finished: Mysterious Amulet (Prishe's; 6398) and
+# Status 1. _iz2 at Status 1: 202 (finished: Status 2). At Status 2, the Hume panel _iz2 from 3 yalms:
+# YOU_MUST_MOVE_CLOSER (7636); from 1.5: 120; finished 0: nothing; 120 again, finished 1: Light of Vahzl, the title
+# Warrior of the Crystal, Status 3. Ebon_Panel_Elvaan at Status 3: NO_NEED_INVESTIGATE (7644, the zone's default).
+# _0z0 at Status 3: 203 (finished: Status 4); at Status 4: the battlefield menu (When Angels Fall), entered with 1;
+# the four Ixzdei killed: 32001; its finish: the battlefield's setPos keeps the char in the zone, and 8-3's own
+# 32001 finish (battlefieldWin is When Angels Fall, Status 4): Status 5. _0z0 at Status 5: 205 (an event). _0zt at
+# Status 5: 204
+# (finished: Status 6). _0z0 at Status 6: the battlefield entry refuses (a lone release), no 8-3 reply. Al'Taieu's
+# zone-in at Status 6: 165; finished: the amulet taken, RETURN_AMULET_TO_PRISHE (7548), and the mission completes
+# (Dawn current).
+lists TheGardenOfRuhmet/onZoneIn/1 TheGardenOfRuhmet/onEventFinish/201 TheGardenOfRuhmet/_iz2/onTrigger TheGardenOfRuhmet/Ebon_Panel_Elvaan/onTrigger TheGardenOfRuhmet/onEventFinish/202 TheGardenOfRuhmet/onEventFinish/120 TheGardenOfRuhmet/_0z0/onTrigger TheGardenOfRuhmet/onEventFinish/203 TheGardenOfRuhmet/onEventUpdate/32000 TheGardenOfRuhmet/onEventFinish/32000 TheGardenOfRuhmet/onEventFinish/32001 TheGardenOfRuhmet/_0zt/onTrigger TheGardenOfRuhmet/onEventFinish/204 Altaieu/onZoneIn/1 Altaieu/onEventFinish/165
+char zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0
+mission Cop WhenAngelsFall current
+login open                              # Status 0: 201
+finish                                  # the amulet; Status 1
+trigger _iz2                            # Status 1: 202
+finish                                  # Status 2
+trigger _iz2 at=3                       # Hume panel, 3 yalms: 7636
+trigger _iz2                            # 1.5 yalms: 120
+finish option=0                         # nothing
+trigger _iz2                            # 120
+finish option=1                         # the light, the title; Status 3
+trigger Ebon_Panel_Elvaan               # Status 3: 7644 (the default)
+finish-if-event
+trigger _0z0                            # Status 3: 203
+finish                                  # Status 4
+trigger _0z0                            # Status 4: the battlefield menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000
+kill IXZDEI_RDM+3
+kill IXZDEI_RDM+2
+kill IXZDEI_RDM+1
+kill IXZDEI_RDM                         # the win: 32001
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+finish-if-event                         # Status 5
+tick 11000
+tick 10000
+trigger _0z0                            # Status 5: 205
+finish-if-event
+trigger _0zt                            # Status 5: 204
+finish                                  # Status 6
+trigger _0z0                            # Status 6: a lone release
+finish-if-event
+warp -422,0,-532 Altaieu open           # Status 6: 165
+finish                                  # the amulet back; completed

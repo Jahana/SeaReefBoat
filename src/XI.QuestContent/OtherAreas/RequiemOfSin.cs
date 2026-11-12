@@ -1,6 +1,6 @@
 // Requiem of Sin (Log ID 4, Quest ID 83), a line-for-line port of scripts/quests/otherAreas/Requiem_of_Sin.lua (quest rework
 // B3b). Tavnazian Safehold: Despachiaire !pos 111.209 -40.015 -85.481 (no script, default 106); Boneyard Gully: the
-// battlefield Requiem of Sin (scripts/battlefields/Boneyard_Gully/requiem_of_sin.lua: id 678, index 6, entry _081; its own
+// battlefield Requiem of Sin (Battlefields/BoneyardGully/RequiemOfSin.cs: id 678, index 6, entry _081; its own
 // checkRequirements: the Letter from Shikaree Y or the Letter from the Mithran Trackers, no quest status).
 // Available once Tango with a Tracker is completed: Despachiaire, when ShikareeBattleWait < NextConquestTally() and Prog 0:
 // 578, whose finish gives the Letter from Shikaree Y, sets the wait and Prog 1. Boneyard Gully's 32000 finish: no

@@ -1,0 +1,18 @@
+# The Road Forks, the completion (mission.cop.the_road_forks#done). A level 75 Warrior of San d'Oria with 3-3 current
+# and the San d'Oria status 14, the Windurst status 12 (GMs): Metalworks Cid: nothing. The Windurst status 14 with the
+# San d'Oria status 12: nothing. Both 14: 847; finished: the mission completes (3-4 current).
+lists Metalworks/Cid/onTrigger Metalworks/onEventFinish/847
+char zone=Metalworks pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop TheRoadForks current
+login
+missionstatus Cop 14 pos=0              # a GM
+missionstatus Cop 12 pos=1              # a GM
+trigger Cid                             # 14, 12: nothing
+finish-if-event
+missionstatus Cop 12 pos=0              # a GM
+missionstatus Cop 14 pos=1              # a GM
+trigger Cid                             # 12, 14: nothing
+finish-if-event
+missionstatus Cop 14 pos=0              # a GM
+trigger Cid                             # 14, 14: 847
+finish                                  # complete: 3-4 current

@@ -1,0 +1,20 @@
+# The Warrior's Path (battlefield.warriors_path, Sealion's Den): Airship_Door inside area 1 (17). The zone's first
+# content, One to Be Feared (Battlefield[992], C#), answers the door: its 32003 (1); update 1: nothing; finished 0:
+# nothing; the door again, finished 4: the char leaves the battlefield. Back at _0w0: the menu again.
+lists SealionsDen/_0w0/onTrigger SealionsDen/Airship_Door/onTrigger SealionsDen/onEventUpdate/32000 SealionsDen/onEventFinish/32000 SealionsDen/onEventUpdate/32003 SealionsDen/onEventFinish/32003
+char zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+mission Cop TheWarriorsPath current
+charvar Mission[6][748]Status 1
+login
+trigger _0w0
+update 32000 option=17
+finish
+trigger Airship_Door
+update 32003 option=1
+finish option=0
+trigger Airship_Door
+finish option=4
+tick 1000
+warp 612,132,774 SealionsDen
+trigger _0w0
+finish-if-event

@@ -2,7 +2,6 @@
 -- Trust
 -----------------------------------
 require('scripts/globals/magic')
-require('scripts/globals/roe')
 -----------------------------------
 xi = xi or {}
 xi.trust = xi.trust or {}

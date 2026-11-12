@@ -1,0 +1,154 @@
+# The Heir to the Light (San d'Oria 9-2, mission.sandoria.the_heir_to_the_light) played through: a level 75 San d'Orian
+# Warrior at rank 9 with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before
+# it completed. Endracion's 1009, option 23: begun. The Northern San d'Oria zone-in 1 (status 1), the Chateau zone-in
+# 10 (status 2): the court's lines; Fei'Yin's zone-in 23 (status 3); Qu'Bia Arena's BC_Entrance 32000, option 65 (index
+# 4, area 1); the GM effects keep the char up; the eleven phase 1 orcs' allDeath plays 32004 (the mission's finish sets
+# Intro 1; phase 2 spawned, Trion, the set-down); the Warlord and his hands dead: WON, 32001 opens in the kill step;
+# its finish (the mission's, battlefieldWin 516 at status 3): status 4. The Northern San d'Oria zone-in 0 (status 5),
+# the court again, _6h4 8 (status 6), _6h0 3, _6h1 5, Halver 30, _6fc 50 (Papal 1), the King Ranperre's Tomb _5a0 14
+# (status 7), Halver 9: completed (rank 10, 100000 gil, the title, the flag), Option 1. Section 3: Aramaviont 11,
+# Curilla 20, Rahal 41; _6fc 50 again (the complete cleared Papal); the Southern San d'Oria zone-in 0: Option and Papal
+# 0.
+char zone=SouthernSanDoria pos=-108,1,-34 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+mission Sandoria Lightbringer completed
+mission Sandoria BreakingBarriers completed
+rank 9
+login
+trigger Endracion                       # no mission current: the guard's own mission list
+finish option=24                        # no mission's option (this mission takes 23): not begun
+trigger Endracion                       # the list again
+finish option=23                        # begun
+warp -240,7,57.9 NorthernSanDoria open  # status 0: 1
+finish                                  # status 1
+trigger Arnau                           # status 1: nothing from the mission
+finish-if-event
+warp 0,0,0 ChateauDoraguille open       # status 1: 10
+finish                                  # status 2
+trigger Aramaviont                      # status 2: 13
+finish
+trigger Curilla                         # status 2: 18
+finish
+trigger Halver                          # status 2: 29
+finish
+trigger Milchupain                      # status 2: 34
+finish
+trigger Nachou                          # status 2: 4
+finish
+trigger Perfaumand                      # status 2: 2
+finish
+trigger Rahal                           # status 2: 39
+finish
+trigger _6h4                            # status 2: nothing from the mission
+finish-if-event
+warp -51.0,-16.0,38.0 Feiyin open       # status 2: 23
+finish                                  # status 3
+warp -212.2,-24.6,20.1 QubiaArena
+trigger BC_Entrance                     # status 3: the 32000 menu
+update 32000 option=65                  # index 4, area 1: entered
+finish
+tick 2000                               # the first tick: phase 1 spawns
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill WARLORD_ROJGNOJ+3
+kill WARLORD_ROJGNOJ+4
+kill WARLORD_ROJGNOJ+5
+kill WARLORD_ROJGNOJ+6
+kill WARLORD_ROJGNOJ+7
+kill WARLORD_ROJGNOJ+8
+kill WARLORD_ROJGNOJ+9
+kill WARLORD_ROJGNOJ+10
+kill WARLORD_ROJGNOJ+11
+kill WARLORD_ROJGNOJ+12
+kill WARLORD_ROJGNOJ+13                 # phase 1 dead: allDeath: 32004
+finish                                  # 32004: the mission's Intro 1; phase 2 spawned, Trion, the set-down
+tick 2000
+kill WARLORD_ROJGNOJ
+kill WARLORD_ROJGNOJ+1
+kill WARLORD_ROJGNOJ+2                  # phase 2 dead: WON: 32001 opens
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish-if-event                         # 32001: the mission's finish: status 4
+tick 11000
+tick 10000
+warp -240,7,57.9 NorthernSanDoria open  # status 4: 0
+finish                                  # status 5
+warp 0,0,0 ChateauDoraguille            # status 5: no zone-in event
+trigger Nachou                          # status 5: 6
+finish
+trigger Perfaumand                      # status 5: 7
+finish
+trigger Aramaviont                      # status 5: 14
+finish
+trigger Curilla                         # status 5: 19
+finish
+trigger Halver                          # status 5: 28
+finish
+trigger Milchupain                      # status 5: 35
+finish
+trigger Rahal                           # status 5: 40
+finish
+trigger _6h0                            # status 5: nothing from the mission
+finish-if-event
+trigger _6h4                            # status 5: 8
+finish                                  # status 6
+trigger _6h0                            # status 6: 3
+finish
+trigger _6h1                            # status 6: 5
+finish
+trigger Halver                          # status 6: 30
+finish
+trigger Nachou                          # status 6: nothing from the mission
+finish-if-event
+warp -240,7,57.9 NorthernSanDoria
+trigger _6fc                            # status 6, Papal 0: 50
+finish                                  # Papal 1
+trigger _6fc                            # Papal 1: nothing from the mission
+finish-if-event
+warp 1,0.1,-101 KingRanperresTomb
+trigger _5a0                            # status 6: 14
+finish                                  # status 7
+trigger _5a0                            # status 7: nothing from the mission
+finish-if-event
+warp 0,0,0 ChateauDoraguille
+trigger Halver                          # status 7: 9
+finish                                  # completed: rank 10, 100000 gil, the title; Option 1; the flag
+trigger Aramaviont                      # section 3, Option 1: 11
+finish
+trigger Curilla                         # Option 1: 20
+finish
+trigger Rahal                           # Option 1: 41
+finish
+trigger Halver                          # Flag 0: nothing from the mission
+finish-if-event
+warp -240,7,57.9 NorthernSanDoria
+trigger _6fc                            # Option 1, Papal 0 (complete cleared the vars): 50
+finish-if-event                         # Papal 1
+warp -108,1,-34 SouthernSanDoria open   # Option 1: 0
+finish                                  # Option 0, Papal 0
+warp 93.4,0,-55.3 SouthernSanDoria      # Option 0: no zone-in event

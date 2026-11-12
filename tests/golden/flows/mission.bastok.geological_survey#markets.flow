@@ -1,0 +1,13 @@
+# A Geological Survey (Bastok 1-2): begun in Bastok Markets. A level 10 Warrior of Bastok (1-1 completed by a GM;
+# Resonance current keeps RoV 1-1 out). Section 1: Cleades's script's 1001; finished with 1: Bastok Markets' own
+# handleAcceptMission registration: begun, YOU_ACCEPT_THE_MISSION. Section 2: Cleades's ORIGINAL_MISSION_OFFSET + 3.
+# Rival zone-in, another mission's script: the login in Bastok Markets plays Seekers of Adventure's Rumors from the West
+# onZoneIn, which returns 22 (the trace records only that return, with no event packet).
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001
+char zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+mission Bastok TheZeruhnReport completed
+login
+trigger Cleades                         # section 1: 1001
+finish option=1                         # 1: begun, YOU_ACCEPT_THE_MISSION
+trigger Cleades                         # section 2: ORIGINAL_MISSION_OFFSET + 3

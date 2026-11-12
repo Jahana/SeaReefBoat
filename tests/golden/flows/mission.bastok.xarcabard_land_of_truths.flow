@@ -1,0 +1,78 @@
+# Xarcabard, Land of Truths (Bastok 5-2, mission.bastok.xarcabard_land_of_truths) played through: a level 75 Bastokan at
+# rank 5, ACP and RoV current (their zone-ins quiet) and the nation's missions before it completed. Malduc's own 1001
+# (the mission list), option 15: begun, YOU_ACCEPT_THE_MISSION; Malduc ORIGINAL_MISSION_OFFSET + 39; Karst 602 (status
+# 2); _6ld without the fragment: his default 604. The Throne Room: _4l1 at status 2: the battlefield's entry trigger
+# refuses (NO_BATTLEFIELD_ENTRY 7254) and the mission's 6 plays (status 3); _4l1 32000, area 1; phase 1 killed: 32004
+# (1), whose finish (onEventFinishBattlefield) despawns phase 1 and spawns phase 2; phase 2 (unkillable) takes the blow
+# at 1 HP; after two days (wait jst=1 twice) he acts (an 028) and drops, and the next tick has him dead: WON, 32001; its
+# finish runs the battlefield's (Shadow Banisher) and the mission's (Zilart's The New Frontier added: the engine's
+# warning over the 65535 Zilart row; PostBattle 1; the set-down at 90.425 -5.749 0.089 in the Throne Room, whose zone
+# change shows at the next tick 400). The zone-in 7 (-1, flags 8): status 4, PostBattle 0, the Shadow Fragment; the
+# Throne Room Zone.lua's own 7 finish sets the char down in Castle Zvahl Baileys (the next tick 400). Metalworks: _6ld
+# 603: completed (rank 6, 20000 gil, the fragment taken). Bastok Mines: Pavvke 76 (importantOnce), then his default 75.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/Pavvke/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/Karst/onTrigger Metalworks/_6ld/onTrigger Metalworks/onEventFinish/602 Metalworks/onEventFinish/603 Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 ThroneRoom/_4l1/onTrigger ThroneRoom/_4l2/onTrigger ThroneRoom/onZoneIn/1 ThroneRoom/onEventUpdate/32000 ThroneRoom/onEventFinish/32000 ThroneRoom/onEventFinish/32001 ThroneRoom/onEventFinish/32002 ThroneRoom/onEventFinish/32003 ThroneRoom/onEventFinish/32004 ThroneRoom/onEventFinish/6 ThroneRoom/onEventFinish/7
+char zone=Metalworks pos=64,-15,-2 job=WAR lvl=75 nation=1
+warning: lua: addMission: overwriting current mission 65535 of log 3 with 0 -- the 32001 finish adds Zilart's The New Frontier while the char's Zilart log holds 65535 (no Zilart row yet): the engine's C++ ShowWarning, the mission is added
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+rank 5
+mission Bastok DarknessRising completed
+login
+trigger Malduc                          # section 1: Malduc's own 1001 (the mission list)
+finish option=15                        # begun: YOU_ACCEPT_THE_MISSION
+trigger Malduc                          # current: ORIGINAL_MISSION_OFFSET + 39
+finish-if-event
+trigger Karst                           # status 0: 602
+finish                                  # status 2
+trigger _6ld                            # no Shadow Fragment: his default 604
+finish-if-event
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 2: the battlefield refuses (7254); the mission's 6
+finish                                  # status 3
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000                               # the first tick: phase 1 spawns; not locked yet
+kill SHADOW_LORD_RANK_5_OFFSET          # phase 1 dead: the group's death: 32004 (1)
+finish                                  # 32004: onEventFinishBattlefield: phase 1 despawned, phase 2 spawned
+tick 2000
+kill SHADOW_LORD_RANK_5_OFFSET+3        # phase 2 (unkillable) takes the blow: 1 HP
+tick 1000                               # nothing yet
+wait jst=1                              # the wall clock a day on
+tick 1000
+tick 1000
+wait jst=1
+tick 1000                               # the second day: phase 2 acts (an 028), HP 0
+tick 1000                               # phase 2 dead: WON, 32001
+tick 1000                               # nothing
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish                                  # 32001: the title; the mission: Zilart 1-1 added, PostBattle 1, setPos
+tick 400                                # the setPos runs: a zone change into the Throne Room
+login open                              # status 3, PostBattle 1: the zone-in's 7 (-1, flags 8)
+finish                                  # 7: status 4, PostBattle 0, the Shadow Fragment
+tick 400                                # Zone.lua 7 finish: setPos to Castle Zvahl Baileys, a zone change
+login
+warp 64,-15,-2 Metalworks
+trigger _6ld                            # the Shadow Fragment: 603
+finish                                  # completed: rank 6, 20000 gil, the fragment taken
+warp -8,-2,-110 BastokMines
+trigger Pavvke                          # completed, Return of the Talekeeper not: 76 (importantOnce)
+finish-if-event
+trigger Pavvke                          # the second time: Pavvke's default 75
+finish-if-event

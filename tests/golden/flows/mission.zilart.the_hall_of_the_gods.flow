@@ -1,0 +1,24 @@
+# The Hall of the Gods (Zilart 11), current. The Hall of the Gods' _6z0 says DEPRESSION_A_CLUE (messageText from the
+# NPC, mode 6) and returns no action (so the NPC's own 1 does not play); Aldo plays 24; Norg's _700 plays the progress
+# 169, whose finish on option 0 (not 1) completes the mission (The Mithra and the Crystal next); the next _700 is The
+# Mithra and the Crystal's 5.
+lists HallOfTheGods/_6z0/onTrigger LowerJeuno/Aldo/onTrigger Norg/_700/onTrigger Norg/onEventFinish/169
+char zone=HallOfTheGods pos=0,-14,46 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheHallOfTheGods current
+login
+trigger _6z0                            # DEPRESSION_A_CLUE, no action
+finish-if-event
+warp 23,3,-58 LowerJeuno
+trigger Aldo                            # 24
+finish
+warp 98,-7,-12 Norg
+trigger _700                            # 169
+finish option=1                         # nothing
+trigger _700                            # 169
+finish option=0                         # completed
+trigger _700                            # The Mithra and the Crystal's 5
+finish

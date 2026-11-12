@@ -1,0 +1,45 @@
+# Wading Beasts (Bastok 2-2, mission.bastok.wading_beasts). A level 10 Warrior of Bastok holding a lizard egg (1-1 to
+# 2-1 completed by a GM: no mission current; a GM's Resonance current keeps RoV 1-1's 30035 out of the logins). Section
+# 1 (no current mission, a Bastokan): the gate guards play their script's mission list 1001; Bastok Markets', Bastok
+# Mines' and Metalworks' finish with option 0 (not 4) does nothing; Port Bastok's with option 4 begins the mission
+# (YOU_ACCEPT_THE_MISSION). Section 2 (2-2 current): Argus, Cleades, Rashid and Malduc each play their zone's
+# ORIGINAL_MISSION_OFFSET + 21. Alois: two eggs: no match, no event; one egg: 372 (the mission not completed), whose
+# finish completes it (250 rank points) and takes the egg. Completed: the mission current again (a GM) with one egg
+# traded again: 373 (completed before), whose finish completes it once more. Rival zone-in, another mission's script:
+# the login in Bastok Markets plays Seekers of Adventure's Rumors from the West onZoneIn, which returns 22 (the trace
+# records only that return, with no event packet).
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/Alois/onTrade Metalworks/onEventFinish/1001 Metalworks/onEventFinish/372 Metalworks/onEventFinish/373 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001
+char zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+item LizardEgg x2
+login
+trigger Cleades                         # section 1: no handler: his script's 1001
+finish option=0                         # not 4: nothing
+warp -8.4,-1,-121 BastokMines
+trigger Rashid                          # section 1: 1001
+finish option=0                         # not 4: nothing
+warp 64,-14,-4 Metalworks
+trigger Malduc                          # section 1: 1001
+finish option=0                         # not 4: nothing
+warp 132,8.5,-4 PortBastok
+trigger Argus                           # section 1: 1001
+finish option=4                         # 4: begun, YOU_ACCEPT_THE_MISSION
+trigger Argus                           # section 2: ORIGINAL_MISSION_OFFSET + 21
+warp -358,-10,-168 BastokMarkets
+trigger Cleades                         # section 2: ORIGINAL_MISSION_OFFSET + 21
+warp -8.4,-1,-121 BastokMines
+trigger Rashid                          # section 2: ORIGINAL_MISSION_OFFSET + 21
+warp 64,-14,-4 Metalworks
+trigger Malduc                          # section 2: ORIGINAL_MISSION_OFFSET + 21
+warp 96,-20,14 Metalworks
+walk 97,-20,14
+trade Alois LizardEgg x2                # two eggs: tradeMatches fails: no event
+trade Alois LizardEgg x1                # 372
+finish                                  # completed: 250 rank points; the egg taken
+mission Bastok WadingBeasts current     # a GM
+trade Alois LizardEgg x1                # 373: done before
+finish                                  # completed again

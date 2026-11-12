@@ -1,0 +1,65 @@
+# The Horutoto Ruins Experiment (Windurst 1-1): the six gizmos of Inner Horutoto Ruins. A level 10 Warrior of Windurst
+# with 1-1 current at status 3 (a GM). With no gizmo the broken one (a GM sets RandomGizmo 7): each of the six plays its
+# failure (49, 51, 53, 55, 57, 59; NOT_BROKEN_ORB) and, triggered again, EXAMINED_RECEPTACLE. Then, status 3 again each
+# time, the gizmo a GM picks as the broken one plays its success (48 to 58), which sets status 4 and gives the Cracked
+# Mana Orb (only the first success shows the key item and its message; the char holds the Orb after that).
+lists InnerHorutotoRuins/_5cp/onTrigger InnerHorutotoRuins/_5cq/onTrigger InnerHorutotoRuins/_5cr/onTrigger InnerHorutotoRuins/_5cs/onTrigger InnerHorutotoRuins/_5ct/onTrigger InnerHorutotoRuins/_5cu/onTrigger InnerHorutotoRuins/onEventFinish/48 InnerHorutotoRuins/onEventFinish/49
+char zone=InnerHorutotoRuins pos=464,-3,98 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment current
+login
+missionstatus Windurst 3                # a GM
+charvar Mission[2][0]RandomGizmo 7      # a GM: no gizmo is the broken one
+warp 464,-3,98 InnerHorutotoRuins
+trigger _5cp                          # gizmo 1: not the broken one: 49
+finish                                  # NOT_BROKEN_ORB
+trigger _5cp                          # examined: EXAMINED_RECEPTACLE
+warp 406,-3,57 InnerHorutotoRuins
+trigger _5cq                          # gizmo 2: not the broken one: 51
+finish                                  # NOT_BROKEN_ORB
+trigger _5cq                          # examined: EXAMINED_RECEPTACLE
+warp 464,-3,22 InnerHorutotoRuins
+trigger _5cr                          # gizmo 3: not the broken one: 53
+finish                                  # NOT_BROKEN_ORB
+trigger _5cr                          # examined: EXAMINED_RECEPTACLE
+warp 295,-3,21 InnerHorutotoRuins
+trigger _5cs                          # gizmo 4: not the broken one: 55
+finish                                  # NOT_BROKEN_ORB
+trigger _5cs                          # examined: EXAMINED_RECEPTACLE
+warp 353,-3,58 InnerHorutotoRuins
+trigger _5ct                          # gizmo 5: not the broken one: 57
+finish                                  # NOT_BROKEN_ORB
+trigger _5ct                          # examined: EXAMINED_RECEPTACLE
+warp 295,-3,98 InnerHorutotoRuins
+trigger _5cu                          # gizmo 6: not the broken one: 59
+finish                                  # NOT_BROKEN_ORB
+trigger _5cu                          # examined: EXAMINED_RECEPTACLE
+charvar Mission[2][0]RandomGizmo 1      # a GM: gizmo 1 is the broken one
+warp 464,-3,98 InnerHorutotoRuins
+trigger _5cp                          # gizmo 1: the broken one: 48
+finish                                  # Cracked Mana Orb, status 4
+missionstatus Windurst 3                # a GM
+charvar Mission[2][0]RandomGizmo 2      # a GM: gizmo 2 is the broken one
+warp 406,-3,57 InnerHorutotoRuins
+trigger _5cq                          # gizmo 2: the broken one: 50
+finish                                  # Cracked Mana Orb, status 4
+missionstatus Windurst 3                # a GM
+charvar Mission[2][0]RandomGizmo 3      # a GM: gizmo 3 is the broken one
+warp 464,-3,22 InnerHorutotoRuins
+trigger _5cr                          # gizmo 3: the broken one: 52
+finish                                  # Cracked Mana Orb, status 4
+missionstatus Windurst 3                # a GM
+charvar Mission[2][0]RandomGizmo 4      # a GM: gizmo 4 is the broken one
+warp 295,-3,21 InnerHorutotoRuins
+trigger _5cs                          # gizmo 4: the broken one: 54
+finish                                  # Cracked Mana Orb, status 4
+missionstatus Windurst 3                # a GM
+charvar Mission[2][0]RandomGizmo 5      # a GM: gizmo 5 is the broken one
+warp 353,-3,58 InnerHorutotoRuins
+trigger _5ct                          # gizmo 5: the broken one: 56
+finish                                  # Cracked Mana Orb, status 4
+missionstatus Windurst 3                # a GM
+charvar Mission[2][0]RandomGizmo 6      # a GM: gizmo 6 is the broken one
+warp 295,-3,98 InnerHorutotoRuins
+trigger _5cu                          # gizmo 6: the broken one: 58
+finish                                  # Cracked Mana Orb, status 4

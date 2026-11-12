@@ -1,0 +1,43 @@
+# Waking the Beast (battlefield.waking_the_beast_cloister_of_flames, CloisterOfFlames): the helpers. Four level 75 Warriors by FP_Entrance. main (the quest accepted, the resonator)
+# registers and leads bob (the quest completed, no resonator: entryRequirement's non-registrant arm lets a completed char
+# in) and dan (accepted, the resonator: the item arm); cat (accepted, no resonator, never completed) is
+# not in the party and has no clearance, so he is judged as a registrant and that arm fails (the helper arm with neither
+# part is pinned by the fake check). bob, holding the clearance: the menu,
+# entered; dan: the menu, entered. The Prime killed: won; BattlefieldQuest's onBattlefieldWin: main and dan (accepted) get
+# battlefieldWin 546, bob (completed, repeatable) too; 32001 for each (canSkipCS 0 for the accepted, 1 for bob). Each
+# finish: the quest's 32001 handler gives main and dan the eye; bob holds no resonator, so no section of the quest
+# applies to him: nothing (the repeat's battlefieldWin is pinned by otherAreas.waking_the_beast#repeat).
+lists CloisterOfFlames/FP_Entrance/onTrigger CloisterOfFlames/onEventUpdate/32000 CloisterOfFlames/onEventFinish/32000 CloisterOfFlames/onEventFinish/32001
+char zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+char bob zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+char cat zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+char dan zone=CloisterOfFlames pos=-720.631,-1.4,-597.955 job=WAR lvl=75
+quest OtherAreas.WakingTheBeast accepted
+keyitem RainbowResonator
+bob: quest OtherAreas.WakingTheBeast completed
+cat: quest OtherAreas.WakingTheBeast accepted
+dan: quest OtherAreas.WakingTheBeast accepted
+dan: keyitem RainbowResonator
+login
+bob: login
+cat: login
+dan: login
+invite bob
+bob: accept
+invite dan
+dan: accept
+trigger FP_Entrance                     # the menu 32000
+update 32000 option=33                  # registered in area 1; bob and dan registered with it
+finish                                  # main entered
+bob: trigger FP_Entrance                # no registrant, completed: the menu
+bob: update 32000 option=33             # entered
+bob: finish
+cat: trigger FP_Entrance                # accepted, no resonator, not completed: no options
+dan: trigger FP_Entrance                # no registrant, the resonator: the menu
+dan: update 32000 option=33             # entered
+dan: finish
+kill IFRIT_PRIME_ASA-15                # won: 32001 to main, bob and dan
+finish                                  # main: the eye
+bob: finish                             # bob: no resonator, no section: nothing
+dan: finish                             # dan: the eye
+tick 11000                              # the won arena's cleanup

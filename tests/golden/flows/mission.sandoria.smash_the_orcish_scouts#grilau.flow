@@ -1,0 +1,23 @@
+# Smash the Orcish Scouts (San d'Oria 1-1): Grilau in Northern San d'Oria. A level 10 Warrior of San d'Oria holding an
+# Orcish Axe and no mission. Section 1: Grilau plays 1000; its finish with option 0 begins the mission (Northern San
+# d'Oria's own registration, YOU_ACCEPT_THE_MISSION). Section 3: Grilau plays ORIGINAL_MISSION_OFFSET; the Axe traded:
+# 1020, whose finish completes it. Section 2: Grilau's script plays 1009; its finish with option 0 begins it again; the
+# Axe traded: 1002, whose finish completes it again. Rival zone-in, another mission's script: the login in Northern San
+# d'Oria plays Seekers of Adventure's Rumors from the West onZoneIn, which returns 878 (the trace records only that
+# return, with no event packet).
+lists NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/Grilau/onTrade NorthernSanDoria/onEventFinish/1000 NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1020 NorthernSanDoria/onEventFinish/1002
+char zone=NorthernSanDoria pos=-240.5,7,57.9 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+item OrcishAxe
+login
+trigger Grilau                          # section 1: 1000
+finish option=0                         # begun
+trigger Grilau                          # section 3: ORIGINAL_MISSION_OFFSET
+walk -241.5,7,57.9
+trade Grilau OrcishAxe x1               # 1020
+finish                                  # completed; the axe taken
+trigger Grilau                          # section 2: his script's 1009
+finish option=0                         # begun again
+item OrcishAxe
+trade Grilau OrcishAxe x1               # 1002
+finish                                  # completed again

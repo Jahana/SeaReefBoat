@@ -3,7 +3,7 @@
 // Whitegate: Iruki-Waraki (script: The Wayward Automaton, Operation Teatime; default 259). Bastok Markets:
 // Shamarhaan (no script; default 433). Mount Zhayolm: qm8 !pos 760.8 -15 1.7 (no script, no default). Nashmau:
 // Sajhra !pos 14.8 0 -61 (script). Talacca Cove: the battlefield Puppetmaster Blues
-// (scripts/battlefields/Talacca_Cove/puppetmaster_blues.lua: index 2, entry _1l0, the Toggle Switch and Valkeng's
+// (Battlefields/TalaccaCove/PuppetmasterBlues.cs: index 2, entry _1l0, the Toggle Switch and Valkeng's
 // Memory Chip required and kept, the quest accepted or completed). Available with Operation Teatime completed, main
 // job PUP at AF3_QUEST_LEVEL (50): Iruki-Waraki 782, whose finish begins it. Accepted: Iruki-Waraki 783 (an Event)
 // at Prog 0-2, 784 at Prog 3 (Prog 4), 785 (an Event) at Prog 4, else 786 (completed: the Puppetry Taj, Paragon of

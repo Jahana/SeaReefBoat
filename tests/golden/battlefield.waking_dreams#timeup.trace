@@ -1,0 +1,99 @@
+# golden trace: battlefield.waking_dreams#timeup
+seed 7
+flow fbaf42e141c0ba02916db46dbc101df47247ccc653f0c95f84d5b5dec7d84542
+recorder lua
+lua-at a6e523f22bf8ea79affa0b135d4357ee3219ad8f
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @582bf102585dafb5 (167)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @3e907948536df038 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @e9cae1c4bb221b99 (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @febdec807bd9e47d (2)
+char_recast @4cdbd8051d2399ff (7)
+char_stats @aed604d3dea413a4 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @b03926e836303e7b (41)
+ret onZoneIn=number:4294967295
+order 10/MC_Entrance/onTrigger=Battlefield[704]
+order 10/onEventUpdate/32000=Battlefield[704]
+order 10/onEventFinish/32000=Battlefield[704]
+order 10/onEventFinish/32002=Battlefield[704]
+step trigger MC_Entrance
+packets
+  00E @5c69b3090626027c
+  00E @5ff16e8a37cba2f7
+  034 @9635e981d2d0a618
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step update 32000 option=33
+packets
+  02A @a76eb71e421806e4
+  02A @3084ac1755dbb9bb
+  02A @f4fa816dd3fa6dba
+  075 @008ac95fc5c2c20d
+  05C @74995bc36b946f49
+  05D @3e1dc80a22aa8f07
+  052 @3c1f8adddcc5ad8a
+  0DF @e86c6ce1bb1d2923
+  037 @11b3856106a4a19e
+ret onEventUpdate=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @cd52eaa85c6f2f16
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step tick 1202000
+packets
+  037 @cd52eaa85c6f2f16
+  067 @8c71f583e5e03d94
+  063 @e9ad0bdb3c680b67
+  029 @a618be292a82d5b4
+char_effects + effectid=254|icon=254|power=706|tick=0|duration=0|subid=$char|subpower=1|tier=1|flags=143130624|timestamp=1799998798|sourcetype=0|sourcetypeparam=0|originid=0
+chars - pos_rot=62
+chars - pos_x=-300
+chars - pos_y=-1.5
+chars - pos_z=-220
+chars + pos_rot=0
+chars + pos_x=-298.557
+chars + pos_y=-2.499
+chars + pos_z=-261.886
+ret afterZoneIn=nil:nil
+step tick 300000
+packets
+  029 @db3f5c2ac5d938b6
+step tick 240000
+packets
+  029 @c6dac5551bf8f450
+step tick 30000
+packets
+  029 @e804939fd732e4de
+step tick 20000
+packets
+  029 @0d74f59d6c98b1c4
+step tick 10000
+packets
+  02A @4819118a18abb004
+  032 @eac38f48e7ba1b49
+  0DF @e86c6ce1bb1d2923
+  037 @11b3856106a4a19e
+step finish-if-event
+packets
+  075 @5825a9e20f61dab9
+  0DF @e86c6ce1bb1d2923
+  037 @cd52eaa85c6f2f16
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil

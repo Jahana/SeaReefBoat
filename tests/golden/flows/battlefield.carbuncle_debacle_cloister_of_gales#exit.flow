@@ -1,0 +1,21 @@
+# Carbuncle Debacle (battlefield.carbuncle_debacle_cloister_of_gales, CloisterOfGales): the exit. The char enters arena
+# 1, then Wind_Protocrystal (arena 1's), in the battlefield: 32003 (an optional cutscene, skippable); its update:
+# nothing; finished with 0: not 4: still inside. Again, finished with 4: leaveBattlefield(1) (no win, no loss event).
+# Then WP_Entrance, no trade: the clearance is kept (effect 254, power 417), so the override's non-registrant arm
+# (isValidEntry) passes: the menu 32000 again.
+lists CloisterOfGales/WP_Entrance/onTrade CloisterOfGales/WP_Entrance/onTrigger CloisterOfGales/Wind_Protocrystal/onTrigger CloisterOfGales/onEventUpdate/32003 CloisterOfGales/onEventFinish/32003
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest Windurst.CarbuncleDebacle accepted
+charvar CarbuncleDebacleProgress 6
+item WindPendulum
+login
+trade WP_Entrance WindPendulum x1      # the menu 32000
+update 32000 option=17                  # index 1, area 1: registered, entered
+finish                                  # in the arena
+trigger Wind_Protocrystal                  # in the battlefield: 32003
+update 32003 option=1                   # onExitEventUpdate: nothing
+finish option=0                         # not 4: still inside
+trigger Wind_Protocrystal                  # 32003
+finish option=4                         # leaveBattlefield(1): out
+warp -357.6,-0.1,-380.0 CloisterOfGales
+trigger WP_Entrance                     # the clearance kept: the helper arm: the menu 32000 again

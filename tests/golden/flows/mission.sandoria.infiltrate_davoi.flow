@@ -1,0 +1,33 @@
+# Infiltrate Davoi (San d'Oria 3-1, mission.sandoria.infiltrate_davoi). A level 30 Warrior of San d'Oria in Southern San
+# d'Oria, 1-1 to 2-3 completed (none current; a GM's Resonance current keeps RoV 1-1 out). Endracion's own script plays
+# the mission list 1009; its finish with option 250 does nothing, with option 110 begins the mission (no message).
+# Status 0: Endracion 1029, Ambrotien 2029. Status 4: both say ORIGINAL_MISSION_OFFSET + 55. Status 2: Endracion and
+# Ambrotien answer their own 1001 and 2001.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/1012 SouthernSanDoria/onEventFinish/2012 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1012 ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/onEventFinish/553 ChateauDoraguille/onEventFinish/554 Davoi/Quemaricond/onTrigger Davoi/Zantaviat/onTrigger Davoi/onZoneIn/1 Davoi/onEventFinish/102 Davoi/onEventFinish/105 Davoi/onEventFinish/116 Davoi/onEventFinish/117
+char zone=SouthernSanDoria pos=-110,1,-35 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+login
+trigger Endracion                       # section 1: 1009
+finish option=250                       # not 110: nothing
+trigger Endracion
+finish option=110                       # begun
+trigger Endracion                       # 1029
+finish-if-event
+trigger Ambrotien                       # 2029
+finish-if-event
+missionstatus Sandoria 4
+trigger Endracion                       # ORIGINAL_MISSION_OFFSET + 55
+finish-if-event
+trigger Ambrotien                       # ORIGINAL_MISSION_OFFSET + 55
+finish-if-event
+missionstatus Sandoria 2
+trigger Endracion                       # status 2: nothing from the mission
+finish-if-event
+trigger Ambrotien
+finish-if-event

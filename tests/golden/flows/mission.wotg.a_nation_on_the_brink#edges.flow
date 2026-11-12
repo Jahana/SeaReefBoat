@@ -1,0 +1,21 @@
+# A Nation on the Brink (WotG 14) zone-in edges. At statuses 1 and 6 the zone-in plays no event. At status 2 it plays
+# 4; an update with option 0 sends no update packet, and the finish still sets status 3.
+lists SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/onEventFinish/6 BatalliaDownsS/Underpass_Hatch/onTrigger BatalliaDownsS/onZoneIn/1 BatalliaDownsS/onEventUpdate/4 BatalliaDownsS/onEventFinish/3 BatalliaDownsS/onEventFinish/4 BatalliaDownsS/onEventFinish/20 BatalliaDownsS/onEventFinish/21 BatalliaDownsS/onEventFinish/22 BatalliaDownsS/_qm5/onTrigger BatalliaDownsS/onEventFinish/5
+char zone=BatalliaDownsS pos=314.083,-1.16,-181.455 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg ANationOnTheBrink current
+login
+missionstatus Wotg 1
+tick 400
+login                                   # status 1: no zone-in reply
+missionstatus Wotg 6
+tick 400
+login                                   # status 6: no zone-in reply
+missionstatus Wotg 2
+tick 400
+login open                              # 4
+update 4 option=0                       # no update reply
+finish

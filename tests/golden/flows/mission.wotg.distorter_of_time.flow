@@ -1,0 +1,20 @@
+# Distorter of Time (WotG 24), the whole run. Regal Pawprints 1 (no Umbra Bug, Timer 0) plays 26 and its finish gives
+# the Umbra Bug (key item 1161); held, it answers 6409 (DefaultActions). At Status 1 (a GM) the zone-in plays 19 and its
+# finish completes the mission. No flow reaches the Ruhotz Silvermines finish (10000); in the game the Light in the
+# Darkness instance sends it.
+uncovered: 1/-/onEventFinish:10000 -- no flow statement starts 10000 here: the harness has no instance run (its only sender is the Crystal War Light in the Darkness instance, which sends 10000 to each char when it completes); the finish (Status 1 and the set-down) is pinned by the fake check c3 T6 wotg in tests/XI.Verify.Quests/C3ToauT6.cs
+lists BeaucedineGlacierS/Regal_Pawprints_1/onTrigger BeaucedineGlacierS/onZoneIn/1 BeaucedineGlacierS/onEventFinish/19 BeaucedineGlacierS/onEventFinish/26
+char zone=BeaucedineGlacierS pos=54.437,-41.904,104.974 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg DistorterOfTime current
+login
+trigger Regal_Pawprints_1                  # 26
+finish                                     # the Umbra Bug
+trigger Regal_Pawprints_1                  # held
+charvar Mission[5][23]Status 1
+tick 400
+login open                                 # 19
+finish                                     # completed

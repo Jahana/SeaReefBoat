@@ -1,0 +1,22 @@
+# Betrayal at Beaucedine (WotG 19), the other Status values. Count Halphas spawned at Status 1, Status set to 0 (a
+# GM) and the mob killed: Status stays 0 (the death sets 2 at Status 1 only); the trigger then plays 15 and its
+# finish sets Status 1. Status 3: the trigger answers nothing but the release; Status 4: the zone-in plays no event.
+lists BeaucedineGlacierS/Regal_Pawprints_2/onTrigger BeaucedineGlacierS/Count_Halphas/onMobDeath BeaucedineGlacierS/onZoneIn/1 BeaucedineGlacierS/onEventFinish/15 BeaucedineGlacierS/onEventFinish/16 BeaucedineGlacierS/onEventFinish/30
+char zone=BeaucedineGlacierS pos=-15.066,-40.249,-217.276 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg BetrayalAtBeaucedine current
+login
+charvar Mission[5][18]Status 1
+trigger Regal_Pawprints_2                  # spawn
+charvar Mission[5][18]Status 0
+kill #17334540
+trigger Regal_Pawprints_2                  # Status 0: 15
+finish
+charvar Mission[5][18]Status 3
+trigger Regal_Pawprints_2                  # Status 3
+charvar Mission[5][18]Status 4
+tick 400
+login                                      # Status 4

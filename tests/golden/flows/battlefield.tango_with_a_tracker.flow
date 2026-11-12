@@ -1,0 +1,21 @@
+# Tango with a Tracker (battlefield.tango_with_a_tracker, Boneyard Gully): The entry menu (event 32000, params
+# 0,0,0,32): option 0 releases only, option 4 answers update 5, option 81 (index 5, area 1) answers update (2,5,0,1800)
+# with the messages 7771, 7610, 7384 and 7387. Finish, tick 2000, kill SHIKAREE_Y_ROS_TWT then SHIKAREE_X_ROS_TWT:
+# event 32001 (1,1800,0,16,8,5). The finish changes nothing: the quest's 32001 (OtherAreas/TangoWithATracker.cs)
+# completes it only when accepted with battlefieldWin set to the battlefield, and no char here has the quest accepted
+# (the quest flows prove the completion). Then ticks 11000 and 10000.
+lists BoneyardGully/_081/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75
+keyitem LetterFromShikareeX
+login
+trigger _081
+update 32000 option=0
+update 32000 option=4
+update 32000 option=81
+finish
+tick 2000
+kill SHIKAREE_Y_ROS_TWT
+kill SHIKAREE_X_ROS_TWT
+finish
+tick 11000
+tick 10000

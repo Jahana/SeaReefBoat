@@ -1,0 +1,35 @@
+# The Temple of Uggalepih: another fight's win. Main (the mission current) trades the Moon Orb to _4j0:
+# Jungle Boogymen's menu (32000, bits 2 and 4); option 17 (index 1, area 1) enters it (A_CRACK_HAS_FORMED
+# 7548, entering 7680, capped at level 60). Eve (completed, Headstone Pilgrimage current) joins it. A GM's
+# win plays 32001 (index 1) to both; main's finish sets no status and eve's gives no title: the win is
+# Jungle Boogymen's.
+lists Norg/Gilgamesh/onTrigger Kazham/Jakoh_Wahcondalo/onTrigger SacrificialChamber/onZoneIn/1 SacrificialChamber/onEventUpdate/7 SacrificialChamber/onEventUpdate/8 SacrificialChamber/onEventFinish/7 SacrificialChamber/onEventFinish/8 SacrificialChamber/_4j0/onTrigger SacrificialChamber/_4j0/onTrade SacrificialChamber/onEventUpdate/32000 SacrificialChamber/onEventFinish/32000 SacrificialChamber/onEventFinish/32001
+char zone=SacrificialChamber pos=300,-1.8,353.5 job=WAR lvl=75 nation=0
+char eve zone=SacrificialChamber pos=299,0.1,349 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheTempleOfUggalepih current
+keyitem SacrificialChamberKey
+item MoonOrb
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Zilart TheTempleOfUggalepih completed
+eve: mission Zilart HeadstonePilgrimage current
+login
+eve: login
+invite eve
+eve: accept
+trade _4j0 MoonOrb x1                   # Jungle Boogymen's menu
+update 32000 option=17                  # index 1, area 1: entered
+finish
+eve: trigger _4j0                       # the fight main entered (bit 2)
+eve: update 32000 option=17
+eve: finish
+tick 2000
+bfwin                                   # a GM's win: 32001 to both
+finish                                  # main (current): nothing
+eve: finish                             # eve (not current): nothing

@@ -1,0 +1,33 @@
+# The Lost City (CoP 2-2, mission.cop.the_lost_city). A level 75 Warrior of San d'Oria with 2-2 current (a GM; Status 0)
+# in Tavnazian Safehold. Status 0: Arquil, Justinius (the first of the two), Liphatte and the Sewer Entrance _0q1: nothing.
+# Despachiaire: 102; finished: Status 1. Status 1: Despachiaire 106 (replaces the default), Arquil 291, Justinius 360,
+# Liphatte 301, each replacing the default. _0q1: 103; finished: the mission completes (Distant Beliefs current). Section 2
+# (2-2 completed, Darkness Named not): Arquil 291, Despachiaire 106 (no parameter), each replacing the default.
+lists TavnazianSafehold/_0q1/onTrigger TavnazianSafehold/Arquil/onTrigger TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/Liphatte/onTrigger TavnazianSafehold/onEventFinish/102 TavnazianSafehold/onEventFinish/103
+char zone=TavnazianSafehold pos=0,-22,10 job=WAR lvl=75 nation=0
+mission Cop TheLostCity current
+login
+trigger Arquil                          # Status 0: nothing
+finish-if-event
+trigger Justinius                       # nothing
+finish-if-event
+trigger Liphatte                        # nothing
+finish-if-event
+trigger _0q1                            # nothing
+finish-if-event
+trigger Despachiaire                    # 102
+finish                                  # Status 1
+trigger Despachiaire                    # 106 with 1
+finish-if-event
+trigger Arquil                          # 291
+finish-if-event
+trigger Justinius                       # 360
+finish-if-event
+trigger Liphatte                        # 301
+finish-if-event
+trigger _0q1                            # 103
+finish                                  # complete: 2-3 current
+trigger Arquil                          # section 2: 291
+finish-if-event
+trigger Despachiaire                    # section 2: 106
+finish-if-event

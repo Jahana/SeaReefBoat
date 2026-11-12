@@ -1,0 +1,30 @@
+# Foiled Ambition (ToAU 24). Naja's trigger. The must-zone var set: the trigger area 3; after a rezone (it clears the
+# var) the Timer in the future: the area; the Timer 0: the area plays 3097; its update with option 0; finished:
+# completed (Imperial Gold Pieces, the title), the must-zone var and the Timer set.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventUpdate/3097 AhtUrhganWhitegate/onEventFinish/3097
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau FoiledAmbition current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem
+finish-if-event
+charvar Mission[4][23]mustZone 1
+walk 34.7,-6.6,-54.1
+walk 34.7,-6.6,-40
+rezone
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][23]Timer 999999999
+walk 34.7,-6.6,-54.1
+walk 34.7,-6.6,-40
+charvar Mission[4][23]Timer 0
+walk 34.7,-6.6,-54.1
+update 3097 option=0
+finish

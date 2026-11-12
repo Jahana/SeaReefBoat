@@ -1,0 +1,59 @@
+# The Celestial Nexus fight (area 1), at Zilart status 0. _513 opens the menu; option 0 is ignored, option 1 enters. The
+# Exoplates struck down and 28 ticks of 3 s passed (short of Eald'narche's Sleep II), phase 1's Eald'narche killed: his
+# group's death despawns his Orbitals and plays 32004 (the area). Its finish (onEventFinishBattlefield) shows phase 1
+# vanishing (0x038) and the event release; phase 1's despawn update comes at the next tick. Phase 2's spawn, the char's
+# targid it keeps and its 30 s engage timer reach no packet: the timer's tick records nothing (coverage counts
+# callback:engage), and phase 2 first shows at its kill. Phase 2's death wins: 32001, whose finish is the mission's
+# (completed, set down in the Hall of the Gods at the next tick).
+lists TheCelestialNexus/_513/onTrigger TheCelestialNexus/onEventUpdate/32000 TheCelestialNexus/onEventFinish/32000 TheCelestialNexus/onEventFinish/32001 TheCelestialNexus/onEventFinish/32002 TheCelestialNexus/onEventFinish/32004 TheCelestialNexus/_514/onTrigger TheCelestialNexus/_515/onTrigger TheCelestialNexus/onEventFinish/32003
+char zone=TheCelestialNexus pos=-580,-8,-30 job=WAR lvl=99 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheCelestialNexus current
+login
+effect 50                               # a GM: Invincible
+effect 522
+effect 49
+trigger _513                            # the menu
+update 32000 option=0                   # ignored
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000
+kill EALDNARCHE+1                       # the Exoplates, unkillable: 1 HP
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+kill EALDNARCHE                         # phase 1 dead: 32004
+finish                                  # phase 1 vanishes, the release (its despawn update next tick)
+tick 29000
+tick 2000                               # the timer's tick: nothing (coverage counts callback:engage)
+kill EALDNARCHE+2                       # phase 2 first shows; won: 32001
+finish                                  # completed; set down in the Hall of the Gods
+tick 400

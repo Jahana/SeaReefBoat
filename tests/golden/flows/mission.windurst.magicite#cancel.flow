@@ -1,0 +1,41 @@
+# Magicite (Windurst 4-1) at status 3 with Option 2 set by a GM: Muckvix without the torch 80; Paya-Sabya at Option 2 80
+# (Windurst's file answers every Option but 1; its finish sets Option 1), Option 2 again (a GM); Geebeh's default text;
+# the Altar Room zone-in 10000 cancelled (1 << 30: Option stays 2), played again and finished (Option 0), then no
+# zone-in event; with the torch (a GM) Muckvix 79.
+lists RuludeGardens/_6r8/onTrigger RuludeGardens/Pakh_Jatalfih/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/131 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/37 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=LowerJeuno pos=-26.8,4.6,-135 job=WAR lvl=50 nation=2
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite current
+charvar Mission[2][13]Option 2
+login
+missionstatus Windurst 3
+trigger Muckvix                         # no torch, Option 2: 80
+finish-if-event
+warp 9,1,72 UpperJeuno
+trigger Paya-Sabya                      # no torch, Option 2: 80 (progress)
+finish                                  # Option 1
+charvar Mission[2][13]Option 2
+trigger Geebeh                          # Option 2: Geebeh's default text (7453)
+finish-if-event
+warp -342,25,43 AltarRoom open          # Option 2: 10000
+finish option=1073741824                # cancelled: Option stays 2
+warp 9,1,72 UpperJeuno
+warp -342,25,43 AltarRoom open          # Option 2: 10000 again
+finish                                  # Option 0
+warp 9,1,72 UpperJeuno
+warp -342,25,43 AltarRoom open          # Option 0: no zone-in event
+finish-if-event
+keyitem YagudoTorch
+warp -26.8,4.6,-135 LowerJeuno
+trigger Muckvix                         # the torch, Option 0: 79
+finish-if-event

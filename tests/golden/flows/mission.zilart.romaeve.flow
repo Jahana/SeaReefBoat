@@ -1,0 +1,23 @@
+# Ro'Maeve (Zilart 9, mission.zilart.romaeve): Lower Jeuno's Aldo plays 84 while the Option var is 0, whose
+# finish sets Mission[3][18]Option to 1; then he plays 24. Norg's _700 plays 3; its finish on option 1 does
+# nothing, on option 0 completes the mission (no key item, no title; the Option var deleted; The Temple of
+# Desolation current). Then _700 plays 5 (10_The_Temple_of_Desolation's reply).
+lists LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/84 Norg/_700/onTrigger Norg/onEventFinish/3
+char zone=LowerJeuno pos=23,3,-58 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart Romaeve current
+login
+trigger Aldo                            # Option 0: 84
+finish                                  # Option set to 1
+trigger Aldo                            # Option 1: 24
+finish
+warp 98,-7,-12 Norg
+trigger _700                            # 3
+finish option=1                         # not 0: nothing
+trigger _700                            # 3
+finish option=0                         # completed
+trigger _700                            # The Temple of Desolation current: its 5
+finish-if-event

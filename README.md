@@ -2,7 +2,7 @@
 
 A Final Fantasy XI server emulator, forked from [LandSandBoat](https://github.com/LandSandBoat/server) and ported to C#, with a new C# quest engine. This repository holds everything the C# server needs to run.
 
-The port is in progress: quests run on C#, while missions, battlefields and other content still run as LandSandBoat's Lua scripts through the C# Lua host.
+The port is in progress. Quests, Records of Eminence, the nation, Rise of the Zilart, Chains of Promathia, Treasures of Aht Urhgan and Wings of the Goddess missions, and their battlefields, run on C#; the other missions, battlefields and content still run as LandSandBoat's Lua scripts through the C# Lua host.
 
 | Path | What it is |
 |---|---|

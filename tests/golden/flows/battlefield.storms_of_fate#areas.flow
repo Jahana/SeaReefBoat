@@ -1,0 +1,27 @@
+# Storms of Fate (battlefield.storms_of_fate#areas, Riverne Site #B01): Options 2 and 3 ask for areas 2 and 3, and both
+# register the fixed area 1 (update 2; the kept Lua quirk of area = 1): kill BAHAMUT, finish, two ticks; the second run
+# after the quest var is set again, its 32001 as a repeat (1,6,1,6,29). Each finish runs the quest's 32001
+# (StormsOfFate.cs): the first gives main the Whisper of the Wyrmking and Prog 2 -> 3; the second only Prog 2 -> 3 (the
+# key item is held).
+lists RiverneSiteB01/Unstable_Displacement/onTrigger RiverneSiteB01/onEventUpdate/32000 RiverneSiteB01/onEventFinish/32000 RiverneSiteB01/onEventFinish/32001
+char zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+quest Jeuno.StormsOfFate accepted
+charvar Quest[3][86]Prog 2
+login
+trigger Unstable_Displacement
+update 32000 option=2
+finish
+tick 2000
+kill BAHAMUT
+finish
+tick 11000
+tick 10000
+charvar Quest[3][86]Prog 2
+trigger Unstable_Displacement
+update 32000 option=3
+finish
+tick 2000
+kill BAHAMUT
+finish
+tick 11000
+tick 10000

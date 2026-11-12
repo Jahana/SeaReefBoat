@@ -1,0 +1,56 @@
+# The Full Moon Fountain (Windurst 6-1, mission.windurst.full_moon_fountain) played through: a level 75 Windurstian at
+# rank 6, ASA, ACP, RoV and SoA current (their content quiet) and the nation's missions before it completed.
+# Janshura-Rashura's own 78, option 16: begun, YOU_ACCEPT_THE_MISSION. Port Windurst (Hakkuru-Rinkuru+7 and
+# Kuroido-Moido+7 are the ones a client sees; the first of each name gives only a release): Hakkuru-Rinkuru 456 (param
+# the Southwestern Star Charm), status 1, the charm (KEYITEM_OBTAINED); then 457; Kuroido-Moido 458. Outer Horutoto
+# Ruins: _5eb at status 1 with no Jack up: the four Jacks spawned and claimed, GUARDIAN_BLOCKING_WAY (14); with them
+# up: DOOR_WONT_OPEN_STAR_CHARM (7312); the four killed, the last: status 2; after their despawn _5eb:
+# STAR_CHARM_DISAPPEARS (7280) and 68, its finish: status 3, the charm taken. Port Windurst: Hakkuru-Rinkuru 459,
+# Kuroido-Moido 460. The Full Moon Fountain zone-in at status 3: 50; its finish: completed, 650 rank points.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWalls/Zokima-Rokima/onTrigger WindurstWalls/onEventFinish/93 WindurstWaters/Mokyokyo/onTrigger WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/onEventFinish/114 PortWindurst/Hakkuru-Rinkuru/onTrigger PortWindurst/Kuroido-Moido/onTrigger PortWindurst/onEventFinish/456 OuterHorutotoRuins/_5eb/onTrigger OuterHorutotoRuins/onEventFinish/68 FullMoonFountain/onZoneIn/1 FullMoonFountain/onEventFinish/50
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+rank 6
+login
+trigger Janshura-Rashura                # his own 78
+finish option=16                        # begun, YOU_ACCEPT_THE_MISSION
+warp -109,-4.2,102 PortWindurst
+trigger Hakkuru-Rinkuru+7               # status 0: 456
+finish                                  # status 1, the Southwestern Star Charm
+trigger Hakkuru-Rinkuru+7               # status 1: 457
+finish
+trigger Kuroido-Moido+7                 # status 1: 458
+finish
+warp -289,0,-659 OuterHorutotoRuins
+trigger _5eb                            # status 1, no Jack up: the four spawned, GUARDIAN_BLOCKING_WAY
+trigger _5eb                            # Jacks up: DOOR_WONT_OPEN_STAR_CHARM
+kill FULL_MOON_FOUNTAIN_OFFSET
+kill FULL_MOON_FOUNTAIN_OFFSET+1
+kill FULL_MOON_FOUNTAIN_OFFSET+2
+kill FULL_MOON_FOUNTAIN_OFFSET+3        # the last: status 2
+tick 15000
+tick 15000                              # the Jacks despawned
+trigger _5eb                            # status 2: STAR_CHARM_DISAPPEARS, 68
+finish                                  # status 3, the charm taken
+warp -109,-4.2,102 PortWindurst
+trigger Hakkuru-Rinkuru+7               # status 3: 459
+finish
+trigger Kuroido-Moido+7                 # status 3: 460
+finish
+warp -301.8,9.5,-260.1 FullMoonFountain open # status 3: 50
+finish                                  # completed: 650 rank points

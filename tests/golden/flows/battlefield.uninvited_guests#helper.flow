@@ -1,0 +1,56 @@
+# Uninvited Guests (battlefield.uninvited_guests, Monarch Linn): main registers and invites bob, cat, dan and eve. A
+# helper passes by having the quest completed, or accepted at the var or higher; the others get no options. The win
+# for the party, each finish.
+lists MonarchLinn/SD_Entrance/onTrigger MonarchLinn/onEventUpdate/32000 MonarchLinn/onEventFinish/32000 MonarchLinn/onEventFinish/32001
+char zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+char bob zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+char cat zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+char dan zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+char eve zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+quest OtherAreas.UninvitedGuests accepted
+charvar Quest[4][81]Prog 1
+keyitem MonarchLinnPatrolPermit
+bob: quest OtherAreas.UninvitedGuests completed
+bob: keyitem MonarchLinnPatrolPermit
+cat: quest OtherAreas.UninvitedGuests accepted
+cat: charvar Quest[4][81]Prog 0
+cat: keyitem MonarchLinnPatrolPermit
+dan: quest OtherAreas.UninvitedGuests accepted
+dan: charvar Quest[4][81]Prog 2
+dan: keyitem MonarchLinnPatrolPermit
+eve: keyitem MonarchLinnPatrolPermit
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+trigger SD_Entrance
+update 32000 option=97
+finish
+bob: trigger SD_Entrance
+bob: update 32000 option=97
+bob: finish
+cat: trigger SD_Entrance
+cat: update 32000 option=97
+cat: finish
+dan: trigger SD_Entrance
+dan: update 32000 option=97
+dan: finish
+eve: trigger SD_Entrance
+eve: update 32000 option=97
+eve: finish
+bfwin
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

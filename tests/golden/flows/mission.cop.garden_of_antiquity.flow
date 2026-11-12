@@ -1,0 +1,57 @@
+# Garden of Antiquity (CoP 8-1) played through. A level 75 Warrior of San d'Oria with 8-1 current (a GM; Status 0)
+# in Al'Taieu; a GM sets the CID status nibble 7 (7-4's three bits). _0x0 at Status 0: progressCutscene 164
+# (finished: Status 1); at Status 1, towers not done: IMPERVIOUS_FIELD_BLOCKS (7471, the zone's default). _0x1: the
+# three Ru'aern popped (popFromQM), OMINOUS_SHADOW (7501); again while they are up: NOTHING_OF_INTEREST (7500, the
+# default). The three killed. _0x1: its
+# status bit (CID bit 3), one tower: 161 (towerOption 0); again: 7500. _0x2 the same: popped (7501), killed, its bit
+# (Rubious bit 1), two towers: 162 (1, the first one not done from 2 down). _0x3: popped, killed, its bit, three
+# towers: 163. _0x0 with the mask 7: optional cutscene 100; finished 0: Status 2; 100 again, finished 1: Status 2 and
+# set down in the Grand Palace of Hu'Xzoi. _iyb at Status 2: its default 56 (the zone's DefaultActions). _iya at
+# Status 2: 1; finished: Tavnazian
+# Ring (6395), Status 3. _iya at Status 3: DOES_NOT_RESPOND (7259, 8-1's own message). _iyb at Status 3: 2; finished:
+# the mission completes (A Fate Decided current).
+lists Altaieu/_0x0/onTrigger Altaieu/_0x1/onTrigger Altaieu/_0x2/onTrigger Altaieu/_0x3/onTrigger Altaieu/onEventFinish/164 Altaieu/onEventFinish/100 Altaieu/onEventFinish/161 Altaieu/onEventFinish/162 Altaieu/onEventFinish/163 GrandPalaceOfHuxzoi/_iya/onTrigger GrandPalaceOfHuxzoi/_iyb/onTrigger GrandPalaceOfHuxzoi/onEventFinish/1 GrandPalaceOfHuxzoi/onEventFinish/2
+char zone=Altaieu pos=0,-12,-457 job=WAR lvl=75 nation=0
+mission Cop GardenOfAntiquity current
+login
+missionstatus Cop 7 pos=6               # a GM: 7-4's CID bits
+trigger _0x0                            # Status 0: 164
+finish                                  # Status 1
+trigger _0x0                            # mask 0 (not 7): 7471 (the default)
+finish-if-event
+trigger _0x1                            # Ru'aern popped: 7501
+trigger _0x1                            # they are up: 7500 (the default)
+kill RUAERN
+kill RUAERN+1
+kill RUAERN+2                           # the three killed
+trigger _0x1                            # CID bit 3; one tower: 161
+finish
+trigger _0x1                            # bit set: 7500
+finish-if-event
+trigger _0x2                            # popped: 7501
+kill RUAERN+3
+kill RUAERN+4
+kill RUAERN+5                           # the three killed
+trigger _0x2                            # Rubious bit 1; two: 162 (1)
+finish
+trigger _0x3                            # popped: 7501
+kill RUAERN+6
+kill RUAERN+7
+kill RUAERN+8                           # the three killed
+trigger _0x3                            # Rubious bit 0; three: 163
+finish
+trigger _0x0                            # mask 7: 100
+finish option=0                         # Status 2
+trigger _0x0                            # 100
+finish option=1                         # Status 2; to Hu'Xzoi
+tick 400
+login                                   # in the Grand Palace of Hu'Xzoi
+warp -20,-2,-277 GrandPalaceOfHuxzoi
+trigger _iyb                            # Status 2: its default 56
+finish-if-event
+trigger _iya                            # Status 2: 1
+finish                                  # the ring; Status 3
+trigger _iya                            # Status 3: 7259
+finish-if-event
+trigger _iyb                            # Status 3: 2
+finish                                  # completed

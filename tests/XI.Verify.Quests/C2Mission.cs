@@ -51,15 +51,7 @@ internal static partial class Program
     {
         public CallMission() : base(MissionLog.Bastok, "THE_ZERUHN_REPORT") { }
 
-        protected override void Build(MissionScriptBuilder b)
-        {
-            b.State(current: true, status: 0).Npc(QC.Zone.BastokMines, QC.Npc.BastokMines.Gerbaum).Called()
-                .OnTrigger(QuestReply.Event(1000))
-                .OnEventFinish(QC.Zone.BastokMines, 1000, q => q.Mission.SetStatus(1));
-            b.State(current: true, status: 1).Npc(QC.Zone.BastokMines, QC.Npc.BastokMines.Gerbaum).Called()
-                .OnTrigger(QuestReply.Event(1001))
-                .OnZoneIn(QC.Zone.BastokMines, q => QuestReply.Event(1002));
-        }
+        protected override void Build(MissionScriptBuilder b) => C2CallMissionBody.Build(b);
     }
 
     // a Called() mission handler with a KeyItem reply: refused, as in a quest's NPC call

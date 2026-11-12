@@ -1,0 +1,43 @@
+# The Crystal Line (Bastok 2-1): the sections that do not apply. Main, a level 10 Warrior of San d'Orian with no
+# mission and a faded crystal: Cleades: section 1 fails (not Bastok): his script's 1003, finished with 3: nothing is
+# begun; Cid has no section: his script's talk, the crystal traded: no event; Ayame and Naji with the report (a GM) and
+# no mission: their scripts' talk. bob, a level 10 Warrior of Bastok with A Geological Survey current (a GM): 2-1's
+# sections fail (a current mission, not 2-1): Cid plays 1-2's own event (503, whose finish gives the Blue tester), the
+# trade does nothing; Ayame and Naji play their scripts' talk. Rival zone-in, another mission's script: the main char's
+# login in Bastok Markets plays Seekers of Adventure's Rumors from the West onZoneIn, which returns 22 (the trace
+# records only that return, with no event packet).
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 Metalworks/Cid/onTrigger Metalworks/Cid/onTrade Metalworks/Ayame/onTrigger Metalworks/Naji/onTrigger
+char zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=0
+char bob zone=Metalworks pos=-12,-12,1 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+bob: mission Rov Resonance current
+bob: mission Bastok GeologicalSurvey current
+item FadedCrystal
+keyitem CLReport
+bob: keyitem CLReport
+bob: item FadedCrystal
+login
+trigger Cleades                         # not Bastok: no section: his script's 1003
+finish option=3                         # not begun: no handler
+warp -12,-12,1 Metalworks
+trigger Cid                             # no section: his script's talk
+finish-if-event
+walk -11,-12,1
+trade Cid FadedCrystal x1               # no section: no event
+warp 133,-19,34 Metalworks
+trigger Ayame                           # no mission: her script's talk
+finish-if-event
+warp 64,-14,-4 Metalworks
+trigger Naji                            # no mission: his script's talk
+finish-if-event
+bob: login
+bob: trigger Cid                        # a current mission (1-2): 1-2's own 503
+bob: finish-if-event                    # 1-2's 503 finish: the Blue tester
+bob: walk -11,-12,1
+bob: trade Cid FadedCrystal x1          # no event
+bob: warp 133,-19,34 Metalworks
+bob: trigger Ayame                      # her script's talk
+bob: finish-if-event
+bob: warp 64,-14,-4 Metalworks
+bob: trigger Naji                       # his script's talk
+bob: finish-if-event

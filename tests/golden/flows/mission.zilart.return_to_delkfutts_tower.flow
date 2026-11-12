@@ -1,0 +1,44 @@
+# Return to Delkfutt's Tower (Zilart 8, mission.zilart.return_to_delkfutts_tower): Norg's Gilgamesh plays
+# 13. Lower Jeuno's Aldo plays 104 (0, 1, 255, 0, 12590582, 95569, 4095, 1) while bit 0 of the Option var is
+# clear; its finish sets the bit (Mission[3][16]Option 1); then he plays 68. The Lower Delkfutt's zone-in
+# from Lower Jeuno plays 15 with bit 1 clear; its finish sets bit 1 (Option 3); with it set a rezone plays
+# nothing. Middle Delkfutt's zone-in plays its own 13 (Zone.lua); from there Lower Delkfutt's plays 14 (the
+# mission's arm and the zone's own Zone.lua both answer 14). The Stellar Fulcrum zone-in at status 0 plays 0;
+# its update on option 0 answers (1, 23, 1756, 488, 179, 7); its finish sets status 1; a rezone then plays
+# nothing. Upper Delkfutt's zone-in plays its own 14 (Zone.lua); from there the Stellar Fulcrum plays 7 (the
+# mission's arm and the zone's own both answer 7). At status 2 (a GM here; the fight's 32001 sets it in
+# battlefield.return_to_delkfutts_tower) the zone-in plays 17, whose finish completes the mission (no key
+# item, no title; the Option var deleted; Ro'Maeve current). Rezoned after that, the Stellar Fulcrum's own
+# Zone.lua plays 7 (the mission no longer current).
+lists Norg/Gilgamesh/onTrigger LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/104 LowerDelkfuttsTower/onZoneIn/1 LowerDelkfuttsTower/onEventFinish/15 StellarFulcrum/onZoneIn/1 StellarFulcrum/onEventUpdate/0 StellarFulcrum/onEventFinish/0 StellarFulcrum/onEventFinish/17 StellarFulcrum/onEventFinish/32001
+char zone=Norg pos=120,-8,-12 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ReturnToDelkfuttsTower current
+login
+trigger Gilgamesh                       # 13
+finish
+warp 23,3,-58 LowerJeuno
+trigger Aldo                            # bit 0 clear: 104
+finish                                  # bit 0 set (Option 1)
+trigger Aldo                            # bit 0 set: 68
+finish
+warp 460.022,-1.77,-103.442 LowerDelkfuttsTower open  # from Lower Jeuno, bit 1 clear: 15
+finish                                  # bit 1 set (Option 3)
+rezone                                  # bit 1 set, not from Middle: nothing
+warp 0,0,0 MiddleDelkfuttsTower         # its own 13 (Zone.lua)
+warp 460.022,-1.77,-103.442 LowerDelkfuttsTower open  # from Middle: 14 (mission and Zone.lua alike)
+finish
+warp -520,-4,17 StellarFulcrum open  # status 0: 0
+update 0 option=0                       # option 0: the update
+finish                                  # status 1
+rezone                                  # status 1, not from Upper Delkfutt's: nothing
+warp 0,0,0 UpperDelkfuttsTower          # its own 14 (Zone.lua)
+warp -520,-4,17 StellarFulcrum open  # status 1, from Upper: 7 (mission and Zone.lua alike)
+finish
+missionstatus Zilart 2                  # a GM (the fight's 32001 sets it: battlefield.return_to_delkfutts_tower)
+rezone open                             # status 2: 17
+finish                                  # completed
+rezone                                  # not current: the zone's own 7 (Zone.lua)

@@ -1,0 +1,89 @@
+# the Full Moon Fountain's Moon Reading (battlefield 225, Windurst 9-2's) with a helper: eve (9-2 completed) in the
+# leader's party; 32004 to both, the leader's finish spawns phase 2, eve's finds it up; WON plays 32001 to both; the
+# leader's finish is the mission's (status 3).
+char zone=FullMoonFountain pos=-301.3,9.5,-260.0 job=WAR lvl=75 nation=2
+char eve zone=FullMoonFountain pos=-301.3,9.5,-260.0 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+mission Windurst TheJesterWhodBeKing completed
+mission Windurst DollOfTheDead completed
+rank 9
+mission Windurst MoonReading current
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Windurst TheHorutotoRuinsExperiment completed
+eve: mission Windurst TheHeartOfTheMatter completed
+eve: mission Windurst ThePriceOfPeace completed
+eve: mission Windurst LostForWords completed
+eve: mission Windurst ATestingTime completed
+eve: mission Windurst TheThreeKingdoms completed
+eve: mission Windurst ToEachHisOwnRight completed
+eve: mission Windurst WrittenInTheStars completed
+eve: mission Windurst ANewJourney completed
+eve: mission Windurst Magicite completed
+eve: mission Windurst TheFinalSeal completed
+eve: mission Windurst TheShadowAwaits completed
+eve: mission Windurst FullMoonFountain completed
+eve: mission Windurst SaintlyInvitation completed
+eve: mission Windurst TheSixthMinistry completed
+eve: mission Windurst AwakeningOfTheGods completed
+eve: mission Windurst Vain completed
+eve: mission Windurst TheJesterWhodBeKing completed
+eve: mission Windurst DollOfTheDead completed
+eve: rank 10
+eve: mission Windurst MoonReading completed
+login
+missionstatus Windurst 2
+eve: login
+invite eve
+eve: accept
+trigger MS_Entrance                     # the leader: the 32000 menu
+update 32000 option=17                  # area 1: registered, entered
+finish
+eve: trigger MS_Entrance                # eve (completed): the menu
+eve: update 32000 option=17
+eve: finish
+tick 2000
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill ACE_OF_CUPS
+kill ACE_OF_CUPS+1
+kill ACE_OF_CUPS+2
+kill ACE_OF_CUPS+3                      # allDeath: 32004 to both
+finish                                  # the leader's 32004: phase 2 spawned
+eve: finish                             # eve's 32004: phase 2 up: nothing
+tick 2000
+kill ACE_OF_CUPS+4
+kill ACE_OF_CUPS+5                      # WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish-if-event                         # 32001, the leader: the mission's finish: status 3, the verses taken
+eve: finish-if-event                    # 32001, eve (completed): nothing from the mission
+tick 11000
+tick 10000

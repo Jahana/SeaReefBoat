@@ -1,0 +1,93 @@
+# Lost for Words (Windurst 2-1, mission.windurst.lost_for_words). A level 10 Warrior of Windurst who has completed
+# 1-1, 1-2 and 1-3 (a GM). Section 1 (no mission current): Janshura-Rashura of Port Windurst plays 78; its finish with
+# option 0 and 1 does nothing, with option 3 begins the mission. Section 2 (2-1 current): Janshura-Rashura, Nine of
+# Clubs, Puo Rhen and Ten of Clubs play 120, 121, 123 and 122. Status 1 (Windurst Waters): Tosuka-Porika plays
+# progress event 160, whose finish sets status 2. Status 2: Tosuka-Porika plays 161; Nanaa Mihgo of Windurst Woods
+# plays 165, whose finish with option 1 gives the Lapis Monocle, picks the rock and sets status 3. Status 3: Bopa
+# Greso and Cha Lebagta play 167 and 168; Nanaa Mihgo plays 80, the event of Mihgo's Amigo, which wins over the
+# mission's 166. Maze of Shakhrami: the right fossil rock (a GM sets it) gives the Lapis Coral (status 4), and says it
+# needs no more investigation. Status 4: Nanaa Mihgo plays 169, whose finish takes both key items, gives the Hideout
+# Key and sets status 5. Status 5: Bopa Greso, Cha Lebagta and Nanaa Mihgo play 171, 172 and 170; the door of Inner
+# Horutoto Ruins plays cutscene 46, whose finish takes the Hideout Key and sets status 6. Status 6: Bopa Greso, Cha
+# Lebagta and Nanaa Mihgo play 174, 175 and 173; the door of the House of the Hero plays 337, whose finish sets status
+# 7. Status 7: Tosuka-Porika plays 168, whose finish completes the mission (300 rank points). Completed (no mission, A
+# Testing Time not completed): Tosuka-Porika plays 169; Nine of Clubs, Puo Rhen and Ten of Clubs play 74, 81 and 80.
+# Rival zone-ins, other missions' scripts: entering Windurst Woods plays Seekers of Adventure's Rumors from the West,
+# 839, whose finish writes that mission's status 4 (area 12); entering Windurst Walls plays A Shantotto Ascension's 510,
+# then 514, whose finish completes that mission (area 11), before the door's 337.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/Nine_of_Clubs/onTrigger PortWindurst/Puo_Rhen/onTrigger PortWindurst/Ten_of_Clubs/onTrigger PortWindurst/onEventFinish/78 WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/onEventFinish/160 WindurstWaters/onEventFinish/168 WindurstWoods/Nanaa_Mihgo/onTrigger WindurstWoods/Bopa_Greso/onTrigger WindurstWoods/Cha_Lebagta/onTrigger WindurstWoods/onEventFinish/165 WindurstWoods/onEventFinish/169 MazeOfShakhrami/Fossil_Rock/onTrigger InnerHorutotoRuins/_5ca/onTrigger InnerHorutotoRuins/onEventFinish/46 WindurstWalls/_6n2/onTrigger WindurstWalls/onEventFinish/337
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+login
+mission Windurst TheHorutotoRuinsExperiment current
+mission Windurst TheHorutotoRuinsExperiment completed   # a GM: 1-1 done
+mission Windurst TheHeartOfTheMatter current
+mission Windurst TheHeartOfTheMatter completed          # a GM: 1-2 done
+mission Windurst ThePriceOfPeace current
+mission Windurst ThePriceOfPeace completed              # a GM: 1-3 done
+trigger Janshura-Rashura                # section 1: 78
+finish option=0                         # not 3: nothing
+trigger Janshura-Rashura                # 78 again
+finish option=1                         # not 3: nothing
+trigger Janshura-Rashura                # 78 again
+finish option=3                         # begun (status 1, YOU_ACCEPT_THE_MISSION)
+trigger Janshura-Rashura                # section 2: 120
+finish
+trigger Nine_of_Clubs                   # 121
+finish
+trigger Puo_Rhen                        # 123
+finish
+trigger Ten_of_Clubs                    # 122
+finish
+warp -28,-5,104 WindurstWaters
+trigger Tosuka-Porika                   # status 1: 160
+finish                                  # status 2
+trigger Tosuka-Porika                   # status 2: 161
+finish
+warp 65,-4,239 WindurstWoods
+trigger Nanaa_Mihgo+99                  # 165
+finish option=1                         # the Lapis Monocle, a rock picked, status 3
+charvar Mission[2][3]Rock 5             # a GM: the fifth rock is the one
+trigger Bopa_Greso                      # status 3: 167
+finish
+trigger Cha_Lebagta                     # 168
+finish
+trigger Nanaa_Mihgo+99                  # 80, Mihgo's Amigo, not 166
+finish
+warp 17,18,184 MazeOfShakhrami
+trigger Fossil_Rock+5                   # the right rock: the Lapis Coral, status 4
+trigger Fossil_Rock+5                   # status 4: NO_NEED_INVESTIGATE
+warp 65,-4,239 WindurstWoods
+trigger Nanaa_Mihgo+99                  # status 4: 169
+finish                                  # both key items taken, the Hideout Key, status 5
+trigger Bopa_Greso                      # status 5: 171
+finish
+trigger Cha_Lebagta                     # 172
+finish
+trigger Nanaa_Mihgo+99                  # 170
+finish
+warp -15,-2,22 InnerHorutotoRuins
+trigger _5ca                            # cutscene 46
+finish                                  # the Hideout Key taken, status 6
+warp 65,-4,239 WindurstWoods
+trigger Bopa_Greso                      # status 6: 174
+finish
+trigger Cha_Lebagta                     # 175
+finish
+trigger Nanaa_Mihgo+99                  # 173
+finish
+warp -26,-13,260 WindurstWalls
+trigger _6n2                            # TEXT 7998 (DOOR_UNLOCKED), then 337
+finish                                  # status 7
+warp -28,-5,104 WindurstWaters
+trigger Tosuka-Porika                   # status 7: 168
+finish                                  # completed (300 rank points)
+trigger Tosuka-Porika                   # completed: 169
+finish
+warp -227,-8,182 PortWindurst
+trigger Nine_of_Clubs                   # completed: 74
+finish
+trigger Puo_Rhen                        # 81
+finish
+trigger Ten_of_Clubs                    # 80
+finish

@@ -1,0 +1,32 @@
+# Path of Blood (ToAU 37) with the RoV era module: the 3220 finish sets the Timer to JST midnight (1, expiring then),
+# with the same local mustZone var. Stirrings of War current: the first two walks come right after the finish, before
+# any zone tick, and enter no area (the Timer arm is in #era_timer_tick, with a tick first); after a JST day on, the
+# area 5 plays 3136. The zone-in list is not compared: the Lua modifyInteractionEntry leaves a function-valued
+# onZoneIn behind (its remove only finds table handlers), so the patched mission is in that list twice; the C#
+# registers it once, and both play the same 3220.
+module modules/era/lua/missions/mission_adjustments.lua
+lists AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventUpdate/3131 AhtUrhganWhitegate/onEventFinish/3131 AhtUrhganWhitegate/onEventFinish/3220 AhtUrhganWhitegate/onTriggerAreaEnter/5 AhtUrhganWhitegate/onEventFinish/3136
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PathOfBlood current
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+login
+tick 1000
+tick 1000
+tick 1000
+walk 34.7,-6.6,-54.1                  # area 3: 3131
+update 3131 option=0
+finish                                  # Status 1, the forced zone
+tick 1000
+login open
+finish                                  # 3220: completed, the Timer 1
+walk 80,-6,-140
+walk 80,-6,-130                         # the Timer holds: nothing
+walk 80,-6,-140
+wait jst=1                              # the Timer expired
+walk 80,-6,-130                         # 3136
+finish

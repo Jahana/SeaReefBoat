@@ -57,18 +57,37 @@ namespace XI.Quests.Authoring
                         yield return $"{(h.Entity != null ? $"{h.Entity} {h.Kind}" : $"{h.Kind} {h.Id}")}: {reply}";
         }
 
+        // the reward's shapes: item and keyItem are each one Lua field, and npcUtil.completeMission passes itemParams
+        // to npcUtil.giveItem only with an item (npc_util.lua:760-764)
+        static IEnumerable<string> MissionRewardProblems(MissionReward r)
+        {
+            if (r.Item != null && r.Items != null) yield return "reward: Item and Items are one Lua field (reward.item)";
+            if (r.KeyItem != null && r.KeyItems != null)
+                yield return "reward: KeyItem and KeyItems are one Lua field (reward.keyItem)";
+            if (r.Items is { Length: 0 }) yield return "reward: an empty Items";
+            if (r.KeyItems is { Length: 0 }) yield return "reward: an empty KeyItems";
+            foreach (var item in r.Items ?? System.Array.Empty<MissionRewardItem>())
+                if (item.Quantity < 1) yield return $"reward: item {item.Id} has a quantity below 1";
+            if (r.ItemParams != null && r.Item == null && r.Items == null)
+                yield return "reward.itemParams with no item: npcUtil.completeMission passes them to " +
+                             "npcUtil.giveItem only with reward.item";
+        }
+
         // a mission's problems (quest rework C2), in declaration order; empty when it is clean. The shared rules
-        // (HandlerProblems), without the quest-only ones (the steps and the reward's itemParams: a mission has
-        // neither), then the mission's own: every state is a mission state (b.State(current, status, when); a quest
-        // match chained onto one, or a quest state chained from one, is refused). A mission with Called() handlers
-        // (xi.cs.mission, missionEvent and missionZoneIn) then has the NPC-call quests' rules (CallProblems)
+        // (HandlerProblems), without the quest-only ones (the steps and the quest reward's itemParams), then the
+        // mission reward's rules (MissionRewardProblems), then the mission's own: every state is a mission state
+        // (b.State(current, status, when); a quest match chained onto one, or a quest state chained from one, is
+        // refused). A mission with Called() handlers (xi.cs.mission, missionEvent and missionZoneIn) then has the
+        // NPC-call quests' rules (CallProblems). Its callbacks and exports have the quests' rules (CallbackProblems)
         public static IReadOnlyList<string> Validate(MissionScriptDefinition def)
         {
             var problems = new List<string>(HandlerProblems(def.Core));
+            if (def.Reward != null) problems.AddRange(MissionRewardProblems(def.Reward));
             for (int i = 0; i < def.States.Count; i++)
                 if (def.States[i].Matches.Count > 0)
                     problems.Add($"state {i + 1} has a quest match: " +
                                  "a mission's states are b.State(current, status, when)");
+            problems.AddRange(CallbackProblems(def.Core));
             if (def.Core.HasCalled) problems.AddRange(CallProblems(def.Core));
             return problems;
         }

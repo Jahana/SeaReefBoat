@@ -1,0 +1,59 @@
+# Vain (Windurst 8-1, mission.windurst.vain), the Gustaberg zone-ins (North and South Gustaberg, Pashhow, Rolanberry).
+# Status 1 (a GM): each zone-in plays its event, left open; its update sends the sky (0, 0, 0, 0, 0, n) the position or
+# the zone before picks, or nothing; the finish closes it. A warp to 0,0,0 is 1,0,1 (a zone's onZoneIn sets a char at
+# 0,0,0 down at its own spot); a warp inside a zone keeps the zone before it.
+char zone=WindurstWaters pos=-55,-8,229 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+rank 8
+mission Windurst Vain current
+login
+missionstatus Windurst 1
+warp 0,0,500 NorthGustaberg open        # status 1: 246
+update 246 option=0                     # z 500: 6
+finish
+warp 1,0,1 NorthGustaberg open          # status 1: 246
+update 246 option=0                     # x 1 (above -240): 7
+finish
+warp -300,0,0 NorthGustaberg open       # status 1: 246
+update 246 option=0                     # x -300: nothing
+finish
+warp 1,0,1 SouthGustaberg open          # status 1: 37
+update 37 option=0                      # x 1, z 1: 6
+finish
+warp 0,0,-400 SouthGustaberg open       # status 1: 37
+update 37 option=0                      # x 0, z -400: 7
+finish
+warp -400,0,0 SouthGustaberg open       # status 1: 37
+update 37 option=0                      # x -400: nothing
+finish
+warp 300,0,0 PashhowMarshlands open     # status 1: 15
+update 15 option=0                      # x 300: 2
+finish
+warp 400,0,0 PashhowMarshlands open     # status 1: 15
+update 15 option=0                      # x 400: nothing
+finish
+warp 1,0,1 RolanberryFields open        # status 1: 4
+update 4 option=0                       # z 1: 1
+finish
+warp 0,0,100 RolanberryFields open      # status 1: 4
+update 4 option=0                       # z 100: 2
+finish

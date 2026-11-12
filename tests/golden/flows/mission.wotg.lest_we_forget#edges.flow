@@ -1,0 +1,19 @@
+# Lest We Forget (WotG 54) at Status 0 with the Moonshade Earring held: afterZoneIn sets nothing, and the qm_reset
+# answers with Grauberg [S]'s DefaultActions AIR_WARPED_AND_DISTORTED (8413). With the local var Option 1 and the
+# mustZone (89) set by a GM: 8413 again.
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/qm_reset/onTrigger GraubergS/afterZoneIn/1 GraubergS/onEventUpdate/39 GraubergS/onEventFinish/39 GraubergS/onEventFinish/46
+char zone=GraubergS pos=-140.28,-6.749,585.24 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg LestWeForget current
+item MoonshadeEarring
+login
+tick 5000                                  # the earring held, Status 0: nothing
+trigger qm_reset                           # Option 0: nothing
+finish-if-event
+localvar Mission[5][53]Option 1
+charvar Mission[5][53]mustZone 89
+trigger qm_reset                           # Option 1, mustZone: nothing
+finish-if-event

@@ -87,8 +87,10 @@ internal static partial class Program
         folders.Missions = LuaMissionFolders(root, out string missionProblems);
         Check("legacy:each mission log's files lie in one folder of scripts/missions, one log to a folder", "",
               missionProblems);
+        // (ToAU, Zilart, CoP, WoTG and the three nations have none: their last mission files went with C3 T4, C6, C4,
+        // T8 and N5/N6. The ToAU, Zilart and nation folders are gone; CoP's and WoTG's keep only helpers.lua, which
+        // makes no Mission:new: see PortedLogFolders)
         Check("legacy:the mission logs' folders (those with files)",
-              "Sandoria sandoria, Bastok bastok, Windurst windurst, Zilart rotz, ToAU toau, WoTG wotg, CoP cop, " +
               "ACP acp, AMK amk, ASA asa, SoA soa, RoV rov, TVR tvr",
               string.Join(", ", folders.Missions.OrderBy(e => e.Key).Select(e => $"{e.Key} {e.Value}")));
         folders.Battlefields = LuaBattlefieldFolders(root);
@@ -149,18 +151,18 @@ internal static partial class Program
         };
         Check("legacy:  a mission and a battlefield at their own Lua files pass", "",
               LegacyPathFolderProblems(tests, folders));
-        var riteTexts = LuaQuestTexts(root, tests.Select(t => t.Item2 + ".lua"), out _);
+        var testTexts = LuaQuestTexts(root, tests.Select(t => t.Item2 + ".lua"), out _);
         Check("legacy:  ... their files name their constants", "",
-              LegacyPathConstantProblems(tests.Where(t => riteTexts.ContainsKey(t.Item2 + ".lua"))
-                  .Select(t => (t.Item1, (string)null, ConstNameOf(t.Item3), riteTexts[t.Item2 + ".lua"]))) +
-              (riteTexts.Count == 2 ? "" : "a file not read"));
+              LegacyPathConstantProblems(tests.Where(t => testTexts.ContainsKey(t.Item2 + ".lua"))
+                  .Select(t => (t.Item1, (string)null, ConstNameOf(t.Item3), testTexts[t.Item2 + ".lua"]))) +
+              (testTexts.Count == 2 ? "" : "a file not read"));
         string asQuest = "scripts/quests/cop/1_2_Below_the_Arks";
         string otherLog = "scripts/missions/rotz/1_2_Below_the_Arks";
         string otherZone = "scripts/battlefields/Waughroon_Shrine/eye_of_the_storm";
         Check("legacy:  a mission LegacyPath under scripts/quests, in another log's folder, a battlefield's in " +
               "another zone's folder: refused",
-              $"LegacyTestMission: {asQuest} is not under scripts/missions/cop/ ; " +
-              $"LegacyTestMission: {otherLog} is not under scripts/missions/cop/ ; " +
+              $"LegacyTestMission: {asQuest} is not under scripts/missions/tvr/ ; " +
+              $"LegacyTestMission: {otherLog} is not under scripts/missions/tvr/ ; " +
               $"LegacyTestBattlefield: {otherZone} is not under scripts/battlefields/Chamber_of_Oracles/",
               LegacyPathFolderProblems(new (string, string, ContainerScript)[]
               {
@@ -177,12 +179,12 @@ internal static partial class Program
               folders.Battlefields.TryGetValue("battlefield.ouryu_cometh", out var riverne) ? riverne : "(none)");
     }
 
-    // CoP 1-2 at its Lua file, for the gate's own checks (never in XI.QuestContent; CoP 1-1's file is gone since
-    // quest rework C2 Task 7, which put CoP 1-1 in C#)
+    // Voracious Resurgence 10-1 at its Lua file, for the gate's own checks (never in XI.QuestContent; no C3 lane ports
+    // the TVR log; CoP 1-2's file is gone since quest rework C3 C1, as CoP 1-1's is since C2 Task 7)
     sealed class LegacyTestMission : MissionScript
     {
-        public LegacyTestMission() : base(MissionLog.CoP, "BELOW_THE_ARKS") { }
-        public override string LegacyPath => "scripts/missions/cop/1_2_Below_the_Arks";
+        public LegacyTestMission() : base(MissionLog.TVR, "TO_MOVALPOLOS") { }
+        public override string LegacyPath => "scripts/missions/tvr/10_1_To_Movalpolos";
         protected override void Build(MissionScriptBuilder b) { }
     }
 
@@ -223,6 +225,19 @@ internal static partial class Program
             .OrderBy(g => g.Key, StringComparer.Ordinal)
             .Select(g => $"{string.Join(", ", g.Select(q => q.Type))}: {g.Key}"));
 
+    // the mission logs whose every Lua file is ported (C3 T4 ToAU, C4 CoP, C6 Zilart, T8 WoTG, N5/N6 the three
+    // nations), so no Mission:new names their folder: each one's LegacyPaths must lie in the folder it had, named here
+    static readonly Dictionary<MissionLog, string> PortedLogFolders = new()
+    {
+        [MissionLog.ToAU] = "scripts/missions/toau/",
+        [MissionLog.CoP] = "scripts/missions/cop/",
+        [MissionLog.Zilart] = "scripts/missions/rotz/",
+        [MissionLog.WoTG] = "scripts/missions/wotg/",
+        [MissionLog.Sandoria] = "scripts/missions/sandoria/",
+        [MissionLog.Bastok] = "scripts/missions/bastok/",
+        [MissionLog.Windurst] = "scripts/missions/windurst/",
+    };
+
     // the folder the container's LegacyPath must lie in ("scripts/<kind>/<folder>/"), by its kind; null with why when
     // there is none
     static string LegacyFolder(ContainerScript c, LegacyFolders folders, out string none)
@@ -236,6 +251,12 @@ internal static partial class Program
                 return null;
             case MissionScript m:
                 if (folders.Missions.TryGetValue(m.Log, out var log)) return "scripts/missions/" + log + "/";
+                // a log with no Lua file left (every one ported) has no folder to read: its LegacyPaths stand for it
+                // (ToAU since C3 T4; CoP since C4 and WoTG since T8, whose folders keep only helpers.lua, no
+                // Mission:new; Zilart since C6; the three nations since N5/N6)
+                if (PortedLogFolders.TryGetValue(m.Log, out var gone) && m.LegacyPath != null
+                    && m.LegacyPath.StartsWith(gone, StringComparison.Ordinal))
+                    return gone;
                 none = $"no folder of scripts/missions for mission log {m.Log}";
                 return null;
             default:

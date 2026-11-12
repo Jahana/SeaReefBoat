@@ -1,0 +1,27 @@
+# Westerly Winds' 3027 finish with a full bag (fill-inventory): nothing is given, status stays 0 (still 3027 on the
+# area); room again: the note, the piece, the title, status 1. 3028 finished at once on a completion that fails (a
+# full bag at the Silver Piece reward: the mission stays current, the note stays).
+lists AhtUrhganWhitegate/onTriggerAreaEnter/5 AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3027 AhtUrhganWhitegate/onEventFinish/3028
+char zone=AhtUrhganWhitegate pos=80,-6,-140 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau WesterlyWinds current
+login
+tick 1000
+tick 1000
+tick 1000
+fill-inventory                          # a GM
+walk 80,-6,-130                         # area 5: 3027
+finish                                  # no room: nothing, status 0
+free-inventory                          # a GM
+walk 80,-6,-140
+walk 80,-6,-130                         # 3027 again
+finish                                  # given, status 1
+fill-inventory                          # a GM: a full bag
+trigger Naja_Salaheem                   # 3028
+finish                                  # the completion fails for the full bag
+free-inventory
+trigger Naja_Salaheem                   # 3028
+finish                                  # completed

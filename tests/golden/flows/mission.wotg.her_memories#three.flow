@@ -1,0 +1,20 @@
+# Her Memories (WotG 41), which has no handler, with Large Memory Fragments 1 and 3 only (GMs): the quest's run as in
+# the main flow; its finish gives Large Memory Fragment 2, and with three fragments checkMemoryFragments does nothing:
+# Her Memories stays current.
+lists SouthernSanDoria/Amaura/onTrigger SouthernSanDoria/onEventFinish/955 SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/onEventFinish/169
+char zone=SouthernSanDoria pos=-82.867,-6.949,91.148 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg HerMemories current
+keyitem LargeMemoryFragment1
+keyitem LargeMemoryFragment3
+login
+trigger Amaura                             # 955
+finish                                     # Of Malign Maladies begun
+charvar Quest[7][72]Prog 3                 # a GM
+keyitem FeyStone                           # a GM
+warp 5.479,-1.999,44.456 SouthernSanDoriaS
+trigger Raustigne                          # 169
+finish                                     # the quest completed, three fragments: Her Memories stays current

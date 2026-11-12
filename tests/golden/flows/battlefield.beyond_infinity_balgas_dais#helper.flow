@@ -1,0 +1,51 @@
+# Beyond Infinity, Balga's Dais (battlefield.beyond_infinity_balgas_dais): main registers and invites bob (accepted,
+# clasp), cat (accepted, no clasp), dan (completed, no clasp) and eve (available, no clasp). Only the registrant
+# needs the clasp: bob, cat and dan enter, eve gets no options. Atori-Tutori killed: the win for the party, each
+# finish.
+lists BalgasDais/BC_Entrance/onTrigger BalgasDais/onEventUpdate/32000 BalgasDais/onEventFinish/32000 BalgasDais/onEventFinish/32001
+char zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75
+char bob zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75
+char cat zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75
+char dan zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75
+char eve zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75
+quest Jeuno.BeyondInfinity accepted
+keyitem SoulGemClasp
+bob: quest Jeuno.BeyondInfinity accepted
+bob: keyitem SoulGemClasp
+cat: quest Jeuno.BeyondInfinity accepted
+dan: quest Jeuno.BeyondInfinity completed
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+trigger BC_Entrance
+update 32000 option=321
+finish
+bob: trigger BC_Entrance
+bob: update 32000 option=321
+bob: finish
+cat: trigger BC_Entrance
+cat: update 32000 option=321
+cat: finish
+dan: trigger BC_Entrance
+dan: update 32000 option=321
+dan: finish
+eve: trigger BC_Entrance
+eve: update 32000 option=321
+eve: finish
+kill ATORI_TUTORI
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

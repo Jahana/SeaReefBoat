@@ -1,0 +1,80 @@
+# Saintly Invitation (Windurst 6-2, mission.windurst.saintly_invitation) played through: a level 75 Windurstian at
+# rank 6, ASA, ACP, RoV and SoA current (their content quiet) and the nation's missions before it completed.
+# Zokima-Rokima's own 93, option 17: begun, YOU_ACCEPT_THE_MISSION; current: the mission's 356. Heaven's Tower
+# (Kupipi+1 is the Kupipi a client sees; the first is cutscene-only): Kupipi 300, Rhy Epocan 302, Ufu Koromoa 303
+# (each an Event); _6q2 310: status 1, the title, the Holy One's Invitation (KEYITEM_OBTAINED). Kupipi at status 1:
+# her script's 251 (her last reply was the mission's Event-priority 300, so the turn goes to her script); Rhy Epocan
+# 307; Ufu Koromoa 308; _6q2 at status 1: nothing from the mission, the default VESTAL_CHAMBERS_LOCKED (310). Balga's
+# Dais (the battlefield saintly_invitation, index 3): area 1 entered; the four killed: allDeath, WON, 32001; its
+# finish runs the battlefield's and the mission's: the title, the Balga Champion Certificate (KEYITEM_OBTAINED), the
+# invitation taken, status 2. Castle Oztroja: Kaa Toru the Just 45 (param the oath): the Ashura Necklace, the Holy
+# One's Oath, the certificate taken, status 3; then 46. Heaven's Tower: Kupipi 333 (the mission's turn again), Rhy
+# Epocan 302, Ufu Koromoa 308; _6q2 312: completed, 40000 gil, rank 7, the oath taken.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWalls/Zokima-Rokima/onTrigger WindurstWalls/onEventFinish/93 WindurstWaters/Mokyokyo/onTrigger WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/onEventFinish/114 HeavensTower/_6q2/onTrigger HeavensTower/Kupipi/onTrigger HeavensTower/Rhy_Epocan/onTrigger HeavensTower/Ufu_Koromoa/onTrigger HeavensTower/onEventFinish/310 HeavensTower/onEventFinish/312 BalgasDais/BC_Entrance/onTrigger BalgasDais/onEventUpdate/32000 BalgasDais/onEventFinish/32000 BalgasDais/onEventFinish/32001 CastleOztroja/Kaa_Toru_the_Just/onTrigger CastleOztroja/onEventFinish/45
+char zone=WindurstWalls pos=0,-16,126 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+rank 6
+login
+trigger Zokima-Rokima                   # his own 93
+finish option=17                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Zokima-Rokima                   # current: 356
+finish
+warp 2,0.1,30 HeavensTower
+trigger Kupipi+1                        # status 0: 300
+finish
+trigger Rhy_Epocan                      # status 0: 302
+finish
+trigger Ufu_Koromoa                     # status 0: 303
+finish
+trigger _6q2                            # status 0: 310
+finish                                  # status 1, the title, the invitation
+trigger Kupipi+1                        # status 1: her script's 251 (the mission's 311 loses)
+finish
+trigger Rhy_Epocan                      # status 1: 307
+finish
+trigger Ufu_Koromoa                     # status 1: 308
+finish
+trigger _6q2                            # status 1: nothing from the mission
+finish-if-event
+warp 300.4,-124.1,341.3 BalgasDais
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=49                  # index 3, area 1: entered
+finish
+tick 2000                               # the group spawns
+kill BUU_XOLO_THE_BLOODFACED
+kill BUU_XOLO_THE_BLOODFACED+1
+kill BUU_XOLO_THE_BLOODFACED+2
+kill BUU_XOLO_THE_BLOODFACED+3          # allDeath: WON, 32001
+finish                                  # 32001: the mission's finish
+tick 11000
+tick 10000
+warp -98,-62,145 CastleOztroja
+trigger Kaa_Toru_the_Just               # status 2: 45
+finish                                  # the Ashura Necklace, the oath, the certificate taken, status 3
+trigger Kaa_Toru_the_Just               # status 3: 46
+finish
+warp 2,0.1,30 HeavensTower
+trigger Kupipi+1                        # status 3: 333
+finish
+trigger Rhy_Epocan                      # status 3: 302
+finish
+trigger Ufu_Koromoa                     # status 3: 308
+finish
+trigger _6q2                            # status 3: 312
+finish                                  # completed: 40000 gil, rank 7, the oath taken

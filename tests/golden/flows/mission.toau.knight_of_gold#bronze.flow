@@ -1,0 +1,21 @@
+# Knight of Gold, the trade of one Imperial Bronze Piece at status 2 (a GM): 3022, finished: the piece taken, status 3.
+# A trade at status 1 (a GM): nothing (status 2 only). Cacaroon at status 1 (a GM) 3035; Nadeey at status 2: nothing.
+lists AhtUrhganWhitegate/Cacaroon/onTrade AhtUrhganWhitegate/onEventFinish/3022
+char zone=AhtUrhganWhitegate pos=-60,0,-80 job=WAR lvl=75 nation=1 gil=5000
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau KnightOfGold current
+item ImperialBronzePiece x1
+login
+tick 1000
+tick 1000
+tick 1000
+missionstatus Toau 1
+trigger Cacaroon                        # status 1: 3035 (walks the char up to Cacaroon)
+finish option=0                         # status 1 again                    # a GM
+trade Cacaroon ImperialBronzePiece x1   # status 1: nothing
+missionstatus Toau 2                    # a GM
+trade Cacaroon ImperialBronzePiece x1   # 3022
+finish                                  # status 3

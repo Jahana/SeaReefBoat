@@ -1,0 +1,29 @@
+# Class Reunion (battlefield.class_reunion, CloisterOfFrost): the requirement arms of the registrant (BattlefieldQuest's
+# check: only the registrant needs the quest state and the item). Main, a level 75 Warrior with the quest accepted and
+# the pendulum but ClassReunionProgress 4: the trade to IP_Entrance: no options. bob, ClassReunionProgress 5 and the
+# pendulum, the quest only available: no options. cat, accepted and ClassReunionProgress 5 but no pendulum (no trade):
+# no options. dan, the quest completed, ClassReunionProgress 5 and the pendulum: a registrant needs accepted: no
+# options.
+lists CloisterOfFrost/IP_Entrance/onTrade CloisterOfFrost/IP_Entrance/onTrigger
+char zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+char bob zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+char cat zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+char dan zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+quest Windurst.ClassReunion accepted
+charvar ClassReunionProgress 4
+item IcePendulum
+bob: charvar ClassReunionProgress 5
+bob: item IcePendulum
+cat: quest Windurst.ClassReunion accepted
+cat: charvar ClassReunionProgress 5
+dan: quest Windurst.ClassReunion completed
+dan: charvar ClassReunionProgress 5
+dan: item IcePendulum
+login
+trade IP_Entrance IcePendulum x1      # ClassReunionProgress 4: no options
+bob: login
+bob: trade IP_Entrance IcePendulum x1 # available: no options
+cat: login
+cat: trigger IP_Entrance               # no pendulum traded: no options
+dan: login
+dan: trade IP_Entrance IcePendulum x1 # completed: no options

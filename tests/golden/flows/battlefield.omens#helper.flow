@@ -1,0 +1,55 @@
+# Omens (battlefield.omens#helper, Navukgo Execution Chamber): Four players enter area 1: main (accepted, Prog 0), bob
+# (completed), cat (accepted, Prog 1) and dan (accepted, Prog 2); eve (no quest) is refused with 32767 (the entry NPC's
+# default, DefaultActions.lua). Only the registrant is held to Prog 0. An entry spawned IMMORTAL_FLAN+1 (first seen in
+# the kill step's updates; the fake check pins that it is the fourth): killing IMMORTAL_FLAN does not win, killing +1
+# gives the 32001 to all four (bob with the skip flag). The finish runs the quest's 32001 (Omens.cs): main's Prog 0 ->
+# 1.
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char bob zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char cat zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char dan zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char eve zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+quest AhtUrhgan.Omens accepted
+charvar Quest[6][22]Prog 0
+bob: quest AhtUrhgan.Omens completed
+cat: quest AhtUrhgan.Omens accepted
+cat: charvar Quest[6][22]Prog 1
+dan: quest AhtUrhgan.Omens accepted
+dan: charvar Quest[6][22]Prog 2
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+trigger _1s0
+update 32000 option=33
+finish
+bob: trigger _1s0
+bob: update 32000 option=33
+bob: finish
+cat: trigger _1s0
+cat: update 32000 option=33
+cat: finish
+dan: trigger _1s0
+dan: update 32000 option=33
+dan: finish
+eve: trigger _1s0
+eve: update 32000 option=33
+eve: finish
+kill IMMORTAL_FLAN
+kill IMMORTAL_FLAN+1
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

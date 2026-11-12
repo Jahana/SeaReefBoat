@@ -1,0 +1,44 @@
+# Return of the Talekeeper edges. qm2 at status 2 spawns both (7394); at status 1 both killed: their onMobDeath checks
+# status 2, so no nmDefeated, and qm2 at status 1 without it gives the default 7393; the var set by hand at status 1:
+# qm2 gives status 3 and the moonpebble (its check is the var alone). Drake Fang at status 0: nothing from the
+# mission, his default 108. Medicine Eagle at status 2: 181; Tall Mountain at status 2: his default 55.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 BastokMines/Medicine_Eagle/onTrigger BastokMines/Tall_Mountain/onTrigger BastokMines/onEventFinish/180 BastokMines/onEventFinish/182 ZeruhnMines/Drake_Fang/onTrigger ZeruhnMines/onEventFinish/200 WesternAltepaDesert/qm2/onTrigger
+char zone=WesternAltepaDesert pos=-323,0,-111 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper current
+rank 6
+login
+missionstatus Bastok 2
+trigger qm2                             # status 2: both spawned
+missionstatus Bastok 1
+kill EASTERN_SPHINX                     # status 1: nothing
+kill WESTERN_SPHINX                     # status 1: nothing
+trigger qm2                             # status 1, no var: nothing
+finish-if-event
+localvar Mission[1][16]nmDefeated 1
+trigger qm2                             # nmDefeated at status 1: status 3, the moonpebble
+warp -72,0,58 ZeruhnMines
+missionstatus Bastok 0
+trigger Drake_Fang                      # status 0: nothing
+finish-if-event
+warp -40,0,36 BastokMines
+missionstatus Bastok 2
+trigger Medicine_Eagle                  # status 2: 181
+finish
+trigger Tall_Mountain                   # status 2: nothing
+finish-if-event

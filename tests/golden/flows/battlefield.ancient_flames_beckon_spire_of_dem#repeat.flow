@@ -1,0 +1,28 @@
+# Ancient Flames Beckon, Spire of Dem, a repeat clear (checkSkipCutscene). main (Below the Arks current, a GM) leads bob,
+# who has passed The Mothercrystals (An Invitation West current) and holds the light of Dem: he is no registrant: the
+# non-registrant requirement (1-3 completed, or the light) holds. main registers (area 1), bob enters the existing
+# fight. The Progenerator killed: WON; main's win: newPromy 1, repeatClear 0 (no light yet), 32001; bob's: no newPromy
+# (the light held, not 1-2 or 1-3 current), repeatClear 1 (autoSkip: the light), arg8 over the other two lights: 1, 32001.
+# Both finished: main's mission handler (1-2 complete); bob's none.
+lists SpireOfDem/_0j0/onTrigger SpireOfDem/onEventUpdate/32000 SpireOfDem/onEventFinish/32000 SpireOfDem/onEventFinish/32001
+char zone=SpireOfDem pos=0,-3.8,240 job=WAR lvl=75 nation=0
+char bob zone=SpireOfDem pos=0,-3.8,240 job=WAR lvl=75
+mission Cop BelowTheArks current
+bob: mission Cop AnInvitationWest current
+bob: keyitem LightOfDem
+login
+bob: login
+invite bob
+bob: accept
+trigger _0j0                            # the menu 32000
+update 32000 option=1                   # area 1: registered, entered
+finish                                  # in the arena
+bob: trigger _0j0                       # the clearance: the menu (enterExisting)
+bob: update 32000 option=1              # area 1: entered
+bob: finish                             # in the arena
+tick 2000                               # the Progenerator spawns
+kill PROGENERATOR                       # allDeath: WON; the wins: 32001 to both
+finish                                  # main: the light of Dem, 1-2 complete
+bob: finish                             # bob: repeatClear 1, no handler
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

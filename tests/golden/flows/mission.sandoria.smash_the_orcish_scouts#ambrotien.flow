@@ -1,0 +1,24 @@
+# Smash the Orcish Scouts (San d'Oria 1-1): Ambrotien in Southern San d'Oria. A level 10 Warrior of San d'Oria holding
+# an Orcish Axe and no mission. Section 1: Ambrotien plays 2000; its finish with option 0 begins the mission (2000's own
+# registration). Section 3: Ambrotien plays ORIGINAL_MISSION_OFFSET; the Axe traded: 2020, whose finish completes it.
+# Completed: Ambrotien plays his script's 2009 and its finish with option 0 begins it again: the Axe traded: 2002,
+# whose finish completes it again. A Bat Fang traded: not tradeMatches: his script's 2008.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Ambrotien/onTrade SouthernSanDoria/onEventFinish/2000 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/2020 SouthernSanDoria/onEventFinish/2002
+char zone=SouthernSanDoria pos=93.4,0,-55.5 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+item OrcishAxe
+item BatFang
+login
+trigger Ambrotien                       # section 1: 2000
+finish option=0                         # begun, YOU_ACCEPT_THE_MISSION
+trigger Ambrotien                       # section 3: ORIGINAL_MISSION_OFFSET
+walk 92.4,0,-55.5
+trade Ambrotien BatFang x1              # not the Axe: no match: his default trade event 2008
+finish                                  # 2008 closed
+trade Ambrotien OrcishAxe x1            # 2020
+finish                                  # completed; one axe taken
+trigger Ambrotien                       # section 2 (completed): his script's 2009
+finish option=0                         # begun again, YOU_ACCEPT_THE_MISSION
+item OrcishAxe
+trade Ambrotien OrcishAxe x1            # 2002
+finish                                  # completed again

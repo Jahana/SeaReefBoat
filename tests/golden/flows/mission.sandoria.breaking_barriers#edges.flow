@@ -1,0 +1,67 @@
+# Breaking Barriers (San d'Oria 9-1, mission.sandoria.breaking_barriers), the arms the play-through skips: qm3 at
+# status 0 and with one bird up (SOMEONE_HAS_BURIED); each bird alone (a GM spawn) dead at status 3 sets Prog 1, at 2
+# nothing; the Valley qm and qm5 at the other statuses; _6h4 with Titan missing; Halver at 2.
+char zone=BatalliaDowns pos=210,17,-613 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+mission Sandoria Lightbringer completed
+rank 9
+mission Sandoria BreakingBarriers current
+login
+trigger qm3                             # status 0: SOMEONE_HAS_BURIED
+missionstatus Sandoria 3
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+spawn SUPARNA                           # a GM: Suparna alone
+trigger qm3                             # status 3, Suparna up: SOMEONE_HAS_BURIED
+kill SUPARNA                            # no fledgling: Prog 1 (7738: spawn_casket's concealed chest)
+tick 30000
+tick 30000
+spawn SUPARNA_FLEDGLING                 # a GM: the fledgling alone
+trigger qm3                             # status 3, the fledgling up: SOMEONE_HAS_BURIED
+kill SUPARNA_FLEDGLING                  # Suparna dead: Prog 1
+tick 30000
+tick 30000
+missionstatus Sandoria 2
+spawn SUPARNA                           # a GM
+tick 2000
+kill SUPARNA                            # status 2: nothing
+tick 30000
+tick 30000
+spawn SUPARNA_FLEDGLING                 # a GM
+tick 2000
+kill SUPARNA_FLEDGLING                  # status 2: nothing
+warp 91,-3,-14 ValleyOfSorrows
+trigger qm_breaking_barriers            # status 2: SOMETHING_BURRIED
+warp 179,-33,84 Xarcabard               # Xarcabard's own zone-in 13: Dynamis_Status 1
+missionstatus Sandoria 1
+trigger qm5                             # status 1: SOMETHING_BURIED
+warp 0,0,0 ChateauDoraguille
+missionstatus Sandoria 4
+keyitem FigureOfLeviathan
+keyitem FigureOfGaruda
+trigger _6h4                            # status 4, no Titan: nothing from the mission
+finish-if-event
+missionstatus Sandoria 2
+trigger Halver                          # status 2: nothing from the mission
+finish-if-event

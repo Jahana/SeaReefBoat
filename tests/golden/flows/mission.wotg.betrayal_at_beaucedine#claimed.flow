@@ -1,0 +1,15 @@
+# Betrayal at Beaucedine (WotG 19), a claim on Count Halphas. Status 1 (a GM): the trigger spawns the mob (8601),
+# `claim` takes it, and the next trigger still answers UNUSUAL_PRESENCE (8603): the char is not engaged afterwards,
+# so the NOW_IS_NOT_THE_TIME arm is not reached by a flow (a fake check pins it).
+lists BeaucedineGlacierS/Regal_Pawprints_2/onTrigger BeaucedineGlacierS/Count_Halphas/onMobDeath BeaucedineGlacierS/onZoneIn/1 BeaucedineGlacierS/onEventFinish/15 BeaucedineGlacierS/onEventFinish/16 BeaucedineGlacierS/onEventFinish/30
+char zone=BeaucedineGlacierS pos=-15.066,-40.249,-217.276 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg BetrayalAtBeaucedine current
+login
+charvar Mission[5][18]Status 1
+trigger Regal_Pawprints_2                  # spawn
+claim #17334540
+trigger Regal_Pawprints_2                  # claimed, not engaged: UNUSUAL_PRESENCE

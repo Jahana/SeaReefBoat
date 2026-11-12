@@ -1,0 +1,41 @@
+# Storm's Crescendo (WotG 32), the whole run, in Xarcabard [S]. Rally Point: Green shows FEDERATION_COMPLETE (027
+# messageName 8274). Red at Status 0 plays nothing (a release only). Blue at Status 0 plays 19 [0, 23, 1756, 400,
+# 67108863, 659255957, 4905] (allegiance 0 first); its finish gives the Alchemical Signal Flare and sets Status 1. With
+# the flare Blue shows HELP_REPUBLIC_PREPARE (8275). The flare taken (a GM), Timer 0: Blue plays 26 [137, 23, 2964],
+# whose finish gives the flare again. The flare taken and Timer 1000000000 (GMs): Blue shows BASTOKAN_OFFICER_GONE
+# (8281). Status 2 (a GM, for the instance no flow runs): Blue plays nothing and shows nothing (Lua returns true); the
+# zone-in plays 20, whose finish sets Status 3. Blue then shows COMPLETED_TASKS (8276); Red plays 23 [137, 5], whose
+# finish sets Status 4; the next tick shows the set-down: the 00B zone-out and the char at -105.798 -25.522 -53.499 rot
+# 176. The login plays 39, left open; its finish completes the mission (Into the Beast's Maw current, Status and Timer
+# cleared).
+lists XarcabardS/Rally_Point_Green/onTrigger XarcabardS/Rally_Point_Blue/onTrigger XarcabardS/Rally_Point_Red/onTrigger XarcabardS/onZoneIn/1 XarcabardS/onEventFinish/19 XarcabardS/onEventFinish/20 XarcabardS/onEventFinish/23 XarcabardS/onEventFinish/26 XarcabardS/onEventFinish/39
+uncovered: 1/-/onEventFinish:10000 -- no flow statement starts 10000 here: its sender would be the Ghoyu's Reverie instance, which this tree does not have (the Lua's TODO; no script under scripts/zones/Ghoyus_Reverie starts an event), and the harness has no instance run; the finish (Status 2 and the set-down) is pinned by the fake check c3 T7 wotg 32 in tests/XI.Verify.Quests/C3ToauT7.cs
+char zone=XarcabardS pos=-106.071,-25.5,-50 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg StormsCrescendo current
+login
+trigger Rally_Point_Green                  # FEDERATION_COMPLETE
+trigger Rally_Point_Red                    # Status 0: not the mission's
+finish-if-event
+trigger Rally_Point_Blue                   # Status 0: 19
+finish                                     # the flare, Status 1
+trigger Rally_Point_Blue                   # the flare held: HELP_REPUBLIC_PREPARE
+delkeyitem AlchemicalSignalFlare
+trigger Rally_Point_Blue                   # no flare, Timer 0: 26
+finish                                     # the flare
+delkeyitem AlchemicalSignalFlare
+charvar Mission[5][31]Timer 1000000000     # a GM: no script sets it
+trigger Rally_Point_Blue                   # no flare, Timer ahead: BASTOKAN_OFFICER_GONE
+charvar Mission[5][31]Status 2             # a GM: the instance's clear
+trigger Rally_Point_Blue                   # Status 2: nothing
+rezone open                                # 20
+finish                                     # Status 3
+trigger Rally_Point_Blue                   # COMPLETED_TASKS
+trigger Rally_Point_Red                    # Status 3: 23
+finish                                     # Status 4, set down
+tick 400
+login open                                 # 39
+finish                                     # completed

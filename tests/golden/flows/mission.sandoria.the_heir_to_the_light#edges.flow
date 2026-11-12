@@ -1,0 +1,102 @@
+# The Heir to the Light (San d'Oria 9-2, mission.sandoria.the_heir_to_the_light), the arms the play-through skips:
+# Arnau 4 at status 0; the zone-ins at the other statuses; the court at status 1 (Lightbringer's section 4 answers
+# Aramaviont, Milchupain and Rahal) and at 4 (Curilla 19, Aramaviont 13, Halver 29, Milchupain 34, Rahal 39); _5a0 at
+# 3; 32001 at status 2 and with battlefieldWin 0 (a GM's bfwin, then a GM's status / local var inside the event):
+# nothing.
+char zone=NorthernSanDoria pos=-240,7,57.9 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+mission Sandoria Lightbringer completed
+mission Sandoria BreakingBarriers completed
+rank 9
+mission Sandoria TheHeirToTheLight current
+login
+missionstatus Sandoria 1
+missionstatus Sandoria 0                # a GM
+trigger Arnau                           # status 0: 4
+finish
+trigger _6fc                            # status 0: nothing from the mission
+finish-if-event
+missionstatus Sandoria 2
+warp 93.4,0,-55.3 SouthernSanDoria      # out
+warp -240,7,57.9 NorthernSanDoria       # status 2: no zone-in event
+missionstatus Sandoria 6
+charvar Mission[0][23]Papal 1
+trigger _6fc                            # status 6, Papal 1: nothing from the mission
+finish-if-event
+warp 0,0,0 ChateauDoraguille            # status 6: no zone-in event
+missionstatus Sandoria 1
+trigger Aramaviont                      # status 1: Lightbringer's section 4 (rank 9, no rank points)
+finish-if-event
+trigger Curilla                         # status 1: nothing from the mission
+finish-if-event
+trigger Halver                          # status 1: nothing from the mission
+finish-if-event
+trigger Milchupain                      # status 1: Lightbringer's section 4 (rank 9, no rank points)
+finish-if-event
+trigger Rahal                           # status 1: Lightbringer's section 4: 42
+finish-if-event
+trigger Nachou                          # status 1: nothing from the mission
+finish-if-event
+trigger Perfaumand                      # status 1: nothing from the mission
+finish-if-event
+trigger _6h1                            # status 1: nothing from the mission
+finish-if-event
+missionstatus Sandoria 4
+trigger Curilla                         # status 4: 19
+finish
+trigger Aramaviont                      # status 4: 13
+finish
+trigger Halver                          # status 4: 29
+finish
+trigger Milchupain                      # status 4: 34
+finish
+trigger Rahal                           # status 4: 39
+finish
+trigger Nachou                          # status 4: nothing from the mission
+finish-if-event
+missionstatus Sandoria 3
+warp -51.0,-16.0,38.0 Feiyin            # status 3: no zone-in event
+warp 1,0.1,-101 KingRanperresTomb
+trigger _5a0                            # status 3: nothing from the mission
+finish-if-event
+warp -212.2,-24.6,20.1 QubiaArena
+trigger BC_Entrance                     # status 3: the 32000 menu
+update 32000 option=65                  # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 516, 32001
+missionstatus Sandoria 2                # a GM, inside the event
+finish                                  # 32001 at status 2: the mission does nothing
+tick 11000
+tick 10000
+missionstatus Sandoria 3
+warp -212.2,-24.6,20.1 QubiaArena
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=65                  # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, 32001
+localvar battlefieldWin 0               # a GM, inside the event
+finish                                  # 32001 with battlefieldWin 0: the mission does nothing
+tick 11000
+tick 10000

@@ -1,0 +1,20 @@
+# Uninvited Guests (battlefield.uninvited_guests, Monarch Linn): enter area 1 (97), trigger the exit NPC
+# (SD_BCNM_Exit_1 and its siblings): event 32003, its update, finish option 4 leaves. Back at the entrance.
+lists MonarchLinn/SD_Entrance/onTrigger MonarchLinn/SD_BCNM_Exit_1/onTrigger MonarchLinn/SD_BCNM_Exit_2/onTrigger MonarchLinn/SD_BCNM_Exit_3/onTrigger MonarchLinn/onEventUpdate/32000 MonarchLinn/onEventFinish/32000 MonarchLinn/onEventUpdate/32003 MonarchLinn/onEventFinish/32003
+char zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+quest OtherAreas.UninvitedGuests accepted
+charvar Quest[4][81]Prog 1
+keyitem MonarchLinnPatrolPermit
+login
+trigger SD_Entrance
+update 32000 option=97
+finish
+trigger SD_BCNM_Exit_1
+update 32003 option=1
+finish option=0
+trigger SD_BCNM_Exit_2
+finish option=0
+trigger SD_BCNM_Exit_3
+finish option=4
+warp -37.6,-3.35,-540 MonarchLinn
+trigger SD_Entrance

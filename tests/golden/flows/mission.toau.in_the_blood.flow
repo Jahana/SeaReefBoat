@@ -1,0 +1,23 @@
+# In the Blood (ToAU 32). Naja's trigger plays 3113 (progress). Finished with a full bag (fill-inventory): the Imperial
+# Gold Piece cannot be given, the completion fails and nothing is set; room again: completed, the Timer set to the
+# next Vanadiel day (and a local var named mustZone, which the base Lua never reads: getMustZone reads a char var).
+# Naja's trigger again (Sentinels' Honor current): 3120, the Timer in the future.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3113
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau InTheBlood current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # 3113
+fill-inventory
+finish                                  # no room: the completion fails
+free-inventory
+trigger Naja_Salaheem                   # 3113
+finish                                  # completed, the Timer set
+trigger Naja_Salaheem                   # Sentinels' Honor: the Timer in the future
+finish-if-event

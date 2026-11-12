@@ -1,0 +1,24 @@
+# Path of Blood (ToAU 37). The Whitegate's trigger area 3: 3131 (progress); its update with option 0 answers with the
+# update event; finished: Status 1 and a move to 97.936 0 0.109 in the same zone (a zone change). The zone-in at
+# Status 1: 3220; finished: completed, the Timer set to the next Vanadiel day (and a local mustZone var the base Lua
+# never reads). Stirrings of War current: the two walks come right after the finish, before any zone tick, and enter
+# no area (the Timer arm of the area 5 is in #timer_tick, with a tick first).
+lists AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventUpdate/3131 AhtUrhganWhitegate/onEventFinish/3131 AhtUrhganWhitegate/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/3220 AhtUrhganWhitegate/onTriggerAreaEnter/5
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PathOfBlood current
+login
+tick 1000
+tick 1000
+tick 1000
+walk 34.7,-6.6,-54.1                  # area 3: 3131
+update 3131 option=0
+finish                                  # Status 1, the forced zone
+tick 1000
+login open
+finish                                  # 3220: completed
+walk 80,-6,-140
+walk 80,-6,-130                         # Stirrings of War, the Timer in the future: nothing

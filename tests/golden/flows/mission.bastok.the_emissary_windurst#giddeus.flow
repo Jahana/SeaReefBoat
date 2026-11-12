@@ -1,0 +1,25 @@
+# The Emissary Windurst at Giddeus, with an Aspir Knife and a Bronze Dagger in the bag. Uu Zhoumo at status 0: nothing
+# from the mission, the zone default 44. A Bronze Dagger trade plays nothing. Status 4: 40, whose finish moves to
+# status 5; status 5: 43; a Dull Sword is given, and the Aspir Knife trade plays 41, whose finish takes the knife and
+# the Dull Sword and moves to status 6; at status 6 the mission's arm for 6 and up plays 44, the same event as the
+# zone default (replay cannot tell them apart; a fake check pins it).
+lists Giddeus/Uu_Zhoumo/onTrigger Giddeus/Uu_Zhoumo/onTrade Giddeus/onEventFinish/40 Giddeus/onEventFinish/41 HeavensTower/Kupipi/onTrigger HeavensTower/onZoneIn/1 HeavensTower/onEventUpdate/42 HeavensTower/onEventFinish/42 HeavensTower/onEventFinish/239 NorthernSanDoria/Helaku/onTrigger PortWindurst/Ada/onTrigger PortWindurst/Gold_Skull/onTrigger PortWindurst/Josef/onTrigger PortWindurst/Melek/onTrigger PortWindurst/onEventFinish/53 PortWindurst/onEventFinish/55
+char zone=Giddeus pos=-179,16,155 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheEmissaryWindurst current
+item AspirKnife
+item BronzeDagger
+login
+trigger Uu_Zhoumo
+finish-if-event
+trade Uu_Zhoumo BronzeDagger x1
+missionstatus Bastok 4
+trigger Uu_Zhoumo
+finish
+trigger Uu_Zhoumo
+finish-if-event
+keyitem DullSword
+trade Uu_Zhoumo AspirKnife x1
+finish
+trigger Uu_Zhoumo
+finish-if-event

@@ -1,0 +1,30 @@
+# Darkness Descends (WotG 37), the whole run, in the Throne Room [S]. The login at Status 0 plays the zone-in 8, left
+# open; the update with option 5 sends 05C [1, 23, 1756, 470, 470, 848]; the finish sets Status 1. A Bronze Cap,
+# Harness, Mittens, Sword and a Lauan Shield equipped; Status 2 (a GM, for the fight no battlefield file holds): the
+# zone-in plays 10; the update with option 5 sends 05C [156, 0, 15, 15, 15, 268, 37] (156, the face 0, then the head,
+# body, hands, main and sub models); the finish completes the mission (Adieu, Lilisette current).
+lists ThroneRoomS/onZoneIn/1 ThroneRoomS/onEventUpdate/8 ThroneRoomS/onEventUpdate/10 ThroneRoomS/onEventFinish/8 ThroneRoomS/onEventFinish/10
+uncovered: 1/-/onEventFinish:32001 -- no battlefield file holds xi.battlefield.id.DARKNESS_DESCENDS (353), so no fight in the Throne Room [S] opens 32001; the finish (Status 2 and the set-down) is pinned by the fake check c3 T7 wotg 37 in tests/XI.Verify.Quests/C3ToauT7.cs
+char zone=ThroneRoomS pos=19,0,-4.5 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg DarknessDescends current
+item BronzeCap
+item BronzeHarness
+item BronzeMittens
+item BronzeSword
+item LauanShield
+login open                                 # 8
+update 8 option=5                          # the update packet
+finish                                     # Status 1
+equip BronzeCap Head
+equip BronzeHarness Body
+equip BronzeMittens Hands
+equip BronzeSword Main
+equip LauanShield Sub
+charvar Mission[5][36]Status 2             # a GM: the fight's win
+rezone open                                # 10
+update 10 option=5                         # the face and the equipment models
+finish                                     # completed

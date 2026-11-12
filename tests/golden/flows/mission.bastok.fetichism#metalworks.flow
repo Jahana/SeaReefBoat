@@ -1,0 +1,29 @@
+# Fetichism (Bastok 1-3): begun and finished in Metalworks. A level 10 Warrior of Bastok holding the four Quadav
+# Fetich parts (1-1 and 1-2 completed by a GM; Resonance current keeps RoV 1-1 out). Malduc: section 1: 1001, finished
+# with 2: Metalworks' own handleAcceptMission registration: begun, YOU_ACCEPT_THE_MISSION. Section 2:
+# ORIGINAL_MISSION_OFFSET + 6; one part: no match, no event; the four: 1008, finished (completed, parts taken). The
+# mission current again (a GM), the parts given again: 1005, finished: Metalworks' 1005 handler.
+lists Metalworks/Malduc/onTrigger Metalworks/Malduc/onTrade Metalworks/onEventFinish/1001 Metalworks/onEventFinish/1005 Metalworks/onEventFinish/1008
+char zone=Metalworks pos=64,-14,-4 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+item QuadavFetichHead
+item QuadavFetichTorso
+item QuadavFetichArms
+item QuadavFetichLegs
+login
+trigger Malduc                          # section 1: 1001
+finish option=2                         # 2: begun, YOU_ACCEPT_THE_MISSION
+trigger Malduc                          # section 2: ORIGINAL_MISSION_OFFSET + 6
+walk 66,-15,2
+trade Malduc QuadavFetichHead x1        # one part: no event
+trade Malduc QuadavFetichHead x1 QuadavFetichTorso x1 QuadavFetichArms x1 QuadavFetichLegs x1   # 1008
+finish                                  # completed; the parts taken
+mission Bastok Fetichism current        # a GM
+item QuadavFetichHead
+item QuadavFetichTorso
+item QuadavFetichArms
+item QuadavFetichLegs
+trade Malduc QuadavFetichHead x1 QuadavFetichTorso x1 QuadavFetichArms x1 QuadavFetichLegs x1   # 1005
+finish                                  # completed again

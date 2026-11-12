@@ -1,0 +1,26 @@
+# Through the Quicksand Caves (battlefield.through_the_quicksand_caves): the mission current at status 0.
+# SC_Entrance opens the menu (32000, bit 1). Update option 0 answers nothing; option 81 (index 5, not offered)
+# answers 5; option 1 (index 0, area 1) enters: ENTERING_THE_BATTLEFIELD_FOR (7609), the party and time
+# lines (7543, 7546), the update (2, 0, 0, 1800). The three Centurio V-III of area 1 (by id +0 to +2) die:
+# won, 32001. The finish is the mission's (mission.zilart.through_the_quicksand_caves): completed (The
+# Chamber of Oracles current). Then the fight ends (0x075).
+lists ChamberOfOracles/SC_Entrance/onTrigger ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/onEventUpdate/32000 ChamberOfOracles/onEventFinish/32000 ChamberOfOracles/onEventFinish/32001 ChamberOfOracles/onEventFinish/32002 ChamberOfOracles/Shimmering_Circle/onTrigger
+char zone=ChamberOfOracles pos=-218.6,-1.9,23.0 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ThroughTheQuicksandCaves current
+login
+trigger SC_Entrance                     # the menu 32000 (bit 1)
+update 32000 option=0                   # ignored
+update 32000 option=81                  # index 5, not offered: 5
+update 32000 option=1                   # index 0, area 1: entered
+finish
+tick 2000                               # placed in area 1
+kill CENTURIO_V_III
+kill CENTURIO_V_III+1
+kill CENTURIO_V_III+2                   # all three dead: won, 32001
+finish                                  # the mission's 32001: completed
+tick 11000                              # the fight ends
+tick 10000

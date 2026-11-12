@@ -1,0 +1,26 @@
+# Shield of Diplomacy (ToAU 22). Naja 3094. A warp into the Navukgo Execution Chamber: the zone-in event 1, finished:
+# Status 1. The entry door: 2, finished: Status 2. The door again: the battlefield menu 32000, option 65 (index 4,
+# area 1): entered; Khimaira killed: won, 32001, finished: completed.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger NavukgoExecutionChamber/onZoneIn/1 NavukgoExecutionChamber/onEventFinish/1 NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventFinish/2 NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ShieldOfDiplomacy current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem
+finish-if-event
+warp -600,8,-100 NavukgoExecutionChamber open
+finish
+trigger _1s0
+finish
+trigger _1s0
+update 32000 option=65
+finish
+tick 2000
+kill KHIMAIRA_13
+finish

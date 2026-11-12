@@ -1,0 +1,37 @@
+# The Road Forks, the San d'Oria path at other statuses (mission.cop.the_road_forks#sd_arms). A level 75 Warrior of San
+# d'Oria with 3-3 current (a GM); the login plays the zone-in cutscene 14 and finishes it (San d'Oria status 1).
+# Northern San d'Oria, San d'Oria status 1 (a GM): the zone-in: nothing; Chasalvige: nothing; status 2: Arnau: nothing;
+# status 5: Arnau: nothing. Carpenter's Landing, status 2: Guilloud: nothing; status 5: Guilloud spawns and claims the
+# Ivy; killed: ivyDefeated; Guilloud: cutscene 0 (the char is a Bastokan); finished: 9. Southern San d'Oria, status 5:
+# Hinaree: nothing; status 11: Hinaree: nothing.
+lists NorthernSanDoria/onZoneIn/1 NorthernSanDoria/Arnau/onTrigger NorthernSanDoria/Chasalvige/onTrigger CarpentersLanding/Guilloud/onTrigger CarpentersLanding/Overgrown_Ivy/onMobDeath CarpentersLanding/onEventFinish/0 SouthernSanDoria/Hinaree/onTrigger
+char zone=NorthernSanDoria pos=148,0,139 job=WAR lvl=75 nation=1
+mission Cop TheRoadForks current
+login
+missionstatus Cop 1 pos=0               # a GM
+warp 96.4,-0.5,134 NorthernSanDoria     # the zone-in at status 1: nothing
+trigger Chasalvige                      # 1: nothing
+finish-if-event
+missionstatus Cop 2 pos=0               # a GM
+trigger Arnau                           # 2: nothing
+finish-if-event
+missionstatus Cop 5 pos=0               # a GM
+trigger Arnau                           # 5: nothing
+finish-if-event
+warp -123.7,-6.6,-469 CarpentersLanding
+missionstatus Cop 2 pos=0               # a GM
+trigger Guilloud                        # 2: nothing
+finish-if-event
+missionstatus Cop 5 pos=0               # a GM
+trigger Guilloud                        # 5: the Ivy spawned and claimed
+finish-if-event
+kill OVERGROWN_IVY                      # 5: ivyDefeated
+trigger Guilloud                        # cutscene 0, a Bastokan
+finish                                  # 9
+warp -301.5,-10.1,97.7 SouthernSanDoria
+missionstatus Cop 5 pos=0               # a GM
+trigger Hinaree                         # 5: nothing
+finish-if-event
+missionstatus Cop 11 pos=0              # a GM
+trigger Hinaree                         # 11: nothing
+finish-if-event

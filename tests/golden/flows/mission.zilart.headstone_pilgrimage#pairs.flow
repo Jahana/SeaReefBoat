@@ -1,0 +1,26 @@
+# Headstone Pilgrimage: the other NM of each pair killed first, no fragment held. Behemoth's Dominion: 200's
+# option 1 shows AIR_AROUND_YOU_CHANGED (7339) and spawns both weapons; right after the Legendary Weapon's kill
+# the headstone says SOMETHING_BETTER (7340). Yuhtunga Jungle: 200's option 1 shows THE_OPO_OPOS_ATTACK (7721)
+# and spawns both Opo-opos; right after Carthi's kill, SOMETHING_BETTER (7698). The trace cannot show whether
+# a killed NM still counts as spawned there (the two spawn tests joined by or change no trace), so the one-up
+# arm is pinned by a fake check.
+# The two kills give 150 and 145 XP. The Yuhtunga zone-in writes Mission[10][6]diggingZone 114
+# (Yuhtunga's Zone.lua: A Moogle Kupo d'Etat's digging helper).
+lists BehemothsDominion/Cermet_Headstone/onTrigger BehemothsDominion/onEventFinish/200 BehemothsDominion/onEventFinish/201
+lists YuhtungaJungle/Cermet_Headstone/onTrigger YuhtungaJungle/onEventFinish/200 YuhtungaJungle/onEventFinish/201
+char zone=BehemothsDominion pos=-72,-5,-88 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart HeadstonePilgrimage current
+login
+trigger Cermet_Headstone                # 200
+finish option=1                         # AIR_AROUND_YOU_CHANGED, both weapons spawned
+kill LEGENDARY_WEAPON
+trigger Cermet_Headstone                # after the kill: SOMETHING_BETTER
+warp 491,20,301 YuhtungaJungle
+trigger Cermet_Headstone                # 200
+finish option=1                         # THE_OPO_OPOS_ATTACK, both Opo-opos spawned
+kill CARTHI
+trigger Cermet_Headstone                # after the kill: SOMETHING_BETTER

@@ -1,0 +1,25 @@
+# Jeuno at Lower Delkfutt's Tower's Cermet Door _542, the Delkfutt Key and a Pickaxe held. Status 1: the door says its
+# own message 160 and takes no trade. Status 2 with no key item: THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY (159); the key with a
+# Pickaxe: nothing; the key alone: cutscene 1, whose finish sets status 3, gives the key item and takes the key. Status
+# 3: the door's own 160.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Lucius/onTrigger Metalworks/Malduc/onTrigger Metalworks/onEventFinish/322 Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 RuludeGardens/_6r2/onTrigger RuludeGardens/Goggehn/onTrigger RuludeGardens/onEventFinish/38 RuludeGardens/onEventFinish/41 LowerDelkfuttsTower/_542/onTrade LowerDelkfuttsTower/_542/onTrigger LowerDelkfuttsTower/onEventFinish/1
+char zone=LowerDelkfuttsTower pos=596,16,-19 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok Jeuno current
+item DelkfuttKey
+item Pickaxe
+login
+missionstatus Bastok 1
+trigger _542                            # status 1: nothing from the mission
+finish-if-event
+walk 597,14,-20
+trade _542 DelkfuttKey x1               # status 1: nothing
+missionstatus Bastok 2
+trigger _542                            # no key item: THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY
+finish-if-event
+walk 597,14,-20
+trade _542 DelkfuttKey x1 Pickaxe x1     # the key and a Pickaxe: nothing
+trade _542 DelkfuttKey x1               # cutscene 1
+finish                                  # status 3, the key item given, the key taken
+trigger _542                            # status 3: nothing from the mission
+finish-if-event

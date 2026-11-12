@@ -5,7 +5,7 @@
 // gil traded: 301, Prog 4, KI Providence Pot and KI Letter from Magriffon); Muckvix's 100 (Prog 5, KI Pungent Providence
 // Pot, the pot and letter deleted); the Oldton zone-in 41 (Prog 6); Tarnotik's 42 (Prog 7); a Bottle of Ahriman Tears
 // to Tarnotik (44: Prog 8, the bottle taken, the char moved into Mine Shaft #2716); the burning circle _0d0's 5 (Prog 9);
-// the battlefield (scripts/battlefields/Mine_Shaft_2716/return_to_the_depths.lua, requiredVar 'Quest[1][78]Prog' at 9:
+// the battlefield (Battlefields/MineShaft2716/ReturnToTheDepths.cs, requiredVar 'Quest[1][78]Prog' at 9:
 // a status read, so the var name and value stay) and its win's 32001 (Prog 10, 10000 gil); Ayame's 881 completes it
 // (Bowyer Ring, Goblin in Disguise, fame +50). Once completed: Ayame 882, Tarnotik 45 (oncePerZone) and 44 for a bottle
 // (moved into the Mine Shaft again), Ravorara's 313 for the Pungent Providence Pot (option 1: 1000 gil, the pot deleted).

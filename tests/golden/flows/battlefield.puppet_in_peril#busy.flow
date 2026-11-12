@@ -1,0 +1,57 @@
+# Puppet in Peril: LOCKED, and a menu outliving its fight (as save_the_children#busy): bob is offered the menu while
+# main is in, and does not answer it; cid's and eve's clearances taken at the lock; cid's late update (LOCKED); after
+# the win and cleanup eve's update (REQS_NOT_MET).
+lists JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventFinish/4 JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001 JadeSepulcher/onEventFinish/32002 JadeSepulcher/_1v1/onTrigger
+char zone=JadeSepulcher pos=299,0,-199 job=WAR lvl=75 nation=1
+char bob zone=JadeSepulcher pos=299,0,-199 job=WAR lvl=75 nation=1
+char cid zone=JadeSepulcher pos=299,0,-199 job=WAR lvl=75 nation=1
+char eve zone=JadeSepulcher pos=299,0,-199 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PuppetInPeril current
+bob: mission Asa BurgeoningDread current
+bob: mission Acp ACrystallineProphecyFin current
+bob: mission Rov ARhapsodyForTheAges current
+bob: mission Soa Abomination current
+bob: mission Toau PuppetInPeril current
+cid: mission Asa BurgeoningDread current
+cid: mission Acp ACrystallineProphecyFin current
+cid: mission Rov ARhapsodyForTheAges current
+cid: mission Soa Abomination current
+cid: mission Toau PuppetInPeril completed
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Toau PuppetInPeril completed
+login
+missionstatus Toau 1
+bob: login
+bob: missionstatus Toau 1
+cid: login
+eve: login
+cid: missionstatus Toau 1
+eve: missionstatus Toau 1
+invite cid
+cid: accept
+invite eve
+eve: accept
+trigger _1v0
+update 32000 option=65
+finish
+bob: trigger _1v0
+cid: trigger _1v0
+eve: trigger _1v0
+tick 2000
+claim LANCELORD_GAHEEL_JA
+tick 1000
+cid: update 32000 option=65
+cid: finish
+kill LANCELORD_GAHEEL_JA
+finish
+tick 11000
+tick 10000
+eve: update 32000 option=65
+eve: finish

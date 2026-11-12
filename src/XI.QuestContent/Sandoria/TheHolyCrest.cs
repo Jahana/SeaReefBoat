@@ -1,7 +1,7 @@
 // The Holy Crest (Log ID 0, Quest ID 93, the DRG unlock), ported from the quest branches of
 // scripts/zones/Port_San_dOria/npcs/Arminibit.lua, scripts/zones/Port_San_dOria/npcs/Ceraulian.lua,
 // scripts/zones/Northern_San_dOria/npcs/Morjean.lua and the win finish of
-// scripts/battlefields/Ghelsba_Outpost/holy_crest.lua (quest rework B3b, San d'Oria group 15; call-only).
+// Battlefields/GhelsbaOutpost/HolyCrest.cs (quest rework B3b, San d'Oria group 15; call-only).
 // Arminibit : !pos -0.841 -8 -122.787 232; Ceraulian : !pos 0 -8 -122 232; Morjean : !pos 99 0 116 231 (his
 // default 601); Hut_Door : !pos -162 -11 78 140.
 // Arminibit, main level 30 or more and this quest available: 24 (else his script's 587); Ceraulian, main level
@@ -86,7 +86,7 @@ namespace XI.QuestContent.Sandoria
                     q.Quest.Begin();
                     q.Player.SetCharVar(CrestVar, 3);
                 })
-                // holy_crest.lua content:onEventFinishWin (32001)
+                // HolyCrest.cs OnEventFinishWin (32001)
                 .OnEventFinish(Zone.GhelsbaOutpost, 32001, q =>
                 {
                     if (q.Option != 0 &&

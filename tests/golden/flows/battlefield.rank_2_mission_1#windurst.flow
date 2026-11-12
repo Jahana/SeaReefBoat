@@ -1,0 +1,30 @@
+# Rank 2 Mission 1 (battlefield.rank_2_mission_1, Horlais Peak: a plain Battlefield with its own entryRequirement and
+# checkSkipCutscene; index 0, no fixed area, 15 minutes, 6 players, isMission, Dread_Dragon and Spotter essential, no
+# loot, Burning_Circle the exit) by a Windurst char. A level 75 Warrior of Windurst with The Three Kingdoms (San
+# d'Oria, the second) current and the Dark Key (a GM). Status 8: BC_Entrance plays NO_BATTLEFIELD_ENTRY (7251), and so
+# does a trade (a Chunk of Copper Ore). Status 9: the menu; area 1 (option 1): registered, entered. Dread_Dragon and
+# Spotter of arena 1 killed: no crate: the timer, WON; at the fifth tick after it the cleanup: battlefieldWin, 32001;
+# finished: Windurst's handler moves to status 10 and gives the Kindred Crest.
+lists HorlaisPeak/BC_Entrance/onTrigger HorlaisPeak/BC_Entrance/onTrade HorlaisPeak/onEventUpdate/32000 HorlaisPeak/onEventFinish/32000 HorlaisPeak/Burning_Circle/onTrigger HorlaisPeak/onEventFinish/32003 HorlaisPeak/onEventFinish/32001
+char zone=HorlaisPeak pos=-501.5,158.3,-212.6 job=WAR lvl=75 nation=2
+mission Windurst TheThreeKingdomsSandoria2 current
+item ChunkOfCopperOre
+keyitem DarkKey
+login
+missionstatus Windurst 8
+trigger BC_Entrance
+trade BC_Entrance ChunkOfCopperOre x1
+missionstatus Windurst 9
+trigger BC_Entrance
+update 32000 option=1
+finish
+tick 2000
+kill #17346561
+kill #17346562
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish

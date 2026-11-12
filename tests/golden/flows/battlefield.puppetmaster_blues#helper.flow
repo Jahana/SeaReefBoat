@@ -1,0 +1,53 @@
+# Puppetmaster Blues (battlefield.puppetmaster_blues#helper, Talacca Cove): Five at the entry, all five enter: main
+# (accepted, both key items), bob (accepted, switch only), cat (completed), dan (chip only) and eve (nothing). Only the
+# registrant is held to the quest and the key items (a member passes isValidEntry, the entry NPC). The win sends the
+# 32001 to all five: the first two without the skip flag, the last three with 1. The finish runs the quest's 32001
+# (PuppetmasterBlues.cs): main takes the key items (keyitems +169:00) and Prog 2. bob's finish does the same.
+lists TalaccaCove/_1l0/onTrigger TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/onEventFinish/32001
+char zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+char bob zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+char cat zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+char dan zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+char eve zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+quest AhtUrhgan.PuppetmasterBlues accepted
+keyitem ToggleSwitch
+keyitem ValkengsMemoryChip
+bob: quest AhtUrhgan.PuppetmasterBlues accepted
+bob: keyitem ToggleSwitch
+cat: quest AhtUrhgan.PuppetmasterBlues completed
+dan: keyitem ValkengsMemoryChip
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+trigger _1l0
+update 32000 option=33
+finish
+bob: trigger _1l0
+bob: update 32000 option=33
+bob: finish
+cat: trigger _1l0
+cat: update 32000 option=33
+cat: finish
+dan: trigger _1l0
+dan: update 32000 option=33
+dan: finish
+eve: trigger _1l0
+eve: update 32000 option=33
+eve: finish
+kill VALKENG
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

@@ -1,0 +1,22 @@
+# Path of Darkness (ToAU 42), the Runic Seal with INSTANCE_ID 7701 (Nashmeira's Plea's id) at 116's finish with option
+# 1: the char stays. As #instance, with the localvar step in place of its tick before 116's finish; the trace does
+# not isolate INSTANCE_ID from the instance not being loaded (no tick), so a fake check pins the INSTANCE_ID test.
+lists AlzadaalUnderseaRuins/_20m/onTrigger AlzadaalUnderseaRuins/onEventFinish/116
+char zone=AlzadaalUnderseaRuins pos=125,-2,20 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PathOfDarkness current
+keyitem NyzulIsleRoute
+login
+tick 1000
+tick 1000
+tick 1000
+missionstatus Toau 1
+trigger _20m
+update 405 option=0
+finish option=1073741824
+localvar INSTANCE_ID 7701
+finish option=1
+tick 5000

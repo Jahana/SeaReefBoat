@@ -1,0 +1,72 @@
+# Coming of Age (San d'Oria 8-1, mission.sandoria.coming_of_age), the arms the play-through skips: _6h1 and the
+# Fountain at status 1, Halver at 3 with no drops (his own text), the Chateau zone-in at status 1 from outside; each of
+# Valor and Honor alone (a GM spawn) at status 2 sets status 3 (each reads itself), at status 1 nothing; the Fountain
+# with the drops held: nothing.
+char zone=ChateauDoraguille pos=0,0,0 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+rank 8
+mission Sandoria ComingOfAge current
+login
+missionstatus Sandoria 1
+trigger _6h1                            # status 1: nothing from the mission
+finish-if-event
+warp 93.4,0,-55.3 SouthernSanDoria      # out
+warp 0,0,0 ChateauDoraguille            # status 1: no zone-in event
+missionstatus Sandoria 3
+trigger Halver                          # status 3, no drops: nothing from the mission
+finish-if-event
+warp 567,18,-937 QuicksandCaves
+missionstatus Sandoria 1
+trigger Fountain_of_Kings               # status 1: nothing from the mission
+finish-if-event
+missionstatus Sandoria 2
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+spawn VALOR                             # a GM: Valor alone
+trigger Fountain_of_Kings               # status 2, Valor up: nothing
+finish-if-event
+kill VALOR                              # status 3
+tick 30000
+tick 30000
+missionstatus Sandoria 2
+spawn HONOR                             # a GM: Honor alone
+trigger Fountain_of_Kings               # status 2, Honor up: nothing
+finish-if-event
+kill HONOR                              # its death reads Honor: status 3
+tick 30000
+tick 30000
+missionstatus Sandoria 1
+spawn HONOR                             # a GM
+tick 2000
+kill HONOR                              # status 1: nothing
+tick 30000
+tick 30000
+spawn VALOR                             # a GM
+tick 2000
+kill VALOR                              # status 1: nothing
+tick 30000
+tick 30000
+missionstatus Sandoria 3
+keyitem DropsOfAmnio
+trigger Fountain_of_Kings               # status 3, the drops held: nothing
+finish-if-event

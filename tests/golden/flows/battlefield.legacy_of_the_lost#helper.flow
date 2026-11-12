@@ -1,0 +1,29 @@
+# Legacy of the Lost: a party member (eve, the mission completed) joins main's registration at the entry door and
+# enters; GESSHO killed: won, 32001 to both; both finish.
+lists TalaccaCove/_1l0/onTrigger TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/onEventFinish/32001 TalaccaCove/onEventFinish/32002 TalaccaCove/_1l1/onTrigger
+char zone=TalaccaCove pos=-88.879,-7.318,-109.233 job=WAR lvl=75 nation=1
+char eve zone=TalaccaCove pos=-88.879,-7.318,-109.233 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau LegacyOfTheLost current
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Toau LegacyOfTheLost completed
+login
+eve: login
+invite eve
+eve: accept
+trigger _1l0
+update 32000 option=65
+finish
+eve: trigger _1l0
+eve: update 32000 option=65
+eve: finish
+tick 2000
+kill GESSHO
+finish
+eve: finish

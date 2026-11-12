@@ -1,0 +1,22 @@
+# Fire in the Eyes of Men (CoP 7-3) played through. A level 75 Warrior of San d'Oria with 7-3 current (a GM; Status
+# 0; the Vana'diel day is 8000). Mine Shaft #2716's _0d0 at Status 0: the battlefield entry's NO_BATTLEFIELD_ENTRY
+# (7097, no battlefield open to the char), then 7-3's 4 (finished: Status 1); at Status 1: 7097 and the zone's default
+# (DefaultActions messageSpecial -1: 32767), no 7-3 reply. Metalworks' Cid at Status 1, Timer 0: 857 (finished: Timer
+# 8001, the next day); Timer 8001 after day 8000: 858; a Vana'diel day later (Timer = day): 890; finished: the title
+# Prishe's Buddy and the mission completes (Calm Before the Storm current).
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/onEventFinish/4 Metalworks/Cid/onTrigger Metalworks/onEventFinish/857 Metalworks/onEventFinish/858 Metalworks/onEventFinish/890
+char zone=MineShaft2716 pos=-54,-121.7,-576 job=WAR lvl=75 nation=0
+mission Cop FireInTheEyesOfMen current
+login
+trigger _0d0                            # 7097; Status 0: 4
+finish                                  # Status 1
+trigger _0d0                            # 7097 and 32767: no 7-3 reply
+finish-if-event
+warp -12,-12,1 Metalworks
+trigger Cid                             # Status 1, Timer 0: 857
+finish                                  # Timer 8001
+trigger Cid                             # Timer 8001 > day 8000: 858
+finish
+wait vana=24                            # a Vana'diel day on: Timer = day
+trigger Cid                             # 890
+finish                                  # the title; completed

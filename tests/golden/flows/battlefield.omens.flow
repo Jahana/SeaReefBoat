@@ -1,0 +1,20 @@
+# Omens (battlefield.omens, Navukgo Execution Chamber): Entry menu (event 32000, params 0,0,0,4): option 0 releases
+# only, 4, 32 and 36 answer update 5, option 33 registers area 1. One player enters, so no extra flan is spawned
+# (numSpawned stays 0): killing IMMORTAL_FLAN alone wins, event 32001 (1,1800,0,4,64,2). The finish runs the quest's
+# 32001 (Omens.cs): main's Prog 0 -> 1.
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+quest AhtUrhgan.Omens accepted
+charvar Quest[6][22]Prog 0
+login
+trigger _1s0
+update 32000 option=0
+update 32000 option=4
+update 32000 option=32
+update 32000 option=36
+update 32000 option=33
+finish
+kill IMMORTAL_FLAN
+finish
+tick 11000
+tick 10000

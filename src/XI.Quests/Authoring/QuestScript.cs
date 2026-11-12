@@ -48,6 +48,9 @@ namespace XI.Quests.Authoring
             HiddenName != null ? HiddenKey(LegacyPath)
             : AreaName(Log) is { } area ? QuestKeyRegistry.KeyFor(area, ConstName) : null;
 
+        // the area of the quest's key: hiddenQuests for a hidden quest, else AreaName(Log), null for a log with none
+        public string KeyArea => HiddenName != null ? HiddenArea : AreaName(Log);
+
         // the key the bridge gave the quest before C2 (for the checks): KeyIn with the area luaArea gives for its log
         // (xi.quest.area as the Lua file has it), or with hiddenQuests for a hidden quest
         internal string ExpectedKeyForTest(Func<QuestLog, string> luaArea) =>

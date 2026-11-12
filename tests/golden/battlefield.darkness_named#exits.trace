@@ -1,0 +1,174 @@
+# golden trace: battlefield.darkness_named#exits
+seed 7
+flow 019c3be6b42cc7d5e5bf299ded79c99bff897e225cdc13506ea73ad542e89987
+recorder lua
+lua-at f52494a28f43c039b6031b94d89dcb915dda7003
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @848ff3d1cee29dee (167)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @3e907948536df038 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @894866077b6e4402 (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @4cdbd8051d2399ff (7)
+char_stats @aed604d3dea413a4 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+char_vars @d243c6f71cc25c88 (1)
+chars @07e18bc1594b3913 (41)
+ret onZoneIn=number:4294967295
+order 10/MC_Entrance/onTrigger=Battlefield[704]
+order 10/onEventUpdate/32000=Battlefield[704]
+order 10/Memento_Circle/onTrigger=Battlefield[704],Battlefield[705],Battlefield[706]
+order 10/onEventFinish/32000=Battlefield[704]
+order 10/onEventFinish/32003=Battlefield[704]
+step trigger MC_Entrance
+packets
+  00E @5c69b3090626027c
+  00E @5ff16e8a37cba2f7
+  034 @0c01027b0a5d3bb1
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step update 32000 option=1
+packets
+  029 @97e9cb903261af09
+  02A @da7f1dd92b4392bf
+  02A @3084ac1755dbb9bb
+  02A @f4fa816dd3fa6dba
+  075 @008ac95fc5c2c20d
+  05C @e5f125711b13fe4e
+  05D @3e1dc80a22aa8f07
+  052 @3c1f8adddcc5ad8a
+  0DF @e86c6ce1bb1d2923
+  037 @a57009c371eb897f
+ret onEventUpdate=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @97b8e55bcaa93193
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Memento_Circle
+packets
+  00E @65c36fb5b9f346fa
+  00E @0fe431a7a64042b3
+  00E @b74b1d84e0b6322f
+  032 @e908c891546a00bb
+  0DF @e86c6ce1bb1d2923
+  037 @a57009c371eb897f
+ret onTrigger=number:0
+step finish option=4
+packets
+  075 @5825a9e20f61dab9
+  0DF @e86c6ce1bb1d2923
+  037 @97b8e55bcaa93193
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step tick 10000
+packets
+  037 @cd52eaa85c6f2f16
+  067 @8c71f583e5e03d94
+  063 @e9ad0bdb3c680b67
+char_effects + effectid=254|icon=254|power=704|tick=0|duration=0|subid=$char|subpower=1|tier=0|flags=143130624|timestamp=1799999990|sourcetype=0|sourcetypeparam=0|originid=0
+chars - pos_rot=62
+chars - pos_x=-300
+chars - pos_y=-1.5
+chars - pos_z=-220
+chars + pos_rot=0
+chars + pos_x=-238.535
+chars + pos_y=-18.249
+chars + pos_z=209.766
+ret afterZoneIn=nil:nil
+step trigger MC_Entrance
+packets
+  00E @18b08164f92f054b
+  00E @5c69b3090626027c
+  00E @5ff16e8a37cba2f7
+  034 @0c01027b0a5d3bb1
+  0DF @e86c6ce1bb1d2923
+  037 @11b3856106a4a19e
+ret onTrigger=number:0
+step update 32000 option=2
+packets
+  05C @204e2399266724fc
+  052 @3c1f8adddcc5ad8a
+ret onEventUpdate=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @cd52eaa85c6f2f16
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Memento_Circle
+packets
+  00E @0fe431a7a64042b3
+  00E @65c36fb5b9f346fa
+  00E @b74b1d84e0b6322f
+  052 @992a1d6976db40ee
+ret onTrigger=number:4294967295
+step finish option=4
+packets
+step tick 10000
+packets
+step trigger MC_Entrance
+packets
+  00E @18b08164f92f054b
+  00E @5c69b3090626027c
+  00E @5ff16e8a37cba2f7
+  034 @0c01027b0a5d3bb1
+  0DF @e86c6ce1bb1d2923
+  037 @11b3856106a4a19e
+ret onTrigger=number:0
+step update 32000 option=3
+packets
+  029 @97e9cb903261af09
+  02A @da7f1dd92b4392bf
+  02A @3084ac1755dbb9bb
+  02A @f4fa816dd3fa6dba
+  075 @008ac95fc5c2c20d
+  05C @881c28d51adfea72
+  05D @3e1dc80a22aa8f07
+  052 @3c1f8adddcc5ad8a
+  0DF @e86c6ce1bb1d2923
+  037 @756bbf9ec5b6f2a8
+ret onEventUpdate=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @6b2e8857053fa567
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Memento_Circle
+packets
+  00E @0fe431a7a64042b3
+  00E @65c36fb5b9f346fa
+  00E @b74b1d84e0b6322f
+  032 @e908c891546a00bb
+  0DF @e86c6ce1bb1d2923
+  037 @756bbf9ec5b6f2a8
+ret onTrigger=number:0
+step finish option=4
+packets
+  075 @5825a9e20f61dab9
+  0DF @e86c6ce1bb1d2923
+  037 @6b2e8857053fa567
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step tick 10000
+packets
+  037 @cd52eaa85c6f2f16
+  067 @8c71f583e5e03d94
+  063 @e9ad0bdb3c680b67
+char_effects - effectid=254|icon=254|power=704|tick=0|duration=0|subid=$char|subpower=1|tier=0|flags=143130624|timestamp=1799999990|sourcetype=0|sourcetypeparam=0|originid=0
+char_effects + effectid=254|icon=254|power=704|tick=0|duration=0|subid=$char|subpower=3|tier=0|flags=143130624|timestamp=1799999990|sourcetype=0|sourcetypeparam=0|originid=0

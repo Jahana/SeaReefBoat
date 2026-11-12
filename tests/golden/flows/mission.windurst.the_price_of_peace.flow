@@ -1,0 +1,76 @@
+# The Price of Peace (Windurst 1-3, mission.windurst.the_price_of_peace). A level 10 Warrior of Windurst who has
+# completed 1-1 and 1-2 (a GM). Section 1 (no mission current): Janshura-Rashura of Port Windurst plays 78; its finish
+# with option 0 and 1 does nothing, with option 2 begins the mission. Section 2 (1-3 current): Janshura-Rashura plays
+# 110; Nine of Clubs, Puo Rhen and Ten of Clubs play 74, 79 and 80, the events of The Heart of the Matter's last
+# section, which has no NONE check in the Lua (a kept bug) and so answers first. Status 1 (Windurst Waters): the quest
+# Food for Thought answers before Price's own events: Kenapa-Keppa plays its 310, Ohbiru-Dohbiru its 308 (its finish
+# sets ohbiruProg 1) and, at status 3, its 309; Leepe-Hoppe plays Price's progress event 140, whose finish gives the
+# Food and Drink Offerings (status 2). Status 2: Leepe-Hoppe plays 142; in Giddeus Laa Mozi plays cutscene 45 and Ghoo
+# Pakya 49: each finish takes its offering (a second finish with none left changes nothing) and the second offering sets
+# status 3. Status 3: Ghoo Pakya plays 52 and Laa Mozi 48 over their own events; in Waters Ohbiru-Dohbiru plays Food for
+# Thought's 309 (not Price's 144) and the trigger area at the Rhinostery plays 146 (status 4). Status 4: Leepe-Hoppe
+# plays 147 (important once); Janshura-Rashura plays 114, whose finish completes the mission (1000 gil, rank 2).
+# Completed (no mission, Lost for Words not completed): Nine of Clubs 117, Puo Rhen 116 and Ten of Clubs 118.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/Nine_of_Clubs/onTrigger PortWindurst/Puo_Rhen/onTrigger PortWindurst/Ten_of_Clubs/onTrigger PortWindurst/onEventFinish/78 PortWindurst/onEventFinish/114 WindurstWaters/Kenapa-Keppa/onTrigger WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/Leepe-Hoppe/onTrigger WindurstWaters/onEventFinish/140 WindurstWaters/onEventFinish/146 WindurstWaters/onTriggerAreaEnter/1 Giddeus/Laa_Mozi/onTrigger Giddeus/Ghoo_Pakya/onTrigger Giddeus/onEventFinish/45 Giddeus/onEventFinish/49
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+login
+mission Windurst TheHorutotoRuinsExperiment current
+mission Windurst TheHorutotoRuinsExperiment completed   # a GM: 1-1 done
+mission Windurst TheHeartOfTheMatter current
+mission Windurst TheHeartOfTheMatter completed          # a GM: 1-2 done
+trigger Janshura-Rashura                # section 1: 78
+finish option=0                         # not 2: nothing
+trigger Janshura-Rashura                # 78 again
+finish option=1                         # not 2: nothing
+trigger Janshura-Rashura                # 78 again
+finish option=2                         # begun (status 1, YOU_ACCEPT_THE_MISSION)
+trigger Janshura-Rashura                # section 2: 110
+finish
+trigger Nine_of_Clubs                   # The Heart of the Matter's 74
+finish
+trigger Puo_Rhen                        # The Heart of the Matter's 79
+finish
+trigger Ten_of_Clubs                    # The Heart of the Matter's 80
+finish
+warp 20,-6,-190 WindurstWaters
+trigger Kenapa-Keppa                    # status 1: Food for Thought's 310
+finish
+trigger Ohbiru-Dohbiru                  # Food for Thought's 308 (ohbiruProg 1)
+finish
+trigger Leepe-Hoppe                     # 140
+finish                                  # the Food and Drink Offerings, status 2
+trigger Leepe-Hoppe                     # status 2: 142
+finish
+warp -22,0,146 Giddeus
+trigger Laa_Mozi                        # cutscene 45
+finish                                  # the Food Offering offered, one of two
+trigger Laa_Mozi                        # 45 again
+finish                                  # no Food Offering left: nothing changes
+warp -139,0,145 Giddeus
+trigger Ghoo_Pakya                      # cutscene 49
+finish                                  # the Drink Offering offered, both: status 3
+trigger Ghoo_Pakya                      # status 3: 52
+finish
+warp -22,0,146 Giddeus
+trigger Laa_Mozi                        # 48
+finish
+warp 20,-6,-190 WindurstWaters
+trigger Ohbiru-Dohbiru                  # status 3: Food for Thought's 309
+finish
+walk 27,-10,-202                        # into trigger area 1
+tick 2000                               # the zone's trigger-area check: 146
+finish                                  # status 4
+trigger Leepe-Hoppe                     # status 4: 147, important once
+finish
+trigger Leepe-Hoppe                     # the second time: DefaultActions' reply, 345
+finish-if-event
+warp -227,-8,182 PortWindurst
+trigger Janshura-Rashura                # 114
+finish                                  # completed (1000 gil, rank 2)
+trigger Nine_of_Clubs                   # completed: 117
+finish
+trigger Puo_Rhen                        # 116
+finish
+trigger Ten_of_Clubs                    # 118
+finish

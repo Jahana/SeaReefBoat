@@ -1,0 +1,51 @@
+# Leaute's Last Wishes edges. Arsha at status 0: her default 513; _6h4 at status 0: the default ITS_LOCKED_TIGHT
+# (7244). Trigger area 2 at status 3 with the Dreamrose and at status 4 without it: nothing (the leave runs too).
+# Halver at status 4: nothing from the mission, his default text (036 7909). Western Altepa: the Dreamrose at status
+# 1: the default 6409; at status 2: spawned (7392); the cactuar killed at status 1: no Progress; at status 2 again,
+# the cactuar dead: spawned again (7392).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Arsha/onTrigger ChateauDoraguille/Chupaile/onTrigger ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h4/onTrigger ChateauDoraguille/onTriggerAreaEnter/2 ChateauDoraguille/onEventFinish/22 ChateauDoraguille/onEventFinish/25 ChateauDoraguille/onEventFinish/87 ChateauDoraguille/onEventFinish/111 WesternAltepaDesert/Dreamrose/onTrigger
+char zone=ChateauDoraguille pos=2,0.1,0.1 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes current
+rank 6
+login
+tick 3000                               # ZoningIn cleared
+trigger Arsha                           # status 0: nothing from the mission
+finish-if-event
+trigger _6h4                            # status 0: nothing from the mission
+finish-if-event
+missionstatus Sandoria 3
+keyitem Dreamrose
+walk -84,-1.5,57.5                      # area 2 at status 3: nothing
+walk 2,0.1,2
+missionstatus Sandoria 4
+delkeyitem Dreamrose
+walk -84,-1.5,57.5                      # area 2 at status 4, no Dreamrose: nothing
+walk 2,0.1,2
+trigger Halver                          # status 4: nothing from the mission
+finish-if-event
+warp -260,-10,49 WesternAltepaDesert
+missionstatus Sandoria 1
+trigger Dreamrose                       # status 1: nothing
+finish-if-event
+missionstatus Sandoria 2
+trigger Dreamrose                       # status 2: spawned
+missionstatus Sandoria 1
+kill SABOTENDER_ENAMORADO               # status 1: nothing
+missionstatus Sandoria 2
+trigger Dreamrose                       # status 2, dead, no Progress: spawned again

@@ -1,0 +1,22 @@
+# The Road Forks, the Mimeo Jewel's timer (mission.cop.the_road_forks#jewel). A level 75 Warrior of Windurst with 3-3
+# current, the Windurst status 8 and the Lioumere's status 1 (GMs): Attohwa Chasm, Loose Sand at its feet: the Mimeo
+# Jewel, the 30 minute timer: the Jewel and 7340 (MIMEO_JEWEL_OFFSET - 1) at once; the timer re-arms every 3 s, but the
+# harness's GetSystemTime does not move with tick, so there is no later message and the Jewel is kept.
+lists AttohwaChasm/Loose_Sand/onTrigger
+char zone=AttohwaChasm pos=478.8,20,41.7 job=WAR lvl=75 nation=2
+mission Cop TheRoadForks current
+login
+tick 1000
+tick 1000
+tick 1000
+missionstatus Cop 8 pos=1               # a GM
+charvar Mission[6][325]Status 1         # a GM
+trigger Loose_Sand here                 # the Jewel; the timer
+finish-if-event
+tick 3000
+tick 361000
+tick 361000
+tick 361000
+tick 361000
+tick 361000
+tick 10000

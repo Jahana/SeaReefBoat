@@ -1,0 +1,22 @@
+# Journey to Bastok in Metalworks with a full bag (fill-inventory), status 4. Grohm 423: the finish gives no Pickaxes
+# and sets the mission's Option var to 1, the status stays 4. Grohm then plays 425 (Option 1 first); its finish with
+# the bag still full changes nothing. With the bag freed (free-inventory) Grohm 425 again, whose finish gives the
+# three Pickaxes and moves to status 5 (Option back to 0); Grohm then 424 and Pius 356.
+lists Metalworks/Grohm/onTrigger Metalworks/Pius/onTrigger Metalworks/Savae_E_Paleade/onTrade Metalworks/onEventFinish/205 Metalworks/onEventFinish/355 Metalworks/onEventFinish/423 Metalworks/onEventFinish/425
+char zone=Metalworks pos=-18,-11,-27 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria JourneyToBastok current
+login
+fill-inventory
+missionstatus Sandoria 4
+trigger Grohm
+finish
+trigger Grohm
+finish
+free-inventory
+trigger Grohm
+finish
+trigger Grohm
+finish-if-event
+trigger Pius
+finish-if-event

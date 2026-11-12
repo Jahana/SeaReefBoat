@@ -1,0 +1,23 @@
+# Wading Beasts (Bastok 2-2): the sections that do not apply. Main, a level 10 Warrior of San d'Orian with a lizard egg
+# and no mission: Cleades: section 1 fails (not Bastok): his script's 1003, finished with 4: nothing begun; Alois: the
+# egg traded: no section 2: no event. bob, a level 10 Warrior of Bastok with A Geological Survey current (a GM): Alois:
+# the egg traded: no event. Rival zone-in, another mission's script: the main char's login in Bastok Markets plays
+# Seekers of Adventure's Rumors from the West onZoneIn, which returns 22 (the trace records only that return, with no
+# event packet).
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 Metalworks/Alois/onTrade
+char zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=0
+char bob zone=Metalworks pos=96,-20,14 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+bob: mission Rov Resonance current
+bob: mission Bastok GeologicalSurvey current
+item LizardEgg
+bob: item LizardEgg
+login
+trigger Cleades                         # not Bastok: no section: his script's 1003
+finish option=4                         # not begun: no handler
+warp 96,-20,14 Metalworks
+walk 97,-20,14
+trade Alois LizardEgg x1                # no section 2: no event
+bob: login
+bob: walk 97,-20,14
+bob: trade Alois LizardEgg x1           # a current mission (1-2): no event

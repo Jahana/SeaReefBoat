@@ -1,0 +1,37 @@
+# The Rescue Drill (San d'Oria 2-1): the sections that do not apply. Main, a level 10 Warrior of Bastok in Southern
+# San d'Oria: Endracion: not a San d'Orian: no section 1 (his script plays 1011). bob, a San d'Orian with Save the
+# Children current (a GM): Endracion plays Save the Children's 1025; its finish with option 3 begins nothing. carol, a
+# Bastok char with 2-1 current (a GM) in La Theine Plateau: Equesobillot reads the status of the char's nation:
+# Sandoria status 2 and Bastok status 0: RESCUE_DRILL; Bastok status 2: 101, whose finish sets Sandoria status 3
+# (Galaihaurat reads the log's: at Sandoria status 3 he answers RESCUE_DRILL). dave, a San d'Orian with 2-1 completed
+# and the Davoi Report current (GMs): Galaihaurat answers RESCUE_DRILL + 39 (section 3 holds whatever is current).
+lists SouthernSanDoria/Endracion/onTrigger LaTheinePlateau/Equesobillot/onTrigger LaTheinePlateau/Galaihaurat/onTrigger LaTheinePlateau/onEventFinish/101 SouthernSanDoria/onEventFinish/1009
+char zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=1
+char bob zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=0
+char carol zone=LaTheinePlateau pos=-287,9,284 job=WAR lvl=10 nation=1
+char dave zone=LaTheinePlateau pos=-482,-7,222 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+bob: mission Rov Resonance current
+carol: mission Rov Resonance current
+dave: mission Rov Resonance current
+bob: mission Sandoria SmashTheOrcishScouts completed
+bob: mission Sandoria BatHunt completed
+bob: mission Sandoria SaveTheChildren current
+carol: mission Sandoria TheRescueDrill current
+dave: mission Sandoria TheRescueDrill completed
+dave: mission Sandoria TheDavoiReport current
+login
+trigger Endracion                       # not a San d'Orian: no section: his script's 1011
+finish option=3
+bob: login
+bob: trigger Endracion                  # another mission current: Save the Children's 1025
+bob: finish option=3                    # no section 1: nothing
+carol: login
+carol: missionstatus Sandoria 2         # a GM: Bastok status is 0
+carol: trigger Equesobillot             # the char's nation: Bastok status 0: RESCUE_DRILL
+carol: missionstatus Bastok 2           # a GM
+carol: trigger Equesobillot             # Bastok status 2: 101
+carol: finish                           # Sandoria status 3
+carol: trigger Galaihaurat              # the log's status 3: RESCUE_DRILL
+dave: login
+dave: trigger Galaihaurat               # section 3: RESCUE_DRILL + 39

@@ -1,0 +1,54 @@
+# The Beast Within (battlefield.beast_within#helper, Jade Sepulcher): a party at _1v0: main (a level 75 Blue Mage at
+# level cap 75, The Beast Within accepted at Quest[6][40]Prog 2 (GMs), one Blue Mage's Testimony) enters area 1 (33) by
+# the testimony: TESTIMONY_WEARS (3 shown, 2 left). The members by the trigger, no trade: bob (completed) and cat
+# (accepted, Quest[6][40]Prog 3) each get the 32000 menu (0,0,0,4); each update 33: REQS_NOT_MET (5); finished: not
+# entered (one player to a battlefield). dan (accepted, Quest[6][40]Prog 0) gets only the door's default
+# (DefaultActions.lua messageSpecial -1, shown as 32767), no menu; his update and finish-if-event find no event.
+lists JadeSepulcher/_1v0/onTrade JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001 JadeSepulcher/onEventFinish/6
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char bob zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char cat zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+char dan zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+levelcap 75
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Transformations completed
+quest AhtUrhgan.TheBeastWithin accepted
+charvar Quest[6][40]Prog 2
+item BlueMagesTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.AnEmptyVessel completed
+bob: quest AhtUrhgan.Transformations completed
+bob: quest AhtUrhgan.TheBeastWithin completed
+bob: charvar Quest[6][40]Prog 2
+cat: levelcap 75
+cat: quest AhtUrhgan.AnEmptyVessel completed
+cat: quest AhtUrhgan.Transformations completed
+cat: quest AhtUrhgan.TheBeastWithin accepted
+cat: charvar Quest[6][40]Prog 3
+dan: levelcap 75
+dan: quest AhtUrhgan.AnEmptyVessel completed
+dan: quest AhtUrhgan.Transformations completed
+dan: quest AhtUrhgan.TheBeastWithin accepted
+dan: charvar Quest[6][40]Prog 0
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trade _1v0 BlueMagesTestimony x1
+update 32000 option=33
+finish
+bob: trigger _1v0
+bob: update 32000 option=33
+bob: finish-if-event
+cat: trigger _1v0
+cat: update 32000 option=33
+cat: finish-if-event
+dan: trigger _1v0
+dan: update 32000 option=33
+dan: finish-if-event

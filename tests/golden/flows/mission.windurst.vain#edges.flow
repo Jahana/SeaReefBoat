@@ -1,0 +1,63 @@
+# Vain (Windurst 8-1, mission.windurst.vain), the arms the play-through skips: Sedal-Godjal at status 1 (nothing), at 2
+# without the seeker and with the drained one (119), the wand at 2, another item at 3, the wand without the drained
+# seeker, 119 at 4 without it; Moreno at 5 (nothing), Fuepepe at 5 (755); the Ro'Maeve zone-in and Qu'Hau Spring at
+# status 2; West Ronfaure at 2.
+char zone=Davoi pos=187,-3,-116 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+rank 8
+mission Windurst Vain current
+item CurseWand
+item FireCrystal
+login
+missionstatus Windurst 1
+trigger Sedal-Godjal                    # status 1: nothing from the mission
+finish-if-event
+missionstatus Windurst 2
+trigger Sedal-Godjal                    # status 2, no seeker: 119
+finish
+keyitem MagicDrainedStarSeeker
+trigger Sedal-Godjal                    # status 2, drained: 119
+finish
+trade Sedal-Godjal CurseWand x1         # status 2: nothing from the mission
+finish-if-event
+missionstatus Windurst 3
+trade Sedal-Godjal FireCrystal x1       # another item: nothing from the mission
+finish-if-event
+delkeyitem MagicDrainedStarSeeker       # a GM
+trade Sedal-Godjal CurseWand x1         # status 3, not drained: nothing from the mission
+finish-if-event
+missionstatus Windurst 4
+trigger Sedal-Godjal                    # status 4, not drained: 119
+finish
+missionstatus Windurst 5
+warp 169,-1.25,161 WindurstWaters
+trigger Moreno-Toeno                    # status 5: nothing from the mission
+finish-if-event
+trigger Fuepepe                         # status 5: 755
+finish
+missionstatus Windurst 1
+warp 1.748,-27.402,67.751 Romaeve
+missionstatus Windurst 2
+warp 1.748,-27.402,67.751 Romaeve       # status 2: no zone-in event
+trigger QuHau_Spring                    # status 2: nothing from the mission
+finish-if-event
+warp -440,24,-220 WestRonfaure          # status 2: no zone-in event

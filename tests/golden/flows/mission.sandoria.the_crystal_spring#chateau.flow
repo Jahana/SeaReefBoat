@@ -1,0 +1,16 @@
+# The Crystal Spring's zone-in edges: at status 2 a warp into Chateau d'Oraguille from Southern San d'Oria plays no
+# zone-in, and Chalvatot answers his own 531; at status 1 the warp into Northern San d'Oria plays SoA's Rumors from the
+# West zone-in 878 (its finish sets that mission's status), and the warp from there into the Chateau plays no zone-in
+# (status 1).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Ambrotien/onTrade SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/Endracion/onTrade SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/1013 SouthernSanDoria/onEventFinish/1030 SouthernSanDoria/onEventFinish/2013 SouthernSanDoria/onEventFinish/2030 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/Grilau/onTrade NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1013 NorthernSanDoria/onEventFinish/1030 ChateauDoraguille/Chalvatot/onTrigger ChateauDoraguille/onZoneIn/1 ChateauDoraguille/onEventFinish/555 ChateauDoraguille/onEventFinish/556
+char zone=SouthernSanDoria pos=-110,1,-35 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria TheCrystalSpring current
+login
+missionstatus Sandoria 2
+warp 2,0.1,0.1 ChateauDoraguille          # from Southern San d'Oria: no zone-in
+trigger Chalvatot                       # status 2: nothing from the mission
+finish-if-event
+missionstatus Sandoria 1
+warp -240,8,57 NorthernSanDoria
+warp 2,0.1,0.1 ChateauDoraguille          # from Northern San d'Oria at status 1: no zone-in

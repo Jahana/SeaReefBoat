@@ -1,0 +1,30 @@
+# Fetichism (Bastok 1-3): the sections that do not apply. Main, a level 10 Warrior of San d'Orian holding the four
+# Quadav Fetich parts and no mission: Cleades: section 1 fails (not Bastok): his script's 1003; the four parts traded:
+# no section 2: no event. bob, a level 10 Warrior of Bastok with A Geological Survey current (a GM): Cleades: 1-3's
+# sections fail (a current mission, not 1-3): 1-2's own section answers (ORIGINAL_MISSION_OFFSET + 3); the four parts
+# traded: no event. Rival zone-ins, another mission's script: both chars' logins in Bastok Markets play Seekers of
+# Adventure's Rumors from the West onZoneIn, which returns 22 each (no event packet; bob's login also writes his area 12
+# status 2).
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/Cleades/onTrade
+char zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=0
+char bob zone=BastokMarkets pos=-358,-10,-168 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+bob: mission Rov Resonance current
+bob: mission Bastok GeologicalSurvey current
+item QuadavFetichHead
+item QuadavFetichTorso
+item QuadavFetichArms
+item QuadavFetichLegs
+bob: item QuadavFetichHead
+bob: item QuadavFetichTorso
+bob: item QuadavFetichArms
+bob: item QuadavFetichLegs
+login
+trigger Cleades                         # not Bastok: no section: his script's 1003
+finish
+walk -357,-10,-168
+trade Cleades QuadavFetichHead x1 QuadavFetichTorso x1 QuadavFetichArms x1 QuadavFetichLegs x1   # no section 2: no event
+bob: login
+bob: trigger Cleades                    # a current mission (1-2): 1-2's ORIGINAL_MISSION_OFFSET + 3
+bob: walk -357,-10,-168
+bob: trade Cleades QuadavFetichHead x1 QuadavFetichTorso x1 QuadavFetichArms x1 QuadavFetichLegs x1   # no event

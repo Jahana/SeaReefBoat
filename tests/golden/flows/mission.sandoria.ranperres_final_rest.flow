@@ -1,0 +1,86 @@
+# Ranperre's Final Rest (San d'Oria 6-2, mission.sandoria.ranperres_final_rest) played through: a level 75 San d'Orian
+# at rank 6, ASA, ACP, RoV and SoA current (their content quiet) and the nation's missions before it completed.
+# Endracion's own 1009, option 17: begun. Chateau: _6h0 81 (status 1); Perfaumand at status 1 without the book:
+# nothing from the mission, his script's 522. King Ranperre's Tomb: _5a0 at status 1: the three Corrupted popped from
+# the door, SENSE_SOMETHING_EVIL (7330); with them up popFromQM fails: the default HEAVY_DOOR (7331); Yorgos and
+# Soffeil killed: nothing; Ulbrig, the other two dead: status 2. _5a0 at status 2, x > -39.019: 6, finished there:
+# status stays 2; 6 again, the char walks through with the event open: status 3. Tombstone_Lower at status 3: 8, the
+# Ancient San d'Orian Book, the Piece of Paper taken; with the book: FINAL_RESTING_PLACE (7335); _5a0 from inside: 7.
+# Perfaumand with the book: 49. Endracion with the book: 1035, the book taken, requiredToZone, status 4; then 1037;
+# zoned: 1039, status 5. Chateau: _6h0 21 (status 6); Perfaumand 50; the Tomb: _5a0 5 (status 7); _6h0 79, Perfaumand
+# 79; Endracion 1033: completed, rank 7, 40000 gil.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/1033 SouthernSanDoria/onEventFinish/1034 SouthernSanDoria/onEventFinish/1035 SouthernSanDoria/onEventFinish/1036 SouthernSanDoria/onEventFinish/1039 SouthernSanDoria/onEventFinish/1040 NorthernSanDoria/onEventFinish/1033 NorthernSanDoria/onEventFinish/1035 NorthernSanDoria/onEventFinish/1039 ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/Perfaumand/onTrigger ChateauDoraguille/onEventFinish/21 ChateauDoraguille/onEventFinish/81 KingRanperresTomb/_5a0/onTrigger KingRanperresTomb/Tombstone_Lower/onTrigger KingRanperresTomb/onEventFinish/5 KingRanperresTomb/onEventFinish/6 KingRanperresTomb/onEventFinish/8
+char zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+rank 6
+keyitem PieceOfPaper
+login
+trigger Endracion                       # his own 1009
+finish option=17                        # begun
+warp 2,0.1,0.1 ChateauDoraguille
+trigger _6h0                            # status 0: 81
+finish                                  # status 1
+trigger Perfaumand                      # status 1, no book: nothing from the mission
+finish-if-event
+warp -36,4.8,20 KingRanperresTomb
+trigger _5a0                            # status 1: the three popped, SENSE_SOMETHING_EVIL
+trigger _5a0                            # status 1, the three up: popFromQM false: nothing
+finish-if-event
+kill CORRUPTED_YORGOS                   # the other two up: nothing
+kill CORRUPTED_SOFFEIL                  # Ulbrig up: nothing
+kill CORRUPTED_ULBRIG                   # the other two dead: status 2
+trigger _5a0                            # status 2, x > -39.019: 6
+finish                                  # x > -39.019: status stays 2
+trigger _5a0                            # status 2: 6
+walk -41,4.8,20                         # through the door, the event open
+finish                                  # x <= -39.019: status 3
+trigger Tombstone_Lower                 # status 3, no book: 8
+finish                                  # the Ancient San d'Orian Book, the Piece of Paper taken
+trigger Tombstone_Lower                 # the book: FINAL_RESTING_PLACE
+walk -41,4.8,20
+trigger _5a0 here                       # status 3, x <= -39.019: 7
+finish
+warp 2,0.1,0.1 ChateauDoraguille
+trigger Perfaumand                      # the book, status 3: 49
+finish
+warp -108.5,1,-34 SouthernSanDoria
+trigger Endracion                       # the book: 1035
+finish                                  # the book taken, requiredToZone, status 4
+trigger Endracion                       # status 4, requiredToZone: 1037
+finish
+warp -240,7,58 NorthernSanDoria
+warp -108.5,1,-34 SouthernSanDoria
+trigger Endracion                       # status 4, zoned: 1039
+finish                                  # status 5
+warp 2,0.1,0.1 ChateauDoraguille
+trigger _6h0                            # status 5: 21
+finish                                  # status 6
+trigger Perfaumand                      # status 6: 50
+finish
+warp -36,4.8,20 KingRanperresTomb
+trigger _5a0                            # status 6: 5
+finish                                  # status 7
+warp 2,0.1,0.1 ChateauDoraguille
+trigger _6h0                            # status 7: 79
+finish
+trigger Perfaumand                      # status 7: 79
+finish
+warp -108.5,1,-34 SouthernSanDoria
+trigger Endracion                       # status 7: 1033
+finish                                  # completed: rank 7, 40000 gil

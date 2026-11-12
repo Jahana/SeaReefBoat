@@ -1,0 +1,64 @@
+# Daughter of a Knight (WotG 10). Amaura in Southern San d'Oria at status 0: 935; finished: status 1. At status 1: 936,
+# finished: Option 1; then Amaura plays her DefaultActions event 642 (no finish change). A trade of the Cernunnos Bulb:
+# 937, finished: status 2, the bulb kept. The Humus-rich Earth in Jugner Forest [S] at status 2:
+# IDEAL_PLACE_TO_PLANT_ITEM; the bulb traded: planted and taken, status 3, YOU_PLANT_ITEM. At status 3:
+# ITEM_IS_PLANTED_HERE there; Amaura plays 938 once per zone, then 642 (DefaultActions). The earth in Jugner Forest: 33
+# (the warp to Jugner Forest writes Mission[10][6]diggingZone=114, another log's var), finished: status 4. At status 4
+# the earth sends DRAWN_UNWANTED_ATTENTION; again: SENSE_UNUSUAL_PRESENCE (the trace shows neither the spawn nor the
+# local var Cernunnos's script sets); Cernunnos killed: the earth plays 34, finished: the Cernunnos Resin and status 5.
+# At status 5 the earth: DELIVER_TO_AMAURE; Amaura: 939, finished: the resin taken, status 6, the Timer and mustZone.
+# Amaura then plays 940 (its finish sets mustZone again, already set by 939, so the trace shows no change), then 642
+# (DefaultActions); after a zone change, with the Timer not reached: 940 once more (finished: mustZone again, which the
+# zone change had cleared); a Vanadiel day on and a zone change: 941, finished: the mission completes (the Bottle of
+# Treant Tonic, A Spoonful of Sugar current).
+lists SouthernSanDoria/Amaura/onTrigger SouthernSanDoria/Amaura/onTrade SouthernSanDoria/onEventFinish/935 SouthernSanDoria/onEventFinish/936 SouthernSanDoria/onEventFinish/937 SouthernSanDoria/onEventFinish/939 SouthernSanDoria/onEventFinish/940 SouthernSanDoria/onEventFinish/941 JugnerForestS/Humus-rich_Earth/onTrigger JugnerForestS/Humus-rich_Earth/onTrade JugnerForest/Humus-rich_Earth/onTrigger JugnerForest/onEventFinish/33 JugnerForest/onEventFinish/34 JugnerForest/Cernunnos/onMobDeath
+char zone=SouthernSanDoria pos=-84.367,-6.949,91.148 job=WAR lvl=99
+item CernunnosBulb
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg DaughterOfAKnight current
+login
+trigger Amaura                          # status 0: 935
+finish                                  # status 1
+trigger Amaura                          # status 1, Option 0: 936
+finish                                  # Option 1
+trigger Amaura                          # Option 1: Amaura's DefaultActions 642
+finish-if-event
+trade Amaura CernunnosBulb x1           # 937
+finish                                  # status 2; the bulb kept
+warp -510.535,7.568,289.283 JugnerForestS
+trigger Humus-rich_Earth                # status 2: IDEAL_PLACE_TO_PLANT_ITEM
+trade Humus-rich_Earth CernunnosBulb x1 # planted; status 3
+trigger Humus-rich_Earth                # status 3: ITEM_IS_PLANTED_HERE
+warp -84.367,-6.949,91.148 SouthernSanDoria
+trigger Amaura                          # status 3: 938, once per zone
+finish-if-event
+trigger Amaura                          # the second time: DefaultActions 642
+finish-if-event
+warp -510.535,7.568,289.283 JugnerForest
+trigger Humus-rich_Earth                # status 3: 33
+finish                                  # status 4
+trigger Humus-rich_Earth                # status 4: DRAWN_UNWANTED_ATTENTION
+trigger Humus-rich_Earth                # again: SENSE_UNUSUAL_PRESENCE
+kill CERNUNNOS
+trigger Humus-rich_Earth                # defeated: 34
+finish                                  # the resin; status 5
+trigger Humus-rich_Earth                # status 5: DELIVER_TO_AMAURE
+warp -84.367,-6.949,91.148 SouthernSanDoria
+trigger Amaura                          # status 5: 939
+finish                                  # status 6; the Timer and mustZone
+trigger Amaura                          # mustZone, amauraOption 0: 940
+finish
+trigger Amaura                          # amauraOption 1: DefaultActions 642
+finish-if-event
+warp -84.367,-6.949,91.148 SouthernSanDoriaS
+warp -84.367,-6.949,91.148 SouthernSanDoria                # zoned
+trigger Amaura                          # the Timer not reached: 940
+finish-if-event
+wait vana=24
+warp -84.367,-6.949,91.148 SouthernSanDoriaS
+warp -84.367,-6.949,91.148 SouthernSanDoria                # zoned
+trigger Amaura                          # 941
+finish                                  # completed

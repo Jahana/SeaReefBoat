@@ -1,0 +1,21 @@
+# The Holy Crest (battlefield.holy_crest, Ghelsba Outpost): a level 30 Dragoon with the quest accepted and the
+# Dragon Curse Remedy triggers Hut_Door. Updates 0 (ignored), 4 (index 0, not in the menu: REQS_NOT_MET), 16
+# (registered: the area is fixed at 1), 20 and 17 (already registered). A tick spawns Cyranuce M Cutauleon; killed: the
+# win, event 32001, its finish, the cleanup.
+lists GhelsbaOutpost/Hut_Door/onTrigger GhelsbaOutpost/onEventUpdate/32000 GhelsbaOutpost/onEventFinish/32000 GhelsbaOutpost/onEventFinish/32001
+char zone=GhelsbaOutpost pos=-163.5,-11.7,77.8 job=DRG lvl=30
+quest Sandoria.TheHolyCrest accepted
+keyitem DragonCurseRemedy
+login
+trigger Hut_Door
+update 32000 option=0
+update 32000 option=4
+update 32000 option=16
+update 32000 option=20
+update 32000 option=17
+finish
+tick 2000
+kill CYRANUCE_M_CUTAULEON
+finish
+tick 11000
+tick 10000

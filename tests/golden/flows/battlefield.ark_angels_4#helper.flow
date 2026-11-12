@@ -1,0 +1,35 @@
+# Ark Angels 4: area 2 with a helper (eve, Ark Angels completed). The win plays 32001 to both; eve's finish does nothing
+# (the mission not current); main's gives the Shard of Arrogance.
+lists LaloffAmphitheater/qm1_4/onTrigger LaloffAmphitheater/onEventUpdate/32000 LaloffAmphitheater/onEventFinish/32000 LaloffAmphitheater/onEventFinish/32001 LaloffAmphitheater/onEventFinish/32002 LaloffAmphitheater/qm2/onTrigger LaloffAmphitheater/onEventFinish/32003
+char zone=LaloffAmphitheater pos=237.15,-173.572,361.266 job=WAR lvl=99 nation=0
+char eve zone=LaloffAmphitheater pos=237.15,-173.572,361.266 job=WAR lvl=99 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ArkAngels current
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Zilart ArkAngels completed
+eve: mission Zilart TheSealedShrine current
+login
+missionstatus Zilart 1                  # a GM
+eve: login
+invite eve
+eve: accept
+effect 50                               # a GM: Invincible
+effect 522
+effect 49
+eve: effect 50
+trigger qm1_4
+update 32000 option=50                  # index 3, area 2: entered
+finish
+eve: trigger qm1_4
+eve: update 32000 option=50
+eve: finish
+tick 2000
+kill ARK_ANGEL_EV+1                   # won: 32001 to both
+eve: finish                             # eve: nothing
+finish                                  # main: the ShardOfArrogance

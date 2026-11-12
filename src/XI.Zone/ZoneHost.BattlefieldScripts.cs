@@ -29,22 +29,13 @@ namespace XI.Zone
         private readonly Dictionary<string, BoundBattlefield> boundBattlefields_ =
             new Dictionary<string, BoundBattlefield>(StringComparer.Ordinal);
 
-        private sealed class DiscoveredBattlefield
+        private sealed class DiscoveredBattlefield : DiscoveredScript<BattlefieldScript>
         {
-            public string TypeName;
-            public BattlefieldScript Script;
-            // what the constructor threw
-            public string Error;
         }
 
         // the BattlefieldScripts of the containers (DiscoverContainers), in type-name order
         private static List<DiscoveredBattlefield> DiscoverBattlefieldScripts(List<DiscoveredContainer> containers) =>
-            containers.Where(d => typeof(BattlefieldScript).IsAssignableFrom(d.Type))
-                .Select(c => new DiscoveredBattlefield
-                {
-                    TypeName = c.Type.FullName, Script = (BattlefieldScript)c.Script, Error = c.Error,
-                })
-                .ToList();
+            DiscoverScripts<DiscoveredBattlefield, BattlefieldScript>(containers);
 
         // the coverage labels of the C# battlefield with the key (BattlefieldScript.CoverageLabels); null when no C#
         // battlefield has it
@@ -62,33 +53,25 @@ namespace XI.Zone
         // the battlefields of the register pass (CSharpQuests.register), after the missions: those with a LegacyPath
         // first, then the others by key, each registered as RegisterBattlefieldScript says; one that throws is left to
         // Lua and logged. Then the hooks of each zone that got one
-        private void RegisterBattlefieldScripts(LuaState l, HashSet<string> keys, int top)
+        private int RegisterBattlefieldScripts(LuaState l, HashSet<string> keys, int top)
         {
+            // the last pass's proxies are dropped and their references released (a battlefield switched off leaves
+            // no stale content); their zones get their hooks again below, the list's Lua contents back in place
+            var lastZones = boundBattlefields_.Values.Select(b => b.Zone).ToList();
+            foreach (var old in boundBattlefields_.Values) ReleaseBattlefield(l, old, top);
             boundBattlefields_.Clear();
             var all = (SkipDiscoveredQuests ? new List<DiscoveredBattlefield>() : battlefieldScripts_)
                 .Concat(TestQuestScripts.OfType<BattlefieldScript>()
-                    .Select(s => new DiscoveredBattlefield { TypeName = s.GetType().FullName, Script = s }))
-                .ToList();
-            string SortKey(DiscoveredBattlefield d) => d.Script?.Key ?? d.TypeName;
-            var ordered = all.Where(d => d.Script?.LegacyPath != null)
-                .Concat(all.Where(d => d.Script?.LegacyPath == null).OrderBy(SortKey, StringComparer.Ordinal));
-            foreach (var d in ordered)
-            {
-                string name = d.TypeName;
-                try
+                    .Select(s => new DiscoveredBattlefield { TypeName = s.GetType().FullName, Script = s }));
+            var ordered = LegacyFirst(all, d => d.Script?.LegacyPath, d => d.Script?.Key ?? d.TypeName);
+            int registered = RegisterEach(l, ordered, top, d => d.TypeName,
+                (DiscoveredBattlefield d, ref string name, ref bool duplicate, out QuestScriptBinding bound) =>
                 {
-                    RegisterBattlefieldScript(l, d, keys, ref name);
-                }
-                catch (Exception e)
-                {
-                    log_($"quests: {name} not registered: {e.Message}");
-                }
-                finally
-                {
-                    l.SetTop(top);
-                }
-            }
-            foreach (var zone in boundBattlefields_.Values.Select(b => b.Zone).Distinct().OrderBy(z => z))
+                    bound = null;
+                    return RegisterBattlefieldScript(l, d, keys, ref name);
+                });
+            var zones = boundBattlefields_.Values.Select(b => b.Zone).Concat(lastZones).Distinct().OrderBy(z => z);
+            foreach (var zone in zones)
             {
                 try
                 {
@@ -102,6 +85,33 @@ namespace XI.Zone
                 {
                     l.SetTop(top);
                 }
+            }
+            return registered;
+        }
+
+        // one proxy of the last pass taken out of the Lua tables, its registry reference released
+        private void ReleaseBattlefield(LuaState l, BoundBattlefield b, int top)
+        {
+            try
+            {
+                if (b.Proxy == null) return;
+                l.GetPath("CSharpQuests.dropBattlefield");
+                l.PushValue(1);
+                l.PushRef(b.Proxy);
+                l.Call(2, 0);
+            }
+            catch (Exception e)
+            {
+                log_($"quests: {b.Key}: its last proxy not released: {e.Message}");
+            }
+            finally
+            {
+                if (b.Proxy != null)
+                {
+                    l.Unref(b.Proxy);
+                    b.Proxy = null;
+                }
+                l.SetTop(top);
             }
         }
 
@@ -129,17 +139,8 @@ namespace XI.Zone
             // whether a refusal leaves the Lua in charge: hasLua, or for an unknown constant or a second class with
             // the key (where the container tells nothing) whether the LegacyPath file is there
             bool fallback = hasLua;
-            bool Refuse(string reason, IList<string> each = null)
-            {
-                if (!fallback)
-                {
-                    log_($"quests: C# battlefield {key} failed to load and has no Lua fallback: {reason}");
-                    QuestLoadFailures.Add(key);
-                }
-                else if (each != null) foreach (var p in each) log_($"quests: {key} not registered: {p}");
-                else log_($"quests: {key} not registered: {reason}");
-                return false;
-            }
+            bool Refuse(string reason, IList<string> each = null) =>
+                RefuseContainer("battlefield", key, fallback, reason, each);
             if (CSharpQuestsOff.Contains(key))
             {
                 // OFF leaves the Lua file in charge while it exists; after its deletion there is nothing to fall back
@@ -170,6 +171,7 @@ namespace XI.Zone
             if (problems.Count > 0) return Refuse(string.Join("; ", problems), each: problems);
 
             var b = new BoundBattlefield(key, d.Script, data, id.Value);
+            b.MakeCallbackRef = cb => BattlefieldCallbackFunction(b, cb);
             int top = l.Top;
             try
             {
@@ -186,6 +188,12 @@ namespace XI.Zone
             catch (Exception e)
             {
                 containerCache_ = null;
+                // the proxy took its registry reference before the build threw
+                if (b.Proxy != null)
+                {
+                    l.Unref(b.Proxy);
+                    b.Proxy = null;
+                }
                 return Refuse(e.Message);
             }
             finally
@@ -339,33 +347,15 @@ namespace XI.Zone
             foreach (var p in d.Paths) yield return p.Mob;
         }
 
-        // zones[zone].text[name], null for nil
-        internal static int? ZoneTextId(LuaState l, int zone, string name)
+        // zones[zone][kind][key] as a number, null for nil
+        internal static int? ZoneEntryId(LuaState l, int zone, string kind, string key)
         {
             int top = l.Top;
             try
             {
                 l.GetGlobal("zones");
                 if (l.IsTable(-1)) l.RawGetI(-1, zone); else l.PushNil();
-                if (l.IsTable(-1)) l.GetField(-1, "text"); else l.PushNil();
-                if (l.IsTable(-1)) l.GetField(-1, name); else l.PushNil();
-                return l.IsNumber(-1) ? (int)l.ToIntegral(-1) : null;
-            }
-            finally
-            {
-                l.SetTop(top);
-            }
-        }
-
-        // zones[zone].mob[key], null for nil
-        private static int? ZoneMobId(LuaState l, int zone, string key)
-        {
-            int top = l.Top;
-            try
-            {
-                l.GetGlobal("zones");
-                if (l.IsTable(-1)) l.RawGetI(-1, zone); else l.PushNil();
-                if (l.IsTable(-1)) l.GetField(-1, "mob"); else l.PushNil();
+                if (l.IsTable(-1)) l.GetField(-1, kind); else l.PushNil();
                 if (l.IsTable(-1)) l.GetField(-1, key); else l.PushNil();
                 return l.IsNumber(-1) ? (int)l.ToIntegral(-1) : null;
             }
@@ -374,6 +364,12 @@ namespace XI.Zone
                 l.SetTop(top);
             }
         }
+
+        // zones[zone].text[name], null for nil
+        internal static int? ZoneTextId(LuaState l, int zone, string name) => ZoneEntryId(l, zone, "text", name);
+
+        // zones[zone].mob[key], null for nil
+        private static int? ZoneMobId(LuaState l, int zone, string key) => ZoneEntryId(l, zone, "mob", key);
 
         // xi.settings.main[name] as a number, null when it is not one
         private static double? SettingNumber(LuaState l, string name)
@@ -583,10 +579,14 @@ namespace XI.Zone
                 Bool("isQuest", true);
             }
 
-            // sections = { { [zoneId] = {} } }: its hooks are set with the zone's (SetZoneBattlefieldHooks)
+            // sections = { { [zoneId] = { onEventUpdate = { [csid] = fn }, onEventFinish = { ... } } } }: the
+            // battlefield's own handlers; its hooks are set with the zone's (SetZoneBattlefieldHooks), which
+            // utils.append merges into the same tables, as Battlefield:register does for one_to_be_feared.lua
             l.NewTable();
             l.NewTable();
             l.NewTable();
+            PushSectionEvents(l, b, "onEventUpdate", d.OnEventUpdate);
+            PushSectionEvents(l, b, "onEventFinish", d.OnEventFinish);
             l.RawSetI(-2, d.ZoneId);
             l.RawSetI(-2, 1);
             l.SetField(proxy, "sections");
@@ -623,7 +623,67 @@ namespace XI.Zone
                 l.PushFunction(fn);
                 l.SetField(proxy, field);
             }
+            foreach (var (field, value) in d.ProxyFields.OrderBy(f => f.Key, StringComparer.Ordinal))
+            {
+                l.GetField(proxy, field);
+                bool taken = !l.IsNil(-1);
+                l.Pop(1);
+                if (taken) throw new InvalidOperationException($"proxy field {field} is a framework field");
+                PushProxyValue(l, value);
+                l.SetField(proxy, field);
+            }
             return proxy;
+        }
+
+        // the zone section's handlers of the kind, as a table of its section at the top of the stack; none when empty.
+        // The lookup calls each with (player, csid, option, npc)
+        private void PushSectionEvents(LuaState l, BoundBattlefield b, string kind,
+                                       Dictionary<int, BattlefieldEventHandler> handlers)
+        {
+            if (handlers.Count == 0) return;
+            l.NewTable();
+            foreach (var (csid, run) in handlers.OrderBy(h => h.Key))
+            {
+                string label = BattlefieldScript.SectionLabel(kind, csid);
+                l.PushFunction(BattlefieldClosure(b, label, player: 1, npc: 4, body: (q, cl) =>
+                {
+                    q.Reached(label);
+                    run(q, cl.OptInt(2, 0), cl.OptInt(3, 0));
+                    return 0;
+                }));
+                l.RawSetI(-2, csid);
+            }
+            l.SetField(-2, kind);
+        }
+
+        // a proxy field's value (BattlefieldData.ProxyFields) as Lua: the validator took its types
+        private static void PushProxyValue(LuaState l, object value)
+        {
+            switch (value)
+            {
+                case object[] array:
+                    l.NewTable();
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        PushProxyValue(l, array[i]);
+                        l.RawSetI(-2, i + 1);
+                    }
+                    break;
+                case Dictionary<string, object> table:
+                    l.NewTable();
+                    foreach (var (k, v) in table)
+                    {
+                        PushProxyValue(l, v);
+                        l.SetField(-2, k);
+                    }
+                    break;
+                case int n:
+                    l.Push((double)n);
+                    break;
+                default:
+                    l.Push(value);
+                    break;
+            }
         }
 
         // an array of numbers or strings, as a new table
@@ -674,6 +734,11 @@ namespace XI.Zone
             Flag("isParty", g.IsParty ? true : null);
             Flag("spawned", g.Spawned);
             Flag("stationary", g.Stationary);
+            if (g.SuperlinkGroup is { } superlinkGroup)
+            {
+                l.Push((double)superlinkGroup);
+                l.SetField(-2, "superlinkGroup");
+            }
             if (g.EssentialIndex > 0)
             {
                 // allDeath = utils.bind(self.handleAllMonstersDefeated, self): (battlefield, mob)
@@ -702,6 +767,17 @@ namespace XI.Zone
             if (g.AllDeath != null) Callback("allDeath", (q, _) => g.AllDeath(q, q.Mob));
             if (g.RandomDeath != null) Callback("randomDeath", (q, _) => g.RandomDeath(q, q.Mob));
             if (g.Death != null) Callback("death", (q, cl) => g.Death(q, q.Mob, (int)cl.ToIntegral(3)));
+            if (g.Setup != null)
+            {
+                string label = $"group:{number}:setup";
+                l.PushFunction(BattlefieldClosure(b, label, bf: 1, body: (q, _) =>
+                {
+                    q.Reached(label);
+                    g.Setup(q, q.MobsAt(2));
+                    return 0;
+                }));
+                l.SetField(-2, "setup");
+            }
         }
 
         // the proxy's function fields: content:<method>(...) as the framework's Lua calls it, each the C# hook
@@ -842,6 +918,42 @@ namespace XI.Zone
                     l.SetTop(top + keep);
                 }
             };
+        }
+
+        // quest rework C3 PR2: a battlefield callback's C# function, which its closures (CSharpQuests.bfCallback)
+        // call with (m, the engine's m arguments, the captures): a call of the battlefield whose mob is the engine's
+        // first argument, and its player too when that is a char; the callback's label reached, then its body. An
+        // exception is logged as a hook's is (BattlefieldClosure), and the queue or the listeners go on
+        private LuaRef BattlefieldCallbackFunction(BoundBattlefield b, BattlefieldCallback cb)
+        {
+            string name = "callback " + cb.Name;
+            lua_.PushFunction(l =>
+            {
+                int top = l.Top;
+                try
+                {
+                    int m = l.IsNumber(1) ? (int)l.ToIntegral(1) : 0;
+                    var env = new BattlefieldCall(l, this, log_, b, b.Binding, name);
+                    int entity = m >= 1 ? 2 : 0;
+                    int player = entity != 0 && l.ToObject(entity) is CharData ? entity : 0;
+                    var q = new LiveBattlefieldContext(env, player, 0, 0, 0, entity);
+                    q.Reached(cb.Label);
+                    cb.Run(q, new LiveBattlefieldCallbackArgs(env, m, 2, m + 2, top - (m + 1)));
+                    return 0;
+                }
+                catch (Exception e)
+                {
+                    string line = $"quests: {b.Key} {name}: {e.Message}";
+                    log_(line);
+                    HandlerThrew?.Invoke(line);
+                    return 0;
+                }
+                finally
+                {
+                    l.SetTop(top);
+                }
+            });
+            return lua_.Ref();
         }
 
         // ---- the zone's hooks --------------------------------------------------------------------------------------
@@ -1028,6 +1140,30 @@ namespace XI.Zone
                 "    end\n" +
                 "    return byZone, inList\n" +
                 "end", "=CSharpQuests");
+            // CSharpQuests.dropBattlefield(list, content): a C# content of the last pass taken out: of
+            // contentsByZone, and of contents[id] (the list's content with that id takes its place: a Lua file's, or
+            // nothing). A C# battlefield registered again in this pass sets contents[id] after this
+            lua_.DoString(
+                "CSharpQuests.dropBattlefield = function(list, content)\n" +
+                "    local id = content.battlefieldId\n" +
+                "    if xi.battlefield.contents[id] == content then\n" +
+                "        local replacement = nil\n" +
+                "        for _, c in ipairs(list) do\n" +
+                "            if type(c) == 'table' and c ~= content and c.battlefieldId == id and\n" +
+                "                c.id == string.format('Battlefield[%d]', id)\n" +
+                "            then\n" +
+                "                replacement = c\n" +
+                "            end\n" +
+                "        end\n" +
+                "        xi.battlefield.contents[id] = replacement\n" +
+                "    end\n" +
+                "    local byZone = xi.battlefield.contentsByZone[content.zoneId]\n" +
+                "    for i = #(byZone or {}), 1, -1 do\n" +
+                "        if byZone[i] == content then\n" +
+                "            table.remove(byZone, i)\n" +
+                "        end\n" +
+                "    end\n" +
+                "end", "=CSharpQuests");
             // CSharpQuests.battlefieldHooks(self, setupEvents, setupEntryNpcs, h): Battlefield:register's hook
             // setup (scripts/globals/battlefield.lua:514-558) on the content's zone section, with h's functions for
             // a C# content (h nil: a Lua content, the Lua framework's). A Lua content keeps the hooks it already has,
@@ -1136,6 +1272,72 @@ namespace XI.Zone
                 return 1;
             });
             openCrateCallback_ = lua_.Ref();
+            // quest rework C3 PR2: a battlefield callback's closure, as the Lua battlefield's own closure keeps its
+            // upvalues: the captured values held by the closure (Lua's to collect once the queue or the listener lets
+            // go of it), raw called with (m, the engine's m arguments, the captures)
+            lua_.DoString(
+                "CSharpQuests.bfCallback = function(raw, ...)\n" +
+                "    local n = select('#', ...)\n" +
+                "    local captured = { ... }\n" +
+                "    return function(...)\n" +
+                "        local m = select('#', ...)\n" +
+                "        local args = { ... }\n" +
+                "        for i = 1, n do\n" +
+                "            args[m + i] = captured[i]\n" +
+                "        end\n" +
+                "        return raw(m, unpack(args, 1, m + n))\n" +
+                "    end\n" +
+                "end", "=CSharpQuests");
+            // CSharpQuests.moduleOverride(name, super, self, player, battlefield): Battlefield[name] as the Lua
+            // modules' overrides left it (module_utils.lua's applyOverride keeps each override's super in its env),
+            // called on (self, player, battlefield) with the innermost super, the framework's own method, set for the
+            // call to a function that runs super (the C# framework) for self and the framework's own method for any
+            // other content; restored after, also on an error. False, with nothing run, when no module overrides it
+            lua_.DoString(
+                "CSharpQuests.moduleOverride = function(name, super, self, player, battlefield)\n" +
+                "    local inner = nil\n" +
+                "    local f = Battlefield[name]\n" +
+                "    while type(f) == 'function' do\n" +
+                "        local env = getfenv(f)\n" +
+                "        local s = type(env) == 'table' and rawget(env, 'super') or nil\n" +
+                "        if type(s) ~= 'function' then\n" +
+                "            break\n" +
+                "        end\n" +
+                "        inner = env\n" +
+                "        f = s\n" +
+                "    end\n" +
+                "    if inner == nil then\n" +
+                "        return false\n" +
+                "    end\n" +
+                "    local own = rawget(inner, 'super')\n" +
+                "    rawset(inner, 'super', function(first, ...)\n" +
+                "        if first == self then\n" +
+                "            return super(first, ...)\n" +
+                "        end\n" +
+                "        return own(first, ...)\n" +
+                "    end)\n" +
+                "    local ok, err = pcall(Battlefield[name], self, player, battlefield)\n" +
+                "    rawset(inner, 'super', own)\n" +
+                "    if not ok then\n" +
+                "        error(err, 0)\n" +
+                "    end\n" +
+                "    return true\n" +
+                "end", "=CSharpQuests");
+            // super: one function for every override chain, running the body the C# call left pending on a context
+            // over (self, player, battlefield)
+            lua_.PushFunction(l =>
+            {
+                var (body, bound, binding, handler) = pendingSuper_;
+                if (body == null)
+                {
+                    log_("quests: a C# battlefield's module super ran with no body pending");
+                    return 0;
+                }
+                var env = new BattlefieldCall(l, this, log_, bound, binding, handler);
+                body(new LiveBattlefieldContext(env, 2, 0, 0, 3, 0));
+                return 0;
+            });
+            moduleSuper_ = lua_.Ref();
         }
 
         // the callback of the npcUtil.openCrate call running now (LiveBattlefieldEngine.OpenCrate), with its call's
@@ -1143,6 +1345,12 @@ namespace XI.Zone
         internal (Func<IBattlefieldContext, bool> Callback, BoundBattlefield Bound, QuestScriptBinding Binding,
                   string Handler) pendingCrate_;
         internal LuaRef openCrateCallback_;
+
+        // the framework method whose module override chain runs now (LiveBattlefieldEngine.ModuleOverride): the body
+        // its last super runs, with its call's battlefield, binding and name
+        internal (Action<IBattlefieldContext> Body, BoundBattlefield Bound, QuestScriptBinding Binding,
+                  string Handler) pendingSuper_;
+        internal LuaRef moduleSuper_;
     }
 
     // one C# battlefield of this load
@@ -1166,13 +1374,71 @@ namespace XI.Zone
         public QuestScriptBinding Binding { get; }
         // the proxy content table (a registry reference)
         public LuaRef Proxy { get; set; }
+
+        // quest rework C3 PR2: makes a callback's C# function (ZoneHost.BattlefieldCallbackFunction), each once, on
+        // its first arming. Kept for the life of this registration, as a quest's (QuestScriptBinding.CallbackRef):
+        // the LuaState keeps every C# function it is given, so one per arming would grow it with every timer
+        public Func<BattlefieldCallback, LuaRef> MakeCallbackRef { get; set; }
+        private Dictionary<BattlefieldCallback, LuaRef> callbackRefs_;
+
+        public LuaRef CallbackRef(BattlefieldCallback cb)
+        {
+            callbackRefs_ ??= new Dictionary<BattlefieldCallback, LuaRef>(ReferenceEqualityComparer.Instance);
+            if (!callbackRefs_.TryGetValue(cb, out var r))
+            {
+                if (MakeCallbackRef == null)
+                    throw new InvalidOperationException($"{Key}: callbacks cannot be armed here");
+                callbackRefs_[cb] = r = MakeCallbackRef(cb);
+            }
+            return r;
+        }
     }
 
     // an action a hook returns: the Lua Event (a registry reference, released when pushed)
     internal sealed class LiveBattlefieldAction : IBattlefieldAction
     {
-        public LiveBattlefieldAction(LuaRef r) => Ref = r;
+        private readonly LuaState l_;
+
+        public LiveBattlefieldAction(LuaState l, LuaRef r)
+        {
+            l_ = l;
+            Ref = r;
+        }
+
         public LuaRef Ref { get; }
+
+        // action:setPriority(n): the Lua action keeps its reference, and answers itself
+        public IBattlefieldAction SetPriority(int priority)
+        {
+            int top = l_.Top;
+            try
+            {
+                l_.CheckStack(8);
+                l_.PushRef(Ref);
+                int obj = l_.Top;
+                l_.GetField(obj, "setPriority");
+                l_.PushValue(obj);
+                l_.Push((double)priority);
+                l_.Call(2, 0);
+            }
+            finally
+            {
+                l_.SetTop(top);
+            }
+            return this;
+        }
+    }
+
+    // a facet entity (a mob or a player facet) as the Lua value on the call's stack: its position; 0 for nil
+    internal static class LiveEntity
+    {
+        public static LuaSlot Slot(IBattlefieldEntity e) => new LuaSlot(e switch
+        {
+            null => 0,
+            LiveBattlefieldMob m => m.Slot,
+            LiveQuestContext p => p.PlayerSlot,
+            _ => throw new InvalidOperationException("an entity of another bridge"),
+        });
     }
 
     // a Lua value at a position of the call's stack, as an argument
@@ -1301,9 +1567,48 @@ namespace XI.Zone
 
         public int ReadInt(int at = -1) => L.IsNumber(at) ? (int)L.ToIntegral(at) : 0;
 
-        // a player at the position: the quest context over it, with the battlefield bindings
+        // a player at the position: the quest context over it, with the battlefield bindings (over this call: its
+        // battlefield is the one its callbacks are armed for)
         public LiveQuestContext Player(int slot) =>
-            new LiveQuestContext(L, Log, Binding, Handler, player: slot);
+            new LiveQuestContext(L, Log, Binding, Handler, player: slot).InBattlefieldCall(this);
+
+        // quest rework C3 PR2: <self>:<method>(leading..., fn), fn the closure CSharpQuests.bfCallback makes over the
+        // callback's C# function and the captures (a facet of this call as its Lua value), so the engine keeps it as
+        // it keeps a Lua closure (CLuaBaseEntity::timer, queue, addListener)
+        public void ArmCallback(int self, string method, BattlefieldCallback callback, int ms, object[] captures,
+                                params object[] leading)
+        {
+            BattlefieldCallback.CheckArming(Bound?.Script, callback, ms, captures);
+            captures ??= Array.Empty<object>();
+            int top = L.Top;
+            try
+            {
+                L.CheckStack(captures.Length + leading.Length + 16);
+                L.PushValue(self);
+                int obj = L.Top;
+                L.GetField(obj, method);
+                L.PushValue(obj);
+                foreach (var a in leading) Push(a);
+                L.GetPath("CSharpQuests.bfCallback");
+                L.PushRef(Bound.CallbackRef(callback));
+                foreach (var c in captures) Push(CaptureArg(c));
+                L.Call(1 + captures.Length, 1);
+                L.Call(2 + leading.Length, 0);
+            }
+            finally
+            {
+                L.SetTop(top);
+            }
+        }
+
+        // a captured value as an argument: a facet its Lua value, anything else as it is
+        private static object CaptureArg(object c) => c switch
+        {
+            LiveBattlefieldView v => new LuaSlot(v.Slot),
+            IBattlefieldEntity e => LiveEntity.Slot(e),
+            IBattlefieldView => throw new InvalidOperationException("a battlefield of another bridge"),
+            _ => c,
+        };
 
         // the array at the position, each element kept: their positions
         public List<int> KeepArray(int table)
@@ -1338,8 +1643,27 @@ namespace XI.Zone
         public BattlefieldFramework Framework => Script == null ? null : framework_ ??= new BattlefieldFramework(this);
         private BattlefieldFramework framework_;
         public IBattlefieldContent Self => env_.Bound == null ? null
-            : self_ ??= new LiveBattlefieldContent(env_, env_.Keep(() => env_.L.PushRef(env_.Bound.Proxy)));
+            : self_ ??= new LiveBattlefieldContent(env_, env_.Keep(PushSelf));
         private LiveBattlefieldContent self_;
+
+        // the content table: this pass's proxy; a reload released the proxy of a pass whose closures still run in a fight
+        // (the C++ keeps its sol::function), so that fight reads the content now in xi.battlefield.contents[id]
+        private void PushSelf()
+        {
+            var bound = env_.Bound;
+            if (bound.Proxy != null)
+            {
+                env_.L.PushRef(bound.Proxy);
+                return;
+            }
+            env_.L.GetPath("xi.battlefield.contents");
+            env_.L.RawGetI(-1, bound.Id);
+            env_.L.Remove(-2);
+            if (env_.L.IsNil(-1))
+                throw new InvalidOperationException(
+                    $"battlefield {bound.Key}: its proxy was released by a reload and xi.battlefield.contents[{bound.Id}] is nil");
+        }
+        public IBattlefieldText Text => new BattlefieldTextAccessor(this);
         public IBattlefieldPlayer Player => Has(player_) ? playerFacet_ ??= env_.Player(player_) : null;
         private LiveQuestContext playerFacet_;
         public IBattlefieldNpc Npc => Has(npc_) ? new LiveBattlefieldNpc(env_, npc_) : null;
@@ -1360,10 +1684,15 @@ namespace XI.Zone
         public LuaSlot PlayerSlot => new LuaSlot(Has(player_) ? player_ : 0);
         public LuaSlot NpcSlot => new LuaSlot(Has(npc_) ? npc_ : 0);
         public LuaSlot TradeSlot => new LuaSlot(Has(trade_) ? trade_ : 0);
+        public LuaSlot BattlefieldSlot => new LuaSlot(Has(bf_) ? bf_ : 0);
 
         // the players table at the position (handleWipe's), each kept
         public IReadOnlyList<IBattlefieldPlayer> PlayersArg(int at) =>
             env_.KeepArray(at).Select(s => (IBattlefieldPlayer)env_.Player(s)).ToList();
+
+        // the mobs of the array argument at the position
+        public IReadOnlyList<IBattlefieldMob> MobsAt(int at) =>
+            env_.KeepArray(at).Select(s => (IBattlefieldMob)new LiveBattlefieldMob(env_, s)).ToList();
 
         // the table at the position (handleLootRolls' lootTable) as it is, nil too
         public BattlefieldLootTable LootTableArg(int at) => BattlefieldLootTable.OfEngine(new LiveLootTable(env_, at));
@@ -1384,6 +1713,7 @@ namespace XI.Zone
         public int Id => env_.Method(Slot, "getID", 1, () => env_.ReadInt());
         public string Name => env_.Method(Slot, "getName", 1, () => env_.L.ToStringValue(-1));
         public int TargId => env_.Method(Slot, "getTargID", 1, () => env_.ReadInt());
+        public void SetAnimation(int value) => env_.Method(Slot, "setAnimation", 0, () => 0, value);
     }
 
     // a mob at a position
@@ -1398,9 +1728,12 @@ namespace XI.Zone
             slot_ = slot;
         }
 
+        internal int Slot => slot_;
         public int Id => env_.Method(slot_, "getID", 1, () => env_.ReadInt());
         public int MainLevel => env_.Method(slot_, "getMainLvl", 1, () => env_.ReadInt());
         public void SetMobLevel(int level) => env_.Method(slot_, "setMobLevel", 0, () => 0, level);
+        public void MessageText(int textId) =>
+            env_.Method(slot_, "messageText", 0, () => 0, new LuaSlot(slot_), textId);
 
         public void PathThrough(double[] points, int flags)
         {
@@ -1414,6 +1747,182 @@ namespace XI.Zone
                 }
             });
             env_.Method(slot_, "pathThrough", 0, () => 0, new LuaSlot(table), flags);
+        }
+
+        // the Batch F members, each the binding of its name
+        private int I(string method, params object[] args) => env_.Method(slot_, method, 1, () => env_.ReadInt(), args);
+        private bool B(string method, params object[] args) =>
+            env_.Method(slot_, method, 1, () => env_.L.ToBoolean(-1), args);
+        private double N(string method, params object[] args) =>
+            env_.Method(slot_, method, 1, () => env_.L.IsNumber(-1) ? env_.L.ToNumber(-1) : 0, args);
+        private void D(string method, params object[] args) => env_.Method(slot_, method, 0, () => 0, args);
+        private IBattlefieldMob Entity(string method, params object[] args)
+        {
+            int at = env_.KeepMethod(slot_, method, args);
+            return env_.L.IsNil(at) ? null : new LiveBattlefieldMob(env_, at);
+        }
+
+        public uint LocalVar(string name) => (uint)N("getLocalVar", name);
+        public void SetLocalVar(string name, uint value) => D("setLocalVar", name, (double)value);
+        public void ResetLocalVars() => D("resetLocalVars");
+        public bool IsSpawned => B("isSpawned");
+        public bool IsAlive => B("isAlive");
+        public bool IsDead => B("isDead");
+        public bool IsEngaged => B("isEngaged");
+        public bool IsMob => B("isMob");
+        public void Spawn(int? despawnSec = null, int? respawnSec = null) => D("spawn", despawnSec, respawnSec);
+        public void SetSpawn(double x, double y, double z, int? rot = null) => D("setSpawn", x, y, z, rot);
+
+        public void SetPos(double x, double y, double z, int? rot = null)
+        {
+            if (rot == null) D("setPos", x, y, z);
+            else D("setPos", x, y, z, rot.Value);
+        }
+
+        public (double X, double Y, double Z, int Rot) GetPos() => env_.Method(slot_, "getPos", 1, () =>
+        {
+            var l = env_.L;
+            double Field(string key)
+            {
+                l.GetField(-1, key);
+                double v = l.IsNumber(-1) ? l.ToNumber(-1) : 0;
+                l.Pop(1);
+                return v;
+            }
+            return (Field("x"), Field("y"), Field("z"), (int)Field("rot"));
+        });
+
+        public void LookAt(double x, double y, double z) => D("lookAt", x, y, z);
+        public int HP => I("getHP");
+        public void SetHP(int value) => D("setHP", value);
+        public int HPP => I("getHPP");
+        public int MaxHP => I("getMaxHP");
+        public int MaxMP => I("getMaxMP");
+        public void SetMP(int value) => D("setMP", value);
+        public double TP => N("getTP");
+        public void SetTP(int value) => D("setTP", value);
+        public IBattlefieldMob GetTarget() => Entity("getTarget");
+        public void Engage(int targId) => D("engage", targId);
+        public void Disengage() => D("disengage");
+        public void UpdateEnmity(IBattlefieldEntity entity) => D("updateEnmity", LiveEntity.Slot(entity));
+        public void AddEnmity(IBattlefieldEntity entity, int ce, int ve) =>
+            D("addEnmity", LiveEntity.Slot(entity), ce, ve);
+        public void ResetEnmity(IBattlefieldEntity entity) => D("resetEnmity", LiveEntity.Slot(entity));
+
+        public IReadOnlyList<BattlefieldEnmityEntry> GetEnmityList()
+        {
+            var list = new List<BattlefieldEnmityEntry>();
+            int table = env_.KeepMethod(slot_, "getEnmityList");
+            var l = env_.L;
+            foreach (int row in env_.KeepArray(table))
+            {
+                int entity = env_.Keep(() => l.GetField(row, "entity"));
+                var entry = new BattlefieldEnmityEntry { Entity = new LiveBattlefieldMob(env_, entity) };
+                l.GetField(row, "ce");
+                entry.Ce = env_.ReadInt();
+                l.Pop(1);
+                l.GetField(row, "ve");
+                entry.Ve = env_.ReadInt();
+                l.Pop(1);
+                l.GetField(row, "active");
+                entry.Active = l.ToBoolean(-1);
+                l.Pop(1);
+                l.GetField(row, "tameable");
+                entry.Tameable = l.ToBoolean(-1);
+                l.Pop(1);
+                list.Add(entry);
+            }
+            return list;
+        }
+
+        public void UseMobAbility() => D("useMobAbility");
+        public void UseMobAbility(int skillId) => D("useMobAbility", skillId);
+        public void UseMobAbility(int skillId, IBattlefieldEntity target) =>
+            D("useMobAbility", skillId, LiveEntity.Slot(target));
+        public void SetMobAbilityEnabled(bool state) => D("setMobAbilityEnabled", state);
+        public void SetMagicCastingEnabled(bool state) => D("setMagicCastingEnabled", state);
+        public void SetAutoAttackEnabled(bool state) => D("setAutoAttackEnabled", state);
+        public void SetBehavior(int behavior) => D("setBehavior", behavior);
+        public int GetBehavior() => I("getBehavior");
+        public void SetMobMod(int mobMod, int value) => D("setMobMod", mobMod, value);
+        public void SetUnkillable(bool value) => D("setUnkillable", value);
+        public void SetUntargetable(bool value) => D("setUntargetable", value);
+        public void SetSpawnAnimation(int value) => D("setSpawnAnimation", value);
+        public void SetAnimation(int value) => D("setAnimation", value);
+        public void SetStatus(int value) => D("setStatus", value);
+
+        public IBattlefieldView GetBattlefield()
+        {
+            int at = env_.KeepMethod(slot_, "getBattlefield");
+            return env_.L.IsNil(at) ? null : new LiveBattlefieldView(env_, at);
+        }
+
+        public int GetBattlefieldID() => I("getBattlefieldID");
+        public int Pool => I("getPool");
+        public string Name => env_.Method(slot_, "getName", 1, () => env_.L.ToStringValue(-1));
+        public int Race => I("getRace");
+        public int TargId => I("getTargID");
+
+        // quest rework C3 PR2: the entity's own timer, queue and addListener bindings, with a closure over the callback
+        public void Timer(int ms, BattlefieldCallback callback, params object[] captures) =>
+            env_.ArmCallback(slot_, "timer", callback, ms, captures, ms);
+        public void Queue(int ms, BattlefieldCallback callback, params object[] captures) =>
+            env_.ArmCallback(slot_, "queue", callback, ms, captures, ms);
+
+        public void AddListener(string evt, string identifier, BattlefieldCallback callback, params object[] captures)
+        {
+            if (evt == null) throw new ArgumentNullException(nameof(evt));
+            if (identifier == null) throw new ArgumentNullException(nameof(identifier));
+            env_.ArmCallback(slot_, "addListener", callback, 0, captures, evt, identifier);
+        }
+
+        public void RemoveListener(string identifier) =>
+            D("removeListener", identifier ?? throw new ArgumentNullException(nameof(identifier)));
+    }
+
+    // quest rework C3 PR2: a battlefield callback's arguments on its own call's stack: the engine's at first ..
+    // first + count - 1, the captures at capture .. capture + captureCount - 1
+    internal sealed class LiveBattlefieldCallbackArgs : IBattlefieldCallbackArgs
+    {
+        private readonly BattlefieldCall env_;
+        private readonly int first_, capture_;
+
+        public LiveBattlefieldCallbackArgs(BattlefieldCall env, int count, int first, int capture, int captureCount)
+        {
+            env_ = env;
+            ArgCount = count;
+            first_ = first;
+            capture_ = capture;
+            CaptureCount = captureCount;
+        }
+
+        public int ArgCount { get; }
+        public int CaptureCount { get; }
+        public IBattlefieldMob Entity => EntityArg(1);
+
+        private int ArgSlot(int index) => index >= 1 && index <= ArgCount ? first_ + index - 1 : 0;
+
+        private int CaptureSlot(int index) =>
+            index >= 0 && index < CaptureCount ? capture_ + index
+                : throw new ArgumentOutOfRangeException(nameof(index), index, $"{CaptureCount} captured");
+
+        private IBattlefieldMob MobAt(int slot) =>
+            slot == 0 || env_.L.IsNil(slot) ? null : new LiveBattlefieldMob(env_, slot);
+
+        public IBattlefieldMob EntityArg(int index) => MobAt(ArgSlot(index));
+
+        public IBattlefieldView CapturedBattlefield(int index)
+        {
+            int slot = CaptureSlot(index);
+            return env_.L.IsNil(slot) ? null : new LiveBattlefieldView(env_, slot);
+        }
+
+        public IBattlefieldMob CapturedEntity(int index) => MobAt(CaptureSlot(index));
+
+        public int CapturedInt(int index)
+        {
+            int slot = CaptureSlot(index);
+            return env_.L.IsNumber(slot) ? (int)env_.L.ToIntegral(slot) : 0;
         }
     }
 
@@ -1485,8 +1994,17 @@ namespace XI.Zone
         public (int Id, string Name) Initiator() => env_.Method(Slot, "getInitiator", 2, () =>
             (env_.ReadInt(-2), env_.L.IsString(-1) ? env_.L.ToStringValue(-1) : null));
         public int ArmouryCrate => Int("getArmouryCrate");
-        public void InsertEntity(int targId, bool enemy, bool inBattlefield) =>
-            Do("insertEntity", targId, enemy, inBattlefield);
+        public IBattlefieldMob InsertEntity(int targId, bool ally, bool inBattlefield)
+        {
+            int at = env_.KeepMethod(Slot, "insertEntity", targId, ally, inBattlefield);
+            return env_.L.IsNil(at) ? null : new LiveBattlefieldMob(env_, at);
+        }
+
+        public IReadOnlyList<IBattlefieldMob> Allies()
+        {
+            int table = env_.KeepMethod(Slot, "getAllies");
+            return env_.KeepArray(table).Select(s => (IBattlefieldMob)new LiveBattlefieldMob(env_, s)).ToList();
+        }
         public void Cleanup(bool cleanup) => Do("cleanup", cleanup);
         public void Win() => Do("win");
         public void Lose() => Do("lose");
@@ -1532,9 +2050,10 @@ namespace XI.Zone
         public int BattlefieldId => Field("battlefieldId", () => env_.ReadInt());
         public int Index => Field("index", () => env_.ReadInt());
         public bool Experimental => Field("experimental", () => L.ToBoolean(-1));
-        // content.loot, kept on the stack of this call
-        public BattlefieldLootTable Loot =>
+        // content.loot, one table kept on the stack of this call: read twice it is one table, as the fake's
+        public BattlefieldLootTable Loot => loot_ ??=
             BattlefieldLootTable.OfEngine(new LiveLootTable(env_, env_.Keep(() => L.GetField(Slot, "loot"))));
+        private BattlefieldLootTable loot_;
         public IReadOnlyList<string> EntryNpcs => Field("entryNpcs", () =>
         {
             if (!L.IsTable(-1)) return (IReadOnlyList<string>)null;
@@ -1741,6 +2260,13 @@ namespace XI.Zone
                                 c.NpcSlot);
         }
 
+        public bool QuestEvent(IBattlefieldContext q, string key, int csid, int option)
+        {
+            var c = (LiveBattlefieldContext)q;
+            return env_.CallPath("xi.cs.questEvent", 1, () => L.ToBoolean(-1), c.PlayerSlot, c.NpcSlot, key,
+                                 (double)csid, (double)option);
+        }
+
         public bool RejectLevelSyncedParty(IBattlefieldContext q)
         {
             var c = (LiveBattlefieldContext)q;
@@ -1759,6 +2285,12 @@ namespace XI.Zone
             int at = env_.KeepCallPath("GetMobByID", id);
             return L.IsNil(at) ? null : new LiveBattlefieldMob(env_, at);
         }
+
+        public int? ZoneMobId(int zone, string key) => ZoneEntryId(zone, "mob", key);
+        public int? ZoneNpcId(int zone, string key) => ZoneEntryId(zone, "npc", key);
+
+        // zones[zone][kind][key] as a number, null for nil
+        private int? ZoneEntryId(int zone, string kind, string key) => ZoneHost.ZoneEntryId(L, zone, kind, key);
 
         private static LuaSlot NpcSlot(IBattlefieldNpc npc) => new LuaSlot(((LiveBattlefieldNpc)npc).Slot);
 
@@ -1792,6 +2324,27 @@ namespace XI.Zone
             finally
             {
                 host.pendingCrate_ = outer;
+            }
+        }
+
+        // Battlefield.<method> under the Lua modules' overrides: CSharpQuests.moduleOverride on q's content, player
+        // and battlefield, its last super the host's one function, which runs body (pending for the call)
+        public bool ModuleOverride(string method, IBattlefieldContext q, Action<IBattlefieldContext> body)
+        {
+            var host = env_.Host ??
+                       throw new InvalidOperationException("no module override outside a battlefield hook");
+            var c = (LiveBattlefieldContext)q;
+            var self = (LiveBattlefieldContent)q.Self;
+            var outer = host.pendingSuper_;
+            host.pendingSuper_ = (body, env_.Bound, env_.Binding, env_.Handler);
+            try
+            {
+                return env_.CallPath("CSharpQuests.moduleOverride", 1, () => L.ToBoolean(-1), method,
+                                     host.moduleSuper_, new LuaSlot(self.Slot), c.PlayerSlot, c.BattlefieldSlot);
+            }
+            finally
+            {
+                host.pendingSuper_ = outer;
             }
         }
 
@@ -1852,7 +2405,7 @@ namespace XI.Zone
                 L.Push((double)csid);
                 foreach (int a in args) L.Push((double)a);
                 L.Call(args.Length + 2, 1);
-                return new LiveBattlefieldAction(L.Ref());
+                return new LiveBattlefieldAction(L, L.Ref());
             }
             finally
             {
@@ -1877,12 +2430,88 @@ namespace XI.Zone
                 L.Push(true);
                 L.SetField(-2, "canSkip");
                 L.Call(3, 1);
-                return new LiveBattlefieldAction(L.Ref());
+                return new LiveBattlefieldAction(L, L.Ref());
             }
             finally
             {
                 L.SetTop(top);
             }
+        }
+
+        // Battlefield:progressEvent(csid, args...): Container:progressEvent, Event:new(...):progress()
+        public IBattlefieldAction ProgressEvent(int csid, params int[] args)
+        {
+            int top = L.Top;
+            try
+            {
+                L.CheckStack(args.Length + 8);
+                L.GetGlobal("Battlefield");
+                int cls = L.Top;
+                L.GetField(cls, "progressEvent");
+                L.PushValue(cls);
+                L.Push((double)csid);
+                foreach (int a in args) L.Push((double)a);
+                L.Call(args.Length + 2, 1);
+                return new LiveBattlefieldAction(L, L.Ref());
+            }
+            finally
+            {
+                L.SetTop(top);
+            }
+        }
+
+        // SpawnMob(id): the mob, nil kept as null
+        public IBattlefieldMob SpawnMob(int id)
+        {
+            int at = env_.KeepCallPath("SpawnMob", id);
+            return L.IsNil(at) ? null : new LiveBattlefieldMob(env_, at);
+        }
+
+        public void DespawnMob(int id) => env_.CallPath("DespawnMob", 0, () => 0, id);
+
+        public IBattlefieldPlayer GetPlayerByID(int id)
+        {
+            int at = env_.KeepCallPath("GetPlayerByID", id);
+            return L.IsNil(at) ? null : env_.Player(at);
+        }
+
+        public uint GetSystemTime() => env_.CallPath("GetSystemTime", 1, () => (uint)L.ToNumber(-1));
+        public int RandomInt(int lower, int upper) =>
+            env_.CallPath("math.randomInt", 1, () => (int)L.ToIntegral(-1), (double)lower, (double)upper);
+        // the values as a Lua array, shuffled by utils.shuffle, read back
+        public IReadOnlyList<int> Shuffle(IReadOnlyList<int> values)
+        {
+            int table = env_.Keep(() =>
+            {
+                L.NewTable(values.Count, 0);
+                for (int i = 0; i < values.Count; i++)
+                {
+                    L.Push((double)values[i]);
+                    L.RawSetI(-2, i + 1);
+                }
+            });
+            int shuffled = env_.KeepCallPath("utils.shuffle", new LuaSlot(table));
+            return env_.KeepArray(shuffled).Select(at => (int)L.ToIntegral(at)).ToList();
+        }
+
+        public bool IsEntityBusy(IBattlefieldMob mob) =>
+            env_.CallPath("xi.combat.behavior.isEntityBusy", 1, () => L.ToBoolean(-1), LiveEntity.Slot(mob));
+
+        // quest rework C3 PR2: the entity object the facet's Lua userdata stands for, kept as a Lua table keeps the
+        // userdata; read back by pushing that object, which the bindings take as the userdata
+        public BattlefieldKeptEntity Keep(IBattlefieldEntity entity)
+        {
+            if (entity == null) return null;
+            int slot = LiveEntity.Slot(entity).Index;
+            return new BattlefieldKeptEntity(L.ToObject(slot) ??
+                                             throw new InvalidOperationException("the entity is not an engine object"));
+        }
+
+        public IBattlefieldMob Entity(BattlefieldKeptEntity kept)
+        {
+            if (kept == null) return null;
+            int at = env_.Keep(() => L.Push(kept.Handle));
+            return new LiveBattlefieldMob(env_, at);
         }
     }
 
@@ -1924,7 +2553,8 @@ namespace XI.Zone
         {
             int table = PKeep("getAlliance");
             return BfEnv.KeepArray(table)
-                .Select(s => (IBattlefieldPlayer)new LiveQuestContext(lua_, log_, quest_, handler_, player: s))
+                .Select(s => (IBattlefieldPlayer)new LiveQuestContext(lua_, log_, quest_, handler_, player: s)
+                    .InBattlefieldCall(BfEnv))
                 .ToList();
         }
 
@@ -1957,6 +2587,8 @@ namespace XI.Zone
             PDo("messageSpecial", new object[] { textId }.Concat(args.Cast<object>()).ToArray());
         public void MessageText(IBattlefieldNpc npc, int textId, bool showName) =>
             PDo("messageText", new LuaSlot(npc == null ? 0 : ((LiveBattlefieldNpc)npc).Slot), textId, showName);
+        public void ShowText(IBattlefieldMob mob, int textId) =>
+            PDo("showText", new LuaSlot(((LiveBattlefieldMob)mob).Slot), textId);
         public void UpdateEventValues(params object[] args) => PDo("updateEvent", args);
         public void UpdateEventString(string s) => PDo("updateEventString", s);
         public int WornUses(int item) => PInt("getWornUses", item);
@@ -1981,7 +2613,48 @@ namespace XI.Zone
 
         public void DelStatusEffectsByFlag(int flag) => PDo("delStatusEffectsByFlag", flag);
         public void PrintToPlayer(string message, int channel) => PDo("printToPlayer", message, channel);
+        // player:addTreasure(item, npc); no npc: nil (the binding's addTreasure(item))
         public void AddTreasure(int item, IBattlefieldNpc npc) =>
-            PDo("addTreasure", item, new LuaSlot(((LiveBattlefieldNpc)npc).Slot));
+            PDo("addTreasure", item, new LuaSlot(npc == null ? 0 : ((LiveBattlefieldNpc)npc).Slot));
+
+        public IReadOnlyList<IBattlefieldPlayer> Party()
+        {
+            int table = PKeep("getParty");
+            return BfEnv.KeepArray(table)
+                .Select(s => (IBattlefieldPlayer)new LiveQuestContext(lua_, log_, quest_, handler_, player: s)
+                    .InBattlefieldCall(BfEnv))
+                .ToList();
+        }
+
+        public IBattlefieldMob Pet()
+        {
+            int at = PKeep("getPet");
+            return lua_.IsNil(at) ? null : new LiveBattlefieldMob(BfEnv, at);
+        }
+
+        public int TargId => PInt("getTargID");
+        public int MaxHP => PInt("getMaxHP");
+        public int MaxMP => PInt("getMaxMP");
+        public void SetTP(int value) => PDo("setTP", value);
+        public bool IsDead => P("isDead", () => lua_.ToBoolean(-1));
+        public void AllowSendRaisePrompt() => PDo("allowSendRaisePrompt");
+        public void SendEntityUpdateToPlayer(IBattlefieldMob entity, int entityUpdate, int updateMask) =>
+            PDo("sendEntityUpdateToPlayer", LiveEntity.Slot(entity), entityUpdate, updateMask);
+
+        // this player read in a battlefield call: its helpers are that call's (its battlefield, its zone host)
+        internal LiveQuestContext InBattlefieldCall(BattlefieldCall env)
+        {
+            bfEnv_ = env;
+            return this;
+        }
+
+        // quest rework C3 PR2: player:addListener(evt, identifier, <a closure over the battlefield callback>)
+        public void AddListener(string evt, string identifier, BattlefieldCallback callback, params object[] captures)
+        {
+            if (evt == null) throw new ArgumentNullException(nameof(evt));
+            if (identifier == null) throw new ArgumentNullException(nameof(identifier));
+            if (player_ == 0 || lua_.IsNil(player_)) throw new InvalidOperationException("no player in this handler");
+            BfEnv.ArmCallback(player_, "addListener", callback, 0, captures, evt, identifier);
+        }
     }
 }

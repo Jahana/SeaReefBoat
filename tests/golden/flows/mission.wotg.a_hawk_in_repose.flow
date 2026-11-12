@@ -1,0 +1,19 @@
+# A Hawk in Repose (WotG 29), the whole run, in Batallia Downs. A Lilac traded at Status 0: no handler answers (no
+# packet, nil). The Weathered Gravestone plays 502 [105, 2, 300000, 0, 0, 0, 1, 22262]; its finish sets Status 1. The
+# Lilac traded again plays 503 [0, 23, 1753, 0, 0, 0, 1, 3871]; its finish takes the Lilac and completes the mission
+# (The Battle of Xarcabard current, Status cleared).
+lists BatalliaDowns/Weathered_Gravestone/onTrigger BatalliaDowns/Weathered_Gravestone/onTrade BatalliaDowns/onEventFinish/502 BatalliaDowns/onEventFinish/503
+char zone=BatalliaDowns pos=151.228,-5.109,-395.121 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg AHawkInRepose current
+item Lilac
+login
+trade Weathered_Gravestone Lilac x1        # Status 0
+finish-if-event
+trigger Weathered_Gravestone               # 502
+finish                                     # Status 1
+trade Weathered_Gravestone Lilac x1        # 503
+finish                                     # the Lilac taken, completed

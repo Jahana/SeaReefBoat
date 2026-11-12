@@ -1,0 +1,17 @@
+# A Fate Decided (CoP 8-2): Ixghrah's death at Status 2 and _iya. _iyq spawns Ixghrah (7375); a GM sets Status 2;
+# his death leaves Status 2 (it moves only 0 to 1); _iyq: NOTHING_LEFT_TO_DO (7378, the default; Status 2 has no
+# reply). _iya at Status 2 and 1: DOES_NOT_RESPOND (7259, 8-2's own message).
+lists GrandPalaceOfHuxzoi/_iya/onTrigger GrandPalaceOfHuxzoi/_iyq/onTrigger
+char zone=GrandPalaceOfHuxzoi pos=420,-1,396 job=WAR lvl=75 nation=0
+mission Cop AFateDecided current
+login
+trigger _iyq                            # Ixghrah spawned: 7375
+charvar Mission[6][818]Status 2         # a GM
+kill IXGHRAH                            # Status 2 stays
+trigger _iyq                            # 7378 (the default)
+finish-if-event
+trigger _iya                            # 7259
+finish-if-event
+charvar Mission[6][818]Status 1         # a GM
+trigger _iya                            # 7259
+finish-if-event

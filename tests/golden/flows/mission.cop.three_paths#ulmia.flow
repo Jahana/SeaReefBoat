@@ -1,0 +1,64 @@
+# Three Paths (mission.cop.three_paths#ulmia), Ulmia's path. A level 75 Warrior of San d'Oria with 5-3 current (a GM).
+# Login plays Rhapsodies of Vana'diel's zone-in 30035, finished. Southern San d'Oria, Hinaree (Ulmia 0): 22; finished:
+# 2; again: 25. Port San d'Oria's zone-in (2): event 4, finished by the warp: 3. The Northern San d'Oria warp plays
+# Rumors from the West's zone-in 878, finished (area 12, status 1). Chasalvige (3): 762; finished: 4; again: 763.
+# Windurst Waters, Kerutoto (4): 876; finished: 6; again: 882. Windurst Walls: the zone-in plays A Shantotto Ascension's
+# events (onZoneIn 510, then 514; finished: area 11, current 1). Yoran-Oran (6): 473; finished: 7; again: 479. Boneyard
+# Gully's Head Wind entered and won: Three Paths' 32001 moves Ulmia 7 to 8. Bearclaw Pinnacle's Flames for the Dead
+# entered and won: Three Paths' 32001 moves 8 to 9. Metalworks, Cid (9): 855; finished: 14, the title.
+lists SouthernSanDoria/Hinaree/onTrigger SouthernSanDoria/onEventFinish/22 PortSanDoria/onZoneIn/4 PortSanDoria/onEventFinish/4 NorthernSanDoria/Chasalvige/onTrigger NorthernSanDoria/onEventFinish/762 WindurstWaters/Kerutoto/onTrigger WindurstWaters/onEventFinish/876 WindurstWalls/Yoran-Oran/onTrigger WindurstWalls/onEventFinish/473 BoneyardGully/_081/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001 BearclawPinnacle/Wind_Pillar_1/onTrigger BearclawPinnacle/onEventUpdate/32000 BearclawPinnacle/onEventFinish/32000 BearclawPinnacle/onEventFinish/32001 Metalworks/Cid/onTrigger Metalworks/onEventFinish/855
+char zone=SouthernSanDoria pos=-301.5,-10.2,97.7 job=WAR lvl=75 nation=0
+mission Cop ThreePaths current
+login
+trigger Hinaree                         # Ulmia 0: 22
+finish                                  # 2
+trigger Hinaree                         # 2: 25
+finish-if-event
+warp -127,-10,-47 PortSanDoria          # zone-in at 2: event 4, finished: 3
+warp 96.4,-0.5,134 NorthernSanDoria     # zone-in: Rumors from the West's 878, finished
+trigger Chasalvige                      # 3: 762
+finish                                  # 4
+trigger Chasalvige                      # 4: 763
+finish-if-event
+warp 13,-5,-157 WindurstWaters
+trigger Kerutoto                        # 4: 876
+finish                                  # 6
+trigger Kerutoto                        # 6: 882
+finish-if-event
+warp -110,-14,203.3 WindurstWalls       # zone-in: A Shantotto Ascension's 510, then 514
+trigger Yoran-Oran                      # 6: 473
+finish                                  # 7
+trigger Yoran-Oran                      # 7: 479
+finish-if-event
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081
+update 32000 option=0
+update 32000 option=4
+update 32000 option=1
+finish
+tick 2000
+kill SHIKAREE_Z_HW
+kill SHIKAREE_Y_HW
+kill SHIKAREE_X_HW
+finish                                  # 32001: 7 to 8
+tick 11000
+tick 10000
+warp -720,9,-441 BearclawPinnacle
+trigger Wind_Pillar_1
+update 32000 option=0
+update 32000 option=4
+update 32000 option=1
+finish
+tick 2000
+kill SNOLL_TZAR_OFFSET
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish                                  # 32001: 8 to 9
+tick 11000
+tick 10000
+warp -12,-12,1 Metalworks
+trigger Cid                             # 9: 855
+finish                                  # 14, the title

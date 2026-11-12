@@ -1,0 +1,17 @@
+# Infiltrate Davoi at status 2, a level 75 Warrior in Southern San d'Oria: the warp into Davoi plays the zone-in 116,
+# whose finish sets status 3. Quemaricond 117, whose finish gives the report and sets status 4 (no packet shows his
+# ClearPath or ContinuePath; the fake checks pin them); at 4 he says his own message, and a warp into Davoi plays no
+# zone-in.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/1012 SouthernSanDoria/onEventFinish/2012 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1012 ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/onEventFinish/553 ChateauDoraguille/onEventFinish/554 Davoi/Quemaricond/onTrigger Davoi/Zantaviat/onTrigger Davoi/onZoneIn/1 Davoi/onEventFinish/102 Davoi/onEventFinish/105 Davoi/onEventFinish/116 Davoi/onEventFinish/117
+char zone=SouthernSanDoria pos=-110,1,-35 job=WAR lvl=75 nation=0
+mission Rov Resonance current
+mission Sandoria InfiltrateDavoi current
+login
+missionstatus Sandoria 2
+warp -15,-0.5,-18 Davoi open            # 116
+finish                                  # status 3
+trigger Quemaricond                     # 117
+finish                                  # status 4, the report
+trigger Quemaricond                     # status 4: nothing from the mission
+finish-if-event
+warp -15,-0.5,-18 Davoi                 # status 4: no zone-in

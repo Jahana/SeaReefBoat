@@ -1,0 +1,49 @@
+# The Emissary Windurst 2 (Bastok 2-3, mission.bastok.the_emissary_windurst2). A level 30 Warrior of Bastok in Port
+# Windurst with the mission current (a GM; a GM's Resonance current keeps RoV 1-1's first mission out). Status 0:
+# neither arm answers, so the zone defaults play (Ada 44, Gold Skull 43, Josef 45, Melek 42). Status 7: Ada 63, Gold
+# Skull 62, Josef 65, Melek 64. Status 8: Gold Skull and Melek answer messages, no event; Ada falls back to her
+# default 44. Status 9: Gold Skull 57; Melek has no crest and plays her default 42. With the Kindred Crest: Melek 66,
+# whose finish completes the mission, begins The Emissary, takes the crest, moves to status 10 and gives the Kindred
+# Report; The Emissary's own script then answers Melek 67 and Gold Skull 68.
+lists BalgasDais/onEventFinish/32001 HeavensTower/Kupipi/onTrigger HeavensTower/onEventFinish/242 HeavensTower/onEventFinish/244 PortWindurst/Ada/onTrigger PortWindurst/Gold_Skull/onTrigger PortWindurst/Josef/onTrigger PortWindurst/Melek/onTrigger PortWindurst/onEventFinish/66
+char zone=PortWindurst pos=-80,-5,158 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheEmissaryWindurst2 current
+login
+trigger Ada
+finish-if-event
+trigger Gold_Skull
+finish-if-event
+trigger Josef
+finish-if-event
+trigger Melek
+finish-if-event
+missionstatus Bastok 7
+trigger Ada
+finish-if-event
+trigger Gold_Skull
+finish-if-event
+trigger Josef
+finish-if-event
+trigger Melek
+finish-if-event
+missionstatus Bastok 8
+trigger Gold_Skull
+finish-if-event
+trigger Melek
+finish-if-event
+trigger Ada
+finish-if-event
+missionstatus Bastok 9
+trigger Gold_Skull
+finish-if-event
+trigger Melek
+finish-if-event
+keyitem KindredCrest
+trigger Melek
+finish-if-event
+finish
+trigger Melek
+finish-if-event
+trigger Gold_Skull
+finish-if-event

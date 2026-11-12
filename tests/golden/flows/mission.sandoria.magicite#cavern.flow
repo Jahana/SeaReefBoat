@@ -1,0 +1,53 @@
+# Magicite (San d'Oria 4-1) at status 3: each Magicite with the other two stones held (the last one: Monastic Cavern 0
+# (1, 1, 1, 1, 1, 1, 1, 1), Qulun Dome 0 (1, 46, 47), the Altar Room 44 (152, 3)) and with one of them alone (0 (150), 0
+# (0, 46, 47), 44 (152)), the stones set by a GM between the talks; each finish gives its stone.
+lists RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/130 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/36 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=MonasticCavern pos=-158,-8,8 job=WAR lvl=50 nation=0
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite current
+keyitem MagiciteAurastone
+keyitem MagiciteOrastone
+login
+missionstatus Sandoria 3
+trigger Magicite                        # the Aurastone and the Orastone: 0 (1, 1, 1, 1, 1, 1, 1, 1)
+finish                                  # the Optistone
+delkeyitem MagiciteOptistone
+delkeyitem MagiciteOrastone
+trigger Magicite                        # the Aurastone alone: 0 (150)
+finish                                  # the Optistone
+delkeyitem MagiciteAurastone
+keyitem MagiciteOrastone
+warp 13,25,-81 QulunDome
+trigger Magicite                        # the Optistone and the Orastone: 0 (1, 46, 47)
+finish                                  # the Aurastone
+delkeyitem MagiciteAurastone
+delkeyitem MagiciteOptistone
+trigger Magicite                        # the Orastone alone: 0 (0, 46, 47)
+finish                                  # the Aurastone
+delkeyitem MagiciteAurastone
+delkeyitem MagiciteOrastone
+keyitem MagiciteOptistone
+trigger Magicite                        # the Optistone alone: 0 (0, 46, 47)
+finish                                  # the Aurastone
+warp -342,25,43 AltarRoom
+trigger Magicite                        # the Optistone and the Aurastone: 44 (152, 3)
+finish                                  # the Orastone
+delkeyitem MagiciteOrastone
+delkeyitem MagiciteAurastone
+trigger Magicite                        # the Optistone alone: 44 (152)
+finish                                  # the Orastone
+delkeyitem MagiciteOrastone
+delkeyitem MagiciteOptistone
+keyitem MagiciteAurastone
+trigger Magicite                        # the Aurastone alone: 44 (152)
+finish                                  # the Orastone

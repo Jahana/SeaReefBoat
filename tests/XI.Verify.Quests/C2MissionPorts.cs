@@ -142,7 +142,7 @@ internal static partial class Program
               $"|{QC.MissionKey.Cop.TheRitesOfLife}|scripts/missions/cop/1_1_The_Rites_of_Life|" +
               $"{QC.KeyItem.MysteriousAmulet} CoP {QC.Mission.Cop.BelowTheArks}",
               $"{string.Join(" | ", QuestScriptValidator.Validate(d))}|{m.Key}|{m.LegacyPath}|" +
-              $"{d.Reward.KeyItem} {d.Reward.NextLog} {d.Reward.NextMission}");
+              $"{d.Reward.KeyItem ?? 0} {d.Reward.NextLog} {d.Reward.NextMission}");
         Fake F(int current, int cop1 = 1, int status = 0, bool completed = false, int tb = 0, int option = 0,
                int prev = 0)
         {
@@ -244,7 +244,7 @@ internal static partial class Program
               $"|{QC.MissionKey.Rov.RhapsodiesOfVanadiel}|scripts/missions/rov/1_01_Rhapsodies_of_Vanadiel|" +
               $"RoV {QC.Mission.Rov.Resonance} 0 0",
               $"{string.Join(" | ", QuestScriptValidator.Validate(d))}|{m.Key}|{m.LegacyPath}|" +
-              $"{d.Reward.NextLog} {d.Reward.NextMission} {d.Reward.KeyItem} {d.Reward.Item}");
+              $"{d.Reward.NextLog} {d.Reward.NextMission} {d.Reward.KeyItem ?? 0} {d.Reward.Item ?? 0}");
         Fake F(int current = 0, int rov1 = 1, int level = 3, bool mogHouse = false)
         {
             var f = new Fake { ThisMission = (MissionLog.RoV, id), MainLevel = level, InAMogHouse = mogHouse };

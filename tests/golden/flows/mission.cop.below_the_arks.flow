@@ -1,0 +1,50 @@
+# Below the Arks (CoP 1-2, mission.cop.below_the_arks), the Holla crag. A level 75 Warrior of San d'Oria with 1-2 current
+# (a GM; Status 0, Option 0). Section 1: Monberaux (Upper Jeuno, Status 0): 9. Pherimociel (Ru'Lude Gardens, Status 0):
+# 24, finished: Status 1; again: 25 replaces the default; High_Wind 33 and Rainhard 34 (Status 1). The Konschtat telepoint
+# (Status 1, Option 0, 1-2 current): 913 with the first-entry flag 1; finished with 0, the char is set down in the Hall of
+# Transference (the harness follows with a warp: zone-in 108). _0e0, a cermet gate (location 1, Option 0): DOOR_FIRMLY_SHUT.
+# _0e3, a large apparatus (Option 0, 1-2): 160 (the same event for all three), finished: the Holla promyvion; its zone-in
+# (Option 0, no light): 50, finished: Option 1. Back in the Hall: _0e3 (Option 1 = crag 1, no light, fewer than two lights):
+# 122; finished with 1: nothing; again, finished with 0: Option 0 and the teleport out to La Theine. The La Theine
+# telepoint (Option 0, 1-2): 202 with the first-entry flag, finished with 1: nothing. The Spire of Holla: the entry NPC
+# _0h0 (1-2 is a registrant's requirement), the fight won: 32001 (newPromy 1, the light of Holla added, Option 0, one
+# light at 1-2: the mission completes, The Mothercrystals current).
+lists UpperJeuno/Monberaux/onTrigger RuludeGardens/Pherimociel/onTrigger RuludeGardens/High_Wind/onTrigger RuludeGardens/Rainhard/onTrigger RuludeGardens/onEventFinish/24 KonschtatHighlands/Shattered_Telepoint/onTrigger KonschtatHighlands/onEventFinish/913 LaTheinePlateau/Shattered_Telepoint/onTrigger LaTheinePlateau/onEventFinish/202 HallOfTransference/onZoneIn/1 HallOfTransference/_0e0/onTrigger HallOfTransference/_0e3/onTrigger HallOfTransference/onEventFinish/122 HallOfTransference/onEventFinish/160 PromyvionHolla/onZoneIn/1 PromyvionHolla/onEventFinish/50 SpireOfHolla/onEventFinish/32001
+char zone=UpperJeuno pos=-41.9,-0.5,-1.9 job=WAR lvl=75 nation=0
+mission Cop BelowTheArks current
+login
+trigger Monberaux                       # Status 0: 9
+finish
+warp -31.6,1,68 RuludeGardens
+trigger Pherimociel                     # Status 0: 24
+finish                                  # Status 1
+trigger Pherimociel                     # Status 1: 25 replaces the default
+finish
+trigger High_Wind                       # 33
+finish
+trigger Rainhard                        # 34
+finish
+warp 135,19,220 KonschtatHighlands
+trigger Shattered_Telepoint             # Option 0, 1-2: 913, the first-entry flag
+finish option=0                         # setPos to the Hall of Transference (zone 14)
+warp -267.194,-40.634,-280.019 HallOfTransference
+trigger _0e0                            # location 1, Option 0: DOOR_FIRMLY_SHUT
+trigger _0e3                            # Option 0, 1-2: 160
+finish                                  # sendToPromyvionZone(1): the Holla promyvion
+warp 92.033,0,80.38 PromyvionHolla      # zone-in: Option 0, no light: 50
+finish                                  # Option 1
+warp -236.3,-4.9,290 HallOfTransference
+trigger _0e3                            # Option 1 = crag 1, no light, no light held: 122
+finish option=1                         # not 0: nothing
+trigger _0e3                            # 122
+finish option=0                         # Option 0; teleport out to La Theine
+warp 334,19,-60 LaTheinePlateau
+trigger Shattered_Telepoint             # Option 0, 1-2: 202, the first-entry flag
+finish option=1                         # not 0: nothing
+warp 0,-3.8,-240 SpireOfHolla
+trigger _0h0                            # the fight's menu
+update 32000 option=1
+finish
+tick 2000
+kill WREAKER
+finish                                  # 32001: the light of Holla, Option 0, the mission complete

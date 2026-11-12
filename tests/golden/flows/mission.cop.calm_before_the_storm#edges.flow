@@ -1,0 +1,34 @@
+# Calm Before the Storm (CoP 7-4): the death guards, Cid below 7, Sueleen without the letters. qm_dalham spawns
+# Dalham (YOU_ARE_NOT_ALONE, 7464); a GM sets nmBibiki 2; after his death
+# qm_dalham has no 41; his body still counts as spawned, so no new pop: NOTHING_LEFT_INTEREST (7634, the default). The
+# same for _0p4 and Boggelmann (7624, then nmMisareaux 2: NOTHING_ELSE_OF_INTEREST, 7625). Cid at the CID nibble 6:
+# his default 500. At 7 with the letters: 895; finished, the rezone resets oncePerZone: 895 again. The letters taken
+# away (a GM): Sueleen plays her default 20 (the zone's DefaultActions).
+lists BibikiBay/qm_dalham/onTrigger MisareauxCoast/_0p4/onTrigger Metalworks/Cid/onTrigger SealionsDen/Sueleen/onTrigger
+char zone=BibikiBay pos=97,-44.7,937 job=WAR lvl=75 nation=0
+mission Cop CalmBeforeTheStorm current
+login
+trigger qm_dalham                       # Dalham spawned: 7464
+localvar Mission[6][738]nmBibiki 2      # a GM
+kill #16793928                          # Dalham killed
+trigger qm_dalham                       # 2: 7634 (the default)
+warp -309,-34,184 MisareauxCoast
+trigger _0p4                            # Boggelmann spawned: 7624
+localvar Mission[6][738]nmMisareaux 2   # a GM
+kill BOGGELMANN                         # Boggelmann killed
+trigger _0p4                            # 2: 7625 (the default)
+warp -12,-12,1 Metalworks
+missionstatus Cop 6 pos=6               # a GM: bits 1 and 2
+trigger Cid                             # 6: his default 500
+finish-if-event
+missionstatus Cop 7 pos=6               # a GM
+keyitem LettersFromUlmiaAndPrishe       # a GM
+trigger Cid                             # the letters: 895
+finish
+rezone
+trigger Cid                             # a new zone visit: 895 again
+finish
+delkeyitem LettersFromUlmiaAndPrishe    # a GM
+warp 612,132,776 SealionsDen
+trigger Sueleen                         # no letters: her default 20
+finish-if-event

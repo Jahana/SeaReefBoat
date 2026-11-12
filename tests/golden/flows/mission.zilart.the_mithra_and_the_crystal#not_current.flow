@@ -1,0 +1,30 @@
+# The Mithra and the Crystal not current (The Chamber of Oracles current): Aldo and Gilgamesh say nothing, _700 is
+# Norg's DefaultActions DOOR_IS_LOCKED, Maryoh_Comyujah Rabao's DefaultActions 43, qm7 Quicksand Caves' DefaultActions
+# SOMETHING_IS_BURIED, _6z0 the NPC's own 1 and Shimmering_Circle the NPC's own NOTHING_OUT_OF_ORDINARY (below z 200,
+# The Gate of the Gods not reached).
+lists LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/111 Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Rabao/Maryoh_Comyujah/onTrigger Rabao/onEventFinish/81 Rabao/onEventFinish/83 QuicksandCaves/qm7/onTrigger QuicksandCaves/onEventFinish/12 QuicksandCaves/onEventFinish/13 QuicksandCaves/Ancient_Vessel/onMobDeath HallOfTheGods/_6z0/onTrigger HallOfTheGods/Shimmering_Circle/onTrigger HallOfTheGods/onEventFinish/3
+char zone=LowerJeuno pos=23,3,-58 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheChamberOfOracles current
+login
+trigger Aldo                            # nothing
+finish-if-event
+warp 98,-7,-12 Norg
+trigger _700                            # DOOR_IS_LOCKED
+finish-if-event
+trigger Gilgamesh                       # nothing
+finish-if-event
+warp -1,8,73 Rabao
+trigger Maryoh_Comyujah                 # DefaultActions' 43
+finish-if-event
+warp -504,19,-419 QuicksandCaves
+trigger qm7 at=1                        # SOMETHING_IS_BURIED
+finish-if-event
+warp 0,-14,46 HallOfTheGods
+trigger _6z0                            # the NPC's own 1
+finish
+trigger Shimmering_Circle               # NOTHING_OUT_OF_ORDINARY
+finish-if-event

@@ -33,6 +33,13 @@ commandObj.onTrigger = function(player, battlefieldName)
         return
     end
 
+    -- a battlefield that runs in C# (quest rework C3) is rebuilt by the C# side, not from its Lua file
+    local csharpKey = CSharpQuests and CSharpQuests.live and CSharpQuests.live[content.id]
+    if csharpKey then
+        player:printToPlayer(string.format('Battlefield \'%s\' runs in C# (%s); !reloadinteraction 1 (InteractionGlobal.reload(true)) reloads it.', battlefieldName, csharpKey))
+        return
+    end
+
     local filename = content.filename
     if filename and fileExists(filename .. '.lua') then
         if package.loaded[filename] then

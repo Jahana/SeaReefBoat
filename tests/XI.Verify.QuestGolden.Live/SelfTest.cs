@@ -28,14 +28,27 @@ internal static partial class Program
         Check("  a battlefield's record goes to the run's copy too",
               "SELECT name, fastestName, fastestTime, fastestPartySize FROM golden_world_c1_bcnm_records WHERE bcnmId = ?",
               WorldTablesDatabase.Rewrite("SELECT name, fastestName, fastestTime, fastestPartySize FROM bcnm_records WHERE bcnmId = ?", "c1"));
-        Check("  copied: the hashed tables and bcnm_records; a header hashes the first two only",
-              "server_variables,conquest_system,bcnm_records/server_variables,conquest_system",
+        Check("  a unity table update goes to the run's copy too",
+              "UPDATE golden_world_c1_unity_system SET points_current = points_current + ? WHERE leader = ?",
+              WorldTablesDatabase.Rewrite("UPDATE unity_system SET points_current = points_current + ? WHERE leader = ?", "c1"));
+        const string recount = "UPDATE unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) TMP ON unity_system.leader = unity_leader SET unity_system.members_current = members";
+        Check("  the unity recount counts only the flow's chars",
+              "UPDATE golden_world_c1_unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile WHERE charid IN (996161,996162) GROUP BY unity_leader) TMP ON golden_world_c1_unity_system.leader = unity_leader SET golden_world_c1_unity_system.members_current = members",
+              WorldTablesDatabase.Rewrite(recount, "c1", new uint[] { 996161, 996162 }));
+        Check("  the recount with no chars is only renamed",
+              "UPDATE golden_world_c1_unity_system JOIN (SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader) TMP ON golden_world_c1_unity_system.leader = unity_leader SET golden_world_c1_unity_system.members_current = members",
+              WorldTablesDatabase.Rewrite(recount, "c1", Array.Empty<uint>()) + "");
+        Check("  the engine's ZoneHost.Roe.cs still has the recount subquery the rewrite scopes", true,
+              File.ReadAllText(Path.Combine(Root, "src", "XI.Zone", "ZoneHost.Roe.cs")).Contains(WorldTablesDatabase.UnityRecount, StringComparison.Ordinal));
+        Check("  copied: the hashed tables and the seeded ones; a header hashes the first two only",
+              "server_variables,conquest_system,bcnm_records,unity_system/server_variables,conquest_system",
               $"{string.Join(",", WorldTables)}/{string.Join(",", HashedWorldTables)}");
         var tables = new List<WorldTable>
         {
             new("server_variables", new List<string> { "name", "value", "expiry" }, new List<string[]> { new[] { "Davoi_Jar_Move_Time", "1800004534", "0" }, new[] { "a\tb\\c", "1", "0" } }),
             new("conquest_system", new List<string> { "region_id", "mob_kills" }, new List<string[]> { new[] { "0", "5" } }),
             new("bcnm_records", new List<string> { "bcnmId", "fastestName" }, new List<string[]> { new[] { "737", "nobody" } }),
+            new("unity_system", new List<string> { "leader", "points_current" }, new List<string[]> { new[] { "1", "0" } }),
         };
         string text = WorldSnapshotText(tables);
         var back = ReadWorldSnapshot(text, "w.txt");
@@ -59,7 +72,10 @@ internal static partial class Program
         try
         {
             var checkedIn = ReadWorldSnapshot(File.ReadAllText(Path.Combine(GoldenDir, WorldFile)), WorldFile);
-            Check("  the checked-in snapshot reads: the three tables", "server_variables,conquest_system,bcnm_records", string.Join(",", checkedIn.Select(t => t.Name)));
+            var unityRows = checkedIn.First(t => t.Name == "unity_system").Rows;
+            Check("  the snapshot's unity_system: leader 1 has 2 members, leader 2 none", "2/0",
+                  $"{unityRows.First(r => r[0] == "1")[1]}/{unityRows.First(r => r[0] == "2")[1]}");
+            Check("  the checked-in snapshot reads: the four tables", "server_variables,conquest_system,bcnm_records,unity_system", string.Join(",", checkedIn.Select(t => t.Name)));
             // bcnm_records is sql/bcnm_info.sql's seed, row for row (bcnmId zoneId name fastestName fastestPartySize fastestTime)
             var seed = new List<string>();
             foreach (var line in File.ReadLines(Path.Combine(Root, "sql", SeedFiles["bcnm_records"])))
@@ -252,6 +268,9 @@ internal static partial class Program
         SelfTestCarryHarness2();
         SelfTestCarryHarness3();
         SelfTestC2();
+        SelfTestC4();
+        SelfTestSpeed();
+        SelfTestMutants();
         Console.WriteLine("the flow parser");
         const string every = @"# every statement
 lists BastokMarkets/Zon-Fobun/onTrigger BastokMarkets/onEventFinish/251
@@ -591,13 +610,19 @@ login
     private static void StartupMathTest()
     {
         Console.WriteLine("the startup projection");
-        Check("  the registered line: its count and ms", "13/12",
-              RegisteredLine("quests: 13 C# quests registered in 12 ms") is { } r ? $"{r.Count}/{r.Ms}" : "(no match)");
+        Check("  the registered line: its counts and ms", "13/2/3/12",
+              RegisteredLine("quests: 13 C# quests, 2 C# missions and 3 C# battlefields registered in 12 ms") is { } r
+                  ? $"{r.Count}/{r.Missions}/{r.Battlefields}/{r.Ms}" : "(no match)");
         Check("  a failure line is not the registered line", "(no match)",
               RegisteredLine("quests: bastok.groceries not registered: no NPC or mob named Tami in zone 234")?.ToString() ?? "(no match)");
         Check("  the line without its time is not either", "(no match)",
-              RegisteredLine("quests: 13 C# quests registered")?.ToString() ?? "(no match)");
-        Check("  benign: the registered line", true, BenignQuestLines.Any(re => re.IsMatch("quests: 13 C# quests registered in 12 ms")));
+              RegisteredLine("quests: 13 C# quests, 2 C# missions and 3 C# battlefields registered")?.ToString() ??
+              "(no match)");
+        Check("  the old form is not the registered line", "(no match)",
+              RegisteredLine("quests: 13 C# quests registered in 12 ms")?.ToString() ?? "(no match)");
+        Check("  benign: the registered line", true,
+              BenignQuestLines.Any(re => re.IsMatch(
+                  "quests: 13 C# quests, 2 C# missions and 3 C# battlefields registered in 12 ms")));
         Check("  not benign: a failure line", false,
               BenignQuestLines.Any(re => re.IsMatch("quests: C# quest bastok.groceries failed to load and has no Lua fallback: x")));
         Check("  a progress failure line is a problem", "True/True/True",
@@ -763,6 +788,17 @@ login
         {
             Check("  a counts line whose count is not a number", "bad.txt:1: a counts line is key<TAB>label<TAB>count<TAB>traces: bastok.groceries\t1/Tami/onTrigger\tmany\t", e.Message);
         }
+        // a key whose C# script declares no handler (WotG 41): known after the counts file is written, read and merged
+        var none = new Coverage();
+        none.Ran.Add("bastok.groceries");
+        none.Declared["bastok.groceries"] = new List<string>();
+        var noneMerged = Coverage.Parse(none.Write(), "n1.txt");
+        noneMerged.Merge(Coverage.Parse(new Coverage().Write(), "n2.txt"));
+        Check("  a key with no declared handler, written, read back and merged: 0 of 0, not unknown",
+              "PASS coverage bastok.groceries: 0 of 0 handlers reached, 0 waived",
+              string.Join("|", CoverageResults(noneMerged,
+                  new List<Flow> { Flow.Parse("char zone=BastokMarkets pos=0,0,0\nlogin\n", "bastok.groceries.flow",
+                                              "bastok.groceries", null) })));
         CollisionTest();
         NoHandlersTest();
     }

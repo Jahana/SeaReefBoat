@@ -1,0 +1,28 @@
+# The New Frontier: rank 5 in Windurst, option 2, the var set to 2 by a GM. At rank 5 no section matches:
+# the afterZoneIn plays nothing, Tales_Beginning nothing, _700 says DOOR_IS_LOCKED (10380, Norg's
+# DefaultActions) and Comitiolus plays 72 (Norg's DefaultActions). At rank 6 the afterZoneIn plays 1; its
+# update answers the short notice whatever the option; its finish on option 2 does nothing. With the var at
+# 2 Tales_Beginning plays 293, option 1 starts 1, and its finish on option 1 hides the NPCs (an empty
+# 0x077), deletes the var and completes the mission (the Map of Norg).
+lists Norg/afterZoneIn/1 Norg/Tales_Beginning/onTrigger Norg/onEventUpdate/1 Norg/onEventFinish/1 Norg/onEventFinish/293 Norg/_700/onTrigger Norg/Comitiolus/onTrigger
+char zone=Norg pos=-22,1,-38 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheNewFrontier current
+rank 5
+login
+tick 5000                               # rank 5: no section, nothing
+trigger Tales_Beginning                 # no section
+trigger _700                            # no section: DOOR_IS_LOCKED (DefaultActions)
+trigger Comitiolus                      # no section: 72 (DefaultActions)
+rank 6                                  # a GM
+rezone
+tick 5000                               # afterZoneIn: 1
+update 1 option=3                       # the var 0: the short notice, any option
+finish option=2                         # option 2: nothing
+charvar [ROZ]TalesBeginning 2           # a GM
+trigger Tales_Beginning                 # 293
+finish option=1                         # 1 (252)
+finish option=1                         # option 1, the var 2: NPCs hidden, var deleted, completed

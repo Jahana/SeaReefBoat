@@ -1,0 +1,19 @@
+# Borne by the Wind (WotG 13) at status 1 (a GM): Bulwark Gate gives DOOR_FIRMLY_SEALED (DefaultActions), Radford
+# replies with nothing, Velda-Galda plays event 177 (DefaultActions).
+lists SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/onEventFinish/5 BastokMarketsS/Radford/onTrigger WindurstWatersS/Velda-Galda/onTrigger
+char zone=SauromugueChampaignS pos=-447.174,-1.831,342.417 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg BorneByTheWind current
+login
+missionstatus Wotg 1
+trigger Bulwark_Gate                    # status 1: DOOR_FIRMLY_SEALED (DefaultActions)
+finish-if-event
+warp -205.303,-8,26.874 BastokMarketsS
+trigger Radford                         # status 1: no reply
+finish-if-event
+warp 138.631,-2.112,61.658 WindurstWatersS
+trigger Velda-Galda                     # status 1: event 177 (DefaultActions)
+finish-if-event

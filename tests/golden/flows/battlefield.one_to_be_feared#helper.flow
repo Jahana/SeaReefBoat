@@ -1,0 +1,48 @@
+# One to be Feared with a party (battlefield.one_to_be_feared#helper). Main (Status 3) and eve (6-5 current: 6-4 done)
+# in a party: both enter area 1; phase 1 dead: event 10 to both; main's door, option 100: event 1 to both (each its own
+# battleCompleted); Omega's update; Omega dead: event 11 to both; door 101: event 2 to both; Ultima dead: WON, 32001
+# to both; both finish.
+lists SealionsDen/_0w0/onTrigger SealionsDen/Airship_Door/onTrigger SealionsDen/onEventUpdate/32000 SealionsDen/onEventUpdate/1 SealionsDen/onEventUpdate/2 SealionsDen/onEventFinish/32000 SealionsDen/onEventFinish/32001 SealionsDen/onEventFinish/32003 SealionsDen/onEventFinish/10 SealionsDen/onEventFinish/11
+char zone=SealionsDen pos=0,0,0 job=WAR lvl=75 nation=0
+char eve zone=SealionsDen pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop OneToBeFeared current
+charvar Mission[6][638]Status 3
+eve: mission Cop ChainsAndBonds current
+login
+eve: login
+invite eve
+eve: accept
+trigger _0w0
+update 32000 option=1
+finish
+eve: trigger _0w0
+eve: update 32000 option=1
+eve: finish
+tick 2000
+kill MAMMET_22_ZETA
+kill MAMMET_22_ZETA+1
+kill MAMMET_22_ZETA+2
+kill MAMMET_22_ZETA+3
+kill MAMMET_22_ZETA+4                   # event 10 to both
+finish
+eve: finish
+trigger Airship_Door
+finish option=100                       # event 1 to both
+update 1 option=0
+finish
+eve: update 1 option=0
+eve: finish
+kill MAMMET_22_ZETA+5                   # event 11 to both
+finish
+eve: finish
+trigger Airship_Door
+finish option=101                       # event 2 to both
+update 2 option=0
+finish
+eve: update 2 option=0
+eve: finish
+kill MAMMET_22_ZETA+6                   # WON
+finish
+eve: finish
+tick 11000
+tick 10000

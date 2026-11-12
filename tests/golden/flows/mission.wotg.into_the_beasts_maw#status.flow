@@ -1,0 +1,17 @@
+# Into the Beast's Maw (WotG 33): the zone-in plays no event at Status 1, 4 and 6 (GMs), and at Status 6 the Peculiar
+# Glint shows its DefaultActions NO_RESPONSE (7905).
+lists XarcabardS/Rally_Point_Red/onTrigger CastleZvahlBaileysS/Ornate_Block/onTrigger CastleZvahlBaileysS/Peculiar_Glint/onTrigger CastleZvahlBaileysS/onZoneIn/1 CastleZvahlBaileysS/onEventUpdate/14 CastleZvahlBaileysS/onEventFinish/1 CastleZvahlBaileysS/onEventFinish/2 CastleZvahlBaileysS/onEventFinish/3 CastleZvahlBaileysS/onEventFinish/11 CastleZvahlBaileysS/onEventFinish/14 CastleZvahlBaileysS/onEventFinish/15
+char zone=CastleZvahlBaileysS pos=179.4,-24.1,98 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg IntoTheBeastsMaw current
+charvar Mission[5][32]Status 1
+login                                      # Status 1: no zone-in event
+charvar Mission[5][32]Status 4
+rezone                                     # Status 4: no zone-in event
+charvar Mission[5][32]Status 6
+rezone                                     # Status 6: no zone-in event
+trigger Peculiar_Glint                     # Status 6: not the mission's
+finish-if-event

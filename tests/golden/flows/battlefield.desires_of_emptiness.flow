@@ -1,0 +1,19 @@
+# Desires of Emptiness (battlefield.desires_of_emptiness, Spire of Vahzl: a BattlefieldMission, index 0, 30 minutes, six
+# players, entry NPC _0n0). A level 75 Warrior of San d'Oria with 5-2 current at Status 2 (a GM): the menu 32000; area 1
+# (option 1): entered. Area 1's Agonizers (three, the first group) spawn at the first tick; all killed: allDeath sets
+# WON; 32001; finished: the mission's handler (Status 2, the win: Status 3), the Frozen Dead Body title, 1500 XP.
+lists SpireOfVahzl/_0n0/onTrigger SpireOfVahzl/onEventUpdate/32000 SpireOfVahzl/onEventFinish/32000 SpireOfVahzl/onEventFinish/32001
+char zone=SpireOfVahzl pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop DesiresOfEmptiness current
+charvar Mission[6][518]Status 2
+login
+trigger _0n0                            # the menu 32000
+update 32000 option=1                  # index 0, area 1: entered
+finish                                  # in the arena
+tick 2000                               # the group spawns
+kill AGONIZER
+kill AGONIZER+1
+kill AGONIZER+6
+finish                                  # 32001: Status 3, set down in Beaucedine Glacier
+tick 11000
+tick 10000

@@ -1,0 +1,22 @@
+# Unraveling Reason (ToAU 40) edges. Pherimociel at Status 1 plays nothing (the default dialog); the Wajaom Woodlands
+# zone-in at Status 0 plays nothing.
+lists RuludeGardens/Pherimociel/onTrigger RuludeGardens/onEventFinish/10098 WajaomWoodlands/onZoneIn/1
+char zone=RuludeGardens pos=-31.6,1,67.9 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau UnravelingReason current
+login
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][39]Timer 0
+missionstatus Toau 1
+trigger Pherimociel
+finish-if-event
+missionstatus Toau 0
+warp -200,-10,80 WajaomWoodlands
+tick 1000
+tick 1000
+tick 1000

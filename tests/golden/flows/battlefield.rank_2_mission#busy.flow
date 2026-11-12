@@ -1,0 +1,35 @@
+# Rank 2 Mission (battlefield.rank_2_mission) with four chars of San d'Oria, all with Journey to Windurst (the second)
+# current at status 8 and the Dark Key (GMs): the first registers area 1; bob picks area 1 (taken: update params 1)
+# and then area 2; cid picks area 3; dan triggers with all three arenas taken: NO_BATTLEFIELD_ENTRY (7251).
+lists BalgasDais/BC_Entrance/onTrigger BalgasDais/BC_Entrance/onTrade BalgasDais/onEventUpdate/32000 BalgasDais/onEventFinish/32000 BalgasDais/Burning_Circle/onTrigger BalgasDais/onEventFinish/32003 BalgasDais/onEventFinish/32001
+char zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=0
+char bob zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=0
+char cid zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=0
+char dan zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75 nation=0
+mission Sandoria JourneyToWindurst2 current
+keyitem DarkKey
+bob: mission Sandoria JourneyToWindurst2 current
+bob: keyitem DarkKey
+cid: mission Sandoria JourneyToWindurst2 current
+cid: keyitem DarkKey
+dan: mission Sandoria JourneyToWindurst2 current
+dan: keyitem DarkKey
+login
+missionstatus Sandoria 8
+bob: login
+bob: missionstatus Sandoria 8
+cid: login
+cid: missionstatus Sandoria 8
+dan: login
+dan: missionstatus Sandoria 8
+trigger BC_Entrance
+update 32000 option=1
+finish
+bob: trigger BC_Entrance
+bob: update 32000 option=1
+bob: update 32000 option=2
+bob: finish
+cid: trigger BC_Entrance
+cid: update 32000 option=3
+cid: finish
+dan: trigger BC_Entrance

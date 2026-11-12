@@ -1,0 +1,42 @@
+# The Pirate's Cove edges. Gilgamesh traded the Frag Rock at status 1 and a Pebble at status 2: nothing. qm4 at status
+# 1 with the ore: nothing; a Pebble at status 2: nothing; the ore: popped (7289, one ore taken); the qm shown again by
+# hand with the NMs up: popFromQM fails, nothing, the second ore kept.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 Metalworks/Naji/onTrigger Metalworks/onEventFinish/761 Metalworks/onEventFinish/762 Norg/Gilgamesh/onTrigger Norg/Gilgamesh/onTrade Norg/onEventFinish/98 Norg/onEventFinish/99 IfritsCauldron/qm4/onTrade
+char zone=Norg pos=120.9,-8,-12 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove current
+rank 6
+item ChunkOfAdamanOre x2
+item FragRock
+item Pebble
+login
+missionstatus Bastok 1
+trade Gilgamesh FragRock x1             # status 1: nothing from the mission
+finish-if-event
+missionstatus Bastok 2
+trade Gilgamesh Pebble x1               # status 2, another item: nothing from the mission
+finish-if-event
+warp 172.5,0,-25 IfritsCauldron
+missionstatus Bastok 1
+trade qm4 ChunkOfAdamanOre x1           # status 1: nothing
+missionstatus Bastok 2
+trade qm4 Pebble x1                     # another item: nothing
+trade qm4 ChunkOfAdamanOre x1           # the NMs popped
+npcstatus qm4 normal
+trade qm4 ChunkOfAdamanOre x1           # the NMs up: popFromQM false, nothing

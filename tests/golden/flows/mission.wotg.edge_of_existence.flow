@@ -1,0 +1,13 @@
+# Edge of Existence (WotG 40) in Batallia Downs: the Cavernous Maw plays 3 [0, 0, 0, 0, 0, 0, 0, 1]; its finish
+# completes the mission (Her Memories current), then xi.maws.goToMaw gets the zone's id where it wants a maw table and
+# raises "attempt to index local 'maw' (a number value)" (the step's expect-error): the char stays where it is.
+lists BatalliaDowns/Cavernous_Maw/onTrigger BatalliaDowns/onEventFinish/3
+char zone=BatalliaDowns pos=-48,0.1,435 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg EdgeOfExistence current
+login
+trigger Cavernous_Maw                      # 3
+finish expect-error "attempt to index local 'maw' (a number value)"

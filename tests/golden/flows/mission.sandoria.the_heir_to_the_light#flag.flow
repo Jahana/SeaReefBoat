@@ -1,0 +1,42 @@
+# The Heir to the Light (San d'Oria 9-2, mission.sandoria.the_heir_to_the_light), the flag with a full bag: Halver 9
+# completes it with Flag 1 (no flag); his next talk refuses while the bag is full (then DefaultActions' 7909), gives
+# the flag (Flag 0) once a slot is free (then Halver.lua's own 31, rank 10); _6fc 50 (Papal 1).
+char zone=ChateauDoraguille pos=0,0,0 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+mission Sandoria Lightbringer completed
+mission Sandoria BreakingBarriers completed
+rank 9
+mission Sandoria TheHeirToTheLight current
+login
+missionstatus Sandoria 7
+fill-inventory
+trigger Halver                          # status 7: 9
+finish                                  # completed; the bag full: Flag 1
+trigger Halver                          # Flag 1, the bag full: refused, Flag stays; DefaultActions' 7909
+finish-if-event
+free-inventory
+trigger Halver                          # Flag 1: the flag, Flag 0; then Halver.lua's own 31 (rank 10)
+finish-if-event
+warp -240,7,57.9 NorthernSanDoria
+trigger _6fc                            # Option 1, Papal 0: 50
+finish                                  # Papal 1

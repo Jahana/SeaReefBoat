@@ -1,0 +1,40 @@
+# The Davoi Report (San d'Oria 2-2), the arms the main flow leaves out. Main, a San d'Orian with 1-1 completed and 2-2
+# current at status 0 holding the Lost Document (GMs): in Davoi Zantaviat plays 100, not 104 (status 0 decides first);
+# with status 2 he plays 104. In Northern San d'Oria with no report held and not completed the Papal Chambers door
+# does nothing (the report alone decides). bob, with Save the Children current (a GM): Endracion plays Save the
+# Children's 1025; its finish with option 104 begins nothing; Zantaviat has no section. carol, a Bastok char:
+# Endracion has no 2-2 section.
+# Rival zone-in, another mission's script: the warp to Northern San d'Oria plays Seekers of Adventure's Rumors from the
+# West onZoneIn, which returns 878 (no event packet), and area 12's status goes from 0 to 1.
+lists Davoi/Zantaviat/onTrigger Davoi/onEventFinish/100 Davoi/onEventFinish/104 NorthernSanDoria/_6fc/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009
+char zone=Davoi pos=215,0.1,-10 job=WAR lvl=10 nation=0
+char bob zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=0
+char carol zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=1
+mission Rov Resonance current
+bob: mission Rov Resonance current
+carol: mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+bob: mission Sandoria SmashTheOrcishScouts completed
+bob: mission Sandoria BatHunt completed
+bob: mission Sandoria SaveTheChildren current
+mission Sandoria TheDavoiReport current
+login
+keyitem LostDocument
+trigger Zantaviat                       # status 0 with the document: 100, not 104
+finish                                  # status 1
+warp 131,-11,122 NorthernSanDoria
+trigger _6fc                            # no report, not completed: nothing: its default
+finish-if-event
+warp 215,0.1,-10 Davoi
+missionstatus Sandoria 2                # a GM
+trigger Zantaviat                       # the document held, status 2: 104
+finish                                  # status 3
+bob: login
+bob: trigger Endracion                  # another mission current: Save the Children's 1025
+bob: finish option=104                  # no section 1: nothing
+bob: warp 215,0.1,-10 Davoi
+bob: trigger Zantaviat                  # no section 2: his default
+bob: finish-if-event
+carol: login
+carol: trigger Endracion                # not a San d'Orian: no section
+carol: finish option=104                # nothing

@@ -1,0 +1,19 @@
+# Trial-Size Trial by Wind (battlefield.trial_size_trial_by_wind, CloisterOfGales, a BattlefieldQuest; 15 minutes, one player
+# capped at 20, the MiniTuningForkOfWind required, Wind_Protocrystal the exit). A level 20 Summoner with the quest accepted and the fork.
+# The trade to WP_Entrance: the menu 32000. Updates: 0 and an area past the zone's arenas: REQS_NOT_MET; the fight's
+# option, area 1: registered, entered (the fork taken). The boss of arena 1 killed: WON; the win: 32001; its finish:
+# the battlefield's onEventFinishWin (and the quest's handler). After the cleanup, out.
+lists CloisterOfGales/WP_Entrance/onTrade CloisterOfGales/onEventUpdate/32000 CloisterOfGales/onEventFinish/32000 CloisterOfGales/onEventFinish/32001
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=SMN lvl=20
+quest Outlands.TrialSizeTrialByWind accepted
+item MiniTuningForkOfWind
+login
+trade WP_Entrance MiniTuningForkOfWind x1  # the fork: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=36                  # past the arenas: REQS_NOT_MET
+update 32000 option=33                   # area 1: registered, entered, the fork taken
+finish                                  # in the arena
+kill OGMIOS+3                  # the boss of arena 1: WON; 32001
+finish                                  # the battlefield's finish
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

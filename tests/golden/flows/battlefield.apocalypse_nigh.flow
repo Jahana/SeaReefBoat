@@ -1,0 +1,21 @@
+# Apocalypse Nigh (battlefield.apocalypse_nigh, Empyreal Paradox): a level 75 char with the quest accepted and
+# Quest[3][89]Prog 3 triggers the entrance. Updates 0 (ignored), 4, 16 and 20 (REQS_NOT_MET), then 17 (area 1):
+# registered and entered. The area's mobs killed: the win, event 32001, its finish (its setPos zones the char out),
+# the cleanup.
+lists EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/onEventUpdate/32000 EmpyrealParadox/onEventFinish/32000 EmpyrealParadox/onEventFinish/32001
+char zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75
+quest Jeuno.ApocalypseNigh accepted
+charvar Quest[3][89]Prog 3
+login
+trigger TR_Entrance
+update 32000 option=0
+update 32000 option=4
+update 32000 option=16
+update 32000 option=20
+update 32000 option=17
+finish
+kill KAMLANAUT
+kill KAMLANAUT+1
+finish
+tick 11000
+tick 10000

@@ -1,0 +1,28 @@
+# When Angels Fall (battlefield.when_angels_fall, The Garden of Ru'Hmet). A level 75 Warrior of San d'Oria with 8-3
+# current at Status 4 (a GM) triggers _0z0: the menu (0, 0, 0, 1: index 0). Update 0: nothing; 16: REQS_NOT_MET (5);
+# 1 (area 1): ENTERING_THE_BATTLEFIELD_FOR (7628) and entered. The four Ixzdei (one superlinked group) killed: the
+# win, 32001 (1, 1800, 0, 34, 35); its finish: this battlefield's onEventFinishWin only moves the char (no title, no
+# experience: it replaces the BattlefieldMission finish), and 8-3's own 32001 finish: Status 5. The cleanup.
+lists TheGardenOfRuhmet/_0z0/onTrigger TheGardenOfRuhmet/onEventUpdate/32000 TheGardenOfRuhmet/onEventFinish/32000 TheGardenOfRuhmet/onEventFinish/32001
+char zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0
+mission Cop WhenAngelsFall current
+charvar Mission[6][828]Status 4
+login
+trigger _0z0
+update 32000 option=0
+update 32000 option=16
+update 32000 option=1
+finish
+tick 2000
+kill IXZDEI_RDM+3
+kill IXZDEI_RDM+2
+kill IXZDEI_RDM+1
+kill IXZDEI_RDM
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+finish-if-event
+tick 11000
+tick 10000

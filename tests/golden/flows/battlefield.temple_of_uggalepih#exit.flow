@@ -1,0 +1,34 @@
+# The Temple of Uggalepih: the three exits. Entered at area 1 each time; _4j2, _4j3 and _4j4 each play
+# 32003: option 0 stays, option 4 leaves the fight (0x075). After the first exit the next tick still adds
+# the battlefield effect (254) and moves the char into the arena; the warp back removes it. After the
+# second exit the tick shows nothing.
+lists SacrificialChamber/_4j0/onTrigger SacrificialChamber/onEventUpdate/32000 SacrificialChamber/onEventFinish/32000 SacrificialChamber/_4j2/onTrigger SacrificialChamber/_4j3/onTrigger SacrificialChamber/_4j4/onTrigger SacrificialChamber/onEventFinish/32003
+char zone=SacrificialChamber pos=299,0.1,349 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheTempleOfUggalepih current
+keyitem SacrificialChamberKey
+login
+trigger _4j0
+update 32000 option=1
+finish
+trigger _4j2
+finish option=0                         # stays
+trigger _4j2
+finish option=4                         # out (0x075)
+tick 2000
+warp 299,0.1,349 SacrificialChamber
+trigger _4j0
+update 32000 option=1
+finish
+trigger _4j3
+finish option=4                         # out
+tick 2000
+warp 299,0.1,349 SacrificialChamber
+trigger _4j0
+update 32000 option=1
+finish
+trigger _4j4
+finish option=4                         # out

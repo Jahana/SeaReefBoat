@@ -1,0 +1,59 @@
+# The Chains That Bind Us (Bastok 8-1, mission.bastok.the_chains_that_bind_us) played through: a level 75 Bastokan
+# Warrior at rank 8 with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before
+# it completed. Malduc's 1001, option 20: begun (YOU_ACCEPT_THE_MISSION); Malduc then says EXTENDED_MISSION_OFFSET +
+# 10. Status 0: Iron Eater 767 (option 0: status 1; the door _6ld and Iron Eater's own 604 otherwise). Quicksand Caves:
+# qm4 says its own text at status 1; qm6 with none up spawns Centurio, Triarius and Princeps (claimed) and says
+# SENSE_OF_FOREBODING; the GM effects keep the char up; each death reads the other two (dead or not spawned): the last
+# sets status 2. qm6 11 (status 3), qm4 10 (status 4); Iron Eater 768 completes the mission (1133 rank points).
+char zone=Metalworks pos=66,-15,6 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+rank 8
+login
+trigger Malduc                          # the guard's own 1001
+finish option=20                        # section 1: begun, YOU_ACCEPT_THE_MISSION
+trigger Malduc                          # current: EXTENDED_MISSION_OFFSET + 10
+finish-if-event
+trigger _6ld                            # status 0: nothing from the mission
+finish-if-event
+trigger Iron_Eater                      # status 0: 767
+finish option=0                         # status 1
+trigger Iron_Eater                      # status 1: nothing from the mission
+finish-if-event
+warp -469,0,618 QuicksandCaves
+trigger qm4                             # status 1: nothing from the mission
+finish-if-event
+trigger qm6                             # status 1, none up: the three spawned, SENSE_OF_FOREBODING
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill CENTURIO_IV_VII                    # Triarius and Princeps alive: nothing
+kill TRIARIUS_IV_XIV                    # Princeps alive: nothing
+kill PRINCEPS_IV_XLV                    # the other two dead: status 2
+trigger qm6                             # status 2: 11
+finish                                  # status 3
+trigger qm4                             # status 3: 10
+finish                                  # status 4
+warp 92,-19.5,4 Metalworks
+trigger Iron_Eater                      # status 4: 768
+finish                                  # completed: 1133 rank points
+trigger Iron_Eater                      # completed: nothing from the mission
+finish-if-event

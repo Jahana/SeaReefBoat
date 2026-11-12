@@ -11,7 +11,8 @@ using XI.QuestContent;
 // A golden flow (tests/golden/flows/<key>[#branch].flow): one statement per line, '#' starts a comment. The key (Key:
 // the name up to its first '#') is its container's: a quest's <area>.<const> (bastok.the_doorman), or (quest rework
 // C2) a mission's mission.<log>.<const> (mission.cop.the_rites_of_life#cop.flow) or a battlefield's
-// battlefield.<const> (battlefield.cactuar_suave.flow); probe.<name> is a probe's (no container). Names resolve
+// battlefield.<const> (battlefield.cactuar_suave.flow), roe.<topic> a Records of Eminence flow's (no container; every
+// roe flow counts under the one coverage key roe); probe.<name> is a probe's (no container). Names resolve
 // through the generated constants of XI.QuestContent by reflection (Zone, Item, KeyItem, FameArea, Slot, QuestKey,
 // Mob, Npc), so a typo fails the parse with "<file>:<line>: unknown <kind> <name>".
 //
@@ -146,6 +147,22 @@ using XI.QuestContent;
 //                                         onEffectGain; stop: the effect deleted, its onEffectLose). Refused while an event
 //                                         is open (the engine drops a 0x0E8 sent in one, BlockedState.InEvent)
 //
+// Records of Eminence (quest rework C4):
+//   record take <id> [refused]            GP_CLI_COMMAND_ROE_START (0x10C). The run fails unless the step's packets
+//                                         hold ROE_START (704) for the id, or, with refused, unless they do not
+//   record remove <id>                    GP_CLI_COMMAND_ROE_REMOVE (0x10D); the record must be on the log before it and
+//                                         off it after
+//   record claim <id>                     GP_CLI_COMMAND_ROE_CLAIM (0x10E); the record must be on the log before it
+//   record progress <id> <n>              a GM's player:setEminenceProgress(id, n); the run fails when it returns false
+//   record event <RoeTrigger> [<key>=<n> ...]
+//                                         a GM's player:triggerRoeEvent(<trigger>, { key = n }), the engine's own dispatch
+//   cast <Spell|id> [<char>|<Mob>|#<id>]  GP_CLI_COMMAND_ACTION CastMagic (0x01A) on the char itself, a char of the flow
+//                                         or a mob, then ticks of 400 ms to the cast's end. The run fails when the char
+//                                         is not casting after the packet (the engine refused it)
+//   spawn <Mob>|#<id>                     a GM's SpawnMob; the mob must be up after it
+//   unity <UnityLeader>                   char_profile.unity_leader as a setup line; a GM's player:setUnityLeader after
+//                                         the login, read back through getUnityLeader
+//
 // Carry-harness-2 (the user's rulings of 2026-11-04):
 //   <step> expect-error "<text>"          a suffix that ends a step (not a header or setup line): the step raises a
 //                                         script error, expected there. The record (Lua side) needs a script error
@@ -214,6 +231,8 @@ internal sealed class Statement
     public uint? MobNumber;           // kill / claim #<id>: the mob's id (quest rework P8); null: Name is its IDs.lua key
     public bool NoKiller;             // kill <Mob> nokiller: the mob dies with no killer (quest rework P9)
     public int Pos = -1;              // missionstatus ... pos=<n>: the 4-bit field (quest rework P8); -1: the whole status
+    public bool Refused;              // record take <id> refused: the 0x10C must not start the record (quest rework C4)
+    public List<(string Key, int Value)> Datagrams; // record event: the trigger's datagrams
     public string ExpectError;        // <step> expect-error "<text>": its script error (carry-harness-2); null: none
 }
 
@@ -242,8 +261,13 @@ internal sealed class Flow
     public string Name;               // the file name without .flow: <key>[#branch]
     // the container key (a quest's, a mission's mission.<log>.<const>, a battlefield's battlefield.<const>) or a
     // probe's
-    public string Key => Name.Split('#')[0];
+    public string Key => KeyOf(Name);
+    // a flow name's key: the name up to its first '#' (the selector picks by it before any file is parsed: LoadSelected)
+    public static string KeyOf(string name) => name.Split('#')[0];
     public string File;
+    // harness-speed: a flow a selection did not pick (LoadSelected): its name, file and module lines only, never parsed
+    // (no chars, statements or waivers); it holds its place in all's name order, so the picked flows keep their indices
+    public bool Stub;
     public string Sha256;
     public bool MentionsTwin;         // the file's text (comments too) names a twin: a probe flow that expects Twins.cs to register one
     // "twin" at the start of a word, any case (twin, twins, Twins.cs), or "Twin" anywhere, case-sensitive (a twin class:
@@ -298,7 +322,16 @@ internal sealed class Flow
     // (0/Npc/onTrigger stays refused)
     private static readonly System.Text.RegularExpressions.Regex HandlerLabel =
         new(@"^[1-9][0-9]*/([^/\s]|[^/\s][^/]*[^/\s])/(onTrigger|onTrade|onMobDeath|onZoneIn|afterZoneIn|onZoneOut|(onEventFinish|onEventUpdate|onTriggerAreaEnter|onTriggerAreaLeave):[0-9]+)(@(?<zone>\w+))?$" +
-            @"|^0/-/callback:[A-Za-z][A-Za-z0-9_]*$");
+            @"|^0/-/callback:[A-Za-z][A-Za-z0-9_]*$" +
+            @"|^(trigger|req|check|reward|flag):[A-Za-z][A-Za-z0-9_]*(:[a-z]+)?$" +
+            // five of a battlefield's label kinds (BattlefieldScript.CoverageLabels): a group callback, an exit NPC,
+            // an essential group, requiredItems:worn (quest rework C3 Q4: the worn check is the zone's entry
+            // hook's, and a C# content whose zone's first content is Lua never runs it: the Lua framework's
+            // onEntryTrade checks its proxy) and a deferred callback (C3 C3c: callback:<name>, BattlefieldCallback's
+            // label, for a closure no statement reaches: century_of_hardship's dead-Bugbby reaction); hook:<Name>,
+            // requiredKeyItems, requiredItems:wear, loot and section: labels are refused
+            @"|^(group:[1-9][0-9]*:[A-Za-z]+|exit:[A-Za-z0-9_]+|essentialMobs:[1-9][0-9]*|requiredItems:worn" +
+            @"|callback:[A-Za-z][A-Za-z0-9_]*)$");
     // uncovered: <label> -- <reason>: the label up to the first " --" that a space or the line's end follows
     private static readonly System.Text.RegularExpressions.Regex WaiverLine =
         new(@"^\s*uncovered:\s*(?<label>.*?)(\s--(\s+(?<reason>.*?))?)?\s*$");
@@ -342,13 +375,14 @@ internal sealed class Flow
     // the chars a flow may have: a full party
     public const int MaxChars = 6;
 
-    private static readonly string[] SetupVerbs = { "fame", "item", "keyitem", "charvar", "quest", "mission", "rank", "title", "setting", "skill", "levelcap", "merits", "storage", "spell" };
+    private static readonly string[] SetupVerbs = { "fame", "item", "keyitem", "charvar", "quest", "mission", "rank", "title", "setting", "skill", "levelcap", "merits", "storage", "spell", "unity" };
     private static readonly string[] HeaderVerbs = { "char", "hide", "lists", "uncovered:", "module", "warning:" };
     private static readonly string[] StepVerbs =
     {
         "login", "trigger", "trade", "finish", "finish-if-event", "update", "zoneline", "route", "warp", "rezone", "walk", "equip",
         "seekeyitem", "delkeyitem", "localvar", "npclocalvar", "weather", "animatenpc", "fill-inventory", "free-inventory", "kill", "claim", "tick", "wait", "logout",
         "invite", "accept", "decline", "effect", "npcstatus", "missionstatus", "currency", "bfwin", "heal",
+        "cast", "record", "spawn",
     };
     // the statements of the world, not of a char: no <name>: prefix
     private static readonly string[] WorldVerbs = { "tick", "wait", "setting" };
@@ -362,6 +396,32 @@ internal sealed class Flow
         var f = Parse(text, Path.GetFileName(path), Path.GetFileNameWithoutExtension(path), npcs, weapons, items);
         f.File = path;
         return f;
+    }
+
+    // harness-speed: a flow a selection did not pick, by its file: its name and its module lines (ModuleLines), unparsed
+    public static Flow LoadStub(string path)
+    {
+        var f = new Flow { Name = Path.GetFileNameWithoutExtension(path), File = path, Stub = true };
+        f.Modules.AddRange(ModuleLines(Encoding.UTF8.GetString(System.IO.File.ReadAllBytes(path))));
+        return f;
+    }
+
+    // harness-speed: the paths of a flow's module lines, in order, as Parse adds them to Modules, without the rest of the
+    // parse: a line whose words (its comment off, as Parse takes it off) are `module <path>`. A flow that parses gives
+    // the same list (a module line with a prefix, another word count or expect-error is a parse error; select-check
+    // compares the two over every flow); the coverage gate's module part needs every flow's (ModuleCoverageResults)
+    public static List<string> ModuleLines(string text)
+    {
+        var paths = new List<string>();
+        if (!text.Contains("module", StringComparison.Ordinal)) return paths;
+        foreach (var line in text.Replace("\r\n", "\n").Split('\n'))
+        {
+            // a line without the word has none once its comment is off
+            if (!line.Contains("module", StringComparison.Ordinal)) continue;
+            var w = WithoutComment(line).Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+            if (w.Length == 2 && w[0] == "module") paths.Add(w[1]);
+        }
+        return paths;
     }
 
     // the sha256 hex of the flow's statements: each line without its comment and trailing whitespace, the blank lines
@@ -393,7 +453,7 @@ internal sealed class Flow
     }
     private static readonly System.Text.RegularExpressions.Regex ExpectErrorQuote =
         new(@"(^|\s)expect-error\s+(?<quote>"")");
-    private static readonly System.Text.RegularExpressions.Regex MobIdWord = new(@"^\s*([a-z][a-z0-9_]*:\s+)?(kill|claim)\s+(?<hash>#)[0-9]");
+    private static readonly System.Text.RegularExpressions.Regex MobIdWord = new(@"^\s*([a-z][a-z0-9_]*:\s+)?(kill|claim|spawn|cast\s+\S+)\s+(?<hash>#)[0-9]");
 
     public static Flow Parse(string text, string file, string name, NpcResolver npcs, WeaponResolver weapons = null, ItemResolver items = null)
     {
@@ -887,26 +947,7 @@ internal sealed class Flow
                         st.NoKiller = true;
                     }
                     else Args(1, 1);
-                    // #<id>: the mob by its id (quest rework P8; checked at the run)
-                    if (w[1].StartsWith('#'))
-                    {
-                        if (!uint.TryParse(w[1].AsSpan(1), NumberStyles.None, CultureInfo.InvariantCulture, out var mobNumber) || mobNumber == 0)
-                            throw Err($"{verb} #<id> takes a mob's id, a number from 1: {w[1]}");
-                        st.MobNumber = mobNumber;
-                        st.Name = w[1];
-                        break;
-                    }
-                    // <Mob>+<n> / <Mob>-<n>: the key's id plus or minus n (a key is an identifier: no sign in it)
-                    string mob = w[1];
-                    int sign = mob.IndexOfAny(new[] { '+', '-' });
-                    if (sign >= 0)
-                    {
-                        if (!int.TryParse(mob.AsSpan(sign + 1), NumberStyles.None, CultureInfo.InvariantCulture, out var off) || off <= 0)
-                            throw Err($"{verb} takes <Mob>, <Mob>+<n> or <Mob>-<n>, n from 1: {mob}");
-                        st.Offset = mob[sign] == '-' ? -off : off;
-                        mob = mob.Substring(0, sign);
-                    }
-                    st.Name = ResolveMob(here, mob, Err);
+                    MobWord(st, verb, w[1], here, Err);
                     break;
                 }
                 case "tick":
@@ -965,6 +1006,67 @@ internal sealed class Flow
                     if (w.Length > 1 && w[1] != "stop") throw Err($"heal takes nothing or stop: {w[1]}");
                     st.Amount = w.Length > 1 ? (int)XI.Map.CampMode.Off : (int)XI.Map.CampMode.On;
                     break;
+                case "cast":
+                {
+                    // cast <Spell|id> [<char>|<Mob>|#<id>]: 0x01A CastMagic, on the char itself when no target is given
+                    Args(1, 2);
+                    st.Value = char.IsDigit(w[1][0]) ? Int(w[1], Err) : ResolveInt(typeof(Spell), "spell", w[1], Err);
+                    if (st.Value is < 1 or > 1023) throw Err($"a spell is an xi.magic.spell id, 1 to 1023: {w[1]}");
+                    if (w.Length > 2)
+                    {
+                        int who = f.Chars.FindIndex(cs => cs.Name == w[2]);
+                        if (who >= 0) st.Target = who;
+                        else MobWord(st, verb, w[2], here, Err);
+                    }
+                    break;
+                }
+                case "spawn":
+                    // spawn <Mob>|#<id>: a GM's SpawnMob, an NM no flow can pop
+                    Args(1, 1);
+                    MobWord(st, verb, w[1], here, Err);
+                    break;
+                case "unity":
+                    // unity <UnityLeader>: char_profile.unity_leader before the login, player:setUnityLeader after it
+                    Args(1, 1);
+                    st.Value = ResolveInt(typeof(UnityLeader), "unity leader", w[1], Err);
+                    break;
+                case "record":
+                    Args(1, 9);
+                    st.Status = w[1];
+                    switch (w[1])
+                    {
+                        case "take":
+                            Args(2, 3);
+                            st.Value = RecordId(w[2], Err);
+                            if (w.Length > 3 && w[3] != "refused") throw Err($"record take takes <id> [refused]: {w[3]}");
+                            st.Refused = w.Length > 3;
+                            break;
+                        case "remove":
+                        case "claim":
+                            Args(2, 2);
+                            st.Value = RecordId(w[2], Err);
+                            break;
+                        case "progress":
+                            Args(3, 3);
+                            st.Value = RecordId(w[2], Err);
+                            st.Amount = Int(w[3], Err);
+                            if (st.Amount < 0) throw Err($"record progress takes a count of 0 or more: {w[3]}");
+                            break;
+                        case "event":
+                            Args(2, 9);
+                            st.Value = ResolveInt(typeof(RoeTrigger), "RoE trigger", w[2], Err);
+                            st.Datagrams = new List<(string Key, int Value)>();
+                            foreach (var d in w.Skip(3))
+                            {
+                                int eq = d.IndexOf('=');
+                                if (eq < 1) throw Err($"a datagram is <name>=<n>: {d}");
+                                st.Datagrams.Add((d.Substring(0, eq), Int(d.Substring(eq + 1), Err)));
+                            }
+                            break;
+                        default:
+                            throw Err($"record takes take, remove, claim, progress or event: {w[1]}");
+                    }
+                    break;
                 case "wait":
                     Args(1, 1);
                     if (w[1].StartsWith("vana=", StringComparison.Ordinal)) st.Name = "vana";
@@ -991,6 +1093,36 @@ internal sealed class Flow
     {
         int i = f.Chars.FindIndex(cs => cs.Name == name);
         return i >= 0 ? i : throw err($"unknown char {name}");
+    }
+
+    // a mob word: #<id>, or an IDs.lua key with an optional +<n> / -<n> (kill, claim, spawn, cast)
+    private static void MobWord(Statement st, string verb, string word, ushort here, Func<string, Exception> err)
+    {
+        if (word.StartsWith('#'))
+        {
+            if (!uint.TryParse(word.AsSpan(1), NumberStyles.None, CultureInfo.InvariantCulture, out var mobNumber) || mobNumber == 0)
+                throw err($"{verb} #<id> takes a mob's id, a number from 1: {word}");
+            st.MobNumber = mobNumber;
+            st.Name = word;
+            return;
+        }
+        string mob = word;
+        int sign = mob.IndexOfAny(new[] { '+', '-' });
+        if (sign >= 0)
+        {
+            if (!int.TryParse(mob.AsSpan(sign + 1), NumberStyles.None, CultureInfo.InvariantCulture, out var off) || off <= 0)
+                throw err($"{verb} takes <Mob>, <Mob>+<n> or <Mob>-<n>, n from 1: {mob}");
+            st.Offset = mob[sign] == '-' ? -off : off;
+            mob = mob.Substring(0, sign);
+        }
+        st.Name = ResolveMob(here, mob, err);
+    }
+
+    // a record id: the log holds 0 to 4095, and 0 is an empty slot
+    private static int RecordId(string s, Func<string, Exception> err)
+    {
+        int id = Int(s, err);
+        return id is >= 1 and <= 4095 ? id : throw err($"a record id is 1 to 4095: {s}");
     }
 
     private static int Int(string s, Func<string, Exception> err) =>

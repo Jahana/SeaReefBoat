@@ -1,0 +1,24 @@
+# The Three Kingdoms San d'Oria (Windurst 2-3, mission.windurst.the_three_kingdoms_sandoria). A level 30 Warrior of
+# Windurst in Northern San d'Oria with the mission current (a GM; a GM's Resonance current keeps RoV 1-1 out). The login
+# plays SoA's Rumors from the West zone-in 878 (that mission's event, not this one's). Status 0: Kasaroro answers his
+# own default 548. Status 3: KASARORO_DIALOG (no event). Status 4: 549. Status 5: 550, whose finish completes the
+# mission (no reward table) and begins The Three Kingdoms at status 6; Kasaroro then says KASARORO_DIALOG + 7, The Three
+# Kingdoms' status 6 line.
+lists ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/502 GhelsbaOutpost/Warchief_Vatgit/onMobDeath NorthernSanDoria/Kasaroro/onTrigger NorthernSanDoria/onEventFinish/550
+char zone=NorthernSanDoria pos=-72,-3,34 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdomsSandoria current
+login
+trigger Kasaroro                        # status 0: nothing from the mission
+finish-if-event
+missionstatus Windurst 3
+trigger Kasaroro                        # KASARORO_DIALOG
+finish-if-event
+missionstatus Windurst 4
+trigger Kasaroro                        # 549
+finish-if-event
+missionstatus Windurst 5
+trigger Kasaroro                        # 550
+finish                                  # completed, The Three Kingdoms begun, status 6
+trigger Kasaroro
+finish-if-event

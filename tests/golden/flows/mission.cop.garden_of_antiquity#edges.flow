@@ -1,0 +1,36 @@
+# Garden of Antiquity (CoP 8-1): handlers at states they do not answer (GMs set the vars). _0x1 at Status 0:
+# NOTHING_OF_INTEREST (7500, the zone's default). At Status 1, _0x2 pops its three Ru'aern (7501); killed: 161 (2).
+# Status 2 with the CID nibble 8 and the Rubious nibble 3 (the mask 7): _0x0 plays 100 (the mask alone decides past
+# Status 0); finished 0: nothing new. In Hu'Xzoi at Status 1: _iya: DOES_NOT_RESPOND (7259, 8-1's message); _iyb:
+# its default 56 (the zone's DefaultActions). Status 2: _iya: 1, finished with a full bag: ITEM_CANNOT_BE_OBTAINED
+# (6387), Status stays 2; _iyb: 56.
+lists Altaieu/_0x0/onTrigger Altaieu/_0x1/onTrigger Altaieu/_0x2/onTrigger GrandPalaceOfHuxzoi/_iya/onTrigger GrandPalaceOfHuxzoi/_iyb/onTrigger GrandPalaceOfHuxzoi/onEventFinish/1
+char zone=Altaieu pos=0,-12,-457 job=WAR lvl=75 nation=0
+mission Cop GardenOfAntiquity current
+login
+trigger _0x1                            # Status 0: 7500 (the default)
+finish-if-event
+charvar Mission[6][800]Status 1         # a GM
+trigger _0x2                            # popped: 7501
+kill RUAERN+3
+kill RUAERN+4
+kill RUAERN+5
+trigger _0x2                            # one tower: 161 (2)
+finish-if-event
+charvar Mission[6][800]Status 2         # a GM
+missionstatus Cop 8 pos=6               # a GM: CID bit 3
+missionstatus Cop 3 pos=7               # a GM: Rubious bits 0 and 1
+trigger _0x0                            # mask 7: 100
+finish option=0                         # Status 2
+warp -20,-2,-277 GrandPalaceOfHuxzoi
+charvar Mission[6][800]Status 1         # a GM
+trigger _iya                            # Status 1: 7259
+finish-if-event
+trigger _iyb                            # Status 1: its default 56
+finish-if-event
+charvar Mission[6][800]Status 2         # a GM
+trigger _iya                            # Status 2: 1
+fill-inventory
+finish                                  # full: 6387; Status 2
+trigger _iyb                            # Status 2: 56
+finish-if-event

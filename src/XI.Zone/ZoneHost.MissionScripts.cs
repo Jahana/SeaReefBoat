@@ -20,51 +20,23 @@ namespace XI.Zone
         // the MissionScripts of XI.QuestContent, each instantiated and compiled once, in type-name order
         private List<CompiledMissionScript> missionScripts_ = new List<CompiledMissionScript>();
 
-        private sealed class CompiledMissionScript
+        private sealed class CompiledMissionScript : CompiledScript<MissionScript, MissionScriptDefinition>
         {
-            public string TypeName;
-            public MissionScript Script;
-            public MissionScriptDefinition Def;
-            // what the constructor or Compile threw
-            public string Error;
         }
 
         // the MissionScripts of the containers (DiscoverContainers), each compiled once, in type-name order; a mission
         // whose constructor or Compile threw is kept with the error
         private static List<CompiledMissionScript> DiscoverMissionScripts(List<DiscoveredContainer> containers)
         {
-            var list = new List<CompiledMissionScript>();
-            foreach (var c in containers.Where(d => typeof(MissionScript).IsAssignableFrom(d.Type)))
-            {
-                var m = new CompiledMissionScript
-                {
-                    TypeName = c.Type.FullName, Script = (MissionScript)c.Script, Error = c.Error,
-                };
-                if (m.Script != null)
-                    try
-                    {
-                        m.Def = m.Script.Compile();
-                    }
-                    catch (Exception e)
-                    {
-                        m.Error = InnerMessage(e);
-                    }
-                list.Add(m);
-            }
+            var list = DiscoverScripts<CompiledMissionScript, MissionScript>(containers);
+            foreach (var m in list) CompileScript(m, s => s.Compile());
             return list;
         }
 
         private static CompiledMissionScript CompiledMission(MissionScript s)
         {
             var m = new CompiledMissionScript { TypeName = s.GetType().FullName, Script = s };
-            try
-            {
-                m.Def = s.Compile();
-            }
-            catch (Exception e)
-            {
-                m.Error = e.Message;
-            }
+            CompileScript(m, x => x.Compile());
             return m;
         }
 
@@ -81,7 +53,8 @@ namespace XI.Zone
         {
             var tests = TestQuestScripts.OfType<MissionScript>().Select(CompiledTestMission);
             foreach (var m in missionScripts_.Concat(tests))
-                if (m.Def != null && m.Script.Key == missionKey) return HandlerLabels(m.Def.Core);
+                if (m.Def != null && m.Script.Key == missionKey)
+                    return HandlerLabels(WithModules(missionKey, m.Def.Core));
             return null;
         }
 
@@ -95,31 +68,18 @@ namespace XI.Zone
         }
 
         // the missions of the register pass (CSharpQuests.register), after the quests: those with a LegacyPath first,
-        // then the others by key, each registered as RegisterMissionScript says; one that throws is left to Lua and
-        // logged. keys: the pass's container keys (a mission key is never a quest's: its prefix is mission.)
-        private void RegisterMissionScripts(LuaState l, HashSet<string> keys, int top)
+        // then the others by key, each registered as RegisterMissionScript says, its exports claimed as a quest's;
+        // how many registered. keys: the pass's container keys (a mission key is never a quest's: its prefix is
+        // mission.)
+        private int RegisterMissionScripts(LuaState l, HashSet<string> keys, int top)
         {
             var all = (SkipDiscoveredQuests ? new List<CompiledMissionScript>() : missionScripts_)
-                .Concat(TestQuestScripts.OfType<MissionScript>().Select(CompiledMission)).ToList();
-            string SortKey(CompiledMissionScript m) => m.Script?.Key ?? m.TypeName;
-            var ordered = all.Where(m => m.Script?.LegacyPath != null)
-                .Concat(all.Where(m => m.Script?.LegacyPath == null).OrderBy(SortKey, StringComparer.Ordinal));
-            foreach (var m in ordered)
-            {
-                string name = m.TypeName;
-                try
-                {
-                    RegisterMissionScript(l, m, keys, ref name);
-                }
-                catch (Exception e)
-                {
-                    log_($"quests: {name} not registered: {e.Message}");
-                }
-                finally
-                {
-                    l.SetTop(top);
-                }
-            }
+                .Concat(TestQuestScripts.OfType<MissionScript>().Select(CompiledMission));
+            return RegisterEach(l, LegacyFirst(all, m => m.Script?.LegacyPath, m => m.Script?.Key ?? m.TypeName), top,
+                m => m.TypeName,
+                (CompiledMissionScript m, ref string name, ref bool duplicate, out QuestScriptBinding bound) =>
+                    RegisterMissionScript(l, m, keys, ref name, ref duplicate, out bound),
+                (m, name, bound) => ClaimExports(l, m.Script, m.Def?.Core, name, bound));
         }
 
         // resolves, validates, builds and substitutes one mission; false when it is skipped or refused (logged), the
@@ -130,8 +90,10 @@ namespace XI.Zone
         // as a quest is: a call-only mission keeps only its Mission object (its vars) and puts no container in the
         // list, and is named in the call-only line when the switches leave it out. name: the mission's key once
         // known, for the caller's log line when this throws
-        private bool RegisterMissionScript(LuaState l, CompiledMissionScript m, HashSet<string> keys, ref string name)
+        private bool RegisterMissionScript(LuaState l, CompiledMissionScript m, HashSet<string> keys, ref string name,
+                                           ref bool duplicate, out QuestScriptBinding bound)
         {
+            bound = null;
             if (m.Script == null)
             {
                 if (CSharpQuestsEnabled) log_($"quests: {m.TypeName} not registered: {m.Error}");
@@ -141,13 +103,14 @@ namespace XI.Zone
             string key = m.Script.Key;
             name = key;
             bool first = keys.Add(key);
+            duplicate = !first;
             bool callOnly = m.Def is { Core.CallOnly: true };
             if (!CSharpQuestsEnabled)
             {
                 if (callOnly) callOnlyOff_.Add(key);
                 return false;
             }
-            string area = MissionArea(l, log);
+            string area = MissionScript.AreaName(m.Script.Log);
             if (area == null)
             {
                 log_($"quests: {key} not registered: unknown mission log {log}");
@@ -156,17 +119,11 @@ namespace XI.Zone
             int? id = MissionConstId(l, area, m.Script.ConstName);
             // the Lua file's container is in the list (the file is there); without one, a refusal has no fallback
             bool hasLua = id != null && HasContainer(l, MissionContainerId(log, id.Value));
-            bool Refuse(string reason, IList<string> each = null)
-            {
-                if (id != null && !hasLua)
-                {
-                    log_($"quests: C# mission {key} failed to load and has no Lua fallback: {reason}");
-                    QuestLoadFailures.Add(key);
-                }
-                else if (each != null) foreach (var p in each) log_($"quests: {key} not registered: {p}");
-                else log_($"quests: {key} not registered: {reason}");
-                return false;
-            }
+            // whether a refusal leaves the Lua in charge: hasLua, or for an unknown constant or a second class with
+            // the key (where the container tells nothing) whether the LegacyPath file is there
+            bool fallback = hasLua;
+            bool Refuse(string reason, IList<string> each = null) =>
+                RefuseContainer("mission", key, fallback, reason, each);
             if (CSharpQuestsOff.Contains(key))
             {
                 // OFF leaves the Lua file in charge while it exists; after its deletion there is nothing to fall back
@@ -178,23 +135,26 @@ namespace XI.Zone
             }
             if (!first)
             {
-                log_($"quests: {key} not registered: another C# mission ({m.TypeName}) has the key");
-                return false;
+                fallback = LegacyFileExists(l, m.Script.LegacyPath);
+                return Refuse($"another C# mission ({m.TypeName}) has the key");
             }
-            if (m.Def == null) return Refuse(m.Error);
             if (id == null)
             {
-                log_($"quests: {key} not registered: unknown mission constant");
-                return false;
+                fallback = LegacyFileExists(l, m.Script.LegacyPath);
+                return Refuse("unknown mission constant");
             }
+            if (m.Def == null) return Refuse(m.Error);
+            // the definition with an enabled module's overrides applied (validated with them), else the mission's
+            // own; a patched mission is placed as any other here and moved to the end of the list after the pass
+            var def = m.Def.WithCore(WithModules(key, m.Def.Core));
             var problems = new List<string>();
-            // the key's log name is the area name the Lua gives the log (MissionLog's names in lower case)
-            if (key != ContainerKeys.Mission(area, m.Script.ConstName))
-                problems.Add($"its key's log is not xi.mission.area[{log}] ({area})");
-            problems.AddRange(ValidateMissionScript(m.Def));
+            problems.AddRange(ValidateMissionScript(def));
+            // a module or global another container of this pass exports, or a global another script sets
+            if (def.Core.Exports.Count > 0)
+                problems.AddRange(ExportProblems(l, key, def.Core, m.Script.LegacyPath));
             if (problems.Count > 0) return Refuse(string.Join("; ", problems), each: problems);
 
-            var binding = new QuestScriptBinding(key, m.Def.Core, area, id.Value) { Mission = m.Def };
+            var binding = new QuestScriptBinding(key, def.Core, area, id.Value) { Mission = def };
             binding.MakeCallbackRef = cb => CallbackFunction(binding, cb);
             int top = l.Top;
             try
@@ -202,13 +162,16 @@ namespace XI.Zone
                 int mission = BuildMissionContainer(l, binding);
                 // every handler is an NPC-call one: only the Mission object stays (its vars), the lookup gets no
                 // container
-                if (m.Def.Core.CallOnly)
+                if (def.Core.CallOnly)
                 {
                     npcCallQuests_[key] = binding;
+                    bound = binding;
                     return true;
                 }
                 PlaceContainer(l, key, binding.ContainerId, mission, m.Script.LegacyPath);
-                if (m.Def.Core.HasCalled) npcCallQuests_[key] = binding;
+                if (def.Core.HasCalled) npcCallQuests_[key] = binding;
+                if (modulePatches_.ContainsKey(key)) placedPatched_[key] = binding.ContainerId;
+                bound = binding;
                 return true;
             }
             catch (Exception e)
@@ -224,23 +187,6 @@ namespace XI.Zone
 
         // Mission[<log>][<id>]: Mission.getVarPrefix, the container id and var prefix
         internal static string MissionContainerId(int log, int id) => $"Mission[{log}][{id}]";
-
-        // xi.mission.area[log], null when it is not there
-        private static string MissionArea(LuaState l, int log)
-        {
-            int top = l.Top;
-            try
-            {
-                l.GetPath("xi.mission.area");
-                if (!l.IsTable(-1)) return null;
-                l.RawGetI(-1, log);
-                return l.IsString(-1) ? l.ToStringValue(-1) : null;
-            }
-            finally
-            {
-                l.SetTop(top);
-            }
-        }
 
         // xi.mission.id[area][constName], null when it is not there
         private static int? MissionConstId(LuaState l, string area, string constName)
@@ -301,20 +247,49 @@ namespace XI.Zone
             return mission;
         }
 
-        // npcUtil.completeMission's params, only the fields the mission sets (a field at 0, NextLog at null, is not a
-        // key): item, keyItem, gil, bayld, exp, title, rankPoints, rank, nextMission = { log, id }; leaves the table on
-        // the stack
+        // npcUtil.completeMission's params, only the fields the mission sets (null is not a key, 0 is): item, itemParams,
+        // keyItem, gil, bayld, exp, title, rankPoints, rank, nextMission = { log, id }; leaves the table on the stack
         internal static void PushMissionRewardTable(LuaState l, MissionReward r)
         {
             l.NewTable();
-            void Set(string k, int v)
+            void Set(string k, int? v)
             {
-                if (v == 0) return;
-                l.Push((double)v);
+                if (v is not { } value) return;
+                l.Push((double)value);
                 l.SetField(-2, k);
             }
             Set("item", r.Item);
+            if (r.Items != null)
+            {
+                l.NewTable();
+                for (int i = 0; i < r.Items.Length; i++)
+                {
+                    var item = r.Items[i];
+                    if (item.Quantity is { } quantity)
+                    {
+                        l.NewTable();
+                        l.Push((double)item.Id);
+                        l.RawSetI(-2, 1);
+                        l.Push((double)quantity);
+                        l.RawSetI(-2, 2);
+                    }
+                    else l.Push((double)item.Id);
+                    l.RawSetI(-2, i + 1);
+                }
+                l.SetField(-2, "item");
+            }
+            PushItemParams(l, r.ItemParams);
             Set("keyItem", r.KeyItem);
+            if (r.KeyItems != null)
+            {
+                l.NewTable();
+                for (int i = 0; i < r.KeyItems.Length; i++)
+                {
+                    l.Push((double)r.KeyItems[i]);
+                    l.RawSetI(-2, i + 1);
+                }
+                l.SetField(-2, "keyItem");
+            }
             Set("gil", r.Gil);
             Set("bayld", r.Bayld);
             Set("exp", r.Exp);
@@ -442,13 +417,21 @@ namespace XI.Zone
             }
 
             // mission:setVar(player, name, value)
-            public void SetVar(string name, int value) => c_.SetVar(name, value);
+            // mission:setVar(player, name, value, expiry)
+            public void SetVar(string name, int value, uint expiry = 0) => c_.SetVar(name, value, expiry);
             // mission:setMustZone(player)
             public void SetMustZone() => c_.SetMustZone();
             // mission:setLocalVar(player, name, value)
             public void SetLocalVar(string name, int value) => ((IQuestProgress)c_).SetLocalVar(name, value);
+            // Container:isVarBitsSet(player, name, bits...), setVarBit(player, name, bit) and
+            // incrementVar(player, name, value)
+            public bool IsVarBitsSet(string name, params int[] bits) => c_.IsVarBitsSet(name, bits);
+            public void SetVarBit(string name, int bit) => c_.SetVarBit(name, bit);
+            public void IncrementVar(string name, int value) => c_.IncrementVar(name, value);
             // mission:cleanup(player)
             public void Cleanup() => c_.Cleanup();
+            // for _, member in ipairs(player:getAlliance()) do mission:setLocalVar(member, name, value) ... end
+            public void SetAllianceLocalVars(params (string Name, int Value)[] vars) => c_.AllianceLocalVars(vars);
         }
     }
 }

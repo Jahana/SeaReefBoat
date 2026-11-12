@@ -1,0 +1,19 @@
+# Gaze of the Saboteur (ToAU 36): the zone-in 6 finished (Status 1), then the Status set to 0: the _260 trigger plays
+# nothing; at Status 1 a warp into the zone plays nothing (the zone-in is for Status 0).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger HazhalmTestingGrounds/_260/onTrigger HazhalmTestingGrounds/onZoneIn/1 HazhalmTestingGrounds/onEventFinish/6 HazhalmTestingGrounds/onEventFinish/7
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau GazeOfTheSaboteur current
+login
+tick 1000
+tick 1000
+tick 1000
+warp 486,-227.6,-20 HazhalmTestingGrounds open
+finish                                  # 6: Status 1
+missionstatus Toau 0
+trigger _260                            # Status 0: nothing
+missionstatus Toau 1
+warp 486,-227.6,-20 HazhalmTestingGrounds   # Status 1: nothing

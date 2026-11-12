@@ -1,0 +1,25 @@
+# Stirrings of War (ToAU 38) with the RoV era module: the section is live when the Timer var is 0 (and the must-zone
+# var clear). The Timer 1: nothing; the Timer 0: Naja plays 3134, the area 5 plays 3136; finished: completed.
+module modules/era/lua/missions/mission_adjustments.lua
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/5 AhtUrhganWhitegate/onEventFinish/3136
+char zone=AhtUrhganWhitegate pos=80,-6,-140 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau StirringsOfWar current
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+login
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][37]Timer 1
+trigger Naja_Salaheem                   # the Timer 1: nothing
+walk 80,-6,-130                         # nothing
+walk 80,-6,-140
+charvar Mission[4][37]Timer 0
+trigger Naja_Salaheem                   # 3134
+finish-if-event
+walk 80,-6,-130                         # 3136
+finish                                  # completed

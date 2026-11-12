@@ -1,0 +1,49 @@
+# Dawn (battlefield.dawn, Empyreal Paradox): areas 2 and 3. Main (8-4 Status 1) enters area 2 (option 2): Promathia
+# +2 killed: 32004 (2), finished: +3 spawned; +3 killed: 32001 (2); its finish: the battlefield's setPos zones the
+# char out, and 8-4's own 32001 finish (battlefieldWin is this battlefield, Status 1): Status 2. bob (Status 1)
+# enters area 3 (3): +4: 32004 (3); +5: 32001 (3); finished: 8-4's own 32001 finish, Status 2.
+lists EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/onEventUpdate/32000 EmpyrealParadox/onEventFinish/32000 EmpyrealParadox/onEventFinish/32004 EmpyrealParadox/onEventFinish/32001
+char zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+char bob zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+mission Cop Dawn current
+charvar Mission[6][840]Status 1
+bob: mission Cop Dawn current
+bob: charvar Mission[6][840]Status 1
+login
+trigger TR_Entrance
+update 32000 option=2
+finish
+tick 2000
+kill PROMATHIA+2
+tick 1000
+tick 1000
+tick 1000
+finish-if-event
+tick 2000
+kill PROMATHIA+3
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+finish-if-event
+bob: login
+bob: trigger TR_Entrance
+bob: update 32000 option=3
+bob: finish
+tick 2000
+bob: kill PROMATHIA+4
+tick 1000
+tick 1000
+tick 1000
+bob: finish-if-event
+tick 2000
+bob: kill PROMATHIA+5
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+bob: finish-if-event
+tick 11000
+tick 10000

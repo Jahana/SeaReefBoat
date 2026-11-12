@@ -1,0 +1,84 @@
+# Xarcabard, Land of Truths (Bastok 5-2): the arms the main flow does not take. Karst at status 2: his default 601; the
+# Throne Room zone-in at status 2 with PostBattle 1 and at 3 with PostBattle 0: nothing; _4l1 at status 1: the
+# battlefield refuses (NO_BATTLEFIELD_ENTRY) and the zone's default messageSpecial -1 (32767). Four wins by a GM
+# (bfwin): at status 2 (inside the event) and with battlefieldWin 0: the title only; with Zilart's The New Frontier
+# current (a GM's addMission: the engine's warning over the 65535 Zilart row) and then completed: not added, PostBattle
+# 1, the set-down, the zone-in 7 and its finishes (the mission's and Zone.lua's) as in the main flow.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/Pavvke/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/Karst/onTrigger Metalworks/_6ld/onTrigger Metalworks/onEventFinish/602 Metalworks/onEventFinish/603 Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 ThroneRoom/_4l1/onTrigger ThroneRoom/_4l2/onTrigger ThroneRoom/onZoneIn/1 ThroneRoom/onEventUpdate/32000 ThroneRoom/onEventFinish/32000 ThroneRoom/onEventFinish/32001 ThroneRoom/onEventFinish/32002 ThroneRoom/onEventFinish/32003 ThroneRoom/onEventFinish/32004 ThroneRoom/onEventFinish/6 ThroneRoom/onEventFinish/7
+char zone=Metalworks pos=64,-15,-2 job=WAR lvl=75 nation=1
+warning: lua: addMission: overwriting current mission 65535 of log 3 with 0 -- the GM step mission Zilart TheNewFrontier current (player:addMission) over the char's 65535: the engine's C++ ShowWarning
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+rank 5
+mission Bastok XarcabardLandOfTruths current
+charvar Mission[1][15]PostBattle 1
+login
+missionstatus Bastok 2
+trigger Karst                           # status 2: Karst's default 601
+finish-if-event
+warp -108,-6,0 ThroneRoom               # status 2, PostBattle 1: no zone-in event
+missionstatus Bastok 1
+trigger _4l1                            # status 1: the battlefield refuses (7254), the default -1
+finish-if-event
+charvar Mission[1][15]PostBattle 0
+missionstatus Bastok 3
+warp 64,-15,-2 Metalworks
+warp -108,-6,0 ThroneRoom               # status 3, PostBattle 0: no zone-in event
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 160, 32001
+missionstatus Bastok 2                  # a GM, inside the event
+finish                                  # 32001 at status 2: the title; the mission does nothing
+tick 11000
+tick 10000
+missionstatus Bastok 3
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 160, 32001
+localvar battlefieldWin 0               # a GM, inside the event
+finish                                  # 32001 with battlefieldWin 0: the title; the mission does nothing
+tick 11000
+tick 10000
+mission Zilart TheNewFrontier current
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 160, 32001
+finish                                  # 32001, The New Frontier current: not added again; PostBattle 1, setPos
+tick 400                                # the setPos runs: a zone change into the Throne Room
+login open                              # status 3, PostBattle 1: the zone-in's 7 (-1, flags 8)
+finish                                  # 7: status 4, PostBattle 0, the Shadow Fragment
+tick 400                                # Zone.lua 7 finish: setPos to Castle Zvahl Baileys, a zone change
+login
+missionstatus Bastok 3
+mission Zilart TheNewFrontier completed
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 160, 32001
+finish                                  # 32001, The New Frontier completed: not added; PostBattle 1, setPos
+tick 400                                # the setPos runs: a zone change into the Throne Room
+login open                              # status 3, PostBattle 1: the zone-in's 7 (-1, flags 8)
+finish                                  # 7: status 4, PostBattle 0, the Shadow Fragment
+tick 400                                # Zone.lua 7 finish: setPos to Castle Zvahl Baileys, a zone change
+login

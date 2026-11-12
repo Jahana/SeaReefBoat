@@ -1,0 +1,25 @@
+# The Emissary San d'Oria 2 (Bastok 2-3, mission.bastok.the_emissary_sandoria2). A level 30 Warrior of Bastok in
+# Northern San d'Oria with the mission current (a GM; a GM's Resonance current keeps RoV 1-1's first mission out).
+# Status 0: Helaku with no Kindred Crest answers a message, no event. Shakir plays 538 at every point of the flow,
+# which is also his own zone default, so replay cannot tell the mission's event(538) from the default (a fake check
+# pins it). With the Kindred Crest: Helaku 545, whose finish completes the mission, begins The Emissary, moves to
+# status 11, takes the crest and gives the Kindred Report; Helaku then plays 557 (The Emissary is now current).
+lists ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/503 HorlaisPeak/onEventFinish/32001 NorthernSanDoria/Helaku/onTrigger NorthernSanDoria/Shakir/onTrigger NorthernSanDoria/onEventFinish/545
+char zone=NorthernSanDoria pos=36,-2,-2 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheEmissarySandoria2 current
+login
+trigger Helaku
+finish-if-event
+trigger Shakir
+finish-if-event
+missionstatus Bastok 9
+trigger Shakir
+finish-if-event
+keyitem KindredCrest
+trigger Helaku
+finish
+trigger Helaku
+finish-if-event
+trigger Shakir
+finish-if-event

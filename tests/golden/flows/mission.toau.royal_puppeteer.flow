@@ -1,0 +1,28 @@
+# Royal Puppeteer (ToAU 12, mission.toau.royal_puppeteer). A level 75 Warrior of Bastok with it current, status 0, in Aht
+# Urhgan Whitegate: Naja 3071. Nashmau: Pyopyoroon, a trade of the vial at status 0: nothing; his trigger 277, finished:
+# status 1; again: 278 (once per zone); again in the zone: nothing from this section; a trade of a different item (a Bronze
+# Piece): nothing; the Vial of Jody's Acid: 279, finished: completed (the Vial of Spectral Scent, Lost Kingdom
+# current), the vial taken.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger Nashmau/Pyopyoroon/onTrigger Nashmau/Pyopyoroon/onTrade Nashmau/onEventFinish/277 Nashmau/onEventFinish/279
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau RoyalPuppeteer current
+item VialOfJodysAcid
+item ImperialBronzePiece
+login
+trigger Naja_Salaheem                   # 3071
+finish
+warp 22.112,0,20 Nashmau
+trade Pyopyoroon VialOfJodysAcid x1     # status 0: nothing
+trigger Pyopyoroon                      # 277
+finish                                  # status 1
+trigger Pyopyoroon                      # 278
+finish
+trigger Pyopyoroon                      # once per zone: the second time nothing
+finish-if-event
+trade Pyopyoroon ImperialBronzePiece x1 # not the vial: nothing
+trade Pyopyoroon VialOfJodysAcid x1     # 279
+finish                                  # completed, the vial taken

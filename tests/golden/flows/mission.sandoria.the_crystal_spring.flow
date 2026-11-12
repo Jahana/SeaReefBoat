@@ -1,0 +1,44 @@
+# The Crystal Spring (San d'Oria 3-2, mission.sandoria.the_crystal_spring). A level 30 Warrior of San d'Oria in Southern
+# San d'Oria, 3-1 completed (none current), three Crystal Bass and a Pickaxe held. Endracion's own 1009; option 250
+# nothing, option 111 begins the mission (no message). Status 0: Endracion and Ambrotien say ORIGINAL_MISSION_OFFSET +
+# 68. Trades to Ambrotien: a Pickaxe and two bass: his own 2008; one bass: 2030, whose finish takes it and sets status
+# 2. Status 2: Ambrotien 2031, Endracion 1031. Status 1: Endracion's own 1001; one bass to him: 1030 (at any status),
+# whose finish takes it and sets status 2.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Ambrotien/onTrade SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/Endracion/onTrade SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/1013 SouthernSanDoria/onEventFinish/1030 SouthernSanDoria/onEventFinish/2013 SouthernSanDoria/onEventFinish/2030 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/Grilau/onTrade NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1013 NorthernSanDoria/onEventFinish/1030 ChateauDoraguille/Chalvatot/onTrigger ChateauDoraguille/onZoneIn/1 ChateauDoraguille/onEventFinish/555 ChateauDoraguille/onEventFinish/556
+char zone=SouthernSanDoria pos=-110,1,-35 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+item CrystalBass x3
+item Pickaxe
+login
+trigger Endracion                       # section 1: 1009
+finish option=250                       # not 111: nothing
+trigger Endracion
+finish option=111                       # begun
+trigger Endracion                       # status 0: ORIGINAL_MISSION_OFFSET + 68
+finish-if-event
+trigger Ambrotien                       # ORIGINAL_MISSION_OFFSET + 68
+finish-if-event
+walk 91,1,-57
+trade Ambrotien Pickaxe x1              # not the bass: nothing
+finish-if-event
+trade Ambrotien CrystalBass x2          # two: nothing
+finish-if-event
+trade Ambrotien CrystalBass x1          # 2030
+finish                                  # the bass taken, status 2
+trigger Ambrotien                       # 2031
+finish-if-event
+trigger Endracion                       # 1031
+finish-if-event
+missionstatus Sandoria 1
+trigger Endracion                       # status 1: nothing from the mission
+finish-if-event
+walk -111,1,-36
+trade Endracion CrystalBass x1          # 1030 at any status
+finish                                  # the bass taken, status 2

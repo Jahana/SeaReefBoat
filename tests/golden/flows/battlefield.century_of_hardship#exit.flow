@@ -1,0 +1,26 @@
+# A Century of Hardship (battlefield.century_of_hardship#exit): the exit NPCs. A level 75 Warrior with Three Paths
+# current and Louverance 8 (a GM). _0d0: the 32000 menu; option 1 (area 1): entered (7610, 7384 (6), 7387 (30), the 05C
+# (2,0,0,1800)); the first tick: the effects 143 and 254. _0d1: 32003 (the framework's exit event); update 1
+# acknowledged; finished 0: he stays. _0d2: 32003; finished 0: he stays. _0d3: 32003; finished 4: 075 (out;
+# onBattlefieldLeave). Warped back to the entrance: the effects 143 and 254 removed. _0d0: the 32000 menu again
+# (Louverance still 8); finish-if-event: released.
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/_0d1/onTrigger MineShaft2716/_0d2/onTrigger MineShaft2716/_0d3/onTrigger MineShaft2716/onEventUpdate/32000 MineShaft2716/onEventFinish/32000 MineShaft2716/onEventUpdate/32003 MineShaft2716/onEventFinish/32003
+char zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+mission Cop ThreePaths current
+login
+missionstatus Cop 8 pos=2
+trigger _0d0
+update 32000 option=1
+finish
+tick 2000
+trigger _0d1
+update 32003 option=1
+finish option=0
+trigger _0d2
+finish option=0
+trigger _0d3
+finish option=4
+tick 2000
+warp -93.657,-120,-583.561 MineShaft2716
+trigger _0d0
+finish-if-event

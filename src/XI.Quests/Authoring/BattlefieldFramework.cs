@@ -42,6 +42,23 @@ namespace XI.Quests.Authoring
         public const int AllOptions = 268435455;
     }
 
+    // q.Text over the context's engine: both the live context and the fake's use this one
+    public sealed class BattlefieldTextAccessor : IBattlefieldText
+    {
+        private readonly IBattlefieldContext q_;
+
+        public BattlefieldTextAccessor(IBattlefieldContext q) => q_ = q;
+
+        public int Id(ZoneText text)
+        {
+            if (q_.Script is { } script && text.Zone != script.Data.ZoneId)
+                throw new InvalidOperationException(
+                    $"text {text} is not of the battlefield's zone {script.Data.ZoneId}");
+            return q_.Engine.Text(text.Zone, text.Name) ??
+                   throw new InvalidOperationException($"zone {text.Zone} has no text {text.Name}");
+        }
+    }
+
     public sealed class BattlefieldFramework
     {
         private readonly IBattlefieldContext q_;
@@ -603,8 +620,17 @@ namespace XI.Quests.Authoring
         {
         }
 
-        // battlefield.lua:1094
+        // Battlefield.onBattlefieldEnter as a content reaches it: through a Lua module's override when one is applied
+        // (modules/era/lua/globals/testimony_single_use.lua), whose last super is the framework's own method below,
+        // as it is for a Lua content; else the framework's own method
         public void OnBattlefieldEnter()
+        {
+            if (q_.Engine.ModuleOverride("onBattlefieldEnter", q_, q => q.Framework.OnBattlefieldEnterOwn())) return;
+            OnBattlefieldEnterOwn();
+        }
+
+        // battlefield.lua:1094
+        public void OnBattlefieldEnterOwn()
         {
             var player = Player;
             var battlefield = Bf;
@@ -788,14 +814,15 @@ namespace XI.Quests.Authoring
 
         // battlefield.lua:1285: the groups addEssentialMobs adds to self.groups, after the content's own
         // (content.groups), in call order: { mobs = mobNames, superlink = true, isParty = true, allDeath =
-        // handleAllMonstersDefeated }
+        // handleAllMonstersDefeated }, plus the spawned a file sets on the group after the call
         public static IReadOnlyList<BattlefieldGroup> AddEssentialMobs(BattlefieldData d)
         {
             var groups = new List<BattlefieldGroup>(d.Groups);
             for (int i = 0; i < d.EssentialMobs.Count; i++)
                 groups.Add(new BattlefieldGroup
                 {
-                    Mobs = d.EssentialMobs[i], Superlink = true, IsParty = true, EssentialIndex = i + 1,
+                    Mobs = d.EssentialMobs[i].Mobs, Spawned = d.EssentialMobs[i].Spawned, Superlink = true,
+                    IsParty = true, EssentialIndex = i + 1,
                 });
             return groups;
         }

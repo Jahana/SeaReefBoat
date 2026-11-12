@@ -1,0 +1,27 @@
+# The Savage (CoP 4-2). A level 75 Warrior of San d'Oria with 4-2 current (a GM; Status 0): Justinius (4-2's reply, an
+# important event). Misareaux Coast's gate _0p2 (Status 0): cutscene 8; finished with option 0: nothing; again, finished
+# with option 1: Status 1 and the char set down in Riverne - Site #B01. _0p2 and Justinius at Status 1: 4-2 has no reply
+# at the gate. Status 2 (a GM): Justinius: 110; finished: the mission completes. The fight is battlefield.savage
+# (its 32001 sets Status 2).
+lists TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/onEventFinish/110 MisareauxCoast/_0p2/onTrigger MisareauxCoast/onEventFinish/8
+char zone=TavnazianSafehold pos=78.7,-34,68 job=WAR lvl=75 nation=0
+mission Cop TheSavage current
+login
+trigger Justinius                       # Status 0: the important event
+finish-if-event
+warp -260,-32.7,277 MisareauxCoast
+trigger _0p2                            # Status 0: 8
+finish option=0                         # not option 1
+trigger _0p2                            # Status 0: 8 again
+finish option=1                         # Status 1, set down in Riverne - Site #B01
+tick 10000                              # the zone change
+warp 729.749,-20.325,407.153 RiverneSiteB01
+warp -260,-32.7,277 MisareauxCoast
+trigger _0p2                            # Status 1: no 4-2 reply
+finish-if-event
+warp 76,-34,68 TavnazianSafehold
+trigger Justinius                       # Status 1: the important event
+finish-if-event
+charvar Mission[6][418]Status 2         # a GM
+trigger Justinius                       # Status 2: 110
+finish                                  # complete

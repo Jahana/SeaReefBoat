@@ -1,0 +1,24 @@
+# Return to Delkfutt's Tower: from Middle Delkfutt's with bit 1 clear, option 1, status 3. Lower Delkfutt's
+# zone-in from Middle plays 14 (the mission's arm, or the zone's own Zone.lua: both answer 14) and its finish
+# sets no bit. Upper Delkfutt's zone-in from Lower Delkfutt's plays nothing. The Stellar Fulcrum zone-in
+# from Upper Delkfutt's at status 0 plays 0, not 7; its update on option 1 answers nothing; its finish sets
+# status 1. At status 3 (a GM), from Upper Delkfutt's (whose zone-in from the Stellar Fulcrum plays its own
+# 14), the Stellar Fulcrum plays 7, played through: the zone's own Zone.lua and the mission's arm (status
+# neither 0 nor 2) both answer 7.
+lists Norg/Gilgamesh/onTrigger LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/104 LowerDelkfuttsTower/onZoneIn/1 LowerDelkfuttsTower/onEventFinish/15 StellarFulcrum/onZoneIn/1 StellarFulcrum/onEventUpdate/0 StellarFulcrum/onEventFinish/0 StellarFulcrum/onEventFinish/17 StellarFulcrum/onEventFinish/32001
+char zone=MiddleDelkfuttsTower pos=0,0,0 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ReturnToDelkfuttsTower current
+login
+warp 460.022,-1.77,-103.442 LowerDelkfuttsTower open  # from Middle, bit 1 clear: 14
+finish                                  # no bit set
+warp 0,0,0 UpperDelkfuttsTower
+warp -520,-4,17 StellarFulcrum open  # status 0, from Upper: 0
+update 0 option=1                       # option 1: no update
+finish                                  # status 1
+missionstatus Zilart 3                  # a GM
+warp 0,0,0 UpperDelkfuttsTower
+warp -520,-4,17 StellarFulcrum       # status 3, from Upper: 7, played through

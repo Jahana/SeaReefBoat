@@ -1,0 +1,42 @@
+# Coming of Age (San d'Oria 8-1, mission.sandoria.coming_of_age) with the SoA era module
+# (modules/era/lua/missions/mission_adjustments.lua, RESTRICT_CONTENT 1, ENABLE_SOA 0): its 102 replaces the base's:
+# Progress is the next JST midnight, not a minute on; before it the Northern San d'Oria zone-in plays nothing (Grilau's
+# section 3 text), past it 16. Recorded at lua-at 9cbff708 (the module's Lua).
+module modules/era/lua/missions/mission_adjustments.lua
+char zone=ChateauDoraguille pos=0,0,0 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+rank 8
+mission Sandoria ComingOfAge current
+keyitem DropsOfAmnio
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+login
+missionstatus Sandoria 3
+trigger Halver                          # status 3, the drops: 102
+finish                                  # the module's 102: completed, Progress the next JST midnight, the drops taken
+warp -240,7,57.9 NorthernSanDoria       # before midnight: no zone-in event
+trigger Grilau                          # section 3: ORIGINAL_MISSION_OFFSET + 127
+finish-if-event
+wait jst=1                              # past the midnight
+warp 93.4,0,-55.3 SouthernSanDoria
+warp -240,7,57.9 NorthernSanDoria open  # 16
+finish                                  # Progress 0; Northern San d'Oria's Zone.lua 16 finish: Mission8-1Completed 1

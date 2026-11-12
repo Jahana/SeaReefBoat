@@ -1,0 +1,25 @@
+# The Three Kingdoms San d'Oria 2 (Windurst 2-3, mission.windurst.the_three_kingdoms_sandoria2). A level 30 Warrior of
+# Windurst in Northern San d'Oria with the mission current (a GM; a GM's Resonance current keeps RoV 1-1's first
+# mission out). Kasaroro at status 0 and 9 plays 548, which is his own zone default (replay cannot tell it from the
+# mission's nothing); at status 8 a message (KASARORO_DIALOG); at status 10 with the Kindred Crest held: 551, whose
+# finish completes the mission, begins The Three Kingdoms, moves to status 11, takes the crest and gives the Kindred
+# Report; Kasaroro then answers a message (The Three Kingdoms is now current).
+lists ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/504 HorlaisPeak/onEventFinish/32001 NorthernSanDoria/Kasaroro/onTrigger NorthernSanDoria/onEventFinish/551
+char zone=NorthernSanDoria pos=-72,-3,34 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdomsSandoria2 current
+login
+trigger Kasaroro
+finish-if-event
+missionstatus Windurst 8
+trigger Kasaroro
+finish-if-event
+missionstatus Windurst 9
+trigger Kasaroro
+finish-if-event
+keyitem KindredCrest
+missionstatus Windurst 10
+trigger Kasaroro
+finish
+trigger Kasaroro
+finish-if-event

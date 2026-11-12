@@ -24,6 +24,11 @@ namespace XI.Quests.Authoring
         // mission.<log in lower case>.<constant in lower case>: the enum's names in lower case are xi.mission.area's
         public override string Key => ContainerKeys.Mission(Log.ToString(), ConstName);
 
+        // xi.mission.area[log]: the enum's names in lower case (C2Mission.cs holds them to
+        // scripts/globals/missions.lua); null for a number the enum lacks
+        public static string AreaName(MissionLog log) =>
+            Enum.IsDefined(log) ? log.ToString().ToLowerInvariant() : null;
+
         protected abstract void Build(MissionScriptBuilder b);
 
         // runs Build on a fresh builder
@@ -53,14 +58,42 @@ namespace XI.Quests.Authoring
         public Func<IQuestCheck, bool> When { get; }
     }
 
-    // mission.reward: npcUtil.completeMission's params, in its order. A field left at 0 (NextLog at null) is not a key
-    // of the Lua table, as a Lua mission leaves it out
+    // one entry of reward.item as a table: an item id, or { id, quantity } (npcUtil.giveItem's formats)
+    public readonly struct MissionRewardItem
+    {
+        public MissionRewardItem(int id, int? quantity = null)
+        {
+            Id = id;
+            Quantity = quantity;
+        }
+
+        public int Id { get; }
+        // null: the plain id; a number: the { id, quantity } form
+        public int? Quantity { get; }
+
+        public static implicit operator MissionRewardItem(int id) => new MissionRewardItem(id);
+    }
+
+    // mission.reward: npcUtil.completeMission's params, in its order. A field left at null is not a key of the Lua
+    // table, as a Lua mission leaves it out; 0 is a value (completeMission tests each field against nil). Item and Items
+    // are the one Lua field item, a number or a table; KeyItem and KeyItems likewise
     public sealed class MissionReward
     {
-        public int Item; public int KeyItem; public int Gil; public int Bayld; public int Exp; public int Title;
-        public int RankPoints; public int Rank; public MissionLog? NextLog; public int NextMission;
+        public int? Item; public int? KeyItem; public int? Gil; public int? Bayld; public int? Exp; public int? Title;
+        public int? RankPoints; public int? Rank; public MissionLog? NextLog; public int NextMission;
+        public MissionRewardItem[] Items;
+        public int[] KeyItems;
+        // npcUtil.giveItem's params; completeMission passes them only with an item
+        public QuestItemParams ItemParams;
 
-        internal MissionReward Copy() => (MissionReward)MemberwiseClone();
+        internal MissionReward Copy()
+        {
+            var copy = (MissionReward)MemberwiseClone();
+            copy.Items = (MissionRewardItem[])Items?.Clone();
+            copy.KeyItems = (int[])KeyItems?.Clone();
+            copy.ItemParams = ItemParams?.Copy();
+            return copy;
+        }
     }
 
     // the builder behind MissionScript.Build: the quest builder's states and handlers, entered by a mission match
@@ -80,6 +113,13 @@ namespace XI.Quests.Authoring
         // any), its whole status (null: any) and a guard; its NPC and zone handlers are the quest builder's
         public QuestStateBuilder State(bool? current = true, int? status = null, Func<IQuestCheck, bool> when = null) =>
             core_.NewMissionState(new MissionMatch(current, status, when));
+
+        // a deferred callback of the mission and a Lua global running it (QuestScriptBuilder.Callback, Export): the
+        // mission's handlers arm it by its handle (q.Player.Timer(ms, cb)), and its run has q.Mission
+        public QuestCallback Callback(string name, Action<IQuestContext> run) => core_.Callback(name, run);
+
+        public void Export(string global, QuestCallback callback, string replacesModule = null) =>
+            core_.Export(global, callback, replacesModule);
 
         internal MissionScriptDefinition ToDefinition(MissionLog log, string constName) =>
             new MissionScriptDefinition(log, constName, reward_, core_.ToDefinition(QuestScript.HiddenLog, constName));
@@ -105,5 +145,9 @@ namespace XI.Quests.Authoring
         public QuestScriptDefinition Core { get; }
         // declaration order == Lua section order
         public IReadOnlyList<QuestStateDecl> States => Core.States;
+
+        // the same mission over another core: a module's patched states (QuestOverrides.Apply works on the core)
+        public MissionScriptDefinition WithCore(QuestScriptDefinition core) =>
+            new MissionScriptDefinition(Log, ConstName, Reward, core);
     }
 }

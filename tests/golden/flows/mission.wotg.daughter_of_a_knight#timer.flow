@@ -1,0 +1,23 @@
+# Daughter of a Knight (WotG 10) at status 6, mustZone clear: a Timer far ahead (a GM): Amaura plays 940, finished:
+# mustZone; the Timer then 0 (a GM) with mustZone still set: Amaura's DefaultActions event 642; after a zone change:
+# 941, finished: the mission completes.
+lists SouthernSanDoria/Amaura/onTrigger SouthernSanDoria/Amaura/onTrade SouthernSanDoria/onEventFinish/935 SouthernSanDoria/onEventFinish/936 SouthernSanDoria/onEventFinish/937 SouthernSanDoria/onEventFinish/939 SouthernSanDoria/onEventFinish/940 SouthernSanDoria/onEventFinish/941 JugnerForestS/Humus-rich_Earth/onTrigger JugnerForestS/Humus-rich_Earth/onTrade JugnerForest/Humus-rich_Earth/onTrigger JugnerForest/onEventFinish/33 JugnerForest/onEventFinish/34 JugnerForest/Cernunnos/onMobDeath
+char zone=SouthernSanDoria pos=-84.367,-6.949,91.148 job=WAR lvl=99
+item CernunnosBulb
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg DaughterOfAKnight current
+login
+missionstatus Wotg 6
+charvar Mission[5][9]Timer 99999999     # a GM
+trigger Amaura                          # the Timer not reached: 940
+finish                                  # mustZone
+charvar Mission[5][9]Timer 0            # a GM
+trigger Amaura                          # mustZone: Amaura's DefaultActions 642
+finish-if-event
+warp -84.367,-6.949,91.148 SouthernSanDoriaS
+warp -84.367,-6.949,91.148 SouthernSanDoria                # zoned
+trigger Amaura                          # 941
+finish                                  # completed

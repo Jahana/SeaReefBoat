@@ -1,0 +1,33 @@
+# Ark Angels (Zilart 14), current, holding four shards. Gilgamesh plays 171; at status 0 the Shrine of Ru'Avitau's
+# blank_divine_might plays the progress cutscene 53 (917, 1408, 1550), whose finish sets status 1; at status 1 it is
+# Divine Might's 54 (the quest begun). Ark Angels 5 (index 4) won: the mission's 32001 finish gives the Shard of Rage
+# and, all five held, completes the mission (The Sealed Shrine next).
+lists Norg/Gilgamesh/onTrigger TheShrineOfRuavitau/blank_divine_might/onTrigger TheShrineOfRuavitau/onEventFinish/53 LaloffAmphitheater/onEventFinish/32001
+char zone=Norg pos=120.9,-8,-12 job=WAR lvl=99 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ArkAngels current
+keyitem ShardOfApathy
+keyitem ShardOfCowardice
+keyitem ShardOfEnvy
+keyitem ShardOfArrogance
+login
+trigger Gilgamesh                       # 171
+finish
+warp -38.533,-1.648,-148.199 TheShrineOfRuavitau
+trigger blank_divine_might              # status 0: 53
+finish                                  # status 1
+trigger blank_divine_might              # status 1: Divine Might's 54
+finish                                  # Divine Might begun
+warp 557.5,-38.205,520.627 LaloffAmphitheater
+effect 50                               # a GM: Invincible
+effect 522
+effect 49
+trigger qm1_5                           # the menu
+update 32000 option=65                  # index 4, area 1: entered
+finish
+tick 2000
+kill ARK_ANGEL_GK                       # won: 32001
+finish                                  # the Shard of Rage: all five: completed

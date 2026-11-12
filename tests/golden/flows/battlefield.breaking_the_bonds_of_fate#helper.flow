@@ -1,0 +1,51 @@
+# Breaking the Bonds of Fate (battlefield.breaking_the_bonds_of_fate#helper, Talacca Cove): a party at _1l0: main (a
+# level 75 Corsair at level cap 75, Breaking the Bonds of Fate accepted at Quest[6][41]Prog 1 (GMs), one Corsair's
+# Testimony) enters area 1 (49) by the testimony: TESTIMONY_WEARS (3 shown, 2 left). The members by the trigger, no
+# trade: bob (completed) and cat (accepted, Quest[6][41]Prog 2) each get the 32000 menu (0,0,0,8); each update 49:
+# REQS_NOT_MET (5); finished: not entered (one player to a battlefield). dan (accepted, Quest[6][41]Prog 0) gets only
+# the door's default (DefaultActions.lua messageSpecial -1, shown as 32767), no menu; his update and finish-if-event
+# find no event.
+lists TalaccaCove/_1l0/onTrade TalaccaCove/_1l0/onTrigger TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/onEventFinish/32001
+char zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char bob zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char cat zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char dan zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+levelcap 75
+quest AhtUrhgan.AgainstAllOdds completed
+quest AhtUrhgan.BreakingTheBondsOfFate accepted
+charvar Quest[6][41]Prog 1
+item CorsairsTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.AgainstAllOdds completed
+bob: quest AhtUrhgan.BreakingTheBondsOfFate completed
+bob: charvar Quest[6][41]Prog 1
+cat: levelcap 75
+cat: quest AhtUrhgan.AgainstAllOdds completed
+cat: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+cat: charvar Quest[6][41]Prog 2
+dan: levelcap 75
+dan: quest AhtUrhgan.AgainstAllOdds completed
+dan: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+dan: charvar Quest[6][41]Prog 0
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trade _1l0 CorsairsTestimony x1
+update 32000 option=49
+finish
+bob: trigger _1l0
+bob: update 32000 option=49
+bob: finish-if-event
+cat: trigger _1l0
+cat: update 32000 option=49
+cat: finish-if-event
+dan: trigger _1l0
+dan: update 32000 option=49
+dan: finish-if-event

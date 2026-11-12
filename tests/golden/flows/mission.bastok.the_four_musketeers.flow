@@ -1,0 +1,36 @@
+# The Four Musketeers (Bastok 3-1, mission.bastok.the_four_musketeers). A level 30 Warrior of Bastok in Metalworks, 1-1
+# to 2-3 completed by a GM (none current; a GM's Resonance current keeps RoV 1-1 out). Section 1: Malduc's own script
+# plays the gate guards' mission list 1001; its finish with option 0 does nothing, with option 10 begins the mission and
+# says YOU_ACCEPT_THE_MISSION. Section 2: Malduc 1002. Status 0: Ayame and Naji answer their own defaults 701 and 700;
+# Iron Eater 715, whose finish with option 1 does nothing; 715 again, whose finish with option 0 sets status 1. Status
+# 1: Iron Eater 716, Ayame 718, Naji 717.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Ayame/onTrigger Metalworks/Iron_Eater/onTrigger Metalworks/Malduc/onTrigger Metalworks/Naji/onTrigger Metalworks/onEventFinish/715 Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 Beadeaux/Copper_Quadav/onMobDeath Beadeaux/onZoneIn/1 Beadeaux/onEventFinish/120 PashhowMarshlands/onZoneIn/1 PashhowMarshlands/onEventFinish/10 PashhowMarshlands/onEventFinish/11
+char zone=Metalworks pos=66,-15,4 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+login
+trigger Malduc                          # section 1: 1001
+finish option=0                         # not 10: nothing
+trigger Malduc
+finish option=10                        # begun
+trigger Malduc                          # 1002
+finish-if-event
+trigger Ayame                           # status 0: nothing from the mission
+finish-if-event
+trigger Naji
+finish-if-event
+trigger Iron_Eater                      # 715
+finish option=1                         # not 0: nothing
+trigger Iron_Eater                      # 715
+finish option=0                         # status 1
+trigger Iron_Eater                      # 716
+finish-if-event
+trigger Ayame                           # 718
+finish-if-event
+trigger Naji                            # 717
+finish-if-event

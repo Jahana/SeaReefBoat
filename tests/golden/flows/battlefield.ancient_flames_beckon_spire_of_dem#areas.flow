@@ -1,0 +1,26 @@
+# Ancient Flames Beckon, Spire of Dem, areas 2 and 3. Below the Arks current (a GM). Area 2 (option 2): the arena's
+# Progenerator is PROGENERATOR + 5; killed: WON; 32001 (the area 2), finished: the light of Dem. The light gone and Below
+# the Arks current again (GMs): area 3 (option 3): PROGENERATOR + 10; 32001 (area 3).
+lists SpireOfDem/_0j0/onTrigger SpireOfDem/onEventUpdate/32000 SpireOfDem/onEventFinish/32000 SpireOfDem/onEventFinish/32001
+char zone=SpireOfDem pos=0,-3.8,240 job=WAR lvl=75 nation=0
+mission Cop BelowTheArks current
+login
+trigger _0j0                            # the menu 32000
+update 32000 option=2                   # area 2: entered
+finish                                  # in the arena
+tick 2000                               # area 2's Progenerator spawns
+kill PROGENERATOR+5                     # allDeath: WON; 32001
+finish                                  # the light of Dem, 1-2 complete
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield
+delkeyitem LightOfDem                   # a GM
+warp 135,19,220 KonschtatHighlands
+warp 0,-3.8,240 SpireOfDem
+trigger _0j0                            # the menu 32000
+update 32000 option=3                   # area 3: entered
+finish                                  # in the arena
+tick 2000                               # area 3's Progenerator spawns
+kill PROGENERATOR+10                    # allDeath: WON; 32001
+finish                                  # the light of Dem, 1-2 complete
+tick 11000
+tick 10000

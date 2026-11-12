@@ -1,0 +1,18 @@
+# The Hall of the Gods not current (The Chamber of Oracles current): _6z0 is the NPC's own 1, Aldo says nothing and _700
+# is Norg's DefaultActions DOOR_IS_LOCKED.
+lists HallOfTheGods/_6z0/onTrigger LowerJeuno/Aldo/onTrigger Norg/_700/onTrigger Norg/onEventFinish/169
+char zone=HallOfTheGods pos=0,-14,46 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheChamberOfOracles current
+login
+trigger _6z0                            # the NPC's own 1
+finish
+warp 23,3,-58 LowerJeuno
+trigger Aldo                            # nothing
+finish-if-event
+warp 98,-7,-12 Norg
+trigger _700                            # DOOR_IS_LOCKED
+finish-if-event

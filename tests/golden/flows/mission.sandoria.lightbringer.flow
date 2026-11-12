@@ -1,0 +1,94 @@
+# Lightbringer (San d'Oria 8-2, mission.sandoria.lightbringer) played through: a level 75 San d'Orian Warrior at rank 8
+# with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before it completed.
+# Endracion's 1009, option 21: begun. Chateau: _6h4 100 (status 1), Rahal 106 (status 2, the Crystal Dowser), 107;
+# Curilla 57. The Temple of Uggalepih: the three qm_key give the pieces (statuses 3, 4, 5); qm17 SLIGHTLY_QUIVERS; _4fv
+# with the pieces and no Nio up spawns Nio-A and Nio-Hum (BEGINS_TO_QUIVER); the second death with the other gone sets
+# Prog 1; _4fv 65: status 6, the pieces taken. Chateau: Aramaviont 15, Curilla 103, Halver LIGHTBRINGER_EXTRA,
+# Milchupain 36, Rahal 105, _6h4 104: completed (rank 9, 80000 gil), the dowser taken. Section 3 (rank 9, 9-2 not
+# current): _6h0 63 and _6h1 74 once each (the bits); section 4 (no rank points): Aramaviont LIGHTBRINGER_EXTRA + 1,
+# Milchupain + 3, Rahal 42.
+char zone=SouthernSanDoria pos=-108,1,-34 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+rank 8
+login
+trigger Endracion                       # no mission current: the guard's own mission list
+finish option=24                        # no mission's option (this mission takes 21): not begun
+trigger Endracion                       # the list again
+finish option=21                        # begun
+warp 0,0,0 ChateauDoraguille
+trigger Rahal                           # status 0: nothing from the mission
+finish-if-event
+trigger _6h4                            # status 0: 100
+finish                                  # status 1
+trigger Rahal                           # status 1: 106
+finish                                  # status 2, the Crystal Dowser
+trigger Rahal                           # status 2: 107
+finish
+trigger Curilla                         # status 2: 57
+finish
+trigger _6h4                            # status 2: nothing from the mission
+finish-if-event
+warp -13,-17,-149 TempleOfUggalepih
+trigger _4fv                            # status 2: YOU_CANNOT_OPEN_THIS_DOOR
+trigger qm_key1                         # status 2: status 3, the first piece
+trigger qm_key1                         # held: nothing from the mission
+finish-if-event
+trigger qm_key2                         # status 4, the second piece
+trigger qm_key3                         # status 5, the third piece
+trigger qm17                            # SLIGHTLY_QUIVERS
+trigger _4fv                            # status 5, the three pieces, no Nio up, Prog 0: both spawned, BEGINS_TO_QUIVER
+trigger _4fv                            # both up: YOU_CANNOT_OPEN_THIS_DOOR
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill NIO_A                              # Nio-Hum up: nothing
+kill NIO_HUM                            # Nio-A dead: Prog 1
+trigger _4fv                            # Prog 1: 65
+finish                                  # status 6, the pieces taken
+warp 0,0,0 ChateauDoraguille
+trigger Aramaviont                      # status 6: 15
+finish
+trigger Curilla                         # status 6: 103
+finish
+trigger Halver                          # status 6: LIGHTBRINGER_EXTRA
+finish-if-event
+trigger Milchupain                      # status 6: 36
+finish
+trigger Rahal                           # status 6: 105
+finish
+trigger _6h4                            # status 6: 104
+finish                                  # completed: rank 9, 80000 gil, the dowser taken
+trigger _6h0                            # section 3, bit 0 clear: 63
+finish                                  # bit 0
+trigger _6h0                            # bit 0 set: nothing from the mission
+finish-if-event
+trigger _6h1                            # bit 1 clear: 74
+finish                                  # bit 1
+trigger _6h1                            # bit 1 set: nothing from the mission
+finish-if-event
+trigger Aramaviont                      # section 4: LIGHTBRINGER_EXTRA + 1
+finish-if-event
+trigger Milchupain                      # section 4: LIGHTBRINGER_EXTRA + 3
+finish-if-event
+trigger Rahal                           # section 4: 42
+finish-if-event

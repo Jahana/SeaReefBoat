@@ -1,0 +1,57 @@
+# the Full Moon Fountain's Moon Reading (battlefield 225, Windurst 9-2's), area 1: a level 75 Windurstian Warrior with
+# 9-2 current at status 2: the Full Moon Fountain's MS_Entrance 32000, option 17 (index 1, area 1); the GM effects keep
+# the char up; the four phase 1 cards' allDeath plays 32004 (phase 2 spawned, Ajido-Marujido, the set-down); the last
+# two dead: WON, 32001 opens in the kill step; its finish (the mission's, battlefieldWin 225 at status 2): status 3,
+# the verses taken.
+char zone=FullMoonFountain pos=-301.3,9.5,-260.0 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+mission Windurst TheJesterWhodBeKing completed
+mission Windurst DollOfTheDead completed
+rank 9
+mission Windurst MoonReading current
+login
+missionstatus Windurst 2
+trigger MS_Entrance                     # status 2: the 32000 menu
+update 32000 option=17                  # index 1, area 1: entered
+finish
+tick 2000                               # the first tick: phase 1 spawns
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill ACE_OF_CUPS
+kill ACE_OF_CUPS+1
+kill ACE_OF_CUPS+2
+kill ACE_OF_CUPS+3                      # phase 1 dead: allDeath: 32004
+finish                                  # 32004: phase 2 spawned, Ajido-Marujido, the set-down
+tick 2000
+kill ACE_OF_CUPS+4
+kill ACE_OF_CUPS+5                      # phase 2 dead: WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish-if-event                         # 32001: the mission's finish: status 3
+tick 11000
+tick 10000

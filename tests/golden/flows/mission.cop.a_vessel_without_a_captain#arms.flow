@@ -1,0 +1,25 @@
+# A Vessel Without a Captain, the other statuses (mission.cop.a_vessel_without_a_captain#arms). 3-2 current with
+# Status 0 (a GM): Ru'Lude Gardens' trigger area 1: nothing. Status 2: the area, Harnek and _6tc: nothing. Status 1:
+# _6tc: nothing. Metalworks Cid: 861.
+lists LowerJeuno/_6tc/onTrigger LowerJeuno/Harnek/onTrigger RuludeGardens/onTriggerAreaEnter/1 Metalworks/Cid/onTrigger
+char zone=RuludeGardens pos=0,3,10 job=WAR lvl=75 nation=0
+mission Cop AVesselWithoutACaptain current
+login
+tick 1000
+tick 1000
+tick 1000
+walk 0,3,50                             # Status 0: nothing
+walk 0,3,10
+charvar Mission[6][318]Status 2         # a GM
+walk 0,3,50                             # Status 2: nothing
+warp 15.5,-0.1,-6.1 LowerJeuno
+trigger Harnek                          # Status 2: nothing
+finish-if-event
+trigger _6tc                            # Status 2: nothing
+finish-if-event
+charvar Mission[6][318]Status 1         # a GM
+trigger _6tc                            # Status 1: nothing
+finish-if-event
+warp 0,0,0 Metalworks
+trigger Cid                             # 861
+finish-if-event

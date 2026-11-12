@@ -2,7 +2,7 @@
 // rework B3b Aht Urhgan, group 1). Aht Urhgan Whitegate: Waoud !pos 65 -6 -78 (no script; default 61), Lathuya !pos -95
 // -6 32 (no script; default 770; the hidden quest Crafted Magus Artifact once Transformations is accepted). Aydeewa
 // Subterrane: blank_omens !pos 342 37 -25 (no script; default NOTHING_OUT_OF_ORDINARY). Navukgo Execution Chamber: the
-// battlefield Omens (scripts/battlefields/Navukgo_Execution_Chamber/omens.lua: index 2, entry _1s0, requiredVar Prog
+// battlefield Omens (Battlefields/NavukgoExecutionChamber/Omens.cs: index 2, entry _1s0, requiredVar Prog
 // 0). Available with Beginnings completed, main job BLU at AF2_QUEST_LEVEL (50): Waoud nil while Omens' mustZone is set
 // or GetSystemTime() < Timer (Beginnings' 707 sets both), else 710, whose finish begins it. Accepted: Waoud Prog 1 712
 // (the Sealed Immortal Envelope, Prog 2), Prog 0 711 (gil), Prog 2 713 (gil), each 711 / 713 option 1 with 1000 gil

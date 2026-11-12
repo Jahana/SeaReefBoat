@@ -1,0 +1,12 @@
+# Trial by Water (battlefield.trial_by_water): the requirement arms. Main, a level 75 Warrior with the quest accepted but no
+# Tuning Fork of Water: WP_Entrance: the key item check fails: no options: the default. bob, with the fork but the quest
+# only available: BattlefieldQuest's check (accepted or more) fails: the default.
+lists CloisterOfTides/WP_Entrance/onTrigger
+char zone=CloisterOfTides pos=557.5,35.1,563.0 job=WAR lvl=75
+char bob zone=CloisterOfTides pos=557.5,35.1,563.0 job=WAR lvl=75
+quest Outlands.TrialByWater accepted
+bob: keyitem TuningForkOfWater
+login
+trigger WP_Entrance                     # accepted, no fork: no options
+bob: login
+bob: trigger WP_Entrance                # the fork, available: no options

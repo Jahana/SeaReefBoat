@@ -1,0 +1,33 @@
+# Apocalypse Nigh (battlefield.apocalypse_nigh, Empyreal Paradox): areas 2 and 3 (options 18 and 19): each
+# registered, entered, its mobs killed: the win, the finish (event 32001) and its setPos, which zones the char out
+# (onZoneOut). The flow resets the var and logs in again (GMs) for each area.
+lists EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/onEventUpdate/32000 EmpyrealParadox/onEventFinish/32000 EmpyrealParadox/onEventFinish/32001
+char zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75
+quest Jeuno.ApocalypseNigh accepted
+charvar Quest[3][89]Prog 3
+login
+trigger TR_Entrance
+update 32000 option=18
+finish
+kill KAMLANAUT+2
+kill KAMLANAUT+3
+finish
+tick 400
+charvar Quest[3][89]Prog 3
+login
+warp 541.5,-1.2,-597.7 EmpyrealParadox
+tick 11000
+tick 10000
+charvar Quest[3][89]Prog 3
+trigger TR_Entrance
+update 32000 option=19
+finish
+kill KAMLANAUT+4
+kill KAMLANAUT+5
+finish
+tick 400
+charvar Quest[3][89]Prog 3
+login
+warp 541.5,-1.2,-597.7 EmpyrealParadox
+tick 11000
+tick 10000

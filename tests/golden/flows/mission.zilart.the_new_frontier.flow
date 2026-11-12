@@ -1,0 +1,32 @@
+# The New Frontier (Zilart 1, mission.zilart.the_new_frontier): rank 6 in San d'Oria, the cutscene
+# postponed, then played from the Tales' Beginning. The Norg afterZoneIn with [ROZ]TalesBeginning 0 plays 1;
+# its update answers the short notice (79, the Vana'diel time, 0, 0, 0, MAX_UINT32, 9044486); its finish on
+# option 0 sets the var to 1, sends the Zilart log page (0x056) and shows Tales_Beginning and the NPC before
+# it (0x077). Rezoned, the afterZoneIn only shows the two. Tales_Beginning plays 293: option 0 does nothing,
+# option 1 starts 1 (252, ...), whose update now answers the full cutscene (65, ...) and whose finish on
+# option 0 hides the NPCs (an empty 0x077), deletes the var and completes the mission: the Map of Norg
+# (KEYITEM_OBTAINED 6420), Welcome t'Norg current. Rezoned, nothing plays; Comitiolus plays 6 (section 2).
+lists Norg/afterZoneIn/1 Norg/Tales_Beginning/onTrigger Norg/onEventUpdate/1 Norg/onEventFinish/1 Norg/onEventFinish/293 Norg/_700/onTrigger Norg/Comitiolus/onTrigger
+char zone=Norg pos=-22,1,-38 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheNewFrontier current
+rank 6
+login
+tick 5000                               # afterZoneIn, [ROZ]TalesBeginning 0: 1
+update 1 option=0                       # the var 0: the short notice's reply
+finish option=0                         # var 0, option 0: the var 1, the log page, the NPCs shown
+rezone
+tick 5000                               # afterZoneIn, the var 1: the two NPCs shown, no event
+trigger Tales_Beginning                 # 293
+finish option=0                         # not 1: nothing
+trigger Tales_Beginning                 # 293
+finish option=1                         # 1: started again with 252
+update 1 option=0                       # the var 1: the full cutscene's reply
+finish option=0                         # the var 1, option 0: NPCs hidden, var deleted, completed
+rezone
+tick 5000                               # completed: nothing
+trigger Comitiolus                      # completed: 6 (section 2)
+finish

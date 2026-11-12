@@ -1,0 +1,23 @@
+# President Salaheem with its SoA era module (quest rework C3): modules/era/lua/missions/mission_adjustments.lua, whose
+# SoA case (RESTRICT_CONTENT 1, ENABLE_SOA 0) replaces Naja's trigger (3020 only when the Timer var is 0 as well) and
+# the 73 finish (which sets Timer to 1 until JST midnight). 73, finished: status 1, must zone, Timer 1. A rezone: the
+# Timer holds: 3003. A JST day on (the Timer expired): 3020, completed.
+module modules/era/lua/missions/mission_adjustments.lua
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/73 AhtUrhganWhitegate/onEventFinish/3020
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PresidentSalaheem current
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+login
+trigger Naja_Salaheem                   # status 0: 73
+finish                                  # status 1, must zone, Timer 1
+rezone                                  # the flag cleared; the Timer holds
+trigger Naja_Salaheem                   # Timer 1: 3003
+finish
+wait jst=1                              # the Timer expired
+trigger Naja_Salaheem                   # 3020
+finish                                  # completed

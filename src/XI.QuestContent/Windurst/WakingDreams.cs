@@ -1,6 +1,7 @@
 // Waking Dreams (Log ID 2, Quest ID 93), a line-for-line port of scripts/quests/windurst/Waking_Dreams.lua (quest rework
 // B3b). Kerutoto : !pos 13 -5 -157 238. Offered once CoP 3-5 (Darkness Named) is completed: Kerutoto's 918 begins it with
-// the Vial of Dream Incense; the Diabolos battlefield in The Shrouded Maw (its own script) gives the Whisper of Dreams;
+// the Vial of Dream Incense; the Diabolos battlefield in The Shrouded Maw (Battlefields/TheShroudedMaw/WakingDreams.cs)
+// gives the Whisper of Dreams;
 // Kerutoto's 920 then offers a reward (options 1-4 an item, 5 15000 gil, 6 the Diabolos pact) and completes the quest
 // (fame +60, mustZone, a JST-midnight lockout in the char var Darkness_Named_date). Repeatable after the lockout: 918
 // gives another vial (option 1), and 920 the reward again. Event 920 hides the pact option (bit 5) for players who have

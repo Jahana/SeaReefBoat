@@ -1,0 +1,32 @@
+# The Crystal Spring in Northern San d'Oria with one Crystal Bass. The login plays SoA's Rumors from the West zone-in
+# 878. Grilau's own 1009; option 250 nothing, option 111 begins. Status 0: ORIGINAL_MISSION_OFFSET + 68. The bass: 1030,
+# whose finish takes it and sets status 2; Grilau 1031. The warp into Chateau d'Oraguille from Northern San d'Oria at
+# status 2 plays the zone-in 555, whose finish sets status 3; Chalvatot 556, whose finish completes the mission (400
+# rank points).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Ambrotien/onTrade SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/Endracion/onTrade SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/1013 SouthernSanDoria/onEventFinish/1030 SouthernSanDoria/onEventFinish/2013 SouthernSanDoria/onEventFinish/2030 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/Grilau/onTrade NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1013 NorthernSanDoria/onEventFinish/1030 ChateauDoraguille/Chalvatot/onTrigger ChateauDoraguille/onZoneIn/1 ChateauDoraguille/onEventFinish/555 ChateauDoraguille/onEventFinish/556
+char zone=NorthernSanDoria pos=-240,8,57 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+item CrystalBass
+login
+trigger Grilau                          # section 1: 1009
+finish option=250                       # not 111: nothing
+trigger Grilau
+finish option=111                       # begun
+trigger Grilau                          # ORIGINAL_MISSION_OFFSET + 68
+finish-if-event
+walk -240,8,57
+trade Grilau CrystalBass x1             # 1030
+finish                                  # the bass taken, status 2
+trigger Grilau                          # 1031
+finish-if-event
+warp 2,0.1,0.1 ChateauDoraguille open     # from Northern San d'Oria at status 2: 555
+finish                                  # status 3
+trigger Chalvatot                       # 556
+finish                                  # completed (400 rank points)

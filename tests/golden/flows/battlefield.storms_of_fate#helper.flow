@@ -1,0 +1,53 @@
+# Storms of Fate (battlefield.storms_of_fate#helper, Riverne Site #B01): Party of five at the entry: bob (completed) and
+# dan (accepted, Prog 3) enter and get their 32001 on the win (bob with the skip flag 1); cat (accepted, Prog 0) and eve
+# (no quest) are refused with the zone default's 7613 (DefaultActions.lua). On the win main's finish runs the quest's
+# 32001 (StormsOfFate.cs): the Whisper of the Wyrmking and Prog 2 -> 3.
+lists RiverneSiteB01/Unstable_Displacement/onTrigger RiverneSiteB01/onEventUpdate/32000 RiverneSiteB01/onEventFinish/32000 RiverneSiteB01/onEventFinish/32001
+char zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+char bob zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+char cat zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+char dan zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+char eve zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+quest Jeuno.StormsOfFate accepted
+charvar Quest[3][86]Prog 2
+bob: quest Jeuno.StormsOfFate completed
+cat: quest Jeuno.StormsOfFate accepted
+cat: charvar Quest[3][86]Prog 0
+dan: quest Jeuno.StormsOfFate accepted
+dan: charvar Quest[3][86]Prog 3
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+trigger Unstable_Displacement
+update 32000 option=1
+finish
+bob: trigger Unstable_Displacement
+bob: update 32000 option=1
+bob: finish
+cat: trigger Unstable_Displacement
+cat: update 32000 option=1
+cat: finish
+dan: trigger Unstable_Displacement
+dan: update 32000 option=1
+dan: finish
+eve: trigger Unstable_Displacement
+eve: update 32000 option=1
+eve: finish
+tick 2000
+kill BAHAMUT
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

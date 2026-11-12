@@ -1,0 +1,29 @@
+# To the Forsaken Mines at Port Bastok: Argus' own 1001; option 0 nothing, option 11 begins (YOU_ACCEPT_THE_MISSION);
+# Argus 1002 twice; a Pickaxe, a Glocolite with a Pickaxe: nothing; the Glocolite: 1010, whose finish completes the
+# mission (400 rank points) and takes it.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/Cleades/onTrade BastokMarkets/onEventFinish/1001 BastokMarkets/onEventFinish/1006 BastokMarkets/onEventFinish/1010 BastokMines/Davyad/onTrigger BastokMines/Rashid/onTrigger BastokMines/Rashid/onTrade BastokMines/onEventFinish/1001 BastokMines/onEventFinish/1006 BastokMines/onEventFinish/1010 Metalworks/Malduc/onTrigger Metalworks/Malduc/onTrade Metalworks/onEventFinish/1001 Metalworks/onEventFinish/1006 Metalworks/onEventFinish/1010 PortBastok/Argus/onTrigger PortBastok/Argus/onTrade PortBastok/onEventFinish/1001 PortBastok/onEventFinish/1006 PortBastok/onEventFinish/1010 GusgenMines/qm2/onTrigger GusgenMines/qm2/onTrade
+char zone=PortBastok pos=132,8.5,-4 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+item Glocolite
+item Pickaxe
+login
+trigger Argus                            # section 1: 1001
+finish option=0                         # not 11: nothing
+trigger Argus
+finish option=11                        # begun
+trigger Argus                            # 1002
+finish-if-event
+
+trigger Argus
+finish-if-event
+trade Argus Pickaxe x1                   # not the Glocolite: nothing
+trade Argus Glocolite x1 Pickaxe x1      # not the Glocolite alone: nothing
+trade Argus Glocolite x1                 # first time: 1010
+finish                                  # completed (400 rank points), the Glocolite taken

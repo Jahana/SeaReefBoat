@@ -1,0 +1,22 @@
+# Chains and Bonds (CoP 7-1): the other two finishes complete it. Main (Status 2, Option 5: bits 0 and 2, GMs)
+# triggers _0q1: 116, whose finish sets bit 1, Option 7: completed. eve (Status 2, Option 3: bits 0 and 1) triggers
+# _0qa: bit 0 set: no 7-1 reply (DOOR_IS_LOCKED_TIGHT, 11040, the zone's default); Sealion's Den's zone-in (bit 2
+# unset): 14, whose
+# finish sets bit 2, Option 7: completed.
+lists TavnazianSafehold/onZoneIn/1 TavnazianSafehold/_0q1/onTrigger TavnazianSafehold/_0qa/onTrigger TavnazianSafehold/onEventFinish/115 TavnazianSafehold/onEventFinish/116 SealionsDen/onZoneIn/1 SealionsDen/onEventFinish/14
+char zone=TavnazianSafehold pos=28,-13.8,49 job=WAR lvl=75 nation=0
+char eve zone=TavnazianSafehold pos=117,-42.8,45 job=WAR lvl=75 nation=0
+mission Cop ChainsAndBonds current
+charvar Mission[6][648]Status 2
+charvar Mission[6][648]Option 5
+eve: mission Cop ChainsAndBonds current
+eve: charvar Mission[6][648]Status 2
+eve: charvar Mission[6][648]Option 3
+login
+trigger _0q1                            # bit 1 unset: 116
+finish                                  # Option 7: completed
+eve: login
+eve: trigger _0qa                       # bit 0 set: no 7-1 reply (11040)
+eve: finish-if-event
+eve: warp 612,132,776 SealionsDen open  # bit 2 unset: 14
+eve: finish                             # Option 7: completed

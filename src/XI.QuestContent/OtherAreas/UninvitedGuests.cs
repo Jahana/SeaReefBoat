@@ -1,6 +1,6 @@
 // Uninvited Guests (Log ID 4, Quest ID 81), a line-for-line port of scripts/quests/otherAreas/Uninvited_Guests.lua
 // (quest rework B3b, Other Areas group 7). Tavnazian Safehold: Justinius !pos 76 -34 68 (no script; default 265);
-// Monarch Linn: the battlefield Uninvited Guests (scripts/battlefields/Monarch_Linn/uninvited_guests.lua: index 6,
+// Monarch Linn: the battlefield Uninvited Guests (Battlefields/MonarchLinn/UninvitedGuests.cs: index 6,
 // entry SD_Entrance, the Monarch Linn Patrol Permit spent on entry; requiredVar Quest[4][81]Prog = 1 of the
 // registrant).
 // Available once CoP's The Savage is completed: Justinius 570, whose finish on option 1 starts the quest (the permit,

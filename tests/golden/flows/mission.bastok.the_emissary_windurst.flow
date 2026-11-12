@@ -1,0 +1,48 @@
+# The Emissary Windurst (Bastok 2-3, mission.bastok.the_emissary_windurst). A level 30 Warrior of Bastok in Port
+# Windurst with the mission current (a GM; a GM's Resonance current keeps RoV 1-1's first mission out). Status 0: Ada
+# 51, Gold Skull 50, Josef 52, Melek 49. With the Sword Offering and no Dull Sword: Gold Skull 53, whose finish gives
+# the Dull Sword and takes the offering; with both, Gold Skull's status arm answers 50. Status 3: Gold Skull 50.
+# Status 4: Gold Skull 54, Melek 49. Status 5: Melek 49. Status 7: neither arm answers, so the zone defaults play
+# (Gold Skull 43, Melek 42). Status 6: Gold Skull 54, Melek 55, whose finish completes the mission, begins The
+# Emissary and moves to status 7.
+lists Giddeus/Uu_Zhoumo/onTrigger Giddeus/Uu_Zhoumo/onTrade Giddeus/onEventFinish/40 Giddeus/onEventFinish/41 HeavensTower/Kupipi/onTrigger HeavensTower/onZoneIn/1 HeavensTower/onEventUpdate/42 HeavensTower/onEventFinish/42 HeavensTower/onEventFinish/239 NorthernSanDoria/Helaku/onTrigger PortWindurst/Ada/onTrigger PortWindurst/Gold_Skull/onTrigger PortWindurst/Josef/onTrigger PortWindurst/Melek/onTrigger PortWindurst/onEventFinish/53 PortWindurst/onEventFinish/55
+char zone=PortWindurst pos=-80,-5,158 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheEmissaryWindurst current
+login
+trigger Ada
+finish-if-event
+trigger Gold_Skull
+finish-if-event
+trigger Josef
+finish-if-event
+trigger Melek
+finish-if-event
+keyitem SwordOffering
+trigger Gold_Skull
+finish
+keyitem SwordOffering
+trigger Gold_Skull
+finish-if-event
+delkeyitem SwordOffering
+missionstatus Bastok 3
+trigger Gold_Skull
+finish-if-event
+missionstatus Bastok 4
+trigger Gold_Skull
+finish-if-event
+trigger Melek
+finish-if-event
+missionstatus Bastok 5
+trigger Melek
+finish-if-event
+missionstatus Bastok 7
+trigger Gold_Skull
+finish-if-event
+trigger Melek
+finish-if-event
+missionstatus Bastok 6
+trigger Gold_Skull
+finish-if-event
+trigger Melek
+finish

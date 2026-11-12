@@ -1,0 +1,31 @@
+# Breaking the Bonds of Fate (battlefield.breaking_the_bonds_of_fate, Talacca Cove): a level 75 Corsair at level cap 75,
+# Breaking the Bonds of Fate accepted at Quest[6][41]Prog 1 (GMs), one Corsair's Testimony. The testimony traded to
+# _1l0: the 32000 menu (0,0,0,8: index 3). Updates: 0 ignored; 48 (area 0) and 52 (area 4): REQS_NOT_MET (5); 49 (area
+# 1): registered, entered: TESTIMONY_WEARS 7397 (the item, 3 shown, 2 left: its wear 0 -> 1),
+# ENTERING_THE_BATTLEFIELD_FOR, MEMBERS_OF_YOUR_PARTY (1), TIME_LIMIT_FOR_THIS_BATTLE_IS (10); the testimony kept.
+# Finished: in the arena. QULTADA brought to 1 HP (he is unkillable): in the kill step his mob script's
+# QULTADA_LADY_DESTINY, QULTADA_GO_EASY, QULTADA_HEAT_UP, QULTADA_NOT_BAD and 32001 (1,600,0,2,57,3: area 1, index 3,
+# the skip flag 0). Finished: the battlefield's onEventFinishWin, then the quest's 32001
+# (ahtUrhgan.breaking_the_bonds_of_fate, C#; battlefieldWin set by the win): a Scroll of Instant Warp (ITEM_OBTAINED),
+# the title 493 (Master of Chance), completed (the cap 75 kept, no message). 11 s, then 10 s: the effects 143 and 254
+# (the battlefield's) removed.
+uncovered: group:1:allDeath -- Qultada is unkillable (Qultada.lua:32, setUnkillable(true) in onMobSpawn): kill and kill nokiller leave him alive (a #alldeath flow's record failed: 'the mob did not die'), and his mob script wins the fight with battlefield:win() (Qultada.lua:136); the allDeath is pinned by the c3 Q4 group check
+lists TalaccaCove/_1l0/onTrade TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/onEventFinish/32001
+char zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+levelcap 75
+quest AhtUrhgan.AgainstAllOdds completed
+quest AhtUrhgan.BreakingTheBondsOfFate accepted
+charvar Quest[6][41]Prog 1
+item CorsairsTestimony
+login
+trade _1l0 CorsairsTestimony x1
+update 32000 option=0
+update 32000 option=48
+update 32000 option=52
+update 32000 option=49
+finish
+kill QULTADA
+finish
+finish-if-event
+tick 11000
+tick 10000

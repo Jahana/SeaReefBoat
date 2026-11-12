@@ -8,7 +8,7 @@ using XI.Zone;
 
 // XI.Verify.Roe.Live -- live gate for Records of Eminence (ZoneHost.Roe: c2s 0x10C ROE_START, 0x10D ROE_REMOVE,
 // 0x10E ROE_CLAIM; roeutils' parse, onCharLoad resets, the JST hourly cycles, onRecordTrigger; the RoE / currency /
-// exp bindings) against the real MariaDB (xidb) with the real xi.roe scripts loaded.
+// exp bindings) against the real MariaDB (xidb) with the real xi.roe global (C#) and the C# records.
 //
 // Exit codes: 0 = all checks passed; 1 = a check failed; 3 = DB not reachable (prerequisite).
 internal static class Program
@@ -167,7 +167,7 @@ internal static class Program
         using var scripts = new ScriptEngine(Path.GetDirectoryName(dataDir), log.Add, log.Add);
         zone.InitScripts(scripts);
 
-        Console.WriteLine("parse (RoeParseRecords / RoeParseTimed from xi.roe):");
+        Console.WriteLine("parse (the C# records):");
         Check("no unknown trigger / flag", false, log.Exists(l => l.Contains("ROEUtils: Unknown")));
 
         Console.WriteLine("onCharLoad:");
@@ -275,8 +275,11 @@ internal static class Program
         Check("1200's item reward", "12", Lua("report(xi.item.COPY_OF_DEATH_FOR_DIMWITS)") is var dimwits &&
               c.Items.Find(i => i.ItemId.ToString() == dimwits) is Item given ? given.Quantity.ToString() : "none");
         Check("CURRENCIES_1 after the claim", 1, Of(0x113).Count);
-        Check("getNumEminenceCompleted", Lua("local n = 0 for i = 0, 4095 do if player:getEminenceCompleted(i) and not (xi.roe.records[i] and xi.roe.records[i].flags.hidden) then n = n + 1 end end report(n)"),
-              Lua("report(player:getNumEminenceCompleted())"));
+        int completedShown = 0;
+        for (int i = 0; i < 4096; i++)
+            if (Complete(c.EminenceLog, i) && (zone.RoeRecordForTest(i)?.Flags & XI.Quests.RoeFlags.Hidden) is null or XI.Quests.RoeFlags.None)
+                completedShown++;
+        Check("getNumEminenceCompleted", completedShown.ToString(), Lua("report(player:getNumEminenceCompleted())"));
 
         Console.WriteLine("0x10D ROE_REMOVE:");
         Roe(0x10C, 3);
@@ -291,14 +294,22 @@ internal static class Program
         Check("the activemap", "false", Lua("report(tostring(player:hasEminenceRecord(3)))"));
 
         Console.WriteLine("triggerRoeEvent / onRecordTrigger:");
-        Lua(@"xi.roe.records[3999] = { trigger = xi.roeTrigger.TRIGGER_NPC, check = function(self, player, params)
-                  roeSeen = string.format('%s:%d:%d', params.tag, params.count, params.progress) return false end }
-              xi.roe.initialize()");
+        string roeSeen = null;
+        zone.AddRoeRecordForTest(new XI.Quests.RoeRecord(3999)
+        {
+            Trigger = 18, // TRIGGER_NPC
+            TestCheck = (player, p) =>
+            {
+                roeSeen = $"{p.Text("tag")}:{p.Number("count")}:{p.Progress}";
+                return false;
+            },
+        });
         Roe(0x10C, 3999);
-        Lua("roeSeen = nil player:triggerRoeEvent(xi.roeTrigger.TRIGGER_NPC, { tag = 'x', count = 3 })");
-        Check("the record's check sees the datagrams and its progress", "x:3:0", Lua("report(tostring(roeSeen))"));
-        Lua("roeSeen = nil player:triggerRoeEvent(xi.roeTrigger.HEAL_ALLY, { tag = 'y', count = 1 })");
-        Check("another trigger: not called", "nil", Lua("report(tostring(roeSeen))"));
+        Lua("player:triggerRoeEvent(xi.roeTrigger.TRIGGER_NPC, { tag = 'x', count = 3 })");
+        Check("the record's check sees the datagrams and its progress", "x:3:0", roeSeen ?? "nil");
+        roeSeen = null;
+        Lua("player:triggerRoeEvent(xi.roeTrigger.HEAL_ALLY, { tag = 'y', count = 1 })");
+        Check("another trigger: not called", "nil", roeSeen ?? "nil");
 
         Console.WriteLine("currencies:");
         Clear();
@@ -373,5 +384,21 @@ internal static class Program
         Check("Monday: under 5000 both weeks, the trust removed", "-", Q1(db, "SELECT spellid FROM char_spells WHERE charid = ?"));
         Check("midnight: the daily progress cleared", 0u, Progress(c.EminenceLog, 0));
         Check("Monday 00-04: the timed record is 4015", 4015, Active(c.EminenceLog, 30));
+
+        Console.WriteLine("accolades: the unity rank's bonus");
+        // leader 1 ranks 3rd: 1.1 * 300 is 330
+        Sql(db, "UPDATE unity_system SET members_prev = 0, points_prev = 0");
+        foreach (var (leader, prev) in new[] { (2, 90), (3, 80), (1, 70) })
+            Sql(db, "UPDATE unity_system SET members_prev = 1, points_prev = ? WHERE leader = ?",
+                BoundValue.Of(prev), BoundValue.Of(leader));
+        zone.AddRoeRecordForTest(new XI.Quests.RoeRecord(3998)
+        {
+            Reward = new XI.Quests.RoeReward { Accolades = 300 },
+        });
+        Roe(0x10C, 3998);
+        Lua("player:setEminenceProgress(3998, 1)");
+        Clear();
+        Roe(0x10E, 3998);
+        Check("rank 3: 5% a rank", true, Msgs().Exists(m => m.StartsWith($"{M("ROE_RECEIVED_ACCOLADES")}:330:")));
     }
 }

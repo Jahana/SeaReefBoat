@@ -1,0 +1,52 @@
+# Proof of Valor (WotG 21), the whole run, in Southern San d'Oria [S]. The first Raustigne trigger answers message
+# 14025 [20] and 14026 (the petition count) and sets mustZone; the second reaches the zone's default event 606. Each
+# of the ten petition NPCs (Illeuse 115 to Mailleronce 122, Remiotte 124, Aissaville 123) plays its event; the
+# finish sets its Status bit, adds 1 to Option and answers message 14297 [1162, total]. A second Illeuse trigger
+# reaches a default event. Eumielle 131 sets Remind; the next trigger plays 141; the cassoulet trade plays 135 and
+# adds 12. After a zone round trip Raustigne plays 148 and the finish with option 1 gives the reward and completes
+# the mission (state: A Sanguinary Prelude current).
+lists SouthernSanDoriaS/Aissaville/onTrigger SouthernSanDoriaS/Andagge/onTrigger SouthernSanDoriaS/Aurfet/onTrigger SouthernSanDoriaS/Corseihaut/onTrigger SouthernSanDoriaS/Coucheutand/onTrigger SouthernSanDoriaS/Daigraffeaux/onTrigger SouthernSanDoriaS/Elnonde/onTrigger SouthernSanDoriaS/Eumielle/onTrigger SouthernSanDoriaS/Farouel/onTrigger SouthernSanDoriaS/Hauberliond/onTrigger SouthernSanDoriaS/Illeuse/onTrigger SouthernSanDoriaS/Loillie/onTrigger SouthernSanDoriaS/Louxiard/onTrigger SouthernSanDoriaS/Machionage/onTrigger SouthernSanDoriaS/Mailleronce/onTrigger SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/Remiotte/onTrigger SouthernSanDoriaS/Rongelouts_N_Distaud/onTrigger SouthernSanDoriaS/Sabiliont/onTrigger SouthernSanDoriaS/Vichauxdat/onTrigger SouthernSanDoriaS/Coucheutand/onTrade SouthernSanDoriaS/Eumielle/onTrade SouthernSanDoriaS/Hauberliond/onTrade SouthernSanDoriaS/Rongelouts_N_Distaud/onTrade SouthernSanDoriaS/Sabiliont/onTrade SouthernSanDoriaS/onEventUpdate/125 SouthernSanDoriaS/onEventUpdate/126 SouthernSanDoriaS/onEventUpdate/127 SouthernSanDoriaS/onEventUpdate/128 SouthernSanDoriaS/onEventFinish/115 SouthernSanDoriaS/onEventFinish/116 SouthernSanDoriaS/onEventFinish/117 SouthernSanDoriaS/onEventFinish/118 SouthernSanDoriaS/onEventFinish/119 SouthernSanDoriaS/onEventFinish/120 SouthernSanDoriaS/onEventFinish/121 SouthernSanDoriaS/onEventFinish/122 SouthernSanDoriaS/onEventFinish/123 SouthernSanDoriaS/onEventFinish/124 SouthernSanDoriaS/onEventFinish/125 SouthernSanDoriaS/onEventFinish/126 SouthernSanDoriaS/onEventFinish/127 SouthernSanDoriaS/onEventFinish/128 SouthernSanDoriaS/onEventFinish/129 SouthernSanDoriaS/onEventFinish/130 SouthernSanDoriaS/onEventFinish/131 SouthernSanDoriaS/onEventFinish/132 SouthernSanDoriaS/onEventFinish/133 SouthernSanDoriaS/onEventFinish/134 SouthernSanDoriaS/onEventFinish/135 SouthernSanDoriaS/onEventFinish/136 SouthernSanDoriaS/onEventFinish/137 SouthernSanDoriaS/onEventFinish/138 SouthernSanDoriaS/onEventFinish/144 SouthernSanDoriaS/onEventFinish/148
+char zone=SouthernSanDoriaS pos=100.801,1,103.211 job=WAR lvl=99
+item AnglersCassoulet
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg ProofOfValor current
+login
+trigger Raustigne
+trigger Raustigne
+finish-if-event
+trigger Illeuse                    # 115
+finish
+trigger Aissaville                    # 123
+finish
+trigger Andagge                    # 121
+finish
+trigger Daigraffeaux                    # 118
+finish
+trigger Louxiard                    # 119
+finish
+trigger Machionage                    # 120
+finish
+trigger Elnonde                    # 116
+finish
+trigger Loillie                    # 117
+finish
+trigger Remiotte                    # 124
+finish
+trigger Mailleronce                    # 122
+finish
+trigger Illeuse
+finish-if-event
+trigger Eumielle
+finish
+trigger Eumielle
+finish
+trade Eumielle AnglersCassoulet x1
+finish
+warp 46.387,0.117,318.21 JugnerForestS
+warp 100.801,1,103.211 SouthernSanDoriaS
+trigger Raustigne
+finish option=1
+trigger Raustigne

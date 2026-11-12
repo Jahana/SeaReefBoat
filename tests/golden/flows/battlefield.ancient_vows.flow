@@ -1,0 +1,25 @@
+# Ancient Vows (battlefield.ancient_vows, Monarch Linn: a BattlefieldMission, index 0, 30 minutes, six players, entry NPC
+# SD_Entrance). A level 75 Warrior of San d'Oria with Ancient Vows current and its Status 2 (GMs), who came from Riverne -
+# Site #B01: entryRequirement refuses (the previous zone is B01): no options. Back in from Riverne - Site #A01: the menu
+# 32000; area 1 (option 1): entered. The three Mammet-19 Epsilon of area 1 spawn at the first tick; killed: allDeath sets
+# WON; the win: battlefieldWin, 32001; finished: the mission's handler (Status 2, the win: complete, the char set down in
+# South Gustaberg), the Tavnazian Traveler title, 1000 XP.
+lists MonarchLinn/SD_Entrance/onTrigger MonarchLinn/onEventUpdate/32000 MonarchLinn/onEventFinish/32000 MonarchLinn/onEventFinish/32001
+char zone=RiverneSiteB01 pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop AncientVows current
+charvar Mission[6][248]Status 2
+login
+warp -39.1,-3.3,-537 MonarchLinn        # from B01
+trigger SD_Entrance                     # refused
+warp 0,0,0 RiverneSiteA01
+warp -39.1,-3.3,-537 MonarchLinn        # from A01
+trigger SD_Entrance                     # the menu 32000
+update 32000 option=1                   # area 1: entered
+finish                                  # in the arena
+tick 2000                               # the Mammets spawn
+kill MAMMET_19_EPSILON
+kill MAMMET_19_EPSILON+1
+kill MAMMET_19_EPSILON+2                # allDeath: WON; 32001
+finish                                  # the mission completes
+tick 11000
+tick 10000

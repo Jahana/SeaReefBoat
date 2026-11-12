@@ -1,0 +1,39 @@
+# Traitor in the Midst (WotG 18), the whole run, in Beaucedine Glacier [S]. Regal Pawprints 1 at Status 0 answers
+# 6409 (DefaultActions). Pawprints 3 to 7 play 8 to 12; each update with option 1 and finish with option 1 sets the
+# pawprint's Status bit (3 to 7: bits 0 to 4) when 20 s have passed since the update for pawprints 3 to 5 (a `wait
+# jst=1` between), and at once for 6 and 7. A finish under 20 s sets nothing; a set pawprint answers 6409
+# (DefaultActions). At Status 31 Pawprints 1 plays 14 and its finish completes the mission.
+lists BeaucedineGlacierS/Regal_Pawprints_3/onTrigger BeaucedineGlacierS/Regal_Pawprints_4/onTrigger BeaucedineGlacierS/Regal_Pawprints_5/onTrigger BeaucedineGlacierS/Regal_Pawprints_6/onTrigger BeaucedineGlacierS/Regal_Pawprints_7/onTrigger BeaucedineGlacierS/Regal_Pawprints_1/onTrigger BeaucedineGlacierS/onEventUpdate/8 BeaucedineGlacierS/onEventUpdate/9 BeaucedineGlacierS/onEventUpdate/10 BeaucedineGlacierS/onEventUpdate/11 BeaucedineGlacierS/onEventUpdate/12 BeaucedineGlacierS/onEventFinish/8 BeaucedineGlacierS/onEventFinish/9 BeaucedineGlacierS/onEventFinish/10 BeaucedineGlacierS/onEventFinish/11 BeaucedineGlacierS/onEventFinish/12 BeaucedineGlacierS/onEventFinish/14
+char zone=BeaucedineGlacierS pos=-23.803,-60.055,-72.156 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg TraitorInTheMidst current
+login
+trigger Regal_Pawprints_1                  # Status 0
+trigger Regal_Pawprints_3                  # 8
+update 8 option=0
+update 8 option=1                          # Timer set
+finish option=1                            # under 20 s
+trigger Regal_Pawprints_3                  # 8 again
+update 8 option=1
+wait jst=1
+finish option=1                            # 20 s on: bit 0
+trigger Regal_Pawprints_3                  # bit 0 set
+trigger Regal_Pawprints_4
+update 9 option=1
+wait jst=1
+finish option=1
+trigger Regal_Pawprints_5
+update 10 option=1
+wait jst=1
+finish option=1
+trigger Regal_Pawprints_6
+update 11 option=1
+finish option=1
+trigger Regal_Pawprints_7
+update 12 option=1
+finish option=1
+trigger Regal_Pawprints_1                  # Status 31: 14
+finish                                     # completed

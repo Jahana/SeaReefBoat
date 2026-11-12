@@ -1,0 +1,24 @@
+# Lest We Forget (WotG 54) at Status 0 without the earring: afterZoneIn sets the local var Option 1 (a local var: no
+# row). The qm_reset plays 46 [89, 23, 1756, 0, 9467, 16940788]; its finish with option 0 writes the mustZone (89); with
+# it set the qm_reset answers with Grauberg [S]'s DefaultActions AIR_WARPED_AND_DISTORTED (8413). A warp to Batallia
+# Downs [S] clears the mustZone; back in Grauberg [S] afterZoneIn sets Option 1 again; 46 again; its finish with option
+# 1 deletes Maiden of the Dusk, Where It All Began, A Token of Troth and Lest We Forget, adds Maiden of the Dusk
+# (current 50) with Status 2, gives the Primal Glow (1731, message 6398) and says YOU_HAVE_RETRACED_RIVER (8412).
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/qm_reset/onTrigger GraubergS/afterZoneIn/1 GraubergS/onEventUpdate/39 GraubergS/onEventFinish/39 GraubergS/onEventFinish/46
+char zone=GraubergS pos=-140.28,-6.749,585.24 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg LestWeForget current
+login
+tick 5000                                  # afterZoneIn: no earring, Status 0: Option 1
+trigger qm_reset                           # 46
+finish option=0                            # not 1: mustZone
+trigger qm_reset                           # mustZone: nothing
+finish-if-event
+warp -48,0,435 BatalliaDownsS              # another zone: mustZone cleared
+warp -140.28,-6.749,585.24 GraubergS
+tick 5000                                  # Option 1 again
+trigger qm_reset                           # 46
+finish option=1                            # the reset: Maiden of the Dusk at Status 2, the Primal Glow

@@ -1,0 +1,46 @@
+# Prestige of the Papsque (San d'Oria 7-1, mission.sandoria.prestige_of_the_papsque) played through: a level 75 San
+# d'Orian at rank 7, ASA, ACP, RoV and SoA current (their content quiet) and the nation's missions before it
+# completed. Grilau's own 1009, option 18: begun. _6fc 7 (status 1), then 9. West Ronfaure: qm4 at status 1 with
+# Marauder Dvogzog not up: spawned, SOMETHING_IS_AMISS (7907); with him up: nothing, an event release; killed: Stage 1
+# (and his gil, 8098); after his despawn qm4: Stage 0, status 2, the Ancient San d'Orian Tablet (KEYITEM_OBTAINED).
+# _6fc 8: completed, 1000 rank points, the tablet taken.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/_6fc/onTrigger NorthernSanDoria/onEventFinish/7 NorthernSanDoria/onEventFinish/8 WestRonfaure/qm4/onTrigger
+char zone=NorthernSanDoria pos=-240,7,58 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+rank 7
+login
+trigger Grilau                          # his own 1009
+finish option=18                        # begun
+warp 129,-11,121 NorthernSanDoria
+trigger _6fc                            # status 0: 7
+finish                                  # status 1
+trigger _6fc                            # status 1: 9
+finish
+warp -693,-40,21 WestRonfaure
+trigger qm4                             # status 1, Dvogzog not up: spawned, SOMETHING_IS_AMISS
+trigger qm4                             # Dvogzog up: nothing
+finish-if-event
+kill MARAUDER_DVOGZOG                   # status 1: Stage 1
+tick 15000
+tick 15000
+trigger qm4                             # Stage 1: Stage 0, status 2, the tablet
+warp 129,-11,121 NorthernSanDoria
+trigger _6fc                            # the tablet: 8
+finish                                  # completed: 1000 rank points, the tablet taken

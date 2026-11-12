@@ -1,0 +1,48 @@
+# The Enduring Tumult of War (CoP 5-1), each condition's other parts. A level 75 Warrior of San d'Oria with 5-1
+# current and Status 1 (a GM): Despachiaire has no 5-1 reply (144, X Marks the Spot's, accepted; Status 1, bit 0
+# unset), Chasalvige plays 764 (Status 1, bit 1 unset), Anoki has no 5-1 reply (519; Status 1), Port Bastok's zone-in
+# has no event (Status 1). At Status 0 Cid has no 5-1 reply (500). At Status 2: _i98 and _i99 have no 5-1 reply
+# (7257); Pso'Xja's zone-in at x -300 from Beaucedine Glacier plays 1 (finished: Status 3), but not from another zone,
+# not at another x and not at another Status (3). At Status 3 with Nunyunuwi spawned (a GM): _i98 has no 5-1 reply
+# (7257). At Status 4 Nunyunuwi's death sets nothing; Promyvion - Vahzl's zone-in at Status 3 has no event. The warp
+# to Northern San d'Oria also advances Rhapsodies of Vana'diel (char_mission_state area=13, current=2).
+lists TavnazianSafehold/Despachiaire/onTrigger NorthernSanDoria/Chasalvige/onTrigger PortSanDoria/Anoki/onTrigger PortBastok/onZoneIn/1 Metalworks/Cid/onTrigger Psoxja/_i98/onTrigger Psoxja/_i99/onTrigger Psoxja/Nunyunuwi/onMobDeath Psoxja/onZoneIn/1 Psoxja/onEventFinish/1 PromyvionVahzl/onZoneIn/1
+char zone=TavnazianSafehold pos=108,-40,-83 job=WAR lvl=75 nation=0
+mission Cop TheEnduringTumultOfWar current
+charvar Mission[6][448]Status 1
+login
+trigger Despachiaire                    # Status 1, bit 0 unset: no 5-1 reply (144)
+finish-if-event
+warp 96.4,-0.5,134 NorthernSanDoria
+trigger Chasalvige                      # Status 1, bit 1 unset: 764
+finish-if-event
+warp -22.4,-8.2,30.4 PortSanDoria
+trigger Anoki                           # Status 1: no 5-1 reply (519)
+finish-if-event
+warp -111,-4,-10 PortBastok             # Status 1: no zone-in event
+charvar Mission[6][448]Status 0
+warp -12,-12,1 Metalworks
+trigger Cid                             # Status 0: no 5-1 reply (500)
+finish-if-event
+charvar Mission[6][448]Status 2
+warp 0,0,0 BeaucedineGlacier
+warp -300,-0.4,10 Psoxja                # from Beaucedine Glacier at x -300, Status 2: 1
+charvar Mission[6][448]Status 2
+trigger _i98                            # Status 2: no 5-1 reply (7257)
+finish-if-event
+trigger _i99                            # Status 2: no 5-1 reply (7257)
+finish-if-event
+warp 0,0,0 LufaiseMeadows
+warp -300,-0.4,10 Psoxja                # from another zone: no zone-in event
+warp 0,0,0 BeaucedineGlacier
+warp -299,-0.4,10 Psoxja                # at another x: no zone-in event
+warp 0,0,0 BeaucedineGlacier
+charvar Mission[6][448]Status 3
+warp -300,-0.4,10 Psoxja                # Status 3: no zone-in event
+spawn NUNYUNUWI
+trigger _i98                            # Status 3, Nunyunuwi spawned: no 5-1 reply (7257)
+finish-if-event
+charvar Mission[6][448]Status 4
+kill NUNYUNUWI                          # Status 4: nothing set
+charvar Mission[6][448]Status 3
+warp 0,0,0 PromyvionVahzl               # Status 3: no zone-in event

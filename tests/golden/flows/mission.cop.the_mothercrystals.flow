@@ -1,0 +1,38 @@
+# The Mothercrystals (CoP 1-3), the Dem and Mea crags. A level 75 Warrior of San d'Oria with 1-3 current and the light of
+# Holla (a GM): one light, Status 0, Option 0. The Konschtat telepoint (one light, no light of Dem, Option 0): the
+# local var toPromyvion 2 and 912; finished with 1: nothing; again, with 0: Promyvion - Dem. Its zone-in (Option 0, one
+# light): 51, finished: Option 2. The Spire of Dem: _0j0, won (the Progenerator): 32001 (newPromy 1, the light of Dem, two
+# lights: not complete, Option 0, the teleport out). The Hall of Transference from Tahrongi (two lights, no light of Mea,
+# Status 0): 155 (toPromyvion 3), finished: Status 1 and the Mea promyvion; its zone-in (two lights): 52, finished: Option
+# 3. The Spire of Mea: won (the Delver): 32001 (the light of Mea, three lights: complete, An Invitation West current, the
+# title; toLufaise 1 and the teleport to Lufaise Meadows). The Spire's exit lands in Konschtat, not the Hall, so no 155 there.
+lists KonschtatHighlands/Shattered_Telepoint/onTrigger KonschtatHighlands/onEventFinish/912 HallOfTransference/onZoneIn/1 HallOfTransference/onEventFinish/155 PromyvionDem/onZoneIn/1 PromyvionDem/onEventFinish/51 PromyvionMea/onZoneIn/1 PromyvionMea/onEventFinish/52 SpireOfDem/onEventFinish/32001 SpireOfMea/onEventFinish/32001
+char zone=KonschtatHighlands pos=135,19,220 job=WAR lvl=75 nation=0
+mission Cop TheMothercrystals current
+keyitem LightOfHolla
+login
+trigger Shattered_Telepoint             # one light, Option 0: 912
+finish option=1                         # not 0: nothing
+trigger Shattered_Telepoint
+finish option=0                         # sendToPromyvionZone(2)
+warp 185.891,0,-52.331 PromyvionDem     # 51
+finish                                  # Option 2
+warp 0,-3.8,240 SpireOfDem
+trigger _0j0
+update 32000 option=1
+finish
+tick 2000
+kill PROGENERATOR
+finish                                  # 32001: the light of Dem, two lights
+warp 179,35,255 TahrongiCanyon
+warp -236.3,-4.9,290 HallOfTransference # prevZone Tahrongi, two lights, no Mea light, Status 0: 155
+finish                                  # Status 1, the Mea promyvion
+warp -93.268,0,170.749 PromyvionMea     # two lights: 52
+finish                                  # Option 3
+warp 0,-3.8,240 SpireOfMea
+trigger _0l0
+update 32000 option=1
+finish
+tick 2000
+kill DELVER
+finish                                  # 32001: the light of Mea, three lights: complete, to Lufaise

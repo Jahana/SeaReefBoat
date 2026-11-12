@@ -1,0 +1,17 @@
+# Cavernous Maws (WotG 1) with ENABLE_WOTG 0 and the mission current: the maw's own script (xi.maws) gives
+# NOTHING_HAPPENS, not 500. ENABLE_WOTG set to 1 again: 500 plays, and its finish completes the mission (the Pure White
+# Feather, maw teleport bit 4).
+lists BatalliaDowns/Cavernous_Maw/onTrigger BatalliaDowns/onEventFinish/500 RolanberryFields/Cavernous_Maw/onTrigger RolanberryFields/onEventFinish/500 SauromugueChampaign/Cavernous_Maw/onTrigger SauromugueChampaign/onEventFinish/500
+char zone=BatalliaDowns pos=-48,0.1,435 job=WAR lvl=99
+setting ENABLE_WOTG 0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg CavernousMaws current
+login
+trigger Cavernous_Maw                   # xi.maws' NOTHING_HAPPENS
+finish-if-event
+setting ENABLE_WOTG 1
+trigger Cavernous_Maw                   # 500
+finish-if-event

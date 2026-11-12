@@ -1,0 +1,17 @@
+# Testing the Waters (ToAU 34): without the coin (no must-zone var) the walk in Arrapago Reef comes right after the
+# warp, before any zone tick, and enters no area (the coin arm of the area is in #nocoin_tick, with ticks and a walk
+# out first); a warp into Talacca Cove at Status 0: nothing.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger ArrapagoReef/onTriggerAreaEnter/1 ArrapagoReef/onEventFinish/15 TalaccaCove/onZoneIn/1 TalaccaCove/onEventFinish/106
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau TestingTheWaters current
+login
+tick 1000
+tick 1000
+tick 1000
+warp -463.026,-2,-394.478 ArrapagoReef
+walk -458,-2,-400                       # no coin: nothing
+warp -88.879,-7.318,-109.233 TalaccaCove   # Status 0: nothing

@@ -1,0 +1,56 @@
+# The Throne Room's Shadow Lord (battlefield 160) with a helper: the leader on Xarcabard at status 3; eve (it completed)
+# enters too. Phase 1 killed: 32004 to both; the leader's finish spawns phase 2; eve's finds him up: nothing. Phase 2
+# dies after two days: 32001 to both; the leader's finish: the title and the mission's (The New Frontier added: the
+# engine's warning); eve's (canSkipCS 1): the title only.
+lists ThroneRoom/_4l1/onTrigger ThroneRoom/_4l2/onTrigger ThroneRoom/onZoneIn/1 ThroneRoom/onEventUpdate/32000 ThroneRoom/onEventFinish/32000 ThroneRoom/onEventFinish/32001 ThroneRoom/onEventFinish/32002 ThroneRoom/onEventFinish/32003 ThroneRoom/onEventFinish/32004 ThroneRoom/onEventFinish/6 ThroneRoom/onEventFinish/7
+char zone=ThroneRoom pos=-108,-6,0 job=WAR lvl=75 nation=1
+warning: lua: addMission: overwriting current mission 65535 of log 3 with 0 -- the 32001 finish adds Zilart's The New Frontier while the char's Zilart log holds 65535 (no Zilart row yet): the engine's C++ ShowWarning, the mission is added
+char eve zone=ThroneRoom pos=-108,-6,0 job=WAR lvl=75 nation=1
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths current
+eve: mission Bastok XarcabardLandOfTruths completed
+login
+missionstatus Bastok 3
+eve: login
+invite eve
+eve: accept
+trigger _4l1                            # the leader: the 32000 menu
+update 32000 option=1                   # area 1: registered, entered
+finish
+eve: trigger _4l1                       # eve (completed): the menu
+eve: update 32000 option=1              # entered
+eve: finish
+tick 2000
+kill SHADOW_LORD_RANK_5_OFFSET          # phase 1 dead: 32004 to both
+finish                                  # the leader's 32004: phase 2 spawned
+eve: finish                             # eve's 32004: phase 2 up: nothing
+tick 2000
+kill SHADOW_LORD_RANK_5_OFFSET+3
+tick 1000
+wait jst=1
+tick 1000
+tick 1000
+wait jst=1
+tick 1000                               # the second day: phase 2 acts (an 028), HP 0
+tick 1000                               # phase 2 dead: WON, 32001
+tick 1000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish                                  # 32001: the leader: the title, the mission
+eve: finish                             # 32001: eve: the title

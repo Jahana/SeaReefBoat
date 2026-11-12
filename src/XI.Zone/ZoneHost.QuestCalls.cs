@@ -83,7 +83,7 @@ namespace XI.Zone
         // the binding a call of the kind takes for the key: a quest call only a quest's, a mission call only a
         // mission's
         private bool TryCallBinding(string key, bool mission, out QuestScriptBinding b) =>
-            npcCallQuests_.TryGetValue(key, out b) && b.Mission != null == mission;
+            npcCallQuests_.TryGetValue(key, out b) && (b.Mission != null) == mission;
 
         // the unknown key's line, at most once per key per 60 s of NowMs (the quest calls and the mission calls each
         // keep their own times)
@@ -112,16 +112,16 @@ namespace XI.Zone
 
         // whether state i's match holds for the call; a check that throws is false (logged). A quest's state matches
         // on the status (read by the caller) and the step, as its section check does; a mission's on IsMissionMatch
-        // over the check's mission arguments
-        private bool CallStateMatches(QuestScriptBinding b, int i, QuestStatus status, LiveQuestContext check)
+        // over the check's mission arguments, and it passes a null status
+        private bool CallStateMatches(QuestScriptBinding b, int i, QuestStatus? status, LiveQuestContext check)
         {
             var state = b.Def.States[i];
             try
             {
                 if (b.Mission != null) return state.IsMissionMatch(check);
                 int step = state.Matches.Any(m => m.Step.HasValue) ? check.Step : 0;
-                bool match = state.IsMatch(status, step, check);
-                ReportRemoved(b, status, check);
+                bool match = state.IsMatch(status.Value, step, check);
+                ReportRemoved(b, status.Value, check);
                 return match;
             }
             catch (Exception e)
@@ -201,7 +201,7 @@ namespace XI.Zone
             string npcName = LuaGet(l, 2, "getName", () => l.IsString(-1) ? l.ToStringValue(-1) : null);
             var def = b.Def;
             LiveQuestContext check = null;
-            QuestStatus status = default;
+            QuestStatus? status = null;
             for (int i = 0; i < def.States.Count; i++)
             {
                 var state = def.States[i];
@@ -304,7 +304,7 @@ namespace XI.Zone
                 if (hs.Count == 0) continue;
                 if (b.Mission != null) missionCheck ??= NewCallCheck(l, b, npc: 2);
                 else status ??= check.Status;
-                if (!CallStateMatches(b, i, status ?? default, missionCheck ?? check)) continue;
+                if (!CallStateMatches(b, i, status, missionCheck ?? check)) continue;
                 bool ran = false;
                 foreach (var h in hs)
                 {
@@ -364,7 +364,7 @@ namespace XI.Zone
                 if (h == null) continue;
                 if (b.Mission != null) missionCheck ??= NewCallCheck(l, b);
                 else status ??= check.Status;
-                if (!CallStateMatches(b, i, status ?? default, missionCheck ?? check)) continue;
+                if (!CallStateMatches(b, i, status, missionCheck ?? check)) continue;
                 string name = HandlerName(h);
                 var ctx = new LiveQuestContext(l, log_, b, name, player: 1, zone: zone, called: true);
                 if (!RunHandler(b, h, name, ctx, out var reply) || reply == null) return null;

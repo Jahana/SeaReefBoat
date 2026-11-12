@@ -1,0 +1,22 @@
+# A Hawk in Repose (WotG 29) at Status 1 (a GM). The Gravestone's trigger plays nothing of the mission's: its
+# DefaultActions message SEE_WEATHERED_GRAVESTONE (11341). Two Lilacs, a Bronze Sword, and a Lilac with a Bronze Sword
+# each fail the exact match: no handler answers (no packet, nil), and nothing is taken.
+lists BatalliaDowns/Weathered_Gravestone/onTrigger BatalliaDowns/Weathered_Gravestone/onTrade BatalliaDowns/onEventFinish/502 BatalliaDowns/onEventFinish/503
+char zone=BatalliaDowns pos=151.228,-5.109,-395.121 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg AHawkInRepose current
+charvar Mission[5][28]Status 1
+item Lilac x2
+item BronzeSword
+login
+trigger Weathered_Gravestone               # Status 1: not the mission's
+finish-if-event
+trade Weathered_Gravestone Lilac x2        # two Lilacs: no match
+finish-if-event
+trade Weathered_Gravestone BronzeSword x1  # another item: no match
+finish-if-event
+trade Weathered_Gravestone Lilac x1 BronzeSword x1   # a Lilac and another item: no match
+finish-if-event

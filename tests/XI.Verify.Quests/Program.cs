@@ -421,6 +421,30 @@ internal static partial class Program
         // quest rework C2 Task 7: Bastok 1-1, CoP 1-1 and RoV 1-1 on C#
         RunC2MissionPorts();
         RunC2Battlefields();
+        // quest rework C4: the records against the Lua dump
+        RunC4Records();
+        RunC4Checks();
+        // quest rework C3 Prep: the platform carries
+        RunC3Prep();
+        RunC3Cop();
+        RunC3CopC3a();
+        RunC3CopC3b();
+        RunC3CopC3c();
+        RunC3CopC4();
+        RunC3Bfquest();
+        RunC3Toau();
+        RunC3ToauT2();
+        RunC3ToauT3();
+        RunC3ToauT4();
+        RunC3ToauT5();
+        RunC3ToauT6();
+        RunC3ToauT7();
+        RunC3ToauT8();
+        RunC3RotzC5();
+        RunC3RotzC6();
+        // quest rework C3 Batch F: the facet members several lanes need
+        RunC3Facets();
+        RunC3Nations();
         RunCarryQuests1();
 
         RunOnlyFilterGate();

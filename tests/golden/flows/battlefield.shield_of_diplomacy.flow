@@ -1,0 +1,23 @@
+# Shield of Diplomacy (battlefield.shield_of_diplomacy, Navukgo Execution Chamber, BattlefieldMission: ToAU 22, Status
+# 2, area 1, index 4, 30 minutes, three exit NPCs). The menu 32000 at Status 2: option 0 ignored; 17 (index 1)
+# refused; 65 (index 4, area 1): entered. Karababa and Khimaira spawn at the first tick; Khimaira killed: won, 32001;
+# finished: ToAU 22's handler completes the mission. Out after the cleanup.
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001 NavukgoExecutionChamber/onEventFinish/32002 NavukgoExecutionChamber/_1s1/onTrigger
+char zone=NavukgoExecutionChamber pos=-600,8,-100 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ShieldOfDiplomacy current
+login
+missionstatus Toau 2
+trigger _1s0
+update 32000 option=0
+update 32000 option=17
+update 32000 option=65
+finish
+tick 2000
+kill KHIMAIRA_13
+finish
+tick 11000
+tick 10000

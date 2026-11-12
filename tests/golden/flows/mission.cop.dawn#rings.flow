@@ -1,0 +1,55 @@
+# Dawn (CoP 8-4): the rings at _6s1 (Upper Jeuno). Main (8-4 at Status 7, Timer 0, firstRing 0; GMs): 204; update 3:
+# nothing; update 4: the three rings; finished 4: nothing. Status 4: _6s1's own event 124 (0, 1). Status 7 with Timer
+# 1: 124. eve (The Last Verse current: 8-4 completed): 204, finished 8: nothing; firstRing 1 (a GM): 84, update 4,
+# finished 7: Tamas Ring (6554), firstRing 0; now holding a ring: 124. bob (completed, holding Rajas Ring) and cat
+# (Sattva Ring): 124. dan (completed, firstRing 1) with a full bag: 84, finished 5: ITEM_CANNOT_BE_OBTAINED (6546),
+# firstRing stays; with room: 84, finished 6: Sattva Ring, firstRing 0.
+lists UpperJeuno/_6s1/onTrigger UpperJeuno/onEventUpdate/84 UpperJeuno/onEventUpdate/204 UpperJeuno/onEventFinish/84 UpperJeuno/onEventFinish/204
+char zone=UpperJeuno pos=-95,-1.7,88 job=WAR lvl=75 nation=0
+char bob zone=UpperJeuno pos=-95,-1.7,88 job=WAR lvl=75 nation=0
+char cat zone=UpperJeuno pos=-95,-1.7,88 job=WAR lvl=75 nation=0
+char dan zone=UpperJeuno pos=-95,-1.7,88 job=WAR lvl=75 nation=0
+char eve zone=UpperJeuno pos=-95,-1.7,88 job=WAR lvl=75 nation=0
+mission Cop Dawn current
+charvar Mission[6][840]Status 7
+bob: mission Cop TheLastVerse current
+bob: item RajasRing
+cat: mission Cop TheLastVerse current
+cat: item SattvaRing
+dan: mission Cop TheLastVerse current
+dan: charvar Mission[6][840]firstRing 1
+eve: mission Cop TheLastVerse current
+login
+trigger _6s1                            # Status 7, firstRing 0: 204
+update 204 option=3                     # nothing
+update 204 option=4                     # the three rings
+finish option=4                         # nothing
+charvar Mission[6][840]Status 4         # a GM
+trigger _6s1                            # Status 4: its own 124
+finish-if-event
+charvar Mission[6][840]Status 7         # a GM
+charvar Mission[6][840]Timer 1          # a GM
+trigger _6s1                            # Timer 1: 124
+finish-if-event
+eve: login
+eve: trigger _6s1                       # completed: 204
+eve: finish option=8                    # nothing
+eve: charvar Mission[6][840]firstRing 1
+eve: trigger _6s1                       # firstRing 1: 84
+eve: update 84 option=4
+eve: finish option=7                    # Tamas Ring; firstRing 0
+eve: trigger _6s1                       # a ring held: 124
+eve: finish-if-event
+bob: login
+bob: trigger _6s1                       # Rajas Ring held: 124
+bob: finish-if-event
+cat: login
+cat: trigger _6s1                       # Sattva Ring held: 124
+cat: finish-if-event
+dan: login
+dan: fill-inventory
+dan: trigger _6s1                       # 84
+dan: finish option=5                    # full: 6546; firstRing stays
+dan: free-inventory
+dan: trigger _6s1                       # 84
+dan: finish option=6                    # Sattva Ring; firstRing 0

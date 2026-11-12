@@ -1,0 +1,62 @@
+# Desires of Emptiness (CoP 5-2) played through. A level 75 Warrior of San d'Oria with 5-2 current (a GM; Status 0):
+# Promyvion - Vahzl's three Memory Fluxes each pop their Notorious Monster (ON_NM_SPAWN) and play their cutscene (51
+# Propagator, 52 Solicitor, 53 Ponderer) once it is dead; the Propagator's flux (_0mc) also gives message 7235 (no 5-2
+# reply) while its NM lives and after its cutscene; the last cutscene's finish sets Status 1. Pso'Xja's _i99 with all
+# six Option bits plays 112 (finished with option 1: set down at the Promyvion's first portal). Spire of Vahzl's zone-in
+# at Status 1: 20 (finished: Status 2); at Status 2: nothing; at Status 0 (a GM): 21 (finished: set down in Promyvion -
+# Vahzl). At Status 3 (a GM, the fight's win) Beaucedine Glacier's zone-in: 206 (its update answers with the amulet;
+# finished: Status 4); Leigon-Moigon, Potete and Torino-Samarino play 212, 213 and 211. Metalworks' Cid: 850; finished:
+# the mission completes. Pso'Xja's _i99 then plays 112 whatever the Option (finished with option 2; the trace has no
+# position change after it, so the set-down at the second portal is pinned by a fake check).
+lists PromyvionVahzl/_0mc/onTrigger PromyvionVahzl/_0md/onTrigger PromyvionVahzl/_0m0/onTrigger PromyvionVahzl/Propagator/onMobDeath PromyvionVahzl/Solicitor/onMobDeath PromyvionVahzl/Ponderer/onMobDeath PromyvionVahzl/onEventFinish/51 PromyvionVahzl/onEventFinish/52 PromyvionVahzl/onEventFinish/53 Psoxja/_i99/onTrigger Psoxja/onEventFinish/112 SpireOfVahzl/onZoneIn/1 SpireOfVahzl/onEventFinish/20 SpireOfVahzl/onEventFinish/21 BeaucedineGlacier/Leigon-Moigon/onTrigger BeaucedineGlacier/Potete/onTrigger BeaucedineGlacier/Torino-Samarino/onTrigger BeaucedineGlacier/onZoneIn/1 BeaucedineGlacier/onEventUpdate/206 BeaucedineGlacier/onEventFinish/206 Metalworks/Cid/onTrigger Metalworks/onEventFinish/850
+char zone=PromyvionVahzl pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop DesiresOfEmptiness current
+login
+trigger _0mc                            # Propagator's flux, bit 0 unset, not spawned: it pops
+tick 2000
+trigger _0mc                            # spawned: no 5-2 reply (7235)
+finish-if-event
+kill PROPAGATOR                         # bit 0
+trigger _0mc                            # bit 0 set, bit 3 unset: 51
+finish                                  # bit 3
+trigger _0mc                            # both set: no 5-2 reply (7235)
+finish-if-event
+trigger _0md                            # Solicitor's flux: it pops
+tick 2000
+kill SOLICITOR                          # bit 1
+trigger _0md                            # 52
+finish                                  # bit 4
+trigger _0m0                            # Ponderer's flux: it pops
+tick 2000
+kill PONDERER                           # bit 2
+trigger _0m0                            # 53
+finish                                  # bit 5: Status 1
+warp -380,46,330.5 Psoxja
+trigger _i99                            # all six bits: 112
+finish option=1                         # set down at the first portal
+tick 10000
+warp -14.7,0,-119.7 PromyvionVahzl
+warp 0,0,0 SpireOfVahzl                 # Status 1: 20, finished: Status 2
+warp 0,0,0 PromyvionVahzl
+warp 0,0,0 SpireOfVahzl                 # Status 2: no zone-in event
+charvar Mission[6][518]Status 0
+warp 0,0,0 PromyvionVahzl
+warp 0,0,0 SpireOfVahzl                 # Status 0: 21, finished: set down in Promyvion - Vahzl
+tick 10000
+warp -14.7,0,-119.7 PromyvionVahzl
+charvar Mission[6][518]Status 3         # a GM: the fight won
+warp -340,-100.2,140 BeaucedineGlacier open                  # Status 3: 206, left open
+update 206 option=0                     # updateEvent(0, the amulet)
+finish                                  # Status 4
+trigger Leigon-Moigon                   # Status 4: 212
+finish-if-event
+trigger Potete                          # 213
+finish-if-event
+trigger Torino-Samarino                 # 211
+finish-if-event
+warp -12,-12,1 Metalworks
+trigger Cid                             # Status 4: 850
+finish                                  # the mission completes
+warp -380,46,330.5 Psoxja
+trigger _i99                            # completed: 112
+finish option=2                         # no position change in the trace (a fake check pins the set-down)

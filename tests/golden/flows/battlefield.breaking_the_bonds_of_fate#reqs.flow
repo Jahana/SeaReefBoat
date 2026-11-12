@@ -1,0 +1,65 @@
+# Breaking the Bonds of Fate (battlefield.breaking_the_bonds_of_fate#reqs, Talacca Cove): six chars at _1l0, each
+# refused with NO_BATTLEFIELD_ENTRY 7376 (the framework's entry hooks) and no menu. Main (a level 75 Corsair at level
+# cap 75, Breaking the Bonds of Fate accepted at Quest[6][41]Prog 1 (GMs), one Corsair's Testimony): a trigger with no
+# trade (a testimony fight's registrant must trade): 7376, then the door's default (DefaultActions.lua messageSpecial
+# -1, shown as 32767); a trade of the Puppetmaster's Testimony (not the required item): 7376. Each other trades a
+# Corsair's Testimony, all else as main: bob a level 65 Corsair (the level alone); cat at Quest[6][41]Prog 2 (the var
+# alone: the registrant's must be 1); dan with the quest available (the quest alone); eve with it completed (a
+# registrant's must be accepted); fay a level 75 Warrior (the job alone).
+lists TalaccaCove/_1l0/onTrade TalaccaCove/_1l0/onTrigger TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000
+char zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char bob zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=65
+char cat zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char dan zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char eve zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+char fay zone=TalaccaCove pos=-98.5,-9.399,-87 job=WAR lvl=75
+levelcap 75
+quest AhtUrhgan.AgainstAllOdds completed
+quest AhtUrhgan.BreakingTheBondsOfFate accepted
+charvar Quest[6][41]Prog 1
+item CorsairsTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.AgainstAllOdds completed
+bob: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+bob: charvar Quest[6][41]Prog 1
+bob: item CorsairsTestimony
+cat: levelcap 75
+cat: quest AhtUrhgan.AgainstAllOdds completed
+cat: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+cat: charvar Quest[6][41]Prog 2
+cat: item CorsairsTestimony
+dan: levelcap 75
+dan: quest AhtUrhgan.AgainstAllOdds completed
+dan: charvar Quest[6][41]Prog 1
+dan: item CorsairsTestimony
+eve: levelcap 75
+eve: quest AhtUrhgan.AgainstAllOdds completed
+eve: quest AhtUrhgan.BreakingTheBondsOfFate completed
+eve: charvar Quest[6][41]Prog 1
+eve: item CorsairsTestimony
+fay: levelcap 75
+fay: quest AhtUrhgan.AgainstAllOdds completed
+fay: quest AhtUrhgan.BreakingTheBondsOfFate accepted
+fay: charvar Quest[6][41]Prog 1
+fay: item CorsairsTestimony
+item PuppetmastersTestimony
+login
+bob: login
+cat: login
+dan: login
+eve: login
+fay: login
+trigger _1l0
+finish-if-event
+trade _1l0 PuppetmastersTestimony x1
+finish-if-event
+bob: trade _1l0 CorsairsTestimony x1
+bob: finish-if-event
+cat: trade _1l0 CorsairsTestimony x1
+cat: finish-if-event
+dan: trade _1l0 CorsairsTestimony x1
+dan: finish-if-event
+eve: trade _1l0 CorsairsTestimony x1
+eve: finish-if-event
+fay: trade _1l0 CorsairsTestimony x1
+fay: finish-if-event

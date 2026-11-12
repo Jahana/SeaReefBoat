@@ -1,0 +1,41 @@
+# The Rescue Drill (San d'Oria 2-1), Ambrotien's route and Deaufrain's sword. A level 10 Warrior of San d'Oria, rank 2
+# with 1-1, 1-2 and 1-3 completed (GMs; Resonance current keeps RoV 1-1 out). Section 1: Ambrotien's script plays 2009;
+# its finish with option 3 begins the mission (Southern San d'Oria's 2009). Section 2, status 0: Ambrotien plays
+# ORIGINAL_MISSION_OFFSET + 36. La Theine Plateau, status 8 with the Option var 3 (GMs): Equesobillot and Galaihaurat
+# answer RESCUE_DRILL + 21; Deaufrain plays 113: the Bronze Sword, status 9. Status 9: Deaufrain answers +25,
+# Equesobillot and Galaihaurat +26. Ordelles Caves: the sword traded to Ruillont: 2, whose finish takes it, status 10.
+# Status 10: Ambrotien answers ORIGINAL_MISSION_OFFSET + 36; Vicorpasse 115: the certificate, status 11. Ambrotien at
+# status 11: 2005, whose finish completes the mission and takes the certificate.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/2005 LaTheinePlateau/Deaufrain/onTrigger LaTheinePlateau/Equesobillot/onTrigger LaTheinePlateau/Galaihaurat/onTrigger LaTheinePlateau/Vicorpasse/onTrigger LaTheinePlateau/onEventFinish/113 LaTheinePlateau/onEventFinish/115 OrdellesCaves/Ruillont/onTrade OrdellesCaves/onEventFinish/2
+char zone=SouthernSanDoria pos=93.4,0,-55.5 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+rank 2
+login
+trigger Ambrotien                       # section 1: his script's 2009
+finish option=3                         # begun
+trigger Ambrotien                       # section 2, status 0: ORIGINAL_MISSION_OFFSET + 36
+warp -304,28,339 LaTheinePlateau
+missionstatus Sandoria 8                # a GM
+charvar Mission[0][3]Option 3           # a GM
+trigger Equesobillot                    # Option 3, not 2: RESCUE_DRILL + 21
+trigger Galaihaurat                     # Option 3, not 1: RESCUE_DRILL + 21
+trigger Deaufrain                       # Option 3: 113
+finish                                  # the Bronze Sword, status 9
+trigger Deaufrain                       # status 9, Option 3: RESCUE_DRILL + 25
+trigger Equesobillot                    # not Option 2: RESCUE_DRILL + 26
+trigger Galaihaurat                     # not Option 1: RESCUE_DRILL + 26
+warp -70,1,607 OrdellesCaves
+walk -71,1,607
+trade Ruillont BronzeSword x1           # status 9: 2
+finish                                  # the sword taken, status 10
+warp 93.4,0,-55.5 SouthernSanDoria
+trigger Ambrotien                       # status 10: ORIGINAL_MISSION_OFFSET + 36
+warp -344,37,266 LaTheinePlateau
+trigger Vicorpasse                      # status 10: 115
+finish                                  # the certificate, status 11
+warp 93.4,0,-55.5 SouthernSanDoria
+trigger Ambrotien                       # status 11: 2005
+finish                                  # completed (300 rank points), the certificate taken

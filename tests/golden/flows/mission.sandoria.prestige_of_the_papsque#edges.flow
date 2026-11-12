@@ -1,0 +1,39 @@
+# Prestige of the Papsque edges. qm4 at status 0: nothing, an event release; at status 1: spawned (7907); Dvogzog
+# killed at status 2: no Stage; qm4 at status 2: nothing. _6fc at status 2 without the tablet: nothing from the
+# mission, the default ITS_LOCKED (11558).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/_6fc/onTrigger NorthernSanDoria/onEventFinish/7 NorthernSanDoria/onEventFinish/8 WestRonfaure/qm4/onTrigger
+char zone=WestRonfaure pos=-693,-40,21 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque current
+rank 7
+login
+trigger qm4                             # status 0: nothing
+finish-if-event
+missionstatus Sandoria 1
+trigger qm4                             # status 1: spawned
+missionstatus Sandoria 2
+kill MARAUDER_DVOGZOG                   # status 2: nothing
+tick 15000
+tick 15000
+trigger qm4                             # status 2: nothing
+finish-if-event
+warp 129,-11,121 NorthernSanDoria
+trigger _6fc                            # status 2, no tablet: nothing from the mission
+finish-if-event

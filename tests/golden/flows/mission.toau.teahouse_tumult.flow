@@ -1,0 +1,24 @@
+# Teahouse Tumult (ToAU 20). Naja 3091. A warp into the Aydeewa Subterrane at Status 0: the zone-in event 10,
+# finished: Status 1. A rezone. The Subterrane's blank NPC at Status 0: nothing; at Status 1: 11, finished: completed.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AydeewaSubterrane/blank_toau20/onTrigger AydeewaSubterrane/onZoneIn/1 AydeewaSubterrane/onEventFinish/10 AydeewaSubterrane/onEventFinish/11
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau TeahouseTumult current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem
+finish-if-event
+warp -299.891,36.977,-39.022 AydeewaSubterrane open
+finish
+rezone
+missionstatus Toau 0
+trigger blank_toau20
+finish-if-event
+missionstatus Toau 1
+trigger blank_toau20
+finish

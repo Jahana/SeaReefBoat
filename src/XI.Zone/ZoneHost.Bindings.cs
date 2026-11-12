@@ -810,13 +810,18 @@ namespace XI.Zone
         {
             int log = l.ToEnumArg(2), mission = (ushort)l.ToIntArg(3);
             if (Pc(l, "hasCompletedMission") is not CharData c) return Ret(l, false);
+            return Ret(l, CompletedMission(c, log, mission));
+        }
+
+        private bool CompletedMission(CharData c, int log, int mission)
+        {
             if (log < 0 || log >= MaxMissionArea || mission >= MaxMissionId)
             {
                 log_($"lua: hasCompletedMission: missionLogID {log} or Mission {mission} is invalid");
-                return Ret(l, false);
+                return false;
             }
-            bool complete = log == MissionLogCoP || mission >= 64 ? mission < c.MissionCurrent(log) : c.MissionComplete(log, mission);
-            return Ret(l, complete);
+            if (log == MissionLogCoP || mission >= 64) return mission < c.MissionCurrent(log);
+            return c.MissionComplete(log, mission);
         }
 
         // ---- position, teleports, home point ----------------------------------------------------------------------

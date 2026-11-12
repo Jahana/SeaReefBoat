@@ -1,0 +1,26 @@
+# Ancient Flames Beckon, Spire of Holla, areas 2 and 3. Below the Arks current (a GM). Area 2 (option 2): the arena's
+# Wreaker is WREAKER + 5; killed: WON; 32001 (the area 2), finished: the light of Holla. The light gone and Below
+# the Arks current again (GMs): area 3 (option 3): WREAKER + 10; 32001 (area 3).
+lists SpireOfHolla/_0h0/onTrigger SpireOfHolla/onEventUpdate/32000 SpireOfHolla/onEventFinish/32000 SpireOfHolla/onEventFinish/32001
+char zone=SpireOfHolla pos=0,-3.8,-240 job=WAR lvl=75 nation=0
+mission Cop BelowTheArks current
+login
+trigger _0h0                            # the menu 32000
+update 32000 option=2                   # area 2: entered
+finish                                  # in the arena
+tick 2000                               # area 2's Wreaker spawns
+kill WREAKER+1                     # allDeath: WON; 32001
+finish                                  # the light of Holla, 1-2 complete
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield
+delkeyitem LightOfHolla                   # a GM
+warp 334,19,-60 LaTheinePlateau
+warp 0,-3.8,-240 SpireOfHolla
+trigger _0h0                            # the menu 32000
+update 32000 option=3                   # area 3: entered
+finish                                  # in the arena
+tick 2000                               # area 3's Wreaker spawns
+kill WREAKER+2                    # allDeath: WON; 32001
+finish                                  # the light of Holla, 1-2 complete
+tick 11000
+tick 10000

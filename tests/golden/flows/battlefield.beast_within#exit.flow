@@ -1,0 +1,39 @@
+# The Beast Within (battlefield.beast_within#exit, Jade Sepulcher): a level 75 Blue Mage at level cap 75, The Beast
+# Within accepted at Quest[6][40]Prog 2 (GMs), one Blue Mage's Testimony. Entered (area 1, 33) by the testimony:
+# TESTIMONY_WEARS (3 shown, 2 left). _1v1: 32003; option 0 stays; _1v1 again, option 4: out. 10 s; a warp back to _1v0;
+# in again: TESTIMONY_WEARS (2 shown, 1 left: wear 2); _1v2, option 4: out. 10 s, back, in again: TESTIMONY_WEARS (1
+# shown, 0 left: wear 3); _1v3, option 4: out. 10 s, back; the fourth trade: TESTIMONY_IS_TORN 7396 with the item (worn
+# 3 of 3, xi.battlefield.itemUses), no menu.
+lists JadeSepulcher/_1v0/onTrade JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/_1v1/onTrigger JadeSepulcher/_1v2/onTrigger JadeSepulcher/_1v3/onTrigger JadeSepulcher/onEventFinish/32003
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+levelcap 75
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Transformations completed
+quest AhtUrhgan.TheBeastWithin accepted
+charvar Quest[6][40]Prog 2
+item BlueMagesTestimony
+login
+trade _1v0 BlueMagesTestimony x1
+update 32000 option=33
+finish
+trigger _1v1
+finish option=0
+trigger _1v1
+finish option=4
+tick 10000
+warp 300,-2.517,-198.5 JadeSepulcher
+trade _1v0 BlueMagesTestimony x1
+update 32000 option=33
+finish
+trigger _1v2
+finish option=4
+tick 10000
+warp 300,-2.517,-198.5 JadeSepulcher
+trade _1v0 BlueMagesTestimony x1
+update 32000 option=33
+finish
+trigger _1v3
+finish option=4
+tick 10000
+warp 300,-2.517,-198.5 JadeSepulcher
+trade _1v0 BlueMagesTestimony x1

@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if xi.cs.mission(player, npc, 'mission.bastok.geological_survey', 'onTrigger') then
+    if xi.cs.mission(player, npc, 'mission.rov.the_endless_sky', 'onTrigger') then
         return true
     end
 
@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    return xi.cs.missionEvent(player, npc, 'mission.bastok.geological_survey', csid, option)
+    return xi.cs.missionEvent(player, npc, 'mission.rov.the_endless_sky', csid, option)
 end
 
 return entity

@@ -1,0 +1,241 @@
+# golden trace: battlefield.desires_of_emptiness#reqs
+seed 7
+flow 80b7c0c44e88f3a0b4f71af724c93f9d19388069f50a535835766605f6736027
+recorder lua
+lua-at fd8fadf74223c29a2cdaf2e46769fa948b101e30
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @4e49118c553686f8 (167)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @3e907948536df038 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @e18f0bdcaca17885 (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @4cdbd8051d2399ff (7)
+char_stats @aed604d3dea413a4 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+char_vars @c3d47ee9d1e73d0c (1)
+chars @9f0c32ea2e7b689c (41)
+ret onZoneIn=number:4294967295
+order 23/_0n0/onTrigger=default,Battlefield[864]
+order 23/onEventUpdate/32000=Battlefield[864]
+order 23/onEventFinish/32000=Battlefield[864]
+order 23/onEventFinish/32001=Battlefield[864],Mission[6][518]
+step charvar Mission[6][518]Status 1
+packets
+char_mission_state - area=6|current=518|status=0|completed_mask=0|progress={"518:Status":2}
+char_mission_state + area=6|current=518|status=0|completed_mask=0|progress={"518:Status":1}
+char_vars - varname=Mission[6][518]Status|value=2|expiry=0
+char_vars + varname=Mission[6][518]Status|value=1|expiry=0
+step trigger _0n0
+packets
+  00E @5bc545ca6e464c0c
+  00E @c000ddc32d62eeef
+  02A @4a8ce54f4653f9f4
+  02A @3b569082454d58d4
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step finish-if-event
+packets
+step charvar Mission[6][518]Status 3
+packets
+char_mission_state - area=6|current=518|status=0|completed_mask=0|progress={"518:Status":1}
+char_mission_state + area=6|current=518|status=0|completed_mask=0|progress={"518:Status":3}
+char_vars - varname=Mission[6][518]Status|value=1|expiry=0
+char_vars + varname=Mission[6][518]Status|value=3|expiry=0
+step trigger _0n0
+packets
+  02A @4a8ce54f4653f9f4
+  02A @3b569082454d58d4
+  052 @992a1d6976db40ee
+ret onTrigger=number:0
+step finish-if-event
+packets
+step charvar Mission[6][518]Status 2
+packets
+char_mission_state - area=6|current=518|status=0|completed_mask=0|progress={"518:Status":3}
+char_mission_state + area=6|current=518|status=0|completed_mask=0|progress={"518:Status":2}
+char_vars - varname=Mission[6][518]Status|value=3|expiry=0
+char_vars + varname=Mission[6][518]Status|value=2|expiry=0
+step trigger _0n0
+packets
+  034 @57576437fbe1b3e9
+  0DF @e86c6ce1bb1d2923
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step update 32000 option=1
+packets
+  029 @97e9cb903261af09
+  02A @ad9bb6910a6a4f66
+  02A @3084ac1755dbb9bb
+  02A @f4fa816dd3fa6dba
+  075 @008ac95fc5c2c20d
+  05C @e5f125711b13fe4e
+  05D @3e1dc80a22aa8f07
+  052 @3c1f8adddcc5ad8a
+  0DF @e86c6ce1bb1d2923
+  037 @a57009c371eb897f
+ret onEventUpdate=nil:nil
+step finish
+packets
+  0DF @e86c6ce1bb1d2923
+  037 @97b8e55bcaa93193
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step tick 2000
+packets
+  037 @97b8e55bcaa93193
+  067 @8c71f583e5e03d94
+  063 @2735a70cc45da34f
+char_effects + effectid=143|icon=143|power=99|tick=0|duration=0|subid=0|subpower=0|tier=0|flags=142606848|timestamp=1799999998|sourcetype=0|sourcetypeparam=0|originid=0
+char_effects + effectid=254|icon=254|power=864|tick=0|duration=0|subid=$char|subpower=1|tier=1|flags=143130624|timestamp=1799999998|sourcetype=0|sourcetypeparam=0|originid=0
+chars - pos_rot=64
+chars - pos_x=-0.039
+chars - pos_y=-2.049
+chars - pos_z=293.64
+chars + pos_rot=0
+chars + pos_x=1.5
+chars + pos_y=-3.812
+chars + pos_z=243.999
+step kill AGONIZER
+packets
+  00E @54c9f47adf5f6aed
+  00E @3ac7dc6ea41765ff
+  00E @07649ea2e699a98b
+  00E @202d8ab2ff8315cd
+  00E @fc3ca360a8ffd1cb
+  00E @4852fa4ecc435469
+  058 @45ae1667ca0fd18c
+  0DF @e86c6ce1bb1d2923
+  037 @f2c4d670b433fabf
+  028 @44aa36bd72a5fea1
+  0DF @e86c6ce1bb1d2923
+  037 @97b8e55bcaa93193
+  029 @9860832a7a2eeaeb
+chars - pos_x=1.5
+chars - pos_y=-3.812
+chars - pos_z=243.999
+chars + pos_x=-247
+chars + pos_y=60.75
+chars + pos_z=0
+ret afterZoneIn=nil:nil,onMobDeath=nil:nil
+step kill AGONIZER+1
+packets
+  029 @7515480cc889d064
+  00E @0de538de0cb3ef09
+  029 @7515480cc889d064
+  029 @7515480cc889d064
+  029 @860d17fa9046fa7e
+  028 @0467304c7fe4499b
+  0DF @2404866ff39a5cf2
+  037 @611cedff05b3121f
+  029 @7515480cc889d064
+  058 @af3050145646f6c5
+  0DF @2404866ff39a5cf2
+  037 @e4c50cb072768d26
+  028 @0d51a4d18eb97725
+  028 @1f9d20e1cb16c59b
+  0DF @c4fcff8aaa61e434
+  037 @5623aecca878854d
+  00E @d15cfed49585a03e
+  0DF @c4fcff8aaa61e434
+  037 @f22ea0e0b7f5b8fb
+  029 @585e82c9d57c65d4
+char_skills + skillid=29|value=4|rank=7
+chars - pos_x=-247
+chars + pos_x=-237
+ret onMobDeath=nil:nil
+step kill AGONIZER+6
+packets
+  029 @3b8c696fd9b4d37b
+  029 @86e186ca0328ba6a
+  028 @08572ab5e07e88ee
+  0DF @4a5bf08a503a5901
+  037 @82e1d13f7fa262ae
+  029 @3b8c696fd9b4d37b
+  00E @84c82548ca965677
+  029 @3b8c696fd9b4d37b
+  029 @3b8c696fd9b4d37b
+  028 @fa95bc8a2b616207
+  0DF @aba6e65b05aeb258
+  037 @2a2e8975657f1471
+  058 @57d2d15630fd7d8e
+  0DF @aba6e65b05aeb258
+  037 @b0228c33e2009435
+  038 @ab746b430f2ce7bf
+  028 @c78be697ee2ce87a
+  028 @0467304c7fe4499b
+  0DF @c9928ab000222a64
+  037 @503d6afbd8f4704c
+  0DF @c9928ab000222a64
+  037 @811f06c51d4eb424
+  034 @1652ac39c4d6ce53
+  0DF @c9928ab000222a64
+  037 @cea2a541b248f579
+  00E @8f8b6ef342c54459
+char_skills - skillid=29|value=4|rank=7
+char_skills + skillid=29|value=5|rank=7
+chars - pos_x=-237
+chars - pos_y=60.75
+chars - pos_z=0
+chars + pos_x=-241.441
+chars + pos_y=60.574
+chars + pos_z=-2.216
+step charvar Mission[6][518]Status 1
+packets
+char_mission_state - area=6|current=518|status=0|completed_mask=0|progress={"518:Status":2}
+char_mission_state + area=6|current=518|status=0|completed_mask=0|progress={"518:Status":1}
+char_vars - varname=Mission[6][518]Status|value=2|expiry=0
+char_vars + varname=Mission[6][518]Status|value=1|expiry=0
+step finish
+packets
+  061 @bd4d2d6043524b19
+  02D @097776706876a666
+  061 @8310f4ee492726bb
+  0DF @c9928ab000222a64
+  037 @811f06c51d4eb424
+  052 @3c1f8adddcc5ad8a
+char_exp - war=0
+char_exp + war=1500
+char_stats - hp=3000
+char_stats - mp=50
+char_stats - title=0
+char_stats + hp=699
+char_stats + mp=0
+char_stats + title=355
+char_vars + varname=Battlefield[864]XP|value=1800025200|expiry=0
+chars titles +44:08
+ret onEventFinish=nil:nil
+step tick 11000
+packets
+  038 @4eec086b467efeb1
+  038 @ab746b430f2ce7bf
+  038 @4eec086b467efeb1
+  038 @0f1bbe19361dfc6c
+  038 @390f534e0db56c3b
+  038 @0ebaabc08a44c316
+  038 @59650130c7d14eba
+  038 @44a5d2d2777cc6aa
+  075 @5825a9e20f61dab9
+step tick 10000
+packets
+  037 @dea50c9201524bff
+  067 @8c71f583e5e03d94
+  063 @673317619739ebe8
+  00E @1f811760a113f825
+  038 @0f1bbe19361dfc6c
+  029 @dcca4e8371751500
+  061 @8310f4ee492726bb
+char_effects - effectid=143|icon=143|power=99|tick=0|duration=0|subid=0|subpower=0|tier=0|flags=142606848|timestamp=1799999998|sourcetype=0|sourcetypeparam=0|originid=0
+char_effects - effectid=254|icon=254|power=864|tick=0|duration=0|subid=$char|subpower=1|tier=1|flags=143130624|timestamp=1799999998|sourcetype=0|sourcetypeparam=0|originid=0
+ret onMobDeath=nil:nil

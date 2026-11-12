@@ -1,0 +1,39 @@
+# Magicite (San d'Oria 4-1) at status 3 with Option 2 set by a GM: Muckvix without the torch 80; Paya-Sabya nothing from
+# the mission at Option 2 (her default 79); Geebeh's default text; the Altar Room zone-in 10000 cancelled (1 << 30:
+# Option stays 2), played again and finished (Option 0), then no zone-in event; with the torch (a GM) Muckvix 79.
+lists RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/130 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/36 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=LowerJeuno pos=-26.8,4.6,-135 job=WAR lvl=50 nation=0
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite current
+charvar Mission[0][13]Option 2
+login
+missionstatus Sandoria 3
+trigger Muckvix                         # no torch, Option 2: 80
+finish-if-event
+warp 9,1,72 UpperJeuno
+trigger Paya-Sabya                      # Option 2: Paya-Sabya's default 79
+finish-if-event
+trigger Geebeh                          # Option 2: Geebeh's default text (7453)
+finish-if-event
+warp -342,25,43 AltarRoom open          # Option 2: 10000
+finish option=1073741824                # cancelled: Option stays 2
+warp 9,1,72 UpperJeuno
+warp -342,25,43 AltarRoom open          # Option 2: 10000 again
+finish                                  # Option 0
+warp 9,1,72 UpperJeuno
+warp -342,25,43 AltarRoom open          # Option 0: no zone-in event
+finish-if-event
+keyitem YagudoTorch
+warp -26.8,4.6,-135 LowerJeuno
+trigger Muckvix                         # the torch, Option 0: 79
+finish-if-event

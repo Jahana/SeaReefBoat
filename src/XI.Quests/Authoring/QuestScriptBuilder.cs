@@ -101,9 +101,12 @@ namespace XI.Quests.Authoring
         // quest runs while they hold (the state would have played); null when it is not removed
         public IReadOnlyList<QuestMatch> RemovedMatches { get; private set; }
 
-        // a copy with other matches, handlers and module marks, every other member kept (a member added later is copied too)
-        internal QuestStateDecl With(IReadOnlyList<QuestMatch> matches, IReadOnlyList<QuestHandlerDecl> handlers, QuestModuleInfo checkModule,
-                                     QuestModuleInfo removedBy, IReadOnlyList<QuestMatch> removedMatches)
+        // a copy with other matches, handlers and module marks, every other member kept (a member added later is copied
+        // too); missionMatches: a mission state's patched matches (null keeps them)
+        internal QuestStateDecl With(IReadOnlyList<QuestMatch> matches, IReadOnlyList<QuestHandlerDecl> handlers,
+                                     QuestModuleInfo checkModule, QuestModuleInfo removedBy,
+                                     IReadOnlyList<QuestMatch> removedMatches,
+                                     IReadOnlyList<MissionMatch> missionMatches = null)
         {
             var copy = (QuestStateDecl)MemberwiseClone();
             copy.Matches = matches;
@@ -111,6 +114,7 @@ namespace XI.Quests.Authoring
             copy.CheckModule = checkModule;
             copy.RemovedBy = removedBy;
             copy.RemovedMatches = removedMatches;
+            if (missionMatches != null) copy.MissionMatches = missionMatches;
             return copy;
         }
 
@@ -124,15 +128,18 @@ namespace XI.Quests.Authoring
 
         // a mission's state (quest rework C2, MissionScript): its matches, any one of which runs the section; empty for
         // a quest's state (whose matches are Matches)
-        public IReadOnlyList<MissionMatch> MissionMatches { get; }
+        public IReadOnlyList<MissionMatch> MissionMatches { get; private set; }
 
         // true when one MissionMatch matches the check's mission (q.Mission): whether the log's current mission is this
         // one (null = any), the log's status (null = any) and the guard (null = pass)
-        public bool IsMissionMatch(IQuestCheck q)
+        public bool IsMissionMatch(IQuestCheck q) => AnyMissionMatch(MissionMatches, q);
+
+        // the same over a list of matches (QuestOverrides.Apply: an overridden check's base)
+        internal static bool AnyMissionMatch(IReadOnlyList<MissionMatch> matches, IQuestCheck q)
         {
             var mission = q.Mission ??
                 throw new InvalidOperationException("a mission state is matched in a mission's check (q.Mission)");
-            foreach (var m in MissionMatches)
+            foreach (var m in matches)
             {
                 if (m.IsCurrent.HasValue && m.IsCurrent.Value != mission.IsCurrent) continue;
                 if (m.Status.HasValue && m.Status.Value != mission.Status) continue;

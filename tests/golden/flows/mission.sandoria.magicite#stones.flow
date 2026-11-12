@@ -1,0 +1,51 @@
+# Magicite (San d'Oria 4-1) at status 3, the stones set by a GM one by one: _6r9 with two of the three: nothing from the
+# mission (its file answers nil there), _6r9's own 138; Aldo with any stone: 183; the three stones and the Airship Pass:
+# _6r9 60 (1, 0), whose finish takes the stones, gives 20000 gil, the title and status 4.
+lists RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/130 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/36 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=RuludeGardens pos=-32,9,-47 job=WAR lvl=50 nation=0
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite current
+keyitem MagiciteAurastone
+keyitem MagiciteOrastone
+keyitem AirshipPass
+login
+missionstatus Sandoria 3
+trigger _6r9                            # the Optistone missing: nothing from the mission
+finish-if-event
+keyitem MagiciteOptistone
+delkeyitem MagiciteAurastone
+trigger _6r9                            # the Aurastone missing: nothing from the mission
+finish-if-event
+keyitem MagiciteAurastone
+delkeyitem MagiciteOrastone
+trigger _6r9                            # the Orastone missing: nothing from the mission
+finish-if-event
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # the Optistone and the Aurastone: 183
+finish-if-event
+delkeyitem MagiciteOptistone
+trigger Aldo                            # the Aurastone alone: 183
+finish-if-event
+delkeyitem MagiciteAurastone
+keyitem MagiciteOrastone
+trigger Aldo                            # the Orastone alone: 183
+finish-if-event
+keyitem MagiciteOptistone
+delkeyitem MagiciteOrastone
+trigger Aldo                            # the Optistone alone: 183
+finish-if-event
+keyitem MagiciteAurastone
+keyitem MagiciteOrastone
+warp -32,9,-47 RuludeGardens
+trigger _6r9                            # the three stones and the pass: 60 (1, 0)
+finish                                  # the stones taken, 20000 gil, the title, status 4

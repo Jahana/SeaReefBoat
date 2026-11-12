@@ -1,0 +1,39 @@
+# Ark Angels: other battlefieldWin values at the 32001 finish (a GM). Main's 0 (index -288) gives no shard but, all five
+# held, completes the mission; bob's 294 (index 6) gives no shard and, two held, nothing.
+lists Norg/Gilgamesh/onTrigger TheShrineOfRuavitau/blank_divine_might/onTrigger TheShrineOfRuavitau/onEventFinish/53 LaloffAmphitheater/onEventFinish/32001
+char zone=LaloffAmphitheater pos=-603.563,-22.681,483.937 job=WAR lvl=99 nation=0
+char bob zone=LaloffAmphitheater pos=-603.563,-22.681,483.937 job=WAR lvl=99 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ArkAngels current
+keyitem ShardOfCowardice
+keyitem ShardOfEnvy
+keyitem ShardOfArrogance
+keyitem ShardOfRage
+bob: mission Asa BurgeoningDread current
+bob: mission Acp ACrystallineProphecyFin current
+bob: mission Rov ARhapsodyForTheAges current
+bob: mission Soa Abomination current
+bob: mission Zilart ArkAngels current
+bob: keyitem ShardOfCowardice
+bob: keyitem ShardOfEnvy
+login
+bob: login
+invite bob
+bob: accept
+missionstatus Zilart 1                  # a GM
+bob: missionstatus Zilart 1             # a GM
+trigger qm1_1
+update 32000 option=1                   # index 0, area 1: entered
+finish
+bob: trigger qm1_1
+bob: update 32000 option=1
+bob: finish
+bfwin                                   # a GM: WON, 32001 to both
+localvar battlefieldWin 0               # a GM
+keyitem ShardOfApathy                   # a GM
+finish                                  # index -288: no shard; all five held: completed
+bob: localvar battlefieldWin 294        # a GM: index 6
+bob: finish                             # no shard; two held: nothing

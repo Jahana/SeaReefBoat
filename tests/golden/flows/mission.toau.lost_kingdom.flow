@@ -1,0 +1,35 @@
+# Lost Kingdom (ToAU 13, mission.toau.lost_kingdom). A level 75 Warrior of Bastok with it current and the Vial of
+# Spectral Scent, in Aht Urhgan Whitegate: Naja 3071. Nashmau: Pyopyoroon 275. Caedarva Mire: Jazaraat's Headstone at
+# status 0: cutscene 8, finished: status 1; at status 1: Jazaraat spawned with its enmity on the char (no action); again
+# (spawned): nothing; Jazaraat killed: status 2; the headstone: cutscene 9, finished: the vial deleted, completed (the
+# Ephramadian Gold Coin, The Dolphin Crest current). Section 2 (completed): the headstone with the coin: the zone's
+# JAZARAATS_HEADSTONE message; without it (a GM took it): the coin given again.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger Nashmau/Pyopyoroon/onTrigger CaedarvaMire/Jazaraats_Headstone/onTrigger CaedarvaMire/Jazaraat/onMobDeath CaedarvaMire/onEventFinish/8 CaedarvaMire/onEventFinish/9
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau LostKingdom current
+keyitem VialOfSpectralScent
+login
+trigger Naja_Salaheem                   # 3071
+finish
+warp 22.112,0,20 Nashmau
+trigger Pyopyoroon                      # 275
+finish
+warp -385,6,-565 CaedarvaMire
+trigger Jazaraats_Headstone             # status 0, the vial: 8
+finish                                  # status 1
+trigger Jazaraats_Headstone             # status 1: Jazaraat spawned
+finish-if-event
+trigger Jazaraats_Headstone             # spawned: nothing
+finish-if-event
+kill JAZARAAT                           # status 2
+trigger Jazaraats_Headstone             # 9
+finish                                  # completed
+trigger Jazaraats_Headstone             # section 2, the coin held: the message
+finish-if-event
+delkeyitem EphramadianGoldCoin          # a GM
+trigger Jazaraats_Headstone             # the coin given again
+finish-if-event

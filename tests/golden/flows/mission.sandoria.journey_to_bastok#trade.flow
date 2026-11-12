@@ -1,0 +1,24 @@
+# Journey to Bastok in Metalworks with two Ounces of Mythril Sand and a Pickaxe held, Savae E Paleade. Status 4: a
+# trigger plays 208, from Savae's own script (any San d'Oria mission current), not the mission's; a trade of the sand
+# draws no reply. Status 5: two sands, the Pickaxe alone, and the sand with the Pickaxe each draw no reply (the trade
+# must be exactly one sand); one sand plays 205, whose finish takes one sand, completes Journey to Bastok, moves to
+# status 6 and begins Journey Abroad. At status 6 (a GM) a further sand draws no reply.
+lists Metalworks/Grohm/onTrigger Metalworks/Pius/onTrigger Metalworks/Savae_E_Paleade/onTrade Metalworks/onEventFinish/205 Metalworks/onEventFinish/355 Metalworks/onEventFinish/423 Metalworks/onEventFinish/425
+char zone=Metalworks pos=-18,-11,-27 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria JourneyToBastok current
+item OnzOfMythrilSand x2
+item Pickaxe
+login
+missionstatus Sandoria 4
+trigger Savae_E_Paleade
+finish-if-event
+trade Savae_E_Paleade OnzOfMythrilSand x1
+missionstatus Sandoria 5
+trade Savae_E_Paleade OnzOfMythrilSand x2
+trade Savae_E_Paleade Pickaxe x1
+trade Savae_E_Paleade OnzOfMythrilSand x1 Pickaxe x1
+trade Savae_E_Paleade OnzOfMythrilSand x1
+finish
+missionstatus Sandoria 6
+trade Savae_E_Paleade OnzOfMythrilSand x1

@@ -1,0 +1,22 @@
+# Path of Blood (ToAU 37), then Stirrings of War current with the Timer in the future: after a zone tick the
+# area 5 plays nothing (the area handler runs and answers nil).
+lists AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventUpdate/3131 AhtUrhganWhitegate/onEventFinish/3131 AhtUrhganWhitegate/onZoneIn/1 AhtUrhganWhitegate/onEventFinish/3220 AhtUrhganWhitegate/onTriggerAreaEnter/5
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PathOfBlood current
+login
+tick 1000
+tick 1000
+tick 1000
+walk 34.7,-6.6,-54.1                  # area 3: 3131
+update 3131 option=0
+finish                                  # Status 1, the forced zone
+tick 1000
+login open
+finish                                  # 3220: completed
+tick 5000
+walk 80,-6,-140
+walk 80,-6,-130                         # Stirrings of War, the Timer in the future: nothing (the area handler runs)

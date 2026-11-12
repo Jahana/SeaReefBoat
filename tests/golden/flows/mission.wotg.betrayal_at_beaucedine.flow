@@ -1,0 +1,23 @@
+# Betrayal at Beaucedine (WotG 19), the whole run. Regal Pawprints 2 at Status 0 plays 15 (finish: Status 1). At Status
+# 1 the trigger spawns Count Halphas (UNWANTED_ATTENTION, 8601); the next answers UNUSUAL_PRESENCE (8603). The kill sets
+# Status 2 (the gil drop is the kill's). At Status 2 the trigger plays 16 (finish: Status 3); the next tick shows its
+# set-down, the char at -15.036 -40.355 -219.202 rot 189 and zoning 1. The zone-in at Status 3 plays 30 and its finish
+# completes the mission.
+lists BeaucedineGlacierS/Regal_Pawprints_2/onTrigger BeaucedineGlacierS/Count_Halphas/onMobDeath BeaucedineGlacierS/onZoneIn/1 BeaucedineGlacierS/onEventFinish/15 BeaucedineGlacierS/onEventFinish/16 BeaucedineGlacierS/onEventFinish/30
+char zone=BeaucedineGlacierS pos=-15.066,-40.249,-217.276 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg BetrayalAtBeaucedine current
+login
+trigger Regal_Pawprints_2                  # Status 0: 15
+finish                                     # Status 1
+trigger Regal_Pawprints_2                  # spawn
+trigger Regal_Pawprints_2                  # spawned
+kill #17334540
+trigger Regal_Pawprints_2                  # Status 2: 16
+finish                                     # Status 3
+tick 400
+login open                                 # 30
+finish                                     # completed

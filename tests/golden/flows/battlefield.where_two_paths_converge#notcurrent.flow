@@ -1,0 +1,36 @@
+# the Throne Room's Where Two Paths Converge (battlefield 161, Bastok 9-2's), no entry: no mission current, 9-2 at
+# status 0 and at status 2: _4l1 says NO_BATTLEFIELD_ENTRY.
+char zone=ThroneRoom pos=-108,-6,0 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+mission Bastok TheChainsThatBindUs completed
+mission Bastok EnterTheTalekeeper completed
+mission Bastok TheSaltOfTheEarth completed
+rank 9
+login
+trigger _4l1                            # no mission current: NO_BATTLEFIELD_ENTRY
+finish-if-event
+mission Bastok WhereTwoPathsConverge current
+trigger _4l1                            # status 0 (the registrant needs 1): NO_BATTLEFIELD_ENTRY
+finish-if-event
+missionstatus Bastok 2
+trigger _4l1                            # status 2: NO_BATTLEFIELD_ENTRY (7254)
+finish-if-event

@@ -1,0 +1,18 @@
+# Dawn (battlefield.dawn, Empyreal Paradox): enter area 1 (option 1), trigger the exit NPC Transcendental_Radiance:
+# the zone data's status is cutscene_only, so the engine refuses the trigger before any script runs (a lone release,
+# no 32003), and the update and the finish do nothing. The warp back to the entrance re-enters the battlefield area
+# (ENTERING_THE_BATTLEFIELD_FOR again); TR_Entrance: the menu.
+uncovered: exit:Transcendental_Radiance -- the three Transcendental_Radiance are cutscene_only (npcs.yaml:108,122,136): the engine refuses the trigger before any script, so Battlefield.onExitTrigger never runs
+lists EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/Transcendental_Radiance/onTrigger EmpyrealParadox/onEventUpdate/32000 EmpyrealParadox/onEventFinish/32000 EmpyrealParadox/onEventUpdate/32003 EmpyrealParadox/onEventFinish/32003
+char zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+mission Cop Dawn current
+charvar Mission[6][840]Status 1
+login
+trigger TR_Entrance
+update 32000 option=1
+finish
+trigger Transcendental_Radiance
+update 32003 option=1
+finish option=4
+warp 541.5,-1.2,-597.7 EmpyrealParadox
+trigger TR_Entrance

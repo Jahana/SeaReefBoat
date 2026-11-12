@@ -1,0 +1,18 @@
+# For Whom the Verse is Sung (CoP 6-1) played through. A level 75 Warrior of San d'Oria with 6-1 current (a GM; Status
+# 0): Ru'Lude Gardens' Pherimociel plays 10046 (finished: Status 1), then 10052 (finished: nothing changes). Upper
+# Jeuno's Marble Bridge door (_6s1) plays 10011 (finished: Status 2). Ru'Lude Gardens' zone-in at Status 2: 10047
+# (finished: the mission completes, 6-2 current). Pherimociel then plays 155, the default (6-2 has no Status 0 reply).
+lists RuludeGardens/Pherimociel/onTrigger RuludeGardens/onZoneIn/1 RuludeGardens/onEventFinish/10046 RuludeGardens/onEventFinish/10047 UpperJeuno/_6s1/onTrigger UpperJeuno/onEventFinish/10011
+char zone=RuludeGardens pos=-31.6,2,66 job=WAR lvl=75 nation=0
+mission Cop ForWhomTheVerseIsSung current
+login
+trigger Pherimociel                     # Status 0: 10046
+finish                                  # Status 1
+trigger Pherimociel                     # Status 1: 10052
+finish
+warp -97,-1.7,90 UpperJeuno
+trigger _6s1                            # Status 1: 10011
+finish                                  # Status 2
+warp -31.6,2,66 RuludeGardens           # Status 2: 10047, finished: 6-2 current
+trigger Pherimociel
+finish-if-event

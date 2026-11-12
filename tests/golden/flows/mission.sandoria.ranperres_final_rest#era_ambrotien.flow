@@ -1,0 +1,41 @@
+# Ranperre's Final Rest at Ambrotien with the era module (mission_adjustments, RESTRICT_CONTENT 1, SoA off: its SoA
+# case patches San d'Oria 6-2 section 2 (sections[2], .State(2)): 1036's finish: the base and the
+# Timer; zoned with the Timer: the module's
+# 1038; after JST midnight: the base's 1040, status 5.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/1033 SouthernSanDoria/onEventFinish/1034 SouthernSanDoria/onEventFinish/1035 SouthernSanDoria/onEventFinish/1036 SouthernSanDoria/onEventFinish/1039 SouthernSanDoria/onEventFinish/1040 NorthernSanDoria/onEventFinish/1033 NorthernSanDoria/onEventFinish/1035 NorthernSanDoria/onEventFinish/1039 ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/Perfaumand/onTrigger ChateauDoraguille/onEventFinish/21 ChateauDoraguille/onEventFinish/81 KingRanperresTomb/_5a0/onTrigger KingRanperresTomb/Tombstone_Lower/onTrigger KingRanperresTomb/onEventFinish/5 KingRanperresTomb/onEventFinish/6 KingRanperresTomb/onEventFinish/8
+module modules/era/lua/missions/mission_adjustments.lua
+char zone=SouthernSanDoria pos=95,0,-57 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest current
+rank 6
+keyitem PieceOfPaper
+keyitem AncientSanDorianBook
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+login
+missionstatus Sandoria 3
+trigger Ambrotien                       # the book: 1036
+finish                                  # base: book taken, requiredToZone, status 4; module: Timer to JST midnight
+warp -240,7,58 NorthernSanDoria
+warp 95,0,-57 SouthernSanDoria
+trigger Ambrotien                       # status 4, zoned, Timer: the module's 1038
+finish
+wait jst=1                              # the Timer expired
+trigger Ambrotien                       # status 4, no Timer: the base, zoned: 1039/1040
+finish                                  # status 5

@@ -1,0 +1,58 @@
+# Doll of the Dead (Windurst 9-1, mission.windurst.doll_of_the_dead), the arms the play-through skips: the Warden at
+# status 4 (speech, trade 13 too), another item, at 3; the zone-ins at the other statuses; _6q2 at 1, Yoran-Oran at 6,
+# Apururu 621 at 6 again and nothing at 2.
+char zone=TheBoyahdaTree pos=81.981,7.593,141.5 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+mission Windurst Vain completed
+mission Windurst TheJesterWhodBeKing completed
+rank 9
+mission Windurst DollOfTheDead current
+item ClumpOfGoobbueHumus
+item FireCrystal
+login
+missionstatus Windurst 4
+trigger Mandragora_Warden               # status 4: WARDEN_SPEECH, WARDEN_TRANSLATION
+finish-if-event
+trade Mandragora_Warden FireCrystal x1  # another item: nothing from the mission
+finish-if-event
+trade Mandragora_Warden ClumpOfGoobbueHumus x1  # status 4: 13
+finish                                  # status 6, the letter
+missionstatus Windurst 3
+trigger Mandragora_Warden               # status 3: nothing from the mission
+finish-if-event
+missionstatus Windurst 2
+warp 2,0,30 HeavensTower
+warp 2,0,30 HeavensTower                # status 2: no zone-in event
+missionstatus Windurst 1
+trigger _6q2                            # status 1: nothing from the mission
+finish-if-event
+missionstatus Windurst 6
+warp -301.3,9.5,-260.0 FullMoonFountain # status 6: no zone-in event
+warp -108,-14,203.3 WindurstWalls
+trigger Yoran-Oran                      # status 6: nothing from the mission
+finish-if-event
+warp -9,-2,13 WindurstWoods
+trigger Apururu                         # status 6: 621
+finish
+missionstatus Windurst 2
+trigger Apururu                         # status 2: nothing from the mission
+finish-if-event

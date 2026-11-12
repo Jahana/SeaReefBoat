@@ -1,0 +1,93 @@
+# Magicite (Windurst 4-1, mission.windurst.magicite) played through: a level 50 Windurstian at rank 4 with the 2152 rank
+# points, ACP and RoV current (their zone-ins quiet) and the nation's missions before it completed. Pakh Jatalfih 50
+# (progress; it outranks A New Journey's 54 replaceDefault), the door _6r8 131 (0): begun at status 1 with
+# YOU_ACCEPT_THE_MISSION and the permit. Pakh Jatalfih 134, _6r9 128 (the Letter to Aldo, status 2); Pakh Jatalfih's own
+# 103 (the alternation after the event 134), 137. Aldo 152 (0, 1) (status 3, the Silver Bell); the key item hunt as
+# Bastok's (Paya-Sabya 80 and 23, the Altar Room zone-in 10000, the three Magicite and their own messages); Pakh
+# Jatalfih 137, _6r9 60 (0, 0): status 4. Status 4: Aldo 183, Pakh Jatalfih 37 (progress): completed (rank 5, 10000 gil,
+# the Message to Jeuno). Completed: Pakh Jatalfih's own 57 (the message held).
+lists RuludeGardens/_6r8/onTrigger RuludeGardens/Pakh_Jatalfih/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/131 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/37 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=RuludeGardens pos=34,9,-33 job=WAR lvl=50 nation=2
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+rank 4 points=2152
+login
+trigger Pakh_Jatalfih                   # section 1, the rank points met: 50 (progress)
+finish
+trigger _6r8                            # 131 (0: no permit)
+finish option=1                         # begun, status 1, YOU_ACCEPT_THE_MISSION, the permit
+trigger Pakh_Jatalfih                   # status 1: 134
+finish-if-event
+trigger _6r9                            # status 1: 128 (progress)
+finish                                  # status 2, the Letter to Aldo
+trigger Pakh_Jatalfih                   # the alternation after 134: Pakh Jatalfih's own
+finish-if-event
+trigger Pakh_Jatalfih                   # status 2: 137
+finish-if-event
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # status 2, no bell: 152 (0, 1)
+finish                                  # status 3, the letter taken, the Silver Bell given
+trigger Aldo                            # no stone: 161
+finish-if-event
+trigger Muckvix                         # no torch, Option 0: 80
+finish-if-event
+warp 9,1,72 UpperJeuno
+trigger Geebeh                          # Option 0: Geebeh's default text (7453)
+finish-if-event
+trigger Paya-Sabya                      # Option 0: 80 (progress)
+finish                                  # Option 1
+trigger Geebeh                          # Option 1, no torch: WITHER_AND_DIE
+finish-if-event
+trigger Paya-Sabya                      # Option 1: 23
+finish-if-event
+warp -26.8,4.6,-135 LowerJeuno
+trigger Muckvix                         # Option 1: 184
+finish                                  # the Yagudo Torch, Option 2
+trigger Muckvix                         # the torch, Option 2: 81
+finish-if-event
+warp 9,1,72 UpperJeuno
+trigger Paya-Sabya                      # the torch: Paya-Sabya's default 79
+finish-if-event
+trigger Geebeh                          # the torch: Geebeh's default text (7453)
+finish-if-event
+warp -342,25,43 AltarRoom open          # Option 2: 10000
+finish                                  # Option 0
+trigger Magicite                        # no stone: 44 (152)
+finish                                  # the Orastone
+trigger Magicite                        # the Orastone held: its own message (7126)
+finish-if-event
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # a stone held: 183
+finish-if-event
+warp -158,-8,8 MonasticCavern
+trigger Magicite                        # the Orastone alone: 0 (150)
+finish                                  # the Optistone
+trigger Magicite                        # the Optistone held: its own message (7291)
+finish-if-event
+warp 13,25,-81 QulunDome
+trigger Magicite                        # the Optistone and the Orastone: 0 (1, 46, 47)
+finish                                  # the Aurastone
+trigger Magicite                        # the Aurastone held: its own message (7275)
+finish-if-event
+warp 34,9,-33 RuludeGardens
+trigger Pakh_Jatalfih                   # status 3: 137
+finish-if-event
+trigger _6r9                            # the three stones, no pass: 60 (0, 0)
+finish                                  # the stones taken, the Airship Pass, the title, status 4
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # status 4: 183
+finish-if-event
+warp 34,9,-33 RuludeGardens
+trigger Pakh_Jatalfih                   # status 4: 37 (progress)
+finish                                  # completed: rank 5, 10000 gil, the Message to Jeuno
+trigger Pakh_Jatalfih                   # completed: his own 57 (the message held)
+finish-if-event

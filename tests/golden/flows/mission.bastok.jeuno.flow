@@ -1,0 +1,26 @@
+# Jeuno (Bastok 3-3, mission.bastok.jeuno). A level 30 Warrior of Bastok in Metalworks, 3-2 completed (none current).
+# Malduc's own script plays the gate guards' mission list 1001; its finish with option 0 does nothing, with option 12
+# begins the mission and says YOU_ACCEPT_THE_MISSION. Malduc 1002; Lucius 322, whose finish gives the Letter to the
+# Ambassador and sets status 1; at status 1 Lucius answers his own default 320.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Lucius/onTrigger Metalworks/Malduc/onTrigger Metalworks/onEventFinish/322 Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 RuludeGardens/_6r2/onTrigger RuludeGardens/Goggehn/onTrigger RuludeGardens/onEventFinish/38 RuludeGardens/onEventFinish/41 LowerDelkfuttsTower/_542/onTrade LowerDelkfuttsTower/_542/onTrigger LowerDelkfuttsTower/onEventFinish/1
+char zone=Metalworks pos=66,-15,4 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+login
+trigger Malduc                          # section 1: 1001
+finish option=0                         # not 12: nothing
+trigger Malduc
+finish option=12                        # begun
+trigger Malduc                          # 1002
+finish-if-event
+trigger Lucius                          # 322
+finish                                  # status 1, the letter to the ambassador
+trigger Lucius                          # status 1: nothing from the mission
+finish-if-event

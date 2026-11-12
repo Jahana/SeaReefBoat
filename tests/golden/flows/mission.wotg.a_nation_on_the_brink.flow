@@ -1,0 +1,38 @@
+# A Nation on the Brink (WotG 14), the whole run. The Bulwark Gate plays 6 and its finish gives key item 1063 (Underpass
+# Hatch Key, message 6398); with the key held the gate answers SURRENDER_CEREMONY_HASTE (8488), then DOOR_FIRMLY_SEALED
+# (7740) on the next trigger. The Underpass Hatch plays 3 (finish: status 1). With a GM status 2 the zone-in plays 4, an
+# update (option 1) sends the update packet [0, 0, 1756] and the finish sets status 3. The zone-ins at statuses 3, 4 and
+# 5 play 20, 21 and 22 and each finish moves the status on; 22's finish gives item 184 and completes the mission
+# (Crossroads of Time current). Finish 4's set-down shows at the next tick: the 00B zone-out and the char at 399.999 8.3
+# -269.999 rot 159. Finishes 20 and 21 set the char down on that same spot, so their ticks show only the 00B zone-out
+# and zoning 1.
+uncovered: 1/-/onEventFinish:10000 -- no flow statement starts 10000 here: the harness has no instance run; the finish (status 2 and the set-down) is pinned by the fake check c3 T6 wotg in tests/XI.Verify.Quests/C3ToauT6.cs
+lists SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/onEventFinish/6 BatalliaDownsS/Underpass_Hatch/onTrigger BatalliaDownsS/onZoneIn/1 BatalliaDownsS/onEventUpdate/4 BatalliaDownsS/onEventFinish/3 BatalliaDownsS/onEventFinish/4 BatalliaDownsS/onEventFinish/20 BatalliaDownsS/onEventFinish/21 BatalliaDownsS/onEventFinish/22 BatalliaDownsS/_qm5/onTrigger BatalliaDownsS/onEventFinish/5
+char zone=SauromugueChampaignS pos=-447.174,-1.831,342.417 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg ANationOnTheBrink current
+login
+trigger Bulwark_Gate                    # 6
+finish                                  # the Underpass Hatch Key
+trigger Bulwark_Gate                    # the key held: SURRENDER_CEREMONY_HASTE
+trigger Bulwark_Gate                    # again: once per zone
+warp 314.083,-1.16,-181.455 BatalliaDownsS
+trigger Underpass_Hatch                 # 3
+finish                                  # status 1
+missionstatus Wotg 2
+tick 400
+login open                              # status 2: 4
+update 4 option=1
+finish                                  # status 3; setPos
+tick 400
+login open                              # status 3: 20
+finish                                  # status 4; setPos
+tick 400
+login open                              # status 4: 21
+finish                                  # status 5; setPos
+tick 400
+login open                              # status 5: 22
+finish                                  # completed; the Jeunoan Flag

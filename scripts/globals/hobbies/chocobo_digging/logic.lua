@@ -5,7 +5,6 @@
 -----------------------------------
 require('scripts/globals/hobbies/chocobo_digging/data')
 require('scripts/globals/hobbies/chocobo_raising/whistle')
-require('scripts/globals/roe')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 xi = xi or {}

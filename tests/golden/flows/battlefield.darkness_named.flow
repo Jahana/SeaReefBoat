@@ -1,0 +1,18 @@
+# Darkness Named (battlefield.darkness_named, Memento Circle: a BattlefieldMission, index 0, 30 minutes, six players,
+# entry NPC MC_Entrance). A level 75 Warrior of San d'Oria with Darkness Named current at Status 4 (GMs): the menu
+# 32000; area 1 (option 1): entered; finished. At the first tick Diabolos and the six Diremites of area 1 spawn.
+# Diabolos killed: allDeath sets WON; the win: battlefieldWin, 32001; finished: the Transient Dreamer and Dreambreaker
+# titles, 1000 XP, and the mission's 32001 handler sets Status 5.
+lists TheShroudedMaw/MC_Entrance/onTrigger TheShroudedMaw/onEventUpdate/32000 TheShroudedMaw/onEventFinish/32000 TheShroudedMaw/onEventFinish/32001
+char zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop DarknessNamed current
+charvar Mission[6][358]Status 4
+login
+trigger MC_Entrance                     # the menu 32000
+update 32000 option=1                   # area 1: entered
+finish                                  # in the arena
+tick 2000                               # Diabolos and the Diremites spawn
+kill DIABOLOS                           # allDeath: WON; 32001
+finish                                  # Status 5
+tick 11000
+tick 10000

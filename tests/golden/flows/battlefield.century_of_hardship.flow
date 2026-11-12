@@ -1,0 +1,156 @@
+# A Century of Hardship (battlefield.century_of_hardship, Mine Shaft #2716): a level 99 Warrior (Ragnarok, Great Sword
+# skill 4240, a Bronze Dagger in the bag) with Three Paths current and Louverance 8 (a GM). _0d0: the 32000 menu
+# (0,0,0,1). Updates: 0 released; 16 and 4: REQS_NOT_MET (5); 1 (area 1): registered, entered:
+# ENTERING_THE_BATTLEFIELD_FOR 7610, MEMBERS_OF_YOUR_PARTY 7384 (6), TIME_LIMIT_FOR_THIS_BATTLE_IS 7387 (30), the 05C
+# (2,0,0,1800); onBattlefieldEnter adds the DEATH listener. Perfect Dodge, Invincible and Elemental Sforzo given (GM
+# effects: the char lives); the first tick: the battlefield's effects 143 (Level Restriction 99) and 254 (Battlefield
+# 736). BUGBBY claimed: in the 3 s ticks onBattlefieldTick's 90% arm starts the command cycle (nextCommandTime now +
+# 30-60 s); GetSystemTime moves on wait jst=1 only, so these ticks give no command. The Bronze Dagger equipped (Bugbby
+# kept alive); each wait jst=1 + tick passes nextCommandTime: the global timer picks an alive Moblin and
+# handleMoblinCommand runs: the Moblin's command line (base + type - 1: Movamuq 7828, Chekochuk 7836, Trikotrak 7844,
+# Swipostik 7852) and Bugbby's accept (7859-7864) in that tick. Type 1 disengages Bugbby onto the Moblin's target. Type
+# 2 arms heavyWhisk: step 43 Swipostik's 7853 accepted, Bugbby readies (028 category 7) at step 47, Heavy Whisk 358 at
+# step 49. Type 3 arms mightyStrikes: step 37 Chekochuk's 7838 accepted, Mighty Strikes 688 at step 41
+# (usedMightyStrikes set). A refusal (20%, or Mighty Strikes asked again: step 47's 7838, forceRefusal) arms
+# bugbearRefusal and moblinInsult: at the next tick (step 49) Bugbby's 7865/7866 and the Moblin's insult (base + 3,
+# 7839), its refusal skill readied at the next tick or the one after and used a tick later (step 49's Goblin Dice: ready
+# at 51, 1102 at 53; Goblin Dice 1102-1108, Frypan 1081, Smokebomb 1082, Bomb Toss 591). After each Bomb Toss (steps 61,
+# 75, 81) Swipostik.lua's own WEAPONSKILL_STATE_EXIT listener (not this script) shows its table's reaction lines at the
+# next tick (steps 63, 77, 83: 02A 7867, 7833, 7849, 7841). The Moblins' spells (Dia, Disease, Blindness, Shock) land on
+# the char and the effect rows are re-saved with the moved clock. Ragnarok back on, MOVAMUQ claimed: Movamuq's
+# job_special mixin uses Benediction 689 at step 108; at step 112 Movamuq.lua's onMobFight (50% HP) has set
+# triggerMoblinCommand and the tick's HP-threshold arm runs handleMoblinCommand: 7828 and Bugbby's 7859. The four
+# Moblins killed; a wait jst=1 + tick: no Moblin alive, no command. BUGBBY killed: allDeath sets WON; 32001
+# (1,1800,0,238,13: area 1, no record yet, 238 s inside). Finished: the battlefield's onEventFinishWin (XP 1000: war 0
+# -> 1000, the Battlefield[736]XP var at the next JST midnight), then Three Paths' Mine Shaft 32001
+# (mission.cop.three_paths, C#; battlefieldWin set by the win) moves Louverance 8 to 9. 11 s: 075 (out); 10 s: the
+# effects 143 and 254 removed.
+uncovered: callback:deadBugbearReaction -- dead code: handleMoblinCommand arms it only when Bugbby is not alive, and both of its callers (onBattlefieldTick's HP-threshold and timer arms) run after the tick's own return when Bugbby is nil or not alive, in the same tick, with only local vars, mob mods, behaviour, a look, a message and the first command's disengage and updateEnmity (no damage, no state change) between
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/onEventUpdate/32000 MineShaft2716/onEventFinish/32000 MineShaft2716/onEventFinish/32001
+char zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=99 nation=1
+mission Cop ThreePaths current
+item Ragnarok75
+item BronzeDagger
+skill GreatSword 4240
+login
+missionstatus Cop 8 pos=2
+equip Ragnarok75 Main
+trigger _0d0
+update 32000 option=0
+update 32000 option=16
+update 32000 option=4
+update 32000 option=1
+finish
+effect 49
+effect 50
+effect 522
+tick 2000
+claim BUGBBY
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+equip BronzeDagger Main
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+wait jst=1
+tick 3000
+equip Ragnarok75 Main
+claim MOVAMUQ
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+kill MOVAMUQ
+kill CHEKOCHUK
+kill TRIKOTRAK
+kill SWIPOSTIK
+wait jst=1
+tick 3000
+kill BUGBBY
+finish
+tick 11000
+tick 10000

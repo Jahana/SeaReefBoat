@@ -1,0 +1,24 @@
+# Appointment to Jeuno section 1 in Northern San d'Oria. The login plays SoA's Rumors from the West zone-in 878 (that
+# mission's event, not this one's). Grilau's own 1009; option 250 nothing, option 12 begins the mission. Status 0:
+# ORIGINAL_MISSION_OFFSET + 74. Status 2: Grilau's own 1001.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Arsha/onTrigger ChateauDoraguille/Chupaile/onTrigger ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h4/onTrigger ChateauDoraguille/onEventFinish/508 ChateauDoraguille/onEventFinish/537 RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/onEventFinish/39 RuludeGardens/onEventFinish/42 LowerDelkfuttsTower/_541/onTrade LowerDelkfuttsTower/_541/onTrigger LowerDelkfuttsTower/onEventFinish/0
+char zone=NorthernSanDoria pos=-240,8,57 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+login
+trigger Grilau                          # section 1: 1009
+finish option=250                       # not 12: nothing
+trigger Grilau
+finish option=12                        # begun
+trigger Grilau                          # ORIGINAL_MISSION_OFFSET + 74
+finish-if-event
+missionstatus Sandoria 2
+trigger Grilau                          # status 2: nothing from the mission
+finish-if-event

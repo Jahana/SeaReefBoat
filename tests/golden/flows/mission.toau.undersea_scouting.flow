@@ -1,0 +1,24 @@
+# Undersea Scouting (ToAU 9, mission.toau.undersea_scouting). A level 75 Warrior of Bastok with it current, in Aht
+# Urhgan Whitegate: Naja 3051, the Option var cycling 1, 0, 1 (the dialog operand). Alzadaal Undersea Ruins: trigger
+# area 23 (394 -1 -619 .. 487 1 -540): 1 (the mercenary rank, 0), finished: completed, the Astral Compass, Astral
+# Waves current.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AlzadaalUnderseaRuins/onTriggerAreaEnter/23 AlzadaalUnderseaRuins/onEventFinish/1
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau UnderseaScouting current
+login
+trigger Naja_Salaheem                   # Option 0: dialog 1
+finish
+trigger Naja_Salaheem                   # dialog 0
+finish
+trigger Naja_Salaheem                   # dialog 1
+finish
+warp 400,0,-500 AlzadaalUnderseaRuins
+tick 1000
+tick 1000
+tick 1000
+walk 420,0,-580                         # area 23: 1
+finish                                  # completed

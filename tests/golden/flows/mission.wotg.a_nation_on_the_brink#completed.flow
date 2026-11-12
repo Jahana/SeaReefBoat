@@ -1,0 +1,24 @@
+# A Nation on the Brink (WotG 14) completed: the _qm5 reward. With Unclaimed 0 the _qm5 answers 6409 (DefaultActions).
+# With a GM Unclaimed 1 it plays 5; finish option 0 gives nothing, and Unclaimed stays; with the bag full option 1
+# answers ITEM_CANNOT_BE_OBTAINED (6387) and Unclaimed stays; with room option 1 gives item 184 and clears Unclaimed;
+# the next trigger answers 6409 again.
+lists SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/onEventFinish/6 BatalliaDownsS/Underpass_Hatch/onTrigger BatalliaDownsS/onZoneIn/1 BatalliaDownsS/onEventUpdate/4 BatalliaDownsS/onEventFinish/3 BatalliaDownsS/onEventFinish/4 BatalliaDownsS/onEventFinish/20 BatalliaDownsS/onEventFinish/21 BatalliaDownsS/onEventFinish/22 BatalliaDownsS/_qm5/onTrigger BatalliaDownsS/onEventFinish/5
+char zone=BatalliaDownsS pos=314.083,-1.16,-181.455 job=WAR lvl=99
+mission Wotg ANationOnTheBrink completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg CrossroadsOfTime current
+login
+trigger _qm5                            # Unclaimed 0
+charvar Mission[5][13]Unclaimed 1       # a GM
+trigger _qm5                            # 5
+finish option=0                         # no flag
+trigger _qm5                            # 5
+fill-inventory
+finish option=1                         # the bag full: Unclaimed stays
+free-inventory
+trigger _qm5                            # 5
+finish option=1                         # the flag; Unclaimed 0
+trigger _qm5                            # Unclaimed 0

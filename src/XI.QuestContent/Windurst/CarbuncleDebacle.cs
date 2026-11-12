@@ -21,7 +21,8 @@
 // the Wind Pendulum 87 (0, Wind Pendulum), with it 88 (no finish); 86's and 87's finish: a free slot: the pendulum
 // (addItem, ITEM_OBTAINED), the var 6; else ITEM_CANNOT_BE_OBTAINED.
 // The Cloister of Storms (the var 3 -> 4) and Cloister of Gales (6 -> 7, the charm taken) battlefield wins never name
-// the quest: they stay in Lua (their BattlefieldQuest entries read this quest's status there).
+// the quest: they are the battlefields' (Battlefields/CloisterOfStorms/CarbuncleDebacle.cs and CloisterOfGales/
+// CarbuncleDebacle.cs, onEventFinishWin), and their BattlefieldQuest entries read this quest's status.
 // A deliberate change from the Lua (user ruling 2026-11-04, kept Lua bugs): 416 wants the quest accepted at the var 1
 // or 2; the Lua's `accepted and progress == 1 or progress == 2` (no parentheses) played it at the var 2 in any status,
 // also ahead of 420.

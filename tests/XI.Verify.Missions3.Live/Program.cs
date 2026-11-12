@@ -1328,10 +1328,14 @@ internal static class Program
         EventEnd(3);
         // the finish's xi.maws.goToMaw(player, xi.zone.BATALLIA_DOWNS) passes a zone id where goToMaw wants a maw
         // table (maw.dest): the script's own error, after the mission's complete, caught by the interaction
-        // framework's handler pcall ("Error running handler")
+        // framework's handler pcall ("Error running handler") on Lua, by the C# handler runner on C# (quest rework C3
+        // T7: "quests: mission.wotg.edge_of_existence <handler>: ...")
+        bool MawError(string l) =>
+            (l.Contains("Error running handler") || l.Contains("quests: mission.wotg.edge_of_existence ")) &&
+            l.Contains("attempt to index local 'maw' (a number value)");
         Check("  Edge of Existence complete, Her Memories current; goToMaw's error (a zone id for the maw), the char left in place",
               $"40,0/True/{BatalliaDowns}",
-              $"{Mission(LogWotg)}/{log.Any(l => l.Contains("Error running handler") && l.Contains("attempt to index local 'maw' (a number value)"))}/{c.Zone}");
+              $"{Mission(LogWotg)}/{log.Any(MawError)}/{c.Zone}");
         Tick(400);
 
         Console.WriteLine("WotG 41 Her Memories (Operation Cupid, then Azure Footfalls with all four fragments)");

@@ -1,0 +1,35 @@
+# Vain (Windurst 8-1, mission.windurst.vain) with ASA Burgeoning Dread current (the kept Lua bug Vain.cs's header
+# names): a Windurstian at status 1 (a GM) leaves Windurst Woods for East Sarutabaruta unmounted; the zone-in raises
+# "attempt to index local 'action' (a number value)" (interaction_lookup.lua:351 indexing Vain's bare 52 after
+# Burgeoning Dread's event action) and no cutscene plays. From Outer Horutoto Ruins, Burgeoning Dread's zone-in is
+# quiet and Vain's 52 plays; its update from there sends nothing; the finish closes it.
+char zone=WindurstWoods pos=106,-5,-21 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+rank 8
+mission Windurst Vain current
+login
+missionstatus Windurst 1
+warp 1,0,1 EastSarutabaruta expect-error "attempt to index local 'action' (a number value)"   # from Windurst Woods
+warp 1,0,1 OuterHorutotoRuins           # Outer Horutoto Ruins
+warp 1,0,1 EastSarutabaruta open        # status 1: 52
+update 52 option=0                      # from Outer Horutoto, z 1: nothing
+finish

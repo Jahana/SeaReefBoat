@@ -1,0 +1,12 @@
+# Trial by Lightning (battlefield.trial_by_lightning): the requirement arms. Main, a level 75 Warrior with the quest accepted but no
+# Tuning Fork of Lightning: LP_Entrance: the key item check fails: no options: the default. bob, with the fork but the quest
+# only available: BattlefieldQuest's check (accepted or more) fails: the default.
+lists CloisterOfStorms/LP_Entrance/onTrigger
+char zone=CloisterOfStorms pos=533.5,-14.9,492.0 job=WAR lvl=75
+char bob zone=CloisterOfStorms pos=533.5,-14.9,492.0 job=WAR lvl=75
+quest OtherAreas.TrialByLightning accepted
+bob: keyitem TuningForkOfLightning
+login
+trigger LP_Entrance                     # accepted, no fork: no options
+bob: login
+bob: trigger LP_Entrance                # the fork, available: no options

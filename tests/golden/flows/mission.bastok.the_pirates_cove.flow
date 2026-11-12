@@ -1,0 +1,51 @@
+# The Pirate's Cove (Bastok 6-2, mission.bastok.the_pirates_cove) played through: a level 75 Bastokan at rank 6, ASA,
+# ACP, RoV and SoA current (their content quiet) and the nation's missions before it completed, with a Chunk of Adaman
+# Ore and a Frag Rock. Malduc's own 1001, option 17: begun, YOU_ACCEPT_THE_MISSION; current: EXTENDED_MISSION_OFFSET +
+# 3. Naji 761 (status 1); at status 1 nothing from the mission, the zone's default 700. Norg: Gilgamesh 98 (status 2);
+# at status 2 a trigger: nothing, an event release. Ifrit's Cauldron: the ore traded to qm4 at status 2: the two NMs
+# popped from the qm, the ore taken, BAD_FEELING_ABOUT_PLACE (7289). The Frag Rock traded to Gilgamesh: 99, the rock
+# taken, status 3. Naji 762: completed, 40000 gil, rank 7.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 Metalworks/Naji/onTrigger Metalworks/onEventFinish/761 Metalworks/onEventFinish/762 Norg/Gilgamesh/onTrigger Norg/Gilgamesh/onTrade Norg/onEventFinish/98 Norg/onEventFinish/99 IfritsCauldron/qm4/onTrade
+char zone=Metalworks pos=64,-15,4 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+rank 6
+item ChunkOfAdamanOre
+item FragRock
+login
+trigger Malduc                          # his own 1001
+finish option=17                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Malduc                          # current: EXTENDED_MISSION_OFFSET + 3
+finish-if-event
+trigger Naji                            # status 0: 761
+finish                                  # status 1
+trigger Naji                            # status 1: nothing from the mission
+finish-if-event
+warp 120.9,-8,-12 Norg
+trigger Gilgamesh                       # status 1: 98
+finish                                  # status 2
+trigger Gilgamesh                       # status 2: nothing from the mission
+finish-if-event
+warp 172.5,0,-25 IfritsCauldron
+trade qm4 ChunkOfAdamanOre x1           # status 2: the two NMs popped, BAD_FEELING_ABOUT_PLACE
+warp 120.9,-8,-12 Norg
+trade Gilgamesh FragRock x1             # status 2: 99
+finish                                  # the rock taken, status 3
+warp 64,-15,-2 Metalworks
+trigger Naji                            # status 3: 762
+finish                                  # completed: 40000 gil, rank 7

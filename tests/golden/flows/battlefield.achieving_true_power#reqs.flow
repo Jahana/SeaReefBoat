@@ -1,0 +1,71 @@
+# Achieving True Power (battlefield.achieving_true_power#reqs, Navukgo Execution Chamber): six chars at _1s0, each
+# refused with NO_BATTLEFIELD_ENTRY 7277 (the framework's entry hooks) and no menu. Main (a level 75 Puppetmaster at
+# level cap 75, Achieving True Power accepted at Quest[1][85]Prog 1 (GMs), one Puppetmaster's Testimony): a trigger
+# with no trade (a testimony fight's registrant must trade): 7277, then the door's default (DefaultActions.lua
+# messageSpecial -1, shown as 32767); a trade of the Blue Mage's Testimony (not the required item): 7277. Each other
+# trades a Puppetmaster's Testimony, all else as main: bob a level 65 Puppetmaster (the level alone); cat at
+# Quest[1][85]Prog 2 (the var alone: the registrant's must be 1); dan with the quest available (the quest alone); eve
+# with it completed (a registrant's must be accepted); fay a level 75 Warrior (the job alone).
+lists NavukgoExecutionChamber/_1s0/onTrade NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char bob zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=65
+char cat zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char dan zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char eve zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char fay zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+levelcap 75
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.PuppetmasterBlues completed
+quest Bastok.AchievingTruePower accepted
+charvar Quest[1][85]Prog 1
+item PuppetmastersTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.NoStringsAttached completed
+bob: quest AhtUrhgan.PuppetmasterBlues completed
+bob: quest Bastok.AchievingTruePower accepted
+bob: charvar Quest[1][85]Prog 1
+bob: item PuppetmastersTestimony
+cat: levelcap 75
+cat: quest AhtUrhgan.NoStringsAttached completed
+cat: quest AhtUrhgan.PuppetmasterBlues completed
+cat: quest Bastok.AchievingTruePower accepted
+cat: charvar Quest[1][85]Prog 2
+cat: item PuppetmastersTestimony
+dan: levelcap 75
+dan: quest AhtUrhgan.NoStringsAttached completed
+dan: quest AhtUrhgan.PuppetmasterBlues completed
+dan: charvar Quest[1][85]Prog 1
+dan: item PuppetmastersTestimony
+eve: levelcap 75
+eve: quest AhtUrhgan.NoStringsAttached completed
+eve: quest AhtUrhgan.PuppetmasterBlues completed
+eve: quest Bastok.AchievingTruePower completed
+eve: charvar Quest[1][85]Prog 1
+eve: item PuppetmastersTestimony
+fay: levelcap 75
+fay: quest AhtUrhgan.NoStringsAttached completed
+fay: quest AhtUrhgan.PuppetmasterBlues completed
+fay: quest Bastok.AchievingTruePower accepted
+fay: charvar Quest[1][85]Prog 1
+fay: item PuppetmastersTestimony
+item BlueMagesTestimony
+login
+bob: login
+cat: login
+dan: login
+eve: login
+fay: login
+trigger _1s0
+finish-if-event
+trade _1s0 BlueMagesTestimony x1
+finish-if-event
+bob: trade _1s0 PuppetmastersTestimony x1
+bob: finish-if-event
+cat: trade _1s0 PuppetmastersTestimony x1
+cat: finish-if-event
+dan: trade _1s0 PuppetmastersTestimony x1
+dan: finish-if-event
+eve: trade _1s0 PuppetmastersTestimony x1
+eve: finish-if-event
+fay: trade _1s0 PuppetmastersTestimony x1
+fay: finish-if-event

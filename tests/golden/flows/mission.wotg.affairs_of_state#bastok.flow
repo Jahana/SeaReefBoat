@@ -1,0 +1,17 @@
+# Affairs of State (WotG 12) with Bastok first. Radford at status 0: 175; finished: status 1. At status 1: 177 (the
+# reminder). Velda-Galda at status 1: 179; finished: the mission completes.
+lists WindurstWatersS/Velda-Galda/onTrigger WindurstWatersS/onEventFinish/178 WindurstWatersS/onEventFinish/179 BastokMarketsS/Radford/onTrigger BastokMarketsS/onEventFinish/175 BastokMarketsS/onEventFinish/176
+char zone=BastokMarketsS pos=-205.303,-8,26.874 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg AffairsOfState current
+login
+trigger Radford                         # status 0: 175
+finish                                  # status 1
+trigger Radford                         # status 1, Bastok first: 177
+finish-if-event
+warp 138.631,-2.112,61.658 WindurstWatersS
+trigger Velda-Galda                     # status 1: 179
+finish                                  # completed

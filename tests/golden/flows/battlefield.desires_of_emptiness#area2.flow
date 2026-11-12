@@ -1,0 +1,17 @@
+# Desires of Emptiness, area 2. A level 75 Warrior of San d'Oria with 5-2 current at Status 2 (a GM): the menu 32000;
+# area 2 (option 2): entered; its three Agonizers killed: WON, 32001, finished: Status 3.
+lists SpireOfVahzl/_0n0/onTrigger SpireOfVahzl/onEventUpdate/32000 SpireOfVahzl/onEventFinish/32000 SpireOfVahzl/onEventFinish/32001
+char zone=SpireOfVahzl pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop DesiresOfEmptiness current
+charvar Mission[6][518]Status 2
+login
+trigger _0n0                            # the menu 32000
+update 32000 option=2                  # index 0, area 2: entered
+finish                                  # in the arena
+tick 2000                               # the group spawns
+kill AGONIZER+7
+kill AGONIZER+8
+kill AGONIZER+13
+finish                                  # 32001: Status 3, set down in Beaucedine Glacier
+tick 11000
+tick 10000

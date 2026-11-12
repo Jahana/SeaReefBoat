@@ -1,0 +1,27 @@
+# Breaking the Bonds of Fate (battlefield.breaking_the_bonds_of_fate#testimony, Talacca Cove): a level 75 Corsair at
+# level cap 75, Breaking the Bonds of Fate accepted at Quest[6][41]Prog 1 (GMs), one Corsair's Testimony, with
+# modules/era/lua/globals/testimony_single_use.lua enabled by xi.pre(ABYSSEA) (RESTRICT_CONTENT 1, ENABLE_ABYSSEA 0): it
+# overrides Battlefield.onBattlefieldEnter. The testimony traded: the 32000 menu; 49 (area 1): registered, entered: wear
+# 0 -> 3 (testimony_single_use.lua:21-22 wears it to totalUses - 1 = 2, then its super at :26, the framework's
+# onBattlefieldEnter, once more) and TESTIMONY_WEARS 7397 (the item, 1 shown, 0 left), then the framework's other three
+# texts (without the module: 3 shown, 2 left, wear 1: #exit). Finished: in. _1l1, option 4: out. 10 s; a warp back to
+# _1l0; the testimony traded again: TESTIMONY_IS_TORN 7396 with the item, no menu.
+module modules/era/lua/globals/testimony_single_use.lua
+lists TalaccaCove/_1l0/onTrade TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/_1l1/onTrigger TalaccaCove/onEventFinish/32003
+char zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_ABYSSEA 0
+levelcap 75
+quest AhtUrhgan.AgainstAllOdds completed
+quest AhtUrhgan.BreakingTheBondsOfFate accepted
+charvar Quest[6][41]Prog 1
+item CorsairsTestimony
+login
+trade _1l0 CorsairsTestimony x1
+update 32000 option=49
+finish
+trigger _1l1
+finish option=4
+tick 10000
+warp -98.5,-9.399,-87 TalaccaCove
+trade _1l0 CorsairsTestimony x1

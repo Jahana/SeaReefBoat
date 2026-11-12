@@ -1,18 +1,17 @@
 # Class Reunion (windurst 82, SMN AF2): the door _6n2 and Koru-Moru (Windurst Walls), Shantotto, Fuepepe and
-# Furakku-Norakku, Gulmama (Northern San d'Oria). The Puppet Master completed by GM. SMN 75.
-# Turns: _6n2 (default DOORS_SEALED_SHUT), Koru-Moru (193), Fuepepe (423) and Furakku-Norakku (371) have a
-# Default-priority default and a script, so the lookup takes turns: the default's turn, the script's turn
-# (interaction_lookup.lua's UseFallback, per NPC, cleared by a zone change: a warp zones). A script that plays nothing
-# falls back to the default, and the next talk is the default's turn again. At Shantotto, Curses Foiled Again 1's
-# offer 171 (an Event, available to a fresh char) outranks her default 164 and takes the turns. Gulmama has no default
-# (her 710 is her script's). Back in Windurst Walls from Windurst Waters, a mission's zone-in event (514) plays.
-# 413 (option 0): begun, Carbuncle's Tear, var 1. Koru-Moru: the trade at var 1: nothing; 412: the tear taken, var 2;
-# 414; the trades: three Astragaloi, four with gil, four with another item: nothing (his script's check); four: 407
-# (the trade taken in its finish, var 3); four again at var 3: nothing; 408 (no student talked to). Shantotto 409:
-# var 4; again: nothing (171). Fuepepe 817; again: nothing. Koru-Moru 408 (Fuepepe only). Furakku-Norakku 816.
-# Gulmama 713: the Ice Pendulum, var 5. Koru-Moru at var 5 with both talked to: nothing of this quest (his default).
-# Var 6 (GM: the Cloister of Frost win stays Lua): 410 refused on a full inventory, then the spats, completed, the
-# vars 0, needToZone, fame 20. Completed: 411.
+# Furakku-Norakku, Gulmama (Northern San d'Oria). The Puppet Master completed by GM. SMN 75. Turns: _6n2 (default
+# DOORS_SEALED_SHUT), Koru-Moru (193), Fuepepe (423) and Furakku-Norakku (371) have a Default-priority default and a
+# script, so the lookup takes turns: the default's turn, the script's turn (interaction_lookup.lua's UseFallback, per
+# NPC, cleared by a zone change: a warp zones). A script that plays nothing falls back to the default, and the next talk
+# is the default's turn again. At Shantotto, Curses Foiled Again 1's offer 171 (an Event, available to a fresh char)
+# outranks her default 164 and takes the turns. Gulmama has no default (her 710 is her script's). Back in Windurst Walls
+# from Windurst Waters, a mission's zone-in event (514) plays. 413 (option 0): begun, Carbuncle's Tear, var 1.
+# Koru-Moru: the trade at var 1: nothing; 412: the tear taken, var 2; 414; the trades: three Astragaloi, four with gil,
+# four with another item: nothing (his script's check); four: 407 (the trade taken in its finish, var 3); four again at
+# var 3: nothing; 408 (no student talked to). Shantotto 409: var 4; again: nothing (171). Fuepepe 817; again: nothing.
+# Koru-Moru 408 (Fuepepe only). Furakku-Norakku 816. Gulmama 713: the Ice Pendulum, var 5. Koru-Moru at var 5 with both
+# talked to: nothing of this quest (his default). Var 6 (GM: the Cloister of Frost win, battlefield.class_reunion): 410
+# refused on a full inventory, then the spats, completed, the vars 0, needToZone, fame 20. Completed: 411.
 char zone=WindurstWalls pos=-24.5,-14.5,263.0 job=SMN lvl=75
 quest Windurst.ThePuppetMaster completed
 item Astragalos x11
@@ -83,7 +82,7 @@ trigger Koru-Moru                       # the default's turn: 193
 finish
 trigger Koru-Moru                       # var 5, both talked to: no arm (Root not accepted): 193
 finish
-charvar ClassReunionProgress 6          # GM: the Cloister of Frost win (class_reunion.lua, var-only) stays Lua
+charvar ClassReunionProgress 6          # GM: the Cloister of Frost win (battlefield.class_reunion)
 fill-inventory
 trigger Koru-Moru                       # the default's turn: 193
 finish

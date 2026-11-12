@@ -1,0 +1,37 @@
+# The Temple of Uggalepih: section 2 (another Zilart mission current, battlefieldWin the Temple). Main (the
+# mission current) and eve (completed, Headstone Pilgrimage current) enter area 1 and kill the three
+# Gravitons (by id): 32001 to both. A GM sets eve's battlefieldWin to 128; eve's finish gives the Bearer of
+# the Wisewoman's Hope title (section 2). Main's finish sets status 1 (section 1).
+# Each kill also counts EVERYONES_GRUDGE_KILLS for both (Everyone's Grudge, another script).
+lists Norg/Gilgamesh/onTrigger Kazham/Jakoh_Wahcondalo/onTrigger SacrificialChamber/onZoneIn/1 SacrificialChamber/onEventUpdate/7 SacrificialChamber/onEventUpdate/8 SacrificialChamber/onEventFinish/7 SacrificialChamber/onEventFinish/8 SacrificialChamber/_4j0/onTrigger SacrificialChamber/_4j0/onTrade SacrificialChamber/onEventUpdate/32000 SacrificialChamber/onEventFinish/32000 SacrificialChamber/onEventFinish/32001
+char zone=SacrificialChamber pos=299,0.1,349 job=WAR lvl=75 nation=0
+char eve zone=SacrificialChamber pos=299,0.1,349 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheTempleOfUggalepih current
+keyitem SacrificialChamberKey
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Zilart TheTempleOfUggalepih completed
+eve: mission Zilart HeadstonePilgrimage current
+login
+eve: login
+invite eve
+eve: accept
+trigger _4j0
+update 32000 option=1                   # index 0, area 1: entered
+finish
+eve: trigger _4j0
+eve: update 32000 option=1
+eve: finish
+tick 2000
+kill GRAVITON
+kill GRAVITON+1
+kill GRAVITON+2                         # all three dead: won, 32001 to both
+eve: localvar battlefieldWin 128        # a GM: the Temple's id
+eve: finish                             # section 2: the title
+finish                                  # main: status 1 (section 1)

@@ -1,0 +1,54 @@
+# Ranperre's Final Rest edges. _5a0 at status 0: the default HEAVY_DOOR (7331); at status 1: popped (7330); the three
+# killed at status 2: nothing; from inside (x <= -39.019) at status 2: the default 7331; Tombstone_Lower at status 2:
+# nothing, an event release; _5a0 at status 3 from outside: 6, its finish outside: no change. Chateau with the book:
+# Perfaumand at status 6: 50; _6h0 at status 6: the default ITS_LOCKED (7243); Perfaumand at status 2: his script's
+# 522.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/1033 SouthernSanDoria/onEventFinish/1034 SouthernSanDoria/onEventFinish/1035 SouthernSanDoria/onEventFinish/1036 SouthernSanDoria/onEventFinish/1039 SouthernSanDoria/onEventFinish/1040 NorthernSanDoria/onEventFinish/1033 NorthernSanDoria/onEventFinish/1035 NorthernSanDoria/onEventFinish/1039 ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/Perfaumand/onTrigger ChateauDoraguille/onEventFinish/21 ChateauDoraguille/onEventFinish/81 KingRanperresTomb/_5a0/onTrigger KingRanperresTomb/Tombstone_Lower/onTrigger KingRanperresTomb/onEventFinish/5 KingRanperresTomb/onEventFinish/6 KingRanperresTomb/onEventFinish/8
+char zone=KingRanperresTomb pos=-36,4.8,20 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest current
+rank 6
+keyitem PieceOfPaper
+login
+trigger _5a0                            # status 0: nothing
+finish-if-event
+missionstatus Sandoria 1
+trigger _5a0                            # status 1: popped
+missionstatus Sandoria 2
+kill CORRUPTED_YORGOS                   # status 2: nothing
+kill CORRUPTED_SOFFEIL                  # status 2: nothing
+kill CORRUPTED_ULBRIG                   # status 2: nothing
+walk -41,4.8,20
+trigger _5a0 here                       # status 2, x <= -39.019: nothing
+finish-if-event
+trigger Tombstone_Lower                 # status 2, no book: nothing
+finish-if-event
+missionstatus Sandoria 3
+trigger _5a0                            # status 3, x > -39.019: 6
+finish                                  # status 3: no change
+warp 2,0.1,0.1 ChateauDoraguille
+missionstatus Sandoria 6
+keyitem AncientSanDorianBook
+trigger Perfaumand                      # the book, status 6: 50
+finish
+trigger _6h0                            # status 6: nothing from the mission
+finish-if-event
+missionstatus Sandoria 2
+trigger Perfaumand                      # the book, status 2: nothing from the mission
+finish-if-event

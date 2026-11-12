@@ -1,0 +1,36 @@
+# Bat Hunt (San d'Oria 1-2): the sections that do not apply. Main, a level 10 Warrior of Bastok with an Orcish Scale
+# Mail, in Southern San d'Oria: Endracion: not a San d'Orian: no section 1 (his script plays 1011); the mail traded:
+# his script's 1010. bob, a level 10 Warrior of San d'Oria with Save the Children current (a GM): Endracion: 1-2's
+# sections fail (another mission current; Save the Children's 1025 plays); the mail traded: his script's 1008. carol, a
+# San d'Orian with Bat Hunt current at status 3 (a GM): 1-2's sections need status below 2 or exactly 2: none answers
+# (his script plays 1001); the mail traded: his script's 1008.
+lists SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/Endracion/onTrade
+char zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=1
+char bob zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=0
+char carol zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+bob: mission Rov Resonance current
+carol: mission Rov Resonance current
+bob: mission Sandoria SmashTheOrcishScouts completed
+carol: mission Sandoria SmashTheOrcishScouts completed
+bob: mission Sandoria SaveTheChildren current
+carol: mission Sandoria BatHunt current
+item OrcishMailScales
+bob: item OrcishMailScales
+carol: item OrcishMailScales
+login
+trigger Endracion                       # not a San d'Orian: no section: his script's 1011
+finish option=101
+walk -109.5,1,-34
+trade Endracion OrcishMailScales x1     # no section 3: his script's 1010
+bob: login
+bob: trigger Endracion                  # another mission current: Save the Children's own section
+bob: finish option=101
+bob: walk -109.5,1,-34
+bob: trade Endracion OrcishMailScales x1   # his script's 1008
+carol: login
+carol: missionstatus Sandoria 3         # a GM: neither below 2 nor 2
+carol: trigger Endracion                # no 1-2 section answers: his script's 1001
+carol: finish option=101
+carol: walk -109.5,1,-34
+carol: trade Endracion OrcishMailScales x1   # his script's 1008

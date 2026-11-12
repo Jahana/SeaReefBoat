@@ -1,0 +1,21 @@
+# When Wills Collide (WotG 46) without the Bottled Punch Bug: the Veridical Conflux plays the event 41 [89, 23, 1756]; a
+# Punch Bug trade plays 42 [76, 0, 1267351, 120, 0, 8323092]; its finish gives the key item (1730, message 6398) and
+# leaves the bug in the bag. A second Punch Bug trade, the key item held, gets no reply. The trigger now plays 29 [89,
+# 6]; its finish with option 0 sets nothing down.
+lists GraubergS/Veridical_Conflux/onTrigger GraubergS/Veridical_Conflux/onTrade GraubergS/onEventFinish/29 GraubergS/onEventFinish/42 WalkOfEchoes/_521/onTrigger WalkOfEchoes/onZoneIn/1 WalkOfEchoes/onEventUpdate/1 WalkOfEchoes/onEventUpdate/2 WalkOfEchoes/onEventFinish/1 WalkOfEchoes/onEventFinish/2
+char zone=GraubergS pos=-140.28,-6.749,585.24 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg WhenWillsCollide current
+item PunchBug
+login
+trigger Veridical_Conflux                  # no key item: 41
+finish
+walk -142.28,-6.749,586.74
+trade Veridical_Conflux PunchBug x1        # 42
+finish                                     # the key item; the bug kept
+trade Veridical_Conflux PunchBug x1        # the key item held: no 42
+trigger Veridical_Conflux                  # 29
+finish option=0                            # not 99: stays

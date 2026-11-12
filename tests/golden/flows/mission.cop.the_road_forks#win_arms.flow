@@ -1,0 +1,55 @@
+# The Road Forks, the Windurst path at other statuses (mission.cop.the_road_forks#win_arms). A level 75 Warrior of
+# Windurst with 3-3 current (a GM); the login plays the zone-in cutscene 871 and finishes it (Windurst status 1).
+# Windurst Waters, Windurst status 1: the zone-in: nothing; Honoi-Gomoi: nothing; Kyume-Romeh: nothing; Tosuka-Porika:
+# nothing; status 5: Ohbiru-Dohbiru: nothing; status 11: Kyume-Romeh and Honoi-Gomoi: nothing; status 12:
+# Ohbiru-Dohbiru: nothing. Windurst Walls, Yoran-Oran at status 1, 5, 9 and 11: 477 at 9 only. Port Windurst, Yujuju at
+# status 5 and 12: nothing. Attohwa Chasm, Cradle of Rebirth with no Jewel: nothing.
+lists WindurstWaters/onZoneIn/1 WindurstWaters/Honoi-Gomoi/onTrigger WindurstWaters/Kyume-Romeh/onTrigger WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/Tosuka-Porika/onTrigger WindurstWalls/Yoran-Oran/onTrigger PortWindurst/Yujuju/onTrigger AttohwaChasm/Cradle_of_Rebirth/onTrigger
+char zone=WindurstWaters pos=23,-5,-190 job=WAR lvl=75 nation=2
+mission Cop TheRoadForks current
+login
+missionstatus Cop 1 pos=1               # a GM
+warp 23,-5,-190 WindurstWaters          # the zone-in at status 1: nothing
+trigger Honoi-Gomoi                     # 1: nothing
+finish-if-event
+trigger Kyume-Romeh                     # 1: nothing
+finish-if-event
+trigger Tosuka-Porika                   # 1: nothing
+finish-if-event
+missionstatus Cop 5 pos=1               # a GM
+trigger Ohbiru-Dohbiru                  # 5: nothing
+finish-if-event
+missionstatus Cop 11 pos=1              # a GM
+trigger Kyume-Romeh                     # 11: nothing
+finish-if-event
+trigger Honoi-Gomoi                     # 11: nothing
+finish-if-event
+missionstatus Cop 12 pos=1              # a GM
+trigger Ohbiru-Dohbiru                  # 12: nothing
+finish-if-event
+warp -109.9,-14,203.3 WindurstWalls
+missionstatus Cop 1 pos=1               # a GM
+trigger Yoran-Oran                      # 1: nothing
+finish-if-event
+missionstatus Cop 5 pos=1               # a GM
+trigger Yoran-Oran                      # 5: nothing
+finish-if-event
+missionstatus Cop 9 pos=1               # a GM
+trigger Yoran-Oran                      # 9: 477
+finish-if-event
+missionstatus Cop 11 pos=1              # a GM
+trigger Yoran-Oran                      # 11: nothing
+finish-if-event
+warp 201.5,-4.7,139 PortWindurst
+missionstatus Cop 5 pos=1               # a GM
+trigger Yujuju                          # 5: nothing
+finish-if-event
+missionstatus Cop 12 pos=1              # a GM
+trigger Yujuju                          # 12: nothing
+finish-if-event
+warp 478.8,20,41.7 AttohwaChasm
+tick 1000
+tick 1000
+tick 1000
+trigger Cradle_of_Rebirth               # no Jewel: nothing
+finish-if-event

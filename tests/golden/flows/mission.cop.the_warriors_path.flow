@@ -1,0 +1,48 @@
+# The Warrior's Path (CoP 7-5) played through. A level 75 Warrior of San d'Oria (race 1) with 7-5 current (a GM;
+# Status 0), Mysterious Amulet (drained) and Light of Vahzl held (GMs). Sealion's Den's Sueleen: 28 (an event). _0w0
+# at Status 0: 32; update option 1: nothing; option 0: the update (32); finished: Status 1. _0w0 at Status 1: the
+# battlefield menu (The Warrior's Path, entered with 17); Tenzen killed: the battlefield's win at his 15% (he is
+# unkillable), 32001; its finish: the battlefield's titles The Chebukki's Worst Nightmare and Unquenchable Light,
+# and 7-5's own 32001 finish (battlefieldWin is The Warrior's Path, Status 1): Status 2; the battlefield's setPos
+# zones the char back into Sealion's Den. The zone-in at Status 2: 34;
+# finished: Status 3, set down in Al'Taieu. Al'Taieu's zone-in at Status 3: 1; finished: AMULET_SHATTERED (7522), the
+# light taken (LIGHT_STOLEN, 7523) and Light of Al'Taieu given (6398), the title Seeker of the Light, Option 1,
+# SagheeraInteractions 7, and the mission completes (Garden of Antiquity current). Sealion's Den's zone-in, Option 1:
+# 18 (finished: Option 0); the rezone: nothing. Sueleen (7-5 completed): 12; finished 0: nothing; finished 1: the
+# teleport to the Sea (Al'Taieu).
+lists SealionsDen/Sueleen/onTrigger SealionsDen/_0w0/onTrigger SealionsDen/onEventUpdate/32 SealionsDen/onEventFinish/32 SealionsDen/onEventUpdate/32000 SealionsDen/onEventFinish/32000 SealionsDen/onEventFinish/32001 SealionsDen/onZoneIn/1 SealionsDen/onEventFinish/34 Altaieu/onZoneIn/1 Altaieu/onEventFinish/1 SealionsDen/onEventFinish/18 SealionsDen/onEventFinish/12
+char zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+mission Cop TheWarriorsPath current
+keyitem MysteriousAmuletDrained
+keyitem LightOfVahzl
+login
+trigger Sueleen                         # 28
+finish
+trigger _0w0                            # Status 0: 32
+update 32 option=1                      # nothing
+update 32 option=0                      # the update (32)
+finish                                  # Status 1
+trigger _0w0                            # Status 1: the battlefield menu
+update 32000 option=17                  # area 1 (index 1)
+finish
+tick 2000
+kill TENZEN                             # unkillable: the win at 15%
+tick 1000
+tick 1000
+tick 1000
+finish                                  # 32001: titles, Status 2; setPos
+tick 400
+login open                              # Status 2: 34
+finish                                  # Status 3; set down in Al'Taieu
+tick 400
+login open                              # Status 3: 1
+finish                                  # the light; completed; Option 1
+warp 612,132,776 SealionsDen open       # Option 1: 18
+finish                                  # Option 0
+rezone                                  # Option 0: nothing
+trigger Sueleen                         # completed: 12
+finish option=0                         # nothing
+trigger Sueleen                         # 12
+finish option=1                         # to the Sea
+tick 400
+login                                   # in Al'Taieu

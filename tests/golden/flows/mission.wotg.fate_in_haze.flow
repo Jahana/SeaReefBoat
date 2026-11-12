@@ -1,0 +1,27 @@
+# Fate in Haze (WotG 26), the whole run, with What Price Loyalty completed, in Southern San d'Oria [S]. Rholont with no
+# allegiance plays event 32, his DefaultActions event. Lion Springs plays 151 (allegiance 0); its finish sets Status 1,
+# and the next tick shows its set-down: the 00B zone-out and rot 0 to 31 (the char starts on the set-down spot, so x, y
+# and z do not change). The zone-in at Status 1 plays 154, an update with option 1 sends the update packet [0, 0, 1756]
+# and its finish sets Status 2 (the next tick: the 00B zone-out only); at Status 2 the zone-in plays 155 (the same
+# update) and its finish completes the mission.
+lists SouthernSanDoriaS/Lion_Springs/onTrigger SouthernSanDoriaS/Rholont/onTrigger SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventUpdate/154 SouthernSanDoriaS/onEventUpdate/155 SouthernSanDoriaS/onEventFinish/151 SouthernSanDoriaS/onEventFinish/154 SouthernSanDoriaS/onEventFinish/155
+char zone=SouthernSanDoriaS pos=100.801,1,103.211 job=WAR lvl=99
+quest CrystalWar.WhatPriceLoyalty completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg FateInHaze current
+login
+trigger Rholont                            # allegiance 0
+finish
+trigger Lion_Springs                       # 151
+finish                                     # Status 1
+tick 400
+login open                                 # 154
+update 154 option=1
+finish                                     # Status 2
+tick 400
+login open                                 # 155
+update 155 option=1
+finish                                     # completed

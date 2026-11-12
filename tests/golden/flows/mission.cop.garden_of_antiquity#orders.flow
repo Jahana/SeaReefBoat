@@ -1,0 +1,25 @@
+# Garden of Antiquity (CoP 8-1): the tower cutscenes in other orders (Status 1; a GM sets the nmDefeated local var).
+# Main: nmDefeated 2 (bit 1): _0x3 sets Rubious bit 0, one tower: 161 (1); nmDefeated 3: _0x1 sets CID bit 3, two
+# towers, the first not done from 2 down is 2: 162 (2). bob: nmDefeated 4: _0x2 (Rubious bit 1), one: 161 (2);
+# nmDefeated 6: _0x3, two, towers 2 and 1 done: 162 (0).
+lists Altaieu/_0x1/onTrigger Altaieu/_0x2/onTrigger Altaieu/_0x3/onTrigger
+char zone=Altaieu pos=0,-12,-457 job=WAR lvl=75 nation=0
+char bob zone=Altaieu pos=0,-12,-457 job=WAR lvl=75 nation=0
+mission Cop GardenOfAntiquity current
+charvar Mission[6][800]Status 1
+bob: mission Cop GardenOfAntiquity current
+bob: charvar Mission[6][800]Status 1
+login
+localvar Mission[6][800]nmDefeated 2    # a GM
+trigger _0x3                            # one tower: 161 (1)
+finish
+localvar Mission[6][800]nmDefeated 3    # a GM
+trigger _0x1                            # two: 162 (2)
+finish
+bob: login
+bob: localvar Mission[6][800]nmDefeated 4
+bob: trigger _0x2                       # one tower: 161 (2)
+bob: finish
+bob: localvar Mission[6][800]nmDefeated 6
+bob: trigger _0x3                       # two: 162 (0)
+bob: finish

@@ -1,0 +1,25 @@
+# Moment of Truth (battlefield.moment_of_truth, Jade Sepulcher): Entry menu (event 32000, params 0,0,0,8): option 0
+# releases only, 4, 48 and 52 answer update 5, option 49 registers area 1. The six Shadowhand Kajeel-Ja (+0 to +5)
+# killed (allDeath wins): event 32001 (1,1800,0,50,67,3,0,2); the eighth argument is the skip flag 0 (accepted), the
+# ninth is 2. The finish runs the quest's 32001 (MomentOfTruth.cs): main's Prog 4 -> 5.
+lists JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+quest AhtUrhgan.MomentOfTruth accepted
+charvar Quest[6][30]Prog 4
+login
+trigger _1v0
+update 32000 option=0
+update 32000 option=4
+update 32000 option=48
+update 32000 option=52
+update 32000 option=49
+finish
+kill SHADOWHAND_KAJEEL_JA
+kill SHADOWHAND_KAJEEL_JA+1
+kill SHADOWHAND_KAJEEL_JA+2
+kill SHADOWHAND_KAJEEL_JA+3
+kill SHADOWHAND_KAJEEL_JA+4
+kill SHADOWHAND_KAJEEL_JA+5
+finish
+tick 11000
+tick 10000

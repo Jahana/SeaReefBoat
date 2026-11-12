@@ -1,0 +1,25 @@
+# Appointment to Jeuno at Lower Delkfutt's Tower's Cermet Door _541, the Delkfutt Key and a Pickaxe held. Status 3: the
+# door says its own message 160 and takes no trade. Status 4 with no key item: THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY (159);
+# the key with a Pickaxe: nothing; the key alone: cutscene 0, whose finish sets status 5, gives the key item and takes
+# the key. Status 5: the door's own 160.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Arsha/onTrigger ChateauDoraguille/Chupaile/onTrigger ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h4/onTrigger ChateauDoraguille/onEventFinish/508 ChateauDoraguille/onEventFinish/537 RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/onEventFinish/39 RuludeGardens/onEventFinish/42 LowerDelkfuttsTower/_541/onTrade LowerDelkfuttsTower/_541/onTrigger LowerDelkfuttsTower/onEventFinish/0
+char zone=LowerDelkfuttsTower pos=636,16,20 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria AppointmentToJeuno current
+item DelkfuttKey
+item Pickaxe
+login
+missionstatus Sandoria 3
+trigger _541                            # status 3: nothing from the mission
+finish-if-event
+walk 637,14,21
+trade _541 DelkfuttKey x1               # status 3: nothing
+missionstatus Sandoria 4
+trigger _541                            # no key item: THE_DOOR_IS_FIRMLY_SHUT_OPEN_KEY
+finish-if-event
+walk 637,14,21
+trade _541 DelkfuttKey x1 Pickaxe x1     # the key and a Pickaxe: nothing
+trade _541 DelkfuttKey x1               # cutscene 0
+finish                                  # status 5, the key item given, the key taken
+trigger _541                            # status 5: nothing from the mission
+finish-if-event

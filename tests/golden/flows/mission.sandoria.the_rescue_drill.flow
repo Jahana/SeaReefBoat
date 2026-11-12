@@ -1,0 +1,100 @@
+# The Rescue Drill (San d'Oria 2-1, mission.sandoria.the_rescue_drill), Endracion's route. A level 10 Warrior of San
+# d'Oria, rank 2 with 1-1, 1-2 and 1-3 completed (GMs; Resonance current keeps RoV 1-1 out), holding a Bat Fang.
+# Section 1 (no current mission, a San d'Orian): Endracion's script plays 1009; its finish with option 1 does nothing;
+# again, with option 3: begun. Section 2 (2-1 current), status 0: Endracion plays ORIGINAL_MISSION_OFFSET + 36. La
+# Theine Plateau: Vicorpasse plays 5; Galaihaurat 110 (status 2), then RESCUE_DRILL + 16; Equesobillot 101 (status 3),
+# then +3; Deaufrain 102 (status 4), then +4; Vicorpasse 108 (status 5), then +19; Laurisse 106 (status 6), then 109
+# (no finish handler); Narvecaint 107 (status 7), then +14; Augevinne 103 and Yaucevouchat 104 (no finish handler).
+# Ordelles Caves: Ruillont 1: status 8 and the Option var, a random 1 to 3 (2 on this seed); Ruillont then answers
+# RUILLONT_INITIAL_DIALOG. Status 8: the five other NPCs and Deaufrain and Galaihaurat (Option is not theirs) answer
+# RESCUE_DRILL + 21; Equesobillot (Option 2) plays 112: the Bronze Sword, status 9. Status 9: Equesobillot answers
+# +25, the others +26, Ruillont his dialog; a Bat Fang traded to Ruillont: nothing is sent; the Bronze Sword: 2, whose
+# finish takes it, status 10. Ruillont then answers his default 7372, then RUILLONT_INITIAL_DIALOG + 9; Deaufrain,
+# Equesobillot and Galaihaurat +30; Vicorpasse 115: the Rescue Training Certificate, status 11; Vicorpasse then answers
+# +29 with the key item. Endracion at status 11: 1005, whose finish completes the mission (300 rank points) and takes
+# the certificate. Completed: Galaihaurat answers RESCUE_DRILL + 39; Ruillont: no section: his default.
+lists SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/1005 LaTheinePlateau/Augevinne/onTrigger LaTheinePlateau/Deaufrain/onTrigger LaTheinePlateau/Equesobillot/onTrigger LaTheinePlateau/Galaihaurat/onTrigger LaTheinePlateau/Laurisse/onTrigger LaTheinePlateau/Narvecaint/onTrigger LaTheinePlateau/Vicorpasse/onTrigger LaTheinePlateau/Yaucevouchat/onTrigger LaTheinePlateau/onEventFinish/101 LaTheinePlateau/onEventFinish/102 LaTheinePlateau/onEventFinish/106 LaTheinePlateau/onEventFinish/107 LaTheinePlateau/onEventFinish/108 LaTheinePlateau/onEventFinish/110 LaTheinePlateau/onEventFinish/112 LaTheinePlateau/onEventFinish/115 OrdellesCaves/Ruillont/onTrigger OrdellesCaves/Ruillont/onTrade OrdellesCaves/onEventFinish/1 OrdellesCaves/onEventFinish/2
+char zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+rank 2
+item BatFang
+login
+trigger Endracion                       # section 1: his script's 1009
+finish option=1                         # not 3: nothing
+trigger Endracion                       # 1009 again
+finish option=3                         # 3: begun
+trigger Endracion                       # section 2, status 0: ORIGINAL_MISSION_OFFSET + 36
+warp -344,37,266 LaTheinePlateau
+trigger Vicorpasse                      # status 0: 5
+finish
+trigger Galaihaurat                     # status 0: 110
+finish                                  # status 2
+trigger Galaihaurat                     # status 2: RESCUE_DRILL + 16
+trigger Equesobillot                    # status 2: 101
+finish                                  # status 3
+trigger Equesobillot                    # status 3: RESCUE_DRILL + 3
+trigger Deaufrain                       # status 3: 102
+finish                                  # status 4
+trigger Deaufrain                       # status 4: RESCUE_DRILL + 4
+trigger Vicorpasse                      # status 4: 108
+finish                                  # status 5
+trigger Vicorpasse                      # status 5: RESCUE_DRILL + 19
+trigger Laurisse                        # status 5: 106
+finish                                  # status 6
+trigger Laurisse                        # status 6: 109
+finish                                  # no handler: status stays 6
+trigger Narvecaint                      # status 6: 107
+finish                                  # status 7
+trigger Narvecaint                      # status 7: RESCUE_DRILL + 14
+trigger Augevinne                       # status 7: 103
+finish
+trigger Yaucevouchat                    # status 7: 104
+finish
+warp -70,1,607 OrdellesCaves
+trigger Ruillont                        # status 7: 1
+finish                                  # status 8, Option 2
+trigger Ruillont                        # status 8: RUILLONT_INITIAL_DIALOG
+warp -344,37,266 LaTheinePlateau
+trigger Augevinne                       # status 8: RESCUE_DRILL + 21
+trigger Laurisse                        # RESCUE_DRILL + 21
+trigger Narvecaint                      # RESCUE_DRILL + 21
+trigger Vicorpasse                      # RESCUE_DRILL + 21
+trigger Yaucevouchat                    # RESCUE_DRILL + 21
+trigger Deaufrain                       # Option 2, not 3: RESCUE_DRILL + 21
+trigger Galaihaurat                     # Option 2, not 1: RESCUE_DRILL + 21
+trigger Equesobillot                    # Option 2: 112
+finish                                  # the Bronze Sword, status 9
+trigger Equesobillot                    # status 9, Option 2: RESCUE_DRILL + 25
+trigger Deaufrain                       # status 9, not Option 3: RESCUE_DRILL + 26
+trigger Galaihaurat                     # RESCUE_DRILL + 26
+trigger Augevinne                       # RESCUE_DRILL + 26
+trigger Laurisse                        # RESCUE_DRILL + 26
+trigger Narvecaint                      # RESCUE_DRILL + 26
+trigger Vicorpasse                      # RESCUE_DRILL + 26
+trigger Yaucevouchat                    # RESCUE_DRILL + 26
+warp -70,1,607 OrdellesCaves
+trigger Ruillont                        # status 9: RUILLONT_INITIAL_DIALOG
+walk -71,1,607
+trade Ruillont BatFang x1               # not the sword: nothing is sent
+finish-if-event
+trade Ruillont BronzeSword x1           # status 9: 2
+finish                                  # the sword taken, status 10
+trigger Ruillont                        # status 10: his default 7372, then RUILLONT_INITIAL_DIALOG + 9
+warp -344,37,266 LaTheinePlateau
+trigger Deaufrain                       # status 10: RESCUE_DRILL + 30
+trigger Equesobillot                    # RESCUE_DRILL + 30
+trigger Galaihaurat                     # RESCUE_DRILL + 30
+trigger Vicorpasse                      # status 10: 115
+finish                                  # the certificate, status 11
+trigger Vicorpasse                      # status 11: RESCUE_DRILL + 29 with the key item
+warp -108.5,1,-34 SouthernSanDoria
+trigger Endracion                       # status 11: 1005
+finish                                  # completed (300 rank points), the certificate taken
+warp -344,37,266 LaTheinePlateau
+trigger Galaihaurat                     # section 3 (completed): RESCUE_DRILL + 39 in place of his default
+warp -70,1,607 OrdellesCaves
+trigger Ruillont                        # completed, none current: no section: his default
+finish-if-event

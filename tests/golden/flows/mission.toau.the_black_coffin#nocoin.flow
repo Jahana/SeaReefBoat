@@ -1,0 +1,18 @@
+# The Black Coffin (ToAU 15): the area without the coin. Status 0, no coin: one walk, one tick after login, before
+# the area's handler runs, so the area is not entered (a fake check pins the arm). Then Status 2, no coin: a walk
+# out and back in; the area runs and plays nothing (onTriggerAreaEnter returns nil).
+lists ArrapagoReef/onTriggerAreaEnter/1 ArrapagoReef/onEventFinish/35 ArrapagoReef/onZoneIn/1 Nashmau/onZoneIn/1 Nashmau/onEventFinish/281
+char zone=ArrapagoReef pos=-463.026,-2,-394.478 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau TheBlackCoffin current
+login
+tick 1000
+walk -458,-2,-400
+finish-if-event
+missionstatus Toau 2
+walk -463.026,-2,-394.478
+walk -458,-2,-400
+finish-if-event

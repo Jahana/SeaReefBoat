@@ -1,0 +1,75 @@
+# Enter the Talekeeper (Bastok 8-2, mission.bastok.enter_the_talekeeper) played through: a level 75 Bastokan Warrior at
+# rank 8 with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before it
+# completed. Rashid's 1001, option 21: begun; Rashid says EXTENDED_MISSION_OFFSET + 12. Zeruhn Mines: Drake Fang 202
+# (status 1), 203. Kuftal Tunnel: qm6 says its own text at status 1; qm5 12, option 0: status 2 and FELL; qm6 with no
+# ghost up spawns the three (no claim) and says EVIL; each ghost's death with none alive sets status 3; qm6 13: the Old
+# Piece of Wood, status 4. Drake Fang 204: status 5 (his finish's setPos); a warp into Bastok Mines from Zeruhn Mines:
+# the zone-in plays 176, its finish: completed (80000 gil, rank 9), the wood taken. Section 3 (completed, The Salt of
+# the Earth not): Detzo 184 (importantOnce: his own 30 next), Gumbah's talk goes to Blade of Darkness's 99 (a quest's
+# progress event above the mission's 183), Pavvke 76, Iron Eater 769.
+char zone=BastokMines pos=-6,-2,-123 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+mission Bastok TheChainsThatBindUs completed
+rank 8
+login
+trigger Rashid                          # the guard's own 1001
+finish option=21                        # section 1: begun, YOU_ACCEPT_THE_MISSION
+trigger Rashid                          # current: EXTENDED_MISSION_OFFSET + 12
+finish-if-event
+warp -74,0.1,60 ZeruhnMines
+trigger Drake_Fang                      # status 0: 202
+finish                                  # status 1
+trigger Drake_Fang                      # status 1: 203
+finish
+warp -27.695,-22.159,-183.716 KuftalTunnel
+trigger qm6                             # status 1: nothing from the mission
+finish-if-event
+trigger qm5                             # status 1: 12
+finish option=0                         # status 2, FELL
+trigger qm5                             # status 2: nothing from the mission
+finish-if-event
+trigger qm6                             # status 2, no ghost: the three spawned, EVIL
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill TALEKEEPER_OFFSET                  # two ghosts up: nothing
+kill TALEKEEPER_OFFSET+1                # one up: nothing
+kill TALEKEEPER_OFFSET+2                # none up: status 3
+trigger qm6                             # status 3, no ghost up: 13
+finish                                  # status 4, the Old Piece of Wood
+warp -74,0.1,60 ZeruhnMines
+trigger Drake_Fang                      # status 4: 204
+finish                                  # status 5, setPos
+tick 400
+warp -8,-2,-121 BastokMines open        # from Zeruhn Mines at status 5: 176
+finish                                  # completed: 80000 gil, rank 9; the wood taken
+trigger Detzo                           # section 3: 184
+finish
+trigger Detzo                           # again
+finish-if-event
+trigger Gumbah                          # section 3: Blade of Darkness's 99 (progress) over the mission's 183
+finish
+trigger Pavvke                          # section 3: 76
+finish
+warp 92,-19.5,4 Metalworks
+trigger Iron_Eater                      # section 3: 769
+finish

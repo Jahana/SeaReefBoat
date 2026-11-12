@@ -1,0 +1,32 @@
+# The Price of Peace (Windurst 1-3): Windurst Waters. A level 10 Warrior of Windurst who has completed 1-1 and 1-2 (a
+# GM). Section 1: Mokyokyo plays 111; its finish with option 2 begins the mission. Section 2 (1-3 current):
+# Mokyokyo plays 136; The Heart of the Matter's last section (no NONE check in the Lua, a kept bug) answers first:
+# Dagoza-Beruza plays 112, Panna-Donna 113 and Ten of Hearts 114. Status 4 (a GM): Mokyokyo plays 148, whose finish
+# completes the mission. Completed: Dagoza-Beruza, Panna-Donna and Ten of Hearts play 150, 152 and 154.
+lists WindurstWaters/Mokyokyo/onTrigger WindurstWaters/Dagoza-Beruza/onTrigger WindurstWaters/Panna-Donna/onTrigger WindurstWaters/Ten_of_Hearts/onTrigger WindurstWaters/onEventFinish/111 WindurstWaters/onEventFinish/148
+char zone=WindurstWaters pos=-55,-5,228 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+login
+mission Windurst TheHorutotoRuinsExperiment current
+mission Windurst TheHorutotoRuinsExperiment completed   # a GM: 1-1 done
+mission Windurst TheHeartOfTheMatter current
+mission Windurst TheHeartOfTheMatter completed          # a GM: 1-2 done
+trigger Mokyokyo                        # section 1: 111
+finish option=2                         # begun (status 1)
+trigger Dagoza-Beruza                   # section 2: The Heart of the Matter's 112
+finish
+trigger Mokyokyo                        # 136
+finish
+trigger Panna-Donna                     # The Heart of the Matter's 113
+finish
+trigger Ten_of_Hearts                   # The Heart of the Matter's 114
+finish
+missionstatus Windurst 4                # a GM
+trigger Mokyokyo                        # status 4: 148
+finish                                  # completed (1000 gil, rank 2)
+trigger Dagoza-Beruza                   # completed: 150
+finish
+trigger Panna-Donna                     # 152
+finish
+trigger Ten_of_Hearts                   # 154
+finish

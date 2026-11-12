@@ -167,7 +167,9 @@ namespace XI.Zone
             TryLearningSpells(owner, m);
             m.UsedSkillIds.Clear();
             foreach (var member in ForAlliance(owner))
-                if (SameArea(member, owner))
+                // CBaseEntity::getZone: the zone id alone, so a member in another instance of the zone is
+                // credited, as the C++
+                if (ZoneOf(member) == ZoneOf(owner))
                     RoeEvent(RoeEventMobKill, member, new (string, object)[] { ("mob", m), ("atkType", m.LastHitAtkType) });
 
             if (m.GiveExp && !owner.StatusEffects.HasStatusEffect(EffectBattlefield))
@@ -470,11 +472,7 @@ namespace XI.Zone
                     log_("CLuaBaseEntity::checkKillCredit() - Non-PC type calling function, or PLuaBaseEntity is not a MOB.");
                     return Ret(l, false);
                 }
-                float range = l.IsNumber(3) ? (float)l.ToNumber(3) : 100f;
-                bool credit = CheckMob(mob.HiPcLvl, mob) > MobTooWeak && Distance(mob, c) < range && !mob.CallForHelp;
-                // a synced party's designee must be in range and up as well
-                if (credit && c.Party?.SyncTarget is { } syncTarget) credit = Distance(mob, syncTarget) < range && syncTarget.Hp > 0;
-                return Ret(l, credit);
+                return Ret(l, CheckKillCredit(c, mob, l.IsNumber(3) ? (float)l.ToNumber(3) : 100f));
             };
             // CLuaBaseEntity::checkDifficulty(mob)
             m["checkDifficulty"] = l =>
@@ -482,6 +480,16 @@ namespace XI.Zone
                 if (Pc(l, "checkDifficulty") is not CharData c || l.ToObject(2) is not MobEntity mob) return Ret(l, 0);
                 return Ret(l, CheckMob(c.MLvl, mob));
             };
+        }
+
+        // CLuaBaseEntity::checkKillCredit: the mob gives EXP and the char was within range
+        private bool CheckKillCredit(CharData c, MobEntity mob, float range = 100f)
+        {
+            bool credit = CheckMob(mob.HiPcLvl, mob) > MobTooWeak && Distance(mob, c) < range && !mob.CallForHelp;
+            // a synced party's designee must be in range and up as well
+            if (credit && c.Party?.SyncTarget is { } syncTarget)
+                credit = Distance(mob, syncTarget) < range && syncTarget.Hp > 0;
+            return credit;
         }
     }
 }

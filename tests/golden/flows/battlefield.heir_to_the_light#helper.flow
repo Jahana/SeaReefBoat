@@ -1,0 +1,98 @@
+# Qu'Bia Arena's The Heir to the Light (battlefield 516, San d'Oria 9-2's) with a helper: eve (9-2 completed) in the
+# leader's party; the allDeath plays 32004 to the leader and 32005 to eve (completed); the leader's finish (the
+# mission's Intro 1) spawns phase 2, eve's finds it up; WON plays 32001 to both; the leader's finish is the mission's
+# (status 4), eve's does nothing.
+char zone=QubiaArena pos=-212.2,-24.6,20.1 job=WAR lvl=75 nation=0
+char eve zone=QubiaArena pos=-212.2,-24.6,20.1 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+mission Sandoria Lightbringer completed
+mission Sandoria BreakingBarriers completed
+rank 9
+mission Sandoria TheHeirToTheLight current
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Sandoria SmashTheOrcishScouts completed
+eve: mission Sandoria BatHunt completed
+eve: mission Sandoria SaveTheChildren completed
+eve: mission Sandoria TheRescueDrill completed
+eve: mission Sandoria TheDavoiReport completed
+eve: mission Sandoria JourneyAbroad completed
+eve: mission Sandoria InfiltrateDavoi completed
+eve: mission Sandoria TheCrystalSpring completed
+eve: mission Sandoria AppointmentToJeuno completed
+eve: mission Sandoria Magicite completed
+eve: mission Sandoria TheRuinsOfFeiYin completed
+eve: mission Sandoria TheShadowLord completed
+eve: mission Sandoria LeautesLastWishes completed
+eve: mission Sandoria RanperresFinalRest completed
+eve: mission Sandoria PrestigeOfThePapsque completed
+eve: mission Sandoria TheSecretWeapon completed
+eve: mission Sandoria ComingOfAge completed
+eve: mission Sandoria Lightbringer completed
+eve: mission Sandoria BreakingBarriers completed
+eve: rank 10
+eve: mission Sandoria TheHeirToTheLight completed
+login
+missionstatus Sandoria 3
+eve: login
+invite eve
+eve: accept
+trigger BC_Entrance                     # the leader: the 32000 menu
+update 32000 option=65                  # area 1: registered, entered
+finish
+eve: trigger BC_Entrance                # eve (completed): the menu
+eve: update 32000 option=65
+eve: finish
+tick 2000
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill WARLORD_ROJGNOJ+3
+kill WARLORD_ROJGNOJ+4
+kill WARLORD_ROJGNOJ+5
+kill WARLORD_ROJGNOJ+6
+kill WARLORD_ROJGNOJ+7
+kill WARLORD_ROJGNOJ+8
+kill WARLORD_ROJGNOJ+9
+kill WARLORD_ROJGNOJ+10
+kill WARLORD_ROJGNOJ+11
+kill WARLORD_ROJGNOJ+12
+kill WARLORD_ROJGNOJ+13                 # allDeath: 32004 to the leader, 32005 to eve
+finish                                  # the leader's 32004: the mission's Intro 1; phase 2 spawned
+eve: finish                             # eve's 32005: phase 2 up: nothing
+tick 2000
+kill WARLORD_ROJGNOJ
+kill WARLORD_ROJGNOJ+1
+kill WARLORD_ROJGNOJ+2                  # WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish-if-event                         # 32001, the leader: the mission's finish (battlefieldWin 516): status 4
+eve: finish-if-event                    # 32001, eve (completed): nothing from the mission
+tick 11000
+tick 10000

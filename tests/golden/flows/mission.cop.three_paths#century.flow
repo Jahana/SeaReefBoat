@@ -1,0 +1,17 @@
+# Three Paths (mission.cop.three_paths#century). A level 75 Warrior with 5-3 current, Louverance 8 (a GM), in Mine Shaft
+# #2716. _0d0: the Century of Hardship menu (32000); option 1 (index 0, area 1) enters; won by bfwin (a GM): 32001 (the
+# Century of Hardship's win; battlefield 736 in the effect and the XP var); finished: Three Paths' Mine Shaft 32001
+# moves Louverance 8 to 9. Metalworks, Cid (9): 852.
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/onEventUpdate/32000 MineShaft2716/onEventFinish/32000 MineShaft2716/onEventFinish/32001 Metalworks/Cid/onTrigger Metalworks/onEventFinish/852
+char zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=75 nation=1
+mission Cop ThreePaths current
+login
+missionstatus Cop 8 pos=2               # a GM
+trigger _0d0
+update 32000 option=1
+finish
+bfwin
+finish                                  # 32001
+warp -12,-12,1 Metalworks
+trigger Cid                             # 9: 852
+finish-if-event

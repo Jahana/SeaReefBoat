@@ -1,0 +1,40 @@
+# A Century of Hardship (battlefield.century_of_hardship#wipe): the char dies. A level 99 Warrior (Ragnarok, Great Sword
+# skill 4240) with Three Paths current and Louverance 8 (a GM), no GM effects. _0d0: the 32000 menu; option 1 (area 1):
+# entered (7610, 7384 (6), 7387 (30), the 05C (2,0,0,1800)); onBattlefieldEnter adds the DEATH listener; the first tick:
+# the effects 143 and 254. BUGBBY claimed; the five mobs beat the char down; at step 19 Trikotrak defeats him (029
+# message 97). The DEATH listener gets no killer (a char's DEATH listener never does: C++ battle_entity.cpp), so it
+# returns at once: no Trikotrak death line (7850). The framework's handleWipe: THE_PARTY_WILL_BE_REMOVED 7430 (3
+# minutes). 60 s ticks: at step 24 the wipe time is over: PARTY_MEMBERS_HAVE_FALLEN 7423 and 32002 (the loss). Finished:
+# 075 (out; onBattlefieldLeave removes the listener); no XP, Louverance stays 8. 10 s: the effect 143 removed, 254
+# re-saved at tier 0.
+lists MineShaft2716/_0d0/onTrigger MineShaft2716/onEventUpdate/32000 MineShaft2716/onEventFinish/32000 MineShaft2716/onEventFinish/32001
+char zone=MineShaft2716 pos=-93.657,-120,-583.561 job=WAR lvl=99 nation=1
+mission Cop ThreePaths current
+item Ragnarok75
+skill GreatSword 4240
+login
+missionstatus Cop 8 pos=2
+equip Ragnarok75 Main
+trigger _0d0
+update 32000 option=1
+finish
+tick 2000
+claim BUGBBY
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 60000
+tick 60000
+tick 60000
+tick 60000
+finish-if-event
+tick 10000

@@ -1,0 +1,103 @@
+# Magicite (Bastok 4-1, mission.bastok.magicite) played through: a level 50 Bastokan at rank 4 with the 2152 rank points
+# (getMissionRankPoints), ACP and RoV current (their zone-ins quiet) and the nation's missions before it completed.
+# Goggehn 0 (event), the door _6r2 129 (0) (progress): begun with YOU_ACCEPT_THE_MISSION and the permit. Goggehn and
+# _6r9 have their own scripts: a talk after a reply of priority 100 or less (an event, a message) goes to the script
+# (interaction_lookup's alternation), so Goggehn answers his own 101 between the mission's 0, 132 and 135. Status 0:
+# _6r9 128 (the Letter to Aldo, status 1); 1: _6r9 138 (1), Aldo 152 (0, 1) (status 2, the Silver Bell). Status 2: Aldo
+# 161; Muckvix 80; Geebeh's default text (WASTING_YOUR_TIME 7453); Paya-Sabya 80 (progress, Option 1); Geebeh
+# WITHER_AND_DIE, Paya-Sabya 23; Muckvix 184 (the Yagudo Torch, Option 2), 81; with the torch Paya-Sabya's default 79
+# and Geebeh's text; the Altar Room zone-in 10000 (Option 0); the three Magicite (each then its own message: 7126, 7291,
+# 7275), Aldo 183; Goggehn 135, _6r9 60 (0, 0): the stones taken, the Airship Pass, Have Wings, Will Fly, status 3.
+# Status 3: _6r2 THE_CONSULATE_IS_AWAY, Aldo 183, Goggehn 35: completed (rank 5, 10000 gil, the Message to Jeuno, the
+# rank points back to 0). Completed: Goggehn's own 55 (the message held).
+lists RuludeGardens/_6r2/onTrigger RuludeGardens/Goggehn/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/129 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/35 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=RuludeGardens pos=3,9,-76 job=WAR lvl=50 nation=1
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+rank 4 points=2152
+login
+trigger Goggehn                         # section 1, the rank points met: 0
+finish-if-event
+trigger _6r2                            # 129 (0: no permit)
+finish option=1                         # begun, YOU_ACCEPT_THE_MISSION, the permit
+trigger Goggehn                         # the alternation after 0: Goggehn's own 101
+finish-if-event
+trigger Goggehn                         # status 0: 132
+finish-if-event
+trigger _6r9                            # status 0: 128
+finish                                  # status 1, the Letter to Aldo
+trigger Goggehn                         # the alternation after 132: Goggehn's own 101
+finish-if-event
+trigger Goggehn                         # status 1: 135
+finish-if-event
+trigger _6r9                            # status 1: 138 (1)
+finish-if-event
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # status 1, no bell: 152 (0, 1)
+finish                                  # status 2, the letter taken, the Silver Bell given
+trigger Aldo                            # no stone: 161
+finish-if-event
+trigger Muckvix                         # no torch, Option 0: 80
+finish-if-event
+warp 9,1,72 UpperJeuno
+trigger Geebeh                          # Option 0: Geebeh's default text (7453)
+finish-if-event
+trigger Paya-Sabya                      # Option 0: 80 (progress)
+finish                                  # Option 1
+trigger Geebeh                          # Option 1, no torch: WITHER_AND_DIE
+finish-if-event
+trigger Paya-Sabya                      # Option 1: 23
+finish-if-event
+warp -26.8,4.6,-135 LowerJeuno
+trigger Muckvix                         # Option 1: 184
+finish                                  # the Yagudo Torch, Option 2
+trigger Muckvix                         # the torch, Option 2: 81
+finish-if-event
+warp 9,1,72 UpperJeuno
+trigger Paya-Sabya                      # the torch: Paya-Sabya's default 79
+finish-if-event
+trigger Geebeh                          # the torch: Geebeh's default text (7453)
+finish-if-event
+warp -342,25,43 AltarRoom open          # Option 2: 10000
+finish                                  # Option 0
+trigger Magicite                        # no stone: 44 (152)
+finish                                  # the Orastone
+trigger Magicite                        # the Orastone held: its own message (7126)
+finish-if-event
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # a stone held: 183
+finish-if-event
+warp -158,-8,8 MonasticCavern
+trigger Magicite                        # the Orastone alone: 0 (150)
+finish                                  # the Optistone
+trigger Magicite                        # the Optistone held: its own message (7291)
+finish-if-event
+warp 13,25,-81 QulunDome
+trigger Magicite                        # the Optistone and the Orastone: 0 (1, 46, 47)
+finish                                  # the Aurastone
+trigger Magicite                        # the Aurastone held: its own message (7275)
+finish-if-event
+warp 3,9,-76 RuludeGardens
+trigger Goggehn                         # status 2: 135
+finish-if-event
+trigger _6r9                            # the three stones, no pass: 60 (0, 0)
+finish                                  # the stones taken, the Airship Pass, the title, status 3
+trigger _6r2                            # status 3: THE_CONSULATE_IS_AWAY
+finish-if-event
+warp 20,3,-56 LowerJeuno
+trigger Aldo                            # status 3: 183
+finish-if-event
+warp 3,9,-76 RuludeGardens
+trigger Goggehn                         # status 3: 35
+finish                                  # completed: rank 5, 10000 gil, the Message to Jeuno
+trigger Goggehn                         # completed: Goggehn's own 55 (the message held)
+finish-if-event

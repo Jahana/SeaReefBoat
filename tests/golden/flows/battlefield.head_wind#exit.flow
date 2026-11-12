@@ -1,0 +1,20 @@
+# Head Wind (battlefield.head_wind#exit): inside area 1 the exit NPCs _082 (event 32003, update option 1, finish option
+# 0), _084 (32003, finish option 0) and _086 (32003, finish option 4: 0x075 cleared, no position change in the trace)
+# each answer 32003; then a warp to the entrance, and _081 triggers the menu 32000 again.
+lists BoneyardGully/_081/onTrigger BoneyardGully/_082/onTrigger BoneyardGully/_084/onTrigger BoneyardGully/_086/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventUpdate/32003 BoneyardGully/onEventFinish/32003
+char zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75 nation=0
+mission Cop ThreePaths current
+login
+missionstatus Cop 7 pos=4               # a GM
+trigger _081
+update 32000 option=1
+finish
+trigger _082
+update 32003 option=1
+finish option=0
+trigger _084
+finish option=0
+trigger _086
+finish option=4
+warp -617.9,-1.5,505.7 BoneyardGully
+trigger _081

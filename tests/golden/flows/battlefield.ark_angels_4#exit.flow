@@ -1,0 +1,23 @@
+# Ark Angels 4: the exit. qm2 outside a battlefield: the handler returns nil and qm2 is LaLoff's DefaultActions
+# NO_RESPONSE_CANNOT_ESCAPE. Inside, qm2 plays 32003 (0, 0, 0, 0, 3, 180); option 0 stays, option 4 leaves.
+lists LaloffAmphitheater/qm1_4/onTrigger LaloffAmphitheater/onEventUpdate/32000 LaloffAmphitheater/onEventFinish/32000 LaloffAmphitheater/onEventFinish/32001 LaloffAmphitheater/onEventFinish/32002 LaloffAmphitheater/qm2/onTrigger LaloffAmphitheater/onEventFinish/32003
+char zone=LaloffAmphitheater pos=237.15,-173.572,361.266 job=WAR lvl=99 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ArkAngels current
+login
+missionstatus Zilart 1                  # a GM
+trigger qm2                             # in no battlefield: nil: NO_RESPONSE_CANNOT_ESCAPE
+finish-if-event
+warp 237.15,-173.572,361.266 LaloffAmphitheater
+trigger qm1_4
+update 32000 option=49
+finish
+tick 2000
+trigger qm2                             # 32003
+finish option=0                         # stays
+trigger qm2                             # 32003
+finish option=4                         # out
+tick 2000

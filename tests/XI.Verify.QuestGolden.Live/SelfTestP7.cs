@@ -13,6 +13,49 @@ internal static partial class Program
     {
         Console.WriteLine("quest rework P7 hooks");
         SelfTestP7ZoneOutLabel();
+        SelfTestP7BattlefieldLabels();
+    }
+
+    // a waiver may name a battlefield's group callback, exit NPC or essential group (group:<n>:<Callback>, exit:<Npc>,
+    // essentialMobs:<n>), the three label kinds of BattlefieldScript.CoverageLabels the grammar takes; a malformed
+    // one is refused
+    private static void SelfTestP7BattlefieldLabels()
+    {
+        const string cs = "char zone=BastokMarkets pos=0,0,0\n" + "login\n";
+        try
+        {
+            var f = Flow.Parse("uncovered: group:1:allDeath -- a\nuncovered: exit:Transcendental_Radiance -- b\n" +
+                               "uncovered: essentialMobs:2 -- c\nuncovered: requiredItems:worn -- d\n" + cs, "w.flow",
+                               "w", null);
+            Check("  uncovered: group:<n>:<Callback>, exit:<Npc>, essentialMobs:<n>, requiredItems:worn (C3 Q4): " +
+                  "battlefield labels",
+                  "group:1:allDeath|exit:Transcendental_Radiance|essentialMobs:2|requiredItems:worn",
+                  string.Join("|", f.Waivers.Select(w => w.Label)));
+        }
+        catch (FormatException e)
+        {
+            Fail("  uncovered: the battlefield labels", e.Message);
+        }
+        P5Refused("uncovered: group:0:allDeath (the groups count from 1) is no label",
+                  "uncovered: group:0:allDeath -- x\n" + cs,
+                  "t.flow:1: a handler label is <n>/<entity>/<trigger>: group:0:allDeath");
+        P5Refused("uncovered: exit: with no NPC is no label", "uncovered: exit: -- x\n" + cs,
+                  "t.flow:1: a handler label is <n>/<entity>/<trigger>: exit:");
+        try
+        {
+            var f = Flow.Parse("uncovered: callback:deadBugbearReaction -- a\n" + cs, "w.flow", "w", null);
+            Check("  uncovered: callback:<name> (C3 C3c): a battlefield's deferred callback",
+                  "callback:deadBugbearReaction", string.Join("|", f.Waivers.Select(w => w.Label)));
+        }
+        catch (FormatException e)
+        {
+            Fail("  uncovered: a battlefield's callback label", e.Message);
+        }
+        P5Refused("uncovered: callback: with no name is no label", "uncovered: callback: -- x\n" + cs,
+                  "t.flow:1: a handler label is <n>/<entity>/<trigger>: callback:");
+        P5Refused("uncovered: requiredItems:wear (the content's own onBattlefieldEnter reaches it) is no label",
+                  "uncovered: requiredItems:wear -- x\n" + cs,
+                  "t.flow:1: a handler label is <n>/<entity>/<trigger>: requiredItems:wear");
     }
 
     // a waiver may name an onZoneOut handler (its label n/-/onZoneOut); the bridge labels it so, and names every handler kind

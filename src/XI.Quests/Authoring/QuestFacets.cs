@@ -120,6 +120,18 @@ namespace XI.Quests.Authoring
         // to a whole number (LuaState.ToIntegral, llround): a non-whole override (none returns one) would be compared
         // rounded, where the Lua compares the fraction
         int VigilWeaponRequiredWsPoints { get; }
+        // xi.soa.helpers.imprimaturGate(player, gateAmount): the global looked up at each call, so the override of
+        // modules/custom/lua/soa_remove_imprimatur_gate.lua is the one that runs
+        bool SoaImprimaturGate(int gateAmount);
+        // xi.wotg.helpers.meetsMission<mission>Reqs(player), mission 3, 4, 8, 15, 26 or 38, likewise
+        // (modules/custom/lua/wotg_decouple_story_missions_from_nation_quests.lua)
+        bool WotgMeetsMissionReqs(int mission);
+        // whitegateShared.doRoyalPalaceArmorCheck(player) (scripts/zones/Aht_Urhgan_Whitegate/Shared.lua): a body armor
+        // of its allowed list and hands, legs and feet all worn (ToAU 16, 17: Naja's judgement of the char's dress)
+        bool RoyalPalaceArmorCheck();
+        // xi.mission.getMissionRankPoints(player, mission) (scripts/globals/missions.lua): a BOOLEAN, the rank points
+        // are at least what the mission needs, not the points
+        bool MissionRankPoints(int mission);
         // zones[<the handler's zone>].npc[npcKey]: an IDs.lua npc id that is a number (eldiemeID.npc.BRAZIER); a key that
         // is missing or not a number (a table of ids) throws
         int NpcIdOf(string npcKey);
@@ -165,6 +177,8 @@ namespace XI.Quests.Authoring
         int Nation { get; }
         // player:hasTitle(title): title is an XI.QuestContent.Title
         bool HasTitle(int title);
+        // player:getTitle(): the char's current title (the title id, 0 none)
+        int CurrentTitle { get; }
         // player:getPlaytime(): the char's play time in seconds (the saved time plus this session's)
         int Playtime { get; }
         // player:getRace(): the char's race (xi.race: 1 Hume male, 2 Hume female, 3 Elvaan male, 4 Elvaan female, 5 Tarutaru
@@ -175,6 +189,8 @@ namespace XI.Quests.Authoring
         System.Collections.Generic.IReadOnlyList<(int ZoneId, double Distance, int Nation, int Race, int MainJob)> PartyMembers { get; }
         // player:getRank(nation): the char's rank in that nation (xi.nation: 0 San d'Oria, 1 Bastok, 2 Windurst)
         int Rank(int nation);
+        // player:getRankPoints() (quest rework C2; a check reads it since C3 N6: San d'Oria 8-2's optional dialogue)
+        int RankPoints { get; }
         // player:getCurrentMission(missionLog): pass the generated XI.QuestContent.MissionLog constant (MissionLog.Cop); the
         // answer compares with a XI.QuestContent.Mission.<Area> constant
         int CurrentMission(int missionLog);
@@ -219,6 +235,8 @@ namespace XI.Quests.Authoring
         bool InMogHouseInHomeNation { get; }
         // player:inMogHouse() (B3b hidden quests group 4, Mog House Exposition): the char is in a Mog House
         bool InMogHouse { get; }
+        // player:isEngaged() (C3 T6, Betrayal at Beaucedine): the char is engaged with a target
+        bool IsEngaged { get; }
         // xi.monstrosity.hasUnlockedSpecies(player, species) (Monstrosity Bee): the char has the species unlocked. The
         // bridge calls the Lua global
         bool MonstrosityHasUnlockedSpecies(int species);
@@ -254,6 +272,9 @@ namespace XI.Quests.Authoring
         void AddTitle(int title);
         // player:setTitle(title): the char's current title (added to the titles held, as setTitle does)
         void SetTitle(int title);
+        // xi.instance.onEventFinish(player, csid, option, nil): the Runic Seal's instance entry (Nyzul Isle), the npc
+        // not given
+        void InstanceOnEventFinish(int csid, int option);
         // player:setCharVar(name, value[, expiry]): an expiry of 0 is none
         void SetCharVar(string name, int value, uint expiry = 0);
         // player:incrementCharVar(name, value): the char var moved by value (a var the quest does not own: [RSE]Gear)
@@ -323,6 +344,10 @@ namespace XI.Quests.Authoring
         bool MobIsAlive(string mobName, int offset = 0);
         // GetMobByID(zones[zone].mob[mobName] + offset):isDead(): a mob never spawned, or despawned, counts as dead too
         bool MobIsDead(string mobName, int offset = 0);
+        // (quest rework C6, The Mithra and the Crystal's Ancient Vessel) GetMobByID(zones[zone].mob[mobName] + offset)
+        // is not nil; and its getLocalVar(name), a nil mob raising as the Lua's call on nil does
+        bool MobExists(string mobName, int offset = 0);
+        int MobLocalVar(string mobName, string name, int offset = 0);
         // SpawnMob(zones[zone].mob[mobName] + offset), then :updateClaim(player) when claim, else :updateEnmity(player)
         void SpawnMob(string mobName, int offset, bool claim);
         // DespawnMob(zones[zone].mob[mobName] + offset), in the handler's zone, with no method called on the mob
@@ -342,6 +367,34 @@ namespace XI.Quests.Authoring
         void AddSpell(int spell, bool silentLog);
         // xi.teleport.to(player, destination): an xi.teleport.id; the char's position set, the zone change pending
         void TeleportTo(int destination);
+        // xi.maws.gotoRandomMaw(player): one of the three past maws (math.randomInt(1, 3): Batallia Downs, Rolanberry
+        // Fields, Sauromugue Champaign), its PAST_MAW teleport bit added, the char sent to that maw's destination (the
+        // other era's zone) (WotG 1)
+        void GotoRandomMaw();
+        // xi.maws.addMaw(player): the maw of the char's own zone (xi.maws.pastMaws), its bit added, the char sent to
+        // that maw's destination (the other era's zone) (WotG 2)
+        void AddMaw();
+        // xi.maws.goToMaw(player, maw) with a number where the Lua wants a maw table (WotG 40 passes a zone id): the
+        // Lua global raises "attempt to index local 'maw' (a number value)", and the throw reaches the handler as in
+        // Lua
+        void GoToMaw(int maw);
+        // xi.maws.goToMaw(player, xi.maws.pastMaws[zone]) (C3 T8, WotG 42's 33): the char set down at that maw's
+        // destination (the other era's zone); a zone with no past maw (0) hands goToMaw a nil, and the Lua global
+        // raises "attempt to index local 'maw' (a nil value)"
+        void GoToPastMaw(int zone);
+        // xi.wotg.helpers.removeMemoryFragments(player) (C3 T8, WotG 42): the four large memory fragment key items
+        // taken, held or not (the Lua global is called)
+        void RemoveMemoryFragments();
+        // player:addItem(item, qty, augment0, value0, augment1, value1) (C3 T8, WotG 54's Moonshade Earring): the item
+        // with two augments (augments.sql ids); its boolean result is unused
+        void AddItemAugmented(int item, int qty, int augment0, int value0, int augment1, int value1);
+        // player:getFace(): the char's face (0 to 15)
+        int Face { get; }
+        // player:getEquipmentModelIds(): the model ids of the head, body, hands, main and sub slots
+        (int Head, int Body, int Hands, int Main, int Sub) EquipmentModelIds { get; }
+        // npcUtil.giveItem(player, item) where item may be nil (an index past a Lua table: WotG 31's
+        // rewardItems[Option]); giveItem then gives nothing and answers true
+        bool GiveItemOrNil(int? item);
         // player:addKeyItem(keyItem): the key item, with no message (npcUtil.giveKeyItem, with its message, is GiveKeyItem)
         void AddKeyItem(int keyItem);
         // player:startEvent(csid, args...): the handler starts the event itself; a Lua handler that does so returns nil, so
@@ -403,9 +456,15 @@ namespace XI.Quests.Authoring
         void ChangeContainerSize(int container, int delta);
         // SpawnMob(zones[zone].mob[mobName]) alone: no claim and no enmity (a zone-in spawn, The Crimson Trial)
         void SpawnMob(string mobName);
+        // SpawnMob(zones[zone].mob[mobName] + offset) alone, in the handler's zone: no claim and no enmity (quest
+        // rework C3 N6, Bastok 8-2's TALEKEEPER_OFFSET + i and Windurst 8-2's JESTER_WHOD_BE_KING_OFFSET + 1)
+        void SpawnMob(string mobName, int offset);
         // npcUtil.popFromQM(player, npc, zones[zone].mob[mobName], { claim = claim, hide = hide, radius = radius }): the mob
         // spawns at a random point within radius yalms of the npc (two math.randomFloat draws)
         bool PopFromQm(string mobName, bool claim, int hide, int radius);
+        // GetMobByID(zones[zone].mob[mobName] + offset):setSpawn(x, y, z, rot), in the handler's zone: the mob's next
+        // spawn point (The Secrets of Worship's Old Professor Mariselle and her two pupils, set at the qm); no spawn
+        void SetMobSpawn(string mobName, int offset, double x, double y, double z, int rot);
         // player:addGil(amount) / player:delGil(amount) (the bool delGil answers is not read)
         void AddGil(int amount);
         void DelGil(int amount);
@@ -430,11 +489,15 @@ namespace XI.Quests.Authoring
         // completed (player:completeMission), then the next one added (player:addMission); answers npcUtil's result (true:
         // no item in the params, so nothing can fail)
         bool CompleteMission(int missionLog, int mission, int nextMissionLog, int nextMission);
+        // player:completeMission(missionLog, mission) alone (quest rework C5, The Temple of Uggalepih's RoV step): when
+        // it is the log's current mission, the current is cleared (0 above log 2, else 65535) and, outside CoP for an
+        // id below 64, its completed bit set; else the engine logs a warning and changes nothing
+        void CompleteMissionRaw(int missionLog, int mission);
         // player:setRank(rank): the char's rank in its own nation (quest rework C2; npcUtil.completeMission's rank)
         void SetRank(int rank);
-        // player:setRankPoints(points) / player:getRankPoints() (quest rework C2; npcUtil.completeMission's rankPoints)
+        // player:setRankPoints(points) (quest rework C2; npcUtil.completeMission's rankPoints); getRankPoints is
+        // IQuestPlayerView.RankPoints
         void SetRankPoints(int points);
-        int RankPoints { get; }
         // player:addRankPoints(points) (quest rework C2; San d'Oria 1-3's repeat)
         void AddRankPoints(int points);
         // player:setPos(x, y, z): the char set down there in its own zone, its rotation kept (no rot, no zone given; the 5-argument SetPos zones it)
@@ -445,6 +508,9 @@ namespace XI.Quests.Authoring
         // player:showText(npc, zones[text.Zone].text[text.Name], args...): the handler's npc speaks the text to this char
         // alone (Npc.ShowText is npc:showText, sent to the chars in range); an NPC script's call in an NPC handler
         void ShowText(ZoneText text, params int[] args);
+        // (C3 N3) player:showText(npc, textId, args...) with a text id the handler computed (a zone text plus an
+        // offset: The Three Kingdoms' Kasaroro, KASARORO_DIALOG + 20), the handler's npc as the speaker
+        void ShowText(int textId, params int[] args);
         // (B3b Outlands 1, Forge Your Destiny's qms) local mob = SpawnMob(zones[zone].mob[mobName]); false when nil; else
         // mob:updateClaim(player), mob:setLocalVar('QMID', npcId) and mob:addListener('DESPAWN', 'DESPAWN_' .. id, f), f
         // removing itself and setting GetNPCByID(mob:getLocalVar('QMID')):setLocalVar(npcVar, GetSystemTime() + seconds)
@@ -482,6 +548,9 @@ namespace XI.Quests.Authoring
         // player:startEvent(csid, { isHidden = true }) (quest rework C2, CoP 1-1's 36 to 39): a hidden event, its table
         // with no other field
         void StartEventHidden(int csid);
+        // player:startEvent(csid, { [index] = value, isHidden = true }) (quest rework C3 T2, ToAU 15's 34): a hidden
+        // event whose table also sets one parameter
+        void StartEventHiddenParam(int csid, int index, int value);
         // player:enableEntities({ id, ... }) (quest rework C2, CoP 1-1's Tales' Beginning NPCs): the client may show
         // these entities (a 0x077). No ids is the empty table, whose 0x077 hides the ones shown before
         void EnableEntities(params int[] ids);
@@ -507,6 +576,28 @@ namespace XI.Quests.Authoring
         // by id rather than the handler's npc: Scattered into Shadow's GetNPCByID(castleOzID.npc.TEBHI) in a zone-in
         // and a TICK listener, Mimeo Stone's GetNPCByID(npc:getID() + 1)
         IQuestNpc NpcById(int id);
+        // (quest rework C3 C4, CoP 7-4's Cryptonberry Executor and Dalham) local mob = GetMobByID(id); nil: false; else
+        // mob:spawn(), mob:updateClaim(player), and mob:setCE(player, 0) when zeroEnmity: true. The entity's own spawn,
+        // not SpawnMob (SpawnMobById)
+        bool SpawnMobEntityById(int id, bool zeroEnmity);
+        // (quest rework C3 C4, CoP 8-1's Rubious Crystals) npcUtil.popFromQM(player, npc, { id, ... },
+        // { hide = hide }): the mobs by id, in the order given
+        bool PopFromQmIds(int[] ids, int hide);
+        // (quest rework C3 C4, CoP 8-1's Ru'aern death) print(message): the Lua global print, a line in the server log
+        void LuaPrint(string message);
+        // (quest rework C3 N5, Ranperre's Final Rest's _5a0) npcUtil.popFromQM(player, npc, { zones[zone].mob[mobName],
+        // ... }, { hide = hide, claim = claim }): each mob entry as IDs.lua has it, in the order given
+        bool PopFromQm(string[] mobNames, int hide, bool claim);
+        // (quest rework C3 N5, The Final Image's Ro'Maeve qm2) npcUtil.popFromQM(player, npc, { id, id + 1, ..., id +
+        // count - 1 }, { claim = claim, look = look, radius = radius }), id = zones[zone].mob[mobName]: no hide given,
+        // so popFromQM takes xi.settings.main.FORCE_SPAWN_QM_RESET_TIME
+        bool PopFromQmSeriesRadius(string mobName, int count, bool claim, bool look, int radius);
+        // (quest rework C3 N5, The Pirate's Cove's qm4) GetMobByID(zones[zone].mob[mobName] + offset):lookAt(
+        // player:getPos()); a nil mob raises, as the Lua's call on nil does
+        void MobLookAtPlayer(string mobName, int offset = 0);
+        // (quest rework C3 N5, The Pirate's Cove's qm4) GetMobByID(zones[zone].mob[mobName] + offset):updateClaim(
+        // player): no spawn; a nil mob raises, as the Lua's call on nil does
+        void MobUpdateClaim(string mobName, int offset = 0);
     }
 
     public interface IQuestProgress : IQuestProgressView
@@ -573,6 +664,9 @@ namespace XI.Quests.Authoring
         void SetAnimation(int animation);
         // npc:showText(npc, zones[text.Zone].text[text.Name], args...): the NPC speaks the text to the chars in range
         void ShowText(ZoneText text, params int[] args);
+        // npc:messageText(player, zones[text.Zone].text[text.Name]) (quest rework C5, Headstone Pilgrimage's
+        // monuments): the NPC the speaker, the handler's char the entity, showName and mode left nil
+        void MessageText(ZoneText text);
         // npc:hideNPC(seconds)
         void Hide(int seconds);
         // npc:getXPos() / getYPos() / getZPos() (Test My Mettle's moveJar: npcUtil.pickNewPosition finds the jar's spot)
@@ -609,6 +703,9 @@ namespace XI.Quests.Authoring
         // (Mimeo Stone's Luminant) require('scripts/zones/Attohwa_Chasm/globals').handleLuminantUsed(npc): the zone
         // global with this NPC (the Luminant goes CUTSCENE_ONLY; a timer of its own wakes a used one later)
         void AttohwaChasmHandleLuminantUsed();
+        // (quest rework C3 C4, CoP 7-4's Cryptonberry Executor) mob:messageText(mob, zones[text.Zone].text[text.Name]):
+        // the entity is both self and speaker (showName and mode left nil)
+        void MessageTextOwn(ZoneText text);
     }
 
     public interface IQuestSettings
@@ -754,12 +851,20 @@ namespace XI.Quests.Authoring
         // player:messageName(zones[text.Zone].text[text.Name], nil, ...): no entity, the params from the third
         // argument on
         void MessageName(ZoneText text, params int[] args);
+        // player:messageName(zones[text.Zone].text[text.Name], player, ...): the char is the entity named in the line
+        // (Psoxja's TRAP_ACTIVATES: "<name> examines the door"). It sends the same packet as MessageName: C++ falls
+        // back to the char when the name entity is nil, so the member only keeps the Lua's argument parity (a
+        // nil-versus-player mutant is equivalent)
+        void MessageNameOfPlayer(ZoneText text, params int[] args);
         // player:messageText(npc, zones[text.Zone].text[text.Name], showName, mode): the handler's npc (nil when it has
         // none), showName a boolean, mode a number (6 is the system message type)
         void MessageText(ZoneText text, bool showName, int mode);
         // player:messageText(player, zones[text.Zone].text[text.Name]) (New Character Cutscenes): the char is its own
         // speaker, showName and mode left nil
         void MessageTextFromPlayer(ZoneText text);
+        // player:messageText(npc, zones[text.Zone].text[text.Name]) (quest rework C3 N6, Windurst 9-1's Mandragora
+        // Warden): the handler's npc speaks, showName and mode left nil
+        void MessageTextFromNpc(ZoneText text);
         // player:messageSpecial(textId, ...): an id read with Id and offset (cavesID.text.DRY_WIND + 1)
         void Special(int textId, params int[] args);
         // zones[text.Zone].text[text.Name]: the text's id, for a Lua text id plus an offset (HELBORT_ORDERS + 3)

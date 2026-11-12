@@ -1,0 +1,55 @@
+# The Rescue Drill (San d'Oria 2-1), Grilau's route, Galaihaurat's sword and a repeat. A level 10 Warrior of San d'Oria,
+# rank 2 with 1-1, 1-2 and 1-3 completed. Section 1: Grilau's script plays 1009; its finish with option 3 begins the
+# mission (Northern San d'Oria's 1009). Section 2, status 0: Grilau plays ORIGINAL_MISSION_OFFSET + 36. La Theine
+# Plateau, status 8 with the Option var 1 (GMs): Equesobillot and Deaufrain answer RESCUE_DRILL + 21; Galaihaurat plays
+# 114: the Bronze Sword, status 9. Status 9: Galaihaurat answers +25, Deaufrain and Equesobillot +26. Ordelles Caves:
+# the sword traded: 2, status 10. Grilau at status 10: ORIGINAL_MISSION_OFFSET + 36; Vicorpasse 115, status 11; Grilau
+# at status 11: 1005, whose finish completes the mission. Repeated (begun again by the same 1009 finish; section 1 has
+# no completed check): Ruillont at status 0 answers RUILLONT_INITIAL_DIALOG + 9 (completed), and at status 8 his default
+# 7372 plays first, then + 9; Galaihaurat at status 0 plays 110 (section 2), then at status 2 answers RESCUE_DRILL + 16.
+# Rival zone-in, another mission's script: the login in Northern San d'Oria plays Seekers of Adventure's Rumors from the
+# West onZoneIn, which returns 878 (the trace records only that return, with no event packet).
+lists NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1005 LaTheinePlateau/Deaufrain/onTrigger LaTheinePlateau/Equesobillot/onTrigger LaTheinePlateau/Galaihaurat/onTrigger LaTheinePlateau/Vicorpasse/onTrigger LaTheinePlateau/onEventFinish/114 LaTheinePlateau/onEventFinish/115 OrdellesCaves/Ruillont/onTrigger OrdellesCaves/Ruillont/onTrade OrdellesCaves/onEventFinish/2
+char zone=NorthernSanDoria pos=-240.5,7,57.9 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+rank 2
+login
+trigger Grilau                          # section 1: his script's 1009
+finish option=3                         # begun
+trigger Grilau                          # section 2, status 0: ORIGINAL_MISSION_OFFSET + 36
+warp -482,-7,222 LaTheinePlateau
+missionstatus Sandoria 8                # a GM
+charvar Mission[0][3]Option 1           # a GM
+trigger Equesobillot                    # Option 1, not 2: RESCUE_DRILL + 21
+trigger Deaufrain                       # Option 1, not 3: RESCUE_DRILL + 21
+trigger Galaihaurat                     # Option 1: 114
+finish                                  # the Bronze Sword, status 9
+trigger Galaihaurat                     # status 9, Option 1: RESCUE_DRILL + 25
+trigger Deaufrain                       # RESCUE_DRILL + 26
+trigger Equesobillot                    # RESCUE_DRILL + 26
+warp -70,1,607 OrdellesCaves
+walk -71,1,607
+trade Ruillont BronzeSword x1           # status 9: 2
+finish                                  # status 10
+warp -240.5,7,57.9 NorthernSanDoria
+trigger Grilau                          # status 10: ORIGINAL_MISSION_OFFSET + 36
+warp -344,37,266 LaTheinePlateau
+trigger Vicorpasse                      # status 10: 115
+finish                                  # status 11
+warp -240.5,7,57.9 NorthernSanDoria
+trigger Grilau                          # status 11: 1005
+finish                                  # completed (300 rank points)
+trigger Grilau                          # section 1: 1009 (no completed check)
+finish option=3                         # begun again
+warp -70,1,607 OrdellesCaves
+trigger Ruillont                        # status 0, completed: RUILLONT_INITIAL_DIALOG + 9
+missionstatus Sandoria 8                # a GM
+trigger Ruillont                        # status 8, completed: his default 7372, then RUILLONT_INITIAL_DIALOG + 9
+warp -482,-7,222 LaTheinePlateau
+missionstatus Sandoria 0                # a GM
+trigger Galaihaurat                     # sections 2 and 3: 110
+finish                                  # status 2
+trigger Galaihaurat                     # status 2: RESCUE_DRILL + 16

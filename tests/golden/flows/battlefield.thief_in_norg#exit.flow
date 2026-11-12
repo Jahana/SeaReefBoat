@@ -1,0 +1,23 @@
+# A Thief in Norg?! (battlefield.thief_in_norg): the exit. The char enters arena 1, then Burning_Circle (arena 1's), in the battlefield:
+# 32003 (an optional cutscene, skippable); its update: nothing; finished with 0: not 4: still inside. Again, finished with
+# 4: leaveBattlefield(1) (no win, no loss event). BC_Entrance with the clearance and the charm kept: checkRequirements as
+# no registrant fails: the handler returns nothing: the default.
+lists WaughroonShrine/BC_Entrance/onTrade WaughroonShrine/BC_Entrance/onTrigger WaughroonShrine/Burning_Circle/onTrigger WaughroonShrine/onEventUpdate/32003 WaughroonShrine/onEventFinish/32003
+char zone=WaughroonShrine pos=-338.1,104.3,-260.3 job=SAM lvl=50
+quest Outlands.ForgeYourDestiny completed
+quest Outlands.TheSacredKatana completed
+quest Outlands.YomiOkuri completed
+quest Outlands.AThiefInNorg accepted
+charvar Quest[5][142]Prog 6
+item BanishingCharm
+login
+trade BC_Entrance BanishingCharm x1     # the menu 32000
+update 32000 option=65                  # index 4, area 1: entered
+finish                                  # in the arena
+trigger Burning_Circle                  # in the battlefield: 32003
+update 32003 option=1                   # onExitEventUpdate: nothing
+finish option=0                         # not 4: still inside
+trigger Burning_Circle                  # 32003
+finish option=4                         # leaveBattlefield(1): out
+warp -338.1,104.3,-260.3 WaughroonShrine
+trigger BC_Entrance                     # the clearance, the charm kept: the default

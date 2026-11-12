@@ -1,0 +1,25 @@
+# To Each His Own Right section 1 at Port Windurst: a Windurstian with 1-1 to 2-3 completed and none current.
+# Janshura-Rashura's own script plays the gate guards' mission list 78; its finish with option 0 does nothing, with
+# option 10 begins the mission and says YOU_ACCEPT_THE_MISSION. Hakkuru-Rinkuru at status 0 answers his own 224; at 2
+# the mission's 147, whose finish sets status 3; at 3 148.
+lists PortWindurst/Hakkuru-Rinkuru/onTrigger PortWindurst/onEventFinish/78 PortWindurst/onEventFinish/147 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/Sola_Jaab/onTrigger WindurstWoods/Tih_Pikeh/onTrigger WindurstWoods/onEventFinish/114 CastleOztroja/onEventFinish/43 HeavensTower/Foo_Beibo/onTrigger HeavensTower/Kupipi/onTrigger HeavensTower/Rhy_Epocan/onTrigger HeavensTower/Shaz_Norem/onTrigger HeavensTower/Ufu_Koromoa/onTrigger HeavensTower/Vahn_Paineesha/onTrigger HeavensTower/onEventFinish/103 HeavensTower/onEventFinish/107 HeavensTower/onEventFinish/114
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+login
+trigger Janshura-Rashura                # section 1: 78
+finish option=0                         # not 10: nothing
+trigger Janshura-Rashura
+finish option=10                        # begun
+trigger Hakkuru-Rinkuru+7                 # status 0: nothing from the mission
+finish-if-event
+missionstatus Windurst 2
+trigger Hakkuru-Rinkuru+7                 # 147
+finish                                  # status 3
+trigger Hakkuru-Rinkuru+7                 # 148
+finish-if-event

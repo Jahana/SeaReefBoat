@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using XI.Persistence;
 
-// The world tables (server_variables, conquest_system, bcnm_records) of a golden world. Every world starts from the same
+// The world tables (server_variables, conquest_system, bcnm_records, unity_system) of a golden world. Every world starts from the same
 // rows, the snapshot in tests/golden/world-tables.txt, whatever the database's own rows are and whatever an earlier run
 // (or world of the run) left:
 // the run's queries go through WorldTablesDatabase, which sends each one that names a world table to the run's private
@@ -76,6 +76,7 @@ internal static partial class Program
             Console.WriteLine($"could not drop the world tables of {world_.Tag}: {ex.Message}");
         }
         world_.Tag = null;
+        world_.Chars = null;
     }
 
     // world-snapshot: tests/golden/world-tables.txt written, the hashed world tables from the --db's real ones, the
@@ -100,6 +101,7 @@ internal static partial class Program
                     n += rows;
                     statements++;
                 }
+                if (SeedOverrides.TryGetValue(table, out var over)) Sql(world_.Inner, string.Format(over, from));
                 var count = Sql(world_.Inner, $"SELECT COUNT(*) AS n FROM `{from}`");
                 long got = count != null && count.Next() ? count.Get<long>("n") : -1;
                 if (n == 0 || got != n)
@@ -211,8 +213,10 @@ internal static partial class Program
     {
         var sb = new StringBuilder();
         sb.Append("# the world tables every golden world starts from (tests/XI.Verify.QuestGolden.Live/World.cs). A change to\n");
-        sb.Append("# server_variables or conquest_system changes every trace's world header: record them again. bcnm_records is\n");
-        sb.Append("# sql/bcnm_info.sql's seed, which no header hashes. Written by `world-snapshot`.\n");
+        sb.Append("# server_variables or conquest_system changes every trace's world header: record them again. bcnm_records and\n");
+        sb.Append("# unity_system are sql/bcnm_info.sql's and sql/unity_system.sql's seeds, which no header hashes. Written by\n");
+        sb.Append("# `world-snapshot`. unity_system's leader 1 row holds members_current 2, the value every trace recorded\n");
+        sb.Append("# (Program.SeedOverrides).\n");
         foreach (var t in tables)
         {
             sb.Append($"table {t.Name}\n");
@@ -270,8 +274,8 @@ internal static partial class Program
     }
 }
 
-// the run's database with its world tables private: a query naming server_variables, conquest_system or bcnm_records
-// (as a whole word) goes to golden_world_<tag>_<table>; the rest goes through unchanged. No tag: nothing is rewritten
+// the run's database with its world tables private: a query naming server_variables, conquest_system, bcnm_records or
+// unity_system (as a whole word) goes to golden_world_<tag>_<table>; the rest goes through unchanged. No tag: nothing is rewritten
 internal sealed class WorldTablesDatabase : IDatabase
 {
     private static readonly Regex Names = new(@"\b(" + string.Join("|", Program.WorldTables) + @")\b");
@@ -280,11 +284,24 @@ internal sealed class WorldTablesDatabase : IDatabase
 
     public IDatabase Inner { get; }
     public string Tag;
+    // the running flow's char ids: the engine's hourly unity recount reads char_profile, which every run on the lane
+    // shares, so it counts only these chars (Rewrite); null: nothing beyond the table names is rewritten
+    public IReadOnlyList<uint> Chars;
 
     internal static string PrivateName(string table, string tag) => $"golden_world_{tag}_{table}";
 
-    internal static string Rewrite(string query, string tag) =>
-        tag == null || query == null || !NamesAny(query) ? query : Names.Replace(query, m => PrivateName(m.Value, tag));
+    // ZoneHost.Roe.cs's recount subquery, exactly (SelfTest checks the engine source still has it)
+    internal const string UnityRecount = "SELECT unity_leader, COUNT(*) AS members FROM char_profile GROUP BY unity_leader";
+
+    internal static string Rewrite(string query, string tag, IReadOnlyList<uint> chars = null)
+    {
+        if (tag == null || query == null || !NamesAny(query)) return query;
+        var named = Names.Replace(query, m => PrivateName(m.Value, tag));
+        if (chars == null || chars.Count == 0 || !named.Contains(UnityRecount, StringComparison.Ordinal)) return named;
+        return named.Replace(UnityRecount,
+            $"SELECT unity_leader, COUNT(*) AS members FROM char_profile WHERE charid IN ({string.Join(",", chars)}) GROUP BY unity_leader",
+            StringComparison.Ordinal);
+    }
 
     // whether the query names a world table at all (a plain loop: every query of the run passes here)
     private static bool NamesAny(string query)
@@ -294,8 +311,8 @@ internal sealed class WorldTablesDatabase : IDatabase
         return false;
     }
 
-    public ResultSet Execute(string query, IReadOnlyList<BoundValue> parameters) => Inner.Execute(Rewrite(query, Tag), parameters);
-    public ResultSet ExecuteBulk(string query, IReadOnlyList<BoundValue> parameters) => Inner.ExecuteBulk(Rewrite(query, Tag), parameters);
+    public ResultSet Execute(string query, IReadOnlyList<BoundValue> parameters) => Inner.Execute(Rewrite(query, Tag, Chars), parameters);
+    public ResultSet ExecuteBulk(string query, IReadOnlyList<BoundValue> parameters) => Inner.ExecuteBulk(Rewrite(query, Tag, Chars), parameters);
     public string Schema => Inner.Schema;
     public string Version => Inner.Version;
     public string DriverVersion => Inner.DriverVersion;

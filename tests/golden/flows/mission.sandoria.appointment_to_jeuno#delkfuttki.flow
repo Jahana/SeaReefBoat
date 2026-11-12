@@ -1,0 +1,17 @@
+# Appointment to Jeuno at the Cermet Door _541 holding the Delkfutt Key key item and the key: at status 4 the trigger
+# plays cutscene 0, whose finish sets status 5 and keeps the key; again at 4 the trade plays 0, whose finish keeps the
+# key (the key item is held).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Arsha/onTrigger ChateauDoraguille/Chupaile/onTrigger ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h4/onTrigger ChateauDoraguille/onEventFinish/508 ChateauDoraguille/onEventFinish/537 RuludeGardens/Nelcabrit/onTrigger RuludeGardens/_6r5/onTrigger RuludeGardens/onEventFinish/39 RuludeGardens/onEventFinish/42 LowerDelkfuttsTower/_541/onTrade LowerDelkfuttsTower/_541/onTrigger LowerDelkfuttsTower/onEventFinish/0
+char zone=LowerDelkfuttsTower pos=636,16,20 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria AppointmentToJeuno current
+keyitem DelkfuttKey
+item DelkfuttKey
+login
+missionstatus Sandoria 4
+trigger _541                            # cutscene 0
+finish                                  # status 5, the key item kept
+missionstatus Sandoria 4
+walk 637,14,21
+trade _541 DelkfuttKey x1               # cutscene 0
+finish                                  # status 5, the item kept: the key item held

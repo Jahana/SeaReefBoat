@@ -1,0 +1,83 @@
+# Vain (Windurst 8-1, mission.windurst.vain), the Sarutabaruta zone-ins (East and West Sarutabaruta, Tahrongi,
+# Buburimu) by the zone before. Status 1 (a GM): each zone-in plays its event, left open; its update sends the sky (0,
+# 0, 0, 0, 0, n) the position or the zone before picks, or nothing; the finish closes it. A warp to 0,0,0 is 1,0,1 (a
+# zone's onZoneIn sets a char at 0,0,0 down at its own spot); a warp inside a zone keeps the zone before it. Enemy of
+# the Empire II (ASA id 5) is current here, not Burgeoning Dread (id 1): Burgeoning Dread's own East Sarutabaruta
+# zone-in with Vain's breaks the Lua lookup (a table and a number; #dread pins it).
+char zone=WindurstWoods pos=106,-5,-21 job=WAR lvl=75 nation=2
+mission Asa EnemyOfTheEmpireIi current  # not Burgeoning Dread: its East Sarutabaruta zone-in
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods completed
+rank 8
+mission Windurst Vain current
+login
+missionstatus Windurst 1
+warp 1,0,1 EastSarutabaruta open        # status 1: 52
+update 52 option=0                      # from Windurst Woods, z 1: 1
+finish
+warp 0,0,600 WestSarutabaruta open      # status 1: 50
+update 50 option=0                      # z 600: 2
+finish
+warp 0,0,600 EastSarutabaruta open      # status 1: 52
+update 52 option=0                      # from West Sarutabaruta, z 600: 2
+finish
+warp 1,0,1 WestSarutabaruta open        # status 1: 50
+update 50 option=0                      # z 1: 1
+finish
+warp 1,0,1 EastSarutabaruta open        # status 1: 52
+update 52 option=0                      # from West Sarutabaruta, z 1: 1
+finish
+warp 1,0,1 OuterHorutotoRuins           # Outer Horutoto Ruins
+warp 0,0,600 EastSarutabaruta open      # status 1: 52
+update 52 option=0                      # from Outer Horutoto, z 600: 2
+finish
+warp 1,0,1 TahrongiCanyon open          # status 1: 37
+update 37 option=0                      # from East Sarutabaruta: 7
+finish
+warp 1,0,1 OuterHorutotoRuins           # Outer Horutoto Ruins
+warp 1,0,1 EastSarutabaruta open        # status 1: 52
+update 52 option=0                      # from Outer Horutoto, z 1: nothing
+finish
+warp 1,0,1 MazeOfShakhrami              # the Maze of Shakhrami
+warp 1,0,1 EastSarutabaruta open        # status 1: 52
+update 52 option=0                      # from the Maze of Shakhrami: nothing
+finish
+warp 1,0,1 BuburimuPeninsula open       # status 1: 5
+update 5 option=0                       # from East Sarutabaruta: nothing
+finish
+warp 1,0,1 TahrongiCanyon open          # status 1: 37
+update 37 option=0                      # from Buburimu Peninsula: 7
+finish
+warp 1,0,1 MazeOfShakhrami              # the Maze of Shakhrami
+warp 1,0,1 TahrongiCanyon open          # status 1: 37
+update 37 option=0                      # from the Maze of Shakhrami: 6
+finish
+warp 1,0,1 MazeOfShakhrami              # the Maze of Shakhrami
+warp 1,0,1 BuburimuPeninsula open       # status 1: 5
+update 5 option=0                       # from the Maze of Shakhrami: 6
+finish
+warp 1,0,1 LabyrinthOfOnzozo            # the Labyrinth of Onzozo
+warp 1,0,1 BuburimuPeninsula open       # status 1: 5
+update 5 option=0                       # from the Labyrinth of Onzozo: 7
+finish
+warp 1,0,1 Mhaura                       # Mhaura
+warp 1,0,1 BuburimuPeninsula open       # status 1: 5
+update 5 option=0                       # from Mhaura: 7
+finish

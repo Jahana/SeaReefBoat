@@ -1,0 +1,32 @@
+# Path of Darkness (ToAU 42), Whitegate arm. Naja 3148. Rodin-Comidin without the Nyzul Isle Route: 3142, finished: the
+# key item; again: 3141. Trigger area 3 at Status 0 plays nothing; at Status 1: 3143 (blockedDialog 0), update 3143 with
+# option 0 answers 0, 1 and with option 1 nothing, finished: blockedDialog 1 and the char set down at the door; out and
+# in again: 3143 with blockedDialog 1.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/Rodin-Comidin/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventUpdate/3143 AhtUrhganWhitegate/onEventFinish/3142 AhtUrhganWhitegate/onEventFinish/3143
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PathOfDarkness current
+keyitem PscWildcatBadge
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem
+finish-if-event
+trigger Rodin-Comidin
+finish
+trigger Rodin-Comidin
+finish-if-event
+walk 34.7,-6.6,-54.1
+walk 34.7,-6.6,-40
+missionstatus Toau 1
+walk 34.7,-6.6,-54.1
+update 3143 option=0
+update 3143 option=1
+finish
+walk 34.7,-6.6,-40
+walk 34.7,-6.6,-54.1
+finish

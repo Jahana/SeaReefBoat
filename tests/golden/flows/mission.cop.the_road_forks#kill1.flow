@@ -1,0 +1,15 @@
+# The Road Forks, the Lioumere killed with its status 1 (mission.cop.the_road_forks#kill1). A level 75 Warrior of
+# Windurst with 3-3 current (a GM). Attohwa Chasm, Windurst status 8: Loose Sand spawns and claims the Lioumere; the
+# mission Status set to 1 (a GM); the Lioumere killed: nothing.
+lists AttohwaChasm/Loose_Sand/onTrigger AttohwaChasm/Lioumere/onMobDeath
+char zone=AttohwaChasm pos=478.8,20,41.7 job=WAR lvl=75 nation=2
+mission Cop TheRoadForks current
+login
+tick 1000
+tick 1000
+tick 1000
+missionstatus Cop 8 pos=1               # a GM
+trigger Loose_Sand here                 # 8: the Lioumere spawned and claimed
+finish-if-event
+charvar Mission[6][325]Status 1         # a GM
+kill LIOUMERE                           # status 1: nothing

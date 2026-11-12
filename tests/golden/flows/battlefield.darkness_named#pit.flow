@@ -1,0 +1,23 @@
+# Darkness Named's pit (battlefield.darkness_named#pit). A level 75 Warrior of San d'Oria with Darkness Named current
+# at Status 4 (GMs), in area 1: the first Diremite claimed (the char at its place, outside the arena box; superlink:
+# its six engage): the ticks mark the char in the pit; walked into the box: the enmity reset, every player inside, the
+# Diremites disengage and despawn; out of the box and in again with none engaged.
+lists TheShroudedMaw/MC_Entrance/onTrigger TheShroudedMaw/onEventUpdate/32000 TheShroudedMaw/onEventFinish/32000
+char zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+mission Cop DarknessNamed current
+charvar Mission[6][358]Status 4
+login
+trigger MC_Entrance
+update 32000 option=1
+finish
+tick 2000
+claim DIABOLOS+1                        # the Diremites engage
+tick 5000                               # the char is out of the box: in the pit
+walk -240,-35,285                       # into the box
+tick 5000                               # the enmity reset; disengaged
+tick 5000
+walk -240,-10,285                       # out of the box
+tick 5000
+walk -240,-35,285                       # in again
+tick 5000
+tick 5000

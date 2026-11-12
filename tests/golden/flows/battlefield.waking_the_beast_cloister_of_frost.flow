@@ -1,0 +1,23 @@
+# Waking the Beast (battlefield.waking_the_beast_cloister_of_frost, CloisterOfFrost, a BattlefieldQuest of OtherAreas.WakingTheBeast, a C# quest; index 3, 30
+# minutes, up to 18 players, repeatable, the Rainbow Resonator read by entryRequirement, Ice_Protocrystal the exit). A level 75 Warrior with
+# the quest accepted and the resonator. The trigger: the menu 32000. Updates: 0: ignored (option 0); 4 (index 0, not in the menu): REQS_NOT_MET; 48 (index 3, area 0) and 52 (area 4, past
+# the zone's arenas): REQS_NOT_MET; 49 (index 3, area 1): registered, entered. The Prime of arena 1 (Shiva_Prime_WTB) killed: the first
+# group's allDeath kills the elementals after it and sets WON; the win (BattlefieldQuest's onBattlefieldWin, accepted):
+# battlefieldWin 483 set, 32001; its finish: the battlefield's onEventFinishWin (the framework's), then the quest's 32001
+# handler: the eye. After the cleanup, out.
+lists CloisterOfFrost/IP_Entrance/onTrigger CloisterOfFrost/onEventUpdate/32000 CloisterOfFrost/onEventFinish/32000 CloisterOfFrost/onEventFinish/32001
+char zone=CloisterOfFrost pos=561.5,-0.8,600.0 job=WAR lvl=75
+quest OtherAreas.WakingTheBeast accepted
+keyitem RainbowResonator
+login
+trigger IP_Entrance                     # the resonator: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=4                   # index 0, not in the menu: REQS_NOT_MET
+update 32000 option=48                  # area 0: REQS_NOT_MET
+update 32000 option=52                  # area 4: REQS_NOT_MET
+update 32000 option=49                  # area 1: registered, entered
+finish                                  # in the arena
+kill SHIVA_PRIME_ASA-15                # the Prime of arena 1 (allDeath): its elementals die, WON; 32001
+finish                                  # the battlefield's finish, then the quest's handler: the eye
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

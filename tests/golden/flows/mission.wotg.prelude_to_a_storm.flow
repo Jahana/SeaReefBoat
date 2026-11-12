@@ -1,0 +1,28 @@
+# Prelude to a Storm (WotG 31), the whole run, in Xarcabard [S]. Rally Point: Red shows REQUIRED_TO_DELIVER (027
+# messageName 8272) and plays nothing (Lua returns true). Rally Point: Green at Status 0 plays 21 [137, 300, 200, 100,
+# 0, 6553620]; its finish gives the Magelight Signal Flare (KEYITEM_OBTAINED) and sets Status 1. With the flare, Green
+# shows HELP_FEDERATION_PREPARE (8273) and plays nothing; the flare taken (a GM), Green plays 25 [137, 23, 2963], whose
+# finish gives the flare again. Status 2 and Option 1 (GMs, for the instance no flow runs): the zone-in plays 22, left
+# open; the update with option 13 sends 05C [0, 23, 1756, 0, 0, 0, 0, 2]; the finish gives an Elixir and completes the
+# mission (Storm's Crescendo current, Status and Option cleared).
+lists XarcabardS/Rally_Point_Red/onTrigger XarcabardS/Rally_Point_Green/onTrigger XarcabardS/onZoneIn/1 XarcabardS/onEventUpdate/22 XarcabardS/onEventFinish/21 XarcabardS/onEventFinish/22 XarcabardS/onEventFinish/25
+uncovered: 1/-/onEventFinish:10000 -- no flow statement starts 10000 here: its sender would be the Ghoyu's Reverie instance, which this tree does not have (the Lua's TODO; no script under scripts/zones/Ghoyus_Reverie starts an event), and the harness has no instance run; the finish (Status 2 and the set-down) is pinned by the fake check c3 T7 wotg 31 in tests/XI.Verify.Quests/C3ToauT7.cs
+char zone=XarcabardS pos=-106.071,-25.5,-50 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg PreludeToAStorm current
+login
+trigger Rally_Point_Red                    # REQUIRED_TO_DELIVER
+trigger Rally_Point_Green                  # Status 0: 21
+finish                                     # the flare, Status 1
+trigger Rally_Point_Green                  # the flare held: HELP_FEDERATION_PREPARE
+delkeyitem MagelightSignalFlare
+trigger Rally_Point_Green                  # no flare: 25
+finish                                     # the flare
+charvar Mission[5][30]Status 2             # a GM: the instance's clear
+charvar Mission[5][30]Option 1             # a GM: the reward tier
+rezone open                                # 22
+update 22 option=13                        # the update packet
+finish                                     # an Elixir, completed

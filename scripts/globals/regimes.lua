@@ -10,7 +10,6 @@
 -----------------------------------
 require('scripts/globals/extravaganza')
 require('scripts/globals/npc_util')
-require('scripts/globals/roe')
 require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}

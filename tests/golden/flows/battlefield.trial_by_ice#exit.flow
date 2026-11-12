@@ -1,0 +1,19 @@
+# Trial by Ice (battlefield.trial_by_ice): the exit. The char enters arena 1, then Ice_Protocrystal (arena 1's), in the battlefield:
+# 32003 (an optional cutscene, skippable); its update: nothing; finished with 0: not 4: still inside. Again, finished with
+# 4: leaveBattlefield(1) (no win, no loss event). IP_Entrance with the clearance and the entry item gone: checkRequirements as
+# no registrant fails: the handler returns nothing: the default.
+lists CloisterOfFrost/IP_Entrance/onTrigger CloisterOfFrost/Ice_Protocrystal/onTrigger CloisterOfFrost/onEventUpdate/32003 CloisterOfFrost/onEventFinish/32003
+char zone=CloisterOfFrost pos=558.5,-0.8,600.0 job=WAR lvl=75
+quest Sandoria.TrialByIce accepted
+keyitem TuningForkOfIce
+login
+trigger IP_Entrance                     # the fork: the menu 32000
+update 32000 option=1                   # area 1: registered, entered, the fork taken
+finish                                  # in the arena
+trigger Ice_Protocrystal                  # in the battlefield: 32003
+update 32003 option=1                   # onExitEventUpdate: nothing
+finish option=0                         # not 4: still inside
+trigger Ice_Protocrystal                  # 32003
+finish option=4                         # leaveBattlefield(1): out
+warp 558.5,-0.8,600.0 CloisterOfFrost
+trigger IP_Entrance                     # the clearance, the entry item gone: the default

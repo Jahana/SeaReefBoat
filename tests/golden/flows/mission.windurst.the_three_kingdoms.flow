@@ -1,0 +1,32 @@
+# The Three Kingdoms (Windurst 2-3, mission.windurst.the_three_kingdoms). A level 30 Warrior of Windurst at Port
+# Windurst, 1-1 to 2-2 completed by a GM (no mission current; a GM's Resonance current keeps RoV 1-1 out of the logins),
+# ENABLE_TRUST_QUESTS 1. Section 1: Janshura-Rashura's own script plays the gate guards' mission list 78; its finish
+# with option 0 does nothing, with option 5 begins the mission and says YOU_ACCEPT_THE_MISSION. Section 2:
+# Janshura-Rashura 138. Heaven's Tower: Kupipi at status 0 plays 95 with the Letter to the Consuls in slot 3 and the
+# eighth parameter 1 (neither Semih Lafihna's spell nor her cipher); its finish gives the letter and the cipher and sets
+# status 1. At status 1 Kupipi plays 97, 98, 97: each finish flips the local var KupipiRepeatLine.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWalls/Zokima-Rokima/onTrigger WindurstWalls/onEventFinish/93 WindurstWaters/Dagoza-Beruza/onTrigger WindurstWaters/Mokyokyo/onTrigger WindurstWaters/Panna-Donna/onTrigger WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/onEventFinish/114 HeavensTower/Kupipi/onTrigger HeavensTower/onEventFinish/95 HeavensTower/onEventFinish/97 HeavensTower/onEventFinish/98 HeavensTower/onEventFinish/101 Metalworks/Mih_Ketto/onTrigger Metalworks/Moyoyo/onTrigger Metalworks/Patt-Pott/onTrigger Metalworks/Topuru-Kuperu/onTrigger Metalworks/onEventFinish/254 Metalworks/onEventFinish/256 NorthernSanDoria/Heruze-Moruze/onTrigger NorthernSanDoria/Kasaroro/onTrigger NorthernSanDoria/onEventFinish/546 NorthernSanDoria/onEventFinish/547 NorthernSanDoria/onEventFinish/582
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+setting ENABLE_TRUST_QUESTS 1
+login
+trigger Janshura-Rashura                # section 1: 78
+finish option=0                         # not 5: nothing
+trigger Janshura-Rashura                # 78 again
+finish option=5                         # begun
+trigger Janshura-Rashura                # section 2: 138
+finish-if-event
+warp 2,0.1,30 HeavensTower
+trigger Kupipi+1                          # status 0: 95, needs Semih's trust
+finish
+trigger Kupipi+1                          # status 1: 97
+finish
+trigger Kupipi+1                          # 98
+finish
+trigger Kupipi+1                          # 97
+finish

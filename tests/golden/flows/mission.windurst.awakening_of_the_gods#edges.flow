@@ -1,0 +1,50 @@
+# Awakening of the Gods edges. _4fx at status 3: a Pebble: nothing from the mission, its script gives NOTHING_HAPPENS
+# (119); the key at z < 332: the cutscene 23, status 5, the Book of the Gods. Kazham at status 1: Romaa Mihgo and
+# Vanono nothing from the mission, their defaults 263 and 262. Windurst Waters at status 5 without the book:
+# Leepe-Hoppe nothing from the mission, her default 345; Kerutoto 738.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWalls/Zokima-Rokima/onTrigger WindurstWalls/onEventFinish/93 WindurstWaters/Mokyokyo/onTrigger WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/onEventFinish/114 WindurstWaters/Kerutoto/onTrigger WindurstWaters/Leepe-Hoppe/onTrigger WindurstWaters/onEventFinish/734 WindurstWaters/onEventFinish/736 WindurstWaters/onEventFinish/742 Kazham/Jakoh_Wahcondalo/onTrigger Kazham/Romaa_Mihgo/onTrigger Kazham/Vanono/onTrigger Kazham/onEventFinish/264 Kazham/onEventFinish/266 TempleOfUggalepih/_4fx/onTrade TempleOfUggalepih/onEventFinish/23
+char zone=TempleOfUggalepih pos=340,0,326 job=WAR lvl=75 nation=2
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+mission Windurst TheShadowAwaits completed
+mission Windurst FullMoonFountain completed
+mission Windurst SaintlyInvitation completed
+mission Windurst TheSixthMinistry completed
+mission Windurst AwakeningOfTheGods current
+rank 7
+keyitem BlankBookOfTheGods
+item CursedKey
+item Pebble
+login
+missionstatus Windurst 3
+trade _4fx Pebble x1                    # another item: nothing from the mission
+finish-if-event
+trade _4fx CursedKey x1                 # status 3, z < 332: cutscene 23
+finish                                  # status 5, the Book of the Gods
+missionstatus Windurst 3
+warp 101.702,-15.023,-115.841 Kazham
+missionstatus Windurst 1
+trigger Romaa_Mihgo                     # status 1: nothing from the mission
+finish-if-event
+trigger Vanono                          # status 1: nothing from the mission
+finish-if-event
+warp 24.0,-5.38,-197.7 WindurstWaters
+missionstatus Windurst 5
+delkeyitem BookOfTheGods
+trigger Leepe-Hoppe                     # status 5, no book: nothing from the mission
+finish-if-event
+trigger Kerutoto                        # status 5: 738
+finish

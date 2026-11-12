@@ -1,0 +1,48 @@
+# Headstone Pilgrimage: Behemoth's Dominion's headstone (Lightning Fragment), five of the others held. Without its
+# fragment it first plays 200 (Lightning); option 0 does nothing; 3 yalms off option 1 says
+# MUST_MOVE_CLOSER (7361: 0, the fragment); close by, option 1 shows AIR_AROUND_YOU_CHANGED (7339, a 0x036 message)
+# and spawns the Ancient Weapon and the Legendary Weapon. With both up, and again right after the Ancient Weapon's
+# kill, the headstone says SOMETHING_BETTER (7340); the trace cannot show whether the killed NM still counts as
+# spawned there (the two spawn tests joined by or change no trace), so the one-up arm is pinned by a fake check.
+# Each kill gives 150 XP. Once both are dead it plays 201 instead; option 0
+# does nothing, 3 yalms off MUST_MOVE_CLOSER, close by option 1 gives the fragment (KEYITEM_OBTAINED 6398).
+# Held, it says ALREADY_OBTAINED_FRAG (7344). A GM adds the last fragment and takes this one: 201's
+# option 1 says FOUND_ALL_FRAGS (7346) and completes the mission (the Bearer of the Eight Prayers
+# title, Through the Quicksand Caves current). Completed, it says ALREADY_HAVE_ALL_FRAGS (7345, section 2).
+lists BehemothsDominion/Cermet_Headstone/onTrigger BehemothsDominion/onEventFinish/200 BehemothsDominion/onEventFinish/201
+char zone=BehemothsDominion pos=-72,-5,-88 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart HeadstonePilgrimage current
+keyitem FireFragment
+keyitem IceFragment
+keyitem WindFragment
+keyitem EarthFragment
+keyitem LightFragment
+login
+trigger Cermet_Headstone                # no fragment, no NM up: 200
+finish option=0                         # not 1: nothing
+trigger Cermet_Headstone at=3           # 200
+finish option=1                         # 3 yalms off: MUST_MOVE_CLOSER
+trigger Cermet_Headstone                # 200
+finish option=1                         # AIR_AROUND_YOU_CHANGED, the NMs spawned
+trigger Cermet_Headstone                # both up: SOMETHING_BETTER
+kill ANCIENT_WEAPON                     
+trigger Cermet_Headstone                # after the kill: SOMETHING_BETTER
+kill LEGENDARY_WEAPON                   # the last dead: 201 next
+trigger Cermet_Headstone                # both NMs dead: 201
+finish option=0                         # not 1: nothing
+trigger Cermet_Headstone at=3           # 201
+finish option=1                         # 3 yalms off: MUST_MOVE_CLOSER
+trigger Cermet_Headstone                # 201
+finish option=1                         # the fragment, KEYITEM_OBTAINED
+trigger Cermet_Headstone                # held: ALREADY_OBTAINED_FRAG
+finish-if-event
+keyitem WaterFragment                   # a GM
+delkeyitem LightningFragment            # a GM
+trigger Cermet_Headstone                # 201
+finish option=1                         # the last fragment: FOUND_ALL_FRAGS, completed
+trigger Cermet_Headstone                # completed: section 2
+finish-if-event

@@ -1,0 +1,19 @@
+# The Moonlit Path (battlefield.moonlit_path, Full Moon Fountain, a BattlefieldQuest of windurst.the_moonlit_path; index 0,
+# 30 minutes, 6 players, the Moon Bauble required and kept, Moon_Spiral the exit). A level 75 Warrior with the quest
+# accepted and the bauble. The trigger: the menu 32000. Updates: 0 and 4 (past the arenas): REQS_NOT_MET; 1 (area 1):
+# registered, entered (the bauble kept). Fenrir Prime of arena 1 (FENRIR_PRIME) killed: WON; the win: 32001; its
+# finish; the cleanup.
+lists FullMoonFountain/MS_Entrance/onTrigger FullMoonFountain/onEventUpdate/32000 FullMoonFountain/onEventFinish/32000 FullMoonFountain/onEventFinish/32001
+char zone=FullMoonFountain pos=-301.3,9.5,-260.0 job=WAR lvl=75
+quest Windurst.TheMoonlitPath accepted
+keyitem MoonBauble
+login
+trigger MS_Entrance                     # the bauble: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=4                   # area 4: REQS_NOT_MET
+update 32000 option=1                   # area 1: registered, entered, the bauble kept
+finish                                  # in the arena
+kill FENRIR_PRIME                       # arena 1's Fenrir Prime: WON; 32001
+finish                                  # the battlefield's finish, the quest's handler
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

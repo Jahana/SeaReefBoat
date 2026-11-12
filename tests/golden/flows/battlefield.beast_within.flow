@@ -1,0 +1,34 @@
+# The Beast Within (battlefield.beast_within, Jade Sepulcher): a level 75 Blue Mage at level cap 75, The Beast Within
+# accepted at Quest[6][40]Prog 2 (GMs), one Blue Mage's Testimony. The testimony traded to _1v0: the 32000 menu
+# (0,0,0,4: index 2). Updates: 0 ignored; 32 (area 0) and 36 (area 4): REQS_NOT_MET (5); 33 (area 1): registered,
+# entered: TESTIMONY_WEARS 7397 (the item, 3 shown, 2 left: its wear 0 -> 1), ENTERING_THE_BATTLEFIELD_FOR,
+# MEMBERS_OF_YOUR_PARTY (1), TIME_LIMIT_FOR_THIS_BATTLE_IS (10); the testimony kept. Finished: in the arena. RAUBAHN
+# brought to 1 HP (he is unkillable): in the kill step his mob script's RAUBAHN_YOUR_SOUL and RAUBAHN_GREATER_POWER; at
+# the second tick RAUBAHN_STRENGTH_FAILED_ME and 32001 (1,600,0,6,67,2: area 1, index 2, the skip flag 0). Finished: the
+# battlefield's onEventFinishWin, then the quest's 32001 (ahtUrhgan.the_beast_within, C#; battlefieldWin set by the
+# win): its event 6; finished: a Scroll of Instant Warp (ITEM_OBTAINED), the title 492 (Master of Ambition), completed
+# (the cap 75 kept, no message). 11 s, then 10 s: the effects 143 and 254 (the battlefield's) removed.
+uncovered: group:1:allDeath -- Raubahn is unkillable (Raubahn.lua:35, setUnkillable(true) in onMobSpawn): kill and kill nokiller leave him alive (a #alldeath flow's record failed: 'the mob did not die'), and his mob script wins the fight with battlefield:win() (Raubahn.lua:182); the allDeath is pinned by the c3 Q4 group check
+uncovered: requiredItems:worn -- Jade Sepulcher's entry hooks are Battlefield[1153]'s (Shadows_of_the_Mind.lua, the zone's first content, Lua: order 67/_1v0/onTrade in every trace), so no statement reaches the C# framework's onEntryTrade in this zone, the one handler that counts this label: the Lua framework's onEntryTrade makes the worn check on this content's proxy; the torn testimony's TESTIMONY_IS_TORN 7396 from this content's wornMessage is in #exit and #testimony, the field is pinned by the c3 Q4 check of each one's testimony, and the C# arm by the c3 Q4 onEntryTrade check
+lists JadeSepulcher/_1v0/onTrade JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001 JadeSepulcher/onEventFinish/6
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+levelcap 75
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Transformations completed
+quest AhtUrhgan.TheBeastWithin accepted
+charvar Quest[6][40]Prog 2
+item BlueMagesTestimony
+login
+trade _1v0 BlueMagesTestimony x1
+update 32000 option=0
+update 32000 option=32
+update 32000 option=36
+update 32000 option=33
+finish
+kill RAUBAHN
+tick 1000
+tick 1000
+finish
+finish-if-event
+tick 11000
+tick 10000

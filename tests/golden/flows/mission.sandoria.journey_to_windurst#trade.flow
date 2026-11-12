@@ -1,0 +1,25 @@
+# Journey to Windurst in Windurst Woods with three Parana Shields and a Bronze Dagger held, Mourices. Status 5: a trade
+# of two Parana Shields draws no reply. Status 6: one shield, three shields, the dagger alone, and two shields with the
+# dagger each draw no reply (the trade must be exactly two shields); two shields play 457, whose finish is run. At
+# status 6 again a single shield draws no reply. The login in Windurst Woods also plays SoA's Rumors from the West zone-
+# in 839, whose finish sets SoA status 4.
+lists Giddeus/Uu_Zhoumo/onTrigger Giddeus/onEventFinish/42 HeavensTower/Kupipi/onTrigger HeavensTower/onZoneIn/1 HeavensTower/onEventUpdate/42 HeavensTower/onEventFinish/42 HeavensTower/onEventFinish/238 WindurstWoods/Catalia/onTrigger WindurstWoods/Erpolant/onTrigger WindurstWoods/Forine/onTrigger WindurstWoods/Mourices/onTrade WindurstWoods/Mourices/onTrigger WindurstWoods/onEventFinish/457
+char zone=WindurstWoods pos=-50.6,-0.5,-27.6 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria JourneyToWindurst current
+item ParanaShield x3
+item BronzeDagger
+login
+missionstatus Sandoria 5
+trigger Mourices
+finish-if-event
+trade Mourices ParanaShield x2
+missionstatus Sandoria 6
+trade Mourices ParanaShield x1
+trade Mourices ParanaShield x3
+trade Mourices BronzeDagger x1
+trade Mourices ParanaShield x2 BronzeDagger x1
+trade Mourices ParanaShield x2
+finish
+missionstatus Sandoria 6
+trade Mourices ParanaShield x1

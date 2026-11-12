@@ -1,0 +1,61 @@
+# Achieving True Power (battlefield.achieving_true_power#areas, Navukgo Execution Chamber): four chars, each a level 75
+# Puppetmaster at level cap 75, Achieving True Power accepted at Quest[1][85]Prog 1 (GMs), one Puppetmaster's Testimony;
+# one player to a battlefield. main enters area 1 (49), bob area 2 (50), cat area 3 (51), each by the testimony:
+# TESTIMONY_WEARS (3 shown, 2 left). dan's trade with all three areas taken: NO_BATTLEFIELD_ENTRY 7277, no menu. bob's
+# SHAMARHAAN+2 brought to 1 HP: in the kill step SHAMARHAAN_AUTOMATON_POWER, SHAMARHAAN_UNDERESTIMATED,
+# SHAMARHAAN_MAGNIFICENT (his mob script) and 32001 (area 2); finished: the scroll, completed. cat's SHAMARHAAN+4: in
+# the kill step the same three texts and 32001 (area 3); finished: the scroll, completed.
+lists NavukgoExecutionChamber/_1s0/onTrade NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char bob zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char cat zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char dan zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+levelcap 75
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.PuppetmasterBlues completed
+quest Bastok.AchievingTruePower accepted
+charvar Quest[1][85]Prog 1
+item PuppetmastersTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.NoStringsAttached completed
+bob: quest AhtUrhgan.PuppetmasterBlues completed
+bob: quest Bastok.AchievingTruePower accepted
+bob: charvar Quest[1][85]Prog 1
+bob: item PuppetmastersTestimony
+cat: levelcap 75
+cat: quest AhtUrhgan.NoStringsAttached completed
+cat: quest AhtUrhgan.PuppetmasterBlues completed
+cat: quest Bastok.AchievingTruePower accepted
+cat: charvar Quest[1][85]Prog 1
+cat: item PuppetmastersTestimony
+dan: levelcap 75
+dan: quest AhtUrhgan.NoStringsAttached completed
+dan: quest AhtUrhgan.PuppetmasterBlues completed
+dan: quest Bastok.AchievingTruePower accepted
+dan: charvar Quest[1][85]Prog 1
+dan: item PuppetmastersTestimony
+login
+bob: login
+cat: login
+dan: login
+trade _1s0 PuppetmastersTestimony x1
+update 32000 option=49
+finish
+bob: trade _1s0 PuppetmastersTestimony x1
+bob: update 32000 option=50
+bob: finish
+cat: trade _1s0 PuppetmastersTestimony x1
+cat: update 32000 option=51
+cat: finish
+dan: trade _1s0 PuppetmastersTestimony x1
+dan: finish-if-event
+bob: kill SHAMARHAAN+2
+tick 1000
+tick 1000
+bob: finish
+bob: finish-if-event
+cat: kill SHAMARHAAN+4
+tick 1000
+tick 1000
+cat: finish
+cat: finish-if-event

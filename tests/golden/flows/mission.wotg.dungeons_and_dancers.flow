@@ -1,0 +1,23 @@
+# Dungeons and Dancers (WotG 23), the whole run. Regal Pawprints 1 (no Aroma Bug, Timer 0) plays 25 and its finish gives
+# the Aroma Bug (key item 1160); held, it answers 6409 (DefaultActions). Pawprints 8 at Status 0 plays 20 (finish:
+# Status 1); at Status 1 it answers 8605 (DefaultActions' NO_RESPONSE). At Status 2 the zone-in plays 18 and its finish
+# gives the Umbra Bug (key item 1161) and completes the mission. No flow reaches the Everbloom Hollow finish (10000).
+uncovered: 1/-/onEventFinish:10000 -- no flow statement starts 10000 here: the harness has no instance run; the finish (Status 2 and the set-down) is pinned by the fake check c3 T6 wotg in tests/XI.Verify.Quests/C3ToauT6.cs
+lists BeaucedineGlacierS/Regal_Pawprints_8/onTrigger BeaucedineGlacierS/Regal_Pawprints_1/onTrigger BeaucedineGlacierS/onZoneIn/1 BeaucedineGlacierS/onEventFinish/18 BeaucedineGlacierS/onEventFinish/20 BeaucedineGlacierS/onEventFinish/25
+char zone=BeaucedineGlacierS pos=-145.266,-61.851,-174.171 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg DungeonsAndDancers current
+login
+trigger Regal_Pawprints_1                  # 25
+finish                                     # the Aroma Bug
+trigger Regal_Pawprints_1                  # held
+trigger Regal_Pawprints_8                  # Status 0: 20
+finish                                     # Status 1
+trigger Regal_Pawprints_8                  # Status 1
+charvar Mission[5][22]Status 2
+tick 400
+login open                                 # 18
+finish                                     # completed

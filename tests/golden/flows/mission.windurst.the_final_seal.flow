@@ -1,0 +1,47 @@
+# The Final Seal (Windurst 5-1, mission.windurst.the_final_seal) played through: a level 75 Windurstian at rank 5, ACP
+# and RoV current (their zone-ins quiet) and the nation's missions before it completed, the Message to Jeuno held. _6q2
+# 166 (progress), option 0: begun, status 10, YOU_ACCEPT_THE_MISSION, the New Fei'Yin Seal, the message taken. Fei'Yin's
+# zone-in 1 (status 11); Qu'Bia Arena area 1, the Archlich killed: allDeath, WON, 32001: Archmage Assassin and the
+# mission's finish (the Burnt Seal, status 12). _6q2 192: completed (600 rank points, the Burnt Seal taken); then the
+# zone's default VESTAL_CHAMBERS_LOCKED (310).
+lists WindurstWaters/Mokyokyo/onTrigger PortWindurst/Janshura-Rashura/onTrigger WindurstWoods/Rakoh_Buuma/onTrigger WindurstWalls/Zokima-Rokima/onTrigger HeavensTower/_6q2/onTrigger HeavensTower/onEventFinish/166 HeavensTower/onEventFinish/190 HeavensTower/onEventFinish/192 Feiyin/onZoneIn/1 Feiyin/onEventFinish/1 QubiaArena/BC_Entrance/onTrigger QubiaArena/Burning_Circle/onTrigger QubiaArena/onEventUpdate/32000 QubiaArena/onEventFinish/32000 QubiaArena/onEventFinish/32003 QubiaArena/onEventFinish/32001 QubiaArena/onEventFinish/32002
+char zone=HeavensTower pos=2,0.1,30 job=WAR lvl=75 nation=2
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+rank 5
+keyitem MessageToJeunoWindurst
+login
+trigger _6q2                            # section 1, the message held: 166 (progress)
+finish option=0                         # begun: status 10, YOU_ACCEPT_THE_MISSION, the seal; the message taken
+warp -51.0,-16.0,38.0 Feiyin open       # status 10: 1
+finish                                  # status 11
+warp -212.2,-24.6,20.1 QubiaArena
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000                               # the first tick: the groups spawn
+kill ARCHLICH_TABERQUOAN                # the Archlich: allDeath, WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish                                  # 32001: the title, the mission's 32001 finish
+tick 11000
+tick 10000
+warp 2,0.1,30 HeavensTower
+trigger _6q2                            # status 12, the Burnt Seal: 192
+finish                                  # completed: 600 rank points, the Burnt Seal taken
+trigger _6q2                            # completed: nothing from the mission
+finish-if-event

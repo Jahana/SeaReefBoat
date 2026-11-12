@@ -1,0 +1,26 @@
+# One to be Feared (CoP 6-4), the other arms. 6-4 current at Status 1 (a GM): Metalworks' Cid: no 6-4 reply (500);
+# Sealion's Den's zone-in plays 15, its update with option 1: no answer, finished: Status 2, whose zone-in: no event;
+# Status 0 (a GM): Sueleen: no 6-4 reply (20), the Iron Gate: message 7110; Status 3 (a GM): Sueleen: no 6-4 reply (20),
+# the zone-in: no event.
+lists Metalworks/Cid/onTrigger SealionsDen/_0w0/onTrigger SealionsDen/Sueleen/onTrigger SealionsDen/onZoneIn/1 SealionsDen/onEventUpdate/15 SealionsDen/onEventFinish/15
+char zone=Metalworks pos=-12,-12,1 job=WAR lvl=75 nation=0
+mission Cop OneToBeFeared current
+charvar Mission[6][638]Status 1
+login
+trigger Cid                             # Status 1: no 6-4 reply (500)
+finish-if-event
+warp 612,132,776 SealionsDen open       # Status 1: 15
+update 15 option=1                      # option 1: no answer
+finish                                  # Status 2
+warp 108,-40,-83 TavnazianSafehold
+warp 612,132,776 SealionsDen            # Status 2: no zone-in event
+charvar Mission[6][638]Status 0         # a GM
+trigger Sueleen                         # Status 0: no 6-4 reply (20)
+finish-if-event
+trigger _0w0                            # Status 0: message 7110
+finish-if-event
+charvar Mission[6][638]Status 3         # a GM
+trigger Sueleen                         # Status 3: no 6-4 reply (20)
+finish-if-event
+warp 108,-40,-83 TavnazianSafehold
+warp 612,132,776 SealionsDen            # Status 3: no zone-in event

@@ -1,0 +1,9 @@
+# 'timed' and 'repeat', and the dead guard: the schedule's load cleared Timed, so 0x10C takes 4013 (row "0x10C's
+# timed-record guard never fires"). 4000/5000; a capacity datagram has no params.exp and fails; 1500 more completes
+# it with ROE_TIMED_CLEAR (710), not ROE_REPEAT_OR_CANCEL.
+char zone=WestRonfaure pos=0,0,0 job=WAR lvl=30
+login
+record take 4013
+record event GainExperience exp=4000
+record event GainExperience capacity=50
+record event GainExperience exp=1500

@@ -1,0 +1,24 @@
+# Immortal Sentries in Caedarva Mire: Nahshib with the package 5 (option 0: nothing; option 1: handed over), without
+# it 6; Nareema with the package (a GM) 5 with its second operand 1, finished with option 1: handed over; without it 6
+# (1).
+lists CaedarvaMire/Nahshib/onTrigger CaedarvaMire/Nareema/onTrigger CaedarvaMire/onEventFinish/5
+char zone=CaedarvaMire pos=-270,-9,-60 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ImmortalSentries current
+keyitem SuppliesPackage
+login
+trigger Nahshib                         # the package: 5
+finish option=0                         # nothing
+trigger Nahshib
+finish option=1                         # handed over
+trigger Nahshib                         # no package: 6
+finish
+warp 518.387,-24.707,-467.297 CaedarvaMire
+trigger Nareema                         # no package: 6 (1)
+finish
+keyitem SuppliesPackage                 # a GM
+trigger Nareema                         # the package: 5 (1)
+finish option=1                         # handed over

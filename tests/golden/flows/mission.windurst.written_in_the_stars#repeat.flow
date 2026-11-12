@@ -1,0 +1,32 @@
+# Written in the Stars current again after a completion (section 3, the repeat), four Rusty Daggers held: Kiwawa answers
+# his own 58. Status 0: three daggers to Zubaba, nothing; Zubaba 257 with the dagger in slot 1, whose finish sets status
+# 3. Status 3: Zubaba 150 with the same parameters; two daggers: nothing; three: 151, whose finish completes the mission
+# (400 rank points, no bonus) and takes the three daggers. Section 1 then: Zubaba 136.
+lists HeavensTower/Kiwawa/onTrigger HeavensTower/Nebibi/onTrigger HeavensTower/Zubaba/onTrigger HeavensTower/Zubaba/onTrade HeavensTower/Kupipi/onTrigger HeavensTower/onEventFinish/121 HeavensTower/onEventFinish/135 HeavensTower/onEventFinish/151 HeavensTower/onEventFinish/257 PortWindurst/onEventFinish/78 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/Sola_Jaab/onTrigger WindurstWoods/Tih_Pikeh/onTrigger WindurstWoods/onEventFinish/114 InnerHorutotoRuins/_5ci/onTrigger InnerHorutotoRuins/onEventFinish/41
+char zone=HeavensTower pos=15,-26,18 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst WrittenInTheStars current
+item RustyDagger x4
+login
+trigger Kiwawa                          # nothing from the mission
+finish-if-event
+walk 15,-26,16
+trade Zubaba RustyDagger x3             # status 0: nothing
+trigger Zubaba                          # 257
+finish                                  # status 3
+trigger Zubaba                          # 150
+finish-if-event
+walk 15,-26,16
+trade Zubaba RustyDagger x2             # two: nothing
+trade Zubaba RustyDagger x3             # 151
+finish                                  # completed, the daggers taken
+trigger Zubaba                          # section 1: 136
+finish-if-event

@@ -1,0 +1,56 @@
+# Dawn (battlefield.dawn, Empyreal Paradox): helpers. Main (8-4 Status 1) registers area 1 and invites bob (8-4 at
+# Status 4), cat (The Last Verse current: 8-4 completed) and dan (When Angels Fall current). bob and cat get the menu
+# and enter; dan gets a lone release (no menu). Promathia killed: 32004 (1) to the three; main's finish spawns the
+# second form; bob's and cat's find it spawned (only their move). It killed: 32001 to the three (bob and cat with
+# the skip flag 1); 8-4's own 32001 finish moves only main's Status (1 to 2).
+lists EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/onEventUpdate/32000 EmpyrealParadox/onEventFinish/32000 EmpyrealParadox/onEventFinish/32004 EmpyrealParadox/onEventFinish/32001
+char zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+char bob zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+char cat zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+char dan zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+mission Cop Dawn current
+charvar Mission[6][840]Status 1
+bob: mission Cop Dawn current
+bob: charvar Mission[6][840]Status 4
+cat: mission Cop TheLastVerse current
+dan: mission Cop WhenAngelsFall current
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trigger TR_Entrance
+update 32000 option=1
+finish
+bob: trigger TR_Entrance
+bob: update 32000 option=1
+bob: finish
+cat: trigger TR_Entrance
+cat: update 32000 option=1
+cat: finish
+dan: trigger TR_Entrance
+dan: update 32000 option=1
+dan: finish-if-event
+tick 2000
+kill PROMATHIA
+tick 1000
+finish
+bob: finish
+cat: finish
+tick 2000
+kill PROMATHIA+1
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+finish
+bob: finish
+cat: finish
+dan: finish-if-event
+tick 11000

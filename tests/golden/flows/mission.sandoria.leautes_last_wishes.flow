@@ -1,0 +1,57 @@
+# Leaute's Last Wishes (San d'Oria 6-1, mission.sandoria.leautes_last_wishes) played through: a level 75 San d'Orian
+# at rank 6, ASA, ACP, RoV and SoA current (their content quiet) and the nation's missions before it completed.
+# Endracion's own 1009, option 16: begun. Chateau d'Oraguille: Halver 25 (status 1); Arsha 85, Chupaile 86, Halver 23;
+# _6h4 87 (status 2); Halver 24; Arsha at status 2: nothing from the mission, the zone's default 513. Western Altepa
+# (its zone-in adds a log-10 mission row): the Dreamrose at status 2 with the cactuar not up: Sabotender Enamorado
+# spawned, FEEL_SOMETHING_PRICKLY (7392); with it up: the default NOTHING_OUT_OF_ORDINARY (6409); killed: Progress 1;
+# the Dreamrose: Progress 0, status 3, the Dreamrose (KEYITEM_OBTAINED). Halver 22 (status 4). Trigger area 2 (after
+# the 2.5 s ZoningIn): 111; its finish: completed, 600 rank points, the Piece of Paper, the Dreamrose taken.
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Arsha/onTrigger ChateauDoraguille/Chupaile/onTrigger ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h4/onTrigger ChateauDoraguille/onTriggerAreaEnter/2 ChateauDoraguille/onEventFinish/22 ChateauDoraguille/onEventFinish/25 ChateauDoraguille/onEventFinish/87 ChateauDoraguille/onEventFinish/111 WesternAltepaDesert/Dreamrose/onTrigger
+char zone=SouthernSanDoria pos=-108.5,1,-34 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+rank 6
+login
+trigger Endracion                       # his own 1009
+finish option=16                        # begun
+warp 2,0.1,0.1 ChateauDoraguille
+trigger Halver                          # status 0: 25
+finish                                  # status 1
+trigger Arsha                           # status 1: 85
+finish
+trigger Chupaile                        # status 1: 86
+finish
+trigger Halver                          # status 1: 23
+finish
+trigger _6h4                            # status 1: 87
+finish                                  # status 2
+trigger Halver                          # status 2: 24
+finish
+trigger Arsha                           # status 2: nothing from the mission
+finish-if-event
+warp -260,-10,49 WesternAltepaDesert
+trigger Dreamrose                       # status 2, the cactuar not up: spawned, FEEL_SOMETHING_PRICKLY
+trigger Dreamrose                       # the cactuar up: nothing
+finish-if-event
+kill SABOTENDER_ENAMORADO               # status 2: Progress 1
+trigger Dreamrose                       # Progress 1: Progress 0, status 3, the Dreamrose
+warp 2,0.1,0.1 ChateauDoraguille
+trigger Halver                          # status 3: 22
+finish                                  # status 4
+tick 3000                               # ZoningIn cleared (2.5 s after the zone-in)
+walk -84,-1.5,57.5                      # trigger area 2, status 4, the Dreamrose: 111
+finish                                  # completed: 600 rank points, the Piece of Paper; the Dreamrose taken

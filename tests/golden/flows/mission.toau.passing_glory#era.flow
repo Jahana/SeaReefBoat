@@ -1,0 +1,36 @@
+# Passing Glory (ToAU 18) with the RoV era module: the Timer 1: Naja and the trigger area 3; the must-zone var set
+# with the Timer 0: Naja and the area; a rezone (it clears the var), the Timer 0: Naja plays 3090, finished.
+module modules/era/lua/missions/mission_adjustments.lua
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/3 AhtUrhganWhitegate/onEventUpdate/3090 AhtUrhganWhitegate/onEventFinish/3090
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PassingGlory current
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+login
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][17]Timer 1
+trigger Naja_Salaheem
+finish-if-event
+walk 34.7,-6.6,-54.1
+finish-if-event
+walk 34.7,-6.6,-40
+charvar Mission[4][17]mustZone 1
+charvar Mission[4][17]Timer 0
+trigger Naja_Salaheem
+finish-if-event
+walk 34.7,-6.6,-54.1
+finish-if-event
+walk 34.7,-6.6,-40
+rezone
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][17]Timer 0
+trigger Naja_Salaheem
+finish

@@ -1,0 +1,38 @@
+# When Angels Fall (CoP 8-3): each race's own panel at Status 2 (GMs). Main (Hume, race 2) at Ebon_Panel_Galka:
+# NO_NEED_INVESTIGATE (7644, the zone's default); at _iz2 (races 1 and 2): 120, finished 1: Light of Vahzl (593),
+# the title, Status 3. bob (race 4) at Ebon_Panel_Elvaan: 121, Light of Mea (592); cat (race 6) at Ebon_Panel_Taru:
+# 123, Light of Holla (590); dan (race 7) at Ebon_Panel_Mithra: 124, Light of Dem (591); eve (Galka, 8) at
+# Ebon_Panel_Galka: 122, Light of Al'Taieu (594). Each finish gives the title and Status 3.
+lists TheGardenOfRuhmet/_iz2/onTrigger TheGardenOfRuhmet/Ebon_Panel_Elvaan/onTrigger TheGardenOfRuhmet/Ebon_Panel_Taru/onTrigger TheGardenOfRuhmet/Ebon_Panel_Mithra/onTrigger TheGardenOfRuhmet/Ebon_Panel_Galka/onTrigger TheGardenOfRuhmet/onEventFinish/120 TheGardenOfRuhmet/onEventFinish/121 TheGardenOfRuhmet/onEventFinish/122 TheGardenOfRuhmet/onEventFinish/123 TheGardenOfRuhmet/onEventFinish/124
+char zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0 race=2
+char bob zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0 race=4
+char cat zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0 race=6
+char dan zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0 race=7
+char eve zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0 race=8
+mission Cop WhenAngelsFall current
+charvar Mission[6][828]Status 2
+bob: mission Cop WhenAngelsFall current
+bob: charvar Mission[6][828]Status 2
+cat: mission Cop WhenAngelsFall current
+cat: charvar Mission[6][828]Status 2
+dan: mission Cop WhenAngelsFall current
+dan: charvar Mission[6][828]Status 2
+eve: mission Cop WhenAngelsFall current
+eve: charvar Mission[6][828]Status 2
+login
+trigger Ebon_Panel_Galka
+finish-if-event
+trigger _iz2
+finish option=1
+bob: login
+bob: trigger Ebon_Panel_Elvaan
+bob: finish option=1
+cat: login
+cat: trigger Ebon_Panel_Taru
+cat: finish option=1
+dan: login
+dan: trigger Ebon_Panel_Mithra
+dan: finish option=1
+eve: login
+eve: trigger Ebon_Panel_Galka
+eve: finish option=1

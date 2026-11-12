@@ -1,0 +1,55 @@
+# The Salt of the Earth (Bastok 9-1, mission.bastok.the_salt_of_the_earth), the arms the play-through skips: Alois 775
+# at status 3, his own 370 at 2; Dancing Wolf 103 at 2, his own 106 at 0; qm2's own text at status 0 and with a plasm
+# up; one Nanoplasm (a GM spawn) dead at status 0: nothing; at status 2 with no other plasm alive: status 3.
+char zone=Metalworks pos=96,-20,16 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+mission Bastok TheChainsThatBindUs completed
+mission Bastok EnterTheTalekeeper completed
+rank 9
+mission Bastok TheSaltOfTheEarth current
+login
+missionstatus Bastok 3
+trigger Alois                           # status 3: 775
+finish
+missionstatus Bastok 2
+trigger Alois                           # status 2: nothing from the mission
+finish-if-event
+warp 7.6,7,83 Rabao
+trigger Dancing_Wolf                    # status 2: 103
+finish
+missionstatus Bastok 0
+trigger Dancing_Wolf                    # status 0: nothing from the mission
+finish-if-event
+warp -130,1.256,254.7 GustavTunnel
+trigger qm2                             # status 0: nothing from the mission; DefaultActions' 6409
+finish-if-event
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+spawn GIGAPLASM+9                       # a GM: one Nanoplasm
+tick 2000
+kill GIGAPLASM+9                        # status 0: nothing
+missionstatus Bastok 2
+spawn GIGAPLASM+14                      # a GM: one Nanoplasm
+trigger qm2                             # status 2, a plasm up: DefaultActions' NOTHING_OUT_OF_ORDINARY
+finish-if-event
+kill GIGAPLASM+14                       # none up: status 3

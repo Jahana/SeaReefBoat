@@ -1,0 +1,50 @@
+# Written in the Stars (Windurst 3-2, mission.windurst.written_in_the_stars). A level 30 Warrior of Windurst in Heaven's
+# Tower with the mission current, To Each His Own Right completed (a GM; a GM's Resonance current keeps RoV 1-1 out).
+# Status 0: Kiwawa and Nebibi answer their own defaults 58 and 68; Kupipi 120; Zubaba 121, whose finish gives the Charm
+# of Light and sets status 1. Status 1: Zubaba 122, Kiwawa 124, Nebibi 134. Inner Horutoto Ruins: the Gate of Light _5ci
+# plays 41 with the charm in slot 1, whose finish takes the charm and sets status 2; at status 2 the gate answers its
+# own message. Back in Heaven's Tower: Kiwawa his own 58; Zubaba 135, whose finish completes the mission (400 rank
+# points) and adds 100 more (500). Section 1 (completed, A New Journey not): Kiwawa 138, Nebibi 147, Zubaba 136 over
+# their defaults.
+lists HeavensTower/Kiwawa/onTrigger HeavensTower/Nebibi/onTrigger HeavensTower/Zubaba/onTrigger HeavensTower/Zubaba/onTrade HeavensTower/Kupipi/onTrigger HeavensTower/onEventFinish/121 HeavensTower/onEventFinish/135 HeavensTower/onEventFinish/151 HeavensTower/onEventFinish/257 PortWindurst/onEventFinish/78 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/Sola_Jaab/onTrigger WindurstWoods/Tih_Pikeh/onTrigger WindurstWoods/onEventFinish/114 InnerHorutotoRuins/_5ci/onTrigger InnerHorutotoRuins/onEventFinish/41
+char zone=HeavensTower pos=15,-26,18 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars current
+login
+trigger Kiwawa                          # status 0: nothing from the mission
+finish-if-event
+trigger Nebibi
+finish-if-event
+trigger Kupipi+1                        # 120
+finish-if-event
+trigger Zubaba                          # 121
+finish                                  # the Charm of Light, status 1
+trigger Zubaba                          # 122
+finish-if-event
+trigger Kiwawa                          # 124
+finish-if-event
+trigger Nebibi                          # 134
+finish-if-event
+warp -331,0,139 InnerHorutotoRuins
+trigger _5ci                            # 41
+finish                                  # status 2, the charm taken
+trigger _5ci                            # status 2: nothing from the mission
+finish-if-event
+warp 15,-26,18 HeavensTower
+trigger Kiwawa                          # status 2: nothing from the mission
+finish-if-event
+trigger Zubaba                          # 135
+finish                                  # completed, 100 rank points more
+trigger Kiwawa                          # section 1, completed: 138
+finish-if-event
+trigger Nebibi                          # 147
+finish-if-event
+trigger Zubaba                          # 136
+finish-if-event

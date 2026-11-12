@@ -1,0 +1,21 @@
+# A Vessel Without a Captain, another mission current (mission.cop.a_vessel_without_a_captain#other). Ancient Vows
+# (2-5) current with 3-2's Status at 0 and 1 (GMs): Lower Jeuno _6tc and Harnek, Ru'Lude Gardens' trigger area 1 and
+# Metalworks Cid answer nothing for this mission.
+lists LowerJeuno/_6tc/onTrigger LowerJeuno/Harnek/onTrigger RuludeGardens/onTriggerAreaEnter/1 Metalworks/Cid/onTrigger
+char zone=LowerJeuno pos=15.5,-0.1,-6.1 job=WAR lvl=75 nation=0
+mission Cop AncientVows current
+charvar Mission[6][318]Status 0         # a GM
+login
+trigger _6tc                            # nothing
+finish-if-event
+charvar Mission[6][318]Status 1         # a GM
+trigger Harnek                          # nothing
+finish-if-event
+warp 0,3,10 RuludeGardens
+tick 1000
+tick 1000
+tick 1000
+walk 0,3,50                             # nothing
+warp 0,0,0 Metalworks
+trigger Cid                             # nothing
+finish-if-event

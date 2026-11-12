@@ -1,0 +1,34 @@
+# The Mithra and the Crystal: the Ancient Vessel's respawn wait. The killer's onMobDeath sets the Vessel's
+# [AncientVessel]Respawn to GetSystemTime() + 300. With nmDefeated cleared (a GM) qm7 plays 12 again: option 1 says
+# THIS_IS_NOT_THE_TIME while the corpse is up, FAINT_TRACES_OF_MAGIC once it has despawned (inside the wait), and
+# SOMETHING_ATTACKING_YOU after a day (past it), spawning the Vessel again.
+lists LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/111 Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Rabao/Maryoh_Comyujah/onTrigger Rabao/onEventFinish/81 Rabao/onEventFinish/83 QuicksandCaves/qm7/onTrigger QuicksandCaves/onEventFinish/12 QuicksandCaves/onEventFinish/13 QuicksandCaves/Ancient_Vessel/onMobDeath HallOfTheGods/_6z0/onTrigger HallOfTheGods/Shimmering_Circle/onTrigger HallOfTheGods/onEventFinish/3
+char zone=QuicksandCaves pos=-504,19,-419 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheMithraAndTheCrystal current
+login
+missionstatus Zilart 1                  # a GM
+trigger qm7 at=1                        # 12
+finish option=1                         # SOMETHING_ATTACKING_YOU
+kill ANCIENT_VESSEL                     # the respawn wait set
+localvar Mission[3][23]nmDefeated 0     # a GM
+trigger qm7 at=1                        # nmDefeated 0: 12
+finish option=1                         # the corpse still up: THIS_IS_NOT_THE_TIME
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+trigger qm7 at=1                        # 12
+finish option=1                         # despawned, in the wait: FAINT_TRACES_OF_MAGIC
+wait jst=1
+trigger qm7 at=1                        # 12
+finish option=1                         # past the wait: SOMETHING_ATTACKING_YOU

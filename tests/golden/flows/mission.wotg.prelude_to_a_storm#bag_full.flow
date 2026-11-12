@@ -1,0 +1,18 @@
+# Prelude to a Storm (WotG 31), Status 2 and Option 1 (GMs): the zone-in plays 22, left open; with the bag filled the
+# finish shows ITEM_CANNOT_BE_OBTAINED (6387, the Elixir) and does not complete. The bag emptied, the zone-in plays 22
+# again; its finish gives the Elixir and completes the mission.
+lists XarcabardS/Rally_Point_Red/onTrigger XarcabardS/Rally_Point_Green/onTrigger XarcabardS/onZoneIn/1 XarcabardS/onEventUpdate/22 XarcabardS/onEventFinish/21 XarcabardS/onEventFinish/22 XarcabardS/onEventFinish/25
+char zone=XarcabardS pos=-106.071,-25.5,-50 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg PreludeToAStorm current
+charvar Mission[5][30]Status 2
+charvar Mission[5][30]Option 1
+login open                                 # 22
+fill-inventory
+finish                                     # no room: not completed
+free-inventory
+rezone open                                # 22 again
+finish                                     # an Elixir, completed

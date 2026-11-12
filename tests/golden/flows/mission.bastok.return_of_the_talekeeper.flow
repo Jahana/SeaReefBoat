@@ -1,0 +1,60 @@
+# Return of the Talekeeper (Bastok 6-1, mission.bastok.return_of_the_talekeeper) played through: a level 75 Bastokan
+# at rank 6, ASA, ACP, RoV and SoA current (their content quiet) and the nation's missions before it completed.
+# Malduc's own 1001 (the mission list), option 16: begun, YOU_ACCEPT_THE_MISSION; Malduc current: the mission's
+# EXTENDED_MISSION_OFFSET (8623). Bastok Mines: Medicine Eagle 180 (status 1), then 181; Tall Mountain at status 1:
+# nothing from the mission, the zone's default 55. Zeruhn Mines: Drake Fang 200 (status 2), then 201. Western Altepa
+# (its zone-in adds a log-10 mission row): qm2 at status 2 with no sphinx up: both spawned, EVIL_LOOMING_ABOVE_YOU
+# (7394); with them up: nothing from the mission, the default MANY_STONES_LITTER_AREA (7393); the Eastern Sphinx
+# killed with the Western up: no nmDefeated, qm2 7393 again; the Western killed: nmDefeated; qm2: status 3, the Altepa
+# Moonpebble (KEYITEM_OBTAINED). Tall Mountain 182: completed, 650 rank points, the moonpebble taken; completed: his
+# default 55.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 BastokMines/Medicine_Eagle/onTrigger BastokMines/Tall_Mountain/onTrigger BastokMines/onEventFinish/180 BastokMines/onEventFinish/182 ZeruhnMines/Drake_Fang/onTrigger ZeruhnMines/onEventFinish/200 WesternAltepaDesert/qm2/onTrigger
+char zone=Metalworks pos=64,-15,4 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+rank 6
+login
+trigger Malduc                          # no mission current: his own 1001
+finish option=16                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Malduc                          # current: EXTENDED_MISSION_OFFSET
+finish-if-event
+warp -40,0,36 BastokMines
+trigger Medicine_Eagle                  # status 0: 180
+finish                                  # status 1
+trigger Medicine_Eagle                  # status 1: 181
+finish
+trigger Tall_Mountain                   # status 1: nothing from the mission
+finish-if-event
+warp -72,0,58 ZeruhnMines
+trigger Drake_Fang                      # status 1: 200
+finish                                  # status 2
+trigger Drake_Fang                      # status 2: 201
+finish
+warp -323,0,-111 WesternAltepaDesert
+trigger qm2                             # status 2, no sphinx up: both spawned, EVIL_LOOMING_ABOVE_YOU
+trigger qm2                             # both up: nothing
+finish-if-event
+kill EASTERN_SPHINX                     # Western up: nothing
+trigger qm2                             # Western up: nothing
+finish-if-event
+kill WESTERN_SPHINX                     # Eastern dead: nmDefeated
+trigger qm2                             # nmDefeated: status 3, the Altepa Moonpebble
+warp -40,0,36 BastokMines
+trigger Tall_Mountain                   # status 3: 182
+finish                                  # completed: 650 rank points, the moonpebble taken
+trigger Tall_Mountain                   # completed: nothing
+finish-if-event

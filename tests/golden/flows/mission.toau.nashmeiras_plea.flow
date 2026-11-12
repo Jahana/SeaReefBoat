@@ -1,0 +1,35 @@
+# Nashmeira's Plea (ToAU 44). Naja without the Mythril Mirror: 3156, finished: the key item; again: 3149. Alzadaal,
+# blank_lamp (shown by a GM) at Status 0: 8, finished with option 1: nothing; again 8, finished with option 0: Status 1;
+# again: nothing. Status 2 (a GM), a zone out and in: the zone-in plays 10, finished: completed (Ragnarok current, the
+# Preventer of Ragnarok title).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3156 AlzadaalUnderseaRuins/blank_lamp/onTrigger AlzadaalUnderseaRuins/onZoneIn/1 AlzadaalUnderseaRuins/onEventFinish/8 AlzadaalUnderseaRuins/onEventFinish/10
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau NashmeirasPlea current
+keyitem PscWildcatBadge
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem
+finish
+trigger Naja_Salaheem
+finish-if-event
+warp 208.05,-1.5,20.05 AlzadaalUnderseaRuins
+tick 1000
+tick 1000
+tick 1000
+npcstatus blank_lamp normal
+trigger blank_lamp
+finish option=1
+trigger blank_lamp
+finish option=0
+trigger blank_lamp
+finish-if-event
+missionstatus Toau 2
+warp 208.05,-1.5,20.05 AhtUrhganWhitegate
+warp 208.05,-1.5,20.05 AlzadaalUnderseaRuins open
+finish

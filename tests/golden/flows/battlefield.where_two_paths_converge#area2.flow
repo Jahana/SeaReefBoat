@@ -1,0 +1,53 @@
+# the Throne Room's Where Two Paths Converge (battlefield 161, Bastok 9-2's), area 2 (option 18): the same fight on
+# that area's Zeid (+4); Zeid (unkillable) takes the hits to 1 HP; his COMBAT_TICK listener (armed by the group's
+# setup) below 70% HP sets ChangingPhase and plays 32004 (3, 3, 1, 3, 3, 3, 3, 3) to every player, despawning him;
+# 32004's finish spawns Zeid_2 at his HP share, Volker, and sets the char down; Zeid_2's death: WON, 32001 opens in the
+# kill step; its finish is the mission's (status 2).
+char zone=ThroneRoom pos=-108,-6,0 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+mission Bastok TheChainsThatBindUs completed
+mission Bastok EnterTheTalekeeper completed
+mission Bastok TheSaltOfTheEarth completed
+rank 9
+mission Bastok WhereTwoPathsConverge current
+login
+missionstatus Bastok 1
+trigger _4l1                            # the 32000 menu
+update 32000 option=18                  # index 1, area 2: entered
+finish
+tick 2000
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill ZEID_BCNM_OFFSET+4                 # unkillable: 1 HP; the combat tick: 32004
+finish                                  # 32004: phase 2 of this area spawned, Volker
+tick 2000
+kill ZEID_BCNM_OFFSET+5                 # WON
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish-if-event                         # 32001: the mission's finish (battlefieldWin 161): status 2
+tick 11000
+tick 10000

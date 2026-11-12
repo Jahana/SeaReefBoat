@@ -1,0 +1,18 @@
+# Uninvited Guests (battlefield.uninvited_guests, Monarch Linn): enter area 1 (97) and let the 30 minutes run out:
+# the clock ticks, the time-up message, the loss event, its finish.
+lists MonarchLinn/SD_Entrance/onTrigger MonarchLinn/onEventUpdate/32000 MonarchLinn/onEventFinish/32000 MonarchLinn/onEventFinish/32002
+char zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+quest OtherAreas.UninvitedGuests accepted
+charvar Quest[4][81]Prog 1
+keyitem MonarchLinnPatrolPermit
+login
+trigger SD_Entrance
+update 32000 option=97
+finish
+tick 1202000
+tick 300000
+tick 240000
+tick 30000
+tick 20000
+tick 10000
+finish-if-event

@@ -1,0 +1,69 @@
+# The Ruins of Fei'Yin (San d'Oria 5-1): the arms the main flow does not take. The Chateau zone-in at status 8 from
+# Northern and at status 0 from Southern San d'Oria: nothing. Current: Halver at 11: the zone's default text
+# (HALVER_OFFSET + 1092, 7909); at 12 without the Burnt Seal: the alternation, Halver's own 577; Fei'Yin at 11: no
+# zone-in event; two Qu'Bia Arena wins by a GM (status 10 inside the event; battlefieldWin 0): the title only. Completed
+# with The Shadow Lord current: _6h0 the zone's default ITS_LOCKED (7243); The Shadow Lord completed, rank 6: Curilla 56
+# from The Shadow Lord's section 4 (completed, no mission current, Leaute's Last Wishes not).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/Curilla/onTrigger ChateauDoraguille/Rahal/onTrigger ChateauDoraguille/onZoneIn/1 ChateauDoraguille/onEventFinish/509 ChateauDoraguille/onEventFinish/533 ChateauDoraguille/onEventFinish/534 Feiyin/onZoneIn/1 Feiyin/onEventFinish/1 QubiaArena/BC_Entrance/onTrigger QubiaArena/Burning_Circle/onTrigger QubiaArena/onEventUpdate/32000 QubiaArena/onEventFinish/32000 QubiaArena/onEventFinish/32003 QubiaArena/onEventFinish/32001 QubiaArena/onEventFinish/32002
+char zone=NorthernSanDoria pos=-240,7,58 job=WAR lvl=75 nation=0
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+rank 5
+keyitem MessageToJeunoSandoria
+login                                   # the zone-in: SoA's Rumors from the West 878
+missionstatus Sandoria 8
+warp 2,0.1,0.1 ChateauDoraguille        # from Northern San d'Oria at status 8: no zone-in event
+missionstatus Sandoria 0
+warp 0,0,0 SouthernSanDoria
+warp 2,0.1,0.1 ChateauDoraguille        # from Southern San d'Oria at status 0: no zone-in event
+mission Sandoria TheRuinsOfFeiYin current
+keyitem NewFeiyinSeal
+missionstatus Sandoria 11
+trigger Halver                          # status 11: the default text (HALVER_OFFSET + 1092)
+finish-if-event
+missionstatus Sandoria 12
+trigger Halver                          # status 12, no seal: his own 577
+finish-if-event
+missionstatus Sandoria 11
+warp -51.0,-16.0,38.0 Feiyin            # status 11: no zone-in event
+warp -212.2,-24.6,20.1 QubiaArena
+missionstatus Sandoria 11
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 512, 32001
+missionstatus Sandoria 10               # a GM, inside the event
+finish                                  # 32001 at status 10: the title; the mission does nothing
+tick 11000
+tick 10000
+missionstatus Sandoria 11
+warp -212.2,-24.6,20.1 QubiaArena
+trigger BC_Entrance                     # the 32000 menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 512, 32001
+localvar battlefieldWin 0               # a GM, inside the event
+finish                                  # 32001 with battlefieldWin 0: the title; the mission does nothing
+tick 11000
+tick 10000
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord current
+warp 2,0.1,0.1 ChateauDoraguille
+trigger _6h0                            # The Shadow Lord current: ITS_LOCKED
+finish-if-event
+mission Sandoria TheShadowLord completed
+rank 6
+trigger Curilla                         # rank 6: The Shadow Lord's section 4: 56
+finish-if-event

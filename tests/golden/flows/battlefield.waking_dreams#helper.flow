@@ -1,0 +1,44 @@
+# Waking Dreams (battlefield.waking_dreams#helper, The Shrouded Maw): Party of four at the entry: main (quest accepted,
+# vial), bob (quest completed, vial), cat (quest accepted, no vial), dan (vial, no quest). bob enters with the eighth
+# parameter 5; cat and dan are refused with a release only. The win gives main and bob their 32001 (bob with the eighth
+# argument 5). The finishes of main and bob answer message 6398 (the battlefield's onEventFinishWin, WakingDreams.cs).
+lists TheShroudedMaw/MC_Entrance/onTrigger TheShroudedMaw/onEventUpdate/32000 TheShroudedMaw/onEventFinish/32000 TheShroudedMaw/onEventFinish/32001
+char zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+char bob zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+char cat zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+char dan zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+quest Windurst.WakingDreams accepted
+keyitem VialOfDreamIncense
+bob: quest Windurst.WakingDreams completed
+bob: keyitem VialOfDreamIncense
+cat: quest Windurst.WakingDreams accepted
+dan: keyitem VialOfDreamIncense
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trigger MC_Entrance
+update 32000 option=33
+finish
+bob: trigger MC_Entrance
+bob: update 32000 option=33
+bob: finish
+cat: trigger MC_Entrance
+cat: update 32000 option=33
+cat: finish
+dan: trigger MC_Entrance
+dan: update 32000 option=33
+dan: finish
+tick 2000
+kill DIABOLOS_WD
+finish
+bob: finish
+cat: finish
+dan: finish
+tick 11000

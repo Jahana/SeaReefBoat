@@ -1,0 +1,41 @@
+# The Three Kingdoms Bastok (Windurst 2-3, mission.windurst.the_three_kingdoms_bastok). A level 30 Warrior of Windurst
+# in Metalworks with the mission current (a GM; a GM's Resonance current keeps RoV 1-1 out). Status 0: Grohm 422 (his
+# own default is 422 too: a fake check pins the mission's); Pius answers his own default 350; Mih Ketto 267, Moyoyo 264,
+# Topuru-Kuperu 261. Status 3: Grohm 422; Pius 355 with parameter 1, whose finish sets status 4; Pius then 350 (his
+# own). Status 4: Grohm 423, whose finish gives five Pickaxes and sets status 5. Status 5 without the Mythril Sand:
+# Grohm 424; with it: 422. Patt-Pott takes the sand with 255, whose finish completes the mission (no reward table),
+# takes the sand, sets status 7 and begins The Three Kingdoms; Grohm then answers his own 422.
+lists Metalworks/Grohm/onTrigger Metalworks/Pius/onTrigger Metalworks/Patt-Pott/onTrade Metalworks/Mih_Ketto/onTrigger Metalworks/Moyoyo/onTrigger Metalworks/Topuru-Kuperu/onTrigger Metalworks/onEventFinish/255 Metalworks/onEventFinish/355 Metalworks/onEventFinish/423 Metalworks/onEventFinish/425
+char zone=Metalworks pos=-18,-11,-27 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdomsBastok current
+login
+trigger Grohm                           # status 0: 422
+finish-if-event
+trigger Pius                            # nothing from the mission
+finish-if-event
+trigger Mih_Ketto                       # 267
+finish-if-event
+trigger Moyoyo                          # 264
+finish-if-event
+trigger Topuru-Kuperu                   # 261
+finish-if-event
+missionstatus Windurst 3
+trigger Grohm
+finish-if-event
+trigger Pius                            # 355
+finish                                  # status 4
+trigger Pius
+finish-if-event
+trigger Grohm                           # 423
+finish                                  # five Pickaxes, status 5
+trigger Grohm                           # 424
+finish-if-event
+item OnzOfMythrilSand
+trigger Grohm                           # 422
+finish-if-event
+walk 23,-17,40
+trade Patt-Pott OnzOfMythrilSand x1     # 255
+finish                                  # completed, status 7, The Three Kingdoms begun
+trigger Grohm
+finish-if-event

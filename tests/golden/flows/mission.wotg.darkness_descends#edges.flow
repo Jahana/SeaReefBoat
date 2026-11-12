@@ -1,0 +1,19 @@
+# Darkness Descends (WotG 37): the zone-in plays 8; the update with option 4 sends no 05C; the finish sets Status 1. At
+# Status 1 the zone-in plays no event. At Status 2 (a GM) the zone-in plays 10; the update with option 4 sends no 05C;
+# the update with option 5 sends 05C [156, 0, 0, 8, 8, 21] (nothing equipped); the finish completes the mission.
+lists ThroneRoomS/onZoneIn/1 ThroneRoomS/onEventUpdate/8 ThroneRoomS/onEventUpdate/10 ThroneRoomS/onEventFinish/8 ThroneRoomS/onEventFinish/10
+char zone=ThroneRoomS pos=19,0,-4.5 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg DarknessDescends current
+login open                                 # 8
+update 8 option=4                          # not 5: no packet
+finish                                     # Status 1
+rezone                                     # Status 1: no zone-in event
+charvar Mission[5][36]Status 2
+rezone open                                # 10
+update 10 option=4                         # not 5: no packet
+update 10 option=5                         # bare: the face and models of a char with nothing equipped
+finish                                     # completed

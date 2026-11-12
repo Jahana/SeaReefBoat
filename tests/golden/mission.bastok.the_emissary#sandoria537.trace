@@ -1,0 +1,100 @@
+# golden trace: mission.bastok.the_emissary#sandoria537
+seed 7
+flow a3e9a36b1f7b3d3da52ed83562dbb667e0ccc8c1b5bea951d2b4f0f00218bef3
+recorder lua
+lua-at 7888a3e6d9f2f1b4620b576f95da1e7f0423dfa1
+world server_variables b320b049abe126dd
+world conquest_system 835cfd2e101680ff
+blobs accounts_sessions.seacom_message accounts_sessions.session_key char_monstrosity.equip char_monstrosity.instincts char_monstrosity.levels char_monstrosity.variants char_pet.chocobo_user_data char_pet.equipped_attachments char_pet.unlocked_attachments char_stats.bazaar_message char_unlocks.abyssea_conflux char_unlocks.claimed_deeds char_unlocks.eschan_portals char_unlocks.homepoints char_unlocks.maze_runes char_unlocks.maze_vouchers char_unlocks.survivals char_unlocks.unique_event char_unlocks.waypoints chars.abilities chars.assault chars.campaign chars.eminence chars.keyitems chars.missions chars.quests chars.set_blue_spells chars.titles chars.unlocked_weapons chars.weaponskills chars.zones
+step login
+packets @e5bc596d64351c11 (170)
+accounts_sessions @6cc582432cfc1baa (16)
+char_equip @e13e84c3e41607fc (1)
+char_exp @da09b7dced770062 (26)
+char_history @1447682f72b2f95a (14)
+char_inventory @f96ee64e28ea26d2 (1)
+char_jobs @66c57b98f0122169 (25)
+char_look @e851488e2a5b2eb5 (11)
+char_mission_state @6104bcb756c1d432 (15)
+char_pet @a3c6ef83182dde78 (7)
+char_points @6e1cefe2b871553c (199)
+char_profile @87f8f752dc597dcc (19)
+char_quest_state @8d5a9501a00be4b2 (1)
+char_recast @0b9414455bd195c9 (4)
+char_stats @624f10c4cab4ab95 (17)
+char_storage @1d8d0b828ab1ef39 (14)
+char_unlocks @842d7ed545545d54 (19)
+chars @d2b2e254a35d0a5d (41)
+ret onZoneIn=number:878,onEventFinish=nil:nil
+order 231/Baraka/onTrigger=Mission[1][5],Mission[1][6]
+order 231/Helaku/onTrigger=default,Mission[1][5],Mission[1][6],Mission[1][7],Mission[1][8]
+order 231/Shakir/onTrigger=default,Mission[1][5],Mission[1][6],Mission[1][8]
+order 231/onEventFinish/537=Mission[1][5]
+order 231/onEventFinish/581=Mission[1][5]
+step missionstatus Bastok 7
+packets
+char_mission_state - area=1|current=5|status=0|completed_mask=0|progress=null
+char_mission_state + area=1|current=5|status=7|completed_mask=0|progress=null
+chars missions +74:07
+step trigger Shakir
+packets
+  00E @e8b2905f9655a3c1
+  00E @f118428780982627
+  00E @5194115e971ca153
+  00E @afc1e795fc728afd
+  00E @1761e65a4482426e
+  00E @4b9b10d10685d736
+  00E @3f1766792b814a91
+  00E @f497a2cd015b4ee3
+  00E @358f9a86df986248
+  00E @3544e7fab8a65536
+  00E @bc5dd4b9180ca3ca
+  00E @c46cd450aa680156
+  00E @02e643877b4b8c7b
+  00E @0ed23ab0892f3c67
+  00E @f53fe1a5ad7bfd6f
+  00E @3a6efba7193cfb11
+  00E @e95a94fac9c359f2
+  00E @cb1eab5ffaf77ff0
+  032 @2a192ed32e2beccb
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish-if-event
+packets
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Helaku
+packets
+  00E @342b008b80a7cd5c
+  032 @aeab9dc5fa3f0977
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish option=1
+packets
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+ret onEventFinish=nil:nil
+step trigger Helaku
+packets
+  032 @aeab9dc5fa3f0977
+  0DF @e46209efa0d60518
+  037 @676c09eb86d9e153
+ret onTrigger=number:0
+step finish option=0
+packets
+  056 @ed198c10a0d9e892
+  056 @36a19fe2eb461263
+  055 @39a5a014d49ec4c9
+  0DF @e46209efa0d60518
+  037 @7b1b7bd2a760339c
+  052 @3c1f8adddcc5ad8a
+char_mission_state - area=1|current=5|status=7|completed_mask=0|progress=null
+char_mission_state + area=1|current=8|status=8|completed_mask=0|progress=null
+chars keyitems +0:00
+chars missions +70:08 +74:08
+ret onEventFinish=nil:nil

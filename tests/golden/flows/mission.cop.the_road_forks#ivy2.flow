@@ -1,0 +1,12 @@
+# The Road Forks, the Ivy killed at the wrong San d'Oria status (mission.cop.the_road_forks#ivy2). A level 75 Warrior
+# of San d'Oria with 3-3 current (a GM). Carpenter's Landing, San d'Oria status 5: Guilloud spawns and claims the Ivy;
+# the status set to 2 (a GM); the Ivy killed: nothing.
+lists CarpentersLanding/Guilloud/onTrigger CarpentersLanding/Overgrown_Ivy/onMobDeath
+char zone=CarpentersLanding pos=-123.7,-6.6,-469 job=WAR lvl=75 nation=1
+mission Cop TheRoadForks current
+login
+missionstatus Cop 5 pos=0               # a GM
+trigger Guilloud                        # 5: the Ivy spawned and claimed
+finish-if-event
+missionstatus Cop 2 pos=0               # a GM
+kill OVERGROWN_IVY                      # 2: nothing

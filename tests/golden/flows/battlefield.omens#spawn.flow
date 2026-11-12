@@ -1,0 +1,43 @@
+# Omens (battlefield.omens#spawn, Navukgo Execution Chamber): Area 2 with four players (main accepted at Prog 0, the
+# other three completed): an entry spawned IMMORTAL_FLAN+8 (first seen in the kill step's updates; the fake check pins
+# that it is the fourth). Killing +8 does not win, killing IMMORTAL_FLAN+7 gives event 32001 (2,1800,0,14,64,2) to all
+# four. The finish runs the quest's 32001 (Omens.cs): main's Prog 0 -> 1.
+lists NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char bob zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char cat zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+char dan zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=WAR lvl=75
+quest AhtUrhgan.Omens accepted
+charvar Quest[6][22]Prog 0
+bob: quest AhtUrhgan.Omens completed
+cat: quest AhtUrhgan.Omens completed
+dan: quest AhtUrhgan.Omens completed
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trigger _1s0
+update 32000 option=34
+finish
+bob: trigger _1s0
+bob: update 32000 option=34
+bob: finish
+cat: trigger _1s0
+cat: update 32000 option=34
+cat: finish
+dan: trigger _1s0
+dan: update 32000 option=34
+dan: finish
+kill IMMORTAL_FLAN+8
+kill IMMORTAL_FLAN+7
+finish
+bob: finish
+cat: finish
+dan: finish
+tick 11000

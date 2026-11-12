@@ -1,0 +1,20 @@
+# Puppet in Peril (ToAU 29). Naja's trigger (3117). The Jade Sepulcher entry door at Status 0: 4 (progress); finished:
+# Status 1. The door again at Status 1: the mission plays nothing, the fight's menu (32000) does; option 0 is ignored.
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventFinish/4 JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PuppetInPeril current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # 3117
+finish-if-event
+warp 299,0,-199 JadeSepulcher
+trigger _1v0                            # Status 0: 4
+finish                                  # Status 1
+trigger _1v0                            # Status 1: the fight's menu
+update 32000 option=0

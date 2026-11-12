@@ -1,0 +1,74 @@
+# Breaking Barriers (San d'Oria 9-1, mission.sandoria.breaking_barriers) played through: a level 75 San d'Orian Warrior
+# at rank 9 with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before it
+# completed. Endracion's 1009, option 22: begun. Halver 26, _6h4 32 (status 1), Halver 1; the Valley of Sorrows' qm 0:
+# the Figure of Titan (status 2), then SOMETHING_BURRIED; Xarcabard's qm5 12: the Figure of Garuda (status 3); Batallia
+# Downs' qm3 with neither up spawns Suparna and its Fledgling (SENSE_SOMETHING_LURKING); the second death sets Prog 1;
+# qm3 904: the Figure of Leviathan (status 4); _6h4 76 with the three: completed (900 rank points), the figures taken.
+# Curilla and Rahal then give their own lines: section 3 names them with no zone (kept: the lookup never registers
+# them).
+char zone=SouthernSanDoria pos=-108,1,-34 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+mission Sandoria RanperresFinalRest completed
+mission Sandoria PrestigeOfThePapsque completed
+mission Sandoria TheSecretWeapon completed
+mission Sandoria ComingOfAge completed
+mission Sandoria Lightbringer completed
+rank 9
+login
+trigger Endracion                       # no mission current: the guard's own mission list
+finish option=24                        # no mission's option (this mission takes 22): not begun
+trigger Endracion                       # the list again
+finish option=22                        # begun
+warp 0,0,0 ChateauDoraguille
+trigger Halver                          # status 0: 26
+finish
+trigger _6h4                            # status 0: 32
+finish                                  # status 1
+trigger Halver                          # status 1: 1
+finish
+trigger _6h4                            # status 1: nothing from the mission
+finish-if-event
+warp 91,-3,-14 ValleyOfSorrows
+trigger qm_breaking_barriers            # status 1: 0
+finish                                  # the Figure of Titan, status 2
+trigger qm_breaking_barriers            # status 2: SOMETHING_BURRIED
+warp 179,-33,84 Xarcabard               # Xarcabard's own zone-in 13: Dynamis_Status 1
+trigger qm5                             # status 2: 12
+finish                                  # the Figure of Garuda, status 3
+trigger qm5                             # status 3: SOMETHING_BURIED
+warp 210,17,-613 BatalliaDowns
+trigger qm3                             # status 3, neither up, Prog 0: both spawned, SENSE_SOMETHING_LURKING
+trigger qm3                             # both up: SOMEONE_HAS_BURIED
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill SUPARNA                            # the fledgling up: nothing
+kill SUPARNA_FLEDGLING                  # Suparna dead: Prog 1
+trigger qm3                             # Prog 1: 904
+finish                                  # the Figure of Leviathan, status 4
+trigger qm3                             # status 4: SOMEONE_HAS_BURIED
+warp 0,0,0 ChateauDoraguille
+trigger Halver                          # status 4: nothing from the mission
+finish-if-event
+trigger _6h4                            # status 4, the three figures: 76
+finish                                  # completed: 900 rank points, the figures taken
+trigger Curilla                         # completed: her own line (the section names her with no zone)
+finish-if-event
+trigger Rahal                           # his own line
+finish-if-event

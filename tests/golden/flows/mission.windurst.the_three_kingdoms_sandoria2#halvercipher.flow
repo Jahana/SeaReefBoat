@@ -1,0 +1,24 @@
+# The Three Kingdoms San d'Oria 2 at the Chateau d'Oraguille with ENABLE_TRUST_QUESTS 1 and Halver's cipher in the
+# bag, the spell not learned. Halver at status 0: the message. Status 8: 504 (parameter 7 is 0), whose finish moves to
+# status 9 and gives no second cipher. Statuses 9, 10 and 11: the message.
+lists ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/504 HorlaisPeak/onEventFinish/32001 NorthernSanDoria/Kasaroro/onTrigger NorthernSanDoria/onEventFinish/551
+char zone=ChateauDoraguille pos=2,0.1,0.1 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdomsSandoria2 current
+setting ENABLE_TRUST_QUESTS 1
+item 10158
+login
+trigger Halver
+finish-if-event
+missionstatus Windurst 8
+trigger Halver
+finish
+missionstatus Windurst 9
+trigger Halver
+finish-if-event
+missionstatus Windurst 10
+trigger Halver
+finish-if-event
+missionstatus Windurst 11
+trigger Halver
+finish-if-event

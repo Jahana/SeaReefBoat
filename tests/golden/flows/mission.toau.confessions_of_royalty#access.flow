@@ -1,0 +1,33 @@
+# Confessions of Royalty, canEnterChateau's arms at Guilerme (with the letter), each true: nothing from this section.
+# Rank 3 (a Warrior of Bastok); a San d'Orian at rank 2; a Bastok citizen with the Bastok mission at 5 or more
+# (The Emissary and on). False arms are the main flow (Bastok, rank 1, mission 0) and the San d'Orian at rank 1.
+lists NorthernSanDoria/Guilerme/onTrigger
+char zone=NorthernSanDoria pos=0,0,0 job=WAR lvl=75 nation=1
+char sandy zone=NorthernSanDoria pos=0,0,0 job=WAR lvl=75 nation=0
+char bast zone=NorthernSanDoria pos=0,0,0 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau ConfessionsOfRoyalty current
+keyitem RaillefalsLetter
+rank 3
+sandy: mission Toau ConfessionsOfRoyalty current
+sandy: keyitem RaillefalsLetter
+sandy: rank 1
+bast: mission Toau ConfessionsOfRoyalty current
+bast: keyitem RaillefalsLetter
+bast: rank 1
+bast: mission Bastok TheEmissary current
+login
+trigger Guilerme                        # Bastok rank 3: true: nothing
+finish-if-event
+sandy: login
+sandy: trigger Guilerme                 # San d'Oria rank 1: 810
+sandy: finish option=0
+sandy: rank 2                           # a GM
+sandy: trigger Guilerme                 # rank 2 for San d'Oria: nothing
+sandy: finish-if-event
+bast: login
+bast: trigger Guilerme                  # Bastok mission 5 or more: nothing
+bast: finish-if-event

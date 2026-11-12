@@ -1,0 +1,26 @@
+# Forget Me Not (WotG 42) from Batallia Downs, the four Large Memory Fragments held: the Cavernous Maw plays 4 [0, 1,
+# 2964, 1700, 43]; its finish sets Status 1 and Option 105, and the next tick shows the set-down at 800 71.839 770 rot
+# 63 in Grauberg [S]. The login there at Status 1 plays the zone-in 33, left open; the update with option 1 sends 05C
+# [12, 23, 1756]; the finish sets Status 2 and xi.maws.goToMaw sends the char to xi.maws.pastMaws[105]: the next tick
+# shows Batallia Downs [S] at -51.486 0.371 436.972 rot 128. The login there at Status 2 completes the mission (Pillar
+# of Hope current) and takes the four fragments (xi.wotg.helpers.removeMemoryFragments).
+lists BatalliaDowns/Cavernous_Maw/onTrigger BatalliaDowns/onEventFinish/4 GraubergS/onZoneIn/1 GraubergS/onEventUpdate/33 GraubergS/onEventFinish/33 BatalliaDownsS/onZoneIn/1
+char zone=BatalliaDowns pos=-48,0.1,435 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg ForgetMeNot current
+keyitem LargeMemoryFragment1
+keyitem LargeMemoryFragment2
+keyitem LargeMemoryFragment3
+keyitem LargeMemoryFragment4
+login
+trigger Cavernous_Maw                      # 4
+finish                                     # Status 1, Option the zone; set down in Grauberg [S]
+tick 400
+login open                                 # Status 1: 33
+update 33 option=1                         # the update packet
+finish                                     # Status 2; goToMaw: the maw's other side
+tick 400
+login                                      # Status 2: completed, the fragments removed

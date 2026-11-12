@@ -1,0 +1,40 @@
+# Dancers in Distress (WotG 9). Lion Springs at status 0: its message. Raustigne: 86; finished: status 1. Elegant
+# Footprints in Jugner Forest [S] at status 1: 2; updated with option 1 and 18 (no reply), then 19 (a random choice of
+# the quiz item, answered as the 8th operand); finished: status 2 and mustZone. At status 2, before zoning: a trade of
+# each quiz item plays nothing; the trigger: LILISETTE_IS_PREPARING. After a zone change and back, the trades of the
+# three quiz items in turn: the one of the choice plays 3; finished: the mission completes (the trade taken, Daughter
+# of a Knight current).
+lists SouthernSanDoriaS/Lion_Springs/onTrigger SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/onEventFinish/86 JugnerForestS/Elegant_Footprints/onTrigger JugnerForestS/Elegant_Footprints/onTrade JugnerForestS/onEventUpdate/2 JugnerForestS/onEventFinish/2 JugnerForestS/onEventFinish/3
+char zone=SouthernSanDoriaS pos=96,0,106 job=WAR lvl=99
+item LynxMeat
+item GoldBeastcoin
+item NyumomoDoll
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg DancersInDistress current
+login
+trigger Lion_Springs                    # status 0: its message
+finish-if-event
+warp 3.979,-1.999,44.456 SouthernSanDoriaS
+trigger Raustigne                       # 86
+finish                                  # status 1
+warp 46.387,0.117,318.21 JugnerForestS
+trigger Elegant_Footprints              # status 1: 2
+update 2 option=1                       # no reply
+update 2 option=18                      # no reply
+update 2 option=19                      # the quiz item chosen
+finish                                  # status 2; mustZone
+trade Elegant_Footprints LynxMeat x1    # mustZone: nothing
+trade Elegant_Footprints GoldBeastcoin x1
+trade Elegant_Footprints NyumomoDoll x1
+trigger Elegant_Footprints              # LILISETTE_IS_PREPARING
+warp 96,0,106 SouthernSanDoriaS
+warp 46.387,0.117,318.21 JugnerForestS                   # zoned: mustZone clear
+trade Elegant_Footprints LynxMeat x1
+finish-if-event
+trade Elegant_Footprints GoldBeastcoin x1
+finish-if-event
+trade Elegant_Footprints NyumomoDoll x1
+finish-if-event

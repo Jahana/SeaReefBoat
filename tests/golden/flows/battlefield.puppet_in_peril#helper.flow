@@ -1,0 +1,31 @@
+# Puppet in Peril: a party member (eve, the mission completed) joins main's registration at the entry door and enters;
+# LANCELORD_GAHEEL_JA killed: won, 32001 to both; both finish.
+lists JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventFinish/4 JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001 JadeSepulcher/onEventFinish/32002 JadeSepulcher/_1v1/onTrigger
+char zone=JadeSepulcher pos=299,0,-199 job=WAR lvl=75 nation=1
+char eve zone=JadeSepulcher pos=299,0,-199 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PuppetInPeril current
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Toau PuppetInPeril completed
+login
+missionstatus Toau 1
+eve: login
+eve: missionstatus Toau 1
+invite eve
+eve: accept
+trigger _1v0
+update 32000 option=65
+finish
+eve: trigger _1v0
+eve: update 32000 option=65
+eve: finish
+tick 2000
+kill LANCELORD_GAHEEL_JA
+finish
+eve: finish

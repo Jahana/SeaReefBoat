@@ -1,0 +1,25 @@
+# Path of Darkness (ToAU 42), Alzadaal arm. blank_lamp (shown by a GM) at Status 0: 6, finished with option 1: nothing;
+# again 6, finished with option 0: Status 1; again: nothing. Status 2 (a GM), a zone out and in: the zone-in plays 7,
+# finished: completed (Fangs of the Lion current, the Najas Comrade in Arms title).
+lists AlzadaalUnderseaRuins/blank_lamp/onTrigger AlzadaalUnderseaRuins/onZoneIn/1 AlzadaalUnderseaRuins/onEventFinish/6 AlzadaalUnderseaRuins/onEventFinish/7
+char zone=AlzadaalUnderseaRuins pos=208.05,-1.5,20.05 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PathOfDarkness current
+login
+tick 1000
+tick 1000
+tick 1000
+npcstatus blank_lamp normal
+trigger blank_lamp
+finish option=1
+trigger blank_lamp
+finish option=0
+trigger blank_lamp
+finish-if-event
+missionstatus Toau 2
+warp 208.05,-1.5,20.05 AhtUrhganWhitegate
+warp 208.05,-1.5,20.05 AlzadaalUnderseaRuins open
+finish

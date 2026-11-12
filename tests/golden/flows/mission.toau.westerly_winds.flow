@@ -1,0 +1,37 @@
+# Westerly Winds (ToAU 7, mission.toau.westerly_winds). A level 75 Warrior of Bastok with it current, status 0, in Aht
+# Urhgan Whitegate (the Teahouse area 5, 64 -7 -137 .. 95 -5 -123, to its south): Cacaroon 3023, Nadeey 3025, Naja 3021
+# (the mercenary rank 0); area 5: 3027, finished with room: the Raillefal's Note, an Imperial Silver Piece, Agent of
+# the Allied Forces, status 1. Status 1: Cacaroon and Nadeey nothing; area 5 again nothing; Naja 3028, its updates
+# (option 1: updateEvent(2, 1, ...); option 2: 0), finished: completed (the Silver Piece, A Mercenary Life current),
+# the note deleted, A Mercenary Life's must-zone flag set.
+lists AhtUrhganWhitegate/Cacaroon/onTrigger AhtUrhganWhitegate/Nadeey/onTrigger AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onTriggerAreaEnter/5 AhtUrhganWhitegate/onEventUpdate/3028 AhtUrhganWhitegate/onEventFinish/3027 AhtUrhganWhitegate/onEventFinish/3028
+char zone=AhtUrhganWhitegate pos=80,-6,-140 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau WesterlyWinds current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Cacaroon                        # 3023
+finish
+trigger Nadeey                          # 3025
+finish
+trigger Naja_Salaheem                   # 3021
+finish
+walk 80,-6,-140
+walk 80,-6,-130                         # area 5: 3027
+finish                                  # the note, the piece, the title, status 1
+trigger Cacaroon                        # status 1: nothing
+finish-if-event
+trigger Nadeey                          # nothing
+finish-if-event
+walk 80,-6,-140
+walk 80,-6,-130                         # status 1: nothing
+walk 80,-6,-140
+trigger Naja_Salaheem                   # 3028
+update 3028 option=1                    # updateEvent(2, 1, ...)
+update 3028 option=2                    # updateEvent(0, 1, ...)
+finish                                  # completed; the note deleted; must zone

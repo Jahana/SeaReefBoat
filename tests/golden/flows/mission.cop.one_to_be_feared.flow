@@ -1,0 +1,31 @@
+# One to be Feared (CoP 6-4) played through. A level 75 Warrior of San d'Oria with 6-4 current (a GM; Status 0):
+# Metalworks' Cid plays 856 (finished: Status 1). Tavnazian Safehold's Ironclad Gorilla plays 306; Despachiaire plays
+# 144, X Marks the Spot's event (its finish accepts that quest), and Justinius 570, another script's: no 6-4 reply, so
+# 6-4's 318 and 267 lose there (pinned by a fake check). Sealion's Den's zone-in at Status 1: 15 (its update with
+# option 0 answers with the arguments; finished: Status 2). At Status 2 Sueleen plays 24 and the Iron Gate (_0w0) 31
+# (finished: Status 3). At Status 4 (a GM; what the battlefield's win leaves) the zone-in plays 33 (finished: the
+# mission completes, 6-5 current, set down in Lufaise Meadows).
+lists Metalworks/Cid/onTrigger Metalworks/onEventFinish/856 TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Ironclad_Gorilla/onTrigger TavnazianSafehold/Justinius/onTrigger SealionsDen/_0w0/onTrigger SealionsDen/Sueleen/onTrigger SealionsDen/onZoneIn/1 SealionsDen/onEventUpdate/15 SealionsDen/onEventFinish/15 SealionsDen/onEventFinish/31 SealionsDen/onEventFinish/33
+char zone=Metalworks pos=-12,-12,1 job=WAR lvl=75 nation=0
+mission Cop OneToBeFeared current
+login
+trigger Cid                             # Status 0: 856
+finish                                  # Status 1
+warp 108,-40,-83 TavnazianSafehold
+trigger Despachiaire                    # 144 (X Marks the Spot's)
+finish-if-event
+trigger Ironclad_Gorilla                # 306
+finish-if-event
+trigger Justinius                       # 570 (another script's)
+finish-if-event
+warp 612,132,776 SealionsDen open       # Status 1: 15, left open
+update 15 option=0                      # updateEvent(0, 0, 0, 0, 32, 2, 0, 0)
+finish                                  # Status 2
+trigger Sueleen                         # Status 2: 24
+finish-if-event
+trigger _0w0                            # Status 2: 31
+finish                                  # Status 3
+charvar Mission[6][638]Status 4         # a GM: the fight won
+warp 108,-40,-83 TavnazianSafehold
+warp 612,132,776 SealionsDen            # Status 4: 33, finished: complete, set down in Lufaise Meadows
+tick 10000

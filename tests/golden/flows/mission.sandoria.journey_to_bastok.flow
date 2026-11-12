@@ -1,0 +1,55 @@
+# Journey to Bastok (San d'Oria 2-3, part 1) in Metalworks, a level 30 Warrior of San d'Oria with the mission current
+# (a GM; a GM's Resonance current keeps RoV 1-1's first mission out). Status 0: Grohm 422 and Pius 356 (events); Savae
+# E Paleade's trigger plays 208 (his zone default, not the mission's); a trade to him at status 0 draws no reply.
+# Status 3: Grohm 422, Pius 355, whose finish moves to status 4; Pius then 356. Status 4: Grohm 423, whose finish
+# gives three Pickaxes and moves to status 5. Status 5 without Mythril Sand: Grohm 424 (a second time too), Pius 356;
+# with one Ounce of Mythril Sand held: Grohm 422. The sand traded to Savae at status 5: 205, whose finish takes it,
+# moves to status 6 and begins Journey Abroad (the 2-3 mission that follows, the log's current mission). Then Grohm
+# plays 422 (the mission's section is off, so this is not told apart from the zone default); Pius plays 350 (another
+# script's, not the mission's 356); at status 6, Grohm 422.
+lists Metalworks/Grohm/onTrigger Metalworks/Pius/onTrigger Metalworks/Savae_E_Paleade/onTrade Metalworks/onEventFinish/205 Metalworks/onEventFinish/355 Metalworks/onEventFinish/423 Metalworks/onEventFinish/425
+char zone=Metalworks pos=-18,-11,-27 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria JourneyToBastok current
+login
+trigger Grohm
+finish-if-event
+trigger Pius
+finish-if-event
+trigger Savae_E_Paleade
+finish-if-event
+trade Savae_E_Paleade OnzOfMythrilSand x1
+missionstatus Sandoria 3
+trigger Grohm
+finish-if-event
+trigger Pius
+finish
+trigger Pius
+finish-if-event
+trigger Grohm
+finish-if-event
+trigger Grohm
+finish
+trigger Grohm
+finish-if-event
+trigger Pius
+finish-if-event
+missionstatus Sandoria 5
+trigger Grohm
+finish-if-event
+trigger Pius
+finish-if-event
+item OnzOfMythrilSand
+trigger Grohm
+finish-if-event
+trigger Savae_E_Paleade
+finish-if-event
+trade Savae_E_Paleade OnzOfMythrilSand x1
+finish
+trigger Grohm
+finish-if-event
+trigger Pius
+finish-if-event
+missionstatus Sandoria 6
+trigger Grohm
+finish-if-event

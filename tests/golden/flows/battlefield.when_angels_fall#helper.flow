@@ -1,0 +1,45 @@
+# When Angels Fall (battlefield.when_angels_fall, The Garden of Ru'Hmet): helpers. Main (8-3 Status 4) registers
+# area 1 and invites bob (8-3 at Status 5), cat (Dawn current: 8-3 completed) and dan (A Fate Decided current). bob
+# and cat get the menu and enter; dan gets a lone release (no menu). Won with bfwin: 32001 to the three (bob and cat
+# with the skip flag 1); each finish: the battlefield's move; 8-3's own 32001 finish moves only main's Status (4
+# to 5).
+lists TheGardenOfRuhmet/_0z0/onTrigger TheGardenOfRuhmet/onEventUpdate/32000 TheGardenOfRuhmet/onEventFinish/32000 TheGardenOfRuhmet/onEventFinish/32001
+char zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0
+char bob zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0
+char cat zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0
+char dan zone=TheGardenOfRuhmet pos=420,-2,404 job=WAR lvl=75 nation=0
+mission Cop WhenAngelsFall current
+charvar Mission[6][828]Status 4
+bob: mission Cop WhenAngelsFall current
+bob: charvar Mission[6][828]Status 5
+cat: mission Cop Dawn current
+dan: mission Cop AFateDecided current
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trigger _0z0
+update 32000 option=1
+finish
+bob: trigger _0z0
+bob: update 32000 option=1
+bob: finish
+cat: trigger _0z0
+cat: update 32000 option=1
+cat: finish
+dan: trigger _0z0
+dan: update 32000 option=1
+dan: finish-if-event
+tick 2000
+bfwin
+finish
+bob: finish
+cat: finish
+dan: finish-if-event
+tick 11000

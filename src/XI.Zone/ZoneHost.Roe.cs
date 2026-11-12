@@ -5,11 +5,13 @@ using System.Text.RegularExpressions;
 using XI.Ipc;
 using XI.Map;
 using XI.Persistence;
+using XI.Quests;
 using XI.Script;
 
 namespace XI.Zone
 {
-    // roeutils: Records of Eminence. xi.roe hands its record and timed tables to RoeParseRecords / RoeParseTimed while
+    // roeutils: Records of Eminence. The records and the timed table load from XI.QuestContent's RoeRecords, or, in a
+    // world whose scripts folder holds roe.lua (a record at a lua-at), through RoeParseRecords / RoeParseTimed while
     // the global scripts load; the char's eminencelog_t lives in CharData.EminenceLog (active u16[31] @0, progress
     // u32[31] @64, complete bits[4096] @188) with the activemap beside it.
     public partial class ZoneHost
@@ -308,6 +310,30 @@ namespace XI.Zone
             return false;
         }
 
+        // setEminenceCompleted(id, repeat, status)
+        private void SetEminenceCompleted(CharData c, ushort id, bool repeat, bool status = true)
+        {
+            if (repeat) SetEminenceRecordProgress(c, id, 0);
+            else DelEminenceRecord(c, id);
+            SetEminenceRecordCompletion(c, id, status);
+        }
+
+        // setEminenceProgress(id, progress, total): the messages only as a step of the record's threshold is passed
+        private bool SetEminenceProgress(CharData c, ushort id, uint progress, uint total)
+        {
+            bool notify = true;
+            uint threshold = id < RoeRecordCount ? roe_.NotifyThresholds[id] : 1;
+            if (threshold > 1) notify = progress / threshold > GetEminenceRecordProgress(c, id) / threshold;
+
+            bool result = SetEminenceRecordProgress(c, id, progress);
+            if (total != 0 && notify)
+            {
+                PushTo(c, SelfPackets.BattleMessage(c, id, 0, MsgBasicRoeRecord));
+                PushTo(c, SelfPackets.BattleMessage(c, (int)progress, (int)total, MsgBasicRoeProgress));
+            }
+            return result;
+        }
+
         // ---- triggers -----------------------------------------------------------------------------------------------
 
         // roeutils::event: xi.roe.onRecordTrigger for each active record the trigger handles
@@ -321,7 +347,11 @@ namespace XI.Zone
             for (int i = 0; i < 31; i++)
             {
                 ushort id = RoeActive(c, i);
-                if (Test(handler, id)) CallOnRecordTrigger(c, id, payload);
+                if (Test(handler, id))
+                {
+                    RoeReached("trigger:" + RoeChecks.TriggerNames[eventId]);
+                    CallOnRecordTrigger(c, id, payload);
+                }
             }
             return true;
         }
@@ -329,6 +359,24 @@ namespace XI.Zone
         private void CallOnRecordTrigger(CharData c, ushort id, IReadOnlyList<(string Key, object Value)> payload)
         {
             if (lua_ == null) return;
+            if (!RoeOnLua)
+            {
+                // the Lua pcall's place: an error of npcUtil or a binding is logged and ends this record's trigger
+                int saved = lua_.Top;
+                try
+                {
+                    RoeRecordTrigger(c, id, RoeParamsOf(id, GetEminenceRecordProgress(c, id), payload));
+                }
+                catch (Exception e)
+                {
+                    log_($"roeutils::onRecordTrigger: {e.Message}");
+                }
+                finally
+                {
+                    lua_.SetTop(saved);
+                }
+                return;
+            }
             int top = lua_.Top;
             try
             {
@@ -375,7 +423,11 @@ namespace XI.Zone
 
         private void OnRecordTake(CharData c, ushort id)
         {
-            if (Test(roe_.Retroactive, id)) CallOnRecordTrigger(c, id, NoDatagrams);
+            if (Test(roe_.Retroactive, id))
+            {
+                RoeReached("flag:retro");
+                CallOnRecordTrigger(c, id, NoDatagrams);
+            }
         }
 
         private bool OnRecordClaim(CharData c, int id)
@@ -560,11 +612,19 @@ namespace XI.Zone
         private void ClearDailyRecords(CharData c)
         {
             for (int i = 0; i < 30; i++)
-                if (Test(roe_.Daily, RoeActive(c, i))) SetRoeProgress(c, i, 0);
+                if (Test(roe_.Daily, RoeActive(c, i)))
+                {
+                    RoeReached("flag:daily");
+                    SetRoeProgress(c, i, 0);
+                }
             PushTo(c, GameOkPackets.RoeActiveLog(c));
             foreach (ushort id in roe_.DailyIds) SetRoeCompleteBit(c, id, false);
             // unity records lose their completion and keep the active progress
-            foreach (ushort id in roe_.UnityIds) SetRoeCompleteBit(c, id, false);
+            foreach (ushort id in roe_.UnityIds)
+            {
+                if (GetEminenceRecordCompletion(c, id)) RoeReached("flag:unity");
+                SetRoeCompleteBit(c, id, false);
+            }
             SaveEminenceData(c);
             PushRoeLogs(c);
         }
@@ -572,9 +632,17 @@ namespace XI.Zone
         private void ClearWeeklyRecords(CharData c)
         {
             for (int i = 0; i < 30; i++)
-                if (Test(roe_.Weekly, RoeActive(c, i))) SetRoeProgress(c, i, 0);
+                if (Test(roe_.Weekly, RoeActive(c, i)))
+                {
+                    RoeReached("flag:weekly");
+                    SetRoeProgress(c, i, 0);
+                }
             PushTo(c, GameOkPackets.RoeActiveLog(c));
-            foreach (ushort id in roe_.WeeklyIds) SetRoeCompleteBit(c, id, false);
+            foreach (ushort id in roe_.WeeklyIds)
+            {
+                if (GetEminenceRecordCompletion(c, id)) RoeReached("flag:weekly");
+                SetRoeCompleteBit(c, id, false);
+            }
             SaveEminenceData(c);
             SetCharVar(c, "weekly_sparks_spent", 0, 0);
             SetCharVar(c, "weekly_accolades_spent", 0, 0);
@@ -1048,9 +1116,7 @@ namespace XI.Zone
                 if (Pc(l, "setEminenceCompleted") is not CharData c) return 0;
                 bool repeat = !l.IsNil(3) && l.ToBoolean(3);
                 bool status = l.IsNil(4) || l.ToBoolean(4);
-                if (repeat) SetEminenceRecordProgress(c, id, 0);
-                else DelEminenceRecord(c, id);
-                SetEminenceRecordCompletion(c, id, status);
+                SetEminenceCompleted(c, id, repeat, status);
                 return 0;
             };
             m["getNumEminenceCompleted"] = l => Ret(l, Pc(l, "getNumEminenceCompleted") is CharData c ? GetNumEminenceCompleted(c) : 0);
@@ -1060,19 +1126,7 @@ namespace XI.Zone
                 uint progress = l.ToUIntArg(3);
                 if (Pc(l, "setEminenceProgress") is not CharData c) return Ret(l, false);
                 uint total = l.IsNumber(4) ? (uint)l.ToIntegral(4) : 0;
-
-                // progress messages only as a step of the record's threshold is passed
-                bool notify = true;
-                uint threshold = id < RoeRecordCount ? roe_.NotifyThresholds[id] : 1;
-                if (threshold > 1) notify = progress / threshold > GetEminenceRecordProgress(c, id) / threshold;
-
-                bool result = SetEminenceRecordProgress(c, id, progress);
-                if (total != 0 && notify)
-                {
-                    PushTo(c, SelfPackets.BattleMessage(c, id, 0, MsgBasicRoeRecord));
-                    PushTo(c, SelfPackets.BattleMessage(c, (int)progress, (int)total, MsgBasicRoeProgress));
-                }
-                return Ret(l, result);
+                return Ret(l, SetEminenceProgress(c, id, progress, total));
             };
             m["getEminenceProgress"] = l =>
             {

@@ -1,0 +1,57 @@
+# Unraveling Reason (ToAU 40). Naja 3148. Ru'Lude Gardens with the Timer in the future and the mustZone clear:
+# Pherimociel plays 10099 (seenCS 0), whose finish sets seenCS and the mustZone; again: the default dialog. Timer
+# cleared with the mustZone still set: the default dialog. A warp out and back clears the mustZone: Pherimociel plays
+# 10098, finished with option 0: nothing, with option 1: Status 1 and Wajaom Woodlands, whose zone-ins play 11, 21 and
+# 22 (updates 11 and 21 with options 0 and 1): Status 2, 3, completed (Light of Judgment current, the Endymion
+# Paratrooper title).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger RuludeGardens/Pherimociel/onTrigger RuludeGardens/onEventFinish/10098 RuludeGardens/onEventFinish/10099 WajaomWoodlands/onZoneIn/1 WajaomWoodlands/onEventUpdate/11 WajaomWoodlands/onEventUpdate/21 WajaomWoodlands/onEventFinish/11 WajaomWoodlands/onEventFinish/21 WajaomWoodlands/onEventFinish/22
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau UnravelingReason current
+keyitem PscWildcatBadge
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem
+finish-if-event
+warp -31.6,1,67.9 RuludeGardens
+tick 1000
+tick 1000
+tick 1000
+charvar Mission[4][39]Timer 999999999
+trigger Pherimociel
+finish
+trigger Pherimociel
+finish-if-event
+charvar Mission[4][39]Timer 0
+trigger Pherimociel
+finish-if-event
+warp 40,-6,-30 AhtUrhganWhitegate
+tick 1000
+tick 1000
+tick 1000
+warp -31.6,1,67.9 RuludeGardens
+tick 1000
+tick 1000
+tick 1000
+trigger Pherimociel
+finish option=0
+trigger Pherimociel
+finish option=1
+tick 2000
+rezone open
+update 11 option=0
+update 11 option=1
+finish
+tick 2000
+rezone open
+update 21 option=0
+update 21 option=1
+finish
+tick 2000
+rezone
+finish

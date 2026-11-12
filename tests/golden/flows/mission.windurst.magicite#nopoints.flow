@@ -1,0 +1,34 @@
+# Magicite (Windurst 4-1) not begun: rank 4 with 2151 rank points (one short): Pakh Jatalfih 54 (event; A New Journey's
+# 54 replaceDefault is the same event, outranked), then his own 103 (the alternation); _6r8 (no script) the zone's
+# default RESTRICTED (10123). Rank 3: section 1 does not hold: Pakh Jatalfih 54 from A New Journey (3-3 completed,
+# Magicite not: replaceDefault); _6r8 the default 10123. Rank 4 with A New Journey current: _6r8 the default 10123.
+lists RuludeGardens/_6r8/onTrigger RuludeGardens/Pakh_Jatalfih/onTrigger RuludeGardens/_6r9/onTrigger RuludeGardens/onEventFinish/131 RuludeGardens/onEventFinish/128 RuludeGardens/onEventFinish/60 RuludeGardens/onEventFinish/37 LowerJeuno/Aldo/onTrigger LowerJeuno/Muckvix/onTrigger LowerJeuno/onEventFinish/152 LowerJeuno/onEventFinish/184 UpperJeuno/Geebeh/onTrigger UpperJeuno/Paya-Sabya/onTrigger UpperJeuno/onEventFinish/80 AltarRoom/Magicite/onTrigger AltarRoom/onZoneIn/1 AltarRoom/onEventFinish/44 AltarRoom/onEventFinish/10000 MonasticCavern/Magicite/onTrigger MonasticCavern/onEventFinish/0 QulunDome/Magicite/onTrigger QulunDome/onEventFinish/0
+char zone=RuludeGardens pos=34,9,-33 job=WAR lvl=50 nation=2
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+rank 4 points=2151
+login
+trigger Pakh_Jatalfih                   # section 1, the rank points one short: 54
+finish-if-event
+trigger Pakh_Jatalfih                   # the alternation after 54: Pakh Jatalfih's own
+finish-if-event
+trigger _6r8                            # the points short: the default RESTRICTED
+finish-if-event
+rank 3 points=2152
+trigger Pakh_Jatalfih                   # rank 3: A New Journey's 54 (replaceDefault)
+finish-if-event
+trigger _6r8                            # rank 3: the default RESTRICTED (no script)
+finish-if-event
+rank 4 points=2152
+mission Windurst ANewJourney current
+trigger _6r8                            # a mission current: the default RESTRICTED
+finish-if-event

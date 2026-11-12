@@ -1,0 +1,22 @@
+# The Warrior's Path (battlefield.warriors_path, Sealion's Den): the registrant's requirements (7-5 current and
+# Mission[6][748]Status 1). Each gets IRON_GATE_LOCKED (7110, the zone's default), no menu: main (7-5 at Status 3), bob
+# (Garden of Antiquity current with Status 1) and cat (Calm Before the Storm current with Status 1).
+lists SealionsDen/_0w0/onTrigger
+char zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+char bob zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+char cat zone=SealionsDen pos=612,132,774 job=WAR lvl=75 nation=0
+mission Cop TheWarriorsPath current
+charvar Mission[6][748]Status 3
+bob: mission Cop GardenOfAntiquity current
+bob: charvar Mission[6][748]Status 1
+cat: mission Cop CalmBeforeTheStorm current
+cat: charvar Mission[6][748]Status 1
+login
+trigger _0w0
+finish-if-event
+bob: login
+bob: trigger _0w0
+bob: finish-if-event
+cat: login
+cat: trigger _0w0
+cat: finish-if-event

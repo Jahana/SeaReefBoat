@@ -1,0 +1,21 @@
+# The Three Kingdoms in Northern San d'Oria with the letter. The login plays SoA's Rumors from the West zone-in 878.
+# Status 6: Kasaroro says KASARORO_DIALOG + 7 (no event); Heruze-Moruze answers his own 554. Status 11: Kasaroro shows
+# KASARORO_DIALOG + 20 to the char and answers no action (the trigger returns true). Status 7: Kasaroro 547, whose
+# finish ends this mission, begins The Three Kingdoms San d'Oria 2, takes the letter and sets status 8.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/onEventFinish/78 WindurstWalls/Zokima-Rokima/onTrigger WindurstWalls/onEventFinish/93 WindurstWaters/Dagoza-Beruza/onTrigger WindurstWaters/Mokyokyo/onTrigger WindurstWaters/Panna-Donna/onTrigger WindurstWaters/onEventFinish/111 WindurstWoods/Rakoh_Buuma/onTrigger WindurstWoods/onEventFinish/114 HeavensTower/Kupipi/onTrigger HeavensTower/onEventFinish/95 HeavensTower/onEventFinish/97 HeavensTower/onEventFinish/98 HeavensTower/onEventFinish/101 Metalworks/Mih_Ketto/onTrigger Metalworks/Moyoyo/onTrigger Metalworks/Patt-Pott/onTrigger Metalworks/Topuru-Kuperu/onTrigger Metalworks/onEventFinish/254 Metalworks/onEventFinish/256 NorthernSanDoria/Heruze-Moruze/onTrigger NorthernSanDoria/Kasaroro/onTrigger NorthernSanDoria/onEventFinish/546 NorthernSanDoria/onEventFinish/547 NorthernSanDoria/onEventFinish/582
+char zone=NorthernSanDoria pos=-72,-3,34 job=WAR lvl=30 nation=2
+mission Rov Resonance current
+mission Windurst TheThreeKingdoms current
+keyitem LetterToTheConsulsWindurst
+login
+missionstatus Windurst 6
+trigger Kasaroro                        # KASARORO_DIALOG + 7
+finish-if-event
+trigger Heruze-Moruze
+finish-if-event
+missionstatus Windurst 11
+trigger Kasaroro                        # KASARORO_DIALOG + 20, no action
+finish-if-event
+missionstatus Windurst 7
+trigger Kasaroro                        # 547
+finish                                  # to The Three Kingdoms San d'Oria 2, the letter taken, status 8

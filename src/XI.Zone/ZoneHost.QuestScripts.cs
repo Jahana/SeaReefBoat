@@ -58,13 +58,8 @@ namespace XI.Zone
         // key -> LegacyPath of the quests in the list now, for the slot of the next
         private readonly Dictionary<string, string> legacyPaths_ = new Dictionary<string, string>(StringComparer.Ordinal);
 
-        private sealed class CompiledQuestScript
+        private sealed class CompiledQuestScript : CompiledScript<QuestScript, QuestScriptDefinition>
         {
-            public string TypeName;
-            public QuestScript Script;
-            public QuestScriptDefinition Def;
-            // what the constructor or Compile threw
-            public string Error;
         }
 
         // how long finding and compiling the XI.QuestContent quests took (each quest's Build JIT-compiled on a cold start),
@@ -122,6 +117,28 @@ namespace XI.Zone
                 "        mob:updateClaim(player)\n" +
                 "    else\n" +
                 "        mob:updateEnmity(player)\n" +
+                "    end\n" +
+                "end", "=CSharpQuests");
+            // quest rework C3 C4: Player.SpawnMobEntityById (CoP 7-4's Executor and Dalham, line for line) and
+            // Mission.SetAllianceLocalVars (CoP 8-1's Rubious Crystals: the loop over the alliance)
+            lua_.DoString(
+                "CSharpQuests.spawnMobEntityById = function(player, id, zeroEnmity)\n" +
+                "    local mob = GetMobByID(id)\n" +
+                "    if not mob then\n" +
+                "        return false\n" +
+                "    end\n" +
+                "    mob:spawn()\n" +
+                "    mob:updateClaim(player)\n" +
+                "    if zeroEnmity then\n" +
+                "        mob:setCE(player, 0)\n" +
+                "    end\n" +
+                "    return true\n" +
+                "end\n" +
+                "CSharpQuests.allianceLocalVars = function(container, player, vars)\n" +
+                "    for _, member in ipairs(player:getAlliance()) do\n" +
+                "        for _, v in ipairs(vars) do\n" +
+                "            container:setLocalVar(member, v[1], v[2])\n" +
+                "        end\n" +
                 "    end\n" +
                 "end", "=CSharpQuests");
             RegisterQuestCallGlobals();
@@ -184,38 +201,15 @@ namespace XI.Zone
         // whose constructor or Compile threw is kept with the error
         private static List<CompiledQuestScript> DiscoverQuestScripts(List<DiscoveredContainer> containers)
         {
-            var list = new List<CompiledQuestScript>();
-            foreach (var c in containers.Where(d => typeof(QuestScript).IsAssignableFrom(d.Type)))
-            {
-                var q = new CompiledQuestScript
-                {
-                    TypeName = c.Type.FullName, Script = (QuestScript)c.Script, Error = c.Error,
-                };
-                if (q.Script != null)
-                    try
-                    {
-                        q.Def = q.Script.Compile();
-                    }
-                    catch (Exception e)
-                    {
-                        q.Error = InnerMessage(e);
-                    }
-                list.Add(q);
-            }
+            var list = DiscoverScripts<CompiledQuestScript, QuestScript>(containers);
+            foreach (var q in list) CompileScript(q, s => s.Compile());
             return list;
         }
 
         private static CompiledQuestScript Compiled(QuestScript s)
         {
             var q = new CompiledQuestScript { TypeName = s.GetType().FullName, Script = s };
-            try
-            {
-                q.Def = s.Compile();
-            }
-            catch (Exception e)
-            {
-                q.Error = e.Message;
-            }
+            CompileScript(q, x => x.Compile());
             return q;
         }
 
@@ -315,7 +309,7 @@ namespace XI.Zone
         {
             var clock = System.Diagnostics.Stopwatch.StartNew();
             int top = l.Top;
-            int registered = 0;
+            int registered = 0, missions = 0, battlefields = 0;
             var keys = new HashSet<string>();
             callOnlyOff_.Clear();
             exportModules_.Clear();
@@ -364,39 +358,20 @@ namespace XI.Zone
                     l.SetTop(top);
                 }
                 if (l.IsTable(1))
-                    foreach (var q in InLoadOrder(
-                                 (SkipDiscoveredQuests ? new List<CompiledQuestScript>() : questScripts_)
-                                 .Concat(TestQuestScripts.OfType<QuestScript>().Select(Compiled))))
-                    {
-                        // one quest's unexpected throw (its key, its validation, the registry) leaves that quest to Lua
-                        // and the others registered: this runs inside loadContainers, unprotected, before addContainers
-                        string name = q.TypeName;
-                        QuestScriptBinding bound = null;
-                        bool duplicate = false;
-                        try
-                        {
-                            if (RegisterQuestScript(l, q, keys, ref name, ref duplicate, out bound)) registered++;
-                            else bound = null;
-                        }
-                        catch (Exception e)
-                        {
-                            log_($"quests: {name} not registered: {e.Message}");
-                            bound = null;
-                        }
-                        finally
-                        {
-                            l.SetTop(top);
-                        }
-                        // quest rework P10: its exports, registered or not (a refused quest's are no-ops), once its key
-                        // is known (name holds it then). A quest refused because another has its key sets none: the
-                        // key's first quest owns the module and the globals, and the second's no-ops would replace them
-                        if (name != q.TypeName && !duplicate) ClaimExports(l, q, name, bound);
-                    }
+                    registered = RegisterEach(l, InLoadOrder(
+                            (SkipDiscoveredQuests ? new List<CompiledQuestScript>() : questScripts_)
+                            .Concat(TestQuestScripts.OfType<QuestScript>().Select(Compiled))), top, q => q.TypeName,
+                        (CompiledQuestScript q, ref string name, ref bool duplicate, out QuestScriptBinding bound) =>
+                            RegisterQuestScript(l, q, keys, ref name, ref duplicate, out bound),
+                        // quest rework P10: its exports, registered or not (a refused quest's are no-ops). A quest
+                        // refused because another has its key sets none: the key's first quest owns the module and
+                        // the globals, and the second's no-ops would replace them
+                        (q, name, bound) => ClaimExports(l, q.Script, q.Def, name, bound));
                 // quest rework C2: the missions, each in place of its Lua Mission container (ZoneHost.MissionScripts)
-                if (l.IsTable(1)) RegisterMissionScripts(l, keys, top);
+                if (l.IsTable(1)) missions = RegisterMissionScripts(l, keys, top);
                 // and the battlefields, each in place of its Lua content, with their zones' hooks set again
                 // (ZoneHost.BattlefieldScripts)
-                if (l.IsTable(1)) RegisterBattlefieldScripts(l, keys, top);
+                if (l.IsTable(1)) battlefields = RegisterBattlefieldScripts(l, keys, top);
                 // the patched quests last, as modifyInteractionEntry leaves them (ZoneHost.QuestModules)
                 try
                 {
@@ -420,15 +395,13 @@ namespace XI.Zone
             // the time of the pass, and of the discovery before the first: the C# quests' whole cost at a start
             var spent = clock.Elapsed + discoverTime_;
             discoverTime_ = TimeSpan.Zero;
-            log_($"quests: {registered} C# quests registered in {spent.TotalMilliseconds:F0} ms");
+            log_($"quests: {registered} C# quests, {missions} C# missions and {battlefields} C# battlefields " +
+                 $"registered in {spent.TotalMilliseconds:F0} ms");
             return 0;
         }
 
-        // the quests with a LegacyPath first (they take their slots by it, in any order), then those without, by key
-        // (they go to the end)
         private IEnumerable<CompiledQuestScript> InLoadOrder(IEnumerable<CompiledQuestScript> all)
         {
-            var list = all.ToList();
             string SortKey(CompiledQuestScript q)
             {
                 try
@@ -440,8 +413,7 @@ namespace XI.Zone
                     return q.TypeName;
                 }
             }
-            return list.Where(q => q.Script?.LegacyPath != null)
-                .Concat(list.Where(q => q.Script?.LegacyPath == null).OrderBy(SortKey, StringComparer.Ordinal));
+            return LegacyFirst(all, q => q.Script?.LegacyPath, SortKey);
         }
 
         // the list at index 1 as C# data, built once per register pass and kept in step with each insert: the container ids
@@ -604,7 +576,7 @@ namespace XI.Zone
             var log = q.Script.Log;
             // a hidden quest (quest rework P9): no quest log or id; its key hiddenQuests.<file>, its container HQuest[name]
             bool hidden = q.Script.HiddenName != null;
-            string area = hidden ? QuestScript.HiddenArea : QuestScript.AreaName(log);
+            string area = q.Script.KeyArea;
             if (area == null)
             {
                 if (CSharpQuestsEnabled) log_($"quests: {q.TypeName} not registered: unknown quest log {(int)log}");
@@ -622,17 +594,8 @@ namespace XI.Zone
             int? id = hidden ? 0 : QuestConstId(l, area, q.Script.ConstName);
             // the Lua file's container is in the list (the file is there); without one, a refusal has no fallback
             bool hasLua = id != null && HasContainer(l, hidden ? HiddenContainerId(q.Script.HiddenName) : $"Quest[{(int)log}][{id.Value}]");
-            bool Refuse(string reason, IList<string> each = null)
-            {
-                if (id != null && !hasLua)
-                {
-                    log_($"quests: C# quest {key} failed to load and has no Lua fallback: {reason}");
-                    QuestLoadFailures.Add(key);
-                }
-                else if (each != null) foreach (var p in each) log_($"quests: {key} not registered: {p}");
-                else log_($"quests: {key} not registered: {reason}");
-                return false;
-            }
+            bool Refuse(string reason, IList<string> each = null) =>
+                RefuseContainer("quest", key, id == null || hasLua, reason, each);
             if (CSharpQuestsOff.Contains(key))
             {
                 // an NPC-call quest has no Lua container: its Lua is the NPC script's branches. OFF leaves them alone only
@@ -895,22 +858,25 @@ namespace XI.Zone
                 l.PushString(r.Var);
                 l.SetField(-2, "var");
             }
-            // itemParams = { fromTrade = true }: npcUtil.giveItem's params, which completeQuest passes with the items; none
-            // when no field is set (an empty table is no Lua quest's)
-            if (r.ItemParams is { } ip && (ip.Silent != null || ip.FromTrade != null || ip.Multiple != null))
+            PushItemParams(l, r.ItemParams);
+        }
+
+        // itemParams = { fromTrade = true }: npcUtil.giveItem's params, set on the table at the top of the stack; none
+        // when no field is set (an empty table is no Lua quest's)
+        internal static void PushItemParams(LuaState l, QuestItemParams ip)
+        {
+            if (ip == null || ip.Silent == null && ip.FromTrade == null && ip.Multiple == null) return;
+            l.NewTable();
+            void Flag(string k, bool? v)
             {
-                l.NewTable();
-                void Flag(string k, bool? v)
-                {
-                    if (v == null) return;
-                    l.Push(v.Value);
-                    l.SetField(-2, k);
-                }
-                Flag("silent", ip.Silent);
-                Flag("fromTrade", ip.FromTrade);
-                Flag("multiple", ip.Multiple);
-                l.SetField(-2, "itemParams");
+                if (v == null) return;
+                l.Push(v.Value);
+                l.SetField(-2, k);
             }
+            Flag("silent", ip.Silent);
+            Flag("fromTrade", ip.FromTrade);
+            Flag("multiple", ip.Multiple);
+            l.SetField(-2, "itemParams");
         }
 
         // one state as a Lua section: check, then per zone its entity tables and its zone-wide handler tables, keyed as
@@ -1037,6 +1003,7 @@ namespace XI.Zone
         // every declared handler's label of the C# quest with the key, in declaration order; null when no C# quest has it
         public IReadOnlyList<string> HandlerLabels(string questKey)
         {
+            if (questKey == ContainerKeys.RoeCoverage) return RoeOnLua ? null : RoeChecks.CoverageLabels();
             foreach (var q in questScripts_.Concat(TestQuestScripts.OfType<QuestScript>().Select(CompiledTest)))
             {
                 if (q.Def == null) continue;
@@ -2089,6 +2056,103 @@ namespace XI.Zone
                 return 0;
             });
         }
+        // xi.maws.gotoRandomMaw(player)
+        public void GotoRandomMaw()
+        {
+            NoEffect("send the char to a past maw");
+            Protected(() =>
+            {
+                lua_.GetPath("xi.maws.gotoRandomMaw");
+                PushPlayer();
+                lua_.Call(1, 0);
+                return 0;
+            });
+        }
+        // xi.maws.addMaw(player), with no maw: the one of the char's zone
+        public void AddMaw()
+        {
+            NoEffect("add a past maw");
+            Protected(() =>
+            {
+                lua_.GetPath("xi.maws.addMaw");
+                PushPlayer();
+                lua_.Call(1, 0);
+                return 0;
+            });
+        }
+        // xi.maws.goToMaw(player, maw), the maw a number as the caller gives it (its Lua raise is the handler's)
+        public void GoToMaw(int maw)
+        {
+            NoEffect("send the char to a maw");
+            Protected(() =>
+            {
+                lua_.GetPath("xi.maws.goToMaw");
+                PushPlayer();
+                lua_.Push((double)maw);
+                lua_.Call(2, 0);
+                return 0;
+            });
+        }
+        // xi.maws.goToMaw(player, xi.maws.pastMaws[zone]): the table's entry pushed as the Lua reads it (nil for a zone
+        // with no past maw, and goToMaw's raise is the handler's)
+        public void GoToPastMaw(int zone)
+        {
+            NoEffect("send the char to a maw");
+            Protected(() =>
+            {
+                lua_.GetPath("xi.maws.goToMaw");
+                PushPlayer();
+                lua_.GetPath("xi.maws.pastMaws");
+                lua_.Push((double)zone);
+                lua_.GetTable(-2);
+                lua_.Remove(-2);
+                lua_.Call(2, 0);
+                return 0;
+            });
+        }
+        // xi.wotg.helpers.removeMemoryFragments(player); the helper file required first (no container file loads it
+        // once the missions are C#)
+        public void RemoveMemoryFragments()
+        {
+            NoEffect("remove the memory fragments");
+            Protected(() =>
+            {
+                RequireHelper("scripts/missions/wotg/helpers");
+                lua_.GetPath("xi.wotg.helpers.removeMemoryFragments");
+                PushPlayer();
+                lua_.Call(1, 0);
+                return 0;
+            });
+        }
+        // player:getFace()
+        public int Face => PlayerCall("getFace", 1, () => (int)lua_.ToIntegral(-1));
+        // player:getEquipmentModelIds(): the table's head, body, hands, main and sub fields
+        public (int Head, int Body, int Hands, int Main, int Sub) EquipmentModelIds =>
+            PlayerCall("getEquipmentModelIds", 1, () =>
+            {
+                int Field(string key)
+                {
+                    lua_.GetField(-1, key);
+                    int v = (int)lua_.ToIntegral(-1);
+                    lua_.Pop(1);
+                    return v;
+                }
+                return (Field("head"), Field("body"), Field("hands"), Field("main"), Field("sub"));
+            });
+        // npcUtil.giveItem(player, item), with nil pushed for a null item
+        public bool GiveItemOrNil(int? item)
+        {
+            NoEffect("give an item");
+            return Protected(() =>
+            {
+                lua_.GetPath("npcUtil.giveItem");
+                PushPlayer();
+                if (item is int i) lua_.Push((double)i);
+                else lua_.PushNil();
+                lua_.Call(2, 1);
+                return lua_.ToBoolean(-1);
+            });
+        }
         // player:getNation()
         public int Nation => PlayerCall("getNation", 1, () => (int)lua_.ToIntegral(-1));
         // VanadielHour()
@@ -2190,6 +2254,12 @@ namespace XI.Zone
         {
             NoEffect("delete a mission");
             PlayerCall("delMission", 0, () => 0, missionLog, mission);
+        }
+        // player:completeMission(missionLog, mission)
+        public void CompleteMissionRaw(int missionLog, int mission)
+        {
+            NoEffect("complete a mission");
+            PlayerCall("completeMission", 0, () => 0, missionLog, mission);
         }
         // player:setMissionStatus(missionLog, status)
         public void SetMissionStatus(int missionLog, int status)
@@ -2422,6 +2492,8 @@ namespace XI.Zone
         });
         // player:inMogHouse()
         public bool InMogHouse => PlayerCall("inMogHouse", 1, () => lua_.ToBoolean(-1));
+        // player:isEngaged()
+        public bool IsEngaged => PlayerCall("isEngaged", 1, () => lua_.ToBoolean(-1));
         // xi.monstrosity.hasUnlockedSpecies(player, species)
         public bool MonstrosityHasUnlockedSpecies(int species) => Protected(() =>
         {
@@ -2623,6 +2695,57 @@ namespace XI.Zone
             lua_.Call(1, 1);
             return (int)lua_.ToIntegral(-1);
         });
+        // the missions' Lua helpers, each global looked up at each call so a module's override is the one that runs.
+        // The helper file is required first: once its missions are C#, no container file loads it
+        public bool SoaImprimaturGate(int gateAmount) => Protected(() =>
+        {
+            RequireHelper("scripts/missions/soa/helpers");
+            lua_.GetPath("xi.soa.helpers.imprimaturGate");
+            PushPlayer();
+            lua_.Push((double)gateAmount);
+            lua_.Call(2, 1);
+            return lua_.ToBoolean(-1);
+        });
+
+        public bool WotgMeetsMissionReqs(int mission) => Protected(() =>
+        {
+            RequireHelper("scripts/missions/wotg/helpers");
+            lua_.GetPath($"xi.wotg.helpers.meetsMission{mission}Reqs");
+            PushPlayer();
+            lua_.Call(1, 1);
+            return lua_.ToBoolean(-1);
+        });
+
+        // whitegateShared.doRoyalPalaceArmorCheck(player): a function of the zone's Shared module, which the require
+        // returns (it is no global); the module is required at each call; require answers the cached module, the one
+        // the Lua files hold
+        public bool RoyalPalaceArmorCheck() => Protected(() =>
+        {
+            lua_.GetGlobal("require");
+            lua_.PushString("scripts/zones/Aht_Urhgan_Whitegate/Shared");
+            lua_.Call(1, 1);
+            lua_.GetField(-1, "doRoyalPalaceArmorCheck");
+            PushPlayer();
+            lua_.Call(1, 1);
+            return lua_.ToBoolean(-1);
+        });
+
+        // xi.mission.getMissionRankPoints(player, mission): a boolean
+        public bool MissionRankPoints(int mission) => Protected(() =>
+        {
+            lua_.GetPath("xi.mission.getMissionRankPoints");
+            PushPlayer();
+            lua_.Push((double)mission);
+            lua_.Call(2, 1);
+            return lua_.ToBoolean(-1);
+        });
+
+        private void RequireHelper(string file)
+        {
+            lua_.GetGlobal("require");
+            lua_.PushString(file);
+            lua_.Call(1, 0);
+        }
         // zones[zone].npc[npcKey] in the handler's zone; an unknown key raises, as the Lua's arithmetic on nil does
         public int NpcIdOf(string npcKey)
         {
@@ -2770,6 +2893,8 @@ namespace XI.Zone
         }
         // player:hasTitle(title)
         public bool HasTitle(int title) => PlayerCall("hasTitle", 1, () => lua_.ToBoolean(-1), title);
+        // player:getTitle()
+        public int CurrentTitle => PlayerCall("getTitle", 1, () => (int)lua_.ToIntegral(-1));
         // player:getPlaytime()
         public int Playtime => PlayerCall("getPlaytime", 1, () => (int)lua_.ToIntegral(-1));
         // player:addExp(exp)
@@ -2829,6 +2954,12 @@ namespace XI.Zone
                 return true;
             });
         }
+        // player:addItem(item, qty, augment0, value0, augment1, value1): six numbers, the result unread
+        public void AddItemAugmented(int item, int qty, int augment0, int value0, int augment1, int value1)
+        {
+            NoEffect("add an item");
+            PlayerCall("addItem", 0, () => 0, item, qty, augment0, value0, augment1, value1);
+        }
         // player:setMannequinPose(item, race, pose)
         public void SetMannequinPose(int item, int race, int pose)
         {
@@ -2840,6 +2971,22 @@ namespace XI.Zone
         {
             NoEffect("add a title");
             PlayerCall("addTitle", 0, () => 0, title);
+        }
+        // xi.instance.onEventFinish(player, csid, option, nil): the npc is nil, the Lua reads only the player, csid,
+        // option
+        public void InstanceOnEventFinish(int csid, int option)
+        {
+            NoEffect("enter an instance");
+            Protected(() =>
+            {
+                lua_.GetPath("xi.instance.onEventFinish");
+                PushPlayer();
+                lua_.Push((double)csid);
+                lua_.Push((double)option);
+                lua_.PushNil();
+                lua_.Call(4, 0);
+                return 0;
+            });
         }
         // player:setTitle(title)
         public void SetTitle(int title)
@@ -2882,6 +3029,38 @@ namespace XI.Zone
         public bool MobIsAlive(string mobName, int offset = 0) => MobCall("GetMobByID", mobName, offset, "isAlive", false);
         // GetMobByID(zones[zone].mob[mobName] + offset):isDead()
         public bool MobIsDead(string mobName, int offset = 0) => MobCall("GetMobByID", mobName, offset, "isDead", false);
+        // GetMobByID(zones[zone].mob[mobName] + offset) ~= nil (quest rework C6)
+        public bool MobExists(string mobName, int offset = 0)
+        {
+            int id = MobIdOf(mobName) + offset;
+            return Protected(() =>
+            {
+                lua_.GetGlobal("GetMobByID");
+                lua_.Push((double)id);
+                lua_.Call(1, 1);
+                return !lua_.IsNil(-1);
+            });
+        }
+        // GetMobByID(zones[zone].mob[mobName] + offset):getLocalVar(name); a nil mob raises, as the Lua's call on nil
+        // does
+        public int MobLocalVar(string mobName, string name, int offset = 0)
+        {
+            int id = MobIdOf(mobName) + offset;
+            return Protected(() =>
+            {
+                lua_.GetGlobal("GetMobByID");
+                lua_.Push((double)id);
+                lua_.Call(1, 1);
+                int mob = lua_.Top;
+                if (lua_.IsNil(mob))
+                    throw new InvalidOperationException($"GetMobByID({id}) is nil ({mobName}+{offset})");
+                lua_.GetField(mob, "getLocalVar");
+                lua_.PushValue(mob);
+                lua_.PushString(name);
+                lua_.Call(2, 1);
+                return (int)lua_.ToIntegral(-1);
+            });
+        }
         // SpawnMob(zones[zone].mob[mobName] + offset):updateClaim(player), or :updateEnmity(player)
         public void SpawnMob(string mobName, int offset, bool claim)
         {
@@ -2921,6 +3100,25 @@ namespace XI.Zone
                 return 0;
             });
         }
+        // player:showText(npc, textId, args...) with a text id the handler computed (a zone text plus an offset), npc
+        // the handler's npc argument, as the ZoneText form above
+        public void ShowText(int textId, params int[] args)
+        {
+            NoEffect("show a text");
+            if (npc_ == 0 || lua_.IsNil(npc_)) throw new InvalidOperationException("no npc in this handler");
+            Protected(() =>
+            {
+                PushPlayer();
+                int self = lua_.Top;
+                lua_.GetField(self, "showText");
+                lua_.PushValue(self);
+                lua_.PushValue(npc_);
+                lua_.Push((double)textId);
+                foreach (var a in args) lua_.Push((double)a);
+                lua_.Call(args.Length + 3, 0);
+                return 0;
+            });
+        }
         // DespawnMob(zones[zone].mob[mobName] + offset), with no method called on the mob
         public void DespawnMob(string mobName, int offset = 0)
         {
@@ -2932,6 +3130,12 @@ namespace XI.Zone
         {
             NoEffect("spawn a mob");
             MobCall("SpawnMob", mobName, 0, null, false);
+        }
+        // SpawnMob(zones[zone].mob[mobName] + offset), with no method called on the mob
+        public void SpawnMob(string mobName, int offset)
+        {
+            NoEffect("spawn a mob");
+            MobCall("SpawnMob", mobName, offset, null, false);
         }
         // local mob = SpawnMob(zones[zone].mob[mobName]); nil: false; else mob:updateClaim(player), mob:setLocalVar('QMID',
         // npcId), and a DESPAWN listener that sets GetNPCByID(QMID):setLocalVar(npcVar, GetSystemTime() + seconds): true
@@ -2986,6 +3190,180 @@ namespace XI.Zone
                 PushPlayer();
                 lua_.Push((double)id);
                 lua_.Push(claim);
+                lua_.Call(3, 0);
+                return 0;
+            });
+        }
+        // local mob = GetMobByID(id); nil: false; else mob:spawn(), mob:updateClaim(player) and, with zeroEnmity,
+        // mob:setCE(player, 0) (CSharpQuests.spawnMobEntityById)
+        public bool SpawnMobEntityById(int id, bool zeroEnmity)
+        {
+            NoEffect("spawn a mob");
+            return Protected(() =>
+            {
+                lua_.GetPath("CSharpQuests.spawnMobEntityById");
+                PushPlayer();
+                lua_.Push((double)id);
+                lua_.Push(zeroEnmity);
+                lua_.Call(3, 1);
+                return lua_.ToBoolean(-1);
+            });
+        }
+        // npcUtil.popFromQM(player, npc, { id, ... }, { hide = hide })
+        public bool PopFromQmIds(int[] ids, int hide)
+        {
+            NoEffect("pop a mob");
+            if (npc_ == 0 || lua_.IsNil(npc_)) throw new InvalidOperationException("no npc in this handler");
+            return Protected(() =>
+            {
+                lua_.GetPath("npcUtil.popFromQM");
+                PushPlayer();
+                lua_.PushValue(npc_);
+                lua_.NewTable();
+                int list = lua_.Top;
+                for (int i = 0; i < ids.Length; i++)
+                {
+                    lua_.Push((double)ids[i]);
+                    lua_.RawSetI(list, i + 1);
+                }
+                lua_.NewTable();
+                lua_.Push((double)hide);
+                lua_.SetField(-2, "hide");
+                lua_.Call(4, 1);
+                return lua_.ToBoolean(-1);
+            });
+        }
+        // print(message)
+        public void LuaPrint(string message)
+        {
+            Protected(() =>
+            {
+                lua_.GetGlobal("print");
+                lua_.PushString(message);
+                lua_.Call(1, 0);
+                return 0;
+            });
+        }
+        // npcUtil.popFromQM(player, npc, { zones[zone].mob[mobName], ... }, { hide = hide, claim = claim }): each mob
+        // entry as IDs.lua has it, in the order given (quest rework C3 N5)
+        public bool PopFromQm(string[] mobNames, int hide, bool claim)
+        {
+            NoEffect("pop a mob");
+            if (npc_ == 0 || lua_.IsNil(npc_)) throw new InvalidOperationException("no npc in this handler");
+            ushort zone = Zone;
+            return Protected(() =>
+            {
+                lua_.GetPath("npcUtil.popFromQM");
+                PushPlayer();
+                lua_.PushValue(npc_);
+                lua_.NewTable();
+                int list = lua_.Top;
+                lua_.GetGlobal("zones");
+                if (lua_.IsTable(-1)) lua_.RawGetI(-1, zone); else lua_.PushNil();
+                if (lua_.IsTable(-1)) lua_.GetField(-1, "mob"); else lua_.PushNil();
+                int mobs = lua_.Top;
+                for (int i = 0; i < mobNames.Length; i++)
+                {
+                    if (lua_.IsTable(mobs)) lua_.GetField(mobs, mobNames[i]); else lua_.PushNil();
+                    if (lua_.IsNil(-1))
+                        throw new InvalidOperationException($"unknown mob {mobNames[i]} in zone {zone}");
+                    lua_.RawSetI(list, i + 1);
+                }
+                // the tables the entries were read through dropped
+                lua_.SetTop(list);
+                lua_.NewTable();
+                lua_.Push((double)hide);
+                lua_.SetField(-2, "hide");
+                lua_.Push(claim);
+                lua_.SetField(-2, "claim");
+                lua_.Call(4, 1);
+                return lua_.ToBoolean(-1);
+            });
+        }
+        // npcUtil.popFromQM(player, npc, { id, id + 1, ..., id + count - 1 }, { claim = claim, look = look, radius =
+        // radius }), id = zones[zone].mob[mobName], which must be an id; no hide, so popFromQM's default applies
+        // (quest rework C3 N5)
+        public bool PopFromQmSeriesRadius(string mobName, int count, bool claim, bool look, int radius)
+        {
+            NoEffect("pop a mob");
+            if (npc_ == 0 || lua_.IsNil(npc_)) throw new InvalidOperationException("no npc in this handler");
+            int first = MobIdOf(mobName);
+            return Protected(() =>
+            {
+                lua_.GetPath("npcUtil.popFromQM");
+                PushPlayer();
+                lua_.PushValue(npc_);
+                lua_.NewTable();
+                for (int i = 0; i < count; i++)
+                {
+                    lua_.Push((double)(first + i));
+                    lua_.RawSetI(-2, i + 1);
+                }
+                lua_.NewTable();
+                lua_.Push(claim);
+                lua_.SetField(-2, "claim");
+                lua_.Push(look);
+                lua_.SetField(-2, "look");
+                lua_.Push((double)radius);
+                lua_.SetField(-2, "radius");
+                lua_.Call(4, 1);
+                return lua_.ToBoolean(-1);
+            });
+        }
+        // GetMobByID(zones[zone].mob[mobName] + offset):lookAt(player:getPos()); a nil mob raises (quest rework C3 N5)
+        public void MobLookAtPlayer(string mobName, int offset = 0)
+        {
+            NoEffect("turn a mob");
+            int id = MobIdOf(mobName) + offset;
+            Protected(() =>
+            {
+                lua_.GetGlobal("GetMobByID");
+                lua_.Push((double)id);
+                lua_.Call(1, 1);
+                int mob = lua_.Top;
+                if (lua_.IsNil(mob))
+                    throw new InvalidOperationException($"GetMobByID({id}) is nil ({mobName}+{offset})");
+                lua_.GetField(mob, "lookAt");
+                lua_.PushValue(mob);
+                PushPlayer();
+                int player = lua_.Top;
+                lua_.GetField(player, "getPos");
+                lua_.PushValue(player);
+                lua_.Call(1, 1);
+                // the position table in the player's place, the player dropped
+                lua_.Insert(player);
+                lua_.Pop(1);
+                lua_.Call(2, 0);
+                return 0;
+            });
+        }
+        // GetMobByID(zones[zone].mob[mobName] + offset):updateClaim(player); a nil mob raises (quest rework C3 N5)
+        public void MobUpdateClaim(string mobName, int offset = 0)
+        {
+            NoEffect("claim a mob");
+            MobCall("GetMobByID", mobName, offset, "updateClaim", true);
+        }
+        // for _, member in ipairs(player:getAlliance()) do container:setLocalVar(member, name, value) ... end
+        // (CSharpQuests.allianceLocalVars), the container this context's quest or mission
+        internal void AllianceLocalVars((string Name, int Value)[] vars)
+        {
+            NoEffect("set a local var");
+            Protected(() =>
+            {
+                lua_.GetPath("CSharpQuests.allianceLocalVars");
+                lua_.PushRef(quest_.Container);
+                PushPlayer();
+                lua_.NewTable();
+                int list = lua_.Top;
+                for (int i = 0; i < vars.Length; i++)
+                {
+                    lua_.NewTable();
+                    lua_.PushString(vars[i].Name);
+                    lua_.RawSetI(-2, 1);
+                    lua_.Push((double)vars[i].Value);
+                    lua_.RawSetI(-2, 2);
+                    lua_.RawSetI(list, i + 1);
+                }
                 lua_.Call(3, 0);
                 return 0;
             });
@@ -3070,6 +3448,25 @@ namespace XI.Zone
                 lua_.Insert(-2);
                 lua_.Push((double)csid);
                 lua_.NewTable();
+                lua_.Push(true);
+                lua_.SetField(-2, "isHidden");
+                lua_.Call(3, 0);
+                return 0;
+            });
+        }
+        // player:startEvent(csid, { [index] = value, isHidden = true })
+        public void StartEventHiddenParam(int csid, int index, int value)
+        {
+            NoEffect("start an event");
+            Protected(() =>
+            {
+                PushPlayer();
+                lua_.GetField(-1, "startEvent");
+                lua_.Insert(-2);
+                lua_.Push((double)csid);
+                lua_.NewTable();
+                lua_.Push((double)value);
+                lua_.RawSetI(-2, index);
                 lua_.Push(true);
                 lua_.SetField(-2, "isHidden");
                 lua_.Call(3, 0);
@@ -3573,6 +3970,37 @@ namespace XI.Zone
         // npcUtil.popFromQM(player, npc, zones[zone].mob[mobName], { claim = claim, hide = hide, radius = radius })
         public bool PopFromQm(string mobName, bool claim, int hide, int radius) => PopFromQmWith(mobName, claim, hide, 0, radius);
 
+        // GetMobByID(zones[zone].mob[mobName] + offset):setSpawn(x, y, z, rot); a nil mob raises, as the Lua's call
+        // on nil does
+        public void SetMobSpawn(string mobName, int offset, double x, double y, double z, int rot)
+        {
+            NoEffect("set a mob's spawn point");
+            ushort zone = Zone;
+            Protected(() =>
+            {
+                lua_.GetGlobal("zones");
+                if (lua_.IsTable(-1)) lua_.RawGetI(-1, zone); else lua_.PushNil();
+                if (lua_.IsTable(-1)) lua_.GetField(-1, "mob"); else lua_.PushNil();
+                if (lua_.IsTable(-1)) lua_.GetField(-1, mobName); else lua_.PushNil();
+                if (!lua_.IsNumber(-1)) throw new InvalidOperationException($"unknown mob {mobName} in zone {zone}");
+                double id = lua_.ToNumber(-1) + offset;
+                lua_.GetGlobal("GetMobByID");
+                lua_.Push(id);
+                lua_.Call(1, 1);
+                int mob = lua_.Top;
+                if (lua_.IsNil(mob))
+                    throw new InvalidOperationException($"GetMobByID({id}) is nil ({mobName}+{offset} in zone {zone})");
+                lua_.GetField(mob, "setSpawn");
+                lua_.PushValue(mob);
+                lua_.Push(x);
+                lua_.Push(y);
+                lua_.Push(z);
+                lua_.Push((double)rot);
+                lua_.Call(5, 0);
+                return 0;
+            });
+        }
+
         // the one popFromQM call of the single-mob forms: the params table holds claim and hide, and radius only when given
         // (popFromQM draws its random spawn point only for a radius); an offset moves an id entry (see PopFromQm)
         private bool PopFromQmWith(string mobName, bool claim, int hide, int offset, int? radius)
@@ -3718,6 +4146,26 @@ namespace XI.Zone
             });
         }
 
+        // player:messageName(zones[text.Zone].text[text.Name], player, ...); an unknown name throws, as Special does
+        public void MessageNameOfPlayer(ZoneText text, params int[] args)
+        {
+            NoEffect("send a message");
+            int? id = TextId(lua_, text.Zone, text.Name);
+            if (id == null) throw new InvalidOperationException($"unknown text {text.Name} in zone {text.Zone}");
+            Protected(() =>
+            {
+                PushPlayer();
+                int self = lua_.Top;
+                lua_.GetField(self, "messageName");
+                lua_.PushValue(self);
+                lua_.Push((double)id.Value);
+                lua_.PushValue(self);
+                foreach (var a in args) lua_.Push((double)a);
+                lua_.Call(3 + args.Length, 0);
+                return 0;
+            });
+        }
+
         // player:messageText(npc, zones[text.Zone].text[text.Name], showName, mode), npc the handler's npc argument (nil when
         // it has none); an unknown name throws, as Special does
         public void MessageText(ZoneText text, bool showName, int mode)
@@ -3754,6 +4202,26 @@ namespace XI.Zone
                 lua_.GetField(self, "messageText");
                 lua_.PushValue(self);
                 lua_.PushValue(self);
+                lua_.Push((double)id.Value);
+                lua_.Call(3, 0);
+                return 0;
+            });
+        }
+
+        // player:messageText(npc, zones[text.Zone].text[text.Name]), npc the handler's npc argument (nil when it has
+        // none): the npc its speaker, showName and mode left nil; an unknown name throws
+        public void MessageTextFromNpc(ZoneText text)
+        {
+            NoEffect("send a message");
+            int? id = TextId(lua_, text.Zone, text.Name);
+            if (id == null) throw new InvalidOperationException($"unknown text {text.Name} in zone {text.Zone}");
+            Protected(() =>
+            {
+                PushPlayer();
+                int self = lua_.Top;
+                lua_.GetField(self, "messageText");
+                lua_.PushValue(self);
+                if (npc_ == 0) lua_.PushNil(); else lua_.PushValue(npc_);
                 lua_.Push((double)id.Value);
                 lua_.Call(3, 0);
                 return 0;
@@ -3860,11 +4328,49 @@ namespace XI.Zone
                     return 0;
                 });
             }
+            // npc:messageText(player, zones[text.Zone].text[text.Name]): the npc the speaker, the char the entity
+            public void MessageText(ZoneText text)
+            {
+                ctx_.NoEffect("show a message text");
+                int? id = TextId(ctx_.lua_, text.Zone, text.Name);
+                if (id == null) throw new InvalidOperationException($"unknown text {text.Name} in zone {text.Zone}");
+                ctx_.Protected(() =>
+                {
+                    var l = ctx_.lua_;
+                    l.PushValue(slot_);
+                    int npc = l.Top;
+                    l.GetField(npc, "messageText");
+                    l.PushValue(npc);
+                    ctx_.PushPlayer();
+                    l.Push((double)id.Value);
+                    l.Call(3, 0);
+                    return 0;
+                });
+            }
             // npc:hideNPC(seconds)
             public void Hide(int seconds)
             {
                 ctx_.NoEffect("hide an npc");
                 ctx_.Method(slot_, "hideNPC", 0, () => 0, seconds);
+            }
+            // mob:messageText(mob, zones[text.Zone].text[text.Name]): the entity both self and speaker
+            public void MessageTextOwn(ZoneText text)
+            {
+                ctx_.NoEffect("show a text");
+                int? id = TextId(ctx_.lua_, text.Zone, text.Name);
+                if (id == null) throw new InvalidOperationException($"unknown text {text.Name} in zone {text.Zone}");
+                ctx_.Protected(() =>
+                {
+                    var l = ctx_.lua_;
+                    l.PushValue(slot_);
+                    int mob = l.Top;
+                    l.GetField(mob, "messageText");
+                    l.PushValue(mob);
+                    l.PushValue(mob);
+                    l.Push((double)id.Value);
+                    l.Call(3, 0);
+                    return 0;
+                });
             }
             // npc:getXPos() / getYPos() / getZPos()
             public double XPos => ctx_.Method(slot_, "getXPos", 1, () => ctx_.lua_.ToNumber(-1));

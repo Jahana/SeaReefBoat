@@ -1,0 +1,24 @@
+# Darkness Named completed, Tavnazian Safehold (mission.cop.darkness_named#done). A level 75 Warrior of San d'Oria with
+# 3-5 completed (Sheltering Doubt current). Chemioue: 282; Justinius: 129; Parelbriaux: 296; Arquil: 292; Despachiaire:
+# 315 (Slanderous Utterings not completed). Slanderous Utterings completed (a GM): Arquil and Despachiaire: nothing.
+lists TavnazianSafehold/Chemioue/onTrigger TavnazianSafehold/Justinius/onTrigger TavnazianSafehold/Parelbriaux/onTrigger TavnazianSafehold/Arquil/onTrigger TavnazianSafehold/Despachiaire/onTrigger
+char zone=TavnazianSafehold pos=117,-42.8,43.5 job=WAR lvl=75 nation=0
+mission Cop ShelteringDoubt current     # 3-5 is behind the current mission: completed
+login
+trigger Chemioue                        # 282
+finish-if-event
+trigger Justinius                       # 129
+finish-if-event
+trigger Parelbriaux                     # 296
+finish-if-event
+trigger Arquil                          # 292
+finish-if-event
+trigger Despachiaire                    # 315
+finish-if-event
+# A GM: a live completeMission that only clears the current mission, so the addMission below finds none current.
+mission Cop ShelteringDoubt completed
+mission Cop TheEnduringTumultOfWar current # a GM: 4-4 is behind it
+trigger Arquil                          # nothing
+finish-if-event
+trigger Despachiaire                    # nothing
+finish-if-event

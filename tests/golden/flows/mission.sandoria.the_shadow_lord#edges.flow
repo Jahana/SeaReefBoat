@@ -1,0 +1,64 @@
+# The Shadow Lord (San d'Oria 5-2): the arms the main flow does not take. _6h0 at status 0: the zone's default
+# ITS_LOCKED (7243); Halver at 3: the default text (7909); at 4 without the fragment: the alternation, his own 577;
+# Rahal at 4: section 4's 77; hallEvent 1 (a GM): Halver HIS_MAJESTY_AWAITS. Two wins by a GM (battlefieldWin 0; status
+# 2 inside the event): the title only. Completed with Leaute's Last Wishes (a GM: the engine's warning, not current):
+# section 4 does not hold: Rahal 544 from The Ruins of Fei'Yin's section 3.
+lists SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 NorthernSanDoria/onEventFinish/1009 ChateauDoraguille/Halver/onTrigger ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/_6h4/onTrigger ChateauDoraguille/Arsha/onTrigger ChateauDoraguille/Chupaile/onTrigger ChateauDoraguille/Aramaviont/onTrigger ChateauDoraguille/Curilla/onTrigger ChateauDoraguille/Milchupain/onTrigger ChateauDoraguille/Rahal/onTrigger ChateauDoraguille/onEventFinish/546 ChateauDoraguille/onEventFinish/547 ChateauDoraguille/onEventFinish/548 ChateauDoraguille/onEventFinish/61 ThroneRoom/_4l1/onTrigger ThroneRoom/_4l2/onTrigger ThroneRoom/onZoneIn/1 ThroneRoom/onEventUpdate/32000 ThroneRoom/onEventFinish/32000 ThroneRoom/onEventFinish/32001 ThroneRoom/onEventFinish/32002 ThroneRoom/onEventFinish/32003 ThroneRoom/onEventFinish/32004 ThroneRoom/onEventFinish/6 ThroneRoom/onEventFinish/7
+char zone=ChateauDoraguille pos=2,0.1,0.1 job=WAR lvl=75 nation=0
+warning: lua: completeMission: 16 on log 0 is not the current mission -- the GM step mission Sandoria LeautesLastWishes completed after The Shadow Lord's completion left no mission current: nothing changes but the flag
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Sandoria SmashTheOrcishScouts completed
+mission Sandoria BatHunt completed
+mission Sandoria SaveTheChildren completed
+mission Sandoria TheRescueDrill completed
+mission Sandoria TheDavoiReport completed
+mission Sandoria JourneyAbroad completed
+mission Sandoria InfiltrateDavoi completed
+mission Sandoria TheCrystalSpring completed
+mission Sandoria AppointmentToJeuno completed
+mission Sandoria Magicite completed
+mission Sandoria TheRuinsOfFeiYin completed
+rank 5
+mission Sandoria TheShadowLord current
+login
+trigger _6h0                            # status 0: the default ITS_LOCKED
+finish-if-event
+missionstatus Sandoria 3
+trigger Halver                          # status 3: the default text (HALVER_OFFSET + 1092)
+finish-if-event
+missionstatus Sandoria 4
+trigger Halver                          # status 4, no fragment: the alternation: his own 577
+finish-if-event
+trigger Rahal                           # status 4: section 4: 77
+finish-if-event
+charvar Mission[0][15]hallEvent 1
+trigger Halver                          # status 4, hallEvent 1: HIS_MAJESTY_AWAITS
+finish-if-event
+charvar Mission[0][15]hallEvent 0
+missionstatus Sandoria 3
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 160, 32001
+localvar battlefieldWin 0               # a GM, inside the event
+finish                                  # 32001 with battlefieldWin 0: the title; the mission does nothing
+tick 11000
+tick 10000
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 160, 32001
+missionstatus Sandoria 2                # a GM, inside the event
+finish                                  # 32001 at status 2: the title; the mission does nothing
+tick 11000
+tick 10000
+mission Sandoria TheShadowLord completed
+mission Sandoria LeautesLastWishes completed
+warp 2,0.1,0.1 ChateauDoraguille
+trigger Rahal                           # section 4 does not hold: 5-1's section 3: 544
+finish-if-event

@@ -1,0 +1,12 @@
+# The Moonlit Path (battlefield.moonlit_path): the requirement arms. Main, a level 75 Warrior with the quest accepted but
+# no Moon Bauble: MS_Entrance: the key item check fails: no options. bob, with the bauble but the quest only available:
+# fails.
+lists FullMoonFountain/MS_Entrance/onTrigger
+char zone=FullMoonFountain pos=-301.3,9.5,-260.0 job=WAR lvl=75
+char bob zone=FullMoonFountain pos=-301.3,9.5,-260.0 job=WAR lvl=75
+quest Windurst.TheMoonlitPath accepted
+bob: keyitem MoonBauble
+login
+trigger MS_Entrance                     # no bauble: no options
+bob: login
+bob: trigger MS_Entrance                # available: no options

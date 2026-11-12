@@ -1,0 +1,40 @@
+# The Mothercrystals, the other zones and the large apparatuses (CoP 1-3). 1-3 current, the light of Dem (a GM). The
+# Tahrongi telepoint (one light, no light of Mea, Option 0): 912, finished with 0: Promyvion - Mea; its zone-in (one
+# light): 51, finished: Option 3. The Hall: _0e7 (Option 3, no light of Mea, one light): 128, finished with 1: nothing; with
+# 0: Option 0 and out to Tahrongi. Option 1 (a GM): _0e3: 122, finished with 0. The light of Dem swapped for Holla's and
+# Option 2 (a GM): _0e5: 125, finished with 0. With the lights of Holla and Mea (two lights): Promyvion - Dem's zone-in:
+# 52, finished: Option 2; _0e5 (two lights): nothing from the mission. The flow ends there; the
+# other _0e3 cases are in below_the_arks#arms and #isolate.
+lists TahrongiCanyon/Shattered_Telepoint/onTrigger TahrongiCanyon/onEventFinish/912 HallOfTransference/_0e3/onTrigger HallOfTransference/_0e5/onTrigger HallOfTransference/_0e7/onTrigger HallOfTransference/onEventFinish/122 HallOfTransference/onEventFinish/125 HallOfTransference/onEventFinish/128 PromyvionMea/onZoneIn/1 PromyvionMea/onEventFinish/51 PromyvionDem/onZoneIn/1 PromyvionDem/onEventFinish/52
+char zone=TahrongiCanyon pos=179,35,255 job=WAR lvl=75 nation=0
+mission Cop TheMothercrystals current
+keyitem LightOfDem
+login
+trigger Shattered_Telepoint             # one light, Option 0: 912
+finish option=0                         # sendToPromyvionZone(3)
+warp -93.268,0,170.749 PromyvionMea     # 51
+finish                                  # Option 3
+warp 270,-84.9,-36.299 HallOfTransference
+trigger _0e7                            # Option 3 = crag 3, no light of Mea: 128
+finish option=1                         # not 0: nothing
+trigger _0e7
+finish option=0                         # Option 0, out to Tahrongi
+warp 179,35,255 TahrongiCanyon
+charvar Mission[6][128]Option 1         # a GM
+warp -236.3,-4.9,290 HallOfTransference
+trigger _0e3                            # Option 1 = crag 1: 122
+finish option=0                         # out to La Theine
+warp 334,19,-60 LaTheinePlateau
+delkeyitem LightOfDem                   # a GM
+keyitem LightOfHolla                    # a GM
+charvar Mission[6][128]Option 2         # a GM
+warp -216.449,-48.635,-280 HallOfTransference
+trigger _0e5                            # Option 2 = crag 2, no light of Dem: 125
+finish option=0                         # out to Konschtat
+warp 135,19,220 KonschtatHighlands
+keyitem LightOfMea                      # a GM: two lights
+charvar Mission[6][128]Option 0         # a GM
+warp 185.891,0,-52.331 PromyvionDem     # two lights: 52
+finish                                  # Option 2
+warp -216.449,-48.635,-280 HallOfTransference
+trigger _0e5                            # two lights: nothing from the mission

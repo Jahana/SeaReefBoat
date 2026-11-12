@@ -1,0 +1,31 @@
+# Head Wind (battlefield.head_wind#areas): areas 2 and 3. Ulmia's field 7: option 2 enters area 2 (mob ids +5); the
+# kills give 7731 and 7742, the third the win 32001; finished: Three Paths' Boneyard Gully 32001 moves Ulmia's field 7
+# to 8, 1000 XP, title 358. X's death message 7753 comes only in the tick 10000 after the win. A GM sets the field back
+# to 7 and option 3 enters area 3 (ids +10); its win gives 32001, Three Paths' 32001 moves the field to 8 again, no
+# second XP or title in the trace; 7753 again in the last tick.
+lists BoneyardGully/_081/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75 nation=0
+mission Cop ThreePaths current
+login
+missionstatus Cop 7 pos=4               # a GM
+trigger _081
+update 32000 option=2                   # area 2
+finish
+tick 2000
+kill SHIKAREE_Z_HW+5
+kill SHIKAREE_Y_HW+5
+kill SHIKAREE_X_HW+5
+finish
+tick 11000
+tick 10000
+missionstatus Cop 7 pos=4               # a GM
+trigger _081
+update 32000 option=3                   # area 3
+finish
+tick 2000
+kill SHIKAREE_Z_HW+10
+kill SHIKAREE_Y_HW+10
+kill SHIKAREE_X_HW+10
+finish
+tick 11000
+tick 10000

@@ -1,0 +1,49 @@
+# The Mithra and the Crystal (Zilart 12), current, through the papyrus. Aldo plays 111 while Intro is 0 (its finish sets
+# Intro 1), then 69; _700 plays 5 (ReplaceDefault) and Gilgamesh 170 without the Cerulean Crystal. At status 0 Rabao's
+# Maryoh_Comyujah plays 81 (hasDeclined the Option var), whose finish sets Option 1 on option 0 and status 1 on option
+# 1; at status 1 she plays 82. Quicksand Caves' qm7 (status 1, no papyrus) plays 12 while nmDefeated is 0: option 0 does
+# nothing, option 1 says MUST_MOVE_CLOSER beyond 1.5, else SOMETHING_ATTACKING_YOU and spawns the Ancient Vessel
+# (claimed), and THIS_IS_NOT_THE_TIME while it is up. Its death (the killer's handler) sets nmDefeated and the respawn
+# wait; qm7 then plays 13, whose option 1 (near) gives the Scrap of Papyrus; with it qm7 says YOU_FIND_NOTHING.
+lists LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/111 Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Rabao/Maryoh_Comyujah/onTrigger Rabao/onEventFinish/81 Rabao/onEventFinish/83 QuicksandCaves/qm7/onTrigger QuicksandCaves/onEventFinish/12 QuicksandCaves/onEventFinish/13 QuicksandCaves/Ancient_Vessel/onMobDeath HallOfTheGods/_6z0/onTrigger HallOfTheGods/Shimmering_Circle/onTrigger HallOfTheGods/onEventFinish/3
+char zone=LowerJeuno pos=23,3,-58 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheMithraAndTheCrystal current
+login
+trigger Aldo                            # Intro 0: 111
+finish                                  # Intro 1
+trigger Aldo                            # 69
+finish
+warp 98,-7,-12 Norg
+trigger _700                            # 5
+finish
+trigger Gilgamesh                       # no crystal: 170
+finish
+warp -1,8,73 Rabao
+trigger Maryoh_Comyujah                 # status 0: 81, hasDeclined 0
+finish option=0                         # Option 1
+trigger Maryoh_Comyujah                 # 81, hasDeclined 1
+finish option=1                         # status 1
+trigger Maryoh_Comyujah                 # status 1: 82
+finish
+warp -504,19,-419 QuicksandCaves
+trigger qm7 at=1                        # 12
+finish option=0                         # nothing
+trigger qm7 at=3                        # 12
+finish option=1                         # far: MUST_MOVE_CLOSER
+trigger qm7 at=1                        # 12
+finish option=1                         # SOMETHING_ATTACKING_YOU: the Ancient Vessel
+trigger qm7 at=1                        # 12
+finish option=1                         # spawned: THIS_IS_NOT_THE_TIME
+kill ANCIENT_VESSEL                     # nmDefeated 1
+trigger qm7 at=1                        # 13
+finish option=0                         # nothing
+trigger qm7 at=3                        # 13
+finish option=1                         # far: MUST_MOVE_CLOSER
+trigger qm7 at=1                        # 13
+finish option=1                         # Scrap of Papyrus
+trigger qm7 at=1                        # papyrus: YOU_FIND_NOTHING
+finish-if-event

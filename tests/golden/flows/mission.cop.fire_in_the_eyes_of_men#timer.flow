@@ -1,0 +1,16 @@
+# Fire in the Eyes of Men (CoP 7-3): Cid at Status 0 and Timer on both sides of the day (8000). Status 0: the
+# zone's default for Cid,
+# 500. A GM sets Status 1 and Timer 8001: 858; Timer 7999: 890, finished: the title and the mission completes.
+lists Metalworks/Cid/onTrigger Metalworks/onEventFinish/858 Metalworks/onEventFinish/890
+char zone=Metalworks pos=-12,-12,1 job=WAR lvl=75 nation=0
+mission Cop FireInTheEyesOfMen current
+login
+trigger Cid                             # Status 0: his default 500
+finish-if-event
+charvar Mission[6][728]Status 1         # a GM
+charvar Mission[6][728]Timer 8001       # a GM
+trigger Cid                             # Timer 8001 > day: 858
+finish
+charvar Mission[6][728]Timer 7999       # a GM
+trigger Cid                             # Timer 7999 <= day: 890
+finish                                  # the title; completed

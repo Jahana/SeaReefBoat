@@ -1,0 +1,55 @@
+# Achieving True Power (battlefield.achieving_true_power#helper, Navukgo Execution Chamber): a party at _1s0: main (a
+# level 75 Puppetmaster at level cap 75, Achieving True Power accepted at Quest[1][85]Prog 1 (GMs), one Puppetmaster's
+# Testimony) enters area 1 (49) by the testimony: TESTIMONY_WEARS (3 shown, 2 left). The members by the trigger, no
+# trade: bob (completed) and cat (accepted, Quest[1][85]Prog 2) each get the 32000 menu (0,0,0,8); each update 49:
+# REQS_NOT_MET (5); finished: not entered (one player to a battlefield). dan (accepted, Quest[1][85]Prog 0) gets only
+# the door's default (DefaultActions.lua messageSpecial -1, shown as 32767), no menu; his update and finish-if-event
+# find no event.
+lists NavukgoExecutionChamber/_1s0/onTrade NavukgoExecutionChamber/_1s0/onTrigger NavukgoExecutionChamber/onEventUpdate/32000 NavukgoExecutionChamber/onEventFinish/32000 NavukgoExecutionChamber/onEventFinish/32001
+char zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char bob zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char cat zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+char dan zone=NavukgoExecutionChamber pos=-598.5,8,-100 job=PUP lvl=75
+levelcap 75
+quest AhtUrhgan.NoStringsAttached completed
+quest AhtUrhgan.PuppetmasterBlues completed
+quest Bastok.AchievingTruePower accepted
+charvar Quest[1][85]Prog 1
+item PuppetmastersTestimony
+bob: levelcap 75
+bob: quest AhtUrhgan.NoStringsAttached completed
+bob: quest AhtUrhgan.PuppetmasterBlues completed
+bob: quest Bastok.AchievingTruePower completed
+bob: charvar Quest[1][85]Prog 1
+cat: levelcap 75
+cat: quest AhtUrhgan.NoStringsAttached completed
+cat: quest AhtUrhgan.PuppetmasterBlues completed
+cat: quest Bastok.AchievingTruePower accepted
+cat: charvar Quest[1][85]Prog 2
+dan: levelcap 75
+dan: quest AhtUrhgan.NoStringsAttached completed
+dan: quest AhtUrhgan.PuppetmasterBlues completed
+dan: quest Bastok.AchievingTruePower accepted
+dan: charvar Quest[1][85]Prog 0
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trade _1s0 PuppetmastersTestimony x1
+update 32000 option=49
+finish
+bob: trigger _1s0
+bob: update 32000 option=49
+bob: finish-if-event
+cat: trigger _1s0
+cat: update 32000 option=49
+cat: finish-if-event
+dan: trigger _1s0
+dan: update 32000 option=49
+dan: finish-if-event

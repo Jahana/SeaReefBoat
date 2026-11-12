@@ -588,6 +588,119 @@ internal static partial class Program
         : mode == (int)CampMode.On ? "heal: the char is not resting after the 0x0E8 (resting already, engaged, dead, or a status that blocks it?)"
         : "heal stop: the char is still resting after the 0x0E8 (was it resting?)";
 
+    // cast <Spell|id> [target] (quest rework C4): GP_CLI_COMMAND_ACTION CastMagic through the engine's own path
+    // (ZoneHost.OnAction, PlayerCast), then ticks to the cast's end. On a mob the char first stands beside it, as a swing
+    // does. A cast the engine refuses fails the run
+    private static void CastStep(Statement st)
+    {
+        Collect();
+        if (st.Target < 0 && st.Name != null)
+        {
+            // the walk beside the mob, then the same position again: a client that stands still reports a zero move,
+            // and a cast that begins with a move (m_startedMoving) is interrupted at its end
+            StandBeside(Here.MobById[StatementMob(st)]);
+            StandBeside(Here.MobById[StatementMob(st)]);
+        }
+        var (id, targ) = CastTarget(st);
+        Send(0x01A, 28, b =>
+        {
+            BitConverter.GetBytes(id).CopyTo(b, 4);
+            BitConverter.GetBytes(targ).CopyTo(b, C2sAction.OffActIndex);
+            BitConverter.GetBytes((ushort)ActionId.CastMagic).CopyTo(b, C2sAction.OffActionID);
+            C2sAction.SetSpellId(b, (uint)st.Value);
+        });
+        if (CastProblem(st.Value, c.MagicState != null) is { } problem) throw new InvalidOperationException(problem);
+        // a cast on oneself or a char gets no zero move (a 0x015 would change the step's packets), so one that begins
+        // with a move, after a walk, a kill or a swing, fails here rather than pin a spell the engine interrupts
+        if (MovedCastProblem(st.Value, c.MagicState.StartedMoving) is { } moved) throw new InvalidOperationException(moved);
+        for (int ticks = 0; c.MagicState != null; ticks++)
+        {
+            if (ticks == 75) throw new InvalidOperationException($"cast {st.Value}: still casting after 30 s");
+            Tick(400);
+        }
+    }
+    internal static string MovedCastProblem(int spell, bool startedMoving) => !startedMoving ? null
+        : $"cast {spell}: it begins with a move and is interrupted at its end; tick or stand still before the cast";
+    internal static string CastProblem(int spell, bool casting) => casting ? null
+        : $"cast {spell}: the char is not casting after the 0x01A (MP, level, range, recast, target?)";
+
+    // the id and act index of the cast's target: a char of the flow, a mob, or the char itself
+    private static (uint Id, ushort TargId) CastTarget(Statement st)
+    {
+        if (st.Target >= 0)
+        {
+            var other = actors_[st.Target].C ?? throw new InvalidOperationException($"cast: {actors_[st.Target].Name} is not logged in");
+            return (other.Id, other.TargId);
+        }
+        if (st.Name == null) return (c.Id, c.TargId);
+        var m = Here.MobById[StatementMob(st)];
+        return (m.Id, m.TargId);
+    }
+
+    // record take / remove / claim: the eminence packets (ObjectiveId u16 @4); progress and event: a GM's call
+    private static void RoeStep(Statement st)
+    {
+        Collect();
+        switch (st.Status)
+        {
+            case "take":
+                SendRecord(0x10C, st.Value);
+                bool started = s.PacketList.Any(p => Opcode(p) == 0x029 && BitConverter.ToUInt16(p.Buffer, 24) == RoeStartMessage &&
+                                                     BitConverter.ToUInt32(p.Buffer, 12) == (uint)st.Value);
+                if (RecordTakeProblem(st.Value, st.Refused, started) is { } take) throw new InvalidOperationException(take);
+                break;
+            case "remove":
+                RequireOnLog("record remove", st.Value);
+                SendRecord(0x10D, st.Value);
+                if (HasRecord(st.Value)) throw new InvalidOperationException($"record remove {st.Value}: still on the log after the 0x10D");
+                break;
+            case "claim":
+                RequireOnLog("record claim", st.Value);
+                SendRecord(0x10E, st.Value);
+                break;
+            case "progress":
+                if (Lua($"report(tostring(player:setEminenceProgress({st.Value}, {st.Amount})))") != "true")
+                    throw new InvalidOperationException($"record progress {st.Value}: the record is not on the log");
+                break;
+            case "event":
+                string table = string.Join(", ", st.Datagrams.Select(d => $"{d.Key} = {d.Value}"));
+                Lua($"player:triggerRoeEvent({st.Value}, {{ {table} }})");
+                break;
+        }
+    }
+    private const ushort RoeStartMessage = 704;
+    private static void SendRecord(ushort opcode, int id) =>
+        Send(opcode, 8, b => BitConverter.GetBytes((ushort)id).CopyTo(b, 4));
+    private static bool HasRecord(int id) => Lua($"report(tostring(player:hasEminenceRecord({id})))") == "true";
+    private static void RequireOnLog(string step, int id)
+    {
+        if (RecordOnLogProblem(step, id, HasRecord(id)) is { } problem) throw new InvalidOperationException(problem);
+    }
+    internal static string RecordTakeProblem(int id, bool refused, bool started) =>
+        started == !refused ? null
+        : refused ? $"record take {id} refused: the record started"
+        : $"record take {id}: no ROE_START (full log, already taken, refused?)";
+    internal static string RecordOnLogProblem(string step, int id, bool active) => active ? null
+        : $"{step} {id}: the record is not on the log, so the step would record nothing";
+
+    // spawn <Mob>|#<id>: a GM's SpawnMob; the mob is up after it, or the run fails
+    private static void SpawnStep(uint mobId)
+    {
+        Collect();
+        Lua($"SpawnMob({mobId})");
+        if (!Here.MobById[mobId].IsSpawned) throw new InvalidOperationException($"spawn {mobId}: the mob is not up after SpawnMob");
+    }
+
+    // unity <UnityLeader>: char_profile as a setup line; a GM's setUnityLeader, read back, after the login
+    private static void SetUnityRow(int leader) =>
+        Sql(db, "UPDATE char_profile SET unity_leader = ? WHERE charid = ?", BoundValue.Of((byte)leader), BoundValue.Of(CharId));
+    private static void UnityStep(int leader)
+    {
+        string got = Lua($"player:setUnityLeader({leader}) report(tostring(player:getUnityLeader()))");
+        if (got != leader.ToString(CultureInfo.InvariantCulture))
+            throw new InvalidOperationException($"unity {leader}: getUnityLeader reads {got} after it");
+    }
+
     // kill / claim's mob: #<id> (quest rework P8: a mob of the char's zone by id), else the IDs.lua key and offset
     private static uint StatementMob(Statement st)
     {
@@ -1044,8 +1157,8 @@ internal static partial class Program
         float dx = m.X - c.X, dy = m.Y - c.Y, dz = m.Z - c.Z;
         return MathF.Sqrt(dx * dx + dy * dy + dz * dz);
     }
-    private static void SwingAt(MobEntity m)
-    {
+    // the char beside the mob, as a client moves it: GP_CLI_COMMAND_POS
+    private static void StandBeside(MobEntity m) =>
         Send(0x015, 32, b =>
         {
             BitConverter.GetBytes(m.X - 2.0f).CopyTo(b, C2sPos.OffX);
@@ -1053,6 +1166,9 @@ internal static partial class Program
             BitConverter.GetBytes(m.Z).CopyTo(b, C2sPos.OffY);
             b[C2sPos.OffDir] = 0;
         });
+    private static void SwingAt(MobEntity m)
+    {
+        StandBeside(m);
         Send(0x01A, 28, b =>
         {
             BitConverter.GetBytes(m.Id).CopyTo(b, 4);
@@ -1331,10 +1447,21 @@ internal static partial class Program
     private static readonly string[] HashedWorldTables = { "server_variables", "conquest_system" };
     // the world tables whose snapshot rows are the sql/ seed's, not a database's, and which no header hashes: a
     // battlefield's record (bcnm_records: the 32000 menu shows its holder, a win writes it), so a trace sees the seed's
-    // 'nobody' whatever an earlier run or the lane's history won
-    private static readonly string[] SeededWorldTables = { "bcnm_records" };
+    // 'nobody' whatever an earlier run or the lane's history won; unity_system: every accolade writes it, every status
+    // packet of a char with a leader reads its rank
+    private static readonly string[] SeededWorldTables = { "bcnm_records", "unity_system" };
     // the sql/ file holding each seeded table's INSERTs
-    private static readonly Dictionary<string, string> SeedFiles = new(StringComparer.Ordinal) { ["bcnm_records"] = "bcnm_info.sql" };
+    private static readonly Dictionary<string, string> SeedFiles = new(StringComparer.Ordinal)
+    {
+        ["bcnm_records"] = "bcnm_info.sql", ["unity_system"] = "unity_system.sql",
+    };
+    // a statement run on a seeded table after its INSERTs ({0} is the table). Every trace recorded the lanes' unity_system,
+    // whose leader 1 row carries members_current = 2 (0x063 sends it) while sql/unity_system.sql seeds 0; the seed is a
+    // fixture, not game data, so the snapshot takes the recorded value
+    private static readonly Dictionary<string, string> SeedOverrides = new(StringComparer.Ordinal)
+    {
+        ["unity_system"] = "UPDATE `{0}` SET members_current = 2 WHERE leader = 1",
+    };
     // the world tables a run copies privately and restores from the snapshot before each world (World.cs): the hashed
     // ones, then the seeded ones (after both, in this file: static initialisers run in text order)
     internal static readonly string[] WorldTables = HashedWorldTables.Concat(SeededWorldTables).ToArray();

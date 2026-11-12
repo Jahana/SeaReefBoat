@@ -1,0 +1,20 @@
+# The Puppet Master (battlefield.puppet_master, Cloister of Tremors, a BattlefieldQuest of windurst.the_puppet_master;
+# index 1, 30 minutes, 18 players, the Earth Pendulum required and kept, Quest[2][81]Prog 1 required). A level 75
+# Summoner with the quest accepted, Prog 1 and the pendulum. The trade to EP_Entrance: the menu 32000 (index 1).
+# Updates: 0 and 20 (area 4 of index 1): REQS_NOT_MET; 17 (area 1): registered, entered, the pendulum kept. The first
+# Galgalim (area 1's ids are GALGALIM + area - 1) killed: WON; the win: 32001; its finish; the cleanup.
+lists CloisterOfTremors/EP_Entrance/onTrade CloisterOfTremors/onEventUpdate/32000 CloisterOfTremors/onEventFinish/32000 CloisterOfTremors/onEventFinish/32001
+char zone=CloisterOfTremors pos=-538.4,0.455,-493.9 job=SMN lvl=75
+quest Windurst.ThePuppetMaster accepted
+charvar Quest[2][81]Prog 1
+item EarthPendulum
+login
+trade EP_Entrance EarthPendulum x1      # the pendulum, Prog 1: the menu 32000
+update 32000 option=0                   # 0: ignored
+update 32000 option=20                  # index 1, area 4: REQS_NOT_MET
+update 32000 option=17                  # index 1, area 1: registered, entered, the pendulum kept
+finish                                  # in the arena
+kill GALGALIM                           # area 1's Galgalim: WON; 32001
+finish                                  # the battlefield's finish, the quest's handler
+tick 11000                              # the won arena's cleanup
+tick 10000                              # out of the battlefield

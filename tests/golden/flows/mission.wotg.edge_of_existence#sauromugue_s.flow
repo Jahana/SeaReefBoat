@@ -1,0 +1,14 @@
+# Edge of Existence (WotG 40) in Sauromugue Champaign [S]: the Cavernous Maw plays 702 [2, -8, -2, -2, 0, 0, 0, 1]
+# (MAX_UINT32 - 7, - 1, - 1); its finish completes the mission (Her Memories current), then xi.maws.goToMaw gets the
+# zone's id where it wants a maw table and raises "attempt to index local 'maw' (a number value)" (the step's
+# expect-error): the char stays where it is.
+lists SauromugueChampaignS/Cavernous_Maw/onTrigger SauromugueChampaignS/onEventFinish/702
+char zone=SauromugueChampaignS pos=369,8,-227 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg EdgeOfExistence current
+login
+trigger Cavernous_Maw                      # 702
+finish expect-error "attempt to index local 'maw' (a number value)"

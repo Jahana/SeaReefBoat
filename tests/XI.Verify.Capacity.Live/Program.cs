@@ -21,6 +21,7 @@ internal static class Program
 
     private const uint CharId = 993420;
     private const ushort WestRonfaure = 100;
+    private const uint MemberId = 993421;
     private const uint Rabbit = 17186822;
 
     private static void Check(string name, object expected, object actual)
@@ -54,10 +55,13 @@ internal static class Program
 
     private static void Cleanup(IDatabase db)
     {
-        foreach (var t in CharidTables(db))
-            Sql(db, $"DELETE FROM `{t}` WHERE charid = ?", BoundValue.Of(CharId));
-        Sql(db, "DELETE FROM chars WHERE charid = ?", BoundValue.Of(CharId));
-        Sql(db, "DELETE FROM accounts WHERE id = ?", BoundValue.Of(CharId));
+        foreach (uint id in new[] { CharId, MemberId })
+        {
+            foreach (var t in CharidTables(db))
+                Sql(db, $"DELETE FROM `{t}` WHERE charid = ?", BoundValue.Of(id));
+            Sql(db, "DELETE FROM chars WHERE charid = ?", BoundValue.Of(id));
+            Sql(db, "DELETE FROM accounts WHERE id = ?", BoundValue.Of(id));
+        }
     }
 
     private static string FindDataDir()
@@ -242,15 +246,45 @@ internal static class Program
         Lua("player:delMod(xi.mod.CAPACITY_BONUS, 10) player:delKeyItem(xi.keyItem.RHAPSODY_IN_FUCHSIA)");
 
         Console.WriteLine("RoE: the payloads reach the records");
-        Lua(@"xi.roe.records[3990] = { trigger = xi.roeTrigger.DEFEAT_MOB, goal = 100, increment = 1, check = function(self, player, params)
-                  roeKill = string.format('%s:%s', params.mob:getName(), tostring(params.atkType)) return false end }
-              xi.roe.records[3991] = { trigger = xi.roeTrigger.GAIN_EXPERIENCE, goal = 100, increment = 1, check = function(self, player, params)
-                  if params.capacity then roeCapacity = params.capacity end return false end }
-              xi.roe.records[3992] = { trigger = xi.roeTrigger.COMPLETE_QUEST, goal = 100, increment = 1, check = function(self, player, params)
-                  roeQuest = (roeQuest or 0) + 1 return false end }
-              xi.roe.records[3993] = { trigger = xi.roeTrigger.COMPLETE_MISSION, goal = 100, increment = 1, check = function(self, player, params)
-                  roeMission = (roeMission or 0) + 1 return false end }
-              xi.roe.initialize()");
+        string roeKill = null;
+        long? roeCapacity = null;
+        int roeQuest = 0, roeMission = 0;
+        zone.AddRoeRecordForTest(new XI.Quests.RoeRecord(3990)
+        {
+            Trigger = 1, Goal = 100,
+            TestCheck = (player, p) =>
+            {
+                roeKill = $"{p.Mob.Name}:{p.AtkType}";
+                return false;
+            },
+        });
+        zone.AddRoeRecordForTest(new XI.Quests.RoeRecord(3991)
+        {
+            Trigger = 7, Goal = 100,
+            TestCheck = (player, p) =>
+            {
+                if (p.Number("capacity") is long capacity) roeCapacity = capacity;
+                return false;
+            },
+        });
+        zone.AddRoeRecordForTest(new XI.Quests.RoeRecord(3992)
+        {
+            Trigger = 11, Goal = 100,
+            TestCheck = (player, p) =>
+            {
+                roeQuest++;
+                return false;
+            },
+        });
+        zone.AddRoeRecordForTest(new XI.Quests.RoeRecord(3993)
+        {
+            Trigger = 12, Goal = 100,
+            TestCheck = (player, p) =>
+            {
+                roeMission++;
+                return false;
+            },
+        });
         foreach (ushort id in new ushort[] { 3990, 3991, 3992, 3993 })
             Send(0x10C, 8, buf => BitConverter.GetBytes(id).CopyTo(buf, 4));
         Check("the four records active", "true|true|true|true",
@@ -258,15 +292,69 @@ internal static class Program
         log.Clear();
         now += 60_000;
         Kill();
-        Check("DEFEAT_MOB: the mob and the last hit's attack type", "Wild_Rabbit:0", Lua("report(tostring(roeKill))"));
-        Check("GAIN_EXPERIENCE: the capacity points", "149", Lua("report(tostring(roeCapacity))"));
+        Check("DEFEAT_MOB: the mob and the last hit's attack type", "Wild_Rabbit:0", roeKill ?? "nil");
+        Check("GAIN_EXPERIENCE: the capacity points", "149", roeCapacity?.ToString() ?? "nil");
         Check("no unhandled payload", false, log.Exists(l => l.Contains("Unhandled payload type")));
         Lua("player:addQuest(xi.questLog.SANDORIA, 1) player:completeQuest(xi.questLog.SANDORIA, 1) player:completeQuest(xi.questLog.SANDORIA, 1)");
-        Check("COMPLETE_QUEST once (the second completion is a no-op)", "1", Lua("report(tostring(roeQuest))"));
+        Check("COMPLETE_QUEST once (the second completion is a no-op)", "1", roeQuest.ToString());
         Lua("player:addMission(xi.mission.log_id.SANDORIA, 0) player:completeMission(xi.mission.log_id.SANDORIA, 0)");
-        Check("COMPLETE_MISSION", "1", Lua("report(tostring(roeMission))"));
+        Check("COMPLETE_MISSION", "1", roeMission.ToString());
         Lua("player:addCapacityPoints(50)");
-        Check("addCapacityPoints from a script: not a kill, no GAIN_EXPERIENCE", "149", Lua("report(tostring(roeCapacity))"));
+        Check("addCapacityPoints from a script: not a kill, no GAIN_EXPERIENCE", "149", roeCapacity?.ToString() ?? "nil");
+        Console.WriteLine("RoE kill credit: the zone decides, not the instance (mob_entity.cpp:891)");
+        Sql(db, "INSERT INTO accounts(id,login,password,content_ids) VALUES (?,?,?,?)",
+            BoundValue.Of(MemberId), BoundValue.Of("capy" + MemberId), BoundValue.Of("x"), BoundValue.Of((byte)1));
+        Sql(db, "INSERT INTO chars(charid,accid,charname,pos_zone,pos_prevzone,pos_x,pos_y,pos_z,nation,gmlevel) VALUES (?,?,?,?,?,?,?,?,?,?)",
+            BoundValue.Of(MemberId), BoundValue.Of(MemberId), BoundValue.Of("Cappa"), BoundValue.Of(WestRonfaure), BoundValue.Of((ushort)0),
+            BoundValue.Of(0.0f), BoundValue.Of(0.0f), BoundValue.Of(0.0f), BoundValue.Of((byte)0), BoundValue.Of((byte)0));
+        Sql(db, "INSERT INTO accounts_sessions(accid,charid,server_addr,server_port) VALUES (?,?,?,?)",
+            BoundValue.Of(MemberId), BoundValue.Of(MemberId), BoundValue.Of(0u), BoundValue.Of((ushort)0));
+        // xi.player.onGameIn runs charCreate on this first login, and charCreate needs a race
+        Sql(db, "REPLACE INTO char_look(charid, race) VALUES (?, 1)", BoundValue.Of(MemberId));
+        Sql(db, "REPLACE INTO char_stats(charid, hp, mp, mjob, mlvl) VALUES (?, 3000, 50, 1, 99)", BoundValue.Of(MemberId));
+        Sql(db, "REPLACE INTO char_jobs(charid, war) VALUES (?, 99)", BoundValue.Of(MemberId));
+        Sql(db, "INSERT IGNORE INTO char_storage(charid) VALUES (?)", BoundValue.Of(MemberId));
+        var s2 = new MapSession { CharId = MemberId, AccountId = MemberId };
+        zone.OnLogin(s2);
+        var c2 = (CharData)s2.Char;
+        void Send2(ushort opcode, int size, Action<byte[]> fill = null)
+        {
+            var buf = new byte[size];
+            buf[0] = (byte)opcode; buf[1] = (byte)(buf.Length / 4 << 1 | opcode >> 8);
+            fill?.Invoke(buf);
+            zone.Dispatch(s2, opcode, new BasicPacket(buf));
+            zone.AfterParse(s2);
+        }
+        Send2(0x00A, 92, buf => BitConverter.GetBytes(MemberId).CopyTo(buf, 12));
+        Send2(0x00C, 12);
+        Pump();
+        Send(0x06E, 12, b =>
+        {
+            BitConverter.GetBytes(MemberId).CopyTo(b, 4);
+            BitConverter.GetBytes(c2.TargId).CopyTo(b, 8);
+        });
+        Pump();
+        Send2(0x074, 8, b => b[4] = 1);
+        Pump();
+        int memberKills = 0;
+        zone.AddRoeRecordForTest(new XI.Quests.RoeRecord(3994)
+        {
+            Trigger = 1, Goal = 100,
+            TestCheck = (player, p) =>
+            {
+                memberKills++;
+                return false;
+            },
+        });
+        Send2(0x10C, 8, buf => BitConverter.GetBytes((ushort)3994).CopyTo(buf, 4));
+        now += 60_000;
+        Kill();
+        Check("the member beside the owner: credited", 1, memberKills);
+        c2.Instance = new Instance { Data = new InstanceData { Zone = WestRonfaure }, Info = info };
+        now += 60_000;
+        Kill();
+        Check("the member in another instance of the zone: credited, as the C++", 2, memberKills);
+        c2.Instance = null;
         // caskets (spawn_casket on DEATH) need queryEntitiesByName, an open AI gap
         Check("no script errors", false, log.Exists(l => l.Contains("lua:") && !l.Contains("0 load errors") && true));
         foreach (var l in log) if (l.Contains("lua:") && true) Console.WriteLine("  log: " + l);

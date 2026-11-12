@@ -1,0 +1,49 @@
+# The Final Image (Bastok 7-1, mission.bastok.the_final_image) played through: a level 75 Bastokan at rank 7, ASA,
+# ACP, RoV and SoA current (their content quiet) and the nation's missions before it completed. Malduc's own 1001,
+# option 18: begun, YOU_ACCEPT_THE_MISSION; current: EXTENDED_MISSION_OFFSET + 5. Cid 763 (status 1); at status 1
+# nothing from the mission, the zone's default 500. Ro'Maeve: qm2 at status 1 without nmDefeated: the two Mokkurkalfi
+# popped from the qm, A_CHILL_RUNS_DOWN_SPINE (7416); both killed: nmDefeated; the qm hidden until
+# FORCE_SPAWN_QM_RESET_TIME after the despawn, so the flow ticks past it; qm2: status 2, the Reinforced Cermet
+# (KEYITEM_OBTAINED). Cid 764: completed, 700 rank points, the cermet taken.
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Malduc/onTrigger Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 Metalworks/Cid/onTrigger Metalworks/onEventFinish/763 Metalworks/onEventFinish/764 Romaeve/qm2/onTrigger
+char zone=Metalworks pos=64,-15,4 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+rank 7
+login
+trigger Malduc                          # his own 1001
+finish option=18                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Malduc                          # current: EXTENDED_MISSION_OFFSET + 5
+finish-if-event
+trigger Cid                             # status 0: 763
+finish                                  # status 1
+trigger Cid                             # status 1: nothing from the mission
+finish-if-event
+warp 104,-4,-114 Romaeve
+trigger qm2                             # status 1, no var: the two Mokkurkalfi popped, A_CHILL_RUNS_DOWN_SPINE
+kill MOKKURKALFI                        # status 1: nmDefeated
+kill MOKKURKALFI+1                      # status 1: nmDefeated
+tick 15000
+tick 15000
+tick 300000                             # the qm back after FORCE_SPAWN_QM_RESET_TIME
+tick 5000
+trigger qm2                             # nmDefeated: status 2, the Reinforced Cermet
+warp -12,-11,4 Metalworks
+trigger Cid                             # status 2: 764
+finish                                  # completed: 700 rank points, the cermet taken

@@ -1,0 +1,43 @@
+# Tango with a Tracker (battlefield.tango_with_a_tracker#helper, Boneyard Gully): Party of four at the entry: main
+# (letter), bob (quest completed), cat (letter), dan (neither). The three with the letter or the quest enter; dan is
+# refused with a release only. The win gives the three their 32001; dan gets nothing. Each finish changes nothing: the
+# quest's 32001 (OtherAreas/TangoWithATracker.cs) completes it only when accepted with battlefieldWin set to the
+# battlefield, and no char here has the quest accepted (the quest flows prove the completion).
+lists BoneyardGully/_081/onTrigger BoneyardGully/onEventUpdate/32000 BoneyardGully/onEventFinish/32000 BoneyardGully/onEventFinish/32001
+char zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75
+char bob zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75
+char cat zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75
+char dan zone=BoneyardGully pos=-617.9,-1.5,505.7 job=WAR lvl=75
+keyitem LetterFromShikareeX
+bob: quest OtherAreas.TangoWithATracker completed
+cat: keyitem LetterFromShikareeX
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+trigger _081
+update 32000 option=81
+finish
+bob: trigger _081
+bob: update 32000 option=81
+bob: finish
+cat: trigger _081
+cat: update 32000 option=81
+cat: finish
+dan: trigger _081
+dan: update 32000 option=81
+dan: finish
+tick 2000
+kill SHIKAREE_Y_ROS_TWT
+kill SHIKAREE_X_ROS_TWT
+finish
+bob: finish
+cat: finish
+dan: finish
+tick 11000

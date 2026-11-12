@@ -1,0 +1,44 @@
+# Proof of Valor (WotG 21), the four games. Each game NPC (Farouel 125, Vichauxdat 126, Aurfet 127, Corseihaut 128)
+# plays its event. The right answers send nothing; only the update whose option is three times the answer count sends
+# the update packet, [6] in each game. The finish with option 1 adds no signatures: the Lua reads the local var
+# numCorrect through mission:getVar, so it is 0 (kept Lua bug). It sets the Status bit (and the first one writes Option
+# 0) and answers 14297 [1162]. The last trigger, Raustigne, answers MUST_GATHER_SIGNATURES (14025 [20]) and
+# CURRENT_PETITIONS (14026 [0, 0, 1162]) and sets mustZone (80).
+lists SouthernSanDoriaS/Aissaville/onTrigger SouthernSanDoriaS/Andagge/onTrigger SouthernSanDoriaS/Aurfet/onTrigger SouthernSanDoriaS/Corseihaut/onTrigger SouthernSanDoriaS/Coucheutand/onTrigger SouthernSanDoriaS/Daigraffeaux/onTrigger SouthernSanDoriaS/Elnonde/onTrigger SouthernSanDoriaS/Eumielle/onTrigger SouthernSanDoriaS/Farouel/onTrigger SouthernSanDoriaS/Hauberliond/onTrigger SouthernSanDoriaS/Illeuse/onTrigger SouthernSanDoriaS/Loillie/onTrigger SouthernSanDoriaS/Louxiard/onTrigger SouthernSanDoriaS/Machionage/onTrigger SouthernSanDoriaS/Mailleronce/onTrigger SouthernSanDoriaS/Raustigne/onTrigger SouthernSanDoriaS/Remiotte/onTrigger SouthernSanDoriaS/Rongelouts_N_Distaud/onTrigger SouthernSanDoriaS/Sabiliont/onTrigger SouthernSanDoriaS/Vichauxdat/onTrigger SouthernSanDoriaS/Coucheutand/onTrade SouthernSanDoriaS/Eumielle/onTrade SouthernSanDoriaS/Hauberliond/onTrade SouthernSanDoriaS/Rongelouts_N_Distaud/onTrade SouthernSanDoriaS/Sabiliont/onTrade SouthernSanDoriaS/onEventUpdate/125 SouthernSanDoriaS/onEventUpdate/126 SouthernSanDoriaS/onEventUpdate/127 SouthernSanDoriaS/onEventUpdate/128 SouthernSanDoriaS/onEventFinish/115 SouthernSanDoriaS/onEventFinish/116 SouthernSanDoriaS/onEventFinish/117 SouthernSanDoriaS/onEventFinish/118 SouthernSanDoriaS/onEventFinish/119 SouthernSanDoriaS/onEventFinish/120 SouthernSanDoriaS/onEventFinish/121 SouthernSanDoriaS/onEventFinish/122 SouthernSanDoriaS/onEventFinish/123 SouthernSanDoriaS/onEventFinish/124 SouthernSanDoriaS/onEventFinish/125 SouthernSanDoriaS/onEventFinish/126 SouthernSanDoriaS/onEventFinish/127 SouthernSanDoriaS/onEventFinish/128 SouthernSanDoriaS/onEventFinish/129 SouthernSanDoriaS/onEventFinish/130 SouthernSanDoriaS/onEventFinish/131 SouthernSanDoriaS/onEventFinish/132 SouthernSanDoriaS/onEventFinish/133 SouthernSanDoriaS/onEventFinish/134 SouthernSanDoriaS/onEventFinish/135 SouthernSanDoriaS/onEventFinish/136 SouthernSanDoriaS/onEventFinish/137 SouthernSanDoriaS/onEventFinish/138 SouthernSanDoriaS/onEventFinish/144 SouthernSanDoriaS/onEventFinish/148
+char zone=SouthernSanDoriaS pos=100.801,1,103.211 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg ProofOfValor current
+login
+trigger Farouel                    # 125
+update 125 option=1
+update 125 option=2
+update 125 option=4
+update 125 option=8
+update 125 option=9
+finish option=1
+trigger Vichauxdat                    # 126
+update 126 option=1
+update 126 option=4
+update 126 option=6
+update 126 option=9
+finish option=1
+trigger Aurfet                    # 127
+update 127 option=1
+update 127 option=5
+update 127 option=7
+update 127 option=10
+update 127 option=12
+finish option=1
+trigger Corseihaut                    # 128
+update 128 option=2
+update 128 option=5
+update 128 option=6
+update 128 option=11
+update 128 option=13
+update 128 option=16
+update 128 option=18
+finish option=1
+trigger Raustigne

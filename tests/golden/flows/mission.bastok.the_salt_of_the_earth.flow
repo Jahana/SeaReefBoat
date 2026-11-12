@@ -1,0 +1,85 @@
+# The Salt of the Earth (Bastok 9-1, mission.bastok.the_salt_of_the_earth) played through: a level 75 Bastokan Warrior
+# at rank 9 with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions before it
+# completed. Malduc's 1001, option 22: begun; Malduc says EXTENDED_MISSION_OFFSET + 14. Alois 773 (status 1), 774;
+# Rabao's Dancing Wolf 102 (status 2), 103. Gustav Tunnel: qm2 with no plasm up spawns the Gigaplasm (claimed) and says
+# BAD_FEELING_ABOUT_PLACE; the GM effects keep the char up; each plasm splits in two on its death (its own script) down
+# to the eight Nanoplasms; the last Nanoplasm's death with none alive sets status 3. qm2 gives the Miraclesalt (a
+# keyItem reply), then its own text. Dancing Wolf 104 (status 4), 105; Alois 776: completed (1500 rank points), Option
+# 1. Section 3: Alois 778; section 4 (Option): Franziska 777 (Option 2), 779 (Option 0), then her own 620.
+char zone=Metalworks pos=66,-15,6 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+mission Bastok TheChainsThatBindUs completed
+mission Bastok EnterTheTalekeeper completed
+rank 9
+login
+trigger Malduc                          # the guard's own 1001
+finish option=22                        # section 1: begun, YOU_ACCEPT_THE_MISSION
+trigger Malduc                          # current: EXTENDED_MISSION_OFFSET + 14
+finish-if-event
+trigger Alois                           # status 0: 773
+finish                                  # status 1
+trigger Alois                           # status 1: 774
+finish
+warp 7.6,7,83 Rabao
+trigger Dancing_Wolf                    # status 1: 102
+finish                                  # status 2
+trigger Dancing_Wolf                    # status 2: 103
+finish
+warp -130,1.256,254.7 GustavTunnel
+trigger qm2                             # status 2, no plasm: Gigaplasm spawned, BAD_FEELING_ABOUT_PLACE
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+kill GIGAPLASM
+kill GIGAPLASM+1
+kill GIGAPLASM+2
+kill GIGAPLASM+3
+kill GIGAPLASM+4
+kill GIGAPLASM+5
+kill GIGAPLASM+6
+kill GIGAPLASM+7
+kill GIGAPLASM+8
+kill GIGAPLASM+9
+kill GIGAPLASM+10
+kill GIGAPLASM+11
+kill GIGAPLASM+12
+kill GIGAPLASM+13
+kill GIGAPLASM+14
+trigger qm2                             # status 3, no salt: the Miraclesalt
+trigger qm2                             # the salt held: nothing from the mission
+finish-if-event
+warp 7.6,7,83 Rabao
+trigger Dancing_Wolf                    # status 3: 104
+finish                                  # status 4
+trigger Dancing_Wolf                    # status 4: 105
+finish
+warp 96,-20,16 Metalworks
+trigger Alois                           # status 4: 776
+finish                                  # completed: 1500 rank points; Option 1
+trigger Alois                           # section 3: 778
+finish
+trigger Franziska                       # Option 1: 777
+finish                                  # Option 2
+trigger Franziska                       # Option 2: 779
+finish                                  # Option 0
+trigger Franziska                       # Option 0: nothing from the mission
+finish-if-event

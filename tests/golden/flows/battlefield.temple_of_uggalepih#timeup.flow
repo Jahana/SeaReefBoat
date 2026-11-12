@@ -1,0 +1,27 @@
+# The Temple of Uggalepih: area 3, time up. Entered at area 3 (option 3); after 30 minutes
+# TIME_IN_THE_BATTLEFIELD_IS_UP (7237) and 32002; its finish leaves the fight. Level synced (effect 269),
+# _4j0 says MEMBERS_LEVELS_ARE_RESTRICTED (7028, the battlefield framework's refusal, a 0x036 from _4j0)
+# and 32767 (DefaultActions' messageSpecial -1).
+lists SacrificialChamber/_4j0/onTrigger SacrificialChamber/_4j0/onTrade SacrificialChamber/onEventUpdate/32000 SacrificialChamber/onEventFinish/32000 SacrificialChamber/onEventFinish/32001 SacrificialChamber/onEventFinish/32002 SacrificialChamber/onZoneIn/1 SacrificialChamber/_4j2/onTrigger
+char zone=SacrificialChamber pos=299,0.1,349 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheTempleOfUggalepih current
+keyitem SacrificialChamberKey
+login
+trigger _4j0
+update 32000 option=3                   # area 3
+finish
+tick 2000                               # placed in area 3
+tick 1199000
+tick 300000
+tick 240000
+tick 30000
+tick 20000
+tick 10000                              # TIME_IN_THE_BATTLEFIELD_IS_UP, 32002
+finish
+tick 10000
+effect 269
+trigger _4j0                            # level synced: MEMBERS_LEVELS_ARE_RESTRICTED, 32767

@@ -1,0 +1,15 @@
+# Waking Dreams (battlefield.waking_dreams#exit, The Shrouded Maw): The exit NPC Memento_Circle gives the exit event
+# 32003 (update option 1, finish option 4), then a warp out and the entry again.
+lists TheShroudedMaw/MC_Entrance/onTrigger TheShroudedMaw/Memento_Circle/onTrigger TheShroudedMaw/onEventUpdate/32000 TheShroudedMaw/onEventFinish/32000 TheShroudedMaw/onEventUpdate/32003 TheShroudedMaw/onEventFinish/32003
+char zone=TheShroudedMaw pos=0,0,0 job=WAR lvl=75 nation=0
+quest Windurst.WakingDreams accepted
+keyitem VialOfDreamIncense
+login
+trigger MC_Entrance
+update 32000 option=33
+finish
+trigger Memento_Circle
+update 32003 option=1
+finish option=4
+warp 0,0,0 TheShroudedMaw
+trigger MC_Entrance

@@ -1,0 +1,43 @@
+# Waking the Beast (battlefield.waking_the_beast_cloister_of_gales, CloisterOfGales): the helpers. Four level 75 Warriors by WP_Entrance. main (the quest accepted, the resonator)
+# registers and leads bob (the quest completed, no resonator: entryRequirement's non-registrant arm lets a completed char
+# in) and dan (accepted, the resonator: the item arm); cat (accepted, no resonator, never completed) is
+# not in the party and has no clearance, so he is judged as a registrant and that arm fails (the helper arm with neither
+# part is pinned by the fake check). bob, holding the clearance: the menu,
+# entered; dan: the menu, entered. The Prime killed: won; BattlefieldQuest's onBattlefieldWin: main and dan (accepted) get
+# battlefieldWin 419, bob (completed, repeatable) too; 32001 for each (canSkipCS 0 for the accepted, 1 for bob). Each
+# finish: the quest's 32001 handler gives main and dan the eye; bob holds no resonator, so no section of the quest
+# applies to him: nothing (the repeat's battlefieldWin is pinned by otherAreas.waking_the_beast#repeat).
+lists CloisterOfGales/WP_Entrance/onTrigger CloisterOfGales/onEventUpdate/32000 CloisterOfGales/onEventFinish/32000 CloisterOfGales/onEventFinish/32001
+char zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char bob zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char cat zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+char dan zone=CloisterOfGales pos=-357.6,-0.1,-380.0 job=WAR lvl=75
+quest OtherAreas.WakingTheBeast accepted
+keyitem RainbowResonator
+bob: quest OtherAreas.WakingTheBeast completed
+cat: quest OtherAreas.WakingTheBeast accepted
+dan: quest OtherAreas.WakingTheBeast accepted
+dan: keyitem RainbowResonator
+login
+bob: login
+cat: login
+dan: login
+invite bob
+bob: accept
+invite dan
+dan: accept
+trigger WP_Entrance                     # the menu 32000
+update 32000 option=49                  # registered in area 1; bob and dan registered with it
+finish                                  # main entered
+bob: trigger WP_Entrance                # no registrant, completed: the menu
+bob: update 32000 option=49             # entered
+bob: finish
+cat: trigger WP_Entrance                # accepted, no resonator, not completed: no options
+dan: trigger WP_Entrance                # no registrant, the resonator: the menu
+dan: update 32000 option=49             # entered
+dan: finish
+kill GARUDA_PRIME_ASA-15                # won: 32001 to main, bob and dan
+finish                                  # main: the eye
+bob: finish                             # bob: no resonator, no section: nothing
+dan: finish                             # dan: the eye
+tick 11000                              # the won arena's cleanup

@@ -83,9 +83,13 @@ internal static partial class Program
     internal static string ItemStackKey(Flow f, Statement st) => $"{f.Name}:{st.Line}";
 
     // the gate over every flow: a line that breaks a rule, not exempt, and the split cannot mend (a second Rare row) is
-    // a failure; an exempt entry whose line breaks no rule (or names no setup item line, or another statement) is stale
+    // a failure; an exempt entry whose line breaks no rule (or names no setup item line, or another statement) is
+    // stale. only (harness-speed, a selection's run: LoadSelected): the flows are a selection's, and an entry is
+    // checked only when it names one of them. Each problem is one flow's (its lines, or an entry <flow>:<line>, used by
+    // that flow's lines alone), so the result is exactly the full gate's problems of those flows
     internal static List<string> ItemStackProblems(IReadOnlyList<Flow> flows, Func<int, (int Stack, bool Rare)> info,
-                                                   IReadOnlyDictionary<string, string> exempt)
+                                                   IReadOnlyDictionary<string, string> exempt,
+                                                   IReadOnlySet<string> only = null)
     {
         var problems = new List<string>();
         var used = new HashSet<string>(StringComparer.Ordinal);
@@ -108,7 +112,7 @@ internal static partial class Program
                 }
             }
         foreach (var (key, label) in exempt)
-            if (!used.Contains(key))
+            if (!used.Contains(key) && (only == null || only.Contains(key.Substring(0, key.LastIndexOf(':')))))
                 problems.Add($"item-stack-exempt.txt: {key} [{label}] is stale: that line is no setup item line " +
                              "above its stack size or a second Rare row (drop the entry)");
         return problems;
@@ -216,12 +220,16 @@ internal static partial class Program
         Console.WriteLine($"item-stacks: {entries.Count} entries written to {file}");
     }
 
-    // the gate's run over the loaded flows: false (each problem failed) when any
+    // the gate's run over the loaded flows: false (each problem failed) when any. A selection's run (harness-speed: all
+    // holds stubs, LoadSelected) checks its picked flows' part (ItemStackProblems' only) and the list's own form; the
+    // rest is the flow files' and the list's, not the code's, and every `replay all` checks it whole
     private static bool ItemStackGate(IReadOnlyList<Flow> flows)
     {
         var problems = new List<string>();
         var exempt = ItemStackExempt(problems);
-        problems.AddRange(ItemStackProblems(flows, ItemStack, exempt));
+        var parsed = flows.Where(f => !f.Stub).ToList();
+        var only = parsed.Count < flows.Count ? parsed.Select(f => f.Name).ToHashSet(StringComparer.Ordinal) : null;
+        problems.AddRange(ItemStackProblems(parsed, ItemStack, exempt, only));
         foreach (var p in problems) Fail("item stacks", p);
         return problems.Count == 0;
     }

@@ -1,0 +1,14 @@
+# Tending Aged Wounds, another mission current (mission.cop.tending_aged_wounds#other). Ancient Vows (2-5) current with
+# 3-4's Status at 0 and 1 (GMs): Lower Jeuno's zone-in, _6tc and Metalworks Cid answer nothing for this mission.
+# A Crystalline Prophecy is not current (the default char has its own Lower Jeuno zone-in).
+lists LowerJeuno/onZoneIn/1 LowerJeuno/_6tc/onTrigger Metalworks/Cid/onTrigger
+char zone=Metalworks pos=0,0,0 job=WAR lvl=75 nation=0
+mission Acp TheEchoAwakens current       # A Crystalline Prophecy's own Lower Jeuno zone-in is off
+mission Cop AncientVows current
+charvar Mission[6][350]Status 1         # a GM
+login
+trigger Cid                             # nothing
+finish-if-event
+warp 15.5,-0.1,-6.1 LowerJeuno               # nothing
+trigger _6tc                            # nothing
+finish-if-event

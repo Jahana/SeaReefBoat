@@ -1,0 +1,20 @@
+# The Emissary San d'Oria at Chateau d'Oraguille with ENABLE_TRUST_QUESTS 1 and neither Halver's spell nor his cipher
+# (the login's onZoneIn returns nothing). Halver at status 0 and at status 2 (a GM): nothing from the mission; at
+# status 3: 501 (parameter 7 is 1), whose finish moves to status 4 and gives Halver's cipher; at status 4:
+# HALVER_OFFSET + 266, a message.
+lists ChateauDoraguille/Halver/onTrigger ChateauDoraguille/onEventFinish/501 GhelsbaOutpost/Warchief_Vatgit/onMobDeath NorthernSanDoria/Baraka/onTrigger NorthernSanDoria/Helaku/onTrigger NorthernSanDoria/Shakir/onTrigger NorthernSanDoria/onEventFinish/536 NorthernSanDoria/onEventFinish/543
+char zone=ChateauDoraguille pos=2,0.1,0.1 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheEmissarySandoria current
+setting ENABLE_TRUST_QUESTS 1
+login
+trigger Halver
+finish-if-event
+missionstatus Bastok 2
+trigger Halver
+finish-if-event
+missionstatus Bastok 3
+trigger Halver
+finish
+trigger Halver
+finish-if-event

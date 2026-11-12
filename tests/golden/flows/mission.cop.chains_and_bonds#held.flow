@@ -1,0 +1,15 @@
+# Chains and Bonds (CoP 7-1) with the ring already held (a Rare item). Lufaise Meadows' zone-in at Status 0: 111;
+# finished with room: the give fails (ITEM_CANNOT_BE_OBTAINED, 6387) and nothing changes, so the rezone plays 111
+# again with the same end. A GM sets RingStashed 1: qm_chains_and_bonds plays 114; its finish fails the same way
+# (6387), nothing.
+lists LufaiseMeadows/onZoneIn/1 LufaiseMeadows/onEventFinish/111 LufaiseMeadows/qm_chains_and_bonds/onTrigger LufaiseMeadows/onEventFinish/114
+char zone=LufaiseMeadows pos=393,-0.1,-75 job=WAR lvl=75 nation=0
+mission Cop ChainsAndBonds current
+item DucalGuardsRing
+login open                              # 111
+finish                                  # held: 6387, nothing
+rezone open                             # still Status 0: 111
+finish                                  # 6387, nothing
+charvar Mission[6][648]RingStashed 1    # a GM
+trigger qm_chains_and_bonds             # 114
+finish                                  # held: 6387, nothing

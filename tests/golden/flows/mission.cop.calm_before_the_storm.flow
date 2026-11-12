@@ -1,0 +1,48 @@
+# Calm Before the Storm (CoP 7-4) played through. A level 75 Warrior of San d'Oria with 7-4 current (a GM; the CID
+# status nibble 0). Misareaux Coast's _0p4 (bit 0 unset, nmMisareaux 0, Boggelmann not up): Boggelmann spawned and
+# claimed, CREATURE_HAS_APPEARED (7624); again while he is up: no 7-4 reply (NOTHING_ELSE_OF_INTEREST, 7625, the zone's
+# default). Boggelmann killed: _0p4 plays 13 (0, Ducal Guard's Ring); finished: Vessel of Light (6398) and bit 0; _0p4
+# again: 7625. Carpenters' Landing's qm_cryptonberries: the Executor spawned and claimed, CRYPTONBERRY_EXECUTOR_POP
+# (7271); again while he is up: CRYPTONBERRY_FALLEN_TREE (7270, the default). A GM sets carpentersNm 14 (the three
+# Assassins' bits), standing in for their deaths, which #assassins takes; the Executor killed: CRYPTONBERRY_EXECUTOR_DIE
+# (7496) twice, 7-4's messageText and the mob's own script. qm_cryptonberries at 15: 37 (finished: bit 1); again: 7270.
+# Bibiki Bay's qm_dalham: Dalham spawned and claimed, YOU_ARE_NOT_ALONE (7464); again: NOTHING_LEFT_INTEREST (7634, the
+# default); Dalham killed: 41 (finished: bit 2, the nibble 7); again: 7634. Metalworks' Cid at 7 without the letters:
+# 892 (finished: Letters from Ulmia and Prishe, 6453); with them: 895 (oncePerZone), then his default 500 (the zone's
+# DefaultActions). Sealion's Den's Sueleen with the letters: 17; finished: the mission completes (The Warrior's Path
+# current).
+lists MisareauxCoast/_0p4/onTrigger MisareauxCoast/onEventFinish/13 CarpentersLanding/qm_cryptonberries/onTrigger CarpentersLanding/onEventFinish/37 BibikiBay/qm_dalham/onTrigger BibikiBay/onEventFinish/41 Metalworks/Cid/onTrigger Metalworks/onEventFinish/892 Metalworks/onEventFinish/895 SealionsDen/Sueleen/onTrigger SealionsDen/onEventFinish/17
+char zone=MisareauxCoast pos=-309,-34,184 job=WAR lvl=75 nation=0
+mission Cop CalmBeforeTheStorm current
+login
+trigger _0p4                            # Boggelmann spawned: 7624
+trigger _0p4                            # he is up: 7625 (the default)
+kill BOGGELMANN                         # Boggelmann killed
+trigger _0p4                            # 13
+finish                                  # Vessel of Light; bit 0
+trigger _0p4                            # bit 0 set: 7625
+warp 117,-5.5,-387 CarpentersLanding
+trigger qm_cryptonberries               # the Executor spawned: 7271
+trigger qm_cryptonberries               # he is up: 7270 (the default)
+localvar Mission[6][738]carpentersNm 14 # a GM: the three Assassins' bits (#assassins kills them)
+kill CRYPTONBERRY_EXECUTOR              # 7496 twice
+trigger qm_cryptonberries               # 15: 37
+finish                                  # bit 1
+trigger qm_cryptonberries               # bit 1 set: 7270
+warp 97,-44.7,937 BibikiBay
+trigger qm_dalham                       # Dalham spawned: 7464
+trigger qm_dalham                       # he is up: 7634 (the default)
+kill #16793928                          # Dalham killed
+trigger qm_dalham                       # 41
+finish                                  # bit 2: the nibble 7
+trigger qm_dalham                       # bit 2 set: 7634
+warp -12,-12,1 Metalworks
+trigger Cid                             # 7, no letters: 892
+finish                                  # the letters
+trigger Cid                             # with the letters: 895
+finish
+trigger Cid                             # 895 played in this zone: his default 500
+finish-if-event
+warp 612,132,776 SealionsDen
+trigger Sueleen                         # the letters: 17
+finish                                  # completed

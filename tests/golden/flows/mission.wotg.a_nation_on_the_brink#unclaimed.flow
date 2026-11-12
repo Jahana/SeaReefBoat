@@ -1,0 +1,19 @@
+# A Nation on the Brink (WotG 14) finished with a full bag. A GM status 5 and the zone-in plays 22; its finish
+# completes the mission but the item 184 is refused (6387) so Unclaimed is set to 1. With room, the _qm5 plays 5 and
+# finish option 1 gives item 184 and clears Unclaimed.
+lists SauromugueChampaignS/Bulwark_Gate/onTrigger SauromugueChampaignS/onEventFinish/6 BatalliaDownsS/Underpass_Hatch/onTrigger BatalliaDownsS/onZoneIn/1 BatalliaDownsS/onEventUpdate/4 BatalliaDownsS/onEventFinish/3 BatalliaDownsS/onEventFinish/4 BatalliaDownsS/onEventFinish/20 BatalliaDownsS/onEventFinish/21 BatalliaDownsS/onEventFinish/22 BatalliaDownsS/_qm5/onTrigger BatalliaDownsS/onEventFinish/5
+char zone=BatalliaDownsS pos=314.083,-1.16,-181.455 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg ANationOnTheBrink current
+login
+missionstatus Wotg 5
+fill-inventory
+tick 400
+login open                              # 22
+finish                                  # completed; the bag full: Unclaimed 1
+free-inventory
+trigger _qm5                            # 5
+finish option=1                         # the flag; Unclaimed 0

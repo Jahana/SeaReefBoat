@@ -1,0 +1,71 @@
+# The Celestial Nexus: area 2 with a helper (eve, Awakening current). Phase 1's death plays 32004 (2) to both; main's
+# finish shows phase 1 vanishing and the release (phase 2's spawn reaches no packet; it first shows at its kill), eve's
+# the release only; the win plays 32001 to both; eve's finish does nothing (not current), main's completes the mission.
+lists TheCelestialNexus/_513/onTrigger TheCelestialNexus/onEventUpdate/32000 TheCelestialNexus/onEventFinish/32000 TheCelestialNexus/onEventFinish/32001 TheCelestialNexus/onEventFinish/32002 TheCelestialNexus/onEventFinish/32004 TheCelestialNexus/_514/onTrigger TheCelestialNexus/_515/onTrigger TheCelestialNexus/onEventFinish/32003
+char zone=TheCelestialNexus pos=-580,-8,-30 job=WAR lvl=99 nation=0
+char eve zone=TheCelestialNexus pos=-580,-8,-30 job=WAR lvl=99 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheCelestialNexus current
+eve: mission Asa BurgeoningDread current
+eve: mission Acp ACrystallineProphecyFin current
+eve: mission Rov ARhapsodyForTheAges current
+eve: mission Soa Abomination current
+eve: mission Zilart TheCelestialNexus completed
+eve: mission Zilart Awakening current
+login
+eve: login
+invite eve
+eve: accept
+effect 50                               # a GM: Invincible
+effect 522
+effect 49
+eve: effect 50
+eve: effect 522
+eve: effect 49
+trigger _513
+update 32000 option=2                   # area 2: entered
+finish
+eve: trigger _513
+eve: update 32000 option=2
+eve: finish
+tick 2000
+kill EALDNARCHE+6                       # area 2's Exoplates: 1 HP
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+tick 3000
+kill EALDNARCHE+5                       # phase 1 dead: 32004 to both
+finish                                  # main: phase 1 vanishes, the release
+eve: finish                             # eve: the release only
+tick 31000
+kill EALDNARCHE+7                       # phase 2 first shows; won: 32001 to both
+eve: finish                             # eve: not current: nothing
+finish                                  # main: completed
+tick 400

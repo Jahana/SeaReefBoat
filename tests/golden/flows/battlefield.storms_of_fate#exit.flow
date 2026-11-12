@@ -1,0 +1,15 @@
+# Storms of Fate (battlefield.storms_of_fate#exit, Riverne Site #B01): The exit NPC SD_BCNM_Exit: the exit event 32003,
+# update option 1, finish option 4, then a warp out and the entry again.
+lists RiverneSiteB01/Unstable_Displacement/onTrigger RiverneSiteB01/SD_BCNM_Exit/onTrigger RiverneSiteB01/onEventUpdate/32000 RiverneSiteB01/onEventFinish/32000 RiverneSiteB01/onEventUpdate/32003 RiverneSiteB01/onEventFinish/32003
+char zone=RiverneSiteB01 pos=-611.3,1.8,693.2 job=WAR lvl=75
+quest Jeuno.StormsOfFate accepted
+charvar Quest[3][86]Prog 2
+login
+trigger Unstable_Displacement
+update 32000 option=1
+finish
+trigger SD_BCNM_Exit
+update 32003 option=1
+finish option=4
+warp -611.3,1.8,693.2 RiverneSiteB01
+trigger Unstable_Displacement

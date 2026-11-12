@@ -1,0 +1,25 @@
+# The Heart of the Matter (Windurst 1-2): the orbs lost. A level 10 Warrior of Windurst with 1-2 current at status 5 and
+# the six Glowing Mana Orbs (a GM). The zone-in of East Sarutabaruta plays 48, whose finish takes the six orbs and sets
+# status 6. Status 6: Pore-Ohre and Quh Berhuja say their stolen-orbs text; Apururu of Windurst Woods plays 143, whose
+# finish completes the mission (250 rank points). Rival zone-in: entering Windurst Woods plays the Seekers of Adventure
+# mission Rumors from the West, 839 (another mission's script, not this one); its finish writes that mission's status 4
+# (area 12).
+lists EastSarutabaruta/onZoneIn/1 EastSarutabaruta/onEventFinish/48 EastSarutabaruta/Pore-Ohre/onTrigger EastSarutabaruta/Quh_Berhuja/onTrigger WindurstWoods/Apururu/onTrigger WindurstWoods/onEventFinish/143
+char zone=WindurstWoods pos=-11,-2,13 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+mission Windurst TheHeartOfTheMatter current
+login
+missionstatus Windurst 5                # a GM
+keyitem FirstGlowingManaOrb             # a GM
+keyitem SecondGlowingManaOrb            # a GM
+keyitem ThirdGlowingManaOrb             # a GM
+keyitem FourthGlowingManaOrb            # a GM
+keyitem FifthGlowingManaOrb             # a GM
+keyitem SixthGlowingManaOrb             # a GM
+warp 258,-17,-440 EastSarutabaruta open # the Cardians take the orbs: 48
+finish                                  # the six orbs taken, status 6
+trigger Pore-Ohre                       # PORE_OHRE_STOLEN_ORBS
+trigger Quh_Berhuja                     # QUH_BERHUJA_STOLEN_ORBS
+warp -11,-2,13 WindurstWoods
+trigger Apururu                         # status 6: 143
+finish                                  # completed (250 rank points)

@@ -1,0 +1,38 @@
+# Breaking the Bonds of Fate (battlefield.breaking_the_bonds_of_fate#exit, Talacca Cove): a level 75 Corsair at level
+# cap 75, Breaking the Bonds of Fate accepted at Quest[6][41]Prog 1 (GMs), one Corsair's Testimony. Entered (area 1,
+# 49) by the testimony: TESTIMONY_WEARS (3 shown, 2 left). _1l1: 32003; option 0 stays; _1l1 again, option 4: out. 10
+# s; a warp back to _1l0; in again: TESTIMONY_WEARS (2 shown, 1 left: wear 2); _1l2, option 4: out. 10 s, back, in
+# again: TESTIMONY_WEARS (1 shown, 0 left: wear 3); _1l3, option 4: out. 10 s, back; the fourth trade:
+# TESTIMONY_IS_TORN 7396 with the item (worn 3 of 3, xi.battlefield.itemUses), no menu.
+lists TalaccaCove/_1l0/onTrade TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/_1l1/onTrigger TalaccaCove/_1l2/onTrigger TalaccaCove/_1l3/onTrigger TalaccaCove/onEventFinish/32003
+char zone=TalaccaCove pos=-98.5,-9.399,-87 job=COR lvl=75
+levelcap 75
+quest AhtUrhgan.AgainstAllOdds completed
+quest AhtUrhgan.BreakingTheBondsOfFate accepted
+charvar Quest[6][41]Prog 1
+item CorsairsTestimony
+login
+trade _1l0 CorsairsTestimony x1
+update 32000 option=49
+finish
+trigger _1l1
+finish option=0
+trigger _1l1
+finish option=4
+tick 10000
+warp -98.5,-9.399,-87 TalaccaCove
+trade _1l0 CorsairsTestimony x1
+update 32000 option=49
+finish
+trigger _1l2
+finish option=4
+tick 10000
+warp -98.5,-9.399,-87 TalaccaCove
+trade _1l0 CorsairsTestimony x1
+update 32000 option=49
+finish
+trigger _1l3
+finish option=4
+tick 10000
+warp -98.5,-9.399,-87 TalaccaCove
+trade _1l0 CorsairsTestimony x1

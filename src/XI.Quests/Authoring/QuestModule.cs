@@ -280,7 +280,22 @@ namespace XI.Quests.Authoring
         // key goes on with its overrides
         public QuestOverrideBuilder Quest(string key)
         {
-            if (string.IsNullOrEmpty(key) || key.IndexOf('.') <= 0) throw new ArgumentException($"a quest key is <area>.<name>: {key}", nameof(key));
+            if (string.IsNullOrEmpty(key) || key.IndexOf('.') <= 0 || ContainerKeys.IsMission(key))
+                throw new ArgumentException($"a quest key is <area>.<name>: {key}", nameof(key));
+            return Overrides(key);
+        }
+
+        // the C# mission with the key (XI.QuestContent.MissionKey.ToAU.<Name>): its states take a quest's handler and
+        // check overrides; QuestOverrides.Apply refuses Reward, RemoveState and AddStates
+        public QuestOverrideBuilder Mission(string key)
+        {
+            if (!ContainerKeys.IsMission(key))
+                throw new ArgumentException($"a mission key is mission.<log>.<name>: {key}", nameof(key));
+            return Overrides(key);
+        }
+
+        QuestOverrideBuilder Overrides(string key)
+        {
             var at = _quests.FindIndex(q => q.Key == key);
             if (at < 0)
             {

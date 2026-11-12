@@ -1,0 +1,43 @@
+# To the Forsaken Mines repeated (completed and current again): Malduc 1002, the Glocolite 1006, whose finish completes
+# the mission (400 rank points) and takes it. Begun again by a GM with a new Glocolite each time: in Bastok Markets (the
+# warp plays SoA's Rumors from the West zone-in 22) Cleades 1002 and 1006; in Bastok Mines Rashid; at Port Bastok Argus;
+# each 1006 finish completes it again (400 more each time).
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/Cleades/onTrade BastokMarkets/onEventFinish/1001 BastokMarkets/onEventFinish/1006 BastokMarkets/onEventFinish/1010 BastokMines/Davyad/onTrigger BastokMines/Rashid/onTrigger BastokMines/Rashid/onTrade BastokMines/onEventFinish/1001 BastokMines/onEventFinish/1006 BastokMines/onEventFinish/1010 Metalworks/Malduc/onTrigger Metalworks/Malduc/onTrade Metalworks/onEventFinish/1001 Metalworks/onEventFinish/1006 Metalworks/onEventFinish/1010 PortBastok/Argus/onTrigger PortBastok/Argus/onTrade PortBastok/onEventFinish/1001 PortBastok/onEventFinish/1006 PortBastok/onEventFinish/1010 GusgenMines/qm2/onTrigger GusgenMines/qm2/onTrade
+char zone=Metalworks pos=66,-15,4 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok ToTheForsakenMines current
+item Glocolite
+login
+trigger Malduc
+finish-if-event
+trade Malduc Glocolite x1               # repeat: 1006
+finish                                  # completed, the Glocolite taken
+mission Bastok ToTheForsakenMines current
+item Glocolite
+warp -358,-10,-168 BastokMarkets
+trigger Cleades
+finish-if-event
+trade Cleades Glocolite x1              # 1006
+finish
+mission Bastok ToTheForsakenMines current
+item Glocolite
+warp -8.4,-1,-121 BastokMines
+trigger Rashid
+finish-if-event
+trade Rashid Glocolite x1               # 1006
+finish
+mission Bastok ToTheForsakenMines current
+item Glocolite
+warp 132,8.5,-4 PortBastok
+trigger Argus
+finish-if-event
+trade Argus Glocolite x1                # 1006
+finish

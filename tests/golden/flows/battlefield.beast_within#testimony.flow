@@ -1,0 +1,28 @@
+# The Beast Within (battlefield.beast_within#testimony, Jade Sepulcher): a level 75 Blue Mage at level cap 75, The Beast
+# Within accepted at Quest[6][40]Prog 2 (GMs), one Blue Mage's Testimony, with
+# modules/era/lua/globals/testimony_single_use.lua enabled by xi.pre(ABYSSEA) (RESTRICT_CONTENT 1, ENABLE_ABYSSEA 0): it
+# overrides Battlefield.onBattlefieldEnter. The testimony traded: the 32000 menu; 33 (area 1): registered, entered: wear
+# 0 -> 3 (testimony_single_use.lua:21-22 wears it to totalUses - 1 = 2, then its super at :26, the framework's
+# onBattlefieldEnter, once more) and TESTIMONY_WEARS 7397 (the item, 1 shown, 0 left), then the framework's other three
+# texts (without the module: 3 shown, 2 left, wear 1: #exit). Finished: in. _1v1, option 4: out. 10 s; a warp back to
+# _1v0; the testimony traded again: TESTIMONY_IS_TORN 7396 with the item, no menu.
+module modules/era/lua/globals/testimony_single_use.lua
+lists JadeSepulcher/_1v0/onTrade JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/_1v1/onTrigger JadeSepulcher/onEventFinish/32003
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=BLU lvl=75
+setting RESTRICT_CONTENT 1
+setting ENABLE_ABYSSEA 0
+levelcap 75
+quest AhtUrhgan.AnEmptyVessel completed
+quest AhtUrhgan.Transformations completed
+quest AhtUrhgan.TheBeastWithin accepted
+charvar Quest[6][40]Prog 2
+item BlueMagesTestimony
+login
+trade _1v0 BlueMagesTestimony x1
+update 32000 option=33
+finish
+trigger _1v1
+finish option=4
+tick 10000
+warp 300,-2.517,-198.5 JadeSepulcher
+trade _1v0 BlueMagesTestimony x1

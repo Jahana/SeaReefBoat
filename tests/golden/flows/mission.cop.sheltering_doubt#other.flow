@@ -1,0 +1,27 @@
+# Sheltering Doubt, the statuses the main flow skips: Despachiaire at Statuses 0 and 2, Justinius at Statuses 0 and 1,
+# the Dilapidated Gate at Statuses 0, 1 (no cutscene) and 2 (cutscene 7, which completes the mission).
+lists TavnazianSafehold/onZoneIn/1 TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/Justinius/onTrigger MisareauxCoast/_0p0/onTrigger MisareauxCoast/onEventFinish/7
+char zone=TavnazianSafehold pos=78.7,-34,68 job=WAR lvl=75 nation=0
+mission Cop ShelteringDoubt current
+charvar Mission[6][368]Status 1         # a GM
+login                                   # Status 1: no 4-1 reply
+trigger Justinius                       # Status 1: no 4-1 reply
+finish-if-event
+charvar Mission[6][368]Status 0         # a GM
+trigger Justinius                       # Status 0: no 4-1 reply
+finish-if-event
+trigger Despachiaire                    # Status 0: no 4-1 reply
+finish-if-event
+charvar Mission[6][368]Status 2         # a GM
+trigger Despachiaire                    # Status 2: no 4-1 reply
+finish-if-event
+warp 260,9,-435 MisareauxCoast
+charvar Mission[6][368]Status 0         # a GM
+trigger _0p0                            # Status 0: no 4-1 reply
+finish-if-event
+charvar Mission[6][368]Status 1         # a GM
+trigger _0p0                            # Status 1: no 4-1 reply
+finish-if-event
+charvar Mission[6][368]Status 2         # a GM
+trigger _0p0                            # Status 2: 7
+finish                                  # complete

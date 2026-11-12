@@ -1,0 +1,19 @@
+# Through the Quicksand Caves: another fight's win. The Clotho Orb traded to SC_Entrance opens Cactuar
+# Suave's menu (32000, bit 32); option 81 (index 5, area 1) enters it (A_CRACK_HAS_FORMED 7548, entering
+# 7609). A GM's win plays 32001 (index 5); its finish leaves the mission current: the win is Cactuar
+# Suave's, not this fight's.
+lists Norg/Gilgamesh/onTrigger ChamberOfOracles/SC_Entrance/onTrigger ChamberOfOracles/SC_Entrance/onTrade ChamberOfOracles/onEventUpdate/32000 ChamberOfOracles/onEventFinish/32000 ChamberOfOracles/onEventFinish/32001
+char zone=ChamberOfOracles pos=-218.6,-1.9,23.0 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ThroughTheQuicksandCaves current
+item ClothoOrb
+login
+trade SC_Entrance ClothoOrb x1          # Cactuar Suave's menu (bit 32)
+update 32000 option=81                  # index 5, area 1: entered
+finish
+tick 2000
+bfwin                                   # a GM's win: 32001
+finish                                  # Cactuar Suave's win: still current

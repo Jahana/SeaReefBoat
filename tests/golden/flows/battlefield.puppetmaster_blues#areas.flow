@@ -1,0 +1,25 @@
+# Puppetmaster Blues (battlefield.puppetmaster_blues#areas, Talacca Cove): Area 2: kill VALKENG+1, event 32001 (2,...),
+# finish, two ticks. Then both key items given again and option 35 (area 3): kill VALKENG+2, event 32001 (3,4,1,...).
+# The finish runs the quest's 32001 (PuppetmasterBlues.cs): main takes the key items (keyitems +169:00) and Prog 2.
+lists TalaccaCove/_1l0/onTrigger TalaccaCove/onEventUpdate/32000 TalaccaCove/onEventFinish/32000 TalaccaCove/onEventFinish/32001
+char zone=TalaccaCove pos=-100,-9.399,-85 job=PUP lvl=75
+quest AhtUrhgan.PuppetmasterBlues accepted
+keyitem ToggleSwitch
+keyitem ValkengsMemoryChip
+login
+trigger _1l0
+update 32000 option=34
+finish
+kill VALKENG+1
+finish
+tick 11000
+tick 10000
+keyitem ToggleSwitch
+keyitem ValkengsMemoryChip
+trigger _1l0
+update 32000 option=35
+finish
+kill VALKENG+2
+finish
+tick 11000
+tick 10000

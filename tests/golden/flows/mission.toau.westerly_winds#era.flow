@@ -1,0 +1,19 @@
+# Westerly Winds with its SoA era module (modules/era/lua/missions/mission_adjustments.lua, RESTRICT_CONTENT 1,
+# ENABLE_SOA 0): the 3028 finish, on a completion, deletes the note, sets A Mercenary Life's must-zone flag (the local
+# var) and its Timer var (1 until JST midnight). Status 1 (a GM) with the note: 3028, finished: completed, note
+# deleted, Timer 1, flag set.
+module modules/era/lua/missions/mission_adjustments.lua
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3028
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau WesterlyWinds current
+keyitem RaillefalsNote
+setting RESTRICT_CONTENT 1
+setting ENABLE_SOA 0
+login
+missionstatus Toau 1                    # a GM
+trigger Naja_Salaheem                   # 3028
+finish                                  # completed; Timer 1

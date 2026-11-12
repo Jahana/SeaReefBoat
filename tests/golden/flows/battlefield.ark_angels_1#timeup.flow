@@ -1,0 +1,26 @@
+# Ark Angels 1: time up in area 3: the framework's TIME_IN_THE_BATTLEFIELD_IS_UP, then the loss's 32002 (0, 0, 0, 0, 0,
+# 0, 180), whose finish takes the char out. Level synced afterwards, qm1_1 says the framework's
+# MEMBERS_LEVELS_ARE_RESTRICTED.
+lists LaloffAmphitheater/qm1_1/onTrigger LaloffAmphitheater/onEventUpdate/32000 LaloffAmphitheater/onEventFinish/32000 LaloffAmphitheater/onEventFinish/32001 LaloffAmphitheater/onEventFinish/32002 LaloffAmphitheater/qm2/onTrigger LaloffAmphitheater/onEventFinish/32003
+char zone=LaloffAmphitheater pos=-603.563,-22.681,483.937 job=WAR lvl=99 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart ArkAngels current
+login
+missionstatus Zilart 1                  # a GM
+trigger qm1_1
+update 32000 option=3                  # area 3
+finish
+tick 2000
+tick 1199000
+tick 300000
+tick 240000
+tick 30000
+tick 20000
+tick 10000                              # time up: 32002
+finish                                  # out
+tick 10000
+effect 269
+trigger qm1_1                           # level synced: MEMBERS_LEVELS_ARE_RESTRICTED

@@ -1,0 +1,20 @@
+# Easterly Winds' 10094 finish with option 1: ten Imperial Bronze Pieces given, then completed. With a full bag
+# (fill-inventory): npcUtil.giveItem fails: not completed (still current); room again: option 1: the pieces, completed.
+lists RuludeGardens/onTriggerAreaEnter/1 RuludeGardens/onEventFinish/10094
+char zone=RuludeGardens pos=0,3,20 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau EasterlyWinds current
+login
+tick 1000
+tick 1000
+tick 1000
+fill-inventory                          # a GM: a full bag
+walk 0,3,50                             # area 1: 10094
+finish option=1                         # the bag full: not completed
+free-inventory                          # a GM: room
+walk 0,3,20
+walk 0,3,50                             # 10094 again
+finish option=1                         # the pieces, completed

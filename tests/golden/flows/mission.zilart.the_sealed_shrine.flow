@@ -1,0 +1,27 @@
+# The Sealed Shrine (Zilart 15), current. At status 0 _700 plays the progress 172, whose finish sets status 1 on option
+# 0 (not 1); at status 1 the handler returns nil, so _700 is Norg's DefaultActions DOOR_IS_LOCKED. Gilgamesh plays 173;
+# Aldo plays the progress 111 while Option is 0 (its finish sets Option 1), then 69. The zone-in to the Shrine of
+# Ru'Avitau at status 1 plays 51, whose finish completes the mission (The Celestial Nexus next).
+lists Norg/_700/onTrigger Norg/Gilgamesh/onTrigger Norg/onEventFinish/172 LowerJeuno/Aldo/onTrigger LowerJeuno/onEventFinish/111 TheShrineOfRuavitau/onZoneIn/1 TheShrineOfRuavitau/onEventFinish/51
+char zone=Norg pos=98,-7,-12 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheSealedShrine current
+login
+trigger _700                            # status 0: 172
+finish option=1                         # nothing
+trigger _700                            # 172
+finish option=0                         # status 1
+trigger _700                            # status 1: nil: DOOR_IS_LOCKED
+finish-if-event
+trigger Gilgamesh                       # 173
+finish
+warp 23,3,-58 LowerJeuno
+trigger Aldo                            # Option 0: 111
+finish                                  # Option 1
+trigger Aldo                            # 69
+finish
+warp -40,-2,-230 TheShrineOfRuavitau open  # status 1: 51
+finish                                  # completed

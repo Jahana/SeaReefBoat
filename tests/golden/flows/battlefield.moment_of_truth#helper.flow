@@ -1,0 +1,58 @@
+# Moment of Truth (battlefield.moment_of_truth#helper, Jade Sepulcher): bob (completed) and dan (accepted, Prog 5) enter
+# with the main char; cat (accepted, Prog 2) and eve (no quest) are each refused with only the entry NPC's default
+# 32767 (DefaultActions.lua): neither gets the framework's NO_BATTLEFIELD_ENTRY 7377. The 32001 packets carry the skip
+# flag 0 for main and dan and 1 for bob, and the ninth argument 2. The finish runs the quest's 32001
+# (MomentOfTruth.cs): main's Prog 4 -> 5. dan's finish (Prog 5) changes nothing.
+lists JadeSepulcher/_1v0/onTrigger JadeSepulcher/onEventUpdate/32000 JadeSepulcher/onEventFinish/32000 JadeSepulcher/onEventFinish/32001
+char zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+char bob zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+char cat zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+char dan zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+char eve zone=JadeSepulcher pos=300,-2.517,-198.5 job=WAR lvl=75
+quest AhtUrhgan.MomentOfTruth accepted
+charvar Quest[6][30]Prog 4
+bob: quest AhtUrhgan.MomentOfTruth completed
+cat: quest AhtUrhgan.MomentOfTruth accepted
+cat: charvar Quest[6][30]Prog 2
+dan: quest AhtUrhgan.MomentOfTruth accepted
+dan: charvar Quest[6][30]Prog 5
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+trigger _1v0
+update 32000 option=49
+finish
+bob: trigger _1v0
+bob: update 32000 option=49
+bob: finish
+cat: trigger _1v0
+cat: update 32000 option=49
+cat: finish
+dan: trigger _1v0
+dan: update 32000 option=49
+dan: finish
+eve: trigger _1v0
+eve: update 32000 option=49
+eve: finish
+kill SHADOWHAND_KAJEEL_JA
+kill SHADOWHAND_KAJEEL_JA+1
+kill SHADOWHAND_KAJEEL_JA+2
+kill SHADOWHAND_KAJEEL_JA+3
+kill SHADOWHAND_KAJEEL_JA+4
+kill SHADOWHAND_KAJEEL_JA+5
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

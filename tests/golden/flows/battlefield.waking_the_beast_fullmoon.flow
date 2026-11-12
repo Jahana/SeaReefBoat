@@ -1,0 +1,77 @@
+# Waking the Beast (battlefield.waking_the_beast_fullmoon, FullMoonFountain, a BattlefieldQuest of
+# OtherAreas.WakingTheBeast; index 2, 30 minutes, up to 18 players, repeatable, MS_Entrance the entry, Moon_Spiral the
+# exit): the whole fight. A level 99 Warrior with the quest accepted and the seven key items (the six eyes, the Rainbow
+# Resonator). The trigger: the menu 32000. Updates: 0 ignored; 4 (index 0) and 32 (area 0): REQS_NOT_MET; 33:
+# registered, entered (setupBattlefield: the avatars' shuffled order, the main Carbuncle unkillable). GMs give Perfect
+# Dodge, Invincible and Elemental Sforzo so the avatars' two-hours do not kill the char. Phase 0: the main
+# Carbuncle_Prime, unkillable, left at 1 HP: below 75%: phase 1, the Carbuncle despawned (disengaged, the despawn
+# animation), its 7 s timer: DISAPPEAR. Each spawn waits 5 s of GetSystemTime (a day's wait). Phase 1: Ifrit_Prime (+5)
+# by the Carbuncle; killed: phase 2, the Carbuncle back (its kept HP: 1); below 50%: phase 3, despawned again:
+# Leviathan_Prime (+10) and Shiva_Prime (+6). At Leviathan's kill step, Shiva's taunt (message 7838); at Shiva's, before
+# she dies, her two-hour Diamond Dust (an 028 of category 11, ability 884). Both killed: phase 4, the Carbuncle back,
+# below 25%: phase 5: Ramuh_Prime (+9), Titan_Prime (+8), Garuda_Prime (+7); at Titan's kill step, after Ramuh's death,
+# Garuda's Aerial Blast (875) and Titan's Earthen Fury (857). Each killed: phase 6: the five Carbuncles at 1 HP (the
+# main one killable); at the first one's kill step all five use Searing Light (912). The five killed: WON, the loot (a
+# Shiva's Shotel to the char's pool and inventory), 32001 from the main Carbuncle. Its finish: the quest's 32001
+# handler: the Faded Ruby, the seven taken, Option 1. Out.
+lists FullMoonFountain/MS_Entrance/onTrigger FullMoonFountain/onEventUpdate/32000 FullMoonFountain/onEventFinish/32000 FullMoonFountain/onEventFinish/32001
+char zone=FullMoonFountain pos=-301.8,9.5,-260.1 job=WAR lvl=99
+quest OtherAreas.WakingTheBeast accepted
+keyitem EyeOfFlames
+keyitem EyeOfFrost
+keyitem EyeOfGales
+keyitem EyeOfStorms
+keyitem EyeOfTides
+keyitem EyeOfTremors
+keyitem RainbowResonator
+login
+trigger MS_Entrance
+update 32000 option=0                   # 0: ignored
+update 32000 option=4                   # index 0: REQS_NOT_MET
+update 32000 option=32                  # area 0: REQS_NOT_MET
+update 32000 option=33                  # area 1: registered, entered
+finish
+effect 49                               # a GM: Perfect Dodge
+effect 50                               # a GM: Invincible
+effect 522                              # a GM: Elemental Sforzo
+tick 2000
+kill CARBUNCLE_PRIME                    # unkillable: 1 HP; phase 1, despawned
+tick 8000
+wait jst=1
+tick 1000
+tick 3000
+kill CARBUNCLE_PRIME+5                  # Ifrit_Prime: phase 2
+wait jst=1
+tick 1000
+tick 1000
+tick 8000
+wait jst=1
+tick 1000
+tick 3000
+kill CARBUNCLE_PRIME+10                 # Leviathan_Prime
+tick 1000
+kill CARBUNCLE_PRIME+6                  # Shiva_Prime: phase 4
+wait jst=1
+tick 1000
+tick 1000
+tick 8000
+wait jst=1
+tick 1000
+tick 3000
+kill CARBUNCLE_PRIME+9                  # Ramuh_Prime
+kill CARBUNCLE_PRIME+8                  # Titan_Prime
+kill CARBUNCLE_PRIME+7                  # Garuda_Prime: phase 6
+wait jst=1
+tick 1000
+tick 1000
+wait jst=1
+tick 1000
+kill CARBUNCLE_PRIME+1
+kill CARBUNCLE_PRIME+2
+kill CARBUNCLE_PRIME+3
+kill CARBUNCLE_PRIME+4
+kill CARBUNCLE_PRIME                    # phase 6: the last Carbuncle: WON, the loot
+tick 1000
+finish                                  # the quest's 32001: the Faded Ruby
+tick 11000
+tick 10000

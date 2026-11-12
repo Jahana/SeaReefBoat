@@ -1,0 +1,19 @@
+# probe (quest rework C4): record take / remove / progress / claim / event, spawn and unity on the running engine. 2
+# (Vanquish 1 Enemy) goes on the log and comes off it. 4082 goes on, a second take is refused (ROE_UNABLE), a GM sets
+# its progress, and a GM's DEFEAT_MOB with no mob fails its mobXP req. Record 63 takes a CHOCOBO_DIG_SUCCESS. Jaggedy-
+# Eared Jack comes up by a GM. The run's chars' rows are cleaned up after it (RunFlow), so the leader it ends on
+# (Ayame) does not reach the lane's hourly unity count.
+char zone=WestRonfaure pos=0,0,0 job=WAR lvl=5
+unity Pieuje
+login
+record take 2
+record remove 2
+record take 4082
+record take 4082 refused
+record progress 4082 7
+record event DefeatMob
+record take 63
+record event ChocoboDigSuccess
+record claim 63
+spawn #17187111
+unity Ayame

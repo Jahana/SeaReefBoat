@@ -1,0 +1,12 @@
+# Check form 2: 1046 (An Eminent Scholar, collectSparks 2000) on TRIGGER_NPC. Isakoth with the Memorandoll held and
+# record 1 off the log fires the trigger, then opens the spark shop. No sparks: nothing. A GM's 2000: it completes,
+# with its number-form item.
+char zone=BastokMarkets pos=0,0,0 job=WAR lvl=5
+keyitem Memorandoll
+login
+record take 1046
+trigger Isakoth
+finish-if-event
+currency spark_of_eminence 2000
+trigger Isakoth
+finish-if-event

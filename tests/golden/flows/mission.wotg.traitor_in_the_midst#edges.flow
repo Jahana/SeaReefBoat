@@ -1,0 +1,31 @@
+# Traitor in the Midst (WotG 18) edges. Pawprint 6 finished on option 0 and option 2: nothing; update 2 then finish
+# option 1: bit 3, and the pawprint then answers 6409 (DefaultActions). Pawprint 5 update 1 and an instant finish:
+# nothing. Status 30 (a GM): Pawprints 1 answers 6409; Status 31: Pawprints 3 answers 6409 (bit 0 set), Pawprints 1
+# plays 14 and the finish completes the mission.
+lists BeaucedineGlacierS/Regal_Pawprints_3/onTrigger BeaucedineGlacierS/Regal_Pawprints_4/onTrigger BeaucedineGlacierS/Regal_Pawprints_5/onTrigger BeaucedineGlacierS/Regal_Pawprints_6/onTrigger BeaucedineGlacierS/Regal_Pawprints_7/onTrigger BeaucedineGlacierS/Regal_Pawprints_1/onTrigger BeaucedineGlacierS/onEventUpdate/8 BeaucedineGlacierS/onEventUpdate/9 BeaucedineGlacierS/onEventUpdate/10 BeaucedineGlacierS/onEventUpdate/11 BeaucedineGlacierS/onEventUpdate/12 BeaucedineGlacierS/onEventFinish/8 BeaucedineGlacierS/onEventFinish/9 BeaucedineGlacierS/onEventFinish/10 BeaucedineGlacierS/onEventFinish/11 BeaucedineGlacierS/onEventFinish/12 BeaucedineGlacierS/onEventFinish/14
+char zone=BeaucedineGlacierS pos=-23.803,-60.055,-72.156 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg TraitorInTheMidst current
+login
+trigger Regal_Pawprints_6
+finish option=0
+trigger Regal_Pawprints_6
+finish option=2
+trigger Regal_Pawprints_6
+update 11 option=2
+finish option=1                            # bit 3
+trigger Regal_Pawprints_6                  # bit 3 set
+trigger Regal_Pawprints_5
+update 10 option=1
+finish option=1
+trigger Regal_Pawprints_5                  # 10 again
+finish option=0
+charvar Mission[5][17]Status 30
+trigger Regal_Pawprints_1                  # Status 30
+charvar Mission[5][17]Status 31
+trigger Regal_Pawprints_3                  # bit 0 set
+trigger Regal_Pawprints_1                  # 14
+finish

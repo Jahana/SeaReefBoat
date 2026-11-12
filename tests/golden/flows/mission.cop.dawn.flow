@@ -1,0 +1,98 @@
+# Dawn (CoP 8-4) played through. A level 75 Warrior of San d'Oria with 8-4 current (a GM; Status 0) in Empyreal
+# Paradox. TR_Entrance at Status 0: 2 (finished: Status 1); at Status 1: the battlefield menu (Dawn), entered with 1.
+# Promathia killed: 32004 (1); finished: Promathia's second form spawned. It killed: the win, 32001; its finish:
+# the battlefield's setPos zones the char out, and 8-4's own 32001 finish (battlefieldWin is Dawn, Status 1):
+# Status 2. The zone-in at
+# Status 2: 6 (finished: Status 3, zoned again); at Status 3: 3; finished: Tear of Altana (6398), Timer 1 until JST
+# midnight, Option 31, Status 4, set down in Al'Taieu. Ru'Lude Gardens' area 1 at Status 4 with Option 31: nothing.
+# A day on (wait jst=1: the Timer expires). Mhaura's zone-in (bit 2): 322 (finished: bit 2 cleared); Oldton
+# Movalpolos' zone-in (bit 3): 57; Metalworks' Cid (bit 4): 897; Port Windurst's zone-in plays Rhapsodies of
+# Vana'diel's 30035 (finished by the warp); Chipmy-Popmy (bit 1, CProg 0): 619 (CProg 1); Bibiki Bay's Warmachine
+# (CProg 1): progressCutscene 43; finished: a random colored drop (Purple Drop, 6395) and bit 1 cleared. Southern San
+# d'Oria's Hinaree (bit 0, LProg 0): 757 (LProg 1); Uleguerand Range's zone-in (LProg 1): 17 (LProg 2); Southern San
+# d'Oria's area 1 (LProg 2): 758 (bit 0 cleared: Option 0). Ru'Lude Gardens' area 1 at Status 4, Option 0: 122
+# (Status 5). Upper Jeuno's _6s1 at Status 5: 129 (Status 6, firstRing 1); at Status 6: 84; update 4: the three
+# rings; finished 5: Rajas Ring (6554), firstRing 0. Tavnazian Safehold's _0qa at Status 6: 543 (Status 7). Lufaise
+# Meadows' area 1 at Status 7: progressCutscene 116; finished: the title Banisher of Emptiness, Status 8. Apocalypse
+# Nigh accepted at Prog 5 (GMs): Norg's Gilgamesh plays the quest's 232 (252, 6); finished 1: the quest's earring
+# (6417) and the quest completes, and 8-4's own 232 finish (option 1, Status 8): the mission completes (The Last
+# Verse current).
+lists EmpyrealParadox/TR_Entrance/onTrigger EmpyrealParadox/onEventFinish/2 EmpyrealParadox/onEventUpdate/32000 EmpyrealParadox/onEventFinish/32000 EmpyrealParadox/onEventFinish/32004 EmpyrealParadox/onEventFinish/32001 EmpyrealParadox/onZoneIn/1 EmpyrealParadox/onEventFinish/6 EmpyrealParadox/onEventFinish/3 RuludeGardens/onTriggerAreaEnter/1 Mhaura/onZoneIn/1 Mhaura/onEventFinish/322 OldtonMovalpolos/onZoneIn/1 OldtonMovalpolos/onEventFinish/57 Metalworks/Cid/onTrigger Metalworks/onEventFinish/897 PortWindurst/Chipmy-Popmy/onTrigger PortWindurst/onEventFinish/619 BibikiBay/Warmachine/onTrigger BibikiBay/onEventFinish/43 SouthernSanDoria/Hinaree/onTrigger SouthernSanDoria/onEventFinish/757 UleguerandRange/onZoneIn/1 UleguerandRange/onEventFinish/17 SouthernSanDoria/onTriggerAreaEnter/1 SouthernSanDoria/onEventFinish/758 RuludeGardens/onEventFinish/122 UpperJeuno/_6s1/onTrigger UpperJeuno/onEventFinish/129 UpperJeuno/onEventUpdate/84 UpperJeuno/onEventFinish/84 TavnazianSafehold/_0qa/onTrigger TavnazianSafehold/onEventFinish/543 LufaiseMeadows/onTriggerAreaEnter/1 LufaiseMeadows/onEventFinish/116 Norg/onEventFinish/232
+char zone=EmpyrealParadox pos=541.5,-1.2,-597.7 job=WAR lvl=75 nation=0
+mission Cop Dawn current
+login
+trigger TR_Entrance                     # Status 0: 2
+finish                                  # Status 1
+trigger TR_Entrance                     # Status 1: the battlefield menu
+update 32000 option=1                   # area 1: entered
+finish
+tick 2000
+kill PROMATHIA                          # 32004 (1)
+tick 1000
+tick 1000
+tick 1000
+finish-if-event                         # the second form spawned
+tick 2000
+kill PROMATHIA+1                        # the win: 32001
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+tick 1000
+finish-if-event                         # Status 2; zoned
+tick 400
+login open                              # Status 2: 6
+finish                                  # Status 3; zoned
+tick 400
+login open                              # Status 3: 3
+finish                                  # the Tear, Timer, Option 31; Status 4
+tick 400
+login open                              # in Al'Taieu
+warp 0,3,100 RuludeGardens
+tick 3000
+walk 0,3,60                             # Option 31: nothing
+wait jst=1                              # the Timer expires
+warp 0.003,-6.252,117.971 Mhaura open   # bit 2: 322
+finish                                  # Option 27
+warp 160.9,11,-55.7 OldtonMovalpolos open # bit 3: 57
+finish                                  # Option 19
+warp -12,-12,1 Metalworks
+trigger Cid                             # bit 4: 897
+finish                                  # Option 3
+warp -183,-2.8,70 PortWindurst          # Rhapsodies' 30035, finished
+trigger Chipmy-Popmy                    # bit 1, CProg 0: 619
+finish                                  # CProg 1
+warp -345.2,-3.2,-976.5 BibikiBay
+trigger Warmachine                      # CProg 1: 43
+finish                                  # a drop; Option 1
+warp -301.5,-9.2,95 SouthernSanDoria
+trigger Hinaree                         # bit 0, LProg 0: 757
+finish                                  # LProg 1
+warp -298.3,-51.9,-18.9 UleguerandRange open # LProg 1: 17
+finish                                  # LProg 2
+warp -301.5,-9.2,95 SouthernSanDoria
+tick 3000
+walk -275,-9,97                         # area 1, LProg 2: 758
+finish                                  # Option 0
+warp 0,3,100 RuludeGardens
+tick 3000
+walk 0,3,60                             # Status 4, Option 0: 122
+finish                                  # Status 5
+warp -95,-1.7,88 UpperJeuno
+trigger _6s1                            # Status 5: 129
+finish                                  # Status 6, firstRing 1
+trigger _6s1                            # Status 6, firstRing 1: 84
+update 84 option=4                      # the three rings
+finish option=5                         # Rajas Ring; firstRing 0
+warp 111,-41,41 TavnazianSafehold
+trigger _0qa                            # Status 6: 543
+finish                                  # Status 7
+warp 199,-20,320 LufaiseMeadows
+tick 3000
+walk 199,-20,337                        # area 1, Status 7: 116
+finish                                  # the title; Status 8
+quest Jeuno.ApocalypseNigh accepted     # a GM
+charvar Quest[3][89]Prog 5              # a GM
+warp 120.9,-8,-12 Norg
+trigger Gilgamesh                       # the quest's 232
+finish option=1                         # the earring; completed (both)

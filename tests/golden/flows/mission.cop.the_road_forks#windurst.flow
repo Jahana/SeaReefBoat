@@ -1,0 +1,70 @@
+# The Road Forks, the Windurst path (mission.cop.the_road_forks#windurst). A level 75 Warrior of Windurst with 3-3
+# current (a GM; no status). Windurst Waters' zone-in (Windurst status 0): 871; finished: 1. Ohbiru-Dohbiru (1): 872;
+# finished: 2; again (2): 877. Windurst Walls, Yoran-Oran (2): 469; finished: 3; again (3): 474. Windurst Waters,
+# Kyume-Romeh (3): 873; finished: 5; again (5): 878. Honoi-Gomoi (5): 874; finished: the Cracked Mimeo Mirror, 6; again
+# (6): 879. Yoran-Oran (6): 470; finished: the mirror taken, 8; again (8, no Feather): 476. Attohwa Chasm, Loose Sand
+# (8) at its feet: the Lioumere spawned and claimed; again (spawned): nothing; the Lioumere killed (8, status 0):
+# status 1; Loose Sand: the Mimeo Jewel; Cradle of Rebirth (Jewel): 2; finished: the Jewel taken, the three Feathers.
+# Yoran-Oran (8, Feather): 471; finished: the Feathers taken, 9; again (9): 477. Port Windurst, Yujuju (9): 592;
+# finished: 11; again (11): 593. Windurst Waters, Tosuka-Porika (11): 875; finished: 12; again (12): 881. Yoran-Oran
+# (12): 472; finished: 14; again (14): 478.
+lists WindurstWaters/onZoneIn/1 WindurstWaters/onEventFinish/871 WindurstWaters/Ohbiru-Dohbiru/onTrigger WindurstWaters/onEventFinish/872 WindurstWalls/Yoran-Oran/onTrigger WindurstWalls/onEventFinish/469 WindurstWaters/Kyume-Romeh/onTrigger WindurstWaters/onEventFinish/873 WindurstWaters/Honoi-Gomoi/onTrigger WindurstWaters/onEventFinish/874 WindurstWalls/onEventFinish/470 AttohwaChasm/Loose_Sand/onTrigger AttohwaChasm/Lioumere/onMobDeath AttohwaChasm/Cradle_of_Rebirth/onTrigger AttohwaChasm/onEventFinish/2 WindurstWalls/onEventFinish/471 PortWindurst/Yujuju/onTrigger PortWindurst/onEventFinish/592 WindurstWaters/Tosuka-Porika/onTrigger WindurstWaters/onEventFinish/875 WindurstWalls/onEventFinish/472
+char zone=WindurstWaters pos=23,-5,-190 job=WAR lvl=75 nation=2
+mission Cop TheRoadForks current
+login                                   # status 0: 871; 1
+trigger Ohbiru-Dohbiru                  # 1: 872
+finish                                  # 2
+trigger Ohbiru-Dohbiru                  # 2: 877
+finish-if-event
+warp -109.9,-14,203.3 WindurstWalls
+trigger Yoran-Oran                      # 2: 469
+finish                                  # 3
+trigger Yoran-Oran                      # 3: 474
+finish-if-event
+warp -58,-4,23 WindurstWaters
+trigger Kyume-Romeh                     # 3: 873
+finish                                  # 5
+trigger Kyume-Romeh                     # 5: 878
+finish-if-event
+trigger Honoi-Gomoi                     # 5: 874
+finish                                  # the mirror; 6
+trigger Honoi-Gomoi                     # 6: 879
+finish-if-event
+warp -109.9,-14,203.3 WindurstWalls
+trigger Yoran-Oran                      # 6: 470
+finish                                  # 8
+trigger Yoran-Oran                      # 8, no Feather: 476
+finish-if-event
+warp 478.8,20,41.7 AttohwaChasm
+tick 1000
+tick 1000
+tick 1000
+trigger Loose_Sand here                 # 8, status 0: the Lioumere spawned and claimed
+finish-if-event
+trigger Loose_Sand here                 # the Lioumere spawned: nothing
+finish-if-event
+kill LIOUMERE                           # status 1
+trigger Loose_Sand here                 # the Jewel; the timer
+finish-if-event
+trigger Cradle_of_Rebirth               # Jewel: krtu; 2
+finish                                  # the Jewel taken; the three Feathers
+warp -109.9,-14,203.3 WindurstWalls
+trigger Yoran-Oran                      # 8, Feather: 471
+finish                                  # 9
+trigger Yoran-Oran                      # 9: 477
+finish-if-event
+warp 201.5,-4.7,139 PortWindurst
+trigger Yujuju                          # 9: 592
+finish                                  # 11
+trigger Yujuju                          # 11: 593
+finish-if-event
+warp -26,-6,103 WindurstWaters
+trigger Tosuka-Porika                   # 11: 875
+finish                                  # 12
+trigger Tosuka-Porika                   # 12: 881
+finish-if-event
+warp -109.9,-14,203.3 WindurstWalls
+trigger Yoran-Oran                      # 12: 472
+finish                                  # 14
+trigger Yoran-Oran                      # 14: 478
+finish-if-event

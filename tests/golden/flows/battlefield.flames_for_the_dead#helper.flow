@@ -1,0 +1,61 @@
+# Flames for the Dead (battlefield.flames_for_the_dead#helper): a party of five, all in Bearclaw Pinnacle. Main at Ulmia
+# 8 enters option 1. Bob (9, a helper) enters too. Cat (7) is refused with no menu (an event release with mode 0, no
+# message): her update and finish send nothing. Dan (Three Paths completed, For Whom the Verse is Sung current) enters.
+# Eve (The Road Forks current) is refused. The Snoll Tzar killed, five ticks: the win event 32001 goes to main, bob and
+# dan; each finishes: 1000 XP and title 364 for all three; Three Paths' Bearclaw Pinnacle 32001 moves only main's Ulmia
+# field, 8 to 9.
+lists BearclawPinnacle/Wind_Pillar_1/onTrigger BearclawPinnacle/onEventUpdate/32000 BearclawPinnacle/onEventFinish/32000 BearclawPinnacle/onEventFinish/32001
+char zone=BearclawPinnacle pos=-720,9,-441 job=WAR lvl=75 nation=0
+char bob zone=BearclawPinnacle pos=-720,9,-441 job=WAR lvl=75 nation=0
+char cat zone=BearclawPinnacle pos=-720,9,-441 job=WAR lvl=75 nation=0
+char dan zone=BearclawPinnacle pos=-720,9,-441 job=WAR lvl=75 nation=0
+char eve zone=BearclawPinnacle pos=-720,9,-441 job=WAR lvl=75 nation=0
+mission Cop ThreePaths current
+bob: mission Cop ThreePaths current
+cat: mission Cop ThreePaths current
+dan: mission Cop ForWhomTheVerseIsSung current
+eve: mission Cop TheRoadForks current
+login
+bob: login
+invite bob
+bob: accept
+cat: login
+invite cat
+cat: accept
+dan: login
+invite dan
+dan: accept
+eve: login
+invite eve
+eve: accept
+missionstatus Cop 8 pos=4               # a GM
+bob: missionstatus Cop 9 pos=4          # a GM
+cat: missionstatus Cop 7 pos=4          # a GM
+trigger Wind_Pillar_1
+update 32000 option=1
+finish
+bob: trigger Wind_Pillar_1
+bob: update 32000 option=1
+bob: finish
+cat: trigger Wind_Pillar_1
+cat: update 32000 option=1
+cat: finish
+dan: trigger Wind_Pillar_1
+dan: update 32000 option=1
+dan: finish
+eve: trigger Wind_Pillar_1
+eve: update 32000 option=1
+eve: finish
+tick 2000
+kill SNOLL_TZAR_OFFSET
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+tick 2000
+finish
+bob: finish
+cat: finish
+dan: finish
+eve: finish
+tick 11000

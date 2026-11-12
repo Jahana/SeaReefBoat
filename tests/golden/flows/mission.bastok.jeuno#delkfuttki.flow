@@ -1,0 +1,17 @@
+# Jeuno at the Cermet Door _542 holding the Delkfutt Key key item and the key: at status 2 the trigger plays cutscene 1,
+# whose finish sets status 3 and keeps the key; again at 2 the trade plays 1, whose finish keeps the key (the key item
+# is held).
+lists BastokMarkets/Cleades/onTrigger BastokMarkets/onEventFinish/1001 BastokMines/Rashid/onTrigger BastokMines/onEventFinish/1001 Metalworks/Lucius/onTrigger Metalworks/Malduc/onTrigger Metalworks/onEventFinish/322 Metalworks/onEventFinish/1001 PortBastok/Argus/onTrigger PortBastok/onEventFinish/1001 RuludeGardens/_6r2/onTrigger RuludeGardens/Goggehn/onTrigger RuludeGardens/onEventFinish/38 RuludeGardens/onEventFinish/41 LowerDelkfuttsTower/_542/onTrade LowerDelkfuttsTower/_542/onTrigger LowerDelkfuttsTower/onEventFinish/1
+char zone=LowerDelkfuttsTower pos=596,16,-19 job=WAR lvl=30 nation=1
+mission Rov Resonance current
+mission Bastok Jeuno current
+keyitem DelkfuttKey
+item DelkfuttKey
+login
+missionstatus Bastok 2
+trigger _542                            # cutscene 1
+finish                                  # status 3, the key item kept
+missionstatus Bastok 2
+walk 597,14,-20
+trade _542 DelkfuttKey x1               # cutscene 1
+finish                                  # status 3, the item kept: the key item held

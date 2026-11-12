@@ -1,0 +1,29 @@
+# Bat Hunt (San d'Oria 1-2): Grilau in Northern San d'Oria. A level 10 Warrior of San d'Oria with 1-1 completed, holding
+# an Orcish Scale Mail and a Bat Fang. Section 1: Grilau's script plays 1009; its finish with option 101 begins the
+# mission (Northern San d'Oria's own registration). Section 2 (status 0): Grilau plays 1021. Section 3 (status 2, a GM):
+# Grilau plays 1022; the Orcish Scale Mail traded: 1023, whose finish completes it. Begun again and set to status 2: the
+# Bat Fang traded: 1003, whose finish completes it again.
+# Rival zone-in, another mission's script: the login in Northern San d'Oria plays Seekers of Adventure's Rumors from the
+# West onZoneIn, which returns 878 (the trace records only that return, with no event packet).
+lists NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/Grilau/onTrade NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1003 NorthernSanDoria/onEventFinish/1023
+char zone=NorthernSanDoria pos=-240.5,7,57.9 job=WAR lvl=10 nation=0
+mission Rov Resonance current
+mission Sandoria SmashTheOrcishScouts completed
+item OrcishMailScales
+item BatFang
+login
+trigger Grilau                          # section 1: 1009
+finish option=101                       # begun
+trigger Grilau                          # section 2 (status 0): 1021
+finish
+missionstatus Sandoria 2                # a GM
+trigger Grilau                          # section 3: 1022
+finish
+walk -241.5,7,57.9
+trade Grilau OrcishMailScales x1        # 1023
+finish                                  # completed
+trigger Grilau                          # section 1: 1009
+finish option=101                       # begun again
+missionstatus Sandoria 2
+trade Grilau BatFang x1                 # 1003
+finish                                  # completed again

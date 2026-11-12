@@ -1,0 +1,59 @@
+# The Shadow Awaits (Windurst 5-2): the arms the main flow does not take. Neither key item: _6q2 the zone's default
+# VESTAL_CHAMBERS_LOCKED (310), Zubaba the default 56. The Heavens Tower zone-in with ReturnCS 1, at status 3, without
+# the fragment: nothing. Two wins by a GM (battlefieldWin 0; status 2 inside the event): the title only.
+lists PortWindurst/onEventFinish/78 WindurstWalls/onEventFinish/93 WindurstWaters/onEventFinish/111 WindurstWoods/onEventFinish/114 HeavensTower/onZoneIn/1 HeavensTower/_6q2/onTrigger HeavensTower/Zubaba/onTrigger HeavensTower/onEventFinish/214 HeavensTower/onEventFinish/215 HeavensTower/onEventFinish/216 ThroneRoom/_4l1/onTrigger ThroneRoom/_4l2/onTrigger ThroneRoom/onZoneIn/1 ThroneRoom/onEventUpdate/32000 ThroneRoom/onEventFinish/32000 ThroneRoom/onEventFinish/32001 ThroneRoom/onEventFinish/32002 ThroneRoom/onEventFinish/32003 ThroneRoom/onEventFinish/32004 ThroneRoom/onEventFinish/6 ThroneRoom/onEventFinish/7
+char zone=HeavensTower pos=2,0.1,30 job=WAR lvl=75 nation=2
+mission Rov ARhapsodyForTheAges current
+mission Acp ACrystallineProphecyFin current
+mission Windurst TheHorutotoRuinsExperiment completed
+mission Windurst TheHeartOfTheMatter completed
+mission Windurst ThePriceOfPeace completed
+mission Windurst LostForWords completed
+mission Windurst ATestingTime completed
+mission Windurst TheThreeKingdoms completed
+mission Windurst ToEachHisOwnRight completed
+mission Windurst WrittenInTheStars completed
+mission Windurst ANewJourney completed
+mission Windurst Magicite completed
+mission Windurst TheFinalSeal completed
+rank 5
+mission Windurst TheShadowAwaits current
+login
+trigger _6q2                            # neither key item: nothing from the mission
+finish-if-event
+trigger Zubaba                          # neither: Zubaba's default 56
+finish-if-event
+missionstatus Windurst 4
+keyitem ShadowFragment
+charvar Mission[2][15]ReturnCS 1
+warp 0,-16,126 WindurstWalls
+warp 2,0.1,30 HeavensTower              # ReturnCS 1: no zone-in event
+charvar Mission[2][15]ReturnCS 0
+missionstatus Windurst 3
+warp 0,-16,126 WindurstWalls
+warp 2,0.1,30 HeavensTower              # status 3: no zone-in event
+missionstatus Windurst 4
+delkeyitem ShadowFragment
+warp 0,-16,126 WindurstWalls
+warp 2,0.1,30 HeavensTower              # no fragment: no zone-in event
+missionstatus Windurst 3
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 160, 32001
+localvar battlefieldWin 0               # a GM, inside the event
+finish                                  # 32001 with battlefieldWin 0: the title; the mission does nothing
+tick 11000
+tick 10000
+warp -108,-6,0 ThroneRoom
+trigger _4l1                            # status 3: the 32000 menu
+update 32000 option=1                   # entered
+finish
+tick 2000
+bfwin                                   # a GM: WON, battlefieldWin 160, 32001
+missionstatus Windurst 2                # a GM, inside the event
+finish                                  # 32001 at status 2: the title; the mission does nothing
+tick 11000
+tick 10000

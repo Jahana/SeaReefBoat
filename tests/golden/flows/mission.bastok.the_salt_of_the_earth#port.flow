@@ -1,0 +1,36 @@
+# The Salt of the Earth (Bastok 9-1, mission.bastok.the_salt_of_the_earth) through Port Bastok's Argus's 1001: a level
+# 75 Warrior at rank 9 with the ASA, ACP, RoV and SoA logs current (their zone-ins quiet) and the nation's missions
+# before it completed. Section 1 (no mission current, a char of the nation; no rank and no completed test, kept): the
+# gate guard's own mission list, option 24 (no mission's) begins nothing, option 22 begins the mission with the zone's
+# YOU_ACCEPT_THE_MISSION; then, current, the mission's EXTENDED_MISSION_OFFSET + 14.
+char zone=PortBastok pos=132,7.5,0 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Bastok TheZeruhnReport completed
+mission Bastok GeologicalSurvey completed
+mission Bastok Fetichism completed
+mission Bastok TheCrystalLine completed
+mission Bastok WadingBeasts completed
+mission Bastok TheEmissary completed
+mission Bastok TheFourMusketeers completed
+mission Bastok ToTheForsakenMines completed
+mission Bastok Jeuno completed
+mission Bastok Magicite completed
+mission Bastok DarknessRising completed
+mission Bastok XarcabardLandOfTruths completed
+mission Bastok ReturnOfTheTalekeeper completed
+mission Bastok ThePiratesCove completed
+mission Bastok TheFinalImage completed
+mission Bastok OnMyWay completed
+mission Bastok TheChainsThatBindUs completed
+mission Bastok EnterTheTalekeeper completed
+rank 9
+login
+trigger Argus                           # no mission current: the guard's own 1001 (the mission list)
+finish option=24                        # no mission's option (this mission takes 22): not begun
+trigger Argus                           # 1001 again
+finish option=22                        # begun, YOU_ACCEPT_THE_MISSION
+trigger Argus                           # current: the mission's EXTENDED_MISSION_OFFSET + 14
+finish-if-event

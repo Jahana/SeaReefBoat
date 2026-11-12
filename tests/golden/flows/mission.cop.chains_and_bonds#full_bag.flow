@@ -1,0 +1,19 @@
+# Chains and Bonds (CoP 7-1) with a full bag. Lufaise Meadows' zone-in at Status 0: 111, finished with no free slot:
+# NO_ROOM_COME_BACK_LATER (7720, the ring) and RingStashed 1 (Status stays 0). qm_chains_and_bonds (RingStashed 1): 114;
+# finished with the bag still full: ITEM_CANNOT_BE_OBTAINED (6387), nothing. The rezone at Status 0, RingStashed 1:
+# nothing. With room: 114 again, finished: the ring, RingStashed 0 and Status 1. The rezone at Status 1: nothing;
+# qm_chains_and_bonds at RingStashed 0: no 7-1 reply (NOTHING_OUT_OF_ORDINARY, 6409, the zone's default).
+lists LufaiseMeadows/onZoneIn/1 LufaiseMeadows/onEventUpdate/111 LufaiseMeadows/onEventFinish/111 LufaiseMeadows/qm_chains_and_bonds/onTrigger LufaiseMeadows/onEventFinish/114
+char zone=LufaiseMeadows pos=393,-0.1,-75 job=WAR lvl=75 nation=0
+mission Cop ChainsAndBonds current
+login open                              # 111
+fill-inventory
+finish                                  # no room: 7720, RingStashed 1
+trigger qm_chains_and_bonds             # RingStashed 1: 114
+finish                                  # full: 6387, nothing
+rezone                                  # RingStashed 1: nothing
+free-inventory
+trigger qm_chains_and_bonds             # 114
+finish                                  # the ring; RingStashed 0, Status 1
+rezone                                  # Status 1: nothing
+trigger qm_chains_and_bonds             # RingStashed 0: no 7-1 reply (6409)

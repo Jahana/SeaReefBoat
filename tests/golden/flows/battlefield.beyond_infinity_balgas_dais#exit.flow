@@ -1,0 +1,16 @@
+# Beyond Infinity, Balga's Dais (battlefield.beyond_infinity_balgas_dais): enter area 1 (321), trigger
+# Burning_Circle: event 32003, its update, finish option 4 leaves. Back at the entrance the trigger shows the menu
+# again.
+lists BalgasDais/BC_Entrance/onTrigger BalgasDais/Burning_Circle/onTrigger BalgasDais/onEventUpdate/32000 BalgasDais/onEventFinish/32000 BalgasDais/onEventUpdate/32003 BalgasDais/onEventFinish/32003
+char zone=BalgasDais pos=300.4,-124.1,341.3 job=WAR lvl=75
+quest Jeuno.BeyondInfinity accepted
+keyitem SoulGemClasp
+login
+trigger BC_Entrance
+update 32000 option=321
+finish
+trigger Burning_Circle
+update 32003 option=1
+finish option=4
+warp 300.4,-124.1,341.3 BalgasDais
+trigger BC_Entrance

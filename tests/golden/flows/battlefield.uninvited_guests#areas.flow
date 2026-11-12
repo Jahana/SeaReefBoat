@@ -1,0 +1,24 @@
+# Uninvited Guests (battlefield.uninvited_guests, Monarch Linn): areas 2 and 3 (options 98 and 99): each registered,
+# entered, then bfwin (a GM WON, see the main flow; no mob is killed): the finish, the cleanup.
+lists MonarchLinn/SD_Entrance/onTrigger MonarchLinn/onEventUpdate/32000 MonarchLinn/onEventFinish/32000 MonarchLinn/onEventFinish/32001
+char zone=MonarchLinn pos=-37.6,-3.35,-540 job=WAR lvl=75
+quest OtherAreas.UninvitedGuests accepted
+charvar Quest[4][81]Prog 1
+keyitem MonarchLinnPatrolPermit
+login
+trigger SD_Entrance
+update 32000 option=98
+finish
+bfwin
+finish
+tick 11000
+tick 10000
+charvar Quest[4][81]Prog 1
+keyitem MonarchLinnPatrolPermit
+trigger SD_Entrance
+update 32000 option=99
+finish
+bfwin
+finish
+tick 11000
+tick 10000

@@ -1,0 +1,16 @@
+# Infiltrate Davoi in Chateau d'Oraguille at the Prince Royal's door _6h0. Status 0: 553 with the Royal Knights' Davoi
+# Report in slot 1, whose finish sets status 2; at 2 the door says its own message. With the report at status 4: 554,
+# whose finish completes the mission (300 rank points), takes the report and adds 100 more (400).
+lists SouthernSanDoria/Ambrotien/onTrigger SouthernSanDoria/Endracion/onTrigger SouthernSanDoria/onEventFinish/1009 SouthernSanDoria/onEventFinish/2009 SouthernSanDoria/onEventFinish/1012 SouthernSanDoria/onEventFinish/2012 NorthernSanDoria/Grilau/onTrigger NorthernSanDoria/onEventFinish/1009 NorthernSanDoria/onEventFinish/1012 ChateauDoraguille/_6h0/onTrigger ChateauDoraguille/onEventFinish/553 ChateauDoraguille/onEventFinish/554 Davoi/Quemaricond/onTrigger Davoi/Zantaviat/onTrigger Davoi/onZoneIn/1 Davoi/onEventFinish/102 Davoi/onEventFinish/105 Davoi/onEventFinish/116 Davoi/onEventFinish/117
+char zone=ChateauDoraguille pos=-38,-3,73 job=WAR lvl=30 nation=0
+mission Rov Resonance current
+mission Sandoria InfiltrateDavoi current
+login
+trigger _6h0                            # 553
+finish                                  # status 2
+trigger _6h0                            # status 2: nothing from the mission
+finish-if-event
+keyitem RoyalKnightsDavoiReport
+missionstatus Sandoria 4
+trigger _6h0                            # 554
+finish                                  # completed (300 + 100 rank points), the report taken

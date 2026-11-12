@@ -1,0 +1,24 @@
+# In the Blood (ToAU 32) with the RoV era module: the 3113 finish sets the Timer to JST midnight (1, expiring then),
+# with the same local mustZone var. Naja's trigger again: 3120; a JST day on: 3130, finished: Sentinels' Honor
+# completed (33 current).
+module modules/era/lua/missions/mission_adjustments.lua
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger AhtUrhganWhitegate/onEventFinish/3113
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau InTheBlood current
+setting RESTRICT_CONTENT 1
+setting ENABLE_ROV 0
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # 3113
+finish                                  # completed, the Timer 1
+trigger Naja_Salaheem                   # Sentinels' Honor: the Timer holds: 3120
+finish-if-event
+wait jst=1                              # the Timer expired
+trigger Naja_Salaheem                   # 3130
+finish-if-event

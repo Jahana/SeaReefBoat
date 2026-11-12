@@ -1,0 +1,33 @@
+# The Queen of the Dance (WotG 4), Burden of Suspicion completed. Lion Springs at status 0: 68; finished: status 1. Lion
+# Springs at status 1: 69. Upper Jeuno's Turlough at status 1: 10172; finished: the Mayakov Show Ticket and status 2.
+# Lion Springs at status 2: 70; finished: status 3 and the char set down in the zone. The zone-in at status 3: 152,
+# updated with option 1 and finished: status 4 (the setPos lands on the same spot, so no position change shows). The
+# zone-in at status 4: 153, updated with option 1 and finished: the mission completes (the ticket taken, While the Cat
+# is Away current).
+lists SouthernSanDoriaS/Lion_Springs/onTrigger SouthernSanDoriaS/onZoneIn/1 SouthernSanDoriaS/onEventUpdate/152 SouthernSanDoriaS/onEventUpdate/153 SouthernSanDoriaS/onEventFinish/68 SouthernSanDoriaS/onEventFinish/70 SouthernSanDoriaS/onEventFinish/152 SouthernSanDoriaS/onEventFinish/153 UpperJeuno/Turlough/onTrigger UpperJeuno/onEventFinish/10172
+char zone=SouthernSanDoriaS pos=100.801,1,103.211 job=WAR lvl=99
+quest CrystalWar.BurdenOfSuspicion completed
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg TheQueenOfTheDance current
+login
+trigger Lion_Springs                    # status 0: 68
+finish                                  # status 1
+trigger Lion_Springs                    # status 1: 69
+finish-if-event
+warp -58.697,0,103.553 UpperJeuno
+trigger Turlough                        # status 1: 10172
+finish                                  # the ticket; status 2
+warp 96,0,106 SouthernSanDoriaS         # status 2: no zone-in reply
+trigger Lion_Springs                    # status 2: 70
+finish                                  # status 3; setPos
+tick 400
+login open                              # the zone change at status 3: 152, left open
+update 152 option=1
+finish                                  # status 4; setPos
+tick 400
+login open                              # the zone change at status 4: 153, left open
+update 153 option=1
+finish                                  # completed; the ticket taken

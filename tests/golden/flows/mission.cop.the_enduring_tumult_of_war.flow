@@ -1,0 +1,56 @@
+# The Enduring Tumult of War (CoP 5-1) played through. A level 75 Warrior of San d'Oria with 5-1 current (a GM; Status
+# 0): Tavnazian Safehold's Despachiaire plays 117 (finished: Option bit 0), then no 5-1 reply (144, X Marks the
+# Spot's, whose finish accepts that quest). Northern San d'Oria's Chasalvige plays 761 (bit 1), then 764. Port San
+# d'Oria's Anoki plays 724 (bit 2), 728 (bit 3), then no 5-1 reply (519). Port Bastok's zone-in plays 306 (finished:
+# Status 1). Metalworks' Cid at Status 1: 849 (finished: Status 2), then 863. The zone-in of Pso'Xja from Beaucedine
+# Glacier at x -300 (Status 2): 1 (finished: Status 3). The _i98 door pops Nunyunuwi (Status 3, TRAP_ACTIVATES), then
+# no 5-1 reply while it is spawned (message 7257); its death sets Status 4. _i98 at Status 4 south of z 318: optional
+# cutscene 69; north of it: 70. _i99 at Status 4: 2, finished with option 0 (nothing) and with option 1 (set down at
+# the Promyvion's portal). Promyvion - Vahzl's zone-in at Status 4: 50; finished: the two key items, and the mission
+# completes. The warp to Northern San d'Oria also advances Rhapsodies of Vana'diel (char_mission_state area=13,
+# current=2).
+lists TavnazianSafehold/Despachiaire/onTrigger TavnazianSafehold/onEventFinish/117 NorthernSanDoria/Chasalvige/onTrigger NorthernSanDoria/onEventFinish/761 PortSanDoria/Anoki/onTrigger PortSanDoria/onEventFinish/724 PortSanDoria/onEventFinish/728 PortBastok/onZoneIn/1 PortBastok/onEventFinish/306 Metalworks/Cid/onTrigger Metalworks/onEventFinish/849 Psoxja/_i98/onTrigger Psoxja/_i99/onTrigger Psoxja/Nunyunuwi/onMobDeath Psoxja/onZoneIn/1 Psoxja/onEventFinish/1 Psoxja/onEventFinish/2 PromyvionVahzl/onZoneIn/1 PromyvionVahzl/onEventFinish/50
+char zone=TavnazianSafehold pos=108,-40,-83 job=WAR lvl=75 nation=0
+mission Cop TheEnduringTumultOfWar current
+login
+trigger Despachiaire                    # Status 0, bit 0 unset: 117
+finish                                  # bit 0
+trigger Despachiaire                    # bit 0 set: no 5-1 reply (144, X Marks the Spot's)
+finish-if-event
+warp 96.4,-0.5,134 NorthernSanDoria
+trigger Chasalvige                      # Status 0, bit 1 unset: 761
+finish                                  # bit 1
+trigger Chasalvige                      # bit 1 set: 764
+finish-if-event
+warp -22.4,-8.2,30.4 PortSanDoria
+trigger Anoki                           # Status 0, bit 2 unset: 724
+finish                                  # bit 2
+trigger Anoki                           # bit 3 unset: 728
+finish                                  # bit 3
+trigger Anoki                           # both set: no 5-1 reply (519)
+finish-if-event
+warp -111,-4,-10 PortBastok             # the zone-in: 306, finished: Status 1
+warp -12,-12,1 Metalworks
+trigger Cid                             # Status 1: 849
+finish                                  # Status 2
+trigger Cid                             # Status 2: 863
+finish-if-event
+warp 0,0,0 BeaucedineGlacier
+warp -300,-0.4,10 Psoxja                # from Beaucedine Glacier at x -300, Status 2: 1; Status 3
+trigger _i98                            # Status 3, Nunyunuwi not spawned: it pops
+tick 2000
+trigger _i98                            # Nunyunuwi spawned: no 5-1 reply (7257)
+finish-if-event
+kill NUNYUNUWI                          # Status 4
+walk -330,-1.9,316
+trigger _i98 here                       # Status 4, z 316: 69
+finish
+walk -330,-1.9,320
+trigger _i98 here                       # Status 4, z 320: 70
+finish
+trigger _i99                            # Status 4: 2
+finish option=0                         # not option 1
+trigger _i99
+finish option=1                         # set down at the portal
+tick 10000
+warp 0,0,0 PromyvionVahzl               # the zone-in at Status 4: 50, finished: the mission completes

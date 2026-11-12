@@ -1,0 +1,31 @@
+# Cavernous Maws (WotG 1). The maw in Batallia Downs, Rolanberry Fields and Sauromugue Champaign, each with the mission
+# current: 500 with the zone's index (0, 1, 2); finished: the mission completes (the Pure White Feather, Back to the
+# Beginning current) and the char is sent to a random past maw's destination, which the next tick's zone change shows;
+# the key item message shows on the first finish only. The setup lines after each warp mark the next mission completed
+# and the mission current again.
+lists BatalliaDowns/Cavernous_Maw/onTrigger BatalliaDowns/onEventFinish/500 RolanberryFields/Cavernous_Maw/onTrigger RolanberryFields/onEventFinish/500 SauromugueChampaign/Cavernous_Maw/onTrigger SauromugueChampaign/onEventFinish/500
+char zone=BatalliaDowns pos=-48,0.1,435 job=WAR lvl=99
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Wotg CavernousMaws current
+login
+trigger Cavernous_Maw                   # 500, index 0
+finish                                  # completed; to a past maw
+tick 400
+login                                   # the zone change
+warp -198,8,361 RolanberryFields
+mission Wotg BackToTheBeginning completed
+mission Wotg CavernousMaws current
+trigger Cavernous_Maw                   # 500, index 1
+finish
+tick 400
+login
+warp 369,8,-227 SauromugueChampaign
+mission Wotg BackToTheBeginning completed
+mission Wotg CavernousMaws current
+trigger Cavernous_Maw                   # 500, index 2
+finish
+tick 400
+login

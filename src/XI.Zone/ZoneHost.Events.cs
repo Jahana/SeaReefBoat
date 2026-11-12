@@ -23,9 +23,14 @@ namespace XI.Zone
         private const byte AnimationEvent = 4, AnimationOpenDoor = 8, AnimationCloseDoor = 9;
         private const ushort MsgEventSkipped = 117;
 
+        // the cutover seam (quest rework C4): while scripts/globals/roe.lua is in the engine's scripts folder the Lua
+        // runs; absent, C# does. A record at a lua-at runs from a temp tree that holds the file, so it records on Lua
+        public bool RoeOnLua { get; private set; }
+
         // luautils::init's part after the engine is up: the C# bindings, then the global scripts and InteractionGlobal
         public void InitScripts(ScriptEngine scripts)
         {
+            RoeOnLua = File.Exists(Path.Combine(scripts.ScriptsDir, "globals", "roe.lua"));
             scripts_ = scripts;
             lua_ = scripts.Lua;
             scripts.LuaInit();
@@ -45,6 +50,7 @@ namespace XI.Zone
             }
             zoneNamesRead_ = true;
             scripts.LoadGlobalScripts(zones);
+            if (!RoeOnLua) InstallRoe();
             // luautils.cpp:569-576: the Lua modules init.txt lists, before the containers (platform round P11)
             LoadLuaModules();
             if (loader_ != null)

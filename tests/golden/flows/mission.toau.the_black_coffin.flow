@@ -1,0 +1,33 @@
+# The Black Coffin (ToAU 15). Status 0, the Ephramadian Gold Coin held: Naja 3073, finished. Arrapago Reef's trigger
+# area 1 (after a warp in): events 8, 34 and 35 play in turn, all three finished: Status 1 (the finish of 35). Walked
+# out and in again with the coin and Status 1: nothing. The coin gone (a GM): the area plays 12; once more in the same
+# zone: nothing (once per zone).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger ArrapagoReef/onTriggerAreaEnter/1 ArrapagoReef/onEventFinish/35 ArrapagoReef/onEventFinish/9 Nashmau/onEventFinish/281 ArrapagoReef/onZoneIn/1 Nashmau/onZoneIn/1
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau TheBlackCoffin current
+keyitem EphramadianGoldCoin
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # 3073
+finish
+warp -463.026,-2,-394.478 ArrapagoReef
+tick 5000
+walk -458,-2,-400
+finish
+finish-if-event
+finish-if-event
+walk -463.026,-2,-394.478
+walk -458,-2,-400
+delkeyitem EphramadianGoldCoin
+walk -463.026,-2,-394.478
+walk -458,-2,-400
+finish-if-event
+walk -463.026,-2,-394.478
+walk -458,-2,-400
+finish-if-event

@@ -1,0 +1,72 @@
+# The Horutoto Ruins Experiment (Windurst 1-1, mission.windurst.the_horutoto_ruins_experiment). A level 10 Warrior of
+# Windurst (a GM's Resonance current keeps RoV 1-1 out). Section 1 (no mission current, a Windurstian): Janshura-Rashura
+# of Port Windurst plays 83; its finish with option 0 does nothing, with option 1 begins the mission. Section 2 (1-1
+# current): Janshura-Rashura, Nine of Clubs, Puo Rhen and Ten of Clubs play 89, 86, 88 and 87. Section 3 (status 1):
+# Hakkuru-Rinkuru plays 90, whose finish sets status 2. Section 4 (status 2): Hakkuru-Rinkuru plays 91 and
+# Kuroido-Moido 92 (important once). East Sarutabaruta: Sama Gohjima plays 53. Inner Horutoto Ruins: the first gate
+# plays cutscene 42 (status 3, the harness's random gizmo, 3). Section 5 (status 3): gizmo 1 plays its failure  49, then
+# the examined message; gizmo 3 plays its success 52, which gives the Cracked Mana Orb and sets status 4.  Section 6
+# (status 4): Sama Gohjima's message; Kuroido-Moido plays 98; Hakkuru-Rinkuru plays 94 and its finish  completes the
+# mission and takes the Orb. Section 7 (completed, no mission): Hakkuru-Rinkuru plays 96 and  Kuroido-Moido 100 (each
+# important once), Nine of Clubs 102, Puo Rhen 101 and Ten of Clubs 103.
+lists PortWindurst/Janshura-Rashura/onTrigger PortWindurst/Nine_of_Clubs/onTrigger PortWindurst/Puo_Rhen/onTrigger PortWindurst/Ten_of_Clubs/onTrigger PortWindurst/Hakkuru-Rinkuru/onTrigger PortWindurst/Kuroido-Moido/onTrigger PortWindurst/onEventFinish/83 PortWindurst/onEventFinish/90 PortWindurst/onEventFinish/94 EastSarutabaruta/Sama_Gohjima/onTrigger InnerHorutotoRuins/_5c5/onTrigger InnerHorutotoRuins/_5cp/onTrigger InnerHorutotoRuins/_5cr/onTrigger InnerHorutotoRuins/onEventFinish/42 InnerHorutotoRuins/onEventFinish/49 InnerHorutotoRuins/onEventFinish/52
+char zone=PortWindurst pos=-227,-8,182 job=WAR lvl=10 nation=2
+mission Rov Resonance current
+login
+trigger Janshura-Rashura                # section 1: 83
+finish option=0                         # not 1: nothing
+trigger Janshura-Rashura                # 83 again
+finish option=1                         # begun (zone title, status 1, YOU_ACCEPT_THE_MISSION)
+trigger Janshura-Rashura                # section 2: 89
+finish
+trigger Nine_of_Clubs                   # 86
+finish
+trigger Puo_Rhen                        # 88
+finish
+trigger Ten_of_Clubs                    # 87
+finish
+warp -111,-4,101 PortWindurst
+trigger Hakkuru-Rinkuru+7                 # section 3 (status 1): 90
+finish                                  # status 2
+trigger Hakkuru-Rinkuru+7                 # section 4 (status 2): 91
+finish
+warp -130,-4,144 PortWindurst
+trigger Kuroido-Moido+7                   # 92, important once
+finish
+trigger Kuroido-Moido+7                   # the second time: DefaultActions' 225
+finish-if-event
+warp 377,-13,98 EastSarutabaruta
+trigger Sama_Gohjima                    # 53
+finish
+warp 419,0,-25 InnerHorutotoRuins
+trigger _5c5                            # cutscene 42
+finish                                  # status 3, the random gizmo 3
+warp 464,-3,98 InnerHorutotoRuins
+trigger _5cp                            # section 5: gizmo 1 is not it: 49
+finish                                  # NOT_BROKEN_ORB
+trigger _5cp                            # examined: EXAMINED_RECEPTACLE
+warp 464,-3,22 InnerHorutotoRuins
+trigger _5cr                            # gizmo 3: 52
+finish                                  # Cracked Mana Orb, status 4
+warp 377,-13,98 EastSarutabaruta
+trigger Sama_Gohjima                    # section 6: SAMA_GOHJIMA_POSTDIALOG
+warp -130,-4,144 PortWindurst
+trigger Kuroido-Moido+7                   # 98
+finish
+warp -111,-4,101 PortWindurst
+trigger Hakkuru-Rinkuru+7                 # 94 with the Orb
+finish                                  # completed (250 rank points); the Orb taken
+trigger Hakkuru-Rinkuru+7                 # section 7: 96, important once
+finish
+trigger Hakkuru-Rinkuru+7                 # the second time: DefaultActions' 224
+finish-if-event
+warp -130,-4,144 PortWindurst
+trigger Kuroido-Moido+7                   # 100, important once
+finish
+warp -227,-8,182 PortWindurst
+trigger Nine_of_Clubs                   # 102
+finish
+trigger Puo_Rhen                        # 101
+finish
+trigger Ten_of_Clubs                    # 103
+finish

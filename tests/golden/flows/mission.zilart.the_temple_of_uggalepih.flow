@@ -1,0 +1,33 @@
+# The Temple of Uggalepih (Zilart 4, mission.zilart.the_temple_of_uggalepih): Norg's Gilgamesh plays 8, Kazham's Jakoh
+# Wahcondalo 115. The Sacrificial Chamber zone-in plays nothing at status 0. At status 1 (set by a GM here; the fight's
+# 32001 sets it in battlefield.temple_of_uggalepih) it plays 7; its update on option 0 answers (0, 23, 1756, 0, 163);
+# its finish sets status 2; the next tick moves the char (0x00B). At status 2 the zone-in plays 8 (the same update); its
+# finish completes the mission: the Dark Fragment (KEYITEM_OBTAINED 6398), the Bearer of the Wisewoman's Hope title, the
+# Sacrificial Chamber Key taken, Headstone Pilgrimage current; the RoV log (A Rhapsody for the Ages) is left alone.
+# Rezoned, nothing plays; _4j0 says NO_BATTLEFIELD_ENTRY (7256, the battlefield framework's refusal) and 32767
+# (DefaultActions' messageSpecial -1).
+lists Norg/Gilgamesh/onTrigger Kazham/Jakoh_Wahcondalo/onTrigger SacrificialChamber/onZoneIn/1 SacrificialChamber/onEventUpdate/7 SacrificialChamber/onEventUpdate/8 SacrificialChamber/onEventFinish/7 SacrificialChamber/onEventFinish/8 SacrificialChamber/_4j0/onTrigger SacrificialChamber/_4j0/onTrade SacrificialChamber/onEventUpdate/32000 SacrificialChamber/onEventFinish/32000 SacrificialChamber/onEventFinish/32001
+char zone=Norg pos=120,-8,-12 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheTempleOfUggalepih current
+keyitem SacrificialChamberKey
+login
+trigger Gilgamesh                       # 8
+finish
+warp 103,-15,-113 Kazham
+trigger Jakoh_Wahcondalo                # 115
+finish
+warp 299,0.1,349 SacrificialChamber     # status 0: no zone-in event
+missionstatus Zilart 1                  # a GM (the fight's 32001 sets it: battlefield.temple_of_uggalepih)
+rezone open                             # status 1: 7 left open
+update 7 option=0                       # option 0: the update
+finish                                  # status 2; the next tick moves the char (0x00B)
+tick 400
+login open                              # status 2: 8 left open
+update 8 option=0                       # option 0: the update
+finish                                  # completed, the key taken; RoV untouched
+rezone                                  # completed: nothing
+trigger _4j0                            # not current: NO_BATTLEFIELD_ENTRY, 32767

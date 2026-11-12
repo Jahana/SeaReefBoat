@@ -1,0 +1,22 @@
+# Prevalence of Pirates (ToAU 30). Naja's trigger (3118). A warp into Arrapago Reef at Status 0: the zone-in 13;
+# finished: Status 1. Trigger area 1 at Status 1: 14 (progress); finished: completed (the Periqia Assault Area Entry
+# Permit).
+lists AhtUrhganWhitegate/Naja_Salaheem/onTrigger ArrapagoReef/onZoneIn/1 ArrapagoReef/onTriggerAreaEnter/1 ArrapagoReef/onEventFinish/13 ArrapagoReef/onEventFinish/14
+char zone=AhtUrhganWhitegate pos=40,-6,-30 job=WAR lvl=75 nation=1
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Toau PrevalenceOfPirates current
+login
+tick 1000
+tick 1000
+tick 1000
+trigger Naja_Salaheem                   # 3118
+finish-if-event
+warp -463.026,-2,-394.478 ArrapagoReef open
+finish                                  # 13: Status 1
+tick 1000
+walk -458,-2,-400                       # area 1, Status 1: 14
+tick 1000
+finish                                  # completed

@@ -1,0 +1,29 @@
+# The Temple of Uggalepih (battlefield.temple_of_uggalepih): the mission current at status 0, the key held.
+# _4j0 opens the menu (32000, bit 1). Update option 0 answers nothing; option 17 (index 1, not offered)
+# answers 5; option 1 (index 0, area 1) enters: ENTERING_THE_BATTLEFIELD_FOR (7680), the party and time lines
+# (7543, 7546), the update (2, 0, 0, 1800). The three Gravitons of area 1 (by id +0 to +2) die: won, 32001
+# (each kill also counts EVERYONES_GRUDGE_KILLS: Everyone's Grudge, another script). The finish is the
+# mission's (mission.zilart.the_temple_of_uggalepih): status 1; the next tick moves the char (0x00B). Its
+# zone-in plays 7, answered at login, which sets status 2; the login bundle also carries 7680, 7543 and
+# 7546.
+lists SacrificialChamber/_4j0/onTrigger SacrificialChamber/_4j0/onTrade SacrificialChamber/onEventUpdate/32000 SacrificialChamber/onEventFinish/32000 SacrificialChamber/onEventFinish/32001 SacrificialChamber/onEventFinish/32002 SacrificialChamber/onZoneIn/1 SacrificialChamber/_4j2/onTrigger
+char zone=SacrificialChamber pos=299,0.1,349 job=WAR lvl=75 nation=0
+mission Asa BurgeoningDread current
+mission Acp ACrystallineProphecyFin current
+mission Rov ARhapsodyForTheAges current
+mission Soa Abomination current
+mission Zilart TheTempleOfUggalepih current
+keyitem SacrificialChamberKey
+login
+trigger _4j0                            # the menu 32000 (bit 1)
+update 32000 option=0                   # ignored
+update 32000 option=17                  # index 1, not offered: 5
+update 32000 option=1                   # index 0, area 1: entered
+finish
+tick 2000                               # placed in area 1
+kill GRAVITON
+kill GRAVITON+1
+kill GRAVITON+2                         # all three dead: won, 32001
+finish                                  # the mission's 32001: status 1 (moved at the next tick)
+tick 400
+login                                   # status 1: the mission's 7, answered: status 2

@@ -1,0 +1,15 @@
+# Below the Arks, the two arms the other flows never take alone (CoP 1-2). Status 1 and Option 1 (GMs, the Holla crag
+# entered), no light held. La Theine's telepoint (Option = its crag, no own light, no lights at all): the entry 202 with
+# the flag 0, not the seal 212. With the light of Holla added (a GM): the Hall's _0e3 (Option 1 = crag 1, the light held,
+# fewer than two lights): nothing from the mission.
+lists LaTheinePlateau/Shattered_Telepoint/onTrigger LaTheinePlateau/onEventFinish/202 HallOfTransference/_0e3/onTrigger
+char zone=LaTheinePlateau pos=334,19,-60 job=WAR lvl=75 nation=0
+mission Cop BelowTheArks current
+charvar Mission[6][118]Status 1
+charvar Mission[6][118]Option 1
+login
+trigger Shattered_Telepoint             # Option 1 = Holla's crag, no light: 202, the flag 0
+finish option=1                         # not 0: nothing
+keyitem LightOfHolla                    # a GM
+warp -236.3,-4.9,290 HallOfTransference
+trigger _0e3                            # Option 1 = crag 1 but the light is held: nothing from the mission
